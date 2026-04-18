@@ -1,0 +1,175 @@
+version: 1
+project:
+  name: Agency Website Frontend Plan
+  type: public marketing, services, commerce, and conversion website
+  summary: >-
+    Premium SaaS-style web presence for a web development agency with service
+    detail pages, a digital product shop, portfolio proof, AI concierge,
+    booking, WhatsApp escalation, and Stripe checkout planning.
+  status: documentation-first
+  canonical_docs_root: DOC/PROJECT PLAN/Frontend/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Frontend/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Frontend/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+  minimum_instruction: >-
+    Start by reading DOC/PROJECT PLAN/Frontend/ai-context.yaml, then follow the listed
+    read_path for the current frontend task before implementing pages,
+    components, or flows.
+
+core_invariants:
+  - Use design tokens and shared primitives as the styling source of truth.
+  - Avoid hardcoded design values outside the documented design system.
+  - Keep public marketing, commerce, proof, and conversion flows structurally distinct but visually consistent.
+  - Server-authoritative flows such as booking, checkout, chat handoff, and payment states must not be treated as client truth.
+  - Explicitly handle loading, empty, error, offline or reconnect, and success states where relevant.
+  - All UI must remain responsive, accessible, and localization-ready.
+
+surfaces:
+  public_marketing:
+    routes:
+      - /
+      - /services
+      - /services/saas-applications
+      - /services/websites
+      - /services/mcp-servers
+      - /services/automation
+      - /portfolio
+      - /portfolio/[slug]
+      - /pricing
+      - /about
+      - /faq
+    capabilities:
+      - marketing
+      - service discovery
+      - proof and credibility
+  commerce:
+    routes:
+      - /shop
+      - /shop/[slug]
+      - /checkout
+    capabilities:
+      - category browsing
+      - product discovery
+      - purchase flow
+  conversion:
+    routes:
+      - /ai-concierge
+      - /book-appointment
+      - /contact
+    capabilities:
+      - AI assistance
+      - live chat escalation
+      - WhatsApp routing
+      - appointment booking
+  trust_and_utility:
+    routes:
+      - /privacy-policy
+      - /terms-of-service
+      - /404
+    capabilities:
+      - policy visibility
+      - recovery and trust
+
+foundation_docs:
+  - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+  - DOC/PROJECT PLAN/Frontend/01-design-system.md
+  - DOC/PROJECT PLAN/Frontend/02-component-system.md
+
+frontend_rules:
+  mandatory:
+    - No hardcoded design values outside tokens and documented primitives.
+    - Keep page composition thin and route workflow logic through reusable components and implementation modules.
+    - Use explicit status handling for loading, empty, error, and recovery states.
+    - Keep mobile interactions thumb-friendly and avoid hover-only access paths.
+    - Preserve SEO structure for public pages and trust clarity for commerce flows.
+
+read_paths:
+  docs_review:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+  build_global_shell:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+  build_homepage:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/Frontend/home-page.md
+  build_services:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/Frontend/services-page.md
+    - DOC/PROJECT PLAN/Frontend/service-saas-applications-page.md
+    - DOC/PROJECT PLAN/Frontend/service-websites-page.md
+    - DOC/PROJECT PLAN/Frontend/service-mcp-servers-page.md
+    - DOC/PROJECT PLAN/Frontend/service-automation-page.md
+  build_proof:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/Frontend/portfolio-page.md
+    - DOC/PROJECT PLAN/Frontend/case-study-page.md
+  build_commerce:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/Frontend/shop-page.md
+    - DOC/PROJECT PLAN/Frontend/product-detail-page.md
+    - DOC/PROJECT PLAN/Frontend/checkout-page.md
+  build_conversion:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/Frontend/ai-concierge-page.md
+    - DOC/PROJECT PLAN/Frontend/book-appointment-page.md
+    - DOC/PROJECT PLAN/Frontend/contact-page.md
+    - DOC/PROJECT PLAN/Frontend/faq-page.md
+  build_trust_and_utility:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/Frontend/privacy-policy-page.md
+    - DOC/PROJECT PLAN/Frontend/terms-of-service-page.md
+    - DOC/PROJECT PLAN/Frontend/404-page.md
+
+document_groups:
+  foundation:
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+  marketing_and_services:
+    - DOC/PROJECT PLAN/Frontend/home-page.md
+    - DOC/PROJECT PLAN/Frontend/services-page.md
+    - DOC/PROJECT PLAN/Frontend/service-saas-applications-page.md
+    - DOC/PROJECT PLAN/Frontend/service-websites-page.md
+    - DOC/PROJECT PLAN/Frontend/service-mcp-servers-page.md
+    - DOC/PROJECT PLAN/Frontend/service-automation-page.md
+    - DOC/PROJECT PLAN/Frontend/pricing-page.md
+    - DOC/PROJECT PLAN/Frontend/about-page.md
+  proof:
+    - DOC/PROJECT PLAN/Frontend/portfolio-page.md
+    - DOC/PROJECT PLAN/Frontend/case-study-page.md
+  commerce:
+    - DOC/PROJECT PLAN/Frontend/shop-page.md
+    - DOC/PROJECT PLAN/Frontend/product-detail-page.md
+    - DOC/PROJECT PLAN/Frontend/checkout-page.md
+  conversion_and_support:
+    - DOC/PROJECT PLAN/Frontend/ai-concierge-page.md
+    - DOC/PROJECT PLAN/Frontend/book-appointment-page.md
+    - DOC/PROJECT PLAN/Frontend/contact-page.md
+    - DOC/PROJECT PLAN/Frontend/faq-page.md
+  legal_and_utility:
+    - DOC/PROJECT PLAN/Frontend/privacy-policy-page.md
+    - DOC/PROJECT PLAN/Frontend/terms-of-service-page.md
+    - DOC/PROJECT PLAN/Frontend/404-page.md

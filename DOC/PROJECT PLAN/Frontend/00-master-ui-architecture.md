@@ -3,6 +3,7 @@ document_type: master-architecture
 scope: site-wide
 build_stage: 1-architecture
 recommended_next_reads:
+  - ai-context.yaml
   - README.md
   - 01-design-system.md
   - 02-component-system.md
@@ -11,9 +12,10 @@ recommended_next_reads:
 # Agency SaaS Website UI Architecture
 
 ## AI Consumption Guidance
-- Entry point for this folder: README.md.
+- AI first-stop file for this folder: ai-context.yaml.
+- Human index for this folder: README.md.
 - Read this file when defining route structure, shared journeys, conversion paths, and cross-page dependencies.
-- Do not read every page file before implementation; use README.md to select only the relevant page plans.
+- Do not read every page file before implementation; use ai-context.yaml and README.md to select only the relevant page plans.
 
 ## Product Intent
 - Build a premium SaaS-style web presence for a web development agency that sells high-trust custom services and productized digital assets.
@@ -266,6 +268,7 @@ recommended_next_reads:
 - /404
 
 ## File Output Inventory
+- ai-context.yaml
 - README.md
 - 00-master-ui-architecture.md
 - 01-design-system.md

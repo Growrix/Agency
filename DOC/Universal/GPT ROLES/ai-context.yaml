@@ -1,0 +1,127 @@
+version: 1
+role_system:
+  name: Universal Enterprise Site Documentation Roles
+  type: cross-project GPT role library
+  summary: >-
+    Universal role set for creating AI-readable, enterprise-grade documentation
+    for websites, SaaS platforms, hybrid products, dashboards, commerce flows,
+    and deployment operations.
+  canonical_ai_entrypoint: DOC/Universal/GPT ROLES/ai-context.yaml
+  canonical_human_index: DOC/Universal/GPT ROLES/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/Universal/GPT ROLES/ai-context.yaml
+  minimum_instruction: >-
+    Start with DOC/Universal/GPT ROLES/ai-context.yaml, choose the matching role for the
+    current planning task, and ensure all generated docs include a compact
+    ai-context.yaml, a human README, shared invariants, and minimal read paths.
+  workflow_guide:
+    - DOC/Universal/GPT ROLES/Documentation_Workflow_Playbook.md
+
+shared_invariants:
+  - Shared system contracts must exist before independent frontend and backend planning diverge.
+  - AI-readable routing must exist in every documentation folder through ai-context.yaml and README.md.
+  - Server-authoritative flows, permissions, integrations, and state models must not be invented by the frontend role.
+  - Enterprise docs must define loading, empty, success, error, recovery, and permission behavior where relevant.
+  - Build plans should prefer vertical slices with complete contracts over disconnected silo plans.
+
+roles:
+  fullstack_contract_orchestrator:
+    file: DOC/Universal/GPT ROLES/Fullstack_Contract_Orchestrator.md
+    use_for:
+      - system blueprint
+      - cross-team planning
+      - frontend backend alignment
+      - contract-first delivery
+  frontend_uiux_generator:
+    file: DOC/Universal/GPT ROLES/Frontend_UIUX_Generator.md
+    use_for:
+      - UI architecture
+      - page planning
+      - design system
+      - component system
+  backend_system_planner:
+    file: DOC/Universal/GPT ROLES/Backend_System_Planner.md
+    use_for:
+      - backend architecture
+      - service boundaries
+      - common integrations
+      - storage and jobs
+  api_data_contract_architect:
+    file: DOC/Universal/GPT ROLES/API_Data_Contract_Architect.md
+    use_for:
+      - API contracts
+      - schemas
+      - events
+      - status models
+  security_compliance_trust_architect:
+    file: DOC/Universal/GPT ROLES/Security_Compliance_Trust_Architect.md
+    use_for:
+      - authorization
+      - tenant isolation
+      - privacy
+      - auditability
+      - compliance
+  devops_reliability_release_planner:
+    file: DOC/Universal/GPT ROLES/DevOps_Reliability_Release_Planner.md
+    use_for:
+      - deployment
+      - environments
+      - observability
+      - reliability
+      - release control
+  qa_test_release_governor:
+    file: DOC/Universal/GPT ROLES/QA_Test_Release_Governor.md
+    use_for:
+      - testing strategy
+      - release gates
+      - contract verification
+      - end-to-end quality
+
+recommended_sequence:
+  - DOC/Universal/GPT ROLES/Fullstack_Contract_Orchestrator.md
+  - DOC/Universal/GPT ROLES/Frontend_UIUX_Generator.md
+  - DOC/Universal/GPT ROLES/Backend_System_Planner.md
+  - DOC/Universal/GPT ROLES/API_Data_Contract_Architect.md
+  - DOC/Universal/GPT ROLES/Security_Compliance_Trust_Architect.md
+  - DOC/Universal/GPT ROLES/DevOps_Reliability_Release_Planner.md
+  - DOC/Universal/GPT ROLES/QA_Test_Release_Governor.md
+
+shared_output_requirements:
+  mandatory_files:
+    - ai-context.yaml
+    - README.md
+  mandatory_doc_concepts:
+    - product or system summary
+    - invariants
+    - role or surface boundaries
+    - status models
+    - read paths
+    - failure state handling
+    - implementation sequence
+    - testing expectation
+
+task_routing:
+  choose_workflow:
+    role: DOC/Universal/GPT ROLES/Documentation_Workflow_Playbook.md
+  create_site_blueprint:
+    role: DOC/Universal/GPT ROLES/Fullstack_Contract_Orchestrator.md
+  plan_frontend:
+    role: DOC/Universal/GPT ROLES/Frontend_UIUX_Generator.md
+  plan_backend:
+    role: DOC/Universal/GPT ROLES/Backend_System_Planner.md
+  lock_contracts:
+    role: DOC/Universal/GPT ROLES/API_Data_Contract_Architect.md
+  plan_security_and_compliance:
+    role: DOC/Universal/GPT ROLES/Security_Compliance_Trust_Architect.md
+  plan_devops_and_release:
+    role: DOC/Universal/GPT ROLES/DevOps_Reliability_Release_Planner.md
+  plan_test_and_quality:
+    role: DOC/Universal/GPT ROLES/QA_Test_Release_Governor.md
+
+anti_mismatch_rules:
+  - Frontend planners must consume shared contracts before defining server-backed UX behavior.
+  - Backend planners must consume shared contracts before defining APIs, states, or persistence models.
+  - API or schema changes must update both the shared contract and any affected specialized docs.
+  - If the system contract does not exist yet, create it before specialized planning continues.
