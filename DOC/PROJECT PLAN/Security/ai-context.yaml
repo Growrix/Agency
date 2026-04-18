@@ -1,0 +1,349 @@
+version: 1
+project:
+  name: Agency SaaS Website — Security & Compliance
+  type: security architecture and compliance planning
+  summary: >-
+    Security threat model, access control, data protection, compliance requirements,
+    and operational security controls for the web development agency platform.
+    Covers authentication, authorization, data privacy, PCI-DSS, GDPR, and audit trails.
+  status: security-first planning
+  canonical_docs_root: DOC/PROJECT PLAN/Security/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Security/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Security/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+  minimum_instruction: >-
+    All backend code, API implementations, and DevOps configurations must follow
+    the security controls defined in this contract. Security is not optional.
+
+core_invariants:
+  - All user data is encrypted at rest and in transit.
+  - All API requests are encrypted over HTTPS; HTTP is blocked.
+  - All authentication is stateless JWT-based; no server-side sessions.
+  - All authorization decisions are explicit and logged.
+  - All admin actions are audited and immutable.
+  - PCI compliance is required for payment handling.
+  - GDPR compliance is required for EU visitor data.
+  - All secrets are rotated quarterly and stored in a secrets manager.
+  - All dependencies are scanned for vulnerabilities weekly.
+
+authentication_model:
+  method: JWT (JSON Web Token) stateless
+  flow:
+    - user provides email + password to POST /auth/login
+    - backend validates credentials against bcrypt hash
+    - backend generates JWT with iat, exp, user_id, role
+    - frontend stores JWT in httpOnly cookie or secure localStorage
+    - frontend includes JWT in Authorization header for all subsequent requests
+    - backend validates JWT signature and expiration before processing request
+    - JWT expires in 24 hours; refresh token expires in 30 days
+  
+  password_requirements:
+    - minimum 8 characters
+    - at least 1 uppercase letter
+    - at least 1 lowercase letter
+    - at least 1 digit
+    - at least 1 special character
+    - no common patterns (password, 123456, qwerty)
+  
+  session_management:
+    - JWT stored in httpOnly cookie (immune to XSS)
+    - Secure flag set (HTTPS only)
+    - SameSite=Strict (CSRF protection)
+    - Refresh token rotated on each refresh
+    - User can revoke all sessions from dashboard
+    - Auto-logout after 24 hours of inactivity
+  
+  multi_factor_authentication:
+    - optional for subscribers and all admins
+    - TOTP (Time-based One-Time Password) supported (Google Authenticator, Authy)
+    - SMS 2FA considered for future phase
+    - bypass codes generated for account recovery
+
+authorization_model:
+  role_based_access_control:
+    public:
+      - browse marketing content
+      - view services, portfolio, pricing
+      - browse shop (no checkout)
+      - initiate contact or booking inquiry
+      - cannot: view admin content, modify data
+    
+    subscriber:
+      - all public permissions
+      - view own order history
+      - view own appointment history
+      - update own profile
+      - cannot: access other users' data, admin content
+    
+    customer:
+      - all subscriber permissions
+      - download purchased products
+      - request refunds
+      - cannot: access admin content, view other customers' data
+    
+    admin:
+      - all customer permissions
+      - manage services, products, portfolio (CRUD)
+      - view all orders, appointments, inquiries
+      - manage other admins
+      - access analytics and reports
+      - configure site settings and integrations
+      - view and export audit logs
+  
+  permission_enforcement:
+    - all APIs validate role before allowing access
+    - all database queries include role-based filtering
+    - all admin actions logged to audit trail
+    - no wildcard permissions; all permissions explicit
+  
+  resource_ownership:
+    - users can only access their own orders, appointments, profile
+    - admin can access all resources
+    - cross-tenant access is impossible (single tenant for now; multi-tenant design document separate)
+
+data_protection:
+  encryption_at_rest:
+    - database: encrypted at storage layer (AWS RDS encryption enabled)
+    - backups: encrypted at rest
+    - file storage (S3): encryption enabled
+    - secrets: stored in AWS Secrets Manager, encrypted with AWS KMS
+  
+  encryption_in_transit:
+    - all HTTP traffic redirected to HTTPS (HTTP Strict Transport Security header)
+    - TLS 1.2 or higher enforced
+    - certificate renewed before expiration (automated)
+    - cipher suites: modern, no deprecated algorithms
+  
+  sensitive_data_handling:
+    - password: bcrypt with cost 12 (hardened against brute force)
+    - payment info: never stored; delegated to Stripe (PCI compliance)
+    - API keys: not logged or displayed in UI
+    - email addresses: treated as sensitive
+    - phone numbers: treated as sensitive
+    - all sensitive operations logged to audit trail (not data values)
+  
+  data_retention:
+    - orders: retained for 7 years (tax regulation)
+    - appointments: retained for 2 years
+    - contact inquiries: retained for 1 year
+    - audit logs: retained for 2 years minimum
+    - deleted data: soft-deleted, restorable for 30 days, hard-deleted after 30 days
+    - GDPR right to be forgotten: all user data deleted on request (except audit logs)
+  
+  data_classifications:
+    - public: marketing content, public portfolio
+    - internal: service definitions, product catalogs
+    - confidential: customer orders, appointments, emails, phone numbers
+    - restricted: password hashes, API keys, secrets, payment tokens
+    - PII: email, name, phone, booking preferences
+
+compliance:
+  pci_dss:
+    - applicable: yes (handles payment data via Stripe)
+    - scope: minimized; Stripe handles card data
+    - internal compliance: never store full card numbers, expiry, CVV
+    - PCI compliance verified annually
+  
+  gdpr:
+    - applicable: yes (EU visitor data)
+    - privacy policy: required, published on website
+    - consent: explicit consent for marketing emails
+    - data processing agreement: in place with all sub-processors (Stripe, Intercom, SendGrid)
+    - data portability: user can download their data
+    - right to deletion: honored within 30 days of request
+    - data breach notification: required within 72 hours of discovery
+    - privacy by design: implemented in architecture
+  
+  ccpa:
+    - applicable: yes (California residents)
+    - privacy policy: includes CCPA rights
+    - right to know: residents can request what data is collected
+    - right to delete: residents can request deletion
+    - right to opt-out: residents can opt-out of data sales (none planned)
+  
+  accessibility_wcag_2_1:
+    - applicable: yes (public website)
+    - compliance level: AA
+    - visual design: color contrast ratios met (WCAG AA)
+    - keyboard navigation: all functionality keyboard accessible
+    - screen reader support: semantic HTML, ARIA labels
+    - alt text: all images have descriptive alt text
+  
+  industry_best_practices:
+    - OWASP Top 10: all mitigations implemented
+    - CSP (Content Security Policy): enabled
+    - CORS: restricted to known origins
+    - rate limiting: 100 requests/minute per IP
+    - input validation: all inputs validated and sanitized
+    - output encoding: all outputs HTML-escaped
+
+threat_model:
+  external_threats:
+    injection_attacks:
+      threat: SQL injection, NoSQL injection, command injection
+      mitigation: parameterized queries, input validation, no eval/exec
+      tooling: OWASP dependency check, static analysis
+    
+    xss_cross_site_scripting:
+      threat: malicious scripts in user input
+      mitigation: input sanitization, output encoding, CSP
+      tooling: CSP headers, DOMPurify for user media
+    
+    csrf_cross_site_request_forgery:
+      threat: attacker forces user action without consent
+      mitigation: CSRF token, SameSite cookie attribute
+      tooling: automatic CSRF token generation and validation
+    
+    ddos_distributed_denial_of_service:
+      threat: attacker floods API with requests
+      mitigation: rate limiting, WAF, auto-scaling
+      tooling: AWS WAF, CloudFront caching
+    
+    brute_force_authentication:
+      threat: attacker tries many password combinations
+      mitigation: bcrypt cost factor, rate limiting, account lockout
+      tooling: failed login attempt tracking, exponential backoff
+    
+    man_in_the_middle:
+      threat: attacker intercepts network traffic
+      mitigation: HTTPS with TLS 1.2+, certificate pinning
+      tooling: HSTS header, OCSP stapling
+  
+  internal_threats:
+    unauthorized_access:
+      threat: insider attempts to access restricted data
+      mitigation: RBAC, audit logging, principle of least privilege
+      tooling: access logs, quarterly access reviews
+    
+    data_exfiltration:
+      threat: insider attempts to export sensitive data
+      mitigation: no bulk export without admin approval, audit logging
+      tooling: DLP (data loss prevention) monitoring
+    
+    misconfiguration:
+      threat: accidental exposure of secrets or data
+      mitigation: IaC validation, secrets manager, configuration scanning
+      tooling: Terraform validate, git-secrets, checkov
+
+audit_and_logging:
+  audit_trail:
+    - all admin actions logged (create, update, delete)
+    - all auth events logged (login, logout, failed login, token refresh)
+    - all data access logged (query, export)
+    - all integrations logged (Stripe, Email, Calendar, Chat)
+    - all errors logged with stack trace and context
+    - immutable audit log (append-only)
+    - retention: 2 years minimum
+    - access control: audit logs accessible only to authorized admins
+  
+  log_aggregation:
+    - centralized logging (CloudWatch, DataDog, or similar)
+    - structured JSON logging (timestamp, level, service, tracing_id)
+    - real-time alerting on suspicious patterns
+    - log retention per compliance requirements
+  
+  monitoring_alerts:
+    - authentication failures > 10 in 1 hour
+    - admin actions during off-hours
+    - data export by non-admin
+    - failed payment attempts > 5% in 1 hour
+    - API error rate > 5% in 5 minutes
+    - unauthorized access attempts
+    - secrets accessed outside normal window
+
+incident_response:
+  incident_classification:
+    severity_1_critical:
+      - data breach (customer data exposed)
+      - payment system compromise
+      - complete system outage
+      - response_time: immediate
+    
+    severity_2_high:
+      - partial data loss or corruption
+      - unauthorized access by insider
+      - compliance violation
+      - response_time: within 1 hour
+    
+    severity_3_medium:
+      - failed payment processing
+      - email delivery failures
+      - component outage (not critical path)
+      - response_time: within 4 hours
+  
+  incident_handling:
+    - incident detection: automated alerts or user report
+    - incident declaration: severity assigned, on-call team notified
+    - containment: affected systems isolated if necessary
+    - investigation: root cause analysis, timeline reconstruction
+    - remediation: fix applied, tested, deployed
+    - notification: users and regulators notified if required by law
+    - post-mortem: lessons learned documented, preventive measures identified
+  
+  data_breach_notification:
+    - GDPR: notify within 72 hours of discovery
+    - CCPA: notify within 30 days of discovery
+    - notification content: breach description, data type, individuals affected, remediation
+
+secrets_management:
+  storage:
+    - all secrets stored in AWS Secrets Manager
+    - never commit secrets to version control
+    - git-secrets hook enforces no-commit policy
+  
+  rotation_policy:
+    - all secrets rotated quarterly
+    - API keys rotated annually
+    - database passwords rotated quarterly
+    - Stripe keys rotated on API version update
+  
+  access_to_secrets:
+    - only production code and authorized admins can access
+    - all secret access logged
+    - least privilege: each service only accesses its own secrets
+  
+  emergency_access:
+    - on-call engineer can access all secrets (with approval and logging)
+    - master password stored offline in secure location
+    - quarterly drill of emergency access procedure
+
+vulnerability_management:
+  scanning:
+    - dependencies scanned weekly (npm audit, pip audit, snyk)
+    - container images scanned before deployment
+    - OWASP top 10 assessment quarterly
+    - penetration testing annually
+  
+  patching:
+    - critical vulnerabilities patched within 24 hours
+    - high severity patched within 1 week
+    - medium severity patched within 2 weeks
+    - low severity patched in next release cycle
+  
+  disclosure:
+    - security issues reported to security@agency.com
+    - responsible disclosure: 90-day window for fix before public disclosure
+    - hall of fame: security researchers credited on website
+
+security_testing:
+  static_analysis:
+    - SAST tool scans code on every commit (SonarQube, Snyk)
+    - failures block deployment
+  
+  dynamic_analysis:
+    - DAST runs against staging environment
+    - fuzzing on API endpoints
+  
+  penetration_testing:
+    - annual professional penetration test
+    - quarterly internal security assessment
+  
+  code_review:
+    - all code reviewed by another engineer
+    - security review for sensitive areas (auth, payment, data access)

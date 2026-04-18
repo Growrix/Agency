@@ -1,0 +1,302 @@
+version: 1
+project:
+  name: Agency SaaS Website — QA & Release Governance
+  type: testing strategy and quality assurance
+  summary: >-
+    End-to-end testing strategy, quality gates, release governance, and defect
+    management for the web development agency platform. Covers unit, integration,
+    smoke, performance, security, and user acceptance testing with automation,
+    manual execution, and continuous quality improvement.
+  status: quality-first release gates
+  canonical_docs_root: DOC/PROJECT PLAN/QA/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/QA/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/QA/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    - DOC/PROJECT PLAN/QA/ai-context.yaml
+  minimum_instruction: >-
+    No code is deployed without passing the quality gates defined here. Every release
+    requires sign-off from QA. Defects blocking critical workflows are P0 (ship-blocking).
+
+core_invariants:
+  - All code must have unit tests (coverage > 80%).
+  - All APIs must have integration tests covering happy path, edge cases, and errors.
+  - Critical workflows (payment, booking, email) must have end-to-end tests.
+  - No production deployment without passing all automated tests + manual regression.
+  - Defects blocking critical workflows are P0 and must be fixed before release.
+  - Performance, security, and accessibility are non-functional requirements, not nice-to-haves.
+  - All test changes are reviewed and tracked alongside production changes.
+
+test_pyramid:
+  unit_tests:
+    scope: individual functions, models, utilities
+    framework: Jest (JavaScript), Pytest (Python)
+    coverage_target: > 80%
+    run_frequency: on every commit (CI)
+    expected_runtime: < 5 minutes
+    examples:
+      - validate email format
+      - calculate order total with discount
+      - generate JWT token
+      - hash password
+  
+  integration_tests:
+    scope: service boundaries, API contracts, database interactions
+    framework: Jest, Pytest, Postman collections
+    coverage_target: all API endpoints (happy path + error cases)
+    run_frequency: on every commit (CI), before merge
+    expected_runtime: < 15 minutes
+    examples:
+      - POST /auth/login → returns token
+      - GET /services → list all services
+      - POST /orders → creates order, updates inventory, sends email
+      - Stripe webhook → updates order status
+  
+  end_to_end_tests:
+    scope: complete user workflows across frontend, backend, integrations
+    framework: Playwright, Cypress, Selenium
+    coverage_target: critical workflows (checkout, booking, email delivery)
+    run_frequency: before staging deployment
+    expected_runtime: < 30 minutes
+    examples:
+      - user browsable shop, adds product, checks out, receives email confirmation
+      - user fills booking form, calendar confirms availability, receives email
+      - admin manages products, publishes, frontend shows updated price
+  
+  performance_tests:
+    scope: response time, throughput, resource usage under load
+    framework: k6, Locust, Apache JMeter
+    coverage_target: critical endpoints (homepage, shop listing, checkout)
+    run_frequency: weekly (staging)
+    expected_runtime: < 10 minutes per endpoint
+    criteria:
+      - homepage: < 2 seconds
+      - product pages: < 1.5 seconds
+      - API calls: < 500ms p99
+      - shop search: < 200ms
+  
+  security_tests:
+    scope: OWASP Top 10, injection prevention, XSS, CSRF, authentication
+    framework: OWASP ZAP, Burp Suite, custom scripts
+    coverage_target: all API endpoints
+    run_frequency: before production release
+    expected_runtime: < 1 hour per environment
+    examples:
+      - SQL injection attempts on search endpoint
+      - XSS payload in contact form
+      - CSRF token validation on state-changing endpoints
+      - authentication bypass attempts
+  
+  accessibility_tests:
+    scope: WCAG 2.1 AA compliance, keyboard navigation, screen reader support
+    framework: Axe Core, pa11y, manual testing
+    coverage_target: all public pages
+    run_frequency: before release
+    examples:
+      - color contrast ratios meet WCAG AA
+      - all form fields labeled
+      - keyboard tab order logical
+      - screen reader announces buttons, links
+
+critical_workflows:
+  payment_workflow:
+    steps:
+      - user adds product to cart
+      - user navigates to checkout
+      - user enters payment details (Stripe form)
+      - system creates order, captures payment
+      - system sends confirmation email
+      - system triggers fulfillment job
+      - user downloads product
+    test_coverage:
+      - unit: discount calculation, order creation
+      - integration: Stripe API, email service, fulfillment queue
+      - e2e: full checkout flow with mock payment
+      - security: CSRF protection, XSS prevention
+      - performance: checkout completes in < 5 seconds
+    defect_severity:
+      - payment fails silently: P0 (ship-blocking)
+      - customer charged twice: P0 (ship-blocking)
+      - product not delivered: P0 (ship-blocking)
+      - email not sent: P1 (must fix before release)
+  
+  booking_workflow:
+    steps:
+      - user fills booking form
+      - system checks calendar availability
+      - system sends confirmation email
+      - admin receives notification
+      - user can view booking status
+    test_coverage:
+      - unit: datetime validation, timezone handling
+      - integration: Calendar API, email service
+      - e2e: booking form submission → email confirmation
+      - security: rate limiting on form submissions
+      - performance: availability check completes in < 500ms
+    defect_severity:
+      - booking confirmed but calendar not updated: P0
+      - user not notified: P1
+      - double booking occurs: P0
+
+test_automation:
+  ci_pipeline:
+    - on_commit: run unit tests + linting
+    - on_pull_request: run unit + integration tests
+    - on_merge_to_main: run unit + integration + e2e (staging)
+    - before_production: run security + performance tests
+    - on_failure: block deployment, notify team
+  
+  test_data_management:
+    - database snapshots: production-like test data for staging
+    - data cleanup: reset between test runs
+    - sensitive_data: test data never contains real customer PII
+    - faker_library: generate realistic test data programmatically
+  
+  test_environment:
+    - staging: mirrors production, runs full test suite
+    - e2e_environment: isolated, ephemeral, cleaned up after tests
+    - api_mocking: Stripe, Calendar, Email services mocked in unit/integration tests
+
+manual_testing:
+  regression_testing:
+    scope: all features, edge cases, integrations
+    frequency: before every release
+    duration: 2-3 hours per environment
+    test_cases: written and maintained in test management tool (TestRail, Zephyr)
+    coverage:
+      - user workflows (browse, shop, book, contact)
+      - admin workflows (manage products, view orders)
+      - edge cases (empty states, loading states, errors)
+      - integrations (Stripe payment, email notifications)
+  
+  user_acceptance_testing:
+    scope: business requirements validation
+    participants: product owner, end users
+    frequency: before major releases
+    duration: 1 week (beta testing)
+    success_criteria: UAT sign-off from stakeholders
+  
+  exploratory_testing:
+    scope: unscripted, ad-hoc testing to find unexpected issues
+    frequency: ongoing, weekly dedicated sessions
+    duration: 4 hours per week
+    testers: experienced QA engineers
+    technique: user journey mapping, boundary testing, error recovery
+  
+  mobile_testing:
+    scope: responsive design, touch interactions, mobile browsers
+    devices: iPhone (iOS 15+), Android (9+) devices
+    browsers: Safari, Chrome, Firefox
+    frequency: before release
+    tools: Appium, BrowserStack
+
+defect_management:
+  severity_levels:
+    p0_critical:
+      - payment processing fails
+      - data loss or corruption
+      - security vulnerability
+      - complete feature unavailable
+      - response_time: fix within 24 hours, ship in next release
+    
+    p1_high:
+      - major feature degraded
+      - email not sent, but order processed
+      - booking UI broken
+      - performance significantly degraded
+      - response_time: fix within 1 week
+    
+    p2_medium:
+      - UI text incorrect or misaligned
+      - non-critical feature degraded
+      - minor usability issue
+      - response_time: fix in next sprint
+    
+    p3_low:
+      - cosmetic issue
+      - nice-to-have feature not working
+      - documentation unclear
+      - response_time: backlog for future sprint
+  
+  defect_workflow:
+    reported: defect entered in tracking system with steps to reproduce
+    triaged: assigned priority, assigned to developer
+    in_progress: developer begins fix
+    ready_for_qa: fix submitted for review
+    qa_testing: QA verifies fix and regression testing
+    closed: defect resolved and closed
+    reopened: if regression or incomplete fix identified
+  
+  metrics:
+    - defect discovery rate: target < 5 defects per 100 test hours
+    - escape_rate: defects found in production / total defects found
+    - p0_incidents: track production incidents, analyze and prevent
+    - mttr: mean time to resolution for P0 defects (target: 4 hours)
+
+release_gates:
+  approval_criteria:
+    - all automated tests passing (unit, integration, e2e, security, performance)
+    - manual regression testing completed and signed off
+    - no P0 or P1 defects remaining
+    - security review passed
+    - performance benchmarks met
+    - accessibility audit passed
+    - release notes written and reviewed
+  
+  release_sign_off:
+    - qa_lead: confirms all testing complete, defects resolved
+    - product_owner: confirms features match requirements
+    - devops_lead: confirms deployment ready
+    - security_lead: confirms security review passed
+  
+  deployment_authorization:
+    - production deployments: approved by DevOps lead + released by automation
+    - staging deployments: approved by QA lead
+    - emergency deployments: approved by on-call incident commander (P0 only)
+  
+  rollback_criteria:
+    - if_p0_defect_found_in_production: automatic rollback triggered
+    - if_error_rate_exceeds_5_percent: automatic rollback
+    - if_payment_processing_affected: manual rollback decision within 15 minutes
+
+continuous_improvement:
+  metrics_collection:
+    - test coverage trends
+    - defect escape rate (production defects vs. detected)
+    - test execution time
+    - automation ROI (manual hours saved)
+  
+  retrospectives:
+    - post_mortem: after every P0 incident
+    - quarterly: QA team review of testing effectiveness
+    - annually: full testing strategy review
+  
+  tooling_and_infrastructure:
+    - test framework upgrades: evaluated quarterly
+    - ci_cd improvements: reduce test time, improve reliability
+    - test data: refresh quarterly to match production patterns
+    - observability: improve defect detection with better logging and monitoring
+
+test_documentation:
+  test_plans:
+    - written before feature coding begins
+    - covers unit, integration, e2e, security, performance test cases
+    - includes acceptance criteria and rollback plan
+  
+  test_cases:
+    - stored in test management tool (TestRail, Zephyr)
+    - include steps to reproduce, expected result, actual result
+    - linked to user stories and requirements
+    - updated before every release
+  
+  runbooks:
+    - how to run automated test suites locally
+    - how to reproduce reported defects
+    - how to perform manual regression testing
+    - how to validate business critical workflows

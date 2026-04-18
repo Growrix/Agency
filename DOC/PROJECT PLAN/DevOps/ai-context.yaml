@@ -1,0 +1,297 @@
+version: 1
+project:
+  name: Agency SaaS Website — DevOps & Reliability
+  type: deployment, infrastructure, and operational reliability
+  summary: >-
+    DevOps architecture for the web development agency platform, covering deployment
+    pipelines, environments, infrastructure-as-code, container management, monitoring,
+    observability, reliability patterns, and disaster recovery.
+  status: ops-first planning
+  canonical_docs_root: DOC/PROJECT PLAN/DevOps/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/DevOps/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/DevOps/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+  minimum_instruction: >-
+    All infrastructure must be defined as code (Terraform, CloudFormation, Docker).
+    All deployments must be automated, immutable, and repeatable. All services must
+    have monitoring, alerting, and runbooks for on-call response.
+
+core_invariants:
+  - Infrastructure is defined as code; no manual configuration.
+  - All environments (dev, staging, prod) follow the same template.
+  - Deployments are automated, fast, and reversible.
+  - All services are containerized (Docker) for consistency.
+  - All services have health checks and are auto-restarting.
+  - All logs, metrics, and traces flow to centralized observability platform.
+  - Incidents are detected automatically and trigger alerts.
+  - All data is backed up daily and tested for recoverability quarterly.
+  - Disaster recovery time objective (RTO) is 4 hours; recovery point objective (RPO) is 1 hour.
+
+deployment_strategy:
+  approach: containerized microservices on Kubernetes or ECS
+  ci_cd_platform: GitHub Actions (automated on every commit)
+  container_registry: Amazon ECR (private Docker registry)
+  orchestration: AWS ECS (Fargate) or Kubernetes
+  
+  ci_pipeline:
+    - triggered: on push to main or PR
+    - steps:
+      - run linting (ESLint, Pylint, etc.)
+      - run unit tests (coverage > 80%)
+      - run SAST (SonarQube, Snyk)
+      - build Docker image
+      - scan image for vulnerabilities
+      - push to ECR
+    - on_failure: block pull request merge
+  
+  cd_pipeline_staging:
+    - triggered: on merge to main
+    - deployment_target: staging environment
+    - strategy: blue-green deployment
+    - smoke_tests: run against staging
+    - on_failure: alert DevOps team, manual rollback
+  
+  cd_pipeline_production:
+    - triggered: manual approval from DevOps lead
+    - deployment_target: production environment
+    - strategy: canary deployment (5% traffic, then 25%, then 100%)
+    - health_checks: verify all endpoints and critical workflows
+    - metrics: monitor error rate, latency, and resource usage
+    - on_degradation: automatic rollback
+    - on_success: mark release as stable
+
+environments:
+  development:
+    platform: local Docker Compose or minikube
+    data: test data only
+    integrations: Stripe test keys, mock Calendar API
+    url: http://localhost:3000
+    retention: no backup required
+  
+  staging:
+    platform: AWS ECS (Fargate) or Kubernetes on EC2
+    data: production-like test data
+    integrations: Stripe test keys, mock Calendar API
+    url: https://staging.agency.com
+    retention: 7 days (purged weekly)
+  
+  production:
+    platform: AWS ECS (Fargate) with auto-scaling
+    data: real customer data
+    integrations: Stripe live keys, real Calendar API, real Email service
+    url: https://api.agency.com
+    retention: per data retention policy (7 years for orders, etc.)
+    sla: 99.5% uptime
+
+infrastructure_as_code:
+  framework: Terraform + AWS
+  modules:
+    - vpc (virtual private cloud, subnets, security groups)
+    - ecs_cluster (container orchestration)
+    - rds (managed PostgreSQL database)
+    - s3 (file storage for products)
+    - cloudfront (CDN)
+    - alb (application load balancer)
+    - secrets_manager (secrets storage)
+    - iam (identity and access management)
+  
+  repository: git repository (separate from application code)
+  approval: code review + plan approval before apply
+  state_management: Terraform state in S3 with versioning
+
+database:
+  engine: PostgreSQL 14+
+  deployment: AWS RDS Multi-AZ (high availability)
+  backup:
+    - automated daily backups (retained 30 days)
+    - point-in-time recovery (last 35 days)
+    - test restore quarterly
+    - backup encrypted at rest
+  
+  monitoring:
+    - connection pool monitoring
+    - query performance (slow query log)
+    - disk usage
+    - replication lag (if read replicas)
+  
+  scaling:
+    - read replicas for read-heavy workloads
+    - connection pooling (PgBouncer or Pgpool-II)
+    - query optimization and indexing
+
+messaging_and_queues:
+  job_queue: AWS SQS (Simple Queue Service)
+  use_cases:
+    - order fulfillment jobs
+    - appointment reminder jobs
+    - lead routing jobs
+    - email sending
+  
+  configuration:
+    - visibility timeout: 5 minutes for order fulfillment, 1 hour for email
+    - max receive count: 3 retries before dead-letter queue
+    - dead-letter queue: separate queue for failed jobs
+    - monitoring: message count, age, processing time
+
+monitoring_and_observability:
+  metrics_collection: Prometheus or AWS CloudWatch
+  key_metrics:
+    - HTTP request rate, latency (p50, p95, p99)
+    - error rate by endpoint
+    - database query latency
+    - queue depth (SQS backlog)
+    - container CPU and memory usage
+    - Stripe API latency and error rate
+    - email delivery rate
+    - LLM (AI concierge) latency and cost
+    - appointment no-show rate
+    - order fulfillment time
+  
+  alerting:
+    - platform: PagerDuty or similar
+    - channels: Slack, email, SMS for critical
+    - alert_rules:
+      - API error rate > 5% for 5 minutes
+      - database connection pool > 80% capacity
+      - SQS dead-letter queue has messages
+      - Stripe API down for 1 minute
+      - payment success rate < 95%
+      - response time p95 > 1 second
+      - pod restarts > 3 in 10 minutes
+  
+  logging:
+    - platform: CloudWatch Logs or ELK stack
+    - format: JSON (timestamp, level, service, tracing_id, message)
+    - retention: 30 days (except audit logs: 2 years)
+    - log aggregation: all services log to central platform
+  
+  tracing:
+    - platform: X-Ray or Jaeger
+    - tracing_id: assigned to every request
+    - trace correlation: follow request across all services
+    - slow trace detection: alerts for traces > 1 second
+
+reliability_patterns:
+  health_checks:
+    - liveness probe: responds to /health → 200 OK
+    - readiness probe: /ready → checks database connectivity, queue access
+    - startup probe: waits for service initialization
+    - frequency: checked every 10 seconds
+    - failure_threshold: 3 consecutive failures → pod restart
+  
+  auto_scaling:
+    - metric: CPU > 70% or memory > 80%
+    - scale_up: add 1 pod per metric breach
+    - scale_down: remove 1 pod if metrics < 30% for 5 minutes
+    - min_pods: 3 (across availability zones)
+    - max_pods: 20
+  
+  circuit_breaker:
+    - Stripe API: fail fast if down, retry with exponential backoff
+    - Calendar API: fail fast if down, allow booking inquiry without calendar confirmation
+    - Email service: queue for retry if temporarily down
+    - LLM API: fall back to FAQ or "contact sales" if concierge unavailable
+  
+  rate_limiting:
+    - API: 100 requests/minute per IP address
+    - Stripe API: respect Stripe rate limits
+    - Email service: batch sends, respect email provider limits
+    - LLM API: batch requests, respect API rate limits
+  
+  graceful_degradation:
+    - if Stripe down: payment processing paused, customers notified, retry queued
+    - if Email down: notifications queued, retry with exponential backoff
+    - if Calendar down: booking inquiry collected without calendar confirmation
+    - if LLM down: FAQ shown or "contact sales" offered
+
+disaster_recovery:
+  recovery_time_objective: 4 hours (RTO)
+  recovery_point_objective: 1 hour (RPO)
+  
+  backup_and_restore:
+    - database: daily backups, tested restore quarterly
+    - file storage (S3): versioning enabled, cross-region replication
+    - configuration: infrastructure as code (Terraform) in separate repo
+    - secrets: backed in Secrets Manager with versioning
+  
+  failover_strategy:
+    - database: Multi-AZ with automatic failover (< 5 minutes)
+    - api_services: auto-scaling across availability zones
+    - dns_failover: Route 53 health checks trigger DNS change if primary region down
+  
+  runbooks:
+    - database_restore: documented steps to restore from backup
+    - services_restart: automated via orchestration
+    - data_sync: reconcile data between primary and replica
+    - communication_plan: notify stakeholders during outage
+
+on_call_procedures:
+  escalation_policy:
+    - primary_oncall: DevOps engineer (24/7 rotation)
+    - secondary: backend lead (escalate after 15 minutes if primary unavailable)
+    - incident_commander: manager (if incident > 1 hour)
+  
+  runbooks:
+    - database_connection_errors: check pool, restart clients
+    - high_api_error_rate: check recent deployments, rollback if needed
+    - payment_processing_failures: check Stripe status, review failed orders, manual processing
+    - email_delivery_failures: check email service status, verify queue
+    - appointment_reminders_missed: check scheduler, verify job queue
+  
+  post_incident:
+    - war_room: immediate analysis and root cause identification
+    - timeline: reconstruction of events
+    - action_items: prevent recurrence
+    - communication: post-mortem within 48 hours
+
+performance_tuning:
+  frontend:
+    - image optimization: WebP, lazy loading, responsive images
+    - code splitting: load only required JS/CSS per page
+    - caching: service worker, CDN (CloudFront)
+    - metrics: Lighthouse > 90 on all pages
+  
+  backend:
+    - database: indexing, query optimization, query cache (Redis)
+    - api_response: compression (gzip), ETag support, conditional requests
+    - job_processing: batch updates, background tasks
+    - api_rate: cache frequently accessed data (Redis)
+  
+  cdn:
+    - CloudFront in front of API and static assets
+    - cache policy: static assets (1 year), API (no cache except public GET)
+    - origin: ALB (application load balancer)
+
+release_process:
+  versioning: semantic versioning (MAJOR.MINOR.PATCH)
+  release_notes: generated from commit messages
+  deployment_checklist:
+    - code review approved
+    - tests passing (unit, integration, smoke)
+    - security scanning passed
+    - database migrations tested
+    - staging deployment successful
+    - smoke tests on staging passed
+    - security review passed
+    - documentation updated
+    - release notes written
+  
+  post_deployment:
+    - monitor error rate and latency for 1 hour
+    - check critical workflows (checkout, booking, order delivery)
+    - confirm no new alerts
+    - mark release as stable in version control
+
+security_operations:
+  secrets_rotation: quarterly via Secrets Manager
+  certificate_renewal: 30 days before expiration (automated)
+  dependency_updates: security updates applied within SLA, non-security updates monthly
+  access_reviews: quarterly review of who has production access
+  log_retention: audit logs retained per compliance (2 years minimum)

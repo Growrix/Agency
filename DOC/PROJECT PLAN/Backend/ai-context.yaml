@@ -1,0 +1,400 @@
+version: 1
+project:
+  name: Agency SaaS Website — Backend System Plan
+  type: backend architecture and service design
+  summary: >-
+    Backend system architecture for the web development agency platform,
+    covering service boundaries, domain models, state machines, authentication,
+    integrations (Stripe, WhatsApp, Calendar, Email, AI, Chat, Analytics),
+    storage, queuing, observability, and reliability patterns.
+  status: backend-first architecture
+  canonical_docs_root: DOC/PROJECT PLAN/Backend/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Backend/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Backend/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+  minimum_instruction: >-
+    Start by reading the shared contract in DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml.
+    Then read DOC/PROJECT PLAN/Backend/ai-context.yaml before designing models, endpoints,
+    or integrations. All backend services must inherit the domain entities, role model,
+    and API contracts from the shared system blueprint.
+
+core_invariants:
+  - Backend is source-of-truth for all domain entities, state machines, and lifecycle rules.
+  - All API endpoints must match the shared contract; no backend-invented behavior.
+  - All integrations (payments, email, calendar, chat, AI) are backend responsibilities.
+  - State transitions (appointment confirmed, order paid, booking completed) must be explicit, logged, and event-driven.
+  - No business logic can leak into the frontend; all validation and authorization happens backend.
+  - All state must be persisted and auditable.
+
+service_boundaries:
+  auth_service:
+    responsibility: user registration, login, session management, token generation
+    models: User, Session, ApiKey, Role, Permission
+    endpoints:
+      - POST /api/v1/auth/register
+      - POST /api/v1/auth/login
+      - POST /api/v1/auth/logout
+      - POST /api/v1/auth/refresh-token
+      - GET /api/v1/auth/me
+    integrations: none (internal)
+  
+  service_catalog_service:
+    responsibility: service definitions, pricing, availability, messaging
+    models: Service, ServicePricing, ServiceFeature, ServiceFAQ
+    endpoints:
+      - GET /api/v1/services
+      - GET /api/v1/services/[serviceId]
+      - POST/PUT/DELETE /api/v1/admin/services (admin only)
+    integrations: none (internal)
+  
+  portfolio_service:
+    responsibility: portfolio projects, case studies, testimonials, proof
+    models: PortfolioProject, Testimonial, ProjectImage, ProjectMilestone
+    endpoints:
+      - GET /api/v1/portfolio
+      - GET /api/v1/portfolio/[slug]
+      - POST/PUT/DELETE /api/v1/admin/portfolio (admin only)
+    integrations: none (internal)
+  
+  product_shop_service:
+    responsibility: digital product catalog, inventory, categories
+    models: Product, Category, ProductVariant, Inventory, Rating
+    endpoints:
+      - GET /api/v1/shop/categories
+      - GET /api/v1/shop/products
+      - GET /api/v1/shop/products/[productSlug]
+      - POST/PUT/DELETE /api/v1/admin/products (admin only)
+    integrations: storage_service (for product files)
+  
+  order_service:
+    responsibility: order creation, payment processing, fulfillment, delivery
+    models: Order, OrderItem, OrderStatus, Payment, Refund, Delivery
+    endpoints:
+      - POST /api/v1/orders
+      - GET /api/v1/orders/[orderId]
+      - POST /api/v1/orders/[orderId]/download
+      - GET /api/v1/me/orders (subscriber only)
+      - GET /api/v1/admin/orders (admin only)
+    integrations:
+      - stripe_service (payment intent, charges)
+      - email_service (order confirmation, delivery notification)
+      - fulfillment_service (via Zapier or internal queue)
+      - storage_service (deliver purchased files)
+  
+  appointment_service:
+    responsibility: booking inquiries, availability checking, confirmation
+    models: Appointment, TimeSlot, AppointmentStatus, BookingNote
+    endpoints:
+      - POST /api/v1/appointments
+      - GET /api/v1/appointments/[appointmentId]
+      - GET /api/v1/me/appointments (subscriber only)
+      - GET /api/v1/admin/appointments (admin only)
+    integrations:
+      - calendar_service (Google Calendar or similar)
+      - email_service (confirmation, reminder, follow-up)
+      - whatsapp_service (optional escalation)
+      - crm_service (lead tracking)
+  
+  contact_inquiry_service:
+    responsibility: contact form submissions, inquiry routing
+    models: ContactInquiry, InquiryStatus, InquiryResponse
+    endpoints:
+      - POST /api/v1/contact
+      - GET /api/v1/admin/inquiries (admin only)
+    integrations:
+      - email_service (acknowledge receipt, FAQ, route to team)
+  
+  ai_concierge_service:
+    responsibility: chatbot responses, lead qualification, service recommendation
+    models: ConversationSession, Message, LLMQuery, QualifiedLead
+    endpoints:
+      - POST /api/v1/ai-concierge
+      - GET /api/v1/ai-concierge/[sessionId]
+    integrations:
+      - llm_service (OpenAI, Anthropic, or similar)
+      - crm_service (save conversations, track leads)
+      - email_service (route high-intent leads to sales)
+  
+  live_chat_service:
+    responsibility: real-time visitor support, escalation to team
+    models: ChatSession, Message, ChatTranscript, Escalation
+    endpoints:
+      - POST /api/v1/chat/start
+      - GET /api/v1/chat/[sessionId]/messages
+      - POST /api/v1/chat/[sessionId]/message
+    integrations:
+      - live_chat_platform (Intercom, Drift, or custom WebSocket)
+      - whatsapp_service (escalation endpoint)
+      - email_service (session transcript)
+  
+  notification_service:
+    responsibility: email, SMS, push notifications for transactional events
+    models: Notification, NotificationTemplate, NotificationLog
+    integrations:
+      - email_service (SendGrid, SES)
+      - sms_service (optional, SMS notifications)
+      - push_service (optional, browser push)
+  
+  integration_service:
+    responsibility: manage all third-party integrations
+    models: IntegrationConfig, WebhookLog, IntegrationError
+    integrations:
+      - stripe_webhooks
+      - zapier_webhooks
+      - crm_webhooks (HubSpot, Pipedrive)
+
+domain_models:
+  User:
+    fields:
+      - id (UUID)
+      - email (string, unique)
+      - password_hash (bcrypt)
+      - first_name, last_name (string)
+      - phone (string, optional)
+      - role (enum: visitor, subscriber, customer, admin)
+      - profile_picture_url (optional)
+      - created_at, updated_at (timestamp)
+    lifecycle:
+      - visitor (unauthenticated, no DB record)
+      - subscriber (registered, email verified)
+      - customer (has completed transaction)
+      - admin (staff account)
+  
+  Service:
+    fields:
+      - id (UUID)
+      - title (string)
+      - slug (string, unique)
+      - description (string)
+      - service_type (enum: saas_app, website, mcp_server, automation)
+      - pricing_model (enum: contact, tiered, fixed)
+      - base_price (decimal, nullable)
+      - delivery_timeline (string, e.g., "4-6 weeks")
+      - support_level (enum: standard, premium, enterprise)
+      - tech_stack (array of strings)
+      - use_cases (array of strings)
+      - created_at, updated_at
+  
+  Product:
+    fields:
+      - id (UUID)
+      - sku (string, unique)
+      - title (string)
+      - slug (string, unique)
+      - description (string)
+      - category (enum: template, mcp_server, ready_website, mobile_app)
+      - price_usd (decimal)
+      - discount_price_usd (decimal, nullable)
+      - discount_valid_until (timestamp, nullable)
+      - file_url (string, presigned S3 URL)
+      - file_size_bytes (integer)
+      - delivery_method (enum: instant_download, email_link, manual)
+      - support_level (enum: none, email, priority)
+      - status (enum: draft, active, discontinued)
+      - created_at, updated_at
+  
+  Order:
+    fields:
+      - id (UUID)
+      - customer_id (FK to User, nullable for guest checkout)
+      - order_number (string, unique, human-readable)
+      - items (array of OrderItem)
+      - subtotal_usd (decimal)
+      - tax_usd (decimal)
+      - discount_usd (decimal, nullable)
+      - total_usd (decimal)
+      - currency (string, default "USD")
+      - payment_status (enum: pending, succeeded, failed, refunded)
+      - payment_method (enum: stripe_card, stripe_bank, apple_pay, google_pay)
+      - stripe_transaction_id (string)
+      - fulfillment_status (enum: pending, fulfilling, delivered, archived)
+      - delivery_urls (array of strings, product download links)
+      - customer_email, customer_name, customer_phone (string)
+      - shipping_address (optional, for future physical products)
+      - notes (string, nullable)
+      - created_at, completed_at, refunded_at (timestamp)
+  
+  Appointment:
+    fields:
+      - id (UUID)
+      - visitor_email (string)
+      - visitor_name (string)
+      - visitor_phone (string, optional)
+      - service_id (FK to Service)
+      - service_interested_in (string)
+      - preferred_datetime (timestamp)
+      - timezone (string, e.g., "America/New_York")
+      - duration_minutes (integer, default 30)
+      - status (enum: inquiry, confirmed, completed, cancelled, no_show)
+      - calendar_event_id (string, external calendar ID)
+      - notes (text, visitor questions)
+      - internal_notes (text, admin notes)
+      - follow_up_required (boolean)
+      - assigned_to (FK to User, admin staff member)
+      - created_at, confirmed_at, completed_at (timestamp)
+  
+  ContactInquiry:
+    fields:
+      - id (UUID)
+      - visitor_email (string)
+      - visitor_name (string)
+      - subject (string)
+      - message (text)
+      - inquiry_type (enum: general, support, partnership, other)
+      - status (enum: new, read, responded, closed, spam)
+      - assigned_to (FK to User, nullable)
+      - response_message (text, nullable)
+      - responded_at (timestamp, nullable)
+      - created_at, updated_at
+
+state_machines:
+  appointment_lifecycle:
+    states:
+      - inquiry: freshly submitted booking request
+      - confirmed: visitor confirmed, placed on calendar
+      - completed: appointment took place
+      - cancelled: visitor or admin cancelled
+      - no_show: visitor did not attend
+    transitions:
+      - inquiry -> confirmed: admin confirms or auto-confirm via calendar
+      - inquiry -> cancelled: visitor or admin cancels
+      - confirmed -> completed: time passes, appointment marked done
+      - confirmed -> cancelled: visitor or admin cancels
+      - confirmed -> no_show: time passes, never marked completed
+  
+  order_lifecycle:
+    states:
+      - pending: Stripe payment intent created, awaiting payment
+      - succeeded: payment captured, order confirmed
+      - failed: payment declined or cancelled
+      - refunded: payment refunded, order cancelled
+    fulfillment_substates:
+      - pending: awaiting download or manual fulfillment
+      - fulfilling: files being prepared or sent via email
+      - delivered: customer has received product
+      - archived: order older than retention window
+    transitions:
+      - pending -> succeeded: Stripe webhook confirms payment
+      - pending -> failed: Stripe webhook reports failed payment or timeout
+      - succeeded -> fulfilling: fulfillment service processes
+      - fulfilling -> delivered: product delivered to customer
+      - succeeded/fulfilling -> refunded: customer or admin requests refund
+  
+  appointment_status_transitions_on_events:
+    on_appointment_created: inquiry
+    on_calendar_event_created: confirmed
+    on_email_sent: confirmed (implies admin action)
+    on_calendar_event_deleted: cancelled
+    on_time_past_no_completion: no_show
+    on_admin_completion: completed
+
+queue_models:
+  order_fulfillment_job:
+    trigger: order moved to succeeded state
+    payload:
+      - order_id
+      - customer_email
+      - product_download_urls
+      - delivery_method
+    handler: fulfillment_service
+    retry_policy: exponential backoff, max 3 retries
+    timeout: 5 minutes
+  
+  appointment_reminder_job:
+    trigger: scheduled 24 hours before appointment
+    payload:
+      - appointment_id
+      - customer_email
+      - appointment_datetime
+    handler: notification_service
+    retry_policy: linear backoff, max 2 retries
+  
+  ai_concierge_lead_routing_job:
+    trigger: visitor achieves high intent score
+    payload:
+      - conversation_session_id
+      - visitor_email
+      - recommended_service_id
+      - lead_score
+    handler: crm_service (via Zapier or direct integration)
+    retry_policy: exponential backoff, max 3 retries
+
+webhook_integrations:
+  stripe_webhooks:
+    events:
+      - payment_intent.succeeded
+      - payment_intent.payment_failed
+      - charge.refunded
+      - customer.subscription.updated
+    handler: order_service
+    retry_policy: Stripe will retry for 3 days
+  
+  zapier_webhooks:
+    events:
+      - order created -> fulfillment workflow
+      - appointment confirmed -> CRM sync
+    handler: integration_service
+  
+  crm_webhooks:
+    events:
+      - deal.updated
+      - contact.has_conversation
+    handler: sync back to Appointment.assigned_to, etc.
+
+observability:
+  logging:
+    - all state transitions logged (Appointment status change, Order payment, etc.)
+    - all integrations calls logged (Stripe, Calendar, Email, LLM)
+    - all errors logged with stack trace and context
+    - structured logging (JSON) with tracing_id for cross-service correlation
+  
+  metrics:
+    - order count by day
+    - order revenue by day
+    - appointment count by day
+    - appointment no-show rate
+    - API response time by endpoint (p50, p95, p99)
+    - Stripe payment success rate
+    - Email delivery rate
+    - LLM latency and cost
+  
+  tracing:
+    - all requests assigned tracing_id
+    - distributed tracing across service calls
+    - flame graphs for slow requests
+  
+  alerts:
+    - payment processing failures > 5% in 1 hour
+    - order fulfillment failures > 10% in 1 hour
+    - API response time p95 > 1 second
+    - appointment service outage
+    - email delivery errors
+    - LLM API errors
+
+reliability_patterns:
+  circuit_breaker:
+    - Stripe API: fail fast if payment service unavailable
+    - Calendar API: fail fast if booking service unavailable
+    - Email service: queue for retry if temporarily down
+    - LLM API: fall back to FAQ or "contact sales" if chatbot unavailable
+  
+  retry_logic:
+    - transient failures (network timeouts): exponential backoff
+    - permanent failures (auth errors): immediate failure, alert
+    - rate limits: respect Retry-After header
+  
+  fallback_behavior:
+    - if Stripe down: show "payment service unavailable" to customer
+    - if Calendar down: show "booking unavailable" but collect inquiry via form
+    - if LLM down: show FAQ or suggestion to contact sales
+    - if Email down: queue in background, notify admin if still failing after 1 hour
+  
+  data_consistency:
+    - no eventual consistency; all critical state transitions are transactional within service
+    - cross-service consistency via event-driven model and saga pattern
+    - appointments and orders immutable once confirmed/paid
+    - refunds are audit trail (not destructive deletes)

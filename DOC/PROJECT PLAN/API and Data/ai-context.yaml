@@ -1,0 +1,420 @@
+version: 1
+project:
+  name: Agency SaaS Website — API & Data Contracts
+  type: data architecture and API schema specification
+  summary: >-
+    Complete API schema, response models, error handling, data types, and database
+    structure for the web development agency platform. This layer locks down contracts
+    between backend service implementations and frontend/mobile consumption.
+  status: contract-locked
+  canonical_docs_root: DOC/PROJECT PLAN/API and Data/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/API and Data/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/API and Data/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+  minimum_instruction: >-
+    All API responses must match the schemas defined in this contract. Backend teams
+    must not alter response structures without coordinating with frontend and API roles.
+    Frontend must not assume response structures not defined here. Data models must be
+    persisted and queryable per these schemas.
+
+core_invariants:
+  - API schemas are immutable after launch; breaking changes require versioning or deprecation period.
+  - All API responses include metadata (timestamp, request_id, paging info where applicable).
+  - All errors follow a standard error response format with error_code, message, and details.
+  - Database schema is a direct reflection of API domain models.
+  - All timestamps are ISO 8601, UTC.
+  - All monetary amounts are in cents (USD cents) to avoid floating-point errors.
+  - All user-facing identifiers (order_number, etc.) are human-readable; internal IDs are UUIDs.
+
+api_base_url: https://api.agency.com/api/v1
+
+response_envelope:
+  success:
+    description: all successful API responses
+    structure:
+      - success (boolean, always true)
+      - data (object or array, varies by endpoint)
+      - timestamp (ISO 8601)
+      - request_id (UUID)
+  
+  paginated:
+    description: list endpoints with pagination
+    structure:
+      - success (boolean)
+      - data (array of items)
+      - pagination
+        - total (integer, total record count)
+        - page (integer, current page, 1-indexed)
+        - page_size (integer, items per page)
+        - total_pages (integer, ceil(total / page_size))
+      - timestamp, request_id
+  
+  error:
+    description: all error responses
+    status_code: 4xx or 5xx
+    structure:
+      - success (boolean, always false)
+      - error
+        - code (string, machine-readable error code)
+        - message (string, human-readable)
+        - details (object, nullable, extra context)
+      - timestamp, request_id
+
+error_codes:
+  authentication:
+    - UNAUTHORIZED (401): missing or invalid token
+    - INVALID_CREDENTIALS (401): incorrect email/password
+    - TOKEN_EXPIRED (401): auth token has expired, refresh required
+  
+  authorization:
+    - FORBIDDEN (403): user lacks permission
+    - RESOURCE_NOT_OWNED (403): user trying to access another user's resource
+  
+  validation:
+    - INVALID_REQUEST (400): malformed request body or invalid parameter
+    - MISSING_REQUIRED_FIELD (400): required field missing
+    - FIELD_VALIDATION_FAILED (400): field value invalid (too long, wrong format, etc.)
+  
+  resource:
+    - NOT_FOUND (404): resource does not exist
+    - RESOURCE_DELETED (410): resource was deleted
+    - CONFLICT (409): operation would violate unique constraint
+  
+  rate_limiting:
+    - RATE_LIMIT_EXCEEDED (429): too many requests
+  
+  server:
+    - INTERNAL_ERROR (500): unexpected server error
+    - SERVICE_UNAVAILABLE (503): external service down (Stripe, Calendar, Email)
+
+database_schema:
+  users_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - email VARCHAR(255) UNIQUE NOT NULL
+      - password_hash VARCHAR(255) NOT NULL
+      - first_name VARCHAR(100)
+      - last_name VARCHAR(100)
+      - phone VARCHAR(20)
+      - role ENUM(visitor, subscriber, customer, admin) NOT NULL DEFAULT visitor
+      - profile_picture_url TEXT
+      - created_at TIMESTAMP UTC NOT NULL DEFAULT now()
+      - updated_at TIMESTAMP UTC NOT NULL DEFAULT now()
+    indexes:
+      - email (unique)
+      - role
+      - created_at
+  
+  services_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - title VARCHAR(255) NOT NULL
+      - slug VARCHAR(255) UNIQUE NOT NULL
+      - description TEXT NOT NULL
+      - service_type ENUM(saas_app, website, mcp_server, automation) NOT NULL
+      - pricing_model ENUM(contact, tiered, fixed) NOT NULL
+      - base_price_cents INT (nullable for "contact us" model)
+      - delivery_timeline_days INT
+      - support_level ENUM(standard, premium, enterprise)
+      - tech_stack JSONB (array of tech names)
+      - use_cases JSONB (array of use cases)
+      - created_at, updated_at
+    indexes:
+      - slug (unique)
+      - service_type
+  
+  products_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - sku VARCHAR(100) UNIQUE NOT NULL
+      - title VARCHAR(255) NOT NULL
+      - slug VARCHAR(255) UNIQUE NOT NULL
+      - description TEXT
+      - category ENUM(template, mcp_server, ready_website, mobile_app) NOT NULL
+      - price_cents INT NOT NULL (USD cents)
+      - discount_price_cents INT (nullable)
+      - discount_valid_until TIMESTAMP (nullable)
+      - file_url TEXT (presigned S3 URL)
+      - file_size_bytes BIGINT
+      - delivery_method ENUM(instant_download, email_link, manual)
+      - support_level ENUM(none, email, priority)
+      - status ENUM(draft, active, discontinued)
+      - created_at, updated_at
+    indexes:
+      - sku (unique)
+      - slug (unique)
+      - category
+      - status
+  
+  orders_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - customer_id UUID (nullable for guests, FK to users)
+      - order_number VARCHAR(50) UNIQUE NOT NULL (human-readable, e.g., ORD-20250418-001)
+      - subtotal_cents INT NOT NULL
+      - tax_cents INT NOT NULL
+      - discount_cents INT (nullable)
+      - total_cents INT NOT NULL
+      - currency VARCHAR(3) DEFAULT USD
+      - payment_status ENUM(pending, succeeded, failed, refunded) NOT NULL
+      - payment_method ENUM(stripe_card, stripe_bank, apple_pay, google_pay)
+      - stripe_transaction_id VARCHAR(255)
+      - fulfillment_status ENUM(pending, fulfilling, delivered, archived) NOT NULL
+      - customer_email VARCHAR(255) NOT NULL
+      - customer_name VARCHAR(255) NOT NULL
+      - customer_phone VARCHAR(20)
+      - notes TEXT
+      - created_at, completed_at, refunded_at TIMESTAMP
+    indexes:
+      - customer_id (FK)
+      - order_number (unique)
+      - payment_status
+      - created_at
+  
+  order_items_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - order_id UUID NOT NULL (FK to orders)
+      - product_id UUID NOT NULL (FK to products)
+      - quantity INT NOT NULL DEFAULT 1
+      - unit_price_cents INT NOT NULL
+      - discount_cents INT (nullable)
+      - total_cents INT NOT NULL
+    indexes:
+      - order_id (FK)
+      - product_id (FK)
+  
+  appointments_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - visitor_email VARCHAR(255) NOT NULL
+      - visitor_name VARCHAR(255) NOT NULL
+      - visitor_phone VARCHAR(20)
+      - service_id UUID (nullable, FK to services)
+      - service_interested_in TEXT
+      - preferred_datetime TIMESTAMP NOT NULL
+      - timezone VARCHAR(50) (e.g., America/New_York)
+      - duration_minutes INT DEFAULT 30
+      - status ENUM(inquiry, confirmed, completed, cancelled, no_show) NOT NULL
+      - calendar_event_id VARCHAR(255) (external ID)
+      - notes TEXT
+      - internal_notes TEXT
+      - follow_up_required BOOLEAN DEFAULT false
+      - assigned_to_user_id UUID (nullable, FK to users admin staff)
+      - created_at, confirmed_at, completed_at TIMESTAMP
+    indexes:
+      - visitor_email
+      - service_id (FK)
+      - status
+      - preferred_datetime
+      - assigned_to_user_id
+  
+  contact_inquiries_table:
+    columns:
+      - id UUID PRIMARY KEY
+      - visitor_email VARCHAR(255) NOT NULL
+      - visitor_name VARCHAR(255) NOT NULL
+      - subject VARCHAR(255) NOT NULL
+      - message TEXT NOT NULL
+      - inquiry_type ENUM(general, support, partnership, other)
+      - status ENUM(new, read, responded, closed, spam) NOT NULL DEFAULT new
+      - assigned_to_user_id UUID (nullable, FK to users)
+      - response_message TEXT
+      - responded_at TIMESTAMP
+      - created_at, updated_at TIMESTAMP
+    indexes:
+      - visitor_email
+      - status
+      - assigned_to_user_id
+      - created_at
+
+api_endpoints_detailed:
+  auth_endpoints:
+    POST /auth/register:
+      request:
+        email (string, email format, required)
+        password (string, min 8 chars, required)
+        first_name (string, optional)
+        last_name (string, optional)
+      response_success:
+        user (User object)
+        token (JWT auth token)
+        expires_in (integer, seconds)
+      response_error:
+        INVALID_REQUEST, EMAIL_ALREADY_EXISTS, PASSWORD_TOO_WEAK
+    
+    POST /auth/login:
+      request:
+        email (string, required)
+        password (string, required)
+      response_success:
+        user (User object)
+        token (JWT auth token)
+        expires_in (integer, seconds)
+      response_error:
+        INVALID_CREDENTIALS, USER_NOT_FOUND
+    
+    POST /auth/refresh-token:
+      request:
+        refresh_token (string, required)
+      response_success:
+        token (new JWT)
+        expires_in
+      response_error:
+        TOKEN_EXPIRED, INVALID_TOKEN
+  
+  services_endpoints:
+    GET /services:
+      query_params:
+        page (integer, default 1)
+        page_size (integer, default 20)
+        service_type (enum filter, optional)
+      response_success:
+        paginated list of Service objects
+      response_error:
+        INVALID_REQUEST
+    
+    GET /services/[serviceId]:
+      response_success:
+        Service object (id, title, description, pricing, support_level, tech_stack, use_cases)
+      response_error:
+        NOT_FOUND
+  
+  products_endpoints:
+    GET /shop/categories:
+      response_success:
+        array of strings (template, mcp_server, ready_website, mobile_app)
+    
+    GET /shop/products:
+      query_params:
+        category (enum filter, optional)
+        search (string, optional)
+        page, page_size
+      response_success:
+        paginated list of Product objects (id, title, price_cents, category, rating)
+      response_error:
+        INVALID_REQUEST
+    
+    GET /shop/products/[productSlug]:
+      response_success:
+        Product object (id, title, description, price, discount, file_url, support_level, rating)
+      response_error:
+        NOT_FOUND
+  
+  orders_endpoints:
+    POST /orders:
+      requires_auth: false (guest checkout allowed)
+      request:
+        items (array of { product_id, quantity })
+        customer_email (string)
+        customer_name (string)
+        customer_phone (string, optional)
+        coupon_code (string, optional)
+      response_success:
+        Order object (id, order_number, total_cents, payment_status, stripe_client_secret for Stripe.js)
+      response_error:
+        INVALID_REQUEST, PRODUCT_NOT_FOUND, OUT_OF_STOCK
+    
+    GET /orders/[orderId]:
+      requires_auth: true (must own order or be admin)
+      response_success:
+        Order object (full details including fulfillment_status, delivery_urls)
+      response_error:
+        NOT_FOUND, RESOURCE_NOT_OWNED
+    
+    POST /orders/[orderId]/download:
+      requires_auth: true
+      response_success:
+        redirect to presigned S3 download URL
+      response_error:
+        NOT_FOUND, FULFILLMENT_NOT_COMPLETE
+  
+  appointments_endpoints:
+    POST /appointments:
+      request:
+        visitor_email, visitor_name, visitor_phone (optional)
+        service_id (UUID)
+        preferred_datetime (ISO 8601)
+        timezone (string)
+        notes (text, optional)
+      response_success:
+        Appointment object (id, status: inquiry, confirmation_sent: boolean)
+      response_error:
+        INVALID_REQUEST, SERVICE_NOT_FOUND, INVALID_DATETIME
+    
+    GET /appointments/[appointmentId]:
+      response_success:
+        Appointment object (visitor_email, service, preferred_datetime, status, notes)
+      response_error:
+        NOT_FOUND
+  
+  contact_endpoints:
+    POST /contact:
+      request:
+        visitor_email, visitor_name
+        subject, message (text)
+        inquiry_type (enum)
+      response_success:
+        { id (UUID), status: new, message: "Thank you, we'll respond soon" }
+      response_error:
+        INVALID_REQUEST
+
+data_type_specifications:
+  timestamp:
+    format: ISO 8601
+    example: 2025-04-18T14:30:00Z
+    timezone: UTC always
+  
+  money:
+    format: integer (cents)
+    example: 9999 (represents $99.99)
+    currency: USD
+  
+  uuid:
+    format: RFC 4122
+    example: 550e8400-e29b-41d4-a716-446655440000
+  
+  email:
+    format: RFC 5322
+    validation: standard email validation + domain verification optional
+  
+  phone:
+    format: E.164 or dash-separated
+    example: +1-555-123-4567 or 5551234567
+  
+  enum:
+    represented as lowercase string with underscores
+    example: payment_status: "stripe_card"
+
+webhook_event_schemas:
+  on_order_created:
+    event_type: order.created
+    payload:
+      order_id (UUID)
+      order_number (string)
+      customer_email (string)
+      total_cents (int)
+      items (array of { product_id, quantity })
+      created_at (timestamp)
+  
+  on_payment_succeeded:
+    event_type: payment.succeeded
+    payload:
+      order_id (UUID)
+      stripe_transaction_id (string)
+      amount_cents (int)
+      timestamp (ISO 8601)
+  
+  on_appointment_confirmed:
+    event_type: appointment.confirmed
+    payload:
+      appointment_id (UUID)
+      visitor_email (string)
+      service_id (UUID)
+      preferred_datetime (ISO 8601)
+      confirmed_at (timestamp)

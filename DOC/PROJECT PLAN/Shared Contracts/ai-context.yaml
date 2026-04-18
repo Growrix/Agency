@@ -1,0 +1,370 @@
+version: 1
+project:
+  name: Agency SaaS Website — Shared System Contracts
+  type: cross-team contract layer
+  summary: >-
+    Shared system blueprint for the web development agency platform, defining
+    all surfaces, roles, domain entities, API contracts, integrations, and
+    non-functional requirements before specialized planning diverges into
+    frontend, backend, security, and operations.
+  status: contract-first blueprint
+  canonical_docs_root: DOC/PROJECT PLAN/Shared Contracts/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Shared Contracts/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+  minimum_instruction: >-
+    Start with DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml, then read the system
+    architecture and route map before any backend, frontend, or security planning
+    begins. All specialized roles must inherit this contract.
+
+core_invariants:
+  - All surfaces (public, commerce, conversion, admin) must follow the same role and permission model.
+  - Domain entities, lifecycle states, and ownership rules are canonical and shared.
+  - API contracts and event payloads are defined here before implementation.
+  - Integrations (Stripe, WhatsApp, Zapier, AI/LLM, email) are managed centrally by backend, not scattered.
+  - Security boundaries, tenant isolation, and compliance rules are explicit upfront.
+  - Frontend and backend must both reference this contract; no invention allowed.
+
+surfaces:
+  public_marketing:
+    description: Public marketing, service discovery, portfolio, pricing, credibility proof
+    routes:
+      - /
+      - /services
+      - /services/saas-applications
+      - /services/websites
+      - /services/mcp-servers
+      - /services/automation
+      - /portfolio
+      - /portfolio/[slug]
+      - /pricing
+      - /about
+      - /faq
+      - /contact
+    auth_required: false
+    roles_allowed: public, subscriber
+  
+  commerce:
+    description: Digital product shop for templates, MCP servers, ready websites, mobile apps
+    routes:
+      - /shop
+      - /shop/[category]
+      - /shop/[category]/[productSlug]
+      - /shop/cart
+      - /shop/checkout
+    auth_required: false (public browsing) or true (checkout)
+    roles_allowed: public, subscriber, customer
+    integrations:
+      - Stripe (payment)
+      - Zapier (order fulfillment)
+  
+  conversion:
+    description: Booking, appointment, AI concierge, WhatsApp handoff, contact flows
+    routes:
+      - /book-appointment
+      - /ai-concierge
+      - /contact
+      - /live-chat
+    auth_required: false
+    roles_allowed: public, subscriber
+    integrations:
+      - Calendar API (availability, booking)
+      - WhatsApp (escalation)
+      - Email (notifications)
+      - LLM/AI (concierge)
+      - Live chat platform
+
+domain_entities:
+  visitor:
+    description: Unauthenticated or public user browsing the site
+    lifecycle:
+      - discovers services
+      - explores portfolio
+      - views pricing
+      - engages with concierge or live chat
+      - books appointment or initiates checkout
+  
+  subscriber:
+    description: Registered user, may have nurture history, can track inquiries
+    lifecycle:
+      - signs up
+      - receives email communications
+      - tracks inquiry/booking status
+      - receives service updates
+  
+  customer:
+    description: Completed a transaction (purchase, booking, project engagement)
+    lifecycle:
+      - completes payment or booking
+      - receives order/confirmation
+      - accesses order history
+      - may request support or reorder
+  
+  service:
+    description: Branded service offering (SaaS apps, websites, MCP servers, automation)
+    attributes:
+      - title, description, use_cases
+      - pricing_model (contact, tiered, fixed)
+      - delivery_timeline
+      - support_level
+      - integrations_supported
+  
+  product:
+    description: Digital product for sale (template, MCP server, ready website, mobile app)
+    attributes:
+      - sku, title, description
+      - pricing (USD)
+      - category (template, mcp_server, ready_website, mobile_app)
+      - file_url or delivery_method
+      - support_level
+  
+  project:
+    description: Active engagement (custom service delivery)
+    attributes:
+      - project_id, client_name
+      - service_type, scope
+      - status (pending, active, completed, archived)
+      - timeline, budget
+  
+  appointment:
+    description: Booked consultation or meeting
+    attributes:
+      - appointment_id, visitor_email, visitor_phone
+      - service_interested_in
+      - preferred_datetime
+      - status (pending, confirmed, completed, cancelled)
+      - notes, follow_up_required
+
+role_model:
+  public:
+    description: Unauthenticated visitor
+    permissions:
+      - browse all marketing content
+      - view services, portfolio, pricing
+      - initiate chat or booking inquiry
+      - view product shop
+      - cannot: checkout, access admin
+  
+  subscriber:
+    description: Registered user
+    permissions:
+      - all public permissions
+      - receive email communications
+      - track inquiry/booking status
+      - view order history (after purchase)
+      - cannot: access admin
+  
+  customer:
+    description: Paid customer or booked client
+    permissions:
+      - all subscriber permissions
+      - access project details
+      - request support
+      - reorder or upgrade
+      - cannot: access admin
+  
+  admin:
+    description: Agency internal staff
+    permissions:
+      - all customer permissions
+      - manage services, products, portfolio
+      - view orders, bookings, inquiries
+      - configure integrations
+      - access analytics
+
+api_contract_index:
+  public_endpoints:
+    - GET /api/v1/services: list all services
+    - GET /api/v1/services/[serviceId]: service detail, pricing, messaging
+    - GET /api/v1/portfolio: list portfolio projects
+    - GET /api/v1/portfolio/[slug]: portfolio detail, images, testimonials
+    - GET /api/v1/shop/categories: product categories
+    - GET /api/v1/shop/products: list products with pagination, filters
+    - GET /api/v1/shop/products/[productSlug]: product detail
+  
+  conversion_endpoints:
+    - POST /api/v1/appointments: create booking inquiry
+    - GET /api/v1/appointments/[appointmentId]: retrieve status
+    - POST /api/v1/contact: contact form submission
+    - POST /api/v1/ai-concierge: LLM chat query
+    - POST /api/v1/chat/start: initiate live chat
+  
+  commerce_endpoints:
+    - POST /api/v1/orders: create order (Stripe payment intent)
+    - GET /api/v1/orders/[orderId]: order status and delivery
+    - POST /api/v1/orders/[orderId]/download: download digital product
+  
+  subscriber_endpoints:
+    - GET /api/v1/me: current user profile
+    - POST /api/v1/me/update: update profile
+    - GET /api/v1/me/orders: order history
+    - GET /api/v1/me/appointments: appointment history
+  
+  admin_endpoints:
+    - POST/PUT/DELETE /api/v1/admin/services
+    - POST/PUT/DELETE /api/v1/admin/products
+    - POST/PUT/DELETE /api/v1/admin/portfolio
+    - GET /api/v1/admin/orders, /appointments, /inquiries
+    - POST /api/v1/admin/content/settings
+    - GET /api/v1/admin/analytics
+
+event_model:
+  on_booking_created:
+    payload: { appointmentId, visitorEmail, serviceId, preferredDatetime }
+    subscribers: email_service, calendar_service, crm
+  
+  on_product_purchased:
+    payload: { orderId, customerId, productId, amount, paymentMethod }
+    subscribers: stripe_webhook, email_service, fulfillment_service
+  
+  on_inquiry_received:
+    payload: { inquiryId, visitorEmail, subject, message }
+    subscribers: email_service, slack_notification, crm
+  
+  on_ai_concierge_qualified:
+    payload: { visitorEmail, intent, recommendedService }
+    subscribers: email_service, sales_crm
+
+integration_inventory:
+  stripe:
+    purpose: payment processing for digital products
+    scope: shop checkout, order creation, refunds
+    owner: backend
+    contract: standard Stripe webhook integration
+  
+  whatsapp:
+    purpose: escalation from live chat to agency WhatsApp
+    scope: booking, project inquiry, support
+    owner: backend + live chat platform
+    contract: WhatsApp Business API or Zapier webhook
+  
+  calendar_api:
+    purpose: availability checking, appointment booking
+    scope: booking form, confirmation
+    owner: backend
+    contract: Google Calendar API or similar
+  
+  email_service:
+    purpose: transactional and marketing email
+    scope: confirmations, notifications, newsletters
+    owner: backend
+    contract: SendGrid, AWS SES, or similar
+  
+  ai_llm:
+    purpose: AI concierge for visitor questions
+    scope: chatbot responses, FAQ automation
+    owner: backend
+    contract: OpenAI API, Anthropic API, or similar
+  
+  live_chat:
+    purpose: real-time visitor support and escalation
+    scope: on-site chat widget, WhatsApp handoff
+    owner: frontend + backend
+    contract: Intercom, Drift, or similar
+  
+  analytics:
+    purpose: visitor behavior, conversion tracking, SEO
+    scope: page views, form completions, commerce events
+    owner: frontend + backend
+    contract: Google Analytics, Mixpanel, or similar
+  
+  zapier_webhooks:
+    purpose: workflow automation (order fulfillment, CRM sync)
+    scope: order creation, booking confirmation
+    owner: backend
+    contract: Zapier automation rules
+
+non_functional_requirements:
+  performance:
+    - homepage load time: < 2s
+    - product page load time: < 1.5s
+    - api response time: < 500ms
+    - shop search latency: < 200ms
+  
+  availability:
+    - uptime target: 99.5%
+    - graceful degradation if integrations fail
+    - offline mode for marketing pages
+  
+  security:
+    - HTTPS on all traffic
+    - CSRF protection on forms
+    - XSS prevention
+    - role-based access control (RBAC)
+    - PCI compliance for Stripe integration
+    - GDPR-compliant data retention
+  
+  scalability:
+    - support 10k+ concurrent visitors
+    - product catalog: 1000+ items
+    - orders: 100+ per day peak
+  
+  accessibility:
+    - WCAG 2.1 AA compliance
+    - keyboard navigation
+    - screen reader support
+    - alt text on all images
+  
+  localization_readiness:
+    - language switching ready (defer to future phase)
+    - time zone handling for bookings
+    - multi-currency support (defer to future phase)
+
+implementation_sequence:
+  phase_1_mvp:
+    duration: weeks 1-4
+    deliverables:
+      - public marketing site (home, services, about, contact)
+      - portfolio showcase
+      - booking form (integrated with calendar)
+      - email notifications
+      - live chat integration
+  
+  phase_2_commerce:
+    duration: weeks 5-8
+    deliverables:
+      - product shop (browse, detail, cart)
+      - Stripe checkout
+      - order confirmation and delivery
+      - customer order history
+  
+  phase_3_ai_concierge:
+    duration: weeks 9-11
+    deliverables:
+      - AI-powered chatbot for FAQ and service questions
+      - WhatsApp escalation
+      - lead qualification and routing
+  
+  phase_4_admin_panel:
+    duration: weeks 12-14
+    deliverables:
+      - admin dashboard for products, services, portfolio
+      - order and booking management
+      - analytics and insights
+  
+  phase_5_optimization:
+    duration: weeks 15+
+    deliverables:
+      - performance tuning
+      - SEO optimization
+      - A/B testing framework
+      - multi-currency, localization roadmap
+
+assumptions_and_questions:
+  assumptions:
+    - Stripe account exists and is configured
+    - Calendar system (Google Calendar or similar) is available
+    - WhatsApp Business account will be set up
+    - Email provider (SendGrid, SES) is ready
+    - AI/LLM service (OpenAI, Anthropic) is available
+    - Live chat platform chosen (Intercom, Drift, custom)
+  
+  unresolved:
+    - Will there be a mobile app or PWA in scope?
+    - Will multi-tenancy support be needed in future?
+    - What's the data retention policy for old orders?
+    - Will affiliate/referral system be part of MVP?
+    - CRM integration: required immediately or future?
