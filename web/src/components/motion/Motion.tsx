@@ -3,13 +3,14 @@
 import {
   motion,
   AnimatePresence,
+  MotionConfig,
   useInView,
   useReducedMotion,
   type HTMLMotionProps,
   type Variants,
 } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 const EASE_SIGNAL = [0.22, 1, 0.36, 1] as const;
 
@@ -140,40 +141,59 @@ export function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px 0px" });
   const reduced = useReducedMotion();
-  const parsed = parseStat(value);
+  // Memoize the parsed shape on the value string so identity is stable.
+  const parsed = useMemo(() => parseStat(value), [value]);
+  const num = parsed?.num ?? null;
+  const prefix = parsed?.prefix ?? "";
+  const suffix = parsed?.suffix ?? "";
   const [display, setDisplay] = useState<string>(() => {
-    if (!parsed) return value;
+    if (num == null) return value;
     if (reduced) return value;
-    return `${parsed.prefix}0${parsed.suffix}`;
+    return `${prefix}0${suffix}`;
   });
 
   useEffect(() => {
-    if (!parsed) return;
+    if (num == null) {
+      setDisplay(value);
+      return;
+    }
     if (reduced || !inView) {
       setDisplay(value);
       return;
     }
-    const decimals = (parsed.num.toString().split(".")[1] ?? "").length;
+    const decimals = (num.toString().split(".")[1] ?? "").length;
     const start = performance.now();
     let raf = 0;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / (duration * 1000));
       const eased = 1 - Math.pow(1 - p, 3);
-      const current = parsed.num * eased;
+      const current = num * eased;
       const formatted =
         decimals > 0 ? current.toFixed(decimals) : Math.round(current).toLocaleString();
-      setDisplay(`${parsed.prefix}${formatted}${parsed.suffix}`);
+      setDisplay(`${prefix}${formatted}${suffix}`);
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration, reduced, parsed]);
+  }, [inView, value, duration, reduced, num, prefix, suffix]);
 
   return (
     <span ref={ref} className={className}>
       {display}
     </span>
   );
+}
+
+/**
+ * Mounts a single MotionConfig with reducedMotion="user" so every framer-motion
+ * animation in the tree (initial/animate/exit/whileHover/whileTap/AnimatePresence,
+ * etc.) automatically becomes a no-op when the user has the OS-level
+ * "Reduce motion" preference enabled. Use this once at the root of the app
+ * shell — the existing Reveal/RevealGroup/RouteTransition/CountUp helpers also
+ * gate themselves explicitly so this is a defense-in-depth.
+ */
+export function MotionRoot({ children }: { children: ReactNode }) {
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }
 
 export function RouteTransition({ children }: { children: ReactNode }) {

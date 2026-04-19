@@ -23,6 +23,7 @@ import { CTABand } from "@/components/sections/CTABand";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES, TESTIMONIALS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
 const ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -240,19 +241,32 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7">
-              <Badge tone="primary" dot>{copy.eyebrow}</Badge>
-              <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
+              <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+                <Badge tone="primary" dot>{copy.eyebrow}</Badge>
+              </div>
+              <h1
+                className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance signal-rise"
+                style={{ animationDelay: "70ms" }}
+              >
                 {copy.headline}
               </h1>
-              <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7">{copy.description}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <p
+                className="mt-6 text-lg text-[var(--color-text-muted)] leading-7 signal-rise"
+                style={{ animationDelay: "140ms" }}
+              >
+                {copy.description}
+              </p>
+              <div
+                className="mt-8 flex flex-wrap gap-3 signal-rise"
+                style={{ animationDelay: "210ms" }}
+              >
                 <LinkButton href="/book-appointment" size="lg">
                   {copy.primaryCta} <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton href={copy.secondaryHref} variant="outline" size="lg">{copy.secondaryCta}</LinkButton>
               </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
               <Card className="overflow-hidden">
                 <div className="flex items-center justify-between mb-5">
                   <div className="inline-flex size-12 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
@@ -284,14 +298,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section tone="inset">
         <Container>
           <SectionHeading eyebrow="What gets built" title="The actual surfaces and systems we ship." />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {copy.builds.map((b) => (
-              <Card key={b.title} hoverable>
-                <h3 className="font-display text-lg tracking-tight">{b.title}</h3>
-                <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{b.description}</p>
-              </Card>
+              <RevealItem key={b.title} className="h-full">
+                <Card hoverable className="h-full">
+                  <h3 className="font-display text-lg tracking-tight">{b.title}</h3>
+                  <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{b.description}</p>
+                </Card>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -302,15 +318,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             title="Operating choices, not adjectives."
             description="The decisions that shape how this work actually feels to use, ship, and maintain."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
             {copy.differentiators.map((d) => (
-              <div key={d.title} className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-                <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-primary)]">Principle</div>
-                <h3 className="mt-2 font-display text-xl tracking-tight">{d.title}</h3>
-                <p className="mt-2 text-[var(--color-text-muted)] leading-7 text-pretty">{d.description}</p>
-              </div>
+              <RevealItem key={d.title} className="h-full">
+                <div className="h-full rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+                  <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-primary)]">Principle</div>
+                  <h3 className="mt-2 font-display text-xl tracking-tight">{d.title}</h3>
+                  <p className="mt-2 text-[var(--color-text-muted)] leading-7 text-pretty">{d.description}</p>
+                </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -332,9 +350,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 View all <ArrowUpRightIcon className="inline size-4" />
               </Link>
             </div>
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
               {related.map((p) => (
-                <Link key={p.slug} href={`/portfolio/${p.slug}`} className="group block rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] hover:shadow-[var(--shadow-2)] transition-all">
+                <RevealItem key={p.slug} className="h-full">
+                <Link href={`/portfolio/${p.slug}`} className="group block h-full rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]">
                   <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.accent}`}>
                     <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
                     <div className="absolute inset-0 flex items-end p-5 text-white">
@@ -348,8 +367,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     <p className="text-sm text-[var(--color-text-muted)] leading-6">{p.summary}</p>
                   </div>
                 </Link>
+                </RevealItem>
               ))}
-            </div>
+            </RevealGroup>
           </Container>
         </Section>
       )}
@@ -361,22 +381,26 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             title="Pick the surface area that matches the work."
             align="center"
           />
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {copy.tiers.map((t) => (
-              <PricingTier key={t.name} tier={t} />
+              <RevealItem key={t.name} className="h-full">
+                <PricingTier tier={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
       <Section>
         <Container>
           <SectionHeading eyebrow="Voices" title="Recent quotes from this practice." />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {TESTIMONIALS.map((t) => (
-              <Testimonial key={t.author} data={t} />
+              <RevealItem key={t.author} className="h-full">
+                <Testimonial data={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
