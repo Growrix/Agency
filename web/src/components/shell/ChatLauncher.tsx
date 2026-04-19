@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ChatBubbleLeftRightIcon, XMarkIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
 
 const SUGGESTED = [
@@ -17,8 +18,17 @@ export function ChatLauncher() {
 
   return (
     <div className="hidden lg:block fixed bottom-6 right-6 z-50">
+      <AnimatePresence>
       {open && (
-        <div className="mb-3 w-[340px] rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-3)] overflow-hidden animate-fade-up">
+        <motion.div
+          key="chat-panel"
+          initial={{ opacity: 0, scale: 0.92, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 8 }}
+          transition={{ type: "spring", stiffness: 380, damping: 28, mass: 0.6 }}
+          style={{ transformOrigin: "bottom right" }}
+          className="mb-3 w-[340px] rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-3)] overflow-hidden"
+        >
           <div className="flex items-center justify-between bg-[var(--color-contrast)] px-4 py-3 text-[var(--color-contrast-text)]">
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden />
@@ -66,18 +76,32 @@ export function ChatLauncher() {
               Conversations may be reviewed for service quality. See <Link href="/privacy-policy" className="underline">privacy</Link>.
             </p>
           </div>
-        </div>
+        </motion.div>
       )}
-      <button
+      </AnimatePresence>
+      <motion.button
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close chat launcher" : "Open chat launcher"}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.92 }}
+        transition={{ type: "spring", stiffness: 500, damping: 22 }}
         className={cn(
-          "size-14 rounded-full bg-[var(--color-primary)] text-[var(--color-surface)] shadow-[var(--shadow-3)] flex items-center justify-center hover:bg-[var(--color-primary-hover)] transition-all",
-          open && "scale-95"
+          "size-14 rounded-full bg-[var(--color-primary)] text-[var(--color-surface)] shadow-[var(--shadow-3)] flex items-center justify-center hover:bg-[var(--color-primary-hover)] transition-colors will-change-transform"
         )}
       >
-        {open ? <XMarkIcon className="size-6" /> : <ChatBubbleLeftRightIcon className="size-6" />}
-      </button>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={open ? "close" : "open"}
+            initial={{ rotate: -90, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            exit={{ rotate: 90, opacity: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="inline-flex"
+          >
+            {open ? <XMarkIcon className="size-6" /> : <ChatBubbleLeftRightIcon className="size-6" />}
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
     </div>
   );
 }

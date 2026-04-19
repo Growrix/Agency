@@ -244,6 +244,108 @@ body {
   animation: signal-marquee 40s linear infinite;
 }
 
+/* on-load entrance — used by hero copy with staggered delays */
+@keyframes signal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signal-rise {
+  animation: signal-rise 620ms var(--ease-signal) both;
+}
+
+/* SVG line-draw — set pathLength="1" on the path */
+@keyframes signal-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.signal-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: signal-draw 1800ms var(--ease-signal) 350ms forwards;
+}
+
+/* slow ambient drift for radial-gradient blobs in CTA bands */
+@keyframes signal-drift-1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(22px, -14px, 0) scale(1.04);
+  }
+}
+
+@keyframes signal-drift-2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-18px, 16px, 0) scale(1.05);
+  }
+}
+
+.signal-drift-1 {
+  animation: signal-drift-1 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+.signal-drift-2 {
+  animation: signal-drift-2 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* float — used by floating signal pills */
+@keyframes signal-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.signal-float {
+  animation: signal-float 4.5s ease-in-out infinite;
+}
+
+/* subtle one-time logo pulse on load */
+@keyframes signal-logo-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  60% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.signal-logo-pulse {
+  animation: signal-logo-pulse 700ms var(--ease-signal) both;
+}
+
+/* trust-strip enhancements: pause the marquee on hover, fade edges via mask */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 96px, #000 calc(100% - 96px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 96px, #000 calc(100% - 96px), transparent 100%);
+}
+
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
 /* selection */
 ::selection {
   background: var(--color-primary);

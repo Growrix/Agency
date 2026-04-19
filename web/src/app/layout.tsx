@@ -6,6 +6,7 @@ import { Footer } from "@/components/shell/Footer";
 import { MobileBottomNav } from "@/components/shell/MobileBottomNav";
 import { UtilityRibbon } from "@/components/shell/UtilityRibbon";
 import { ChatLauncher } from "@/components/shell/ChatLauncher";
+import { RouteTransition } from "@/components/motion/Motion";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -68,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <UtilityRibbon />
         <Header />
         <main id="main" className="flex-1 pb-20 lg:pb-0">
-          {children}
+          <RouteTransition>{children}</RouteTransition>
         </main>
         <Footer />
         <MobileBottomNav />

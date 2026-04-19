@@ -25,6 +25,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
   BLOG_POSTS,
   CLIENT_LOGOS,
@@ -82,14 +83,25 @@ export default function Home() {
         <Container width="shell">
           <div className="grid gap-12 lg:gap-16 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7">
-              <Badge tone="primary" dot>Independent product studio</Badge>
-              <h1 className="mt-5 font-display text-[44px] sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance">
+              <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+                <Badge tone="primary" dot>Independent product studio</Badge>
+              </div>
+              <h1
+                className="signal-rise mt-5 font-display text-[44px] sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance"
+                style={{ animationDelay: "90ms" }}
+              >
                 Standout digital products,<br className="hidden sm:block" /> shipped like a real team built them.
               </h1>
-              <p className="mt-6 max-w-xl text-lg text-[var(--color-text-muted)] leading-7 text-pretty">
+              <p
+                className="signal-rise mt-6 max-w-xl text-lg text-[var(--color-text-muted)] leading-7 text-pretty"
+                style={{ animationDelay: "180ms" }}
+              >
                 We design and engineer SaaS applications, marketing websites, MCP servers, and operational automations — with the kind of polish your competitors will quietly want to match.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div
+                className="signal-rise mt-8 flex flex-wrap gap-3"
+                style={{ animationDelay: "270ms" }}
+              >
                 <LinkButton href="/book-appointment" size="lg">
                   Book Appointment <ArrowRightIcon className="size-4" />
                 </LinkButton>
@@ -97,13 +109,16 @@ export default function Home() {
                   Explore Portfolio
                 </LinkButton>
               </div>
-              <p className="mt-6 font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+              <p
+                className="signal-rise mt-6 font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]"
+                style={{ animationDelay: "360ms" }}
+              >
                 Trusted by Tideline · Northcrest · Lumora · Glasswing · Helix
               </p>
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative">
+              <div className="relative signal-rise" style={{ animationDelay: "180ms" }}>
                 {/* Layered desktop mockup */}
                 <Card className="relative overflow-hidden p-0 shadow-[var(--shadow-3)]">
                   <div className="flex items-center gap-1.5 border-b border-[var(--color-border)] px-4 py-2.5 bg-[var(--color-inset)]/60">
@@ -139,6 +154,8 @@ export default function Home() {
                           fill="none"
                           stroke="#0F766E"
                           strokeWidth="2"
+                          pathLength={1}
+                          className="signal-draw"
                         />
                       </svg>
                     </div>
@@ -174,7 +191,7 @@ export default function Home() {
                 </Card>
 
                 {/* Floating signal */}
-                <div className="absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 shadow-[var(--shadow-2)]">
+                <div className="signal-float absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 shadow-[var(--shadow-2)]">
                   <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="font-mono text-[11px] uppercase tracking-wider">Shipping daily</span>
                 </div>
@@ -204,21 +221,22 @@ export default function Home() {
               Compare services <ArrowUpRightIcon className="size-4" />
             </Link>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
             {SERVICES.map((s) => {
               const Icon = SERVICE_ICONS[s.slug as keyof typeof SERVICE_ICONS];
               return (
-                <FeatureCard
-                  key={s.slug}
-                  href={`/services/${s.slug}`}
-                  icon={<Icon className="size-5" />}
-                  title={s.name}
-                  description={s.short}
-                  meta={s.timeline}
-                />
+                <RevealItem key={s.slug}>
+                  <FeatureCard
+                    href={`/services/${s.slug}`}
+                    icon={<Icon className="size-5" />}
+                    title={s.name}
+                    description={s.short}
+                    meta={s.timeline}
+                  />
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -230,12 +248,12 @@ export default function Home() {
             title="Outcomes our clients can talk about."
             description="A selection of products, websites, and systems we've shipped recently. Each engagement is shaped around a measurable result."
           />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {PORTFOLIO.slice(0, 3).map((p) => (
+              <RevealItem key={p.slug}>
               <Link
-                key={p.slug}
                 href={`/portfolio/${p.slug}`}
-                className="group block rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] hover:shadow-[var(--shadow-2)] transition-all duration-200"
+                className="group block h-full rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
               >
                 <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.accent}`}>
                   <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
@@ -256,8 +274,9 @@ export default function Home() {
                   </span>
                 </div>
               </Link>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
           <div className="mt-8 flex justify-center">
             <LinkButton href="/portfolio" variant="outline">
               See all projects
@@ -281,9 +300,10 @@ export default function Home() {
               Browse the shop <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
             {FEATURED_PRODUCTS.map((p) => (
-              <Card key={p.name} hoverable className="flex flex-col">
+              <RevealItem key={p.name} className="h-full">
+              <Card hoverable className="flex flex-col h-full">
                 <div className="relative h-32 -mx-6 -mt-6 mb-5 rounded-t-[16px] bg-gradient-to-br from-[var(--color-inset)] to-[var(--color-bg)] border-b border-[var(--color-border)] overflow-hidden">
                   <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
                   <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
@@ -300,8 +320,9 @@ export default function Home() {
                   </Link>
                 </div>
               </Card>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -381,11 +402,13 @@ export default function Home() {
             description="Custom builds, embedded partnership, or productized starters — pick the surface area that matches the work."
             align="center"
           />
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {HOME_TIERS.map((t) => (
-              <PricingTier key={t.name} tier={t} />
+              <RevealItem key={t.name} className="h-full">
+                <PricingTier tier={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
           <div className="mt-8 text-center">
             <Link href="/pricing" className="text-sm font-medium text-[var(--color-primary)]">
               See full pricing details →
@@ -398,11 +421,13 @@ export default function Home() {
       <Section>
         <Container>
           <SectionHeading eyebrow="Voices" title="Teams we've shipped with." />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {TESTIMONIALS.map((t) => (
-              <Testimonial key={t.author} data={t} />
+              <RevealItem key={t.author} className="h-full">
+                <Testimonial data={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -419,14 +444,16 @@ export default function Home() {
               Visit the blog <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {[...BLOG_POSTS]
               .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
               .slice(0, 3)
               .map((p) => (
-                <BlogCard key={p.slug} post={p} />
+                <RevealItem key={p.slug}>
+                  <BlogCard post={p} />
+                </RevealItem>
               ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 

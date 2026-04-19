@@ -13,6 +13,7 @@ import { CTABand } from "@/components/sections/CTABand";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CLIENT_LOGOS, FAQ_GENERAL, PROCESS_STEPS, SERVICES, TESTIMONIALS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
 export const metadata: Metadata = {
   title: "Web Development Services | SaaS Apps, Websites, MCP Servers, Automation",
@@ -63,11 +64,12 @@ export default function ServicesPage() {
 
       <Section className="py-12">
         <Container>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <RevealGroup className="grid gap-5 sm:grid-cols-2" stagger={0.08}>
             {SERVICES.map((s) => {
               const Icon = SERVICE_ICONS[s.slug as keyof typeof SERVICE_ICONS];
               return (
-                <Link key={s.slug} href={`/services/${s.slug}`} className="group">
+                <RevealItem key={s.slug} className="h-full">
+                <Link href={`/services/${s.slug}`} className="group block h-full">
                   <Card hoverable className="h-full">
                     <div className="flex items-start justify-between gap-4">
                       <div className="inline-flex size-11 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
@@ -89,9 +91,10 @@ export default function ServicesPage() {
                     </p>
                   </Card>
                 </Link>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -164,11 +167,13 @@ export default function ServicesPage() {
       <Section>
         <Container>
           <SectionHeading eyebrow="Proof" title="One voice from each practice." />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {TESTIMONIALS.map((t) => (
-              <Testimonial key={t.author} data={t} />
+              <RevealItem key={t.author} className="h-full">
+                <Testimonial data={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 

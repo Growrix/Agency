@@ -24,12 +24,12 @@ export function CTABand({
         <div className="relative overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-contrast)] px-8 py-14 sm:px-12 sm:py-16 text-[var(--color-contrast-text)]">
           <div className="absolute inset-0 bg-grid-strong opacity-[0.06]" aria-hidden />
           <div
-            className="absolute -top-32 -right-24 size-96 rounded-full opacity-30 blur-3xl"
+            className="signal-drift-1 absolute -top-32 -right-24 size-96 rounded-full opacity-30 blur-3xl"
             style={{ background: "radial-gradient(circle, var(--color-primary), transparent 60%)" }}
             aria-hidden
           />
           <div
-            className="absolute -bottom-32 -left-24 size-96 rounded-full opacity-25 blur-3xl"
+            className="signal-drift-2 absolute -bottom-32 -left-24 size-96 rounded-full opacity-25 blur-3xl"
             style={{ background: "radial-gradient(circle, var(--color-secondary), transparent 60%)" }}
             aria-hidden
           />

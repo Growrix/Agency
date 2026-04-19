@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SunIcon, MoonIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "@/components/motion/Motion";
 
 type Mode = "light" | "dark" | "system";
 const STORAGE_KEY = "signal-theme";
@@ -86,9 +87,20 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         aria-label={label}
         aria-pressed={isDark}
         title={label}
-        className="inline-flex size-10 items-center justify-center rounded-full hover:bg-[var(--color-inset)] transition-colors"
+        className="relative inline-flex size-10 items-center justify-center overflow-hidden rounded-full hover:bg-[var(--color-inset)] transition-colors"
       >
-        {isDark ? <MoonIcon className="size-5" aria-hidden /> : <SunIcon className="size-5" aria-hidden />}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={isDark ? "moon" : "sun"}
+            initial={{ rotate: -60, opacity: 0, scale: 0.7 }}
+            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+            exit={{ rotate: 60, opacity: 0, scale: 0.7 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex"
+          >
+            {isDark ? <MoonIcon className="size-5" aria-hidden /> : <SunIcon className="size-5" aria-hidden />}
+          </motion.span>
+        </AnimatePresence>
       </button>
       {mode !== "system" && (
         <button
