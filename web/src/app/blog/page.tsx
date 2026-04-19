@@ -78,11 +78,19 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="max-w-2xl">
-            <Badge tone="primary" dot>The Signal Atelier blog</Badge>
-            <h1 className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance">
+            <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+              <Badge tone="primary" dot>The Signal Atelier blog</Badge>
+            </div>
+            <h1
+              className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"
+              style={{ animationDelay: "70ms" }}
+            >
               Field notes from a studio that ships.
             </h1>
-            <p className="mt-5 text-lg text-[var(--color-text-muted)] leading-7 text-pretty">
+            <p
+              className="mt-5 text-lg text-[var(--color-text-muted)] leading-7 text-pretty signal-rise"
+              style={{ animationDelay: "140ms" }}
+            >
               Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.
             </p>
           </div>
