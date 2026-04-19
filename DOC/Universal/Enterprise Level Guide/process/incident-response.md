@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how Growrix should respond to production incidents.
+This document defines how Growrix OS should respond to production incidents.
 
 ## Incident Principles
 

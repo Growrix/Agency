@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the experience standards for Growrix interfaces. The product promise depends on trust, clarity, and operational transparency, so the UI must communicate status and next actions without ambiguity.
+This document defines the experience standards for Growrix OS interfaces. The product promise depends on trust, clarity, and operational transparency, so the UI must communicate status and next actions without ambiguity.
 
 ## Experience Principles
 

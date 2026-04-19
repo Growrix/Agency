@@ -44,7 +44,7 @@ export function Header() {
             <span className="absolute inset-0 rounded-[10px] bg-[var(--color-secondary)]/40 mix-blend-multiply" aria-hidden />
             <span className="relative font-display font-bold">G</span>
           </span>
-          <span className="font-display text-lg tracking-tight">Growrix</span>
+          <span className="font-display text-lg tracking-tight">Growrix OS</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-4">

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how AI coding agents should contribute to Growrix. The goal is not merely faster generation. The goal is controlled, architecture-aligned execution that preserves business rules and system integrity.
+This document defines how AI coding agents should contribute to Growrix OS. The goal is not merely faster generation. The goal is controlled, architecture-aligned execution that preserves business rules and system integrity.
 
 ## AI Operating Principles
 

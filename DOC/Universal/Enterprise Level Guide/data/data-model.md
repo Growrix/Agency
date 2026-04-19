@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the canonical entity model for Growrix. It should guide database migrations, Supabase policies, query design, and API contracts.
+This document defines the canonical entity model for Growrix OS. It should guide database migrations, Supabase policies, query design, and API contracts.
 
 ## Data Design Principles
 

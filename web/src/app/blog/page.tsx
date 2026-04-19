@@ -15,7 +15,7 @@ import {
 } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Blog — Field notes from Growrix",
+  title: "Blog — Field notes from Growrix OS",
   description:
     "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, MCP servers, and automation.",
 };
@@ -79,7 +79,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
         <Container>
           <div className="max-w-2xl">
             <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>The Growrix blog</Badge>
+              <Badge tone="primary" dot>The Growrix OS blog</Badge>
             </div>
             <h1
               className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"

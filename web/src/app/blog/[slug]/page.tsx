@@ -39,7 +39,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   if (!post) notFound();
 
   const related = getRelatedPosts(slug, 2);
-  const url = `https://growrix.com/blog/${post.slug}`;
+  const url = `https://growrixos.com/blog/${post.slug}`;
 
   return (
     <>

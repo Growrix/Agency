@@ -5,8 +5,8 @@ import { SunIcon, MoonIcon, ComputerDesktopIcon } from "@heroicons/react/24/outl
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 
 type Mode = "light" | "dark" | "system";
-const STORAGE_KEY = "growrix-theme";
-const LEGACY_STORAGE_KEY = "signal-theme";
+const STORAGE_KEY = "growrix-os-theme";
+const LEGACY_STORAGE_KEYS = ["growrix-theme", "signal-theme"] as const;
 
 function applyTheme(mode: Mode) {
   if (typeof document === "undefined") return;
@@ -22,7 +22,7 @@ function readStored(): Mode {
   if (typeof window === "undefined") return "system";
   const v =
     window.localStorage.getItem(STORAGE_KEY) ??
-    window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    LEGACY_STORAGE_KEYS.map((key) => window.localStorage.getItem(key)).find((value) => value != null);
   return v === "light" || v === "dark" ? v : "system";
 }
 
@@ -44,7 +44,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     if (stored !== "system") {
       try {
         window.localStorage.setItem(STORAGE_KEY, stored);
-        window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+        LEGACY_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
       } catch {
         /* ignore storage errors */
       }
@@ -57,7 +57,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     setMode(next);
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
-      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+      LEGACY_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
     } catch {
       /* ignore storage errors (Safari private mode, etc.) */
     }
@@ -68,7 +68,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     setMode("system");
     try {
       window.localStorage.removeItem(STORAGE_KEY);
-      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+      LEGACY_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
     } catch {
       /* ignore */
     }

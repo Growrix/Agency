@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the standards for Growrix APIs. It covers route design, auth, request and response shape, webhook handling, realtime contracts, and module-specific endpoint groups.
+This document defines the standards for Growrix OS APIs. It covers route design, auth, request and response shape, webhook handling, realtime contracts, and module-specific endpoint groups.
 
 ## API Style
 

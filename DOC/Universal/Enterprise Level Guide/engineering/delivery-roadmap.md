@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines a practical implementation sequence for Growrix so the team builds a stable core before adding broad feature surface area.
+This document defines a practical implementation sequence for Growrix OS so the team builds a stable core before adding broad feature surface area.
 
 ## Delivery Strategy
 

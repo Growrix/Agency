@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines baseline privacy and retention rules for Growrix.
+This document defines baseline privacy and retention rules for Growrix OS.
 
 ## Data Handling Principles
 

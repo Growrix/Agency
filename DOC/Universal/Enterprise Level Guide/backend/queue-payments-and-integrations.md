@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the most critical backend rules in Growrix: queue integrity, priority payments, and third-party integration safety.
+This document defines the most critical backend rules in Growrix OS: queue integrity, priority payments, and third-party integration safety.
 
 ## Queue Integrity Rules
 

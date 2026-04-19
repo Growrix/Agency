@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document establishes the operational and security baseline for Growrix. The platform handles user identities, payment events, private files, internal-only workflows, and customer communications, so operational discipline must exist from the first release.
+This document establishes the operational and security baseline for Growrix OS. The platform handles user identities, payment events, private files, internal-only workflows, and customer communications, so operational discipline must exist from the first release.
 
 ## Environment Strategy
 

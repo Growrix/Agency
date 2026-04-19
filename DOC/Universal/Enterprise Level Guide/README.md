@@ -1,10 +1,10 @@
-# Growrix Documentation Index
+# Growrix OS Documentation Index
 
-This directory is the authoritative handbook for designing, implementing, operating, and evolving Growrix. The repository now also includes a runnable MVP implementation that follows these docs.
+This directory is the authoritative handbook for designing, implementing, operating, and evolving Growrix OS. The repository now also includes a runnable MVP implementation that follows these docs.
 
 ## Runnable MVP
 
-The current codebase includes a local, self-contained Next.js MVP that implements the core Growrix flows without external credentials.
+The current codebase includes a local, self-contained Next.js MVP that implements the core Growrix OS flows without external credentials.
 
 Use these commands from the repo root:
 
@@ -16,8 +16,8 @@ Use these commands from the repo root:
 Seeded accounts for local validation:
 
 - Client: `client@example.com`
-- Admin: `admin@growrix.com`
-- Developer: `maya@growrix.com`
+- Admin: `admin@growrixos.com`
+- Developer: `maya@growrixos.com`
 
 ## AI First-Stop File
 
