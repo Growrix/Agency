@@ -42,9 +42,9 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2 shrink-0 group">
           <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-[var(--color-primary)] text-[var(--color-surface)] transition-transform duration-300 ease-[var(--ease-signal)] group-hover:scale-105">
             <span className="absolute inset-0 rounded-[10px] bg-[var(--color-secondary)]/40 mix-blend-multiply" aria-hidden />
-            <span className="relative font-display font-bold">S</span>
+            <span className="relative font-display font-bold">G</span>
           </span>
-          <span className="font-display text-lg tracking-tight">Signal Atelier</span>
+          <span className="font-display text-lg tracking-tight">Growrix</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-4">

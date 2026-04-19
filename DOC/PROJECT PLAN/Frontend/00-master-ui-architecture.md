@@ -39,6 +39,7 @@ recommended_next_reads:
 - New prospect: Home -> Services -> Service Detail -> Book Appointment.
 - Product buyer: Home or Shop -> Product Detail -> Checkout.
 - Proof-seeking lead: Home -> Portfolio -> Case Study -> Contact or Book Appointment.
+- Research-driven buyer: Home -> Blog -> Blog Post -> Book Appointment.
 - Fast-answer visitor: Any page -> AI Chat Widget or AI Concierge -> WhatsApp or Booking.
 - Mobile visitor: Landing section -> sticky bottom dock -> chat/shop/services/booking without hunting.
 
@@ -46,6 +47,8 @@ recommended_next_reads:
 
 ### Primary Marketing Pages
 - Home
+- Blog Overview
+- Blog Detail
 - Services Overview
 - SaaS Applications Service
 - Websites Service
@@ -73,10 +76,10 @@ recommended_next_reads:
 - 404
 
 ## Global Navigation Model
-- Header links: Services, Shop, Portfolio, Pricing, About, AI Concierge.
+- Header links: Services, Shop, Portfolio, Blog, Pricing, About, AI Concierge.
 - Persistent primary CTA: Book Appointment.
 - Persistent secondary utilities: Live Chat, WhatsApp, Cart.
-- Footer groups: Services, Shop Categories, Portfolio, Company, Support, Legal.
+- Footer groups: Services, Shop Categories, Insights, Company, Support, Legal.
 - Deep-link behavior: every service card, case study teaser, and featured product routes to a detail surface.
 
 ## Mobile Navigation Model
@@ -110,6 +113,16 @@ recommended_next_reads:
 - Goal: explain offer fast, establish proof, and route users into service, portfolio, shop, or booking journeys.
 - Primary CTA: Book Appointment.
 - Secondary CTA: Explore Portfolio.
+
+### Blog Overview
+- Goal: turn educational content into a discovery and trust surface that routes readers into service, portfolio, and booking journeys.
+- Primary CTA: Read an Article.
+- Secondary CTA: Book Appointment.
+
+### Blog Detail
+- Goal: provide deep practical guidance, show technical depth, and create a clear next step through related reads and consultation CTAs.
+- Primary CTA: Book Appointment.
+- Secondary CTA: Explore More Articles.
 
 ### Services Overview
 - Goal: show the complete capability map and help users self-select the right engagement.
@@ -247,6 +260,8 @@ recommended_next_reads:
 
 ## Route Map
 - /
+- /blog
+- /blog/[slug]
 - /services
 - /services/saas-applications
 - /services/websites
@@ -274,6 +289,8 @@ recommended_next_reads:
 - 01-design-system.md
 - 02-component-system.md
 - home-page.md
+- blog-page.md
+- blog-post-page.md
 - services-page.md
 - service-saas-applications-page.md
 - service-websites-page.md

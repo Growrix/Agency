@@ -6,7 +6,7 @@ import { LinkButton } from "@/components/primitives/Button";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Review the commercial, licensing, payment, and delivery terms for Signal Atelier services and digital products.",
+  description: "Review the commercial, licensing, payment, and delivery terms for Growrix services and digital products.",
 };
 
 const SECTIONS = [
@@ -68,7 +68,7 @@ const SECTIONS = [
     id: "contact",
     title: "Contact",
     body: [
-      "Questions about these terms? Reach us via the contact page or email legal@signalatelier.example.",
+      "Questions about these terms? Reach us via the contact page or email legal@growrix.example.",
     ],
   },
 ];

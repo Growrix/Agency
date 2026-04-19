@@ -31,6 +31,8 @@ surfaces:
   public_marketing:
     routes:
       - /
+      - /blog
+      - /blog/[slug]
       - /services
       - /services/saas-applications
       - /services/websites
@@ -43,6 +45,8 @@ surfaces:
       - /faq
     capabilities:
       - marketing
+      - thought leadership
+      - content discovery
       - service discovery
       - proof and credibility
   commerce:
@@ -102,6 +106,14 @@ read_paths:
     - DOC/PROJECT PLAN/Frontend/01-design-system.md
     - DOC/PROJECT PLAN/Frontend/02-component-system.md
     - DOC/PROJECT PLAN/Frontend/home-page.md
+    - DOC/PROJECT PLAN/Frontend/blog-page.md
+  build_blog:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/Frontend/blog-page.md
+    - DOC/PROJECT PLAN/Frontend/blog-post-page.md
   build_services:
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
@@ -150,6 +162,8 @@ document_groups:
     - DOC/PROJECT PLAN/Frontend/02-component-system.md
   marketing_and_services:
     - DOC/PROJECT PLAN/Frontend/home-page.md
+    - DOC/PROJECT PLAN/Frontend/blog-page.md
+    - DOC/PROJECT PLAN/Frontend/blog-post-page.md
     - DOC/PROJECT PLAN/Frontend/services-page.md
     - DOC/PROJECT PLAN/Frontend/service-saas-applications-page.md
     - DOC/PROJECT PLAN/Frontend/service-websites-page.md

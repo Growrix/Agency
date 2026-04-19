@@ -11,7 +11,7 @@ recommended_next_reads:
 # Design System
 
 ## Visual Direction
-- Name: Signal Atelier.
+- Name: Growrix.
 - Positioning: premium product studio aesthetic with operational clarity.
 - Core contrast: warm editorial background plus precise technical surfaces.
 - Default theme: light-first.

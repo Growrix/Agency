@@ -189,7 +189,7 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
           About the studio
         </h3>
         <p className="mt-3 text-sm leading-6 text-[var(--color-text)]">
-          Signal Atelier is a small product studio shipping SaaS apps, websites, MCP servers, and automation for ambitious teams.
+          Growrix is a small product studio shipping SaaS apps, websites, MCP servers, and automation for ambitious teams.
         </p>
         <Link
           href="/about"
