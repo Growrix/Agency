@@ -4,7 +4,7 @@ import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { BlogCard } from "@/components/sections/BlogCard";
+import { BlogGrid } from "@/components/sections/BlogGrid";
 import { BlogSidebar } from "@/components/sections/BlogSidebar";
 import {
   BLOG_POSTS,
@@ -173,16 +173,14 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                   </Link>
                 </div>
               ) : (
-                <div className="mt-8 grid gap-5 sm:grid-cols-2">
-                  {grid.map((p) => (
-                    <BlogCard key={p.slug} post={p} />
-                  ))}
-                </div>
+                <BlogGrid posts={grid} />
               )}
             </div>
 
             <div className="lg:col-span-4">
-              <BlogSidebar categories={categories} tags={tags} initialSearch={params.q ?? ""} />
+              <div className="lg:sticky lg:top-24">
+                <BlogSidebar categories={categories} tags={tags} initialSearch={params.q ?? ""} />
+              </div>
             </div>
           </div>
         </Container>
