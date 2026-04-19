@@ -130,3 +130,92 @@ body {
   background: var(--color-primary);
   color: var(--color-surface);
 }
+
+/* long-form article prose */
+.prose-article {
+  color: var(--color-text);
+  font-size: 18px;
+  line-height: 1.75;
+}
+.prose-article > * + * {
+  margin-top: 1.25em;
+}
+.prose-article h2 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+.prose-article h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.25;
+  margin-top: 1.75em;
+  margin-bottom: 0.4em;
+}
+.prose-article p {
+  color: var(--color-text);
+}
+.prose-article a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose-article ul,
+.prose-article ol {
+  padding-left: 1.4em;
+}
+.prose-article ul {
+  list-style: disc;
+}
+.prose-article ol {
+  list-style: decimal;
+}
+.prose-article li + li {
+  margin-top: 0.4em;
+}
+.prose-article blockquote {
+  border-left: 3px solid var(--color-primary);
+  padding: 0.4em 1.2em;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--color-text);
+  background: color-mix(in oklab, var(--color-primary) 5%, transparent);
+  border-radius: 0 12px 12px 0;
+}
+.prose-article code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-inset);
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+.prose-article pre {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  background: #101316;
+  color: #f1ece1;
+  padding: 1.1em 1.25em;
+  border-radius: 14px;
+  overflow-x: auto;
+}
+.prose-article pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+.prose-article hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2.5em 0;
+}
+.prose-article strong {
+  font-weight: 600;
+}

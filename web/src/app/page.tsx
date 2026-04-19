@@ -24,7 +24,9 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
+import { BlogCard } from "@/components/sections/BlogCard";
 import {
+  BLOG_POSTS,
   CLIENT_LOGOS,
   FEATURED_PRODUCTS,
   HOME_STATS,
@@ -400,6 +402,30 @@ export default function Home() {
             {TESTIMONIALS.map((t) => (
               <Testimonial key={t.author} data={t} />
             ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Field notes (Blog) */}
+      <Section tone="inset">
+        <Container>
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="Field notes"
+              title="Long-form writing from the studio."
+              description="Engineering deep-dives, design system reflections, and quarterly notes on what we shipped."
+            />
+            <LinkButton href="/blog" variant="outline">
+              Visit the blog <ArrowUpRightIcon className="size-4" />
+            </LinkButton>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[...BLOG_POSTS]
+              .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
+              .slice(0, 3)
+              .map((p) => (
+                <BlogCard key={p.slug} post={p} />
+              ))}
           </div>
         </Container>
       </Section>
