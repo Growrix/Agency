@@ -7,12 +7,13 @@ import {
   Bars3Icon,
   XMarkIcon,
   ShoppingBagIcon,
+  CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
-import { ThemeToggle } from "@/components/shell/ThemeToggle";
+import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -38,13 +39,13 @@ export function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-shell items-center gap-6 px-5 sm:px-8 lg:h-18 lg:px-12">
-        <Link href="/" className="flex shrink-0 items-center gap-2 group">
+      <div className="mx-auto flex h-16 max-w-shell items-center gap-2 px-4 sm:px-8 lg:h-18 lg:gap-6 lg:px-12">
+        <Link href="/" className="group flex min-w-0 flex-1 items-center gap-2.5 lg:flex-none lg:shrink-0">
           <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-primary text-surface transition-transform duration-300 ease-signal group-hover:scale-105">
             <span className="absolute inset-0 rounded-[10px] bg-secondary/40 mix-blend-multiply" aria-hidden />
             <span className="relative font-display font-bold">G</span>
           </span>
-          <span className="font-display text-lg tracking-tight">Growrix OS</span>
+          <span className="truncate font-display text-base tracking-tight sm:text-lg">Growrix OS</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-4">
@@ -94,27 +95,36 @@ export function Header() {
           )}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-1 lg:gap-2">
           <Link
             href="/ai-concierge"
-            className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset sm:inline-flex"
+            className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
             aria-label="Open chat"
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </Link>
           <Link
             href="/shop"
-            className="inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset"
+            className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
             aria-label="Open cart"
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
           </Link>
-          <ThemeToggle />
-          <LinkButton href="/book-appointment" size="sm" className="hidden sm:inline-flex ml-1">
+          <ThemeToggleButton className="lg:hidden" />
+          <ThemeToggle className="hidden lg:inline-flex" />
+          <Link
+            href="/book-appointment"
+            className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
+            aria-label="Book appointment"
+            title="Book appointment"
+          >
+            <CalendarDaysIcon className="size-5" aria-hidden />
+          </Link>
+          <LinkButton href="/book-appointment" size="sm" className="ml-1 hidden lg:inline-flex">
             Book Appointment
           </LinkButton>
           <button
-            className="inline-flex size-10 items-center justify-center rounded-full hover:bg-inset lg:hidden"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-inset lg:hidden"
             aria-label="Toggle menu"
             onClick={() => setMobileOpen((v) => !v)}
           >
