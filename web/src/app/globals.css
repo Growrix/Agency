@@ -1,26 +1,132 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #0f766e;
+  --color-primary-hover: #0b5e58;
+  --color-secondary: #c56a3b;
+  --color-secondary-hover: #a85629;
+  --color-accent: #1783ff;
+  --color-bg: #f5f1e8;
+  --color-surface: #fffdf8;
+  --color-inset: #ece5d8;
+  --color-overlay: rgba(20, 22, 26, 0.72);
+  --color-border: #d5ccbb;
+  --color-border-strong: #b9ad94;
+  --color-text: #171a1f;
+  --color-text-muted: #5c6470;
+  --color-success: #138a52;
+  --color-warning: #b98016;
+  --color-destructive: #b73a3a;
+  --color-info: #1769c2;
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --shadow-1: 0 1px 2px rgba(20, 22, 26, 0.04), 0 2px 6px rgba(20, 22, 26, 0.05);
+  --shadow-2: 0 4px 12px rgba(20, 22, 26, 0.06), 0 8px 24px rgba(20, 22, 26, 0.06);
+  --shadow-3: 0 12px 32px rgba(20, 22, 26, 0.12), 0 24px 64px rgba(20, 22, 26, 0.12);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --ease-signal: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --container-content: 1200px;
+  --container-shell: 1440px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(15, 118, 110, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(197, 106, 59, 0.05), transparent 60%);
+}
+
+/* subtle blueprint grid texture */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(23, 26, 31, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 26, 31, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-grid-strong {
+  background-image:
+    linear-gradient(to right, rgba(23, 26, 31, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 26, 31, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* focus ring */
+:where(a, button, input, textarea, select, [role="button"]):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* simple animations */
+@keyframes signal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: signal-fade-up 260ms var(--ease-signal) both;
+}
+
+@keyframes signal-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: signal-marquee 40s linear infinite;
+}
+
+/* selection */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-surface);
 }
