@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { Card } from "@/components/primitives/Card";
 import { Button } from "@/components/primitives/Button";
+import { motion } from "@/components/motion/Motion";
 
 type SidebarProps = {
   categories: { category: string; count: number }[];
@@ -156,9 +157,14 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
           One short email a month with the studio&apos;s best writing on shipping software.
         </p>
         {subscribed ? (
-          <p className="mt-4 rounded-[10px] bg-white/10 px-3 py-2.5 text-sm text-white">
+          <motion.p
+            initial={{ opacity: 0, scale: 0.92, y: 6 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 380, damping: 24, mass: 0.6 }}
+            className="mt-4 rounded-[10px] bg-white/10 px-3 py-2.5 text-sm text-white"
+          >
             You&apos;re on the list. Talk soon.
-          </p>
+          </motion.p>
         ) : (
           <form onSubmit={onSubscribe} className="mt-4 space-y-2">
             <input
