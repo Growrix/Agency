@@ -502,6 +502,7 @@ export function getRelatedPosts(slug: string, limit = 2): BlogPost[] {
   const tagSet = new Set(current.tags);
   return BLOG_POSTS.filter((p) => p.slug !== slug)
     .map((p) => ({ post: p, score: p.tags.filter((t) => tagSet.has(t)).length }))
+    .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score || +new Date(b.post.publishedAt) - +new Date(a.post.publishedAt))
     .slice(0, limit)
     .map((x) => x.post);
