@@ -77,6 +77,14 @@
   --body-radial-1: rgba(15, 118, 110, 0.06);
   --body-radial-2: rgba(197, 106, 59, 0.05);
 
+  --button-outline-bg: var(--c-surface);
+  --button-outline-bg-hover: color-mix(in srgb, var(--c-inset) 72%, transparent);
+  --button-outline-text: var(--c-text);
+  --button-outline-border: var(--c-border);
+  --button-outline-border-hover: var(--c-border-strong);
+
+  --shell-offset: 4rem;
+
   color-scheme: light;
 }
 
@@ -110,6 +118,12 @@
   --bg-grid-line-strong: rgba(255, 255, 255, 0.07);
   --body-radial-1: rgba(45, 212, 191, 0.07);
   --body-radial-2: rgba(232, 137, 90, 0.06);
+
+  --button-outline-bg: var(--c-surface);
+  --button-outline-bg-hover: color-mix(in srgb, var(--c-inset) 72%, transparent);
+  --button-outline-text: var(--c-text);
+  --button-outline-border: var(--c-border);
+  --button-outline-border-hover: var(--c-border-strong);
 
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
   --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -145,8 +159,34 @@
     --bg-grid-line-strong: rgba(255, 255, 255, 0.07);
     --body-radial-1: rgba(45, 212, 191, 0.07);
     --body-radial-2: rgba(232, 137, 90, 0.06);
+    --button-outline-bg: var(--c-surface);
+    --button-outline-bg-hover: color-mix(in srgb, var(--c-inset) 72%, transparent);
+    --button-outline-text: var(--c-text);
+    --button-outline-border: var(--c-border);
+    --button-outline-border-hover: var(--c-border-strong);
     color-scheme: dark;
   }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --shell-offset: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --shell-offset: 6.5rem;
+  }
+}
+
+.contrast-surface,
+.bg-contrast {
+  --button-outline-bg: transparent;
+  --button-outline-bg-hover: rgba(255, 255, 255, 0.08);
+  --button-outline-text: var(--color-contrast-text);
+  --button-outline-border: rgba(255, 255, 255, 0.18);
+  --button-outline-border-hover: rgba(255, 255, 255, 0.3);
 }
 
 html,
@@ -156,6 +196,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 html {
