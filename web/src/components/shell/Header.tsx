@@ -51,31 +51,36 @@ export function Header() {
           {PRIMARY_NAV.map((item) =>
             item.children ? (
               <Popover key={item.label} className="relative">
-                <PopoverButton className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium hover:text-[var(--color-primary)] transition-colors data-[open]:text-[var(--color-primary)]">
-                  {item.label}
-                  <ChevronDownIcon className="size-3.5" aria-hidden />
-                </PopoverButton>
-                <Transition
-                  enter="transition duration-150"
-                  enterFrom="opacity-0 -translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition duration-100"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <PopoverPanel className="absolute left-0 top-full mt-2 w-[420px] rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 shadow-[var(--shadow-3)]">
-                    {item.children.map((c) => (
-                      <Link
-                        key={c.href}
-                        href={c.href}
-                        className="block rounded-[12px] px-4 py-3 hover:bg-[var(--color-inset)] transition-colors"
-                      >
-                        <div className="font-medium text-[15px]">{c.label}</div>
-                        <div className="text-sm text-[var(--color-text-muted)] leading-snug">{c.description}</div>
-                      </Link>
-                    ))}
-                  </PopoverPanel>
-                </Transition>
+                {({ close }) => (
+                  <>
+                    <PopoverButton className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium hover:text-[var(--color-primary)] transition-colors data-[open]:text-[var(--color-primary)]">
+                      {item.label}
+                      <ChevronDownIcon className="size-3.5" aria-hidden />
+                    </PopoverButton>
+                    <Transition
+                      enter="transition duration-150"
+                      enterFrom="opacity-0 -translate-y-1"
+                      enterTo="opacity-100 translate-y-0"
+                      leave="transition duration-100"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <PopoverPanel className="absolute left-0 top-full mt-2 w-[420px] rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 shadow-[var(--shadow-3)]">
+                        {item.children.map((c) => (
+                          <Link
+                            key={c.href}
+                            href={c.href}
+                            onClick={() => close()}
+                            className="block rounded-[12px] px-4 py-3 hover:bg-[var(--color-inset)] transition-colors"
+                          >
+                            <div className="font-medium text-[15px]">{c.label}</div>
+                            <div className="text-sm text-[var(--color-text-muted)] leading-snug">{c.description}</div>
+                          </Link>
+                        ))}
+                      </PopoverPanel>
+                    </Transition>
+                  </>
+                )}
               </Popover>
             ) : (
               <Link

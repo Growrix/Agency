@@ -1,4 +1,5 @@
 export const PRIMARY_NAV = [
+  { label: "Home", href: "/" },
   {
     label: "Services",
     href: "/services",
