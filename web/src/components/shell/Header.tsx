@@ -7,13 +7,12 @@ import {
   Bars3Icon,
   XMarkIcon,
   ShoppingBagIcon,
-  CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
-import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
+import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -39,13 +38,13 @@ export function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-shell items-center gap-3 px-4 sm:px-8 lg:h-18 lg:px-12">
-        <Link href="/" className="flex min-w-0 items-center gap-2 shrink group">
+      <div className="mx-auto flex h-16 max-w-shell items-center gap-6 px-5 sm:px-8 lg:h-18 lg:px-12">
+        <Link href="/" className="flex shrink-0 items-center gap-2 group">
           <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-primary text-surface transition-transform duration-300 ease-signal group-hover:scale-105">
             <span className="absolute inset-0 rounded-[10px] bg-secondary/40 mix-blend-multiply" aria-hidden />
             <span className="relative font-display font-bold">G</span>
           </span>
-          <span className="truncate font-display text-base sm:text-lg tracking-tight">Growrix OS</span>
+          <span className="font-display text-lg tracking-tight">Growrix OS</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-4">
@@ -95,7 +94,7 @@ export function Header() {
           )}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
           <Link
             href="/ai-concierge"
             className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset sm:inline-flex"
@@ -110,16 +109,7 @@ export function Header() {
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
           </Link>
-          <ThemeToggleButton className="lg:hidden" />
-          <ThemeToggle className="hidden lg:inline-flex" />
-          <Link
-            href="/book-appointment"
-            className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
-            aria-label="Book appointment"
-            title="Book appointment"
-          >
-            <CalendarDaysIcon className="size-5" aria-hidden />
-          </Link>
+          <ThemeToggle />
           <LinkButton href="/book-appointment" size="sm" className="hidden sm:inline-flex ml-1">
             Book Appointment
           </LinkButton>
@@ -167,10 +157,6 @@ export function Header() {
             <Link href="/faq" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
               FAQ
             </Link>
-            <div className="mt-3 flex items-center justify-between rounded-sm border border-border bg-surface px-3 py-2">
-              <span className="text-sm font-medium">Theme</span>
-              <ThemeToggle />
-            </div>
             <LinkButton href="/book-appointment" className="mt-3" fullWidth>
               Book Appointment
             </LinkButton>
