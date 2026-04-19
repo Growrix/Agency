@@ -9,6 +9,7 @@ import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
 export const metadata: Metadata = {
   title: "Pricing | Custom Builds, Productized Services, and Digital Products",
@@ -100,11 +101,13 @@ export default function PricingPage() {
 
       <Section className="py-12">
         <Container>
-          <div className="grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {TIERS.map((t) => (
-              <PricingTier key={t.name} tier={t} />
+              <RevealItem key={t.name} className="h-full">
+                <PricingTier tier={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 
@@ -144,15 +147,17 @@ export default function PricingPage() {
             eyebrow="Productized"
             title="Shop offers — fixed prices, instant delivery."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
             {SHOP_OFFERS.map((s) => (
-              <Card key={s.name} hoverable>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">{s.name}</p>
-                <p className="mt-2 font-display text-xl tracking-tight">{s.price}</p>
-                <p className="mt-3 text-sm text-[var(--color-text-muted)] leading-6">{s.description}</p>
-              </Card>
+              <RevealItem key={s.name} className="h-full">
+                <Card hoverable className="h-full">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">{s.name}</p>
+                  <p className="mt-2 font-display text-xl tracking-tight">{s.price}</p>
+                  <p className="mt-3 text-sm text-[var(--color-text-muted)] leading-6">{s.description}</p>
+                </Card>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 

@@ -33,7 +33,7 @@ type CommonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-[12px] font-medium tracking-tight transition-colors transition-shadow duration-200 ease-[var(--ease-signal)] disabled:opacity-60 disabled:pointer-events-none whitespace-nowrap";
+  "inline-flex items-center justify-center rounded-[12px] font-medium tracking-tight transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[var(--ease-signal)] disabled:opacity-60 disabled:pointer-events-none whitespace-nowrap will-change-transform hover:-translate-y-px active:translate-y-0 active:scale-[0.97]";
 
 export function Button({
   variant = "primary",

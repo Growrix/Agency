@@ -12,6 +12,7 @@ import { StatBlock } from "@/components/sections/StatBlock";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CLIENT_LOGOS, PORTFOLIO, SERVICES, TESTIMONIALS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
 
 const FILTERS = [
@@ -115,12 +116,12 @@ export default function PortfolioPage() {
               </button>
             </div>
           ) : (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
               {filtered.map((p) => (
+                <RevealItem key={p.slug}>
                 <Link
-                  key={p.slug}
                   href={`/portfolio/${p.slug}`}
-                  className="group block rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] hover:shadow-[var(--shadow-2)] transition-all"
+                  className="group block h-full rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
                 >
                   <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.accent}`}>
                     <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
@@ -148,8 +149,9 @@ export default function PortfolioPage() {
                     </div>
                   </div>
                 </Link>
+                </RevealItem>
               ))}
-            </div>
+            </RevealGroup>
           )}
         </Container>
       </Section>
@@ -159,11 +161,13 @@ export default function PortfolioPage() {
       <Section>
         <Container>
           <SectionHeading eyebrow="Voices" title="What clients say after launch." />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {TESTIMONIALS.map((t) => (
-              <Testimonial key={t.author} data={t} />
+              <RevealItem key={t.author} className="h-full">
+                <Testimonial data={t} />
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </Container>
       </Section>
 

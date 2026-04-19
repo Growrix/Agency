@@ -27,10 +27,10 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "rounded-[16px] p-6 transition-all duration-200 ease-[var(--ease-signal)]",
+        "rounded-[16px] p-6 transition-[transform,box-shadow,border-color,background-color] duration-300 ease-[var(--ease-signal)] will-change-transform",
         variants[variant],
         hoverable &&
-          "hover:-translate-y-0.5 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]",
+          "hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]",
         className
       )}
     >

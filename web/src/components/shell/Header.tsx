@@ -13,6 +13,7 @@ import {
 import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
 import { ThemeToggle } from "@/components/shell/ThemeToggle";
+import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -36,8 +37,8 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-[1440px] items-center gap-6 px-5 sm:px-8 lg:px-12 h-16 lg:h-18">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="relative inline-flex size-8 items-center justify-center rounded-[10px] bg-[var(--color-primary)] text-[var(--color-surface)]">
+        <Link href="/" className="flex items-center gap-2 shrink-0 group">
+          <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-[var(--color-primary)] text-[var(--color-surface)] transition-transform duration-300 ease-[var(--ease-signal)] group-hover:scale-105">
             <span className="absolute inset-0 rounded-[10px] bg-[var(--color-secondary)]/40 mix-blend-multiply" aria-hidden />
             <span className="relative font-display font-bold">S</span>
           </span>
@@ -115,8 +116,16 @@ export function Header() {
         </div>
       </div>
 
+      <AnimatePresence initial={false}>
       {mobileOpen && (
-        <div className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+        <motion.div
+          key="mobile-menu"
+          className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
           <nav className="mx-auto max-w-[1440px] px-5 sm:px-8 py-4 flex flex-col">
             {PRIMARY_NAV.map((item) => (
               <div key={item.label} className="py-1">
@@ -157,8 +166,9 @@ export function Header() {
               Book Appointment
             </LinkButton>
           </nav>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </header>
   );
 }

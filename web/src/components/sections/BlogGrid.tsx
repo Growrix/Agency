@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/primitives/Button";
 import { BlogCard } from "@/components/sections/BlogCard";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import type { BlogPost } from "@/lib/content";
 
 const PAGE_SIZE = 9;
@@ -14,11 +15,13 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
 
   return (
     <>
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+      <RevealGroup className="mt-8 grid gap-5 sm:grid-cols-2" stagger={0.07}>
         {shown.map((p) => (
-          <BlogCard key={p.slug} post={p} />
+          <RevealItem key={p.slug}>
+            <BlogCard post={p} />
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
       {hasMore && (
         <div className="mt-10 flex flex-col items-center gap-2">
           <Button variant="outline" onClick={() => setVisible((v) => v + PAGE_SIZE)}>
