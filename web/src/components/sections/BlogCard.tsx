@@ -7,7 +7,7 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col overflow-hidden rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)] transition-all duration-200"
+      className="group flex flex-col h-full overflow-hidden rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
     >
       <div className={`relative ${compact ? "aspect-[5/3]" : "aspect-[16/9]"} bg-gradient-to-br ${post.accent}`}>
         <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />

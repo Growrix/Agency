@@ -260,6 +260,27 @@ body {
   animation: signal-rise 620ms var(--ease-signal) both;
 }
 
+/* Spring-style entrance with a small overshoot via a back-out curve.
+   Used for hero cards/floating mockups so they "spring" into place. */
+@keyframes signal-spring-in {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.94);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.signal-spring-in {
+  animation: signal-spring-in 720ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  will-change: transform, opacity;
+}
+
 /* SVG line-draw — set pathLength="1" on the path */
 @keyframes signal-draw {
   to {

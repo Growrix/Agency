@@ -153,11 +153,11 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
           </h3>
         </div>
         <p className="mt-2 text-sm leading-6 text-white/80">
-          One short email a month with the studio's best writing on shipping software.
+          One short email a month with the studio&apos;s best writing on shipping software.
         </p>
         {subscribed ? (
           <p className="mt-4 rounded-[10px] bg-white/10 px-3 py-2.5 text-sm text-white">
-            You're on the list. Talk soon.
+            You&apos;re on the list. Talk soon.
           </p>
         ) : (
           <form onSubmit={onSubscribe} className="mt-4 space-y-2">
