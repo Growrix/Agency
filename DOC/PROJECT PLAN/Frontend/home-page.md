@@ -46,35 +46,40 @@ depends_on:
 - Components: portfolio tiles, metric strips, testimonial quote.
 - State requirements: loaded, loading skeleton, empty fallback if no featured work.
 
-### 6. Shop Spotlight
+### 6. Blog and Insights Section
+- Content: featured articles, operator playbooks, architecture notes, and direct links into the blog hub.
+- Components: article cards, tag badges, eyebrow label, section CTA.
+- Interaction notes: featured article can use larger layout treatment; supporting cards should remain scannable on mobile.
+
+### 7. Shop Spotlight
 - Content: templates, ready websites, mobile apps, automation kits, and MCP servers with category tabs.
 - Components: product tiles, tab group, price chips.
 - Interaction notes: quick preview drawer on desktop, preview sheet on mobile.
 
-### 7. Process and Collaboration Model
+### 8. Process and Collaboration Model
 - Content: discovery, strategy, design system, build, QA, launch, optimization.
 - Components: step indicator, content blocks, timeline strip.
 - Interaction notes: step hover highlights outputs and cadence.
 
-### 8. AI Concierge and Live Chat Section
+### 9. AI Concierge and Live Chat Section
 - Content: prompt suggestions, assistant capabilities, privacy note, escalation to WhatsApp or booking.
 - Components: chat widget preview, prompt chips, action bar.
 - State requirements: online, loading, fallback to live or WhatsApp.
 
-### 9. Pricing and Engagement Snapshot
+### 10. Pricing and Engagement Snapshot
 - Content: starting ranges, packaged accelerators, productized offers, support retainers.
 - Components: pricing tiers, comparison rows, CTA block.
 - Interaction notes: monthly and project toggle if needed.
 
-### 10. Testimonial and Credibility Strip
+### 11. Testimonial and Credibility Strip
 - Content: client logos, quote carousel, shipping principles, tech stack badges.
 - Components: marquee, testimonial cards, badges.
 
-### 11. Final Conversion Band
+### 12. Final Conversion Band
 - Content: booking CTA, WhatsApp CTA, and chat CTA with expectation setting.
 - Components: CTA section, dual buttons, reassurance list.
 
-### 12. Footer
+### 13. Footer
 - Content: deep links, support, legal, social, response-time promise.
 - Components: footer, menu groups, small badges.
 
@@ -94,5 +99,6 @@ depends_on:
 
 ## Conversion Path
 - Primary path: Hero -> Featured builds -> Process -> Booking.
+- Secondary path: Hero -> Blog and insights -> Blog detail -> Booking.
 - Secondary path: Hero -> Shop spotlight -> Product detail -> Checkout.
 - Assisted path: AI concierge -> WhatsApp or booking.

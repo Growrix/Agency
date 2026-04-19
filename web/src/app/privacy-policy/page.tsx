@@ -6,7 +6,7 @@ import { LinkButton } from "@/components/primitives/Button";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Learn how Signal Atelier handles data related to contact forms, AI chat, booking, analytics, and payments.",
+  description: "Learn how Growrix handles data related to contact forms, AI chat, booking, analytics, and payments.",
 };
 
 const SECTIONS = [
@@ -63,7 +63,7 @@ const SECTIONS = [
     id: "contact",
     title: "Contact",
     body: [
-      "Questions about this policy? Reach us via the contact page or email privacy@signalatelier.example.",
+      "Questions about this policy? Reach us via the contact page or email privacy@growrix.example.",
     ],
   },
 ];

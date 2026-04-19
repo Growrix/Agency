@@ -5,7 +5,8 @@ import { SunIcon, MoonIcon, ComputerDesktopIcon } from "@heroicons/react/24/outl
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 
 type Mode = "light" | "dark" | "system";
-const STORAGE_KEY = "signal-theme";
+const STORAGE_KEY = "growrix-theme";
+const LEGACY_STORAGE_KEY = "signal-theme";
 
 function applyTheme(mode: Mode) {
   if (typeof document === "undefined") return;
@@ -19,7 +20,9 @@ function applyTheme(mode: Mode) {
 
 function readStored(): Mode {
   if (typeof window === "undefined") return "system";
-  const v = window.localStorage.getItem(STORAGE_KEY);
+  const v =
+    window.localStorage.getItem(STORAGE_KEY) ??
+    window.localStorage.getItem(LEGACY_STORAGE_KEY);
   return v === "light" || v === "dark" ? v : "system";
 }
 
@@ -36,7 +39,16 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-flag pattern needed to avoid SSR/CSR theme mismatch
     setMounted(true);
-    setMode(readStored());
+    const stored = readStored();
+    setMode(stored);
+    if (stored !== "system") {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, stored);
+        window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+      } catch {
+        /* ignore storage errors */
+      }
+    }
   }, []);
 
   function cycle() {
@@ -45,6 +57,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     setMode(next);
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
     } catch {
       /* ignore storage errors (Safari private mode, etc.) */
     }
@@ -55,6 +68,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     setMode("system");
     try {
       window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
     } catch {
       /* ignore */
     }

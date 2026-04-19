@@ -3,7 +3,7 @@ import { ComingSoon } from "@/components/sections/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Book Appointment",
-  description: "Schedule a 30-minute discovery call with Signal Atelier.",
+  description: "Schedule a 30-minute discovery call with Growrix.",
 };
 
 export default function BookPage() {

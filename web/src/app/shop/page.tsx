@@ -3,7 +3,7 @@ import { ComingSoon } from "@/components/sections/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Shop — Templates, Starters, and Kits",
-  description: "The Signal Atelier shop is opening soon with templates, MCP starters, and automation kits.",
+  description: "The Growrix shop is opening soon with templates, MCP starters, and automation kits.",
 };
 
 export default function ShopPage() {

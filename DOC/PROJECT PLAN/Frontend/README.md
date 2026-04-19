@@ -63,6 +63,15 @@ tasks:
       - 02-component-system.md
       - home-page.md
 
+  build-blog:
+    read:
+      - ai-context.yaml
+      - 00-master-ui-architecture.md
+      - 01-design-system.md
+      - 02-component-system.md
+      - blog-page.md
+      - blog-post-page.md
+
   build-services:
     read:
       - ai-context.yaml
@@ -130,7 +139,7 @@ tasks:
 1. AI should read [ai-context.yaml](ai-context.yaml) first, then the relevant `read_path` for the current task.
 2. Read [00-master-ui-architecture.md](00-master-ui-architecture.md), [01-design-system.md](01-design-system.md), and [02-component-system.md](02-component-system.md).
 3. Build the shared shell first: header, footer, mobile bottom navigation, utility ribbon, chat launcher, WhatsApp action, cart entry.
-4. Build the core marketing routes: [home-page.md](home-page.md), [services-page.md](services-page.md), [pricing-page.md](pricing-page.md), [about-page.md](about-page.md).
+4. Build the core marketing routes: [home-page.md](home-page.md), [blog-page.md](blog-page.md), [blog-post-page.md](blog-post-page.md), [services-page.md](services-page.md), [pricing-page.md](pricing-page.md), [about-page.md](about-page.md).
 5. Build the service detail routes: [service-saas-applications-page.md](service-saas-applications-page.md), [service-websites-page.md](service-websites-page.md), [service-mcp-servers-page.md](service-mcp-servers-page.md), [service-automation-page.md](service-automation-page.md).
 6. Build proof routes: [portfolio-page.md](portfolio-page.md) and [case-study-page.md](case-study-page.md).
 7. Build commerce routes: [shop-page.md](shop-page.md), [product-detail-page.md](product-detail-page.md), [checkout-page.md](checkout-page.md).
@@ -140,6 +149,7 @@ tasks:
 
 ## Minimal Read Paths
 - To build one marketing page: read the three global foundation files plus the target page file.
+- To build the blog surface: read the three global foundation files plus [blog-page.md](blog-page.md) and [blog-post-page.md](blog-post-page.md).
 - To build one service detail page: read the three global foundation files, [services-page.md](services-page.md), and the target service page.
 - To build one shop route: read the three global foundation files plus the relevant commerce file; include [checkout-page.md](checkout-page.md) if cart or payment state is involved.
 - To build AI chat or WhatsApp escalation: read the three global foundation files plus [ai-concierge-page.md](ai-concierge-page.md), [contact-page.md](contact-page.md), and [book-appointment-page.md](book-appointment-page.md).
@@ -156,6 +166,8 @@ tasks:
 
 ### Marketing And Services
 - [home-page.md](home-page.md)
+- [blog-page.md](blog-page.md)
+- [blog-post-page.md](blog-post-page.md)
 - [services-page.md](services-page.md)
 - [service-saas-applications-page.md](service-saas-applications-page.md)
 - [service-websites-page.md](service-websites-page.md)
@@ -186,6 +198,7 @@ tasks:
 
 ## Dependency Notes
 - Every route implementation depends on the master architecture, design system, and component system.
+- Blog listing and blog detail should share one content model so tags, related content, and homepage highlights stay aligned.
 - Commerce work depends on shop, product detail, and checkout staying structurally aligned.
 - Portfolio detail work depends on the portfolio listing model.
 - Booking, contact, AI concierge, and WhatsApp escalation should be built as one connected conversion system.

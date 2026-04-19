@@ -15,7 +15,7 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 export const metadata: Metadata = {
   title: "About | Product-Minded Web Development Partner",
   description:
-    "Learn how Signal Atelier works, what it values, and how it delivers visually strong, technically rigorous digital products.",
+    "Learn how Growrix works, what it values, and how it delivers visually strong, technically rigorous digital products.",
 };
 
 const PRINCIPLES = [
@@ -53,7 +53,7 @@ export default function AboutPage() {
                 A studio for teams that take their product seriously.
               </h1>
               <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7 text-pretty">
-                Signal Atelier is an independent studio of senior designers and engineers. We build SaaS products, websites, MCP servers, and automation systems with the discipline of a real product team — and the speed of a small one.
+                Growrix is an independent studio of senior designers and engineers. We build SaaS products, websites, MCP servers, and automation systems with the discipline of a real product team — and the speed of a small one.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LinkButton href="/book-appointment" size="lg">Meet through a call</LinkButton>

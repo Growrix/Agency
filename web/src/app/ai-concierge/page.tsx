@@ -3,7 +3,7 @@ import { ComingSoon } from "@/components/sections/ComingSoon";
 
 export const metadata: Metadata = {
   title: "AI Concierge",
-  description: "Get instant, business-aware answers about Signal Atelier services, pricing, and timelines.",
+  description: "Get instant, business-aware answers about Growrix services, pricing, and timelines.",
 };
 
 export default function AIConciergePage() {
