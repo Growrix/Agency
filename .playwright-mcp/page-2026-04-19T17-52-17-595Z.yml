@@ -1,0 +1,436 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Booking discovery calls for Q2
+      - generic [ref=e8]:
+        - img [ref=e9]
+        - text: Avg response under 2 business hours
+    - generic [ref=e11]:
+      - link "WhatsApp" [ref=e12] [cursor=pointer]:
+        - /url: https://wa.me/0000000000
+        - img [ref=e13]
+        - text: WhatsApp
+      - 'link "Spring bundle: 20% off MCP starters →" [ref=e15] [cursor=pointer]':
+        - /url: /shop
+  - banner [ref=e16]:
+    - generic [ref=e17]:
+      - link "G Growrix OS" [ref=e18] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e21]: G
+        - generic [ref=e22]: Growrix OS
+      - navigation [ref=e23]:
+        - link "Home" [ref=e24] [cursor=pointer]:
+          - /url: /
+        - button "Services" [ref=e26]:
+          - text: Services
+          - img [ref=e27]
+        - link "Shop" [ref=e29] [cursor=pointer]:
+          - /url: /shop
+        - link "Portfolio" [ref=e30] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Pricing" [ref=e31] [cursor=pointer]:
+          - /url: /pricing
+        - link "Blog" [ref=e32] [cursor=pointer]:
+          - /url: /blog
+        - link "About" [ref=e33] [cursor=pointer]:
+          - /url: /about
+        - link "AI Concierge" [ref=e34] [cursor=pointer]:
+          - /url: /ai-concierge
+      - generic [ref=e35]:
+        - link "Open chat" [ref=e36] [cursor=pointer]:
+          - /url: /ai-concierge
+          - img [ref=e37]
+        - link "Open cart" [ref=e39] [cursor=pointer]:
+          - /url: /shop
+          - img [ref=e40]
+        - button "Toggle theme" [ref=e42]:
+          - img [ref=e43]
+        - link "Book Appointment" [ref=e45] [cursor=pointer]:
+          - /url: /book-appointment
+  - main [ref=e46]:
+    - generic [ref=e47]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: Services
+          - heading "Choose the delivery model that fits the problem, not just the tech." [level=1] [ref=e53]
+          - paragraph [ref=e54]: "SaaS products, websites, MCP servers, and automation systems built with the same standard: clear strategy, rigorous execution, and a conversion path that makes sense."
+          - generic [ref=e55]:
+            - link "Discuss my project" [ref=e56] [cursor=pointer]:
+              - /url: /book-appointment
+              - text: Discuss my project
+              - img [ref=e57]
+            - link "Compare services" [ref=e59] [cursor=pointer]:
+              - /url: "#compare"
+        - generic [ref=e60]:
+          - generic [ref=e62]:
+            - generic [ref=e63]:
+              - img [ref=e65]
+              - generic [ref=e67]: 8–24 weeks
+            - heading "SaaS Applications" [level=2] [ref=e68]
+            - paragraph [ref=e69]: Admin panels, user portals, billing, dashboards, and AI-assisted features built as a real product, not a long demo.
+            - paragraph [ref=e70]: MVP sprint to product partnership
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - img [ref=e73]
+                - generic [ref=e75]: Product strategy
+              - generic [ref=e76]:
+                - img [ref=e77]
+                - generic [ref=e79]: Frontend systems
+              - generic [ref=e80]:
+                - img [ref=e81]
+                - generic [ref=e83]: Billing & auth
+              - generic [ref=e84]:
+                - img [ref=e85]
+                - generic [ref=e87]: Performance & QA
+            - paragraph [ref=e88]: Best when you need product thinking, UX systems, and engineering in the same engagement.
+            - link "Explore this service" [ref=e89] [cursor=pointer]:
+              - /url: /services/saas-applications
+              - text: Explore this service
+              - img [ref=e90]
+          - generic [ref=e93]:
+            - generic [ref=e94]:
+              - img [ref=e96]
+              - generic [ref=e98]: 4–10 weeks
+            - heading "Websites" [level=2] [ref=e99]
+            - paragraph [ref=e100]: From editorial marketing to launch sites and content-heavy hubs — built around conversion architecture and performance.
+            - paragraph [ref=e101]: Launch sprint or redesign track
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - img [ref=e104]
+                - generic [ref=e106]: Design system
+              - generic [ref=e107]:
+                - img [ref=e108]
+                - generic [ref=e110]: Motion discipline
+              - generic [ref=e111]:
+                - img [ref=e112]
+                - generic [ref=e114]: SEO & Core Web Vitals
+              - generic [ref=e115]:
+                - img [ref=e116]
+                - generic [ref=e118]: CMS handoff
+            - paragraph [ref=e119]: Best when brand perception, conversion architecture, and speed all matter at once.
+            - link "Explore this service" [ref=e120] [cursor=pointer]:
+              - /url: /services/websites
+              - text: Explore this service
+              - img [ref=e121]
+          - generic [ref=e124]:
+            - generic [ref=e125]:
+              - img [ref=e127]
+              - generic [ref=e129]: 3–12 weeks
+            - heading "MCP Servers" [level=2] [ref=e130]
+            - paragraph [ref=e131]: Secure, observable MCP servers that wrap your APIs, databases, and internal tools so agents can act with confidence.
+            - paragraph [ref=e132]: Scoped integration or platform engagement
+            - generic [ref=e133]:
+              - generic [ref=e134]:
+                - img [ref=e135]
+                - generic [ref=e137]: Tool design
+              - generic [ref=e138]:
+                - img [ref=e139]
+                - generic [ref=e141]: Auth & access
+              - generic [ref=e142]:
+                - img [ref=e143]
+                - generic [ref=e145]: Observability
+              - generic [ref=e146]:
+                - img [ref=e147]
+                - generic [ref=e149]: Deployment & ops
+            - paragraph [ref=e150]: Best when agents need auditable access to your APIs, docs, or internal operations.
+            - link "Explore this service" [ref=e151] [cursor=pointer]:
+              - /url: /services/mcp-servers
+              - text: Explore this service
+              - img [ref=e152]
+          - generic [ref=e155]:
+            - generic [ref=e156]:
+              - img [ref=e158]
+              - generic [ref=e160]: 2–8 weeks
+            - heading "Automation" [level=2] [ref=e161]
+            - paragraph [ref=e162]: We map workflows, design exception logic, and ship integrations across CRMs, payments, support, and content systems.
+            - paragraph [ref=e163]: Audit + implementation + retainer
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - img [ref=e166]
+                - generic [ref=e168]: Workflow mapping
+              - generic [ref=e169]:
+                - img [ref=e170]
+                - generic [ref=e172]: Exception logic
+              - generic [ref=e173]:
+                - img [ref=e174]
+                - generic [ref=e176]: Integrations
+              - generic [ref=e177]:
+                - img [ref=e178]
+                - generic [ref=e180]: Observability
+            - paragraph [ref=e181]: Best when repetitive ops work is slowing down sales, support, reporting, or onboarding.
+            - link "Explore this service" [ref=e182] [cursor=pointer]:
+              - /url: /services/automation
+              - text: Explore this service
+              - img [ref=e183]
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - generic [ref=e189]: Comparison
+          - heading "See the difference before you commit to a scope." [level=2] [ref=e192]
+          - paragraph [ref=e194]: The fastest way to choose the right engagement is to compare the business shape of the work, not just the deliverables.
+        - table [ref=e196]:
+          - rowgroup [ref=e197]:
+            - row "Decision point SaaS Applications Websites MCP Servers Automation" [ref=e198]:
+              - columnheader "Decision point" [ref=e199]
+              - columnheader "SaaS Applications" [ref=e200]
+              - columnheader "Websites" [ref=e201]
+              - columnheader "MCP Servers" [ref=e202]
+              - columnheader "Automation" [ref=e203]
+          - rowgroup [ref=e204]:
+            - row "Primary goal Ship or rebuild a product Convert and position the brand Expose trusted tools to agents Remove manual operational work" [ref=e205]:
+              - cell "Primary goal" [ref=e206]
+              - cell "Ship or rebuild a product" [ref=e207]
+              - cell "Convert and position the brand" [ref=e208]
+              - cell "Expose trusted tools to agents" [ref=e209]
+              - cell "Remove manual operational work" [ref=e210]
+            - row "Complexity High Medium Medium to high Medium" [ref=e211]:
+              - cell "Complexity" [ref=e212]
+              - cell "High" [ref=e213]
+              - cell "Medium" [ref=e214]
+              - cell "Medium to high" [ref=e215]
+              - cell "Medium" [ref=e216]
+            - row "Typical timeline 8–24 weeks 4–10 weeks 3–12 weeks 2–8 weeks" [ref=e217]:
+              - cell "Typical timeline" [ref=e218]
+              - cell "8–24 weeks" [ref=e219]
+              - cell "4–10 weeks" [ref=e220]
+              - cell "3–12 weeks" [ref=e221]
+              - cell "2–8 weeks" [ref=e222]
+            - row "Maintenance model Roadmap + ongoing releases CRO, CMS, experiments Observability + tool governance Monitoring + optimization" [ref=e223]:
+              - cell "Maintenance model" [ref=e224]
+              - cell "Roadmap + ongoing releases" [ref=e225]
+              - cell "CRO, CMS, experiments" [ref=e226]
+              - cell "Observability + tool governance" [ref=e227]
+              - cell "Monitoring + optimization" [ref=e228]
+            - row "Best engagement MVP sprint or product partner Launch sprint or redesign track Scoped build or platform engagement Audit sprint then implementation" [ref=e229]:
+              - cell "Best engagement" [ref=e230]
+              - cell "MVP sprint or product partner" [ref=e231]
+              - cell "Launch sprint or redesign track" [ref=e232]
+              - cell "Scoped build or platform engagement" [ref=e233]
+              - cell "Audit sprint then implementation" [ref=e234]
+      - generic [ref=e236]:
+        - generic [ref=e237]:
+          - generic [ref=e239]: Delivery system
+          - heading "A consistent build method across every service." [level=2] [ref=e242]
+          - paragraph [ref=e244]: Discovery, strategy, design, engineering, launch, and post-launch optimization are handled as one system instead of disconnected vendors.
+        - list [ref=e246]:
+          - listitem [ref=e247]:
+            - generic [ref=e248]:
+              - generic [ref=e249]: Step 01
+              - generic [ref=e250]: "1"
+            - heading "Discovery" [level=3] [ref=e251]
+            - paragraph [ref=e252]: Goals, audience, current systems, and constraints. We surface the real problem before scoping.
+            - paragraph [ref=e253]: Week 1
+          - listitem [ref=e254]:
+            - generic [ref=e255]:
+              - generic [ref=e256]: Step 02
+              - generic [ref=e257]: "2"
+            - heading "Strategy & UX" [level=3] [ref=e258]
+            - paragraph [ref=e259]: Architecture, flows, content priorities, and decision-grade wireframes paired with measurable outcomes.
+            - paragraph [ref=e260]: Weeks 2–3
+          - listitem [ref=e261]:
+            - generic [ref=e262]:
+              - generic [ref=e263]: Step 03
+              - generic [ref=e264]: "3"
+            - heading "Design & Build" [level=3] [ref=e265]
+            - paragraph [ref=e266]: Design system, motion discipline, and engineering iterations shipped behind feature flags as we go.
+            - paragraph [ref=e267]: Weeks 3–10
+          - listitem [ref=e268]:
+            - generic [ref=e269]:
+              - generic [ref=e270]: Step 04
+              - generic [ref=e271]: "4"
+            - heading "Launch & Optimize" [level=3] [ref=e272]
+            - paragraph [ref=e273]: Performance audit, accessibility checks, analytics, and iterative optimization after launch.
+            - paragraph [ref=e274]: Ongoing
+      - generic [ref=e276]:
+        - generic [ref=e277]:
+          - generic [ref=e279]: Stack and integrations
+          - heading "The surrounding systems matter as much as the page or app itself." [level=2] [ref=e282]
+        - generic [ref=e283]:
+          - generic [ref=e285]:
+            - heading "Frontend systems" [level=3] [ref=e286]
+            - paragraph [ref=e287]: Next.js, design systems, responsive UI, motion, accessibility, dashboards.
+          - generic [ref=e289]:
+            - heading "Backend and APIs" [level=3] [ref=e290]
+            - paragraph [ref=e291]: Typed APIs, auth, billing, CMS, databases, queue-driven workflows, webhooks.
+          - generic [ref=e293]:
+            - heading "AI and agent tooling" [level=3] [ref=e294]
+            - paragraph [ref=e295]: MCP servers, retrieval, evaluation-aware flows, approvals, and traceable automations.
+          - generic [ref=e297]:
+            - heading "Commerce and growth" [level=3] [ref=e298]
+            - paragraph [ref=e299]: Stripe, booking, analytics, SEO, experimentation, CRM and lifecycle integration.
+      - generic [ref=e301]:
+        - generic [ref=e302]:
+          - generic [ref=e304]: Proof by service
+          - heading "Recent work mapped to the capability behind it." [level=2] [ref=e307]
+          - paragraph [ref=e309]: Each service leads to a different kind of business outcome, so the proof should stay attached to the service type.
+        - generic [ref=e310]:
+          - generic [ref=e312]:
+            - paragraph [ref=e314]: Healthcare SaaS
+            - heading "Tideline Health" [level=3] [ref=e315]
+            - paragraph [ref=e316]: A patient onboarding and care plan platform replacing five legacy tools.
+            - generic [ref=e317]:
+              - generic [ref=e318]: +182% activation
+              - link "View case study" [ref=e319] [cursor=pointer]:
+                - /url: /portfolio/tideline-health
+          - generic [ref=e321]:
+            - paragraph [ref=e323]: B2B Operations
+            - heading "Northcrest MCP" [level=3] [ref=e324]
+            - paragraph [ref=e325]: An MCP server connecting CRM, billing, and inventory for an internal ops agent.
+            - generic [ref=e326]:
+              - generic [ref=e327]: 5h/week saved per ops lead
+              - link "View case study" [ref=e328] [cursor=pointer]:
+                - /url: /portfolio/northcrest-mcp
+          - generic [ref=e330]:
+            - paragraph [ref=e332]: Brand & Marketing
+            - heading "Lumora Studio" [level=3] [ref=e333]
+            - paragraph [ref=e334]: A premium agency website rebuild with editorial motion and a productized portfolio.
+            - generic [ref=e335]:
+              - generic [ref=e336]: +64% demo bookings
+              - link "View case study" [ref=e337] [cursor=pointer]:
+                - /url: /portfolio/lumora-studio
+        - generic [ref=e338]:
+          - generic [ref=e340]:
+            - img [ref=e341]
+            - paragraph [ref=e343]: They shipped what felt like a polished v3 in a single quarter. The system they handed over runs itself — that's rare.
+            - generic [ref=e344]:
+              - generic [ref=e346]:
+                - paragraph [ref=e347]: Maya Okonkwo
+                - paragraph [ref=e348]: CEO, Tideline Health
+              - generic [ref=e349]: +182% activation
+          - generic [ref=e351]:
+            - img [ref=e352]
+            - paragraph [ref=e354]: We replaced four spreadsheets and a contractor with one MCP server. Our agent now answers operations questions correctly.
+            - generic [ref=e355]:
+              - generic [ref=e357]:
+                - paragraph [ref=e358]: Daniel Vargas
+                - paragraph [ref=e359]: Head of Ops, Northcrest
+              - generic [ref=e360]: 5h/week saved
+          - generic [ref=e362]:
+            - img [ref=e363]
+            - paragraph [ref=e365]: Best frontend partner we've worked with. The website redesign carried our entire Q4 narrative without us pushing copy.
+            - generic [ref=e366]:
+              - generic [ref=e368]:
+                - paragraph [ref=e369]: Priya Shankar
+                - paragraph [ref=e370]: VP Marketing, Lumora
+              - generic [ref=e371]: +64% demo bookings
+      - generic [ref=e373]:
+        - generic [ref=e374]:
+          - generic [ref=e376]: FAQ
+          - heading "Questions buyers usually ask before choosing a service." [level=2] [ref=e379]
+        - generic [ref=e381]:
+          - button "How do projects typically start?" [ref=e383]:
+            - generic [ref=e384]: How do projects typically start?
+            - img [ref=e385]
+          - button "What is your typical timeline?" [ref=e388]:
+            - generic [ref=e389]: What is your typical timeline?
+            - img [ref=e390]
+          - button "Do you handle content, copy, and assets?" [ref=e393]:
+            - generic [ref=e394]: Do you handle content, copy, and assets?
+            - img [ref=e395]
+          - button "How do payments work?" [ref=e398]:
+            - generic [ref=e399]: How do payments work?
+            - img [ref=e400]
+          - button "Will I own the code?" [ref=e403]:
+            - generic [ref=e404]: Will I own the code?
+            - img [ref=e405]
+      - generic [ref=e413]:
+        - generic [ref=e414]: Next step
+        - heading "Need help choosing the right service path?" [level=2] [ref=e417]
+        - paragraph [ref=e418]: Tell us the business problem, the current bottleneck, and the timeline. We will map it to the right delivery model quickly.
+        - generic [ref=e419]:
+          - link "Book Appointment" [ref=e420] [cursor=pointer]:
+            - /url: /book-appointment
+          - link "WhatsApp us" [ref=e421] [cursor=pointer]:
+            - /url: https://wa.me/0000000000
+  - contentinfo [ref=e422]:
+    - generic [ref=e423]:
+      - generic [ref=e424]:
+        - generic [ref=e425]:
+          - link "G Growrix OS" [ref=e426] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e427]: G
+            - generic [ref=e428]: Growrix OS
+          - paragraph [ref=e429]: A product-minded studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.
+          - paragraph [ref=e430]: Average response time
+          - paragraph [ref=e431]: Under 2 business hours
+        - generic [ref=e432]:
+          - heading "Services" [level=3] [ref=e433]
+          - list [ref=e434]:
+            - listitem [ref=e435]:
+              - link "SaaS Applications" [ref=e436] [cursor=pointer]:
+                - /url: /services/saas-applications
+            - listitem [ref=e437]:
+              - link "Websites" [ref=e438] [cursor=pointer]:
+                - /url: /services/websites
+            - listitem [ref=e439]:
+              - link "MCP Servers" [ref=e440] [cursor=pointer]:
+                - /url: /services/mcp-servers
+            - listitem [ref=e441]:
+              - link "Automation" [ref=e442] [cursor=pointer]:
+                - /url: /services/automation
+        - generic [ref=e443]:
+          - heading "Shop" [level=3] [ref=e444]
+          - list [ref=e445]:
+            - listitem [ref=e446]:
+              - link "Templates" [ref=e447] [cursor=pointer]:
+                - /url: /shop?category=templates
+            - listitem [ref=e448]:
+              - link "Ready Websites" [ref=e449] [cursor=pointer]:
+                - /url: /shop?category=websites
+            - listitem [ref=e450]:
+              - link "MCP Servers" [ref=e451] [cursor=pointer]:
+                - /url: /shop?category=mcp
+            - listitem [ref=e452]:
+              - link "Mobile Apps" [ref=e453] [cursor=pointer]:
+                - /url: /shop?category=mobile
+            - listitem [ref=e454]:
+              - link "Automation Kits" [ref=e455] [cursor=pointer]:
+                - /url: /shop?category=automation
+        - generic [ref=e456]:
+          - heading "Company" [level=3] [ref=e457]
+          - list [ref=e458]:
+            - listitem [ref=e459]:
+              - link "About" [ref=e460] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e461]:
+              - link "Portfolio" [ref=e462] [cursor=pointer]:
+                - /url: /portfolio
+            - listitem [ref=e463]:
+              - link "Pricing" [ref=e464] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e465]:
+              - link "Blog" [ref=e466] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e467]:
+              - link "Contact" [ref=e468] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e469]:
+          - heading "Support" [level=3] [ref=e470]
+          - list [ref=e471]:
+            - listitem [ref=e472]:
+              - link "FAQ" [ref=e473] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e474]:
+              - link "AI Concierge" [ref=e475] [cursor=pointer]:
+                - /url: /ai-concierge
+            - listitem [ref=e476]:
+              - link "Book Appointment" [ref=e477] [cursor=pointer]:
+                - /url: /book-appointment
+            - listitem [ref=e478]:
+              - link "WhatsApp" [ref=e479] [cursor=pointer]:
+                - /url: https://wa.me/0000000000
+        - generic [ref=e480]:
+          - heading "Legal" [level=3] [ref=e481]
+          - list [ref=e482]:
+            - listitem [ref=e483]:
+              - link "Privacy Policy" [ref=e484] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e485]:
+              - link "Terms of Service" [ref=e486] [cursor=pointer]:
+                - /url: /terms-of-service
+      - generic [ref=e487]:
+        - paragraph [ref=e488]: © 2026 Growrix OS. All rights reserved.
+        - paragraph [ref=e489]: Built deliberately. Shipped with care.
+  - button "Open chat launcher" [ref=e491]:
+    - img [ref=e493]
