@@ -19,7 +19,7 @@ export function ChatLauncher() {
     <div className="hidden lg:block fixed bottom-6 right-6 z-50">
       {open && (
         <div className="mb-3 w-[340px] rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-3)] overflow-hidden animate-fade-up">
-          <div className="flex items-center justify-between bg-[#101316] px-4 py-3 text-[#f1ece1]">
+          <div className="flex items-center justify-between bg-[var(--color-contrast)] px-4 py-3 text-[var(--color-contrast-text)]">
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden />
               <p className="font-display tracking-tight">AI Concierge</p>

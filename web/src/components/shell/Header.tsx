@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
+import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -100,6 +101,7 @@ export function Header() {
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
           </Link>
+          <ThemeToggle />
           <LinkButton href="/book-appointment" size="sm" className="hidden sm:inline-flex ml-1">
             Book Appointment
           </LinkButton>
@@ -147,6 +149,10 @@ export function Header() {
             <Link href="/faq" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
               FAQ
             </Link>
+            <div className="mt-3 flex items-center justify-between rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2">
+              <span className="text-sm font-medium">Theme</span>
+              <ThemeToggle />
+            </div>
             <LinkButton href="/book-appointment" className="mt-3" fullWidth>
               Book Appointment
             </LinkButton>

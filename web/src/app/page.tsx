@@ -158,7 +158,7 @@ export default function Home() {
 
                 {/* Floating mobile mockup */}
                 <Card className="absolute -bottom-6 -left-6 hidden sm:block w-44 p-0 overflow-hidden shadow-[var(--shadow-3)] rotate-[-3deg]">
-                  <div className="bg-[#101316] text-[#f1ece1] p-4">
+                  <div className="bg-[var(--color-contrast)] text-[var(--color-contrast-text)] p-4">
                     <p className="font-mono text-[9px] uppercase tracking-wider text-white/50">Concierge</p>
                     <p className="mt-2 font-display text-sm leading-tight">
                       Want a SaaS scope estimate?
@@ -342,7 +342,7 @@ export default function Home() {
               </p>
             </div>
             <div className="lg:col-span-7">
-              <Card className="bg-[#101316] text-[#f1ece1] border-white/10">
+              <Card className="bg-[var(--color-contrast)] text-[var(--color-contrast-text)] border-white/10">
                 <div className="space-y-4">
                   <div className="flex gap-3 max-w-md">
                     <div className="size-8 rounded-full bg-[var(--color-secondary)] shrink-0" aria-hidden />

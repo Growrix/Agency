@@ -4,7 +4,7 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 
 export function UtilityRibbon() {
   return (
-    <div className="hidden md:block bg-[#101316] text-[#f1ece1]">
+    <div className="hidden md:block bg-[var(--color-contrast)] text-[var(--color-contrast-text)]">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12 py-2 text-[12px] tracking-wide">
         <div className="flex items-center gap-5 text-white/75">
           <span className="inline-flex items-center gap-1.5">
