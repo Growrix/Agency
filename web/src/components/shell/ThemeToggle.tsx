@@ -33,19 +33,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const [mode, setMode] = useState<Mode>("system");
   const [mounted, setMounted] = useState(false);
 
-  // Defer the initial sync to a microtask so we never call setState
-  // synchronously inside the effect body (matches React's effect contract
-  // and avoids the cascading-render lint error).
   useEffect(() => {
-    let cancelled = false;
-    queueMicrotask(() => {
-      if (cancelled) return;
-      setMounted(true);
-      setMode(readStored());
-    });
-    return () => {
-      cancelled = true;
-    };
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-flag pattern needed to avoid SSR/CSR theme mismatch
+    setMounted(true);
+    setMode(readStored());
   }, []);
 
   function cycle() {

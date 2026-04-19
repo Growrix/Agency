@@ -14,11 +14,13 @@ import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
 import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
+import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -116,16 +118,8 @@ export function Header() {
         </div>
       </div>
 
-      <AnimatePresence initial={false}>
-      {mobileOpen && (
-        <motion.div
-          key="mobile-menu"
-          className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        >
+      {(() => {
+        const menuContent = (
           <nav className="mx-auto max-w-[1440px] px-5 sm:px-8 py-4 flex flex-col">
             {PRIMARY_NAV.map((item) => (
               <div key={item.label} className="py-1">
@@ -166,9 +160,32 @@ export function Header() {
               Book Appointment
             </LinkButton>
           </nav>
-        </motion.div>
-      )}
-      </AnimatePresence>
+        );
+        // Reduced motion: render plain DOM, no AnimatePresence/motion.
+        if (reduced) {
+          return mobileOpen ? (
+            <div className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+              {menuContent}
+            </div>
+          ) : null;
+        }
+        return (
+          <AnimatePresence initial={false}>
+            {mobileOpen && (
+              <motion.div
+                key="mobile-menu"
+                className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {menuContent}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        );
+      })()}
     </header>
   );
 }

@@ -17,6 +17,7 @@ import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
+import { motion } from "@/components/motion/Motion";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { FAQ_GENERAL } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -120,8 +121,19 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <Card>
                 {status === "success" ? (
-                  <div className="text-center py-6">
-                    <CheckCircleIcon className="mx-auto size-12 text-[var(--color-success)]" aria-hidden />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ type: "spring", stiffness: 360, damping: 24, mass: 0.6 }}
+                    className="text-center py-6"
+                  >
+                    <motion.div
+                      initial={{ scale: 0.4, rotate: -20 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 420, damping: 18, delay: 0.05 }}
+                    >
+                      <CheckCircleIcon className="mx-auto size-12 text-[var(--color-success)]" aria-hidden />
+                    </motion.div>
                     <h3 className="mt-4 font-display text-2xl tracking-tight">Thanks — we got it.</h3>
                     <p className="mt-2 text-[var(--color-text-muted)] max-w-md mx-auto">
                       We&apos;ll respond within 2 business hours. Need something faster? Open WhatsApp or book a call.
@@ -130,7 +142,7 @@ export default function ContactPage() {
                       <LinkButton href={WHATSAPP_HREF} variant="outline">WhatsApp us</LinkButton>
                       <LinkButton href="/book-appointment">Book a call</LinkButton>
                     </div>
-                  </div>
+                  </motion.div>
                 ) : (
                   <form onSubmit={onSubmit} className="space-y-5" aria-busy={status === "submitting"}>
                     <div className="grid gap-5 sm:grid-cols-2">

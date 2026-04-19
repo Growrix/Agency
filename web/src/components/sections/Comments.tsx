@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { motion } from "@/components/motion/Motion";
 import type { BlogComment } from "@/lib/content";
 import { formatBlogDate } from "@/lib/content";
 
@@ -195,9 +196,14 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
             <Button type="submit">Post comment</Button>
           </div>
           {submitted && (
-            <p className="sm:col-span-2 rounded-[10px] bg-[var(--color-success)]/10 border border-[var(--color-success)]/25 px-3 py-2 text-sm text-[var(--color-success)]">
+            <motion.p
+              initial={{ opacity: 0, scale: 0.92, y: 6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 380, damping: 24, mass: 0.6 }}
+              className="sm:col-span-2 rounded-[10px] bg-[var(--color-success)]/10 border border-[var(--color-success)]/25 px-3 py-2 text-sm text-[var(--color-success)]"
+            >
               Thanks — your comment is up.
-            </p>
+            </motion.p>
           )}
         </form>
       </Card>
