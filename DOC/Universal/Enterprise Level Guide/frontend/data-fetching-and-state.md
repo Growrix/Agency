@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how frontend code should fetch, cache, mutate, and present data in Growrix.
+This document defines how frontend code should fetch, cache, mutate, and present data in Growrix OS.
 
 ## State Principles
 

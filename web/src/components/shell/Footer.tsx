@@ -12,7 +12,7 @@ export function Footer() {
               <span className="size-8 rounded-[10px] bg-[var(--color-primary)] text-[var(--color-surface)] inline-flex items-center justify-center font-display font-bold">
                 G
               </span>
-              <span className="font-display text-lg tracking-tight">Growrix</span>
+              <span className="font-display text-lg tracking-tight">Growrix OS</span>
             </Link>
             <p className="mt-4 max-w-sm text-[var(--color-text-muted)] leading-7">
               A product-minded studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.
@@ -46,7 +46,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 border-t border-[var(--color-border)] py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-[var(--color-text-muted)]">
-            © {new Date().getFullYear()} Growrix. All rights reserved.
+            © {new Date().getFullYear()} Growrix OS. All rights reserved.
           </p>
           <p className="text-xs text-[var(--color-text-muted)] font-mono">
             Built deliberately. Shipped with care.

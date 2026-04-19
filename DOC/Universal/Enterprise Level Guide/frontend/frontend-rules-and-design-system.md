@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document enforces strict rules for UI/UX development in Growrix, ensuring all frontend work is maintainable, scalable, and visually consistent through a centralized design system (DS).
+This document enforces strict rules for UI/UX development in Growrix OS, ensuring all frontend work is maintainable, scalable, and visually consistent through a centralized design system (DS).
 
 ## No Hardcoding Policy
 

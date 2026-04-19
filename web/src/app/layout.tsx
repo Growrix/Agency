@@ -28,11 +28,11 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Growrix | Web Development Agency for SaaS, Websites, MCP & Automation",
-    template: "%s | Growrix",
+    default: "Growrix OS | Web Development Agency for SaaS, Websites, MCP & Automation",
+    template: "%s | Growrix OS",
   },
   description:
-    "Growrix is a product-minded web development studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.",
+    "Growrix OS is a product-minded web development studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.",
 };
 
 // Inline pre-hydration script: applies the saved theme before first paint
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const themeInitScript = `
 (function(){
   try {
-    var stored = localStorage.getItem('growrix-theme') || localStorage.getItem('signal-theme');
+    var stored = localStorage.getItem('growrix-os-theme') || localStorage.getItem('growrix-theme') || localStorage.getItem('signal-theme');
     if (stored === 'light' || stored === 'dark') {
       document.documentElement.setAttribute('data-theme', stored);
     }

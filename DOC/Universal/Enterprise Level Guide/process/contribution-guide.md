@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how contributors should work inside the Growrix repository.
+This document defines how contributors should work inside the Growrix OS repository.
 
 ## Contribution Principles
 

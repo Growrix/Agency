@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines accessibility and localization standards for Growrix.
+This document defines accessibility and localization standards for Growrix OS.
 
 ## Accessibility Baseline
 

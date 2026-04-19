@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document governs how Growrix frontend components should be structured, reused, and styled.
+This document governs how Growrix OS frontend components should be structured, reused, and styled.
 
 ## Component Taxonomy
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document helps new engineers and AI-assisted contributors ramp into Growrix without breaking core business rules.
+This document helps new engineers and AI-assisted contributors ramp into Growrix OS without breaking core business rules.
 
 ## First Read Sequence
 
@@ -16,7 +16,7 @@ This document helps new engineers and AI-assisted contributors ramp into Growrix
 
 ## What New Contributors Must Understand
 
-- Growrix has four distinct role surfaces.
+- Growrix OS has four distinct role surfaces.
 - Hidden routes are not security boundaries.
 - Queue integrity is a first-class business rule.
 - Developers do not self-assign work.

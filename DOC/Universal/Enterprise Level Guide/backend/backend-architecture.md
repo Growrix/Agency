@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the backend architecture for Growrix. It translates the platform model into server-side boundaries, integration strategy, and operational expectations.
+This document defines the backend architecture for Growrix OS. It translates the platform model into server-side boundaries, integration strategy, and operational expectations.
 
 ## Backend Mission
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the access control model for Growrix at the backend and data layers.
+This document defines the access control model for Growrix OS at the backend and data layers.
 
 ## Access Model
 

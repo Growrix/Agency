@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how Growrix environments should be structured and how changes move between them.
+This document defines how Growrix OS environments should be structured and how changes move between them.
 
 ## Environment Model
 

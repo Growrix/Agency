@@ -255,8 +255,8 @@ export type BlogPost = {
 export const BLOG_AUTHORS: Record<string, BlogAuthor> = {
   noah: {
     name: "Noah Whitfield",
-    role: "Founding Partner, Growrix",
-    bio: "Noah leads product strategy and design at Growrix. Previously shipped two SaaS startups from zero to Series B.",
+    role: "Founding Partner, Growrix OS",
+    bio: "Noah leads product strategy and design at Growrix OS. Previously shipped two SaaS startups from zero to Series B.",
     initials: "NW",
   },
   amara: {
@@ -268,7 +268,7 @@ export const BLOG_AUTHORS: Record<string, BlogAuthor> = {
   rohan: {
     name: "Rohan Iyer",
     role: "Design Lead",
-    bio: "Rohan leads visual systems and motion design across Growrix engagements.",
+    bio: "Rohan leads visual systems and motion design across Growrix OS engagements.",
     initials: "RI",
   },
   sasha: {
@@ -316,7 +316,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { type: "code", lang: "ts", code: "server.tool(\"list_invoices\", {\n  description: \"List invoices for the signed-in customer\",\n  input: z.object({ status: z.enum([\"open\", \"paid\"]).optional() }),\n  handler: async ({ input, ctx }) => {\n    const customer = await requireCustomer(ctx);\n    return billing.invoices.list({ customer: customer.id, ...input });\n  },\n});" },
       { type: "h2", text: "Observability you'll actually open" },
       { type: "p", text: "Every tool call should be logged with: tool name, hashed user identity, input shape, latency, result kind, and a request id you can grep. We pipe these to a single dashboard with three charts — calls per tool, error rate, p95 latency — and almost never need more." },
-      { type: "quote", text: "If you can't answer 'which tool does the agent call most often, and how fast' in under ten seconds, the server isn't done.", cite: "Internal Growrix Ops playbook" },
+      { type: "quote", text: "If you can't answer 'which tool does the agent call most often, and how fast' in under ten seconds, the server isn't done.", cite: "Internal Growrix OS Ops playbook" },
       { type: "h2", text: "What we're working on next" },
       { type: "p", text: "We're prototyping a small library that lets a single MCP server expose different toolsets per audience — staff, customer, anonymous — without forking the server. More on that soon." },
     ],
@@ -369,7 +369,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "the-design-system-thats-allowed-to-bend",
     title: "The design system that's allowed to bend",
     excerpt:
-      "How Growrix balances tight design tokens with the editorial flexibility a marketing site needs.",
+      "How Growrix OS balances tight design tokens with the editorial flexibility a marketing site needs.",
     category: "Design",
     tags: ["Design Systems", "Tokens", "Editorial"],
     author: BLOG_AUTHORS.rohan,

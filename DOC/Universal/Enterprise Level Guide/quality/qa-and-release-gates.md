@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines what must be true before Growrix changes are promoted across environments.
+This document defines what must be true before Growrix OS changes are promoted across environments.
 
 ## Release Philosophy
 

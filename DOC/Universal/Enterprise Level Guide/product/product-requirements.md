@@ -2,11 +2,11 @@
 
 ## Purpose
 
-This document converts the original Growrix blueprint into a normalized product requirements baseline. It defines the product scope, business rules, user roles, critical workflows, and delivery phases that should govern all implementation work.
+This document converts the original Growrix OS blueprint into a normalized product requirements baseline. It defines the product scope, business rules, user roles, critical workflows, and delivery phases that should govern all implementation work.
 
 ## Product Vision
 
-Growrix is a trust-first services platform that reduces the perceived risk of buying software delivery. The product leads with a free customized demo, shows queue transparency, offers a paid priority path, and then carries the client through delivery, support, and future upsells.
+Growrix OS is a trust-first services platform that reduces the perceived risk of buying software delivery. The product leads with a free customized demo, shows queue transparency, offers a paid priority path, and then carries the client through delivery, support, and future upsells.
 
 ## Primary Personas
 

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the end-to-end testing approach for Growrix. The platform includes sensitive workflows around roles, payments, queue ordering, delivery, files, and maintenance, so testing must protect business rules instead of only UI behavior.
+This document defines the end-to-end testing approach for Growrix OS. The platform includes sensitive workflows around roles, payments, queue ordering, delivery, files, and maintenance, so testing must protect business rules instead of only UI behavior.
 
 ## Testing Principles
 

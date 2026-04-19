@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines performance and analytics expectations for Growrix frontend work.
+This document defines performance and analytics expectations for Growrix OS frontend work.
 
 ## Performance Principles
 

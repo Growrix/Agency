@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the frontend architecture for Growrix. It exists to keep the public site, client dashboard, admin dashboard, and developer dashboard coherent while preventing privilege leakage, duplicated logic, and UI-driven business rules.
+This document defines the frontend architecture for Growrix OS. It exists to keep the public site, client dashboard, admin dashboard, and developer dashboard coherent while preventing privilege leakage, duplicated logic, and UI-driven business rules.
 
 ## Frontend Mission
 

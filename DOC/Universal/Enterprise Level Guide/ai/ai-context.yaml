@@ -1,6 +1,6 @@
 version: 1
 project:
-  name: Growrix
+  name: Growrix OS
   type: role-based SaaS platform
   summary: >-
     Client-first, demo-driven web and app delivery platform with public, client,

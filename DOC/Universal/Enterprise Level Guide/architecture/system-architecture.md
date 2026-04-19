@@ -2,7 +2,7 @@
 
 ## Architecture Goal
 
-Growrix should be built as a modular SaaS platform with strong security boundaries, reliable queue integrity, auditable business flows, and a clear separation between public marketing surfaces and restricted operational dashboards.
+Growrix OS should be built as a modular SaaS platform with strong security boundaries, reliable queue integrity, auditable business flows, and a clear separation between public marketing surfaces and restricted operational dashboards.
 
 ## Target Architecture
 
