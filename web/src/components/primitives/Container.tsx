@@ -41,7 +41,7 @@ export function Section({
     tone === "inset"
       ? "bg-[var(--color-inset)]"
       : tone === "dark"
-        ? "bg-[#101316] text-[#f1ece1]"
+        ? "bg-[var(--color-contrast)] text-[var(--color-contrast-text)]"
         : "";
   return (
     <section

@@ -8,7 +8,7 @@ const variants: Record<Variant, string> = {
     "bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-1)]",
   inset: "bg-[var(--color-inset)]/70 border border-[var(--color-border)]",
   outline: "bg-transparent border border-[var(--color-border)]",
-  dark: "bg-[#101316] text-[#f1ece1] border border-white/10",
+  dark: "bg-[var(--color-contrast)] text-[var(--color-contrast-text)] border border-white/10",
 };
 
 export function Card({

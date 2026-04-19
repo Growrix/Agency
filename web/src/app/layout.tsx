@@ -34,12 +34,30 @@ export const metadata: Metadata = {
     "A product-minded web development studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.",
 };
 
+// Inline pre-hydration script: applies the saved theme before first paint
+// to prevent a light/dark flash. Falls back to `prefers-color-scheme` when
+// the user hasn't expressed a preference.
+const themeInitScript = `
+(function(){
+  try {
+    var stored = localStorage.getItem('signal-theme');
+    if (stored === 'light' || stored === 'dark') {
+      document.documentElement.setAttribute('data-theme', stored);
+    }
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <a
           href="#main"

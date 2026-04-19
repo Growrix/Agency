@@ -1,23 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0f766e;
-  --color-primary-hover: #0b5e58;
-  --color-secondary: #c56a3b;
-  --color-secondary-hover: #a85629;
-  --color-accent: #1783ff;
-  --color-bg: #f5f1e8;
-  --color-surface: #fffdf8;
-  --color-inset: #ece5d8;
-  --color-overlay: rgba(20, 22, 26, 0.72);
-  --color-border: #d5ccbb;
-  --color-border-strong: #b9ad94;
-  --color-text: #171a1f;
-  --color-text-muted: #5c6470;
-  --color-success: #138a52;
-  --color-warning: #b98016;
-  --color-destructive: #b73a3a;
-  --color-info: #1769c2;
+  --color-primary: var(--c-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-secondary: var(--c-secondary);
+  --color-secondary-hover: var(--c-secondary-hover);
+  --color-accent: var(--c-accent);
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-inset: var(--c-inset);
+  --color-overlay: var(--c-overlay);
+  --color-border: var(--c-border);
+  --color-border-strong: var(--c-border-strong);
+  --color-text: var(--c-text);
+  --color-text-muted: var(--c-text-muted);
+  --color-success: var(--c-success);
+  --color-warning: var(--c-warning);
+  --color-destructive: var(--c-destructive);
+  --color-info: var(--c-info);
+
+  /* "Contrast" surface — the intentionally inverted island
+     used in CTA bands, dark cards, code previews, etc.
+     Always reads as a dark slab in light theme and remains
+     a deep slab in dark theme (slightly darker than --c-surface). */
+  --color-contrast: var(--c-contrast);
+  --color-contrast-text: var(--c-contrast-text);
+  --color-contrast-muted: var(--c-contrast-muted);
 
   --radius-xs: 8px;
   --radius-sm: 12px;
@@ -39,6 +47,108 @@
   --container-shell: 1440px;
 }
 
+/* ---------- Light theme (default) ---------- */
+:root,
+[data-theme="light"] {
+  --c-primary: #0f766e;
+  --c-primary-hover: #0b5e58;
+  --c-secondary: #c56a3b;
+  --c-secondary-hover: #a85629;
+  --c-accent: #1783ff;
+  --c-bg: #f5f1e8;
+  --c-surface: #fffdf8;
+  --c-inset: #ece5d8;
+  --c-overlay: rgba(20, 22, 26, 0.72);
+  --c-border: #d5ccbb;
+  --c-border-strong: #b9ad94;
+  --c-text: #171a1f;
+  --c-text-muted: #5c6470;
+  --c-success: #138a52;
+  --c-warning: #b98016;
+  --c-destructive: #b73a3a;
+  --c-info: #1769c2;
+
+  --c-contrast: #101316;
+  --c-contrast-text: #f1ece1;
+  --c-contrast-muted: rgba(241, 236, 225, 0.62);
+
+  --bg-grid-line: rgba(23, 26, 31, 0.04);
+  --bg-grid-line-strong: rgba(23, 26, 31, 0.06);
+  --body-radial-1: rgba(15, 118, 110, 0.06);
+  --body-radial-2: rgba(197, 106, 59, 0.05);
+
+  color-scheme: light;
+}
+
+/* ---------- Dark theme ---------- */
+[data-theme="dark"] {
+  --c-primary: #2dd4bf;
+  --c-primary-hover: #5eead4;
+  --c-secondary: #e8895a;
+  --c-secondary-hover: #f1a37c;
+  --c-accent: #4aa3ff;
+  --c-bg: #0d1014;
+  --c-surface: #15191f;
+  --c-inset: #1d222a;
+  --c-overlay: rgba(0, 0, 0, 0.78);
+  --c-border: #262d36;
+  --c-border-strong: #3b4350;
+  --c-text: #f1ece1;
+  --c-text-muted: #9aa3b0;
+  --c-success: #34d399;
+  --c-warning: #f0b96b;
+  --c-destructive: #f87171;
+  --c-info: #5eb0ff;
+
+  /* In dark mode the "contrast" slab stays dark but a touch deeper than the surface
+     so it still reads as an intentional, separated panel. */
+  --c-contrast: #06080b;
+  --c-contrast-text: #f1ece1;
+  --c-contrast-muted: rgba(241, 236, 225, 0.6);
+
+  --bg-grid-line: rgba(255, 255, 255, 0.045);
+  --bg-grid-line-strong: rgba(255, 255, 255, 0.07);
+  --body-radial-1: rgba(45, 212, 191, 0.07);
+  --body-radial-2: rgba(232, 137, 90, 0.06);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.55), 0 24px 64px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+/* Prefer-color-scheme fallback when no explicit choice has been made */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --c-primary: #2dd4bf;
+    --c-primary-hover: #5eead4;
+    --c-secondary: #e8895a;
+    --c-secondary-hover: #f1a37c;
+    --c-accent: #4aa3ff;
+    --c-bg: #0d1014;
+    --c-surface: #15191f;
+    --c-inset: #1d222a;
+    --c-overlay: rgba(0, 0, 0, 0.78);
+    --c-border: #262d36;
+    --c-border-strong: #3b4350;
+    --c-text: #f1ece1;
+    --c-text-muted: #9aa3b0;
+    --c-success: #34d399;
+    --c-warning: #f0b96b;
+    --c-destructive: #f87171;
+    --c-info: #5eb0ff;
+    --c-contrast: #06080b;
+    --c-contrast-text: #f1ece1;
+    --c-contrast-muted: rgba(241, 236, 225, 0.6);
+    --bg-grid-line: rgba(255, 255, 255, 0.045);
+    --bg-grid-line-strong: rgba(255, 255, 255, 0.07);
+    --body-radial-1: rgba(45, 212, 191, 0.07);
+    --body-radial-2: rgba(232, 137, 90, 0.06);
+    color-scheme: dark;
+  }
+}
+
 html,
 body {
   background: var(--color-bg);
@@ -48,24 +158,30 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+html {
+  /* Smooth color transitions when toggling themes — short and disabled
+     for users who prefer reduced motion (handled below). */
+  transition: background-color 240ms var(--ease-signal), color 240ms var(--ease-signal);
+}
+
 body {
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(15, 118, 110, 0.06), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(197, 106, 59, 0.05), transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--body-radial-1), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, var(--body-radial-2), transparent 60%);
 }
 
 /* subtle blueprint grid texture */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(23, 26, 31, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(23, 26, 31, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, var(--bg-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 .bg-grid-strong {
   background-image:
-    linear-gradient(to right, rgba(23, 26, 31, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(23, 26, 31, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, var(--bg-grid-line-strong) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid-line-strong) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -86,6 +202,9 @@ body {
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    transition: none;
+  }
   *,
   *::before,
   *::after {
@@ -184,7 +303,7 @@ body {
   font-size: 22px;
   line-height: 1.45;
   color: var(--color-text);
-  background: color-mix(in oklab, var(--color-primary) 5%, transparent);
+  background: color-mix(in oklab, var(--color-primary) 8%, transparent);
   border-radius: 0 12px 12px 0;
 }
 .prose-article code {
@@ -199,8 +318,8 @@ body {
   font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.6;
-  background: #101316;
-  color: #f1ece1;
+  background: var(--color-contrast);
+  color: var(--color-contrast-text);
   padding: 1.1em 1.25em;
   border-radius: 14px;
   overflow-x: auto;
