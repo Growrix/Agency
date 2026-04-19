@@ -12,6 +12,7 @@ export const PRIMARY_NAV = [
   { label: "Shop", href: "/shop" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "AI Concierge", href: "/ai-concierge" },
 ];
@@ -34,6 +35,7 @@ export const FOOTER_NAV = {
     { label: "About", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
   Support: [
