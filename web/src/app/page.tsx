@@ -93,7 +93,7 @@ export default function Home() {
                 Standout digital products,<br className="hidden sm:block" /> shipped like a real team built them.
               </h1>
               <p
-                className="signal-rise mt-6 max-w-xl text-lg text-[var(--color-text-muted)] leading-7 text-pretty"
+                className="signal-rise mt-6 max-w-xl text-lg text-text-muted leading-7 text-pretty"
                 style={{ animationDelay: "180ms" }}
               >
                 We design and engineer SaaS applications, marketing websites, MCP servers, and operational automations — with the kind of polish your competitors will quietly want to match.
@@ -110,7 +110,7 @@ export default function Home() {
                 </LinkButton>
               </div>
               <p
-                className="signal-rise mt-6 font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]"
+                className="signal-rise mt-6 font-mono text-xs uppercase tracking-wider text-text-muted"
                 style={{ animationDelay: "360ms" }}
               >
                 Trusted by Tideline · Northcrest · Lumora · Glasswing · Helix
@@ -120,24 +120,24 @@ export default function Home() {
             <div className="lg:col-span-5">
               <div className="relative signal-spring-in" style={{ animationDelay: "180ms" }}>
                 {/* Layered desktop mockup */}
-                <Card className="relative overflow-hidden p-0 shadow-[var(--shadow-3)]">
-                  <div className="flex items-center gap-1.5 border-b border-[var(--color-border)] px-4 py-2.5 bg-[var(--color-inset)]/60">
+                <Card className="relative overflow-hidden p-0 shadow-(--shadow-3)">
+                  <div className="flex items-center gap-1.5 border-b border-border bg-inset/60 px-4 py-2.5">
                     <span className="size-2.5 rounded-full bg-[#ff5f57]" />
                     <span className="size-2.5 rounded-full bg-[#febc2e]" />
                     <span className="size-2.5 rounded-full bg-[#28c840]" />
-                    <span className="ml-3 font-mono text-[11px] text-[var(--color-text-muted)]">tideline.health/dash</span>
+                    <span className="ml-3 font-mono text-[11px] text-text-muted">tideline.health/dash</span>
                   </div>
-                  <div className="p-5 bg-[var(--color-surface)]">
+                  <div className="bg-surface p-5">
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
+                        <div className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
                           Activation
                         </div>
                         <div className="font-display text-3xl tracking-tight">+182%</div>
                       </div>
                       <Badge tone="success" dot>Live</Badge>
                     </div>
-                    <div className="mt-4 h-32 rounded-[12px] border border-[var(--color-border)] bg-gradient-to-br from-[var(--color-primary)]/10 via-transparent to-[var(--color-secondary)]/10 relative overflow-hidden">
+                    <div className="relative mt-4 h-32 overflow-hidden rounded-sm border border-border bg-linear-to-br from-primary/10 via-transparent to-secondary/10">
                       <svg viewBox="0 0 320 120" className="absolute inset-0 h-full w-full">
                         <defs>
                           <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
@@ -163,9 +163,9 @@ export default function Home() {
                       {["Onboard", "Activate", "Retain"].map((m, i) => (
                         <div
                           key={m}
-                          className="rounded-[10px] border border-[var(--color-border)] bg-[var(--color-inset)]/50 p-2.5"
+                          className="rounded-sm border border-border bg-inset/50 p-2.5"
                         >
-                          <div className="font-mono text-[10px] uppercase text-[var(--color-text-muted)]">{m}</div>
+                          <div className="font-mono text-[10px] uppercase text-text-muted">{m}</div>
                           <div className="font-display text-base">{[92, 76, 84][i]}%</div>
                         </div>
                       ))}
@@ -175,11 +175,11 @@ export default function Home() {
 
                 {/* Floating mobile mockup — spring-in slightly behind the dashboard */}
                 <div
-                  className="absolute -bottom-6 -left-6 hidden sm:block w-44 rotate-[-3deg] signal-spring-in"
+                  className="signal-spring-in absolute -bottom-6 -left-6 hidden w-44 -rotate-3 sm:block"
                   style={{ animationDelay: "420ms" }}
                 >
-                <Card className="p-0 overflow-hidden shadow-[var(--shadow-3)]">
-                  <div className="bg-[var(--color-contrast)] text-[var(--color-contrast-text)] p-4">
+                <Card className="overflow-hidden p-0 shadow-(--shadow-3)">
+                  <div className="bg-contrast p-4 text-contrast-text">
                     <p className="font-mono text-[9px] uppercase tracking-wider text-white/50">Concierge</p>
                     <p className="mt-2 font-display text-sm leading-tight">
                       Want a SaaS scope estimate?
@@ -196,7 +196,7 @@ export default function Home() {
                 </div>
 
                 {/* Floating signal */}
-                <div className="signal-float absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 shadow-[var(--shadow-2)]">
+                <div className="signal-float absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 shadow-(--shadow-2)">
                   <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="font-mono text-[11px] uppercase tracking-wider">Shipping daily</span>
                 </div>
@@ -221,7 +221,7 @@ export default function Home() {
             />
             <Link
               href="/services"
-              className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)]"
+              className="inline-flex items-center gap-1 text-sm font-medium text-primary"
             >
               Compare services <ArrowUpRightIcon className="size-4" />
             </Link>
@@ -258,9 +258,9 @@ export default function Home() {
               <RevealItem key={p.slug}>
               <Link
                 href={`/portfolio/${p.slug}`}
-                className="group block h-full rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
+                className="group block h-full overflow-hidden rounded-[20px] border border-border bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-signal hover:-translate-y-1 hover:border-border-strong hover:shadow-(--shadow-2)"
               >
-                <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.accent}`}>
+                <div className={`relative aspect-4/3 bg-linear-to-br ${p.accent}`}>
                   <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
                   <div className="absolute inset-0 flex items-end p-5">
                     <div className="text-white">
@@ -273,8 +273,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="p-5">
-                  <p className="text-[var(--color-text-muted)] leading-6 text-pretty">{p.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)] group-hover:gap-2 transition-all">
+                  <p className="text-text-muted leading-6 text-pretty">{p.summary}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
                     View case study <ArrowUpRightIcon className="size-4" />
                   </span>
                 </div>
@@ -309,18 +309,18 @@ export default function Home() {
             {FEATURED_PRODUCTS.map((p) => (
               <RevealItem key={p.name} className="h-full">
               <Card hoverable className="flex flex-col h-full">
-                <div className="relative h-32 -mx-6 -mt-6 mb-5 rounded-t-[16px] bg-gradient-to-br from-[var(--color-inset)] to-[var(--color-bg)] border-b border-[var(--color-border)] overflow-hidden">
+                <div className="relative -mx-6 -mt-6 mb-5 h-32 overflow-hidden rounded-t-[16px] border-b border-border bg-linear-to-br from-inset to-bg">
                   <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
                   <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                    <RectangleGroupIcon className="size-9 text-[var(--color-primary)]" aria-hidden />
+                    <RectangleGroupIcon className="size-9 text-primary" aria-hidden />
                     {p.tag && <Badge tone="secondary">{p.tag}</Badge>}
                   </div>
                 </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">{p.category}</p>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{p.category}</p>
                 <h3 className="mt-1 font-display text-lg tracking-tight">{p.name}</h3>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="font-display text-xl">{p.price}</span>
-                  <Link href="/shop" className="text-sm font-medium text-[var(--color-primary)] hover:underline">
+                  <Link href="/shop" className="text-sm font-medium text-primary hover:underline">
                     Preview →
                   </Link>
                 </div>
@@ -363,21 +363,21 @@ export default function Home() {
                   <ChatBubbleLeftRightIcon className="size-4" /> WhatsApp
                 </LinkButton>
               </div>
-              <p className="mt-5 text-xs text-[var(--color-text-muted)] flex items-center gap-1.5">
+              <p className="mt-5 flex items-center gap-1.5 text-xs text-text-muted">
                 <ShieldCheckIcon className="size-3.5" /> Conversations are private and never used to train models.
               </p>
             </div>
             <div className="lg:col-span-7">
-              <Card className="bg-[var(--color-contrast)] text-[var(--color-contrast-text)] border-white/10">
+              <Card className="border-white/10 bg-contrast text-contrast-text">
                 <div className="space-y-4">
                   <div className="flex gap-3 max-w-md">
-                    <div className="size-8 rounded-full bg-[var(--color-secondary)] shrink-0" aria-hidden />
+                    <div className="size-8 shrink-0 rounded-full bg-secondary" aria-hidden />
                     <div className="rounded-[14px] bg-white/5 px-4 py-3 text-sm leading-6">
                       Hey — I&apos;m thinking about rebuilding our SaaS dashboard. We&apos;re 12 people, 8k MAUs.
                     </div>
                   </div>
                   <div className="flex gap-3 max-w-md ml-auto justify-end">
-                    <div className="rounded-[14px] bg-[var(--color-primary)] px-4 py-3 text-sm leading-6 text-white">
+                    <div className="rounded-[14px] bg-primary px-4 py-3 text-sm leading-6 text-white">
                       That sounds like a Product Partner engagement. We typically scope these in a 1-week discovery sprint. Want timelines and team sizing?
                     </div>
                     <div className="size-8 rounded-full bg-white/10 inline-flex items-center justify-center shrink-0">
@@ -415,7 +415,7 @@ export default function Home() {
             ))}
           </RevealGroup>
           <div className="mt-8 text-center">
-            <Link href="/pricing" className="text-sm font-medium text-[var(--color-primary)]">
+            <Link href="/pricing" className="text-sm font-medium text-primary">
               See full pricing details →
             </Link>
           </div>
