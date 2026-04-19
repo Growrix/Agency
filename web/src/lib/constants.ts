@@ -4,6 +4,7 @@ export const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Shop", href: "/shop" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "AI Concierge", href: "/ai-concierge" },
@@ -53,6 +54,15 @@ export const FOOTER_GROUPS = {
       { label: "MCP Servers", href: "/shop?category=mcp-servers" },
       { label: "Ready Websites", href: "/shop?category=ready-websites" },
       { label: "Mobile Apps", href: "/shop?category=mobile-apps" },
+    ],
+  },
+  insights: {
+    title: "Insights",
+    links: [
+      { label: "Blog", href: "/blog" },
+      { label: "SaaS Articles", href: "/blog?category=SaaS+Applications" },
+      { label: "MCP Guides", href: "/blog?category=MCP+Servers" },
+      { label: "Automation Notes", href: "/blog?category=Automation" },
     ],
   },
   company: {

@@ -9,9 +9,9 @@ export function Footer() {
     <footer className="bg-foreground text-background mt-auto">
       {/* Main Footer */}
       <Container size="2xl" className="py-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-8">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+          <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Link
               href="/"
               className="font-bold text-xl tracking-tight"

@@ -1,6 +1,8 @@
 import { Container, Section, LinkButton } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { BlogPostCard } from "@/components/blog/post-card";
+import { getFeaturedBlogPosts } from "@/lib/blog";
 import { SERVICES, SITE_CONFIG } from "@/lib/constants";
 import {
   RocketLaunchIcon,
@@ -89,6 +91,8 @@ const featuredWork = [
     slug: "ai-agent-hub",
   },
 ];
+
+const featuredArticles = getFeaturedBlogPosts(3);
 
 export default function HomePage() {
   return (
@@ -299,6 +303,37 @@ export default function HomePage() {
             <LinkButton href="/portfolio" variant="outline">
               View All Work
             </LinkButton>
+          </div>
+        </Container>
+      </Section>
+
+      {/* === Blog Section === */}
+      <Section className="bg-surface">
+        <Container size="2xl">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-12">
+            <div>
+              <Badge variant="info" className="mb-4">
+                Blog
+              </Badge>
+              <h2
+                className="text-3xl sm:text-4xl font-bold tracking-tight"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Insights for Builders and Operators
+              </h2>
+              <p className="mt-3 text-muted max-w-2xl">
+                Articles on architecture, performance, MCP servers, and automation strategy for teams making high-stakes product decisions.
+              </p>
+            </div>
+            <LinkButton href="/blog" variant="outline" className="self-start sm:self-auto">
+              Visit Blog
+              <ArrowRightIcon className="h-4 w-4" />
+            </LinkButton>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {featuredArticles.map((post) => (
+              <BlogPostCard key={post.slug} post={post} />
+            ))}
           </div>
         </Container>
       </Section>
