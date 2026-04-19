@@ -7,12 +7,13 @@ import {
   Bars3Icon,
   XMarkIcon,
   ShoppingBagIcon,
+  CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
-import { ThemeToggle } from "@/components/shell/ThemeToggle";
+import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -34,17 +35,17 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-[var(--color-surface)]/85 backdrop-blur border-b border-[var(--color-border)]"
+          ? "border-b border-border bg-surface/85 backdrop-blur"
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center gap-6 px-5 sm:px-8 lg:px-12 h-16 lg:h-18">
-        <Link href="/" className="flex items-center gap-2 shrink-0 group">
-          <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-[var(--color-primary)] text-[var(--color-surface)] transition-transform duration-300 ease-[var(--ease-signal)] group-hover:scale-105">
-            <span className="absolute inset-0 rounded-[10px] bg-[var(--color-secondary)]/40 mix-blend-multiply" aria-hidden />
+      <div className="mx-auto flex h-16 max-w-shell items-center gap-3 px-4 sm:px-8 lg:h-18 lg:px-12">
+        <Link href="/" className="flex min-w-0 items-center gap-2 shrink group">
+          <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-primary text-surface transition-transform duration-300 ease-signal group-hover:scale-105">
+            <span className="absolute inset-0 rounded-[10px] bg-secondary/40 mix-blend-multiply" aria-hidden />
             <span className="relative font-display font-bold">G</span>
           </span>
-          <span className="font-display text-lg tracking-tight">Growrix OS</span>
+          <span className="truncate font-display text-base sm:text-lg tracking-tight">Growrix OS</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-4">
@@ -53,7 +54,7 @@ export function Header() {
               <Popover key={item.label} className="relative">
                 {({ close }) => (
                   <>
-                    <PopoverButton className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium hover:text-[var(--color-primary)] transition-colors data-[open]:text-[var(--color-primary)]">
+                    <PopoverButton className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary data-open:text-primary">
                       {item.label}
                       <ChevronDownIcon className="size-3.5" aria-hidden />
                     </PopoverButton>
@@ -65,16 +66,16 @@ export function Header() {
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <PopoverPanel className="absolute left-0 top-full mt-2 w-[420px] rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-2 shadow-[var(--shadow-3)]">
+                      <PopoverPanel className="absolute left-0 top-full mt-2 w-105 rounded-[16px] border border-border bg-surface p-2 shadow-(--shadow-3)">
                         {item.children.map((c) => (
                           <Link
                             key={c.href}
                             href={c.href}
                             onClick={() => close()}
-                            className="block rounded-[12px] px-4 py-3 hover:bg-[var(--color-inset)] transition-colors"
+                            className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
                           >
                             <div className="font-medium text-[15px]">{c.label}</div>
-                            <div className="text-sm text-[var(--color-text-muted)] leading-snug">{c.description}</div>
+                            <div className="text-sm leading-snug text-text-muted">{c.description}</div>
                           </Link>
                         ))}
                       </PopoverPanel>
@@ -86,7 +87,7 @@ export function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="px-3 py-2 text-sm font-medium hover:text-[var(--color-primary)] transition-colors"
+                className="px-3 py-2 text-sm font-medium transition-colors hover:text-primary"
               >
                 {item.label}
               </Link>
@@ -94,27 +95,36 @@ export function Header() {
           )}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1 sm:gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-2">
           <Link
             href="/ai-concierge"
-            className="hidden sm:inline-flex size-10 items-center justify-center rounded-full hover:bg-[var(--color-inset)] transition-colors"
+            className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset sm:inline-flex"
             aria-label="Open chat"
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </Link>
           <Link
             href="/shop"
-            className="inline-flex size-10 items-center justify-center rounded-full hover:bg-[var(--color-inset)] transition-colors"
+            className="inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset"
             aria-label="Open cart"
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
           </Link>
-          <ThemeToggle />
+          <ThemeToggleButton className="lg:hidden" />
+          <ThemeToggle className="hidden lg:inline-flex" />
+          <Link
+            href="/book-appointment"
+            className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
+            aria-label="Book appointment"
+            title="Book appointment"
+          >
+            <CalendarDaysIcon className="size-5" aria-hidden />
+          </Link>
           <LinkButton href="/book-appointment" size="sm" className="hidden sm:inline-flex ml-1">
             Book Appointment
           </LinkButton>
           <button
-            className="lg:hidden inline-flex size-10 items-center justify-center rounded-full hover:bg-[var(--color-inset)]"
+            className="inline-flex size-10 items-center justify-center rounded-full hover:bg-inset lg:hidden"
             aria-label="Toggle menu"
             onClick={() => setMobileOpen((v) => !v)}
           >
@@ -125,7 +135,7 @@ export function Header() {
 
       {(() => {
         const menuContent = (
-          <nav className="mx-auto max-w-[1440px] px-5 sm:px-8 py-4 flex flex-col">
+          <nav className="mx-auto flex max-w-shell flex-col px-5 py-4 sm:px-8">
             {PRIMARY_NAV.map((item) => (
               <div key={item.label} className="py-1">
                 <Link
@@ -136,13 +146,13 @@ export function Header() {
                   {item.label}
                 </Link>
                 {item.children && (
-                  <div className="pl-3 mb-2 border-l border-[var(--color-border)] ml-1 space-y-1">
+                  <div className="mb-2 ml-1 space-y-1 border-l border-border pl-3">
                     {item.children.map((c) => (
                       <Link
                         key={c.href}
                         href={c.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block py-1.5 text-sm text-[var(--color-text-muted)]"
+                        className="block py-1.5 text-sm text-text-muted"
                       >
                         {c.label}
                       </Link>
@@ -157,7 +167,7 @@ export function Header() {
             <Link href="/faq" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
               FAQ
             </Link>
-            <div className="mt-3 flex items-center justify-between rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2">
+            <div className="mt-3 flex items-center justify-between rounded-sm border border-border bg-surface px-3 py-2">
               <span className="text-sm font-medium">Theme</span>
               <ThemeToggle />
             </div>
@@ -169,7 +179,7 @@ export function Header() {
         // Reduced motion: render plain DOM, no AnimatePresence/motion.
         if (reduced) {
           return mobileOpen ? (
-            <div className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+            <div className="border-t border-border bg-surface lg:hidden">
               {menuContent}
             </div>
           ) : null;
@@ -179,7 +189,7 @@ export function Header() {
             {mobileOpen && (
               <motion.div
                 key="mobile-menu"
-                className="lg:hidden border-t border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden"
+                className="overflow-hidden border-t border-border bg-surface lg:hidden"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
