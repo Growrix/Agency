@@ -33,9 +33,19 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const [mode, setMode] = useState<Mode>("system");
   const [mounted, setMounted] = useState(false);
 
+  // Defer the initial sync to a microtask so we never call setState
+  // synchronously inside the effect body (matches React's effect contract
+  // and avoids the cascading-render lint error).
   useEffect(() => {
-    setMounted(true);
-    setMode(readStored());
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setMounted(true);
+      setMode(readStored());
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   function cycle() {

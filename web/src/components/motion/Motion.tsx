@@ -147,20 +147,15 @@ export function CountUp({
   const prefix = parsed?.prefix ?? "";
   const suffix = parsed?.suffix ?? "";
   const [display, setDisplay] = useState<string>(() => {
-    if (num == null) return value;
-    if (reduced) return value;
+    if (num == null || reduced) return value;
     return `${prefix}0${suffix}`;
   });
 
   useEffect(() => {
-    if (num == null) {
-      setDisplay(value);
-      return;
-    }
-    if (reduced || !inView) {
-      setDisplay(value);
-      return;
-    }
+    // Bail without touching state — render falls back to the initial value
+    // (which is either the full value when un-animated, or "0" when ready
+    // to animate in once visible).
+    if (num == null || reduced || !inView) return;
     const decimals = (num.toString().split(".")[1] ?? "").length;
     const start = performance.now();
     let raf = 0;
@@ -175,11 +170,15 @@ export function CountUp({
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration, reduced, num, prefix, suffix]);
+  }, [inView, duration, num, prefix, suffix, reduced]);
+
+  // When the input value changes after mount, render the latest non-animated
+  // value if we're not actively animating.
+  const text = num == null || reduced ? value : display;
 
   return (
     <span ref={ref} className={className}>
-      {display}
+      {text}
     </span>
   );
 }
@@ -199,6 +198,7 @@ export function MotionRoot({ children }: { children: ReactNode }) {
 export function RouteTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const reduced = useReducedMotion();
+  const FADE_MS = 0.12;
   if (reduced) return <>{children}</>;
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -207,7 +207,7 @@ export function RouteTransition({ children }: { children: ReactNode }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.18, ease: "easeOut" }}
+        transition={{ duration: FADE_MS, ease: "easeOut" }}
       >
         {children}
       </motion.div>

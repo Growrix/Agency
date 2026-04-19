@@ -19,6 +19,7 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
   return (
     <Card
       variant={tier.featured ? "dark" : "surface"}
+      hoverable
       className={cn(
         "h-full flex flex-col",
         tier.featured && "ring-1 ring-[var(--color-primary)]/40 shadow-[var(--shadow-2)]",

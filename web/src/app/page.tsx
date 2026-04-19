@@ -16,7 +16,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
-import { SectionHeading, Eyebrow } from "@/components/primitives/SectionHeading";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { FeatureCard } from "@/components/sections/FeatureCard";
 import { Testimonial } from "@/components/sections/Testimonial";
@@ -25,7 +25,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
   BLOG_POSTS,
   CLIENT_LOGOS,
@@ -118,7 +118,7 @@ export default function Home() {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative signal-rise" style={{ animationDelay: "180ms" }}>
+              <div className="relative signal-spring-in" style={{ animationDelay: "180ms" }}>
                 {/* Layered desktop mockup */}
                 <Card className="relative overflow-hidden p-0 shadow-[var(--shadow-3)]">
                   <div className="flex items-center gap-1.5 border-b border-[var(--color-border)] px-4 py-2.5 bg-[var(--color-inset)]/60">
@@ -173,8 +173,12 @@ export default function Home() {
                   </div>
                 </Card>
 
-                {/* Floating mobile mockup */}
-                <Card className="absolute -bottom-6 -left-6 hidden sm:block w-44 p-0 overflow-hidden shadow-[var(--shadow-3)] rotate-[-3deg]">
+                {/* Floating mobile mockup — spring-in slightly behind the dashboard */}
+                <div
+                  className="absolute -bottom-6 -left-6 hidden sm:block w-44 rotate-[-3deg] signal-spring-in"
+                  style={{ animationDelay: "420ms" }}
+                >
+                <Card className="p-0 overflow-hidden shadow-[var(--shadow-3)]">
                   <div className="bg-[var(--color-contrast)] text-[var(--color-contrast-text)] p-4">
                     <p className="font-mono text-[9px] uppercase tracking-wider text-white/50">Concierge</p>
                     <p className="mt-2 font-display text-sm leading-tight">
@@ -189,6 +193,7 @@ export default function Home() {
                     </div>
                   </div>
                 </Card>
+                </div>
 
                 {/* Floating signal */}
                 <div className="signal-float absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 shadow-[var(--shadow-2)]">
