@@ -175,7 +175,7 @@ export default function Home() {
 
                 {/* Floating mobile mockup — spring-in slightly behind the dashboard */}
                 <div
-                  className="signal-spring-in absolute -bottom-6 -left-6 hidden w-44 -rotate-3 sm:block"
+                  className="signal-spring-in absolute -bottom-6 left-0 sm:-left-6 hidden w-44 -rotate-3 sm:block"
                   style={{ animationDelay: "420ms" }}
                 >
                 <Card className="overflow-hidden p-0 shadow-(--shadow-3)">
@@ -196,7 +196,7 @@ export default function Home() {
                 </div>
 
                 {/* Floating signal */}
-                <div className="signal-float absolute -top-4 -right-4 flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 shadow-(--shadow-2)">
+                <div className="signal-float absolute -top-4 right-0 sm:-right-4 flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 shadow-(--shadow-2)">
                   <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="font-mono text-[11px] uppercase tracking-wider">Shipping daily</span>
                 </div>
