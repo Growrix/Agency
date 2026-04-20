@@ -33,6 +33,8 @@ surfaces:
     description: Public marketing, service discovery, portfolio, pricing, credibility proof
     routes:
       - /
+      - /blog
+      - /blog/[slug]
       - /services
       - /services/saas-applications
       - /services/websites
@@ -51,10 +53,8 @@ surfaces:
     description: Digital product shop for templates, MCP servers, ready websites, mobile apps
     routes:
       - /shop
-      - /shop/[category]
-      - /shop/[category]/[productSlug]
-      - /shop/cart
-      - /shop/checkout
+      - /shop/[slug]
+      - /checkout
     auth_required: false (public browsing) or true (checkout)
     roles_allowed: public, subscriber, customer
     integrations:

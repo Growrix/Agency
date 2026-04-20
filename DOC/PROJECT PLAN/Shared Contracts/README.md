@@ -23,12 +23,12 @@ This document defines the canonical system surfaces, roles, domain entities, API
 
 The system consists of four distinct surfaces, each with specific purposes, routes, authentication requirements, and integrations:
 
-1. **Public Marketing** (`/`, `/services`, `/portfolio`, `/pricing`, `/about`, `/faq`, `/contact`)
+1. **Public Marketing** (`/`, `/blog`, `/blog/[slug]`, `/services`, `/portfolio`, `/pricing`, `/about`, `/faq`, `/contact`)
    - No auth required
    - Public browsing, service discovery, credibility proof
    - Read-only for public users
 
-2. **Commerce** (`/shop`, `/shop/[category]`, `/shop/checkout`)
+2. **Commerce** (`/shop`, `/shop/[slug]`, `/checkout`)
    - Optional auth (browsing) or required (checkout)
    - Digital product sales (templates, MCP servers, ready websites, mobile apps)
    - Stripe payment integration

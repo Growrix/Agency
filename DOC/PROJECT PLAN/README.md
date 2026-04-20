@@ -40,6 +40,7 @@ Primary file:
 Generated sequentially by GPT roles.
 
 Folders:
+- `Tasks/`
 - `Shared Contracts/`
 - `Frontend/`
 - `Backend/`
@@ -52,7 +53,13 @@ Folders:
 
 ### For project understanding
 1. `DOC/PROJECT PLAN/ai-context.yaml`
-2. `DOC/PROJECT PLAN/Shared Contracts/README.md`
+2. `DOC/PROJECT PLAN/Tasks/tasks.md`
+3. `DOC/PROJECT PLAN/Shared Contracts/README.md`
+
+### For execution tracking
+1. `DOC/PROJECT PLAN/Tasks/ai-context.yaml`
+2. `DOC/PROJECT PLAN/Tasks/tasks.md`
+3. `DOC/PROJECT PLAN/ai-context.yaml`
 
 ### For frontend build work
 1. `DOC/PROJECT PLAN/ai-context.yaml`
@@ -75,6 +82,7 @@ Folders:
 - Use `DOC/Universal/Prompts/master_orchestration_prompt.md` only to create project docs.
 - Use `DOC/PROJECT PLAN/ai-context.yaml` for all later execution.
 - Use `Shared Contracts/` as the cross-role source of truth.
+- Use `Tasks/tasks.md` as the single execution tracker for current phase, blockers, and next steps.
 
 ## Why This Root File Was Needed
 
@@ -82,4 +90,5 @@ Without a root project entrypoint, AI can jump directly into random subfolders a
 This root makes the workflow stable:
 - first generate docs
 - then execute from project docs
+- keep the execution tracker updated
 - never mix the two stages

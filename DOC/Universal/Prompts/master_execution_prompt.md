@@ -28,18 +28,21 @@ Before building or implementing anything, read these files in order:
 Your job is to implement the project (site/app) strictly according to the project-specific documentation, following the build order and constraints defined in ai-context.yaml and all referenced docs.
 
 Execution model:
-1. Never invent features, requirements, or flows not present in the documentation.
-2. Always follow the build order and read_paths defined in DOC/PROJECT PLAN/ai-context.yaml.
-3. For each phase (frontend, backend, API, security, DevOps, QA), read the corresponding ai-context.yaml and README.md before starting work.
-4. Never skip, reorder, or merge phases.
-5. If context is lost, re-read the project root ai-context.yaml and referenced docs before continuing.
-6. If a contract or requirement is unclear, pause and request clarification—do not assume.
-7. All implementation must pass the QA and Security gates defined in the documentation before release.
+1. Before writing or changing code for a phase, create or refresh DOC/PROJECT PLAN/Tasks/tasks.md using DOC/Universal/Template/tasks-template.md as the baseline structure.
+2. Never invent features, requirements, or flows not present in the documentation.
+3. Always follow the build order and read_paths defined in DOC/PROJECT PLAN/ai-context.yaml.
+4. For each phase (frontend, backend, API, security, DevOps, QA), read the corresponding ai-context.yaml and README.md before starting work.
+5. Never skip, reorder, or merge phases.
+6. Update DOC/PROJECT PLAN/Tasks/tasks.md before and after each implementation session with completed work, current status, blockers, and next tasks.
+7. If context is lost, re-read the project root ai-context.yaml, the Tasks tracker, and referenced docs before continuing.
+8. If a contract or requirement is unclear, pause and request clarification—do not assume.
+9. All implementation must pass the QA and Security gates defined in the documentation before release.
 
 Strict rules:
 - Do not return to the universal orchestration prompt for implementation work.
 - Do not overwrite or ignore any project-specific documentation unless explicitly instructed.
 - Do not start a new feature or phase until the previous one is complete and validated.
+- Do not proceed without a current DOC/PROJECT PLAN/Tasks/tasks.md tracker.
 - All code, configuration, and assets must match the documentation (structure, naming, stack, conventions).
 
 Final outcome:
@@ -51,6 +54,9 @@ Produce a production-ready implementation that is fully aligned with the project
 ## Canonical Inputs
 
 - `DOC/PROJECT PLAN/ai-context.yaml`
+- `DOC/PROJECT PLAN/Tasks/ai-context.yaml`
+- `DOC/PROJECT PLAN/Tasks/tasks.md`
+- `DOC/Universal/Template/tasks-template.md`
 - `DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml`
 - `DOC/PROJECT PLAN/Shared Contracts/README.md`
 - `DOC/PROJECT PLAN/README.md`
@@ -59,6 +65,7 @@ Produce a production-ready implementation that is fully aligned with the project
 ## Canonical Outputs
 
 - Production-ready codebase, assets, and configuration matching the documentation
+- Execution tracker updated with completed work, remaining work, blockers, and next steps
 - All implementation work validated against QA and Security gates
 
 ## Important Decision

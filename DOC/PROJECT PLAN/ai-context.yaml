@@ -28,6 +28,11 @@ execution_workflow:
     Start with DOC/PROJECT PLAN/ai-context.yaml. Read the shared contracts first,
     then route to the role-specific project folder required by the current task.
     Do not return to the universal prompt for implementation work.
+  execution_tracker:
+    required: true
+    ai_entry: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Tasks/tasks.md
+    rule: Update the execution tracker before starting a new phase and after finishing material work.
   implementation_gate:
     - Shared Contracts must exist
     - Frontend, Backend, API and Data, Security, DevOps, and QA docs must exist
@@ -39,6 +44,7 @@ core_invariants:
   - Implementation must follow project-specific docs, not ad hoc assumptions.
   - Contract changes must be reflected in affected docs before further feature buildout.
   - AI must use this file as the primary routing file once documentation generation is complete.
+  - Execution status must be tracked in DOC/PROJECT PLAN/Tasks/tasks.md before and after each implementation phase.
 
 project_layers:
   universal_layer:
@@ -55,6 +61,14 @@ project_layers:
     root: DOC/PROJECT PLAN/
 
 project_docs:
+  tasks:
+    ai_entry: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Tasks/tasks.md
+    use_for:
+      - execution tracking
+      - phase status
+      - remaining work
+      - release blockers
   shared_contracts:
     ai_entry: DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     human_index: DOC/PROJECT PLAN/Shared Contracts/README.md
@@ -115,20 +129,29 @@ read_paths:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/README.md
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+  track_execution:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
   implement_frontend:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
   implement_backend:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Backend/ai-context.yaml
     - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
   harden_security:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
   release_project:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/DevOps/ai-context.yaml
     - DOC/PROJECT PLAN/QA/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md

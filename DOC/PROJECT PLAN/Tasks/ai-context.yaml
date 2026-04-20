@@ -1,0 +1,66 @@
+version: 1
+project:
+  name: Agency SaaS Website - Execution Tracker
+  type: implementation tracking and phase status
+  summary: >-
+    Machine-readable execution tracker layer for the Agency project. This file
+    routes AI agents to the canonical task tracker so implementation sessions
+    always know what is done, what is partial, what is blocked, and what comes next.
+  status: execution-tracking-active
+  canonical_docs_root: DOC/PROJECT PLAN/Tasks/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Tasks/tasks.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+  minimum_instruction: >-
+    Start with DOC/PROJECT PLAN/Tasks/ai-context.yaml, then read
+    DOC/PROJECT PLAN/Tasks/tasks.md before continuing any implementation phase.
+    Update the tracker before and after material work.
+
+core_invariants:
+  - DOC/PROJECT PLAN/Tasks/tasks.md is the single source of truth for execution status.
+  - No task may be marked done without code evidence or documented validation evidence.
+  - Partial means scaffold or mock exists, but the real integrated flow is not complete.
+  - If implementation diverges from contracts, update the contracts or record a blocker before continuing.
+  - Release readiness must be tracked explicitly, not inferred.
+
+status_model:
+  done: implemented and evidenced in code
+  partial: scaffold or placeholder exists without full integration
+  blocked: dependent on another phase or external blocker
+  not_started: no implementation evidence yet
+
+read_paths:
+  audit_project_state:
+    - DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    - DOC/PROJECT PLAN/QA/ai-context.yaml
+  continue_frontend:
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+  continue_backend:
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+  continue_release:
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    - DOC/PROJECT PLAN/QA/ai-context.yaml
+
+tracker_rules:
+  - Update current state, blockers, and next recommended tasks after each implementation session.
+  - Keep exact file paths in task descriptions wherever possible.
+  - Record deployment blockers explicitly.
+  - Reflect status changes in the root project docs when the execution model changes.
