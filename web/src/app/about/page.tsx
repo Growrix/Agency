@@ -7,10 +7,10 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { TrustStrip } from "@/components/sections/TrustStrip";
-import { Testimonial } from "@/components/sections/Testimonial";
 import { CTABand } from "@/components/sections/CTABand";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
-import { CLIENT_LOGOS, HOME_STATS, PROCESS_STEPS, TESTIMONIALS } from "@/lib/content";
+import { CLIENT_LOGOS, HOME_STATS, PROCESS_STEPS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { ABOUT_IMAGES, TEAM_IMAGES } from "@/lib/site-images";
 
@@ -166,12 +166,11 @@ export default function AboutPage() {
 
       <Section>
         <Container>
-          <SectionHeading eyebrow="Voices" title="What clients say after launch." />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <Testimonial key={t.author} data={t} />
-            ))}
-          </div>
+          <GoogleReviews
+            eyebrow="Voices"
+            title="What clients say after launch."
+            description="Live Google reviews shown from the studio business profile."
+          />
         </Container>
       </Section>
 

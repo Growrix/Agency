@@ -42,8 +42,8 @@ depends_on:
 - Components: stat tiles, feature blocks.
 
 ### 6. Testimonials and Social Proof
-- Content: client voices, retention or repeat work proof, stack credibility.
-- Components: testimonial cards, logo rail.
+- Content: live Google reviews, retention or repeat work proof, stack credibility.
+- Components: Google review cards, logo rail, leave-review CTA.
 
 ### 7. CTA Section
 - Content: build something similar, talk through a project, or ask AI for project fit.

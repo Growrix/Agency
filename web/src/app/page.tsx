@@ -19,7 +19,7 @@ import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { FeatureCard } from "@/components/sections/FeatureCard";
-import { Testimonial } from "@/components/sections/Testimonial";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
@@ -34,7 +34,6 @@ import {
   PORTFOLIO,
   PROCESS_STEPS,
   SERVICES,
-  TESTIMONIALS,
 } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
@@ -425,14 +424,11 @@ export default function Home() {
       {/* Testimonials */}
       <Section>
         <Container>
-          <SectionHeading eyebrow="Voices" title="Teams we've shipped with." />
-          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {TESTIMONIALS.map((t) => (
-              <RevealItem key={t.author} className="h-full">
-                <Testimonial data={t} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <GoogleReviews
+            eyebrow="Voices"
+            title="Teams we've shipped with."
+            description="Live Google reviews from the public Growrix OS business profile."
+          />
         </Container>
       </Section>
 

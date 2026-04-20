@@ -41,8 +41,8 @@ depends_on:
 - Components: manifesto blocks, media strip, checklist.
 
 ### 6. Proof and Milestones
-- Content: selected metrics, notable launches, client outcomes, repeat engagements.
-- Components: stat blocks, logo rail, testimonial pull quote.
+- Content: selected metrics, notable launches, client outcomes, repeat engagements, live Google review proof.
+- Components: stat blocks, logo rail, Google review cards.
 
 ### 7. CTA Section
 - Content: invite to talk, review portfolio, or ask the AI concierge.

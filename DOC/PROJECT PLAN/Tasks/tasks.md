@@ -100,7 +100,7 @@ phases:
 | --- | --- | --- |
 | P0 | done | Task tracking and documentation alignment established. |
 | P1 | done | Workspace, shell, primitives, theme system, and styling foundation are built. |
-| P2 | partial | Marketing, blog, proof, and shop preview surfaces exist; contact/checkout/booking/AI are not integrated. |
+| P2 | partial | Marketing, blog, proof, and shop preview surfaces exist, including live Google review proof; contact/checkout/booking/AI are not integrated. |
 | P3 | not_started | No backend domain layer or route handlers exist. |
 | P4 | not_started | Security rules exist in docs only; auth, audit, validation, and abuse controls are not implemented. |
 | P5 | partial | Development deployment baseline, CI, and runbook assets now exist, but observability and broader runtime hardening are still pending. |
@@ -186,6 +186,7 @@ phases:
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.
 - The main marketing, services, blog, proof, and legal surfaces exist in code.
+- Shared trust sections can now pull live Google Business reviews through the frontend Google Maps integration.
 - The shop browsing and product preview experience exists in code.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.

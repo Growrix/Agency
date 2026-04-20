@@ -39,6 +39,13 @@ That works because the root `postinstall` script installs `web/` dependencies an
 
 Copy values from `.env.example` into Vercel project environment variables before deployment. The current frontend can deploy without backend secrets, but the public site URL should be set.
 
+For the live Google review sections, also set:
+
+- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`: a browser/referrer-restricted key.
+- `NEXT_PUBLIC_GOOGLE_PLACE_ID` or `NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT`: the business listing to load.
+
+Enable both the Google Maps JavaScript API and the Places API for that key. The review feed is browser-side so the key should stay restricted to your site domain.
+
 ## Documentation Entry Points
 
 - Execution tracker: `DOC/PROJECT PLAN/Tasks/tasks.md`

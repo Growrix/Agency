@@ -43,8 +43,8 @@ depends_on:
 - Components: logo cloud, icon grid, content block.
 
 ### 6. Proof by Service Type
-- Content: one case study teaser and one testimonial for each service category.
-- Components: case-study cards, testimonial cards.
+- Content: one case study teaser per service category plus a shared live Google review feed for agency-wide proof.
+- Components: case-study cards, Google review cards, leave-review CTA.
 
 ### 7. FAQ and Objection Handling
 - Content: custom vs template, project length, maintenance, team collaboration, pricing approach.

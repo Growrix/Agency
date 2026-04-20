@@ -46,8 +46,8 @@ depends_on:
 - Components: gallery, tabs, modal viewer.
 
 ### 7. Testimonial and Reflection
-- Content: client quote, lessons learned, future scope.
-- Components: testimonial block, content section.
+- Content: live Google review pull quote, lessons learned, future scope.
+- Components: Google review block, content section.
 
 ### 8. Final CTA
 - Content: similar project CTA, WhatsApp shortcut, related work links.

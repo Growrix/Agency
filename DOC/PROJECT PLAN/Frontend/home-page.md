@@ -72,8 +72,8 @@ depends_on:
 - Interaction notes: monthly and project toggle if needed.
 
 ### 11. Testimonial and Credibility Strip
-- Content: client logos, quote carousel, shipping principles, tech stack badges.
-- Components: marquee, testimonial cards, badges.
+- Content: client logos, live Google review feed, shipping principles, tech stack badges.
+- Components: marquee, Google review cards, leave-review CTA, badges.
 
 ### 12. Final Conversion Band
 - Content: booking CTA, WhatsApp CTA, and chat CTA with expectation setting.
