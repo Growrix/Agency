@@ -22,6 +22,30 @@ This document covers CI/CD pipelines, environments, infrastructure-as-code, cont
 
 ## Deployment Strategy
 
+### Current Development Deployment Baseline
+
+The current execution decision is to deploy the frontend for development and live review while backend and API implementation remain deferred.
+
+Current baseline:
+- Host the site on Vercel as a Next.js app.
+- Prefer `web/` as the Vercel Root Directory.
+- Use Node.js `20.x`.
+- Keep placeholder or mock-only flows visible only if they are acceptable on the live development site.
+- Do not treat this as full production readiness for commerce, booking, contact persistence, or AI concierge integrations.
+
+Recommended Vercel settings:
+1. Root Directory: `web`
+2. Install Command: `npm install`
+3. Build Command: `npm run build`
+4. Output Directory: auto-detected by Vercel
+5. Environment Variables: seed from repository `.env.example`
+
+Repository support added for this baseline:
+- root `package.json` proxies dev, lint, build, and start into `web/`
+- root `postinstall` installs `web/` dependencies for root-based CI or fallback deployment
+- `.github/workflows/ci.yml` validates lint and production build on push and pull request
+- `.env.example` documents the current frontend-only deployment variables
+
 ### CI/CD Platform: GitHub Actions
 
 **CI Pipeline** (on every push or PR):
@@ -319,11 +343,12 @@ This document covers CI/CD pipelines, environments, infrastructure-as-code, cont
 
 **Deployment Checklist**:
 - [ ] Code review approved
-- [ ] Tests passing (unit, integration, smoke)
+- [ ] CI lint and build passing
+- [ ] Tests passing (unit, integration, smoke) where applicable
 - [ ] Security scanning passed
-- [ ] Database migrations tested
-- [ ] Staging deployment successful
-- [ ] Smoke tests on staging passed
+- [ ] Database migrations tested if backend work is included
+- [ ] Vercel development deployment successful
+- [ ] Smoke tests on deployed frontend passed
 - [ ] Security review passed
 - [ ] Documentation updated
 - [ ] Release notes written
@@ -349,6 +374,7 @@ This document covers CI/CD pipelines, environments, infrastructure-as-code, cont
 ## How to Use This Plan
 
 - **DevOps engineers**: follow deployment strategy, infrastructure templates, on-call procedures
+- **Frontend-only deployment owners**: use the Vercel baseline above until backend work resumes
 - **Backend developers**: use health checks, structured logging, metrics instrumentation
 - **QA team**: validate deployments, smoke tests, monitor stability
 - **Incident response**: use runbooks and escalation procedures

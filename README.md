@@ -1,0 +1,46 @@
+# Agency Workspace
+
+This repository contains the Agency frontend workspace and the project planning system used to track implementation phases.
+
+## Local Commands
+
+Run these commands from the repository root:
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
+
+The root install now also installs the Next.js app dependencies inside `web/` through `postinstall`, so CI and deployment environments can build from the repository root without a manual second install step.
+
+## Development Deployment Baseline
+
+The current deployment target is a frontend-only development deployment. Backend and API phases are intentionally deferred while frontend iteration continues.
+
+Recommended Vercel project settings:
+
+- Framework Preset: `Next.js`
+- Root Directory: `web`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: leave empty and let Vercel detect `.next`
+- Node.js Version: `20.x`
+
+If the Vercel project is instead pointed at the repository root, use:
+
+- Install Command: `npm install`
+- Build Command: `npm run build`
+
+That works because the root `postinstall` script installs `web/` dependencies and the root build script proxies to the Next.js app.
+
+## Environment Setup
+
+Copy values from `.env.example` into Vercel project environment variables before deployment. The current frontend can deploy without backend secrets, but the public site URL should be set.
+
+## Documentation Entry Points
+
+- Execution tracker: `DOC/PROJECT PLAN/Tasks/tasks.md`
+- Machine-readable tracker entry: `DOC/PROJECT PLAN/Tasks/ai-context.yaml`
+- DevOps plan: `DOC/PROJECT PLAN/DevOps/README.md`
