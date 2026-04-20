@@ -21,7 +21,7 @@ export function CTABand({
   return (
     <Section>
       <Container>
-        <div className="relative overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-contrast)] px-8 py-14 sm:px-12 sm:py-16 text-[var(--color-contrast-text)]">
+        <div className="contrast-surface relative overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-contrast px-8 py-14 text-contrast-text sm:px-12 sm:py-16">
           <div className="absolute inset-0 bg-grid-strong opacity-[0.06]" aria-hidden />
           <div
             className="signal-drift-1 absolute -top-32 -right-24 size-96 rounded-full opacity-30 blur-3xl"
@@ -49,12 +49,7 @@ export function CTABand({
                 {primary.label}
               </LinkButton>
               {secondary && (
-                <LinkButton
-                  href={secondary.href}
-                  variant="ghost"
-                  size="lg"
-                  className="text-[var(--color-contrast-text)] border border-white/15 hover:bg-white/10"
-                >
+                <LinkButton href={secondary.href} variant="outline" size="lg">
                   {secondary.label}
                 </LinkButton>
               )}

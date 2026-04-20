@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -16,6 +17,7 @@ import {
   getBlogPost,
   getRelatedPosts,
 } from "@/lib/content";
+import { getBlogImage } from "@/lib/site-images";
 
 type Params = Promise<{ slug: string }>;
 
@@ -39,6 +41,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   if (!post) notFound();
 
   const related = getRelatedPosts(slug, 2);
+  const heroImage = getBlogImage(post.slug);
   const url = `https://growrixos.com/blog/${post.slug}`;
 
   return (
@@ -81,7 +84,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
         <Container width="content" className="mt-10">
           <div className={`relative aspect-[21/9] overflow-hidden rounded-[24px] bg-gradient-to-br ${post.accent}`}>
-            <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
+            {heroImage ? (
+              <Image
+                src={heroImage.src}
+                alt={heroImage.alt}
+                fill
+                priority
+                sizes="(min-width: 1024px) 80vw, 100vw"
+                className="object-cover"
+              />
+            ) : null}
+            <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" aria-hidden />
           </div>
         </Container>
       </Section>

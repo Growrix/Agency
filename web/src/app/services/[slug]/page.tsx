@@ -21,6 +21,7 @@ import { Testimonial } from "@/components/sections/Testimonial";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { StatBlock } from "@/components/sections/StatBlock";
+import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES, TESTIMONIALS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
@@ -236,7 +237,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section className="pt-12 sm:pt-16 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
-          <Link href="/services" className="inline-flex items-center gap-1 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)]">
+          <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
             ← All services
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
@@ -251,7 +252,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 {copy.headline}
               </h1>
               <p
-                className="mt-6 text-lg text-[var(--color-text-muted)] leading-7 signal-rise"
+                className="mt-6 text-lg text-text-muted leading-7 signal-rise"
                 style={{ animationDelay: "140ms" }}
               >
                 {copy.description}
@@ -269,17 +270,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
               <Card className="overflow-hidden">
                 <div className="flex items-center justify-between mb-5">
-                  <div className="inline-flex size-12 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+                  <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
                     <Icon className="size-6" />
                   </div>
                   <Badge tone="secondary">{service.timeline}</Badge>
                 </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">Engagement style</p>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
                 <p className="mt-1 font-display text-2xl tracking-tight">{service.typical}</p>
                 <ul className="mt-6 space-y-2.5">
                   {service.pillars.map((p) => (
                     <li key={p} className="flex items-center gap-2 text-sm">
-                      <CheckIcon className="size-4 text-[var(--color-primary)]" /> {p}
+                      <CheckIcon className="size-4 text-primary" /> {p}
                     </li>
                   ))}
                 </ul>
@@ -303,7 +304,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               <RevealItem key={b.title} className="h-full">
                 <Card hoverable className="h-full">
                   <h3 className="font-display text-lg tracking-tight">{b.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{b.description}</p>
+                  <p className="mt-2 text-sm text-text-muted leading-6">{b.description}</p>
                 </Card>
               </RevealItem>
             ))}
@@ -321,10 +322,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
             {copy.differentiators.map((d) => (
               <RevealItem key={d.title} className="h-full">
-                <div className="h-full rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-                  <div className="font-mono text-xs uppercase tracking-wider text-[var(--color-primary)]">Principle</div>
+                <div className="h-full rounded-[16px] border border-border bg-surface p-6">
+                  <div className="font-mono text-xs uppercase tracking-wider text-primary">Principle</div>
                   <h3 className="mt-2 font-display text-xl tracking-tight">{d.title}</h3>
-                  <p className="mt-2 text-[var(--color-text-muted)] leading-7 text-pretty">{d.description}</p>
+                  <p className="mt-2 text-text-muted leading-7 text-pretty">{d.description}</p>
                 </div>
               </RevealItem>
             ))}
@@ -346,27 +347,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <Container>
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
-              <Link href="/portfolio" className="text-sm font-medium text-[var(--color-primary)]">
+              <Link href="/portfolio" className="text-sm font-medium text-primary">
                 View all <ArrowUpRightIcon className="inline size-4" />
               </Link>
             </div>
             <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
               {related.map((p) => (
                 <RevealItem key={p.slug} className="h-full">
-                <Link href={`/portfolio/${p.slug}`} className="group block h-full rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]">
-                  <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.accent}`}>
-                    <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
-                    <div className="absolute inset-0 flex items-end p-5 text-white">
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-wider opacity-80">{p.industry}</p>
-                        <p className="font-display text-xl tracking-tight">{p.name}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <p className="text-sm text-[var(--color-text-muted)] leading-6">{p.summary}</p>
-                  </div>
-                </Link>
+                  <PortfolioCard project={p} />
                 </RevealItem>
               ))}
             </RevealGroup>

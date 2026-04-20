@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
@@ -11,6 +12,7 @@ import { CTABand } from "@/components/sections/CTABand";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { CLIENT_LOGOS, HOME_STATS, PROCESS_STEPS, TESTIMONIALS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { ABOUT_IMAGES, TEAM_IMAGES } from "@/lib/site-images";
 
 export const metadata: Metadata = {
   title: "About | Product-Minded Web Development Partner",
@@ -52,7 +54,7 @@ export default function AboutPage() {
               <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
                 A studio for teams that take their product seriously.
               </h1>
-              <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7 text-pretty">
+              <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
                 Growrix OS is an independent studio of senior designers and engineers. We build SaaS products, websites, MCP servers, and automation systems with the discipline of a real product team — and the speed of a small one.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -62,8 +64,16 @@ export default function AboutPage() {
             </div>
             <div className="lg:col-span-5">
               <Card className="p-0 overflow-hidden">
-                <div className="aspect-[4/3] bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-secondary)]/40 to-[var(--color-accent)]/40 relative">
-                  <div className="absolute inset-0 bg-grid-strong opacity-25" aria-hidden />
+                <div className="relative aspect-4/3 overflow-hidden">
+                  <Image
+                    src={ABOUT_IMAGES.hero.src}
+                    alt={ABOUT_IMAGES.hero.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/12 to-transparent" aria-hidden />
                   <div className="absolute inset-0 flex items-end p-6 text-white">
                     <p className="font-display text-2xl tracking-tight max-w-xs">
                       “Studio sized for craft, scoped for outcomes.”
@@ -88,9 +98,9 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {PRINCIPLES.map((p) => (
               <Card key={p.title}>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)]">Principle</p>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Principle</p>
                 <h3 className="mt-2 font-display text-xl tracking-tight">{p.title}</h3>
-                <p className="mt-2 text-[var(--color-text-muted)] leading-7 text-pretty">{p.description}</p>
+                <p className="mt-2 text-text-muted leading-7 text-pretty">{p.description}</p>
               </Card>
             ))}
           </div>
@@ -107,9 +117,19 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {TEAM.map((m) => (
               <Card key={m.name} hoverable>
-                <div className="size-14 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)]" aria-hidden />
+                <div className="relative size-14 overflow-hidden rounded-full border border-border">
+                  {TEAM_IMAGES[m.name] ? (
+                    <Image
+                      src={TEAM_IMAGES[m.name].src}
+                      alt={TEAM_IMAGES[m.name].alt}
+                      fill
+                      sizes="56px"
+                      className="object-cover"
+                    />
+                  ) : null}
+                </div>
                 <h3 className="mt-4 font-display text-lg tracking-tight">{m.name}</h3>
-                <p className="text-sm text-[var(--color-text-muted)]">{m.role}</p>
+                <p className="text-sm text-text-muted">{m.role}</p>
                 <p className="mt-3 text-sm leading-6">{m.strength}</p>
               </Card>
             ))}
@@ -132,7 +152,7 @@ export default function AboutPage() {
           <ul className="mt-8 space-y-4">
             {PHILOSOPHY.map((p, i) => (
               <li key={p} className="flex gap-4">
-                <span className="shrink-0 size-7 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center font-mono text-xs">
+                <span className="shrink-0 size-7 rounded-full bg-primary/10 text-primary flex items-center justify-center font-mono text-xs">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p className="text-lg leading-7 text-pretty pt-0.5">{p}</p>

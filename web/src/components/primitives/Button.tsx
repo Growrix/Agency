@@ -13,7 +13,7 @@ const variants: Record<Variant, string> = {
   ghost:
     "bg-transparent text-[var(--color-text)] hover:bg-[var(--color-inset)]",
   outline:
-    "bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-inset)]/60",
+    "border border-[var(--button-outline-border)] bg-[var(--button-outline-bg)] text-[var(--button-outline-text)] hover:border-[var(--button-outline-border-hover)] hover:bg-[var(--button-outline-bg-hover)]",
   destructive:
     "bg-[var(--color-destructive)] text-[var(--color-surface)] hover:opacity-90",
 };
