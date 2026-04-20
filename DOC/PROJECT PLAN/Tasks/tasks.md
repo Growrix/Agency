@@ -7,10 +7,12 @@ canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
 last_audit_date: 2026-04-20
 current_state:
-  repo_branch_audited: main
+  repo_branch_audited: Complete_Execution
   frontend_shell: done
   frontend_routes: mostly_done
   frontend_conversion_integrations: partial
+  backend_phase_deferred: true
+  development_frontend_deployable: true
   backend_implementation: not_started
   api_implementation: not_started
   security_implementation: not_started
@@ -18,11 +20,10 @@ current_state:
   qa_implementation: not_started
   deployable: false
 release_blockers:
-  - Vercel production build is failing and deployment configuration is unresolved.
-  - No backend or API implementation exists under web/src/app/api/** or a server domain layer.
+  - Full integrated production release is blocked because backend and API work remain deferred.
   - Checkout, booking, and AI concierge routes are placeholders rather than real integrated flows.
   - The contact form is UI-only and does not submit to a persisted backend endpoint.
-  - No automated test suite or CI workflow exists.
+  - Production observability and runtime asset hardening are still not implemented.
 phase_sequence:
   - P0-documentation-tracking-alignment
   - P1-frontend-foundation
@@ -31,22 +32,22 @@ phase_sequence:
   - P4-security-hardening
   - P5-devops-release-readiness
   - P6-qa-release-gates
-next_recommended_phase: P3-backend-api-implementation
+next_recommended_phase: P5-devops-release-readiness
 next_recommended_tasks:
-  - T013
-  - T014
-  - T015
-  - T016
+  - T027
+  - T028
+  - T029
+  - T031
 phase_status_counts:
   done: 2
   partial: 2
   blocked: 0
   not_started: 3
 task_status_counts:
-  done: 10
+  done: 13
   partial: 0
   blocked: 0
-  not_started: 23
+  not_started: 20
 ---
 
 # Tasks / Execution Tracker
@@ -56,11 +57,11 @@ task_status_counts:
 	- DOC/PROJECT PLAN/ai-context.yaml
 	- DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
 	- DOC/PROJECT PLAN/*/README.md
-	- current `web/` codebase on `main`
+  - current `web/` codebase on `Complete_Execution`
 - Working conclusion:
 	- the documented frontend surface is largely implemented
 	- the documented backend, API, Security, DevOps, and QA phases are still mostly documentation-only
-	- deployment is blocked by runtime, integration, and release-engineering gaps rather than missing marketing pages
+  - frontend-only development deployment is now configured, but full integrated release is still blocked by deferred backend and remaining release-engineering gaps
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.
@@ -102,7 +103,7 @@ phases:
 | P2 | partial | Marketing, blog, proof, and shop preview surfaces exist; contact/checkout/booking/AI are not integrated. |
 | P3 | not_started | No backend domain layer or route handlers exist. |
 | P4 | not_started | Security rules exist in docs only; auth, audit, validation, and abuse controls are not implemented. |
-| P5 | partial | Local build scripts exist, but production deployment and CI/CD are not release-ready. |
+| P5 | partial | Development deployment baseline, CI, and runbook assets now exist, but observability and broader runtime hardening are still pending. |
 | P6 | not_started | No unit, integration, e2e, accessibility, performance, or security automation exists. |
 
 ## Tasks By Phase
@@ -165,13 +166,13 @@ phases:
 - [ ] T023 Add rate limiting, CSRF/XSS protection, and abuse controls for public forms and auth-sensitive routes.
 
 ### Phase P5 — DevOps, Deployment & Reliability
-- [ ] T024 Fix production deployment configuration by aligning:
+- [x] T024 Fix production deployment configuration by aligning:
 	- `package.json`
 	- `web/package.json`
 	- `vercel.json` (if used)
 	- Vercel project root, install command, and build command settings
-- [ ] T025 Add CI workflow automation in `.github/workflows/ci.yml` for lint, build, and test execution.
-- [ ] T026 Add environment and deployment runbook assets in `.env.example`, `README.md`, and `DOC/PROJECT PLAN/DevOps/README.md`.
+- [x] T025 Add CI workflow automation in `.github/workflows/ci.yml` for lint, build, and test execution.
+- [x] T026 Add environment and deployment runbook assets in `.env.example`, `README.md`, and `DOC/PROJECT PLAN/DevOps/README.md`.
 - [ ] T027 Add infrastructure/runtime assets in `infra/**` if the project moves beyond pure Vercel-hosted frontend deployment.
 - [ ] T028 Add production observability and error reporting hooks for frontend and backend runtime.
 
@@ -187,15 +188,17 @@ phases:
 - The main marketing, services, blog, proof, and legal surfaces exist in code.
 - The shop browsing and product preview experience exists in code.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
+- The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
 
 ## What Is Next To Build
-1. T013-T019: implement the real backend and API layer so the current UI stops depending on placeholders or local-only mocks.
-2. T024: fix the production deployment configuration that is currently blocking Vercel release.
-3. T020-T023: add security enforcement around auth, validation, secrets, logging, and abuse prevention.
-4. T029-T033: add QA automation and release evidence before pointing the Namecheap domain to production.
+1. T027-T028: add the remaining runtime hardening and observability needed beyond the current Vercel development deployment baseline.
+2. T029-T033: add QA automation and release evidence for safer live updates.
+3. T013-T019: resume backend and integrated-flow work after the frontend stabilizes.
+4. T020-T023: add security enforcement around auth, validation, secrets, logging, and abuse prevention when backend work resumes.
 
 ## Release Readiness Checklist
-- [ ] Production build passes in Vercel.
+- [x] Local production build passes.
+- [ ] Vercel development deployment is verified on the live project.
 - [ ] Contact form persists inquiries through a real API.
 - [ ] Booking flow is connected to a real calendar or inquiry backend.
 - [ ] Checkout is connected to a real order and payment backend.
