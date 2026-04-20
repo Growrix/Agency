@@ -10,6 +10,7 @@ import { Testimonial } from "@/components/sections/Testimonial";
 import { CTABand } from "@/components/sections/CTABand";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { CLIENT_LOGOS, PORTFOLIO, SERVICES, TESTIMONIALS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
@@ -119,36 +120,7 @@ export default function PortfolioPage() {
             <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
               {filtered.map((p) => (
                 <RevealItem key={p.slug}>
-                <Link
-                  href={`/portfolio/${p.slug}`}
-                  className="group block h-full rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
-                >
-                  <div className={`relative aspect-[4/3] bg-gradient-to-br ${p.accent}`}>
-                    <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
-                    <div className="absolute top-4 left-4">
-                      <span className="rounded-full bg-black/30 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
-                        {SERVICES.find((s) => s.slug === p.service)?.name ?? "Project"}
-                      </span>
-                    </div>
-                    <div className="absolute inset-0 flex items-end p-5 text-white">
-                      <div>
-                        <p className="font-mono text-[11px] uppercase tracking-wider opacity-80">{p.industry}</p>
-                        <p className="font-display text-xl tracking-tight mt-1">{p.name}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <p className="text-sm text-[var(--color-text-muted)] leading-6 text-pretty">{p.summary}</p>
-                    <div className="mt-4 flex items-center justify-between">
-                      <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)]">
-                        {p.metric}
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)] group-hover:gap-2 transition-all">
-                        Case study <ArrowUpRightIcon className="size-3.5" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                  <PortfolioCard project={p} />
                 </RevealItem>
               ))}
             </RevealGroup>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -13,6 +14,7 @@ import {
   getBlogTagCounts,
   type BlogPost,
 } from "@/lib/content";
+import { getBlogImage } from "@/lib/site-images";
 
 export const metadata: Metadata = {
   title: "Blog — Field notes from Growrix OS",
@@ -48,6 +50,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
     (a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)
   );
   const featured = sorted[0];
+  const featuredImage = featured ? getBlogImage(featured.slug) : undefined;
   const rest = sorted.slice(1);
 
   const filtered = filterPosts(sorted, params);
@@ -100,8 +103,18 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
               href={`/blog/${featured.slug}`}
               className="group mt-12 grid overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] hover:shadow-[var(--shadow-3)] transition-all lg:grid-cols-12"
             >
-              <div className={`relative aspect-[16/10] lg:aspect-auto lg:col-span-7 bg-gradient-to-br ${featured.accent}`}>
-                <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
+              <div className={`relative aspect-[16/10] lg:aspect-auto lg:col-span-7 overflow-hidden bg-gradient-to-br ${featured.accent}`}>
+                {featuredImage ? (
+                  <Image
+                    src={featuredImage.src}
+                    alt={featuredImage.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="object-cover transition-transform duration-500 ease-signal group-hover:scale-[1.02]"
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-linear-to-t from-black/68 via-black/12 to-transparent" aria-hidden />
                 <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-black/30 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
                   Featured · {featured.category}
                 </div>

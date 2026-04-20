@@ -1,16 +1,29 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import type { BlogPost } from "@/lib/content";
 import { formatBlogDate } from "@/lib/content";
+import { getBlogImage } from "@/lib/site-images";
 
 export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: boolean }) {
+  const image = getBlogImage(post.slug);
+
   return (
     <Link
       href={`/blog/${post.slug}`}
       className="group flex flex-col h-full overflow-hidden rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
     >
-      <div className={`relative ${compact ? "aspect-[5/3]" : "aspect-[16/9]"} bg-gradient-to-br ${post.accent}`}>
-        <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
+      <div className={`relative ${compact ? "aspect-[5/3]" : "aspect-[16/9]"} overflow-hidden bg-gradient-to-br ${post.accent}`}>
+        {image ? (
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes={compact ? "(min-width: 640px) 40vw, 100vw" : "(min-width: 1024px) 35vw, 100vw"}
+            className="object-cover transition-transform duration-500 ease-signal group-hover:scale-[1.03]"
+          />
+        ) : null}
+        <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/18 to-transparent" aria-hidden />
         <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/30 backdrop-blur px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-white">
           {post.category}
         </div>

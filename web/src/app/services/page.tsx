@@ -17,6 +17,7 @@ import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { Testimonial } from "@/components/sections/Testimonial";
 import {
 	FAQ_GENERAL,
@@ -277,20 +278,7 @@ export default function ServicesPage() {
 					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
 						{PORTFOLIO.slice(0, 3).map((project) => (
 							<RevealItem key={project.slug} className="h-full">
-								<Card hoverable className="h-full">
-									  <div className={`h-2 rounded-full bg-linear-to-r ${project.accent}`} aria-hidden />
-									  <p className="mt-5 font-mono text-[11px] uppercase tracking-wider text-text-muted">
-										{project.industry}
-									</p>
-									<h3 className="mt-2 font-display text-2xl tracking-tight">{project.name}</h3>
-									  <p className="mt-3 text-sm text-text-muted leading-6">{project.summary}</p>
-									<div className="mt-5 flex items-center justify-between gap-4">
-										<Badge tone="accent">{project.metric}</Badge>
-										<Link href={`/portfolio/${project.slug}`} className="text-sm font-medium text-primary hover:text-primary-hover">
-											View case study
-										</Link>
-									</div>
-								</Card>
+								<PortfolioCard project={project} />
 							</RevealItem>
 						))}
 					</RevealGroup>
