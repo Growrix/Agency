@@ -17,12 +17,12 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
-import { Testimonial } from "@/components/sections/Testimonial";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES, TESTIMONIALS } from "@/lib/content";
+import { PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
@@ -381,14 +381,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <Section>
         <Container>
-          <SectionHeading eyebrow="Voices" title="Recent quotes from this practice." />
-          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {TESTIMONIALS.map((t) => (
-              <RevealItem key={t.author} className="h-full">
-                <Testimonial data={t} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <GoogleReviews
+            eyebrow="Google reviews"
+            title="Recent client feedback from the studio."
+            description="Live reviews from the public business profile, reused across service trust surfaces."
+          />
         </Container>
       </Section>
 

@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowUpRightIcon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
-import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { Testimonial } from "@/components/sections/Testimonial";
 import { CTABand } from "@/components/sections/CTABand";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { CLIENT_LOGOS, PORTFOLIO, SERVICES, TESTIMONIALS } from "@/lib/content";
+import { CLIENT_LOGOS, PORTFOLIO, SERVICES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
@@ -132,14 +130,11 @@ export default function PortfolioPage() {
 
       <Section>
         <Container>
-          <SectionHeading eyebrow="Voices" title="What clients say after launch." />
-          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {TESTIMONIALS.map((t) => (
-              <RevealItem key={t.author} className="h-full">
-                <Testimonial data={t} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <GoogleReviews
+            eyebrow="Voices"
+            title="What clients say after launch."
+            description="Live Google reviews provide the trust layer across portfolio and proof pages."
+          />
         </Container>
       </Section>
 

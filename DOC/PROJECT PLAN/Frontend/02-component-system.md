@@ -63,7 +63,8 @@ recommended_next_reads:
 - States: default, featured, expanded, unavailable.
 
 ### Testimonial
-- Formats: quote card, client video teaser, pull quote with metric.
+- Formats: quote card, client video teaser, pull quote with metric, live Google review card.
+- Data source: support both authored proof content and live Google Business reviews with rating, publish-relative timestamp, and review-profile link.
 - Accessibility: transcripts or text alternatives for video testimony.
 
 ### SearchBar, FilterBar, SortControl, PaginationControl

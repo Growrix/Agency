@@ -8,11 +8,11 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { Testimonial } from "@/components/sections/Testimonial";
 import { CTABand } from "@/components/sections/CTABand";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { PORTFOLIO, PORTFOLIO_BY_SLUG, SERVICES, TESTIMONIALS } from "@/lib/content";
+import { PORTFOLIO, PORTFOLIO_BY_SLUG, SERVICES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { getCaseStudyDetail, getPortfolioImage } from "@/lib/site-images";
 
@@ -185,8 +185,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <Section tone="inset">
         <Container width="reading">
-          <Testimonial
-            data={TESTIMONIALS[0]}
+          <GoogleReviews
+            eyebrow="Google reviews"
+            title="Recent client feedback from the studio profile."
+            description="A live Google review keeps the proof layer tied to the public business profile."
+            displayMode="single"
+            limit={1}
+            showSummary={false}
           />
         </Container>
       </Section>

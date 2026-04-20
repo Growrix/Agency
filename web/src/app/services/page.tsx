@@ -16,15 +16,14 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { Testimonial } from "@/components/sections/Testimonial";
 import {
 	FAQ_GENERAL,
 	PORTFOLIO,
 	PROCESS_STEPS,
 	SERVICES,
-	TESTIMONIALS,
 } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
@@ -283,13 +282,11 @@ export default function ServicesPage() {
 						))}
 					</RevealGroup>
 
-					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
-						{TESTIMONIALS.map((testimonial) => (
-							<RevealItem key={testimonial.author} className="h-full">
-								<Testimonial data={testimonial} className="h-full" />
-							</RevealItem>
-						))}
-					</RevealGroup>
+					<GoogleReviews
+						eyebrow="Google reviews"
+						title="What clients say after launch."
+						description="Live reviews from the agency Google Business profile."
+					/>
 				</Container>
 			</Section>
 
