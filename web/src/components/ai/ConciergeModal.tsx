@@ -40,7 +40,7 @@ export function ConciergeModal() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[80]"
+          className="fixed inset-0 z-80"
         >
           <button
             type="button"
@@ -55,7 +55,7 @@ export function ConciergeModal() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.98, y: 16 }}
               transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.8 }}
-              className="relative flex h-[100dvh] w-full overflow-hidden rounded-none border border-border bg-surface shadow-(--shadow-3) sm:h-[min(88vh,860px)] sm:w-[min(1120px,calc(100%-2rem))] sm:rounded-[24px]"
+              className="relative flex h-dvh w-full overflow-hidden rounded-none bg-surface shadow-(--shadow-3) sm:h-[min(88vh,860px)] sm:w-[min(1120px,calc(100%-2rem))] sm:rounded-[24px] sm:border sm:border-border"
             >
               <button
                 type="button"
