@@ -1,0 +1,30 @@
+# Ignore environment variable files
+.env
+.env.*
+
+# System files
+.DS_Store
+
+# Dependency directories
+node_modules/
+.pnpm-debug.log*
+
+# Build and output directories
+.next/
+build/
+out/
+coverage/
+
+# Debug and log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
+.replit
+.playwright-mcp/
+*.pem
+*.tsbuildinfo
+
+# Vercel
+.vercel/
