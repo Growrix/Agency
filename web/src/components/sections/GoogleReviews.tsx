@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Motion";
@@ -15,42 +15,48 @@ const googlePlaceId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID;
 const googlePlaceSearchText = process.env.NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT;
 
 type GoogleReviewResult = {
-  author_name?: string;
-  author_url?: string;
+  authorAttribution?: {
+    displayName?: string;
+    uri?: string;
+  };
+  publishTime?: Date;
   rating?: number;
-  relative_time_description?: string;
+  relativePublishTimeDescription?: string;
   text?: string;
-  time?: number;
 };
 
-type GooglePlaceResult = {
-  name?: string;
-  place_id?: string;
+type GooglePlace = {
+  displayName?: string;
+  fetchFields: (request: { fields: string[] }) => Promise<void>;
+  googleMapsURI?: string;
+  id?: string;
   rating?: number;
   reviews?: GoogleReviewResult[];
-  url?: string;
-  user_ratings_total?: number;
+  userRatingCount?: number;
 };
 
-type GooglePlacesService = {
-  findPlaceFromQuery: (
-    request: { fields: string[]; query: string },
-    callback: (results: GooglePlaceResult[] | null, status: string) => void
-  ) => void;
-  getDetails: (
-    request: { fields: string[]; placeId: string },
-    callback: (result: GooglePlaceResult | null, status: string) => void
-  ) => void;
+type GooglePlaceClass = {
+  new (options: { id: string }): GooglePlace;
+  searchByText: (request: {
+    fields: string[];
+    language?: string;
+    maxResultCount?: number;
+    region?: string;
+    textQuery: string;
+  }) => Promise<{ places?: GooglePlace[] }>;
+};
+
+type GooglePlacesLibrary = {
+  Place: GooglePlaceClass;
 };
 
 type GoogleMapsWindow = Window &
   typeof globalThis & {
     __growrixGoogleMapsPromise?: Promise<void>;
+    __growrixGoogleMapsReady?: () => void;
     google?: {
       maps?: {
-        places?: {
-          PlacesService: new (element: Element) => GooglePlacesService;
-        };
+        importLibrary?: (library: string) => Promise<unknown>;
       };
     };
   };
@@ -88,7 +94,7 @@ function getGoogleMapsWindow(): GoogleMapsWindow {
 
 function loadGoogleMaps(apiKey: string): Promise<void> {
   const mapsWindow = getGoogleMapsWindow();
-  if (mapsWindow.google?.maps?.places) {
+  if (mapsWindow.google?.maps?.importLibrary) {
     return Promise.resolve();
   }
   if (mapsWindow.__growrixGoogleMapsPromise) {
@@ -96,35 +102,41 @@ function loadGoogleMaps(apiKey: string): Promise<void> {
   }
 
   mapsWindow.__growrixGoogleMapsPromise = new Promise<void>((resolve, reject) => {
-    const onLoad = () => {
-      if (mapsWindow.google?.maps?.places) {
+    const finish = () => {
+      if (mapsWindow.google?.maps?.importLibrary) {
         resolve();
         return;
       }
-      reject(new Error("Google Maps Places library was not available after script load."));
+      reject(new Error("Google Maps importLibrary API was not available after script load."));
     };
 
     const onError = () => {
+      mapsWindow.__growrixGoogleMapsPromise = undefined;
+      delete mapsWindow.__growrixGoogleMapsReady;
       reject(new Error("Google Maps script failed to load."));
     };
 
     const existingScript = document.querySelector<HTMLScriptElement>('script[data-google-maps-loader="growrix"]');
     if (existingScript) {
-      if (mapsWindow.google?.maps?.places) {
+      if (mapsWindow.google?.maps?.importLibrary) {
         resolve();
         return;
       }
-      existingScript.addEventListener("load", onLoad, { once: true });
+      existingScript.addEventListener("load", finish, { once: true });
       existingScript.addEventListener("error", onError, { once: true });
       return;
     }
+
+    mapsWindow.__growrixGoogleMapsReady = () => {
+      delete mapsWindow.__growrixGoogleMapsReady;
+      finish();
+    };
 
     const script = document.createElement("script");
     script.async = true;
     script.defer = true;
     script.dataset.googleMapsLoader = "growrix";
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=places&loading=async&v=weekly`;
-    script.addEventListener("load", onLoad, { once: true });
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&loading=async&callback=__growrixGoogleMapsReady&v=weekly`;
     script.addEventListener("error", onError, { once: true });
     document.head.appendChild(script);
   });
@@ -132,43 +144,41 @@ function loadGoogleMaps(apiKey: string): Promise<void> {
   return mapsWindow.__growrixGoogleMapsPromise;
 }
 
-function createPlacesService(element: Element): GooglePlacesService {
-  const PlacesService = getGoogleMapsWindow().google?.maps?.places?.PlacesService;
-  if (!PlacesService) {
-    throw new Error("Google Places service is unavailable.");
+async function getPlacesLibrary(apiKey: string): Promise<GooglePlacesLibrary> {
+  await loadGoogleMaps(apiKey);
+
+  const library = await getGoogleMapsWindow().google?.maps?.importLibrary?.("places");
+  if (!library || typeof library !== "object" || !("Place" in library)) {
+    throw new Error("Google Places library could not be loaded.");
   }
-  return new PlacesService(element);
+
+  return library as GooglePlacesLibrary;
 }
 
-function resolvePlaceId(service: GooglePlacesService, searchText: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    service.findPlaceFromQuery({ fields: ["place_id"], query: searchText }, (results, status) => {
-      const placeId = results?.[0]?.place_id;
-      if (status === "OK" && placeId) {
-        resolve(placeId);
-        return;
-      }
-      reject(new Error(`Could not resolve a Google Place ID for \"${searchText}\".`));
-    });
+async function resolvePlaceId(Place: GooglePlaceClass, searchText: string): Promise<string> {
+  const { places } = await Place.searchByText({
+    fields: ["displayName", "id"],
+    language: typeof navigator === "object" ? navigator.language : undefined,
+    maxResultCount: 1,
+    textQuery: searchText,
   });
+
+  const placeId = places?.[0]?.id;
+  if (!placeId) {
+    throw new Error(`Could not resolve a Google Place ID for \"${searchText}\".`);
+  }
+
+  return placeId;
 }
 
-function fetchPlaceDetails(service: GooglePlacesService, placeId: string): Promise<GooglePlaceResult> {
-  return new Promise((resolve, reject) => {
-    service.getDetails(
-      {
-        fields: ["name", "rating", "reviews", "url", "user_ratings_total"],
-        placeId,
-      },
-      (result, status) => {
-        if (status === "OK" && result) {
-          resolve(result);
-          return;
-        }
-        reject(new Error(`Google Place details request failed with status ${status}.`));
-      }
-    );
+async function fetchPlaceDetails(Place: GooglePlaceClass, placeId: string): Promise<GooglePlace> {
+  const place = new Place({ id: placeId });
+
+  await place.fetchFields({
+    fields: ["displayName", "googleMapsURI", "rating", "reviews", "userRatingCount"],
   });
+
+  return place;
 }
 
 function toWriteReviewUrl(placeId: string): string {
@@ -181,14 +191,14 @@ function normalizeReview(review: GoogleReviewResult): LiveReview | null {
     return null;
   }
 
-  const author = review.author_name?.trim() || "Google reviewer";
-  const reviewId = [author, review.time ?? "undated", quote.slice(0, 48)].join("-");
+  const author = review.authorAttribution?.displayName?.trim() || "Google reviewer";
+  const reviewId = [author, review.publishTime?.getTime() ?? "undated", quote.slice(0, 48)].join("-");
 
   return {
     author,
-    authorUrl: review.author_url,
+    authorUrl: review.authorAttribution?.uri,
     id: reviewId,
-    publishedLabel: review.relative_time_description,
+    publishedLabel: review.relativePublishTimeDescription,
     quote,
     rating: typeof review.rating === "number" ? review.rating : undefined,
     role: "Google review",
@@ -244,7 +254,6 @@ export function GoogleReviews({
   showSummary = true,
   title,
 }: GoogleReviewsProps) {
-  const serviceHostRef = useRef<HTMLDivElement>(null);
   const [errorText, setErrorText] = useState<string | null>(null);
   const [reviews, setReviews] = useState<LiveReview[]>([]);
   const [status, setStatus] = useState<"empty" | "error" | "loading" | "ready">("loading");
@@ -260,14 +269,10 @@ export function GoogleReviews({
       if (!googlePlaceId && !googlePlaceSearchText) {
         throw new Error("Set NEXT_PUBLIC_GOOGLE_PLACE_ID or NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT.");
       }
-      if (!serviceHostRef.current) {
-        throw new Error("Google Places host element is unavailable.");
-      }
 
-      await loadGoogleMaps(googleMapsApiKey);
-      const placesService = createPlacesService(serviceHostRef.current);
-      const resolvedPlaceId = googlePlaceId ?? (await resolvePlaceId(placesService, googlePlaceSearchText!));
-      const place = await fetchPlaceDetails(placesService, resolvedPlaceId);
+      const { Place } = await getPlacesLibrary(googleMapsApiKey);
+      const resolvedPlaceId = googlePlaceId || (await resolvePlaceId(Place, googlePlaceSearchText!));
+      const place = await fetchPlaceDetails(Place, resolvedPlaceId);
       const nextReviews = (place.reviews ?? [])
         .map(normalizeReview)
         .filter((review): review is LiveReview => review !== null)
@@ -278,10 +283,10 @@ export function GoogleReviews({
       }
 
       setSummary({
-        name: place.name || "Growrix OS",
-        profileUrl: place.url,
+        name: place.displayName || "Growrix OS",
+        profileUrl: place.googleMapsURI,
         rating: typeof place.rating === "number" ? place.rating : undefined,
-        totalRatings: typeof place.user_ratings_total === "number" ? place.user_ratings_total : undefined,
+        totalRatings: typeof place.userRatingCount === "number" ? place.userRatingCount : undefined,
         writeReviewUrl: toWriteReviewUrl(resolvedPlaceId),
       });
 
@@ -316,8 +321,6 @@ export function GoogleReviews({
 
   return (
     <div className={className}>
-      <div ref={serviceHostRef} className="h-0 w-0 overflow-hidden" aria-hidden />
-
       <SectionHeading eyebrow={eyebrow} title={title} description={description} align={align} />
 
       {showSummary && (status === "ready" || status === "empty") && summary && (
@@ -368,7 +371,7 @@ export function GoogleReviews({
               {errorText ?? "Check your Google Maps API setup."}
             </p>
             <p className="mt-3 text-sm leading-6 text-text-muted">
-              Make sure the Google Maps JavaScript API and Places API are enabled, and keep the public key referrer-restricted to your website domain.
+              Make sure the Google Maps JavaScript API, Places API, and Places API (New) are enabled, and keep the public key referrer-restricted to your website domain.
             </p>
           </Card>
         </Reveal>
