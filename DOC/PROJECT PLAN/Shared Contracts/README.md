@@ -101,7 +101,7 @@ The system consists of four distinct surfaces, each with specific purposes, rout
 
 ### AI Concierge Contract Rules
 
-- The Ask the concierge CTA opens the dedicated `/ai-concierge` chat interface; the launcher and mobile chat entry should route into the same surface.
+- The Ask the concierge CTA, launcher, and mobile chat entry open the shared popup chat surface first; the dedicated `/ai-concierge` route remains available as a full-page fallback and shareable destination.
 - The concierge may answer only from approved internal Growrix content sources: services, pricing guidance, FAQs, portfolio proof, shop catalog, booking/contact instructions, and policy copy.
 - The concierge must not use open-web browsing or unsupported model knowledge as a response source.
 - If the request is outside approved knowledge, the concierge must return a bounded no-answer response and offer escalation to WhatsApp, booking, or contact.

@@ -59,6 +59,9 @@ task_status_counts:
 	- DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
+- Active implementation session:
+  - hardened the AI concierge answer pipeline so grounded questions now resolve to `answered` instead of collapsing into `no_answer`
+  - aligned runtime page context and contract wording with the current popup-first concierge activation model
 - Working conclusion:
 	- the documented frontend surface is largely implemented
 	- the documented backend, API, Security, DevOps, and QA phases are still mostly documentation-only, though the AI concierge now has an initial server-backed slice
@@ -149,7 +152,7 @@ phases:
 	- `web/src/app/api/v1/appointments/[appointmentId]/route.ts`
 	- `web/src/app/api/v1/ai-concierge/route.ts`
 	- `web/src/app/api/v1/chat/start/route.ts`
-  - AI concierge implementation note: `POST /api/v1/ai-concierge` now exists as a grounded OpenAI-backed endpoint that answers only from curated Growrix content, returns source metadata, and falls back to `no_answer` plus escalation when the knowledge base does not support the request.
+  - AI concierge implementation note: `POST /api/v1/ai-concierge` now exists as a grounded OpenAI-backed endpoint that answers only from curated Growrix content, returns source metadata, normalizes model success states to the contract response model, uses the live page path as request context, and falls back to `no_answer` plus escalation when the knowledge base does not support the request.
 - [ ] T018 Implement commerce APIs at:
 	- `web/src/app/api/v1/orders/route.ts`
 	- `web/src/app/api/v1/orders/[orderId]/route.ts`
@@ -195,6 +198,7 @@ phases:
 - Shared trust sections can now pull live Google Business reviews through the frontend Google Maps integration.
 - The shop browsing and product preview experience exists in code.
 - The AI concierge route now renders a real chat UI and the site includes a first server-backed `/api/v1/ai-concierge` endpoint grounded in current website content only.
+- The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
 

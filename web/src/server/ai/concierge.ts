@@ -38,9 +38,9 @@ export type ConciergeReply = {
 
 type OpenAiJsonReply = {
   answer?: string;
-  response_state?: ConciergeResponseState;
+  response_state?: string;
   source_ids?: string[];
-  action_ids?: ConciergeActionKey[];
+  action_ids?: string[];
 };
 
 function isActionKey(value: string): value is ConciergeActionKey {
@@ -77,7 +77,7 @@ async function requestChatCompletion(apiKey: string, message: string, pagePath: 
           {
             role: "system",
             content:
-              "You are the Growrix OS AI concierge. Answer only from the supplied internal knowledge. Never use outside knowledge. If the supplied knowledge does not support the answer, return response_state no_answer. Respond as JSON with keys: answer, response_state, source_ids, action_ids. Keep answers concise, business-aware, and practical.",
+              "You are the Growrix OS AI concierge. Answer only from the supplied internal knowledge. Never use outside knowledge. If the supplied knowledge supports the answer, use response_state answered. If the supplied knowledge does not support the answer, use response_state no_answer. Use escalation only when human follow-up is clearly the best next step. Respond as JSON with keys: answer, response_state, source_ids, action_ids. The only valid response_state values are answered, no_answer, and escalation. Keep answers concise, business-aware, and practical.",
           },
           {
             role: "user",
@@ -128,12 +128,22 @@ function parseJsonPayload(payload: string | null | undefined) {
   }
 }
 
-function normalizeResponseState(value: string | undefined): ConciergeResponseState {
-  if (value === "answered" || value === "no_answer" || value === "escalation") {
-    return value;
+function normalizeResponseState(input: {
+  answer: string;
+  hasSources: boolean;
+  value: string | undefined;
+}): ConciergeResponseState {
+  const normalizedValue = input.value?.trim().toLowerCase();
+
+  if (normalizedValue === "answered" || normalizedValue === "no_answer" || normalizedValue === "escalation") {
+    return normalizedValue;
   }
 
-  if (value === "provided") {
+  if (normalizedValue === "provided" || normalizedValue === "success" || normalizedValue === "supported") {
+    return "answered";
+  }
+
+  if (input.answer.trim().length > 0 && input.hasSources) {
     return "answered";
   }
 
@@ -171,7 +181,9 @@ export async function generateConciergeReply(input: {
     return buildNoAnswer(sessionId);
   }
 
-  const sourceIds = (parsed.source_ids || []).filter((id): id is string => knowledgeById.has(id));
+  const sourceIds = Array.isArray(parsed.source_ids)
+    ? parsed.source_ids.filter((id): id is string => typeof id === "string" && knowledgeById.has(id))
+    : [];
   const resolvedSources = (sourceIds.length > 0 ? sourceIds : knowledge.slice(0, 3).map((item) => item.id))
     .map((id) => knowledgeById.get(id))
     .filter((value): value is NonNullable<typeof value> => Boolean(value))
@@ -187,7 +199,11 @@ export async function generateConciergeReply(input: {
     .filter(Boolean)
     .slice(0, 3);
 
-  const responseState = normalizeResponseState(parsed.response_state);
+  const responseState = normalizeResponseState({
+    answer: parsed.answer,
+    hasSources: resolvedSources.length > 0,
+    value: parsed.response_state,
+  });
   const finalResponseState = responseState === "answered" && resolvedSources.length === 0 ? "no_answer" : responseState;
 
   return {

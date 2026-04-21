@@ -9,3 +9,4 @@
 [  601789ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5001/about?_rsc=1r34m:0
 [  601790ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5001/pricing?_rsc=1r34m:0
 [  601993ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5001/?_rsc=1r34m:0
+[  644923ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:5001/book-appointment?_rsc=1r34m:0
