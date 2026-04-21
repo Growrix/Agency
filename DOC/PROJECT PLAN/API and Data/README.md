@@ -230,6 +230,59 @@ All requests must include:
 
 ---
 
+### conversation_sessions
+- **id** (UUID, PK)
+- **channel** (ENUM: ai_concierge, launcher)
+- **visitor_id** (UUID, nullable)
+- **visitor_email** (VARCHAR 255, nullable)
+- **status** (ENUM: active, handed_off, closed)
+- **last_intent** (ENUM: pricing, services, timeline, product_fit, booking, support, other)
+- **recommended_route** (VARCHAR 255, nullable)
+- **created_at, updated_at, last_message_at** (TIMESTAMP UTC)
+
+**Indexes**: status, visitor_email, last_message_at
+
+---
+
+### conversation_messages
+- **id** (UUID, PK)
+- **session_id** (UUID, FK conversation_sessions)
+- **role** (ENUM: user, assistant, system)
+- **content** (TEXT)
+- **response_state** (ENUM: answered, no_answer, escalation)
+- **source_refs** (JSONB array)
+- **created_at** (TIMESTAMP UTC)
+
+**Indexes**: session_id (FK), created_at
+
+---
+
+### knowledge_documents
+- **id** (UUID, PK)
+- **source_type** (ENUM: service, faq, portfolio, product, policy, manual_note)
+- **source_path** (VARCHAR 255)
+- **title** (VARCHAR 255)
+- **status** (ENUM: draft, active, archived)
+- **content_hash** (VARCHAR 255)
+- **published_at, created_at, updated_at** (TIMESTAMP UTC)
+
+**Indexes**: source_type, status, source_path
+
+---
+
+### knowledge_chunks
+- **id** (UUID, PK)
+- **document_id** (UUID, FK knowledge_documents)
+- **chunk_text** (TEXT)
+- **embedding_key** (VARCHAR 255)
+- **token_count** (INT)
+- **sort_order** (INT)
+- **created_at, updated_at** (TIMESTAMP UTC)
+
+**Indexes**: document_id (FK), embedding_key
+
+---
+
 ## API Endpoints
 
 ### Authentication
@@ -349,6 +402,48 @@ Response: full Appointment object
 }
 ```
 Response: `{ id, status: "new", message: "Thank you, we'll respond soon" }`
+
+---
+
+### AI Concierge
+
+**POST /ai-concierge**
+```json
+{
+  "session_id": "550e8400-e29b-41d4-a716-446655440000",
+  "message": "What does a typical SaaS rebuild engagement cost?",
+  "channel": "ai_concierge",
+  "page_path": "/ai-concierge"
+}
+```
+Response:
+```json
+{
+  "session_id": "550e8400-e29b-41d4-a716-446655440000",
+  "message_id": "550e8400-e29b-41d4-a716-446655440001",
+  "response_state": "answered",
+  "answer": "We usually scope SaaS rebuilds through a paid discovery sprint before confirming implementation cost.",
+  "sources": [
+    {
+      "label": "Pricing",
+      "source_type": "service",
+      "source_path": "/pricing"
+    }
+  ],
+  "suggested_actions": [
+    { "label": "Book appointment", "href": "/book-appointment" },
+    { "label": "Open WhatsApp", "href": "https://wa.me/0000000000" }
+  ]
+}
+```
+
+Rules:
+- `response_state` must be one of `answered`, `no_answer`, or `escalation`.
+- `sources` must be present for every `answered` response.
+- If no grounded answer exists, `answer` must explicitly state that the assistant only replies from approved Growrix content and offer escalation.
+
+**GET /ai-concierge/[sessionId]**
+Response: `{ session, messages[] }`
 
 ---
 

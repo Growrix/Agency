@@ -78,7 +78,7 @@ recommended_next_reads:
 ## Global Navigation Model
 - Header links: Services, Shop, Portfolio, Blog, Pricing, About, AI Concierge.
 - Persistent primary CTA: Book Appointment.
-- Persistent secondary utilities: Live Chat, WhatsApp, Cart.
+- Persistent secondary utilities: AI popup chat, WhatsApp, Cart.
 - Footer groups: Services, Shop Categories, Insights, Company, Support, Legal.
 - Deep-link behavior: every service card, case study teaser, and featured product routes to a detail surface.
 
@@ -86,10 +86,10 @@ recommended_next_reads:
 - Bottom dock items: Home, Services, Shop, Portfolio, Chat.
 - Sticky mobile action bar: Book, WhatsApp, Cart.
 - Drawer menu for secondary pages: Pricing, About, Contact, FAQ, Legal.
-- Mobile filters, cart, and chat use bottom sheets instead of full-page interruptions where possible.
+- Mobile filters, cart, and chat use sheets or modal overlays instead of full-page interruptions where possible.
 
 ## Shared Conversion Infrastructure
-- AI chat widget pinned globally with contextual prompts per page.
+- AI chat launcher pinned globally with a shared popup conversation surface and contextual prompts per page.
 - Live chat entry for high-intent pages and support pages.
 - WhatsApp CTA in header utility, mobile sticky action, AI fallback, and contact surfaces.
 - Booking flow connected from hero sections, service pages, pricing, and AI escalation.

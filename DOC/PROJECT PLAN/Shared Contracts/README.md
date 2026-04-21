@@ -99,6 +99,14 @@ The system consists of four distinct surfaces, each with specific purposes, rout
 - `POST /api/v1/ai-concierge`: LLM chat query for FAQ/service questions
 - `POST /api/v1/chat/start`: initiate live chat session
 
+### AI Concierge Contract Rules
+
+- The Ask the concierge CTA opens the dedicated `/ai-concierge` chat interface; the launcher and mobile chat entry should route into the same surface.
+- The concierge may answer only from approved internal Growrix content sources: services, pricing guidance, FAQs, portfolio proof, shop catalog, booking/contact instructions, and policy copy.
+- The concierge must not use open-web browsing or unsupported model knowledge as a response source.
+- If the request is outside approved knowledge, the concierge must return a bounded no-answer response and offer escalation to WhatsApp, booking, or contact.
+- The backend owns grounding, prompt policy, lead qualification, and source attribution; the frontend owns chat rendering, composer state, and escalation UX.
+
 ### Commerce Endpoints
 
 - `POST /api/v1/orders`: create order (Stripe payment processing)
@@ -131,7 +139,7 @@ The system consists of four distinct surfaces, each with specific purposes, rout
 | **WhatsApp** | Escalation from chat | Backend + Chat | WhatsApp Business API or Zapier |
 | **Calendar API** | Availability & booking | Backend | Google Calendar or similar |
 | **Email Service** | Transactional & marketing | Backend | SendGrid, SES, or similar |
-| **AI/LLM** | Concierge chatbot | Backend | OpenAI, Anthropic, or similar |
+| **AI/LLM** | Grounded concierge chatbot | Backend | OpenAI Responses API or similar with retrieval over curated internal knowledge only |
 | **Live Chat** | Real-time support | Frontend + Backend | Intercom, Drift, or custom |
 | **Analytics** | Behavior tracking, conversions | Frontend + Backend | Google Analytics, Mixpanel |
 | **Zapier** | Workflow automation | Backend | Order fulfillment, CRM sync |
@@ -192,7 +200,8 @@ The system consists of four distinct surfaces, each with specific purposes, rout
 - Customer order history
 
 ### Phase 3: AI Concierge (Weeks 9–11)
-- AI chatbot for FAQ and service questions
+- Grounded AI chat for FAQ, service, pricing, timeline, and product-fit questions
+- Curated knowledge ingestion from approved internal content only
 - WhatsApp escalation
 - Lead qualification
 

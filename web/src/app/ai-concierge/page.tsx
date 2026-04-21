@@ -1,22 +1,25 @@
 import type { Metadata } from "next";
-import { ComingSoon } from "@/components/sections/ComingSoon";
+import { Suspense } from "react";
+import { ConciergeChat } from "@/components/ai/ConciergeChat";
 
 export const metadata: Metadata = {
   title: "AI Concierge",
   description: "Get instant, business-aware answers about Growrix OS services, pricing, and timelines.",
 };
 
-export default function AIConciergePage() {
+type AIConciergePageProps = {
+  searchParams?: Promise<{ q?: string | string[] }>;
+};
+
+export default async function AIConciergePage({ searchParams }: AIConciergePageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const query = Array.isArray(resolvedSearchParams?.q)
+    ? resolvedSearchParams.q[0]
+    : resolvedSearchParams?.q;
+
   return (
-    <ComingSoon
-      eyebrow="AI Concierge · Training"
-      title="The concierge is being trained on our service playbook."
-      description="It will answer scope, pricing, timeline, and product-fit questions instantly and route you to the right next step. Until then, our team responds in 2 business hours."
-      alternatives={[
-        { label: "FAQ", href: "/faq", description: "Searchable answers." },
-        { label: "Contact form", href: "/contact", description: "Send a brief." },
-        { label: "WhatsApp", href: "https://wa.me/0000000000", description: "Conversational." },
-      ]}
-    />
+    <Suspense fallback={null}>
+      <ConciergeChat initialPrompt={query} />
+    </Suspense>
   );
 }

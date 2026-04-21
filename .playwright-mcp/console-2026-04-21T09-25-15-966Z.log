@@ -1,0 +1,21 @@
+[     430ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   13010ms] [LOG] [Fast Refresh] done in 12103ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   15472ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   15951ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   60034ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   62487ms] [LOG] [Fast Refresh] done in 2554ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   64482ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5000/api/v1/ai-concierge:0
+[  132905ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5000/api/v1/ai-concierge:0
+[  231664ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  232473ms] [LOG] [Fast Refresh] done in 879ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  232582ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  233255ms] [LOG] [Fast Refresh] done in 776ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  233370ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  234004ms] [LOG] [Fast Refresh] done in 749ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  234255ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  235922ms] [LOG] [Fast Refresh] done in 1901ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  236058ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  236134ms] [LOG] [Fast Refresh] done in 180ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  236248ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  236606ms] [LOG] [Fast Refresh] done in 471ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[  359160ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5000/api/v1/ai-concierge:0

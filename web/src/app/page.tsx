@@ -23,6 +23,7 @@ import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
+import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
@@ -355,9 +356,9 @@ export default function Home() {
                 description="Ask anything about scope, pricing, timelines, or product fit. The concierge knows our services and routes you to the best next step — chat, WhatsApp, or a call."
               />
               <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href="/ai-concierge">
+                <ConciergeTriggerButton>
                   <SparklesIcon className="size-4" /> Ask the concierge
-                </LinkButton>
+                </ConciergeTriggerButton>
                 <LinkButton href={WHATSAPP_HREF} variant="outline">
                   <ChatBubbleLeftRightIcon className="size-4" /> WhatsApp
                 </LinkButton>

@@ -136,18 +136,24 @@ The backend is organized into loosely-coupled services, each with clear responsi
 ---
 
 ### AI Concierge Service
-**Responsibility**: chatbot responses, lead qualification, service recommendation
+**Responsibility**: grounded chatbot responses, lead qualification, service recommendation, and safe escalation
 
-**Models**: ConversationSession, Message, LLMQuery, QualifiedLead
+**Models**: ConversationSession, Message, LLMQuery, QualifiedLead, KnowledgeDocument, KnowledgeChunk
 
 **Endpoints**:
 - `POST /api/v1/ai-concierge`
 - `GET /api/v1/ai-concierge/[sessionId]`
 
 **Integrations**:
-- LLM service (OpenAI, Anthropic, or similar)
+- LLM service (OpenAI Responses API or similar)
+- Internal knowledge base service built from approved Growrix content
 - CRM service (save conversations, track leads)
 - Email service (route high-intent leads to sales)
+
+**Behavior rules**:
+- Retrieval is restricted to approved internal content; no open-web tools or uncontrolled knowledge sources.
+- When retrieval does not produce a grounded answer, the service returns a no-answer state instead of improvising.
+- Responses should include source metadata for frontend rendering and suggested escalation actions when confidence is low or human follow-up is preferred.
 
 ---
 

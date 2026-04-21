@@ -12,6 +12,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
+import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata = {
@@ -42,9 +43,9 @@ export default function NotFound() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <LinkButton href="/" size="lg">Go home</LinkButton>
-            <LinkButton href="/ai-concierge" variant="outline" size="lg">
+            <ConciergeTriggerButton variant="outline" size="lg">
               <SparklesIcon className="size-4" /> Open concierge
-            </LinkButton>
+            </ConciergeTriggerButton>
           </div>
         </div>
 
