@@ -85,6 +85,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
   const [sessionId, setSessionId] = useState<string | undefined>();
 
   const isModal = mode === "modal";
+  const isMobileModal = isModal;
   const showStarterPrompts = messages.length === 1;
 
   useEffect(() => {
@@ -179,7 +180,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
   const conversationCard = (
     <div
       className={cn(
-        "flex min-h-0 flex-1 flex-col overflow-hidden",
+        "flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden",
         isModal
           ? "h-full bg-surface"
           : "min-h-[70vh] rounded-[16px] border border-border bg-surface shadow-(--shadow-1)"
@@ -205,13 +206,13 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           <div
             key={message.id}
             className={cn(
-              "flex",
+              "flex min-w-0",
               message.role === "user" ? "justify-end" : "justify-start"
             )}
           >
             <div
               className={cn(
-                "max-w-[88%] px-4 py-3 text-sm leading-6 shadow-(--shadow-1) sm:max-w-[78%]",
+                "min-w-0 max-w-[88%] wrap-break-word px-4 py-3 text-sm leading-6 shadow-(--shadow-1) sm:max-w-[78%]",
                 message.role === "user"
                   ? "rounded-[18px] rounded-br-xs bg-primary text-white"
                   : message.responseState === "no_answer"
@@ -272,7 +273,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           <div
             className={cn(
               "mb-3 flex gap-2",
-              isModal ? "-mx-1 overflow-x-auto px-1 pb-1" : "flex-wrap"
+              isModal ? "no-scrollbar -mx-1 overflow-x-auto overflow-y-hidden px-1 pb-1" : "flex-wrap"
             )}
           >
             {STARTER_PROMPTS.map((prompt) => (
@@ -291,7 +292,13 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex items-end gap-3">
+        <form
+          onSubmit={handleSubmit}
+          className={cn(
+            "min-w-0 gap-3",
+            isMobileModal ? "flex flex-col items-stretch sm:flex-row sm:items-end" : "flex items-end"
+          )}
+        >
           <label className="sr-only" htmlFor={isModal ? "concierge-input-modal" : "concierge-input-page"}>
             Ask the concierge
           </label>
@@ -303,14 +310,17 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
             rows={isModal ? 2 : 3}
             maxLength={600}
             className={cn(
-              "flex-1 resize-none rounded-[14px] border border-border bg-surface px-4 py-3 text-sm leading-6 outline-none focus:border-primary",
+              "w-full flex-1 resize-none rounded-[14px] border border-border bg-surface px-4 py-3 text-sm leading-6 outline-none focus:border-primary",
               isModal ? "min-h-14 max-h-40" : "min-h-24"
             )}
           />
           <Button
             type="submit"
             size={isModal ? "sm" : "md"}
-            className={cn("shrink-0", isModal && "h-12 px-4")}
+            className={cn(
+              "shrink-0 justify-center",
+              isModal && "h-12 self-end min-w-28 px-4 sm:w-auto"
+            )}
             disabled={pending || input.trim().length < 2}
           >
             <PaperAirplaneIcon className="size-4" /> Send
@@ -376,7 +386,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         </div>
 
         <div className="grid min-h-0 flex-1 gap-0 overflow-hidden lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-4">
-          <div className="min-h-0">{conversationCard}</div>
+          <div className="min-h-0 min-w-0 lg:border-r lg:border-border">{conversationCard}</div>
           <div className="hidden overflow-y-auto border-l border-border bg-inset/40 p-5 lg:block">{escalationRail}</div>
         </div>
       </div>
