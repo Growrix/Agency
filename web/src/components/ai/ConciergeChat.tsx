@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   ArrowUpRightIcon,
@@ -75,6 +76,7 @@ type ConciergeExperienceProps = {
 };
 
 export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: ConciergeExperienceProps) {
+  const pathname = usePathname();
   const seededPromptHandled = useRef<string | null>(null);
   const threadRef = useRef<HTMLDivElement | null>(null);
   const [input, setInput] = useState("");
@@ -112,7 +114,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         },
         body: JSON.stringify({
           message,
-          pagePath: "/ai-concierge",
+          pagePath: pathname || "/ai-concierge",
           sessionId,
         }),
       });
