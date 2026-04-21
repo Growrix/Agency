@@ -1,6 +1,18 @@
 import { Fragment } from "react";
 import type { BlogBodyBlock } from "@/lib/content";
 
+export function getProseHeadingId(text: string, index: number) {
+  const slug = text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return `${slug || "section"}-${index}`;
+}
+
 export function ProseArticle({ blocks }: { blocks: BlogBodyBlock[] }) {
   return (
     <div className="prose-article">
@@ -9,9 +21,17 @@ export function ProseArticle({ blocks }: { blocks: BlogBodyBlock[] }) {
           case "p":
             return <p key={i}>{b.text}</p>;
           case "h2":
-            return <h2 key={i}>{b.text}</h2>;
+            return (
+              <h2 key={i} id={getProseHeadingId(b.text, i)} className="scroll-mt-28">
+                {b.text}
+              </h2>
+            );
           case "h3":
-            return <h3 key={i}>{b.text}</h3>;
+            return (
+              <h3 key={i} id={getProseHeadingId(b.text, i)} className="scroll-mt-28">
+                {b.text}
+              </h3>
+            );
           case "ul":
             return (
               <ul key={i}>

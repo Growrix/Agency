@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { LinkIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { cn } from "@/lib/utils";
 
 function TwitterIcon({ className }: { className?: string }) {
   return (
@@ -32,7 +33,15 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export function ShareRail({ url, title }: { url: string; title: string }) {
+export function ShareRail({
+  url,
+  title,
+  className,
+}: {
+  url: string;
+  title: string;
+  className?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   function copy() {
@@ -69,8 +78,13 @@ export function ShareRail({ url, title }: { url: string; title: string }) {
   ];
 
   return (
-    <div className="lg:sticky lg:top-24 flex lg:flex-col gap-2 items-center justify-start">
-      <span className="hidden lg:block font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-1">
+    <div
+      className={cn(
+        "flex items-center justify-start gap-2 overflow-x-auto pb-1 xl:sticky xl:top-24 xl:flex-col xl:items-center xl:overflow-visible xl:pb-0",
+        className
+      )}
+    >
+      <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] xl:mb-1">
         Share
       </span>
       {links.map(({ label, href, Icon }) => (
@@ -80,7 +94,7 @@ export function ShareRail({ url, title }: { url: string; title: string }) {
           target="_blank"
           rel="noreferrer"
           aria-label={label}
-          className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors"
+          className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors"
         >
           <Icon className="size-4" />
         </a>
@@ -88,7 +102,7 @@ export function ShareRail({ url, title }: { url: string; title: string }) {
       <button
         onClick={copy}
         aria-label={copied ? "Link copied" : "Copy link"}
-        className="inline-flex size-10 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors"
+        className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors"
       >
         {copied ? <CheckIcon className="size-4 text-[var(--color-success)]" /> : <LinkIcon className="size-4" />}
       </button>
