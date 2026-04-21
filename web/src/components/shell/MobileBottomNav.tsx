@@ -17,6 +17,7 @@ import {
   ChatBubbleLeftRightIcon as ChatFilled,
 } from "@heroicons/react/24/solid";
 import { cn } from "@/lib/utils";
+import { useConciergeStore } from "@/lib/concierge-store";
 
 const ITEMS = [
   { label: "Home", href: "/", icon: HomeIcon, active: HomeFilled },
@@ -27,6 +28,8 @@ const ITEMS = [
 ];
 
 export function MobileBottomNav() {
+  const openConcierge = useConciergeStore((state) => state.open);
+  const isConciergeOpen = useConciergeStore((state) => state.isOpen);
   const pathname = usePathname();
   return (
     <nav
@@ -35,20 +38,36 @@ export function MobileBottomNav() {
     >
       <ul className="grid grid-cols-5">
         {ITEMS.map((item) => {
-          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+          const isActive = item.href === "/ai-concierge"
+            ? isConciergeOpen
+            : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           const Icon = isActive ? item.active : item.icon;
           return (
             <li key={item.label}>
-              <Link
-                href={item.href}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
-                  isActive ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"
-                )}
-              >
-                <Icon className="size-5" aria-hidden />
-                {item.label}
-              </Link>
+              {item.href === "/ai-concierge" ? (
+                <button
+                  type="button"
+                  onClick={() => openConcierge()}
+                  className={cn(
+                    "flex w-full flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
+                    isActive ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"
+                  )}
+                >
+                  <Icon className="size-5" aria-hidden />
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
+                    isActive ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"
+                  )}
+                >
+                  <Icon className="size-5" aria-hidden />
+                  {item.label}
+                </Link>
+              )}
             </li>
           );
         })}

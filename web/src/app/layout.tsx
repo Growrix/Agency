@@ -6,6 +6,7 @@ import { Footer } from "@/components/shell/Footer";
 import { MobileBottomNav } from "@/components/shell/MobileBottomNav";
 import { UtilityRibbon } from "@/components/shell/UtilityRibbon";
 import { ChatLauncher } from "@/components/shell/ChatLauncher";
+import { ConciergeModal } from "@/components/ai/ConciergeModal";
 import { MotionRoot, RouteTransition } from "@/components/motion/Motion";
 
 const sans = Manrope({
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <MobileBottomNav />
           <ChatLauncher />
+          <ConciergeModal />
         </MotionRoot>
       </body>
     </html>

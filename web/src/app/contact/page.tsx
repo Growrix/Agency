@@ -21,6 +21,7 @@ import { motion } from "@/components/motion/Motion";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { FAQ_GENERAL } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { useConciergeStore } from "@/lib/concierge-store";
 
 const CHANNELS = [
   { icon: PaperAirplaneIcon, name: "Inquiry form", description: "Best for project briefs and detailed scoping requests.", action: "Use the form below", href: "#form", recommended: true },
@@ -42,6 +43,7 @@ const BUDGET_BANDS = ["< $10k", "$10k – $30k", "$30k – $80k", "$80k – $200
 const URGENCY = ["Exploring", "Within 30 days", "Within 90 days", "ASAP"];
 
 export default function ContactPage() {
+  const openConcierge = useConciergeStore((state) => state.open);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -83,19 +85,35 @@ export default function ContactPage() {
           <SectionHeading eyebrow="Channels" title="Pick the route that fits." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {CHANNELS.map((c) => (
-              <Link key={c.name} href={c.href} className="group">
-                <Card hoverable className={cn("h-full", c.recommended && "border-[var(--color-primary)]/50 ring-1 ring-[var(--color-primary)]/30")}>
-                  <div className="flex items-start justify-between">
-                    <div className="inline-flex size-10 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
-                      <c.icon className="size-5" />
+              c.name === "AI Concierge" ? (
+                <button key={c.name} type="button" onClick={() => openConcierge()} className="group text-left">
+                  <Card hoverable className={cn("h-full", c.recommended && "border-[var(--color-primary)]/50 ring-1 ring-[var(--color-primary)]/30")}>
+                    <div className="flex items-start justify-between">
+                      <div className="inline-flex size-10 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+                        <c.icon className="size-5" />
+                      </div>
+                      {c.recommended && <Badge tone="primary">Recommended</Badge>}
                     </div>
-                    {c.recommended && <Badge tone="primary">Recommended</Badge>}
-                  </div>
-                  <h3 className="mt-4 font-display text-lg tracking-tight">{c.name}</h3>
-                  <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{c.description}</p>
-                  <p className="mt-4 text-sm font-medium text-[var(--color-primary)]">{c.action} →</p>
-                </Card>
-              </Link>
+                    <h3 className="mt-4 font-display text-lg tracking-tight">{c.name}</h3>
+                    <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{c.description}</p>
+                    <p className="mt-4 text-sm font-medium text-[var(--color-primary)]">{c.action} →</p>
+                  </Card>
+                </button>
+              ) : (
+                <Link key={c.name} href={c.href} className="group">
+                  <Card hoverable className={cn("h-full", c.recommended && "border-[var(--color-primary)]/50 ring-1 ring-[var(--color-primary)]/30")}>
+                    <div className="flex items-start justify-between">
+                      <div className="inline-flex size-10 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+                        <c.icon className="size-5" />
+                      </div>
+                      {c.recommended && <Badge tone="primary">Recommended</Badge>}
+                    </div>
+                    <h3 className="mt-4 font-display text-lg tracking-tight">{c.name}</h3>
+                    <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{c.description}</p>
+                    <p className="mt-4 text-sm font-medium text-[var(--color-primary)]">{c.action} →</p>
+                  </Card>
+                </Link>
+              )
             ))}
           </div>
         </Container>

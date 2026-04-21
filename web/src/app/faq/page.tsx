@@ -10,6 +10,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
+import { ConciergeTrigger, ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
@@ -127,7 +128,7 @@ export default function FAQPage() {
                 <p className="font-display text-xl tracking-tight">No matches.</p>
                 <p className="mt-2 text-[var(--color-text-muted)]">Try a different keyword or open the concierge.</p>
                 <div className="mt-5 flex justify-center gap-3">
-                  <LinkButton href="/ai-concierge" variant="outline"><SparklesIcon className="size-4" /> Ask AI</LinkButton>
+                  <ConciergeTriggerButton variant="outline"><SparklesIcon className="size-4" /> Ask AI</ConciergeTriggerButton>
                   <LinkButton href={WHATSAPP_HREF}><ChatBubbleLeftRightIcon className="size-4" /> WhatsApp</LinkButton>
                 </div>
               </div>
@@ -142,18 +143,24 @@ export default function FAQPage() {
         <Container>
           <SectionHeading eyebrow="Still stuck" title="Pick a faster route." align="center" />
           <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
-            {[
-              { icon: SparklesIcon, label: "AI Concierge", href: "/ai-concierge" },
-              { icon: ChatBubbleLeftRightIcon, label: "WhatsApp", href: WHATSAPP_HREF },
-              { icon: CalendarDaysIcon, label: "Book a call", href: "/book-appointment" },
-            ].map((c) => (
-              <Link key={c.label} href={c.href}>
-                <Card hoverable className="text-center">
-                  <c.icon className="mx-auto size-7 text-[var(--color-primary)]" aria-hidden />
-                  <p className="mt-3 font-display text-lg tracking-tight">{c.label}</p>
-                </Card>
-              </Link>
-            ))}
+            <ConciergeTrigger className="text-left">
+              <Card hoverable className="text-center">
+                <SparklesIcon className="mx-auto size-7 text-[var(--color-primary)]" aria-hidden />
+                <p className="mt-3 font-display text-lg tracking-tight">AI Concierge</p>
+              </Card>
+            </ConciergeTrigger>
+            <Link href={WHATSAPP_HREF}>
+              <Card hoverable className="text-center">
+                <ChatBubbleLeftRightIcon className="mx-auto size-7 text-[var(--color-primary)]" aria-hidden />
+                <p className="mt-3 font-display text-lg tracking-tight">WhatsApp</p>
+              </Card>
+            </Link>
+            <Link href="/book-appointment">
+              <Card hoverable className="text-center">
+                <CalendarDaysIcon className="mx-auto size-7 text-[var(--color-primary)]" aria-hidden />
+                <p className="mt-3 font-display text-lg tracking-tight">Book a call</p>
+              </Card>
+            </Link>
           </div>
         </Container>
       </Section>

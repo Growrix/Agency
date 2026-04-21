@@ -1,0 +1,298 @@
+[    2515ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    3163ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[    5244ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://places.googleapis.com/$rpc/google.maps.places.v1.Places/SearchText:0
+[ 4716930ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4717667ms] [LOG] [Fast Refresh] done in 837ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4972484ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4975657ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4976590ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4982137ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4988099ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4988105ms] [LOG] [Fast Refresh] done in 15650ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4988257ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4988470ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4988488ms] [LOG] [Fast Refresh] done in 274ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4988631ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4989152ms] [LOG] [Fast Refresh] done in 636ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4991142ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 4991745ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5447652ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5447725ms] [LOG] [Fast Refresh] done in 120ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5447731ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5448280ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5448321ms] [LOG] [Fast Refresh] done in 541ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5448438ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5449473ms] [LOG] [Fast Refresh] done in 1149ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5449686ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5451367ms] [LOG] [Fast Refresh] done in 1823ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5452013ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5452665ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5453188ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5455073ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace:0
+[ 5458164ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5458339ms] [LOG] [Fast Refresh] done in 285ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5481176ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5483070ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5483126ms] [LOG] [Fast Refresh] done in 2001ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5483349ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5484653ms] [LOG] [Fast Refresh] done in 1452ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5484811ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5486535ms] [LOG] [Fast Refresh] done in 1834ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5489539ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5490019ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 5492856ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace:0
+[ 6905231ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6905288ms] [LOG] [Fast Refresh] done in 40ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6905321ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6905527ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6905532ms] [LOG] [Fast Refresh] done in 236ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6905705ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6906315ms] [LOG] [Fast Refresh] done in 721ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6911062ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6911899ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6912165ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912169ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912345ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912477ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912569ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912656ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912784ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:916:37)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11800:61
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:11799:40)
+    at http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13967:64
+    at startTransition (http://localhost:5000/_next/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:1279:31)
+    at processMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:5000/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13335:52)
+[ 6912938ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6913255ms] [ERROR] Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously tries to update the component. Move this work to useEffect instead. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[ 6913292ms] [LOG] [Fast Refresh] done in 422ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6913406ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6914774ms] [LOG] [Fast Refresh] done in 1474ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6915230ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6916514ms] [LOG] [Fast Refresh] done in 490ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6916619ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6916722ms] [LOG] [Fast Refresh] done in 207ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6916834ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6917084ms] [LOG] [Fast Refresh] done in 353ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6918218ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6919308ms] [LOG] [Fast Refresh] done in 100ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6920146ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6920358ms] [LOG] [Fast Refresh] done in 365ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6920788ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace:0
+[ 6924104ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 6924608ms] [LOG] [Fast Refresh] done in 107ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7208310ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7209927ms] [LOG] [Fast Refresh] done in 1726ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7210035ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7210084ms] [LOG] [Fast Refresh] done in 155ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7212638ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7212672ms] [LOG] [Fast Refresh] done in 139ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7212873ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7213437ms] [LOG] [Fast Refresh] done in 668ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7213545ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7213570ms] [LOG] [Fast Refresh] done in 128ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7213948ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7214064ms] [LOG] [Fast Refresh] done in 230ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7214278ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7214561ms] [LOG] [Fast Refresh] done in 390ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7215390ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7215440ms] [LOG] [Fast Refresh] done in 153ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7215550ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7215927ms] [LOG] [Fast Refresh] done in 485ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7216036ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7216468ms] [LOG] [Fast Refresh] done in 538ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7216617ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7216938ms] [LOG] [Fast Refresh] done in 427ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7217147ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7218613ms] [LOG] [Fast Refresh] done in 1574ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7218761ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7218886ms] [LOG] [Fast Refresh] done in 237ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7218989ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7219139ms] [LOG] [Fast Refresh] done in 250ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7219247ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7219266ms] [LOG] [Fast Refresh] done in 123ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7219607ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7220002ms] [LOG] [Fast Refresh] done in 503ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7220108ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7220125ms] [LOG] [Fast Refresh] done in 119ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7220235ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7221240ms] [LOG] [Fast Refresh] done in 1113ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7221441ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7221510ms] [LOG] [Fast Refresh] done in 171ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7379823ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7381158ms] [LOG] [Fast Refresh] done in 1437ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7387661ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7388475ms] [LOG] [Fast Refresh] done in 919ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7428044ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7445908ms] [LOG] [Fast Refresh] done in 17962ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7446045ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7446282ms] [LOG] [Fast Refresh] done in 352ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7446408ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7447131ms] [LOG] [Fast Refresh] done in 830ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7447276ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7448821ms] [LOG] [Fast Refresh] done in 1654ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7449444ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7453578ms] [LOG] [Fast Refresh] done in 4238ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7486162ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7491630ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7491648ms] [LOG] [Fast Refresh] done in 5763ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7491650ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7496221ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7497101ms] [LOG] [Fast Refresh] done in 4571ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7497510ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7500243ms] [LOG] [Fast Refresh] done in 3141ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7500521ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7504714ms] [LOG] [Fast Refresh] done in 4304ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7505679ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7506280ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7508087ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace:0
+[ 7550110ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7551386ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7551407ms] [LOG] [Fast Refresh] done in 1380ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7551513ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7552537ms] [LOG] [Fast Refresh] done in 1128ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7552950ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7555112ms] [LOG] [Fast Refresh] done in 2398ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7555649ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7557742ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7558212ms] [LOG] [HMR] connected @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7559009ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7559158ms] [LOG] [Fast Refresh] done in 261ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7559395ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7559414ms] [LOG] [Fast Refresh] done in 129ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7560787ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://places.googleapis.com/$rpc/google.maps.places.v1.Places/GetPlace:0
+[ 7628617ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7629491ms] [LOG] [Fast Refresh] done in 989ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7790340ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7790673ms] [LOG] [Fast Refresh] done in 385ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7791049ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7792227ms] [LOG] [Fast Refresh] done in 1280ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7869509ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[ 7869620ms] [LOG] [Fast Refresh] done in 224ms @ http://localhost:5000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

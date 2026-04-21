@@ -17,8 +17,10 @@ import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useConciergeStore } from "@/lib/concierge-store";
 
 export function Header() {
+  const openConcierge = useConciergeStore((state) => state.open);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const reduced = useReducedMotion();
@@ -96,13 +98,14 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-1 lg:gap-2">
-          <Link
-            href="/ai-concierge"
+          <button
+            type="button"
+            onClick={() => openConcierge()}
             className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
             aria-label="Open chat"
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
-          </Link>
+          </button>
           <Link
             href="/shop"
             className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
