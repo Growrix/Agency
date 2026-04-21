@@ -7,7 +7,7 @@ canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
 last_audit_date: 2026-04-21
 current_state:
-  repo_branch_audited: Google_Review
+  repo_branch_audited: main
   frontend_shell: done
   frontend_routes: mostly_done
   frontend_conversion_integrations: partial
@@ -60,8 +60,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
-  - hardened the AI concierge answer pipeline so grounded questions now resolve to `answered` instead of collapsing into `no_answer`
-  - aligned runtime page context and contract wording with the current popup-first concierge activation model
+  - improved the popup-first AI concierge mobile experience so the modal behaves like a full-height app-style chat sheet with cleaner message flow, safe-area spacing, and dock-aware behavior on phones
+  - improved the blog detail route so the slug page now collapses share and navigation utilities cleanly, adds generated on-page navigation, and keeps long-form reading and comments readable across mobile breakpoints
 - Working conclusion:
 	- the documented frontend surface is largely implemented
 	- the documented backend, API, Security, DevOps, and QA phases are still mostly documentation-only, though the AI concierge now has an initial server-backed slice
@@ -199,6 +199,8 @@ phases:
 - The shop browsing and product preview experience exists in code.
 - The AI concierge route now renders a real chat UI and the site includes a first server-backed `/api/v1/ai-concierge` endpoint grounded in current website content only.
 - The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
+- The mobile AI concierge popup now uses a cleaner app-style sheet layout, hides the mobile dock while open, and keeps prompts, messages, and composer spacing responsive without route-specific hardcoding.
+- The blog detail surface now derives on-page navigation from article headings, uses a cleaner one-column mobile reading flow, and shares improved article, share-rail, and comment responsiveness across slugs.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
 
@@ -209,7 +211,7 @@ phases:
 4. T028-T033: add observability, automated validation, and release evidence before promoting the assistant publicly.
 
 ## Release Readiness Checklist
-- [x] Local production build passes.
+- [ ] Local production build passes; current validation is blocked in this environment because Next.js cannot fetch the configured Google fonts through Turbopack.
 - [ ] Vercel development deployment is verified on the live project.
 - [ ] Contact form persists inquiries through a real API.
 - [ ] Booking flow is connected to a real calendar or inquiry backend.

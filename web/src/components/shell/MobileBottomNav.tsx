@@ -31,9 +31,14 @@ export function MobileBottomNav() {
   const openConcierge = useConciergeStore((state) => state.open);
   const isConciergeOpen = useConciergeStore((state) => state.isOpen);
   const pathname = usePathname();
+
+  if (isConciergeOpen) {
+    return null;
+  }
+
   return (
     <nav
-      className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur pb-[env(safe-area-inset-bottom)]"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
       aria-label="Primary mobile navigation"
     >
       <ul className="grid grid-cols-5">
@@ -50,7 +55,7 @@ export function MobileBottomNav() {
                   onClick={() => openConcierge()}
                   className={cn(
                     "flex w-full flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
-                    isActive ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"
+                    isActive ? "text-primary" : "text-text-muted"
                   )}
                 >
                   <Icon className="size-5" aria-hidden />
@@ -61,7 +66,7 @@ export function MobileBottomNav() {
                   href={item.href}
                   className={cn(
                     "flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
-                    isActive ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"
+                    isActive ? "text-primary" : "text-text-muted"
                   )}
                 >
                   <Icon className="size-5" aria-hidden />

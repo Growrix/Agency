@@ -61,7 +61,7 @@ export function ConciergeModal() {
                 type="button"
                 aria-label="Close concierge chat"
                 onClick={close}
-                className="absolute right-4 top-4 z-10 inline-flex size-10 items-center justify-center rounded-full border border-border bg-surface/85 text-text shadow-(--shadow-1) backdrop-blur hover:bg-inset"
+                className="absolute right-4 top-4 z-10 hidden size-10 items-center justify-center rounded-full border border-border bg-surface/85 text-text shadow-(--shadow-1) backdrop-blur hover:bg-inset sm:inline-flex"
               >
                 <XMarkIcon className="size-5" />
               </button>

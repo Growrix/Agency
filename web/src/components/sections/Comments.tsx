@@ -40,7 +40,7 @@ function CommentItem({
   const open = pendingReplyId === comment.id;
 
   return (
-    <li className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+    <li className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-5">
       <div className="flex items-start gap-3">
         <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-[11px] font-semibold">
           {comment.initials}
@@ -63,14 +63,14 @@ function CommentItem({
       </div>
 
       {comment.replies && comment.replies.length > 0 && (
-        <ul className="mt-4 space-y-3 border-l border-[var(--color-border)] pl-4 ml-12">
+        <ul className="mt-4 ml-0 space-y-3 border-l border-[var(--color-border)] pl-3 sm:ml-12 sm:pl-4">
           {comment.replies.map((r) => (
             <li key={r.id} className="flex items-start gap-3">
               <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-[10px] font-semibold">
                 {r.initials}
               </span>
-              <div>
-                <div className="flex items-baseline gap-3">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <span className="font-medium text-sm">{r.author}</span>
                   <span className="font-mono text-[10px] text-[var(--color-text-muted)]">
                     {formatBlogDate(r.postedAt)}
@@ -84,7 +84,7 @@ function CommentItem({
       )}
 
       {open && (
-        <form onSubmit={submitReply} className="mt-4 ml-12 space-y-2">
+        <form onSubmit={submitReply} className="mt-4 ml-0 space-y-2 sm:ml-12">
           <input
             type="text"
             placeholder="Your name"
@@ -151,7 +151,7 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
 
   return (
     <section className="mt-16">
-      <div className="flex items-baseline justify-between">
+      <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-baseline sm:justify-between">
         <h2 className="font-display text-2xl tracking-tight">
           Discussion <span className="text-[var(--color-text-muted)] font-normal">({comments.length})</span>
         </h2>
@@ -189,7 +189,7 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
             rows={4}
             className="sm:col-span-2 resize-none rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-sm focus:outline-none focus:border-[var(--color-primary)]"
           />
-          <div className="sm:col-span-2 flex items-center justify-between gap-3">
+          <div className="sm:col-span-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-[var(--color-text-muted)]">
               Email is never published. Comments load instantly in this preview.
             </p>

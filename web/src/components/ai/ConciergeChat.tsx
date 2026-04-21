@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowUpRightIcon,
   ChatBubbleLeftRightIcon,
@@ -85,12 +85,13 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
   const [sessionId, setSessionId] = useState<string | undefined>();
 
   const isModal = mode === "modal";
+  const showStarterPrompts = messages.length === 1;
 
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, pending]);
 
-  async function submitMessage(rawMessage: string) {
+  const submitMessage = useCallback(async (rawMessage: string) => {
     const message = rawMessage.trim();
     if (!message || pending) {
       return;
@@ -158,7 +159,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
     } finally {
       setPending(false);
     }
-  }
+  }, [pathname, pending, sessionId]);
 
   useEffect(() => {
     const seededPrompt = initialPrompt?.trim();
@@ -168,7 +169,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
 
     seededPromptHandled.current = seededPrompt;
     void submitMessage(seededPrompt);
-  }, [initialPrompt]);
+  }, [initialPrompt, submitMessage]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -176,15 +177,30 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
   }
 
   const conversationCard = (
-    <Card className={cn("p-0 overflow-hidden flex flex-col", isModal ? "h-full min-h-0" : "min-h-[70vh]")}>
-      <div className="border-b border-border bg-inset/60 px-5 py-4">
-        <p className="font-display text-xl tracking-tight">Concierge chat</p>
-        <p className="mt-1 text-sm text-text-muted">
-          Ask a question in plain English. If the answer is not supported by the approved knowledge set, the assistant will say so and escalate.
-        </p>
-      </div>
+    <div
+      className={cn(
+        "flex min-h-0 flex-1 flex-col overflow-hidden",
+        isModal
+          ? "h-full bg-surface"
+          : "min-h-[70vh] rounded-[16px] border border-border bg-surface shadow-(--shadow-1)"
+      )}
+    >
+      {!isModal && (
+        <div className="border-b border-border bg-inset/60 px-5 py-4">
+          <p className="font-display text-xl tracking-tight">Concierge chat</p>
+          <p className="mt-1 text-sm text-text-muted">
+            Ask a question in plain English. If the answer is not supported by the approved knowledge set, the assistant will say so and escalate.
+          </p>
+        </div>
+      )}
 
-      <div ref={threadRef} className="flex-1 min-h-0 space-y-4 overflow-y-auto px-4 py-5 sm:px-5">
+      <div
+        ref={threadRef}
+        className={cn(
+          "flex-1 min-h-0 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5 sm:py-5",
+          isModal && "bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-inset)_36%,transparent)_0%,transparent_18%)]"
+        )}
+      >
         {messages.map((message) => (
           <div
             key={message.id}
@@ -195,12 +211,12 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           >
             <div
               className={cn(
-                "max-w-[92%] rounded-[16px] px-4 py-3 text-sm leading-6 sm:max-w-[78%]",
+                "max-w-[88%] px-4 py-3 text-sm leading-6 shadow-(--shadow-1) sm:max-w-[78%]",
                 message.role === "user"
-                  ? "bg-primary text-white"
+                  ? "rounded-[18px] rounded-br-xs bg-primary text-white"
                   : message.responseState === "no_answer"
-                    ? "border border-border-strong bg-inset text-text"
-                    : "bg-inset text-text"
+                    ? "rounded-[18px] rounded-bl-xs border border-border-strong bg-inset text-text"
+                    : "rounded-[18px] rounded-bl-xs bg-inset text-text"
               )}
             >
               {message.role === "assistant" && (
@@ -239,26 +255,41 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
 
         {pending && (
           <div className="flex justify-start">
-            <div className="rounded-[16px] bg-inset px-4 py-3 text-sm text-text-muted">
+            <div className="rounded-[18px] rounded-bl-xs bg-inset px-4 py-3 text-sm text-text-muted shadow-(--shadow-1)">
               The concierge is reviewing the approved Growrix knowledge...
             </div>
           </div>
         )}
       </div>
 
-      <div className="border-t border-border bg-surface px-4 py-4 sm:px-5">
-        <div className="mb-3 flex flex-wrap gap-2">
-          {STARTER_PROMPTS.map((prompt) => (
-            <button
-              key={prompt}
-              type="button"
-              onClick={() => void submitMessage(prompt)}
-              className="rounded-full border border-border px-3 py-1.5 text-xs font-medium text-text-muted hover:border-primary/40 hover:bg-primary/5 hover:text-text"
-            >
-              {prompt}
-            </button>
-          ))}
-        </div>
+      <div
+        className={cn(
+          "border-t border-border bg-surface px-4 pt-3 sm:px-5",
+          isModal ? "pb-[calc(env(safe-area-inset-bottom)+0.875rem)]" : "pb-4"
+        )}
+      >
+        {showStarterPrompts && (
+          <div
+            className={cn(
+              "mb-3 flex gap-2",
+              isModal ? "-mx-1 overflow-x-auto px-1 pb-1" : "flex-wrap"
+            )}
+          >
+            {STARTER_PROMPTS.map((prompt) => (
+              <button
+                key={prompt}
+                type="button"
+                onClick={() => void submitMessage(prompt)}
+                className={cn(
+                  "rounded-full border border-border px-3 py-1.5 text-xs font-medium text-text-muted hover:border-primary/40 hover:bg-primary/5 hover:text-text",
+                  isModal && "shrink-0 whitespace-nowrap"
+                )}
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="flex items-end gap-3">
           <label className="sr-only" htmlFor={isModal ? "concierge-input-modal" : "concierge-input-page"}>
@@ -269,16 +300,24 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
             value={input}
             onChange={(event) => setInput(event.target.value)}
             placeholder="Ask about services, pricing, timelines, products, or which path fits your project."
-            rows={3}
+            rows={isModal ? 2 : 3}
             maxLength={600}
-            className="min-h-24 flex-1 resize-none rounded-[14px] border border-border bg-surface px-4 py-3 text-sm leading-6 outline-none focus:border-primary"
+            className={cn(
+              "flex-1 resize-none rounded-[14px] border border-border bg-surface px-4 py-3 text-sm leading-6 outline-none focus:border-primary",
+              isModal ? "min-h-14 max-h-40" : "min-h-24"
+            )}
           />
-          <Button type="submit" className="shrink-0" disabled={pending || input.trim().length < 2}>
+          <Button
+            type="submit"
+            size={isModal ? "sm" : "md"}
+            className={cn("shrink-0", isModal && "h-12 px-4")}
+            disabled={pending || input.trim().length < 2}
+          >
             <PaperAirplaneIcon className="size-4" /> Send
           </Button>
         </form>
       </div>
-    </Card>
+    </div>
   );
 
   const escalationRail = (
@@ -315,10 +354,10 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
   if (isModal) {
     return (
       <div className="flex h-full min-h-0 w-full flex-col bg-surface">
-        <div className="border-b border-border bg-inset/60 px-5 py-4 pr-16 sm:px-6">
+        <div className="border-b border-border bg-inset/60 px-4 pb-3 pr-4 pt-[calc(env(safe-area-inset-top)+0.875rem)] sm:px-6 sm:py-4 sm:pr-16">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-display text-2xl tracking-tight">Ask the concierge</p>
+              <p className="font-display text-xl tracking-tight sm:text-2xl">Ask the concierge</p>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-text-muted">
                 Stay on the current page while chatting. Answers are grounded in current Growrix site content only.
               </p>
@@ -328,7 +367,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
                 type="button"
                 onClick={onClose}
                 aria-label="Close concierge chat"
-                className="hidden rounded-full p-2 text-text-muted hover:bg-surface sm:inline-flex"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-surface/85 text-text-muted shadow-(--shadow-1) backdrop-blur hover:bg-surface sm:hidden"
               >
                 <XMarkIcon className="size-5" />
               </button>
@@ -336,8 +375,8 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           </div>
         </div>
 
-        <div className="grid min-h-0 flex-1 gap-4 overflow-hidden px-0 py-0 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="min-h-0 p-4 sm:p-5">{conversationCard}</div>
+        <div className="grid min-h-0 flex-1 gap-0 overflow-hidden lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-4">
+          <div className="min-h-0">{conversationCard}</div>
           <div className="hidden overflow-y-auto border-l border-border bg-inset/40 p-5 lg:block">{escalationRail}</div>
         </div>
       </div>

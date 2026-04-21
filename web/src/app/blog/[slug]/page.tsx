@@ -6,7 +6,8 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { Card } from "@/components/primitives/Card";
-import { ProseArticle } from "@/components/sections/ProseArticle";
+import { LinkButton } from "@/components/primitives/Button";
+import { ProseArticle, getProseHeadingId } from "@/components/sections/ProseArticle";
 import { ShareRail } from "@/components/sections/ShareRail";
 import { Comments } from "@/components/sections/Comments";
 import { BlogCard } from "@/components/sections/BlogCard";
@@ -43,13 +44,24 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const related = getRelatedPosts(slug, 2);
   const heroImage = getBlogImage(post.slug);
   const url = `https://growrixos.com/blog/${post.slug}`;
+  const articleSections = post.body.flatMap((block, index) => {
+    if (block.type !== "h2" && block.type !== "h3") {
+      return [];
+    }
+
+    return [{
+      id: getProseHeadingId(block.text, index),
+      label: block.text,
+      level: block.type,
+    }];
+  });
 
   return (
     <>
       {/* Hero */}
-      <Section className="pt-10 pb-0">
+      <Section className="pb-0 pt-8 sm:pt-10">
         <Container width="reading">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
             <Link href="/" className="hover:text-[var(--color-primary)]">Home</Link>
             <ChevronRightIcon className="size-3.5" />
             <Link href="/blog" className="hover:text-[var(--color-primary)]">Blog</Link>
@@ -59,13 +71,13 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
           <div className="mt-8">
             <Badge tone="primary">{post.category}</Badge>
-            <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-balance">
+            <h1 className="mt-5 font-display text-3xl leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[56px]">
               {post.title}
             </h1>
-            <p className="mt-5 text-lg text-[var(--color-text-muted)] leading-7 text-pretty">
+            <p className="mt-5 text-base leading-7 text-[var(--color-text-muted)] text-pretty sm:text-lg">
               {post.excerpt}
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-4">
+            <div className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
               <div className="flex items-center gap-3">
                 <span className="inline-flex size-10 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-xs font-semibold">
                   {post.author.initials}
@@ -82,8 +94,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           </div>
         </Container>
 
-        <Container width="content" className="mt-10">
-          <div className={`relative aspect-[21/9] overflow-hidden rounded-[24px] bg-gradient-to-br ${post.accent}`}>
+        <Container width="content" className="mt-8 sm:mt-10">
+          <div className={`relative aspect-[4/3] overflow-hidden rounded-[24px] bg-gradient-to-br sm:aspect-[21/9] ${post.accent}`}>
             {heroImage ? (
               <Image
                 src={heroImage.src}
@@ -102,11 +114,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       {/* Body + share rail */}
       <Section className="pt-12 pb-8">
         <Container width="content">
-          <div className="grid gap-8 lg:grid-cols-[64px_1fr]">
-            <div>
-              <ShareRail url={url} title={post.title} />
-            </div>
-            <article className="max-w-[720px]">
+          <div className="grid gap-6 xl:grid-cols-[72px_minmax(0,1fr)_280px] xl:items-start">
+            <article className="order-1 min-w-0 max-w-[720px] xl:order-2 xl:max-w-none">
               <ProseArticle blocks={post.body} />
 
               <div className="mt-12 flex flex-wrap items-center gap-2">
@@ -143,6 +152,53 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               {/* Comments */}
               <Comments initial={post.comments} />
             </article>
+
+            <div className="order-2 xl:order-1 xl:self-start">
+              <div className="rounded-[18px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-1)] xl:rounded-none xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none">
+                <ShareRail url={url} title={post.title} />
+              </div>
+            </div>
+
+            <aside className="order-3 xl:self-start">
+              <div className="grid gap-4 xl:sticky xl:top-24">
+                {articleSections.length > 0 && (
+                  <Card variant="inset" className="p-5">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                      On this page
+                    </p>
+                    <nav aria-label="On this page" className="mt-4">
+                      <ul className="space-y-2.5">
+                        {articleSections.map((section) => (
+                          <li key={section.id}>
+                            <a
+                              href={`#${section.id}`}
+                              className="block text-sm leading-6 text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
+                            >
+                              {section.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  </Card>
+                )}
+
+                <Card className="p-5">
+                  <p className="font-display text-xl tracking-tight">Turn the article into a plan.</p>
+                  <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
+                    If you already know the problem, route straight into a scoped conversation instead of keeping the decision in your head.
+                  </p>
+                  <div className="mt-5 grid gap-3">
+                    <LinkButton href="/book-appointment" fullWidth>
+                      Book appointment
+                    </LinkButton>
+                    <LinkButton href="/services" variant="outline" fullWidth>
+                      Explore services
+                    </LinkButton>
+                  </div>
+                </Card>
+              </div>
+            </aside>
           </div>
         </Container>
       </Section>
