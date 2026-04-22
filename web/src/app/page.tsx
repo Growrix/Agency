@@ -90,13 +90,13 @@ export default function Home() {
                 className="signal-rise mt-5 font-display text-[44px] sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance"
                 style={{ animationDelay: "90ms" }}
               >
-                Premium websites, SaaS products,<br className="hidden sm:block" /> and ready launches that do not look packaged.
+                Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out
               </h1>
               <p
                 className="signal-rise mt-6 max-w-xl text-lg text-text-muted leading-7 text-pretty"
                 style={{ animationDelay: "180ms" }}
               >
-                We design and ship premium websites, SaaS applications, mobile app launch experiences, and ready websites. MCP servers and automation stay available when the roadmap needs them, not as the headline offer.
+                From premium websites and SaaS apps to mobile launch pages and ready sites—we deliver results that don't look generic. MCP servers and automation support your roadmap when required.
               </p>
               <div
                 className="signal-rise mt-8 flex flex-wrap gap-3"
