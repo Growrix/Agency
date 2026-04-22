@@ -61,23 +61,23 @@ export const PRODUCT_IMAGES: Record<string, StockImage> = {
   },
   "Atelier Marketing Theme": {
     src: "/images/products/template.jpg",
-    alt: "Designer workspace with laptop and visual design tools.",
+    alt: "Designer workspace with laptop and visual design tools for a premium website template.",
   },
   "Operator Dashboard Kit": {
-    src: "/images/products/template.jpg",
-    alt: "Laptop workspace suitable for dashboard and template design.",
+    src: "/images/portfolio/glasswing-onboarding-hero.jpg",
+    alt: "Product-focused interface representing a SaaS dashboard and onboarding flow.",
   },
   "Inquiry-to-CRM Automation": {
     src: "/images/products/automation.jpg",
     alt: "Business analytics screen suggesting workflow automation.",
   },
   "Mobile App Landing Pack": {
-    src: "/images/products/template.jpg",
-    alt: "Modern laptop setup for web and landing page design.",
+    src: "/images/home/mobile-device.jpg",
+    alt: "Close-up of a mobile device representing a mobile app launch website.",
   },
   "Booking + Stripe Bundle": {
-    src: "/images/products/automation.jpg",
-    alt: "Analytics and operations workspace for payments and automation.",
+    src: "/images/blog/launch-sprint.jpg",
+    alt: "Team planning a launch-ready service website with booking and payments.",
   },
 };
 

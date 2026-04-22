@@ -14,7 +14,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Shop — Website Templates and Ready Websites",
-  description: "Browse website templates and ready-made websites by category, type, and industry, then go straight to product details or checkout.",
+  description: "Browse website templates from $500 and ready websites from $1k, then go straight to product details or checkout.",
 };
 
 type SearchParams = Promise<{
@@ -126,7 +126,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 Templates &amp; Ready Websites
               </h1>
               <p className="mt-2 text-sm leading-6 text-text-muted">
-                {PUBLISHED_SHOP_PRODUCTS.length} products &mdash; purchase any item and receive it immediately.
+                {PUBLISHED_SHOP_PRODUCTS.length} products &mdash; website templates from $500 and ready websites from $1k, each with 1 year of support.
               </p>
             </div>
             <LinkButton href="/book-appointment" variant="outline" size="sm">

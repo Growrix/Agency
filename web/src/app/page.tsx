@@ -50,15 +50,15 @@ const HOME_TIERS: Tier[] = [
     name: "Launch Sprint",
     price: "$9.5k",
     cadence: "/ project",
-    description: "A fixed-scope sprint to ship a focused website or MCP server in weeks, not quarters.",
-    features: ["1 surface or system", "Discovery + design + build", "Launch playbook", "30 days post-launch support"],
+    description: "A fixed-scope sprint to ship a premium website, mobile app launch surface, or focused SaaS MVP slice.",
+    features: ["Website, launch, or MVP surface", "Discovery + design + build", "Launch playbook", "30 days post-launch support"],
     cta: { label: "Get scoping", href: "/book-appointment" },
   },
   {
     name: "Product Partner",
     price: "$14k",
     cadence: "/ month",
-    description: "An embedded studio that operates as your product team for SaaS, websites, and integrations.",
+    description: "An embedded studio that operates as your product team for SaaS, high-conversion websites, and launch-ready digital experiences.",
     features: ["Dedicated lead + designer + engineer", "Continuous shipping", "Quarterly strategy", "Stack ownership"],
     cta: { label: "Plan a partnership", href: "/book-appointment" },
     featured: true,
@@ -66,10 +66,10 @@ const HOME_TIERS: Tier[] = [
   },
   {
     name: "Productized",
-    price: "From $129",
+    price: "From $500",
     cadence: "one-time",
-    description: "Ready-to-deploy website templates and ready-made websites that ship in a day.",
-    features: ["Stripe-powered checkout", "License + updates", "Quick setup docs", "Optional install help"],
+    description: "Website templates and ready websites priced for fast launch without sacrificing fit.",
+    features: ["Flexible payment options", "1 year support + maintenance", "Quick setup or handoff docs", "Optional install help"],
     cta: { label: "Browse the shop", href: "/shop" },
   },
 ];
@@ -84,19 +84,19 @@ export default function Home() {
           <div className="grid gap-12 lg:gap-16 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7">
               <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-                <Badge tone="primary" dot>Independent product studio</Badge>
+                <Badge tone="primary" dot>Websites, SaaS, ready launches</Badge>
               </div>
               <h1
                 className="signal-rise mt-5 font-display text-[44px] sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance"
                 style={{ animationDelay: "90ms" }}
               >
-                Standout digital products,<br className="hidden sm:block" /> shipped like a real team built them.
+                Premium websites, SaaS products,<br className="hidden sm:block" /> and ready launches that do not look packaged.
               </h1>
               <p
                 className="signal-rise mt-6 max-w-xl text-lg text-text-muted leading-7 text-pretty"
                 style={{ animationDelay: "180ms" }}
               >
-                We design and engineer SaaS applications, marketing websites, MCP servers, and operational automations — with the kind of polish your competitors will quietly want to match.
+                We design and ship premium websites, SaaS applications, mobile app launch experiences, and ready websites. MCP servers and automation stay available when the roadmap needs them, not as the headline offer.
               </p>
               <div
                 className="signal-rise mt-8 flex flex-wrap gap-3"
@@ -216,8 +216,8 @@ export default function Home() {
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
               eyebrow="Capabilities"
-              title="Four sharp practices, one studio operating model."
-              description="We do the work that needs design discipline, technical depth, and shipping muscle. No undefined consultants, no offshore handoffs."
+              title="Websites and SaaS first. Supporting systems when they matter."
+              description="Our primary work is premium websites, SaaS applications, mobile launch experiences, and ready-to-ship website products. MCP and automation come in when they strengthen that core offer."
             />
             <Link
               href="/services"
@@ -250,8 +250,8 @@ export default function Home() {
         <Container>
           <SectionHeading
             eyebrow="Featured builds"
-            title="Outcomes our clients can talk about."
-            description="A selection of products, websites, and systems we've shipped recently. Each engagement is shaped around a measurable result."
+            title="Proof from launches, rebuilds, and growth."
+            description="A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."
           />
           <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {PORTFOLIO.slice(0, 3).map((p) => (
@@ -299,7 +299,7 @@ export default function Home() {
             <SectionHeading
               eyebrow="Shop spotlight"
               title="Website templates and ready websites, built to ship."
-              description="Packaged from the same systems we build for clients — purchase today and launch in days."
+              description="Website templates from $500 and ready websites from $1k, built from the same systems we use in custom engagements."
             />
             <LinkButton href="/shop" variant="outline">
               Browse the shop <ArrowUpRightIcon className="size-4" />
@@ -353,7 +353,7 @@ export default function Home() {
               <SectionHeading
                 eyebrow="AI Concierge"
                 title="Get the right answer before you book."
-                description="Ask anything about scope, pricing, timelines, or product fit. The concierge knows our services and routes you to the best next step — chat, WhatsApp, or a call."
+                description="Ask about website scope, SaaS roadmaps, ready website fit, pricing, or timelines. The concierge keeps MCP and automation in context when they support the main build."
               />
               <div className="mt-8 flex flex-wrap gap-3">
                 <ConciergeTriggerButton>
@@ -404,7 +404,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Engagements"
             title="Transparent ways to work together."
-            description="Custom builds, embedded partnership, or productized starters — pick the surface area that matches the work."
+            description="Choose a custom build, an embedded partnership, or a website product with flexible payment and 1 year of support."
             align="center"
           />
           <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>

@@ -2,39 +2,39 @@
 
 export const SERVICES = [
   {
-    slug: "saas-applications",
-    name: "SaaS Applications",
-    short: "Strategy + engineering for new and rebuilt SaaS products.",
-    long: "Admin panels, user portals, billing, dashboards, and AI-assisted features built as a real product, not a long demo.",
-    typical: "MVP sprint to product partnership",
-    timeline: "8–24 weeks",
-    pillars: ["Product strategy", "Frontend systems", "Billing & auth", "Performance & QA"],
-  },
-  {
     slug: "websites",
     name: "Websites",
-    short: "Design-forward sites engineered for conversion and speed.",
-    long: "From editorial marketing to launch sites and content-heavy hubs — built around conversion architecture and performance.",
+    short: "Premium websites and ready-to-launch fronts built for conversion.",
+    long: "From marketing sites and mobile app launch pages to content-heavy hubs and ready websites - built around conversion architecture, clarity, and performance.",
     typical: "Launch sprint or redesign track",
-    timeline: "4–10 weeks",
-    pillars: ["Design system", "Motion discipline", "SEO & Core Web Vitals", "CMS handoff"],
+    timeline: "4-10 weeks",
+    pillars: ["Conversion architecture", "Design system & motion", "SEO & Core Web Vitals", "CMS handoff"],
+  },
+  {
+    slug: "saas-applications",
+    name: "SaaS Applications",
+    short: "SaaS and product platforms for web-first and mobile-first teams.",
+    long: "Admin panels, user portals, billing, dashboards, and companion mobile experiences built as durable products, not long demos.",
+    typical: "MVP sprint to product partnership",
+    timeline: "8-24 weeks",
+    pillars: ["Product strategy", "Frontend systems", "Billing & auth", "Growth-ready analytics"],
   },
   {
     slug: "mcp-servers",
     name: "MCP Servers",
-    short: "Production-grade Model Context Protocol servers for agents.",
-    long: "Secure, observable MCP servers that wrap your APIs, databases, and internal tools so agents can act with confidence.",
+    short: "Secondary: MCP infrastructure when your product stack needs agents.",
+    long: "Secure, observable MCP servers that extend websites, SaaS products, and internal tools when agent workflows are part of the roadmap.",
     typical: "Scoped integration or platform engagement",
-    timeline: "3–12 weeks",
+    timeline: "3-12 weeks",
     pillars: ["Tool design", "Auth & access", "Observability", "Deployment & ops"],
   },
   {
     slug: "automation",
     name: "Automation",
-    short: "Operational systems that remove repetitive work measurably.",
-    long: "We map workflows, design exception logic, and ship integrations across CRMs, payments, support, and content systems.",
+    short: "Secondary: automation for the workflows around your core product.",
+    long: "We map workflows and ship integrations across CRM, payments, support, and content systems when manual operations start slowing delivery.",
     typical: "Audit + implementation + retainer",
-    timeline: "2–8 weeks",
+    timeline: "2-8 weeks",
     pillars: ["Workflow mapping", "Exception logic", "Integrations", "Observability"],
   },
 ] as const;
@@ -71,29 +71,29 @@ export const PROCESS_STEPS = [
 export const TESTIMONIALS = [
   {
     quote:
-      "They shipped what felt like a polished v3 in a single quarter. The system they handed over runs itself — that's rare.",
+      "Best frontend partner we've worked with. The website redesign carried our entire Q4 narrative without us pushing copy.",
+    author: "Priya Shankar",
+    role: "VP Marketing, Lumora",
+    metric: "+64% demo bookings",
+  },
+  {
+    quote:
+      "They shipped what felt like a polished v3 in a single quarter. The system they handed over runs itself - that's rare.",
     author: "Maya Okonkwo",
     role: "CEO, Tideline Health",
     metric: "+182% activation",
   },
   {
     quote:
-      "We replaced four spreadsheets and a contractor with one MCP server. Our agent now answers operations questions correctly.",
+      "We went from 'we should launch soon' to taking paid bookings in under two weeks. The ready website felt custom enough that no one guessed it started from a packaged system.",
     author: "Daniel Vargas",
-    role: "Head of Ops, Northcrest",
-    metric: "5h/week saved",
-  },
-  {
-    quote:
-      "Best frontend partner we've worked with. The website redesign carried our entire Q4 narrative without us pushing copy.",
-    author: "Priya Shankar",
-    role: "VP Marketing, Lumora",
-    metric: "+64% demo bookings",
+    role: "Founder, Cedar Lane Studio",
+    metric: "12-day launch",
   },
 ];
 
 export const HOME_STATS = [
-  { value: "47", label: "Products shipped", hint: "SaaS, websites, MCP, automation" },
+  { value: "47", label: "Launches shipped", hint: "Websites, SaaS, ready websites" },
   { value: "6", label: "Years in motion", hint: "Independent studio" },
   { value: "$18M+", label: "Client funding raised", hint: "Post-launch" },
   { value: "98", label: "NPS", hint: "Trailing 12 months" },
@@ -111,13 +111,22 @@ export const CLIENT_LOGOS = [
 ];
 
 export const FEATURED_PRODUCTS = [
-  { slug: "atelier-marketing-theme", name: "Atelier Marketing Theme", price: "$129", category: "Templates", tag: "Best seller" },
-  { slug: "operator-dashboard-kit", name: "Operator Dashboard Kit", price: "$189", category: "Templates", tag: "Updated" },
-  { slug: "mobile-app-landing-pack", name: "Mobile App Landing Pack", price: "$149", category: "Ready Websites" },
-  { slug: "booking-stripe-bundle", name: "Booking + Stripe Bundle", price: "$229", category: "Ready Websites", tag: "Bundle" },
+  { slug: "atelier-marketing-theme", name: "Atelier Marketing Theme", price: "$790", category: "Templates", tag: "Best seller" },
+  { slug: "operator-dashboard-kit", name: "Operator Dashboard Kit", price: "$1,850", category: "Templates", tag: "Updated" },
+  { slug: "mobile-app-landing-pack", name: "Mobile App Landing Pack", price: "$1,950", category: "Ready Websites" },
+  { slug: "booking-stripe-bundle", name: "Booking + Stripe Bundle", price: "$3,900", category: "Ready Websites", tag: "Bundle" },
 ];
 
 export const PORTFOLIO = [
+  {
+    slug: "lumora-studio",
+    name: "Lumora Studio",
+    industry: "Brand & Marketing",
+    service: "websites",
+    summary: "A premium agency website rebuild with editorial motion, tighter narrative sequencing, and a productized portfolio.",
+    metric: "+64% demo bookings",
+    accent: "from-amber-500 to-orange-600",
+  },
   {
     slug: "tideline-health",
     name: "Tideline Health",
@@ -128,22 +137,13 @@ export const PORTFOLIO = [
     accent: "from-teal-500 to-emerald-500",
   },
   {
-    slug: "northcrest-mcp",
-    name: "Northcrest MCP",
-    industry: "B2B Operations",
-    service: "mcp-servers",
-    summary: "An MCP server connecting CRM, billing, and inventory for an internal ops agent.",
-    metric: "5h/week saved per ops lead",
-    accent: "from-sky-500 to-blue-600",
-  },
-  {
-    slug: "lumora-studio",
-    name: "Lumora Studio",
-    industry: "Brand & Marketing",
+    slug: "helix-research-portal",
+    name: "Helix Research Portal",
+    industry: "Capital Markets",
     service: "websites",
-    summary: "A premium agency website rebuild with editorial motion and a productized portfolio.",
-    metric: "+64% demo bookings",
-    accent: "from-amber-500 to-orange-600",
+    summary: "A subscriber research hub with secure gating, richer editorial structure, and AI-assisted search.",
+    metric: "3.4x dwell time",
+    accent: "from-indigo-500 to-violet-600",
   },
   {
     slug: "glasswing-onboarding",
@@ -155,6 +155,15 @@ export const PORTFOLIO = [
     accent: "from-purple-500 to-fuchsia-500",
   },
   {
+    slug: "northcrest-mcp",
+    name: "Northcrest MCP",
+    industry: "B2B Operations",
+    service: "mcp-servers",
+    summary: "An MCP server connecting CRM, billing, and inventory for an internal ops agent.",
+    metric: "5h/week saved per ops lead",
+    accent: "from-sky-500 to-blue-600",
+  },
+  {
     slug: "beacon-route-engine",
     name: "Beacon Route Engine",
     industry: "Mobility",
@@ -162,15 +171,6 @@ export const PORTFOLIO = [
     summary: "Automated dispatch + driver SMS pipeline tied to live shift availability.",
     metric: "−38% no-shows",
     accent: "from-rose-500 to-pink-600",
-  },
-  {
-    slug: "helix-research-portal",
-    name: "Helix Research Portal",
-    industry: "Capital Markets",
-    service: "websites",
-    summary: "A long-form research site with secure subscriber gating and AI search.",
-    metric: "3.4x dwell time",
-    accent: "from-indigo-500 to-violet-600",
   },
 ];
 
@@ -185,17 +185,17 @@ export const FAQ_GENERAL = [
   {
     question: "What is your typical timeline?",
     answer:
-      "Websites land in 4–10 weeks. SaaS products in 8–24 weeks depending on integrations. MCP servers in 3–12 weeks. Automation work often ships in under a month.",
+      "Custom websites usually land in 4-10 weeks. Ready websites can move much faster when the content is clear. SaaS products run 8-24 weeks depending on integrations. MCP and automation work are scoped when they support the main build.",
   },
   {
     question: "Do you handle content, copy, and assets?",
     answer:
-      "We can. Content production is offered as an add-on for marketing sites. For SaaS work, we collaborate with your team or designate a content lead inside the engagement.",
+      "Yes. Hero rewrites, FAQ updates, case study positioning, and launch-supporting content can be handled as part of the build or as a focused content pass.",
   },
   {
     question: "How do payments work?",
     answer:
-      "We use a milestone-based model with a 30% kickoff deposit. Productized offers in the shop are charged once via Stripe at checkout.",
+      "For international clients, we can offer delivery-first payment with no advance on the first 100 qualifying projects. We also support flexible milestone or custom arrangements when the scope makes sense.",
   },
   {
     question: "Will I own the code?",
@@ -204,7 +204,7 @@ export const FAQ_GENERAL = [
   {
     question: "Do you support after launch?",
     answer:
-      "Yes. We offer support retainers covering maintenance, performance, security patches, and feature delivery on a predictable cadence.",
+      "Yes. Every delivered site includes 1 year of free support and maintenance covering bug fixes, security updates, and minor content changes. Ongoing packages and growth add-ons are available after that.",
   },
 ];
 

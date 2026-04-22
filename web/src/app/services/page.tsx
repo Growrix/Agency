@@ -28,9 +28,9 @@ import {
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata: Metadata = {
-	title: "Web Development Services | SaaS Apps, Websites, MCP Servers, Automation",
+	title: "Services | Websites, SaaS, MCP, and Automation",
 	description:
-		"Compare the agency's service offerings and choose the right path for custom SaaS, websites, MCP servers, and automation.",
+		"Compare the agency's services with primary emphasis on websites, SaaS applications, and launch systems, plus secondary MCP and automation work.",
 };
 
 const ICONS = {
@@ -41,10 +41,10 @@ const ICONS = {
 } as const;
 
 const FIT_NOTES: Record<string, string> = {
-	"saas-applications": "Best when you need product thinking, UX systems, and engineering in the same engagement.",
+	"saas-applications": "Best when you need a real product team across SaaS, dashboards, and companion mobile experiences.",
 	websites: "Best when brand perception, conversion architecture, and speed all matter at once.",
-	"mcp-servers": "Best when agents need auditable access to your APIs, docs, or internal operations.",
-	automation: "Best when repetitive ops work is slowing down sales, support, reporting, or onboarding.",
+	"mcp-servers": "Best when agent workflows need to support the website or SaaS product behind the scenes.",
+	automation: "Best when repetitive ops work around sales, support, reporting, or onboarding is slowing the main product.",
 };
 
 const GOAL_ROWS = [
@@ -97,16 +97,16 @@ const GOAL_ROWS = [
 
 const STACK_AREAS = [
 	{
-		title: "Frontend systems",
-		detail: "Next.js, design systems, responsive UI, motion, accessibility, dashboards.",
+		title: "Website systems",
+		detail: "Next.js, design systems, responsive UI, motion, accessibility, and high-conversion page architecture.",
 	},
 	{
-		title: "Backend and APIs",
-		detail: "Typed APIs, auth, billing, CMS, databases, queue-driven workflows, webhooks.",
+		title: "SaaS products",
+		detail: "Typed APIs, auth, billing, dashboards, CMS, databases, and the product infrastructure behind real launches.",
 	},
 	{
 		title: "AI and agent tooling",
-		detail: "MCP servers, retrieval, evaluation-aware flows, approvals, and traceable automations.",
+		detail: "MCP servers, retrieval, evaluation-aware flows, approvals, and traceable automations when the roadmap needs them.",
 	},
 	{
 		title: "Commerce and growth",
@@ -123,11 +123,10 @@ export default function ServicesPage() {
 					<div className="max-w-3xl">
 						<Badge tone="primary" dot>Services</Badge>
 						<h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-							Choose the delivery model that fits the problem, not just the tech.
+							Choose the delivery path that fits the launch and the long-term product.
 						</h1>
 						<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-							SaaS products, websites, MCP servers, and automation systems built with the same standard: clear strategy,
-							rigorous execution, and a conversion path that makes sense.
+							We lead with premium websites, SaaS products, mobile launch experiences, and ready-to-ship website systems. MCP and automation stay available when they strengthen that core work.
 						</p>
 						<div className="mt-8 flex flex-wrap gap-3">
 							<LinkButton href="/book-appointment" size="lg">
@@ -183,7 +182,7 @@ export default function ServicesPage() {
 					<SectionHeading
 						eyebrow="Comparison"
 						title="See the difference before you commit to a scope."
-						description="The fastest way to choose the right engagement is to compare the business shape of the work, not just the deliverables."
+						description="Compare the business shape of the work, where it sits in the larger launch, and when supporting systems are actually necessary."
 					/>
 					  <div className="mt-10 hidden lg:block overflow-hidden rounded-[18px] border border-border bg-surface">
 						<table className="w-full text-left text-sm">
@@ -272,7 +271,7 @@ export default function ServicesPage() {
 					<SectionHeading
 						eyebrow="Proof by service"
 						title="Recent work mapped to the capability behind it."
-						description="Each service leads to a different kind of business outcome, so the proof should stay attached to the service type."
+						description="Most proof here is weighted toward websites and SaaS work, with supporting systems shown where they helped the main outcome."
 					/>
 					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
 						{PORTFOLIO.slice(0, 3).map((project) => (
@@ -304,8 +303,8 @@ export default function ServicesPage() {
 			</Section>
 
 			<CTABand
-				title="Need help choosing the right service path?"
-				description="Tell us the business problem, the current bottleneck, and the timeline. We will map it to the right delivery model quickly."
+				title="Need help choosing between a website, a SaaS build, or a ready launch?"
+				description="Tell us the business problem, the current bottleneck, and the timeline. We will map it to the right delivery model and the supporting systems only if they matter."
 				primary={{ label: "Book Appointment", href: "/book-appointment" }}
 				secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
 			/>

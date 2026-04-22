@@ -157,7 +157,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               {/* CTAs */}
               <div className="flex flex-col gap-3">
                 <LinkButton href={getCheckoutHref(product)} size="lg" fullWidth>
-                  <ShoppingBagIcon className="size-5" /> Buy Now
+                  <ShoppingBagIcon className="size-5" /> Start Purchase
                 </LinkButton>
                 <LinkButton href={`/shop/${product.slug}#preview`} variant="outline" size="lg" fullWidth>
                   Live Preview <ArrowUpRightIcon className="size-4" />
@@ -192,7 +192,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               {/* Talk to us */}
               <div className="text-center">
                 <LinkButton href="/book-appointment" variant="ghost" size="sm" fullWidth>
-                  Have questions? Talk to us first
+                  Need flexible payment or a custom fit? Talk to us first
                 </LinkButton>
               </div>
             </aside>
@@ -206,7 +206,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           <Container>
             <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
             <p className="mt-2 text-sm text-text-muted">
-              Browse more website templates and ready-made products.
+              Browse more website templates and ready websites.
             </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (

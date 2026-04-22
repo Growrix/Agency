@@ -15,15 +15,15 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 import { ABOUT_IMAGES, TEAM_IMAGES } from "@/lib/site-images";
 
 export const metadata: Metadata = {
-  title: "About | Product-Minded Web Development Partner",
+  title: "About | Websites, SaaS, and Launch Systems Partner",
   description:
-    "Learn how Growrix OS works, what it values, and how it delivers visually strong, technically rigorous digital products.",
+    "Learn how Growrix OS works, what it values, and how it delivers premium websites, SaaS products, mobile launch experiences, and ready websites.",
 };
 
 const PRINCIPLES = [
   { title: "Design discipline", description: "Tokens, typography, motion, and spacing decided once and used everywhere." },
   { title: "Engineering quality", description: "Tests, types, observability, and production readiness from day one." },
-  { title: "Speed without chaos", description: "Predictable cadence, written plans, and clear ownership at every step." },
+  { title: "Content that sells", description: "Hero messaging, proof, FAQs, and launch copy are treated like product surfaces, not filler text." },
   { title: "Measurable outcomes", description: "Every engagement targets a number. We don't ship vanity work." },
 ];
 
@@ -31,13 +31,13 @@ const TEAM = [
   { name: "Mira Aldenberg", role: "Founder · Product & Strategy", strength: "Scopes the right problem before sizing the solution." },
   { name: "Felix Aranha", role: "Engineering Lead", strength: "Designs systems that survive feature growth." },
   { name: "Yuna Park", role: "Design Lead", strength: "Builds visual systems that feel inevitable in retrospect." },
-  { name: "Ravi Saini", role: "Automation & MCP", strength: "Connects systems other people would have given up on." },
+  { name: "Ravi Saini", role: "Systems & Integrations Lead", strength: "Brings automation and MCP work in where the main product needs it." },
 ];
 
 const PHILOSOPHY = [
-  "Frontends are the product. We treat them as such.",
+  "A website should convert like a product, not read like a brochure.",
   "Motion is language. It must support meaning, not decorate it.",
-  "Mobile is not a smaller desktop. It's a thumb-driven product.",
+  "Mobile is often the first impression. It needs launch-level care, not desktop leftovers.",
   "Accessibility is a baseline, not an upsell.",
   "Performance is a brand attribute. Slow feels cheap.",
 ];
@@ -52,10 +52,10 @@ export default function AboutPage() {
             <div className="lg:col-span-7">
               <Badge tone="primary" dot>About</Badge>
               <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-                A studio for teams that take their product seriously.
+                A studio for teams that want the launch to feel as strong as the product.
               </h1>
               <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-                Growrix OS is an independent studio of senior designers and engineers. We build SaaS products, websites, MCP servers, and automation systems with the discipline of a real product team — and the speed of a small one.
+                Growrix OS is an independent studio of senior designers and engineers. We focus on premium websites, SaaS products, mobile app launch experiences, and ready websites, with MCP and automation brought in when they support the main outcome.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LinkButton href="/book-appointment" size="lg">Meet through a call</LinkButton>
@@ -169,13 +169,13 @@ export default function AboutPage() {
           <GoogleReviews
             eyebrow="Voices"
             title="What clients say after launch."
-            description="Live Google reviews shown from the studio business profile."
+            description="Proof from launches, redesigns, and ongoing product work."
           />
         </Container>
       </Section>
 
       <CTABand
-        title="Want to meet the team that would actually build it?"
+        title="Want to meet the team that would actually launch it?"
         primary={{ label: "Book Appointment", href: "/book-appointment" }}
         secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
       />

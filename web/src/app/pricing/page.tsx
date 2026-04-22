@@ -12,9 +12,9 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
 export const metadata: Metadata = {
-  title: "Pricing | Custom Builds, Productized Services, and Digital Products",
+  title: "Pricing | Websites, Ready Websites, SaaS, and Launch Systems",
   description:
-    "Review pricing ranges, engagement models, and value drivers for websites, SaaS products, MCP servers, automation, and digital assets.",
+    "Review pricing ranges, flexible payment options, and support coverage for websites, ready websites, SaaS applications, and launch systems.",
 };
 
 const TIERS: Tier[] = [
@@ -22,7 +22,7 @@ const TIERS: Tier[] = [
     name: "Launch Sprint",
     price: "$9.5k",
     cadence: "/ project",
-    description: "A 4–6 week sprint to ship a focused website, MCP server, or automation system.",
+    description: "A 4-6 week sprint to ship a premium website, mobile app launch surface, or focused SaaS MVP slice.",
     features: ["1 surface or system", "Discovery + design + build", "Launch playbook", "30 days post-launch support"],
     cta: { label: "Start a sprint", href: "/book-appointment" },
   },
@@ -30,7 +30,7 @@ const TIERS: Tier[] = [
     name: "Product Partner",
     price: "$14k",
     cadence: "/ month",
-    description: "An embedded studio operating as your product team for SaaS, websites, and integrations.",
+    description: "An embedded studio operating as your product team for SaaS, websites, and growth-ready launch experiences.",
     features: ["Dedicated lead + designer + engineer", "Continuous shipping", "Quarterly strategy", "Stack ownership"],
     cta: { label: "Plan partnership", href: "/book-appointment" },
     featured: true,
@@ -38,26 +38,27 @@ const TIERS: Tier[] = [
   },
   {
     name: "Productized",
-    price: "From $99",
+    price: "From $500",
     cadence: "one-time",
-    description: "Templates, MCP starters, and automation kits ready to deploy today.",
-    features: ["Stripe-powered checkout", "License + updates", "Setup docs", "Optional install help"],
+    description: "Website templates and ready websites for teams that want speed without looking generic.",
+    features: ["Flexible payment options", "1 year support + maintenance", "Setup or handoff docs", "Optional install help"],
     cta: { label: "Browse the shop", href: "/shop" },
   },
 ];
 
 const RANGES = [
-  { service: "SaaS Applications", range: "$24k – $180k+", note: "MVP sprints to multi-quarter product partnerships." },
-  { service: "Websites", range: "$9.5k – $60k", note: "Launch sprints to full redesigns with conversion architecture." },
-  { service: "MCP Servers", range: "$249 – $45k", note: "Productized starters to multi-system platform engagements." },
-  { service: "Automation", range: "$3.5k – $24k", note: "Audits to full implementation with ongoing optimization." },
+  { service: "Website Templates", range: "$500 - $10k", note: "Basic: $500-$1k, standard: $1k-$3k, premium: $3k-$10k." },
+  { service: "Ready Websites", range: "$1k - $15k", note: "Basic: $1k-$2.5k, standard: $2.5k-$5k, premium: $5k-$15k." },
+  { service: "SaaS Applications", range: "Custom scope", note: "Priced after discovery based on product scope, integrations, and delivery model." },
+  { service: "Mobile App Launch Systems", range: "Custom scope", note: "Landing sites, onboarding funnels, and growth surfaces around the app launch." },
+  { service: "MCP + Automation", range: "Secondary scope", note: "Scoped when they support the main website, SaaS, or launch engagement." },
 ];
 
 const SHOP_OFFERS = [
-  { name: "Templates", price: "$99 – $189", description: "Designed and engineered site, dashboard, and product templates." },
-  { name: "Ready websites", price: "$499 – $1,499", description: "Launch-ready sites for niche industries with content and CMS." },
-  { name: "MCP starters", price: "$249 – $799", description: "Production-grade MCP servers you can deploy in an afternoon." },
-  { name: "Automation kits", price: "$99 – $399", description: "Inquiry-to-CRM, booking-to-invoicing, support-routing kits." },
+  { name: "Website templates", price: "$500 - $10k", description: "Basic, standard, and premium website templates built with Next.js, React, and Tailwind CSS." },
+  { name: "Ready websites", price: "$1k - $15k", description: "Launch-ready websites with TypeScript and optional headless CMS setups in Strapi or Sanity." },
+  { name: "Flexible payment", price: "No advance option", description: "International clients can qualify for delivery-first payment on the first 100 projects." },
+  { name: "Support included", price: "1 year free", description: "Bug fixes, security updates, and minor content updates are included with every delivered site." },
 ];
 
 const COST_DRIVERS = [
@@ -70,11 +71,12 @@ const COST_DRIVERS = [
 ];
 
 const FAQ = [
-  { question: "What's the deposit?", answer: "30% on engagement kickoff. Remaining payments are milestone-based across the project." },
-  { question: "Can we pay monthly?", answer: "Yes — Product Partner and retainer engagements are monthly. Milestone-based custom work can also be split into monthly invoices." },
+  { question: "Do you require an advance payment?", answer: "For qualifying international clients, we do not require an advance payment on the first 100 projects. Other scopes can use milestone-based terms when that fits better." },
+  { question: "Can we choose a different payment arrangement?", answer: "Yes. We are flexible about payment structure and can tailor installments or milestones to the project as long as the arrangement stays fair for both sides." },
+  { question: "Can we pay monthly?", answer: "Yes - Product Partner engagements are monthly, and custom scopes can also be broken into agreed installments." },
   { question: "What about scope changes?", answer: "We re-estimate transparently. Small changes flow through; significant additions are scoped as a change request." },
-  { question: "Refunds on shop products?", answer: "Digital products are refundable within 14 days if they don't meet the documented description. Custom work is non-refundable once delivered against milestone acceptance." },
-  { question: "Do you offer payment plans?", answer: "For shop bundles over $1k, we offer 3-month installments via Stripe." },
+  { question: "Do you offer payment plans?", answer: "Yes. Payment plans are available when the scope and delivery model justify them, especially for larger ready-website or custom engagements." },
+  { question: "What support is included after launch?", answer: "Every delivered site comes with 1 year of free support and maintenance, including bug fixes, security updates, and minor content updates." },
 ];
 
 export default function PricingPage() {
@@ -86,10 +88,10 @@ export default function PricingPage() {
           <div className="max-w-3xl">
             <Badge tone="primary" dot>Pricing</Badge>
             <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-              Pricing that respects custom work and rewards productization.
+              Pricing built around real launches, not generic packages.
             </h1>
             <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7">
-              Real engagements have real ranges. Here&apos;s what to expect across services, partnerships, and our shop — without the salesy fog.
+              Start with transparent ranges for website templates and ready websites, then use discovery to scope SaaS, mobile launches, and the supporting systems around them.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <LinkButton href="/book-appointment" size="lg">Get a tailored proposal</LinkButton>
@@ -115,8 +117,8 @@ export default function PricingPage() {
         <Container>
           <SectionHeading
             eyebrow="Service ranges"
-            title="What custom work typically costs."
-            description="Real projects are scoped after a discovery call. These ranges set realistic expectations from the start."
+            title="Where the main offers start."
+            description="Website templates and ready websites have defined bands. SaaS, mobile launches, and secondary systems are scoped after discovery."
           />
           <div className="mt-10 overflow-hidden rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)]">
             <table className="w-full text-left text-sm">
@@ -178,8 +180,8 @@ export default function PricingPage() {
               stats={[
                 { value: "+182%", label: "Activation", hint: "SaaS rebuild" },
                 { value: "+64%", label: "Demo bookings", hint: "Website redesign" },
-                { value: "5h/wk", label: "Time saved", hint: "Automation" },
-                { value: "92s", label: "Avg approval", hint: "Onboarding" },
+                { value: "3.4x", label: "Dwell time", hint: "Subscriber website" },
+                { value: "12 days", label: "Launch speed", hint: "Ready website handoff" },
               ]}
             />
           </div>
@@ -197,7 +199,7 @@ export default function PricingPage() {
 
       <CTABand
         title="Tell us your scope. We'll tell you the real number."
-        description="A 30-minute call. A written proposal within 48 hours. No fog, no hidden line items."
+        description="A short call. A written pricing direction within 48 hours. Flexible terms, no fog, no hidden line items."
         primary={{ label: "Book Appointment", href: "/book-appointment" }}
         secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
       />

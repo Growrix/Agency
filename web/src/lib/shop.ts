@@ -65,7 +65,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slug: "atelier-marketing-theme",
     name: "Atelier Marketing Theme",
-    price: "$129",
+    price: "$790",
     category: "Templates",
     categorySlug: "templates",
     type: "Marketing Site",
@@ -77,9 +77,9 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     rating: 4.8,
     reviewCount: "3.2K",
     salesCount: "412",
-    teaser: "An editorial Next.js marketing theme with premium typography, modular sections, and launch-ready pacing.",
+    teaser: "An editorial Next.js website template with premium typography, modular sections, and launch-ready pacing.",
     summary:
-      "For founders and agencies who want a site that feels intentional on day one instead of generic-by-template.",
+      "For founders and agencies who want a premium website template that can be adapted quickly without feeling generic.",
     audience: "Studios, SaaS launches, design-led service brands",
     previewVariant: "marketing",
     includes: [
@@ -87,6 +87,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Editorial section library",
       "Token-based theme system",
       "Blog and CTA blocks",
+      "12 months support + maintenance",
       "Performance-first defaults",
     ],
     stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
@@ -99,7 +100,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slug: "operator-dashboard-kit",
     name: "Operator Dashboard Kit",
-    price: "$189",
+    price: "$1,850",
     category: "Templates",
     categorySlug: "templates",
     type: "Dashboard Website",
@@ -111,9 +112,9 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     rating: 4.6,
     reviewCount: "1.4K",
     salesCount: "238",
-    teaser: "A polished dashboard system for teams shipping internal tools, queues, and KPI-heavy operations surfaces.",
+    teaser: "A polished SaaS dashboard template for teams shipping internal tools, queues, and KPI-heavy product surfaces.",
     summary:
-      "Made for product teams who need a credible operator UI without spending weeks on table states, charts, and navigation shells.",
+      "Made for SaaS teams who need a credible operator UI without spending weeks on table states, charts, and navigation shells.",
     audience: "Ops platforms, internal tools, B2B admin products",
     previewVariant: "dashboard",
     includes: [
@@ -121,6 +122,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Queue and table states",
       "Command center modules",
       "KPI widgets + alerts",
+      "12 months support + maintenance",
       "Dark theme presets",
     ],
     stack: ["Next.js", "React", "TypeScript", "Chart-ready components"],
@@ -163,7 +165,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slug: "mobile-app-landing-pack",
     name: "Mobile App Landing Pack",
-    price: "$149",
+    price: "$1,950",
     category: "Ready Websites",
     categorySlug: "ready-websites",
     type: "Launch Website",
@@ -174,9 +176,9 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     rating: 4.7,
     reviewCount: "980",
     salesCount: "174",
-    teaser: "A launch-focused mobile landing system with app-store panels, feature storytelling, and device-first sections.",
+    teaser: "A ready website for mobile app launches with app-store panels, feature storytelling, and device-first sections.",
     summary:
-      "Useful when the product is mobile-first and the launch site needs to feel like it belongs to a real app team.",
+      "Useful when the product is mobile-first and the launch site needs to ship with the app instead of weeks later.",
     audience: "Mobile app launches, consumer SaaS, founders shipping MVPs",
     previewVariant: "mobile",
     includes: [
@@ -184,6 +186,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Device showcase layouts",
       "Download CTA modules",
       "Pricing + FAQ sections",
+      "12 months support + maintenance",
       "Social proof variants",
     ],
     stack: ["Next.js", "Responsive UI", "Mobile-first sections"],
@@ -196,7 +199,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slug: "booking-stripe-bundle",
     name: "Booking + Stripe Bundle",
-    price: "$229",
+    price: "$3,900",
     category: "Ready Websites",
     categorySlug: "ready-websites",
     type: "Booking Website",
@@ -208,9 +211,9 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     rating: 4.9,
     reviewCount: "2.1K",
     salesCount: "307",
-    teaser: "A service-business starter that combines booking UX, checkout states, and payment-ready operational flows.",
+    teaser: "A ready website for service businesses that combines booking UX, checkout states, and payment-ready operational flows.",
     summary:
-      "Designed for service companies that need the front-end polish and the operational structure behind a premium booking flow.",
+      "Designed for service companies that need front-end polish, operational structure, and a faster launch than a custom build timeline allows.",
     audience: "Studios, consultancies, premium service businesses",
     previewVariant: "booking",
     includes: [
@@ -218,6 +221,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Stripe-ready checkout states",
       "Confirmation and reminder flows",
       "Order summary patterns",
+      "12 months support + maintenance",
       "Staff handoff screens",
     ],
     stack: ["Stripe", "Calendaring flows", "Next.js", "Email state maps"],

@@ -24,22 +24,24 @@ import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
 
 const CHANNELS = [
-  { icon: PaperAirplaneIcon, name: "Inquiry form", description: "Best for project briefs and detailed scoping requests.", action: "Use the form below", href: "#form", recommended: true },
-  { icon: ChatBubbleLeftRightIcon, name: "WhatsApp", description: "Best for fast, conversational questions during business hours.", action: "Open WhatsApp", href: WHATSAPP_HREF },
-  { icon: SparklesIcon, name: "AI Concierge", description: "Best for service, pricing, and timeline questions answered instantly.", action: "Ask the concierge", href: "/ai-concierge" },
-  { icon: CalendarDaysIcon, name: "Book a call", description: "Best for discovery, scoping, and decision-grade conversations.", action: "Book appointment", href: "/book-appointment" },
+  { icon: PaperAirplaneIcon, name: "Inquiry form", description: "Best for website, SaaS, mobile app, or ready-website briefs that need clear scoping.", action: "Use the form below", href: "#form", recommended: true },
+  { icon: ChatBubbleLeftRightIcon, name: "WhatsApp", description: "Best for fast questions about pricing, timelines, and product fit during business hours.", action: "Open WhatsApp", href: WHATSAPP_HREF },
+  { icon: SparklesIcon, name: "AI Concierge", description: "Best for instant answers about websites, ready websites, SaaS work, and launch timing.", action: "Ask the concierge", href: "/ai-concierge" },
+  { icon: CalendarDaysIcon, name: "Book a call", description: "Best for discovery, scoping, and decision-grade conversations around a real launch plan.", action: "Book appointment", href: "/book-appointment" },
 ];
 
 const SERVICE_INTERESTS = [
-  "SaaS Application",
-  "Website / Marketing site",
+  "Website template",
+  "Ready website",
+  "Premium custom website",
+  "SaaS application",
+  "Mobile app launch / marketing site",
   "MCP Server",
   "Automation",
-  "Productized / Shop",
   "Not sure yet",
 ];
 
-const BUDGET_BANDS = ["< $10k", "$10k – $30k", "$30k – $80k", "$80k – $200k", "> $200k", "Not sure yet"];
+const BUDGET_BANDS = ["$500 - $1k", "$1k - $3k", "$3k - $10k", "$10k - $25k", "$25k+", "Not sure yet"];
 const URGENCY = ["Exploring", "Within 30 days", "Within 90 days", "ASAP"];
 
 export default function ContactPage() {
@@ -63,16 +65,16 @@ export default function ContactPage() {
           <div className="max-w-3xl">
             <Badge tone="primary" dot>Contact</Badge>
             <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-              The fastest way to start a real conversation.
+              The fastest way to start the right conversation.
             </h1>
-            <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7">
-              Choose the channel that fits the urgency. We respond to every inquiry within 2 business hours.
+            <p className="mt-6 text-lg text-text-muted leading-7">
+              Most inquiries here are about websites, SaaS builds, mobile app launches, and ready websites. We respond to every inquiry within 2 business hours.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-full px-3 py-1.5">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-muted">
                 <ClockIcon className="size-3.5" /> Mon–Fri · 9am–6pm CET
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-full px-3 py-1.5">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-muted">
                 <ShieldCheckIcon className="size-3.5" /> Conversations stay private
               </span>
             </div>
@@ -87,30 +89,30 @@ export default function ContactPage() {
             {CHANNELS.map((c) => (
               c.name === "AI Concierge" ? (
                 <button key={c.name} type="button" onClick={() => openConcierge()} className="group text-left">
-                  <Card hoverable className={cn("h-full", c.recommended && "border-[var(--color-primary)]/50 ring-1 ring-[var(--color-primary)]/30")}>
+                  <Card hoverable className={cn("h-full", c.recommended && "border-primary/50 ring-1 ring-primary/30")}>
                     <div className="flex items-start justify-between">
-                      <div className="inline-flex size-10 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+                      <div className="inline-flex size-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
                         <c.icon className="size-5" />
                       </div>
                       {c.recommended && <Badge tone="primary">Recommended</Badge>}
                     </div>
                     <h3 className="mt-4 font-display text-lg tracking-tight">{c.name}</h3>
-                    <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{c.description}</p>
-                    <p className="mt-4 text-sm font-medium text-[var(--color-primary)]">{c.action} →</p>
+                    <p className="mt-2 text-sm text-text-muted leading-6">{c.description}</p>
+                    <p className="mt-4 text-sm font-medium text-primary">{c.action} →</p>
                   </Card>
                 </button>
               ) : (
                 <Link key={c.name} href={c.href} className="group">
-                  <Card hoverable className={cn("h-full", c.recommended && "border-[var(--color-primary)]/50 ring-1 ring-[var(--color-primary)]/30")}>
+                  <Card hoverable className={cn("h-full", c.recommended && "border-primary/50 ring-1 ring-primary/30")}>
                     <div className="flex items-start justify-between">
-                      <div className="inline-flex size-10 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+                      <div className="inline-flex size-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
                         <c.icon className="size-5" />
                       </div>
                       {c.recommended && <Badge tone="primary">Recommended</Badge>}
                     </div>
                     <h3 className="mt-4 font-display text-lg tracking-tight">{c.name}</h3>
-                    <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{c.description}</p>
-                    <p className="mt-4 text-sm font-medium text-[var(--color-primary)]">{c.action} →</p>
+                    <p className="mt-2 text-sm text-text-muted leading-6">{c.description}</p>
+                    <p className="mt-4 text-sm font-medium text-primary">{c.action} →</p>
                   </Card>
                 </Link>
               )
@@ -125,14 +127,14 @@ export default function ContactPage() {
             <div className="lg:col-span-5">
               <SectionHeading
                 eyebrow="Inquiry form"
-                title="Tell us about the work."
-                description="Share what you're building, the timeline, and any constraints. We'll respond with a written next step within 2 business hours."
+                title="Tell us what you want to launch."
+                description="Share the website, SaaS product, mobile launch, or ready-site need, plus the timeline and constraints. We'll respond with a written next step within 2 business hours."
               />
               <Card className="mt-8">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">Trust note</p>
-                <p className="mt-2 text-sm leading-6 text-[var(--color-text-muted)]">
-                  Your message is sent over HTTPS, stored securely, and only used to respond to your inquiry. See our{" "}
-                  <Link href="/privacy-policy" className="text-[var(--color-primary)] underline">privacy policy</Link>.
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Trust note</p>
+                <p className="mt-2 text-sm leading-6 text-text-muted">
+                  Your message is sent over HTTPS, stored securely, and only used to respond to your inquiry. Qualifying international clients can also use our delivery-first payment option. See our{" "}
+                  <Link href="/privacy-policy" className="text-primary underline">privacy policy</Link>.
                 </p>
               </Card>
             </div>
@@ -150,10 +152,10 @@ export default function ContactPage() {
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: "spring", stiffness: 420, damping: 18, delay: 0.05 }}
                     >
-                      <CheckCircleIcon className="mx-auto size-12 text-[var(--color-success)]" aria-hidden />
+                      <CheckCircleIcon className="mx-auto size-12 text-success" aria-hidden />
                     </motion.div>
                     <h3 className="mt-4 font-display text-2xl tracking-tight">Thanks — we got it.</h3>
-                    <p className="mt-2 text-[var(--color-text-muted)] max-w-md mx-auto">
+                    <p className="mx-auto mt-2 max-w-md text-text-muted">
                       We&apos;ll respond within 2 business hours. Need something faster? Open WhatsApp or book a call.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-3 justify-center">
@@ -198,7 +200,7 @@ export default function ContactPage() {
                       <textarea name="message" required rows={5} className="signal-input" placeholder="What are you building? What problem are we solving?" />
                     </Field>
                     <div className="flex items-center justify-between gap-4 pt-2">
-                      <p className="text-xs text-[var(--color-text-muted)]">By submitting, you agree to our privacy policy.</p>
+                      <p className="text-xs text-text-muted">By submitting, you agree to our privacy policy.</p>
                       <Button type="submit" disabled={status === "submitting"}>
                         {status === "submitting" ? "Sending…" : "Send inquiry"}
                       </Button>
@@ -256,8 +258,8 @@ export default function ContactPage() {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
-        {label} {required && <span className="text-[var(--color-destructive)]">*</span>}
+      <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+        {label} {required && <span className="text-destructive">*</span>}
       </span>
       <div className="mt-1.5">{children}</div>
     </label>
