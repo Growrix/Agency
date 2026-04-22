@@ -15,7 +15,7 @@ export const PRIMARY_NAV = [
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "AI Concierge", href: "/ai-concierge" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const FOOTER_NAV = {
@@ -41,7 +41,7 @@ export const FOOTER_NAV = {
   ],
   Support: [
     { label: "FAQ", href: "/faq" },
-    { label: "AI Concierge", href: "/ai-concierge" },
+    { label: "AI Growrix OS", href: "/ai-concierge" },
     { label: "Book Appointment", href: "/book-appointment" },
     { label: "WhatsApp", href: "https://wa.me/0000000000" },
   ],

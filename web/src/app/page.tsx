@@ -96,7 +96,7 @@ export default function Home() {
                 className="signal-rise mt-6 max-w-xl text-lg text-text-muted leading-7 text-pretty"
                 style={{ animationDelay: "180ms" }}
               >
-                From premium websites and SaaS apps to mobile launch pages and ready sites—we deliver results that don't look generic. MCP servers and automation support your roadmap when required.
+                From premium websites and SaaS apps to mobile launch pages and ready sites-we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required.
               </p>
               <div
                 className="signal-rise mt-8 flex flex-wrap gap-3"
@@ -351,13 +351,13 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-12 items-center">
             <div className="lg:col-span-5">
               <SectionHeading
-                eyebrow="AI Concierge"
+                eyebrow="AI Growrix OS"
                 title="Get the right answer before you book."
                 description="Ask about website scope, SaaS roadmaps, ready website fit, pricing, or timelines. The concierge keeps MCP and automation in context when they support the main build."
               />
               <div className="mt-8 flex flex-wrap gap-3">
                 <ConciergeTriggerButton>
-                  <SparklesIcon className="size-4" /> Ask the concierge
+                  <SparklesIcon className="size-4" /> Ask AI Growrix OS
                 </ConciergeTriggerButton>
                 <LinkButton href={WHATSAPP_HREF} variant="outline">
                   <ChatBubbleLeftRightIcon className="size-4" /> WhatsApp

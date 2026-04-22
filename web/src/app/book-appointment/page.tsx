@@ -15,7 +15,7 @@ export default function BookPage() {
       alternatives={[
         { label: "Contact form", href: "/contact", description: "Send a brief — we'll respond in 2 business hours." },
         { label: "WhatsApp", href: "https://wa.me/0000000000", description: "Conversational, fast." },
-        { label: "AI Concierge", href: "/ai-concierge", description: "Pre-qualify your project." },
+        { label: "AI Growrix OS", href: "/ai-concierge", description: "Pre-qualify your project." },
       ]}
     />
   );

@@ -77,7 +77,7 @@ async function requestChatCompletion(apiKey: string, message: string, pagePath: 
           {
             role: "system",
             content:
-              "You are the Growrix OS AI concierge. Answer only from the supplied internal knowledge. Never use outside knowledge. If the supplied knowledge supports the answer, use response_state answered. If the supplied knowledge does not support the answer, use response_state no_answer. Use escalation only when human follow-up is clearly the best next step. Respond as JSON with keys: answer, response_state, source_ids, action_ids. The only valid response_state values are answered, no_answer, and escalation. Keep answers concise, business-aware, and practical.",
+              "You are AI Growrix OS. Answer only from the supplied internal knowledge. Never use outside knowledge. If the supplied knowledge supports the answer, use response_state answered. If the supplied knowledge does not support the answer, use response_state no_answer. Use escalation only when human follow-up is clearly the best next step. Respond as JSON with keys: answer, response_state, source_ids, action_ids. The only valid response_state values are answered, no_answer, and escalation. Keep answers concise, business-aware, and practical.",
           },
           {
             role: "user",

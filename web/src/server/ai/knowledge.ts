@@ -72,7 +72,7 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/contact",
     sourceType: "contact",
     content:
-      `Growrix supports several next steps depending on urgency: use the AI concierge for quick pre-sales questions, open WhatsApp at ${WHATSAPP_HREF} for direct messaging, use the contact form for a brief, or book an appointment for a scoped conversation.`,
+      `Growrix supports several next steps depending on urgency: use AI Growrix OS for quick pre-sales questions, open WhatsApp at ${WHATSAPP_HREF} for direct messaging, use the contact form for a brief, or book an appointment for a scoped conversation.`,
   },
   {
     id: "booking-path",

@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ConciergeChat } from "@/components/ai/ConciergeChat";
 
 export const metadata: Metadata = {
-  title: "AI Concierge",
+  title: "AI Growrix OS",
   description: "Get instant, business-aware answers about Growrix OS services, pricing, and timelines.",
 };
 

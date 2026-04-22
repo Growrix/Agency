@@ -313,7 +313,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           )}
         >
           <label className="sr-only" htmlFor={isModal ? "concierge-input-modal" : "concierge-input-page"}>
-            Ask the concierge
+            Ask AI Growrix OS
           </label>
           <textarea
             id={isModal ? "concierge-input-modal" : "concierge-input-page"}
@@ -380,7 +380,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         <div className="border-b border-border bg-inset/60 px-4 pb-3 pr-4 pt-[calc(env(safe-area-inset-top)+0.875rem)] sm:px-6 sm:py-4 sm:pr-16">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-display text-xl tracking-tight sm:text-2xl">Ask the concierge</p>
+              <p className="font-display text-xl tracking-tight sm:text-2xl">Ask AI Growrix OS</p>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-text-muted">
                 Stay on the current page while chatting. Answers are grounded in current Growrix site content only.
               </p>
@@ -414,7 +414,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div className="max-w-3xl">
               <Badge tone="primary" dot>
-                AI Concierge
+                AI Growrix OS
               </Badge>
               <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
                 Get the right answer before you book.

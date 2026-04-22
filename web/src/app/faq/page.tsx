@@ -146,7 +146,7 @@ export default function FAQPage() {
             <ConciergeTrigger className="text-left">
               <Card hoverable className="text-center">
                 <SparklesIcon className="mx-auto size-7 text-primary" aria-hidden />
-                <p className="mt-3 font-display text-lg tracking-tight">AI Concierge</p>
+                <p className="mt-3 font-display text-lg tracking-tight">AI Growrix OS</p>
               </Card>
             </ConciergeTrigger>
             <Link href={WHATSAPP_HREF}>

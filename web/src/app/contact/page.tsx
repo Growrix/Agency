@@ -26,7 +26,7 @@ import { useConciergeStore } from "@/lib/concierge-store";
 const CHANNELS = [
   { icon: PaperAirplaneIcon, name: "Inquiry form", description: "Best for website, SaaS, mobile app, or ready-website briefs that need clear scoping.", action: "Use the form below", href: "#form", recommended: true },
   { icon: ChatBubbleLeftRightIcon, name: "WhatsApp", description: "Best for fast questions about pricing, timelines, and product fit during business hours.", action: "Open WhatsApp", href: WHATSAPP_HREF },
-  { icon: SparklesIcon, name: "AI Concierge", description: "Best for instant answers about websites, ready websites, SaaS work, and launch timing.", action: "Ask the concierge", href: "/ai-concierge" },
+  { icon: SparklesIcon, name: "AI Growrix OS", description: "Best for instant answers about websites, ready websites, SaaS work, and launch timing.", action: "Ask AI Growrix OS", href: "/ai-concierge" },
   { icon: CalendarDaysIcon, name: "Book a call", description: "Best for discovery, scoping, and decision-grade conversations around a real launch plan.", action: "Book appointment", href: "/book-appointment" },
 ];
 
@@ -99,7 +99,7 @@ export default function ContactPage() {
           <SectionHeading eyebrow="Channels" title="Pick the route that fits." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {CHANNELS.map((c) => (
-              c.name === "AI Concierge" ? (
+              c.name === "AI Growrix OS" ? (
                 <button key={c.name} type="button" onClick={() => openConcierge()} className="group text-left">
                   <Card hoverable className={cn("h-full", c.recommended && "border-primary/50 ring-1 ring-primary/30")}>
                     <div className="flex items-start justify-between">
