@@ -43,7 +43,7 @@ export const FOOTER_NAV = {
     { label: "FAQ", href: "/faq" },
     { label: "AI Growrix OS", href: "/ai-concierge" },
     { label: "Book Appointment", href: "/book-appointment" },
-    { label: "WhatsApp", href: "https://wa.me/0000000000" },
+    { label: "WhatsApp", href: "https://wa.me/8801986925425" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
@@ -51,4 +51,4 @@ export const FOOTER_NAV = {
   ],
 };
 
-export const WHATSAPP_HREF = "https://wa.me/0000000000";
+export const WHATSAPP_HREF = "https://wa.me/8801986925425";
