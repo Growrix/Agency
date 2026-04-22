@@ -7,15 +7,15 @@ type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-primary)] text-[var(--color-surface)] hover:bg-[var(--color-primary-hover)] shadow-[var(--shadow-1)]",
+    "bg-primary text-surface hover:bg-primary-hover shadow-[var(--shadow-1)]",
   secondary:
-    "bg-[var(--color-secondary)] text-[var(--color-surface)] hover:bg-[var(--color-secondary-hover)] shadow-[var(--shadow-1)]",
+    "bg-secondary text-surface hover:bg-secondary-hover shadow-[var(--shadow-1)]",
   ghost:
-    "bg-transparent text-[var(--color-text)] hover:bg-[var(--color-inset)]",
+    "bg-transparent text-text hover:bg-inset",
   outline:
     "border border-[var(--button-outline-border)] bg-[var(--button-outline-bg)] text-[var(--button-outline-text)] hover:border-[var(--button-outline-border-hover)] hover:bg-[var(--button-outline-bg-hover)]",
   destructive:
-    "bg-[var(--color-destructive)] text-[var(--color-surface)] hover:opacity-90",
+    "bg-destructive text-surface hover:opacity-90",
 };
 
 const sizes: Record<Size, string> = {
@@ -33,7 +33,7 @@ type CommonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-[12px] font-medium tracking-tight transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[var(--ease-signal)] disabled:opacity-60 disabled:pointer-events-none whitespace-nowrap will-change-transform hover:-translate-y-px active:translate-y-0 active:scale-[0.97]";
+  "inline-flex items-center justify-center rounded-sm font-medium tracking-tight transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[var(--ease-signal)] disabled:opacity-60 disabled:pointer-events-none whitespace-nowrap will-change-transform hover:-translate-y-px active:translate-y-0 active:scale-[0.97]";
 
 export function Button({
   variant = "primary",

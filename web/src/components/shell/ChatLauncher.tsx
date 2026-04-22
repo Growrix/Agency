@@ -10,7 +10,7 @@ export function ChatLauncher() {
   const toggle = useConciergeStore((state) => state.toggle);
 
   const buttonClass = cn(
-    "size-14 rounded-full bg-[var(--color-primary)] text-[var(--color-surface)] shadow-[var(--shadow-3)] flex items-center justify-center hover:bg-[var(--color-primary-hover)] transition-colors"
+    "size-14 rounded-full bg-primary text-surface shadow-[var(--shadow-3)] flex items-center justify-center hover:bg-primary-hover transition-colors"
   );
   const icon = isOpen ? <XMarkIcon className="size-6" /> : <ChatBubbleLeftRightIcon className="size-6" />;
 

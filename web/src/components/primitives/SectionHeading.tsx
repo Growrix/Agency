@@ -6,11 +6,11 @@ export function Eyebrow({ children, className }: { children: ReactNode; classNam
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-primary)]",
+        "inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary",
         className
       )}
     >
-      <span className="h-px w-6 bg-[var(--color-primary)]/50" aria-hidden />
+      <span className="h-px w-6 bg-primary/50" aria-hidden />
       {children}
     </span>
   );
@@ -51,7 +51,7 @@ export function SectionHeading({
       </Reveal>
       {description && (
         <Reveal delay={eyebrow ? 0.14 : 0.07}>
-          <p className="mt-5 text-[17px] leading-7 text-[var(--color-text-muted)] text-pretty">
+          <p className="mt-5 text-[17px] leading-7 text-text-muted text-pretty">
             {description}
           </p>
         </Reveal>

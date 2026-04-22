@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 type Tone = "neutral" | "primary" | "secondary" | "accent" | "success" | "warning";
 
 const tones: Record<Tone, string> = {
-  neutral: "bg-[var(--color-inset)] text-[var(--color-text)] border-[var(--color-border)]",
-  primary: "bg-[var(--color-primary)]/10 text-[var(--color-primary)] border-[var(--color-primary)]/25",
-  secondary: "bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] border-[var(--color-secondary)]/25",
-  accent: "bg-[var(--color-accent)]/10 text-[var(--color-accent)] border-[var(--color-accent)]/25",
-  success: "bg-[var(--color-success)]/10 text-[var(--color-success)] border-[var(--color-success)]/25",
-  warning: "bg-[var(--color-warning)]/10 text-[var(--color-warning)] border-[var(--color-warning)]/25",
+  neutral: "bg-inset text-text border-border",
+  primary: "bg-primary/10 text-primary border-primary/25",
+  secondary: "bg-secondary/10 text-secondary border-secondary/25",
+  accent: "bg-accent/10 text-accent border-accent/25",
+  success: "bg-success/10 text-success border-success/25",
+  warning: "bg-warning/10 text-warning border-warning/25",
 };
 
 export function Badge({

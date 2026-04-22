@@ -53,7 +53,7 @@ export function ProseArticle({ blocks }: { blocks: BlogBodyBlock[] }) {
               <blockquote key={i}>
                 <p>{b.text}</p>
                 {b.cite && (
-                  <footer className="mt-2 font-sans text-sm not-italic text-[var(--color-text-muted)]">
+                  <footer className="mt-2 font-sans text-sm not-italic text-text-muted">
                     — {b.cite}
                   </footer>
                 )}

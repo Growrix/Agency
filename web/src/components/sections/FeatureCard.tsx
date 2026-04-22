@@ -22,19 +22,19 @@ export function FeatureCard({
   const inner = (
     <>
       {icon && (
-        <div className="mb-5 inline-flex size-11 items-center justify-center rounded-[12px] bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+        <div className="mb-5 inline-flex size-11 items-center justify-center rounded-sm bg-primary/10 text-primary">
           {icon}
         </div>
       )}
       <h3 className="font-display text-xl tracking-tight">{title}</h3>
-      <p className="mt-2 text-[var(--color-text-muted)] leading-7 text-pretty">{description}</p>
+      <p className="mt-2 text-text-muted leading-7 text-pretty">{description}</p>
       {meta && (
-        <p className="mt-4 font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+        <p className="mt-4 font-mono text-xs uppercase tracking-wider text-text-muted">
           {meta}
         </p>
       )}
       {href && (
-        <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)] group-hover:gap-2 transition-all">
+        <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
           Explore <ArrowUpRightIcon className="size-4" />
         </span>
       )}

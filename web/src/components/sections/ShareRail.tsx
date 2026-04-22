@@ -84,7 +84,7 @@ export function ShareRail({
         className
       )}
     >
-      <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] xl:mb-1">
+      <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-text-muted xl:mb-1">
         Share
       </span>
       {links.map(({ label, href, Icon }) => (
@@ -94,7 +94,7 @@ export function ShareRail({
           target="_blank"
           rel="noreferrer"
           aria-label={label}
-          className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors"
+          className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-text-muted hover:text-primary hover:border-primary transition-colors"
         >
           <Icon className="size-4" />
         </a>
@@ -102,9 +102,9 @@ export function ShareRail({
       <button
         onClick={copy}
         aria-label={copied ? "Link copied" : "Copy link"}
-        className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors"
+        className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-text-muted hover:text-primary hover:border-primary transition-colors"
       >
-        {copied ? <CheckIcon className="size-4 text-[var(--color-success)]" /> : <LinkIcon className="size-4" />}
+        {copied ? <CheckIcon className="size-4 text-success" /> : <LinkIcon className="size-4" />}
       </button>
     </div>
   );

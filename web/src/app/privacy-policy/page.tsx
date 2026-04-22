@@ -75,15 +75,15 @@ export default function PrivacyPage() {
         <Container width="reading">
           <Badge tone="primary" dot>Legal</Badge>
           <h1 className="mt-5 font-display text-4xl sm:text-5xl tracking-tight text-balance">Privacy Policy</h1>
-          <p className="mt-4 text-[var(--color-text-muted)] text-pretty">
+          <p className="mt-4 text-text-muted text-pretty">
             Last updated April 19, 2026. This policy explains how we handle data across the website, AI chat, booking, and payments.
           </p>
-          <nav className="mt-8 rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-            <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">On this page</p>
+          <nav className="mt-8 rounded-[16px] border border-border bg-surface p-5">
+            <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">On this page</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} className="text-sm text-[var(--color-primary)] hover:underline">
+                  <a href={`#${s.id}`} className="text-sm text-primary hover:underline">
                     {s.title}
                   </a>
                 </li>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
             {SECTIONS.map((s) => (
               <section key={s.id} id={s.id} className="scroll-mt-24">
                 <h2 className="font-display text-2xl tracking-tight">{s.title}</h2>
-                <div className="mt-4 space-y-3 text-[var(--color-text-muted)] leading-7 text-pretty">
+                <div className="mt-4 space-y-3 text-text-muted leading-7 text-pretty">
                   {s.body.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
@@ -112,12 +112,12 @@ export default function PrivacyPage() {
 
       <Section className="py-12">
         <Container width="reading">
-          <div className="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+          <div className="rounded-[20px] border border-border bg-surface p-8">
             <h3 className="font-display text-xl tracking-tight">Questions about your data?</h3>
-            <p className="mt-2 text-[var(--color-text-muted)]">We respond to privacy questions within 5 business days.</p>
+            <p className="mt-2 text-text-muted">We respond to privacy questions within 5 business days.</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <LinkButton href="/contact">Contact us</LinkButton>
-              <Link href="/terms-of-service" className="inline-flex items-center text-sm font-medium text-[var(--color-primary)] px-3 py-2">
+              <Link href="/terms-of-service" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
                 Read terms of service →
               </Link>
             </div>

@@ -5,9 +5,9 @@ type Variant = "surface" | "inset" | "outline" | "dark";
 
 const variants: Record<Variant, string> = {
   surface:
-    "bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-1)]",
-  inset: "bg-[var(--color-inset)]/70 border border-[var(--color-border)]",
-  outline: "bg-transparent border border-[var(--color-border)]",
+    "bg-surface border border-border shadow-[var(--shadow-1)]",
+  inset: "bg-inset/70 border border-border",
+  outline: "bg-transparent border border-border",
   dark: "contrast-surface bg-contrast text-contrast-text border border-white/10",
 };
 

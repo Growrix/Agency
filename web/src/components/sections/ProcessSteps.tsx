@@ -10,20 +10,20 @@ export function ProcessSteps({ steps }: { steps: Step[]; eyebrow?: ReactNode }) 
         <RevealItem
           as="li"
           key={step.title}
-          className="relative rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-1)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
+          className="relative rounded-[16px] border border-border bg-surface p-6 shadow-[var(--shadow-1)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-border-strong"
         >
           <div className="flex items-center justify-between">
-            <span className="font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+            <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
               Step {step.number}
             </span>
-            <span className="size-7 rounded-full border border-[var(--color-border)] flex items-center justify-center text-xs font-mono">
+            <span className="size-7 rounded-full border border-border flex items-center justify-center text-xs font-mono">
               {idx + 1}
             </span>
           </div>
           <h3 className="mt-4 font-display text-lg tracking-tight">{step.title}</h3>
-          <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6">{step.description}</p>
+          <p className="mt-2 text-sm text-text-muted leading-6">{step.description}</p>
           {step.meta && (
-            <p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-[var(--color-primary)]">
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
               {step.meta}
             </p>
           )}

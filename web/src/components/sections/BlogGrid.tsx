@@ -27,7 +27,7 @@ export function BlogGrid({ posts }: { posts: BlogPost[] }) {
           <Button variant="outline" onClick={() => setVisible((v) => v + PAGE_SIZE)}>
             Load more articles
           </Button>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
             Showing {shown.length} of {posts.length}
           </p>
         </div>

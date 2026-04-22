@@ -39,7 +39,7 @@ export function Section({
 }) {
   const toneClass =
     tone === "inset"
-      ? "bg-[var(--color-inset)]"
+      ? "bg-inset"
       : tone === "dark"
         ? "contrast-surface bg-contrast text-contrast-text"
         : "";

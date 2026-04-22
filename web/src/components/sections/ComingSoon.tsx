@@ -24,7 +24,7 @@ export function ComingSoon({
         <div className="text-center max-w-2xl mx-auto">
           <Badge tone="secondary" dot>{eyebrow}</Badge>
           <h1 className="mt-5 font-display text-5xl sm:text-6xl tracking-tight text-balance">{title}</h1>
-          <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7 text-pretty">{description}</p>
+          <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <LinkButton href="/contact" size="lg">
               <EnvelopeIcon className="size-4" /> Get notified
@@ -37,7 +37,7 @@ export function ComingSoon({
 
         {alternatives.length > 0 && (
           <div className="mt-16">
-            <p className="text-center font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+            <p className="text-center font-mono text-xs uppercase tracking-wider text-text-muted">
               In the meantime
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-3xl mx-auto">
@@ -46,9 +46,9 @@ export function ComingSoon({
                   <Card hoverable>
                     <p className="font-display text-lg tracking-tight">{a.label}</p>
                     {a.description && (
-                      <p className="mt-1 text-sm text-[var(--color-text-muted)]">{a.description}</p>
+                      <p className="mt-1 text-sm text-text-muted">{a.description}</p>
                     )}
-                    <p className="mt-3 text-sm font-medium text-[var(--color-primary)]">Open →</p>
+                    <p className="mt-3 text-sm font-medium text-primary">Open →</p>
                   </Card>
                 </Link>
               ))}
@@ -59,7 +59,7 @@ export function ComingSoon({
         <div className="mt-10 text-center">
           <Link
             href={WHATSAPP_HREF}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-text-muted hover:text-primary"
           >
             <ChatBubbleLeftRightIcon className="size-4" /> Or message us on WhatsApp
           </Link>

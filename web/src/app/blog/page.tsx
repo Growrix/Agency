@@ -91,7 +91,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
               Field notes from a studio that ships.
             </h1>
             <p
-              className="mt-5 text-lg text-[var(--color-text-muted)] leading-7 text-pretty signal-rise"
+              className="mt-5 text-lg text-text-muted leading-7 text-pretty signal-rise"
               style={{ animationDelay: "140ms" }}
             >
               Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.
@@ -101,9 +101,9 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
           {!isFiltering && featured && (
             <Link
               href={`/blog/${featured.slug}`}
-              className="group mt-12 grid overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] hover:shadow-[var(--shadow-3)] transition-all lg:grid-cols-12"
+              className="group mt-12 grid overflow-hidden rounded-[24px] border border-border bg-surface hover:shadow-[var(--shadow-3)] transition-all lg:grid-cols-12"
             >
-              <div className={`relative aspect-[16/10] lg:aspect-auto lg:col-span-7 overflow-hidden bg-gradient-to-br ${featured.accent}`}>
+              <div className={`relative aspect-16/10 lg:aspect-auto lg:col-span-7 overflow-hidden bg-linear-to-br ${featured.accent}`}>
                 {featuredImage ? (
                   <Image
                     src={featuredImage.src}
@@ -120,26 +120,26 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                 </div>
               </div>
               <div className="lg:col-span-5 flex flex-col justify-center p-8 lg:p-10">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                   {formatBlogDate(featured.publishedAt)} · {featured.readMinutes} min read
                 </p>
-                <h2 className="mt-3 font-display text-3xl lg:text-[34px] tracking-tight leading-[1.1] group-hover:text-[var(--color-primary)] transition-colors">
+                <h2 className="mt-3 font-display text-3xl lg:text-[34px] tracking-tight leading-[1.1] group-hover:text-primary transition-colors">
                   {featured.title}
                 </h2>
-                <p className="mt-4 text-[15px] leading-6 text-[var(--color-text-muted)] text-pretty">
+                <p className="mt-4 text-[15px] leading-6 text-text-muted text-pretty">
                   {featured.excerpt}
                 </p>
                 <div className="mt-6 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <span className="inline-flex size-9 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-xs font-semibold">
+                    <span className="inline-flex size-9 items-center justify-center rounded-full bg-inset font-mono text-xs font-semibold">
                       {featured.author.initials}
                     </span>
                     <div>
                       <div className="text-sm font-medium">{featured.author.name}</div>
-                      <div className="text-xs text-[var(--color-text-muted)]">{featured.author.role}</div>
+                      <div className="text-xs text-text-muted">{featured.author.role}</div>
                     </div>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)] group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
                     Read <ArrowUpRightIcon className="size-4" />
                   </span>
                 </div>
@@ -167,7 +167,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                     <Link
                       key={c.key}
                       href={chipHref(c.key)}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/10 px-3 py-1 text-xs font-medium text-[var(--color-primary)] hover:bg-[var(--color-primary)]/15"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary hover:bg-primary/15"
                     >
                       {c.label}
                       <XMarkIcon className="size-3.5" />
@@ -175,7 +175,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                   ))}
                   <Link
                     href="/blog"
-                    className="inline-flex items-center rounded-full border border-[var(--color-border)] px-3 py-1 text-xs font-medium text-[var(--color-text-muted)] hover:bg-[var(--color-inset)]"
+                    className="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-text-muted hover:bg-inset"
                   >
                     Clear all
                   </Link>
@@ -183,12 +183,12 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
               )}
 
               {grid.length === 0 ? (
-                <div className="mt-10 rounded-[20px] border border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-10 text-center">
+                <div className="mt-10 rounded-[20px] border border-dashed border-border bg-surface p-10 text-center">
                   <p className="font-display text-2xl tracking-tight">No matching articles.</p>
-                  <p className="mt-2 text-[var(--color-text-muted)]">Try clearing filters or searching for a different term.</p>
+                  <p className="mt-2 text-text-muted">Try clearing filters or searching for a different term.</p>
                   <Link
                     href="/blog"
-                    className="mt-4 inline-block text-sm font-medium text-[var(--color-primary)]"
+                    className="mt-4 inline-block text-sm font-medium text-primary"
                   >
                     Reset filters →
                   </Link>

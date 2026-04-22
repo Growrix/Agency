@@ -40,22 +40,22 @@ function CommentItem({
   const open = pendingReplyId === comment.id;
 
   return (
-    <li className="rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-5">
+    <li className="rounded-[16px] border border-border bg-surface p-4 sm:p-5">
       <div className="flex items-start gap-3">
-        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-[11px] font-semibold">
+        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-inset font-mono text-[11px] font-semibold">
           {comment.initials}
         </span>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
             <span className="font-medium text-sm">{comment.author}</span>
-            <span className="font-mono text-[11px] text-[var(--color-text-muted)]">
+            <span className="font-mono text-[11px] text-text-muted">
               {formatBlogDate(comment.postedAt)}
             </span>
           </div>
-          <p className="mt-2 text-[15px] leading-6 text-[var(--color-text)]">{comment.body}</p>
+          <p className="mt-2 text-[15px] leading-6 text-text">{comment.body}</p>
           <button
             onClick={() => setPendingReplyId(open ? null : comment.id)}
-            className="mt-3 text-xs font-medium text-[var(--color-primary)] hover:underline"
+            className="mt-3 text-xs font-medium text-primary hover:underline"
           >
             {open ? "Cancel" : "Reply"}
           </button>
@@ -63,20 +63,20 @@ function CommentItem({
       </div>
 
       {comment.replies && comment.replies.length > 0 && (
-        <ul className="mt-4 ml-0 space-y-3 border-l border-[var(--color-border)] pl-3 sm:ml-12 sm:pl-4">
+        <ul className="mt-4 ml-0 space-y-3 border-l border-border pl-3 sm:ml-12 sm:pl-4">
           {comment.replies.map((r) => (
             <li key={r.id} className="flex items-start gap-3">
-              <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-[10px] font-semibold">
+              <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-inset font-mono text-[10px] font-semibold">
                 {r.initials}
               </span>
               <div className="min-w-0">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <span className="font-medium text-sm">{r.author}</span>
-                  <span className="font-mono text-[10px] text-[var(--color-text-muted)]">
+                  <span className="font-mono text-[10px] text-text-muted">
                     {formatBlogDate(r.postedAt)}
                   </span>
                 </div>
-                <p className="mt-1 text-sm leading-6 text-[var(--color-text)]">{r.body}</p>
+                <p className="mt-1 text-sm leading-6 text-text">{r.body}</p>
               </div>
             </li>
           ))}
@@ -91,7 +91,7 @@ function CommentItem({
             aria-label="Your name"
             value={replyName}
             onChange={(e) => setReplyName(e.target.value)}
-            className="w-full rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+            className="w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm focus:outline-none focus:border-primary"
             required
           />
           <textarea
@@ -100,7 +100,7 @@ function CommentItem({
             value={replyBody}
             onChange={(e) => setReplyBody(e.target.value)}
             rows={2}
-            className="w-full resize-none rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+            className="w-full resize-none rounded-[10px] border border-border bg-surface px-3 py-2 text-sm focus:outline-none focus:border-primary"
             required
           />
           <Button type="submit" size="sm">Post reply</Button>
@@ -153,9 +153,9 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
     <section className="mt-16">
       <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-baseline sm:justify-between">
         <h2 className="font-display text-2xl tracking-tight">
-          Discussion <span className="text-[var(--color-text-muted)] font-normal">({comments.length})</span>
+          Discussion <span className="text-text-muted font-normal">({comments.length})</span>
         </h2>
-        <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+        <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
           Be kind. Be specific.
         </span>
       </div>
@@ -169,7 +169,7 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
             aria-label="Your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+            className="rounded-[10px] border border-border bg-surface px-3 py-2.5 text-sm focus:outline-none focus:border-primary"
           />
           <input
             type="email"
@@ -178,7 +178,7 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
             aria-label="Email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+            className="rounded-[10px] border border-border bg-surface px-3 py-2.5 text-sm focus:outline-none focus:border-primary"
           />
           <textarea
             required
@@ -187,10 +187,10 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={4}
-            className="sm:col-span-2 resize-none rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+            className="sm:col-span-2 resize-none rounded-[10px] border border-border bg-surface px-3 py-2.5 text-sm focus:outline-none focus:border-primary"
           />
           <div className="sm:col-span-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-[var(--color-text-muted)]">
+            <p className="text-xs text-text-muted">
               Email is never published. Comments load instantly in this preview.
             </p>
             <Button type="submit">Post comment</Button>
@@ -200,7 +200,7 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
               initial={{ opacity: 0, scale: 0.92, y: 6 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 380, damping: 24, mass: 0.6 }}
-              className="sm:col-span-2 rounded-[10px] bg-[var(--color-success)]/10 border border-[var(--color-success)]/25 px-3 py-2 text-sm text-[var(--color-success)]"
+              className="sm:col-span-2 rounded-[10px] bg-success/10 border border-success/25 px-3 py-2 text-sm text-success"
             >
               Thanks — your comment is up.
             </motion.p>

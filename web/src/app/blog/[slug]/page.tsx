@@ -61,12 +61,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       {/* Hero */}
       <Section className="pb-0 pt-8 sm:pt-10">
         <Container width="reading">
-          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
-            <Link href="/" className="hover:text-[var(--color-primary)]">Home</Link>
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs text-text-muted">
+            <Link href="/" className="hover:text-primary">Home</Link>
             <ChevronRightIcon className="size-3.5" />
-            <Link href="/blog" className="hover:text-[var(--color-primary)]">Blog</Link>
+            <Link href="/blog" className="hover:text-primary">Blog</Link>
             <ChevronRightIcon className="size-3.5" />
-            <span className="text-[var(--color-text)] truncate">{post.title}</span>
+            <span className="text-text truncate">{post.title}</span>
           </nav>
 
           <div className="mt-8">
@@ -74,20 +74,20 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             <h1 className="mt-5 font-display text-3xl leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[56px]">
               {post.title}
             </h1>
-            <p className="mt-5 text-base leading-7 text-[var(--color-text-muted)] text-pretty sm:text-lg">
+            <p className="mt-5 text-base leading-7 text-text-muted text-pretty sm:text-lg">
               {post.excerpt}
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
               <div className="flex items-center gap-3">
-                <span className="inline-flex size-10 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-xs font-semibold">
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-inset font-mono text-xs font-semibold">
                   {post.author.initials}
                 </span>
                 <div>
                   <div className="text-sm font-medium">{post.author.name}</div>
-                  <div className="text-xs text-[var(--color-text-muted)]">{post.author.role}</div>
+                  <div className="text-xs text-text-muted">{post.author.role}</div>
                 </div>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                 {formatBlogDate(post.publishedAt)} · {post.readMinutes} min read
               </span>
             </div>
@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         </Container>
 
         <Container width="content" className="mt-8 sm:mt-10">
-          <div className={`relative aspect-[4/3] overflow-hidden rounded-[24px] bg-gradient-to-br sm:aspect-[21/9] ${post.accent}`}>
+          <div className={`relative aspect-4/3 overflow-hidden rounded-[24px] bg-linear-to-br sm:aspect-21/9 ${post.accent}`}>
             {heroImage ? (
               <Image
                 src={heroImage.src}
@@ -115,18 +115,18 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <Section className="pt-12 pb-8">
         <Container width="content">
           <div className="grid gap-6 xl:grid-cols-[72px_minmax(0,1fr)_280px] xl:items-start">
-            <article className="order-1 min-w-0 max-w-[720px] xl:order-2 xl:max-w-none">
+            <article className="order-1 min-w-0 max-w-180 xl:order-2 xl:max-w-none">
               <ProseArticle blocks={post.body} />
 
               <div className="mt-12 flex flex-wrap items-center gap-2">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)] mr-1">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted mr-1">
                   Tags
                 </span>
                 {post.tags.map((t) => (
                   <Link
                     key={t}
                     href={`/blog?tag=${encodeURIComponent(t)}`}
-                    className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-1 text-xs hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
+                    className="inline-flex items-center rounded-full border border-border bg-surface px-2.5 py-1 text-xs hover:border-primary hover:text-primary"
                   >
                     #{t}
                   </Link>
@@ -136,15 +136,15 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               {/* Author card */}
               <Card className="mt-12">
                 <div className="flex items-start gap-4">
-                  <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-mono text-sm font-semibold">
+                  <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary font-mono text-sm font-semibold">
                     {post.author.initials}
                   </span>
                   <div>
                     <div className="font-display text-lg tracking-tight">{post.author.name}</div>
-                    <div className="text-xs font-mono uppercase tracking-wider text-[var(--color-text-muted)]">
+                    <div className="text-xs font-mono uppercase tracking-wider text-text-muted">
                       {post.author.role}
                     </div>
-                    <p className="mt-3 text-sm leading-6 text-[var(--color-text)]">{post.author.bio}</p>
+                    <p className="mt-3 text-sm leading-6 text-text">{post.author.bio}</p>
                   </div>
                 </div>
               </Card>
@@ -154,7 +154,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             </article>
 
             <div className="order-2 xl:order-1 xl:self-start">
-              <div className="rounded-[18px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-1)] xl:rounded-none xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none">
+              <div className="rounded-[18px] border border-border bg-surface p-4 shadow-(--shadow-1) xl:rounded-none xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none">
                 <ShareRail url={url} title={post.title} />
               </div>
             </div>
@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               <div className="grid gap-4 xl:sticky xl:top-24">
                 {articleSections.length > 0 && (
                   <Card variant="inset" className="p-5">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">
                       On this page
                     </p>
                     <nav aria-label="On this page" className="mt-4">
@@ -172,7 +172,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                           <li key={section.id}>
                             <a
                               href={`#${section.id}`}
-                              className="block text-sm leading-6 text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-primary)]"
+                              className="block text-sm leading-6 text-text-muted transition-colors hover:text-primary"
                             >
                               {section.label}
                             </a>
@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
                 <Card className="p-5">
                   <p className="font-display text-xl tracking-tight">Turn the article into a plan.</p>
-                  <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
+                  <p className="mt-3 text-sm leading-6 text-text-muted">
                     If you already know the problem, route straight into a scoped conversation instead of keeping the decision in your head.
                   </p>
                   <div className="mt-5 grid gap-3">
@@ -209,7 +209,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <Container>
             <div className="flex items-end justify-between gap-4">
               <h2 className="font-display text-3xl tracking-tight">Continue reading</h2>
-              <Link href="/blog" className="text-sm font-medium text-[var(--color-primary)]">
+              <Link href="/blog" className="text-sm font-medium text-primary">
                 All articles →
               </Link>
             </div>

@@ -38,7 +38,7 @@ export default function NotFound() {
           <h1 className="mt-5 font-display text-6xl sm:text-7xl tracking-tight">
             That page slipped off the grid.
           </h1>
-          <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7">
+          <p className="mt-6 text-lg text-text-muted leading-7">
             The URL might be old, or we&apos;ve moved things around. Pick a useful destination — or open the concierge.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
@@ -50,16 +50,16 @@ export default function NotFound() {
         </div>
 
         <div className="mt-16">
-          <p className="text-center font-mono text-xs uppercase tracking-wider text-[var(--color-text-muted)]">
+          <p className="text-center font-mono text-xs uppercase tracking-wider text-text-muted">
             Or try one of these
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {DESTINATIONS.map((d) => (
               <Link key={d.label} href={d.href}>
                 <Card hoverable className="text-center">
-                  <d.icon className="mx-auto size-7 text-[var(--color-primary)]" aria-hidden />
+                  <d.icon className="mx-auto size-7 text-primary" aria-hidden />
                   <p className="mt-3 font-display text-base tracking-tight">{d.label}</p>
-                  <p className="mt-1 text-xs text-[var(--color-text-muted)]">{d.description}</p>
+                  <p className="mt-1 text-xs text-text-muted">{d.description}</p>
                 </Card>
               </Link>
             ))}
@@ -69,7 +69,7 @@ export default function NotFound() {
         <div className="mt-12 text-center">
           <Link
             href={WHATSAPP_HREF}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-primary)]"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary"
           >
             <ChatBubbleLeftRightIcon className="size-4" /> Or message us on WhatsApp
           </Link>

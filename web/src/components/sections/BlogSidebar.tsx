@@ -62,19 +62,19 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
     <aside className="space-y-6">
       {/* Search */}
       <Card>
-        <h3 className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h3 className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
           Search field notes
         </h3>
         <form onSubmit={onSearch} className="mt-3 flex items-center gap-2">
           <div className="relative flex-1">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--color-text-muted)]" />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted" />
             <input
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search articles…"
               aria-label="Search articles"
-              className="w-full rounded-[10px] border border-[var(--color-border)] bg-[var(--color-surface)] pl-9 pr-3 py-2 text-sm placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-primary)]"
+              className="w-full rounded-[10px] border border-border bg-surface pl-9 pr-3 py-2 text-sm placeholder:text-text-muted focus:outline-none focus:border-primary"
             />
           </div>
           <Button type="submit" size="sm">Go</Button>
@@ -83,7 +83,7 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
 
       {/* Categories */}
       <Card>
-        <h3 className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h3 className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
           Categories
         </h3>
         <ul className="mt-3 space-y-1.5">
@@ -92,8 +92,8 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
               onClick={() => setCategory(null)}
               className={`flex w-full items-center justify-between rounded-md px-2 py-1.5 text-sm transition-colors ${
                 !activeCategory
-                  ? "bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-medium"
-                  : "hover:bg-[var(--color-inset)]"
+                  ? "bg-primary/10 text-primary font-medium"
+                  : "hover:bg-inset"
               }`}
             >
               <span>All articles</span>
@@ -105,12 +105,12 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
                 onClick={() => setCategory(c.category)}
                 className={`flex w-full items-center justify-between rounded-md px-2 py-1.5 text-sm transition-colors ${
                   activeCategory === c.category
-                    ? "bg-[var(--color-primary)]/10 text-[var(--color-primary)] font-medium"
-                    : "hover:bg-[var(--color-inset)]"
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "hover:bg-inset"
                 }`}
               >
                 <span>{c.category}</span>
-                <span className="font-mono text-xs text-[var(--color-text-muted)]">{c.count}</span>
+                <span className="font-mono text-xs text-text-muted">{c.count}</span>
               </button>
             </li>
           ))}
@@ -119,7 +119,7 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
 
       {/* Tags */}
       <Card>
-        <h3 className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h3 className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
           Tags
         </h3>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -131,12 +131,12 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
                 onClick={() => setTag(active ? null : t.tag)}
                 className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors ${
                   active
-                    ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-[var(--color-surface)]"
-                    : "border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]"
+                    ? "border-primary bg-primary text-surface"
+                    : "border-border bg-surface hover:border-border-strong"
                 }`}
               >
                 <span>{t.tag}</span>
-                <span className={`font-mono text-[10px] ${active ? "opacity-80" : "text-[var(--color-text-muted)]"}`}>
+                <span className={`font-mono text-[10px] ${active ? "opacity-80" : "text-text-muted"}`}>
                   {t.count}
                 </span>
               </button>
@@ -148,7 +148,7 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
       {/* Subscribe */}
       <Card variant="dark">
         <div className="flex items-center gap-2">
-          <SparklesIcon className="size-4 text-[var(--color-secondary)]" />
+          <SparklesIcon className="size-4 text-secondary" />
           <h3 className="font-mono text-[11px] uppercase tracking-wider text-white/70">
             Field notes, monthly
           </h3>
@@ -174,7 +174,7 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@studio.com"
               aria-label="Email address for newsletter"
-              className="w-full rounded-[10px] border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-[var(--color-secondary)]"
+              className="w-full rounded-[10px] border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-secondary"
             />
             <Button type="submit" variant="secondary" fullWidth size="sm">
               Subscribe
@@ -185,15 +185,15 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
 
       {/* Studio blurb */}
       <Card variant="inset">
-        <h3 className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h3 className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
           About the studio
         </h3>
-        <p className="mt-3 text-sm leading-6 text-[var(--color-text)]">
+        <p className="mt-3 text-sm leading-6 text-text">
           Growrix OS is a small product studio shipping SaaS apps, websites, MCP servers, and automation for ambitious teams.
         </p>
         <Link
           href="/about"
-          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)]"
+          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary"
         >
           Read the studio story →
         </Link>

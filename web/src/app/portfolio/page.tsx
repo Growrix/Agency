@@ -39,7 +39,7 @@ export default function PortfolioPage() {
             <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
               Outcomes you can see and metrics you can verify.
             </h1>
-            <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7">
+            <p className="mt-6 text-lg text-text-muted leading-7">
               A filterable showcase of products, websites, MCP integrations, and automations we&apos;ve shipped recently.
             </p>
           </div>
@@ -67,8 +67,8 @@ export default function PortfolioPage() {
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium border transition-colors",
                     filter === f.value
-                      ? "bg-[var(--color-primary)] text-[var(--color-surface)] border-[var(--color-primary)]"
-                      : "bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-border-strong)]"
+                      ? "bg-primary text-surface border-primary"
+                      : "bg-surface border-border hover:border-border-strong"
                   )}
                 >
                   {f.label}
@@ -76,19 +76,19 @@ export default function PortfolioPage() {
               ))}
             </div>
             <div className="relative max-w-sm w-full">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-[var(--color-text-muted)]" aria-hidden />
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-text-muted" aria-hidden />
               <input
                 type="search"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search projects, industries…"
-                className="w-full h-11 rounded-[12px] border border-[var(--color-border)] bg-[var(--color-surface)] pl-9 pr-9 text-sm placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)] outline-none"
+                className="w-full h-11 rounded-sm border border-border bg-surface pl-9 pr-9 text-sm placeholder:text-text-muted focus:border-primary outline-none"
               />
               {q && (
                 <button
                   onClick={() => setQ("")}
                   aria-label="Clear search"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-text-muted hover:text-text"
                 >
                   <XMarkIcon className="size-4" />
                 </button>
@@ -101,15 +101,15 @@ export default function PortfolioPage() {
       <Section className="py-16">
         <Container>
           {filtered.length === 0 ? (
-            <div className="rounded-[16px] border border-dashed border-[var(--color-border-strong)] bg-[var(--color-surface)] p-12 text-center">
+            <div className="rounded-[16px] border border-dashed border-border-strong bg-surface p-12 text-center">
               <p className="font-display text-xl tracking-tight">No projects match those filters.</p>
-              <p className="mt-2 text-[var(--color-text-muted)]">Try clearing search or selecting a different practice.</p>
+              <p className="mt-2 text-text-muted">Try clearing search or selecting a different practice.</p>
               <button
                 onClick={() => {
                   setFilter("all");
                   setQ("");
                 }}
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-primary)]"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
               >
                 Reset filters
               </button>

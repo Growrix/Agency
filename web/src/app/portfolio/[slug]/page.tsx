@@ -46,7 +46,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     <>
       <Section className="pt-12 sm:pt-16 pb-12">
         <Container>
-          <Link href="/portfolio" className="inline-flex items-center gap-1 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)]">
+          <Link href="/portfolio" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
             ← All projects
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-start">
@@ -59,18 +59,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
                 {project.name}
               </h1>
-              <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7 text-pretty">{project.summary}</p>
+              <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{project.summary}</p>
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-[14px] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">Client</p>
+                <div className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-muted">Client</p>
                   <p className="mt-2 font-display text-lg tracking-tight">{detail.client}</p>
                 </div>
-                <div className="rounded-[14px] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">Duration</p>
+                <div className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-muted">Duration</p>
                   <p className="mt-2 font-display text-lg tracking-tight">{detail.duration}</p>
                 </div>
-                <div className="rounded-[14px] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">Team</p>
+                <div className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-muted">Team</p>
                   <p className="mt-2 font-display text-lg tracking-tight">{detail.team}</p>
                 </div>
               </div>
@@ -81,7 +81,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </div>
             <div className="lg:col-span-5">
               <Card className="overflow-hidden p-0">
-                <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${project.accent}`}>
+                <div className={`relative aspect-4/3 overflow-hidden bg-linear-to-br ${project.accent}`}>
                   {heroImage ? (
                     <Image
                       src={heroImage.src}
@@ -133,7 +133,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <ul className="mt-10 space-y-5">
             {detail.strategy.map((s, i) => (
               <li key={i} className="flex gap-4">
-                <span className="shrink-0 size-8 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center font-mono text-sm">
+                <span className="shrink-0 size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-mono text-sm">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p className="text-lg leading-7 text-pretty pt-0.5">{s}</p>
@@ -146,10 +146,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <Section tone="inset">
         <Container>
           <SectionHeading eyebrow="Build breakdown" title="Stack and modules delivered." />
-          <div className="mt-10 grid gap-px overflow-hidden rounded-[16px] border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-px overflow-hidden rounded-[16px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {detail.build.map((b) => (
-              <div key={b.label} className="bg-[var(--color-surface)] p-5">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">{b.label}</p>
+              <div key={b.label} className="bg-surface p-5">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{b.label}</p>
                 <p className="mt-2 font-display text-lg tracking-tight">{b.value}</p>
               </div>
             ))}
@@ -164,7 +164,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             {detail.gallery.map((image, index) => (
               <div
                 key={`${image.src}-${index}`}
-                className="relative aspect-[16/10] rounded-[20px] overflow-hidden border border-[var(--color-border)] bg-[var(--color-inset)]"
+                className="relative aspect-16/10 rounded-[20px] overflow-hidden border border-border bg-inset"
               >
                 <Image
                   src={image.src}
@@ -200,7 +200,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <Container>
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <SectionHeading eyebrow="More work" title="Adjacent projects worth a look." />
-            <Link href="/portfolio" className="text-sm font-medium text-[var(--color-primary)]">
+            <Link href="/portfolio" className="text-sm font-medium text-primary">
               View all <ArrowUpRightIcon className="inline size-4" />
             </Link>
           </div>

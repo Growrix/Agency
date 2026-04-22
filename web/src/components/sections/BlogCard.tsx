@@ -11,9 +11,9 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col h-full overflow-hidden rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-[var(--color-border-strong)]"
+      className="group flex flex-col h-full overflow-hidden rounded-[20px] border border-border bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-signal)] hover:-translate-y-1 hover:shadow-[var(--shadow-2)] hover:border-border-strong"
     >
-      <div className={`relative ${compact ? "aspect-[5/3]" : "aspect-[16/9]"} overflow-hidden bg-gradient-to-br ${post.accent}`}>
+      <div className={`relative ${compact ? "aspect-5/3" : "aspect-16/9"} overflow-hidden bg-linear-to-br ${post.accent}`}>
         {image ? (
           <Image
             src={image.src}
@@ -29,15 +29,15 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
         </div>
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-xl tracking-tight leading-snug group-hover:text-[var(--color-primary)] transition-colors">
+        <h3 className="font-display text-xl tracking-tight leading-snug group-hover:text-primary transition-colors">
           {post.title}
         </h3>
-        <p className="mt-2 text-sm text-[var(--color-text-muted)] leading-6 text-pretty line-clamp-3">
+        <p className="mt-2 text-sm text-text-muted leading-6 text-pretty line-clamp-3">
           {post.excerpt}
         </p>
-        <div className="mt-4 flex items-center justify-between text-xs text-[var(--color-text-muted)]">
+        <div className="mt-4 flex items-center justify-between text-xs text-text-muted">
           <div className="flex items-center gap-2">
-            <span className="inline-flex size-7 items-center justify-center rounded-full bg-[var(--color-inset)] font-mono text-[10px] font-semibold text-[var(--color-text)]">
+            <span className="inline-flex size-7 items-center justify-center rounded-full bg-inset font-mono text-[10px] font-semibold text-text">
               {post.author.initials}
             </span>
             <span>{post.author.name}</span>
@@ -46,7 +46,7 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
             {formatBlogDate(post.publishedAt)} · {post.readMinutes} min
           </span>
         </div>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-primary)] group-hover:gap-2 transition-all">
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
           Read article <ArrowUpRightIcon className="size-4" />
         </span>
       </div>

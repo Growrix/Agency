@@ -22,7 +22,7 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
       hoverable
       className={cn(
         "h-full flex flex-col",
-        tier.featured && "ring-1 ring-[var(--color-primary)]/40 shadow-[var(--shadow-2)]",
+        tier.featured && "ring-1 ring-primary/40 shadow-[var(--shadow-2)]",
         className
       )}
     >
@@ -35,12 +35,12 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
       <div className="mt-5 flex items-baseline gap-1">
         <span className="font-display text-4xl tracking-tight">{tier.price}</span>
         {tier.cadence && (
-          <span className={cn("text-sm", tier.featured ? "text-white/60" : "text-[var(--color-text-muted)]")}>
+          <span className={cn("text-sm", tier.featured ? "text-white/60" : "text-text-muted")}>
             {tier.cadence}
           </span>
         )}
       </div>
-      <p className={cn("mt-3 leading-7 text-pretty", tier.featured ? "text-white/75" : "text-[var(--color-text-muted)]")}>
+      <p className={cn("mt-3 leading-7 text-pretty", tier.featured ? "text-white/75" : "text-text-muted")}>
         {tier.description}
       </p>
       <ul className="mt-6 space-y-3 flex-1">
@@ -49,7 +49,7 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
             <CheckIcon
               className={cn(
                 "mt-0.5 size-5 shrink-0",
-                tier.featured ? "text-[var(--color-secondary)]" : "text-[var(--color-primary)]"
+                tier.featured ? "text-secondary" : "text-primary"
               )}
               aria-hidden
             />

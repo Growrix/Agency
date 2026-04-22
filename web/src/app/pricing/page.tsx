@@ -90,7 +90,7 @@ export default function PricingPage() {
             <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
               Pricing built around real launches, not generic packages.
             </h1>
-            <p className="mt-6 text-lg text-[var(--color-text-muted)] leading-7">
+            <p className="mt-6 text-lg text-text-muted leading-7">
               Start with transparent ranges for website templates and ready websites, then use discovery to scope SaaS, mobile launches, and the supporting systems around them.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -120,21 +120,21 @@ export default function PricingPage() {
             title="Where the main offers start."
             description="Website templates and ready websites have defined bands. SaaS, mobile launches, and secondary systems are scoped after discovery."
           />
-          <div className="mt-10 overflow-hidden rounded-[16px] border border-[var(--color-border)] bg-[var(--color-surface)]">
+          <div className="mt-10 overflow-hidden rounded-[16px] border border-border bg-surface">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[var(--color-inset)]/60">
+              <thead className="bg-inset/60">
                 <tr>
-                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">Service</th>
-                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">Typical range</th>
-                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)] hidden md:table-cell">Notes</th>
+                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">Service</th>
+                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">Typical range</th>
+                  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted hidden md:table-cell">Notes</th>
                 </tr>
               </thead>
               <tbody>
                 {RANGES.map((r) => (
-                  <tr key={r.service} className="border-t border-[var(--color-border)]">
+                  <tr key={r.service} className="border-t border-border">
                     <td className="px-5 py-4 font-display text-base tracking-tight">{r.service}</td>
-                    <td className="px-5 py-4 font-mono text-sm text-[var(--color-primary)]">{r.range}</td>
-                    <td className="px-5 py-4 text-[var(--color-text-muted)] hidden md:table-cell">{r.note}</td>
+                    <td className="px-5 py-4 font-mono text-sm text-primary">{r.range}</td>
+                    <td className="px-5 py-4 text-text-muted hidden md:table-cell">{r.note}</td>
                   </tr>
                 ))}
               </tbody>
@@ -153,9 +153,9 @@ export default function PricingPage() {
             {SHOP_OFFERS.map((s) => (
               <RevealItem key={s.name} className="h-full">
                 <Card hoverable className="h-full">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]">{s.name}</p>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{s.name}</p>
                   <p className="mt-2 font-display text-xl tracking-tight">{s.price}</p>
-                  <p className="mt-3 text-sm text-[var(--color-text-muted)] leading-6">{s.description}</p>
+                  <p className="mt-3 text-sm text-text-muted leading-6">{s.description}</p>
                 </Card>
               </RevealItem>
             ))}
