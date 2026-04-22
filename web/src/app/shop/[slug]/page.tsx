@@ -53,17 +53,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
   return (
     <>
-      <Section className="pb-0 pt-8 sm:pt-10">
+      {/* Main product layout */}
+      <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
         <Container>
-          <Link href="/shop" className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+          <Link href="/shop" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
             <ArrowLeftIcon className="size-4" /> Back to shop
           </Link>
-        </Container>
-      </Section>
 
-      {/* Main product layout */}
-      <Section className="py-8 sm:py-12">
-        <Container>
           <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
 
             {/* LEFT — preview + details */}
