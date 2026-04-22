@@ -51,10 +51,22 @@ export default function ContactPage() {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
-    // Form submission will be wired to a real backend in a later phase.
-    await new Promise((r) => setTimeout(r, 900));
-    setStatus("success");
-    (e.target as HTMLFormElement).reset();
+
+    const form = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      setStatus("success");
+      form.reset();
+    } else {
+      setStatus("error");
+    }
   };
 
   return (
@@ -205,6 +217,9 @@ export default function ContactPage() {
                         {status === "submitting" ? "Sending…" : "Send inquiry"}
                       </Button>
                     </div>
+                    {status === "error" && (
+                      <p className="text-sm text-destructive text-center">Something went wrong. Please try again or use WhatsApp.</p>
+                    )}
                   </form>
                 )}
               </Card>
