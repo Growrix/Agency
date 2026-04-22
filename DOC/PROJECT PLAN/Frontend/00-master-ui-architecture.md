@@ -150,12 +150,12 @@ recommended_next_reads:
 - Secondary CTA: View Automation Examples.
 
 ### Shop Overview
-- Goal: sell reusable digital products and make category discovery effortless.
-- Primary CTA: Browse Products.
-- Secondary CTA: View Bundles.
+- Goal: sell website templates and ready-made websites through fast category, type, and industry discovery.
+- Primary CTA: Browse Templates.
+- Secondary CTA: Start Checkout.
 
 ### Product Detail
-- Goal: convert product interest into checkout with clear previews, specs, and trust.
+- Goal: convert template and ready-website interest into checkout with clear previews, specs, and trust.
 - Primary CTA: Buy Now.
 - Secondary CTA: Chat Before Buying.
 
@@ -190,7 +190,7 @@ recommended_next_reads:
 - Secondary CTA: Ask a Question First.
 
 ### Checkout
-- Goal: complete payment with confidence and low friction.
+- Goal: complete website product payment with confidence and low friction.
 - Primary CTA: Pay with Stripe.
 - Secondary CTA: Return to Product.
 

@@ -35,6 +35,7 @@ depends_on:
 ### 1A. Popup Activation Layer
 - Content: modal-first chat activation from homepage Ask AI buttons, the global floating icon, and mobile chat shortcuts without forcing a route transition.
 - Components: global launcher button, modal overlay, close controls, focus trap, preserved background context.
+- Interaction rule: when users click suggested next-step actions (WhatsApp, booking, contact, pricing, services, shop, FAQ), the popup closes immediately and the target destination is shown without requiring manual chat dismissal.
 
 ### 2. Conversation Surface
 - Content: full chat interface with starter prompts for services, pricing, delivery timelines, products, technical fit, and escalation.
@@ -65,9 +66,11 @@ depends_on:
 - Chat supports input validation, typing feedback, retry on failure, explicit escalation state, and preserved thread state per session.
 - A no-answer state must explain that the assistant is restricted to approved Growrix knowledge and offer escalation immediately.
 - Offline or API-error state must still route to WhatsApp, contact, and booking.
+- Popup mode must auto-close on route transition so internal navigation always reveals the destination screen immediately.
 
 ## Responsive Adaptation
-- Mobile popup opens the chat as a full-height app-like sheet with sticky composer and persistent bottom-safe spacing above the mobile nav.
+- Mobile popup opens the chat as a full-height app-like sheet with a single-column conversation surface, sticky bottom-safe composer treatment, and no desktop escalation rail.
+- The mobile composer stacks input and send action vertically so the primary submit control always remains visible inside narrow viewports.
 - Knowledge areas and FAQs live below the conversation in stacked cards.
 
 ## SEO and Metadata

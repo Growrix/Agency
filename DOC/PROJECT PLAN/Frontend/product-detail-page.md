@@ -15,7 +15,7 @@ depends_on:
 
 ## Page Definition
 - Purpose: convert product interest into purchase through clear previews, specs, and reassurance.
-- Target audience: buyers evaluating a specific template, app, ready website, MCP server, or automation product.
+- Target audience: buyers evaluating a specific website template or ready-made website.
 - Primary CTA: Buy Now.
 - Secondary CTA: Chat Before Buying.
 
@@ -26,7 +26,7 @@ depends_on:
 - Components: media gallery, pricing card, badge row, CTA block.
 
 ### 2. Preview Gallery
-- Content: desktop screens, mobile screens, code or workflow previews, documentation teaser.
+- Content: desktop screens, mobile screens, section previews, and documentation teaser.
 - Components: media gallery, tabs, modal viewer.
 
 ### 3. What You Get
@@ -34,7 +34,7 @@ depends_on:
 - Components: checklist grid, content cards.
 
 ### 4. Technical Specs and Compatibility
-- Content: frameworks, integrations, APIs, CMS compatibility, deployment guidance.
+- Content: frameworks, integrations, CMS compatibility, deployment guidance, and implementation expectations.
 - Components: spec table, badge list, info alerts.
 
 ### 5. Use Cases and Outcomes
@@ -62,8 +62,8 @@ depends_on:
 - Gallery becomes swipe-first with thumbnail rail below.
 
 ## SEO and Metadata
-- Title: Product Detail | Digital Asset, Template, or Ready Build.
-- Description: Review previews, specs, support, and purchase details for this digital product.
+- Title: Product Detail | Website Template or Ready Website.
+- Description: Review previews, specs, support, and purchase details for this website product.
 
 ## Conversion Path
 - Hero -> gallery -> specs -> reviews -> buy or chat.

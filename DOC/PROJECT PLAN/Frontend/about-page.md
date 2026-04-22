@@ -13,7 +13,7 @@ depends_on:
 # About Page
 
 ## Page Definition
-- Purpose: humanize the agency while reinforcing product discipline and quality standards.
+- Purpose: humanize the agency while reinforcing product discipline and quality standards around premium websites, SaaS applications, mobile launch work, and ready websites.
 - Target audience: buyers who want to understand the team, process, and operating philosophy before committing.
 - Primary CTA: Meet Through a Call.
 - Secondary CTA: Explore Process.
@@ -21,7 +21,7 @@ depends_on:
 ## Sections In Visual Order
 
 ### 1. About Hero
-- Content: agency story, positioning, and concise reason the studio exists.
+- Content: agency story, positioning, and concise reason the studio exists, with a clear statement that websites and SaaS are the core offer and MCP plus automation support the wider delivery system.
 - Components: hero, portrait or workspace media, CTA pair.
 
 ### 2. Mission and Principles
@@ -41,7 +41,7 @@ depends_on:
 - Components: manifesto blocks, media strip, checklist.
 
 ### 6. Proof and Milestones
-- Content: selected metrics, notable launches, client outcomes, repeat engagements, live Google review proof.
+- Content: selected metrics, notable launches, client outcomes, repeat engagements, and live Google review proof weighted toward website and SaaS outcomes.
 - Components: stat blocks, logo rail, Google review cards.
 
 ### 7. CTA Section
@@ -58,7 +58,7 @@ depends_on:
 
 ## SEO and Metadata
 - Title: About the Agency | Product-Minded Web Development Partner.
-- Description: Learn how the agency works, what it values, and how it delivers visually strong, technically rigorous digital products.
+- Description: Learn how the agency works, what it values, and how it delivers premium websites, SaaS applications, mobile launch systems, and ready-to-buy website products.
 
 ## Conversion Path
 - About hero -> principles -> process -> proof -> CTA.

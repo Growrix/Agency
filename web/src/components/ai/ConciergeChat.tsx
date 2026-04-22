@@ -177,6 +177,12 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
     void submitMessage(input);
   }
 
+  function handleActionClick() {
+    if (isModal && onClose) {
+      onClose();
+    }
+  }
+
   const conversationCard = (
     <div
       className={cn(
@@ -233,6 +239,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
                     <Link
                       key={`${message.id}-${source.label}`}
                       href={source.sourcePath}
+                      onClick={handleActionClick}
                       className="rounded-full border border-border bg-surface px-2.5 py-1 text-[11px] font-medium text-text-muted hover:border-primary/40 hover:text-text"
                     >
                       {source.label}
@@ -244,7 +251,13 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
               {message.suggestedActions && message.suggestedActions.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {message.suggestedActions.map((action) => (
-                    <LinkButton key={`${message.id}-${action.href}`} href={action.href} size="sm" variant="outline">
+                    <LinkButton
+                      key={`${message.id}-${action.href}`}
+                      href={action.href}
+                      size="sm"
+                      variant="outline"
+                      onClick={handleActionClick}
+                    >
                       {action.label}
                     </LinkButton>
                   ))}
@@ -338,13 +351,13 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
           The assistant is for fast clarification, not for replacing a scoped project conversation.
         </p>
         <div className="mt-5 grid gap-3">
-          <LinkButton href={WHATSAPP_HREF} fullWidth>
+          <LinkButton href={WHATSAPP_HREF} fullWidth onClick={handleActionClick}>
             <ChatBubbleLeftRightIcon className="size-4" /> Open WhatsApp
           </LinkButton>
-          <LinkButton href="/book-appointment" variant="outline" fullWidth>
+          <LinkButton href="/book-appointment" variant="outline" fullWidth onClick={handleActionClick}>
             <ArrowUpRightIcon className="size-4" /> Book appointment
           </LinkButton>
-          <LinkButton href="/contact" variant="outline" fullWidth>
+          <LinkButton href="/contact" variant="outline" fullWidth onClick={handleActionClick}>
             <ArrowUpRightIcon className="size-4" /> Send a brief
           </LinkButton>
         </div>

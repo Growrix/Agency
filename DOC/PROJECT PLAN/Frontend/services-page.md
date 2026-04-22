@@ -13,7 +13,7 @@ depends_on:
 # Services Overview Page
 
 ## Page Definition
-- Purpose: help visitors understand the capability map and choose the right engagement path.
+- Purpose: help visitors understand the capability map while clearly prioritizing websites, SaaS applications, mobile app launch work, and ready website offers.
 - Target audience: buyers who know they need help but have not yet chosen the service model.
 - Primary CTA: Discuss My Project.
 - Secondary CTA: Compare Services.
@@ -21,11 +21,11 @@ depends_on:
 ## Sections In Visual Order
 
 ### 1. Hero and Service Selector
-- Content: services headline, concise positioning, segmented selector for SaaS apps, websites, MCP servers, and automation.
+- Content: services headline and concise positioning that lead with websites and SaaS, reference mobile app launch work, and keep MCP plus automation as secondary specialist services.
 - Components: hero section, segmented control, service preview cards.
 
 ### 2. Service Grid
-- Content: four detailed cards showing typical projects, outcomes, timelines, and fit indicators.
+- Content: four detailed cards showing typical projects, outcomes, timelines, and fit indicators, with the first-message emphasis on websites, SaaS applications, and launch-ready digital products.
 - Components: feature blocks, cards, badges.
 - Interaction notes: hover expands scope summary and ideal client profile.
 
@@ -43,7 +43,7 @@ depends_on:
 - Components: logo cloud, icon grid, content block.
 
 ### 6. Proof by Service Type
-- Content: one case study teaser per service category plus a shared live Google review feed for agency-wide proof.
+- Content: proof weighted toward website, SaaS, mobile launch, and ready-website outcomes, while still leaving room for secondary MCP and automation examples deeper in the page.
 - Components: case-study cards, Google review cards, leave-review CTA.
 
 ### 7. FAQ and Objection Handling
@@ -64,7 +64,7 @@ depends_on:
 
 ## SEO and Metadata
 - Title: Web Development Services | SaaS Apps, Websites, MCP Servers, Automation.
-- Description: Compare the agency's service offerings and choose the right path for custom SaaS, websites, MCP servers, and automation.
+- Description: Compare the agency's service offerings with primary emphasis on websites, SaaS applications, mobile launch work, and ready websites, plus secondary MCP and automation services.
 
 ## Conversion Path
 - Services overview -> chosen service detail -> booking or chat.

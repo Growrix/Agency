@@ -13,19 +13,19 @@ depends_on:
 # FAQ Page
 
 ## Page Definition
-- Purpose: answer recurring questions and reduce friction before booking or buying.
-- Target audience: visitors evaluating services, products, payment, timing, or support.
+- Purpose: answer recurring questions and reduce friction before booking or buying, especially for website, SaaS, mobile app, and ready website buyers.
+- Target audience: visitors evaluating services, products, payment flexibility, timing, support, and handoff expectations.
 - Primary CTA: Ask the AI Concierge.
 - Secondary CTA: Book Appointment.
 
 ## Sections In Visual Order
 
 ### 1. FAQ Hero and Search
-- Content: search-first entry with category chips for services, shop, booking, payments, support, and technical questions.
+- Content: search-first entry with category chips for services, shop, booking, payments, support, and technical questions, framed around the primary website and SaaS offer.
 - Components: hero, search bar, chips.
 
 ### 2. Category-Based FAQ Blocks
-- Content: grouped answers covering scope, timelines, pricing, revisions, support, integrations, and product licensing.
+- Content: grouped answers covering website templates, ready websites, SaaS work, mobile launch work, timelines, payment flexibility, support, and secondary-service questions.
 - Components: accordion groups, content anchors.
 
 ### 3. Quick Answer Panel
@@ -46,7 +46,7 @@ depends_on:
 
 ## SEO and Metadata
 - Title: FAQ | Services, Pricing, Products, Booking, and Support.
-- Description: Find answers about service scope, timing, pricing, products, support, Stripe checkout, and chat options.
+- Description: Find answers about websites, ready websites, SaaS work, pricing, support, flexible payments, and chat or booking options.
 
 ## Conversion Path
 - Search or browse -> find answer -> escalate to AI, WhatsApp, contact, or booking.

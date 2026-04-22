@@ -14,7 +14,7 @@ depends_on:
 
 ## Page Definition
 - Purpose: give visitors the fastest appropriate route to start a conversation.
-- Target audience: prospects, buyers needing pre-sales clarification, and existing customers needing help.
+- Target audience: prospects and buyers needing pre-sales clarification around websites, SaaS applications, mobile launch work, ready websites, or related support.
 - Primary CTA: Send Inquiry.
 - Secondary CTA: Open WhatsApp.
 
@@ -25,11 +25,11 @@ depends_on:
 - Components: hero, badge row, CTA pair.
 
 ### 2. Contact Method Cards
-- Content: contact form, WhatsApp, AI concierge, live chat, booking.
+- Content: contact form, WhatsApp, AI concierge, live chat, and booking with language tuned to website, SaaS, mobile app, and ready-website inquiries first.
 - Components: channel cards, action buttons.
 
 ### 3. Inquiry Form
-- Content: service interest, project summary, budget band, urgency, preferred follow-up channel.
+- Content: service interest, project summary, budget band, urgency, preferred follow-up channel, plus options for website templates, ready websites, SaaS applications, and mobile app work.
 - Components: form section, file attachment placeholder if added later.
 
 ### 4. Business FAQ Shortcut
@@ -37,7 +37,7 @@ depends_on:
 - Components: accordion, quick links, prompt chips.
 
 ### 5. Trust and Availability
-- Content: support hours, timezone, privacy note, expected next step.
+- Content: support hours, timezone, privacy note, expected next step, flexible-payment reassurance, and delivery-first payment note for qualifying international clients.
 - Components: content cards, alert message.
 
 ### 6. Final Action Rail
@@ -54,7 +54,7 @@ depends_on:
 
 ## SEO and Metadata
 - Title: Contact the Agency | Chat, WhatsApp, Booking, and Project Inquiries.
-- Description: Reach the agency through contact form, booking, WhatsApp, live chat, or the AI concierge.
+- Description: Reach the agency through contact form, booking, WhatsApp, live chat, or the AI concierge for website, SaaS, mobile launch, and ready-website inquiries.
 
 ## Conversion Path
 - Contact methods -> chosen channel -> inquiry submitted or chat handoff.

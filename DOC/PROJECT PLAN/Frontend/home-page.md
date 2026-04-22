@@ -14,7 +14,7 @@ depends_on:
 
 ## Page Definition
 - Purpose: turn first-time visitors into qualified leads, product buyers, or chat-assisted prospects.
-- Target audience: founders, operators, agencies, and technical buyers seeking custom builds or ready-to-use digital products.
+- Target audience: founders, operators, agencies, and growth teams seeking premium websites, SaaS applications, mobile app launch systems, and ready-to-buy website products.
 - Primary CTA: Book Appointment.
 - Secondary CTA: Explore Portfolio.
 
@@ -31,18 +31,18 @@ depends_on:
 - State requirements: default, scrolled, menu open, mobile drawer open.
 
 ### 3. Hero Statement and Proof Deck
-- Content: bold headline around building standout digital products, supporting copy, dual CTAs, client metrics, and a layered mockup showing site plus mobile app-like views.
+- Content: bold headline prioritizing premium websites, SaaS applications, mobile app launch experiences, and ready websites, plus supporting copy that keeps MCP servers and automation as secondary capabilities.
 - Components: hero section, stat blocks, proof badges, media panel.
 - Interaction notes: subtle panel parallax and CTA hover; reduced-motion version keeps static layering.
 - Responsive notes: mobile stacks proof below CTA, keeps one visible media mockup plus swipe gallery.
 
 ### 4. Capability Rail
-- Content: four service pillars for SaaS applications, websites, MCP servers, and automation with short value statements.
+- Content: four service pillars with websites and SaaS positioned first, while MCP servers and automation are framed as secondary support capabilities.
 - Components: feature cards, icon badges.
 - Interaction notes: hover reveals delivery angle and typical outcome.
 
 ### 5. Featured Builds and Outcomes
-- Content: selected case studies with problem, approach, metric, and result snippet.
+- Content: selected case studies weighted toward websites, SaaS applications, mobile launch work, and ready-to-deploy website systems.
 - Components: portfolio tiles, metric strips, testimonial quote.
 - State requirements: loaded, loading skeleton, empty fallback if no featured work.
 
@@ -52,9 +52,9 @@ depends_on:
 - Interaction notes: featured article can use larger layout treatment; supporting cards should remain scannable on mobile.
 
 ### 7. Shop Spotlight
-- Content: templates, ready websites, mobile apps, automation kits, and MCP servers with category tabs.
-- Components: product tiles, tab group, price chips.
-- Interaction notes: quick preview drawer on desktop, preview sheet on mobile.
+- Content: website templates and ready websites only, with pricing language aligned to the new ranges: templates from $500 to $10k and ready websites from $1k to $15k.
+- Components: product tiles (4-col grid on desktop), price chips, category label, tag badge, direct link to product detail page.
+- Interaction notes: each product card links directly to its `/shop/[slug]` detail page. Section CTA links to `/shop`.
 
 ### 8. Process and Collaboration Model
 - Content: discovery, strategy, design system, build, QA, launch, optimization.
@@ -67,7 +67,7 @@ depends_on:
 - State requirements: online, loading, fallback to live or WhatsApp.
 
 ### 10. Pricing and Engagement Snapshot
-- Content: starting ranges, packaged accelerators, productized offers, support retainers.
+- Content: starting ranges for website templates, ready websites, custom SaaS work, and mobile app launch systems, plus flexible-payment messaging, delivery-first international option for the first 100 clients, and 1 year of free support and maintenance.
 - Components: pricing tiers, comparison rows, CTA block.
 - Interaction notes: monthly and project toggle if needed.
 
@@ -94,8 +94,8 @@ depends_on:
 - Mobile uses a single-column hero, sticky bottom dock, swipeable proofs, and sheet-based quick previews.
 
 ## SEO and Metadata
-- Title: SaaS Web Development Agency | Websites, MCP Servers, Automation, and Digital Products.
-- Description: Premium web development agency building SaaS applications, websites, MCP servers, automation systems, and ready-to-buy digital products.
+- Title: Premium Websites, SaaS Applications, Ready Websites, and Mobile App Launch Systems.
+- Description: Premium web development agency focused on websites, SaaS applications, mobile app launch systems, and ready-to-buy website products, with MCP and automation as secondary services.
 
 ## Conversion Path
 - Primary path: Hero -> Featured builds -> Process -> Booking.

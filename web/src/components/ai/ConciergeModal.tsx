@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { ConciergeExperience } from "@/components/ai/ConciergeChat";
@@ -10,6 +11,8 @@ export function ConciergeModal() {
   const close = useConciergeStore((state) => state.close);
   const initialPrompt = useConciergeStore((state) => state.initialPrompt);
   const isOpen = useConciergeStore((state) => state.isOpen);
+  const pathname = usePathname();
+  const previousPathname = useRef(pathname);
 
   useEffect(() => {
     if (!isOpen) {
@@ -31,6 +34,15 @@ export function ConciergeModal() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [close, isOpen]);
+
+  useEffect(() => {
+    const pathChanged = previousPathname.current !== pathname;
+    previousPathname.current = pathname;
+
+    if (pathChanged && isOpen) {
+      close();
+    }
+  }, [pathname, close, isOpen]);
 
   return (
     <AnimatePresence>

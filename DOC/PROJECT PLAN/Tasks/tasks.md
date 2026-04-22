@@ -60,13 +60,19 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
-  - improved the popup-first AI concierge mobile experience so the modal behaves like a full-height app-style chat sheet with cleaner message flow, safe-area spacing, and dock-aware behavior on phones
+  - improved the popup-first AI concierge mobile experience so the modal now behaves like a phone-first single-column chat sheet with no desktop escalation rail, a stacked composer, and a consistently visible send action on small screens
+  - fixed concierge suggested-action navigation so WhatsApp, booking, contact, and other routed suggestions now close the popup immediately and reveal the destination without requiring manual chat close
   - improved the blog detail route so the slug page now collapses share and navigation utilities cleanly, adds generated on-page navigation, and keeps long-form reading and comments readable across mobile breakpoints
+  - redesigning the shop index into a denser e-commerce catalog focused on website templates and ready-made websites only, with category, type, and industry organization plus direct checkout actions from every published listing
+  - realigning the site's marketing copy around premium websites, SaaS applications, mobile app launch work, and ready websites as the primary offer, while keeping MCP servers and automation as secondary services
 - Working conclusion:
 	- the documented frontend surface is largely implemented
 	- the documented backend, API, Security, DevOps, and QA phases are still mostly documentation-only, though the AI concierge now has an initial server-backed slice
   - frontend-only development deployment is now configured, but full integrated release is still blocked by deferred backend and remaining release-engineering gaps
   - the AI concierge entry points now open a shared popup chat surface backed by `/api/v1/ai-concierge`, while the dedicated `/ai-concierge` route remains available as a secondary full-page view
+  - concierge popup behavior now auto-closes on route changes and action-link clicks so conversion routes appear immediately after suggestion taps
+  - the shop is being repositioned as a website-product storefront; MCP and automation offers should remain outside the active shop catalog until the commerce strategy expands again
+  - current content work should stay text-only and documentation-first: no route logic changes, only copy, pricing language, FAQs, and related positioning updates
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.
@@ -199,7 +205,7 @@ phases:
 - The shop browsing and product preview experience exists in code.
 - The AI concierge route now renders a real chat UI and the site includes a first server-backed `/api/v1/ai-concierge` endpoint grounded in current website content only.
 - The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
-- The mobile AI concierge popup now uses a cleaner app-style sheet layout, hides the mobile dock while open, and keeps prompts, messages, and composer spacing responsive without route-specific hardcoding.
+- The mobile AI concierge popup now uses a cleaner app-style sheet layout, hides the mobile dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
 - The blog detail surface now derives on-page navigation from article headings, uses a cleaner one-column mobile reading flow, and shares improved article, share-rail, and comment responsiveness across slugs.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.

@@ -15,8 +15,8 @@ depends_on:
 # Checkout Page
 
 ## Page Definition
-- Purpose: complete digital product purchases through a clear, trustworthy Stripe-powered checkout flow.
-- Target audience: buyers ready to purchase a template, ready website, mobile app, MCP server, bundle, or support add-on.
+- Purpose: complete website product purchases through a clear, trustworthy Stripe-powered checkout flow.
+- Target audience: buyers ready to purchase a website template or ready-made website.
 - Primary CTA: Pay with Stripe.
 - Secondary CTA: Return to Product.
 
@@ -27,7 +27,7 @@ depends_on:
 - Components: top bar, step indicator, trust badges.
 
 ### 2. Order Summary
-- Content: products, quantities, licenses, support add-ons, and totals.
+- Content: selected website product, license, support notes, and totals.
 - Components: summary card, editable rows, price blocks.
 
 ### 3. Coupon and Bundle Logic
@@ -61,7 +61,7 @@ depends_on:
 
 ## SEO and Metadata
 - Title: Secure Checkout | Complete Your Purchase.
-- Description: Review your order and pay securely with Stripe.
+- Description: Review your website order and pay securely with Stripe.
 
 ## Conversion Path
 - Order summary -> customer info -> payment -> success delivery path.
