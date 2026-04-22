@@ -11,7 +11,16 @@ export type ShopProduct = {
   name: string;
   price: string;
   category: string;
+  categorySlug: string;
+  type: string;
+  typeSlug: string;
+  industry: string;
+  industrySlug: string;
   tag?: string;
+  published?: boolean;
+  rating?: number;
+  reviewCount?: string;
+  salesCount?: string;
   teaser: string;
   summary: string;
   audience: string;
@@ -27,7 +36,13 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     name: "Concierge MCP Starter",
     price: "$249",
     category: "MCP Servers",
+    categorySlug: "mcp",
+    type: "Internal Tool Starter",
+    typeSlug: "internal-tool-starter",
+    industry: "AI Operations",
+    industrySlug: "ai-operations",
     tag: "New",
+    published: false,
     teaser: "A premium MCP starter with auth, tracing, tool scaffolding, and operator-safe defaults.",
     summary:
       "Built for teams who want a fast path to an internal agent surface without inventing the architecture from scratch.",
@@ -52,7 +67,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     name: "Atelier Marketing Theme",
     price: "$129",
     category: "Templates",
+    categorySlug: "templates",
+    type: "Marketing Site",
+    typeSlug: "marketing-site",
+    industry: "Studios & SaaS",
+    industrySlug: "studios-saas",
     tag: "Best seller",
+    published: true,
+    rating: 4.8,
+    reviewCount: "3.2K",
+    salesCount: "412",
     teaser: "An editorial Next.js marketing theme with premium typography, modular sections, and launch-ready pacing.",
     summary:
       "For founders and agencies who want a site that feels intentional on day one instead of generic-by-template.",
@@ -77,7 +101,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     name: "Operator Dashboard Kit",
     price: "$189",
     category: "Templates",
+    categorySlug: "templates",
+    type: "Dashboard Website",
+    typeSlug: "dashboard-website",
+    industry: "B2B SaaS",
+    industrySlug: "b2b-saas",
     tag: "Updated",
+    published: true,
+    rating: 4.6,
+    reviewCount: "1.4K",
+    salesCount: "238",
     teaser: "A polished dashboard system for teams shipping internal tools, queues, and KPI-heavy operations surfaces.",
     summary:
       "Made for product teams who need a credible operator UI without spending weeks on table states, charts, and navigation shells.",
@@ -102,6 +135,12 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     name: "Inquiry-to-CRM Automation",
     price: "$99",
     category: "Automation kit",
+    categorySlug: "automation",
+    type: "Lead Routing Kit",
+    typeSlug: "lead-routing-kit",
+    industry: "Marketing Operations",
+    industrySlug: "marketing-operations",
+    published: false,
     teaser: "A workflow starter for routing leads, enriching records, and triggering follow-up across your CRM stack.",
     summary:
       "Ideal for teams stuck between form fills, spreadsheets, and delayed follow-up. The kit makes the flow legible before you automate it.",
@@ -125,7 +164,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     slug: "mobile-app-landing-pack",
     name: "Mobile App Landing Pack",
     price: "$149",
-    category: "Templates",
+    category: "Ready Websites",
+    categorySlug: "ready-websites",
+    type: "Launch Website",
+    typeSlug: "launch-website",
+    industry: "Mobile Apps",
+    industrySlug: "mobile-apps",
+    published: true,
+    rating: 4.7,
+    reviewCount: "980",
+    salesCount: "174",
     teaser: "A launch-focused mobile landing system with app-store panels, feature storytelling, and device-first sections.",
     summary:
       "Useful when the product is mobile-first and the launch site needs to feel like it belongs to a real app team.",
@@ -149,8 +197,17 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     slug: "booking-stripe-bundle",
     name: "Booking + Stripe Bundle",
     price: "$229",
-    category: "Automation kit",
+    category: "Ready Websites",
+    categorySlug: "ready-websites",
+    type: "Booking Website",
+    typeSlug: "booking-website",
+    industry: "Service Businesses",
+    industrySlug: "service-businesses",
     tag: "Bundle",
+    published: true,
+    rating: 4.9,
+    reviewCount: "2.1K",
+    salesCount: "307",
     teaser: "A service-business starter that combines booking UX, checkout states, and payment-ready operational flows.",
     summary:
       "Designed for service companies that need the front-end polish and the operational structure behind a premium booking flow.",
@@ -176,6 +233,28 @@ export const SHOP_PRODUCT_BY_SLUG = Object.fromEntries(
   SHOP_PRODUCTS.map((product) => [product.slug, product])
 ) as Record<string, ShopProduct>;
 
+export const PUBLISHED_SHOP_PRODUCTS = SHOP_PRODUCTS.filter((product) => product.published !== false);
+
+export const SHOP_CATEGORY_OPTIONS = Array.from(
+  new Map(PUBLISHED_SHOP_PRODUCTS.map((product) => [product.categorySlug, product.category])).entries(),
+  ([value, label]) => ({ value, label })
+);
+
+export const SHOP_TYPE_OPTIONS = Array.from(
+  new Map(PUBLISHED_SHOP_PRODUCTS.map((product) => [product.typeSlug, product.type])).entries(),
+  ([value, label]) => ({ value, label })
+);
+
+export const SHOP_INDUSTRY_OPTIONS = Array.from(
+  new Map(PUBLISHED_SHOP_PRODUCTS.map((product) => [product.industrySlug, product.industry])).entries(),
+  ([value, label]) => ({ value, label })
+);
+
 export function getShopProduct(slug: string) {
   return SHOP_PRODUCT_BY_SLUG[slug];
+}
+
+export function getCheckoutHref(productOrSlug: ShopProduct | string) {
+  const slug = typeof productOrSlug === "string" ? productOrSlug : productOrSlug.slug;
+  return `/checkout?product=${slug}`;
 }

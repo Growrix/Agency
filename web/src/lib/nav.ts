@@ -27,10 +27,10 @@ export const FOOTER_NAV = {
   ],
   Shop: [
     { label: "Templates", href: "/shop?category=templates" },
-    { label: "Ready Websites", href: "/shop?category=websites" },
-    { label: "MCP Servers", href: "/shop?category=mcp" },
-    { label: "Mobile Apps", href: "/shop?category=mobile" },
-    { label: "Automation Kits", href: "/shop?category=automation" },
+    { label: "Ready Websites", href: "/shop?category=ready-websites" },
+    { label: "B2B SaaS", href: "/shop?industry=b2b-saas" },
+    { label: "Mobile Apps", href: "/shop?industry=mobile-apps" },
+    { label: "Service Businesses", href: "/shop?industry=service-businesses" },
   ],
   Company: [
     { label: "About", href: "/about" },
