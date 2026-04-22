@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const DEFAULT_FALLBACK_FROM_EMAIL = "Growrix <onboarding@resend.dev>";
 
 export async function POST(req: NextRequest) {
@@ -29,11 +28,14 @@ export async function POST(req: NextRequest) {
 
   const toEmail = process.env.CONTACT_TO_EMAIL;
   const fromEmail = process.env.CONTACT_FROM_EMAIL;
+  const resendApiKey = process.env.RESEND_API_KEY;
 
-  if (!toEmail || !fromEmail) {
-    console.error("CONTACT_TO_EMAIL or CONTACT_FROM_EMAIL env var is missing.");
+  if (!toEmail || !fromEmail || !resendApiKey) {
+    console.error("CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, or RESEND_API_KEY env var is missing.");
     return NextResponse.json({ error: "Server configuration error." }, { status: 500 });
   }
+
+  const resend = new Resend(resendApiKey);
 
   const html = `
     <h2>New Inquiry from Growrix Website</h2>
@@ -48,26 +50,42 @@ export async function POST(req: NextRequest) {
     </table>
   `;
 
-  const { error } = await resend.emails.send({
-    from: fromEmail,
-    to: [toEmail],
-    replyTo: email,
-    subject: `New inquiry from ${name}${service ? ` — ${service}` : ""}`,
-    html,
-  });
+  let sendResult: Awaited<ReturnType<typeof resend.emails.send>>;
 
-  if (error && isUnverifiedDomainError(error)) {
-    const fallbackFromEmail = process.env.CONTACT_FROM_FALLBACK_EMAIL ?? DEFAULT_FALLBACK_FROM_EMAIL;
-    const retry = await resend.emails.send({
-      from: fallbackFromEmail,
+  try {
+    sendResult = await resend.emails.send({
+      from: fromEmail,
       to: [toEmail],
       replyTo: email,
       subject: `New inquiry from ${name}${service ? ` — ${service}` : ""}`,
       html,
-      headers: {
-        "X-Original-From": fromEmail,
-      },
     });
+  } catch (err) {
+    console.error("Resend send threw an exception:", err);
+    return NextResponse.json({ error: "Email provider request failed." }, { status: 500 });
+  }
+
+  const { error } = sendResult;
+
+  if (error && isUnverifiedDomainError(error)) {
+    const fallbackFromEmail = process.env.CONTACT_FROM_FALLBACK_EMAIL ?? DEFAULT_FALLBACK_FROM_EMAIL;
+    let retry: Awaited<ReturnType<typeof resend.emails.send>>;
+
+    try {
+      retry = await resend.emails.send({
+        from: fallbackFromEmail,
+        to: [toEmail],
+        replyTo: email,
+        subject: `New inquiry from ${name}${service ? ` — ${service}` : ""}`,
+        html,
+        headers: {
+          "X-Original-From": fromEmail,
+        },
+      });
+    } catch (err) {
+      console.error("Resend fallback send threw an exception:", err);
+      return NextResponse.json({ error: "Email provider request failed." }, { status: 500 });
+    }
 
     if (!retry.error) {
       return NextResponse.json({ success: true, fallbackSenderUsed: true });
