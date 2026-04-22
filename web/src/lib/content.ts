@@ -111,12 +111,10 @@ export const CLIENT_LOGOS = [
 ];
 
 export const FEATURED_PRODUCTS = [
-  { name: "Concierge MCP Starter", price: "$249", category: "MCP Servers", tag: "New" },
-  { name: "Atelier Marketing Theme", price: "$129", category: "Templates", tag: "Best seller" },
-  { name: "Operator Dashboard Kit", price: "$189", category: "Templates", tag: "Updated" },
-  { name: "Inquiry-to-CRM Automation", price: "$99", category: "Automation kit" },
-  { name: "Mobile App Landing Pack", price: "$149", category: "Templates" },
-  { name: "Booking + Stripe Bundle", price: "$229", category: "Automation kit", tag: "Bundle" },
+  { slug: "atelier-marketing-theme", name: "Atelier Marketing Theme", price: "$129", category: "Templates", tag: "Best seller" },
+  { slug: "operator-dashboard-kit", name: "Operator Dashboard Kit", price: "$189", category: "Templates", tag: "Updated" },
+  { slug: "mobile-app-landing-pack", name: "Mobile App Landing Pack", price: "$149", category: "Ready Websites" },
+  { slug: "booking-stripe-bundle", name: "Booking + Stripe Bundle", price: "$229", category: "Ready Websites", tag: "Bundle" },
 ];
 
 export const PORTFOLIO = [

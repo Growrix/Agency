@@ -66,9 +66,9 @@ const HOME_TIERS: Tier[] = [
   },
   {
     name: "Productized",
-    price: "From $99",
+    price: "From $129",
     cadence: "one-time",
-    description: "Ready-to-deploy templates, automation kits, and MCP starters that ship in a day.",
+    description: "Ready-to-deploy website templates and ready-made websites that ship in a day.",
     features: ["Stripe-powered checkout", "License + updates", "Quick setup docs", "Optional install help"],
     cta: { label: "Browse the shop", href: "/shop" },
   },
@@ -298,14 +298,14 @@ export default function Home() {
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
               eyebrow="Shop spotlight"
-              title="Templates, kits, and starters ready to ship today."
-              description="Productized accelerators built from the same playbooks we use on custom engagements."
+              title="Website templates and ready websites, built to ship."
+              description="Packaged from the same systems we build for clients — purchase today and launch in days."
             />
             <LinkButton href="/shop" variant="outline">
               Browse the shop <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
             {FEATURED_PRODUCTS.map((p) => (
               <RevealItem key={p.name} className="h-full">
               <Card hoverable className="flex flex-col h-full">
@@ -320,7 +320,7 @@ export default function Home() {
                 <h3 className="mt-1 font-display text-lg tracking-tight">{p.name}</h3>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="font-display text-xl">{p.price}</span>
-                  <Link href="/shop" className="text-sm font-medium text-primary hover:underline">
+                  <Link href={`/shop/${p.slug}`} className="text-sm font-medium text-primary hover:underline">
                     Preview →
                   </Link>
                 </div>
