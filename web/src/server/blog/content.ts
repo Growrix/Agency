@@ -1,23 +1,18 @@
 import "server-only";
 
-import { BLOG_POSTS, getBlogPost, type BlogPost } from "@/lib/content";
+import type { BlogPost } from "@/lib/content";
 import { listSanityBlogPosts } from "@/server/sanity/blog";
 
-async function listCmsPostsOrFallback(): Promise<BlogPost[]> {
+async function listCmsPosts(): Promise<BlogPost[]> {
   try {
-    const cmsPosts = await listSanityBlogPosts();
-    if (cmsPosts.length > 0) {
-      return cmsPosts;
-    }
+    return await listSanityBlogPosts();
   } catch {
-    // Gracefully fall back to static content when CMS is unreachable.
+    return [];
   }
-
-  return BLOG_POSTS;
 }
 
 export async function listBlogPosts(): Promise<BlogPost[]> {
-  const posts = await listCmsPostsOrFallback();
+  const posts = await listCmsPosts();
   return [...posts].sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
 }
 
@@ -27,8 +22,8 @@ export async function listBlogSlugs(): Promise<string[]> {
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-  const posts = await listCmsPostsOrFallback();
-  return posts.find((post) => post.slug === slug) ?? getBlogPost(slug);
+  const posts = await listCmsPosts();
+  return posts.find((post) => post.slug === slug);
 }
 
 export async function getRelatedPosts(slug: string, limit = 2): Promise<BlogPost[]> {
