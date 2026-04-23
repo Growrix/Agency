@@ -257,11 +257,21 @@ const BLOG_DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
-export function formatBlogDate(iso: string): string {
+export function formatBlogDate(iso?: string | null): string {
+  // Keep rendering stable even when CMS data is incomplete.
+  if (!iso || typeof iso !== "string") {
+    return "Date TBD";
+  }
+
   // Parse YYYY-MM-DD as UTC so SSR and client agree regardless of timezone.
   const [y, m, d] = iso.split("-").map(Number);
   const date = Number.isFinite(y) && Number.isFinite(m) && Number.isFinite(d)
     ? new Date(Date.UTC(y, (m ?? 1) - 1, d ?? 1))
     : new Date(iso);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Date TBD";
+  }
+
   return BLOG_DATE_FORMATTER.format(date);
 }
