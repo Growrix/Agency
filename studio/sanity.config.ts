@@ -1,4 +1,5 @@
 import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemaTypes";
 
@@ -7,7 +8,7 @@ export default defineConfig({
   title: "Growrix OS CMS",
   projectId: "1tk4ulcx",
   dataset: "production",
-  plugins: [visionTool()],
+  plugins: [structureTool(), visionTool()],
   schema: {
     types: schemaTypes,
   },
