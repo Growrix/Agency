@@ -217,6 +217,7 @@ export type BlogBodyBlock =
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "quote"; text: string; cite?: string }
+  | { type: "image"; url: string; alt: string; caption?: string }
   | { type: "code"; lang?: string; code: string }
   | { type: "hr" };
 
@@ -241,6 +242,14 @@ export type BlogCoverImage = {
   alt: string;
 };
 
+export type BlogSeo = {
+  metaTitle?: string;
+  metaDescription?: string;
+  canonicalUrl?: string;
+  noIndex?: boolean;
+  ogImageUrl?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -248,6 +257,7 @@ export type BlogPost = {
   category: string;
   tags: string[];
   coverImage?: BlogCoverImage;
+  seo?: BlogSeo;
   author: BlogAuthor;
   publishedAt: string;
   readMinutes: number;

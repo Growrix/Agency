@@ -15,6 +15,11 @@ describe.sequential("auth users", () => {
   beforeEach(async () => {
     await resetDatabase();
     process.env.AUTH_JWT_SECRET = "test-secret-key-123!";
+    process.env.SUPABASE_URL = "";
+    process.env.SUPABASE_ANON_KEY = "";
+    process.env.SUPABASE_SECRET_KEY = "";
+    process.env.ADMIN_EMAIL = "";
+    process.env.ADMIN_PASSWORD = "";
   });
 
   it("rejects weak passwords", () => {

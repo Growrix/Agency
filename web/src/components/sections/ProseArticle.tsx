@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Image from "next/image";
 import type { BlogBodyBlock } from "@/lib/content";
 
 export function getProseHeadingId(text: string, index: number) {
@@ -64,6 +65,23 @@ export function ProseArticle({ blocks }: { blocks: BlogBodyBlock[] }) {
               <pre key={i}>
                 <code>{b.code}</code>
               </pre>
+            );
+          case "image":
+            return (
+              <figure key={i} className="my-10">
+                <div className="relative w-full overflow-hidden rounded-[16px] border border-border bg-inset aspect-16/10">
+                  <Image
+                    src={b.url}
+                    alt={b.alt}
+                    fill
+                    sizes="(min-width: 1024px) 70vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                {b.caption && (
+                  <figcaption className="mt-3 text-sm text-text-muted">{b.caption}</figcaption>
+                )}
+              </figure>
             );
           case "hr":
             return <hr key={i} />;
