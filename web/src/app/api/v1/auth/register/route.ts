@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiError, createRequestContext, errorResponse } from "@/server/core/api";
 import { applySessionCookie } from "@/server/auth/guards";
 import { issueSessionToken } from "@/server/auth/token";
-import { authenticateUser, getRequiredAdminCredentialsConfigured } from "@/server/auth/users";
+import { createUser, getRequiredAdminCredentialsConfigured } from "@/server/auth/users";
 import { getRuntimeConfig } from "@/server/config/runtime";
-import { assertRateLimit } from "@/server/security/rate-limit";
+import { assertNoBotTrap, assertRateLimit } from "@/server/security/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -20,23 +20,27 @@ export async function POST(request: NextRequest) {
     });
 
     const body = (await request.json()) as Record<string, unknown>;
-    const email = typeof body.email === "string" ? body.email.trim() : "";
-    const password = typeof body.password === "string" ? body.password : "";
+    assertNoBotTrap(body.website);
 
-    if (!email || !password) {
-      throw new ApiError("MISSING_REQUIRED_FIELD", 400, "Email and password are required.");
-    }
-
-    const user = await authenticateUser(email, password);
-    if (!user) {
-      throw new ApiError("UNAUTHORIZED", 401, "Invalid credentials.");
-    }
+    const user = await createUser({
+      email: typeof body.email === "string" ? body.email : "",
+      password: typeof body.password === "string" ? body.password : "",
+      firstName: typeof body.first_name === "string" ? body.first_name : typeof body.firstName === "string" ? body.firstName : undefined,
+      lastName: typeof body.last_name === "string" ? body.last_name : typeof body.lastName === "string" ? body.lastName : undefined,
+      role: "subscriber",
+    });
 
     const token = await issueSessionToken({ userId: user.id, email: user.email, role: user.role });
     const response = NextResponse.json({
       success: true,
       data: {
-        user: { id: user.id, email: user.email, role: user.role },
+        user: {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          first_name: user.first_name ?? null,
+          last_name: user.last_name ?? null,
+        },
       },
       timestamp: new Date().toISOString(),
       request_id: context.requestId,
@@ -44,6 +48,6 @@ export async function POST(request: NextRequest) {
 
     return applySessionCookie(response, token);
   } catch (error) {
-    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to sign in."));
+    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to register account."));
   }
 }

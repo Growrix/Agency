@@ -20,6 +20,9 @@ function cloneDefaultDatabase(): DatabaseSchema {
     conversations: [...DEFAULT_DATABASE.conversations],
     orders: [...DEFAULT_DATABASE.orders],
     users: [...DEFAULT_DATABASE.users],
+    services: [...DEFAULT_DATABASE.services],
+    portfolio_projects: [...DEFAULT_DATABASE.portfolio_projects],
+    products: [...DEFAULT_DATABASE.products],
     analytics_events: [...DEFAULT_DATABASE.analytics_events],
     audit_logs: [...DEFAULT_DATABASE.audit_logs],
   };

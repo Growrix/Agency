@@ -1,0 +1,31 @@
+import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests/e2e",
+  timeout: 45_000,
+  expect: { timeout: 10_000 },
+  fullyParallel: false,
+  use: {
+    baseURL: "http://127.0.0.1:5000",
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+  },
+  webServer: {
+    command: "npm run start",
+    url: "http://127.0.0.1:5000",
+    reuseExistingServer: true,
+    timeout: 120_000,
+    env: {
+      NEXT_PUBLIC_SITE_URL: "http://127.0.0.1:5000",
+      AUTH_JWT_SECRET: "test-secret-key-123!",
+      ADMIN_EMAIL: "admin@growrix.test",
+      ADMIN_PASSWORD: "Admin123!",
+    },
+  },
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+  ],
+});

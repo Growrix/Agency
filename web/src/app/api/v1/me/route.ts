@@ -7,7 +7,15 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   try {
     const user = await requireAuthenticatedUser(request);
-    return successResponse({ user });
+    return successResponse({
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        first_name: user.firstName ?? null,
+        last_name: user.lastName ?? null,
+      },
+    });
   } catch (error) {
     return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to load current user."));
   }

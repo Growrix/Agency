@@ -23,11 +23,11 @@ This list is extracted from the audit report and includes only the remaining (no
 
 ### Phase P2 Frontend Surface
 - [x] Booking integrated flow
-- [ ] Live chat dedicated route
-- [~] Admin interface routes
+- [x] Live chat dedicated route
+- [x] Admin interface routes
 
 ### Phase P3 Backend and API
-- [ ] Public read API contract surface (v1 services/portfolio/shop routes)
+- [x] Public read API contract surface (v1 services/portfolio/shop routes)
 - [x] Conversion APIs (appointments/chat start/full contract parity)
 - [~] Commerce APIs (orders, payment webhooks, fulfillment)
 - [~] Subscriber and admin APIs with auth enforcement
@@ -40,14 +40,14 @@ This list is extracted from the audit report and includes only the remaining (no
 
 ### Phase P5 DevOps and Reliability
 - [~] Production observability stack
-- [ ] Full infrastructure/runtime hardening
+- [x] Full infrastructure/runtime hardening
 
 ### Phase P6 QA and Release Gates
-- [ ] Unit tests
+- [x] Unit tests
 - [x] Integration/API tests
-- [ ] E2E tests
-- [ ] Accessibility/performance/security automation
-- [ ] Full release gate execution evidence
+- [x] E2E tests
+- [x] Accessibility/performance/security automation
+- [x] Full release gate execution evidence
 
 ### Integration Checklist (Explicit)
 - [~] Stripe

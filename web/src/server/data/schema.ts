@@ -1,5 +1,8 @@
 import "server-only";
 
+import type { PreviewVariant } from "@/lib/shop";
+import type { CaseStudyDetail, StockImage } from "@/lib/site-images";
+
 export type InquiryStatus = "new" | "read" | "responded" | "closed" | "spam";
 export type AppointmentStatus = "inquiry" | "confirmed" | "completed" | "cancelled" | "no_show";
 export type OrderPaymentStatus = "pending" | "succeeded" | "failed" | "refunded";
@@ -102,6 +105,55 @@ export type UserRecord = {
   updated_at: string;
 };
 
+export type ManagedServiceRecord = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  short_description: string;
+  service_type: string;
+  pricing_model: "contact" | "tiered" | "fixed";
+  delivery_timeline: string;
+  pillars: string[];
+};
+
+export type ManagedPortfolioRecord = {
+  slug: string;
+  name: string;
+  industry: string;
+  service: string;
+  summary: string;
+  metric: string;
+  accent: string;
+  hero_image: StockImage | null;
+  detail: CaseStudyDetail | null;
+};
+
+export type ManagedProductRecord = {
+  slug: string;
+  name: string;
+  price: string;
+  category: string;
+  categorySlug: string;
+  type: string;
+  typeSlug: string;
+  industry: string;
+  industrySlug: string;
+  tag?: string;
+  published?: boolean;
+  rating?: number;
+  reviewCount?: string;
+  salesCount?: string;
+  teaser: string;
+  summary: string;
+  audience: string;
+  previewVariant: PreviewVariant;
+  includes: string[];
+  stack: string[];
+  highlights: { label: string; value: string }[];
+  image: StockImage | null;
+};
+
 export type AnalyticsEventRecord = {
   id: string;
   event_name: string;
@@ -129,6 +181,9 @@ export type DatabaseSchema = {
   conversations: ConversationSessionRecord[];
   orders: OrderRecord[];
   users: UserRecord[];
+  services: ManagedServiceRecord[];
+  portfolio_projects: ManagedPortfolioRecord[];
+  products: ManagedProductRecord[];
   analytics_events: AnalyticsEventRecord[];
   audit_logs: AuditLogRecord[];
 };
@@ -139,6 +194,9 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   conversations: [],
   orders: [],
   users: [],
+  services: [],
+  portfolio_projects: [],
+  products: [],
   analytics_events: [],
   audit_logs: [],
 };

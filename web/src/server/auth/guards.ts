@@ -9,6 +9,8 @@ export type AuthenticatedUser = {
   id: string;
   email: string;
   role: SessionPayload["role"];
+  firstName?: string;
+  lastName?: string;
 };
 
 export async function getAuthenticatedUser(request: Request | NextRequest): Promise<AuthenticatedUser | null> {
@@ -28,6 +30,8 @@ export async function getAuthenticatedUser(request: Request | NextRequest): Prom
       id: user.id,
       email: user.email,
       role: user.role,
+      firstName: user.first_name,
+      lastName: user.last_name,
     };
   } catch {
     return null;

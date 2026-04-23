@@ -5,6 +5,10 @@ import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/
 const protectedPrefixes = ["/admin", "/api/v1/admin", "/api/v1/me"];
 
 export async function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/admin/login")) {
+    return NextResponse.next();
+  }
+
   if (!protectedPrefixes.some((prefix) => request.nextUrl.pathname.startsWith(prefix))) {
     return NextResponse.next();
   }

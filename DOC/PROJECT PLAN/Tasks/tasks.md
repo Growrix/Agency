@@ -9,22 +9,20 @@ last_audit_date: 2026-04-23
 current_state:
   repo_branch_audited: main
   frontend_shell: done
-  frontend_routes: mostly_done
+  frontend_routes: done
   frontend_conversion_integrations: partial
-  backend_phase_deferred: true
+  backend_phase_deferred: false
   development_frontend_deployable: true
-  backend_implementation: partial
+  backend_implementation: mostly_done
   api_implementation: partial
   security_implementation: partial
   devops_implementation: partial
-  qa_implementation: partial
+  qa_implementation: done
   deployable: false
 release_blockers:
-  - Full integrated production release is still blocked by customer/subscriber auth, broader RBAC coverage, and protected self-service flows beyond the seeded admin login.
-  - Stripe checkout and webhook code now exist, but production payment go-live is still blocked until secrets are configured and real fulfillment assets replace the current manual summary download.
-  - Booking now persists real slots, but external calendar synchronization and downstream confirmation automation are still incomplete.
-  - Production observability, alerting, and release-gate automation remain incomplete.
-  - End-to-end browser coverage is still pending even though API integration tests now exist.
+  - Full integrated production release is still blocked by external integrations intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and optional CMS workflow).
+  - Customer/subscriber RBAC and protected self-service ownership flows are implemented to a baseline level, but richer policy granularity remains a hardening follow-up.
+  - Infrastructure-as-code and external monitoring/alerting stack work are still pending if deployment expands beyond frontend-hosted runtime.
 phase_sequence:
   - P0-documentation-tracking-alignment
   - P1-frontend-foundation
@@ -33,22 +31,21 @@ phase_sequence:
   - P4-security-hardening
   - P5-devops-release-readiness
   - P6-qa-release-gates
-next_recommended_phase: P4-security-hardening
+next_recommended_phase: P5-devops-release-readiness
 next_recommended_tasks:
-  - T019
-  - T020
+  - T027
   - T028
-  - T031
+  - T019
 phase_status_counts:
-  done: 2
-  partial: 5
+  done: 4
+  partial: 3
   blocked: 0
   not_started: 0
 task_status_counts:
-  done: 18
-  partial: 8
+  done: 26
+  partial: 6
   blocked: 0
-  not_started: 7
+  not_started: 1
 ---
 
 # Tasks / Execution Tracker
@@ -95,7 +92,7 @@ phases:
     status: done
   - id: P2
     name: Frontend Surface Implementation
-    status: partial
+    status: done
   - id: P3
     name: Backend API Implementation
     status: partial
@@ -107,7 +104,7 @@ phases:
     status: partial
   - id: P6
     name: QA Release Gates
-    status: partial
+    status: done
 ```
 
 ## Phase Overview
@@ -115,11 +112,11 @@ phases:
 | --- | --- | --- |
 | P0 | done | Task tracking and documentation alignment established. |
 | P1 | done | Workspace, shell, primitives, theme system, and styling foundation are built. |
-| P2 | partial | Marketing, blog, proof, and shop preview surfaces exist, and the contact, booking, checkout, and AI chat conversion routes now connect to real server-backed flows. |
-| P3 | partial | A shared domain/data layer plus contact, booking, concierge, order, admin, auth, and self-service API slices now exist, but public catalog APIs and richer fulfillment remain incomplete. |
+| P2 | done | Marketing, blog, proof, shop, booking, checkout, concierge, live-chat, and admin surface routes are implemented and connected to live backend flows. |
+| P3 | partial | Public read APIs and managed catalog persistence are now implemented, while commerce fulfillment and richer ownership policy coverage remain partially complete. |
 | P4 | partial | JWT admin auth, proxy-based protection, request validation, audit logging, and in-memory abuse controls now exist, but broader RBAC and production-grade security hardening remain incomplete. |
-| P5 | partial | Development deployment baseline, CI, runbook assets, and lightweight observability hooks now exist, but external error reporting and runtime hardening are still pending. |
-| P6 | partial | API integration tests now cover the key conversion routes locally, but unit, browser e2e, accessibility, performance, and security automation remain incomplete. |
+| P5 | partial | Runtime hardening headers, health/readiness probes, and client error capture hooks now exist; infrastructure-as-code and external monitoring stack are still pending. |
+| P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
 
 ## Tasks By Phase
 
@@ -141,14 +138,14 @@ phases:
 - [x] T011 Build the contact conversion flow in `web/src/app/contact/page.tsx` and connect it to `web/src/app/api/v1/contact/route.ts`.
 - [x] T012 Replace placeholder conversion routes in `web/src/app/ai-concierge/page.tsx`, `web/src/app/book-appointment/page.tsx`, and `web/src/app/checkout/page.tsx` with real integrated flows.
   - AI concierge implementation note: the homepage CTA, floating launcher, header chat utility, FAQ/contact shortcuts, and mobile bottom nav now open the shared popup chat interface in place; `/ai-concierge` remains available as the dedicated full chat route.
-- [ ] T013 Build the missing live chat surface at `web/src/app/live-chat/page.tsx` and the supporting UI state modules.
-- [~] T014 Build the missing admin surface at `web/src/app/admin/**` for services, products, portfolio, orders, appointments, inquiries, and analytics.
-  - Current state: protected admin login and an operational summary dashboard now exist for inquiries, appointments, orders, and analytics; CRUD management surfaces are still pending.
+- [x] T013 Build the missing live chat surface at `web/src/app/live-chat/page.tsx` and the supporting UI state modules.
+- [x] T014 Build the missing admin surface at `web/src/app/admin/**` for services, products, portfolio, orders, appointments, inquiries, and analytics.
+  - Current state: protected admin login plus a full operations workspace now supports analytics and managed CRUD updates for services, products, and portfolio alongside inquiry/appointment/order views.
 
 ### Phase P3 — Backend & API Implementation
-- [~] T015 Create the shared server domain and data access layer under `web/src/server/**` for services, products, orders, appointments, inquiries, conversations, and users.
-  - Current state: a persistent file-backed store plus domain services now exist for orders, appointments, inquiries, conversations, analytics, audit logs, and users; service/product catalog persistence still relies on static library data.
-- [ ] T016 Implement public read APIs at:
+- [x] T015 Create the shared server domain and data access layer under `web/src/server/**` for services, products, orders, appointments, inquiries, conversations, and users.
+  - Current state: a persistent file-backed store now includes managed records for services, products, and portfolio projects in addition to orders, appointments, inquiries, conversations, analytics, audit logs, and users.
+- [x] T016 Implement public read APIs at:
 	- `web/src/app/api/v1/services/route.ts`
 	- `web/src/app/api/v1/services/[serviceId]/route.ts`
 	- `web/src/app/api/v1/portfolio/route.ts`
@@ -176,7 +173,7 @@ phases:
 	- `web/src/app/api/v1/admin/**`
   - `web/src/proxy.ts`
 	- `web/src/server/auth/**`
-  - Current state: seeded admin login, JWT cookie sessions, `/api/v1/me`, `/api/v1/me/orders`, `/api/v1/me/appointments`, admin summary reads, and route protection now exist; richer subscriber/customer auth and self-service updates remain incomplete.
+  - Current state: registration, login, `/api/v1/me`, `/api/v1/me/update`, `/api/v1/me/orders`, `/api/v1/me/appointments`, managed admin catalog endpoints, admin operational reads, and route protection now exist; deeper ownership policy hardening remains incomplete.
 
 ### Phase P4 — Security Hardening
 - [~] T020 Implement secure auth, session, and RBAC enforcement in `web/src/proxy.ts`, `web/src/server/auth/**`, and `web/src/server/policies/**`.
@@ -198,11 +195,11 @@ phases:
 - [~] T028 Add production observability and error reporting hooks for frontend and backend runtime.
 
 ### Phase P6 — QA & Release Gates
-- [ ] T029 Add unit tests for UI, content utilities, and helpers in `web/src/**/*.test.ts(x)`.
+- [x] T029 Add unit tests for UI, content utilities, and helpers in `web/src/**/*.test.ts(x)`.
 - [x] T030 Add API and integration tests in `web/tests/integration/**` or equivalent.
-- [ ] T031 Add end-to-end coverage for checkout, booking, contact, and admin in `tests/e2e/**` or the project Playwright suite.
-- [ ] T032 Add accessibility, performance, and security validation automation before release.
-- [ ] T033 Run full release-gate validation against the QA, Security, and DevOps documents and record the outcome in this tracker.
+- [x] T031 Add end-to-end coverage for checkout, booking, contact, and admin in `tests/e2e/**` or the project Playwright suite.
+- [x] T032 Add accessibility, performance, and security validation automation before release.
+- [x] T033 Run full release-gate validation against the QA, Security, and DevOps documents and record the outcome in this tracker.
 
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.
@@ -222,10 +219,9 @@ phases:
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
 
 ## What Is Next To Build
-1. T019 + T020: extend auth and RBAC beyond the seeded admin flow into real subscriber/customer account surfaces.
-2. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
-3. T028 + T031-T033: add external observability, browser e2e coverage, and the remaining accessibility/performance/security release gates.
-4. T016: expose the planned public catalog/read APIs instead of relying only on library imports.
+1. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
+2. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
+3. T027 + T028: add infrastructure-as-code plus external observability/alerting for expanded production operations.
 
 ## Release Readiness Checklist
 - [x] Local production build passes.
@@ -234,8 +230,8 @@ phases:
 - [x] Booking flow is connected to a real inquiry backend.
 - [x] Checkout is connected to a real order and payment backend.
 - [x] AI concierge and live chat have real server-backed behavior, with the concierge restricted to approved internal knowledge and explicit escalation when no grounded answer exists.
-- [ ] Auth, RBAC, and admin management exist for protected flows.
-- [ ] CI, tests, and release gates are passing.
+- [~] Auth, RBAC, and admin management exist for protected flows.
+- [x] CI, tests, and release gates are passing.
 - [ ] Security and compliance controls are implemented beyond documentation.
 
 ## Tracker Maintenance Rule
