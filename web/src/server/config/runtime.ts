@@ -21,6 +21,12 @@ type RuntimeConfig = {
     adminEmail?: string;
     adminPassword?: string;
   };
+  supabase: {
+    url?: string;
+    anonKey?: string;
+    secretKey?: string;
+    serviceRoleKey?: string;
+  };
   abuseProtection: {
     contactLimitPerMinute: number;
     conciergeLimitPerMinute: number;
@@ -79,6 +85,12 @@ export function getRuntimeConfig(): RuntimeConfig {
       jwtSecret: process.env.AUTH_JWT_SECRET,
       adminEmail: process.env.ADMIN_EMAIL,
       adminPassword: process.env.ADMIN_PASSWORD,
+    },
+    supabase: {
+      url: process.env.SUPABASE_URL,
+      anonKey: process.env.SUPABASE_ANON_KEY,
+      secretKey: process.env.SUPABASE_SECRET_KEY,
+      serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY,
     },
     abuseProtection: {
       contactLimitPerMinute: parseNumber(process.env.RATE_LIMIT_CONTACT_PER_MINUTE, 6),

@@ -214,6 +214,7 @@ phases:
 - The booking route now persists real appointment requests through `/api/v1/appointments` instead of showing a placeholder.
 - The checkout route now creates persisted orders and hands off to Stripe when configured, with a webhook endpoint and fallback manual delivery summary.
 - Seeded admin auth, protected `/admin` routes, and `/api/v1/me` plus `/api/v1/admin/**` reads now exist behind JWT cookie sessions.
+- Supabase-backed auth and persistence adapters now exist and can be enabled by environment configuration without changing route contracts.
 - Local API integration tests now cover contact, booking, checkout, and concierge persistence flows.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.

@@ -33,6 +33,11 @@ core_invariants:
 
 api_base_url: https://api.agency.com/api/v1
 
+platform_providers:
+  auth_provider: Supabase Auth (email/password, JWT sessions)
+  database_provider: Supabase Postgres (managed PostgreSQL)
+  compatibility_mode: local file-backed store allowed for offline development only
+
 response_envelope:
   success:
     description: all successful API responses

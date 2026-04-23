@@ -3,9 +3,11 @@ import "server-only";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DEFAULT_DATABASE, type DatabaseSchema } from "@/server/data/schema";
+import { getSupabaseAdminClient, isSupabaseDatabaseConfigured } from "@/server/supabase/client";
 
 const DATA_DIRECTORY = path.join(process.cwd(), ".data");
 const DATABASE_PATH = path.join(DATA_DIRECTORY, "agency-db.json");
+const SUPABASE_APP_STATE_ID = "primary";
 
 let writeQueue = Promise.resolve();
 
@@ -29,6 +31,10 @@ function cloneDefaultDatabase(): DatabaseSchema {
 }
 
 export async function readDatabase(): Promise<DatabaseSchema> {
+  if (isSupabaseDatabaseConfigured()) {
+    return readDatabaseFromSupabase();
+  }
+
   await ensureDataDirectory();
 
   try {
@@ -40,6 +46,17 @@ export async function readDatabase(): Promise<DatabaseSchema> {
 }
 
 export async function writeDatabase(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
+  if (isSupabaseDatabaseConfigured()) {
+    writeQueue = writeQueue.then(async () => {
+      const current = await readDatabaseFromSupabase();
+      const next = await updater(current);
+      await writeDatabaseToSupabase(next);
+    });
+
+    await writeQueue;
+    return;
+  }
+
   await ensureDataDirectory();
 
   writeQueue = writeQueue.then(async () => {
@@ -54,4 +71,41 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
 export async function withDatabase<T>(selector: (database: DatabaseSchema) => T | Promise<T>) {
   const database = await readDatabase();
   return selector(database);
+}
+
+async function readDatabaseFromSupabase(): Promise<DatabaseSchema> {
+  const client = getSupabaseAdminClient();
+  const { data, error } = await client
+    .from("app_state")
+    .select("payload")
+    .eq("id", SUPABASE_APP_STATE_ID)
+    .maybeSingle<{ payload: Partial<DatabaseSchema> | null }>();
+
+  if (error) {
+    throw new Error(`Supabase app_state read failed: ${error.message}`);
+  }
+
+  if (!data?.payload) {
+    const initial = cloneDefaultDatabase();
+    await writeDatabaseToSupabase(initial);
+    return initial;
+  }
+
+  return { ...cloneDefaultDatabase(), ...data.payload };
+}
+
+async function writeDatabaseToSupabase(database: DatabaseSchema) {
+  const client = getSupabaseAdminClient();
+  const { error } = await client.from("app_state").upsert(
+    {
+      id: SUPABASE_APP_STATE_ID,
+      payload: database,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "id" }
+  );
+
+  if (error) {
+    throw new Error(`Supabase app_state write failed: ${error.message}`);
+  }
 }

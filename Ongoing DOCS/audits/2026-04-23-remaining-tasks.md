@@ -52,6 +52,7 @@ This list is extracted from the audit report and includes only the remaining (no
 ### Integration Checklist (Explicit)
 - [~] Stripe
 - [ ] Sanity
+- [x] Supabase (auth + database adapter integration)
 - [x] AI Growrix OS concierge (session persistence, rate limiting, analytics)
 - [~] WhatsApp (full API integration if required)
 - [~] Calendar booking integration

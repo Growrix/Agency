@@ -50,3 +50,9 @@ read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , a
 
 Project name : Growrix OS
 supabase DB pass : ow0rJSThOZtHVCjZ
+Project URL : https://okzrczymtlkaaxlvjnyh.supabase.co
+Publishable Key : sb_publishable_UXidVgN6ulcKzqgRPS79UQ_UCBf6W4X
+Direct Connection string : postgresql://postgres:[YOUR-PASSWORD]@db.okzrczymtlkaaxlvjnyh.supabase.co:5432/postgres
+CLI setup commands : supabase login
+supabase init
+supabase link --project-ref okzrczymtlkaaxlvjnyh
