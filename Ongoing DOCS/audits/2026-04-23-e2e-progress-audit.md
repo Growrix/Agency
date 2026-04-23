@@ -6,20 +6,20 @@ Workspace: f:/PROJECTS/Agency
 
 ## 1) Executive Summary
 
-Current overall delivery is frontend-heavy and documentation-strong, with backend, security, and QA still largely pending.
+Current overall delivery is still frontend-heavy, but the backend, security, and QA layers now have a first real production-style slice rather than remaining documentation-only.
 
 - Documentation and orchestration system: mature and aligned
 - Frontend route coverage: high
 - Conversion integrations: partial
-- Backend API surface from project plan: mostly not implemented yet
-- Security hardening and QA gates: not started at implementation level
+- Backend API surface from project plan: partially implemented with real conversion, auth, admin, and commerce baselines
+- Security hardening and QA gates: partially implemented with JWT admin auth, audit logging, abuse controls, and integration tests
 
-Estimated implementation completion versus full plan: about 30 to 35 percent.
+Estimated implementation completion versus full plan: about 55 to 60 percent.
 
 Reasoning:
 - Most public pages and UX surfaces exist and are polished
-- Only two API routes exist in code today
-- Critical transactional flows (booking persistence, payments, auth, admin) are not yet implemented end to end
+- Versioned contact, appointment, concierge, auth, admin, self-service, and order routes now exist in code today
+- Critical transactional flows now have real server-backed implementations, but production secrets, richer fulfillment, calendar sync, and end-to-end release gating are still pending
 
 ## 2) Method and Evidence Base
 
@@ -68,13 +68,14 @@ What is done
 - AI Growrix OS chat route exists and works against backend endpoint
 - Google reviews component is implemented and reused across multiple pages
 
-What is in progress
-- Contact flow works to send email but lacks persistence and CRM-style tracking
+What is done
+- Contact flow now persists inquiries and exposes admin visibility
+- Booking route now submits real appointment requests through the backend
+- Checkout route now creates persisted orders and can hand off to Stripe when configured
 
 What remains
-- Booking route still placeholder style (ComingSoon)
 - Live chat dedicated route is not implemented
-- Admin surface routes are not implemented
+- Admin CRUD and management routes are still incomplete beyond the new protected dashboard shell
 
 ### Phase P3 Backend and API Implementation
 Status: Early partial
@@ -84,21 +85,22 @@ What is done
 - AI concierge API exists at web/src/app/api/v1/ai-concierge/route.ts
 - Concierge server logic and grounded knowledge layer exist under web/src/server/ai
 
+What is done
+- Shared file-backed domain/data layer now persists inquiries, appointments, conversations, orders, users, analytics events, and audit logs
+- Versioned contact, appointment, concierge, chat-start, auth, admin, self-service, and order APIs now exist
+
 What remains
-- Broader public APIs from Shared Contracts are missing
-- Conversion APIs from v1 contract (appointments, chat start, contact v1 path) are missing
-- Commerce APIs (orders, fulfillment/download flow) are missing
-- Authenticated subscriber/admin API surfaces are missing
-- No persistent data/domain layer as described by plan tasks
+- Broader public read APIs from Shared Contracts are still missing
+- Commerce fulfillment is still a temporary manual summary artifact rather than final delivery assets
+- Subscriber/customer auth remains incomplete beyond the seeded admin flow
 
 ### Phase P4 Security Hardening
-Status: Not started in implementation
+Status: Partial
 
 What remains
-- Auth/session/RBAC middleware
-- Central validation and audit logging framework
-- Runtime environment validation and secret policy
-- Rate limiting and abuse controls for public endpoints
+- Subscriber/customer RBAC expansion and broader ownership enforcement
+- Stronger runtime environment validation and secret policy enforcement
+- Production-grade abuse control backing store beyond the current in-memory throttles
 
 ### Phase P5 DevOps and Release Readiness
 Status: Partial
@@ -113,11 +115,10 @@ What remains
 - Full release hardening path still incomplete
 
 ### Phase P6 QA and Release Gates
-Status: Not started in implementation
+Status: Partial
 
 What remains
 - Unit tests
-- Integration/API tests
 - E2E tests
 - Accessibility/performance/security automation gates
 - Full release-gate evidence run
@@ -152,16 +153,20 @@ Remaining
 - Optional observability around reviews load failures
 
 ### Stripe
-Status: Not implemented for transactions
+Status: Partial
 
 Implemented
 - Checkout preview UI and product-to-checkout routing path
 - Product and copy-level references to Stripe readiness
 
+Implemented
+- Real order persistence
+- Stripe checkout session creation when secrets are configured
+- Stripe webhook endpoint
+
 Remaining
-- Real checkout session creation
-- Payment confirmation/webhook handling
-- Order persistence and fulfillment workflow
+- Production Stripe secret provisioning and external verification
+- Replace the temporary manual delivery summary with real fulfillment assets
 
 ### Sanity
 Status: Not integrated
@@ -174,7 +179,7 @@ Remaining
 - Decide CMS strategy (Sanity vs alternatives) and implement if required
 
 ### AI Growrix OS Concierge
-Status: Partial, functioning assistant baseline
+Status: Implemented baseline with persistence and controls
 
 Implemented
 - Working API endpoint
@@ -183,9 +188,7 @@ Implemented
 - Frontend chat route and popup entry points
 
 Remaining
-- Conversation/session persistence
-- Rate limiting/abuse controls
-- Broader escalation and operational analytics
+- Broader escalation automation and external operational dashboards
 
 ### WhatsApp
 Status: Partial
@@ -197,23 +200,26 @@ Remaining
 - If required by plan, full WhatsApp Business API workflow and event/webhook handling
 
 ### Booking Calendar
-Status: Not implemented
+Status: Partial
 
 Implemented
-- Placeholder booking route and alternatives
+- Real appointment creation and persisted slot reservation flow
 
 Remaining
-- Real slot availability + scheduling + confirmation flow
+- External calendar synchronization and automated downstream confirmation
 
 ### Analytics
-Status: Not implemented to production standard
+Status: Partial
 
 Observed
 - Shared Contracts expects analytics stack integration
 - No complete implementation-level analytics framework confirmed in this audit
 
+Implemented
+- Backend conversion events for contact, booking, checkout, live chat, and concierge
+
 Remaining
-- Event taxonomy, instrumentation, dashboards, and consent policy alignment
+- Dashboards, broader frontend instrumentation, and consent-policy alignment
 
 ## 5) E2E Capability Map
 
@@ -225,10 +231,10 @@ Remaining
 - Trust journey: live Google reviews rendering in shared proof sections
 
 ### Partially working
-- Contact operations journey: submission works, but no persistence/admin tracking
-- Checkout journey: route and summary exist, payment transaction does not
-- Booking journey: route exists but remains placeholder
-- AI concierge operations journey: no persistent conversation history/controls
+- Contact operations journey: persisted and admin-visible, but still lacks CRM sync
+- Checkout journey: persisted order plus Stripe handoff exist, but production payment/fulfillment verification is still pending
+- Booking journey: persisted slot reservation works, but external calendar sync is still pending
+- AI concierge operations journey: session persistence and abuse controls exist, but richer operational analytics are still pending
 
 ### Not working yet (per plan)
 - End-to-end paid checkout with Stripe and order state lifecycle
@@ -239,11 +245,11 @@ Remaining
 ## 6) Risk and Blocker Assessment
 
 Top blockers to full release
-1. Missing transactional backend for booking and payments
-2. Missing auth/RBAC and security middleware
-3. Missing persistent data layer for orders/appointments/inquiries
-4. Missing QA automation and release gates
-5. External integration readiness dependency for final Resend domain verification
+1. Customer/subscriber auth and richer RBAC coverage remain incomplete
+2. Production fulfillment assets and Stripe go-live configuration remain incomplete
+3. External calendar synchronization remains incomplete
+4. QA release gates still lack browser e2e plus accessibility/performance/security automation
+5. External integration readiness still affects Resend and Stripe verification
 
 Operational risk level
 - Customer-facing marketing risk: low
@@ -254,17 +260,16 @@ Operational risk level
 ## 7) Priority Remaining Work (Actionable)
 
 ### Priority P0 (must do before full production release)
-- Implement persistent backend domain and storage layer for key entities
-- Implement booking APIs and real scheduling flow
-- Implement Stripe checkout and webhook-based payment/order flow
-- Implement auth/session/RBAC middleware and protected admin/read APIs
-- Implement endpoint abuse controls for public APIs (contact, concierge)
+- Extend the new persistent backend/domain baseline into production-grade storage, fulfillment, and retention controls
+- Finish external calendar synchronization around the new booking APIs and scheduling flow
+- Finish production Stripe rollout and replace the temporary manual delivery artifact in the order flow
+- Extend auth/session/RBAC beyond the new seeded-admin JWT flow into subscriber/customer ownership and richer protected reads
+- Harden the current abuse controls beyond the in-memory throttling baseline
 
 ### Priority P1 (strongly recommended for MVP stability)
-- Add inquiry persistence and admin visibility for contact submissions
-- Add observability (errors, latency, integration failures)
-- Add analytics instrumentation for conversion paths
-- Add integration and e2e tests for contact, booking, checkout, concierge
+- Expand observability from local audit/analytics persistence into production error, latency, and integration monitoring
+- Expand analytics from backend conversion events into dashboards and broader funnel coverage
+- Add browser e2e coverage on top of the new integration suite for contact, booking, checkout, and concierge
 
 ### Priority P2 (quality and scale)
 - Add full regression test matrix and performance/accessibility gates
@@ -291,23 +296,23 @@ Legend
 - [x] Blog list/detail
 - [x] Portfolio list/detail
 - [x] Shop list/detail
-- [~] Contact conversion flow (email send works, persistence missing)
-- [ ] Booking integrated flow (still placeholder)
+- [x] Contact conversion flow
+- [x] Booking integrated flow
 - [ ] Live chat dedicated route
-- [ ] Admin interface routes
+- [~] Admin interface routes
 
 ### Phase P3 Backend and API
-- [~] Integrations baseline APIs: Resend contact route and AI concierge route exist
+- [~] Integrations baseline APIs: Resend contact route, AI concierge route, and the broader conversion/order/auth/admin API baseline now exist
 - [ ] Public read API contract surface (v1 services/portfolio/shop routes)
-- [ ] Conversion APIs (appointments/chat start/full contract parity)
-- [ ] Commerce APIs (orders, payment webhooks, fulfillment)
-- [ ] Subscriber and admin APIs with auth enforcement
+- [x] Conversion APIs (appointments/chat start/full contract parity)
+- [~] Commerce APIs (orders, payment webhooks, fulfillment)
+- [~] Subscriber and admin APIs with auth enforcement
 
 ### Phase P4 Security
-- [ ] Auth/session/RBAC implementation
-- [ ] Request validation and audit logs framework
-- [ ] Runtime env validation policy
-- [ ] Rate limit and abuse controls
+- [~] Auth/session/RBAC implementation
+- [~] Request validation and audit logs framework
+- [~] Runtime env validation policy
+- [x] Rate limit and abuse controls
 
 ### Phase P5 DevOps and Reliability
 - [x] CI baseline workflow exists
@@ -317,7 +322,7 @@ Legend
 
 ### Phase P6 QA and Release Gates
 - [ ] Unit tests
-- [ ] Integration/API tests
+- [x] Integration/API tests
 - [ ] E2E tests
 - [ ] Accessibility/performance/security automation
 - [ ] Full release gate execution evidence
@@ -325,15 +330,15 @@ Legend
 ### Integration Checklist (explicit)
 - [~] Resend
 - [x] Google Reviews
-- [ ] Stripe
+- [~] Stripe
 - [ ] Sanity
-- [~] AI Growrix OS concierge
+- [x] AI Growrix OS concierge
 - [~] WhatsApp (link escalation only)
-- [ ] Calendar booking integration
-- [ ] Analytics stack implementation
+- [~] Calendar booking integration
+- [~] Analytics stack implementation
 
 ## 9) Audit Conclusion
 
-The site has strong frontend delivery and visible progress in user-facing polish, with meaningful integration movement on contact email, AI concierge baseline, and Google review trust proofs. Full end-to-end operational readiness is still pending backend transactional work, security hardening, and QA automation required by the project plan phases.
+The site still has strong frontend delivery and user-facing polish, but it now also has a meaningful backend/security/testing baseline: persisted inquiries, booking requests, order drafts, Stripe/webhook code, seeded admin auth, protected admin reads, abuse controls, and conversion-route integration tests. Full production readiness is still pending calendar sync, richer fulfillment, broader RBAC, and the remaining release gates.
 
-Recommended immediate execution focus: complete booking and payment transaction backends, then security controls, then tests and release gates.
+Recommended immediate execution focus: finish production auth and fulfillment hardening, then complete browser e2e plus non-functional release gates.

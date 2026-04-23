@@ -30,3 +30,29 @@ Our each site delivery comes with 1 year of free support and maintenance, which 
 
 *** I want you to read necessary existing documentations and also the codebases, locate all the site contents . plan for the content update > update the necessary documentations and after that start implimentations. ###strickt note : We are not changing any logics or codes, we are just updating site's text based contents, Faq etc that are relevant to our plan.
 
+
+
+
+
+
+***strickt rules for AI execution*** 
+Understand the above tasks and the project focus areas clearly before starting any execution. Always refer to the project plan and documentation for guidance on what needs to be done.
+read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , and update the documentations if it doenst match the current codebase implimentations. and then start execution as per planned. make sure to run test and 0 gate pass validations. 
+
+- Do not push or merge any code , only commit. 
+- Never do hardcoding, always use environment variables or configuration files for any values that may change in different environments or over time.
+- Never Hardcode any Frontend development or UI UX building, must use reusable components and follow best practices for maintainability and scalability. 
+- Always run tests and ensure 0 gate pass validations before considering any implementation complete.
+
+
+
+
+
+Project name : Growrix OS
+supabase DB pass : ow0rJSThOZtHVCjZ
+Project URL : https://okzrczymtlkaaxlvjnyh.supabase.co
+Publishable Key : sb_publishable_UXidVgN6ulcKzqgRPS79UQ_UCBf6W4X
+Direct Connection string : postgresql://postgres:[YOUR-PASSWORD]@db.okzrczymtlkaaxlvjnyh.supabase.co:5432/postgres
+CLI setup commands : supabase login
+supabase init
+supabase link --project-ref okzrczymtlkaaxlvjnyh

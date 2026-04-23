@@ -47,24 +47,33 @@ const URGENCY = ["Exploring", "Within 30 days", "Within 90 days", "ASAP"];
 export default function ContactPage() {
   const openConcierge = useConciergeStore((state) => state.open);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again or use WhatsApp.");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
+    setErrorMessage("Something went wrong. Please try again or use WhatsApp.");
 
     const form = e.target as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form).entries());
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    try {
+      const res = await fetch("/api/v1/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, source: "contact_page" }),
+      });
 
-    if (res.ok) {
-      setStatus("success");
-      form.reset();
-    } else {
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+        return;
+      }
+
+      const payload = (await res.json().catch(() => null)) as { error?: { message?: string } } | null;
+      setErrorMessage(payload?.error?.message ?? "Something went wrong. Please try again or use WhatsApp.");
+      setStatus("error");
+    } catch {
       setStatus("error");
     }
   };
@@ -177,6 +186,7 @@ export default function ContactPage() {
                   </motion.div>
                 ) : (
                   <form onSubmit={onSubmit} className="space-y-5" aria-busy={status === "submitting"}>
+                    <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
                     <div className="grid gap-5 sm:grid-cols-2">
                       <Field label="Name" required>
                         <input name="name" required className="signal-input" placeholder="Your name" />
@@ -218,7 +228,7 @@ export default function ContactPage() {
                       </Button>
                     </div>
                     {status === "error" && (
-                      <p className="text-sm text-destructive text-center">Something went wrong. Please try again or use WhatsApp.</p>
+                      <p className="text-sm text-destructive text-center">{errorMessage}</p>
                     )}
                   </form>
                 )}

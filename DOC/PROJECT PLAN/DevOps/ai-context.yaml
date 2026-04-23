@@ -108,7 +108,7 @@ infrastructure_as_code:
 
 database:
   engine: PostgreSQL 14+
-  deployment: AWS RDS Multi-AZ (high availability)
+  deployment: Supabase managed PostgreSQL (primary) or AWS RDS Multi-AZ (fallback enterprise topology)
   backup:
     - automated daily backups (retained 30 days)
     - point-in-time recovery (last 35 days)

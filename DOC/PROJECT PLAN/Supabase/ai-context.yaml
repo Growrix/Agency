@@ -1,0 +1,114 @@
+version: 1
+project:
+  name: Agency SaaS Website — Supabase Integration
+  type: authentication and database provider specification
+  summary: >-
+    Supabase PostgreSQL backend for auth (JWT email/password), user management,
+    and persistent application state. Single source of truth for both local development
+    and production environments.
+  status: bootstrap-complete, end-to-end verification pending
+  canonical_docs_root: DOC/PROJECT PLAN/Supabase/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Supabase/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Supabase/README.md
+  last_updated: 2026-04-23
+
+project_scope:
+  provider: Supabase (managed PostgreSQL + Auth)
+  project_id: okzrczymtlkaaxlvjnyh
+  project_name: Growrix OS
+  endpoint: https://okzrczymtlkaaxlvjnyh.supabase.co
+  region: us-east-1
+  auth_method: email/password with JWT session tokens
+  session_storage: JWT cookies with httpOnly, secure, sameSite flags
+
+integration_points:
+  auth:
+    - Supabase Auth for user registration/login/verification
+    - JWT tokens issued by Supabase
+    - App-owned AUTH_JWT_SECRET for session cookie encryption
+    - Fallback to bcryptjs for local/test environments
+    - Admin bootstrap: admin@growrixos.com + ADMIN_PASSWORD credential
+  
+  persistence:
+    - app_state table (public.app_state) for application state
+    - Row-level security disabled (accessed only via service_role_key)
+    - Conditional: Supabase if env vars present, local file fallback if not
+    - Schema: id (text primary key), payload (jsonb), updated_at (timestamptz)
+  
+  deployment:
+    - Same credentials across local dev and production
+    - NEXT_PUBLIC_SITE_URL environment-specific (localhost:5000 vs growrixos.com)
+    - Supabase project shared across all environments
+
+credentials:
+  supabase_url: https://okzrczymtlkaaxlvjnyh.supabase.co
+  publishable_key: YOUR_SUPABASE_ANON_KEY
+  secret_key: YOUR_SUPABASE_SECRET_KEY
+  admin_email: admin@growrixos.com
+  admin_password_hash: YOUR_ADMIN_PASSWORD
+  app_jwt_secret: YOUR_AUTH_JWT_SECRET
+
+environment_configuration:
+  local_development:
+    file: web/.env.local
+    next_public_site_url: http://localhost:5000
+    supabase_mode: live (against production project)
+    fallback_mode: file-backed persistence if env vars missing
+    
+  production:
+    location: Deployment platform (Vercel, Railway, etc.)
+    next_public_site_url: https://growrixos.com
+    supabase_mode: live (same project as local)
+    credentials_method: Platform secrets/environment variables
+
+bootstrap_status:
+  sql_schema:
+    status: executed
+    timestamp: 2026-04-23T00:00:00Z
+    table_name: public.app_state
+    indexes: app_state_updated_at_idx
+    rls_status: disabled
+  
+  verification_phase: pending
+    - Test user registration against Supabase Auth
+    - Test user login and JWT issuance
+    - Test app_state persistence in Supabase PostgreSQL
+    - Verify local fallback mode (file-backed) when env vars absent
+
+code_integration_points:
+  - web/src/server/supabase/client.ts: Admin and Auth client initialization
+  - web/src/server/config/runtime.ts: Supabase URL and key configuration
+  - web/src/server/auth/users.ts: User registration/login with Supabase Auth + fallback
+  - web/src/server/data/store.ts: Conditional routing to Supabase or file-backed persistence
+  - web/.env.local: Local environment with live credentials
+  - web/.env.production: Production environment template
+  - web/supabase/schema.sql: Bootstrap SQL (app_state table definition)
+
+testing_requirements:
+  unit_tests:
+    - auth flow isolated from live Supabase (env cleanup in beforeEach)
+    - persistence tests use file fallback
+    - pass_rate: 8/8 (current)
+  
+  integration_tests:
+    - User registration via /api/v1/auth/register
+    - User login via /api/v1/auth/login
+    - Session persistence verification
+    - app_state table write/read operations
+    - Expected: 100% pass after verification phase
+
+documentation_artifacts:
+  - README.md: Human-readable overview and quickstart
+  - integration-status.md: Current status and blockers
+  - environment-configuration.md: Environment setup and NEXT_PUBLIC_SITE_URL explanation
+  - verification-procedures.md: Post-bootstrap testing steps and validation checklist
+
+core_invariants:
+  - Supabase is the default managed provider for auth and database (project ai-context.yaml)
+  - Credentials are shared across local and production environments
+  - NEXT_PUBLIC_SITE_URL is environment-specific; Supabase credentials are not
+  - app_state table is server-only; never exposed to client-side queries
+  - RLS is disabled because table is trusted application infrastructure
+  - All Supabase operations use service_role_key (SUPABASE_SECRET_KEY) from backend
+  - Fallback to local bcryptjs + file persistence if Supabase env vars missing
+  - Bootstrap SQL must execute before auth/persistence endpoints are functional

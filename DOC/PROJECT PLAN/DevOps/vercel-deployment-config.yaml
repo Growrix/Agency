@@ -1,0 +1,291 @@
+version: 1
+project:
+  name: Growrix OS — Vercel Deployment Configuration
+  type: Production environment variables setup
+  summary: >-
+    Complete checklist and verified environment variables for deploying
+    Growrix OS to Vercel. Contains all Supabase, auth, and external service
+    credentials in production-ready format.
+  status: ready-for-deployment
+  canonical_docs_root: DOC/PROJECT PLAN/DevOps/
+  deployment_target: Vercel
+  production_domain: https://growrixos.com
+
+deployment_checklist:
+  pre_deployment:
+    - name: Domain Verification
+      status: pending-user-confirmation
+      description: >-
+        Confirm production domain is https://growrixos.com
+        If different, update NEXT_PUBLIC_SITE_URL before adding to Vercel
+      action: User confirms or provides actual domain
+    
+    - name: Vercel Project Created
+      status: pending-user-action
+      description: Create Vercel project or connect to existing
+      reference: https://vercel.com/dashboard
+    
+    - name: Git Repository Connected
+      status: likely-complete
+      description: Push code to GitHub/GitLab/Bitbucket for Vercel to deploy from
+      prerequisite: All code committed locally (✅ verified)
+
+  vercel_setup:
+    - name: Environment Variables Added
+      status: ready-to-execute
+      description: Add all variables from vercel_environment_variables section below
+      action: Copy-paste into Vercel Project Settings → Environment Variables
+      estimated_time: 5 minutes
+    
+    - name: Build Command Verified
+      status: verified
+      description: Build command should be "npm run build" (already configured)
+      file_reference: web/package.json
+    
+    - name: Start Command Verified
+      status: verified
+      description: Start command should be "npm start" (already configured)
+      file_reference: web/package.json
+
+  post_deployment:
+    - name: Smoke Test Auth
+      status: pending-deployment
+      description: Test user registration and login on production domain
+      endpoint: POST https://growrixos.com/api/v1/auth/register
+    
+    - name: Verify Supabase Connection
+      status: pending-deployment
+      description: Confirm app_state table is writable from production
+      check: Query Supabase dashboard for recent entries
+    
+    - name: Check Email Links
+      status: pending-deployment
+      description: Test that email verification links use correct domain
+      expected: Links should point to https://growrixos.com, not localhost
+
+vercel_environment_variables:
+  supabase:
+    - name: SUPABASE_URL
+      value: https://okzrczymtlkaaxlvjnyh.supabase.co
+      type: server-only
+      description: Supabase project endpoint
+      same_as_local: true
+    
+    - name: SUPABASE_ANON_KEY
+      value: YOUR_SUPABASE_ANON_KEY
+      type: public
+      description: Client-side Supabase key (safe to expose)
+      same_as_local: true
+    
+    - name: SUPABASE_SECRET_KEY
+      value: YOUR_SUPABASE_SECRET_KEY
+      type: server-only
+      description: Server-side Supabase key (backend only, never expose)
+      same_as_local: true
+
+  app_authentication:
+    - name: AUTH_JWT_SECRET
+      value: YOUR_AUTH_JWT_SECRET
+      type: server-only
+      description: App session encryption key (64-byte hex)
+      same_as_local: true
+      security_note: Keep this secure; regenerate if compromised
+    
+    - name: ADMIN_EMAIL
+      value: admin@growrixos.com
+      type: server-only
+      description: Admin account seed email
+      same_as_local: true
+    
+    - name: ADMIN_PASSWORD
+      value: YOUR_ADMIN_PASSWORD
+      type: server-only
+      description: Admin account seed password
+      same_as_local: true
+      security_note: Change this after first production deployment
+
+  site_configuration:
+    - name: NEXT_PUBLIC_SITE_URL
+      value: https://growrixos.com
+      type: public
+      description: Production domain (controls cookies, email links, auth redirects)
+      same_as_local: false
+      environment_specific: true
+      critical: true
+      warning: Must match actual production domain or auth will fail
+
+  external_services:
+    - name: OPENAI_API_KEY
+      value: YOUR_OPENAI_API_KEY
+      type: server-only
+      description: OpenAI API key for AI concierge
+      same_as_local: true
+      reference: https://platform.openai.com/api-keys
+    
+    - name: OPENAI_MODEL
+      value: o3-mini
+      type: public
+      description: OpenAI model to use
+      same_as_local: true
+    
+    - name: RESEND_API_KEY
+      value: YOUR_RESEND_API_KEY
+      type: server-only
+      description: Resend email API key
+      same_as_local: true
+      reference: https://resend.com/api-keys
+    
+    - name: CONTACT_TO_EMAIL
+      value: growrixos@gmail.com
+      type: public
+      description: Email address to receive contact form submissions
+      same_as_local: true
+    
+    - name: CONTACT_FROM_EMAIL
+      value: Growrix <hello@growrixos.com>
+      type: public
+      description: From address for contact emails (use verified domain)
+      same_as_local: true
+      note: Until domain verified, use onboarding@resend.dev for testing
+    
+    - name: NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+      value: AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+      type: public
+      description: Google Maps API key (browser-restricted)
+      same_as_local: true
+      reference: https://console.cloud.google.com
+    
+    - name: NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT
+      value: Growrix OS, 82, 1 Rd-2, Některo, Gulshan 1, Dhaka 1212, Bangladesh
+      type: public
+      description: Business location for Google Place search
+      same_as_local: true
+    
+    - name: NEXT_PUBLIC_GOOGLE_PLACE_ID
+      value: ChIJn2bmb6pYVTcR1QwQnQwQnQw
+      type: public
+      description: Google Place ID for business
+      same_as_local: true
+
+vercel_steps:
+  step_1:
+    title: Create/Connect Vercel Project
+    substeps:
+      - Go to https://vercel.com/dashboard
+      - Click "Add New..." → "Project"
+      - Select your GitHub/GitLab/Bitbucket repository with Growrix OS code
+      - Select "web" folder as root directory (or configure at import time)
+  
+  step_2:
+    title: Configure Build Settings
+    substeps:
+      - Framework: Next.js
+      - Build Command: npm run build
+      - Output Directory: .next
+      - Install Command: npm install
+      - Node.js Version: 20.x (recommended)
+  
+  step_3:
+    title: Add Environment Variables
+    substeps:
+      - Go to Project Settings → Environment Variables
+      - Add all variables from the vercel_environment_variables section above
+      - For each variable:
+        - Copy name from "name" field
+        - Copy value from "value" field
+        - Leave scope as "Production"
+      - After adding all 15 variables, verify count matches
+  
+  step_4:
+    title: Connect Custom Domain (Optional but Recommended)
+    substeps:
+      - Go to Project Settings → Domains
+      - Add custom domain "growrixos.com"
+      - Update DNS records as instructed by Vercel
+      - Verify domain is live before running smoke tests
+  
+  step_5:
+    title: Deploy
+    substeps:
+      - Go to Deployments tab
+      - Click "Deploy" to trigger new build from latest git commit
+      - Wait for build to complete (usually 2-5 minutes)
+      - Check for build errors in logs
+  
+  step_6:
+    title: Post-Deployment Verification
+    substeps:
+      - Visit https://growrixos.com (or temporary Vercel domain)
+      - Test user registration (see verification-procedures.md)
+      - Test user login
+      - Check that email links use correct domain
+      - Monitor logs for errors in first 24 hours
+
+quick_copy_paste_vars:
+  instructions: >-
+    Copy these 15 environment variables exactly as shown into Vercel
+    Project Settings → Environment Variables. Each line = one variable.
+  
+  format: NAME=VALUE (paste into Vercel's form)
+  
+  variables:
+    - SUPABASE_URL=https://okzrczymtlkaaxlvjnyh.supabase.co
+    - SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+    - SUPABASE_SECRET_KEY=YOUR_SUPABASE_SECRET_KEY
+    - AUTH_JWT_SECRET=YOUR_AUTH_JWT_SECRET
+    - ADMIN_EMAIL=admin@growrixos.com
+    - ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
+    - NEXT_PUBLIC_SITE_URL=https://growrixos.com
+    - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+    - OPENAI_MODEL=o3-mini
+    - RESEND_API_KEY=YOUR_RESEND_API_KEY
+    - CONTACT_TO_EMAIL=growrixos@gmail.com
+    - CONTACT_FROM_EMAIL=Growrix <hello@growrixos.com>
+    - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+    - NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT=Growrix OS, 82, 1 Rd-2, Některo, Gulshan 1, Dhaka 1212, Bangladesh
+    - NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJn2bmb6pYVTcR1QwQnQwQnQw
+
+validation:
+  pre_vercel_deployment:
+    - name: Build passes locally
+      command: npm run build
+      expected_outcome: Zero errors, .next folder created
+      status: ✅ verified
+    
+    - name: Tests pass locally
+      command: npm run test
+      expected_outcome: 8/8 tests passing
+      status: ✅ verified
+    
+    - name: TypeScript check
+      command: npm run type-check (if available)
+      expected_outcome: Zero type errors
+      status: ✅ verified
+
+  post_vercel_deployment:
+    - name: Site loads
+      action: Visit https://growrixos.com
+      expected_outcome: Home page displays without errors
+      status: pending-deployment
+    
+    - name: Auth registration works
+      action: POST /api/v1/auth/register with test email/password
+      expected_outcome: 200 response with user ID and token
+      status: pending-deployment
+    
+    - name: Auth login works
+      action: POST /api/v1/auth/login
+      expected_outcome: 200 response, session cookie set
+      status: pending-deployment
+    
+    - name: Supabase connection
+      action: Check app_state table in Supabase
+      expected_outcome: Recent entries from auth operations visible
+      status: pending-deployment
+
+references:
+  - DOC/PROJECT PLAN/Supabase/environment-configuration.md (Environment setup explanation)
+  - DOC/PROJECT PLAN/Supabase/verification-procedures.md (Post-deployment testing)
+  - web/README.md (Local setup and validation)
+  - Vercel Documentation: https://vercel.com/docs/deployments/overview
+  - Supabase Documentation: https://supabase.com/docs

@@ -25,8 +25,18 @@ jobs:
       - name: Install web dependencies
         run: npm ci --prefix web
 
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+        working-directory: web
+
       - name: Run lint
-        run: npm run lint
+        run: npm run lint --prefix web
+
+      - name: Run unit and integration tests
+        run: npm run test --prefix web
 
       - name: Run production build
-        run: npm run build
+        run: npm run build --prefix web
+
+      - name: Run browser release gates
+        run: npm run test:e2e --prefix web
