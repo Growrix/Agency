@@ -43,3 +43,10 @@ read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , a
 - Never do hardcoding, always use environment variables or configuration files for any values that may change in different environments or over time.
 - Never Hardcode any Frontend development or UI UX building, must use reusable components and follow best practices for maintainability and scalability. 
 - Always run tests and ensure 0 gate pass validations before considering any implementation complete.
+
+
+
+
+
+Project name : Growrix OS
+supabase DB pass : ow0rJSThOZtHVCjZ
