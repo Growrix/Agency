@@ -36,6 +36,7 @@ api_base_url: https://api.agency.com/api/v1
 platform_providers:
   auth_provider: Supabase Auth (email/password, JWT sessions)
   database_provider: Supabase Postgres (managed PostgreSQL)
+  cms_provider: Sanity CMS (blog content, optional with static fallback)
   compatibility_mode: local file-backed store allowed for offline development only
 
 response_envelope:

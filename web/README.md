@@ -27,6 +27,13 @@ cp .env.example .env.local
 
 If Supabase variables are not set, the server falls back to local file persistence under `.data/agency-db.json`.
 
+4. Configure Sanity CMS (optional, for blog content management):
+	- Set `SANITY_PROJECT_ID` and `SANITY_DATASET`
+	- Optionally set `SANITY_API_TOKEN` for private datasets
+	- Keep `SANITY_API_VERSION` pinned (default: `2025-01-01`)
+
+If Sanity variables are not set or Sanity is unavailable, the blog automatically falls back to static content in `src/lib/content.ts`.
+
 ## Run
 
 ```bash
@@ -49,3 +56,4 @@ npm run test:e2e
 - Auth API uses Supabase Auth when configured and keeps existing API contracts.
 - Data persistence uses Supabase Postgres table `public.app_state` when configured.
 - Existing routes remain unchanged: integration is adapter-based behind server domain/store layers.
+- Blog content uses Sanity CMS when configured, with automatic static fallback.
