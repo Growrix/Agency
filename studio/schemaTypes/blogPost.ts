@@ -19,6 +19,21 @@ export const blogPostType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "mainImage",
+      title: "Cover Image",
+      type: "image",
+      options: { hotspot: true },
+      validation: (rule) => rule.required(),
+      description: "Primary blog image shown in list cards, featured section, and article hero.",
+    }),
+    defineField({
+      name: "mainImageAlt",
+      title: "Cover Image Alt Text",
+      type: "string",
+      validation: (rule) => rule.required().min(8).max(160),
+      description: "Accessible alt text for the cover image.",
+    }),
+    defineField({
       name: "excerpt",
       title: "Excerpt",
       type: "text",
@@ -130,6 +145,7 @@ export const blogPostType = defineType({
     select: {
       title: "title",
       subtitle: "category",
+      media: "mainImage",
     },
   },
 });

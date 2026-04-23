@@ -20,6 +20,10 @@ type SanityBlogPost = {
   excerpt: string;
   category: string;
   tags: string[];
+  coverImage?: {
+    url?: string;
+    alt?: string;
+  };
   author: {
     name: string;
     role: string;
@@ -45,6 +49,10 @@ const SANITY_BLOG_POSTS_QUERY = `*[_type == "blogPost" && defined(slug.current)]
   excerpt,
   "category": coalesce(category->title, category, "Field Notes"),
   "tags": coalesce(tags, []),
+  "coverImage": {
+    "url": mainImage.asset->url,
+    "alt": coalesce(mainImageAlt, title)
+  },
   "author": {
     "name": coalesce(author->name, author.name, "Growrix OS"),
     "role": coalesce(author->role, author.role, "Editorial Team"),
@@ -155,6 +163,13 @@ function normalizePost(post: SanityBlogPost): BlogPost {
     excerpt: post.excerpt,
     category: post.category,
     tags: post.tags,
+    coverImage:
+      post.coverImage?.url
+        ? {
+            url: post.coverImage.url,
+            alt: post.coverImage.alt ?? post.title,
+          }
+        : undefined,
     author: {
       name: post.author.name,
       role: post.author.role,

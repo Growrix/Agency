@@ -6,7 +6,9 @@ import { formatBlogDate } from "@/lib/content";
 import { getBlogImage } from "@/lib/site-images";
 
 export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: boolean }) {
-  const image = getBlogImage(post.slug);
+  const image = post.coverImage
+    ? { src: post.coverImage.url, alt: post.coverImage.alt }
+    : getBlogImage(post.slug);
 
   return (
     <Link

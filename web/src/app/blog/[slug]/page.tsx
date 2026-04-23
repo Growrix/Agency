@@ -45,7 +45,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   if (!post) notFound();
 
   const related = await getRelatedPosts(slug, 2);
-  const heroImage = getBlogImage(post.slug);
+  const heroImage = post.coverImage
+    ? { src: post.coverImage.url, alt: post.coverImage.alt }
+    : getBlogImage(post.slug);
   const url = `https://growrixos.com/blog/${post.slug}`;
   const articleSections = post.body.flatMap((block, index) => {
     if (block.type !== "h2" && block.type !== "h3") {

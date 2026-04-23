@@ -50,7 +50,11 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
   const params = await searchParams;
   const sorted = await listBlogPosts();
   const featured = sorted[0];
-  const featuredImage = featured ? getBlogImage(featured.slug) : undefined;
+  const featuredImage = featured
+    ? featured.coverImage
+      ? { src: featured.coverImage.url, alt: featured.coverImage.alt }
+      : getBlogImage(featured.slug)
+    : undefined;
   const rest = sorted.slice(1);
 
   const filtered = filterPosts(sorted, params);

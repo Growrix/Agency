@@ -236,12 +236,18 @@ export type BlogComment = {
   replies?: { id: string; author: string; initials: string; postedAt: string; body: string }[];
 };
 
+export type BlogCoverImage = {
+  url: string;
+  alt: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
   category: string;
   tags: string[];
+  coverImage?: BlogCoverImage;
   author: BlogAuthor;
   publishedAt: string;
   readMinutes: number;
