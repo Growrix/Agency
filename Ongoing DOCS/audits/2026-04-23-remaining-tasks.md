@@ -17,7 +17,6 @@ This list is extracted from the audit report and includes only the remaining (no
 ## Priority P2 (Quality and Scale)
 - Add full regression test matrix and performance/accessibility gates
 - Add production runbooks with rollback criteria and on-call playbook
-- Add CMS integration only if editorial workflow requires it now
 
 ## Sequential Phase Checklist (Remaining Only)
 
@@ -51,7 +50,7 @@ This list is extracted from the audit report and includes only the remaining (no
 
 ### Integration Checklist (Explicit)
 - [~] Stripe
-- [ ] Sanity
+- [x] Sanity (blog CMS adapter integration with static fallback)
 - [x] Supabase (auth + database adapter integration)
 - [x] AI Growrix OS concierge (session persistence, rate limiting, analytics)
 - [~] WhatsApp (full API integration if required)

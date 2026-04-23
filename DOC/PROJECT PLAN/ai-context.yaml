@@ -46,6 +46,7 @@ core_invariants:
   - AI must use this file as the primary routing file once documentation generation is complete.
   - Execution status must be tracked in DOC/PROJECT PLAN/Tasks/tasks.md before and after each implementation phase.
   - Supabase is the default managed provider for auth and database persistence unless explicitly overridden.
+  - Sanity CMS may be used as the optional blog content provider with local static fallback when CMS is unavailable.
 
 project_layers:
   universal_layer:

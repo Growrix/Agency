@@ -13,22 +13,25 @@ import { Comments } from "@/components/sections/Comments";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { CTABand } from "@/components/sections/CTABand";
 import {
-  BLOG_POSTS,
   formatBlogDate,
-  getBlogPost,
-  getRelatedPosts,
 } from "@/lib/content";
 import { getBlogImage } from "@/lib/site-images";
+import {
+  getBlogPostBySlug,
+  getRelatedPosts,
+  listBlogSlugs,
+} from "@/server/blog/content";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
+  const slugs = await listBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Article not found" };
   return {
     title: post.title,
@@ -38,11 +41,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function BlogPostPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getRelatedPosts(slug, 2);
-  const heroImage = getBlogImage(post.slug);
+  const related = await getRelatedPosts(slug, 2);
+  const heroImage = post.coverImage
+    ? { src: post.coverImage.url, alt: post.coverImage.alt }
+    : getBlogImage(post.slug);
   const url = `https://growrixos.com/blog/${post.slug}`;
   const articleSections = post.body.flatMap((block, index) => {
     if (block.type !== "h2" && block.type !== "h3") {

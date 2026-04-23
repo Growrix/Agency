@@ -8,13 +8,15 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { BlogGrid } from "@/components/sections/BlogGrid";
 import { BlogSidebar } from "@/components/sections/BlogSidebar";
 import {
-  BLOG_POSTS,
   formatBlogDate,
-  getBlogCategoryCounts,
-  getBlogTagCounts,
   type BlogPost,
 } from "@/lib/content";
 import { getBlogImage } from "@/lib/site-images";
+import {
+  getBlogCategoryCounts,
+  getBlogTagCounts,
+  listBlogPosts,
+} from "@/server/blog/content";
 
 export const metadata: Metadata = {
   title: "Blog — Field notes from Growrix OS",
@@ -46,19 +48,21 @@ function filterPosts(posts: BlogPost[], { category, tag, q }: { category?: strin
 
 export default async function BlogIndexPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
-  const sorted = [...BLOG_POSTS].sort(
-    (a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)
-  );
+  const sorted = await listBlogPosts();
   const featured = sorted[0];
-  const featuredImage = featured ? getBlogImage(featured.slug) : undefined;
+  const featuredImage = featured
+    ? featured.coverImage
+      ? { src: featured.coverImage.url, alt: featured.coverImage.alt }
+      : getBlogImage(featured.slug)
+    : undefined;
   const rest = sorted.slice(1);
 
   const filtered = filterPosts(sorted, params);
   const isFiltering = !!(params.category || params.tag || params.q);
   const grid = isFiltering ? filtered : rest;
 
-  const categories = getBlogCategoryCounts();
-  const tags = getBlogTagCounts();
+  const categories = getBlogCategoryCounts(sorted);
+  const tags = getBlogTagCounts(sorted);
 
   const activeChips: { label: string; key: "category" | "tag" | "q"; value: string }[] = [];
   if (params.category) activeChips.push({ label: `Category: ${params.category}`, key: "category", value: params.category });
@@ -101,7 +105,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
           {!isFiltering && featured && (
             <Link
               href={`/blog/${featured.slug}`}
-              className="group mt-12 grid overflow-hidden rounded-[24px] border border-border bg-surface hover:shadow-[var(--shadow-3)] transition-all lg:grid-cols-12"
+              className="group mt-12 grid overflow-hidden rounded-[24px] border border-border bg-surface hover:shadow-(--shadow-3) transition-all lg:grid-cols-12"
             >
               <div className={`relative aspect-16/10 lg:aspect-auto lg:col-span-7 overflow-hidden bg-linear-to-br ${featured.accent}`}>
                 {featuredImage ? (

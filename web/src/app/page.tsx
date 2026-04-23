@@ -28,7 +28,6 @@ import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
-  BLOG_POSTS,
   CLIENT_LOGOS,
   FEATURED_PRODUCTS,
   HOME_STATS,
@@ -37,6 +36,7 @@ import {
   SERVICES,
 } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { listBlogPosts } from "@/server/blog/content";
 
 const SERVICE_ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -74,7 +74,9 @@ const HOME_TIERS: Tier[] = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const latestBlogPosts = (await listBlogPosts()).slice(0, 3);
+
   return (
     <>
       {/* Hero */}
@@ -447,15 +449,20 @@ export default function Home() {
             </LinkButton>
           </div>
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
-            {[...BLOG_POSTS]
-              .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt))
-              .slice(0, 3)
-              .map((p) => (
+            {latestBlogPosts.map((p) => (
                 <RevealItem key={p.slug}>
                   <BlogCard post={p} />
                 </RevealItem>
               ))}
           </RevealGroup>
+          {latestBlogPosts.length === 0 && (
+            <Card className="mt-8 text-center">
+              <p className="font-display text-2xl tracking-tight">No published blog posts yet.</p>
+              <p className="mt-2 text-text-muted">
+                Publish your first post in Sanity to show it here.
+              </p>
+            </Card>
+          )}
         </Container>
       </Section>
 
