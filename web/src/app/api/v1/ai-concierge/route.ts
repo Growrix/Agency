@@ -1,68 +1,58 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { ApiError, createRequestContext, errorResponse, successResponse } from "@/server/core/api";
+import { getRuntimeConfig } from "@/server/config/runtime";
 import { generateConciergeReply } from "@/server/ai/concierge";
+import { appendConciergeExchange } from "@/server/domain/conversations";
+import { assertNoBotTrap, assertRateLimit } from "@/server/security/rate-limit";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  const context = createRequestContext(request);
+
   try {
     const body = (await request.json()) as {
       message?: unknown;
       pagePath?: unknown;
       sessionId?: unknown;
+      website?: unknown;
     };
+
+    assertNoBotTrap(body.website);
+    assertRateLimit({
+      scope: "ai-concierge",
+      identifier: context.ip,
+      limit: getRuntimeConfig().abuseProtection.conciergeLimitPerMinute,
+    });
 
     const message = typeof body.message === "string" ? body.message.trim() : "";
     const pagePath = typeof body.pagePath === "string" ? body.pagePath : "/ai-concierge";
     const sessionId = typeof body.sessionId === "string" ? body.sessionId : undefined;
 
     if (message.length < 2) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: {
-            code: "INVALID_REQUEST",
-            message: "Message must be at least 2 characters long.",
-          },
-        },
-        { status: 400 }
-      );
+      throw new ApiError("INVALID_REQUEST", 400, "Message must be at least 2 characters long.");
     }
 
     if (message.length > 600) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: {
-            code: "INVALID_REQUEST",
-            message: "Message is too long. Keep it under 600 characters.",
-          },
-        },
-        { status: 400 }
-      );
+      throw new ApiError("INVALID_REQUEST", 400, "Message is too long. Keep it under 600 characters.");
     }
 
     const reply = await generateConciergeReply({ message, pagePath, sessionId });
+    const session = await appendConciergeExchange({
+      sessionId: reply.sessionId,
+      pagePath,
+      userMessage: message,
+      assistantMessage: reply.answer,
+      responseState: reply.responseState,
+      requestId: context.requestId,
+      ip: context.ip,
+    });
 
-    return NextResponse.json({
-      success: true,
-      data: reply,
-      timestamp: new Date().toISOString(),
-      request_id: crypto.randomUUID(),
+    return successResponse({
+      ...reply,
+      sessionId: session.id,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "The concierge could not answer right now.";
-
-    return NextResponse.json(
-      {
-        success: false,
-        error: {
-          code: "INTERNAL_ERROR",
-          message,
-        },
-        timestamp: new Date().toISOString(),
-        request_id: crypto.randomUUID(),
-      },
-      { status: 500 }
-    );
+    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "The concierge could not answer right now."));
   }
 }

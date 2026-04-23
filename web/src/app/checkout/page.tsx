@@ -6,6 +6,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { getCheckoutHref, getShopProduct } from "@/lib/shop";
+import { CheckoutExperience } from "./CheckoutExperience";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -13,13 +14,15 @@ export const metadata: Metadata = {
 };
 
 type CheckoutPageProps = {
-  searchParams?: Promise<{ product?: string | string[] }>;
+  searchParams?: Promise<{ product?: string | string[]; status?: string | string[]; order?: string | string[] }>;
 };
 
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
   const resolved = searchParams ? await searchParams : undefined;
   const productSlug = Array.isArray(resolved?.product) ? resolved?.product[0] : resolved?.product;
   const product = productSlug ? getShopProduct(productSlug) : undefined;
+  const status = Array.isArray(resolved?.status) ? resolved?.status[0] : resolved?.status;
+  const orderId = Array.isArray(resolved?.order) ? resolved?.order[0] : resolved?.order;
 
   return (
     <Section className="pb-12 pt-12 sm:pb-16 sm:pt-16">
@@ -32,21 +35,16 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           <Card>
             <Badge tone="primary">Checkout preview</Badge>
             <h1 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl">
-              {product ? `Checkout for ${product.name}` : "Secure checkout opens with the storefront rollout."}
+              {product ? `Checkout for ${product.name}` : "Secure checkout requires a selected product."}
             </h1>
             <p className="mt-4 text-base leading-7 text-text-muted">
               {product
-                ? "This checkout route is wired to the selected product so buyers can move directly from the catalog into purchase. The live Stripe handoff is still the remaining integration step."
-                : "Once the live payment handoff is connected, this route will finalize website purchases directly from the shop."}
+                ? "This checkout now creates a persisted order and hands off to Stripe when the payment environment is configured. If Stripe is not configured yet, the order is still captured for manual follow-up."
+                : "Choose a product from the shop to create an order and continue into checkout."}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/contact" size="lg">
-                Request invoice
-              </LinkButton>
-              <LinkButton href="/book-appointment" variant="outline" size="lg">
-                Ask before buying
-              </LinkButton>
+            <div className="mt-8">
+              <CheckoutExperience product={product} status={status} orderId={orderId} />
             </div>
           </Card>
 
@@ -78,7 +76,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                     Review product details
                   </LinkButton>
                   <LinkButton href={getCheckoutHref(product)} fullWidth>
-                    Stay on this checkout <ArrowUpRightIcon className="size-4" />
+                    Refresh this checkout <ArrowUpRightIcon className="size-4" />
                   </LinkButton>
                 </div>
               </>
