@@ -1,2 +1,8 @@
+# Development phase — indexing is disabled.
+# Do NOT index or crawl any part of this site.
+
+User-agent: Googlebot
+Disallow: /
+
 User-agent: *
 Disallow: /
