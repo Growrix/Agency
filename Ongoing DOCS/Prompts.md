@@ -56,3 +56,28 @@ Direct Connection string : postgresql://postgres:[YOUR-PASSWORD]@db.okzrczymtlka
 CLI setup commands : supabase login
 supabase init
 supabase link --project-ref okzrczymtlkaaxlvjnyh
+
+
+
+
+***few issues to fix sequentially one by one. just unedrstand the contexts and the screenshort shared.***
+
+1. In the phone the bottom bar cant see, needs alignment. Check and make it visible as well.
+
+2. The responder ai aslo menting the legacy name concrige, it should be Ai growrix os .
+
+3. Do all the necessary settings and configuration for the newsletter subscription.
+
+
+
+
+***Tasks to do :***
+
+1. update the hero section from 2 columns to 1 comun layout , move the titles and texts to the center and make it more attractive. remove the second column and the image from the hero section. ALso make sure the hero section new alignment match with the header and the topbar content alignment. Adjust as per needed.
+
+
+
+
+###strickt rues for AI execution :
+- Understand the above tasks and the project focus areas clearly before starting any execution. Always refer to the project plan and documentation for guidance on what needs to be done.
+- read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , and update the documentations if it doenst match the current codebase implimentations. and then start execution as per planned. make sure to run test and 0 gate pass validations before considering any implementation complete. Finally commit the changes but do not push or merge any code, only commit. 

@@ -27,6 +27,7 @@ function cloneDefaultDatabase(): DatabaseSchema {
     products: [...DEFAULT_DATABASE.products],
     analytics_events: [...DEFAULT_DATABASE.analytics_events],
     audit_logs: [...DEFAULT_DATABASE.audit_logs],
+    newsletter_subscribers: [...DEFAULT_DATABASE.newsletter_subscribers],
   };
 }
 

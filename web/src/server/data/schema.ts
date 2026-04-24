@@ -175,6 +175,13 @@ export type AuditLogRecord = {
   created_at: string;
 };
 
+export type NewsletterSubscriberRecord = {
+  id: string;
+  email: string;
+  subscribed_at: string;
+  source: string;
+};
+
 export type DatabaseSchema = {
   inquiries: ContactInquiryRecord[];
   appointments: AppointmentRecord[];
@@ -186,6 +193,7 @@ export type DatabaseSchema = {
   products: ManagedProductRecord[];
   analytics_events: AnalyticsEventRecord[];
   audit_logs: AuditLogRecord[];
+  newsletter_subscribers: NewsletterSubscriberRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -199,4 +207,5 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   products: [],
   analytics_events: [],
   audit_logs: [],
+  newsletter_subscribers: [],
 };

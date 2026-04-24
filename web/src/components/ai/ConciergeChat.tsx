@@ -126,7 +126,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         | { success: false; error?: { message?: string } };
 
       if (!response.ok || !payload.success) {
-        throw new Error(payload.success ? "The concierge could not answer right now." : payload.error?.message || "The concierge could not answer right now.");
+        throw new Error(payload.success ? "AI Growrix OS could not answer right now." : payload.error?.message || "AI Growrix OS could not answer right now.");
       }
 
       setSessionId(payload.data.sessionId);
@@ -142,7 +142,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         },
       ]);
     } catch (error) {
-      const messageText = error instanceof Error ? error.message : "The concierge could not answer right now.";
+      const messageText = error instanceof Error ? error.message : "AI Growrix OS could not answer right now.";
       setMessages((current) => [
         ...current,
         {
@@ -194,7 +194,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
     >
       {!isModal && (
         <div className="border-b border-border bg-inset/60 px-5 py-4">
-          <p className="font-display text-xl tracking-tight">Concierge chat</p>
+          <p className="font-display text-xl tracking-tight">AI Growrix OS</p>
           <p className="mt-1 text-sm text-text-muted">
             Ask a question in plain English. If the answer is not supported by the approved knowledge set, the assistant will say so and escalate.
           </p>
@@ -270,7 +270,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         {pending && (
           <div className="flex justify-start">
             <div className="rounded-[18px] rounded-bl-xs bg-inset px-4 py-3 text-sm text-text-muted shadow-(--shadow-1)">
-              The concierge is reviewing the approved Growrix knowledge...
+              AI Growrix OS is reviewing the approved knowledge...
             </div>
           </div>
         )}

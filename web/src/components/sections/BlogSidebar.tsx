@@ -20,6 +20,8 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
   const [search, setSearch] = useState(initialSearch);
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
+  const [subscribeError, setSubscribeError] = useState("");
 
   const activeCategory = searchParams.get("category");
   const activeTag = searchParams.get("tag");
@@ -51,11 +53,29 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
     applyFilter(next);
   }
 
-  function onSubscribe(e: FormEvent) {
+  async function onSubscribe(e: FormEvent) {
     e.preventDefault();
-    if (!email.trim()) return;
-    setSubscribed(true);
-    setEmail("");
+    if (!email.trim() || subscribing) return;
+    setSubscribeError("");
+    setSubscribing(true);
+    try {
+      const res = await fetch("/api/v1/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const payload = (await res.json()) as { success?: boolean; error?: { message?: string } };
+      if (!res.ok || !payload.success) {
+        setSubscribeError(payload.error?.message ?? "Something went wrong. Please try again.");
+        return;
+      }
+      setSubscribed(true);
+      setEmail("");
+    } catch {
+      setSubscribeError("Network error. Please try again.");
+    } finally {
+      setSubscribing(false);
+    }
   }
 
   return (
@@ -176,8 +196,11 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
               aria-label="Email address for newsletter"
               className="w-full rounded-[10px] border border-white/15 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-secondary"
             />
-            <Button type="submit" variant="secondary" fullWidth size="sm">
-              Subscribe
+            {subscribeError && (
+              <p className="text-xs text-red-400">{subscribeError}</p>
+            )}
+            <Button type="submit" variant="secondary" fullWidth size="sm" disabled={subscribing}>
+              {subscribing ? "Subscribing…" : "Subscribe"}
             </Button>
           </form>
         )}
