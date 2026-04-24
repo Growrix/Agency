@@ -57,6 +57,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - refined sticky sidebar behavior by aligning admin section top spacing with a shared sidebar offset setting so sticky engages immediately and no initial sidebar/page co-scroll phase is visible
   - identified a sticky gating bug where sidebar stickiness was restricted to `lg:` breakpoints, causing non-sticky behavior on smaller effective viewport widths (including zoomed desktop); fixed by applying sticky classes without breakpoint gating
   - identified the sticky-sidebar root cause as sticky classes attached to the transform-enabled Card primitive (`will-change-transform`), and corrected by moving sticky positioning back to a plain aside wrapper
   - corrected the admin sticky-sidebar implementation by applying sticky positioning to the sidebar card itself (not just the wrapper) to avoid grid-flow release behavior during deep catalog scrolling
@@ -246,6 +247,7 @@ phases:
 - Sticky behavior is now attached to the actual sidebar panel element, preventing wrapper-level layout interactions from causing the sidebar to drift during long-page scroll.
 - Sticky behavior is now anchored to a non-transform aside wrapper so Card animation/transform styles do not interfere with sticky positioning.
 - Sticky behavior now applies at all viewport sizes for admin pages (`sticky top-4 self-start h-fit`), removing breakpoint-gated failures.
+- Admin sticky offset is now controlled via a shared CSS variable and used consistently for both section top spacing and sticky top positioning, preventing apparent co-scrolling before sticky lock engages.
 - Supabase-backed auth and persistence adapters now exist and can be enabled by environment configuration without changing route contracts.
 - Local API integration tests now cover contact, booking, checkout, and concierge persistence flows.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.

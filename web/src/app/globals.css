@@ -45,6 +45,7 @@
 
   --container-content: 1200px;
   --container-shell: 1440px;
+  --admin-sidebar-top: 1rem;
 }
 
 /* ---------- Light theme (default) ---------- */
