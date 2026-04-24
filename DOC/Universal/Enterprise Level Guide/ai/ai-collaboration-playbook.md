@@ -20,6 +20,27 @@ This document defines how AI coding agents should contribute to Growrix OS. The 
 3. Read workspace instructions in `.github/`.
 4. Inspect existing code for current implementation patterns before editing.
 
+## Strict Execution Workflow (Step-by-Step)
+
+When executing any implementation task, follow this sequence in order:
+
+1. Read `DOC/PROJECT PLAN/ai-context.yaml` (or the equivalent project entrypoint) before making any change.
+2. Read task-relevant documentation and nearby implementation files.
+3. Form a falsifiable hypothesis about the change or defect before touching code.
+4. Make the smallest grounded edit that addresses the task.
+5. Immediately run the narrowest useful validation (lint, type check, unit test, or targeted build).
+6. If docs are out of sync with the implementation, update them before finishing.
+7. Run final release-gate checks relevant to the task.
+8. Commit locally with a clear, descriptive message.
+
+## Tool Discipline
+
+- Use read and search first to gather the minimum required context.
+- Use edit for the smallest practical change set — avoid touching unrelated code.
+- Use execute only for focused validation commands, build/test runs, and local git commit operations.
+- Use task tracking when a task has multiple concrete steps that need sequencing.
+- Do not use broader exploration than needed once the controlling file or abstraction is identified.
+
 ## AI Rules for Domain Safety
 
 - Never weaken role boundaries for convenience.
@@ -38,6 +59,16 @@ For meaningful feature work, AI agents should produce or update:
 - migration or policy changes where needed
 - concise rationale in the final summary
 
+## Output Format
+
+Every completed task must return:
+
+1. What was changed
+2. What documentation was updated, if any
+3. What validations were run and whether they passed
+4. The local commit hash, if a commit was created
+5. Any remaining risk or follow-up only if one truly exists
+
 ## Preferred Working Pattern
 
 - Start by identifying the owning module.
@@ -54,6 +85,24 @@ For meaningful feature work, AI agents should produce or update:
 - Are side effects explicit and observable?
 - Does the change preserve module boundaries?
 - Do docs need updating?
+
+## Zero-Gate Pass Rule
+
+A task is not complete until all of the following are confirmed as passing for the scope of the change:
+
+- no unresolved build failures
+- no unresolved TypeScript or lint errors
+- no test failures related to changed code
+- relevant documentation is in sync with implemented behavior
+
+If any gate fails, stop, fix, and re-run before declaring done.
+
+## Local Commit Discipline
+
+- ALWAYS commit completed work locally when changes were made.
+- NEVER push code without explicit user instruction.
+- NEVER merge code without explicit user instruction.
+- NEVER skip validation just because the change looks small.
 
 ## Prompting Guidance for Future AI Work
 

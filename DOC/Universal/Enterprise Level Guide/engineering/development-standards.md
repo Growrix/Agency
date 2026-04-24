@@ -19,6 +19,9 @@ This document defines the engineering standards that should govern implementatio
 - Use shared UI primitives for consistency, but keep business logic inside feature modules.
 - Handle loading, empty, error, and reconnect states explicitly.
 - Treat queue status, ETA, and payment state as server-owned truth.
+- Follow the design system first: reuse existing primitives, shared shells, tokens, spacing, and interaction patterns before introducing new UI patterns.
+- Do not hardcode design values, layout exceptions, or one-off styling when the design system or shared components should own them.
+- For mobile work, build with app-like behavior in mind: strong bottom-safe spacing, clear tap targets, sheet-like interactions where appropriate, stable fixed controls, and layouts that feel intentional on phones rather than compressed desktop views.
 
 ## Backend Standards
 
@@ -76,6 +79,7 @@ A change is not done until:
 - authorization has been validated
 - docs are updated if the behavior changed
 - monitoring or logs exist for critical production-impacting flows
+- zero-gate pass confirmed: no unresolved build, type, lint, or test failures relevant to the change
 
 ## Recommended Initial Repo Conventions
 

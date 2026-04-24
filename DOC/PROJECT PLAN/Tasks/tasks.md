@@ -57,6 +57,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - merged Growrix Strict Executor rules into universal docs: strict 8-step execution workflow, tool discipline, zero-gate pass rule, local commit discipline, design-system-first and mobile-first frontend constraints, and standardised output format are now reflected in ai-collaboration-playbook.md, development-standards.md, and contribution-guide.md with machine-readable routing updated in ai-context.yaml
   - added a universal Enterprise Testing and Quality Enforcement (v2) protocol document and wired it into universal handbook indexes plus machine-readable ai-context routing for release and QA work
   - fixed admin login 500 failures caused by Supabase `app_state` read/write errors by adding graceful fallback to local file-backed persistence in the shared data store
   - replaced the booking page's fixed slot dropdown with native date and time controls so appointment requests are chosen from calendar-style inputs instead of a prebuilt list
@@ -236,6 +237,7 @@ phases:
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
 - Universal handbook quality guidance now includes a dedicated Enterprise Testing and Quality Enforcement (v2) protocol, referenced by both human indexes and machine-readable ai-context files.
+- The universal AI collaboration playbook, development standards, and contribution guide now reflect the strict execution workflow (doc-first, zero-gate pass, local commit discipline, design-system-first mobile frontend rules, and standardised output format).
 
 ## What Is Next To Build
 1. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.

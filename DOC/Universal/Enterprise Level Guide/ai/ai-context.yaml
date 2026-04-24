@@ -390,6 +390,12 @@ ai_output_expectations:
     - update tests for critical logic
     - preserve module boundaries
     - state assumptions explicitly when requirements are incomplete
+  completion_discipline:
+    - confirm zero-gate pass before declaring done
+    - commit locally with a clear message
+    - never push or merge without explicit instruction
+    - output must include what changed, docs updated, validations run, commit hash, and remaining risks
+  reference_doc: DOC/Universal/Enterprise Level Guide/ai/ai-collaboration-playbook.md
 
 index:
   docs_index: DOC/Universal/Enterprise Level Guide/README.md
