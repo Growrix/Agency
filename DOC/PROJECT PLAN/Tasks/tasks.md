@@ -57,6 +57,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - converted the homepage hero from a two-column composition to a centered single-column layout and removed the legacy mockup/image column so the hero aligns with topbar/header rhythm
+  - redesigned the admin workspace into a sidebar-driven dashboard layout and removed public-site chrome from `/admin` routes so operators get a dedicated back-to-site control inside the dashboard
   - improved the popup-first AI concierge mobile experience so the modal now behaves like a phone-first single-column chat sheet with no desktop escalation rail, a stacked composer, and a consistently visible send action on small screens
   - fixed concierge suggested-action navigation so WhatsApp, booking, contact, and other routed suggestions now close the popup immediately and reveal the destination without requiring manual chat close
   - improved the blog detail route so the slug page now collapses share and navigation utilities cleanly, adds generated on-page navigation, and keeps long-form reading and comments readable across mobile breakpoints

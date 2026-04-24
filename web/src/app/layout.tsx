@@ -2,13 +2,8 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/shell/Header";
-import { Footer } from "@/components/shell/Footer";
-import { MobileBottomNav } from "@/components/shell/MobileBottomNav";
-import { UtilityRibbon } from "@/components/shell/UtilityRibbon";
-import { ChatLauncher } from "@/components/shell/ChatLauncher";
-import { ConciergeModal } from "@/components/ai/ConciergeModal";
-import { MotionRoot, RouteTransition } from "@/components/motion/Motion";
+import { MotionRoot } from "@/components/motion/Motion";
+import { AppChrome } from "@/components/shell/AppChrome";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -76,15 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <MotionRoot>
-          <UtilityRibbon />
-          <Header />
-          <main id="main" className="flex-1 pb-24 lg:pb-0">
-            <RouteTransition>{children}</RouteTransition>
-          </main>
-          <Footer />
-          <MobileBottomNav />
-          <ChatLauncher />
-          <ConciergeModal />
+          <AppChrome>{children}</AppChrome>
         </MotionRoot>
       </body>
     </html>

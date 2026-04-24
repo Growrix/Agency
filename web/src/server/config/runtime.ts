@@ -110,3 +110,9 @@ export function requireRuntimeValue(value: string | undefined, key: string) {
 
   return value;
 }
+
+export function resetRuntimeConfigForTests() {
+  if (process.env.NODE_ENV === "test") {
+    cachedRuntimeConfig = null;
+  }
+}

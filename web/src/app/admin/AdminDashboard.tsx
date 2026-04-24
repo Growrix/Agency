@@ -251,181 +251,198 @@ export function AdminDashboard() {
   };
 
   return (
-    <Section className="py-12 sm:py-16">
-      <Container>
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <Badge tone="secondary" dot>Admin</Badge>
-            <h1 className="mt-4 font-display text-4xl tracking-tight">Operational dashboard</h1>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-text-muted">
-              Protected summary of the persisted backend flows added in this release: inquiries, appointments, concierge sessions, and orders.
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <LinkButton href="/contact" variant="outline">Public contact page</LinkButton>
-            <Button type="button" onClick={onLogout}>Log out</Button>
-          </div>
-        </div>
+    <Section className="py-8 sm:py-10">
+      <Container width="shell">
+        <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <aside className="lg:sticky lg:top-6 lg:self-start">
+            <Card className="space-y-5">
+              <div>
+                <Badge tone="secondary" dot>Admin workspace</Badge>
+                <h1 className="mt-3 font-display text-3xl tracking-tight">Operational dashboard</h1>
+                <p className="mt-3 text-sm leading-6 text-text-muted">
+                  Secure operations for inquiries, appointments, orders, analytics, and managed catalog data.
+                </p>
+              </div>
 
-        {error ? <p className="mt-8 text-sm text-destructive">{error}</p> : null}
-  {notice ? <p className="mt-4 text-sm text-primary">{notice}</p> : null}
+              <div className="grid gap-2">
+                <a href="#overview" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Overview</a>
+                <a href="#activity" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Activity</a>
+                <a href="#catalog" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Catalog management</a>
+                <a href="#pipeline" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Pipeline</a>
+              </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { label: "Inquiries", value: summary?.totals.inquiries ?? 0 },
-            { label: "Appointments", value: summary?.totals.appointments ?? 0 },
-            { label: "Orders", value: summary?.totals.orders ?? 0 },
-            { label: "Concierge sessions", value: summary?.totals.concierge_sessions ?? 0 },
-          ].map((card) => (
-            <Card key={card.label}>
-              <p className="text-sm text-text-muted">{card.label}</p>
-              <p className="mt-3 font-display text-4xl tracking-tight">{card.value}</p>
+              <div className="grid gap-2">
+                <LinkButton href="/" variant="outline" size="sm">Back to main site</LinkButton>
+                <Button type="button" variant="ghost" onClick={onLogout}>Log out</Button>
+              </div>
             </Card>
-          ))}
-        </div>
+          </aside>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <Card>
-            <h2 className="font-display text-2xl tracking-tight">Latest analytics events</h2>
-            <div className="mt-5 space-y-3 text-sm text-text-muted">
-              {summary?.latest_events.length ? summary.latest_events.map((event) => (
-                <div key={event.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="font-medium text-text">{event.event_name}</div>
-                  <div>{new Date(event.created_at).toLocaleString()}</div>
-                </div>
-              )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No analytics events yet.</div>}
-            </div>
-          </Card>
+          <div className="space-y-6">
+            {error ? <p className="text-sm text-destructive">{error}</p> : null}
+            {notice ? <p className="text-sm text-primary">{notice}</p> : null}
 
-          <Card>
-            <h2 className="font-display text-2xl tracking-tight">Latest audit entries</h2>
-            <div className="mt-5 space-y-3 text-sm text-text-muted">
-              {summary?.latest_logs.length ? summary.latest_logs.map((log) => (
-                <div key={log.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="font-medium text-text">{log.action}</div>
-                  <div>{log.level.toUpperCase()} · {new Date(log.created_at).toLocaleString()}</div>
-                </div>
-              )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No audit entries yet.</div>}
-            </div>
-          </Card>
-        </div>
+            <section id="overview" className="space-y-4">
+              <h2 className="font-display text-2xl tracking-tight">Overview</h2>
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {[
+                  { label: "Inquiries", value: summary?.totals.inquiries ?? 0 },
+                  { label: "Appointments", value: summary?.totals.appointments ?? 0 },
+                  { label: "Orders", value: summary?.totals.orders ?? 0 },
+                  { label: "Concierge sessions", value: summary?.totals.concierge_sessions ?? 0 },
+                ].map((card) => (
+                  <Card key={card.label}>
+                    <p className="text-sm text-text-muted">{card.label}</p>
+                    <p className="mt-3 font-display text-4xl tracking-tight">{card.value}</p>
+                  </Card>
+                ))}
+              </div>
+            </section>
 
-        <div className="mt-10 grid gap-6 xl:grid-cols-3">
-          <Card>
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-display text-2xl tracking-tight">Manage services</h2>
-              <Button type="button" variant="outline" onClick={() => setServiceEditor(formatJson(buildNewService()))}>New</Button>
-            </div>
-            <div className="mt-5 space-y-3">
-              {services.map((service) => (
-                <div key={service.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="font-medium text-text">{service.title}</div>
-                      <div className="text-xs text-text-muted">{service.slug}</div>
+            <section id="activity" className="grid gap-6 xl:grid-cols-2">
+              <Card>
+                <h3 className="font-display text-2xl tracking-tight">Latest analytics events</h3>
+                <div className="mt-5 space-y-3 text-sm text-text-muted">
+                  {summary?.latest_events.length ? summary.latest_events.map((event) => (
+                    <div key={event.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="font-medium text-text">{event.event_name}</div>
+                      <div>{new Date(event.created_at).toLocaleString()}</div>
                     </div>
-                    <div className="flex gap-2">
-                      <Button type="button" variant="outline" onClick={() => setServiceEditor(formatJson(service))}>Edit</Button>
-                      <Button type="button" variant="ghost" onClick={() => deleteRecord("/api/v1/admin/services", `id=${encodeURIComponent(service.id)}`)}>Delete</Button>
-                    </div>
-                  </div>
+                  )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No analytics events yet.</div>}
                 </div>
-              ))}
-            </div>
-            <textarea value={serviceEditor} onChange={(event) => setServiceEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
-            <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/services", serviceEditor, async () => setServices((await (await fetch("/api/v1/admin/services")).json()).data))}>Save service</Button>
-          </Card>
+              </Card>
 
-          <Card>
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-display text-2xl tracking-tight">Manage products</h2>
-              <Button type="button" variant="outline" onClick={() => setProductEditor(formatJson(buildNewProduct()))}>New</Button>
-            </div>
-            <div className="mt-5 space-y-3">
-              {products.map((product) => (
-                <div key={product.slug} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="font-medium text-text">{product.name}</div>
-                      <div className="text-xs text-text-muted">{product.slug}</div>
+              <Card>
+                <h3 className="font-display text-2xl tracking-tight">Latest audit entries</h3>
+                <div className="mt-5 space-y-3 text-sm text-text-muted">
+                  {summary?.latest_logs.length ? summary.latest_logs.map((log) => (
+                    <div key={log.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="font-medium text-text">{log.action}</div>
+                      <div>{log.level.toUpperCase()} · {new Date(log.created_at).toLocaleString()}</div>
                     </div>
-                    <div className="flex gap-2">
-                      <Button type="button" variant="outline" onClick={() => setProductEditor(formatJson(product))}>Edit</Button>
-                      <Button type="button" variant="ghost" onClick={() => deleteRecord("/api/v1/admin/products", `slug=${encodeURIComponent(product.slug)}`)}>Delete</Button>
+                  )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No audit entries yet.</div>}
+                </div>
+              </Card>
+            </section>
+
+            <section id="catalog" className="grid gap-6 xl:grid-cols-3">
+              <Card>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="font-display text-2xl tracking-tight">Manage services</h3>
+                  <Button type="button" variant="outline" onClick={() => setServiceEditor(formatJson(buildNewService()))}>New</Button>
+                </div>
+                <div className="mt-5 space-y-3">
+                  {services.map((service) => (
+                    <div key={service.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-medium text-text">{service.title}</div>
+                          <div className="text-xs text-text-muted">{service.slug}</div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button type="button" variant="outline" onClick={() => setServiceEditor(formatJson(service))}>Edit</Button>
+                          <Button type="button" variant="ghost" onClick={() => deleteRecord("/api/v1/admin/services", `id=${encodeURIComponent(service.id)}`)}>Delete</Button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <textarea value={productEditor} onChange={(event) => setProductEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
-            <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/products", productEditor, async () => setProducts((await (await fetch("/api/v1/admin/products")).json()).data))}>Save product</Button>
-          </Card>
+                <textarea value={serviceEditor} onChange={(event) => setServiceEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
+                <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/services", serviceEditor, async () => setServices((await (await fetch("/api/v1/admin/services")).json()).data))}>Save service</Button>
+              </Card>
 
-          <Card>
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-display text-2xl tracking-tight">Manage portfolio</h2>
-              <Button type="button" variant="outline" onClick={() => setPortfolioEditor(formatJson(buildNewPortfolio()))}>New</Button>
-            </div>
-            <div className="mt-5 space-y-3">
-              {portfolio.map((project) => (
-                <div key={project.slug} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="font-medium text-text">{project.name}</div>
-                      <div className="text-xs text-text-muted">{project.slug}</div>
+              <Card>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="font-display text-2xl tracking-tight">Manage products</h3>
+                  <Button type="button" variant="outline" onClick={() => setProductEditor(formatJson(buildNewProduct()))}>New</Button>
+                </div>
+                <div className="mt-5 space-y-3">
+                  {products.map((product) => (
+                    <div key={product.slug} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-medium text-text">{product.name}</div>
+                          <div className="text-xs text-text-muted">{product.slug}</div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button type="button" variant="outline" onClick={() => setProductEditor(formatJson(product))}>Edit</Button>
+                          <Button type="button" variant="ghost" onClick={() => deleteRecord("/api/v1/admin/products", `slug=${encodeURIComponent(product.slug)}`)}>Delete</Button>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex gap-2">
-                      <Button type="button" variant="outline" onClick={() => setPortfolioEditor(formatJson(project))}>Edit</Button>
-                      <Button type="button" variant="ghost" onClick={() => deleteRecord("/api/v1/admin/portfolio", `slug=${encodeURIComponent(project.slug)}`)}>Delete</Button>
+                  ))}
+                </div>
+                <textarea value={productEditor} onChange={(event) => setProductEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
+                <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/products", productEditor, async () => setProducts((await (await fetch("/api/v1/admin/products")).json()).data))}>Save product</Button>
+              </Card>
+
+              <Card>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="font-display text-2xl tracking-tight">Manage portfolio</h3>
+                  <Button type="button" variant="outline" onClick={() => setPortfolioEditor(formatJson(buildNewPortfolio()))}>New</Button>
+                </div>
+                <div className="mt-5 space-y-3">
+                  {portfolio.map((project) => (
+                    <div key={project.slug} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-medium text-text">{project.name}</div>
+                          <div className="text-xs text-text-muted">{project.slug}</div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button type="button" variant="outline" onClick={() => setPortfolioEditor(formatJson(project))}>Edit</Button>
+                          <Button type="button" variant="ghost" onClick={() => deleteRecord("/api/v1/admin/portfolio", `slug=${encodeURIComponent(project.slug)}`)}>Delete</Button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <textarea value={portfolioEditor} onChange={(event) => setPortfolioEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
-            <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/portfolio", portfolioEditor, async () => setPortfolio((await (await fetch("/api/v1/admin/portfolio")).json()).data))}>Save project</Button>
-          </Card>
-        </div>
+                <textarea value={portfolioEditor} onChange={(event) => setPortfolioEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
+                <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/portfolio", portfolioEditor, async () => setPortfolio((await (await fetch("/api/v1/admin/portfolio")).json()).data))}>Save project</Button>
+              </Card>
+            </section>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          <Card>
-            <h2 className="font-display text-2xl tracking-tight">Recent inquiries</h2>
-            <div className="mt-5 space-y-3 text-sm text-text-muted">
-              {inquiries.slice(0, 8).map((inquiry) => (
-                <div key={inquiry.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="font-medium text-text">{inquiry.visitor_name}</div>
-                  <div>{inquiry.visitor_email}</div>
-                  <div>{inquiry.status.toUpperCase()}</div>
+            <section id="pipeline" className="grid gap-6 xl:grid-cols-3">
+              <Card>
+                <h3 className="font-display text-2xl tracking-tight">Recent inquiries</h3>
+                <div className="mt-5 space-y-3 text-sm text-text-muted">
+                  {inquiries.slice(0, 8).map((inquiry) => (
+                    <div key={inquiry.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="font-medium text-text">{inquiry.visitor_name}</div>
+                      <div>{inquiry.visitor_email}</div>
+                      <div>{inquiry.status.toUpperCase()}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </Card>
+              </Card>
 
-          <Card>
-            <h2 className="font-display text-2xl tracking-tight">Recent appointments</h2>
-            <div className="mt-5 space-y-3 text-sm text-text-muted">
-              {appointments.slice(0, 8).map((appointment) => (
-                <div key={appointment.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="font-medium text-text">{appointment.visitor_name}</div>
-                  <div>{appointment.service_interested_in}</div>
-                  <div>{new Date(appointment.preferred_datetime).toLocaleString()}</div>
+              <Card>
+                <h3 className="font-display text-2xl tracking-tight">Recent appointments</h3>
+                <div className="mt-5 space-y-3 text-sm text-text-muted">
+                  {appointments.slice(0, 8).map((appointment) => (
+                    <div key={appointment.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="font-medium text-text">{appointment.visitor_name}</div>
+                      <div>{appointment.service_interested_in}</div>
+                      <div>{new Date(appointment.preferred_datetime).toLocaleString()}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </Card>
+              </Card>
 
-          <Card>
-            <h2 className="font-display text-2xl tracking-tight">Recent orders</h2>
-            <div className="mt-5 space-y-3 text-sm text-text-muted">
-              {orders.slice(0, 8).map((order) => (
-                <div key={order.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                  <div className="font-medium text-text">{order.order_number}</div>
-                  <div>{order.customer_email}</div>
-                  <div>{order.payment_status.toUpperCase()} · {order.fulfillment_status.toUpperCase()}</div>
+              <Card>
+                <h3 className="font-display text-2xl tracking-tight">Recent orders</h3>
+                <div className="mt-5 space-y-3 text-sm text-text-muted">
+                  {orders.slice(0, 8).map((order) => (
+                    <div key={order.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                      <div className="font-medium text-text">{order.order_number}</div>
+                      <div>{order.customer_email}</div>
+                      <div>{order.payment_status.toUpperCase()} · {order.fulfillment_status.toUpperCase()}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </Card>
+              </Card>
+            </section>
+          </div>
         </div>
       </Container>
     </Section>
