@@ -259,8 +259,8 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
     <Section className="py-8 sm:py-10">
       <Container width="shell">
         <div className="grid items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="lg:self-start">
-            <Card className="space-y-5 lg:sticky lg:top-6 lg:h-fit">
+          <aside className="lg:sticky lg:top-6 lg:self-start lg:h-fit">
+            <Card className="space-y-5">
               <div>
                 <Badge tone="secondary" dot>Admin workspace</Badge>
                 <h1 className="mt-3 font-display text-3xl tracking-tight">Operational dashboard</h1>
