@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/primitives/Badge";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
@@ -257,16 +256,12 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
 
   return (
     <Section className="pt-[var(--admin-sidebar-top)] pb-8 sm:pb-10">
-      <Container width="shell">
-        <div className="grid items-start gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="sticky top-[var(--admin-sidebar-top)] self-start h-fit">
+      <Container width="shell" className="relative">
+        <div className="relative">
+          <aside className="sticky top-[var(--admin-sidebar-top)] self-start h-fit lg:fixed lg:top-[var(--admin-sidebar-top)] lg:w-[var(--admin-sidebar-width)] lg:z-10">
             <Card className="space-y-5">
               <div>
-                <Badge tone="secondary" dot>Admin workspace</Badge>
-                <h1 className="mt-3 font-display text-3xl tracking-tight">Operational dashboard</h1>
-                <p className="mt-3 text-sm leading-6 text-text-muted">
-                  Secure operations for inquiries, appointments, orders, analytics, and managed catalog data.
-                </p>
+                <h1 className="font-display text-3xl tracking-tight">Admin Dashboard</h1>
               </div>
 
               <div className="grid gap-2">
@@ -296,7 +291,7 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
             </Card>
           </aside>
 
-          <div className="space-y-6">
+          <div className="space-y-6 lg:pl-[calc(var(--admin-sidebar-width)+1.5rem)]">
             {error ? <p className="text-sm text-destructive">{error}</p> : null}
             {notice ? <p className="text-sm text-primary">{notice}</p> : null}
 
