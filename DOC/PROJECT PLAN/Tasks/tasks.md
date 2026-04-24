@@ -57,6 +57,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - converted the admin sidebar from single-page anchor scrolling to route-based navigation so overview, activity, catalog management, and pipeline now open as dedicated admin dashboard routes
   - merged Growrix Strict Executor rules into universal docs: strict 8-step execution workflow, tool discipline, zero-gate pass rule, local commit discipline, design-system-first and mobile-first frontend constraints, and standardised output format are now reflected in ai-collaboration-playbook.md, development-standards.md, and contribution-guide.md with machine-readable routing updated in ai-context.yaml
   - added a universal Enterprise Testing and Quality Enforcement (v2) protocol document and wired it into universal handbook indexes plus machine-readable ai-context routing for release and QA work
   - fixed admin login 500 failures caused by Supabase `app_state` read/write errors by adding graceful fallback to local file-backed persistence in the shared data store
@@ -232,6 +233,7 @@ phases:
 - The booking route now persists real appointment requests through `/api/v1/appointments` instead of showing a placeholder.
 - The checkout route now creates persisted orders and hands off to Stripe when configured, with a webhook endpoint and fallback manual delivery summary.
 - Seeded admin auth, protected `/admin` routes, and `/api/v1/me` plus `/api/v1/admin/**` reads now exist behind JWT cookie sessions.
+- Admin sidebar navigation now uses route-based pages (`/admin`, `/admin/activity`, `/admin/catalog`, `/admin/pipeline`) instead of in-page anchor jumps.
 - Supabase-backed auth and persistence adapters now exist and can be enabled by environment configuration without changing route contracts.
 - Local API integration tests now cover contact, booking, checkout, and concierge persistence flows.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.

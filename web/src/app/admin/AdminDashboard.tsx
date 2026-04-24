@@ -1,10 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/primitives/Badge";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
+
+type AdminDashboardView = "overview" | "activity" | "catalog" | "pipeline";
 
 type ServiceRecord = {
   id: string;
@@ -142,7 +146,8 @@ function buildNewPortfolio(): PortfolioRecord {
   };
 }
 
-export function AdminDashboard() {
+export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardView }) {
+  const pathname = usePathname();
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [services, setServices] = useState<ServiceRecord[]>([]);
   const [products, setProducts] = useState<ProductRecord[]>([]);
@@ -265,10 +270,23 @@ export function AdminDashboard() {
               </div>
 
               <div className="grid gap-2">
-                <a href="#overview" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Overview</a>
-                <a href="#activity" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Activity</a>
-                <a href="#catalog" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Catalog management</a>
-                <a href="#pipeline" className="rounded-md border border-border px-3 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Pipeline</a>
+                {[
+                  { href: "/admin", label: "Overview", key: "overview" },
+                  { href: "/admin/activity", label: "Activity", key: "activity" },
+                  { href: "/admin/catalog", label: "Catalog management", key: "catalog" },
+                  { href: "/admin/pipeline", label: "Pipeline", key: "pipeline" },
+                ].map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.key}
+                      href={item.href}
+                      className={`rounded-md border px-3 py-2 text-sm transition-colors ${isActive ? "border-border-strong bg-surface text-text" : "border-border text-text-muted hover:border-border-strong hover:text-text"}`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
               </div>
 
               <div className="grid gap-2">
@@ -282,50 +300,55 @@ export function AdminDashboard() {
             {error ? <p className="text-sm text-destructive">{error}</p> : null}
             {notice ? <p className="text-sm text-primary">{notice}</p> : null}
 
-            <section id="overview" className="space-y-4">
-              <h2 className="font-display text-2xl tracking-tight">Overview</h2>
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                {[
-                  { label: "Inquiries", value: summary?.totals.inquiries ?? 0 },
-                  { label: "Appointments", value: summary?.totals.appointments ?? 0 },
-                  { label: "Orders", value: summary?.totals.orders ?? 0 },
-                  { label: "Concierge sessions", value: summary?.totals.concierge_sessions ?? 0 },
-                ].map((card) => (
-                  <Card key={card.label}>
-                    <p className="text-sm text-text-muted">{card.label}</p>
-                    <p className="mt-3 font-display text-4xl tracking-tight">{card.value}</p>
-                  </Card>
-                ))}
-              </div>
-            </section>
-
-            <section id="activity" className="grid gap-6 xl:grid-cols-2">
-              <Card>
-                <h3 className="font-display text-2xl tracking-tight">Latest analytics events</h3>
-                <div className="mt-5 space-y-3 text-sm text-text-muted">
-                  {summary?.latest_events.length ? summary.latest_events.map((event) => (
-                    <div key={event.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                      <div className="font-medium text-text">{event.event_name}</div>
-                      <div>{new Date(event.created_at).toLocaleString()}</div>
-                    </div>
-                  )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No analytics events yet.</div>}
+            {view === "overview" ? (
+              <section className="space-y-4">
+                <h2 className="font-display text-2xl tracking-tight">Overview</h2>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  {[
+                    { label: "Inquiries", value: summary?.totals.inquiries ?? 0 },
+                    { label: "Appointments", value: summary?.totals.appointments ?? 0 },
+                    { label: "Orders", value: summary?.totals.orders ?? 0 },
+                    { label: "Concierge sessions", value: summary?.totals.concierge_sessions ?? 0 },
+                  ].map((card) => (
+                    <Card key={card.label}>
+                      <p className="text-sm text-text-muted">{card.label}</p>
+                      <p className="mt-3 font-display text-4xl tracking-tight">{card.value}</p>
+                    </Card>
+                  ))}
                 </div>
-              </Card>
+              </section>
+            ) : null}
 
-              <Card>
-                <h3 className="font-display text-2xl tracking-tight">Latest audit entries</h3>
-                <div className="mt-5 space-y-3 text-sm text-text-muted">
-                  {summary?.latest_logs.length ? summary.latest_logs.map((log) => (
-                    <div key={log.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-                      <div className="font-medium text-text">{log.action}</div>
-                      <div>{log.level.toUpperCase()} · {new Date(log.created_at).toLocaleString()}</div>
-                    </div>
-                  )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No audit entries yet.</div>}
-                </div>
-              </Card>
-            </section>
+            {view === "activity" ? (
+              <section className="grid gap-6 xl:grid-cols-2">
+                <Card>
+                  <h3 className="font-display text-2xl tracking-tight">Latest analytics events</h3>
+                  <div className="mt-5 space-y-3 text-sm text-text-muted">
+                    {summary?.latest_events.length ? summary.latest_events.map((event) => (
+                      <div key={event.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                        <div className="font-medium text-text">{event.event_name}</div>
+                        <div>{new Date(event.created_at).toLocaleString()}</div>
+                      </div>
+                    )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No analytics events yet.</div>}
+                  </div>
+                </Card>
 
-            <section id="catalog" className="grid gap-6 xl:grid-cols-3">
+                <Card>
+                  <h3 className="font-display text-2xl tracking-tight">Latest audit entries</h3>
+                  <div className="mt-5 space-y-3 text-sm text-text-muted">
+                    {summary?.latest_logs.length ? summary.latest_logs.map((log) => (
+                      <div key={log.id} className="rounded-[14px] border border-border bg-surface px-4 py-3">
+                        <div className="font-medium text-text">{log.action}</div>
+                        <div>{log.level.toUpperCase()} · {new Date(log.created_at).toLocaleString()}</div>
+                      </div>
+                    )) : <div className="rounded-[14px] border border-border bg-surface px-4 py-3">No audit entries yet.</div>}
+                  </div>
+                </Card>
+              </section>
+            ) : null}
+
+            {view === "catalog" ? (
+              <section className="grid gap-6 xl:grid-cols-3">
               <Card>
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="font-display text-2xl tracking-tight">Manage services</h3>
@@ -400,9 +423,11 @@ export function AdminDashboard() {
                 <textarea value={portfolioEditor} onChange={(event) => setPortfolioEditor(event.target.value)} className="signal-input mt-5 min-h-72 font-mono text-xs" />
                 <Button type="button" className="mt-4" onClick={() => saveEditor("/api/v1/admin/portfolio", portfolioEditor, async () => setPortfolio((await (await fetch("/api/v1/admin/portfolio")).json()).data))}>Save project</Button>
               </Card>
-            </section>
+              </section>
+            ) : null}
 
-            <section id="pipeline" className="grid gap-6 xl:grid-cols-3">
+            {view === "pipeline" ? (
+              <section className="grid gap-6 xl:grid-cols-3">
               <Card>
                 <h3 className="font-display text-2xl tracking-tight">Recent inquiries</h3>
                 <div className="mt-5 space-y-3 text-sm text-text-muted">
@@ -441,7 +466,8 @@ export function AdminDashboard() {
                   ))}
                 </div>
               </Card>
-            </section>
+              </section>
+            ) : null}
           </div>
         </div>
       </Container>
