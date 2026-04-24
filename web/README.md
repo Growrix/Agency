@@ -42,6 +42,8 @@ npm run dev
 
 App runs on [http://localhost:5000](http://localhost:5000).
 
+For mobile testing on the same LAN, the dev config now auto-allows the machine's active local IPv4 addresses for Next.js development origins. Restart the dev server after your IP changes so the updated origin list is picked up.
+
 ## Validation
 
 ```bash

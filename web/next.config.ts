@@ -1,7 +1,38 @@
+import os from "node:os";
 import type { NextConfig } from "next";
 
+function getLocalIpv4Origins() {
+  const interfaces = os.networkInterfaces();
+  const addresses = new Set<string>();
+
+  for (const entries of Object.values(interfaces)) {
+    for (const entry of entries ?? []) {
+      if (entry.family !== "IPv4" || entry.internal) {
+        continue;
+      }
+
+      addresses.add(entry.address);
+    }
+  }
+
+  return [...addresses];
+}
+
+const isDevelopment = process.env.NODE_ENV !== "production";
+const allowedDevOrigins = [
+  "*.replit.dev",
+  "*.worf.replit.dev",
+  "localhost",
+  "127.0.0.1",
+  ...getLocalIpv4Origins(),
+  "growrixos.com",
+  "www.growrixos.com",
+];
+
+const connectSrc = ["'self'", "https:", ...(isDevelopment ? ["http:", "ws:", "wss:"] : [])].join(" ");
+
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["*.replit.dev", "*.worf.replit.dev", "localhost", "127.0.0.1", "192.168.0.100", "growrixos.com", "www.growrixos.com"],
+  allowedDevOrigins,
   images: {
     remotePatterns: [
       {
@@ -24,7 +55,7 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;",
+              `default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src ${connectSrc}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`,
           },
         ],
       },

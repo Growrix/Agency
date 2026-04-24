@@ -95,11 +95,16 @@ export async function getPublicService(serviceId: string): Promise<PublicService
 
 export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   const database = await ensureCatalogSeeded();
-  return database.portfolio_projects.map((project) => {
-    const publicProject = { ...project };
-    delete publicProject.detail;
-    return publicProject;
-  });
+  return database.portfolio_projects.map((project) => ({
+    slug: project.slug,
+    name: project.name,
+    industry: project.industry,
+    service: project.service,
+    summary: project.summary,
+    metric: project.metric,
+    accent: project.accent,
+    hero_image: project.hero_image,
+  }));
 }
 
 export async function getPublicPortfolioProject(slug: string): Promise<PublicPortfolioDetailRecord | null> {
