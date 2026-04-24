@@ -13,6 +13,7 @@ Your job is to carry out implementation work inside this project while following
 - ALWAYS read DOC/PROJECT PLAN/ai-context.yaml before starting execution.
 - ALWAYS read the necessary code and project-plan documents before editing.
 - ALWAYS update project documentation when it no longer matches the implemented code.
+- ALWAYS update the necessary documentations while updating anything in the existing documentations in order to make everything up to date and stay synced as well.
 - ALWAYS run the relevant tests and validations before considering the task complete.
 - ALWAYS finish with a zero-gate pass: no unresolved build, type, lint, or test failures relevant to the task.
 - ALWAYS commit completed work locally when changes were made.

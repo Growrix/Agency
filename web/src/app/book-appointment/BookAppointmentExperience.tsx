@@ -11,7 +11,6 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 import { useConciergeStore } from "@/lib/concierge-store";
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
-type BookingSlot = { label: string; value: string; helper: string };
 
 const SERVICE_OPTIONS = [
   "Premium custom website",
@@ -23,40 +22,57 @@ const SERVICE_OPTIONS = [
   "Not sure yet",
 ];
 
-function generateBookingSlots() {
-  const slots: BookingSlot[] = [];
-  const cursor = new Date();
-  cursor.setHours(0, 0, 0, 0);
+const TIME_OPTIONS = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+];
 
-  while (slots.length < 12) {
-    cursor.setDate(cursor.getDate() + 1);
-    const day = cursor.getDay();
-    if (day === 0 || day === 6) {
-      continue;
-    }
+function getDetectedTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+  } catch {
+    return "UTC";
+  }
+}
 
-    for (const hour of [10, 12, 14, 16]) {
-      if (slots.length >= 12) {
-        break;
-      }
+function toDateInputValue(date: Date) {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
-      const slotDate = new Date(cursor);
-      slotDate.setHours(hour, 0, 0, 0);
-      slots.push({
-        label: slotDate.toLocaleString(undefined, {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-          hour: "numeric",
-          minute: "2-digit",
-        }),
-        value: slotDate.toISOString(),
-        helper: "30 minute discovery call",
-      });
-    }
+function formatTimeInputValue(date: Date) {
+  const hours = `${date.getHours()}`.padStart(2, "0");
+  const minutes = `${date.getMinutes()}`.padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
+function formatSelectedSlot(dateValue: string, timeValue: string) {
+  if (!dateValue || !timeValue) {
+    return null;
   }
 
-  return slots;
+  const slotDate = new Date(`${dateValue}T${timeValue}:00`);
+  if (Number.isNaN(slotDate.getTime())) {
+    return null;
+  }
+
+  return slotDate.toLocaleString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 export function BookAppointmentExperience() {
@@ -64,8 +80,13 @@ export function BookAppointmentExperience() {
   const [status, setStatus] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("Could not reserve that slot. Please try another time or use WhatsApp.");
   const [confirmation, setConfirmation] = useState<{ id: string; datetime: string } | null>(null);
-  const timezone = "UTC";
-  const slots = generateBookingSlots();
+  const timezone = getDetectedTimezone();
+  const [minimumBookingDate] = useState(() => new Date(Date.now() + 30 * 60 * 1000));
+  const minDate = toDateInputValue(minimumBookingDate);
+  const minTimeForToday = formatTimeInputValue(minimumBookingDate);
+  const [selectedDate, setSelectedDate] = useState(minDate);
+  const [selectedTime, setSelectedTime] = useState("");
+  const selectedSlotLabel = formatSelectedSlot(selectedDate, selectedTime);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,6 +95,13 @@ export function BookAppointmentExperience() {
 
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    const preferredDate = new Date(`${selectedDate}T${selectedTime}:00`);
+
+    if (!selectedDate || !selectedTime || Number.isNaN(preferredDate.getTime())) {
+      setErrorMessage("Please choose a valid date and time for the discovery call.");
+      setStatus("error");
+      return;
+    }
 
     try {
       const response = await fetch("/api/v1/appointments", {
@@ -81,6 +109,7 @@ export function BookAppointmentExperience() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          preferred_datetime: preferredDate.toISOString(),
           timezone,
           source: "booking_page",
         }),
@@ -97,6 +126,8 @@ export function BookAppointmentExperience() {
       setStatus("success");
       setConfirmation({ id: payload.data.id, datetime: payload.data.preferred_datetime });
       form.reset();
+      setSelectedDate(minDate);
+      setSelectedTime("");
     } catch {
       setStatus("error");
     }
@@ -196,12 +227,42 @@ export function BookAppointmentExperience() {
                       </select>
                     </label>
                     <label className="block">
-                      <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Available slot *</span>
-                      <select name="preferred_datetime" className="booking-input mt-1.5" defaultValue="" required>
-                        <option value="" disabled>{slots.length ? "Choose a slot…" : "Loading slots…"}</option>
-                        {slots.map((slot) => <option key={slot.value} value={slot.value}>{slot.label} · {slot.helper}</option>)}
-                      </select>
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Preferred date *</span>
+                      <input
+                        type="date"
+                        className="booking-input mt-1.5"
+                        min={minDate}
+                        value={selectedDate}
+                        onChange={(event) => setSelectedDate(event.target.value)}
+                        required
+                      />
                     </label>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_220px]">
+                    <label className="block">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Preferred time *</span>
+                      <input
+                        type="time"
+                        className="booking-input mt-1.5"
+                        min={selectedDate === minDate ? minTimeForToday : undefined}
+                        step={1800}
+                        list="booking-time-options"
+                        value={selectedTime}
+                        onChange={(event) => setSelectedTime(event.target.value)}
+                        required
+                      />
+                      <datalist id="booking-time-options">
+                        {TIME_OPTIONS.map((time) => <option key={time} value={time} />)}
+                      </datalist>
+                    </label>
+                    <div className="rounded-sm border border-border bg-inset/45 px-4 py-3">
+                      <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Selected slot</p>
+                      <p className="mt-2 text-sm leading-6 text-text">
+                        {selectedSlotLabel ?? "Pick a date and time to preview the discovery call request."}
+                      </p>
+                      <p className="mt-2 text-xs text-text-muted">30 minute discovery call · {timezone}</p>
+                    </div>
                   </div>
 
                   <label className="block">
@@ -217,8 +278,8 @@ export function BookAppointmentExperience() {
                   {status === "error" ? <p className="text-sm text-destructive">{errorMessage}</p> : null}
 
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                    <p className="text-xs text-text-muted">We store this booking request for admin follow-up and confirmation.</p>
-                    <Button type="submit" disabled={status === "submitting" || slots.length === 0}>
+                    <p className="text-xs text-text-muted">Choose a date and time from the calendar controls. We store the request for admin follow-up and confirmation.</p>
+                    <Button type="submit" disabled={status === "submitting" || !selectedDate || !selectedTime}>
                       <CalendarDaysIcon className="size-4" /> {status === "submitting" ? "Saving..." : "Reserve slot"}
                     </Button>
                   </div>

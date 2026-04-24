@@ -57,6 +57,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - fixed admin login 500 failures caused by Supabase `app_state` read/write errors by adding graceful fallback to local file-backed persistence in the shared data store
+  - replaced the booking page's fixed slot dropdown with native date and time controls so appointment requests are chosen from calendar-style inputs instead of a prebuilt list
   - updated the homepage hero proof line and animated marquee to feature framework, language, infrastructure, and integration names instead of the previous client-name text
   - fixed a mobile concierge runtime crash by replacing direct client `crypto.randomUUID()` calls with a browser-safe message ID fallback for older or restricted mobile environments
   - fixed mobile LAN dev access for the AI concierge by replacing the stale hardcoded Next.js dev origin IP with dynamic local IPv4 detection and development websocket allowance
@@ -217,6 +219,8 @@ phases:
 - The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
 - The client concierge now uses a browser-safe local message ID fallback so starter prompts and manual sends do not crash on mobile browsers that lack `crypto.randomUUID()`.
 - The homepage hero proof line and marquee now foreground stack, language, infrastructure, and integration names such as Next.js, React, Python, Django, Supabase, Stripe, and OpenAI instead of repeating client names.
+- The booking surface now uses native date and time controls with a selected-slot preview instead of a fixed generated slot dropdown, while still submitting the same `preferred_datetime` API contract.
+- Auth and related server flows now gracefully fall back to local file-backed persistence when Supabase `app_state` reads/writes fail, avoiding hard 500 errors during admin sign-in.
 - The mobile AI concierge popup now uses a cleaner app-style sheet layout, stacks above the fixed mobile dock, hides that dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
 - The Next.js development config now auto-allows active local IPv4 origins and development websocket connections so mobile devices on the same LAN receive hydrated interactive behavior instead of dead chat triggers.
 - The mobile footer now preserves enough bottom-safe spacing for the copyright strip to remain visible above the fixed dock.
