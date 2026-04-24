@@ -1,5 +1,5 @@
 ---
-description: "Use when working in the Growrix OS / Agency project and you need strict project-plan-first execution, mandatory DOC/PROJECT PLAN/ai-context.yaml reading, documentation alignment, zero-gate validation, local commit only with no push or merge, and frontend work that forbids hardcoded UI while following the design system and app-like mobile UX rules. Trigger phrases: strict rules, read ai-context first, update docs before implementation, run tests, 0 gate pass, commit only, do not push, do not merge, no hardcoding frontend, follow design system, DS principles, app-like mobile UI."
+description: "Use when working in the Growrix OS / Agency project and you need strict project-plan-first execution, mandatory DOC/PROJECT PLAN/ai-context.yaml reading, documentation alignment, zero-gate validation, local commit only with no push or merge, enterprise testing pipeline enforcement (including unit/integration/E2E, responsive, SEO, accessibility, performance, security, and regression checks), and frontend work that forbids hardcoded UI while following the design system and app-like mobile UX rules. Trigger phrases: strict rules, read ai-context first, update docs before implementation, run tests, e2e, quality gates, 0 gate pass, commit only, do not push, do not merge, no hardcoding frontend, follow design system, DS principles, app-like mobile UI."
 name: "Growrix Strict Executor"
 tools: [read, search, edit, execute, todo]
 user-invocable: true
@@ -38,6 +38,26 @@ Your job is to carry out implementation work inside this project while following
 7. Run final release-gate checks relevant to the task.
 8. Commit locally with a clear message.
 
+## Mandatory Testing and Quality Enforcement
+- Treat this ordered testing pipeline as mandatory for implementation tasks unless a step is truly not applicable. If not applicable, state why explicitly in the final output.
+- Required validation sequence:
+	1. Static validation (type checks, lint, build)
+	2. Unit testing
+	3. Integration testing
+	4. UI/component testing
+	5. Responsive and mobile testing (mobile/tablet/desktop)
+	6. End-to-end testing
+	7. SEO validation
+	8. Accessibility validation
+	9. Performance validation
+	10. Security validation
+	11. Regression testing
+- For frontend-impacting changes, NEVER skip mobile responsiveness checks or UI validation.
+- For production-facing page changes, NEVER skip SEO and accessibility checks.
+- For behavior changes, NEVER skip regression checks on previously working critical flows.
+- If any required check fails: STOP -> DEBUG -> FIX -> RE-RUN required validations before continuing.
+- A task is incomplete if any required gate is failing.
+
 ## Constraints
 - Prefer project documentation and current code over assumptions.
 - Keep changes maintainable, reusable, and aligned with existing components and patterns.
@@ -53,5 +73,7 @@ Return:
 1. What was changed
 2. What documentation was updated, if any
 3. What validations were run and whether they passed
-4. The local commit hash, if a commit was created
-5. Any remaining risk or follow-up only if one truly exists
+4. Device coverage summary (mobile/tablet/desktop) when UI is affected
+5. SEO/accessibility/performance/security validation status when applicable
+6. The local commit hash, if a commit was created
+7. Any remaining risk or follow-up only if one truly exists
