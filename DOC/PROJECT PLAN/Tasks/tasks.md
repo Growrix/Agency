@@ -57,6 +57,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - fixed a mobile concierge regression by restoring popup overlay stacking above the fixed bottom dock so the chat opens visibly from the mobile chat shortcut
+  - restored mobile footer bottom-safe spacing so the copyright strip clears the fixed dock instead of being hidden behind it
   - converted the homepage hero from a two-column composition to a centered single-column layout and removed the legacy mockup/image column so the hero aligns with topbar/header rhythm
   - redesigned the admin workspace into a sidebar-driven dashboard layout and removed public-site chrome from `/admin` routes so operators get a dedicated back-to-site control inside the dashboard
   - improved the popup-first AI concierge mobile experience so the modal now behaves like a phone-first single-column chat sheet with no desktop escalation rail, a stacked composer, and a consistently visible send action on small screens
@@ -210,7 +212,8 @@ phases:
 - The shop browsing and product preview experience exists in code.
 - The AI concierge route now renders a real chat UI and the site includes a first server-backed `/api/v1/ai-concierge` endpoint grounded in current website content only.
 - The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
-- The mobile AI concierge popup now uses a cleaner app-style sheet layout, hides the mobile dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
+- The mobile AI concierge popup now uses a cleaner app-style sheet layout, stacks above the fixed mobile dock, hides that dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
+- The mobile footer now preserves enough bottom-safe spacing for the copyright strip to remain visible above the fixed dock.
 - The blog detail surface now derives on-page navigation from article headings, uses a cleaner one-column mobile reading flow, and shares improved article, share-rail, and comment responsiveness across slugs.
 - Blog routes now support Sanity CMS as an optional primary source, with automatic fallback to local static blog content when Sanity is not configured or unavailable.
 - The contact form now persists inquiries through `/api/v1/contact`, records analytics/audit events, and exposes protected admin visibility.

@@ -12,7 +12,7 @@ test("home and contact pages pass accessibility smoke checks", async ({ page }) 
   }
 });
 
-test("security headers and auth protection are present", async ({ request, page }) => {
+test("security headers and auth protection are present", async ({ request }) => {
   const response = await request.get("/");
   expect(response.headers()["x-content-type-options"]).toBe("nosniff");
   expect(response.headers()["x-frame-options"]).toBe("DENY");

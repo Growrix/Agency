@@ -44,7 +44,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-border py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-border pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-6 sm:flex-row sm:items-center sm:justify-between sm:pb-6">
           <p className="text-xs text-text-muted">
             © {new Date().getFullYear()} Growrix OS. All rights reserved.
           </p>

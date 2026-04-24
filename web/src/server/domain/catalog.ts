@@ -1,17 +1,14 @@
 import "server-only";
 
-import { SERVICE_BY_SLUG, SERVICES, PORTFOLIO, PORTFOLIO_BY_SLUG } from "@/lib/content";
+import { SERVICES, PORTFOLIO } from "@/lib/content";
 import {
-  type CaseStudyDetail,
   CASE_STUDY_DETAILS,
   getPortfolioImage,
   getProductImage,
-  type StockImage,
 } from "@/lib/site-images";
 import {
   PUBLISHED_SHOP_PRODUCTS,
   SHOP_CATEGORY_OPTIONS,
-  type ShopProduct,
 } from "@/lib/shop";
 import type {
   ManagedPortfolioRecord,
@@ -98,7 +95,11 @@ export async function getPublicService(serviceId: string): Promise<PublicService
 
 export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   const database = await ensureCatalogSeeded();
-  return database.portfolio_projects.map(({ detail: _detail, ...project }) => project);
+  return database.portfolio_projects.map((project) => {
+    const publicProject = { ...project };
+    delete publicProject.detail;
+    return publicProject;
+  });
 }
 
 export async function getPublicPortfolioProject(slug: string): Promise<PublicPortfolioDetailRecord | null> {

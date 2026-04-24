@@ -35,6 +35,7 @@ depends_on:
 ### 1A. Popup Activation Layer
 - Content: modal-first chat activation from homepage Ask AI buttons, the global floating icon, and mobile chat shortcuts without forcing a route transition.
 - Components: global launcher button, modal overlay, close controls, focus trap, preserved background context.
+- Layering rule: the popup overlay must stack above the fixed mobile dock so chat always opens visibly from the mobile chat shortcut.
 - Interaction rule: when users click suggested next-step actions (WhatsApp, booking, contact, pricing, services, shop, FAQ), the popup closes immediately and the target destination is shown without requiring manual chat dismissal.
 
 ### 2. Conversation Surface
@@ -71,6 +72,7 @@ depends_on:
 ## Responsive Adaptation
 - Mobile popup opens the chat as a full-height app-like sheet with a single-column conversation surface, sticky bottom-safe composer treatment, and no desktop escalation rail.
 - The mobile composer stacks input and send action vertically so the primary submit control always remains visible inside narrow viewports.
+- The public shell keeps footer utility and copyright copy above the fixed mobile dock with bottom-safe spacing.
 - Knowledge areas and FAQs live below the conversation in stacked cards.
 
 ## SEO and Metadata
