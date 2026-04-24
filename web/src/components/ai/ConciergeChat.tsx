@@ -69,6 +69,14 @@ const INITIAL_MESSAGE: Message = {
     "Ask about services, pricing, timelines, products, or fit. I answer only from approved Growrix site content and will route you to a human when a verified answer is not available.",
 };
 
+function createMessageId() {
+  if (typeof globalThis.crypto !== "undefined" && typeof globalThis.crypto.randomUUID === "function") {
+    return globalThis.crypto.randomUUID();
+  }
+
+  return `msg-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 type ConciergeExperienceProps = {
   initialPrompt?: string;
   mode?: "modal" | "page";
@@ -99,7 +107,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
     }
 
     const userMessage: Message = {
-      id: crypto.randomUUID(),
+      id: createMessageId(),
       role: "user",
       text: message,
     };
@@ -146,7 +154,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
       setMessages((current) => [
         ...current,
         {
-          id: crypto.randomUUID(),
+          id: createMessageId(),
           role: "assistant",
           text: `${messageText} You can still use WhatsApp, contact, or booking to continue.`,
           responseState: "escalation",

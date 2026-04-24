@@ -57,6 +57,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - fixed a mobile concierge runtime crash by replacing direct client `crypto.randomUUID()` calls with a browser-safe message ID fallback for older or restricted mobile environments
   - fixed mobile LAN dev access for the AI concierge by replacing the stale hardcoded Next.js dev origin IP with dynamic local IPv4 detection and development websocket allowance
   - fixed a mobile concierge regression by restoring popup overlay stacking above the fixed bottom dock so the chat opens visibly from the mobile chat shortcut
   - restored mobile footer bottom-safe spacing so the copyright strip clears the fixed dock instead of being hidden behind it
@@ -213,6 +214,7 @@ phases:
 - The shop browsing and product preview experience exists in code.
 - The AI concierge route now renders a real chat UI and the site includes a first server-backed `/api/v1/ai-concierge` endpoint grounded in current website content only.
 - The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
+- The client concierge now uses a browser-safe local message ID fallback so starter prompts and manual sends do not crash on mobile browsers that lack `crypto.randomUUID()`.
 - The mobile AI concierge popup now uses a cleaner app-style sheet layout, stacks above the fixed mobile dock, hides that dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
 - The Next.js development config now auto-allows active local IPv4 origins and development websocket connections so mobile devices on the same LAN receive hydrated interactive behavior instead of dead chat triggers.
 - The mobile footer now preserves enough bottom-safe spacing for the copyright strip to remain visible above the fixed dock.
