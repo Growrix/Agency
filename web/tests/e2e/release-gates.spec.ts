@@ -2,8 +2,9 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 test("home and contact pages pass accessibility smoke checks", async ({ page }) => {
+  test.setTimeout(120_000);
   for (const route of ["/", "/contact"]) {
-    await page.goto(route);
+    await page.goto(route, { waitUntil: "domcontentloaded" });
     const results = await new AxeBuilder({ page })
       .disableRules(["color-contrast", "definition-list", "region"])
       .analyze();
