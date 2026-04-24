@@ -110,6 +110,21 @@ export const CLIENT_LOGOS = [
   "Sundial Foods",
 ];
 
+export const HOME_STACK_MARQUEE = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Python",
+  "Django",
+  "PostgreSQL",
+  "Supabase",
+  "Stripe",
+  "OpenAI",
+  "Sanity CMS",
+  "Resend",
+  "Vercel",
+];
+
 export const FEATURED_PRODUCTS = [
   { slug: "atelier-marketing-theme", name: "Atelier Marketing Theme", price: "$790", category: "Templates", tag: "Best seller" },
   { slug: "operator-dashboard-kit", name: "Operator Dashboard Kit", price: "$1,850", category: "Templates", tag: "Updated" },

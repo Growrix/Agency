@@ -28,9 +28,9 @@ import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
-  CLIENT_LOGOS,
   FEATURED_PRODUCTS,
   HOME_STATS,
+  HOME_STACK_MARQUEE,
   PORTFOLIO,
   PROCESS_STEPS,
   SERVICES,
@@ -116,7 +116,7 @@ export default async function Home() {
               className="signal-rise mx-auto mt-6 max-w-2xl font-mono text-xs uppercase tracking-wider text-text-muted"
               style={{ animationDelay: "360ms" }}
             >
-              Trusted by Tideline · Northcrest · Lumora · Glasswing · Helix
+              Next.js · React · TypeScript · Python · Django · Stripe · Supabase
             </p>
           </div>
 
@@ -206,7 +206,7 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <TrustStrip items={CLIENT_LOGOS} />
+      <TrustStrip items={HOME_STACK_MARQUEE} />
 
       {/* Shop Spotlight */}
       <Section>
