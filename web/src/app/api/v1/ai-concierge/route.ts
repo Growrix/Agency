@@ -53,6 +53,6 @@ export async function POST(request: NextRequest) {
       sessionId: session.id,
     });
   } catch (error) {
-    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "The concierge could not answer right now."));
+    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "AI Growrix OS could not answer right now."));
   }
 }

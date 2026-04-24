@@ -73,6 +73,7 @@ Prompt guidance:
 - [engineering/development-standards.md](engineering/development-standards.md)
 - [quality/testing-strategy.md](quality/testing-strategy.md)
 - [quality/qa-and-release-gates.md](quality/qa-and-release-gates.md)
+- [quality/enterprise-testing-and-quality-enforcement-v2.md](quality/enterprise-testing-and-quality-enforcement-v2.md)
 - [operations/security-and-operations.md](operations/security-and-operations.md)
 - [operations/platform-governance-and-controls.md](operations/platform-governance-and-controls.md)
 
@@ -146,4 +147,5 @@ Prompt guidance:
 2. development standards
 3. testing strategy
 4. QA and release gates
-5. deployment, security, incident response, and platform governance docs
+5. enterprise testing and quality enforcement protocol
+6. deployment, security, incident response, and platform governance docs

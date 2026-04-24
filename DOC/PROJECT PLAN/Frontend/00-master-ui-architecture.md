@@ -87,6 +87,7 @@ recommended_next_reads:
 - Sticky mobile action bar: Book, WhatsApp, Cart.
 - Drawer menu for secondary pages: Pricing, About, Contact, FAQ, Legal.
 - Mobile filters, cart, and chat use sheets or modal overlays instead of full-page interruptions where possible.
+- The public shell must reserve bottom-safe space so footer trust and copyright content remain visible above fixed mobile utilities.
 
 ## Shared Conversion Infrastructure
 - AI chat launcher pinned globally with a shared popup conversation surface and contextual prompts per page.

@@ -41,6 +41,13 @@ export const blogPostType = defineType({
       validation: (rule) => rule.required().min(20).max(240),
     }),
     defineField({
+      name: "scheduledPublishAt",
+      title: "Scheduled Publish At (Optional)",
+      type: "datetime",
+      description:
+        "If set to a future time, this post stays hidden on the website until that time.",
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
@@ -54,9 +61,17 @@ export const blogPostType = defineType({
       validation: (rule) => rule.required().min(1).max(60),
     }),
     defineField({
-      name: "category",
+      name: "categoryRef",
       title: "Category",
+      type: "reference",
+      to: [{ type: "category" }],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "category",
+      title: "Legacy Category (Optional)",
       type: "string",
+      description: "Backward-compat fallback field for older posts.",
       options: {
         list: [
           { title: "Field Notes", value: "Field Notes" },
@@ -67,7 +82,6 @@ export const blogPostType = defineType({
           { title: "Studio", value: "Studio" },
         ],
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "tags",
@@ -85,21 +99,28 @@ export const blogPostType = defineType({
       description: "Tailwind gradient classes, e.g. from-teal-500 to-emerald-500",
     }),
     defineField({
-      name: "author",
+      name: "authorRef",
       title: "Author",
+      type: "reference",
+      to: [{ type: "author" }],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "author",
+      title: "Legacy Author (Optional)",
       type: "object",
+      description: "Backward-compat fallback for older posts.",
       fields: [
-        defineField({ name: "name", title: "Name", type: "string", validation: (rule) => rule.required() }),
-        defineField({ name: "role", title: "Role", type: "string", validation: (rule) => rule.required() }),
-        defineField({ name: "bio", title: "Bio", type: "text", rows: 3, validation: (rule) => rule.required() }),
+        defineField({ name: "name", title: "Name", type: "string" }),
+        defineField({ name: "role", title: "Role", type: "string" }),
+        defineField({ name: "bio", title: "Bio", type: "text", rows: 3 }),
         defineField({
           name: "initials",
           title: "Initials",
           type: "string",
-          validation: (rule) => rule.required().min(1).max(3),
+          validation: (rule) => rule.min(1).max(3),
         }),
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "body",
@@ -107,6 +128,19 @@ export const blogPostType = defineType({
       type: "array",
       of: [
         { type: "block" },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+              validation: (rule) => rule.required().min(8).max(160),
+            }),
+            defineField({ name: "caption", title: "Caption (Optional)", type: "string" }),
+          ],
+        },
         {
           type: "object",
           name: "codeBlock",
@@ -122,6 +156,44 @@ export const blogPostType = defineType({
         },
       ],
       validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "object",
+      fields: [
+        defineField({
+          name: "metaTitle",
+          title: "Meta Title",
+          type: "string",
+          validation: (rule) => rule.max(70),
+        }),
+        defineField({
+          name: "metaDescription",
+          title: "Meta Description",
+          type: "text",
+          rows: 3,
+          validation: (rule) => rule.max(170),
+        }),
+        defineField({
+          name: "ogImage",
+          title: "OG Image (Optional)",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "canonicalUrl",
+          title: "Canonical URL (Optional)",
+          type: "url",
+        }),
+        defineField({
+          name: "noIndex",
+          title: "No Index",
+          type: "boolean",
+          initialValue: false,
+        }),
+      ],
+      options: { collapsible: true, collapsed: true },
     }),
     defineField({
       name: "comments",

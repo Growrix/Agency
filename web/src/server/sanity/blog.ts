@@ -12,6 +12,9 @@ type SanityPortableTextBlock = {
   children?: SanityPortableTextChild[];
   language?: string;
   code?: string;
+  url?: string;
+  alt?: string;
+  caption?: string;
 };
 
 type SanityBlogPost = {
@@ -23,6 +26,13 @@ type SanityBlogPost = {
   coverImage?: {
     url?: string;
     alt?: string;
+  };
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    canonicalUrl?: string;
+    noIndex?: boolean;
+    ogImageUrl?: string;
   };
   author: {
     name: string;
@@ -43,26 +53,45 @@ type SanityBlogPost = {
   }>;
 };
 
-const SANITY_BLOG_POSTS_QUERY = `*[_type == "blogPost" && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc) {
+const SANITY_BLOG_POSTS_QUERY = `*[
+  _type == "blogPost" &&
+  defined(slug.current) &&
+  (!defined(scheduledPublishAt) || dateTime(scheduledPublishAt) <= now())
+] | order(coalesce(publishedAt, scheduledPublishAt, _createdAt) desc) {
   "slug": slug.current,
   title,
   excerpt,
-  "category": coalesce(category->title, category, "Field Notes"),
+  "category": coalesce(categoryRef->title, category->title, category, "Field Notes"),
   "tags": coalesce(tags, []),
   "coverImage": {
     "url": mainImage.asset->url,
     "alt": coalesce(mainImageAlt, title)
   },
-  "author": {
-    "name": coalesce(author->name, author.name, "Growrix OS"),
-    "role": coalesce(author->role, author.role, "Editorial Team"),
-    "bio": coalesce(author->bio, author.bio, ""),
-    "initials": coalesce(author->initials, author.initials, "GO")
+  "seo": {
+    "metaTitle": seo.metaTitle,
+    "metaDescription": seo.metaDescription,
+    "canonicalUrl": seo.canonicalUrl,
+    "noIndex": seo.noIndex,
+    "ogImageUrl": seo.ogImage.asset->url
   },
-  "publishedAt": string(coalesce(publishedAt, _createdAt))[0..9],
+  "author": {
+    "name": coalesce(authorRef->name, author->name, author.name, "Growrix OS"),
+    "role": coalesce(authorRef->role, author->role, author.role, "Editorial Team"),
+    "bio": coalesce(authorRef->bio, author->bio, author.bio, ""),
+    "initials": coalesce(authorRef->initials, author->initials, author.initials, "GO")
+  },
+  "publishedAt": string(coalesce(publishedAt, scheduledPublishAt, _createdAt))[0..9],
   "readMinutes": coalesce(readMinutes, 6),
   "accent": coalesce(accent, "from-indigo-500 to-violet-600"),
-  body,
+  "body": body[]{
+    ...,
+    _type == "image" => {
+      "_type": "image",
+      "url": asset->url,
+      "alt": coalesce(alt, title),
+      "caption": caption
+    }
+  },
   "comments": coalesce(comments, [])
 }`;
 
@@ -92,6 +121,23 @@ function toBlogBody(raw: SanityPortableTextBlock[] | undefined): BlogBodyBlock[]
     if (block._type === "code") {
       flushList();
       out.push({ type: "code", lang: block.language, code: block.code ?? "" });
+      continue;
+    }
+
+    if (block._type === "codeBlock") {
+      flushList();
+      out.push({ type: "code", lang: block.language, code: block.code ?? "" });
+      continue;
+    }
+
+    if (block._type === "image" && block.url) {
+      flushList();
+      out.push({
+        type: "image",
+        url: block.url,
+        alt: block.alt ?? "Blog image",
+        caption: block.caption,
+      });
       continue;
     }
 
@@ -176,6 +222,15 @@ function normalizePost(post: SanityBlogPost): BlogPost {
       bio: post.author.bio,
       initials: post.author.initials,
     },
+    seo: post.seo
+      ? {
+          metaTitle: post.seo.metaTitle,
+          metaDescription: post.seo.metaDescription,
+          canonicalUrl: post.seo.canonicalUrl,
+          noIndex: post.seo.noIndex,
+          ogImageUrl: post.seo.ogImageUrl,
+        }
+      : undefined,
     publishedAt: post.publishedAt,
     readMinutes: post.readMinutes,
     accent: post.accent,

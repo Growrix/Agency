@@ -28,9 +28,9 @@ import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
-  CLIENT_LOGOS,
   FEATURED_PRODUCTS,
   HOME_STATS,
+  HOME_STACK_MARQUEE,
   PORTFOLIO,
   PROCESS_STEPS,
   SERVICES,
@@ -82,128 +82,42 @@ export default async function Home() {
       {/* Hero */}
       <Section className="pt-12 sm:pt-16 lg:pt-20 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+        <div className="pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute right-12 top-24 h-40 w-40 rounded-full bg-secondary/20 blur-3xl" aria-hidden />
         <Container width="shell">
-          <div className="grid gap-12 lg:gap-16 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-7">
-              <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-                <Badge tone="primary" dot>Websites, SaaS, ready launches</Badge>
-              </div>
-              <h1
-                className="signal-rise mt-5 font-display text-[44px] sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance"
-                style={{ animationDelay: "90ms" }}
-              >
-                Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out
-              </h1>
-              <p
-                className="signal-rise mt-6 max-w-xl text-lg text-text-muted leading-7 text-pretty"
-                style={{ animationDelay: "180ms" }}
-              >
-                From premium websites and SaaS apps to mobile launch pages and ready sites-we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required.
-              </p>
-              <div
-                className="signal-rise mt-8 flex flex-wrap gap-3"
-                style={{ animationDelay: "270ms" }}
-              >
-                <LinkButton href="/book-appointment" size="lg">
-                  Book Appointment <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href="/portfolio" variant="outline" size="lg">
-                  Explore Portfolio
-                </LinkButton>
-              </div>
-              <p
-                className="signal-rise mt-6 font-mono text-xs uppercase tracking-wider text-text-muted"
-                style={{ animationDelay: "360ms" }}
-              >
-                Trusted by Tideline · Northcrest · Lumora · Glasswing · Helix
-              </p>
+          <div className="mx-auto max-w-5xl text-center">
+            <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+              <Badge tone="primary" dot>Websites, SaaS, ready launches</Badge>
             </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative signal-spring-in" style={{ animationDelay: "180ms" }}>
-                {/* Layered desktop mockup */}
-                <Card className="relative overflow-hidden p-0 shadow-(--shadow-3)">
-                  <div className="flex items-center gap-1.5 border-b border-border bg-inset/60 px-4 py-2.5">
-                    <span className="size-2.5 rounded-full bg-[#ff5f57]" />
-                    <span className="size-2.5 rounded-full bg-[#febc2e]" />
-                    <span className="size-2.5 rounded-full bg-[#28c840]" />
-                    <span className="ml-3 font-mono text-[11px] text-text-muted">tideline.health/dash</span>
-                  </div>
-                  <div className="bg-surface p-5">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-                          Activation
-                        </div>
-                        <div className="font-display text-3xl tracking-tight">+182%</div>
-                      </div>
-                      <Badge tone="success" dot>Live</Badge>
-                    </div>
-                    <div className="relative mt-4 h-32 overflow-hidden rounded-sm border border-border bg-linear-to-br from-primary/10 via-transparent to-secondary/10">
-                      <svg viewBox="0 0 320 120" className="absolute inset-0 h-full w-full">
-                        <defs>
-                          <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-                            <stop offset="0%" stopColor="#0F766E" stopOpacity="0.5" />
-                            <stop offset="100%" stopColor="#0F766E" stopOpacity="0" />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          d="M0,90 C40,85 60,70 90,72 C120,74 140,40 170,42 C200,44 220,18 260,16 C290,14 310,22 320,26 L320,120 L0,120 Z"
-                          fill="url(#g)"
-                        />
-                        <path
-                          d="M0,90 C40,85 60,70 90,72 C120,74 140,40 170,42 C200,44 220,18 260,16 C290,14 310,22 320,26"
-                          fill="none"
-                          stroke="#0F766E"
-                          strokeWidth="2"
-                          pathLength={1}
-                          className="signal-draw"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-4 grid grid-cols-3 gap-2">
-                      {["Onboard", "Activate", "Retain"].map((m, i) => (
-                        <div
-                          key={m}
-                          className="rounded-sm border border-border bg-inset/50 p-2.5"
-                        >
-                          <div className="font-mono text-[10px] uppercase text-text-muted">{m}</div>
-                          <div className="font-display text-base">{[92, 76, 84][i]}%</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Floating mobile mockup — spring-in slightly behind the dashboard */}
-                <div
-                  className="signal-spring-in absolute -bottom-6 left-0 sm:-left-6 hidden w-44 -rotate-3 sm:block"
-                  style={{ animationDelay: "420ms" }}
-                >
-                <Card className="overflow-hidden p-0 shadow-(--shadow-3)">
-                  <div className="bg-contrast p-4 text-contrast-text">
-                    <p className="font-mono text-[9px] uppercase tracking-wider text-white/50">Concierge</p>
-                    <p className="mt-2 font-display text-sm leading-tight">
-                      Want a SaaS scope estimate?
-                    </p>
-                    <div className="mt-3 space-y-1.5">
-                      {["Talk to AI", "Book a call", "WhatsApp"].map((b) => (
-                        <div key={b} className="rounded-md bg-white/10 px-2.5 py-1.5 text-[11px]">
-                          {b}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-                </div>
-
-                {/* Floating signal */}
-                <div className="signal-float absolute -top-4 right-0 sm:-right-4 flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 shadow-(--shadow-2)">
-                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-mono text-[11px] uppercase tracking-wider">Shipping daily</span>
-                </div>
-              </div>
+            <h1
+              className="signal-rise mt-5 font-display text-[42px] leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl"
+              style={{ animationDelay: "90ms" }}
+            >
+              Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out
+            </h1>
+            <p
+              className="signal-rise mx-auto mt-6 max-w-3xl text-lg leading-7 text-pretty text-text-muted"
+              style={{ animationDelay: "180ms" }}
+            >
+              From premium websites and SaaS apps to mobile launch pages and ready sites, we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required.
+            </p>
+            <div
+              className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
+              style={{ animationDelay: "270ms" }}
+            >
+              <LinkButton href="/book-appointment" size="lg">
+                Book Appointment <ArrowRightIcon className="size-4" />
+              </LinkButton>
+              <LinkButton href="/portfolio" variant="outline" size="lg">
+                Explore Portfolio
+              </LinkButton>
             </div>
+            <p
+              className="signal-rise mx-auto mt-6 max-w-2xl font-mono text-xs uppercase tracking-wider text-text-muted"
+              style={{ animationDelay: "360ms" }}
+            >
+              Next.js · React · TypeScript · Python · Django · Stripe · Supabase
+            </p>
           </div>
 
           <div className="mt-14">
@@ -292,7 +206,7 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <TrustStrip items={CLIENT_LOGOS} />
+      <TrustStrip items={HOME_STACK_MARQUEE} />
 
       {/* Shop Spotlight */}
       <Section>

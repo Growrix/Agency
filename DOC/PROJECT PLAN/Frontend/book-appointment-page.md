@@ -35,7 +35,7 @@ depends_on:
 
 ### 4. Calendar and Time Selection
 - Content: timezone-aware availability and alternate contact option.
-- Components: date picker, time slots, inline alerts.
+- Components: date picker, native time picker or time input, selected-slot preview, inline alerts.
 
 ### 5. Confirmation and Next Steps
 - Content: meeting summary, preparation guidance, WhatsApp fallback, confirmation email note.
@@ -51,7 +51,7 @@ depends_on:
 
 ## Responsive Adaptation
 - Mobile uses a progress-first step flow with sticky bottom continue action.
-- Calendar converts to list slots rather than a dense grid.
+- Calendar uses native mobile-friendly date and time controls rather than a long fixed slot dropdown.
 
 ## SEO and Metadata
 - Title: Book an Appointment | Discovery Call and Project Scoping.

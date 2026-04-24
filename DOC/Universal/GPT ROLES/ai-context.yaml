@@ -25,6 +25,15 @@ shared_invariants:
   - Server-authoritative flows, permissions, integrations, and state models must not be invented by the frontend role.
   - Enterprise docs must define loading, empty, success, error, recovery, and permission behavior where relevant.
   - Build plans should prefer vertical slices with complete contracts over disconnected silo plans.
+  - Testing and quality docs must define explicit pass/fail gates, including mobile, accessibility, performance, and security checks.
+
+quality_protocol:
+  file: DOC/Universal/Enterprise Level Guide/quality/enterprise-testing-and-quality-enforcement-v2.md
+  use_for:
+    - quality gate enforcement
+    - release readiness criteria
+    - test pipeline ordering
+    - failure handling protocol
 
 roles:
   fullstack_contract_orchestrator:
@@ -101,6 +110,7 @@ shared_output_requirements:
     - failure state handling
     - implementation sequence
     - testing expectation
+    - quality enforcement gate and completion criteria
 
 task_routing:
   choose_workflow:

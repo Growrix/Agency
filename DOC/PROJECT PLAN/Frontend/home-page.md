@@ -31,7 +31,7 @@ depends_on:
 - State requirements: default, scrolled, menu open, mobile drawer open.
 
 ### 3. Hero Statement and Proof Deck
-- Content: bold headline prioritizing premium websites, SaaS applications, mobile app launch experiences, and ready websites, plus supporting copy that keeps MCP servers and automation as secondary capabilities.
+- Content: bold headline prioritizing premium websites, SaaS applications, mobile app launch experiences, and ready websites, plus supporting copy that keeps MCP servers and automation as secondary capabilities and a compact stack line featuring core frameworks and delivery tooling.
 - Components: hero section, stat blocks, proof badges, media panel.
 - Interaction notes: subtle panel parallax and CTA hover; reduced-motion version keeps static layering.
 - Responsive notes: mobile stacks proof below CTA, keeps one visible media mockup plus swipe gallery.
@@ -72,7 +72,7 @@ depends_on:
 - Interaction notes: monthly and project toggle if needed.
 
 ### 11. Testimonial and Credibility Strip
-- Content: client logos, live Google review feed, shipping principles, tech stack badges.
+- Content: a stack-and-integrations marquee on the homepage, live Google review feed, shipping principles, and tech stack badges, while other proof surfaces can still use client-name marquees.
 - Components: marquee, Google review cards, leave-review CTA, badges.
 
 ### 12. Final Conversion Band

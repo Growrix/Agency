@@ -33,9 +33,23 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Article not found" };
+
+  const canonical = post.seo?.canonicalUrl ?? `https://www.growrixos.com/blog/${post.slug}`;
+
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.seo?.metaTitle ?? post.title,
+    description: post.seo?.metaDescription ?? post.excerpt,
+    alternates: {
+      canonical,
+    },
+    robots: post.seo?.noIndex ? { index: false, follow: false } : undefined,
+    openGraph: {
+      title: post.seo?.metaTitle ?? post.title,
+      description: post.seo?.metaDescription ?? post.excerpt,
+      type: "article",
+      url: canonical,
+      images: post.seo?.ogImageUrl ? [{ url: post.seo.ogImageUrl }] : undefined,
+    },
   };
 }
 

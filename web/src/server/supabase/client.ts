@@ -53,3 +53,10 @@ export function getSupabaseAuthClient() {
 
   return authClient;
 }
+
+export function resetSupabaseClientsForTests() {
+  if (process.env.NODE_ENV === "test") {
+    adminClient = null;
+    authClient = null;
+  }
+}

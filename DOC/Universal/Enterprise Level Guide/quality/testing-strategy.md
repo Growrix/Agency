@@ -4,6 +4,10 @@
 
 This document defines the end-to-end testing approach for Growrix OS. The platform includes sensitive workflows around roles, payments, queue ordering, delivery, files, and maintenance, so testing must protect business rules instead of only UI behavior.
 
+For the strict quality gate sequence used by AI and delivery workflows, also follow:
+
+- [enterprise-testing-and-quality-enforcement-v2.md](enterprise-testing-and-quality-enforcement-v2.md)
+
 ## Testing Principles
 
 - Test business-critical flows before convenience features.

@@ -27,14 +27,23 @@ function cloneDefaultDatabase(): DatabaseSchema {
     products: [...DEFAULT_DATABASE.products],
     analytics_events: [...DEFAULT_DATABASE.analytics_events],
     audit_logs: [...DEFAULT_DATABASE.audit_logs],
+    newsletter_subscribers: [...DEFAULT_DATABASE.newsletter_subscribers],
   };
 }
 
 export async function readDatabase(): Promise<DatabaseSchema> {
   if (isSupabaseDatabaseConfigured()) {
-    return readDatabaseFromSupabase();
+    try {
+      return await readDatabaseFromSupabase();
+    } catch {
+      return readDatabaseFromFile();
+    }
   }
 
+  return readDatabaseFromFile();
+}
+
+async function readDatabaseFromFile(): Promise<DatabaseSchema> {
   await ensureDataDirectory();
 
   try {
@@ -48,19 +57,27 @@ export async function readDatabase(): Promise<DatabaseSchema> {
 export async function writeDatabase(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
   if (isSupabaseDatabaseConfigured()) {
     writeQueue = writeQueue.then(async () => {
-      const current = await readDatabaseFromSupabase();
-      const next = await updater(current);
-      await writeDatabaseToSupabase(next);
+      try {
+        const current = await readDatabaseFromSupabase();
+        const next = await updater(current);
+        await writeDatabaseToSupabase(next);
+      } catch {
+        await writeDatabaseToFile(updater);
+      }
     });
 
     await writeQueue;
     return;
   }
 
+  await writeDatabaseToFile(updater);
+}
+
+async function writeDatabaseToFile(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
   await ensureDataDirectory();
 
   writeQueue = writeQueue.then(async () => {
-    const current = await readDatabase();
+    const current = await readDatabaseFromFile();
     const next = await updater(current);
     await writeFile(DATABASE_PATH, JSON.stringify(next, null, 2), "utf8");
   });

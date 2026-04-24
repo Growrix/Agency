@@ -38,7 +38,7 @@ export function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface pb-[max(env(safe-area-inset-bottom),_8px)] backdrop-blur-md lg:hidden"
       aria-label="Primary mobile navigation"
     >
       <ul className="grid grid-cols-5">
@@ -54,8 +54,8 @@ export function MobileBottomNav() {
                   type="button"
                   onClick={() => openConcierge()}
                   className={cn(
-                    "flex w-full flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
-                    isActive ? "text-primary" : "text-text-muted"
+                    "flex w-full flex-col items-center justify-center gap-1 py-3 text-[11px] font-medium",
+                    isActive ? "text-primary" : "text-text"
                   )}
                 >
                   <Icon className="size-5" aria-hidden />
@@ -65,8 +65,8 @@ export function MobileBottomNav() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium",
-                    isActive ? "text-primary" : "text-text-muted"
+                    "flex flex-col items-center justify-center gap-1 py-3 text-[11px] font-medium",
+                    isActive ? "text-primary" : "text-text"
                   )}
                 >
                   <Icon className="size-5" aria-hidden />

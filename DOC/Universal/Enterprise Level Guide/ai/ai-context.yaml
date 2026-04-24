@@ -58,6 +58,27 @@ core_invariants:
   - Entitlements, quotas, rollout controls, and abuse protections are operational controls, not frontend-only concerns.
   - Do not introduce undocumented lifecycle states, routes, or cross-domain coupling.
 
+quality_enforcement:
+  protocol_doc: DOC/Universal/Enterprise Level Guide/quality/enterprise-testing-and-quality-enforcement-v2.md
+  completion_rule: all-required-quality-checks-must-pass
+  mandatory_pipeline:
+    - static_validation
+    - unit_testing
+    - integration_testing
+    - ui_testing
+    - responsive_mobile_testing
+    - end_to_end_testing
+    - seo_validation
+    - accessibility_validation
+    - performance_validation
+    - security_validation
+    - regression_testing
+  failure_protocol:
+    - stop
+    - debug
+    - fix
+    - rerun_full_pipeline
+
 surfaces:
   public:
     routes:
@@ -296,6 +317,7 @@ read_paths:
     - DOC/Universal/Enterprise Level Guide/backend/backend-observability-and-reliability.md
   release_or_ops_change:
     - DOC/Universal/Enterprise Level Guide/ai/ai-context.yaml
+    - DOC/Universal/Enterprise Level Guide/quality/enterprise-testing-and-quality-enforcement-v2.md
     - DOC/Universal/Enterprise Level Guide/quality/qa-and-release-gates.md
     - DOC/Universal/Enterprise Level Guide/process/deployment-and-environments.md
     - DOC/Universal/Enterprise Level Guide/process/incident-response.md
@@ -368,9 +390,16 @@ ai_output_expectations:
     - update tests for critical logic
     - preserve module boundaries
     - state assumptions explicitly when requirements are incomplete
+  completion_discipline:
+    - confirm zero-gate pass before declaring done
+    - commit locally with a clear message
+    - never push or merge without explicit instruction
+    - output must include what changed, docs updated, validations run, commit hash, and remaining risks
+  reference_doc: DOC/Universal/Enterprise Level Guide/ai/ai-collaboration-playbook.md
 
 index:
   docs_index: DOC/Universal/Enterprise Level Guide/README.md
   workspace_instructions: .github/copilot-instructions.md
   ai_playbook: DOC/Universal/Enterprise Level Guide/ai/ai-collaboration-playbook.md
   frontend_design_system_rules: DOC/Universal/Enterprise Level Guide/frontend/frontend-rules-and-design-system.md
+  quality_enforcement_protocol: DOC/Universal/Enterprise Level Guide/quality/enterprise-testing-and-quality-enforcement-v2.md

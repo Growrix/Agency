@@ -4,6 +4,10 @@
 
 This document defines what must be true before Growrix OS changes are promoted across environments.
 
+For strict enterprise execution workflow and mandatory cross-discipline validation order, follow:
+
+- [enterprise-testing-and-quality-enforcement-v2.md](enterprise-testing-and-quality-enforcement-v2.md)
+
 ## Release Philosophy
 
 - The system should ship in small, verifiable increments.

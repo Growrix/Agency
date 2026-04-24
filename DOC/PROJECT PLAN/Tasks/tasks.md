@@ -57,6 +57,26 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - replaced the admin sidebar with a fixed-on-desktop layout using shared CSS offset/width settings so the sidebar no longer scrolls with page content, and simplified the sidebar heading copy to "Admin Dashboard" only
+  - refined sticky sidebar behavior by aligning admin section top spacing with a shared sidebar offset setting so sticky engages immediately and no initial sidebar/page co-scroll phase is visible
+  - identified a sticky gating bug where sidebar stickiness was restricted to `lg:` breakpoints, causing non-sticky behavior on smaller effective viewport widths (including zoomed desktop); fixed by applying sticky classes without breakpoint gating
+  - identified the sticky-sidebar root cause as sticky classes attached to the transform-enabled Card primitive (`will-change-transform`), and corrected by moving sticky positioning back to a plain aside wrapper
+  - corrected the admin sticky-sidebar implementation by applying sticky positioning to the sidebar card itself (not just the wrapper) to avoid grid-flow release behavior during deep catalog scrolling
+  - fixed a sticky-sidebar regression in admin routes by removing internal sidebar overflow scrolling so the sidebar remains fixed while page content scrolls
+  - hardened admin sidebar stickiness for desktop route pages by using a grid items-start layout and viewport-bounded sticky sidebar behavior
+  - made the admin dashboard sidebar sticky across the admin route pages and adjusted related E2E coverage to align with current contact, booking, checkout, and accessibility behaviors
+  - converted the admin sidebar from single-page anchor scrolling to route-based navigation so overview, activity, catalog management, and pipeline now open as dedicated admin dashboard routes
+  - merged Growrix Strict Executor rules into universal docs: strict 8-step execution workflow, tool discipline, zero-gate pass rule, local commit discipline, design-system-first and mobile-first frontend constraints, and standardised output format are now reflected in ai-collaboration-playbook.md, development-standards.md, and contribution-guide.md with machine-readable routing updated in ai-context.yaml
+  - added a universal Enterprise Testing and Quality Enforcement (v2) protocol document and wired it into universal handbook indexes plus machine-readable ai-context routing for release and QA work
+  - fixed admin login 500 failures caused by Supabase `app_state` read/write errors by adding graceful fallback to local file-backed persistence in the shared data store
+  - replaced the booking page's fixed slot dropdown with native date and time controls so appointment requests are chosen from calendar-style inputs instead of a prebuilt list
+  - updated the homepage hero proof line and animated marquee to feature framework, language, infrastructure, and integration names instead of the previous client-name text
+  - fixed a mobile concierge runtime crash by replacing direct client `crypto.randomUUID()` calls with a browser-safe message ID fallback for older or restricted mobile environments
+  - fixed mobile LAN dev access for the AI concierge by replacing the stale hardcoded Next.js dev origin IP with dynamic local IPv4 detection and development websocket allowance
+  - fixed a mobile concierge regression by restoring popup overlay stacking above the fixed bottom dock so the chat opens visibly from the mobile chat shortcut
+  - restored mobile footer bottom-safe spacing so the copyright strip clears the fixed dock instead of being hidden behind it
+  - converted the homepage hero from a two-column composition to a centered single-column layout and removed the legacy mockup/image column so the hero aligns with topbar/header rhythm
+  - redesigned the admin workspace into a sidebar-driven dashboard layout and removed public-site chrome from `/admin` routes so operators get a dedicated back-to-site control inside the dashboard
   - improved the popup-first AI concierge mobile experience so the modal now behaves like a phone-first single-column chat sheet with no desktop escalation rail, a stacked composer, and a consistently visible send action on small screens
   - fixed concierge suggested-action navigation so WhatsApp, booking, contact, and other routed suggestions now close the popup immediately and reveal the destination without requiring manual chat close
   - improved the blog detail route so the slug page now collapses share and navigation utilities cleanly, adds generated on-page navigation, and keeps long-form reading and comments readable across mobile breakpoints
@@ -208,17 +228,34 @@ phases:
 - The shop browsing and product preview experience exists in code.
 - The AI concierge route now renders a real chat UI and the site includes a first server-backed `/api/v1/ai-concierge` endpoint grounded in current website content only.
 - The AI concierge answer pipeline now correctly treats model success replies as grounded answers and preserves live page context for popup and route-based chat requests.
-- The mobile AI concierge popup now uses a cleaner app-style sheet layout, hides the mobile dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
+- The client concierge now uses a browser-safe local message ID fallback so starter prompts and manual sends do not crash on mobile browsers that lack `crypto.randomUUID()`.
+- The homepage hero proof line and marquee now foreground stack, language, infrastructure, and integration names such as Next.js, React, Python, Django, Supabase, Stripe, and OpenAI instead of repeating client names.
+- The booking surface now uses native date and time controls with a selected-slot preview instead of a fixed generated slot dropdown, while still submitting the same `preferred_datetime` API contract.
+- Auth and related server flows now gracefully fall back to local file-backed persistence when Supabase `app_state` reads/writes fail, avoiding hard 500 errors during admin sign-in.
+- The mobile AI concierge popup now uses a cleaner app-style sheet layout, stacks above the fixed mobile dock, hides that dock while open, removes the desktop escalation rail on small screens, and keeps prompts, messages, and the send action responsive without route-specific hardcoding.
+- The Next.js development config now auto-allows active local IPv4 origins and development websocket connections so mobile devices on the same LAN receive hydrated interactive behavior instead of dead chat triggers.
+- The mobile footer now preserves enough bottom-safe spacing for the copyright strip to remain visible above the fixed dock.
 - The blog detail surface now derives on-page navigation from article headings, uses a cleaner one-column mobile reading flow, and shares improved article, share-rail, and comment responsiveness across slugs.
 - Blog routes now support Sanity CMS as an optional primary source, with automatic fallback to local static blog content when Sanity is not configured or unavailable.
 - The contact form now persists inquiries through `/api/v1/contact`, records analytics/audit events, and exposes protected admin visibility.
 - The booking route now persists real appointment requests through `/api/v1/appointments` instead of showing a placeholder.
 - The checkout route now creates persisted orders and hands off to Stripe when configured, with a webhook endpoint and fallback manual delivery summary.
 - Seeded admin auth, protected `/admin` routes, and `/api/v1/me` plus `/api/v1/admin/**` reads now exist behind JWT cookie sessions.
+- Admin sidebar navigation now uses route-based pages (`/admin`, `/admin/activity`, `/admin/catalog`, `/admin/pipeline`) instead of in-page anchor jumps.
+- Admin dashboard sidebar now remains sticky while scrolling, and the full Playwright E2E suite is passing after updating booking date/time, checkout fallback/redirect handling, and accessibility smoke-test stability.
+- Admin sidebar sticky behavior is now hardened for long admin pages with viewport-bounded sticky positioning and independent sidebar overflow handling on desktop.
+- Admin sidebar no longer uses internal scrolling; sticky behavior now keeps the whole sidebar fixed while users scroll page content in long admin views.
+- Sticky behavior is now attached to the actual sidebar panel element, preventing wrapper-level layout interactions from causing the sidebar to drift during long-page scroll.
+- Sticky behavior is now anchored to a non-transform aside wrapper so Card animation/transform styles do not interfere with sticky positioning.
+- Sticky behavior now applies at all viewport sizes for admin pages (`sticky top-4 self-start h-fit`), removing breakpoint-gated failures.
+- Admin sticky offset is now controlled via a shared CSS variable and used consistently for both section top spacing and sticky top positioning, preventing apparent co-scrolling before sticky lock engages.
+- Admin sidebar now uses a deterministic fixed desktop layout with configuration variables (`--admin-sidebar-top`, `--admin-sidebar-width`) so page content scroll never moves the sidebar panel.
 - Supabase-backed auth and persistence adapters now exist and can be enabled by environment configuration without changing route contracts.
 - Local API integration tests now cover contact, booking, checkout, and concierge persistence flows.
 - Local build and lint entrypoints exist through the root and `web/` package scripts.
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
+- Universal handbook quality guidance now includes a dedicated Enterprise Testing and Quality Enforcement (v2) protocol, referenced by both human indexes and machine-readable ai-context files.
+- The universal AI collaboration playbook, development standards, and contribution guide now reflect the strict execution workflow (doc-first, zero-gate pass, local commit discipline, design-system-first mobile frontend rules, and standardised output format).
 
 ## What Is Next To Build
 1. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
