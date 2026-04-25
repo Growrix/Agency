@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FOOTER_NAV } from "@/lib/nav";
 import { Container } from "@/components/primitives/Container";
@@ -9,10 +10,14 @@ export function Footer() {
         <div className="grid gap-10 py-16 lg:grid-cols-6">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <span className="size-8 rounded-[10px] bg-primary text-surface inline-flex items-center justify-center font-display font-bold">
-                G
-              </span>
-              <span className="font-display text-lg tracking-tight">Growrix OS</span>
+              <Image
+                src="/website logo main.svg"
+                alt="Growrix logo"
+                width={140}
+                height={36}
+                unoptimized
+                className="h-8 w-auto object-contain"
+              />
             </Link>
             <p className="mt-4 max-w-sm text-text-muted leading-7">
               A product-minded studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.
