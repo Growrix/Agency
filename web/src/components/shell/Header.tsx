@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -43,11 +44,14 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-shell items-center gap-2 px-4 sm:px-8 lg:h-18 lg:gap-6 lg:px-12">
         <Link href="/" className="group flex min-w-0 flex-1 items-center gap-2.5 lg:flex-none lg:shrink-0">
-          <span className="signal-logo-pulse relative inline-flex size-8 items-center justify-center rounded-[10px] bg-primary text-surface transition-transform duration-300 ease-signal group-hover:scale-105">
-            <span className="absolute inset-0 rounded-[10px] bg-secondary/40 mix-blend-multiply" aria-hidden />
-            <span className="relative font-display font-bold">G</span>
-          </span>
-          <span className="truncate font-display text-base tracking-tight sm:text-lg">Growrix OS</span>
+          <Image
+            src="/growrixos Main Logo.png"
+            alt="Growrix logo"
+            width={180}
+            height={44}
+            priority
+            className="h-8 w-auto object-contain sm:h-9"
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-4">
