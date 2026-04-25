@@ -57,6 +57,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - rebuilt the admin dashboard shell into a strict two-row app layout so the transparent header and sidebar never overlap, added reusable dashboard header controls (theme toggle reuse + notification/profile popovers), and anchored utility actions (including logout) to the sidebar bottom
+  - introduced a reusable dashboard shell component with collapsible sidebar behavior, responsive mobile drawer navigation, and shared dashboard layout tokens, then refactored admin routes to run inside that shell for future multi-tenant reuse
   - replaced the admin sidebar with a fixed-on-desktop layout using shared CSS offset/width settings so the sidebar no longer scrolls with page content, and simplified the sidebar heading copy to "Admin Dashboard" only
   - refined sticky sidebar behavior by aligning admin section top spacing with a shared sidebar offset setting so sticky engages immediately and no initial sidebar/page co-scroll phase is visible
   - identified a sticky gating bug where sidebar stickiness was restricted to `lg:` breakpoints, causing non-sticky behavior on smaller effective viewport widths (including zoomed desktop); fixed by applying sticky classes without breakpoint gating
