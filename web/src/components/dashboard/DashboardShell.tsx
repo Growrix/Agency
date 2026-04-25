@@ -35,25 +35,7 @@ export function DashboardShell({
     : "lg:grid-cols-[var(--dashboard-sidebar-expanded)_minmax(0,1fr)]";
 
   return (
-    <div className={cn("grid h-screen min-h-0 overflow-hidden bg-background grid-rows-[var(--dashboard-header-height)_minmax(0,1fr)] lg:grid-rows-[auto]", sidebarWidthClass)}>
-      <header className="z-30 border-b border-border/40 bg-surface/35 backdrop-blur-md lg:col-start-2 lg:row-start-1">
-        <div className="flex h-(--dashboard-header-height) items-center justify-between px-4 sm:px-5">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              className="lg:hidden"
-              onClick={() => setMobileSidebarOpen(true)}
-              aria-label="Open navigation"
-            >
-              <Bars3Icon className="h-5 w-5" />
-            </Button>
-            <h1 className="font-display text-base font-semibold tracking-tight text-text sm:text-lg">{title}</h1>
-          </div>
-          <DashboardHeaderControls />
-        </div>
-      </header>
+    <div className={cn("h-screen min-h-0 overflow-hidden bg-background lg:grid", sidebarWidthClass)}>
 
       <div
         className={cn(
@@ -66,7 +48,7 @@ export function DashboardShell({
 
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-border/40 bg-surface/92 backdrop-blur-md transition-transform duration-200 lg:static lg:col-start-1 lg:row-start-1 lg:h-screen lg:w-auto lg:backdrop-blur-0",
+          "fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-border/40 bg-surface/92 backdrop-blur-md transition-transform duration-200 lg:static lg:h-screen lg:w-auto lg:backdrop-blur-0",
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
@@ -133,9 +115,30 @@ export function DashboardShell({
         )}
       </aside>
 
-      <main className="min-h-0 overflow-y-auto lg:col-start-2 lg:row-start-1 lg:mt-(--dashboard-header-height)">
-        <div className="h-full w-full">{children}</div>
-      </main>
+      <div className="relative z-0 flex h-screen min-h-0 flex-col bg-background lg:h-screen">
+        <header className="z-30 border-b border-border/40 bg-surface/85 backdrop-blur-md">
+          <div className="flex h-(--dashboard-header-height) items-center justify-between px-4 sm:px-5">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="lg:hidden"
+                onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open navigation"
+              >
+                <Bars3Icon className="h-5 w-5" />
+              </Button>
+              <h1 className="font-display text-base font-semibold tracking-tight text-text sm:text-lg">{title}</h1>
+            </div>
+            <DashboardHeaderControls />
+          </div>
+        </header>
+
+        <main className="min-h-0 flex-1 overflow-y-auto bg-background">
+          <div className="h-full w-full">{children}</div>
+        </main>
+      </div>
     </div>
   );
 }
