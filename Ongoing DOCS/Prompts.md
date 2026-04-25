@@ -81,3 +81,8 @@ supabase link --project-ref okzrczymtlkaaxlvjnyh
 ###strickt rues for AI execution :
 - Understand the above tasks and the project focus areas clearly before starting any execution. Always refer to the project plan and documentation for guidance on what needs to be done.
 - read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , and update the documentations if it doenst match the current codebase implimentations. and then start execution as per planned. make sure to run test and 0 gate pass validations before considering any implementation complete. Finally commit the changes but do not push or merge any code, only commit. 
+
+
+
+in the hero section , I need different content in this counter.  As a new company I do not have such lauches good numbers that is good to show, Years in motion 
+
