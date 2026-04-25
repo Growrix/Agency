@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Bars3Icon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -54,10 +55,25 @@ export function DashboardShell({
       >
         <div className="flex h-(--dashboard-header-height) items-center justify-between border-b border-border/40 px-4">
           <div className="flex min-w-0 items-center gap-2.5">
-            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
-              GX
-            </span>
-            {!collapsed && <span className="truncate text-sm font-semibold text-text">Growrix</span>}
+            {collapsed ? (
+              <Image
+                src="/website logo main.svg"
+                alt="Growrix logo"
+                width={32}
+                height={32}
+                unoptimized
+                className="h-8 w-8 object-contain"
+              />
+            ) : (
+              <Image
+                src="/website logo main.svg"
+                alt="Growrix logo"
+                width={120}
+                height={32}
+                unoptimized
+                className="h-7 w-auto object-contain"
+              />
+            )}
           </div>
           <div className="flex items-center gap-1">
             <Button

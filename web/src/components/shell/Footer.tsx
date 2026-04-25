@@ -11,7 +11,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="/website logo 01-01.svg"
+                src="/website logo main.svg"
                 alt="Growrix logo"
                 width={140}
                 height={36}

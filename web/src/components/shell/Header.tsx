@@ -45,7 +45,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-shell items-center gap-2 px-4 sm:px-8 lg:h-18 lg:gap-6 lg:px-12">
         <Link href="/" className="group flex min-w-0 flex-1 items-center gap-2.5 lg:flex-none lg:shrink-0">
           <Image
-            src="/website logo 01-01.svg"
+            src="/website logo main.svg"
             alt="Growrix logo"
             width={180}
             height={44}
