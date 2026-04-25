@@ -30,11 +30,13 @@ export function DashboardShell({
 }: DashboardShellProps) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const sidebarWidthClass = collapsed ? "lg:grid-cols-[var(--dashboard-sidebar-collapsed)_minmax(0,1fr)]" : "lg:grid-cols-[var(--dashboard-sidebar-expanded)_minmax(0,1fr)]";
+  const sidebarWidthClass = collapsed
+    ? "lg:grid-cols-[var(--dashboard-sidebar-collapsed)_minmax(0,1fr)]"
+    : "lg:grid-cols-[var(--dashboard-sidebar-expanded)_minmax(0,1fr)]";
 
   return (
-    <div className="grid h-screen grid-rows-[var(--dashboard-header-height)_minmax(0,1fr)] overflow-hidden bg-background">
-      <header className="z-30 border-b border-border/40 bg-surface/35 backdrop-blur-md">
+    <div className={cn("grid h-screen min-h-0 overflow-hidden bg-background grid-rows-[var(--dashboard-header-height)_minmax(0,1fr)] lg:grid-rows-[auto]", sidebarWidthClass)}>
+      <header className="z-30 border-b border-border/40 bg-surface/35 backdrop-blur-md lg:col-start-2 lg:row-start-1">
         <div className="flex h-(--dashboard-header-height) items-center justify-between px-4 sm:px-5">
           <div className="flex items-center gap-2 sm:gap-3">
             <Button
@@ -53,89 +55,87 @@ export function DashboardShell({
         </div>
       </header>
 
-      <div className={cn("relative min-h-0 lg:grid", sidebarWidthClass)}>
-        <div
-          className={cn(
-            "fixed inset-0 z-20 bg-overlay/50 transition-opacity lg:hidden",
-            mobileSidebarOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-          )}
-          onClick={() => setMobileSidebarOpen(false)}
-          aria-hidden
-        />
+      <div
+        className={cn(
+          "fixed inset-0 z-20 bg-overlay/50 transition-opacity lg:hidden",
+          mobileSidebarOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        )}
+        onClick={() => setMobileSidebarOpen(false)}
+        aria-hidden
+      />
 
-        <aside
-          className={cn(
-            "fixed left-0 top-(--dashboard-header-height) z-40 flex h-[calc(100dvh-var(--dashboard-header-height))] w-(--dashboard-sidebar-expanded) flex-col border-r border-border/40 bg-surface/92 backdrop-blur-md transition-transform duration-200 lg:static lg:top-auto lg:z-auto lg:h-auto lg:w-auto lg:backdrop-blur-0",
-            mobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-          )}
-        >
-          <div className="flex h-16 items-center justify-between border-b border-border/40 px-4">
-            <div className="flex min-w-0 items-center gap-2.5">
-              <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
-                GX
-              </span>
-              {!collapsed && <span className="truncate text-sm font-semibold text-text">Growrix</span>}
-            </div>
-            <div className="flex items-center gap-1">
-              <Button
-                type="button"
-                size="sm"
-                variant="ghost"
-                onClick={() => setCollapsed((v) => !v)}
-                className="hidden lg:inline-flex"
-                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-              >
-                {collapsed ? <ChevronDoubleRightIcon className="h-4 w-4" /> : <ChevronDoubleLeftIcon className="h-4 w-4" />}
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="ghost"
-                className="lg:hidden"
-                onClick={() => setMobileSidebarOpen(false)}
-                aria-label="Close navigation"
-              >
-                <XMarkIcon className="h-4 w-4" />
-              </Button>
-            </div>
+      <aside
+        className={cn(
+          "fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-border/40 bg-surface/92 backdrop-blur-md transition-transform duration-200 lg:static lg:col-start-1 lg:row-start-1 lg:h-screen lg:w-auto lg:backdrop-blur-0",
+          mobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        )}
+      >
+        <div className="flex h-(--dashboard-header-height) items-center justify-between border-b border-border/40 px-4">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/12 text-xs font-semibold text-primary">
+              GX
+            </span>
+            {!collapsed && <span className="truncate text-sm font-semibold text-text">Growrix</span>}
           </div>
+          <div className="flex items-center gap-1">
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              onClick={() => setCollapsed((v) => !v)}
+              className="hidden lg:inline-flex"
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            >
+              {collapsed ? <ChevronDoubleRightIcon className="h-4 w-4" /> : <ChevronDoubleLeftIcon className="h-4 w-4" />}
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className="lg:hidden"
+              onClick={() => setMobileSidebarOpen(false)}
+              aria-label="Close navigation"
+            >
+              <XMarkIcon className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
 
-          <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-3">
-            {navItems.map((item) => {
-              const active = item.href === currentPath;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileSidebarOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 rounded-md border px-3 py-2.5 text-sm transition-all whitespace-nowrap",
-                    active
-                      ? "border-border-strong bg-inset/60 text-text"
-                      : "border-border/40 text-text-muted hover:border-border-strong hover:text-text",
-                    collapsed && "justify-center px-2"
-                  )}
-                >
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary shrink-0">
-                    {item.icon ?? <span className="text-xs font-semibold">{item.label.slice(0, 1)}</span>}
-                  </span>
-                  {!collapsed && <span>{item.label}</span>}
-                </Link>
-              );
-            })}
-          </nav>
+        <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-3">
+          {navItems.map((item) => {
+            const active = item.href === currentPath;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileSidebarOpen(false)}
+                className={cn(
+                  "flex items-center gap-3 rounded-md border px-3 py-2.5 text-sm transition-all whitespace-nowrap",
+                  active
+                    ? "border-border-strong bg-inset/60 text-text"
+                    : "border-border/40 text-text-muted hover:border-border-strong hover:text-text",
+                  collapsed && "justify-center px-2"
+                )}
+              >
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary shrink-0">
+                  {item.icon ?? <span className="text-xs font-semibold">{item.label.slice(0, 1)}</span>}
+                </span>
+                {!collapsed && <span>{item.label}</span>}
+              </Link>
+            );
+          })}
+        </nav>
 
-          {utilityActions && (
-            <div className="mt-auto space-y-2 border-t border-border/40 p-2">
-              {utilityActions}
-            </div>
-          )}
-        </aside>
+        {utilityActions && (
+          <div className="mt-auto space-y-2 border-t border-border/40 p-2">
+            {utilityActions}
+          </div>
+        )}
+      </aside>
 
-        <main className="min-h-0 overflow-y-auto">
-          <div className="h-full w-full">{children}</div>
-        </main>
-      </div>
+      <main className="min-h-0 overflow-y-auto lg:col-start-2 lg:row-start-1 lg:mt-(--dashboard-header-height)">
+        <div className="h-full w-full">{children}</div>
+      </main>
     </div>
   );
 }
