@@ -45,6 +45,10 @@ const SERVICE_ICONS = {
   automation: BoltIcon,
 } as const;
 
+// Temporary kill switch: keep Google reviews code in place but hidden from UI
+// until Place ID / API configuration is stable again.
+const SHOW_GOOGLE_REVIEWS = false;
+
 const HOME_TIERS: Tier[] = [
   {
     name: "Template Packs",
@@ -339,15 +343,17 @@ export default async function Home() {
       </Section>
 
       {/* Testimonials */}
-      <Section>
-        <Container>
-          <GoogleReviews
-            eyebrow="Voices"
-            title="Teams we've shipped with."
-            description="Live Google reviews from the public Growrix OS business profile."
-          />
-        </Container>
-      </Section>
+      {SHOW_GOOGLE_REVIEWS && (
+        <Section>
+          <Container>
+            <GoogleReviews
+              eyebrow="Voices"
+              title="Teams we've shipped with."
+              description="Live Google reviews from the public Growrix OS business profile."
+            />
+          </Container>
+        </Section>
+      )}
 
       {/* Field notes (Blog) */}
       <Section tone="inset">
