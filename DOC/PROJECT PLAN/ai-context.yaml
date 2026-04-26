@@ -125,6 +125,14 @@ project_docs:
       - test strategy
       - release gates
       - end-to-end validation
+  admin_dashboard:
+    ai_entry: DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Admin Dashboard/README.md
+    use_for:
+      - admin operations planning
+      - dashboard module boundaries
+      - shop and portfolio management workflows
+      - submissions inbox planning
 
 read_paths:
   understand_project:
@@ -146,6 +154,7 @@ read_paths:
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Backend/ai-context.yaml
     - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/tasks.md
   harden_security:
     - DOC/PROJECT PLAN/ai-context.yaml

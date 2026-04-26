@@ -53,6 +53,17 @@ read_paths:
     - DOC/PROJECT PLAN/Tasks/tasks.md
     - DOC/PROJECT PLAN/Backend/ai-context.yaml
     - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+  continue_admin_dashboard:
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/README.md
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    - DOC/PROJECT PLAN/QA/ai-context.yaml
   continue_release:
     - DOC/PROJECT PLAN/Tasks/tasks.md
     - DOC/PROJECT PLAN/Security/ai-context.yaml
