@@ -93,10 +93,10 @@ export const TESTIMONIALS = [
 ];
 
 export const HOME_STATS = [
-  { value: "47", label: "Launches shipped", hint: "Websites, SaaS, ready websites" },
-  { value: "6", label: "Years in motion", hint: "Independent studio" },
-  { value: "$18M+", label: "Client funding raised", hint: "Post-launch" },
-  { value: "98", label: "NPS", hint: "Trailing 12 months" },
+  { value: "12", label: "Launches shipped", hint: "Websites, SaaS, ready websites" },
+  { value: "2", label: "Years in motion", hint: "Independent studio" },
+  { value: "4", label: "Core services", hint: "Websites, SaaS, MCP, automation" },
+  { value: "4", label: "Delivery phases", hint: "Discovery to optimization" },
 ];
 
 export const CLIENT_LOGOS = [
