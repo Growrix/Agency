@@ -1,0 +1,78 @@
+version: 1
+project:
+  name: Agency SaaS Website - Admin Dashboard Expansion
+  type: admin operations planning and execution routing
+  summary: >-
+    Contract-first planning layer for rebuilding the admin dashboard into a
+    usable operations console for shop management, portfolio management,
+    newsletter subscriptions, contact inquiries, and booking submissions.
+  status: planning-ready
+  canonical_docs_root: DOC/PROJECT PLAN/Admin Dashboard/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/Admin Dashboard/README.md
+
+prompt_contract:
+  always_reference_first:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+  minimum_instruction: >-
+    Start with DOC/PROJECT PLAN/ai-context.yaml, then Shared Contracts,
+    then this admin dashboard context. Keep admin scope aligned with existing
+    role model and API contracts before proposing frontend/backend changes.
+
+core_invariants:
+  - Admin dashboard is server-authoritative; frontend never decides source-of-truth states.
+  - All admin mutations must be authenticated, authorized, and audited.
+  - Catalog operations must support draft and publish lifecycle states.
+  - Submission operations (newsletter, inquiry, booking) must have explicit status workflows.
+  - Shop and portfolio operations must be manageable without raw JSON editing.
+  - New admin planning must not break existing public routes or API compatibility.
+
+scope:
+  includes:
+    - shop management end-to-end
+    - portfolio management end-to-end
+    - newsletter subscriber records operations
+    - contact inquiry operations
+    - booking submission operations
+    - admin role and policy hardening for these surfaces
+  excludes:
+    - public-site redesign unrelated to admin operations
+    - replacing payment provider or checkout architecture
+    - replatforming infrastructure outside current release blockers
+
+phase_alignment:
+  tracker_phase: P7-admin-dashboard-e2e-expansion
+  tracker_tasks:
+    - T034
+    - T035
+    - T036
+    - T037
+    - T038
+
+read_paths:
+  baseline_and_contracts:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+  admin_frontend_planning:
+    - DOC/PROJECT PLAN/Admin Dashboard/README.md
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+  admin_backend_planning:
+    - DOC/PROJECT PLAN/Admin Dashboard/README.md
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+  admin_security_release:
+    - DOC/PROJECT PLAN/Admin Dashboard/README.md
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    - DOC/PROJECT PLAN/QA/ai-context.yaml
+
+success_criteria:
+  - Dedicated admin docs exist and are linked from project root docs.
+  - Admin module architecture covers Shop, Portfolio, and Submissions inbox.
+  - Backend contracts define CRUD plus workflow transitions and audit events.
+  - QA gates are explicit for unit, integration, e2e, accessibility, security, and regression.

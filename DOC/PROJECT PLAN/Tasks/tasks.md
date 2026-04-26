@@ -31,21 +31,22 @@ phase_sequence:
   - P4-security-hardening
   - P5-devops-release-readiness
   - P6-qa-release-gates
-next_recommended_phase: P5-devops-release-readiness
+  - P7-admin-dashboard-e2e-expansion
+next_recommended_phase: P7-admin-dashboard-e2e-expansion
 next_recommended_tasks:
-  - T027
-  - T028
-  - T019
+  - T034
+  - T035
+  - T036
 phase_status_counts:
   done: 4
   partial: 3
   blocked: 0
-  not_started: 0
+  not_started: 1
 task_status_counts:
   done: 26
   partial: 6
   blocked: 0
-  not_started: 1
+  not_started: 6
 ---
 
 # Tasks / Execution Tracker
@@ -127,6 +128,9 @@ phases:
   - id: P6
     name: QA Release Gates
     status: done
+  - id: P7
+    name: Admin Dashboard E2E Expansion
+    status: not_started
 ```
 
 ## Phase Overview
@@ -139,6 +143,7 @@ phases:
 | P4 | partial | JWT admin auth, proxy-based protection, request validation, audit logging, and in-memory abuse controls now exist, but broader RBAC and production-grade security hardening remain incomplete. |
 | P5 | partial | Runtime hardening headers, health/readiness probes, and client error capture hooks now exist; infrastructure-as-code and external monitoring stack are still pending. |
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
+| P7 | not_started | Fresh admin dashboard expansion for production-grade content operations, including shop and portfolio management plus submissions inbox workflows. |
 
 ## Tasks By Phase
 
@@ -223,6 +228,13 @@ phases:
 - [x] T032 Add accessibility, performance, and security validation automation before release.
 - [x] T033 Run full release-gate validation against the QA, Security, and DevOps documents and record the outcome in this tracker.
 
+### Phase P7 — Admin Dashboard E2E Expansion (Fresh)
+- [ ] T034 Define fresh admin information architecture, module boundaries, and route map for Shop Management, Portfolio Management, and Submissions Inbox surfaces.
+- [ ] T035 Implement production-grade backend contracts for shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
+- [ ] T036 Implement operational records surfaces and APIs for newsletter subscribers, contact inquiries, and booking submissions with status workflow, assignment, and notes.
+- [ ] T037 Harden admin authorization, role policies, and auditability for all admin mutations and sensitive reads.
+- [ ] T038 Add admin-focused validation gates (unit, integration, e2e, accessibility, security, regression) and release-readiness criteria for dashboard rollout.
+
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.
 - The main marketing, services, blog, proof, and legal surfaces exist in code.
@@ -260,9 +272,12 @@ phases:
 - The universal AI collaboration playbook, development standards, and contribution guide now reflect the strict execution workflow (doc-first, zero-gate pass, local commit discipline, design-system-first mobile frontend rules, and standardised output format).
 
 ## What Is Next To Build
-1. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
-2. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
-3. T027 + T028: add infrastructure-as-code plus external observability/alerting for expanded production operations.
+1. T034 + T035: ship a fresh, usable admin management stack for shop templates and portfolio records with full backend contracts.
+2. T036 + T037: deliver an admin submissions inbox for newsletter/form/booking operations with status workflow, assignment, and audit-safe access controls.
+3. T038: enforce dedicated admin dashboard release gates and staged rollout readiness.
+4. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
+5. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
+6. T027 + T028: add infrastructure-as-code plus external observability/alerting for expanded production operations.
 
 ## Release Readiness Checklist
 - [x] Local production build passes.

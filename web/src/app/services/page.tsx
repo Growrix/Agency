@@ -25,6 +25,7 @@ import {
 	PROCESS_STEPS,
 	SERVICES,
 } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata: Metadata = {
@@ -281,11 +282,13 @@ export default function ServicesPage() {
 						))}
 					</RevealGroup>
 
-					<GoogleReviews
-						eyebrow="Google reviews"
-						title="What clients say after launch."
-						description="Live reviews from the agency Google Business profile."
-					/>
+					{SHOW_GOOGLE_REVIEWS && (
+						<GoogleReviews
+							eyebrow="Google reviews"
+							title="What clients say after launch."
+							description="Live reviews from the agency Google Business profile."
+						/>
+					)}
 				</Container>
 			</Section>
 

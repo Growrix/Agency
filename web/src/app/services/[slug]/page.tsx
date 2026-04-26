@@ -22,7 +22,8 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES } from "@/lib/content";
+import { HOME_STATS, PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
@@ -292,7 +293,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <Section className="py-12">
         <Container>
-          <StatBlock stats={copy.stats} />
+          <StatBlock stats={HOME_STATS} />
         </Container>
       </Section>
 
@@ -379,15 +380,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section>
-        <Container>
-          <GoogleReviews
-            eyebrow="Google reviews"
-            title="Recent client feedback from the studio."
-            description="Live reviews from the public business profile, reused across service trust surfaces."
-          />
-        </Container>
-      </Section>
+      {SHOW_GOOGLE_REVIEWS && (
+        <Section>
+          <Container>
+            <GoogleReviews
+              eyebrow="Google reviews"
+              title="Recent client feedback from the studio."
+              description="Live reviews from the public business profile, reused across service trust surfaces."
+            />
+          </Container>
+        </Section>
+      )}
 
       <Section tone="inset">
         <Container width="reading">

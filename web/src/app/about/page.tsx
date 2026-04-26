@@ -11,6 +11,7 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { CLIENT_LOGOS, HOME_STATS, PROCESS_STEPS } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { ABOUT_IMAGES, TEAM_IMAGES } from "@/lib/site-images";
 
@@ -164,15 +165,17 @@ export default function AboutPage() {
 
       <TrustStrip items={CLIENT_LOGOS} />
 
-      <Section>
-        <Container>
-          <GoogleReviews
-            eyebrow="Voices"
-            title="What clients say after launch."
-            description="Proof from launches, redesigns, and ongoing product work."
-          />
-        </Container>
-      </Section>
+      {SHOW_GOOGLE_REVIEWS && (
+        <Section>
+          <Container>
+            <GoogleReviews
+              eyebrow="Voices"
+              title="What clients say after launch."
+              description="Proof from launches, redesigns, and ongoing product work."
+            />
+          </Container>
+        </Section>
+      )}
 
       <CTABand
         title="Want to meet the team that would actually launch it?"

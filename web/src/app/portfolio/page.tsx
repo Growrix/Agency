@@ -9,7 +9,8 @@ import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { CLIENT_LOGOS, PORTFOLIO, SERVICES } from "@/lib/content";
+import { CLIENT_LOGOS, HOME_STATS, PORTFOLIO, SERVICES } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
@@ -44,14 +45,7 @@ export default function PortfolioPage() {
             </p>
           </div>
           <div className="mt-12">
-            <StatBlock
-              stats={[
-                { value: "47", label: "Total projects" },
-                { value: "12", label: "Sites (12mo)" },
-                { value: "12+", label: "MCPs shipped" },
-                { value: "98", label: "NPS" },
-              ]}
-            />
+            <StatBlock stats={HOME_STATS} />
           </div>
         </Container>
       </Section>
@@ -128,15 +122,17 @@ export default function PortfolioPage() {
 
       <TrustStrip items={CLIENT_LOGOS} />
 
-      <Section>
-        <Container>
-          <GoogleReviews
-            eyebrow="Voices"
-            title="What clients say after launch."
-            description="Live Google reviews provide the trust layer across portfolio and proof pages."
-          />
-        </Container>
-      </Section>
+      {SHOW_GOOGLE_REVIEWS && (
+        <Section>
+          <Container>
+            <GoogleReviews
+              eyebrow="Voices"
+              title="What clients say after launch."
+              description="Live Google reviews provide the trust layer across portfolio and proof pages."
+            />
+          </Container>
+        </Section>
+      )}
 
       <CTABand
         title="See something close to what you need? Let's build yours."

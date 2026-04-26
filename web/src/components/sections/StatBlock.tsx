@@ -1,9 +1,13 @@
 import { cn } from "@/lib/utils";
 import { CountUp } from "@/components/motion/Motion";
+import { HOME_STATS } from "@/lib/content";
+import { FORCE_HERO_STATS_SITEWIDE } from "@/lib/feature-flags";
 
 export type Stat = { value: string; label: string; hint?: string };
 
 export function StatBlock({ stats, className, dense }: { stats: Stat[]; className?: string; dense?: boolean }) {
+  const effectiveStats = FORCE_HERO_STATS_SITEWIDE ? HOME_STATS : stats;
+
   return (
     <dl
       className={cn(
@@ -12,7 +16,7 @@ export function StatBlock({ stats, className, dense }: { stats: Stat[]; classNam
         className
       )}
     >
-      {stats.map((s) => (
+      {effectiveStats.map((s) => (
         <div key={s.label} className="bg-surface p-5">
           <dt className="font-mono text-xs uppercase tracking-wider text-text-muted">
             {s.label}

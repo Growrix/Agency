@@ -48,6 +48,7 @@ Folders:
 - `Security/`
 - `DevOps/`
 - `QA/`
+- `Admin Dashboard/`
 
 ## What To Read First
 
@@ -71,6 +72,13 @@ Folders:
 2. `DOC/PROJECT PLAN/Shared Contracts/README.md`
 3. `DOC/PROJECT PLAN/Backend/README.md`
 4. `DOC/PROJECT PLAN/API and Data/README.md`
+
+### For admin dashboard planning and rollout
+1. `DOC/PROJECT PLAN/ai-context.yaml`
+2. `DOC/PROJECT PLAN/Tasks/tasks.md`
+3. `DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml`
+4. `DOC/PROJECT PLAN/Admin Dashboard/README.md`
+5. `DOC/PROJECT PLAN/Shared Contracts/README.md`
 
 ### For release work
 1. `DOC/PROJECT PLAN/ai-context.yaml`

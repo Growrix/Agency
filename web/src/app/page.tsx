@@ -35,6 +35,7 @@ import {
   PROCESS_STEPS,
   SERVICES,
 } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { listBlogPosts } from "@/server/blog/content";
 
@@ -339,15 +340,17 @@ export default async function Home() {
       </Section>
 
       {/* Testimonials */}
-      <Section>
-        <Container>
-          <GoogleReviews
-            eyebrow="Voices"
-            title="Teams we've shipped with."
-            description="Live Google reviews from the public Growrix OS business profile."
-          />
-        </Container>
-      </Section>
+      {SHOW_GOOGLE_REVIEWS && (
+        <Section>
+          <Container>
+            <GoogleReviews
+              eyebrow="Voices"
+              title="Teams we've shipped with."
+              description="Live Google reviews from the public Growrix OS business profile."
+            />
+          </Container>
+        </Section>
+      )}
 
       {/* Field notes (Blog) */}
       <Section tone="inset">
