@@ -35,6 +35,7 @@ import {
   PROCESS_STEPS,
   SERVICES,
 } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { listBlogPosts } from "@/server/blog/content";
 
@@ -44,10 +45,6 @@ const SERVICE_ICONS = {
   "mcp-servers": CpuChipIcon,
   automation: BoltIcon,
 } as const;
-
-// Temporary kill switch: keep Google reviews code in place but hidden from UI
-// until Place ID / API configuration is stable again.
-const SHOW_GOOGLE_REVIEWS = false;
 
 const HOME_TIERS: Tier[] = [
   {

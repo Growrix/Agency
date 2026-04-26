@@ -8,6 +8,7 @@ import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { StatBlock } from "@/components/sections/StatBlock";
+import { HOME_STATS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
@@ -176,14 +177,7 @@ export default function PricingPage() {
         <Container>
           <SectionHeading eyebrow="ROI logic" title="Where the money goes back to work." align="center" />
           <div className="mt-10">
-            <StatBlock
-              stats={[
-                { value: "+182%", label: "Activation", hint: "SaaS rebuild" },
-                { value: "+64%", label: "Demo bookings", hint: "Website redesign" },
-                { value: "3.4x", label: "Dwell time", hint: "Subscriber website" },
-                { value: "12 days", label: "Launch speed", hint: "Ready website handoff" },
-              ]}
-            />
+            <StatBlock stats={HOME_STATS} />
           </div>
         </Container>
       </Section>

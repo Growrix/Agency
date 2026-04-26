@@ -12,7 +12,8 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { PORTFOLIO, PORTFOLIO_BY_SLUG, SERVICES } from "@/lib/content";
+import { HOME_STATS, PORTFOLIO, PORTFOLIO_BY_SLUG, SERVICES } from "@/lib/content";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { getCaseStudyDetail, getPortfolioImage } from "@/lib/site-images";
 
@@ -108,7 +109,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       <Section className="py-12">
         <Container>
-          <StatBlock stats={detail.results} />
+          <StatBlock stats={HOME_STATS} />
         </Container>
       </Section>
 
@@ -183,18 +184,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Container>
       </Section>
 
-      <Section tone="inset">
-        <Container width="reading">
-          <GoogleReviews
-            eyebrow="Google reviews"
-            title="Recent client feedback from the studio profile."
-            description="A live Google review keeps the proof layer tied to the public business profile."
-            displayMode="single"
-            limit={1}
-            showSummary={false}
-          />
-        </Container>
-      </Section>
+      {SHOW_GOOGLE_REVIEWS && (
+        <Section tone="inset">
+          <Container width="reading">
+            <GoogleReviews
+              eyebrow="Google reviews"
+              title="Recent client feedback from the studio profile."
+              description="A live Google review keeps the proof layer tied to the public business profile."
+              displayMode="single"
+              limit={1}
+              showSummary={false}
+            />
+          </Container>
+        </Section>
+      )}
 
       <Section>
         <Container>

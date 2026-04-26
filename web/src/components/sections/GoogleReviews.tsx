@@ -8,6 +8,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Testimonial, type TestimonialData } from "@/components/sections/Testimonial";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { cn } from "@/lib/utils";
 
 const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -260,6 +261,10 @@ export function GoogleReviews({
   const [summary, setSummary] = useState<PlaceSummary | null>(null);
 
   useEffect(() => {
+    if (!SHOW_GOOGLE_REVIEWS) {
+      return;
+    }
+
     let active = true;
 
     async function loadReviews() {
@@ -313,6 +318,11 @@ export function GoogleReviews({
       active = false;
     };
   }, [displayMode, limit]);
+
+  // Global mute to keep review code available but hidden until Place ID/API is stable.
+  if (!SHOW_GOOGLE_REVIEWS) {
+    return null;
+  }
 
   const totalRatingsLabel =
     typeof summary?.totalRatings === "number"
