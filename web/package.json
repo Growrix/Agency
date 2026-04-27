@@ -6,7 +6,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "next dev --webpack -p 5000 -H 0.0.0.0",
+    "dev": "node ./scripts/dev-server.mjs",
     "build": "next build --webpack",
     "start": "next start -p 5000 -H 0.0.0.0",
     "lint": "eslint",

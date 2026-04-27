@@ -15,6 +15,8 @@ npm run lint
 npm run build
 ```
 
+`npm run dev` now self-heals common local startup issues: it enforces Node 20 through `fnm` when available, restarts stale Agency Next.js processes that are still holding port `5000`, and falls back to the next free local port if `5000` is occupied by another application.
+
 The root install now also installs the Next.js app dependencies inside `web/` through `postinstall`, so CI and deployment environments can build from the repository root without a manual second install step.
 
 ## Development Deployment Baseline
