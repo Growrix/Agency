@@ -30,6 +30,7 @@ import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
+  FEATURED_LIVE_SAAS,
   FEATURED_PRODUCTS,
   HOME_STATS,
   HOME_STACK_MARQUEE,
@@ -315,6 +316,80 @@ export default async function Home() {
                   </Link>
                 </div>
               </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Live SaaS Spotlight */}
+      <Section tone="inset">
+        <Container>
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="Live SaaS"
+              title="Buy a Live SaaS — Not Just a Template"
+              description="We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."
+            />
+            <LinkButton href="/shop" variant="outline">
+              Explore Live SaaS <ArrowUpRightIcon className="size-4" />
+            </LinkButton>
+          </div>
+
+          {/* Value bullets */}
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              "Test the product before you buy",
+              "Experience real functionality, not demos",
+              "Understand the business potential firsthand",
+              "Launch instantly with a proven foundation",
+            ].map((point) => (
+              <div key={point} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+                <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                <span className="text-sm leading-6">{point}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Live SaaS product cards */}
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+            {FEATURED_LIVE_SAAS.map((p) => (
+              <RevealItem key={p.name} className="h-full">
+                <Card hoverable className="flex flex-col h-full">
+                  <div className="relative -mx-6 -mt-6 mb-5 h-32 overflow-hidden rounded-t-[16px] border-b border-border bg-linear-to-br from-inset to-bg">
+                    <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
+                    <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+                      <CodeBracketSquareIcon className="size-9 text-secondary" aria-hidden />
+                      {p.tag && <Badge tone="primary">{p.tag}</Badge>}
+                    </div>
+                  </div>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{p.category}</p>
+                  <h3 className="mt-1 font-display text-lg tracking-tight">{p.name}</h3>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="font-display text-xl">{p.price}</span>
+                    <Link href={`/shop/${p.slug}`} className="text-sm font-medium text-primary hover:underline">
+                      Preview →
+                    </Link>
+                  </div>
+                </Card>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+
+          {/* Bottom CTA */}
+          <div className="mt-10 rounded-2xl border border-border bg-surface px-6 py-8 sm:px-10 sm:py-10 text-center">
+            <p className="font-display text-xl tracking-tight sm:text-2xl">
+              This is your chance to skip the idea stage and step directly into a working business.
+            </p>
+            <p className="mt-3 text-text-muted">
+              Use it. Test it. Validate it. Then make your move with confidence.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <LinkButton href="/shop">
+                Explore All Live SaaS <ArrowRightIcon className="size-4" />
+              </LinkButton>
+              <LinkButton href="/book-appointment" variant="outline">
+                Book a Demo
+              </LinkButton>
             </div>
           </div>
         </Container>

@@ -132,6 +132,13 @@ export const FEATURED_PRODUCTS = [
   { slug: "booking-stripe-bundle", name: "Booking + Stripe Bundle", price: "$3,900", category: "Ready Websites", tag: "Bundle" },
 ];
 
+export const FEATURED_LIVE_SAAS = [
+  { slug: "taskflow-pro", name: "Taskflow Pro", price: "$4,900", category: "Live SaaS", tag: "Live" },
+  { slug: "invoicekit", name: "InvoiceKit", price: "$3,200", category: "Live SaaS", tag: "Popular" },
+  { slug: "clientportal-hub", name: "ClientPortal Hub", price: "$5,500", category: "Live SaaS", tag: "New" },
+  { slug: "schedulerx", name: "SchedulerX", price: "$6,800", category: "Live SaaS", tag: "Bundle" },
+];
+
 export const PORTFOLIO = [
   {
     slug: "lumora-studio",
