@@ -57,7 +57,7 @@ npm run test:e2e
 
 On this Windows workspace, `npm run build` uses `next build --webpack` for the same native-binding reason as local dev.
 
-Vitest scripts now use `--configLoader runner` to avoid local rolldown config-bundling failures on this Windows environment.
+Unit and integration scripts now run through Node's built-in test runner via `tsx --test`, which avoids the local Vitest rolldown/native-binding failures seen on this Windows environment.
 
 ## Notes
 

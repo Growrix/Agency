@@ -96,10 +96,14 @@ export function BookAppointmentExperience() {
   const selectedSlotLabel = formatSelectedSlot(selectedDate, selectedTime);
 
   useEffect(() => {
-    const nextMinimumBookingDate = getMinimumBookingDate();
-    setMinimumBookingDate(nextMinimumBookingDate);
-    setSelectedDate(toDateInputValue(nextMinimumBookingDate));
-    setIsHydrated(true);
+    const frame = window.requestAnimationFrame(() => {
+      const nextMinimumBookingDate = getMinimumBookingDate();
+      setMinimumBookingDate(nextMinimumBookingDate);
+      setSelectedDate(toDateInputValue(nextMinimumBookingDate));
+      setIsHydrated(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {

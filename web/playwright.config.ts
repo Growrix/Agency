@@ -24,8 +24,16 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "chromium",
+      name: "desktop-chrome",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "tablet-safari",
+      use: { ...devices["iPad (gen 7)"] },
+    },
+    {
+      name: "mobile-chrome",
+      use: { ...devices["Pixel 5"] },
     },
   ],
 });

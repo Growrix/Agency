@@ -14,7 +14,11 @@ export default function LiveChatPage() {
   const [message, setMessage] = useState("Could not start live chat.");
 
   useEffect(() => {
-    setIsHydrated(true);
+    const frame = window.requestAnimationFrame(() => {
+      setIsHydrated(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {

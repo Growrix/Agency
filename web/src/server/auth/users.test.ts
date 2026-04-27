@@ -1,9 +1,13 @@
+import assert from "node:assert/strict";
 import { mkdir, rm } from "node:fs/promises";
 import path from "node:path";
-import { beforeEach, describe, expect, it } from "vitest";
-import { authenticateUser, createUser, updateUserProfile, validatePasswordStrength } from "./users.ts";
-import { resetRuntimeConfigForTests } from "../config/runtime.ts";
-import { resetSupabaseClientsForTests } from "../supabase/client.ts";
+import { beforeEach, describe, it } from "node:test";
+import { authenticateUser, createUser, updateUserProfile, validatePasswordStrength } from "@/server/auth/users";
+import { resetRuntimeConfigForTests } from "@/server/config/runtime";
+import { resetSupabaseClientsForTests } from "@/server/supabase/client";
+
+const testEnv = process.env as Record<string, string | undefined>;
+testEnv.NODE_ENV = "test";
 
 const dataDirectory = path.join(process.cwd(), ".data");
 const databasePath = path.join(dataDirectory, "agency-db.json");
@@ -13,7 +17,7 @@ async function resetDatabase() {
   await rm(databasePath, { force: true });
 }
 
-describe.sequential("auth users", () => {
+describe("auth users", () => {
   beforeEach(async () => {
     await resetDatabase();
     process.env.AUTH_JWT_SECRET = "test-secret-key-123!";
@@ -28,7 +32,7 @@ describe.sequential("auth users", () => {
   });
 
   it("rejects weak passwords", () => {
-    expect(() => validatePasswordStrength("weak")).toThrow(/Password must be at least 8 characters/);
+    assert.throws(() => validatePasswordStrength("weak"), /Password must be at least 8 characters/);
   });
 
   it("creates authenticates and updates a subscriber", async () => {
@@ -39,13 +43,13 @@ describe.sequential("auth users", () => {
       lastName: "User",
     });
 
-    expect(user.role).toBe("subscriber");
+    assert.equal(user.role, "subscriber");
 
     const authenticated = await authenticateUser("user@example.com", "StrongPass1!");
-    expect(authenticated?.email).toBe("user@example.com");
+    assert.equal(authenticated?.email, "user@example.com");
 
     const updated = await updateUserProfile(authenticated!.id, { firstName: "Updated", lastName: "Name" });
-    expect(updated.first_name).toBe("Updated");
-    expect(updated.last_name).toBe("Name");
+    assert.equal(updated.first_name, "Updated");
+    assert.equal(updated.last_name, "Name");
   });
 });
