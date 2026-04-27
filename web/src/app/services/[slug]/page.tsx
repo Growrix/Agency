@@ -114,9 +114,9 @@ const COPY: Record<
       { title: "App-like mobile UX", description: "Sticky utilities, sheets, and thumb-friendly interactions that feel like product UI." },
     ],
     tiers: [
-      { name: "Launch Sprint", price: "$9.5k", cadence: "/ project", description: "Ship a focused marketing site or product launch site in 4–6 weeks.", features: ["Up to 8 templates", "Design system + motion", "CMS handoff", "30 days post-launch"], cta: { label: "Plan a launch", href: "/book-appointment" } },
-      { name: "Redesign Track", price: "$22k", cadence: "/ project", description: "A full redesign with conversion architecture and content sequencing.", features: ["Full information architecture", "Brand-tier visual system", "Content strategy support", "Analytics & experiments"], cta: { label: "Scope a redesign", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
-      { name: "Conversion Retainer", price: "$5.5k", cadence: "/ month", description: "Continuous CRO and content shipping with experiment review.", features: ["Monthly experiment plan", "New surfaces shipped", "Analytics review", "Content production"], cta: { label: "Start retainer", href: "/book-appointment" } },
+      { name: "Template Packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/shop" } },
+      { name: "Ready Websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/shop" }, featured: true, badge: "Most chosen" },
+      { name: "Custom Build Scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: [
       { question: "Do you handle content?", answer: "Yes — content production is offered as an add-on. We can also collaborate with your in-house content team." },
@@ -294,6 +294,75 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section className="py-12">
         <StatBlock stats={HOME_STATS} />
       </Section>
+
+      {slug === "saas-applications" && (
+        <Section tone="inset">
+          <Container>
+            <SectionHeading
+              eyebrow="Our stack"
+              title="Our SaaS Development Stack"
+              description="We build modern, scalable SaaS applications using a proven, flexible tech stack—carefully selected for performance, scalability, and speed of execution."
+            />
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+              {[
+                {
+                  category: "Core Development",
+                  items: ["Python", "Django", "JavaScript", "TypeScript", "Node.js", "REST APIs", "GraphQL"],
+                },
+                {
+                  category: "Frontend & Frameworks",
+                  items: ["Next.js", "React", "Vite", "Tailwind CSS", "ShadCN UI"],
+                },
+                {
+                  category: "AI & Automation Systems",
+                  items: ["Custom MCP servers", "AI-driven workflows", "API automation", "Background job systems", "Cron pipelines"],
+                },
+                {
+                  category: "Cloud & Infrastructure",
+                  items: ["AWS (S3, EC2, Lambda)", "Vercel", "Docker", "CI/CD pipelines", "Serverless architecture"],
+                },
+                {
+                  category: "Databases",
+                  items: ["PostgreSQL", "MongoDB", "Redis"],
+                },
+                {
+                  category: "Payments & Monetization",
+                  items: ["Stripe", "Webhooks", "Subscription systems"],
+                },
+                {
+                  category: "Email & Communication",
+                  items: ["SendGrid", "Resend", "SMTP systems", "Transactional email pipelines"],
+                },
+                {
+                  category: "CMS & Content Systems",
+                  items: ["Sanity", "Payload CMS", "Headless CMS architectures"],
+                },
+                {
+                  category: "Integrations & Tools",
+                  items: ["Third-party APIs", "OAuth systems", "Webhook integrations", "Zapier-style automation bridges"],
+                },
+              ].map((group) => (
+                <RevealItem key={group.category} className="h-full">
+                  <Card hoverable className="h-full">
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-primary">{group.category}</p>
+                    <ul className="mt-3 space-y-1.5">
+                      {group.items.map((item) => (
+                        <li key={item} className="flex items-center gap-2 text-sm text-text-muted">
+                          <CheckIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+            <p className="mt-8 text-center text-sm text-text-muted max-w-2xl mx-auto">
+              We don&apos;t just pick tools—we combine them into a system that can build, launch, and scale SaaS products efficiently.
+            </p>
+          </Container>
+        </Section>
+      )}
 
       <Section tone="inset">
         <Container>
