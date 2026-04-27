@@ -58,6 +58,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - revised the about route after the first redesign overshot: restored the original page structure, kept the existing team/process/philosophy sections, and replaced the heavy third-person layout with three lighter first-person founder sections anchored by the optimized portrait
   - redesigned the about route around Nayeem's founder story, replaced the stock hero with an optimized real portrait, and expanded the page with journey, operating model, and collaboration sections
   - stabilized main-branch local development startup by switching the Next.js dev script to Webpack mode after Turbopack failed on this Windows environment due to unavailable native bindings, and removed an accidental root lockfile that created extra workspace-root warnings
   - stabilized the remaining local release gates by routing the Next.js build script through Webpack as well, and removed the shared route transition wrapper after booking-page navigation intermittently surfaced a React unmounted-update warning and transient JSON parse overlay during first-load E2E runs

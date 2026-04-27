@@ -13,7 +13,7 @@ depends_on:
 # About Page
 
 ## Page Definition
-- Purpose: humanize the agency through a founder-led narrative while reinforcing product discipline, growth thinking, and delivery quality around premium websites, SaaS applications, and revenue-ready digital systems.
+- Purpose: keep the original studio-facing about page structure while adding a concise founder voice that helps visitors feel they are hearing directly from Nayeem.
 - Target audience: buyers who want to understand the team, process, and operating philosophy before committing.
 - Primary CTA: Meet Through a Call.
 - Secondary CTA: Explore Process.
@@ -21,48 +21,55 @@ depends_on:
 ## Sections In Visual Order
 
 ### 1. About Hero
-- Content: founder-led positioning, clear explanation of what Growrix OS is, audience-fit chips, and a real founder portrait with a short note.
-- Components: hero, founder portrait media, CTA pair, audience chips.
+- Content: original studio positioning, concise agency story, and CTA pair.
+- Components: hero, studio media, CTA pair.
 
-### 2. Founding Signals
-- Content: four quick cards covering growth roots, full-stack evolution, remote-first collaboration, and AI-ready workflows.
-- Components: signal cards.
+### 2. Proof Snapshot
+- Content: original stat block retained.
+- Components: stat block.
 
-### 3. Founder Note
-- Content: Nayeem's progression from digital marketing and SEO into WordPress, full-scale development, and MCP-powered AI-assisted product delivery.
-- Components: editorial content block, promise/checklist panel.
+### 3. Principles
+- Content: original principle cards retained.
+- Components: principle cards.
 
-### 4. Journey Timeline
-- Content: milestone cards showing the evolution from growth work to product engineering and Growrix OS as an operating system.
-- Components: timeline or milestone card grid.
+### 4. Founder Note
+- Content: first-person introduction from Nayeem with a real portrait and three concise story cards covering growth roots, development evolution, and current AI-assisted delivery approach.
+- Components: portrait media, editorial cards.
 
-### 5. How We Work
-- Content: remote-first delivery model, founder-led accountability, distributed specialist collaboration, and the core four-step process.
-- Components: operating model cards, process timeline.
+### 5. How I Work
+- Content: first-person explanation of leadership style, remote-team collaboration, and AI-assisted execution.
+- Components: three concise working-style cards.
 
 ### 6. Beyond Development
-- Content: build, maintain, operate, and partner collaboration models with a strong statement that the studio helps build businesses, not just codebases.
-- Components: editorial manifesto block, engagement model cards, stack/system chips.
+- Content: first-person partnership framing covering build, maintain, operate, and long-term collaboration without overcrowding the page.
+- Components: editorial content block with short action list.
 
-### 7. Proof and Milestones
-- Content: client logo strip and optional Google review proof weighted toward website and SaaS outcomes.
-- Components: logo rail, Google review cards.
+### 7. Team Section
+- Content: original team section retained.
+- Components: profile cards, avatar blocks.
 
-### 8. CTA Section
-- Content: invite to talk about a new product, rebuild, launch plan, or long-term operating support.
+- Content: original process section retained.
+- Components: process timeline.
+
+### 9. Frontend Philosophy
+- Content: original frontend philosophy section retained.
+- Components: manifesto list.
+
+### 10. Proof and CTA
+- Content: original logo strip, optional Google reviews, and CTA retained.
 - Components: CTA band, action row.
 
 ## State Requirements
 - Founder portrait should remain legible and intentional across mobile, tablet, and desktop.
-- Milestone and signal cards should support default and hover/focus states.
+- The added founder sections should feel lighter and more conversational than the surrounding studio sections.
 
 ## Responsive Adaptation
-- Mobile uses vertically stacked founder content, portrait, and engagement cards.
-- Process section turns into a compact step grid rather than a wide timeline.
+- Mobile uses vertically stacked founder content and portrait media with readable line lengths.
+- Original team, process, and philosophy sections retain their previous responsive behavior.
 
 ## SEO and Metadata
-- Title: About Growrix OS | Founder-Led Websites and SaaS Delivery.
-- Description: Meet Nayeem and learn how Growrix OS combines growth strategy, product development, and AI-driven execution to build premium websites, SaaS products, and digital systems.
+- Title: About | Websites, SaaS, and Launch Systems Partner.
+- Description: Learn how Growrix OS works, what it values, and how it delivers premium websites, SaaS products, mobile launch experiences, and ready websites.
 
 ## Conversion Path
-- About hero -> founder note -> journey -> process -> engagement models -> proof -> CTA.
+- About hero -> principles -> founder note -> how I work -> beyond development -> team -> process -> proof -> CTA.
