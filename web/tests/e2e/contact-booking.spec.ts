@@ -14,13 +14,15 @@ test("contact inquiry flow works", async ({ page }) => {
 
 test("booking flow works", async ({ page }) => {
   await page.goto("/book-appointment");
+  const uniqueSeed = Date.now();
   await page.locator('input[name="visitor_name"]').fill("Test Booker");
-  await page.locator('input[name="visitor_email"]').fill("booker@example.com");
+  await page.locator('input[name="visitor_email"]').fill(`booker+${uniqueSeed}@example.com`);
   await page.locator('select[name="service_interested_in"]').selectOption({ index: 1 });
-  const bookingDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000);
+  const bookingDate = new Date(Date.now() + (8 + (uniqueSeed % 14)) * 24 * 60 * 60 * 1000);
   const dateValue = `${bookingDate.getFullYear()}-${String(bookingDate.getMonth() + 1).padStart(2, "0")}-${String(bookingDate.getDate()).padStart(2, "0")}`;
+  const timeValue = `${String(10 + (uniqueSeed % 8)).padStart(2, "0")}:${uniqueSeed % 2 === 0 ? "00" : "30"}`;
   await page.locator('input[type="date"]').fill(dateValue);
-  await page.locator('input[type="time"]').fill("14:00");
+  await page.locator('input[type="time"]').fill(timeValue);
   await page.locator('textarea[name="notes"]').fill("Website relaunch and conversion improvements.");
   await page.getByRole("button", { name: /Reserve slot|Saving/ }).click();
   await expect(page.getByRole("heading", { name: "Slot requested." })).toBeVisible();

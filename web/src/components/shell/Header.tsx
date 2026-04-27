@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Popover, PopoverButton, PopoverPanel, Transition } from "@headlessui/react";
+import { Popover } from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
@@ -59,34 +59,25 @@ export function Header() {
           {PRIMARY_NAV.map((item) =>
             item.children ? (
               <Popover key={item.label} className="relative">
-                {({ close }) => (
+                {({ close }: { close: () => void }) => (
                   <>
-                    <PopoverButton className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary data-open:text-primary">
+                    <Popover.Button className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary data-open:text-primary">
                       {item.label}
                       <ChevronDownIcon className="size-3.5" aria-hidden />
-                    </PopoverButton>
-                    <Transition
-                      enter="transition duration-150"
-                      enterFrom="opacity-0 -translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition duration-100"
-                      leaveFrom="opacity-100"
-                      leaveTo="opacity-0"
-                    >
-                      <PopoverPanel className="absolute left-0 top-full mt-2 w-105 rounded-[16px] border border-border bg-surface p-2 shadow-(--shadow-3)">
-                        {item.children.map((c) => (
-                          <Link
-                            key={c.href}
-                            href={c.href}
-                            onClick={() => close()}
-                            className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
-                          >
-                            <div className="font-medium text-[15px]">{c.label}</div>
-                            <div className="text-sm leading-snug text-text-muted">{c.description}</div>
-                          </Link>
-                        ))}
-                      </PopoverPanel>
-                    </Transition>
+                    </Popover.Button>
+                    <Popover.Panel className="absolute left-0 top-full mt-2 w-105 rounded-[16px] border border-border bg-surface p-2 shadow-(--shadow-3)">
+                      {item.children.map((c) => (
+                        <Link
+                          key={c.href}
+                          href={c.href}
+                          onClick={() => close()}
+                          className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
+                        >
+                          <div className="font-medium text-[15px]">{c.label}</div>
+                          <div className="text-sm leading-snug text-text-muted">{c.description}</div>
+                        </Link>
+                      ))}
+                    </Popover.Panel>
                   </>
                 )}
               </Popover>

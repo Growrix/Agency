@@ -58,6 +58,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - stabilized main-branch local development startup by switching the Next.js dev script to Webpack mode after Turbopack failed on this Windows environment due to unavailable native bindings, and removed an accidental root lockfile that created extra workspace-root warnings
   - rebuilt the admin dashboard shell into a strict two-row app layout so the transparent header and sidebar never overlap, added reusable dashboard header controls (theme toggle reuse + notification/profile popovers), and anchored utility actions (including logout) to the sidebar bottom
   - introduced a reusable dashboard shell component with collapsible sidebar behavior, responsive mobile drawer navigation, and shared dashboard layout tokens, then refactored admin routes to run inside that shell for future multi-tenant reuse
   - replaced the admin sidebar with a fixed-on-desktop layout using shared CSS offset/width settings so the sidebar no longer scrolls with page content, and simplified the sidebar heading copy to "Admin Dashboard" only

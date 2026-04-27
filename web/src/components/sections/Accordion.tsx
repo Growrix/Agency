@@ -11,7 +11,7 @@ export function Accordion({ items, className }: { items: AccordionItem[]; classN
     <div className={cn("divide-y divide-border border-y border-border", className)}>
       {items.map((item) => (
         <Disclosure key={item.question} as="div">
-          {({ open }) => (
+          {({ open }: { open: boolean }) => (
             <>
               <DisclosureButton className="flex w-full items-center justify-between py-5 text-left">
                 <span className="font-display text-lg font-medium tracking-tight">{item.question}</span>
