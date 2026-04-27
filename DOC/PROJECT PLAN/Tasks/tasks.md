@@ -58,6 +58,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - fixed the noisy local `next build` SWC warnings by removing the corrupted `@next/swc-win32-x64-msvc` install from `web/node_modules`, reinstalling dependencies, confirming the native binding loads cleanly again, adding local Node 20 guard files plus strict engine enforcement so future installs do not drift back onto an unsupported major runtime, and isolating unit-test data directories so the file-backed store no longer races across parallel test files
   - revised the about route after the first redesign overshot: restored the original page structure, kept the existing team/process/philosophy sections, and replaced the heavy third-person layout with three lighter first-person founder sections anchored by the optimized portrait
   - redesigned the about route around Nayeem's founder story, replaced the stock hero with an optimized real portrait, and expanded the page with journey, operating model, and collaboration sections
   - stabilized main-branch local development startup by switching the Next.js dev script to Webpack mode after Turbopack failed on this Windows environment due to unavailable native bindings, and removed an accidental root lockfile that created extra workspace-root warnings

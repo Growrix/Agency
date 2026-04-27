@@ -4,6 +4,8 @@ This repository contains the Agency frontend workspace and the project planning 
 
 ## Local Commands
 
+Use Node.js `20.x` locally. The repository now includes `.nvmrc`, `.node-version`, and `engine-strict` enforcement so installs do not silently drift onto an unsupported major version and break Next.js native bindings.
+
 Run these commands from the repository root:
 
 ```bash

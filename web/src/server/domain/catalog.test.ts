@@ -14,8 +14,9 @@ import {
 
 const testEnv = process.env as Record<string, string | undefined>;
 testEnv.NODE_ENV = "test";
+testEnv.AGENCY_DATA_DIRECTORY = path.join(process.cwd(), ".data", "catalog-domain-test");
 
-const dataDirectory = path.join(process.cwd(), ".data");
+const dataDirectory = testEnv.AGENCY_DATA_DIRECTORY;
 const databasePath = path.join(dataDirectory, "agency-db.json");
 
 async function resetDatabase() {

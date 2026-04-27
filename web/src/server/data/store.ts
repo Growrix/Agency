@@ -5,14 +5,20 @@ import path from "node:path";
 import { DEFAULT_DATABASE, type DatabaseSchema } from "@/server/data/schema";
 import { getSupabaseAdminClient, isSupabaseDatabaseConfigured } from "@/server/supabase/client";
 
-const DATA_DIRECTORY = path.join(process.cwd(), ".data");
-const DATABASE_PATH = path.join(DATA_DIRECTORY, "agency-db.json");
 const SUPABASE_APP_STATE_ID = "primary";
 
 let writeQueue = Promise.resolve();
 
+function getDataDirectory() {
+  return process.env.AGENCY_DATA_DIRECTORY?.trim() || path.join(process.cwd(), ".data");
+}
+
+function getDatabasePath() {
+  return path.join(getDataDirectory(), "agency-db.json");
+}
+
 async function ensureDataDirectory() {
-  await mkdir(DATA_DIRECTORY, { recursive: true });
+  await mkdir(getDataDirectory(), { recursive: true });
 }
 
 function cloneDefaultDatabase(): DatabaseSchema {
@@ -47,7 +53,7 @@ async function readDatabaseFromFile(): Promise<DatabaseSchema> {
   await ensureDataDirectory();
 
   try {
-    const content = await readFile(DATABASE_PATH, "utf8");
+    const content = await readFile(getDatabasePath(), "utf8");
     return { ...cloneDefaultDatabase(), ...(JSON.parse(content) as Partial<DatabaseSchema>) };
   } catch {
     return cloneDefaultDatabase();
@@ -79,7 +85,7 @@ async function writeDatabaseToFile(updater: (database: DatabaseSchema) => Databa
   writeQueue = writeQueue.then(async () => {
     const current = await readDatabaseFromFile();
     const next = await updater(current);
-    await writeFile(DATABASE_PATH, JSON.stringify(next, null, 2), "utf8");
+    await writeFile(getDatabasePath(), JSON.stringify(next, null, 2), "utf8");
   });
 
   await writeQueue;
