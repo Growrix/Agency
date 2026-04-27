@@ -44,10 +44,10 @@ export default function PortfolioPage() {
               A filterable showcase of products, websites, MCP integrations, and automations we&apos;ve shipped recently.
             </p>
           </div>
-          <div className="mt-12">
-            <StatBlock stats={HOME_STATS} />
-          </div>
         </Container>
+        <div className="mt-12">
+          <StatBlock stats={HOME_STATS} />
+        </div>
       </Section>
 
       <Section className="py-8" tone="inset">

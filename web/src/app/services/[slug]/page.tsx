@@ -292,9 +292,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       <Section className="py-12">
-        <Container>
-          <StatBlock stats={HOME_STATS} />
-        </Container>
+        <StatBlock stats={HOME_STATS} />
       </Section>
 
       <Section tone="inset">

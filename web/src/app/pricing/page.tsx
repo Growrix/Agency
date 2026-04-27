@@ -176,10 +176,10 @@ export default function PricingPage() {
       <Section>
         <Container>
           <SectionHeading eyebrow="ROI logic" title="Where the money goes back to work." align="center" />
-          <div className="mt-10">
-            <StatBlock stats={HOME_STATS} />
-          </div>
         </Container>
+        <div className="mt-10">
+          <StatBlock stats={HOME_STATS} />
+        </div>
       </Section>
 
       <Section tone="inset">

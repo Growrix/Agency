@@ -89,8 +89,6 @@ export default function AboutPage() {
 
       <StatBlock stats={HOME_STATS} />
 
-      <TrustStrip items={HOME_STACK_MARQUEE} />
-
       <Section tone="inset">
         <Container>
           <SectionHeading eyebrow="Principles" title="Four operating choices we don't compromise on." />
@@ -164,6 +162,8 @@ export default function AboutPage() {
           </div>
         </Container>
       </Section>
+
+      <TrustStrip items={HOME_STACK_MARQUEE} />
 
       <Section>
         <Container>

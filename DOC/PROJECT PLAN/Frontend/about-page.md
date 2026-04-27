@@ -36,27 +36,28 @@ depends_on:
 - Content: first-person introduction from Nayeem with a real portrait and three concise story cards covering growth roots, development evolution, and current AI-assisted delivery approach.
 - Components: portrait media, editorial cards.
 
-### 5. How I Work
-- Content: first-person explanation of leadership style, remote-team collaboration, and AI-assisted execution.
-- Components: three concise working-style cards.
+### 5. How We Work
+- Content: process timeline that clarifies delivery phases.
+- Components: process timeline.
 
-### 6. Beyond Development
+### 6. Stack Marquee
+- Content: rotating framework, infrastructure, and integration names.
+- Components: trust strip marquee.
+
+### 7. Beyond Development
 - Content: first-person partnership framing covering build, maintain, operate, and long-term collaboration without overcrowding the page.
 - Components: editorial content block with short action list.
 
-### 7. Team Section
+### 8. Team Section
 - Content: original team section retained.
 - Components: profile cards, avatar blocks.
-
-- Content: original process section retained.
-- Components: process timeline.
 
 ### 9. Frontend Philosophy
 - Content: original frontend philosophy section retained.
 - Components: manifesto list.
 
 ### 10. Proof and CTA
-- Content: original logo strip, optional Google reviews, and CTA retained.
+- Content: optional Google reviews and CTA retained.
 - Components: CTA band, action row.
 
 ## State Requirements
@@ -72,4 +73,4 @@ depends_on:
 - Description: Learn how Growrix OS works, what it values, and how it delivers premium websites, SaaS products, mobile launch experiences, and ready websites.
 
 ## Conversion Path
-- About hero -> principles -> founder note -> how I work -> beyond development -> team -> process -> proof -> CTA.
+- About hero -> principles -> founder note -> process -> stack marquee -> beyond development -> team -> philosophy -> proof -> CTA.

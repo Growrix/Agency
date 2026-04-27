@@ -104,6 +104,7 @@ task_status_counts:
   - concierge popup behavior now auto-closes on route changes and action-link clicks so conversion routes appear immediately after suggestion taps
   - the shop is being repositioned as a website-product storefront; MCP and automation offers should remain outside the active shop catalog until the commerce strategy expands again
   - current content work should stay text-only and documentation-first: no route logic changes, only copy, pricing language, FAQs, and related positioning updates
+  - adjusted the shared StatBlock section to use the global Container width for consistent sizing across routes, and moved the about-page stack marquee to follow the process section
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.

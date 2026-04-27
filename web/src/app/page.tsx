@@ -121,10 +121,10 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="mt-14">
-            <StatBlock stats={HOME_STATS} />
-          </div>
         </Container>
+        <div className="mt-14">
+          <StatBlock stats={HOME_STATS} />
+        </div>
       </Section>
 
       {/* Capability Rail */}

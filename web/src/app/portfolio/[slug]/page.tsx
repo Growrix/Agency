@@ -108,9 +108,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </Section>
 
       <Section className="py-12">
-        <Container>
-          <StatBlock stats={HOME_STATS} />
-        </Container>
+        <StatBlock stats={HOME_STATS} />
       </Section>
 
       <Section tone="inset">
