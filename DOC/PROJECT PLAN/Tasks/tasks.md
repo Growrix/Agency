@@ -105,6 +105,7 @@ task_status_counts:
   - the shop is being repositioned as a website-product storefront; MCP and automation offers should remain outside the active shop catalog until the commerce strategy expands again
   - current content work should stay text-only and documentation-first: no route logic changes, only copy, pricing language, FAQs, and related positioning updates
   - adjusted the shared StatBlock section to use the global Container width for consistent sizing across routes, and moved the about-page stack marquee to follow the process section
+  - identified the Version_3 Vercel install failure root cause as Windows-only native binaries being declared as direct web dependencies, removed those direct pins, refreshed the lockfile, and verified the branch still passes lint, unit, integration, and build gates
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.
