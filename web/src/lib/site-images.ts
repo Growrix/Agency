@@ -33,6 +33,10 @@ export const ABOUT_IMAGES = {
     src: "/images/about/studio-team.jpg",
     alt: "Studio team working together around a table of laptops.",
   },
+  founder: {
+    src: "/images/about/founder/nayeem-founder-portrait.jpg",
+    alt: "Portrait of Nayeem, founder of Growrix OS.",
+  },
 } as const;
 
 export const TEAM_IMAGES: Record<string, StockImage> = {

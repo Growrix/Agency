@@ -58,6 +58,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `Complete_Execution`
 - Active implementation session:
+  - redesigned the about route around Nayeem's founder story, replaced the stock hero with an optimized real portrait, and expanded the page with journey, operating model, and collaboration sections
   - stabilized main-branch local development startup by switching the Next.js dev script to Webpack mode after Turbopack failed on this Windows environment due to unavailable native bindings, and removed an accidental root lockfile that created extra workspace-root warnings
   - stabilized the remaining local release gates by routing the Next.js build script through Webpack as well, and removed the shared route transition wrapper after booking-page navigation intermittently surfaced a React unmounted-update warning and transient JSON parse overlay during first-load E2E runs
   - removed a booking-form hydration mismatch caused by SSR time-derived minimum-slot values, hardened JS-dependent booking and live-chat forms against pre-hydration native submits, and moved local unit/integration execution to `tsx --test` after Windows-specific Vitest rolldown/native-binding failures prevented clean release-gate runs

@@ -13,7 +13,7 @@ depends_on:
 # About Page
 
 ## Page Definition
-- Purpose: humanize the agency while reinforcing product discipline and quality standards around premium websites, SaaS applications, mobile launch work, and ready websites.
+- Purpose: humanize the agency through a founder-led narrative while reinforcing product discipline, growth thinking, and delivery quality around premium websites, SaaS applications, and revenue-ready digital systems.
 - Target audience: buyers who want to understand the team, process, and operating philosophy before committing.
 - Primary CTA: Meet Through a Call.
 - Secondary CTA: Explore Process.
@@ -21,44 +21,48 @@ depends_on:
 ## Sections In Visual Order
 
 ### 1. About Hero
-- Content: agency story, positioning, and concise reason the studio exists, with a clear statement that websites and SaaS are the core offer and MCP plus automation support the wider delivery system.
-- Components: hero, portrait or workspace media, CTA pair.
+- Content: founder-led positioning, clear explanation of what Growrix OS is, audience-fit chips, and a real founder portrait with a short note.
+- Components: hero, founder portrait media, CTA pair, audience chips.
 
-### 2. Mission and Principles
-- Content: design discipline, engineering quality, speed without chaos, measurable outcomes.
-- Components: principle cards, content blocks.
+### 2. Founding Signals
+- Content: four quick cards covering growth roots, full-stack evolution, remote-first collaboration, and AI-ready workflows.
+- Components: signal cards.
 
-### 3. Founder or Team Section
-- Content: bios, roles, operating strengths, collaboration style.
-- Components: profile cards, avatar blocks.
+### 3. Founder Note
+- Content: Nayeem's progression from digital marketing and SEO into WordPress, full-scale development, and MCP-powered AI-assisted product delivery.
+- Components: editorial content block, promise/checklist panel.
 
-### 4. How the Agency Works
-- Content: discovery, strategy, design, build, launch, support with communication rhythm.
-- Components: step indicator, process timeline.
+### 4. Journey Timeline
+- Content: milestone cards showing the evolution from growth work to product engineering and Growrix OS as an operating system.
+- Components: timeline or milestone card grid.
 
-### 5. Frontend and Product Philosophy
-- Content: what makes the agency's frontend work stand out visually and structurally.
-- Components: manifesto blocks, media strip, checklist.
+### 5. How We Work
+- Content: remote-first delivery model, founder-led accountability, distributed specialist collaboration, and the core four-step process.
+- Components: operating model cards, process timeline.
 
-### 6. Proof and Milestones
-- Content: selected metrics, notable launches, client outcomes, repeat engagements, and live Google review proof weighted toward website and SaaS outcomes.
-- Components: stat blocks, logo rail, Google review cards.
+### 6. Beyond Development
+- Content: build, maintain, operate, and partner collaboration models with a strong statement that the studio helps build businesses, not just codebases.
+- Components: editorial manifesto block, engagement model cards, stack/system chips.
 
-### 7. CTA Section
-- Content: invite to talk, review portfolio, or ask the AI concierge.
+### 7. Proof and Milestones
+- Content: client logo strip and optional Google review proof weighted toward website and SaaS outcomes.
+- Components: logo rail, Google review cards.
+
+### 8. CTA Section
+- Content: invite to talk about a new product, rebuild, launch plan, or long-term operating support.
 - Components: CTA band, action row.
 
 ## State Requirements
-- Team cards support default and focus/hover detail reveal.
-- Milestone numbers use count-up only when motion is allowed.
+- Founder portrait should remain legible and intentional across mobile, tablet, and desktop.
+- Milestone and signal cards should support default and hover/focus states.
 
 ## Responsive Adaptation
-- Mobile uses vertically stacked profiles and swipeable principle cards.
-- Process section turns into a stepper rather than a wide timeline.
+- Mobile uses vertically stacked founder content, portrait, and engagement cards.
+- Process section turns into a compact step grid rather than a wide timeline.
 
 ## SEO and Metadata
-- Title: About the Agency | Product-Minded Web Development Partner.
-- Description: Learn how the agency works, what it values, and how it delivers premium websites, SaaS applications, mobile launch systems, and ready-to-buy website products.
+- Title: About Growrix OS | Founder-Led Websites and SaaS Delivery.
+- Description: Meet Nayeem and learn how Growrix OS combines growth strategy, product development, and AI-driven execution to build premium websites, SaaS products, and digital systems.
 
 ## Conversion Path
-- About hero -> principles -> process -> proof -> CTA.
+- About hero -> founder note -> journey -> process -> engagement models -> proof -> CTA.
