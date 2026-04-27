@@ -4,6 +4,7 @@ import {
   ArrowUpRightIcon,
   BoltIcon,
   ChatBubbleLeftRightIcon,
+  CheckCircleIcon,
   CodeBracketSquareIcon,
   CpuChipIcon,
   CubeTransparentIcon,
@@ -11,6 +12,7 @@ import {
   ShieldCheckIcon,
   SparklesIcon,
   WindowIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
@@ -245,6 +247,76 @@ export default async function Home() {
               </RevealItem>
             ))}
           </RevealGroup>
+
+          {/* Template Purchase & Customization */}
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface">
+            {/* Header */}
+            <div className="border-b border-border px-6 py-6 sm:px-8 sm:py-7">
+              <Badge tone="secondary" className="mb-3">Template Purchase &amp; Customization</Badge>
+              <h3 className="font-display text-xl tracking-tight sm:text-2xl">
+                Buy ready-to-ship templates and launch faster with confidence.
+              </h3>
+            </div>
+
+            {/* Two-column scope grid */}
+            <div className="grid divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+              {/* Included */}
+              <div className="px-6 py-6 sm:px-8 sm:py-7">
+                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+                  What&apos;s included — Customization Scope
+                </p>
+                <p className="mb-5 text-sm leading-6 text-text-muted">
+                  We tailor the template to match your brand and make it launch-ready:
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Full rebranding (logo, colors, visual identity)",
+                    "Color palette and typography updates",
+                    "Additional pages (as needed within template structure)",
+                    "Email setup and basic configurations",
+                    "Payment integration (e.g., Stripe)",
+                    "Setup of integrations already included in the template",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm">
+                      <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Not included + flexible note */}
+              <div className="px-6 py-6 sm:px-8 sm:py-7">
+                <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
+                  What&apos;s not included — Out of Scope
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Custom automation systems",
+                    "Advanced scaling or infrastructure work",
+                    "Features or integrations not mentioned in the template",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm">
+                      <XCircleIcon className="mt-0.5 size-4 shrink-0 text-text-muted" aria-hidden />
+                      <span className="text-text-muted">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 border-t border-border pt-6">
+                  <p className="text-sm leading-6 text-text-muted">
+                    That said, we&apos;re highly flexible. If you need something beyond scope, we&apos;re always open to discussing custom collaboration.
+                  </p>
+                  <Link
+                    href="/book-appointment"
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                  >
+                    Let&apos;s talk custom <ArrowUpRightIcon className="size-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </Container>
       </Section>
 
