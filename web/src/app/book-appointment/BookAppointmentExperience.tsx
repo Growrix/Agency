@@ -336,30 +336,6 @@ export function BookAppointmentExperience() {
           </div>
         </Container>
       </Section>
-
-      <style jsx global>{`
-        .booking-input {
-          width: 100%;
-          height: 44px;
-          border: 1px solid var(--color-border);
-          background: var(--color-surface);
-          border-radius: 12px;
-          padding: 0 14px;
-          font-size: 15px;
-          color: var(--color-text);
-          transition: border-color 150ms var(--ease-signal);
-        }
-
-        .booking-input:focus {
-          outline: none;
-          border-color: var(--color-primary);
-          box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
-        }
-
-        .booking-input::placeholder {
-          color: var(--color-text-muted);
-        }
-      `}</style>
     </>
   );
 }

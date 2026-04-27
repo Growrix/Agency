@@ -175,8 +175,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   ...(product.highlights.slice(0, 2).map((h) => ({ label: h.label, value: h.value }))),
                 ].map((row) => (
                   <div key={row.label} className="flex items-start justify-between gap-4">
-                    <dt className="font-medium text-text-muted">{row.label}</dt>
-                    <dd className="text-right text-text">{row.value}</dd>
+                    <dt className="shrink-0 font-medium text-text-muted">{row.label}</dt>
+                    <dd className="max-w-[62%] wrap-break-word text-right text-text">{row.value}</dd>
                   </div>
                 ))}
               </dl>
@@ -191,7 +191,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
               {/* Talk to us */}
               <div className="text-center">
-                <LinkButton href="/book-appointment" variant="ghost" size="sm" fullWidth>
+                <LinkButton
+                  href="/book-appointment"
+                  variant="ghost"
+                  size="sm"
+                  fullWidth
+                  className="h-auto whitespace-normal px-4 py-2.5 leading-5"
+                >
                   Need flexible payment or a custom fit? Talk to us first
                 </LinkButton>
               </div>

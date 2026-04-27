@@ -68,7 +68,7 @@ const SECTIONS = [
     id: "contact",
     title: "Contact",
     body: [
-      "Questions about these terms? Reach us via the contact page or email legal@growrixos.example.",
+      "Questions about these terms? Reach us via the contact page or email admin@growrixos.com.",
     ],
   },
 ];
