@@ -23,6 +23,7 @@
     "@playwright/test": "^1.55.0",
     "@sanity/client": "^7.21.0",
     "@supabase/supabase-js": "^2.104.0",
+    "@vercel/speed-insights": "^2.0.0",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
