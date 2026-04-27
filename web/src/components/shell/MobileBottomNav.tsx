@@ -38,7 +38,8 @@ export function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface pb-[max(env(safe-area-inset-bottom),8px)] backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface backdrop-blur-md lg:hidden"
+      style={{ paddingBottom: "max(env(safe-area-inset-bottom), 8px)" }}
       aria-label="Primary mobile navigation"
     >
       <ul className="grid grid-cols-5">

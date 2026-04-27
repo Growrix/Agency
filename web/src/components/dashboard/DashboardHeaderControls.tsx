@@ -46,7 +46,7 @@ const defaultNotifications: DashboardNotification[] = [
 
 export function DashboardHeaderControls({
   profileName = "Admin User",
-  profileEmail = "admin@growrix.com",
+  profileEmail = "admin@growrixos.com",
   notifications = defaultNotifications,
   className,
 }: DashboardHeaderControlsProps) {

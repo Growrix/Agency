@@ -256,6 +256,7 @@ body {
 .booking-input {
   width: 100%;
   height: 44px;
+  appearance: none;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   border-radius: 12px;
@@ -283,8 +284,21 @@ textarea.booking-input {
 
 .signal-input::placeholder,
 .booking-input::placeholder {
-  color: var(--color-text-muted);
+  color: color-mix(in srgb, var(--color-text-muted) 92%, var(--color-text) 8%);
   opacity: 1;
+}
+
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="range"]):not([type="color"]):not([type="file"]), textarea)::placeholder {
+  color: color-mix(in srgb, var(--color-text-muted) 92%, var(--color-text) 8%);
+  opacity: 1;
+}
+
+:where(.signal-input, .booking-input):-webkit-autofill,
+:where(.signal-input, .booking-input):-webkit-autofill:hover,
+:where(.signal-input, .booking-input):-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text);
+  box-shadow: 0 0 0 1000px var(--color-surface) inset;
+  caret-color: var(--color-text);
 }
 
 /* focus ring */

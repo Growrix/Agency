@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { ConciergeExperience } from "@/components/ai/ConciergeChat";
 import { useConciergeStore } from "@/lib/concierge-store";
 
+const modalOverlayClassName = "fixed inset-0";
+
 export function ConciergeModal() {
   const close = useConciergeStore((state) => state.close);
   const initialPrompt = useConciergeStore((state) => state.initialPrompt);
@@ -52,7 +54,8 @@ export function ConciergeModal() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-80"
+          className={modalOverlayClassName}
+          style={{ zIndex: 80 }}
         >
           <button
             type="button"

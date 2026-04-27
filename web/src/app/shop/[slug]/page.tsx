@@ -60,10 +60,10 @@ export default async function ShopPreviewPage({ params }: PageProps) {
             <ArrowLeftIcon className="size-4" /> Back to shop
           </Link>
 
-          <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
+          <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
 
             {/* LEFT — preview + details */}
-            <div className="space-y-8">
+            <div className="min-w-0 space-y-8">
               {/* Product name (mobile only, shown above preview) */}
               <div className="lg:hidden">
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
@@ -73,7 +73,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               </div>
 
               {/* Preview surface */}
-              <div className="overflow-hidden rounded-2xl border border-border">
+              <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border">
                 <ProductPreviewSurface variant={product.previewVariant} />
               </div>
 
@@ -127,7 +127,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
             </div>
 
             {/* RIGHT — sticky purchase sidebar */}
-            <aside className="space-y-4 lg:sticky lg:top-24">
+            <aside className="min-w-0 space-y-4 lg:sticky lg:top-24">
               {/* Name + category (desktop) */}
               <div className="hidden lg:block">
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
@@ -138,7 +138,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
               {/* Rating row */}
               {product.rating ? (
-                <div className="flex items-center gap-2 text-sm text-text-muted">
+                <div className="flex flex-wrap items-center gap-2 text-sm text-text-muted">
                   <StarRating rating={product.rating} />
                   <span className="font-semibold text-text">{product.rating}</span>
                   {product.reviewCount ? <span>({product.reviewCount} reviews)</span> : null}
@@ -174,9 +174,9 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   { label: "Industry", value: product.industry },
                   ...(product.highlights.slice(0, 2).map((h) => ({ label: h.label, value: h.value }))),
                 ].map((row) => (
-                  <div key={row.label} className="flex items-start justify-between gap-4">
+                  <div key={row.label} className="flex min-w-0 items-start justify-between gap-4">
                     <dt className="shrink-0 font-medium text-text-muted">{row.label}</dt>
-                    <dd className="max-w-[62%] wrap-break-word text-right text-text">{row.value}</dd>
+                    <dd className="min-w-0 flex-1 wrap-anywhere text-right text-text">{row.value}</dd>
                   </div>
                 ))}
               </dl>

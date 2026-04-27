@@ -5,9 +5,9 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-04-23
+last_audit_date: 2026-04-27
 current_state:
-  repo_branch_audited: main
+  repo_branch_audited: Version_3
   frontend_shell: done
   frontend_routes: done
   frontend_conversion_integrations: partial
@@ -92,7 +92,8 @@ task_status_counts:
   - connected the public contact, booking, checkout, and concierge flows to versioned server APIs with request validation, request IDs, rate limiting, honeypot abuse checks, analytics events, and audit logging
   - implemented a seeded-admin JWT auth flow with protected admin and `/api/v1/me` reads, and moved the route guard to the Next.js 16 `proxy.ts` entrypoint
   - replaced the placeholder booking and checkout routes with real server-backed forms, added a protected admin login/dashboard route, and introduced integration tests for contact, booking, checkout, and concierge flows
-  - fixed legal contact accuracy on the terms page by routing policy inquiries to `admin@growrixos.com`, moved `.signal-input` and `.booking-input` styles into global CSS so checkout/contact/booking placeholders render consistently across routes, and hardened `/shop/[slug]` mobile behavior by enabling safe value wrapping and multi-line CTA text to prevent horizontal overflow
+  - fixed legal contact accuracy across the remaining user-facing admin/profile fallback copy by routing contact email to `admin@growrixos.com`, strengthened shared checkout/form placeholder visibility with broader base placeholder and autofill styling, and hardened `/shop/[slug]` plus preview surfaces with min-width and wrap controls so mobile layouts do not overflow across desktop, tablet, or phone viewport tests
+  - reran the release pipeline on a clean production server instance and confirmed lint, typecheck, build, unit, integration, accessibility smoke, security header/auth checks, performance smoke, and full Playwright desktop/tablet/mobile coverage pass when executed serially in this Windows workspace
 - Working conclusion:
 	- the documented frontend surface is largely implemented
   - the documented backend, API, Security, and QA phases now each have a first real implementation slice, though full production hardening is still pending

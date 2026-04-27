@@ -9,16 +9,16 @@ function BrowserShell({ children }: { children: React.ReactNode }) {
         <span className="size-2.5 rounded-full bg-[#28c840]" />
         <span className="ml-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">Preview environment</span>
       </div>
-      <div className="bg-grid-strong bg-[#0d1117] p-4">{children}</div>
+      <div className="bg-grid-strong min-w-0 overflow-hidden bg-[#0d1117] p-4">{children}</div>
     </div>
   );
 }
 
 function StatPill({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[14px] border border-white/10 bg-white/4 px-4 py-3">
-      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">{label}</p>
-      <p className="mt-2 font-display text-lg tracking-tight text-white">{value}</p>
+    <div className="min-w-0 rounded-[14px] border border-white/10 bg-white/4 px-4 py-3">
+      <p className="break-words font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">{label}</p>
+      <p className="mt-2 break-words font-display text-lg tracking-tight text-white">{value}</p>
     </div>
   );
 }
@@ -31,8 +31,8 @@ function MarketingPreview() {
           <span>Atelier theme</span>
           <span>Launch ready</span>
         </div>
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
-          <div>
+        <div className="mt-8 grid min-w-0 gap-6 lg:grid-cols-[1.2fr_.8fr]">
+          <div className="min-w-0">
             <div className="h-3 w-28 rounded-full bg-primary/80" />
             <div className="mt-5 max-w-lg space-y-3">
               <div className="h-8 w-full rounded-full bg-white/90" />
@@ -46,7 +46,7 @@ function MarketingPreview() {
               <div className="h-11 w-32 rounded-full border border-white/15 bg-white/5" />
             </div>
           </div>
-          <div className="grid gap-4">
+          <div className="grid min-w-0 gap-4">
             <div className="rounded-[18px] border border-white/10 bg-white/5 p-4">
               <div className="aspect-4/3 rounded-[14px] bg-linear-to-br from-primary/30 via-accent/20 to-secondary/25" />
             </div>
@@ -70,8 +70,8 @@ function MarketingPreview() {
 function DashboardPreview() {
   return (
     <BrowserShell>
-      <div className="grid gap-4 lg:grid-cols-[240px_1fr]">
-        <div className="rounded-[18px] border border-white/10 bg-white/4 p-4">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[240px_1fr]">
+        <div className="min-w-0 rounded-[18px] border border-white/10 bg-white/4 p-4">
           <div className="h-9 w-full rounded-[14px] bg-primary/20" />
           <div className="mt-6 space-y-3">
             {[1, 2, 3, 4, 5].map((item) => (
@@ -79,7 +79,7 @@ function DashboardPreview() {
             ))}
           </div>
         </div>
-        <div className="grid gap-4">
+        <div className="grid min-w-0 gap-4">
           <div className="grid gap-4 sm:grid-cols-3">
             <StatPill label="MRR" value="$84k" />
             <StatPill label="Queue health" value="94%" />
@@ -123,8 +123,8 @@ function DashboardPreview() {
 function McpPreview() {
   return (
     <BrowserShell>
-      <div className="grid gap-4 lg:grid-cols-[1.15fr_.85fr]">
-        <div className="rounded-[18px] border border-white/10 bg-white/4 p-5">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[1.15fr_.85fr]">
+        <div className="min-w-0 rounded-[18px] border border-white/10 bg-white/4 p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">Tool graph</p>
@@ -146,7 +146,7 @@ function McpPreview() {
             ))}
           </div>
         </div>
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <div className="rounded-[18px] border border-white/10 bg-black/25 p-4 font-mono text-[11px] text-white/72">
             <div className="text-primary">$ tool trace --latest</div>
             <div className="mt-3">auth.session verified</div>
@@ -175,7 +175,7 @@ function AutomationPreview() {
             12 automations
           </div>
         </div>
-        <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center">
+        <div className="mt-8 grid min-w-0 gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center">
           {[
             { title: "Lead captured", note: "Form + enrichment" },
             { title: "Routing logic", note: "Owner + priority" },
@@ -204,8 +204,8 @@ function AutomationPreview() {
 function MobilePreview() {
   return (
     <BrowserShell>
-      <div className="grid gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-        <div className="mx-auto w-55 rounded-[32px] border border-white/10 bg-black/35 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+        <div className="mx-auto w-full max-w-[13.75rem] rounded-[32px] border border-white/10 bg-black/35 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
           <div className="overflow-hidden rounded-[24px] border border-white/10 bg-linear-to-b from-[#16202a] via-[#10151f] to-[#0f1218] p-4">
             <div className="mx-auto h-1.5 w-20 rounded-full bg-white/15" />
             <div className="mt-6 h-20 rounded-[18px] bg-linear-to-br from-primary/30 via-accent/20 to-secondary/20" />
@@ -219,7 +219,7 @@ function MobilePreview() {
             </div>
           </div>
         </div>
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <div className="rounded-[18px] border border-white/10 bg-white/4 p-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">Launch layout</p>
             <div className="mt-4 space-y-3">
@@ -243,8 +243,8 @@ function MobilePreview() {
 function BookingPreview() {
   return (
     <BrowserShell>
-      <div className="grid gap-4 lg:grid-cols-[1fr_.9fr]">
-        <div className="rounded-[18px] border border-white/10 bg-white/4 p-5">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[1fr_.9fr]">
+        <div className="min-w-0 rounded-[18px] border border-white/10 bg-white/4 p-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">Booking journey</p>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {[
@@ -270,7 +270,7 @@ function BookingPreview() {
             </div>
           </div>
         </div>
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <StatPill label="Checkout states" value="07" />
           <StatPill label="Admin views" value="05" />
           <div className="rounded-[18px] border border-white/10 bg-black/25 p-4">
