@@ -86,3 +86,53 @@ supabase link --project-ref okzrczymtlkaaxlvjnyh
 
 in the hero section , I need different content in this counter.  As a new company I do not have such lauches good numbers that is good to show, Years in motion 
 
+
+
+I want you to redesing the about page by adding more sections and content to it as per : 
+
+add this personal photo of mine web\public\images\about\Personal\Personal Photo.jpeg as per design and make sure to optimize the image for web use.
+
+Founder’s Note
+- Nayeem
+I’m the founder of Growrix OS, building and scaling digital products with a clear focus on results. My journey began in 2013 with digital marketing, where I developed a strong foundation in growth, SEO, and online business strategy. Over time, my curiosity pushed me beyond marketing into the technical side of building products.
+
+I started with WordPress, then moved into full-scale development—learning HTML, CSS, JavaScript, Python, and modern frameworks like Django, Next.js, and Vite. Today, I combine development expertise with AI-driven workflows, powered by my own MCP-based systems, to build faster, smarter, and more reliable SaaS products.
+
+How We Work
+
+Growrix OS is not a solo effort—it’s a remote-first system backed by a flexible team of developers and specialists. I lead the vision, architecture, and execution, while collaborating with a distributed team to deliver high-quality outcomes.
+
+We follow industry-standard practices end-to-end—from planning and development to deployment and scaling. Our strength lies in combining technical depth, AI leverage, and efficient team chemistry to ship enterprise-level SaaS applications at speed.
+
+Beyond Development
+
+We don’t just build software—we build businesses.
+
+Whether you’re a startup, an individual with an idea, or an established company, we can collaborate in a way that fits your goals. We can build, maintain, operate, or even partner with you long-term. With the rise of micro SaaS, we are actively creating and supporting products that generate real revenue—not just code.
+
+As the founder, I personally stand behind every deal and every outcome. You don’t need to worry about the process—we focus on delivering results you can trust, test, and confidently grow with.
+
+If you have an idea or opportunity, let’s talk.
+
+***note : these are plain texts, and you do not need to copy paste it exactly but make sure it fits as per your section designing as well. plan the content layout and design of the about page to make it engaging and informative, while also reflecting the personality and values of Growrix OS. Use the provided content as a base, but feel free to enhance it with additional sections, visuals, or design elements that align with our brand and resonate with our target audience.
+
+
+Eyebrow: Founder's Note
+Title: Turning Ideas Into Lasting Products
+Description:
+Starting in digital marketing taught me the value of growth and adaptability. Over time, I’ve built a toolkit that combines technical expertise with AI-powered systems, ensuring every project is both innovative and practical.
+
+Portrait Caption:
+Nayeem, Founder of Growrix OS
+
+Section 1:
+01. Getting Started
+I entered the field through growth, SEO, and online business. Since 2013, I’ve focused on understanding what makes products succeed, not just how they look. 
+
+Section 2:
+02. Expanding My Skills
+Transitioning from WordPress, I immersed myself in modern development tools—HTML, CSS, JavaScript, Python, Django, React, Next.js, and Vite, along with more native tools and frameworks to bridge strategy and implementation. 
+
+Section 3:
+03. My Current Focus
+I use disciplined product methods and Industry standard and AI-driven processes to deliver solutions that are reliable, effective, and built for real-world challenges. 

@@ -1,0 +1,24 @@
+﻿{
+  "name": "Growrix OS Agency",
+  "rules": [
+    ".continue/rules/growrix-strict-executor.md",
+    ".continue/rules/growrix-e2e-planning-architect.md",
+    ".continue/rules/enterprise-testing-quality-enforcement.md"
+  ],
+  "context": [
+    { "type": "file", "path": "DOC/PROJECT PLAN/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/README.md" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Tasks/tasks.md" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Tasks/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Frontend/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Backend/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/API and Data/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Security/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/DevOps/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/QA/ai-context.yaml" },
+    { "type": "file", "path": "DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml" },
+    { "type": "file", "path": "DOC/Universal/GPT ROLES/ai-context.yaml" },
+    { "type": "file", "path": "DOC/Universal/Execution Constitution.md" }
+  ]
+}

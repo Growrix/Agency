@@ -87,7 +87,9 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <StatBlock stats={HOME_STATS} />
+      <div className="pb-12 sm:pb-16">
+        <StatBlock stats={HOME_STATS} />
+      </div>
 
       <Section tone="inset">
         <Container>
