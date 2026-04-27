@@ -4,6 +4,7 @@ import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionRoot>
           <AppChrome>{children}</AppChrome>
         </MotionRoot>
+        <SpeedInsights />
       </body>
     </html>
   );
