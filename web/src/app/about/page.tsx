@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import type { Metadata } from "next";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
@@ -10,7 +10,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
-import { CLIENT_LOGOS, HOME_STATS, PROCESS_STEPS } from "@/lib/content";
+import { HOME_STATS, HOME_STACK_MARQUEE, PROCESS_STEPS } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { ABOUT_IMAGES, TEAM_IMAGES } from "@/lib/site-images";
@@ -41,28 +41,6 @@ const PHILOSOPHY = [
   "Mobile is often the first impression. It needs launch-level care, not desktop leftovers.",
   "Accessibility is a baseline, not an upsell.",
   "Performance is a brand attribute. Slow feels cheap.",
-];
-
-const HOW_I_WORK = [
-  {
-    title: "I lead the direction myself",
-    description: "I stay close to the strategy, architecture, and final quality so the work stays aligned from first conversation to launch.",
-  },
-  {
-    title: "I work with a flexible remote team",
-    description: "When a project needs more depth, I bring in the right developers and specialists instead of forcing a one-size-fits-all setup.",
-  },
-  {
-    title: "I use AI to move faster, not looser",
-    description: "My MCP-based workflows help speed up research, delivery, and iteration without compromising engineering standards.",
-  },
-];
-
-const PARTNERSHIP_OPTIONS = [
-  "I can build a new product or website from scratch.",
-  "I can maintain and improve what you already have.",
-  "I can help operate the product after launch if you need continuity.",
-  "I am open to long-term partnerships when the opportunity makes sense.",
 ];
 
 export default function AboutPage() {
@@ -99,7 +77,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/12 to-transparent" aria-hidden />
                   <div className="absolute inset-0 flex items-end p-6 text-white">
                     <p className="font-display text-2xl tracking-tight max-w-xs">
-                      “Studio sized for craft, scoped for outcomes.”
+                      &ldquo;Studio sized for craft, scoped for outcomes.&rdquo;
                     </p>
                   </div>
                 </div>
@@ -109,11 +87,9 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section className="py-12">
-        <Container>
-          <StatBlock stats={HOME_STATS} />
-        </Container>
-      </Section>
+      <StatBlock stats={HOME_STATS} />
+
+      <TrustStrip items={HOME_STACK_MARQUEE} />
 
       <Section tone="inset">
         <Container>
@@ -133,49 +109,46 @@ export default function AboutPage() {
       <Section>
         <Container>
           <SectionHeading
-            eyebrow="Founder’s note"
-            title="A little more about me, in my own words."
-            description="I wanted this page to feel a bit more personal, so here are the parts of the story that matter most when we work together."
+            eyebrow="Founder's Note"
+            title="Turning Ideas Into Lasting Products"
+            description="Starting in digital marketing taught me the value of growth and adaptability. Over time, I've built a toolkit that combines technical expertise with AI-powered systems, ensuring every project is both innovative and practical."
           />
           <div className="mt-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <Card className="p-0 overflow-hidden rounded-[24px]">
               <div className="relative aspect-4/5 overflow-hidden">
                 <Image
                   src={ABOUT_IMAGES.founder.src}
-                  alt={ABOUT_IMAGES.founder.alt}
+                  alt="Nayeem, Founder of Growrix OS"
                   fill
                   sizes="(min-width: 1024px) 34vw, 100vw"
                   className="object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" aria-hidden />
                 <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/70">Nayeem</p>
-                  <p className="mt-3 max-w-sm text-base leading-6 text-white/90 sm:text-lg">
-                    I started in digital marketing, grew into full-scale product development, and now build with the help of AI-driven systems that keep delivery sharper and faster.
-                  </p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/70">Nayeem, Founder of Growrix OS</p>
                 </div>
               </div>
             </Card>
             <div className="grid gap-4">
               <Card>
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">01. How I started</p>
-                <h3 className="mt-3 font-display text-2xl tracking-tight">I began with growth, SEO, and online business.</h3>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">01. Getting Started</p>
+                <h3 className="mt-3 font-display text-2xl tracking-tight">I entered the field through growth, SEO, and online business.</h3>
                 <p className="mt-4 text-base leading-7 text-text-muted text-pretty">
-                  Since 2013, I have been learning how digital products actually grow, not just how they look. That foundation still shapes the way I think about every website, SaaS product, and launch decision.
+                  Since 2013, I&apos;ve focused on understanding what makes products succeed, not just how they look.
                 </p>
               </Card>
               <Card>
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">02. How I build</p>
-                <h3 className="mt-3 font-display text-2xl tracking-tight">I moved from WordPress into full-scale development.</h3>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">02. Expanding My Skills</p>
+                <h3 className="mt-3 font-display text-2xl tracking-tight">Transitioning from WordPress, I immersed myself in modern development tools.</h3>
                 <p className="mt-4 text-base leading-7 text-text-muted text-pretty">
-                  Over time, I went deeper into HTML, CSS, JavaScript, Python, Django, Next.js, and Vite so I could connect strategy with real implementation and not stop at surface-level execution.
+                  HTML, CSS, JavaScript, Python, Django, React, Next.js, and Vite, along with more native tools and frameworks, helped me bridge strategy and implementation.
                 </p>
               </Card>
               <Card>
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">03. How I work now</p>
-                <h3 className="mt-3 font-display text-2xl tracking-tight">I build with product discipline and AI leverage together.</h3>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">03. My Current Focus</p>
+                <h3 className="mt-3 font-display text-2xl tracking-tight">I use disciplined product methods and industry standard and AI-driven processes.</h3>
                 <p className="mt-4 text-base leading-7 text-text-muted text-pretty">
-                  Today I use my own MCP-based workflows to move faster and think cleaner, but the goal stays simple: give you something reliable, useful, and ready to grow in the real world.
+                  My goal is to deliver solutions that are reliable, effective, and built for real-world challenges.
                 </p>
               </Card>
             </div>
@@ -183,53 +156,59 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section id="process" tone="inset">
         <Container>
-          <SectionHeading
-            eyebrow="How I work"
-            title="What working with me usually feels like."
-            description="I do not like bloated process for the sake of process. I prefer a clear path, direct communication, and the right level of support around the product."
-          />
-          <div className="mt-10 grid gap-4 lg:grid-cols-3">
-            {HOW_I_WORK.map((item) => (
-              <Card key={item.title} className="h-full">
-                <h3 className="font-display text-xl tracking-tight">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-text-muted text-pretty">{item.description}</p>
-              </Card>
-            ))}
+          <SectionHeading eyebrow="How we work" title="Process you can plan a quarter around." />
+          <div className="mt-10">
+            <ProcessSteps steps={PROCESS_STEPS} />
           </div>
         </Container>
       </Section>
 
       <Section>
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="grid gap-10 lg:grid-cols-[60%_40%] lg:items-start">
             <SectionHeading
-              eyebrow="Beyond development"
-              title="I am interested in outcomes, not just handoff files."
-              description="If you have an idea, an early product, or an existing business that needs the right technical partner behind it, I am happy to work in the way that helps most."
+              eyebrow="Beyond Development"
+              title="We don't just build software—we build businesses."
+              description="Whether you're a startup, an individual with an idea, or an established company, we can collaborate in a way that fits your goals. We can build, maintain, operate, or even partner with you long-term. With the rise of micro SaaS, we are actively creating and supporting products that generate real revenue—not just code."
             />
-            <Card variant="inset" className="rounded-[24px] p-6 sm:p-8">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">What I can help with</p>
-              <ul className="mt-6 space-y-4">
-                {PARTNERSHIP_OPTIONS.map((item, index) => (
-                  <li key={item} className="flex gap-4">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 font-mono text-xs text-primary">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <p className="pt-0.5 text-base leading-7 text-text-muted">{item}</p>
+            <Card variant="inset" className="rounded-[24px] p-6 sm:p-8 flex flex-col h-full">
+              <div className="flex flex-col gap-4 h-full">
+                <h4 className="font-display text-lg tracking-tight text-primary mb-2">Why partner with us?</h4>
+                <hr className="border-border mb-3" />
+                <ul className="space-y-3 mb-4">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-block size-3 rounded-full bg-primary" />
+                    <span>As the founder, I personally stand behind every project.</span>
                   </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-base leading-7 text-text-muted text-pretty">
-                I personally stand behind the work and the relationship, so if we decide to work together, you can expect direct accountability from me.
-              </p>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-block size-3 rounded-full bg-primary" />
+                    <span>Transparent process from start to finish.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-block size-3 rounded-full bg-primary" />
+                    <span>Flexible collaboration models—build, maintain, operate, or partner long-term.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-block size-3 rounded-full bg-primary" />
+                    <span>We focus on delivering results you can truly grow with.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 inline-block size-3 rounded-full bg-primary" />
+                    <span>Active in micro SaaS—building products that generate revenue, not just code.</span>
+                  </li>
+                </ul>
+                <div className="mt-auto pt-2">
+                  <LinkButton href="/contact" className="w-full">Let&apos;s talk about your idea</LinkButton>
+                </div>
+              </div>
             </Card>
           </div>
         </Container>
       </Section>
 
-      <Section>
+      <Section tone="inset">
         <Container>
           <SectionHeading
             eyebrow="The team"
@@ -259,15 +238,6 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section id="process" tone="inset">
-        <Container>
-          <SectionHeading eyebrow="How we work" title="Process you can plan a quarter around." />
-          <div className="mt-10">
-            <ProcessSteps steps={PROCESS_STEPS} />
-          </div>
-        </Container>
-      </Section>
-
       <Section>
         <Container width="reading">
           <SectionHeading eyebrow="Frontend philosophy" title="Why our frontend work doesn't blend in." />
@@ -275,7 +245,7 @@ export default function AboutPage() {
             {PHILOSOPHY.map((p, i) => (
               <li key={p} className="flex gap-4">
                 <span className="shrink-0 size-7 rounded-full bg-primary/10 text-primary flex items-center justify-center font-mono text-xs">
-                  {String(i + 1).padStart(2, "0")}
+                  {String(i + 1).padStart(2, "00")}
                 </span>
                 <p className="text-lg leading-7 text-pretty pt-0.5">{p}</p>
               </li>
@@ -283,8 +253,6 @@ export default function AboutPage() {
           </ul>
         </Container>
       </Section>
-
-      <TrustStrip items={CLIENT_LOGOS} />
 
       {SHOW_GOOGLE_REVIEWS && (
         <Section>
