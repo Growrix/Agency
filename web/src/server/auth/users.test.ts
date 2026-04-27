@@ -1,9 +1,9 @@
 import { mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
-import { authenticateUser, createUser, updateUserProfile, validatePasswordStrength } from "@/server/auth/users";
-import { resetRuntimeConfigForTests } from "@/server/config/runtime";
-import { resetSupabaseClientsForTests } from "@/server/supabase/client";
+import { authenticateUser, createUser, updateUserProfile, validatePasswordStrength } from "./users.ts";
+import { resetRuntimeConfigForTests } from "../config/runtime.ts";
+import { resetSupabaseClientsForTests } from "../supabase/client.ts";
 
 const dataDirectory = path.join(process.cwd(), ".data");
 const databasePath = path.join(dataDirectory, "agency-db.json");

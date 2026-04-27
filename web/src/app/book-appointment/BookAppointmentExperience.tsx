@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CalendarDaysIcon, ChatBubbleLeftRightIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
@@ -75,18 +75,32 @@ function formatSelectedSlot(dateValue: string, timeValue: string) {
   });
 }
 
+function getMinimumBookingDate() {
+  const minimumDate = new Date(Date.now() + 30 * 60 * 1000);
+  minimumDate.setSeconds(0, 0);
+  return minimumDate;
+}
+
 export function BookAppointmentExperience() {
+  const [isHydrated, setIsHydrated] = useState(false);
   const openConcierge = useConciergeStore((state) => state.open);
   const [status, setStatus] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("Could not reserve that slot. Please try another time or use WhatsApp.");
   const [confirmation, setConfirmation] = useState<{ id: string; datetime: string } | null>(null);
   const timezone = getDetectedTimezone();
-  const [minimumBookingDate] = useState(() => new Date(Date.now() + 30 * 60 * 1000));
-  const minDate = toDateInputValue(minimumBookingDate);
-  const minTimeForToday = formatTimeInputValue(minimumBookingDate);
-  const [selectedDate, setSelectedDate] = useState(minDate);
+  const [minimumBookingDate, setMinimumBookingDate] = useState<Date | null>(null);
+  const minDate = minimumBookingDate ? toDateInputValue(minimumBookingDate) : "";
+  const minTimeForToday = minimumBookingDate ? formatTimeInputValue(minimumBookingDate) : undefined;
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const selectedSlotLabel = formatSelectedSlot(selectedDate, selectedTime);
+
+  useEffect(() => {
+    const nextMinimumBookingDate = getMinimumBookingDate();
+    setMinimumBookingDate(nextMinimumBookingDate);
+    setSelectedDate(toDateInputValue(nextMinimumBookingDate));
+    setIsHydrated(true);
+  }, []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -231,7 +245,7 @@ export function BookAppointmentExperience() {
                       <input
                         type="date"
                         className="booking-input mt-1.5"
-                        min={minDate}
+                        min={minDate || undefined}
                         value={selectedDate}
                         onChange={(event) => setSelectedDate(event.target.value)}
                         required
@@ -279,7 +293,10 @@ export function BookAppointmentExperience() {
 
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                     <p className="text-xs text-text-muted">Choose a date and time from the calendar controls. We store the request for admin follow-up and confirmation.</p>
-                    <Button type="submit" disabled={status === "submitting" || !selectedDate || !selectedTime}>
+                    <Button
+                      type="submit"
+                      disabled={!isHydrated || !minimumBookingDate || status === "submitting" || !selectedDate || !selectedTime}
+                    >
                       <CalendarDaysIcon className="size-4" /> {status === "submitting" ? "Saving..." : "Reserve slot"}
                     </Button>
                   </div>

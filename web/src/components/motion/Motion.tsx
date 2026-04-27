@@ -196,23 +196,9 @@ export function MotionRoot({ children }: { children: ReactNode }) {
 }
 
 export function RouteTransition({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  const reduced = useReducedMotion();
-  const FADE_MS = 0.12;
-  if (reduced) return <>{children}</>;
-  return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: FADE_MS, ease: "easeOut" }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  );
+  usePathname();
+  useReducedMotion();
+  return <>{children}</>;
 }
 
 export { AnimatePresence, motion };

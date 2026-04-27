@@ -42,7 +42,7 @@ npm run dev
 
 App runs on [http://localhost:5000](http://localhost:5000).
 
-The local dev script intentionally uses Next.js Webpack mode for reliable startup in this workspace's Windows environment.
+The local dev and build scripts intentionally use Next.js Webpack mode for reliable execution in this workspace's Windows environment, where Turbopack native bindings are not loading correctly.
 
 For mobile testing on the same LAN, the dev config now auto-allows the machine's active local IPv4 addresses for Next.js development origins. Restart the dev server after your IP changes so the updated origin list is picked up.
 
@@ -54,6 +54,10 @@ npm run test
 npm run build
 npm run test:e2e
 ```
+
+On this Windows workspace, `npm run build` uses `next build --webpack` for the same native-binding reason as local dev.
+
+Vitest scripts now use `--configLoader runner` to avoid local rolldown config-bundling failures on this Windows environment.
 
 ## Notes
 

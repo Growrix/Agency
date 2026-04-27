@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 const dataDirectory = path.join(process.cwd(), ".data");
 const databasePath = path.join(dataDirectory, "agency-db.json");
 
-vi.mock("@/server/ai/concierge", () => ({
+vi.mock("../../src/server/ai/concierge.ts", () => ({
   generateConciergeReply: vi.fn(async () => ({
     answer: "We can help with that.",
     messageId: "message-1",
@@ -44,7 +44,7 @@ describe.sequential("API flows", () => {
   });
 
   it("persists contact inquiries through the v1 route", async () => {
-    const { POST } = await import("@/app/api/v1/contact/route");
+    const { POST } = await import("../../src/app/api/v1/contact/route.ts");
     const request = new NextRequest("http://localhost/api/v1/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-forwarded-for": "127.0.0.1" },
@@ -65,7 +65,7 @@ describe.sequential("API flows", () => {
   });
 
   it("creates appointments and rejects duplicate reserved slots", async () => {
-    const { POST } = await import("@/app/api/v1/appointments/route");
+    const { POST } = await import("../../src/app/api/v1/appointments/route.ts");
     const slot = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
 
     const firstResponse = await POST(
@@ -102,7 +102,7 @@ describe.sequential("API flows", () => {
   });
 
   it("creates persisted orders even when Stripe is not configured", async () => {
-    const { POST } = await import("@/app/api/v1/orders/route");
+    const { POST } = await import("../../src/app/api/v1/orders/route.ts");
 
     const response = await POST(
       new NextRequest("http://localhost/api/v1/orders", {
@@ -127,7 +127,7 @@ describe.sequential("API flows", () => {
   });
 
   it("persists concierge conversations through the public route", async () => {
-    const { POST } = await import("@/app/api/v1/ai-concierge/route");
+    const { POST } = await import("../../src/app/api/v1/ai-concierge/route.ts");
 
     const response = await POST(
       new NextRequest("http://localhost/api/v1/ai-concierge", {

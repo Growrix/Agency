@@ -9,7 +9,7 @@ import {
   listPublicServices,
   listPublicShopCategories,
   listPublicShopProducts,
-} from "@/server/domain/catalog";
+} from "./catalog.ts";
 
 const dataDirectory = path.join(process.cwd(), ".data");
 const databasePath = path.join(dataDirectory, "agency-db.json");

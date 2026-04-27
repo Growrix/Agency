@@ -22,6 +22,7 @@ type CreateContactInquiryInput = {
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_DELIVERY_TIMEOUT_MS = 3_000;
 
 function escapeHtml(value: string) {
   return value
@@ -92,6 +93,15 @@ async function sendInquiryEmail(inquiry: ContactInquiryRecord) {
   return { delivered: !retry.error, fallbackSenderUsed: !retry.error };
 }
 
+async function sendInquiryEmailWithTimeout(inquiry: ContactInquiryRecord) {
+  return await Promise.race([
+    sendInquiryEmail(inquiry),
+    new Promise<{ delivered: false; fallbackSenderUsed: false }>((resolve) => {
+      setTimeout(() => resolve({ delivered: false, fallbackSenderUsed: false }), EMAIL_DELIVERY_TIMEOUT_MS);
+    }),
+  ]);
+}
+
 export async function createContactInquiry(input: CreateContactInquiryInput) {
   if (!input.visitor_name.trim()) {
     throw new ApiError("MISSING_REQUIRED_FIELD", 400, "Name is required.");
@@ -127,7 +137,7 @@ export async function createContactInquiry(input: CreateContactInquiryInput) {
     inquiries: [inquiry, ...database.inquiries],
   }));
 
-  const emailDelivery = await sendInquiryEmail(inquiry).catch(async (error: unknown) => {
+  const emailDelivery = await sendInquiryEmailWithTimeout(inquiry).catch(async (error: unknown) => {
     await recordAuditLog({
       level: "error",
       action: "contact.email_failed",

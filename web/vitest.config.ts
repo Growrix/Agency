@@ -1,5 +1,8 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   test: {
@@ -7,11 +10,16 @@ export default defineConfig({
     globals: true,
     include: ["tests/**/*.test.ts", "src/**/*.test.ts"],
     fileParallelism: false,
+    alias: [
+      { find: /^@\//, replacement: `${path.resolve(projectRoot, "src")}/` },
+      { find: "server-only", replacement: path.resolve(projectRoot, "tests/mocks/server-only.ts") },
+    ],
   },
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-      "server-only": path.resolve(__dirname, "tests/mocks/server-only.ts"),
-    },
+    tsconfigPaths: true,
+    alias: [
+      { find: /^@\//, replacement: `${path.resolve(projectRoot, "src")}/` },
+      { find: "server-only", replacement: path.resolve(projectRoot, "tests/mocks/server-only.ts") },
+    ],
   },
 });
