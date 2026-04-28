@@ -27,6 +27,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CTABand } from "@/components/sections/CTABand";
 import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
+import { AdditionalServices } from "@/components/sections/AdditionalServices";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
@@ -164,6 +165,8 @@ export default async function Home() {
           </RevealGroup>
         </Container>
       </Section>
+
+      <AdditionalServices />
 
       {/* Featured Builds */}
       <Section>
