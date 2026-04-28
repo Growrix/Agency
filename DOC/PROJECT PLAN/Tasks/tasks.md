@@ -5,7 +5,7 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-04-27
+last_audit_date: 2026-04-28
 current_state:
   repo_branch_audited: Version_3
   frontend_shell: done
@@ -96,6 +96,8 @@ task_status_counts:
   - replaced the placeholder booking and checkout routes with real server-backed forms, added a protected admin login/dashboard route, and introduced integration tests for contact, booking, checkout, and concierge flows
   - fixed legal contact accuracy across the remaining user-facing admin/profile fallback copy by routing contact email to `admin@growrixos.com`, strengthened shared checkout/form placeholder visibility with broader base placeholder and autofill styling, and hardened `/shop/[slug]` plus preview surfaces with min-width and wrap controls so mobile layouts do not overflow across desktop, tablet, or phone viewport tests
   - reran the release pipeline on a clean production server instance and confirmed lint, typecheck, build, unit, integration, accessibility smoke, security header/auth checks, performance smoke, and full Playwright desktop/tablet/mobile coverage pass when executed serially in this Windows workspace
+  - added an "Additional Services" section (SEO & Visibility Setup, Tracking & Analytics, Technical SEO) as a shared component rendered on the homepage after the Capability Rail and on the services overview page before the CTABand, with all bullet items, footer disclaimer, and a CTA link to the new dedicated page
+  - created the `/additional-services` dedicated page with a full 7-section design: hero, category card grid (3 columns desktop/1 mobile), why-it-matters value strip, delivery model two-panel (included vs not-included), 4-step process, FAQ accordion, and CTA band; added page-plan doc, updated Frontend ai-context.yaml route registry, updated PRIMARY_NAV Services dropdown and FOOTER_NAV Services column in nav.ts
 - Working conclusion:
 	- the documented frontend surface is largely implemented
   - the documented backend, API, Security, and QA phases now each have a first real implementation slice, though full production hardening is still pending
