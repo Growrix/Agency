@@ -1,4 +1,5 @@
 import {
+  ArrowUpRightIcon,
   ChartBarIcon,
   CheckCircleIcon,
   MagnifyingGlassCircleIcon,
@@ -90,6 +91,13 @@ export function AdditionalServices() {
               </Link>
               .
             </p>
+            <Link
+              href="/additional-services"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
+            >
+              See full additional services details
+              <ArrowUpRightIcon className="size-3.5" />
+            </Link>
           </div>
         </div>
       </Container>

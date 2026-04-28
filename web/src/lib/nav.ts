@@ -8,6 +8,7 @@ export const PRIMARY_NAV = [
       { label: "Websites", href: "/services/websites", description: "Design-forward marketing sites built for conversion." },
       { label: "MCP Servers", href: "/services/mcp-servers", description: "Production-ready Model Context Protocol servers for agents." },
       { label: "Automation", href: "/services/automation", description: "Operational systems that remove repetitive work." },
+      { label: "Additional Services", href: "/additional-services", description: "One-time SEO, analytics, and technical setup services." },
     ],
   },
   { label: "Shop", href: "/shop" },
@@ -24,6 +25,7 @@ export const FOOTER_NAV = {
     { label: "Websites", href: "/services/websites" },
     { label: "MCP Servers", href: "/services/mcp-servers" },
     { label: "Automation", href: "/services/automation" },
+    { label: "Additional Services", href: "/additional-services" },
   ],
   Shop: [
     { label: "Templates", href: "/shop?category=templates" },

@@ -38,6 +38,7 @@ surfaces:
       - /services/websites
       - /services/mcp-servers
       - /services/automation
+      - /additional-services
       - /portfolio
       - /portfolio/[slug]
       - /pricing
