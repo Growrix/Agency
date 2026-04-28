@@ -308,8 +308,6 @@ export default function ServicesPage() {
 				</Container>
 			</Section>
 
-			<AdditionalServices />
-
 			<CTABand
 				title="Need help choosing between a website, a SaaS build, or a ready launch?"
 				description="Tell us the business problem, the current bottleneck, and the timeline. We will map it to the right delivery model and the supporting systems only if they matter."
