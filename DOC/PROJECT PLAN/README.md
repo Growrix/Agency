@@ -85,12 +85,32 @@ Folders:
 2. `DOC/PROJECT PLAN/DevOps/README.md`
 3. `DOC/PROJECT PLAN/QA/README.md`
 
+### For end-to-end planning and scale expansion
+1. `DOC/PROJECT PLAN/ai-context.yaml`
+2. `DOC/PROJECT PLAN/README.md`
+3. `DOC/PROJECT PLAN/Tasks/tasks.md`
+4. `DOC/PROJECT PLAN/Shared Contracts/README.md`
+5. `DOC/PROJECT PLAN/Frontend/README.md`
+6. `DOC/PROJECT PLAN/Backend/README.md`
+7. `DOC/PROJECT PLAN/API and Data/README.md`
+8. `DOC/PROJECT PLAN/Supabase/README.md`
+9. `DOC/PROJECT PLAN/Admin Dashboard/README.md`
+10. `DOC/PROJECT PLAN/Security/README.md`
+11. `DOC/PROJECT PLAN/DevOps/README.md`
+12. `DOC/PROJECT PLAN/QA/README.md`
+13. `DOC/Universal/Template/e2e-planning-template.md`
+
+Planning rule:
+- For any existing-site enhancement or expansion, audit the current codebase first and prefer reuse or extension over net-new architecture.
+- A complete plan must explicitly cover reusable components and routes, CMS and authoring model, database and schema ownership, admin or operator workflows, integration contracts, and release validation.
+
 ## Concrete Rule
 
 - Use `DOC/Universal/Prompts/master_orchestration_prompt.md` only to create project docs.
 - Use `DOC/PROJECT PLAN/ai-context.yaml` for all later execution.
 - Use `Shared Contracts/` as the cross-role source of truth.
 - Use `Tasks/tasks.md` as the single execution tracker for current phase, blockers, and next steps.
+- Use `DOC/Universal/Template/e2e-planning-template.md` when generating or revising end-to-end planning documents.
 
 ## Why This Root File Was Needed
 

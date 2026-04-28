@@ -46,7 +46,11 @@ core_invariants:
   - AI must use this file as the primary routing file once documentation generation is complete.
   - Execution status must be tracked in DOC/PROJECT PLAN/Tasks/tasks.md before and after each implementation phase.
   - Supabase is the default managed provider for auth and database persistence unless explicitly overridden.
-  - Sanity CMS may be used as the optional blog content provider with local static fallback when CMS is unavailable.
+  - Planning for an existing codebase must start with a reuse audit of routes, layouts, components, schemas, data modules, and integrations before proposing net-new architecture.
+  - End-to-end planning must explicitly cover CMS/content operations, database ownership, schema evolution, operator workflows, and integration boundaries.
+  - The planning stack decision must explicitly assess Next.js, React, TypeScript, Sanity CMS, Supabase, PostgreSQL, Prisma, Lark, Resend, Pusher, and S3.
+  - Sanity CMS should be treated as a first-class content planning surface and must have explicit ownership decisions for blog, services, shop, case studies, FAQs, and other editorial surfaces.
+  - The common footer copyright standard is: © {year} {Company Name or Site Name}. All right reserved. Built & Maintenece by Growrix OS. Link Growrix OS to https://www.growrixos.com.
 
 project_layers:
   universal_layer:
@@ -103,6 +107,14 @@ project_docs:
       - payload contracts
       - event flows
       - schema and persistence rules
+  supabase:
+    ai_entry: DOC/PROJECT PLAN/Supabase/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Supabase/README.md
+    use_for:
+      - auth provider planning
+      - managed PostgreSQL ownership
+      - environment and secret strategy
+      - persistence constraints and fallback rules
   security:
     ai_entry: DOC/PROJECT PLAN/Security/ai-context.yaml
     human_index: DOC/PROJECT PLAN/Security/README.md
@@ -140,10 +152,26 @@ read_paths:
     - DOC/PROJECT PLAN/README.md
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Supabase/ai-context.yaml
   track_execution:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/tasks.md
+  plan_end_to_end:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/README.md
+    - DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Backend/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Supabase/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    - DOC/PROJECT PLAN/QA/ai-context.yaml
+    - DOC/Universal/Template/e2e-planning-template.md
   implement_frontend:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml

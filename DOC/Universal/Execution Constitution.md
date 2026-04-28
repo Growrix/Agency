@@ -94,6 +94,8 @@ Rules:
 - every later phase must read earlier artifacts
 - if a valid existing folder already exists, reuse and normalize it instead of blindly replacing it
 - no phase may silently override shared contracts
+- for scale or enhancement planning, AI must audit the current implementation and prefer extension or normalization over replacement
+- documentation generation is incomplete if CMS, database ownership, integration boundaries, or operator workflows are left implicit
 
 ---
 
@@ -137,7 +139,8 @@ If AI starts from any other file first, the workflow is off-track.
 - Backend: as defined in `DOC/PROJECT PLAN/Backend/README.md`
 - API: as defined in `DOC/PROJECT PLAN/API and Data/README.md`
 - Database: as defined in `DOC/PROJECT PLAN/API and Data/README.md`
-- Integrations: Stripe, WhatsApp, Email, Calendar, AI as defined in shared contracts
+- CMS and content operations: Sanity ownership, authoring flow, and preview or publishing model must be explicit when content-bearing surfaces exist
+- Integrations: Stripe, WhatsApp, Email, Calendar, AI, storage, and realtime providers as defined in shared contracts and project-specific docs
 - CI/CD and operations: as defined in `DOC/PROJECT PLAN/DevOps/README.md`
 - Testing and release gates: as defined in `DOC/PROJECT PLAN/QA/README.md`
 
@@ -152,6 +155,8 @@ Do:
 - always preserve the chain Universal -> GPT Roles -> Project Specific -> Implementation
 - always keep `DOC/PROJECT PLAN/ai-context.yaml` current as the project root routing file
 - always validate implementation against QA and Security docs before considering a feature complete
+- always prefer reuse of existing routes, components, schemas, and integrations before proposing net-new architecture on an existing codebase
+- always make CMS, data, integration, and operator ownership explicit during planning rather than leaving them as follow-up guesses
 
 Do not:
 - do not invent features outside the project plan

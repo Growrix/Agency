@@ -30,13 +30,16 @@ core_invariants:
   - All timestamps are ISO 8601, UTC.
   - All monetary amounts are in cents (USD cents) to avoid floating-point errors.
   - All user-facing identifiers (order_number, etc.) are human-readable; internal IDs are UUIDs.
+  - Planning must explicitly identify which entities live in PostgreSQL, which content lives in Sanity, and how those systems reference each other.
+  - Planning must explicitly identify schema migration, seed, and operational ownership when new CMS or transactional surfaces are introduced.
 
 api_base_url: https://api.agency.com/api/v1
 
 platform_providers:
   auth_provider: Supabase Auth (email/password, JWT sessions)
   database_provider: Supabase Postgres (managed PostgreSQL)
-  cms_provider: Sanity CMS (blog content, optional with static fallback)
+  cms_provider: Sanity CMS (planning must explicitly assign ownership for blog, services, shop, case studies, FAQs, and other editorial surfaces or justify exclusions)
+  orm_query_layer: Prisma or direct typed queries must be chosen explicitly during planning; do not leave the decision implicit
   compatibility_mode: local file-backed store allowed for offline development only
 
 response_envelope:

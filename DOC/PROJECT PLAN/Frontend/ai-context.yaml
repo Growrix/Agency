@@ -26,6 +26,9 @@ core_invariants:
   - Server-authoritative flows such as booking, checkout, chat handoff, and payment states must not be treated as client truth.
   - Explicitly handle loading, empty, error, offline or reconnect, and success states where relevant.
   - All UI must remain responsive, accessible, and localization-ready.
+  - For scale and enhancement planning, audit and reuse existing shells, layouts, components, sections, and content collections before adding new frontend architecture.
+  - Frontend planning must define which surfaces are code-authored versus CMS-authored and how Sanity models blog posts, services, shop content, case studies, FAQs, and landing content when those surfaces are in scope.
+  - Shared site chrome must preserve a common footer copyright implementation: © {year} {Company Name or Site Name}. All right reserved. Built & Maintenece by Growrix OS. Link Growrix OS to https://www.growrixos.com.
 
 surfaces:
   public_marketing:
@@ -96,6 +99,15 @@ read_paths:
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/README.md
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+  plan_frontend_scale_or_expand:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+    - DOC/PROJECT PLAN/Supabase/ai-context.yaml
   build_global_shell:
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
