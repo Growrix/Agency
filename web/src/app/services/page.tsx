@@ -235,6 +235,8 @@ export default function ServicesPage() {
 				</Container>
 			</Section>
 
+			<AdditionalServices />
+
 			<Section>
 				<Container>
 					<SectionHeading
