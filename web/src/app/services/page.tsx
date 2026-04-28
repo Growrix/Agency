@@ -236,6 +236,8 @@ export default function ServicesPage() {
 				</Container>
 			</Section>
 
+			<AdditionalServices />
+
 			<Section>
 				<Container>
 					<SectionHeading
@@ -305,8 +307,6 @@ export default function ServicesPage() {
 					</div>
 				</Container>
 			</Section>
-
-			<AdditionalServices />
 
 			<CTABand
 				title="Need help choosing between a website, a SaaS build, or a ready launch?"
