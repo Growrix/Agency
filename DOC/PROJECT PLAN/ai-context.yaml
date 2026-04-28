@@ -22,6 +22,25 @@ documentation_workflow:
     A complete project-specific documentation system must exist under
     DOC/PROJECT PLAN/ before implementation begins.
 
+planning_artifact_contract:
+  required_for_end_to_end_planning: true
+  location: DOC/PROJECT PLAN/
+  naming_convention: <scope>-e2e-plan.md
+  downstream_role_docs_required: true
+  minimum_required_for_cms_content_operations:
+    - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
+    - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+    - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+  rule: >-
+    Create or update a concrete planning artifact in DOC/PROJECT PLAN/ before
+    updating DOC/PROJECT PLAN/Tasks/tasks.md. Chat summaries are secondary and
+    are not the canonical project plan.
+  downstream_rule: >-
+    Create or update the affected role-specific planning docs in their owning
+    DOC/PROJECT PLAN subfolders before the plan is considered complete or the
+    tracker is updated.
+
 execution_workflow:
   start_here_for_build: true
   minimum_instruction: >-
@@ -67,6 +86,22 @@ project_layers:
     root: DOC/PROJECT PLAN/
 
 project_docs:
+  planning_artifacts:
+    root: DOC/PROJECT PLAN/
+    active_artifacts:
+      - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    use_for:
+      - canonical fresh, scale, or hybrid planning artifacts created after codebase audits
+      - cross-role scope decisions that must exist before tracker updates or implementation
+  downstream_role_docs:
+    active_docs:
+      - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
+      - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+      - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+      - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+    use_for:
+      - role-specific implementation planning derived from the active root planning artifact
+      - role entrypoints that must exist before later implementation work starts
   tasks:
     ai_entry: DOC/PROJECT PLAN/Tasks/ai-context.yaml
     human_index: DOC/PROJECT PLAN/Tasks/tasks.md
@@ -172,6 +207,11 @@ read_paths:
     - DOC/PROJECT PLAN/DevOps/ai-context.yaml
     - DOC/PROJECT PLAN/QA/ai-context.yaml
     - DOC/Universal/Template/e2e-planning-template.md
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
+    - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+    - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
   implement_frontend:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml

@@ -32,6 +32,7 @@ The generated documentation for one real project.
 Contains:
 - `DOC/PROJECT PLAN/ai-context.yaml`
 - `DOC/PROJECT PLAN/README.md`
+- root planning artifacts such as `DOC/PROJECT PLAN/<scope>-e2e-plan.md`
 - `DOC/PROJECT PLAN/Shared Contracts/`
 - `DOC/PROJECT PLAN/Frontend/`
 - `DOC/PROJECT PLAN/Backend/`
@@ -73,6 +74,11 @@ Input:
 Rule:
 - once the project-specific documentation exists, all build work must start from the project root ai-context, not from the universal prompt
 
+Additional rule for later fresh, scale, or hybrid planning inside Stage B:
+- AI must materialize the plan as a markdown artifact under `DOC/PROJECT PLAN/` before updating the execution tracker or recommending implementation.
+- AI must also materialize the affected downstream role-specific planning docs in their owning folders before updating the execution tracker or recommending implementation.
+- chat summaries are secondary and never replace the canonical planning artifact.
+
 Purpose:
 - keeps implementation grounded in the already-generated project docs instead of re-running orchestration logic
 
@@ -96,6 +102,7 @@ Rules:
 - no phase may silently override shared contracts
 - for scale or enhancement planning, AI must audit the current implementation and prefer extension or normalization over replacement
 - documentation generation is incomplete if CMS, database ownership, integration boundaries, or operator workflows are left implicit
+- planning is incomplete if the new scope does not exist as a concrete project artifact under `DOC/PROJECT PLAN/` and inside the affected role folders
 
 ---
 
@@ -154,6 +161,7 @@ Do:
 - always read the current phase's `ai-context.yaml` and `README.md`
 - always preserve the chain Universal -> GPT Roles -> Project Specific -> Implementation
 - always keep `DOC/PROJECT PLAN/ai-context.yaml` current as the project root routing file
+- always materialize cross-role planning as a concrete markdown artifact under `DOC/PROJECT PLAN/` and create the affected downstream role docs before touching `Tasks/tasks.md`
 - always validate implementation against QA and Security docs before considering a feature complete
 - always prefer reuse of existing routes, components, schemas, and integrations before proposing net-new architecture on an existing codebase
 - always make CMS, data, integration, and operator ownership explicit during planning rather than leaving them as follow-up guesses

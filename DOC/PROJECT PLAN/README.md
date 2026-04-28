@@ -99,10 +99,27 @@ Folders:
 11. `DOC/PROJECT PLAN/DevOps/README.md`
 12. `DOC/PROJECT PLAN/QA/README.md`
 13. `DOC/Universal/Template/e2e-planning-template.md`
+14. `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`
 
 Planning rule:
 - For any existing-site enhancement or expansion, audit the current codebase first and prefer reuse or extension over net-new architecture.
 - A complete plan must explicitly cover reusable components and routes, CMS and authoring model, database and schema ownership, admin or operator workflows, integration contracts, and release validation.
+
+## Planning Artifact Rule
+
+- Every fresh, scale, or hybrid end-to-end planning session must create or update a concrete markdown artifact under `DOC/PROJECT PLAN/` before `DOC/PROJECT PLAN/Tasks/tasks.md` is changed.
+- Every canonical end-to-end planning session must also create or update the affected role-specific planning docs in their owning folders before `DOC/PROJECT PLAN/Tasks/tasks.md` is changed.
+- For CMS and content-operations scope, the minimum downstream role-doc set is Frontend, API and Data, Admin Dashboard, and Security unless an explicit scope exclusion is documented.
+- Chat summaries do not replace planning artifacts.
+- Use `DOC/Universal/Template/e2e-planning-template.md` as the base and prefer scope-specific root names such as `DOC/PROJECT PLAN/<scope>-e2e-plan.md`.
+
+## Active Planning Artifacts
+
+- `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`
+- `DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md`
+- `DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md`
+- `DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md`
+- `DOC/PROJECT PLAN/Security/cms-content-operations-security.md`
 
 ## Concrete Rule
 
@@ -111,6 +128,7 @@ Planning rule:
 - Use `Shared Contracts/` as the cross-role source of truth.
 - Use `Tasks/tasks.md` as the single execution tracker for current phase, blockers, and next steps.
 - Use `DOC/Universal/Template/e2e-planning-template.md` when generating or revising end-to-end planning documents.
+- For cross-role planning scopes, create or update the canonical root planning artifact and the affected downstream role docs before `Tasks/tasks.md` is updated.
 
 ## Why This Root File Was Needed
 

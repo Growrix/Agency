@@ -38,6 +38,9 @@ read_first:
 - [01-design-system.md](01-design-system.md): tokens, typography, color, spacing, surfaces, responsive rules.
 - [02-component-system.md](02-component-system.md): reusable UI primitives, states, behavior, accessibility, responsive logic.
 
+## Scope-Specific Planning Docs
+- [cms-content-operations-frontend.md](cms-content-operations-frontend.md): canonical frontend implementation-planning doc for the CMS/content-operations rollout. Read this together with the root e2e artifact when planning or implementing CMS-backed public surfaces.
+
 ## Machine-Readable Task Map
 ```yaml
 tasks:
@@ -133,6 +136,15 @@ tasks:
       - privacy-policy-page.md
       - terms-of-service-page.md
       - 404-page.md
+
+  plan-cms-content-operations:
+    read:
+      - ai-context.yaml
+      - ../cms-content-operations-e2e-plan.md
+      - cms-content-operations-frontend.md
+      - 00-master-ui-architecture.md
+      - 01-design-system.md
+      - 02-component-system.md
 ```
 
 ## Sequential Build Workflow
@@ -195,6 +207,9 @@ tasks:
 - [privacy-policy-page.md](privacy-policy-page.md)
 - [terms-of-service-page.md](terms-of-service-page.md)
 - [404-page.md](404-page.md)
+
+### Scope-Specific Planning
+- [cms-content-operations-frontend.md](cms-content-operations-frontend.md)
 
 ## Dependency Notes
 - Every route implementation depends on the master architecture, design system, and component system.

@@ -2,6 +2,20 @@
 
 Use this template for all fresh, scale, and hybrid planning work in the Agency workspace.
 
+Documentation materialization rule:
+- Instantiate this template into a real markdown file under `DOC/PROJECT PLAN/` before updating `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- For cross-role scope, store the artifact at the `DOC/PROJECT PLAN/` root using a scope-specific name such as `<scope>-e2e-plan.md`.
+- Create or update the affected role-specific planning docs in their owning folders before considering the plan complete.
+- Chat summaries are secondary and never replace the canonical planning artifact.
+
+## 0. Artifact Metadata
+- Canonical artifact path:
+- Affected downstream role docs:
+- Planning request source:
+- Planning mode:
+- Status:
+- Last updated:
+
 ## 1. Planning Mode And Objective
 - Planning mode: fresh, scale, or hybrid
 - Why this mode fits the request:
@@ -190,5 +204,6 @@ Use this template for all fresh, scale, and hybrid planning work in the Agency w
 
 ## 12. Tracker And Documentation Updates
 - Files updated:
+- Downstream role docs updated:
 - Task tracker deltas:
 - New planning artifacts created:

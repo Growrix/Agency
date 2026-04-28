@@ -29,6 +29,14 @@ core_invariants:
   - Shop and portfolio operations must be manageable without raw JSON editing.
   - New admin planning must not break existing public routes or API compatibility.
 
+scope_specific_planning_docs:
+  cms_content_operations:
+    canonical_doc: DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+    parent_artifact: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    use_for:
+      - operator ownership boundaries between Sanity Studio and the admin dashboard
+      - admin module map and workflow design for catalog, newsletter, inquiry, and booking operations
+
 scope:
   includes:
     - shop management end-to-end
@@ -61,15 +69,25 @@ read_paths:
     - DOC/PROJECT PLAN/Admin Dashboard/README.md
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
   admin_backend_planning:
     - DOC/PROJECT PLAN/Admin Dashboard/README.md
     - DOC/PROJECT PLAN/Backend/ai-context.yaml
     - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
   admin_security_release:
     - DOC/PROJECT PLAN/Admin Dashboard/README.md
     - DOC/PROJECT PLAN/Security/ai-context.yaml
     - DOC/PROJECT PLAN/DevOps/ai-context.yaml
     - DOC/PROJECT PLAN/QA/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+  plan_cms_content_operations:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+    - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
 
 success_criteria:
   - Dedicated admin docs exist and are linked from project root docs.
