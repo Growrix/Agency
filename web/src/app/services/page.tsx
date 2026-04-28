@@ -16,6 +16,7 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
+import { AdditionalServices } from "@/components/sections/AdditionalServices";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
@@ -306,6 +307,8 @@ export default function ServicesPage() {
 					</div>
 				</Container>
 			</Section>
+
+			<AdditionalServices />
 
 			<CTABand
 				title="Need help choosing between a website, a SaaS build, or a ready launch?"

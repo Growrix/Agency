@@ -230,6 +230,45 @@ export const FAQ_GENERAL = [
   },
 ];
 
+export const ADDITIONAL_SERVICES_CATEGORIES: {
+  id: string;
+  title: string;
+  badge?: string;
+  items: string[];
+}[] = [
+  {
+    id: "seo-visibility",
+    title: "SEO & Visibility Setup",
+    badge: "One-Time Services",
+    items: [
+      "Google Search Console setup & Google Indexing",
+      "Sitemap & robots.txt configuration",
+      "On-page SEO fundamentals (meta tags, titles, descriptions)",
+      "Technical SEO audits and fixes",
+      "Page speed and performance optimization",
+    ],
+  },
+  {
+    id: "tracking-analytics",
+    title: "Tracking & Analytics",
+    items: [
+      "Meta Pixel (Facebook Pixel) setup",
+      "Google Analytics integration",
+      "Conversion tracking and event configuration",
+    ],
+  },
+  {
+    id: "technical-seo",
+    title: "Technical SEO",
+    items: [
+      "Structured data (schema markup)",
+      "URL structure optimization",
+      "Core Web Vitals improvements",
+      "Indexing and crawlability fixes",
+    ],
+  },
+];
+
 // ---------------- BLOG ----------------
 
 export type BlogBodyBlock =
