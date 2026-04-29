@@ -395,7 +395,7 @@ async function fetchSingle<T>(query: string, params: Record<string, unknown>, op
 
   const client = getSanityClient({ preview: options.preview });
   try {
-    return await client.fetch<T | null>(query, { ...params, preview: options.preview === true, timeout: 3000 });
+    return await client.fetch<T | null>(query, { ...params, preview: options.preview === true });
   } catch {
     return null;
   }
@@ -408,7 +408,7 @@ async function fetchList<T>(query: string, options: SanityQueryOptions) {
 
   const client = getSanityClient({ preview: options.preview });
   try {
-    return await client.fetch<T[]>(query, { preview: options.preview === true, timeout: 3000 });
+    return await client.fetch<T[]>(query, { preview: options.preview === true });
   } catch {
     return [] as T[];
   }

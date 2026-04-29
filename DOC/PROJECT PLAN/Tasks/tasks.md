@@ -117,6 +117,7 @@ task_status_counts:
   - current content work should stay text-only and documentation-first: no route logic changes, only copy, pricing language, FAQs, and related positioning updates
   - adjusted the shared StatBlock section to use the global Container width for consistent sizing across routes, and moved the about-page stack marquee to follow the process section
   - identified the Version_3 Vercel install failure root cause as Windows-only native binaries being declared as direct web dependencies, removed those direct pins, refreshed the lockfile, and verified the branch still passes lint, unit, integration, and build gates
+  - identified and fixed the CMS branch Vercel build blocker as a Sanity client typing misuse (`timeout` passed as a GROQ params field), removed the invalid query param to restore typecheck compatibility, and aligned GitHub Actions Node to 20 to match local/Vercel runtime expectations
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.

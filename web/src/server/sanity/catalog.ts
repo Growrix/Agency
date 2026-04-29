@@ -316,7 +316,7 @@ async function fetchCatalogEntries<T>(query: string, options: SanityQueryOptions
 
   const client = getSanityClient({ preview: options.preview });
   try {
-    return await client.fetch<T[]>(query, { preview: options.preview === true, timeout: 3000 });
+    return await client.fetch<T[]>(query, { preview: options.preview === true });
   } catch {
     return [] as T[];
   }
