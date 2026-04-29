@@ -9,11 +9,7 @@
     "build": "npm --prefix web run build",
     "start": "npm --prefix web run start",
     "lint": "npm --prefix web run lint",
-    "studio:dev": "npm --prefix studio run dev",
-    "studio:build": "npm --prefix studio run build",
-    "studio:deploy": "npm --prefix studio run deploy",
     "install:web": "npm --prefix web install",
-    "install:studio": "npm --prefix studio install",
     "postinstall": "npm run install:web"
   }
 }

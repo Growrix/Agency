@@ -81,6 +81,7 @@ Documentation materialization rule:
 - Slug and preview rules:
 - Draft, review, publish flow:
 - Revalidation or cache invalidation model:
+- Studio runtime and deployment isolation plan:
 
 ### Editorial And Operator Workflow
 - Who creates blog posts and where:
@@ -171,6 +172,14 @@ Documentation materialization rule:
 - Entry criteria:
 - Exit criteria:
 - Risks and fallback:
+
+### CMS Studio Runtime Isolation Checklist
+- Studio directory and package manifest audited:
+- Studio lockfile strategy defined:
+- Node version policy defined for Studio:
+- Root install/deploy coupling explicitly accepted or rejected:
+- Separate CI workflow defined:
+- Separate hosting project and CMS domain defined:
 
 ### QA
 - Inputs:

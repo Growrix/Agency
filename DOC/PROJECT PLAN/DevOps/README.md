@@ -46,6 +46,33 @@ Repository support added for this baseline:
 - `.github/workflows/ci.yml` validates lint and production build on push and pull request
 - `.env.example` documents the current frontend-only deployment variables
 
+### Sanity Studio Runtime Isolation
+
+Sanity Studio must be treated as a separate application inside the same repository.
+
+Required rules:
+1. Use Node.js `20.x` for both `web/` and `studio/` unless project docs explicitly approve a different major version.
+2. Keep Studio install flow separate from the root and `web/` install flow.
+3. Keep a dedicated `studio/package-lock.json` committed to source control.
+4. Keep Studio CI separate from the public site CI.
+5. Keep Studio hosting separate from the public site hosting.
+6. Do not allow root `postinstall` or root deploy commands to install or build Studio.
+
+Recommended Studio local flow:
+1. `cd studio`
+2. `npm install`
+3. `npm run dev`
+
+Recommended Studio hosting:
+1. Create a separate Vercel project for `studio/`
+2. Set Root Directory to `studio`
+3. Set Install Command to `npm install`
+4. Set Build Command to `npm run build`
+5. Set Output Directory to `dist`
+6. Attach a separate domain such as `cms.growrixos.com`
+
+The public site and Studio may share a Git repository, but they must not share one install or deployment lifecycle.
+
 ### CI/CD Platform: GitHub Actions
 
 **CI Pipeline** (on every push or PR):

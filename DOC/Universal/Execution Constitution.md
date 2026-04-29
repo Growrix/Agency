@@ -165,6 +165,7 @@ Do:
 - always validate implementation against QA and Security docs before considering a feature complete
 - always prefer reuse of existing routes, components, schemas, and integrations before proposing net-new architecture on an existing codebase
 - always make CMS, data, integration, and operator ownership explicit during planning rather than leaving them as follow-up guesses
+- always treat third-party CMS studios such as Sanity Studio as isolated apps when they live inside the same repo: own runtime contract, own lockfile, own CI/deploy path, and no root install coupling by default
 
 Do not:
 - do not invent features outside the project plan

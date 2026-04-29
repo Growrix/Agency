@@ -10,6 +10,7 @@ project:
   canonical_docs_root: DOC/PROJECT PLAN/DevOps/
   deployment_target: Vercel
   production_domain: https://growrixos.com
+  studio_domain: https://cms.growrixos.com
 
 deployment_checklist:
   pre_deployment:
@@ -46,6 +47,18 @@ deployment_checklist:
       status: verified
       description: Start command should be "npm start" (already configured)
       file_reference: web/package.json
+
+  studio_setup:
+    - name: Separate Studio Project Created
+      status: pending-user-action
+      description: Create a second Vercel project with `studio/` as the root directory
+      reference: https://vercel.com/dashboard
+    - name: Studio Build Settings Verified
+      status: ready-to-execute
+      description: Studio project must use `npm install`, `npm run build`, and `dist`
+    - name: Studio Custom Domain Added
+      status: pending-user-action
+      description: Attach `cms.growrixos.com` (or equivalent) to the separate Studio project
 
   post_deployment:
     - name: Smoke Test Auth
@@ -220,6 +233,17 @@ vercel_steps:
       - Test user login
       - Check that email links use correct domain
       - Monitor logs for errors in first 24 hours
+
+  step_7:
+    title: Deploy Sanity Studio Separately
+    substeps:
+      - Create a second Vercel project that points to the `studio` directory
+      - Framework: Other
+      - Install Command: npm install
+      - Build Command: npm run build
+      - Output Directory: dist
+      - Add domain `cms.growrixos.com`
+      - Add the Studio domain to the Sanity project CORS and allowed origins list
 
 quick_copy_paste_vars:
   instructions: >-

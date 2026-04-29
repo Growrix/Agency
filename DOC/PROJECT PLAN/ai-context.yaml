@@ -69,6 +69,7 @@ core_invariants:
   - End-to-end planning must explicitly cover CMS/content operations, database ownership, schema evolution, operator workflows, and integration boundaries.
   - The planning stack decision must explicitly assess Next.js, React, TypeScript, Sanity CMS, Supabase, PostgreSQL, Prisma, Lark, Resend, Pusher, and S3.
   - Sanity CMS should be treated as a first-class content planning surface and must have explicit ownership decisions for blog, services, shop, case studies, FAQs, and other editorial surfaces.
+  - Sanity Studio must be treated as an isolated app inside the repository: same approved Node major as the web app unless explicitly documented otherwise, own lockfile, own install flow, own CI and deploy surface, and no root postinstall coupling.
   - The common footer copyright standard is: © {year} {Company Name or Site Name}. All right reserved. Built & Maintenece by Growrix OS. Link Growrix OS to https://www.growrixos.com.
 
 project_layers:

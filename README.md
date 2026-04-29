@@ -15,9 +15,40 @@ npm run lint
 npm run build
 ```
 
+These root commands are for the `web/` app only. Do not use the repository root to install or run Sanity Studio.
+
 `npm run dev` now self-heals common local startup issues: it enforces Node 20 through `fnm` when available, restarts stale Agency Next.js processes that are still holding port `5000`, and falls back to the next free local port if `5000` is occupied by another application.
 
 The root install now also installs the Next.js app dependencies inside `web/` through `postinstall`, so CI and deployment environments can build from the repository root without a manual second install step.
+
+## Sanity Studio
+
+`studio/` is an isolated application inside the same repository.
+
+Rules:
+
+- Use Node.js `20.x` for Studio as well.
+- Run Studio commands from `studio/`, not from the repository root.
+- Keep a dedicated `studio/package-lock.json` for deterministic installs.
+- Keep Studio CI/deploy separate from the public site CI/deploy.
+- Deploy Studio to its own project and domain such as `cms.growrixos.com`.
+
+Recommended Studio commands:
+
+```bash
+cd studio
+npm install
+npm run dev
+```
+
+Recommended Studio deployment target:
+
+- separate Vercel project
+- Root Directory: `studio`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Domain: `cms.growrixos.com`
 
 ## Development Deployment Baseline
 

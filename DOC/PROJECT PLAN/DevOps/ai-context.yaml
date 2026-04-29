@@ -33,6 +33,33 @@ core_invariants:
   - Incidents are detected automatically and trigger alerts.
   - All data is backed up daily and tested for recoverability quarterly.
   - Disaster recovery time objective (RTO) is 4 hours; recovery point objective (RPO) is 1 hour.
+  - Sanity Studio is deployed as its own app surface, not as part of the public web runtime.
+  - Sanity Studio uses its own lockfile, install lifecycle, CI workflow, and hosting project.
+  - Root workspace install and deployment automation must remain web-only unless a doc explicitly defines a separate Studio path.
+
+cms_studio_policy:
+  enabled: true
+  ownership: editorial authoring surface for public content
+  runtime:
+    node: 20.x
+    package_manager: npm
+    lockfile_required: true
+  repository_rules:
+    same_repo_allowed: true
+    shared_install_flow_allowed: false
+    root_postinstall_may_install_studio: false
+    root_scripts_may_proxy_studio: false
+  ci_cd:
+    separate_workflow_required: true
+    separate_hosting_project_required: true
+    recommended_domain: https://cms.growrixos.com
+    recommended_vercel_root_directory: studio
+    recommended_build_command: npm run build
+    recommended_output_directory: dist
+  safety_rules:
+    - never couple Studio install failures to the public web build path
+    - never require a different Node major for Studio unless project docs are explicitly updated first
+    - never store transactional app data in Sanity Studio
 
 deployment_strategy:
   approach: containerized microservices on Kubernetes or ECS
