@@ -8,10 +8,10 @@
     "deploy": "sanity deploy"
   },
   "dependencies": {
-    "@sanity/vision": "latest",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "sanity": "latest",
+    "@sanity/vision": "5.22.0",
+    "react": "19.2.2",
+    "react-dom": "19.2.2",
+    "sanity": "5.22.0",
     "styled-components": "6.1.19"
   },
   "devDependencies": {
