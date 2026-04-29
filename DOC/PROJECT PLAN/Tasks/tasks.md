@@ -121,6 +121,7 @@ task_status_counts:
   - audited recurring Vercel Node-engine warnings and normalized root/web `engines.node` from strict `20.x` to `>=20 <25` so the project setting `24.x` no longer conflicts while local Node 20 remains supported
   - codified Sanity Studio best-practice rules across universal and project docs so AI must treat Studio as an isolated app with Node 20, its own lockfile/install flow/CI/deploy, and a separate CMS domain rather than coupling it to the public web lifecycle
   - implemented the Studio isolation baseline in code by removing root-level Studio script coupling, adding Studio-local runtime files and agent guidance, generating a dedicated `studio/package-lock.json`, adding a separate Studio CI workflow and Vercel config, and verifying both `web` and `studio` production builds pass under Node 20
+  - hardened Studio local startup to a reliable one-command flow by replacing direct `sanity dev` with a Node-20 enforcing bootstrap runner that self-checks required dependencies and launches Sanity through `npm exec` for Windows-safe execution
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.
