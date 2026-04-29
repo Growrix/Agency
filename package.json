@@ -2,7 +2,7 @@
   "name": "agency-workspace",
   "private": true,
   "engines": {
-    "node": "20.x"
+    "node": ">=20 <25"
   },
   "scripts": {
     "dev": "npm --prefix web run dev",

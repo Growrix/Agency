@@ -4,7 +4,7 @@ This repository contains the Agency frontend workspace and the project planning 
 
 ## Local Commands
 
-Use Node.js `20.x` locally. The repository now includes `.nvmrc`, `.node-version`, and `engine-strict` enforcement so installs do not silently drift onto an unsupported major version and break Next.js native bindings.
+Use Node.js `20.x` locally (recommended). The repository now allows Node `>=20 <25` for deployment/runtime alignment while `.nvmrc` and `.node-version` keep local development pinned to `20` by default.
 
 Run these commands from the repository root:
 
@@ -30,7 +30,7 @@ Recommended Vercel project settings:
 - Install Command: `npm install`
 - Build Command: `npm run build`
 - Output Directory: leave empty and let Vercel detect `.next`
-- Node.js Version: `20.x`
+- Node.js Version: `20.x` or `24.x` (both are compatible with the repository engine range)
 
 If the Vercel project is instead pointed at the repository root, use:
 
