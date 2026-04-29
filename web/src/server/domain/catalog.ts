@@ -1,15 +1,6 @@
 import "server-only";
 
-import { SERVICES, PORTFOLIO } from "@/lib/content";
-import {
-  CASE_STUDY_DETAILS,
-  getPortfolioImage,
-  getProductImage,
-} from "@/lib/site-images";
-import {
-  PUBLISHED_SHOP_PRODUCTS,
-  SHOP_CATEGORY_OPTIONS,
-} from "@/lib/shop";
+import { SERVICES } from "@/lib/content";
 import type {
   ManagedPortfolioRecord,
   ManagedProductRecord,
@@ -47,6 +38,24 @@ export type PublicShopCategoryRecord = {
 
 export type PublicShopProductRecord = ManagedProductRecord & { price_cents: number };
 
+const LEGACY_MOCK_PORTFOLIO_SLUGS = new Set([
+  "lumora-studio",
+  "tideline-health",
+  "helix-research-portal",
+  "glasswing-onboarding",
+  "northcrest-mcp",
+  "beacon-route-engine",
+]);
+
+const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
+  "concierge-mcp-starter",
+  "atelier-marketing-theme",
+  "operator-dashboard-kit",
+  "inquiry-to-crm-automation",
+  "mobile-app-landing-pack",
+  "booking-stripe-bundle",
+]);
+
 function parseUsdPriceToCents(price: string) {
   const normalized = price.replace(/[^\d.]/g, "");
   const parsed = Number(normalized);
@@ -71,19 +80,12 @@ function getEffectiveServices(databaseServices: ManagedServiceRecord[]) {
   return mergeServices(getDefaultServices(), databaseServices);
 }
 
-function getDefaultPortfolio(): ManagedPortfolioRecord[] {
-  return PORTFOLIO.map((project) => ({
-    ...project,
-    hero_image: getPortfolioImage(project.slug) ?? null,
-    detail: CASE_STUDY_DETAILS[project.slug] ?? null,
-  }));
-}
-
-function getDefaultProducts(): ManagedProductRecord[] {
-  return PUBLISHED_SHOP_PRODUCTS.map((product) => ({
-    ...product,
-    image: getProductImage(product.name) ?? null,
-  }));
+function stripLegacyMockCatalog(database: Awaited<ReturnType<typeof readDatabase>>) {
+  return {
+    ...database,
+    portfolio_projects: database.portfolio_projects.filter((project) => !LEGACY_MOCK_PORTFOLIO_SLUGS.has(project.slug)),
+    products: database.products.filter((product) => !LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug)),
+  };
 }
 
 function mergeServices(fallback: ManagedServiceRecord[], cms: ManagedServiceRecord[]) {
@@ -148,16 +150,14 @@ function mergeProducts(fallback: ManagedProductRecord[], cms: ManagedProductReco
 }
 
 async function ensureCatalogSeeded() {
-  const database = await readDatabase();
-  if (database.services.length || database.portfolio_projects.length || database.products.length) {
+  const database = stripLegacyMockCatalog(await readDatabase());
+  if (database.services.length) {
     return database;
   }
 
   const seeded = {
     ...database,
     services: getDefaultServices(),
-    portfolio_projects: getDefaultPortfolio(),
-    products: getDefaultProducts(),
   };
 
   await writeDatabase(() => seeded);
@@ -194,6 +194,8 @@ export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   return mergePortfolio(database.portfolio_projects, cmsProjects).map((project) => ({
     slug: project.slug,
     name: project.name,
+    livePreviewUrl: project.livePreviewUrl,
+    embeddedPreviewUrl: project.embeddedPreviewUrl,
     industry: project.industry,
     service: project.service,
     summary: project.summary,
@@ -233,12 +235,6 @@ export async function listPublicShopCategories(): Promise<PublicShopCategoryReco
     }
 
     categoryMap.set(product.categorySlug, product.category);
-  }
-
-  if (categoryMap.size === 0) {
-    for (const category of SHOP_CATEGORY_OPTIONS) {
-      categoryMap.set(category.value, category.label);
-    }
   }
 
   return Array.from(categoryMap.entries()).map(([slug, name]) => ({
@@ -315,7 +311,7 @@ export async function getPublicShopProduct(slug: string): Promise<PublicShopProd
 
   return {
     ...product,
-    image: product.image ?? getProductImage(product.name) ?? null,
+    image: product.image ?? null,
     price_cents: parseUsdPriceToCents(product.price),
   };
 }

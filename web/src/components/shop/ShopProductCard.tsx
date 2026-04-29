@@ -93,12 +93,12 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
             <ShoppingBagIcon className="size-4" />
           </LinkButton>
           <LinkButton
-            href={product.livePreviewUrl ?? `/shop/${product.slug}`}
+            href={product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}`}
             variant="outline"
             size="sm"
             fullWidth
-            target={product.livePreviewUrl ? "_blank" : undefined}
-            rel={product.livePreviewUrl ? "noreferrer" : undefined}
+            target={product.livePreviewUrl || product.embeddedPreviewUrl ? "_blank" : undefined}
+            rel={product.livePreviewUrl || product.embeddedPreviewUrl ? "noreferrer" : undefined}
           >
             Live Preview <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>

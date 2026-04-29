@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import type { PORTFOLIO } from "@/lib/content";
 import { SERVICES } from "@/lib/content";
-import { getPortfolioImage } from "@/lib/site-images";
+import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 
-type Project = (typeof PORTFOLIO)[number];
+type Project = PublicPortfolioRecord;
 
 export function PortfolioCard({ project }: { project: Project }) {
-  const image = getPortfolioImage(project.slug);
+  const image = project.hero_image;
 
   return (
     <Link

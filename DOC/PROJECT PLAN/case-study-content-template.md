@@ -23,6 +23,8 @@ last_updated: 2026-04-30
 ```yaml
 name: "Three Circles"
 slug: "three-circles"
+livePreviewUrl: "https://threecircles.com"
+embeddedPreviewUrl: "https://demo.threecircles.com"
 industry: "Interior Design"
 serviceSlug: "websites"
 summary: "A premium company website for an interior design brand focused on elegant presentation, stronger trust, and easier inquiry conversion."
@@ -68,6 +70,8 @@ gallery:
 ## Field Intent Guide
 - `name`: Public project title.
 - `slug`: Public portfolio URL key.
+- `livePreviewUrl`: Real public site URL.
+- `embeddedPreviewUrl`: Optional iframe-safe preview URL for embedded demos.
 - `industry`: Visible industry label.
 - `serviceSlug`: Connects the case study to a service route.
 - `summary`: Short overview used in cards and detail page intro.

@@ -32,7 +32,6 @@ import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import {
   FEATURED_LIVE_SAAS,
-  FEATURED_PRODUCTS,
   HOME_STATS,
   HOME_STACK_MARQUEE,
   PROCESS_STEPS,
@@ -102,7 +101,7 @@ export default async function Home() {
   const featuredProducts = pickBySlugs(
     publicProducts,
     homeContent?.shopSpotlight?.productSlugs,
-    publicProducts.length > 0 ? publicProducts.slice(0, 4) : FEATURED_PRODUCTS
+    publicProducts.slice(0, 4)
   );
   const pricingTiers = homeContent?.pricing?.tiers && homeContent.pricing.tiers.length > 0 ? homeContent.pricing.tiers : HOME_TIERS;
 

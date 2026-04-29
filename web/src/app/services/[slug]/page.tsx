@@ -22,11 +22,11 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { HOME_STATS, PORTFOLIO, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
-import { getPublicService } from "@/server/domain/catalog";
+import { getPublicService, listPublicPortfolio } from "@/server/domain/catalog";
 import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 
 const ICONS = {
@@ -249,7 +249,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   };
 
   const Icon = ICONS[slug as SlugKey];
-  const related = PORTFOLIO.filter((p) => p.service === slug).slice(0, 3);
+  const related = (await listPublicPortfolio()).filter((p) => p.service === slug).slice(0, 3);
 
   return (
     <>

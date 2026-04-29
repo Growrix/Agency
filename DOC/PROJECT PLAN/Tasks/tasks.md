@@ -41,14 +41,14 @@ next_recommended_tasks:
   - T044
 phase_status_counts:
   done: 4
-  partial: 4
+  partial: 5
   blocked: 0
-  not_started: 1
+  not_started: 0
 task_status_counts:
   done: 29
-  partial: 6
+  partial: 7
   blocked: 0
-  not_started: 9
+  not_started: 8
 ---
 
 # Tasks / Execution Tracker
@@ -122,6 +122,7 @@ task_status_counts:
   - codified Sanity Studio best-practice rules across universal and project docs so AI must treat Studio as an isolated app with Node 20, its own lockfile/install flow/CI/deploy, and a separate CMS domain rather than coupling it to the public web lifecycle
   - implemented the Studio isolation baseline in code by removing root-level Studio script coupling, adding Studio-local runtime files and agent guidance, generating a dedicated `studio/package-lock.json`, adding a separate Studio CI workflow and Vercel config, and verifying both `web` and `studio` production builds pass under Node 20
   - hardened Studio local startup to a reliable one-command flow by replacing direct `sanity dev` with a Node-20 enforcing bootstrap runner that self-checks required dependencies and launches Sanity through `npm exec` for Windows-safe execution
+  - moved the shop and portfolio surfaces further into the CMS-first path by removing legacy mock catalog dependence from homepage, services, checkout, orders, concierge knowledge, and portfolio/shop detail flows; added richer case-study authoring fields plus live/embedded preview URL support; and updated tests/templates for managed catalog records instead of static mock slugs
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.
@@ -158,7 +159,7 @@ phases:
     status: partial
   - id: P8
     name: Frontend CMS Content Operations
-    status: not_started
+    status: partial
 ```
 
 ## Phase Overview
@@ -172,7 +173,7 @@ phases:
 | P5 | partial | Runtime hardening headers, health/readiness probes, and client error capture hooks now exist; infrastructure-as-code and external monitoring stack are still pending. |
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
 | P7 | partial | The CMS/content-operations and admin information architecture is now documented, while implementation for production-grade shop, portfolio, newsletter, and submissions operations remains ahead. |
-| P8 | not_started | Frontend route migration to Sanity-backed content loaders, preview, and exact-path revalidation is planned but not yet implemented. |
+| P8 | partial | Shop and portfolio surfaces are now being moved to Sanity-backed loaders and CMS-authored preview metadata, while draft preview and broader route migration remain incomplete. |
 
 ## Tasks By Phase
 
@@ -267,7 +268,7 @@ phases:
 - [ ] T038 Add admin-focused validation gates (unit, integration, e2e, accessibility, security, regression) and release-readiness criteria for dashboard rollout.
 
 ### Phase P8 — Frontend CMS Content Operations
-- [ ] T041 Implement Sanity-backed typed loaders with static fallbacks for `web/src/app/portfolio/**`, `web/src/app/shop/**`, `web/src/app/services/**`, `web/src/app/page.tsx`, `web/src/app/about/page.tsx`, and `web/src/app/faq/page.tsx`.
+- [~] T041 Implement Sanity-backed typed loaders with static fallbacks for `web/src/app/portfolio/**`, `web/src/app/shop/**`, `web/src/app/services/**`, `web/src/app/page.tsx`, `web/src/app/about/page.tsx`, and `web/src/app/faq/page.tsx`.
 - [~] T042 Add Sanity schema coverage and normalized view-model mappers for case studies, shop items/categories, service pages, FAQ items, home page, about page, and site settings in `studio/schemaTypes/**` and `web/src/server/sanity/**`.
 - [ ] T043 Implement authenticated draft-mode preview and exact-path revalidation for migrated frontend surfaces in `web/src/app/api/**` and supporting server helpers.
 - [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.

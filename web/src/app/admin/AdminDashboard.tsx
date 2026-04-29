@@ -25,6 +25,8 @@ type ProductRecord = {
   slug: string;
   name: string;
   price: string;
+  livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   category: string;
   categorySlug: string;
   type: string;
@@ -46,6 +48,8 @@ type ProductRecord = {
 type PortfolioRecord = {
   slug: string;
   name: string;
+  livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   industry: string;
   service: string;
   summary: string;
@@ -111,6 +115,8 @@ function buildNewProduct(): ProductRecord {
     slug: "new-product",
     name: "New Product",
     price: "$500",
+    livePreviewUrl: "https://demo.example.com",
+    embeddedPreviewUrl: "https://demo.example.com",
     category: "Templates",
     categorySlug: "templates",
     type: "Marketing Site",
@@ -133,6 +139,8 @@ function buildNewPortfolio(): PortfolioRecord {
   return {
     slug: "new-project",
     name: "New Project",
+    livePreviewUrl: "https://project.example.com",
+    embeddedPreviewUrl: "https://project.example.com",
     industry: "General",
     service: "websites",
     summary: "Project summary",

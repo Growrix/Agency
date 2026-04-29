@@ -26,6 +26,7 @@ name: "Three Circles - Interior Designer company website"
 slug: "three-circles-interior-designer-company-website"
 price: "$999"
 livePreviewUrl: "https://three-circles-demo.vercel.app"
+embeddedPreviewUrl: "https://three-circles-demo.vercel.app"
 categoryLabel: "Interior Designer Company"
 categorySlug: "interior-designer-company"
 type: "SaaS"
@@ -72,6 +73,7 @@ mainImageAlt: "Homepage screenshot of the Three Circles interior designer websit
 - `slug`: Public URL key.
 - `price`: Visible selling price.
 - `livePreviewUrl`: Real external demo URL opened from the product page.
+- `embeddedPreviewUrl`: Optional iframe-safe demo URL. Use only when the site allows embedding.
 - `categoryLabel`: Human-readable category text.
 - `categorySlug`: Filter-safe category key.
 - `type`: Product type shown beside category.
@@ -95,5 +97,5 @@ mainImageAlt: "Homepage screenshot of the Three Circles interior designer websit
 Use this instruction when asking an AI to generate a new shop item:
 
 ```text
-Create a complete Growrix OS shop item entry using the project template in DOC/PROJECT PLAN/shop-item-content-template.md. Output all fields with realistic commercial copy, clean slugs, 3 highlights, 5-7 includes, 4-6 stack items, and a real-looking preview URL placeholder.
+Create a complete Growrix OS shop item entry using the project template in DOC/PROJECT PLAN/shop-item-content-template.md. Output all fields with realistic commercial copy, clean slugs, 3 highlights, 5-7 includes, 4-6 stack items, a live preview URL, and an embedded preview URL only if the preview domain is iframe-safe.
 ```

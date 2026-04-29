@@ -156,7 +156,7 @@ export async function generateConciergeReply(input: {
   sessionId?: string;
 }) {
   const sessionId = input.sessionId || crypto.randomUUID();
-  const knowledge = searchKnowledge(input.message);
+  const knowledge = await searchKnowledge(input.message);
 
   if (knowledge.length === 0) {
     return buildNoAnswer(sessionId);

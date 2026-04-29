@@ -22,12 +22,11 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import {
 	FAQ_GENERAL,
-	PORTFOLIO,
 	PROCESS_STEPS,
 } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
-import { listPublicServices } from "@/server/domain/catalog";
+import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 import { listSanityFaqItems } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = {
@@ -118,6 +117,7 @@ const STACK_AREAS = [
 ];
 
 export default async function ServicesPage() {
+	const portfolio = await listPublicPortfolio();
 	const services = await listPublicServices();
 	const cmsFaqItems = await listSanityFaqItems().catch(() => []);
 	const faqItems = cmsFaqItems.length > 0
@@ -285,7 +285,7 @@ export default async function ServicesPage() {
 						description="Most proof here is weighted toward websites and SaaS work, with supporting systems shown where they helped the main outcome."
 					/>
 					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
-						{PORTFOLIO.slice(0, 3).map((project) => (
+						{portfolio.slice(0, 3).map((project) => (
 							<RevealItem key={project.slug} className="h-full">
 								<PortfolioCard project={project} />
 							</RevealItem>

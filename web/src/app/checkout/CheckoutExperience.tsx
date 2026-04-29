@@ -2,10 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import { Button, LinkButton } from "@/components/primitives/Button";
-import type { ShopProduct } from "@/lib/shop";
+import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
 type CheckoutExperienceProps = {
-  product?: ShopProduct;
+  product?: PublicShopProductRecord | null;
   status?: string;
   orderId?: string;
 };

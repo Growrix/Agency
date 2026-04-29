@@ -7,7 +7,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
-import { getCheckoutHref, getShopProduct, SHOP_PRODUCTS } from "@/lib/shop";
+import { getCheckoutHref } from "@/lib/shop";
 import { getPublicShopProduct, listPublicShopProducts } from "@/server/domain/catalog";
 
 type PageProps = {
@@ -16,14 +16,12 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const publicProducts = await listPublicShopProducts().catch(() => []);
-  return Array.from(
-    new Map([...SHOP_PRODUCTS, ...publicProducts].map((product) => [product.slug, { slug: product.slug }])).values()
-  );
+  return publicProducts.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = (await getPublicShopProduct(slug).catch(() => null)) ?? getShopProduct(slug);
+  const product = await getPublicShopProduct(slug).catch(() => null);
   if (!product) return {};
   return {
     title: `${product.name} — Shop`,
@@ -50,7 +48,7 @@ function StarRating({ rating }: { rating: number }) {
 
 export default async function ShopPreviewPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = (await getPublicShopProduct(slug).catch(() => null)) ?? getShopProduct(slug);
+  const product = await getPublicShopProduct(slug).catch(() => null);
 
   if (!product) notFound();
 
@@ -79,7 +77,17 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
               {/* Preview surface */}
               <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border">
-                {product.image ? (
+                {product.embeddedPreviewUrl ? (
+                  <div className="aspect-16/10 min-w-0 bg-black">
+                    <iframe
+                      src={product.embeddedPreviewUrl}
+                      title={`${product.name} live preview`}
+                      className="h-full w-full border-0"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                  </div>
+                ) : product.image ? (
                   <div className="relative aspect-16/10 min-w-0 bg-inset">
                     <Image
                       src={product.image.src}
@@ -178,12 +186,12 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <ShoppingBagIcon className="size-5" /> Start Purchase
                 </LinkButton>
                 <LinkButton
-                  href={product.livePreviewUrl ?? `/shop/${product.slug}#preview`}
+                  href={product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}#preview`}
                   variant="outline"
                   size="lg"
                   fullWidth
-                  target={product.livePreviewUrl ? "_blank" : undefined}
-                  rel={product.livePreviewUrl ? "noreferrer" : undefined}
+                  target={product.livePreviewUrl || product.embeddedPreviewUrl ? "_blank" : undefined}
+                  rel={product.livePreviewUrl || product.embeddedPreviewUrl ? "noreferrer" : undefined}
                 >
                   Live Preview <ArrowUpRightIcon className="size-4" />
                 </LinkButton>

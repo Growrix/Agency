@@ -78,13 +78,24 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LinkButton href="/book-appointment" size="lg">Build something similar</LinkButton>
+                {project.livePreviewUrl ? (
+                  <LinkButton href={project.livePreviewUrl} target="_blank" rel="noreferrer" variant="outline" size="lg">Visit live site</LinkButton>
+                ) : null}
                 <LinkButton href="/portfolio" variant="outline" size="lg">More work</LinkButton>
               </div>
             </div>
             <div className="lg:col-span-5">
               <Card className="overflow-hidden p-0">
                 <div className={`relative aspect-4/3 overflow-hidden bg-linear-to-br ${project.accent}`}>
-                  {heroImage ? (
+                  {project.embeddedPreviewUrl ? (
+                    <iframe
+                      src={project.embeddedPreviewUrl}
+                      title={`${project.name} live preview`}
+                      className="absolute inset-0 h-full w-full border-0"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    />
+                  ) : heroImage ? (
                     <Image
                       src={heroImage.src}
                       alt={heroImage.alt}

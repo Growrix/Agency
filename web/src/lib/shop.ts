@@ -11,6 +11,7 @@ export type ShopProduct = {
   name: string;
   price: string;
   livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   category: string;
   categorySlug: string;
   type: string;

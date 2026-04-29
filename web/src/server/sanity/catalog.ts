@@ -6,7 +6,6 @@ import type {
   ManagedServiceRecord,
 } from "@/server/data/schema";
 import type { CaseStudyDetail, StockImage } from "@/lib/site-images";
-import { getCaseStudyDetail, getPortfolioImage, getProductImage } from "@/lib/site-images";
 import { getSanityClient, isSanityConfigured } from "@/server/sanity/client";
 
 type SanityQueryOptions = {
@@ -27,6 +26,8 @@ type SanityKeyValue = {
 type SanityCaseStudy = {
   slug?: string;
   name?: string;
+  livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   industry?: string;
   service?: string;
   summary?: string;
@@ -51,6 +52,7 @@ type SanityShopItem = {
   name?: string;
   price?: string;
   livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   category?: string;
   categorySlug?: string;
   type?: string;
@@ -89,6 +91,8 @@ const SANITY_CASE_STUDIES_QUERY = `*[
 ] | order(coalesce(featuredRank, 999), coalesce(_updatedAt, _createdAt) desc) {
   "slug": slug.current,
   "name": coalesce(name, title),
+  livePreviewUrl,
+  embeddedPreviewUrl,
   industry,
   "service": coalesce(serviceSlug, servicePage->slug.current, service, "websites"),
   summary,
@@ -123,6 +127,7 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   "name": coalesce(name, title),
   price,
   livePreviewUrl,
+  embeddedPreviewUrl,
   "category": coalesce(category->title, categoryLabel, category, "Templates"),
   "categorySlug": coalesce(category->slug.current, categorySlug),
   type,
@@ -204,29 +209,24 @@ function normalizeCaseStudyDetail(
   slug: string,
   detail: SanityCaseStudy["detail"] | undefined,
 ): CaseStudyDetail | null {
-  const fallback = getCaseStudyDetail(slug);
   const gallery = (detail?.gallery ?? [])
-    .map((image, index) => normalizeImage(image, fallback?.gallery[index] ?? null))
+    .map((image) => normalizeImage(image, null))
     .filter((image): image is StockImage => image !== null);
 
-  if (!detail && !fallback) {
+  if (!detail) {
     return null;
   }
 
   return {
-    client: normalizeString(detail?.client, fallback?.client ?? "Client"),
-    year: normalizeString(detail?.year, fallback?.year ?? "TBD"),
-    duration: normalizeString(detail?.duration, fallback?.duration ?? "TBD"),
-    team: normalizeString(detail?.team, fallback?.team ?? "Growrix OS"),
-    challenge: normalizeStringArray(detail?.challenge).length ? normalizeStringArray(detail?.challenge) : [...(fallback?.challenge ?? [])],
-    strategy: normalizeStringArray(detail?.strategy).length ? normalizeStringArray(detail?.strategy) : [...(fallback?.strategy ?? [])],
-    build: normalizeKeyValueArray(detail?.build).length
-      ? normalizeKeyValueArray(detail?.build)
-      : [...(fallback?.build ?? [])],
-    results: normalizeKeyValueArray(detail?.results).length
-      ? normalizeKeyValueArray(detail?.results)
-      : [...(fallback?.results ?? [])],
-    gallery: gallery.length ? gallery : [...(fallback?.gallery ?? [])],
+    client: normalizeString(detail.client, "Client"),
+    year: normalizeString(detail.year, "TBD"),
+    duration: normalizeString(detail.duration, "TBD"),
+    team: normalizeString(detail.team, "Growrix OS"),
+    challenge: normalizeStringArray(detail.challenge),
+    strategy: normalizeStringArray(detail.strategy),
+    build: normalizeKeyValueArray(detail.build),
+    results: normalizeKeyValueArray(detail.results),
+    gallery,
   };
 }
 
@@ -241,12 +241,14 @@ function normalizeCaseStudy(item: SanityCaseStudy): ManagedPortfolioRecord | nul
   return {
     slug,
     name,
+    livePreviewUrl: normalizeString(item.livePreviewUrl) || undefined,
+    embeddedPreviewUrl: normalizeString(item.embeddedPreviewUrl) || undefined,
     industry: normalizeString(item.industry, "Editorial"),
     service: normalizeString(item.service, "websites"),
     summary: normalizeString(item.summary),
     metric: normalizeString(item.metric, "Measured impact"),
     accent: normalizeString(item.accent, "from-teal-500 to-emerald-500"),
-    hero_image: normalizeImage(item.heroImage, getPortfolioImage(slug) ?? null),
+    hero_image: normalizeImage(item.heroImage, null),
     detail: normalizeCaseStudyDetail(slug, item.detail),
   };
 }
@@ -269,6 +271,7 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     name,
     price: normalizeString(item.price, "$0"),
     livePreviewUrl: normalizeString(item.livePreviewUrl) || undefined,
+    embeddedPreviewUrl: normalizeString(item.embeddedPreviewUrl) || undefined,
     category,
     categorySlug: normalizeString(item.categorySlug, slugify(category, "templates")),
     type,
@@ -287,7 +290,7 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     includes: normalizeStringArray(item.includes),
     stack: normalizeStringArray(item.stack),
     highlights,
-    image: normalizeImage(item.image, getProductImage(name) ?? null),
+    image: normalizeImage(item.image, null),
   };
 }
 

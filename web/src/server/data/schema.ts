@@ -120,6 +120,8 @@ export type ManagedServiceRecord = {
 export type ManagedPortfolioRecord = {
   slug: string;
   name: string;
+  livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   industry: string;
   service: string;
   summary: string;
@@ -134,6 +136,7 @@ export type ManagedProductRecord = {
   name: string;
   price: string;
   livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   category: string;
   categorySlug: string;
   type: string;

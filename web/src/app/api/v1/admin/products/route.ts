@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
       name: typeof body.name === "string" ? body.name : "",
       price: typeof body.price === "string" ? body.price : "$0",
       livePreviewUrl: typeof body.livePreviewUrl === "string" ? body.livePreviewUrl : undefined,
+      embeddedPreviewUrl: typeof body.embeddedPreviewUrl === "string" ? body.embeddedPreviewUrl : undefined,
       category: typeof body.category === "string" ? body.category : "Templates",
       categorySlug: typeof body.categorySlug === "string" ? body.categorySlug : "templates",
       type: typeof body.type === "string" ? body.type : "Marketing Site",
