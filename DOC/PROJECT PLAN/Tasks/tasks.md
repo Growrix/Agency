@@ -261,14 +261,14 @@ phases:
 
 ### Phase P7 — Admin Dashboard E2E Expansion (Fresh)
 - [x] T034 Define and document the canonical CMS/content-operations information architecture, module boundaries, and route map for Shop Management, Portfolio Management, Newsletter Operations, and Submissions Inbox surfaces in `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`.
-- [ ] T035 Implement production-grade backend contracts for Sanity-backed shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
+- [~] T035 Implement production-grade backend contracts for Sanity-backed shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
 - [ ] T036 Implement operational records surfaces and APIs for newsletter subscribers, contact inquiries, and booking submissions with status workflow, assignment, notes, and unsubscribe/send-log handling.
 - [ ] T037 Harden admin authorization, role policies, preview secret handling, webhook authentication, and auditability for all admin mutations and sensitive reads.
 - [ ] T038 Add admin-focused validation gates (unit, integration, e2e, accessibility, security, regression) and release-readiness criteria for dashboard rollout.
 
 ### Phase P8 — Frontend CMS Content Operations
 - [ ] T041 Implement Sanity-backed typed loaders with static fallbacks for `web/src/app/portfolio/**`, `web/src/app/shop/**`, `web/src/app/services/**`, `web/src/app/page.tsx`, `web/src/app/about/page.tsx`, and `web/src/app/faq/page.tsx`.
-- [ ] T042 Add Sanity schema coverage and normalized view-model mappers for case studies, shop items/categories, service pages, FAQ items, home page, about page, and site settings in `studio/schemaTypes/**` and `web/src/server/sanity/**`.
+- [~] T042 Add Sanity schema coverage and normalized view-model mappers for case studies, shop items/categories, service pages, FAQ items, home page, about page, and site settings in `studio/schemaTypes/**` and `web/src/server/sanity/**`.
 - [ ] T043 Implement authenticated draft-mode preview and exact-path revalidation for migrated frontend surfaces in `web/src/app/api/**` and supporting server helpers.
 - [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.
 

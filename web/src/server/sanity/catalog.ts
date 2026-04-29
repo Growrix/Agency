@@ -121,7 +121,7 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   "slug": slug.current,
   "name": coalesce(name, title),
   price,
-  "category": coalesce(category->title, category, "Templates"),
+  "category": coalesce(category->title, categoryLabel, category, "Templates"),
   "categorySlug": coalesce(category->slug.current, categorySlug),
   type,
   typeSlug,

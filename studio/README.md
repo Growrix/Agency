@@ -30,6 +30,16 @@ Default local URL:
 
 - `http://localhost:3333`
 
+## Content Models
+
+Studio now includes schema coverage for:
+
+- Blog (`blogPost`, `author`, `category`)
+- Services (`servicePage`)
+- Portfolio (`caseStudy`)
+- Shop (`shopCategory`, `shopItem`)
+- Site settings (`siteSettings`)
+
 ## Build
 
 ```bash

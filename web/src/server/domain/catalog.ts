@@ -24,6 +24,14 @@ import {
   listSanityServicePages,
   listSanityShopItems,
 } from "@/server/sanity/catalog";
+import {
+  deleteSanityCaseStudy,
+  deleteSanityServicePage,
+  deleteSanityShopItem,
+  upsertSanityCaseStudy,
+  upsertSanityServicePage,
+  upsertSanityShopItem,
+} from "@/server/sanity/management";
 
 export type PublicServiceRecord = ManagedServiceRecord;
 
@@ -307,12 +315,17 @@ export async function getPublicShopProduct(slug: string): Promise<PublicShopProd
 
   return {
     ...product,
-    image: getProductImage(product.name) ?? null,
+    image: product.image ?? getProductImage(product.name) ?? null,
     price_cents: parseUsdPriceToCents(product.price),
   };
 }
 
 export async function listManagedServices() {
+  const cmsServices = await listSanityServicePages({ preview: true }).catch(() => []);
+  if (cmsServices.length > 0) {
+    return cmsServices;
+  }
+
   const database = await ensureCatalogSeeded();
   return database.services;
 }
@@ -329,6 +342,8 @@ export async function upsertManagedService(input: ManagedServiceRecord) {
     services: [nextRecord, ...database.services.filter((service) => service.id !== input.id && service.slug !== input.slug)],
   }));
 
+  await upsertSanityServicePage(nextRecord).catch(() => false);
+
   return nextRecord;
 }
 
@@ -338,9 +353,16 @@ export async function deleteManagedService(serviceId: string) {
     ...database,
     services: database.services.filter((service) => service.id !== serviceId && service.slug !== serviceId),
   }));
+
+  await deleteSanityServicePage(serviceId).catch(() => false);
 }
 
 export async function listManagedProducts() {
+  const cmsProducts = await listSanityShopItems({ preview: true }).catch(() => []);
+  if (cmsProducts.length > 0) {
+    return cmsProducts;
+  }
+
   const database = await ensureCatalogSeeded();
   return database.products;
 }
@@ -359,6 +381,8 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
     products: [nextRecord, ...database.products.filter((product) => product.slug !== input.slug)],
   }));
 
+  await upsertSanityShopItem(nextRecord).catch(() => false);
+
   return nextRecord;
 }
 
@@ -368,9 +392,16 @@ export async function deleteManagedProduct(productSlug: string) {
     ...database,
     products: database.products.filter((product) => product.slug !== productSlug),
   }));
+
+  await deleteSanityShopItem(productSlug).catch(() => false);
 }
 
 export async function listManagedPortfolioProjects() {
+  const cmsProjects = await listSanityCaseStudies({ preview: true }).catch(() => []);
+  if (cmsProjects.length > 0) {
+    return cmsProjects;
+  }
+
   const database = await ensureCatalogSeeded();
   return database.portfolio_projects;
 }
@@ -388,6 +419,8 @@ export async function upsertManagedPortfolioProject(input: ManagedPortfolioRecor
     portfolio_projects: [nextRecord, ...database.portfolio_projects.filter((project) => project.slug !== input.slug)],
   }));
 
+  await upsertSanityCaseStudy(nextRecord).catch(() => false);
+
   return nextRecord;
 }
 
@@ -397,4 +430,6 @@ export async function deleteManagedPortfolioProject(projectSlug: string) {
     ...database,
     portfolio_projects: database.portfolio_projects.filter((project) => project.slug !== projectSlug),
   }));
+
+  await deleteSanityCaseStudy(projectSlug).catch(() => false);
 }
