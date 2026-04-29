@@ -310,6 +310,7 @@ phases:
 - The planner agent, planning template, execution constitution, and root project-plan routing now require a canonical `DOC/PROJECT PLAN/` planning artifact before tracker updates.
 - The CMS/content-operations rollout now has a canonical root planning artifact at `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`.
 - The CMS/content-operations rollout now also has role-specific implementation-planning docs under `DOC/PROJECT PLAN/Frontend/`, `DOC/PROJECT PLAN/API and Data/`, `DOC/PROJECT PLAN/Admin Dashboard/`, and `DOC/PROJECT PLAN/Security/`.
+- Shop CMS authoring now includes grouped editor fields, example-driven field labels, real preview URL support, real uploaded image rendering on shop surfaces, and project-specific content templates for shop items, blog posts, and case studies under `DOC/PROJECT PLAN/`.
 
 ## What Is Next To Build
 Use `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` plus the downstream role-specific CMS/content-operations docs as the canonical input for the remaining P7 execution work.

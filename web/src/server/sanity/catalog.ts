@@ -50,6 +50,7 @@ type SanityShopItem = {
   slug?: string;
   name?: string;
   price?: string;
+  livePreviewUrl?: string;
   category?: string;
   categorySlug?: string;
   type?: string;
@@ -121,6 +122,7 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   "slug": slug.current,
   "name": coalesce(name, title),
   price,
+  livePreviewUrl,
   "category": coalesce(category->title, categoryLabel, category, "Templates"),
   "categorySlug": coalesce(category->slug.current, categorySlug),
   type,
@@ -266,6 +268,7 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     slug,
     name,
     price: normalizeString(item.price, "$0"),
+    livePreviewUrl: normalizeString(item.livePreviewUrl) || undefined,
     category,
     categorySlug: normalizeString(item.categorySlug, slugify(category, "templates")),
     type,

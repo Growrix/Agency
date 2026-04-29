@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBagIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
@@ -24,7 +25,7 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export function ShopProductCard({ product }: { product: ShopProduct }) {
-  const image = getProductImage(product.name);
+  const image = product.image ?? getProductImage(product.name);
 
   return (
     <Card hoverable className="group flex h-full flex-col overflow-hidden p-0">
@@ -57,7 +58,9 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
 
         {/* Name */}
         <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text">
-          {product.name}
+          <Link href={`/shop/${product.slug}`} className="hover:text-primary">
+            {product.name}
+          </Link>
         </h3>
 
         {/* Price */}
@@ -89,10 +92,20 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
           >
             <ShoppingBagIcon className="size-4" />
           </LinkButton>
-          <LinkButton href={`/shop/${product.slug}`} variant="outline" size="sm" fullWidth>
+          <LinkButton
+            href={product.livePreviewUrl ?? `/shop/${product.slug}`}
+            variant="outline"
+            size="sm"
+            fullWidth
+            target={product.livePreviewUrl ? "_blank" : undefined}
+            rel={product.livePreviewUrl ? "noreferrer" : undefined}
+          >
             Live Preview <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>
         </div>
+        <Link href={`/shop/${product.slug}`} className="text-sm font-medium text-primary hover:underline">
+          View details
+        </Link>
       </div>
     </Card>
   );

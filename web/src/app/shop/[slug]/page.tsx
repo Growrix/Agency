@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowUpRightIcon, ShoppingBagIcon, CheckIcon } from "@heroicons/react/24/outline";
@@ -78,7 +79,20 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
               {/* Preview surface */}
               <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border">
-                <ProductPreviewSurface variant={product.previewVariant} />
+                {product.image ? (
+                  <div className="relative aspect-16/10 min-w-0 bg-inset">
+                    <Image
+                      src={product.image.src}
+                      alt={product.image.alt}
+                      fill
+                      sizes="(min-width: 1280px) 70vw, (min-width: 1024px) 60vw, 100vw"
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <ProductPreviewSurface variant={product.previewVariant} />
+                )}
               </div>
 
               {/* Description */}
@@ -163,7 +177,14 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 <LinkButton href={getCheckoutHref(product)} size="lg" fullWidth>
                   <ShoppingBagIcon className="size-5" /> Start Purchase
                 </LinkButton>
-                <LinkButton href={`/shop/${product.slug}#preview`} variant="outline" size="lg" fullWidth>
+                <LinkButton
+                  href={product.livePreviewUrl ?? `/shop/${product.slug}#preview`}
+                  variant="outline"
+                  size="lg"
+                  fullWidth
+                  target={product.livePreviewUrl ? "_blank" : undefined}
+                  rel={product.livePreviewUrl ? "noreferrer" : undefined}
+                >
                   Live Preview <ArrowUpRightIcon className="size-4" />
                 </LinkButton>
               </div>

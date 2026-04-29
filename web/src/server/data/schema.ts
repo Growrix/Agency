@@ -133,6 +133,7 @@ export type ManagedProductRecord = {
   slug: string;
   name: string;
   price: string;
+  livePreviewUrl?: string;
   category: string;
   categorySlug: string;
   type: string;

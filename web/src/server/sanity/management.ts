@@ -31,6 +31,7 @@ export async function upsertSanityShopItem(record: ManagedProductRecord) {
     name: record.name,
     slug: { _type: "slug", current: record.slug },
     price: record.price,
+    livePreviewUrl: record.livePreviewUrl,
     categoryLabel: record.category,
     categorySlug: record.categorySlug,
     type: record.type,
