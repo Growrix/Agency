@@ -22,10 +22,12 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { HOME_STATS, PORTFOLIO, PROCESS_STEPS, SERVICE_BY_SLUG, SERVICES } from "@/lib/content";
+import { HOME_STATS, PORTFOLIO, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { getPublicService } from "@/server/domain/catalog";
+import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 
 const ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -216,19 +218,35 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const s = SERVICE_BY_SLUG[slug];
-  if (!s) return {};
+  const service = await getPublicService(slug);
+  if (!service) return {};
   return {
-    title: `${s.name} Service`,
-    description: s.long,
+    title: `${service.title} Service`,
+    description: service.description,
   };
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = SERVICE_BY_SLUG[slug];
-  const copy = COPY[slug as SlugKey];
-  if (!service || !copy) notFound();
+  const service = await getPublicService(slug);
+  const fallbackCopy = COPY[slug as SlugKey];
+  if (!service || !fallbackCopy) notFound();
+
+  const cmsCopy = await getSanityServiceDetailContent(slug).catch(() => null);
+  const copy = {
+    ...fallbackCopy,
+    eyebrow: cmsCopy?.heroEyebrow ?? fallbackCopy.eyebrow,
+    headline: cmsCopy?.heroHeadline ?? fallbackCopy.headline,
+    description: cmsCopy?.heroDescription ?? fallbackCopy.description,
+    primaryCta: cmsCopy?.primaryCtaLabel ?? fallbackCopy.primaryCta,
+    secondaryCta: cmsCopy?.secondaryCtaLabel ?? fallbackCopy.secondaryCta,
+    secondaryHref: cmsCopy?.secondaryCtaHref ?? fallbackCopy.secondaryHref,
+    builds: cmsCopy?.builds ?? fallbackCopy.builds,
+    differentiators: cmsCopy?.differentiators ?? fallbackCopy.differentiators,
+    tiers: cmsCopy?.tiers ?? fallbackCopy.tiers,
+    faq: cmsCopy?.faq ?? fallbackCopy.faq,
+    stats: cmsCopy?.stats ?? fallbackCopy.stats,
+  };
 
   const Icon = ICONS[slug as SlugKey];
   const related = PORTFOLIO.filter((p) => p.service === slug).slice(0, 3);
@@ -274,14 +292,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
                     <Icon className="size-6" />
                   </div>
-                  <Badge tone="secondary">{service.timeline}</Badge>
+                  <Badge tone="secondary">{service.delivery_timeline}</Badge>
                 </div>
                 <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
-                <p className="mt-1 font-display text-2xl tracking-tight">{service.typical}</p>
+                <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
                 <ul className="mt-6 space-y-2.5">
-                  {service.pillars.map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-sm">
-                      <CheckIcon className="size-4 text-primary" /> {p}
+                  {service.pillars.map((pillar) => (
+                    <li key={pillar} className="flex items-center gap-2 text-sm">
+                      <CheckIcon className="size-4 text-primary" /> {pillar}
                     </li>
                   ))}
                 </ul>

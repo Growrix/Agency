@@ -6,19 +6,23 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
-import { getCheckoutHref, getShopProduct, PUBLISHED_SHOP_PRODUCTS, SHOP_PRODUCTS } from "@/lib/shop";
+import { getCheckoutHref, getShopProduct, SHOP_PRODUCTS } from "@/lib/shop";
+import { getPublicShopProduct, listPublicShopProducts } from "@/server/domain/catalog";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return SHOP_PRODUCTS.map((product) => ({ slug: product.slug }));
+  const publicProducts = await listPublicShopProducts().catch(() => []);
+  return Array.from(
+    new Map([...SHOP_PRODUCTS, ...publicProducts].map((product) => [product.slug, { slug: product.slug }])).values()
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getShopProduct(slug);
+  const product = (await getPublicShopProduct(slug).catch(() => null)) ?? getShopProduct(slug);
   if (!product) return {};
   return {
     title: `${product.name} — Shop`,
@@ -45,11 +49,11 @@ function StarRating({ rating }: { rating: number }) {
 
 export default async function ShopPreviewPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getShopProduct(slug);
+  const product = (await getPublicShopProduct(slug).catch(() => null)) ?? getShopProduct(slug);
 
   if (!product) notFound();
 
-  const related = PUBLISHED_SHOP_PRODUCTS.filter((item) => item.slug !== product.slug).slice(0, 3);
+  const related = (await listPublicShopProducts()).filter((item) => item.slug !== product.slug).slice(0, 3);
 
   return (
     <>

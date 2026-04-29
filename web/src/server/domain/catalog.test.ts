@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
-import { mkdir, rm } from "node:fs/promises";
+import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { beforeEach, describe, it } from "node:test";
+import { SERVICES } from "@/lib/content";
 import {
   getPublicPortfolioProject,
   getPublicService,
@@ -35,6 +36,28 @@ describe("catalog domain", () => {
 
     assert.ok(services.length > 0);
     assert.equal(websites?.slug, "websites");
+  });
+
+  it("restores canonical services from stale persisted catalog state", async () => {
+    const staleServices = SERVICES.filter((service) => service.slug !== "automation").map((service) => ({
+      id: service.slug,
+      slug: service.slug,
+      title: service.name,
+      description: service.long,
+      short_description: service.short,
+      service_type: service.slug,
+      pricing_model: "contact" as const,
+      delivery_timeline: service.timeline,
+      pillars: [...service.pillars],
+    }));
+
+    await writeFile(databasePath, JSON.stringify({ services: staleServices }, null, 2), "utf8");
+
+    const services = await listPublicServices();
+    const automation = await getPublicService("automation");
+
+    assert.equal(services.some((service) => service.slug === "automation"), true);
+    assert.equal(automation?.title, "Automation");
   });
 
   it("lists portfolio and product catalogs", async () => {

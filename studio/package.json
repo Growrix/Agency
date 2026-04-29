@@ -11,7 +11,7 @@
     "@sanity/vision": "5.22.0",
     "react": "19.2.2",
     "react-dom": "19.2.2",
-    "sanity": "5.22.0",
+    "sanity": "^5.22.0",
     "styled-components": "6.1.19"
   },
   "devDependencies": {

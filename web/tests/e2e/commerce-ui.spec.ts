@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("checkout placeholders remain visible", async ({ page }) => {
-  await page.goto("/checkout?product=atelier-marketing-theme");
+  await page.goto("/checkout?product=atelier-marketing-theme", { waitUntil: "domcontentloaded" });
 
   const nameField = page.locator('input[name="customer_name"]');
   const emailField = page.locator('input[name="customer_email"]');
@@ -27,8 +27,8 @@ test("checkout placeholders remain visible", async ({ page }) => {
 
 test("shop product pages do not overflow the mobile viewport", async ({ page }) => {
   for (const slug of ["atelier-marketing-theme", "mobile-app-landing-pack", "booking-stripe-bundle"]) {
-    await page.goto(`/shop/${slug}`);
-    await page.waitForLoadState("networkidle");
+    await page.goto(`/shop/${slug}`, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     const viewport = page.viewportSize();
     const dimensions = await page.evaluate(() => ({
@@ -40,6 +40,7 @@ test("shop product pages do not overflow the mobile viewport", async ({ page }) 
 
     const sidebarButton = page.getByRole("link", { name: /Talk to us first/i });
     await expect(sidebarButton).toBeVisible();
+    await sidebarButton.scrollIntoViewIfNeeded();
 
     const buttonBox = await sidebarButton.boundingBox();
     expect(buttonBox).not.toBeNull();

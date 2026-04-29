@@ -245,6 +245,10 @@ export async function listSanityBlogPosts(): Promise<BlogPost[]> {
   }
 
   const client = getSanityClient();
-  const posts = await client.fetch<SanityBlogPost[]>(SANITY_BLOG_POSTS_QUERY);
-  return posts.map(normalizePost);
+  try {
+    const posts = await client.fetch<SanityBlogPost[]>(SANITY_BLOG_POSTS_QUERY);
+    return (posts ?? []).map(normalizePost);
+  } catch {
+    return [];
+  }
 }

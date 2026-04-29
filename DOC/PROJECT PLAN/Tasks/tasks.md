@@ -32,21 +32,23 @@ phase_sequence:
   - P5-devops-release-readiness
   - P6-qa-release-gates
   - P7-admin-dashboard-e2e-expansion
-next_recommended_phase: P7-admin-dashboard-e2e-expansion
+  - P8-frontend-cms-content-operations
+next_recommended_phase: P8-frontend-cms-content-operations
 next_recommended_tasks:
-  - T035
-  - T036
-  - T037
+  - T041
+  - T042
+  - T043
+  - T044
 phase_status_counts:
   done: 4
   partial: 4
   blocked: 0
-  not_started: 0
+  not_started: 1
 task_status_counts:
   done: 29
   partial: 6
   blocked: 0
-  not_started: 5
+  not_started: 9
 ---
 
 # Tasks / Execution Tracker
@@ -149,6 +151,9 @@ phases:
   - id: P7
     name: Admin Dashboard E2E Expansion
     status: partial
+  - id: P8
+    name: Frontend CMS Content Operations
+    status: not_started
 ```
 
 ## Phase Overview
@@ -162,6 +167,7 @@ phases:
 | P5 | partial | Runtime hardening headers, health/readiness probes, and client error capture hooks now exist; infrastructure-as-code and external monitoring stack are still pending. |
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
 | P7 | partial | The CMS/content-operations and admin information architecture is now documented, while implementation for production-grade shop, portfolio, newsletter, and submissions operations remains ahead. |
+| P8 | not_started | Frontend route migration to Sanity-backed content loaders, preview, and exact-path revalidation is planned but not yet implemented. |
 
 ## Tasks By Phase
 
@@ -254,6 +260,12 @@ phases:
 - [ ] T036 Implement operational records surfaces and APIs for newsletter subscribers, contact inquiries, and booking submissions with status workflow, assignment, notes, and unsubscribe/send-log handling.
 - [ ] T037 Harden admin authorization, role policies, preview secret handling, webhook authentication, and auditability for all admin mutations and sensitive reads.
 - [ ] T038 Add admin-focused validation gates (unit, integration, e2e, accessibility, security, regression) and release-readiness criteria for dashboard rollout.
+
+### Phase P8 — Frontend CMS Content Operations
+- [ ] T041 Implement Sanity-backed typed loaders with static fallbacks for `web/src/app/portfolio/**`, `web/src/app/shop/**`, `web/src/app/services/**`, `web/src/app/page.tsx`, `web/src/app/about/page.tsx`, and `web/src/app/faq/page.tsx`.
+- [ ] T042 Add Sanity schema coverage and normalized view-model mappers for case studies, shop items/categories, service pages, FAQ items, home page, about page, and site settings in `studio/schemaTypes/**` and `web/src/server/sanity/**`.
+- [ ] T043 Implement authenticated draft-mode preview and exact-path revalidation for migrated frontend surfaces in `web/src/app/api/**` and supporting server helpers.
+- [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.
 
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.

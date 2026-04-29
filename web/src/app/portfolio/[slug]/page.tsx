@@ -12,34 +12,35 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { HOME_STATS, PORTFOLIO, PORTFOLIO_BY_SLUG, SERVICES } from "@/lib/content";
+import { HOME_STATS, SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
-import { getCaseStudyDetail, getPortfolioImage } from "@/lib/site-images";
+import { getPublicPortfolioProject, listPublicPortfolio } from "@/server/domain/catalog";
 
-export function generateStaticParams() {
-  return PORTFOLIO.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const projects = await listPublicPortfolio();
+  return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const p = PORTFOLIO_BY_SLUG[slug];
-  if (!p) return {};
+  const project = await getPublicPortfolioProject(slug);
+  if (!project) return {};
   return {
-    title: `${p.name} — Case Study`,
-    description: p.summary,
+    title: `${project.name} — Case Study`,
+    description: project.summary,
   };
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = PORTFOLIO_BY_SLUG[slug];
+  const project = await getPublicPortfolioProject(slug);
   if (!project) notFound();
 
   const service = SERVICES.find((s) => s.slug === project.service);
-  const related = PORTFOLIO.filter((p) => p.slug !== project.slug).slice(0, 3);
-  const detail = getCaseStudyDetail(project.slug);
-  const heroImage = getPortfolioImage(project.slug);
+  const related = (await listPublicPortfolio()).filter((entry) => entry.slug !== project.slug).slice(0, 3);
+  const detail = project.detail;
+  const heroImage = project.hero_image;
 
   if (!detail) notFound();
 
