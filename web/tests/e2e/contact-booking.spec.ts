@@ -11,8 +11,13 @@ test("contact inquiry flow works", async ({ page }) => {
   await page.getByLabel("Project summary").fill("Need a premium website launch in the next month.");
   const submitInquiryButton = page.getByRole("button", { name: "Send inquiry" });
   await expect(submitInquiryButton).toBeEnabled();
+  const responsePromise = page.waitForResponse(
+    (response) => response.url().includes("/api/v1/contact") && response.request().method() === "POST",
+    { timeout: 20000 }
+  );
   await submitInquiryButton.click();
-  await expect(page.getByText(/Thanks\s*[—-]\s*we got it\./)).toBeVisible({ timeout: 20000 });
+  await expect.poll(async () => (await responsePromise).status()).toBe(200);
+  await expect(page.getByRole("heading", { name: /Thanks\s*[—-]\s*we got it\./ })).toBeVisible({ timeout: 20000 });
 });
 
 test("booking flow works", async ({ page }) => {
@@ -34,7 +39,12 @@ test("booking flow works", async ({ page }) => {
   await page.locator('textarea[name="notes"]').fill("Website relaunch and conversion improvements.");
 
   await expect(submitButton).toBeEnabled({ timeout: 20000 });
+  const responsePromise = page.waitForResponse(
+    (response) => response.url().includes("/api/v1/appointments") && response.request().method() === "POST",
+    { timeout: 20000 }
+  );
   await submitButton.click();
+  await expect.poll(async () => (await responsePromise).status()).toBe(200);
   await expect(page.getByRole("heading", { name: "Slot requested." })).toBeVisible({ timeout: 20000 });
 });
 

@@ -94,7 +94,7 @@ const SANITY_CASE_STUDIES_QUERY = `*[
   livePreviewUrl,
   embeddedPreviewUrl,
   industry,
-  "service": coalesce(serviceSlug, servicePage->slug.current, service, "websites"),
+  "service": coalesce(category->slug.current, categorySlug, serviceSlug, servicePage->slug.current, service, "websites"),
   summary,
   metric,
   accent,
@@ -205,6 +205,25 @@ function slugify(value: string, fallback: string) {
   return normalized || fallback;
 }
 
+const SERVICE_SLUG_ALIASES: Record<string, string> = {
+  website: "websites",
+  websites: "websites",
+  saas: "saas-applications",
+  "saas-app": "saas-applications",
+  "saas-application": "saas-applications",
+  "saas-applications": "saas-applications",
+  mcp: "mcp-servers",
+  "mcp-server": "mcp-servers",
+  "mcp-servers": "mcp-servers",
+  automation: "automation",
+  automations: "automation",
+};
+
+function normalizeServiceSlug(value: string | undefined) {
+  const slug = slugify(normalizeString(value, "websites"), "websites");
+  return SERVICE_SLUG_ALIASES[slug] ?? slug;
+}
+
 function normalizeCaseStudyDetail(
   slug: string,
   detail: SanityCaseStudy["detail"] | undefined,
@@ -244,7 +263,7 @@ function normalizeCaseStudy(item: SanityCaseStudy): ManagedPortfolioRecord | nul
     livePreviewUrl: normalizeString(item.livePreviewUrl) || undefined,
     embeddedPreviewUrl: normalizeString(item.embeddedPreviewUrl) || undefined,
     industry: normalizeString(item.industry, "Editorial"),
-    service: normalizeString(item.service, "websites"),
+    service: normalizeServiceSlug(item.service),
     summary: normalizeString(item.summary),
     metric: normalizeString(item.metric, "Measured impact"),
     accent: normalizeString(item.accent, "from-teal-500 to-emerald-500"),

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("checkout fallback flow captures an order", async ({ page }) => {
-  await page.goto("/checkout?product=booking-stripe-bundle", { waitUntil: "domcontentloaded" });
+  await page.goto("/checkout?product=three-circles-template", { waitUntil: "domcontentloaded" });
   await page.getByLabel("Full name *").fill("Checkout User");
   await page.getByLabel("Email *").fill("checkout@example.com");
   await page.getByRole("button", { name: "Continue to payment" }).click();

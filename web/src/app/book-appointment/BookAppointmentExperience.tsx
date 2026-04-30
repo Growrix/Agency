@@ -251,6 +251,7 @@ export function BookAppointmentExperience() {
                         className="booking-input mt-1.5"
                         min={minDate || undefined}
                         value={selectedDate}
+                        onInput={(event) => setSelectedDate(event.currentTarget.value)}
                         onChange={(event) => setSelectedDate(event.target.value)}
                         required
                       />
@@ -267,6 +268,7 @@ export function BookAppointmentExperience() {
                         step={1800}
                         list="booking-time-options"
                         value={selectedTime}
+                        onInput={(event) => setSelectedTime(event.currentTarget.value)}
                         onChange={(event) => setSelectedTime(event.target.value)}
                         required
                       />

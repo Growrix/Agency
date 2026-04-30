@@ -51,6 +51,21 @@ export const caseStudyType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "category",
+      title: "Portfolio Category (Optional) [Example: Websites]",
+      type: "reference",
+      to: [{ type: "portfolioCategory" }],
+      description: "Primary portfolio grouping used for portfolio filters.",
+      group: "basics",
+    }),
+    defineField({
+      name: "categorySlug",
+      title: "Category Slug Fallback (Optional) [Example: websites]",
+      type: "string",
+      description: "Fallback filter key when no Portfolio Category reference is selected.",
+      group: "basics",
+    }),
+    defineField({
       name: "servicePage",
       title: "Service Page (Optional) [Example: Websites]",
       type: "reference",
@@ -218,7 +233,13 @@ export const caseStudyType = defineType({
     select: {
       title: "name",
       subtitle: "industry",
+      categoryTitle: "category.title",
       media: "heroImage",
     },
+    prepare: ({ title, subtitle, categoryTitle, media }) => ({
+      title,
+      subtitle: categoryTitle ?? subtitle,
+      media,
+    }),
   },
 });
