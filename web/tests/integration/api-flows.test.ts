@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
-import { mkdir, readFile, rm } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { NextRequest } from "next/server";
 import { resetRuntimeConfigForTests } from "@/server/config/runtime";
@@ -15,6 +15,43 @@ const originalFetch = globalThis.fetch;
 async function resetDatabase() {
   await mkdir(dataDirectory, { recursive: true });
   await rm(databasePath, { force: true });
+}
+
+async function seedManagedProduct() {
+  await writeFile(
+    databasePath,
+    JSON.stringify(
+      {
+        products: [
+          {
+            slug: "three-circles-template",
+            name: "Three Circles Template",
+            price: "$999",
+            livePreviewUrl: "https://three-circles-demo.vercel.app",
+            embeddedPreviewUrl: "https://three-circles-demo.vercel.app",
+            category: "Interior Designer Company",
+            categorySlug: "interior-designer-company",
+            type: "SaaS",
+            typeSlug: "saas",
+            industry: "Service",
+            industrySlug: "service",
+            published: true,
+            teaser: "Premium website template for interior design brands.",
+            summary: "A polished website template built for premium service businesses.",
+            audience: "Interior design studios",
+            previewVariant: "marketing",
+            includes: ["Homepage", "Services page"],
+            stack: ["Next.js", "Sanity"],
+            highlights: [{ label: "Pages", value: "12" }],
+            image: null,
+          },
+        ],
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
 }
 
 async function readDatabaseFile() {
@@ -149,6 +186,7 @@ describe("API flows", () => {
 
   it("creates persisted orders even when Stripe is not configured", async () => {
     const { POST } = await import("@/app/api/v1/orders/route");
+    await seedManagedProduct();
 
     const response = await POST(
       new NextRequest("http://localhost/api/v1/orders", {
@@ -157,7 +195,7 @@ describe("API flows", () => {
         body: JSON.stringify({
           customer_name: "Morgan Buyer",
           customer_email: "morgan@example.com",
-          product_slug: "booking-stripe-bundle",
+          product_slug: "three-circles-template",
         }),
       })
     );

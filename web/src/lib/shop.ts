@@ -10,6 +10,8 @@ export type ShopProduct = {
   slug: string;
   name: string;
   price: string;
+  livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
   category: string;
   categorySlug: string;
   type: string;
@@ -28,6 +30,10 @@ export type ShopProduct = {
   includes: string[];
   stack: string[];
   highlights: { label: string; value: string }[];
+  image?: {
+    src: string;
+    alt: string;
+  } | null;
 };
 
 export const SHOP_PRODUCTS: ShopProduct[] = [

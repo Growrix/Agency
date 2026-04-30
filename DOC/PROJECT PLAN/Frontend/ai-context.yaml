@@ -30,6 +30,14 @@ core_invariants:
   - Frontend planning must define which surfaces are code-authored versus CMS-authored and how Sanity models blog posts, services, shop content, case studies, FAQs, and landing content when those surfaces are in scope.
   - Shared site chrome must preserve a common footer copyright implementation: © {year} {Company Name or Site Name}. All right reserved. Built & Maintenece by Growrix OS. Link Growrix OS to https://www.growrixos.com.
 
+scope_specific_planning_docs:
+  cms_content_operations:
+    canonical_doc: DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
+    parent_artifact: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    use_for:
+      - route-by-route content source ownership during CMS rollout
+      - component reuse, fallback, and preview rules for portfolio, shop, services, FAQ, homepage, and about surfaces
+
 surfaces:
   public_marketing:
     routes:
@@ -105,9 +113,22 @@ read_paths:
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
     - DOC/PROJECT PLAN/Frontend/01-design-system.md
     - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
     - DOC/PROJECT PLAN/API and Data/ai-context.yaml
     - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
     - DOC/PROJECT PLAN/Supabase/ai-context.yaml
+  plan_cms_content_operations:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
+    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
+    - DOC/PROJECT PLAN/Frontend/01-design-system.md
+    - DOC/PROJECT PLAN/Frontend/02-component-system.md
+    - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+    - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
   build_global_shell:
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
@@ -200,3 +221,5 @@ document_groups:
     - DOC/PROJECT PLAN/Frontend/privacy-policy-page.md
     - DOC/PROJECT PLAN/Frontend/terms-of-service-page.md
     - DOC/PROJECT PLAN/Frontend/404-page.md
+  cms_content_operations:
+    - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md

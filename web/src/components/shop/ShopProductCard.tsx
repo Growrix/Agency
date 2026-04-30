@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBagIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
@@ -24,7 +25,8 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export function ShopProductCard({ product }: { product: ShopProduct }) {
-  const image = getProductImage(product.name);
+  const image = product.image ?? getProductImage(product.name);
+  const embeddedPreview = !image ? product.embeddedPreviewUrl : undefined;
 
   return (
     <Card hoverable className="group flex h-full flex-col overflow-hidden p-0">
@@ -37,6 +39,14 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
             fill
             sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : embeddedPreview ? (
+          <iframe
+            src={embeddedPreview}
+            title={`${product.name} embedded preview`}
+            className="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : (
           <div className="absolute inset-0 bg-inset" />
@@ -57,7 +67,9 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
 
         {/* Name */}
         <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text">
-          {product.name}
+          <Link href={`/shop/${product.slug}`} className="hover:text-primary">
+            {product.name}
+          </Link>
         </h3>
 
         {/* Price */}
@@ -89,10 +101,20 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
           >
             <ShoppingBagIcon className="size-4" />
           </LinkButton>
-          <LinkButton href={`/shop/${product.slug}`} variant="outline" size="sm" fullWidth>
+          <LinkButton
+            href={product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}`}
+            variant="outline"
+            size="sm"
+            fullWidth
+            target={product.livePreviewUrl || product.embeddedPreviewUrl ? "_blank" : undefined}
+            rel={product.livePreviewUrl || product.embeddedPreviewUrl ? "noreferrer" : undefined}
+          >
             Live Preview <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>
         </div>
+        <Link href={`/shop/${product.slug}`} className="text-sm font-medium text-primary hover:underline">
+          View details
+        </Link>
       </div>
     </Card>
   );

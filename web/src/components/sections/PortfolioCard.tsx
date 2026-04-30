@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import type { PORTFOLIO } from "@/lib/content";
 import { SERVICES } from "@/lib/content";
-import { getPortfolioImage } from "@/lib/site-images";
+import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 
-type Project = (typeof PORTFOLIO)[number];
+type Project = PublicPortfolioRecord;
 
 export function PortfolioCard({ project }: { project: Project }) {
-  const image = getPortfolioImage(project.slug);
+  const image = project.hero_image;
+  const embeddedPreview = !image ? project.embeddedPreviewUrl : undefined;
 
   return (
     <Link
@@ -22,7 +22,15 @@ export function PortfolioCard({ project }: { project: Project }) {
             alt={image.alt}
             fill
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 ease-signal group-hover:scale-[1.03]"
+            className="object-contain bg-[#070b12]"
+          />
+        ) : embeddedPreview ? (
+          <iframe
+            src={embeddedPreview}
+            title={`${project.name} embedded preview`}
+            className="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-black/78 via-black/22 to-transparent" aria-hidden />
@@ -41,9 +49,14 @@ export function PortfolioCard({ project }: { project: Project }) {
       </div>
       <div className="p-5">
         <p className="text-sm leading-6 text-text-muted text-pretty">{project.summary}</p>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
-          View case study <ArrowUpRightIcon className="size-4" />
-        </span>
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <span className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
+            View case study <ArrowUpRightIcon className="size-4" />
+          </span>
+          {project.livePreviewUrl ? (
+            <span className="text-xs font-medium uppercase tracking-[0.16em] text-text-muted">Live site available</span>
+          ) : null}
+        </div>
       </div>
     </Link>
   );

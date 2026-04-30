@@ -4,13 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
-import {
-  PUBLISHED_SHOP_PRODUCTS,
-  SHOP_CATEGORY_OPTIONS,
-  SHOP_INDUSTRY_OPTIONS,
-  SHOP_TYPE_OPTIONS,
-  type ShopProduct,
-} from "@/lib/shop";
+import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = {
   title: "Shop — Website Templates and Ready Websites",
@@ -29,15 +23,6 @@ type FilterState = {
   industry?: string;
 };
 
-function filterProducts(products: ShopProduct[], filters: FilterState) {
-  return products.filter((product) => {
-    if (filters.category && product.categorySlug !== filters.category) return false;
-    if (filters.type && product.typeSlug !== filters.type) return false;
-    if (filters.industry && product.industrySlug !== filters.industry) return false;
-    return true;
-  });
-}
-
 function buildShopHref(filters: FilterState, patch: Partial<FilterState>) {
   const next = new URLSearchParams();
   const merged = { ...filters, ...patch };
@@ -54,6 +39,25 @@ type FilterGroup = {
   options: { value: string; label: string }[];
   activeValue: string | undefined;
 };
+
+function buildFilterOptions(
+  items: Array<{ category: string; categorySlug: string; type: string; typeSlug: string; industry: string; industrySlug: string }>,
+) {
+  return {
+    categories: Array.from(
+      new Map(items.map((item) => [item.categorySlug, item.category])).entries(),
+      ([value, label]) => ({ value, label })
+    ),
+    types: Array.from(
+      new Map(items.map((item) => [item.typeSlug, item.type])).entries(),
+      ([value, label]) => ({ value, label })
+    ),
+    industries: Array.from(
+      new Map(items.map((item) => [item.industrySlug, item.industry])).entries(),
+      ([value, label]) => ({ value, label })
+    ),
+  };
+}
 
 function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterState }) {
   const allHref = buildShopHref(filters, { [group.key]: undefined });
@@ -105,14 +109,18 @@ function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterS
 
 export default async function ShopPage({ searchParams }: { searchParams: SearchParams }) {
   const filters = await searchParams;
-  const filteredProducts = filterProducts(PUBLISHED_SHOP_PRODUCTS, filters);
+  const [allProducts, filteredProducts] = await Promise.all([
+    listPublicShopProducts(),
+    listPublicShopProducts(filters),
+  ]);
+  const filterOptions = buildFilterOptions(allProducts);
 
   const hasActiveFilter = !!(filters.category || filters.type || filters.industry);
 
   const filterGroups: FilterGroup[] = [
-    { label: "Category", key: "category", options: SHOP_CATEGORY_OPTIONS, activeValue: filters.category },
-    { label: "Type", key: "type", options: SHOP_TYPE_OPTIONS, activeValue: filters.type },
-    { label: "Industry", key: "industry", options: SHOP_INDUSTRY_OPTIONS, activeValue: filters.industry },
+    { label: "Category", key: "category", options: filterOptions.categories, activeValue: filters.category },
+    { label: "Type", key: "type", options: filterOptions.types, activeValue: filters.type },
+    { label: "Industry", key: "industry", options: filterOptions.industries, activeValue: filters.industry },
   ];
 
   return (
@@ -126,7 +134,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 Templates &amp; Ready Websites
               </h1>
               <p className="mt-2 text-sm leading-6 text-text-muted">
-                {PUBLISHED_SHOP_PRODUCTS.length} products &mdash; website templates from $500 and ready websites from $1k, each with 1 year of support.
+                {allProducts.length} products &mdash; website templates from $500 and ready websites from $1k, each with 1 year of support.
               </p>
             </div>
             <LinkButton href="/book-appointment" variant="outline" size="sm">

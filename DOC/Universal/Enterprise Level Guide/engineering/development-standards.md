@@ -59,6 +59,14 @@ This document defines the engineering standards that should govern implementatio
 - Do not leave key architecture decisions only in tickets or chats.
 - Capture new state transitions and side effects in the relevant docs.
 
+## CMS Studio Standards
+
+- Treat Sanity Studio or any similar CMS studio as a standalone app surface even when it lives in the same repository.
+- Keep CMS studio runtime, lockfile, install flow, CI workflow, and deployment separate from the public site.
+- Default to one approved Node major across the repo unless project docs explicitly justify an exception.
+- Never couple root `postinstall`, root build, or root deploy flows to the CMS studio by default.
+- Prefer a separate CMS domain such as `cms.<primary-domain>` for hosted Studio access.
+
 ## Code Review Standards
 
 Reviewers should verify:

@@ -48,6 +48,7 @@ When executing any implementation task, follow this sequence in order:
 - Never make delivered work public without an approval control.
 - Never expose private storage objects directly without verifying access intent.
 - Never let client-side state become the source of truth for project status.
+- Never treat an embedded CMS studio (for example Sanity Studio) as part of the public app install or deploy lifecycle without explicit project documentation approving that coupling.
 
 ## Expected AI Deliverables
 
@@ -131,3 +132,4 @@ Example:
 
 - If implementation clarifies a previously vague rule, update the relevant spec.
 - If docs and code conflict, resolve the conflict explicitly instead of silently drifting.
+- For Sanity or similar CMS tools inside a monorepo, document Node version policy, install isolation, lockfile ownership, CI ownership, and hosting/domain ownership before editing package scripts.

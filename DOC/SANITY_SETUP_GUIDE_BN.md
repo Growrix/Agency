@@ -13,7 +13,9 @@
 
 ### লোকাল Studio চালু করা
 ```bash
-npm --prefix studio run dev
+cd studio
+npm install
+npm run dev
 ```
 এরপর খুলুন: **http://localhost:3333**
 
@@ -117,14 +119,17 @@ ls -la web/.next/static
 
 ### সমস্যা: Studio খুলছে না
 ```bash
-npm --prefix studio run dev
+cd studio
+npm install
+npm run dev
 # এবং localhost:3333 খুলুন
 ```
 
 ### সমস্যা: ব্লগ পোস্ট ফর্ম খালি দেখাচ্ছে
 ```bash
 # Studio বন্ধ করুন এবং পুনরায় চালু করুন
-npm --prefix studio run dev
+cd studio
+npm run dev
 ```
 
 ### সমস্যা: ফ্রন্টএন্ডে পোস্ট দেখাচ্ছে না
@@ -185,6 +190,14 @@ curl "https://1tk4ulcx.api.sanity.io/v2026-04-23/data/query/production?query=%7B
 | **সেই API URL কী?** | Sanity API - ডেটা ফেচ করার জন্য |
 | **লাইভ ডোমেইনে কাজ করবে?** | হ্যাঁ, স্বয়ংক্রিয়ভাবে (বিশেষ সেটআপ ছাড়াই) |
 | **Studio লাইভ দরকার?** | না, লোকাল যথেষ্ট (আপনি লোকালি এডিট করবেন) |
+
+### Best Practice
+
+- `studio/`-কে আলাদা app হিসেবে ট্রিট করুন
+- Node `20.x` ব্যবহার করুন
+- root থেকে Studio install/run করবেন না
+- `studio`-র আলাদা lockfile, CI, deploy, এবং domain রাখুন
+- online Studio চাইলে `cms.growrixos.com` এর মতো আলাদা domain ব্যবহার করুন
 
 ---
 

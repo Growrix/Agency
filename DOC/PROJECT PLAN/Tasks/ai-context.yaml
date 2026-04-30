@@ -23,6 +23,7 @@ prompt_contract:
 core_invariants:
   - DOC/PROJECT PLAN/Tasks/tasks.md is the single source of truth for execution status.
   - No task may be marked done without code evidence or documented validation evidence.
+  - For planning-only or documentation-first sessions, the canonical planning artifact under DOC/PROJECT PLAN/ and the affected downstream role docs must be created or updated before tasks.md is changed.
   - Partial means scaffold or mock exists, but the real integrated flow is not complete.
   - If implementation diverges from contracts, update the contracts or record a blocker before continuing.
   - Release readiness must be tracked explicitly, not inferred.
@@ -38,6 +39,7 @@ read_paths:
     - DOC/PROJECT PLAN/Tasks/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/tasks.md
     - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Backend/ai-context.yaml
@@ -72,6 +74,7 @@ read_paths:
 
 tracker_rules:
   - Update current state, blockers, and next recommended tasks after each implementation session.
+  - When a session produces or revises a cross-role plan, record the planning artifact path and affected downstream role-doc paths in tasks.md and update the tracker only after those docs exist.
   - Keep exact file paths in task descriptions wherever possible.
   - Record deployment blockers explicitly.
   - Reflect status changes in the root project docs when the execution model changes.

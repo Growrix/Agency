@@ -2,6 +2,20 @@
 
 Use this template for all fresh, scale, and hybrid planning work in the Agency workspace.
 
+Documentation materialization rule:
+- Instantiate this template into a real markdown file under `DOC/PROJECT PLAN/` before updating `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- For cross-role scope, store the artifact at the `DOC/PROJECT PLAN/` root using a scope-specific name such as `<scope>-e2e-plan.md`.
+- Create or update the affected role-specific planning docs in their owning folders before considering the plan complete.
+- Chat summaries are secondary and never replace the canonical planning artifact.
+
+## 0. Artifact Metadata
+- Canonical artifact path:
+- Affected downstream role docs:
+- Planning request source:
+- Planning mode:
+- Status:
+- Last updated:
+
 ## 1. Planning Mode And Objective
 - Planning mode: fresh, scale, or hybrid
 - Why this mode fits the request:
@@ -67,6 +81,7 @@ Use this template for all fresh, scale, and hybrid planning work in the Agency w
 - Slug and preview rules:
 - Draft, review, publish flow:
 - Revalidation or cache invalidation model:
+- Studio runtime and deployment isolation plan:
 
 ### Editorial And Operator Workflow
 - Who creates blog posts and where:
@@ -158,6 +173,14 @@ Use this template for all fresh, scale, and hybrid planning work in the Agency w
 - Exit criteria:
 - Risks and fallback:
 
+### CMS Studio Runtime Isolation Checklist
+- Studio directory and package manifest audited:
+- Studio lockfile strategy defined:
+- Node version policy defined for Studio:
+- Root install/deploy coupling explicitly accepted or rejected:
+- Separate CI workflow defined:
+- Separate hosting project and CMS domain defined:
+
 ### QA
 - Inputs:
 - Deliverables:
@@ -190,5 +213,6 @@ Use this template for all fresh, scale, and hybrid planning work in the Agency w
 
 ## 12. Tracker And Documentation Updates
 - Files updated:
+- Downstream role docs updated:
 - Task tracker deltas:
 - New planning artifacts created:

@@ -22,12 +22,12 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import {
 	FAQ_GENERAL,
-	PORTFOLIO,
 	PROCESS_STEPS,
-	SERVICES,
 } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
+import { listSanityFaqItems } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = {
 	title: "Services | Websites, SaaS, MCP, and Automation",
@@ -116,7 +116,14 @@ const STACK_AREAS = [
 	},
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+	const portfolio = await listPublicPortfolio();
+	const services = await listPublicServices();
+	const cmsFaqItems = await listSanityFaqItems().catch(() => []);
+	const faqItems = cmsFaqItems.length > 0
+		? cmsFaqItems.slice(0, 5).map(({ question, answer }) => ({ question, answer }))
+		: FAQ_GENERAL.slice(0, 5);
+
 	return (
 		<>
 			<Section className="pt-12 sm:pt-16 pb-14 relative overflow-hidden">
@@ -139,7 +146,7 @@ export default function ServicesPage() {
 					</div>
 
 					<RevealGroup className="mt-12 grid gap-4 lg:grid-cols-4 sm:grid-cols-2" stagger={0.06}>
-						{SERVICES.map((service) => {
+							{services.map((service) => {
 							const Icon = ICONS[service.slug as keyof typeof ICONS];
 
 							return (
@@ -149,12 +156,12 @@ export default function ServicesPage() {
 											  <div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
 												<Icon className="size-6" />
 											</div>
-											<Badge tone="secondary">{service.timeline}</Badge>
+													<Badge tone="secondary">{service.delivery_timeline}</Badge>
 										</div>
-										<h2 className="mt-5 font-display text-2xl tracking-tight">{service.name}</h2>
-										<p className="mt-3 text-sm text-text-muted leading-6">{service.long}</p>
-										<p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
-											{service.typical}
+											<h2 className="mt-5 font-display text-2xl tracking-tight">{service.title}</h2>
+											<p className="mt-3 text-sm text-text-muted leading-6">{service.description}</p>
+											<p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
+												{service.short_description}
 										</p>
 										<div className="mt-6 space-y-2 flex-1">
 											{service.pillars.map((pillar) => (
@@ -191,9 +198,9 @@ export default function ServicesPage() {
 							  <thead className="bg-inset/70">
 								<tr>
 									  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">Decision point</th>
-									{SERVICES.map((service) => (
+									{services.map((service) => (
 										<th key={service.slug} className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">
-											{service.name}
+											{service.title}
 										</th>
 									))}
 								</tr>
@@ -202,7 +209,7 @@ export default function ServicesPage() {
 								{GOAL_ROWS.map((row) => (
 									  <tr key={row.label} className="border-t border-border align-top">
 										<td className="px-5 py-4 font-display text-base tracking-tight">{row.label}</td>
-										{SERVICES.map((service) => (
+										{services.map((service) => (
 											  <td key={`${row.label}-${service.slug}`} className="px-5 py-4 text-text-muted leading-6">
 												{row.values[service.slug as keyof typeof row.values]}
 											</td>
@@ -214,12 +221,12 @@ export default function ServicesPage() {
 					</div>
 
 					<RevealGroup className="mt-10 grid gap-4 lg:hidden" stagger={0.06}>
-						{SERVICES.map((service) => (
+						{services.map((service) => (
 							<RevealItem key={service.slug}>
 								<Card>
 									<div className="flex items-center justify-between gap-4">
-										<h3 className="font-display text-xl tracking-tight">{service.name}</h3>
-										<Badge tone="primary">{service.timeline}</Badge>
+										<h3 className="font-display text-xl tracking-tight">{service.title}</h3>
+										<Badge tone="primary">{service.delivery_timeline}</Badge>
 									</div>
 									<dl className="mt-5 space-y-4">
 										{GOAL_ROWS.map((row) => (
@@ -278,7 +285,7 @@ export default function ServicesPage() {
 						description="Most proof here is weighted toward websites and SaaS work, with supporting systems shown where they helped the main outcome."
 					/>
 					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
-						{PORTFOLIO.slice(0, 3).map((project) => (
+						{portfolio.slice(0, 3).map((project) => (
 							<RevealItem key={project.slug} className="h-full">
 								<PortfolioCard project={project} />
 							</RevealItem>
@@ -303,7 +310,7 @@ export default function ServicesPage() {
 						align="center"
 					/>
 					<div className="mt-10">
-						<Accordion items={FAQ_GENERAL.slice(0, 5)} />
+							<Accordion items={faqItems} />
 					</div>
 				</Container>
 			</Section>

@@ -9,12 +9,20 @@ This document locks down all API request/response formats, data types, database 
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **[CMS/content operations scope doc](#cms-content-operations-scope-doc)**: `cms-content-operations-api-data.md`
 - **[Response Envelope](#response-envelope)**: success, paginated, error formats
 - **[Error Codes](#error-codes)**: standardized error handling
 - **[Database Schema](#database)**: users, services, products, orders, appointments, inquiries
 - **[API Endpoints](#endpoints)**: auth, services, products, orders, appointments, contact
 - **[Data Types](#types)**: timestamps, money, UUIDs, enums
 - **[Webhooks](#webhooks)**: event schemas for order, payment, appointment
+
+---
+
+## CMS Content Operations Scope Doc
+
+- `cms-content-operations-api-data.md` is the canonical role-specific planning doc for the current CMS/content-operations rollout.
+- Read it together with `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` before changing API contracts, schema ownership, webhook behavior, or migration sequencing for CMS-backed content and newsletter operations.
 
 ---
 

@@ -18,6 +18,11 @@ The existing admin routes and APIs are present but operationally shallow for rea
 - Human plan index: DOC/PROJECT PLAN/Admin Dashboard/README.md
 - Execution tracker source: DOC/PROJECT PLAN/Tasks/tasks.md
 
+## Scope-Specific Planning Doc
+
+- `DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md` is the canonical admin role doc for the current CMS/content-operations rollout.
+- Read it together with `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` before changing admin routes, workflow ownership, publish controls, or submissions operations.
+
 ## Planning Mode
 
 Hybrid planning mode:

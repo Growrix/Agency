@@ -35,7 +35,7 @@ Setup:
 ```
 
 **Workflow:**
-1. You (on your computer): `npm --prefix studio run dev`
+1. You (on your computer): `cd studio && npm install && npm run dev`
 2. You login to `localhost:3333` and create posts
 3. Posts sync to Sanity cloud automatically
 4. Anyone on the internet: visits `yourdomain.com` and sees your posts
@@ -102,7 +102,9 @@ vercel --prod
 
 # 3. That's it! Your frontend is live.
 # Keep running Studio locally:
-npm --prefix studio run dev
+cd studio
+npm install
+npm run dev
 ```
 
 **Verify it works:**
@@ -120,7 +122,7 @@ curl "https://yourdomain.com/blog"
 ```json
 {
   "scripts": {
-    "studio:deploy": "cd studio && npm run build && vercel deploy --prod"
+   "studio:deploy": "cd studio && npm install && npm run build && vercel deploy --prod"
   }
 }
 ```
@@ -132,7 +134,10 @@ https://cms.yourdomain.com
 
 **Step 3:** Deploy Studio:
 ```bash
-npm run studio:deploy
+cd studio
+npm install
+npm run build
+vercel deploy --prod
 ```
 
 **Step 4:** Add DNS CNAME:

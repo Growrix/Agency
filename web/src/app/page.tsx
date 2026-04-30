@@ -8,7 +8,6 @@ import {
   CodeBracketSquareIcon,
   CpuChipIcon,
   CubeTransparentIcon,
-  RectangleGroupIcon,
   ShieldCheckIcon,
   SparklesIcon,
   WindowIcon,
@@ -29,19 +28,20 @@ import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { AdditionalServices } from "@/components/sections/AdditionalServices";
 import { BlogCard } from "@/components/sections/BlogCard";
+import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import {
   FEATURED_LIVE_SAAS,
-  FEATURED_PRODUCTS,
   HOME_STATS,
   HOME_STACK_MARQUEE,
-  PORTFOLIO,
   PROCESS_STEPS,
-  SERVICES,
 } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { listBlogPosts } from "@/server/blog/content";
+import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
+import { getSanityHomePageContent } from "@/server/sanity/marketing";
 
 const SERVICE_ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -79,8 +79,32 @@ const HOME_TIERS: Tier[] = [
   },
 ];
 
+function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | undefined, fallback: T[]) {
+  if (!slugs || slugs.length === 0) {
+    return fallback;
+  }
+
+  const bySlug = new Map(items.map((item) => [item.slug, item]));
+  const picked = slugs.map((slug) => bySlug.get(slug)).filter((item): item is T => item !== undefined);
+  return picked.length > 0 ? picked : fallback;
+}
+
 export default async function Home() {
-  const latestBlogPosts = (await listBlogPosts()).slice(0, 3);
+  const [latestBlogPosts, homeContent, services, portfolio, publicProducts] = await Promise.all([
+    listBlogPosts().then((items) => items.slice(0, 3)),
+    getSanityHomePageContent().catch(() => null),
+    listPublicServices(),
+    listPublicPortfolio(),
+    listPublicShopProducts(),
+  ]);
+
+  const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
+  const featuredProducts = pickBySlugs(
+    publicProducts,
+    homeContent?.shopSpotlight?.productSlugs,
+    publicProducts.slice(0, 4)
+  );
+  const pricingTiers = homeContent?.pricing?.tiers && homeContent.pricing.tiers.length > 0 ? homeContent.pricing.tiers : HOME_TIERS;
 
   return (
     <>
@@ -92,19 +116,19 @@ export default async function Home() {
         <Container width="shell">
           <div className="mx-auto max-w-5xl text-center">
             <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>Websites, SaaS, ready launches</Badge>
+              <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Websites, SaaS, ready launches"}</Badge>
             </div>
             <h1
               className="signal-rise mt-5 font-display text-[42px] leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl"
               style={{ animationDelay: "90ms" }}
             >
-              Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out
+              {homeContent?.heroTitle ?? "Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out"}
             </h1>
             <p
               className="signal-rise mx-auto mt-6 max-w-3xl text-lg leading-7 text-pretty text-text-muted"
               style={{ animationDelay: "180ms" }}
             >
-              From premium websites and SaaS apps to mobile launch pages and ready sites, we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required.
+              {homeContent?.heroDescription ?? "From premium websites and SaaS apps to mobile launch pages and ready sites, we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required."}
             </p>
             <div
               className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
@@ -136,9 +160,9 @@ export default async function Home() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="Capabilities"
-              title="Websites and SaaS first. Supporting systems when they matter."
-              description="Our primary work is premium websites, SaaS applications, mobile launch experiences, and ready-to-ship website products. MCP and automation come in when they strengthen that core offer."
+              eyebrow={homeContent?.capability?.eyebrow ?? "Capabilities"}
+              title={homeContent?.capability?.title ?? "Websites and SaaS first. Supporting systems when they matter."}
+              description={homeContent?.capability?.description ?? "Our primary work is premium websites, SaaS applications, mobile launch experiences, and ready-to-ship website products. MCP and automation come in when they strengthen that core offer."}
             />
             <Link
               href="/services"
@@ -148,16 +172,16 @@ export default async function Home() {
             </Link>
           </div>
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {SERVICES.map((s) => {
+            {services.map((s) => {
               const Icon = SERVICE_ICONS[s.slug as keyof typeof SERVICE_ICONS];
               return (
                 <RevealItem key={s.slug}>
                   <FeatureCard
                     href={`/services/${s.slug}`}
                     icon={<Icon className="size-5" />}
-                    title={s.name}
-                    description={s.short}
-                    meta={s.timeline}
+                    title={s.title}
+                    description={s.short_description}
+                    meta={s.delivery_timeline}
                   />
                 </RevealItem>
               );
@@ -172,36 +196,14 @@ export default async function Home() {
       <Section>
         <Container>
           <SectionHeading
-            eyebrow="Featured builds"
-            title="Proof from launches, rebuilds, and growth."
-            description="A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."
+              eyebrow={homeContent?.featuredBuilds?.eyebrow ?? "Featured builds"}
+              title={homeContent?.featuredBuilds?.title ?? "Proof from launches, rebuilds, and growth."}
+              description={homeContent?.featuredBuilds?.description ?? "A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."}
           />
           <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {PORTFOLIO.slice(0, 3).map((p) => (
+            {featuredProjects.map((p) => (
               <RevealItem key={p.slug}>
-              <Link
-                href={`/portfolio/${p.slug}`}
-                className="group block h-full overflow-hidden rounded-[20px] border border-border bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-signal hover:-translate-y-1 hover:border-border-strong hover:shadow-(--shadow-2)"
-              >
-                <div className={`relative aspect-4/3 bg-linear-to-br ${p.accent}`}>
-                  <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
-                  <div className="absolute inset-0 flex items-end p-5">
-                    <div className="text-white">
-                      <p className="font-mono text-[11px] uppercase tracking-wider opacity-80">{p.industry}</p>
-                      <p className="font-display text-2xl tracking-tight mt-1">{p.name}</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4 rounded-full bg-black/30 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
-                    {p.metric}
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-text-muted leading-6 text-pretty">{p.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
-                    View case study <ArrowUpRightIcon className="size-4" />
-                  </span>
-                </div>
-              </Link>
+                <PortfolioCard project={p} />
               </RevealItem>
             ))}
           </RevealGroup>
@@ -220,34 +222,18 @@ export default async function Home() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="Shop spotlight"
-              title="Website templates and ready websites, built to ship."
-              description="Website templates from $500 and ready websites from $1k, built from the same systems we use in custom engagements."
+              eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "Shop spotlight"}
+              title={homeContent?.shopSpotlight?.title ?? "Website templates and ready websites, built to ship."}
+              description={homeContent?.shopSpotlight?.description ?? "Website templates from $500 and ready websites from $1k, built from the same systems we use in custom engagements."}
             />
             <LinkButton href="/shop" variant="outline">
               Browse the shop <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {FEATURED_PRODUCTS.map((p) => (
+            {featuredProducts.map((p) => (
               <RevealItem key={p.name} className="h-full">
-              <Card hoverable className="flex flex-col h-full">
-                <div className="relative -mx-6 -mt-6 mb-5 h-32 overflow-hidden rounded-t-[16px] border-b border-border bg-linear-to-br from-inset to-bg">
-                  <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
-                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                    <RectangleGroupIcon className="size-9 text-primary" aria-hidden />
-                    {p.tag && <Badge tone="secondary">{p.tag}</Badge>}
-                  </div>
-                </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{p.category}</p>
-                <h3 className="mt-1 font-display text-lg tracking-tight">{p.name}</h3>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="font-display text-xl">{p.price}</span>
-                  <Link href={`/shop/${p.slug}`} className="text-sm font-medium text-primary hover:underline">
-                    Preview →
-                  </Link>
-                </div>
-              </Card>
+                <ShopProductCard product={p} />
               </RevealItem>
             ))}
           </RevealGroup>
@@ -329,9 +315,9 @@ export default async function Home() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="Live SaaS"
-              title="Buy a Live SaaS — Not Just a Template"
-              description="We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."
+              eyebrow={homeContent?.liveSaas?.eyebrow ?? "Live SaaS"}
+              title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
+              description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
             />
             <LinkButton href="/shop" variant="outline">
               Explore Live SaaS <ArrowUpRightIcon className="size-4" />
@@ -418,9 +404,9 @@ export default async function Home() {
           <div className="grid gap-10 lg:grid-cols-12 items-center">
             <div className="lg:col-span-5">
               <SectionHeading
-                eyebrow="AI Growrix OS"
-                title="Get the right answer before you book."
-                description="Ask about website scope, SaaS roadmaps, ready website fit, pricing, or timelines. The concierge keeps MCP and automation in context when they support the main build."
+                eyebrow={homeContent?.ai?.eyebrow ?? "AI Growrix OS"}
+                title={homeContent?.ai?.title ?? "Get the right answer before you book."}
+                description={homeContent?.ai?.description ?? "Ask about website scope, SaaS roadmaps, ready website fit, pricing, or timelines. The concierge keeps MCP and automation in context when they support the main build."}
               />
               <div className="mt-8 flex flex-wrap gap-3">
                 <ConciergeTriggerButton>
@@ -431,7 +417,7 @@ export default async function Home() {
                 </LinkButton>
               </div>
               <p className="mt-5 flex items-center gap-1.5 text-xs text-text-muted">
-                <ShieldCheckIcon className="size-3.5" /> Conversations are private and never used to train models.
+                <ShieldCheckIcon className="size-3.5" /> {homeContent?.ai?.privacyNote ?? "Conversations are private and never used to train models."}
               </p>
             </div>
             <div className="lg:col-span-7">
@@ -469,13 +455,13 @@ export default async function Home() {
       <Section tone="inset">
         <Container>
           <SectionHeading
-            eyebrow="Engagements"
-            title="Transparent ways to work together."
-            description="Choose a custom build, an embedded partnership, or a website product with flexible payment and 1 year of support."
+            eyebrow={homeContent?.pricing?.eyebrow ?? "Engagements"}
+            title={homeContent?.pricing?.title ?? "Transparent ways to work together."}
+            description={homeContent?.pricing?.description ?? "Choose a custom build, an embedded partnership, or a website product with flexible payment and 1 year of support."}
             align="center"
           />
           <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {HOME_TIERS.map((t) => (
+            {pricingTiers.map((t) => (
               <RevealItem key={t.name} className="h-full">
                 <PricingTier tier={t} />
               </RevealItem>
@@ -507,9 +493,9 @@ export default async function Home() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="Field notes"
-              title="Long-form writing from the studio."
-              description="Engineering deep-dives, design system reflections, and quarterly notes on what we shipped."
+              eyebrow={homeContent?.fieldNotes?.eyebrow ?? "Field notes"}
+              title={homeContent?.fieldNotes?.title ?? "Long-form writing from the studio."}
+              description={homeContent?.fieldNotes?.description ?? "Engineering deep-dives, design system reflections, and quarterly notes on what we shipped."}
             />
             <LinkButton href="/blog" variant="outline">
               Visit the blog <ArrowUpRightIcon className="size-4" />
@@ -535,11 +521,11 @@ export default async function Home() {
 
       {/* Final CTA */}
       <CTABand
-        eyebrow="Start a conversation"
-        title="Tell us what you're building. We'll tell you how we'd ship it."
-        description="A 30-minute discovery call. A written plan within 48 hours. No pressure, no boilerplate."
-        primary={{ label: "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}
+        eyebrow={homeContent?.finalCta?.eyebrow ?? "Start a conversation"}
+        title={homeContent?.finalCta?.title ?? "Tell us what you're building. We'll tell you how we'd ship it."}
+        description={homeContent?.finalCta?.description ?? "A 30-minute discovery call. A written plan within 48 hours. No pressure, no boilerplate."}
+        primary={{ label: homeContent?.finalCta?.primaryLabel ?? "Book Appointment", href: "/book-appointment" }}
+        secondary={{ label: homeContent?.finalCta?.secondaryLabel ?? "Open WhatsApp", href: WHATSAPP_HREF }}
       />
     </>
   );

@@ -5,8 +5,9 @@ import { ApiError } from "@/server/core/api";
 import { getRuntimeConfig } from "@/server/config/runtime";
 import type { OrderItemRecord, OrderRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
+import { getPublicShopProduct } from "@/server/domain/catalog";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
-import { getCheckoutHref, getShopProduct } from "@/lib/shop";
+import { getCheckoutHref } from "@/lib/shop";
 
 type CreateOrderInput = {
   product_slug: string;
@@ -54,7 +55,7 @@ export async function createOrder(input: CreateOrderInput) {
     throw new ApiError("FIELD_VALIDATION_FAILED", 400, "A valid email address is required.");
   }
 
-  const product = getShopProduct(input.product_slug);
+  const product = await getPublicShopProduct(input.product_slug);
   if (!product || product.published === false) {
     throw new ApiError("NOT_FOUND", 404, "Selected product could not be found.");
   }

@@ -28,6 +28,8 @@ export async function POST(request: NextRequest) {
     const record = await upsertManagedPortfolioProject({
       slug: typeof body.slug === "string" ? body.slug : "",
       name: typeof body.name === "string" ? body.name : "",
+      livePreviewUrl: typeof body.livePreviewUrl === "string" ? body.livePreviewUrl : undefined,
+      embeddedPreviewUrl: typeof body.embeddedPreviewUrl === "string" ? body.embeddedPreviewUrl : undefined,
       industry: typeof body.industry === "string" ? body.industry : "",
       service: typeof body.service === "string" ? body.service : "",
       summary: typeof body.summary === "string" ? body.summary : "",

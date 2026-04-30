@@ -1,8 +1,8 @@
 import "server-only";
 
-import { FAQ_GENERAL, PORTFOLIO, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { FAQ_GENERAL, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
-import { SHOP_PRODUCTS } from "@/lib/shop";
+import { listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
 
 export type ConciergeSourceType =
   | "service"
@@ -102,7 +102,7 @@ function tokenize(text: string) {
     .filter((token) => token.length > 2);
 }
 
-function buildDocuments(): KnowledgeDocument[] {
+async function buildDocuments(): Promise<KnowledgeDocument[]> {
   const serviceDocs = SERVICES.map((service) => ({
     id: `service-${service.slug}`,
     label: service.name,
@@ -119,7 +119,9 @@ function buildDocuments(): KnowledgeDocument[] {
     content: `${entry.question} ${entry.answer}`,
   }));
 
-  const portfolioDocs = PORTFOLIO.map((project) => ({
+  const [portfolio, products] = await Promise.all([listPublicPortfolio(), listPublicShopProducts()]);
+
+  const portfolioDocs = portfolio.map((project) => ({
     id: `portfolio-${project.slug}`,
     label: project.name,
     sourcePath: `/portfolio/${project.slug}`,
@@ -135,7 +137,7 @@ function buildDocuments(): KnowledgeDocument[] {
     content: `${step.title}. ${step.description} Typical timing: ${step.meta}.`,
   }));
 
-  const productDocs = SHOP_PRODUCTS.map((product) => ({
+  const productDocs = products.map((product) => ({
     id: `product-${product.slug}`,
     label: product.name,
     sourcePath: `/shop/${product.slug}`,
@@ -154,13 +156,12 @@ function buildDocuments(): KnowledgeDocument[] {
   ];
 }
 
-const KNOWLEDGE_DOCUMENTS = buildDocuments();
-
-export function searchKnowledge(query: string, limit = 6) {
+export async function searchKnowledge(query: string, limit = 6) {
+  const knowledgeDocuments = await buildDocuments();
   const normalizedQuery = normalize(query);
   const tokens = tokenize(query);
 
-  return KNOWLEDGE_DOCUMENTS
+  return knowledgeDocuments
     .map((document) => {
       const normalizedContent = normalize(`${document.label} ${document.content}`);
       let score = 0;
@@ -200,6 +201,6 @@ export function formatKnowledgeForPrompt(documents: KnowledgeDocument[]) {
     .join("\n\n");
 }
 
-export function listKnowledgeDocuments() {
-  return KNOWLEDGE_DOCUMENTS;
+export async function listKnowledgeDocuments() {
+  return buildDocuments();
 }

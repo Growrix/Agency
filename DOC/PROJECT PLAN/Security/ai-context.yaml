@@ -32,6 +32,23 @@ core_invariants:
   - All secrets are rotated quarterly and stored in a secrets manager.
   - All dependencies are scanned for vulnerabilities weekly.
 
+scope_specific_planning_docs:
+  cms_content_operations:
+    canonical_doc: DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+    parent_artifact: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    use_for:
+      - preview, webhook, newsletter, and admin-security rules for the CMS rollout
+      - token ownership, role enforcement, auditability, and privacy controls for content operations
+
+planning_read_paths:
+  plan_cms_content_operations:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+    - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+
 authentication_model:
   method: JWT (JSON Web Token) stateless
   flow:

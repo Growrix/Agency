@@ -7,7 +7,7 @@ canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
 last_audit_date: 2026-04-28
 current_state:
-  repo_branch_audited: Version_3
+  repo_branch_audited: CMS
   frontend_shell: done
   frontend_routes: done
   frontend_conversion_integrations: partial
@@ -20,7 +20,7 @@ current_state:
   qa_implementation: done
   deployable: false
 release_blockers:
-  - Full integrated production release is still blocked by external integrations intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and optional CMS workflow).
+  - Full integrated production release is still blocked by external integrations and content-operations rollout work intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and the now-documented CMS/content operations implementation plan).
   - Customer/subscriber RBAC and protected self-service ownership flows are implemented to a baseline level, but richer policy granularity remains a hardening follow-up.
   - Infrastructure-as-code and external monitoring/alerting stack work are still pending if deployment expands beyond frontend-hosted runtime.
 phase_sequence:
@@ -32,21 +32,23 @@ phase_sequence:
   - P5-devops-release-readiness
   - P6-qa-release-gates
   - P7-admin-dashboard-e2e-expansion
-next_recommended_phase: P7-admin-dashboard-e2e-expansion
+  - P8-frontend-cms-content-operations
+next_recommended_phase: P8-frontend-cms-content-operations
 next_recommended_tasks:
-  - T034
-  - T035
-  - T036
+  - T041
+  - T042
+  - T043
+  - T044
 phase_status_counts:
   done: 4
-  partial: 3
+  partial: 5
   blocked: 0
-  not_started: 1
+  not_started: 0
 task_status_counts:
-  done: 26
-  partial: 6
+  done: 29
+  partial: 7
   blocked: 0
-  not_started: 6
+  not_started: 8
 ---
 
 # Tasks / Execution Tracker
@@ -54,10 +56,15 @@ task_status_counts:
 ## Audit Snapshot
 - Audit basis:
 	- DOC/PROJECT PLAN/ai-context.yaml
+	- DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
 	- DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
 	- DOC/PROJECT PLAN/*/README.md
-  - current `web/` codebase on `Complete_Execution`
-- Active implementation session:
+  - current `web/` codebase on `CMS`
+- Active tracked sessions:
+  - refined CMS-driven portfolio presentation quality by removing homepage portfolio card zoom/crop behavior, prioritizing slug-page hero image rendering with gallery fallback to hero media when gallery entries are missing, and moving the live-site CTA below the media card with an external-link affordance
+  - removed placeholder `new-product` leakage from public shop output by enforcing CMS-first public catalog selection and filtering admin placeholder records from shop/portfolio surfaces, then switched homepage featured shop/portfolio sections to shared preview-capable cards and updated commerce E2E fixtures to consume live CMS slugs
+  - hardened the planner agent, planning template, execution constitution, and root project-plan routing so every cross-role planning request must materialize a canonical `DOC/PROJECT PLAN/` artifact before `Tasks/tasks.md` is updated or a plan is treated as complete
+  - created the canonical root planning artifact `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` for the CMS/content-operations rollout, covering content ownership, Sanity structure, data boundaries, operator workflow, integrations, phase sequencing, backlog, and validation gates without starting implementation
   - hardened local development startup by replacing the raw `next dev` script with a wrapper that enforces Node 20 through `fnm`, automatically restarts stale same-workspace Next.js processes still holding port `5000`, and falls back to the next free local port when another application owns the default port
   - fixed the noisy local `next build` SWC warnings by removing the corrupted `@next/swc-win32-x64-msvc` install from `web/node_modules`, reinstalling dependencies, confirming the native binding loads cleanly again, adding local Node 20 guard files plus strict engine enforcement so future installs do not drift back onto an unsupported major runtime, and isolating unit-test data directories so the file-backed store no longer races across parallel test files
   - revised the about route after the first redesign overshot: restored the original page structure, kept the existing team/process/philosophy sections, and replaced the heavy third-person layout with three lighter first-person founder sections anchored by the optimized portrait
@@ -103,6 +110,8 @@ task_status_counts:
 - Working conclusion:
 	- the documented frontend surface is largely implemented
   - the documented backend, API, Security, and QA phases now each have a first real implementation slice, though full production hardening is still pending
+  - the planner workflow is now documentation-first at the root level: canonical end-to-end plans must exist in `DOC/PROJECT PLAN/` before tracker updates or later implementation routing
+  - the CMS/content-operations expansion is now canonically planned in `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`, but implementation has not started in this slice
   - frontend-only development deployment is now configured, but full integrated release is still blocked by deferred backend and remaining release-engineering gaps
   - the AI concierge entry points now open a shared popup chat surface backed by `/api/v1/ai-concierge`, while the dedicated `/ai-concierge` route remains available as a secondary full-page view
   - concierge popup behavior now auto-closes on route changes and action-link clicks so conversion routes appear immediately after suggestion taps
@@ -110,6 +119,12 @@ task_status_counts:
   - current content work should stay text-only and documentation-first: no route logic changes, only copy, pricing language, FAQs, and related positioning updates
   - adjusted the shared StatBlock section to use the global Container width for consistent sizing across routes, and moved the about-page stack marquee to follow the process section
   - identified the Version_3 Vercel install failure root cause as Windows-only native binaries being declared as direct web dependencies, removed those direct pins, refreshed the lockfile, and verified the branch still passes lint, unit, integration, and build gates
+  - identified and fixed the CMS branch Vercel build blocker as a Sanity client typing misuse (`timeout` passed as a GROQ params field), removed the invalid query param to restore typecheck compatibility, and aligned GitHub Actions Node to 20 to match local/Vercel runtime expectations
+  - audited recurring Vercel Node-engine warnings and normalized root/web `engines.node` from strict `20.x` to `>=20 <25` so the project setting `24.x` no longer conflicts while local Node 20 remains supported
+  - codified Sanity Studio best-practice rules across universal and project docs so AI must treat Studio as an isolated app with Node 20, its own lockfile/install flow/CI/deploy, and a separate CMS domain rather than coupling it to the public web lifecycle
+  - implemented the Studio isolation baseline in code by removing root-level Studio script coupling, adding Studio-local runtime files and agent guidance, generating a dedicated `studio/package-lock.json`, adding a separate Studio CI workflow and Vercel config, and verifying both `web` and `studio` production builds pass under Node 20
+  - hardened Studio local startup to a reliable one-command flow by replacing direct `sanity dev` with a Node-20 enforcing bootstrap runner that self-checks required dependencies and launches Sanity through `npm exec` for Windows-safe execution
+  - moved the shop and portfolio surfaces further into the CMS-first path by removing legacy mock catalog dependence from homepage, services, checkout, orders, concierge knowledge, and portfolio/shop detail flows; added richer case-study authoring fields plus live/embedded preview URL support; and updated tests/templates for managed catalog records instead of static mock slugs
 
 ## Status Legend
 - `done`: implemented in code and present in the audited codebase.
@@ -143,20 +158,24 @@ phases:
     status: done
   - id: P7
     name: Admin Dashboard E2E Expansion
-    status: not_started
+    status: partial
+  - id: P8
+    name: Frontend CMS Content Operations
+    status: partial
 ```
 
 ## Phase Overview
 | Phase | Status | Summary |
 | --- | --- | --- |
-| P0 | done | Task tracking and documentation alignment established. |
+| P0 | done | Task tracking, documentation alignment, and the root planning-artifact contract are established. |
 | P1 | done | Workspace, shell, primitives, theme system, and styling foundation are built. |
 | P2 | done | Marketing, blog, proof, shop, booking, checkout, concierge, live-chat, and admin surface routes are implemented and connected to live backend flows. |
 | P3 | partial | Public read APIs and managed catalog persistence are now implemented, while commerce fulfillment and richer ownership policy coverage remain partially complete. |
 | P4 | partial | JWT admin auth, proxy-based protection, request validation, audit logging, and in-memory abuse controls now exist, but broader RBAC and production-grade security hardening remain incomplete. |
 | P5 | partial | Runtime hardening headers, health/readiness probes, and client error capture hooks now exist; infrastructure-as-code and external monitoring stack are still pending. |
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
-| P7 | not_started | Fresh admin dashboard expansion for production-grade content operations, including shop and portfolio management plus submissions inbox workflows. |
+| P7 | partial | The CMS/content-operations and admin information architecture is now documented, while implementation for production-grade shop, portfolio, newsletter, and submissions operations remains ahead. |
+| P8 | partial | Shop and portfolio surfaces are now being moved to Sanity-backed loaders and CMS-authored preview metadata, while draft preview and broader route migration remain incomplete. |
 
 ## Tasks By Phase
 
@@ -165,6 +184,8 @@ phases:
 - [x] T002 Add a machine-readable entrypoint and human index at `DOC/PROJECT PLAN/Tasks/ai-context.yaml` and `DOC/PROJECT PLAN/Tasks/README.md`.
 - [x] T003 Align root planning docs so `DOC/PROJECT PLAN/ai-context.yaml` and `DOC/PROJECT PLAN/README.md` reference the Tasks layer.
 - [x] T004 Align shared contract route maps with the implemented frontend route plan in `DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml` and `DOC/PROJECT PLAN/Shared Contracts/README.md`.
+- [x] T039 Harden the planner agent, planning template, execution constitution, and root project-plan routing so end-to-end planning always materializes a canonical artifact under `DOC/PROJECT PLAN/` before `Tasks/tasks.md` is updated.
+- [x] T040 Create the canonical CMS/content-operations planning artifact at `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`, create the downstream role-specific planning docs in Frontend, API and Data, Admin Dashboard, and Security, and align the project-plan docs to reference them.
 
 ### Phase P1 — Frontend Foundation
 - [x] T005 Build root workspace scripts in `package.json` and `web/package.json`.
@@ -242,11 +263,17 @@ phases:
 - [x] T033 Run full release-gate validation against the QA, Security, and DevOps documents and record the outcome in this tracker.
 
 ### Phase P7 — Admin Dashboard E2E Expansion (Fresh)
-- [ ] T034 Define fresh admin information architecture, module boundaries, and route map for Shop Management, Portfolio Management, and Submissions Inbox surfaces.
-- [ ] T035 Implement production-grade backend contracts for shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
-- [ ] T036 Implement operational records surfaces and APIs for newsletter subscribers, contact inquiries, and booking submissions with status workflow, assignment, and notes.
-- [ ] T037 Harden admin authorization, role policies, and auditability for all admin mutations and sensitive reads.
+- [x] T034 Define and document the canonical CMS/content-operations information architecture, module boundaries, and route map for Shop Management, Portfolio Management, Newsletter Operations, and Submissions Inbox surfaces in `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`.
+- [~] T035 Implement production-grade backend contracts for Sanity-backed shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
+- [ ] T036 Implement operational records surfaces and APIs for newsletter subscribers, contact inquiries, and booking submissions with status workflow, assignment, notes, and unsubscribe/send-log handling.
+- [ ] T037 Harden admin authorization, role policies, preview secret handling, webhook authentication, and auditability for all admin mutations and sensitive reads.
 - [ ] T038 Add admin-focused validation gates (unit, integration, e2e, accessibility, security, regression) and release-readiness criteria for dashboard rollout.
+
+### Phase P8 — Frontend CMS Content Operations
+- [~] T041 Implement Sanity-backed typed loaders with static fallbacks for `web/src/app/portfolio/**`, `web/src/app/shop/**`, `web/src/app/services/**`, `web/src/app/page.tsx`, `web/src/app/about/page.tsx`, and `web/src/app/faq/page.tsx`.
+- [~] T042 Add Sanity schema coverage and normalized view-model mappers for case studies, shop items/categories, service pages, FAQ items, home page, about page, and site settings in `studio/schemaTypes/**` and `web/src/server/sanity/**`.
+- [ ] T043 Implement authenticated draft-mode preview and exact-path revalidation for migrated frontend surfaces in `web/src/app/api/**` and supporting server helpers.
+- [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.
 
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.
@@ -283,14 +310,21 @@ phases:
 - The repository now includes a frontend-only Vercel deployment baseline, CI lint/build workflow, and documented environment setup.
 - Universal handbook quality guidance now includes a dedicated Enterprise Testing and Quality Enforcement (v2) protocol, referenced by both human indexes and machine-readable ai-context files.
 - The universal AI collaboration playbook, development standards, and contribution guide now reflect the strict execution workflow (doc-first, zero-gate pass, local commit discipline, design-system-first mobile frontend rules, and standardised output format).
+- The planner agent, planning template, execution constitution, and root project-plan routing now require a canonical `DOC/PROJECT PLAN/` planning artifact before tracker updates.
+- The CMS/content-operations rollout now has a canonical root planning artifact at `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`.
+- The CMS/content-operations rollout now also has role-specific implementation-planning docs under `DOC/PROJECT PLAN/Frontend/`, `DOC/PROJECT PLAN/API and Data/`, `DOC/PROJECT PLAN/Admin Dashboard/`, and `DOC/PROJECT PLAN/Security/`.
+- Shop CMS authoring now includes grouped editor fields, example-driven field labels, real preview URL support, real uploaded image rendering on shop surfaces, and project-specific content templates for shop items, blog posts, and case studies under `DOC/PROJECT PLAN/`.
 
 ## What Is Next To Build
-1. T034 + T035: ship a fresh, usable admin management stack for shop templates and portfolio records with full backend contracts.
-2. T036 + T037: deliver an admin submissions inbox for newsletter/form/booking operations with status workflow, assignment, and audit-safe access controls.
-3. T038: enforce dedicated admin dashboard release gates and staged rollout readiness.
-4. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
-5. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
-6. T027 + T028: add infrastructure-as-code plus external observability/alerting for expanded production operations.
+Use `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` plus the downstream role-specific CMS/content-operations docs as the canonical input for the remaining P7 execution work.
+
+1. T035: ship production-grade Sanity-backed backend contracts for shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
+2. T036: deliver an admin submissions and newsletter-operations stack for subscribers, contact inquiries, and booking requests with status workflow, assignment, notes, unsubscribe handling, and send logs.
+3. T037: harden admin authorization, preview and webhook secret handling, and auditability for the new CMS and operator flows.
+4. T038: enforce dedicated admin dashboard and CMS rollout release gates before migration completion.
+5. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
+6. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
+7. T027 + T028: add infrastructure-as-code plus external observability and alerting for expanded production operations.
 
 ## Release Readiness Checklist
 - [x] Local production build passes.

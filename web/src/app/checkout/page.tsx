@@ -5,7 +5,8 @@ import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
-import { getCheckoutHref, getShopProduct } from "@/lib/shop";
+import { getCheckoutHref } from "@/lib/shop";
+import { getPublicShopProduct } from "@/server/domain/catalog";
 import { CheckoutExperience } from "./CheckoutExperience";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ type CheckoutPageProps = {
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
   const resolved = searchParams ? await searchParams : undefined;
   const productSlug = Array.isArray(resolved?.product) ? resolved?.product[0] : resolved?.product;
-  const product = productSlug ? getShopProduct(productSlug) : undefined;
+  const product = productSlug ? await getPublicShopProduct(productSlug).catch(() => null) : undefined;
   const status = Array.isArray(resolved?.status) ? resolved?.status[0] : resolved?.status;
   const orderId = Array.isArray(resolved?.order) ? resolved?.order[0] : resolved?.order;
 

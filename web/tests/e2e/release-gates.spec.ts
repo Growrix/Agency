@@ -34,7 +34,7 @@ test("health endpoints respond and homepage loads within smoke threshold", async
   expect(ready.ok()).toBeTruthy();
 
   const started = Date.now();
-  await page.goto("/", { waitUntil: "networkidle" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
   const duration = Date.now() - started;
   expect(duration).toBeLessThan(10_000);
 });

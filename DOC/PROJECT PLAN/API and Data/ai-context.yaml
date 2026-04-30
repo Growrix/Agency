@@ -33,6 +33,23 @@ core_invariants:
   - Planning must explicitly identify which entities live in PostgreSQL, which content lives in Sanity, and how those systems reference each other.
   - Planning must explicitly identify schema migration, seed, and operational ownership when new CMS or transactional surfaces are introduced.
 
+scope_specific_planning_docs:
+  cms_content_operations:
+    canonical_doc: DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    parent_artifact: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    use_for:
+      - source-of-truth boundaries between Sanity and PostgreSQL during CMS rollout
+      - API, webhook, revalidation, and migration contracts for CMS-backed content and newsletter operations
+
+planning_read_paths:
+  plan_cms_content_operations:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+    - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
+    - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+    - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+
 api_base_url: https://api.agency.com/api/v1
 
 platform_providers:

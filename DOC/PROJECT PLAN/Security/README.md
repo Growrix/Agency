@@ -9,6 +9,7 @@ This document defines authentication, authorization, data protection, encryption
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **[CMS/content operations scope doc](#cms-content-operations-scope-doc)**: `cms-content-operations-security.md`
 - **[Authentication](#auth)**: JWT stateless, password policy, MFA
 - **[Authorization](#authz)**: role-based access control, resource ownership
 - **[Data Protection](#data)**: encryption at rest and in transit, retention, classification
@@ -18,6 +19,13 @@ This document defines authentication, authorization, data protection, encryption
 - **[Incident Response](#incident)**: severity classification, handling procedures
 - **[Secrets Management](#secrets)**: storage, rotation, access control
 - **[Vulnerability Management](#vulnscan)**: scanning, patching, testing
+
+---
+
+## CMS Content Operations Scope Doc
+
+- `cms-content-operations-security.md` is the canonical role-specific planning doc for the current CMS/content-operations rollout.
+- Read it together with `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` before changing preview access, webhook authentication, admin policy, newsletter privacy handling, or publish-related audit controls.
 
 ---
 

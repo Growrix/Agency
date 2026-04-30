@@ -350,7 +350,9 @@ git push origin main
 curl https://www.growrixos.com/blog
 
 # 5. Create test posts in local Studio
-npm --prefix studio run dev
+cd studio
+npm install
+npm run dev
 # Login at localhost:3333 → Create → Blog Post
 
 # 6. Check live domain shows posts
