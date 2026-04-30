@@ -8,9 +8,7 @@ import type {
 } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import {
-  getSanityCaseStudyBySlug,
   getSanityServicePageBySlug,
-  getSanityShopItemBySlug,
   listSanityCaseStudies,
   listSanityServicePages,
   listSanityShopItems,
@@ -54,7 +52,45 @@ const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
   "inquiry-to-crm-automation",
   "mobile-app-landing-pack",
   "booking-stripe-bundle",
+  "new-product",
 ]);
+
+const LEGACY_MOCK_PORTFOLIO_PLACEHOLDER_SLUGS = new Set(["new-project"]);
+
+function isLikelyPlaceholderUrl(value: string | undefined) {
+  if (!value) {
+    return false;
+  }
+
+  return /demo\.example\.com|project\.example\.com/i.test(value);
+}
+
+function isPlaceholderProduct(product: ManagedProductRecord) {
+  if (LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug)) {
+    return true;
+  }
+
+  if (isLikelyPlaceholderUrl(product.livePreviewUrl) || isLikelyPlaceholderUrl(product.embeddedPreviewUrl)) {
+    return true;
+  }
+
+  return (
+    product.name.trim().toLowerCase() === "new product" &&
+    product.summary.trim().toLowerCase() === "product summary"
+  );
+}
+
+function isPlaceholderPortfolioProject(project: ManagedPortfolioRecord) {
+  if (LEGACY_MOCK_PORTFOLIO_PLACEHOLDER_SLUGS.has(project.slug)) {
+    return true;
+  }
+
+  if (isLikelyPlaceholderUrl(project.livePreviewUrl) || isLikelyPlaceholderUrl(project.embeddedPreviewUrl)) {
+    return true;
+  }
+
+  return project.name.trim().toLowerCase() === "new project";
+}
 
 function parseUsdPriceToCents(price: string) {
   const normalized = price.replace(/[^\d.]/g, "");
@@ -107,48 +143,6 @@ function mergeServices(fallback: ManagedServiceRecord[], cms: ManagedServiceReco
   return Array.from(merged.values());
 }
 
-function mergePortfolio(fallback: ManagedPortfolioRecord[], cms: ManagedPortfolioRecord[]) {
-  if (cms.length === 0) {
-    return fallback;
-  }
-
-  const merged = new Map(fallback.map((project) => [project.slug, project]));
-
-  for (const project of cms) {
-    const previous = merged.get(project.slug);
-    merged.set(project.slug, {
-      ...(previous ?? project),
-      ...project,
-      hero_image: project.hero_image ?? previous?.hero_image ?? null,
-      detail: project.detail ?? previous?.detail ?? null,
-    });
-  }
-
-  return Array.from(merged.values());
-}
-
-function mergeProducts(fallback: ManagedProductRecord[], cms: ManagedProductRecord[]) {
-  if (cms.length === 0) {
-    return fallback;
-  }
-
-  const merged = new Map(fallback.map((product) => [product.slug, product]));
-
-  for (const product of cms) {
-    const previous = merged.get(product.slug);
-    merged.set(product.slug, {
-      ...(previous ?? product),
-      ...product,
-      includes: product.includes.length > 0 ? product.includes : previous?.includes ?? [],
-      stack: product.stack.length > 0 ? product.stack : previous?.stack ?? [],
-      highlights: product.highlights.length > 0 ? product.highlights : previous?.highlights ?? [],
-      image: product.image ?? previous?.image ?? null,
-    });
-  }
-
-  return Array.from(merged.values());
-}
-
 async function ensureCatalogSeeded() {
   const database = stripLegacyMockCatalog(await readDatabase());
   if (database.services.length) {
@@ -191,7 +185,11 @@ export async function getPublicService(serviceId: string): Promise<PublicService
 export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   const database = await ensureCatalogSeeded();
   const cmsProjects = await listSanityCaseStudies().catch(() => []);
-  return mergePortfolio(database.portfolio_projects, cmsProjects).map((project) => ({
+  const publicProjects = cmsProjects.length > 0 ? cmsProjects : database.portfolio_projects;
+
+  return publicProjects
+    .filter((project) => !isPlaceholderPortfolioProject(project))
+    .map((project) => ({
     slug: project.slug,
     name: project.name,
     livePreviewUrl: project.livePreviewUrl,
@@ -207,25 +205,23 @@ export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
 
 export async function getPublicPortfolioProject(slug: string): Promise<PublicPortfolioDetailRecord | null> {
   const database = await ensureCatalogSeeded();
-  const fallback = database.portfolio_projects.find((project) => project.slug === slug) ?? null;
-  const cms = await getSanityCaseStudyBySlug(slug).catch(() => null);
+  const cmsProjects = await listSanityCaseStudies().catch(() => []);
 
-  if (!cms) {
-    return fallback;
+  if (cmsProjects.length > 0) {
+    const cmsProject = cmsProjects.find((project) => project.slug === slug) ?? null;
+    return cmsProject && !isPlaceholderPortfolioProject(cmsProject) ? cmsProject : null;
   }
 
-  return {
-    ...(fallback ?? cms),
-    ...cms,
-    hero_image: cms.hero_image ?? fallback?.hero_image ?? null,
-    detail: cms.detail ?? fallback?.detail ?? null,
-  };
+  const fallback = database.portfolio_projects.find((project) => project.slug === slug) ?? null;
+  return fallback && !isPlaceholderPortfolioProject(fallback) ? fallback : null;
 }
 
 export async function listPublicShopCategories(): Promise<PublicShopCategoryRecord[]> {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
-  const products = mergeProducts(database.products, cmsProducts);
+  const products = (cmsProducts.length > 0 ? cmsProducts : database.products).filter(
+    (product) => !isPlaceholderProduct(product),
+  );
 
   const categoryMap = new Map<string, string>();
 
@@ -252,7 +248,9 @@ export async function listPublicShopProducts(filters?: {
 }) {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
-  const products = mergeProducts(database.products, cmsProducts);
+  const products = (cmsProducts.length > 0 ? cmsProducts : database.products).filter(
+    (product) => !isPlaceholderProduct(product),
+  );
   const q = filters?.search?.trim().toLowerCase();
 
   return products.filter((product) => {
@@ -290,22 +288,13 @@ export async function listPublicShopProducts(filters?: {
 
 export async function getPublicShopProduct(slug: string): Promise<PublicShopProductRecord | null> {
   const database = await ensureCatalogSeeded();
-  const fallback = database.products.find((item) => item.slug === slug && item.published !== false) ?? null;
-  const cms = await getSanityShopItemBySlug(slug).catch(() => null);
-  const product = cms?.published === false
-    ? null
-    : cms
-      ? {
-          ...(fallback ?? cms),
-          ...cms,
-          includes: cms.includes.length > 0 ? cms.includes : fallback?.includes ?? [],
-          stack: cms.stack.length > 0 ? cms.stack : fallback?.stack ?? [],
-          highlights: cms.highlights.length > 0 ? cms.highlights : fallback?.highlights ?? [],
-          image: cms.image ?? fallback?.image ?? null,
-        }
-      : fallback;
+  const cmsProducts = await listSanityShopItems().catch(() => []);
 
-  if (!product) {
+  const product = cmsProducts.length > 0
+    ? cmsProducts.find((item) => item.slug === slug && item.published !== false) ?? null
+    : database.products.find((item) => item.slug === slug && item.published !== false) ?? null;
+
+  if (!product || isPlaceholderProduct(product)) {
     return null;
   }
 

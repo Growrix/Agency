@@ -26,6 +26,7 @@ function StarRating({ rating }: { rating: number }) {
 
 export function ShopProductCard({ product }: { product: ShopProduct }) {
   const image = product.image ?? getProductImage(product.name);
+  const embeddedPreview = !image ? product.embeddedPreviewUrl : undefined;
 
   return (
     <Card hoverable className="group flex h-full flex-col overflow-hidden p-0">
@@ -38,6 +39,14 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
             fill
             sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : embeddedPreview ? (
+          <iframe
+            src={embeddedPreview}
+            title={`${product.name} embedded preview`}
+            className="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : (
           <div className="absolute inset-0 bg-inset" />

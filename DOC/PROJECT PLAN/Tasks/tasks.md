@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - removed placeholder `new-product` leakage from public shop output by enforcing CMS-first public catalog selection and filtering admin placeholder records from shop/portfolio surfaces, then switched homepage featured shop/portfolio sections to shared preview-capable cards and updated commerce E2E fixtures to consume live CMS slugs
   - hardened the planner agent, planning template, execution constitution, and root project-plan routing so every cross-role planning request must materialize a canonical `DOC/PROJECT PLAN/` artifact before `Tasks/tasks.md` is updated or a plan is treated as complete
   - created the canonical root planning artifact `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` for the CMS/content-operations rollout, covering content ownership, Sanity structure, data boundaries, operator workflow, integrations, phase sequencing, backlog, and validation gates without starting implementation
   - hardened local development startup by replacing the raw `next dev` script with a wrapper that enforces Node 20 through `fnm`, automatically restarts stale same-workspace Next.js processes still holding port `5000`, and falls back to the next free local port when another application owns the default port

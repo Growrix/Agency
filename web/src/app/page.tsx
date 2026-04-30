@@ -8,7 +8,6 @@ import {
   CodeBracketSquareIcon,
   CpuChipIcon,
   CubeTransparentIcon,
-  RectangleGroupIcon,
   ShieldCheckIcon,
   SparklesIcon,
   WindowIcon,
@@ -29,7 +28,9 @@ import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { AdditionalServices } from "@/components/sections/AdditionalServices";
 import { BlogCard } from "@/components/sections/BlogCard";
+import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import {
   FEATURED_LIVE_SAAS,
   HOME_STATS,
@@ -202,29 +203,7 @@ export default async function Home() {
           <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {featuredProjects.map((p) => (
               <RevealItem key={p.slug}>
-              <Link
-                href={`/portfolio/${p.slug}`}
-                className="group block h-full overflow-hidden rounded-[20px] border border-border bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-signal hover:-translate-y-1 hover:border-border-strong hover:shadow-(--shadow-2)"
-              >
-                <div className={`relative aspect-4/3 bg-linear-to-br ${p.accent}`}>
-                  <div className="absolute inset-0 bg-grid-strong opacity-20" aria-hidden />
-                  <div className="absolute inset-0 flex items-end p-5">
-                    <div className="text-white">
-                      <p className="font-mono text-[11px] uppercase tracking-wider opacity-80">{p.industry}</p>
-                      <p className="font-display text-2xl tracking-tight mt-1">{p.name}</p>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4 rounded-full bg-black/30 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
-                    {p.metric}
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-text-muted leading-6 text-pretty">{p.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
-                    View case study <ArrowUpRightIcon className="size-4" />
-                  </span>
-                </div>
-              </Link>
+                <PortfolioCard project={p} />
               </RevealItem>
             ))}
           </RevealGroup>
@@ -254,23 +233,7 @@ export default async function Home() {
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
             {featuredProducts.map((p) => (
               <RevealItem key={p.name} className="h-full">
-              <Card hoverable className="flex flex-col h-full">
-                <div className="relative -mx-6 -mt-6 mb-5 h-32 overflow-hidden rounded-t-[16px] border-b border-border bg-linear-to-br from-inset to-bg">
-                  <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
-                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                    <RectangleGroupIcon className="size-9 text-primary" aria-hidden />
-                    {p.tag && <Badge tone="secondary">{p.tag}</Badge>}
-                  </div>
-                </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{p.category}</p>
-                <h3 className="mt-1 font-display text-lg tracking-tight">{p.name}</h3>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="font-display text-xl">{p.price}</span>
-                  <Link href={`/shop/${p.slug}`} className="text-sm font-medium text-primary hover:underline">
-                    Preview →
-                  </Link>
-                </div>
-              </Card>
+                <ShopProductCard product={p} />
               </RevealItem>
             ))}
           </RevealGroup>
