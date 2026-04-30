@@ -7,7 +7,7 @@ canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
 last_audit_date: 2026-04-28
 current_state:
-  repo_branch_audited: CMS
+  repo_branch_audited: BOT
   frontend_shell: done
   frontend_routes: done
   frontend_conversion_integrations: partial
@@ -61,6 +61,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - hardened Sanity-to-live publish reliability for blog content by adding ISR revalidation on blog index/detail routes, extending `/api/revalidate` to accept both query-param and JSON webhook payload document types, increasing Sanity client timeout for production reliability, and replacing silent Sanity fetch failures with explicit server logs for faster incident diagnosis
+  - refreshed the repository AI memory baseline after full-site content updates by creating `memories/repo/site-brain.md` with live route/API/CMS/runtime snapshots and wiring the project-plan root docs to use it as a first-class memory input for future sessions
   - remediated Sanity Studio Vercel warning surface by aligning `studio` React dependencies to 19.2.5 (matching current Sanity peer expectations), validating a clean Studio production build, and documenting required Vercel Node runtime setting (`20.x`) plus known transitive `EBADENGINE` warning behavior from Sanity CLI packages
   - refined CMS-driven portfolio presentation quality by removing homepage portfolio card zoom/crop behavior, prioritizing slug-page hero image rendering with gallery fallback to hero media when gallery entries are missing, and moving the live-site CTA below the media card with an external-link affordance
   - removed placeholder `new-product` leakage from public shop output by enforcing CMS-first public catalog selection and filtering admin placeholder records from shop/portfolio surfaces, then switched homepage featured shop/portfolio sections to shared preview-capable cards and updated commerce E2E fixtures to consume live CMS slugs

@@ -66,6 +66,7 @@ SANITY_PROJECT_ID=1tk4ulcx
 SANITY_DATASET=production
 SANITY_API_VERSION=2025-01-01
 SANITY_API_TOKEN=<set-in-hosting-secret-manager>
+REVALIDATE_SECRET=<set-in-hosting-secret-manager>
 ```
 
 #### 3. Configure Build Settings
@@ -197,6 +198,29 @@ curl "https://1tk4ulcx.api.sanity.io/v2025-01-01/data/query/production?query=%7B
 
 # Should return: [{"title": "Your Post Title"}]
 ```
+
+### Issue: Sanity post published but not live yet
+```bash
+# 1) Confirm the post is actually published (not draft only)
+# 2) Confirm schedule is not in the future
+#    scheduledPublishAt must be empty or <= current time
+
+# 3) Trigger on-demand cache invalidation manually
+curl -X POST "https://www.growrixos.com/api/revalidate?secret=$REVALIDATE_SECRET&type=blogPost"
+
+# 4) Verify live routes
+curl -I https://www.growrixos.com/blog
+curl -I https://www.growrixos.com/blog/<your-slug>
+```
+
+Sanity webhook (recommended):
+- URL: `https://www.growrixos.com/api/revalidate?secret=<REVALIDATE_SECRET>&type={_type}`
+- Trigger on create/update/delete for `blogPost`, `caseStudy`, `shopItem`, `servicePage`, `siteSettings`.
+- If `_type` is not passed by query, the endpoint also reads JSON payload `_type` as fallback.
+
+Fallback strategy:
+- Blog routes now use ISR (`revalidate = 60`), so new blog content appears within 60 seconds even if webhook delivery fails.
+- Primary path remains webhook revalidation for near-instant updates.
 
 ### Issue: SSL certificate error
 ```

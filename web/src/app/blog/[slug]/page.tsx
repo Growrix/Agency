@@ -22,6 +22,12 @@ import {
   listBlogSlugs,
 } from "@/server/blog/content";
 
+// ISR: revalidate each blog post page every 60 seconds.
+// Sanity webhook at /api/revalidate?type=blogPost triggers on-demand invalidation.
+export const revalidate = 60;
+// Allow slugs not generated at build time (new posts published after deploy).
+export const dynamicParams = true;
+
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
