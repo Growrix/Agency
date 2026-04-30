@@ -22,7 +22,7 @@ export function PortfolioCard({ project }: { project: Project }) {
             alt={image.alt}
             fill
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 ease-signal group-hover:scale-[1.03]"
+            className="object-contain bg-[#070b12]"
           />
         ) : embeddedPreview ? (
           <iframe

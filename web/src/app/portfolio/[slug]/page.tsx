@@ -41,6 +41,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const related = (await listPublicPortfolio()).filter((entry) => entry.slug !== project.slug).slice(0, 3);
   const detail = project.detail;
   const heroImage = project.hero_image;
+  const galleryImages = detail.gallery.length > 0
+    ? detail.gallery
+    : heroImage
+      ? [heroImage]
+      : [];
 
   if (!detail) notFound();
 
@@ -78,31 +83,28 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LinkButton href="/book-appointment" size="lg">Build something similar</LinkButton>
-                {project.livePreviewUrl ? (
-                  <LinkButton href={project.livePreviewUrl} target="_blank" rel="noreferrer" variant="outline" size="lg">Visit live site</LinkButton>
-                ) : null}
                 <LinkButton href="/portfolio" variant="outline" size="lg">More work</LinkButton>
               </div>
             </div>
             <div className="lg:col-span-5">
               <Card className="overflow-hidden p-0">
                 <div className={`relative aspect-4/3 overflow-hidden bg-linear-to-br ${project.accent}`}>
-                  {project.embeddedPreviewUrl ? (
-                    <iframe
-                      src={project.embeddedPreviewUrl}
-                      title={`${project.name} live preview`}
-                      className="absolute inset-0 h-full w-full border-0"
-                      loading="lazy"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                    />
-                  ) : heroImage ? (
+                  {heroImage ? (
                     <Image
                       src={heroImage.src}
                       alt={heroImage.alt}
                       fill
                       priority
                       sizes="(min-width: 1024px) 40vw, 100vw"
-                      className="object-cover"
+                      className="object-contain bg-[#070b12]"
+                    />
+                  ) : project.embeddedPreviewUrl ? (
+                    <iframe
+                      src={project.embeddedPreviewUrl}
+                      title={`${project.name} live preview`}
+                      className="absolute inset-0 h-full w-full border-0"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
                     />
                   ) : null}
                   <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/15 to-transparent" aria-hidden />
@@ -114,6 +116,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   </div>
                 </div>
               </Card>
+              {project.livePreviewUrl ? (
+                <div className="mt-4">
+                  <LinkButton href={project.livePreviewUrl} target="_blank" rel="noreferrer" variant="outline" fullWidth>
+                    Visit live site <ArrowUpRightIcon className="size-4" />
+                  </LinkButton>
+                </div>
+              ) : null}
             </div>
           </div>
         </Container>
@@ -172,7 +181,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <Container>
           <SectionHeading eyebrow="Experience gallery" title="Surfaces from the live product." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            {detail.gallery.map((image, index) => (
+            {galleryImages.map((image, index) => (
               <div
                 key={`${image.src}-${index}`}
                 className="relative aspect-16/10 rounded-[20px] overflow-hidden border border-border bg-inset"
@@ -182,7 +191,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   alt={image.alt}
                   fill
                   sizes="(min-width: 640px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-contain bg-[#070b12]"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/5 to-transparent" aria-hidden />
                 <div className="absolute inset-0 flex items-end p-6 text-white">
