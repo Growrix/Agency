@@ -3,7 +3,16 @@ import "server-only";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { formatKnowledgeForPrompt, searchKnowledge } from "@/server/ai/knowledge";
 
-type ConciergeActionKey = "book" | "contact" | "faq" | "pricing" | "services" | "shop" | "whatsapp";
+type ConciergeActionKey =
+  | "book"
+  | "contact"
+  | "faq"
+  | "pricing"
+  | "services"
+  | "additional_services"
+  | "portfolio"
+  | "shop"
+  | "whatsapp";
 type ConciergeResponseState = "answered" | "no_answer" | "escalation";
 
 type Action = {
@@ -17,6 +26,8 @@ const ACTIONS: Record<ConciergeActionKey, Action> = {
   faq: { label: "Open FAQ", href: "/faq" },
   pricing: { label: "View pricing", href: "/pricing" },
   services: { label: "Explore services", href: "/services" },
+  additional_services: { label: "Additional services", href: "/additional-services" },
+  portfolio: { label: "View portfolio", href: "/portfolio" },
   shop: { label: "Browse shop", href: "/shop" },
   whatsapp: { label: "WhatsApp", href: WHATSAPP_HREF },
 };
@@ -81,7 +92,7 @@ async function requestChatCompletion(apiKey: string, message: string, pagePath: 
           },
           {
             role: "user",
-            content: `Visitor question: ${message}\nPage path: ${pagePath}\n\nApproved knowledge:\n${knowledgePrompt}\n\nValid action_ids: book, contact, faq, pricing, services, shop, whatsapp`,
+            content: `Visitor question: ${message}\nPage path: ${pagePath}\n\nApproved knowledge:\n${knowledgePrompt}\n\nValid action_ids: book, contact, faq, pricing, services, additional_services, portfolio, shop, whatsapp`,
           },
         ],
       }),
