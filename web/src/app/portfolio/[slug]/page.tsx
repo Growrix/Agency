@@ -40,14 +40,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const service = SERVICES.find((s) => s.slug === project.service);
   const related = (await listPublicPortfolio()).filter((entry) => entry.slug !== project.slug).slice(0, 3);
   const detail = project.detail;
+
+  if (!detail) notFound();
+
   const heroImage = project.hero_image;
   const galleryImages = detail.gallery.length > 0
     ? detail.gallery
     : heroImage
       ? [heroImage]
       : [];
-
-  if (!detail) notFound();
 
   return (
     <>
