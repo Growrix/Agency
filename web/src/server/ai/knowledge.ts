@@ -1,16 +1,18 @@
 import "server-only";
 
-import { FAQ_GENERAL, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { ADDITIONAL_SERVICES_CATEGORIES, FAQ_GENERAL, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
 
 export type ConciergeSourceType =
   | "service"
+  | "offering"
   | "pricing"
   | "faq"
   | "portfolio"
   | "product"
   | "process"
+  | "additional_service"
   | "contact"
   | "policy";
 
@@ -92,6 +94,33 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
   },
 ];
 
+const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
+  {
+    id: "offering-primary-focus",
+    label: "Primary offer focus",
+    sourcePath: "/",
+    sourceType: "offering",
+    content:
+      "Growrix primary focus is premium websites, SaaS applications, and productized website templates or ready websites. MCP servers and automation are secondary services when they support the core build.",
+  },
+  {
+    id: "offering-shop-structure",
+    label: "Shop structure and categories",
+    sourcePath: "/shop",
+    sourceType: "offering",
+    content:
+      "Shop products are organized around Templates, Ready Websites, and Live SaaS style offers. Homepage Shop Spotlight should remain template-focused while Live SaaS has a separate dedicated section.",
+  },
+  {
+    id: "offering-support-handoff",
+    label: "Delivery ownership and support",
+    sourcePath: "/faq",
+    sourceType: "offering",
+    content:
+      "Delivered builds transfer ownership to the client on completion. Standard delivery includes one year of free support and maintenance for bug fixes, security updates, and minor content adjustments.",
+  },
+];
+
 function normalize(text: string) {
   return text.toLowerCase().replace(/[^a-z0-9\s]+/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -145,11 +174,21 @@ async function buildDocuments(): Promise<KnowledgeDocument[]> {
     content: `${product.name} costs ${product.price} in category ${product.category}. ${product.teaser} ${product.summary} Audience: ${product.audience}. Includes: ${product.includes.join(", ")}. Stack: ${product.stack.join(", ")}.`,
   }));
 
+  const additionalServiceDocs = ADDITIONAL_SERVICES_CATEGORIES.map((category) => ({
+    id: `additional-service-${category.id}`,
+    label: category.title,
+    sourcePath: "/additional-services",
+    sourceType: "additional_service" as const,
+    content: `${category.title}. ${category.badge ? `${category.badge}. ` : ""}Includes: ${category.items.join(", ")}.`,
+  }));
+
   return [
     ...serviceDocs,
+    ...OFFERING_DOCUMENTS,
     ...faqDocs,
     ...portfolioDocs,
     ...processDocs,
+    ...additionalServiceDocs,
     ...productDocs,
     ...PRICING_DOCUMENTS,
     ...CONVERSION_DOCUMENTS,
@@ -178,6 +217,20 @@ export async function searchKnowledge(query: string, limit = 6) {
 
       if (document.sourceType === "pricing" && tokens.some((token) => ["price", "pricing", "cost", "budget"].includes(token))) {
         score += 4;
+      }
+
+      if (
+        document.sourceType === "additional_service" &&
+        tokens.some((token) => ["seo", "analytics", "tracking", "pixel", "schema", "core", "vitals", "indexing"].includes(token))
+      ) {
+        score += 4;
+      }
+
+      if (
+        document.sourceType === "offering" &&
+        tokens.some((token) => ["template", "templates", "ready", "website", "websites", "live", "saas"].includes(token))
+      ) {
+        score += 3;
       }
 
       if (document.sourceType === "contact" && tokens.some((token) => ["contact", "call", "whatsapp", "book", "booking"].includes(token))) {
