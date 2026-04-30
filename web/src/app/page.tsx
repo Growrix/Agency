@@ -32,7 +32,6 @@ import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import {
-  FEATURED_LIVE_SAAS,
   HOME_STATS,
   HOME_STACK_MARQUEE,
   PROCESS_STEPS,
@@ -89,6 +88,13 @@ function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | u
   return picked.length > 0 ? picked : fallback;
 }
 
+function isLiveSaasProduct(product: { category: string; categorySlug: string }) {
+  const normalizedSlug = product.categorySlug.trim().toLowerCase();
+  const normalizedCategory = product.category.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+  return normalizedSlug === "live-saas" || normalizedCategory === "live-saas";
+}
+
 export default async function Home() {
   const [latestBlogPosts, homeContent, services, portfolio, publicProducts] = await Promise.all([
     listBlogPosts().then((items) => items.slice(0, 3)),
@@ -103,6 +109,12 @@ export default async function Home() {
     publicProducts,
     homeContent?.shopSpotlight?.productSlugs,
     publicProducts.slice(0, 4)
+  );
+  const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
+  const featuredLiveSaasProducts = pickBySlugs(
+    liveSaasProducts,
+    homeContent?.liveSaas?.productSlugs,
+    liveSaasProducts.slice(0, 4),
   );
   const pricingTiers = homeContent?.pricing?.tiers && homeContent.pricing.tiers.length > 0 ? homeContent.pricing.tiers : HOME_TIERS;
 
@@ -341,28 +353,20 @@ export default async function Home() {
 
           {/* Live SaaS product cards */}
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {FEATURED_LIVE_SAAS.map((p) => (
-              <RevealItem key={p.name} className="h-full">
-                <Card hoverable className="flex flex-col h-full">
-                  <div className="relative -mx-6 -mt-6 mb-5 h-32 overflow-hidden rounded-t-[16px] border-b border-border bg-linear-to-br from-inset to-bg">
-                    <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
-                    <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                      <CodeBracketSquareIcon className="size-9 text-secondary" aria-hidden />
-                      {p.tag && <Badge tone="primary">{p.tag}</Badge>}
-                    </div>
-                  </div>
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{p.category}</p>
-                  <h3 className="mt-1 font-display text-lg tracking-tight">{p.name}</h3>
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="font-display text-xl">{p.price}</span>
-                    <Link href={`/shop/${p.slug}`} className="text-sm font-medium text-primary hover:underline">
-                      Preview →
-                    </Link>
-                  </div>
-                </Card>
+            {featuredLiveSaasProducts.map((p) => (
+              <RevealItem key={p.slug} className="h-full">
+                <ShopProductCard product={p} />
               </RevealItem>
             ))}
           </RevealGroup>
+          {featuredLiveSaasProducts.length === 0 && (
+            <Card className="mt-10 text-center">
+              <p className="font-display text-2xl tracking-tight">No published Live SaaS items yet.</p>
+              <p className="mt-2 text-text-muted">
+                Publish shop items with the category slug or label set to Live SaaS to show them here.
+              </p>
+            </Card>
+          )}
 
           {/* Bottom CTA */}
           <div className="mt-10 rounded-2xl border border-border bg-surface px-6 py-8 sm:px-10 sm:py-10 text-center">
