@@ -18,6 +18,10 @@ import {
   listBlogPosts,
 } from "@/server/blog/content";
 
+// ISR: revalidate blog listing every 60 seconds.
+// Sanity webhook at /api/revalidate triggers on-demand invalidation after publish.
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Blog — Field notes from Growrix OS",
   description:

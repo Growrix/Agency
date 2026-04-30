@@ -33,9 +33,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, message: "Invalid secret." }, { status: 401 });
   }
 
-  // Support both a single `path` param (legacy) and a `type` param (Sanity webhook).
+  // Resolve document type: query param takes priority, then Sanity webhook JSON body.
+  // Sanity webhook URL template: /api/revalidate?secret=SECRET&type={_type}
+  // Fallback: parse body for _type when no type query param is present.
   const explicitPath = url.searchParams.get("path");
-  const documentType = url.searchParams.get("type");
+  let documentType = url.searchParams.get("type");
+
+  if (!documentType) {
+    try {
+      const contentType = request.headers.get("content-type") ?? "";
+      if (contentType.includes("application/json")) {
+        const body = await request.json() as Record<string, unknown>;
+        const raw = body?._type;
+        if (typeof raw === "string" && raw.length > 0) {
+          documentType = raw;
+        }
+      }
+    } catch {
+      // Body is not JSON or empty — fall through without document type.
+    }
+  }
 
   const pathsToRevalidate: string[] = [];
 
@@ -47,9 +64,9 @@ export async function POST(request: NextRequest) {
     pathsToRevalidate.push(...REVALIDATION_MAP[documentType]);
   }
 
-  // Always revalidate /blog as a baseline (preserves legacy behavior).
-  if (!pathsToRevalidate.includes("/blog")) {
-    pathsToRevalidate.push("/blog");
+  // Fallback baseline: if we have no specific paths to revalidate, revalidate home + blog.
+  if (pathsToRevalidate.length === 0) {
+    pathsToRevalidate.push("/", "/blog");
   }
 
   const unique = Array.from(new Set(pathsToRevalidate));
@@ -58,5 +75,5 @@ export async function POST(request: NextRequest) {
     revalidatePath(path);
   }
 
-  return NextResponse.json({ ok: true, revalidated: unique });
+  return NextResponse.json({ ok: true, revalidated: unique, documentType: documentType ?? null });
 }

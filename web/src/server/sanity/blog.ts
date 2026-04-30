@@ -241,7 +241,8 @@ function normalizePost(post: SanityBlogPost): BlogPost {
 
 export async function listSanityBlogPosts(): Promise<BlogPost[]> {
   if (!isSanityConfigured()) {
-    return [];
+     console.warn("[Sanity] Sanity is not configured (missing SANITY_PROJECT_ID or SANITY_DATASET). Blog posts will be empty.");
+     return [];
   }
 
   const client = getSanityClient();
@@ -249,6 +250,8 @@ export async function listSanityBlogPosts(): Promise<BlogPost[]> {
     const posts = await client.fetch<SanityBlogPost[]>(SANITY_BLOG_POSTS_QUERY);
     return (posts ?? []).map(normalizePost);
   } catch {
+    // Log instead of silently swallowing — critical for diagnosing live publish failures.
+    console.error("[Sanity] Failed to fetch blog posts from Sanity CMS. Check SANITY_PROJECT_ID, SANITY_DATASET, and network connectivity.");
     return [];
   }
 }

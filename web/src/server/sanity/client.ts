@@ -30,6 +30,8 @@ export function getSanityClient(options: SanityClientOptions = {}): SanityClient
     useCdn: !preview && !token,
     token,
     perspective: preview ? "drafts" : "published",
-    timeout: 3000,
+    // 10s: allows Sanity CDN cold-start on first ISR revalidation after deploy.
+    // 3s was too tight and caused silent fetch failures in production.
+    timeout: 10000,
   });
 }

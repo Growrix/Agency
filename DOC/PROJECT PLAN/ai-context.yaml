@@ -186,6 +186,7 @@ read_paths:
   understand_project:
     - DOC/PROJECT PLAN/ai-context.yaml
     - DOC/PROJECT PLAN/README.md
+    - memories/repo/site-brain.md
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/tasks.md
     - DOC/PROJECT PLAN/Supabase/ai-context.yaml

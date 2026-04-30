@@ -138,3 +138,23 @@ This root makes the workflow stable:
 - then execute from project docs
 - keep the execution tracker updated
 - never mix the two stages
+
+## AI Brain Memory Map
+
+Use these locations as the approved memory brain surfaces for future updates.
+
+Primary memory anchor:
+- memories/repo/site-brain.md
+
+Canonical approved planning and execution memory:
+- DOC/PROJECT PLAN/ai-context.yaml
+- DOC/PROJECT PLAN/Tasks/ai-context.yaml
+- DOC/PROJECT PLAN/Tasks/tasks.md
+- DOC/PROJECT PLAN/Shared Contracts/README.md
+
+Agent instruction surfaces:
+- web/AGENTS.md
+- studio/AGENTS.md
+
+Update rule:
+- When major site content changes, update memories/repo/site-brain.md first, then sync any affected DOC/PROJECT PLAN files.
