@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - remediated Sanity Studio Vercel warning surface by aligning `studio` React dependencies to 19.2.5 (matching current Sanity peer expectations), validating a clean Studio production build, and documenting required Vercel Node runtime setting (`20.x`) plus known transitive `EBADENGINE` warning behavior from Sanity CLI packages
   - refined CMS-driven portfolio presentation quality by removing homepage portfolio card zoom/crop behavior, prioritizing slug-page hero image rendering with gallery fallback to hero media when gallery entries are missing, and moving the live-site CTA below the media card with an external-link affordance
   - removed placeholder `new-product` leakage from public shop output by enforcing CMS-first public catalog selection and filtering admin placeholder records from shop/portfolio surfaces, then switched homepage featured shop/portfolio sections to shared preview-capable cards and updated commerce E2E fixtures to consume live CMS slugs
   - hardened the planner agent, planning template, execution constitution, and root project-plan routing so every cross-role planning request must materialize a canonical `DOC/PROJECT PLAN/` artifact before `Tasks/tasks.md` is updated or a plan is treated as complete

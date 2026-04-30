@@ -15,8 +15,8 @@
   "dependencies": {
     "@sanity/vision": "5.22.0",
     "date-fns": "4.1.0",
-    "react": "19.2.2",
-    "react-dom": "19.2.2",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "sanity": "5.22.0",
     "styled-components": "6.1.19"
   },
