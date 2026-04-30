@@ -105,10 +105,11 @@ export default async function Home() {
   ]);
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
+  const templateProducts = publicProducts.filter((p) => !isLiveSaasProduct(p));
   const featuredProducts = pickBySlugs(
-    publicProducts,
+    templateProducts,
     homeContent?.shopSpotlight?.productSlugs,
-    publicProducts.slice(0, 4)
+    templateProducts.slice(0, 4)
   );
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
