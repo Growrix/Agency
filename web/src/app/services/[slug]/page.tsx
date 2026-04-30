@@ -37,6 +37,7 @@ const ICONS = {
 } as const;
 
 type SlugKey = keyof typeof ICONS;
+const PRICE_MUTED_SERVICE_SLUGS = new Set<SlugKey>(["mcp-servers", "automation"]);
 
 const COPY: Record<
   SlugKey,
@@ -233,6 +234,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (!service || !fallbackCopy) notFound();
 
   const cmsCopy = await getSanityServiceDetailContent(slug).catch(() => null);
+  const shouldMuteTierPrices = PRICE_MUTED_SERVICE_SLUGS.has(slug as SlugKey);
   const copy = {
     ...fallbackCopy,
     eyebrow: cmsCopy?.heroEyebrow ?? fallbackCopy.eyebrow,
@@ -243,7 +245,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     secondaryHref: cmsCopy?.secondaryCtaHref ?? fallbackCopy.secondaryHref,
     builds: cmsCopy?.builds ?? fallbackCopy.builds,
     differentiators: cmsCopy?.differentiators ?? fallbackCopy.differentiators,
-    tiers: cmsCopy?.tiers ?? fallbackCopy.tiers,
+    tiers: (cmsCopy?.tiers ?? fallbackCopy.tiers).map((tier) =>
+      shouldMuteTierPrices ? { ...tier, mutePrice: true } : tier
+    ),
     faq: cmsCopy?.faq ?? fallbackCopy.faq,
     stats: cmsCopy?.stats ?? fallbackCopy.stats,
   };

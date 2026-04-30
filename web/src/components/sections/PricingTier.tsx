@@ -8,6 +8,7 @@ export type Tier = {
   name: string;
   price: string;
   cadence?: string;
+  mutePrice?: boolean;
   description: string;
   features: string[];
   cta: { label: string; href: string };
@@ -32,14 +33,16 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
           <Badge tone={tier.featured ? "secondary" : "primary"}>{tier.badge}</Badge>
         )}
       </div>
-      <div className="mt-5 flex items-baseline gap-1">
-        <span className="font-display text-4xl tracking-tight">{tier.price}</span>
-        {tier.cadence && (
-          <span className={cn("text-sm", tier.featured ? "text-white/60" : "text-text-muted")}>
-            {tier.cadence}
-          </span>
-        )}
-      </div>
+      {!tier.mutePrice && (
+        <div className="mt-5 flex items-baseline gap-1">
+          <span className="font-display text-4xl tracking-tight">{tier.price}</span>
+          {tier.cadence && (
+            <span className={cn("text-sm", tier.featured ? "text-white/60" : "text-text-muted")}>
+              {tier.cadence}
+            </span>
+          )}
+        </div>
+      )}
       <p className={cn("mt-3 leading-7 text-pretty", tier.featured ? "text-white/75" : "text-text-muted")}>
         {tier.description}
       </p>
