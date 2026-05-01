@@ -1,0 +1,65 @@
+{
+  "_id": "caseStudy.nourish-wellness-clinic",
+  "_type": "caseStudy",
+  "name": "Nourish Wellness Clinic",
+  "slug": { "_type": "slug", "current": "nourish-wellness-clinic" },
+  "livePreviewUrl": "https://nourishwellness.com",
+  "embeddedPreviewUrl": null,
+  "industry": "Healthcare",
+  "serviceSlug": "websites",
+  "summary": "A full digital presence rebuild for a wellness and functional medicine clinic — designed to convert high-intent visitors into booked consultations.",
+  "metric": "+53% consultation bookings in 6 weeks",
+  "accent": "from-emerald-500 to-teal-600",
+  "published": true,
+  "featuredRank": 5,
+  "heroImage": {
+    "_type": "image",
+    "asset": { "_type": "reference", "_ref": "image-4b37ea8f4b3a174b9c6f7df890c36c6b74fa6011-1237x600-png" },
+    "alt": "Nourish Wellness Clinic website homepage"
+  },
+  "heroImageAlt": "Nourish Wellness Clinic website homepage",
+  "client": "Nourish Wellness Clinic",
+  "year": "2026",
+  "duration": "6 weeks",
+  "team": "Strategy, UX, Frontend, CMS",
+  "deliveryStory": "We rebuilt the clinic's online presence from a generic practice website into a patient-first digital experience — with treatment clarity, practitioner trust signals, and a booking-optimized consultation path.",
+  "process": [
+    "Patient journey mapping and conversion gap analysis",
+    "Content hierarchy and visual trust system design",
+    "Build, booking integration, accessibility QA, and launch"
+  ],
+  "challenge": [
+    "The previous site looked clinical and impersonal, creating doubt rather than confidence.",
+    "The booking path required too many steps and offered no reassurance along the way."
+  ],
+  "strategy": [
+    "Led with practitioner credibility, treatment outcomes, and patient language.",
+    "Simplified the booking flow to three steps with visible confirmation signals.",
+    "Added condition-specific landing sections to match high-intent search behavior."
+  ],
+  "integrations": [
+    "Sanity CMS for practitioner profiles and service content",
+    "Cal.com for appointment scheduling",
+    "Resend for booking confirmation workflows"
+  ],
+  "seo": [
+    "Condition-specific page metadata and structured data",
+    "Local SEO markup for clinic location and practitioners",
+    "Schema.org MedicalOrganization and Physician markup"
+  ],
+  "standards": [
+    "WCAG 2.1 AA accessibility compliance throughout",
+    "Mobile-first responsive QA across all devices",
+    "Core Web Vitals optimized with image and font loading strategy"
+  ],
+  "build": [
+    { "_type": "object", "_key": "b1", "label": "Platform", "value": "Next.js + Sanity", "hint": "Fast content updates for clinic team" },
+    { "_type": "object", "_key": "b2", "label": "Booking", "value": "Cal.com integration", "hint": "Native scheduling with confirmations" },
+    { "_type": "object", "_key": "b3", "label": "Scope", "value": "Full marketing site", "hint": "Services, practitioners, conditions, booking" }
+  ],
+  "results": [
+    { "_type": "object", "_key": "r1", "value": "+53%", "label": "Consultation bookings", "hint": "First 6 weeks post-launch" },
+    { "_type": "object", "_key": "r2", "value": "+34%", "label": "Time on service pages", "hint": "Avg. vs. previous site" },
+    { "_type": "object", "_key": "r3", "value": "4.2x", "label": "Return visitor rate", "hint": "Organic search traffic" }
+  ]
+}

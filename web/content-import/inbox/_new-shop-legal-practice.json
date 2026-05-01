@@ -1,0 +1,52 @@
+{
+  "_id": "shopItem.legal-practice-website",
+  "_type": "shopItem",
+  "name": "Legal Practice Website",
+  "slug": { "_type": "slug", "current": "legal-practice-website" },
+  "price": "$1,299",
+  "livePreviewUrl": "https://legal-practice-demo.vercel.app",
+  "embeddedPreviewUrl": null,
+  "categoryLabel": "Professional Services",
+  "categorySlug": "professional-services",
+  "type": "Website",
+  "typeSlug": "website",
+  "industry": "Legal",
+  "industrySlug": "legal",
+  "tag": "New",
+  "published": true,
+  "featuredRank": 5,
+  "rating": 4.8,
+  "reviewCount": "44",
+  "salesCount": "18",
+  "teaser": "A trust-first website template for law firms and solo practitioners who need a premium digital presence that converts prospects into consultations.",
+  "summary": "Designed for law firms, barristers, and solo legal professionals who need to establish credibility fast, communicate practice areas clearly, and route qualified leads into a consultation booking path.",
+  "audience": "Law firms, solo practitioners, barristers, legal consultants",
+  "previewVariant": "marketing",
+  "includes": [
+    "Firm homepage with credibility section",
+    "Practice areas overview and individual pages",
+    "Attorney/barrister profile pages",
+    "Case results and social proof section",
+    "Consultation booking flow",
+    "Contact and intake form",
+    "CMS setup for content updates"
+  ],
+  "stack": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Sanity CMS",
+    "Vercel"
+  ],
+  "highlights": [
+    { "_type": "object", "_key": "h1", "label": "Pages", "value": "16" },
+    { "_type": "object", "_key": "h2", "label": "Setup time", "value": "2-3 hrs" },
+    { "_type": "object", "_key": "h3", "label": "Best for", "value": "Boutique law firms" }
+  ],
+  "mainImage": {
+    "_type": "image",
+    "asset": { "_type": "reference", "_ref": "image-12e1e4729b4f72aeda25544b1db88e0a8cbdde42-1871x907-png" },
+    "alt": "Legal Practice Website template homepage"
+  },
+  "mainImageAlt": "Legal Practice Website template homepage showing firm credibility and practice areas"
+}

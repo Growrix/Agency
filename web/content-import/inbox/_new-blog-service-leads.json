@@ -1,0 +1,49 @@
+{
+  "_id": "blogPost.why-service-businesses-lose-leads-before-first-contact",
+  "_type": "blogPost",
+  "title": "Why Service Businesses Lose Leads Before First Contact (And How to Fix It)",
+  "slug": { "_type": "slug", "current": "why-service-businesses-lose-leads-before-first-contact" },
+  "excerpt": "Most service business websites create doubt instead of confidence. Here is exactly where that happens and what to do about it.",
+  "publishedAt": "2026-05-02T12:00:00Z",
+  "readMinutes": 6,
+  "categoryRef": { "_type": "reference", "_ref": "category.operations" },
+  "tags": ["lead conversion", "service websites", "trust design", "ux", "web strategy"],
+  "accent": "from-violet-500 to-purple-700",
+  "authorRef": { "_type": "reference", "_ref": "author.growrix-os" },
+  "body": [
+    { "_type": "block", "_key": "b1", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s1", "marks": [], "text": "Most service businesses know they need a better website. What they do not know is that the real problem usually shows up in the first five seconds — before the visitor has even read anything." }] },
+    { "_type": "block", "_key": "b2", "style": "h2", "markDefs": [], "children": [{ "_type": "span", "_key": "s2", "marks": [], "text": "The trust gap nobody measures" }] },
+    { "_type": "block", "_key": "b3", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s3", "marks": [], "text": "Visitors arrive with a specific need. The first thing they do is assess whether you are the kind of business that can handle it. Generic copy, inconsistent visual quality, and missing social proof fail that test instantly — even if your actual service is excellent." }] },
+    { "_type": "block", "_key": "b4", "style": "h2", "markDefs": [], "children": [{ "_type": "span", "_key": "s4", "marks": [], "text": "Where most service sites break down" }] },
+    { "_type": "block", "_key": "b5", "style": "h3", "markDefs": [], "children": [{ "_type": "span", "_key": "s5", "marks": [], "text": "1. No specificity in the hero" }] },
+    { "_type": "block", "_key": "b6", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s6", "marks": [], "text": "Phrases like 'We deliver results' and 'Your success is our mission' say nothing. Specific outcomes — 'We help interior design studios convert 40% more qualified leads' — create immediate relevance." }] },
+    { "_type": "block", "_key": "b7", "style": "h3", "markDefs": [], "children": [{ "_type": "span", "_key": "s7", "marks": [], "text": "2. Proof buried three scrolls down" }] },
+    { "_type": "block", "_key": "b8", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s8", "marks": [], "text": "Testimonials and case study metrics should appear near the first decision moment, not in a footer section. Visitors need reassurance before they commit to reading further." }] },
+    { "_type": "block", "_key": "b9", "style": "h3", "markDefs": [], "children": [{ "_type": "span", "_key": "s9", "marks": [], "text": "3. Weak or unclear CTA path" }] },
+    { "_type": "block", "_key": "b10", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s10", "marks": [], "text": "A single generic 'Contact us' button at the bottom of the page is not a conversion path. Every key section needs a next step that matches the intent of a visitor at that point in their decision." }] },
+    { "_type": "block", "_key": "b11", "style": "h2", "markDefs": [], "children": [{ "_type": "span", "_key": "s11", "marks": [], "text": "What to fix first" }] },
+    { "_type": "block", "_key": "b12", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s12", "marks": [], "text": "Start with the hero and the first visible proof section. Rewrite your headline around a specific outcome for a specific buyer. Move one real metric or short testimonial into the top half of the page. Then add a contextual CTA after each major content section." }] },
+    { "_type": "block", "_key": "b13", "style": "h2", "markDefs": [], "children": [{ "_type": "span", "_key": "s13", "marks": [], "text": "The compounding effect" }] },
+    { "_type": "block", "_key": "b14", "style": "normal", "markDefs": [], "children": [{ "_type": "span", "_key": "s14", "marks": [], "text": "Each of these changes is small on its own. Together they close the trust gap and give qualified visitors the confidence to take the next step before they second-guess themselves." }] }
+  ],
+  "seo": {
+    "_type": "object",
+    "metaTitle": "Why Service Businesses Lose Leads Before First Contact | Growrix OS",
+    "metaDescription": "Most service websites create doubt instead of confidence in the first 5 seconds. Here is exactly where the trust gap appears and how to fix it.",
+    "canonicalUrl": "https://www.growrixos.com/blog/why-service-businesses-lose-leads-before-first-contact",
+    "noIndex": false
+  },
+  "mainImage": {
+    "_type": "image",
+    "asset": { "_type": "reference", "_ref": "image-5ed33f660093497de39c9ca1a3beb0b8a1d3ee60-640x640-jpg" }
+  },
+  "mainImageAlt": "Service business owner reviewing website analytics showing high bounce rate",
+  "category": "Operations",
+  "author": {
+    "_type": "object",
+    "name": "Growrix OS",
+    "role": "Editorial Team",
+    "bio": "We publish practical playbooks from shipping premium websites and operational content systems.",
+    "initials": "GO"
+  }
+}

@@ -45,6 +45,13 @@ export const shopItemType = defineType({
       group: "media",
     }),
     defineField({
+      name: "embeddedPreviewUrl",
+      title: "Embeddable Preview URL (Optional)",
+      type: "url",
+      description: "Use only when the demo site allows iframe embedding.",
+      group: "media",
+    }),
+    defineField({
       name: "category",
       title: "Category Reference (Optional) [Example: Templates]",
       type: "reference",
