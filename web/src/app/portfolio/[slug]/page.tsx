@@ -65,7 +65,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             ← All projects
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-start">
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-6">
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge tone="primary">{project.industry}</Badge>
                 {service && <Badge tone="neutral">{service.name}</Badge>}
@@ -94,7 +94,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <LinkButton href="/portfolio" variant="outline" size="lg">More work</LinkButton>
               </div>
             </div>
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-6">
               <Card className="overflow-hidden p-0">
                 <div className={`relative aspect-16/10 overflow-hidden bg-linear-to-br ${project.accent}`}>
                   {heroImage ? (
