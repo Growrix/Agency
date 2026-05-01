@@ -15,7 +15,9 @@
     "test:integration": "tsx --test tests/integration/api-flows.test.ts",
     "test:e2e": "playwright test",
     "test:release": "npm run test && npm run build && npm run test:e2e",
-    "cms:import": "node ./scripts/import-cms-content.mjs"
+    "cms:import": "node ./scripts/import-cms-content.mjs",
+    "cms:import:inbox": "node ./scripts/import-cms-content.mjs",
+    "cms:import:inbox:dry": "node ./scripts/import-cms-content.mjs --dry-run"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.11.0",

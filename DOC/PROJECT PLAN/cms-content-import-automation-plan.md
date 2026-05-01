@@ -29,6 +29,8 @@ Target outcome:
 Implement a deterministic CLI importer in the web workspace:
 - Script: `web/scripts/import-cms-content.mjs`
 - Command: `npm --prefix web run cms:import -- --type <caseStudy|blogPost|shopItem> --file <path>`
+- Shared operator drop folder: `web/content-import/inbox/`
+- Optional processed archive folder: `web/content-import/processed/`
 - Input formats:
   - Markdown files with fenced `yaml` block
   - Raw `.yaml` / `.yml`
@@ -36,6 +38,7 @@ Implement a deterministic CLI importer in the web workspace:
 - Operation mode:
   - `--dry-run` to validate payload mapping
   - `createOrReplace` for idempotent upsert
+  - Batch import by directory using `--dir`, or no-arg inbox processing
 
 ## 4. Data Contract
 ### Required environment
@@ -77,12 +80,15 @@ Maps template payload to:
 
 ## 6. Operator Workflow
 1. Generate content file from template.
-2. Run dry-run command:
-   - `npm --prefix web run cms:import -- --type caseStudy --file ./content/case-study.md --dry-run`
-3. Verify payload output.
-4. Run import command without dry-run.
-5. Open Sanity Studio and upload images/screenshots.
-6. Publish.
+2. Put generated files in `web/content-import/inbox/`.
+3. Run dry-run for all inbox files:
+  - `npm --prefix web run cms:import -- --dry-run`
+4. Verify payload output.
+5. Run live import:
+  - `npm --prefix web run cms:import`
+6. Open Sanity Studio and upload images/screenshots.
+7. Publish.
+8. Move imported source files into `web/content-import/processed/`.
 
 ## 7. Validation and Quality Gates
 - Static gate: script executes with valid args and env.

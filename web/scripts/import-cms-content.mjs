@@ -3,14 +3,21 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 import { load as parseYaml } from "js-yaml";
 import { createClient } from "@sanity/client";
 
 const DEFAULT_PROJECT_ID = "1tk4ulcx";
 const DEFAULT_DATASET = "production";
+const SUPPORTED_EXTENSIONS = new Set([".md", ".markdown", ".yaml", ".yml", ".json"]);
+
+const scriptFile = fileURLToPath(import.meta.url);
+const scriptDirectory = path.dirname(scriptFile);
+const webRoot = path.resolve(scriptDirectory, "..");
+const inboxDirectory = path.resolve(webRoot, "content-import", "inbox");
 
 function parseArgs(argv) {
-  const args = { file: "", type: "", dryRun: false };
+  const args = { file: "", dir: "", type: "", dryRun: false };
 
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index];
@@ -23,6 +30,12 @@ function parseArgs(argv) {
 
     if (value === "--type" || value === "-t") {
       args.type = argv[index + 1] ?? "";
+      index += 1;
+      continue;
+    }
+
+    if (value === "--dir" || value === "-d") {
+      args.dir = argv[index + 1] ?? "";
       index += 1;
       continue;
     }
@@ -118,6 +131,29 @@ function parseContentFile(rawText, extName) {
   return parseYaml(rawText);
 }
 
+async function findExistingPath(inputPath) {
+  if (!inputPath) {
+    return "";
+  }
+
+  const candidates = [
+    path.resolve(process.cwd(), inputPath),
+    path.resolve(webRoot, inputPath),
+    path.resolve(inboxDirectory, inputPath),
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      await fs.access(candidate);
+      return candidate;
+    } catch {
+      // Continue.
+    }
+  }
+
+  return "";
+}
+
 function resolveContentType(cliType, data) {
   const value = String(cliType || data?.contentType || data?.documentType || data?.type || "").trim();
   const normalized = value.toLowerCase();
@@ -141,7 +177,7 @@ function resolveContentType(cliType, data) {
   return "";
 }
 
-async function ensureCategoryRef(client, categoryRefOrLabel) {
+async function ensureCategoryRef(client, categoryRefOrLabel, dryRun) {
   const raw = String(categoryRefOrLabel ?? "").trim();
   if (!raw) {
     throw new Error("blogPost requires categoryRefOrLabel in the content file.");
@@ -154,17 +190,19 @@ async function ensureCategoryRef(client, categoryRefOrLabel) {
   const slug = toSlug(raw);
   const id = `category.${slug}`;
 
-  await client.createIfNotExists({
-    _id: id,
-    _type: "category",
-    title: raw,
-    slug: { _type: "slug", current: slug },
-  });
+  if (!dryRun) {
+    await client.createIfNotExists({
+      _id: id,
+      _type: "category",
+      title: raw,
+      slug: { _type: "slug", current: slug },
+    });
+  }
 
   return { _type: "reference", _ref: id };
 }
 
-async function ensureAuthorRef(client, authorInput) {
+async function ensureAuthorRef(client, authorInput, dryRun) {
   if (!authorInput || typeof authorInput !== "object") {
     throw new Error("blogPost requires an author object with at least author.name.");
   }
@@ -180,19 +218,21 @@ async function ensureAuthorRef(client, authorInput) {
   const bio = String(authorInput.bio ?? "").trim() || undefined;
   const initials = String(authorInput.initials ?? "").trim().slice(0, 3) || undefined;
 
-  await client.createIfNotExists({
-    _id: id,
-    _type: "author",
-    name,
-    role,
-    bio,
-    initials,
-  });
+  if (!dryRun) {
+    await client.createIfNotExists({
+      _id: id,
+      _type: "author",
+      name,
+      role,
+      bio,
+      initials,
+    });
+  }
 
   return { _type: "reference", _ref: id };
 }
 
-async function buildDocumentPayload(client, contentType, data) {
+async function buildDocumentPayload(client, contentType, data, dryRun) {
   if (contentType === "caseStudy") {
     const name = String(data?.name ?? "").trim();
     const slug = String(data?.slug ?? "").trim() || toSlug(name);
@@ -279,8 +319,8 @@ async function buildDocumentPayload(client, contentType, data) {
       throw new Error("blogPost requires title and slug fields.");
     }
 
-    const categoryRef = await ensureCategoryRef(client, data?.categoryRefOrLabel ?? data?.category);
-    const authorRef = await ensureAuthorRef(client, data?.author);
+    const categoryRef = await ensureCategoryRef(client, data?.categoryRefOrLabel ?? data?.category, dryRun);
+    const authorRef = await ensureAuthorRef(client, data?.author, dryRun);
 
     const bodyPortableText = Array.isArray(data?.bodyPortableText)
       ? data.bodyPortableText
@@ -331,32 +371,51 @@ async function buildDocumentPayload(client, contentType, data) {
   throw new Error("Unsupported content type. Use one of: caseStudy, shopItem, blogPost.");
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
-
-  if (!args.file) {
-    throw new Error("Missing --file argument. Example: npm run cms:import -- --type caseStudy --file ./content/case-study.md");
-  }
-
-  const absoluteFilePath = path.resolve(process.cwd(), args.file);
+async function importSingleFile(client, absoluteFilePath, cliType, dryRun) {
   const extension = path.extname(absoluteFilePath).toLowerCase();
   const rawText = await fs.readFile(absoluteFilePath, "utf8");
   const data = parseContentFile(rawText, extension);
 
   if (!data || typeof data !== "object") {
-    throw new Error("Parsed content is empty or invalid.");
+    throw new Error(`Parsed content is empty or invalid for file: ${absoluteFilePath}`);
   }
 
-  const contentType = resolveContentType(args.type, data);
+  const contentType = resolveContentType(cliType, data);
   if (!contentType) {
-    throw new Error("Could not resolve content type. Pass --type caseStudy|shopItem|blogPost or include contentType in the file.");
+    throw new Error(
+      `Could not resolve content type for file: ${absoluteFilePath}. Use --type caseStudy|shopItem|blogPost or set contentType inside file.`,
+    );
   }
+
+  const document = await buildDocumentPayload(client, contentType, data, dryRun);
+
+  if (dryRun) {
+    console.log(`[dry-run] ${path.basename(absoluteFilePath)} => ${contentType}`);
+    console.log(JSON.stringify(document, null, 2));
+    return;
+  }
+
+  const result = await client.createOrReplace(document);
+  console.log(`Imported ${contentType} -> ${result._id} (${path.basename(absoluteFilePath)})`);
+}
+
+async function collectImportFiles(targetDirectory) {
+  const entries = await fs.readdir(targetDirectory, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => path.resolve(targetDirectory, entry.name))
+    .filter((filePath) => SUPPORTED_EXTENSIONS.has(path.extname(filePath).toLowerCase()))
+    .sort((left, right) => left.localeCompare(right));
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
 
   const projectId = process.env.SANITY_PROJECT_ID || DEFAULT_PROJECT_ID;
   const dataset = process.env.SANITY_DATASET || DEFAULT_DATASET;
   const token = process.env.SANITY_API_TOKEN;
 
-  if (!token) {
+  if (!args.dryRun && !token) {
     throw new Error("Missing SANITY_API_TOKEN. Set it in your terminal before running the importer.");
   }
 
@@ -368,16 +427,37 @@ async function main() {
     useCdn: false,
   });
 
-  const document = await buildDocumentPayload(client, contentType, data);
+  const resolvedFilePath = args.file ? await findExistingPath(args.file) : "";
+  const resolvedDirectoryPath = args.dir
+    ? await findExistingPath(args.dir)
+    : !args.file
+      ? inboxDirectory
+      : "";
 
-  if (args.dryRun) {
-    console.log("[dry-run] Parsed content type:", contentType);
-    console.log(JSON.stringify(document, null, 2));
+  if (args.file && !resolvedFilePath) {
+    throw new Error(`Input file was not found: ${args.file}`);
+  }
+
+  if (args.file && resolvedFilePath) {
+    await importSingleFile(client, resolvedFilePath, args.type, args.dryRun);
     return;
   }
 
-  const result = await client.createOrReplace(document);
-  console.log(`Imported ${contentType} -> ${result._id}`);
+  if (!resolvedDirectoryPath) {
+    throw new Error(
+      "Missing input. Use --file <path> for a single file, --dir <path> for a batch folder, or run without args to process web/content-import/inbox.",
+    );
+  }
+
+  const files = await collectImportFiles(resolvedDirectoryPath);
+  if (files.length === 0) {
+    throw new Error(`No importable files found in: ${resolvedDirectoryPath}`);
+  }
+
+  console.log(`Processing ${files.length} file(s) from ${resolvedDirectoryPath}`);
+  for (const filePath of files) {
+    await importSingleFile(client, filePath, args.type, args.dryRun);
+  }
 }
 
 main().catch((error) => {
