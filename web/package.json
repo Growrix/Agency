@@ -14,7 +14,8 @@
     "test:unit": "tsx --test src/server/auth/users.test.ts src/server/domain/catalog.test.ts",
     "test:integration": "tsx --test tests/integration/api-flows.test.ts",
     "test:e2e": "playwright test",
-    "test:release": "npm run test && npm run build && npm run test:e2e"
+    "test:release": "npm run test && npm run build && npm run test:e2e",
+    "cms:import": "node ./scripts/import-cms-content.mjs"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.11.0",
@@ -27,6 +28,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.37.0",
     "jose": "^6.2.2",
+    "js-yaml": "^4.1.0",
     "motion-dom": "^12.37.0",
     "next": "16.2.4",
     "react": "19.2.4",

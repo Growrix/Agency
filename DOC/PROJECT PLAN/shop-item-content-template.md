@@ -22,6 +22,7 @@ last_updated: 2026-04-30
 ## Copy Template
 
 ```yaml
+contentType: "shopItem"
 name: "Three Circles - Interior Designer company website"
 slug: "three-circles-interior-designer-company-website"
 price: "$999"
@@ -99,3 +100,12 @@ Use this instruction when asking an AI to generate a new shop item:
 ```text
 Create a complete Growrix OS shop item entry using the project template in DOC/PROJECT PLAN/shop-item-content-template.md. Output all fields with realistic commercial copy, clean slugs, 3 highlights, 5-7 includes, 4-6 stack items, a live preview URL, and an embedded preview URL only if the preview domain is iframe-safe.
 ```
+
+## Import Automation (Optional)
+- Save the YAML payload in a markdown file and run:
+
+```bash
+npm --prefix web run cms:import -- --type shopItem --file ./path/to/shop-item.md
+```
+
+- Use `--dry-run` first to verify parsed output before writing to Sanity.

@@ -21,6 +21,7 @@ last_updated: 2026-04-30
 ## Copy Template
 
 ```yaml
+contentType: "blogPost"
 title: "How We Built a Premium Interior Design Website That Converts Better"
 slug: "how-we-built-a-premium-interior-design-website-that-converts-better"
 excerpt: "A breakdown of how structure, proof, visual hierarchy, and CTA placement helped an interior design website feel premium and convert more qualified leads."
@@ -63,6 +64,7 @@ seo:
   metaDescription: "See how we structured a premium interior design website to improve trust, clarity, and lead conversion."
   canonicalUrl: "https://www.growrixos.com/blog/how-we-built-a-premium-interior-design-website-that-converts-better"
   noIndex: false
+mainImageAlt: "Interior design team reviewing premium web layouts on desktop"
 comments:
   - id: "c1"
     author: "Editorial Review"
@@ -89,3 +91,12 @@ comments:
 ```text
 Create a complete Growrix OS blog post using the project template in DOC/PROJECT PLAN/blog-post-content-template.md. Make it specific, premium, and practical. Include a clear excerpt, 4-6 tags, body outline sections, and SEO copy.
 ```
+
+## Import Automation (Optional)
+- Save the YAML payload in a markdown file and run:
+
+```bash
+npm --prefix web run cms:import -- --type blogPost --file ./path/to/blog-post.md
+```
+
+- Use `--dry-run` first to validate mapping without writing to Sanity.

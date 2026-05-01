@@ -116,6 +116,7 @@ Planning rule:
 ## Active Planning Artifacts
 
 - `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`
+- `DOC/PROJECT PLAN/cms-content-import-automation-plan.md`
 - `DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md`
 - `DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md`
 - `DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md`

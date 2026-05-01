@@ -39,8 +39,13 @@ type SanityCaseStudy = {
     year?: string;
     duration?: string;
     team?: string;
+    deliveryStory?: string;
+    process?: string[];
     challenge?: string[];
     strategy?: string[];
+    integrations?: string[];
+    seo?: string[];
+    standards?: string[];
     build?: SanityKeyValue[];
     results?: SanityKeyValue[];
     gallery?: SanityImage[];
@@ -107,8 +112,13 @@ const SANITY_CASE_STUDIES_QUERY = `*[
     year,
     duration,
     team,
+    deliveryStory,
+    "process": coalesce(process, []),
     "challenge": coalesce(challenge, []),
     "strategy": coalesce(strategy, []),
+    "integrations": coalesce(integrations, []),
+    "seo": coalesce(seo, []),
+    "standards": coalesce(standards, []),
     "build": coalesce(build, []),
     "results": coalesce(results, []),
     "gallery": coalesce(gallery, [])[]{
@@ -241,8 +251,13 @@ function normalizeCaseStudyDetail(
     year: normalizeString(detail.year, "TBD"),
     duration: normalizeString(detail.duration, "TBD"),
     team: normalizeString(detail.team, "Growrix OS"),
+    deliveryStory: normalizeString(detail.deliveryStory) || undefined,
+    process: normalizeStringArray(detail.process),
     challenge: normalizeStringArray(detail.challenge),
     strategy: normalizeStringArray(detail.strategy),
+    integrations: normalizeStringArray(detail.integrations),
+    seo: normalizeStringArray(detail.seo),
+    standards: normalizeStringArray(detail.standards),
     build: normalizeKeyValueArray(detail.build),
     results: normalizeKeyValueArray(detail.results),
     gallery,

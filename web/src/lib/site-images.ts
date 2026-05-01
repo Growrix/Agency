@@ -10,8 +10,13 @@ export type CaseStudyDetail = {
   year: string;
   duration: string;
   team: string;
+  deliveryStory?: string;
+  process?: string[];
   challenge: string[];
   strategy: string[];
+  integrations?: string[];
+  seo?: string[];
+  standards?: string[];
   build: { label: string; value: string }[];
   results: { value: string; label: string; hint?: string }[];
   gallery: StockImage[];

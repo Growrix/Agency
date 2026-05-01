@@ -49,6 +49,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     : heroImage
       ? [heroImage]
       : [];
+  const outcomeStats = detail.results.length > 0 ? detail.results : HOME_STATS;
+  const hasTechnicalMeta =
+    Boolean(detail.deliveryStory?.trim()) ||
+    (detail.process?.length ?? 0) > 0 ||
+    (detail.integrations?.length ?? 0) > 0 ||
+    (detail.seo?.length ?? 0) > 0 ||
+    (detail.standards?.length ?? 0) > 0;
 
   return (
     <>
@@ -58,7 +65,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             ← All projects
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-start">
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-5">
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge tone="primary">{project.industry}</Badge>
                 {service && <Badge tone="neutral">{service.name}</Badge>}
@@ -87,16 +94,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <LinkButton href="/portfolio" variant="outline" size="lg">More work</LinkButton>
               </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-7">
               <Card className="overflow-hidden p-0">
-                <div className={`relative aspect-4/3 overflow-hidden bg-linear-to-br ${project.accent}`}>
+                <div className={`relative aspect-16/10 overflow-hidden bg-linear-to-br ${project.accent}`}>
                   {heroImage ? (
                     <Image
                       src={heroImage.src}
                       alt={heroImage.alt}
                       fill
                       priority
-                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      sizes="(min-width: 1024px) 60vw, 100vw"
                       className="object-contain bg-[#070b12]"
                     />
                   ) : project.embeddedPreviewUrl ? (
@@ -130,39 +137,108 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </Section>
 
       <Section className="py-12">
-        <StatBlock stats={HOME_STATS} />
+        <StatBlock stats={outcomeStats} />
       </Section>
 
-      <Section tone="inset">
-        <Container width="reading">
-          <SectionHeading eyebrow="The challenge" title="What needed to change." />
-          <div className="mt-8 space-y-4">
-            {detail.challenge.map((c, i) => (
-              <p key={i} className="text-lg leading-7 text-pretty">{c}</p>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {hasTechnicalMeta && (
+        <Section tone="inset">
+          <Container>
+            <SectionHeading
+              eyebrow="Delivery focus"
+              title="How we built the new production website."
+              description="A concise project narrative, delivery process, and the technical standards we enforced before launch."
+            />
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              <Card className="p-6 lg:col-span-1">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Execution story</p>
+                <p className="mt-3 text-sm leading-7 text-pretty text-text-muted">
+                  {detail.deliveryStory?.trim() || "We rebuilt the experience around conversion clarity, scalable content operations, and production-safe engineering gates."}
+                </p>
+              </Card>
+              <Card className="p-6 lg:col-span-2">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Delivery process</p>
+                <ol className="mt-3 space-y-3">
+                  {(detail.process?.length ? detail.process : ["Discovery and KPI alignment", "Design and content architecture", "Build, QA, and launch hardening"]).map((step, index) => (
+                    <li key={`${step}-${index}`} className="flex gap-3">
+                      <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-border font-mono text-[11px] text-text-muted">
+                        {index + 1}
+                      </span>
+                      <span className="text-sm leading-6 text-text-muted">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </Card>
+            </div>
+            <div className="mt-5 grid gap-5 lg:grid-cols-3">
+              {(detail.integrations?.length ?? 0) > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Integrations</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                    {detail.integrations?.map((integration, index) => (
+                      <li key={`${integration}-${index}`}>• {integration}</li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              {(detail.seo?.length ?? 0) > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">SEO and discovery</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                    {detail.seo?.map((item, index) => (
+                      <li key={`${item}-${index}`}>• {item}</li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              {(detail.standards?.length ?? 0) > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Quality standards</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                    {detail.standards?.map((item, index) => (
+                      <li key={`${item}-${index}`}>• {item}</li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+            </div>
+          </Container>
+        </Section>
+      )}
 
-      <Section>
-        <Container width="reading">
-          <SectionHeading
-            eyebrow="Strategy & solution"
-            title="Decisions that shaped the build."
-            description="The architecture, design system, and product choices that made the rest of the project possible."
-          />
-          <ul className="mt-10 space-y-5">
-            {detail.strategy.map((s, i) => (
-              <li key={i} className="flex gap-4">
-                <span className="shrink-0 size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-mono text-sm">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-lg leading-7 text-pretty pt-0.5">{s}</p>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
+      {detail.challenge.length > 0 && (
+        <Section tone="inset">
+          <Container width="reading">
+            <SectionHeading eyebrow="The challenge" title="What needed to change." />
+            <div className="mt-8 space-y-4">
+              {detail.challenge.map((c, i) => (
+                <p key={i} className="text-lg leading-7 text-pretty">{c}</p>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {detail.strategy.length > 0 && (
+        <Section>
+          <Container width="reading">
+            <SectionHeading
+              eyebrow="Strategy & solution"
+              title="Decisions that shaped the build."
+              description="The architecture, design system, and product choices that made the rest of the project possible."
+            />
+            <ul className="mt-10 space-y-5">
+              {detail.strategy.map((s, i) => (
+                <li key={i} className="flex gap-4">
+                  <span className="shrink-0 size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-mono text-sm">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-lg leading-7 text-pretty pt-0.5">{s}</p>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </Section>
+      )}
 
       <Section tone="inset">
         <Container>

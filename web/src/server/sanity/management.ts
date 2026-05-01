@@ -91,8 +91,13 @@ export async function upsertSanityCaseStudy(record: ManagedPortfolioRecord) {
     year: record.detail?.year,
     duration: record.detail?.duration,
     team: record.detail?.team,
+    deliveryStory: record.detail?.deliveryStory,
+    process: record.detail?.process ?? [],
     challenge: record.detail?.challenge ?? [],
     strategy: record.detail?.strategy ?? [],
+    integrations: record.detail?.integrations ?? [],
+    seo: record.detail?.seo ?? [],
+    standards: record.detail?.standards ?? [],
     build: record.detail?.build ?? [],
     results: record.detail?.results ?? [],
   });
