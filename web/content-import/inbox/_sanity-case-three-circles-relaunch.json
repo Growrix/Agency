@@ -1,0 +1,95 @@
+{
+  "_id": "caseStudy.three-circles-relaunch-2026",
+  "_type": "caseStudy",
+  "name": "Three Circles Relaunch 2026",
+  "slug": {
+    "_type": "slug",
+    "current": "three-circles-relaunch-2026"
+  },
+  "livePreviewUrl": "https://threecircles.com",
+  "embeddedPreviewUrl": "https://demo.threecircles.com",
+  "industry": "Interior Design",
+  "serviceSlug": "websites",
+  "summary": "A relaunch-focused edition of the Three Circles website emphasizing premium positioning, clearer trust flow, and stronger inquiry conversion.",
+  "metric": "+41% qualified inquiries in 8 weeks",
+  "accent": "from-stone-500 to-amber-700",
+  "published": true,
+  "featuredRank": 7,
+  "heroImage": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4b37ea8f4b3a174b9c6f7df890c36c6b74fa6011-1237x600-png"
+    },
+    "alt": "Three Circles relaunch homepage preview"
+  },
+  "heroImageAlt": "Three Circles relaunch homepage preview",
+  "client": "Three Circles",
+  "year": "2026",
+  "duration": "5 weeks",
+  "team": "Strategy, UI/UX, Frontend, CMS",
+  "deliveryStory": "We rebuilt the digital experience around conversion-first content architecture and production-grade launch gates.",
+  "process": [
+    "Discovery workshop, conversion diagnosis, and content model definition",
+    "Wireframe and visual system decisions aligned to premium positioning",
+    "Build, integration, QA gates, and staged launch"
+  ],
+  "challenge": [
+    "The previous site underrepresented brand quality.",
+    "Proof and inquiry path were not strategically placed."
+  ],
+  "strategy": [
+    "Rebuilt information hierarchy around trust and service clarity.",
+    "Improved visual rhythm, CTA sequencing, and proof placement.",
+    "Prepared reusable CMS-driven sections for faster updates."
+  ],
+  "integrations": [
+    "Sanity CMS for content operations",
+    "Resend for inquiry confirmation workflows",
+    "Analytics events for CTA and form actions"
+  ],
+  "seo": [
+    "Intent-aligned metadata and social snippet coverage",
+    "Semantic heading system and internal linking structure",
+    "Optimized media text and alt governance"
+  ],
+  "standards": [
+    "Responsive QA across mobile, tablet, and desktop",
+    "Accessibility checks for labels, focus, and contrast",
+    "Performance-safe media sizing and layout stability"
+  ],
+  "build": [
+    {
+      "_type": "object",
+      "label": "Platform",
+      "value": "Next.js + Sanity",
+      "hint": "Operational content velocity"
+    },
+    {
+      "_type": "object",
+      "label": "Scope",
+      "value": "Website relaunch",
+      "hint": "Service pages, proof blocks, conversion flow"
+    }
+  ],
+  "results": [
+    {
+      "_type": "object",
+      "value": "+41%",
+      "label": "Qualified inquiries",
+      "hint": "First 8 weeks"
+    },
+    {
+      "_type": "object",
+      "value": "+26%",
+      "label": "Engaged sessions",
+      "hint": "Post-launch"
+    },
+    {
+      "_type": "object",
+      "value": "-19%",
+      "label": "Bounce rate",
+      "hint": "Homepage and service pages"
+    }
+  ]
+}

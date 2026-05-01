@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - resolved operator confusion around dry-run vs live-write by creating three truly new Sanity documents via authenticated CLI (`caseStudy.three-circles-relaunch-2026`, `shopItem.commodity-website-pro-2026`, `blogPost.relaunching-service-websites-with-a-cms-first-workflow-2026`) with seeded image references so they appear immediately in Studio for final manual image replacement
   - prepared three production-ready CMS import payloads in `web/content-import/inbox` (portfolio three-circles redo, shop commodity-website redo, and a new blog post), validated batch dry-run mapping, and confirmed live write is currently blocked until `SANITY_API_TOKEN` is provided in the terminal environment
   - hardened Sanity-to-live publish reliability for blog content by adding ISR revalidation on blog index/detail routes, extending `/api/revalidate` to accept both query-param and JSON webhook payload document types, increasing Sanity client timeout for production reliability, and replacing silent Sanity fetch failures with explicit server logs for faster incident diagnosis
   - refreshed the repository AI memory baseline after full-site content updates by creating `memories/repo/site-brain.md` with live route/API/CMS/runtime snapshots and wiring the project-plan root docs to use it as a first-class memory input for future sessions

@@ -1,0 +1,70 @@
+{
+  "_id": "shopItem.commodity-website-pro-2026",
+  "_type": "shopItem",
+  "name": "Commodity Website Pro 2026",
+  "slug": {
+    "_type": "slug",
+    "current": "commodity-website-pro-2026"
+  },
+  "price": "$1,499",
+  "livePreviewUrl": "https://commodity-demo.vercel.app",
+  "embeddedPreviewUrl": "https://commodity-demo.vercel.app",
+  "categoryLabel": "Commodity Business",
+  "categorySlug": "commodity-business",
+  "type": "Website",
+  "typeSlug": "website",
+  "industry": "Commerce",
+  "industrySlug": "commerce",
+  "tag": "New",
+  "published": true,
+  "featuredRank": 6,
+  "rating": 4.9,
+  "reviewCount": "96",
+  "salesCount": "41",
+  "teaser": "A premium conversion-focused commodity business website package with trust-first structure and high-intent lead capture.",
+  "summary": "Designed for commodity suppliers and export teams who need a modern sales website with category clarity, proof sections, and operationally simple content updates.",
+  "audience": "Commodity suppliers, trading firms, B2B export teams",
+  "previewVariant": "marketing",
+  "includes": [
+    "Homepage",
+    "Company profile section",
+    "Product category showcase",
+    "Industry use-case blocks",
+    "Inquiry and contact workflow",
+    "CMS content structure",
+    "Deployment checklist"
+  ],
+  "stack": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Sanity CMS",
+    "Vercel"
+  ],
+  "highlights": [
+    {
+      "_type": "object",
+      "label": "Pages",
+      "value": "14"
+    },
+    {
+      "_type": "object",
+      "label": "Setup time",
+      "value": "3 hrs"
+    },
+    {
+      "_type": "object",
+      "label": "Best for",
+      "value": "B2B commodity teams"
+    }
+  ],
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-12e1e4729b4f72aeda25544b1db88e0a8cbdde42-1871x907-png"
+    },
+    "alt": "Commodity Website Pro 2026 homepage preview"
+  },
+  "mainImageAlt": "Commodity Website Pro 2026 homepage preview"
+}
