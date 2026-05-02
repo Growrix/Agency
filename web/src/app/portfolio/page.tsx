@@ -1,4 +1,4 @@
-import { CLIENT_LOGOS, HOME_STATS, SERVICES } from "@/lib/content";
+import { HOME_STACK_MARQUEE, HOME_STATS, SERVICES } from "@/lib/content";
 import { listPublicPortfolio } from "@/server/domain/catalog";
 import { PortfolioPageClient } from "./PortfolioPageClient";
 
@@ -14,7 +14,7 @@ export default async function PortfolioPage() {
       projects={projects}
       filters={filters}
       stats={[...HOME_STATS]}
-      clientLogos={[...CLIENT_LOGOS]}
+      trustItems={[...HOME_STACK_MARQUEE]}
     />
   );
 }

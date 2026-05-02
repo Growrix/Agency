@@ -19,10 +19,10 @@ type PortfolioPageClientProps = {
   projects: PublicPortfolioRecord[];
   filters: Array<{ label: string; value: string }>;
   stats: Array<{ value: string; label: string; hint?: string }>;
-  clientLogos: string[];
+  trustItems: string[];
 };
 
-export function PortfolioPageClient({ projects, filters, stats, clientLogos }: PortfolioPageClientProps) {
+export function PortfolioPageClient({ projects, filters, stats, trustItems }: PortfolioPageClientProps) {
   const [filter, setFilter] = useState<string>("all");
   const [q, setQ] = useState("");
 
@@ -128,7 +128,7 @@ export function PortfolioPageClient({ projects, filters, stats, clientLogos }: P
         </Container>
       </Section>
 
-      <TrustStrip items={clientLogos} />
+      <TrustStrip items={trustItems} />
 
       {SHOW_GOOGLE_REVIEWS ? (
         <Section>
