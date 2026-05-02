@@ -39,8 +39,13 @@ type SanityCaseStudy = {
     year?: string;
     duration?: string;
     team?: string;
+    deliveryStory?: string;
+    process?: string[];
     challenge?: string[];
     strategy?: string[];
+    integrations?: string[];
+    seo?: string[];
+    standards?: string[];
     build?: SanityKeyValue[];
     results?: SanityKeyValue[];
     gallery?: SanityImage[];
@@ -67,8 +72,12 @@ type SanityShopItem = {
   teaser?: string;
   summary?: string;
   audience?: string;
+  features?: string[];
   previewVariant?: ManagedProductRecord["previewVariant"];
   includes?: string[];
+  inScope?: string[];
+  outOfScope?: string[];
+  enhancementPlan?: string[];
   stack?: string[];
   highlights?: SanityKeyValue[];
   image?: SanityImage;
@@ -107,8 +116,13 @@ const SANITY_CASE_STUDIES_QUERY = `*[
     year,
     duration,
     team,
+    deliveryStory,
+    "process": coalesce(process, []),
     "challenge": coalesce(challenge, []),
     "strategy": coalesce(strategy, []),
+    "integrations": coalesce(integrations, []),
+    "seo": coalesce(seo, []),
+    "standards": coalesce(standards, []),
     "build": coalesce(build, []),
     "results": coalesce(results, []),
     "gallery": coalesce(gallery, [])[]{
@@ -142,8 +156,12 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   teaser,
   summary,
   audience,
+  "features": coalesce(features, []),
   previewVariant,
   "includes": coalesce(includes, []),
+  "inScope": coalesce(inScope, []),
+  "outOfScope": coalesce(outOfScope, []),
+  "enhancementPlan": coalesce(enhancementPlan, []),
   "stack": coalesce(stack, []),
   "highlights": coalesce(highlights, []),
   "image": {
@@ -241,8 +259,13 @@ function normalizeCaseStudyDetail(
     year: normalizeString(detail.year, "TBD"),
     duration: normalizeString(detail.duration, "TBD"),
     team: normalizeString(detail.team, "Growrix OS"),
+    deliveryStory: normalizeString(detail.deliveryStory) || undefined,
+    process: normalizeStringArray(detail.process),
     challenge: normalizeStringArray(detail.challenge),
     strategy: normalizeStringArray(detail.strategy),
+    integrations: normalizeStringArray(detail.integrations),
+    seo: normalizeStringArray(detail.seo),
+    standards: normalizeStringArray(detail.standards),
     build: normalizeKeyValueArray(detail.build),
     results: normalizeKeyValueArray(detail.results),
     gallery,
@@ -265,7 +288,7 @@ function normalizeCaseStudy(item: SanityCaseStudy): ManagedPortfolioRecord | nul
     industry: normalizeString(item.industry, "Editorial"),
     service: normalizeServiceSlug(item.service),
     summary: normalizeString(item.summary),
-    metric: normalizeString(item.metric, "Measured impact"),
+    metric: normalizeString(item.metric) || undefined,
     accent: normalizeString(item.accent, "from-teal-500 to-emerald-500"),
     hero_image: normalizeImage(item.heroImage, null),
     detail: normalizeCaseStudyDetail(slug, item.detail),
@@ -305,8 +328,12 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     teaser: normalizeString(item.teaser),
     summary: normalizeString(item.summary),
     audience: normalizeString(item.audience),
+    features: normalizeStringArray(item.features),
     previewVariant: item.previewVariant ?? "marketing",
     includes: normalizeStringArray(item.includes),
+    inScope: normalizeStringArray(item.inScope),
+    outOfScope: normalizeStringArray(item.outOfScope),
+    enhancementPlan: normalizeStringArray(item.enhancementPlan),
     stack: normalizeStringArray(item.stack),
     highlights,
     image: normalizeImage(item.image, null),

@@ -155,7 +155,7 @@ async function buildDocuments(): Promise<KnowledgeDocument[]> {
     label: project.name,
     sourcePath: `/portfolio/${project.slug}`,
     sourceType: "portfolio" as const,
-    content: `${project.name} is a ${project.industry} case study under ${project.service}. ${project.summary} Reported outcome: ${project.metric}.`,
+    content: `${project.name} is a ${project.industry} case study under ${project.service}. ${project.summary}${project.metric ? ` Reported outcome: ${project.metric}.` : ""}`,
   }));
 
   const processDocs = PROCESS_STEPS.map((step) => ({

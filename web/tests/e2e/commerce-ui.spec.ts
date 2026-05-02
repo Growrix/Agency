@@ -1,6 +1,6 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type APIRequestContext } from "@playwright/test";
 
-async function getFirstPublicProductSlug(request: Parameters<typeof test>[0]["request"]) {
+async function getFirstPublicProductSlug(request: APIRequestContext) {
   const response = await request.get("/api/v1/shop/products");
   expect(response.ok()).toBeTruthy();
   const payload = (await response.json()) as { data?: Array<{ slug: string }> };
@@ -9,7 +9,7 @@ async function getFirstPublicProductSlug(request: Parameters<typeof test>[0]["re
   return slug as string;
 }
 
-async function getFirstPublicPortfolioSlug(request: Parameters<typeof test>[0]["request"]) {
+async function getFirstPublicPortfolioSlug(request: APIRequestContext) {
   const response = await request.get("/api/v1/portfolio");
   expect(response.ok()).toBeTruthy();
   const payload = (await response.json()) as { data?: Array<{ slug: string; name: string }> };

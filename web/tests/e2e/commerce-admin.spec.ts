@@ -1,7 +1,16 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type APIRequestContext } from "@playwright/test";
 
-test("checkout fallback flow captures an order", async ({ page }) => {
-  await page.goto("/checkout?product=three-circles-template", { waitUntil: "domcontentloaded" });
+async function getFirstProductSlug(request: APIRequestContext): Promise<string | null> {
+  const response = await request.get("/api/v1/shop/products");
+  if (!response.ok()) return null;
+  const payload = (await response.json()) as { data?: Array<{ slug: string }> };
+  return payload.data?.[0]?.slug ?? null;
+}
+
+test("checkout fallback flow captures an order", async ({ page, request }) => {
+  const productSlug = await getFirstProductSlug(request);
+  test.skip(!productSlug, "No products available in the current data environment");
+  await page.goto(`/checkout?product=${productSlug}`, { waitUntil: "domcontentloaded" });
   await page.getByLabel("Full name *").fill("Checkout User");
   await page.getByLabel("Email *").fill("checkout@example.com");
   await page.getByRole("button", { name: "Continue to payment" }).click();

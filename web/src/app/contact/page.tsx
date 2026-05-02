@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import {
   ChatBubbleLeftRightIcon,
@@ -46,17 +46,9 @@ const URGENCY = ["Exploring", "Within 30 days", "Within 90 days", "ASAP"];
 
 export default function ContactPage() {
   const openConcierge = useConciergeStore((state) => state.open);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [isHydrated] = useState(true);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again or use WhatsApp.");
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setIsHydrated(true);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -194,7 +186,7 @@ export default function ContactPage() {
                     </div>
                   </motion.div>
                 ) : (
-                  <form onSubmit={onSubmit} className="space-y-5" aria-busy={status === "submitting"}>
+                  <form onSubmit={onSubmit} className="space-y-5" aria-busy={status === "submitting"} data-ready={isHydrated ? "true" : "false"}>
                     <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
                     <div className="grid gap-5 sm:grid-cols-2">
                       <Field label="Name" required>

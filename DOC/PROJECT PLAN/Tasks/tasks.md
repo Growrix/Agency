@@ -5,7 +5,7 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-04-28
+last_audit_date: 2026-05-03
 current_state:
   repo_branch_audited: BOT
   frontend_shell: done
@@ -61,6 +61,12 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - removed remaining Tailwind canonical utility warnings in portfolio slug/card surfaces by normalizing alpha and spacing utility syntax (`bg-primary/5`, `bg-primary/4`, `min-h-52.5`), then revalidated lint, typecheck, unit/integration tests, production build, and targeted cross-device portfolio E2E to restore zero-warning gate expectations
+  - resolved Sanity Studio missing-key edit blockers for object-array fields by adding importer `_key` generation, shipping a one-time maintenance script (`cms:fix-array-keys`) for existing `shopItem`/`caseStudy` documents, and redesigning shop slug-page `Key features` into an Envato-style checklist layout aligned with `Files and delivery scope` while upgrading shop-item authoring guidance for deeper end-to-end feature detail
+  - removed the case-study slug-page fallback counter strip, redesigned delivery/build cards with stronger heading hierarchy plus icon-led visual anchors, made case-study primary metric optional across Studio schema/import pipeline/rendering, and updated template/default content language to avoid relaunch/rebuild phrasing in favor of delivered-build framing
+  - completed CMS text-only content-automation hardening by stripping/ignoring importer media fields, adding UUID-safe slug upsert behavior, extending shop schema/model/query support for feature/scope/enhancement fields, simplifying shop slug IA to Envato-style non-duplicative sections, aligning portfolio slug content emphasis to stacks/integrations, and importing fresh shop and portfolio records that render without image assignments
+  - resolved operator confusion around dry-run vs live-write by creating three truly new Sanity documents via authenticated CLI (`caseStudy.three-circles-relaunch-2026`, `shopItem.commodity-website-pro-2026`, `blogPost.relaunching-service-websites-with-a-cms-first-workflow-2026`) with seeded image references so they appear immediately in Studio for final manual image replacement
+  - prepared three production-ready CMS import payloads in `web/content-import/inbox` (portfolio three-circles redo, shop commodity-website redo, and a new blog post), validated batch dry-run mapping, and confirmed live write is currently blocked until `SANITY_API_TOKEN` is provided in the terminal environment
   - hardened Sanity-to-live publish reliability for blog content by adding ISR revalidation on blog index/detail routes, extending `/api/revalidate` to accept both query-param and JSON webhook payload document types, increasing Sanity client timeout for production reliability, and replacing silent Sanity fetch failures with explicit server logs for faster incident diagnosis
   - refreshed the repository AI memory baseline after full-site content updates by creating `memories/repo/site-brain.md` with live route/API/CMS/runtime snapshots and wiring the project-plan root docs to use it as a first-class memory input for future sessions
   - remediated Sanity Studio Vercel warning surface by aligning `studio` React dependencies to 19.2.5 (matching current Sanity peer expectations), validating a clean Studio production build, and documenting required Vercel Node runtime setting (`20.x`) plus known transitive `EBADENGINE` warning behavior from Sanity CLI packages

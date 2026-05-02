@@ -39,17 +39,19 @@ export function PortfolioCard({ project }: { project: Project }) {
             {SERVICES.find((service) => service.slug === project.service)?.name ?? "Project"}
           </span>
         </div>
-        <div className="absolute right-4 top-4 rounded-full bg-black/40 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
-          {project.metric}
-        </div>
+        {project.metric ? (
+          <div className="absolute right-4 top-4 rounded-full bg-black/40 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
+            {project.metric}
+          </div>
+        ) : null}
         <div className="absolute inset-x-0 bottom-0 p-5 text-white">
           <p className="font-mono text-[11px] uppercase tracking-wider opacity-85">{project.industry}</p>
           <p className="mt-1 font-display text-2xl tracking-tight">{project.name}</p>
         </div>
       </div>
-      <div className="p-5">
+      <div className="flex min-h-52.5 flex-col p-5">
         <p className="text-sm leading-6 text-text-muted text-pretty">{project.summary}</p>
-        <div className="mt-4 flex items-center justify-between gap-3">
+        <div className="mt-auto flex items-center justify-between gap-3 pt-4">
           <span className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
             View case study <ArrowUpRightIcon className="size-4" />
           </span>

@@ -1,0 +1,185 @@
+{
+  "_id": "blogPost.relaunching-service-websites-with-a-cms-first-workflow-2026",
+  "_type": "blogPost",
+  "title": "Relaunching Service Websites with a CMS-First Workflow: 2026 Edition",
+  "slug": {
+    "_type": "slug",
+    "current": "relaunching-service-websites-with-a-cms-first-workflow-2026"
+  },
+  "excerpt": "A practical 2026 field playbook for relaunching service websites with stronger content operations and conversion readiness.",
+  "publishedAt": "2026-05-02T11:00:00Z",
+  "readMinutes": 8,
+  "categoryRef": {
+    "_type": "reference",
+    "_ref": "category.operations"
+  },
+  "tags": [
+    "cms operations",
+    "website relaunch",
+    "conversion",
+    "content workflow",
+    "nextjs"
+  ],
+  "accent": "from-cyan-500 to-blue-600",
+  "authorRef": {
+    "_type": "reference",
+    "_ref": "author.growrix-os"
+  },
+  "body": [
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why most website relaunches stall after design"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Many teams finish design but fail to operationalize content, governance, and publishing rituals."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The CMS-first relaunch model"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1. Define content entities before section design"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Treat case studies, products, and blog posts as structured entities with predictable fields and operators."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2. Build import and editorial workflows early"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Use templates and dry-run import tooling so content velocity is not blocked near launch."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3. Enforce release gates like product teams"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Run accessibility, security, performance, and responsive checks before publishing major content refreshes."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Operational outcomes"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This approach reduces publish friction, keeps quality consistent, and helps teams relaunch without content chaos."
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "_type": "object",
+    "metaTitle": "CMS-First Website Relaunch Playbook 2026 | Growrix OS",
+    "metaDescription": "Learn a practical CMS-first workflow to relaunch service websites with better content operations and conversion readiness.",
+    "canonicalUrl": "https://www.growrixos.com/blog/relaunching-service-websites-with-a-cms-first-workflow-2026",
+    "noIndex": false
+  },
+  "mainImage": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5ed33f660093497de39c9ca1a3beb0b8a1d3ee60-640x640-jpg"
+    }
+  },
+  "mainImageAlt": "Team planning a CMS-first website relaunch workflow on large screens",
+  "category": "Operations",
+  "author": {
+    "_type": "object",
+    "name": "Growrix OS",
+    "role": "Editorial Team",
+    "bio": "We publish practical playbooks from shipping premium websites and operational content systems.",
+    "initials": "GO"
+  }
+}

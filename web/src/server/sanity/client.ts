@@ -27,7 +27,7 @@ export function getSanityClient(options: SanityClientOptions = {}): SanityClient
     projectId,
     dataset,
     apiVersion: SANITY_API_VERSION,
-    useCdn: !preview && !token,
+    useCdn: !preview && !token && process.env.NODE_ENV !== "development",
     token,
     perspective: preview ? "drafts" : "published",
     // 10s: allows Sanity CDN cold-start on first ISR revalidation after deploy.
