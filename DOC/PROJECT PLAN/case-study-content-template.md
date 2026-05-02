@@ -14,10 +14,11 @@ last_updated: 2026-05-02
 ## Writing Rules
 - Project name should match how the brand is known publicly.
 - Summary should explain the new site/product that was delivered and why it mattered.
-- Metric should be a strong headline proof point.
+- Metric is optional. Add it when you have a clear and defensible proof point.
 - Do not include image fields in automation payloads. Image uploads are manual in Sanity Studio.
 - Keep strategy concise and focus strongly on build, integrations, scope clarity, and measurable outcomes.
 - Delivery story and process should read like a short execution narrative, not a long essay.
+- Avoid "relaunch" or "rebuilt" language. Describe what was delivered and how it performs.
 
 ## Copy Template
 
@@ -42,7 +43,7 @@ deliveryStory: "We replaced the old marketing site with a conversion-first archi
 process:
   - "Discovery, KPI alignment, and content model planning"
   - "UX and visual system design with reusable components"
-  - "Production build, integrations, QA, and launch hardening"
+  - "Production build, integrations, QA, and release hardening"
 strategy:
   - "Redesigned the content hierarchy around trust, service clarity, and featured work."
   - "Built a more premium visual system with stronger spacing, typography, and CTA rhythm."
@@ -72,7 +73,7 @@ results:
     hint: "First 60 days"
   - label: "Time on site"
     value: "+22%"
-    hint: "After relaunch"
+    hint: "After delivery"
   - label: "Bounce rate"
     value: "-18%"
     hint: "Homepage improvement"
@@ -86,10 +87,10 @@ results:
 - `industry`: Visible industry label.
 - `serviceSlug`: Connects the case study to a service route.
 - `summary`: Short overview used in cards and detail page intro.
-- `metric`: Headline proof point.
+- `metric`: Optional headline proof point.
 - `accent`: Gradient styling pair.
 - `client`, `year`, `duration`, `team`: Quick project context.
-- `deliveryStory`: One short paragraph about how the new site was delivered.
+- `deliveryStory`: One short paragraph about how the build was delivered.
 - `process`: 3-5 concise steps from discovery to launch.
 - `strategy`: What decisions or changes were made.
 - `integrations`: External systems used in delivery.

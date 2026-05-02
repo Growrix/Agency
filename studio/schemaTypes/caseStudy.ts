@@ -92,11 +92,10 @@ export const caseStudyType = defineType({
     }),
     defineField({
       name: "metric",
-      title: "Primary Metric [Example: +37% more qualified inquiries]",
+      title: "Primary Metric (Optional) [Example: +37% more qualified inquiries]",
       type: "string",
       description: "Headline proof point shown on portfolio cards and hero.",
       group: "proof",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "accent",

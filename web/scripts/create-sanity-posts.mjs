@@ -98,7 +98,7 @@ const caseStudy = {
   livePreviewUrl: "https://nourishwellness.com",
   industry: "Healthcare",
   serviceSlug: "websites",
-  summary: "A full digital presence rebuild for a wellness and functional medicine clinic — designed to convert high-intent visitors into booked consultations.",
+  summary: "A full digital presence delivery for a wellness and functional medicine clinic, designed to convert high-intent visitors into booked consultations.",
   metric: "+53% consultation bookings in 6 weeks",
   accent: "from-emerald-500 to-teal-600",
   published: true,
@@ -107,7 +107,7 @@ const caseStudy = {
   year: "2026",
   duration: "6 weeks",
   team: "Strategy, UX, Frontend, CMS",
-  deliveryStory: "We rebuilt the clinic's online presence from a generic practice website into a patient-first digital experience — with treatment clarity, practitioner trust signals, and a booking-optimized consultation path.",
+  deliveryStory: "We delivered a patient-first digital experience for the clinic with treatment clarity, practitioner trust signals, and a booking-optimized consultation path.",
   process: [
     "Patient journey mapping and conversion gap analysis",
     "Content hierarchy and visual trust system design",
@@ -139,7 +139,7 @@ const caseStudy = {
     { _type: "object", _key: "b3", label: "Scope", value: "Full marketing site", hint: "Services, practitioners, conditions, booking" },
   ],
   results: [
-    { _type: "object", _key: "r1", value: "+53%", label: "Consultation bookings", hint: "First 6 weeks post-launch" },
+    { _type: "object", _key: "r1", value: "+53%", label: "Consultation bookings", hint: "First 6 weeks after delivery" },
     { _type: "object", _key: "r2", value: "+34%", label: "Time on service pages", hint: "Avg. vs. previous site" },
     { _type: "object", _key: "r3", value: "4.2x", label: "Return visitor rate", hint: "Organic search traffic" },
   ],

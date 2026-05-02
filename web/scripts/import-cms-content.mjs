@@ -268,7 +268,7 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
       industry: String(data?.industry ?? "").trim() || "General",
       serviceSlug: String(data?.serviceSlug ?? "").trim() || "websites",
       summary: String(data?.summary ?? "").trim(),
-      metric: String(data?.metric ?? "").trim(),
+      metric: String(data?.metric ?? "").trim() || undefined,
       accent: String(data?.accent ?? "").trim() || "from-teal-500 to-emerald-500",
       published: data?.published !== false,
       featuredRank: typeof data?.featuredRank === "number" ? data.featuredRank : 999,

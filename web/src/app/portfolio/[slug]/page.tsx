@@ -2,7 +2,15 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowUpRightIcon,
+  LinkIcon,
+  MagnifyingGlassIcon,
+  QueueListIcon,
+  ShieldCheckIcon,
+  SparklesIcon,
+  WrenchScrewdriverIcon,
+} from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -10,9 +18,8 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { HOME_STATS, SERVICES } from "@/lib/content";
+import { SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { getPublicPortfolioProject, listPublicPortfolio } from "@/server/domain/catalog";
@@ -49,7 +56,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     : heroImage
       ? [heroImage]
       : [];
-  const outcomeStats = detail.results.length > 0 ? detail.results : HOME_STATS;
+  const processSteps = detail.process?.length
+    ? detail.process
+    : [
+        "Intent discovery and KPI alignment",
+        "Information architecture and content planning",
+        "Build, integrations, QA, and delivery readiness",
+      ];
+  const executionStory = detail.deliveryStory?.trim()
+    || "We delivered a conversion-focused website architecture with scalable content operations and production-safe engineering quality gates.";
   const hasTechnicalMeta =
     Boolean(detail.deliveryStory?.trim()) ||
     (detail.process?.length ?? 0) > 0 ||
@@ -116,12 +131,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     />
                   ) : null}
                   <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/15 to-transparent" aria-hidden />
-                  <div className="absolute inset-0 flex items-end p-6 text-white">
-                    <div>
-                      <p className="font-mono text-xs uppercase tracking-wider opacity-80">Outcome</p>
-                      <p className="mt-1 font-display text-3xl tracking-tight">{project.metric}</p>
+                  {project.metric ? (
+                    <div className="absolute inset-0 flex items-end p-6 text-white">
+                      <div>
+                        <p className="font-mono text-xs uppercase tracking-wider opacity-80">Primary metric</p>
+                        <p className="mt-1 font-display text-3xl tracking-tight">{project.metric}</p>
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </Card>
               {project.livePreviewUrl ? (
@@ -136,31 +153,35 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Container>
       </Section>
 
-      <Section className="py-12">
-        <StatBlock stats={outcomeStats} />
-      </Section>
-
       {hasTechnicalMeta && (
         <Section tone="inset">
           <Container>
             <SectionHeading
               eyebrow="Delivery focus"
-              title="How we built the new production website."
-              description="A concise project narrative, delivery process, and the technical standards we enforced before launch."
+              title="Execution narrative and delivery standards."
+              description="A sharper look at execution context, process phases, and the quality controls applied during delivery."
             />
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              <Card className="p-6 lg:col-span-1">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Execution story</p>
+              <Card className="p-6 lg:col-span-1 border-primary/30 bg-primary/[0.05]">
+                <div className="flex items-center gap-2 text-primary">
+                  <SparklesIcon className="size-4" />
+                  <p className="font-mono text-[11px] uppercase tracking-wider">Execution story</p>
+                </div>
+                <h3 className="mt-4 font-display text-xl tracking-tight text-balance">What we delivered and why it mattered</h3>
                 <p className="mt-3 text-sm leading-7 text-pretty text-text-muted">
-                  {detail.deliveryStory?.trim() || "We rebuilt the experience around conversion clarity, scalable content operations, and production-safe engineering gates."}
+                  {executionStory}
                 </p>
               </Card>
               <Card className="p-6 lg:col-span-2">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Delivery process</p>
+                <div className="flex items-center gap-2 text-primary">
+                  <QueueListIcon className="size-4" />
+                  <p className="font-mono text-[11px] uppercase tracking-wider">Delivery process</p>
+                </div>
+                <h3 className="mt-4 font-display text-xl tracking-tight text-balance">How execution moved from scope to delivery</h3>
                 <ol className="mt-3 space-y-3">
-                  {(detail.process?.length ? detail.process : ["Discovery and KPI alignment", "Design and content architecture", "Build, QA, and launch hardening"]).map((step, index) => (
+                  {processSteps.map((step, index) => (
                     <li key={`${step}-${index}`} className="flex gap-3">
-                      <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-border font-mono text-[11px] text-text-muted">
+                      <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 font-mono text-[11px] text-primary">
                         {index + 1}
                       </span>
                       <span className="text-sm leading-6 text-text-muted">{step}</span>
@@ -172,7 +193,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <div className="mt-5 grid gap-5 lg:grid-cols-3">
               {(detail.integrations?.length ?? 0) > 0 && (
                 <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Integrations</p>
+                  <div className="flex items-center gap-2 text-primary">
+                    <LinkIcon className="size-4" />
+                    <p className="font-mono text-[11px] uppercase tracking-wider">Integrations</p>
+                  </div>
                   <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
                     {detail.integrations?.map((integration, index) => (
                       <li key={`${integration}-${index}`}>• {integration}</li>
@@ -182,7 +206,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               )}
               {(detail.seo?.length ?? 0) > 0 && (
                 <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">SEO and discovery</p>
+                  <div className="flex items-center gap-2 text-primary">
+                    <MagnifyingGlassIcon className="size-4" />
+                    <p className="font-mono text-[11px] uppercase tracking-wider">SEO and discovery</p>
+                  </div>
                   <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
                     {detail.seo?.map((item, index) => (
                       <li key={`${item}-${index}`}>• {item}</li>
@@ -192,7 +219,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               )}
               {(detail.standards?.length ?? 0) > 0 && (
                 <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Quality standards</p>
+                  <div className="flex items-center gap-2 text-primary">
+                    <ShieldCheckIcon className="size-4" />
+                    <p className="font-mono text-[11px] uppercase tracking-wider">Quality standards</p>
+                  </div>
                   <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
                     {detail.standards?.map((item, index) => (
                       <li key={`${item}-${index}`}>• {item}</li>
@@ -211,7 +241,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <SectionHeading
               eyebrow="Stack and integrations"
               title="Production scope and systems delivered."
-              description="A clearer snapshot of what was implemented, integrated, and measured after launch."
+              description="A clearer snapshot of what was implemented, integrated, and measured after delivery."
             />
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {(detail.integrations?.length ?? 0) > 0 && (
@@ -274,12 +304,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <Section tone="inset">
         <Container>
           <SectionHeading eyebrow="Build breakdown" title="Stack and modules delivered." />
-          <div className="mt-10 grid gap-px overflow-hidden rounded-[16px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {detail.build.map((b) => (
-              <div key={b.label} className="bg-surface p-5">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{b.label}</p>
-                <p className="mt-2 font-display text-lg tracking-tight">{b.value}</p>
-              </div>
+              <Card key={b.label} className="p-5 border-primary/20 bg-primary/[0.04]">
+                <div className="flex items-center gap-2 text-primary">
+                  <WrenchScrewdriverIcon className="size-4" />
+                  <p className="font-mono text-[11px] uppercase tracking-wider">{b.label}</p>
+                </div>
+                <p className="mt-3 font-display text-xl tracking-tight text-balance">{b.value}</p>
+                {b.hint ? <p className="mt-2 text-sm text-text-muted leading-6">{b.hint}</p> : null}
+              </Card>
             ))}
           </div>
         </Container>

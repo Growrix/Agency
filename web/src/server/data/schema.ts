@@ -125,7 +125,7 @@ export type ManagedPortfolioRecord = {
   industry: string;
   service: string;
   summary: string;
-  metric: string;
+  metric?: string;
   accent: string;
   hero_image: StockImage | null;
   detail: CaseStudyDetail | null;

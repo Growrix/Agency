@@ -5,7 +5,7 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-05-02
+last_audit_date: 2026-05-03
 current_state:
   repo_branch_audited: BOT
   frontend_shell: done
@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - removed the case-study slug-page fallback counter strip, redesigned delivery/build cards with stronger heading hierarchy plus icon-led visual anchors, made case-study primary metric optional across Studio schema/import pipeline/rendering, and updated template/default content language to avoid relaunch/rebuild phrasing in favor of delivered-build framing
   - completed CMS text-only content-automation hardening by stripping/ignoring importer media fields, adding UUID-safe slug upsert behavior, extending shop schema/model/query support for feature/scope/enhancement fields, simplifying shop slug IA to Envato-style non-duplicative sections, aligning portfolio slug content emphasis to stacks/integrations, and importing fresh shop and portfolio records that render without image assignments
   - resolved operator confusion around dry-run vs live-write by creating three truly new Sanity documents via authenticated CLI (`caseStudy.three-circles-relaunch-2026`, `shopItem.commodity-website-pro-2026`, `blogPost.relaunching-service-websites-with-a-cms-first-workflow-2026`) with seeded image references so they appear immediately in Studio for final manual image replacement
   - prepared three production-ready CMS import payloads in `web/content-import/inbox` (portfolio three-circles redo, shop commodity-website redo, and a new blog post), validated batch dry-run mapping, and confirmed live write is currently blocked until `SANITY_API_TOKEN` is provided in the terminal environment

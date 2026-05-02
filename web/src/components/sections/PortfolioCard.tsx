@@ -39,9 +39,11 @@ export function PortfolioCard({ project }: { project: Project }) {
             {SERVICES.find((service) => service.slug === project.service)?.name ?? "Project"}
           </span>
         </div>
-        <div className="absolute right-4 top-4 rounded-full bg-black/40 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
-          {project.metric}
-        </div>
+        {project.metric ? (
+          <div className="absolute right-4 top-4 rounded-full bg-black/40 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
+            {project.metric}
+          </div>
+        ) : null}
         <div className="absolute inset-x-0 bottom-0 p-5 text-white">
           <p className="font-mono text-[11px] uppercase tracking-wider opacity-85">{project.industry}</p>
           <p className="mt-1 font-display text-2xl tracking-tight">{project.name}</p>

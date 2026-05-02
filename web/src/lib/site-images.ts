@@ -17,7 +17,7 @@ export type CaseStudyDetail = {
   integrations?: string[];
   seo?: string[];
   standards?: string[];
-  build: { label: string; value: string }[];
+  build: { label: string; value: string; hint?: string }[];
   results: { value: string; label: string; hint?: string }[];
   gallery: StockImage[];
 };
