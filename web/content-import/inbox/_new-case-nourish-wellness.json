@@ -12,12 +12,6 @@
   "accent": "from-emerald-500 to-teal-600",
   "published": true,
   "featuredRank": 5,
-  "heroImage": {
-    "_type": "image",
-    "asset": { "_type": "reference", "_ref": "image-4b37ea8f4b3a174b9c6f7df890c36c6b74fa6011-1237x600-png" },
-    "alt": "Nourish Wellness Clinic website homepage"
-  },
-  "heroImageAlt": "Nourish Wellness Clinic website homepage",
   "client": "Nourish Wellness Clinic",
   "year": "2026",
   "duration": "6 weeks",

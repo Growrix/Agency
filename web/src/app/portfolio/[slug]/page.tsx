@@ -205,14 +205,45 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Section>
       )}
 
-      {detail.challenge.length > 0 && (
+      {((detail.integrations?.length ?? 0) > 0 || detail.build.length > 0 || detail.results.length > 0) && (
         <Section tone="inset">
-          <Container width="reading">
-            <SectionHeading eyebrow="The challenge" title="What needed to change." />
-            <div className="mt-8 space-y-4">
-              {detail.challenge.map((c, i) => (
-                <p key={i} className="text-lg leading-7 text-pretty">{c}</p>
-              ))}
+          <Container>
+            <SectionHeading
+              eyebrow="Stack and integrations"
+              title="Production scope and systems delivered."
+              description="A clearer snapshot of what was implemented, integrated, and measured after launch."
+            />
+            <div className="mt-8 grid gap-5 lg:grid-cols-3">
+              {(detail.integrations?.length ?? 0) > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Integrations shipped</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                    {detail.integrations?.map((integration, index) => (
+                      <li key={`${integration}-${index}`}>• {integration}</li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              {detail.build.length > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Build facts</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                    {detail.build.map((item) => (
+                      <li key={`${item.label}-${item.value}`}>{item.label}: {item.value}</li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              {detail.results.length > 0 && (
+                <Card className="p-6">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Measured outcomes</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                    {detail.results.map((item) => (
+                      <li key={`${item.label}-${item.value}`}>{item.label}: {item.value}</li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
             </div>
           </Container>
         </Section>

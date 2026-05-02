@@ -13,7 +13,6 @@ metric: "+41% qualified inquiries in 8 weeks"
 accent: "from-stone-500 to-amber-700"
 published: true
 featuredRank: 8
-heroImageAlt: "Three Circles redesigned homepage with premium interior design visuals"
 client: "Three Circles"
 year: "2026"
 duration: "5 weeks"
@@ -23,9 +22,6 @@ process:
   - "Discovery workshop, conversion diagnosis, and content model definition"
   - "Wireframe and visual system decisions aligned to premium service positioning"
   - "Build, integration, QA gates, and staged launch"
-challenge:
-  - "The previous website looked generic and reduced perceived brand value."
-  - "Service clarity and proof placement were weak around inquiry moments."
 strategy:
   - "Rebuilt information hierarchy around service clarity, trust, and proof."
   - "Improved hero structure, typography rhythm, and call-to-action sequencing."

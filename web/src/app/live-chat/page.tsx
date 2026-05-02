@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Badge } from "@/components/primitives/Badge";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -8,18 +8,10 @@ import { Container, Section } from "@/components/primitives/Container";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export default function LiveChatPage() {
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [isHydrated] = useState(true);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [message, setMessage] = useState("Could not start live chat.");
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setIsHydrated(true);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,7 +74,7 @@ export default function LiveChatPage() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={onSubmit} className="space-y-4" aria-busy={status === "submitting"}>
+              <form onSubmit={onSubmit} className="space-y-4" aria-busy={status === "submitting"} data-ready={isHydrated ? "true" : "false"}>
                 <div>
                   <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Queue request</p>
                   <h2 className="mt-2 font-display text-3xl tracking-tight">Tell us what this conversation is about.</h2>

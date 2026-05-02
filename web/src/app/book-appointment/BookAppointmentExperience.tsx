@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CalendarDaysIcon, ChatBubbleLeftRightIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
@@ -82,29 +82,18 @@ function getMinimumBookingDate() {
 }
 
 export function BookAppointmentExperience() {
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [isHydrated] = useState(true);
   const openConcierge = useConciergeStore((state) => state.open);
   const [status, setStatus] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("Could not reserve that slot. Please try another time or use WhatsApp.");
   const [confirmation, setConfirmation] = useState<{ id: string; datetime: string } | null>(null);
   const timezone = getDetectedTimezone();
-  const [minimumBookingDate, setMinimumBookingDate] = useState<Date | null>(null);
+  const [minimumBookingDate] = useState<Date>(() => getMinimumBookingDate());
   const minDate = minimumBookingDate ? toDateInputValue(minimumBookingDate) : "";
   const minTimeForToday = minimumBookingDate ? formatTimeInputValue(minimumBookingDate) : undefined;
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(() => toDateInputValue(getMinimumBookingDate()));
   const [selectedTime, setSelectedTime] = useState("");
   const selectedSlotLabel = formatSelectedSlot(selectedDate, selectedTime);
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      const nextMinimumBookingDate = getMinimumBookingDate();
-      setMinimumBookingDate(nextMinimumBookingDate);
-      setSelectedDate(toDateInputValue(nextMinimumBookingDate));
-      setIsHydrated(true);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -212,7 +201,7 @@ export function BookAppointmentExperience() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} className="space-y-4" aria-busy={status === "submitting"}>
+                <form onSubmit={onSubmit} className="space-y-4" aria-busy={status === "submitting"} data-ready={isHydrated ? "true" : "false"}>
                   <div>
                     <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Discovery booking</p>
                     <h2 className="mt-2 font-display text-3xl tracking-tight">Choose a time and tell us what you&apos;re building.</h2>
@@ -250,7 +239,7 @@ export function BookAppointmentExperience() {
                         type="date"
                         className="booking-input mt-1.5"
                         min={minDate || undefined}
-                        value={selectedDate}
+                        defaultValue={selectedDate || undefined}
                         onInput={(event) => setSelectedDate(event.currentTarget.value)}
                         onChange={(event) => setSelectedDate(event.target.value)}
                         required
@@ -267,7 +256,6 @@ export function BookAppointmentExperience() {
                         min={selectedDate === minDate ? minTimeForToday : undefined}
                         step={1800}
                         list="booking-time-options"
-                        value={selectedTime}
                         onInput={(event) => setSelectedTime(event.currentTarget.value)}
                         onChange={(event) => setSelectedTime(event.target.value)}
                         required

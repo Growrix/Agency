@@ -53,6 +53,10 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   if (!product) notFound();
 
   const related = (await listPublicShopProducts()).filter((item) => item.slug !== product.slug).slice(0, 3);
+  const features = product.features ?? [];
+  const inScope = product.inScope ?? [];
+  const outOfScope = product.outOfScope ?? [];
+  const enhancementPlan = product.enhancementPlan ?? [];
 
   return (
     <>
@@ -103,9 +107,9 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 )}
               </div>
 
-              {/* Description */}
+              {/* Template overview */}
               <div>
-                <h2 className="font-display text-xl font-semibold tracking-tight">About this product</h2>
+                <h2 className="font-display text-xl font-semibold tracking-tight">Template overview</h2>
                 <p className="mt-3 leading-7 text-text-muted">{product.teaser}</p>
                 <p className="mt-3 leading-7 text-text-muted">{product.summary}</p>
               </div>
@@ -123,9 +127,23 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 </div>
               </div>
 
+              {/* Key features */}
+              {features.length > 0 ? (
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Key features</h2>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {features.map((item) => (
+                      <div key={item} className="rounded-2xl border border-border bg-inset/40 px-4 py-4 text-sm leading-6 text-text-muted">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
               {/* Includes */}
               <div>
-                <h2 className="font-display text-xl font-semibold tracking-tight">What&apos;s included</h2>
+                <h2 className="font-display text-xl font-semibold tracking-tight">Files and delivery scope</h2>
                 <ul className="mt-4 space-y-2">
                   {product.includes.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
@@ -135,6 +153,58 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   ))}
                 </ul>
               </div>
+
+              {(inScope.length > 0 || outOfScope.length > 0) ? (
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Included and not included</h2>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-border bg-inset/40 p-4">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Included in template price</p>
+                      <ul className="mt-3 space-y-2">
+                        {inScope.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm leading-6 text-text-muted">
+                            <CheckIcon className="mt-1 size-4 shrink-0 text-primary" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="rounded-2xl border border-border bg-inset/40 p-4">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Not included in template price</p>
+                      <ul className="mt-3 space-y-2">
+                        {outOfScope.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm leading-6 text-text-muted">
+                            <span className="mt-1 inline-block size-1.5 shrink-0 rounded-full bg-text-muted" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {enhancementPlan.length > 0 ? (
+                <div className="rounded-2xl border border-border bg-inset/40 p-5">
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Enhancement roadmap</h2>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">
+                    If you want to scale beyond the base template, we can plan and estimate the next phase with your team.
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    {enhancementPlan.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4">
+                    <LinkButton href="/contact" variant="outline" size="sm">
+                      Discuss scaling plan <ArrowUpRightIcon className="size-4" />
+                    </LinkButton>
+                  </div>
+                </div>
+              ) : null}
 
               {/* Stack */}
               <div>
@@ -205,7 +275,6 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   { label: "Category", value: product.category },
                   { label: "Type", value: product.type },
                   { label: "Industry", value: product.industry },
-                  ...(product.highlights.slice(0, 2).map((h) => ({ label: h.label, value: h.value }))),
                 ].map((row) => (
                   <div key={row.label} className="flex min-w-0 items-start justify-between gap-4">
                     <dt className="shrink-0 font-medium text-text-muted">{row.label}</dt>

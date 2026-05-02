@@ -47,9 +47,9 @@ export function PortfolioCard({ project }: { project: Project }) {
           <p className="mt-1 font-display text-2xl tracking-tight">{project.name}</p>
         </div>
       </div>
-      <div className="p-5">
+      <div className="flex min-h-[210px] flex-col p-5">
         <p className="text-sm leading-6 text-text-muted text-pretty">{project.summary}</p>
-        <div className="mt-4 flex items-center justify-between gap-3">
+        <div className="mt-auto flex items-center justify-between gap-3 pt-4">
           <span className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-all group-hover:gap-2">
             View case study <ArrowUpRightIcon className="size-4" />
           </span>

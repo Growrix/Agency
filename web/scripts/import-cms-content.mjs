@@ -3,6 +3,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { load as parseYaml } from "js-yaml";
 import { createClient } from "@sanity/client";
@@ -87,6 +88,23 @@ function normalizeResultsArray(input) {
       hint: String(item?.hint ?? "").trim() || undefined,
     }))
     .filter((item) => item.value && item.label);
+}
+
+function warnAndStripImageFields(contentType, data) {
+  const imageFieldsByType = {
+    caseStudy: ["heroImage", "gallery", "heroImageAlt"],
+    shopItem: ["mainImage", "mainImageAlt"],
+    blogPost: ["mainImage", "mainImageAlt"],
+  };
+
+  const blockedFields = imageFieldsByType[contentType] ?? [];
+  const present = blockedFields.filter((field) => data?.[field] !== undefined && data?.[field] !== null);
+
+  if (present.length > 0) {
+    console.warn(
+      `[text-only import] Ignoring media fields for ${contentType}: ${present.join(", ")}. Upload images manually in Sanity Studio.`,
+    );
+  }
 }
 
 function normalizeBodyOutlineEntry(entry) {
@@ -242,7 +260,6 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
     }
 
     return {
-      _id: `caseStudy.${slug}`,
       _type: "caseStudy",
       name,
       slug: { _type: "slug", current: slug },
@@ -255,7 +272,6 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
       accent: String(data?.accent ?? "").trim() || "from-teal-500 to-emerald-500",
       published: data?.published !== false,
       featuredRank: typeof data?.featuredRank === "number" ? data.featuredRank : 999,
-      heroImageAlt: String(data?.heroImageAlt ?? "").trim() || undefined,
       client: String(data?.client ?? "").trim() || undefined,
       year: String(data?.year ?? "").trim() || undefined,
       duration: String(data?.duration ?? "").trim() || undefined,
@@ -281,7 +297,6 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
     }
 
     return {
-      _id: `shopItem.${slug}`,
       _type: "shopItem",
       name,
       slug: { _type: "slug", current: slug },
@@ -304,10 +319,13 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
       summary: String(data?.summary ?? "").trim(),
       audience: String(data?.audience ?? "").trim(),
       previewVariant: String(data?.previewVariant ?? "marketing").trim() || "marketing",
+      features: normalizeStringArray(data?.features),
       includes: normalizeStringArray(data?.includes),
+      inScope: normalizeStringArray(data?.inScope),
+      outOfScope: normalizeStringArray(data?.outOfScope),
+      enhancementPlan: normalizeStringArray(data?.enhancementPlan),
       stack: normalizeStringArray(data?.stack),
       highlights: normalizeBuildArray(data?.highlights),
-      mainImageAlt: String(data?.mainImageAlt ?? "").trim() || undefined,
     };
   }
 
@@ -333,7 +351,6 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
     }
 
     return {
-      _id: `blogPost.${slug}`,
       _type: "blogPost",
       title,
       slug: { _type: "slug", current: slug },
@@ -354,7 +371,6 @@ async function buildDocumentPayload(client, contentType, data, dryRun) {
         noIndex: data?.seo?.noIndex === true,
       },
       comments: Array.isArray(data?.comments) ? data.comments : undefined,
-      mainImageAlt: String(data?.mainImageAlt ?? data?.title ?? "").trim() || undefined,
       category: String(data?.categoryRefOrLabel ?? data?.category ?? "").trim() || undefined,
       author: data?.author && typeof data.author === "object"
         ? {
@@ -387,6 +403,8 @@ async function importSingleFile(client, absoluteFilePath, cliType, dryRun) {
     );
   }
 
+  warnAndStripImageFields(contentType, data);
+
   const document = await buildDocumentPayload(client, contentType, data, dryRun);
 
   if (dryRun) {
@@ -395,8 +413,26 @@ async function importSingleFile(client, absoluteFilePath, cliType, dryRun) {
     return;
   }
 
-  const result = await client.createOrReplace(document);
+  const result = await upsertDocumentBySlug(client, contentType, document);
   console.log(`Imported ${contentType} -> ${result._id} (${path.basename(absoluteFilePath)})`);
+}
+
+async function upsertDocumentBySlug(client, contentType, document) {
+  const slug = String(document?.slug?.current ?? "").trim();
+  if (!slug) {
+    throw new Error(`${contentType} requires slug.current.`);
+  }
+
+  const existing = await client.fetch(
+    `*[_type == $contentType && slug.current == $slug][0]{_id}`,
+    { contentType, slug },
+  );
+
+  if (existing?._id) {
+    return client.createOrReplace({ ...document, _id: existing._id });
+  }
+
+  return client.create({ ...document, _id: randomUUID() });
 }
 
 async function collectImportFiles(targetDirectory) {

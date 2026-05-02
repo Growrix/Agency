@@ -2,7 +2,7 @@
 document_type: cms-content-template
 content_type: shop-item
 status: active
-last_updated: 2026-04-30
+last_updated: 2026-05-02
 ---
 
 # Shop Item Content Template
@@ -16,8 +16,11 @@ last_updated: 2026-04-30
 - Keep names specific and commercially clear.
 - Keep slugs lowercase and hyphen-separated.
 - Use real preview links when available.
-- Main image should be a real screenshot of the product/template, not a random stock image.
+- Do not include image fields in automation payloads. Upload product screenshots manually in Sanity Studio.
 - Highlights should be short key-value proof points.
+- Explain what is included and out of scope so buyers understand the exact template boundary.
+- Add a short scaling/enhancement roadmap with a CTA to contact for custom expansion.
+- Keep sections non-duplicative: `features` should describe capability value, while `includes` should list concrete deliverables/files.
 
 ## Copy Template
 
@@ -43,6 +46,10 @@ salesCount: "34"
 teaser: "A premium website template for interior design businesses that want a modern, elegant, trust-building online presence."
 summary: "Built for interior design studios, boutique agencies, and premium service businesses that need a polished website with strong visual storytelling, service sections, portfolio-ready blocks, and conversion-focused contact flows."
 audience: "Interior design studios, boutique agencies, premium home styling brands"
+features:
+  - "Conversion-focused hero with trust signals and clear CTA flow"
+  - "Modular service and portfolio sections for quick content updates"
+  - "Mobile-first layout tuned for premium visual storytelling"
 previewVariant: "marketing"
 includes:
   - "Homepage design"
@@ -51,6 +58,18 @@ includes:
   - "Portfolio/gallery blocks"
   - "Contact and lead form"
   - "CMS setup guidance"
+inScope:
+  - "Deploying the purchased template with current built-in pages"
+  - "Baseline CMS wiring and launch-ready configuration"
+  - "Minor copy/content entry updates during setup"
+outOfScope:
+  - "Adding net-new feature modules outside current template scope"
+  - "Large-scale redesign and additional custom page systems"
+  - "Complex automation or third-party workflow engineering"
+enhancementPlan:
+  - "Lead-routing automation with CRM and notification workflows"
+  - "A/B testing roadmap for hero and CTA conversion lifts"
+  - "Custom growth pages and scale-ready content architecture"
 stack:
   - "Next.js"
   - "TypeScript"
@@ -64,9 +83,6 @@ highlights:
     value: "2 hrs"
   - label: "Best for"
     value: "Luxury brands"
-mainImage:
-  instruction: "Upload a real homepage or full-screen template screenshot in Sanity"
-mainImageAlt: "Homepage screenshot of the Three Circles interior designer website template"
 ```
 
 ## Field Intent Guide
@@ -87,12 +103,14 @@ mainImageAlt: "Homepage screenshot of the Three Circles interior designer websit
 - `teaser`: First short explanation on slug page.
 - `summary`: Broader product overview.
 - `audience`: Used in the `Ideal for` panel.
+- `features`: Clear feature-level explanation for buyer clarity.
 - `previewVariant`: Fallback mock preview only when no real image exists.
 - `includes`: Actual deliverables.
+- `inScope`: Explicitly included within template price.
+- `outOfScope`: Explicitly excluded from template price.
+- `enhancementPlan`: What can be added in a custom scaling phase.
 - `stack`: Tech/platform list.
 - `highlights`: Small facts shown in the `At a glance` section.
-- `mainImage`: Real visual preview.
-- `mainImageAlt`: Accessibility fallback text.
 
 ## AI Prompt Hint
 Use this instruction when asking an AI to generate a new shop item:

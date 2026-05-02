@@ -2,7 +2,7 @@
 document_type: cms-content-template
 content_type: case-study
 status: active
-last_updated: 2026-04-30
+last_updated: 2026-05-02
 ---
 
 # Case Study Content Template
@@ -15,9 +15,9 @@ last_updated: 2026-04-30
 - Project name should match how the brand is known publicly.
 - Summary should explain the new site/product that was delivered and why it mattered.
 - Metric should be a strong headline proof point.
-- Keep challenge and strategy concise; focus more on build, integrations, SEO, and standards.
+- Do not include image fields in automation payloads. Image uploads are manual in Sanity Studio.
+- Keep strategy concise and focus strongly on build, integrations, scope clarity, and measurable outcomes.
 - Delivery story and process should read like a short execution narrative, not a long essay.
-- Gallery images should be real product or project screenshots.
 
 ## Copy Template
 
@@ -34,9 +34,6 @@ metric: "+37% more qualified inquiries in the first 60 days"
 accent: "from-stone-500 to-amber-700"
 published: true
 featuredRank: 12
-heroImage:
-  instruction: "Upload a real homepage or branded hero screenshot"
-heroImageAlt: "Homepage view of the Three Circles interior design company website"
 client: "Three Circles"
 year: "2026"
 duration: "4 weeks"
@@ -46,9 +43,6 @@ process:
   - "Discovery, KPI alignment, and content model planning"
   - "UX and visual system design with reusable components"
   - "Production build, integrations, QA, and launch hardening"
-challenge:
-  - "The previous website looked generic and did not reflect the premium nature of the brand."
-  - "The inquiry path was weak and did not support trust-building."
 strategy:
   - "Redesigned the content hierarchy around trust, service clarity, and featured work."
   - "Built a more premium visual system with stronger spacing, typography, and CTA rhythm."
@@ -82,8 +76,6 @@ results:
   - label: "Bounce rate"
     value: "-18%"
     hint: "Homepage improvement"
-gallery:
-  - instruction: "Upload 2-5 real supporting screenshots with proper alt text"
 ```
 
 ## Field Intent Guide
@@ -96,18 +88,15 @@ gallery:
 - `summary`: Short overview used in cards and detail page intro.
 - `metric`: Headline proof point.
 - `accent`: Gradient styling pair.
-- `heroImage`: Main portfolio image.
 - `client`, `year`, `duration`, `team`: Quick project context.
 - `deliveryStory`: One short paragraph about how the new site was delivered.
 - `process`: 3-5 concise steps from discovery to launch.
-- `challenge`: What problem existed before the work.
 - `strategy`: What decisions or changes were made.
 - `integrations`: External systems used in delivery.
 - `seo`: Search visibility work included in scope.
 - `standards`: Quality and engineering standards followed.
 - `build`: Key implementation facts.
 - `results`: Measurable outcome entries.
-- `gallery`: Supporting visuals.
 
 ## AI Prompt Hint
 ```text

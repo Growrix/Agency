@@ -72,8 +72,12 @@ type SanityShopItem = {
   teaser?: string;
   summary?: string;
   audience?: string;
+  features?: string[];
   previewVariant?: ManagedProductRecord["previewVariant"];
   includes?: string[];
+  inScope?: string[];
+  outOfScope?: string[];
+  enhancementPlan?: string[];
   stack?: string[];
   highlights?: SanityKeyValue[];
   image?: SanityImage;
@@ -152,8 +156,12 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   teaser,
   summary,
   audience,
+  "features": coalesce(features, []),
   previewVariant,
   "includes": coalesce(includes, []),
+  "inScope": coalesce(inScope, []),
+  "outOfScope": coalesce(outOfScope, []),
+  "enhancementPlan": coalesce(enhancementPlan, []),
   "stack": coalesce(stack, []),
   "highlights": coalesce(highlights, []),
   "image": {
@@ -320,8 +328,12 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     teaser: normalizeString(item.teaser),
     summary: normalizeString(item.summary),
     audience: normalizeString(item.audience),
+    features: normalizeStringArray(item.features),
     previewVariant: item.previewVariant ?? "marketing",
     includes: normalizeStringArray(item.includes),
+    inScope: normalizeStringArray(item.inScope),
+    outOfScope: normalizeStringArray(item.outOfScope),
+    enhancementPlan: normalizeStringArray(item.enhancementPlan),
     stack: normalizeStringArray(item.stack),
     highlights,
     image: normalizeImage(item.image, null),

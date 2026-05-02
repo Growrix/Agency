@@ -31,5 +31,6 @@ npm --prefix web run cms:import -- --dir ./web/content-import/inbox
 
 ## Notes
 - Include `contentType` inside file payload (`caseStudy`, `blogPost`, or `shopItem`) or pass `--type`.
+- Import automation is text-only by policy; image/media fields in payloads are ignored.
 - Image uploads remain manual in Sanity Studio as planned.
 - Requires `SANITY_API_TOKEN` in your terminal.

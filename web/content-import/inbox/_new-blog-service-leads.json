@@ -33,11 +33,6 @@
     "canonicalUrl": "https://www.growrixos.com/blog/why-service-businesses-lose-leads-before-first-contact",
     "noIndex": false
   },
-  "mainImage": {
-    "_type": "image",
-    "asset": { "_type": "reference", "_ref": "image-5ed33f660093497de39c9ca1a3beb0b8a1d3ee60-640x640-jpg" }
-  },
-  "mainImageAlt": "Service business owner reviewing website analytics showing high bounce rate",
   "category": "Operations",
   "author": {
     "_type": "object",

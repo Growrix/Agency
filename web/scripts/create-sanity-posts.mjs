@@ -28,7 +28,7 @@ const client = createClient({
   token,
 });
 
-// ── Shop Item: Legal Practice Website ────────────────────────────────────────
+// ── Shop Item: Legal Practice Website (text-only payload) ───────────────────
 const shopItem = {
   _id: randomUUID(),
   _type: "shopItem",
@@ -51,6 +51,11 @@ const shopItem = {
   teaser: "A trust-first website template for law firms and solo practitioners who need a premium digital presence that converts prospects into consultations.",
   summary: "Designed for law firms, barristers, and solo legal professionals who need to establish credibility fast, communicate practice areas clearly, and route qualified leads into a consultation booking path.",
   audience: "Law firms, solo practitioners, barristers, legal consultants",
+  features: [
+    "Conversion-first homepage with trust proof and legal positioning",
+    "Practice-area architecture built for clarity and decision confidence",
+    "Mobile-first inquiry flow that routes serious prospects faster",
+  ],
   previewVariant: "marketing",
   includes: [
     "Firm homepage with credibility section",
@@ -61,21 +66,30 @@ const shopItem = {
     "Contact and intake form",
     "CMS setup for content updates",
   ],
+  inScope: [
+    "Template deployment with existing pages and baseline sections",
+    "Core CMS wiring and launch-ready configuration",
+    "Minor content entry updates during setup",
+  ],
+  outOfScope: [
+    "Net-new feature modules beyond the existing template",
+    "Major visual redesign and expanded information architecture",
+    "Advanced automation and deep third-party workflow engineering",
+  ],
+  enhancementPlan: [
+    "Conversion experiments for hero, CTA rhythm, and inquiry routing",
+    "CRM automation for lead qualification and follow-up",
+    "Expanded practice pages, authority content, and growth funnel modules",
+  ],
   stack: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS", "Vercel"],
   highlights: [
     { _type: "object", _key: "h1", label: "Pages", value: "16" },
     { _type: "object", _key: "h2", label: "Setup time", value: "2-3 hrs" },
     { _type: "object", _key: "h3", label: "Best for", value: "Boutique law firms" },
   ],
-  mainImage: {
-    _type: "image",
-    asset: { _type: "reference", _ref: "image-12e1e4729b4f72aeda25544b1db88e0a8cbdde42-1871x907-png" },
-    alt: "Legal Practice Website template homepage",
-  },
-  mainImageAlt: "Legal Practice Website template homepage showing firm credibility and practice areas",
 };
 
-// ── Case Study: Nourish Wellness Clinic ──────────────────────────────────────
+// ── Case Study: Nourish Wellness Clinic (text-only payload) ─────────────────
 const caseStudy = {
   _id: randomUUID(),
   _type: "caseStudy",
@@ -89,12 +103,6 @@ const caseStudy = {
   accent: "from-emerald-500 to-teal-600",
   published: true,
   featuredRank: 5,
-  heroImage: {
-    _type: "image",
-    asset: { _type: "reference", _ref: "image-4b37ea8f4b3a174b9c6f7df890c36c6b74fa6011-1237x600-png" },
-    alt: "Nourish Wellness Clinic website homepage",
-  },
-  heroImageAlt: "Nourish Wellness Clinic website homepage",
   client: "Nourish Wellness Clinic",
   year: "2026",
   duration: "6 weeks",
@@ -104,10 +112,6 @@ const caseStudy = {
     "Patient journey mapping and conversion gap analysis",
     "Content hierarchy and visual trust system design",
     "Build, booking integration, accessibility QA, and launch",
-  ],
-  challenge: [
-    "The previous site looked clinical and impersonal, creating doubt rather than confidence.",
-    "The booking path required too many steps and offered no reassurance along the way.",
   ],
   strategy: [
     "Led with practitioner credibility, treatment outcomes, and patient language.",
@@ -168,11 +172,6 @@ const blogPost = {
     { _type: "block", _key: "b13", style: "h2", markDefs: [], children: [{ _type: "span", _key: "s13", marks: [], text: "The compounding effect" }] },
     { _type: "block", _key: "b14", style: "normal", markDefs: [], children: [{ _type: "span", _key: "s14", marks: [], text: "Each of these changes is small on its own. Together they close the trust gap and give qualified visitors the confidence to take the next step before they second-guess themselves." }] },
   ],
-  mainImage: {
-    _type: "image",
-    asset: { _type: "reference", _ref: "image-5ed33f660093497de39c9ca1a3beb0b8a1d3ee60-640x640-jpg" },
-  },
-  mainImageAlt: "Service business owner reviewing website analytics showing high bounce rate",
   category: "Operations",
   author: {
     _type: "object",
