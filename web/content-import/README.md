@@ -34,3 +34,14 @@ npm --prefix web run cms:import -- --dir ./web/content-import/inbox
 - Import automation is text-only by policy; image/media fields in payloads are ignored.
 - Image uploads remain manual in Sanity Studio as planned.
 - Requires `SANITY_API_TOKEN` in your terminal.
+
+## Fix missing Studio array keys (one-time maintenance)
+
+If Sanity Studio shows `Missing keys` for object arrays like shop `highlights`, run:
+
+```bash
+npm --prefix web run cms:fix-array-keys:dry
+npm --prefix web run cms:fix-array-keys
+```
+
+This backfills `_key` values for object-array items in `shopItem` and `caseStudy` documents.

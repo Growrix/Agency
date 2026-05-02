@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowUpRightIcon,
+  ChartBarSquareIcon,
   LinkIcon,
   MagnifyingGlassIcon,
   QueueListIcon,
@@ -245,31 +246,49 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             />
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {(detail.integrations?.length ?? 0) > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Integrations shipped</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                <Card className="p-6 border-primary/20 bg-primary/[0.04]">
+                  <div className="flex items-center gap-2 text-primary">
+                    <LinkIcon className="size-4" />
+                    <p className="font-mono text-[11px] uppercase tracking-wider">Integrations shipped</p>
+                  </div>
+                  <h3 className="mt-4 font-display text-xl tracking-tight text-balance">Connected systems in this delivery</h3>
+                  <ul className="mt-4 space-y-2 text-sm leading-6 text-text-muted">
                     {detail.integrations?.map((integration, index) => (
-                      <li key={`${integration}-${index}`}>• {integration}</li>
+                      <li key={`${integration}-${index}`} className="rounded-[10px] border border-border/70 bg-surface/70 px-3 py-2">
+                        {integration}
+                      </li>
                     ))}
                   </ul>
                 </Card>
               )}
               {detail.build.length > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Build facts</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                <Card className="p-6 border-primary/20 bg-primary/[0.04]">
+                  <div className="flex items-center gap-2 text-primary">
+                    <WrenchScrewdriverIcon className="size-4" />
+                    <p className="font-mono text-[11px] uppercase tracking-wider">Build facts</p>
+                  </div>
+                  <h3 className="mt-4 font-display text-xl tracking-tight text-balance">What was built across scope</h3>
+                  <ul className="mt-4 space-y-2 text-sm leading-6 text-text-muted">
                     {detail.build.map((item) => (
-                      <li key={`${item.label}-${item.value}`}>{item.label}: {item.value}</li>
+                      <li key={`${item.label}-${item.value}`} className="rounded-[10px] border border-border/70 bg-surface/70 px-3 py-2">
+                        <span className="font-medium text-text">{item.label}:</span> {item.value}
+                      </li>
                     ))}
                   </ul>
                 </Card>
               )}
               {detail.results.length > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Measured outcomes</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                <Card className="p-6 border-primary/20 bg-primary/[0.04]">
+                  <div className="flex items-center gap-2 text-primary">
+                    <ChartBarSquareIcon className="size-4" />
+                    <p className="font-mono text-[11px] uppercase tracking-wider">Measured outcomes</p>
+                  </div>
+                  <h3 className="mt-4 font-display text-xl tracking-tight text-balance">Performance signals after delivery</h3>
+                  <ul className="mt-4 space-y-2 text-sm leading-6 text-text-muted">
                     {detail.results.map((item) => (
-                      <li key={`${item.label}-${item.value}`}>{item.label}: {item.value}</li>
+                      <li key={`${item.label}-${item.value}`} className="rounded-[10px] border border-border/70 bg-surface/70 px-3 py-2">
+                        <span className="font-medium text-text">{item.label}:</span> {item.value}
+                      </li>
                     ))}
                   </ul>
                 </Card>

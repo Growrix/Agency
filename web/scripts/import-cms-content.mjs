@@ -68,12 +68,19 @@ function normalizeBuildArray(input) {
   if (!Array.isArray(input)) return [];
 
   return input
-    .map((item) => ({
-      _type: "object",
-      label: String(item?.label ?? "").trim(),
-      value: String(item?.value ?? "").trim(),
-      hint: String(item?.hint ?? "").trim() || undefined,
-    }))
+    .map((item) => {
+      const label = String(item?.label ?? "").trim();
+      const value = String(item?.value ?? "").trim();
+      const providedKey = String(item?._key ?? "").trim();
+
+      return {
+        _type: "object",
+        _key: providedKey || randomUUID().replace(/-/g, "").slice(0, 12),
+        label,
+        value,
+        hint: String(item?.hint ?? "").trim() || undefined,
+      };
+    })
     .filter((item) => item.label && item.value);
 }
 
@@ -81,12 +88,19 @@ function normalizeResultsArray(input) {
   if (!Array.isArray(input)) return [];
 
   return input
-    .map((item) => ({
-      _type: "object",
-      value: String(item?.value ?? "").trim(),
-      label: String(item?.label ?? "").trim(),
-      hint: String(item?.hint ?? "").trim() || undefined,
-    }))
+    .map((item) => {
+      const label = String(item?.label ?? "").trim();
+      const value = String(item?.value ?? "").trim();
+      const providedKey = String(item?._key ?? "").trim();
+
+      return {
+        _type: "object",
+        _key: providedKey || randomUUID().replace(/-/g, "").slice(0, 12),
+        value,
+        label,
+        hint: String(item?.hint ?? "").trim() || undefined,
+      };
+    })
     .filter((item) => item.value && item.label);
 }
 

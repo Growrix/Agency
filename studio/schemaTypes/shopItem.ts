@@ -165,7 +165,7 @@ export const shopItemType = defineType({
       title: "Feature Descriptions [Example: Conversion-focused hero with trust proof and CTA logic]",
       type: "array",
       of: [{ type: "string" }],
-      description: "Short, buyer-facing feature explanations. One per line.",
+      description: "Primary buyer-facing details list. Aim for 8-14 concrete, non-duplicative bullets (Envato-style depth) covering structure, conversion flow, CMS editing, responsive behavior, SEO/performance baseline, and launch readiness.",
       group: "content",
       validation: (rule) => rule.min(1),
     }),

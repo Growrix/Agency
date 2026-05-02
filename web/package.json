@@ -17,7 +17,9 @@
     "test:release": "npm run test && npm run build && npm run test:e2e",
     "cms:import": "node ./scripts/import-cms-content.mjs",
     "cms:import:inbox": "node ./scripts/import-cms-content.mjs",
-    "cms:import:inbox:dry": "node ./scripts/import-cms-content.mjs --dry-run"
+    "cms:import:inbox:dry": "node ./scripts/import-cms-content.mjs --dry-run",
+    "cms:fix-array-keys": "node ./scripts/fix-sanity-array-keys.mjs",
+    "cms:fix-array-keys:dry": "node ./scripts/fix-sanity-array-keys.mjs --dry-run"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.11.0",

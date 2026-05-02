@@ -131,13 +131,14 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               {features.length > 0 ? (
                 <div>
                   <h2 className="font-display text-xl font-semibold tracking-tight">Key features</h2>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <ul className="mt-4 space-y-2">
                     {features.map((item) => (
-                      <div key={item} className="rounded-2xl border border-border bg-inset/40 px-4 py-4 text-sm leading-6 text-text-muted">
+                      <li key={item} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
                         {item}
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               ) : null}
 

@@ -2,7 +2,7 @@
 document_type: cms-content-template
 content_type: shop-item
 status: active
-last_updated: 2026-05-02
+last_updated: 2026-05-03
 ---
 
 # Shop Item Content Template
@@ -18,9 +18,10 @@ last_updated: 2026-05-02
 - Use real preview links when available.
 - Do not include image fields in automation payloads. Upload product screenshots manually in Sanity Studio.
 - Highlights should be short key-value proof points.
+- Treat `features` as the primary Envato-style detail area: aim for 8-14 concrete bullets spanning UI sections, conversion flow, CMS editing, responsiveness, performance, SEO baseline, and operational readiness.
 - Explain what is included and out of scope so buyers understand the exact template boundary.
 - Add a short scaling/enhancement roadmap with a CTA to contact for custom expansion.
-- Keep sections non-duplicative: `features` should describe capability value, while `includes` should list concrete deliverables/files.
+- Keep sections non-duplicative: `features` should describe capability and outcomes, while `includes` should list concrete deliverables/files.
 
 ## Copy Template
 
@@ -50,6 +51,12 @@ features:
   - "Conversion-focused hero with trust signals and clear CTA flow"
   - "Modular service and portfolio sections for quick content updates"
   - "Mobile-first layout tuned for premium visual storytelling"
+  - "Sticky conversion CTA patterns across service and proof sections"
+  - "Structured service blocks built for fast CMS editing"
+  - "SEO-ready heading hierarchy and metadata-friendly content flow"
+  - "Performance-safe media placement and layout stability defaults"
+  - "Reusable testimonial and social-proof modules"
+  - "Contact flow tuned for high-intent visitor completion"
 previewVariant: "marketing"
 includes:
   - "Homepage design"
@@ -103,7 +110,7 @@ highlights:
 - `teaser`: First short explanation on slug page.
 - `summary`: Broader product overview.
 - `audience`: Used in the `Ideal for` panel.
-- `features`: Clear feature-level explanation for buyer clarity.
+- `features`: Primary buyer-facing details list (Envato-style depth). Cover what users get in real usage, not just design adjectives.
 - `previewVariant`: Fallback mock preview only when no real image exists.
 - `includes`: Actual deliverables.
 - `inScope`: Explicitly included within template price.
@@ -117,6 +124,8 @@ Use this instruction when asking an AI to generate a new shop item:
 
 ```text
 Create a complete Growrix OS shop item entry using the project template in DOC/PROJECT PLAN/shop-item-content-template.md. Output all fields with realistic commercial copy, clean slugs, 3 highlights, 5-7 includes, 4-6 stack items, a live preview URL, and an embedded preview URL only if the preview domain is iframe-safe.
+
+For the `features` field, produce 8-14 concrete, non-duplicative bullets in an Envato-like detail style that cover structure, conversion behavior, CMS editing experience, responsive behavior, SEO/performance baseline, and launch readiness.
 ```
 
 ## Import Automation (Optional)
