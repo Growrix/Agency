@@ -7,11 +7,11 @@ import { NextRequest, NextResponse } from "next/server";
  * Per cms-content-operations-frontend.md Slice 3 deliverable.
  */
 const REVALIDATION_MAP: Record<string, string[]> = {
-  blogPost: ["/blog", "/blog/[slug]"],
-  caseStudy: ["/portfolio", "/portfolio/[slug]"],
-  shopItem: ["/shop", "/shop/[slug]"],
+  blogPost: ["/", "/blog", "/blog/[slug]"],
+  caseStudy: ["/", "/portfolio", "/portfolio/[slug]"],
+  shopItem: ["/", "/shop", "/shop/[slug]"],
   shopCategory: ["/shop"],
-  servicePage: ["/services", "/services/[slug]"],
+  servicePage: ["/", "/services", "/services/[slug]"],
   faqItem: ["/faq", "/services", "/"],
   homePage: ["/"],
   aboutPage: ["/about"],
