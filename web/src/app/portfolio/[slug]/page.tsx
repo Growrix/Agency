@@ -163,7 +163,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               description="A sharper look at execution context, process phases, and the quality controls applied during delivery."
             />
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              <Card className="p-6 lg:col-span-1 border-primary/30 bg-primary/[0.05]">
+              <Card className="p-6 lg:col-span-1 border-primary/30 bg-primary/5">
                 <div className="flex items-center gap-2 text-primary">
                   <SparklesIcon className="size-4" />
                   <p className="font-mono text-[11px] uppercase tracking-wider">Execution story</p>
@@ -246,7 +246,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             />
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {(detail.integrations?.length ?? 0) > 0 && (
-                <Card className="p-6 border-primary/20 bg-primary/[0.04]">
+                <Card className="p-6 border-primary/20 bg-primary/4">
                   <div className="flex items-center gap-2 text-primary">
                     <LinkIcon className="size-4" />
                     <p className="font-mono text-[11px] uppercase tracking-wider">Integrations shipped</p>
@@ -262,7 +262,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 </Card>
               )}
               {detail.build.length > 0 && (
-                <Card className="p-6 border-primary/20 bg-primary/[0.04]">
+                <Card className="p-6 border-primary/20 bg-primary/4">
                   <div className="flex items-center gap-2 text-primary">
                     <WrenchScrewdriverIcon className="size-4" />
                     <p className="font-mono text-[11px] uppercase tracking-wider">Build facts</p>
@@ -278,7 +278,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 </Card>
               )}
               {detail.results.length > 0 && (
-                <Card className="p-6 border-primary/20 bg-primary/[0.04]">
+                <Card className="p-6 border-primary/20 bg-primary/4">
                   <div className="flex items-center gap-2 text-primary">
                     <ChartBarSquareIcon className="size-4" />
                     <p className="font-mono text-[11px] uppercase tracking-wider">Measured outcomes</p>
@@ -325,7 +325,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <SectionHeading eyebrow="Build breakdown" title="Stack and modules delivered." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {detail.build.map((b) => (
-              <Card key={b.label} className="p-5 border-primary/20 bg-primary/[0.04]">
+              <Card key={b.label} className="p-5 border-primary/20 bg-primary/4">
                 <div className="flex items-center gap-2 text-primary">
                   <WrenchScrewdriverIcon className="size-4" />
                   <p className="font-mono text-[11px] uppercase tracking-wider">{b.label}</p>
