@@ -18,7 +18,7 @@ function buildDeskStructure(S: Parameters<NonNullable<Parameters<typeof structur
   return S.list()
     .title("Content")
     .items([
-      S.listItem().title("About Page").child(S.documentTypeList("aboutPage").title("About Page")),
+      S.listItem().title("About Team Section").child(S.documentTypeList("aboutPage").title("About Team Section")),
       S.divider(),
       S.listItem()
         .title("Blog")
