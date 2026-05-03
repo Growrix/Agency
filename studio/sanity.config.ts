@@ -4,6 +4,7 @@ import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemaTypes";
 
 const DESK_GROUPED_TYPES = new Set([
+  "aboutPage",
   "author",
   "category",
   "blogPost",
@@ -17,6 +18,8 @@ function buildDeskStructure(S: Parameters<NonNullable<Parameters<typeof structur
   return S.list()
     .title("Content")
     .items([
+      S.listItem().title("About Page").child(S.documentTypeList("aboutPage").title("About Page")),
+      S.divider(),
       S.listItem()
         .title("Blog")
         .child(

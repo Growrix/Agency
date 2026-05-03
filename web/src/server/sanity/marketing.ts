@@ -106,6 +106,15 @@ type SanityAboutPage = {
   founderCards?: SanityRichItem[];
   processEyebrow?: string;
   processTitle?: string;
+  teamEyebrow?: string;
+  teamTitle?: string;
+  teamDescription?: string;
+  teamMembers?: Array<{
+    name?: string;
+    role?: string;
+    strength?: string;
+    profileImage?: { url?: string; alt?: string };
+  }>;
   beyondEyebrow?: string;
   beyondTitle?: string;
   beyondDescription?: string;
@@ -201,6 +210,20 @@ export type AboutPageContent = {
   process?: {
     eyebrow?: string;
     title?: string;
+  };
+  team?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    members?: Array<{
+      name: string;
+      role: string;
+      strength: string;
+      image?: {
+        src: string;
+        alt: string;
+      };
+    }>;
   };
   beyond?: {
     eyebrow?: string;
@@ -304,6 +327,18 @@ const SANITY_ABOUT_PAGE_QUERY = `*[
   "founderCards": coalesce(founderCards, []),
   processEyebrow,
   processTitle,
+  teamEyebrow,
+  teamTitle,
+  teamDescription,
+  "teamMembers": coalesce(teamMembers, [])[]{
+    name,
+    role,
+    strength,
+    "profileImage": {
+      "url": profileImage.asset->url,
+      "alt": coalesce(profileImage.alt, name)
+    }
+  },
   beyondEyebrow,
   beyondTitle,
   beyondDescription,
@@ -522,6 +557,32 @@ export async function getSanityAboutPageContent(options: SanityQueryOptions = {}
     description: item.description,
   }));
   const founderCards = normalizeRichItems(page.founderCards);
+  const teamMembers = (page.teamMembers ?? [])
+    .map((member) => {
+      const name = normalizeString(member.name);
+      const role = normalizeString(member.role);
+      const strength = normalizeString(member.strength);
+
+      if (!name || !role || !strength) {
+        return null;
+      }
+
+      const imageUrl = normalizeString(member.profileImage?.url);
+      const imageAlt = normalizeString(member.profileImage?.alt) || `${name} profile image`;
+
+      return {
+        name,
+        role,
+        strength,
+        image: imageUrl
+          ? {
+              src: imageUrl,
+              alt: imageAlt,
+            }
+          : undefined,
+      };
+    })
+    .filter((member): member is NonNullable<typeof member> => member !== null);
 
   return {
     heroTitle: normalizeString(page.heroTitle) || undefined,
@@ -537,6 +598,12 @@ export async function getSanityAboutPageContent(options: SanityQueryOptions = {}
     process: {
       eyebrow: normalizeString(page.processEyebrow) || undefined,
       title: normalizeString(page.processTitle) || undefined,
+    },
+    team: {
+      eyebrow: normalizeString(page.teamEyebrow) || undefined,
+      title: normalizeString(page.teamTitle) || undefined,
+      description: normalizeString(page.teamDescription) || undefined,
+      members: teamMembers.length > 0 ? teamMembers : undefined,
     },
     beyond: {
       eyebrow: normalizeString(page.beyondEyebrow) || undefined,

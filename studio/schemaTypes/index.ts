@@ -1,4 +1,5 @@
 import { authorType } from "./author";
+import { aboutPageType } from "./aboutPage";
 import { blogPostType } from "./blogPost";
 import { caseStudyType } from "./caseStudy";
 import { categoryType } from "./category";
@@ -9,6 +10,7 @@ import { shopItemType } from "./shopItem";
 import { siteSettingsType } from "./siteSettings";
 
 export const schemaTypes = [
+	aboutPageType,
 	authorType,
 	categoryType,
 	portfolioCategoryType,

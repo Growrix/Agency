@@ -35,6 +35,7 @@ Default local URL:
 Studio now includes schema coverage for:
 
 - Blog (`blogPost`, `author`, `category`)
+- About page (`aboutPage`)
 - Services (`servicePage`)
 - Portfolio (`caseStudy`)
 - Shop (`shopCategory`, `shopItem`)

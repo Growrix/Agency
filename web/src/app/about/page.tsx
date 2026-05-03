@@ -27,7 +27,17 @@ const TEAM = [
   { name: "Felix Aranha", role: "Engineering Lead", strength: "Designs systems that survive feature growth." },
   { name: "Yuna Park", role: "Design Lead", strength: "Builds visual systems that feel inevitable in retrospect." },
   { name: "Ravi Saini", role: "Systems & Integrations Lead", strength: "Brings automation and MCP work in where the main product needs it." },
-];
+] as const;
+
+type TeamMember = {
+  name: string;
+  role: string;
+  strength: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+};
 
 const PRINCIPLES = [
   { title: "Design discipline", description: "Tokens, typography, motion, and spacing decided once and used everywhere." },
@@ -64,6 +74,9 @@ export default async function AboutPage() {
         "Active in micro SaaS\u2014building products that generate revenue, not just code.",
       ];
   const philosophyItems = aboutContent?.philosophy?.items && aboutContent.philosophy.items.length > 0 ? aboutContent.philosophy.items : PHILOSOPHY;
+  const teamMembers: TeamMember[] = aboutContent?.team?.members && aboutContent.team.members.length > 0
+    ? aboutContent.team.members
+    : [...TEAM];
 
   return (
     <>
@@ -209,29 +222,34 @@ export default async function AboutPage() {
       <Section tone="inset">
         <Container>
           <SectionHeading
-            eyebrow="The team"
-            title="Senior, hands-on, and accountable."
-            description="No middlemen between you and the people doing the work."
+            eyebrow={aboutContent?.team?.eyebrow ?? "The team"}
+            title={aboutContent?.team?.title ?? "Senior, hands-on, and accountable."}
+            description={aboutContent?.team?.description ?? "No middlemen between you and the people doing the work."}
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {TEAM.map((m) => (
-              <Card key={m.name} hoverable>
-                <div className="relative size-14 overflow-hidden rounded-full border border-border">
-                  {TEAM_IMAGES[m.name] ? (
-                    <Image
-                      src={TEAM_IMAGES[m.name].src}
-                      alt={TEAM_IMAGES[m.name].alt}
-                      fill
-                      sizes="56px"
-                      className="object-cover"
-                    />
-                  ) : null}
-                </div>
-                <h3 className="mt-4 font-display text-lg tracking-tight">{m.name}</h3>
-                <p className="text-sm text-text-muted">{m.role}</p>
-                <p className="mt-3 text-sm leading-6">{m.strength}</p>
-              </Card>
-            ))}
+            {teamMembers.map((m) => {
+              const fallbackImage = TEAM_IMAGES[m.name];
+              const memberImage = m.image ?? fallbackImage;
+
+              return (
+                <Card key={m.name} hoverable>
+                  <div className="relative size-14 overflow-hidden rounded-full border border-border">
+                    {memberImage ? (
+                      <Image
+                        src={memberImage.src}
+                        alt={memberImage.alt}
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                    ) : null}
+                  </div>
+                  <h3 className="mt-4 font-display text-lg tracking-tight">{m.name}</h3>
+                  <p className="text-sm text-text-muted">{m.role}</p>
+                  <p className="mt-3 text-sm leading-6">{m.strength}</p>
+                </Card>
+              );
+            })}
           </div>
         </Container>
       </Section>
