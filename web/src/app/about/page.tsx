@@ -13,30 +13,13 @@ import { StatBlock } from "@/components/sections/StatBlock";
 import { HOME_STATS, HOME_STACK_MARQUEE, PROCESS_STEPS } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
-import { ABOUT_IMAGES, TEAM_IMAGES } from "@/lib/site-images";
+import { ABOUT_IMAGES } from "@/lib/site-images";
 import { getSanityAboutPageContent } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = {
   title: "About | Websites, SaaS, and Launch Systems Partner",
   description:
     "Learn how Growrix OS works, what it values, and how it delivers premium websites, SaaS products, mobile launch experiences, and ready websites.",
-};
-
-const TEAM = [
-  { name: "Mira Aldenberg", role: "Founder · Product & Strategy", strength: "Scopes the right problem before sizing the solution." },
-  { name: "Felix Aranha", role: "Engineering Lead", strength: "Designs systems that survive feature growth." },
-  { name: "Yuna Park", role: "Design Lead", strength: "Builds visual systems that feel inevitable in retrospect." },
-  { name: "Ravi Saini", role: "Systems & Integrations Lead", strength: "Brings automation and MCP work in where the main product needs it." },
-] as const;
-
-type TeamMember = {
-  name: string;
-  role: string;
-  strength: string;
-  image?: {
-    src: string;
-    alt: string;
-  };
 };
 
 const PRINCIPLES = [
@@ -74,9 +57,7 @@ export default async function AboutPage() {
         "Active in micro SaaS\u2014building products that generate revenue, not just code.",
       ];
   const philosophyItems = aboutContent?.philosophy?.items && aboutContent.philosophy.items.length > 0 ? aboutContent.philosophy.items : PHILOSOPHY;
-  const teamMembers: TeamMember[] = aboutContent?.team?.members && aboutContent.team.members.length > 0
-    ? aboutContent.team.members
-    : [...TEAM];
+  const teamMembers = aboutContent?.team?.members ?? [];
 
   return (
     <>
@@ -226,18 +207,15 @@ export default async function AboutPage() {
             title={aboutContent?.team?.title ?? "Senior, hands-on, and accountable."}
             description={aboutContent?.team?.description ?? "No middlemen between you and the people doing the work."}
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((m) => {
-              const fallbackImage = TEAM_IMAGES[m.name];
-              const memberImage = m.image ?? fallbackImage;
-
-              return (
+          {teamMembers.length > 0 && (
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {teamMembers.map((m) => (
                 <Card key={m.name} hoverable>
                   <div className="relative size-14 overflow-hidden rounded-full border border-border">
-                    {memberImage ? (
+                    {m.image ? (
                       <Image
-                        src={memberImage.src}
-                        alt={memberImage.alt}
+                        src={m.image.src}
+                        alt={m.image.alt}
                         fill
                         sizes="56px"
                         className="object-cover"
@@ -248,9 +226,9 @@ export default async function AboutPage() {
                   <p className="text-sm text-text-muted">{m.role}</p>
                   <p className="mt-3 text-sm leading-6">{m.strength}</p>
                 </Card>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
         </Container>
       </Section>
 
