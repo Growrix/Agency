@@ -8,7 +8,6 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
@@ -325,13 +324,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </Container>
       </Section>
-
-      <CTABand
-        eyebrow="Build something similar"
-        title={`Want a result like ${project.name}'s?`}
-        primary={{ label: "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}
-      />
     </>
   );
 }
