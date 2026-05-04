@@ -104,7 +104,7 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
 
       {activeIndex !== null && (
         <div
-          className="fixed inset-0 z-[120] bg-black/90 p-4 sm:p-8"
+          className="fixed inset-0 z-120 bg-black/90 p-4 sm:p-8"
           role="dialog"
           aria-modal="true"
           aria-label="Image preview"
