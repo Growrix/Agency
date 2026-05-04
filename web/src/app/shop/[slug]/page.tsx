@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowUpRightIcon, ShoppingBagIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
+import { PreviewableImageFrame } from "@/components/media/PreviewableImageFrame";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
 import { getCheckoutHref } from "@/lib/shop";
@@ -92,16 +92,11 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     />
                   </div>
                 ) : product.image ? (
-                  <div className="relative aspect-16/10 min-w-0 bg-inset">
-                    <Image
-                      src={product.image.src}
-                      alt={product.image.alt}
-                      fill
-                      sizes="(min-width: 1280px) 70vw, (min-width: 1024px) 60vw, 100vw"
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
+                  <PreviewableImageFrame
+                    src={product.image.src}
+                    alt={product.image.alt}
+                    sizes="(min-width: 1280px) 70vw, (min-width: 1024px) 60vw, 100vw"
+                  />
                 ) : (
                   <ProductPreviewSurface variant={product.previewVariant} />
                 )}
@@ -131,14 +126,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               {features.length > 0 ? (
                 <div>
                   <h2 className="font-display text-xl font-semibold tracking-tight">Key features</h2>
-                  <ul className="mt-4 space-y-2">
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {features.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
-                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <div key={item} className="rounded-2xl border border-border bg-inset/40 px-4 py-4 text-sm leading-6 text-text-muted">
                         {item}
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               ) : null}
 

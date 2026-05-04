@@ -5,7 +5,7 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-05-03
+last_audit_date: 2026-05-02
 current_state:
   repo_branch_audited: BOT
   frontend_shell: done
@@ -61,10 +61,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
-  - identified and fixed stale production homepage catalog cards after Sanity deletions by correcting webhook revalidation coverage: `shopItem`, `caseStudy`, `blogPost`, and `servicePage` now revalidate `/` in addition to their detail/index routes so home sections invalidate alongside shop/portfolio/blog/service updates
-  - removed remaining Tailwind canonical utility warnings in portfolio slug/card surfaces by normalizing alpha and spacing utility syntax (`bg-primary/5`, `bg-primary/4`, `min-h-52.5`), then revalidated lint, typecheck, unit/integration tests, production build, and targeted cross-device portfolio E2E to restore zero-warning gate expectations
-  - resolved Sanity Studio missing-key edit blockers for object-array fields by adding importer `_key` generation, shipping a one-time maintenance script (`cms:fix-array-keys`) for existing `shopItem`/`caseStudy` documents, and redesigning shop slug-page `Key features` into an Envato-style checklist layout aligned with `Files and delivery scope` while upgrading shop-item authoring guidance for deeper end-to-end feature detail
-  - removed the case-study slug-page fallback counter strip, redesigned delivery/build cards with stronger heading hierarchy plus icon-led visual anchors, made case-study primary metric optional across Studio schema/import pipeline/rendering, and updated template/default content language to avoid relaunch/rebuild phrasing in favor of delivered-build framing
+  - fixed Sanity Studio local startup robustness by resolving Node-20 enforcement flow in `studio` and validating the studio dev server launch path separately from `web`, then imported three WordPress portfolio case studies (Casablanca Power, Rayiss Electrical & Solar PTY LTD, Communicators) into Sanity
+  - added click-to-preview fullscreen image lightbox behavior on both public slug surfaces: portfolio gallery images now open in a navigable modal (Esc/arrow/Prev/Next) and shop slug main image previews now open fullscreen when image media is present
   - completed CMS text-only content-automation hardening by stripping/ignoring importer media fields, adding UUID-safe slug upsert behavior, extending shop schema/model/query support for feature/scope/enhancement fields, simplifying shop slug IA to Envato-style non-duplicative sections, aligning portfolio slug content emphasis to stacks/integrations, and importing fresh shop and portfolio records that render without image assignments
   - resolved operator confusion around dry-run vs live-write by creating three truly new Sanity documents via authenticated CLI (`caseStudy.three-circles-relaunch-2026`, `shopItem.commodity-website-pro-2026`, `blogPost.relaunching-service-websites-with-a-cms-first-workflow-2026`) with seeded image references so they appear immediately in Studio for final manual image replacement
   - prepared three production-ready CMS import payloads in `web/content-import/inbox` (portfolio three-circles redo, shop commodity-website redo, and a new blog post), validated batch dry-run mapping, and confirmed live write is currently blocked until `SANITY_API_TOKEN` is provided in the terminal environment
@@ -75,6 +73,7 @@ task_status_counts:
   - removed placeholder `new-product` leakage from public shop output by enforcing CMS-first public catalog selection and filtering admin placeholder records from shop/portfolio surfaces, then switched homepage featured shop/portfolio sections to shared preview-capable cards and updated commerce E2E fixtures to consume live CMS slugs
   - hardened the planner agent, planning template, execution constitution, and root project-plan routing so every cross-role planning request must materialize a canonical `DOC/PROJECT PLAN/` artifact before `Tasks/tasks.md` is updated or a plan is treated as complete
   - created the canonical root planning artifact `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` for the CMS/content-operations rollout, covering content ownership, Sanity structure, data boundaries, operator workflow, integrations, phase sequencing, backlog, and validation gates without starting implementation
+    - refined the About CMS implementation to be team-only (client-editable team section only), with a simplified `aboutPage` schema focused on `teamMembers` add/edit/remove workflows and explicit team-member photo upload fields while preserving safe frontend fallbacks
   - hardened local development startup by replacing the raw `next dev` script with a wrapper that enforces Node 20 through `fnm`, automatically restarts stale same-workspace Next.js processes still holding port `5000`, and falls back to the next free local port when another application owns the default port
   - fixed the noisy local `next build` SWC warnings by removing the corrupted `@next/swc-win32-x64-msvc` install from `web/node_modules`, reinstalling dependencies, confirming the native binding loads cleanly again, adding local Node 20 guard files plus strict engine enforcement so future installs do not drift back onto an unsupported major runtime, and isolating unit-test data directories so the file-backed store no longer races across parallel test files
   - revised the about route after the first redesign overshot: restored the original page structure, kept the existing team/process/philosophy sections, and replaced the heavy third-person layout with three lighter first-person founder sections anchored by the optimized portrait

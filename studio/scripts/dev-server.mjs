@@ -1,9 +1,13 @@
 import { existsSync } from "node:fs";
 import { spawnSync, spawn } from "node:child_process";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const REQUIRED_NODE_MAJOR = 20;
-const studioRoot = process.cwd();
+// Resolve studio root from the script's own location (studio/scripts/ -> studio/)
+// so this works regardless of what cwd the caller uses.
+const scriptFile = fileURLToPath(import.meta.url);
+const studioRoot = path.resolve(path.dirname(scriptFile), "..");
 
 function fail(message) {
   console.error(message);
@@ -40,14 +44,17 @@ function runInstallIfNeeded() {
 const currentNodeMajor = Number.parseInt(process.versions.node.split(".")[0], 10);
 if (currentNodeMajor !== REQUIRED_NODE_MAJOR) {
   fail(
-    `[studio] Node ${REQUIRED_NODE_MAJOR}.x is required. Current: ${process.version}. Run fnm use 20 and retry.`,
+    `[studio] Node ${REQUIRED_NODE_MAJOR}.x is required. Current: ${process.version}. Run: fnm exec --using=20 npm run dev`,
   );
 }
 
 runInstallIfNeeded();
 
-const sanityCommand = "npm";
-const sanityArgs = ["exec", "sanity", "--", "dev", "--host", "0.0.0.0", "--port", "3333"];
+console.log("[studio] Starting Sanity dev server on port 3333...");
+
+const sanityBin = path.join(studioRoot, "node_modules", ".bin", "sanity");
+const sanityCommand = sanityBin;
+const sanityArgs = ["dev", "--host", "0.0.0.0", "--port", "3333"];
 
 const child = spawn(sanityCommand, sanityArgs, {
   cwd: studioRoot,

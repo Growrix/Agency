@@ -23,7 +23,7 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
       hoverable
       className={cn(
         "h-full flex flex-col",
-        tier.featured && "ring-1 ring-primary/40 shadow-[var(--shadow-2)]",
+        tier.featured && "ring-1 ring-primary/40 shadow-(--shadow-2)",
         className
       )}
     >
