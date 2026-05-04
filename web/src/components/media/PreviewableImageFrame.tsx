@@ -12,6 +12,17 @@ type PreviewableImageFrameProps = {
 
 export function PreviewableImageFrame({ src, alt, sizes, className }: PreviewableImageFrameProps) {
   const [open, setOpen] = useState(false);
+  const [naturalSize, setNaturalSize] = useState<{ width: number; height: number } | null>(null);
+
+  const openPreview = () => {
+    setNaturalSize(null);
+    setOpen(true);
+  };
+
+  const closePreview = () => {
+    setOpen(false);
+    setNaturalSize(null);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -24,11 +35,25 @@ export function PreviewableImageFrame({ src, alt, sizes, className }: Previewabl
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const probe = new window.Image();
+    probe.onload = () => {
+      setNaturalSize({
+        width: Math.max(1, probe.naturalWidth || 1),
+        height: Math.max(1, probe.naturalHeight || 1),
+      });
+    };
+    probe.onerror = () => setNaturalSize({ width: 1440, height: 2400 });
+    probe.src = src;
+  }, [open, src]);
+
   return (
     <>
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={openPreview}
         className={`group relative aspect-16/10 min-w-0 bg-inset text-left ${className ?? ""}`}
         aria-label="Open image preview"
       >
@@ -51,20 +76,36 @@ export function PreviewableImageFrame({ src, alt, sizes, className }: Previewabl
           role="dialog"
           aria-modal="true"
           aria-label="Image preview"
-          onClick={() => setOpen(false)}
+          onClick={closePreview}
         >
           <div className="mx-auto flex h-full max-w-6xl flex-col gap-4" onClick={(event) => event.stopPropagation()}>
             <div className="flex items-center justify-end">
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={closePreview}
                 className="rounded-md border border-white/30 px-3 py-1.5 text-xs uppercase tracking-wider text-white hover:bg-white/10"
               >
                 Close
               </button>
             </div>
-            <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl border border-white/20 bg-[#070b12]">
-              <Image src={src} alt={alt} fill priority sizes="100vw" className="object-contain" />
+            <div className="min-h-0 flex-1 overflow-auto rounded-xl border border-white/20 bg-[#070b12]">
+              <div className="flex min-h-full min-w-full items-start justify-center p-3 sm:p-6">
+                {naturalSize ? (
+                  <Image
+                    src={src}
+                    alt={alt}
+                    width={naturalSize.width}
+                    height={naturalSize.height}
+                    priority
+                    sizes="100vw"
+                    className="h-auto w-auto max-w-none"
+                  />
+                ) : (
+                  <div className="my-auto rounded-md border border-white/20 px-3 py-2 text-xs uppercase tracking-wider text-white/70">
+                    Loading image...
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

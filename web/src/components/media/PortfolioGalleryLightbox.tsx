@@ -14,10 +14,20 @@ type PortfolioGalleryLightboxProps = {
 
 export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [naturalSize, setNaturalSize] = useState<{ width: number; height: number } | null>(null);
 
-  const close = () => setActiveIndex(null);
+  const close = () => {
+    setActiveIndex(null);
+    setNaturalSize(null);
+  };
+
+  const openAt = (index: number) => {
+    setNaturalSize(null);
+    setActiveIndex(index);
+  };
 
   const move = useCallback((direction: -1 | 1) => {
+    setNaturalSize(null);
     setActiveIndex((index) => {
       if (index === null) return 0;
       const next = index + direction;
@@ -46,6 +56,25 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [activeIndex, images.length, move]);
 
+  useEffect(() => {
+    if (activeIndex === null) return;
+
+    const source = images[activeIndex]?.src;
+    if (!source) {
+      return;
+    }
+
+    const probe = new window.Image();
+    probe.onload = () => {
+      setNaturalSize({
+        width: Math.max(1, probe.naturalWidth || 1),
+        height: Math.max(1, probe.naturalHeight || 1),
+      });
+    };
+    probe.onerror = () => setNaturalSize({ width: 1440, height: 2400 });
+    probe.src = source;
+  }, [activeIndex, images]);
+
   return (
     <>
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -53,7 +82,7 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
           <button
             key={`${image.src}-${index}`}
             type="button"
-            onClick={() => setActiveIndex(index)}
+            onClick={() => openAt(index)}
             className="group relative aspect-16/10 rounded-[20px] overflow-hidden border border-border bg-inset text-left"
             aria-label={`Open screen ${index + 1} preview`}
           >
@@ -95,15 +124,24 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
               </button>
             </div>
 
-            <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl border border-white/20 bg-[#070b12]">
-              <Image
-                src={images[activeIndex].src}
-                alt={images[activeIndex].alt}
-                fill
-                priority
-                sizes="100vw"
-                className="object-contain"
-              />
+            <div className="min-h-0 flex-1 overflow-auto rounded-xl border border-white/20 bg-[#070b12]">
+              <div className="flex min-h-full min-w-full items-start justify-center p-3 sm:p-6">
+                {naturalSize ? (
+                  <Image
+                    src={images[activeIndex].src}
+                    alt={images[activeIndex].alt}
+                    width={naturalSize.width}
+                    height={naturalSize.height}
+                    priority
+                    sizes="100vw"
+                    className="h-auto w-auto max-w-none"
+                  />
+                ) : (
+                  <div className="my-auto rounded-md border border-white/20 px-3 py-2 text-xs uppercase tracking-wider text-white/70">
+                    Loading image...
+                  </div>
+                )}
+              </div>
             </div>
 
             {images.length > 1 && (
