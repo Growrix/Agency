@@ -117,12 +117,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     />
                   ) : null}
                   <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/15 to-transparent" aria-hidden />
-                  <div className="absolute inset-0 flex items-end p-6 text-white">
-                    <div>
-                      <p className="font-mono text-xs uppercase tracking-wider opacity-80">Outcome</p>
-                      <p className="mt-1 font-display text-3xl tracking-tight">{project.metric}</p>
+                  {project.metric ? (
+                    <div className="absolute inset-0 flex items-end p-6 text-white">
+                      <div>
+                        <p className="font-mono text-xs uppercase tracking-wider opacity-80">Outcome</p>
+                        <p className="mt-1 font-display text-3xl tracking-tight">{project.metric}</p>
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </Card>
               {project.livePreviewUrl ? (

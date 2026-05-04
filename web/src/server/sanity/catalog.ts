@@ -288,7 +288,7 @@ function normalizeCaseStudy(item: SanityCaseStudy): ManagedPortfolioRecord | nul
     industry: normalizeString(item.industry, "Editorial"),
     service: normalizeServiceSlug(item.service),
     summary: normalizeString(item.summary),
-    metric: normalizeString(item.metric, "Measured impact"),
+    metric: normalizeString(item.metric) || undefined,
     accent: normalizeString(item.accent, "from-teal-500 to-emerald-500"),
     hero_image: normalizeImage(item.heroImage, null),
     detail: normalizeCaseStudyDetail(slug, item.detail),
