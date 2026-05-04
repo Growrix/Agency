@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - fixed shop slug image preview collapse by making the preview button frame full-width (`w-full`) so media no longer compresses into a thin strip and remains clickable for original-size lightbox preview
   - fixed Sanity Studio local startup robustness by resolving Node-20 enforcement flow in `studio` and validating the studio dev server launch path separately from `web`, then imported three WordPress portfolio case studies (Casablanca Power, Rayiss Electrical & Solar PTY LTD, Communicators) into Sanity
   - added click-to-preview fullscreen image lightbox behavior on both public slug surfaces: portfolio gallery images now open in a navigable modal (Esc/arrow/Prev/Next) and shop slug main image previews now open fullscreen when image media is present
   - completed CMS text-only content-automation hardening by stripping/ignoring importer media fields, adding UUID-safe slug upsert behavior, extending shop schema/model/query support for feature/scope/enhancement fields, simplifying shop slug IA to Envato-style non-duplicative sections, aligning portfolio slug content emphasis to stacks/integrations, and importing fresh shop and portfolio records that render without image assignments

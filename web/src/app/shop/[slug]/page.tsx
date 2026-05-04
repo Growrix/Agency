@@ -81,7 +81,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
               {/* Preview surface */}
               <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border">
-                {product.embeddedPreviewUrl ? (
+                {product.image ? (
+                  <PreviewableImageFrame
+                    src={product.image.src}
+                    alt={product.image.alt}
+                    sizes="(min-width: 1280px) 70vw, (min-width: 1024px) 60vw, 100vw"
+                  />
+                ) : product.embeddedPreviewUrl ? (
                   <div className="aspect-16/10 min-w-0 bg-black">
                     <iframe
                       src={product.embeddedPreviewUrl}
@@ -91,12 +97,6 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       referrerPolicy="strict-origin-when-cross-origin"
                     />
                   </div>
-                ) : product.image ? (
-                  <PreviewableImageFrame
-                    src={product.image.src}
-                    alt={product.image.alt}
-                    sizes="(min-width: 1280px) 70vw, (min-width: 1024px) 60vw, 100vw"
-                  />
                 ) : (
                   <ProductPreviewSurface variant={product.previewVariant} />
                 )}

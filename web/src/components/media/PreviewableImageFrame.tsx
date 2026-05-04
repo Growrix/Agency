@@ -54,7 +54,7 @@ export function PreviewableImageFrame({ src, alt, sizes, className }: Previewabl
       <button
         type="button"
         onClick={openPreview}
-        className={`group relative aspect-16/10 min-w-0 bg-inset text-left ${className ?? ""}`}
+        className={`group relative block w-full aspect-16/10 min-w-0 bg-inset text-left ${className ?? ""}`}
         aria-label="Open image preview"
       >
         <Image
