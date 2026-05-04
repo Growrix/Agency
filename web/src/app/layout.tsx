@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   description:
     "Growrix OS is a product-minded web development studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.",
   icons: {
-    icon: "/Favicon.svg",
-    shortcut: "/Favicon.svg",
-    apple: "/Favicon.svg",
+    icon: "/Favicon.svg?v=20260504",
+    shortcut: "/Favicon.svg?v=20260504",
+    apple: "/Favicon.png?v=20260504",
   },
 };
 
