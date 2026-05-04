@@ -18,5 +18,10 @@ Live preview links:
 - Shop cards use `livePreviewUrl` (or `embeddedPreviewUrl`) for the Live Preview button.
 - Portfolio slug pages use `livePreviewUrl` for the Visit live site action.
 
+Slug page image preview behavior:
+- Portfolio slug gallery images are click-to-preview with a fullscreen lightbox.
+- Use `Esc` to close and arrow keys or Prev/Next controls to switch gallery images.
+- Shop slug main product image (when image-based, not iframe-based) is click-to-preview with a fullscreen lightbox.
+
 Placeholder content guard:
 - Public catalog output now suppresses placeholder records such as `new-product`/`new-project` and demo example URLs.

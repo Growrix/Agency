@@ -1,0 +1,73 @@
+# Portfolio Import: Communicators
+
+```yaml
+contentType: "caseStudy"
+name: "Communicators"
+slug: "communicators-bd"
+livePreviewUrl: "https://communicatorsbd.com"
+industry: "Brand Marketing & Activation"
+serviceSlug: "websites"
+summary: "A premium WordPress website for Communicators, a Bangladesh-based brand marketing and activation agency, designed to showcase service breadth, brand credibility, and contact-driven conversion in a high-contrast visual identity."
+metric: "Multi-section agency site launched with complete service architecture and lead capture"
+accent: "from-zinc-700 to-red-600"
+published: true
+featuredRank: 11
+client: "Communicators"
+year: "2026"
+duration: "4 weeks"
+team: "Strategy, UI Design, WordPress Development, Content Structuring"
+deliveryStory: "Communicators needed a website that felt bold, modern, and brand-led while still being easy to navigate for service buyers. We delivered a WordPress build with distinct sections for services, clients, value proposition, team, and inquiry capture, preserving their black-red design language and strengthening trust through social proof and clear CTA pathways."
+process:
+  - "Discovery and content architecture planning for agency service communication"
+  - "Visual system design using a dark, high-contrast identity with red brand accents"
+  - "WordPress implementation with modular sections and reusable service cards"
+  - "Client logo wall, team profile section, and contact conversion flow setup"
+  - "Responsive QA, SEO essentials, and launch readiness validation"
+strategy:
+  - "Structured the homepage around agency narrative first, then service clarity and client proof."
+  - "Used a strong monochrome + red system to preserve brand recall and visual distinctiveness."
+  - "Designed service blocks for quick scanning across brand building, digital, events, OOH, and strategy offerings."
+  - "Prioritized trust signals with a broad client logo gallery and leadership/team visibility."
+  - "Made contact conversion frictionless through a direct form and clear communication channels."
+integrations:
+  - "WordPress contact form workflow for inbound project inquiries"
+  - "Social profile linking for Facebook, YouTube, and other brand channels"
+  - "Google Maps embed for office location trust and navigation"
+  - "SEO plugin setup for metadata and sitemap management"
+seo:
+  - "Page-level metadata and keyword alignment for agency and activation service searches"
+  - "Structured headings and section order for better crawl understanding"
+  - "Optimized image handling and alt coverage for performance and accessibility"
+  - "Contact and location signals reinforced for local discoverability"
+standards:
+  - "Responsive QA across desktop, tablet, and mobile breakpoints"
+  - "Accessibility checks on contrast, navigation, and form labeling"
+  - "Cross-browser verification for core pages and interaction sections"
+  - "Performance-friendly media rendering and layout stability practices"
+build:
+  - label: "Platform"
+    value: "WordPress"
+    hint: "Custom theme with modular section composition"
+  - label: "Scope"
+    value: "Agency marketing website"
+    hint: "Home, About, Services, Contact, Team, Client proof"
+  - label: "Visual direction"
+    value: "Dark premium with red accent"
+    hint: "Brand-anchored UI system"
+  - label: "Conversion layer"
+    value: "Form + social + location"
+    hint: "Multiple trust and inquiry channels"
+results:
+  - label: "Launch"
+    value: "End-to-end site"
+    hint: "Core agency sections delivered and published"
+  - label: "Service clarity"
+    value: "Multi-category"
+    hint: "Brand, digital, events, OOH, and strategy visible in one flow"
+  - label: "Trust layer"
+    value: "Client and team proof"
+    hint: "Logo wall and leadership profiles integrated"
+  - label: "Lead capture"
+    value: "Contact-ready"
+    hint: "Inquiry form and contact details placed in high-intent zones"
+```
