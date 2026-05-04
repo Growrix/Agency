@@ -9,12 +9,10 @@ import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLightbox";
-import { HOME_STATS, SERVICES } from "@/lib/content";
+import { SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
-import { WHATSAPP_HREF } from "@/lib/nav";
 import { getPublicPortfolioProject, listPublicPortfolio } from "@/server/domain/catalog";
 
 export async function generateStaticParams() {
@@ -49,7 +47,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     : heroImage
       ? [heroImage]
       : [];
-  const outcomeStats = detail.results.length > 0 ? detail.results : HOME_STATS;
   const hasTechnicalMeta =
     Boolean(detail.deliveryStory?.trim()) ||
     (detail.process?.length ?? 0) > 0 ||
@@ -149,18 +146,32 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               description="A concise project narrative, delivery process, and the technical standards we enforced before launch."
             />
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              <Card className="p-6 lg:col-span-1">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Execution story</p>
-                <p className="mt-3 text-sm leading-7 text-pretty text-text-muted">
+              {/* Execution story card */}
+              <Card className="relative overflow-hidden p-6 lg:col-span-1 border-border/60">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-primary via-primary/60 to-transparent" aria-hidden />
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-md bg-primary/10">
+                    <span className="font-mono text-[9px] text-primary font-bold">01</span>
+                  </span>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Execution story</p>
+                </div>
+                <p className="mt-4 text-sm leading-7 text-pretty text-text-muted">
                   {detail.deliveryStory?.trim() || "We rebuilt the experience around conversion clarity, scalable content operations, and production-safe engineering gates."}
                 </p>
               </Card>
-              <Card className="p-6 lg:col-span-2">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Delivery process</p>
-                <ol className="mt-3 space-y-3">
+              {/* Delivery process card */}
+              <Card className="relative overflow-hidden p-6 lg:col-span-2 border-border/60">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-accent via-accent/60 to-transparent" aria-hidden />
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-md bg-accent/10">
+                    <span className="font-mono text-[9px] text-accent font-bold">02</span>
+                  </span>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-accent">Delivery process</p>
+                </div>
+                <ol className="mt-4 space-y-3">
                   {(detail.process?.length ? detail.process : ["Discovery and KPI alignment", "Design and content architecture", "Build, QA, and launch hardening"]).map((step, index) => (
                     <li key={`${step}-${index}`} className="flex gap-3">
-                      <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-border font-mono text-[11px] text-text-muted">
+                      <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent font-mono text-[11px] font-semibold">
                         {index + 1}
                       </span>
                       <span className="text-sm leading-6 text-text-muted">{step}</span>
@@ -169,44 +180,64 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 </ol>
               </Card>
             </div>
-            <div className="mt-5 grid gap-5 lg:grid-cols-3">
-              {(detail.integrations?.length ?? 0) > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Integrations</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
-                    {detail.integrations?.map((integration, index) => (
-                      <li key={`${integration}-${index}`}>• {integration}</li>
-                    ))}
-                  </ul>
-                </Card>
-              )}
-              {(detail.seo?.length ?? 0) > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">SEO and discovery</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
-                    {detail.seo?.map((item, index) => (
-                      <li key={`${item}-${index}`}>• {item}</li>
-                    ))}
-                  </ul>
-                </Card>
-              )}
-              {(detail.standards?.length ?? 0) > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Quality standards</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
-                    {detail.standards?.map((item, index) => (
-                      <li key={`${item}-${index}`}>• {item}</li>
-                    ))}
-                  </ul>
-                </Card>
-              )}
-            </div>
+            {((detail.integrations?.length ?? 0) > 0 || (detail.seo?.length ?? 0) > 0 || (detail.standards?.length ?? 0) > 0) && (
+              <div className="mt-5 grid gap-5 lg:grid-cols-3">
+                {(detail.integrations?.length ?? 0) > 0 && (
+                  <Card className="relative overflow-hidden p-6 group hover:border-primary/40 transition-colors">
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/80 to-primary/10" aria-hidden />
+                    <div className="pl-3">
+                      <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Integrations</p>
+                      <ul className="mt-3 space-y-2 text-sm leading-6">
+                        {detail.integrations?.map((integration, index) => (
+                          <li key={`${integration}-${index}`} className="flex items-start gap-2 text-text-muted">
+                            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary/60" aria-hidden />
+                            {integration}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Card>
+                )}
+                {(detail.seo?.length ?? 0) > 0 && (
+                  <Card className="relative overflow-hidden p-6 group hover:border-accent/40 transition-colors">
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-linear-to-b from-accent/80 to-accent/10" aria-hidden />
+                    <div className="pl-3">
+                      <p className="font-mono text-[11px] uppercase tracking-wider text-accent">SEO and discovery</p>
+                      <ul className="mt-3 space-y-2 text-sm leading-6">
+                        {detail.seo?.map((item, index) => (
+                          <li key={`${item}-${index}`} className="flex items-start gap-2 text-text-muted">
+                            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent/60" aria-hidden />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Card>
+                )}
+                {(detail.standards?.length ?? 0) > 0 && (
+                  <Card className="relative overflow-hidden p-6 group hover:border-text-muted/30 transition-colors">
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-linear-to-b from-text-muted/60 to-text-muted/10" aria-hidden />
+                    <div className="pl-3">
+                      <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Quality standards</p>
+                      <ul className="mt-3 space-y-2 text-sm leading-6">
+                        {detail.standards?.map((item, index) => (
+                          <li key={`${item}-${index}`} className="flex items-start gap-2 text-text-muted">
+                            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-text-muted/50" aria-hidden />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Card>
+                )}
+              </div>
+            )}
           </Container>
         </Section>
       )}
 
       {((detail.integrations?.length ?? 0) > 0 || detail.build.length > 0 || detail.results.length > 0) && (
-        <Section tone="inset">
+        <Section>
           <Container>
             <SectionHeading
               eyebrow="Stack and integrations"
@@ -215,31 +246,43 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             />
             <div className="mt-8 grid gap-5 lg:grid-cols-3">
               {(detail.integrations?.length ?? 0) > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Integrations shipped</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                <Card className="relative overflow-hidden p-6 border-border/60">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-primary via-primary/50 to-transparent" aria-hidden />
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Integrations shipped</p>
+                  <ul className="mt-4 space-y-2.5 text-sm leading-6">
                     {detail.integrations?.map((integration, index) => (
-                      <li key={`${integration}-${index}`}>• {integration}</li>
+                      <li key={`${integration}-${index}`} className="flex items-start gap-2 text-text-muted">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary/60" aria-hidden />
+                        {integration}
+                      </li>
                     ))}
                   </ul>
                 </Card>
               )}
               {detail.build.length > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Build facts</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                <Card className="relative overflow-hidden p-6 border-border/60">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-accent via-accent/50 to-transparent" aria-hidden />
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-accent">Build facts</p>
+                  <ul className="mt-4 space-y-3">
                     {detail.build.map((item) => (
-                      <li key={`${item.label}-${item.value}`}>{item.label}: {item.value}</li>
+                      <li key={`${item.label}-${item.value}`} className="border-b border-border/40 pb-2.5 last:border-0 last:pb-0">
+                        <span className="block font-mono text-[10px] uppercase tracking-wider text-text-muted">{item.label}</span>
+                        <span className="mt-0.5 block font-medium text-sm text-text">{item.value}</span>
+                      </li>
                     ))}
                   </ul>
                 </Card>
               )}
               {detail.results.length > 0 && (
-                <Card className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Measured outcomes</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
+                <Card className="relative overflow-hidden p-6 border-border/60 bg-primary/3">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-primary via-primary/80 to-transparent" aria-hidden />
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Measured outcomes</p>
+                  <ul className="mt-4 space-y-3">
                     {detail.results.map((item) => (
-                      <li key={`${item.label}-${item.value}`}>{item.label}: {item.value}</li>
+                      <li key={`${item.label}-${item.value}`} className="border-b border-border/40 pb-2.5 last:border-0 last:pb-0">
+                        <span className="block font-display text-xl tracking-tight text-text">{item.value}</span>
+                        <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-wider text-text-muted">{item.label}</span>
+                      </li>
                     ))}
                   </ul>
                 </Card>
@@ -274,10 +317,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <Section tone="inset">
         <Container>
           <SectionHeading eyebrow="Build breakdown" title="Stack and modules delivered." />
-          <div className="mt-10 grid gap-px overflow-hidden rounded-[16px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-px overflow-hidden rounded-[20px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {detail.build.map((b) => (
-              <div key={b.label} className="bg-surface p-5">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{b.label}</p>
+              <div key={b.label} className="group relative bg-surface p-5 hover:bg-primary/4 transition-colors cursor-default">
+                <div className="absolute top-0 left-0 right-0 h-px bg-primary/0 group-hover:bg-primary/20 transition-colors" aria-hidden />
+                <p className="font-mono text-[10px] uppercase tracking-wider text-primary/70 group-hover:text-primary transition-colors">{b.label}</p>
                 <p className="mt-2 font-display text-lg tracking-tight">{b.value}</p>
               </div>
             ))}
