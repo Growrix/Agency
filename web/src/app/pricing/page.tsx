@@ -7,8 +7,6 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
-import { StatBlock } from "@/components/sections/StatBlock";
-import { HOME_STATS } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 
@@ -171,15 +169,6 @@ export default function PricingPage() {
             <Accordion items={COST_DRIVERS} />
           </div>
         </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <SectionHeading eyebrow="ROI logic" title="Where the money goes back to work." align="center" />
-        </Container>
-        <div className="mt-10">
-          <StatBlock stats={HOME_STATS} />
-        </div>
       </Section>
 
       <Section tone="inset">

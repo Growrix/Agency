@@ -313,9 +313,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section className="py-12">
-        <StatBlock stats={HOME_STATS} />
-      </Section>
+      {slug !== "mcp-servers" && (
+        <Section className="py-12">
+          <StatBlock stats={HOME_STATS} />
+        </Section>
+      )}
 
       {slug === "saas-applications" && (
         <Section tone="inset">
