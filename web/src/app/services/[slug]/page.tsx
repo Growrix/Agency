@@ -313,7 +313,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      {slug !== "mcp-servers" && (
+      {slug !== "mcp-servers" && slug !== "automation" && (
         <Section className="py-12">
           <StatBlock stats={HOME_STATS} />
         </Section>
