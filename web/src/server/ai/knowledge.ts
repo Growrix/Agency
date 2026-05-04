@@ -26,28 +26,28 @@ export type KnowledgeDocument = {
 
 const PRICING_DOCUMENTS: KnowledgeDocument[] = [
   {
-    id: "pricing-launch-sprint",
-    label: "Launch Sprint pricing",
+    id: "pricing-template-packs",
+    label: "Template Packs pricing",
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Launch Sprint pricing starts at $9.5k per project for a focused 4-6 week sprint to ship a website, MCP server, or automation system. It includes discovery, design, build, a launch playbook, and 30 days of post-launch support.",
+      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse the shop at /shop.",
   },
   {
-    id: "pricing-product-partner",
-    label: "Product Partner pricing",
+    id: "pricing-ready-websites",
+    label: "Ready Websites pricing",
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Product Partner pricing starts at $14k per month. It is an embedded studio model for SaaS, websites, and integrations with a dedicated lead, designer, engineer, continuous shipping, quarterly strategy, and stack ownership.",
+      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /shop.",
   },
   {
-    id: "pricing-productized",
-    label: "Productized offers pricing",
+    id: "pricing-custom-build",
+    label: "Custom Build Scope pricing",
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Productized offers start from $99 one-time and cover templates, MCP starters, and automation kits with license, updates, setup docs, and optional install help.",
+      "Custom Build Scope is discovery-based project pricing. It covers SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals. A final quote is provided after discovery. Book a discovery call at /book-appointment.",
   },
   {
     id: "pricing-service-ranges",
@@ -55,15 +55,47 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Typical custom ranges are: SaaS Applications $24k-$180k+, Websites $9.5k-$60k, MCP Servers $249-$45k, Automation $3.5k-$24k. Final pricing is confirmed after a discovery call and written scope.",
+      "Service pricing ranges: Website Templates $500–$10k (basic $500–$1k, standard $1k–$3k, premium $3k–$10k). Ready Websites $1k–$15k (basic $1k–$2.5k, standard $2.5k–$5k, premium $5k–$15k). SaaS Applications: custom scope priced after discovery. Mobile App Launch Systems: custom scope. MCP + Automation: secondary scope, priced when they support the core build.",
+  },
+  {
+    id: "pricing-saas-tiers",
+    label: "SaaS Applications engagement tiers",
+    sourcePath: "/services/saas-applications",
+    sourceType: "pricing",
+    content:
+      "SaaS Applications engagement options: MVP Sprint at $24k per project (8-week sprint with discovery, design system, auth, billing, primary flows, analytics, and launch). Product Partner at $14k per month (embedded lead + designer + engineer, continuous shipping, quarterly strategy, stack ownership). Rebuild Engagement at custom pricing (architecture review, migration plan, phased shipping, knowledge transfer).",
+  },
+  {
+    id: "pricing-mcp-tiers",
+    label: "MCP Servers engagement tiers",
+    sourcePath: "/services/mcp-servers",
+    sourceType: "pricing",
+    content:
+      "MCP Servers options: Starter MCP at $249 one-time (TypeScript codebase, auth, secrets, example tools, deployment guide). Custom Integration at $8.5k per project (discovery, auth model, tool design, tests, deployment, handoff). Platform Engagement at custom pricing (shared auth layer, tool registry, audit, governance, ongoing support).",
+  },
+  {
+    id: "pricing-automation-tiers",
+    label: "Automation engagement tiers",
+    sourcePath: "/services/automation",
+    sourceType: "pricing",
+    content:
+      "Automation engagement options: Audit Sprint at $3.5k per project (2-week audit with workflow mapping, cost model, prioritized roadmap, handoff). Implementation at $8k per project (discovery, build, integrations, observability, documentation). Optimization Retainer at $3.2k per month (monthly review, new workflows, failure monitoring, quarterly cost review).",
   },
   {
     id: "pricing-payment-terms",
-    label: "Payment terms",
+    label: "Payment terms and support",
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Most engagements use a 30% kickoff deposit with milestone-based payments. Product Partner retainers are monthly. Shop bundles over $1k can be split into 3-month installments via Stripe.",
+      "For qualifying international clients, Growrix does not require an advance payment on the first 100 projects (delivery-first option). Milestone-based or custom payment arrangements are available. Every delivered site includes 1 year of free support and maintenance covering bug fixes, security updates, and minor content updates. Payment plans are available for larger ready-website or custom engagements.",
+  },
+  {
+    id: "pricing-cost-drivers",
+    label: "What influences project cost",
+    sourcePath: "/pricing",
+    sourceType: "pricing",
+    content:
+      "Key cost drivers: project complexity (number of surfaces, roles, integrations, edge cases), integration count (each external system adds discovery and error-handling work), content readiness (prepared content ships faster), timeline pressure (compressed timelines require parallel workstreams), support expectations (post-launch retainers are separate), and migration effort (replacing existing systems adds data migration and team training).",
   },
 ];
 
@@ -74,7 +106,7 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/contact",
     sourceType: "contact",
     content:
-      `Growrix supports several next steps depending on urgency: use AI Growrix OS for quick pre-sales questions, open WhatsApp at ${WHATSAPP_HREF} for direct messaging, use the contact form for a brief, or book an appointment for a scoped conversation.`,
+      `Growrix supports four contact channels: (1) Inquiry form at /contact — best for website, SaaS, mobile app, or ready-website briefs that need clear scoping. (2) WhatsApp at ${WHATSAPP_HREF} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about websites, ready websites, SaaS work, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
   },
   {
     id: "booking-path",
@@ -82,7 +114,7 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/book-appointment",
     sourceType: "contact",
     content:
-      "Discovery calls are typically 30 minutes. They are used to clarify the business problem, timeline, scope, and next recommendation before a written plan is prepared.",
+      "Discovery calls are typically 30 minutes. They are used to clarify the business problem, timeline, scope, and next recommendation. A written plan is prepared within 48 hours after the call. Nothing is signed until the plan reads correctly.",
   },
   {
     id: "privacy-boundary",
@@ -90,7 +122,7 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/privacy-policy",
     sourceType: "policy",
     content:
-      "The concierge should keep conversations inside Growrix tooling, avoid unsupported claims, and route to a human when a verified answer is not available. Public-model training claims should not be made beyond what is shown in the site experience.",
+      "The AI Growrix OS concierge answers only from approved internal knowledge about Growrix services, pricing, portfolio, and process. It does not use outside knowledge, does not make unsupported claims, and routes to a human when a verified answer is not available.",
   },
 ];
 
@@ -101,7 +133,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/",
     sourceType: "offering",
     content:
-      "Growrix primary focus is premium websites, SaaS applications, and productized website templates or ready websites. MCP servers and automation are secondary services when they support the core build.",
+      "Growrix OS is an independent studio. Primary focus is premium websites, SaaS applications, website templates, and ready websites. MCP servers and automation are secondary services scoped when they support the core website, SaaS, or launch engagement. The studio has been operating for 2 years and has shipped 12 launches.",
   },
   {
     id: "offering-shop-structure",
@@ -109,7 +141,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/shop",
     sourceType: "offering",
     content:
-      "Shop products are organized around Templates, Ready Websites, and Live SaaS style offers. Homepage Shop Spotlight should remain template-focused while Live SaaS has a separate dedicated section.",
+      "The Growrix shop has two main categories: Website Templates (from $500 one-time — basic, standard, premium tiers) and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
   },
   {
     id: "offering-support-handoff",
@@ -117,7 +149,31 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/faq",
     sourceType: "offering",
     content:
-      "Delivered builds transfer ownership to the client on completion. Standard delivery includes one year of free support and maintenance for bug fixes, security updates, and minor content adjustments.",
+      "On project completion, full ownership of code, design files, and infrastructure transfers to the client. Every delivered site includes 1 year of free support and maintenance covering bug fixes, security updates, and minor content updates. Ongoing packages and growth add-ons are available after that.",
+  },
+  {
+    id: "offering-studio-stats",
+    label: "Studio stats and track record",
+    sourcePath: "/about",
+    sourceType: "offering",
+    content:
+      "Growrix OS studio stats: 12 launches shipped (websites, SaaS, ready websites), 2 years in motion as an independent studio, 4 core services (websites, SaaS, MCP, automation), 4 delivery phases (discovery to optimization). The studio focuses on premium websites, SaaS products, mobile app launch experiences, and ready websites.",
+  },
+  {
+    id: "offering-stack",
+    label: "Technology stack",
+    sourcePath: "/about",
+    sourceType: "offering",
+    content:
+      "Growrix OS uses: Next.js, React, TypeScript, Python, Django, PostgreSQL, Supabase, Stripe, OpenAI, Sanity CMS, Resend, and Vercel as core technologies. For SaaS: also AWS (S3, EC2, Lambda), Docker, CI/CD pipelines, MongoDB, Redis, SendGrid, and GraphQL. For MCP work: Cloudflare Workers, Fly, or custom cloud deployments.",
+  },
+  {
+    id: "offering-no-advance-payment",
+    label: "No advance payment option",
+    sourcePath: "/pricing",
+    sourceType: "offering",
+    content:
+      "International clients can qualify for delivery-first payment with no advance on the first 100 qualifying projects. This removes financial risk for clients who want to see the work before paying. Milestone-based and custom payment arrangements are also available.",
   },
 ];
 
