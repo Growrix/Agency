@@ -138,9 +138,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Container>
       </Section>
 
-      <Section className="py-12">
-        <StatBlock stats={outcomeStats} />
-      </Section>
+      {/* StatBlock counter banner removed as requested */}
 
       {hasTechnicalMeta && (
         <Section tone="inset">
