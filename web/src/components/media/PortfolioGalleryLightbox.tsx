@@ -134,7 +134,7 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
                     height={naturalSize.height}
                     priority
                     sizes="100vw"
-                    className="h-auto w-auto max-w-none"
+                    className="max-w-full max-h-full object-contain"
                   />
                 ) : (
                   <div className="my-auto rounded-md border border-white/20 px-3 py-2 text-xs uppercase tracking-wider text-white/70">
