@@ -3,6 +3,12 @@ Studio local server:
 - From repository root: `npm --prefix studio run dev`
 - Or from studio directory: `cd studio` then `npx sanity dev --port 3333`
 
+Sanity API Token requirement for shop items:
+- **Important:** The `SANITY_API_TOKEN` must be set in `.env.local` for published shop items to appear on the shop page.
+- Without the token, the Sanity catalog query falls back to local database items only, bypassing CMS content.
+- To generate a token: From the `studio` directory, run `npx sanity tokens add`, select Viewer role, and add the token to `web/.env.local`.
+- This is required for both local development and production deployments.
+
 Homepage featured cards (CMS control):
 - Shop featured cards use published `shopItem` entries sorted by `featuredRank` (lower number appears first).
 - Portfolio featured cards use published `caseStudy` entries sorted by `featuredRank` (lower number appears first).
@@ -19,10 +25,10 @@ Live preview links:
 - Portfolio slug pages use `livePreviewUrl` for the Visit live site action.
 
 Slug page image preview behavior:
-- Portfolio slug gallery images are click-to-preview with a fullscreen lightbox.
+- Portfolio slug gallery images display in a dedicated "Experience gallery" section with click-to-preview fullscreen lightbox.
+- Shop slug gallery images display in a dedicated "Template gallery" section with the same fullscreen lightbox behavior as portfolio.
 - Use `Esc` to close and arrow keys or Prev/Next controls to switch gallery images.
-- Shop slug supports an additional screenshot gallery (`shopItem.gallery`) with the same fullscreen lightbox behavior as portfolio.
-- If `shopItem.gallery` is empty but `mainImage` exists, the slug page falls back to that single image in the gallery surface.
+- If gallery is empty but `mainImage` exists, a single preview image is shown in the gallery.
 
 Shop slug content structure:
 - Key features now render as a clean bullet list (checkmark rows) instead of card tiles.

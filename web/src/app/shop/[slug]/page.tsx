@@ -6,6 +6,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { PreviewableImageFrame } from "@/components/media/PreviewableImageFrame";
 import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLightbox";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
 import { getCheckoutHref } from "@/lib/shop";
@@ -140,16 +141,6 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       </li>
                     ))}
                   </ul>
-                </div>
-              ) : null}
-
-              {galleryImages.length > 0 ? (
-                <div>
-                  <h2 className="font-display text-xl font-semibold tracking-tight">Screenshot gallery</h2>
-                  <p className="mt-2 text-sm leading-6 text-text-muted">
-                    Additional template screens in fullscreen preview, matching the portfolio case-study experience.
-                  </p>
-                  <PortfolioGalleryLightbox images={galleryImages} />
                 </div>
               ) : null}
 
@@ -319,6 +310,16 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           </div>
         </Container>
       </Section>
+
+      {/* Screenshot gallery */}
+      {galleryImages.length > 0 ? (
+        <Section>
+          <Container>
+            <SectionHeading eyebrow="Template gallery" title="Surfaces from the template." />
+            <PortfolioGalleryLightbox images={galleryImages} />
+          </Container>
+        </Section>
+      ) : null}
 
       {/* Related products */}
       {related.length > 0 ? (
