@@ -81,6 +81,7 @@ type SanityShopItem = {
   stack?: string[];
   highlights?: SanityKeyValue[];
   image?: SanityImage;
+  gallery?: SanityImage[];
 };
 
 type SanityServicePage = {
@@ -167,6 +168,10 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   "image": {
     "url": mainImage.asset->url,
     "alt": coalesce(mainImage.alt, mainImageAlt, name, title)
+  },
+  "gallery": coalesce(gallery, [])[]{
+    "url": asset->url,
+    "alt": coalesce(alt, name, title)
   }
 }`;
 
@@ -307,6 +312,9 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
   const type = normalizeString(item.type, "Website Product");
   const industry = normalizeString(item.industry, "General");
   const highlights = normalizeKeyValueArray(item.highlights);
+  const gallery = (item.gallery ?? [])
+    .map((image) => normalizeImage(image, null))
+    .filter((image): image is StockImage => image !== null);
 
   return {
     slug,
@@ -337,6 +345,7 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     stack: normalizeStringArray(item.stack),
     highlights,
     image: normalizeImage(item.image, null),
+    gallery,
   };
 }
 

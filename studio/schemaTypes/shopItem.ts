@@ -284,6 +284,20 @@ export const shopItemType = defineType({
       description: "Used if you do not set alt text directly inside the uploaded image field.",
       group: "media",
     }),
+    defineField({
+      name: "gallery",
+      title: "Gallery [Example: 2-5 additional real screenshots]",
+      type: "array",
+      description: "Additional screenshots for the shop slug page preview gallery.",
+      group: "media",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [defineField({ name: "alt", title: "Alt Text [Example: Contact section screenshot from the live template]", type: "string" })],
+        },
+      ],
+    }),
   ],
   preview: {
     select: {

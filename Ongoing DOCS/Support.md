@@ -21,7 +21,12 @@ Live preview links:
 Slug page image preview behavior:
 - Portfolio slug gallery images are click-to-preview with a fullscreen lightbox.
 - Use `Esc` to close and arrow keys or Prev/Next controls to switch gallery images.
-- Shop slug main product image (when image-based, not iframe-based) is click-to-preview with a fullscreen lightbox.
+- Shop slug supports an additional screenshot gallery (`shopItem.gallery`) with the same fullscreen lightbox behavior as portfolio.
+- If `shopItem.gallery` is empty but `mainImage` exists, the slug page falls back to that single image in the gallery surface.
+
+Shop slug content structure:
+- Key features now render as a clean bullet list (checkmark rows) instead of card tiles.
+- This mirrors the readability style used in the Files and delivery scope section.
 
 Placeholder content guard:
 - Public catalog output now suppresses placeholder records such as `new-product`/`new-project` and demo example URLs.

@@ -160,6 +160,7 @@ export type ManagedProductRecord = {
   stack: string[];
   highlights: { label: string; value: string }[];
   image: StockImage | null;
+  gallery?: StockImage[];
 };
 
 export type AnalyticsEventRecord = {

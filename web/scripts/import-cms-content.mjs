@@ -108,7 +108,7 @@ function normalizeResultsArray(input) {
 function warnAndStripImageFields(contentType, data) {
   const imageFieldsByType = {
     caseStudy: ["heroImage", "gallery", "heroImageAlt"],
-    shopItem: ["mainImage", "mainImageAlt"],
+    shopItem: ["mainImage", "gallery", "mainImageAlt"],
     blogPost: ["mainImage", "mainImageAlt"],
   };
 

@@ -2,7 +2,7 @@
 document_type: cms-content-template
 content_type: shop-item
 status: active
-last_updated: 2026-05-03
+last_updated: 2026-05-06
 ---
 
 # Shop Item Content Template
@@ -16,7 +16,7 @@ last_updated: 2026-05-03
 - Keep names specific and commercially clear.
 - Keep slugs lowercase and hyphen-separated.
 - Use real preview links when available.
-- Do not include image fields in automation payloads. Upload product screenshots manually in Sanity Studio.
+- Do not include image fields in automation payloads. Upload `mainImage` and optional `gallery` screenshots manually in Sanity Studio.
 - Highlights should be short key-value proof points.
 - Treat `features` as the primary Envato-style detail area: aim for 8-14 concrete bullets spanning UI sections, conversion flow, CMS editing, responsiveness, performance, SEO baseline, and operational readiness.
 - Explain what is included and out of scope so buyers understand the exact template boundary.
@@ -112,6 +112,7 @@ highlights:
 - `audience`: Used in the `Ideal for` panel.
 - `features`: Primary buyer-facing details list (Envato-style depth). Cover what users get in real usage, not just design adjectives.
 - `previewVariant`: Fallback mock preview only when no real image exists.
+- `mainImage` / `gallery`: Manual-only image uploads in Studio for slug-page screenshot previews. Keep them out of import payloads.
 - `includes`: Actual deliverables.
 - `inScope`: Explicitly included within template price.
 - `outOfScope`: Explicitly excluded from template price.

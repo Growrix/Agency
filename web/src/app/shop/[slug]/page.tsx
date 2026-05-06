@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ArrowUpRightIcon, ShoppingBagIcon, CheckIcon } from "@he
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { PreviewableImageFrame } from "@/components/media/PreviewableImageFrame";
+import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLightbox";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
 import { getCheckoutHref } from "@/lib/shop";
@@ -57,6 +58,11 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const inScope = product.inScope ?? [];
   const outOfScope = product.outOfScope ?? [];
   const enhancementPlan = product.enhancementPlan ?? [];
+  const galleryImages = (product.gallery?.length ?? 0) > 0
+    ? product.gallery ?? []
+    : product.image
+      ? [product.image]
+      : [];
 
   return (
     <>
@@ -126,13 +132,24 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               {features.length > 0 ? (
                 <div>
                   <h2 className="font-display text-xl font-semibold tracking-tight">Key features</h2>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    {features.map((item) => (
-                      <div key={item} className="rounded-2xl border border-border bg-inset/40 px-4 py-4 text-sm leading-6 text-text-muted">
+                  <ul className="mt-4 space-y-2">
+                    {features.map((item, index) => (
+                      <li key={`${item}-${index}`} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
                         {item}
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
+                </div>
+              ) : null}
+
+              {galleryImages.length > 0 ? (
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Screenshot gallery</h2>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">
+                    Additional template screens in fullscreen preview, matching the portfolio case-study experience.
+                  </p>
+                  <PortfolioGalleryLightbox images={galleryImages} />
                 </div>
               ) : null}
 
