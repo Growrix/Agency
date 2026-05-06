@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - fixed the CMS importer path-resolution bug so repo-root `npm --prefix web run cms:import` commands now accept both `./content-import/inbox/...` and `./web/content-import/inbox/...`, updated operator support/import docs, and created the `shopItem.powerpro-electrical-service-company-website` record in Sanity via the authenticated CLI session before moving the source file to `processed`
   - fixed shop slug image preview collapse by making the preview button frame full-width (`w-full`) so media no longer compresses into a thin strip and remains clickable for original-size lightbox preview
   - fixed Sanity Studio local startup robustness by resolving Node-20 enforcement flow in `studio` and validating the studio dev server launch path separately from `web`, then imported three WordPress portfolio case studies (Casablanca Power, Rayiss Electrical & Solar PTY LTD, Communicators) into Sanity
   - added click-to-preview fullscreen image lightbox behavior on both public slug surfaces: portfolio gallery images now open in a navigable modal (Esc/arrow/Prev/Next) and shop slug main image previews now open fullscreen when image media is present

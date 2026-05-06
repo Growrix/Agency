@@ -15,6 +15,7 @@ const SUPPORTED_EXTENSIONS = new Set([".md", ".markdown", ".yaml", ".yml", ".jso
 const scriptFile = fileURLToPath(import.meta.url);
 const scriptDirectory = path.dirname(scriptFile);
 const webRoot = path.resolve(scriptDirectory, "..");
+const workspaceRoot = path.resolve(webRoot, "..");
 const inboxDirectory = path.resolve(webRoot, "content-import", "inbox");
 
 function parseArgs(argv) {
@@ -168,10 +169,18 @@ async function findExistingPath(inputPath) {
     return "";
   }
 
+  const normalizedInput = String(inputPath).trim();
+  const withoutLeadingDot = normalizedInput.replace(/^\.\\?/, "");
+  const withoutWebPrefix = withoutLeadingDot.replace(/^web[\\/]/i, "");
+
   const candidates = [
-    path.resolve(process.cwd(), inputPath),
-    path.resolve(webRoot, inputPath),
-    path.resolve(inboxDirectory, inputPath),
+    path.resolve(process.cwd(), normalizedInput),
+    path.resolve(webRoot, normalizedInput),
+    path.resolve(workspaceRoot, normalizedInput),
+    path.resolve(webRoot, withoutWebPrefix),
+    path.resolve(workspaceRoot, withoutWebPrefix),
+    path.resolve(inboxDirectory, normalizedInput),
+    path.resolve(inboxDirectory, withoutWebPrefix),
   ];
 
   for (const candidate of candidates) {

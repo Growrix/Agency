@@ -9,8 +9,8 @@ Use this folder for post-content files that should be imported into Sanity.
 ## Single file import
 
 ```bash
-npm --prefix web run cms:import -- --file ./web/content-import/inbox/your-file.md --dry-run
-npm --prefix web run cms:import -- --file ./web/content-import/inbox/your-file.md
+npm --prefix web run cms:import -- --file ./content-import/inbox/your-file.md --dry-run
+npm --prefix web run cms:import -- --file ./content-import/inbox/your-file.md
 ```
 
 ## Batch import from inbox
@@ -25,8 +25,8 @@ Running without `--file` or `--dir` automatically processes `web/content-import/
 ## Optional explicit directory import
 
 ```bash
-npm --prefix web run cms:import -- --dir ./web/content-import/inbox --dry-run
-npm --prefix web run cms:import -- --dir ./web/content-import/inbox
+npm --prefix web run cms:import -- --dir ./content-import/inbox --dry-run
+npm --prefix web run cms:import -- --dir ./content-import/inbox
 ```
 
 ## Notes
@@ -34,6 +34,7 @@ npm --prefix web run cms:import -- --dir ./web/content-import/inbox
 - Import automation is text-only by policy; image/media fields in payloads are ignored.
 - Image uploads remain manual in Sanity Studio as planned.
 - Requires `SANITY_API_TOKEN` in your terminal.
+- The importer also accepts `./web/content-import/inbox/...` paths when commands are run from the repository root.
 
 ## Fix missing Studio array keys (one-time maintenance)
 
