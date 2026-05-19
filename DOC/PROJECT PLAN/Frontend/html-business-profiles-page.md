@@ -16,7 +16,7 @@ depends_on:
 - Purpose: provide a category-first preview and purchase surface for HTML business profile templates.
 - Target audience: operators and service businesses that want launch-ready HTML profile templates without a custom build cycle.
 - Primary CTA: Buy This Template.
-- Secondary CTA: Open Full Preview.
+- Secondary CTA: Open HTML Preview.
 
 ## Sections In Visual Order
 
@@ -30,7 +30,7 @@ depends_on:
 - State requirements: all, active category, no category selected.
 
 ### 3. Selected Template Live Preview
-- Content: selected template title, summary, live iframe preview, and direct purchase action.
+- Content: selected template title, summary, direct HTML iframe preview, and direct purchase action.
 - Components: card shell, iframe container, CTA row.
 - State requirements: selected template, no preview URL fallback.
 

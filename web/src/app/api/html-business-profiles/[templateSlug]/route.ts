@@ -17,7 +17,8 @@ type RouteContext = {
 
 export async function GET(_: Request, context: RouteContext) {
   const { templateSlug } = await context.params;
-  const template = getHtmlBusinessProfileBySlug(templateSlug);
+  const normalizedTemplateSlug = templateSlug.replace(/^html-business-profile-/, "");
+  const template = getHtmlBusinessProfileBySlug(normalizedTemplateSlug);
 
   if (!template) {
     return new Response("Template not found.", { status: 404 });

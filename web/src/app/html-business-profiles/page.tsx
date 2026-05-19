@@ -43,7 +43,7 @@ function buildProfilesHref(current: QueryState, patch: Partial<QueryState>) {
   }
 
   if (merged.template) {
-    params.set("template", merged.template);
+    params.set("template", toTemplateSlug(merged.template));
   }
 
   const query = params.toString();
@@ -52,6 +52,12 @@ function buildProfilesHref(current: QueryState, patch: Partial<QueryState>) {
 
 function toTemplateSlug(productSlug: string) {
   return productSlug.replace(/^html-business-profile-/, "");
+}
+
+function toProductTemplateSlug(templateSlug: string) {
+  return templateSlug.startsWith("html-business-profile-")
+    ? templateSlug
+    : `html-business-profile-${templateSlug}`;
 }
 
 function extractProfileNumber(productSlug: string) {
@@ -82,10 +88,16 @@ export default async function HtmlBusinessProfilesPage({ searchParams }: { searc
     ? allTemplates.filter((item) => item.typeSlug === activeCategory)
     : allTemplates;
 
-  const selectedTemplate = visibleTemplates.find((item) => item.slug === query.template)
+  const selectedTemplateSlug = query.template ? toProductTemplateSlug(query.template) : undefined;
+
+  const selectedTemplate = visibleTemplates.find((item) => item.slug === selectedTemplateSlug)
     ?? visibleTemplates[0]
     ?? allTemplates[0]
     ?? null;
+
+  const selectedTemplatePreviewHref = selectedTemplate?.embeddedPreviewUrl
+    ?? selectedTemplate?.livePreviewUrl
+    ?? undefined;
 
   return (
     <>
@@ -174,9 +186,9 @@ export default async function HtmlBusinessProfilesPage({ searchParams }: { searc
                   <LinkButton href={getCheckoutHref(selectedTemplate)}>
                     <ShoppingBagIcon className="size-4" /> Buy this template
                   </LinkButton>
-                  {selectedTemplate.livePreviewUrl || selectedTemplate.embeddedPreviewUrl ? (
+                  {selectedTemplatePreviewHref ? (
                     <LinkButton
-                      href={selectedTemplate.livePreviewUrl ?? selectedTemplate.embeddedPreviewUrl ?? "#"}
+                      href={selectedTemplatePreviewHref}
                       target="_blank"
                       rel="noreferrer"
                       variant="outline"
@@ -191,7 +203,7 @@ export default async function HtmlBusinessProfilesPage({ searchParams }: { searc
             <Card>
               <p className="font-display text-2xl tracking-tight">No published HTML templates yet.</p>
               <p className="mt-2 text-text-muted">
-                Publish templates in Studio or keep local profile files in the HTML Business Profiles folder.
+                Publish templates in Studio and add preview URLs to make them available here.
               </p>
             </Card>
           )}
@@ -245,7 +257,7 @@ export default async function HtmlBusinessProfilesPage({ searchParams }: { searc
 
                             <div className="mt-4 flex flex-wrap gap-2">
                               <LinkButton
-                                href={buildProfilesHref(query, { category: category.slug, template: product.slug })}
+                                href={buildProfilesHref(query, { category: category.slug, template: toTemplateSlug(product.slug) })}
                                 variant={isSelected ? "primary" : "outline"}
                                 size="sm"
                               >

@@ -7,9 +7,9 @@ import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = {
-  title: "Shop — Templates, HTML Business Profiles, and Ready Websites",
+  title: "Shop — Published Templates and Digital Products",
   description:
-    "Browse website templates, category-based HTML Business Profiles, and ready websites, then go straight to product details or checkout.",
+    "Browse published digital products, preview details, and purchase directly from the live catalog.",
 };
 
 type SearchParams = Promise<{
@@ -132,10 +132,10 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                Templates, HTML Profiles &amp; Ready Websites
+                Published Template Catalog
               </h1>
               <p className="mt-2 text-sm leading-6 text-text-muted">
-                {allProducts.length} products &mdash; including category-based HTML business profiles, website templates from $500, and ready websites from $1k.
+                {allProducts.length} published product{allProducts.length === 1 ? "" : "s"} available right now. Filter by category, type, and industry.
               </p>
             </div>
             <LinkButton href="/book-appointment" variant="outline" size="sm">

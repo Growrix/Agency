@@ -28,7 +28,7 @@ depends_on:
 - Content: category, product type, and industry filter groups as a vertical sidebar navigation.
 - Components: sidebar nav groups (Category, Type, Industry), each with an "All" option and individual filter links; active-filter pills with clear links; result count above product grid.
 - Layout: desktop uses a two-column `[240px_1fr]` grid — sidebar on the left (sticky), product grid on the right. Mobile stacks the sidebar above the grid.
-- Interaction notes: every sidebar item is a `<Link>` that updates the URL searchParam; active state is derived from URL, no client-side state required; "Clear filters" link appears when any filter is active. All sidebar groups are driven entirely from `SHOP_CATEGORY_OPTIONS`, `SHOP_TYPE_OPTIONS`, `SHOP_INDUSTRY_OPTIONS` — no hardcoded labels or values in the UI layer.
+- Interaction notes: every sidebar item is a `<Link>` that updates the URL searchParam; active state is derived from URL, no client-side state required; "Clear filters" link appears when any filter is active. All sidebar groups are derived from the live published catalog payload returned by `listPublicShopProducts` — no hardcoded labels or values in the UI layer.
 
 ### 3. Category Shelves
 - Content: grouped product shelves for templates, HTML business profiles, and ready websites, with wording that reinforces these as the primary commerce offer over MCP or automation kits.

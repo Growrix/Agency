@@ -4,7 +4,7 @@ role: frontend
 scope: cms-content-operations
 parent_plan: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
 status: planning-ready
-last_updated: 2026-04-28
+last_updated: 2026-05-19
 ---
 
 # Frontend CMS Content Operations Plan
@@ -42,7 +42,7 @@ last_updated: 2026-04-28
 - Reuse existing route shells and page composition in `web/src/app/**`.
 - Reuse current section components and design primitives in `web/src/components/**`.
 - Reuse current server Sanity integration patterns in `web/src/server/sanity/**`.
-- Reuse static content modules as temporary fallbacks until parity is proven.
+- Keep static fallback usage limited to routes that are still in migration; do not reintroduce static seeded catalog data for commerce routes.
 
 ## Route Ownership Matrix
 
@@ -50,8 +50,8 @@ last_updated: 2026-04-28
 |---|---|---|---|---|
 | `/blog`, `/blog/[slug]` | Sanity with static fallback | Sanity primary | Keep current fallback until the wider CMS rollout is stable | Existing pattern becomes the reference model |
 | `/portfolio`, `/portfolio/[slug]` | Static `web/src/lib/content.ts` | Sanity `caseStudy` | Keep static fallback until route parity and revalidation are proven | Preserve existing card/detail composition |
-| `/shop`, `/shop/[slug]` | Static `web/src/lib/shop.ts` | Sanity `shopCategory` and `shopItem` | Keep static fallback until commerce parity and filter behavior are proven | Preserve current catalog UX and CTA structure |
-| `/html-business-profiles` | Static `web/src/lib/html-business-profiles.ts` | Sanity `htmlBusinessProfileTemplate` + static fallback catalog | Keep static local template fallback until schema parity and preview stability are proven | Preserve category chips, URL-driven template preview, and purchase CTA behavior |
+| `/shop`, `/shop/[slug]` | Sanity `shopItem` + managed catalog records | Sanity `shopCategory` and `shopItem` | No static seeded product fallback; only managed records may surface | Preserve current catalog UX and CTA structure |
+| `/html-business-profiles` | Sanity `htmlBusinessProfileTemplate` and published shop records | Sanity `htmlBusinessProfileTemplate` | No static local template catalog fallback; preview URLs must come from published records | Preserve category chips, URL-driven template preview, and purchase CTA behavior |
 | `/services` and current detail routes | Code-authored copy | Sanity `servicePage` | Keep current copy in code until service-document parity is verified | Route map stays fixed; content becomes data-backed |
 | `/faq` | Code-authored FAQ entries | Sanity `faqItem` | Keep current local entries until query parity is proven | Preserve accordion interaction model |
 | `/` and `/about` | Code-authored singleton copy | Sanity `homePage`, `aboutPage`, `siteSettings` | Keep current local defaults until singleton queries are stable | Homepage composition remains code-controlled |
@@ -61,7 +61,7 @@ last_updated: 2026-04-28
 - Do not pass raw Sanity documents directly through page trees when normalized view models are expected.
 - Preserve route URLs, metadata shape, structured data, and section ordering unless a later plan explicitly changes them.
 - Preserve current mobile, accessibility, and performance behavior while data sources shift.
-- Keep static fallbacks until route-by-route parity, preview, and revalidation are verified.
+- Keep static fallbacks only where retirement is not complete; `/shop`, `/shop/[slug]`, and `/html-business-profiles` must remain static-seed free.
 - Preview must remain server-authoritative and must not rely on client-visible secrets or open query-parameter toggles.
 
 ## Planned Frontend Work Slices
@@ -79,7 +79,7 @@ last_updated: 2026-04-28
   - `web/src/server/sanity/**`
 - Deliverables:
   - typed Sanity-to-view-model mappers
-  - route loaders with temporary static fallback
+  - route loaders backed by managed records with static catalog seeds removed from public output
   - preserved filtering, featured items, and CTA behaviors
   - schema-backed profile template uploads with preview path consistency
 

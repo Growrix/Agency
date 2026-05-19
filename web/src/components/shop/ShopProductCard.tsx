@@ -32,6 +32,10 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
     : !image
       ? product.embeddedPreviewUrl
       : undefined;
+  const hasExternalPreview = Boolean(product.livePreviewUrl || product.embeddedPreviewUrl);
+  const previewHref = shouldUseEmbeddedPreview
+    ? product.embeddedPreviewUrl ?? product.livePreviewUrl ?? `/shop/${product.slug}`
+    : product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}`;
 
   return (
     <Card hoverable className="group flex h-full flex-col overflow-hidden p-0">
@@ -107,12 +111,12 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
             <ShoppingBagIcon className="size-4" />
           </LinkButton>
           <LinkButton
-            href={product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}`}
+            href={previewHref}
             variant="outline"
             size="sm"
             fullWidth
-            target={product.livePreviewUrl || product.embeddedPreviewUrl ? "_blank" : undefined}
-            rel={product.livePreviewUrl || product.embeddedPreviewUrl ? "noreferrer" : undefined}
+            target={hasExternalPreview ? "_blank" : undefined}
+            rel={hasExternalPreview ? "noreferrer" : undefined}
           >
             Live Preview <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>

@@ -1,11 +1,8 @@
 import "server-only";
 
 import { SERVICES } from "@/lib/content";
-import { SHOP_PRODUCTS } from "@/lib/shop";
 import {
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
-  HTML_BUSINESS_PROFILE_TEMPLATES,
-  getHtmlBusinessProfilePreviewUrl,
 } from "@/lib/html-business-profiles";
 import type {
   ManagedPortfolioRecord,
@@ -103,82 +100,17 @@ function toHtmlProductSlug(slug: string) {
   return slug.startsWith("html-business-profile-") ? slug : `html-business-profile-${slug}`;
 }
 
-function getBuiltInHtmlBusinessProfileProducts(): ManagedProductRecord[] {
-  return HTML_BUSINESS_PROFILE_TEMPLATES.map((template) => ({
-    slug: toHtmlProductSlug(template.slug),
-    name: template.title,
-    price: template.suggestedPrice,
-    livePreviewUrl: `/html-business-profiles?template=${template.slug}`,
-    embeddedPreviewUrl: getHtmlBusinessProfilePreviewUrl(template.slug),
-    category: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.label,
-    categorySlug: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug,
-    type: template.categoryLabel,
-    typeSlug: template.categorySlug,
-    industry: template.categoryLabel,
-    industrySlug: template.categorySlug,
-    tag: template.tag,
-    published: true,
-    teaser: template.teaser,
-    summary: template.summary,
-    audience: template.audience,
-    features: [
-      "Category-ready HTML structure",
-      "Launch-friendly business profile layout",
-      "Fast customization flow",
-      "Shop-ready delivery path",
-    ],
-    previewVariant: "marketing",
-    includes: [
-      "HTML profile source file",
-      "Category-specific business profile layout",
-      "Customization-ready sections",
-      "Launch and handoff notes",
-    ],
-    inScope: [
-      "Template source delivery",
-      "Category-aligned structure",
-      "Purchase-ready listing integration",
-    ],
-    outOfScope: [
-      "Custom backend development",
-      "New module engineering outside template scope",
-      "Advanced third-party automation setup",
-    ],
-    enhancementPlan: [
-      "Brand and copy adaptation",
-      "CMS migration option",
-      "Checkout and lead pipeline extension",
-    ],
-    stack: ["HTML5", "CSS3", "JavaScript"],
-    highlights: [
-      { label: "Category", value: template.categoryLabel },
-      { label: "Template Type", value: "Business Profile" },
-      { label: "Delivery", value: "Digital" },
-    ],
-    image: null,
-  }));
-}
-
-function getDefaultShopProducts(): ManagedProductRecord[] {
-  return SHOP_PRODUCTS.map((product) => ({
-    ...product,
-    image: product.image ?? null,
-    features: [],
-    inScope: [],
-    outOfScope: [],
-    enhancementPlan: [],
-  }));
-}
-
-function mergeCatalogProducts(baseProducts: ManagedProductRecord[], cmsHtmlProducts: ManagedProductRecord[]) {
+function mergeCatalogProducts(...productGroups: ManagedProductRecord[][]) {
   const merged = new Map<string, ManagedProductRecord>();
 
-  for (const product of [...baseProducts, ...getBuiltInHtmlBusinessProfileProducts(), ...cmsHtmlProducts]) {
-    const normalizedSlug = product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug
-      ? toHtmlProductSlug(product.slug)
-      : product.slug;
-    const normalized = { ...product, slug: normalizedSlug };
-    merged.set(normalized.slug, normalized);
+  for (const products of productGroups) {
+    for (const product of products) {
+      const normalizedSlug = product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug
+        ? toHtmlProductSlug(product.slug)
+        : product.slug;
+      const normalized = { ...product, slug: normalizedSlug };
+      merged.set(normalized.slug, normalized);
+    }
   }
 
   return Array.from(merged.values());
@@ -188,12 +120,10 @@ async function listAllPublicProducts() {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
   const cmsHtmlTemplates = await listSanityHtmlBusinessProfileTemplates().catch(() => []);
-  const fallbackProducts = database.products.length > 0 ? database.products : getDefaultShopProducts();
-  const baseProducts = (cmsProducts.length > 0 ? cmsProducts : fallbackProducts).filter(
-    (product) => !isPlaceholderProduct(product),
-  );
+  const managedProducts = database.products.filter((product) => !isPlaceholderProduct(product));
 
-  return mergeCatalogProducts(baseProducts, cmsHtmlTemplates).filter((product) => !isPlaceholderProduct(product));
+  return mergeCatalogProducts(managedProducts, cmsProducts, cmsHtmlTemplates)
+    .filter((product) => !isPlaceholderProduct(product));
 }
 
 function getDefaultServices(): ManagedServiceRecord[] {

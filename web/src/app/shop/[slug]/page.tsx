@@ -60,6 +60,10 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const outOfScope = product.outOfScope ?? [];
   const enhancementPlan = product.enhancementPlan ?? [];
   const shouldUseEmbeddedPreview = product.categorySlug === "html-business-profiles" && Boolean(product.embeddedPreviewUrl);
+  const hasExternalPreview = Boolean(product.livePreviewUrl || product.embeddedPreviewUrl);
+  const previewHref = shouldUseEmbeddedPreview
+    ? product.embeddedPreviewUrl ?? product.livePreviewUrl ?? `/shop/${product.slug}#preview`
+    : product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}#preview`;
   const galleryImages = (product.gallery?.length ?? 0) > 0
     ? product.gallery ?? []
     : product.image
@@ -260,12 +264,12 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <ShoppingBagIcon className="size-5" /> Start Purchase
                 </LinkButton>
                 <LinkButton
-                  href={product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}#preview`}
+                  href={previewHref}
                   variant="outline"
                   size="lg"
                   fullWidth
-                  target={product.livePreviewUrl || product.embeddedPreviewUrl ? "_blank" : undefined}
-                  rel={product.livePreviewUrl || product.embeddedPreviewUrl ? "noreferrer" : undefined}
+                  target={hasExternalPreview ? "_blank" : undefined}
+                  rel={hasExternalPreview ? "noreferrer" : undefined}
                 >
                   Live Preview <ArrowUpRightIcon className="size-4" />
                 </LinkButton>
@@ -328,7 +332,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           <Container>
             <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
             <p className="mt-2 text-sm text-text-muted">
-              Browse more website templates and ready websites.
+              Browse more published products from the live catalog.
             </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (

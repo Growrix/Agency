@@ -4,7 +4,7 @@ role: api-and-data
 scope: cms-content-operations
 parent_plan: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
 status: planning-ready
-last_updated: 2026-04-28
+last_updated: 2026-05-19
 ---
 
 # API And Data CMS Content Operations Plan
@@ -38,7 +38,7 @@ last_updated: 2026-04-28
 ### Public Read Layer
 - Add normalized query adapters that read Sanity content and emit stable view models to existing routes.
 - Preserve current response envelopes for any public API surfaces that become CMS-backed.
-- Keep static fallback compatibility until parity is verified route by route.
+- Keep public shop and HTML-profile catalog responses static-seed free; use published CMS and managed records only.
 
 ### Admin And Operational APIs
 - Plan for stable admin contracts covering:
@@ -82,8 +82,8 @@ last_updated: 2026-04-28
 ## Migration And Backfill Sequence
 1. Seed Sanity documents from current static content modules for portfolio, shop, services, FAQ, homepage, and about.
 2. Add PostgreSQL newsletter lifecycle tables before newsletter campaign send workflows are introduced.
-3. Introduce normalized query adapters and revalidation flow while static fallback remains available.
-4. Remove obsolete fallback branches only after regression evidence is captured.
+3. Introduce normalized query adapters and revalidation flow while preserving envelope and route compatibility.
+4. Retire obsolete static catalog fallback branches after regression evidence is captured.
 
 ## File Targets For Future Implementation
 - `web/src/server/domain/catalog.ts`
