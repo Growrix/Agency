@@ -207,7 +207,7 @@ export default async function Home() {
                 </RevealItem>
               );
             })}
-            <RevealItem key="seo-additional-service" className="h-full">
+            <RevealItem key="seo-service" className="h-full">
               <FeatureCard
                 href="/additional-services"
                 icon={<SparklesIcon className="size-5" />}
