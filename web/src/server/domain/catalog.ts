@@ -2,7 +2,9 @@ import "server-only";
 
 import { SERVICES } from "@/lib/content";
 import {
+  HTML_BUSINESS_PROFILE_TEMPLATES,
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
+  getHtmlBusinessProfilePreviewUrl,
 } from "@/lib/html-business-profiles";
 import type {
   ManagedPortfolioRecord,
@@ -50,6 +52,10 @@ const LEGACY_MOCK_PORTFOLIO_SLUGS = new Set([
 ]);
 
 const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
+  "atelier-marketing-theme",
+  "operator-dashboard-kit",
+  "mobile-app-landing-pack",
+  "booking-stripe-bundle",
   "new-product",
 ]);
 
@@ -100,6 +106,43 @@ function toHtmlProductSlug(slug: string) {
   return slug.startsWith("html-business-profile-") ? slug : `html-business-profile-${slug}`;
 }
 
+function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
+  return HTML_BUSINESS_PROFILE_TEMPLATES.map((template) => {
+    const previewUrl = getHtmlBusinessProfilePreviewUrl(template.slug);
+
+    return {
+      slug: template.slug,
+      name: template.title,
+      price: template.suggestedPrice,
+      livePreviewUrl: previewUrl,
+      embeddedPreviewUrl: previewUrl,
+      category: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.label,
+      categorySlug: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug,
+      type: template.categoryLabel,
+      typeSlug: template.categorySlug,
+      industry: template.categoryLabel,
+      industrySlug: template.categorySlug,
+      tag: template.tag,
+      published: true,
+      teaser: template.teaser,
+      summary: template.summary,
+      audience: template.audience,
+      features: [],
+      previewVariant: "marketing",
+      includes: ["HTML template files", "Launch-ready sections"],
+      inScope: [],
+      outOfScope: [],
+      enhancementPlan: [],
+      stack: ["HTML5", "CSS3", "JavaScript"],
+      highlights: template.profileNumber === null
+        ? [{ label: "Collection", value: "Showcase" }]
+        : [{ label: "Profile", value: `#${template.profileNumber}` }],
+      image: null,
+      gallery: [],
+    };
+  });
+}
+
 function mergeCatalogProducts(...productGroups: ManagedProductRecord[][]) {
   const merged = new Map<string, ManagedProductRecord>();
 
@@ -120,9 +163,10 @@ async function listAllPublicProducts() {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
   const cmsHtmlTemplates = await listSanityHtmlBusinessProfileTemplates().catch(() => []);
+  const localHtmlTemplates = getDefaultHtmlBusinessProfileProducts();
   const managedProducts = database.products.filter((product) => !isPlaceholderProduct(product));
 
-  return mergeCatalogProducts(managedProducts, cmsProducts, cmsHtmlTemplates)
+  return mergeCatalogProducts(localHtmlTemplates, managedProducts, cmsProducts, cmsHtmlTemplates)
     .filter((product) => !isPlaceholderProduct(product));
 }
 
