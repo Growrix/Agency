@@ -108,13 +108,16 @@ export default async function Home() {
   ]);
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
-  const templateProducts = publicProducts.filter((p) => !isLiveSaasProduct(p));
+  const templateProducts = publicProducts.filter(
+    (p) => !isLiveSaasProduct(p) && p.categorySlug !== "html-business-profiles",
+  );
   const featuredProducts = pickBySlugs(
     templateProducts,
     homeContent?.shopSpotlight?.productSlugs,
     templateProducts.slice(0, 4)
   );
   const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
+  const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
   const htmlBusinessProfileCategoryStats = HTML_BUSINESS_PROFILE_CATEGORIES.map((category) => {
     const items = htmlBusinessProfileProducts.filter((product) => product.typeSlug === category.slug);
     return {
@@ -233,7 +236,23 @@ export default async function Home() {
             </div>
           </div>
 
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3" stagger={0.07}>
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+            {featuredHtmlBusinessProfileProducts.map((product) => (
+              <RevealItem key={product.slug} className="h-full">
+                <ShopProductCard product={product} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          {featuredHtmlBusinessProfileProducts.length === 0 && (
+            <Card className="mt-10 text-center">
+              <p className="font-display text-2xl tracking-tight">No published HTML Business Profile items yet.</p>
+              <p className="mt-2 text-text-muted">
+                Publish HTML business profile products to display cards in this section.
+              </p>
+            </Card>
+          )}
+
+          <RevealGroup className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3" stagger={0.07}>
             {htmlBusinessProfileCategoryStats.map((category) => (
               <RevealItem key={category.slug} className="h-full">
                 <Card hoverable className="h-full">
