@@ -44,6 +44,7 @@ import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from 
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
 
 const SHOW_ADDITIONAL_SERVICES_SECTION = false;
+const SHOW_LIVE_SAAS_SECTION = false;
 
 const SERVICE_ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -378,71 +379,73 @@ export default async function Home() {
 
       <TrustStrip items={HOME_STACK_MARQUEE} />
 
-      {/* Live SaaS Spotlight */}
-      <Section tone="inset">
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-            <SectionHeading
-              eyebrow={homeContent?.liveSaas?.eyebrow ?? "Live SaaS"}
-              title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
-              description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
-            />
-            <LinkButton href="/shop" variant="outline">
-              Explore Live SaaS <ArrowUpRightIcon className="size-4" />
-            </LinkButton>
-          </div>
-
-          {/* Value bullets */}
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              "Test the product before you buy",
-              "Experience real functionality, not demos",
-              "Understand the business potential firsthand",
-              "Launch instantly with a proven foundation",
-            ].map((point) => (
-              <div key={point} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3">
-                <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                <span className="text-sm leading-6">{point}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Live SaaS product cards */}
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {featuredLiveSaasProducts.map((p) => (
-              <RevealItem key={p.slug} className="h-full">
-                <ShopProductCard product={p} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-          {featuredLiveSaasProducts.length === 0 && (
-            <Card className="mt-10 text-center">
-              <p className="font-display text-2xl tracking-tight">No published Live SaaS items yet.</p>
-              <p className="mt-2 text-text-muted">
-                Publish shop items with the category slug or label set to Live SaaS to show them here.
-              </p>
-            </Card>
-          )}
-
-          {/* Bottom CTA */}
-          <div className="mt-10 rounded-2xl border border-border bg-surface px-6 py-8 sm:px-10 sm:py-10 text-center">
-            <p className="font-display text-xl tracking-tight sm:text-2xl">
-              This is your chance to skip the idea stage and step directly into a working business.
-            </p>
-            <p className="mt-3 text-text-muted">
-              Use it. Test it. Validate it. Then make your move with confidence.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <LinkButton href="/shop">
-                Explore All Live SaaS <ArrowRightIcon className="size-4" />
-              </LinkButton>
-              <LinkButton href="/book-appointment" variant="outline">
-                Book a Demo
+      {/* # muted by request: keep Live SaaS section in code but hide on homepage */}
+      {SHOW_LIVE_SAAS_SECTION ? (
+        <Section tone="inset">
+          <Container>
+            <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+              <SectionHeading
+                eyebrow={homeContent?.liveSaas?.eyebrow ?? "Live SaaS"}
+                title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
+                description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
+              />
+              <LinkButton href="/shop" variant="outline">
+                Explore Live SaaS <ArrowUpRightIcon className="size-4" />
               </LinkButton>
             </div>
-          </div>
-        </Container>
-      </Section>
+
+            {/* Value bullets */}
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                "Test the product before you buy",
+                "Experience real functionality, not demos",
+                "Understand the business potential firsthand",
+                "Launch instantly with a proven foundation",
+              ].map((point) => (
+                <div key={point} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+                  <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                  <span className="text-sm leading-6">{point}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Live SaaS product cards */}
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+              {featuredLiveSaasProducts.map((p) => (
+                <RevealItem key={p.slug} className="h-full">
+                  <ShopProductCard product={p} />
+                </RevealItem>
+              ))}
+            </RevealGroup>
+            {featuredLiveSaasProducts.length === 0 && (
+              <Card className="mt-10 text-center">
+                <p className="font-display text-2xl tracking-tight">No published Live SaaS items yet.</p>
+                <p className="mt-2 text-text-muted">
+                  Publish shop items with the category slug or label set to Live SaaS to show them here.
+                </p>
+              </Card>
+            )}
+
+            {/* Bottom CTA */}
+            <div className="mt-10 rounded-2xl border border-border bg-surface px-6 py-8 sm:px-10 sm:py-10 text-center">
+              <p className="font-display text-xl tracking-tight sm:text-2xl">
+                This is your chance to skip the idea stage and step directly into a working business.
+              </p>
+              <p className="mt-3 text-text-muted">
+                Use it. Test it. Validate it. Then make your move with confidence.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <LinkButton href="/shop">
+                  Explore All Live SaaS <ArrowRightIcon className="size-4" />
+                </LinkButton>
+                <LinkButton href="/book-appointment" variant="outline">
+                  Book a Demo
+                </LinkButton>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      ) : null}
 
       {/* Process */}
       <Section tone="inset">
