@@ -39,10 +39,11 @@ import {
 } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
-import { HTML_BUSINESS_PROFILE_CATEGORIES } from "@/lib/html-business-profiles";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
+
+const SHOW_ADDITIONAL_SERVICES_SECTION = false;
 
 const SERVICE_ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -118,14 +119,6 @@ export default async function Home() {
   );
   const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
   const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
-  const htmlBusinessProfileCategoryStats = HTML_BUSINESS_PROFILE_CATEGORIES.map((category) => {
-    const items = htmlBusinessProfileProducts.filter((product) => product.typeSlug === category.slug);
-    return {
-      ...category,
-      productCount: items.length,
-      sampleProduct: items[0],
-    };
-  }).filter((category) => category.productCount > 0);
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
     liveSaasProducts,
@@ -214,6 +207,15 @@ export default async function Home() {
                 </RevealItem>
               );
             })}
+            <RevealItem key="seo-additional-service">
+              <FeatureCard
+                href="/additional-services"
+                icon={<SparklesIcon className="size-5" />}
+                title="SEO"
+                description="Additional service for visibility setup, indexing, analytics, and technical optimization."
+                meta="One-time setup"
+              />
+            </RevealItem>
           </RevealGroup>
         </Container>
       </Section>
@@ -345,34 +347,11 @@ export default async function Home() {
             </Card>
           )}
 
-          <RevealGroup className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3" stagger={0.07}>
-            {htmlBusinessProfileCategoryStats.map((category) => (
-              <RevealItem key={category.slug} className="h-full">
-                <Card hoverable className="h-full">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
-                    {category.productCount} templates
-                  </p>
-                  <h3 className="mt-2 font-display text-xl tracking-tight">{category.label}</h3>
-                  <p className="mt-3 text-sm leading-6 text-text-muted">{category.description}</p>
-                  {category.sampleProduct ? (
-                    <p className="mt-3 text-sm text-text-muted">
-                      Starts from <span className="font-medium text-text">{category.sampleProduct.price}</span>
-                    </p>
-                  ) : null}
-                  <Link
-                    href={`/html-business-profiles?category=${category.slug}`}
-                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
-                  >
-                    Browse {category.shortLabel} <ArrowUpRightIcon className="size-3.5" />
-                  </Link>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealGroup>
         </Container>
       </Section>
 
-      <AdditionalServices />
+      {/* # muted by request: keep component in code but hide section from homepage */}
+      {SHOW_ADDITIONAL_SERVICES_SECTION ? <AdditionalServices /> : null}
 
       {/* Featured Builds */}
       <Section>
