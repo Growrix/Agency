@@ -218,94 +218,6 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <Section>
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-            <SectionHeading
-              eyebrow="New service"
-              title="HTML Business Profiles - category-based digital products"
-              description="Preview every built HTML business profile by category, then purchase directly from the shop with a clear template-to-checkout path."
-            />
-            <div className="flex flex-wrap gap-3">
-              <LinkButton href="/html-business-profiles" variant="outline">
-                Preview all profiles <ArrowUpRightIcon className="size-4" />
-              </LinkButton>
-              <LinkButton href="/shop?category=html-business-profiles">
-                Shop category <ArrowRightIcon className="size-4" />
-              </LinkButton>
-            </div>
-          </div>
-
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {featuredHtmlBusinessProfileProducts.map((product) => (
-              <RevealItem key={product.slug} className="h-full">
-                <ShopProductCard product={product} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-          {featuredHtmlBusinessProfileProducts.length === 0 && (
-            <Card className="mt-10 text-center">
-              <p className="font-display text-2xl tracking-tight">No published HTML Business Profile items yet.</p>
-              <p className="mt-2 text-text-muted">
-                Publish HTML business profile products to display cards in this section.
-              </p>
-            </Card>
-          )}
-
-          <RevealGroup className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3" stagger={0.07}>
-            {htmlBusinessProfileCategoryStats.map((category) => (
-              <RevealItem key={category.slug} className="h-full">
-                <Card hoverable className="h-full">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
-                    {category.productCount} templates
-                  </p>
-                  <h3 className="mt-2 font-display text-xl tracking-tight">{category.label}</h3>
-                  <p className="mt-3 text-sm leading-6 text-text-muted">{category.description}</p>
-                  {category.sampleProduct ? (
-                    <p className="mt-3 text-sm text-text-muted">
-                      Starts from <span className="font-medium text-text">{category.sampleProduct.price}</span>
-                    </p>
-                  ) : null}
-                  <Link
-                    href={`/html-business-profiles?category=${category.slug}`}
-                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
-                  >
-                    Browse {category.shortLabel} <ArrowUpRightIcon className="size-3.5" />
-                  </Link>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </Container>
-      </Section>
-
-      <AdditionalServices />
-
-      {/* Featured Builds */}
-      <Section>
-        <Container>
-          <SectionHeading
-              eyebrow={homeContent?.featuredBuilds?.eyebrow ?? "Featured builds"}
-              title={homeContent?.featuredBuilds?.title ?? "Proof from launches, rebuilds, and growth."}
-              description={homeContent?.featuredBuilds?.description ?? "A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."}
-          />
-          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {featuredProjects.map((p) => (
-              <RevealItem key={p.slug}>
-                <PortfolioCard project={p} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-          <div className="mt-8 flex justify-center">
-            <LinkButton href="/portfolio" variant="outline">
-              See all projects
-            </LinkButton>
-          </div>
-        </Container>
-      </Section>
-
-      <TrustStrip items={HOME_STACK_MARQUEE} />
-
       {/* Shop Spotlight */}
       <Section>
         <Container>
@@ -398,6 +310,94 @@ export default async function Home() {
           </div>
         </Container>
       </Section>
+
+      <Section>
+        <Container>
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="New service"
+              title="HTML Business Profiles - category-based digital products"
+              description="Preview every built HTML business profile by category, then purchase directly from the shop with a clear template-to-checkout path."
+            />
+            <div className="flex flex-wrap gap-3">
+              <LinkButton href="/html-business-profiles" variant="outline">
+                Preview all profiles <ArrowUpRightIcon className="size-4" />
+              </LinkButton>
+              <LinkButton href="/shop?category=html-business-profiles">
+                Shop category <ArrowRightIcon className="size-4" />
+              </LinkButton>
+            </div>
+          </div>
+
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+            {featuredHtmlBusinessProfileProducts.map((product) => (
+              <RevealItem key={product.slug} className="h-full">
+                <ShopProductCard product={product} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          {featuredHtmlBusinessProfileProducts.length === 0 && (
+            <Card className="mt-10 text-center">
+              <p className="font-display text-2xl tracking-tight">No published HTML Business Profile items yet.</p>
+              <p className="mt-2 text-text-muted">
+                Publish HTML business profile products to display cards in this section.
+              </p>
+            </Card>
+          )}
+
+          <RevealGroup className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3" stagger={0.07}>
+            {htmlBusinessProfileCategoryStats.map((category) => (
+              <RevealItem key={category.slug} className="h-full">
+                <Card hoverable className="h-full">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
+                    {category.productCount} templates
+                  </p>
+                  <h3 className="mt-2 font-display text-xl tracking-tight">{category.label}</h3>
+                  <p className="mt-3 text-sm leading-6 text-text-muted">{category.description}</p>
+                  {category.sampleProduct ? (
+                    <p className="mt-3 text-sm text-text-muted">
+                      Starts from <span className="font-medium text-text">{category.sampleProduct.price}</span>
+                    </p>
+                  ) : null}
+                  <Link
+                    href={`/html-business-profiles?category=${category.slug}`}
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+                  >
+                    Browse {category.shortLabel} <ArrowUpRightIcon className="size-3.5" />
+                  </Link>
+                </Card>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </Container>
+      </Section>
+
+      <AdditionalServices />
+
+      {/* Featured Builds */}
+      <Section>
+        <Container>
+          <SectionHeading
+              eyebrow={homeContent?.featuredBuilds?.eyebrow ?? "Featured builds"}
+              title={homeContent?.featuredBuilds?.title ?? "Proof from launches, rebuilds, and growth."}
+              description={homeContent?.featuredBuilds?.description ?? "A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."}
+          />
+          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
+            {featuredProjects.map((p) => (
+              <RevealItem key={p.slug}>
+                <PortfolioCard project={p} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          <div className="mt-8 flex justify-center">
+            <LinkButton href="/portfolio" variant="outline">
+              See all projects
+            </LinkButton>
+          </div>
+        </Container>
+      </Section>
+
+      <TrustStrip items={HOME_STACK_MARQUEE} />
 
       {/* Live SaaS Spotlight */}
       <Section tone="inset">
