@@ -196,7 +196,7 @@ export default async function Home() {
             {services.map((s) => {
               const Icon = SERVICE_ICONS[s.slug as keyof typeof SERVICE_ICONS];
               return (
-                <RevealItem key={s.slug}>
+                <RevealItem key={s.slug} className="h-full">
                   <FeatureCard
                     href={`/services/${s.slug}`}
                     icon={<Icon className="size-5" />}
@@ -207,13 +207,13 @@ export default async function Home() {
                 </RevealItem>
               );
             })}
-            <RevealItem key="seo-additional-service">
+            <RevealItem key="seo-additional-service" className="h-full">
               <FeatureCard
                 href="/additional-services"
                 icon={<SparklesIcon className="size-5" />}
                 title="SEO"
-                description="Additional service for visibility setup, indexing, analytics, and technical optimization."
-                meta="One-time setup"
+                description="Technical SEO service for indexing, analytics, and visibility setup."
+                meta="Technical SEO"
               />
             </RevealItem>
           </RevealGroup>
