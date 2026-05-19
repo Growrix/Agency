@@ -1,0 +1,27 @@
+{
+  "name": "growrixos-sanity-studio",
+  "private": true,
+  "version": "0.0.1",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev": "fnm exec --using=20 -- node ./scripts/dev-server.mjs",
+    "dev:raw": "sanity dev --host 0.0.0.0 --port 3333",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "@sanity/vision": "5.22.0",
+    "date-fns": "4.1.0",
+    "growrixos-sanity-studio": "file:",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "sanity": "5.22.0",
+    "styled-components": "6.1.19"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

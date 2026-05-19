@@ -1,0 +1,9 @@
+{
+  "_id": "category.operations",
+  "_type": "category",
+  "title": "Operations",
+  "slug": {
+    "_type": "slug",
+    "current": "operations"
+  }
+}

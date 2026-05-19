@@ -1,0 +1,88 @@
+# Growrixos Workspace
+
+This repository contains the Growrixos frontend workspace and the project planning system used to track implementation phases.
+
+## Local Commands
+
+Use Node.js `20.x` locally (recommended). The repository now allows Node `>=20 <25` for deployment/runtime alignment while `.nvmrc` and `.node-version` keep local development pinned to `20` by default.
+
+Run these commands from the repository root:
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
+
+These root commands are for the `web/` app only. Do not use the repository root to install or run Sanity Studio.
+
+`npm run dev` now self-heals common local startup issues: it enforces Node 20 through `fnm` when available, restarts stale Growrixos Next.js processes that are still holding port `5000`, and falls back to the next free local port if `5000` is occupied by another application.
+
+The root install now also installs the Next.js app dependencies inside `web/` through `postinstall`, so CI and deployment environments can build from the repository root without a manual second install step.
+
+## Sanity Studio
+
+`studio/` is an isolated application inside the same repository.
+
+Rules:
+
+- Use Node.js `20.x` for Studio as well.
+- Run Studio commands from `studio/`, not from the repository root.
+- Keep a dedicated `studio/package-lock.json` for deterministic installs.
+- Keep Studio CI/deploy separate from the public site CI/deploy.
+- Deploy Studio to its own project and domain such as `cms.growrixos.com`.
+
+Recommended Studio commands:
+
+```bash
+cd studio
+npm install
+npm run dev
+```
+
+Recommended Studio deployment target:
+
+- separate Vercel project
+- Root Directory: `studio`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Domain: `cms.growrixos.com`
+
+## Development Deployment Baseline
+
+The current deployment target is a frontend-only development deployment. Backend and API phases are intentionally deferred while frontend iteration continues.
+
+Recommended Vercel project settings:
+
+- Framework Preset: `Next.js`
+- Root Directory: `web`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: leave empty and let Vercel detect `.next`
+- Node.js Version: `20.x` or `24.x` (both are compatible with the repository engine range)
+
+If the Vercel project is instead pointed at the repository root, use:
+
+- Install Command: `npm install`
+- Build Command: `npm run build`
+
+That works because the root `postinstall` script installs `web/` dependencies and the root build script proxies to the Next.js app.
+
+## Environment Setup
+
+Copy values from `.env.example` into Vercel project environment variables before deployment. The current frontend can deploy without backend secrets, but the public site URL should be set.
+
+For the live Google review sections, also set:
+
+- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`: a browser/referrer-restricted key.
+- `NEXT_PUBLIC_GOOGLE_PLACE_ID` or `NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT`: the business listing to load.
+
+Enable both the Google Maps JavaScript API and the Places API for that key. The review feed is browser-side so the key should stay restricted to your site domain.
+
+## Documentation Entry Points
+
+- Execution tracker: `DOC/PROJECT PLAN/Tasks/tasks.md`
+- Machine-readable tracker entry: `DOC/PROJECT PLAN/Tasks/ai-context.yaml`
+- DevOps plan: `DOC/PROJECT PLAN/DevOps/README.md`

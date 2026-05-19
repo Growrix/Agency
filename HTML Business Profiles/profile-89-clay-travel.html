@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Wanderlust — Travel Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(160deg,#d0f0ff 0%,#d0e8ff 40%,#ffe8d0 100%);margin:0 auto}
+.clay{border-radius:22px;box-shadow:0 2px 0 rgba(0,0,0,.06) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 10px 28px rgba(0,0,0,.1),0 3px 8px rgba(0,0,0,.07)}
+.hero{min-height:278px;padding:28px 20px 22px;position:relative;overflow:hidden}
+.em{position:absolute;font-size:40px}
+.em1{top:18px;right:12px;transform:rotate(12deg)}.em2{top:68px;left:8px;font-size:26px;transform:rotate(-8deg)}.em3{bottom:24px;right:16px;font-size:30px}
+.hb{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:5px 13px;font-size:11px;font-weight:800;color:#1840b0;margin-bottom:14px;width:fit-content;box-shadow:0 6px 16px rgba(24,64,176,.15)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:42px;font-weight:900;color:#081040;line-height:.9;letter-spacing:-2px}
+.hero h1 .acc{color:#2060e0}
+.hero-sub{font-size:12px;color:rgba(8,16,64,.4);margin-top:8px;line-height:1.55;font-weight:600}
+.dest-row{display:flex;gap:8px;padding:4px 14px 14px;overflow-x:auto;scrollbar-width:none}
+.dest-row::-webkit-scrollbar{display:none}
+.dest{background:#fff;border-radius:100px;padding:6px 14px;font-size:11px;font-weight:800;color:rgba(8,16,64,.5);white-space:nowrap;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:rgba(8,16,64,.35);margin:16px 0 12px}
+.packages{display:flex;flex-direction:column;gap:8px}
+.pkg{background:#fff;border-radius:20px;padding:16px;position:relative;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.08)}
+.pkg-flag{font-size:28px;margin-bottom:8px}
+.pkg-top{display:flex;justify-content:space-between;align-items:flex-start}
+.pkg-dest{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:#081040}
+.pkg-dur{font-size:10px;color:rgba(8,16,64,.35);margin-top:2px;font-weight:700}
+.pkg-right{text-align:right}
+.pkg-price{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:#2060e0}
+.pkg-per{font-size:9px;color:rgba(8,16,64,.3);font-weight:600}
+.pkg-tags{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+.pkg-tag{background:#f0f4ff;border-radius:100px;padding:2px 9px;font-size:9px;font-weight:700;color:rgba(8,16,64,.45)}
+.pkg-tag.hot{background:#fff0e0;color:rgba(160,80,0,.6)}
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{background:#fff;border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 6px 16px rgba(0,0,0,.07)}
+.svc-name{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:#081040}
+.svc-desc{font-size:10px;color:rgba(8,16,64,.4);margin-top:2px;font-weight:600}
+.svc-price{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:#2060e0;flex-shrink:0}
+.cta{background:linear-gradient(135deg,#1840b0,#2080f0);border-radius:24px;padding:24px;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.1) inset,0 -2px 0 rgba(255,255,255,.25) inset,0 14px 36px rgba(24,64,176,.3)}
+.cta h3{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:18px;line-height:1.5;font-weight:600}
+.cta-btn{display:block;background:#fff;color:#1840b0;border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.cta-btn2{display:block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);border-radius:16px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:none}
+.contacts{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.07)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(8,16,64,.07);font-size:12px;color:rgba(8,16,64,.45);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:linear-gradient(135deg,#1840b0,#2080f0);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 10px rgba(24,64,176,.3)}
+footer{text-align:center;padding:18px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:rgba(8,16,64,.2)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <span class="em em1">✈️</span><span class="em em2">🌍</span><span class="em em3">🏝️</span>
+  <div class="hb">✈️ ATAB Licensed · Since 2010</div>
+  <h1>Travel more,<br>worry <span class="acc">less.</span></h1>
+  <div class="hero-sub">Group tours, family holidays, corporate travel and visa assistance. We've sent 50,000+ Bangladeshis around the world!</div>
+</div>
+<div class="dest-row">
+  <div class="dest">🇹🇭 Thailand</div><div class="dest">🇸🇬 Singapore</div>
+  <div class="dest">🇦🇪 Dubai</div><div class="dest">🇮🇳 India</div>
+  <div class="dest">🇲🇾 Malaysia</div><div class="dest">🌍 Europe</div>
+</div>
+<div class="body">
+  <div class="sec">Hot packages 🔥</div>
+  <div class="packages">
+    <div class="pkg"><div class="pkg-flag">🇹🇭</div><div class="pkg-top"><div><div class="pkg-dest">Bangkok & Pattaya</div><div class="pkg-dur">5 nights · 6 days</div></div><div class="pkg-right"><div class="pkg-price">৳55,000</div><div class="pkg-per">per person</div></div></div><div class="pkg-tags"><div class="pkg-tag hot">🔥 Best Seller</div><div class="pkg-tag">Hotel + Flights</div><div class="pkg-tag">Visa incl.</div></div></div>
+    <div class="pkg"><div class="pkg-flag">🇦🇪</div><div class="pkg-top"><div><div class="pkg-dest">Dubai City & Desert</div><div class="pkg-dur">4 nights · 5 days</div></div><div class="pkg-right"><div class="pkg-price">৳85,000</div><div class="pkg-per">per person</div></div></div><div class="pkg-tags"><div class="pkg-tag">Hotel + Flights</div><div class="pkg-tag">Desert Safari</div><div class="pkg-tag">City Tour</div></div></div>
+  </div>
+  <div class="sec">Other services ✈️</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Visa Processing</div><div class="svc-desc">Tourist, business, student — any country</div></div><div class="svc-price">৳3,500</div></div>
+    <div class="svc"><div><div class="svc-name">Umrah Package</div><div class="svc-desc">15 days · accommodation + transport</div></div><div class="svc-price">৳1,20,000</div></div>
+    <div class="svc"><div><div class="svc-name">Air Ticket</div><div class="svc-desc">Best fares · all airlines · any destination</div></div><div class="svc-price">Best Rate</div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Plan your trip! 🌍</div>
+  <div class="cta">
+    <h3>✈️ Where to next?</h3>
+    <p>Tell us your destination and budget — we'll design the perfect trip for you. Free consultation!</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🌍 Get a Free Quote</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call our travel experts</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Find us 📍</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Motijheel, Dhaka · ATAB member</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu 9am–7pm · Sat 10am–4pm</div>
+  </div>
+</div>
+<footer>© 2025 Wanderlust Travel Agency · ATAB Licensed · Dhaka ✈️</footer>
+</div></body></html>

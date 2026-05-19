@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>GreenThumb — Landscaping & Gardening</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:#0a1a06;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f4f8f0;margin:0 auto}
+.hero{min-height:268px;background:linear-gradient(160deg,#2d6a20 0%,#1a4a10 55%,#0a2006 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px}
+.leaf-bg{position:absolute;inset:0;font-size:40px;display:flex;flex-wrap:wrap;gap:18px;padding:10px;align-content:flex-start;opacity:.05;pointer-events:none}
+.hero-ground{position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(0deg,rgba(80,40,10,.4),transparent);border-radius:50% 50% 0 0}
+.hero-plant{position:absolute;right:12px;top:16px;font-size:60px;opacity:.12}
+.h-season{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:4px 12px;font-size:9px;color:rgba(255,255,255,.8);font-weight:600;margin-bottom:14px;width:fit-content;letter-spacing:.5px}
+.hero h1{font-family:'Fraunces',serif;font-size:40px;font-weight:300;color:#f0f8e8;line-height:.92;letter-spacing:-.5px}
+.hero h1 em{font-style:italic;color:#a8dc80}
+.hero-sub{font-size:11px;color:rgba(240,248,232,.45);margin-top:8px;line-height:1.5}
+.hero-quote{font-family:'Fraunces',serif;font-style:italic;font-size:12px;color:rgba(240,248,232,.35);margin-top:10px}
+.stats-row{display:flex;background:#fff;border-bottom:1px solid #d4e8c8}
+.st{flex:1;text-align:center;padding:12px 0;border-right:1px solid #e8f4e0}
+.st:last-child{border-right:none}
+.st-n{font-family:'Fraunces',serif;font-size:18px;color:#2d6a20;font-weight:400}
+.st-l{font-size:8px;color:#7aaa60;margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#4a8a30;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(74,138,48,.2)}
+.services{display:flex;flex-direction:column;gap:7px}
+.svc{background:#fff;border:1px solid #d4e8c8;border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-icon{font-size:22px;margin-bottom:3px}
+.svc-name{font-family:'Fraunces',serif;font-size:15px;font-weight:400;color:#1a3a10;font-style:italic}
+.svc-desc{font-size:10px;color:#7aaa60;margin-top:2px;line-height:1.4}
+.svc-price{font-family:'Fraunces',serif;font-size:16px;color:#4a8a30;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:#9ac880;font-family:'DM Sans',sans-serif;margin-top:1px}
+.plants-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.plant-card{background:#fff;border:1px solid #d4e8c8;border-radius:10px;padding:12px;text-align:center}
+.plant-icon{font-size:26px;margin-bottom:5px}
+.plant-name{font-family:'Fraunces',serif;font-size:12px;color:#1a3a10;font-style:italic}
+.plant-price{font-size:11px;color:#4a8a30;margin-top:3px;font-weight:600}
+.seasonal{background:linear-gradient(135deg,#e8f4e0,#d4e8c8);border-radius:14px;padding:16px;border:1px solid #b8d8a0;margin-top:2px}
+.seasonal h4{font-family:'Fraunces',serif;font-size:16px;color:#1a3a10;font-style:italic;margin-bottom:8px}
+.seasonal p{font-size:12px;color:#5a8a48;line-height:1.6}
+.seasonal-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.stag{background:#fff;border:1px solid #b8d8a0;border-radius:100px;padding:4px 10px;font-size:10px;color:#4a8a30;font-weight:600}
+.consult-box{background:linear-gradient(135deg,#2d6a20,#1a4a10);border-radius:14px;padding:20px;text-align:center}
+.consult-box h3{font-family:'Fraunces',serif;font-size:20px;font-weight:300;font-style:italic;color:#f0f8e8;margin-bottom:6px}
+.consult-box p{font-size:12px;color:rgba(240,248,232,.5);margin-bottom:16px;line-height:1.5}
+.con-btn{display:block;background:#a8dc80;color:#0a2006;border-radius:10px;padding:13px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:7px;font-family:'Fraunces',serif;font-style:italic}
+.con-btn2{display:block;background:rgba(255,255,255,.08);color:rgba(240,248,232,.4);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:11px;font-size:11px;text-decoration:none}
+.contacts{background:#fff;border:1px solid #d4e8c8;border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #eef8e8;font-size:12px;color:#555}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#2d6a20;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+footer{background:#0a2006;padding:16px;text-align:center;font-family:'Fraunces',serif;font-size:13px;font-style:italic;color:rgba(240,248,232,.2)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="leaf-bg">🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿</div>
+  <div class="hero-ground"></div>
+  <div class="hero-plant">🌳</div>
+  <div class="h-season">🌱 Now taking garden projects</div>
+  <h1>Green<br><em>Thumb</em></h1>
+  <div class="hero-sub">Landscaping, garden design, rooftop gardens & monthly maintenance. Making Dhaka greener, one garden at a time.</div>
+  <div class="hero-quote">"Every garden tells a story. Let us write yours."</div>
+</div>
+<div class="stats-row">
+  <div class="st"><div class="st-n">350+</div><div class="st-l">Gardens</div></div>
+  <div class="st"><div class="st-n">10yr</div><div class="st-l">Experience</div></div>
+  <div class="st"><div class="st-n">4.9★</div><div class="st-l">Rating</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-icon">🌳</div><div class="svc-name">Garden Design & Setup</div><div class="svc-desc">Full landscaping from bare ground — design, plants, paths, lighting</div></div><div class="svc-price">Custom<span>free quote</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🏠</div><div class="svc-name">Rooftop Garden</div><div class="svc-desc">Terrace gardens, planters, irrigation, raised beds</div></div><div class="svc-price">৳25,000<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🌿</div><div class="svc-name">Monthly Maintenance</div><div class="svc-desc">Watering, pruning, fertilising, pest control</div></div><div class="svc-price">৳3,000<span>/ month</span></div></div>
+    <div class="svc"><div><div class="svc-icon">✂️</div><div class="svc-name">Tree & Hedge Trimming</div><div class="svc-desc">Shaping, removal, stump grinding</div></div><div class="svc-price">৳1,500<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">💧</div><div class="svc-name">Irrigation System</div><div class="svc-desc">Drip & sprinkler — automatic timer systems</div></div><div class="svc-price">৳8,000<span>from</span></div></div>
+  </div>
+  <div class="sec">Plants We Sell & Supply</div>
+  <div class="plants-grid">
+    <div class="plant-card"><div class="plant-icon">🌺</div><div class="plant-name">Flowering</div><div class="plant-price">৳150+</div></div>
+    <div class="plant-card"><div class="plant-icon">🌿</div><div class="plant-name">Indoor</div><div class="plant-price">৳200+</div></div>
+    <div class="plant-card"><div class="plant-icon">🌵</div><div class="plant-name">Succulents</div><div class="plant-price">৳100+</div></div>
+    <div class="plant-card"><div class="plant-icon">🌱</div><div class="plant-name">Herbs</div><div class="plant-price">৳80+</div></div>
+    <div class="plant-card"><div class="plant-icon">🎋</div><div class="plant-name">Bamboo</div><div class="plant-price">৳500+</div></div>
+    <div class="plant-card"><div class="plant-icon">🌳</div><div class="plant-name">Fruit Trees</div><div class="plant-price">৳800+</div></div>
+  </div>
+  <div class="sec">What We Specialise In</div>
+  <div class="seasonal">
+    <h4>Our specialties this season:</h4>
+    <p>Rooftop kitchen gardens, vertical green walls for offices, water-wise drought-resistant gardens, and children's sensory gardens.</p>
+    <div class="seasonal-tags">
+      <div class="stag">🌾 Kitchen gardens</div>
+      <div class="stag">🟩 Green walls</div>
+      <div class="stag">🌊 Water-wise</div>
+      <div class="stag">🧒 Kids gardens</div>
+    </div>
+  </div>
+  <div class="sec">Book a Free Consultation</div>
+  <div class="consult-box">
+    <h3>Let's grow something beautiful.</h3>
+    <p>Free 30-minute site visit and quote. No obligation. We'll bring ideas, plant samples and a design mood board.</p>
+    <a href="https://wa.me/8801700000000" class="con-btn">🌿 Book Free Consultation</a>
+    <a href="tel:+8801700000000" class="con-btn2">📞 Call us</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Based in Mirpur · All Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Daily · 7am–7pm</div>
+    <div class="cr"><div class="ci">📸</div>@greenthumb.dhaka</div>
+  </div>
+</div>
+<footer>© 2025 GreenThumb Landscaping · Making Dhaka Greener 🌿</footer>
+</div></body></html>

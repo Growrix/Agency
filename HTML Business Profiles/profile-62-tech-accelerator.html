@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>LaunchPad BD — Tech Startup Accelerator</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:#06020f;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#08031a;margin:0 auto;color:#e0d8f8}
+/* GRADIENT MESH / BLOB HERO */
+.hero{min-height:270px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px}
+.mesh{position:absolute;inset:0;background:linear-gradient(135deg,#1a0640 0%,#08031a 50%,#03101a 100%)}
+.blob-a{position:absolute;width:240px;height:240px;background:radial-gradient(circle,rgba(180,60,255,.25) 0%,transparent 70%);top:-60px;right:-40px;filter:blur(20px)}
+.blob-b{position:absolute;width:180px;height:180px;background:radial-gradient(circle,rgba(255,80,140,.15) 0%,transparent 70%);bottom:-30px;left:-20px;filter:blur(16px)}
+.blob-c{position:absolute;width:140px;height:140px;background:radial-gradient(circle,rgba(60,200,255,.12) 0%,transparent 70%);top:40px;left:40px;filter:blur(12px)}
+.h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:5px 14px;font-size:10px;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:12px;width:fit-content;position:relative;z-index:1}
+.rocket{font-size:13px}
+.hero h1{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;color:#fff;line-height:.95;letter-spacing:-1.5px;position:relative;z-index:1}
+.hero h1 .grd{background:linear-gradient(135deg,#d060ff,#ff6090,#60d0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:11px;color:rgba(224,216,248,.4);margin-top:8px;line-height:1.5;position:relative;z-index:1}
+.hero-round{position:absolute;bottom:22px;right:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;text-align:center;z-index:1}
+.hr-n{font-family:'Syne',sans-serif;font-size:16px;color:#d060ff;font-weight:700}
+.hr-l{font-size:8px;color:rgba(224,216,248,.3);margin-top:2px;letter-spacing:1px}
+.stats-g{display:flex;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06)}
+.sg{flex:1;text-align:center;padding:13px 0;border-right:1px solid rgba(255,255,255,.06)}
+.sg:last-child{border-right:none}
+.sg-n{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;background:linear-gradient(135deg,#d060ff,#60d0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sg-l{font-size:8px;color:rgba(224,216,248,.2);margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(180,100,255,.5);margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(180,100,255,.15)}
+.cohorts{display:flex;flex-direction:column;gap:8px}
+.cohort{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.cohort::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.c-seed::before{background:linear-gradient(90deg,#d060ff,#ff6090)}
+.c-series::before{background:linear-gradient(90deg,#60d0ff,#d060ff)}
+.cohort-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(224,216,248,.3);margin-bottom:8px}
+.cohort-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#e0d8f8;letter-spacing:-.3px}
+.cohort-desc{font-size:11px;color:rgba(224,216,248,.35);margin-top:4px;line-height:1.5}
+.cohort-details{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+.cd{font-size:10px;color:rgba(180,100,255,.6);background:rgba(180,100,255,.08);border:1px solid rgba(180,100,255,.15);border-radius:100px;padding:3px 9px;font-weight:600}
+.alumni-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.alumni{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px;text-align:center}
+.alumni-name{font-size:11px;font-weight:600;color:#e0d8f8}
+.alumni-raise{font-size:9px;color:rgba(180,100,255,.6);margin-top:2px}
+.cta{background:linear-gradient(135deg,rgba(180,60,255,.2),rgba(255,80,140,.1));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#d060ff,#ff6090,#60d0ff,transparent)}
+.cta h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-.5px}
+.cta p{font-size:11px;color:rgba(224,216,248,.4);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:linear-gradient(135deg,#d060ff,#ff6090);color:#fff;border-radius:10px;padding:13px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:7px;font-family:'Syne',sans-serif}
+.cta-btn2{display:block;background:rgba(255,255,255,.05);color:rgba(224,216,248,.35);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:11px;font-size:11px;text-decoration:none}
+.contacts{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(224,216,248,.3)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:rgba(180,60,255,.15);border:1px solid rgba(180,60,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{border-top:1px solid rgba(255,255,255,.05);padding:16px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;letter-spacing:1.5px;color:rgba(224,216,248,.1);text-transform:uppercase}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="mesh"></div>
+  <div class="blob-a"></div><div class="blob-b"></div><div class="blob-c"></div>
+  <div class="h-pill"><span class="rocket">🚀</span>Applications now open · Cohort 8</div>
+  <h1>Build the<br><span class="grd">next big</span><br>thing here.</h1>
+  <div class="hero-sub">Bangladesh's leading startup accelerator. $100K investment + 4 months of expert mentoring.</div>
+  <div class="hero-round"><div class="hr-n">$100K</div><div class="hr-l">Investment</div></div>
+</div>
+<div class="stats-g">
+  <div class="sg"><div class="sg-n">72</div><div class="sg-l">Startups</div></div>
+  <div class="sg"><div class="sg-n">$42M</div><div class="sg-l">Raised</div></div>
+  <div class="sg"><div class="sg-n">85%</div><div class="sg-l">Survive 3yr</div></div>
+</div>
+<div class="body">
+  <div class="sec">Current Programs</div>
+  <div class="cohorts">
+    <div class="cohort c-seed">
+      <div class="cohort-label">Seed Stage</div>
+      <div class="cohort-name">LaunchPad Seed</div>
+      <div class="cohort-desc">For pre-revenue startups with a working prototype. $100K equity-free grant + 4 months intensive.</div>
+      <div class="cohort-details"><div class="cd">$100K grant</div><div class="cd">4 months</div><div class="cd">Equity-free</div><div class="cd">30 mentors</div></div>
+    </div>
+    <div class="cohort c-series">
+      <div class="cohort-label">Growth Stage</div>
+      <div class="cohort-name">LaunchPad Scale</div>
+      <div class="cohort-desc">Revenue-generating startups seeking Series A. Connect with 50+ regional investors.</div>
+      <div class="cohort-details"><div class="cd">$250K investment</div><div class="cd">6 months</div><div class="cd">5% equity</div></div>
+    </div>
+  </div>
+  <div class="sec">Alumni Highlights</div>
+  <div class="alumni-grid">
+    <div class="alumni"><div class="alumni-name">ShopHive</div><div class="alumni-raise">$3.2M raised</div></div>
+    <div class="alumni"><div class="alumni-name">MedFlow</div><div class="alumni-raise">$1.8M raised</div></div>
+    <div class="alumni"><div class="alumni-name">AgroGrid</div><div class="alumni-raise">$2.5M raised</div></div>
+    <div class="alumni"><div class="alumni-name">CipherPay</div><div class="alumni-raise">$4.1M raised</div></div>
+    <div class="alumni"><div class="alumni-name">EduSpark</div><div class="alumni-raise">$900K raised</div></div>
+    <div class="alumni"><div class="alumni-name">HealthOS</div><div class="alumni-raise">$1.2M raised</div></div>
+  </div>
+  <div class="sec">Apply Now</div>
+  <div class="cta">
+    <h3>🚀 Ready to launch?</h3>
+    <p>Applications for Cohort 8 close in 30 days. 500 founders apply. 12 get in.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">Apply for Cohort 8</a>
+    <a href="mailto:apply@launchpadbd.com" class="cta-btn2">apply@launchpadbd.com</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📧</div>apply@launchpadbd.com</div>
+    <div class="cr"><div class="ci">📍</div>Startup Hub, Banani, Dhaka</div>
+    <div class="cr"><div class="ci">🌐</div>launchpadbd.com</div>
+  </div>
+</div>
+<footer>LaunchPad BD · Tech Accelerator · Dhaka · Since 2016</footer>
+</div></body></html>

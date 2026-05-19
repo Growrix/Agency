@@ -37,12 +37,6 @@ scope_specific_planning_docs:
     use_for:
       - route-by-route content source ownership during CMS rollout
       - component reuse, fallback, and preview rules for portfolio, shop, services, FAQ, homepage, and about surfaces
-  aircon_installer_transformation:
-    canonical_doc: DOC/PROJECT PLAN/Frontend/aircon-installer-transformation-frontend.md
-    parent_artifact: DOC/PROJECT PLAN/aircon-installer-transformation-e2e-plan.md
-    use_for:
-      - route-by-route transformation planning for the aircon installer site
-      - keep adapt replace retire decisions and shared-surface reuse rules for the transformed frontend
 
 surfaces:
   public_marketing:
@@ -137,17 +131,6 @@ read_paths:
     - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
     - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
-  plan_aircon_installer_transformation:
-    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
-    - DOC/PROJECT PLAN/Frontend/README.md
-    - DOC/PROJECT PLAN/aircon-installer-transformation-e2e-plan.md
-    - DOC/PROJECT PLAN/Frontend/aircon-installer-transformation-frontend.md
-    - DOC/PROJECT PLAN/API and Data/aircon-installer-transformation-api-data.md
-    - DOC/PROJECT PLAN/Admin Dashboard/aircon-installer-transformation-admin-dashboard.md
-    - DOC/PROJECT PLAN/Security/aircon-installer-transformation-security.md
-    - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
-    - DOC/PROJECT PLAN/Frontend/01-design-system.md
-    - DOC/PROJECT PLAN/Frontend/02-component-system.md
   build_global_shell:
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
@@ -246,5 +229,3 @@ document_groups:
     - DOC/PROJECT PLAN/Frontend/404-page.md
   cms_content_operations:
     - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
-  aircon_installer_transformation:
-    - DOC/PROJECT PLAN/Frontend/aircon-installer-transformation-frontend.md

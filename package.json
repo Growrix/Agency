@@ -1,0 +1,15 @@
+{
+  "name": "growrixos-workspace",
+  "private": true,
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "start": "npm --prefix web run start",
+    "lint": "npm --prefix web run lint",
+    "install:web": "npm --prefix web install",
+    "postinstall": "npm run install:web"
+  }
+}

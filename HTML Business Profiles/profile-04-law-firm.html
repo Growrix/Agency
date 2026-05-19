@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Chambers & Associates — Law Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Lato',sans-serif;background:#0c1628;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f8f6f1;margin:0 auto}
+
+.hero{min-height:280px;background:linear-gradient(170deg,#0c1628 0%,#1a2d4f 60%,#0c1628 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 22px}
+.hero-seal{position:absolute;top:24px;right:16px;width:70px;height:70px;border:1.5px solid rgba(212,175,55,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:.5}
+.hero-lines{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(212,175,55,.04) 0px,rgba(212,175,55,.04) 1px,transparent 1px,transparent 60px)}
+.eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(212,175,55,.7);margin-bottom:12px}
+.hero h1{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#fff;line-height:1;letter-spacing:-.3px}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;letter-spacing:1.5px;text-transform:uppercase}
+.hero-rule{width:40px;height:2px;background:linear-gradient(90deg,#d4af37,transparent);margin:12px 0}
+.hero-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.55)}
+
+.gold-bar{background:#d4af37;padding:10px 22px;display:flex;justify-content:space-between;align-items:center}
+.gold-bar span{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0c1628}
+
+.body{padding:0 20px 36px}
+.sec{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#d4af37;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(212,175,55,.3),transparent)}
+
+.attorney-card{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid #e8e2d0;border-radius:10px;padding:16px;margin-bottom:12px}
+.attorney-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#1a2d4f,#0c1628);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#d4af37;flex-shrink:0}
+.attorney-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:#0c1628}
+.attorney-title{font-size:11px;color:#8a7d60;margin-top:2px}
+.attorney-bar{font-size:10px;color:#c4a82a;margin-top:4px;font-weight:700;letter-spacing:.5px}
+
+.practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.practice-card{background:#fff;border:1px solid #e8e2d0;border-radius:8px;padding:14px;text-align:center}
+.practice-icon{font-size:22px;margin-bottom:8px}
+.practice-name{font-size:12px;font-weight:700;color:#0c1628;font-family:'Playfair Display',serif}
+.practice-desc{font-size:10px;color:#8a7d60;margin-top:3px;line-height:1.4}
+
+.consult-box{background:linear-gradient(135deg,#0c1628,#1a2d4f);border-radius:12px;padding:20px;text-align:center}
+.consult-box h3{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px}
+.consult-box p{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:16px;line-height:1.5}
+.consult-btn{display:block;background:#d4af37;color:#0c1628;border-radius:6px;padding:13px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none}
+
+.contact-list{background:#fff;border:1px solid #e8e2d0;border-radius:10px;overflow:hidden}
+.contact-row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #f0ebe0;font-size:12px;color:#444}
+.contact-row:last-child{border-bottom:none}
+.contact-icon{width:32px;height:32px;background:#f5f0e5;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+.awards{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.award{background:#fff;border:1px solid #e8e2d0;border-radius:6px;padding:6px 10px;font-size:10px;color:#8a7d60;display:flex;align-items:center;gap:4px}
+.award .star{color:#d4af37}
+
+footer{background:#0c1628;padding:20px;text-align:center;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-seal">⚖️</div>
+  <div class="eyebrow">Attorneys at Law · Est. 1994</div>
+  <h1>Chambers &amp;<br>Associates</h1>
+  <div class="hero-rule"></div>
+  <div class="hero-tagline">"Justice served with integrity."</div>
+  <div class="hero-sub">Dhaka · London · New York</div>
+</div>
+<div class="gold-bar">
+  <span>⭐ Rated Top 3 Law Firm 2024</span>
+  <span>30yr Experience</span>
+</div>
+<div class="body">
+  <div class="sec">Our Attorneys</div>
+  <div class="attorney-card">
+    <div class="attorney-avatar">JC</div>
+    <div>
+      <div class="attorney-name">James Chambers</div>
+      <div class="attorney-title">Senior Partner · Criminal Law</div>
+      <div class="attorney-bar">✓ Bangladesh Bar Council · LLM Oxford</div>
+    </div>
+  </div>
+  <div class="attorney-card">
+    <div class="attorney-avatar">NA</div>
+    <div>
+      <div class="attorney-name">Nadia Ahmed</div>
+      <div class="attorney-title">Partner · Corporate &amp; Commercial</div>
+      <div class="attorney-bar">✓ 18 years practice · LLB Dhaka</div>
+    </div>
+  </div>
+
+  <div class="sec">Practice Areas</div>
+  <div class="practice-grid">
+    <div class="practice-card"><div class="practice-icon">⚖️</div><div class="practice-name">Criminal Law</div><div class="practice-desc">Defense &amp; prosecution at all court levels</div></div>
+    <div class="practice-card"><div class="practice-icon">🏢</div><div class="practice-name">Corporate Law</div><div class="practice-desc">Company formation, M&amp;A, contracts</div></div>
+    <div class="practice-card"><div class="practice-icon">🏠</div><div class="practice-name">Property Law</div><div class="practice-desc">Land disputes, conveyancing, leases</div></div>
+    <div class="practice-card"><div class="practice-icon">👨‍👩‍👧</div><div class="practice-name">Family Law</div><div class="practice-desc">Divorce, custody, inheritance</div></div>
+  </div>
+
+  <div class="sec">Free Consultation</div>
+  <div class="consult-box">
+    <h3>Book a Free 30-Min Call</h3>
+    <p>Speak directly with a senior attorney. No obligation. Strict confidentiality guaranteed.</p>
+    <a href="https://wa.me/8801700000000" class="consult-btn">📞 Book via WhatsApp</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-list">
+    <div class="contact-row"><div class="contact-icon">📞</div>+880 2-9876543</div>
+    <div class="contact-row"><div class="contact-icon">📧</div>info@chamberslaw.com</div>
+    <div class="contact-row"><div class="contact-icon">📍</div>Gulshan Avenue, Dhaka 1212</div>
+    <div class="contact-row"><div class="contact-icon">⏰</div>Sun–Thu · 9:00am – 5:00pm</div>
+  </div>
+
+  <div class="sec">Recognition</div>
+  <div class="awards">
+    <div class="award"><span class="star">★</span> Legal 500 Listed</div>
+    <div class="award"><span class="star">★</span> Best Law Firm BD 2023</div>
+    <div class="award"><span class="star">★</span> 500+ Cases Won</div>
+    <div class="award"><span class="star">★</span> 98% Client Satisfaction</div>
+  </div>
+</div>
+<footer>© 2025 Chambers &amp; Associates · All communications privileged &amp; confidential</footer>
+</div></body></html>

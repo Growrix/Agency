@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Form Studio — Interior Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Raleway',sans-serif;background:#2a2218;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f5f0e8;margin:0 auto}
+
+.hero{background:#f5f0e8;min-height:300px;position:relative;overflow:hidden;padding:50px 22px 28px;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid #e0d8c8}
+.hero-bg-text{position:absolute;top:-10px;left:-10px;font-family:'Libre Baskerville',serif;font-size:120px;font-weight:700;color:rgba(42,34,24,.05);line-height:.9;letter-spacing:-5px;pointer-events:none;z-index:0}
+.hero-overline{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Libre Baskerville',serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(42,34,24,.4)}
+.avail-tag{font-size:10px;font-weight:500;color:rgba(42,34,24,.35);letter-spacing:.5px}
+.hero h1{font-family:'Libre Baskerville',serif;font-size:50px;font-weight:700;color:#2a2218;line-height:.88;letter-spacing:-2px;position:relative;z-index:1}
+.hero h1 em{font-style:italic;font-weight:400;color:rgba(42,34,24,.45)}
+.hero-rule{width:48px;height:2px;background:#2a2218;margin:16px 0}
+.hero-tagline{font-size:12px;font-weight:300;color:rgba(42,34,24,.5);line-height:1.7;max-width:280px;letter-spacing:.3px}
+
+.project-numbers{display:flex;background:#2a2218}
+.pn{flex:1;text-align:center;padding:16px 0;border-right:1px solid rgba(255,255,255,.08)}
+.pn:last-child{border-right:none}
+.pn-n{font-family:'Libre Baskerville',serif;font-size:24px;color:#f5f0e8;font-weight:700;font-style:italic}
+.pn-l{font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:4px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:8px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(42,34,24,.35);margin:28px 0 14px;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(42,34,24,.12)}
+
+.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.proj-card{background:#fff;border-radius:4px;overflow:hidden;border:1px solid #e0d8c8}
+.proj-img{height:100px;display:flex;align-items:center;justify-content:center;font-size:32px;position:relative}
+.proj-type{position:absolute;bottom:8px;left:8px;background:#2a2218;color:#f5f0e8;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px}
+.proj-body{padding:12px}
+.proj-name{font-family:'Libre Baskerville',serif;font-size:14px;color:#2a2218;font-style:italic;font-weight:400}
+.proj-location{font-size:10px;color:rgba(42,34,24,.4);margin-top:2px;letter-spacing:.5px}
+.proj-area{font-size:10px;color:rgba(42,34,24,.35);margin-top:4px}
+
+.services{display:flex;flex-direction:column;gap:0}
+.svc-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(42,34,24,.08);gap:12px}
+.svc-row:last-child{border-bottom:none}
+.svc-left h4{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:400;color:#2a2218;font-style:italic}
+.svc-left p{font-size:11px;color:rgba(42,34,24,.4);margin-top:3px;line-height:1.5}
+.svc-price{font-family:'Libre Baskerville',serif;font-size:16px;color:rgba(42,34,24,.6);flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(42,34,24,.3);font-family:'Raleway',sans-serif;letter-spacing:.5px;margin-top:1px}
+
+.process-list{display:flex;flex-direction:column;gap:0}
+.proc{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(42,34,24,.08)}
+.proc:last-child{border-bottom:none}
+.proc-n{font-family:'Libre Baskerville',serif;font-size:28px;font-style:italic;color:rgba(42,34,24,.1);font-weight:700;flex-shrink:0;line-height:1;min-width:36px}
+.proc-title{font-size:13px;font-weight:600;color:#2a2218;letter-spacing:.3px}
+.proc-desc{font-size:11px;color:rgba(42,34,24,.4);margin-top:3px;line-height:1.5}
+
+.consult-box{background:#2a2218;padding:24px;position:relative;overflow:hidden;margin-top:4px}
+.consult-box::after{content:'Form';position:absolute;right:-10px;bottom:-10px;font-family:'Libre Baskerville',serif;font-size:80px;font-weight:700;font-style:italic;color:rgba(255,255,255,.03);line-height:1}
+.consult-eyebrow{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:14px}
+.consult-box h3{font-family:'Libre Baskerville',serif;font-size:24px;font-weight:400;font-style:italic;color:#f5f0e8;margin-bottom:8px}
+.consult-box p{font-size:12px;color:rgba(245,240,232,.4);line-height:1.7;margin-bottom:20px;letter-spacing:.3px}
+.consult-btn{display:block;border:1px solid rgba(245,240,232,.3);color:#f5f0e8;padding:14px;text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;margin-bottom:8px}
+.consult-btn2{display:block;color:rgba(245,240,232,.3);text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+
+.contact-list{background:#fff;border:1px solid #e0d8c8;overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #f0ebe0;font-size:12px;color:#555;letter-spacing:.2px}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#f5f0e8;border:1px solid #e0d8c8;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#2a2218;border-top:1px solid rgba(245,240,232,.06);padding:20px;text-align:center;font-family:'Libre Baskerville',serif;font-size:11px;font-style:italic;color:rgba(245,240,232,.2)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-bg-text">Form</div>
+  <div class="hero-overline"><div class="logo">Form Studio</div><div class="avail-tag">Est. 2015 · Dhaka</div></div>
+  <h1>Interior<br><em>Design</em><br>Studio.</h1>
+  <div class="hero-rule"></div>
+  <div class="hero-tagline">We design spaces that feel like you — considered, calm, and completely yours.</div>
+</div>
+<div class="project-numbers">
+  <div class="pn"><div class="pn-n">180+</div><div class="pn-l">Projects</div></div>
+  <div class="pn"><div class="pn-n">10yr</div><div class="pn-l">Practice</div></div>
+  <div class="pn"><div class="pn-n">4</div><div class="pn-l">Designers</div></div>
+</div>
+<div class="body">
+  <div class="sec">Selected Projects</div>
+  <div class="project-grid">
+    <div class="proj-card"><div class="proj-img" style="background:linear-gradient(135deg,#e8e0d0,#d0c8b8)">🛋<div class="proj-type">Residential</div></div><div class="proj-body"><div class="proj-name">The Gulshan Apartment</div><div class="proj-location">Gulshan-2, Dhaka</div><div class="proj-area">2,800 sqft</div></div></div>
+    <div class="proj-card"><div class="proj-img" style="background:linear-gradient(135deg,#d8d0c8,#c0b8a8)">🏢<div class="proj-type">Commercial</div></div><div class="proj-body"><div class="proj-name">Nexus HQ Office</div><div class="proj-location">Banani, Dhaka</div><div class="proj-area">6,000 sqft</div></div></div>
+    <div class="proj-card"><div class="proj-img" style="background:linear-gradient(135deg,#e0d8c8,#c8c0b0)">🍽<div class="proj-type">Restaurant</div></div><div class="proj-body"><div class="proj-name">Sakura Interior</div><div class="proj-location">Banani, Dhaka</div><div class="proj-area">1,200 sqft</div></div></div>
+    <div class="proj-card"><div class="proj-img" style="background:linear-gradient(135deg,#c8c0b0,#b0a898)">🛏<div class="proj-type">Villa</div></div><div class="proj-body"><div class="proj-name">Baridhara Villa</div><div class="proj-location">Baridhara, Dhaka</div><div class="proj-area">5,500 sqft</div></div></div>
+  </div>
+
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc-row"><div class="svc-left"><h4>Residential Design</h4><p>Apartments, houses &amp; villas. End-to-end.</p></div><div class="svc-price">From $2,500<span>per project</span></div></div>
+    <div class="svc-row"><div class="svc-left"><h4>Commercial Interiors</h4><p>Offices, restaurants &amp; retail spaces.</p></div><div class="svc-price">Custom<span>quote</span></div></div>
+    <div class="svc-row"><div class="svc-left"><h4>Space Planning</h4><p>2D &amp; 3D layout with furniture specification.</p></div><div class="svc-price">From $800<span>per space</span></div></div>
+    <div class="svc-row"><div class="svc-left"><h4>Styling &amp; Decor</h4><p>Curated furniture, art &amp; accessories.</p></div><div class="svc-price">From $500<span>per room</span></div></div>
+  </div>
+
+  <div class="sec">Our Process</div>
+  <div class="process-list">
+    <div class="proc"><div class="proc-n">01</div><div><div class="proc-title">Discovery</div><div class="proc-desc">We visit your space, listen to how you live, and understand your aesthetic instincts.</div></div></div>
+    <div class="proc"><div class="proc-n">02</div><div><div class="proc-title">Concept &amp; Design</div><div class="proc-desc">Mood boards, floor plans, material palettes — presented in a full concept deck.</div></div></div>
+    <div class="proc"><div class="proc-n">03</div><div><div class="proc-title">Execution</div><div class="proc-desc">We manage contractors, sourcing and installation. You just show up to the reveal.</div></div></div>
+  </div>
+
+  <div class="sec">Start a Project</div>
+  <div class="consult-box">
+    <div class="consult-eyebrow">Free Discovery Call</div>
+    <h3>Let's design your space.</h3>
+    <p>All projects begin with a free 30-minute call. Tell us about your space, your style, and your vision — we'll tell you how we'd approach it.</p>
+    <a href="https://wa.me/0000000000" class="consult-btn">Book a Discovery Call</a>
+    <a href="mailto:hello@formstudio.com" class="consult-btn2">hello@formstudio.com</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-list">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📍</div>Studio 4, Gulshan Avenue, Dhaka</div>
+    <div class="c-row"><div class="c-icon">📸</div>@formstudio.bd</div>
+    <div class="c-row"><div class="c-icon">⏰</div>Sun–Thu · 10am – 6pm</div>
+  </div>
+</div>
+<footer>© 2025 Form Studio · Interior Design · Dhaka, Bangladesh</footer>
+</div></body></html>

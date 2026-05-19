@@ -1,0 +1,219 @@
+import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Container, Section } from "@/components/primitives/Container";
+import { Badge } from "@/components/primitives/Badge";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
+import { BlogGrid } from "@/components/sections/BlogGrid";
+import { BlogSidebar } from "@/components/sections/BlogSidebar";
+import {
+  formatBlogDate,
+  type BlogPost,
+} from "@/lib/content";
+import { getBlogImage } from "@/lib/site-images";
+import {
+  getBlogCategoryCounts,
+  getBlogTagCounts,
+  listBlogPosts,
+} from "@/server/blog/content";
+
+// ISR: revalidate blog listing every 60 seconds.
+// Sanity webhook at /api/revalidate triggers on-demand invalidation after publish.
+export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Blog — Field notes from Growrix OS",
+  description:
+    "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, MCP servers, and automation.",
+};
+
+type SearchParams = Promise<{
+  category?: string;
+  tag?: string;
+  q?: string;
+}>;
+
+function filterPosts(posts: BlogPost[], { category, tag, q }: { category?: string; tag?: string; q?: string }) {
+  let out = posts;
+  if (category) out = out.filter((p) => p.category === category);
+  if (tag) out = out.filter((p) => p.tags.includes(tag));
+  if (q) {
+    const needle = q.toLowerCase();
+    out = out.filter(
+      (p) =>
+        p.title.toLowerCase().includes(needle) ||
+        p.excerpt.toLowerCase().includes(needle) ||
+        p.tags.some((t) => t.toLowerCase().includes(needle))
+    );
+  }
+  return out;
+}
+
+export default async function BlogIndexPage({ searchParams }: { searchParams: SearchParams }) {
+  const params = await searchParams;
+  const sorted = await listBlogPosts();
+  const featured = sorted[0];
+  const featuredImage = featured
+    ? featured.coverImage
+      ? { src: featured.coverImage.url, alt: featured.coverImage.alt }
+      : getBlogImage(featured.slug)
+    : undefined;
+  const rest = sorted.slice(1);
+
+  const filtered = filterPosts(sorted, params);
+  const isFiltering = !!(params.category || params.tag || params.q);
+  const grid = isFiltering ? filtered : rest;
+
+  const categories = getBlogCategoryCounts(sorted);
+  const tags = getBlogTagCounts(sorted);
+
+  const activeChips: { label: string; key: "category" | "tag" | "q"; value: string }[] = [];
+  if (params.category) activeChips.push({ label: `Category: ${params.category}`, key: "category", value: params.category });
+  if (params.tag) activeChips.push({ label: `Tag: ${params.tag}`, key: "tag", value: params.tag });
+  if (params.q) activeChips.push({ label: `Search: "${params.q}"`, key: "q", value: params.q });
+
+  function chipHref(removeKey: string) {
+    const next = new URLSearchParams();
+    for (const [k, v] of Object.entries(params)) {
+      if (v && k !== removeKey) next.set(k, v);
+    }
+    const qs = next.toString();
+    return qs ? `/blog?${qs}` : "/blog";
+  }
+
+  return (
+    <>
+      {/* Hero / featured */}
+      <Section className="pt-12 sm:pt-16 pb-10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+        <Container>
+          <div className="max-w-2xl">
+            <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+              <Badge tone="primary" dot>The Growrix OS blog</Badge>
+            </div>
+            <h1
+              className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"
+              style={{ animationDelay: "70ms" }}
+            >
+              Field notes from a studio that ships.
+            </h1>
+            <p
+              className="mt-5 text-lg text-text-muted leading-7 text-pretty signal-rise"
+              style={{ animationDelay: "140ms" }}
+            >
+              Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.
+            </p>
+          </div>
+
+          {!isFiltering && featured && (
+            <Link
+              href={`/blog/${featured.slug}`}
+              className="group mt-12 grid overflow-hidden rounded-[24px] border border-border bg-surface hover:shadow-(--shadow-3) transition-all lg:grid-cols-12"
+            >
+              <div className={`relative aspect-16/10 lg:aspect-auto lg:col-span-7 overflow-hidden bg-linear-to-br ${featured.accent}`}>
+                {featuredImage ? (
+                  <Image
+                    src={featuredImage.src}
+                    alt={featuredImage.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="object-cover transition-transform duration-500 ease-signal group-hover:scale-[1.02]"
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-linear-to-t from-black/68 via-black/12 to-transparent" aria-hidden />
+                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-black/30 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
+                  Featured · {featured.category}
+                </div>
+              </div>
+              <div className="lg:col-span-5 flex flex-col justify-center p-8 lg:p-10">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+                  {formatBlogDate(featured.publishedAt)} · {featured.readMinutes} min read
+                </p>
+                <h2 className="mt-3 font-display text-3xl lg:text-[34px] tracking-tight leading-[1.1] group-hover:text-primary transition-colors">
+                  {featured.title}
+                </h2>
+                <p className="mt-4 text-[15px] leading-6 text-text-muted text-pretty">
+                  {featured.excerpt}
+                </p>
+                <div className="mt-6 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="inline-flex size-9 items-center justify-center rounded-full bg-inset font-mono text-xs font-semibold">
+                      {featured.author.initials}
+                    </span>
+                    <div>
+                      <div className="text-sm font-medium">{featured.author.name}</div>
+                      <div className="text-xs text-text-muted">{featured.author.role}</div>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                    Read <ArrowUpRightIcon className="size-4" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          )}
+        </Container>
+      </Section>
+
+      {/* Grid + sidebar */}
+      <Section className="py-12">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-8">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <SectionHeading
+                  eyebrow={isFiltering ? "Filtered" : "Latest writing"}
+                  title={isFiltering ? `${filtered.length} article${filtered.length === 1 ? "" : "s"}` : "More from the studio"}
+                />
+              </div>
+
+              {activeChips.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {activeChips.map((c) => (
+                    <Link
+                      key={c.key}
+                      href={chipHref(c.key)}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary hover:bg-primary/15"
+                    >
+                      {c.label}
+                      <XMarkIcon className="size-3.5" />
+                    </Link>
+                  ))}
+                  <Link
+                    href="/blog"
+                    className="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-text-muted hover:bg-inset"
+                  >
+                    Clear all
+                  </Link>
+                </div>
+              )}
+
+              {grid.length === 0 ? (
+                <div className="mt-10 rounded-[20px] border border-dashed border-border bg-surface p-10 text-center">
+                  <p className="font-display text-2xl tracking-tight">No matching articles.</p>
+                  <p className="mt-2 text-text-muted">Try clearing filters or searching for a different term.</p>
+                  <Link
+                    href="/blog"
+                    className="mt-4 inline-block text-sm font-medium text-primary"
+                  >
+                    Reset filters →
+                  </Link>
+                </div>
+              ) : (
+                <BlogGrid posts={grid} />
+              )}
+            </div>
+
+            <div className="lg:col-span-4">
+              <div className="lg:sticky lg:top-24">
+                <BlogSidebar categories={categories} tags={tags} initialSearch={params.q ?? ""} />
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </>
+  );
+}

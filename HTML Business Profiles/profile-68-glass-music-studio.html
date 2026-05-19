@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Echo Studios — Music Production</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#040208;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#040208;margin:0 auto;overflow:hidden;position:relative}
+.b1{position:fixed;width:300px;height:300px;background:radial-gradient(circle,rgba(255,80,160,.22) 0%,transparent 70%);top:-40px;right:-40px;filter:blur(50px);z-index:0}
+.b2{position:fixed;width:240px;height:240px;background:radial-gradient(circle,rgba(140,60,255,.18) 0%,transparent 70%);bottom:100px;left:-40px;filter:blur(45px);z-index:0}
+.b3{position:fixed;width:180px;height:180px;background:radial-gradient(circle,rgba(255,140,80,.12) 0%,transparent 70%);top:250px;right:20px;filter:blur(35px);z-index:0}
+.w{position:relative;z-index:1}
+.hero{min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 22px;position:relative}
+.hero-top{position:absolute;top:26px;left:20px;right:20px;display:flex;justify-content:space-between}
+.hl{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;background:linear-gradient(135deg,#ff50a0,#8c3cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px}
+.hb{font-size:9px;background:rgba(255,80,160,.1);border:1px solid rgba(255,80,160,.2);border-radius:100px;padding:3px 10px;color:rgba(255,140,180,.6);letter-spacing:1px}
+/* Waveform visualization */
+.waveform{display:flex;align-items:center;gap:2px;height:36px;margin-bottom:14px}
+.wv{background:linear-gradient(0deg,rgba(255,80,160,.4),rgba(140,60,255,.6));border-radius:2px;animation:wave 1.5s ease-in-out infinite}
+.wv:nth-child(1){height:30%;animation-delay:.0s}.wv:nth-child(2){height:60%;animation-delay:.1s}.wv:nth-child(3){height:90%;animation-delay:.2s}
+.wv:nth-child(4){height:50%;animation-delay:.3s}.wv:nth-child(5){height:100%;animation-delay:.4s}.wv:nth-child(6){height:70%;animation-delay:.5s}
+.wv:nth-child(7){height:40%;animation-delay:.6s}.wv:nth-child(8){height:80%;animation-delay:.7s}.wv:nth-child(9){height:55%;animation-delay:.8s}
+.wv:nth-child(10){height:90%;animation-delay:.9s}.wv:nth-child(11){height:65%;animation-delay:1.0s}.wv:nth-child(12){height:35%;animation-delay:1.1s}
+@keyframes wave{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.5)}}
+.wv{width:6px;flex-shrink:0}
+.hero h1{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;letter-spacing:-2px;line-height:.9;background:linear-gradient(135deg,#fff 40%,rgba(255,140,200,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:11px;color:rgba(255,200,220,.3);margin-top:8px;line-height:1.6}
+.body{padding:0 14px 40px}
+.sec{font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,80,160,.4);margin:20px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(255,80,160,.1)}
+.services{display:flex;flex-direction:column;gap:6px}
+.svc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,80,160,.2),transparent)}
+.svc-name{font-family:'Syne',sans-serif;font-size:13px;color:rgba(255,200,220,.8);font-weight:700;letter-spacing:-.3px}
+.svc-desc{font-size:10px;color:rgba(255,200,220,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-size:14px;color:rgba(255,80,160,.7);flex-shrink:0;font-family:'Syne',sans-serif;font-weight:700}
+.svc-price span{display:block;font-size:9px;color:rgba(255,200,220,.2);font-family:'DM Sans',sans-serif;margin-top:1px;font-weight:400}
+.credits{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.crd{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:12px}
+.crd-artist{font-family:'Syne',sans-serif;font-size:12px;color:rgba(255,200,220,.7);font-weight:700}
+.crd-track{font-size:10px;color:rgba(255,200,220,.3);margin-top:2px}
+.crd-year{font-size:9px;color:rgba(255,80,160,.4);margin-top:4px}
+.cta{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,80,160,.5),rgba(140,60,255,.5),transparent)}
+.cta h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:11px;color:rgba(255,200,220,.3);margin-bottom:18px;line-height:1.6}
+.cta-btn{display:block;background:linear-gradient(135deg,rgba(255,80,160,.8),rgba(140,60,255,.8));color:#fff;border-radius:12px;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;background:rgba(255,255,255,.04);color:rgba(255,200,220,.3);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px;font-size:11px;text-decoration:none}
+.contacts{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:14px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.03);font-size:11px;color:rgba(255,200,220,.3)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:rgba(255,80,160,.1);border:1px solid rgba(255,80,160,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{border-top:1px solid rgba(255,255,255,.04);padding:18px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;color:rgba(255,200,220,.1);letter-spacing:1.5px}
+</style></head>
+<body><div class="app">
+<div class="b1"></div><div class="b2"></div><div class="b3"></div>
+<div class="w">
+<div class="hero">
+  <div class="hero-top"><div class="hl">Echo Studios</div><div class="hb">Studio A · Available</div></div>
+  <div class="waveform">
+    <div class="wv"></div><div class="wv"></div><div class="wv"></div><div class="wv"></div>
+    <div class="wv"></div><div class="wv"></div><div class="wv"></div><div class="wv"></div>
+    <div class="wv"></div><div class="wv"></div><div class="wv"></div><div class="wv"></div>
+  </div>
+  <h1>Sound that<br>moves you.</h1>
+  <div class="hero-sub">Professional music recording, mixing, mastering & production. Dhaka's premiere studio since 2010. ISRC certified.</div>
+</div>
+<div class="body">
+  <div class="sec">Studio Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Recording Session</div><div class="svc-desc">Full tracking — vocals, instruments, live band</div></div><div class="svc-price">৳4,000<span>per hour</span></div></div>
+    <div class="svc"><div><div class="svc-name">Mixing & Mastering</div><div class="svc-desc">Stereo or spatial, streaming-ready masters</div></div><div class="svc-price">৳15,000<span>per track</span></div></div>
+    <div class="svc"><div><div class="svc-name">Beat Production</div><div class="svc-desc">Custom beats — hip-hop, pop, folk, fusion</div></div><div class="svc-price">৳8,000<span>exclusive</span></div></div>
+    <div class="svc"><div><div class="svc-name">Film Score / Jingle</div><div class="svc-desc">Ads, TV, film, corporate — full score</div></div><div class="svc-price">Custom</div></div>
+  </div>
+  <div class="sec">Recent Credits</div>
+  <div class="credits">
+    <div class="crd"><div class="crd-artist">Arnob</div><div class="crd-track">"Aalopath" — Album</div><div class="crd-year">2024 · Mixed & Mastered</div></div>
+    <div class="crd"><div class="crd-artist">Shironamhin</div><div class="crd-track">"Abar" — Single</div><div class="crd-year">2024 · Full Production</div></div>
+    <div class="crd"><div class="crd-artist">Grameenphone</div><div class="crd-track">Eid Campaign Score</div><div class="crd-year">2023 · TV + Digital</div></div>
+    <div class="crd"><div class="crd-artist">5 new artists</div><div class="crd-track">Debut EPs</div><div class="crd-year">2024 · End-to-end</div></div>
+  </div>
+  <div class="sec">Book Studio Time</div>
+  <div class="cta">
+    <h3>🎧 Your sound. Our studio.</h3>
+    <p>Check availability and book a session. We offer free 30-min studio tours for first-time clients.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🎵 Book a Session</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call the studio</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-2, Dhaka · Studio Complex B</div>
+    <div class="cr"><div class="ci">⏰</div>Daily · 10am – 2am · By appointment</div>
+  </div>
+</div>
+<footer>© 2025 Echo Studios · Professional Music Production · Dhaka</footer>
+</div></div></body></html>

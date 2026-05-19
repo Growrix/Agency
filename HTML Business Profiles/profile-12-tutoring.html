@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>BrainSpark — Tutoring & Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:#2d1b69;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f8f7ff;margin:0 auto}
+
+.hero{min-height:270px;background:linear-gradient(160deg,#7c3aed 0%,#5b21b6 55%,#3b0764 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 24px}
+.confetti{position:absolute;inset:0;pointer-events:none}
+.confetti::before{content:'⭐ 🎯 💡 ✏️ 📚 🧠';position:absolute;top:10px;right:10px;font-size:22px;letter-spacing:10px;opacity:.12;line-height:1.8;width:150px;word-break:break-all}
+.hero-spark{position:absolute;top:24px;left:22px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:42px;font-weight:900;color:#fff;line-height:.95;letter-spacing:-1px}
+.hero h1 span{color:#fbbf24}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:8px;line-height:1.5;font-weight:600}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#fbbf24;border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#1c1000;margin-top:12px;width:fit-content}
+
+.grades-strip{display:flex;gap:0;background:#fff;border-bottom:2px solid #ede9fe;overflow-x:auto;scrollbar-width:none}
+.grades-strip::-webkit-scrollbar{display:none}
+.grade{flex-shrink:0;text-align:center;padding:10px 14px;border-right:1px solid #ede9fe;cursor:pointer}
+.grade-label{font-size:10px;font-weight:700;color:#7c3aed;white-space:nowrap}
+.grade-sub{font-size:9px;color:#a89cc8;margin-top:2px}
+
+.body{padding:0 18px 36px}
+.sec{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:2px;background:rgba(124,58,237,.2);border-radius:1px}
+
+.subjects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.subj{background:#fff;border:1px solid #ede9fe;border-radius:12px;padding:14px 10px;text-align:center}
+.subj-icon{font-size:24px;margin-bottom:6px}
+.subj-name{font-size:11px;font-weight:800;color:#2d1b69}
+.subj-level{font-size:9px;color:#a89cc8;margin-top:2px}
+
+.tutor-cards{display:flex;flex-direction:column;gap:8px}
+.tutor-card{background:#fff;border:1px solid #ede9fe;border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start}
+.tutor-av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;flex-shrink:0}
+.tutor-name{font-size:14px;font-weight:800;color:#2d1b69}
+.tutor-subj{font-size:11px;color:#7c3aed;font-weight:700;margin-top:2px}
+.tutor-exp{font-size:11px;color:#a89cc8;margin-top:2px}
+.tutor-stars{color:#fbbf24;font-size:11px;margin-top:4px;letter-spacing:1px}
+
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.plan-card{background:#fff;border:2px solid #ede9fe;border-radius:14px;padding:16px}
+.plan-card.featured{background:linear-gradient(135deg,#7c3aed,#5b21b6);border-color:transparent}
+.plan-name{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#7c3aed;margin-bottom:6px}
+.plan-card.featured .plan-name{color:rgba(255,255,255,.7)}
+.plan-price{font-size:28px;font-weight:900;color:#2d1b69;line-height:1}
+.plan-card.featured .plan-price{color:#fff}
+.plan-period{font-size:10px;color:#a89cc8;margin-bottom:10px}
+.plan-card.featured .plan-period{color:rgba(255,255,255,.5)}
+.plan-feat{font-size:11px;color:#6b5a9e;padding:3px 0;display:flex;align-items:center;gap:5px}
+.plan-card.featured .plan-feat{color:rgba(255,255,255,.8)}
+.plan-feat::before{content:'✓';font-size:11px;font-weight:800;color:#7c3aed;flex-shrink:0}
+.plan-card.featured .plan-feat::before{color:#fbbf24}
+
+.schedule-list{display:flex;flex-direction:column;gap:6px}
+.sch-row{background:#fff;border:1px solid #ede9fe;border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.sch-info h4{font-size:13px;font-weight:800;color:#2d1b69}
+.sch-info p{font-size:10px;color:#a89cc8;margin-top:2px}
+.sch-time{font-size:11px;font-weight:700;color:#7c3aed;text-align:right}
+.sch-spots{font-size:9px;color:#10b981;font-weight:700;margin-top:2px}
+
+.free-trial{background:linear-gradient(135deg,#fbbf24,#f59e0b);border-radius:16px;padding:22px;text-align:center}
+.free-trial h3{font-size:22px;font-weight:900;color:#1c1000;margin-bottom:6px}
+.free-trial p{font-size:12px;color:rgba(28,16,0,.6);margin-bottom:16px;line-height:1.5;font-weight:600}
+.trial-btn{display:block;background:#7c3aed;color:#fff;border-radius:10px;padding:14px;font-size:14px;font-weight:800;text-decoration:none}
+
+.contact-box{background:#fff;border:1px solid #ede9fe;border-radius:12px;overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f8f7ff;font-size:12px;color:#333}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#f5f0ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+footer{background:#2d1b69;padding:20px;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="confetti"></div>
+  <div class="hero-spark">BrainSpark Academy</div>
+  <h1>Learn<br>Better.<br><span>Score Higher.</span></h1>
+  <div class="hero-sub">Expert tutoring for Grades 3–12 &amp; University. Online &amp; in-person.</div>
+  <div class="hero-badge">🎯 First session FREE!</div>
+</div>
+<div class="grades-strip">
+  <div class="grade"><div class="grade-label">Primary</div><div class="grade-sub">Gr 3–5</div></div>
+  <div class="grade"><div class="grade-label">Middle</div><div class="grade-sub">Gr 6–8</div></div>
+  <div class="grade"><div class="grade-label">O-Level</div><div class="grade-sub">Gr 9–10</div></div>
+  <div class="grade"><div class="grade-label">A-Level</div><div class="grade-sub">Gr 11–12</div></div>
+  <div class="grade"><div class="grade-label">University</div><div class="grade-sub">UG/PG</div></div>
+</div>
+<div class="body">
+  <div class="sec">Subjects We Teach</div>
+  <div class="subjects-grid">
+    <div class="subj"><div class="subj-icon">➕</div><div class="subj-name">Maths</div><div class="subj-level">All levels</div></div>
+    <div class="subj"><div class="subj-icon">🔬</div><div class="subj-name">Science</div><div class="subj-level">Phy · Chem · Bio</div></div>
+    <div class="subj"><div class="subj-icon">📖</div><div class="subj-name">English</div><div class="subj-level">All levels</div></div>
+    <div class="subj"><div class="subj-icon">💻</div><div class="subj-name">ICT / CS</div><div class="subj-level">Coding too</div></div>
+    <div class="subj"><div class="subj-icon">🌍</div><div class="subj-name">Geography</div><div class="subj-level">O &amp; A level</div></div>
+    <div class="subj"><div class="subj-icon">📊</div><div class="subj-name">Economics</div><div class="subj-level">A level / Uni</div></div>
+  </div>
+
+  <div class="sec">Our Tutors</div>
+  <div class="tutor-cards">
+    <div class="tutor-card">
+      <div class="tutor-av" style="background:#f5f0ff;color:#7c3aed">SR</div>
+      <div><div class="tutor-name">Mr. Sohail Rahman</div><div class="tutor-subj">Mathematics · Physics</div><div class="tutor-exp">MSc · 10 years · 200+ students</div><div class="tutor-stars">★★★★★</div></div>
+    </div>
+    <div class="tutor-card">
+      <div class="tutor-av" style="background:#fffbeb;color:#f59e0b">FA</div>
+      <div><div class="tutor-name">Ms. Farida Ali</div><div class="tutor-subj">English · Literature</div><div class="tutor-exp">MA English · Cambridge trained</div><div class="tutor-stars">★★★★★</div></div>
+    </div>
+    <div class="tutor-card">
+      <div class="tutor-av" style="background:#f0fdf4;color:#16a34a">TK</div>
+      <div><div class="tutor-name">Dr. Tariq Khan</div><div class="tutor-subj">Chemistry · Biology</div><div class="tutor-exp">PhD · University lecturer</div><div class="tutor-stars">★★★★★</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Pricing Plans</div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Per Session</div>
+      <div class="plan-price">$20</div>
+      <div class="plan-period">per hour</div>
+      <div class="plan-feat">Any subject</div>
+      <div class="plan-feat">Online / in-person</div>
+      <div class="plan-feat">Flexible timing</div>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Monthly Pack</div>
+      <div class="plan-price">$99</div>
+      <div class="plan-period">8 sessions / month</div>
+      <div class="plan-feat">Save $61</div>
+      <div class="plan-feat">2 subjects</div>
+      <div class="plan-feat">Progress reports</div>
+    </div>
+  </div>
+
+  <div class="sec">Upcoming Classes</div>
+  <div class="schedule-list">
+    <div class="sch-row"><div class="sch-info"><h4>A-Level Maths Revision</h4><p>Mr. Sohail · Online via Zoom</p></div><div class="sch-time">Sat 4PM<div class="sch-spots">✅ 3 spots left</div></div></div>
+    <div class="sch-row"><div class="sch-info"><h4>O-Level English Writing</h4><p>Ms. Farida · In-person</p></div><div class="sch-time">Sun 3PM<div class="sch-spots">✅ 5 spots left</div></div></div>
+    <div class="sch-row"><div class="sch-info"><h4>O-Level Chemistry</h4><p>Dr. Tariq · Online via Zoom</p></div><div class="sch-time">Mon 5PM<div class="sch-spots">⚠️ 1 spot left</div></div></div>
+  </div>
+
+  <div class="sec">Book Your Free Trial</div>
+  <div class="free-trial">
+    <h3>🎉 First class is on us!</h3>
+    <p>Try a full 60-minute session with your chosen tutor. No payment until you're happy with the match.</p>
+    <a href="https://wa.me/0000000000" class="trial-btn">📚 Book Free Trial</a>
+  </div>
+
+  <div class="sec">Contact Us</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">💬</div>WhatsApp for quick bookings</div>
+    <div class="c-row"><div class="c-icon">📍</div>Mirpur-10, Dhaka (in-person centre)</div>
+    <div class="c-row"><div class="c-icon">🌐</div>Online classes via Zoom / Google Meet</div>
+  </div>
+</div>
+<footer>© 2025 BrainSpark Academy · Every child can excel 🌟</footer>
+</div></body></html>

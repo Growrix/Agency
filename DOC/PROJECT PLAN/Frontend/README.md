@@ -40,7 +40,6 @@ read_first:
 
 ## Scope-Specific Planning Docs
 - [cms-content-operations-frontend.md](cms-content-operations-frontend.md): canonical frontend implementation-planning doc for the CMS/content-operations rollout. Read this together with the root e2e artifact when planning or implementing CMS-backed public surfaces.
-- [aircon-installer-transformation-frontend.md](aircon-installer-transformation-frontend.md): canonical frontend transformation-planning doc for repurposing the current route structure into an aircon installer company website.
 
 ## Machine-Readable Task Map
 ```yaml
@@ -148,15 +147,6 @@ tasks:
       - 00-master-ui-architecture.md
       - 01-design-system.md
       - 02-component-system.md
-
-  plan-aircon-installer-transformation:
-    read:
-      - ai-context.yaml
-      - ../aircon-installer-transformation-e2e-plan.md
-      - aircon-installer-transformation-frontend.md
-      - 00-master-ui-architecture.md
-      - 01-design-system.md
-      - 02-component-system.md
 ```
 
 ## Sequential Build Workflow
@@ -224,7 +214,6 @@ tasks:
 
 ### Scope-Specific Planning
 - [cms-content-operations-frontend.md](cms-content-operations-frontend.md)
-- [aircon-installer-transformation-frontend.md](aircon-installer-transformation-frontend.md)
 
 ## Dependency Notes
 - Every route implementation depends on the master architecture, design system, and component system.

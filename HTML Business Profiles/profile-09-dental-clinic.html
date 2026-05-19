@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>BrightSmile Dental — Modern Dental Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#0a3d5c;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f0f8ff;margin:0 auto}
+
+.hero{min-height:250px;background:linear-gradient(160deg,#1a7abf 0%,#0d5a96 55%,#083d6b 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 22px}
+.hero-circles{position:absolute;top:-30px;right:-30px;width:160px;height:160px;border:1.5px solid rgba(255,255,255,.1);border-radius:50%}
+.hero-circles::before{content:'';position:absolute;inset:20px;border:1.5px solid rgba(255,255,255,.07);border-radius:50%}
+.hero-cross{position:absolute;top:28px;right:28px;font-size:32px;opacity:.2}
+.h-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 13px;font-size:10px;color:#fff;font-weight:500;margin-bottom:12px;width:fit-content}
+.badge-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Nunito',sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.3px}
+.hero h1 span{color:#93d4ff}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px;line-height:1.5}
+.hero-rating{display:flex;align-items:center;gap:6px;margin-top:10px}
+.stars{color:#fbbf24;font-size:12px;letter-spacing:1px}
+.rating-text{font-size:11px;color:rgba(255,255,255,.55)}
+
+.info-chips{display:flex;gap:6px;padding:12px 16px;overflow-x:auto;scrollbar-width:none;background:#fff;border-bottom:1px solid #dbeeff}
+.info-chips::-webkit-scrollbar{display:none}
+.chip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:100px;padding:5px 12px;font-size:11px;color:#1d4ed8;font-weight:500;white-space:nowrap;flex-shrink:0}
+
+.body{padding:0 18px 36px}
+.sec{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1a7abf;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(26,122,191,.2)}
+
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{background:#fff;border:1px solid #dbeeff;border-radius:12px;padding:16px;text-align:center}
+.svc-icon{font-size:28px;margin-bottom:8px}
+.svc-name{font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#0a3d5c}
+.svc-price{font-size:12px;color:#1a7abf;font-weight:600;margin-top:4px}
+.svc-time{font-size:10px;color:#6b8fa8;margin-top:2px}
+
+.doctors{display:flex;flex-direction:column;gap:8px}
+.doctor-card{display:flex;gap=14px;align-items:center;background:#fff;border:1px solid #dbeeff;border-radius:12px;padding:14px;gap:14px}
+.doctor-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;flex-shrink:0;border:2px solid #bfdbfe}
+.doc-name{font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:#0a3d5c}
+.doc-title{font-size:11px;color:#6b8fa8;margin-top:2px}
+.doc-qual{font-size:10px;color:#1a7abf;margin-top:3px;font-weight:600}
+
+.booking-box{background:linear-gradient(135deg,#1a7abf,#0a3d5c);border-radius:16px;padding:22px;text-align:center}
+.booking-box h3{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+.booking-box p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.5}
+.book-btn{display:block;background:#fff;color:#0d5a96;border-radius:10px;padding:14px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px;font-family:'Nunito',sans-serif}
+.book-btn2{display:block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px;font-size:12px;font-weight:500;text-decoration:none}
+
+.hours-box{background:#fff;border:1px solid #dbeeff;border-radius:12px;overflow:hidden}
+.h-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #eff6ff;font-size:12px}
+.h-row:last-child{border-bottom:none}
+.h-row.today{background:#eff6ff}
+.h-day{font-weight:600;color:#0a3d5c}
+.h-row.today .h-day{color:#1a7abf}
+.h-time{color:#6b8fa8}
+.h-row.today .h-time{color:#1a7abf;font-weight:600}
+.closed-tag{font-size:10px;color:#e74c3c;font-weight:600}
+
+.contact-box{background:#fff;border:1px solid #dbeeff;border-radius:12px;overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #f0f8ff;font-size:12px;color:#333}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:32px;height:32px;background:#eff6ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+footer{background:#083d6b;padding:20px;text-align:center;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.5px}
+.footer-cross{font-size:16px;opacity:.2;margin-bottom:6px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-circles"></div>
+  <div class="hero-cross">🦷</div>
+  <div class="h-badge"><span class="badge-dot"></span>Accepting new patients</div>
+  <h1>Bright<span>Smile</span><br>Dental</h1>
+  <div class="hero-sub">Modern dental care for the whole family. Painless. Gentle. Beautiful results.</div>
+  <div class="hero-rating"><span class="stars">★★★★★</span><span class="rating-text">4.9 · 280 reviews</span></div>
+</div>
+<div class="info-chips">
+  <div class="chip">😊 Pain-free treatment</div>
+  <div class="chip">👨‍👩‍👧 Family-friendly</div>
+  <div class="chip">📅 Same-day appts</div>
+  <div class="chip">💳 Easy payment plans</div>
+</div>
+<div class="body">
+  <div class="sec">Our Services</div>
+  <div class="services-grid">
+    <div class="svc"><div class="svc-icon">🦷</div><div class="svc-name">Check-up &amp; Clean</div><div class="svc-price">$60</div><div class="svc-time">45 min</div></div>
+    <div class="svc"><div class="svc-icon">✨</div><div class="svc-name">Teeth Whitening</div><div class="svc-price">$150</div><div class="svc-time">60 min</div></div>
+    <div class="svc"><div class="svc-icon">🔧</div><div class="svc-name">Fillings</div><div class="svc-price">$80+</div><div class="svc-time">30–60 min</div></div>
+    <div class="svc"><div class="svc-icon">😬</div><div class="svc-name">Braces / Align</div><div class="svc-price">$1,200+</div><div class="svc-time">Ongoing</div></div>
+    <div class="svc"><div class="svc-icon">👑</div><div class="svc-name">Crowns &amp; Veneers</div><div class="svc-price">$400+</div><div class="svc-time">2 visits</div></div>
+    <div class="svc"><div class="svc-icon">🚑</div><div class="svc-name">Emergency Care</div><div class="svc-price">Same day</div><div class="svc-time">Priority</div></div>
+  </div>
+
+  <div class="sec">Our Dentists</div>
+  <div class="doctors">
+    <div class="doctor-card">
+      <div class="doctor-av" style="background:#eff6ff;color:#1a7abf">DR</div>
+      <div><div class="doc-name">Dr. Rashed Islam</div><div class="doc-title">Principal Dentist · Cosmetic Specialist</div><div class="doc-qual">BDS · MSc Implantology · 14 years</div></div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-av" style="background:#f0fdf4;color:#16a34a">DS</div>
+      <div><div class="doc-name">Dr. Sumaiya Haq</div><div class="doc-title">Orthodontist · Children's Dentist</div><div class="doc-qual">BDS · MOrth · Invisalign Certified</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Book an Appointment</div>
+  <div class="booking-box">
+    <h3>🦷 New patient offer — $40 check-up</h3>
+    <p>First visit includes examination, X-rays, and a personalised treatment plan. No hidden fees.</p>
+    <a href="https://wa.me/0000000000" class="book-btn">📅 Book via WhatsApp</a>
+    <a href="tel:+8801700000000" class="book-btn2">📞 Call the clinic</a>
+  </div>
+
+  <div class="sec">Opening Hours</div>
+  <div class="hours-box">
+    <div class="h-row today"><span class="h-day">Monday – Friday ✓</span><span class="h-time">8:00am – 7:00pm</span></div>
+    <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">9:00am – 5:00pm</span></div>
+    <div class="h-row"><span class="h-day">Sunday</span><span class="h-time closed-tag">Closed</span></div>
+    <div class="h-row"><span class="h-day">Emergency</span><span class="h-time">24/7 line available</span></div>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 2-9876543</div>
+    <div class="c-row"><div class="c-icon">📧</div>hello@brightsmile.com.bd</div>
+    <div class="c-row"><div class="c-icon">📍</div>House 5, Road 8, Dhanmondi, Dhaka</div>
+    <div class="c-row"><div class="c-icon">🏥</div>Ground Floor · Parking available</div>
+  </div>
+</div>
+<footer><div class="footer-cross">🦷</div>© 2025 BrightSmile Dental · Licensed &amp; Registered · All treatments guaranteed</footer>
+</div></body></html>
