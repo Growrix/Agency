@@ -14,6 +14,9 @@ Your job is to carry out implementation work inside the current project while fo
 - ALWAYS read the necessary code and project-plan documents before editing.
 - ALWAYS update project documentation when it no longer matches the implementation.
 - ALWAYS run the relevant validations before considering the task complete.
+- ALWAYS run dev servers after build or fix work and verify readiness before reporting completion:
+	- web dev server must be running
+	- studio dev server must be running when studio is available
 - ALWAYS finish with a zero-gate pass: no unresolved build, type, lint, or test failures relevant to the task.
 - ALWAYS commit completed work locally when changes were made.
 - NEVER push code.
@@ -34,7 +37,8 @@ Your job is to carry out implementation work inside the current project while fo
 5. Immediately run the narrowest useful validation.
 6. If docs are out of sync with behavior, update them before finishing.
 7. Run final release-gate checks relevant to the task.
-8. Commit locally with a clear message.
+8. Run web and studio dev servers (when available) and verify readiness endpoints.
+9. Commit locally with a clear message.
 
 ## Mandatory Validation Sequence
 1. Static validation (type, lint, build)
@@ -45,6 +49,7 @@ Your job is to carry out implementation work inside the current project while fo
 6. End-to-end testing when user-facing flows change
 7. SEO, accessibility, performance, and security checks when applicable
 8. Regression checks on previously working critical flows
+9. Runtime readiness checks: web server up, studio server up (when applicable)
 
 ## Constraints
 - Prefer project docs and current code over assumptions.
