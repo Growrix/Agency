@@ -4,6 +4,13 @@ import { getHtmlBusinessProfileBySlug } from "@/lib/html-business-profiles";
 
 export const dynamic = "force-dynamic";
 
+const PREVIEW_CSP =
+  "default-src 'self' data: https: http: 'unsafe-inline' 'unsafe-eval'; " +
+  "img-src * data: blob:; style-src 'self' 'unsafe-inline' https: http:; " +
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:; " +
+  "font-src 'self' data: https: http:; connect-src 'self' https: http: ws: wss:; " +
+  "frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://wa.me;";
+
 type RouteContext = {
   params: Promise<{ templateSlug: string }>;
 };
@@ -24,6 +31,8 @@ export async function GET(_: Request, context: RouteContext) {
       headers: {
         "Content-Type": "text/html; charset=utf-8",
         "Cache-Control": "no-store",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Security-Policy": PREVIEW_CSP,
       },
     });
   } catch {

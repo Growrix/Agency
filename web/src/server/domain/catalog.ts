@@ -1,6 +1,7 @@
 import "server-only";
 
 import { SERVICES } from "@/lib/content";
+import { SHOP_PRODUCTS } from "@/lib/shop";
 import {
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
   HTML_BUSINESS_PROFILE_TEMPLATES,
@@ -52,12 +53,6 @@ const LEGACY_MOCK_PORTFOLIO_SLUGS = new Set([
 ]);
 
 const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
-  "concierge-mcp-starter",
-  "atelier-marketing-theme",
-  "operator-dashboard-kit",
-  "inquiry-to-crm-automation",
-  "mobile-app-landing-pack",
-  "booking-stripe-bundle",
   "new-product",
 ]);
 
@@ -160,10 +155,18 @@ function getBuiltInHtmlBusinessProfileProducts(): ManagedProductRecord[] {
       { label: "Template Type", value: "Business Profile" },
       { label: "Delivery", value: "Digital" },
     ],
-    image: {
-      src: "/images/products/template.jpg",
-      alt: `${template.title} preview cover`,
-    },
+    image: null,
+  }));
+}
+
+function getDefaultShopProducts(): ManagedProductRecord[] {
+  return SHOP_PRODUCTS.map((product) => ({
+    ...product,
+    image: product.image ?? null,
+    features: [],
+    inScope: [],
+    outOfScope: [],
+    enhancementPlan: [],
   }));
 }
 
@@ -185,7 +188,8 @@ async function listAllPublicProducts() {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
   const cmsHtmlTemplates = await listSanityHtmlBusinessProfileTemplates().catch(() => []);
-  const baseProducts = (cmsProducts.length > 0 ? cmsProducts : database.products).filter(
+  const fallbackProducts = database.products.length > 0 ? database.products : getDefaultShopProducts();
+  const baseProducts = (cmsProducts.length > 0 ? cmsProducts : fallbackProducts).filter(
     (product) => !isPlaceholderProduct(product),
   );
 
