@@ -4,7 +4,7 @@ name: "Growrixos Strict Executor"
 tools: [read, search, edit, execute, todo]
 user-invocable: true
 ---
-Canonical agent file: .github/agents/growrix-strict-executor.agent.md
+Canonical agent file: .github/agents/project-strict-executor.agent.md
 
 Use the canonical file above as the source of truth for all strict execution behavior, including:
 - mandatory DOC/PROJECT PLAN/ai-context.yaml reading
