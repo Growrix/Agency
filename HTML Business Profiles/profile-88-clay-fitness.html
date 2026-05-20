@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>FlexUp — Fitness & Wellness App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(160deg,#ffe8d0 0%,#ffd0e8 40%,#e0d0ff 100%);margin:0 auto}
+.clay{border-radius:22px;box-shadow:0 2px 0 rgba(0,0,0,.06) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 10px 28px rgba(0,0,0,.1),0 3px 8px rgba(0,0,0,.07)}
+.hero{min-height:278px;padding:28px 20px 22px;position:relative;overflow:hidden}
+.em{position:absolute;font-size:40px}
+.em1{top:18px;right:12px;transform:rotate(12deg)}.em2{top:68px;left:8px;font-size:26px;transform:rotate(-8deg)}.em3{bottom:24px;right:16px;font-size:30px}
+.hb{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:5px 13px;font-size:11px;font-weight:800;color:#8020a0;margin-bottom:14px;width:fit-content;box-shadow:0 6px 16px rgba(128,32,160,.15)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:42px;font-weight:900;color:#280840;line-height:.9;letter-spacing:-2px}
+.hero h1 .acc{color:#e040c0}
+.hero-sub{font-size:12px;color:rgba(40,8,64,.4);margin-top:8px;line-height:1.55;font-weight:600}
+.stats-row{display:flex;gap:8px;padding:4px 14px 14px}
+.st{flex:1;background:#fff;border-radius:16px;padding:12px 0;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 6px 16px rgba(0,0,0,.08)}
+.st-n{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:#e040c0;letter-spacing:-.5px}
+.st-l{font-size:8px;color:rgba(40,8,64,.35);margin-top:2px;font-weight:700}
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:rgba(40,8,64,.35);margin:20px 0 12px}
+.workouts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wo{background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;min-height:110px;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.08)}
+.wo.c1{background:#ffe0f5}.wo.c2{background:#f0e0ff}.wo.c3{background:#ffe8d0}.wo.c4{background:#e0f0ff}
+.wo-icon{font-size:28px;margin-bottom:8px}
+.wo-name{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:#280840}
+.wo-count{font-size:10px;color:rgba(40,8,64,.4);margin-top:3px;font-weight:700}
+.plans{display:flex;flex-direction:column;gap:8px}
+.plan{background:#fff;border-radius:20px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.08)}
+.plan-icon{font-size:28px;flex-shrink:0}
+.plan-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#280840}
+.plan-desc{font-size:10px;color:rgba(40,8,64,.4);margin-top:2px;font-weight:600}
+.plan-price{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:#e040c0;flex-shrink:0;text-align:right}
+.plan-price span{display:block;font-size:9px;color:rgba(40,8,64,.3);font-family:'Nunito Sans',sans-serif;font-weight:600}
+.cta{background:linear-gradient(135deg,#b030d0,#ff4080);border-radius:24px;padding:24px;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.1) inset,0 -2px 0 rgba(255,255,255,.25) inset,0 14px 36px rgba(176,48,208,.3)}
+.cta h3{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:18px;line-height:1.5;font-weight:600}
+.cta-btn{display:block;background:#fff;color:#b030d0;border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.cta-btn2{display:block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);border-radius:16px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:none}
+.contacts{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.07)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(40,8,64,.07);font-size:12px;color:rgba(40,8,64,.45);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:linear-gradient(135deg,#b030d0,#ff4080);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 10px rgba(176,48,208,.3)}
+footer{text-align:center;padding:18px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:rgba(40,8,64,.2)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <span class="em em1">💪</span><span class="em em2">🏃</span><span class="em em3">🔥</span>
+  <div class="hb">🔥 80,000+ workouts completed</div>
+  <h1>Get fit.<br>Stay <span class="acc">strong.</span></h1>
+  <div class="hero-sub">500+ guided workouts, meal plans and live coaching — all in one app. Train anywhere, anytime.</div>
+</div>
+<div class="stats-row">
+  <div class="st"><div class="st-n">80K+</div><div class="st-l">Workouts done</div></div>
+  <div class="st"><div class="st-n">500+</div><div class="st-l">Exercises</div></div>
+  <div class="st"><div class="st-n">4.9★</div><div class="st-l">App rating</div></div>
+</div>
+<div class="body">
+  <div class="sec">Train your way 🏋️</div>
+  <div class="workouts">
+    <div class="wo c1"><div class="wo-icon">🏋️</div><div class="wo-name">Strength</div><div class="wo-count">120 plans</div></div>
+    <div class="wo c2"><div class="wo-icon">🧘</div><div class="wo-name">Yoga & Flex</div><div class="wo-count">80 plans</div></div>
+    <div class="wo c3"><div class="wo-icon">🏃</div><div class="wo-name">Cardio</div><div class="wo-count">100 plans</div></div>
+    <div class="wo c4"><div class="wo-icon">🥗</div><div class="wo-name">Nutrition</div><div class="wo-count">200+ meals</div></div>
+  </div>
+  <div class="sec">Choose your plan 💪</div>
+  <div class="plans">
+    <div class="plan"><div class="plan-icon">⚡</div><div><div class="plan-name">Free Plan</div><div class="plan-desc">20 workouts · basic tracking</div></div><div class="plan-price">Free<span>forever</span></div></div>
+    <div class="plan"><div class="plan-icon">🌟</div><div><div class="plan-name">FlexUp Pro</div><div class="plan-desc">All workouts · live coach · meal plans</div></div><div class="plan-price">৳599<span>/ month</span></div></div>
+    <div class="plan"><div class="plan-icon">👑</div><div><div class="plan-name">1-on-1 Coaching</div><div class="plan-desc">Dedicated trainer · weekly calls</div></div><div class="plan-price">৳3,500<span>/ month</span></div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Start your journey 🚀</div>
+  <div class="cta">
+    <h3>💪 30 days free trial!</h3>
+    <p>Full Pro access for 30 days — no credit card required. Just download and start!</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🔥 Start Free Trial</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Talk to a coach</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Get the app 📱</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📱</div>App Store & Google Play · Free download</div>
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📧</div>hello@flexup.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 FlexUp Fitness · Train smart · Feel amazing 💪</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

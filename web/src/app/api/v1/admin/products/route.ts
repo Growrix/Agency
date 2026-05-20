@@ -41,6 +41,7 @@ export async function POST(request: NextRequest) {
       teaser: typeof body.teaser === "string" ? body.teaser : "",
       summary: typeof body.summary === "string" ? body.summary : "",
       audience: typeof body.audience === "string" ? body.audience : "",
+      features: Array.isArray(body.features) ? body.features.filter((item): item is string => typeof item === "string") : undefined,
       previewVariant:
         body.previewVariant === "mcp" ||
         body.previewVariant === "marketing" ||
@@ -51,6 +52,11 @@ export async function POST(request: NextRequest) {
           ? body.previewVariant
           : "marketing",
       includes: Array.isArray(body.includes) ? body.includes.filter((item): item is string => typeof item === "string") : [],
+      inScope: Array.isArray(body.inScope) ? body.inScope.filter((item): item is string => typeof item === "string") : undefined,
+      outOfScope: Array.isArray(body.outOfScope) ? body.outOfScope.filter((item): item is string => typeof item === "string") : undefined,
+      enhancementPlan: Array.isArray(body.enhancementPlan)
+        ? body.enhancementPlan.filter((item): item is string => typeof item === "string")
+        : undefined,
       stack: Array.isArray(body.stack) ? body.stack.filter((item): item is string => typeof item === "string") : [],
       highlights: Array.isArray(body.highlights)
         ? body.highlights.filter(
@@ -65,6 +71,12 @@ export async function POST(request: NextRequest) {
         typeof (body.image as { alt?: unknown }).alt === "string"
           ? { src: (body.image as { src: string }).src, alt: (body.image as { alt: string }).alt }
           : null,
+      gallery: Array.isArray(body.gallery)
+        ? body.gallery.filter(
+            (item): item is { src: string; alt: string } =>
+              Boolean(item) && typeof item === "object" && typeof item.src === "string" && typeof item.alt === "string",
+          )
+        : undefined,
     });
 
     await recordAuditLog({

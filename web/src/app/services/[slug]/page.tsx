@@ -8,6 +8,7 @@ import {
   CheckIcon,
   CodeBracketSquareIcon,
   CpuChipIcon,
+  DocumentTextIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
@@ -32,6 +33,7 @@ import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 const ICONS = {
   "saas-applications": CodeBracketSquareIcon,
   websites: WindowIcon,
+  "html-business-profiles": DocumentTextIcon,
   "mcp-servers": CpuChipIcon,
   automation: BoltIcon,
 } as const;
@@ -131,6 +133,67 @@ const COPY: Record<
       { value: "94", label: "Avg LCP score" },
       { value: "+64%", label: "Demo bookings" },
       { value: "12", label: "Sites shipped (12mo)" },
+    ],
+  },
+  "html-business-profiles": {
+    eyebrow: "HTML Business Profiles",
+    headline: "Category-based HTML business profiles you can preview and buy fast.",
+    description:
+      "A dedicated digital-product service for businesses that need profile-style websites quickly. Browse category-based templates, preview each build, and purchase directly from the shop.",
+    primaryCta: "Browse profile templates",
+    secondaryCta: "Open profile preview hub",
+    secondaryHref: "/html-business-profiles",
+    builds: [
+      { title: "Creative and marketing profiles", description: "Agency, studio, creator, and design-first business profile templates." },
+      { title: "Local service profiles", description: "Templates for plumbing, cleaning, moving, security, and field-service businesses." },
+      { title: "Corporate profile templates", description: "Enterprise-style profile templates for consulting and corporate services." },
+      { title: "Showcase bundles", description: "Volume packs for teams comparing multiple business profile layouts before purchase." },
+      { title: "Purchase-ready listing flow", description: "Every profile is wired to shop detail and checkout states." },
+      { title: "Customization handoff", description: "Launch-ready structure with optional customization scopes." },
+    ],
+    differentiators: [
+      { title: "Category clarity", description: "Templates are grouped by business category so selection stays focused and fast." },
+      { title: "Truthful preview path", description: "Every listed profile has a real preview route before checkout." },
+      { title: "Commerce-connected", description: "Templates are mapped into the live shop flow so buyers can purchase without side-channel handoffs." },
+      { title: "CMS-extensible", description: "Sanity schema support allows operators to upload additional HTML profile templates over time." },
+    ],
+    tiers: [
+      {
+        name: "Single Profile",
+        price: "$129-$199",
+        cadence: "one-time",
+        description: "Pick one profile template based on category and launch quickly with minimal setup.",
+        features: ["Single profile template", "Category-aligned structure", "Launch-ready section flow", "Digital delivery"],
+        cta: { label: "Shop single templates", href: "/shop?category=html-business-profiles" },
+      },
+      {
+        name: "Showcase Bundle",
+        price: "$399",
+        cadence: "one-time",
+        description: "Get a multi-template showcase bundle to compare and choose before full rollout.",
+        features: ["Multiple profile templates", "Cross-category examples", "Faster internal selection", "Digital delivery"],
+        cta: { label: "View bundles", href: "/html-business-profiles" },
+        featured: true,
+        badge: "Most chosen",
+      },
+      {
+        name: "Customization Upgrade",
+        price: "Custom",
+        description: "Need deeper branding, page additions, or integration hooks? We scope this after selection.",
+        features: ["Brand and content adaptation", "Additional pages", "Integration planning", "Launch support"],
+        cta: { label: "Request customization", href: "/book-appointment" },
+      },
+    ],
+    faq: [
+      { question: "Can I preview templates before buying?", answer: "Yes. Use the HTML Business Profiles preview hub to open category-based previews before purchasing." },
+      { question: "Are these connected to checkout?", answer: "Yes. Each profile template is represented as a shop product with a direct checkout path." },
+      { question: "Can your team customize a purchased profile?", answer: "Yes. After purchase, we can scope branding, content adaptation, and advanced upgrades." },
+    ],
+    stats: [
+      { value: "50+", label: "Built profiles" },
+      { value: "3", label: "Core categories" },
+      { value: "1-7d", label: "Typical launch window" },
+      { value: "100%", label: "Shop purchase coverage" },
     ],
   },
   "mcp-servers": {

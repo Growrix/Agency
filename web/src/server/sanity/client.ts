@@ -3,21 +3,32 @@ import "server-only";
 import { createClient, type SanityClient } from "@sanity/client";
 
 const SANITY_API_VERSION = process.env.SANITY_API_VERSION ?? "2025-01-01";
+const REQUIRED_SANITY_ENV_VARS = ["SANITY_PROJECT_ID", "SANITY_DATASET"] as const;
 
 type SanityClientOptions = {
   preview?: boolean;
 };
 
+function getMissingSanityEnvVars() {
+  return REQUIRED_SANITY_ENV_VARS.filter((name) => {
+    const value = process.env[name];
+    return !value || !value.trim();
+  });
+}
+
 export function isSanityConfigured(): boolean {
-  return Boolean(process.env.SANITY_PROJECT_ID && process.env.SANITY_DATASET);
+  return getMissingSanityEnvVars().length === 0;
 }
 
 export function getSanityClient(options: SanityClientOptions = {}): SanityClient {
   const projectId = process.env.SANITY_PROJECT_ID;
   const dataset = process.env.SANITY_DATASET;
+  const missingEnvVars = getMissingSanityEnvVars();
 
-  if (!projectId || !dataset) {
-    throw new Error("Sanity is not configured. Set SANITY_PROJECT_ID and SANITY_DATASET.");
+  if (!projectId || !dataset || missingEnvVars.length > 0) {
+    throw new Error(
+      `Sanity is not configured (missing ${missingEnvVars.join(", ")}). Set these values in web/.env.local for local development.`,
+    );
   }
 
   const token = process.env.SANITY_API_TOKEN;

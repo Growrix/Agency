@@ -3,7 +3,12 @@ import "server-only";
 import Stripe from "stripe";
 import { ApiError } from "@/server/core/api";
 import { getRuntimeConfig } from "@/server/config/runtime";
-import type { OrderItemRecord, OrderRecord } from "@/server/data/schema";
+import type {
+  OrderFulfillmentStatus,
+  OrderItemRecord,
+  OrderPaymentStatus,
+  OrderRecord,
+} from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { getPublicShopProduct } from "@/server/domain/catalog";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
@@ -20,6 +25,22 @@ type CreateOrderInput = {
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const PAYMENT_TRANSITIONS: Record<OrderPaymentStatus, OrderPaymentStatus[]> = {
+  pending: ["succeeded", "failed"],
+  succeeded: ["refunded"],
+  failed: ["pending"],
+  refunded: [],
+};
+
+const FULFILLMENT_TRANSITIONS: Record<OrderFulfillmentStatus, OrderFulfillmentStatus[]> = {
+  pending: ["intake_pending", "fulfilling", "archived"],
+  intake_pending: ["fulfilling", "archived"],
+  fulfilling: ["qa_review", "delivered", "archived"],
+  qa_review: ["fulfilling", "delivered", "archived"],
+  delivered: ["archived"],
+  archived: [],
+};
 
 function parseUsdPriceToCents(value: string) {
   const normalized = value.replace(/[^\d.]/g, "");
@@ -39,11 +60,36 @@ function buildOrderNumber() {
 
 function createStripeClient() {
   const runtime = getRuntimeConfig();
-  if (!runtime.stripe.secretKey) {
+  if (!runtime.stripe.secretKey || !runtime.stripe.webhookSecret) {
     return null;
   }
 
   return new Stripe(runtime.stripe.secretKey);
+}
+
+function canTransitionPayment(current: OrderPaymentStatus, next: OrderPaymentStatus) {
+  return current === next || PAYMENT_TRANSITIONS[current].includes(next);
+}
+
+function canTransitionFulfillment(current: OrderFulfillmentStatus, next: OrderFulfillmentStatus) {
+  return current === next || FULFILLMENT_TRANSITIONS[current].includes(next);
+}
+
+function normalizeDeliveryUrls(input: string[] | undefined) {
+  if (!input) {
+    return undefined;
+  }
+
+  return input.map((value) => value.trim()).filter(Boolean);
+}
+
+function normalizeNotes(notes: string | undefined) {
+  if (notes === undefined) {
+    return undefined;
+  }
+
+  const trimmed = notes.trim();
+  return trimmed ? trimmed : null;
 }
 
 export async function createOrder(input: CreateOrderInput) {
@@ -184,7 +230,6 @@ export async function listOrdersByEmail(email: string) {
 }
 
 export async function markOrderPaid(orderId: string, paymentIntentId?: string): Promise<OrderRecord | null> {
-  const runtime = getRuntimeConfig();
   let updatedOrder: OrderRecord | null = null;
   await writeDatabase((next) => ({
     ...next,
@@ -193,16 +238,110 @@ export async function markOrderPaid(orderId: string, paymentIntentId?: string): 
         return order;
       }
 
+      if (order.payment_status === "succeeded") {
+        updatedOrder = order;
+        return order;
+      }
+
+      const nextFulfillment: OrderFulfillmentStatus =
+        order.fulfillment_status === "pending" ? "intake_pending" : order.fulfillment_status;
+
       updatedOrder = {
         ...order,
         payment_status: "succeeded",
-        fulfillment_status: "delivered",
-        stripe_payment_intent_id: paymentIntentId,
-        delivery_urls: [`${runtime.appBaseUrl}/api/v1/orders/${order.id}/download`],
-        completed_at: new Date().toISOString(),
+        fulfillment_status: nextFulfillment,
+        stripe_payment_intent_id: paymentIntentId ?? order.stripe_payment_intent_id,
       };
 
       return updatedOrder;
+    }),
+  }));
+
+  return updatedOrder;
+}
+
+export type UpdateOrderOperationsInput = {
+  payment_status?: OrderPaymentStatus;
+  fulfillment_status?: OrderFulfillmentStatus;
+  delivery_urls?: string[];
+  notes?: string;
+};
+
+export async function updateOrderOperations(
+  orderId: string,
+  input: UpdateOrderOperationsInput,
+): Promise<OrderRecord | null> {
+  if (
+    input.payment_status === undefined &&
+    input.fulfillment_status === undefined &&
+    input.delivery_urls === undefined &&
+    input.notes === undefined
+  ) {
+    throw new ApiError("MISSING_REQUIRED_FIELD", 400, "At least one order update field is required.");
+  }
+
+  const normalizedDeliveryUrls = normalizeDeliveryUrls(input.delivery_urls);
+  const normalizedNotes = normalizeNotes(input.notes);
+
+  let updatedOrder: OrderRecord | null = null;
+  await writeDatabase((next) => ({
+    ...next,
+    orders: next.orders.map((order) => {
+      if (order.id !== orderId) {
+        return order;
+      }
+
+      const nextOrder: OrderRecord = { ...order };
+
+      if (input.payment_status) {
+        if (!canTransitionPayment(order.payment_status, input.payment_status)) {
+          throw new ApiError(
+            "CONFLICT",
+            409,
+            `Invalid payment status transition: ${order.payment_status} -> ${input.payment_status}.`,
+          );
+        }
+
+        nextOrder.payment_status = input.payment_status;
+
+        if (input.payment_status === "refunded") {
+          nextOrder.refunded_at = new Date().toISOString();
+        }
+      }
+
+      if (normalizedDeliveryUrls !== undefined) {
+        nextOrder.delivery_urls = normalizedDeliveryUrls;
+      }
+
+      if (input.notes !== undefined) {
+        nextOrder.notes = normalizedNotes ?? undefined;
+      }
+
+      if (input.fulfillment_status) {
+        if (!canTransitionFulfillment(order.fulfillment_status, input.fulfillment_status)) {
+          throw new ApiError(
+            "CONFLICT",
+            409,
+            `Invalid fulfillment status transition: ${order.fulfillment_status} -> ${input.fulfillment_status}.`,
+          );
+        }
+
+        if (input.fulfillment_status === "delivered" && nextOrder.delivery_urls.length === 0) {
+          throw new ApiError(
+            "MISSING_REQUIRED_FIELD",
+            400,
+            "Delivery URL is required before marking an order as delivered.",
+          );
+        }
+
+        nextOrder.fulfillment_status = input.fulfillment_status;
+        if (input.fulfillment_status === "delivered") {
+          nextOrder.completed_at = nextOrder.completed_at ?? new Date().toISOString();
+        }
+      }
+
+      updatedOrder = nextOrder;
+      return nextOrder;
     }),
   }));
 

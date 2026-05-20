@@ -6,6 +6,7 @@ import {
 	CheckIcon,
 	CodeBracketSquareIcon,
 	CpuChipIcon,
+	DocumentTextIcon,
 	WindowIcon,
 } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
@@ -30,14 +31,15 @@ import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog
 import { listSanityFaqItems } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = {
-	title: "Services | Websites, SaaS, MCP, and Automation",
+	title: "Services | Websites, HTML Profiles, SaaS, MCP, and Automation",
 	description:
-		"Compare the agency's services with primary emphasis on websites, SaaS applications, and launch systems, plus secondary MCP and automation work.",
+		"Compare the agency's services with primary emphasis on websites, HTML business profiles, SaaS applications, and launch systems, plus secondary MCP and automation work.",
 };
 
 const ICONS = {
 	"saas-applications": CodeBracketSquareIcon,
 	websites: WindowIcon,
+	"html-business-profiles": DocumentTextIcon,
 	"mcp-servers": CpuChipIcon,
 	automation: BoltIcon,
 } as const;
@@ -45,6 +47,7 @@ const ICONS = {
 const FIT_NOTES: Record<string, string> = {
 	"saas-applications": "Best when you need a real product team across SaaS, dashboards, and companion mobile experiences.",
 	websites: "Best when brand perception, conversion architecture, and speed all matter at once.",
+	"html-business-profiles": "Best when you need category-specific HTML business profile templates with a fast purchase path.",
 	"mcp-servers": "Best when agent workflows need to support the website or SaaS product behind the scenes.",
 	automation: "Best when repetitive ops work around sales, support, reporting, or onboarding is slowing the main product.",
 };
@@ -55,6 +58,7 @@ const GOAL_ROWS = [
 		values: {
 			"saas-applications": "Ship or rebuild a product",
 			websites: "Convert and position the brand",
+			"html-business-profiles": "Launch category-ready profile pages quickly",
 			"mcp-servers": "Expose trusted tools to agents",
 			automation: "Remove manual operational work",
 		},
@@ -64,6 +68,7 @@ const GOAL_ROWS = [
 		values: {
 			"saas-applications": "High",
 			websites: "Medium",
+			"html-business-profiles": "Low to medium",
 			"mcp-servers": "Medium to high",
 			automation: "Medium",
 		},
@@ -73,6 +78,7 @@ const GOAL_ROWS = [
 		values: {
 			"saas-applications": "8–24 weeks",
 			websites: "4–10 weeks",
+			"html-business-profiles": "1–7 days",
 			"mcp-servers": "3–12 weeks",
 			automation: "2–8 weeks",
 		},
@@ -82,6 +88,7 @@ const GOAL_ROWS = [
 		values: {
 			"saas-applications": "Roadmap + ongoing releases",
 			websites: "CRO, CMS, experiments",
+			"html-business-profiles": "Template updates + optional customization",
 			"mcp-servers": "Observability + tool governance",
 			automation: "Monitoring + optimization",
 		},
@@ -91,6 +98,7 @@ const GOAL_ROWS = [
 		values: {
 			"saas-applications": "MVP sprint or product partner",
 			websites: "Launch sprint or redesign track",
+			"html-business-profiles": "Direct purchase with optional upgrade",
 			"mcp-servers": "Scoped build or platform engagement",
 			automation: "Audit sprint then implementation",
 		},
@@ -135,7 +143,7 @@ export default async function ServicesPage() {
 							Choose the delivery path that fits the launch and the long-term product.
 						</h1>
 						<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-							We lead with premium websites, SaaS products, mobile launch experiences, and ready-to-ship website systems. MCP and automation stay available when they strengthen that core work.
+							We lead with premium websites, category-based HTML business profiles, SaaS products, mobile launch experiences, and ready-to-ship website systems. MCP and automation stay available when they strengthen that core work.
 						</p>
 						<div className="mt-8 flex flex-wrap gap-3">
 							<LinkButton href="/book-appointment" size="lg">

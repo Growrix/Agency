@@ -33,6 +33,7 @@ const CHANNELS = [
 const SERVICE_INTERESTS = [
   "Website template",
   "Ready website",
+  "HTML business profiles",
   "Premium custom website",
   "SaaS application",
   "Mobile app launch / marketing site",

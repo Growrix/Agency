@@ -42,6 +42,14 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
       "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /shop.",
   },
   {
+    id: "pricing-html-business-profiles",
+    label: "HTML Business Profiles pricing",
+    sourcePath: "/shop?category=html-business-profiles",
+    sourceType: "pricing",
+    content:
+      "HTML Business Profiles are category-based digital templates with one-time pricing from $129, with showcase bundles and optional customization upgrades available. Browse previews at /html-business-profiles.",
+  },
+  {
     id: "pricing-custom-build",
     label: "Custom Build Scope pricing",
     sourcePath: "/pricing",
@@ -55,7 +63,7 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Service pricing ranges: Website Templates $500–$10k (basic $500–$1k, standard $1k–$3k, premium $3k–$10k). Ready Websites $1k–$15k (basic $1k–$2.5k, standard $2.5k–$5k, premium $5k–$15k). SaaS Applications: custom scope priced after discovery. Mobile App Launch Systems: custom scope. MCP + Automation: secondary scope, priced when they support the core build.",
+      "Service pricing ranges: Website Templates $500–$10k (basic $500–$1k, standard $1k–$3k, premium $3k–$10k). HTML Business Profiles from $129 one-time by category with optional customization upgrades. Ready Websites $1k–$15k (basic $1k–$2.5k, standard $2.5k–$5k, premium $5k–$15k). SaaS Applications: custom scope priced after discovery. Mobile App Launch Systems: custom scope. MCP + Automation: secondary scope, priced when they support the core build.",
   },
   {
     id: "pricing-saas-tiers",
@@ -106,7 +114,7 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/contact",
     sourceType: "contact",
     content:
-      `Growrix supports four contact channels: (1) Inquiry form at /contact — best for website, SaaS, mobile app, or ready-website briefs that need clear scoping. (2) WhatsApp at ${WHATSAPP_HREF} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about websites, ready websites, SaaS work, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
+      `Growrix supports four contact channels: (1) Inquiry form at /contact — best for website, HTML business profile, SaaS, mobile app, or ready-website briefs that need clear scoping. (2) WhatsApp at ${WHATSAPP_HREF} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about websites, HTML profiles, ready websites, SaaS work, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
   },
   {
     id: "booking-path",
@@ -133,7 +141,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/",
     sourceType: "offering",
     content:
-      "Growrix OS is an independent studio. Primary focus is premium websites, SaaS applications, website templates, and ready websites. MCP servers and automation are secondary services scoped when they support the core website, SaaS, or launch engagement. The studio has been operating for 2 years and has shipped 12 launches.",
+      "Growrix OS is an independent studio. Primary focus is premium websites, HTML business profiles, SaaS applications, website templates, and ready websites. MCP servers and automation are secondary services scoped when they support the core website, SaaS, or launch engagement. The studio has been operating for 2 years and has shipped 12 launches.",
   },
   {
     id: "offering-shop-structure",
@@ -141,7 +149,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/shop",
     sourceType: "offering",
     content:
-      "The Growrix shop has two main categories: Website Templates (from $500 one-time — basic, standard, premium tiers) and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
+      "The Growrix shop has three main categories: Website Templates (from $500 one-time — basic, standard, premium tiers), HTML Business Profiles (from $129 one-time, category-based templates), and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
   },
   {
     id: "offering-support-handoff",
@@ -157,7 +165,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/about",
     sourceType: "offering",
     content:
-      "Growrix OS studio stats: 12 launches shipped (websites, SaaS, ready websites), 2 years in motion as an independent studio, 4 core services (websites, SaaS, MCP, automation), 4 delivery phases (discovery to optimization). The studio focuses on premium websites, SaaS products, mobile app launch experiences, and ready websites.",
+      "Growrix OS studio stats: 12 launches shipped (websites, SaaS, ready websites), 2 years in motion as an independent studio, 5 core services (websites, HTML business profiles, SaaS, MCP, automation), 4 delivery phases (discovery to optimization). The studio focuses on premium websites, HTML business profile products, SaaS products, mobile app launch experiences, and ready websites.",
   },
   {
     id: "offering-stack",
@@ -284,7 +292,7 @@ export async function searchKnowledge(query: string, limit = 6) {
 
       if (
         document.sourceType === "offering" &&
-        tokens.some((token) => ["template", "templates", "ready", "website", "websites", "live", "saas"].includes(token))
+        tokens.some((token) => ["template", "templates", "ready", "website", "websites", "live", "saas", "html", "profile", "profiles"].includes(token))
       ) {
         score += 3;
       }

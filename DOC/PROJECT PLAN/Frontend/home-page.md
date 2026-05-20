@@ -14,7 +14,7 @@ depends_on:
 
 ## Page Definition
 - Purpose: turn first-time visitors into qualified leads, product buyers, or chat-assisted prospects.
-- Target audience: founders, operators, agencies, and growth teams seeking premium websites, SaaS applications, mobile app launch systems, and ready-to-buy website products.
+- Target audience: founders, operators, agencies, and growth teams seeking premium websites, HTML business profiles, SaaS applications, mobile app launch systems, and ready-to-buy website products.
 - Primary CTA: Book Appointment.
 - Secondary CTA: Explore Portfolio.
 
@@ -37,49 +37,54 @@ depends_on:
 - Responsive notes: mobile stacks proof below CTA, keeps one visible media mockup plus swipe gallery.
 
 ### 4. Capability Rail
-- Content: four service pillars with websites and SaaS positioned first, while MCP servers and automation are framed as secondary support capabilities.
+- Content: five service pillars with websites, HTML business profiles, and SaaS positioned first, while MCP servers and automation are framed as secondary support capabilities.
 - Components: feature cards, icon badges.
 - Interaction notes: hover reveals delivery angle and typical outcome.
 
-### 5. Featured Builds and Outcomes
+### 5. HTML Business Profiles Spotlight
+- Content: category-based HTML business profile service spotlight with template counts and direct links to preview hub and shop category.
+- Components: section heading, category cards, CTA pair.
+- Interaction notes: category cards route into `/html-business-profiles?category=...`.
+
+### 6. Featured Builds and Outcomes
 - Content: selected case studies weighted toward websites, SaaS applications, mobile launch work, and ready-to-deploy website systems.
 - Components: portfolio tiles, metric strips, testimonial quote.
 - State requirements: loaded, loading skeleton, empty fallback if no featured work.
 
-### 6. Blog and Insights Section
+### 7. Blog and Insights Section
 - Content: featured articles, operator playbooks, architecture notes, and direct links into the blog hub.
 - Components: article cards, tag badges, eyebrow label, section CTA.
 - Interaction notes: featured article can use larger layout treatment; supporting cards should remain scannable on mobile.
 
-### 7. Shop Spotlight
+### 8. Shop Spotlight
 - Content: website templates and ready websites only, with pricing language aligned to the new ranges: templates from $500 to $10k and ready websites from $1k to $15k.
 - Components: product tiles (4-col grid on desktop), price chips, category label, tag badge, direct link to product detail page.
 - Interaction notes: each product card links directly to its `/shop/[slug]` detail page. Section CTA links to `/shop`.
 
-### 8. Process and Collaboration Model
+### 9. Process and Collaboration Model
 - Content: discovery, strategy, design system, build, QA, launch, optimization.
 - Components: step indicator, content blocks, timeline strip.
 - Interaction notes: step hover highlights outputs and cadence.
 
-### 9. AI Concierge and Live Chat Section
+### 10. AI Concierge and Live Chat Section
 - Content: prompt suggestions, assistant capabilities, privacy note, escalation to WhatsApp or booking.
 - Components: chat widget preview, prompt chips, action bar.
 - State requirements: online, loading, fallback to live or WhatsApp.
 
-### 10. Pricing and Engagement Snapshot
+### 11. Pricing and Engagement Snapshot
 - Content: starting ranges for website templates, ready websites, custom SaaS work, and mobile app launch systems, plus flexible-payment messaging, delivery-first international option for the first 100 clients, and 1 year of free support and maintenance.
 - Components: pricing tiers, comparison rows, CTA block.
 - Interaction notes: monthly and project toggle if needed.
 
-### 11. Testimonial and Credibility Strip
+### 12. Testimonial and Credibility Strip
 - Content: a stack-and-integrations marquee on the homepage, live Google review feed, shipping principles, and tech stack badges, while other proof surfaces can still use client-name marquees.
 - Components: marquee, Google review cards, leave-review CTA, badges.
 
-### 12. Final Conversion Band
+### 13. Final Conversion Band
 - Content: booking CTA, WhatsApp CTA, and chat CTA with expectation setting.
 - Components: CTA section, dual buttons, reassurance list.
 
-### 13. Footer
+### 14. Footer
 - Content: deep links, support, legal, social, response-time promise.
 - Components: footer, menu groups, small badges.
 
@@ -94,8 +99,8 @@ depends_on:
 - Mobile uses a single-column hero, sticky bottom dock, swipeable proofs, and sheet-based quick previews.
 
 ## SEO and Metadata
-- Title: Premium Websites, SaaS Applications, Ready Websites, and Mobile App Launch Systems.
-- Description: Premium web development agency focused on websites, SaaS applications, mobile app launch systems, and ready-to-buy website products, with MCP and automation as secondary services.
+- Title: Premium Websites, HTML Business Profiles, SaaS Applications, Ready Websites, and Mobile App Launch Systems.
+- Description: Premium web development agency focused on websites, category-based HTML business profiles, SaaS applications, mobile app launch systems, and ready-to-buy website products, with MCP and automation as secondary services.
 
 ## Conversion Path
 - Primary path: Hero -> Featured builds -> Process -> Booking.

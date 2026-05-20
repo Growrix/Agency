@@ -11,6 +11,7 @@ const DESK_GROUPED_TYPES = new Set([
   "portfolioCategory",
   "caseStudy",
   "shopCategory",
+  "htmlBusinessProfileTemplate",
   "shopItem",
 ]);
 
@@ -48,6 +49,7 @@ function buildDeskStructure(S: Parameters<NonNullable<Parameters<typeof structur
             .title("Shop")
             .items([
               S.documentTypeListItem("shopCategory").title("Shop Category"),
+              S.documentTypeListItem("htmlBusinessProfileTemplate").title("HTML Profile Template"),
               S.documentTypeListItem("shopItem").title("Shop Item"),
             ]),
         ),

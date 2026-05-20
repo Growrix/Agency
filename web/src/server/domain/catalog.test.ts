@@ -16,6 +16,9 @@ import {
 const testEnv = process.env as Record<string, string | undefined>;
 testEnv.NODE_ENV = "test";
 testEnv.AGENCY_DATA_DIRECTORY = path.join(process.cwd(), ".data", "catalog-domain-test");
+testEnv.SANITY_PROJECT_ID = "";
+testEnv.SANITY_DATASET = "";
+testEnv.SANITY_API_TOKEN = "";
 
 const dataDirectory = testEnv.AGENCY_DATA_DIRECTORY;
 const databasePath = path.join(dataDirectory, "agency-db.json");
@@ -91,6 +94,55 @@ async function seedManagedCatalog() {
 describe("catalog domain", () => {
   beforeEach(async () => {
     await resetDatabase();
+  });
+
+  it("keeps html business profiles in the public shop", async () => {
+    const htmlProducts = await listPublicShopProducts({ category: "html-business-profiles" });
+
+    assert.ok(htmlProducts.length > 0);
+    assert.equal(htmlProducts.every((product) => product.slug.startsWith("html-business-profile-")), true);
+  });
+
+  it("filters known mock shop products from managed sources", async () => {
+    await writeFile(
+      databasePath,
+      JSON.stringify(
+        {
+          products: [
+            {
+              slug: "atelier-marketing-theme",
+              name: "Atelier Marketing Theme",
+              price: "$790",
+              livePreviewUrl: "https://atelier.example.com",
+              embeddedPreviewUrl: "https://atelier.example.com",
+              category: "Templates",
+              categorySlug: "templates",
+              type: "Marketing Site",
+              typeSlug: "marketing-site",
+              industry: "Studios & SaaS",
+              industrySlug: "studios-saas",
+              published: true,
+              teaser: "Mock template",
+              summary: "Mock template",
+              audience: "Mock audience",
+              previewVariant: "marketing",
+              includes: ["Homepage"],
+              stack: ["Next.js"],
+              highlights: [{ label: "Pages", value: "10" }],
+              image: null,
+              gallery: [],
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      "utf8",
+    );
+
+    const products = await listPublicShopProducts();
+
+    assert.equal(products.some((product) => product.slug === "atelier-marketing-theme"), false);
   });
 
   it("lists the seeded public services and details", async () => {

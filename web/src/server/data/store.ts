@@ -62,7 +62,7 @@ async function readDatabaseFromFile(): Promise<DatabaseSchema> {
 
 export async function writeDatabase(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
   if (isSupabaseDatabaseConfigured()) {
-    writeQueue = writeQueue.then(async () => {
+    writeQueue = writeQueue.catch(() => undefined).then(async () => {
       try {
         const current = await readDatabaseFromSupabase();
         const next = await updater(current);
@@ -82,7 +82,7 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
 async function writeDatabaseToFile(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
   await ensureDataDirectory();
 
-  writeQueue = writeQueue.then(async () => {
+  writeQueue = writeQueue.catch(() => undefined).then(async () => {
     const current = await readDatabaseFromFile();
     const next = await updater(current);
     await writeFile(getDatabasePath(), JSON.stringify(next, null, 2), "utf8");

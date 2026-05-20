@@ -6,7 +6,13 @@ import type { CaseStudyDetail, StockImage } from "@/lib/site-images";
 export type InquiryStatus = "new" | "read" | "responded" | "closed" | "spam";
 export type AppointmentStatus = "inquiry" | "confirmed" | "completed" | "cancelled" | "no_show";
 export type OrderPaymentStatus = "pending" | "succeeded" | "failed" | "refunded";
-export type OrderFulfillmentStatus = "pending" | "fulfilling" | "delivered" | "archived";
+export type OrderFulfillmentStatus =
+  | "pending"
+  | "intake_pending"
+  | "fulfilling"
+  | "qa_review"
+  | "delivered"
+  | "archived";
 export type Role = "public" | "subscriber" | "customer" | "admin";
 
 export type ContactInquiryRecord = {

@@ -38,8 +38,10 @@ surfaces:
       - /services
       - /services/saas-applications
       - /services/websites
+      - /services/html-business-profiles
       - /services/mcp-servers
       - /services/automation
+      - /html-business-profiles
       - /portfolio
       - /portfolio/[slug]
       - /pricing
@@ -50,7 +52,7 @@ surfaces:
     roles_allowed: public, subscriber
   
   commerce:
-    description: Digital product shop for templates, MCP servers, ready websites, mobile apps
+    description: Digital product shop for templates, HTML business profiles, MCP servers, ready websites, mobile apps
     routes:
       - /shop
       - /shop/[slug]
@@ -104,7 +106,7 @@ domain_entities:
       - may request support or reorder
   
   service:
-    description: Branded service offering (SaaS apps, websites, MCP servers, automation)
+    description: Branded service offering (SaaS apps, websites, HTML business profiles, MCP servers, automation)
     attributes:
       - title, description, use_cases
       - pricing_model (contact, tiered, fixed)
@@ -113,11 +115,11 @@ domain_entities:
       - integrations_supported
   
   product:
-    description: Digital product for sale (template, MCP server, ready website, mobile app)
+    description: Digital product for sale (template, HTML business profile, MCP server, ready website, mobile app)
     attributes:
       - sku, title, description
       - pricing (USD)
-      - category (template, mcp_server, ready_website, mobile_app)
+      - category (template, html_business_profile, mcp_server, ready_website, mobile_app)
       - file_url or delivery_method
       - support_level
   

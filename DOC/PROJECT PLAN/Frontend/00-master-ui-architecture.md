@@ -266,10 +266,12 @@ recommended_next_reads:
 - /services
 - /services/saas-applications
 - /services/websites
+- /services/html-business-profiles
 - /services/mcp-servers
 - /services/automation
 - /shop
 - /shop/[slug]
+- /html-business-profiles
 - /portfolio
 - /portfolio/[slug]
 - /pricing
@@ -295,9 +297,11 @@ recommended_next_reads:
 - services-page.md
 - service-saas-applications-page.md
 - service-websites-page.md
+- service-html-business-profiles-page.md
 - service-mcp-servers-page.md
 - service-automation-page.md
 - shop-page.md
+- html-business-profiles-page.md
 - product-detail-page.md
 - portfolio-page.md
 - case-study-page.md

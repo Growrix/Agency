@@ -25,11 +25,11 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Growrix OS | Web Development Agency for SaaS, Websites, MCP & Automation",
+    default: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
     template: "%s | Growrix OS",
   },
   description:
-    "Growrix OS is a product-minded web development studio building SaaS applications, websites, MCP servers, and automation systems for ambitious teams.",
+    "Growrix OS is a product-minded web development studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.",
   icons: {
     icon: "/Favicon.svg?v=20260504",
     shortcut: "/Favicon.svg?v=20260504",

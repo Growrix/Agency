@@ -4,7 +4,7 @@ role: api-and-data
 scope: cms-content-operations
 parent_plan: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
 status: planning-ready
-last_updated: 2026-04-28
+last_updated: 2026-05-19
 ---
 
 # API And Data CMS Content Operations Plan
@@ -26,7 +26,7 @@ last_updated: 2026-04-28
 | Blog content | Sanity | `blogPost`, `author`, `category` | public blog routes | Existing model remains primary |
 | Services content | Sanity | `servicePage` | services routes, AI knowledge | Preserve fixed route map |
 | Portfolio content | Sanity | `caseStudy` | portfolio routes, admin catalog status views | References service and proof relationships |
-| Shop merchandising content | Sanity | `shopCategory`, `shopItem` | shop routes, homepage merchandising, admin catalog status views | Separate editorial merchandising from order state |
+| Shop merchandising content | Sanity | `shopCategory`, `shopItem`, `htmlBusinessProfileTemplate` | shop routes, `/html-business-profiles`, homepage merchandising, admin catalog status views | Separate editorial merchandising from order state |
 | FAQ and singleton marketing content | Sanity | `faqItem`, `homePage`, `aboutPage`, `siteSettings` | homepage, FAQ, about, shared site sections | Singletons must remain normalized into frontend view models |
 | Newsletter issues and templates | Sanity | `newsletterIssue`, `newsletterTemplate` | admin newsletter operations | Editorial content only |
 | Subscribers and unsubscribe state | PostgreSQL | `newsletter_subscribers`, `newsletter_unsubscribes` | newsletter admin ops, public subscribe API | Never store subscriber lifecycle in Sanity |
@@ -38,7 +38,7 @@ last_updated: 2026-04-28
 ### Public Read Layer
 - Add normalized query adapters that read Sanity content and emit stable view models to existing routes.
 - Preserve current response envelopes for any public API surfaces that become CMS-backed.
-- Keep static fallback compatibility until parity is verified route by route.
+- Keep public shop and HTML-profile catalog responses static-seed free; use published CMS and managed records only.
 
 ### Admin And Operational APIs
 - Plan for stable admin contracts covering:
@@ -82,14 +82,15 @@ last_updated: 2026-04-28
 ## Migration And Backfill Sequence
 1. Seed Sanity documents from current static content modules for portfolio, shop, services, FAQ, homepage, and about.
 2. Add PostgreSQL newsletter lifecycle tables before newsletter campaign send workflows are introduced.
-3. Introduce normalized query adapters and revalidation flow while static fallback remains available.
-4. Remove obsolete fallback branches only after regression evidence is captured.
+3. Introduce normalized query adapters and revalidation flow while preserving envelope and route compatibility.
+4. Retire obsolete static catalog fallback branches after regression evidence is captured.
 
 ## File Targets For Future Implementation
 - `web/src/server/domain/catalog.ts`
 - `web/src/server/domain/newsletter.ts`
 - `web/src/server/data/schema.ts`
 - `web/src/server/sanity/**`
+- `web/src/app/api/html-business-profiles/[templateSlug]/route.ts`
 - `web/src/app/api/revalidate/route.ts`
 - `web/src/app/api/v1/admin/**`
 - `web/src/app/api/v1/newsletter/route.ts`

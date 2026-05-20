@@ -19,6 +19,14 @@ function servicePageDocumentId(slug: string) {
   return `servicePage.${slug}`;
 }
 
+function htmlBusinessProfileTemplateDocumentId(slug: string) {
+  return `htmlBusinessProfileTemplate.${slug}`;
+}
+
+function normalizeHtmlBusinessProfileTemplateSlug(slug: string) {
+  return slug.replace(/^html-business-profile-/, "");
+}
+
 export async function upsertSanityShopItem(record: ManagedProductRecord) {
   if (!isSanityWriteConfigured()) {
     return false;
@@ -64,6 +72,48 @@ export async function deleteSanityShopItem(slug: string) {
 
   const client = getSanityClient({ preview: true });
   await client.delete(shopItemDocumentId(slug));
+  return true;
+}
+
+export async function upsertSanityHtmlBusinessProfileTemplate(record: ManagedProductRecord) {
+  if (!isSanityWriteConfigured()) {
+    return false;
+  }
+
+  const client = getSanityClient({ preview: true });
+  const normalizedSlug = normalizeHtmlBusinessProfileTemplateSlug(record.slug);
+  const profileMatch = /^profile-(\d+)-/i.exec(normalizedSlug);
+  const parsedProfileNumber = profileMatch ? Number.parseInt(profileMatch[1] ?? "", 10) : undefined;
+  const profileNumber = Number.isFinite(parsedProfileNumber) ? parsedProfileNumber : undefined;
+
+  await client.createOrReplace({
+    _id: htmlBusinessProfileTemplateDocumentId(normalizedSlug),
+    _type: "htmlBusinessProfileTemplate",
+    name: record.name,
+    slug: { _type: "slug", current: normalizedSlug },
+    profileNumber,
+    summary: record.summary,
+    category: record.type,
+    categorySlug: record.typeSlug,
+    published: record.published ?? true,
+    price: record.price,
+    orderRank: 100,
+    livePreviewUrl: record.livePreviewUrl,
+    embeddedPreviewUrl: record.embeddedPreviewUrl,
+    previewImageAlt: record.image?.alt,
+  });
+
+  return true;
+}
+
+export async function deleteSanityHtmlBusinessProfileTemplate(slug: string) {
+  if (!isSanityWriteConfigured()) {
+    return false;
+  }
+
+  const client = getSanityClient({ preview: true });
+  const normalizedSlug = normalizeHtmlBusinessProfileTemplateSlug(slug);
+  await client.delete(htmlBusinessProfileTemplateDocumentId(normalizedSlug));
   return true;
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "agency-sanity-studio",
+  "name": "growrixos-sanity-studio",
   "private": true,
   "version": "0.0.1",
   "packageManager": "npm@10.8.2",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@sanity/vision": "5.22.0",
     "date-fns": "4.1.0",
+    "growrixos-sanity-studio": "file:",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "sanity": "5.22.0",

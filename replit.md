@@ -1,4 +1,4 @@
-# Signal Atelier — Agency SaaS Marketing Site
+# Signal Atelier - Growrixos SaaS Marketing Site
 
 A premium web development studio website (SaaS apps · websites · MCP servers · automation), built on Next.js and migrated from Vercel to Replit.
 

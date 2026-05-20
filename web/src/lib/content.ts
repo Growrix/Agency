@@ -11,6 +11,15 @@ export const SERVICES = [
     pillars: ["Conversion architecture", "Design system & motion", "SEO & Core Web Vitals", "CMS handoff"],
   },
   {
+    slug: "html-business-profiles",
+    name: "HTML Business Profiles",
+    short: "Category-based HTML business profile templates ready for fast launch.",
+    long: "A dedicated catalog of ready-to-buy HTML business profile templates grouped by business category so teams can preview quickly and purchase from the shop.",
+    typical: "Template selection + optional customization",
+    timeline: "1-7 days",
+    pillars: ["Category-structured profiles", "Fast customization", "Shop-ready delivery", "CMS extensibility"],
+  },
+  {
     slug: "saas-applications",
     name: "SaaS Applications",
     short: "SaaS and product platforms for web-first and mobile-first teams.",
@@ -95,7 +104,7 @@ export const TESTIMONIALS = [
 export const HOME_STATS = [
   { value: "12", label: "Launches shipped", hint: "Websites, SaaS, ready websites" },
   { value: "2", label: "Years in motion", hint: "Independent studio" },
-  { value: "4", label: "Core services", hint: "Websites, SaaS, MCP, automation" },
+  { value: "5", label: "Core services", hint: "Websites, HTML profiles, SaaS, MCP, automation" },
   { value: "4", label: "Delivery phases", hint: "Discovery to optimization" },
 ];
 

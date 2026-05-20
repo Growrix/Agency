@@ -11,14 +11,14 @@ const CATEGORIES = [
 ];
 
 const QUESTIONS: { category: string; question: string; answer: string }[] = [
-  { category: "services", question: "What services do you offer?", answer: "Premium websites, SaaS applications, mobile app launch experiences, and ready websites. MCP servers and automation support those core offers when needed." },
+  { category: "services", question: "What services do you offer?", answer: "Premium websites, HTML business profiles, SaaS applications, mobile app launch experiences, and ready websites. MCP servers and automation support those core offers when needed." },
   { category: "services", question: "How do projects typically start?", answer: "A 30-minute discovery call, followed by a written plan within 48 hours. Nothing is signed until the plan reads correctly to you." },
   { category: "services", question: "Will I own the code and assets?", answer: "Yes. On project completion, code, design files, and infrastructure ownership transfer to you." },
   { category: "pricing", question: "Do you require an advance payment?", answer: "For qualifying international clients, we can offer delivery-first payment with no advance on the first 100 projects." },
   { category: "pricing", question: "Can we choose a payment arrangement?", answer: "Yes. We are flexible and can tailor milestones, installments, or custom arrangements to the scope." },
   { category: "pricing", question: "Can we pay monthly?", answer: "Yes - Product Partner work is monthly, and larger scopes can also be split into agreed installments." },
   { category: "shop", question: "What comes with a ready website?", answer: "A launch-ready build, setup or handoff notes, and 1 year of free support and maintenance for bugs, security updates, and minor content changes." },
-  { category: "shop", question: "Do shop products include support?", answer: "Yes. Website templates and ready websites include setup guidance plus 1 year of support and maintenance." },
+  { category: "shop", question: "Do shop products include support?", answer: "Yes. Website templates, HTML business profiles, and ready websites include setup guidance plus 1 year of support and maintenance." },
   { category: "shop", question: "How do updates work?", answer: "Support and maintenance are included for the first year. After that, you can continue with an ongoing package or keep the delivered version as-is." },
   { category: "booking", question: "How long is the discovery call?", answer: "30 minutes by default. We can extend to 60 minutes for complex projects on request." },
   { category: "booking", question: "What time zones do you cover?", answer: "Primary CET hours, with availability for North American mornings and South Asian afternoons." },

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Pinnacle — Luxury Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#f0ede8;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f2efe9;margin:0 auto;overflow:hidden}
+
+/* === 3D MINIMAL-REALISM ===
+   Pure depth through shadow layers.
+   Warm off-white palette. Cormorant serif headlines.
+   Objects float via stacked box-shadows.
+   No glass, no gradients, no textures.
+*/
+
+/* Building silhouette — pure CSS architectural shapes */
+.bldg-scene{
+  position:relative;height:180px;display:flex;align-items:flex-end;
+  justify-content:center;gap:0;overflow:hidden;margin-bottom:0;
+  padding:0 20px;
+}
+.bldg{
+  position:relative;flex-shrink:0;
+  box-shadow:
+    2px 0 0 rgba(0,0,0,.04),
+    -2px 0 0 rgba(0,0,0,.02),
+    0 8px 24px rgba(0,0,0,.06),
+    0 20px 50px rgba(0,0,0,.06),
+    0 40px 80px rgba(0,0,0,.04);
+}
+/* Windows as repeating pattern */
+.bldg::before{
+  content:'';position:absolute;top:16px;left:0;right:0;bottom:0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 6px,
+      rgba(0,0,0,.05) 6px, rgba(0,0,0,.05) 10px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 12px,
+      rgba(0,0,0,.04) 12px, rgba(0,0,0,.04) 16px
+    );
+}
+/* Penthouse line */
+.bldg::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:10px;
+  background:rgba(0,0,0,.06);
+}
+
+/* Individual building colours (warm off-whites to stone) */
+.b1{width:52px;height:100px;background:#e8e3d8;border-radius:3px 3px 0 0}
+.b2{width:40px;height:140px;background:#ddd8cc;border-radius:3px 3px 0 0}
+.b3{width:60px;height:170px;background:#d5cfc2;border-radius:3px 3px 0 0}
+.b4{width:44px;height:120px;background:#ddd8cc;border-radius:3px 3px 0 0}
+.b5{width:48px;height:90px;background:#e2ddd2;border-radius:3px 3px 0 0}
+.b6{width:36px;height:115px;background:#d9d4c8;border-radius:3px 3px 0 0}
+.bldg-ground{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(0,0,0,.08)}
+
+/* 3D float system */
+.float-deep{
+  background:#fff;border-radius:20px;
+  box-shadow:
+    0 1px 2px  rgba(0,0,0,.03),
+    0 4px 8px  rgba(0,0,0,.04),
+    0 10px 22px rgba(0,0,0,.05),
+    0 24px 50px rgba(0,0,0,.05),
+    0 50px 80px rgba(0,0,0,.04);
+}
+.float-mid{
+  background:#fff;border-radius:16px;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.04),
+    0 4px 10px rgba(0,0,0,.05),
+    0 12px 26px rgba(0,0,0,.05),
+    0 26px 50px rgba(0,0,0,.04);
+}
+.float-light{
+  background:#fff;border-radius:14px;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,.04),
+    0 4px 12px rgba(0,0,0,.05),
+    0 12px 28px rgba(0,0,0,.04);
+}
+
+/* Hero */
+.hero{min-height:300px;background:#f2efe9;padding:28px 22px 24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.hero-nav{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:rgba(20,15,5,.35);font-style:italic}
+.hero-chip{font-size:9px;font-weight:600;letter-spacing:.5px;color:rgba(20,15,5,.35);background:#fff;border-radius:100px;padding:4px 12px;
+  box-shadow:0 1px 3px rgba(0,0,0,.07),0 4px 10px rgba(0,0,0,.05)}
+
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:#140f05;line-height:.88;letter-spacing:-.5px;font-style:italic}
+.hero-tagline{font-size:10px;font-weight:500;letter-spacing:3.5px;text-transform:uppercase;color:rgba(20,15,5,.25);margin-top:10px}
+.hero-rule{height:1px;background:linear-gradient(90deg,rgba(0,0,0,.12),rgba(0,0,0,.04),transparent);margin:14px 0 0}
+
+/* Trust row */
+.trust-row{display:flex;gap:8px;padding:14px 16px 6px}
+.tr-item{flex:1;padding:12px 0;text-align:center;border-radius:14px}
+.tr-n{font-family:'Cormorant Garamond',serif;font-size:20px;color:#140f05;font-style:italic}
+.tr-l{font-size:8px;color:rgba(20,15,5,.3);margin-top:4px;letter-spacing:1px;font-weight:500}
+
+/* Body */
+.body{padding:6px 14px 48px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(20,15,5,.22);margin:20px 0 12px}
+.sec-rule{display:flex;align-items:center;gap:12px}
+.sec-rule::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.08)}
+
+/* Property cards */
+.properties{display:flex;flex-direction:column;gap:11px}
+.prop{padding:18px;position:relative;overflow:hidden}
+/* Floor-plan silhouette strip */
+.prop-visual{
+  height:60px;background:linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.04) 100%);
+  border-radius:10px;margin-bottom:14px;overflow:hidden;display:flex;align-items:flex-end;
+  padding:8px 10px 0;gap:2px;
+}
+.pv-room{border-radius:3px 3px 0 0;flex-shrink:0}
+.prop-tag{position:absolute;top:16px;right:16px;font-size:9px;font-weight:600;letter-spacing:.5px;background:#140f05;color:#f2efe9;border-radius:100px;padding:3px 10px}
+.prop-name{font-family:'Cormorant Garamond',serif;font-size:22px;color:#140f05;font-style:italic;letter-spacing:-.3px}
+.prop-loc{font-size:10px;color:rgba(20,15,5,.38);margin-top:3px;letter-spacing:.3px;display:flex;align-items:center;gap:5px}
+.prop-loc::before{content:'📍';font-size:9px}
+.prop-details{display:flex;gap:16px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.06)}
+.pd{font-size:11px;color:rgba(20,15,5,.4);font-weight:500;display:flex;align-items:center;gap:4px}
+.prop-price{font-family:'Cormorant Garamond',serif;font-size:26px;color:#140f05;font-style:italic;margin-top:10px;letter-spacing:-.5px}
+.prop-price-sub{font-size:10px;color:rgba(20,15,5,.3);font-weight:500;margin-top:2px}
+
+/* Services */
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:#140f05}
+.svc-desc{font-size:10px;color:rgba(20,15,5,.35);margin-top:2px}
+.svc-tag{font-size:10px;font-weight:600;color:rgba(20,15,5,.3);flex-shrink:0}
+
+/* CTA */
+.cta{padding:26px;text-align:center}
+.cta h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;font-style:italic;color:#140f05;letter-spacing:-.5px;margin-bottom:8px;line-height:.95}
+.cta p{font-size:11px;color:rgba(20,15,5,.35);margin-bottom:22px;line-height:1.7}
+.btn-dark{display:block;background:#140f05;color:#f2efe9;border-radius:100px;padding:15px 32px;font-size:14px;font-weight:600;text-decoration:none;margin-bottom:10px;letter-spacing:.3px;
+  box-shadow:0 2px 4px rgba(0,0,0,.1),0 8px 20px rgba(0,0,0,.12),0 20px 40px rgba(0,0,0,.08)}
+.btn-light{display:block;background:#fff;color:rgba(20,15,5,.45);border-radius:100px;padding:13px 32px;font-size:12px;font-weight:600;text-decoration:none;
+  box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.05),0 12px 28px rgba(0,0,0,.04)}
+
+.contact-wrap{overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(0,0,0,.05);font-size:12px;color:rgba(20,15,5,.38)}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:#f2efe9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.07),0 4px 10px rgba(0,0,0,.05)}
+
+footer{padding:20px;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(20,15,5,.18)}
+</style>
+</head>
+<body><div class="app">
+
+<div class="hero">
+  <div class="hero-nav">
+    <div class="logo">Pinnacle</div>
+    <div class="hero-chip">Luxury Properties</div>
+  </div>
+  <!-- Architectural building silhouette -->
+  <div class="bldg-scene">
+    <div class="bldg-ground"></div>
+    <div class="bldg b1"></div>
+    <div class="bldg b2"></div>
+    <div class="bldg b3"></div>
+    <div class="bldg b4"></div>
+    <div class="bldg b5"></div>
+    <div class="bldg b6"></div>
+  </div>
+  <h1>Your finest<br>address<br>awaits.</h1>
+  <div class="hero-tagline">Premium Real Estate · Dhaka · Est. 2005</div>
+  <div class="hero-rule"></div>
+</div>
+
+<div class="trust-row">
+  <div class="tr-item float-light"><div class="tr-n">850+</div><div class="tr-l">Properties sold</div></div>
+  <div class="tr-item float-light"><div class="tr-n">20yr</div><div class="tr-l">In market</div></div>
+  <div class="tr-item float-light"><div class="tr-n">4.9★</div><div class="tr-l">Client rating</div></div>
+</div>
+
+<div class="body">
+  <div class="sec sec-rule">Featured Listings</div>
+  <div class="properties">
+    <div class="prop float-deep">
+      <div class="prop-visual">
+        <div class="pv-room" style="width:28%;height:35px;background:rgba(0,0,0,.06)"></div>
+        <div class="pv-room" style="width:22%;height:48px;background:rgba(0,0,0,.08)"></div>
+        <div class="pv-room" style="width:18%;height:28px;background:rgba(0,0,0,.05)"></div>
+        <div class="pv-room" style="width:30%;height:40px;background:rgba(0,0,0,.07)"></div>
+      </div>
+      <div class="prop-tag">● New</div>
+      <div class="prop-name">The Zenith Penthouse</div>
+      <div class="prop-loc">Gulshan-2, Dhaka · Floor 28</div>
+      <div class="prop-details">
+        <div class="pd">🛏 4 bed</div>
+        <div class="pd">🛁 3 bath</div>
+        <div class="pd">📐 3,800 sqft</div>
+      </div>
+      <div class="prop-price">৳4.8 Cr</div>
+      <div class="prop-price-sub">Or take at ৳42,000/sqft</div>
+    </div>
+    <div class="prop float-deep">
+      <div class="prop-visual">
+        <div class="pv-room" style="width:35%;height:40px;background:rgba(0,0,0,.07)"></div>
+        <div class="pv-room" style="width:25%;height:32px;background:rgba(0,0,0,.06)"></div>
+        <div class="pv-room" style="width:38%;height:44px;background:rgba(0,0,0,.08)"></div>
+      </div>
+      <div class="prop-tag">Exclusive</div>
+      <div class="prop-name">Banani Skyview Villa</div>
+      <div class="prop-loc">Banani Road 11, Dhaka</div>
+      <div class="prop-details">
+        <div class="pd">🛏 5 bed</div>
+        <div class="pd">🛁 4 bath</div>
+        <div class="pd">📐 5,200 sqft</div>
+      </div>
+      <div class="prop-price">৳7.2 Cr</div>
+      <div class="prop-price-sub">Duplex · Private lift · Pool deck</div>
+    </div>
+  </div>
+
+  <div class="sec sec-rule" style="margin-top:22px">Our Services</div>
+  <div class="services">
+    <div class="svc float-light"><div><div class="svc-name">Property Sales & Acquisition</div><div class="svc-desc">Residential, commercial, investment grade</div></div><div class="svc-tag">Commission based</div></div>
+    <div class="svc float-light"><div><div class="svc-name">Investment Advisory</div><div class="svc-desc">ROI analysis, portfolio strategy, market insight</div></div><div class="svc-tag">Retainer</div></div>
+    <div class="svc float-light"><div><div class="svc-name">Property Management</div><div class="svc-desc">Rental, maintenance, tenant management</div></div><div class="svc-tag">8% of rent</div></div>
+    <div class="svc float-light"><div><div class="svc-name">Legal & Documentation</div><div class="svc-desc">Title verification, deed preparation, RAJUK</div></div><div class="svc-tag">Fixed fee</div></div>
+  </div>
+
+  <div class="sec sec-rule" style="margin-top:22px">Speak with an Advisor</div>
+  <div class="cta float-deep">
+    <h3>Find your<br>perfect property.</h3>
+    <p>Private consultations available. Confidential, no-obligation, expert guidance from our senior advisors.</p>
+    <a href="https://wa.me/8801700000000" class="btn-dark">🏢 Schedule a Consultation</a>
+    <a href="tel:+8801700000000" class="btn-light">📞 Call the office</a>
+  </div>
+
+  <div class="sec sec-rule" style="margin-top:22px">Contact</div>
+  <div class="contact-wrap float-mid">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-1, Dhaka · Pinnacle House, Level 6</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 7pm · By appointment</div>
+    <div class="cr"><div class="ci">🌐</div>pinnacle.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 Pinnacle Properties · Luxury Real Estate · Dhaka</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

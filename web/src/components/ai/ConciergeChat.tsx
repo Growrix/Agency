@@ -56,7 +56,7 @@ const STARTER_PROMPTS = [
 ];
 
 const KNOWLEDGE_AREAS = [
-  { title: "Services", detail: "SaaS apps, websites, MCP servers, and automation." },
+  { title: "Services", detail: "Websites, HTML business profiles, SaaS apps, MCP servers, and automation." },
   { title: "Pricing", detail: "Ranges, deposits, retainers, and shop pricing." },
   { title: "Proof", detail: "Portfolio outcomes and launch results already on the site." },
   { title: "Next steps", detail: "Book a call, use contact, or escalate to WhatsApp." },

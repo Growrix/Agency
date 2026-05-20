@@ -1,6 +1,6 @@
-# Growrix Agency Web
+# Growrixos Web
 
-Next.js App Router frontend + API surface for the Agency platform.
+Next.js App Router frontend + API surface for the Growrixos platform.
 
 ## Local setup
 
@@ -13,7 +13,7 @@ npm install
 2. Create environment file from template:
 
 ```bash
-cp .env.example .env.local
+cp ../.env.example .env.local
 ```
 
 3. Configure Supabase (recommended for production-like auth + db):

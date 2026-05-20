@@ -1,6 +1,6 @@
-# Agency Workspace
+# Growrixos Workspace
 
-This repository contains the Agency frontend workspace and the project planning system used to track implementation phases.
+This repository contains the Growrixos frontend workspace and the project planning system used to track implementation phases.
 
 ## Local Commands
 
@@ -17,7 +17,7 @@ npm run build
 
 These root commands are for the `web/` app only. Do not use the repository root to install or run Sanity Studio.
 
-`npm run dev` now self-heals common local startup issues: it enforces Node 20 through `fnm` when available, restarts stale Agency Next.js processes that are still holding port `5000`, and falls back to the next free local port if `5000` is occupied by another application.
+`npm run dev` now self-heals common local startup issues: it enforces Node 20 through `fnm` when available, restarts stale Growrixos Next.js processes that are still holding port `5000`, and falls back to the next free local port if `5000` is occupied by another application.
 
 The root install now also installs the Next.js app dependencies inside `web/` through `postinstall`, so CI and deployment environments can build from the repository root without a manual second install step.
 

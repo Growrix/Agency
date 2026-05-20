@@ -1,5 +1,6 @@
 import "server-only";
 
+import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
 import type {
   ManagedPortfolioRecord,
   ManagedProductRecord,
@@ -92,6 +93,34 @@ type SanityServicePage = {
   typical?: string;
   timeline?: string;
   pillars?: string[];
+};
+
+type SanityHtmlBusinessProfileTemplate = {
+  slug?: string;
+  name?: string;
+  price?: string;
+  livePreviewUrl?: string;
+  embeddedPreviewUrl?: string;
+  profileCategoryLabel?: string;
+  profileCategorySlug?: string;
+  profileNumber?: number;
+  tag?: string;
+  published?: boolean;
+  teaser?: string;
+  summary?: string;
+  audience?: string;
+  features?: string[];
+  previewVariant?: ManagedProductRecord["previewVariant"];
+  includes?: string[];
+  inScope?: string[];
+  outOfScope?: string[];
+  enhancementPlan?: string[];
+  stack?: string[];
+  highlights?: SanityKeyValue[];
+  htmlTemplateFileUrl?: string;
+  deliveryBundleFileUrl?: string;
+  image?: SanityImage;
+  gallery?: SanityImage[];
 };
 
 const SANITY_CASE_STUDIES_QUERY = `*[
@@ -189,6 +218,44 @@ const SANITY_SERVICE_PAGES_QUERY = `*[
   "pillars": coalesce(pillars, [])
 }`;
 
+const SANITY_HTML_BUSINESS_PROFILE_TEMPLATES_QUERY = `*[
+  _type == "htmlBusinessProfileTemplate" &&
+  defined(slug.current) &&
+  ($preview || coalesce(published, true) == true)
+] | order(coalesce(orderRank, featuredRank, 999), coalesce(profileNumber, 999), coalesce(name, title) asc) {
+  "slug": slug.current,
+  "name": coalesce(name, title),
+  price,
+  livePreviewUrl,
+  embeddedPreviewUrl,
+  "profileCategoryLabel": coalesce(profileCategoryLabel, category),
+  "profileCategorySlug": coalesce(profileCategorySlug, categorySlug),
+  profileNumber,
+  tag,
+  published,
+  teaser,
+  summary,
+  audience,
+  "features": coalesce(features, []),
+  previewVariant,
+  "includes": coalesce(includes, []),
+  "inScope": coalesce(inScope, []),
+  "outOfScope": coalesce(outOfScope, []),
+  "enhancementPlan": coalesce(enhancementPlan, []),
+  "stack": coalesce(stack, []),
+  "highlights": coalesce(highlights, []),
+  "htmlTemplateFileUrl": coalesce(htmlTemplateFile.asset->url, templateFile.asset->url),
+  "deliveryBundleFileUrl": deliveryBundleFile.asset->url,
+  "image": {
+    "url": previewImage.asset->url,
+    "alt": coalesce(previewImage.alt, previewImageAlt, name, title)
+  },
+  "gallery": coalesce(gallery, [])[]{
+    "url": asset->url,
+    "alt": coalesce(alt, name, title)
+  }
+}`;
+
 function normalizeString(value: string | undefined, fallback = "") {
   return typeof value === "string" ? value.trim() : fallback;
 }
@@ -235,6 +302,11 @@ const SERVICE_SLUG_ALIASES: Record<string, string> = {
   "saas-app": "saas-applications",
   "saas-application": "saas-applications",
   "saas-applications": "saas-applications",
+  html: "html-business-profiles",
+  "html-profile": "html-business-profiles",
+  "html-profiles": "html-business-profiles",
+  "html-business-profile": "html-business-profiles",
+  "html-business-profiles": "html-business-profiles",
   mcp: "mcp-servers",
   "mcp-server": "mcp-servers",
   "mcp-servers": "mcp-servers",
@@ -349,6 +421,65 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
   };
 }
 
+function normalizeHtmlBusinessProfileTemplate(item: SanityHtmlBusinessProfileTemplate): ManagedProductRecord | null {
+  const slug = normalizeString(item.slug);
+  const name = normalizeString(item.name);
+
+  if (!slug || !name) {
+    return null;
+  }
+
+  const profileCategory = normalizeString(item.profileCategoryLabel, "Creative Business");
+  const profileCategorySlug = normalizeString(item.profileCategorySlug, "creative-business");
+  const htmlTemplateUrl = normalizeString(item.htmlTemplateFileUrl) || undefined;
+  const livePreviewUrl = normalizeString(item.livePreviewUrl) || htmlTemplateUrl;
+  const embeddedPreviewUrl = normalizeString(item.embeddedPreviewUrl) || htmlTemplateUrl;
+  const highlights = normalizeKeyValueArray(item.highlights);
+  const normalizedStack = normalizeStringArray(item.stack);
+  const gallery = (item.gallery ?? [])
+    .map((image) => normalizeImage(image, null))
+    .filter((image): image is StockImage => image !== null);
+
+  if (highlights.length === 0 && typeof item.profileNumber === "number") {
+    highlights.push({ label: "Profile", value: `#${item.profileNumber}`, hint: "Template number" });
+  }
+
+  if (highlights.length === 0) {
+    highlights.push({ label: "Delivery", value: "Digital", hint: "HTML template" });
+  }
+
+  return {
+    slug,
+    name,
+    price: normalizeString(item.price, "$149"),
+    livePreviewUrl,
+    embeddedPreviewUrl,
+    category: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.label,
+    categorySlug: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug,
+    type: profileCategory,
+    typeSlug: slugify(profileCategorySlug, "creative-marketing"),
+    industry: profileCategory,
+    industrySlug: slugify(profileCategorySlug, "creative-marketing"),
+    tag: normalizeString(item.tag) || undefined,
+    published: item.published ?? true,
+    teaser: normalizeString(item.teaser, "Category-ready HTML business profile template."),
+    summary: normalizeString(item.summary, "A digital HTML business profile template available for direct purchase."),
+    audience: normalizeString(item.audience, "Businesses that need fast profile website launches."),
+    features: normalizeStringArray(item.features),
+    previewVariant: item.previewVariant ?? "marketing",
+    includes: normalizeStringArray(item.includes),
+    inScope: normalizeStringArray(item.inScope),
+    outOfScope: normalizeStringArray(item.outOfScope),
+    enhancementPlan: normalizeStringArray(item.enhancementPlan),
+    stack: normalizedStack.length > 0
+      ? normalizedStack
+      : ["HTML5", "CSS3", "JavaScript"],
+    highlights,
+    image: normalizeImage(item.image, null),
+    gallery,
+  };
+}
+
 function normalizeService(item: SanityServicePage): ManagedServiceRecord | null {
   const slug = normalizeString(item.slug);
   const title = normalizeString(item.title);
@@ -407,6 +538,18 @@ export async function getSanityShopItemBySlug(
 ): Promise<ManagedProductRecord | null> {
   const entries = await listSanityShopItems(options);
   return entries.find((entry) => entry.slug === slug) ?? null;
+}
+
+export async function listSanityHtmlBusinessProfileTemplates(
+  options: SanityQueryOptions = {},
+): Promise<ManagedProductRecord[]> {
+  const entries = await fetchCatalogEntries<SanityHtmlBusinessProfileTemplate>(
+    SANITY_HTML_BUSINESS_PROFILE_TEMPLATES_QUERY,
+    options,
+  );
+  return entries
+    .map(normalizeHtmlBusinessProfileTemplate)
+    .filter((entry): entry is ManagedProductRecord => entry !== null);
 }
 
 export async function listSanityServicePages(options: SanityQueryOptions = {}): Promise<ManagedServiceRecord[]> {

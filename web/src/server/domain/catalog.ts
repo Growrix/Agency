@@ -1,6 +1,11 @@
 import "server-only";
 
 import { SERVICES } from "@/lib/content";
+import {
+  HTML_BUSINESS_PROFILE_TEMPLATES,
+  HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
+  getHtmlBusinessProfilePreviewUrl,
+} from "@/lib/html-business-profiles";
 import type {
   ManagedPortfolioRecord,
   ManagedProductRecord,
@@ -10,14 +15,17 @@ import { readDatabase, writeDatabase } from "@/server/data/store";
 import {
   getSanityServicePageBySlug,
   listSanityCaseStudies,
+  listSanityHtmlBusinessProfileTemplates,
   listSanityServicePages,
   listSanityShopItems,
 } from "@/server/sanity/catalog";
 import {
   deleteSanityCaseStudy,
+  deleteSanityHtmlBusinessProfileTemplate,
   deleteSanityServicePage,
   deleteSanityShopItem,
   upsertSanityCaseStudy,
+  upsertSanityHtmlBusinessProfileTemplate,
   upsertSanityServicePage,
   upsertSanityShopItem,
 } from "@/server/sanity/management";
@@ -46,10 +54,8 @@ const LEGACY_MOCK_PORTFOLIO_SLUGS = new Set([
 ]);
 
 const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
-  "concierge-mcp-starter",
   "atelier-marketing-theme",
   "operator-dashboard-kit",
-  "inquiry-to-crm-automation",
   "mobile-app-landing-pack",
   "booking-stripe-bundle",
   "new-product",
@@ -96,6 +102,78 @@ function parseUsdPriceToCents(price: string) {
   const normalized = price.replace(/[^\d.]/g, "");
   const parsed = Number(normalized);
   return Number.isFinite(parsed) ? Math.round(parsed * 100) : 0;
+}
+
+function toHtmlProductSlug(slug: string) {
+  return slug.startsWith("html-business-profile-") ? slug : `html-business-profile-${slug}`;
+}
+
+function toSanityHtmlTemplateSlug(slug: string) {
+  return slug.replace(/^html-business-profile-/, "");
+}
+
+function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
+  return HTML_BUSINESS_PROFILE_TEMPLATES.map((template) => {
+    const previewUrl = getHtmlBusinessProfilePreviewUrl(template.slug);
+
+    return {
+      slug: template.slug,
+      name: template.title,
+      price: template.suggestedPrice,
+      livePreviewUrl: previewUrl,
+      embeddedPreviewUrl: previewUrl,
+      category: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.label,
+      categorySlug: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug,
+      type: template.categoryLabel,
+      typeSlug: template.categorySlug,
+      industry: template.categoryLabel,
+      industrySlug: template.categorySlug,
+      tag: template.tag,
+      published: true,
+      teaser: template.teaser,
+      summary: template.summary,
+      audience: template.audience,
+      features: [],
+      previewVariant: "marketing",
+      includes: ["HTML template files", "Launch-ready sections"],
+      inScope: [],
+      outOfScope: [],
+      enhancementPlan: [],
+      stack: ["HTML5", "CSS3", "JavaScript"],
+      highlights: template.profileNumber === null
+        ? [{ label: "Collection", value: "Showcase" }]
+        : [{ label: "Profile", value: `#${template.profileNumber}` }],
+      image: null,
+      gallery: [],
+    };
+  });
+}
+
+function mergeCatalogProducts(...productGroups: ManagedProductRecord[][]) {
+  const merged = new Map<string, ManagedProductRecord>();
+
+  for (const products of productGroups) {
+    for (const product of products) {
+      const normalizedSlug = product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug
+        ? toHtmlProductSlug(product.slug)
+        : product.slug;
+      const normalized = { ...product, slug: normalizedSlug };
+      merged.set(normalized.slug, normalized);
+    }
+  }
+
+  return Array.from(merged.values());
+}
+
+async function listAllPublicProducts() {
+  const database = await ensureCatalogSeeded();
+  const cmsProducts = await listSanityShopItems().catch(() => []);
+  const cmsHtmlTemplates = await listSanityHtmlBusinessProfileTemplates().catch(() => []);
+  const localHtmlTemplates = getDefaultHtmlBusinessProfileProducts();
+  const managedProducts = database.products.filter((product) => !isPlaceholderProduct(product));
+
+  return mergeCatalogProducts(localHtmlTemplates, managedProducts, cmsProducts, cmsHtmlTemplates)
+    .filter((product) => !isPlaceholderProduct(product));
 }
 
 function getDefaultServices(): ManagedServiceRecord[] {
@@ -217,11 +295,7 @@ export async function getPublicPortfolioProject(slug: string): Promise<PublicPor
 }
 
 export async function listPublicShopCategories(): Promise<PublicShopCategoryRecord[]> {
-  const database = await ensureCatalogSeeded();
-  const cmsProducts = await listSanityShopItems().catch(() => []);
-  const products = (cmsProducts.length > 0 ? cmsProducts : database.products).filter(
-    (product) => !isPlaceholderProduct(product),
-  );
+  const products = await listAllPublicProducts();
 
   const categoryMap = new Map<string, string>();
 
@@ -246,11 +320,7 @@ export async function listPublicShopProducts(filters?: {
   industry?: string;
   search?: string;
 }) {
-  const database = await ensureCatalogSeeded();
-  const cmsProducts = await listSanityShopItems().catch(() => []);
-  const products = (cmsProducts.length > 0 ? cmsProducts : database.products).filter(
-    (product) => !isPlaceholderProduct(product),
-  );
+  const products = await listAllPublicProducts();
   const q = filters?.search?.trim().toLowerCase();
 
   return products.filter((product) => {
@@ -287,12 +357,11 @@ export async function listPublicShopProducts(filters?: {
 }
 
 export async function getPublicShopProduct(slug: string): Promise<PublicShopProductRecord | null> {
-  const database = await ensureCatalogSeeded();
-  const cmsProducts = await listSanityShopItems().catch(() => []);
-
-  const product = cmsProducts.length > 0
-    ? cmsProducts.find((item) => item.slug === slug && item.published !== false) ?? null
-    : database.products.find((item) => item.slug === slug && item.published !== false) ?? null;
+  const products = await listAllPublicProducts();
+  const alternateHtmlSlug = toHtmlProductSlug(slug);
+  const product = products.find(
+    (item) => (item.slug === slug || item.slug === alternateHtmlSlug) && item.published !== false,
+  ) ?? null;
 
   if (!product || isPlaceholderProduct(product)) {
     return null;
@@ -343,9 +412,12 @@ export async function deleteManagedService(serviceId: string) {
 }
 
 export async function listManagedProducts() {
-  const cmsProducts = await listSanityShopItems({ preview: true }).catch(() => []);
-  if (cmsProducts.length > 0) {
-    return cmsProducts;
+  const [cmsProducts, cmsHtmlTemplates] = await Promise.all([
+    listSanityShopItems({ preview: true }).catch(() => []),
+    listSanityHtmlBusinessProfileTemplates({ preview: true }).catch(() => []),
+  ]);
+  if (cmsProducts.length > 0 || cmsHtmlTemplates.length > 0) {
+    return mergeCatalogProducts(cmsProducts, cmsHtmlTemplates);
   }
 
   const database = await ensureCatalogSeeded();
@@ -366,7 +438,11 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
     products: [nextRecord, ...database.products.filter((product) => product.slug !== input.slug)],
   }));
 
-  await upsertSanityShopItem(nextRecord).catch(() => false);
+  if (nextRecord.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug) {
+    await upsertSanityHtmlBusinessProfileTemplate(nextRecord).catch(() => false);
+  } else {
+    await upsertSanityShopItem(nextRecord).catch(() => false);
+  }
 
   return nextRecord;
 }
@@ -378,7 +454,11 @@ export async function deleteManagedProduct(productSlug: string) {
     products: database.products.filter((product) => product.slug !== productSlug),
   }));
 
-  await deleteSanityShopItem(productSlug).catch(() => false);
+  const htmlSlugCandidates = Array.from(new Set([productSlug, toSanityHtmlTemplateSlug(productSlug)]));
+  await Promise.all([
+    deleteSanityShopItem(productSlug).catch(() => false),
+    ...htmlSlugCandidates.map((slug) => deleteSanityHtmlBusinessProfileTemplate(slug).catch(() => false)),
+  ]);
 }
 
 export async function listManagedPortfolioProjects() {
