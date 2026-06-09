@@ -2,10 +2,13 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/auth/token";
 
-const protectedPrefixes = ["/admin", "/api/v1/admin", "/api/v1/me"];
+const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
 
 export async function proxy(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/admin/login")) {
+  if (
+    request.nextUrl.pathname.startsWith("/admin/login") ||
+    request.nextUrl.pathname.startsWith("/dashboard/login")
+  ) {
     return NextResponse.next();
   }
 
@@ -44,11 +47,13 @@ function reject(request: NextRequest) {
   }
 
   const url = request.nextUrl.clone();
-  url.pathname = "/admin/login";
+  url.pathname = request.nextUrl.pathname.startsWith("/dashboard")
+    ? "/dashboard/login"
+    : "/admin/login";
   url.searchParams.set("next", request.nextUrl.pathname);
   return NextResponse.redirect(url);
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/v1/admin/:path*", "/api/v1/me/:path*"],
+  matcher: ["/admin/:path*", "/dashboard/:path*", "/api/v1/admin/:path*", "/api/v1/me/:path*"],
 };

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Zenith Executive — Executive Coaching & Leadership</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#1a1814;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#faf7f2;margin:0 auto}
+/* QUIET LUXURY — cream, charcoal, warm gold line */
+.hero{min-height:290px;background:#1a1814;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px 26px}
+.hero-vline{position:absolute;left:28px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(200,180,120,.3),transparent)}
+.h-top{position:absolute;top:26px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center}
+.h-wordmark{font-size:10px;font-weight:400;color:rgba(250,247,242,.25);letter-spacing:4px;text-transform:uppercase}
+.h-sessions{font-size:9px;color:rgba(200,180,120,.4);letter-spacing:1px}
+.hero h1{font-family:'Instrument Serif',serif;font-size:42px;color:#faf7f2;line-height:.9;letter-spacing:-.5px}
+.hero h1 em{font-style:italic;color:rgba(200,180,120,.7)}
+.hero-rule{width:32px;height:1px;background:rgba(200,180,120,.4);margin:14px 0 10px}
+.hero-sub{font-size:11px;color:rgba(250,247,242,.35);line-height:1.7;letter-spacing:.2px;max-width:260px}
+.stats-r{display:flex;background:#faf7f2;border-bottom:1px solid #e8e4dc}
+.sr{flex:1;text-align:center;padding:14px 0;border-right:1px solid #e8e4dc}
+.sr:last-child{border-right:none}
+.sr-n{font-family:'Instrument Serif',serif;font-size:20px;color:#1a1814}
+.sr-l{font-size:8px;color:rgba(26,24,20,.3);margin-top:4px;letter-spacing:1.5px;text-transform:uppercase}
+.body{padding:0 24px 40px;background:#faf7f2}
+.sec{font-size:8px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(26,24,20,.3);margin:28px 0 14px;display:flex;align-items:center;gap:14px}
+.sec::after{content:'';flex:1;height:1px;background:#e8e4dc}
+.offers{display:flex;flex-direction:column;gap:1px}
+.offer{padding:18px 0;border-bottom:1px solid #e8e4dc;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.offer:last-child{border-bottom:none}
+.offer-name{font-family:'Instrument Serif',serif;font-size:17px;color:#1a1814;font-style:italic}
+.offer-desc{font-size:10px;font-weight:300;color:rgba(26,24,20,.4);margin-top:5px;line-height:1.6;letter-spacing:.2px}
+.offer-right{text-align:right;flex-shrink:0}
+.offer-price{font-family:'Instrument Serif',serif;font-size:16px;color:#1a1814}
+.offer-per{font-size:9px;color:rgba(26,24,20,.3);margin-top:2px;letter-spacing:.5px}
+.testimonial{padding:24px 0;border-top:1px solid #e8e4dc}
+.t-quote{font-family:'Instrument Serif',serif;font-style:italic;font-size:15px;color:#1a1814;line-height:1.65;letter-spacing:-.1px}
+.t-dash{width:24px;height:1px;background:rgba(200,180,120,.5);margin:12px 0 8px}
+.t-name{font-size:9px;font-weight:400;color:rgba(26,24,20,.35);letter-spacing:2px;text-transform:uppercase}
+.cta-q{padding:24px 0;border-top:1px solid #e8e4dc}
+.cta-q h3{font-family:'Instrument Serif',serif;font-size:24px;color:#1a1814;letter-spacing:-.5px;margin-bottom:8px}
+.cta-q p{font-size:11px;font-weight:300;color:rgba(26,24,20,.4);margin-bottom:20px;line-height:1.7;letter-spacing:.2px}
+.cta-btn{display:block;background:#1a1814;color:#faf7f2;padding:15px;text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;color:rgba(26,24,20,.3);text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+.contact-q{display:flex;flex-direction:column;gap:0}
+.cq{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #e8e4dc;font-size:11px}
+.cq:last-child{border-bottom:none}
+.cq-label{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(26,24,20,.25)}
+.cq-val{color:rgba(26,24,20,.45);font-weight:300}
+footer{background:#1a1814;padding:18px 24px;display:flex;justify-content:space-between}
+.f-name{font-family:'Instrument Serif',serif;font-size:13px;color:rgba(250,247,242,.25);font-style:italic}
+.f-copy{font-size:9px;color:rgba(250,247,242,.1);letter-spacing:1px}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-vline"></div>
+  <div class="h-top"><div class="h-wordmark">Zenith Executive</div><div class="h-sessions">By appointment only</div></div>
+  <h1>Lead with<br><em>clarity.</em><br>Grow with purpose.</h1>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Executive coaching for CEOs, founders and senior leaders who want to perform at their highest level.</div>
+</div>
+<div class="stats-r">
+  <div class="sr"><div class="sr-n">320+</div><div class="sr-l">Leaders coached</div></div>
+  <div class="sr"><div class="sr-n">15yr</div><div class="sr-l">Practice</div></div>
+  <div class="sr"><div class="sr-n">ICF</div><div class="sr-l">Certified</div></div>
+</div>
+<div class="body">
+  <div class="sec">Coaching Engagements</div>
+  <div class="offers">
+    <div class="offer"><div><div class="offer-name">CEO & Founder Coaching</div><div class="offer-desc">Monthly 1:1 sessions, 360-feedback, strategic clarity, stakeholder navigation. 6-month minimum engagement.</div></div><div class="offer-right"><div class="offer-price">$800</div><div class="offer-per">per session</div></div></div>
+    <div class="offer"><div><div class="offer-name">Leadership Acceleration</div><div class="offer-desc">For senior managers moving into director or C-suite roles. Structured 12-session programme.</div></div><div class="offer-right"><div class="offer-price">$5,500</div><div class="offer-per">full programme</div></div></div>
+    <div class="offer"><div><div class="offer-name">Board Effectiveness</div><div class="offer-desc">Facilitated board retreat, governance review, team dynamics workshop. One-day intensive.</div></div><div class="offer-right"><div class="offer-price">$3,000</div><div class="offer-per">per day</div></div></div>
+    <div class="offer"><div><div class="offer-name">Single Strategy Session</div><div class="offer-desc">90-minute clarity session for a specific leadership challenge or decision.</div></div><div class="offer-right"><div class="offer-price">$400</div><div class="offer-per">one session</div></div></div>
+  </div>
+  <div class="testimonial">
+    <div class="t-quote">"The six months with Zenith changed how I lead entirely. Clearer thinking, better decisions, stronger team."</div>
+    <div class="t-dash"></div>
+    <div class="t-name">CEO · Listed manufacturing group · Dhaka</div>
+  </div>
+  <div class="cta-q">
+    <h3>Ready to lead differently?</h3>
+    <p>A complimentary 30-minute conversation to see if we're the right fit. No pressure, complete confidentiality.</p>
+    <a href="mailto:coach@zenithexecutive.com" class="cta-btn">Request a Discovery Call</a>
+    <a href="https://wa.me/8801700000000" class="cta-btn2">WhatsApp →</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contact-q">
+    <div class="cq"><span class="cq-label">Phone</span><span class="cq-val">+880 1700-000000</span></div>
+    <div class="cq"><span class="cq-label">Email</span><span class="cq-val">coach@zenithexecutive.com</span></div>
+    <div class="cq"><span class="cq-label">Location</span><span class="cq-val">Gulshan · Also via Zoom</span></div>
+  </div>
+</div>
+<footer><div class="f-name">Zenith Executive</div><div class="f-copy">© 2025 · ICF Certified</div></footer>
+</div></body></html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NexaTech — IT Services & Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Space Grotesk',sans-serif;background:#020818;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#030c1f;margin:0 auto;color:#ccd6f6}
+
+.hero{min-height:270px;background:#030c1f;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 24px;border-bottom:1px solid rgba(0,180,255,.15)}
+.circuit{position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,255,.06) 1px,transparent 1px);background-size:24px 24px}
+.circuit-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(0,180,255,.12) 1.5px,transparent 1.5px);background-size:24px 24px}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,255,.12) 0%,transparent 70%)}
+.h-sys{display:inline-flex;align-items:center;gap:6px;background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.2);border-radius:4px;padding:4px 12px;font-size:9px;color:#00b4ff;font-weight:600;letter-spacing:1.5px;margin-bottom:14px;width:fit-content;font-family:'Space Grotesk',sans-serif}
+.h-sys-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:b 1.5s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-size:38px;font-weight:700;color:#e8f4ff;line-height:.92;letter-spacing:-1.5px}
+.hero h1 .acc{color:#00b4ff}
+.hero-sub{font-size:11px;color:rgba(204,214,246,.35);margin-top:8px;line-height:1.6}
+.hero-stack{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.stag{background:rgba(0,180,255,.06);border:1px solid rgba(0,180,255,.15);border-radius:4px;padding:3px 9px;font-size:9px;color:rgba(0,180,255,.6);font-weight:500;letter-spacing:.3px}
+
+.kpis{display:flex;background:rgba(0,180,255,.04);border-bottom:1px solid rgba(0,180,255,.1)}
+.kpi{flex:1;text-align:center;padding:12px 0;border-right:1px solid rgba(0,180,255,.08)}
+.kpi:last-child{border-right:none}
+.kpi-n{font-size:18px;font-weight:700;color:#00b4ff}
+.kpi-l{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(204,214,246,.2);margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(0,180,255,.5);margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(0,180,255,.12)}
+
+.services{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.svc{background:rgba(255,255,255,.03);border:1px solid rgba(0,180,255,.1);border-radius:8px;padding:13px}
+.svc-icon{font-size:20px;margin-bottom:6px}
+.svc-name{font-size:12px;font-weight:600;color:#e8f4ff}
+.svc-desc{font-size:10px;color:rgba(204,214,246,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-size:12px;font-weight:600;color:#00b4ff;margin-top:5px}
+
+.clients{display:flex;flex-wrap:wrap;gap:5px}
+.client-tag{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:5px 11px;font-size:10px;color:rgba(204,214,246,.35)}
+
+.certs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cert{background:rgba(0,180,255,.06);border:1px solid rgba(0,180,255,.12);border-radius:6px;padding:10px;display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(204,214,246,.5)}
+.cert::before{content:'✓';color:#00b4ff;font-weight:700;flex-shrink:0}
+
+.cta-box{background:rgba(0,180,255,.06);border:1px solid rgba(0,180,255,.2);border-radius:10px;padding:20px;text-align:center;position:relative}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00b4ff,transparent)}
+.cta-box h3{font-size:18px;font-weight:700;color:#e8f4ff;margin-bottom:7px;letter-spacing:-.5px}
+.cta-box p{font-size:12px;color:rgba(204,214,246,.35);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:#00b4ff;color:#030c1f;border-radius:6px;padding:13px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:7px}
+.cta-btn2{display:block;background:rgba(255,255,255,.04);color:rgba(204,214,246,.35);border:1px solid rgba(0,180,255,.12);border-radius:6px;padding:11px;font-size:11px;text-decoration:none}
+
+.contacts{background:rgba(255,255,255,.03);border:1px solid rgba(0,180,255,.08);border-radius:8px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(0,180,255,.05);font-size:12px;color:rgba(204,214,246,.35)}
+.cr:last-child{border-bottom:none}
+.ci{width:27px;height:27px;background:#00b4ff;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+footer{background:#020818;border-top:1px solid rgba(0,180,255,.08);padding:14px;text-align:center;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(204,214,246,.1)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="circuit"></div>
+  <div class="circuit-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="h-sys"><span class="h-sys-dot"></span>Systems Online · All Services Active</div>
+  <h1>Nexa<span class="acc">Tech</span></h1>
+  <div class="hero-sub">End-to-end IT solutions for enterprises — infrastructure, software, cybersecurity &amp; cloud.</div>
+  <div class="hero-stack">
+    <div class="stag">AWS Certified</div><div class="stag">ISO 27001</div><div class="stag">Microsoft Partner</div><div class="stag">CISA</div>
+  </div>
+</div>
+<div class="kpis">
+  <div class="kpi"><div class="kpi-n">150+</div><div class="kpi-l">Enterprise clients</div></div>
+  <div class="kpi"><div class="kpi-n">99.9%</div><div class="kpi-l">Uptime SLA</div></div>
+  <div class="kpi"><div class="kpi-n">12yr</div><div class="kpi-l">Experience</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">☁️</div><div class="svc-name">Cloud & Infra</div><div class="svc-desc">AWS, Azure, private cloud, data centres</div><div class="svc-price">Custom</div></div>
+    <div class="svc"><div class="svc-icon">🔒</div><div class="svc-name">Cybersecurity</div><div class="svc-desc">SOC, pen testing, SIEM, ISO 27001</div><div class="svc-price">Custom</div></div>
+    <div class="svc"><div class="svc-icon">💻</div><div class="svc-name">Custom Software</div><div class="svc-desc">ERP, CRM, mobile apps, integrations</div><div class="svc-price">From $5,000</div></div>
+    <div class="svc"><div class="svc-icon">🤖</div><div class="svc-name">AI & Data</div><div class="svc-desc">ML models, analytics, AI integration</div><div class="svc-price">Custom</div></div>
+    <div class="svc"><div class="svc-icon">🖥</div><div class="svc-name">IT Support AMC</div><div class="svc-desc">Helpdesk, hardware, network support</div><div class="svc-price">From $500/mo</div></div>
+    <div class="svc"><div class="svc-icon">🌐</div><div class="svc-name">Web & E-Commerce</div><div class="svc-desc">Enterprise web platforms, portals</div><div class="svc-price">From $3,000</div></div>
+  </div>
+
+  <div class="sec">Trusted By</div>
+  <div class="clients">
+    <div class="client-tag">Bangladesh Bank</div><div class="client-tag">BGMEA</div><div class="client-tag">bKash</div>
+    <div class="client-tag">Unilever BD</div><div class="client-tag">Square Group</div><div class="client-tag">3 Government Agencies</div>
+  </div>
+
+  <div class="sec">Certifications</div>
+  <div class="certs">
+    <div class="cert">ISO 27001 Certified</div>
+    <div class="cert">AWS Advanced Partner</div>
+    <div class="cert">Microsoft Gold Partner</div>
+    <div class="cert">CISA Engineers on team</div>
+  </div>
+
+  <div class="sec">Start a Project</div>
+  <div class="cta-box">
+    <h3>Free IT audit for enterprises.</h3>
+    <p>We'll assess your current IT infrastructure, identify risks, and give you a roadmap to modernise — at no cost.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">💻 Request Free IT Audit</a>
+    <a href="mailto:enterprise@nexatech.com.bd" class="cta-btn2">enterprise@nexatech.com.bd</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>NexaTech House, Motijheel, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>24/7 Support · Office: Sun–Thu 9am–6pm</div>
+  </div>
+</div>
+<footer>NexaTech IT Solutions · Dhaka · ISO 27001 · AWS Partner</footer>
+</div></body></html>

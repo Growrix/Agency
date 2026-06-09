@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Karim's Auto Repair — Trusted Since 1998</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f4f0e8;color:#1a1208;font-family:'Barlow',sans-serif;min-height:100vh}
+header{background:#1a1208;color:#f4f0e8;padding:0 5vw;display:flex;justify-content:space-between;align-items:center;height:70px}
+.brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#e8a020}
+.header-contact{font-size:14px;color:#d4c8b0}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+.hero-left{background:#e8a020;padding:80px 5vw;display:flex;flex-direction:column;justify-content:center}
+.hero-kicker{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#5a3a00;margin-bottom:16px}
+.hero-left h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5rem);line-height:1;color:#1a1208;margin-bottom:20px}
+.hero-left p{font-size:16px;color:#4a2a00;line-height:1.7;font-weight:300;margin-bottom:36px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:14px 28px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;font-family:'Barlow',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.btn-dark{background:#1a1208;color:#e8a020}
+.btn-dark:hover{background:#333}
+.btn-outline{border:2px solid #1a1208;color:#1a1208}
+.hero-right{background:#1a1208;display:flex;flex-direction:column;justify-content:center;padding:60px 5vw;gap:24px}
+.service-item{display:flex;align-items:center;gap:16px;padding:20px;border:1px solid rgba(232,160,32,.15);border-radius:8px}
+.service-icon{font-size:28px;width:48px;height:48px;background:rgba(232,160,32,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.service-item h3{font-size:16px;font-weight:600;color:#f4f0e8;margin-bottom:3px}
+.service-item p{font-size:13px;color:#8a7858;line-height:1.4}
+.trust-strip{background:#1a1208;padding:36px 5vw;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.trust-item{background:rgba(232,160,32,.06);padding:24px;text-align:center;border:1px solid rgba(232,160,32,.1)}
+.trust-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#e8a020;display:block}
+.trust-label{font-size:12px;color:#8a7858;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+.content{max-width:1100px;margin:0 auto;padding:80px 5vw}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:80px}
+.about-img{background:#1a1208;border-radius:16px;height:360px;display:flex;align-items:center;justify-content:center;font-size:80px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;margin-bottom:20px;letter-spacing:2px}
+.about-text p{color:#5a4a38;line-height:1.85;font-size:15px;font-weight:300;margin-bottom:16px}
+.checklist{list-style:none;margin-top:20px}
+.checklist li{padding:8px 0;border-bottom:1px solid #e8e0d0;font-size:14px;color:#3a2808;display:flex;align-items:center;gap:12px}
+.checklist li::before{content:'✓';color:#e8a020;font-weight:600}
+.pricing{background:#1a1208;color:#f4f0e8;padding:60px 5vw;margin-bottom:0}
+.pricing h2{color:#e8a020;margin-bottom:40px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(232,160,32,.15);border-radius:12px;padding:32px}
+.price-name{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#8a7858;margin-bottom:8px}
+.price-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#e8a020;line-height:1}
+.price-unit{font-size:12px;color:#6a5a48;margin-top:4px;margin-bottom:20px}
+.price-items{list-style:none;display:flex;flex-direction:column;gap:8px}
+.price-items li{font-size:13px;color:#c0b090;display:flex;align-items:center;gap:8px}
+.price-items li::before{content:'→';color:#e8a020}
+.map-cta{background:#e8a020;padding:60px 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.map-cta h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#1a1208;letter-spacing:2px}
+.map-cta p{color:#5a3a00;margin-top:8px}
+footer{background:#0f0b06;padding:24px 5vw;text-align:center;font-size:13px;color:#5a4a38}
+@media(max-width:768px){.hero{grid-template-columns:1fr}.trust-strip{grid-template-columns:1fr 1fr}.about-grid{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}.map-cta{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Karim's Auto</div>
+  <div class="header-contact">📞 +880 1700-000000 · Open Sat–Thu 8AM–8PM</div>
+</header>
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Dhaka's Most Trusted Workshop</div>
+    <h1>We fix cars. We keep our word.</h1>
+    <p>From oil changes to full engine rebuilds, Karim's has been Mirpur's most trusted auto repair workshop for 27 years. Honest pricing. Fast turnaround. Every time.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-dark">Book a Service</a>
+      <a href="#" class="btn btn-outline">Our Prices</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="service-item"><div class="service-icon">🔧</div><div><h3>Engine Service</h3><p>Full diagnostics, tune-ups, major &amp; minor engine repairs</p></div></div>
+    <div class="service-item"><div class="service-icon">🛢️</div><div><h3>Oil &amp; Fluids</h3><p>Oil change, coolant flush, brake fluid top-up in under 1 hour</p></div></div>
+    <div class="service-item"><div class="service-icon">⚡</div><div><h3>Electrical</h3><p>Battery, wiring, AC systems, dashboard electronics</p></div></div>
+  </div>
+</section>
+<div class="trust-strip">
+  <div class="trust-item"><span class="trust-num">27</span><div class="trust-label">Years in Business</div></div>
+  <div class="trust-item"><span class="trust-num">12K+</span><div class="trust-label">Cars Serviced</div></div>
+  <div class="trust-item"><span class="trust-num">4.9★</span><div class="trust-label">Google Rating</div></div>
+  <div class="trust-item"><span class="trust-num">1hr</span><div class="trust-label">Avg Oil Change</div></div>
+</div>
+<div class="content">
+  <div class="about-grid">
+    <div class="about-img">🚗</div>
+    <div class="about-text">
+      <h2>Family owned. Community trusted.</h2>
+      <p>Karim's Auto was founded in 1998 by Mohammad Karim after 15 years of experience at Toyota Bangladesh. Today, his son Rafiq carries on the legacy — with the same commitment to honest, no-surprise pricing.</p>
+      <p>We work on all major brands — Toyota, Honda, Suzuki, Mitsubishi, Hyundai, and more. Japanese, Korean, and European vehicles welcome.</p>
+      <ul class="checklist"><li>No hidden charges — we show you the problem before we fix it</li><li>Genuine parts sourced from authorised dealers</li><li>30-day service warranty on all work</li><li>Free collection &amp; delivery within Mirpur</li></ul>
+    </div>
+  </div>
+</div>
+<section class="pricing">
+  <h2>Transparent Pricing</h2>
+  <div class="pricing-grid">
+    <div class="price-card"><div class="price-name">Basic Service</div><div class="price-num">৳1,800</div><div class="price-unit">Starting from</div><ul class="price-items"><li>Engine oil change</li><li>Filter replacement</li><li>Fluid top-up</li><li>Safety check</li></ul></div>
+    <div class="price-card" style="border-color:rgba(232,160,32,.4)"><div class="price-name">Major Service</div><div class="price-num">৳4,500</div><div class="price-unit">Starting from</div><ul class="price-items"><li>Everything in Basic</li><li>Spark plugs</li><li>Air filter</li><li>Brake inspection</li><li>Full diagnostic scan</li></ul></div>
+    <div class="price-card"><div class="price-name">Full Overhaul</div><div class="price-num">৳9,000</div><div class="price-unit">Starting from</div><ul class="price-items"><li>Everything in Major</li><li>Timing belt</li><li>Coolant flush</li><li>Brake pads &amp; discs</li><li>Suspension check</li></ul></div>
+  </div>
+</section>
+<div class="map-cta">
+  <div><h2>Find Us in Mirpur-10</h2><p>Plot 14, Section 10, Mirpur, Dhaka 1216 · Open 8AM–8PM Sat–Thu</p></div>
+  <a href="#" class="btn btn-dark" style="font-size:16px">📍 Get Directions</a>
+</div>
+<footer>© 2025 Karim's Auto Repair Workshop · All rights reserved</footer>
+</body></html>

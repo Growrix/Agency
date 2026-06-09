@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>KidSpark — Children's Learning App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900;1000&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(160deg,#e8d4ff 0%,#d4eeff 40%,#d4ffe8 100%);margin:0 auto}
+
+/* CLAYMORPHISM — 3D inflated cards */
+.clay{border-radius:24px;box-shadow:0 2px 0 rgba(0,0,0,.06) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 10px 30px rgba(0,0,0,.12),0 3px 8px rgba(0,0,0,.08)}
+.clay-btn{border-radius:18px;box-shadow:0 2px 0 rgba(0,0,0,.1) inset,0 -2px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(0,0,0,.18),0 3px 6px rgba(0,0,0,.1)}
+
+.hero{min-height:280px;padding:28px 20px 24px;position:relative;overflow:visible}
+.hero-bg-emoji{position:absolute;pointer-events:none}
+.em1{top:20px;right:16px;font-size:48px;transform:rotate(15deg)}
+.em2{top:60px;left:12px;font-size:32px;transform:rotate(-10deg)}
+.em3{bottom:30px;right:20px;font-size:36px;transform:rotate(8deg)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:6px 14px;font-size:11px;font-weight:800;color:#7030e0;margin-bottom:16px;width:fit-content}
+.hero-badge span{font-size:14px}
+.clay-badge{box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 5px 15px rgba(112,48,224,.18),0 2px 5px rgba(0,0,0,.06)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:44px;font-weight:1000;color:#2a1060;line-height:.88;letter-spacing:-2px}
+.hero h1 .acc{color:#e040c0}
+.hero-sub{font-size:12px;color:rgba(42,16,96,.5);margin-top:10px;line-height:1.55;font-weight:600}
+.hero-stars{display:flex;align-items:center;gap:6px;margin-top:12px}
+.star-text{font-size:12px;font-weight:800;color:rgba(42,16,96,.5)}
+
+.stats-row{display:flex;gap:10px;padding:6px 16px 16px}
+.stat{flex:1;background:#fff;border-radius:18px;padding:14px 0;text-align:center}
+.stat{box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.06)}
+.stat-n{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:#7030e0;letter-spacing:-.5px}
+.stat-l{font-size:9px;color:rgba(42,16,96,.35);margin-top:3px;font-weight:700;letter-spacing:.3px}
+
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:rgba(42,16,96,.45);margin:20px 0 12px;letter-spacing:-.3px}
+
+.subjects{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.subj{padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:110px}
+.subj-s1{background:#ffe0f5}.subj-s2{background:#e0f0ff}.subj-s3{background:#e8ffe0}.subj-s4{background:#fff8e0}
+.subj-icon{font-size:32px;margin-bottom:8px}
+.subj-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#2a1060;letter-spacing:-.3px}
+.subj-count{font-size:10px;color:rgba(42,16,96,.4);margin-top:3px;font-weight:700}
+
+.age-bands{display:flex;flex-direction:column;gap:8px}
+.age-band{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ab-left{display:flex;align-items:center;gap:10px}
+.ab-icon{font-size:28px;flex-shrink:0}
+.ab-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#2a1060;letter-spacing:-.3px}
+.ab-desc{font-size:10px;color:rgba(42,16,96,.45);margin-top:2px;font-weight:600}
+.ab-badge{background:#7030e0;color:#fff;border-radius:100px;padding:4px 12px;font-size:11px;font-weight:900;flex-shrink:0}
+.ab1{background:#ffe0f5}.ab2{background:#e0f0ff}.ab3{background:#e8ffe0}
+
+.cta-clay{background:linear-gradient(135deg,#8040f0,#c030a0);border-radius:24px;padding:26px;text-align:center}
+.cta-clay{box-shadow:0 2px 0 rgba(0,0,0,.1) inset,0 -2px 0 rgba(255,255,255,.2) inset,0 14px 36px rgba(128,64,240,.35),0 4px 10px rgba(0,0,0,.1)}
+.cta-clay h3{font-family:'Nunito',sans-serif;font-size:26px;font-weight:1000;color:#fff;letter-spacing:-1px;margin-bottom:8px;line-height:.95}
+.cta-clay p{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:20px;line-height:1.5;font-weight:600}
+.cta-btn-c{display:block;background:#fff;color:#7030e0;border-radius:16px;padding:15px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;text-decoration:none;margin-bottom:10px}
+.cta-btn-c{box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.15)}
+.cta-btn2-c{display:block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);border-radius:16px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;text-decoration:none}
+
+.contacts{background:#fff;border-radius:20px;overflow:hidden}
+.contacts{box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.08)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(42,16,96,.06);font-size:12px;color:rgba(42,16,96,.4);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:linear-gradient(135deg,#8040f0,#c030a0);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 10px rgba(128,64,240,.3)}
+
+footer{text-align:center;padding:18px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:rgba(42,16,96,.25)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <span class="hero-bg-emoji em1">🌟</span>
+  <span class="hero-bg-emoji em2">🎨</span>
+  <span class="hero-bg-emoji em3">🚀</span>
+  <div class="clay-badge hero-badge"><span>🎓</span>30,000+ happy learners</div>
+  <h1>Learn big,<br>little <span class="acc">stars!</span></h1>
+  <div class="hero-sub">Math, reading, coding and science for kids aged 3–12. Fun, interactive lessons that actually work. 🌈</div>
+  <div class="hero-stars">⭐⭐⭐⭐⭐ <span class="star-text">4.9 · Parents love it</span></div>
+</div>
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Lessons</div></div>
+  <div class="stat"><div class="stat-n">30K+</div><div class="stat-l">Kids</div></div>
+  <div class="stat"><div class="stat-n">Free</div><div class="stat-l">14-day trial</div></div>
+</div>
+<div class="body">
+  <div class="sec">What kids learn 🌈</div>
+  <div class="subjects">
+    <div class="subj clay subj-s1"><div class="subj-icon">🔢</div><div class="subj-name">Math</div><div class="subj-count">120 lessons</div></div>
+    <div class="subj clay subj-s2"><div class="subj-icon">📖</div><div class="subj-name">Reading</div><div class="subj-count">95 lessons</div></div>
+    <div class="subj clay subj-s3"><div class="subj-icon">💻</div><div class="subj-name">Coding</div><div class="subj-count">80 lessons</div></div>
+    <div class="subj clay subj-s4"><div class="subj-icon">🔬</div><div class="subj-name">Science</div><div class="subj-count">105 lessons</div></div>
+  </div>
+  <div class="sec">Plans by age 🎂</div>
+  <div class="age-bands">
+    <div class="age-band clay ab1"><div class="ab-left"><div class="ab-icon">🐣</div><div><div class="ab-name">Tiny Sparks</div><div class="ab-desc">Ages 3–5 · Play-based learning</div></div></div><div class="ab-badge">৳299/mo</div></div>
+    <div class="age-band clay ab2"><div class="ab-left"><div class="ab-icon">🌟</div><div><div class="ab-name">Bright Stars</div><div class="ab-desc">Ages 6–9 · Core curriculum</div></div></div><div class="ab-badge">৳499/mo</div></div>
+    <div class="age-band clay ab3"><div class="ab-left"><div class="ab-icon">🚀</div><div><div class="ab-name">Super Stars</div><div class="ab-desc">Ages 10–12 · Advanced + coding</div></div></div><div class="ab-badge">৳699/mo</div></div>
+  </div>
+  <div class="sec" style="margin-top:24px">Start free today! 🎉</div>
+  <div class="cta-clay">
+    <h3>🎓 14 days free.<br>No card needed!</h3>
+    <p>Start your child's learning journey today. Cancel anytime, no stress!</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn-c">🌟 Start Free Trial</a>
+    <a href="tel:+8801700000000" class="cta-btn2-c">📞 Talk to us!</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Find us 📍</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📱</div>App Store & Google Play</div>
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📧</div>hello@kidspark.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 KidSpark Learning · For little minds, big dreams! 🌈</footer>
+</div></body></html>

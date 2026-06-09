@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dr. Sabina Islam — Cardiologist</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;min-height:100vh}
+body{background:#f0f4f8;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Source Sans 3',sans-serif;padding:20px}
+.card{width:420px;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 40px rgba(0,60,120,.12)}
+.card-top{background:#0a3d7a;padding:36px;display:flex;gap:20px;align-items:center}
+.avatar{width:80px;height:80px;border-radius:16px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
+.top-info h1{font-family:'Libre Baskerville',serif;font-size:20px;color:#fff;margin-bottom:4px;font-weight:700}
+.top-info .title{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:6px;font-weight:300}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:4px 12px;font-size:11px;color:rgba(255,255,255,.85)}
+.hospital-strip{background:#0d4f9e;padding:14px 36px;display:flex;align-items:center;gap:10px}
+.hospital-strip p{font-size:13px;color:rgba(255,255,255,.7)}<span style="color:#fff;font-weight:600">Apollo Hospital Dhaka</span>
+.card-body{padding:32px}
+.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#94a3b8;margin-bottom:14px}
+.info-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.info-row{display:flex;align-items:center;gap:12px}
+.info-dot{width:8px;height:8px;border-radius:50%;background:#0a3d7a;flex-shrink:0}
+.info-row span{font-size:14px;color:#374151}
+.divider{height:1px;background:#f1f5f9;margin:20px 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.contact-btn{padding:12px;border-radius:10px;text-align:center;text-decoration:none;font-size:13px;font-weight:600;transition:.2s}
+.btn-navy{background:#0a3d7a;color:#fff}
+.btn-navy:hover{background:#083060}
+.btn-outline{border:1px solid #0a3d7a;color:#0a3d7a;background:transparent}
+.appointment{background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:16px;text-align:center}
+.appointment p{font-size:13px;color:#1e40af;margin-bottom:8px}
+.appointment a{display:inline-block;background:#1d4ed8;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-top">
+    <div class="avatar">👩‍⚕️</div>
+    <div class="top-info">
+      <h1>Dr. Sabina Islam</h1>
+      <div class="title">MBBS, MD (Cardiology), FCPS</div>
+      <div class="badge">🏥 Apollo Hospital Dhaka</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="section-label">Specialisations</div>
+    <div class="info-list">
+      <div class="info-row"><div class="info-dot"></div><span>Interventional Cardiology</span></div>
+      <div class="info-row"><div class="info-dot"></div><span>Heart Failure Management</span></div>
+      <div class="info-row"><div class="info-dot"></div><span>Echocardiography &amp; Stress Testing</span></div>
+      <div class="info-row"><div class="info-dot"></div><span>Hypertension &amp; Lipid Disorders</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section-label">Contact</div>
+    <div class="contact-grid">
+      <a href="tel:+8801700000000" class="contact-btn btn-navy">📞 Call Chamber</a>
+      <a href="mailto:dr.sabina@apollo.com" class="contact-btn btn-outline">✉ Email</a>
+    </div>
+    <div class="appointment">
+      <p>🗓 Chamber hours: Sat–Thu · 5–8 PM · Room 312</p>
+      <a href="#">Book Appointment</a>
+    </div>
+  </div>
+</div>
+</body></html>

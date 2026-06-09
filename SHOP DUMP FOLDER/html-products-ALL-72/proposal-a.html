@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Web Development Proposal — NovaTech Properties · Synapse Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05060a;color:#e2e8f0;font-family:'Inter',sans-serif;padding:0 0 60px}
+.cover{background:linear-gradient(160deg,#0d1117,#05060a);padding:80px 60px;border-bottom:1px solid rgba(99,102,241,.2);min-height:420px;display:flex;flex-direction:column;justify-content:space-between}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start}
+.agency-name{font-family:'JetBrains Mono',monospace;font-size:14px;color:#6366f1;letter-spacing:2px}
+.ref{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.25)}
+.cover-bottom h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:700;letter-spacing:-2px;line-height:1.05;margin-bottom:16px}
+.cover-bottom h1 span{color:#6366f1}
+.cover-meta{display:flex;gap:32px;flex-wrap:wrap}
+.meta-item .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:2px;margin-bottom:4px}
+.meta-item .value{font-size:14px;font-weight:500;color:#e2e8f0}
+.content{max-width:900px;margin:0 auto;padding:60px 40px 0}
+.section{margin-bottom:56px}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6366f1;letter-spacing:2px;margin-bottom:10px}
+h2{font-size:1.8rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:20px}
+p{font-size:15px;color:#94a3b8;line-height:1.8;font-weight:300;margin-bottom:14px}
+.scope-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.scope-list li{display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid rgba(255,255,255,.06);border-radius:10px;background:rgba(255,255,255,.02)}
+.scope-list li .icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.scope-list li .text strong{color:#e2e8f0;font-size:14px;display:block;margin-bottom:4px}
+.scope-list li .text p{color:#64748b;font-size:13px;margin:0}
+.timeline{display:flex;flex-direction:column;gap:0}
+.phase{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.05);position:relative}
+.phase:last-child{border-bottom:none}
+.phase-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6366f1;letter-spacing:1px;padding-top:2px}
+.phase-title{font-size:15px;font-weight:600;color:#e2e8f0;margin-bottom:5px}
+.phase-desc{font-size:13px;color:#64748b;line-height:1.6}
+.phase-duration{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.3);margin-top:6px}
+.pricing-table{width:100%;border-collapse:collapse}
+.pricing-table thead th{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.15);padding:12px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6366f1;text-align:left;font-weight:500}
+.pricing-table tbody td{border:1px solid rgba(255,255,255,.05);padding:14px 16px;font-size:14px;color:#94a3b8}
+.pricing-table tbody tr:hover td{background:rgba(255,255,255,.02)}
+.price-cell{color:#e2e8f0;font-weight:600;font-family:'JetBrains Mono',monospace;text-align:right}
+.total-row td{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.2)!important;font-weight:700}
+.total-row .price-cell{color:#6366f1;font-size:18px}
+.terms-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.term-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:20px}
+.term-card h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#6366f1;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.term-card p{font-size:13px;color:#64748b;line-height:1.6;margin:0}
+.sign-section{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:36px;text-align:center}
+.sign-section h3{font-size:1.5rem;margin-bottom:10px;font-weight:600}
+.sign-section p{font-size:14px;color:#64748b;margin-bottom:28px}
+.sign-btn{display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:15px 40px;text-decoration:none;border-radius:8px;font-size:15px;font-weight:600}
+.validity{font-size:12px;color:rgba(255,255,255,.25);margin-top:16px}
+@media(max-width:768px){.cover{padding:48px 24px}.content{padding:40px 24px 0}.terms-grid{grid-template-columns:1fr}.phase{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-top"><div class="agency-name">SYNAPSE_LABS.AI</div><div class="ref">PROP-2025-008 · Confidential</div></div>
+  <div class="cover-bottom">
+    <h1>Web Platform<br>Development<br><span>Proposal</span></h1>
+    <div class="cover-meta">
+      <div class="meta-item"><div class="label">Prepared For</div><div class="value">NovaTech Properties Ltd.</div></div>
+      <div class="meta-item"><div class="label">Prepared By</div><div class="value">Synapse Labs</div></div>
+      <div class="meta-item"><div class="label">Date</div><div class="value">22 May 2025</div></div>
+      <div class="meta-item"><div class="label">Valid Until</div><div class="value">5 June 2025</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="section">
+    <div class="section-num">01 // OVERVIEW</div>
+    <h2>The Opportunity</h2>
+    <p>NovaTech Properties requires a modern property listing and management platform to replace their current static website. This proposal outlines our approach to building a scalable, performant web application that serves both end users (property seekers) and administrators (internal team).</p>
+    <p>Based on our discovery call and audit of your current setup, we've identified the primary gaps: no search functionality, no agent portal, mobile experience scoring 28/100 on Google PageSpeed, and zero CRM integration. This proposal addresses all four.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">02 // SCOPE OF WORK</div>
+    <h2>What We're Building</h2>
+    <ul class="scope-list">
+      <li><div class="icon">🏠</div><div class="text"><strong>Property Listing Portal</strong><p>Full-featured listing pages with advanced search, filter by location/price/type, map integration, and photo galleries. SEO-optimised for each listing.</p></div></li>
+      <li><div class="icon">🔑</div><div class="text"><strong>Agent &amp; Admin Dashboard</strong><p>Internal CMS for the NovaTech team to create, edit, and manage listings without developer help. Role-based access control.</p></div></li>
+      <li><div class="icon">📱</div><div class="text"><strong>Mobile-First Responsive Design</strong><p>Rebuilt from the ground up for mobile. Target: 90+ PageSpeed score on mobile and desktop.</p></div></li>
+      <li><div class="icon">🔗</div><div class="text"><strong>CRM &amp; Lead Integration</strong><p>Connect enquiry forms directly to HubSpot CRM. Automated lead assignment to agents. Email notification workflows.</p></div></li>
+      <li><div class="icon">☁️</div><div class="text"><strong>Hosting &amp; DevOps Setup</strong><p>AWS deployment with staging environment, automated deployments via GitHub Actions, and monitoring via Datadog.</p></div></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-num">03 // TIMELINE</div>
+    <h2>Delivery Plan</h2>
+    <div class="timeline">
+      <div class="phase"><div class="phase-label">PHASE 1</div><div><div class="phase-title">Discovery &amp; Architecture</div><div class="phase-desc">Technical requirements finalisation, database schema design, API architecture, design system setup.</div><div class="phase-duration">// Week 1–2</div></div></div>
+      <div class="phase"><div class="phase-label">PHASE 2</div><div><div class="phase-title">Core Development</div><div class="phase-desc">Backend API, database, authentication, listing CRUD, search engine integration.</div><div class="phase-duration">// Week 3–6</div></div></div>
+      <div class="phase"><div class="phase-label">PHASE 3</div><div><div class="phase-title">Frontend &amp; Dashboard</div><div class="phase-desc">All user-facing pages, admin dashboard, mobile optimisation, CRM integration.</div><div class="phase-duration">// Week 7–10</div></div></div>
+      <div class="phase"><div class="phase-label">PHASE 4</div><div><div class="phase-title">Testing, Launch &amp; Handover</div><div class="phase-desc">QA, load testing, staging review, production deployment, team training, documentation.</div><div class="phase-duration">// Week 11–12</div></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">04 // INVESTMENT</div>
+    <h2>Pricing</h2>
+    <table class="pricing-table">
+      <thead><tr><th>Item</th><th>Hours</th><th style="text-align:right">Amount</th></tr></thead>
+      <tbody>
+        <tr><td>Backend Development (API, DB, Auth)</td><td>80 hrs</td><td class="price-cell">৳2,00,000</td></tr>
+        <tr><td>Frontend Development (All Pages)</td><td>60 hrs</td><td class="price-cell">৳1,50,000</td></tr>
+        <tr><td>Admin Dashboard &amp; CMS</td><td>40 hrs</td><td class="price-cell">৳1,00,000</td></tr>
+        <tr><td>CRM Integration &amp; Workflows</td><td>16 hrs</td><td class="price-cell">৳40,000</td></tr>
+        <tr><td>DevOps, Deployment &amp; QA</td><td>20 hrs</td><td class="price-cell">৳50,000</td></tr>
+        <tr><td>Project Management &amp; Documentation</td><td>1 project</td><td class="price-cell">৳30,000</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Total Project Investment</strong></td><td class="price-cell">৳5,70,000</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;font-size:13px">Payment schedule: 30% on signing, 30% at Phase 2 completion, 40% on final delivery. All prices exclude VAT.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">05 // TERMS</div>
+    <h2>Our Commitment</h2>
+    <div class="terms-grid">
+      <div class="term-card"><h4>Warranty</h4><p>60-day bug fix warranty post-launch. All defects in delivered scope fixed at no charge.</p></div>
+      <div class="term-card"><h4>Source Code</h4><p>Full source code ownership transferred to NovaTech on final payment. No vendor lock-in.</p></div>
+      <div class="term-card"><h4>Confidentiality</h4><p>NDA in place. All business data and design materials treated as strictly confidential.</p></div>
+      <div class="term-card"><h4>Support Retainer</h4><p>Optional 3-month post-launch retainer at ৳25,000/month for maintenance and feature additions.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sign-section">
+      <h3>Ready to move forward?</h3>
+      <p>Sign digitally below or reply to this email. We can kick off within 5 business days of signing.</p>
+      <a href="#" class="sign-btn">✍ Accept Proposal &amp; Sign</a>
+      <div class="validity">This proposal expires 5 June 2025 · Questions? hello@synapse-labs.ai</div>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "annual-report-c.html",
+        "type_slug":  "annual-report-pages",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/documents-reports/annual-report-pages/annual-report-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/annual-report\\annual-report-c.html"
+    },
+    {
+        "source_file":  "annual-report-b.html",
+        "type_slug":  "annual-report-pages",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/documents-reports/annual-report-pages/annual-report-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/annual-report\\annual-report-b.html"
+    },
+    {
+        "source_file":  "annual-report-a.html",
+        "type_slug":  "annual-report-pages",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/documents-reports/annual-report-pages/annual-report-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/annual-report\\annual-report-a.html"
+    }
+]

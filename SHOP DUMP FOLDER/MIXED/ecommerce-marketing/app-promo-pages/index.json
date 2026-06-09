@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "app-promo-c.html",
+        "type_slug":  "app-promo-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/ecommerce-marketing/app-promo-pages/app-promo-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\app-promo-c.html"
+    },
+    {
+        "source_file":  "app-promo-b.html",
+        "type_slug":  "app-promo-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/ecommerce-marketing/app-promo-pages/app-promo-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\app-promo-b.html"
+    },
+    {
+        "source_file":  "app-promo-a.html",
+        "type_slug":  "app-promo-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/ecommerce-marketing/app-promo-pages/app-promo-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\app-promo-a.html"
+    }
+]

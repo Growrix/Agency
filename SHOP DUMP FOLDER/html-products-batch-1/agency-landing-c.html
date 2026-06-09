@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Synapse Labs — Tech & AI Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050507;--card:#0c0c10;--border:rgba(255,255,255,.07);--accent:#00d4ff;--accent2:#7c3aed;--text:#e8e8f0;--muted:#5a5a70}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+.mesh{position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,58,237,.12),transparent),radial-gradient(ellipse 60% 50% at 80% 100%,rgba(0,212,255,.08),transparent);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:100;background:rgba(5,5,7,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:18px 60px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--accent);letter-spacing:1px}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:.15s}
+.nav-links a:hover{color:var(--text)}
+.btn-cta{background:var(--accent);color:#000!important;padding:9px 22px;border-radius:6px;font-weight:600;font-size:13px}
+.hero{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:120px 60px 80px}
+.code-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);border-radius:8px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:40px}
+h1{font-size:clamp(3rem,6vw,6.5rem);font-weight:700;line-height:1;letter-spacing:-3px;margin-bottom:28px}
+h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-desc{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;max-width:520px;margin-bottom:44px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:80px}
+.btn{padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;transition:.2s;cursor:pointer;border:none}
+.btn-accent{background:var(--accent);color:#000}
+.btn-accent:hover{opacity:.9;transform:translateY(-1px)}
+.btn-border{border:1px solid var(--border);color:var(--text);background:transparent}
+.btn-border:hover{border-color:var(--accent);color:var(--accent)}
+.terminal{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:80px;max-width:700px}
+.terminal-header{background:rgba(255,255,255,.03);padding:12px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.dot{width:12px;height:12px;border-radius:50%}
+.d-red{background:#ff5f57}.d-yellow{background:#febc2e}.d-green{background:#28c840}
+.terminal-body{padding:22px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2}
+.t-prompt{color:var(--accent)}
+.t-cmd{color:#e8e8f0}
+.t-out{color:var(--muted)}
+.t-success{color:#4ade80}
+.t-cursor{display:inline-block;width:2px;height:14px;background:var(--accent);animation:blink .8s infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+.services-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 60px 100px}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:32px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.2s}
+.service-card:hover{border-color:rgba(0,212,255,.25);background:rgba(0,212,255,.03)}
+.service-card h3{font-size:17px;font-weight:600;margin:12px 0 8px}
+.service-card p{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300}
+.service-icon{font-size:28px}
+.clients{position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:32px 60px;overflow:hidden}
+.clients-inner{display:flex;gap:64px;animation:scroll 20s linear infinite;width:max-content;align-items:center}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.client-logo{font-size:13px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.cta-box{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 60px}
+.cta-inner{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(0,212,255,.08));border:1px solid rgba(124,58,237,.2);border-radius:24px;padding:72px;text-align:center}
+.cta-inner h2{font-size:3rem;font-weight:700;letter-spacing:-2px;margin-bottom:16px}
+.cta-inner p{color:var(--muted);font-size:15px;margin-bottom:36px;font-weight:300}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto}
+footer p{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+@media(max-width:900px){.services-grid{grid-template-columns:1fr}.hero,.services-section,.cta-box{padding-left:24px;padding-right:24px}nav{padding:14px 24px}.nav-links a:not(.btn-cta){display:none}}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+<nav>
+  <div class="logo">synapse_labs.ai</div>
+  <div class="nav-links"><a href="#">Services</a><a href="#">Work</a><a href="#">Lab</a><a href="#" class="btn-cta">Start Project →</a></div>
+</nav>
+<section class="hero">
+  <div class="code-badge">🤖 Now integrating GPT-4o + Claude 3.5</div>
+  <h1>We build <span class="grad">AI-powered</span><br>software.</h1>
+  <p class="hero-desc">From MVPs to production-grade AI systems. We help startups and enterprises in Bangladesh and beyond automate, scale, and innovate with cutting-edge technology.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn btn-accent">→ Get a Free Audit</a>
+    <a href="#" class="btn btn-border">View Case Studies</a>
+  </div>
+  <div class="terminal">
+    <div class="terminal-header"><div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div><span style="font-size:12px;color:var(--muted);margin-left:8px;font-family:'JetBrains Mono',monospace">synapse — bash</span></div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">$</span> <span class="t-cmd">synapse init --project "YourApp"</span></div>
+      <div><span class="t-out">→ Analysing requirements...</span></div>
+      <div><span class="t-out">→ Setting up AI pipeline...</span></div>
+      <div><span class="t-success">✓ Backend API ready (Node.js + Python)</span></div>
+      <div><span class="t-success">✓ ML model integrated (custom fine-tuned)</span></div>
+      <div><span class="t-success">✓ Dashboard deployed to production</span></div>
+      <div><span class="t-prompt">$</span> <span class="t-cursor"></span></div>
+    </div>
+  </div>
+</section>
+<section class="services-section">
+  <div class="section-tag">// What We Build</div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">🤖</div><h3>AI Product Development</h3><p>LLM integration, fine-tuning, RAG systems, and custom AI agents for your specific use case.</p></div>
+    <div class="service-card"><div class="service-icon">⚡</div><h3>SaaS Development</h3><p>Full-stack web applications built for scale with modern tech: Next.js, Node, PostgreSQL, Redis.</p></div>
+    <div class="service-card"><div class="service-icon">📊</div><h3>Data Engineering</h3><p>Pipelines, analytics dashboards, ML models, and BI systems that turn data into decisions.</p></div>
+    <div class="service-card"><div class="service-icon">📱</div><h3>Mobile Apps</h3><p>Cross-platform React Native apps with AI-powered features, delivered fast.</p></div>
+    <div class="service-card"><div class="service-icon">🔗</div><h3>API &amp; Integrations</h3><p>Connect anything. Build middleware, webhooks, and third-party integrations that just work.</p></div>
+    <div class="service-card"><div class="service-icon">☁️</div><h3>DevOps &amp; Cloud</h3><p>CI/CD pipelines, Docker, Kubernetes, AWS — reliable infrastructure that scales with you.</p></div>
+  </div>
+</section>
+<div class="clients">
+  <div class="clients-inner">
+    <div class="client-logo">Apex Tech</div><div class="client-logo">MediConnect</div><div class="client-logo">PayFlow BD</div><div class="client-logo">ShopMart</div><div class="client-logo">GrowthPocket</div><div class="client-logo">CricketBD</div>
+    <div class="client-logo">Apex Tech</div><div class="client-logo">MediConnect</div><div class="client-logo">PayFlow BD</div><div class="client-logo">ShopMart</div><div class="client-logo">GrowthPocket</div><div class="client-logo">CricketBD</div>
+  </div>
+</div>
+<section class="cta-box"><div class="cta-inner">
+  <h2>Let's build<br>something intelligent.</h2>
+  <p>Free 60-minute technical consultation. Bring your idea, we'll bring the blueprint.</p>
+  <a href="#" class="btn btn-accent" style="font-size:16px;padding:16px 40px">→ Book a Consultation</a>
+</div></section>
+<footer><p>// © 2025 Synapse Labs · Dhaka · synapse-labs.ai</p><p>hello@synapse-labs.ai</p></footer>
+</body></html>

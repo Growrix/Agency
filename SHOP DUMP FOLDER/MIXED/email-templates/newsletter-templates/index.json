@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "newsletter-c.html",
+        "type_slug":  "newsletter-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/email-templates/newsletter-templates/newsletter-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\newsletter-c.html"
+    },
+    {
+        "source_file":  "newsletter-b.html",
+        "type_slug":  "newsletter-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/email-templates/newsletter-templates/newsletter-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\newsletter-b.html"
+    },
+    {
+        "source_file":  "newsletter-a.html",
+        "type_slug":  "newsletter-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/email-templates/newsletter-templates/newsletter-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\newsletter-a.html"
+    }
+]

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Élevé Realty — Luxury Property</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;justify-content:center;background:#0a0014}
+.app{width:100%;max-width:420px;min-height:100vh;background:#08001a;margin:0 auto;color:#f0ecff;position:relative;overflow:hidden}
+
+/* AURORA BACKGROUND */
+.aurora-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.a1{position:absolute;width:340px;height:340px;background:radial-gradient(circle,rgba(120,40,255,.35) 0%,transparent 70%);top:-80px;right:-60px;filter:blur(40px)}
+.a2{position:absolute;width:280px;height:280px;background:radial-gradient(circle,rgba(200,40,255,.2) 0%,transparent 70%);top:200px;left:-80px;filter:blur(50px)}
+.a3{position:absolute;width:220px;height:220px;background:radial-gradient(circle,rgba(40,140,255,.18) 0%,transparent 70%);bottom:200px;right:-40px;filter:blur(35px)}
+.a4{position:absolute;width:180px;height:180px;background:radial-gradient(circle,rgba(255,60,160,.12) 0%,transparent 70%);bottom:100px;left:20px;filter:blur(30px)}
+
+/* GLASS MIXIN */
+.glass{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
+.glass-dark{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+
+.wrap{position:relative;z-index:1}
+
+/* HERO */
+.hero{min-height:320px;padding:52px 22px 28px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.logo-row{position:absolute;top:22px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.logo-text{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(240,236,255,.35)}
+.live-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(12px);border-radius:100px;padding:4px 12px;font-size:9px;color:rgba(240,236,255,.6);letter-spacing:1px}
+.live-dot{width:5px;height:5px;background:#4ade80;border-radius:50%;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;line-height:.88;letter-spacing:-2px;background:linear-gradient(135deg,#fff 30%,rgba(200,160,255,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.hero-sub{font-size:12px;color:rgba(240,236,255,.4);letter-spacing:.3px;line-height:1.6;max-width:280px}
+
+/* GLASS STATS ROW */
+.stats-row{display:flex;gap:8px;padding:0 18px 20px;position:relative;z-index:1}
+.stat-glass{flex:1;padding:14px 0;text-align:center;border-radius:14px}
+.sg-n{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,#c084fc,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.sg-l{font-size:8px;color:rgba(240,236,255,.3);margin-top:4px;letter-spacing:1.5px;text-transform:uppercase}
+
+.body{padding:0 18px 48px;position:relative;z-index:1}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(192,132,252,.6);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(192,132,252,.15)}
+
+/* GLASS PROPERTY CARDS */
+.properties{display:flex;flex-direction:column;gap:10px}
+.prop-card{border-radius:18px;padding:16px;overflow:hidden;position:relative}
+.prop-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
+.prop-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.prop-icon-block{width:44px;height:44px;border-radius:12px;background:rgba(192,132,252,.15);border:1px solid rgba(192,132,252,.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.prop-badge{background:rgba(192,132,252,.12);border:1px solid rgba(192,132,252,.2);border-radius:100px;padding:3px 10px;font-size:8px;font-weight:700;color:rgba(192,132,252,.8);letter-spacing:1px;text-transform:uppercase}
+.prop-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#f0ecff;letter-spacing:-.3px;margin-bottom:4px}
+.prop-loc{font-size:11px;color:rgba(240,236,255,.35);letter-spacing:.2px}
+.prop-details{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pd{font-size:10px;color:rgba(240,236,255,.4);display:flex;align-items:center;gap:4px}
+.pd span{color:rgba(240,236,255,.6);font-weight:500}
+.prop-price{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(135deg,#c084fc,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:8px}
+.prop-note{font-size:10px;color:rgba(240,236,255,.25);margin-top:2px}
+
+/* GLASS SERVICE CARDS */
+.services{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc-glass{border-radius:16px;padding:16px;text-align:center}
+.svc-emoji{font-size:26px;margin-bottom:8px}
+.svc-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#f0ecff;letter-spacing:-.2px}
+.svc-desc{font-size:10px;color:rgba(240,236,255,.3);margin-top:3px;line-height:1.4}
+
+/* GLASS CTA */
+.cta-glass{border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden}
+.cta-glass::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent)}
+.cta-glass::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(120,40,255,.15),rgba(200,40,255,.08));pointer-events:none}
+.cta-glass h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:8px;position:relative;z-index:1}
+.cta-glass p{font-size:12px;color:rgba(240,236,255,.4);margin-bottom:18px;line-height:1.6;position:relative;z-index:1}
+.cta-btn{display:block;background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border-radius:12px;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px;position:relative;z-index:1;border:1px solid rgba(192,132,252,.3)}
+.cta-btn2{display:block;background:rgba(255,255,255,.06);color:rgba(240,236,255,.5);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;font-size:11px;text-decoration:none;position:relative;z-index:1;backdrop-filter:blur(8px)}
+
+/* GLASS CONTACT */
+.contact-glass{border-radius:16px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;color:rgba(240,236,255,.4)}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:rgba(192,132,252,.15);border:1px solid rgba(192,132,252,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{border-top:1px solid rgba(255,255,255,.06);padding:20px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,236,255,.12);position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div class="aurora-bg"><div class="a1"></div><div class="a2"></div><div class="a3"></div><div class="a4"></div></div>
+<div class="app"><div class="wrap">
+<div class="hero">
+  <div class="logo-row">
+    <div class="logo-text">Élevé Realty</div>
+    <div class="live-pill"><span class="live-dot"></span>12 listings</div>
+  </div>
+  <h1>Where luxury<br>finds home.</h1>
+  <div class="hero-sub">Premium residential and commercial property in Dhaka's most sought-after addresses.</div>
+</div>
+<div class="stats-row">
+  <div class="stat-glass glass"><div class="sg-n">$240M</div><div class="sg-l">Sold</div></div>
+  <div class="stat-glass glass"><div class="sg-n">320+</div><div class="sg-l">Sales</div></div>
+  <div class="stat-glass glass"><div class="sg-n">15yr</div><div class="sg-l">Practice</div></div>
+</div>
+<div class="body">
+  <div class="sec">Featured Listings</div>
+  <div class="properties">
+    <div class="prop-card glass">
+      <div class="prop-header">
+        <div class="prop-icon-block">🏙️</div>
+        <div class="prop-badge">New</div>
+      </div>
+      <div class="prop-name">The Gulshan Penthouse</div>
+      <div class="prop-loc">Gulshan-2, Dhaka</div>
+      <div class="prop-details">
+        <div class="pd"><span>4</span> beds</div>
+        <div class="pd"><span>4,200</span> sqft</div>
+        <div class="pd"><span>Rooftop</span> terrace</div>
+      </div>
+      <div class="prop-price">$1.8M</div>
+      <div class="prop-note">Furnished · Ready to move</div>
+    </div>
+    <div class="prop-card glass">
+      <div class="prop-header">
+        <div class="prop-icon-block">🏢</div>
+        <div class="prop-badge">Rent</div>
+      </div>
+      <div class="prop-name">Baridhara Residence</div>
+      <div class="prop-loc">Baridhara DOHS</div>
+      <div class="prop-details">
+        <div class="pd"><span>5</span> beds</div>
+        <div class="pd"><span>3,800</span> sqft</div>
+        <div class="pd"><span>Pool</span></div>
+      </div>
+      <div class="prop-price">$4,500<span style="font-size:13px">/mo</span></div>
+      <div class="prop-note">Semi-furnished · Diplomatic zone</div>
+    </div>
+  </div>
+
+  <div class="sec">Our Services</div>
+  <div class="services">
+    <div class="svc-glass glass"><div class="svc-emoji">🔑</div><div class="svc-name">Buy & Sell</div><div class="svc-desc">End-to-end sale advisory</div></div>
+    <div class="svc-glass glass"><div class="svc-emoji">🏠</div><div class="svc-name">Property Mgmt</div><div class="svc-desc">Lettings & maintenance</div></div>
+    <div class="svc-glass glass"><div class="svc-emoji">📊</div><div class="svc-name">Valuation</div><div class="svc-desc">Certified property reports</div></div>
+    <div class="svc-glass glass"><div class="svc-emoji">🌍</div><div class="svc-name">NRB Investment</div><div class="svc-desc">Diaspora buyers · Remote</div></div>
+  </div>
+
+  <div class="sec">Find Your Property</div>
+  <div class="cta-glass glass">
+    <h3>Your dream home awaits.</h3>
+    <p>Speak with a dedicated property consultant. No pressure — just expert guidance on Dhaka's finest addresses.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">✦ WhatsApp a Consultant</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call +880 1700-000000</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-glass glass">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-2, Dhaka · By appointment</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 10am – 7pm</div>
+    <div class="cr"><div class="ci">📸</div>@eleve.realty</div>
+  </div>
+</div>
+<footer>© 2025 Élevé Realty · Luxury Property · Dhaka</footer>
+</div></div></body></html>

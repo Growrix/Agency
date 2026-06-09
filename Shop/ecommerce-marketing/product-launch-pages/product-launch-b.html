@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Verdant — The Skincare Set That Works With Your Skin, Not Against It</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#faf9f4;color:#1a1a0f;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+nav{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.07)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:3px;color:#2a3a1a;font-style:italic}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:14px;color:#6a6a5a;text-decoration:none;font-weight:300}
+.nav-links a:hover{color:#1a1a0f}
+.nav-shop{background:#2a3a1a;color:#faf9f4;padding:10px 24px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 68px)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 80px 80px 60px}
+.hero-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#8a9a6a;margin-bottom:24px;font-weight:400}
+.hero-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4.2rem);font-weight:300;line-height:1.1;letter-spacing:-1px;margin-bottom:20px}
+.hero-left h1 em{font-style:italic;color:#4a6a2a}
+.hero-left p{font-size:16px;color:#5a5a4a;line-height:1.8;font-weight:300;max-width:380px;margin-bottom:36px}
+.hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:32px}
+.btn-buy{background:#2a3a1a;color:#faf9f4;padding:15px 36px;border-radius:100px;font-size:15px;font-weight:500;text-decoration:none;transition:.2s}
+.btn-buy:hover{background:#3a5a26}
+.btn-learn{font-size:14px;color:#4a6a2a;text-decoration:none;border-bottom:1px solid rgba(74,106,42,.3)}
+.hero-promise{display:flex;gap:24px;flex-wrap:wrap}
+.promise-item{display:flex;align-items:center;gap:8px;font-size:13px;color:#7a7a6a;font-weight:300}
+.promise-dot{width:4px;height:4px;background:#8a9a6a;border-radius:50%;flex-shrink:0}
+.hero-right{background:#e8e4d8;display:flex;align-items:center;justify-content:center;font-size:100px;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.4),transparent)}
+.product-visual{position:relative;z-index:1;text-align:center}
+.product-visual .emoji{font-size:100px;line-height:1;display:block;margin-bottom:16px}
+.product-badge{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border-radius:100px;padding:8px 18px;font-size:12px;color:#2a3a1a;font-weight:500;display:inline-block}
+.ingredients{background:#fff;padding:80px 60px}
+.ingredients h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;text-align:center;margin-bottom:48px;letter-spacing:-1px}
+.ing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:#e8e4d8}
+.ing{background:#fff;padding:32px 24px;text-align:center;transition:.2s}
+.ing:hover{background:#f5f2ea}
+.ing-icon{font-size:36px;margin-bottom:12px}
+.ing-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:6px;font-style:italic}
+.ing-desc{font-size:13px;color:#7a7a6a;font-weight:300;line-height:1.5}
+.how-to{padding:80px 60px;max-width:900px;margin:0 auto}
+.how-to h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;margin-bottom:48px;letter-spacing:-1px}
+.steps-row{display:flex;gap:0;position:relative}
+.steps-row::before{content:'';position:absolute;top:20px;left:20px;right:20px;height:1px;background:#e8e4d8}
+.step{flex:1;text-align:center;position:relative}
+.step-circle{width:40px;height:40px;border-radius:50%;background:#2a3a1a;color:#faf9f4;display:flex;align-items:center;justify-content:center;font-size:16px;margin:0 auto 16px;position:relative;z-index:1}
+.step h4{font-size:14px;font-weight:500;margin-bottom:6px}
+.step p{font-size:12px;color:#8a8a7a;font-weight:300;line-height:1.5}
+.reviews{background:#2a3a1a;color:#faf9f4;padding:80px 60px}
+.reviews h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;text-align:center;margin-bottom:48px;font-style:italic;letter-spacing:-1px;color:#d4e4b4}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px}
+.review-stars{color:#d4e4b4;font-size:14px;margin-bottom:10px}
+.review-text{font-size:14px;color:rgba(250,249,244,.7);line-height:1.7;font-weight:300;margin-bottom:14px;font-style:italic}
+.review-author{font-size:12px;color:rgba(250,249,244,.35);letter-spacing:1px}
+.buy-section{padding:80px 60px;text-align:center}
+.buy-section h2{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;margin-bottom:12px;letter-spacing:-1px}
+.price-tag{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:#4a6a2a;margin-bottom:8px;font-style:italic}
+.price-note{font-size:13px;color:#8a8a7a;margin-bottom:32px;font-weight:300}
+footer{border-top:1px solid #e8e4d8;padding:28px 60px;text-align:center;font-size:12px;color:#9a9a8a;letter-spacing:1px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-right{min-height:320px}.hero-left{padding:48px 24px}.ingredients{padding:48px 24px}.ing-grid{grid-template-columns:1fr 1fr}.review-grid{grid-template-columns:1fr}.how-to,.buy-section,.reviews{padding:48px 24px}.steps-row{flex-direction:column;gap:24px}.steps-row::before{display:none}nav{padding:16px 24px}.nav-links a{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Verdant</div>
+  <div class="nav-links"><a href="#">Our Story</a><a href="#">Ingredients</a><a href="#">Reviews</a><a href="#" class="nav-shop">Shop Now</a></div>
+</nav>
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Introducing the Verdant Skin Ritual Set</div>
+    <h1>Skincare that works <em>with</em> your skin,<br>not against it.</h1>
+    <p>Three clean, plant-based products formulated for Bangladesh's humidity and heat. No irritants. No greenwashing. Just skin that feels like itself again.</p>
+    <div class="hero-cta"><a href="#" class="btn-buy">Shop the Set — ৳2,800</a><a href="#" class="btn-learn">See what's inside →</a></div>
+    <div class="hero-promise"><div class="promise-item"><div class="promise-dot"></div>100% clean ingredients</div><div class="promise-item"><div class="promise-dot"></div>Cruelty-free &amp; vegan</div><div class="promise-item"><div class="promise-dot"></div>30-day money-back</div></div>
+  </div>
+  <div class="hero-right"><div class="product-visual"><span class="emoji">🌿</span><div class="product-badge">Ritual Set · 3 Products</div></div></div>
+</section>
+<section class="ingredients">
+  <h2>Every ingredient earns its place.</h2>
+  <div class="ing-grid">
+    <div class="ing"><div class="ing-icon">🌹</div><div class="ing-name">Niacinamide</div><div class="ing-desc">Brightens, minimises pores, evens skin tone without irritation.</div></div>
+    <div class="ing"><div class="ing-icon">💧</div><div class="ing-name">Hyaluronic Acid</div><div class="ing-desc">Deep hydration that lasts all day, even in Dhaka's humidity.</div></div>
+    <div class="ing"><div class="ing-icon">☀️</div><div class="ing-name">Centella Asiatica</div><div class="ing-desc">Calms redness, strengthens the skin barrier, heals faster.</div></div>
+    <div class="ing"><div class="ing-icon">🍵</div><div class="ing-name">Green Tea Extract</div><div class="ing-desc">Antioxidant-rich protection against UV and pollution stress.</div></div>
+  </div>
+</section>
+<section class="how-to">
+  <h2>Your 3-minute morning ritual.</h2>
+  <div class="steps-row">
+    <div class="step"><div class="step-circle">1</div><h4>Gentle Cleanser</h4><p>30 seconds. Removes overnight build-up without stripping moisture.</p></div>
+    <div class="step"><div class="step-circle">2</div><h4>Niacinamide Serum</h4><p>2 drops. Pat gently. Works while you finish getting ready.</p></div>
+    <div class="step"><div class="step-circle">3</div><h4>Moisture Balancer</h4><p>Light as water. Seals everything in. Sets perfectly under SPF.</p></div>
+  </div>
+</section>
+<section class="reviews">
+  <h2>What 840 customers said.</h2>
+  <div class="review-grid">
+    <div class="review"><div class="review-stars">★★★★★</div><div class="review-text">"My skin has never felt this calm. I've struggled with redness for years — this cleared it in 3 weeks."</div><div class="review-author">— Fatima R., Dhaka</div></div>
+    <div class="review"><div class="review-stars">★★★★★</div><div class="review-text">"Finally a Bangladeshi brand that actually understands how our skin reacts to our climate. Brilliant."</div><div class="review-author">— Nadia K., Chittagong</div></div>
+    <div class="review"><div class="review-stars">★★★★★</div><div class="review-text">"My dermatologist asked me what I changed. I just switched to Verdant. Repurchased twice already."</div><div class="review-author">— Sabina M., Sylhet</div></div>
+  </div>
+</section>
+<section class="buy-section">
+  <h2>Ready for skin that finally feels right?</h2>
+  <div class="price-tag">৳2,800</div>
+  <div class="price-note">Full 3-product Ritual Set · Free delivery · 30-day guarantee</div>
+  <a href="#" class="btn-buy" style="display:inline-block;font-size:16px;padding:17px 48px">Order the Verdant Ritual Set →</a>
+</section>
+<footer>© 2025 Verdant Skincare · verdant.com.bd · Dhaka · Cruelty-Free · Clean Beauty</footer>
+</body></html>

@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "portfolio-c.html",
+        "type_slug":  "portfolio-templates",
+        "parent_category_slug":  "education-info-products",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/education-info-products/portfolio-templates/portfolio-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\portfolio-c.html"
+    },
+    {
+        "source_file":  "portfolio-b.html",
+        "type_slug":  "portfolio-templates",
+        "parent_category_slug":  "education-info-products",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/education-info-products/portfolio-templates/portfolio-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\portfolio-b.html"
+    },
+    {
+        "source_file":  "portfolio-a.html",
+        "type_slug":  "portfolio-templates",
+        "parent_category_slug":  "education-info-products",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/education-info-products/portfolio-templates/portfolio-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\portfolio-a.html"
+    }
+]

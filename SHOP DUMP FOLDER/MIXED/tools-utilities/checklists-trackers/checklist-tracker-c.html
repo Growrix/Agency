@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Travel Packing List — Cox's Bazar Trip</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(160deg,#e8f4ff,#f0f8ff,#fff8e8);min-height:100vh;font-family:'Nunito',sans-serif;color:#1a2840;padding:32px 16px}
+.app{max-width:600px;margin:0 auto}
+.app-header{text-align:center;margin-bottom:28px}
+.app-header h1{font-size:2rem;font-weight:900;color:#1a2840;letter-spacing:-.5px;margin-bottom:4px}
+.app-header p{font-size:14px;color:#64748b;font-weight:400}
+.progress-section{background:#fff;border-radius:20px;padding:22px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.ps-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ps-title{font-size:14px;font-weight:700;color:#1a2840}
+.ps-count{font-size:14px;font-weight:700;color:#2563eb}
+.progress-track{background:#e8f0ff;border-radius:8px;height:10px;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,#2563eb,#06b6d4);height:10px;border-radius:8px;transition:.4s}
+.emoji-progress{font-size:12px;margin-top:8px;display:flex;justify-content:space-between;color:#94a3b8}
+.controls{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.ctrl-btn{padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:'Nunito',sans-serif;transition:.15s}
+.ctrl-btn.active,.ctrl-btn:hover{transform:scale(1.02)}
+.btn-all{background:#2563eb;color:#fff}
+.btn-unpacked{background:#fff;border:2px solid #e2e8f0;color:#64748b}
+.btn-packed{background:#fff;border:2px solid #e2e8f0;color:#64748b}
+.btn-packed.active{background:#dcfce7;border-color:#86efac;color:#15803d}
+.categories{display:flex;flex-direction:column;gap:14px}
+.cat{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.cat-header{padding:14px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.cat-emoji{font-size:22px}
+.cat-name{font-size:15px;font-weight:800;flex:1}
+.cat-count{font-size:12px;color:#94a3b8;font-weight:600}
+.cat-items{border-top:1px solid #f0f4f8;padding:6px 10px 10px}
+.item{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:10px;cursor:pointer;transition:.15s}
+.item:hover{background:#f8faff}
+.item.packed{opacity:.6}
+.item-check{width:28px;height:28px;border-radius:50%;border:2.5px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;transition:.2s}
+.item.packed .item-check{background:#2563eb;border-color:#2563eb;color:#fff}
+.item-label{font-size:14px;font-weight:600;color:#1a2840;flex:1;transition:.15s}
+.item.packed .item-label{text-decoration:line-through;color:#94a3b8}
+.item-qty{font-size:11px;color:#94a3b8;background:#f1f5f9;border-radius:6px;padding:2px 8px}
+.add-item-row{display:flex;gap:8px;padding:8px}
+.add-input{flex:1;border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Nunito',sans-serif;outline:none;color:#1a2840}
+.add-input:focus{border-color:#2563eb}
+.add-sub{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
+.congrats{background:linear-gradient(135deg,#2563eb,#06b6d4);border-radius:16px;padding:20px;text-align:center;color:#fff;margin-top:16px;display:none}
+.congrats h3{font-size:1.4rem;font-weight:900;margin-bottom:4px}
+.congrats p{font-size:13px;color:rgba(255,255,255,.75)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="app-header">
+    <h1>✈️ Cox's Bazar Trip</h1>
+    <p>June 14–17 · 4 days · 2 people · Pack smart!</p>
+  </div>
+  <div class="progress-section">
+    <div class="ps-header"><span class="ps-title">Packing Progress</span><span class="ps-count" id="countDisplay">0 / 0 packed</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="emoji-progress"><span id="pctDisplay">0% complete</span><span id="emojiDisplay">Start packing! 🧳</span></div>
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn btn-all active" onclick="setFilter('all',this)">All Items</button>
+    <button class="ctrl-btn btn-unpacked" onclick="setFilter('unpacked',this)">Not Packed</button>
+    <button class="ctrl-btn btn-packed" onclick="setFilter('packed',this)">✓ Packed</button>
+  </div>
+  <div class="categories" id="catList"></div>
+  <div class="congrats" id="congrats">
+    <h3>🎉 All packed!</h3>
+    <p>You're ready for Cox's Bazar. Have an amazing trip! 🌊</p>
+  </div>
+</div>
+<script>
+let filter='all';
+let cats=[
+  {name:'Clothing',emoji:'👗',color:'#fce7f3',items:[
+    {id:1,label:'T-shirts',qty:'×5',packed:false},{id:2,label:'Shorts / trousers',qty:'×3',packed:false},
+    {id:3,label:'Swimwear / beach shorts',qty:'×2',packed:false},{id:4,label:'Light jacket',qty:'×1',packed:false},
+    {id:5,label:'Underwear',qty:'×5',packed:false},{id:6,label:'Sandals / flip-flops',qty:'×1 pair',packed:false},
+    {id:7,label:'Sneakers',qty:'×1 pair',packed:false}
+  ]},
+  {name:'Toiletries',emoji:'🧴',color:'#e0f2fe',items:[
+    {id:8,label:'Sunscreen SPF 50',qty:'large bottle',packed:false},{id:9,label:'Shampoo & conditioner',packed:false},
+    {id:10,label:'Toothbrush & toothpaste',packed:false},{id:11,label:'Deodorant',packed:false},
+    {id:12,label:'After-sun lotion',packed:false}
+  ]},
+  {name:'Beach Essentials',emoji:'🏖️',color:'#fef9c3',items:[
+    {id:13,label:'Beach towel',qty:'×2',packed:false},{id:14,label:'Sunglasses',packed:false},
+    {id:15,label:'Hat / cap',packed:false},{id:16,label:'Snorkel kit',packed:false},
+    {id:17,label:'Waterproof phone pouch',packed:false}
+  ]},
+  {name:'Documents & Money',emoji:'📄',color:'#f0fdf4',items:[
+    {id:18,label:'National ID card',packed:false},{id:19,label:'Hotel booking confirmation',packed:false},
+    {id:20,label:'Cash (৳8,000 minimum)',packed:false},{id:21,label:'bKash / Nagad ready',packed:false}
+  ]},
+  {name:'Electronics',emoji:'⚡',color:'#faf5ff',items:[
+    {id:22,label:'Phone + charger',packed:false},{id:23,label:'Power bank',packed:false},
+    {id:24,label:'Camera + memory card',packed:false},{id:25,label:'Earphones',packed:false}
+  ]},
+];
+let nextId=30;
+function setFilter(f,btn){filter=f;document.querySelectorAll('.ctrl-btn').forEach(b=>{b.classList.remove('active');});btn.classList.add('active');render();}
+function toggle(catIdx,itemId){cats[catIdx].items.find(x=>x.id===itemId).packed^=1;render();}
+function addItem(catIdx,input){const v=input.value.trim();if(!v)return;cats[catIdx].items.push({id:nextId++,label:v,packed:false});input.value='';render();}
+function render(){
+  const allItems=cats.flatMap(c=>c.items);
+  const packed=allItems.filter(x=>x.packed).length;
+  const total=allItems.length;
+  const pct=total?Math.round(packed/total*100):0;
+  document.getElementById('countDisplay').textContent=`${packed} / ${total} packed`;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('pctDisplay').textContent=pct+'% complete';
+  document.getElementById('emojiDisplay').textContent=pct===100?'Ready! 🎉':pct>60?'Almost there! 🙌':pct>30?'Keep going! 💪':'Start packing! 🧳';
+  document.getElementById('congrats').style.display=pct===100?'block':'none';
+  document.getElementById('catList').innerHTML=cats.map((cat,ci)=>{
+    const items=cat.items.filter(it=>filter==='all'||(filter==='packed'&&it.packed)||(filter==='unpacked'&&!it.packed));
+    const catPacked=cat.items.filter(x=>x.packed).length;
+    return`<div class="cat">
+      <div class="cat-header" style="background:${cat.color}">
+        <span class="cat-emoji">${cat.emoji}</span>
+        <span class="cat-name">${cat.name}</span>
+        <span class="cat-count">${catPacked}/${cat.items.length}</span>
+      </div>
+      <div class="cat-items">
+        ${items.map(it=>`
+          <div class="item ${it.packed?'packed':''}" onclick="toggle(${ci},${it.id})">
+            <div class="item-check">${it.packed?'✓':''}</div>
+            <span class="item-label">${it.label}</span>
+            ${it.qty?`<span class="item-qty">${it.qty}</span>`:''}
+          </div>`).join('')}
+        ${filter==='all'?`<div class="add-item-row">
+          <input class="add-input" id="ai${ci}" placeholder="Add item..." onkeydown="if(event.key==='Enter')addItem(${ci},this)">
+          <button class="add-sub" onclick="addItem(${ci},document.getElementById('ai${ci}'))">+</button>
+        </div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+render();
+</script>
+</body></html>

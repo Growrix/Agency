@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Luminary Studio — Photography &amp; Film</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#080705}
+body{font-family:'Montserrat',sans-serif;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0c0b09;margin:0 auto;color:#f0ece4}
+
+/* HERO */
+.hero{min-height:300px;background:#0e0b06;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px;overflow:hidden}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,#0c0b09 100%)}
+.geo1{position:absolute;top:20px;right:-30px;width:180px;height:180px;border:1px solid rgba(200,168,86,.14);border-radius:50%}
+.geo1::before{content:'';position:absolute;inset:20px;border:1px solid rgba(200,168,86,.07);border-radius:50%}
+.geo2{position:absolute;top:60px;right:10px;width:80px;height:80px;border:1px solid rgba(200,168,86,.08);border-radius:50%}
+.geo3{position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border:1px solid rgba(200,168,86,.08);border-radius:50%}
+.noise{position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.h-eyebrow{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#c8a856;margin-bottom:14px;position:relative}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:#f0ece4;line-height:.9;position:relative}
+.hero h1 em{font-style:italic;color:#c8a856}
+.h-sub{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,236,228,.3);margin-top:12px;position:relative}
+
+/* STATS BAR */
+.stats{display:flex;border-top:1px solid #1e1c14;border-bottom:1px solid #1e1c14}
+.stat{flex:1;text-align:center;padding:16px 0;border-right:1px solid #1e1c14}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#c8a856}
+.stat-l{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,236,228,.25);margin-top:5px}
+
+/* BODY */
+.body{padding:4px 18px 40px}
+.sec{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:#c8a856;margin:24px 0 12px;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(200,168,86,.2)}
+
+/* SERVICES */
+.service{display:flex;justify-content:space-between;align-items:center;padding:14px;background:#0f0e09;border:1px solid #1e1c14;margin-bottom:2px}
+.service:first-child{border-radius:4px 4px 0 0}
+.service:last-child{border-radius:0 0 4px 4px;margin-bottom:0}
+.sv-wrap{flex:1}
+.sv-name{font-size:13px;font-weight:600;color:#f0ece4;letter-spacing:.3px}
+.sv-detail{font-size:9px;color:rgba(240,236,228,.3);margin-top:4px;letter-spacing:.5px;line-height:1.5}
+.sv-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:#c8a856;flex-shrink:0;margin-left:14px}
+
+/* PORTFOLIO GRID */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:4px}
+.pc{aspect-ratio:1;background:linear-gradient(135deg,#181308,#231b09);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
+.pc-icon{font-size:22px;opacity:.4}
+.pc-label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(200,168,86,.45);letter-spacing:.5px}
+
+/* ABOUT */
+.about-box{background:#0f0e09;border:1px solid #1e1c14;border-radius:4px;padding:16px}
+.about-text{font-size:12px;color:rgba(240,236,228,.5);line-height:1.8;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300}
+
+/* CONTACT */
+.contact-box{background:#0f0e09;border:1px solid #1e1c14;border-radius:4px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(240,236,228,.55)}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;border:1px solid rgba(200,168,86,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+/* CTAs */
+.cta-primary{display:block;margin-top:16px;background:transparent;color:#c8a856;border:1px solid #c8a856;width:100%;padding:16px;border-radius:4px;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;letter-spacing:4px;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none;transition:background .2s}
+.cta-primary:hover{background:rgba(200,168,86,.08)}
+.cta-secondary{display:block;margin-top:6px;background:rgba(200,168,86,.06);color:rgba(200,168,86,.6);border:1px solid rgba(200,168,86,.15);width:100%;padding:14px;border-radius:4px;font-size:10px;font-weight:600;font-family:'Montserrat',sans-serif;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none}
+
+/* FOOTER */
+footer{background:#080705;text-align:center;padding:22px 16px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,236,228,.15);border-top:1px solid #1e1c14}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:rgba(200,168,86,.4);letter-spacing:4px;margin-bottom:8px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hero">
+    <div class="noise"></div>
+    <div class="geo1"></div>
+    <div class="geo2"></div>
+    <div class="geo3"></div>
+    <div class="hero-fade"></div>
+    <div class="h-eyebrow">✦ Est. 2018 · Dhaka, Bangladesh ✦</div>
+    <h1>Luminary<br><em>Studio</em></h1>
+    <div class="h-sub">Photography · Film · Direction</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n">800+</div><div class="stat-l">Shoots Done</div></div>
+    <div class="stat"><div class="stat-n">6yr</div><div class="stat-l">Experience</div></div>
+    <div class="stat"><div class="stat-n">98%</div><div class="stat-l">Satisfaction</div></div>
+  </div>
+
+  <div class="body">
+
+    <div class="sec">Services &amp; Pricing</div>
+    <div class="service">
+      <div class="sv-wrap">
+        <div class="sv-name">Wedding Package</div>
+        <div class="sv-detail">Full day coverage · Edited album<br>Drone footage · 2 photographers</div>
+      </div>
+      <div class="sv-price">৳45K</div>
+    </div>
+    <div class="service">
+      <div class="sv-wrap">
+        <div class="sv-name">Portrait Session</div>
+        <div class="sv-detail">2hr session · 30 edited photos<br>Studio or outdoor</div>
+      </div>
+      <div class="sv-price">৳8K</div>
+    </div>
+    <div class="service">
+      <div class="sv-wrap">
+        <div class="sv-name">Brand &amp; Product Shoot</div>
+        <div class="sv-detail">Lifestyle · E-commerce · Social media<br>Delivery in 5 business days</div>
+      </div>
+      <div class="sv-price">৳15K</div>
+    </div>
+    <div class="service">
+      <div class="sv-wrap">
+        <div class="sv-name">Event Coverage</div>
+        <div class="sv-detail">Corporate · Social · Candid<br>Same-day highlights available</div>
+      </div>
+      <div class="sv-price">৳20K</div>
+    </div>
+    <div class="service">
+      <div class="sv-wrap">
+        <div class="sv-name">Cinematic Film</div>
+        <div class="sv-detail">4K video · Color grade · Music<br>Up to 5 min final cut</div>
+      </div>
+      <div class="sv-price">৳35K</div>
+    </div>
+
+    <div class="sec">Portfolio</div>
+    <div class="pgrid">
+      <div class="pc"><div class="pc-icon">💍</div><div class="pc-label">Weddings</div></div>
+      <div class="pc"><div class="pc-icon">🎭</div><div class="pc-label">Portraits</div></div>
+      <div class="pc"><div class="pc-icon">🏢</div><div class="pc-label">Corporate</div></div>
+      <div class="pc"><div class="pc-icon">✨</div><div class="pc-label">Lifestyle</div></div>
+    </div>
+
+    <div class="sec">About</div>
+    <div class="about-box">
+      <div class="about-text">"We don't just take photos — we tell stories. Every frame we capture is a moment preserved for generations to come."</div>
+    </div>
+
+    <div class="sec">Contact</div>
+    <div class="contact-box">
+      <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+      <div class="c-row"><div class="c-icon">📧</div>hello@luminary.com.bd</div>
+      <div class="c-row"><div class="c-icon">📍</div>Banani, Dhaka 1213</div>
+      <div class="c-row"><div class="c-icon">⏰</div>Sat–Thu · 10am – 8pm</div>
+    </div>
+
+    <a href="https://wa.me/8801700000000?text=Hi! I'd like to book a session..." class="cta-primary">Book a Session</a>
+    <a href="#" class="cta-secondary">View Portfolio →</a>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">Luminary</div>
+    © 2025 Luminary Studio · Dhaka · All rights reserved
+  </footer>
+</div>
+</body>
+</html>

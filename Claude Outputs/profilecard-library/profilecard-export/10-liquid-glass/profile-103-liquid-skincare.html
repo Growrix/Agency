@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Luminis Skin — Luxury Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0a080e;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0a080e;margin:0 auto;overflow:hidden;position:relative;color:rgba(240,235,250,.7)}
+
+/* LIQUID GLASS — ultra-transparent, prismatic, fluid */
+/* Background: very dark with soft warm blobs */
+.blob1{position:fixed;width:350px;height:350px;background:radial-gradient(ellipse,rgba(180,140,220,.14) 0%,transparent 65%);top:-80px;left:-80px;filter:blur(70px);z-index:0;pointer-events:none}
+.blob2{position:fixed;width:280px;height:280px;background:radial-gradient(ellipse,rgba(220,180,140,.1) 0%,transparent 65%);bottom:60px;right:-60px;filter:blur(65px);z-index:0;pointer-events:none}
+.blob3{position:fixed;width:200px;height:200px;background:radial-gradient(ellipse,rgba(140,200,220,.08) 0%,transparent 65%);top:250px;right:30px;filter:blur(55px);z-index:0;pointer-events:none}
+
+/* LIQUID GLASS card formula */
+/* Real glass refracts light — prismatic thin film iridescence on edges */
+.lg{
+  background:rgba(255,255,255,.04);
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  /* Glass surface — subtle gradient suggests thickness & transmission */
+  background-image:linear-gradient(145deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.02) 50%,rgba(255,255,255,.06) 100%);
+}
+/* Prismatic edge using conic gradient on pseudo-element */
+.lg::before{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  z-index:0;
+  background:conic-gradient(from 180deg,
+    rgba(255,160,120,.25),
+    rgba(255,220,120,.2),
+    rgba(120,220,255,.2),
+    rgba(160,120,255,.22),
+    rgba(255,120,200,.2),
+    rgba(255,160,120,.25)
+  );
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+  padding:1px;
+  opacity:.4;
+}
+.lg::after{content:'';position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,transparent 100%);z-index:0;border-radius:inherit;pointer-events:none}
+.lg > *{position:relative;z-index:1}
+/* Simple variant without overflow tricks */
+.lg-simple{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);position:relative;overflow:hidden}
+.lg-simple::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,200,150,.3),rgba(180,200,255,.3),rgba(255,150,200,.25),transparent);pointer-events:none}
+
+.w{position:relative;z-index:1}
+
+/* HERO */
+.hero{min-height:310px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 20px 26px;position:relative}
+.hero-top{position:absolute;top:26px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.h-logo{font-size:13px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(240,235,250,.25)}
+.h-ritual{font-size:9px;letter-spacing:2px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:4px 12px;color:rgba(240,235,250,.3)}
+.hero h1{font-size:46px;font-weight:300;letter-spacing:-2px;line-height:.9;color:rgba(240,235,250,.9);font-style:italic}
+.hero-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,200,150,.2),rgba(180,160,220,.2),rgba(150,210,230,.2),transparent);margin:16px 0 10px}
+.hero-sub{font-size:11px;font-weight:300;color:rgba(240,235,250,.3);line-height:1.7;letter-spacing:.2px}
+
+/* Liquid glass stats */
+.stats-lg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 16px}
+.slg{padding:14px 0;text-align:center;position:relative}
+.slg-n{font-size:20px;font-weight:300;color:rgba(240,235,250,.8);font-style:italic;letter-spacing:-.5px}
+.slg-l{font-size:8px;color:rgba(240,235,250,.2);margin-top:4px;letter-spacing:2px;text-transform:uppercase;font-weight:300}
+
+.body{padding:0 14px 40px}
+.sec{font-size:9px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:rgba(240,235,250,.2);margin:22px 0 12px;display:flex;align-items:center;gap:14px}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.06),transparent)}
+
+/* Ritual cards — ultra-thin glass */
+.rituals{display:flex;flex-direction:column;gap:7px}
+.ritual{padding:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.ritual-icon{font-size:22px;flex-shrink:0;opacity:.7}
+.ritual-name{font-size:15px;font-weight:300;color:rgba(240,235,250,.7);font-style:italic;letter-spacing:-.2px}
+.ritual-desc{font-size:10px;font-weight:300;color:rgba(240,235,250,.25);margin-top:3px;line-height:1.6}
+.ritual-step{font-size:9px;color:rgba(200,180,220,.35);margin-top:5px;letter-spacing:1px}
+.ritual-price{font-size:16px;font-weight:300;color:rgba(240,235,250,.5);flex-shrink:0;font-style:italic}
+
+/* Ingredients glass card */
+.ingred-card{padding:20px}
+.ingred-title{font-size:12px;font-weight:300;color:rgba(240,235,250,.4);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.ingreds{display:flex;flex-wrap:wrap;gap:6px}
+.ingred{font-size:10px;font-weight:300;color:rgba(240,235,250,.3);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:100px;padding:4px 12px;letter-spacing:.5px}
+
+/* CTA liquid */
+.cta-lg{padding:24px;text-align:center;position:relative}
+.cta-lg h3{font-size:26px;font-weight:300;color:rgba(240,235,250,.85);font-style:italic;letter-spacing:-1px;margin-bottom:8px;line-height:.95}
+.cta-lg p{font-size:11px;font-weight:300;color:rgba(240,235,250,.25);margin-bottom:20px;line-height:1.7;letter-spacing:.2px}
+.cta-btn{display:block;background:rgba(255,255,255,.08);color:rgba(240,235,250,.8);border-radius:14px;padding:15px;font-size:13px;font-weight:300;text-decoration:none;margin-bottom:8px;letter-spacing:1px;backdrop-filter:blur(8px)}
+.cta-btn{border:1px solid rgba(255,255,255,.1);background-image:linear-gradient(135deg,rgba(255,200,150,.06),rgba(180,160,255,.04))}
+.cta-btn2{display:block;color:rgba(240,235,250,.2);font-size:10px;font-weight:300;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+
+.contacts-lg{padding:0;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;font-weight:300;color:rgba(240,235,250,.25);letter-spacing:.2px}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{border-top:1px solid rgba(255,255,255,.03);padding:20px;text-align:center;font-size:10px;font-weight:300;color:rgba(240,235,250,.1);letter-spacing:3px;text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="blob1"></div><div class="blob2"></div><div class="blob3"></div>
+<div class="w">
+<div class="hero">
+  <div class="hero-top">
+    <div class="h-logo">Luminis</div>
+    <div class="h-ritual">Ritual Skincare</div>
+  </div>
+  <h1>Your skin.<br>Transformed.</h1>
+  <div class="hero-line"></div>
+  <div class="hero-sub">Science-led, plant-derived luxury skincare rituals. Formulated for Dhaka's tropical climate. Because your skin deserves clarity.</div>
+</div>
+<div class="stats-lg">
+  <div class="slg lg-simple"><div class="slg-n">12</div><div class="slg-l">Products</div></div>
+  <div class="slg lg-simple"><div class="slg-n">98%</div><div class="slg-l">Natural</div></div>
+  <div class="slg lg-simple"><div class="slg-n">4.9★</div><div class="slg-l">Reviews</div></div>
+</div>
+<div class="body">
+  <div class="sec">Signature Rituals</div>
+  <div class="rituals">
+    <div class="ritual lg-simple"><div class="ritual-icon">🌸</div><div><div class="ritual-name">Radiance Serum</div><div class="ritual-desc">Vitamin C · hyaluronic acid · niacinamide · brightening</div><div class="ritual-step">AM ritual · 3 drops · apply to damp skin</div></div><div class="ritual-price">৳3,800</div></div>
+    <div class="ritual lg-simple"><div class="ritual-icon">🌙</div><div><div class="ritual-name">Night Renewal Cream</div><div class="ritual-desc">Retinol 0.3% · peptides · ceramides · regenerating</div><div class="ritual-step">PM ritual · pea-sized amount</div></div><div class="ritual-price">৳4,200</div></div>
+    <div class="ritual lg-simple"><div class="ritual-icon">💧</div><div><div class="ritual-name">Deep Hydration Mask</div><div class="ritual-desc">Hyaluronic spheres · aloe · 72hr moisture boost</div><div class="ritual-step">Weekly · 15 minutes · rinse or sleep-in</div></div><div class="ritual-price">৳2,500</div></div>
+    <div class="ritual lg-simple"><div class="ritual-icon">☀️</div><div><div class="ritual-name">Silk SPF 50 Fluid</div><div class="ritual-desc">PA++++ · invisible finish · no white cast for BD skin</div><div class="ritual-step">Final AM step · reapply at midday</div></div><div class="ritual-price">৳2,800</div></div>
+  </div>
+  <div class="sec">Key Actives</div>
+  <div class="ingred-card lg-simple">
+    <div class="ingred-title">What's inside</div>
+    <div class="ingreds">
+      <div class="ingred">Vitamin C 15%</div><div class="ingred">Niacinamide</div><div class="ingred">Hyaluronic Acid</div>
+      <div class="ingred">Retinol 0.3%</div><div class="ingred">Ceramides</div><div class="ingred">Peptides</div>
+      <div class="ingred">Green Tea Extract</div><div class="ingred">Turmeric</div>
+    </div>
+  </div>
+  <div class="sec">Begin Your Ritual</div>
+  <div class="cta-lg lg-simple">
+    <h3>Skin that glows<br>from within.</h3>
+    <p>Free skin consultation with every first order. We'll build your personalised 3-step ritual — cleanse, treat, protect.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">✦ Shop & Consult</a>
+    <a href="mailto:ritual@luminis.com.bd" class="cta-btn2">ritual@luminis.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts-lg lg-simple">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📦</div>Ships across Bangladesh · 2–3 days</div>
+    <div class="cr"><div class="ci">📸</div>@luminisskin.bd</div>
+  </div>
+</div>
+<footer>© 2025 Luminis Skin · Luxury Skincare · Dhaka</footer>
+</div></div></body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Nova Restaurant — Modern Dhaka Dining</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0a0604;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0d0806;margin:0 auto}
+/* WARM DARK BENTO - restaurant */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:12px}
+.cell{border-radius:20px;padding:18px;overflow:hidden;position:relative}
+.w-full{grid-column:span 2}
+/* Hero */
+.hero-c{background:linear-gradient(155deg,#1e0e06,#2a1406);border:1px solid rgba(200,120,60,.1);min-height:210px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-c::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,120,60,.35),transparent)}
+.hc-eyebrow{font-size:9px;color:rgba(220,160,80,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.hc-h1{font-family:'Fraunces',serif;font-size:42px;font-weight:600;line-height:.88;letter-spacing:-1px;color:#f5e8d8}
+.hc-h1 em{font-style:italic;color:rgba(220,160,80,.8)}
+.hc-sub{font-size:11px;color:rgba(245,232,216,.35);margin-top:8px;line-height:1.5}
+/* Stat cells */
+.warm-stat{background:#1a0e06;border:1px solid rgba(200,120,60,.08);display:flex;flex-direction:column;justify-content:flex-end;min-height:90px}
+.ws-n{font-family:'Fraunces',serif;font-size:28px;color:rgba(220,160,80,.8)}
+.ws-l{font-size:9px;color:rgba(245,232,216,.25);margin-top:3px;letter-spacing:.5px}
+.amber-c{background:rgba(220,140,60,.15);border:1px solid rgba(220,140,60,.2);display:flex;flex-direction:column;justify-content:flex-end;min-height:90px}
+.amber-c .ws-n{color:#fff}.amber-c .ws-l{color:rgba(255,255,255,.5)}
+/* Menu cells */
+.menu-c{background:#1a0e06;border:1px solid rgba(200,120,60,.08);min-height:130px;display:flex;flex-direction:column;justify-content:flex-end}
+.mc-course{font-size:9px;color:rgba(220,160,80,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.mc-name{font-family:'Fraunces',serif;font-size:16px;font-style:italic;color:rgba(245,232,216,.75)}
+.mc-desc{font-size:9px;color:rgba(245,232,216,.3);margin-top:3px;line-height:1.4}
+.mc-price{font-size:12px;color:rgba(220,160,80,.6);margin-top:6px;font-family:'Fraunces',serif;font-style:italic}
+/* Hours cell */
+.hours-c{background:rgba(220,140,60,.12);border:1px solid rgba(220,140,60,.18);min-height:110px;display:flex;flex-direction:column;justify-content:flex-end}
+.hc-time{font-family:'Fraunces',serif;font-size:22px;color:#fff;font-style:italic}
+.hc-days{font-size:10px;color:rgba(255,255,255,.5);margin-top:4px}
+/* CTA Cell */
+.cta-c{background:rgba(200,80,40,.8);min-height:90px;display:flex;flex-direction:column;justify-content:space-between}
+.cta-c h3{font-family:'Fraunces',serif;font-size:18px;color:#fff;font-style:italic}
+.cta-btn{display:block;background:#fff;color:#c85028;border-radius:12px;padding:10px;font-size:11px;font-weight:700;text-decoration:none;text-align:center;margin-top:10px}
+/* Contact */
+.contact-c{background:#1a0e06;border:1px solid rgba(200,120,60,.08);min-height:100px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}
+.cc-r{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(245,232,216,.35)}
+</style></head>
+<body><div class="app">
+<div class="bento">
+  <div class="cell w-full hero-c">
+    <div class="hc-eyebrow">Modern Bangladeshi · Pan-Asian · Dhaka</div>
+    <div class="hc-h1">Nova<br><em>Restaurant</em></div>
+    <div class="hc-sub">A new approach to flavour. Seasonal menus, craft cocktails and intimate dining — Banani's most celebrated table.</div>
+  </div>
+  <div class="cell warm-stat"><div class="ws-n">4.9★</div><div class="ws-l">Zomato · Google</div></div>
+  <div class="cell amber-c"><div class="ws-n">8yr</div><div class="ws-l">Serving Dhaka</div></div>
+  <div class="cell warm-stat"><div class="ws-n">50+</div><div class="ws-l">Menu items</div></div>
+  <div class="cell amber-c"><div class="ws-n">Private</div><div class="ws-l">Events · PDR</div></div>
+  <!-- Menu -->
+  <div class="cell menu-c"><div class="mc-course">Starter</div><div class="mc-name">Smoked Hilsa Ceviche</div><div class="mc-desc">Citrus cure, chilli oil, mustard seeds, microherbs</div><div class="mc-price">৳680</div></div>
+  <div class="cell menu-c"><div class="mc-course">Main</div><div class="mc-name">Charcoal Duck Kacchi</div><div class="mc-desc">Slow-cooked, truffle-infused raita, gold leaf</div><div class="mc-price">৳1,480</div></div>
+  <div class="cell menu-c"><div class="mc-course">Dessert</div><div class="mc-name">Mishti Crème Brûlée</div><div class="mc-desc">Rosogolla cream, jaggery caramel, saffron</div><div class="mc-price">৳450</div></div>
+  <div class="cell hours-c"><div class="hc-time">12pm–11pm</div><div class="hc-days">Daily · Last order 10pm</div></div>
+  <div class="cell w-full cta-c">
+    <h3>Reserve your table tonight.</h3>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🍽️ Book via WhatsApp</a>
+  </div>
+  <div class="cell contact-c">
+    <div class="cc-r">📞 +880 1700-000000</div>
+    <div class="cc-r">📍 Banani, Dhaka · Level 2</div>
+    <div class="cc-r">📸 @novarestaurant.bd</div>
+  </div>
+  <div class="cell amber-c" style="min-height:100px;justify-content:center;align-items:center;text-align:center">
+    <div style="font-size:28px;margin-bottom:8px">🍽️</div>
+    <div style="font-size:11px;font-weight:600;color:#fff">Private dining</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:3px">Up to 30 guests</div>
+  </div>
+</div>
+<div style="text-align:center;padding:14px;font-size:10px;color:rgba(245,232,216,.08)">© 2025 Nova Restaurant · Banani, Dhaka</div>
+</div></body></html>

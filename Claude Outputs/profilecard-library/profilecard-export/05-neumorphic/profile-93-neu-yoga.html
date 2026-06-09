@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Prana Yoga — Yoga & Meditation Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Gantari:wght@300;400;500;600;700;800&family=Literata:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Gantari',sans-serif;background:#c8d4c0;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#d4e0cc;margin:0 auto;color:#1e2c18}
+:root{--bg:#d4e0cc;--light:rgba(255,255,255,.8);--shadow:rgba(140,170,120,.6);--accent:#3a6830;--text:#1e2c18;--muted:rgba(30,44,24,.38)}
+.neu{box-shadow:-5px -5px 12px var(--light),5px 5px 12px var(--shadow)}
+.neu-sm{box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+.hero{background:var(--bg);padding:32px 22px 26px;position:relative;min-height:278px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-top{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.h-logo{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.h-open{font-size:9px;background:var(--bg);border-radius:100px;padding:4px 12px;color:var(--accent);font-weight:700;letter-spacing:.5px;box-shadow:-2px -2px 5px var(--light),2px 2px 5px var(--shadow)}
+.lotus{width:64px;height:64px;background:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:16px;box-shadow:-5px -5px 12px var(--light),5px 5px 12px var(--shadow)}
+.hero h1{font-family:'Literata',serif;font-style:italic;font-size:40px;font-weight:400;color:var(--text);line-height:.9;letter-spacing:-.5px}
+.hero h1 .a{color:var(--accent)}
+.hero-sub{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.65;font-weight:400}
+.stats{display:flex;gap:8px;padding:16px}
+.st{flex:1;background:var(--bg);border-radius:16px;padding:14px 0;text-align:center;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.st-n{font-size:20px;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.st-l{font-size:8px;color:var(--muted);margin-top:3px;letter-spacing:.5px;font-weight:600}
+.body{padding:0 16px 40px}
+.sec{font-family:'Literata',serif;font-style:italic;font-size:14px;color:var(--muted);margin:22px 0 12px;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(58,104,48,.15)}
+.classes{display:flex;flex-direction:column;gap:9px}
+.cls{background:var(--bg);border-radius:18px;padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.cls-icon{font-size:24px;flex-shrink:0;margin-top:1px}
+.cls-name{font-family:'Gantari',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.cls-desc{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.4;font-weight:400}
+.cls-dur{font-size:9px;color:var(--accent);margin-top:4px;font-weight:700;letter-spacing:.5px}
+.cls-price{font-size:15px;font-weight:800;color:var(--accent);flex-shrink:0;text-align:right}
+.cls-price span{display:block;font-size:9px;color:var(--muted);font-weight:500;margin-top:1px}
+.schedule{background:var(--bg);border-radius:18px;padding:18px;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.sch-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(58,104,48,.1)}
+.sch-row:last-child{border-bottom:none;padding-bottom:0}
+.sch-day{font-size:11px;font-weight:700;color:var(--text)}
+.sch-classes{font-size:10px;color:var(--muted);margin-top:2px}
+.sch-time{font-size:11px;color:var(--accent);font-weight:700}
+.cta{background:var(--bg);border-radius:22px;padding:26px;text-align:center;box-shadow:-6px -6px 14px var(--light),6px 6px 14px var(--shadow)}
+.cta h3{font-family:'Literata',serif;font-style:italic;font-size:22px;color:var(--text);margin-bottom:8px}
+.cta p{font-size:11px;color:var(--muted);margin-bottom:22px;line-height:1.65}
+.cta-btn{display:block;background:var(--accent);color:#d4e0cc;border-radius:14px;padding:15px;font-family:'Gantari',sans-serif;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 18px rgba(58,104,48,.3)}
+.cta-btn2{display:block;background:var(--bg);color:var(--muted);border-radius:14px;padding:12px;font-size:12px;text-decoration:none;box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+.contacts{background:var(--bg);border-radius:18px;overflow:hidden;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(58,104,48,.08);font-size:12px;color:var(--muted)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;box-shadow:0 3px 10px rgba(58,104,48,.3)}
+footer{background:#c8d4c0;padding:16px;text-align:center;font-family:'Literata',serif;font-style:italic;font-size:12px;color:var(--muted)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-top"><div class="h-logo">Prana</div><div class="h-open">🟢 Classes today</div></div>
+  <div class="lotus">🪷</div>
+  <h1>Breathe.<br>Move.<br><span class="a">Flourish.</span></h1>
+  <div class="hero-sub">Yoga, meditation and mindfulness for all levels. Indoor garden studio. Dhaka's most peaceful practice space since 2014.</div>
+</div>
+<div class="stats">
+  <div class="st"><div class="st-n">600+</div><div class="st-l">Members</div></div>
+  <div class="st"><div class="st-n">18</div><div class="st-l">Classes/week</div></div>
+  <div class="st"><div class="st-n">10yr</div><div class="st-l">Studio</div></div>
+</div>
+<div class="body">
+  <div class="sec">Our Classes</div>
+  <div class="classes">
+    <div class="cls"><span class="cls-icon">🧘</span><div><div class="cls-name">Hatha Flow</div><div class="cls-desc">Foundation postures · breath work · all levels welcome</div><div class="cls-dur">60 min · Daily 7am & 6pm</div></div><div class="cls-price">৳600<span>per class</span></div></div>
+    <div class="cls"><span class="cls-icon">🔥</span><div><div class="cls-name">Vinyasa Power</div><div class="cls-desc">Dynamic flow · strength · cardiovascular · intermediate</div><div class="cls-dur">75 min · Mon Wed Fri</div></div><div class="cls-price">৳800<span>per class</span></div></div>
+    <div class="cls"><span class="cls-icon">🌙</span><div><div class="cls-name">Yin & Restorative</div><div class="cls-desc">Deep stretching · relaxation · nervous system reset</div><div class="cls-dur">90 min · Tue Thu Sat</div></div><div class="cls-price">৳700<span>per class</span></div></div>
+    <div class="cls"><span class="cls-icon">🧠</span><div><div class="cls-name">Meditation & Pranayama</div><div class="cls-desc">Breath control · mindfulness · stress management</div><div class="cls-dur">45 min · Daily 8am</div></div><div class="cls-price">৳500<span>per class</span></div></div>
+  </div>
+  <div class="sec">Memberships</div>
+  <div class="schedule">
+    <div class="sch-row"><div><div class="sch-day">Drop-in Pass</div><div class="sch-classes">Single class · any style</div></div><div class="sch-time">৳700/class</div></div>
+    <div class="sch-row"><div><div class="sch-day">Monthly Unlimited</div><div class="sch-classes">All classes · best value</div></div><div class="sch-time">৳4,500/mo</div></div>
+    <div class="sch-row"><div><div class="sch-day">10-Class Pack</div><div class="sch-classes">Valid 3 months · flexible</div></div><div class="sch-time">৳5,500 pack</div></div>
+    <div class="sch-row"><div><div class="sch-day">Private Session</div><div class="sch-classes">1-on-1 with senior teacher</div></div><div class="sch-time">৳2,500/hr</div></div>
+  </div>
+  <div class="sec">Try a Free Class</div>
+  <div class="cta">
+    <h3>Your first class is on us.</h3>
+    <p>New to yoga? We invite you to try any class for free. No experience needed — just bring an open mind.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🪷 Claim Free Class</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call the studio</a>
+  </div>
+  <div class="sec">Visit Us</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Dhanmondi Road 15, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Daily 6am – 9pm</div>
+    <div class="cr"><div class="ci">📸</div>@pranayoga.bd</div>
+  </div>
+</div>
+<footer>© 2025 Prana Yoga Studio · Dhanmondi, Dhaka · Est. 2014 🪷</footer>
+</div></body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Morning Press — Café & Bakery</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#faf7f2;color:#2c2015;font-family:'Jost',sans-serif;min-height:100vh}
+.header{padding:48px 40px 32px;text-align:center;border-bottom:1px solid #e8ddd0}
+.tagline{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#b09070;margin-bottom:12px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);color:#2c2015;font-weight:400;margin-bottom:6px}
+.info-line{font-size:12px;color:#b09070;letter-spacing:2px;margin-top:8px}
+.menu{max-width:780px;margin:0 auto;padding:48px 40px}
+.section{margin-bottom:52px}
+.section-header{margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #e8ddd0}
+.section-header h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:#2c2015;margin-bottom:4px}
+.section-header p{font-size:12px;color:#b09070;letter-spacing:1px;font-style:italic}
+.item{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px dotted #e0d5c5}
+.item:last-child{border-bottom:none}
+.item-left{flex:1}
+.item-name{font-size:15px;font-weight:500;color:#2c2015;margin-bottom:3px}
+.item-desc{font-size:13px;color:#8a7060;line-height:1.5;font-weight:300;font-style:italic}
+.item-tags{display:flex;gap:6px;margin-top:6px}
+.tag{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#b09070;background:#f5ede0;border-radius:3px;padding:2px 7px}
+.price{font-family:'Playfair Display',serif;font-size:17px;color:#6a4a20;font-weight:400;white-space:nowrap}
+.size-note{font-size:11px;color:#b09070;display:block;text-align:right;margin-top:2px}
+.seasonal-box{background:#f5ede0;border:1px solid #e8d5b5;border-radius:12px;padding:24px;margin:32px 0;display:flex;gap:20px;align-items:center}
+.leaf{font-size:32px}
+.seasonal-box h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:4px;color:#2c2015}
+.seasonal-box p{font-size:13px;color:#8a7060;line-height:1.5;font-style:italic}
+.brew-guide{background:#2c2015;color:#f5ede0;padding:40px;border-radius:16px;margin:0 0 52px;text-align:center}
+.brew-guide h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:8px;font-weight:400;font-style:italic}
+.brew-guide p{font-size:13px;color:rgba(245,237,224,.6);margin-bottom:20px;font-weight:300}
+.brew-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.brew-btn{padding:8px 20px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid rgba(245,237,224,.25);color:rgba(245,237,224,.7);cursor:pointer;background:transparent;transition:.15s;font-family:'Jost',sans-serif}
+.brew-btn.active,.brew-btn:hover{background:rgba(245,237,224,.1);border-color:rgba(245,237,224,.5);color:#f5ede0}
+footer{text-align:center;padding:32px 40px;border-top:1px solid #e8ddd0;font-size:12px;color:#b09070;letter-spacing:1px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="tagline">Specialty Coffee &amp; Artisan Bakery</div>
+  <h1>The Morning Press</h1>
+  <div class="info-line">Dhanmondi · Open Daily 7:30AM – 9PM · +880 1700-000000</div>
+</div>
+<div class="menu">
+  <div class="brew-guide">
+    <h3>Today's Featured Coffee</h3>
+    <p>Ethiopian Yirgacheffe — light roast · blueberry, jasmine, citrus</p>
+    <div class="brew-btns"><button class="brew-btn active">Espresso</button><button class="brew-btn">Pourover</button><button class="brew-btn">Cold Brew</button><button class="brew-btn">French Press</button></div>
+  </div>
+  <div class="section">
+    <div class="section-header"><h2>Espresso Bar</h2><p>All espresso made with our house blend — Brazilian Cerrado &amp; Ethiopian natural</p></div>
+    <div class="item"><div class="item-left"><div class="item-name">Espresso</div><div class="item-desc">Single or double shot, served in a warmed demitasse</div></div><div><div class="price">৳180</div><div class="size-note">solo / doppio</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Flat White</div><div class="item-desc">Double ristretto with 130ml of silky microfoam milk</div><div class="item-tags"><span class="tag">Oat milk +৳30</span></div></div><div><div class="price">৳280</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Cortado</div><div class="item-desc">Equal parts espresso and lightly steamed milk. No sugar needed.</div></div><div><div class="price">৳260</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Cappuccino</div><div class="item-desc">Classic Italian preparation — dry, airy foam over a bold double shot</div></div><div><div class="price">৳280</div><div class="size-note">hot or iced +৳20</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Café Latte</div><div class="item-desc">Smooth and mellow — 220ml whole milk, double espresso</div><div class="item-tags"><span class="tag">Vanilla +৳30</span><span class="tag">Hazelnut +৳30</span></div></div><div><div class="price">৳300</div></div></div>
+  </div>
+  <div class="section">
+    <div class="section-header"><h2>Slow Brews</h2><p>Brewed to order · please allow 4–6 minutes</p></div>
+    <div class="item"><div class="item-left"><div class="item-name">V60 Pourover</div><div class="item-desc">Single origin filter coffee, brewed with precision gooseneck. Ask your barista for today's origin.</div></div><div><div class="price">৳360</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Cold Brew</div><div class="item-desc">18-hour cold-steeped Guatemalan, served over ice with citrus peel</div></div><div><div class="price">৳340</div></div></div>
+  </div>
+  <div class="seasonal-box"><div class="leaf">🍂</div><div><h3>Seasonal Special — Monsoon Spice Latte</h3><p>Espresso with cardamom, cinnamon, and black pepper warm milk. Available May–July only.</p></div></div>
+  <div class="section">
+    <div class="section-header"><h2>Bakery &amp; Kitchen</h2><p>Baked fresh in-house from 5AM each morning</p></div>
+    <div class="item"><div class="item-left"><div class="item-name">Plain Croissant</div><div class="item-desc">72-hour butter lamination, caramelised base, airy interior. Served warm.</div></div><div><div class="price">৳220</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Smoked Salmon Bagel</div><div class="item-desc">House-baked bagel, cream cheese, smoked salmon, capers, red onion &amp; dill</div></div><div><div class="price">৳520</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Banana Brown Butter Cake</div><div class="item-desc">Dense, fragrant slice with roasted banana and brown butter frosting</div><div class="item-tags"><span class="tag">Vegetarian</span></div></div><div><div class="price">৳280</div></div></div>
+    <div class="item"><div class="item-left"><div class="item-name">Avo Toast</div><div class="item-desc">Sourdough, smashed avocado, poached egg, dukkah, chilli flakes &amp; lemon</div></div><div><div class="price">৳480</div></div></div>
+  </div>
+</div>
+<footer>All items may contain allergens. Please speak to staff. Prices include VAT. The Morning Press · themorningpress.com.bd</footer>
+</body></html>

@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "resume-c.html",
+        "type_slug":  "html-resumes-cv",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/documents-reports/html-resumes-cv/resume-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/Resume\\resume-c.html"
+    },
+    {
+        "source_file":  "resume-b.html",
+        "type_slug":  "html-resumes-cv",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/documents-reports/html-resumes-cv/resume-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/Resume\\resume-b.html"
+    },
+    {
+        "source_file":  "resume-a.html",
+        "type_slug":  "html-resumes-cv",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/documents-reports/html-resumes-cv/resume-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/Resume\\resume-a.html"
+    }
+]

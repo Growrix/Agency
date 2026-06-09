@@ -22,7 +22,7 @@ import { useConciergeStore } from "@/lib/concierge-store";
 const ITEMS = [
   { label: "Home", href: "/", icon: HomeIcon, active: HomeFilled },
   { label: "Services", href: "/services", icon: Squares2X2Icon, active: SquaresFilled },
-  { label: "Shop", href: "/shop", icon: ShoppingBagIcon, active: ShopFilled },
+  { label: "Products", href: "/products", icon: ShoppingBagIcon, active: ShopFilled },
   { label: "Portfolio", href: "/portfolio", icon: BriefcaseIcon, active: BriefFilled },
   { label: "Chat", href: "/ai-concierge", icon: ChatBubbleLeftRightIcon, active: ChatFilled },
 ];

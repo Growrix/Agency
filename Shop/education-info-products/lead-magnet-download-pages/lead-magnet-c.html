@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Free Excel Template — Personal Finance Tracker (12-Month Budget)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f8f9fb;font-family:'Inter',sans-serif;color:#1e293b;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px}
+.page{max-width:820px;width:100%;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 48px rgba(0,0,0,.08)}
+.top-accent{height:5px;background:linear-gradient(90deg,#0a3d7a,#1e5fa8,#0a3d7a)}
+.content{padding:52px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:36px;flex-wrap:wrap;gap:20px}
+.header-left .label{font-size:11px;color:#0a3d7a;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.header-left h1{font-size:2rem;font-weight:800;letter-spacing:-1px;line-height:1.1;color:#0f172a;margin-bottom:10px}
+.header-left p{font-size:14px;color:#64748b;line-height:1.7;font-weight:300;max-width:440px}
+.dl-badge{background:#0a3d7a;color:#fff;border-radius:12px;padding:18px 22px;text-align:center;flex-shrink:0}
+.dl-badge .dl-num{font-size:2rem;font-weight:800;letter-spacing:-1px;display:block;line-height:1;margin-bottom:2px}
+.dl-badge .dl-label{font-size:11px;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:1.5px}
+.preview{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:32px}
+.preview-label{font-size:11px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.sheet-preview{background:#fff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;font-size:12px}
+.sheet-row{display:grid;grid-template-columns:2fr repeat(4,1fr);border-bottom:1px solid #f0f4f8}
+.sheet-row:last-child{border-bottom:none}
+.sheet-header{background:#0a3d7a;color:#fff;font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.sheet-row div{padding:8px 10px;border-right:1px solid #f0f4f8}
+.sheet-row div:last-child{border-right:none}
+.sheet-row.header div{border-right-color:rgba(255,255,255,.15)}
+.cell-green{color:#15803d;font-weight:600}
+.cell-red{color:#dc2626;font-weight:600}
+.cell-blue{color:#0a3d7a;font-weight:600}
+.cell-muted{color:#94a3b8}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.what-includes h3{font-size:13px;font-weight:700;color:#0f172a;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.include-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.include-list li{font-size:14px;color:#374151;display:flex;align-items:flex-start;gap:10px}
+.include-list li::before{content:'✓';color:#0a3d7a;font-weight:700;flex-shrink:0;margin-top:1px}
+.form-section h3{font-size:13px;font-weight:700;color:#0f172a;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+.field input{width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:11px 14px;font-size:14px;color:#0f172a;font-family:'Inter',sans-serif;outline:none;transition:.2s}
+.field input:focus{border-color:#0a3d7a;box-shadow:0 0 0 3px rgba(10,61,122,.07)}
+.field input::placeholder{color:#cbd5e1}
+.submit{width:100%;background:#0a3d7a;color:#fff;padding:14px;border-radius:8px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
+.submit:hover{background:#0d4fa0}
+.trust{font-size:12px;color:#94a3b8;margin-top:8px;text-align:center}
+.testimonials{border-top:1px solid #f1f5f9;padding-top:28px;margin-top:32px}
+.test-label{font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.test{background:#f8fafc;border-left:3px solid #0a3d7a;border-radius:0 8px 8px 0;padding:12px 14px}
+.test-text{font-size:13px;color:#475569;line-height:1.5;margin-bottom:5px;font-style:italic}
+.test-author{font-size:11px;color:#94a3b8}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.header{flex-direction:column}.content{padding:28px}.test-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top-accent"></div>
+  <div class="content">
+    <div class="header">
+      <div class="header-left">
+        <div class="label">📥 Free Download · No signup required</div>
+        <h1>12-Month Personal Finance Tracker</h1>
+        <p>A clean, practical Excel and Google Sheets template to track income, expenses, savings, and goals — built for Bangladeshi households and freelancers. Used by 6,200 people.</p>
+      </div>
+      <div class="dl-badge">
+        <span class="dl-num">6.2K</span>
+        <span class="dl-label">Downloads</span>
+      </div>
+    </div>
+
+    <div class="preview">
+      <div class="preview-label">Template Preview — Monthly Budget Sheet</div>
+      <div class="sheet-preview">
+        <div class="sheet-row header"><div>Category</div><div>Budget</div><div>Actual</div><div>Variance</div><div>%</div></div>
+        <div class="sheet-row"><div class="cell-blue">💵 Total Income</div><div>৳65,000</div><div class="cell-green">৳68,400</div><div class="cell-green">+৳3,400</div><div class="cell-green">105%</div></div>
+        <div class="sheet-row"><div>🏠 Rent</div><div>৳18,000</div><div>৳18,000</div><div class="cell-muted">৳0</div><div class="cell-muted">100%</div></div>
+        <div class="sheet-row"><div>🍽️ Food & Groceries</div><div>৳12,000</div><div class="cell-red">৳14,200</div><div class="cell-red">-৳2,200</div><div class="cell-red">118%</div></div>
+        <div class="sheet-row"><div>🚗 Transport</div><div>৳5,000</div><div class="cell-green">৳4,200</div><div class="cell-green">+৳800</div><div class="cell-green">84%</div></div>
+        <div class="sheet-row"><div class="cell-blue">💰 Net Savings</div><div>৳14,000</div><div class="cell-green">৳16,800</div><div class="cell-green">+৳2,800</div><div class="cell-green">120%</div></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="what-includes">
+        <h3>What's included</h3>
+        <ul class="include-list">
+          <li>12 pre-built monthly sheets (Jan–Dec)</li>
+          <li>Annual summary &amp; net worth tracker</li>
+          <li>Income vs. expenses chart (auto-updates)</li>
+          <li>Emergency fund calculator</li>
+          <li>Savings goals tracker (5 goals)</li>
+          <li>Bangladesh VAT &amp; tax reference sheet</li>
+          <li>Works in Excel &amp; Google Sheets</li>
+        </ul>
+      </div>
+      <div class="form-section">
+        <h3>Get Instant Access</h3>
+        <div class="field"><label>Your Email</label><input type="email" placeholder="rahul@gmail.com"></div>
+        <div class="field"><label>Profession <span style="color:#94a3b8;font-weight:400">(optional)</span></label><input type="text" placeholder="Salaried / Freelancer / Business owner"></div>
+        <button class="submit">📥 Download Free Template</button>
+        <div class="trust">🔒 No spam · Unsubscribe anytime · Instant download</div>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <div class="test-label">What people say</div>
+      <div class="test-grid">
+        <div class="test"><div class="test-text">"I've tried every budgeting app. Nothing beats this template — simple, clear, and I actually use it every month."</div><div class="test-author">— Karim U., Software Engineer</div></div>
+        <div class="test"><div class="test-text">"Finally figured out where my salary was going. Saved ৳2,400 extra last month just from tracking properly."</div><div class="test-author">— Sabina M., School Teacher</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

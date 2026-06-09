@@ -6,6 +6,7 @@ import { getRuntimeConfig } from "@/server/config/runtime";
 import type { ContactInquiryRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
+import { recordLeadEvent } from "@/server/domain/leads";
 
 type CreateContactInquiryInput = {
   visitor_name: string;
@@ -176,6 +177,28 @@ export async function createContactInquiry(input: CreateContactInquiryInput) {
         service: inquiry.service ?? null,
         source: input.source ?? "contact_form",
       },
+    }),
+    recordLeadEvent({
+      email: inquiry.visitor_email,
+      eventType: "contact_form",
+      source: "contact_form",
+      route: "/contact",
+      name: inquiry.visitor_name,
+      company: inquiry.company,
+      relatedInquiryId: inquiry.id,
+      metadata: {
+        service: inquiry.service,
+        budget: inquiry.budget,
+        urgency: inquiry.urgency,
+      },
+    }).catch(async (error: unknown) => {
+      await recordAuditLog({
+        level: "warning",
+        action: "contact.lead_event_failed",
+        actor_email: inquiry.visitor_email,
+        metadata: { message: error instanceof Error ? error.message : "Unknown error" },
+      });
+      return undefined;
     }),
   ]);
 

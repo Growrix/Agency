@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Digital Marketing Mastery — Go from Beginner to In-Demand in 8 Weeks</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a2e;font-family:'Manrope',sans-serif;overflow-x:hidden}
+nav{padding:18px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f0f8;position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);z-index:100}
+.logo{font-size:18px;font-weight:800;color:#2563eb;letter-spacing:-.5px}
+.nav-right{display:flex;gap:14px;align-items:center}
+.nav-link{font-size:14px;color:#666;text-decoration:none}
+.nav-btn{background:#2563eb;color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none}
+.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb,#1d4ed8);color:#fff;padding:80px 60px}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:start}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:22px}
+h1{font-size:clamp(2.5rem,4vw,3.6rem);font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:18px}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.75);line-height:1.75;font-weight:300;max-width:500px;margin-bottom:28px}
+.proof-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.proof-item{text-align:center}
+.proof-item .n{font-size:2rem;font-weight:800;display:block;letter-spacing:-1px}
+.proof-item .l{font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1.5px}
+.instructor-mini{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.1);border-radius:12px;padding:14px 18px}
+.im-av{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.im-name{font-size:15px;font-weight:700;color:#fff}
+.im-cred{font-size:12px;color:rgba(255,255,255,.6)}
+.enroll-card{background:#fff;border-radius:20px;padding:28px;color:#1a1a2e;box-shadow:0 20px 60px rgba(0,0,0,.2);position:sticky;top:88px}
+.ec-label{font-size:11px;color:#2563eb;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.ec-price{font-size:3rem;font-weight:800;letter-spacing:-2px;color:#1a1a2e;line-height:1;margin-bottom:4px}
+.ec-orig{font-size:14px;color:#bbb;text-decoration:line-through;margin-bottom:6px}
+.ec-save{display:inline-block;background:#dcfce7;color:#15803d;font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;margin-bottom:16px}
+.ec-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.ec-list li{font-size:13px;color:#374151;display:flex;align-items:center;gap:8px}
+.ec-list li::before{content:'✓';color:#2563eb;font-weight:700;flex-shrink:0}
+.ec-cta{display:block;background:#2563eb;color:#fff;text-align:center;padding:15px;border-radius:10px;font-size:16px;font-weight:800;text-decoration:none;margin-bottom:10px;transition:.15s}
+.ec-cta:hover{background:#1d4ed8}
+.ec-note{font-size:12px;color:#94a3b8;text-align:center;line-height:1.5}
+.social-proof-strip{background:#f8fafc;padding:36px 60px;border-bottom:1px solid #e2e8f0}
+.sp-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;gap:24px;flex-wrap:wrap}
+.sp-stat .n{font-size:2rem;font-weight:800;color:#1e3a8a;letter-spacing:-1px;display:block}
+.sp-stat .l{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.sp-stat{text-align:center}
+.curriculum{max-width:1100px;margin:0 auto;padding:64px 60px}
+h2{font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+.section-sub{font-size:15px;color:#64748b;margin-bottom:36px;font-weight:300}
+.week-grid{display:flex;flex-direction:column;gap:0}
+.week{border:1px solid #e2e8f0;border-bottom:none;display:grid;grid-template-columns:90px 1fr auto;align-items:center;padding:18px 22px;transition:.15s}
+.week:first-child{border-radius:12px 12px 0 0}
+.week:last-child{border-radius:0 0 12px 12px;border-bottom:1px solid #e2e8f0}
+.week:hover{background:#f8faff;border-color:#bfdbfe}
+.week-num{font-size:11px;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:2px}
+.week-title{font-size:15px;font-weight:600;color:#1a1a2e;margin-bottom:3px}
+.week-desc{font-size:13px;color:#64748b}
+.week-dur{font-size:12px;color:#94a3b8;white-space:nowrap;padding-left:16px}
+.outcomes{background:#eff6ff;padding:64px 60px}
+.outcomes h2{font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:32px;max-width:1100px;margin-left:auto;margin-right:auto}
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.outcome{background:#fff;border-radius:14px;padding:24px;border:1px solid #bfdbfe}
+.outcome-icon{font-size:28px;margin-bottom:12px}
+.outcome h4{font-size:15px;font-weight:700;color:#1e3a8a;margin-bottom:7px}
+.outcome p{font-size:13px;color:#475569;line-height:1.6;font-weight:300}
+.bottom-cta{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:80px 60px;text-align:center}
+.bottom-cta h2{font-size:2.5rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:12px}
+.bottom-cta p{color:rgba(255,255,255,.7);font-size:16px;margin-bottom:32px;font-weight:300}
+.bottom-cta a{display:inline-block;background:#fff;color:#1e3a8a;padding:17px 48px;border-radius:10px;font-size:17px;font-weight:800;text-decoration:none}
+footer{padding:28px 60px;text-align:center;font-size:13px;color:#94a3b8;border-top:1px solid #e2e8f0}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.enroll-card{position:static}.curriculum,.outcomes,.bottom-cta,.social-proof-strip{padding-left:24px;padding-right:24px}.outcome-grid{grid-template-columns:1fr}.hero{padding:60px 24px}.week{grid-template-columns:1fr;gap:4px}nav{padding:14px 24px}.nav-link{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">GrowthPath</div>
+  <div class="nav-right"><a href="#" class="nav-link">Curriculum</a><a href="#" class="nav-link">Results</a><a href="#" class="nav-btn">Enroll Now</a></div>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">📈 8-Week Intensive · Online &amp; Live</div>
+      <h1>Go from Beginner to In-Demand Digital Marketer</h1>
+      <p class="hero-sub">Master Meta Ads, Google Ads, SEO, email marketing, and analytics in 8 intensive weeks — with real campaigns, real results, and career support that doesn't end at graduation.</p>
+      <div class="proof-row">
+        <div class="proof-item"><span class="n">4,200+</span><span class="l">Graduates</span></div>
+        <div class="proof-item"><span class="n">৳45K</span><span class="l">Avg salary increase</span></div>
+        <div class="proof-item"><span class="n">91%</span><span class="l">Job rate</span></div>
+        <div class="proof-item"><span class="n">4.9★</span><span class="l">Rating</span></div>
+      </div>
+      <div class="instructor-mini"><div class="im-av">👩‍💼</div><div><div class="im-name">Nadia Chowdhury</div><div class="im-cred">8 years · Former Head of Growth, ShopMart BD · Trained 4,200 marketers</div></div></div>
+    </div>
+    <div class="enroll-card">
+      <div class="ec-label">Enroll Today</div>
+      <div class="ec-price">৳3,200</div>
+      <div class="ec-orig">Regular: ৳5,500</div>
+      <div class="ec-save">Save ৳2,300 — Early Bird Ends May 31</div>
+      <ul class="ec-list">
+        <li>8 weeks live Zoom classes (Sat &amp; Sun)</li>
+        <li>Run real campaigns with ৳5,000 ad budget</li>
+        <li>Google &amp; Meta certification prep</li>
+        <li>1-on-1 career coaching sessions</li>
+        <li>90-day job placement support</li>
+        <li>Lifetime access to course materials</li>
+      </ul>
+      <a href="#" class="ec-cta">→ Enroll for ৳3,200</a>
+      <div class="ec-note">Only 20 seats per batch · 15 taken<br>EMI available · 30-day money-back guarantee</div>
+    </div>
+  </div>
+</section>
+<div class="social-proof-strip">
+  <div class="sp-inner">
+    <div class="sp-stat"><span class="n">4,200+</span><span class="l">Graduates</span></div>
+    <div class="sp-stat"><span class="n">91%</span><span class="l">Placed in 90 days</span></div>
+    <div class="sp-stat"><span class="n">৳45K</span><span class="l">Avg salary lift</span></div>
+    <div class="sp-stat"><span class="n">4.9★</span><span class="l">Student rating</span></div>
+    <div class="sp-stat"><span class="n">3 yrs</span><span class="l">Running since 2022</span></div>
+  </div>
+</div>
+<section class="curriculum">
+  <h2>8-Week Curriculum</h2>
+  <p class="section-sub">Theory and live campaigns every week. You'll have real results to show by graduation.</p>
+  <div class="week-grid">
+    <div class="week"><span class="week-num">Week 1</span><div><div class="week-title">Digital Marketing Foundations &amp; Strategy</div><div class="week-desc">Funnels, buyer psychology, channel selection, KPIs, and your first campaign brief</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 2</span><div><div class="week-title">Meta Ads — Facebook &amp; Instagram</div><div class="week-desc">Campaign structure, audiences, creatives, A/B testing. Run your first ৳500 campaign live.</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 3</span><div><div class="week-title">Google Ads — Search, Display &amp; Shopping</div><div class="week-desc">Keyword research, Quality Score, bidding strategies, Google Analytics 4</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 4</span><div><div class="week-title">SEO — Rank on Google Without Paying</div><div class="week-desc">On-page, technical SEO, link building, content strategy, local SEO for Bangladesh</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 5</span><div><div class="week-title">Email Marketing &amp; Automation</div><div class="week-desc">Mailchimp, list building, drip sequences, segmentation, open rate optimisation</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 6</span><div><div class="week-title">Content Marketing &amp; Social Media Strategy</div><div class="week-desc">Content calendar, copywriting, video for social, community building</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 7</span><div><div class="week-title">Analytics, Reporting &amp; Optimisation</div><div class="week-desc">GA4, Meta Pixel, attribution models, building dashboards clients actually understand</div></div><span class="week-dur">8 hrs</span></div>
+    <div class="week"><span class="week-num">Week 8</span><div><div class="week-title">Capstone Project &amp; Career Preparation</div><div class="week-desc">Present a full-funnel campaign. CV review, LinkedIn optimisation, interview prep.</div></div><span class="week-dur">8 hrs</span></div>
+  </div>
+</section>
+<section class="outcomes">
+  <h2>What you'll be able to do.</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><div class="outcome-icon">📈</div><h4>Run Profitable Ads</h4><p>Manage Facebook and Google ad campaigns with real ROAS targets and proper attribution.</p></div>
+    <div class="outcome"><div class="outcome-icon">🔍</div><h4>Get Pages to Rank on Google</h4><p>Apply SEO systematically — from keyword research to technical fixes — and see real ranking improvements.</p></div>
+    <div class="outcome"><div class="outcome-icon">📊</div><h4>Report Like a Pro</h4><p>Build client-ready dashboards that show exactly what's working and what to do next.</p></div>
+    <div class="outcome"><div class="outcome-icon">💼</div><h4>Get Hired or Go Freelance</h4><p>With a real campaign portfolio and career coaching, you'll have everything a marketing job requires.</p></div>
+    <div class="outcome"><div class="outcome-icon">🎓</div><h4>Earn Google & Meta Certifications</h4><p>Prepare for and pass both official certifications — employers look for these on CVs.</p></div>
+    <div class="outcome"><div class="outcome-icon">🤝</div><h4>Join a Network of 4,200+</h4><p>Permanent access to our alumni community, job board, and monthly industry events.</p></div>
+  </div>
+</section>
+<section class="bottom-cta">
+  <h2>Your marketing career starts on June 10.</h2>
+  <p>Only 5 seats remaining. Early bird price ends May 31.</p>
+  <a href="#">→ Enroll Now for ৳3,200</a>
+</section>
+<footer>© 2025 GrowthPath Academy · growthpath.com.bd · Dhaka · Privacy · Terms</footer>
+</body></html>

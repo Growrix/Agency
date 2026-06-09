@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Momentum — Digital Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#04020c;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#04020c;margin:0 auto;color:#e8e0ff}
+
+.hero{min-height:300px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 26px;border-bottom:1px solid rgba(255,255,255,.06)}
+.hero-mesh{position:absolute;inset:0;background:radial-gradient(ellipse at 10% 50%,rgba(168,85,247,.25) 0%,transparent 55%),radial-gradient(ellipse at 90% 20%,rgba(59,130,246,.2) 0%,transparent 55%),radial-gradient(ellipse at 60% 80%,rgba(236,72,153,.15) 0%,transparent 50%),#04020c}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.04}
+.hero-open{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:5px 14px;font-size:10px;color:rgba(232,224,255,.6);font-weight:500;margin-bottom:16px;width:fit-content}
+.hero-open .dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:#fff;line-height:.9;letter-spacing:-2px}
+.hero h1 .grad{background:linear-gradient(90deg,#a855f7,#3b82f6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:12px;color:rgba(232,224,255,.4);margin-top:10px;line-height:1.65;max-width:260px}
+.hero-tags{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.htag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:4px 11px;font-size:10px;color:rgba(232,224,255,.5)}
+
+.metrics{display:flex;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06)}
+.met{flex:1;text-align:center;padding:13px 0;border-right:1px solid rgba(255,255,255,.05)}
+.met:last-child{border-right:none}
+.met-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(90deg,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.met-l{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(232,224,255,.2);margin-top:4px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(168,85,247,.7);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(168,85,247,.2),transparent)}
+
+.services{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px;position:relative;overflow:hidden;transition:border-color .2s}
+.svc::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,#a855f7,#3b82f6);opacity:.6}
+.svc-emoji{font-size:22px;margin-bottom:7px}
+.svc-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#e8e0ff}
+.svc-desc{font-size:10px;color:rgba(232,224,255,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-size:12px;font-weight:600;color:rgba(168,85,247,.8);margin-top:6px}
+
+.case-row{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px;margin-bottom:8px}
+.case-brand{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e8e0ff;margin-bottom:6px}
+.case-results{display:flex;gap:10px;flex-wrap:wrap}
+.res-pill{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);border-radius:6px;padding:4px 10px;font-size:10px;font-weight:600;color:rgba(168,85,247,.8)}
+.res-pill.blue{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:rgba(100,160,255,.8)}
+.res-pill.pink{background:rgba(236,72,153,.1);border-color:rgba(236,72,153,.2);color:rgba(236,120,180,.8)}
+
+.packages{display:flex;flex-direction:column;gap:8px}
+.pkg{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px}
+.pkg.featured{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(59,130,246,.08));border:1px solid rgba(168,85,247,.3)}
+.pkg-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e8e0ff}
+.pkg-price{font-size:22px;font-weight:800;background:linear-gradient(90deg,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:4px 0 2px;font-family:'Syne',sans-serif}
+.pkg-per{font-size:10px;color:rgba(232,224,255,.3);margin-bottom:10px}
+.pkg-feats{display:flex;flex-direction:column;gap:4px}
+.pkg-feat{font-size:11px;color:rgba(232,224,255,.45);display:flex;align-items:center;gap:7px}
+.pkg-feat::before{content:'→';color:rgba(168,85,247,.6);font-size:10px;flex-shrink:0}
+
+.cta-box{background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(59,130,246,.1));border:1px solid rgba(168,85,247,.25);border-radius:14px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#a855f7,#3b82f6,transparent)}
+.cta-box h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.5px}
+.cta-box p{font-size:12px;color:rgba(232,224,255,.4);margin-bottom:18px;line-height:1.6}
+.cta-btn{display:block;background:linear-gradient(90deg,#a855f7,#3b82f6);color:#fff;border-radius:10px;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;background:rgba(255,255,255,.04);color:rgba(232,224,255,.4);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:11px;text-decoration:none}
+
+.contacts{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;color:rgba(232,224,255,.4)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:linear-gradient(135deg,#a855f7,#3b82f6);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.05);padding:16px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;letter-spacing:1px;color:rgba(232,224,255,.1)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-open"><span class="dot"></span>Accepting new clients</div>
+  <h1>Momen<br><span class="grad">tum.</span></h1>
+  <div class="hero-sub">Performance marketing, social media &amp; brand building that drives measurable growth.</div>
+  <div class="hero-tags">
+    <div class="htag">📱 Social Media</div>
+    <div class="htag">📊 Performance Ads</div>
+    <div class="htag">🎨 Brand Design</div>
+    <div class="htag">📈 SEO</div>
+  </div>
+</div>
+<div class="metrics">
+  <div class="met"><div class="met-n">$12M+</div><div class="met-l">Ad spend managed</div></div>
+  <div class="met"><div class="met-n">80+</div><div class="met-l">Brands grown</div></div>
+  <div class="met"><div class="met-n">4.2x</div><div class="met-l">Avg ROAS</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-emoji">🎯</div><div class="svc-name">Performance Ads</div><div class="svc-desc">Meta, Google, TikTok — data-driven campaigns</div><div class="svc-price">From $800/mo</div></div>
+    <div class="svc"><div class="svc-emoji">📱</div><div class="svc-name">Social Media Mgmt</div><div class="svc-desc">Content, posting, community, stories</div><div class="svc-price">From $500/mo</div></div>
+    <div class="svc"><div class="svc-emoji">🎨</div><div class="svc-name">Brand Identity</div><div class="svc-desc">Logo, guidelines, visual system</div><div class="svc-price">From $1,200</div></div>
+    <div class="svc"><div class="svc-emoji">🔍</div><div class="svc-name">SEO & Content</div><div class="svc-desc">Organic growth, blog, link building</div><div class="svc-price">From $600/mo</div></div>
+    <div class="svc"><div class="svc-emoji">🎬</div><div class="svc-name">Video Production</div><div class="svc-desc">Reels, ads, brand films, UGC</div><div class="svc-price">From $800</div></div>
+    <div class="svc"><div class="svc-emoji">📧</div><div class="svc-name">Email Marketing</div><div class="svc-desc">Flows, campaigns, automation</div><div class="svc-price">From $400/mo</div></div>
+  </div>
+
+  <div class="sec">Recent Results</div>
+  <div class="case-row">
+    <div class="case-brand">🛒 E-commerce Brand · 90 days</div>
+    <div class="case-results">
+      <div class="res-pill">↑ 340% Revenue</div>
+      <div class="res-pill blue">4.8x ROAS</div>
+      <div class="res-pill pink">$180K GMV</div>
+    </div>
+  </div>
+  <div class="case-row">
+    <div class="case-brand">🏠 Real Estate Developer · 60 days</div>
+    <div class="case-results">
+      <div class="res-pill">2,400 Leads</div>
+      <div class="res-pill blue">↓ 68% CPL</div>
+      <div class="res-pill pink">42 Flats Sold</div>
+    </div>
+  </div>
+
+  <div class="sec">Growth Packages</div>
+  <div class="packages">
+    <div class="pkg">
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-price">$800</div>
+      <div class="pkg-per">/ month</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">1 channel (Meta or Google)</div>
+        <div class="pkg-feat">12 content pieces/month</div>
+        <div class="pkg-feat">Monthly performance report</div>
+      </div>
+    </div>
+    <div class="pkg featured">
+      <div class="pkg-name">Growth ⭐ Popular</div>
+      <div class="pkg-price">$2,000</div>
+      <div class="pkg-per">/ month</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">3 channels + SEO</div>
+        <div class="pkg-feat">30 content pieces/month</div>
+        <div class="pkg-feat">Weekly reporting + strategy call</div>
+        <div class="pkg-feat">Dedicated account manager</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">Start Growing</div>
+  <div class="cta-box">
+    <h3>Free 45-min growth audit.</h3>
+    <p>We'll analyse your current marketing, identify your biggest growth levers, and show you exactly what we'd do differently.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📈 Book Free Audit</a>
+    <a href="mailto:grow@momentumagency.io" class="cta-btn2">grow@momentumagency.io</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-2, Dhaka · Remote-first team</div>
+    <div class="cr"><div class="ci">📸</div>@momentumagency</div>
+  </div>
+</div>
+<footer>© 2025 Momentum · Digital Marketing Agency · Dhaka</footer>
+</div></body></html>

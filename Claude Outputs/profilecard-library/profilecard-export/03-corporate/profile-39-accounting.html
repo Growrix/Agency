@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Apex Accounting — Tax, Audit & Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#061a0e;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f5fbf7;margin:0 auto}
+
+.hero{min-height:270px;background:#f5fbf7;position:relative;overflow:hidden;padding:50px 22px 28px;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid #c8e8d0}
+.hero-large-text{position:absolute;top:-20px;right:-20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:110px;font-weight:800;color:rgba(22,101,52,.04);line-height:1;letter-spacing:-8px}
+.hero-rule-top{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#16a34a,#4ade80,#16a34a)}
+.hero-emblem{position:absolute;top:30px;left:22px;width:52px;height:52px;background:#16a34a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hero-lic{position:absolute;top:34px;right:22px;font-size:9px;color:rgba(22,101,52,.4);letter-spacing:.5px;text-align:right;line-height:1.6}
+.hero h1{font-size:36px;font-weight:800;color:#052e16;line-height:.95;letter-spacing:-1.5px}
+.hero h1 .light{font-weight:300;color:rgba(5,46,22,.4)}
+.hero-sub{font-size:11px;color:rgba(5,46,22,.45);margin-top:8px;line-height:1.6}
+.hero-cred{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.cred{background:#dcfce7;border:1px solid #bbf7d0;border-radius:100px;padding:3px 10px;font-size:9px;font-weight:700;color:#16a34a;letter-spacing:.5px}
+
+.key-figures{display:flex;background:#16a34a;padding:0}
+.kf{flex:1;text-align:center;padding:13px 0;border-right:1px solid rgba(255,255,255,.15)}
+.kf:last-child{border-right:none}
+.kf-n{font-size:18px;font-weight:800;color:#fff}
+.kf-l{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#16a34a;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(22,163,74,.2)}
+
+.services{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{background:#fff;border:1px solid #d4f0dc;border-radius:12px;padding:14px}
+.svc.full{grid-column:span 2}
+.svc-icon{font-size:22px;margin-bottom:7px}
+.svc-name{font-size:12px;font-weight:700;color:#052e16}
+.svc-desc{font-size:10px;color:#5a8a6a;margin-top:2px;line-height:1.4}
+.svc-price{font-size:13px;font-weight:700;color:#16a34a;margin-top:6px}
+
+.why-cards{display:flex;flex-direction:column;gap:6px}
+.why{background:#fff;border:1px solid #d4f0dc;border-radius:10px;padding:13px;display:flex;gap:12px;align-items:center}
+.why-icon{width:36px;height:36px;background:#dcfce7;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.why-title{font-size:12px;font-weight:700;color:#052e16}
+.why-desc{font-size:10px;color:#5a8a6a;margin-top:2px}
+
+.team{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.member{background:#fff;border:1px solid #d4f0dc;border-radius:12px;padding:14px;text-align:center}
+.m-av{width:48px;height:48px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:#dcfce7;color:#16a34a;border:2px solid #bbf7d0}
+.m-name{font-size:12px;font-weight:700;color:#052e16}
+.m-title{font-size:10px;color:#5a8a6a;margin-top:2px}
+.m-qual{font-size:9px;color:#16a34a;font-weight:600;margin-top:3px}
+
+.cta{background:#052e16;border-radius:14px;padding:22px;text-align:center}
+.cta h3{font-size:18px;font-weight:800;color:#fff;margin-bottom:7px}
+.cta p{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:#16a34a;color:#fff;border-radius:10px;padding:13px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:7px}
+.cta-btn2{display:block;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px;font-size:11px;text-decoration:none}
+
+.contacts{background:#fff;border:1px solid #d4f0dc;border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #edfaef;font-size:12px;color:#333}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#16a34a;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#052e16;padding:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-large-text">A+</div>
+  <div class="hero-rule-top"></div>
+  <div class="hero-emblem">📊</div>
+  <div class="hero-lic">ICAB Member<br>ICMAB Registered<br>Tax Consultant</div>
+  <h1>Apex<br><span class="light">Accounting</span></h1>
+  <div class="hero-sub">Tax, audit, advisory & bookkeeping for businesses of all sizes. Trusted by 400+ clients since 2010.</div>
+  <div class="hero-cred">
+    <div class="cred">✓ ICAB Member</div>
+    <div class="cred">✓ NBR Listed</div>
+    <div class="cred">✓ ISO 9001</div>
+    <div class="cred">✓ 15yr Practice</div>
+  </div>
+</div>
+<div class="key-figures">
+  <div class="kf"><div class="kf-n">400+</div><div class="kf-l">Clients</div></div>
+  <div class="kf"><div class="kf-n">৳2B+</div><div class="kf-l">Tax Filed</div></div>
+  <div class="kf"><div class="kf-n">15yr</div><div class="kf-l">Practice</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">📊</div><div class="svc-name">Tax Filing</div><div class="svc-desc">Personal & corporate income tax, VAT returns</div><div class="svc-price">From ৳5,000</div></div>
+    <div class="svc"><div class="svc-icon">🔍</div><div class="svc-name">Statutory Audit</div><div class="svc-desc">Annual audit for companies & NGOs</div><div class="svc-price">From ৳25,000</div></div>
+    <div class="svc"><div class="svc-icon">📚</div><div class="svc-name">Bookkeeping</div><div class="svc-desc">Monthly accounts, payroll, bank recon</div><div class="svc-price">From ৳8,000/mo</div></div>
+    <div class="svc"><div class="svc-icon">🏢</div><div class="svc-name">Company Formation</div><div class="svc-desc">RJSC registration, trade licence, TIN</div><div class="svc-price">From ৳15,000</div></div>
+    <div class="svc full"><div class="svc-icon">💼</div><div class="svc-name">CFO-on-Demand</div><div class="svc-desc">Part-time CFO service for growing businesses — budgeting, forecasting, investor reporting &amp; financial strategy without the full-time cost.</div><div class="svc-price">From ৳30,000 / month</div></div>
+  </div>
+
+  <div class="sec">Why Apex</div>
+  <div class="why-cards">
+    <div class="why"><div class="why-icon">⚡</div><div><div class="why-title">72-Hour Tax Return Turnaround</div><div class="why-desc">We prepare and file personal tax returns in 3 business days or less</div></div></div>
+    <div class="why"><div class="why-icon">🔒</div><div><div class="why-title">100% Confidentiality</div><div class="why-desc">All financial data is encrypted and never shared with third parties</div></div></div>
+    <div class="why"><div class="why-icon">📱</div><div><div class="why-title">WhatsApp-First Support</div><div class="why-desc">Reach your dedicated accountant directly — no call centres, no bots</div></div></div>
+  </div>
+
+  <div class="sec">Our Team</div>
+  <div class="team">
+    <div class="member"><div class="m-av">SA</div><div class="m-name">S. Ahmed FCA</div><div class="m-title">Senior Partner</div><div class="m-qual">ICAB · 20yr exp</div></div>
+    <div class="member"><div class="m-av">NR</div><div class="m-name">N. Rahman FCMA</div><div class="m-title">Tax Director</div><div class="m-qual">ICMAB · 15yr exp</div></div>
+    <div class="member"><div class="m-av">KI</div><div class="m-name">K. Islam ACA</div><div class="m-title">Audit Manager</div><div class="m-qual">ICAB · 10yr exp</div></div>
+    <div class="member"><div class="m-av">FH</div><div class="m-name">F. Hossain</div><div class="m-title">VAT Specialist</div><div class="m-qual">NBR Listed · 8yr</div></div>
+  </div>
+
+  <div class="sec">Book a Consultation</div>
+  <div class="cta">
+    <h3>Free 30-minute tax consultation.</h3>
+    <p>Speak with a senior accountant about your tax, audit or business needs — at no charge.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📊 Book Free Consultation</a>
+    <a href="mailto:tax@apexaccounting.com.bd" class="cta-btn2">tax@apexaccounting.com.bd</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Level 5, Dhanmondi Tower, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am–5:30pm</div>
+    <div class="cr"><div class="ci">🌐</div>www.apexaccounting.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 Apex Accounting · ICAB & ICMAB Registered · Dhaka</footer>
+</div></body></html>

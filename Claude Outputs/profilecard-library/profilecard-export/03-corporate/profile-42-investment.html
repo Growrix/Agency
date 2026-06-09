@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Meridian Capital — Investment & Private Equity</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Josefin Sans',sans-serif;background:#08060a;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#09070c;margin:0 auto;color:#e8e0d0}
+
+.hero{min-height:300px;background:#09070c;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 26px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(200,168,48,.08) 0%,transparent 60%)}
+.hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(200,168,48,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,48,.04) 1px,transparent 1px);background-size:40px 40px}
+.hero-gold-top{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,#c8a830 50%,transparent 90%)}
+.hero-monogram{position:absolute;top:24px;right:20px;font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:rgba(200,168,48,.04);line-height:1;font-style:italic}
+.h-eyebrow{font-size:8px;letter-spacing:5px;text-transform:uppercase;color:rgba(200,168,48,.4);margin-bottom:16px;position:relative}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:#e8e0d0;line-height:.9;letter-spacing:.5px;position:relative}
+.hero h1 em{font-style:italic;color:#c8a830}
+.hero-rule{width:48px;height:1px;background:linear-gradient(90deg,#c8a830,transparent);margin:14px 0;position:relative}
+.hero-tagline{font-size:11px;color:rgba(232,224,208,.35);line-height:1.7;max-width:250px;position:relative;letter-spacing:.3px}
+
+.aum-bar{display:flex;background:#130e18;border-bottom:1px solid rgba(200,168,48,.1)}
+.aum{flex:1;text-align:center;padding:14px 0;border-right:1px solid rgba(200,168,48,.08)}
+.aum:last-child{border-right:none}
+.aum-n{font-family:'Cormorant Garamond',serif;font-size:22px;color:#c8a830;font-weight:400;letter-spacing:.5px}
+.aum-l{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,224,208,.2);margin-top:4px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,168,48,.45);margin:26px 0 12px;display:flex;align-items:center;gap:12px}
+.sec::before{content:'—';color:rgba(200,168,48,.25)}
+.sec::after{content:'';flex:1;height:1px;background:rgba(200,168,48,.12)}
+
+.focus-areas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.focus{background:#130e18;border:1px solid rgba(200,168,48,.1);border-radius:4px;padding:14px}
+.focus-icon{font-size:20px;margin-bottom:8px}
+.focus-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;color:#e8e0d0;font-style:italic}
+.focus-desc{font-size:10px;color:rgba(232,224,208,.3);margin-top:3px;line-height:1.4;letter-spacing:.2px}
+.focus-ticket{font-size:10px;color:rgba(200,168,48,.55);margin-top:6px;font-weight:600;letter-spacing:.5px}
+
+.portfolio{display:flex;flex-direction:column;gap:2px}
+.port-row{background:#130e18;border:1px solid rgba(200,168,48,.08);padding:13px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.port-row:first-child{border-radius:4px 4px 0 0}
+.port-row:last-child{border-radius:0 0 4px 4px}
+.port-name{font-family:'Cormorant Garamond',serif;font-size:14px;color:#e8e0d0;font-style:italic}
+.port-sector{font-size:9px;color:rgba(232,224,208,.3);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+.port-return{font-family:'Cormorant Garamond',serif;font-size:16px;color:#c8a830;text-align:right}
+.port-year{font-size:9px;color:rgba(232,224,208,.2);text-align:right;margin-top:2px;letter-spacing:.5px}
+
+.team{display:flex;flex-direction:column;gap:8px}
+.partner{background:#130e18;border:1px solid rgba(200,168,48,.1);border-radius:4px;padding:14px;display:flex;gap=12px;gap:12px;align-items:center}
+.p-av{width:44px;height:44px;border-radius:50%;border:1px solid rgba(200,168,48,.3);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:#c8a830;flex-shrink:0;background:#1a1520}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:15px;color:#e8e0d0;font-style:italic}
+.p-title{font-size:10px;color:rgba(232,224,208,.35);margin-top:2px;letter-spacing:.3px}
+.p-exp{font-size:9px;color:rgba(200,168,48,.45);margin-top:3px;letter-spacing:.3px}
+
+.invest-box{background:#130e18;border:1px solid rgba(200,168,48,.2);border-radius:4px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.invest-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#c8a830,transparent)}
+.invest-eyebrow{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,168,48,.35);margin-bottom:14px}
+.invest-box h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#e8e0d0;font-style:italic;margin-bottom:8px}
+.invest-box p{font-size:11px;color:rgba(232,224,208,.3);line-height:1.7;margin-bottom:18px;letter-spacing:.2px}
+.invest-btn{display:block;border:1px solid #c8a830;color:#c8a830;padding:13px;text-align:center;font-size:9px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;margin-bottom:6px}
+.invest-btn2{display:block;color:rgba(232,224,208,.2);text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+
+.contacts{background:#130e18;border:1px solid rgba(200,168,48,.08);border-radius:4px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(200,168,48,.06);font-size:11px;color:rgba(232,224,208,.3);letter-spacing:.3px}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;border:1px solid rgba(200,168,48,.2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#06040a;border-top:1px solid rgba(200,168,48,.1);padding:20px;text-align:center;font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(232,224,208,.15)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-gold-top"></div>
+  <div class="hero-monogram">M</div>
+  <div class="h-eyebrow">Private Equity · Venture Capital · Est. 2005</div>
+  <h1>Meridian<br><em>Capital</em></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-tagline">Partnering with exceptional founders and management teams to build enduring businesses in South Asia.</div>
+</div>
+<div class="aum-bar">
+  <div class="aum"><div class="aum-n">$240M</div><div class="aum-l">AUM</div></div>
+  <div class="aum"><div class="aum-n">34</div><div class="aum-l">Portfolio Companies</div></div>
+  <div class="aum"><div class="aum-n">19yr</div><div class="aum-l">Track Record</div></div>
+</div>
+<div class="body">
+  <div class="sec">Investment Focus</div>
+  <div class="focus-areas">
+    <div class="focus"><div class="focus-icon">💊</div><div class="focus-name">Healthcare</div><div class="focus-desc">Pharma, diagnostics, hospital chains</div><div class="focus-ticket">$2M – $15M</div></div>
+    <div class="focus"><div class="focus-icon">💻</div><div class="focus-name">Technology</div><div class="focus-desc">SaaS, fintech, marketplace, AI</div><div class="focus-ticket">$500K – $5M</div></div>
+    <div class="focus"><div class="focus-icon">🏭</div><div class="focus-name">Manufacturing</div><div class="focus-desc">Export-oriented, value-add industries</div><div class="focus-ticket">$5M – $30M</div></div>
+    <div class="focus"><div class="focus-icon">🌾</div><div class="focus-name">Agribusiness</div><div class="focus-desc">Food processing, cold chain, inputs</div><div class="focus-ticket">$3M – $20M</div></div>
+  </div>
+
+  <div class="sec">Selected Portfolio</div>
+  <div class="portfolio">
+    <div class="port-row"><div><div class="port-name">NexaPharma Ltd.</div><div class="port-sector">Healthcare · PE Growth</div></div><div><div class="port-return">3.4x</div><div class="port-year">Exited 2022</div></div></div>
+    <div class="port-row"><div><div class="port-name">ShipEasy (Current)</div><div class="port-sector">Logistics Tech · Series B</div></div><div><div class="port-return">Active</div><div class="port-year">Invested 2021</div></div></div>
+    <div class="port-row"><div><div class="port-name">GrainHub BD</div><div class="port-sector">Agritech · Series A</div></div><div><div class="port-return">Active</div><div class="port-year">Invested 2023</div></div></div>
+  </div>
+
+  <div class="sec">Investment Team</div>
+  <div class="team">
+    <div class="partner"><div class="p-av">AM</div><div><div class="p-name">Arif Mahmood</div><div class="p-title">Managing Partner</div><div class="p-exp">Wharton · Former IFC · 22yr PE experience</div></div></div>
+    <div class="partner"><div class="p-av">SR</div><div><div class="p-name">Sadia Rahman</div><div class="p-title">Partner · Venture</div><div class="p-exp">LBS · Former Sequoia India · 14yr VC</div></div></div>
+  </div>
+
+  <div class="sec">Investment Enquiries</div>
+  <div class="invest-box">
+    <div class="invest-eyebrow">Confidential Conversations Only</div>
+    <h3>Building something exceptional?</h3>
+    <p>We invest in businesses with strong unit economics, defensible market positions, and founders who prioritise long-term value creation over short-term metrics.</p>
+    <a href="mailto:deals@meridiancapital.com.bd" class="invest-btn">Submit a Deck</a>
+    <a href="https://wa.me/8801700000000" class="invest-btn2">Schedule a partner conversation →</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📧</div>deals@meridiancapital.com.bd</div>
+    <div class="cr"><div class="ci">📍</div>Meridian House, Gulshan-2, Dhaka</div>
+    <div class="cr"><div class="ci">🌐</div>www.meridiancapital.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 Meridian Capital · Private Equity · Venture Capital · Dhaka</footer>
+</div></body></html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rina Ahmed — Real Estate Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;min-height:100vh}
+body{background:linear-gradient(135deg,#fdf4e8,#fef9f0);display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Nunito',sans-serif;padding:20px}
+.card{width:400px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 8px 60px rgba(200,120,20,.15)}
+.card-hero{background:linear-gradient(135deg,#c87820,#e8a838);padding:40px 32px 32px;text-align:center}
+.initials{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.6);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:32px;color:#fff;font-weight:700}
+.card-hero h1{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:4px}
+.card-hero p{color:rgba(255,255,255,.8);font-size:13px;margin-bottom:16px}
+.hero-stats{display:flex;justify-content:center;gap:32px}
+.h-stat span{display:block;text-align:center}
+.h-stat .num{font-size:20px;font-weight:700;color:#fff;font-family:'Playfair Display',serif}
+.h-stat .lab{font-size:10px;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.card-body{padding:28px}
+.company{display:flex;align-items:center;gap:12px;background:#fdf6ee;border:1px solid #f0d8aa;border-radius:12px;padding:14px;margin-bottom:22px}
+.company-icon{width:40px;height:40px;background:#c87820;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:#fff}
+.company p:first-child{font-size:14px;font-weight:600;color:#1a1208}
+.company p:last-child{font-size:12px;color:#8a6030}
+.areas{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.area-tag{background:#fdf6ee;border:1px solid #f0d8aa;border-radius:20px;padding:5px 14px;font-size:12px;color:#8a5018;font-weight:600}
+.contact-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.c-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:12px;text-decoration:none;font-size:14px;font-weight:600;transition:.2s}
+.c-btn-gold{background:#c87820;color:#fff}
+.c-btn-gold:hover{background:#a86010}
+.c-btn-outline{border:1.5px solid #c87820;color:#c87820;background:transparent}
+.c-btn-outline:hover{background:#fdf6ee}
+.testimonial{background:#fdf6ee;border-left:3px solid #c87820;border-radius:0 12px 12px 0;padding:14px 16px;margin-bottom:20px}
+.testimonial p{font-size:13px;color:#5a3818;font-style:italic;line-height:1.6}
+.testimonial .author{font-size:11px;color:#8a6030;margin-top:6px;font-style:normal;font-weight:600}
+.qr-row{display:flex;align-items:center;gap:14px;border-top:1px solid #f0ede8;padding-top:18px}
+.qr{width:56px;height:56px;background:#fdf6ee;border:1px solid #e8d0a0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.qr-text p{font-size:12px;color:#8a6030}
+.qr-text a{font-size:12px;color:#c87820;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-hero">
+    <div class="initials">RA</div>
+    <h1>Rina Ahmed</h1>
+    <p>Senior Property Consultant · REAB Certified</p>
+    <div class="hero-stats">
+      <div class="h-stat"><span class="num">320+</span><span class="lab">Properties Sold</span></div>
+      <div class="h-stat"><span class="num">14yr</span><span class="lab">Experience</span></div>
+      <div class="h-stat"><span class="num">4.9★</span><span class="lab">Rating</span></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="company"><div class="company-icon">🏢</div><div><p>Prime Properties BD</p><p>Gulshan Branch · Senior Agent</p></div></div>
+    <div class="areas"><span class="area-tag">Gulshan</span><span class="area-tag">Banani</span><span class="area-tag">Baridhara</span><span class="area-tag">Uttara</span><span class="area-tag">Bashundhara</span></div>
+    <div class="contact-btns">
+      <a href="tel:+8801700000000" class="c-btn c-btn-gold">📞 Call Now — +880 1700-000000</a>
+      <a href="https://wa.me/8801700000000" class="c-btn c-btn-outline">💬 WhatsApp Me</a>
+    </div>
+    <div class="testimonial"><p>"Rina found us our dream apartment in Gulshan in under 2 weeks. Honest, fast, and zero pressure."</p><div class="author">— Kamal &amp; Fatima H., Satisfied Clients</div></div>
+    <div class="qr-row"><div class="qr">▦</div><div class="qr-text"><p>Scan to view my listings</p><a href="#">→ primepropbd.com/rina</a></div></div>
+  </div>
+</div>
+</body></html>

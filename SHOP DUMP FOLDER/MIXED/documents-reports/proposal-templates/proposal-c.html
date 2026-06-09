@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Growth Strategy Proposal — Apex Tech · Meridian Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f2f4f8;font-family:'Source Sans 3',sans-serif;color:#1a2840}
+.cover{background:#1a2840;color:#fff;padding:72px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;min-height:400px}
+.cover-left h1{font-family:'Libre Baskerville',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:400;line-height:1.1;margin-bottom:12px}
+.cover-left p{color:rgba(255,255,255,.4);font-size:14px;font-weight:300}
+.cover-right{display:flex;flex-direction:column;gap:16px}
+.cover-meta{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:18px 22px}
+.cover-meta .label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px}
+.cover-meta .value{font-size:14px;color:#fff;font-weight:400}
+.cover-accent{background:#4a90ff;height:4px;width:60px;margin-top:20px}
+.body{background:#fff;max-width:920px;margin:0 auto;padding:56px 56px 48px;box-shadow:0 2px 40px rgba(0,0,0,.06)}
+.section{margin-bottom:48px}
+.section-number{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#4a90ff;margin-bottom:10px}
+h2{font-family:'Libre Baskerville',serif;font-size:1.8rem;font-weight:400;margin-bottom:18px;color:#1a2840}
+p{font-size:15px;color:#4a5a70;line-height:1.85;font-weight:300;margin-bottom:14px}
+.divider{height:1px;background:#e8ecf4;margin:40px 0}
+.phases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+.phase-card{border:1px solid #dde2ec;border-radius:10px;overflow:hidden}
+.phase-header{padding:16px 18px;border-bottom:1px solid #dde2ec}
+.phase-1 .phase-header{background:#1a2840;color:#fff}
+.phase-2 .phase-header{background:#1e3a6e;color:#fff}
+.phase-3 .phase-header{background:#4a90ff;color:#fff}
+.phase-header .num{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.6;margin-bottom:4px}
+.phase-header .name{font-family:'Libre Baskerville',serif;font-size:1.1rem;font-weight:400}
+.phase-body{padding:18px;background:#f8fafc}
+.phase-body ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.phase-body li{font-size:13px;color:#4a5a70;display:flex;align-items:flex-start;gap:8px}
+.phase-body li::before{content:'→';color:#4a90ff;flex-shrink:0;margin-top:1px}
+.phase-timeline{font-size:11px;color:#94a3b8;margin-top:12px;padding-top:10px;border-top:1px solid #e2e8f4;letter-spacing:1px;text-transform:uppercase}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#dde2ec;border:1px solid #dde2ec;border-radius:10px;overflow:hidden;margin:20px 0}
+.roi-item{background:#f8fafc;padding:24px;text-align:center}
+.roi-num{font-family:'Libre Baskerville',serif;font-size:2rem;color:#1a2840;display:block;margin-bottom:4px}
+.roi-label{font-size:12px;color:#64748b;letter-spacing:1px;text-transform:uppercase}
+.fee-table{width:100%;border-collapse:collapse;margin:16px 0}
+.fee-table th{background:#1a2840;color:#fff;padding:12px 16px;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:400;text-align:left}
+.fee-table td{padding:14px 16px;border-bottom:1px solid #e8ecf4;font-size:14px}
+.fee-table td:last-child{text-align:right;font-weight:600;color:#1a2840}
+.fee-table tr:last-child td{background:#f0f4f8;font-weight:700;border-bottom:none}
+.fee-table tr:last-child td:last-child{color:#4a90ff;font-size:18px}
+.sign-box{background:#f0f4f8;border:1px solid #dde2ec;border-radius:12px;padding:40px;text-align:center;margin-top:48px}
+.sign-box h3{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:400;margin-bottom:10px;color:#1a2840}
+.sign-box p{font-size:14px;color:#64748b;margin-bottom:28px;max-width:380px;margin-left:auto;margin-right:auto}
+.btn-primary{display:inline-block;background:#1a2840;color:#fff;padding:14px 36px;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;margin-right:10px}
+.btn-secondary{display:inline-block;border:1px solid #1a2840;color:#1a2840;padding:13px 28px;text-decoration:none;border-radius:6px;font-size:14px}
+.sign-box .note{font-size:12px;color:#94a3b8;margin-top:16px}
+@media(max-width:768px){.cover{grid-template-columns:1fr;padding:40px 24px;gap:24px}.body{padding:32px 24px}.phases-grid{grid-template-columns:1fr}.roi-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-left">
+    <h1>Growth Strategy Proposal</h1>
+    <p>FY 2025–2026 · Apex Technologies Ltd.</p>
+    <div class="cover-accent"></div>
+  </div>
+  <div class="cover-right">
+    <div class="cover-meta"><div class="label">Prepared by</div><div class="value">Meridian Consulting · Gulshan-2, Dhaka</div></div>
+    <div class="cover-meta"><div class="label">Reference</div><div class="value">MC-2025-AP-042 · Confidential</div></div>
+    <div class="cover-meta"><div class="label">Date / Valid Until</div><div class="value">22 May 2025 · Expires 5 June 2025</div></div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="section">
+    <div class="section-number">01 / Executive Summary</div>
+    <h2>The Objective</h2>
+    <p>Meridian Consulting proposes a structured 18-month growth programme to accelerate Apex Technologies' revenue from ৳85 Crore to ৳2.5 Lakh Crore (3× growth), while improving unit economics and building institutional-grade operational infrastructure for scale.</p>
+    <p>Based on our four-week assessment, we have identified 12 high-impact opportunities across market expansion, product commercialisation, talent structure, and capital efficiency. This proposal outlines the three-phase implementation roadmap, expected returns, and our engagement terms.</p>
+    <div class="roi-grid">
+      <div class="roi-item"><span class="roi-num">3×</span><div class="roi-label">Revenue Target</div></div>
+      <div class="roi-item"><span class="roi-num">90 days</span><div class="roi-label">First ROI</div></div>
+      <div class="roi-item"><span class="roi-num">18 months</span><div class="roi-label">Programme Duration</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-number">02 / Approach</div>
+    <h2>Three-Phase Roadmap</h2>
+    <div class="phases-grid">
+      <div class="phase-card phase-1">
+        <div class="phase-header"><div class="num">Phase 1</div><div class="name">Foundation</div></div>
+        <div class="phase-body">
+          <ul>
+            <li>Full commercial audit (revenue, CAC, LTV, churn)</li>
+            <li>Customer research — 40 interviews</li>
+            <li>Competitive intelligence mapping</li>
+            <li>Organisational capability assessment</li>
+          </ul>
+          <div class="phase-timeline">Month 1–3</div>
+        </div>
+      </div>
+      <div class="phase-card phase-2">
+        <div class="phase-header"><div class="num">Phase 2</div><div class="name">Execution</div></div>
+        <div class="phase-body">
+          <ul>
+            <li>GTM strategy launch — 2 new verticals</li>
+            <li>Pricing model optimisation</li>
+            <li>Sales enablement programme</li>
+            <li>Partnership channel development</li>
+          </ul>
+          <div class="phase-timeline">Month 4–9</div>
+        </div>
+      </div>
+      <div class="phase-card phase-3">
+        <div class="phase-header"><div class="num">Phase 3</div><div class="name">Scale</div></div>
+        <div class="phase-body">
+          <ul>
+            <li>Market expansion — 2 additional cities</li>
+            <li>Operational efficiency programme</li>
+            <li>Management team build</li>
+            <li>Series A preparation support</li>
+          </ul>
+          <div class="phase-timeline">Month 10–18</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-number">03 / Investment</div>
+    <h2>Engagement Fee</h2>
+    <table class="fee-table">
+      <thead><tr><th>Component</th><th>Duration</th><th>Fee</th></tr></thead>
+      <tbody>
+        <tr><td>Phase 1 — Foundation &amp; Diagnosis</td><td>3 months</td><td>৳6,00,000</td></tr>
+        <tr><td>Phase 2 — Growth Execution</td><td>6 months</td><td>৳8,00,000</td></tr>
+        <tr><td>Phase 3 — Scale &amp; Sustain</td><td>9 months</td><td>৳4,00,000</td></tr>
+        <tr><td colspan="2"><strong>Total Programme Investment</strong></td><td>৳18,00,000</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#94a3b8">Payable in 3 equal instalments at the start of each phase. Excludes out-of-pocket expenses. Performance bonus of 2% of incremental revenue above target may be negotiated.</p>
+  </div>
+
+  <div class="sign-box">
+    <h3>Proceed with Meridian?</h3>
+    <p>Accepting this proposal locks your Q2 start date. We are currently accepting one additional client for this quarter.</p>
+    <a href="#" class="btn-primary">Accept Proposal</a>
+    <a href="#" class="btn-secondary">Schedule a Call</a>
+    <div class="note">Proposal expires 5 June 2025 · meridianconsult.com.bd · +880 2-9876543</div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "coming-soon-c.html",
+        "type_slug":  "coming-soon-maintenance-pages",
+        "parent_category_slug":  "tools-utilities",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/tools-utilities/coming-soon-maintenance-pages/coming-soon-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\coming-soon-c.html"
+    },
+    {
+        "source_file":  "coming-soon-b.html",
+        "type_slug":  "coming-soon-maintenance-pages",
+        "parent_category_slug":  "tools-utilities",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/tools-utilities/coming-soon-maintenance-pages/coming-soon-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\coming-soon-b.html"
+    },
+    {
+        "source_file":  "coming-soon-a.html",
+        "type_slug":  "coming-soon-maintenance-pages",
+        "parent_category_slug":  "tools-utilities",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/tools-utilities/coming-soon-maintenance-pages/coming-soon-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\coming-soon-a.html"
+    }
+]

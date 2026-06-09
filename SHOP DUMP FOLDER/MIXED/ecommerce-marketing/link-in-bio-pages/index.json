@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "link-in-bio-c.html",
+        "type_slug":  "link-in-bio-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/ecommerce-marketing/link-in-bio-pages/link-in-bio-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\link-in-bio-c.html"
+    },
+    {
+        "source_file":  "link-in-bio-b.html",
+        "type_slug":  "link-in-bio-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/ecommerce-marketing/link-in-bio-pages/link-in-bio-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\link-in-bio-b.html"
+    },
+    {
+        "source_file":  "link-in-bio-a.html",
+        "type_slug":  "link-in-bio-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/ecommerce-marketing/link-in-bio-pages/link-in-bio-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\link-in-bio-a.html"
+    }
+]

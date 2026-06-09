@@ -103,9 +103,9 @@ export function Header() {
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </button>
           <Link
-            href="/shop"
+            href="/products"
             className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
-            aria-label="Open cart"
+            aria-label="Browse products"
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
           </Link>

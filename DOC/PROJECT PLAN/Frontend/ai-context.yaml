@@ -47,9 +47,15 @@ surfaces:
       - /services
       - /services/saas-applications
       - /services/websites
+      - /services/html-business-profiles
       - /services/mcp-servers
       - /services/automation
+      - /services/template-customization
       - /additional-services
+      - /solutions/for-startups
+      - /solutions/for-local-businesses
+      - /solutions/for-agencies
+      - /solutions/for-saas-founders
       - /portfolio
       - /portfolio/[slug]
       - /pricing
@@ -63,9 +69,15 @@ surfaces:
       - proof and credibility
   commerce:
     routes:
+      - /products
+      - /products/[slug]
+      - /products/category/[category]
+      - /products/bundles
+      - /products/free
       - /shop
       - /shop/[slug]
       - /checkout
+      - /html-business-profiles
     capabilities:
       - category browsing
       - product discovery
@@ -156,6 +168,7 @@ read_paths:
     - DOC/PROJECT PLAN/Frontend/services-page.md
     - DOC/PROJECT PLAN/Frontend/service-saas-applications-page.md
     - DOC/PROJECT PLAN/Frontend/service-websites-page.md
+    - DOC/PROJECT PLAN/Frontend/service-html-business-profiles-page.md
     - DOC/PROJECT PLAN/Frontend/service-mcp-servers-page.md
     - DOC/PROJECT PLAN/Frontend/service-automation-page.md
   build_proof:
@@ -171,6 +184,7 @@ read_paths:
     - DOC/PROJECT PLAN/Frontend/01-design-system.md
     - DOC/PROJECT PLAN/Frontend/02-component-system.md
     - DOC/PROJECT PLAN/Frontend/shop-page.md
+    - DOC/PROJECT PLAN/Frontend/html-business-profiles-page.md
     - DOC/PROJECT PLAN/Frontend/product-detail-page.md
     - DOC/PROJECT PLAN/Frontend/checkout-page.md
   build_conversion:
@@ -201,6 +215,7 @@ document_groups:
     - DOC/PROJECT PLAN/Frontend/services-page.md
     - DOC/PROJECT PLAN/Frontend/service-saas-applications-page.md
     - DOC/PROJECT PLAN/Frontend/service-websites-page.md
+    - DOC/PROJECT PLAN/Frontend/service-html-business-profiles-page.md
     - DOC/PROJECT PLAN/Frontend/service-mcp-servers-page.md
     - DOC/PROJECT PLAN/Frontend/service-automation-page.md
     - DOC/PROJECT PLAN/Frontend/pricing-page.md
@@ -210,6 +225,7 @@ document_groups:
     - DOC/PROJECT PLAN/Frontend/case-study-page.md
   commerce:
     - DOC/PROJECT PLAN/Frontend/shop-page.md
+    - DOC/PROJECT PLAN/Frontend/html-business-profiles-page.md
     - DOC/PROJECT PLAN/Frontend/product-detail-page.md
     - DOC/PROJECT PLAN/Frontend/checkout-page.md
   conversion_and_support:

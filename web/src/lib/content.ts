@@ -11,6 +11,15 @@ export const SERVICES = [
     pillars: ["Conversion architecture", "Design system & motion", "SEO & Core Web Vitals", "CMS handoff"],
   },
   {
+    slug: "template-customization",
+    name: "Template Customization",
+    short: "Bought a template? We customize, connect, and launch it for you.",
+    long: "Done-For-You setup for purchased templates — branding, content, deployment, forms, payments, and QA so non-technical teams can go live without touching code.",
+    typical: "Post-purchase setup or bundle upgrade",
+    timeline: "3-14 days",
+    pillars: ["Brand adaptation", "Deployment", "Form + payment wiring", "Launch QA"],
+  },
+  {
     slug: "saas-applications",
     name: "SaaS Applications",
     short: "SaaS and product platforms for web-first and mobile-first teams.",
@@ -93,10 +102,10 @@ export const TESTIMONIALS = [
 ];
 
 export const HOME_STATS = [
-  { value: "12", label: "Launches shipped", hint: "Websites, SaaS, ready websites" },
-  { value: "2", label: "Years in motion", hint: "Independent studio" },
-  { value: "4", label: "Core services", hint: "Websites, SaaS, MCP, automation" },
-  { value: "4", label: "Delivery phases", hint: "Discovery to optimization" },
+  { value: "50+", label: "Digital products", hint: "Templates, starters, and toolkits" },
+  { value: "3", label: "Purchase tiers", hint: "Standard, Premium, Done-For-You" },
+  { value: "24h", label: "Response window", hint: "Sales and support routing" },
+  { value: "4", label: "Buyer paths", hint: "DIY, setup, build, or chat" },
 ];
 
 export const CLIENT_LOGOS = [

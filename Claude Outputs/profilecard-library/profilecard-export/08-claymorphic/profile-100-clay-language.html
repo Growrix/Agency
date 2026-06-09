@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>LingoBuddy — Language Learning App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900;1000&family=Nunito+Sans:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center;min-height:100vh;background:#e8d5ff}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(165deg,#ddc4ff 0%,#c4ddff 45%,#c4ffee 100%);margin:0 auto}
+
+/* CLAYMORPHISM CORE */
+.clay{
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.95) inset,
+    0 -3px 0 rgba(0,0,0,.08) inset,
+    0 12px 32px rgba(0,0,0,.13),
+    0 4px 8px rgba(0,0,0,.08);
+}
+.clay-sm{
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.9) inset,
+    0 -2px 0 rgba(0,0,0,.07) inset,
+    0 8px 20px rgba(0,0,0,.1),
+    0 2px 6px rgba(0,0,0,.06);
+}
+
+/* HERO */
+.hero{padding:32px 18px 20px;position:relative;overflow:hidden;min-height:290px;display:flex;flex-direction:column;justify-content:flex-end}
+.floating-em{position:absolute;pointer-events:none;animation:float 3s ease-in-out infinite}
+.fe1{font-size:50px;top:16px;right:14px;animation-delay:0s}
+.fe2{font-size:34px;top:56px;left:10px;animation-delay:.6s}
+.fe3{font-size:28px;top:110px;right:52px;animation-delay:1.2s}
+.fe4{font-size:24px;bottom:48px;left:24px;animation-delay:1.8s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border-radius:100px;padding:6px 16px;font-size:11px;font-weight:800;color:#6030d0;margin-bottom:14px;width:fit-content}
+.hero-badge{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 6px 18px rgba(96,48,208,.2),0 2px 5px rgba(0,0,0,.07)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:44px;font-weight:1000;color:#1e0860;line-height:.88;letter-spacing:-2px}
+.hero h1 .wave{color:#d040c0;display:inline-block;animation:wave-anim 1s ease-in-out infinite alternate}
+@keyframes wave-anim{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.hero-sub{font-size:12px;color:rgba(30,8,96,.45);margin-top:9px;line-height:1.55;font-weight:600;max-width:280px}
+.stars{display:flex;align-items:center;gap:6px;margin-top:11px}
+.star-val{font-size:13px;font-weight:800;color:rgba(30,8,96,.45)}
+
+/* STREAK BAR */
+.streak-bar{background:#fff;border-radius:20px;padding:14px 18px;margin:8px 14px;display:flex;align-items:center;gap:12px}
+.streak-bar{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 8px 20px rgba(0,0,0,.08),0 2px 5px rgba(0,0,0,.05)}
+.streak-icon{font-size:28px}
+.streak-text{flex:1}
+.streak-n{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:#ff5010;letter-spacing:-1px;line-height:1}
+.streak-l{font-size:10px;color:rgba(30,8,96,.4);font-weight:600;margin-top:1px}
+.streak-days{display:flex;gap:5px}
+.day{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+.day.done{background:#ff5010;color:#fff;box-shadow:0 3px 8px rgba(255,80,16,.3)}
+.day.today{background:linear-gradient(135deg,#ff5010,#ff8030);color:#fff;box-shadow:0 3px 10px rgba(255,80,16,.4);animation:pulse-day .8s infinite alternate}
+@keyframes pulse-day{from{transform:scale(1)}to{transform:scale(1.08)}}
+.day.empty{background:rgba(30,8,96,.06);color:rgba(30,8,96,.25)}
+
+/* BODY */
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:rgba(30,8,96,.35);margin:18px 0 12px;letter-spacing:-.3px}
+
+.languages{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.lang-card{background:#fff;border-radius:22px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:115px}
+.lc1{background:linear-gradient(135deg,#fff5e0,#ffe0c0)}
+.lc2{background:linear-gradient(135deg,#e0f5ff,#c0e8ff)}
+.lc3{background:linear-gradient(135deg,#ffe0f5,#ffc0e8)}
+.lc4{background:linear-gradient(135deg,#e0ffe8,#c0ffd0)}
+.lc5{background:linear-gradient(135deg,#f0e0ff,#ddc0ff)}
+.lc6{background:linear-gradient(135deg,#fff0e0,#ffddbb)}
+.lang-flag{font-size:34px;margin-bottom:8px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.15))}
+.lang-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#1e0860;letter-spacing:-.3px}
+.lang-level{font-size:10px;color:rgba(30,8,96,.4);margin-top:3px;font-weight:700}
+.lang-progress{width:100%;height:5px;background:rgba(30,8,96,.08);border-radius:100px;margin-top:8px;overflow:hidden}
+.lp-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#7030d0,#d040c0)}
+
+.plans{display:flex;flex-direction:column;gap:9px}
+.plan-clay{background:#fff;border-radius:22px;padding:18px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;overflow:hidden}
+.plan-clay.featured{background:linear-gradient(135deg,#7030d0,#d040c0)}
+.plan-clay.featured::before{content:'⭐ Most popular';position:absolute;top:11px;right:14px;font-size:9px;background:rgba(255,255,255,.25);color:#fff;border-radius:100px;padding:3px 9px;font-weight:800}
+.plan-icon{font-size:30px;flex-shrink:0}
+.plan-name{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#1e0860;letter-spacing:-.3px}
+.plan-clay.featured .plan-name{color:#fff}
+.plan-desc{font-size:10px;color:rgba(30,8,96,.4);margin-top:3px;font-weight:600}
+.plan-clay.featured .plan-desc{color:rgba(255,255,255,.6)}
+.plan-price{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#7030d0;text-align:right;flex-shrink:0;letter-spacing:-1px}
+.plan-clay.featured .plan-price{color:#fff}
+.plan-per{font-size:9px;font-weight:600;color:rgba(30,8,96,.3);display:block;margin-top:2px}
+.plan-clay.featured .plan-per{color:rgba(255,255,255,.5)}
+
+.cta-clay{background:linear-gradient(135deg,#7030d0,#d040c0);border-radius:26px;padding:26px;text-align:center;margin-top:4px}
+.cta-clay{box-shadow:0 3px 0 rgba(255,255,255,.2) inset,0 -3px 0 rgba(0,0,0,.15) inset,0 16px 40px rgba(112,48,208,.35),0 4px 12px rgba(0,0,0,.12)}
+.cta-clay h3{font-family:'Nunito',sans-serif;font-size:26px;font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:8px;line-height:.95}
+.cta-clay p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:20px;line-height:1.5;font-weight:600}
+.cta-btn{display:block;background:#fff;color:#7030d0;border-radius:18px;padding:15px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;text-decoration:none;margin-bottom:10px}
+.cta-btn{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -3px 0 rgba(0,0,0,.1) inset,0 8px 22px rgba(0,0,0,.18)}
+.cta-btn2{display:block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;text-decoration:none}
+.contacts{background:#fff;border-radius:22px;overflow:hidden}
+.contacts{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 8px 22px rgba(0,0,0,.08)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(30,8,96,.06);font-size:12px;color:rgba(30,8,96,.45);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:32px;height:32px;background:linear-gradient(135deg,#7030d0,#d040c0);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 12px rgba(112,48,208,.35)}
+footer{text-align:center;padding:20px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:rgba(30,8,96,.2)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <span class="floating-em fe1">🌍</span>
+  <span class="floating-em fe2">💬</span>
+  <span class="floating-em fe3">✨</span>
+  <span class="floating-em fe4">🎯</span>
+  <div class="hero-badge clay-sm">🗣️ 5M+ learners worldwide</div>
+  <h1>Speak any<br>language <span class="wave">🎉</span></h1>
+  <div class="hero-sub">Learn 40+ languages with AI-powered lessons, live tutors and gamified streaks. Just 10 minutes a day!</div>
+  <div class="stars">⭐⭐⭐⭐⭐<span class="star-val">4.9 · Top rated app 2024</span></div>
+</div>
+
+<div class="streak-bar clay">
+  <div class="streak-icon">🔥</div>
+  <div class="streak-text">
+    <div class="streak-n">47 day streak!</div>
+    <div class="streak-l">Keep it going — don't break the chain 💪</div>
+  </div>
+  <div class="streak-days">
+    <div class="day done">M</div>
+    <div class="day done">T</div>
+    <div class="day done">W</div>
+    <div class="day today">T</div>
+    <div class="day empty">F</div>
+    <div class="day empty">S</div>
+    <div class="day empty">S</div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="sec">Choose your language 🌐</div>
+  <div class="languages">
+    <div class="lang-card clay-sm lc1"><div class="lang-flag">🇯🇵</div><div class="lang-name">Japanese</div><div class="lang-level">180K learners</div><div class="lang-progress"><div class="lp-fill" style="width:75%"></div></div></div>
+    <div class="lang-card clay-sm lc2"><div class="lang-flag">🇨🇳</div><div class="lang-name">Mandarin</div><div class="lang-level">220K learners</div><div class="lang-progress"><div class="lp-fill" style="width:60%"></div></div></div>
+    <div class="lang-card clay-sm lc3"><div class="lang-flag">🇸🇦</div><div class="lang-name">Arabic</div><div class="lang-level">150K learners</div><div class="lang-progress"><div class="lp-fill" style="width:50%"></div></div></div>
+    <div class="lang-card clay-sm lc4"><div class="lang-flag">🇪🇸</div><div class="lang-name">Spanish</div><div class="lang-level">310K learners</div><div class="lang-progress"><div class="lp-fill" style="width:88%"></div></div></div>
+    <div class="lang-card clay-sm lc5"><div class="lang-flag">🇫🇷</div><div class="lang-name">French</div><div class="lang-level">190K learners</div><div class="lang-progress"><div class="lp-fill" style="width:65%"></div></div></div>
+    <div class="lang-card clay-sm lc6"><div class="lang-flag">🇩🇪</div><div class="lang-name">German</div><div class="lang-level">140K learners</div><div class="lang-progress"><div class="lp-fill" style="width:42%"></div></div></div>
+  </div>
+
+  <div class="sec">Pick your plan 🎯</div>
+  <div class="plans">
+    <div class="plan-clay clay-sm"><div class="plan-icon">⚡</div><div><div class="plan-name">Free Forever</div><div class="plan-desc">10 lessons/day · Basic AI tutor · Streaks</div></div><div class="plan-price">৳0<span class="plan-per">always</span></div></div>
+    <div class="plan-clay clay featured"><div class="plan-icon">🌟</div><div><div class="plan-name">LingoPro</div><div class="plan-desc">Unlimited · Live tutors · Offline · No ads</div></div><div class="plan-price">৳699<span class="plan-per">/month</span></div></div>
+    <div class="plan-clay clay-sm"><div class="plan-icon">👑</div><div><div class="plan-name">Annual Plan</div><div class="plan-desc">Everything in Pro · Save 40% · Certificate</div></div><div class="plan-price">৳4,999<span class="plan-per">/year</span></div></div>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Start today! 🚀</div>
+  <div class="cta-clay">
+    <h3>🌍 First month FREE!</h3>
+    <p>Join 5 million learners. No credit card needed to start. Cancel anytime.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🎯 Start Learning Free</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Talk to us</a>
+  </div>
+  <div class="sec" style="margin-top:20px">Download the app 📱</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📱</div>App Store & Google Play · Free</div>
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📧</div>hello@lingobuddy.app</div>
+  </div>
+</div>
+<footer>© 2025 LingoBuddy · Learn any language · 40+ languages available 🌍</footer>
+</div></body></html>

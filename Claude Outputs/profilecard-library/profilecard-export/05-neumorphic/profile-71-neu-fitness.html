@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>IronBody Fitness — Personal Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#e0e5ec;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#e0e5ec;margin:0 auto;color:#31456a}
+/* NEUMORPHISM BASE */
+:root{--bg:#e0e5ec;--sh-l:-6px -6px 16px rgba(255,255,255,.9);--sh-d:6px 6px 16px rgba(163,177,198,.65);--sh-in:inset -4px -4px 10px rgba(255,255,255,.9),inset 4px 4px 10px rgba(163,177,198,.65);--accent:#5b8dee;--accent2:#ff6b6b}
+.neu{background:var(--bg);box-shadow:var(--sh-l),var(--sh-d)}
+.neu-in{background:var(--bg);box-shadow:var(--sh-in)}
+.neu-btn{background:var(--bg);box-shadow:var(--sh-l),var(--sh-d);border:none;cursor:pointer}
+.hero{padding:52px 22px 28px;background:var(--bg)}
+.logo-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.logo-text{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:var(--accent);letter-spacing:-1px}
+.status-pill{display:flex;align-items:center;gap:5px;border-radius:100px;padding:6px 14px;font-size:9px;color:rgba(49,69,106,.4);letter-spacing:1px;box-shadow:var(--sh-l),var(--sh-d)}
+.sd{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+/* BIG RING */
+.ring-container{display:flex;justify-content:center;align-items:center;padding:8px 0 24px}
+.ring-outer{width:180px;height:180px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-l),var(--sh-d)}
+.ring-inner{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:var(--sh-in)}
+.ring-emoji{font-size:40px}
+.ring-text{font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;color:var(--accent);margin-top:4px;letter-spacing:.5px;text-transform:uppercase}
+.hero-title{font-family:'Nunito',sans-serif;font-size:36px;font-weight:900;color:#31456a;text-align:center;letter-spacing:-1px;line-height:.95;margin-bottom:8px}
+.hero-sub{font-size:12px;color:rgba(49,69,106,.45);text-align:center;line-height:1.6;letter-spacing:.2px}
+.body{padding:0 20px 48px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(91,141,238,.6);margin:26px 0 14px}
+/* NEU CARDS */
+.services{display:flex;flex-direction:column;gap:12px}
+.svc{border-radius:20px;padding:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.svc-icon{font-size:28px;margin-bottom:4px}
+.svc-name{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:#31456a}
+.svc-desc{font-size:11px;color:rgba(49,69,106,.45);margin-top:3px;line-height:1.4}
+.svc-price{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--accent);flex-shrink:0;text-align:right}
+.svc-per{font-size:9px;color:rgba(49,69,106,.35);display:block;margin-top:2px;font-family:'DM Sans',sans-serif;font-weight:400}
+/* NEU STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{border-radius:16px;padding:16px 0;text-align:center}
+.st-n{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--accent);letter-spacing:-1px}
+.st-l{font-size:9px;color:rgba(49,69,106,.35);margin-top:4px;letter-spacing:.5px;text-transform:uppercase}
+/* NEU TOGGLE TABS */
+.tabs{display:flex;border-radius:16px;padding:6px;gap:4px;margin-bottom:12px}
+.tab{flex:1;border-radius:12px;padding:10px;text-align:center;font-size:11px;font-weight:700;color:rgba(49,69,106,.35);transition:all .2s}
+.tab.active{color:var(--accent);box-shadow:var(--sh-in)}
+/* NEU CTA */
+.cta-wrap{border-radius:24px;padding:24px;text-align:center}
+.cta-wrap h3{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:#31456a;margin-bottom:8px;letter-spacing:-.5px}
+.cta-wrap p{font-size:12px;color:rgba(49,69,106,.45);margin-bottom:20px;line-height:1.5}
+.cta-btn{display:block;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#fff;text-decoration:none;margin-bottom:10px;background:linear-gradient(135deg,#5b8dee,#3d6fd8);box-shadow:4px 4px 12px rgba(91,141,238,.35),-2px -2px 8px rgba(255,255,255,.8)}
+.cta-btn2{display:block;border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;box-shadow:var(--sh-l),var(--sh-d)}
+.contacts{border-radius:20px;overflow:hidden;padding:4px}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;margin-bottom:4px;font-size:12px;color:rgba(49,69,106,.5)}
+.cr:last-child{margin-bottom:0}
+.ci{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:var(--sh-l),var(--sh-d)}
+footer{background:var(--bg);padding:20px;text-align:center;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:rgba(49,69,106,.2);letter-spacing:1px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="logo-row"><div class="logo-text">IRONBODY</div><div class="status-pill neu"><span class="sd"></span>Slots open</div></div>
+  <div class="ring-container">
+    <div class="ring-outer neu">
+      <div class="ring-inner neu-in">
+        <div class="ring-emoji">💪</div>
+        <div class="ring-text">Personal Trainer</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-title">Train smarter.<br>Get stronger.</div>
+  <div class="hero-sub">Certified personal trainer delivering science-backed fitness programmes. Gym, home, or online.</div>
+</div>
+<div class="body">
+  <div class="sec">Training Programmes</div>
+  <div class="services">
+    <div class="svc neu"><div><div class="svc-icon">🏋️</div><div class="svc-name">1-on-1 PT Session</div><div class="svc-desc">Personalised workout, form coaching, progress tracking</div></div><div class="svc-price">৳2,500<span class="svc-per">per session</span></div></div>
+    <div class="svc neu"><div><div class="svc-icon">📅</div><div class="svc-name">Monthly Package</div><div class="svc-desc">12 sessions + custom meal plan + WhatsApp support</div></div><div class="svc-price">৳22,000<span class="svc-per">per month</span></div></div>
+    <div class="svc neu"><div><div class="svc-icon">📱</div><div class="svc-name">Online Coaching</div><div class="svc-desc">Custom programme, video check-ins, app tracking</div></div><div class="svc-price">৳8,000<span class="svc-per">per month</span></div></div>
+    <div class="svc neu"><div><div class="svc-icon">🍱</div><div class="svc-name">Nutrition Plan Only</div><div class="svc-desc">12-week plan, macros, meal timing, grocery list</div></div><div class="svc-price">৳5,000<span class="svc-per">one-time</span></div></div>
+  </div>
+  <div class="sec">Results</div>
+  <div class="stats">
+    <div class="stat neu"><div class="st-n">320+</div><div class="st-l">Clients</div></div>
+    <div class="stat neu"><div class="st-n">8yr</div><div class="st-l">Experience</div></div>
+    <div class="stat neu"><div class="st-n">4.9★</div><div class="st-l">Rating</div></div>
+  </div>
+  <div class="sec">Book a Trial Session</div>
+  <div class="cta-wrap neu">
+    <h3>First session FREE.</h3>
+    <p>Come in for a complimentary 45-min trial session. No commitment, no pressure — just results.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">💪 Book Free Trial</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call to discuss</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts neu">
+    <div class="cr"><div class="ci neu">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci neu">📍</div>Dhanmondi Gym · Home visits · Online</div>
+    <div class="cr"><div class="ci neu">⏰</div>6am – 9pm · 7 days a week</div>
+  </div>
+</div>
+<footer>IRONBODY FITNESS · CERTIFIED PERSONAL TRAINER · DHAKA</footer>
+</div></body></html>

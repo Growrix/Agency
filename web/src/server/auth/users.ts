@@ -188,11 +188,44 @@ export async function authenticateUser(email: string, password: string) {
   const database = await readDatabase();
   const normalizedEmail = email.trim().toLowerCase();
   const user = database.users.find((entry) => entry.email.toLowerCase() === normalizedEmail);
+  const runtime = getRuntimeConfig();
 
   if (isSupabaseAuthConfigured()) {
     const supabaseAuth = getSupabaseAuthClient();
     const { data, error } = await supabaseAuth.auth.signInWithPassword({ email: normalizedEmail, password });
     if (error || !data.user) {
+      const configuredAdminEmail = runtime.auth.adminEmail?.trim().toLowerCase();
+      const configuredAdminPassword = runtime.auth.adminPassword;
+
+      if (
+        configuredAdminEmail &&
+        configuredAdminPassword &&
+        normalizedEmail === configuredAdminEmail &&
+        password === configuredAdminPassword
+      ) {
+        const now = getNow();
+        const fallbackAdmin: UserRecord = {
+          id: user?.id ?? crypto.randomUUID(),
+          email: configuredAdminEmail,
+          password_hash: "env-admin",
+          role: "admin",
+          first_name: user?.first_name,
+          last_name: user?.last_name,
+          created_at: user?.created_at ?? now,
+          updated_at: now,
+        };
+
+        await writeDatabase((next) => {
+          const withoutMatch = next.users.filter((entry) => entry.email.toLowerCase() !== normalizedEmail);
+          return {
+            ...next,
+            users: [fallbackAdmin, ...withoutMatch],
+          };
+        });
+
+        return fallbackAdmin;
+      }
+
       return null;
     }
 
@@ -205,7 +238,7 @@ export async function authenticateUser(email: string, password: string) {
     const role =
       existingRole ??
       metadataRole ??
-      (getRuntimeConfig().auth.adminEmail?.toLowerCase() === normalizedEmail ? "admin" : "subscriber");
+      (runtime.auth.adminEmail?.toLowerCase() === normalizedEmail ? "admin" : "subscriber");
 
     const syncedUser: UserRecord = {
       id: data.user.id,

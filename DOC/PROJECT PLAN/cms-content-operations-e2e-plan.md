@@ -417,7 +417,7 @@ last_updated: 2026-04-28
   - use route-by-route parity checklists before removing static fallbacks.
 
 ## 9. Execution Backlog
-1. Harden the planning chain so end-to-end plans must materialize as `DOC/PROJECT PLAN/` root artifacts before tracker updates; owner hint: planning/docs; dependency: none; target docs/files: `.github/agents/growrix-e2e-planning-architect.agent.md`, `DOC/Universal/Template/e2e-planning-template.md`, `DOC/PROJECT PLAN/ai-context.yaml`, `DOC/PROJECT PLAN/README.md`, `DOC/PROJECT PLAN/Tasks/ai-context.yaml`, `DOC/Universal/Execution Constitution.md`.
+1. Harden the planning chain so end-to-end plans must materialize as `DOC/PROJECT PLAN/` root artifacts before tracker updates; owner hint: planning/docs; dependency: none; target docs/files: `.github/agents/project-e2e-planning-architect.agent.md`, `DOC/Universal/Template/e2e-planning-template.md`, `DOC/PROJECT PLAN/ai-context.yaml`, `DOC/PROJECT PLAN/README.md`, `DOC/PROJECT PLAN/Tasks/ai-context.yaml`, `DOC/Universal/Execution Constitution.md`.
 2. Extend Sanity Studio with `caseStudy`, `shopCategory`, `shopItem`, `servicePage`, `faqItem`, `homePage`, `aboutPage`, `siteSettings`, `newsletterIssue`, and `newsletterTemplate` schemas; owner hint: CMS/frontend; dependency: backlog item 1; target docs/files: `studio/schemaTypes/**`, `DOC/PROJECT PLAN/Frontend/**`, `DOC/PROJECT PLAN/API and Data/**`.
 3. Replace static portfolio and shop source arrays with CMS-backed data access while keeping current route composition and fallbacks during migration; owner hint: frontend/backend; dependency: backlog item 2; target docs/files: `web/src/lib/content.ts`, `web/src/lib/shop.ts`, `web/src/server/domain/catalog.ts`, `web/src/app/portfolio/**`, `web/src/app/shop/**`.
 4. Move FAQ, services, homepage merchandising, and about/editorial copy to Sanity singletons/documents; owner hint: frontend/content ops; dependency: backlog item 2; target docs/files: `web/src/app/page.tsx`, `web/src/app/about/page.tsx`, `web/src/app/services/**`, `web/src/app/faq/page.tsx`.
@@ -458,7 +458,7 @@ last_updated: 2026-04-28
 
 ## 12. Tracker And Documentation Updates
 - Files updated:
-  - `.github/agents/growrix-e2e-planning-architect.agent.md`
+  - `.github/agents/project-e2e-planning-architect.agent.md`
   - `DOC/Universal/Template/e2e-planning-template.md`
   - `DOC/PROJECT PLAN/ai-context.yaml`
   - `DOC/PROJECT PLAN/README.md`

@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
+import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = {
-  title: "Shop — Website Templates and Ready Websites",
-  description: "Browse website templates from $500 and ready websites from $1k, then go straight to product details or checkout.",
+  title: "Digital Products — Templates, Starters, and Toolkits",
+  description:
+    "Browse HTML templates, SaaS starters, AI toolkits, MCP kits, and SEO packs. Compare Standard, Premium, and Done-For-You tiers.",
 };
 
 type SearchParams = Promise<{
@@ -30,7 +33,7 @@ function buildShopHref(filters: FilterState, patch: Partial<FilterState>) {
   if (merged.type) next.set("type", merged.type);
   if (merged.industry) next.set("industry", merged.industry);
   const query = next.toString();
-  return query ? `/shop?${query}` : "/shop";
+  return query ? `/products?${query}` : "/products";
 }
 
 type FilterGroup = {
@@ -43,19 +46,39 @@ type FilterGroup = {
 function buildFilterOptions(
   items: Array<{ category: string; categorySlug: string; type: string; typeSlug: string; industry: string; industrySlug: string }>,
 ) {
+  const categoryOrder = new Map([
+    ["html-business-profiles", 0],
+    ["html-templates", 1],
+    ["saas-templates", 2],
+    ["ai-automation", 3],
+    ["mcp-servers", 4],
+    ["seo-toolkits", 5],
+    ["bundles", 6],
+    ["free-products", 7],
+  ]);
+
+  const sortOptions = (left: { value: string; label: string }, right: { value: string; label: string }) => {
+    const leftRank = categoryOrder.get(left.value) ?? 999;
+    const rightRank = categoryOrder.get(right.value) ?? 999;
+    if (leftRank !== rightRank) {
+      return leftRank - rightRank;
+    }
+    return left.label.localeCompare(right.label);
+  };
+
   return {
     categories: Array.from(
       new Map(items.map((item) => [item.categorySlug, item.category])).entries(),
       ([value, label]) => ({ value, label })
-    ),
+    ).sort(sortOptions),
     types: Array.from(
       new Map(items.map((item) => [item.typeSlug, item.type])).entries(),
       ([value, label]) => ({ value, label })
-    ),
+    ).sort((left, right) => left.label.localeCompare(right.label)),
     industries: Array.from(
       new Map(items.map((item) => [item.industrySlug, item.industry])).entries(),
       ([value, label]) => ({ value, label })
-    ),
+    ).sort((left, right) => left.label.localeCompare(right.label)),
   };
 }
 
@@ -109,6 +132,13 @@ function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterS
 
 export default async function ShopPage({ searchParams }: { searchParams: SearchParams }) {
   const filters = await searchParams;
+  if (
+    filters.category === "saas-templates" ||
+    filters.category === "website-templates" ||
+    filters.category === "ready-websites"
+  ) {
+    redirect("/products/category/website-templates");
+  }
   const [allProducts, filteredProducts] = await Promise.all([
     listPublicShopProducts(),
     listPublicShopProducts(filters),
@@ -130,15 +160,30 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
         <Container>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                Templates &amp; Ready Websites
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{PRODUCT_INDEX_COPY.eyebrow}</p>
+              <h1 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                {PRODUCT_INDEX_COPY.title}
               </h1>
-              <p className="mt-2 text-sm leading-6 text-text-muted">
-                {allProducts.length} products &mdash; website templates from $500 and ready websites from $1k, each with 1 year of support.
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-text-muted">
+                {PRODUCT_INDEX_COPY.description}
               </p>
+              <p className="mt-2 text-sm text-text-muted">
+                {allProducts.length} product{allProducts.length === 1 ? "" : "s"} published now.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {PRODUCT_CATEGORY_CHIPS.map((chip) => (
+                  <Link
+                    key={chip.href}
+                    href={chip.href}
+                    className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-muted transition-colors hover:border-primary/40 hover:text-primary"
+                  >
+                    {chip.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-            <LinkButton href="/book-appointment" variant="outline" size="sm">
-              Need something custom?
+            <LinkButton href="/services/template-customization" variant="outline" size="sm">
+              Need Done-For-You setup?
             </LinkButton>
           </div>
         </Container>
@@ -155,7 +200,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 <p className="font-display text-sm font-semibold tracking-tight">Filters</p>
                 {hasActiveFilter ? (
                   <Link
-                    href="/shop"
+                    href="/products"
                     scroll={false}
                     className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-primary"
                   >
@@ -196,7 +241,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                   <p className="font-display text-xl tracking-tight">No products match those filters.</p>
                   <p className="mt-2 text-sm text-text-muted">Clear a filter to see more of the catalog.</p>
                   <div className="mt-6 flex justify-center">
-                    <LinkButton href="/shop" size="sm">Reset filters</LinkButton>
+                    <LinkButton href="/products" size="sm">Reset filters</LinkButton>
                   </div>
                 </div>
               ) : (

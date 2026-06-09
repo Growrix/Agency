@@ -34,6 +34,12 @@ function cloneDefaultDatabase(): DatabaseSchema {
     analytics_events: [...DEFAULT_DATABASE.analytics_events],
     audit_logs: [...DEFAULT_DATABASE.audit_logs],
     newsletter_subscribers: [...DEFAULT_DATABASE.newsletter_subscribers],
+    leads: [...DEFAULT_DATABASE.leads],
+    lead_events: [...DEFAULT_DATABASE.lead_events],
+    service_requests: [...DEFAULT_DATABASE.service_requests],
+    notifications: [...DEFAULT_DATABASE.notifications],
+    downloads: [...DEFAULT_DATABASE.downloads],
+    licenses: [...DEFAULT_DATABASE.licenses],
   };
 }
 
@@ -62,7 +68,7 @@ async function readDatabaseFromFile(): Promise<DatabaseSchema> {
 
 export async function writeDatabase(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
   if (isSupabaseDatabaseConfigured()) {
-    writeQueue = writeQueue.then(async () => {
+    writeQueue = writeQueue.catch(() => undefined).then(async () => {
       try {
         const current = await readDatabaseFromSupabase();
         const next = await updater(current);
@@ -82,7 +88,7 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
 async function writeDatabaseToFile(updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>) {
   await ensureDataDirectory();
 
-  writeQueue = writeQueue.then(async () => {
+  writeQueue = writeQueue.catch(() => undefined).then(async () => {
     const current = await readDatabaseFromFile();
     const next = await updater(current);
     await writeFile(getDatabasePath(), JSON.stringify(next, null, 2), "utf8");

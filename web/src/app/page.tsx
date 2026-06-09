@@ -1,32 +1,28 @@
-import Link from "next/link";
 import {
   ArrowRightIcon,
   ArrowUpRightIcon,
-  BoltIcon,
   ChatBubbleLeftRightIcon,
   CheckCircleIcon,
-  CodeBracketSquareIcon,
-  CpuChipIcon,
   CubeTransparentIcon,
   ShieldCheckIcon,
   SparklesIcon,
-  WindowIcon,
-  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
+import { TrustBar } from "@/components/marketing/TrustBar";
+import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
+import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
+import { ServiceCards } from "@/components/marketing/ServiceCards";
+import { Testimonials } from "@/components/marketing/Testimonials";
+import { ProductLedFinalCTA } from "@/components/marketing/ProductLedFinalCTA";
 import { StatBlock } from "@/components/sections/StatBlock";
-import { FeatureCard } from "@/components/sections/FeatureCard";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { TrustStrip } from "@/components/sections/TrustStrip";
-import { CTABand } from "@/components/sections/CTABand";
 import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
-import { PricingTier, type Tier } from "@/components/sections/PricingTier";
-import { AdditionalServices } from "@/components/sections/AdditionalServices";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
@@ -42,41 +38,7 @@ import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
 
-const SERVICE_ICONS = {
-  "saas-applications": CodeBracketSquareIcon,
-  websites: WindowIcon,
-  "mcp-servers": CpuChipIcon,
-  automation: BoltIcon,
-} as const;
-
-const HOME_TIERS: Tier[] = [
-  {
-    name: "Template Packs",
-    price: "From $500",
-    cadence: "one-time",
-    description: "Launch-ready website templates customized for your brand, offer, and conversion flow.",
-    features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"],
-    cta: { label: "Browse templates", href: "/shop" },
-  },
-  {
-    name: "Ready Websites",
-    price: "From $1k",
-    cadence: "one-time",
-    description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.",
-    features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"],
-    cta: { label: "View ready websites", href: "/shop" },
-    featured: true,
-    badge: "Most chosen",
-  },
-  {
-    name: "Custom Build Scope",
-    price: "Discovery-based",
-    cadence: "project pricing",
-    description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.",
-    features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"],
-    cta: { label: "Book discovery call", href: "/book-appointment" },
-  },
-];
+const SHOW_LIVE_SAAS_SECTION = false;
 
 function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | undefined, fallback: T[]) {
   if (!slugs || slugs.length === 0) {
@@ -105,20 +67,22 @@ export default async function Home() {
   ]);
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
-  const templateProducts = publicProducts.filter((p) => !isLiveSaasProduct(p));
+  const templateProducts = publicProducts.filter(
+    (p) => !isLiveSaasProduct(p) && p.categorySlug !== "html-business-profiles",
+  );
   const featuredProducts = pickBySlugs(
     templateProducts,
     homeContent?.shopSpotlight?.productSlugs,
     templateProducts.slice(0, 4)
   );
+  const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
+  const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
     liveSaasProducts,
     homeContent?.liveSaas?.productSlugs,
     liveSaasProducts.slice(0, 4),
   );
-  const pricingTiers = homeContent?.pricing?.tiers && homeContent.pricing.tiers.length > 0 ? homeContent.pricing.tiers : HOME_TIERS;
-
   return (
     <>
       {/* Hero */}
@@ -129,30 +93,48 @@ export default async function Home() {
         <Container width="shell">
           <div className="mx-auto max-w-5xl text-center">
             <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Websites, SaaS, ready launches"}</Badge>
+              <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Productized SaaS studio + digital marketplace"}</Badge>
             </div>
             <h1
               className="signal-rise mt-5 font-display text-[42px] leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl"
               style={{ animationDelay: "90ms" }}
             >
-              {homeContent?.heroTitle ?? "Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out"}
+              {homeContent?.heroTitle ?? "Launch faster with ready-made SaaS templates, AI tools, and custom development support."}
             </h1>
             <p
               className="signal-rise mx-auto mt-6 max-w-3xl text-lg leading-7 text-pretty text-text-muted"
               style={{ animationDelay: "180ms" }}
             >
-              {homeContent?.heroDescription ?? "From premium websites and SaaS apps to mobile launch pages and ready sites, we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required."}
+              {homeContent?.heroDescription ?? "Buy production-ready digital products, customize them yourself, or hire GrowrixOS to set up, modify, and scale them for your business."}
             </p>
             <div
               className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
               style={{ animationDelay: "270ms" }}
             >
-              <LinkButton href="/book-appointment" size="lg">
-                Book Appointment <ArrowRightIcon className="size-4" />
+              <LinkButton href="/products" size="lg">
+                Browse Products <ArrowRightIcon className="size-4" />
               </LinkButton>
-              <LinkButton href="/portfolio" variant="outline" size="lg">
-                Explore Portfolio
+              <LinkButton href="/book-appointment" variant="outline" size="lg">
+                Book a Free Consultation
               </LinkButton>
+            </div>
+            <div
+              className="signal-rise mt-4 flex flex-wrap items-center justify-center gap-2"
+              style={{ animationDelay: "320ms" }}
+            >
+              <LinkButton href="/contact" variant="ghost" size="sm">
+                Need Custom Work?
+              </LinkButton>
+              <LinkButton href={WHATSAPP_HREF} variant="ghost" size="sm" target="_blank" rel="noreferrer">
+                Chat on WhatsApp
+              </LinkButton>
+              <ConciergeTriggerButton
+                variant="ghost"
+                size="sm"
+                prompt="I need help choosing between a product purchase and a done-for-you custom build."
+              >
+                Ask AI Assistant
+              </ConciergeTriggerButton>
             </div>
             <p
               className="signal-rise mx-auto mt-6 max-w-2xl font-mono text-xs uppercase tracking-wider text-text-muted"
@@ -168,42 +150,58 @@ export default async function Home() {
         </div>
       </Section>
 
-      {/* Capability Rail */}
-      <Section className="py-16 sm:py-20" tone="inset">
+      <TrustBar />
+
+      <FeaturedProducts
+        products={featuredProducts}
+        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "Featured products"}
+        title={homeContent?.shopSpotlight?.title ?? "Production-ready digital products"}
+        description={
+          homeContent?.shopSpotlight?.description ??
+          "Templates, starters, and toolkits with Standard, Premium, and Done-For-You tiers — buy now or hire us to launch it for you."
+        }
+      />
+
+      <ThreePathExplainer />
+
+      <ServiceCards services={services} />
+
+      <Section>
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow={homeContent?.capability?.eyebrow ?? "Capabilities"}
-              title={homeContent?.capability?.title ?? "Websites and SaaS first. Supporting systems when they matter."}
-              description={homeContent?.capability?.description ?? "Our primary work is premium websites, SaaS applications, mobile launch experiences, and ready-to-ship website products. MCP and automation come in when they strengthen that core offer."}
+              eyebrow="New service"
+              title="HTML Business Profiles - category-based digital products"
+              description="Preview every built HTML business profile by category, then purchase directly from the product catalog with a clear template-to-checkout path."
             />
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-1 text-sm font-medium text-primary"
-            >
-              Compare services <ArrowUpRightIcon className="size-4" />
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <LinkButton href="/products/category/html-business-profiles" variant="outline">
+                Preview all profiles <ArrowUpRightIcon className="size-4" />
+              </LinkButton>
+              <LinkButton href="/products/category/html-business-profiles">
+                Browse category <ArrowRightIcon className="size-4" />
+              </LinkButton>
+            </div>
           </div>
+
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {services.map((s) => {
-              const Icon = SERVICE_ICONS[s.slug as keyof typeof SERVICE_ICONS];
-              return (
-                <RevealItem key={s.slug}>
-                  <FeatureCard
-                    href={`/services/${s.slug}`}
-                    icon={<Icon className="size-5" />}
-                    title={s.title}
-                    description={s.short_description}
-                    meta={s.delivery_timeline}
-                  />
-                </RevealItem>
-              );
-            })}
+            {featuredHtmlBusinessProfileProducts.map((product) => (
+              <RevealItem key={product.slug} className="h-full">
+                <ShopProductCard product={product} />
+              </RevealItem>
+            ))}
           </RevealGroup>
+          {featuredHtmlBusinessProfileProducts.length === 0 && (
+            <Card className="mt-10 text-center">
+              <p className="font-display text-2xl tracking-tight">No published HTML Business Profile items yet.</p>
+              <p className="mt-2 text-text-muted">
+                Publish HTML business profile products to display cards in this section.
+              </p>
+            </Card>
+          )}
+
         </Container>
       </Section>
-
-      <AdditionalServices />
 
       {/* Featured Builds */}
       <Section>
@@ -230,164 +228,73 @@ export default async function Home() {
 
       <TrustStrip items={HOME_STACK_MARQUEE} />
 
-      {/* Shop Spotlight */}
-      <Section>
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-            <SectionHeading
-              eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "Shop spotlight"}
-              title={homeContent?.shopSpotlight?.title ?? "Website templates and ready websites, built to ship."}
-              description={homeContent?.shopSpotlight?.description ?? "Website templates from $500 and ready websites from $1k, built from the same systems we use in custom engagements."}
-            />
-            <LinkButton href="/shop" variant="outline">
-              Browse the shop <ArrowUpRightIcon className="size-4" />
-            </LinkButton>
-          </div>
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {featuredProducts.map((p) => (
-              <RevealItem key={p.name} className="h-full">
-                <ShopProductCard product={p} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-
-          {/* Template Purchase & Customization */}
-          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface">
-            {/* Header */}
-            <div className="border-b border-border px-6 py-6 sm:px-8 sm:py-7">
-              <Badge tone="secondary" className="mb-3">Template Purchase &amp; Customization</Badge>
-              <h3 className="font-display text-xl tracking-tight sm:text-2xl">
-                Buy ready-to-ship templates and launch faster with confidence.
-              </h3>
+      {/* # muted by request: keep Live SaaS section in code but hide on homepage */}
+      {SHOW_LIVE_SAAS_SECTION ? (
+        <Section tone="inset">
+          <Container>
+            <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+              <SectionHeading
+                eyebrow={homeContent?.liveSaas?.eyebrow ?? "Live SaaS"}
+                title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
+                description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
+              />
+              <LinkButton href="/products" variant="outline">
+                Explore Live SaaS <ArrowUpRightIcon className="size-4" />
+              </LinkButton>
             </div>
 
-            {/* Two-column scope grid */}
-            <div className="grid divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
-              {/* Included */}
-              <div className="px-6 py-6 sm:px-8 sm:py-7">
-                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
-                  What&apos;s included — Customization Scope
-                </p>
-                <p className="mb-5 text-sm leading-6 text-text-muted">
-                  We tailor the template to match your brand and make it launch-ready:
-                </p>
-                <ul className="space-y-3">
-                  {[
-                    "Full rebranding (logo, colors, visual identity)",
-                    "Color palette and typography updates",
-                    "Additional pages (as needed within template structure)",
-                    "Email setup and basic configurations",
-                    "Payment integration (e.g., Stripe)",
-                    "Setup of integrations already included in the template",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm">
-                      <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Not included + flexible note */}
-              <div className="px-6 py-6 sm:px-8 sm:py-7">
-                <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
-                  What&apos;s not included — Out of Scope
-                </p>
-                <ul className="space-y-3">
-                  {[
-                    "Custom automation systems",
-                    "Advanced scaling or infrastructure work",
-                    "Features or integrations not mentioned in the template",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm">
-                      <XCircleIcon className="mt-0.5 size-4 shrink-0 text-text-muted" aria-hidden />
-                      <span className="text-text-muted">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-6 border-t border-border pt-6">
-                  <p className="text-sm leading-6 text-text-muted">
-                    That said, we&apos;re highly flexible. If you need something beyond scope, we&apos;re always open to discussing custom collaboration.
-                  </p>
-                  <Link
-                    href="/book-appointment"
-                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-                  >
-                    Let&apos;s talk custom <ArrowUpRightIcon className="size-3.5" />
-                  </Link>
+            {/* Value bullets */}
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                "Test the product before you buy",
+                "Experience real functionality, not demos",
+                "Understand the business potential firsthand",
+                "Launch instantly with a proven foundation",
+              ].map((point) => (
+                <div key={point} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+                  <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                  <span className="text-sm leading-6">{point}</span>
                 </div>
-              </div>
+              ))}
             </div>
-          </div>
-        </Container>
-      </Section>
 
-      {/* Live SaaS Spotlight */}
-      <Section tone="inset">
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-            <SectionHeading
-              eyebrow={homeContent?.liveSaas?.eyebrow ?? "Live SaaS"}
-              title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
-              description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
-            />
-            <LinkButton href="/shop" variant="outline">
-              Explore Live SaaS <ArrowUpRightIcon className="size-4" />
-            </LinkButton>
-          </div>
+            {/* Live SaaS product cards */}
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+              {featuredLiveSaasProducts.map((p) => (
+                <RevealItem key={p.slug} className="h-full">
+                  <ShopProductCard product={p} />
+                </RevealItem>
+              ))}
+            </RevealGroup>
+            {featuredLiveSaasProducts.length === 0 && (
+              <Card className="mt-10 text-center">
+                <p className="font-display text-2xl tracking-tight">No published Live SaaS items yet.</p>
+                <p className="mt-2 text-text-muted">
+                  Publish shop items with the category slug or label set to Live SaaS to show them here.
+                </p>
+              </Card>
+            )}
 
-          {/* Value bullets */}
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              "Test the product before you buy",
-              "Experience real functionality, not demos",
-              "Understand the business potential firsthand",
-              "Launch instantly with a proven foundation",
-            ].map((point) => (
-              <div key={point} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3">
-                <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                <span className="text-sm leading-6">{point}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Live SaaS product cards */}
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
-            {featuredLiveSaasProducts.map((p) => (
-              <RevealItem key={p.slug} className="h-full">
-                <ShopProductCard product={p} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-          {featuredLiveSaasProducts.length === 0 && (
-            <Card className="mt-10 text-center">
-              <p className="font-display text-2xl tracking-tight">No published Live SaaS items yet.</p>
-              <p className="mt-2 text-text-muted">
-                Publish shop items with the category slug or label set to Live SaaS to show them here.
+            {/* Bottom CTA */}
+            <div className="mt-10 rounded-2xl border border-border bg-surface px-6 py-8 sm:px-10 sm:py-10 text-center">
+              <p className="font-display text-xl tracking-tight sm:text-2xl">
+                This is your chance to skip the idea stage and step directly into a working business.
               </p>
-            </Card>
-          )}
-
-          {/* Bottom CTA */}
-          <div className="mt-10 rounded-2xl border border-border bg-surface px-6 py-8 sm:px-10 sm:py-10 text-center">
-            <p className="font-display text-xl tracking-tight sm:text-2xl">
-              This is your chance to skip the idea stage and step directly into a working business.
-            </p>
-            <p className="mt-3 text-text-muted">
-              Use it. Test it. Validate it. Then make your move with confidence.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <LinkButton href="/shop">
-                Explore All Live SaaS <ArrowRightIcon className="size-4" />
-              </LinkButton>
-              <LinkButton href="/book-appointment" variant="outline">
-                Book a Demo
-              </LinkButton>
+              <p className="mt-3 text-text-muted">
+                Use it. Test it. Validate it. Then make your move with confidence.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <LinkButton href="/products">
+                  Explore All Live SaaS <ArrowRightIcon className="size-4" />
+                </LinkButton>
+                <LinkButton href="/book-appointment" variant="outline">
+                  Book a Demo
+                </LinkButton>
+              </div>
             </div>
-          </div>
-        </Container>
-      </Section>
+          </Container>
+        </Section>
+      ) : null}
 
       {/* Process */}
       <Section tone="inset">
@@ -456,31 +363,8 @@ export default async function Home() {
         </Container>
       </Section>
 
-      {/* Pricing snapshot */}
-      <Section tone="inset">
-        <Container>
-          <SectionHeading
-            eyebrow={homeContent?.pricing?.eyebrow ?? "Engagements"}
-            title={homeContent?.pricing?.title ?? "Transparent ways to work together."}
-            description={homeContent?.pricing?.description ?? "Choose a custom build, an embedded partnership, or a website product with flexible payment and 1 year of support."}
-            align="center"
-          />
-          <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {pricingTiers.map((t) => (
-              <RevealItem key={t.name} className="h-full">
-                <PricingTier tier={t} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-          <div className="mt-8 text-center">
-            <Link href="/pricing" className="text-sm font-medium text-primary">
-              See full pricing details →
-            </Link>
-          </div>
-        </Container>
-      </Section>
+      <Testimonials />
 
-      {/* Testimonials */}
       {SHOW_GOOGLE_REVIEWS && (
         <Section>
           <Container>
@@ -524,13 +408,17 @@ export default async function Home() {
         </Container>
       </Section>
 
-      {/* Final CTA */}
-      <CTABand
-        eyebrow={homeContent?.finalCta?.eyebrow ?? "Start a conversation"}
-        title={homeContent?.finalCta?.title ?? "Tell us what you're building. We'll tell you how we'd ship it."}
-        description={homeContent?.finalCta?.description ?? "A 30-minute discovery call. A written plan within 48 hours. No pressure, no boilerplate."}
-        primary={{ label: homeContent?.finalCta?.primaryLabel ?? "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: homeContent?.finalCta?.secondaryLabel ?? "Open WhatsApp", href: WHATSAPP_HREF }}
+      <ProductLedFinalCTA
+        eyebrow={homeContent?.finalCta?.eyebrow ?? "Start with a product or a conversation"}
+        title={homeContent?.finalCta?.title ?? "Browse ready-made assets or book a free consultation."}
+        description={
+          homeContent?.finalCta?.description ??
+          "Pick a digital product for instant delivery, request Done-For-You setup, or scope a custom build."
+        }
+        primaryLabel={homeContent?.finalCta?.primaryLabel ?? "Browse Products"}
+        primaryHref="/products"
+        secondaryLabel={homeContent?.finalCta?.secondaryLabel ?? "Book a Free Consultation"}
+        secondaryHref="/book-appointment"
       />
     </>
   );

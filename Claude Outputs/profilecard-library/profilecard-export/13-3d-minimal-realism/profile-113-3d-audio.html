@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Auris — Premium Audio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#f4f3f0;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f6f5f2;margin:0 auto;overflow:hidden}
+
+/* ===========================
+   3D MINIMAL-REALISM
+   Philosophy: depth through shadow layers only.
+   No glass, no texture, no gradients — just
+   precise multi-stop box-shadows creating the
+   illusion of physically lifted objects.
+   =========================== */
+
+/* Card levitation system: 5-stop shadow stack */
+.float-card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:
+    0 1px 2px  rgba(0,0,0,.03),      /* contact shadow */
+    0 3px 6px  rgba(0,0,0,.04),      /* near-field */
+    0 8px 18px rgba(0,0,0,.05),      /* mid-field */
+    0 20px 40px rgba(0,0,0,.05),     /* far-field */
+    0 40px 64px rgba(0,0,0,.04);     /* ambient */
+}
+/* Pressed / low-float */
+.float-sm{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:
+    0 1px 2px  rgba(0,0,0,.04),
+    0 4px 10px rgba(0,0,0,.05),
+    0 12px 24px rgba(0,0,0,.05);
+}
+/* Button - pill, very lifted */
+.float-btn{
+  border-radius:100px;
+  box-shadow:
+    0 1px 2px  rgba(0,0,0,.04),
+    0 4px 12px rgba(0,0,0,.08),
+    0 14px 28px rgba(0,0,0,.08),
+    0 28px 44px rgba(0,0,0,.05);
+}
+
+/* === HERO === */
+.hero{min-height:340px;background:#fff;padding:28px 22px 32px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+/* Subtle radial wash — the only non-white colour in hero */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 75% 30%,rgba(0,0,0,.025) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-nav{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.hero-wordmark{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(15,12,10,.35)}
+.hero-chip{font-size:9px;font-weight:600;letter-spacing:.5px;color:rgba(15,12,10,.35);background:#f6f5f2;border-radius:100px;padding:4px 12px;
+  box-shadow:0 1px 3px rgba(0,0,0,.07),0 4px 10px rgba(0,0,0,.04)}
+
+/* The hero product — a single emoji floating with deep shadow */
+.product-float{
+  display:flex;justify-content:center;margin-bottom:24px;position:relative;
+}
+.product-emoji{
+  font-size:96px;line-height:1;
+  /* 3D floating effect: multi-layer colored shadow */
+  filter:
+    drop-shadow(0 2px 4px rgba(0,0,0,.08))
+    drop-shadow(0 8px 20px rgba(0,0,0,.12))
+    drop-shadow(0 24px 48px rgba(0,0,0,.10))
+    drop-shadow(0 40px 64px rgba(0,0,0,.06));
+  animation:hover-float 4s ease-in-out infinite;
+}
+@keyframes hover-float{
+  0%,100%{transform:translateY(0px)}
+  50%{transform:translateY(-10px)}
+}
+/* Cast shadow beneath the product */
+.product-shadow{
+  position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+  width:80px;height:12px;
+  background:radial-gradient(ellipse,rgba(0,0,0,.18) 0%,transparent 70%);
+  border-radius:50%;
+  animation:shadow-pulse 4s ease-in-out infinite;
+}
+@keyframes shadow-pulse{
+  0%,100%{transform:translateX(-50%) scaleX(1);opacity:.18}
+  50%{transform:translateX(-50%) scaleX(.7);opacity:.1}
+}
+
+.hero-eyebrow{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(15,12,10,.28);margin-bottom:10px}
+.hero h1{font-size:40px;font-weight:800;color:#0f0c0a;line-height:.88;letter-spacing:-2.5px}
+.hero h1 i{font-style:italic;font-weight:200;color:rgba(15,12,10,.35)}
+.hero-sub{font-size:11px;color:rgba(15,12,10,.38);margin-top:9px;line-height:1.7}
+
+/* === SPEC ROW === */
+.spec-row{display:flex;gap:8px;padding:18px 16px 8px}
+.spec{flex:1;padding:14px 0;text-align:center;border-radius:16px}
+.spec-n{font-size:18px;font-weight:800;color:#0f0c0a;letter-spacing:-1px}
+.spec-l{font-size:9px;color:rgba(15,12,10,.3);margin-top:4px;letter-spacing:.5px;font-weight:500}
+
+/* === BODY === */
+.body{padding:6px 14px 48px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(15,12,10,.25);margin:20px 0 12px}
+
+/* Product line cards */
+.products{display:flex;flex-direction:column;gap:10px}
+.prod-card{padding:18px;display:flex;gap:16px;align-items:center}
+.prod-em{font-size:40px;flex-shrink:0;
+  filter:drop-shadow(0 3px 8px rgba(0,0,0,.1)) drop-shadow(0 10px 20px rgba(0,0,0,.08));
+  line-height:1}
+.prod-series{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(15,12,10,.25);margin-bottom:4px}
+.prod-name{font-size:16px;font-weight:700;color:#0f0c0a;letter-spacing:-.5px}
+.prod-spec{font-size:10px;color:rgba(15,12,10,.38);margin-top:3px;line-height:1.5}
+.prod-right{margin-left:auto;text-align:right;flex-shrink:0}
+.prod-price{font-size:18px;font-weight:800;color:#0f0c0a;letter-spacing:-.5px}
+.prod-avail{font-size:9px;font-weight:600;color:rgba(15,12,10,.28);margin-top:4px}
+.prod-avail.instock{color:rgba(20,140,60,.7)}
+
+/* Feature grid */
+.features{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.feat{padding:18px;min-height:110px;display:flex;flex-direction:column;justify-content:flex-end}
+.feat-icon{font-size:26px;margin-bottom:8px;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.1))}
+.feat-name{font-size:13px;font-weight:700;color:#0f0c0a;letter-spacing:-.3px}
+.feat-desc{font-size:10px;color:rgba(15,12,10,.35);margin-top:3px;line-height:1.4}
+
+/* CTA */
+.cta{padding:26px;text-align:center}
+.cta h3{font-size:26px;font-weight:800;color:#0f0c0a;letter-spacing:-1.5px;margin-bottom:8px;line-height:.9}
+.cta h3 i{font-style:italic;font-weight:200;color:rgba(15,12,10,.3)}
+.cta p{font-size:11px;color:rgba(15,12,10,.36);margin-bottom:22px;line-height:1.65}
+.btn-main{
+  display:block;background:#0f0c0a;color:#fff;border-radius:100px;padding:16px 32px;
+  font-size:14px;font-weight:700;text-decoration:none;margin-bottom:11px;
+  letter-spacing:.3px;
+  box-shadow:0 2px 4px rgba(0,0,0,.1),0 8px 20px rgba(0,0,0,.14),0 20px 36px rgba(0,0,0,.1);
+}
+.btn-sec{
+  display:block;background:#fff;color:rgba(15,12,10,.45);border-radius:100px;padding:14px 32px;
+  font-size:12px;font-weight:600;text-decoration:none;
+  box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.06),0 10px 24px rgba(0,0,0,.04);
+}
+
+.contact-wrap{overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(0,0,0,.04);font-size:12px;color:rgba(15,12,10,.4)}
+.cr:last-child{border-bottom:none}
+.ci{width:32px;height:32px;background:#f6f5f2;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.07),0 4px 10px rgba(0,0,0,.05)}
+
+footer{padding:20px;text-align:center;font-size:10px;color:rgba(15,12,10,.2);letter-spacing:.5px;font-style:italic}
+</style>
+</head>
+<body><div class="app">
+
+<div class="hero">
+  <div class="hero-nav">
+    <div class="hero-wordmark">Auris</div>
+    <div class="hero-chip">BD Flagship Store Open</div>
+  </div>
+  <div class="product-float">
+    <div class="product-emoji">🎧</div>
+    <div class="product-shadow"></div>
+  </div>
+  <div class="hero-eyebrow">Sound · Precision · Form</div>
+  <h1>Hear every<br><i>detail.</i></h1>
+  <div class="hero-sub">Studio-reference headphones, earbuds and speakers — engineered for audiophiles and professionals. Authorised dealer in Bangladesh.</div>
+</div>
+
+<div class="spec-row">
+  <div class="spec float-sm"><div class="spec-n">40mm</div><div class="spec-l">Drivers</div></div>
+  <div class="spec float-sm"><div class="spec-n">30hr</div><div class="spec-l">Playtime</div></div>
+  <div class="spec float-sm"><div class="spec-n">Hi-Res</div><div class="spec-l">Certified</div></div>
+</div>
+
+<div class="body">
+  <div class="sec">Product Line</div>
+  <div class="products">
+    <div class="prod-card float-card">
+      <div class="prod-em">🎧</div>
+      <div>
+        <div class="prod-series">Auris · Studio Pro</div>
+        <div class="prod-name">A1 Over-Ear</div>
+        <div class="prod-spec">40mm planar · ANC · 30hr · BT 5.4 · foldable</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">$280</div>
+        <div class="prod-avail instock">● In stock</div>
+      </div>
+    </div>
+    <div class="prod-card float-card">
+      <div class="prod-em">🎵</div>
+      <div>
+        <div class="prod-series">Auris · Air</div>
+        <div class="prod-name">E3 Open-Ear</div>
+        <div class="prod-spec">Open-back · 10mm driver · 8hr · IP54 sport</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">$120</div>
+        <div class="prod-avail instock">● In stock</div>
+      </div>
+    </div>
+    <div class="prod-card float-card">
+      <div class="prod-em">🔊</div>
+      <div>
+        <div class="prod-series">Auris · Studio</div>
+        <div class="prod-name">S5 Monitor Speaker</div>
+        <div class="prod-spec">5" woofer · DSP EQ · USB + XLR · flat response</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">$340</div>
+        <div class="prod-avail">Pre-order</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">Why Auris</div>
+  <div class="features">
+    <div class="feat float-sm"><div class="feat-icon">🎚️</div><div class="feat-name">Hi-Res Audio</div><div class="feat-desc">24-bit/192kHz playback — hear what you've been missing</div></div>
+    <div class="feat float-sm"><div class="feat-icon">🔇</div><div class="feat-name">Hybrid ANC</div><div class="feat-desc">-42dB noise cancellation. Focus. Flow. Work.</div></div>
+    <div class="feat float-sm"><div class="feat-icon">⚡</div><div class="feat-name">10-min Fast Charge</div><div class="feat-desc">3 hours of playback from a 10-minute charge</div></div>
+    <div class="feat float-sm"><div class="feat-icon">🎤</div><div class="feat-name">Studio Mic</div><div class="feat-desc">Beamforming 6-mic array. Crystal-clear calls.</div></div>
+  </div>
+
+  <div class="sec">Order & Demo</div>
+  <div class="cta float-card">
+    <h3>Listen before<br><i>you decide.</i></h3>
+    <p>Visit our listening studio for a private demo session. Try every product before you buy — no pressure, ever.</p>
+    <a href="https://wa.me/8801700000000" class="btn-main">🎧 Book a Demo Session</a>
+    <a href="tel:+8801700000000" class="btn-sec">📞 Call the store</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-wrap float-card">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Banani 11, Dhaka · Listening Studio</div>
+    <div class="cr"><div class="ci">⏰</div>Sat–Thu · 10am – 8pm</div>
+    <div class="cr"><div class="ci">🌐</div>auris.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 Auris Audio · Bangladesh Flagship · Sound refined.</footer>
+</div></body></html>

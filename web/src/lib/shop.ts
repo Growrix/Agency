@@ -264,7 +264,39 @@ export function getShopProduct(slug: string) {
   return SHOP_PRODUCT_BY_SLUG[slug];
 }
 
-export function getCheckoutHref(productOrSlug: ShopProduct | string) {
+export type CheckoutSelection = {
+  variantSlug?: string;
+  tierName?: string;
+  fulfillmentType?: string;
+};
+
+export const RESERVED_PRODUCT_ROUTE_SEGMENTS = ["free", "bundles", "category"] as const;
+
+export function getProductHref(productOrSlug: Pick<ShopProduct, "slug"> | string) {
   const slug = typeof productOrSlug === "string" ? productOrSlug : productOrSlug.slug;
-  return `/checkout?product=${slug}`;
+  return `/products/${slug}`;
+}
+
+export function isReservedProductRouteSlug(slug: string) {
+  const normalized = slug.trim().toLowerCase();
+  return RESERVED_PRODUCT_ROUTE_SEGMENTS.includes(normalized as (typeof RESERVED_PRODUCT_ROUTE_SEGMENTS)[number]);
+}
+
+export function getCheckoutHref(productOrSlug: ShopProduct | string, selection?: CheckoutSelection) {
+  const slug = typeof productOrSlug === "string" ? productOrSlug : productOrSlug.slug;
+  const params = new URLSearchParams({ product: slug });
+
+  if (selection?.variantSlug) {
+    params.set("variant", selection.variantSlug);
+  }
+
+  if (selection?.tierName) {
+    params.set("tier", selection.tierName);
+  }
+
+  if (selection?.fulfillmentType) {
+    params.set("fulfillment", selection.fulfillmentType);
+  }
+
+  return `/checkout?${params.toString()}`;
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>AquaFix Plumbing — Licensed Plumber</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#0a2040;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f4f8ff;margin:0 auto}
+
+.hero{min-height:252px;background:linear-gradient(155deg,#1a5fbf 0%,#0d3d8f 55%,#082060 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 20px}
+.hero-pipes{position:absolute;inset:0;opacity:.06;background-image:linear-gradient(rgba(255,255,255,1) 3px,transparent 3px),linear-gradient(90deg,rgba(255,255,255,1) 3px,transparent 3px);background-size:60px 60px}
+.hero-drop{position:absolute;top:24px;right:20px;font-size:56px;opacity:.12;transform:rotate(-15deg)}
+.h-open{position:absolute;top:24px;left:20px;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border-radius:100px;padding:4px 12px;font-size:10px;color:#fff;font-weight:600}
+.h-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Nunito',sans-serif;font-size:36px;font-weight:900;color:#fff;line-height:.95;letter-spacing:-.5px}
+.hero h1 span{color:#7dd3fc}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:7px;line-height:1.5}
+.hero-lic{font-size:9px;color:rgba(255,255,255,.3);margin-top:8px;letter-spacing:.5px}
+
+.info-chips{display:flex;gap:6px;padding:12px 16px;background:#fff;border-bottom:1px solid #dbeeff;overflow-x:auto;scrollbar-width:none}
+.info-chips::-webkit-scrollbar{display:none}
+.chip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:100px;padding:5px 11px;font-size:10px;color:#1d4ed8;font-weight:600;white-space:nowrap;flex-shrink:0}
+
+.body{padding:0 18px 40px}
+.sec{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1a5fbf;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(26,95,191,.15)}
+
+.services{display:flex;flex-direction:column;gap:6px}
+.svc{background:#fff;border:1px solid #dbeeff;border-radius:10px;padding:13px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-icon{font-size:20px;margin-bottom:4px}
+.svc-name{font-size:13px;font-weight:700;color:#0d3d8f}
+.svc-desc{font-size:11px;color:#6b8fb0;margin-top:2px;line-height:1.4}
+.svc-price{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:#1a5fbf;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:#8bacc8;margin-top:1px;font-family:'DM Sans',sans-serif}
+
+.emergency-box{background:linear-gradient(135deg,#1a5fbf,#0d3d8f);border-radius:14px;padding:20px;text-align:center}
+.emergency-box h3{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:6px}
+.emergency-box p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.5}
+.emerg-btn{display:block;background:#fff;color:#0d3d8f;border-radius:10px;padding:13px;font-weight:800;font-family:'Nunito',sans-serif;font-size:14px;text-decoration:none;margin-bottom:8px}
+.emerg-btn2{display:block;background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px;font-size:12px;text-decoration:none}
+
+.process{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.proc-card{background:#fff;border:1px solid #dbeeff;border-radius:10px;padding:14px;text-align:center}
+.proc-num{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#bfdbfe;line-height:1}
+.proc-label{font-size:11px;font-weight:700;color:#0d3d8f;margin-top:4px}
+.proc-desc{font-size:10px;color:#6b8fb0;margin-top:3px;line-height:1.4}
+
+.contact-box{background:#fff;border:1px solid #dbeeff;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #eff6ff;font-size:12px;color:#333}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#1a5fbf;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#0a2040;padding:18px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-pipes"></div>
+  <div class="hero-drop">💧</div>
+  <div class="h-open"><span class="h-dot"></span>Open Now</div>
+  <h1>Aqua<span>Fix</span><br>Plumbing</h1>
+  <div class="hero-sub">Licensed plumber for homes & offices. Leaks, installations, drain repairs — all done right.</div>
+  <div class="hero-lic">⭐ 4.9 · 380 reviews · Licensed & Insured</div>
+</div>
+<div class="info-chips">
+  <div class="chip">🚨 24hr Emergency</div>
+  <div class="chip">🔧 Same-day service</div>
+  <div class="chip">💰 Free quotes</div>
+  <div class="chip">✅ Guaranteed work</div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-icon">💧</div><div class="svc-name">Leak Detection & Repair</div><div class="svc-desc">Pipes, taps, hidden leaks — found & fixed</div></div><div class="svc-price">৳600<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🚿</div><div class="svc-name">Bathroom Installation</div><div class="svc-desc">Shower, toilet, basin — full fit-out</div></div><div class="svc-price">৳3,500<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🪠</div><div class="svc-name">Drain Unblocking</div><div class="svc-desc">Drain jetting, sink, toilet, floor drains</div></div><div class="svc-price">৳800<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🚰</div><div class="svc-name">Tap Replacement</div><div class="svc-desc">All brands — kitchen, bathroom, garden</div></div><div class="svc-price">৳500<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🏊</div><div class="svc-name">Water Tank Cleaning</div><div class="svc-desc">Overhead & underground — drain, clean, refill</div></div><div class="svc-price">৳1,200<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🔥</div><div class="svc-name">Geyser / Water Heater</div><div class="svc-desc">Install, repair, thermostat replacement</div></div><div class="svc-price">৳900<span>from</span></div></div>
+  </div>
+
+  <div class="sec">How It Works</div>
+  <div class="process">
+    <div class="proc-card"><div class="proc-num">01</div><div class="proc-label">Call or WhatsApp</div><div class="proc-desc">Tell us the problem &amp; your location</div></div>
+    <div class="proc-card"><div class="proc-num">02</div><div class="proc-label">Get a Quote</div><div class="proc-desc">Free estimate before we start any work</div></div>
+    <div class="proc-card"><div class="proc-num">03</div><div class="proc-label">We Show Up</div><div class="proc-desc">On time, uniformed, with all parts needed</div></div>
+    <div class="proc-card"><div class="proc-num">04</div><div class="proc-label">Job Guaranteed</div><div class="proc-desc">30-day workmanship warranty on all jobs</div></div>
+  </div>
+
+  <div class="sec">Emergency Plumbing</div>
+  <div class="emergency-box">
+    <h3>💧 Burst pipe? Flooding?</h3>
+    <p>Our emergency team responds within 45–60 minutes across all of Dhaka, any time of day or night.</p>
+    <a href="tel:+8801700000000" class="emerg-btn">📞 Call Emergency Line</a>
+    <a href="https://wa.me/8801700000000" class="emerg-btn2">💬 WhatsApp for non-urgent</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000 (24/7)</div>
+    <div class="c-row"><div class="c-icon">📍</div>Based in Rampura · All Dhaka covered</div>
+    <div class="c-row"><div class="c-icon">⏰</div>8am–9pm daily · Emergency 24/7</div>
+    <div class="c-row"><div class="c-icon">💬</div>WhatsApp preferred for photos of issue</div>
+  </div>
+</div>
+<footer>© 2025 AquaFix Plumbing · Licensed Plumber · Dhaka · 30-Day Guarantee</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

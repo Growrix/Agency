@@ -59,7 +59,12 @@ async function readDatabaseFile() {
   return JSON.parse(content) as {
     inquiries: Array<{ visitor_email: string }>;
     appointments: Array<{ id: string; preferred_datetime: string }>;
-    orders: Array<{ customer_email: string }>;
+    orders: Array<{
+      customer_email: string;
+      selected_variant_slug?: string;
+      selected_tier_name?: string;
+      selected_fulfillment_type?: string;
+    }>;
     conversations: Array<{ id: string; messages: Array<{ content: string }> }>;
   };
 }
@@ -80,6 +85,7 @@ describe("API flows", () => {
   beforeEach(async () => {
     await resetDatabase();
     process.env.OPENAI_API_KEY = "test-openai-key";
+    process.env.AUTH_JWT_SECRET = "test-jwt-secret";
     delete process.env.STRIPE_SECRET_KEY;
     delete process.env.STRIPE_WEBHOOK_SECRET;
     delete process.env.SUPABASE_URL;
@@ -196,6 +202,9 @@ describe("API flows", () => {
           customer_name: "Morgan Buyer",
           customer_email: "morgan@example.com",
           product_slug: "three-circles-template",
+          product_variant_slug: "premium_plus",
+          product_tier_name: "Premium Plus",
+          fulfillment_type: "Done For You",
         }),
       })
     );
@@ -208,6 +217,9 @@ describe("API flows", () => {
     const database = await readDatabaseFile();
     assert.equal(database.orders.length, 1);
     assert.equal(database.orders[0]?.customer_email, "morgan@example.com");
+    assert.equal(database.orders[0]?.selected_variant_slug, "premium-plus");
+    assert.equal(database.orders[0]?.selected_tier_name, "Premium Plus");
+    assert.equal(database.orders[0]?.selected_fulfillment_type, "done-for-you");
   });
 
   it("persists concierge conversations through the public route", async () => {
@@ -230,5 +242,85 @@ describe("API flows", () => {
     assert.equal(database.conversations.length, 1);
     assert.equal(database.conversations[0]?.messages.length, 2);
     assert.match(database.conversations[0]?.messages[0]?.content ?? "", /booking/i);
+  });
+
+  it("authorizes private downloads for the owning authenticated customer", async () => {
+    await seedManagedProduct();
+
+    const { createUser } = await import("@/server/auth/users");
+    const { SESSION_COOKIE_NAME, issueSessionToken } = await import("@/server/auth/token");
+    const { createOrder, markOrderPaid, updateOrderOperations } = await import("@/server/domain/orders");
+    const { listDownloadsByEmail } = await import("@/server/domain/downloads");
+
+    const user = await createUser({
+      email: "buyer@example.com",
+      password: "Passw0rd!",
+      firstName: "Buyer",
+      lastName: "User",
+      role: "subscriber",
+    });
+    const token = await issueSessionToken({ userId: user.id, email: user.email, role: user.role });
+    const cookie = `${SESSION_COOKIE_NAME}=${token}`;
+
+    const created = await createOrder({
+      product_slug: "three-circles-template",
+      customer_name: "Buyer User",
+      customer_email: "buyer@example.com",
+    });
+    await markOrderPaid(created.order.id, "pi_test_private_download");
+    await updateOrderOperations(created.order.id, { fulfillment_status: "fulfilling" });
+    await updateOrderOperations(created.order.id, { fulfillment_status: "qa_review" });
+    await updateOrderOperations(created.order.id, {
+      fulfillment_status: "delivered",
+      delivery_urls: ["https://downloads.example.com/private/three-circles-template.zip"],
+    });
+
+    const downloads = await listDownloadsByEmail("buyer@example.com");
+    assert.equal(downloads.length, 1);
+
+    const { GET: getDownloads } = await import("@/app/api/v1/me/downloads/route");
+    const downloadsResponse = await getDownloads(
+      new NextRequest("http://localhost/api/v1/me/downloads", {
+        headers: { cookie },
+      })
+    );
+
+    assert.equal(downloadsResponse.status, 200);
+    const downloadsPayload = await downloadsResponse.json() as {
+      data: Array<{ id: string; order_id: string; download_count: number }>;
+    };
+    assert.equal(downloadsPayload.data.length, 1);
+    assert.equal(downloadsPayload.data[0]?.id, downloads[0]?.id);
+
+    const { POST: createSignedUrl } = await import("@/app/api/v1/downloads/[downloadId]/signed-url/route");
+    const signedUrlResponse = await createSignedUrl(
+      new NextRequest(`http://localhost/api/v1/downloads/${downloads[0]?.id}/signed-url`, {
+        method: "POST",
+        headers: { cookie },
+      }),
+      { params: Promise.resolve({ downloadId: downloads[0]?.id ?? "" }) }
+    );
+
+    assert.equal(signedUrlResponse.status, 200);
+    const signedUrlPayload = await signedUrlResponse.json() as {
+      data: {
+        download_url: string;
+        download: { download_count: number };
+      };
+    };
+    assert.equal(signedUrlPayload.data.download_url, "https://downloads.example.com/private/three-circles-template.zip");
+    assert.equal(signedUrlPayload.data.download.download_count, 1);
+
+    const { POST: downloadOrderAsset } = await import("@/app/api/v1/orders/[orderId]/download/route");
+    const orderDownloadResponse = await downloadOrderAsset(
+      new NextRequest(`http://localhost/api/v1/orders/${created.order.id}/download`, {
+        method: "POST",
+        headers: { cookie },
+      }),
+      { params: Promise.resolve({ orderId: created.order.id }) }
+    );
+
+    assert.equal(orderDownloadResponse.status, 307);
+    assert.equal(orderDownloadResponse.headers.get("location"), "https://downloads.example.com/private/three-circles-template.zip");
   });
 });

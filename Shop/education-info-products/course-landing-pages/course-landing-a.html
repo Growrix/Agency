@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Full-Stack Web Development Bootcamp — From Zero to Hired</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#060812;--surface:#0c0e1a;--border:rgba(255,255,255,.07);--accent:#00d4aa;--text:#e2e8f0;--muted:#64748b}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+.mesh{position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 50% -5%,rgba(0,212,170,.15),transparent);pointer-events:none}
+nav{position:sticky;top:0;z-index:100;background:rgba(6,8,18,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:16px 60px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent);letter-spacing:1px}
+.nav-right{display:flex;gap:14px;align-items:center}
+.nav-link{font-size:13px;color:var(--muted);text-decoration:none}
+.nav-enroll{background:var(--accent);color:#060812;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:700;text-decoration:none}
+section{position:relative;z-index:1}
+.hero{max-width:1100px;margin:0 auto;padding:90px 60px 70px;display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:start}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.25);border-radius:6px;padding:7px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:24px}
+h1{font-size:clamp(2.5rem,4vw,3.8rem);font-weight:800;letter-spacing:-2px;line-height:1.02;margin-bottom:18px}
+h1 .hl{color:var(--accent)}
+.hero-desc{font-size:16px;color:rgba(255,255,255,.5);line-height:1.8;font-weight:300;margin-bottom:28px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.h-stat{text-align:center}
+.h-stat .n{font-size:1.8rem;font-weight:800;color:var(--accent);letter-spacing:-1px;display:block;line-height:1}
+.h-stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px}
+.stack-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.stack-pill{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.6)}
+.enroll-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;position:sticky;top:88px}
+.ec-eyebrow{font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.ec-price{font-size:3rem;font-weight:800;letter-spacing:-2px;color:#fff;line-height:1;margin-bottom:4px}
+.ec-orig{font-size:14px;color:var(--muted);text-decoration:line-through;margin-bottom:6px}
+.ec-badge{display:inline-block;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171;font-size:11px;font-weight:700;padding:4px 12px;border-radius:4px;margin-bottom:16px;letter-spacing:1px}
+.ec-include{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.ec-include li{font-size:13px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:10px}
+.ec-include li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+.ec-btn{display:block;text-align:center;background:var(--accent);color:#060812;padding:15px;border-radius:10px;font-size:16px;font-weight:800;text-decoration:none;margin-bottom:10px}
+.ec-btn:hover{background:#00c09a}
+.ec-note{font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+.divider{height:1px;background:var(--border);max-width:1100px;margin:0 auto}
+.curriculum{max-width:1100px;margin:0 auto;padding:64px 60px}
+.curr-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px}
+.curr-header h2{font-size:2rem;font-weight:800;letter-spacing:-1px}
+.curr-meta{font-size:13px;color:var(--muted)}
+.modules{display:flex;flex-direction:column;gap:0}
+.module{border:1px solid var(--border);border-bottom:none;overflow:hidden}
+.module:last-child{border-bottom:1px solid var(--border)}
+.module:first-child{border-radius:12px 12px 0 0}
+.module:last-child{border-radius:0 0 12px 12px}
+.module-header{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.02);cursor:pointer}
+.module-header:hover{background:rgba(255,255,255,.04)}
+.mod-left{display:flex;align-items:center;gap:14px}
+.mod-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;width:24px}
+.mod-title{font-size:15px;font-weight:600;color:#e2e8f0}
+.mod-right{display:flex;align-items:center;gap:12px}
+.mod-lessons{font-size:12px;color:var(--muted)}
+.mod-dur{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.mod-free{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);color:var(--accent);font-size:10px;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:1px}
+.module-body{background:rgba(255,255,255,.01);padding:16px 22px 16px 60px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.lesson{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.lesson::before{content:'▶';font-size:10px;color:var(--accent);flex-shrink:0}
+.instructors{max-width:1100px;margin:0 auto;padding:0 60px 64px}
+.instructors h2{font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:32px}
+.instructor-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.instructor{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:start}
+.inst-av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#6366f1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.inst-name{font-size:16px;font-weight:700;color:#e2e8f0;margin-bottom:3px}
+.inst-role{font-size:12px;color:var(--accent);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.inst-bio{font-size:13px;color:var(--muted);line-height:1.6}
+.reviews{background:var(--surface);padding:64px 60px;max-width:1100px;margin:0 auto}
+.reviews h2{font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:32px}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;padding:20px}
+.review-stars{color:#fbbf24;font-size:14px;margin-bottom:8px}
+.review-text{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:10px;font-style:italic}
+.review-author{font-size:12px;color:var(--muted)}
+.bottom-cta{max-width:1100px;margin:0 auto;padding:64px 60px;text-align:center}
+.bottom-cta h2{font-size:2.5rem;font-weight:800;letter-spacing:-2px;margin-bottom:12px}
+.bottom-cta p{color:var(--muted);font-size:15px;margin-bottom:32px;font-weight:300}
+.bottom-cta a{display:inline-block;background:var(--accent);color:#060812;padding:17px 48px;border-radius:10px;font-size:17px;font-weight:800;text-decoration:none}
+footer{border-top:1px solid var(--border);padding:28px 60px;text-align:center;font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:60px 24px}.enroll-card{position:static}.curriculum,.instructors,.reviews,.bottom-cta,.instructors{padding-left:24px;padding-right:24px}.instructor-grid,.review-grid{grid-template-columns:1fr}nav{padding:14px 24px}.nav-link{display:none}}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+<nav>
+  <div class="logo">DevPath.academy</div>
+  <div class="nav-right"><a href="#" class="nav-link">Curriculum</a><a href="#" class="nav-link">Instructors</a><a href="#" class="nav-link">Reviews</a><a href="#" class="nav-enroll">Enroll — ৳4,800</a></div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-tag">🚀 Cohort 8 · Starting June 10</div>
+    <h1>Full-Stack Web Dev<br><span class="hl">From Zero to Hired.</span></h1>
+    <p class="hero-desc">12 weeks. React, Node.js, PostgreSQL, AWS, and a portfolio of 5 real projects. The most practical, career-focused bootcamp in Bangladesh — with a job guarantee.</p>
+    <div class="hero-stats">
+      <div class="h-stat"><span class="n">94%</span><span class="l">Job rate in 90 days</span></div>
+      <div class="h-stat"><span class="n">2,400+</span><span class="l">Graduates hired</span></div>
+      <div class="h-stat"><span class="n">12 wks</span><span class="l">Duration</span></div>
+      <div class="h-stat"><span class="n">Job</span><span class="l">Guarantee</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--accent);margin-bottom:10px;font-family:'JetBrains Mono',monospace">// TECH STACK YOU'LL MASTER</p>
+    <div class="stack-row">
+      <div class="stack-pill">HTML/CSS</div><div class="stack-pill">JavaScript</div><div class="stack-pill">React</div><div class="stack-pill">Node.js</div><div class="stack-pill">PostgreSQL</div><div class="stack-pill">AWS</div><div class="stack-pill">Git/GitHub</div><div class="stack-pill">Docker</div>
+    </div>
+  </div>
+  <div class="enroll-card">
+    <div class="ec-eyebrow">Enroll Now</div>
+    <div class="ec-price">৳4,800</div>
+    <div class="ec-orig">Regular price: ৳8,000</div>
+    <div class="ec-badge">40% EARLY BIRD — Ends May 31</div>
+    <ul class="ec-include">
+      <li>12 weeks live instruction</li>
+      <li>5 portfolio projects</li>
+      <li>1-on-1 mentor sessions</li>
+      <li>Career coaching + CV review</li>
+      <li>Job guarantee or 100% refund</li>
+      <li>Lifetime alumni community access</li>
+    </ul>
+    <a href="#" class="ec-btn">→ Enroll for ৳4,800</a>
+    <div class="ec-note">Only 24 seats per cohort · 18 taken<br>EMI available: ৳1,600/month × 3</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="curriculum">
+  <div class="curr-header"><h2>Curriculum</h2><div class="curr-meta">12 modules · 84 lessons · ~200 hours</div></div>
+  <div class="modules">
+    <div class="module"><div class="module-header"><div class="mod-left"><span class="mod-num">01</span><span class="mod-title">HTML, CSS & Responsive Design</span></div><div class="mod-right"><span class="mod-lessons">8 lessons</span><span class="mod-dur">2 wks</span><span class="mod-free">FREE PREVIEW</span></div></div>
+    <div class="module-body"><div class="lesson">HTML5 semantic elements and document structure</div><div class="lesson">CSS Flexbox &amp; Grid layouts</div><div class="lesson">Mobile-first responsive design</div><div class="lesson">Building your first webpage from scratch</div></div></div>
+    <div class="module"><div class="module-header"><div class="mod-left"><span class="mod-num">02</span><span class="mod-title">JavaScript Fundamentals & ES6+</span></div><div class="mod-right"><span class="mod-lessons">10 lessons</span><span class="mod-dur">2 wks</span></div></div></div>
+    <div class="module"><div class="module-header"><div class="mod-left"><span class="mod-num">03</span><span class="mod-title">React.js & Component Architecture</span></div><div class="mod-right"><span class="mod-lessons">12 lessons</span><span class="mod-dur">2 wks</span></div></div></div>
+    <div class="module"><div class="module-header"><div class="mod-left"><span class="mod-num">04</span><span class="mod-title">Node.js, Express & REST APIs</span></div><div class="mod-right"><span class="mod-lessons">10 lessons</span><span class="mod-dur">2 wks</span></div></div></div>
+    <div class="module"><div class="module-header"><div class="mod-left"><span class="mod-num">05</span><span class="mod-title">PostgreSQL & Database Design</span></div><div class="mod-right"><span class="mod-lessons">8 lessons</span><span class="mod-dur">1 wk</span></div></div></div>
+    <div class="module"><div class="module-header"><div class="mod-left"><span class="mod-num">06</span><span class="mod-title">AWS Deployment, DevOps & Capstone Project</span></div><div class="mod-right"><span class="mod-lessons">8 lessons</span><span class="mod-dur">3 wks</span></div></div></div>
+  </div>
+</section>
+
+<section class="instructors">
+  <h2>Your Instructors</h2>
+  <div class="instructor-grid">
+    <div class="instructor"><div class="inst-av">👨‍💻</div><div><div class="inst-name">Arif Rahman</div><div class="inst-role">// Lead Instructor</div><div class="inst-bio">Senior engineer at Apex Tech. 6 years building production systems. Taught 800+ students across 7 cohorts.</div></div></div>
+    <div class="instructor"><div class="inst-av">👩‍💻</div><div><div class="inst-name">Nadia Islam</div><div class="inst-role">// Frontend Instructor</div><div class="inst-bio">UI/UX engineer. Previously at ShopMart BD. Expert in React, accessibility, and design systems.</div></div></div>
+  </div>
+</section>
+
+<section class="reviews" style="border-radius:0">
+  <h2>What Graduates Say</h2>
+  <div class="review-grid">
+    <div class="review"><div class="review-stars">★★★★★</div><div class="review-text">"Got my first dev job 6 weeks after graduating. The job guarantee gave me confidence to quit my old job and commit fully."</div><div class="review-author">— Karim U., now at PayFlow BD</div></div>
+    <div class="review"><div class="review-stars">★★★★★</div><div class="review-text">"Best ৳4,800 I've ever spent. The projects in my portfolio are real and complex — not just to-do apps."</div><div class="review-author">— Sabina M., now at Synapse Labs</div></div>
+    <div class="review"><div class="review-stars">★★★★★</div><div class="review-text">"Arif doesn't just teach syntax — he teaches how to think like an engineer. That mindset is what got me the job."</div><div class="review-author">— Rahul A., now at GrowthPocket</div></div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <h2>94% of graduates get hired. Will you?</h2>
+  <p>Cohort 8 starts June 10. Only 6 seats remaining.</p>
+  <a href="#">→ Secure Your Seat — ৳4,800</a>
+</section>
+<footer>// DevPath.academy · Dhaka · devpath.academy · Cohort 8 · June 10, 2025</footer>
+</body></html>

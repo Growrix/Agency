@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Axiom — Productivity App</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0e0f14;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0e0f14;margin:0 auto;overflow:hidden;color:#d0d8f0}
+
+/* ISOMETRIC DESIGN — CSS perspective + geometric diagonal lines */
+/* Isometric grid feeling through diagonal patterns and 3D-ish cards */
+:root{--iso-angle:30deg;--acc:#5060ff;--acc2:#00d4c8}
+
+/* Diagonal stripe background */
+.hero{min-height:295px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 24px}
+.iso-bg{position:absolute;inset:0;background-color:#0e0f14;background-image:
+  repeating-linear-gradient(60deg,rgba(80,96,255,.06) 0,rgba(80,96,255,.06) 1px,transparent 1px,transparent 28px),
+  repeating-linear-gradient(-60deg,rgba(0,212,200,.04) 0,rgba(0,212,200,.04) 1px,transparent 1px,transparent 28px),
+  repeating-linear-gradient(0deg,rgba(80,96,255,.02) 0,rgba(80,96,255,.02) 1px,transparent 1px,transparent 28px);
+  pointer-events:none}
+/* Isometric cube accent decoration */
+.iso-cube{position:absolute;right:16px;top:24px;width:80px;height:80px}
+.cube-top{position:absolute;top:0;left:10px;width:60px;height:30px;background:linear-gradient(135deg,rgba(80,96,255,.2),rgba(80,96,255,.1));transform:skewX(-30deg);border:1px solid rgba(80,96,255,.2)}
+.cube-left{position:absolute;top:22px;left:0;width:30px;height:40px;background:rgba(80,96,255,.08);border:1px solid rgba(80,96,255,.15)}
+.cube-right{position:absolute;top:22px;left:29px;width:30px;height:40px;background:rgba(80,96,255,.12);border:1px solid rgba(80,96,255,.18)}
+.hero-top{position:absolute;top:24px;left:20px;right:110px}
+.h-logo{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;color:rgba(208,216,240,.35);letter-spacing:1px}
+.h-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;background:rgba(80,96,255,.1);border:1px solid rgba(80,96,255,.2);border-radius:3px;padding:3px 10px;color:rgba(120,140,255,.7);letter-spacing:1px;font-family:'Space Mono',monospace;margin-top:6px}
+.hd{width:5px;height:5px;background:rgba(0,212,200,.8);border-radius:50%;animation:b 2s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-size:38px;font-weight:800;color:#d0d8f0;line-height:.9;letter-spacing:-2px}
+.hero h1 .a{background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:11px;color:rgba(208,216,240,.32);margin-top:9px;line-height:1.6}
+.hero-rule{height:1px;background:linear-gradient(90deg,rgba(80,96,255,.3),rgba(0,212,200,.25),transparent);margin-top:14px}
+
+/* ISO stats — 3D tilted cards */
+.iso-stats{display:flex;gap:6px;padding:14px 16px}
+.is{flex:1;background:#14161e;border:1px solid rgba(80,96,255,.12);border-radius:8px;padding:14px 10px;text-align:center;position:relative;overflow:hidden}
+/* Pseudo isometric top edge */
+.is::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--acc),var(--acc2));opacity:.5}
+.is-n{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:rgba(80,96,255,.9);letter-spacing:-1px}
+.is-l{font-size:8px;color:rgba(208,216,240,.2);margin-top:3px;letter-spacing:1.5px;text-transform:uppercase}
+
+.body{padding:0 14px 40px}
+.sec{font-family:'Space Mono',monospace;font-size:9px;color:rgba(80,96,255,.4);letter-spacing:2px;text-transform:uppercase;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(80,96,255,.1)}
+
+/* ISO feature cards — slight perspective tilt suggestion */
+.features{display:flex;flex-direction:column;gap:7px}
+.feat{background:#12141c;border:1px solid rgba(80,96,255,.1);border-radius:12px;padding:16px;display:flex;align-items:flex-start;gap:14px;position:relative;overflow:hidden}
+/* Left accent bar suggesting 3D depth */
+.feat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--acc),var(--acc2));opacity:.6}
+.feat-icon{font-size:24px;flex-shrink:0;margin-top:1px}
+.feat-name{font-size:14px;font-weight:700;color:#d0d8f0;letter-spacing:-.3px}
+.feat-desc{font-size:10px;color:rgba(208,216,240,.28);margin-top:2px;line-height:1.4}
+
+/* ISO pricing — 3D step cards */
+.pricing{display:flex;flex-direction:column;gap:6px}
+.plan{background:#12141c;border:1px solid rgba(80,96,255,.1);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative}
+.plan.pro{background:rgba(80,96,255,.08);border-color:rgba(80,96,255,.22)}
+.plan::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--acc),var(--acc2));border-radius:10px 0 0 10px;opacity:.5}
+.plan.pro::before{opacity:1}
+.plan-name{font-size:14px;font-weight:700;color:#d0d8f0}
+.plan-desc{font-size:10px;color:rgba(208,216,240,.28);margin-top:2px}
+.plan-price{font-family:'Space Mono',monospace;font-size:17px;color:rgba(80,96,255,.8);flex-shrink:0;text-align:right}
+
+.cta{background:#12141c;border:1px solid rgba(80,96,255,.15);border-radius:14px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--acc),var(--acc2));opacity:.7}
+.cta h3{font-size:20px;font-weight:800;color:#d0d8f0;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:11px;color:rgba(208,216,240,.28);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:linear-gradient(135deg,#4050d8,#00b8b0);color:#fff;border-radius:8px;padding:14px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:7px;letter-spacing:-.2px}
+.cta-btn2{display:block;background:#12141c;color:rgba(208,216,240,.3);border:1px solid rgba(80,96,255,.12);border-radius:8px;padding:12px;font-family:'Space Mono',monospace;font-size:10px;text-decoration:none}
+.contacts{background:#12141c;border:1px solid rgba(80,96,255,.1);border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(80,96,255,.06);font-size:12px;color:rgba(208,216,240,.28)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:rgba(80,96,255,.12);border:1px solid rgba(80,96,255,.18);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{border-top:1px solid rgba(80,96,255,.06);padding:14px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;color:rgba(208,216,240,.12);letter-spacing:2px}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="iso-bg"></div>
+  <div class="iso-cube"><div class="cube-top"></div><div class="cube-left"></div><div class="cube-right"></div></div>
+  <div class="hero-top">
+    <div class="h-logo">Axiom</div>
+    <div class="h-badge"><span class="hd"></span>v3.2 · Live</div>
+  </div>
+  <h1>Work<br>at <span class="a">peak<br>velocity.</span></h1>
+  <div class="hero-sub">The all-in-one productivity platform for teams who think in systems. Tasks, docs, and goals — one isometric view.</div>
+  <div class="hero-rule"></div>
+</div>
+<div class="iso-stats">
+  <div class="is"><div class="is-n">120K+</div><div class="is-l">Teams</div></div>
+  <div class="is"><div class="is-n">99.9%</div><div class="is-l">Uptime</div></div>
+  <div class="is"><div class="is-n">SOC 2</div><div class="is-l">Certified</div></div>
+</div>
+<div class="body">
+  <div class="sec">Core Features</div>
+  <div class="features">
+    <div class="feat"><div class="feat-icon">📋</div><div><div class="feat-name">Project Command Centre</div><div class="feat-desc">Kanban, Gantt, list and calendar — switch views instantly</div></div></div>
+    <div class="feat"><div class="feat-icon">🤖</div><div><div class="feat-name">AI-Powered Summaries</div><div class="feat-desc">Auto-generate meeting notes, weekly reports and next actions</div></div></div>
+    <div class="feat"><div class="feat-icon">🔗</div><div><div class="feat-name">200+ Integrations</div><div class="feat-desc">Slack, GitHub, Figma, Notion, Google Workspace and more</div></div></div>
+    <div class="feat"><div class="feat-icon">📊</div><div><div class="feat-name">Team Analytics</div><div class="feat-desc">Velocity, capacity, burndown — real-time across all projects</div></div></div>
+  </div>
+  <div class="sec">Pricing</div>
+  <div class="pricing">
+    <div class="plan"><div><div class="plan-name">Starter</div><div class="plan-desc">Up to 5 users · core features</div></div><div class="plan-price">Free</div></div>
+    <div class="plan pro"><div><div class="plan-name">⭐ Pro</div><div class="plan-desc">Unlimited users · AI features · integrations</div></div><div class="plan-price">$12/mo</div></div>
+    <div class="plan"><div><div class="plan-name">Enterprise</div><div class="plan-desc">SSO · dedicated support · custom SLA</div></div><div class="plan-price">Custom</div></div>
+  </div>
+  <div class="sec">Try Axiom</div>
+  <div class="cta">
+    <h3>Start your free workspace.</h3>
+    <p>No credit card. No setup. Invite your team and go live in 5 minutes.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">⚡ Start Free — No Card Needed</a>
+    <a href="mailto:hello@axiomapp.io" class="cta-btn2">hello@axiomapp.io</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📧</div>hello@axiomapp.io</div>
+    <div class="cr"><div class="ci">📍</div>Dhaka · Remote-first · Global</div>
+    <div class="cr"><div class="ci">⏰</div>Support 24/7 · Chat in-app</div>
+  </div>
+</div>
+<footer>AXIOM · PRODUCTIVITY PLATFORM · DHAKA</footer>
+</div></body></html>

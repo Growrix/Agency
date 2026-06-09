@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "biz-card-c.html",
+        "type_slug":  "digital-business-cards",
+        "parent_category_slug":  "business-professional",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/business-professional/digital-business-cards/biz-card-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/business-cards\\biz-card-c.html"
+    },
+    {
+        "source_file":  "biz-card-b.html",
+        "type_slug":  "digital-business-cards",
+        "parent_category_slug":  "business-professional",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/business-professional/digital-business-cards/biz-card-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/business-cards\\biz-card-b.html"
+    },
+    {
+        "source_file":  "biz-card-a.html",
+        "type_slug":  "digital-business-cards",
+        "parent_category_slug":  "business-professional",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/business-professional/digital-business-cards/biz-card-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/business-cards\\biz-card-a.html"
+    }
+]

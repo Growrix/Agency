@@ -31,7 +31,7 @@ integration_points:
   
   persistence:
     - app_state table (public.app_state) for application state
-    - Row-level security disabled (accessed only via service_role_key)
+    - Row-level security enabled (client roles blocked by policy)
     - Conditional: Supabase if env vars present, local file fallback if not
     - Schema: id (text primary key), payload (jsonb), updated_at (timestamptz)
   
@@ -67,7 +67,7 @@ bootstrap_status:
     timestamp: 2026-04-23T00:00:00Z
     table_name: public.app_state
     indexes: app_state_updated_at_idx
-    rls_status: disabled
+    rls_status: enabled
   
   verification_phase: pending
     - Test user registration against Supabase Auth
@@ -108,7 +108,7 @@ core_invariants:
   - Credentials are shared across local and production environments
   - NEXT_PUBLIC_SITE_URL is environment-specific; Supabase credentials are not
   - app_state table is server-only; never exposed to client-side queries
-  - RLS is disabled because table is trusted application infrastructure
+  - RLS is enabled and client roles are blocked by policy on app_state
   - All Supabase operations use service_role_key (SUPABASE_SECRET_KEY) from backend
   - Fallback to local bcryptjs + file persistence if Supabase env vars missing
   - Bootstrap SQL must execute before auth/persistence endpoints are functional

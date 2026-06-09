@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HungerRun — Food Delivery. Faster Than You Think.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#ff3b3b;--amber:#ffb800;--dark:#0a0a0a}
+body{background:#fff;color:var(--dark);font-family:'Nunito',sans-serif;overflow-x:hidden}
+nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--dark);position:sticky;top:0;background:#fff;z-index:100}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--red)}
+.nav-dl{display:flex;gap:10px}
+.nav-store{display:inline-flex;align-items:center;gap:7px;background:var(--dark);color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;transition:.15s}
+.nav-store:hover{background:var(--red)}
+.hero{background:var(--red);padding:60px 48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;overflow:hidden;position:relative}
+.hero::after{content:'🍔';position:absolute;right:-20px;bottom:-30px;font-size:200px;opacity:.08;transform:rotate(-15deg)}
+.hero-kicker{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:6px 14px;font-size:11px;color:#fff;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,7rem);line-height:.88;color:#fff;margin-bottom:18px;text-transform:uppercase;letter-spacing:1px}
+.hero-desc{font-size:16px;color:rgba(255,255,255,.8);line-height:1.7;font-weight:400;max-width:380px;margin-bottom:28px}
+.dl-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.btn-white{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--dark);padding:13px 24px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:800;transition:.2s}
+.btn-white:hover{background:#f0f0f0;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;border:2px solid rgba(255,255,255,.5);color:#fff;padding:11px 20px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:700}
+.btn-txt .sub{font-size:10px;display:block;opacity:.65;text-transform:uppercase;letter-spacing:1px}
+.btn-txt .main{font-size:15px;display:block}
+.hero-badges{display:flex;gap:14px;flex-wrap:wrap}
+.h-badge{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.75);font-weight:600}
+.h-badge::before{content:'✓';font-weight:900}
+.phone-hero{position:relative;z-index:1}
+.phone-card{background:#fff;border-radius:32px;padding:18px 14px;width:240px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.p-notch{width:72px;height:7px;background:#e0e0e0;border-radius:4px;margin:0 auto 14px}
+.p-screen{background:#fff8f0;border-radius:22px;overflow:hidden;min-height:400px;display:flex;flex-direction:column}
+.p-header{background:var(--red);padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.p-h-left .p-greeting{font-size:10px;color:rgba(255,255,255,.7)}
+.p-h-left .p-name{font-size:14px;font-weight:800;color:#fff}
+.p-h-right{font-size:20px}
+.p-search{margin:10px;background:#fff;border-radius:10px;padding:10px 12px;font-size:12px;color:#bbb;border:1px solid #f0e0d0}
+.p-cats{display:flex;gap:6px;padding:0 10px 10px;overflow:hidden}
+.p-cat{background:#fff;border:1px solid #f0e0d0;border-radius:20px;padding:5px 12px;font-size:10px;font-weight:700;white-space:nowrap;color:#555}
+.p-cat.active{background:var(--red);border-color:var(--red);color:#fff}
+.p-restaurants{padding:0 10px;display:flex;flex-direction:column;gap:8px;flex:1}
+.p-rest{background:#fff;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:center;border:1px solid #f5e8d8}
+.p-rest-icon{width:38px;height:38px;border-radius:8px;background:#fff8f0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid #f0e0d0}
+.p-rest-name{font-size:12px;font-weight:700;color:#333;margin-bottom:1px}
+.p-rest-meta{font-size:10px;color:#aaa}
+.p-rest-rating{font-size:11px;color:var(--amber);font-weight:700;margin-left:auto;white-space:nowrap}
+.tracking-strip{background:var(--dark);padding:8px 48px;text-align:center}
+.tracking-strip p{font-size:13px;color:rgba(255,255,255,.6);font-weight:600}
+.tracking-strip strong{color:var(--amber)}
+.cuisine-section{padding:60px 48px;background:#fff}
+.cuisine-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:2px;margin-bottom:8px;text-align:center;text-transform:uppercase}
+.cuisine-section .sub{text-align:center;color:#888;margin-bottom:36px;font-size:15px;font-weight:400}
+.cuisine-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:900px;margin:0 auto}
+.cuisine{border:2px solid #e8e8e8;border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:.2s}
+.cuisine:hover{border-color:var(--red);transform:translateY(-3px)}
+.cuisine-emoji{font-size:36px;display:block;margin-bottom:8px}
+.cuisine-name{font-size:14px;font-weight:700}
+.cuisine-count{font-size:12px;color:#aaa}
+.how-it-works{background:#fff8f0;padding:60px 48px}
+.how-it-works h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:2px;text-align:center;margin-bottom:48px;text-transform:uppercase}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto}
+.step{text-align:center}
+.step-circle{width:64px;height:64px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px}
+.step h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.step p{font-size:14px;color:#777;font-weight:400;line-height:1.6}
+.cta-hero{background:var(--dark);padding:60px 48px;text-align:center}
+.cta-hero h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);color:#fff;letter-spacing:2px;line-height:.9;margin-bottom:14px;text-transform:uppercase}
+.cta-hero h2 span{color:var(--amber)}
+.cta-hero p{color:rgba(255,255,255,.5);font-size:16px;margin-bottom:32px;font-weight:400}
+.cta-dl-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:24px 48px;text-align:center;font-size:12px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:48px 24px}.hero::after{display:none}.cuisine-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.cuisine-section,.how-it-works,.cta-hero{padding:48px 24px}nav{padding:14px 24px}.phone-hero{order:-1}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Hunger<span style="color:var(--amber)">Run</span></div>
+  <div class="nav-dl">
+    <a href="#" class="nav-store">🍎 iOS</a>
+    <a href="#" class="nav-store">▶ Android</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-kicker">🚀 Dhaka's #1 Food Delivery App</div>
+    <h1>Food.<br>Fast.<br>Real.</h1>
+    <p class="hero-desc">2,400 restaurants. Live order tracking. Average delivery in 28 minutes. HungerRun brings Dhaka's best food straight to your door.</p>
+    <div class="dl-row">
+      <a href="#" class="btn-white"><span style="font-size:20px">🍎</span><div class="btn-txt"><span class="sub">Download on</span><span class="main">App Store</span></div></a>
+      <a href="#" class="btn-outline"><span style="font-size:20px">▶</span><div class="btn-txt"><span class="sub">Get it on</span><span class="main">Google Play</span></div></a>
+    </div>
+    <div class="hero-badges">
+      <div class="h-badge">Free delivery on first 3 orders</div>
+      <div class="h-badge">Live GPS tracking</div>
+      <div class="h-badge">28-min avg delivery</div>
+    </div>
+  </div>
+  <div class="phone-hero">
+    <div class="phone-card">
+      <div class="p-notch"></div>
+      <div class="p-screen">
+        <div class="p-header">
+          <div class="p-h-left"><div class="p-greeting">Good evening 👋</div><div class="p-name">What are you craving?</div></div>
+          <div class="p-h-right">🛒</div>
+        </div>
+        <div class="p-search">🔍 &nbsp;Search restaurants or dishes...</div>
+        <div class="p-cats">
+          <div class="p-cat active">All</div><div class="p-cat">🍚 Biryani</div><div class="p-cat">🍔 Burgers</div><div class="p-cat">🍕 Pizza</div>
+        </div>
+        <div class="p-restaurants">
+          <div class="p-rest"><div class="p-rest-icon">🍚</div><div><div class="p-rest-name">Spice Palace</div><div class="p-rest-meta">Biryani · Banani · 28 min</div></div><div class="p-rest-rating">★ 4.8</div></div>
+          <div class="p-rest"><div class="p-rest-icon">🍔</div><div><div class="p-rest-name">Street Hunger</div><div class="p-rest-meta">Burgers · Dhanmondi · 22 min</div></div><div class="p-rest-rating">★ 4.7</div></div>
+          <div class="p-rest"><div class="p-rest-icon">🍕</div><div><div class="p-rest-name">Pizza House BD</div><div class="p-rest-meta">Pizza · Gulshan · 35 min</div></div><div class="p-rest-rating">★ 4.6</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tracking-strip"><p>🛵 Your last order arrived in <strong>24 minutes</strong> · Rider rating: ★★★★★ · Track live anytime</p></div>
+
+<section class="cuisine-section">
+  <h2>Every craving covered.</h2>
+  <p class="sub">2,400 restaurants across 12 Dhaka neighbourhoods</p>
+  <div class="cuisine-grid">
+    <div class="cuisine"><span class="cuisine-emoji">🍚</span><div class="cuisine-name">Biryani & Rice</div><div class="cuisine-count">284 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">🍔</span><div class="cuisine-name">Burgers</div><div class="cuisine-count">142 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">🍕</span><div class="cuisine-name">Pizza</div><div class="cuisine-count">96 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">🍜</span><div class="cuisine-name">Asian & Noodles</div><div class="cuisine-count">188 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">🥘</span><div class="cuisine-name">Deshi Food</div><div class="cuisine-count">420 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">☕</span><div class="cuisine-name">Café & Desserts</div><div class="cuisine-count">165 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">🌮</span><div class="cuisine-name">Shawarma & Wraps</div><div class="cuisine-count">113 restaurants</div></div>
+    <div class="cuisine"><span class="cuisine-emoji">🥗</span><div class="cuisine-name">Healthy & Salads</div><div class="cuisine-count">72 restaurants</div></div>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <h2>Order in 3 taps.</h2>
+  <div class="steps">
+    <div class="step"><div class="step-circle">🔍</div><h3>Pick a restaurant</h3><p>Browse 2,400 restaurants, filter by cuisine, rating, delivery time, or price.</p></div>
+    <div class="step"><div class="step-circle">🛒</div><h3>Place your order</h3><p>Build your order, pay with bKash, Nagad, card, or cash on delivery. One tap to confirm.</p></div>
+    <div class="step"><div class="step-circle">🚪</div><h3>Watch it arrive</h3><p>Track your rider live on the map. Real-time ETA. Average delivery: 28 minutes.</p></div>
+  </div>
+</section>
+
+<section class="cta-hero">
+  <h2>HUNGRY?<br><span>DOWNLOAD.</span></h2>
+  <p>Free delivery on your first 3 orders. Use code NEWORDER.</p>
+  <div class="cta-dl-row">
+    <a href="#" class="btn-white"><span style="font-size:20px">🍎</span><div class="btn-txt"><span class="sub">Download on</span><span class="main">App Store</span></div></a>
+    <a href="#" class="btn-outline" style="border-color:rgba(255,255,255,.3)"><span style="font-size:20px">▶</span><div class="btn-txt"><span class="sub">Get it on</span><span class="main">Google Play</span></div></a>
+  </div>
+</section>
+<footer>© 2025 HUNGERRUN · hungerrun.com.bd · Privacy · Terms · Rider Partner · Restaurant Partner</footer>
+</body></html>

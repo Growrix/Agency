@@ -5,7 +5,7 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-05-02
+last_audit_date: 2026-06-07
 current_state:
   repo_branch_audited: BOT
   frontend_shell: done
@@ -18,11 +18,16 @@ current_state:
   security_implementation: partial
   devops_implementation: partial
   qa_implementation: done
+  product_led_platform_planning: done
+  product_led_platform_implementation: partial
+  content_composition_alignment_planning: done
+  content_composition_alignment_implementation: partial
   deployable: false
 release_blockers:
   - Full integrated production release is still blocked by external integrations and content-operations rollout work intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and the now-documented CMS/content operations implementation plan).
   - Customer/subscriber RBAC and protected self-service ownership flows are implemented to a baseline level, but richer policy granularity remains a hardening follow-up.
   - Infrastructure-as-code and external monitoring/alerting stack work are still pending if deployment expands beyond frontend-hosted runtime.
+  - Product-led platform release is blocked until normalized Supabase transactional schema, private downloads, customer dashboard, lead scoring, Lark notifications, expanded Resend commerce emails, and upgraded admin product-led operations are implemented and validated.
 phase_sequence:
   - P0-documentation-tracking-alignment
   - P1-frontend-foundation
@@ -33,22 +38,21 @@ phase_sequence:
   - P6-qa-release-gates
   - P7-admin-dashboard-e2e-expansion
   - P8-frontend-cms-content-operations
-next_recommended_phase: P8-frontend-cms-content-operations
+  - P9-product-led-platform-gap-implementation
+  - P10-content-composition-alignment
+next_recommended_phase: P10-content-composition-alignment
 next_recommended_tasks:
-  - T041
-  - T042
-  - T043
-  - T044
+  - T062
 phase_status_counts:
   done: 4
-  partial: 5
+  partial: 7
   blocked: 0
   not_started: 0
 task_status_counts:
-  done: 29
-  partial: 7
+  done: 40
+  partial: 12
   blocked: 0
-  not_started: 8
+  not_started: 2
 ---
 
 # Tasks / Execution Tracker
@@ -60,7 +64,32 @@ task_status_counts:
 	- DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
+- Hybrid catalog fallback policy (active):
+  - public catalog source remains hybrid (published CMS + intentional fallback seed sets)
+  - fallback seed sets are explicit product-line groups only: HTML Business Profiles, anchor products, curated HTML Email Template packs
+  - placeholder/legacy mock records are filtered before public exposure
+- Product URL policy (active):
+  - canonical listing and detail surfaces are `/products` and `/products/[slug]`
+  - category and type remain discovery filters via query params (for example `/products?category=saas-templates`)
+  - reserved product slug segments (`free`, `bundles`, `category`) are blocked to prevent route collisions
 - Active tracked sessions:
+  - fixed failing admin sign-in with `.env.local` credentials by hardening `authenticateUser` in `web/src/server/auth/users.ts`: when Supabase Auth is configured but `signInWithPassword` fails (stale/mismatched Supabase admin password), the flow now safely falls back to the configured environment admin credentials (`ADMIN_EMAIL` + `ADMIN_PASSWORD`) and synchronizes a local admin user record, restoring deterministic local admin login without weakening role checks
+  - implementing Product Publishing & Shop Management alignment by codifying a hybrid catalog publishing contract in `web/src/server/domain/catalog.ts` (explicit fallback seed sets + legacy placeholder filtering), aligning HTML profile pricing/variants to planned Standard (`$19`) + Premium (`$49`) + Done-For-You (`$299-$799`) in fallback and Sanity-normalized paths, introducing curated HTML Email Template packs with Standard (`$15`) + Premium (`$39`) + Done-For-You (`$199-$499`) tiers, and syncing shop/admin/import taxonomy defaults to `HTML Templates` + `Email Templates` before final validation
+  - completed P10 implementation slices for catalog/content composition by seeding anchor product records with authored Standard/Premium/Done-For-You variants plus bundle/free offers (`getDefaultAnchorProducts` in `web/src/server/domain/catalog.ts`), refactoring product detail composition with explicit non-math fallback tiers + audience/use-case section + mobile sticky buy/preview actions (`web/src/app/shop/[slug]/page.tsx`), restructuring `/pricing` into tabbed Digital Products | Done-For-You Setup | Custom Services and aligning contact taxonomy/budget bands (`web/src/app/pricing/PricingPageClient.tsx`, `web/src/app/pricing/page.tsx`, `web/src/app/contact/page.tsx`), and completing pending P10 doc sync for `00-master-ui-architecture.md` and `product-detail-page.md` (T056, T057, T060, T061 done)
+  - started P10 content-composition-alignment by creating `DOC/PROJECT PLAN/content-composition-alignment-e2e-plan.md` plus downstream Frontend/QA role docs, extracting marketing components (`TrustBar`, `FeaturedProducts`, `ThreePathExplainer`, `ServiceCards`, `Testimonials`, `ProductLedFinalCTA`, `SolutionsLanding`), recomposing the homepage around the product-led funnel, rewriting the `/products` index hero, shipping `/services/template-customization`, adding four `/solutions/*` audience landings, updating nav/footer route maps, and syncing `home-page.md` + Frontend `ai-context.yaml` (T053–T055, T058–T059, T061 partial/done; T056–T057, T060–T062 remain)
+  - completed Slice 5 of the product-led platform completion plan by wiring Lark `purchase_completed` and `download_issued` notifications into `markOrderPaid` and `updateOrderOperations` (via `dispatchNotification` with audit-guarded try/catch fallback) and adding the operator-gated Supabase normalized migration runner `web/scripts/migrate-supabase.mjs` + `npm run db:migrate` (reads `web/supabase/schema.sql`, applies over `SUPABASE_DB_URL` using `pg`, redacted connection logging, idempotent statements), validated with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), warning-free `next build` (163/163 static pages); live Supabase migration execution remains an explicit manual operator step against shared infrastructure (T050 done; T048 final live migration intentionally deferred to operator)
+  - completed Slice 4 of the product-led platform completion plan by introducing authenticated admin operations endpoints for leads (`/api/v1/admin/leads`, `/api/v1/admin/leads/[leadId]`), service requests (`/api/v1/admin/service-requests` + `[id]` with audited status PATCH via `updateServiceRequestStatus`), entitlements (`/api/v1/admin/downloads`, `/api/v1/admin/licenses`), notification logs (`/api/v1/admin/notifications`), and product funnel analytics (`/api/v1/admin/funnel`) bucketing `analytics_events`/`lead_events` into view→click→cart→checkout→paid→delivered with conversion rates, lead temperature distribution, and totals snapshot, plus extending `/api/v1/admin/analytics` to surface lead/service-request/download/license/notification totals + latest 10-record sample lists, all behind `requireAdminUser` with `ApiError` field-validation, validated with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), warning-free `next build` (163/163, all 8 new admin routes in route table) (T052 done)
+  - completed Slice 3 of the product-led platform completion plan by adding the commerce + lead Resend email module (`web/src/server/domain/commerce-emails.ts`) covering purchase confirmation, download-ready, and service-request confirmation with HTML-escaped templates, runtime-config sender/reply-to, 5s timeout fallback, and dashboard deep-links, wiring `safeSend*` wrappers into `markOrderPaid` (purchase email on `payment_status === "succeeded"`) and `updateOrderOperations` (download email on `fulfillment_status === "delivered"` with `delivery_urls`) in `web/src/server/domain/orders.ts`, and into the existing `Promise.all` of `createServiceRequest` in `web/src/server/domain/service-requests.ts`, with `recordAuditLog` failure breadcrumbs and graceful no-op when Resend is unconfigured; validated with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), and a warning-free `next build` (163/163) (T051 done)
+  - completed Slice 1 of the product-led platform completion plan by adding the leads / lead_events / service_requests / notifications / downloads / licenses data layer (`web/src/server/data/schema.ts`, `store.ts`), domain modules (`web/src/server/domain/leads.ts`, `service-requests.ts`, `notifications.ts`), four new public APIs (`/api/v1/events/track`, `/api/v1/leads`, `/api/v1/service-requests`, `/api/v1/cta/whatsapp`), lead-event wiring under a `.catch` warning-audit guard in contact/appointments/AI-concierge flows, Slice 1 lead-domain unit tests, the normalized Supabase SQL (RLS + deny-all + service_role grants + `set_updated_at()` trigger) appended to `web/supabase/schema.sql`, and validated with lint (0/0), `next build` (green, all 4 new routes in route table), `tsx --test` unit (17/17) plus integration (4/4) and Playwright e2e, finalizing Slice 1 shared-contract field lists for Lead/LeadEvent/ServiceRequest/NotificationLog/Download/License in `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md` (T045 done; T048 data-layer done with live Supabase migration deferred to Slice 5; T050 events/WhatsApp/AI portions done)
+  - completed Slice 2 of the product-led platform completion plan by implementing the private download entitlement service (`web/src/server/domain/downloads.ts`) with idempotent license-on-payment and download-on-delivery issuance wired into `markOrderPaid`/`updateOrderOperations`, owner/admin authorized signed-URL issuance with expiry + max-download + ownership enforcement, new customer self-service APIs (`/api/v1/me/downloads`, `/api/v1/me/licenses`, `/api/v1/downloads/[downloadId]/signed-url`), reworked legacy `/api/v1/orders/[orderId]/download` to redirect to authorized asset URLs, a new `/success` post-checkout page, a full customer `/dashboard/**` portal (overview, products, downloads, orders, appointments, support, login) with shared `DashboardShell` reuse and customer auth UI, Stripe `success_url` switched to `/success`, proxy-based dashboard protection redirecting to `/dashboard/login?next=...`, Sanity blog fallback noise silenced in production builds (`web/src/server/sanity/blog.ts`), and validated with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), warning-free `next build` green with all new routes in the route table, plus dev-server runtime smoke (`/api/health` 200, `/success` 200, `/dashboard/login` 200, `/api/v1/me/downloads` 401, `/api/v1/me/licenses` 401, `/dashboard` 307 to login) (T049 done)
+  - completed T047 by extending Sanity/product models with tiered variants, FAQ, related product/service links, and customization upsells; updated management/admin persistence; and redesigned product detail conversion UX with Standard/Premium/Done-For-You cards, comparison matrix, tier-aware checkout handoff, and FAQ/related service sections
+  - aligned the homepage hero to the product-led platform plan by updating fallback positioning copy and CTA hierarchy to Browse Products + Book a Free Consultation with supporting actions (Need Custom Work, WhatsApp, Ask AI Assistant), while preserving the existing visual system and validating with lint/build/unit/integration plus Playwright regression rerun
+  - implemented Stripe checkout selection metadata propagation by extending checkout query/payload handling and orders APIs to capture variant/tier/fulfillment fields, persisting selection on order and order-item records, attaching metadata/line-item context in Stripe checkout sessions, reconciling selection during webhook payment completion, and extending order-domain plus API integration tests for the new flow
+  - started P9 implementation with canonical `/products` surfaces (`/products`, `/products/[slug]`, `/products/category/[category]`, `/products/bundles`, `/products/free`) while preserving `/shop` compatibility, added `/book` alias routing, switched global navigation and core commerce CTAs to product-led paths, aligned AI/revalidation route references, and validated via lint/build/type/unit/integration/e2e plus web/studio readiness probes
+  - created the canonical product-led platform gap plan from `Ongoing DOCS/Website Plan Growrix OS/websiteplan.md`, audited the existing Next.js/Sanity/Supabase implementation, identified gaps against `/products`, variants, private downloads, customer dashboard, lead scoring, Lark, Resend commerce automation, and admin operations, then materialized the root E2E artifact plus downstream role docs before updating this tracker
+  - hardened Supabase `public.app_state` security posture by enabling RLS in `web/supabase/schema.sql`, explicitly blocking `anon`/`authenticated` roles, and updating Supabase integration docs/playbooks to remove obsolete "RLS disabled" guidance after urgent advisor remediation authorization
+  - removed public static/mocked shop catalog injection so `/shop`, `/shop/[slug]`, and `/html-business-profiles` now surface published managed records only (CMS + managed catalog records), fixed HTML profile template slug normalization so each live preview resolves to its own template, and changed HTML profile live-preview CTAs to open direct embedded HTML preview URLs instead of the wrapper route
+  - added a new HTML Business Profiles delivery slice across web and studio by introducing `/html-business-profiles` preview commerce route, wiring category-aware homepage and services coverage, extending public catalog merging for built-in and Sanity-managed profile templates, adding raw HTML preview API routing, and registering a dedicated Studio schema/desk model (`htmlBusinessProfileTemplate`) for template uploads and shop-surface publication
   - aligned shop slug UX with portfolio media behavior by adding `shopItem.gallery` support in Studio schema and Sanity catalog mapping, rendering a fullscreen screenshot gallery on shop slug pages, and simplifying the key-features area into a readable bullet list style consistent with delivery scope content
   - fixed the CMS importer path-resolution bug so repo-root `npm --prefix web run cms:import` commands now accept both `./content-import/inbox/...` and `./web/content-import/inbox/...`, updated operator support/import docs, and created the `shopItem.powerpro-electrical-service-company-website` record in Sanity via the authenticated CLI session before moving the source file to `processed`
   - fixed shop slug image preview collapse by making the preview button frame full-width (`w-full`) so media no longer compresses into a thin strip and remains clickable for original-size lightbox preview
@@ -174,6 +203,12 @@ phases:
   - id: P8
     name: Frontend CMS Content Operations
     status: partial
+  - id: P9
+    name: Product-Led Platform Gap Implementation
+    status: partial
+  - id: P10
+    name: Content Composition Alignment
+    status: partial
 ```
 
 ## Phase Overview
@@ -188,6 +223,8 @@ phases:
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
 | P7 | partial | The CMS/content-operations and admin information architecture is now documented, while implementation for production-grade shop, portfolio, newsletter, and submissions operations remains ahead. |
 | P8 | partial | Shop and portfolio surfaces are now being moved to Sanity-backed loaders and CMS-authored preview metadata, while draft preview and broader route migration remain incomplete. |
+| P9 | partial | Product-led implementation now includes canonical `/products` routing, `/shop` compatibility, and tiered product-detail conversion UX with variant metadata flow. Downloads, customer dashboard, lead scoring, Lark, Resend automation, and admin operations remain pending. |
+| P10 | partial | Content-composition alignment started: marketing components, homepage recomposition, product index hero, template-customization service, and solutions landings shipped. CMS seeding, pricing tabs, product-detail refactor, and P10 QA gates remain. |
 
 ## Tasks By Phase
 
@@ -237,7 +274,7 @@ phases:
 	- `web/src/app/api/v1/orders/route.ts`
 	- `web/src/app/api/v1/orders/[orderId]/route.ts`
 	- `web/src/app/api/v1/orders/[orderId]/download/route.ts`
-  - Current state: persisted order creation, Stripe checkout handoff, status reads, manual summary download delivery, and webhook handling now exist; production fulfillment assets still need to replace the temporary download summary.
+  - Current state: persisted order creation, Stripe checkout handoff, status reads, manual summary download delivery, and webhook handling now exist; checkout variant/tier/fulfillment selection metadata now flows through order persistence, Stripe session metadata, and webhook payment updates; production fulfillment assets still need to replace the temporary download summary.
 - [~] T019 Implement subscriber and admin APIs plus auth enforcement at:
 	- `web/src/app/api/v1/me/route.ts`
 	- `web/src/app/api/v1/me/update/route.ts`
@@ -287,6 +324,37 @@ phases:
 - [ ] T043 Implement authenticated draft-mode preview and exact-path revalidation for migrated frontend surfaces in `web/src/app/api/**` and supporting server helpers.
 - [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.
 
+### Phase P9 — Product-Led Platform Gap Implementation
+- [x] T045 Update shared contracts and route ownership for the product-led platform plan in `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md` and `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`.
+  - Current state: Finalized field lists for Lead, LeadEvent, ServiceRequest, NotificationLog, Download, and License appended to `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md` (Slice 1) to match the live `web/src/server/data/schema.ts` types and the Slice 1 public APIs (`/api/v1/events/track`, `/api/v1/leads`, `/api/v1/service-requests`, `/api/v1/cta/whatsapp`).
+- [x] T046 Add canonical `/products` routes with `/shop` compatibility, product category/bundle/free surfaces, and product-led homepage CTA repositioning.
+- [x] T047 Extend Sanity and frontend product models for Standard, Premium, and Done-For-You variants, product FAQs, related products/services, and customization upsells.
+  - Current state: Sanity schemas and catalog/management mappers now support tier variants, FAQ, related links, and customization upsells; product detail routes now render tier cards, comparison rows, tier-aware checkout links, FAQ content, and related service cross-links.
+- [~] T048 Add normalized Supabase transactional schema and APIs for products metadata, product variants, orders, order items, downloads, leads, lead events, service requests, conversations, messages, and licenses.
+  - Current state: Slice 1 added the application-level data layer for `leads`, `lead_events`, `service_requests`, `notifications`, `downloads`, and `licenses` in `web/src/server/data/schema.ts` (JSON-backed store with Supabase `app_state` fallback), implemented the corresponding domain modules (`leads`, `service-requests`, `notifications`) and four new public APIs, and appended the normalized Supabase SQL (RLS, deny-all policies, `set_updated_at()` trigger, `service_role`-only grants) for all of the above tables plus `products`, `product_variants`, `orders`, `order_items`, `conversations`, `conversation_messages`, and `notification_log` to `web/supabase/schema.sql`. Slice 5 added an operator-gated migration runner `web/scripts/migrate-supabase.mjs` plus the `npm run db:migrate` script that applies `web/supabase/schema.sql` over a `SUPABASE_DB_URL` (`pg` client, redacted logging). Live execution of that migration against the Supabase project, plus full backend reads/writes through normalized tables (currently still going through `app_state`), is the only remaining piece and is intentionally deferred to manual operator action against shared infrastructure (do not automate against a shared environment).
+- [x] T049 Implement private download delivery, `/success`, and customer `/dashboard/**` surfaces for products, downloads, orders, support, and appointments.
+  - Current state: Slice 2 added a normalized entitlement service (`web/src/server/domain/downloads.ts`) that issues `LicenseRecord`s on order payment and `DownloadRecord`s when paid orders are marked delivered, with idempotent reconciliation wired into `markOrderPaid` and `updateOrderOperations` in `web/src/server/domain/orders.ts`. Introduced owner/admin authorized download URL issuance (`createAuthorizedDownloadUrl`) with expiry, max-download, and ownership enforcement, exposed through `/api/v1/downloads/[downloadId]/signed-url` and reworked the legacy `/api/v1/orders/[orderId]/download` route to redirect to the authorized asset URL. Added customer self-service APIs `/api/v1/me/downloads` and `/api/v1/me/licenses`, a new `/success` post-checkout page, and a full `/dashboard/**` customer portal (`/dashboard`, `/dashboard/products`, `/dashboard/downloads`, `/dashboard/orders`, `/dashboard/appointments`, `/dashboard/support`, `/dashboard/login`) with shared `DashboardShell` reuse and tab-based customer sign-in/register UI. Protected `/dashboard/**` via `web/src/proxy.ts` with redirect to `/dashboard/login?next=...`. Updated Stripe `success_url` to `/success`. Verified with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), production build green and warning-free, and dev-server runtime smoke (200 on `/success` and `/dashboard/login`, 401 on protected `/me/*`, 307 redirect on `/dashboard`).
+- [x] T050 Implement lead scoring, tracked WhatsApp CTAs, AI qualification writes, service request intake, and Lark hot-lead/purchase notifications.
+  - Current state: Slice 1 implemented lead scoring with canonical event weights (`web/src/server/domain/leads.ts`), temperature classification with promotion-only Lark notifications, the tracked WhatsApp CTA at `/api/v1/cta/whatsapp` (records `whatsapp_click` event then 302 redirects to `runtime.cta.whatsappHref`), AI concierge optional lead-event writes (`ai_message`), service request intake at `/api/v1/service-requests` with audit + notification, and the public `/api/v1/events/track` ingestion route. Contact, appointments, and concierge flows now emit lead events under a `.catch` warning-audit guard. Slice 5 closed the remaining Lark **purchase** notification piece by wiring `dispatchNotification({ kind: "purchase_completed" })` into `markOrderPaid` (fires when `payment_status === "succeeded"` after `safeSendPurchaseConfirmationEmail`) and `dispatchNotification({ kind: "download_issued" })` into `updateOrderOperations` (fires when fulfillment transitions to `delivered` with at least one delivery URL), both in `web/src/server/domain/orders.ts`, each wrapped in a try/catch that records `order.notification_purchase_failed` / `order.notification_download_failed` audit entries so order flows never break on notification errors. When Lark is unconfigured, `dispatchNotification` no-ops via the existing `console` channel + `skipped` log entry. Validated with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), and a warning-free `next build` (163/163 static pages).
+- [x] T051 Extend Resend commerce and lead email automation for purchase confirmation, download links, service request confirmation, and follow-up sequences.
+  - Current state: Slice 3 added the commerce and lead email module `web/src/server/domain/commerce-emails.ts` exporting `sendPurchaseConfirmationEmail`, `sendDownloadReadyEmail`, and `sendServiceRequestConfirmationEmail`, all delivered through Resend with a 5s timeout fallback, runtime-config-driven sender/reply-to, HTML-escaped templates, and dashboard deep-links to `/dashboard/orders`, `/dashboard/downloads`, and `/dashboard/support`. Wrapped each in `safeSend*` wrappers that swallow failures with `recordAuditLog` (`order.email_purchase_failed`, `order.email_download_failed`, `service_request.email_confirmation_failed`) so order/service-request flows never break on email errors. Wired purchase confirmation into `markOrderPaid` (fires after `syncOrderEntitlements` whenever `payment_status === "succeeded"`) and download-ready into `updateOrderOperations` (fires after `syncOrderEntitlements` whenever fulfillment transitions to `delivered` with `delivery_urls`), both in `web/src/server/domain/orders.ts`. Wired service-request confirmation into the `Promise.all` block of `createServiceRequest` in `web/src/server/domain/service-requests.ts` alongside the existing Lark notification. When Resend is not configured, all senders no-op cleanly via `{ delivered: false, skipped: true }`. Validated with `orders.test.ts` (6/6) and `api-flows.test.ts` (5/5) re-running green, plus a warning-free `next build` (163/163 static pages).
+- [x] T052 Upgrade admin operations for products/variants, orders, downloads, leads, service requests, notification logs, and product funnel analytics with validation and audit gates.
+  - Current state: Slice 4 added authenticated admin operations endpoints for leads (`/api/v1/admin/leads`, `/api/v1/admin/leads/[leadId]`), service requests (`/api/v1/admin/service-requests` and `/api/v1/admin/service-requests/[id]` with audited PATCH that drives `updateServiceRequestStatus`), entitlement records (`/api/v1/admin/downloads`, `/api/v1/admin/licenses`), notification logs (`/api/v1/admin/notifications`), and product funnel analytics (`/api/v1/admin/funnel`) that bucket `analytics_events`/`lead_events` into a canonical funnel (page → product view → click → cart → checkout → paid → delivered) with derived conversion rates, lead temperature distribution, and totals snapshot. Extended `/api/v1/admin/analytics` to include leads, service requests, downloads, licenses, and notification totals plus latest sample lists. Product/variant CRUD and orders PATCH operations remained intact under existing admin routes; the new endpoints are all guarded by `requireAdminUser` and validated input shapes with `ApiError` field-validation responses. Validated with `orders.test.ts` (6/6), `api-flows.test.ts` (5/5), warning-free `next build` (163/163 static pages, all 8 new admin routes registered).
+
+### Phase P10 — Content Composition Alignment
+- [x] T053 Create canonical content-composition planning artifact and downstream Frontend/QA role docs in `DOC/PROJECT PLAN/content-composition-alignment-e2e-plan.md`, `DOC/PROJECT PLAN/Frontend/content-composition-alignment-frontend.md`, and `DOC/PROJECT PLAN/QA/content-composition-alignment-qa.md`.
+- [x] T054 Extract reusable marketing components under `web/src/components/marketing/` and add shared copy constants in `web/src/lib/product-led-content.ts`.
+- [x] T055 Recompose homepage section order around product-led funnel (TrustBar → FeaturedProducts → ThreePathExplainer → ServiceCards) and replace agency-first final CTA defaults.
+- [x] T056 Seed CMS/catalog anchor products with authored Standard/Premium/Done-For-You tiers, bundles, and free offers.
+- [x] T057 Refactor product detail composition (use-cases section, sticky purchase panel, disable production fallback tier math).
+- [x] T058 Ship `/services/template-customization` service route, catalog registration, and nav cross-links.
+- [x] T059 Ship `/solutions/for-startups`, `/solutions/for-local-businesses`, `/solutions/for-agencies`, and `/solutions/for-saas-founders` with shared landing template and nav/footer discovery.
+- [x] T060 Restructure `/pricing` into Digital Products | Done-For-You | Custom Services tabs and align contact intents/budget bands.
+- [x] T061 Sync `home-page.md`, `Frontend/ai-context.yaml`, and `DOC/PROJECT PLAN/ai-context.yaml` to P10 route and composition model.
+  - Current state: `00-master-ui-architecture.md` and `product-detail-page.md` synced with the P10 product-led model.
+- [~] T062 Run P10 content/regression validation gates across homepage, products index, solutions, template-customization, and legacy `/shop` compatibility.
+  - Current state: lint/build/unit/integration gates pass after P10 implementation updates; full Playwright suite remains intermittently unstable in this workspace with repeated timeout failures unrelated to the touched P10 files, so route-level smoke and static/integration gates are the current blocking evidence.
+
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.
 - The main marketing, services, blog, proof, and legal surfaces exist in code.
@@ -328,7 +396,11 @@ phases:
 - Shop CMS authoring now includes grouped editor fields, example-driven field labels, real preview URL support, real uploaded image rendering on shop surfaces, and project-specific content templates for shop items, blog posts, and case studies under `DOC/PROJECT PLAN/`.
 
 ## What Is Next To Build
-Use `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` plus the downstream role-specific CMS/content-operations docs as the canonical input for the remaining P7 execution work.
+Use `DOC/PROJECT PLAN/content-composition-alignment-e2e-plan.md` as the canonical input for the active P10 execution work.
+
+1. T062: complete stable full-suite Playwright pass for P10 regression coverage in this environment.
+
+Remaining parallel tracks:
 
 1. T035: ship production-grade Sanity-backed backend contracts for shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
 2. T036: deliver an admin submissions and newsletter-operations stack for subscribers, contact inquiries, and booking requests with status workflow, assignment, notes, unsubscribe handling, and send logs.

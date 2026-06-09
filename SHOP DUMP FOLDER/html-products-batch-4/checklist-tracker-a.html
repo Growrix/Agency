@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Habit Tracker — Build Your Daily Routines</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f8f9fb;font-family:'Inter',sans-serif;min-height:100vh;padding:32px 16px;color:#1e293b}
+.app{max-width:700px;margin:0 auto}
+.app-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+.app-header h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;color:#0f172a}
+.app-header p{font-size:13px;color:#64748b;margin-top:3px}
+.date-row{font-size:13px;color:#64748b;font-weight:500;text-align:right}
+.progress-card{background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:16px;padding:24px 28px;color:#fff;margin-bottom:24px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.pc-text h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.pc-text p{font-size:13px;color:rgba(255,255,255,.65);font-weight:300}
+.pc-ring{position:relative;width:72px;height:72px}
+.pc-ring svg{transform:rotate(-90deg)}
+.pc-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff}
+.pc-bar{background:rgba(255,255,255,.15);border-radius:4px;height:6px;margin-top:14px;overflow:hidden}
+.pc-bar-fill{height:6px;background:#fff;border-radius:4px;transition:.4s}
+.section-label{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.add-btn{font-size:11px;color:#6366f1;cursor:pointer;font-weight:600;border:none;background:none;font-family:'Inter',sans-serif;letter-spacing:1px}
+.habits{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.habit{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;transition:.15s;cursor:pointer}
+.habit:hover{border-color:#6366f1;box-shadow:0 2px 12px rgba(99,102,241,.08)}
+.habit.done{background:#f5f3ff;border-color:#c4b5fd}
+.h-check{width:28px;height:28px;border-radius:50%;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s;font-size:14px}
+.habit.done .h-check{background:#6366f1;border-color:#6366f1;color:#fff}
+.h-emoji{font-size:20px;flex-shrink:0}
+.h-text{flex:1}
+.h-name{font-size:15px;font-weight:600;color:#1e293b;transition:.15s}
+.habit.done .h-name{text-decoration:line-through;color:#94a3b8}
+.h-streak{font-size:11px;color:#94a3b8;margin-top:2px}
+.h-streak .fire{color:#f59e0b}
+.h-delete{font-size:16px;color:#e2e8f0;border:none;background:none;cursor:pointer;padding:4px;opacity:0;transition:.15s}
+.habit:hover .h-delete{opacity:1}
+.add-form{background:#fff;border:2px dashed #e2e8f0;border-radius:12px;padding:16px;margin-bottom:24px;display:none}
+.add-form.open{display:block}
+.af-row{display:flex;gap:8px}
+.af-input{flex:1;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1e293b}
+.af-input:focus{border-color:#6366f1}
+.af-submit{background:#6366f1;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.week-grid{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px;margin-bottom:24px}
+.wg-title{font-size:12px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.wg-days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
+.wg-day-name{font-size:10px;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px}
+.wg-dot{width:28px;height:28px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.wg-dot.done{background:#6366f1;color:#fff}
+.wg-dot.partial{background:#c4b5fd;color:#6366f1}
+.wg-dot.empty{background:#f1f5f9;color:#94a3b8}
+.wg-dot.today{ring:2px solid #6366f1;box-shadow:0 0 0 2px #6366f1}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="app-header">
+    <div><h1>🔆 Habit Tracker</h1><p>Build streaks. Build your future.</p></div>
+    <div class="date-row" id="dateDisplay"></div>
+  </div>
+
+  <div class="progress-card">
+    <div class="pc-text">
+      <h3 id="progressTitle">3 of 5 habits done today</h3>
+      <p>Keep going — you're 60% through your day!</p>
+      <div class="pc-bar"><div class="pc-bar-fill" id="progressBar" style="width:60%"></div></div>
+    </div>
+    <div class="pc-ring">
+      <svg width="72" height="72" viewBox="0 0 72 72">
+        <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="6"/>
+        <circle cx="36" cy="36" r="28" fill="none" stroke="#fff" stroke-width="6" stroke-dasharray="176 176" stroke-dashoffset="70" id="ringProgress" stroke-linecap="round"/>
+      </svg>
+      <div class="pc-ring-num" id="ringNum">60%</div>
+    </div>
+  </div>
+
+  <div class="section-label">
+    <span>Today's Habits</span>
+    <button class="add-btn" onclick="toggleForm()">+ ADD HABIT</button>
+  </div>
+
+  <div class="add-form" id="addForm">
+    <div class="af-row">
+      <input class="af-input" id="newHabitInput" placeholder="e.g. Drink 8 glasses of water 💧" maxlength="60">
+      <button class="af-submit" onclick="addHabit()">Add</button>
+    </div>
+  </div>
+
+  <div class="habits" id="habitList"></div>
+
+  <div class="week-grid">
+    <div class="wg-title">This Week's Overview</div>
+    <div class="wg-days" id="weekGrid"></div>
+  </div>
+</div>
+
+<script>
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const EMOJIS=['💪','🧠','🌊','📚','🏃','🥗','😴','🎯','✍️','🙏'];
+let habits=[
+  {id:1,name:'Exercise 30 minutes',emoji:'💪',done:true,streak:12},
+  {id:2,name:'Read for 20 minutes',emoji:'📚',done:true,streak:8},
+  {id:3,name:'Drink 8 glasses of water',emoji:'🌊',done:true,streak:5},
+  {id:4,name:'Meditate 10 minutes',emoji:'🙏',done:false,streak:3},
+  {id:5,name:'Sleep by 11PM',emoji:'😴',done:false,streak:2},
+];
+let nextId=6;
+
+function toggleForm(){const f=document.getElementById('addForm');f.classList.toggle('open');if(f.classList.contains('open'))document.getElementById('newHabitInput').focus();}
+function addHabit(){
+  const inp=document.getElementById('newHabitInput');
+  const name=inp.value.trim();
+  if(!name)return;
+  const emoji=EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+  habits.push({id:nextId++,name,emoji,done:false,streak:0});
+  inp.value='';
+  document.getElementById('addForm').classList.remove('open');
+  render();
+}
+function toggleHabit(id){const h=habits.find(x=>x.id===id);if(h){h.done=!h.done;if(h.done)h.streak++;else if(h.streak>0)h.streak--;}render();}
+function deleteHabit(id){habits=habits.filter(x=>x.id!==id);render();}
+function render(){
+  const done=habits.filter(x=>x.done).length;
+  const total=habits.length;
+  const pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('progressTitle').textContent=`${done} of ${total} habits done today`;
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('ringNum').textContent=pct+'%';
+  const circumference=176;
+  const offset=circumference-(pct/100*circumference);
+  document.getElementById('ringProgress').setAttribute('stroke-dashoffset',offset);
+  const list=document.getElementById('habitList');
+  list.innerHTML=habits.map(h=>`
+    <div class="habit ${h.done?'done':''}" onclick="toggleHabit(${h.id})">
+      <div class="h-check">${h.done?'✓':''}</div>
+      <div class="h-emoji">${h.emoji}</div>
+      <div class="h-text">
+        <div class="h-name">${h.name}</div>
+        <div class="h-streak"><span class="fire">🔥</span> ${h.streak}-day streak</div>
+      </div>
+      <button class="h-delete" onclick="event.stopPropagation();deleteHabit(${h.id})">✕</button>
+    </div>`).join('');
+  const wg=document.getElementById('weekGrid');
+  const today=new Date().getDay();
+  const todayIdx=today===0?6:today-1;
+  const completionData=[0.8,0.6,1,0.4,0.8,0,0];
+  wg.innerHTML=DAYS.map((d,i)=>`
+    <div>
+      <div class="wg-day-name">${d}</div>
+      <div class="wg-dot ${i===todayIdx?(pct===100?'done today':'partial today'):i<todayIdx?(completionData[i]===1?'done':completionData[i]>0?'partial':'empty'):'empty'}" style="${i===todayIdx?'box-shadow:0 0 0 2px #6366f1':''}">${i===todayIdx?pct+'%':i<todayIdx?(completionData[i]===1?'✓':''):'·'}</div>
+    </div>`).join('');
+}
+const now=new Date();
+document.getElementById('dateDisplay').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+render();
+</script>
+</body></html>

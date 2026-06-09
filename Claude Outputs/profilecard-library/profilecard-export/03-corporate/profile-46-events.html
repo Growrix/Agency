@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Lumière Events — Corporate Event Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Raleway',sans-serif;background:#08060a;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0c0a10;margin:0 auto;color:#f0e8d8}
+
+.hero{min-height:285px;background:#0c0a10;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 24px}
+.hero-confetti{position:absolute;inset:0;pointer-events:none}
+.confetti-piece{position:absolute;border-radius:2px;animation:fall linear infinite}
+.cp1{width:6px;height:6px;background:#c8a840;top:-6px;left:12%;animation-duration:8s;animation-delay:0s}
+.cp2{width:4px;height:8px;background:#f0c860;top:-8px;left:30%;animation-duration:10s;animation-delay:2s}
+.cp3{width:5px;height:5px;background:rgba(200,168,64,.6);top:-5px;left:55%;animation-duration:7s;animation-delay:4s;border-radius:50%}
+.cp4{width:6px;height:4px;background:#c8a840;top:-6px;left:72%;animation-duration:9s;animation-delay:1s}
+.cp5{width:3px;height:9px;background:#f0c860;top:-9px;left:88%;animation-duration:11s;animation-delay:3s}
+@keyframes fall{0%{transform:translateY(-10px) rotate(0deg);opacity:.8}100%{transform:translateY(300px) rotate(360deg);opacity:0}}
+.hero-glow1{position:absolute;top:-40px;left:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,64,.08),transparent)}
+.hero-glow2{position:absolute;bottom:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(200,168,64,.06),transparent)}
+.hero-gold-line{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#c8a840,transparent)}
+.h-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,168,64,.5);margin-bottom:14px;position:relative}
+.hero h1{font-family:'Libre Caslon Display',serif;font-size:40px;color:#f0e8d8;line-height:.9;letter-spacing:-.5px;position:relative}
+.hero h1 em{font-style:italic;color:#c8a840}
+.hero-sub{font-size:11px;color:rgba(240,232,216,.35);margin-top:10px;line-height:1.6;position:relative;letter-spacing:.2px}
+.hero-years{position:absolute;bottom:24px;right:20px;font-family:'Libre Caslon Display',serif;font-size:44px;color:rgba(200,168,64,.05);line-height:1}
+
+.ev-numbers{display:flex;background:#150f20;border-bottom:1px solid rgba(200,168,64,.1)}
+.ev-n{flex:1;text-align:center;padding:12px 0;border-right:1px solid rgba(200,168,64,.08)}
+.ev-n:last-child{border-right:none}
+.ev-num{font-family:'Libre Caslon Display',serif;font-size:20px;color:#c8a840;font-style:italic}
+.ev-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,232,216,.2);margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,168,64,.45);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::before{content:'✦';font-size:10px;color:rgba(200,168,64,.3)}
+.sec::after{content:'';flex:1;height:1px;background:rgba(200,168,64,.1)}
+
+.event-types{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ev-type{background:#150f20;border:1px solid rgba(200,168,64,.12);border-radius:8px;padding:14px;text-align:center}
+.ev-type-icon{font-size:26px;margin-bottom:7px}
+.ev-type-name{font-family:'Libre Caslon Text',serif;font-size:14px;color:#f0e8d8;font-style:italic}
+.ev-type-desc{font-size:10px;color:rgba(240,232,216,.3);margin-top:3px;line-height:1.3}
+.ev-type-range{font-size:11px;color:rgba(200,168,64,.6);margin-top:5px;font-weight:600}
+
+.services{display:flex;flex-direction:column;gap:5px}
+.svc{background:#150f20;border:1px solid rgba(200,168,64,.1);border-radius:6px;padding:13px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-name{font-family:'Libre Caslon Text',serif;font-size:14px;color:#f0e8d8;font-style:italic}
+.svc-desc{font-size:10px;color:rgba(240,232,216,.3);margin-top:3px;line-height:1.4}
+.svc-price{font-family:'Libre Caslon Display',serif;font-size:16px;color:#c8a840;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(240,232,216,.2);font-family:'Raleway',sans-serif;margin-top:1px}
+
+.clients-grid{display:flex;flex-wrap:wrap;gap:6px}
+.client{background:#150f20;border:1px solid rgba(200,168,64,.1);border-radius:4px;padding:5px 11px;font-size:11px;color:rgba(240,232,216,.35)}
+
+.cta{background:#150f20;border:2px solid rgba(200,168,64,.25);border-radius:8px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#c8a840,transparent)}
+.cta h3{font-family:'Libre Caslon Display',serif;font-size:22px;color:#f0e8d8;margin-bottom:8px;font-style:italic}
+.cta p{font-size:12px;color:rgba(240,232,216,.35);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:#c8a840;color:#0c0a10;border-radius:4px;padding:13px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:6px;font-family:'Raleway',sans-serif}
+.cta-btn2{display:block;background:transparent;color:rgba(200,168,64,.45);border:1px solid rgba(200,168,64,.2);border-radius:4px;padding:11px;font-size:10px;letter-spacing:1px;text-decoration:none}
+
+.contacts{background:#150f20;border:1px solid rgba(200,168,64,.1);border-radius:6px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 13px;border-bottom:1px solid rgba(200,168,64,.06);font-size:11px;color:rgba(240,232,216,.3)}
+.cr:last-child{border-bottom:none}
+.ci{width:27px;height:27px;border:1px solid rgba(200,168,64,.2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+footer{background:#08060a;border-top:1px solid rgba(200,168,64,.1);padding:18px;text-align:center;font-family:'Libre Caslon Display',serif;font-size:14px;font-style:italic;color:rgba(200,168,64,.15)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-confetti">
+    <div class="confetti-piece cp1"></div><div class="confetti-piece cp2"></div>
+    <div class="confetti-piece cp3"></div><div class="confetti-piece cp4"></div>
+    <div class="confetti-piece cp5"></div>
+  </div>
+  <div class="hero-glow1"></div><div class="hero-glow2"></div>
+  <div class="hero-gold-line"></div>
+  <div class="hero-years">20</div>
+  <div class="h-eyebrow">Corporate Event Management · Est. 2005</div>
+  <h1>Lumière<br><em>Events</em></h1>
+  <div class="hero-sub">Award ceremonies, product launches, conferences &amp; galas — crafted with precision for Bangladesh's top brands.</div>
+</div>
+<div class="ev-numbers">
+  <div class="ev-n"><div class="ev-num">800+</div><div class="ev-label">Events done</div></div>
+  <div class="ev-n"><div class="ev-num">200+</div><div class="ev-label">Corporate clients</div></div>
+  <div class="ev-n"><div class="ev-num">20yr</div><div class="ev-label">Est.</div></div>
+</div>
+<div class="body">
+  <div class="sec">Event Types</div>
+  <div class="event-types">
+    <div class="ev-type"><div class="ev-type-icon">🏆</div><div class="ev-type-name">Award Ceremonies</div><div class="ev-type-desc">Full staging, trophies, AV</div><div class="ev-type-range">50–500 guests</div></div>
+    <div class="ev-type"><div class="ev-type-icon">🎤</div><div class="ev-type-name">Conferences</div><div class="ev-type-desc">Keynotes, panels, breakouts</div><div class="ev-type-range">100–2,000 pax</div></div>
+    <div class="ev-type"><div class="ev-type-icon">🚀</div><div class="ev-type-name">Product Launches</div><div class="ev-type-desc">Brand activations, live demos</div><div class="ev-type-range">Any scale</div></div>
+    <div class="ev-type"><div class="ev-type-icon">🥂</div><div class="ev-type-name">Galas & Banquets</div><div class="ev-type-desc">Fine dining, entertainment</div><div class="ev-type-range">Up to 1,000</div></div>
+  </div>
+  <div class="sec">What We Handle</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Venue Sourcing & Setup</div><div class="svc-desc">Decor, lighting, furniture, floral</div></div><div class="svc-price">৳80K<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">AV & Technical Production</div><div class="svc-desc">LED screens, PA system, streaming</div></div><div class="svc-price">৳60K<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">Catering Coordination</div><div class="svc-desc">Menu, service staff, beverages</div></div><div class="svc-price">৳400<span>per head</span></div></div>
+    <div class="svc"><div><div class="svc-name">Full Event Management</div><div class="svc-desc">End-to-end — concept to closedown</div></div><div class="svc-price">Custom</div></div>
+  </div>
+  <div class="sec">Trusted Clients</div>
+  <div class="clients-grid">
+    <div class="client">Unilever BD</div><div class="client">BSRM</div><div class="client">Walton</div>
+    <div class="client">Grameenphone</div><div class="client">BGMEA</div><div class="client">50+ top brands</div>
+  </div>
+  <div class="sec">Plan Your Event</div>
+  <div class="cta">
+    <h3>Let's create something unforgettable.</h3>
+    <p>Share your event brief — date, audience, objectives, budget. We'll send you a concept and proposal within 48 hours.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">✨ Submit Your Event Brief</a>
+    <a href="mailto:events@lumiereevents.com.bd" class="cta-btn2">events@lumiereevents.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Lumière House, Gulshan-1, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 10am–7pm</div>
+  </div>
+</div>
+<footer>Lumière Events · Corporate Event Management · Dhaka</footer>
+</div></body></html>

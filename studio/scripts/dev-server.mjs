@@ -52,9 +52,8 @@ runInstallIfNeeded();
 
 console.log("[studio] Starting Sanity dev server on port 3333...");
 
-const sanityBin = path.join(studioRoot, "node_modules", ".bin", "sanity");
-const sanityCommand = sanityBin;
-const sanityArgs = ["dev", "--host", "0.0.0.0", "--port", "3333"];
+const sanityCommand = "npm";
+const sanityArgs = ["run", "dev:raw"];
 
 const child = spawn(sanityCommand, sanityArgs, {
   cwd: studioRoot,

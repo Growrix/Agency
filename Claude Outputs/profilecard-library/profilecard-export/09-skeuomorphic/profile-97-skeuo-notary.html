@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Rahman Notary — Notary Public & Legal Documents</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Crimson Text',serif;display:flex;justify-content:center;background:#1a0e06}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;color:#2a1a08;overflow:hidden}
+
+/* LEATHER TEXTURE — skeuomorphic */
+.leather{background-color:#3a1e08;background-image:
+  repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px),
+  repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,.015) 3px,rgba(255,255,255,.015) 6px),
+  linear-gradient(135deg,#3a1e08 0%,#2a1206 50%,#3a1e08 100%);
+  position:relative}
+
+/* PARCHMENT TEXTURE */
+.parchment{background-color:#f0e8d4;background-image:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"),
+  linear-gradient(160deg,#f8f0e0 0%,#ede0c4 50%,#f4e8d0 100%);
+  color:#2a1a08}
+
+/* GOLD EMBOSSED ELEMENTS */
+.gold-border{border:2px solid #b8860b;box-shadow:0 0 0 1px #8b6914,inset 0 0 0 1px #d4a820,0 4px 16px rgba(0,0,0,.4)}
+.gold-text{color:#8b6914}
+.emboss{text-shadow:0 1px 0 rgba(255,255,255,.15),0 -1px 0 rgba(0,0,0,.3)}
+
+/* SEAL / STAMP effect */
+.seal{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c8a020,#8b6914 50%,#6a4e0a);display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid #d4b840;box-shadow:0 2px 0 #6a4e0a,0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2)}
+
+/* HERO — leather bound */
+.hero{min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:32px 22px 26px;position:relative}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.3) 0%,transparent 60%);pointer-events:none}
+.hero-content{position:relative;z-index:1}
+.hero-top{position:absolute;top:0;left:0;right:0;background:rgba(0,0,0,.3);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(184,134,11,.3)}
+.h-firm{font-size:11px;letter-spacing:3px;color:rgba(200,160,30,.6);text-transform:uppercase}
+.h-reg{font-size:9px;color:rgba(200,160,30,.4);letter-spacing:1px}
+.hero h1{font-family:'IM Fell English',serif;font-size:32px;color:#f0e0b8;line-height:1;margin-bottom:10px;text-shadow:0 2px 4px rgba(0,0,0,.5)}
+.hero h1 em{font-style:italic;color:#c8a020}
+.hero-tagline{font-size:13px;color:rgba(200,170,100,.6);font-style:italic;letter-spacing:.5px}
+.hero-certifications{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.hc{font-size:9px;background:rgba(0,0,0,.35);border:1px solid rgba(184,134,11,.3);border-radius:3px;padding:3px 8px;color:rgba(200,160,30,.6);letter-spacing:.5px}
+
+/* PARCHMENT SECTIONS */
+.parchment-section{padding:22px;position:relative}
+.section-ornament{text-align:center;margin-bottom:14px;color:#8b6914;font-size:18px;letter-spacing:8px;opacity:.5}
+.sec-title{font-family:'IM Fell English',serif;font-size:16px;color:#5a3a10;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-title::before,.sec-title::after{content:'─';flex:1;color:rgba(139,105,20,.3);font-size:12px}
+
+/* Document cards — parchment cards with wax seal style */
+.docs{display:flex;flex-direction:column;gap:8px}
+.doc{background:linear-gradient(135deg,#f8f0e2,#f0e4cc);border-radius:4px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border:1px solid rgba(139,105,20,.2);box-shadow:0 2px 8px rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.8) inset,2px 0 0 rgba(139,105,20,.15) inset}
+.doc-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.doc-name{font-family:'Crimson Text',serif;font-size:15px;font-weight:600;color:#2a1a08}
+.doc-desc{font-size:11px;color:rgba(42,26,8,.45);margin-top:2px;line-height:1.4;font-style:italic}
+.doc-fee{font-size:14px;font-weight:600;color:#7a4a14;flex-shrink:0;font-family:'Crimson Text',serif}
+
+/* Testimonial — wax sealed quote */
+.testimonial{background:linear-gradient(135deg,#f4ead6,#ede0c0);border:1px solid rgba(139,105,20,.2);border-radius:4px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.1),0 1px 0 rgba(255,255,255,.8) inset}
+.t-quote{font-family:'Crimson Text',serif;font-style:italic;font-size:16px;color:#2a1a08;line-height:1.65}
+.t-mark{font-size:40px;color:rgba(139,105,20,.2);line-height:.8;font-family:'IM Fell English',serif}
+.t-author{font-size:11px;color:rgba(42,26,8,.4);margin-top:10px;letter-spacing:.5px}
+
+/* CTA — stamped box */
+.cta-leather{padding:22px;text-align:center;position:relative}
+.cta-inner{background:linear-gradient(135deg,#f4ead6,#ede0c0);border-radius:4px;padding:24px;border:2px solid #b8860b;box-shadow:0 0 0 1px #8b6914,0 6px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.cta-inner h3{font-family:'IM Fell English',serif;font-size:22px;color:#2a1a08;margin-bottom:8px}
+.cta-inner h3 em{color:#7a4a14;font-style:italic}
+.cta-inner p{font-size:12px;color:rgba(42,26,8,.5);margin-bottom:18px;line-height:1.6;font-style:italic}
+.cta-btn{display:block;background:linear-gradient(135deg,#7a4a14,#5a3a0a);color:#f0d890;border-radius:3px;padding:14px;font-family:'IM Fell English',serif;font-size:15px;text-decoration:none;margin-bottom:8px;border:1px solid #8b6914;box-shadow:0 3px 0 #3a2006,0 6px 12px rgba(0,0,0,.3)}
+.cta-btn2{display:block;background:transparent;color:rgba(42,26,8,.45);border:1px solid rgba(139,105,20,.3);border-radius:3px;padding:12px;font-size:12px;text-decoration:none;font-style:italic}
+
+.contact-parchment{background:linear-gradient(135deg,#f4ead6,#ede0c0);border:1px solid rgba(139,105,20,.2);border-radius:4px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(139,105,20,.1);font-size:12px;color:rgba(42,26,8,.5);font-style:italic}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:linear-gradient(135deg,#7a4a14,#5a3a0a);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;border:1px solid #8b6914}
+footer{padding:16px;text-align:center;font-family:'Crimson Text',serif;font-style:italic;font-size:12px;color:rgba(200,160,30,.4);border-top:1px solid rgba(184,134,11,.2)}
+</style></head>
+<body><div class="app leather">
+<div class="hero leather">
+  <div class="hero-top">
+    <div class="h-firm">A.R. Rahman & Sons</div>
+    <div class="h-reg">Est. 1972 · Dhaka</div>
+  </div>
+  <div class="hero-content">
+    <div style="margin-bottom:16px"><div class="seal">⚖️</div></div>
+    <h1>Notary Public<br>&amp; <em>Legal Documents</em></h1>
+    <div class="hero-tagline">Sworn attestation · authentication · apostille · deed drafting</div>
+    <div class="hero-certifications">
+      <div class="hc">✦ Government Licensed</div>
+      <div class="hc">✦ Ministry Approved</div>
+      <div class="hc">✦ Apostille Ready</div>
+    </div>
+  </div>
+</div>
+<div class="parchment-section parchment">
+  <div class="section-ornament">⊱ ─── ✦ ─── ⊰</div>
+  <div class="sec-title">Services & Fees</div>
+  <div class="docs">
+    <div class="doc"><div class="doc-icon">📜</div><div><div class="doc-name">Notarial Attestation</div><div class="doc-desc">Powers of attorney, affidavits, statutory declarations</div></div><div class="doc-fee">৳500</div></div>
+    <div class="doc"><div class="doc-icon">🏠</div><div><div class="doc-name">Property Deed Drafting</div><div class="doc-desc">Sale deed, gift deed, mortgage deed preparation</div></div><div class="doc-fee">৳3,500</div></div>
+    <div class="doc"><div class="doc-icon">🌍</div><div><div class="doc-name">Apostille / Legalisation</div><div class="doc-desc">Ministry attestation for overseas use · visa documents</div></div><div class="doc-fee">৳1,500</div></div>
+    <div class="doc"><div class="doc-icon">✍️</div><div><div class="doc-name">Affidavit Drafting</div><div class="doc-desc">Court-ready sworn statements · all civil matters</div></div><div class="doc-fee">৳800</div></div>
+    <div class="doc"><div class="doc-icon">🤝</div><div><div class="doc-name">Agreement Drafting</div><div class="doc-desc">Business, employment, tenancy, partnership agreements</div></div><div class="doc-fee">৳2,000</div></div>
+  </div>
+  <div class="sec-title" style="margin-top:22px">A Client Speaks</div>
+  <div class="testimonial">
+    <div class="t-mark">"</div>
+    <div class="t-quote">Three generations of our family have trusted A.R. Rahman for every property matter. Their diligence and integrity are unmatched.</div>
+    <div class="t-author">— Hossain family · Dhaka · client since 1985</div>
+  </div>
+  <div class="sec-title" style="margin-top:22px">Consult with Us</div>
+  <div class="cta-leather">
+    <div class="cta-inner">
+      <h3>Your documents,<br><em>handled with honour.</em></h3>
+      <p>Same-day attestation available. Walk-ins welcome during office hours. WhatsApp for urgent requirements.</p>
+      <a href="https://wa.me/8801700000000" class="cta-btn">Request an Appointment</a>
+      <a href="tel:+880298765432" class="cta-btn2">📞 +880 2-9876543</a>
+    </div>
+  </div>
+  <div class="sec-title" style="margin-top:22px">Our Office</div>
+  <div class="contact-parchment">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543 · +880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Motijheel C/A, Dhaka · Room 402</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu 9am–5pm · Sat 9am–1pm</div>
+  </div>
+</div>
+<footer>A.R. Rahman & Sons · Notary Public · Dhaka · Licensed by the Ministry of Law · Est. 1972</footer>
+</div></body></html>

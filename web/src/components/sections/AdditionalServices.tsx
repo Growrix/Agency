@@ -24,7 +24,7 @@ export function AdditionalServices() {
     <Section tone="inset">
       <Container>
         <SectionHeading
-          eyebrow="Additional Services"
+          eyebrow="SEO Service"
           title="Get discovered, tracked, and optimized from day one."
           description="Beyond development, we offer essential services to help your product get discovered, tracked, and optimized from day one."
         />
@@ -95,7 +95,7 @@ export function AdditionalServices() {
               href="/additional-services"
               className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
             >
-              See full additional services details
+              See full SEO service details
               <ArrowUpRightIcon className="size-3.5" />
             </Link>
           </div>

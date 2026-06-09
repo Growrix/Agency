@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "cold-outreach-c.html",
+        "type_slug":  "cold-outreach-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/email-templates/cold-outreach-templates/cold-outreach-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\cold-outreach-c.html"
+    },
+    {
+        "source_file":  "cold-outreach-b.html",
+        "type_slug":  "cold-outreach-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/email-templates/cold-outreach-templates/cold-outreach-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\cold-outreach-b.html"
+    },
+    {
+        "source_file":  "cold-outreach-a.html",
+        "type_slug":  "cold-outreach-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/email-templates/cold-outreach-templates/cold-outreach-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\cold-outreach-a.html"
+    }
+]

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Vertex Capital — Venture & Growth Equity</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#040410;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#040410;margin:0 auto;color:#e8e4f8}
+
+/* AURORA GRADIENT HERO */
+.hero{min-height:300px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 22px 24px}
+.aurora1{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(120,80,255,.35) 0%,transparent 70%);top:-80px;right:-60px;pointer-events:none}
+.aurora2{position:absolute;width:250px;height:250px;background:radial-gradient(circle,rgba(60,160,255,.2) 0%,transparent 70%);top:40px;left:-60px;pointer-events:none}
+.aurora3{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(180,80,255,.15) 0%,transparent 70%);bottom:-40px;right:20px;pointer-events:none}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.025;pointer-events:none}
+.hero-border-bottom{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(120,80,255,.5),rgba(60,160,255,.4),transparent)}
+.hero-top{position:absolute;top:26px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.hero-wordmark{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:rgba(232,228,248,.3);letter-spacing:3px;text-transform:uppercase}
+.hero-status{display:flex;align-items:center;gap:6px;font-size:10px;color:rgba(232,228,248,.25);letter-spacing:1px}
+.h-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;line-height:.9;letter-spacing:-2px;position:relative;z-index:1;background:linear-gradient(135deg,#fff 40%,rgba(180,160,255,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:12px;color:rgba(232,228,248,.35);margin-top:10px;line-height:1.6;position:relative;z-index:1;letter-spacing:.2px}
+
+/* GLASS CARDS */
+.glass-stats{display:flex;gap:0;padding:0 16px 0;margin-top:16px;position:relative;z-index:1}
+.g-stat{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);margin:0 4px;border-radius:12px;padding:14px 0;text-align:center}
+.g-stat-n{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,#c8a8ff,#80c8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.g-stat-l{font-size:9px;color:rgba(232,228,248,.25);margin-top:4px;letter-spacing:1.5px;text-transform:uppercase}
+
+.body{padding:20px 18px 40px}
+.sec{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(150,120,255,.6);margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(150,120,255,.3),transparent)}
+
+/* Glass portfolio cards */
+.portfolio{display:flex;flex-direction:column;gap:8px}
+.port-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(8px)}
+.port-logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;flex-shrink:0;border:1px solid rgba(255,255,255,.08)}
+.port-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#e8e4f8;letter-spacing:-.3px}
+.port-sector{font-size:10px;color:rgba(232,228,248,.3);margin-top:2px;letter-spacing:.3px}
+.port-right{margin-left:auto;text-align:right;flex-shrink:0}
+.port-round{font-size:10px;font-weight:600;color:rgba(150,120,255,.7);background:rgba(150,120,255,.08);border:1px solid rgba(150,120,255,.15);border-radius:100px;padding:3px 9px;margin-bottom:3px;display:inline-block}
+.port-amount{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:rgba(232,228,248,.5);letter-spacing:-.3px}
+
+/* Investment focus cards */
+.focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.focus-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;backdrop-filter:blur(6px)}
+.focus-icon{font-size:24px;margin-bottom:8px}
+.focus-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e8e4f8;letter-spacing:-.2px}
+.focus-desc{font-size:10px;color:rgba(232,228,248,.3);margin-top:3px;line-height:1.4}
+.focus-range{font-size:11px;font-weight:600;color:rgba(150,120,255,.6);margin-top:6px}
+
+/* Team */
+.team-list{display:flex;flex-direction:column;gap:6px}
+.team-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center;backdrop-filter:blur(6px)}
+.team-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
+.team-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e8e4f8;letter-spacing:-.2px}
+.team-role{font-size:10px;color:rgba(232,228,248,.3);margin-top:2px}
+.team-uni{font-size:9px;color:rgba(150,120,255,.5);margin-top:3px;letter-spacing:.3px}
+
+/* Glass CTA */
+.cta{background:linear-gradient(135deg,rgba(120,80,255,.2),rgba(60,160,255,.1));border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px;text-align:center;backdrop-filter:blur(12px);position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,255,.5),rgba(80,180,255,.4),transparent)}
+.cta h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(232,228,248,.4);margin-bottom:18px;line-height:1.6}
+.cta-btn{display:block;background:linear-gradient(135deg,#7850ff,#3ca0ff);color:#fff;border-radius:10px;padding:14px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;background:rgba(255,255,255,.06);color:rgba(232,228,248,.4);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px;font-size:11px;text-decoration:none}
+
+.contacts{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;backdrop-filter:blur(6px)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(232,228,248,.3)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:rgba(120,80,255,.2);border:1px solid rgba(120,80,255,.25);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{border-top:1px solid rgba(255,255,255,.04);padding:18px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(232,228,248,.1)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="aurora1"></div><div class="aurora2"></div><div class="aurora3"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-border-bottom"></div>
+  <div class="hero-top">
+    <div class="hero-wordmark">Vertex</div>
+    <div class="hero-status"><span class="h-dot"></span>Fund III · Active</div>
+  </div>
+  <h1>Backing<br>tomorrow's<br>giants.</h1>
+  <div class="hero-sub">Seed to Series B · Dhaka · Singapore · London. We invest in founders who change industries.</div>
+  <div class="glass-stats">
+    <div class="g-stat"><div class="g-stat-n">$80M</div><div class="g-stat-l">AUM</div></div>
+    <div class="g-stat"><div class="g-stat-n">42</div><div class="g-stat-l">Portfolio</div></div>
+    <div class="g-stat"><div class="g-stat-n">6×</div><div class="g-stat-l">Avg Return</div></div>
+  </div>
+</div>
+<div class="body">
+  <div class="sec">Portfolio Highlights</div>
+  <div class="portfolio">
+    <div class="port-card"><div class="port-logo" style="background:rgba(99,102,241,.15);color:#818cf8">SH</div><div><div class="port-name">ShopHive</div><div class="port-sector">E-Commerce · Bangladesh</div></div><div class="port-right"><div class="port-round">Series A</div><div class="port-amount">$3.2M</div></div></div>
+    <div class="port-card"><div class="port-logo" style="background:rgba(16,185,129,.12);color:#10b981">MF</div><div><div class="port-name">MedFlow</div><div class="port-sector">HealthTech · SEA</div></div><div class="port-right"><div class="port-round">Seed</div><div class="port-amount">$800K</div></div></div>
+    <div class="port-card"><div class="port-logo" style="background:rgba(245,158,11,.12);color:#f59e0b">AG</div><div><div class="port-name">AgroGrid</div><div class="port-sector">AgriTech · BD · IN</div></div><div class="port-right"><div class="port-round">Series A</div><div class="port-amount">$2.5M</div></div></div>
+  </div>
+
+  <div class="sec">Investment Focus</div>
+  <div class="focus-grid">
+    <div class="focus-card"><div class="focus-icon">💡</div><div class="focus-name">Fintech</div><div class="focus-desc">Payments, lending, insurtech</div><div class="focus-range">$500K–$5M</div></div>
+    <div class="focus-card"><div class="focus-icon">🏥</div><div class="focus-name">HealthTech</div><div class="focus-desc">Digital health, diagnostics</div><div class="focus-range">$300K–$3M</div></div>
+    <div class="focus-card"><div class="focus-icon">🌾</div><div class="focus-name">AgriTech</div><div class="focus-desc">Precision farming, supply chains</div><div class="focus-range">$500K–$4M</div></div>
+    <div class="focus-card"><div class="focus-icon">🤖</div><div class="focus-name">AI / SaaS</div><div class="focus-desc">Enterprise software, LLM apps</div><div class="focus-range">$200K–$2M</div></div>
+  </div>
+
+  <div class="sec">The Partners</div>
+  <div class="team-list">
+    <div class="team-card"><div class="team-av" style="background:rgba(120,80,255,.2);color:#c8a8ff">RK</div><div><div class="team-name">Rashid Karim</div><div class="team-role">Founding General Partner</div><div class="team-uni">Wharton MBA · ex-Goldman Sachs</div></div></div>
+    <div class="team-card"><div class="team-av" style="background:rgba(60,160,255,.15);color:#80c8ff">SM</div><div><div class="team-name">Sara Malik</div><div class="team-role">General Partner · HealthTech</div><div class="team-uni">Stanford MBA · ex-Sequoia India</div></div></div>
+  </div>
+
+  <div class="sec">Pitch to Us</div>
+  <div class="cta">
+    <h3>Building something big?</h3>
+    <p>We respond to every pitch within 72 hours. Send us your deck — no warm intro needed.</p>
+    <a href="mailto:pitch@vertexcapital.vc" class="cta-btn">✦ Submit Your Pitch Deck</a>
+    <a href="https://wa.me/8801700000000" class="cta-btn2">WhatsApp for quick chat →</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📧</div>pitch@vertexcapital.vc</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-2, Dhaka · Singapore</div>
+    <div class="cr"><div class="ci">🌐</div>vertexcapital.vc</div>
+  </div>
+</div>
+<footer>© 2025 Vertex Capital · Venture & Growth Equity · All rights reserved</footer>
+</div></body></html>

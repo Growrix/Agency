@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "agency-landing-c.html",
+        "type_slug":  "agency-landing-pages",
+        "parent_category_slug":  "business-professional",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/business-professional/agency-landing-pages/agency-landing-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\agency-landing-c.html"
+    },
+    {
+        "source_file":  "agency-landing-b.html",
+        "type_slug":  "agency-landing-pages",
+        "parent_category_slug":  "business-professional",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/business-professional/agency-landing-pages/agency-landing-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\agency-landing-b.html"
+    },
+    {
+        "source_file":  "agency-landing-a.html",
+        "type_slug":  "agency-landing-pages",
+        "parent_category_slug":  "business-professional",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/business-professional/agency-landing-pages/agency-landing-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\agency-landing-a.html"
+    }
+]

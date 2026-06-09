@@ -81,7 +81,7 @@ Write-Host "Body: $($response.Content | ConvertFrom-Json | ConvertTo-Json)"
 - ✅ app_state table is writable (session stored)
 
 **Troubleshooting:**
-- **500 error:** Check server logs; likely app_state table doesn't exist or RLS is blocking
+- **500 error:** Check server logs; likely app_state table doesn't exist or service-role key is missing/invalid
 - **400 error:** Invalid email format or password too weak
 - **403 error:** Check SUPABASE_SECRET_KEY is correct and has service_role permissions
 
@@ -209,7 +209,7 @@ limit 10;
   - Check server logs for write errors
   - Verify SUPABASE_SECRET_KEY has INSERT permissions
 - **Table doesn't exist:** SQL bootstrap didn't execute; run schema again
-- **Permission denied:** RLS may be blocking; check that RLS is disabled
+- **Permission denied:** Verify server is using service-role credentials and app_state policy still blocks client roles
 
 ---
 
@@ -352,7 +352,7 @@ After completing all phases, verify:
 
 | Symptom | Likely Cause | Solution |
 |---|---|---|
-| 500 on /register | app_state table missing or RLS blocking | Verify schema executed, RLS disabled |
+| 500 on /register | app_state table missing or service-role key not configured | Verify schema executed and service-role env vars are correct |
 | 401 on /login | Invalid credentials or no user in auth | Ensure registration succeeded first |
 | No Set-Cookie header | Session encryption failing | Check AUTH_JWT_SECRET is set correctly |
 | app_state table empty | Persistence not writing | Check SUPABASE_SECRET_KEY permissions |

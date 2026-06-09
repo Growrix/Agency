@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Bloom Studio — Florist & Flower Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#6b3a4a;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#fdf5f5;margin:0 auto}
+
+.hero{min-height:280px;background:linear-gradient(160deg,#d4798a 0%,#b55470 55%,#8c3650 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 24px}
+.petal1{position:absolute;top:-20px;right:-20px;width:140px;height:140px;background:rgba(255,255,255,.06);border-radius:50% 10% 50% 10%;transform:rotate(20deg)}
+.petal2{position:absolute;top:20px;right:20px;width:80px;height:80px;background:rgba(255,255,255,.04);border-radius:10% 50% 10% 50%;transform:rotate(-30deg)}
+.petal3{position:absolute;bottom:-30px;left:-20px;width:100px;height:100px;background:rgba(255,255,255,.05);border-radius:50% 10% 50% 10%;transform:rotate(45deg)}
+.hero-floret{position:absolute;top:28px;right:20px;font-size:40px;opacity:.2}
+.h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:100px;padding:5px 14px;font-size:10px;color:#fff;margin-bottom:12px;width:fit-content}
+.hero h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:#fff;line-height:.95}
+.hero h1 em{font-style:italic;color:rgba(255,235,235,.8)}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:8px;letter-spacing:1.5px;text-transform:uppercase}
+.hero-since{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.5);margin-top:8px}
+
+.occasion-strip{display:flex;gap:0;background:#fff;border-bottom:1px solid #f2e0e0;overflow-x:auto;scrollbar-width:none}
+.occasion-strip::-webkit-scrollbar{display:none}
+.occasion{flex-shrink:0;text-align:center;padding:10px 16px;border-right:1px solid #f2e0e0;cursor:pointer}
+.occasion-emoji{font-size:18px}
+.occasion-label{font-size:9px;color:#9a6070;margin-top:3px;white-space:nowrap;font-weight:500}
+
+.body{padding:0 18px 36px}
+.sec{font-family:'Playfair Display',serif;font-size:16px;font-weight:400;color:#6b3a4a;margin:24px 0 12px;display:flex;align-items:center;gap:10px;font-style:italic}
+.sec::after{content:'';flex:1;height:1px;background:rgba(180,100,130,.2)}
+
+.arrangements{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.arr-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #f2e0e0}
+.arr-img{height:100px;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
+.arr-tag{position:absolute;top:8px;right:8px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px}
+.tag-pop{background:#b55470;color:#fff}
+.tag-new{background:#8c3650;color:#fff}
+.arr-body{padding:12px}
+.arr-name{font-family:'Playfair Display',serif;font-size:14px;color:#4a2030;font-weight:600}
+.arr-desc{font-size:10px;color:#a07080;margin-top:2px;line-height:1.4}
+.arr-price{font-family:'Playfair Display',serif;font-size:16px;color:#b55470;margin-top:6px}
+
+.custom-box{background:linear-gradient(135deg,#f9eeee,#f5e6e8);border-radius:14px;padding:18px;display:flex;gap=14px;align-items:center;border:1px solid #f2d8d8;gap:14px}
+.custom-icon{font-size:36px;flex-shrink:0}
+.custom-h{font-family:'Playfair Display',serif;font-size:16px;color:#6b3a4a;font-style:italic;margin-bottom:4px}
+.custom-p{font-size:12px;color:#a07080;line-height:1.5}
+.custom-btn{display:inline-block;margin-top:10px;background:#b55470;color:#fff;border-radius:100px;padding:8px 18px;font-size:12px;font-weight:500;text-decoration:none}
+
+.delivery-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.del-card{background:#fff;border:1px solid #f2e0e0;border-radius:10px;padding:14px;text-align:center}
+.del-icon{font-size:24px;margin-bottom:6px}
+.del-name{font-size:12px;font-weight:600;color:#4a2030}
+.del-desc{font-size:10px;color:#a07080;margin-top:2px;line-height:1.4}
+.del-price{font-size:11px;color:#b55470;font-weight:600;margin-top:4px}
+
+.subscribe-box{background:linear-gradient(135deg,#b55470,#8c3650);border-radius:16px;padding:22px;text-align:center}
+.subscribe-box h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#fff;font-style:italic;margin-bottom:8px}
+.subscribe-box p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:16px;line-height:1.5}
+.sub-btn{display:block;background:#fff;color:#b55470;border-radius:10px;padding:13px;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:8px;font-family:'Playfair Display',serif;font-style:italic}
+.sub-btn2{display:block;background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:11px;font-size:11px;font-weight:500;text-decoration:none}
+
+.contact-box{background:#fff;border:1px solid #f2e0e0;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f9f0f0;font-size:12px;color:#555}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#fdf0f2;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#6b3a4a;padding:20px;text-align:center;font-family:'Playfair Display',serif;font-size:13px;color:rgba(255,255,255,.3);font-style:italic}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="petal1"></div><div class="petal2"></div><div class="petal3"></div>
+  <div class="hero-floret">🌸</div>
+  <div class="h-pill">🌷 Same-day delivery available</div>
+  <h1>Bloom<br><em>Studio</em></h1>
+  <div class="hero-sub">Florist · Arrangements · Events</div>
+  <div class="hero-since">"Fresh flowers. Heartfelt stories."</div>
+</div>
+<div class="occasion-strip">
+  <div class="occasion"><div class="occasion-emoji">💍</div><div class="occasion-label">Wedding</div></div>
+  <div class="occasion"><div class="occasion-emoji">🎂</div><div class="occasion-label">Birthday</div></div>
+  <div class="occasion"><div class="occasion-emoji">❤️</div><div class="occasion-label">Romance</div></div>
+  <div class="occasion"><div class="occasion-emoji">🏥</div><div class="occasion-label">Get Well</div></div>
+  <div class="occasion"><div class="occasion-emoji">🙏</div><div class="occasion-label">Sympathy</div></div>
+  <div class="occasion"><div class="occasion-emoji">🏢</div><div class="occasion-label">Corporate</div></div>
+</div>
+<div class="body">
+  <div class="sec">Seasonal Arrangements</div>
+  <div class="arrangements">
+    <div class="arr-card">
+      <div class="arr-img" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)">💐<div class="arr-tag tag-pop">Popular</div></div>
+      <div class="arr-body"><div class="arr-name">Rose Romance Bouquet</div><div class="arr-desc">12 premium roses, eucalyptus, ribbon</div><div class="arr-price">$45</div></div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">🌻<div class="arr-tag tag-new">New</div></div>
+      <div class="arr-body"><div class="arr-name">Sunny Meadow Mix</div><div class="arr-desc">Sunflowers, wildflowers, dried pampas</div><div class="arr-price">$38</div></div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)">🌷</div>
+      <div class="arr-body"><div class="arr-name">Blush Peony Dream</div><div class="arr-desc">Peonies, ranunculus, garden roses</div><div class="arr-price">$65</div></div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">🌿</div>
+      <div class="arr-body"><div class="arr-name">Tropical Green</div><div class="arr-desc">Tropical foliage, monstera, birds of paradise</div><div class="arr-price">$55</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Custom Orders</div>
+  <div class="custom-box">
+    <div class="custom-icon">🎨</div>
+    <div>
+      <div class="custom-h">Tell us your vision.</div>
+      <div class="custom-p">Wedding centrepieces, corporate events, or a personalised gift — we'll design it exactly as you imagine it.</div>
+      <a href="https://wa.me/0000000000" class="custom-btn">💬 Chat with us</a>
+    </div>
+  </div>
+
+  <div class="sec">Delivery Options</div>
+  <div class="delivery-cards">
+    <div class="del-card"><div class="del-icon">⚡</div><div class="del-name">Express</div><div class="del-desc">Same-day within 3 hours</div><div class="del-price">+$12</div></div>
+    <div class="del-card"><div class="del-icon">📅</div><div class="del-name">Scheduled</div><div class="del-desc">Choose your exact time slot</div><div class="del-price">+$6</div></div>
+    <div class="del-card"><div class="del-icon">🚶</div><div class="del-name">Pick Up</div><div class="del-desc">Free — collect in store</div><div class="del-price">Free</div></div>
+    <div class="del-card"><div class="del-icon">🌍</div><div class="del-name">Citywide</div><div class="del-desc">We deliver all across Dhaka</div><div class="del-price">From $6</div></div>
+  </div>
+
+  <div class="sec">Flower Subscription</div>
+  <div class="subscribe-box">
+    <h3>Fresh flowers every week.</h3>
+    <p>Curated seasonal arrangements delivered to your home or office. Pause or cancel anytime.</p>
+    <a href="https://wa.me/0000000000" class="sub-btn">🌷 Subscribe from $39/week</a>
+    <a href="#" class="sub-btn2">Learn more →</a>
+  </div>
+
+  <div class="sec">Find Us</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📍</div>12 Garden Road, Gulshan-1, Dhaka</div>
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">⏰</div>Daily · 8:00am – 8:00pm</div>
+    <div class="c-row"><div class="c-icon">📸</div>@bloomstudio.dhaka</div>
+  </div>
+</div>
+<footer>© 2025 Bloom Studio · Every petal tells a story 🌸</footer>
+</div></body></html>

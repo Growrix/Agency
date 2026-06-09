@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Aryan Dhaka — Musician</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#060406;min-height:100vh;font-family:'DM Sans',sans-serif;display:flex;justify-content:center;padding:32px 16px 48px}
+.card{width:100%;max-width:400px}
+.profile{text-align:center;margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.06)}
+.vinyl{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#1a0a18 20%,#2d1428 35%,#1a0a18 40%,#c8a040 41%,#1a0a18 42%,#3d2038 60%,#1a0a18 100%);margin:0 auto 18px;animation:spin 8s linear infinite;box-shadow:0 0 40px rgba(200,160,64,.2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.name{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:#f0e8e0;margin-bottom:4px;font-weight:300}
+.tagline{font-size:13px;color:rgba(240,232,224,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.soc-row{display:flex;justify-content:center;gap:12px;margin-bottom:8px}
+.soc{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;transition:.15s}
+.soc:hover{border-color:rgba(200,160,64,.4);background:rgba(200,160,64,.06)}
+.plays{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:2px}
+.now-playing{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px;margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.np-icon{font-size:24px;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.5}}
+.np-text .np-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.np-text .np-song{font-size:14px;font-weight:500;color:#f0e8e0}
+.links{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.link-item{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:12px;text-decoration:none;color:#f0e8e0;transition:.2s;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
+.link-item:hover{background:rgba(255,255,255,.07);border-color:rgba(200,160,64,.2);transform:translateX(4px)}
+.li-icon{font-size:22px;flex-shrink:0}
+.li-text .li-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px}
+.li-text .li-title{font-size:14px;font-weight:500}
+.li-arrow{margin-left:auto;color:rgba(255,255,255,.2);font-size:18px}
+.gold-link{background:rgba(200,160,64,.06);border-color:rgba(200,160,64,.2)}
+.gold-link:hover{background:rgba(200,160,64,.1);border-color:rgba(200,160,64,.35)}
+.gold-link .li-label{color:rgba(200,160,64,.5)}
+.tracks{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:24px}
+.tracks-title{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.track-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.track-item:last-child{border-bottom:none}
+.track-num{font-size:12px;color:rgba(255,255,255,.2);width:18px;flex-shrink:0;text-align:center}
+.track-name{font-size:13px;color:rgba(255,255,255,.7);flex:1}
+.track-time{font-size:11px;color:rgba(255,255,255,.2)}
+footer{text-align:center;font-size:11px;color:rgba(255,255,255,.15);letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="profile">
+    <div class="vinyl"></div>
+    <div class="name">Aryan Dhaka</div>
+    <div class="tagline">Singer · Songwriter · Producer</div>
+    <div class="soc-row">
+      <a href="#" class="soc">🎵</a><a href="#" class="soc">▶️</a><a href="#" class="soc">📸</a><a href="#" class="soc">🎙️</a>
+    </div>
+    <div class="plays">2.4M MONTHLY LISTENERS</div>
+  </div>
+
+  <div class="now-playing">
+    <span class="np-icon">🎵</span>
+    <div class="np-text"><div class="np-label">Latest release</div><div class="np-song">Raat Bhar — feat. Mehreen</div></div>
+  </div>
+
+  <div class="links">
+    <a href="#" class="link-item gold-link">
+      <span class="li-icon">🎧</span>
+      <div class="li-text"><div class="li-label">New Album — Out Now</div><div class="li-title">Shehorer Gaan — Listen Everywhere</div></div>
+      <span class="li-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <span class="li-icon">🎟️</span>
+      <div class="li-text"><div class="li-label">Live Show</div><div class="li-title">Dhaka Concert — 14 June · Bashundhara</div></div>
+      <span class="li-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <span class="li-icon">▶️</span>
+      <div class="li-text"><div class="li-label">YouTube</div><div class="li-title">Official Music Videos &amp; Sessions</div></div>
+      <span class="li-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <span class="li-icon">📧</span>
+      <div class="li-text"><div class="li-label">Fan Club</div><div class="li-title">Join for exclusive previews &amp; early tickets</div></div>
+      <span class="li-arrow">→</span>
+    </a>
+    <a href="#" class="link-item">
+      <span class="li-icon">🎤</span>
+      <div class="li-text"><div class="li-label">Booking</div><div class="li-title">Events, shows &amp; collaborations</div></div>
+      <span class="li-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="tracks">
+    <div class="tracks-title">Featured Tracks</div>
+    <div class="track-item"><span class="track-num">1</span><span class="track-name">Raat Bhar</span><span class="track-time">3:42</span></div>
+    <div class="track-item"><span class="track-num">2</span><span class="track-name">Shehorer Gaan</span><span class="track-time">4:18</span></div>
+    <div class="track-item"><span class="track-num">3</span><span class="track-name">Neel Akash (Acoustic)</span><span class="track-time">3:55</span></div>
+    <div class="track-item"><span class="track-num">4</span><span class="track-name">Ektuku Kotha</span><span class="track-time">4:02</span></div>
+  </div>
+
+  <footer>© Aryan Dhaka Music · aryandhaka.com</footer>
+</div>
+</body></html>

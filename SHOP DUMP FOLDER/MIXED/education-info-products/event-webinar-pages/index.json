@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "event-webinar-c.html",
+        "type_slug":  "event-webinar-pages",
+        "parent_category_slug":  "education-info-products",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/education-info-products/event-webinar-pages/event-webinar-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\event-webinar-c.html"
+    },
+    {
+        "source_file":  "event-webinar-b.html",
+        "type_slug":  "event-webinar-pages",
+        "parent_category_slug":  "education-info-products",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/education-info-products/event-webinar-pages/event-webinar-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\event-webinar-b.html"
+    },
+    {
+        "source_file":  "event-webinar-a.html",
+        "type_slug":  "event-webinar-pages",
+        "parent_category_slug":  "education-info-products",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/education-info-products/event-webinar-pages/event-webinar-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\event-webinar-a.html"
+    }
+]

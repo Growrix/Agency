@@ -19,6 +19,9 @@ export async function POST(request: NextRequest) {
 
     const result = await createOrder({
       product_slug: typeof body.product_slug === "string" ? body.product_slug : "",
+      product_variant_slug: typeof body.product_variant_slug === "string" ? body.product_variant_slug : undefined,
+      product_tier_name: typeof body.product_tier_name === "string" ? body.product_tier_name : undefined,
+      fulfillment_type: typeof body.fulfillment_type === "string" ? body.fulfillment_type : undefined,
       customer_name: typeof body.customer_name === "string" ? body.customer_name : "",
       customer_email: typeof body.customer_email === "string" ? body.customer_email : "",
       customer_phone: typeof body.customer_phone === "string" ? body.customer_phone : undefined,

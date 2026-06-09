@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ProfileCard — Design Styles Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#040608;color:#fff;font-family:'DM Sans',sans-serif}
+.top-header{text-align:center;padding:72px 20px 20px}
+.eyebrow{display:inline-block;background:rgba(120,80,255,.12);border:1px solid rgba(120,80,255,.25);border-radius:100px;padding:4px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(180,140,255,.7);margin-bottom:18px}
+.top-header h1{font-family:'Syne',sans-serif;font-size:clamp(24px,5vw,52px);font-weight:800;letter-spacing:-2px;line-height:.92;margin-bottom:12px;background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,.3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.top-header p{color:rgba(255,255,255,.25);font-size:13px;max-width:540px;margin:0 auto 30px;line-height:1.7}
+
+.section{padding:32px 16px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:0 4px}
+.sh-badge{display:inline-flex;align-items:center;gap:8px;border-radius:100px;padding:8px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:-.3px}
+.sh-line{flex:1;height:1px}
+.sh-count{font-size:10px;letter-spacing:1px;opacity:.5}
+
+/* Glassmorphic section */
+.glass-section .sh-badge{background:rgba(120,80,255,.1);border:1px solid rgba(120,80,255,.2);color:rgba(180,140,255,.9)}
+.glass-section .sh-line{background:linear-gradient(90deg,rgba(120,80,255,.3),transparent)}
+
+/* Neumorphic section */
+.neu-section .sh-badge{background:rgba(30,100,200,.1);border:1px solid rgba(30,100,200,.2);color:rgba(120,180,255,.9)}
+.neu-section .sh-line{background:linear-gradient(90deg,rgba(30,100,200,.3),transparent)}
+
+/* Bento section */
+.bento-section .sh-badge{background:rgba(255,60,120,.1);border:1px solid rgba(255,60,120,.2);color:rgba(255,120,160,.9)}
+.bento-section .sh-line{background:linear-gradient(90deg,rgba(255,60,120,.3),transparent)}
+
+/* Holographic section */
+.holo-section .sh-badge{background:rgba(255,0,200,.08);border:1px solid rgba(255,0,200,.18);color:rgba(255,100,220,.9)}
+.holo-section .sh-line{background:linear-gradient(90deg,rgba(255,0,200,.3),transparent)}
+
+/* Clay section */
+.clay-section .sh-badge{background:rgba(255,140,60,.1);border:1px solid rgba(255,140,60,.2);color:rgba(255,180,100,.9)}
+.clay-section .sh-line{background:linear-gradient(90deg,rgba(255,140,60,.3),transparent)}
+
+.phones-row{display:flex;gap:14px;overflow-x:auto;padding:8px 4px 16px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.08) transparent}
+.phones-row::-webkit-scrollbar{height:3px}
+.phones-row::-webkit-scrollbar-track{background:transparent}
+.phones-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:100px}
+
+.phone-card{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.phone{width:180px;height:380px;background:#0e0e0e;border-radius:26px;border:2px solid rgba(255,255,255,.06);box-shadow:0 0 0 1px rgba(255,255,255,.02),0 28px 52px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04);position:relative;overflow:hidden;flex-shrink:0}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:16px;background:#0e0e0e;border-radius:0 0 9px 9px;z-index:100}
+.screen{width:100%;height:100%;border-radius:25px;overflow:hidden}
+.screen iframe{width:222%;height:222%;transform:scale(.45);transform-origin:top left;border:none;pointer-events:none}
+.phone-name{font-family:'Syne',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;max-width:180px}
+.phone-type{font-size:9px;color:rgba(255,255,255,.1);text-align:center;margin-top:1px}
+
+.style-desc{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:18px;margin:0 4px;font-size:12px;color:rgba(255,255,255,.2);line-height:1.7}
+.style-desc strong{color:rgba(255,255,255,.5);font-weight:600}
+
+.footer-final{border-top:1px solid rgba(255,255,255,.05);padding:32px 20px;text-align:center}
+.footer-final p{font-size:11px;color:rgba(255,255,255,.15);line-height:2}
+.footer-tag{display:inline-block;margin:0 4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:100px;padding:3px 10px;font-size:9px;color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+<div class="top-header">
+  <div class="eyebrow">✦ ProfileCard Design Library</div>
+  <h1>5 Premium<br>Design Styles</h1>
+  <p>Glassmorphic · Neumorphic · Bento Grid · Dark Holographic · Claymorphic — 25 production-ready HTML business profiles built with the ProfileCard AI Agent.</p>
+</div>
+
+<!-- GLASSMORPHIC -->
+<div class="section glass-section">
+  <div class="section-header">
+    <div class="sh-badge">🔮 Glassmorphism</div>
+    <div class="sh-line"></div>
+    <div class="sh-count">5 profiles</div>
+  </div>
+  <div class="style-desc"><strong>Design language:</strong> Frosted glass cards on dark gradient aurora backgrounds. Multi-layer transparency with <code>backdrop-filter: blur()</code>, iridescent border shimmers and gradient text. Best for luxury, tech, finance and premium consumer brands.</div>
+  <div class="phones-row">
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-66-glass-jewellery.html" loading="lazy"></iframe></div></div><div class="phone-name">Luxury Jewellery</div><div class="phone-type">Aurora on purple-pink</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-67-glass-fintech.html" loading="lazy"></iframe></div></div><div class="phone-name">FinTech Startup</div><div class="phone-type">Dark blue teal aurora</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-68-glass-music-studio.html" loading="lazy"></iframe></div></div><div class="phone-name">Music Studio</div><div class="phone-type">Pink purple blobs + waveform</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-69-glass-spa.html" loading="lazy"></iframe></div></div><div class="phone-name">Premium Spa</div><div class="phone-type">Warm purple teal aurora</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-70-glass-architecture.html" loading="lazy"></iframe></div></div><div class="phone-name">Architecture Firm</div><div class="phone-type">Minimal dark glass</div></div>
+  </div>
+</div>
+
+<!-- NEUMORPHIC -->
+<div class="section neu-section">
+  <div class="section-header">
+    <div class="sh-badge">🧸 Neumorphism</div>
+    <div class="sh-line"></div>
+    <div class="sh-count">5 profiles</div>
+  </div>
+  <div class="style-desc"><strong>Design language:</strong> Soft UI with extruded light/shadow duet — every element raised from the same flat monochromatic background. Tactile, accessible, calming. Best for healthcare, finance, personal services and professional brands.</div>
+  <div class="phones-row">
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-71-neu-accounting.html" loading="lazy"></iframe></div></div><div class="phone-name">Accounting Firm</div><div class="phone-type">Soft gray + blue accent</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-72-neu-clinic.html" loading="lazy"></iframe></div></div><div class="phone-name">Healthcare Clinic</div><div class="phone-type">Soft blue-gray + sky blue</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-73-neu-interior.html" loading="lazy"></iframe></div></div><div class="phone-name">Interior Design</div><div class="phone-type">Warm cream + amber</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-74-neu-dark-tech.html" loading="lazy"></iframe></div></div><div class="phone-name">Dark Tech Firm</div><div class="phone-type">Dark neumorphic + teal</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-75-neu-trainer.html" loading="lazy"></iframe></div></div><div class="phone-name">Personal Trainer</div><div class="phone-type">Warm stone + orange</div></div>
+  </div>
+</div>
+
+<!-- BENTO GRID -->
+<div class="section bento-section">
+  <div class="section-header">
+    <div class="sh-badge">⬜ Bento Grid</div>
+    <div class="sh-line"></div>
+    <div class="sh-count">5 profiles</div>
+  </div>
+  <div class="style-desc"><strong>Design language:</strong> Asymmetric grid of self-contained cells — each card with its own background, type scale and micro-design. Inspired by Apple's product pages. No separators; the grid is the structure. Best for agencies, multi-service brands and digital-native businesses.</div>
+  <div class="phones-row">
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-76-bento-marketing.html" loading="lazy"></iframe></div></div><div class="phone-name">Digital Marketing</div><div class="phone-type">Dark colorful cells</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-78-bento-restaurant.html" loading="lazy"></iframe></div></div><div class="phone-name">Nova Restaurant</div><div class="phone-type">Warm dark amber bento</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-79-bento-edtech.html" loading="lazy"></iframe></div></div><div class="phone-name">EdTech Platform</div><div class="phone-type">Light colorful cells</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-80-bento-hotel.html" loading="lazy"></iframe></div></div><div class="phone-name">Luxury Hotel</div><div class="phone-type">Dark luxury gold bento</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-76-bento-marketing.html" loading="lazy"></iframe></div></div><div class="phone-name">Orbit Digital</div><div class="phone-type">Dark grid + colorful stats</div></div>
+  </div>
+</div>
+
+<!-- HOLOGRAPHIC -->
+<div class="section holo-section">
+  <div class="section-header">
+    <div class="sh-badge">🌈 Dark Holographic</div>
+    <div class="sh-line"></div>
+    <div class="sh-count">profiles</div>
+  </div>
+  <div class="style-desc"><strong>Design language:</strong> Iridescent multi-hue gradients cycling through the full spectrum — on near-black backgrounds. Prism-like borders, aurora blobs, animated gradient text. Best for Web3, beauty, fashion, creative and gaming brands.</div>
+  <div class="phones-row">
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-81-holo-web3.html" loading="lazy"></iframe></div></div><div class="phone-name">Web3 / NFT Studio</div><div class="phone-type">Purple-teal-green holographic</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-83-holo-creative.html" loading="lazy"></iframe></div></div><div class="phone-name">Creative Production</div><div class="phone-type">Full-spectrum prismatic</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-81-holo-web3.html" loading="lazy"></iframe></div></div><div class="phone-name">VOID Studio</div><div class="phone-type">Smart contract + NFT</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-83-holo-creative.html" loading="lazy"></iframe></div></div><div class="phone-name">Prism Creative</div><div class="phone-type">Film + photography</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-81-holo-web3.html" loading="lazy"></iframe></div></div><div class="phone-name">Web3 Variant</div><div class="phone-type">Crypto + DeFi</div></div>
+  </div>
+</div>
+
+<!-- CLAYMORPHIC -->
+<div class="section clay-section">
+  <div class="section-header">
+    <div class="sh-badge">🧁 Claymorphism</div>
+    <div class="sh-line"></div>
+    <div class="sh-count">5 profiles</div>
+  </div>
+  <div class="style-desc"><strong>Design language:</strong> 3D inflated UI elements that look like soft clay — achieved with layered inset + outset box-shadows. Pastel gradient backgrounds, oversized emoji icons, rounded Nunito typeface, vivid colored cards. Best for consumer apps, food, kids, travel and wellness.</div>
+  <div class="phones-row">
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-86-clay-edtech.html" loading="lazy"></iframe></div></div><div class="phone-name">Kids EdTech</div><div class="phone-type">Purple-teal clay gradient</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-87-clay-organic.html" loading="lazy"></iframe></div></div><div class="phone-name">Organic Food</div><div class="phone-type">Green-yellow clay gradient</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-88-clay-fitness.html" loading="lazy"></iframe></div></div><div class="phone-name">Fitness App</div><div class="phone-type">Pink-purple clay gradient</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-89-clay-travel.html" loading="lazy"></iframe></div></div><div class="phone-name">Travel Agency</div><div class="phone-type">Blue-orange clay gradient</div></div>
+    <div class="phone-card"><div class="phone"><div class="screen"><iframe src="profile-90-clay-petcare.html" loading="lazy"></iframe></div></div><div class="phone-name">Pet Care</div><div class="phone-type">Pink-lavender clay gradient</div></div>
+  </div>
+</div>
+
+<div class="footer-final">
+  <p>ProfileCard AI Agent · 90+ templates · 15+ design systems · Built with Claude</p>
+  <p style="margin-top:12px">
+    <span class="footer-tag">Glassmorphism</span>
+    <span class="footer-tag">Neumorphism</span>
+    <span class="footer-tag">Bento Grid</span>
+    <span class="footer-tag">Holographic</span>
+    <span class="footer-tag">Claymorphism</span>
+    <span class="footer-tag">Brutalist</span>
+    <span class="footer-tag">Ultra Minimal</span>
+    <span class="footer-tag">Dashboard UI</span>
+    <span class="footer-tag">Newspaper Editorial</span>
+    <span class="footer-tag">Art Deco</span>
+    <span class="footer-tag">Swiss Grid</span>
+    <span class="footer-tag">Memphis Bauhaus</span>
+  </p>
+</div>
+</body>
+</html>

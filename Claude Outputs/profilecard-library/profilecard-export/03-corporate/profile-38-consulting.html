@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>McKinley & Partners — Management Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#060810;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f8f8fc;margin:0 auto}
+
+/* ── HERO – diagonal cut dark left / light right ── */
+.hero{min-height:290px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:50px 22px 28px}
+.hero-bg{position:absolute;inset:0;background:#0a0c1e}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(100,120,200,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(100,120,200,.06) 1px,transparent 1px);background-size:32px 32px}
+.hero-slash{position:absolute;bottom:-2px;left:0;right:0;height:60px;background:#f8f8fc;clip-path:polygon(0 100%,100% 0,100% 100%)}
+.hero-accent{position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(100,120,255,.12) 0%,transparent 70%)}
+.hero-num{position:absolute;top:26px;right:22px;font-family:'Syne',sans-serif;font-size:72px;font-weight:800;color:rgba(255,255,255,.03);line-height:1;letter-spacing:-4px}
+.hero-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(180,190,255,.45);margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#fff;line-height:.95;letter-spacing:-1.5px;position:relative;z-index:1}
+.hero-rule{width:40px;height:2px;background:linear-gradient(90deg,#6478ff,transparent);margin:14px 0;position:relative;z-index:1}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6;max-width:260px;position:relative;z-index:1}
+
+/* ── STATS RIBBON ── */
+.stats-ribbon{display:flex;background:#0a0c1e;padding:0}
+.stat{flex:1;text-align:center;padding:14px 0;border-right:1px solid rgba(255,255,255,.06)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.stat-l{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:4px}
+
+/* ── BODY ── */
+.body{padding:0 18px 40px;background:#f8f8fc}
+.sec{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#6478ff;margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(100,120,255,.15)}
+
+.service-list{display:flex;flex-direction:column;gap:0}
+.svc-row{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid #ebebf5}
+.svc-row:last-child{border-bottom:none}
+.svc-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#e8e8f4;min-width:32px;line-height:1}
+.svc-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#0a0c1e;letter-spacing:-.3px}
+.svc-desc{font-size:11px;color:#7878a0;margin-top:3px;line-height:1.5}
+.svc-tag{display:inline-block;font-size:9px;background:#eeeeff;color:#6478ff;padding:2px 9px;border-radius:100px;margin-top:5px;font-weight:600;letter-spacing:.5px}
+
+.sectors{display:flex;flex-wrap:wrap;gap:6px}
+.sector{background:#fff;border:1px solid #e0e0f0;border-radius:6px;padding:6px 12px;font-size:11px;font-weight:500;color:#4a4a6a}
+
+.case-studies{display:flex;flex-direction:column;gap:8px}
+.case{background:#fff;border:1px solid #e8e8f5;border-radius:12px;padding:16px;display:flex;gap=12px;gap:12px;align-items:flex-start;position:relative;overflow:hidden}
+.case::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#6478ff,#a0b0ff)}
+.case-icon{font-size:22px;flex-shrink:0}
+.case-title{font-size:13px;font-weight:700;color:#0a0c1e;letter-spacing:-.2px}
+.case-detail{font-size:10px;color:#7878a0;margin-top:3px;line-height:1.5}
+.case-result{font-size:11px;font-weight:700;color:#6478ff;margin-top:5px}
+
+.team{display:flex;flex-direction:column;gap:8px}
+.member{background:#fff;border:1px solid #e8e8f5;border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center}
+.m-av{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;flex-shrink:0;background:#eeeeff;color:#6478ff}
+.m-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#0a0c1e}
+.m-title{font-size:11px;color:#7878a0;margin-top:2px}
+.m-exp{font-size:10px;color:#6478ff;margin-top:3px;font-weight:600}
+
+.cta-box{background:#0a0c1e;border-radius:14px;padding:24px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(100,120,255,.12),transparent)}
+.cta-box h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.5px;position:relative}
+.cta-box p{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:18px;line-height:1.6;position:relative}
+.cta-btn{display:block;background:#6478ff;color:#fff;border-radius:8px;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px;position:relative}
+.cta-btn2{display:block;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;font-size:11px;text-decoration:none;position:relative}
+
+.contacts{background:#fff;border:1px solid #e8e8f5;border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f5f5fb;font-size:12px;color:#555}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:#6478ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#0a0c1e;padding:18px;text-align:center;font-family:'Syne',sans-serif;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.12)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-num">MC</div>
+  <div class="hero-eyebrow">Management Consulting · Est. 2008</div>
+  <h1>McKinley<br>&amp; Partners</h1>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Strategy, transformation & performance consulting for Bangladesh's leading corporations.</div>
+</div>
+<div class="stats-ribbon">
+  <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Clients</div></div>
+  <div class="stat"><div class="stat-n">$2B+</div><div class="stat-l">Value Delivered</div></div>
+  <div class="stat"><div class="stat-n">16yr</div><div class="stat-l">Practice</div></div>
+  <div class="stat"><div class="stat-n">48</div><div class="stat-l">Consultants</div></div>
+</div>
+<div class="body">
+  <div class="sec">Practice Areas</div>
+  <div class="service-list">
+    <div class="svc-row"><div class="svc-num">01</div><div><div class="svc-name">Corporate Strategy</div><div class="svc-desc">Market entry, M&amp;A due diligence, competitive positioning &amp; growth blueprints</div><div class="svc-tag">Core practice</div></div></div>
+    <div class="svc-row"><div class="svc-num">02</div><div><div class="svc-name">Operational Excellence</div><div class="svc-desc">Process optimisation, lean transformation, cost reduction &amp; efficiency programs</div></div></div>
+    <div class="svc-row"><div class="svc-num">03</div><div><div class="svc-name">Digital Transformation</div><div class="svc-desc">Technology strategy, ERP selection, data &amp; AI roadmaps</div></div></div>
+    <div class="svc-row"><div class="svc-num">04</div><div><div class="svc-name">Organisational Design</div><div class="svc-desc">Restructuring, talent strategy, governance &amp; culture change</div></div></div>
+  </div>
+
+  <div class="sec">Industries Served</div>
+  <div class="sectors">
+    <div class="sector">Banking &amp; Financial Services</div>
+    <div class="sector">Garments &amp; Textiles</div>
+    <div class="sector">Pharmaceuticals</div>
+    <div class="sector">FMCG</div>
+    <div class="sector">Telecom</div>
+    <div class="sector">Real Estate</div>
+    <div class="sector">Energy &amp; Power</div>
+  </div>
+
+  <div class="sec">Case Studies</div>
+  <div class="case-studies">
+    <div class="case"><div class="case-icon">🏦</div><div><div class="case-title">Top 5 Bank — Branch Transformation</div><div class="case-detail">Redesigned 200 branch operations model &amp; digital onboarding workflow</div><div class="case-result">↑ 34% revenue per branch · 18-month program</div></div></div>
+    <div class="case"><div class="case-icon">👗</div><div><div class="case-title">$800M Garment Group — Cost Program</div><div class="case-detail">Factory operations overhaul across 12 facilities in Bangladesh</div><div class="case-result">↓ 22% operational cost · $18M annual saving</div></div></div>
+    <div class="case"><div class="case-icon">💊</div><div><div class="case-title">Pharma Co — Market Entry Strategy</div><div class="case-detail">Expansion into 4 new SAARC markets with regulatory &amp; GTM roadmap</div><div class="case-result">Launched in 3 markets within 18 months</div></div></div>
+  </div>
+
+  <div class="sec">Leadership Team</div>
+  <div class="team">
+    <div class="member"><div class="m-av">JM</div><div><div class="m-name">James McKinley</div><div class="m-title">Founding Partner · Strategy</div><div class="m-exp">Harvard MBA · Former McKinsey · 22yr</div></div></div>
+    <div class="member"><div class="m-av">RK</div><div><div class="m-name">Rina Karim</div><div class="m-title">Managing Partner · Operations</div><div class="m-exp">INSEAD · Former Bain · 18yr</div></div></div>
+    <div class="member"><div class="m-av">TA</div><div><div class="m-name">Tariq Ahmed</div><div class="m-title">Partner · Digital</div><div class="m-exp">MIT · Former Deloitte · 14yr</div></div></div>
+  </div>
+
+  <div class="sec">Work With Us</div>
+  <div class="cta-box">
+    <h3>Ready to transform your business?</h3>
+    <p>Book a confidential senior partner conversation. No junior consultants. We start with listening.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">Schedule a Partner Call</a>
+    <a href="mailto:hello@mckinleypartners.com" class="cta-btn2">hello@mckinleypartners.com</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>McKinley House, Gulshan Avenue, Dhaka</div>
+    <div class="cr"><div class="ci">🌐</div>www.mckinleypartners.com</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 6pm</div>
+  </div>
+</div>
+<footer>© 2025 McKinley &amp; Partners · Management Consulting · Dhaka</footer>
+</div></body></html>

@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growrixos — Master Project Instructions</title>
+<style>
+:root {
+  --bg: #0b0b0d;
+  --bg2: #111114;
+  --bg3: #18181d;
+  --bg4: #1e1e25;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.11);
+  --text: #e0e0e8;
+  --text2: #8888a0;
+  --text3: #4a4a60;
+  --accent: #7c5cfc;
+  --accent2: #9b7dff;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --coral: #f97316;
+  --teal: #14b8a6;
+  --blue: #60a5fa;
+  --pink: #f472b6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* SIDEBAR NAV */
+.layout { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 240px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 24px 0;
+  z-index: 50;
+}
+.sidebar-logo {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.sidebar-logo .logo-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.sidebar-logo .logo-sub {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 12px 20px 6px;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 20px;
+  font-size: 12.5px;
+  color: var(--text2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.nav-link:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.nav-link.active { color: var(--accent2); border-left-color: var(--accent); background: rgba(124,92,252,0.07); }
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* CONTENT */
+.content {
+  margin-left: 240px;
+  flex: 1;
+  min-height: 100vh;
+}
+.top-banner {
+  background: linear-gradient(135deg, rgba(124,92,252,0.15) 0%, rgba(20,184,166,0.08) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 48px 36px;
+}
+.top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(124,92,252,0.12);
+  border: 1px solid rgba(124,92,252,0.28);
+  color: var(--accent2);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.top-banner h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  max-width: 640px;
+  margin-bottom: 10px;
+}
+.top-banner p {
+  color: var(--text2);
+  font-size: 14px;
+  max-width: 560px;
+  line-height: 1.6;
+}
+.banner-meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.meta-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text2);
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+.meta-chip strong { color: #fff; font-size: 13px; }
+
+/* MAIN CONTENT AREA */
+.page { max-width: 860px; margin: 0 auto; padding: 48px 48px 80px; }
+
+/* SECTION */
+.section { margin-bottom: 56px; }
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.section-lead {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  max-width: 640px;
+  line-height: 1.65;
+}
+
+/* RULE CARD */
+.rule-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.rule-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.rule-header:hover { background: rgba(255,255,255,0.02); }
+.rule-icon {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.rule-header-text { flex: 1; }
+.rule-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+}
+.rule-subtitle {
+  font-size: 11.5px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.rule-toggle {
+  font-size: 11px;
+  color: var(--text3);
+  transition: transform 0.2s;
+}
+.rule-card.open .rule-toggle { transform: rotate(180deg); }
+.rule-body {
+  display: none;
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+}
+.rule-card.open .rule-body { display: block; }
+
+/* PIPELINE STEPS */
+.pipeline {
+  display: grid;
+  gap: 0;
+  position: relative;
+}
+.pipeline::before {
+  content: '';
+  position: absolute;
+  left: 23px; top: 40px; bottom: 40px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--teal));
+  border-radius: 2px;
+}
+.pipeline-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 18px 0;
+  position: relative;
+}
+.step-num {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  flex-shrink: 0;
+  z-index: 1;
+  border: 2px solid var(--border);
+}
+.step-content { flex: 1; padding-top: 4px; }
+.step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+.step-checklist { list-style: none; }
+.step-checklist li {
+  font-size: 12px;
+  color: var(--text2);
+  padding: 2px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.step-checklist li::before {
+  content: '→';
+  color: var(--accent);
+  font-size: 11px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+/* PRODUCT CATEGORY GRID */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+.cat-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: border-color 0.15s;
+}
+.cat-block:hover { border-color: var(--border2); }
+.cat-block-icon { font-size: 22px; margin-bottom: 10px; }
+.cat-block-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.cat-block-items { list-style: none; }
+.cat-block-items li {
+  font-size: 11.5px;
+  color: var(--text2);
+  padding: 2px 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.cat-block-items li::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--text3);
+  flex-shrink: 0;
+}
+
+/* DESIGN RULES TABLE */
+.rules-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.rules-table th {
+  background: var(--bg3);
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+}
+.rules-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text);
+  vertical-align: top;
+}
+.rules-table tr:last-child td { border-bottom: none; }
+.rules-table tr:hover td { background: rgba(255,255,255,0.015); }
+.do-tag {
+  display: inline-block;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.2);
+  color: var(--green);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.dont-tag {
+  display: inline-block;
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.2);
+  color: var(--coral);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* PROMPT BLOCK */
+.prompt-block {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 12px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.7;
+  position: relative;
+}
+.prompt-block .prompt-label {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 8px;
+}
+.prompt-block .ph {
+  color: var(--accent2);
+  font-weight: 700;
+}
+
+/* INLINE TAG */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.tag-purple { color: var(--accent2); border-color: rgba(155,125,255,0.3); background: rgba(124,92,252,0.1); }
+.tag-green { color: var(--green); border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.08); }
+.tag-amber { color: var(--amber); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+.tag-teal { color: var(--teal); border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.08); }
+.tag-coral { color: var(--coral); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.08); }
+.tag-blue { color: var(--blue); border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.08); }
+
+/* INFO BOX */
+.info-box {
+  background: rgba(124,92,252,0.07);
+  border: 1px solid rgba(124,92,252,0.2);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--text2);
+  margin: 16px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.info-box .info-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.warn-box {
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--text2);
+  margin: 16px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.warn-box .warn-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+/* TIMELINE */
+.timeline-wrap {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin: 20px 0;
+}
+.timeline-phase {
+  flex: 1;
+  min-width: 140px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-right: none;
+  padding: 16px;
+  position: relative;
+}
+.timeline-phase:first-child { border-radius: 10px 0 0 10px; }
+.timeline-phase:last-child { border-right: 1px solid var(--border); border-radius: 0 10px 10px 0; }
+.phase-num {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.phase-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.phase-tasks {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+/* DIVIDER */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* GRID 2 */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+/* SIMPLE LIST */
+.simple-list { list-style: none; margin: 12px 0; }
+.simple-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text);
+}
+.simple-list li:last-child { border-bottom: none; }
+.simple-list li .li-icon { font-size: 14px; flex-shrink: 0; }
+.simple-list li strong { color: #fff; }
+
+/* CODE */
+code {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  color: var(--accent2);
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer .footer-left { font-size: 12px; color: var(--text3); }
+footer .footer-left strong { color: var(--text2); }
+footer .footer-right { font-size: 11px; color: var(--text3); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .page { padding: 24px 20px 60px; }
+  .top-banner { padding: 32px 20px 24px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-name">Growrixos</div>
+    <div class="logo-sub">Master Instructions · 2025–2026</div>
+  </div>
+
+  <div class="nav-section-label">Overview</div>
+  <a class="nav-link active" href="#about">
+    <div class="nav-dot" style="background:#7c5cfc"></div> What This Is
+  </a>
+  <a class="nav-link" href="#products">
+    <div class="nav-dot" style="background:#14b8a6"></div> Product Categories
+  </a>
+
+  <div class="nav-section-label">The Pipeline</div>
+  <a class="nav-link" href="#pipeline">
+    <div class="nav-dot" style="background:#22c55e"></div> Build Pipeline
+  </a>
+  <a class="nav-link" href="#prompt-system">
+    <div class="nav-dot" style="background:#f59e0b"></div> AI Prompt System
+  </a>
+
+  <div class="nav-section-label">Standards</div>
+  <a class="nav-link" href="#design-rules">
+    <div class="nav-dot" style="background:#f472b6"></div> Design Rules
+  </a>
+  <a class="nav-link" href="#code-rules">
+    <div class="nav-dot" style="background:#60a5fa"></div> Code Rules
+  </a>
+  <a class="nav-link" href="#qa-rules">
+    <div class="nav-dot" style="background:#f97316"></div> QA Checklist
+  </a>
+
+  <div class="nav-section-label">Product Specs</div>
+  <a class="nav-link" href="#spec-business">
+    <div class="nav-dot" style="background:#9b7dff"></div> Business Pages
+  </a>
+  <a class="nav-link" href="#spec-email">
+    <div class="nav-dot" style="background:#14b8a6"></div> Email Templates
+  </a>
+  <a class="nav-link" href="#spec-docs">
+    <div class="nav-dot" style="background:#22c55e"></div> Documents
+  </a>
+  <a class="nav-link" href="#spec-ecommerce">
+    <div class="nav-dot" style="background:#f59e0b"></div> Marketing Pages
+  </a>
+  <a class="nav-link" href="#spec-education">
+    <div class="nav-dot" style="background:#f472b6"></div> Education Pages
+  </a>
+  <a class="nav-link" href="#spec-tools">
+    <div class="nav-dot" style="background:#60a5fa"></div> Tools & Utilities
+  </a>
+
+  <div class="nav-section-label">Sync</div>
+  <a class="nav-link" href="#memory">
+    <div class="nav-dot" style="background:#f97316"></div> AI Memory Rules
+  </a>
+</nav>
+
+<!-- CONTENT -->
+<main class="content">
+
+  <!-- BANNER -->
+  <div class="top-banner">
+    <div class="top-badge">⚡ Growrixos · Production OS</div>
+    <h1>Master Project Instructions & Build Standards</h1>
+    <p>Every digital product Growrixos builds follows this document — from the first idea to the final file. This is the operating system for the agency's entire production pipeline.</p>
+    <div class="banner-meta">
+      <div class="meta-chip">🌐 <strong>growrixos.com</strong></div>
+      <div class="meta-chip">🗂️ <strong>6</strong> Product Categories</div>
+      <div class="meta-chip">📋 <strong>5-Phase</strong> Build Pipeline</div>
+      <div class="meta-chip">🤖 <strong>AI-First</strong> Production</div>
+      <div class="meta-chip">📅 <strong>2025–2026</strong></div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 1: WHAT THIS IS
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="about">
+      <div class="section-eyebrow">Section 01 · Overview</div>
+      <h2>What This Document Is</h2>
+      <p class="section-lead">Think of this as the rulebook for the whole agency. Before anyone (or any AI) builds anything, they read this. It tells you what to build, how to plan it, how to design it, how to code it, and how to check if it's done right.</p>
+
+      <div class="info-box">
+        <div class="info-icon">💡</div>
+        <div><strong style="color:#fff;">Plain English Version:</strong> Imagine you're opening a restaurant. Before cooking, you need a menu, recipes, food safety rules, and a quality check. This document is all of that — but for building websites and digital products. Every product gets the same professional treatment, no shortcuts.</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="cat-block">
+          <div class="cat-block-icon">🎯</div>
+          <div class="cat-block-name">The Mission</div>
+          <p style="font-size:12.5px; color:var(--text2); line-height:1.55;">Build high-quality HTML digital products that real businesses will buy — templates, tools, landing pages, and utilities — all planned and built with a proper system, not guesswork.</p>
+        </div>
+        <div class="cat-block">
+          <div class="cat-block-icon">🤖</div>
+          <div class="cat-block-name">AI-First Approach</div>
+          <p style="font-size:12.5px; color:var(--text2); line-height:1.55;">All planning, research, design specs, and code are produced with AI. Every output is written so that an AI can read it, understand it, and execute it — no ambiguity, no vague instructions.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 2: PRODUCT CATEGORIES
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="products">
+      <div class="section-eyebrow">Section 02 · Product Categories</div>
+      <h2>What Growrixos Builds</h2>
+      <p class="section-lead">Six product families. Each has its own rules, its own buyers, and its own design needs. Never mix them up — a restaurant menu page is nothing like a mortgage calculator.</p>
+
+      <div class="cat-grid">
+        <div class="cat-block">
+          <div class="cat-block-icon">🏢</div>
+          <div class="cat-block-name" style="color: var(--accent2);">01 · Business & Professional</div>
+          <ul class="cat-block-items">
+            <li>Business profile / one-pager</li>
+            <li>Digital business cards</li>
+            <li>Agency landing pages</li>
+            <li>Restaurant menu pages</li>
+            <li>Local business sites</li>
+          </ul>
+        </div>
+        <div class="cat-block">
+          <div class="cat-block-icon">📧</div>
+          <div class="cat-block-name" style="color: var(--teal);">02 · Email Templates</div>
+          <ul class="cat-block-items">
+            <li>Newsletter templates</li>
+            <li>Transactional emails</li>
+            <li>Promotional email blasts</li>
+            <li>Cold outreach templates</li>
+            <li>Welcome sequences</li>
+          </ul>
+        </div>
+        <div class="cat-block">
+          <div class="cat-block-icon">📄</div>
+          <div class="cat-block-name" style="color: var(--green);">03 · Documents & Reports</div>
+          <ul class="cat-block-items">
+            <li>HTML invoice templates</li>
+            <li>Proposal templates</li>
+            <li>HTML résumés / CVs</li>
+            <li>Annual report pages</li>
+            <li>Case study pages</li>
+          </ul>
+        </div>
+        <div class="cat-block">
+          <div class="cat-block-icon">🛍️</div>
+          <div class="cat-block-name" style="color: var(--amber);">04 · E-Commerce & Marketing</div>
+          <ul class="cat-block-items">
+            <li>Product launch pages</li>
+            <li>Link-in-bio pages</li>
+            <li>Affiliate landing pages</li>
+            <li>App promo pages</li>
+            <li>Coming soon pages</li>
+          </ul>
+        </div>
+        <div class="cat-block">
+          <div class="cat-block-icon">🎓</div>
+          <div class="cat-block-name" style="color: var(--pink);">05 · Education & Info Products</div>
+          <ul class="cat-block-items">
+            <li>Course landing pages</li>
+            <li>Lead magnet pages</li>
+            <li>Webinar / event pages</li>
+            <li>Portfolio templates</li>
+            <li>FAQ / knowledge pages</li>
+          </ul>
+        </div>
+        <div class="cat-block">
+          <div class="cat-block-icon">🔧</div>
+          <div class="cat-block-name" style="color: var(--blue);">06 · Tools & Utilities</div>
+          <ul class="cat-block-items">
+            <li>Calculators (ROI, mortgage)</li>
+            <li>Habit / project trackers</li>
+            <li>FAQ / accordion pages</li>
+            <li>Maintenance / coming soon</li>
+            <li>Interactive checklists</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-icon">⚠️</div>
+        <div><strong style="color: var(--amber);">Important — Two Separate Universes:</strong> Growrixos also has two bigger dashboards already planned — the <strong style="color:#fff;">Industry Templates Masterplan</strong> (business website templates like plumbers, dentists, gyms) and the <strong style="color:#fff;">SaaS Masterplan</strong> (software product templates). The 6 categories above are separate — these are standalone HTML digital products for sale, not the full industry/SaaS websites.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 3: BUILD PIPELINE
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="pipeline">
+      <div class="section-eyebrow">Section 03 · The Build Pipeline</div>
+      <h2>How Every Product Gets Built — 5 Phases</h2>
+      <p class="section-lead">This is the most important part. No product gets built by jumping straight to code. Every single product goes through all 5 phases. Skipping phases = bad products = products nobody buys.</p>
+
+      <div class="info-box">
+        <div class="info-icon">📚</div>
+        <div><strong style="color:#fff;">Think of it like building a house:</strong> You don't just start laying bricks. First you plan, then you draw blueprints, then the architect checks everything, then you build, then inspectors check it. Same idea here.</div>
+      </div>
+
+      <div class="timeline-wrap">
+        <div class="timeline-phase">
+          <div class="phase-num">Phase 01</div>
+          <div class="phase-name">🔍 Research</div>
+          <div class="phase-tasks">Who buys this? What do competitors look like? What price does it sell for?</div>
+        </div>
+        <div class="timeline-phase">
+          <div class="phase-num">Phase 02</div>
+          <div class="phase-name">📋 Planning</div>
+          <div class="phase-tasks">Define buyer, sections, features, content, and file structure.</div>
+        </div>
+        <div class="timeline-phase">
+          <div class="phase-num">Phase 03</div>
+          <div class="phase-name">🎨 Design Spec</div>
+          <div class="phase-tasks">Colors, fonts, layout wireframe, and the one unique signature element.</div>
+        </div>
+        <div class="timeline-phase">
+          <div class="phase-num">Phase 04</div>
+          <div class="phase-name">💻 Build</div>
+          <div class="phase-tasks">Write HTML, CSS, JS. Single file. Real copy. No lorem ipsum.</div>
+        </div>
+        <div class="timeline-phase">
+          <div class="phase-num">Phase 05</div>
+          <div class="phase-name">✅ QA Check</div>
+          <div class="phase-tasks">Mobile test, links, contrast, performance, and final review.</div>
+        </div>
+      </div>
+
+      <div class="pipeline">
+
+        <div class="pipeline-step">
+          <div class="step-num" style="background: rgba(124,92,252,0.12); color: var(--accent2); border-color: rgba(124,92,252,0.3);">01</div>
+          <div class="step-content">
+            <div class="step-title">Research Phase — "Know Before You Build"</div>
+            <div class="step-desc">Before writing one line of code, answer these questions about the product you're about to build. This stops you from building the wrong thing.</div>
+            <ul class="step-checklist">
+              <li>Who is the buyer? (freelancer, small business, agency, creator?)</li>
+              <li>What problem does this product solve for that buyer?</li>
+              <li>What do the top 3 competitors on Gumroad, ThemeForest, or Envato look like?</li>
+              <li>What price range do similar products sell for? ($9? $29? $79?)</li>
+              <li>What's the primary action the user takes on this product? (Book a call? Download a file? Buy a product?)</li>
+              <li>What industry standard rules apply? (Email templates must work in Gmail/Outlook. Invoices must be printable.)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-num" style="background: rgba(20,184,166,0.12); color: var(--teal); border-color: rgba(20,184,166,0.3);">02</div>
+          <div class="step-content">
+            <div class="step-title">Planning Phase — "What Goes Inside"</div>
+            <div class="step-desc">Write a product brief. This is a simple document (can be in a comment at the top of the HTML file) that defines the product before any code is written.</div>
+            <div class="prompt-block">
+              <div class="prompt-label">📋 Product Brief Template (put at top of every file)</div>
+<!-- PRODUCT BRIEF
+  Name: [Product Name]
+  Category: [Which of the 6 categories]
+  Target Buyer: [1-sentence description]
+  Primary Goal: [What should the visitor DO?]
+  Sections: [List every section in order]
+  Key Features: [Unique/functional things this has]
+  Design Direction: [Dark/Light? Minimal/Rich? Colors? Mood?]
+  Price Tier: [Budget $9–$19 / Mid $29–$49 / Premium $79+]
+  Real-world example: [URL or product name to reference]
+-->
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-num" style="background: rgba(34,197,94,0.12); color: var(--green); border-color: rgba(34,197,94,0.3);">03</div>
+          <div class="step-content">
+            <div class="step-title">Design Spec Phase — "How It Looks"</div>
+            <div class="step-desc">Before writing CSS, define your design tokens. Think of tokens like the official color and font list — once set, everything must use them. No making up colors halfway through.</div>
+            <ul class="step-checklist">
+              <li>Pick a color palette: 1 background, 2–3 surface colors, 1 accent, 1 text color, 1 muted text color</li>
+              <li>Pick fonts: 1 display/heading font + 1 body font (from Google Fonts or system fonts only)</li>
+              <li>Decide the layout: Single column? Two column? Card grid?</li>
+              <li>Name the "Signature Element" — the ONE thing that makes this product memorable (e.g., a hover animation, a unique section layout, a bold typographic choice)</li>
+              <li>Decide if it's light or dark theme. Match the industry: finance = light/professional, music = dark/moody, fitness = bold/energetic</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-num" style="background: rgba(245,158,11,0.12); color: var(--amber); border-color: rgba(245,158,11,0.3);">04</div>
+          <div class="step-content">
+            <div class="step-title">Build Phase — "Write the Code"</div>
+            <div class="step-desc">Now and only now do you write code. Always single-file HTML. Always real content. No generic filler.</div>
+            <ul class="step-checklist">
+              <li>Start with the <code>&lt;!-- PRODUCT BRIEF --&gt;</code> comment at the very top</li>
+              <li>Define all CSS variables in <code>:root {}</code> first before writing any other CSS</li>
+              <li>Write HTML structure first (all sections, no styling), then style it</li>
+              <li>Use real, realistic copy — fake business name, real phone format, real-looking prices</li>
+              <li>Mobile styles go inside <code>@media (max-width: 640px)</code></li>
+              <li>No external JS libraries unless absolutely needed (use vanilla JS)</li>
+              <li>CDN links for fonts and icons only — FontAwesome, Google Fonts are fine</li>
+              <li>Every interactive element (button, input) must have a <code>:hover</code> and <code>:focus</code> state</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-num" style="background: rgba(249,115,22,0.12); color: var(--coral); border-color: rgba(249,115,22,0.3);">05</div>
+          <div class="step-content">
+            <div class="step-title">QA Phase — "Does It Actually Work?"</div>
+            <div class="step-desc">Quality Assurance (QA) = checking if the product is ready to sell. Go through every item on the QA checklist (see Section 06) before marking a product done.</div>
+            <ul class="step-checklist">
+              <li>Open in browser and check all 3 breakpoints: mobile (375px), tablet (768px), desktop (1280px)</li>
+              <li>Click every button and link — they must work or be clearly marked as demo</li>
+              <li>Check that text is readable (dark text on light bg, light text on dark bg — WCAG AA contrast)</li>
+              <li>Check that fonts loaded correctly (no fallback sans-serif where a nice font was intended)</li>
+              <li>Check print layout for invoice, resume, proposal types</li>
+              <li>Validate: no broken HTML tags, no unclosed divs</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 4: AI PROMPT SYSTEM
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="prompt-system">
+      <div class="section-eyebrow">Section 04 · AI Prompt System</div>
+      <h2>How to Talk to AI for Each Phase</h2>
+      <p class="section-lead">Since everything is built with AI, you need to know how to ask for each phase. Copy these prompt templates and fill in the <span style="color:var(--accent2);">[PLACEHOLDERS]</span>. Don't deviate from the structure — structured prompts produce consistent, quality output.</p>
+
+      <div class="rule-card" id="prompt-research">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(124,92,252,0.12); color:var(--accent2);">🔍</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Phase 1 — Research Prompt</div>
+            <div class="rule-subtitle">Use this first, before planning anything</div>
+          </div>
+          <div class="rule-toggle">▼</div>
+        </div>
+        <div class="rule-body">
+          <div class="prompt-block">
+            <div class="prompt-label">AI Research Prompt</div>
+You are a senior product researcher for Growrixos, a web dev agency. I want to build a digital HTML product.<br><br>
+Product Type: <span class="ph">[e.g. "HTML Invoice Template"]</span><br>
+Category: <span class="ph">[one of: Business Pages / Email Templates / Documents / Marketing Pages / Education Pages / Tools]</span><br><br>
+Please give me:<br>
+1. WHO buys this (describe the ideal buyer in 2 sentences)<br>
+2. WHAT they need it to do (top 3 jobs this product must do)<br>
+3. WHAT competitors exist on Gumroad / ThemeForest (3 examples)<br>
+4. WHAT price range is realistic ($9–$79 range)<br>
+5. WHAT industry rules apply (e.g. "invoices must be printable", "email templates must work in Outlook")<br>
+6. WHAT 3 sections are non-negotiable for this product type<br><br>
+Format: numbered list. Be specific, not generic.
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-card" id="prompt-plan">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(20,184,166,0.12); color:var(--teal);">📋</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Phase 2 — Planning Prompt</div>
+            <div class="rule-subtitle">Run after research is done</div>
+          </div>
+          <div class="rule-toggle">▼</div>
+        </div>
+        <div class="rule-body">
+          <div class="prompt-block">
+            <div class="prompt-label">AI Planning Prompt</div>
+You are a senior product planner for Growrixos web dev agency. Based on this research:<br>
+<span class="ph">[paste Phase 1 output here]</span><br><br>
+Create a complete Product Brief for: <span class="ph">[product name]</span><br><br>
+Output as a structured comment block I can paste at the top of an HTML file. Include:<br>
+- Product Name<br>
+- Category<br>
+- Target Buyer (1 sentence)<br>
+- Primary Goal (what should the visitor DO)<br>
+- All Sections in order (with a 1-line description each)<br>
+- Key Features (3–5 functional/unique things)<br>
+- Design Direction (dark/light, mood, color family, fonts)<br>
+- Price Tier (Budget / Mid / Premium and why)<br>
+- Real World Reference (1 product or URL to model)
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-card" id="prompt-design">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(34,197,94,0.12); color:var(--green);">🎨</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Phase 3 — Design Spec Prompt</div>
+            <div class="rule-subtitle">Creates the visual token system before any code</div>
+          </div>
+          <div class="rule-toggle">▼</div>
+        </div>
+        <div class="rule-body">
+          <div class="prompt-block">
+            <div class="prompt-label">AI Design Spec Prompt</div>
+You are the lead designer at Growrixos, a web dev agency. You follow industry-standard design principles.<br><br>
+Create a design specification for: <span class="ph">[product name]</span><br>
+Product Brief: <span class="ph">[paste the brief]</span><br><br>
+Output:<br>
+1. COLOR PALETTE — 6 named hex values: bg, surface, border, accent, text-primary, text-muted<br>
+2. TYPOGRAPHY — Display font + Body font (Google Fonts only), with size scale (h1/h2/h3/body/caption in px)<br>
+3. LAYOUT — Describe the page layout in plain words + an ASCII wireframe of the hero section<br>
+4. SIGNATURE ELEMENT — 1 unique visual element that makes this memorable (describe in detail)<br>
+5. INDUSTRY RULES — List design rules specific to this product type that must not be broken<br><br>
+Do NOT use: pure black backgrounds, generic sans-serif+sans-serif pairings, lorem ipsum, stock emoji as design elements.
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-card" id="prompt-build">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(245,158,11,0.12); color:var(--amber);">💻</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Phase 4 — Build Prompt</div>
+            <div class="rule-subtitle">The main coding prompt — give it everything</div>
+          </div>
+          <div class="rule-toggle">▼</div>
+        </div>
+        <div class="rule-body">
+          <div class="prompt-block">
+            <div class="prompt-label">AI Build Prompt</div>
+You are a senior front-end developer at Growrixos web dev agency. Build this product as a single self-contained HTML file.<br><br>
+Product Brief:<br>
+<span class="ph">[paste Phase 2 brief]</span><br><br>
+Design Spec:<br>
+<span class="ph">[paste Phase 3 spec]</span><br><br>
+HARD RULES — follow every single one:<br>
+✅ Single HTML file — all CSS and JS inside the file, no external dependencies except Google Fonts and FontAwesome CDN<br>
+✅ Start the file with the Product Brief as a comment block<br>
+✅ Define all colors and fonts as CSS variables in :root<br>
+✅ Mobile-first — responsive at 375px, 768px, 1280px<br>
+✅ Use REAL content — real-looking business name, prices, copy. Zero lorem ipsum<br>
+✅ Every button and form input must have :hover and :focus states<br>
+✅ Use semantic HTML: header, main, section, footer, article, nav<br>
+✅ Add ARIA labels to interactive elements<br>
+✅ Animations: only where they add value, not decorative noise<br>
+✅ No inline styles except for dynamic values (color vars, width%)<br><br>
+SPECIFIC RULES for <span class="ph">[product category]</span>:<br>
+<span class="ph">[paste the industry-specific rules from the spec]</span><br><br>
+Build the complete file now.
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-card" id="prompt-qa">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(249,115,22,0.12); color:var(--coral);">✅</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Phase 5 — QA Prompt</div>
+            <div class="rule-subtitle">Run on the finished file before shipping</div>
+          </div>
+          <div class="rule-toggle">▼</div>
+        </div>
+        <div class="rule-body">
+          <div class="prompt-block">
+            <div class="prompt-label">AI QA Prompt</div>
+You are a QA engineer at Growrixos. Review this HTML file and give me a pass/fail report.<br><br>
+<span class="ph">[paste the full HTML code]</span><br><br>
+Check and report:<br>
+1. STRUCTURE — Valid HTML5? Semantic tags used? No unclosed tags?<br>
+2. RESPONSIVENESS — Will it work at 375px (mobile), 768px (tablet), 1280px (desktop)?<br>
+3. ACCESSIBILITY — Contrast ratios OK? ARIA labels present? Keyboard navigable?<br>
+4. PERFORMANCE — Unnecessary external resources? Large inline SVGs? Blocking scripts?<br>
+5. CONTENT — Any lorem ipsum? Any placeholder text left in? All links point somewhere?<br>
+6. CATEGORY RULES — Does it follow the specific rules for its product type?<br><br>
+Format: for each check, write PASS ✅ or FAIL ❌ + one line explaining why. List all fixes needed at the bottom.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 5: DESIGN RULES
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="design-rules">
+      <div class="section-eyebrow">Section 05 · Design Standards</div>
+      <h2>Universal Design Rules — Always Apply</h2>
+      <p class="section-lead">These rules apply to every single product, no exceptions. They are the baseline quality floor. If a product fails any of these, it doesn't ship.</p>
+
+      <table class="rules-table">
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>DO</th>
+            <th>DON'T</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Color</strong></td>
+            <td>Use a CSS variable system. 4–6 named colors max. One accent color that creates energy.</td>
+            <td>Don't use more than 2 accent colors. Don't use pure #000000 black or #ffffff white as backgrounds.</td>
+          </tr>
+          <tr>
+            <td><strong>Typography</strong></td>
+            <td>Pair a characterful display font (headings) with a clean body font. Import from Google Fonts. Set a clear size scale.</td>
+            <td>Don't use 2 sans-serif fonts together (boring). Don't use more than 2 font families. Don't use system fonts for display text.</td>
+          </tr>
+          <tr>
+            <td><strong>Spacing</strong></td>
+            <td>Use consistent spacing units (8px system: 8, 16, 24, 32, 48, 64). Sections should breathe.</td>
+            <td>Don't stack sections with no breathing room. Don't add random padding values that break the rhythm.</td>
+          </tr>
+          <tr>
+            <td><strong>Mobile</strong></td>
+            <td>Design mobile-first. Stack columns on small screens. Buttons min 44px tap target.</td>
+            <td>Don't assume desktop. Don't use tiny text (below 12px) on mobile. Don't let horizontal scroll happen.</td>
+          </tr>
+          <tr>
+            <td><strong>Content</strong></td>
+            <td>Write real copy that matches the buyer. Fake business names should sound real (e.g. "Meridian Consulting Group").</td>
+            <td>No lorem ipsum. No "Your Company Name Here." No "[Insert Testimonial]" placeholders.</td>
+          </tr>
+          <tr>
+            <td><strong>Contrast</strong></td>
+            <td>Text must pass WCAG AA (4.5:1 ratio for body text, 3:1 for large text). Check with a contrast checker.</td>
+            <td>Don't put gray text on gray backgrounds. Don't use colored text on colored backgrounds without checking contrast.</td>
+          </tr>
+          <tr>
+            <td><strong>Animations</strong></td>
+            <td>Only animate where it helps: hover states, focus rings, modal opens. Make it subtle (150–300ms).</td>
+            <td>No spinning logos. No bouncing text. No animations that run on loop automatically. No slide-in text effects that delay reading.</td>
+          </tr>
+          <tr>
+            <td><strong>Images</strong></td>
+            <td>Use CSS gradients, SVG illustrations, or placeholder.co for demo images. Always add alt text.</td>
+            <td>Don't hotlink random images. Don't use stock photos that have watermarks. Don't forget alt attributes.</td>
+          </tr>
+          <tr>
+            <td><strong>Theme vs Industry</strong></td>
+            <td>Match theme to industry. Finance = light/trustworthy. Fitness = bold/dark. Legal = neutral/professional.</td>
+            <td>Don't build a funeral home site in bright neon colors. Don't build a yoga studio in corporate gray.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 6: CODE RULES
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="code-rules">
+      <div class="section-eyebrow">Section 06 · Code Standards</div>
+      <h2>How Code Must Be Written</h2>
+      <p class="section-lead">Consistent code structure means any AI (or developer) can pick up any file and immediately understand it. Every file follows the exact same template structure.</p>
+
+      <div class="prompt-block">
+        <div class="prompt-label">📁 Standard File Structure (every HTML file must follow this order)</div>
+&lt;!-- PRODUCT BRIEF: Name / Category / Buyer / Goal / Sections --&gt;<br>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="en"&gt;<br>
+&lt;head&gt;<br>
+  &lt;meta charset="UTF-8"&gt;<br>
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+  &lt;title&gt;[Product Name] — Growrixos&lt;/title&gt;<br>
+  &lt;!-- Google Fonts link --&gt;<br>
+  &lt;!-- FontAwesome CDN if needed --&gt;<br>
+  &lt;style&gt;<br>
+    /* 1. CSS Variables (:root) */<br>
+    /* 2. Reset */<br>
+    /* 3. Global / base styles */<br>
+    /* 4. Layout (header, main, footer) */<br>
+    /* 5. Components (cards, buttons, forms) */<br>
+    /* 6. Sections (in page order) */<br>
+    /* 7. Utilities */<br>
+    /* 8. Responsive (@media queries) */<br>
+  &lt;/style&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+  &lt;!-- header --&gt;<br>
+  &lt;!-- main sections in order --&gt;<br>
+  &lt;!-- footer --&gt;<br>
+  &lt;script&gt;<br>
+    /* All JS at bottom */<br>
+  &lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+      </div>
+
+      <ul class="simple-list">
+        <li><span class="li-icon">✅</span><div><strong>Single File Only.</strong> All CSS and JS go inside the HTML file. The buyer downloads one .html file and it works — no folders, no dependencies.</div></li>
+        <li><span class="li-icon">✅</span><div><strong>CSS Variables First.</strong> Every color and font must be defined in <code>:root</code> at the top of the style block. Never hardcode a hex color outside of <code>:root</code>.</div></li>
+        <li><span class="li-icon">✅</span><div><strong>Semantic HTML.</strong> Use <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;nav&gt;</code>. Never use <code>&lt;div&gt;</code> for everything.</div></li>
+        <li><span class="li-icon">✅</span><div><strong>JS at Bottom.</strong> All JavaScript goes in a single <code>&lt;script&gt;</code> tag before <code>&lt;/body&gt;</code>. No inline <code>onclick=""</code> attributes — use event listeners.</div></li>
+        <li><span class="li-icon">✅</span><div><strong>No External Dependencies.</strong> Only Google Fonts and FontAwesome CDN are allowed. Everything else must be vanilla HTML/CSS/JS.</div></li>
+        <li><span class="li-icon">✅</span><div><strong>LocalStorage for Stateful Tools.</strong> For trackers, checklists, and calculators, use <code>localStorage</code> to save user data between sessions.</div></li>
+        <li><span class="li-icon">✅</span><div><strong>Print Styles.</strong> Invoices, résumés, and proposals must include a <code>@media print</code> block that hides navigation, shows clean content, and fits on A4 paper.</div></li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 7: QA CHECKLIST
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="qa-rules">
+      <div class="section-eyebrow">Section 07 · QA Checklist</div>
+      <h2>Before Any Product Ships — Check All 20</h2>
+      <p class="section-lead">QA = Quality Assurance. It means you are checking your work before calling it done. A product that fails more than 2 items on this list must be fixed before shipping.</p>
+
+      <div class="grid-2">
+        <div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text3); margin-bottom:12px;">Structure & Code</div>
+          <ul class="simple-list" style="margin:0;">
+            <li><span class="li-icon">☐</span><div>Product Brief comment at top of file</div></li>
+            <li><span class="li-icon">☐</span><div>All CSS vars defined in <code>:root</code></div></li>
+            <li><span class="li-icon">☐</span><div>No lorem ipsum or placeholder text</div></li>
+            <li><span class="li-icon">☐</span><div>No unclosed HTML tags / broken structure</div></li>
+            <li><span class="li-icon">☐</span><div>All images have <code>alt</code> attributes</div></li>
+            <li><span class="li-icon">☐</span><div>Semantic HTML tags used (not all divs)</div></li>
+            <li><span class="li-icon">☐</span><div>No external JS (only Google Fonts/FontAwesome)</div></li>
+            <li><span class="li-icon">☐</span><div>File opens and works with no server (just double-click)</div></li>
+            <li><span class="li-icon">☐</span><div>JS has no console errors</div></li>
+            <li><span class="li-icon">☐</span><div>Page title matches product name</div></li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text3); margin-bottom:12px;">Design & Experience</div>
+          <ul class="simple-list" style="margin:0;">
+            <li><span class="li-icon">☐</span><div>Looks good on 375px wide (mobile)</div></li>
+            <li><span class="li-icon">☐</span><div>Looks good on 768px wide (tablet)</div></li>
+            <li><span class="li-icon">☐</span><div>Looks good on 1280px wide (desktop)</div></li>
+            <li><span class="li-icon">☐</span><div>Text contrast passes WCAG AA</div></li>
+            <li><span class="li-icon">☐</span><div>Buttons have :hover and :focus states</div></li>
+            <li><span class="li-icon">☐</span><div>No horizontal scroll on any screen size</div></li>
+            <li><span class="li-icon">☐</span><div>Fonts loaded correctly (not fallback)</div></li>
+            <li><span class="li-icon">☐</span><div>Category-specific rules followed (see below)</div></li>
+            <li><span class="li-icon">☐</span><div>Print layout works (if invoice/resume/proposal)</div></li>
+            <li><span class="li-icon">☐</span><div>Product feels complete — someone would pay for this</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 8–13: PRODUCT-SPECIFIC SPECS
+         ════════════════════════════════════════════════════ -->
+
+    <div class="section" id="spec-business">
+      <div class="section-eyebrow">Section 08 · Product Spec</div>
+      <h2>🏢 Business & Professional Pages</h2>
+      <p class="section-lead">These are bought by freelancers, consultants, and small businesses who need a professional online presence fast. The buyer wants something that looks credible and drives contact or bookings.</p>
+
+      <div class="rule-card open">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(124,92,252,0.12); color:var(--accent2);">📐</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Required Sections & Industry Rules</div>
+            <div class="rule-subtitle">Every business page must include these</div>
+          </div>
+          <div class="rule-toggle">▲</div>
+        </div>
+        <div class="rule-body">
+          <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:200px;">
+              <div style="font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">Required Sections</div>
+              <ul class="step-checklist">
+                <li>Hero: headline, subheadline, primary CTA button</li>
+                <li>Services / What I Do (3–6 items)</li>
+                <li>About / Trust section</li>
+                <li>Social proof (testimonials or logos)</li>
+                <li>Contact form or booking CTA</li>
+                <li>Footer with links and copyright</li>
+              </ul>
+            </div>
+            <div style="flex:1; min-width:200px;">
+              <div style="font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">Industry Rules</div>
+              <ul class="step-checklist">
+                <li>Phone number must be clickable (<code>href="tel:..."</code>)</li>
+                <li>Email must be clickable (<code>href="mailto:..."</code>)</li>
+                <li>Sticky or fixed navigation required on scroll</li>
+                <li>CTA button must appear above the fold (hero area)</li>
+                <li>Load time: no heavy images, use CSS gradients for hero bg</li>
+                <li>Google Maps embed optional but adds trust for local businesses</li>
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top:16px;">
+            <span class="tag tag-purple">Dark or Light: Match industry</span>&nbsp;
+            <span class="tag tag-green">Required: Mobile nav hamburger menu</span>&nbsp;
+            <span class="tag tag-amber">Price range: $29–$79</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="spec-email">
+      <div class="section-eyebrow">Section 09 · Product Spec</div>
+      <h2>📧 Email Templates</h2>
+      <p class="section-lead">Email templates have the strictest technical rules of all product types. Email clients (Gmail, Outlook, Apple Mail) render HTML very differently from browsers. One wrong CSS property can break the entire email.</p>
+
+      <div class="rule-card open">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(20,184,166,0.12); color:var(--teal);">⚠️</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Critical Email Rendering Rules — Do Not Skip</div>
+            <div class="rule-subtitle">These are non-negotiable — email breaks without them</div>
+          </div>
+          <div class="rule-toggle">▲</div>
+        </div>
+        <div class="rule-body">
+          <ul class="step-checklist">
+            <li>Use <strong>table-based layout</strong> — not flexbox or CSS Grid (Outlook doesn't support them)</li>
+            <li>Use <strong>inline CSS only</strong> — no external stylesheets, no <code>&lt;style&gt;</code> blocks (Gmail strips them)</li>
+            <li>Max width: <strong>600px</strong> — anything wider breaks on mobile email clients</li>
+            <li>Use <strong>web-safe fonts</strong> as fallbacks: Arial, Georgia, Verdana (Google Fonts may not load in email)</li>
+            <li>Images must have <code>width</code> and <code>height</code> attributes set directly on the tag</li>
+            <li>All links must be <strong>full absolute URLs</strong> (https://...) not relative paths</li>
+            <li>Include a plain text <code>&lt;!-- [View in browser] --&gt;</code> link at the very top</li>
+            <li>Add <strong>unsubscribe link</strong> text at the footer (legal requirement in many countries)</li>
+            <li>Background colors go on the <code>&lt;td&gt;</code>, not the <code>&lt;table&gt;</code></li>
+            <li>Buttons: use table cells styled as buttons, not <code>&lt;button&gt;</code> elements</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <span class="tag tag-coral">⚠️ No Flexbox</span>&nbsp;
+            <span class="tag tag-coral">⚠️ No CSS Grid</span>&nbsp;
+            <span class="tag tag-coral">⚠️ No External CSS</span>&nbsp;
+            <span class="tag tag-green">✅ Tables Only</span>&nbsp;
+            <span class="tag tag-green">✅ Inline Styles</span>&nbsp;
+            <span class="tag tag-amber">Max Width: 600px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="spec-docs">
+      <div class="section-eyebrow">Section 10 · Product Spec</div>
+      <h2>📄 Documents & Reports</h2>
+      <p class="section-lead">Invoices, proposals, and résumés need to look perfect on screen AND when printed. The buyer will literally print these and hand them to clients or employers. Print quality is not optional.</p>
+
+      <div class="rule-card open">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(34,197,94,0.12); color:var(--green);">🖨️</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Print & Document Rules</div>
+            <div class="rule-subtitle">Must work on screen and on paper</div>
+          </div>
+          <div class="rule-toggle">▲</div>
+        </div>
+        <div class="rule-body">
+          <ul class="step-checklist">
+            <li>Include a <code>@media print</code> CSS block that hides nav, buttons, and decorative elements</li>
+            <li>Print layout must fit A4 paper (210mm × 297mm) — test this in browser Print Preview</li>
+            <li>Use light backgrounds for print — dark backgrounds waste ink and look bad printed</li>
+            <li>Invoice must auto-calculate totals with JavaScript (quantity × price = line total, sum = grand total)</li>
+            <li>Invoice must have: invoice number, date, due date, sender details, recipient details, line items, subtotal, tax, total</li>
+            <li>Proposal must have: cover section, problem statement, proposed solution, timeline, pricing table, terms, signature area</li>
+            <li>Résumé must be ATS-friendly: real text (not images of text), semantic headings, clean font hierarchy</li>
+            <li>A "Print / Download PDF" button must appear on screen but be hidden in print view</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <span class="tag tag-purple">Theme: Always Light</span>&nbsp;
+            <span class="tag tag-green">Required: @media print</span>&nbsp;
+            <span class="tag tag-amber">Price range: $19–$49</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="spec-ecommerce">
+      <div class="section-eyebrow">Section 11 · Product Spec</div>
+      <h2>🛍️ E-Commerce & Marketing Pages</h2>
+      <p class="section-lead">These are conversion machines. Every element exists to push the visitor toward one action — buy, sign up, or download. Distractions are the enemy.</p>
+
+      <div class="rule-card open">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(245,158,11,0.12); color:var(--amber);">🎯</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Conversion & Marketing Rules</div>
+            <div class="rule-subtitle">Every element must serve the CTA</div>
+          </div>
+          <div class="rule-toggle">▲</div>
+        </div>
+        <div class="rule-body">
+          <ul class="step-checklist">
+            <li>One primary CTA — don't confuse with 5 different buttons. Pick one action.</li>
+            <li>Hero must load above the fold with no scrolling. Headline + subheadline + CTA button + optional image.</li>
+            <li>Social proof (testimonials, logos, star ratings, user counts) must appear before the pricing section</li>
+            <li>Countdown timers must use JavaScript and count down in real-time</li>
+            <li>Product launch pages need: headline, product visual, benefits (not features), social proof, pricing, FAQ, final CTA</li>
+            <li>Link-in-bio pages: profile photo, name, bio, list of links as large tap-friendly buttons, social icons</li>
+            <li>App promo pages: screenshots in device frames, feature list, platform badges (App Store / Play Store), demo video slot</li>
+            <li>Coming soon pages: countdown timer, email capture form, social links</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <span class="tag tag-coral">Rule: Single CTA focus</span>&nbsp;
+            <span class="tag tag-green">Required: Social proof section</span>&nbsp;
+            <span class="tag tag-amber">Price range: $19–$59</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="spec-education">
+      <div class="section-eyebrow">Section 12 · Product Spec</div>
+      <h2>🎓 Education & Info Products</h2>
+      <p class="section-lead">Course pages, lead magnets, and webinar pages sell transformation. The buyer (student, reader, attendee) needs to believe their life will be better after. Trust, credibility, and specificity drive conversions here.</p>
+
+      <div class="rule-card open">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(244,114,182,0.12); color:var(--pink);">📚</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Education Page Rules</div>
+            <div class="rule-subtitle">Sell the transformation, not the information</div>
+          </div>
+          <div class="rule-toggle">▲</div>
+        </div>
+        <div class="rule-body">
+          <ul class="step-checklist">
+            <li>Course landing page sections in order: Hero → What You'll Learn → Who It's For → Curriculum → Instructor Bio → Testimonials → Pricing → FAQ → Final CTA</li>
+            <li>Lead magnet pages: clear statement of what the free resource IS, who it's for, what they'll learn, email capture form, sample preview</li>
+            <li>Webinar pages: event date/time (use JS to show "in X days"), speaker bios with photos, agenda/schedule, registration form</li>
+            <li>Portfolio templates: filterable project grid, about section, skills list, contact form — all in one scrolling page</li>
+            <li>Always show the instructor's face and credentials — anonymous courses don't convert</li>
+            <li>Pricing must show value: cross out "original price," show payment plan option if applicable</li>
+            <li>FAQ section must address the top 5 objections (Is this for beginners? How long does it take? What if I'm not satisfied?)</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <span class="tag tag-purple">Required: Instructor bio with photo placeholder</span>&nbsp;
+            <span class="tag tag-green">Required: Curriculum/agenda section</span>&nbsp;
+            <span class="tag tag-amber">Price range: $29–$79</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="spec-tools">
+      <div class="section-eyebrow">Section 13 · Product Spec</div>
+      <h2>🔧 Tools & Utilities</h2>
+      <p class="section-lead">These are interactive HTML tools. The buyer wants something functional — they'll use it themselves or embed it. The product must actually work, not just look good.</p>
+
+      <div class="rule-card open">
+        <div class="rule-header" onclick="toggleCard(this)">
+          <div class="rule-icon" style="background:rgba(96,165,250,0.12); color:var(--blue);">⚙️</div>
+          <div class="rule-header-text">
+            <div class="rule-title">Tools & Utility Rules</div>
+            <div class="rule-subtitle">Function first, then beauty</div>
+          </div>
+          <div class="rule-toggle">▲</div>
+        </div>
+        <div class="rule-body">
+          <ul class="step-checklist">
+            <li>Calculators: inputs must update output in real-time (no "Submit" button needed — use JS <code>input</code> event)</li>
+            <li>Calculators: show the formula being used so users understand how the number was calculated</li>
+            <li>Trackers and checklists: save state to <code>localStorage</code> so data persists when the page is refreshed</li>
+            <li>Trackers: include a "Reset / Clear All" button with a confirmation step (don't let users accidentally delete their data)</li>
+            <li>FAQ pages: use CSS-only accordion (no JS needed) — clicking a question expands the answer</li>
+            <li>Coming soon / maintenance pages: countdown timer with days/hours/minutes/seconds updating every second via JS</li>
+            <li>All tools must work offline (no API calls, no server required)</li>
+            <li>Tools must be embeddable — clean design that works inside any website's iframe</li>
+            <li>Add "How to use" instructions as collapsible section or tooltip system</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <span class="tag tag-blue">Rule: Must work offline</span>&nbsp;
+            <span class="tag tag-green">Required: LocalStorage for stateful tools</span>&nbsp;
+            <span class="tag tag-amber">Price range: $9–$39</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ════════════════════════════════════════════════════
+         SECTION 14: AI MEMORY RULES
+         ════════════════════════════════════════════════════ -->
+    <div class="section" id="memory">
+      <div class="section-eyebrow">Section 14 · AI Sync</div>
+      <h2>What the AI Must Always Remember</h2>
+      <p class="section-lead">Every conversation with the AI for this project must stay aligned with these facts. These are the standing instructions that never change unless Mohammad updates them.</p>
+
+      <ul class="simple-list">
+        <li><span class="li-icon">🌐</span><div><strong>Agency:</strong> Growrixos — www.growrixos.com. This is the brand behind all products.</div></li>
+        <li><span class="li-icon">🏗️</span><div><strong>Three Build Tracks:</strong> (1) HTML Digital Products (this doc), (2) Industry Website Templates (industry-templates-masterplan.html), (3) SaaS Templates (saas-masterplan.html). Never confuse them.</div></li>
+        <li><span class="li-icon">🤖</span><div><strong>AI-First Production:</strong> All planning, research, design, and code is produced with AI. Every output must be written so another AI session can read it and continue the work without re-explaining.</div></li>
+        <li><span class="li-icon">📚</span><div><strong>Developer Level:</strong> Mohammad is a beginner developer. Explanations must be clear enough for a 10th grader. Never assume prior knowledge of framework names, programming concepts, or design jargon without explaining it first.</div></li>
+        <li><span class="li-icon">🎨</span><div><strong>Design Standard:</strong> Dark-themed interactive dashboards for internal planning tools. Industry-appropriate themes for client-facing products. Always mobile-first. Always real copy.</div></li>
+        <li><span class="li-icon">📦</span><div><strong>Output Format:</strong> Single self-contained HTML files. All CSS and JS inside. No build tools, no frameworks, no npm. Works by double-clicking the file.</div></li>
+        <li><span class="li-icon">💰</span><div><strong>Revenue Goal:</strong> Build products that sell on Gumroad, ThemeForest, or similar marketplaces. Each product needs a price tier: Budget ($9–$19), Mid ($29–$49), or Premium ($79+).</div></li>
+        <li><span class="li-icon">🔄</span><div><strong>Pipeline:</strong> Every product follows Research → Planning → Design Spec → Build → QA. No skipping phases. Every file starts with a Product Brief comment block.</div></li>
+      </ul>
+
+      <div class="info-box" style="margin-top:24px;">
+        <div class="info-icon">🧠</div>
+        <div>
+          <strong style="color:#fff;">When starting a new product build, always start like this:</strong><br>
+          <span style="color:var(--text2);">Tell the AI: "I want to build a [product name]. It is category [X]. Follow the Growrixos build pipeline. Start with Phase 1 Research." — Then follow the prompts in Section 04 in order.</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .page -->
+
+  <footer>
+    <div class="footer-left">
+      <strong>Growrixos</strong> · Master Project Instructions · Digital Products Build OS
+    </div>
+    <div class="footer-right">
+      v1.0 · 2025–2026 · All production runs through this document
+    </div>
+  </footer>
+
+</main>
+</div>
+
+<script>
+// Sidebar active link highlighting on scroll
+const sections = document.querySelectorAll('.section[id], .top-banner');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function updateActiveLink() {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if (top <= 120) current = s.id || 'about';
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+}
+window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+// Smooth scroll for nav links
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Toggle expandable rule cards
+function toggleCard(headerEl) {
+  const card = headerEl.closest('.rule-card');
+  card.classList.toggle('open');
+  headerEl.querySelector('.rule-toggle').textContent = card.classList.contains('open') ? '▲' : '▼';
+}
+</script>
+</body>
+</html>

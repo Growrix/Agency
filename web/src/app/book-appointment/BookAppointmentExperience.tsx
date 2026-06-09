@@ -15,6 +15,7 @@ type SubmitState = "idle" | "submitting" | "success" | "error";
 const SERVICE_OPTIONS = [
   "Premium custom website",
   "Ready website",
+  "HTML business profiles",
   "SaaS application",
   "Mobile app launch / marketing site",
   "Automation",

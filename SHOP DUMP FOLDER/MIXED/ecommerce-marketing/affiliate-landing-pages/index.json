@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "affiliate-landing-c.html",
+        "type_slug":  "affiliate-landing-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/ecommerce-marketing/affiliate-landing-pages/affiliate-landing-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\affiliate-landing-c.html"
+    },
+    {
+        "source_file":  "affiliate-landing-b.html",
+        "type_slug":  "affiliate-landing-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/ecommerce-marketing/affiliate-landing-pages/affiliate-landing-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\affiliate-landing-b.html"
+    },
+    {
+        "source_file":  "affiliate-landing-a.html",
+        "type_slug":  "affiliate-landing-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/ecommerce-marketing/affiliate-landing-pages/affiliate-landing-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\affiliate-landing-a.html"
+    }
+]

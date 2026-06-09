@@ -2,6 +2,7 @@ import "server-only";
 
 import { ADDITIONAL_SERVICES_CATEGORIES, FAQ_GENERAL, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { getProductHref } from "@/lib/shop";
 import { listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
 
 export type ConciergeSourceType =
@@ -31,7 +32,7 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse the shop at /shop.",
+      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse products at /products.",
   },
   {
     id: "pricing-ready-websites",
@@ -39,7 +40,15 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /shop.",
+      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /products.",
+  },
+  {
+    id: "pricing-html-business-profiles",
+    label: "HTML Business Profiles pricing",
+    sourcePath: "/products/category/html-business-profiles",
+    sourceType: "pricing",
+    content:
+      "HTML Business Profiles are category-based digital templates with three clear options: Template Only at $19, Branded Setup at $49, and Business Launch at $299-$799 depending on scope. Browse the canonical product-line page at /products/category/html-business-profiles.",
   },
   {
     id: "pricing-custom-build",
@@ -55,7 +64,7 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Service pricing ranges: Website Templates $500–$10k (basic $500–$1k, standard $1k–$3k, premium $3k–$10k). Ready Websites $1k–$15k (basic $1k–$2.5k, standard $2.5k–$5k, premium $5k–$15k). SaaS Applications: custom scope priced after discovery. Mobile App Launch Systems: custom scope. MCP + Automation: secondary scope, priced when they support the core build.",
+      "Service pricing ranges: Website Templates $500-$10k (basic $500-$1k, standard $1k-$3k, premium $3k-$10k). HTML Business Profiles tiers are Template Only $19, Branded Setup $49, and Business Launch $299-$799. Ready Websites $1k-$15k (basic $1k-$2.5k, standard $2.5k-$5k, premium $5k-$15k). SaaS Applications: custom scope priced after discovery. Mobile App Launch Systems: custom scope. MCP + Automation: secondary scope, priced when they support the core build.",
   },
   {
     id: "pricing-saas-tiers",
@@ -106,7 +115,7 @@ const CONVERSION_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/contact",
     sourceType: "contact",
     content:
-      `Growrix supports four contact channels: (1) Inquiry form at /contact — best for website, SaaS, mobile app, or ready-website briefs that need clear scoping. (2) WhatsApp at ${WHATSAPP_HREF} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about websites, ready websites, SaaS work, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
+      `Growrix supports four contact channels: (1) Inquiry form at /contact — best for website, HTML business profile, SaaS, mobile app, or ready-website briefs that need clear scoping. (2) WhatsApp at ${WHATSAPP_HREF} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about websites, HTML profiles, ready websites, SaaS work, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
   },
   {
     id: "booking-path",
@@ -133,15 +142,15 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/",
     sourceType: "offering",
     content:
-      "Growrix OS is an independent studio. Primary focus is premium websites, SaaS applications, website templates, and ready websites. MCP servers and automation are secondary services scoped when they support the core website, SaaS, or launch engagement. The studio has been operating for 2 years and has shipped 12 launches.",
+      "Growrix OS is an independent studio. Primary focus is premium websites, HTML business profiles, SaaS applications, website templates, and ready websites. MCP servers and automation are secondary services scoped when they support the core website, SaaS, or launch engagement. The studio has been operating for 2 years and has shipped 12 launches.",
   },
   {
     id: "offering-shop-structure",
     label: "Shop structure and categories",
-    sourcePath: "/shop",
+    sourcePath: "/products",
     sourceType: "offering",
     content:
-      "The Growrix shop has two main categories: Website Templates (from $500 one-time — basic, standard, premium tiers) and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
+      "The Growrix shop has three main categories: Website Templates (from $500 one-time — basic, standard, premium tiers), HTML Business Profiles (Template Only $19, Branded Setup $49, Business Launch $299-$799), and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
   },
   {
     id: "offering-support-handoff",
@@ -157,7 +166,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/about",
     sourceType: "offering",
     content:
-      "Growrix OS studio stats: 12 launches shipped (websites, SaaS, ready websites), 2 years in motion as an independent studio, 4 core services (websites, SaaS, MCP, automation), 4 delivery phases (discovery to optimization). The studio focuses on premium websites, SaaS products, mobile app launch experiences, and ready websites.",
+      "Growrix OS studio stats: 12 launches shipped (websites, SaaS, ready websites), 2 years in motion as an independent studio, 5 core services (websites, HTML business profiles, SaaS, MCP, automation), 4 delivery phases (discovery to optimization). The studio focuses on premium websites, HTML business profile products, SaaS products, mobile app launch experiences, and ready websites.",
   },
   {
     id: "offering-stack",
@@ -225,7 +234,7 @@ async function buildDocuments(): Promise<KnowledgeDocument[]> {
   const productDocs = products.map((product) => ({
     id: `product-${product.slug}`,
     label: product.name,
-    sourcePath: `/shop/${product.slug}`,
+    sourcePath: getProductHref(product),
     sourceType: "product" as const,
     content: `${product.name} costs ${product.price} in category ${product.category}. ${product.teaser} ${product.summary} Audience: ${product.audience}. Includes: ${product.includes.join(", ")}. Stack: ${product.stack.join(", ")}.`,
   }));
@@ -284,7 +293,7 @@ export async function searchKnowledge(query: string, limit = 6) {
 
       if (
         document.sourceType === "offering" &&
-        tokens.some((token) => ["template", "templates", "ready", "website", "websites", "live", "saas"].includes(token))
+        tokens.some((token) => ["template", "templates", "ready", "website", "websites", "live", "saas", "html", "profile", "profiles"].includes(token))
       ) {
         score += 3;
       }

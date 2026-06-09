@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Meridian Studio — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#faf8f4;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;font-family:'Jost',sans-serif;color:#1a1614;overflow:hidden}
+.left{padding:60px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid #ede8e0}
+.left-top{}
+.logo{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:3px;color:#1a1614;font-style:italic;text-transform:uppercase;margin-bottom:80px}
+.coming-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c0a880;margin-bottom:24px;font-weight:500}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,5vw,5.5rem);font-weight:300;line-height:.95;letter-spacing:-2px;color:#1a1614;margin-bottom:28px}
+h1 em{font-style:italic;color:#8a7a60}
+.desc{font-size:15px;color:#8a7a60;line-height:1.85;font-weight:300;max-width:380px;margin-bottom:48px}
+.form{display:flex;flex-direction:column;gap:12px;max-width:380px}
+.form-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c0a880;font-weight:500;margin-bottom:4px}
+.form-input{background:transparent;border:none;border-bottom:1px solid #ddd5c4;padding:12px 0;font-size:14px;color:#1a1614;font-family:'Jost',sans-serif;outline:none;width:100%;transition:.2s}
+.form-input:focus{border-bottom-color:#1a1614}
+.form-input::placeholder{color:#c8bca8}
+.form-btn{background:#1a1614;color:#faf8f4;border:none;padding:14px 0;font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;margin-top:4px;transition:.2s}
+.form-btn:hover{background:#3d3028}
+.form-note{font-size:11px;color:#c0a880;margin-top:4px;letter-spacing:.5px}
+.left-bottom{}
+.countdown{display:flex;gap:32px;margin-bottom:28px}
+.cd-unit .num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#1a1614;display:block;line-height:1}
+.cd-unit .label{font-size:9px;color:#c0a880;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.social-row{display:flex;gap:20px;align-items:center}
+.social-row a{font-size:12px;color:#8a7a60;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:.15s}
+.social-row a:hover{color:#1a1614}
+.right{background:#1a1614;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.right-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.right-content{position:relative;z-index:1;text-align:center;padding:40px}
+.right-img{font-size:120px;display:block;margin-bottom:0;opacity:.15;filter:grayscale(100%)}
+.right-quote{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;font-weight:300;color:rgba(250,248,244,.6);line-height:1.5;max-width:300px;margin:0 auto}
+.right-quote em{color:rgba(250,248,244,.9)}
+.lines{position:absolute;inset:0;opacity:.04}
+.lines::before{content:'';position:absolute;top:0;left:33%;width:1px;height:100%;background:#faf8f4}
+.lines::after{content:'';position:absolute;top:0;left:66%;width:1px;height:100%;background:#faf8f4}
+@media(max-width:700px){body{grid-template-columns:1fr;overflow:auto}.right{height:240px;min-height:240px}.left{padding:36px 28px}.right-img{font-size:80px}.countdown{gap:20px}}
+</style>
+</head>
+<body>
+<div class="left">
+  <div class="left-top">
+    <div class="logo">Meridian</div>
+    <div class="coming-tag">Coming Soon · 2025</div>
+    <h1>Where<br>design<br><em>lives.</em></h1>
+    <p class="desc">Meridian is a curated branding and creative direction studio launching this autumn. We work with founders and cultural institutions who want identities that endure.</p>
+    <div class="form">
+      <div>
+        <div class="form-label">Your email</div>
+        <input class="form-input" type="email" placeholder="hello@yourcompany.com">
+      </div>
+      <button class="form-btn">Notify Me When We Launch</button>
+      <div class="form-note">We'll email you once — launch date and first availability.</div>
+    </div>
+  </div>
+  <div class="left-bottom">
+    <div class="countdown" id="cd">
+      <div class="cd-unit"><span class="num" id="cd-d">84</span><span class="label">Days</span></div>
+      <div class="cd-unit"><span class="num" id="cd-h">12</span><span class="label">Hours</span></div>
+      <div class="cd-unit"><span class="num" id="cd-m">37</span><span class="label">Minutes</span></div>
+    </div>
+    <div class="social-row">
+      <a href="#">Instagram</a>
+      <a href="#">Behance</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</div>
+<div class="right">
+  <div class="lines"></div>
+  <div class="right-content">
+    <span class="right-img">◈</span>
+    <div class="right-quote">"Good design is<br><em>honest.</em>"<br><br>— Dieter Rams</div>
+  </div>
+</div>
+<script>
+const launch=new Date('2025-09-20T09:00:00');
+function tick(){
+  const diff=launch-new Date();
+  if(diff<=0)return;
+  document.getElementById('cd-d').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+}
+tick();setInterval(tick,30000);
+</script>
+</body></html>

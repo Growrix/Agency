@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tahmid Hasan — Creative Director & Brand Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a080f;--surf:#13101a;--border:rgba(255,255,255,.07);--p1:#f59e0b;--p2:#ec4899;--text:#f0ede8;--muted:#64748b}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+.cursor{position:fixed;width:12px;height:12px;background:var(--p1);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,opacity .2s;mix-blend-mode:difference}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,8,15,.85);backdrop-filter:blur(16px);padding:22px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:.15s}
+.nav-links a:hover{color:var(--text)}
+.nav-contact{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.hero{max-width:1200px;margin:0 auto;padding:100px 60px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-left{}
+.hero-tag{font-size:11px;color:var(--p1);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:18px}
+h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,5vw,5rem);font-weight:800;letter-spacing:-2px;line-height:.9;margin-bottom:22px}
+.hero-desc{font-size:16px;color:rgba(240,237,232,.45);line-height:1.8;font-weight:300;max-width:420px;margin-bottom:36px}
+.hero-links{display:flex;gap:14px;flex-wrap:wrap}
+.hl-btn{padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:.2s;display:inline-block}
+.hl-primary{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}
+.hl-primary:hover{transform:translateY(-2px)}
+.hl-ghost{border:1px solid var(--border);color:var(--text)}
+.hl-ghost:hover{border-color:var(--p1);color:var(--p1)}
+.hero-right{display:flex;flex-direction:column;gap:14px}
+.stat-card{background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;align-items:center;gap:18px;transition:.2s}
+.stat-card:hover{border-color:rgba(245,158,11,.2);transform:translateX(6px)}
+.sc-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,var(--p1),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0;min-width:80px}
+.sc-text strong{font-size:15px;color:var(--text);display:block;margin-bottom:3px}
+.sc-text span{font-size:13px;color:var(--muted)}
+.work{max-width:1200px;margin:0 auto;padding:0 60px 80px}
+.work-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px}
+.work-header h2{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:-1px}
+.work-header a{font-size:14px;color:var(--p1);text-decoration:none}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--border);border:3px solid var(--border);border-radius:20px;overflow:hidden}
+.work-cell{position:relative;aspect-ratio:4/3;cursor:pointer;overflow:hidden}
+.work-cell .bg{position:absolute;inset:0;transition:transform .5s}
+.work-cell:hover .bg{transform:scale(1.05)}
+.wc-1{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(236,72,153,.15)),var(--surf)}
+.wc-2{background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(6,182,212,.1)),var(--surf)}
+.wc-3{background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(245,158,11,.15)),var(--surf)}
+.wc-4{background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(99,102,241,.15)),var(--surf)}
+.wc-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:64px;transition:.3s;opacity:.4}
+.work-cell:hover .wc-icon{opacity:.6;transform:translate(-50%,-50%) scale(1.1)}
+.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,15,.95),transparent 50%);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transition:.3s}
+.work-cell:hover .work-overlay{opacity:1}
+.wo-tag{font-size:10px;color:var(--p1);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.wo-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text)}
+.wo-meta{font-size:13px;color:rgba(240,237,232,.5)}
+.services{background:var(--surf);padding:80px 60px}
+.services h2{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:48px;max-width:1200px;margin-left:auto;margin-right:auto}
+.services-list{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
+.service-row{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:40px;padding:28px 0;border-bottom:1px solid var(--border);transition:.2s}
+.service-row:hover{padding-left:16px}
+.sr-num{font-size:12px;color:var(--p1);font-family:'DM Sans',sans-serif;opacity:.5;margin-bottom:4px}
+.sr-name{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700}
+.sr-desc{font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
+.sr-price{font-size:14px;color:var(--muted);white-space:nowrap}
+.testimonial-strip{max-width:1200px;margin:0 auto;padding:80px 60px;text-align:center}
+.ts-quote{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;letter-spacing:-.5px;line-height:1.2;margin-bottom:20px}
+.ts-author{font-size:14px;color:var(--muted)}
+.ts-company{color:var(--p1)}
+.contact{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(236,72,153,.07));border:1px solid rgba(245,158,11,.15);border-radius:24px;padding:72px;text-align:center;margin:0 60px 80px}
+.contact h2{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;letter-spacing:-2px;margin-bottom:14px}
+.contact p{color:var(--muted);font-size:16px;margin-bottom:36px;font-weight:300}
+.contact a{display:inline-block;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;padding:17px 48px;border-radius:10px;font-size:17px;font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:13px;color:var(--muted)}
+footer .socials{display:flex;gap:12px}
+footer .socials a{font-size:13px;color:var(--muted);text-decoration:none}
+footer .socials a:hover{color:var(--p1)}
+@media(max-width:900px){.cursor{display:none}body{cursor:auto}.hero,.work,.contact{padding-left:24px;padding-right:24px}.hero{grid-template-columns:1fr;gap:40px;padding-top:60px}.work-grid{grid-template-columns:1fr}.services{padding:60px 24px}.service-row{grid-template-columns:1fr;gap:8px}.testimonial-strip{padding:60px 24px}.contact{margin:0 24px 60px;padding:48px 24px}nav{padding:16px 24px}.nav-links a{display:none}footer{padding:24px;flex-direction:column;gap:12px}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav>
+  <div class="logo">Tahmid.</div>
+  <div class="nav-links"><a href="#">Work</a><a href="#">Services</a><a href="#">About</a><a href="#" class="nav-contact">Let's Talk →</a></div>
+</nav>
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Creative Director · Brand Designer · Dhaka</div>
+    <h1>Design that<br>builds<br>brands.</h1>
+    <p class="hero-desc">8 years turning ambiguous briefs into identities that people remember. I work with founders, agencies, and cultural institutions who refuse to be ordinary.</p>
+    <div class="hero-links">
+      <a href="#" class="hl-btn hl-primary">View My Work →</a>
+      <a href="#" class="hl-btn hl-ghost">Download CV</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card"><div class="sc-num">60+</div><div class="sc-text"><strong>Brands designed</strong><span>Across 12 industries</span></div></div>
+    <div class="stat-card"><div class="sc-num">8yr</div><div class="sc-text"><strong>Years of experience</strong><span>Freelance &amp; agency-side</span></div></div>
+    <div class="stat-card"><div class="sc-num">4.9</div><div class="sc-text"><strong>Average client rating</strong><span>From 48 reviews on Dribbble</span></div></div>
+  </div>
+</section>
+<section class="work">
+  <div class="work-header"><h2>Selected Work</h2><a href="#">View all 60 projects →</a></div>
+  <div class="work-grid">
+    <div class="work-cell"><div class="bg wc-1"></div><div class="wc-icon">🌿</div><div class="work-overlay"><div class="wo-tag">Brand Identity · 2024</div><div class="wo-title">Botanic Wellness</div><div class="wo-meta">Full brand system · Strategy to delivery</div></div></div>
+    <div class="work-cell"><div class="bg wc-2"></div><div class="wc-icon">🏛️</div><div class="work-overlay"><div class="wo-tag">Exhibition Design · 2024</div><div class="wo-title">Musei Cultural Centre</div><div class="wo-meta">Wayfinding + brand identity system</div></div></div>
+    <div class="work-cell"><div class="bg wc-3"></div><div class="wc-icon">⌚</div><div class="work-overlay"><div class="wo-tag">Product Launch · 2023</div><div class="wo-title">Meridian Watches</div><div class="wo-meta">Launch campaign + brand identity</div></div></div>
+    <div class="work-cell"><div class="bg wc-4"></div><div class="wc-icon">🚀</div><div class="work-overlay"><div class="wo-tag">SaaS Branding · 2023</div><div class="wo-title">Nucleus Platform</div><div class="wo-meta">Full brand system + UI design direction</div></div></div>
+  </div>
+</section>
+<section class="services">
+  <h2>What I do.</h2>
+  <div class="services-list">
+    <div class="service-row"><div><div class="sr-num">01</div><div class="sr-name">Brand Identity</div></div><div class="sr-desc">Strategy, logo design, full visual identity systems, brand guidelines — from scratch or rebrand.</div><div class="sr-price">From ৳60,000</div></div>
+    <div class="service-row"><div><div class="sr-num">02</div><div class="sr-name">Art Direction</div></div><div class="sr-desc">Campaign creative direction, visual storytelling, photography direction, social media creative.</div><div class="sr-price">From ৳40,000</div></div>
+    <div class="service-row"><div><div class="sr-num">03</div><div class="sr-name">Packaging Design</div></div><div class="sr-desc">Retail packaging, label design, structural concepts. Print-ready files for any printer.</div><div class="sr-price">From ৳30,000</div></div>
+    <div class="service-row"><div><div class="sr-num">04</div><div class="sr-name">UI/UX Design</div></div><div class="sr-desc">Website and app interfaces designed for beauty and conversion. Figma handoff ready.</div><div class="sr-price">From ৳50,000</div></div>
+  </div>
+</section>
+<section class="testimonial-strip">
+  <div class="ts-quote">"Tahmid doesn't just design — he thinks about our business first. The brand he built has changed how every new client perceives us."</div>
+  <div class="ts-author">— Rina Sultana, CEO · <span class="ts-company">Botanic Wellness Co.</span></div>
+</section>
+<div class="contact"><h2>Let's build something beautiful.</h2><p>Currently taking on 2 projects for Q3 2025. Response within 24 hours.</p><a href="mailto:hello@tahmid.design">→ hello@tahmid.design</a></div>
+<footer><p>© 2025 Tahmid Hasan · Creative Director · Dhaka</p><div class="socials"><a href="#">Dribbble</a><a href="#">Instagram</a><a href="#">LinkedIn</a></div></footer>
+<script>
+const cursor=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+</script>
+</body></html>

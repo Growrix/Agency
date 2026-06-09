@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Form Studio — Architecture & Interior Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Space Grotesk',sans-serif;background:#080c0c;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#090e0e;margin:0 auto;color:#d0e8e0;position:relative;overflow:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+.b1{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(20,180,160,.18) 0%,transparent 70%);top:-60px;right:-40px;filter:blur(50px)}
+.b2{position:absolute;width:250px;height:250px;background:radial-gradient(circle,rgba(20,120,100,.15) 0%,transparent 70%);bottom:200px;left:-30px;filter:blur(40px)}
+.gl{background:rgba(20,180,160,.05);border:1px solid rgba(20,180,160,.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.gl-light{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.wrap{position:relative;z-index:1}
+.hero{padding:60px 22px 28px;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.logo-row{position:absolute;top:22px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Space Mono',monospace;font-size:12px;color:rgba(20,180,160,.6);letter-spacing:3px}
+.award-tag{background:rgba(20,180,160,.08);border:1px solid rgba(20,180,160,.2);border-radius:4px;padding:3px 10px;font-size:8px;color:rgba(20,180,160,.6);letter-spacing:1.5px;backdrop-filter:blur(8px)}
+.hero-label{font-family:'Space Mono',monospace;font-size:9px;color:rgba(208,232,224,.25);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:44px;font-weight:700;color:#e0f8f0;line-height:.88;letter-spacing:-2px;margin-bottom:14px}
+.hero h1 span{display:block;color:rgba(208,232,224,.3);font-weight:300}
+.hero-sub{font-size:11px;color:rgba(208,232,224,.35);line-height:1.65;letter-spacing:.2px;font-weight:300}
+.body{padding:0 18px 48px}
+.sec{font-family:'Space Mono',monospace;font-size:9px;color:rgba(20,180,160,.45);letter-spacing:2px;text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:8px}
+.sec::before{content:'//';opacity:.6}.sec::after{content:'';flex:1;height:1px;background:rgba(20,180,160,.1)}
+.projects{display:flex;flex-direction:column;gap:8px}
+.proj{border-radius:14px;padding:16px;position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.proj::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(20,180,160,.3),transparent)}
+.proj-num{font-family:'Space Mono',monospace;font-size:11px;color:rgba(20,180,160,.4);flex-shrink:0;width:24px}
+.proj-name{font-size:14px;font-weight:600;color:#d0e8e0;letter-spacing:-.2px}
+.proj-type{font-size:10px;color:rgba(208,232,224,.3);margin-top:2px;letter-spacing:.3px}
+.proj-year{font-family:'Space Mono',monospace;font-size:11px;color:rgba(20,180,160,.5);flex-shrink:0}
+.services{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{border-radius:14px;padding:14px}
+.svc-icon{font-size:20px;margin-bottom:7px}
+.svc-name{font-size:12px;font-weight:600;color:#d0e8e0}
+.svc-price{font-family:'Space Mono',monospace;font-size:12px;color:rgba(20,180,160,.7);margin-top:5px}
+.stats-row{display:flex;gap:8px}
+.stat{flex:1;border-radius:12px;padding:14px 0;text-align:center}
+.st-n{font-size:20px;font-weight:700;color:#d0e8e0;letter-spacing:-1px}
+.st-l{font-size:8px;color:rgba(208,232,224,.25);margin-top:4px;letter-spacing:1px;text-transform:uppercase}
+.cta{border-radius:18px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(20,180,160,.4),transparent)}
+.cta h3{font-size:20px;font-weight:700;color:#e0f8f0;letter-spacing:-.5px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(208,232,224,.35);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:rgba(20,180,160,.2);color:#14b4a0;border:1px solid rgba(20,180,160,.3);border-radius:10px;padding:13px;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;color:rgba(208,232,224,.25);border-radius:10px;padding:11px;font-size:11px;text-decoration:none}
+.contacts{border-radius:14px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(20,180,160,.06);font-size:12px;color:rgba(208,232,224,.35)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:rgba(20,180,160,.1);border:1px solid rgba(20,180,160,.18);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{padding:20px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(208,232,224,.1)}
+</style>
+</head>
+<body>
+<div class="bg"><div class="b1"></div><div class="b2"></div></div>
+<div class="app"><div class="wrap">
+<div class="hero">
+  <div class="logo-row"><div class="logo">FORM_STUDIO</div><div class="award-tag">AIA Award 2024</div></div>
+  <div class="hero-label">Architecture · Interior · Landscape · Dhaka</div>
+  <h1>Space is <span>an argument.</span></h1>
+  <div class="hero-sub">We design buildings and interiors that shape how people work, live and feel. Architecture as a force for human experience.</div>
+</div>
+<div class="body">
+  <div class="sec">Selected Projects</div>
+  <div class="projects">
+    <div class="proj gl"><div class="proj-num">01</div><div><div class="proj-name">Skyline Residences</div><div class="proj-type">Luxury Apartment Block · Gulshan</div></div><div class="proj-year">2024</div></div>
+    <div class="proj gl"><div class="proj-num">02</div><div><div class="proj-name">Noor Corporate HQ</div><div class="proj-type">Commercial Interior · Tejgaon</div></div><div class="proj-year">2024</div></div>
+    <div class="proj gl"><div class="proj-num">03</div><div><div class="proj-name">Verde Retreat</div><div class="proj-type">Resort · Cox's Bazar</div></div><div class="proj-year">2023</div></div>
+    <div class="proj gl"><div class="proj-num">04</div><div><div class="proj-name">The Pagoda House</div><div class="proj-type">Private Residence · Baridhara</div></div><div class="proj-year">2023</div></div>
+  </div>
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc gl-light"><div class="svc-icon">🏗️</div><div class="svc-name">Architecture</div><div class="svc-price">Custom quote</div></div>
+    <div class="svc gl-light"><div class="svc-icon">🛋️</div><div class="svc-name">Interior Design</div><div class="svc-price">৳150/sqft</div></div>
+    <div class="svc gl-light"><div class="svc-icon">🌿</div><div class="svc-name">Landscape</div><div class="svc-price">Custom quote</div></div>
+    <div class="svc gl-light"><div class="svc-icon">📐</div><div class="svc-name">Renovation</div><div class="svc-price">৳120/sqft</div></div>
+  </div>
+  <div class="sec">Track Record</div>
+  <div class="stats-row">
+    <div class="stat gl"><div class="st-n">140+</div><div class="st-l">Projects</div></div>
+    <div class="stat gl"><div class="st-n">18yr</div><div class="st-l">Practice</div></div>
+    <div class="stat gl"><div class="st-n">12</div><div class="st-l">Awards</div></div>
+  </div>
+  <div class="sec">Start a Project</div>
+  <div class="cta gl">
+    <h3>Let's build something that lasts.</h3>
+    <p>Free 30-minute brief session. Tell us your vision — we'll tell you how to realise it.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📐 Request a Consultation</a>
+    <a href="mailto:studio@formstudio.com.bd" class="cta-btn2 gl-light">studio@formstudio.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts gl-light">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Baridhara, Dhaka · By appointment</div>
+    <div class="cr"><div class="ci">📸</div>@formstudio.bd</div>
+  </div>
+</div>
+<footer>FORM STUDIO · ARCHITECTURE & INTERIOR · DHAKA · EST. 2007</footer>
+</div></div></body></html>

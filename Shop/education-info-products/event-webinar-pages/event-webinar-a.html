@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TechBD Summit 2025 — Dhaka's Premier Tech Conference</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#04050a;--surface:#0b0c14;--border:rgba(255,255,255,.07);--accent:#6366f1;--text:#e2e8f0;--muted:#4a5568}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+.mesh{position:fixed;inset:0;background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(99,102,241,.18),transparent),radial-gradient(ellipse 40% 30% at 80% 80%,rgba(168,85,247,.1),transparent);pointer-events:none}
+nav{position:sticky;top:0;z-index:100;background:rgba(4,5,10,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:16px 60px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent);letter-spacing:1px}
+.nav-right{display:flex;gap:14px;align-items:center}
+.nav-link{font-size:13px;color:var(--muted);text-decoration:none}
+.nav-register{background:var(--accent);color:#fff;padding:10px 22px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none}
+.hero{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:90px 60px 70px;text-align:center}
+.event-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);border-radius:100px;padding:8px 20px;font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.5px;margin-bottom:32px}
+.badge-live{width:8px;height:8px;background:#ef4444;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{opacity:.3}}
+h1{font-size:clamp(3rem,7vw,6.5rem);font-weight:900;letter-spacing:-4px;line-height:.9;margin-bottom:24px}
+h1 .grad{background:linear-gradient(135deg,var(--accent),#a855f7,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-desc{font-size:17px;color:rgba(255,255,255,.45);font-weight:300;max-width:580px;margin:0 auto 44px;line-height:1.75}
+.event-meta{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:48px}
+.meta-item{text-align:center}
+.meta-icon{font-size:22px;margin-bottom:6px;display:block}
+.meta-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:3px}
+.meta-value{font-size:15px;font-weight:600;color:var(--text)}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.btn{padding:16px 36px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-block;transition:.2s;font-family:'Inter',sans-serif}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#a855f7);color:#fff;box-shadow:0 8px 32px rgba(99,102,241,.3)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--border);color:var(--text);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.ticket-note{font-size:13px;color:rgba(255,255,255,.25)}
+.countdown-section{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:600px;margin:0 auto 80px;text-align:center}
+.cd-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;font-family:'JetBrains Mono',monospace}
+.countdown{display:flex;justify-content:center;gap:16px}
+.cd-unit{text-align:center}
+.cd-num{font-size:3.5rem;font-weight:900;letter-spacing:-2px;color:var(--accent);display:block;line-height:1;font-family:'JetBrains Mono',monospace}
+.cd-text{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.cd-sep{font-size:3rem;font-weight:900;color:rgba(99,102,241,.2);line-height:1;padding-top:4px}
+section.content{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 60px 80px}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;margin-bottom:24px;text-transform:uppercase}
+h2{font-size:2.2rem;font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.speakers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}
+.speaker{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;transition:.2s}
+.speaker:hover{border-color:rgba(99,102,241,.3);transform:translateY(-3px)}
+.sp-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a855f7);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.sp-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
+.sp-role{font-size:12px;color:var(--muted);margin-bottom:3px}
+.sp-company{font-size:12px;color:var(--accent)}
+.schedule{margin-top:60px}
+.day-title{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:20px;font-family:'JetBrains Mono',monospace}
+.track-grid{display:flex;flex-direction:column;gap:2px}
+.track{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:20px;transition:.15s}
+.track:hover{border-color:rgba(99,102,241,.2);background:rgba(99,102,241,.03)}
+.track-time{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.track-title{font-size:14px;font-weight:600;color:var(--text)}
+.track-speaker{font-size:12px;color:var(--muted);margin-top:2px}
+.track-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:1px;white-space:nowrap}
+.tag-keynote{background:rgba(99,102,241,.15);color:var(--accent)}
+.tag-panel{background:rgba(168,85,247,.12);color:#a855f7}
+.tag-workshop{background:rgba(6,182,212,.1);color:#06b6d4}
+.tag-break{background:rgba(255,255,255,.05);color:var(--muted)}
+.sponsors{margin-top:60px;text-align:center}
+.sponsors h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:3px;margin-bottom:24px}
+.sponsor-grid{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+.sponsor-logo{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 28px;font-size:13px;color:var(--muted);font-weight:600}
+.bottom-cta{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(168,85,247,.08));border:1px solid rgba(99,102,241,.2);border-radius:20px;padding:60px;text-align:center;margin-top:60px}
+.bottom-cta h2{font-size:2.4rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:12px}
+.bottom-cta p{color:var(--muted);font-size:15px;margin-bottom:32px}
+.ticket-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.ticket{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;padding:24px}
+.ticket.featured{border-color:var(--accent);background:rgba(99,102,241,.08)}
+.ticket-type{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.ticket-price{font-size:2.2rem;font-weight:800;letter-spacing:-1px;color:var(--text);margin-bottom:4px}
+.ticket-price span{font-size:13px;font-weight:400;color:var(--muted)}
+.ticket-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin:14px 0 18px;font-size:13px;color:rgba(255,255,255,.55)}
+.ticket-features li::before{content:'✓ ';color:var(--accent)}
+.ticket-btn{display:block;text-align:center;padding:11px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700}
+.ticket-btn-primary{background:var(--accent);color:#fff}
+.ticket-btn-ghost{border:1px solid var(--border);color:var(--text)}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 60px;text-align:center;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+@media(max-width:900px){nav{padding:14px 24px}.nav-link{display:none}.hero,.content{padding-left:24px;padding-right:24px}.speakers{grid-template-columns:1fr 1fr}.ticket-cards{grid-template-columns:1fr}.track{grid-template-columns:1fr;gap:6px}}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+<nav>
+  <div class="logo">TechBD_Summit</div>
+  <div class="nav-right"><a href="#" class="nav-link">Speakers</a><a href="#" class="nav-link">Schedule</a><a href="#" class="nav-link">Tickets</a><a href="#" class="nav-register">Register Now</a></div>
+</nav>
+<section class="hero">
+  <div class="event-badge"><span class="badge-live"></span>Registration Open · Only 240 seats</div>
+  <h1>Tech<span class="grad">BD</span><br>Summit<br>2025</h1>
+  <p class="hero-desc">Bangladesh's largest technology conference. 2 days, 24 speakers, 8 workshops, and 600 builders, founders, and engineers under one roof in Dhaka.</p>
+  <div class="event-meta">
+    <div class="meta-item"><span class="meta-icon">📅</span><div class="meta-label">Date</div><div class="meta-value">14–15 June 2025</div></div>
+    <div class="meta-item"><span class="meta-icon">📍</span><div class="meta-label">Venue</div><div class="meta-value">Bashundhara Convention, Dhaka</div></div>
+    <div class="meta-item"><span class="meta-icon">👥</span><div class="meta-label">Attendees</div><div class="meta-value">600 Builders</div></div>
+    <div class="meta-item"><span class="meta-icon">🎙️</span><div class="meta-label">Speakers</div><div class="meta-value">24 Industry Leaders</div></div>
+  </div>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary">→ Register for TechBD Summit</a>
+    <a href="#" class="btn btn-ghost">View Full Schedule</a>
+  </div>
+  <div class="ticket-note">Tickets from ৳2,400 · Groups of 5+ get 20% off</div>
+</section>
+
+<div style="position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 60px">
+  <div class="countdown-section">
+    <div class="cd-label">// Event Starts In</div>
+    <div class="countdown">
+      <div class="cd-unit"><span class="cd-num">22</span><div class="cd-text">Days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num">08</span><div class="cd-text">Hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num">34</span><div class="cd-text">Mins</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num">12</span><div class="cd-text">Secs</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="section-tag">// Speakers</div>
+  <h2>24 world-class speakers.<br>One stage in Dhaka.</h2>
+  <div class="speakers">
+    <div class="speaker"><div class="sp-avatar">👨‍💻</div><div class="sp-name">Arif Rahman</div><div class="sp-role">CTO</div><div class="sp-company">Apex Technologies</div></div>
+    <div class="speaker"><div class="sp-avatar">👩‍🔬</div><div class="sp-name">Dr. Nadia Islam</div><div class="sp-role">AI Research Lead</div><div class="sp-company">Google DeepMind</div></div>
+    <div class="speaker"><div class="sp-avatar">👨‍🚀</div><div class="sp-name">Karim Uddin</div><div class="sp-role">Founder & CEO</div><div class="sp-company">PayFlow BD</div></div>
+    <div class="speaker"><div class="sp-avatar">👩‍💼</div><div class="sp-name">Sabina Akter</div><div class="sp-role">VP Engineering</div><div class="sp-company">Grameenphone</div></div>
+  </div>
+
+  <div class="schedule">
+    <div class="section-tag" style="margin-top:60px">// Day 1 — June 14</div>
+    <h2>Conference Schedule</h2>
+    <div class="track-grid">
+      <div class="track"><div class="track-time">09:00 AM</div><div><div class="track-title">Opening Keynote — The Next Decade of Bangladeshi Tech</div><div class="track-speaker">Arif Rahman · CTO, Apex Technologies</div></div><span class="track-tag tag-keynote">Keynote</span></div>
+      <div class="track"><div class="track-time">10:30 AM</div><div><div class="track-title">Building AI Products That Actually Work</div><div class="track-speaker">Dr. Nadia Islam · Google DeepMind</div></div><span class="track-tag tag-keynote">Keynote</span></div>
+      <div class="track"><div class="track-time">12:00 PM</div><div><div class="track-title">Lunch Break + Networking</div><div class="track-speaker">Sponsored by Grameenphone</div></div><span class="track-tag tag-break">Break</span></div>
+      <div class="track"><div class="track-time">01:30 PM</div><div><div class="track-title">Panel: Fintech Regulation in BD — Opportunity or Obstacle?</div><div class="track-speaker">5 Speakers · Moderated by Karim Uddin</div></div><span class="track-tag tag-panel">Panel</span></div>
+      <div class="track"><div class="track-time">03:30 PM</div><div><div class="track-title">Workshop: Building Your First LLM-Powered App</div><div class="track-speaker">Hands-on · Limited to 40 participants</div></div><span class="track-tag tag-workshop">Workshop</span></div>
+    </div>
+  </div>
+
+  <div class="sponsors">
+    <h3>Proud Sponsors</h3>
+    <div class="sponsor-grid">
+      <div class="sponsor-logo">Grameenphone</div>
+      <div class="sponsor-logo">bKash</div>
+      <div class="sponsor-logo">BASIS</div>
+      <div class="sponsor-logo">Dutch-Bangla Bank</div>
+      <div class="sponsor-logo">BRAC</div>
+    </div>
+  </div>
+
+  <div class="bottom-cta">
+    <h2>Join 600 builders in Dhaka.</h2>
+    <p>Two days that'll change how you think about technology and your career.</p>
+    <div class="ticket-cards">
+      <div class="ticket"><div class="ticket-type">General</div><div class="ticket-price">৳2,400<span>/person</span></div><ul class="ticket-features"><li>Both conference days</li><li>Lunch included</li><li>All keynotes &amp; panels</li></ul><a href="#" class="ticket-btn ticket-btn-ghost">Get Ticket</a></div>
+      <div class="ticket featured"><div class="ticket-type">Professional</div><div class="ticket-price">৳4,800<span>/person</span></div><ul class="ticket-features"><li>Everything in General</li><li>Workshop access (all 8)</li><li>Speaker networking dinner</li><li>Certificate + swag bag</li></ul><a href="#" class="ticket-btn ticket-btn-primary">Get Ticket →</a></div>
+      <div class="ticket"><div class="ticket-type">Group (5+)</div><div class="ticket-price">৳1,920<span>/person</span></div><ul class="ticket-features"><li>20% team discount</li><li>Reserved seating block</li><li>Invoice billing available</li></ul><a href="#" class="ticket-btn ticket-btn-ghost">Book Group</a></div>
+    </div>
+  </div>
+</section>
+<footer>// TechBD Summit 2025 · techbdsummit.com · contact@techbdsummit.com · Dhaka, Bangladesh</footer>
+</body></html>

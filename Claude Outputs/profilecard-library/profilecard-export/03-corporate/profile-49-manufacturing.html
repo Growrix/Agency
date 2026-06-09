@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Forgemaster — Industrial Manufacturing</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Barlow',sans-serif;background:#050808;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#060a0a;margin:0 auto;color:#c8d0d0}
+
+.hero{min-height:260px;background:#060a0a;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px;border-bottom:3px solid #e08020}
+.steel-bg{position:absolute;inset:0;background:linear-gradient(160deg,#141e1e 0%,#0a1414 50%,#060a0a 100%)}
+.steel-lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(224,128,32,.04) 30px,rgba(224,128,32,.04) 32px)}
+.hero-gear1{position:absolute;right:-10px;top:-10px;width:120px;height:120px;border:6px solid rgba(224,128,32,.08);border-radius:50%;opacity:.5}
+.hero-gear2{position:absolute;right:30px;top:30px;width:60px;height:60px;border:4px solid rgba(224,128,32,.06);border-radius:50%}
+.hero-iso{position:absolute;top:26px;left:20px;background:rgba(224,128,32,.1);border:1px solid rgba(224,128,32,.25);border-radius:3px;padding:4px 10px;font-size:9px;color:#e08020;font-weight:700;letter-spacing:1.5px}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;color:#e8f0f0;line-height:.88;letter-spacing:.5px;text-transform:uppercase;position:relative}
+.hero h1 span{color:#e08020}
+.hero-sub{font-size:10px;color:rgba(200,208,208,.35);margin-top:8px;letter-spacing:1.5px;text-transform:uppercase;position:relative}
+.hero-certifications{display:flex;gap=6px;margin-top:10px;flex-wrap:wrap;gap:6px;position:relative}
+.cert-badge{background:rgba(224,128,32,.08);border:1px solid rgba(224,128,32,.2);border-radius:3px;padding:3px 8px;font-size:8px;font-weight:700;color:rgba(224,128,32,.7);letter-spacing:.5px}
+
+.factory-stats{display:flex;background:#0e1616;border-bottom:1px solid rgba(224,128,32,.15)}
+.fs{flex:1;text-align:center;padding:12px 0;border-right:1px solid rgba(224,128,32,.1)}
+.fs:last-child{border-right:none}
+.fs-n{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#e08020;letter-spacing:.5px}
+.fs-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(200,208,208,.2);margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#c8d0d0;text-transform:uppercase;letter-spacing:2px;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#e08020,transparent)}
+
+.products{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.prod{background:#0e1616;border:1px solid rgba(224,128,32,.1);border-radius:6px;padding:13px}
+.prod-icon{font-size:22px;margin-bottom:7px}
+.prod-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#c8d0d0;text-transform:uppercase;letter-spacing:.5px}
+.prod-desc{font-size:10px;color:rgba(200,208,208,.3);margin-top:2px;line-height:1.4}
+.prod-cap{font-size:11px;font-weight:600;color:#e08020;margin-top:5px}
+
+.capabilities{display:flex;flex-direction:column;gap:4px}
+.cap{background:#0e1616;border:1px solid rgba(224,128,32,.08);border-radius:5px;padding:10px 12px;display:flex;align-items:center;gap:10px;font-size:11px;color:rgba(200,208,208,.4)}
+.cap-icon{font-size:16px;flex-shrink:0}
+.cap-n{font-weight:600;color:rgba(200,208,208,.7)}
+
+.cta{background:linear-gradient(135deg,#1a2020,#0e1616);border:2px solid rgba(224,128,32,.2);border-radius:8px;padding:20px;text-align:center;position:relative}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#e08020,transparent)}
+.cta h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#e8f0f0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.cta p{font-size:11px;color:rgba(200,208,208,.35);margin-bottom:14px;line-height:1.4}
+.cta-btn{display:block;background:#e08020;color:#060a0a;border-radius:4px;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:1px;text-decoration:none;margin-bottom:6px}
+.cta-btn2{display:block;background:rgba(224,128,32,.06);color:rgba(224,128,32,.4);border:1px solid rgba(224,128,32,.15);border-radius:4px;padding:10px;font-size:11px;text-decoration:none}
+
+.contacts{background:#0e1616;border:1px solid rgba(224,128,32,.08);border-radius:6px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 13px;border-bottom:1px solid rgba(224,128,32,.06);font-size:12px;color:rgba(200,208,208,.3)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:#e08020;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+footer{background:#050808;border-top:3px solid #e08020;padding:13px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:rgba(200,208,208,.1);text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="steel-bg"></div>
+  <div class="steel-lines"></div>
+  <div class="hero-gear1"></div>
+  <div class="hero-gear2"></div>
+  <div class="hero-iso">ISO 9001 CERTIFIED</div>
+  <h1>Forge<span>master</span></h1>
+  <div class="hero-sub">Steel · Fabrication · Metal Works · Industrial Manufacturing</div>
+  <div class="hero-certifications">
+    <div class="cert-badge">ISO 9001:2015</div>
+    <div class="cert-badge">BSTI Approved</div>
+    <div class="cert-badge">Export Certified</div>
+    <div class="cert-badge">30 Years Est.</div>
+  </div>
+</div>
+<div class="factory-stats">
+  <div class="fs"><div class="fs-n">200,000</div><div class="fs-l">sqft factory</div></div>
+  <div class="fs"><div class="fs-n">500+</div><div class="fs-l">Employees</div></div>
+  <div class="fs"><div class="fs-n">30yr</div><div class="fs-l">Established</div></div>
+</div>
+<div class="body">
+  <div class="sec">Products</div>
+  <div class="products">
+    <div class="prod"><div class="prod-icon">🔩</div><div class="prod-name">Structural Steel</div><div class="prod-desc">I-beams, angles, channels, plates</div><div class="prod-cap">50,000 MT / year</div></div>
+    <div class="prod"><div class="prod-icon">🏗️</div><div class="prod-name">Fabricated Structures</div><div class="prod-desc">Industrial sheds, bridges, platforms</div><div class="prod-cap">Custom capacity</div></div>
+    <div class="prod"><div class="prod-icon">⚙️</div><div class="prod-name">Machine Parts</div><div class="prod-desc">CNC machined components, jigs, fixtures</div><div class="prod-cap">High precision</div></div>
+    <div class="prod"><div class="prod-icon">🔧</div><div class="prod-name">Industrial Fittings</div><div class="prod-desc">Flanges, valves, pipes, forgings</div><div class="prod-cap">Stock & custom</div></div>
+  </div>
+  <div class="sec">Capabilities</div>
+  <div class="capabilities">
+    <div class="cap"><div class="cap-icon">⚡</div><div><div class="cap-n">CNC Machining</div><div>5-axis CNC, turning, milling · ±0.01mm tolerance</div></div></div>
+    <div class="cap"><div class="cap-icon">🔥</div><div><div class="cap-n">Heavy Fabrication</div><div>SAW, MIG, TIG welding · Up to 50mm plate</div></div></div>
+    <div class="cap"><div class="cap-icon">🎨</div><div><div class="cap-n">Surface Treatment</div><div>Hot-dip galvanizing, powder coating, sandblasting</div></div></div>
+    <div class="cap"><div class="cap-icon">🔬</div><div><div class="cap-n">Quality Lab</div><div>In-house NDT, material testing, dimensional QC</div></div></div>
+  </div>
+  <div class="sec">Request a Quote</div>
+  <div class="cta">
+    <h3>Built to specification. Delivered on time.</h3>
+    <p>Send your drawings or specifications and we'll respond with a detailed quote within 48 hours.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">Request a Quote</a>
+    <a href="mailto:sales@forgemaster.com.bd" class="cta-btn2">sales@forgemaster.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Forgemaster Industrial Park, Gazipur</div>
+    <div class="cr"><div class="ci">⏰</div>Sat–Thu · 8am–6pm</div>
+  </div>
+</div>
+<footer>Forgemaster · Steel & Metal Manufacturing · Gazipur · Since 1995</footer>
+</div></body></html>

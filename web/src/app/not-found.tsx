@@ -17,13 +17,13 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata = {
   title: "Page Not Found",
-  description: "The page could not be found. Continue to services, shop, portfolio, booking, or support.",
+  description: "The page could not be found. Continue to services, products, portfolio, booking, or support.",
 };
 
 const DESTINATIONS = [
   { icon: Squares2X2Icon, label: "Services", description: "Browse the four practices.", href: "/services" },
   { icon: BriefcaseIcon, label: "Portfolio", description: "See recent shipped work.", href: "/portfolio" },
-  { icon: ShoppingBagIcon, label: "Shop", description: "Templates and starters.", href: "/shop" },
+  { icon: ShoppingBagIcon, label: "Products", description: "Templates and starters.", href: "/products" },
   { icon: CurrencyDollarIcon, label: "Pricing", description: "Engagement models and ranges.", href: "/pricing" },
   { icon: CalendarDaysIcon, label: "Book a call", description: "30-minute discovery.", href: "/book-appointment" },
 ];

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Pixels Lab — Mobile App Development</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#e8eaf0;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#e8eaf0;margin:0 auto;color:#2d3561}
+:root{--bg:#e8eaf0;--sh-l:-6px -6px 14px rgba(255,255,255,.85);--sh-d:6px 6px 14px rgba(180,185,210,.7);--sh-in:inset -4px -4px 10px rgba(255,255,255,.85),inset 4px 4px 10px rgba(180,185,210,.7);--accent:#5c6bc0;--accent2:#ff7043}
+.neu{background:var(--bg);box-shadow:var(--sh-l),var(--sh-d)}
+.neu-in{box-shadow:var(--sh-in);background:var(--bg)}
+.hero{padding:48px 22px 24px;background:var(--bg)}
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.tb-logo{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:var(--accent);letter-spacing:-1px}
+.tb-badge{border-radius:100px;padding:6px 14px;font-size:9px;color:rgba(45,53,97,.4);letter-spacing:1px;text-transform:uppercase;box-shadow:var(--sh-l),var(--sh-d)}
+/* MOCKUP PHONE */
+.phone-mockup{display:flex;justify-content:center;margin:0 0 20px}
+.pm-outer{width:120px;height:200px;border-radius:24px;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-l),var(--sh-d)}
+.pm-inner{width:100px;height:180px;border-radius:20px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;box-shadow:var(--sh-in);padding:12px}
+.pm-dot{width:8px;height:8px;border-radius:50%;box-shadow:var(--sh-l),var(--sh-d)}
+.pm-bar{height:6px;border-radius:3px;width:100%;box-shadow:var(--sh-in)}
+.b1{background:rgba(92,107,192,.4);width:100%}
+.b2{background:rgba(255,112,67,.3);width:70%}
+.b3{background:rgba(92,107,192,.2);width:85%}
+.hero h1{font-family:'Nunito',sans-serif;font-size:34px;font-weight:900;color:#2d3561;text-align:center;letter-spacing:-1.5px;line-height:.95;margin-bottom:10px}
+.hero-sub{font-size:12px;color:rgba(45,53,97,.4);text-align:center;line-height:1.6;letter-spacing:.2px}
+.body{padding:0 20px 48px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(92,107,192,.5);margin:24px 0 12px}
+.tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.tech{border-radius:12px;padding:8px 14px;font-size:11px;font-weight:700;color:rgba(45,53,97,.5);box-shadow:var(--sh-l),var(--sh-d)}
+.services{display:flex;flex-direction:column;gap:10px}
+.svc{border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;box-shadow:var(--sh-l),var(--sh-d)}
+.svc-icon{font-size:24px;margin-bottom:4px}
+.svc-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:#2d3561}
+.svc-desc{font-size:10px;color:rgba(45,53,97,.4);margin-top:2px;line-height:1.4}
+.svc-price{font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;color:var(--accent);flex-shrink:0;text-align:right}
+.svc-per{display:block;font-size:9px;color:rgba(45,53,97,.3);font-family:'DM Sans',sans-serif;font-weight:400;margin-top:2px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{border-radius:14px;padding:14px 0;text-align:center;box-shadow:var(--sh-l),var(--sh-d)}
+.st-n{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--accent)}
+.st-l{font-size:8px;color:rgba(45,53,97,.3);margin-top:3px;letter-spacing:.5px;text-transform:uppercase}
+.cta{border-radius:22px;padding:22px;text-align:center;box-shadow:var(--sh-l),var(--sh-d)}
+.cta h3{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:#2d3561;margin-bottom:6px}
+.cta p{font-size:12px;color:rgba(45,53,97,.4);margin-bottom:18px;line-height:1.5}
+.cta-btn{display:block;border-radius:14px;padding:15px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#fff;text-decoration:none;margin-bottom:10px;background:linear-gradient(135deg,#5c6bc0,#3949ab);box-shadow:4px 4px 12px rgba(92,107,192,.4),-2px -2px 8px rgba(255,255,255,.8)}
+.cta-btn2{display:block;border-radius:14px;padding:13px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;box-shadow:var(--sh-l),var(--sh-d)}
+.contacts{border-radius:18px;padding:4px;box-shadow:var(--sh-l),var(--sh-d)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;font-size:12px;color:rgba(45,53,97,.45);border-radius:12px;margin-bottom:2px}
+.ci{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;box-shadow:var(--sh-l),var(--sh-d)}
+footer{background:var(--bg);padding:18px;text-align:center;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:rgba(45,53,97,.2)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="top-bar"><div class="tb-logo">pixels.lab</div><div class="tb-badge neu">Building apps</div></div>
+  <div class="phone-mockup">
+    <div class="pm-outer neu">
+      <div class="pm-inner neu-in">
+        <div class="pm-dot" style="background:rgba(92,107,192,.4)"></div>
+        <div class="pm-bar neu-in b1"></div>
+        <div class="pm-bar neu-in b2"></div>
+        <div class="pm-bar neu-in b3"></div>
+        <div class="pm-dot" style="background:rgba(255,112,67,.3)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero h1" style="font-family:'Nunito',sans-serif;font-size:34px;font-weight:900;color:#2d3561;text-align:center;letter-spacing:-1.5px;line-height:.95;margin-bottom:10px">We build apps<br>that people love.</div>
+  <div class="hero-sub">iOS, Android and web applications for startups, SMEs and enterprises. From idea to App Store in 90 days.</div>
+</div>
+<div class="body">
+  <div class="sec">Tech Stack</div>
+  <div class="tech-stack">
+    <div class="tech">React Native</div><div class="tech">Flutter</div><div class="tech">Swift</div>
+    <div class="tech">Node.js</div><div class="tech">Firebase</div><div class="tech">AWS</div>
+  </div>
+  <div class="sec">Services & Pricing</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-icon">📱</div><div class="svc-name">Mobile App (iOS+Android)</div><div class="svc-desc">UI/UX design + full development + App Store submission</div></div><div class="svc-price">$8,000<span class="svc-per">from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🌐</div><div class="svc-name">Web Application</div><div class="svc-desc">React/Next.js + backend API + admin dashboard</div></div><div class="svc-price">$5,000<span class="svc-per">from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🎨</div><div class="svc-name">UI/UX Design Only</div><div class="svc-desc">Figma prototype, design system, user flows</div></div><div class="svc-price">$2,000<span class="svc-per">from</span></div></div>
+  </div>
+  <div class="sec">Track Record</div>
+  <div class="stats">
+    <div class="stat"><div class="st-n">45+</div><div class="st-l">Apps</div></div>
+    <div class="stat"><div class="st-n">7yr</div><div class="st-l">Experience</div></div>
+    <div class="stat"><div class="st-n">4.9★</div><div class="st-l">Rating</div></div>
+  </div>
+  <div class="sec">Start Your App</div>
+  <div class="cta">
+    <h3>Free app scoping session.</h3>
+    <p>Tell us your idea — we'll tell you how to build it, what it'll cost and how long it'll take. No charge.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📱 Book Free Scoping Call</a>
+    <a href="mailto:hello@pixelslab.com.bd" class="cta-btn2">hello@pixelslab.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci neu">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci neu">📍</div>Banani, Dhaka · Remote worldwide</div>
+    <div class="cr"><div class="ci neu">🌐</div>pixelslab.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 Pixels Lab · Mobile & Web App Development · Dhaka</footer>
+</div></body></html>

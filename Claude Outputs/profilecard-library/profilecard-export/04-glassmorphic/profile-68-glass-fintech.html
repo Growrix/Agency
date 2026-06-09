@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NovaPay — Fintech & Payment Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#020818;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#030c20;margin:0 auto;color:#e0eeff;position:relative;overflow:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+.b1{position:absolute;width:320px;height:320px;background:radial-gradient(circle,rgba(56,189,248,.2) 0%,transparent 70%);top:-60px;right:-60px;filter:blur(50px)}
+.b2{position:absolute;width:280px;height:280px;background:radial-gradient(circle,rgba(99,102,241,.25) 0%,transparent 70%);top:280px;left:-60px;filter:blur(45px)}
+.b3{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(34,211,238,.12) 0%,transparent 70%);bottom:150px;right:0;filter:blur(35px)}
+.gl{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.wrap{position:relative;z-index:1}
+/* CARD VISUAL */
+.card-visual{margin:52px 20px 20px;border-radius:20px;padding:24px;background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(99,102,241,.2));border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);position:relative;overflow:hidden}
+.card-visual::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(56,189,248,.3),transparent 70%);border-radius:50%}
+.cv-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px}
+.cv-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.cv-chip{width:32px;height:22px;background:linear-gradient(135deg,#fbbf24,#f59e0b);border-radius:5px;opacity:.8}
+.cv-balance-label{font-size:9px;color:rgba(224,238,255,.35);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.cv-balance{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#fff;letter-spacing:-1.5px}
+.cv-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.cv-number{font-size:13px;color:rgba(224,238,255,.4);letter-spacing:3px}
+.cv-brand{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:rgba(224,238,255,.5);letter-spacing:2px}
+/* BODY */
+.body{padding:0 18px 48px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(56,189,248,.5);margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(56,189,248,.12)}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.feat{border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.feat-icon{font-size:24px;margin-bottom:8px}
+.feat-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0eeff;letter-spacing:-.2px}
+.feat-desc{font-size:10px;color:rgba(224,238,255,.3);margin-top:3px;line-height:1.4}
+.plans{display:flex;flex-direction:column;gap:8px}
+.plan{border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;overflow:hidden}
+.plan::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.plan.hot{border-color:rgba(56,189,248,.3);background:rgba(56,189,248,.08)}
+.plan-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#e0eeff}
+.plan-features{font-size:10px;color:rgba(224,238,255,.35);margin-top:3px;line-height:1.5}
+.plan-price{text-align:right;flex-shrink:0}
+.plan-amount{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.plan-per{font-size:9px;color:rgba(224,238,255,.25);display:block;-webkit-text-fill-color:rgba(224,238,255,.25)}
+.cta{border-radius:20px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
+.cta h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.5px}
+.cta p{font-size:12px;color:rgba(224,238,255,.4);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;border-radius:12px;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;color:rgba(224,238,255,.35);border-radius:12px;padding:12px;font-size:11px;text-decoration:none}
+.contacts{border-radius:16px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(224,238,255,.35)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+footer{padding:20px;text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(224,238,255,.1);font-family:'Syne',sans-serif}
+</style>
+</head>
+<body>
+<div class="bg"><div class="b1"></div><div class="b2"></div><div class="b3"></div></div>
+<div class="app"><div class="wrap">
+<div class="card-visual">
+  <div class="cv-top"><div class="cv-logo">NovaPay</div><div class="cv-chip"></div></div>
+  <div class="cv-balance-label">Total Balance</div>
+  <div class="cv-balance">৳4,82,500</div>
+  <div class="cv-bottom"><div class="cv-number">•••• •••• •••• 4291</div><div class="cv-brand">NOVA</div></div>
+</div>
+<div class="body">
+  <div class="sec">What We Build</div>
+  <div class="features">
+    <div class="feat gl"><div class="feat-icon">💳</div><div class="feat-name">Payment Gateway</div><div class="feat-desc">Accept cards, bKash, Nagad, Rocket</div></div>
+    <div class="feat gl"><div class="feat-icon">🔄</div><div class="feat-name">Instant Transfer</div><div class="feat-desc">Real-time bank & mobile wallet transfer</div></div>
+    <div class="feat gl"><div class="feat-icon">📊</div><div class="feat-name">Analytics Dashboard</div><div class="feat-desc">Transaction insights, trends, reports</div></div>
+    <div class="feat gl"><div class="feat-icon">🔒</div><div class="feat-name">PCI DSS Secure</div><div class="feat-desc">Bank-grade encryption & fraud detection</div></div>
+  </div>
+  <div class="sec">Plans</div>
+  <div class="plans">
+    <div class="plan gl"><div><div class="plan-name">Starter</div><div class="plan-features">1,000 txn/mo · 1.5% fee · Basic analytics</div></div><div class="plan-price"><div class="plan-amount">Free</div><div class="plan-per">forever</div></div></div>
+    <div class="plan gl hot"><div><div class="plan-name">Business ⭐</div><div class="plan-features">Unlimited txn · 0.8% fee · Full dashboard + API</div></div><div class="plan-price"><div class="plan-amount">$49</div><div class="plan-per">/ month</div></div></div>
+    <div class="plan gl"><div><div class="plan-name">Enterprise</div><div class="plan-features">Custom limits · 0.3% fee · Dedicated support</div></div><div class="plan-price"><div class="plan-amount">Custom</div><div class="plan-per">contact us</div></div></div>
+  </div>
+  <div class="sec">Get Started</div>
+  <div class="cta gl">
+    <h3>Go live in 24 hours.</h3>
+    <p>Fast onboarding, sandbox environment, and full API documentation. Trusted by 300+ businesses.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">💳 Start Free Integration</a>
+    <a href="mailto:hello@novapay.com.bd" class="cta-btn2 gl">hello@novapay.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts gl">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Dhaka · API available globally</div>
+    <div class="cr"><div class="ci">🌐</div>novapay.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 NovaPay · Fintech Solutions · Bangladesh Bank Licensed</footer>
+</div></div></body></html>

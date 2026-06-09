@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>BrewBox — Specialty Coffee Subscription</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(165deg,#ffe8c8 0%,#ffd4a8 40%,#ffc890 100%);margin:0 auto}
+.clay{box-shadow:0 2px 0 rgba(255,255,255,.95) inset,0 -3px 0 rgba(0,0,0,.08) inset,0 12px 30px rgba(0,0,0,.12),0 3px 8px rgba(0,0,0,.07)}
+.clay-sm{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.07) inset,0 7px 18px rgba(0,0,0,.09),0 2px 5px rgba(0,0,0,.05)}
+.hero{padding:30px 18px 20px;position:relative;min-height:272px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.coffee-em{position:absolute;font-size:48px;top:14px;right:14px;animation:steam 2s ease-in-out infinite}
+@keyframes steam{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+.bean1{position:absolute;font-size:28px;top:65px;left:14px;animation:steam 2.5s ease-in-out infinite;animation-delay:.4s}
+.bean2{position:absolute;font-size:22px;top:120px;right:48px;animation:steam 3s ease-in-out infinite;animation-delay:.8s}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#7b3a10;margin-bottom:14px;width:fit-content;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.08) inset,0 5px 14px rgba(123,58,16,.2)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:42px;font-weight:900;color:#3a1800;line-height:.9;letter-spacing:-2px}
+.hero h1 .acc{color:#c84820}
+.hero-sub{font-size:12px;color:rgba(58,24,0,.42);margin-top:9px;line-height:1.55;font-weight:600}
+.rating-row{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;font-weight:800;color:rgba(58,24,0,.4)}
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:rgba(58,24,0,.32);margin:18px 0 12px}
+.coffees{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.coffee-card{background:#fff;border-radius:22px;padding:18px;min-height:130px;display:flex;flex-direction:column;justify-content:flex-end}
+.cc-icon{font-size:32px;margin-bottom:8px;filter:drop-shadow(0 3px 7px rgba(0,0,0,.15))}
+.cc-origin{font-size:9px;font-weight:700;color:rgba(58,24,0,.35);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.cc-name{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#3a1800;letter-spacing:-.3px}
+.cc-notes{font-size:10px;color:rgba(58,24,0,.4);margin-top:3px;font-weight:600;line-height:1.3}
+.cc-roast{display:inline-block;background:rgba(200,72,32,.1);color:#c84820;border-radius:100px;padding:2px 9px;font-size:9px;font-weight:800;margin-top:7px}
+.boxes-list{display:flex;flex-direction:column;gap:9px}
+.box-plan{background:#fff;border-radius:22px;padding:17px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative;overflow:hidden}
+.box-plan.featured{background:linear-gradient(135deg,#c84820,#8b2a10)}
+.box-plan.featured::before{content:'🔥 Best Value';position:absolute;top:10px;right:12px;font-size:9px;background:rgba(255,255,255,.2);color:#fff;border-radius:100px;padding:2px 8px;font-weight:800}
+.bp-icon{font-size:28px;flex-shrink:0}
+.bp-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#3a1800;letter-spacing:-.3px}
+.box-plan.featured .bp-name{color:#fff}
+.bp-desc{font-size:10px;color:rgba(58,24,0,.38);margin-top:3px;font-weight:600}
+.box-plan.featured .bp-desc{color:rgba(255,255,255,.6)}
+.bp-price{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:#c84820;flex-shrink:0;text-align:right;letter-spacing:-1px}
+.box-plan.featured .bp-price{color:#fff}
+.bp-per{font-size:9px;font-weight:600;display:block;margin-top:2px;color:rgba(58,24,0,.3)}
+.box-plan.featured .bp-per{color:rgba(255,255,255,.5)}
+.cta-brew{background:linear-gradient(135deg,#8b2a10,#c84820);border-radius:26px;padding:26px;text-align:center}
+.cta-brew{box-shadow:0 3px 0 rgba(255,255,255,.18) inset,0 -3px 0 rgba(0,0,0,.14) inset,0 16px 40px rgba(139,42,16,.35),0 4px 12px rgba(0,0,0,.12)}
+.cta-brew h3{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta-brew p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:20px;line-height:1.5;font-weight:600}
+.cta-btn{display:block;background:#fff;color:#8b2a10;border-radius:18px;padding:14px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;text-decoration:none;margin-bottom:10px;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -3px 0 rgba(0,0,0,.1) inset,0 8px 20px rgba(0,0,0,.15)}
+.cta-btn2{display:block;background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);border-radius:18px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;text-decoration:none}
+.contacts{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 8px 20px rgba(0,0,0,.08)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(58,24,0,.07);font-size:12px;color:rgba(58,24,0,.42);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:32px;height:32px;background:linear-gradient(135deg,#8b2a10,#c84820);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 12px rgba(139,42,16,.3)}
+footer{text-align:center;padding:20px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:rgba(58,24,0,.2)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <span class="coffee-em">☕</span>
+  <span class="bean1">🫘</span>
+  <span class="bean2">🫘</span>
+  <div class="hero-badge clay-sm">☕ Delivering to all of Dhaka</div>
+  <h1>Specialty<br>coffee <span class="acc">delivered.</span></h1>
+  <div class="hero-sub">Single-origin beans from Ethiopia, Colombia, Yemen & more. Roasted fresh, shipped to your door. Monthly subscription.</div>
+  <div class="rating-row">⭐⭐⭐⭐⭐ 4.9 · 8,000+ subscribers</div>
+</div>
+<div class="body">
+  <div class="sec">Featured origins ☕</div>
+  <div class="coffees">
+    <div class="coffee-card clay-sm"><div class="cc-icon">🌍</div><div class="cc-origin">Ethiopia · Yirgacheffe</div><div class="cc-name">Floral Bloom</div><div class="cc-notes">Jasmine, bergamot, citrus</div><div class="cc-roast">Light roast</div></div>
+    <div class="coffee-card clay-sm"><div class="cc-icon">🌎</div><div class="cc-origin">Colombia · Huila</div><div class="cc-name">Caramel Valley</div><div class="cc-notes">Caramel, dark cherry, hazelnut</div><div class="cc-roast">Medium roast</div></div>
+    <div class="coffee-card clay-sm"><div class="cc-icon">🏔️</div><div class="cc-origin">Yemen · Haraaz</div><div class="cc-name">Mystic Mocha</div><div class="cc-notes">Wine, chocolate, spice</div><div class="cc-roast">Medium dark</div></div>
+    <div class="coffee-card clay-sm"><div class="cc-icon">🌏</div><div class="cc-origin">Guatemala · Antigua</div><div class="cc-name">Volcano Rich</div><div class="cc-notes">Brown sugar, apricot, almond</div><div class="cc-roast">Dark roast</div></div>
+  </div>
+  <div class="sec">Choose your box 📦</div>
+  <div class="boxes-list">
+    <div class="box-plan clay-sm"><div class="bp-icon">🫘</div><div><div class="bp-name">Starter Box</div><div class="bp-desc">250g · 1 origin · beginner-friendly</div></div><div class="bp-price">৳850<span class="bp-per">/month</span></div></div>
+    <div class="box-plan clay featured"><div class="bp-icon">☕</div><div><div class="bp-name">Explorer Box</div><div class="bp-desc">500g · 2 origins · tasting notes included</div></div><div class="bp-price">৳1,600<span class="bp-per">/month</span></div></div>
+    <div class="box-plan clay-sm"><div class="bp-icon">🏆</div><div><div class="bp-name">Connoisseur Box</div><div class="bp-desc">1kg · 4 origins · brewing guide + merch</div></div><div class="bp-price">৳2,800<span class="bp-per">/month</span></div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Start your subscription ☕</div>
+  <div class="cta-brew">
+    <h3>☕ First box 30% off!</h3>
+    <p>Freshly roasted, same-week delivery. Pause or cancel anytime — no strings attached.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📦 Subscribe Now</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Talk to a coffee nerd</a>
+  </div>
+  <div class="sec" style="margin-top:20px">Order & delivery 🚚</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Roastery: Uttara, Dhaka · Delivers citywide</div>
+    <div class="cr"><div class="ci">⏰</div>Subscribe by 8pm · Ships within 48hrs</div>
+  </div>
+</div>
+<footer>© 2025 BrewBox · Specialty Coffee Subscription · Dhaka ☕</footer>
+</div></body></html>

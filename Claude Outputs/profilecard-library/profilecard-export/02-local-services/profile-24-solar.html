@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SunPower BD — Solar Energy Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Poppins',sans-serif;background:#1a0a00;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#fff8f2;margin:0 auto}
+
+.hero{min-height:290px;background:linear-gradient(160deg,#f97316 0%,#ea580c 35%,#9a3412 70%,#1a0a00 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 24px}
+.hero-sun{position:absolute;top:-30px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,100,.35) 0%,rgba(249,115,22,.1) 50%,transparent 70%);animation:sunpulse 4s ease-in-out infinite}
+@keyframes sunpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.hero-rays{position:absolute;top:-30px;right:-30px;width:180px;height:180px}
+.hero-rays::before,.hero-rays::after{content:'';position:absolute;top:50%;left:50%;width:300px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,200,50,.08));transform-origin:left center}
+.hero-rays::before{transform:rotate(30deg)}
+.hero-rays::after{transform:rotate(60deg)}
+.hero-grid{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(26,10,0,.4),transparent)}
+.cert-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:10px;color:#fff;font-weight:600;margin-bottom:14px;width:fit-content}
+.hero h1{font-size:36px;font-weight:800;color:#fff;line-height:.95;letter-spacing:-1px}
+.hero h1 span{color:#fde68a}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:8px;line-height:1.5}
+.hero-badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.hero-badge{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:4px 12px;font-size:9px;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.3px}
+
+.savings-bar{background:#fff;border-bottom:2px solid #fed7aa;display:flex}
+.s-item{flex:1;text-align:center;padding:14px 4px;border-right:1px solid #fed7aa}
+.s-item:last-child{border-right:none}
+.s-val{font-size:18px;font-weight:800;color:#ea580c}
+.s-label{font-size:8px;color:#9a7060;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ea580c;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,rgba(234,88,12,.3),transparent);border-radius:1px}
+
+.packages{display:flex;flex-direction:column;gap:10px}
+.pkg{background:#fff;border:1px solid #fed7aa;border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.pkg.featured{background:linear-gradient(160deg,#fff8f2,#fff);border:2px solid #ea580c}
+.pkg-sun{position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,.08) 0%,transparent 70%)}
+.pkg-name{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#ea580c;margin-bottom:4px}
+.pkg-cap{font-size:22px;font-weight:800;color:#1a0a00;letter-spacing:-1px}
+.pkg-desc{font-size:11px;color:#9a7060;margin-top:2px;margin-bottom:12px}
+.pkg-feats{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.pkg-feat{font-size:12px;color:#555;display:flex;align-items:center;gap:8px}
+.pkg-feat::before{content:'☀';font-size:11px;color:#f97316;flex-shrink:0}
+.pkg-footer{display:flex;align-items:center;justify-content:space-between}
+.pkg-price{font-size:22px;font-weight:800;color:#ea580c}
+.pkg-roi{font-size:10px;color:#9a7060;text-align:right}
+.pkg-roi strong{color:#16a34a;display:block;font-size:13px}
+
+.roi-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:14px;padding:18px}
+.roi-box h3{font-size:15px;font-weight:700;color:#052e16;margin-bottom:10px}
+.roi-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:12px}
+.roi-row:last-child{border-bottom:none}
+.roi-label{color:#555}
+.roi-val{font-weight:700;color:#16a34a}
+
+.process{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.proc-step{background:#fff;border:1px solid #fed7aa;border-radius:12px;padding:14px}
+.proc-n{font-size:10px;font-weight:800;color:#ea580c;letter-spacing:1px;margin-bottom:6px}
+.proc-icon{font-size:22px;margin-bottom:6px}
+.proc-title{font-size:12px;font-weight:700;color:#1a0a00}
+.proc-desc{font-size:10px;color:#9a7060;margin-top:3px;line-height:1.4}
+
+.free-survey{background:linear-gradient(135deg,#ea580c,#9a3412);border-radius:16px;padding:22px;text-align:center}
+.free-survey h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+.free-survey p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:18px;line-height:1.5}
+.fs-btn{display:block;background:#fff;color:#ea580c;border-radius:10px;padding:14px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.fs-btn2{display:block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px;font-size:11px;text-decoration:none}
+
+.contact-box{background:#fff;border:1px solid #fed7aa;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #fff8f2;font-size:12px;color:#555}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#fff8f2;border:1px solid #fed7aa;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#1a0a00;padding:20px;text-align:center;font-size:10px;color:rgba(249,115,22,.3);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-sun"></div>
+  <div class="hero-rays"></div>
+  <div class="hero-grid"></div>
+  <div class="cert-pill">☀️ BERC Certified Installer</div>
+  <h1>Sun<span>Power</span><br>Bangladesh</h1>
+  <div class="hero-sub">Solar panels, batteries & grid-tied systems. Cut your electricity bill by up to 90%.</div>
+  <div class="hero-badges">
+    <div class="hero-badge">✓ Govt. Approved</div>
+    <div class="hero-badge">✓ 25yr Panel Warranty</div>
+    <div class="hero-badge">✓ Net Metering Ready</div>
+  </div>
+</div>
+<div class="savings-bar">
+  <div class="s-item"><div class="s-val">90%</div><div class="s-label">Bill Reduction</div></div>
+  <div class="s-item"><div class="s-val">500+</div><div class="s-label">Systems Installed</div></div>
+  <div class="s-item"><div class="s-val">25yr</div><div class="s-label">Panel Warranty</div></div>
+</div>
+<div class="body">
+  <div class="sec">System Packages</div>
+  <div class="packages">
+    <div class="pkg">
+      <div class="pkg-sun"></div>
+      <div class="pkg-name">Starter Home</div>
+      <div class="pkg-cap">2 kW System</div>
+      <div class="pkg-desc">Ideal for 2–3 bedroom homes. Covers fans, lights & basic appliances.</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">6 × 330W solar panels</div>
+        <div class="pkg-feat">2kW on-grid inverter</div>
+        <div class="pkg-feat">Professional installation</div>
+        <div class="pkg-feat">2yr workmanship warranty</div>
+      </div>
+      <div class="pkg-footer"><div class="pkg-price">$1,200</div><div class="pkg-roi">Payback period<strong>3–4 years</strong></div></div>
+    </div>
+    <div class="pkg featured">
+      <div class="pkg-sun"></div>
+      <div class="pkg-name">⭐ Popular Choice</div>
+      <div class="pkg-cap">5 kW System</div>
+      <div class="pkg-desc">Best for mid-sized homes. Powers AC, fridge, washing machine & more.</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">15 × 400W premium panels</div>
+        <div class="pkg-feat">5kW hybrid inverter</div>
+        <div class="pkg-feat">Battery backup option</div>
+        <div class="pkg-feat">Net metering registration</div>
+        <div class="pkg-feat">Remote monitoring app</div>
+      </div>
+      <div class="pkg-footer"><div class="pkg-price">$2,800</div><div class="pkg-roi">Payback period<strong>2.5–3 years</strong></div></div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-name">Commercial</div>
+      <div class="pkg-cap">10–50 kW</div>
+      <div class="pkg-desc">For factories, offices & commercial buildings. Custom design & finance options.</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">Custom panel array design</div>
+        <div class="pkg-feat">3-phase inverter system</div>
+        <div class="pkg-feat">Full project management</div>
+        <div class="pkg-feat">BEPZA / BERC approval</div>
+      </div>
+      <div class="pkg-footer"><div class="pkg-price">Custom</div><div class="pkg-roi">Free site survey<strong>Call for quote</strong></div></div>
+    </div>
+  </div>
+
+  <div class="sec">Your Savings Calculator</div>
+  <div class="roi-box">
+    <h3>📊 Average 5kW System Returns</h3>
+    <div class="roi-row"><span class="roi-label">Monthly bill saving</span><span class="roi-val">~$45–60/mo</span></div>
+    <div class="roi-row"><span class="roi-label">Annual saving</span><span class="roi-val">~$540–720/yr</span></div>
+    <div class="roi-row"><span class="roi-label">25-year total saving</span><span class="roi-val">~$13,500+</span></div>
+    <div class="roi-row"><span class="roi-label">Carbon offset</span><span class="roi-val">~3.5 tons CO₂/yr</span></div>
+  </div>
+
+  <div class="sec">How It Works</div>
+  <div class="process">
+    <div class="proc-step"><div class="proc-n">STEP 01</div><div class="proc-icon">📋</div><div class="proc-title">Free Survey</div><div class="proc-desc">We visit & assess your roof, usage & best system size.</div></div>
+    <div class="proc-step"><div class="proc-n">STEP 02</div><div class="proc-icon">📐</div><div class="proc-title">Custom Design</div><div class="proc-desc">System designed & quotation provided within 24hrs.</div></div>
+    <div class="proc-step"><div class="proc-n">STEP 03</div><div class="proc-icon">🔧</div><div class="proc-title">Installation</div><div class="proc-desc">Professional install in 1–2 days with minimal disruption.</div></div>
+    <div class="proc-step"><div class="proc-n">STEP 04</div><div class="proc-icon">☀️</div><div class="proc-title">Go Solar!</div><div class="proc-desc">Switch on & watch your savings start immediately.</div></div>
+  </div>
+
+  <div class="sec">Book Free Survey</div>
+  <div class="free-survey">
+    <h3>☀️ Free Home Survey</h3>
+    <p>No obligation. Our engineer visits, assesses your site and gives you a full quote — completely free.</p>
+    <a href="https://wa.me/0000000000" class="fs-btn">Book Free Survey Now</a>
+    <a href="tel:+8801700000000" class="fs-btn2">📞 Call: +880 1700-000000</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📧</div>info@sunpowerbd.com</div>
+    <div class="c-row"><div class="c-icon">📍</div>Mirpur-10, Dhaka (Showroom)</div>
+    <div class="c-row"><div class="c-icon">🌐</div>sunpowerbd.com</div>
+  </div>
+</div>
+<footer>© 2025 SunPower Bangladesh · BERC Certified · Powering a cleaner future ☀️</footer>
+</div></body></html>

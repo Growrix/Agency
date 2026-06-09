@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "transactional-c.html",
+        "type_slug":  "transactional-email-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/email-templates/transactional-email-templates/transactional-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\transactional-c.html"
+    },
+    {
+        "source_file":  "transactional-b.html",
+        "type_slug":  "transactional-email-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/email-templates/transactional-email-templates/transactional-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\transactional-b.html"
+    },
+    {
+        "source_file":  "transactional-a.html",
+        "type_slug":  "transactional-email-templates",
+        "parent_category_slug":  "email-templates",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/email-templates/transactional-email-templates/transactional-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/email-templates\\transactional-a.html"
+    }
+]

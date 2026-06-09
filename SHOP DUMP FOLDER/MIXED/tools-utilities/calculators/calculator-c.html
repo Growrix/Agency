@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Freelance Rate Calculator — What Should You Charge?</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#faf8f4;font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;color:#1a1208}
+.wrapper{max-width:760px;width:100%}
+.header{text-align:center;margin-bottom:40px}
+.header h1{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-.5px;color:#1a1208;margin-bottom:8px}
+.header p{font-size:14px;color:#8a7050;font-weight:300}
+.card{background:#fff;border-radius:20px;padding:36px;box-shadow:0 4px 32px rgba(0,0,0,.07);margin-bottom:20px;border:1px solid #f0e8d8}
+.card h2{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#1a1208;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid #f5ede0}
+.field{margin-bottom:20px}
+label{display:block;font-size:12px;font-weight:600;color:#5a4020;letter-spacing:.5px;text-transform:uppercase;margin-bottom:7px}
+.field-desc{font-size:12px;color:#b09070;margin-bottom:7px;font-weight:300}
+.input-row{display:flex;align-items:center;background:#faf7f2;border:1px solid #e8d8c0;border-radius:10px;overflow:hidden;transition:.15s}
+.input-row:focus-within{border-color:#c87820}
+.ip{padding:11px 14px;font-size:15px;font-weight:600;color:#c87820;background:#f5ede0;border-right:1px solid #e8d8c0;flex-shrink:0;min-width:40px;text-align:center}
+.inp{flex:1;background:transparent;border:none;padding:11px 14px;font-size:15px;color:#1a1208;font-family:'DM Sans',sans-serif;outline:none;font-weight:500}
+.inp::placeholder{color:#c0a880;font-weight:300}
+.isuf{padding:11px 14px;font-size:13px;color:#8a7050;background:#f5ede0;border-left:1px solid #e8d8c0;flex-shrink:0}
+.fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.calc-btn{width:100%;background:linear-gradient(135deg,#c87820,#e8a838);color:#fff;padding:16px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:'Syne',sans-serif;letter-spacing:.3px;margin-top:24px;transition:.2s}
+.calc-btn:hover{opacity:.9;transform:translateY(-1px)}
+.results{background:#1a1208;border-radius:20px;padding:36px;color:#f5ede0;margin-bottom:20px}
+.results h2{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#c8a040;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.rate-hero{text-align:center;margin-bottom:24px;padding:24px;background:rgba(200,168,64,.08);border:1px solid rgba(200,168,64,.15);border-radius:14px}
+.rh-label{font-size:11px;color:rgba(245,237,224,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.rh-rate{font-size:4rem;font-weight:800;letter-spacing:-2px;line-height:1;font-family:'Syne',sans-serif;color:#c8a040}
+.rh-sub{font-size:13px;color:rgba(245,237,224,.4);margin-top:6px}
+.rates-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.rate-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px;text-align:center}
+.rb-label{font-size:10px;color:rgba(245,237,224,.35);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+.rb-value{font-size:1.2rem;font-weight:700;color:#f5ede0;font-family:'Syne',sans-serif}
+.breakdown{display:flex;flex-direction:column;gap:8px}
+.bd-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.bd-row:last-child{border-bottom:none;font-weight:700;color:#c8a040}
+.bd-label{color:rgba(245,237,224,.5)}
+.bd-val{color:rgba(245,237,224,.9)}
+.tips{background:#fdf6ee;border:1px solid #f0e0b0;border-radius:16px;padding:24px}
+.tips h3{font-size:12px;font-weight:700;color:#8a5020;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.tip-list{display:flex;flex-direction:column;gap:8px}
+.tip{font-size:13px;color:#5a3820;line-height:1.6;display:flex;align-items:flex-start;gap:8px}
+.tip::before{content:'💡';flex-shrink:0}
+@media(max-width:580px){.fields-grid{grid-template-columns:1fr}.rates-row{grid-template-columns:1fr 1fr}.card,.results{padding:24px}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <h1>💰 Freelance Rate Calculator</h1>
+    <p>Find out exactly what you should charge — based on your actual costs and goals</p>
+  </div>
+  <div class="card">
+    <h2>Your Financial Targets</h2>
+    <div class="fields-grid">
+      <div class="field">
+        <label>Monthly Take-Home Goal</label>
+        <div class="field-desc">What you want to earn after expenses</div>
+        <div class="input-row"><span class="ip">৳</span><input class="inp" id="targetIncome" type="number" value="80000" placeholder="80000"></div>
+      </div>
+      <div class="field">
+        <label>Monthly Business Expenses</label>
+        <div class="field-desc">Software, internet, equipment, etc.</div>
+        <div class="input-row"><span class="ip">৳</span><input class="inp" id="expenses" type="number" value="15000" placeholder="15000"></div>
+      </div>
+      <div class="field">
+        <label>Tax Rate (approx.)</label>
+        <div class="field-desc">Set 0 if you file personally</div>
+        <div class="input-row"><input class="inp" id="taxRate" type="number" value="10" placeholder="10"><span class="isuf">%</span></div>
+      </div>
+      <div class="field">
+        <label>Savings / Buffer</label>
+        <div class="field-desc">Emergency fund, retirement</div>
+        <div class="input-row"><input class="inp" id="savings" type="number" value="10" placeholder="10"><span class="isuf">% of income</span></div>
+      </div>
+    </div>
+    <h2 style="margin-top:24px">Your Time</h2>
+    <div class="fields-grid">
+      <div class="field">
+        <label>Billable Hours per Week</label>
+        <div class="field-desc">Realistic hours spent on client work</div>
+        <div class="input-row"><input class="inp" id="billableHours" type="number" value="30" placeholder="30"><span class="isuf">hours</span></div>
+      </div>
+      <div class="field">
+        <label>Weeks Worked per Year</label>
+        <div class="field-desc">After holidays and sick days</div>
+        <div class="input-row"><input class="inp" id="weeksPerYear" type="number" value="46" placeholder="46"><span class="isuf">weeks</span></div>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcRate()">→ Calculate My Rate</button>
+  </div>
+  <div class="results" id="resultsDiv">
+    <h2>Your Recommended Rates</h2>
+    <div class="rate-hero">
+      <div class="rh-label">Minimum Hourly Rate</div>
+      <div class="rh-rate" id="hourlyRate">৳1,200</div>
+      <div class="rh-sub" id="rateSub">Based on 30 billable hrs/week</div>
+    </div>
+    <div class="rates-row">
+      <div class="rate-box"><div class="rb-label">Daily Rate</div><div class="rb-value" id="dayRate">৳9,600</div></div>
+      <div class="rate-box"><div class="rb-label">Project (1 week)</div><div class="rb-value" id="weekRate">৳48,000</div></div>
+      <div class="rate-box"><div class="rb-label">Monthly Retainer</div><div class="rb-value" id="monthRate">৳1,92,000</div></div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-row"><span class="bd-label">Target take-home</span><span class="bd-val" id="bdTakeHome">৳80,000</span></div>
+      <div class="bd-row"><span class="bd-label">Business expenses</span><span class="bd-val" id="bdExpenses">৳15,000</span></div>
+      <div class="bd-row"><span class="bd-label">Tax provision (10%)</span><span class="bd-val" id="bdTax">৳9,500</span></div>
+      <div class="bd-row"><span class="bd-label">Savings buffer (10%)</span><span class="bd-val" id="bdSavings">৳9,500</span></div>
+      <div class="bd-row"><span class="bd-label">Required monthly gross</span><span class="bd-val" id="bdGross">৳1,14,000</span></div>
+    </div>
+  </div>
+  <div class="tips">
+    <h3>Pricing Tips for Bangladeshi Freelancers</h3>
+    <div class="tip-list">
+      <div class="tip">This is your <strong>minimum</strong> rate — price higher for specialised skills, tight deadlines, or difficult clients.</div>
+      <div class="tip">For international clients, convert your rate to USD and research typical rates on Upwork for your niche. You'll often find you can charge more.</div>
+      <div class="tip">Charge project rates (not hourly) when you can — you earn more as you get faster, and clients prefer fixed costs.</div>
+    </div>
+  </div>
+</div>
+<script>
+function fmt(n){return'৳'+Math.round(n).toLocaleString('en-IN')}
+function calcRate(){
+  const target=+document.getElementById('targetIncome').value||0;
+  const expenses=+document.getElementById('expenses').value||0;
+  const taxRate=+document.getElementById('taxRate').value||0;
+  const savingsPct=+document.getElementById('savings').value||0;
+  const hrs=+document.getElementById('billableHours').value||1;
+  const weeks=+document.getElementById('weeksPerYear').value||46;
+  const savingsAmt=target*(savingsPct/100);
+  const preTax=target+savingsAmt+expenses;
+  const grossNeeded=preTax/(1-(taxRate/100));
+  const taxAmt=grossNeeded-preTax;
+  const annualNeeded=grossNeeded*12;
+  const totalBillableHrs=hrs*weeks;
+  const hourly=annualNeeded/totalBillableHrs;
+  const daily=hourly*8;
+  const weekly=hourly*hrs;
+  const monthly=hourly*hrs*4.33;
+  document.getElementById('hourlyRate').textContent=fmt(hourly);
+  document.getElementById('dayRate').textContent=fmt(daily);
+  document.getElementById('weekRate').textContent=fmt(weekly);
+  document.getElementById('monthRate').textContent=fmt(monthly);
+  document.getElementById('rateSub').textContent=`Based on ${hrs} billable hrs/week · ${weeks} weeks/year`;
+  document.getElementById('bdTakeHome').textContent=fmt(target);
+  document.getElementById('bdExpenses').textContent=fmt(expenses);
+  document.getElementById('bdTax').textContent=fmt(taxAmt/12);
+  document.getElementById('bdSavings').textContent=fmt(savingsAmt);
+  document.getElementById('bdGross').textContent=fmt(grossNeeded);
+}
+calcRate();
+</script>
+</body></html>

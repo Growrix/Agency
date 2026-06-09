@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Scoops — Artisan Ice Cream</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900;1000&family=Nunito+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;overflow:hidden}
+
+/* SQUISHY/GLOSSY — CANDY UI */
+/* Background: vivid rainbow gradient — warm candy land */
+.app-bg{
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%,  #ffb3d1 0%,transparent 55%),
+    radial-gradient(ellipse 60% 60% at 80% 20%,  #ffe0a0 0%,transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50% 80%,  #b3e8ff 0%,transparent 60%),
+    #fff5fa;
+  min-height:100vh;
+}
+
+/* GLOSSY CARD — the core squishy technique */
+.glossy{
+  border-radius:28px;
+  position:relative;overflow:hidden;
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.85) inset,   /* top highlight */
+    0 -3px 0 rgba(0,0,0,.06) inset,          /* bottom shadow */
+    0 14px 36px rgba(0,0,0,.1),
+    0 4px 10px rgba(0,0,0,.07);
+}
+/* Top specular gloss overlay */
+.glossy::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:48%;
+  background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.0) 100%);
+  border-radius:28px 28px 60% 60%;pointer-events:none;
+}
+
+/* Glossy CTA button */
+.g-btn{
+  display:block;border-radius:20px;padding:15px;
+  font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;
+  text-decoration:none;text-align:center;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 0 rgba(255,255,255,.5) inset,0 -3px 0 rgba(0,0,0,.1) inset,0 10px 28px rgba(0,0,0,.18),0 3px 8px rgba(0,0,0,.1);
+}
+.g-btn::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:48%;
+  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,transparent 100%);
+  border-radius:20px 20px 60% 60%;pointer-events:none;
+}
+.g-btn.pink{background:linear-gradient(160deg,#ff6eb0,#ff3d8a);color:#fff}
+.g-btn.mint{background:rgba(255,255,255,.6);color:rgba(30,10,20,.5);border:1.5px solid rgba(255,255,255,.9);box-shadow:0 3px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.05) inset,0 8px 20px rgba(0,0,0,.1)}
+
+/* Flavour card colours */
+.fl-pink{background:linear-gradient(145deg,#ffd6e8,#ffb3d0)}
+.fl-yellow{background:linear-gradient(145deg,#fff3b0,#ffe680)}
+.fl-blue{background:linear-gradient(145deg,#c3e8ff,#a8d8ff)}
+.fl-green{background:linear-gradient(145deg,#c8f5d8,#a8ecc0)}
+.fl-orange{background:linear-gradient(145deg,#ffe0b0,#ffc870)}
+.fl-purple{background:linear-gradient(145deg,#e8c8ff,#d4a8ff)}
+
+/* Hero */
+.hero{padding:28px 18px 22px;position:relative;overflow:hidden;min-height:286px;display:flex;flex-direction:column;justify-content:flex-end}
+.cone-bg{position:absolute;top:-20px;right:-10px;font-size:80px;opacity:.15;transform:rotate(15deg)}
+.sprinkles{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.sp-dot{position:absolute;border-radius:100px;animation:sp-float 3s ease-in-out infinite}
+@keyframes sp-float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-6px) rotate(180deg)}}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border-radius:100px;padding:6px 16px;font-size:11px;font-weight:900;color:#ff3d8a;margin-bottom:14px;width:fit-content;
+  box-shadow:0 3px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 8px 20px rgba(255,61,138,.2),0 2px 6px rgba(0,0,0,.07)}
+.hero-badge::after{display:none}
+.hero h1{font-family:'Nunito',sans-serif;font-size:48px;font-weight:1000;color:#2a0820;line-height:.85;letter-spacing:-3px}
+.hero h1 .scoop{color:#ff3d8a}
+.hero-sub{font-size:12px;color:rgba(42,8,32,.42);margin-top:9px;line-height:1.55;font-weight:700}
+.hero-rating{display:flex;align-items:center;gap:7px;margin-top:11px;font-size:12px;font-weight:800;color:rgba(42,8,32,.38)}
+
+/* Body */
+.body{padding:0 14px 44px}
+.sec{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:rgba(42,8,32,.3);margin:18px 0 12px;letter-spacing:-.3px}
+
+/* Flavour grid */
+.flavours{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.fl-card{border-radius:22px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:105px;
+  box-shadow:0 3px 0 rgba(255,255,255,.8) inset,0 -2px 0 rgba(0,0,0,.07) inset,0 8px 20px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.06)}
+.fl-card::after{display:none}
+.fl-icon{font-size:28px;margin-bottom:7px;filter:drop-shadow(0 3px 7px rgba(0,0,0,.15))}
+.fl-name{font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:#2a0820;letter-spacing:-.3px;line-height:1.2}
+.fl-price{font-size:10px;color:rgba(42,8,32,.4);margin-top:4px;font-weight:700}
+.fl-card.new-tag::before{content:'NEW';position:absolute;top:8px;right:8px;font-size:7px;font-weight:900;background:#ff3d8a;color:#fff;border-radius:100px;padding:2px 6px}
+.fl-card{position:relative;overflow:hidden}
+
+/* Size section */
+.sizes{display:flex;gap:8px}
+.size-card{flex:1;border-radius:20px;padding:14px;text-align:center;
+  box-shadow:0 3px 0 rgba(255,255,255,.8) inset,0 -2px 0 rgba(0,0,0,.07) inset,0 8px 20px rgba(0,0,0,.09),0 2px 5px rgba(0,0,0,.06)}
+.size-card::after{display:none}
+.s-icon{font-size:30px;display:block;margin-bottom:7px;filter:drop-shadow(0 3px 7px rgba(0,0,0,.12))}
+.s-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#2a0820}
+.s-desc{font-size:9px;color:rgba(42,8,32,.38);margin-top:2px;font-weight:700}
+.s-price{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:#ff3d8a;margin-top:6px}
+.s-mini{background:linear-gradient(145deg,#fff5fa,#ffe8f2)}
+.s-regular{background:linear-gradient(145deg,#ffd6e8,#ffb3d0)}
+.s-large{background:linear-gradient(145deg,#ff9ec8,#ff6eb0);box-shadow:0 3px 0 rgba(255,255,255,.4) inset,0 -2px 0 rgba(0,0,0,.1) inset,0 10px 28px rgba(255,110,176,.3),0 3px 8px rgba(0,0,0,.1)}
+.s-large .s-name, .s-large .s-desc{color:#fff}
+.s-large .s-price{color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+/* CTA */
+.cta-block{background:linear-gradient(155deg,#ff6eb0,#ff3d8a);border-radius:26px;padding:26px;text-align:center;margin-top:4px;
+  box-shadow:0 3px 0 rgba(255,255,255,.3) inset,0 -3px 0 rgba(0,0,0,.1) inset,0 16px 40px rgba(255,61,138,.3),0 4px 12px rgba(0,0,0,.12)}
+.cta-block::after{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.25),transparent);border-radius:26px 26px 60% 60%}
+.cta-block{position:relative;overflow:hidden}
+.cta-block h3{font-family:'Nunito',sans-serif;font-size:26px;font-weight:1000;color:#fff;letter-spacing:-1.5px;margin-bottom:8px;line-height:.9;position:relative;z-index:1}
+.cta-block p{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:20px;line-height:1.5;font-weight:700;position:relative;z-index:1}
+.cta-btns{position:relative;z-index:1}
+.contacts{background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:0 3px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.05) inset,0 8px 22px rgba(0,0,0,.08)}
+.contacts::after{display:none}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(255,182,210,.2);font-size:12px;color:rgba(42,8,32,.45);font-weight:700}
+.cr:last-child{border-bottom:none}
+.ci{width:32px;height:32px;background:linear-gradient(135deg,#ff6eb0,#ff3d8a);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
+  box-shadow:0 3px 8px rgba(255,61,138,.3)}
+footer{text-align:center;padding:20px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:rgba(42,8,32,.2)}
+</style>
+</head>
+<body><div class="app app-bg">
+<div class="hero">
+  <span class="cone-bg">🍦</span>
+  <div class="sprinkles">
+    <div class="sp-dot" style="width:8px;height:20px;background:#ff6eb0;top:20px;left:40px;animation-delay:0s;transform:rotate(30deg)"></div>
+    <div class="sp-dot" style="width:6px;height:16px;background:#ffe680;top:50px;left:110px;animation-delay:.5s;transform:rotate(-20deg)"></div>
+    <div class="sp-dot" style="width:7px;height:18px;background:#a8d8ff;top:30px;left:200px;animation-delay:1s;transform:rotate(50deg)"></div>
+    <div class="sp-dot" style="width:6px;height:14px;background:#c8f5d8;top:70px;left:160px;animation-delay:1.5s;transform:rotate(-40deg)"></div>
+    <div class="sp-dot" style="width:8px;height:20px;background:#e8c8ff;top:40px;left:280px;animation-delay:.3s;transform:rotate(15deg)"></div>
+    <div class="sp-dot" style="width:5px;height:14px;background:#ffc870;top:80px;left:320px;animation-delay:.8s;transform:rotate(-60deg)"></div>
+  </div>
+  <div class="hero-badge">🍦 Made fresh daily · No artificial colours</div>
+  <h1>Life is <span class="scoop">sweeter</span><br>with<br>scoops.</h1>
+  <div class="hero-sub">Handcrafted artisan ice cream in 30+ bold flavours. Made fresh every morning. Dine-in, takeaway & home delivery in Dhaka.</div>
+  <div class="hero-rating">⭐⭐⭐⭐⭐ 4.9 · 6,200+ happy customers</div>
+</div>
+
+<div class="body">
+  <div class="sec">Today's Flavours 🍨</div>
+  <div class="flavours">
+    <div class="fl-card fl-pink glossy"><div class="fl-icon">🍓</div><div class="fl-name">Strawberry Kiss</div><div class="fl-price">৳150</div></div>
+    <div class="fl-card fl-yellow glossy"><div class="fl-icon">🍌</div><div class="fl-name">Banana Split</div><div class="fl-price">৳150</div></div>
+    <div class="fl-card fl-blue glossy new-tag"><div class="fl-icon">🫐</div><div class="fl-name">Blueberry Swirl</div><div class="fl-price">৳180</div></div>
+    <div class="fl-card fl-green glossy"><div class="fl-icon">🍵</div><div class="fl-name">Matcha Cloud</div><div class="fl-price">৳180</div></div>
+    <div class="fl-card fl-orange glossy"><div class="fl-icon">🥭</div><div class="fl-name">Mango Tango</div><div class="fl-price">৳160</div></div>
+    <div class="fl-card fl-purple glossy new-tag"><div class="fl-icon">🍇</div><div class="fl-name">Grape Bubble</div><div class="fl-price">৳170</div></div>
+  </div>
+
+  <div class="sec">Pick Your Size 🍧</div>
+  <div class="sizes">
+    <div class="size-card s-mini glossy"><span class="s-icon">🍦</span><div class="s-name">Mini</div><div class="s-desc">1 scoop · 80ml</div><div class="s-price">৳120</div></div>
+    <div class="size-card s-regular glossy"><span class="s-icon">🍨</span><div class="s-name">Regular</div><div class="s-desc">2 scoops · 160ml</div><div class="s-price">৳200</div></div>
+    <div class="size-card s-large glossy"><span class="s-icon">🍧</span><div class="s-name">Large</div><div class="s-desc">3 scoops · 260ml</div><div class="s-price">৳280</div></div>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Order Now! 🛵</div>
+  <div class="cta-block">
+    <h3>🍦 Sweet delivery to your door!</h3>
+    <p>Order via WhatsApp for home delivery. Free cone on orders over ৳500!</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/8801700000000" class="g-btn pink" style="margin-bottom:10px">🛵 Order Now</a>
+      <a href="tel:+8801700000000" class="g-btn mint">📞 Call the shop</a>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Find Us 📍</div>
+  <div class="contacts glossy">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Dhanmondi 27, Dhaka · Takeaway & dine-in</div>
+    <div class="cr"><div class="ci">⏰</div>Daily 11am – 11pm</div>
+    <div class="cr"><div class="ci">📸</div>@scoops.dhaka</div>
+  </div>
+</div>
+<footer>© 2025 Scoops Artisan Ice Cream · Handcrafted with ❤️ in Dhaka 🍦</footer>
+</div></body></html>

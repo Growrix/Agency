@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "faq-kb-c.html",
+        "type_slug":  "faq-knowledge-base-pages",
+        "parent_category_slug":  "tools-utilities",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/tools-utilities/faq-knowledge-base-pages/faq-kb-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/faq\\faq-kb-c.html"
+    },
+    {
+        "source_file":  "faq-kb-b.html",
+        "type_slug":  "faq-knowledge-base-pages",
+        "parent_category_slug":  "tools-utilities",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/tools-utilities/faq-knowledge-base-pages/faq-kb-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/faq\\faq-kb-b.html"
+    },
+    {
+        "source_file":  "faq-kb-a.html",
+        "type_slug":  "faq-knowledge-base-pages",
+        "parent_category_slug":  "tools-utilities",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/tools-utilities/faq-knowledge-base-pages/faq-kb-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/faq\\faq-kb-a.html"
+    }
+]

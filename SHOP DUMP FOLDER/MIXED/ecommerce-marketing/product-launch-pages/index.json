@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "product-launch-c.html",
+        "type_slug":  "product-launch-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/ecommerce-marketing/product-launch-pages/product-launch-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\product-launch-c.html"
+    },
+    {
+        "source_file":  "product-launch-b.html",
+        "type_slug":  "product-launch-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/ecommerce-marketing/product-launch-pages/product-launch-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\product-launch-b.html"
+    },
+    {
+        "source_file":  "product-launch-a.html",
+        "type_slug":  "product-launch-pages",
+        "parent_category_slug":  "ecommerce-marketing",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/ecommerce-marketing/product-launch-pages/product-launch-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/website-templates\\product-launch-a.html"
+    }
+]

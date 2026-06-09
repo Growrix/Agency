@@ -31,17 +31,24 @@ const CHANNELS = [
 ];
 
 const SERVICE_INTERESTS = [
-  "Website template",
-  "Ready website",
-  "Premium custom website",
-  "SaaS application",
-  "Mobile app launch / marketing site",
-  "MCP Server",
-  "Automation",
+  { value: "buy_product", label: "Buy a digital product" },
+  { value: "customize_template", label: "Customize a purchased template" },
+  { value: "build_saas", label: "Build a SaaS product" },
+  { value: "seo_help", label: "Technical SEO help" },
+  { value: "website_build", label: "Custom website build" },
+  { value: "ai_automation", label: "AI or automation support" },
+  { value: "not_sure_yet", label: "Not sure yet" },
+] as const;
+
+const BUDGET_BANDS = [
+  "$15 - $49",
+  "$49 - $149",
+  "$149 - $399",
+  "$299 - $1,500",
+  "$1,500 - $8,000",
+  "$8,000+",
   "Not sure yet",
 ];
-
-const BUDGET_BANDS = ["$500 - $1k", "$1k - $3k", "$3k - $10k", "$10k - $25k", "$25k+", "Not sure yet"];
 const URGENCY = ["Exploring", "Within 30 days", "Within 90 days", "ASAP"];
 
 export default function ContactPage() {
@@ -202,7 +209,9 @@ export default function ContactPage() {
                     <Field label="Service interest">
                       <select name="service" className="signal-input" defaultValue="">
                         <option value="" disabled>Select one…</option>
-                        {SERVICE_INTERESTS.map((s) => <option key={s} value={s}>{s}</option>)}
+                          {SERVICE_INTERESTS.map((service) => (
+                            <option key={service.value} value={service.value}>{service.label}</option>
+                          ))}
                       </select>
                     </Field>
                     <div className="grid gap-5 sm:grid-cols-2">

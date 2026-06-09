@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Brand Identity Proposal — Botanic Wellness · Studio Fold</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#faf9f7;color:#1a1a1a;font-family:'DM Sans',sans-serif}
+.cover{background:#1a1a1a;color:#faf9f7;padding:80px 60px;min-height:460px;display:flex;flex-direction:column;justify-content:space-between}
+.cover-brand{font-size:15px;letter-spacing:3px;text-transform:uppercase;color:rgba(250,249,247,.3)}
+.cover h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1;margin-bottom:12px}
+.cover h1 em{color:#c8a840;font-style:italic}
+.cover-sub{font-size:14px;color:rgba(250,249,247,.4);letter-spacing:2px;margin-bottom:40px}
+.cover-meta-row{display:flex;gap:48px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:28px}
+.meta-item .label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,249,247,.3);margin-bottom:5px}
+.meta-item .value{font-size:14px;color:#faf9f7;font-weight:300}
+.page{max-width:860px;margin:0 auto;padding:64px 48px 0}
+.section{margin-bottom:60px}
+.sec-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c8a840;margin-bottom:12px}
+h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:20px;line-height:1.1}
+h2 em{color:#888;font-style:italic}
+p{font-size:15px;color:#5a5a5a;line-height:1.85;font-weight:300;margin-bottom:14px}
+.challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.challenge-card{border:1px solid #e8e4de;border-radius:10px;padding:22px}
+.challenge-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:8px;color:#1a1a1a}
+.challenge-card p{font-size:13px;margin:0}
+.deliverables{display:flex;flex-direction:column;gap:0;border-top:1px solid #e8e4de}
+.del-row{display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid #f0ece6}
+.del-row:last-child{border-bottom:none}
+.del-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#c8a840;font-style:italic}
+.del-name{font-size:14px;font-weight:500;color:#1a1a1a}
+.del-detail{font-size:12px;color:#888;margin-top:2px}
+.del-timeline{font-size:12px;color:#888;white-space:nowrap;text-align:right}
+.invest-box{background:#1a1a1a;color:#faf9f7;border-radius:14px;overflow:hidden}
+.invest-header{padding:28px 32px;border-bottom:1px solid rgba(255,255,255,.08)}
+.invest-header h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;font-style:italic}
+.invest-items{padding:0 32px}
+.invest-row{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.invest-row:last-child{border-bottom:none}
+.invest-name{font-size:14px;color:rgba(250,249,247,.7);font-weight:300}
+.invest-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#c8a840}
+.invest-total{background:rgba(200,168,64,.08);border-top:1px solid rgba(200,168,64,.15);padding:20px 32px;display:flex;justify-content:space-between;align-items:center}
+.invest-total .label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,249,247,.35)}
+.invest-total .amount{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#c8a840;font-style:italic}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:20px}
+.step{border-top:2px solid #e8e4de;padding-top:16px}
+.step.active{border-color:#c8a840}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#e8e4de;margin-bottom:8px;font-style:italic}
+.step.active .step-num{color:#c8a840}
+.step h4{font-size:13px;font-weight:500;margin-bottom:6px;color:#1a1a1a}
+.step p{font-size:12px;margin:0}
+.cta-section{background:#f5f2ec;border-radius:14px;padding:48px;text-align:center;margin-bottom:60px}
+.cta-section h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:10px}
+.cta-section h3 em{color:#c8a840;font-style:italic}
+.cta-section p{max-width:380px;margin:0 auto 28px;font-size:14px}
+.btn-accept{display:inline-block;background:#1a1a1a;color:#faf9f7;padding:15px 40px;text-decoration:none;border-radius:100px;font-size:14px;font-weight:500;margin-right:10px}
+.btn-question{display:inline-block;border:1px solid #ccc;color:#1a1a1a;padding:14px 28px;text-decoration:none;border-radius:100px;font-size:14px}
+@media(max-width:768px){.cover{padding:48px 24px}.page{padding:40px 24px 0}.challenge-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:1fr 1fr}.cta-section{padding:32px 24px}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-brand">Studio Fold · Creative Direction</div>
+  <div>
+    <h1>Brand Identity<br><em>Proposal</em></h1>
+    <div class="cover-sub">For Botanic Wellness Co. · Ref: SF-PROP-2025-03</div>
+  </div>
+  <div class="cover-meta-row">
+    <div class="meta-item"><div class="label">Client</div><div class="value">Botanic Wellness Co.</div></div>
+    <div class="meta-item"><div class="label">Contact</div><div class="value">Ms. Rina Sultana, CEO</div></div>
+    <div class="meta-item"><div class="label">Submitted</div><div class="value">22 May 2025</div></div>
+    <div class="meta-item"><div class="label">Valid Until</div><div class="value">5 June 2025</div></div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="section">
+    <div class="sec-label">01 · Understanding</div>
+    <h2>Where Botanic is <em>today</em>.</h2>
+    <p>Botanic Wellness is entering a competitive Dhaka wellness market with genuinely superior products — but the brand currently doesn't reflect that quality. The current visual identity feels generic, inconsistent across channels, and fails to communicate the premium, nature-rooted positioning you've articulated in our conversations.</p>
+    <p>The opportunity is significant. The wellness market in Bangladesh is growing at 24% YoY, and premium positioning is undercrowded. The brand you build now will define how you're perceived for the next decade.</p>
+    <div class="challenge-grid">
+      <div class="challenge-card"><h4>The Challenge</h4><p>Existing identity lacks consistency, premium feel, and clear visual differentiation from commodity wellness brands.</p></div>
+      <div class="challenge-card"><h4>The Opportunity</h4><p>Be the first Bangladeshi wellness brand that feels internationally refined while remaining culturally rooted.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label">02 · Deliverables</div>
+    <h2>What you'll <em>receive</em>.</h2>
+    <div class="deliverables">
+      <div class="del-row"><div class="del-num">1</div><div><div class="del-name">Brand Strategy Document</div><div class="del-detail">Positioning, voice &amp; tone, audience personas, competitive landscape, messaging hierarchy</div></div><div class="del-timeline">Week 1–2</div></div>
+      <div class="del-row"><div class="del-num">2</div><div><div class="del-name">Logo Suite</div><div class="del-detail">Primary logo, wordmark, icon, 5 colour variations, responsive versions — delivered in all formats</div></div><div class="del-timeline">Week 3–4</div></div>
+      <div class="del-row"><div class="del-num">3</div><div><div class="del-name">Brand Identity System</div><div class="del-detail">Full colour palette, typography system, iconography, photography direction, pattern/texture library</div></div><div class="del-timeline">Week 4–5</div></div>
+      <div class="del-row"><div class="del-num">4</div><div><div class="del-name">Brand Guidelines (50pp)</div><div class="del-detail">Comprehensive PDF guide for internal team, printers, and agencies to use the brand correctly</div></div><div class="del-timeline">Week 6</div></div>
+      <div class="del-row"><div class="del-num">5</div><div><div class="del-name">Social Media Templates</div><div class="del-detail">12 editable Canva templates for Instagram, Facebook, and Stories</div></div><div class="del-timeline">Week 6</div></div>
+      <div class="del-row"><div class="del-num">6</div><div><div class="del-name">Stationery Suite</div><div class="del-detail">Business card, letterhead, envelope, email signature — print-ready files</div></div><div class="del-timeline">Week 7</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label">03 · Investment</div>
+    <h2>The <em>numbers</em>.</h2>
+    <div class="invest-box">
+      <div class="invest-header"><h3>Brand Identity Programme</h3></div>
+      <div class="invest-items">
+        <div class="invest-row"><span class="invest-name">Brand Strategy &amp; Discovery</span><span class="invest-price">৳45,000</span></div>
+        <div class="invest-row"><span class="invest-name">Logo Design &amp; Identity System</span><span class="invest-price">৳60,000</span></div>
+        <div class="invest-row"><span class="invest-name">Brand Guidelines Document</span><span class="invest-price">৳20,000</span></div>
+        <div class="invest-row"><span class="invest-name">Social Media Templates (12)</span><span class="invest-price">৳18,000</span></div>
+        <div class="invest-row"><span class="invest-name">Stationery Suite</span><span class="invest-price">৳12,000</span></div>
+      </div>
+      <div class="invest-total"><div><div class="label">Total Investment</div><div style="font-size:12px;color:rgba(250,249,247,.25);margin-top:3px">50% on signing · 50% on final delivery</div></div><div class="amount">৳1,55,000</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-label">04 · Process</div>
+    <h2>How we <em>work together</em>.</h2>
+    <div class="process-steps">
+      <div class="step active"><div class="step-num">01</div><h4>Discover</h4><p>Brand audit, stakeholder interviews, competitor research.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Define</h4><p>Strategic direction locked. Design brief agreed before any visual work begins.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Design</h4><p>Iterative with full transparency. 2 revision rounds included.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Deliver</h4><p>All files transferred. Handoff session. 30-day support window.</p></div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>Ready to build something <em>lasting</em>?</h3>
+    <p>We typically begin within 5 business days of signing. We only take 3 brand projects at a time.</p>
+    <a href="#" class="btn-accept">Accept &amp; Sign Proposal</a>
+    <a href="#" class="btn-question">Ask a Question</a>
+    <p style="margin-top:16px;font-size:12px;color:#888">Expires 5 June 2025 · hello@studiofold.com.bd</p>
+  </div>
+</div>
+</body></html>

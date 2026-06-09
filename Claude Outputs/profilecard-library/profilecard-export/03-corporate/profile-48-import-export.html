@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>GlobalTrade BD — Import, Export & Trading</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Archivo',sans-serif;background:#030a14;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#040d18;margin:0 auto;color:#c8dce8}
+
+.hero{min-height:268px;background:#040d18;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 24px;border-bottom:1px solid rgba(0,160,140,.2)}
+.hero-globe{position:absolute;right:-20px;top:-20px;width:180px;height:180px;border:1.5px solid rgba(0,160,140,.08);border-radius:50%}
+.hero-globe::before{content:'';position:absolute;inset:30px;border:1px solid rgba(0,160,140,.06);border-radius:50%}
+.hero-globe::after{content:'';position:absolute;inset:60px;border:1px solid rgba(0,160,140,.04);border-radius:50%}
+.hero-meridian{position:absolute;right:70px;top:-20px;width:1px;height:180px;background:rgba(0,160,140,.06);transform:rotate(30deg)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,160,140,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,160,140,.04) 1px,transparent 1px);background-size:30px 30px}
+.h-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,160,140,.1);border:1px solid rgba(0,160,140,.25);border-radius:4px;padding:4px 12px;font-size:9px;color:#00b0a0;font-weight:600;letter-spacing:1px;margin-bottom:14px;width:fit-content}
+.h-dot{width:5px;height:5px;background:#4ade80;border-radius:50%;animation:b 1.5s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-size:36px;font-weight:800;color:#e8f0f8;line-height:.92;letter-spacing:-1px}
+.hero h1 .acc{color:#00b0a0}
+.hero-sub{font-size:11px;color:rgba(200,220,232,.35);margin-top:8px;line-height:1.5}
+.hero-lic{font-size:9px;color:rgba(200,220,232,.18);margin-top:8px;letter-spacing:.5px}
+
+.trade-figures{display:flex;background:rgba(0,160,140,.05);border-bottom:1px solid rgba(0,160,140,.12)}
+.tf{flex:1;text-align:center;padding:12px 0;border-right:1px solid rgba(0,160,140,.08)}
+.tf:last-child{border-right:none}
+.tf-n{font-family:'DM Mono',monospace;font-size:16px;color:#00b0a0;font-weight:500}
+.tf-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(200,220,232,.2);margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(0,176,160,.5);margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(0,160,140,.15)}
+
+.product-cats{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.cat{background:rgba(255,255,255,.03);border:1px solid rgba(0,160,140,.1);border-radius:8px;padding:12px}
+.cat-icon{font-size:22px;margin-bottom:6px}
+.cat-name{font-size:12px;font-weight:700;color:#c8dce8}
+.cat-items{font-size:10px;color:rgba(200,220,232,.3);margin-top:2px;line-height:1.4}
+.cat-volume{font-size:11px;font-weight:600;color:#00b0a0;margin-top:5px}
+
+.countries{display:flex;flex-wrap:wrap;gap:5px}
+.country{background:rgba(0,160,140,.06);border:1px solid rgba(0,160,140,.12);border-radius:4px;padding:4px 10px;font-size:10px;font-weight:500;color:rgba(200,220,232,.4);font-family:'DM Mono',monospace}
+
+.services{display:flex;flex-direction:column;gap:5px}
+.svc{background:rgba(255,255,255,.03);border:1px solid rgba(0,160,140,.08);border-radius:7px;padding:12px 13px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-name{font-size:12px;font-weight:600;color:#c8dce8}
+.svc-desc{font-size:10px;color:rgba(200,220,232,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-family:'DM Mono',monospace;font-size:13px;color:#00b0a0;flex-shrink:0}
+
+.cta{background:rgba(0,160,140,.08);border:1px solid rgba(0,160,140,.2);border-radius:10px;padding:20px;text-align:center;position:relative}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00b0a0,transparent)}
+.cta h3{font-size:18px;font-weight:800;color:#e8f0f8;margin-bottom:7px;letter-spacing:-.5px}
+.cta p{font-size:11px;color:rgba(200,220,232,.35);margin-bottom:14px;line-height:1.5}
+.cta-btn{display:block;background:#00b0a0;color:#040d18;border-radius:6px;padding:12px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:6px}
+.cta-btn2{display:block;background:rgba(255,255,255,.03);color:rgba(200,220,232,.3);border:1px solid rgba(0,160,140,.12);border-radius:6px;padding:10px;font-size:11px;text-decoration:none}
+
+.contacts{background:rgba(255,255,255,.02);border:1px solid rgba(0,160,140,.08);border-radius:7px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 13px;border-bottom:1px solid rgba(0,160,140,.06);font-size:12px;color:rgba(200,220,232,.3);font-family:'DM Mono',monospace}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:#00b0a0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+footer{background:#030a14;border-top:1px solid rgba(0,160,140,.1);padding:14px;text-align:center;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(200,220,232,.1)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-globe"></div>
+  <div class="hero-meridian"></div>
+  <div class="hero-grid"></div>
+  <div class="h-badge"><span class="h-dot"></span>Licensed Importer & Exporter</div>
+  <h1>Global<span class="acc">Trade</span><br>BD</h1>
+  <div class="hero-sub">Import, export, sourcing &amp; trading across 30+ countries. Your trusted partner for cross-border commerce.</div>
+  <div class="hero-lic">✓ NBR Import Lic · ✓ Export Lic · ✓ Chamber Member · ⭐ Est. 2008</div>
+</div>
+<div class="trade-figures">
+  <div class="tf"><div class="tf-n">$18M+</div><div class="tf-l">Annual trade</div></div>
+  <div class="tf"><div class="tf-n">30+</div><div class="tf-l">Countries</div></div>
+  <div class="tf"><div class="tf-n">16yr</div><div class="tf-l">Experience</div></div>
+</div>
+<div class="body">
+  <div class="sec">Product Categories</div>
+  <div class="product-cats">
+    <div class="cat"><div class="cat-icon">🔩</div><div class="cat-name">Industrial Machinery</div><div class="cat-items">CNC, generators, compressors</div><div class="cat-volume">$5M+ / year</div></div>
+    <div class="cat"><div class="cat-icon">🌾</div><div class="cat-name">Agricultural</div><div class="cat-items">Fertiliser, seeds, agri-inputs</div><div class="cat-volume">$3M+ / year</div></div>
+    <div class="cat"><div class="cat-icon">🧪</div><div class="cat-name">Chemicals</div><div class="cat-items">Industrial, pharma-grade</div><div class="cat-volume">$4M+ / year</div></div>
+    <div class="cat"><div class="cat-icon">👗</div><div class="cat-name">RMG Export</div><div class="cat-items">Garments, fabrics, accessories</div><div class="cat-volume">$6M+ / year</div></div>
+  </div>
+  <div class="sec">Countries We Trade With</div>
+  <div class="countries">
+    <div class="country">🇨🇳 China</div><div class="country">🇮🇳 India</div><div class="country">🇩🇪 Germany</div>
+    <div class="country">🇸🇬 Singapore</div><div class="country">🇺🇸 USA</div><div class="country">🇦🇪 UAE</div>
+    <div class="country">🇬🇧 UK</div><div class="country">30+ more</div>
+  </div>
+  <div class="sec">Trade Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Import Sourcing</div><div class="svc-desc">Supplier identification, negotiation, QC, customs</div></div><div class="svc-price">3–5%</div></div>
+    <div class="svc"><div><div class="svc-name">Export Facilitation</div><div class="svc-desc">Buyer matching, documentation, freight forwarding</div></div><div class="svc-price">2–4%</div></div>
+    <div class="svc"><div><div class="svc-name">L/C & Trade Finance</div><div class="svc-desc">Letter of credit advisory, bank liaison</div></div><div class="svc-price">Custom</div></div>
+  </div>
+  <div class="sec">Trade Enquiries</div>
+  <div class="cta">
+    <h3>Find your trading partner.</h3>
+    <p>Tell us what you need to import or export. We'll present verified suppliers or buyers within 72 hours.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🌍 Submit Trade Enquiry</a>
+    <a href="mailto:trade@globaltrade.com.bd" class="cta-btn2">trade@globaltrade.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Trade Centre, Motijheel, Dhaka</div>
+    <div class="cr"><div class="ci">🌐</div>www.globaltrade.com.bd</div>
+  </div>
+</div>
+<footer>GlobalTrade BD · Import · Export · Trading · Dhaka · Est. 2008</footer>
+</div></body></html>

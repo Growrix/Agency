@@ -2,25 +2,28 @@
 
 import { useState, type FormEvent } from "react";
 import { Button, LinkButton } from "@/components/primitives/Button";
+import type { CheckoutSelection } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
 type CheckoutExperienceProps = {
   product?: PublicShopProductRecord | null;
   status?: string;
   orderId?: string;
+  selection?: CheckoutSelection;
 };
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
-export function CheckoutExperience({ product, status, orderId }: CheckoutExperienceProps) {
+export function CheckoutExperience({ product, status, orderId, selection }: CheckoutExperienceProps) {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("Checkout could not start. Please try again.");
   const [fallbackMessage, setFallbackMessage] = useState<string | null>(null);
+  const selectedTierLabel = selection?.tierName?.trim();
 
   if (status === "success") {
     return (
       <div className="rounded-[16px] border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
-        Payment flow returned successfully. {orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be processing.
+        Payment flow returned successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}{orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be processing.
       </div>
     );
   }
@@ -28,7 +31,7 @@ export function CheckoutExperience({ product, status, orderId }: CheckoutExperie
   if (status === "cancelled") {
     return (
       <div className="rounded-[16px] border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
-        Checkout was cancelled before payment. Your order draft is still available for follow-up if you restart the flow.
+        Checkout was cancelled before payment. {selectedTierLabel ? `Tier ${selectedTierLabel} is still selected. ` : ""}Your order draft is still available for follow-up if you restart the flow.
       </div>
     );
   }
@@ -36,7 +39,7 @@ export function CheckoutExperience({ product, status, orderId }: CheckoutExperie
   if (!product) {
     return (
       <div className="flex flex-wrap gap-3">
-        <LinkButton href="/shop" size="lg">Go to shop</LinkButton>
+        <LinkButton href="/products" size="lg">Go to products</LinkButton>
         <LinkButton href="/contact" variant="outline" size="lg">Request invoice</LinkButton>
       </div>
     );
@@ -58,6 +61,9 @@ export function CheckoutExperience({ product, status, orderId }: CheckoutExperie
         body: JSON.stringify({
           ...data,
           product_slug: product.slug,
+          product_variant_slug: selection?.variantSlug,
+          product_tier_name: selection?.tierName,
+          fulfillment_type: selection?.fulfillmentType,
         }),
       });
 
@@ -114,6 +120,13 @@ export function CheckoutExperience({ product, status, orderId }: CheckoutExperie
         <p className="rounded-[14px] border border-border bg-surface px-4 py-3 text-sm text-text-muted">{fallbackMessage}</p>
       ) : null}
       {submitState === "error" ? <p className="text-sm text-destructive">{errorMessage}</p> : null}
+      {selection?.tierName || selection?.variantSlug || selection?.fulfillmentType ? (
+        <p className="text-sm text-text-muted">
+          Selected package: {selection?.tierName ?? "Base"}
+          {selection?.variantSlug ? ` · ${selection.variantSlug}` : ""}
+          {selection?.fulfillmentType ? ` · ${selection.fulfillmentType}` : ""}
+        </p>
+      ) : null}
       <div className="flex flex-wrap gap-3">
         <Button type="submit" disabled={submitState === "submitting"} size="lg">
           {submitState === "submitting" ? "Starting checkout..." : "Continue to payment"}

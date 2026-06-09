@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Street Hunger — Fast Casual Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff9f0;color:#1a1208;font-family:'Nunito',sans-serif;min-height:100vh}
+header{background:#e82020;padding:28px 24px;text-align:center;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(0,0,0,.05) 10px,rgba(0,0,0,.05) 20px)}
+.brand{position:relative;z-index:1}
+.brand h1{font-family:'Permanent Marker',cursive;font-size:clamp(2.5rem,7vw,4rem);color:#fff;letter-spacing:2px;line-height:1;margin-bottom:6px;text-shadow:4px 4px 0 rgba(0,0,0,.2)}
+.brand p{color:rgba(255,255,255,.75);font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.order-strip{background:#1a1208;padding:12px 24px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.order-strip span{font-size:12px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.filter-tabs{display:flex;gap:0;overflow-x:auto;border-bottom:3px solid #1a1208;background:#fff9f0;padding:0 24px}
+.tab{padding:14px 24px;font-size:14px;font-weight:700;color:#8a7060;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap;transition:.15s;text-decoration:none;display:block}
+.tab.active,.tab:hover{color:#e82020;border-color:#e82020}
+.menu{max-width:1000px;margin:0 auto;padding:32px 24px}
+.category{margin-bottom:48px}
+.cat-title{font-family:'Permanent Marker',cursive;font-size:2rem;color:#1a1208;margin-bottom:24px;display:flex;align-items:center;gap:16px}
+.cat-title span{font-size:1.5rem}
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.item-card{background:#fff;border-radius:16px;overflow:hidden;border:2px solid #e8ddd0;transition:.2s;cursor:pointer}
+.item-card:hover{border-color:#e82020;transform:translateY(-3px);box-shadow:0 8px 24px rgba(232,32,32,.12)}
+.item-img{height:160px;background:#f8f0e8;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative}
+.badge-strip{position:absolute;top:12px;left:12px;display:flex;gap:6px}
+.badge{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.badge-hot{background:#e82020;color:#fff}
+.badge-new{background:#f59e0b;color:#fff}
+.badge-veg{background:#16a34a;color:#fff}
+.badge-bestseller{background:#7c3aed;color:#fff}
+.item-body{padding:16px}
+.item-name{font-size:16px;font-weight:800;color:#1a1208;margin-bottom:4px}
+.item-desc{font-size:13px;color:#8a7060;line-height:1.5;margin-bottom:12px;font-weight:400}
+.item-footer{display:flex;justify-content:space-between;align-items:center}
+.item-price{font-family:'Permanent Marker',cursive;font-size:22px;color:#e82020}
+.add-btn{background:#e82020;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
+.add-btn:hover{background:#c81010}
+.banner{background:linear-gradient(135deg,#f59e0b,#e82020);margin:0 24px 32px;border-radius:16px;padding:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.banner h3{font-family:'Permanent Marker',cursive;font-size:1.5rem;color:#fff}
+.banner p{color:rgba(255,255,255,.85);font-size:13px;margin-top:4px}
+.banner .code{background:rgba(255,255,255,.25);border:2px dashed rgba(255,255,255,.5);border-radius:8px;padding:8px 20px;font-family:'Permanent Marker',cursive;font-size:1.2rem;color:#fff;white-space:nowrap}
+footer{background:#1a1208;padding:24px;text-align:center;color:rgba(255,255,255,.4);font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="brand"><h1>Street Hunger 🔥</h1><p>Fast · Fresh · Furious</p></div></header>
+<div class="order-strip"><span>🛵 Delivery: 25–35 min</span><span>📍 Dhanmondi, Dhaka</span><span>⏰ 11AM – 11PM Daily</span><span>📞 16XXX</span></div>
+<div class="filter-tabs"><a href="#" class="tab active">🍔 Burgers</a><a href="#" class="tab">🍗 Chicken</a><a href="#" class="tab">🌮 Wraps</a><a href="#" class="tab">🍟 Sides</a><a href="#" class="tab">🥤 Drinks</a></div>
+<div class="menu">
+  <div class="banner"><div><h3>Today's Deal! 🎉</h3><p>Get any burger + large fries + drink combo for ৳450</p></div><div class="code">COMBO450</div></div>
+  <div class="category">
+    <div class="cat-title"><span>🍔</span>Signature Burgers</div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-img">🍔<div class="badge-strip"><span class="badge badge-bestseller">Best Seller</span></div></div><div class="item-body"><div class="item-name">The OG Smash Burger</div><div class="item-desc">Double smashed beef patty, American cheese, pickles, caramelised onions &amp; special sauce on a brioche bun.</div><div class="item-footer"><div class="item-price">৳380</div><button class="add-btn">+ Add</button></div></div></div>
+      <div class="item-card"><div class="item-img">🌶️<div class="badge-strip"><span class="badge badge-hot">Spicy 🌶️🌶️</span></div></div><div class="item-body"><div class="item-name">Inferno Burger</div><div class="item-desc">Double beef, ghost pepper sauce, jalapeños, sriracha mayo, and crispy onions. Not for the faint-hearted.</div><div class="item-footer"><div class="item-price">৳420</div><button class="add-btn">+ Add</button></div></div></div>
+      <div class="item-card"><div class="item-img">🥬<div class="badge-strip"><span class="badge badge-veg">Veg</span><span class="badge badge-new">New</span></div></div><div class="item-body"><div class="item-name">Crispy Mushroom Stack</div><div class="item-desc">Battered oyster mushrooms, avocado cream, pickled cabbage, and herb mayo on a sesame bun.</div><div class="item-footer"><div class="item-price">৳340</div><button class="add-btn">+ Add</button></div></div></div>
+    </div>
+  </div>
+  <div class="category">
+    <div class="cat-title"><span>🍗</span>Fried Chicken</div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-img">🍗<div class="badge-strip"><span class="badge badge-bestseller">Popular</span></div></div><div class="item-body"><div class="item-name">3-Piece Crunch Basket</div><div class="item-desc">Triple-battered chicken pieces fried golden. Served with coleslaw, pickles, and your choice of dip.</div><div class="item-footer"><div class="item-price">৳350</div><button class="add-btn">+ Add</button></div></div></div>
+      <div class="item-card"><div class="item-img">🌶️<div class="badge-strip"><span class="badge badge-hot">Nashville Hot</span></div></div><div class="item-body"><div class="item-name">Nashville Hot Tenders</div><div class="item-desc">4 crispy tenders soaked in our house-made Nashville hot sauce. Comes with pickles and white bread.</div><div class="item-footer"><div class="item-price">৳380</div><button class="add-btn">+ Add</button></div></div></div>
+    </div>
+  </div>
+</div>
+<footer>© 2025 Street Hunger · Dhanmondi, Dhaka · Prices include VAT</footer>
+</body></html>

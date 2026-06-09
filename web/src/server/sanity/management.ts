@@ -19,6 +19,14 @@ function servicePageDocumentId(slug: string) {
   return `servicePage.${slug}`;
 }
 
+function htmlBusinessProfileTemplateDocumentId(slug: string) {
+  return `htmlBusinessProfileTemplate.${slug}`;
+}
+
+function normalizeHtmlBusinessProfileTemplateSlug(slug: string) {
+  return slug.replace(/^html-business-profile-/, "");
+}
+
 export async function upsertSanityShopItem(record: ManagedProductRecord) {
   if (!isSanityWriteConfigured()) {
     return false;
@@ -47,8 +55,34 @@ export async function upsertSanityShopItem(record: ManagedProductRecord) {
     teaser: record.teaser,
     summary: record.summary,
     audience: record.audience,
+    features: record.features ?? [],
+    variants: (record.variants ?? []).map((variant) => ({
+      slug: variant.slug,
+      tierName: variant.tier_name,
+      title: variant.title,
+      price: variant.price,
+      fulfillmentType: variant.fulfillment_type,
+      includes: variant.includes,
+      comparisonPoints: variant.comparison_points ?? [],
+      recommended: variant.recommended ?? false,
+    })),
+    faqs: (record.faqs ?? []).map((faq) => ({
+      question: faq.question,
+      answer: faq.answer,
+    })),
+    relatedProductSlugs: record.related_product_slugs ?? [],
+    relatedServiceSlugs: record.related_service_slugs ?? [],
+    customizationUpsells: (record.customization_upsells ?? []).map((upsell) => ({
+      title: upsell.title,
+      description: upsell.description,
+      ctaLabel: upsell.cta_label,
+      ctaHref: upsell.cta_href,
+    })),
     previewVariant: record.previewVariant,
     includes: record.includes,
+    inScope: record.inScope ?? [],
+    outOfScope: record.outOfScope ?? [],
+    enhancementPlan: record.enhancementPlan ?? [],
     stack: record.stack,
     highlights: record.highlights,
     mainImageAlt: record.image?.alt,
@@ -64,6 +98,79 @@ export async function deleteSanityShopItem(slug: string) {
 
   const client = getSanityClient({ preview: true });
   await client.delete(shopItemDocumentId(slug));
+  return true;
+}
+
+export async function upsertSanityHtmlBusinessProfileTemplate(record: ManagedProductRecord) {
+  if (!isSanityWriteConfigured()) {
+    return false;
+  }
+
+  const client = getSanityClient({ preview: true });
+  const normalizedSlug = normalizeHtmlBusinessProfileTemplateSlug(record.slug);
+  const profileMatch = /^profile-(\d+)-/i.exec(normalizedSlug);
+  const parsedProfileNumber = profileMatch ? Number.parseInt(profileMatch[1] ?? "", 10) : undefined;
+  const profileNumber = Number.isFinite(parsedProfileNumber) ? parsedProfileNumber : undefined;
+
+  await client.createOrReplace({
+    _id: htmlBusinessProfileTemplateDocumentId(normalizedSlug),
+    _type: "htmlBusinessProfileTemplate",
+    name: record.name,
+    slug: { _type: "slug", current: normalizedSlug },
+    profileNumber,
+    teaser: record.teaser,
+    summary: record.summary,
+    audience: record.audience,
+    features: record.features ?? [],
+    variants: (record.variants ?? []).map((variant) => ({
+      slug: variant.slug,
+      tierName: variant.tier_name,
+      title: variant.title,
+      price: variant.price,
+      fulfillmentType: variant.fulfillment_type,
+      includes: variant.includes,
+      comparisonPoints: variant.comparison_points ?? [],
+      recommended: variant.recommended ?? false,
+    })),
+    faqs: (record.faqs ?? []).map((faq) => ({
+      question: faq.question,
+      answer: faq.answer,
+    })),
+    relatedProductSlugs: record.related_product_slugs ?? [],
+    relatedServiceSlugs: record.related_service_slugs ?? [],
+    customizationUpsells: (record.customization_upsells ?? []).map((upsell) => ({
+      title: upsell.title,
+      description: upsell.description,
+      ctaLabel: upsell.cta_label,
+      ctaHref: upsell.cta_href,
+    })),
+    includes: record.includes,
+    inScope: record.inScope ?? [],
+    outOfScope: record.outOfScope ?? [],
+    enhancementPlan: record.enhancementPlan ?? [],
+    stack: record.stack,
+    highlights: record.highlights,
+    category: record.type,
+    categorySlug: record.typeSlug,
+    published: record.published ?? true,
+    price: record.price,
+    orderRank: 100,
+    livePreviewUrl: record.livePreviewUrl,
+    embeddedPreviewUrl: record.embeddedPreviewUrl,
+    previewImageAlt: record.image?.alt,
+  });
+
+  return true;
+}
+
+export async function deleteSanityHtmlBusinessProfileTemplate(slug: string) {
+  if (!isSanityWriteConfigured()) {
+    return false;
+  }
+
+  const client = getSanityClient({ preview: true });
+  const normalizedSlug = normalizeHtmlBusinessProfileTemplateSlug(slug);
+  await client.delete(htmlBusinessProfileTemplateDocumentId(normalizedSlug));
   return true;
 }
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>FluxChain — Supply Chain & Logistics Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Barlow',sans-serif;background:#0a0e14;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0c1018;margin:0 auto;color:#c0ccd8}
+/* INDUSTRIAL DATA GRID HERO */
+.hero{min-height:262px;background:#0c1018;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 20px;border-bottom:2px solid #1e5080}
+.data-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(30,80,128,.06) 1px,transparent 1px);background-size:100% 22px}
+.cargo-icon{position:absolute;right:14px;top:18px;font-size:50px;opacity:.06}
+.h-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(30,80,128,.15);border:1px solid rgba(30,80,128,.35);border-radius:3px;padding:4px 12px;font-size:9px;color:rgba(96,160,220,.7);font-weight:600;letter-spacing:1.5px;margin-bottom:12px;width:fit-content}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:40px;color:#e0eaf4;line-height:.9;letter-spacing:-1px}
+.hero h1 .acc{color:#1e80c8}
+.hero-sub{font-size:10px;color:rgba(192,204,216,.35);margin-top:8px;letter-spacing:1px;text-transform:uppercase}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.hm{background:rgba(30,80,128,.1);border:1px solid rgba(30,80,128,.2);padding:8px 0;text-align:center;border-radius:3px}
+.hm-n{font-family:'Archivo Black',sans-serif;font-size:14px;color:#60c8f0}
+.hm-l{font-size:7px;color:rgba(192,204,216,.3);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+.body{padding:0 18px 40px}
+.sec{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(30,128,200,.5);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(30,80,128,.2)}
+.pipeline{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:2px}
+.pipeline::-webkit-scrollbar{display:none}
+.pipe-step{flex-shrink:0;background:#141c28;border:1px solid rgba(30,80,128,.15);padding:12px;min-width:100px;position:relative;text-align:center}
+.pipe-step:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:rgba(30,80,128,.4);font-size:14px;z-index:1;background:#0c1018;padding:0 2px}
+.pipe-step:not(:last-child){border-right:none}
+.ps-icon{font-size:20px;margin-bottom:5px}
+.ps-name{font-size:10px;font-weight:600;color:#c0ccd8;letter-spacing:.2px}
+.services{display:flex;flex-direction:column;gap:5px}
+.svc{background:#141c28;border:1px solid rgba(30,80,128,.12);border-radius:4px;padding:12px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-name{font-size:12px;font-weight:600;color:#c0ccd8}
+.svc-desc{font-size:10px;color:rgba(192,204,216,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-family:'Archivo Black',sans-serif;font-size:13px;color:#1e80c8;flex-shrink:0}
+.cta{background:#141c28;border:1px solid rgba(30,80,128,.2);border-radius:6px;padding:18px;text-align:center}
+.cta h3{font-family:'Archivo Black',sans-serif;font-size:18px;color:#e0eaf4;letter-spacing:-.5px;margin-bottom:6px}
+.cta p{font-size:11px;color:rgba(192,204,216,.35);margin-bottom:14px;line-height:1.5}
+.cta-btn{display:block;background:#1e5080;color:#e0eaf4;border-radius:4px;padding:12px;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:6px}
+.cta-btn2{display:block;background:transparent;color:rgba(192,204,216,.35);border:1px solid rgba(30,80,128,.2);border-radius:4px;padding:10px;font-size:11px;text-decoration:none}
+.contacts{background:#141c28;border:1px solid rgba(30,80,128,.1);border-radius:4px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(30,80,128,.08);font-size:12px;color:rgba(192,204,216,.35)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:#1e5080;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{background:#080c10;border-top:2px solid #1e5080;padding:14px;text-align:center;font-family:'Archivo Black',sans-serif;font-size:11px;letter-spacing:1px;color:rgba(192,204,216,.1)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="data-lines"></div>
+  <div class="cargo-icon">🚢</div>
+  <div class="h-tag">📦 Supply Chain & Logistics Advisory</div>
+  <h1>Flux<span class="acc">Chain</span></h1>
+  <div class="hero-sub">Procurement · Inventory · 3PL · Import/Export · Digital Supply Chain</div>
+  <div class="hero-metrics">
+    <div class="hm"><div class="hm-n">120+</div><div class="hm-l">Clients</div></div>
+    <div class="hm"><div class="hm-n">$2B+</div><div class="hm-l">Spend Mgd</div></div>
+    <div class="hm"><div class="hm-n">30%</div><div class="hm-l">Avg Save</div></div>
+    <div class="hm"><div class="hm-n">12yr</div><div class="hm-l">Practice</div></div>
+  </div>
+</div>
+<div class="body">
+  <div class="sec">Supply Chain Pipeline</div>
+  <div class="pipeline">
+    <div class="pipe-step"><div class="ps-icon">🔍</div><div class="ps-name">Source</div></div>
+    <div class="pipe-step"><div class="ps-icon">🏭</div><div class="ps-name">Produce</div></div>
+    <div class="pipe-step"><div class="ps-icon">🚢</div><div class="ps-name">Move</div></div>
+    <div class="pipe-step"><div class="ps-icon">🏪</div><div class="ps-name">Store</div></div>
+    <div class="pipe-step"><div class="ps-icon">🚚</div><div class="ps-name">Deliver</div></div>
+  </div>
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Supply Chain Audit</div><div class="svc-desc">End-to-end mapping, bottleneck identification, cost analysis</div></div><div class="svc-price">$12,000+</div></div>
+    <div class="svc"><div><div class="svc-name">Procurement Optimisation</div><div class="svc-desc">Vendor rationalisation, contract negotiation, cost reduction</div></div><div class="svc-price">$8,000+</div></div>
+    <div class="svc"><div><div class="svc-name">3PL Selection & Setup</div><div class="svc-desc">Logistics partner identification, SLA design, KPI framework</div></div><div class="svc-price">$6,000+</div></div>
+    <div class="svc"><div><div class="svc-name">Digital SC Transformation</div><div class="svc-desc">ERP, WMS, TMS selection and implementation support</div></div><div class="svc-price">Custom</div></div>
+  </div>
+  <div class="sec">Engage FluxChain</div>
+  <div class="cta">
+    <h3>Streamline your supply chain.</h3>
+    <p>Free 1-hour supply chain diagnostic. We'll identify your top 3 cost-saving opportunities at no charge.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📦 Book Free Diagnostic</a>
+    <a href="mailto:hello@fluxchain.com.bd" class="cta-btn2">hello@fluxchain.com.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Motijheel, Dhaka · Ports nationwide</div>
+  </div>
+</div>
+<footer>FLUXCHAIN · SUPPLY CHAIN CONSULTING · DHAKA</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

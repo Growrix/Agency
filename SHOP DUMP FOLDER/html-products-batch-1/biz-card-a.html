@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tahmid Hasan — Creative Director</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&family=Cabinet+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;min-height:100vh}
+body{background:linear-gradient(135deg,#0d0d14 0%,#14121e 50%,#0d1014 100%);display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Cabinet Grotesk',sans-serif;padding:20px}
+.card{width:400px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:28px;overflow:hidden;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 32px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06)}
+.card-header{background:linear-gradient(135deg,#7c3aed,#ec4899,#f59e0b);padding:40px;text-align:center;position:relative;overflow:hidden}
+.card-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.avatar{width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.2);border:3px solid rgba(255,255,255,.4);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;z-index:1;backdrop-filter:blur(10px)}
+.card-header h1{font-family:'Clash Display',sans-serif;font-size:24px;color:#fff;font-weight:700;position:relative;z-index:1;margin-bottom:4px}
+.card-header p{color:rgba(255,255,255,.75);font-size:13px;font-weight:300;position:relative;z-index:1}
+.status{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;font-size:11px;color:#fff;font-weight:500;margin-top:12px;position:relative;z-index:1;backdrop-filter:blur(10px)}
+.status::before{content:'';width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.card-body{padding:32px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.info-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px}
+.info-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+.info-value{font-size:13px;color:#e2e8f0;font-weight:500}
+.links{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.link-btn{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#e2e8f0;text-decoration:none;font-size:14px;transition:.2s;background:rgba(255,255,255,.02)}
+.link-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(124,58,237,.4)}
+.link-icon{font-size:18px}
+.link-arrow{color:rgba(255,255,255,.3);font-size:18px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.action-btn{padding:13px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;text-align:center;transition:.2s;font-family:'Cabinet Grotesk',sans-serif}
+.action-primary{background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff}
+.action-secondary{border:1px solid rgba(255,255,255,.12);color:#e2e8f0;background:transparent}
+.action-secondary:hover{background:rgba(255,255,255,.06)}
+.qr-section{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;margin-top:28px;display:flex;align-items:center;gap:20px}
+.qr-box{width:64px;height:64px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.qr-text p:first-child{font-size:13px;color:#e2e8f0;font-weight:500;margin-bottom:3px}
+.qr-text p:last-child{font-size:11px;color:rgba(255,255,255,.35)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+    <div class="avatar">🎨</div>
+    <h1>Tahmid Hasan</h1>
+    <p>Creative Director · Brand Strategist</p>
+    <div class="status">Available for work</div>
+  </div>
+  <div class="card-body">
+    <div class="info-grid">
+      <div class="info-item"><div class="info-label">Location</div><div class="info-value">Dhaka, BD</div></div>
+      <div class="info-item"><div class="info-label">Experience</div><div class="info-value">8 Years</div></div>
+      <div class="info-item"><div class="info-label">Speciality</div><div class="info-value">Brand Identity</div></div>
+      <div class="info-item"><div class="info-label">Rate</div><div class="info-value">৳8K/day</div></div>
+    </div>
+    <div class="links">
+      <a href="#" class="link-btn"><span>🌐 Portfolio — tahmid.design</span><span class="link-arrow">→</span></a>
+      <a href="#" class="link-btn"><span>in LinkedIn — /in/tahmid-hasan</span><span class="link-arrow">→</span></a>
+      <a href="#" class="link-btn"><span>📸 Instagram — @tahmidcreates</span><span class="link-arrow">→</span></a>
+    </div>
+    <div class="actions">
+      <a href="mailto:hello@tahmid.design" class="action-btn action-primary">✉ Email Me</a>
+      <a href="tel:+8801700000000" class="action-btn action-secondary">📞 Call</a>
+    </div>
+    <div class="qr-section">
+      <div class="qr-box">▦</div>
+      <div class="qr-text"><p>Scan to save contact</p><p>Or tap to download .vcf card</p></div>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>TalentBridge — HR & Recruitment Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Raleway',sans-serif;background:#3a1218;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#fff9f8;margin:0 auto}
+
+.hero{min-height:278px;background:linear-gradient(160deg,#e84a6a 0%,#c03050 50%,#8a1830 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 26px}
+.hero-people{position:absolute;right:-10px;top:16px;display:flex;gap:-8px;opacity:.15;font-size:52px;letter-spacing:-10px}
+.hero-arc{position:absolute;bottom:-20px;left:-20px;width:180px;height:180px;border:1.5px solid rgba(255,255,255,.08);border-radius:50%}
+.hero-arc2{position:absolute;bottom:-40px;left:-40px;width:240px;height:240px;border:1px solid rgba(255,255,255,.05);border-radius:50%}
+.h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:10px;color:#fff;font-weight:600;margin-bottom:14px;width:fit-content}
+.h-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:b 1.5s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:36px;font-weight:800;color:#fff;line-height:.93;letter-spacing:-1px}
+.hero h1 span{color:rgba(255,220,220,.7);font-weight:300}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:10px;line-height:1.6}
+.hero-stats{display:flex;gap=16px;margin-top:14px;gap:16px}
+.hs{text-align:center}
+.hs-n{font-size:20px;font-weight:800;color:#fff}
+.hs-l{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.5px}
+
+.specialisms{display:flex;gap:6px;padding:12px 18px;background:#fff;border-bottom:1px solid #ffd0d8;overflow-x:auto;scrollbar-width:none}
+.specialisms::-webkit-scrollbar{display:none}
+.spec{background:#fff0f3;border:1px solid #ffc0c8;border-radius:100px;padding:5px 12px;font-size:10px;color:#c03050;font-weight:700;white-space:nowrap;flex-shrink:0}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e84a6a;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(232,74,106,.15)}
+
+.services{display:flex;flex-direction:column;gap:7px}
+.svc{background:#fff;border:1px solid #ffd8de;border-radius:12px;padding:15px;display:flex;gap=12px;justify-content:space-between;align-items:flex-start;gap:12px}
+.svc-icon{font-size:22px;margin-bottom:4px}
+.svc-name{font-size:13px;font-weight:700;color:#3a1218}
+.svc-desc{font-size:10px;color:#c08090;margin-top:2px;line-height:1.4}
+.svc-tag{display:inline-block;font-size:9px;background:#fff0f3;color:#e84a6a;padding:2px 9px;border-radius:100px;margin-top:4px;font-weight:700}
+.svc-price{font-size:15px;font-weight:700;color:#e84a6a;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:#c08090;margin-top:1px}
+
+.process{display:flex;flex-direction:column;gap:0;position:relative}
+.process::before{content:'';position:absolute;left:20px;top:20px;bottom:20px;width:1px;background:rgba(232,74,106,.15)}
+.step{display:flex;gap:14px;padding:12px 0;align-items:flex-start}
+.step-n{width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid rgba(232,74,106,.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#e84a6a;flex-shrink:0;position:relative;z-index:1}
+.step-title{font-size:13px;font-weight:700;color:#3a1218;margin-top:10px}
+.step-desc{font-size:10px;color:#c08090;margin-top:3px;line-height:1.4}
+
+.placements{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.placement{background:#fff;border:1px solid #ffd8de;border-radius:10px;padding:12px;text-align:center}
+.placement-icon{font-size:22px;margin-bottom:4px}
+.placement-sector{font-size:11px;font-weight:700;color:#3a1218}
+.placement-num{font-size:18px;font-weight:800;color:#e84a6a;margin-top:4px}
+.placement-label{font-size:9px;color:#c08090}
+
+.cta{background:linear-gradient(135deg,#e84a6a,#c03050);border-radius:14px;padding:20px;text-align:center}
+.cta h3{font-size:18px;font-weight:800;color:#fff;margin-bottom:7px}
+.cta p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:#fff;color:#c03050;border-radius:10px;padding:13px;font-size:13px;font-weight:800;text-decoration:none;margin-bottom:7px}
+.cta-btn2{display:block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:11px;font-size:11px;text-decoration:none}
+
+.contacts{background:#fff;border:1px solid #ffd8de;border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #fff5f6;font-size:12px;color:#333}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#e84a6a;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#3a1218;padding:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-people">👤👤👤</div>
+  <div class="hero-arc"></div>
+  <div class="hero-arc2"></div>
+  <div class="h-pill"><span class="h-dot"></span>Actively placing candidates</div>
+  <h1>Talent<br><span>Bridge</span></h1>
+  <div class="hero-sub">Executive search, mass recruitment &amp; HR consulting for Bangladesh's top employers.</div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">3,200+</div><div class="hs-l">Placed</div></div>
+    <div class="hs"><div class="hs-n">180+</div><div class="hs-l">Employers</div></div>
+    <div class="hs"><div class="hs-n">12yr</div><div class="hs-l">Est.</div></div>
+  </div>
+</div>
+<div class="specialisms">
+  <div class="spec">Banking & Finance</div>
+  <div class="spec">Garments & RMG</div>
+  <div class="spec">Technology</div>
+  <div class="spec">Pharma</div>
+  <div class="spec">FMCG</div>
+  <div class="spec">Logistics</div>
+</div>
+<div class="body">
+  <div class="sec">Our Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-icon">🎯</div><div class="svc-name">Executive Search</div><div class="svc-desc">C-suite, VP & director-level placements with guarantee</div><div class="svc-tag">3-month replacement guarantee</div></div><div class="svc-price">15–20%<span>of salary</span></div></div>
+    <div class="svc"><div><div class="svc-icon">👥</div><div class="svc-name">Volume Recruitment</div><div class="svc-desc">Bulk hiring for RMG, factories & call centres</div></div><div class="svc-price">Custom<span>per head</span></div></div>
+    <div class="svc"><div><div class="svc-icon">📋</div><div class="svc-name">HR Outsourcing</div><div class="svc-desc">Payroll, PF/gratuity, compliance & HR admin</div></div><div class="svc-price">৳25,000<span>/ month</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🧪</div><div class="svc-name">Assessment Centre</div><div class="svc-desc">Psychometric testing, group exercises, structured interviews</div></div><div class="svc-price">৳800<span>per candidate</span></div></div>
+  </div>
+
+  <div class="sec">Our Process</div>
+  <div class="process">
+    <div class="step"><div class="step-n">1</div><div><div class="step-title">Understand the role</div><div class="step-desc">Deep-dive with hiring manager. Beyond the JD — culture, dynamics, success metrics.</div></div></div>
+    <div class="step"><div class="step-n">2</div><div><div class="step-title">Search &amp; screen</div><div class="step-desc">Active search from our 50,000+ candidate database + market outreach. 3-5 days.</div></div></div>
+    <div class="step"><div class="step-n">3</div><div><div class="step-title">Present shortlist</div><div class="step-desc">3–5 qualified, pre-interviewed candidates with full profile reports.</div></div></div>
+    <div class="step"><div class="step-n">4</div><div><div class="step-title">Placement &amp; support</div><div class="step-desc">Offer management, onboarding support &amp; 90-day check-ins.</div></div></div>
+  </div>
+
+  <div class="sec">Placements by Sector</div>
+  <div class="placements">
+    <div class="placement"><div class="placement-icon">🏦</div><div class="placement-sector">Banking</div><div class="placement-num">620</div><div class="placement-label">placements</div></div>
+    <div class="placement"><div class="placement-icon">👗</div><div class="placement-sector">Garments</div><div class="placement-num">940</div><div class="placement-label">placements</div></div>
+    <div class="placement"><div class="placement-icon">💻</div><div class="placement-sector">Technology</div><div class="placement-num">480</div><div class="placement-label">placements</div></div>
+    <div class="placement"><div class="placement-icon">💊</div><div class="placement-sector">Pharma</div><div class="placement-num">360</div><div class="placement-label">placements</div></div>
+  </div>
+
+  <div class="sec">Work With Us</div>
+  <div class="cta">
+    <h3>Find your next great hire.</h3>
+    <p>Tell us the role — we'll present qualified shortlisted candidates within 5 working days. No upfront fee.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">👥 Submit a Vacancy</a>
+    <a href="mailto:hire@talentbridge.com.bd" class="cta-btn2">hire@talentbridge.com.bd</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Level 8, Banani Tower, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 6pm</div>
+    <div class="cr"><div class="ci">🌐</div>www.talentbridge.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 TalentBridge · HR &amp; Recruitment · Dhaka · 12 Years</footer>
+</div></body></html>

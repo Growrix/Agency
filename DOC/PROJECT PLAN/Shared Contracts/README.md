@@ -9,6 +9,7 @@ This document defines the canonical system surfaces, roles, domain entities, API
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **[Product-led platform contract delta](product-led-platform-shared-contracts.md)**: route, entity, lead, commerce, and integration changes from the 2026-05-23 master plan audit
 - **[System Architecture](#system-architecture)**: surfaces, roles, entities
 - **[API Contract Index](#api-contracts)**: all endpoints
 - **[Integration Inventory](#integrations)**: Stripe, WhatsApp, Calendar, Email, AI, Chat, Analytics
@@ -23,14 +24,14 @@ This document defines the canonical system surfaces, roles, domain entities, API
 
 The system consists of four distinct surfaces, each with specific purposes, routes, authentication requirements, and integrations:
 
-1. **Public Marketing** (`/`, `/blog`, `/blog/[slug]`, `/services`, `/portfolio`, `/pricing`, `/about`, `/faq`, `/contact`)
+1. **Public Marketing** (`/`, `/blog`, `/blog/[slug]`, `/services`, `/services/html-business-profiles`, `/portfolio`, `/pricing`, `/about`, `/faq`, `/contact`)
    - No auth required
    - Public browsing, service discovery, credibility proof
    - Read-only for public users
 
-2. **Commerce** (`/shop`, `/shop/[slug]`, `/checkout`)
+2. **Commerce** (`/shop`, `/shop/[slug]`, `/checkout`, `/html-business-profiles`)
    - Optional auth (browsing) or required (checkout)
-   - Digital product sales (templates, MCP servers, ready websites, mobile apps)
+   - Digital product sales (templates, HTML business profiles, MCP servers, ready websites, mobile apps)
    - Stripe payment integration
    - Order fulfillment
 
@@ -52,8 +53,8 @@ The system consists of four distinct surfaces, each with specific purposes, rout
 - **Visitor**: unauthenticated user → discovers → engages → books or purchases
 - **Subscriber**: registered user → receives communications → tracks orders/bookings
 - **Customer**: completed transaction → accesses order history → potential repeat buyer
-- **Service**: branded offering (SaaS, websites, MCP, automation) with pricing and support model
-- **Product**: digital item for sale (template, MCP, ready website, mobile app) with SKU and delivery
+- **Service**: branded offering (SaaS, websites, HTML business profiles, MCP, automation) with pricing and support model
+- **Product**: digital item for sale (template, HTML business profile, MCP, ready website, mobile app) with SKU and delivery
 - **Project**: active custom service engagement with timeline and budget
 - **Appointment**: booked consultation with status tracking
 

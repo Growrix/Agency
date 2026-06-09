@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>The Groove Room — Vinyl Records & Hi-Fi</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Alfa+Slab+One&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lora',serif;display:flex;justify-content:center;background:#0a0604}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;overflow:hidden;color:#f0e0c0}
+
+/* WOOD GRAIN TEXTURE */
+.wood{background-color:#3a2010;background-image:
+  repeating-linear-gradient(93deg,transparent,transparent 3px,rgba(0,0,0,.06) 3px,rgba(0,0,0,.06) 4px),
+  repeating-linear-gradient(1deg,transparent,transparent 6px,rgba(255,255,255,.018) 6px,rgba(255,255,255,.018) 8px),
+  linear-gradient(165deg,#4a2a14 0%,#3a1e0a 30%,#4a2a12 60%,#382008 100%)}
+
+/* VINYL RECORD — CSS circle */
+.vinyl{width:140px;height:140px;border-radius:50%;background:
+  radial-gradient(circle at 50% 50%,#fff 0%,#fff 5%,#1a1a1a 5.5%,#222 30%,#1a1a1a 30.5%,#222 50%,#1a1a1a 50.5%,#222 70%,#1a1a1a 70.5%,#222 80%,#1a1a1a 80.5%,#111 100%);
+  margin:0 auto;box-shadow:0 0 0 4px #333,0 0 0 6px #1a1a1a,0 8px 32px rgba(0,0,0,.8);
+  animation:spin 8s linear infinite;position:relative}
+.vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,#e53030 0%,#c02020 60%,#a01010 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 2px 4px rgba(0,0,0,.5)}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* HERO */
+.hero{min-height:290px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:28px 22px 24px;position:relative;text-align:center;overflow:hidden}
+.hero-top{position:absolute;top:0;left:0;right:0;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(200,120,40,.2)}
+.h-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:rgba(240,200,120,.7)}
+.h-since{font-size:10px;color:rgba(240,200,120,.4);letter-spacing:1px;font-style:italic}
+.vinyl-wrap{margin-bottom:18px}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:2px;color:#f0d890;line-height:.9;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.hero-sub{font-size:12px;color:rgba(240,200,100,.4);margin-top:8px;font-style:italic;letter-spacing:.5px}
+
+/* ORANGE DIVIDER */
+.divider{height:3px;background:linear-gradient(90deg,transparent,#c84010,#e05020,#c84010,transparent);margin:0}
+
+/* DARK BODY */
+.body{background:#100a04;padding:0 16px 40px}
+.sec{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:rgba(200,120,40,.5);margin:22px 0 12px;padding-bottom:6px;border-bottom:1px solid rgba(200,120,40,.12)}
+
+.genres{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.genre{background:#1a1006;border:1px solid rgba(200,120,40,.12);border-radius:4px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.genre-icon{font-size:22px;flex-shrink:0}
+.genre-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:rgba(240,200,100,.7);letter-spacing:1px}
+.genre-count{font-size:10px;color:rgba(200,140,60,.35);margin-top:1px;font-style:italic}
+
+.featured{display:flex;flex-direction:column;gap:6px}
+.record{background:linear-gradient(135deg,#1a1006,#140c04);border:1px solid rgba(200,120,40,.1);border-radius:4px;padding:14px;display:flex;align-items:center;gap:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.rec-icon{font-size:28px;flex-shrink:0}
+.rec-album{font-family:'Lora',serif;font-size:14px;font-weight:600;color:rgba(240,200,120,.8)}
+.rec-artist{font-size:11px;color:rgba(200,140,60,.45);margin-top:2px;font-style:italic}
+.rec-year{font-size:9px;color:rgba(200,140,60,.3);margin-top:3px;letter-spacing:1px}
+.rec-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:rgba(200,100,30,.7);margin-left:auto;flex-shrink:0}
+
+/* Vintage CTA */
+.cta-box{background:#1a1006;border:2px solid rgba(200,120,40,.2);border-radius:4px;padding:24px;text-align:center;box-shadow:0 0 0 1px rgba(200,120,40,.08),inset 0 1px 0 rgba(255,255,255,.03)}
+.cta-box h3{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:#f0d890;margin-bottom:8px}
+.cta-box p{font-size:12px;color:rgba(200,140,60,.4);margin-bottom:18px;line-height:1.6;font-style:italic}
+.cta-btn{display:block;background:linear-gradient(135deg,#c84010,#a03010);color:#f0d890;border-radius:3px;padding:14px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;text-decoration:none;margin-bottom:7px;border:1px solid #e05020;box-shadow:0 3px 0 #601808,0 6px 12px rgba(0,0,0,.4)}
+.cta-btn2{display:block;background:transparent;color:rgba(200,140,60,.4);border:1px solid rgba(200,120,40,.15);border-radius:3px;padding:12px;font-size:12px;text-decoration:none;font-style:italic}
+
+.contacts{background:#1a1006;border:1px solid rgba(200,120,40,.1);border-radius:4px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(200,120,40,.06);font-size:12px;color:rgba(200,140,60,.4);font-style:italic}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:linear-gradient(135deg,#c84010,#a03010);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+footer{background:#0a0604;border-top:2px solid rgba(200,120,40,.15);padding:16px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(200,120,40,.3)}
+</style></head>
+<body><div class="app wood">
+<div class="hero wood">
+  <div class="hero-top">
+    <div class="h-logo">THE GROOVE ROOM</div>
+    <div class="h-since">Since 1989</div>
+  </div>
+  <div class="vinyl-wrap"><div class="vinyl"></div></div>
+  <h1>Vinyl,<br>Pure &amp; Loud.</h1>
+  <div class="hero-sub">New · used · rare · collectibles · hi-fi equipment · repairs</div>
+</div>
+<div class="divider"></div>
+<div class="body">
+  <div class="sec">Shop By Genre</div>
+  <div class="genres">
+    <div class="genre"><div class="genre-icon">🎷</div><div><div class="genre-name">Jazz & Blues</div><div class="genre-count">1,200+ records</div></div></div>
+    <div class="genre"><div class="genre-icon">🎸</div><div><div class="genre-name">Classic Rock</div><div class="genre-count">800+ records</div></div></div>
+    <div class="genre"><div class="genre-icon">🎻</div><div><div class="genre-name">Classical</div><div class="genre-count">600+ records</div></div></div>
+    <div class="genre"><div class="genre-icon">🎤</div><div><div class="genre-name">Bangladeshi</div><div class="genre-count">400+ records</div></div></div>
+  </div>
+  <div class="sec">New Arrivals</div>
+  <div class="featured">
+    <div class="record"><div class="rec-icon">💿</div><div><div class="rec-album">Kind of Blue</div><div class="rec-artist">Miles Davis · Columbia Records</div><div class="rec-year">ORIGINAL PRESS · 1959</div></div><div class="rec-price">৳8,500</div></div>
+    <div class="record"><div class="rec-icon">💿</div><div><div class="rec-album">Srijonee</div><div class="rec-artist">Runa Laila · HMV Bengal</div><div class="rec-year">ORIGINAL · 1975</div></div><div class="rec-price">৳4,200</div></div>
+    <div class="record"><div class="rec-icon">💿</div><div><div class="rec-album">Abbey Road</div><div class="rec-artist">The Beatles · Apple Records</div><div class="rec-year">UK PRESS · 1969</div></div><div class="rec-price">৳12,000</div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Find Your Record</div>
+  <div class="cta-box">
+    <h3>Rare records found.</h3>
+    <p>Don't see what you're looking for? Give us a request and we'll source it. We've been finding rare vinyl for 35 years.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">SEND A REQUEST</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call the shop</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Visit The Store</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>New Market, Dhaka · Shop 14</div>
+    <div class="cr"><div class="ci">⏰</div>Sat–Thu 11am–9pm</div>
+  </div>
+</div>
+<footer>THE GROOVE ROOM · VINYL & HI-FI · DHAKA · EST. 1989</footer>
+</div></body></html>

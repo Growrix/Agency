@@ -6,6 +6,7 @@ import { getRuntimeConfig } from "@/server/config/runtime";
 import type { AppointmentRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
+import { recordLeadEvent } from "@/server/domain/leads";
 
 type CreateAppointmentInput = {
   visitor_name: string;
@@ -146,6 +147,28 @@ export async function createAppointment(input: CreateAppointmentInput) {
         preferred_datetime: appointment.preferred_datetime,
         email_delivered: emailDelivery.delivered,
       },
+    }),
+    recordLeadEvent({
+      email: appointment.visitor_email,
+      eventType: "booking",
+      source: "booking_form",
+      route: "/book-appointment",
+      name: appointment.visitor_name,
+      phone: appointment.visitor_phone,
+      relatedAppointmentId: appointment.id,
+      metadata: {
+        service: appointment.service_interested_in,
+        preferred_datetime: appointment.preferred_datetime,
+        timezone: appointment.timezone,
+      },
+    }).catch(async (error: unknown) => {
+      await recordAuditLog({
+        level: "warning",
+        action: "appointment.lead_event_failed",
+        actor_email: appointment.visitor_email,
+        metadata: { message: error instanceof Error ? error.message : "Unknown error" },
+      });
+      return undefined;
     }),
   ]);
 

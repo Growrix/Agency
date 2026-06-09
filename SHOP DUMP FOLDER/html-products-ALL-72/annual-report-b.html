@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bondhu Foundation — Annual Impact Report 2024</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fdf9f4;color:#1a1208;font-family:'Source Sans 3',sans-serif}
+.cover{background:#2a4820;color:#f0ede8;min-height:60vh;padding:72px 60px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.05),transparent)}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start}
+.org-name{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:600;color:rgba(240,237,232,.5);letter-spacing:3px;text-transform:uppercase}
+.report-type{font-size:12px;color:rgba(240,237,232,.3);letter-spacing:2px}
+.cover-body h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;line-height:1.05;margin-bottom:10px}
+.cover-body h1 em{font-style:italic;color:#a8d08c}
+.cover-body p{font-size:16px;color:rgba(240,237,232,.55);font-weight:300}
+.cover-bottom{display:flex;gap:48px;flex-wrap:wrap}
+.c-stat .num{font-family:'Playfair Display',serif;font-size:2.8rem;color:#a8d08c;display:block;line-height:1}
+.c-stat .label{font-size:12px;color:rgba(240,237,232,.4);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.content{max-width:960px;margin:0 auto;padding:64px 48px 0}
+.section{margin-bottom:60px}
+.sec-eyebrow{font-size:11px;color:#4a7a30;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;font-weight:600}
+h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;margin-bottom:18px;line-height:1.15}
+p.body-text{font-size:15px;color:#5a4a30;line-height:1.85;font-weight:300;margin-bottom:14px}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:24px 0}
+.impact-card{border-radius:14px;padding:28px;text-align:center}
+.impact-card.green{background:#e8f5e0;border:1px solid #c0d8a0}
+.impact-card.warm{background:#fef3e2;border:1px solid #f0d090}
+.impact-card.earth{background:#f5ede0;border:1px solid #dfc8a0}
+.impact-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:#2a4820;display:block;font-style:italic;margin-bottom:4px}
+.impact-label{font-size:13px;color:#5a6a50;line-height:1.4}
+.story-section{background:#2a4820;color:#f0ede8;border-radius:16px;padding:48px;margin:32px 0}
+.story-section .eyebrow{font-size:10px;color:rgba(168,208,140,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.story-section blockquote{font-family:'Playfair Display',serif;font-size:1.35rem;font-style:italic;line-height:1.7;color:rgba(240,237,232,.9);margin-bottom:14px}
+.story-section .attribution{font-size:13px;color:rgba(240,237,232,.4)}
+.program-list{display:flex;flex-direction:column;gap:0}
+.program{display:grid;grid-template-columns:1fr auto;gap:20px;padding:20px 0;border-bottom:1px solid #e8e0d0;align-items:center}
+.program:last-child{border-bottom:none}
+.prog-name{font-size:16px;font-weight:600;color:#1a1208;margin-bottom:4px}
+.prog-desc{font-size:13px;color:#8a7050;font-weight:300}
+.prog-reach{text-align:right}
+.prog-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:#2a4820;font-style:italic;display:block}
+.prog-unit{font-size:11px;color:#8a7050;letter-spacing:1px;text-transform:uppercase}
+.fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.fin-card{background:#fff;border:1px solid #e8e0d0;border-radius:12px;padding:24px}
+.fin-card h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#8a7050;margin-bottom:16px}
+.fin-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f0e8;font-size:14px}
+.fin-row:last-child{border-bottom:none;font-weight:600;color:#2a4820}
+.cta{background:#f5f0e8;border-radius:14px;padding:48px;text-align:center}
+.cta h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;margin-bottom:10px}
+.cta p{font-size:14px;color:#6a5040;margin-bottom:24px;max-width:380px;margin-left:auto;margin-right:auto}
+.btn{display:inline-block;background:#2a4820;color:#f0ede8;padding:14px 36px;text-decoration:none;border-radius:100px;font-size:14px;font-weight:500;margin:0 6px}
+.btn-outline{display:inline-block;border:1px solid #2a4820;color:#2a4820;padding:13px 28px;text-decoration:none;border-radius:100px;font-size:14px}
+footer{background:#1a2c10;color:rgba(240,237,232,.35);padding:28px 48px;text-align:center;font-size:12px;letter-spacing:1px}
+@media(max-width:768px){.cover{padding:40px 24px;min-height:auto}.content{padding:40px 24px 0}.impact-grid,.fin-grid{grid-template-columns:1fr}.story-section{padding:32px 24px}.program{grid-template-columns:1fr}.prog-reach{text-align:left}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-top"><div class="org-name">Bondhu Foundation</div><div class="report-type">Annual Impact Report · 2024</div></div>
+  <div class="cover-body">
+    <h1>People helped.<br>Lives <em>changed.</em></h1>
+    <p>A year in numbers, stories, and accountability.</p>
+  </div>
+  <div class="cover-bottom">
+    <div class="c-stat"><span class="num">4,840</span><span class="label">Families reached</span></div>
+    <div class="c-stat"><span class="num">৳2.4Cr</span><span class="label">Funds disbursed</span></div>
+    <div class="c-stat"><span class="num">12</span><span class="label">Active programmes</span></div>
+    <div class="c-stat"><span class="num">98%</span><span class="label">Funds to beneficiaries</span></div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="section">
+    <div class="sec-eyebrow">A Letter from the Founder</div>
+    <h2>A year we didn't expect, and wouldn't undo.</h2>
+    <p class="body-text">2024 was the year Bondhu Foundation grew faster than we planned — and slower than communities needed. We reached 4,840 families across Dhaka, Sylhet, and Cox's Bazar. We also ran short of funds twice, paused one programme, and had to make difficult choices about who gets help when the list is long and resources are finite.</p>
+    <p class="body-text">This report tells both stories — the impact we're proud of, and the gaps that still exist. We owe that honesty to every donor who trusted us with their money, and every family who trusted us with their dignity.</p>
+  </div>
+
+  <div class="section">
+    <div class="sec-eyebrow">2024 Impact</div>
+    <h2>The numbers that matter.</h2>
+    <div class="impact-grid">
+      <div class="impact-card green"><span class="impact-num">4,840</span><span class="impact-label">Families received food support, emergency cash, or skills training</span></div>
+      <div class="impact-card warm"><span class="impact-num">1,240</span><span class="impact-label">Women completed vocational skills training programmes</span></div>
+      <div class="impact-card earth"><span class="impact-num">380</span><span class="impact-label">Children enrolled in supplementary education centres</span></div>
+    </div>
+  </div>
+
+  <div class="story-section">
+    <div class="eyebrow">Beneficiary Story</div>
+    <blockquote>"Before Bondhu, I was taking loans from neighbours just to feed my children after my husband fell ill. The skills training helped me start a small tailoring business. I repaid every loan within 4 months."</blockquote>
+    <div class="attribution">— Fatima Begum, 34 · Mirpur-1, Dhaka · Vocational Skills Graduate 2024</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-eyebrow">Our Programmes</div>
+    <h2>What we run, and who it reaches.</h2>
+    <div class="program-list">
+      <div class="program"><div><div class="prog-name">Eid Food Drive</div><div class="prog-desc">Annual food box programme during both Eids — rice, oil, lentils, dates for 500 families per drive</div></div><div class="prog-reach"><span class="prog-num">1,000</span><span class="prog-unit">families · 2024</span></div></div>
+      <div class="program"><div><div class="prog-name">Women's Vocational Skills</div><div class="prog-desc">3-month tailoring, handicraft, and food production training with micro-loan access</div></div><div class="prog-reach"><span class="prog-num">1,240</span><span class="prog-unit">graduates</span></div></div>
+      <div class="program"><div><div class="prog-name">Emergency Cash Relief</div><div class="prog-desc">Rapid response fund for flood, fire, and sudden income loss — disbursed within 48 hours</div></div><div class="prog-reach"><span class="prog-num">840</span><span class="prog-unit">households</span></div></div>
+      <div class="program"><div><div class="prog-name">Children's Education Support</div><div class="prog-desc">Supplementary school centres, uniforms, books, and tuition fees for primary-school children</div></div><div class="prog-reach"><span class="prog-num">380</span><span class="prog-unit">children</span></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-eyebrow">Financials</div>
+    <h2>Where the money comes from, and where it goes.</h2>
+    <div class="fin-grid">
+      <div class="fin-card"><h4>Income 2024</h4>
+        <div class="fin-row"><span>Individual donations</span><span>৳1,42,00,000</span></div>
+        <div class="fin-row"><span>Corporate CSR grants</span><span>৳68,00,000</span></div>
+        <div class="fin-row"><span>Crowdfunding campaigns</span><span>৳24,00,000</span></div>
+        <div class="fin-row"><span>Government grants</span><span>৳6,00,000</span></div>
+        <div class="fin-row"><span><strong>Total Income</strong></span><span>৳2,40,00,000</span></div>
+      </div>
+      <div class="fin-card"><h4>Expenditure 2024</h4>
+        <div class="fin-row"><span>Programme delivery</span><span>৳2,16,00,000 (90%)</span></div>
+        <div class="fin-row"><span>Administration</span><span>৳14,40,000 (6%)</span></div>
+        <div class="fin-row"><span>Fundraising</span><span>৳9,60,000 (4%)</span></div>
+        <div class="fin-row"><span><strong>Total Expenditure</strong></span><span>৳2,40,00,000</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>Help us do more in 2025.</h3>
+    <p>Our target: 8,000 families. We're currently funded for 5,200. The gap is ৳38 Lakh.</p>
+    <a href="#" class="btn">Donate Now</a>
+    <a href="#" class="btn-outline">Volunteer With Us</a>
+  </div>
+  <br><br>
+</div>
+<footer>Bondhu Foundation · bondhu.org.bd · NGO Reg: S-18294 · 100% of programme funds reach beneficiaries directly</footer>
+</body></html>

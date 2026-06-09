@@ -26,9 +26,9 @@ const ACTIONS: Record<ConciergeActionKey, Action> = {
   faq: { label: "Open FAQ", href: "/faq" },
   pricing: { label: "View pricing", href: "/pricing" },
   services: { label: "Explore services", href: "/services" },
-  additional_services: { label: "Additional services", href: "/additional-services" },
+  additional_services: { label: "SEO service", href: "/additional-services" },
   portfolio: { label: "View portfolio", href: "/portfolio" },
-  shop: { label: "Browse shop", href: "/shop" },
+  shop: { label: "Browse products", href: "/products" },
   whatsapp: { label: "WhatsApp", href: WHATSAPP_HREF },
 };
 

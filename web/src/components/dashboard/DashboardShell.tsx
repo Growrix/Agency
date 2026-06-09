@@ -19,6 +19,7 @@ type DashboardShellProps = {
   currentPath: string;
   navItems: DashboardNavItem[];
   utilityActions?: React.ReactNode;
+  headerControls?: React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -27,6 +28,7 @@ export function DashboardShell({
   currentPath,
   navItems,
   utilityActions,
+  headerControls,
   children,
 }: DashboardShellProps) {
   const [collapsed, setCollapsed] = useState(false);
@@ -147,7 +149,7 @@ export function DashboardShell({
               </Button>
               <h1 className="font-display text-base font-semibold tracking-tight text-text sm:text-lg">{title}</h1>
             </div>
-            <DashboardHeaderControls />
+            {headerControls ?? <DashboardHeaderControls />}
           </div>
         </header>
 

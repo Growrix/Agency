@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Prime Properties — Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Montserrat',sans-serif;background:#1c1a14;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#faf8f4;margin:0 auto}
+
+.hero{background:#1c1a14;min-height:260px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 24px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.06) 1px,transparent 1px);background-size:30px 30px}
+.h-top{position:absolute;top:24px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:flex-start}
+.h-logo{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.h-verified{background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);border-radius:4px;padding:4px 10px;font-size:9px;color:#d4af37;letter-spacing:1px}
+.agent-photo{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2d2a1e,#1c1a14);border:2px solid rgba(212,175,55,.4);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:26px;color:#d4af37;font-weight:600;margin-bottom:12px}
+.agent-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#fff;line-height:1}
+.agent-title{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:5px}
+.agent-rule{width:32px;height:1px;background:#d4af37;margin:10px 0}
+.agent-exp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.5)}
+
+.stats-row{display:flex;background:#fff;border-bottom:2px solid #f0ebe0}
+.stat{flex:1;text-align:center;padding:14px 0;border-right:1px solid #f0ebe0}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:22px;color:#1c1a14;font-weight:600}
+.stat-l{font-size:9px;color:#a09070;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+
+.body{padding:0 18px 36px}
+.sec{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#c4a050;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(196,160,80,.25)}
+
+.prop-card{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid #ede8df}
+.prop-img{height:120px;background:linear-gradient(135deg,#2d2a1e,#1c1a14);display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
+.prop-tag{position:absolute;top:10px;left:10px;background:#d4af37;color:#1c1a14;font-size:9px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:.5px}
+.prop-tag.sale{background:#e74c3c;color:#fff}
+.prop-body{padding:14px}
+.prop-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#1c1a14}
+.prop-loc{font-size:11px;color:#a09070;margin-top:2px}
+.prop-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:#c4a050;margin-top:6px;font-weight:600}
+.prop-chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.prop-chip{background:#f5f0e8;border-radius:4px;padding:4px 9px;font-size:10px;color:#7a6a50}
+
+.services-list{display:flex;flex-direction:column;gap:8px}
+.svc-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #ede8df;border-radius:10px;padding:14px}
+.svc-icon{width:36px;height:36px;background:#f5f0e8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.svc-name{font-size:13px;font-weight:600;color:#1c1a14}
+.svc-desc{font-size:11px;color:#a09070;margin-top:2px}
+
+.consult-box{background:#1c1a14;border-radius:12px;padding:22px;text-align:center}
+.consult-box h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;margin-bottom:6px}
+.consult-box h3 em{font-style:italic;color:#d4af37}
+.consult-box p{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px;line-height:1.5}
+.consult-btn{display:block;background:#d4af37;color:#1c1a14;border-radius:6px;padding:14px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;margin-bottom:8px}
+.consult-btn2{display:block;background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:12px;font-size:11px;letter-spacing:.5px;text-decoration:none}
+
+.contact-box{background:#fff;border:1px solid #ede8df;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #f5f0e8;font-size:12px;color:#444}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#f5f0e8;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#1c1a14;border-top:1px solid rgba(212,175,55,.2);padding:20px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="h-top"><div class="h-logo">Prime Properties</div><div class="h-verified">✓ Verified Agent</div></div>
+  <div class="agent-photo">NA</div>
+  <div class="agent-name">Nadia Al-Rashid</div>
+  <div class="agent-title">Senior Property Consultant · RICS Certified</div>
+  <div class="agent-rule"></div>
+  <div class="agent-exp">15 years · 600+ transactions · $80M+ in sales</div>
+</div>
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">600+</div><div class="stat-l">Sold</div></div>
+  <div class="stat"><div class="stat-n">$80M</div><div class="stat-l">Volume</div></div>
+  <div class="stat"><div class="stat-n">15yr</div><div class="stat-l">Exp</div></div>
+</div>
+<div class="body">
+  <div class="sec">Featured Listings</div>
+  <div class="prop-card">
+    <div class="prop-img">🏙️<div class="prop-tag">FOR SALE</div></div>
+    <div class="prop-body">
+      <div class="prop-name">The Waterfront Penthouse</div>
+      <div class="prop-loc">📍 Gulshan-2, Dhaka</div>
+      <div class="prop-price">$480,000</div>
+      <div class="prop-chips">
+        <div class="prop-chip">4 Bed</div>
+        <div class="prop-chip">3 Bath</div>
+        <div class="prop-chip">3,200 sqft</div>
+        <div class="prop-chip">Rooftop</div>
+      </div>
+    </div>
+  </div>
+  <div class="prop-card">
+    <div class="prop-img">🏡<div class="prop-tag sale">FOR RENT</div></div>
+    <div class="prop-body">
+      <div class="prop-name">Executive Garden Villa</div>
+      <div class="prop-loc">📍 Baridhara, Dhaka</div>
+      <div class="prop-price">$2,800 / month</div>
+      <div class="prop-chips">
+        <div class="prop-chip">5 Bed</div>
+        <div class="prop-chip">4 Bath</div>
+        <div class="prop-chip">4,500 sqft</div>
+        <div class="prop-chip">Garden</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">Services</div>
+  <div class="services-list">
+    <div class="svc-row"><div class="svc-icon">🏠</div><div><div class="svc-name">Residential Sales</div><div class="svc-desc">Apartments, villas &amp; plots — buy or sell</div></div></div>
+    <div class="svc-row"><div class="svc-icon">🏢</div><div><div class="svc-name">Commercial Leasing</div><div class="svc-desc">Office spaces, retail &amp; warehouses</div></div></div>
+    <div class="svc-row"><div class="svc-icon">📊</div><div><div class="svc-name">Property Valuation</div><div class="svc-desc">Certified market appraisals</div></div></div>
+    <div class="svc-row"><div class="svc-icon">🤝</div><div><div class="svc-name">Investment Advisory</div><div class="svc-desc">Portfolio building &amp; ROI analysis</div></div></div>
+  </div>
+
+  <div class="sec">Book a Consultation</div>
+  <div class="consult-box">
+    <h3>Find your <em>perfect property.</em></h3>
+    <p>Free consultation. No pressure. Whether you're buying, selling, or investing — I'll guide you every step.</p>
+    <a href="https://wa.me/0000000000" class="consult-btn">📞 Book a Call</a>
+    <a href="mailto:nadia@primeproperties.com" class="consult-btn2">✉ Send an Email</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📧</div>nadia@primeproperties.com</div>
+    <div class="c-row"><div class="c-icon">📍</div>Prime Tower, Gulshan Ave, Dhaka</div>
+    <div class="c-row"><div class="c-icon">🌐</div>www.primeproperties.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 Prime Properties · RICS Certified · Regulated &amp; Licensed</footer>
+</div></body></html>

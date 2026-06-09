@@ -1,6 +1,6 @@
 # Supabase Integration Status
 
-**Last Updated:** 2026-04-23  
+**Last Updated:** 2026-05-20  
 **Phase:** Bootstrap complete, end-to-end verification in progress
 
 ---
@@ -28,7 +28,7 @@
 - **Tables Created:**
   - `public.app_state` (id text primary key, payload jsonb, updated_at timestamptz)
   - Index: `app_state_updated_at_idx` on updated_at DESC
-- **RLS:** Disabled (intentional; table accessed via service_role_key only)
+- **RLS:** Enabled (client roles blocked; backend uses service_role_key only)
 
 ### 2. Environment Configuration
 - **Local (.env.local):** ✅ Configured with live Supabase credentials

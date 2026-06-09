@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Vertex — Architecture & Construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Barlow',sans-serif;background:#0c0e0f;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0c0e10;margin:0 auto;overflow:hidden;color:#c8d4da}
+:root{--acc:#c8a040;--acc2:#e0b840}
+/* ISO grid background */
+.iso-bg{background-image:repeating-linear-gradient(30deg,rgba(200,160,64,.04) 0,rgba(200,160,64,.04) 1px,transparent 1px,transparent 20px),repeating-linear-gradient(-30deg,rgba(200,160,64,.03) 0,rgba(200,160,64,.03) 1px,transparent 1px,transparent 20px)}
+/* ISO building accent */
+.building{position:absolute;right:16px;top:28px;opacity:.15}
+.bld-top{width:48px;height:20px;background:var(--acc);transform:skewX(-30deg);margin-left:12px}
+.bld-mid{width:36px;height:50px;background:rgba(200,160,64,.5);margin-left:0}
+.bld-side{position:absolute;right:0;top:20px;width:16px;height:50px;background:rgba(200,160,64,.3);transform:skewY(30deg);transform-origin:top right}
+.hero{min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 22px;position:relative}
+.hero-top{position:absolute;top:24px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.hl{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:rgba(200,160,64,.55);letter-spacing:3px}
+.hb{font-size:9px;border:1px solid rgba(200,160,64,.2);border-radius:2px;padding:3px 10px;color:rgba(200,160,64,.45);letter-spacing:1.5px;font-weight:600}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:44px;font-weight:700;letter-spacing:-.5px;line-height:.9;color:#d8e4ea}
+.hero h1 .a{color:var(--acc)}
+.hero-sub{font-size:11px;font-weight:300;color:rgba(200,212,218,.3);margin-top:9px;line-height:1.6}
+.hero-line{height:1px;background:linear-gradient(90deg,rgba(200,160,64,.3),rgba(200,160,64,.1),transparent);margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:12px 14px;border-bottom:1px solid rgba(200,160,64,.08)}
+.st{text-align:center;padding:10px 0;border-right:1px solid rgba(200,160,64,.06)}
+.st:last-child{border-right:none}
+.st-n{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--acc);letter-spacing:-.5px}
+.st-l{font-size:8px;color:rgba(200,212,218,.2);margin-top:2px;letter-spacing:1px}
+.body{padding:0 14px 40px}
+.sec{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(200,160,64,.4);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(200,160,64,.1)}
+.projects{display:flex;flex-direction:column;gap:7px}
+.proj{background:#12161a;border:1px solid rgba(200,160,64,.08);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.proj::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--acc);opacity:.5}
+.proj-icon{font-size:26px;flex-shrink:0}
+.proj-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:rgba(216,228,234,.7);letter-spacing:.3px}
+.proj-type{font-size:10px;color:rgba(200,212,218,.25);margin-top:2px;font-style:italic}
+.proj-year{font-family:'Rajdhani',sans-serif;font-size:12px;color:rgba(200,160,64,.4);margin-left:auto;flex-shrink:0}
+.svcs{display:flex;flex-direction:column;gap:6px}
+.svc{background:#12161a;border:1px solid rgba(200,160,64,.07);border-radius:5px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}
+.svc-name{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:rgba(216,228,234,.6)}
+.svc-price{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--acc);opacity:.6}
+.cta{background:#12161a;border:1px solid rgba(200,160,64,.12);border-radius:8px;padding:22px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--acc),transparent);opacity:.6}
+.cta h3{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:#d8e4ea;letter-spacing:.5px;margin-bottom:8px}
+.cta p{font-size:11px;font-weight:300;color:rgba(200,212,218,.3);margin-bottom:16px;line-height:1.5}
+.cta-btn{display:block;background:var(--acc);color:#0c0e10;border-radius:4px;padding:13px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;text-decoration:none;margin-bottom:7px;letter-spacing:1px}
+.cta-btn2{display:block;background:#12161a;color:rgba(200,212,218,.3);border:1px solid rgba(200,160,64,.1);border-radius:4px;padding:12px;font-size:11px;text-decoration:none;letter-spacing:.5px}
+.contacts{background:#12161a;border:1px solid rgba(200,160,64,.07);border-radius:7px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(200,160,64,.05);font-size:12px;color:rgba(200,212,218,.28)}
+.cr:last-child{border-bottom:none}
+.ci{width:24px;height:24px;background:rgba(200,160,64,.1);border:1px solid rgba(200,160,64,.15);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+footer{border-top:1px solid rgba(200,160,64,.06);padding:14px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2px;color:rgba(200,160,64,.2)}
+</style></head>
+<body><div class="app iso-bg">
+<div class="hero iso-bg">
+  <div class="building"><div class="bld-top"></div><div class="bld-mid"></div><div class="bld-side"></div></div>
+  <div class="hero-top"><div class="hl">VERTEX</div><div class="hb">TAKING PROJECTS</div></div>
+  <h1>Building<br><span class="a">Dhaka's</span><br>future.</h1>
+  <div class="hero-sub">Architecture, structural engineering and luxury construction. From concept drawing to final handover — one accountable partner.</div>
+  <div class="hero-line"></div>
+</div>
+<div class="stats">
+  <div class="st"><div class="st-n">180+</div><div class="st-l">Projects</div></div>
+  <div class="st"><div class="st-n">18yr</div><div class="st-l">Practice</div></div>
+  <div class="st"><div class="st-n">BNBC</div><div class="st-l">Certified</div></div>
+  <div class="st"><div class="st-n">25yr</div><div class="st-l">Warranty</div></div>
+</div>
+<div class="body">
+  <div class="sec">Notable Projects</div>
+  <div class="projects">
+    <div class="proj"><div class="proj-icon">🏢</div><div><div class="proj-name">Dhaka Commercial Tower</div><div class="proj-type">22-floor mixed-use · Gulshan · 2024</div></div><div class="proj-year">2024</div></div>
+    <div class="proj"><div class="proj-icon">🏠</div><div><div class="proj-name">Bashundhara Residences</div><div class="proj-type">80-unit residential complex · 2023</div></div><div class="proj-year">2023</div></div>
+    <div class="proj"><div class="proj-icon">🏭</div><div><div class="proj-name">Narayanganj Industrial</div><div class="proj-type">Garment factory complex · 100,000sqft</div></div><div class="proj-year">2022</div></div>
+  </div>
+  <div class="sec">Services</div>
+  <div class="svcs">
+    <div class="svc"><div class="svc-name">Architectural Design</div><div class="svc-price">Custom</div></div>
+    <div class="svc"><div class="svc-name">Construction Management</div><div class="svc-price">৳450/sqft</div></div>
+    <div class="svc"><div class="svc-name">Structural Engineering</div><div class="svc-price">Custom</div></div>
+    <div class="svc"><div class="svc-name">Interior Fit-Out</div><div class="svc-price">৳800/sqft</div></div>
+  </div>
+  <div class="sec">Commission a Project</div>
+  <div class="cta">
+    <h3>Your vision. Our precision.</h3>
+    <p>Free site visit and initial consultation for all new projects. We work across Dhaka and nationwide.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📐 START YOUR PROJECT</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call the office</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>BGMEA Complex, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu 9am–6pm</div>
+  </div>
+</div>
+<footer>VERTEX ARCHITECTURE & CONSTRUCTION · DHAKA · BNBC CERTIFIED · EST. 2007</footer>
+</div></body></html>

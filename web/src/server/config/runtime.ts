@@ -1,7 +1,11 @@
 import "server-only";
+import path from "node:path";
 
 type RuntimeConfig = {
   appBaseUrl: string;
+  htmlBusinessProfiles: {
+    directory: string;
+  };
   contact: {
     toEmail?: string;
     fromEmail?: string;
@@ -32,6 +36,15 @@ type RuntimeConfig = {
     conciergeLimitPerMinute: number;
     bookingLimitPerMinute: number;
     authLimitPerMinute: number;
+    leadEventLimitPerMinute: number;
+  };
+  notifications: {
+    larkWebhookUrl?: string;
+    larkSigningSecret?: string;
+    hotLeadThreshold: number;
+  };
+  cta: {
+    whatsappHref: string;
   };
 };
 
@@ -60,6 +73,15 @@ function parseBaseUrl(value: string | undefined) {
   }
 }
 
+function parseDirectoryPath(value: string | undefined, fallbackSegments: string[]) {
+  const candidate = value?.trim();
+  if (!candidate) {
+    return path.resolve(process.cwd(), ...fallbackSegments);
+  }
+
+  return path.isAbsolute(candidate) ? candidate : path.resolve(process.cwd(), candidate);
+}
+
 export function getRuntimeConfig(): RuntimeConfig {
   if (cachedRuntimeConfig) {
     return cachedRuntimeConfig;
@@ -67,6 +89,12 @@ export function getRuntimeConfig(): RuntimeConfig {
 
   cachedRuntimeConfig = {
     appBaseUrl: parseBaseUrl(process.env.NEXT_PUBLIC_SITE_URL),
+    htmlBusinessProfiles: {
+      directory: parseDirectoryPath(
+        process.env.HTML_BUSINESS_PROFILES_DIRECTORY,
+        ["..", "Shop", "business-professional", "business-profile-pages"],
+      ),
+    },
     contact: {
       toEmail: process.env.CONTACT_TO_EMAIL,
       fromEmail: process.env.CONTACT_FROM_EMAIL,
@@ -92,11 +120,20 @@ export function getRuntimeConfig(): RuntimeConfig {
       secretKey: process.env.SUPABASE_SECRET_KEY,
       serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY,
     },
+    notifications: {
+      larkWebhookUrl: process.env.LARK_WEBHOOK_URL?.trim() || undefined,
+      larkSigningSecret: process.env.LARK_SIGNING_SECRET?.trim() || undefined,
+      hotLeadThreshold: parseNumber(process.env.LEAD_HOT_THRESHOLD, 30),
+    },
+    cta: {
+      whatsappHref: process.env.NEXT_PUBLIC_WHATSAPP_HREF?.trim() || "https://wa.me/8801986925425",
+    },
     abuseProtection: {
       contactLimitPerMinute: parseNumber(process.env.RATE_LIMIT_CONTACT_PER_MINUTE, 6),
       conciergeLimitPerMinute: parseNumber(process.env.RATE_LIMIT_CONCIERGE_PER_MINUTE, 12),
       bookingLimitPerMinute: parseNumber(process.env.RATE_LIMIT_BOOKING_PER_MINUTE, 6),
       authLimitPerMinute: parseNumber(process.env.RATE_LIMIT_AUTH_PER_MINUTE, 10),
+      leadEventLimitPerMinute: parseNumber(process.env.RATE_LIMIT_LEAD_EVENT_PER_MINUTE, 60),
     },
   };
 

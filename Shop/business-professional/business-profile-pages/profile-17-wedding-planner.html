@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>White Rose Weddings — Wedding Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Lato',sans-serif;background:#7a4a5a;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#fef9f6;margin:0 auto}
+
+.hero{min-height:320px;background:linear-gradient(170deg,#f8e8e8 0%,#f0d4d4 40%,#e8c4c8 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:50px 22px 28px;text-align:center;border-bottom:1px solid #f0d4d4}
+.hero-watercolor{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 30%,rgba(255,255,255,.5) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,rgba(220,160,160,.2) 0%,transparent 50%)}
+.hero-flower1{position:absolute;top:-10px;left:-20px;font-size:80px;opacity:.08;transform:rotate(-20deg)}
+.hero-flower2{position:absolute;bottom:-10px;right:-20px;font-size:80px;opacity:.08;transform:rotate(30deg)}
+.hero-monogram{width:72px;height:72px;border:1.5px solid rgba(180,80,100,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;background:rgba(255,255,255,.6)}
+.hero-mono-text{font-family:'Great Vibes',cursive;font-size:32px;color:rgba(140,60,80,.7)}
+.hero h1{font-family:'Great Vibes',cursive;font-size:52px;color:#6b3040;line-height:.95;text-shadow:0 2px 8px rgba(180,80,100,.1)}
+.hero-tagline{font-family:'Libre Baskerville',serif;font-style:italic;font-size:13px;color:rgba(107,48,64,.55);margin-top:10px;line-height:1.6}
+.hero-rule{display:flex;align-items:center;gap:10px;margin:14px auto 0;width:fit-content}
+.hero-rule-line{width:30px;height:1px;background:rgba(107,48,64,.25)}
+.hero-rule-diamond{color:rgba(107,48,64,.4);font-size:8px}
+
+.couple-strip{background:#fff;border-bottom:1px solid #f5e4e4;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.couple-strip span{font-family:'Libre Baskerville',serif;font-size:11px;font-style:italic;color:rgba(107,48,64,.5)}
+.couple-strip strong{font-family:'Great Vibes',cursive;font-size:16px;color:#8c3c50}
+
+.body{padding:0 18px 40px}
+.sec{font-family:'Great Vibes',cursive;font-size:28px;color:#8c3c50;margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(140,60,80,.2),transparent)}
+
+.services{display:flex;flex-direction:column;gap:8px}
+.svc-card{background:#fff;border:1px solid #f5e4e4;border-radius:12px;padding:18px;display:flex;gap=14px;align-items:center;gap:14px;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#d4a0b0,#b87890)}
+.svc-icon{font-size:26px;flex-shrink:0}
+.svc-name{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;color:#3d1822;font-style:italic}
+.svc-desc{font-size:11px;color:rgba(61,24,34,.4);margin-top:3px;line-height:1.5}
+.svc-price{margin-left:auto;text-align:right;flex-shrink:0}
+.svc-price-val{font-family:'Libre Baskerville',serif;font-size:16px;color:#8c3c50;font-style:italic}
+.svc-price-note{font-size:9px;color:rgba(61,24,34,.3);margin-top:2px}
+
+.packages{display:grid;grid-template-columns:1fr;gap:10px}
+.pkg{background:#fff;border:1px solid #f5e4e4;border-radius:12px;padding:20px;text-align:center;position:relative}
+.pkg.signature{background:linear-gradient(160deg,#6b3040,#8c3c50);border:none}
+.pkg-crown{font-size:20px;margin-bottom:8px}
+.pkg-name{font-family:'Great Vibes',cursive;font-size:24px;color:#6b3040;margin-bottom:4px}
+.pkg.signature .pkg-name{color:#fef0f0}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:26px;font-weight:700;color:#6b3040;font-style:italic}
+.pkg.signature .pkg-price{color:#f8d0d8}
+.pkg-period{font-size:10px;color:rgba(107,48,64,.4);margin-bottom:14px}
+.pkg.signature .pkg-period{color:rgba(248,208,216,.5)}
+.pkg-feats{text-align:left;display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.pkg-feat{font-size:12px;color:rgba(61,24,34,.5);display:flex;align-items:center;gap:8px}
+.pkg.signature .pkg-feat{color:rgba(248,208,216,.7)}
+.pkg-feat::before{content:'✿';color:#b87890;font-size:10px;flex-shrink:0}
+.pkg.signature .pkg-feat::before{color:rgba(248,208,216,.6)}
+.pkg-btn{display:block;border:1px solid rgba(107,48,64,.2);color:rgba(107,48,64,.6);border-radius:100px;padding:10px 20px;font-size:11px;font-family:'Libre Baskerville',serif;font-style:italic;text-decoration:none}
+.pkg.signature .pkg-btn{background:rgba(255,255,255,.1);border-color:rgba(248,208,216,.3);color:rgba(248,208,216,.8)}
+
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px}
+.gal-cell{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;overflow:hidden}
+.gal-label{position:absolute;bottom:6px;left:6px;right:6px;font-size:9px;font-style:italic;font-family:'Libre Baskerville',serif;color:rgba(255,255,255,.7);text-align:center;letter-spacing:.5px}
+
+.testimonial{background:#fff;border:1px solid #f5e4e4;border-radius:12px;padding:20px;text-align:center;position:relative}
+.testi-flower{font-size:24px;margin-bottom:12px}
+.testi-quote{font-family:'Libre Baskerville',serif;font-style:italic;font-size:14px;color:#3d1822;line-height:1.7;margin-bottom:14px}
+.testi-dash{width:30px;height:1px;background:rgba(107,48,64,.2);margin:0 auto 10px}
+.testi-name{font-family:'Great Vibes',cursive;font-size:20px;color:#8c3c50}
+.testi-date{font-size:10px;color:rgba(61,24,34,.3);margin-top:3px;letter-spacing:.5px}
+
+.consult-box{background:linear-gradient(160deg,#6b3040,#4a1f2c);border-radius:16px;padding:24px;text-align:center}
+.consult-box h3{font-family:'Great Vibes',cursive;font-size:36px;color:#fef0f0;margin-bottom:8px}
+.consult-box p{font-size:12px;color:rgba(254,240,240,.5);margin-bottom:20px;line-height:1.6;font-style:italic}
+.consult-btn{display:block;background:#fef0f0;color:#6b3040;border-radius:100px;padding:14px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:14px;text-decoration:none;margin-bottom:10px}
+.consult-social{display:flex;gap:8px;justify-content:center}
+.soc{background:rgba(254,240,240,.08);border:1px solid rgba(254,240,240,.15);border-radius:100px;padding:8px 16px;font-size:11px;color:rgba(254,240,240,.5);text-decoration:none}
+
+.contact-list{background:#fff;border:1px solid #f5e4e4;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #fdf0f0;font-size:12px;color:rgba(61,24,34,.5)}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#fdf0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#6b3040;padding:22px;text-align:center}
+.footer-logo{font-family:'Great Vibes',cursive;font-size:30px;color:rgba(254,240,240,.3);margin-bottom:6px}
+.footer-copy{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(254,240,240,.2)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-watercolor"></div>
+  <div class="hero-flower1">🌹</div>
+  <div class="hero-flower2">🌹</div>
+  <div class="hero-monogram"><div class="hero-mono-text">WR</div></div>
+  <h1>White Rose<br>Weddings</h1>
+  <div class="hero-tagline">Crafting timeless weddings<br>for love stories that last forever.</div>
+  <div class="hero-rule"><div class="hero-rule-line"></div><div class="hero-rule-diamond">✦</div><div class="hero-rule-line"></div></div>
+</div>
+<div class="couple-strip">
+  <span>📍 Dhaka, Bangladesh</span>
+  <strong>Est. 2014</strong>
+  <span>⭐ 4.9 · 120 weddings</span>
+</div>
+<div class="body">
+  <div class="sec">Our Services</div>
+  <div class="services">
+    <div class="svc-card"><div class="svc-icon">👰</div><div><div class="svc-name">Full Wedding Planning</div><div class="svc-desc">End-to-end coordination from engagement to honeymoon</div></div><div class="svc-price"><div class="svc-price-val">From $2,000</div><div class="svc-price-note">per wedding</div></div></div>
+    <div class="svc-card"><div class="svc-icon">🌸</div><div><div class="svc-name">Floral &amp; Décor Design</div><div class="svc-desc">Ceremony &amp; reception styling, centrepieces, arches</div></div><div class="svc-price"><div class="svc-price-val">From $800</div></div></div>
+    <div class="svc-card"><div class="svc-icon">📷</div><div><div class="svc-name">Vendor Coordination</div><div class="svc-desc">Catering, photography, music, transport — all managed</div></div><div class="svc-price"><div class="svc-price-val">From $500</div></div></div>
+    <div class="svc-card"><div class="svc-icon">📋</div><div><div class="svc-name">Day-Of Coordination</div><div class="svc-desc">We run the day so you can enjoy every moment</div></div><div class="svc-price"><div class="svc-price-val">$350</div></div></div>
+  </div>
+
+  <div class="sec">Packages</div>
+  <div class="packages">
+    <div class="pkg signature">
+      <div class="pkg-crown">👑</div>
+      <div class="pkg-name">The Royal Package</div>
+      <div class="pkg-price">$4,500</div>
+      <div class="pkg-period">complete wedding experience</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">Full planning &amp; coordination (12 months)</div>
+        <div class="pkg-feat">Custom floral &amp; décor design</div>
+        <div class="pkg-feat">Honeymoon planning</div>
+        <div class="pkg-feat">Rehearsal dinner management</div>
+        <div class="pkg-feat">Dedicated wedding planner</div>
+        <div class="pkg-feat">24/7 WhatsApp support</div>
+      </div>
+      <a href="#" class="pkg-btn">Enquire about Royal →</a>
+    </div>
+    <div class="pkg">
+      <div class="pkg-crown">🌹</div>
+      <div class="pkg-name">The Classic</div>
+      <div class="pkg-price">$2,000</div>
+      <div class="pkg-period">planning + day coordination</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat">6-month planning support</div>
+        <div class="pkg-feat">Vendor sourcing &amp; negotiation</div>
+        <div class="pkg-feat">Day-of coordination team</div>
+        <div class="pkg-feat">Décor consultation</div>
+      </div>
+      <a href="#" class="pkg-btn">Enquire about Classic →</a>
+    </div>
+  </div>
+
+  <div class="sec">Gallery</div>
+  <div class="gallery">
+    <div class="gal-cell" style="background:linear-gradient(135deg,#e8c4c8,#d0a0a8)">💍<div class="gal-label">Ceremony</div></div>
+    <div class="gal-cell" style="background:linear-gradient(135deg,#d4b0b8,#c09098)">🌹<div class="gal-label">Florals</div></div>
+    <div class="gal-cell" style="background:linear-gradient(135deg,#c8a8b0,#b09098)">🎂<div class="gal-label">Reception</div></div>
+    <div class="gal-cell" style="background:linear-gradient(135deg,#dcc0c4,#c4a0a8)">✨<div class="gal-label">Décor</div></div>
+  </div>
+
+  <div class="sec">Love Stories</div>
+  <div class="testimonial">
+    <div class="testi-flower">🌹</div>
+    <div class="testi-quote">"White Rose made our wedding absolutely magical. Every detail was perfect — we didn't have to worry about a single thing on the day."</div>
+    <div class="testi-dash"></div>
+    <div class="testi-name">Nadia &amp; Rahul</div>
+    <div class="testi-date">Married · March 2025 · Gulshan, Dhaka</div>
+  </div>
+
+  <div class="sec">Begin Your Journey</div>
+  <div class="consult-box">
+    <h3>Let's plan your dream day.</h3>
+    <p>A free 30-minute call to hear your love story and share how we can bring your wedding vision to life.</p>
+    <a href="https://wa.me/0000000000" class="consult-btn">💌 Book a Free Consultation</a>
+    <div class="consult-social">
+      <a href="#" class="soc">📸 Instagram</a>
+      <a href="#" class="soc">📘 Facebook</a>
+      <a href="#" class="soc">📌 Pinterest</a>
+    </div>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-list">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📧</div>hello@whiteroseweddings.com</div>
+    <div class="c-row"><div class="c-icon">📍</div>Gulshan-2, Dhaka 1212</div>
+    <div class="c-row"><div class="c-icon">⏰</div>Sun–Thu · 10am – 7pm</div>
+  </div>
+</div>
+<footer><div class="footer-logo">White Rose</div><div class="footer-copy">© 2025 White Rose Weddings · Dhaka · All rights reserved</div></footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>RizeStrong — Personal Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#e0dcda;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#e8e4e2;margin:0 auto;color:#1e1614}
+/* Warm stone neumorphic */
+.hero{min-height:272px;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 22px 22px;position:relative;background:#e8e4e2}
+.hero-top{position:absolute;top:24px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.hl{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:rgba(30,22,20,.3);letter-spacing:2px;text-transform:uppercase}
+.hb{font-size:9px;background:#e8e4e2;border-radius:100px;padding:4px 12px;color:rgba(30,22,20,.35);font-weight:600;box-shadow:-2px -2px 5px rgba(255,255,255,.75),2px 2px 5px rgba(188,178,172,.6)}
+.hero h1{font-family:'Oswald',sans-serif;font-size:46px;font-weight:700;line-height:.88;letter-spacing:-.5px;text-transform:uppercase;color:#1e1614}
+.hero h1 .acc{color:#e05020}
+.hero-sub{font-size:11px;color:rgba(30,22,20,.4);margin-top:9px;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 18px}
+.st{background:#e8e4e2;border-radius:16px;padding:14px 0;text-align:center;box-shadow:-4px -4px 10px rgba(255,255,255,.75),4px 4px 10px rgba(188,178,172,.65)}
+.st-n{font-family:'Oswald',sans-serif;font-size:20px;color:#e05020;font-weight:700;letter-spacing:-.5px}
+.st-l{font-size:8px;color:rgba(30,22,20,.3);margin-top:3px;letter-spacing:.5px;font-weight:600}
+.body{padding:0 16px 40px}
+.sec{font-family:'Oswald',sans-serif;font-size:14px;color:rgba(30,22,20,.35);letter-spacing:2px;text-transform:uppercase;margin:20px 0 12px;font-weight:600}
+.programs{display:flex;flex-direction:column;gap:8px}
+.prog{background:#e8e4e2;border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;box-shadow:-4px -4px 10px rgba(255,255,255,.75),4px 4px 10px rgba(188,178,172,.6)}
+.prog-icon{font-size:28px;flex-shrink:0}
+.prog-name{font-family:'Oswald',sans-serif;font-size:16px;color:#1e1614;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.prog-desc{font-size:10px;color:rgba(30,22,20,.4);margin-top:3px;line-height:1.4}
+.prog-price{font-family:'Oswald',sans-serif;font-size:20px;color:#e05020;font-weight:700;flex-shrink:0;text-align:right}
+.prog-price span{display:block;font-size:9px;color:rgba(30,22,20,.3);font-family:'DM Sans',sans-serif;font-weight:400;margin-top:1px}
+.cta{background:#e8e4e2;border-radius:22px;padding:26px;text-align:center;box-shadow:-6px -6px 14px rgba(255,255,255,.8),6px 6px 14px rgba(188,178,172,.65)}
+.cta h3{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:#1e1614;letter-spacing:.5px;margin-bottom:8px}
+.cta p{font-size:11px;color:rgba(30,22,20,.4);margin-bottom:20px;line-height:1.6}
+.cta-btn{display:block;background:#e05020;color:#fff;border-radius:14px;padding:15px;font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 18px rgba(224,80,32,.3)}
+.cta-btn2{display:block;background:#e8e4e2;color:rgba(30,22,20,.4);border-radius:14px;padding:13px;font-size:12px;font-weight:600;text-decoration:none;box-shadow:-3px -3px 8px rgba(255,255,255,.75),3px 3px 8px rgba(188,178,172,.6)}
+.contacts{background:#e8e4e2;border-radius:16px;overflow:hidden;box-shadow:-4px -4px 10px rgba(255,255,255,.75),4px 4px 10px rgba(188,178,172,.55)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(188,178,172,.3);font-size:12px;color:rgba(30,22,20,.4)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#e05020;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;box-shadow:0 3px 10px rgba(224,80,32,.3)}
+footer{background:#dedad8;padding:14px;text-align:center;font-family:'Oswald',sans-serif;font-size:11px;color:rgba(30,22,20,.2);letter-spacing:2px}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-top"><div class="hl">RizeStrong</div><div class="hb">🔥 Slots available</div></div>
+  <h1>Train hard.<br>Rise <span class="acc">stronger.</span></h1>
+  <div class="hero-sub">Private and group personal training in Dhaka. Transformation programs for all fitness levels. NASM certified coach.</div>
+</div>
+<div class="stats">
+  <div class="st"><div class="st-n">200+</div><div class="st-l">Clients</div></div>
+  <div class="st"><div class="st-n">8yr</div><div class="st-l">Coaching</div></div>
+  <div class="st"><div class="st-n">NASM</div><div class="st-l">Certified</div></div>
+</div>
+<div class="body">
+  <div class="sec">Training Programs</div>
+  <div class="programs">
+    <div class="prog"><div class="prog-icon">💪</div><div><div class="prog-name">1-on-1 Private</div><div class="prog-desc">Personalised training plan, nutrition guide, weekly check-ins</div></div><div class="prog-price">৳8,000<span>/ month</span></div></div>
+    <div class="prog"><div class="prog-icon">👥</div><div><div class="prog-name">Group Training</div><div class="prog-desc">Small groups of 4–6 · HIIT, strength, cardio — mixed</div></div><div class="prog-price">৳4,000<span>/ month</span></div></div>
+    <div class="prog"><div class="prog-icon">📱</div><div><div class="prog-name">Online Coaching</div><div class="prog-desc">Full plan via app, video form checks, weekly call</div></div><div class="prog-price">৳3,000<span>/ month</span></div></div>
+    <div class="prog"><div class="prog-icon">⚡</div><div><div class="prog-name">12-Week Transformation</div><div class="prog-desc">Dedicated program · guaranteed results or refund</div></div><div class="prog-price">৳20,000<span>total</span></div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Start Today</div>
+  <div class="cta">
+    <h3>Free trial session.</h3>
+    <p>Your first training session is on us. Come in, train hard, see if we're the right fit.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">💪 Claim Free Trial</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call to book</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-1, Dhaka · Private Studio</div>
+    <div class="cr"><div class="ci">⏰</div>Daily 6am–9pm · by appointment</div>
+  </div>
+</div>
+<footer>RIZESTRONG · PERSONAL TRAINING · DHAKA · NASM CERTIFIED</footer>
+</div></body></html>

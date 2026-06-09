@@ -1,0 +1,26 @@
+﻿[
+    {
+        "source_file":  "invoice-c.html",
+        "type_slug":  "html-invoice-templates",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "C",
+        "target_shop_path":  "Shop/documents-reports/html-invoice-templates/invoice-c.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/invoice\\invoice-c.html"
+    },
+    {
+        "source_file":  "invoice-b.html",
+        "type_slug":  "html-invoice-templates",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "B",
+        "target_shop_path":  "Shop/documents-reports/html-invoice-templates/invoice-b.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/invoice\\invoice-b.html"
+    },
+    {
+        "source_file":  "invoice-a.html",
+        "type_slug":  "html-invoice-templates",
+        "parent_category_slug":  "documents-reports",
+        "variant_label":  "A",
+        "target_shop_path":  "Shop/documents-reports/html-invoice-templates/invoice-a.html",
+        "legacy_path_alias":  "SHOP DUMP FOLDER/MIXED/invoice\\invoice-a.html"
+    }
+]

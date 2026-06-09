@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Home Loan EMI Calculator — Bangladesh</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f0f4f8;font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px}
+.card{background:#fff;border-radius:24px;overflow:hidden;max-width:900px;width:100%;box-shadow:0 4px 48px rgba(0,0,0,.08)}
+.card-header{background:linear-gradient(135deg,#0f2b5b,#1a4a9a);padding:36px 40px;color:#fff}
+.card-header h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.card-header p{font-size:14px;color:rgba(255,255,255,.55);font-weight:300}
+.card-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.inputs{padding:36px 40px;border-right:1px solid #f0f4f8}
+.input-group{margin-bottom:28px}
+label{display:block;font-size:12px;font-weight:600;color:#374151;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.input-wrap{position:relative}
+.input-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;color:#94a3b8;font-weight:500}
+.input-suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:13px;color:#94a3b8;font-weight:500}
+input[type=range]{width:100%;accent-color:#1a4a9a;height:4px;cursor:pointer;margin-top:8px}
+.val-display{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px 12px 36px;font-size:18px;font-weight:700;color:#0f172a;margin-bottom:6px}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:#94a3b8}
+.results{padding:36px 40px;background:#f8fafc}
+.results h3{font-size:13px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px}
+.result-primary{background:#0f2b5b;border-radius:14px;padding:24px;text-align:center;margin-bottom:16px;color:#fff}
+.rp-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.rp-value{font-size:3rem;font-weight:800;letter-spacing:-2px;line-height:1;color:#fff}
+.rp-unit{font-size:14px;color:rgba(255,255,255,.5);margin-top:4px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.result-item{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px;text-align:center}
+.ri-label{font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+.ri-value{font-size:1.1rem;font-weight:700;color:#0f172a}
+.ri-value.positive{color:#15803d}
+.ri-value.negative{color:#dc2626}
+.breakdown-bar{margin-bottom:16px}
+.bb-label{display:flex;justify-content:space-between;font-size:12px;color:#64748b;margin-bottom:6px}
+.bb-track{background:#e2e8f0;border-radius:4px;height:8px;overflow:hidden}
+.bb-fill-principal{background:#0f2b5b;height:8px;border-radius:4px 0 0 4px}
+.bb-fill-interest{background:#4a90ff;height:8px;border-radius:0 4px 4px 0}
+.bb-combined{display:flex}
+.disclaimer{font-size:11px;color:#94a3b8;line-height:1.6;border-top:1px solid #e2e8f0;padding-top:14px;margin-top:14px}
+@media(max-width:700px){.card-body{grid-template-columns:1fr}.inputs{border-right:none;border-bottom:1px solid #f0f4f8}.card-header{padding:28px 24px}.inputs,.results{padding:28px 24px}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+    <h1>🏠 Home Loan EMI Calculator</h1>
+    <p>Calculate your monthly mortgage payment instantly — Bangladesh banks &amp; rates</p>
+  </div>
+  <div class="card-body">
+    <div class="inputs">
+      <div class="input-group">
+        <label>Loan Amount</label>
+        <div class="input-wrap">
+          <span class="input-prefix">৳</span>
+          <div class="val-display" id="loanDisplay">50,00,000</div>
+        </div>
+        <input type="range" id="loanAmount" min="500000" max="20000000" step="100000" value="5000000">
+        <div class="range-labels"><span>৳5 Lakh</span><span>৳2 Crore</span></div>
+      </div>
+      <div class="input-group">
+        <label>Annual Interest Rate</label>
+        <div class="input-wrap">
+          <div class="val-display" id="rateDisplay" style="padding-left:14px">9.0 <span style="font-size:14px;color:#94a3b8">%</span></div>
+        </div>
+        <input type="range" id="interestRate" min="5" max="18" step="0.5" value="9">
+        <div class="range-labels"><span>5%</span><span>18%</span></div>
+      </div>
+      <div class="input-group">
+        <label>Loan Tenure</label>
+        <div class="input-wrap">
+          <div class="val-display" id="tenureDisplay" style="padding-left:14px">20 <span style="font-size:14px;color:#94a3b8">years</span></div>
+        </div>
+        <input type="range" id="tenure" min="1" max="30" step="1" value="20">
+        <div class="range-labels"><span>1 year</span><span>30 years</span></div>
+      </div>
+    </div>
+    <div class="results">
+      <h3>Your Payment Breakdown</h3>
+      <div class="result-primary">
+        <div class="rp-label">Monthly EMI</div>
+        <div class="rp-value" id="emi">৳45,000</div>
+        <div class="rp-unit">per month</div>
+      </div>
+      <div class="result-grid">
+        <div class="result-item"><div class="ri-label">Principal</div><div class="ri-value" id="principal">৳50,00,000</div></div>
+        <div class="result-item"><div class="ri-label">Total Interest</div><div class="ri-value negative" id="totalInterest">৳58,00,000</div></div>
+        <div class="result-item"><div class="ri-label">Total Amount</div><div class="ri-value" id="totalAmount">৳1,08,00,000</div></div>
+        <div class="result-item"><div class="ri-label">Interest %</div><div class="ri-value negative" id="interestPct">53.7%</div></div>
+      </div>
+      <div class="breakdown-bar">
+        <div class="bb-label"><span>🟦 Principal</span><span>🔷 Interest</span></div>
+        <div class="bb-track"><div class="bb-combined">
+          <div class="bb-fill-principal" id="principalBar" style="width:46%"></div>
+          <div class="bb-fill-interest" id="interestBar" style="width:54%"></div>
+        </div></div>
+      </div>
+      <div class="disclaimer">* Calculations are indicative only. Actual EMI may vary based on bank processing fees, insurance, and exact rate structure. Consult your lender for precise figures.</div>
+    </div>
+  </div>
+</div>
+<script>
+function fmt(n){return '৳'+Math.round(n).toLocaleString('en-IN')}
+function calc(){
+  const P=+document.getElementById('loanAmount').value;
+  const r=(+document.getElementById('interestRate').value/12)/100;
+  const n=+document.getElementById('tenure').value*12;
+  const emi=r>0?P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):P/n;
+  const total=emi*n;
+  const interest=total-P;
+  const pct=Math.round(interest/total*100);
+  document.getElementById('emi').textContent=fmt(emi);
+  document.getElementById('principal').textContent=fmt(P);
+  document.getElementById('totalInterest').textContent=fmt(interest);
+  document.getElementById('totalAmount').textContent=fmt(total);
+  document.getElementById('interestPct').textContent=pct+'%';
+  document.getElementById('principalBar').style.width=(100-pct)+'%';
+  document.getElementById('interestBar').style.width=pct+'%';
+  document.getElementById('loanDisplay').textContent=fmt(P).replace('৳','');
+  document.getElementById('rateDisplay').innerHTML=document.getElementById('interestRate').value+' <span style="font-size:14px;color:#94a3b8">%</span>';
+  document.getElementById('tenureDisplay').innerHTML=document.getElementById('tenure').value+' <span style="font-size:14px;color:#94a3b8">years</span>';
+}
+['loanAmount','interestRate','tenure'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+calc();
+</script>
+</body></html>

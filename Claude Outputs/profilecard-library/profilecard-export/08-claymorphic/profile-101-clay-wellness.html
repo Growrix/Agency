@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Calm Space — Mental Wellness App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(165deg,#c8f0f8 0%,#d4e8ff 40%,#dcd4ff 100%);margin:0 auto}
+.clay{box-shadow:0 2px 0 rgba(255,255,255,.95) inset,0 -3px 0 rgba(0,0,0,.07) inset,0 12px 30px rgba(0,0,0,.11),0 3px 8px rgba(0,0,0,.07)}
+.clay-sm{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 7px 18px rgba(0,0,0,.09),0 2px 5px rgba(0,0,0,.05)}
+.hero{padding:32px 18px 22px;position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+.moon{position:absolute;top:12px;right:12px;font-size:54px;animation:sway 4s ease-in-out infinite;transform-origin:top center}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.stars-bg{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.star-dot{position:absolute;background:#fff;border-radius:50%;animation:twinkle 2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:5px 14px;font-size:11px;font-weight:800;color:#5040c0;margin-bottom:14px;width:fit-content}
+.hero-badge{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 5px 14px rgba(80,64,192,.2),0 2px 4px rgba(0,0,0,.06)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:42px;font-weight:900;color:#1a1060;line-height:.9;letter-spacing:-2px}
+.hero h1 .soft{color:#6050e0}
+.hero-sub{font-size:12px;color:rgba(26,16,96,.42);margin-top:9px;line-height:1.55;font-weight:600}
+.mood-check{background:#fff;border-radius:22px;padding:16px 18px;margin:8px 14px;display:flex;align-items:center;gap:12px}
+.mood-check{box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.06) inset,0 8px 22px rgba(0,0,0,.09),0 2px 5px rgba(0,0,0,.05)}
+.mood-label{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#1a1060;flex:1}
+.moods{display:flex;gap:8px}
+.mood-em{font-size:26px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.15));cursor:default;transition:transform .2s}
+.mood-em.active{transform:scale(1.25)}
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:rgba(26,16,96,.32);margin:18px 0 12px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.feat{border-radius:22px;padding:18px;min-height:115px;display:flex;flex-direction:column;justify-content:flex-end}
+.f1{background:linear-gradient(135deg,#d8f0ff,#c0e0ff)}.f2{background:linear-gradient(135deg,#f0deff,#e0c8ff)}
+.f3{background:linear-gradient(135deg,#d8ffe8,#c0f0d8)}.f4{background:linear-gradient(135deg,#fff3d8,#ffe0b0)}
+.feat-icon{font-size:30px;margin-bottom:8px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.12))}
+.feat-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#1a1060;letter-spacing:-.3px}
+.feat-desc{font-size:9px;color:rgba(26,16,96,.4);margin-top:3px;font-weight:600;line-height:1.4}
+.sessions{display:flex;flex-direction:column;gap:8px}
+.sess{background:#fff;border-radius:20px;padding:15px 17px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sess-icon{font-size:26px;flex-shrink:0}
+.sess-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#1a1060}
+.sess-dur{font-size:10px;color:rgba(26,16,96,.38);margin-top:2px;font-weight:600}
+.sess-badge{background:linear-gradient(135deg,#6050e0,#9040d0);color:#fff;border-radius:100px;padding:4px 12px;font-size:10px;font-weight:900;flex-shrink:0}
+.cta{background:linear-gradient(135deg,#5040c0,#9060e0);border-radius:26px;padding:26px;text-align:center}
+.cta{box-shadow:0 3px 0 rgba(255,255,255,.18) inset,0 -3px 0 rgba(0,0,0,.14) inset,0 16px 40px rgba(80,64,192,.3),0 4px 12px rgba(0,0,0,.1)}
+.cta h3{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(255,255,255,.58);margin-bottom:20px;line-height:1.5;font-weight:600}
+.cta-btn{display:block;background:#fff;color:#5040c0;border-radius:18px;padding:14px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;text-decoration:none;margin-bottom:10px;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -3px 0 rgba(0,0,0,.1) inset,0 8px 20px rgba(0,0,0,.15)}
+.cta-btn2{display:block;background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);border-radius:18px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;text-decoration:none}
+.contacts{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(0,0,0,.05) inset,0 8px 20px rgba(0,0,0,.08)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(26,16,96,.06);font-size:12px;color:rgba(26,16,96,.42);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:32px;height:32px;background:linear-gradient(135deg,#5040c0,#9060e0);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 12px rgba(80,64,192,.3)}
+footer{text-align:center;padding:20px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:rgba(26,16,96,.2)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="moon">🌙</div>
+  <div class="stars-bg">
+    <div class="star-dot" style="width:4px;height:4px;top:30px;left:30px;animation-delay:0s"></div>
+    <div class="star-dot" style="width:3px;height:3px;top:60px;left:80px;animation-delay:.4s"></div>
+    <div class="star-dot" style="width:5px;height:5px;top:45px;left:160px;animation-delay:.8s"></div>
+    <div class="star-dot" style="width:3px;height:3px;top:90px;left:60px;animation-delay:1.2s"></div>
+  </div>
+  <div class="hero-badge clay-sm">🧘 200K+ sessions completed this week</div>
+  <h1>Feel better,<br><span class="soft">every day.</span> 🌟</h1>
+  <div class="hero-sub">Guided meditation, sleep stories, breathing exercises and mood tracking — your pocket therapist.</div>
+</div>
+<div class="mood-check clay">
+  <div class="mood-label">How are you feeling?</div>
+  <div class="moods">
+    <span class="mood-em">😢</span>
+    <span class="mood-em">😐</span>
+    <span class="mood-em active">🙂</span>
+    <span class="mood-em">😄</span>
+    <span class="mood-em">🤩</span>
+  </div>
+</div>
+<div class="body">
+  <div class="sec">What we offer 🌈</div>
+  <div class="features">
+    <div class="feat clay-sm f1"><div class="feat-icon">🧘</div><div class="feat-name">Guided Meditation</div><div class="feat-desc">500+ sessions · 5–30 min</div></div>
+    <div class="feat clay-sm f2"><div class="feat-icon">🌙</div><div class="feat-name">Sleep Stories</div><div class="feat-desc">Fall asleep faster every night</div></div>
+    <div class="feat clay-sm f3"><div class="feat-icon">💨</div><div class="feat-name">Breathing Tools</div><div class="feat-desc">Box, 4-7-8, coherent breathing</div></div>
+    <div class="feat clay-sm f4"><div class="feat-icon">📊</div><div class="feat-name">Mood Tracker</div><div class="feat-desc">Daily check-ins, patterns & insights</div></div>
+  </div>
+  <div class="sec">Today's sessions 🌿</div>
+  <div class="sessions">
+    <div class="sess clay-sm"><div class="sess-icon">🌅</div><div><div class="sess-name">Morning Calm</div><div class="sess-dur">10 min · Beginner friendly</div></div><div class="sess-badge">Free</div></div>
+    <div class="sess clay-sm"><div class="sess-icon">💙</div><div><div class="sess-name">Anxiety Relief</div><div class="sess-dur">15 min · Breathing + body scan</div></div><div class="sess-badge">Pro</div></div>
+    <div class="sess clay-sm"><div class="sess-icon">💤</div><div><div class="sess-name">Deep Sleep Story</div><div class="sess-dur">30 min · Drift into dreamland</div></div><div class="sess-badge">Pro</div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Your wellbeing starts here 🌸</div>
+  <div class="cta">
+    <h3>🌟 7 days free trial!</h3>
+    <p>Full Pro access — all meditations, sleep stories and coaching. No card needed to start.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🧘 Start Free Trial</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Talk to our wellness team</a>
+  </div>
+  <div class="sec" style="margin-top:20px">Get the app 📱</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📱</div>iOS & Android · Free download</div>
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📧</div>hello@calmspace.app</div>
+  </div>
+</div>
+<footer>© 2025 Calm Space · Mental Wellness · Be kind to your mind 🌙</footer>
+</div></body></html>

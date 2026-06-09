@@ -28,6 +28,12 @@ export async function POST(request: NextRequest) {
     const message = typeof body.message === "string" ? body.message.trim() : "";
     const pagePath = typeof body.pagePath === "string" ? body.pagePath : "/ai-concierge";
     const sessionId = typeof body.sessionId === "string" ? body.sessionId : undefined;
+    const leadEmail =
+      typeof (body as Record<string, unknown>).leadEmail === "string"
+        ? ((body as Record<string, unknown>).leadEmail as string)
+        : typeof (body as Record<string, unknown>).email === "string"
+          ? ((body as Record<string, unknown>).email as string)
+          : undefined;
 
     if (message.length < 2) {
       throw new ApiError("INVALID_REQUEST", 400, "Message must be at least 2 characters long.");
@@ -44,6 +50,7 @@ export async function POST(request: NextRequest) {
       userMessage: message,
       assistantMessage: reply.answer,
       responseState: reply.responseState,
+      leadEmail,
       requestId: context.requestId,
       ip: context.ip,
     });

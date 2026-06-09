@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ProfileCard — 8 Design Styles · 24 Profiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#06080d;color:#fff;font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}
+
+/* === HEADER === */
+.masthead{text-align:center;padding:80px 24px 52px}
+.m-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:5px 18px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:22px}
+.m-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);animation:pulse .8s infinite alternate}
+@keyframes pulse{from{opacity:.4}to{opacity:1}}
+.masthead h1{font-family:'Syne',sans-serif;font-size:clamp(28px,7vw,58px);font-weight:900;letter-spacing:-3px;line-height:.88;margin-bottom:14px;background:linear-gradient(135deg,#fff 50%,rgba(255,255,255,.3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.masthead p{color:rgba(255,255,255,.22);font-size:13px;max-width:580px;margin:0 auto;line-height:1.75}
+
+/* === STYLE LEGEND === */
+.legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:0 24px 48px}
+.leg{display:flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:.3px;cursor:default}
+
+/* === STYLE SECTIONS === */
+.style-section{padding:12px 0 44px;border-top:1px solid rgba(255,255,255,.04)}
+.section-header{padding:28px 24px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.sh-left{flex:1}
+.sh-badge{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:7px 16px;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:8px}
+.sh-name{font-family:'Syne',sans-serif;font-size:24px;font-weight:900;letter-spacing:-1px;color:#fff;line-height:.95;margin-bottom:6px}
+.sh-desc{font-size:11px;color:rgba(255,255,255,.2);max-width:480px;line-height:1.65}
+.sh-right{flex-shrink:0;text-align:right}
+.sh-count{font-family:'Syne',sans-serif;font-size:36px;font-weight:900;color:rgba(255,255,255,.06);letter-spacing:-2px;line-height:1}
+.sh-profiles{font-size:9px;color:rgba(255,255,255,.12);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* CSS marker for each style */
+.css-tag{font-size:10px;font-weight:600;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:3px 9px;color:rgba(255,255,255,.25);font-family:'DM Mono',monospace;margin-top:8px;display:inline-block}
+
+/* === PHONE SCROLLER === */
+.scroller{display:flex;gap:14px;overflow-x:auto;padding:0 24px 16px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.06) transparent}
+.scroller::-webkit-scrollbar{height:3px}
+.scroller::-webkit-scrollbar-track{background:transparent}
+.scroller::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:100px}
+
+/* Phone frame */
+.phone-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.phone{
+  width:168px;height:364px;
+  background:#060810;
+  border-radius:26px;
+  border:2px solid rgba(255,255,255,.07);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.02),
+    0 30px 60px rgba(0,0,0,.8),
+    0 10px 20px rgba(0,0,0,.4),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  position:relative;overflow:hidden;
+}
+/* Notch */
+.phone::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:56px;height:14px;background:#060810;border-radius:0 0 10px 10px;z-index:100;
+}
+/* Side buttons */
+.phone::after{
+  content:'';position:absolute;top:60px;right:-2px;width:2px;height:36px;background:rgba(255,255,255,.1);border-radius:2px;
+}
+.screen{width:100%;height:100%;border-radius:24px;overflow:hidden;background:#f2f0ee}
+.screen iframe{
+  width:222%;height:222%;
+  transform:scale(.45);transform-origin:top left;
+  border:none;pointer-events:none;
+}
+.phone-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.16);text-align:center;max-width:168px;line-height:1.4;font-family:'DM Sans',sans-serif}
+
+/* Accent colours per section */
+/* NEUMORPHIC */
+.neu .sh-badge{background:rgba(60,130,240,.1);border:1px solid rgba(60,130,240,.18);color:rgba(120,180,255,.9)}
+.neu .sh-name{background:linear-gradient(135deg,#fff,rgba(120,180,255,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* GLASSMORPHIC */
+.glass .sh-badge{background:rgba(160,80,255,.1);border:1px solid rgba(160,80,255,.18);color:rgba(200,140,255,.9)}
+.glass .sh-name{background:linear-gradient(135deg,#fff,rgba(200,140,255,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* SKEUO */
+.skeuo .sh-badge{background:rgba(160,110,40,.15);border:1px solid rgba(200,150,60,.2);color:rgba(220,170,80,.9)}
+.skeuo .sh-name{background:linear-gradient(135deg,#fff,rgba(220,170,80,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* CLAY */
+.clay .sh-badge{background:rgba(255,80,160,.1);border:1px solid rgba(255,80,160,.18);color:rgba(255,140,200,.9)}
+.clay .sh-name{background:linear-gradient(135deg,#fff,rgba(255,140,200,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* LIQUID */
+.liquid .sh-badge{background:rgba(80,180,255,.1);border:1px solid rgba(80,180,255,.18);color:rgba(140,210,255,.9)}
+.liquid .sh-name{background:linear-gradient(135deg,#fff,rgba(140,210,255,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* TACTILE */
+.tactile .sh-badge{background:rgba(255,60,120,.1);border:1px solid rgba(255,60,120,.18);color:rgba(255,130,170,.9)}
+.tactile .sh-name{background:linear-gradient(135deg,#fff,rgba(255,130,170,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* ISO */
+.iso .sh-badge{background:rgba(255,160,40,.1);border:1px solid rgba(255,160,40,.2);color:rgba(255,195,100,.9)}
+.iso .sh-name{background:linear-gradient(135deg,#fff,rgba(255,195,100,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* 3D */
+.threed .sh-badge{background:rgba(100,220,180,.1);border:1px solid rgba(100,220,180,.2);color:rgba(140,240,200,.9)}
+.threed .sh-name{background:linear-gradient(135deg,#fff,rgba(140,240,200,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* === FOOTER === */
+.footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 24px;text-align:center}
+.footer-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:rgba(255,255,255,.2);letter-spacing:-1px;margin-bottom:16px}
+.style-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:20px}
+.stag{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:100px;padding:4px 12px;font-size:10px;color:rgba(255,255,255,.2)}
+.footer-meta{font-size:11px;color:rgba(255,255,255,.1);line-height:2}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="m-eyebrow"><span class="m-dot"></span>ProfileCard Design Library · 2025</div>
+  <h1>8 Design Systems.<br>24 Premium Profiles.</h1>
+  <p>Every style implemented as a standalone HTML file — mobile-first, 420px max-width, shareable by WhatsApp. Built with the ProfileCard AI Agent.</p>
+</div>
+
+<div class="legend">
+  <div class="leg" style="background:rgba(60,130,240,.08);border:1px solid rgba(60,130,240,.15);color:rgba(120,180,255,.7)">🧊 Neumorphism</div>
+  <div class="leg" style="background:rgba(160,80,255,.08);border:1px solid rgba(160,80,255,.15);color:rgba(200,140,255,.7)">💎 Glassmorphism</div>
+  <div class="leg" style="background:rgba(160,110,40,.1);border:1px solid rgba(200,150,60,.15);color:rgba(220,170,80,.7)">🪵 Skeuomorphism</div>
+  <div class="leg" style="background:rgba(255,80,160,.08);border:1px solid rgba(255,80,160,.15);color:rgba(255,140,200,.7)">🧁 Claymorphism</div>
+  <div class="leg" style="background:rgba(80,180,255,.08);border:1px solid rgba(80,180,255,.15);color:rgba(140,210,255,.7)">🫧 Liquid Glass</div>
+  <div class="leg" style="background:rgba(255,60,120,.08);border:1px solid rgba(255,60,120,.15);color:rgba(255,130,170,.7)">✨ Tactile Max.</div>
+  <div class="leg" style="background:rgba(255,160,40,.08);border:1px solid rgba(255,160,40,.15);color:rgba(255,195,100,.7)">📐 Isometric</div>
+  <div class="leg" style="background:rgba(100,220,180,.08);border:1px solid rgba(100,220,180,.15);color:rgba(140,240,200,.7)">🎯 3D Minimal</div>
+</div>
+
+<!-- 1. NEUMORPHISM -->
+<div class="style-section neu">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">🧊 Neumorphism · Soft UI</div>
+      <div class="sh-name">Extruded from<br>the surface.</div>
+      <div class="sh-desc">Monochromatic background. Every element raised or inset using dual light + shadow pairs. Tactile, calming, professional.</div>
+      <div class="css-tag">box-shadow: -5px -5px 12px rgba(255,255,255,.85), 5px 5px 12px rgba(shadow,.65)</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-91-neu-photography.html" loading="lazy"></iframe></div></div><div class="phone-label">Photography Studio<br>Cool blue-gray</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-92-neu-law.html" loading="lazy"></iframe></div></div><div class="phone-label">Law Firm<br>Warm ivory cream</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-93-neu-yoga.html" loading="lazy"></iframe></div></div><div class="phone-label">Yoga Studio<br>Sage green</div></div>
+  </div>
+</div>
+
+<!-- 2. GLASSMORPHISM -->
+<div class="style-section glass">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">💎 Glassmorphism · Frosted Glass</div>
+      <div class="sh-name">Light through<br>frosted glass.</div>
+      <div class="sh-desc">Dark gradient aurora backgrounds. Cards with backdrop-filter blur, semi-transparent fills and iridescent shimmer borders.</div>
+      <div class="css-tag">backdrop-filter: blur(20px) · background: rgba(255,255,255,.06) · border: 1px solid rgba(255,255,255,.12)</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-94-glass-crypto.html" loading="lazy"></iframe></div></div><div class="phone-label">Crypto Exchange<br>Dark teal live ticker</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-95-glass-wedding.html" loading="lazy"></iframe></div></div><div class="phone-label">Wedding Planner<br>Rose blush aurora</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-96-glass-gaming.html" loading="lazy"></iframe></div></div><div class="phone-label">Gaming Lounge<br>Purple neon Exo 2</div></div>
+  </div>
+</div>
+
+<!-- 3. SKEUOMORPHISM -->
+<div class="style-section skeuo">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">🪵 Skeuomorphism · Classic Realism</div>
+      <div class="sh-name">Real materials.<br>Digital canvas.</div>
+      <div class="sh-desc">CSS-rendered leather, wood grain, tiled stone and parchment. Stitching details, embossed typography, tactile depth cues.</div>
+      <div class="css-tag">repeating-linear-gradient(leather) · radial-gradient(rivets) · text-shadow(emboss)</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-97-skeuo-notary.html" loading="lazy"></iframe></div></div><div class="phone-label">Notary Public<br>Leather + parchment</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-98-skeuo-records.html" loading="lazy"></iframe></div></div><div class="phone-label">Record Store<br>Wood grain + vinyl</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-99-skeuo-barbershop.html" loading="lazy"></iframe></div></div><div class="phone-label">Barbershop<br>Tile pattern + stripe</div></div>
+  </div>
+</div>
+
+<!-- 4. CLAYMORPHISM -->
+<div class="style-section clay">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">🧁 Claymorphism · Soft 3D Clay</div>
+      <div class="sh-name">Inflated. Playful.<br>Three-dimensional.</div>
+      <div class="sh-desc">Multi-layer inset + outset shadows simulate 3D clay inflation. Pastel gradients, oversized emojis, Nunito 900 typeface.</div>
+      <div class="css-tag">box-shadow: 0 2px 0 rgba(255,255,255,.95) inset, 0 -3px 0 rgba(0,0,0,.08) inset, 0 12px 32px rgba(0,0,0,.13)</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-100-clay-language.html" loading="lazy"></iframe></div></div><div class="phone-label">Language App<br>Purple + teal clay</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-101-clay-wellness.html" loading="lazy"></iframe></div></div><div class="phone-label">Wellness App<br>Blue + lavender clay</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-102-clay-coffee.html" loading="lazy"></iframe></div></div><div class="phone-label">Coffee Subscription<br>Warm amber clay</div></div>
+  </div>
+</div>
+
+<!-- 5. LIQUID GLASS -->
+<div class="style-section liquid">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">🫧 Liquid Glass · Apple iOS 26</div>
+      <div class="sh-name">Ultra-transparent.<br>Light on light.</div>
+      <div class="sh-desc">Light backgrounds with vivid chromatic gradient washes. Cards use very high transparency (38–48%), heavy blur and white borders. The inverse of glassmorphism.</div>
+      <div class="css-tag">background: rgba(255,255,255,.38) · backdrop-filter: blur(28px) saturate(200%)</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-103-liquid-cars.html" loading="lazy"></iframe></div></div><div class="phone-label">Luxury Cars<br>Cool blue-silver wash</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-104-liquid-watches.html" loading="lazy"></iframe></div></div><div class="phone-label">Premium Watches<br>Champagne to silver</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-105-liquid-finedining.html" loading="lazy"></iframe></div></div><div class="phone-label">Fine Dining<br>Warm champagne wash</div></div>
+  </div>
+</div>
+
+<!-- 6. TACTILE MAXIMALISM -->
+<div class="style-section tactile">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">✨ Tactile Maximalism · Squishy &amp; Glossy</div>
+      <div class="sh-name">Candy candy.<br>Press me.</div>
+      <div class="sh-desc">Inflated glossy buttons with specular highlight via ::before overlay. Saturated neon or pastel fills, strong glow shadows, maximum border-radius.</div>
+      <div class="css-tag">::before { height:48%; background: linear-gradient(180deg, rgba(255,255,255,.35), transparent) }</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-106-tactile-streetwear.html" loading="lazy"></iframe></div></div><div class="phone-label">Streetwear Brand<br>Chrome dark glossy</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-107-tactile-gaming.html" loading="lazy"></iframe></div></div><div class="phone-label">Gaming Peripherals<br>Dark neon glow</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-108-tactile-icecream.html" loading="lazy"></iframe></div></div><div class="phone-label">Ice Cream Shop<br>Pastel candy glossy</div></div>
+  </div>
+</div>
+
+<!-- 7. ISOMETRIC -->
+<div class="style-section iso">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">📐 Isometric Design · CSS 3D Grid</div>
+      <div class="sh-name">Three faces.<br>Pure CSS art.</div>
+      <div class="sh-desc">CSS clip-path polygons form top, left and right faces of isometric cubes. Three shades of one colour simulate a consistent light source. No SVG, no images.</div>
+      <div class="css-tag">clip-path: polygon(50% 0%, 100% 25%, 50% 50%, 0% 25%) /* top face */</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-109-iso-tech-app.html" loading="lazy"></iframe></div></div><div class="phone-label">Tech SaaS<br>Isometric cube grid</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-110-iso-architecture.html" loading="lazy"></iframe></div></div><div class="phone-label">Architecture Firm<br>Isometric building</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-111-iso-logistics.html" loading="lazy"></iframe></div></div><div class="phone-label">Logistics Company<br>Isometric warehouse</div></div>
+  </div>
+</div>
+
+<!-- 8. 3D MINIMAL-REALISM -->
+<div class="style-section threed">
+  <div class="section-header">
+    <div class="sh-left">
+      <div class="sh-badge">🎯 3D Minimal-Realism · Depth via Shadow</div>
+      <div class="sh-name">Objects that<br>float above the page.</div>
+      <div class="sh-desc">No glass, no colour — only a 5-layer box-shadow stack creates physical depth. Off-white backgrounds, Cormorant or Inter type, animated product float.</div>
+      <div class="css-tag">box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 8px 18px rgba(0,0,0,.05), 0 40px 64px rgba(0,0,0,.04)</div>
+    </div>
+    <div class="sh-right"><div class="sh-count">3</div><div class="sh-profiles">profiles</div></div>
+  </div>
+  <div class="scroller">
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-112-3d-coffee.html" loading="lazy"></iframe></div></div><div class="phone-label">Specialty Coffee<br>Warm off-white float</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-113-3d-audio.html" loading="lazy"></iframe></div></div><div class="phone-label">Premium Audio Brand<br>Floating headphone</div></div>
+    <div class="phone-wrap"><div class="phone"><div class="screen"><iframe src="profile-114-3d-realestate.html" loading="lazy"></iframe></div></div><div class="phone-label">Luxury Real Estate<br>CSS building skyline</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-title">ProfileCard AI Agent · 114+ templates</div>
+  <div class="style-tags">
+    <span class="stag">🧊 Neumorphism</span>
+    <span class="stag">💎 Glassmorphism</span>
+    <span class="stag">🪵 Skeuomorphism</span>
+    <span class="stag">🧁 Claymorphism</span>
+    <span class="stag">🫧 Liquid Glass</span>
+    <span class="stag">✨ Tactile Maximalism</span>
+    <span class="stag">📐 Isometric</span>
+    <span class="stag">🎯 3D Minimal-Realism</span>
+    <span class="stag">🌈 Holographic</span>
+    <span class="stag">📰 Newspaper Editorial</span>
+    <span class="stag">🏗️ Bento Grid</span>
+    <span class="stag">🎨 Art Deco</span>
+  </div>
+  <div class="footer-meta">
+    Built with ProfileCard Agent · Claude claude-sonnet-4-5 · Anthropic API<br>
+    Single .html files · No hosting required · Mobile-first 420px · WhatsApp shareable
+  </div>
+</div>
+</body>
+</html>

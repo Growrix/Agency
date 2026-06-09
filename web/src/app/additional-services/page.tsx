@@ -26,7 +26,7 @@ import { ADDITIONAL_SERVICES_CATEGORIES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata: Metadata = {
-  title: "Additional Services | SEO Setup, Analytics & Technical Optimization",
+  title: "SEO Service | SEO Setup, Analytics & Technical Optimization",
   description:
     "One-time SEO and analytics setup services: Google Search Console, Meta Pixel, GA4, structured data, Core Web Vitals, and more. Get your product found and tracked from day one.",
 };
@@ -143,7 +143,7 @@ export default function AdditionalServicesPage() {
         <div className="pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
         <Container>
           <div className="max-w-3xl">
-            <Badge tone="primary" dot>Additional Services</Badge>
+            <Badge tone="primary" dot>SEO Service</Badge>
             <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
               Get discovered, tracked, and optimized from day one.
             </h1>
@@ -252,7 +252,7 @@ export default function AdditionalServicesPage() {
             <div className="border-b border-border px-6 py-6 sm:px-8 sm:py-7">
               <Badge tone="primary" className="mb-3">What&apos;s covered</Badge>
               <h3 className="font-display text-xl tracking-tight sm:text-2xl">
-                Everything included in a standard additional services engagement.
+                Everything included in a standard SEO service engagement.
               </h3>
             </div>
             {/* Two-column grid */}
@@ -342,7 +342,7 @@ export default function AdditionalServicesPage() {
         <Container width="reading">
           <SectionHeading
             eyebrow="FAQ"
-            title="Common questions about additional services."
+            title="Common questions about SEO service."
             align="center"
           />
           <div className="mt-10">

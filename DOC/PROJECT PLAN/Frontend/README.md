@@ -84,6 +84,7 @@ tasks:
       - services-page.md
       - service-saas-applications-page.md
       - service-websites-page.md
+      - service-html-business-profiles-page.md
       - service-mcp-servers-page.md
       - service-automation-page.md
 
@@ -103,6 +104,7 @@ tasks:
       - 01-design-system.md
       - 02-component-system.md
       - shop-page.md
+      - html-business-profiles-page.md
       - product-detail-page.md
       - checkout-page.md
 
@@ -152,7 +154,7 @@ tasks:
 2. Read [00-master-ui-architecture.md](00-master-ui-architecture.md), [01-design-system.md](01-design-system.md), and [02-component-system.md](02-component-system.md).
 3. Build the shared shell first: header, footer, mobile bottom navigation, utility ribbon, chat launcher, WhatsApp action, cart entry.
 4. Build the core marketing routes: [home-page.md](home-page.md), [blog-page.md](blog-page.md), [blog-post-page.md](blog-post-page.md), [services-page.md](services-page.md), [pricing-page.md](pricing-page.md), [about-page.md](about-page.md).
-5. Build the service detail routes: [service-saas-applications-page.md](service-saas-applications-page.md), [service-websites-page.md](service-websites-page.md), [service-mcp-servers-page.md](service-mcp-servers-page.md), [service-automation-page.md](service-automation-page.md).
+5. Build the service detail routes: [service-saas-applications-page.md](service-saas-applications-page.md), [service-websites-page.md](service-websites-page.md), [service-html-business-profiles-page.md](service-html-business-profiles-page.md), [service-mcp-servers-page.md](service-mcp-servers-page.md), [service-automation-page.md](service-automation-page.md).
 6. Build proof routes: [portfolio-page.md](portfolio-page.md) and [case-study-page.md](case-study-page.md).
 7. Build commerce routes: [shop-page.md](shop-page.md), [product-detail-page.md](product-detail-page.md), [checkout-page.md](checkout-page.md).
 8. Build conversion and assistant flows: [ai-concierge-page.md](ai-concierge-page.md), [book-appointment-page.md](book-appointment-page.md), [contact-page.md](contact-page.md), [faq-page.md](faq-page.md).
@@ -183,6 +185,7 @@ tasks:
 - [services-page.md](services-page.md)
 - [service-saas-applications-page.md](service-saas-applications-page.md)
 - [service-websites-page.md](service-websites-page.md)
+- [service-html-business-profiles-page.md](service-html-business-profiles-page.md)
 - [service-mcp-servers-page.md](service-mcp-servers-page.md)
 - [service-automation-page.md](service-automation-page.md)
 - [pricing-page.md](pricing-page.md)
@@ -194,6 +197,7 @@ tasks:
 
 ### Commerce
 - [shop-page.md](shop-page.md)
+- [html-business-profiles-page.md](html-business-profiles-page.md)
 - [product-detail-page.md](product-detail-page.md)
 - [checkout-page.md](checkout-page.md)
 

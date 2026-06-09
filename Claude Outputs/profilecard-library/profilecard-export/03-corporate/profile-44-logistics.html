@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SwiftLog — Logistics & Supply Chain</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Barlow',sans-serif;background:#080500;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0e0900;margin:0 auto;color:#e8d8c0}
+
+.hero{min-height:258px;background:linear-gradient(155deg,#c84a00 0%,#8a3000 50%,#4a1600 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px;border-bottom:2px solid rgba(255,120,40,.3)}
+.hero-diag{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(255,255,255,.02) 18px,rgba(255,255,255,.02) 20px)}
+.hero-truck{position:absolute;right:-10px;bottom:16px;font-size:70px;opacity:.1;transform:scaleX(-1)}
+.hero-route{position:absolute;top:20px;right:16px;display:flex;gap:4px;align-items:center;opacity:.2}
+.h-live{display:inline-flex;align-items:center;gap:6px;background:rgba(255,120,40,.15);border:1px solid rgba(255,120,40,.3);border-radius:4px;padding:4px 12px;font-size:9px;color:#ff7820;font-weight:700;letter-spacing:1.5px;margin-bottom:14px;width:fit-content}
+.h-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:b 1.5s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-family:'Exo 2',sans-serif;font-size:40px;font-weight:900;color:#fff;line-height:.9;letter-spacing:-1px;text-transform:uppercase}
+.hero h1 span{color:#ff7820}
+.hero-sub{font-size:10px;color:rgba(232,216,192,.4);margin-top:8px;letter-spacing:1px;text-transform:uppercase}
+.hero-feat{display:flex;gap=10px;margin-top:12px;font-size:10px;color:rgba(232,216,192,.35);gap:10px;flex-wrap:wrap}
+.hero-feat span{display:flex;align-items:center;gap:4px}
+
+.track-bar{background:#1a1000;border-bottom:1px solid rgba(255,120,40,.15);display:flex}
+.tb{flex:1;text-align:center;padding:11px 0;border-right:1px solid rgba(255,120,40,.1)}
+.tb:last-child{border-right:none}
+.tb-n{font-family:'Exo 2',sans-serif;font-size:16px;font-weight:800;color:#ff7820}
+.tb-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(232,216,192,.2);margin-top:3px}
+
+.body{padding:0 18px 40px}
+.sec{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:#e8d8c0;text-transform:uppercase;letter-spacing:2px;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#ff7820,transparent)}
+
+.services{display:flex;flex-direction:column;gap:5px}
+.svc{background:#1a1000;border:1px solid rgba(255,120,40,.1);border-radius:7px;padding:13px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#ff7820;border-radius:2px;opacity:.5}
+.svc-name{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:600;color:#e8d8c0;letter-spacing:.3px}
+.svc-desc{font-size:10px;color:rgba(232,216,192,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-family:'Exo 2',sans-serif;font-size:15px;font-weight:800;color:#ff7820;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(232,216,192,.2);font-family:'Barlow',sans-serif;margin-top:1px}
+
+.coverage{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.cov{background:#1a1000;border:1px solid rgba(255,120,40,.08);border-radius:5px;padding:9px 11px;font-size:11px;color:rgba(232,216,192,.4);display:flex;align-items:center;gap:6px}
+.cov::before{content:'📍';font-size:11px}
+
+.cta{background:linear-gradient(135deg,#c84a00,#8a3000);border-radius:10px;padding:20px;text-align:center}
+.cta h3{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.cta p{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:14px;line-height:1.4}
+.cta-btn{display:block;background:#fff;color:#8a3000;border-radius:6px;padding:12px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:800;text-decoration:none;margin-bottom:6px}
+.cta-btn2{display:block;background:rgba(0,0,0,.2);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:10px;font-size:11px;text-decoration:none}
+
+.contacts{background:#1a1000;border:1px solid rgba(255,120,40,.08);border-radius:6px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 13px;border-bottom:1px solid rgba(255,120,40,.05);font-size:12px;color:rgba(232,216,192,.35)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:#ff7820;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+footer{background:#080500;border-top:2px solid rgba(255,120,40,.2);padding:13px;text-align:center;font-family:'Exo 2',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(232,216,192,.1);text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-diag"></div>
+  <div class="hero-truck">🚛</div>
+  <div class="h-live"><span class="h-dot"></span>Live GPS Tracking</div>
+  <h1>Swift<span>Log</span></h1>
+  <div class="hero-sub">Freight · Warehousing · Last Mile · Supply Chain</div>
+  <div class="hero-feat">
+    <span>🌍 Nationwide</span>
+    <span>📦 Same-day possible</span>
+    <span>📱 Live tracking</span>
+  </div>
+</div>
+<div class="track-bar">
+  <div class="tb"><div class="tb-n">500+</div><div class="tb-l">Active clients</div></div>
+  <div class="tb"><div class="tb-n">1,200</div><div class="tb-l">Deliveries/day</div></div>
+  <div class="tb"><div class="tb-n">64</div><div class="tb-l">Districts covered</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">🚛 Road Freight</div><div class="svc-desc">Full & partial truck loads, temperature-controlled, hazardous cargo</div></div><div class="svc-price">Custom<span>per route</span></div></div>
+    <div class="svc"><div><div class="svc-name">✈️ Air & Sea Freight</div><div class="svc-desc">Import/export forwarding — customs clearance included</div></div><div class="svc-price">Custom<span>per shipment</span></div></div>
+    <div class="svc"><div><div class="svc-name">🏭 Warehousing</div><div class="svc-desc">Bonded & commercial warehouse — Dhaka, Ctg, Sylhet</div></div><div class="svc-price">৳12<span>per sqft/mo</span></div></div>
+    <div class="svc"><div><div class="svc-name">📦 Last Mile Delivery</div><div class="svc-desc">E-commerce fulfillment, COD collection, returns</div></div><div class="svc-price">৳60<span>per parcel</span></div></div>
+  </div>
+  <div class="sec">Coverage</div>
+  <div class="coverage">
+    <div class="cov">Dhaka</div><div class="cov">Chittagong</div>
+    <div class="cov">Sylhet</div><div class="cov">Rajshahi</div>
+    <div class="cov">Khulna</div><div class="cov">All 64 Districts</div>
+  </div>
+  <div class="sec">Get a Quote</div>
+  <div class="cta">
+    <h3>🚛 Move Cargo with Us</h3>
+    <p>Send shipment details via WhatsApp and get a competitive quote within 30 minutes.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">Get a Freight Quote</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Operations Hotline</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543 (24/7 ops)</div>
+    <div class="cr"><div class="ci">📍</div>Tejgaon Logistics Hub, Dhaka</div>
+    <div class="cr"><div class="ci">🌐</div>www.swiftlog.com.bd</div>
+  </div>
+</div>
+<footer>SwiftLog · Logistics & Supply Chain · Bangladesh · Since 2012</footer>
+</div></body></html>

@@ -1,7 +1,7 @@
 ---
 document_type: page-plan
 page_id: product-detail
-route: /shop/[slug]
+route: /products/[slug]
 scope: commerce
 build_stage: 5-commerce-implementation
 depends_on:
@@ -14,10 +14,10 @@ depends_on:
 # Product Detail Page
 
 ## Page Definition
-- Purpose: convert product interest into purchase through clear previews, specs, and reassurance.
-- Target audience: buyers evaluating a specific website template or ready-made website.
+- Purpose: convert product interest into purchase while routing non-technical buyers into Done-For-You customization.
+- Target audience: DIY buyers, non-technical operators, and founders evaluating a specific digital product.
 - Primary CTA: Buy Now.
-- Secondary CTA: Chat Before Buying.
+- Secondary CTA: Need Customization.
 
 ## Sections In Visual Order
 
@@ -29,36 +29,40 @@ depends_on:
 - Content: desktop screens, mobile screens, section previews, and documentation teaser.
 - Components: media gallery, tabs, modal viewer.
 
-### 3. What You Get
+### 3. Who This Is For
+- Content: audience fit, use-case bullets, and buying context.
+- Components: audience card, use-case list.
+
+### 4. What You Get
 - Content: files, docs, setup support, updates, bonus assets.
 - Components: checklist grid, content cards.
 
-### 4. Technical Specs and Compatibility
+### 5. Technical Specs and Compatibility
 - Content: frameworks, integrations, CMS compatibility, deployment guidance, and implementation expectations.
 - Components: spec table, badge list, info alerts.
 
-### 5. Use Cases and Outcomes
+### 6. Use Cases and Outcomes
 - Content: ideal buyers, use scenarios, customization options.
 - Components: feature blocks, comparison cards.
 
-### 6. Reviews and Trust
+### 7. Reviews and Trust
 - Content: testimonials, ratings, support promise, secure checkout, refund policy summary.
 - Components: testimonial cards, trust badges.
 
-### 7. Related Products and Bundle Upsell
+### 8. Related Products and Bundle Upsell
 - Content: complementary products and discounted bundles.
 - Components: product tiles, pricing comparison.
 
-### 8. FAQ and Final CTA
+### 9. FAQ and Final CTA
 - Content: setup time, customization, support window, refunds, license limits.
-- Components: accordion, sticky CTA on mobile.
+- Components: accordion, sticky CTA on mobile, customization service links.
 
 ## State Requirements
 - Gallery: loading, ready, fullscreen open.
 - Purchase panel: default, adding to cart, added, checkout redirect, payment-disabled fallback.
 
 ## Responsive Adaptation
-- Mobile puts purchase panel in a sticky bottom action sheet.
+- Mobile uses a sticky bottom action bar for Buy and Live Preview.
 - Gallery becomes swipe-first with thumbnail rail below.
 
 ## SEO and Metadata
@@ -66,4 +70,4 @@ depends_on:
 - Description: Review previews, specs, support, and purchase details for this website product.
 
 ## Conversion Path
-- Hero -> gallery -> specs -> reviews -> buy or chat.
+- Hero -> audience fit -> tier comparison -> buy now or request customization.

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>GrowthPath — Corporate Training & L&D</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#180a30;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f8f5ff;margin:0 auto}
+
+.hero{min-height:275px;background:linear-gradient(155deg,#7c3aed 0%,#5b21b6 45%,#3b0764 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 24px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:30px 30px}
+.hero-growth{position:absolute;right:14px;top:20px;display:flex;flex-direction:column;gap:4px;opacity:.15}
+.bar{width:8px;border-radius:4px 4px 0 0;background:#fff}
+.b1{height:20px}.b2{height:32px}.b3{height:24px}.b4{height:44px}.b5{height:38px}
+.hero-glow{position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06),transparent)}
+.h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:10px;color:#fff;font-weight:600;margin-bottom:14px;width:fit-content}
+.hero h1{font-family:'Nunito',sans-serif;font-size:36px;font-weight:900;color:#fff;line-height:.92;letter-spacing:-1px}
+.hero h1 span{color:#d8b4fe}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:8px;line-height:1.5}
+.hero-stats{display:flex;gap:16px;margin-top:12px}
+.hs{text-align:center}
+.hs-n{font-size:20px;font-weight:900;color:#fff;font-family:'Nunito',sans-serif}
+.hs-l{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.5px}
+
+.accred-bar{display:flex;background:#fff;border-bottom:1px solid #ede9fe;overflow-x:auto;scrollbar-width:none;gap:0}
+.accred-bar::-webkit-scrollbar{display:none}
+.accred{flex-shrink:0;text-align:center;padding:10px 16px;border-right:1px solid #f0eaff}
+.accred:last-child{border-right:none}
+.accred-logo{font-size:16px}
+.accred-name{font-size:9px;font-weight:700;color:#5b21b6;margin-top:3px;white-space:nowrap;letter-spacing:.3px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(124,58,237,.15)}
+
+.programs{display:flex;flex-direction:column;gap:7px}
+.prog{background:#fff;border:1px solid #ede9fe;border-radius:12px;padding:15px;position:relative;overflow:hidden}
+.prog.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.prog-duration{display:inline-block;font-size:8px;font-weight:700;background:#f5f0ff;color:#7c3aed;padding:2px 9px;border-radius:100px;letter-spacing:.5px;margin-bottom:8px}
+.prog-name{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:#180a30;letter-spacing:-.2px}
+.prog-desc{font-size:11px;color:#8870b0;margin-top:3px;line-height:1.4}
+.prog-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.prog-mode{font-size:10px;color:#a890c8}
+.prog-price{font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:#7c3aed}
+
+.skill-areas{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.skill{background:#fff;border:1px solid #ede9fe;border-radius:10px;padding:13px}
+.skill-icon{font-size:22px;margin-bottom:6px}
+.skill-name{font-size:12px;font-weight:700;color:#180a30}
+.skill-desc{font-size:10px;color:#8870b0;margin-top:2px;line-height:1.4}
+.skill-count{font-size:11px;font-weight:700;color:#7c3aed;margin-top:5px}
+
+.outcomes{display:flex;flex-direction:column;gap:6px}
+.outcome{background:#fff;border:1px solid #ede9fe;border-radius:10px;padding:12px;display:flex;gap=12px;align-items:center;gap:12px}
+.out-icon{width:36px;height:36px;background:#f5f0ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.out-stat{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:#7c3aed}
+.out-desc{font-size:11px;color:#8870b0;margin-top:1px}
+
+.cta{background:linear-gradient(135deg,#7c3aed,#5b21b6);border-radius:14px;padding:22px;text-align:center}
+.cta h3{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:8px;letter-spacing:-.3px}
+.cta p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:18px;line-height:1.5}
+.cta-btn{display:block;background:#fff;color:#5b21b6;border-radius:10px;padding:14px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px;font-size:11px;text-decoration:none}
+
+.contacts{background:#fff;border:1px solid #ede9fe;border-radius:12px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #f8f5ff;font-size:12px;color:#444}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#7c3aed;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#180a30;padding:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-growth"><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div><div class="bar b5"></div></div>
+  <div class="hero-glow"></div>
+  <div class="h-pill">📈 Upskilling Bangladesh's workforce</div>
+  <h1>Growth<span>Path</span><br>Learning</h1>
+  <div class="hero-sub">Corporate training, leadership development &amp; professional certification programs for organisations.</div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">15,000+</div><div class="hs-l">Trained</div></div>
+    <div class="hs"><div class="hs-n">200+</div><div class="hs-l">Corporates</div></div>
+    <div class="hs"><div class="hs-n">50+</div><div class="hs-l">Programs</div></div>
+  </div>
+</div>
+<div class="accred-bar">
+  <div class="accred"><div class="accred-logo">🏛️</div><div class="accred-name">BIMB Certified</div></div>
+  <div class="accred"><div class="accred-logo">🎓</div><div class="accred-name">ILM Partner</div></div>
+  <div class="accred"><div class="accred-logo">📜</div><div class="accred-name">HRMI Member</div></div>
+  <div class="accred"><div class="accred-logo">✅</div><div class="accred-name">ISO Certified</div></div>
+</div>
+<div class="body">
+  <div class="sec">Flagship Programs</div>
+  <div class="programs">
+    <div class="prog featured">
+      <div class="prog-duration">3 DAYS · RESIDENTIAL</div>
+      <div class="prog-name">Senior Leadership Masterclass</div>
+      <div class="prog-desc">Strategic thinking, executive presence, decision-making under pressure — for C-suite and VPs.</div>
+      <div class="prog-meta"><div class="prog-mode">🏨 Resort-based · Max 20 pax</div><div class="prog-price">৳45,000/head</div></div>
+    </div>
+    <div class="prog">
+      <div class="prog-duration">2 DAYS · IN-COMPANY</div>
+      <div class="prog-name">Sales Force Accelerator</div>
+      <div class="prog-desc">Consultative selling, objection handling, pipeline management for front-line sales teams.</div>
+      <div class="prog-meta"><div class="prog-mode">🏢 At your office</div><div class="prog-price">৳8,000/head</div></div>
+    </div>
+    <div class="prog">
+      <div class="prog-duration">1 DAY · WORKSHOP</div>
+      <div class="prog-name">Communication & Presentation Skills</div>
+      <div class="prog-desc">Business writing, presentation design, public speaking — for all levels.</div>
+      <div class="prog-meta"><div class="prog-mode">🖥 Also online</div><div class="prog-price">৳4,500/head</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Training Areas</div>
+  <div class="skill-areas">
+    <div class="skill"><div class="skill-icon">🧠</div><div class="skill-name">Leadership & Management</div><div class="skill-desc">From team leads to C-suite</div><div class="skill-count">12 programs</div></div>
+    <div class="skill"><div class="skill-icon">📊</div><div class="skill-name">Finance for Non-Finance</div><div class="skill-desc">P&amp;L, budgeting, reporting</div><div class="skill-count">6 programs</div></div>
+    <div class="skill"><div class="skill-icon">🤝</div><div class="skill-name">HR & People Management</div><div class="skill-desc">Hiring, performance, culture</div><div class="skill-count">8 programs</div></div>
+    <div class="skill"><div class="skill-icon">🎯</div><div class="skill-name">Sales & Negotiation</div><div class="skill-desc">B2B, FMCG, corporate sales</div><div class="skill-count">10 programs</div></div>
+  </div>
+
+  <div class="sec">Proven Outcomes</div>
+  <div class="outcomes">
+    <div class="outcome"><div class="out-icon">📈</div><div><div class="out-stat">↑ 32%</div><div class="out-desc">Average sales performance increase post-training</div></div></div>
+    <div class="outcome"><div class="out-icon">🌟</div><div><div class="out-stat">4.8/5</div><div class="out-desc">Average participant satisfaction score (2024)</div></div></div>
+    <div class="outcome"><div class="out-icon">🏆</div><div><div class="out-stat">94%</div><div class="out-desc">Clients who book a second program within 12 months</div></div></div>
+  </div>
+
+  <div class="sec">Book Training for Your Team</div>
+  <div class="cta">
+    <h3>🚀 Invest in your people.</h3>
+    <p>Custom in-company programs for 10 to 500 participants. Share your training objectives and we'll design a solution.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📋 Submit Training Brief</a>
+    <a href="mailto:learn@growthpath.com.bd" class="cta-btn2">learn@growthpath.com.bd</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>GrowthPath Centre, Gulshan-1, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 6pm</div>
+    <div class="cr"><div class="ci">🌐</div>www.growthpath.com.bd</div>
+  </div>
+</div>
+<footer>© 2025 GrowthPath Learning · Corporate Training &amp; L&D · Dhaka</footer>
+</div></body></html>

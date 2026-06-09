@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>PestShield — Pest Control Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Barlow',sans-serif;background:#0a1a08;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0f1a0d;margin:0 auto;color:#d8e8d0}
+
+.hero{min-height:260px;background:#0f1a0d;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px;border-bottom:3px solid #f57c00}
+.hero-tape{position:absolute;top:0;left:0;right:0;height:8px;background:repeating-linear-gradient(90deg,#f57c00 0px,#f57c00 24px,#1a2a14 24px,#1a2a14 36px)}
+.hero-mesh{position:absolute;inset:0;background-image:linear-gradient(rgba(100,160,80,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(100,160,80,.04) 1px,transparent 1px);background-size:20px 20px}
+.hero-bug{position:absolute;right:14px;top:28px;font-size:60px;opacity:.07;transform:rotate(-20deg)}
+.alert-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(245,124,0,.15);border:1px solid rgba(245,124,0,.35);border-radius:4px;padding:4px 12px;font-size:9px;color:#f57c00;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;width:fit-content}
+.alert-dot{width:6px;height:6px;background:#f57c00;border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-family:'Exo 2',sans-serif;font-size:42px;font-weight:900;color:#e8f4e0;line-height:.9;letter-spacing:-1px;text-transform:uppercase}
+.hero h1 span{color:#f57c00}
+.hero-sub{font-size:10px;color:rgba(216,232,208,.35);margin-top:8px;letter-spacing:2px;text-transform:uppercase}
+.hero-cert{font-size:9px;color:rgba(216,232,208,.2);margin-top:8px;letter-spacing:.5px}
+
+.warning-strip{background:#1a2a14;border-bottom:1px solid rgba(245,124,0,.2);padding:10px 18px;display:flex;justify-content:space-around}
+.ws-item{text-align:center}
+.ws-val{font-family:'Exo 2',sans-serif;font-size:15px;font-weight:800;color:#f57c00}
+.ws-label{font-size:9px;color:rgba(216,232,208,.3);margin-top:2px;letter-spacing:.5px}
+
+.body{padding:0 18px 40px}
+.sec{font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;color:#d8e8d0;text-transform:uppercase;letter-spacing:2px;margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#f57c00,transparent)}
+
+.pests{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pest-card{background:#1a2a14;border:1px solid rgba(100,160,80,.15);border-radius:8px;padding:12px;text-align:center}
+.pest-icon{font-size:24px;margin-bottom:6px}
+.pest-name{font-family:'Exo 2',sans-serif;font-size:11px;font-weight:700;color:#d8e8d0;text-transform:uppercase;letter-spacing:.5px}
+.pest-guaranteed{font-size:9px;color:#f57c00;margin-top:3px;font-weight:600}
+
+.services{display:flex;flex-direction:column;gap:2px}
+.svc{background:#1a2a14;border:1px solid rgba(100,160,80,.1);padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.svc:first-child{border-radius:6px 6px 0 0}
+.svc:last-child{border-radius:0 0 6px 6px}
+.svc-name{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:#d8e8d0;letter-spacing:.3px;text-transform:uppercase}
+.svc-desc{font-size:11px;color:rgba(216,232,208,.3);margin-top:3px;line-height:1.4}
+.svc-tag{display:inline-block;font-size:8px;background:rgba(245,124,0,.12);border:1px solid rgba(245,124,0,.25);color:rgba(245,124,0,.8);padding:2px 7px;border-radius:2px;margin-top:5px;font-weight:700;letter-spacing:.5px}
+.svc-price{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:800;color:#f57c00;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(216,232,208,.25);font-family:'Barlow',sans-serif;margin-top:1px}
+
+.guarantee-box{background:#1a2a14;border:2px solid rgba(245,124,0,.3);border-radius:10px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.guarantee-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f57c00,transparent)}
+.guar-icon{font-size:36px;margin-bottom:8px}
+.guarantee-box h3{font-family:'Exo 2',sans-serif;font-size:17px;font-weight:800;color:#d8e8d0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.guarantee-box p{font-size:11px;color:rgba(216,232,208,.4);line-height:1.5;margin-bottom:14px}
+.guar-btn{display:block;background:#f57c00;color:#0f1a0d;border-radius:4px;padding:13px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;text-decoration:none;margin-bottom:6px}
+.guar-btn2{display:block;background:#1a2a14;color:rgba(216,232,208,.4);border:1px solid rgba(216,232,208,.1);border-radius:4px;padding:11px;font-size:11px;text-decoration:none}
+
+.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.safety{background:#1a2a14;border:1px solid rgba(100,160,80,.1);border-radius:6px;padding:10px 12px;font-size:11px;color:rgba(216,232,208,.4);display:flex;align-items:center;gap:6px}
+.safety::before{content:'✓';color:#6aa060;font-weight:700}
+
+.contact-strip{background:#1a2a14;border:1px solid rgba(100,160,80,.1);border-radius:6px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(100,160,80,.06);font-size:12px;color:rgba(216,232,208,.4)}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:28px;height:28px;background:#f57c00;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#080f06;border-top:3px solid #f57c00;padding:16px;text-align:center;font-family:'Exo 2',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(216,232,208,.12);text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-tape"></div>
+  <div class="hero-mesh"></div>
+  <div class="hero-bug">🦟</div>
+  <div class="alert-badge"><span class="alert-dot"></span>24/7 Emergency Service</div>
+  <h1>Pest<span>Shield</span></h1>
+  <div class="hero-sub">Termite · Cockroach · Bed Bug · Rodent · Mosquito</div>
+  <div class="hero-cert">✓ Govt. Licensed · ✓ WHO-approved chemicals · ✓ Family safe</div>
+</div>
+<div class="warning-strip">
+  <div class="ws-item"><div class="ws-val">8,000+</div><div class="ws-label">Homes Treated</div></div>
+  <div class="ws-item"><div class="ws-val">100%</div><div class="ws-label">Guaranteed</div></div>
+  <div class="ws-item"><div class="ws-val">15yr</div><div class="ws-label">Experience</div></div>
+</div>
+<div class="body">
+  <div class="sec">Pests We Eliminate</div>
+  <div class="pests">
+    <div class="pest-card"><div class="pest-icon">🦟</div><div class="pest-name">Mosquito</div><div class="pest-guaranteed">100% eliminated</div></div>
+    <div class="pest-card"><div class="pest-icon">🪳</div><div class="pest-name">Cockroach</div><div class="pest-guaranteed">100% eliminated</div></div>
+    <div class="pest-card"><div class="pest-icon">🐀</div><div class="pest-name">Rodents</div><div class="pest-guaranteed">Cleared & sealed</div></div>
+    <div class="pest-card"><div class="pest-icon">🐜</div><div class="pest-name">Termite</div><div class="pest-guaranteed">5yr warranty</div></div>
+    <div class="pest-card"><div class="pest-icon">🛏</div><div class="pest-name">Bed Bugs</div><div class="pest-guaranteed">Heat treatment</div></div>
+    <div class="pest-card"><div class="pest-icon">🕷</div><div class="pest-name">Ants & more</div><div class="pest-guaranteed">All species</div></div>
+  </div>
+
+  <div class="sec">Treatment Plans</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">One-Time Treatment</div><div class="svc-desc">Single-visit full treatment, all target pests</div><div class="svc-tag">30-Day Guarantee</div></div><div class="svc-price">৳2,000<span>from / flat</span></div></div>
+    <div class="svc"><div><div class="svc-name">Quarterly AMC</div><div class="svc-desc">4 visits/year · Best for homes &amp; offices</div><div class="svc-tag">Most Popular</div></div><div class="svc-price">৳6,000<span>per year</span></div></div>
+    <div class="svc"><div><div class="svc-name">Termite Treatment</div><div class="svc-desc">Soil treatment, baiting system, 5-year warranty</div><div class="svc-tag">5yr Warranty</div></div><div class="svc-price">৳8,000<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">Bed Bug Heat Treat</div><div class="svc-desc">Non-chemical heat method · Same-day clear</div></div><div class="svc-price">৳3,500<span>from</span></div></div>
+  </div>
+
+  <div class="sec">Our Guarantee</div>
+  <div class="guarantee-box">
+    <div class="guar-icon">🛡️</div>
+    <h3>Pest-Free or We Return Free</h3>
+    <p>If pests return within the guarantee period, our team returns at no charge. No questions asked.</p>
+    <a href="https://wa.me/8801700000000" class="guar-btn">📞 Book Free Inspection</a>
+    <a href="tel:+8801700000000" class="guar-btn2">Emergency line · 24/7</a>
+  </div>
+
+  <div class="sec">Safety Promise</div>
+  <div class="safety-grid">
+    <div class="safety">WHO-approved chemicals</div>
+    <div class="safety">Safe for children</div>
+    <div class="safety">Pet-friendly options</div>
+    <div class="safety">Food-safe certified</div>
+    <div class="safety">Govt. licensed team</div>
+    <div class="safety">Odourless treatment</div>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-strip">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000 (24/7)</div>
+    <div class="c-row"><div class="c-icon">💬</div>WhatsApp a photo for free advice</div>
+    <div class="c-row"><div class="c-icon">📍</div>All Dhaka & surrounding areas</div>
+  </div>
+</div>
+<footer>PestShield · Licensed Pest Control · Dhaka · 15 Years · 100% Guaranteed</footer>
+</div></body></html>

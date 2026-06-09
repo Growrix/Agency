@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sprinkle — We're cooking something delicious 🍩</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff9f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;color:#2a1808;overflow:hidden;padding:24px;position:relative}
+
+/* floating emojis */
+.float{position:fixed;font-size:2rem;animation:floatUp linear infinite;pointer-events:none;opacity:.6}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:.6}100%{transform:translateY(-20vh) rotate(360deg);opacity:0}}
+.f1{left:5%;animation-duration:8s;animation-delay:0s}
+.f2{left:15%;animation-duration:11s;animation-delay:2s;font-size:1.5rem}
+.f3{left:28%;animation-duration:9s;animation-delay:4s}
+.f4{left:42%;animation-duration:12s;animation-delay:1s;font-size:2.5rem}
+.f5{left:58%;animation-duration:7s;animation-delay:3s}
+.f6{left:72%;animation-duration:10s;animation-delay:5s;font-size:1.8rem}
+.f7{left:85%;animation-duration:8s;animation-delay:1.5s}
+.f8{left:93%;animation-duration:13s;animation-delay:6s;font-size:1.4rem}
+
+.content{position:relative;z-index:1;text-align:center;max-width:540px}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid #fcd34d;border-radius:16px;padding:10px 22px;font-size:18px;font-weight:900;color:#2a1808;margin-bottom:32px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:900;line-height:.95;letter-spacing:-1.5px;margin-bottom:18px;color:#1a0f00}
+h1 span{display:inline-block}
+.wave1{color:#f59e0b;animation:wobble 2s ease-in-out infinite}
+.wave2{color:#ef4444;animation:wobble 2s ease-in-out infinite .15s}
+.wave3{color:#8b5cf6;animation:wobble 2s ease-in-out infinite .3s}
+.wave4{color:#10b981;animation:wobble 2s ease-in-out infinite .45s}
+.wave5{color:#f59e0b;animation:wobble 2s ease-in-out infinite .6s}
+.wave6{color:#ec4899;animation:wobble 2s ease-in-out infinite .75s}
+.wave7{color:#3b82f6;animation:wobble 2s ease-in-out infinite .9s}
+.wave8{color:#f97316;animation:wobble 2s ease-in-out infinite 1.05s}
+@keyframes wobble{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.subtitle{font-size:17px;color:#7a5030;font-weight:400;line-height:1.7;margin-bottom:36px;font-style:italic}
+.progress-section{background:#fff;border:2px solid #fed7aa;border-radius:20px;padding:24px;margin-bottom:28px}
+.ps-label{font-size:13px;font-weight:700;color:#c2580a;margin-bottom:12px;display:flex;justify-content:space-between}
+.ps-label span{color:#2a1808;font-size:15px}
+.ps-bar{background:#fff8f0;border-radius:100px;height:16px;overflow:hidden;border:1px solid #fed7aa}
+.ps-fill{height:16px;background:linear-gradient(90deg,#f59e0b,#ef4444,#ec4899,#8b5cf6);border-radius:100px;animation:psLoad 2s ease-out forwards}
+@keyframes psLoad{from{width:0%}to{width:78%}}
+.ps-milestones{display:flex;justify-content:space-between;margin-top:8px}
+.milestone{font-size:10px;color:#c0a880;text-align:center}
+.milestone.done{color:#f59e0b;font-weight:700}
+.notify-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;justify-content:center}
+.notify-input{flex:1;min-width:200px;background:#fff;border:2px solid #fcd34d;border-radius:14px;padding:13px 18px;font-size:15px;color:#2a1808;font-family:'Nunito',sans-serif;outline:none;font-weight:600;transition:.2s}
+.notify-input:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.1)}
+.notify-input::placeholder{color:#c8a068;font-weight:400}
+.notify-btn{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none;padding:13px 24px;border-radius:14px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;transition:.2s;letter-spacing:.3px}
+.notify-btn:hover{transform:scale(1.04) rotate(-1deg)}
+.note{font-size:13px;color:#b08050;margin-bottom:32px;font-style:italic}
+.tease-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.tp{background:#fff;border:2px solid #fcd34d;border-radius:100px;padding:8px 18px;font-size:13px;font-weight:700;color:#5a3010;animation:popIn .4s ease-out both}
+.tp:nth-child(2){animation-delay:.1s}
+.tp:nth-child(3){animation-delay:.2s}
+.tp:nth-child(4){animation-delay:.3s}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.countdown-mini{display:flex;justify-content:center;gap:16px;margin-top:32px;flex-wrap:wrap}
+.cm-unit{text-align:center}
+.cm-num{font-size:1.8rem;font-weight:900;color:#2a1808;display:block;line-height:1}
+.cm-label{font-size:10px;color:#c0a880;text-transform:uppercase;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="float f1">🍩</div>
+<div class="float f2">🧁</div>
+<div class="float f3">🍪</div>
+<div class="float f4">🎂</div>
+<div class="float f5">🍭</div>
+<div class="float f6">🍰</div>
+<div class="float f7">🍫</div>
+<div class="float f8">🎉</div>
+
+<div class="content">
+  <div class="logo-badge">🍩 Sprinkle</div>
+
+  <h1>
+    <span class="wave1">S</span><span class="wave2">o</span><span class="wave3">m</span><span class="wave4">e</span><span class="wave5">t</span><span class="wave6">h</span><span class="wave7">i</span><span class="wave8">n</span><span class="wave1">g</span>
+    <br>
+    <span style="color:#f59e0b">delicious</span>
+    <br>
+    <span style="color:#1a0f00">is coming.</span>
+  </h1>
+  <p class="subtitle">We're baking up something sweet — Dhaka's first curated<br>dessert subscription & gifting experience. 🧁</p>
+
+  <div class="progress-section">
+    <div class="ps-label"><span>🍳 How far along are we?</span><span>78%</span></div>
+    <div class="ps-bar"><div class="ps-fill"></div></div>
+    <div class="ps-milestones">
+      <div class="milestone done">✓ Recipe R&D</div>
+      <div class="milestone done">✓ Kitchen ready</div>
+      <div class="milestone done">✓ Branding done</div>
+      <div class="milestone">🔨 App launch</div>
+    </div>
+  </div>
+
+  <div class="notify-row">
+    <input class="notify-input" type="email" placeholder="your@email.com">
+    <button class="notify-btn">🎉 Tell me first!</button>
+  </div>
+  <div class="note">Subscribers get 20% off their first order + a mystery freebie 🎁</div>
+
+  <div class="tease-pills">
+    <div class="tp">🍩 Weekly boxes</div>
+    <div class="tp">🎁 Gift kits</div>
+    <div class="tp">🏢 Corporate orders</div>
+    <div class="tp">🚀 Free delivery</div>
+  </div>
+
+  <div class="countdown-mini" id="cd">
+    <div class="cm-unit"><span class="cm-num" id="cd-d">42</span><span class="cm-label">Days</span></div>
+    <div class="cm-unit"><span class="cm-num" id="cd-h">08</span><span class="cm-label">Hours</span></div>
+    <div class="cm-unit"><span class="cm-num" id="cd-m">22</span><span class="cm-label">Mins</span></div>
+    <div class="cm-unit"><span class="cm-num" id="cd-s">05</span><span class="cm-label">Secs</span></div>
+  </div>
+</div>
+
+<script>
+const launch=new Date('2025-07-10T10:00:00');
+function tick(){
+  const diff=launch-new Date();
+  if(diff<=0)return;
+  document.getElementById('cd-d').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+</script>
+</body></html>

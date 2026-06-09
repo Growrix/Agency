@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Aperture Studio — Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Outfit',sans-serif;background:#d0d8e4;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#dce4f0;margin:0 auto;color:#1e2840}
+
+/* COOL BLUE-GRAY NEUMORPHIC */
+:root{
+  --bg:#dce4f0;
+  --light:rgba(255,255,255,.85);
+  --shadow:rgba(160,180,210,.65);
+  --accent:#3a60c8;
+  --text:#1e2840;
+  --muted:rgba(30,40,64,.38);
+}
+.neu{box-shadow:-5px -5px 12px var(--light),5px 5px 12px var(--shadow)}
+.neu-press{box-shadow:inset -3px -3px 8px var(--light),inset 3px 3px 8px var(--shadow)}
+.neu-sm{box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+
+/* HERO */
+.hero{background:var(--bg);padding:32px 22px 24px;position:relative;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-top{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.h-logo{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:3px;text-transform:uppercase}
+.h-badge{font-size:10px;background:var(--bg);border-radius:100px;padding:5px 14px;color:var(--accent);font-weight:700;letter-spacing:.5px}
+.h-badge{box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+/* Camera lens SVG-like element */
+.lens{width:70px;height:70px;background:var(--bg);border-radius:50%;margin-bottom:18px;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative}
+.lens{box-shadow:-6px -6px 14px var(--light),6px 6px 14px var(--shadow)}
+.lens::after{content:'';position:absolute;inset:10px;border-radius:50%;box-shadow:inset -2px -2px 6px var(--light),inset 2px 2px 6px var(--shadow)}
+.hero h1{font-size:38px;font-weight:800;color:var(--text);line-height:.9;letter-spacing:-2px}
+.hero h1 .a{color:var(--accent)}
+.hero-sub{font-size:11px;color:var(--muted);margin-top:9px;line-height:1.65;font-weight:500}
+
+/* STATS */
+.stats{display:flex;gap:10px;padding:18px}
+.st{flex:1;background:var(--bg);border-radius:18px;padding:16px 0;text-align:center}
+.st{box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.st-n{font-size:22px;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.st-l{font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.5px;font-weight:600}
+
+/* BODY */
+.body{padding:0 16px 40px}
+.sec{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin:22px 0 12px}
+
+/* Neumorphic service cards */
+.services{display:flex;flex-direction:column;gap:10px}
+.svc{background:var(--bg);border-radius:18px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.svc{box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.svc-icon{font-size:22px;flex-shrink:0}
+.svc-name{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.svc-desc{font-size:10px;color:var(--muted);margin-top:2px;font-weight:500}
+.svc-price{font-size:15px;font-weight:800;color:var(--accent);flex-shrink:0}
+
+/* Gallery grid — neu inset frames */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g-frame{background:var(--bg);border-radius:14px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;overflow:hidden}
+.g-frame{box-shadow:inset -3px -3px 8px var(--light),inset 3px 3px 8px var(--shadow)}
+.g-label{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+
+/* Process */
+.process{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.proc{background:var(--bg);border-radius:16px;padding:16px}
+.proc{box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.proc-n{font-size:28px;font-weight:800;color:rgba(58,96,200,.12);line-height:1;margin-bottom:5px}
+.proc-name{font-size:12px;font-weight:700;color:var(--text);letter-spacing:-.2px}
+.proc-desc{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;font-weight:500}
+
+/* CTA */
+.cta{background:var(--bg);border-radius:24px;padding:26px;text-align:center}
+.cta{box-shadow:-6px -6px 14px var(--light),6px 6px 14px var(--shadow)}
+.cta h3{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:11px;color:var(--muted);margin-bottom:22px;line-height:1.6;font-weight:500}
+.cta-btn{display:block;background:var(--accent);color:#fff;border-radius:16px;padding:15px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:10px;letter-spacing:-.2px}
+.cta-btn{box-shadow:0 6px 20px rgba(58,96,200,.3),-3px -3px 8px var(--light)}
+.cta-btn2{display:block;background:var(--bg);color:var(--muted);border-radius:16px;padding:13px;font-size:12px;font-weight:600;text-decoration:none}
+.cta-btn2{box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+
+.contacts{background:var(--bg);border-radius:18px;overflow:hidden}
+.contacts{box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(160,180,210,.2);font-size:12px;color:var(--muted);font-weight:500}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;box-shadow:0 4px 12px rgba(58,96,200,.3)}
+footer{background:#d0d8e4;padding:18px;text-align:center;font-size:10px;color:var(--muted);letter-spacing:.5px;font-weight:600}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-top">
+    <div class="h-logo">Aperture</div>
+    <div class="h-badge">📅 Booking open</div>
+  </div>
+  <div class="lens">📷</div>
+  <h1>Photos<br>that <span class="a">matter.</span></h1>
+  <div class="hero-sub">Wedding, portrait, commercial & editorial photography. 10 years capturing Dhaka's most important moments.</div>
+</div>
+<div class="stats">
+  <div class="st"><div class="st-n">1,200+</div><div class="st-l">Sessions</div></div>
+  <div class="st"><div class="st-n">10yr</div><div class="st-l">Experience</div></div>
+  <div class="st"><div class="st-n">4.9★</div><div class="st-l">Rating</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><span class="svc-icon">💍</span><div><div class="svc-name">Wedding Coverage</div><div class="svc-desc">Full day · 2 shooters · 600+ edits delivered</div></div><div class="svc-price">৳45,000</div></div>
+    <div class="svc"><span class="svc-icon">👤</span><div><div class="svc-name">Portrait Session</div><div class="svc-desc">2hr studio · 30 edited images · digital delivery</div></div><div class="svc-price">৳8,000</div></div>
+    <div class="svc"><span class="svc-icon">🏢</span><div><div class="svc-name">Corporate / Brand</div><div class="svc-desc">Team photos, product, events, office shoot</div></div><div class="svc-price">৳18,000</div></div>
+    <div class="svc"><span class="svc-icon">🎂</span><div><div class="svc-name">Lifestyle & Events</div><div class="svc-desc">Birthdays, family, cultural celebrations</div></div><div class="svc-price">৳12,000</div></div>
+  </div>
+  <div class="sec">Portfolio</div>
+  <div class="gallery">
+    <div class="g-frame">👰<div class="g-label">Wedding</div></div>
+    <div class="g-frame">👔<div class="g-label">Corporate</div></div>
+    <div class="g-frame">🌸<div class="g-label">Portrait</div></div>
+    <div class="g-frame">🎉<div class="g-label">Events</div></div>
+  </div>
+  <div class="sec">Our Process</div>
+  <div class="process">
+    <div class="proc"><div class="proc-n">01</div><div class="proc-name">Consultation</div><div class="proc-desc">Free call to discuss vision, dates and requirements</div></div>
+    <div class="proc"><div class="proc-n">02</div><div class="proc-name">The Shoot</div><div class="proc-desc">Relaxed, guided session — we handle the rest</div></div>
+    <div class="proc"><div class="proc-n">03</div><div class="proc-name">Editing</div><div class="proc-desc">7-day colour grading and retouching</div></div>
+    <div class="proc"><div class="proc-n">04</div><div class="proc-name">Delivery</div><div class="proc-desc">Gallery link + USB drive option available</div></div>
+  </div>
+  <div class="sec">Book a Session</div>
+  <div class="cta">
+    <h3>Let's create something beautiful.</h3>
+    <p>Free 15-min discovery call before every booking. Enquire via WhatsApp for fastest response.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">📷 Book a Session</a>
+    <a href="mailto:hello@aperturestudio.bd" class="cta-btn2">hello@aperturestudio.bd</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan Studio · Location shoots citywide</div>
+    <div class="cr"><div class="ci">📸</div>@aperturestudio.bd</div>
+  </div>
+</div>
+<footer>© 2025 Aperture Studio · Professional Photography · Dhaka</footer>
+</div></body></html>

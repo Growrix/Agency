@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NovaTech Properties — Annual Report FY 2024–25</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f2f4f8;font-family:'Source Sans 3',sans-serif;color:#1a2840}
+.cover{background:#0a1e3c;color:#fff;padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+.cover-left .eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px}
+.cover-left h1{font-family:'Libre Baskerville',serif;font-size:clamp(2.5rem,4vw,3.8rem);font-weight:400;line-height:1.05;margin-bottom:12px}
+.cover-left .year{font-size:15px;color:rgba(255,255,255,.4);font-weight:300}
+.cover-right{display:flex;flex-direction:column;gap:2px}
+.cover-stat-row{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.cover-stat-row:first-child{border-radius:10px 10px 0 0}
+.cover-stat-row:last-child{border-radius:0 0 10px 10px;background:rgba(42,111,255,.15);border-color:rgba(42,111,255,.25)}
+.csr-label{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:1px}
+.csr-value{font-family:'Libre Baskerville',serif;font-size:1.6rem;color:#fff}
+.csr-change{font-size:12px;color:#4ade80}
+.body{background:#fff;max-width:1000px;margin:0 auto;box-shadow:0 2px 40px rgba(0,0,0,.06)}
+.section{padding:52px 60px;border-bottom:1px solid #e8ecf4}
+.section:last-child{border-bottom:none}
+.sec-num{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#2a6fff;margin-bottom:8px;font-weight:600}
+h2{font-family:'Libre Baskerville',serif;font-size:1.7rem;font-weight:400;margin-bottom:18px;color:#0a1e3c}
+p.body{font-size:15px;color:#4a5a70;line-height:1.85;font-weight:300;margin-bottom:14px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e8ecf4;border:1px solid #e8ecf4;border-radius:10px;overflow:hidden;margin:20px 0}
+.kpi{background:#f8fafc;padding:20px;text-align:center}
+.kpi .n{font-family:'Libre Baskerville',serif;font-size:1.8rem;color:#0a1e3c;display:block;margin-bottom:3px}
+.kpi .l{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px}
+.kpi .c{font-size:12px;color:#16a34a;margin-top:4px}
+.chart-wrapper{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:28px;margin:20px 0}
+.chart-wrapper h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#94a3b8;margin-bottom:16px}
+.hbar-list{display:flex;flex-direction:column;gap:12px}
+.hbar-item{display:flex;align-items:center;gap:12px}
+.hbar-label{font-size:13px;color:#1a2840;width:100px;flex-shrink:0}
+.hbar-track{flex:1;background:#e8ecf4;border-radius:4px;height:28px;position:relative;overflow:hidden}
+.hbar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:10px}
+.hbar-fill span{font-size:12px;color:#fff;font-weight:600}
+.hbar-amount{font-size:13px;font-weight:600;color:#0a1e3c;width:80px;text-align:right;flex-shrink:0}
+.props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:20px 0}
+.prop-card{border:1px solid #e2e8f0;border-radius:10px;padding:20px;background:#f8fafc}
+.prop-type{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2a6fff;margin-bottom:6px;font-weight:600}
+.prop-name{font-size:15px;font-weight:600;color:#0a1e3c;margin-bottom:4px}
+.prop-detail{font-size:12px;color:#64748b;line-height:1.5}
+.prop-val{font-family:'Libre Baskerville',serif;font-size:1.1rem;color:#0a1e3c;margin-top:10px}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.board-member{text-align:center}
+.board-avatar{width:64px;height:64px;border-radius:50%;background:#e8ecf4;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.board-name{font-size:13px;font-weight:600;color:#0a1e3c;margin-bottom:2px}
+.board-title{font-size:11px;color:#64748b}
+.sign-off{background:#0a1e3c;color:#fff;padding:48px 60px;text-align:center}
+.sign-off h3{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:400;margin-bottom:10px}
+.sign-off p{color:rgba(255,255,255,.5);font-size:14px;margin-bottom:24px;font-weight:300}
+.dl-btn{display:inline-block;border:1px solid rgba(255,255,255,.25);color:#fff;padding:13px 32px;text-decoration:none;border-radius:6px;font-size:14px}
+@media(max-width:768px){.cover{grid-template-columns:1fr;padding:40px 24px}.section{padding:36px 24px}.kpi-row{grid-template-columns:1fr 1fr}.props-grid,.board{grid-template-columns:1fr 1fr}.sign-off{padding:40px 24px}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-left">
+    <div class="eyebrow">Annual Report</div>
+    <h1>Building Bangladesh's<br>Future, One Project<br>at a Time.</h1>
+    <div class="year">NovaTech Properties Ltd. · FY 2024–25</div>
+  </div>
+  <div class="cover-right">
+    <div class="cover-stat-row"><div><div class="csr-label">Total Revenue</div><div class="csr-value">৳420 Crore</div></div><div class="csr-change">↑ +28%</div></div>
+    <div class="cover-stat-row"><div><div class="csr-label">Units Handed Over</div><div class="csr-value">1,840</div></div><div class="csr-change">↑ +22%</div></div>
+    <div class="cover-stat-row"><div><div class="csr-label">Projects Under Construction</div><div class="csr-value">12</div></div><div class="csr-change">5 delivering in FY26</div></div>
+    <div class="cover-stat-row"><div><div class="csr-label">Net Profit</div><div class="csr-value">৳58.4 Crore</div></div><div class="csr-change">↑ +18% margin</div></div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="section">
+    <div class="sec-num">01 / Performance Overview</div>
+    <h2>FY25 by the Numbers</h2>
+    <p class="body">NovaTech Properties delivered its strongest financial year since founding, driven by unprecedented demand for mid-market residential units in Bashundhara and continued strength in our commercial portfolio in Gulshan. We handed over 1,840 units — 22% more than FY24 — and maintained a gross margin of 32.4%.</p>
+    <div class="kpi-row">
+      <div class="kpi"><span class="n">৳420Cr</span><span class="l">Revenue</span><div class="c">↑ 28%</div></div>
+      <div class="kpi"><span class="n">1,840</span><span class="l">Units Delivered</span><div class="c">↑ 22%</div></div>
+      <div class="kpi"><span class="n">32.4%</span><span class="l">Gross Margin</span><div class="c">↑ 2.1pp</div></div>
+      <div class="kpi"><span class="n">৳58.4Cr</span><span class="l">Net Profit</span><div class="c">↑ 18%</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">02 / Revenue by Segment</div>
+    <h2>Where We Earn</h2>
+    <div class="chart-wrapper">
+      <h4>Revenue Breakdown — FY25 (৳ Crore)</h4>
+      <div class="hbar-list">
+        <div class="hbar-item"><span class="hbar-label">Residential</span><div class="hbar-track"><div class="hbar-fill" style="width:72%;background:#0a1e3c"><span>৳302Cr</span></div></div><span class="hbar-amount">72%</span></div>
+        <div class="hbar-item"><span class="hbar-label">Commercial</span><div class="hbar-track"><div class="hbar-fill" style="width:18%;background:#2a6fff"><span>৳76Cr</span></div></div><span class="hbar-amount">18%</span></div>
+        <div class="hbar-item"><span class="hbar-label">Land Sales</span><div class="hbar-track"><div class="hbar-fill" style="width:6%;background:#64748b"><span>৳25Cr</span></div></div><span class="hbar-amount">6%</span></div>
+        <div class="hbar-item"><span class="hbar-label">Other</span><div class="hbar-track"><div class="hbar-fill" style="width:4%;background:#94a3b8"><span>৳17Cr</span></div></div><span class="hbar-amount">4%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">03 / Project Portfolio</div>
+    <h2>Selected Projects</h2>
+    <div class="props-grid">
+      <div class="prop-card"><div class="prop-type">Residential · Delivered</div><div class="prop-name">Nova Residences Bashundhara</div><div class="prop-detail">320 units · 18 storeys · G+B+18<br>Handed over Q3 FY25</div><div class="prop-val">৳120 Crore</div></div>
+      <div class="prop-card"><div class="prop-type">Commercial · Under Construction</div><div class="prop-name">Nova Tower Gulshan</div><div class="prop-detail">220,000 sqft · B+G+22 floors<br>Delivery: Q2 FY26</div><div class="prop-val">৳180 Crore</div></div>
+      <div class="prop-card"><div class="prop-type">Mixed Use · Planning</div><div class="prop-name">Nova City Purbachal</div><div class="prop-detail">1,200 units + retail · 3 phases<br>Launch: FY26 Q1</div><div class="prop-val">৳650 Crore</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">04 / Board of Directors</div>
+    <h2>Leadership</h2>
+    <div class="board">
+      <div class="board-member"><div class="board-avatar">🏢</div><div class="board-name">Kamal Hossain</div><div class="board-title">Chairman &amp; MD</div></div>
+      <div class="board-member"><div class="board-avatar">👩‍💼</div><div class="board-name">Rina Hossain</div><div class="board-title">Deputy MD</div></div>
+      <div class="board-member"><div class="board-avatar">👨‍💼</div><div class="board-name">Arif Rahman</div><div class="board-title">CFO</div></div>
+      <div class="board-member"><div class="board-avatar">🏛️</div><div class="board-name">Sabina Islam</div><div class="board-title">Independent Director</div></div>
+    </div>
+  </div>
+
+  <div class="sign-off">
+    <h3>Thank you for your trust.</h3>
+    <p>Full financials, audited statements, and RAJUK approvals available in the complete annual report.</p>
+    <a href="#" class="dl-btn">Download Full Report (PDF)</a>
+  </div>
+</div>
+</body></html>

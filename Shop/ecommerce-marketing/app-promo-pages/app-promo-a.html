@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FitPulse — The Fitness App That Actually Gets You Moving</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--orange:#ff5c1a;--dark:#070a07;--card:#0e120e}
+body{background:var(--dark);color:#f0f0e8;font-family:'Outfit',sans-serif;overflow-x:hidden}
+nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;background:rgba(7,10,7,.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,92,26,.1)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--orange)}
+.nav-dl{display:flex;gap:10px}
+.btn-store{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 18px;font-size:13px;color:#e0e0d8;text-decoration:none;font-weight:500;transition:.15s}
+.btn-store:hover{border-color:var(--orange);color:var(--orange)}
+.hero{display:grid;grid-template-columns:1fr 1fr;max-width:1100px;margin:0 auto;padding:80px 48px 60px;gap:60px;align-items:center}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,26,.12);border:1px solid rgba(255,92,26,.25);border-radius:6px;padding:6px 14px;font-size:11px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;font-weight:600}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6.5rem);line-height:.88;letter-spacing:1px;margin-bottom:18px;text-transform:uppercase}
+h1 .outline{-webkit-text-stroke:2px var(--orange);color:transparent}
+.hero-desc{font-size:16px;color:rgba(240,240,232,.5);line-height:1.75;font-weight:300;max-width:400px;margin-bottom:32px}
+.dl-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;padding:13px 26px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:700;transition:.2s}
+.btn-primary:hover{background:#e04a0a;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.15);color:#e0e0d8;padding:12px 22px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:500;transition:.2s}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+.dl-stats{display:flex;gap:24px;flex-wrap:wrap}
+.dl-stat{font-size:13px;color:rgba(255,255,255,.35)}
+.dl-stat strong{color:#fff;display:block;font-size:15px;font-weight:700}
+.phone-wrap{position:relative;display:flex;justify-content:center}
+.phone{background:var(--card);border:2px solid rgba(255,255,255,.08);border-radius:40px;padding:20px 14px;width:260px;box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 80px rgba(255,92,26,.1)}
+.p-notch{width:80px;height:8px;background:rgba(255,255,255,.08);border-radius:4px;margin:0 auto 16px}
+.p-screen{background:#0a0f0a;border-radius:24px;overflow:hidden;min-height:440px;display:flex;flex-direction:column}
+.p-header{background:var(--orange);padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.p-header-title{font-size:14px;font-weight:700;color:#fff}
+.p-header-streak{font-size:12px;color:rgba(255,255,255,.8);}
+.p-workout{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}
+.p-ring{display:flex;justify-content:center;padding:12px 0}
+.ring-svg{width:110px;height:110px}
+.p-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.p-stat-box{background:rgba(255,255,255,.04);border-radius:10px;padding:10px 8px;text-align:center}
+.p-stat-box .n{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--orange);line-height:1}
+.p-stat-box .l{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px}
+.p-next{background:rgba(255,92,26,.08);border:1px solid rgba(255,92,26,.15);border-radius:10px;padding:10px 12px}
+.p-next .pn-label{font-size:9px;color:rgba(255,92,26,.5);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}
+.p-next .pn-workout{font-size:13px;font-weight:600;color:#f0f0e8}
+.glow-ring{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,92,26,.2),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.stats-band{background:var(--card);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:32px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;text-align:center}
+.band-stat .n{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--orange);letter-spacing:1px;display:block}
+.band-stat .l{font-size:11px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.features{max-width:1100px;margin:0 auto;padding:80px 48px}
+.features h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:2px;margin-bottom:40px;text-transform:uppercase;text-align:center}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feat{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:24px;transition:.2s}
+.feat:hover{border-color:rgba(255,92,26,.2);transform:translateY(-3px)}
+.feat-icon{font-size:28px;margin-bottom:10px}
+.feat h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.feat p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
+.testimonials{background:var(--card);padding:80px 48px}
+.testimonials h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:2px;text-align:center;margin-bottom:40px;text-transform:uppercase}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+.test{background:#0a0e0a;border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:22px}
+.test-stars{color:var(--orange);font-size:14px;margin-bottom:10px}
+.test-text{font-size:13px;color:rgba(255,255,255,.6);line-height:1.65;font-style:italic;margin-bottom:12px}
+.test-author{font-size:12px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between}
+.cta-band{background:var(--orange);padding:80px 48px;text-align:center}
+.cta-band h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);color:#fff;letter-spacing:2px;line-height:.9;margin-bottom:14px;text-transform:uppercase}
+.cta-band p{color:rgba(255,255,255,.7);font-size:16px;font-weight:300;margin-bottom:32px}
+.cta-dl-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.cta-store-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(0,0,0,.3);color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-size:15px;font-weight:700;transition:.2s}
+.cta-store-btn:hover{background:rgba(0,0,0,.45)}
+.btn-txt .sub{font-size:10px;display:block;opacity:.7;text-transform:uppercase;letter-spacing:1px}
+.btn-txt .main{font-size:16px;display:block}
+footer{background:var(--dark);padding:28px 48px;text-align:center;font-size:12px;color:rgba(255,255,255,.2);letter-spacing:1.5px;text-transform:uppercase}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:60px 24px}.phone-wrap{order:-1}.stats-band{grid-template-columns:1fr 1fr;padding:28px 24px}.feat-grid,.test-grid{grid-template-columns:1fr}.features,.cta-band,.testimonials{padding:60px 24px}nav{padding:14px 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">FIT<span style="color:#fff">PULSE</span></div>
+  <div class="nav-dl">
+    <a href="#" class="btn-store">🍎 iOS</a>
+    <a href="#" class="btn-store">▶ Android</a>
+  </div>
+</nav>
+
+<section>
+  <div class="hero">
+    <div>
+      <div class="hero-kicker">💪 4.9★ · 320K Active Users</div>
+      <h1>STOP<br>MAKING<br><span class="outline">EXCUSES.</span></h1>
+      <p class="hero-desc">FitPulse turns your phone into a personal trainer, nutritionist, and accountability partner — all in one. 600+ workouts. Smart meal planning. Real results.</p>
+      <div class="dl-row">
+        <a href="#" class="btn-primary"><span style="font-size:20px">🍎</span><div class="btn-txt"><span class="sub">Download on</span><span class="main">App Store</span></div></a>
+        <a href="#" class="btn-outline"><span style="font-size:20px">▶</span><div class="btn-txt"><span class="sub">Get it on</span><span class="main">Google Play</span></div></a>
+      </div>
+      <div class="dl-stats">
+        <div class="dl-stat"><strong>Free</strong>to start</div>
+        <div class="dl-stat"><strong>320K</strong>active users</div>
+        <div class="dl-stat"><strong>4.9 ★</strong>App Store</div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="glow-ring"></div>
+      <div class="phone">
+        <div class="p-notch"></div>
+        <div class="p-screen">
+          <div class="p-header">
+            <div class="p-header-title">Today's Workout</div>
+            <div class="p-header-streak">🔥 18-day streak</div>
+          </div>
+          <div class="p-workout">
+            <div class="p-ring">
+              <svg class="ring-svg" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,92,26,.1)" stroke-width="10"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#ff5c1a" stroke-width="10" stroke-dasharray="220 314" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                <text x="60" y="55" text-anchor="middle" font-size="20" font-weight="800" fill="#ff5c1a" font-family="Bebas Neue">72%</text>
+                <text x="60" y="70" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="Outfit">completed</text>
+              </svg>
+            </div>
+            <div class="p-stats">
+              <div class="p-stat-box"><span class="n">840</span><span class="l">cal</span></div>
+              <div class="p-stat-box"><span class="n">42m</span><span class="l">time</span></div>
+              <div class="p-stat-box"><span class="n">18</span><span class="l">streak</span></div>
+            </div>
+            <div class="p-next">
+              <div class="pn-label">Next Exercise</div>
+              <div class="pn-workout">💪 Bulgarian Split Squat — 3×12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-band">
+  <div class="band-stat"><span class="n">320K</span><span class="l">Active Users</span></div>
+  <div class="band-stat"><span class="n">600+</span><span class="l">Workouts</span></div>
+  <div class="band-stat"><span class="n">4.9★</span><span class="l">App Rating</span></div>
+  <div class="band-stat"><span class="n">83%</span><span class="l">Hit Their Goal</span></div>
+</div>
+
+<section class="features">
+  <h2>Everything you need. Nothing you don't.</h2>
+  <div class="feat-grid">
+    <div class="feat"><div class="feat-icon">🎯</div><h3>Personalised Plans</h3><p>Answer 8 questions, get a full workout programme built for your body, schedule, and goals.</p></div>
+    <div class="feat"><div class="feat-icon">📊</div><h3>Progress Tracking</h3><p>Track every rep, every set, every meal. Watch the graph go up over time — nothing more motivating.</p></div>
+    <div class="feat"><div class="feat-icon">🍽️</div><h3>Meal Planning</h3><p>10,000+ foods in the Bangladeshi database. Macro tracking that works with daal, biryani, and bhaat.</p></div>
+    <div class="feat"><div class="feat-icon">🤖</div><h3>AI Coach</h3><p>Ask your coach anything. Swap exercises, adjust intensity, get form tips — 24/7, in Bengali or English.</p></div>
+    <div class="feat"><div class="feat-icon">👥</div><h3>Community Challenges</h3><p>Compete with 320K users in weekly challenges. Accountability through friendly competition.</p></div>
+    <div class="feat"><div class="feat-icon">📴</div><h3>Works Offline</h3><p>No WiFi at the gym? No problem. All workouts and tracking work fully offline.</p></div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>Real people. Real results.</h2>
+  <div class="test-grid">
+    <div class="test"><div class="test-stars">★★★★★</div><div class="test-text">"Lost 12kg in 4 months. I'd tried every app — FitPulse is the only one that kept me accountable long enough to actually see results."</div><div class="test-author"><span>Rahul A.</span><span>-12kg · 4 months</span></div></div>
+    <div class="test"><div class="test-stars">★★★★★</div><div class="test-text">"Finally an app that understands Bangladeshi food. Tracking my meals actually works now."</div><div class="test-author"><span>Nadia K.</span><span>+8kg muscle</span></div></div>
+    <div class="test"><div class="test-stars">★★★★★</div><div class="test-text">"The streak system is addictive in the best way. I haven't missed a workout in 42 days."</div><div class="test-author"><span>Karim U.</span><span>42-day streak 🔥</span></div></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h2>YOUR BODY<br>WON'T CHANGE<br>ITSELF.</h2>
+  <p>Free to download. Premium from ৳290/month. Start today.</p>
+  <div class="cta-dl-row">
+    <a href="#" class="cta-store-btn"><span style="font-size:28px">🍎</span><div class="btn-txt"><span class="sub">Download on</span><span class="main">App Store</span></div></a>
+    <a href="#" class="cta-store-btn"><span style="font-size:28px">▶</span><div class="btn-txt"><span class="sub">Get it on</span><span class="main">Google Play</span></div></a>
+  </div>
+</section>
+
+<footer>© 2025 FITPULSE · fitpulse.app · Free to download · Premium ৳290/month · Works offline</footer>
+</body></html>

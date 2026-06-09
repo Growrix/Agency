@@ -44,7 +44,7 @@ The `app_state` table must be created in Supabase before auth/persistence endpoi
 
 ### Server-Only Table
 
-The `public.app_state` table is accessed only by the backend via `SUPABASE_SECRET_KEY`. Row-level security is intentionally disabled because it's internal application infrastructure.
+The `public.app_state` table is accessed only by the backend via the service-role key (`SUPABASE_SECRET_KEY` / `SUPABASE_SERVICE_ROLE_KEY`). Row-level security is enabled, and client roles (`anon`, `authenticated`) are explicitly blocked by policy.
 
 ## Quick Start
 

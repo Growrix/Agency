@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Bashar & Associates — Law Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif;background:#e8e0d4;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#ede6dc;margin:0 auto;color:#2c1e10}
+:root{--bg:#ede6dc;--light:rgba(255,255,255,.8);--shadow:rgba(180,155,120,.55);--accent:#7a4a20;--text:#2c1e10;--muted:rgba(44,30,16,.38)}
+.neu{box-shadow:-5px -5px 12px var(--light),5px 5px 12px var(--shadow)}
+.neu-sm{box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+.hero{background:var(--bg);padding:32px 22px 26px;position:relative;min-height:276px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-top{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.h-seal{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-family:'Lato',sans-serif}
+.h-est{font-size:10px;color:var(--muted);font-family:'Playfair Display',serif;font-style:italic}
+.scales{width:60px;height:60px;background:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;box-shadow:-5px -5px 12px var(--light),5px 5px 12px var(--shadow)}
+.hero h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--text);line-height:.92;letter-spacing:-.3px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-rule{width:36px;height:2px;background:var(--accent);margin:12px 0 10px;opacity:.5}
+.hero-sub{font-size:11px;color:var(--muted);line-height:1.65;font-weight:400}
+.accreds{display:flex;gap:7px;padding:14px 18px;flex-wrap:wrap}
+.acc{background:var(--bg);border-radius:100px;padding:4px 12px;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.5px;box-shadow:-2px -2px 5px var(--light),2px 2px 5px var(--shadow)}
+.body{padding:0 16px 40px}
+.sec{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--muted);margin:22px 0 12px;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(122,74,32,.15)}
+.practices{display:flex;flex-direction:column;gap:8px}
+.prac{background:var(--bg);border-radius:16px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.prac-name{font-family:'Playfair Display',serif;font-size:15px;color:var(--text);font-style:italic}
+.prac-desc{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.4}
+.prac-arrow{color:var(--accent);font-size:16px;opacity:.5;flex-shrink:0}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.member{background:var(--bg);border-radius:18px;padding:18px;text-align:center;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.mem-av{width:50px;height:50px;background:var(--bg);border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+.mem-name{font-family:'Playfair Display',serif;font-size:14px;color:var(--text);font-weight:700}
+.mem-role{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4}
+.cta{background:var(--bg);border-radius:22px;padding:24px;text-align:center;box-shadow:-6px -6px 14px var(--light),6px 6px 14px var(--shadow)}
+.cta h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:8px}
+.cta h3 em{font-style:italic;color:var(--accent)}
+.cta p{font-size:11px;color:var(--muted);margin-bottom:20px;line-height:1.65}
+.cta-btn{display:block;background:var(--accent);color:#ede6dc;border-radius:14px;padding:15px;font-family:'Playfair Display',serif;font-style:italic;font-size:15px;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 18px rgba(122,74,32,.3)}
+.cta-btn2{display:block;background:var(--bg);color:var(--muted);border-radius:14px;padding:13px;font-size:12px;text-decoration:none;box-shadow:-3px -3px 8px var(--light),3px 3px 8px var(--shadow)}
+.contacts{background:var(--bg);border-radius:18px;overflow:hidden;box-shadow:-4px -4px 10px var(--light),4px 4px 10px var(--shadow)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(122,74,32,.08);font-size:12px;color:var(--muted)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;box-shadow:0 3px 10px rgba(122,74,32,.3)}
+footer{background:#e0d8cc;padding:16px;text-align:center;font-family:'Playfair Display',serif;font-size:12px;color:var(--muted);font-style:italic}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-top"><div class="h-seal">Bashar & Associates</div><div class="h-est">Est. 1995</div></div>
+  <div class="scales">⚖️</div>
+  <h1>Justice<br>served with <em>precision.</em></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Corporate law, litigation, real estate and family matters. Three decades of trusted legal counsel across Bangladesh.</div>
+</div>
+<div class="accreds">
+  <div class="acc">✓ Bangladesh Bar Council</div>
+  <div class="acc">✓ Supreme Court Advocate</div>
+  <div class="acc">✓ High Court Division</div>
+</div>
+<div class="body">
+  <div class="sec">Practice Areas</div>
+  <div class="practices">
+    <div class="prac"><div><div class="prac-name">Corporate & Commercial</div><div class="prac-desc">Company formation, M&A, shareholder agreements</div></div><span class="prac-arrow">→</span></div>
+    <div class="prac"><div><div class="prac-name">Civil Litigation</div><div class="prac-desc">Contract disputes, civil claims, arbitration</div></div><span class="prac-arrow">→</span></div>
+    <div class="prac"><div><div class="prac-name">Property & Land Law</div><div class="prac-desc">Title verification, deed drafting, disputes</div></div><span class="prac-arrow">→</span></div>
+    <div class="prac"><div><div class="prac-name">Employment Law</div><div class="prac-desc">Contracts, dismissal, workplace compliance</div></div><span class="prac-arrow">→</span></div>
+    <div class="prac"><div><div class="prac-name">Family & Succession</div><div class="prac-desc">Wills, inheritance, divorce, guardianship</div></div><span class="prac-arrow">→</span></div>
+  </div>
+  <div class="sec">Senior Partners</div>
+  <div class="team">
+    <div class="member"><div class="mem-av">👨‍⚖️</div><div class="mem-name">A.K. Bashar</div><div class="mem-role">Senior Partner<br>LLB, LLM London<br>30 years practice</div></div>
+    <div class="member"><div class="mem-av">👩‍⚖️</div><div class="mem-name">Razia Ahmed</div><div class="mem-role">Partner · Corporate<br>LLB BUET, MBA<br>20 years practice</div></div>
+  </div>
+  <div class="sec">Consultation</div>
+  <div class="cta">
+    <h3>Your legal matter<br><em>in confident hands.</em></h3>
+    <p>All consultations are strictly confidential. Initial consultation fee: ৳1,000 for 45 minutes.</p>
+    <a href="tel:+8801700000000" class="cta-btn">Request a Consultation</a>
+    <a href="https://wa.me/8801700000000" class="cta-btn2">WhatsApp for appointment</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Purana Paltan, Dhaka</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 5pm · By appointment</div>
+  </div>
+</div>
+<footer>© 2025 Bashar & Associates · Advocates & Solicitors · All communications are privileged</footer>
+</div></body></html>

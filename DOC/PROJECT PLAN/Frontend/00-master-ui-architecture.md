@@ -9,7 +9,7 @@ recommended_next_reads:
   - 02-component-system.md
 ---
 
-# Agency SaaS Website UI Architecture
+# Product-Led Website UI Architecture
 
 ## AI Consumption Guidance
 - AI first-stop file for this folder: ai-context.yaml.
@@ -18,9 +18,9 @@ recommended_next_reads:
 - Do not read every page file before implementation; use ai-context.yaml and README.md to select only the relevant page plans.
 
 ## Product Intent
-- Build a premium SaaS-style web presence for a web development agency that sells high-trust custom services and productized digital assets.
-- Position the agency as a product-minded technical partner for SaaS applications, websites, Model Context Protocol (MCP) servers, and automation systems.
-- Support direct conversion paths for discovery, consultation, AI-assisted qualification, WhatsApp escalation, and Stripe-powered commerce.
+- Build a product-led marketplace and service platform where digital products are the primary entry point and services are the expansion path.
+- Position the site around four buyer routes: DIY purchase, Done-For-You customization, custom build discovery, and AI/WhatsApp assisted qualification.
+- Keep direct conversion paths for product checkout, service request, booking, AI-assisted qualification, and WhatsApp escalation.
 
 ## Recommended Experience Direction
 - Visual theme: editorial-premium meets product dashboard.
@@ -36,12 +36,12 @@ recommended_next_reads:
 - Treat the shop as a serious revenue surface, not an afterthought.
 
 ## Core Journeys
-- New prospect: Home -> Services -> Service Detail -> Book Appointment.
-- Product buyer: Home or Shop -> Product Detail -> Checkout.
-- Proof-seeking lead: Home -> Portfolio -> Case Study -> Contact or Book Appointment.
+- DIY buyer: Home -> Products -> Product Detail -> Checkout -> Success -> Dashboard downloads.
+- Non-technical owner: Product Detail -> Done-For-You CTA -> Template Customization Service -> Contact/Booking.
+- Founder prospect: Home or Solutions -> Service Detail -> Book Appointment.
 - Research-driven buyer: Home -> Blog -> Blog Post -> Book Appointment.
 - Fast-answer visitor: Any page -> AI Chat Widget or AI Concierge -> WhatsApp or Booking.
-- Mobile visitor: Landing section -> sticky bottom dock -> chat/shop/services/booking without hunting.
+- Mobile visitor: Landing section -> sticky bottom dock -> chat/products/services/booking without hunting.
 
 ## Site Map
 
@@ -62,9 +62,14 @@ recommended_next_reads:
 - FAQ
 
 ### Commerce Pages
-- Shop Overview
+- Products Overview
 - Product Detail
+- Product Category
+- Bundles
+- Free Products
 - Checkout
+- Success
+- Customer Dashboard
 
 ### Assisted Conversion Pages
 - AI Concierge
@@ -76,10 +81,10 @@ recommended_next_reads:
 - 404
 
 ## Global Navigation Model
-- Header links: Services, Shop, Portfolio, Blog, Pricing, About, AI Concierge.
-- Persistent primary CTA: Book Appointment.
+- Header links: Services, Products, Solutions, Portfolio, Blog, Pricing, About.
+- Persistent primary CTA: Browse Products.
 - Persistent secondary utilities: AI popup chat, WhatsApp, Cart.
-- Footer groups: Services, Shop Categories, Insights, Company, Support, Legal.
+- Footer groups: Services, Products, Solutions, Insights, Company, Support, Legal.
 - Deep-link behavior: every service card, case study teaser, and featured product routes to a detail surface.
 
 ## Mobile Navigation Model
@@ -150,15 +155,15 @@ recommended_next_reads:
 - Primary CTA: Audit My Workflow.
 - Secondary CTA: View Automation Examples.
 
-### Shop Overview
-- Goal: sell website templates and ready-made websites through fast category, type, and industry discovery.
-- Primary CTA: Browse Templates.
-- Secondary CTA: Start Checkout.
+### Products Overview
+- Goal: sell digital products through category, tier, and intent-led discovery.
+- Primary CTA: Browse Products.
+- Secondary CTA: Need Done-For-You Setup.
 
 ### Product Detail
-- Goal: convert template and ready-website interest into checkout with clear previews, specs, and trust.
+- Goal: convert product interest into checkout while offering a clear upgrade path to Done-For-You and custom services.
 - Primary CTA: Buy Now.
-- Secondary CTA: Chat Before Buying.
+- Secondary CTA: Need Customization.
 
 ### Portfolio Overview
 - Goal: establish credibility with a filterable showcase of shipped outcomes.
@@ -171,8 +176,8 @@ recommended_next_reads:
 - Secondary CTA: Explore More Work.
 
 ### Pricing
-- Goal: explain engagement models without making custom work feel commodity-priced.
-- Primary CTA: Get a Tailored Proposal.
+- Goal: clarify three pricing lanes: Digital Products, Done-For-You Setup, and Custom Services.
+- Primary CTA: Browse Products.
 - Secondary CTA: Book Appointment.
 
 ### About
@@ -266,10 +271,22 @@ recommended_next_reads:
 - /services
 - /services/saas-applications
 - /services/websites
+- /services/html-business-profiles
 - /services/mcp-servers
 - /services/automation
+- /services/template-customization
+- /products
+- /products/[slug]
+- /products/category/[category]
+- /products/bundles
+- /products/free
 - /shop
 - /shop/[slug]
+- /solutions/for-startups
+- /solutions/for-local-businesses
+- /solutions/for-agencies
+- /solutions/for-saas-founders
+- /html-business-profiles
 - /portfolio
 - /portfolio/[slug]
 - /pricing
@@ -277,6 +294,8 @@ recommended_next_reads:
 - /ai-concierge
 - /book-appointment
 - /checkout
+- /success
+- /dashboard
 - /contact
 - /faq
 - /privacy-policy
@@ -295,9 +314,11 @@ recommended_next_reads:
 - services-page.md
 - service-saas-applications-page.md
 - service-websites-page.md
+- service-html-business-profiles-page.md
 - service-mcp-servers-page.md
 - service-automation-page.md
 - shop-page.md
+- html-business-profiles-page.md
 - product-detail-page.md
 - portfolio-page.md
 - case-study-page.md

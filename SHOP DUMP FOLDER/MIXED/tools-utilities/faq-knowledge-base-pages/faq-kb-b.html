@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ShopMart Help — FAQ & Customer Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f8f9fb;font-family:'Inter',sans-serif;color:#1e293b}
+nav{background:#0f2b5b;padding:14px 60px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-size:18px;font-weight:800;color:#fff}
+.nav-logo span{color:#38bdf8}
+.nav-right{display:flex;gap:16px;align-items:center}
+.nav-link{font-size:13px;color:rgba(255,255,255,.6);text-decoration:none}
+.nav-shop{background:#38bdf8;color:#0f2b5b;padding:8px 20px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0f2b5b,#1a4a9a);padding:48px 60px;text-align:center;color:#fff}
+.hero h1{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.hero p{color:rgba(255,255,255,.65);font-size:14px;margin-bottom:24px}
+.search{max-width:520px;margin:0 auto;display:flex;background:#fff;border-radius:10px;overflow:hidden}
+.si{flex:1;border:none;padding:13px 16px;font-size:14px;color:#1e293b;font-family:'Inter',sans-serif;outline:none}
+.sb{background:#38bdf8;color:#0f2b5b;border:none;padding:13px 22px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.cats{max-width:960px;margin:0 auto;padding:40px 60px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:.15s}
+.cat:hover{border-color:#0f2b5b;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.cat-icon{font-size:24px;margin-bottom:8px}
+.cat-name{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:2px}
+.cat-n{font-size:11px;color:#94a3b8}
+.main{max-width:960px;margin:0 auto;padding:0 60px 60px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.faq-section h2{font-size:1.2rem;font-weight:700;margin-bottom:18px;color:#0f172a;padding-bottom:12px;border-bottom:2px solid #e2e8f0}
+.faq-list{display:flex;flex-direction:column;gap:2px}
+.faq-item{border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;background:#fff;margin-bottom:4px}
+.faq-q{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:14px;font-weight:600;color:#1e293b;transition:.15s;gap:10px}
+.faq-q:hover{background:#f8faff}
+.faq-q.open{background:#eff6ff;color:#1d4ed8;border-bottom:1px solid #e2e8f0}
+.fq-icon{font-size:18px;flex-shrink:0;color:#94a3b8;transition:.25s}
+.faq-q.open .fq-icon{transform:rotate(45deg);color:#1d4ed8}
+.faq-a{display:none;padding:14px 16px;font-size:13px;color:#64748b;line-height:1.7;font-weight:300;background:#fff}
+.faq-a.open{display:block}
+.quick-links{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px}
+.ql-title{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px}
+.ql-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f1f5f9;text-decoration:none;transition:.15s}
+.ql-item:last-child{border-bottom:none}
+.ql-item:hover .ql-text{color:#0f2b5b}
+.ql-icon{width:36px;height:36px;background:#eff6ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ql-text{font-size:14px;font-weight:600;color:#334155;flex:1}
+.ql-arrow{color:#94a3b8;font-size:16px}
+.contact-box{background:linear-gradient(135deg,#0f2b5b,#1a4a9a);border-radius:14px;padding:24px;text-align:center;margin-top:16px;color:#fff}
+.contact-box h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.contact-box p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px;font-weight:300}
+.contact-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.cb-btn{padding:9px 18px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;transition:.15s}
+.cb-primary{background:#38bdf8;color:#0f2b5b}
+.cb-ghost{border:1px solid rgba(255,255,255,.2);color:#fff}
+footer{background:#0f2b5b;padding:24px 60px;text-align:center;font-size:12px;color:rgba(255,255,255,.4)}
+@media(max-width:700px){.cats{grid-template-columns:1fr 1fr;padding:24px}.main{grid-template-columns:1fr;padding:24px}nav{padding:12px 24px}.nav-link{display:none}.hero{padding:36px 24px}footer{padding:20px 24px}}
+</style>
+</head>
+<body>
+<nav><div class="nav-logo">Shop<span>Mart</span></div><div class="nav-right"><a href="#" class="nav-link">Track Order</a><a href="#" class="nav-shop">My Account</a></div></nav>
+<div class="hero">
+  <h1>How can we help you?</h1>
+  <p>Find answers to common questions or contact our support team</p>
+  <div class="search"><input class="si" placeholder="Search — e.g. 'return policy', 'track order', 'cancel order'..."><button class="sb">Search</button></div>
+</div>
+<div class="cats">
+  <a href="#" class="cat"><div class="cat-icon">📦</div><div class="cat-name">Orders</div><div class="cat-n">12 articles</div></a>
+  <a href="#" class="cat"><div class="cat-icon">🔄</div><div class="cat-name">Returns & Refunds</div><div class="cat-n">8 articles</div></a>
+  <a href="#" class="cat"><div class="cat-icon">🚚</div><div class="cat-name">Delivery</div><div class="cat-n">10 articles</div></a>
+  <a href="#" class="cat"><div class="cat-icon">💳</div><div class="cat-name">Payments</div><div class="cat-n">7 articles</div></a>
+</div>
+<div class="main">
+  <div>
+    <div class="faq-section">
+      <h2>📦 Orders & Tracking</h2>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggle(this)"><span>How do I track my order?</span><span class="fq-icon">+</span></div><div class="faq-a">You'll receive an SMS and email with a tracking link once your order is dispatched. You can also track it in the ShopMart app under <strong>Orders → Track</strong>. Courier tracking updates every 2–3 hours.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggle(this)"><span>Can I cancel my order after placing it?</span><span class="fq-icon">+</span></div><div class="faq-a">Orders can be cancelled within <strong>2 hours</strong> of placement if they haven't been dispatched. Go to <strong>My Orders → Cancel</strong>. After dispatch, you'll need to initiate a return upon delivery. We cannot cancel orders already out for delivery.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggle(this)"><span>What are the delivery times?</span><span class="fq-icon">+</span></div><div class="faq-a">Dhaka & major cities: 1–2 business days. Other areas: 2–4 business days. Same-day delivery is available for select Dhaka areas on orders placed before 12PM. Express delivery is ৳80 extra and available 9AM–9PM daily.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggle(this)"><span>My order is showing 'delivered' but I haven't received it.</span><span class="fq-icon">+</span></div><div class="faq-a">Please check with family members or building security first. If still not found, contact us within <strong>24 hours</strong> of the delivery timestamp — we'll investigate with the courier and arrange a replacement or refund if delivery is confirmed as failed.</div></div>
+      </div>
+    </div>
+    <br>
+    <div class="faq-section">
+      <h2>🔄 Returns & Refunds</h2>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggle(this)"><span>What is your return policy?</span><span class="fq-icon">+</span></div><div class="faq-a">Items can be returned within <strong>7 days</strong> of delivery if they are unused, in original packaging, with all tags attached. Fashion items are eligible for 14 days. We cover return courier costs for defective or wrong items. For change-of-mind returns, ৳60 courier deducted from refund.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggle(this)"><span>How long does a refund take?</span><span class="fq-icon">+</span></div><div class="faq-a">Once we receive the returned item: bKash/Nagad refunds process in 1–2 hours. Card refunds take 5–7 business days depending on your bank. Wallet credit (ShopMart balance) is instant and you get an extra 5% as a goodwill credit.</div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="quick-links">
+      <div class="ql-title">Quick Actions</div>
+      <a href="#" class="ql-item"><div class="ql-icon">📦</div><div class="ql-text">Track My Order</div><span class="ql-arrow">→</span></a>
+      <a href="#" class="ql-item"><div class="ql-icon">🔄</div><div class="ql-text">Start a Return</div><span class="ql-arrow">→</span></a>
+      <a href="#" class="ql-item"><div class="ql-icon">💳</div><div class="ql-text">View My Invoices</div><span class="ql-arrow">→</span></a>
+      <a href="#" class="ql-item"><div class="ql-icon">🏷️</div><div class="ql-text">Check Order Status</div><span class="ql-arrow">→</span></a>
+      <a href="#" class="ql-item"><div class="ql-icon">📞</div><div class="ql-text">Call 16XXX (24/7)</div><span class="ql-arrow">→</span></a>
+    </div>
+    <div class="contact-box">
+      <h3>Can't find an answer?</h3>
+      <p>Our team responds in under 30 minutes, 7AM–11PM daily.</p>
+      <div class="contact-btns"><a href="#" class="cb-btn cb-primary">💬 Live Chat</a><a href="#" class="cb-btn cb-ghost">📞 16XXX</a></div>
+    </div>
+  </div>
+</div>
+<footer>© 2025 ShopMart Bangladesh · shopmart.com.bd · Customer Care: 16XXX · 7AM–11PM Daily</footer>
+<script>function toggle(el){const a=el.nextElementSibling;document.querySelectorAll('.faq-q').forEach(q=>{if(q!==el)q.classList.remove('open')});document.querySelectorAll('.faq-a').forEach(aa=>{if(aa!==a)aa.classList.remove('open')});el.classList.toggle('open');a.classList.toggle('open')}</script>
+</body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Studio Fold — Design & Branding Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital@0;1&family=Neue+Montreal:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f5f3ee;color:#1a1a1a;font-family:'Helvetica Neue',Helvetica,sans-serif;overflow-x:hidden}
+nav{padding:24px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e0ddd5}
+.logo{font-size:18px;font-weight:600;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:40px;align-items:center}
+.nav-links a{color:#888;text-decoration:none;font-size:14px;font-weight:300;transition:.15s}
+.nav-links a:hover{color:#1a1a1a}
+.nav-links a.active{color:#1a1a1a;font-weight:500}
+.btn-nav{background:#1a1a1a!important;color:#f5f3ee!important;padding:10px 24px;border-radius:100px;font-weight:500!important;font-size:13px!important}
+.hero{padding:120px 60px;max-width:1300px;margin:0 auto}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:80px}
+.hero-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#888;border:1px solid #d0ccc4;border-radius:20px;padding:7px 16px}
+.hero-cta-top{display:flex;gap:20px;align-items:center}
+.hero-cta-top a{font-size:14px;color:#1a1a1a;text-decoration:none;font-weight:400}
+h1{font-size:clamp(3.5rem,7vw,8rem);font-weight:300;line-height:.95;letter-spacing:-3px;color:#1a1a1a;margin-bottom:0}
+h1 em{font-style:italic;color:#888}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:60px;gap:40px}
+.hero-desc{max-width:380px;font-size:15px;color:#666;line-height:1.75;font-weight:300}
+.hero-pill{display:flex;align-items:center;gap:16px}
+.pill{background:#1a1a1a;color:#f5f3ee;padding:16px 28px;border-radius:100px;font-size:15px;font-weight:500;text-decoration:none;white-space:nowrap;transition:.2s}
+.pill:hover{background:#333;transform:scale(1.02)}
+.pill-ghost{border:1px solid #ccc;color:#1a1a1a;background:transparent;padding:16px 28px;border-radius:100px;font-size:15px;text-decoration:none;white-space:nowrap}
+.marquee-section{border-top:1px solid #e0ddd5;border-bottom:1px solid #e0ddd5;padding:20px 0;overflow:hidden;background:#1a1a1a}
+.marquee-inner{display:inline-flex;gap:48px;animation:marquee 18s linear infinite;white-space:nowrap}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.marquee-inner span{font-size:13px;color:rgba(245,243,238,.4);letter-spacing:3px;text-transform:uppercase}
+.marquee-inner span.dot{color:rgba(245,243,238,.15)}
+.work{padding:80px 60px;max-width:1300px;margin:0 auto}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:#e0ddd5;border:3px solid #e0ddd5;border-radius:20px;overflow:hidden;margin-top:40px}
+.work-cell{background:#f5f3ee;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:.3s}
+.work-cell:hover .cell-overlay{opacity:1}
+.cell-content{text-align:center}
+.cell-emoji{font-size:48px;margin-bottom:12px;display:block;transition:.3s}
+.cell-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888}
+.cell-overlay{position:absolute;inset:0;background:#1a1a1a;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transition:.3s;padding:32px}
+.cell-overlay h3{color:#f5f3ee;font-size:22px;font-weight:500;margin-bottom:8px}
+.cell-overlay p{color:#888;font-size:13px;text-align:center}
+.process{background:#1a1a1a;color:#f5f3ee;padding:100px 60px}
+.process .inner{max-width:1300px;margin:0 auto}
+.process h2{font-size:clamp(2.5rem,5vw,5rem);font-weight:300;letter-spacing:-2px;margin-bottom:60px}
+.process h2 em{font-style:italic;color:#666}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.step-num{font-size:3rem;font-weight:200;color:rgba(245,243,238,.15);margin-bottom:20px;font-family:Georgia,serif}
+.step h3{font-size:18px;font-weight:500;margin-bottom:12px;color:#f5f3ee}
+.step p{font-size:14px;color:rgba(245,243,238,.45);line-height:1.7;font-weight:300}
+.cta{max-width:1300px;margin:0 auto;padding:120px 60px;text-align:center}
+.cta h2{font-size:clamp(3rem,6vw,7rem);font-weight:300;letter-spacing:-3px;line-height:.95;margin-bottom:40px}
+.cta h2 em{font-style:italic;color:#888}
+.cta-btns{display:flex;justify-content:center;gap:16px}
+footer{padding:32px 60px;border-top:1px solid #e0ddd5;display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:0 auto}
+footer p{font-size:13px;color:#888}
+@media(max-width:900px){.hero,.work,.cta,.process,.footer{padding:60px 24px}.steps{grid-template-columns:1fr 1fr}.work-grid{grid-template-columns:1fr}.nav-links a:not(.btn-nav):not(.active){display:none}nav{padding:16px 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Studio Fold</div>
+  <div class="nav-links"><a href="#" class="active">Work</a><a href="#">Studio</a><a href="#">Services</a><a href="#" class="btn-nav">Let's Talk</a></div>
+</nav>
+<section class="hero">
+  <div class="hero-top"><div class="hero-tag">Brand Design &amp; Creative Direction</div><div class="hero-cta-top"><a href="#">See our process →</a></div></div>
+  <h1>Design that<br>makes <em>things</em><br>happen.</h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">We are a boutique design studio crafting brands, identities, and digital experiences for founders, startups, and cultural institutions that refuse to be ordinary.</p>
+    <div class="hero-pill"><a href="#" class="pill">→ Start a project</a><a href="#" class="pill-ghost">View work</a></div>
+  </div>
+</section>
+<div class="marquee-section"><div class="marquee-inner">
+  <span>Brand Identity</span><span class="dot">·</span><span>Digital Experience</span><span class="dot">·</span><span>Strategy</span><span class="dot">·</span><span>Motion</span><span class="dot">·</span><span>Packaging</span><span class="dot">·</span><span>Editorial</span><span class="dot">·</span>
+  <span>Brand Identity</span><span class="dot">·</span><span>Digital Experience</span><span class="dot">·</span><span>Strategy</span><span class="dot">·</span><span>Motion</span><span class="dot">·</span><span>Packaging</span><span class="dot">·</span><span>Editorial</span><span class="dot">·</span>
+</div></div>
+<section class="work">
+  <h2 style="font-size:3rem;font-weight:300;letter-spacing:-1px">Selected Work</h2>
+  <div class="work-grid">
+    <div class="work-cell"><div class="cell-content"><span class="cell-emoji">🌿</span><div class="cell-label">Botanic · Brand Identity</div></div><div class="cell-overlay"><h3>Botanic Wellness</h3><p>Full brand identity for a premium Dhaka wellness studio</p></div></div>
+    <div class="work-cell"><div class="cell-content"><span class="cell-emoji">🏛️</span><div class="cell-label">Musei · Exhibition Design</div></div><div class="cell-overlay"><h3>Musei Cultural Centre</h3><p>Wayfinding system and brand for new cultural institution</p></div></div>
+    <div class="work-cell"><div class="cell-content"><span class="cell-emoji">⌚</span><div class="cell-label">Meridian · Product Launch</div></div><div class="cell-overlay"><h3>Meridian Watches</h3><p>Launch campaign for a homegrown watch brand</p></div></div>
+    <div class="work-cell"><div class="cell-content"><span class="cell-emoji">📱</span><div class="cell-label">Pulse · App Design</div></div><div class="cell-overlay"><h3>Pulse Health App</h3><p>UI/UX design and brand system for health tracking app</p></div></div>
+  </div>
+</section>
+<section class="process"><div class="inner">
+  <h2>How we <em>work</em>.</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h3>Discover</h3><p>Deep research into your brand, audience, market, and competition. We don't guess.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>Define</h3><p>Clarity on positioning, voice, and visual direction before a single pixel is touched.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Create</h3><p>Iteration-heavy design process with full transparency. You see everything as it develops.</p></div>
+    <div class="step"><div class="step-num">04</div><h3>Deliver</h3><p>Full handoff with brand guidelines, assets, and support for implementation.</p></div>
+  </div>
+</div></section>
+<section class="cta">
+  <h2>Got a project <em>in mind?</em></h2>
+  <div class="cta-btns"><a href="#" class="pill">→ Start the conversation</a><a href="#" class="pill-ghost">Download credentials</a></div>
+</section>
+<footer><p>© 2025 Studio Fold · Dhaka</p><p>hello@studiofold.com.bd</p></footer>
+</body></html>

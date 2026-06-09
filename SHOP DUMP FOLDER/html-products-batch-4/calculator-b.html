@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Business ROI Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#060810;font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;color:#e2e8f0}
+.wrapper{max-width:860px;width:100%}
+.title-row{text-align:center;margin-bottom:40px}
+.title-row h1{font-size:2rem;font-weight:800;letter-spacing:-1px;color:#fff;margin-bottom:6px}
+.title-row p{font-size:14px;color:#475569}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{background:#0d0f1a;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:28px}
+.panel h2{font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:12px;color:#64748b;margin-bottom:7px;font-weight:500;letter-spacing:.3px}
+.field-row{display:flex;align-items:center;gap:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;transition:.2s}
+.field-row:focus-within{border-color:rgba(99,102,241,.4)}
+.field-prefix{padding:11px 12px;font-size:14px;color:#64748b;background:rgba(255,255,255,.03);border-right:1px solid rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.field-input{flex:1;background:transparent;border:none;padding:11px 14px;font-size:15px;color:#e2e8f0;font-family:'Inter',sans-serif;outline:none}
+.field-input::placeholder{color:#334155}
+.field-suffix{padding:11px 12px;font-size:13px;color:#64748b;background:rgba(255,255,255,.03);border-left:1px solid rgba(255,255,255,.06);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.results-panel{background:#0d0f1a;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:28px;margin-top:20px}
+.results-panel h2{font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.result-hero{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(168,85,247,.07));border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:28px;text-align:center;margin-bottom:20px}
+.rh-label{font-size:11px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.rh-val{font-size:4rem;font-weight:900;letter-spacing:-3px;line-height:1;font-family:'JetBrains Mono',monospace}
+.rh-sub{font-size:13px;color:rgba(255,255,255,.35);margin-top:6px}
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ri{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px;text-align:center}
+.ri-val{font-size:1.1rem;font-weight:700;color:#fff;display:block;font-family:'JetBrains Mono',monospace;letter-spacing:-.5px}
+.ri-label{font-size:10px;color:#475569;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+.ri.green .ri-val{color:#4ade80}
+.ri.red .ri-val{color:#f87171}
+.ri.accent .ri-val{color:#818cf8}
+.chart-section{margin-top:20px}
+.chart-title{font-size:12px;color:#64748b;margin-bottom:12px;text-transform:uppercase;letter-spacing:1.5px}
+.bar-chart{display:flex;align-items:flex-end;gap:12px;height:120px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:16px 16px 10px}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.bar{width:100%;border-radius:4px 4px 0 0;transition:.5s;min-height:4px}
+.bar-cost{background:#f87171}
+.bar-rev{background:#818cf8}
+.bar-profit{background:#4ade80}
+.bar-label{font-size:9px;color:#475569;text-transform:uppercase;letter-spacing:1px;text-align:center}
+.calc-btn{width:100%;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;margin-top:20px;transition:.2s}
+.calc-btn:hover{opacity:.9;transform:translateY(-1px)}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="title-row">
+    <h1>📊 Business ROI Calculator</h1>
+    <p>Calculate return on investment, break-even point, and profit margin for any business scenario</p>
+  </div>
+  <div class="grid">
+    <div class="panel">
+      <h2>Investment & Costs</h2>
+      <div class="field"><label>Initial Investment</label><div class="field-row"><span class="field-prefix">৳</span><input class="field-input" id="investment" type="number" value="500000" placeholder="0"></div></div>
+      <div class="field"><label>Monthly Fixed Costs</label><div class="field-row"><span class="field-prefix">৳</span><input class="field-input" id="fixedCosts" type="number" value="50000" placeholder="0"></div></div>
+      <div class="field"><label>Cost per Unit / COGS</label><div class="field-row"><span class="field-prefix">৳</span><input class="field-input" id="cogs" type="number" value="200" placeholder="0"></div></div>
+    </div>
+    <div class="panel">
+      <h2>Revenue & Sales</h2>
+      <div class="field"><label>Price per Unit / Average Order</label><div class="field-row"><span class="field-prefix">৳</span><input class="field-input" id="price" type="number" value="500" placeholder="0"></div></div>
+      <div class="field"><label>Monthly Units Sold / Orders</label><div class="field-row"><input class="field-input" id="units" type="number" value="300" placeholder="0"><span class="field-suffix">units</span></div></div>
+      <div class="field"><label>Analysis Period</label><div class="field-row"><input class="field-input" id="months" type="number" value="12" placeholder="0"><span class="field-suffix">months</span></div></div>
+    </div>
+  </div>
+  <button class="calc-btn" onclick="calcROI()">→ Calculate ROI</button>
+  <div class="results-panel" id="resultsPanel">
+    <h2>Results</h2>
+    <div class="result-hero"><div class="rh-label">Return on Investment</div><div class="rh-val" id="roiVal" style="color:#4ade80">0%</div><div class="rh-sub" id="roiNote">Enter your figures above and click Calculate</div></div>
+    <div class="results-grid">
+      <div class="ri green"><span class="ri-val" id="netProfitVal">৳0</span><span class="ri-label">Net Profit</span></div>
+      <div class="ri"><span class="ri-val" id="monthlyRevVal">৳0</span><span class="ri-label">Monthly Revenue</span></div>
+      <div class="ri accent"><span class="ri-val" id="marginVal">0%</span><span class="ri-label">Profit Margin</span></div>
+      <div class="ri"><span class="ri-val" id="breakevenVal">0 months</span><span class="ri-label">Break-even</span></div>
+    </div>
+    <div class="chart-section">
+      <div class="chart-title">Monthly Breakdown</div>
+      <div class="bar-chart" id="barChart">
+        <div class="bar-wrap"><div class="bar bar-cost" id="bcCost" style="height:40%"></div><div class="bar-label">Costs</div></div>
+        <div class="bar-wrap"><div class="bar bar-rev" id="bcRev" style="height:80%"></div><div class="bar-label">Revenue</div></div>
+        <div class="bar-wrap"><div class="bar bar-profit" id="bcProfit" style="height:40%"></div><div class="bar-label">Profit</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function fmt(n){return'৳'+Math.round(Math.abs(n)).toLocaleString('en-IN')}
+function calcROI(){
+  const inv=+document.getElementById('investment').value||0;
+  const fixed=+document.getElementById('fixedCosts').value||0;
+  const cogs=+document.getElementById('cogs').value||0;
+  const price=+document.getElementById('price').value||0;
+  const units=+document.getElementById('units').value||0;
+  const months=+document.getElementById('months').value||12;
+  const monthlyRev=price*units;
+  const monthlyTotalCost=fixed+cogs*units;
+  const monthlyProfit=monthlyRev-monthlyTotalCost;
+  const totalRev=monthlyRev*months;
+  const totalCost=inv+monthlyTotalCost*months;
+  const netProfit=totalRev-totalCost;
+  const roi=inv>0?((netProfit/inv)*100):0;
+  const margin=monthlyRev>0?((monthlyProfit/monthlyRev)*100):0;
+  const breakeven=monthlyProfit>0?Math.ceil(inv/monthlyProfit):Infinity;
+  document.getElementById('roiVal').textContent=(roi>=0?'+':'')+roi.toFixed(1)+'%';
+  document.getElementById('roiVal').style.color=roi>=0?'#4ade80':'#f87171';
+  document.getElementById('roiNote').textContent=`Over ${months} months · Total investment: ${fmt(inv+monthlyTotalCost*months)}`;
+  document.getElementById('netProfitVal').textContent=(netProfit>=0?'':'-')+fmt(netProfit);
+  document.getElementById('monthlyRevVal').textContent=fmt(monthlyRev);
+  document.getElementById('marginVal').textContent=margin.toFixed(1)+'%';
+  document.getElementById('marginVal').parentElement.className='ri '+(margin>=20?'green':margin>=0?'accent':'red');
+  document.getElementById('breakevenVal').textContent=isFinite(breakeven)?breakeven+' mo':'Never';
+  document.querySelector('.ri.green .ri-val').style.color=netProfit>=0?'#4ade80':'#f87171';
+  const maxVal=Math.max(monthlyRev,monthlyTotalCost,Math.abs(monthlyProfit),1);
+  document.getElementById('bcCost').style.height=(monthlyTotalCost/maxVal*90)+'%';
+  document.getElementById('bcRev').style.height=(monthlyRev/maxVal*90)+'%';
+  document.getElementById('bcProfit').style.height=(Math.abs(monthlyProfit)/maxVal*90)+'%';
+  document.getElementById('bcProfit').style.background=monthlyProfit>=0?'#4ade80':'#f87171';
+}
+calcROI();
+</script>
+</body></html>

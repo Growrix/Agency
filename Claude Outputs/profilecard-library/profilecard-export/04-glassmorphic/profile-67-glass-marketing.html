@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>PRISM Digital — Growth Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;justify-content:center;background:#030014}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;color:#eee8ff;position:relative;overflow:hidden;background:#040018}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.b1{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,.3) 0%,transparent 70%);top:-100px;left:-100px;filter:blur(60px)}
+.b2{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(236,72,153,.25) 0%,transparent 70%);top:300px;right:-80px;filter:blur(50px)}
+.b3{position:absolute;width:250px;height:250px;background:radial-gradient(circle,rgba(6,182,212,.15) 0%,transparent 70%);bottom:200px;left:-40px;filter:blur(40px)}
+.noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.025}
+
+.gl{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.gl-vivid{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+
+.wrap{position:relative;z-index:1}
+
+.hero{padding:60px 20px 24px;position:relative;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end}
+.nav{position:absolute;top:22px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#818cf8,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-status{display:flex;align-items:center;gap:5px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:100px;padding:4px 10px;font-size:9px;color:rgba(74,222,128,.8);letter-spacing:1px;backdrop-filter:blur(8px)}
+.nd{width:5px;height:5px;background:#4ade80;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-label{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(238,232,255,.3);margin-bottom:12px}
+.hero h1{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;line-height:.9;letter-spacing:-2px;margin-bottom:12px}
+.hero h1 .g1{background:linear-gradient(135deg,#fff,rgba(255,255,255,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero h1 .g2{background:linear-gradient(135deg,#818cf8,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-sub{font-size:12px;color:rgba(238,232,255,.4);line-height:1.6;letter-spacing:.2px;max-width:300px}
+
+/* METRIC PILLS */
+.metrics{display:flex;gap:6px;padding:0 20px 20px;overflow-x:auto;scrollbar-width:none}
+.metrics::-webkit-scrollbar{display:none}
+.metric{flex-shrink:0;border-radius:100px;padding:8px 16px;text-align:center}
+.met-n{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;letter-spacing:-.5px}
+.met-l{font-size:8px;color:rgba(238,232,255,.3);margin-top:2px;letter-spacing:1px;text-transform:uppercase}
+.m1 .met-n{color:#818cf8}.m2 .met-n{color:#ec4899}.m3 .met-n{color:#06b6d4}.m4 .met-n{color:#4ade80}
+
+.body{padding:0 18px 48px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(129,140,248,.6);margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(129,140,248,.15)}
+
+/* GLASS SERVICES */
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.svc-left{flex:1}
+.svc-icon{font-size:22px;margin-bottom:6px}
+.svc-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#eee8ff;letter-spacing:-.2px}
+.svc-desc{font-size:11px;color:rgba(238,232,255,.35);margin-top:3px;line-height:1.4}
+.svc-tag{display:inline-block;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);color:rgba(129,140,248,.8);font-size:8px;padding:2px 8px;border-radius:100px;margin-top:5px;font-weight:600;letter-spacing:.5px}
+.svc-price{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;background:linear-gradient(135deg,#818cf8,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex-shrink:0;text-align:right}
+.svc-per{font-size:9px;color:rgba(238,232,255,.25);display:block;margin-top:2px;-webkit-text-fill-color:rgba(238,232,255,.25)}
+
+/* RESULTS CARDS */
+.results{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.result{border-radius:14px;padding:16px;text-align:center;position:relative;overflow:hidden}
+.result::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
+.result-n{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#818cf8,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.result-l{font-size:10px;color:rgba(238,232,255,.3);margin-top:4px;letter-spacing:.3px}
+
+/* CTA */
+.cta{border-radius:20px;padding:24px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)}
+.cta h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(238,232,255,.4);margin-bottom:18px;line-height:1.5}
+.cta-btn{display:block;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;border-radius:12px;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;border-radius:12px;padding:12px;font-size:11px;text-decoration:none;color:rgba(238,232,255,.4)}
+
+.contacts{border-radius:16px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(238,232,255,.35)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:rgba(129,140,248,.15);border:1px solid rgba(129,140,248,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{padding:20px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(238,232,255,.1)}
+</style>
+</head>
+<body>
+<div class="bg"><div class="b1"></div><div class="b2"></div><div class="b3"></div><div class="noise"></div></div>
+<div class="app"><div class="wrap">
+<div class="hero">
+  <div class="nav">
+    <div class="nav-logo">PRISM</div>
+    <div class="nav-status"><span class="nd"></span>Booking Q2</div>
+  </div>
+  <div class="hero-label">Growth Marketing Agency · Dhaka</div>
+  <h1><span class="g1">We don't just</span><span class="g2">run ads. We print money.</span></h1>
+  <div class="hero-sub">Performance marketing, SEO, social media and brand campaigns for ambitious businesses that want real ROI.</div>
+</div>
+<div class="metrics">
+  <div class="metric gl m1"><div class="met-n">$12M+</div><div class="met-l">Ad Spend Managed</div></div>
+  <div class="metric gl m2"><div class="met-n">340%</div><div class="met-l">Avg ROAS</div></div>
+  <div class="metric gl m3"><div class="met-n">80+</div><div class="met-l">Clients</div></div>
+  <div class="metric gl m4"><div class="met-n">4.9★</div><div class="met-l">Rating</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc gl"><div class="svc-left"><div class="svc-icon">📈</div><div class="svc-name">Meta & Google Ads</div><div class="svc-desc">Performance campaigns with daily optimisation</div><div class="svc-tag">Most Popular</div></div><div class="svc-price">$800<span class="svc-per">/ month</span></div></div>
+    <div class="svc gl"><div class="svc-left"><div class="svc-icon">🔍</div><div class="svc-name">SEO & Content</div><div class="svc-desc">Rank for buyer-intent keywords, grow organic</div></div><div class="svc-price">$600<span class="svc-per">/ month</span></div></div>
+    <div class="svc gl"><div class="svc-left"><div class="svc-icon">📱</div><div class="svc-name">Social Media</div><div class="svc-desc">Content creation, scheduling, community mgmt</div></div><div class="svc-price">$500<span class="svc-per">/ month</span></div></div>
+    <div class="svc gl"><div class="svc-left"><div class="svc-icon">🎯</div><div class="svc-name">Full Growth Bundle</div><div class="svc-desc">Ads + SEO + Social + monthly strategy call</div><div class="svc-tag">Best Value</div></div><div class="svc-price">$1,500<span class="svc-per">/ month</span></div></div>
+  </div>
+
+  <div class="sec">Client Results</div>
+  <div class="results">
+    <div class="result gl"><div class="result-n">4.2×</div><div class="result-l">ROAS for e-commerce client</div></div>
+    <div class="result gl"><div class="result-n">+280%</div><div class="result-l">Organic traffic in 6 months</div></div>
+    <div class="result gl"><div class="result-n">₿60K</div><div class="result-l">Revenue generated via Meta</div></div>
+    <div class="result gl"><div class="result-n">92%</div><div class="result-l">Client retention rate</div></div>
+  </div>
+
+  <div class="sec">Start Growing</div>
+  <div class="cta gl">
+    <h3>Free 30-min audit.</h3>
+    <p>We'll analyse your current marketing, show you exactly what's leaking money, and how we'd fix it.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🚀 Book Free Growth Audit</a>
+    <a href="tel:+8801700000000" class="cta-btn2 gl">📞 Call to discuss →</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts gl">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Banani, Dhaka · Remote worldwide</div>
+    <div class="cr"><div class="ci">📸</div>@prism.digital</div>
+  </div>
+</div>
+<footer>© 2025 PRISM Digital · Growth Marketing Agency · Dhaka</footer>
+</div></div></body></html>
