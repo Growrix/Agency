@@ -5,6 +5,7 @@ type RuntimeConfig = {
   appBaseUrl: string;
   htmlBusinessProfiles: {
     directory: string;
+    directoryCandidates: string[];
   };
   contact: {
     toEmail?: string;
@@ -49,6 +50,11 @@ type RuntimeConfig = {
 };
 
 const DEFAULT_FALLBACK_FROM_EMAIL = "Growrix <onboarding@resend.dev>";
+const HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS: ReadonlyArray<ReadonlyArray<string>> = [
+  ["..", "Shop", "business-professional", "business-profile-pages"],
+  ["..", "..", "Shop", "business-professional", "business-profile-pages"],
+  [".", "Shop", "business-professional", "business-profile-pages"],
+];
 
 let cachedRuntimeConfig: RuntimeConfig | null = null;
 
@@ -82,6 +88,25 @@ function parseDirectoryPath(value: string | undefined, fallbackSegments: string[
   return path.isAbsolute(candidate) ? candidate : path.resolve(process.cwd(), candidate);
 }
 
+function buildDirectoryCandidates(value: string | undefined, fallbackSegmentsList: ReadonlyArray<ReadonlyArray<string>>) {
+  const candidates = new Set<string>();
+  const configured = value?.trim();
+
+  if (configured) {
+    candidates.add(
+      path.isAbsolute(configured)
+        ? path.normalize(configured)
+        : path.resolve(process.cwd(), configured),
+    );
+  }
+
+  for (const segments of fallbackSegmentsList) {
+    candidates.add(path.resolve(process.cwd(), ...segments));
+  }
+
+  return Array.from(candidates);
+}
+
 export function getRuntimeConfig(): RuntimeConfig {
   if (cachedRuntimeConfig) {
     return cachedRuntimeConfig;
@@ -90,10 +115,8 @@ export function getRuntimeConfig(): RuntimeConfig {
   cachedRuntimeConfig = {
     appBaseUrl: parseBaseUrl(process.env.NEXT_PUBLIC_SITE_URL),
     htmlBusinessProfiles: {
-      directory: parseDirectoryPath(
-        process.env.HTML_BUSINESS_PROFILES_DIRECTORY,
-        ["..", "Shop", "business-professional", "business-profile-pages"],
-      ),
+      directory: parseDirectoryPath(process.env.HTML_BUSINESS_PROFILES_DIRECTORY, [...HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS[0]]),
+      directoryCandidates: buildDirectoryCandidates(process.env.HTML_BUSINESS_PROFILES_DIRECTORY, HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS),
     },
     contact: {
       toEmail: process.env.CONTACT_TO_EMAIL,

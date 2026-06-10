@@ -46,7 +46,11 @@ const nextConfig: NextConfig = {
   allowedDevOrigins,
   outputFileTracingRoot: path.join(__dirname, ".."),
   outputFileTracingIncludes: {
-    "/api/html-business-profiles/[templateSlug]/route": ["../Shop/business-professional/business-profile-pages/**/*"],
+    "/api/html-business-profiles/[templateSlug]/route": [
+      "../Shop/business-professional/business-profile-pages/**/*",
+      "../../Shop/business-professional/business-profile-pages/**/*",
+      "./Shop/business-professional/business-profile-pages/**/*",
+    ],
   },
   images: {
     remotePatterns: [
