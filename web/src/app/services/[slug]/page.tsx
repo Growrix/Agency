@@ -420,16 +420,19 @@ export function HtmlBusinessProfilesServicePage({
       { slug: "", name: "Agency Business Profile", type: "Agency", price: "$19" },
       { slug: "", name: "Cleaning Business Profile", type: "Cleaning", price: "$19" },
     ];
-  const heroSlides = carouselProfiles.map((profile) => ({
-    name: profile.name,
-    type: profile.type,
-    price: profile.price,
-    href: profile.slug ? getProductHref(profile) : "/products/category/html-business-profiles",
-    previewUrl:
-      ("embeddedPreviewUrl" in profile ? profile.embeddedPreviewUrl : undefined) ??
-      ("livePreviewUrl" in profile ? profile.livePreviewUrl : undefined) ??
-      undefined,
-  }));
+  const heroSlides = carouselProfiles.map((profile) => {
+    const previewSource = profile as {
+      embeddedPreviewUrl?: string;
+      livePreviewUrl?: string;
+    };
+    return {
+      name: profile.name,
+      type: profile.type,
+      price: profile.price,
+      href: profile.slug ? getProductHref(profile) : "/products/category/html-business-profiles",
+      previewUrl: previewSource.embeddedPreviewUrl ?? previewSource.livePreviewUrl ?? undefined,
+    };
+  });
 
   return (
     <>
