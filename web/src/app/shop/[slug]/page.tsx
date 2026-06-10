@@ -1233,7 +1233,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                             <>
                               <p className={`mt-4 text-xs font-semibold uppercase tracking-[0.15em] ${getTierCardMutedTextClass(isFeaturedCard)}`}>Optional Add-ons</p>
                               <ul className="mt-2 space-y-2">
-                                {preset?.optionalAddOns.map((item) => (
+                                {(preset?.optionalAddOns ?? []).map((item) => (
                                   <li key={item} className={`flex items-start gap-2 text-sm leading-6 ${getTierCardMutedTextClass(isFeaturedCard)}`}>
                                     <span className={`mt-[6px] inline-flex h-4 w-4 items-center justify-center text-xs leading-none ${getTierCardMutedTextClass(isFeaturedCard)}`}>•</span>
                                     {item}
@@ -1542,7 +1542,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                         <>
                           <p className={`mt-4 text-xs font-semibold uppercase tracking-[0.15em] ${getTierCardMutedTextClass(isFeaturedCard)}`}>Optional Add-ons</p>
                           <ul className="mt-2 space-y-2">
-                            {preset?.optionalAddOns.map((item) => (
+                            {(preset?.optionalAddOns ?? []).map((item) => (
                               <li key={item} className={`flex items-start gap-2 text-sm leading-6 ${getTierCardMutedTextClass(isFeaturedCard)}`}>
                                 <span className={`mt-[6px] inline-flex h-4 w-4 items-center justify-center text-xs leading-none ${getTierCardMutedTextClass(isFeaturedCard)}`}>•</span>
                                 {item}

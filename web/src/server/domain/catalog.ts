@@ -153,7 +153,7 @@ function withParentTaxonomy(product: ManagedProductRecord): ManagedProductRecord
 }
 
 function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
-  return HTML_BUSINESS_PROFILE_TEMPLATES.map((template) => {
+  return HTML_BUSINESS_PROFILE_TEMPLATES.map<ManagedProductRecord>((template) => {
     const previewUrl = getHtmlBusinessProfilePreviewUrl(template.slug);
 
     return {
@@ -226,7 +226,7 @@ function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
 }
 
 function getDefaultAnchorProducts(): ManagedProductRecord[] {
-  return [
+  return ([
     {
       slug: "saas-launchpad-nextjs",
       name: "SaaS Launchpad Next.js Starter",
@@ -586,11 +586,11 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
       ],
       related_service_slugs: ["template-customization"],
     },
-  ].map(withParentTaxonomy);
+  ] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }
 
 function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
-  return [
+  return ([
     {
       slug: "email-pack-saas-lifecycle",
       name: "SaaS Lifecycle Email Pack",
@@ -768,7 +768,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
       ],
       related_service_slugs: ["template-customization", "automation"],
     },
-  ].map(withParentTaxonomy);
+  ] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }
 
 function getFallbackSeedProducts() {
