@@ -425,7 +425,10 @@ export function HtmlBusinessProfilesServicePage({
     type: profile.type,
     price: profile.price,
     href: profile.slug ? getProductHref(profile) : "/products/category/html-business-profiles",
-    previewUrl: profile.embeddedPreviewUrl ?? profile.livePreviewUrl ?? undefined,
+    previewUrl:
+      ("embeddedPreviewUrl" in profile ? profile.embeddedPreviewUrl : undefined) ??
+      ("livePreviewUrl" in profile ? profile.livePreviewUrl : undefined) ??
+      undefined,
   }));
 
   return (
@@ -724,7 +727,7 @@ export function HtmlBusinessProfilesServicePage({
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="HTML Business Profiles questions, answered." align="center" />
           <div className="mt-10">
-            <Accordion items={HTML_PROFILE_FAQ} />
+            <Accordion items={[...HTML_PROFILE_FAQ]} />
           </div>
         </Container>
       </Section>
