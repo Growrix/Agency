@@ -47,9 +47,8 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname, ".."),
   outputFileTracingIncludes: {
     "/api/html-business-profiles/[templateSlug]/route": [
-      "../Shop/business-professional/business-profile-pages/**/*",
-      "../../Shop/business-professional/business-profile-pages/**/*",
-      "./Shop/business-professional/business-profile-pages/**/*",
+      "./public/previews/html-business-profiles/**/*",
+      "../web/public/previews/html-business-profiles/**/*",
     ],
   },
   images: {

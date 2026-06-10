@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Prism Creative — Production House</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#02000a;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#030008;margin:0 auto;overflow:hidden;position:relative}
+/* HOLOGRAPHIC / IRIDESCENT */
+.b1{position:fixed;width:300px;height:300px;background:radial-gradient(circle,rgba(255,0,180,.18) 0%,transparent 70%);top:-40px;right:-40px;filter:blur(60px);z-index:0}
+.b2{position:fixed;width:260px;height:260px;background:radial-gradient(circle,rgba(0,80,255,.15) 0%,transparent 70%);top:180px;left:-50px;filter:blur(55px);z-index:0}
+.b3{position:fixed;width:220px;height:220px;background:radial-gradient(circle,rgba(0,255,180,.1) 0%,transparent 70%);bottom:80px;right:-30px;filter:blur(50px);z-index:0}
+.w{position:relative;z-index:1}
+/* HOLO gradient text */
+.holo-text{background:linear-gradient(135deg,#ff00cc,#7700ff,#0055ff,#00ccff,#00ffaa,#ffff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:holo 4s linear infinite}
+@keyframes holo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+/* Shimmer border */
+.holo-card{background:rgba(255,255,255,.04);border-radius:18px;position:relative;overflow:hidden}
+.holo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff00cc,#7700ff,#0055ff,#00ccff,#00ffaa,transparent)}
+.hero{min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 24px;position:relative}
+.hero-top{position:absolute;top:24px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.hl{font-family:'Syne',sans-serif;font-size:15px;font-weight:900;letter-spacing:-0.5px}
+.hb{font-size:9px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:3px 11px;color:rgba(255,255,255,.4);letter-spacing:1px}
+.hero h1{font-family:'Syne',sans-serif;font-size:46px;font-weight:900;letter-spacing:-3px;line-height:.88;color:#fff}
+.hero h1 .holo-word{background:linear-gradient(135deg,#ff00cc,#7700ff,#00ccff,#00ffaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;line-height:1.6}
+.hero-rule{width:100%;height:1px;background:linear-gradient(90deg,transparent,#ff00cc,#7700ff,#00ccff,transparent);margin-top:18px;opacity:.4}
+.body{padding:0 14px 40px}
+.sec{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec-holo{background:linear-gradient(90deg,#ff00cc,#7700ff,#00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(180,60,255,.3),transparent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.stat{background:rgba(255,255,255,.04);border-radius:14px;padding:13px 0;text-align:center;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,0,180,.4),rgba(0,100,255,.4),transparent)}
+.stat-n{font-family:'Syne',sans-serif;font-size:18px;font-weight:900;background:linear-gradient(135deg,#ff00cc,#7700ff,#00ccff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.stat-l{font-size:8px;color:rgba(255,255,255,.2);margin-top:3px;letter-spacing:1.5px;text-transform:uppercase}
+.services{display:flex;flex-direction:column;gap:6px}
+.svc{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-icon{font-size:20px;flex-shrink:0}
+.svc-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:-.3px}
+.svc-desc{font-size:10px;color:rgba(255,255,255,.25);margin-top:2px;line-height:1.4}
+.svc-price{font-size:14px;font-weight:700;flex-shrink:0}
+.svc-price.hp{background:linear-gradient(135deg,#ff00cc,#7700ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta{padding:24px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff00cc,#7700ff,#00ccff,#00ffaa,transparent)}
+.cta h3{font-family:'Syne',sans-serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:8px;line-height:.95}
+.cta p{font-size:11px;color:rgba(255,255,255,.25);margin-bottom:18px;line-height:1.6}
+.cta-btn{display:block;background:linear-gradient(135deg,#ff00cc,#7700ff,#0055ff,#00ccff);color:#fff;border-radius:14px;padding:15px;font-family:'Syne',sans-serif;font-size:13px;font-weight:900;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;background:rgba(255,255,255,.04);color:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px;font-size:11px;text-decoration:none}
+.contacts{background:rgba(255,255,255,.03);border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;color:rgba(255,255,255,.25)}
+.cr:last-child{border-bottom:none}
+.ci{width:26px;height:26px;background:linear-gradient(135deg,rgba(255,0,180,.2),rgba(0,100,255,.2));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;border:1px solid rgba(255,255,255,.06)}
+footer{border-top:1px solid rgba(255,255,255,.04);padding:16px;text-align:center;font-family:'Syne',sans-serif;font-size:10px;color:rgba(255,255,255,.1);letter-spacing:1.5px}
+</style></head>
+<body><div class="app">
+<div class="b1"></div><div class="b2"></div><div class="b3"></div>
+<div class="w">
+<div class="hero">
+  <div class="hero-top">
+    <div class="hl holo-text">PRISM</div>
+    <div class="hb">✦ Taking projects</div>
+  </div>
+  <h1>Creative<br><span class="holo-word">without</span><br>limits.</h1>
+  <div class="hero-sub">Film, photography, motion graphics, brand campaigns and content creation. We turn visions into visual experiences.</div>
+  <div class="hero-rule"></div>
+</div>
+<div class="body">
+  <div class="sec"><span class="sec-holo">By The Numbers</span></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">250+</div><div class="stat-l">Projects</div></div>
+    <div class="stat"><div class="stat-n">80+</div><div class="stat-l">Brands</div></div>
+    <div class="stat"><div class="stat-n">12yr</div><div class="stat-l">Practice</div></div>
+  </div>
+  <div class="sec"><span class="sec-holo">Services</span></div>
+  <div class="services">
+    <div class="svc holo-card"><div class="svc-icon">🎬</div><div><div class="svc-name">TVC & Brand Film</div><div class="svc-desc">TV commercials, digital video, full production</div></div><div class="svc-price hp">$5,000+</div></div>
+    <div class="svc holo-card"><div class="svc-icon">📸</div><div><div class="svc-name">Commercial Photography</div><div class="svc-desc">Product, lifestyle, corporate, editorial</div></div><div class="svc-price hp">$800+</div></div>
+    <div class="svc holo-card"><div class="svc-icon">✨</div><div><div class="svc-name">Motion Graphics & VFX</div><div class="svc-desc">Logo animation, explainer, title sequences</div></div><div class="svc-price hp">$1,500+</div></div>
+    <div class="svc holo-card"><div class="svc-icon">🎵</div><div><div class="svc-name">Music Video</div><div class="svc-desc">Concept, shoot, edit — full creative control</div></div><div class="svc-price hp">$3,000+</div></div>
+  </div>
+  <div class="sec"><span class="sec-holo">Work With Us</span></div>
+  <div class="cta holo-card">
+    <h3>Let's make<br>something prismatic.</h3>
+    <p>Share your brief and we'll send you a creative treatment and quote within 24 hours.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">✦ Start a Project</a>
+    <a href="mailto:hello@prismcreative.com" class="cta-btn2">hello@prismcreative.com</a>
+  </div>
+  <div class="sec"><span class="sec-holo">Contact</span></div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Banani, Dhaka · Studio B</div>
+    <div class="cr"><div class="ci">📸</div>@prismcreative.bd</div>
+  </div>
+</div>
+<footer>© 2025 PRISM CREATIVE PRODUCTION · DHAKA</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></div></body></html>

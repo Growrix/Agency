@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Prestige Search — Executive Recruitment</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Raleway',sans-serif;background:#050814;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#060a1e;margin:0 auto;color:#c8d0e0}
+
+/* ART DECO HERO */
+.hero{min-height:300px;background:#060a1e;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px 22px}
+/* Deco geometric frame */
+.deco-frame{position:absolute;inset:12px;border:1px solid rgba(200,168,48,.12);pointer-events:none}
+.deco-frame::before{content:'';position:absolute;inset:8px;border:1px solid rgba(200,168,48,.06)}
+.deco-corner{position:absolute;width:20px;height:20px;border-color:rgba(200,168,48,.4);border-style:solid}
+.dc-tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.dc-tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
+.dc-bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
+.dc-br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+/* Deco diamond ornament */
+.deco-diamond{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.dd-line{height:1px;width:40px;background:linear-gradient(90deg,transparent,rgba(200,168,48,.4))}
+.dd-line.right{background:linear-gradient(270deg,transparent,rgba(200,168,48,.4))}
+.dd-diamond{width:8px;height:8px;background:#c8a830;transform:rotate(45deg);flex-shrink:0}
+.hero-eyebrow{font-size:8px;letter-spacing:5px;text-transform:uppercase;color:rgba(200,168,48,.5);margin-bottom:10px}
+.hero h1{font-family:'Cinzel',serif;font-size:34px;font-weight:700;color:#f0e8d0;line-height:1;letter-spacing:1px}
+.hero h1 .line2{font-weight:400;font-size:20px;color:rgba(200,168,48,.7);display:block;margin-top:4px;letter-spacing:4px}
+.deco-diamond.bottom{margin-top:16px;margin-bottom:8px}
+.hero-tagline{font-size:11px;color:rgba(200,208,224,.35);letter-spacing:2px;text-transform:uppercase}
+
+/* Ruled divider */
+.ruled{display:flex;align-items:center;gap:0;padding:0}
+.ruled-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,48,.3))}
+.ruled-center{background:rgba(200,168,48,.15);border-top:1px solid rgba(200,168,48,.3);border-bottom:1px solid rgba(200,168,48,.3);padding:8px 20px;font-family:'Cinzel',serif;font-size:9px;color:rgba(200,168,48,.6);letter-spacing:3px;text-transform:uppercase;text-align:center}
+.ruled-line.r{background:linear-gradient(270deg,transparent,rgba(200,168,48,.3))}
+
+.body{padding:0 18px 40px}
+.sec{font-family:'Cinzel',serif;font-size:10px;color:rgba(200,168,48,.6);letter-spacing:3px;text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::before,.sec::after{content:'';height:1px;background:rgba(200,168,48,.15)}
+.sec::before{width:16px;flex-shrink:0}
+.sec::after{flex:1}
+
+.roles{display:flex;flex-direction:column;gap:2px}
+.role{background:#0c1030;border:1px solid rgba(200,168,48,.1);padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.role:first-child{border-radius:4px 4px 0 0}
+.role:last-child{border-radius:0 0 4px 4px}
+.role-title{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:#f0e8d0;letter-spacing:.2px}
+.role-company{font-size:10px;color:rgba(200,208,224,.35);margin-top:3px;letter-spacing:.5px}
+.role-right{text-align:right;flex-shrink:0}
+.role-level{font-size:9px;background:rgba(200,168,48,.1);border:1px solid rgba(200,168,48,.2);color:rgba(200,168,48,.7);padding:3px 8px;border-radius:2px;letter-spacing:.5px;font-weight:600;display:block;margin-bottom:4px}
+.role-sal{font-family:'Cinzel',serif;font-size:12px;color:rgba(200,168,48,.6)}
+
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{background:#0c1030;border:1px solid rgba(200,168,48,.08);border-radius:4px;padding:16px}
+.svc-title{font-family:'Cinzel',serif;font-size:14px;font-weight:600;color:#f0e8d0;margin-bottom:6px;letter-spacing:.3px}
+.svc-desc{font-size:11px;color:rgba(200,208,224,.35);line-height:1.6;letter-spacing:.2px}
+
+.process{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.proc-card{background:#0c1030;border:1px solid rgba(200,168,48,.08);border-radius:4px;padding:14px;position:relative;overflow:hidden}
+.proc-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,#c8a830,transparent)}
+.proc-num{font-family:'Cinzel',serif;font-size:22px;color:rgba(200,168,48,.1);font-weight:700;line-height:1;margin-bottom:6px}
+.proc-name{font-size:11px;font-weight:600;color:rgba(240,232,208,.6);letter-spacing:.5px}
+.proc-desc{font-size:9px;color:rgba(200,208,224,.25);margin-top:3px;line-height:1.5}
+
+.engagement-box{background:#0c1030;border:1px solid rgba(200,168,48,.2);position:relative;padding:22px;text-align:center;margin-top:4px}
+.engagement-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#c8a830,transparent)}
+.eg-ornament{font-family:'Cinzel',serif;font-size:11px;color:rgba(200,168,48,.3);letter-spacing:4px;margin-bottom:12px}
+.engagement-box h3{font-family:'Cinzel',serif;font-size:20px;font-weight:600;color:#f0e8d0;margin-bottom:8px;letter-spacing:.5px}
+.engagement-box p{font-size:11px;color:rgba(200,208,224,.35);line-height:1.7;margin-bottom:18px;letter-spacing:.2px}
+.eg-btn{display:block;border:1px solid #c8a830;color:#c8a830;padding:14px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;margin-bottom:8px}
+.eg-btn2{display:block;color:rgba(200,208,224,.25);font-size:10px;letter-spacing:2px;text-decoration:none;text-align:center}
+
+.contacts{background:#0c1030;border:1px solid rgba(200,168,48,.08);border-radius:4px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(200,168,48,.06);font-size:11px;color:rgba(200,208,224,.3);letter-spacing:.2px}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;border:1px solid rgba(200,168,48,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#04060f;border-top:1px solid rgba(200,168,48,.15);padding:20px;text-align:center}
+.footer-crest{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:rgba(200,168,48,.2);letter-spacing:4px;margin-bottom:4px}
+.footer-copy{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,208,224,.08)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="deco-frame">
+    <div class="deco-corner dc-tl"></div>
+    <div class="deco-corner dc-tr"></div>
+    <div class="deco-corner dc-bl"></div>
+    <div class="deco-corner dc-br"></div>
+  </div>
+  <div class="deco-diamond">
+    <div class="dd-line"></div>
+    <div class="dd-diamond"></div>
+    <div class="dd-line right"></div>
+  </div>
+  <div class="hero-eyebrow">Executive Search · Since 2006</div>
+  <h1>Prestige<br><span class="line2">Search</span></h1>
+  <div class="deco-diamond bottom">
+    <div class="dd-line"></div>
+    <div class="dd-diamond"></div>
+    <div class="dd-line right"></div>
+  </div>
+  <div class="hero-tagline">C-Suite · Board · Senior Leadership</div>
+</div>
+<div class="ruled">
+  <div class="ruled-line"></div>
+  <div class="ruled-center">⭐ 4.9 · 600+ placements · 18 years</div>
+  <div class="ruled-line r"></div>
+</div>
+<div class="body">
+  <div class="sec">Open Mandates</div>
+  <div class="roles">
+    <div class="role"><div><div class="role-title">Chief Financial Officer</div><div class="role-company">Listed FMCG Group · Dhaka</div></div><div class="role-right"><div class="role-level">C-Suite</div><div class="role-sal">$120K+</div></div></div>
+    <div class="role"><div><div class="role-title">VP Sales & Distribution</div><div class="role-company">Multinational FMCG · BD</div></div><div class="role-right"><div class="role-level">Senior VP</div><div class="role-sal">$90K+</div></div></div>
+    <div class="role"><div><div class="role-title">Head of Digital</div><div class="role-company">Leading Bank · Dhaka</div></div><div class="role-right"><div class="role-level">Director</div><div class="role-sal">$75K+</div></div></div>
+    <div class="role"><div><div class="role-title">Country CEO</div><div class="role-company">European MNC · Dhaka</div></div><div class="role-right"><div class="role-level">CEO</div><div class="role-sal">$150K+</div></div></div>
+  </div>
+
+  <div class="sec">Our Practice</div>
+  <div class="services">
+    <div class="svc"><div class="svc-title">Executive Search</div><div class="svc-desc">Retained search for C-suite, board and senior director roles. Average time-to-placement: 42 days.</div></div>
+    <div class="svc"><div class="svc-title">Board Advisory</div><div class="svc-desc">Independent director identification, board composition analysis and governance consulting.</div></div>
+    <div class="svc"><div class="svc-title">Succession Planning</div><div class="svc-desc">Internal talent assessment, bench-strength mapping and leadership pipeline development.</div></div>
+  </div>
+
+  <div class="sec">Our Process</div>
+  <div class="process">
+    <div class="proc-card"><div class="proc-num">I</div><div class="proc-name">Brief & Mandate</div><div class="proc-desc">Role definition, culture alignment, compensation benchmarking</div></div>
+    <div class="proc-card"><div class="proc-num">II</div><div class="proc-name">Search & Map</div><div class="proc-desc">Market mapping, discreet candidate identification</div></div>
+    <div class="proc-card"><div class="proc-num">III</div><div class="proc-name">Assess & Present</div><div class="proc-desc">Deep interviews, psychometric assessment, shortlist</div></div>
+    <div class="proc-card"><div class="proc-num">IV</div><div class="proc-name">Offer & Onboard</div><div class="proc-desc">Negotiation support, 12-month placement guarantee</div></div>
+  </div>
+
+  <div class="sec">Engage Us</div>
+  <div class="engagement-box">
+    <div class="eg-ornament">◆ CONFIDENTIAL ◆</div>
+    <h3>Speak with a Search Partner</h3>
+    <p>All enquiries are handled with complete discretion. Whether you are hiring or exploring opportunities, we welcome a confidential conversation.</p>
+    <a href="mailto:search@prestigesearch.com" class="eg-btn">Request a Confidential Call</a>
+    <a href="https://wa.me/8801700000000" class="eg-btn2">WhatsApp for quick enquiry →</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📧</div>search@prestigesearch.com</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-2, Dhaka · Singapore</div>
+    <div class="cr"><div class="ci">⏰</div>By appointment · Sun–Thu</div>
+  </div>
+</div>
+<footer><div class="footer-crest">PRESTIGE SEARCH</div><div class="footer-copy">© 2025 · Executive Search · All Enquiries Confidential</div></footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

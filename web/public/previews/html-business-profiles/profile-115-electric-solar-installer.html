@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="description" content="Licensed electrical and solar installer service for homes, offices, and factories across Dhaka.">
+<title>VoltNest Electrical & Solar - Installer Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#060b18;
+  --bg-soft:#0d1730;
+  --surface:rgba(255,255,255,.06);
+  --surface-2:rgba(255,255,255,.09);
+  --line:rgba(255,255,255,.16);
+  --txt:#f5f8ff;
+  --muted:rgba(245,248,255,.72);
+  --soft:rgba(245,248,255,.46);
+  --accent:#ffc43b;
+  --accent-2:#1ad2ff;
+  --ok:#88ffb8;
+}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:
+    radial-gradient(130% 80% at 10% -5%,rgba(26,210,255,.16),transparent 62%),
+    radial-gradient(90% 70% at 100% 12%,rgba(255,196,59,.2),transparent 62%),
+    linear-gradient(180deg,#04070f 0%,#060b18 40%,#050915 100%);
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+  color:var(--txt);
+}
+.app{
+  width:100%;
+  max-width:420px;
+  min-height:100vh;
+  background:linear-gradient(180deg,var(--bg-soft),var(--bg));
+  margin:0 auto;
+  overflow:hidden;
+  position:relative;
+}
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(38px);
+  pointer-events:none;
+  z-index:0;
+}
+.b1{width:210px;height:210px;top:-50px;right:-44px;background:radial-gradient(circle,rgba(255,196,59,.26) 0%,transparent 72%);animation:drift 14s ease-in-out infinite}
+.b2{width:230px;height:230px;bottom:200px;left:-88px;background:radial-gradient(circle,rgba(26,210,255,.18) 0%,transparent 72%);animation:drift 18s ease-in-out infinite reverse}
+.b3{width:160px;height:160px;top:290px;right:-60px;background:radial-gradient(circle,rgba(170,120,255,.15) 0%,transparent 70%);animation:drift 16s ease-in-out infinite}
+main{position:relative;z-index:1;padding:0 14px 46px}
+.hero{
+  padding:26px 8px 20px;
+}
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+  gap:10px;
+}
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.6px;
+}
+.logo span{color:var(--accent)}
+.live{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:5px 12px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:.4px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--ok);
+  animation:pulse 1.6s ease-in-out infinite;
+}
+.kicker{
+  font-size:9px;
+  letter-spacing:2.6px;
+  text-transform:uppercase;
+  color:var(--soft);
+  margin-bottom:10px;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:42px;
+  line-height:.9;
+  letter-spacing:-1.5px;
+  margin-bottom:12px;
+  max-width:330px;
+}
+.hero h1 .energy{color:var(--accent)}
+.hero p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.65;
+  max-width:350px;
+}
+.hero-chips{
+  margin-top:14px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.chip{
+  padding:6px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05);
+  font-size:10px;
+  color:var(--muted);
+}
+.actions{
+  margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.btn{
+  text-decoration:none;
+  display:block;
+  text-align:center;
+  padding:13px 14px;
+  border-radius:13px;
+  font-size:13px;
+  font-weight:700;
+}
+.btn-primary{
+  color:#1f1500;
+  background:linear-gradient(135deg,#ffd873,#ffc43b 60%,#f2ad11);
+  box-shadow:0 10px 26px rgba(255,196,59,.32);
+}
+.btn-secondary{
+  color:var(--txt);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+}
+.section{
+  margin-top:22px;
+}
+.label{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:2.5px;
+  color:var(--soft);
+  margin-bottom:11px;
+}
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.stat{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:11px 8px;
+  text-align:center;
+  background:var(--surface);
+}
+.stat-n{
+  font-family:'Syne',sans-serif;
+  font-size:19px;
+  letter-spacing:-.5px;
+}
+.stat-l{
+  font-size:9px;
+  color:var(--soft);
+  margin-top:3px;
+}
+.services{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.card{
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--surface);
+  padding:16px;
+}
+.s-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+.s-name{
+  font-size:15px;
+  font-weight:700;
+  line-height:1.25;
+}
+.s-price{
+  font-family:'Syne',sans-serif;
+  font-size:20px;
+  letter-spacing:-.5px;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.s-desc{
+  margin-top:7px;
+  font-size:12px;
+  line-height:1.6;
+  color:var(--muted);
+}
+.plans{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+.plan{
+  border:1px solid var(--line);
+  background:var(--surface-2);
+  border-radius:14px;
+  padding:14px;
+}
+.plan-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.plan-name{font-weight:700;font-size:13px}
+.plan-tag{font-size:10px;color:#001623;background:var(--accent-2);padding:3px 8px;border-radius:999px;font-weight:700}
+.plan p{margin-top:6px;font-size:11px;line-height:1.55;color:var(--muted)}
+.saving{margin-top:8px;font-size:12px;color:#8ce5ff}
+.area-chips{display:flex;flex-wrap:wrap;gap:7px}
+.area{
+  font-size:11px;
+  color:var(--muted);
+  border-radius:100px;
+  border:1px solid var(--line);
+  padding:6px 10px;
+  background:rgba(255,255,255,.04);
+}
+.steps{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.step{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px}
+.step-no{
+  width:26px;height:26px;flex-shrink:0;
+  border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:13px;
+  color:#10131d;background:var(--accent);
+}
+.step strong{display:block;font-size:13px}
+.step span{display:block;margin-top:4px;font-size:11px;color:var(--muted);line-height:1.55}
+.cta{
+  margin-top:24px;
+  border:1px solid rgba(255,196,59,.45);
+  background:linear-gradient(140deg,rgba(255,196,59,.2),rgba(255,196,59,.08));
+  border-radius:18px;
+  padding:20px;
+}
+.cta h2{
+  font-family:'Syne',sans-serif;
+  font-size:28px;
+  line-height:.95;
+  letter-spacing:-1px;
+  color:#fff6df;
+}
+.cta p{margin-top:8px;font-size:12px;line-height:1.65;color:rgba(255,246,223,.86)}
+.cta .btn-primary{margin-top:14px}
+.cta .btn-secondary{margin-top:8px;background:rgba(4,7,15,.28);border-color:rgba(255,255,255,.25)}
+.contact{
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--surface);
+}
+.row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  color:var(--muted);
+  text-decoration:none;
+  font-size:12px;
+}
+.row:last-child{border-bottom:none}
+.ico{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.09);font-size:12px;flex-shrink:0}
+footer{
+  margin-top:22px;
+  text-align:center;
+  color:rgba(245,248,255,.36);
+  font-size:11px;
+  line-height:1.55;
+}
+.builder-brand-bar{
+  margin-top:14px;
+  border-top:1px solid rgba(255,255,255,.16);
+  background:rgba(2,5,12,.75);
+  text-align:center;
+  padding:12px 14px;
+}
+.builder-brand-bar a{
+  color:rgba(255,255,255,.84);
+  font-size:11px;
+  letter-spacing:.35px;
+  text-decoration:none;
+}
+.builder-brand-bar a:hover{color:#ffffff}
+.reveal{animation:rise .7s ease-out both}
+.reveal:nth-child(2){animation-delay:.08s}
+.reveal:nth-child(3){animation-delay:.16s}
+.reveal:nth-child(4){animation-delay:.24s}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,8px)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none;transition:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <main>
+    <header class="hero reveal">
+      <div class="brand">
+        <div class="logo">Volt<span>Nest</span> Electrical & Solar</div>
+        <div class="live"><span class="dot"></span>Emergency On-Call</div>
+      </div>
+      <div class="kicker">Electrical and Solar Installer Service</div>
+      <h1>Power systems built for <span class="energy">safe uptime</span> and lower bills.</h1>
+      <p>Licensed electricians and solar EPC specialists for apartments, homes, offices, and factory rooftops. We handle design, installation, and maintenance under one team.</p>
+      <div class="hero-chips">
+        <div class="chip">REB Certified Team</div>
+        <div class="chip">Net Metering Support</div>
+        <div class="chip">Dhaka Metro Coverage</div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://wa.me/8801711248844">WhatsApp for Quote</a>
+        <a class="btn btn-secondary" href="tel:+8801711248844">24/7 Emergency Call</a>
+      </div>
+    </header>
+
+    <section class="section reveal">
+      <div class="label">Trust Signals</div>
+      <div class="grid-3">
+        <div class="stat"><div class="stat-n">1,900+</div><div class="stat-l">Projects done</div></div>
+        <div class="stat"><div class="stat-n">11yr</div><div class="stat-l">Field experience</div></div>
+        <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">620 reviews</div></div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Core Services</div>
+      <div class="services">
+        <article class="card">
+          <div class="s-head">
+            <div class="s-name">Home Rewiring and Earthing Upgrade</div>
+            <div class="s-price">৳6,500</div>
+          </div>
+          <p class="s-desc">From full circuit rewiring to earth resistance correction with load-safe cable selection and MCB planning.</p>
+        </article>
+        <article class="card">
+          <div class="s-head">
+            <div class="s-name">Rooftop Solar EPC Installation</div>
+            <div class="s-price">৳88,000</div>
+          </div>
+          <p class="s-desc">System sizing, mounting, inverter setup, protections, and commissioning for 3kW to 100kW rooftops.</p>
+        </article>
+        <article class="card">
+          <div class="s-head">
+            <div class="s-name">Hybrid Inverter and Battery Backup</div>
+            <div class="s-price">৳46,000</div>
+          </div>
+          <p class="s-desc">Backup-ready hybrid systems for power cuts, including battery bank wiring, safety isolators, and app monitoring setup.</p>
+        </article>
+        <article class="card">
+          <div class="s-head">
+            <div class="s-name">DB Board and Industrial Panel Retrofit</div>
+            <div class="s-price">৳12,500</div>
+          </div>
+          <p class="s-desc">Panel balancing, RCCB protection, surge devices, and thermal risk reduction for facilities and workshops.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Solar Output Plans</div>
+      <div class="plans">
+        <article class="plan">
+          <div class="plan-top"><div class="plan-name">3kW Home Smart Array</div><div class="plan-tag">Residential</div></div>
+          <p>Ideal for 2-3 bedroom homes with daytime appliance load balancing and net-metering ready export.</p>
+          <div class="saving">Estimated monthly savings: ৳2,400-৳3,100</div>
+        </article>
+        <article class="plan">
+          <div class="plan-top"><div class="plan-name">10kW Business Saver</div><div class="plan-tag">Commercial</div></div>
+          <p>For retail floors, clinics, and offices needing reliable daytime coverage and reduced utility peak charges.</p>
+          <div class="saving">Estimated monthly savings: ৳9,500-৳12,000</div>
+        </article>
+        <article class="plan">
+          <div class="plan-top"><div class="plan-name">25kW Factory Shield</div><div class="plan-tag">Industrial</div></div>
+          <p>Built for production sites requiring stable productivity through outages and better long-term operating margins.</p>
+          <div class="saving">Estimated monthly savings: ৳28,000-৳35,000</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Service Coverage</div>
+      <div class="area-chips">
+        <span class="area">Uttara</span>
+        <span class="area">Mirpur</span>
+        <span class="area">Dhanmondi</span>
+        <span class="area">Gulshan</span>
+        <span class="area">Banani</span>
+        <span class="area">Bashundhara</span>
+        <span class="area">Mohammadpur</span>
+        <span class="area">Purbachal</span>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">How We Work</div>
+      <div class="steps">
+        <div class="step"><div class="step-no">1</div><div><strong>Site Survey and Load Audit</strong><span>Our engineer inspects demand profile, roof structure, protection points, and existing distribution lines.</span></div></div>
+        <div class="step"><div class="step-no">2</div><div><strong>Design, Quote, and Compliance Plan</strong><span>You receive a clear scope with cable schedule, hardware list, safety specs, and final pricing before work starts.</span></div></div>
+        <div class="step"><div class="step-no">3</div><div><strong>Install, Test, and Handover</strong><span>Commissioning, thermal checks, and customer walkthrough completed with maintenance guidance and support contacts.</span></div></div>
+      </div>
+    </section>
+
+    <section class="cta reveal">
+      <h2>Need an urgent electrical fix or a full solar setup this week?</h2>
+      <p>Call now for immediate response or send your monthly bill on WhatsApp to get a practical solar sizing estimate.</p>
+      <a class="btn btn-primary" href="https://wa.me/8801711248844">Get Fast WhatsApp Support</a>
+      <a class="btn btn-secondary" href="tel:+8801711248844">Call Emergency Team</a>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Contact</div>
+      <div class="contact">
+        <a class="row" href="tel:+8801711248844"><span class="ico">📞</span>+880 1711-248844</a>
+        <a class="row" href="https://wa.me/8801711248844"><span class="ico">💬</span>WhatsApp: 8801711248844</a>
+        <a class="row" href="mailto:hello@voltnestbd.com"><span class="ico">✉️</span>hello@voltnestbd.com</a>
+        <a class="row" href="https://maps.google.com/?q=House+14,+Road+12,+Sector+7,+Uttara,+Dhaka"><span class="ico">📍</span>House 14, Road 12, Sector 7, Uttara, Dhaka</a>
+        <div class="row"><span class="ico">⏰</span>Sat-Thu, 8:00am-9:00pm · 24/7 emergency support</div>
+        <a class="row" href="https://www.voltnestbd.com"><span class="ico">🌐</span>www.voltnestbd.com</a>
+      </div>
+    </section>
+
+    <footer>© 2026 VoltNest Electrical & Solar Ltd. All rights reserved.</footer>
+  </main>
+  <div class="builder-brand-bar"><a href="https://www.growrixos.com" target="_blank" rel="noopener">Built By Growrix OS</a></div>
+</div>
+</body>
+</html>

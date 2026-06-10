@@ -51,9 +51,8 @@ type RuntimeConfig = {
 
 const DEFAULT_FALLBACK_FROM_EMAIL = "Growrix <onboarding@resend.dev>";
 const HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS: ReadonlyArray<ReadonlyArray<string>> = [
-  ["..", "Shop", "business-professional", "business-profile-pages"],
-  ["..", "..", "Shop", "business-professional", "business-profile-pages"],
-  [".", "Shop", "business-professional", "business-profile-pages"],
+  ["public", "previews", "html-business-profiles"],
+  ["web", "public", "previews", "html-business-profiles"],
 ];
 
 let cachedRuntimeConfig: RuntimeConfig | null = null;

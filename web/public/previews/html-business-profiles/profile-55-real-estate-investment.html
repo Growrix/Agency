@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Landmark Capital — Real Estate Investment</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#e8e4de;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#faf8f5;margin:0 auto;color:#1a1814}
+
+/* ULTRA MINIMAL HERO — vast whitespace, architectural */
+.hero{min-height:320px;background:#faf8f5;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 28px 32px;position:relative;border-bottom:1px solid #e0dcd6}
+.hero-rule-top{position:absolute;top:0;left:0;right:0;height:3px;background:#1a1814}
+.hero-top{position:absolute;top:24px;left:28px;right:28px;display:flex;justify-content:space-between;align-items:center}
+.hero-wordmark{font-family:'Inter',sans-serif;font-size:10px;font-weight:500;color:rgba(26,24,20,.35);letter-spacing:3px;text-transform:uppercase}
+.hero-year{font-family:'Inter',sans-serif;font-size:10px;color:rgba(26,24,20,.25);letter-spacing:1px}
+.hero h1{font-family:'Instrument Serif',serif;font-size:52px;color:#1a1814;line-height:.9;letter-spacing:-1px;margin-bottom:20px}
+.hero h1 em{font-style:italic;color:rgba(26,24,20,.4)}
+.hero-descriptor{font-size:11px;font-weight:300;color:rgba(26,24,20,.4);letter-spacing:2px;text-transform:uppercase;line-height:2}
+
+/* Thin ruled stats */
+.stats-ruled{border-top:1px solid #e0dcd6;border-bottom:1px solid #e0dcd6;display:flex}
+.sr{flex:1;padding:16px 0;text-align:center;border-right:1px solid #e0dcd6}
+.sr:last-child{border-right:none}
+.sr-n{font-family:'Instrument Serif',serif;font-size:22px;color:#1a1814;line-height:1}
+.sr-l{font-size:9px;font-weight:400;color:rgba(26,24,20,.3);margin-top:5px;letter-spacing:1.5px;text-transform:uppercase}
+
+.body{padding:0 28px 48px}
+
+/* Minimal section label */
+.sec{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(26,24,20,.3);margin:36px 0 16px;display:flex;align-items:center;gap:16px}
+.sec::after{content:'';flex:1;height:1px;background:#e0dcd6}
+
+/* Property cards — ultra clean */
+.properties{display:flex;flex-direction:column;gap:1px}
+.prop{padding:18px 0;border-bottom:1px solid #e0dcd6;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.prop:last-child{border-bottom:none}
+.prop-name{font-family:'Instrument Serif',serif;font-size:17px;color:#1a1814;letter-spacing:-.3px}
+.prop-loc{font-size:10px;font-weight:300;color:rgba(26,24,20,.35);margin-top:4px;letter-spacing:.5px;text-transform:uppercase}
+.prop-type{display:inline-block;font-size:9px;background:#f0ece6;color:rgba(26,24,20,.4);padding:3px 8px;border-radius:2px;margin-top:6px;letter-spacing:.5px;font-weight:500}
+.prop-right{text-align:right;flex-shrink:0}
+.prop-value{font-family:'Instrument Serif',serif;font-size:20px;color:#1a1814}
+.prop-return{font-size:10px;font-weight:300;color:rgba(26,24,20,.35);margin-top:3px;letter-spacing:.5px}
+
+/* Services — minimal list */
+.svc-list{display:flex;flex-direction:column}
+.svc{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid #e0dcd6;gap:12px}
+.svc:last-child{border-bottom:none}
+.svc-name{font-family:'Instrument Serif',serif;font-size:15px;color:#1a1814;font-style:italic}
+.svc-arrow{color:rgba(26,24,20,.2);font-size:14px}
+
+/* Testimonial — blockquote style */
+.blockquote{padding:28px 0;border-top:1px solid #e0dcd6;border-bottom:1px solid #e0dcd6}
+.bq-mark{font-family:'Instrument Serif',serif;font-size:60px;color:rgba(26,24,20,.08);line-height:.8;margin-bottom:-10px}
+.bq-text{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;color:#1a1814;line-height:1.6;letter-spacing:-.2px}
+.bq-author{font-size:10px;font-weight:300;color:rgba(26,24,20,.35);margin-top:14px;letter-spacing:1px;text-transform:uppercase}
+
+/* Minimal CTA */
+.cta-minimal{padding:32px 0;text-align:center;border-top:1px solid #e0dcd6}
+.cta-minimal h3{font-family:'Instrument Serif',serif;font-size:28px;color:#1a1814;letter-spacing:-.5px;margin-bottom:10px}
+.cta-minimal h3 em{font-style:italic;color:rgba(26,24,20,.4)}
+.cta-minimal p{font-size:12px;font-weight:300;color:rgba(26,24,20,.4);margin-bottom:24px;line-height:1.7;letter-spacing:.2px}
+.cta-btn{display:block;background:#1a1814;color:#faf8f5;padding:16px 28px;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-decoration:none;margin-bottom:10px}
+.cta-btn2{display:block;color:rgba(26,24,20,.35);font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+
+.contact-minimal{display:flex;flex-direction:column;gap:12px;padding-top:4px}
+.cm{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:10px 0;border-bottom:1px solid #e0dcd6}
+.cm:last-child{border-bottom:none}
+.cm-label{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(26,24,20,.3)}
+.cm-value{color:rgba(26,24,20,.5);font-weight:300;font-size:11px}
+
+footer{background:#1a1814;padding:20px 28px;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Instrument Serif',serif;font-size:14px;color:rgba(250,248,245,.3);font-style:italic}
+.f-copy{font-size:9px;color:rgba(250,248,245,.15);letter-spacing:1px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-rule-top"></div>
+  <div class="hero-top">
+    <div class="hero-wordmark">Landmark Capital</div>
+    <div class="hero-year">Est. 2004</div>
+  </div>
+  <h1>Where capital<br>meets <em>property.</em></h1>
+  <div class="hero-descriptor">Commercial · Residential · Mixed-Use<br>Investment · Development · Asset Management</div>
+</div>
+<div class="stats-ruled">
+  <div class="sr"><div class="sr-n">$2.4B</div><div class="sr-l">AUM</div></div>
+  <div class="sr"><div class="sr-n">80+</div><div class="sr-l">Properties</div></div>
+  <div class="sr"><div class="sr-n">20yr</div><div class="sr-l">History</div></div>
+</div>
+<div class="body">
+  <div class="sec">Current Portfolio</div>
+  <div class="properties">
+    <div class="prop"><div><div class="prop-name">The Gulshan Tower</div><div class="prop-loc">Gulshan-2, Dhaka</div><div class="prop-type">Grade A Office</div></div><div class="prop-right"><div class="prop-value">$48M</div><div class="prop-return">↑ 11.2% p.a.</div></div></div>
+    <div class="prop"><div><div class="prop-name">Baridhara Residences</div><div class="prop-loc">Baridhara, Dhaka</div><div class="prop-type">Luxury Residential</div></div><div class="prop-right"><div class="prop-value">$32M</div><div class="prop-return">↑ 9.8% p.a.</div></div></div>
+    <div class="prop"><div><div class="prop-name">Commerce Park</div><div class="prop-loc">Uttara, Dhaka</div><div class="prop-type">Mixed-Use</div></div><div class="prop-right"><div class="prop-value">$65M</div><div class="prop-return">↑ 13.1% p.a.</div></div></div>
+  </div>
+
+  <div class="sec">What We Do</div>
+  <div class="svc-list">
+    <div class="svc"><span class="svc-name">Real Estate Investment</span><span class="svc-arrow">→</span></div>
+    <div class="svc"><span class="svc-name">Development Finance</span><span class="svc-arrow">→</span></div>
+    <div class="svc"><span class="svc-name">Asset Management</span><span class="svc-arrow">→</span></div>
+    <div class="svc"><span class="svc-name">Property Advisory</span><span class="svc-arrow">→</span></div>
+    <div class="svc"><span class="svc-name">Joint Ventures</span><span class="svc-arrow">→</span></div>
+  </div>
+
+  <div class="sec">A Client</div>
+  <div class="blockquote">
+    <div class="bq-mark">"</div>
+    <div class="bq-text">Landmark's market insight and patient capital approach delivered returns we couldn't have achieved alone. Twenty-year partners.</div>
+    <div class="bq-author">Chairman, Dhaka Manufacturing Group</div>
+  </div>
+
+  <div class="sec">Invest With Us</div>
+  <div class="cta-minimal">
+    <h3>Patient capital for<br><em>lasting returns.</em></h3>
+    <p>We welcome co-investment from family offices, institutional investors and HNWIs. Minimum ticket: $500,000.</p>
+    <a href="mailto:invest@landmarkcapital.com" class="cta-btn">Request an Investment Deck</a>
+    <a href="https://wa.me/8801700000000" class="cta-btn2">Speak with an advisor →</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-minimal">
+    <div class="cm"><span class="cm-label">Phone</span><span class="cm-value">+880 2-9876543</span></div>
+    <div class="cm"><span class="cm-label">Email</span><span class="cm-value">invest@landmarkcapital.com</span></div>
+    <div class="cm"><span class="cm-label">Office</span><span class="cm-value">Gulshan Avenue, Dhaka</span></div>
+    <div class="cm"><span class="cm-label">Hours</span><span class="cm-value">By appointment · Sun–Thu</span></div>
+  </div>
+</div>
+<footer><div class="f-logo">Landmark Capital</div><div class="f-copy">© 2025</div></footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

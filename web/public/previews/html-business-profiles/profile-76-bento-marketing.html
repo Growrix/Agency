@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Orbit Digital — Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Space Grotesk',sans-serif;background:#080a0f;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#08080c;margin:0 auto;color:#f0eeff}
+
+/* BENTO GRID SYSTEM */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}
+.cell{border-radius:22px;padding:20px;position:relative;overflow:hidden}
+/* Full width cells */
+.w-full{grid-column:span 2}
+/* Colors */
+.c-dark{background:#0f0f18}
+.c-white{background:#f0eeff}
+.c-blue{background:#2040ff}
+.c-purple{background:#7020ff}
+.c-yellow{background:#f5d800}
+.c-pink{background:#ff2080}
+.c-green{background:#00c870}
+
+/* HERO BENTO CELL */
+.hero-cell{background:linear-gradient(135deg,#0f0f22,#18082a);border:1px solid rgba(255,255,255,.06);min-height:200px;display:flex;flex-direction:column;justify-content:flex-end}
+.hc-tag{font-size:9px;color:rgba(240,238,255,.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.hc-dot{width:6px;height:6px;background:#00c870;border-radius:50%;animation:b 1.5s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.3}}
+.hc-h1{font-size:36px;font-weight:800;line-height:.9;letter-spacing:-2px;background:linear-gradient(135deg,#fff 40%,rgba(180,120,255,.8));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hc-sub{font-size:11px;color:rgba(240,238,255,.3);margin-top:8px;line-height:1.5}
+
+/* Stat cell */
+.stat-cell{display:flex;flex-direction:column;justify-content:flex-end;min-height:100px}
+.sc-n{font-size:36px;font-weight:800;letter-spacing:-2px;line-height:1}
+.sc-l{font-size:10px;font-weight:600;margin-top:4px;opacity:.6;letter-spacing:.3px}
+.sc-dark .sc-n{background:linear-gradient(135deg,#8040ff,#4080ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sc-dark .sc-l{color:rgba(240,238,255,.3)}
+.sc-blue .sc-n, .sc-blue .sc-l, .sc-purple .sc-n, .sc-purple .sc-l, .sc-pink .sc-n, .sc-pink .sc-l{color:#fff}
+.sc-yellow .sc-n, .sc-yellow .sc-l{color:#08080c}
+
+/* Service cell */
+.svc-cell{min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
+.svc-icon{font-size:28px;margin-bottom:auto}
+.svc-name{font-size:14px;font-weight:700;letter-spacing:-.3px}
+.svc-price{font-size:12px;margin-top:4px;opacity:.6;font-weight:600}
+.svc-dark .svc-name{color:#f0eeff}
+.svc-dark .svc-price{color:rgba(240,238,255,.35)}
+.svc-colored .svc-name,.svc-colored .svc-price{color:#fff}
+
+/* CTA Cell */
+.cta-cell{background:linear-gradient(135deg,#3040ff,#7020ff);min-height:110px;display:flex;flex-direction:column;justify-content:space-between}
+.cta-cell h3{font-size:20px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1}
+.cta-btn{display:block;background:#fff;color:#3040ff;border-radius:14px;padding:12px;font-size:12px;font-weight:700;text-decoration:none;text-align:center;margin-top:12px}
+
+/* Process cell */
+.process-cell{min-height:100px;display:flex;flex-direction:column;justify-content:flex-end}
+.proc-n{font-size:32px;font-weight:800;opacity:.12;line-height:1;letter-spacing:-1px}
+.proc-name{font-size:12px;font-weight:700;letter-spacing:-.2px}
+.proc-desc{font-size:9px;opacity:.5;margin-top:2px;line-height:1.4}
+.proc-dark .proc-name{color:#f0eeff}
+.proc-dark .proc-n{color:#fff}
+.proc-colored .proc-name,.proc-colored .proc-n{color:#fff}
+
+/* Quote cell */
+.quote-cell{min-height:120px;display:flex;flex-direction:column;justify-content:flex-end}
+.quote-mark{font-size:36px;opacity:.15;line-height:.8;margin-bottom:-2px}
+.quote-text{font-size:12px;line-height:1.55;font-weight:500;font-style:italic}
+.quote-author{font-size:9px;margin-top:10px;opacity:.4;letter-spacing:.5px}
+.q-dark .quote-text,.q-dark .quote-mark{color:#f0eeff}
+
+/* Contact cell */
+.contact-cell{min-height:100px;display:flex;flex-direction:column;gap:8px;justify-content:flex-end}
+.cc-row{display:flex;align-items:center;gap:8px;font-size:11px}
+.cc-icon{font-size:14px;flex-shrink:0}
+.cc-dark .cc-row{color:rgba(240,238,255,.45)}
+
+/* Social cell */
+.social-cell{min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.social-icon{font-size:36px;margin-bottom:8px}
+.social-name{font-size:12px;font-weight:700}
+.social-handle{font-size:11px;opacity:.6;margin-top:3px}
+</style>
+</head>
+<body><div class="app">
+<div class="bento">
+
+  <!-- HERO -->
+  <div class="cell w-full hero-cell">
+    <div class="hc-tag"><span class="hc-dot"></span>Taking new clients · Dhaka</div>
+    <div class="hc-h1">Orbit<br>Digital</div>
+    <div class="hc-sub">Performance marketing, SEO, social media & paid ads. We grow brands in Bangladesh and beyond.</div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="cell c-dark stat-cell sc-dark"><div class="sc-n">120+</div><div class="sc-l">Brands grown</div></div>
+  <div class="cell c-blue stat-cell sc-blue"><div class="sc-n">8yr</div><div class="sc-l">In digital marketing</div></div>
+  <div class="cell c-yellow stat-cell sc-yellow"><div class="sc-n">4.9★</div><div class="sc-l">Client rating</div></div>
+  <div class="cell c-dark stat-cell sc-dark"><div class="sc-n">$2M+</div><div class="sc-l">Ad spend managed</div></div>
+
+  <!-- SERVICES -->
+  <div class="cell c-purple svc-cell svc-colored"><div class="svc-icon">📊</div><div><div class="svc-name">Meta & Google Ads</div><div class="svc-price">৳15,000/mo</div></div></div>
+  <div class="cell c-dark svc-cell svc-dark"><div class="svc-icon">🔍</div><div><div class="svc-name">SEO & Content</div><div class="svc-price">৳12,000/mo</div></div></div>
+  <div class="cell c-pink svc-cell svc-colored"><div class="svc-icon">📱</div><div><div class="svc-name">Social Media Mgmt</div><div class="svc-price">৳10,000/mo</div></div></div>
+  <div class="cell c-dark svc-cell svc-dark"><div class="svc-icon">✉️</div><div><div class="svc-name">Email Marketing</div><div class="svc-price">৳8,000/mo</div></div></div>
+
+  <!-- CTA -->
+  <div class="cell w-full cta-cell">
+    <h3>Ready to 10× your brand?</h3>
+    <a href="https://wa.me/8801700000000" class="cta-btn">Get a Free Audit →</a>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="cell w-full c-dark quote-cell q-dark">
+    <div class="quote-mark">"</div>
+    <div class="quote-text">Orbit took our ROAS from 1.8× to 6.2× in three months. The team genuinely understands BD consumer behaviour.</div>
+    <div class="quote-author">CEO · Fashion e-commerce brand · Dhaka</div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="cell c-dark contact-cell cc-dark">
+    <div class="cc-row"><span class="cc-icon">📞</span>+880 1700-000000</div>
+    <div class="cc-row"><span class="cc-icon">📍</span>Gulshan-1, Dhaka</div>
+    <div class="cc-row"><span class="cc-icon">⏰</span>Sun–Thu 9am–7pm</div>
+  </div>
+  <div class="cell c-green social-cell">
+    <div class="social-icon">📸</div>
+    <div class="social-name" style="color:#08080c">Instagram</div>
+    <div class="social-handle" style="color:rgba(8,8,12,.5)">@orbitdigital.bd</div>
+  </div>
+
+</div>
+<div style="text-align:center;padding:16px;font-size:10px;color:rgba(240,238,255,.1);border-top:1px solid rgba(255,255,255,.04)">© 2025 Orbit Digital · Performance Marketing · Dhaka</div>
+</div><div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</body></html>
