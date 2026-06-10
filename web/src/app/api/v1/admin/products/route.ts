@@ -12,11 +12,11 @@ function asProductValidationError(error: unknown) {
   }
 
   if (error.message.startsWith("INVALID_PRODUCT_SLUG_FORMAT:")) {
-    return new ApiError("INVALID_FIELD", 400, error.message.replace("INVALID_PRODUCT_SLUG_FORMAT:", "").trim());
+    return new ApiError("FIELD_VALIDATION_FAILED", 400, error.message.replace("INVALID_PRODUCT_SLUG_FORMAT:", "").trim());
   }
 
   if (error.message.startsWith("RESERVED_PRODUCT_SLUG:")) {
-    return new ApiError("INVALID_FIELD", 400, error.message.replace("RESERVED_PRODUCT_SLUG:", "").trim());
+    return new ApiError("FIELD_VALIDATION_FAILED", 400, error.message.replace("RESERVED_PRODUCT_SLUG:", "").trim());
   }
 
   if (error.message.startsWith("DUPLICATE_PRODUCT_SLUG:")) {
