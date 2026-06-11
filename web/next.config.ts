@@ -1,5 +1,4 @@
 import os from "node:os";
-import path from "node:path";
 import type { NextConfig } from "next";
 
 function getLocalIpv4Origins() {
@@ -44,15 +43,6 @@ const htmlPreviewCsp =
 
 const nextConfig: NextConfig = {
   allowedDevOrigins,
-  outputFileTracingRoot: path.join(__dirname),
-  outputFileTracingIncludes: {
-    "/api/html-business-profiles/[templateSlug]": [
-      "shop/business-professional/business-profile-pages/**/*",
-    ],
-    "/api/website-templates-html-preview/[templateSlug]": [
-      "shop/website-templates-html/**/*",
-    ],
-  },
   images: {
     remotePatterns: [
       {
@@ -98,6 +88,30 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: "/previews/website-templates-html/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          { key: "Content-Security-Policy", value: htmlPreviewCsp },
+        ],
+      },
+      {
+        source: "/previews/html-business-profiles/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          { key: "Content-Security-Policy", value: htmlPreviewCsp },
+        ],
+      },
+      {
         source: "/api/html-business-profiles/:path*",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
@@ -122,7 +136,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/((?!api/html-business-profiles|api/website-templates-html-preview).*)",
+        source: "/((?!api/html-business-profiles|api/website-templates-html-preview|previews/website-templates-html|previews/html-business-profiles).*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },

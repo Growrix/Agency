@@ -229,7 +229,13 @@ export const HTML_BUSINESS_PROFILES_SERVICE = {
 } as const;
 
 export function getHtmlBusinessProfilePreviewUrl(templateSlug: string) {
-  return `/api/html-business-profiles/${templateSlug}`;
+  const normalizedTemplateSlug = templateSlug.replace(/^html-business-profile-/, "");
+  const template = getHtmlBusinessProfileBySlug(normalizedTemplateSlug);
+  if (!template) {
+    return `/previews/html-business-profiles/${normalizedTemplateSlug}.html`;
+  }
+
+  return `/previews/html-business-profiles/${template.fileName}`;
 }
 
 export function getHtmlBusinessProfilesCategoryPath(categorySlug: HtmlBusinessProfileCategorySlug) {

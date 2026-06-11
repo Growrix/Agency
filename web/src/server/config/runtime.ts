@@ -1,15 +1,7 @@
 import "server-only";
-import { existsSync } from "node:fs";
-import path from "node:path";
 
 type RuntimeConfig = {
   appBaseUrl: string;
-  htmlBusinessProfiles: {
-    directory: string;
-  };
-  websiteTemplatesHtmlPreview: {
-    directory: string;
-  };
   contact: {
     toEmail?: string;
     fromEmail?: string;
@@ -77,17 +69,6 @@ function parseBaseUrl(value: string | undefined) {
   }
 }
 
-function resolveDirectoryPath(value: string | undefined, fallbackCandidates: string[][]) {
-  const candidate = value?.trim();
-  if (candidate) {
-    return path.isAbsolute(candidate) ? candidate : path.resolve(process.cwd(), candidate);
-  }
-
-  const resolvedCandidates = fallbackCandidates.map((segments) => path.resolve(process.cwd(), ...segments));
-  const existingCandidate = resolvedCandidates.find((resolvedPath) => existsSync(resolvedPath));
-  return existingCandidate ?? resolvedCandidates[0];
-}
-
 export function getRuntimeConfig(): RuntimeConfig {
   if (cachedRuntimeConfig) {
     return cachedRuntimeConfig;
@@ -95,22 +76,6 @@ export function getRuntimeConfig(): RuntimeConfig {
 
   cachedRuntimeConfig = {
     appBaseUrl: parseBaseUrl(process.env.NEXT_PUBLIC_SITE_URL),
-    htmlBusinessProfiles: {
-      directory: resolveDirectoryPath(
-        process.env.HTML_BUSINESS_PROFILES_DIRECTORY,
-        [
-          ["shop", "business-professional", "business-profile-pages"],
-        ],
-      ),
-    },
-    websiteTemplatesHtmlPreview: {
-      directory: resolveDirectoryPath(
-        process.env.WEBSITE_TEMPLATES_HTML_PREVIEW_DIRECTORY,
-        [
-          ["shop", "website-templates-html"],
-        ],
-      ),
-    },
     contact: {
       toEmail: process.env.CONTACT_TO_EMAIL,
       fromEmail: process.env.CONTACT_FROM_EMAIL,

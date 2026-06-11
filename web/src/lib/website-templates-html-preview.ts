@@ -29,7 +29,12 @@ export function listWebsiteTemplateHtmlPreviews() {
 }
 
 export function getWebsiteTemplateHtmlPreviewUrl(templateSlug: string) {
-  return `/api/website-templates-html-preview/${templateSlug}`;
+  const template = getWebsiteTemplateHtmlPreviewBySlug(templateSlug);
+  if (!template) {
+    return `/previews/website-templates-html/${templateSlug}.html`;
+  }
+
+  return `/previews/website-templates-html/${template.fileName}`;
 }
 
 type WebsiteTemplateHtmlPreviewCatalogProduct = {
