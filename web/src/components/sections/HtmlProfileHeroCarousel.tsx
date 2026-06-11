@@ -171,22 +171,21 @@ export function HtmlProfileHeroCarousel({
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
-  const [mountedLogicalIndexes, setMountedLogicalIndexes] = useState<Set<number>>(() => new Set([0]));
   const isTransitioningRef = useRef(false);
 
   const canNavigate = safeSlides.length > 1;
 
   const logicalIndex = index >= cloneIndex ? 0 : index;
 
-  useEffect(() => {
-    setMountedLogicalIndexes((prev) => {
-      const next = new Set(prev);
-      next.add(logicalIndex);
-      next.add((logicalIndex - 1 + safeSlides.length) % safeSlides.length);
-      next.add((logicalIndex + 1) % safeSlides.length);
-      return next;
-    });
-  }, [logicalIndex, safeSlides.length]);
+  const previewLoadIndexes = useMemo(
+    () =>
+      new Set([
+        logicalIndex,
+        (logicalIndex - 1 + safeSlides.length) % safeSlides.length,
+        (logicalIndex + 1) % safeSlides.length,
+      ]),
+    [logicalIndex, safeSlides.length],
+  );
 
   const finishLoopReset = useCallback(() => {
     isTransitioningRef.current = true;
@@ -268,8 +267,11 @@ export function HtmlProfileHeroCarousel({
 
   useEffect(() => {
     if (index > cloneIndex) {
-      finishLoopReset();
-      return;
+      const recoveryTimer = window.setTimeout(() => {
+        finishLoopReset();
+      }, 0);
+
+      return () => window.clearTimeout(recoveryTimer);
     }
 
     if (!isTransitioningRef.current) {
@@ -358,7 +360,7 @@ export function HtmlProfileHeroCarousel({
         >
           {loopSlides.map((slide, slideIndex) => {
             const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
-            const loadPreview = mountedLogicalIndexes.has(slideLogicalIndex);
+            const loadPreview = previewLoadIndexes.has(slideLogicalIndex);
 
             return (
               <article
