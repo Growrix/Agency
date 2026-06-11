@@ -61,7 +61,11 @@ export function getWebsiteTemplateHtmlPreviewUrl(templateSlug: string) {
     return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${templateSlug}.html`;
   }
 
-  return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${encodeURIComponent(template.fileName)}`;
+  return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${encodePreviewFileName(template.fileName)}`;
+}
+
+function encodePreviewFileName(fileName: string) {
+  return fileName.replace(/ /g, "%20");
 }
 
 export function getWebsiteTemplateHtmlPreviewProductSlug(templateSlug: string) {

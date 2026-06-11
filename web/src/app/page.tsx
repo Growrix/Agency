@@ -18,7 +18,6 @@ import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
 import { ServiceCards } from "@/components/marketing/ServiceCards";
 import { Testimonials } from "@/components/marketing/Testimonials";
 import { ProductLedFinalCTA } from "@/components/marketing/ProductLedFinalCTA";
-import { StatBlock } from "@/components/sections/StatBlock";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { TrustStrip } from "@/components/sections/TrustStrip";
@@ -26,9 +25,9 @@ import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { ShopProductHtmlMobilePreviewCard } from "@/components/shop/ShopProductHtmlMobilePreviewCard";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import {
-  HOME_STATS,
   HOME_STACK_MARQUEE,
   PROCESS_STEPS,
 } from "@/lib/content";
@@ -36,6 +35,15 @@ import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
+import { HtmlBusinessProfilesCategoryHero } from "@/components/sections/HtmlBusinessProfilesCategoryHero";
+import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
+import {
+  buildWebsiteTemplateHtmlPreviewSlides,
+  getWebsiteTemplateHtmlPreviewUrl,
+  listWebsiteTemplateHtmlPreviews,
+  WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+} from "@/lib/website-templates-html-preview";
+import { getProductHref } from "@/lib/shop";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
 
 const SHOW_LIVE_SAAS_SECTION = false;
@@ -67,22 +75,31 @@ export default async function Home() {
   ]);
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
-  const templateProducts = publicProducts.filter(
-    (p) => !isLiveSaasProduct(p) && p.categorySlug !== "html-business-profiles",
-  );
-  const featuredProducts = pickBySlugs(
-    templateProducts,
-    homeContent?.shopSpotlight?.productSlugs,
-    templateProducts.slice(0, 4)
-  );
   const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
   const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
+  const htmlPreviewCatalogProducts = publicProducts.filter(
+    (product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+  );
+  const featuredHtmlWebsiteTemplates = htmlPreviewCatalogProducts.slice(0, 3);
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
     liveSaasProducts,
     homeContent?.liveSaas?.productSlugs,
     liveSaasProducts.slice(0, 4),
   );
+  const htmlPreviewSlides = buildWebsiteTemplateHtmlPreviewSlides(htmlPreviewCatalogProducts);
+  const htmlPreviewPrimaryTemplate = htmlPreviewCatalogProducts[0];
+  const htmlPreviewFallbackSlide = {
+    name: htmlPreviewPrimaryTemplate?.name ?? "Website Template",
+    type: htmlPreviewPrimaryTemplate?.type ?? "HTML Preview",
+    price: htmlPreviewPrimaryTemplate?.price ?? "$149",
+    href: htmlPreviewPrimaryTemplate
+      ? getProductHref(htmlPreviewPrimaryTemplate)
+      : "/products/category/website-templates-html-preview",
+    previewUrl: listWebsiteTemplateHtmlPreviews()[0]
+      ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
+      : undefined,
+  };
   return (
     <>
       {/* Hero */}
@@ -96,7 +113,7 @@ export default async function Home() {
               <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Productized SaaS studio + digital marketplace"}</Badge>
             </div>
             <h1
-              className="signal-rise mt-5 font-display text-[42px] leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl"
+              className="signal-rise mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance"
               style={{ animationDelay: "90ms" }}
             >
               {homeContent?.heroTitle ?? "Launch faster with ready-made SaaS templates, AI tools, and custom development support."}
@@ -145,21 +162,35 @@ export default async function Home() {
           </div>
 
         </Container>
-        <div className="mt-14">
-          <StatBlock stats={HOME_STATS} />
-        </div>
       </Section>
+
+      <WebsiteTemplateHtmlPreviewShowcaseSections
+        slides={htmlPreviewSlides}
+        emptyFallbackSlide={htmlPreviewFallbackSlide}
+        reverseMobileLayout
+        showMobileSectionDivider={false}
+      />
+
+      <HtmlBusinessProfilesCategoryHero
+        products={htmlBusinessProfileProducts}
+        showBackLink={false}
+        profilesAnchorId="profiles"
+      />
 
       <TrustBar />
 
       <FeaturedProducts
-        products={featuredProducts}
-        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "Featured products"}
-        title={homeContent?.shopSpotlight?.title ?? "Production-ready digital products"}
+        products={featuredHtmlWebsiteTemplates}
+        variant="html-preview"
+        maxProducts={3}
+        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "HTML website templates"}
+        title={homeContent?.shopSpotlight?.title ?? "Production-ready templates with live desktop preview"}
         description={
           homeContent?.shopSpotlight?.description ??
-          "Templates, starters, and toolkits with Standard, Premium, and Done-For-You tiers — buy now or hire us to launch it for you."
+          "Browse HTML website templates with embedded desktop previews — open a product page to buy or request Done-For-You setup."
         }
+        ctaHref="/products/category/website-templates-html-preview#profiles"
+        ctaLabel="Browse HTML templates"
       />
 
       <ThreePathExplainer />
@@ -184,10 +215,10 @@ export default async function Home() {
             </div>
           </div>
 
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+          <RevealGroup className="mt-10 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" stagger={0.07}>
             {featuredHtmlBusinessProfileProducts.map((product) => (
-              <RevealItem key={product.slug} className="h-full">
-                <ShopProductCard product={product} />
+              <RevealItem key={product.slug} className="h-full min-w-0">
+                <ShopProductHtmlMobilePreviewCard product={product} />
               </RevealItem>
             ))}
           </RevealGroup>

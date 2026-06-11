@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/primitives/Card";
-import { WebsiteTemplateHtmlMobilePreviewMarketing } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
+import { WebsiteTemplateHtmlMobilePreviewMarketing, HtmlBusinessProfileMobilePreviewMarketing } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 
 type WebsiteTemplateHtmlMobilePreviewSectionProps = {
@@ -9,16 +9,21 @@ type WebsiteTemplateHtmlMobilePreviewSectionProps = {
   templateTitle?: string;
   /** When true, copy sits on the left and the phone frame on the right (desktop). */
   previewOnRight?: boolean;
+  marketingVariant?: "website-template" | "business-profile";
 };
 
 export function WebsiteTemplateHtmlMobilePreviewSection({
   previewUrl,
   templateTitle = "Website Template",
   previewOnRight = false,
+  marketingVariant = "website-template",
 }: WebsiteTemplateHtmlMobilePreviewSectionProps) {
+  const marketingCopy = marketingVariant === "business-profile"
+    ? <HtmlBusinessProfileMobilePreviewMarketing />
+    : <WebsiteTemplateHtmlMobilePreviewMarketing />;
   const copy = (
     <div className={previewOnRight ? "min-w-0 lg:col-span-5" : "order-1 min-w-0 lg:order-2 lg:col-span-5"}>
-      <WebsiteTemplateHtmlMobilePreviewMarketing />
+      {marketingCopy}
     </div>
   );
 

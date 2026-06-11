@@ -18,6 +18,7 @@ type WebsiteTemplateHtmlMobilePreviewFrameProps = {
   /** Scales the device down so the frame fits this max height (px). Omit for native 390×844 frame height. */
   maxFrameHeight?: number;
   showViewportLabel?: boolean;
+  iframeLoading?: "lazy" | "eager";
 };
 
 export function WebsiteTemplateHtmlMobilePreviewFrame({
@@ -26,6 +27,7 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
   className,
   maxFrameHeight,
   showViewportLabel = true,
+  iframeLoading = "lazy",
 }: WebsiteTemplateHtmlMobilePreviewFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -80,7 +82,7 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
                   width: HTML_MOBILE_VIEWPORT_WIDTH,
                   height: HTML_MOBILE_VIEWPORT_HEIGHT,
                 }}
-                loading="lazy"
+                loading={iframeLoading}
                 referrerPolicy="strict-origin-when-cross-origin"
               />
             </div>

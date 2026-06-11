@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   ArrowPathIcon,
   BoltIcon,
@@ -27,23 +26,7 @@ type WebsiteTemplateHtmlDualPreviewProps = {
   emptyFallbackSlide?: HtmlProfileHeroSlide;
 };
 
-function useMobilePreviewMaxHeight(defaultMax = 380) {
-  const [maxHeight, setMaxHeight] = useState(defaultMax);
-
-  useEffect(() => {
-    const update = () => {
-      const viewportHeight = window.innerHeight;
-      const budget = Math.min(defaultMax, Math.max(280, viewportHeight * 0.4));
-      setMaxHeight(Math.round(budget));
-    };
-
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, [defaultMax]);
-
-  return maxHeight;
-}
+const MOBILE_PREVIEW_MAX_FRAME_HEIGHT = 480;
 
 const DESKTOP_BENEFITS = [
   "Conversion-ready layout — hero, services, proof, and contact in place",
@@ -186,28 +169,27 @@ export function WebsiteTemplateHtmlDesktopPreviewBlock({
 export function WebsiteTemplateHtmlMobilePreviewBlock({
   slides,
   emptyFallbackSlide,
-}: WebsiteTemplateHtmlDualPreviewProps) {
-  const mobilePreviewMaxHeight = useMobilePreviewMaxHeight(380);
-
+  reverseLayout = false,
+}: WebsiteTemplateHtmlDualPreviewProps & {
+  reverseLayout?: boolean;
+}) {
   return (
-    <Card className="min-w-0 overflow-hidden p-5 sm:p-6">
-      <div className="grid min-w-0 gap-6 lg:grid-cols-12 lg:items-start">
-        <div className="min-w-0 lg:col-span-7">
-          <div className="mx-auto w-full min-w-0 max-w-full overflow-hidden">
-            <HtmlProfileHeroCarousel
-              slides={slides}
-              ctaLabel="View Product"
-              emptyFallbackSlide={emptyFallbackSlide}
-              previewMode="mobile-frame"
-              mobileFrameMinHeightClass="min-h-0"
-              mobilePreviewMaxHeight={mobilePreviewMaxHeight}
-              mobilePreviewShowViewportLabel={false}
-            />
-          </div>
+    <Card className="overflow-hidden p-5 sm:p-6">
+      <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+        <div className={cn("min-w-0 lg:col-span-5", reverseLayout && "lg:order-2")}>
+          <WebsiteTemplateHtmlMobilePreviewMarketing />
         </div>
 
-        <div className="min-w-0 lg:col-span-5">
-          <WebsiteTemplateHtmlMobilePreviewMarketing />
+        <div className={cn("min-w-0 lg:col-span-7", reverseLayout && "lg:order-1")}>
+          <HtmlProfileHeroCarousel
+            slides={slides}
+            ctaLabel="View Product"
+            emptyFallbackSlide={emptyFallbackSlide}
+            previewMode="mobile-frame"
+            mobileFrameMinHeightClass="min-h-0"
+            mobilePreviewMaxHeight={MOBILE_PREVIEW_MAX_FRAME_HEIGHT}
+            mobilePreviewShowViewportLabel={false}
+          />
         </div>
       </div>
     </Card>

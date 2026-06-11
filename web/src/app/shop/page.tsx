@@ -3,9 +3,7 @@ import Link from "next/link";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
-import { ShopProductCard } from "@/components/shop/ShopProductCard";
-import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
-import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
+import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
@@ -240,13 +238,9 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 </div>
               ) : (
                 <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                  {filteredProducts.map((product) =>
-                    product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG ? (
-                      <ShopProductHtmlPreviewCard key={product.slug} product={product} />
-                    ) : (
-                      <ShopProductCard key={product.slug} product={product} />
-                    ),
-                  )}
+                  {filteredProducts.map((product) => (
+                    <ShopProductCatalogCard key={product.slug} product={product} />
+                  ))}
                 </div>
               )}
             </div>

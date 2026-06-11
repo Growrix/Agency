@@ -18,6 +18,7 @@ type WebsiteTemplateHtmlDesktopPreviewFrameProps = {
   fit?: FitMode;
   /** Used only when fit="contain" and no height class is applied. */
   containerHeight?: number;
+  iframeLoading?: "lazy" | "eager";
 };
 
 export function WebsiteTemplateHtmlDesktopPreviewFrame({
@@ -29,6 +30,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
   viewportHeight = HTML_DESKTOP_VIEWPORT_HEIGHT,
   fit = "width",
   containerHeight,
+  iframeLoading = "lazy",
 }: WebsiteTemplateHtmlDesktopPreviewFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -146,7 +148,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
           width={viewportWidth}
           height={iframeHeight}
           className="block border-0 bg-white"
-          loading="lazy"
+          loading={iframeLoading}
           referrerPolicy="strict-origin-when-cross-origin"
           onLoad={handleIframeLoad}
         />

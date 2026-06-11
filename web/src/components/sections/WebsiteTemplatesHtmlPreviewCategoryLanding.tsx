@@ -6,7 +6,8 @@ import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
-import { WebsiteTemplateHtmlDesktopPreviewCarousel, WebsiteTemplateHtmlDesktopPreviewBlock, WebsiteTemplateHtmlMobilePreviewBlock, WebsiteTemplateHtmlHeroPreviewFooter } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
+import { WebsiteTemplateHtmlDesktopPreviewCarousel, WebsiteTemplateHtmlHeroPreviewFooter } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
+import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getProductHref, type ShopProduct } from "@/lib/shop";
@@ -83,12 +84,12 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
           </Link>
 
           <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-stretch xl:gap-10">
-            <div className="min-w-0 lg:col-span-5">
+            <div className="min-w-0 lg:col-span-4">
               <Badge tone="primary" dot>HTML Preview Edition</Badge>
               <h1 className="mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
                 Website templates with embedded HTML live preview.
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-7 text-text-muted">
+              <p className="mt-5 text-lg leading-7 text-text-muted">
                 This page mirrors the website templates experience but focuses on direct HTML preview-first discovery.
                 Review the template in-frame, then continue with your preferred purchase or customization path.
               </p>
@@ -104,7 +105,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                   Open Product Details
                 </LinkButton>
               </div>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {[
                   { value: `${catalogProducts.length}+`, label: "Catalog Items" },
                   { value: `${htmlPreviewSlides.length}`, label: "HTML Previews" },
@@ -119,16 +120,15 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
               </div>
             </div>
 
-            <div className="min-w-0 lg:col-span-7">
+            <div className="min-w-0 lg:col-span-8">
               <Card className="flex h-full min-w-0 flex-col overflow-hidden p-5 sm:p-6">
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Live template preview</p>
-                <div className="mt-4 flex min-h-[320px] flex-1 flex-col lg:min-h-0">
+                <div className="mt-4 flex min-h-[380px] flex-1 flex-col sm:min-h-[440px] lg:min-h-[520px] xl:min-h-[560px]">
                   <WebsiteTemplateHtmlDesktopPreviewCarousel
                     slides={htmlPreviewSlides}
-                    emptyFallbackSlide={htmlPreviewFallbackSlide}
                     fillHeight
-                    desktopPreviewFit="cover"
-                    minHeightClass="min-h-[320px] lg:min-h-0"
+                    desktopPreviewFit="width"
+                    minHeightClass="min-h-[380px] sm:min-h-[440px] lg:min-h-[520px] xl:min-h-[560px]"
                     className="flex-1"
                   />
                 </div>
@@ -139,37 +139,13 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         </Container>
       </Section>
 
-      <Section className="overflow-x-hidden pt-10 pb-8 sm:pt-14 sm:pb-10">
-        <Container className="min-w-0">
-          <div className="flex flex-col gap-3 text-center">
-            <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-balance">
-              Desktop and mobile preview, side by side
-            </h2>
-            <p className="mx-auto max-w-3xl text-base leading-7 text-text-muted">
-              This section is preview-first by design, so users can inspect the same HTML template in desktop and
-              mobile form before moving into purchase or customization.
-            </p>
-          </div>
-
-          <div className="mt-8 min-w-0 w-full">
-            <WebsiteTemplateHtmlDesktopPreviewBlock
-              slides={htmlPreviewSlides}
-              emptyFallbackSlide={htmlPreviewFallbackSlide}
-            />
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="overflow-x-hidden pb-10 sm:pb-12">
-        <Container className="min-w-0">
-          <div className="min-w-0 w-full">
-            <WebsiteTemplateHtmlMobilePreviewBlock
-              slides={htmlPreviewSlides}
-              emptyFallbackSlide={htmlPreviewFallbackSlide}
-            />
-          </div>
-        </Container>
-      </Section>
+      <WebsiteTemplateHtmlPreviewShowcaseSections
+        slides={htmlPreviewSlides}
+        emptyFallbackSlide={htmlPreviewFallbackSlide}
+        reverseMobileLayout
+        showDesktopSection={false}
+        showMobileSectionDivider={false}
+      />
 
       <Section id="profiles" tone="inset" className="overflow-x-hidden py-10 sm:py-14">
         <Container className="min-w-0">

@@ -4,10 +4,13 @@ import Link from "next/link";
 import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
-import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
+import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import { cn } from "@/lib/utils";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
 
-export function ShopProductHtmlPreviewCard({
+const MOBILE_CARD_PREVIEW_MAX_HEIGHT = 340;
+
+export function ShopProductHtmlMobilePreviewCard({
   product,
   variant = "default",
 }: {
@@ -19,25 +22,24 @@ export function ShopProductHtmlPreviewCard({
   const isCatalogWide = variant === "catalog-wide";
 
   return (
-    <Card hoverable className="shop-product-html-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
+    <Card hoverable className="shop-product-html-mobile-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
       <div
-        className={
-          isCatalogWide
-            ? "shop-product-html-preview-card__preview relative aspect-16/10 min-h-[240px] w-full max-w-full overflow-hidden bg-[#0a0a0a] sm:min-h-[280px]"
-            : "shop-product-html-preview-card__preview relative aspect-16/10 min-h-[200px] w-full max-w-full overflow-hidden bg-[#0a0a0a]"
-        }
+        className={cn(
+          "shop-product-html-mobile-preview-card__preview relative flex w-full max-w-full items-start justify-center overflow-hidden bg-[#0a0a0a]",
+          isCatalogWide ? "min-h-[300px] px-3 py-5 sm:min-h-[340px]" : "min-h-[260px] px-2 py-4 sm:min-h-[300px]",
+        )}
       >
         {previewUrl ? (
-          <WebsiteTemplateHtmlDesktopPreviewFrame
+          <WebsiteTemplateHtmlMobilePreviewFrame
             previewUrl={previewUrl}
-            title={`${product.name} desktop preview`}
-            fit="cover"
-            className="absolute inset-0 h-full w-full"
-            frameClassName={isCatalogWide ? "shop-product-html-preview-card__frame h-full" : "shop-product-html-preview-card__frame"}
+            title={`${product.name} mobile preview`}
+            maxFrameHeight={isCatalogWide ? MOBILE_CARD_PREVIEW_MAX_HEIGHT + 20 : MOBILE_CARD_PREVIEW_MAX_HEIGHT}
+            showViewportLabel={false}
             iframeLoading="eager"
+            className="w-full max-w-full"
           />
         ) : (
-          <div className="flex h-full min-h-[200px] items-center justify-center px-4 text-sm text-text-muted">
+          <div className="flex h-full min-h-[inherit] w-full items-center justify-center px-4 text-sm text-text-muted">
             Preview unavailable
           </div>
         )}
@@ -48,17 +50,16 @@ export function ShopProductHtmlPreviewCard({
         ) : null}
       </div>
 
-      <div className={`shop-product-html-preview-card__body flex flex-1 flex-col gap-2 ${isCatalogWide ? "p-5" : "p-4"}`}>
+      <div className={cn("shop-product-html-mobile-preview-card__body flex flex-1 flex-col gap-2", isCatalogWide ? "p-5" : "p-4")}>
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
           {product.category} &middot; {product.type}
         </p>
 
         <h3
-          className={
-            isCatalogWide
-              ? "line-clamp-2 font-display text-lg font-semibold leading-snug tracking-tight text-text"
-              : "line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text"
-          }
+          className={cn(
+            "line-clamp-2 font-display font-semibold leading-snug tracking-tight text-text",
+            isCatalogWide ? "text-lg" : "text-base",
+          )}
         >
           <Link href={getProductHref(product)} className="hover:text-primary">
             {product.name}

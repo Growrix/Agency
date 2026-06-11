@@ -1,14 +1,12 @@
-﻿import Link from "next/link";
-import { ArrowRightIcon, ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
+﻿import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
-import { HtmlProfileHeroCarousel } from "@/components/sections/HtmlProfileHeroCarousel";
-import { ShopProductCard } from "@/components/shop/ShopProductCard";
-import { getProductHref } from "@/lib/shop";
+import { HtmlBusinessProfilesCategoryHero } from "@/components/sections/HtmlBusinessProfilesCategoryHero";
+import { ShopProductHtmlMobilePreviewCard } from "@/components/shop/ShopProductHtmlMobilePreviewCard";
 import type { listPublicShopProducts } from "@/server/domain/catalog";
 
 const HTML_PROFILE_FAQ = [
@@ -81,84 +79,10 @@ export function HtmlBusinessProfilesCategoryLanding({
   products: Awaited<ReturnType<typeof listPublicShopProducts>>;
 }) {
   const featuredProfiles = products.slice(0, 8);
-  const carouselProfiles = products.length > 0
-    ? products
-    : [
-      { slug: "", name: "Cafe Business Profile", type: "Cafe", price: "$19" },
-      { slug: "", name: "Law Firm Business Profile", type: "Law Firm", price: "$19" },
-      { slug: "", name: "Agency Business Profile", type: "Agency", price: "$19" },
-      { slug: "", name: "Cleaning Business Profile", type: "Cleaning", price: "$19" },
-    ];
-  const heroSlides = carouselProfiles.map((profile) => ({
-    name: profile.name,
-    type: profile.type,
-    price: profile.price,
-    href: profile.slug ? getProductHref(profile) : "/products/category/html-business-profiles",
-    previewUrl:
-      ("embeddedPreviewUrl" in profile ? profile.embeddedPreviewUrl : undefined) ??
-      ("livePreviewUrl" in profile ? profile.livePreviewUrl : undefined) ??
-      undefined,
-  }));
 
   return (
     <>
-      <Section className="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
-        <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
-        <Container>
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All products
-          </Link>
-
-          <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-start xl:gap-10">
-            <div className="min-w-0 lg:col-span-5">
-              <Badge tone="primary" dot>HTML Business Profiles</Badge>
-              <h1 className="mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
-                Professional Business Profile Websites Ready in 24 Hours
-              </h1>
-              <p className="mt-5 text-lg leading-7 text-text-muted">
-                Choose a category-specific HTML business profile, customize it if needed, and launch a professional
-                online presence without a full website project.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href="#profiles" size="lg">
-                  Browse Business Profiles <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href="/products/category/html-business-profiles" variant="outline" size="lg">
-                  View Live Examples
-                </LinkButton>
-              </div>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-2">
-                {[
-                  { value: "50+", label: "Business Profiles" },
-                  { value: "24h", label: "Response Time" },
-                  { value: "4", label: "Service Levels" },
-                  { value: "100%", label: "Mobile Responsive" },
-                ].map((metric) => (
-                  <Card key={metric.label} className="p-4">
-                    <p className="font-display text-2xl tracking-tight">{metric.value}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-text-muted">{metric.label}</p>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            <div className="min-w-0 lg:col-span-7">
-              <Card className="p-5 sm:p-6">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Live mobile profile preview</p>
-                <div className="mt-4 min-w-0">
-                  <HtmlProfileHeroCarousel
-                    slides={heroSlides}
-                    previewMode="mobile-frame"
-                    mobilePreviewMaxHeight={400}
-                    mobilePreviewShowViewportLabel={false}
-                  />
-                </div>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <HtmlBusinessProfilesCategoryHero products={products} />
 
       <Section id="profiles" tone="inset" className="py-10 sm:py-14">
         <Container>
@@ -167,9 +91,11 @@ export function HtmlBusinessProfilesCategoryLanding({
             title="Browse Popular HTML Business Profiles"
             description="Business profile templates built for real businesses."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-10 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {featuredProfiles.map((product) => (
-              <ShopProductCard key={product.slug} product={product} />
+              <div key={product.slug} className="min-w-0">
+                <ShopProductHtmlMobilePreviewCard product={product} />
+              </div>
             ))}
           </div>
           <div className="mt-8">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowUpRightIcon, ShoppingBagIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { PreviewableImageFrame } from "@/components/media/PreviewableImageFrame";
@@ -9,11 +10,11 @@ import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLig
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
 import { WebsiteTemplateHtmlMobilePreviewSection } from "@/components/sections/WebsiteTemplateHtmlMobilePreviewSection";
-import { WebsiteTemplateHtmlProductPreviewHighlights } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
-import { ShopProductCard } from "@/components/shop/ShopProductCard";
-import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { HtmlBusinessProfileProductPreviewHighlights, WebsiteTemplateHtmlProductPreviewHighlights } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
+import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
+import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
 import {
   getTierCardBadgeClass,
@@ -496,13 +497,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
     return (
       <>
-        <Section className="pb-4 pt-6 sm:pb-6 sm:pt-8">
-          <Container width="shell">
+        <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
+          <Container width="content">
             <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
               <ArrowLeftIcon className="size-4" /> Back to products
             </Link>
 
-            <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_400px] lg:items-start xl:grid-cols-[1fr_420px]">
+            <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
               <div className="min-w-0 space-y-6">
                 <div className="lg:hidden">
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
@@ -511,17 +512,21 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
                 </div>
 
-                <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border lg:min-h-[620px]">
-                  {shouldUseEmbeddedPreview || (!product.image && product.embeddedPreviewUrl) ? (
-                    <div className="h-[420px] min-w-0 bg-black lg:h-[620px]">
-                      <iframe
-                        src={product.embeddedPreviewUrl}
-                        title={`${product.name} live preview`}
-                        className="h-full w-full border-0"
-                        loading="lazy"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                      />
-                    </div>
+                <div id="preview" className="min-w-0 w-full max-w-[440px]">
+                  {product.embeddedPreviewUrl ? (
+                    <Card className="overflow-hidden p-5 sm:p-6">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">
+                        Live mobile profile preview
+                      </p>
+                      <div className="mt-4 min-w-0">
+                        <WebsiteTemplateHtmlMobilePreviewFrame
+                          previewUrl={product.embeddedPreviewUrl}
+                          title={`${product.name} mobile preview`}
+                          maxFrameHeight={480}
+                          showViewportLabel={false}
+                        />
+                      </div>
+                    </Card>
                   ) : product.image ? (
                     <PreviewableImageFrame
                       src={product.image.src}
@@ -533,27 +538,50 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   )}
                 </div>
 
+                <HtmlBusinessProfileProductPreviewHighlights />
+
                 <div>
-                  <h2 className="font-display text-2xl font-semibold tracking-tight">Template Overview</h2>
-                  <p className="mt-3 text-base leading-7 text-text-muted">
-                    This product gives you a professional business profile foundation you can launch quickly, brand confidently, and upgrade as your business grows.
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Profile overview</h2>
+                  <p className="mt-3 text-sm leading-7 text-text-muted">{product.summary}</p>
+                  <p className="mt-3 text-sm leading-7 text-text-muted">
+                    This product gives you a professional business profile foundation you can launch quickly, brand
+                    confidently, and upgrade as your business grows.
                   </p>
-                  <p className="mt-3 text-base leading-7 text-text-muted">
-                    It is designed for founders, agencies, and service teams that need a creative profile website quickly, and want to establish a credible online presence without a long website project.
-                  </p>
-                  <ul className="mt-5 space-y-2">
-                    {[
-                      "Launch faster with a ready-to-use business profile structure.",
-                      "Build brand credibility with a clean, professional presentation.",
-                      "Choose your path from self-serve to complete done-for-you launch.",
-                      "Use this profile as the foundation for future digital growth.",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                </div>
+
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Who this is for</h2>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">{product.audience}</p>
+                  <ul className="mt-3 space-y-2">
+                    {useCases.slice(0, 3).map((item, index) => (
+                      <li key={`${item}-${index}`} className="flex items-start gap-2.5 text-sm leading-6 text-text-muted">
                         <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
                         {item}
                       </li>
                     ))}
                   </ul>
+                </div>
+
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">What&apos;s included</h2>
+                  <ul className="mt-3 space-y-2">
+                    {product.includes.slice(0, 3).map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {product.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-border bg-inset/40 px-3 py-1 text-xs text-text-muted"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 {galleryImages.length > 0 ? (
@@ -664,8 +692,67 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           </Container>
         </Section>
 
-        <Section className="border-t border-border pt-3 sm:pt-4">
-          <Container width="shell">
+        {product.embeddedPreviewUrl ? (
+          <Section className="border-t border-border py-10 sm:py-12">
+            <Container width="content">
+              <WebsiteTemplateHtmlMobilePreviewSection
+                previewUrl={product.embeddedPreviewUrl}
+                templateTitle={product.name}
+                previewOnRight
+                marketingVariant="business-profile"
+              />
+            </Container>
+          </Section>
+        ) : null}
+
+        <Section tone="inset" className="py-10 sm:py-12">
+          <Container width="content">
+            <div className="space-y-10">
+              <div>
+                <h2 className="font-display text-2xl font-semibold tracking-tight">At a glance</h2>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {product.highlights.map((highlight) => (
+                    <div key={highlight.label} className="rounded-2xl border border-border bg-surface px-4 py-4">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">{highlight.label}</p>
+                      <p className="mt-2 font-display text-lg font-semibold tracking-tight">{highlight.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {features.length > 0 ? (
+                <div>
+                  <h2 className="font-display text-2xl font-semibold tracking-tight">Key features</h2>
+                  <ul className="mt-4 space-y-2">
+                    {features.map((item, index) => (
+                      <li key={`${item}-${index}`} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              <div>
+                <h2 className="font-display text-2xl font-semibold tracking-tight">Stack</h2>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {product.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm text-text-muted"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="border-t border-border py-10 sm:py-12">
+          <Container width="content">
             <div className="space-y-8">
               <div className="max-w-4xl">
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Plan</h2>
@@ -823,7 +910,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               </p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {related.map((item) => (
-                  <ShopProductCard key={item.slug} product={item} />
+                  <ShopProductCatalogCard key={item.slug} product={item} />
                 ))}
               </div>
             </Container>
@@ -1272,7 +1359,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               <p className="mt-2 text-sm text-text-muted">Browse more website template HTML previews from this category.</p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
                 {related.map((item) => (
-                  <ShopProductHtmlPreviewCard key={item.slug} product={item} />
+                  <ShopProductCatalogCard key={item.slug} product={item} />
                 ))}
               </div>
             </Container>
@@ -2113,7 +2200,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
             </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (
-                <ShopProductCard key={item.slug} product={item} />
+                <ShopProductCatalogCard key={item.slug} product={item} />
               ))}
             </div>
           </Container>

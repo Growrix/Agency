@@ -1,10 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import {
+  HTML_PROFILE_CAROUSEL_AUTOPLAY_MS,
+  HTML_PROFILE_CAROUSEL_TRANSITION_MS,
+} from "@/lib/html-profile-carousel-config";
 import { cn } from "@/lib/utils";
 
 export type HtmlProfileHeroSlide = {
@@ -35,6 +40,10 @@ type HtmlProfileHeroCarouselProps = {
   mobilePreviewShowViewportLabel?: boolean;
 };
 
+function slideHasPreview(slide: HtmlProfileHeroSlide) {
+  return Boolean(slide.previewUrl || slide.previewImage?.src);
+}
+
 function CarouselPreviewFrame({
   slide,
   previewMode,
@@ -42,6 +51,7 @@ function CarouselPreviewFrame({
   desktopPreviewViewportHeight,
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
+  loadPreview = true,
 }: {
   slide: HtmlProfileHeroSlide;
   previewMode: HtmlProfileHeroCarouselPreviewMode;
@@ -49,7 +59,16 @@ function CarouselPreviewFrame({
   desktopPreviewViewportHeight?: number;
   mobilePreviewMaxHeight?: number;
   mobilePreviewShowViewportLabel?: boolean;
+  loadPreview?: boolean;
 }) {
+  if (!loadPreview) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-[#0a0a0a] px-4 text-center text-xs text-white/50">
+        {slide.name}
+      </div>
+    );
+  }
+
   if (slide.previewUrl && previewMode === "mobile-frame") {
     return (
       <div className="flex h-full w-full min-w-0 items-start justify-center overflow-hidden px-1 py-1">
@@ -59,6 +78,7 @@ function CarouselPreviewFrame({
           maxFrameHeight={mobilePreviewMaxHeight}
           showViewportLabel={mobilePreviewShowViewportLabel}
           className="w-full max-w-full"
+          iframeLoading="eager"
         />
       </div>
     );
@@ -73,6 +93,7 @@ function CarouselPreviewFrame({
         viewportHeight={desktopPreviewViewportHeight}
         className={desktopPreviewFit === "cover" ? "absolute inset-0 h-full w-full" : undefined}
         frameClassName={desktopPreviewFit === "cover" ? "h-full" : "rounded-md border border-border"}
+        iframeLoading="eager"
       />
     );
   }
@@ -83,7 +104,7 @@ function CarouselPreviewFrame({
         src={slide.previewUrl}
         title={`${slide.name} preview`}
         className="h-full w-full border-0"
-        loading="lazy"
+        loading="eager"
         referrerPolicy="strict-origin-when-cross-origin"
       />
     );
@@ -110,6 +131,9 @@ function CarouselPreviewFrame({
   );
 }
 
+const carouselNavButtonClassName =
+  "pointer-events-auto inline-flex size-9 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text shadow-sm backdrop-blur-sm transition hover:border-primary/40 hover:bg-surface hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:pointer-events-none disabled:opacity-40";
+
 export function HtmlProfileHeroCarousel({
   slides,
   ctaLabel = "View Profile",
@@ -131,31 +155,138 @@ export function HtmlProfileHeroCarousel({
     },
     [emptyFallbackSlide],
   );
-  const safeSlides = useMemo(
-    () => (slides.length > 0
-      ? slides
-      : [fallbackSlide]),
-    [fallbackSlide, slides],
-  );
+
+  const safeSlides = useMemo(() => {
+    const previewable = slides.filter(slideHasPreview);
+    if (previewable.length > 0) {
+      return previewable;
+    }
+
+    return slideHasPreview(fallbackSlide) ? [fallbackSlide] : [fallbackSlide];
+  }, [fallbackSlide, slides]);
+
   const loopSlides = useMemo(() => [...safeSlides, safeSlides[0]], [safeSlides]);
+  const cloneIndex = safeSlides.length;
+
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const [mountedLogicalIndexes, setMountedLogicalIndexes] = useState<Set<number>>(() => new Set([0]));
+  const isTransitioningRef = useRef(false);
+
+  const canNavigate = safeSlides.length > 1;
+
+  const logicalIndex = index >= cloneIndex ? 0 : index;
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setAnimate(true);
-      setIndex((prev) => prev + 1);
-    }, 2000);
+    setMountedLogicalIndexes((prev) => {
+      const next = new Set(prev);
+      next.add(logicalIndex);
+      next.add((logicalIndex - 1 + safeSlides.length) % safeSlides.length);
+      next.add((logicalIndex + 1) % safeSlides.length);
+      return next;
+    });
+  }, [logicalIndex, safeSlides.length]);
 
-    return () => window.clearInterval(timer);
+  const finishLoopReset = useCallback(() => {
+    isTransitioningRef.current = true;
+    setAnimate(false);
+    setIndex(0);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        isTransitioningRef.current = false;
+        setAnimate(true);
+      });
+    });
   }, []);
 
-  const handleTransitionEnd = () => {
-    if (index === safeSlides.length) {
-      setAnimate(false);
-      setIndex(0);
+  const goNext = useCallback(() => {
+    if (!canNavigate || isTransitioningRef.current) {
+      return;
     }
-  };
+
+    if (index >= cloneIndex) {
+      finishLoopReset();
+      return;
+    }
+
+    isTransitioningRef.current = true;
+    setAnimate(true);
+    setIndex((prev) => prev + 1);
+  }, [canNavigate, cloneIndex, finishLoopReset, index]);
+
+  const goPrev = useCallback(() => {
+    if (!canNavigate || isTransitioningRef.current) {
+      return;
+    }
+
+    isTransitioningRef.current = true;
+
+    if (index === 0) {
+      setAnimate(false);
+      setIndex(cloneIndex);
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          setAnimate(true);
+          setIndex(safeSlides.length - 1);
+        });
+      });
+      return;
+    }
+
+    setAnimate(true);
+    setIndex((prev) => prev - 1);
+  }, [canNavigate, cloneIndex, index, safeSlides.length]);
+
+  useEffect(() => {
+    if (isPaused || !canNavigate) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      goNext();
+    }, HTML_PROFILE_CAROUSEL_AUTOPLAY_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [isPaused, canNavigate, goNext, logicalIndex]);
+
+  const handleTransitionEnd = useCallback(
+    (event: React.TransitionEvent<HTMLDivElement>) => {
+      if (event.target !== event.currentTarget || event.propertyName !== "transform") {
+        return;
+      }
+
+      if (index >= cloneIndex) {
+        finishLoopReset();
+        return;
+      }
+
+      isTransitioningRef.current = false;
+    },
+    [cloneIndex, finishLoopReset, index],
+  );
+
+  useEffect(() => {
+    if (index > cloneIndex) {
+      finishLoopReset();
+      return;
+    }
+
+    if (!isTransitioningRef.current) {
+      return;
+    }
+
+    const failSafe = window.setTimeout(() => {
+      if (index >= cloneIndex) {
+        finishLoopReset();
+        return;
+      }
+
+      isTransitioningRef.current = false;
+    }, HTML_PROFILE_CAROUSEL_TRANSITION_MS + 250);
+
+    return () => window.clearTimeout(failSafe);
+  }, [cloneIndex, finishLoopReset, index]);
 
   const isMobileFrame = previewMode === "mobile-frame";
 
@@ -165,59 +296,106 @@ export function HtmlProfileHeroCarousel({
         mobileFrameMinHeightClass,
       )
     : previewMode === "desktop-scaled" && fillHeight
-      ? "relative min-h-0 flex-1 overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
+      ? "relative min-h-[320px] min-w-0 flex-1 overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
       : previewMode === "desktop-scaled"
         ? "overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
         : "min-h-[320px] flex-1 overflow-hidden rounded-md border border-border bg-black lg:min-h-[480px]";
 
   return (
-    <div className={cn(
-      "overflow-hidden rounded-md border border-border bg-inset/30",
-      fillHeight && !isMobileFrame ? "flex h-full min-h-0 flex-col" : "min-w-0",
-      !isMobileFrame && !fillHeight && "h-full",
-    )}>
+    <div
+      className={cn(
+        "overflow-hidden rounded-md border border-border bg-inset/30",
+        fillHeight && !isMobileFrame ? "flex h-full min-h-0 flex-col" : "min-w-0",
+        !isMobileFrame && !fillHeight && "h-full",
+      )}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsPaused(false);
+        }
+      }}
+    >
       <div
         className={cn(
-          "flex",
-          fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
-          animate && "transition-transform duration-500 ease-out",
+          "relative min-w-0",
+          fillHeight && !isMobileFrame && "flex min-h-0 flex-1 flex-col",
         )}
-        style={{ transform: `translateX(-${index * 100}%)` }}
-        onTransitionEnd={handleTransitionEnd}
       >
-        {loopSlides.map((slide, slideIndex) => (
-          <article
-            key={`${slide.name}-${slideIndex}`}
-            className={cn(
-              "flex min-w-full flex-col p-3",
-              fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
-            )}
-          >
-            <div className={previewFrameClassName}>
-              <CarouselPreviewFrame
-                slide={slide}
-                previewMode={previewMode}
-                desktopPreviewFit={desktopPreviewFit}
-                desktopPreviewViewportHeight={desktopPreviewViewportHeight}
-                mobilePreviewMaxHeight={mobilePreviewMaxHeight}
-                mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
-              />
-            </div>
-            <div className={cn("mt-3 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
-              <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
-              <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
-              <div className="mt-2 flex items-center justify-between gap-2">
-                <span className="text-sm font-semibold text-primary">From {slide.price}</span>
-                <Link
-                  href={slide.href}
-                  className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
-                >
-                  {ctaLabel}
-                </Link>
-              </div>
-            </div>
-          </article>
-        ))}
+        {canNavigate ? (
+          <div className="pointer-events-none absolute inset-x-0 top-3 bottom-23 z-20 flex items-center justify-between px-1.5 sm:px-2">
+            <button
+              type="button"
+              className={carouselNavButtonClassName}
+              aria-label="Previous preview"
+              onClick={goPrev}
+            >
+              <ChevronLeftIcon className="size-5" aria-hidden />
+            </button>
+            <button
+              type="button"
+              className={carouselNavButtonClassName}
+              aria-label="Next preview"
+              onClick={goNext}
+            >
+              <ChevronRightIcon className="size-5" aria-hidden />
+            </button>
+          </div>
+        ) : null}
+
+        <div
+          className={cn(
+            "flex",
+            fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
+            animate && "ease-out",
+          )}
+          style={{
+            transform: `translateX(-${index * 100}%)`,
+            transition: animate ? `transform ${HTML_PROFILE_CAROUSEL_TRANSITION_MS}ms ease-out` : "none",
+          }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {loopSlides.map((slide, slideIndex) => {
+            const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
+            const loadPreview = mountedLogicalIndexes.has(slideLogicalIndex);
+
+            return (
+              <article
+                key={`${slide.name}-${slideIndex}`}
+                className={cn(
+                  "flex min-w-full flex-col p-3",
+                  fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
+                )}
+              >
+                <div className={cn(previewFrameClassName, fillHeight && !isMobileFrame && "flex flex-col")}>
+                  <CarouselPreviewFrame
+                    slide={slide}
+                    previewMode={previewMode}
+                    desktopPreviewFit={desktopPreviewFit}
+                    desktopPreviewViewportHeight={desktopPreviewViewportHeight}
+                    mobilePreviewMaxHeight={mobilePreviewMaxHeight}
+                    mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
+                    loadPreview={loadPreview}
+                  />
+                </div>
+                <div className={cn("mt-3 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
+                  <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
+                  <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
+                  <div className="mt-2 flex items-center justify-between gap-2">
+                    <span className="text-sm font-semibold text-primary">From {slide.price}</span>
+                    <Link
+                      href={slide.href}
+                      className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
+                    >
+                      {ctaLabel}
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
