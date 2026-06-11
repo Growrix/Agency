@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
+import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
 import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
@@ -132,13 +133,6 @@ function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterS
 
 export default async function ShopPage({ searchParams }: { searchParams: SearchParams }) {
   const filters = await searchParams;
-  if (
-    filters.category === "saas-templates" ||
-    filters.category === "website-templates" ||
-    filters.category === "ready-websites"
-  ) {
-    redirect("/products/category/website-templates");
-  }
   const [allProducts, filteredProducts] = await Promise.all([
     listPublicShopProducts(),
     listPublicShopProducts(filters),
@@ -246,9 +240,13 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 </div>
               ) : (
                 <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                  {filteredProducts.map((product) => (
-                    <ShopProductCard key={product.slug} product={product} />
-                  ))}
+                  {filteredProducts.map((product) =>
+                    product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG ? (
+                      <ShopProductHtmlPreviewCard key={product.slug} product={product} />
+                    ) : (
+                      <ShopProductCard key={product.slug} product={product} />
+                    ),
+                  )}
                 </div>
               )}
             </div>

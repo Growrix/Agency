@@ -6,6 +6,7 @@ import {
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
   getHtmlBusinessProfilePreviewUrl,
 } from "@/lib/html-business-profiles";
+import { getWebsiteTemplateHtmlPreviewUrl } from "@/lib/website-templates-html-preview";
 import { getProductTypeDefinition, PRODUCT_PARENT_CATEGORY_LABELS } from "@/lib/product-taxonomy";
 import { isReservedProductRouteSlug } from "@/lib/shop";
 import type {
@@ -56,8 +57,9 @@ export type PublicShopProductRecord = ManagedProductRecord & { price_cents: numb
  */
 const FALLBACK_CATALOG_POLICY = {
   includeHtmlBusinessProfiles: true,
-  includeAnchorProducts: true,
-  includeHtmlEmailPacks: true,
+  includeWebsiteTemplatesHtmlPreview: true,
+  includeAnchorProducts: false,
+  includeHtmlEmailPacks: false,
 } as const;
 
 const LEGACY_MOCK_PORTFOLIO_SLUGS = new Set([
@@ -77,6 +79,27 @@ const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
   "new-product",
 ]);
 
+const RETIRED_SEED_PRODUCT_SLUGS = new Set([
+  "saas-launchpad-nextjs",
+  "ai-chatbot-qualification-starter",
+  "mcp-server-kickstart-kit",
+  "technical-seo-growth-kit",
+  "business-launch-bundle",
+  "free-conversion-landing-starter",
+  "email-pack-saas-lifecycle",
+  "email-pack-ecommerce-revenue",
+  "email-pack-business-operations",
+]);
+
+const RETIRED_SEED_CATEGORY_SLUGS = new Set([
+  "html-templates",
+  "ai-automation",
+  "mcp-servers",
+  "seo-toolkits",
+  "bundles",
+  "free-products",
+]);
+
 const LEGACY_MOCK_PORTFOLIO_PLACEHOLDER_SLUGS = new Set(["new-project"]);
 const PRODUCT_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -88,8 +111,15 @@ function isLikelyPlaceholderUrl(value: string | undefined) {
   return /demo\.example\.com|project\.example\.com/i.test(value);
 }
 
+function isRetiredSeedProduct(product: Pick<ManagedProductRecord, "slug" | "categorySlug">) {
+  return (
+    RETIRED_SEED_PRODUCT_SLUGS.has(normalizeProductSlug(product.slug)) ||
+    RETIRED_SEED_CATEGORY_SLUGS.has(product.categorySlug)
+  );
+}
+
 function isPlaceholderProduct(product: ManagedProductRecord) {
-  if (LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug)) {
+  if (LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug) || isRetiredSeedProduct(product)) {
     return true;
   }
 
@@ -223,6 +253,78 @@ function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
       gallery: [],
     };
   }).map(withParentTaxonomy);
+}
+
+function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] {
+  const previewUrl = getWebsiteTemplateHtmlPreviewUrl("01-bedrock-construction");
+
+  return [{
+    slug: "website-template-html-preview-bedrock-construction",
+    name: "Bedrock Construction HTML Preview",
+    price: "$149",
+    livePreviewUrl: previewUrl,
+    embeddedPreviewUrl: previewUrl,
+    parentCategoryLabel: PRODUCT_PARENT_CATEGORY_LABELS["business-professional"],
+    parentCategorySlug: "business-professional",
+    category: "Website Templates HTML Preview",
+    categorySlug: "website-templates-html-preview",
+    type: "Website Template HTML",
+    typeSlug: "website-template-html",
+    industry: "Website Templates",
+    industrySlug: "website-templates",
+    tag: "Preview",
+    published: true,
+    teaser: "Embedded HTML preview product card for Bedrock Construction website template.",
+    summary: "A preview-first website template card powered by local HTML rendering and category-based shop routing.",
+    audience: "Buyers who want to inspect live HTML before purchasing template packages.",
+    features: [
+      "Iframe-safe embedded HTML preview",
+      "Template-only, setup, and done-for-you pricing paths",
+      "Shop-ready category routing",
+    ],
+    previewVariant: "marketing",
+    includes: ["Template files", "Responsive layout baseline", "Launch-ready sections"],
+    inScope: ["Template package", "Embedded preview", "Category routing"],
+    outOfScope: ["Custom development", "Complex integrations"],
+    enhancementPlan: ["Add more template previews", "Connect more HTML files to this category"],
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    variants: [
+      {
+        slug: "standard",
+        tier_name: "Standard",
+        title: "Bedrock Construction Standard",
+        price: "$149",
+        fulfillment_type: "digital_download",
+        includes: ["Template files", "Responsive layout", "Setup notes"],
+        comparison_points: ["Self-serve launch", "Template files"],
+        recommended: true,
+      },
+      {
+        slug: "premium",
+        tier_name: "Premium",
+        title: "Bedrock Construction Premium",
+        price: "$499",
+        fulfillment_type: "hybrid_support",
+        includes: ["Brand setup", "Content population", "Core integrations"],
+        comparison_points: ["Brand setup", "Integration support"],
+      },
+      {
+        slug: "done-for-you",
+        tier_name: "Done-For-You",
+        title: "Bedrock Construction Done-For-You",
+        price: "Custom Pricing",
+        fulfillment_type: "done_for_you_service",
+        includes: ["Planning", "Full implementation", "Launch support"],
+        comparison_points: ["Full implementation", "Launch support"],
+      },
+    ],
+    highlights: [
+      { label: "Preview", value: "Live HTML" },
+      { label: "Category", value: "Website Templates HTML Preview" },
+    ],
+    image: null,
+    gallery: [],
+  }].map(withParentTaxonomy);
 }
 
 function getDefaultAnchorProducts(): ManagedProductRecord[] {
@@ -808,9 +910,12 @@ async function listAllPublicProducts() {
   const localHtmlTemplates = FALLBACK_CATALOG_POLICY.includeHtmlBusinessProfiles
     ? getDefaultHtmlBusinessProfileProducts()
     : [];
+  const localWebsiteTemplateHtmlPreviews = FALLBACK_CATALOG_POLICY.includeWebsiteTemplatesHtmlPreview
+    ? getDefaultWebsiteTemplateHtmlPreviewProducts()
+    : [];
   const managedProducts = database.products.filter((product) => !isPlaceholderProduct(product));
 
-  return mergeCatalogProducts(localHtmlTemplates, managedProducts, cmsProducts, cmsHtmlTemplates)
+  return mergeCatalogProducts(localHtmlTemplates, localWebsiteTemplateHtmlPreviews, managedProducts, cmsProducts, cmsHtmlTemplates)
     .filter((product) => !isPlaceholderProduct(product));
 }
 
@@ -836,7 +941,7 @@ function stripLegacyMockCatalog(database: Awaited<ReturnType<typeof readDatabase
   return {
     ...database,
     portfolio_projects: database.portfolio_projects.filter((project) => !LEGACY_MOCK_PORTFOLIO_SLUGS.has(project.slug)),
-    products: database.products.filter((product) => !LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug)),
+    products: database.products.filter((product) => !isPlaceholderProduct(product)),
   };
 }
 

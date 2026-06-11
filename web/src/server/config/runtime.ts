@@ -1,11 +1,14 @@
 import "server-only";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 type RuntimeConfig = {
   appBaseUrl: string;
   htmlBusinessProfiles: {
     directory: string;
-    directoryCandidates: string[];
+  };
+  websiteTemplatesHtmlPreview: {
+    directory: string;
   };
   contact: {
     toEmail?: string;
@@ -50,10 +53,6 @@ type RuntimeConfig = {
 };
 
 const DEFAULT_FALLBACK_FROM_EMAIL = "Growrix <onboarding@resend.dev>";
-const HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS: ReadonlyArray<ReadonlyArray<string>> = [
-  ["public", "previews", "html-business-profiles"],
-  ["web", "public", "previews", "html-business-profiles"],
-];
 
 let cachedRuntimeConfig: RuntimeConfig | null = null;
 
@@ -78,32 +77,15 @@ function parseBaseUrl(value: string | undefined) {
   }
 }
 
-function parseDirectoryPath(value: string | undefined, fallbackSegments: string[]) {
+function resolveDirectoryPath(value: string | undefined, fallbackCandidates: string[][]) {
   const candidate = value?.trim();
-  if (!candidate) {
-    return path.resolve(process.cwd(), ...fallbackSegments);
+  if (candidate) {
+    return path.isAbsolute(candidate) ? candidate : path.resolve(process.cwd(), candidate);
   }
 
-  return path.isAbsolute(candidate) ? candidate : path.resolve(process.cwd(), candidate);
-}
-
-function buildDirectoryCandidates(value: string | undefined, fallbackSegmentsList: ReadonlyArray<ReadonlyArray<string>>) {
-  const candidates = new Set<string>();
-  const configured = value?.trim();
-
-  if (configured) {
-    candidates.add(
-      path.isAbsolute(configured)
-        ? path.normalize(configured)
-        : path.resolve(process.cwd(), configured),
-    );
-  }
-
-  for (const segments of fallbackSegmentsList) {
-    candidates.add(path.resolve(process.cwd(), ...segments));
-  }
-
-  return Array.from(candidates);
+  const resolvedCandidates = fallbackCandidates.map((segments) => path.resolve(process.cwd(), ...segments));
+  const existingCandidate = resolvedCandidates.find((resolvedPath) => existsSync(resolvedPath));
+  return existingCandidate ?? resolvedCandidates[0];
 }
 
 export function getRuntimeConfig(): RuntimeConfig {
@@ -114,8 +96,26 @@ export function getRuntimeConfig(): RuntimeConfig {
   cachedRuntimeConfig = {
     appBaseUrl: parseBaseUrl(process.env.NEXT_PUBLIC_SITE_URL),
     htmlBusinessProfiles: {
-      directory: parseDirectoryPath(process.env.HTML_BUSINESS_PROFILES_DIRECTORY, [...HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS[0]]),
-      directoryCandidates: buildDirectoryCandidates(process.env.HTML_BUSINESS_PROFILES_DIRECTORY, HTML_BUSINESS_PROFILES_FALLBACK_SEGMENTS),
+      directory: resolveDirectoryPath(
+        process.env.HTML_BUSINESS_PROFILES_DIRECTORY,
+        [
+          ["..", "Shop", "business-professional", "business-profile-pages"],
+          ["Shop", "business-professional", "business-profile-pages"],
+          [".", "Shop", "business-professional", "business-profile-pages"],
+          ["..", "..", "Shop", "business-professional", "business-profile-pages"],
+        ],
+      ),
+    },
+    websiteTemplatesHtmlPreview: {
+      directory: resolveDirectoryPath(
+        process.env.WEBSITE_TEMPLATES_HTML_PREVIEW_DIRECTORY,
+        [
+          ["..", "Shop", "website-templates-html"],
+          ["Shop", "website-templates-html"],
+          [".", "Shop", "website-templates-html"],
+          ["..", "..", "Shop", "website-templates-html"],
+        ],
+      ),
     },
     contact: {
       toEmail: process.env.CONTACT_TO_EMAIL,

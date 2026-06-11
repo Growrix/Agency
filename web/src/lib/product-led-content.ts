@@ -43,6 +43,7 @@ export const PRODUCT_CATEGORY_CHIPS = [
   { label: "All products", href: "/products" },
   { label: "HTML templates", href: "/products/category/html-business-profiles" },
   { label: "Website templates", href: "/products/category/website-templates" },
+  { label: "Website templates HTML preview", href: "/products/category/website-templates-html-preview" },
 ] as const;
 
 export type SolutionAudience = {

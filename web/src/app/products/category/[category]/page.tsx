@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { HtmlBusinessProfilesServicePage } from "@/app/services/[slug]/page";
 import { WebsiteTemplatesCategoryLanding } from "@/components/sections/WebsiteTemplatesCategoryLanding";
+import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 type PageProps = {
@@ -20,6 +21,10 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
   if (category === "website-templates") {
     const products = await listPublicShopProducts({ category: "website-templates" });
     return <WebsiteTemplatesCategoryLanding products={products} />;
+  }
+  if (category === "website-templates-html-preview") {
+    const products = await listPublicShopProducts({ category: "website-templates-html-preview" });
+    return <WebsiteTemplatesHtmlPreviewCategoryLanding products={products} />;
   }
 
   redirect("/products");

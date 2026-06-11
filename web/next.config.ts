@@ -50,6 +50,10 @@ const nextConfig: NextConfig = {
       "../Shop/business-professional/business-profile-pages/**/*",
       "Shop/business-professional/business-profile-pages/**/*",
     ],
+    "/api/website-templates-html-preview/[templateSlug]": [
+      "../Shop/website-templates-html/**/*",
+      "Shop/website-templates-html/**/*",
+    ],
   },
   images: {
     remotePatterns: [
@@ -108,7 +112,19 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/((?!api/html-business-profiles).*)",
+        source: "/api/website-templates-html-preview/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          { key: "Content-Security-Policy", value: htmlPreviewCsp },
+        ],
+      },
+      {
+        source: "/((?!api/html-business-profiles|api/website-templates-html-preview).*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
