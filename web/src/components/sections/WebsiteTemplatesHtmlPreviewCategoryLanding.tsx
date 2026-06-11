@@ -57,7 +57,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
   const catalogProducts = products.filter(
     (product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
   );
-  const catalogGridProducts = catalogProducts.slice(0, 12);
+  const catalogGridProducts = catalogProducts;
   const standardPrice = getVariantPrice(products, "standard", "$149");
   const premiumPrice = getVariantPrice(products, "premium", "$499");
   const launchPrice = getVariantPrice(products, "done-for-you", "Custom Pricing");
@@ -176,7 +176,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
           <SectionHeading
             eyebrow="Template catalog"
             title="HTML preview templates you can buy right now"
-            description="Twelve live HTML website templates in a compact three-column grid — preview in-frame, then open the product page to buy."
+            description="Live HTML website templates in a compact grid — preview in-frame, then open the product page to buy."
           />
           <div className="mt-8 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {catalogGridProducts.map((product) => (

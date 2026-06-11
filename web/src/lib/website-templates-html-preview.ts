@@ -1,6 +1,7 @@
 export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG = "website-templates-html-preview" as const;
 
-export type WebsiteTemplateHtmlPreviewRoot = "website-templates-html" | "html-business-profiles";
+/** Public URL segment and shop folder name for HTML website template files. */
+export const WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT = "html-template-websites" as const;
 
 export type WebsiteTemplateHtmlPreviewRecord = {
   slug: string;
@@ -8,7 +9,6 @@ export type WebsiteTemplateHtmlPreviewRecord = {
   title: string;
   type: string;
   price: string;
-  previewRoot?: WebsiteTemplateHtmlPreviewRoot;
   industry?: string;
   teaser?: string;
   summary?: string;
@@ -18,7 +18,6 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
   {
     slug: "01-bedrock-construction",
     fileName: "01-BedrockConstruction.html",
-    previewRoot: "website-templates-html",
     title: "Bedrock Construction",
     type: "Construction & Trades",
     price: "$149",
@@ -27,103 +26,24 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     summary: "A trades-focused website template with embedded HTML preview, built for contractors who need credibility fast.",
   },
   {
-    slug: "02-luminary-studio",
-    fileName: "profile-02-luminary-studio.html",
-    previewRoot: "html-business-profiles",
-    title: "Luminary Studio",
-    type: "Creative Agency",
+    slug: "02-super-shop-commerce",
+    fileName: "02-SuperShopCommerce.html",
+    title: "SuperShop Commerce",
+    type: "E-Commerce",
     price: "$149",
-    industry: "Creative & Marketing",
+    industry: "Retail & E-Commerce",
+    teaser: "Premium multi-category storefront with product discovery, promos, and conversion-ready checkout flows.",
+    summary: "A full-width e-commerce website template with category browsing, deals, and mobile-first shopping UX.",
   },
   {
-    slug: "03-nexus-digital",
-    fileName: "profile-03-nexus-digital.html",
-    previewRoot: "html-business-profiles",
-    title: "Nexus Digital",
-    type: "Digital Agency",
+    slug: "03-primora-supershop",
+    fileName: "03. primora-supershop-website.html",
+    title: "Primora Super Shop",
+    type: "E-Commerce",
     price: "$149",
-    industry: "Creative & Marketing",
-  },
-  {
-    slug: "04-law-firm",
-    fileName: "profile-04-law-firm.html",
-    previewRoot: "html-business-profiles",
-    title: "Sterling Law Group",
-    type: "Professional Services",
-    price: "$149",
-    industry: "Legal",
-  },
-  {
-    slug: "05-yoga-studio",
-    fileName: "profile-05-yoga-studio.html",
-    previewRoot: "html-business-profiles",
-    title: "Solstice Yoga Studio",
-    type: "Wellness & Fitness",
-    price: "$149",
-    industry: "Wellness",
-  },
-  {
-    slug: "06-barbershop",
-    fileName: "profile-06-barbershop.html",
-    previewRoot: "html-business-profiles",
-    title: "Iron & Blade Barbershop",
-    type: "Local Business",
-    price: "$149",
-    industry: "Personal Care",
-  },
-  {
-    slug: "07-real-estate",
-    fileName: "profile-07-real-estate.html",
-    previewRoot: "html-business-profiles",
-    title: "Harbor Real Estate",
-    type: "Real Estate",
-    price: "$149",
-    industry: "Real Estate",
-  },
-  {
-    slug: "08-food-truck",
-    fileName: "profile-08-food-truck.html",
-    previewRoot: "html-business-profiles",
-    title: "Rolling Bites Food Truck",
-    type: "Food & Hospitality",
-    price: "$149",
-    industry: "Food & Beverage",
-  },
-  {
-    slug: "09-dental-clinic",
-    fileName: "profile-09-dental-clinic.html",
-    previewRoot: "html-business-profiles",
-    title: "BrightSmile Dental",
-    type: "Healthcare",
-    price: "$149",
-    industry: "Healthcare",
-  },
-  {
-    slug: "10-personal-trainer",
-    fileName: "profile-10-personal-trainer.html",
-    previewRoot: "html-business-profiles",
-    title: "PeakForm Training",
-    type: "Fitness Coach",
-    price: "$149",
-    industry: "Fitness",
-  },
-  {
-    slug: "11-flower-shop",
-    fileName: "profile-11-flower-shop.html",
-    previewRoot: "html-business-profiles",
-    title: "Petal & Stem Florals",
-    type: "Retail & Local",
-    price: "$149",
-    industry: "Retail",
-  },
-  {
-    slug: "12-tutoring",
-    fileName: "profile-12-tutoring.html",
-    previewRoot: "html-business-profiles",
-    title: "BrightPath Tutoring",
-    type: "Education",
-    price: "$149",
-    industry: "Education",
+    industry: "Retail & E-Commerce",
+    teaser: "Premium super shop layout with fresh produce, member rewards, same-day delivery, and conversion-ready category pages.",
+    summary: "A polished grocery and multi-category retail website template with loyalty messaging, promos, and mobile-first shopping UX.",
   },
 ];
 
@@ -138,11 +58,10 @@ export function listWebsiteTemplateHtmlPreviews() {
 export function getWebsiteTemplateHtmlPreviewUrl(templateSlug: string) {
   const template = getWebsiteTemplateHtmlPreviewBySlug(templateSlug);
   if (!template) {
-    return `/previews/website-templates-html/${templateSlug}.html`;
+    return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${templateSlug}.html`;
   }
 
-  const previewRoot = template.previewRoot ?? "website-templates-html";
-  return `/previews/${previewRoot}/${template.fileName}`;
+  return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${encodeURIComponent(template.fileName)}`;
 }
 
 export function getWebsiteTemplateHtmlPreviewProductSlug(templateSlug: string) {

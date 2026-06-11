@@ -83,10 +83,27 @@ const nextConfig: NextConfig = {
         destination: "/products/category/website-templates",
         permanent: true,
       },
+      {
+        source: "/previews/website-templates-html/:path*",
+        destination: "/previews/html-template-websites/:path*",
+        permanent: true,
+      },
     ];
   },
   async headers() {
     return [
+      {
+        source: "/previews/html-template-websites/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          { key: "Content-Security-Policy", value: htmlPreviewCsp },
+        ],
+      },
       {
         source: "/previews/website-templates-html/:path*",
         headers: [
@@ -136,7 +153,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/((?!api/html-business-profiles|api/website-templates-html-preview|previews/website-templates-html|previews/html-business-profiles).*)",
+        source: "/((?!api/html-business-profiles|api/website-templates-html-preview|previews/html-template-websites|previews/website-templates-html|previews/html-business-profiles).*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
