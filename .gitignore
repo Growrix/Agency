@@ -1,6 +1,8 @@
-# Ignore environment variable files
+# Ignore environment variable files (keep .env.example tracked)
 .env
-.env.*
+.env.local
+.env.*.local
+!.env.example
 
 # System files
 .DS_Store
@@ -15,6 +17,9 @@ build/
 out/
 coverage/
 studio/dist/
+web/test-results/
+web/.data/
+web/web/.data/
 
 # Debug and log files
 npm-debug.log*
