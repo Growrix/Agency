@@ -56,8 +56,8 @@ export type PublicShopProductRecord = ManagedProductRecord & { price_cents: numb
  */
 const FALLBACK_CATALOG_POLICY = {
   includeHtmlBusinessProfiles: true,
-  includeAnchorProducts: true,
-  includeHtmlEmailPacks: true,
+  includeAnchorProducts: false,
+  includeHtmlEmailPacks: false,
 } as const;
 
 const LEGACY_MOCK_PORTFOLIO_SLUGS = new Set([
@@ -77,6 +77,27 @@ const LEGACY_MOCK_PRODUCT_SLUGS = new Set([
   "new-product",
 ]);
 
+const RETIRED_SEED_PRODUCT_SLUGS = new Set([
+  "saas-launchpad-nextjs",
+  "ai-chatbot-qualification-starter",
+  "mcp-server-kickstart-kit",
+  "technical-seo-growth-kit",
+  "business-launch-bundle",
+  "free-conversion-landing-starter",
+  "email-pack-saas-lifecycle",
+  "email-pack-ecommerce-revenue",
+  "email-pack-business-operations",
+]);
+
+const RETIRED_SEED_CATEGORY_SLUGS = new Set([
+  "html-templates",
+  "ai-automation",
+  "mcp-servers",
+  "seo-toolkits",
+  "bundles",
+  "free-products",
+]);
+
 const LEGACY_MOCK_PORTFOLIO_PLACEHOLDER_SLUGS = new Set(["new-project"]);
 const PRODUCT_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -88,8 +109,15 @@ function isLikelyPlaceholderUrl(value: string | undefined) {
   return /demo\.example\.com|project\.example\.com/i.test(value);
 }
 
+function isRetiredSeedProduct(product: Pick<ManagedProductRecord, "slug" | "categorySlug">) {
+  return (
+    RETIRED_SEED_PRODUCT_SLUGS.has(normalizeProductSlug(product.slug)) ||
+    RETIRED_SEED_CATEGORY_SLUGS.has(product.categorySlug)
+  );
+}
+
 function isPlaceholderProduct(product: ManagedProductRecord) {
-  if (LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug)) {
+  if (LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug) || isRetiredSeedProduct(product)) {
     return true;
   }
 
@@ -836,7 +864,7 @@ function stripLegacyMockCatalog(database: Awaited<ReturnType<typeof readDatabase
   return {
     ...database,
     portfolio_projects: database.portfolio_projects.filter((project) => !LEGACY_MOCK_PORTFOLIO_SLUGS.has(project.slug)),
-    products: database.products.filter((product) => !LEGACY_MOCK_PRODUCT_SLUGS.has(product.slug)),
+    products: database.products.filter((product) => !isPlaceholderProduct(product)),
   };
 }
 

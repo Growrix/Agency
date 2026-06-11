@@ -104,35 +104,29 @@ describe("catalog domain", () => {
     assert.equal(htmlProducts.every((product) => product.slug.startsWith("html-business-profile-")), true);
   });
 
-  it("seeds anchor catalog products with explicit variants, bundle, and free offers", async () => {
+  it("does not expose retired fallback catalog products", async () => {
     const products = await listPublicShopProducts();
     const bundle = products.find((product) => product.slug === "business-launch-bundle");
     const freeStarter = products.find((product) => product.slug === "free-conversion-landing-starter");
     const starter = products.find((product) => product.slug === "saas-launchpad-nextjs");
     const emailPack = products.find((product) => product.slug === "email-pack-saas-lifecycle");
 
-    assert.equal(Boolean(bundle), true);
-    assert.equal(Boolean(freeStarter), true);
-    assert.equal(Boolean(emailPack), true);
-    assert.equal(starter?.variants?.length, 3);
-    assert.equal(starter?.variants?.some((variant) => variant.tier_name === "Done-For-You"), true);
+    assert.equal(Boolean(bundle), false);
+    assert.equal(Boolean(freeStarter), false);
+    assert.equal(Boolean(emailPack), false);
+    assert.equal(Boolean(starter), false);
   });
 
-  it("uses planned pricing tiers for html business profiles and email packs", async () => {
+  it("uses planned pricing tiers for html business profiles only", async () => {
     const htmlProfiles = await listPublicShopProducts({ category: "html-business-profiles" });
     const emailPacks = await listPublicShopProducts({ type: "email-templates" });
     const firstProfile = htmlProfiles[0];
-    const firstEmailPack = emailPacks[0];
 
     assert.equal(Boolean(firstProfile), true);
     assert.equal(firstProfile?.price, "$19");
     assert.equal(firstProfile?.variants?.find((variant) => variant.tier_name === "Premium")?.price, "$49");
     assert.equal(firstProfile?.variants?.find((variant) => variant.tier_name === "Done-For-You")?.price, "$299-$799");
-
-    assert.equal(Boolean(firstEmailPack), true);
-    assert.equal(firstEmailPack?.price, "$15");
-    assert.equal(firstEmailPack?.variants?.find((variant) => variant.tier_name === "Premium")?.price, "$39");
-    assert.equal(firstEmailPack?.variants?.find((variant) => variant.tier_name === "Done-For-You")?.price, "$199-$499");
+    assert.equal(emailPacks.length, 0);
   });
 
   it("rejects reserved product slugs that conflict with /products routes", async () => {

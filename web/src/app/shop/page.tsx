@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
@@ -132,13 +131,6 @@ function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterS
 
 export default async function ShopPage({ searchParams }: { searchParams: SearchParams }) {
   const filters = await searchParams;
-  if (
-    filters.category === "saas-templates" ||
-    filters.category === "website-templates" ||
-    filters.category === "ready-websites"
-  ) {
-    redirect("/products/category/website-templates");
-  }
   const [allProducts, filteredProducts] = await Promise.all([
     listPublicShopProducts(),
     listPublicShopProducts(filters),
