@@ -28,7 +28,7 @@ import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
-import { getPublicService, listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
+import { getPublicService, listPublicPortfolio } from "@/server/domain/catalog";
 import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 
 const ICONS = {
