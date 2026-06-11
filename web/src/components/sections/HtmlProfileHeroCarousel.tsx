@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import { cn } from "@/lib/utils";
 
 export type HtmlProfileHeroSlide = {
   name: string;
@@ -28,6 +29,10 @@ type HtmlProfileHeroCarouselProps = {
   fillHeight?: boolean;
   desktopPreviewFit?: "width" | "cover";
   desktopPreviewViewportHeight?: number;
+  mobileFrameMinHeightClass?: string;
+  /** Max height budget for scaling the phone frame (use HTML_MOBILE_FRAME_HEIGHT for native size). */
+  mobilePreviewMaxHeight?: number;
+  mobilePreviewShowViewportLabel?: boolean;
 };
 
 function CarouselPreviewFrame({
@@ -35,16 +40,26 @@ function CarouselPreviewFrame({
   previewMode,
   desktopPreviewFit = "width",
   desktopPreviewViewportHeight,
+  mobilePreviewMaxHeight,
+  mobilePreviewShowViewportLabel = false,
 }: {
   slide: HtmlProfileHeroSlide;
   previewMode: HtmlProfileHeroCarouselPreviewMode;
   desktopPreviewFit?: "width" | "cover";
   desktopPreviewViewportHeight?: number;
+  mobilePreviewMaxHeight?: number;
+  mobilePreviewShowViewportLabel?: boolean;
 }) {
   if (slide.previewUrl && previewMode === "mobile-frame") {
     return (
-      <div className="flex h-full items-center justify-center px-2 py-4">
-        <WebsiteTemplateHtmlMobilePreviewFrame previewUrl={slide.previewUrl} title={`${slide.name} mobile preview`} />
+      <div className="flex h-full w-full min-w-0 items-start justify-center overflow-hidden px-1 py-1">
+        <WebsiteTemplateHtmlMobilePreviewFrame
+          previewUrl={slide.previewUrl}
+          title={`${slide.name} mobile preview`}
+          maxFrameHeight={mobilePreviewMaxHeight}
+          showViewportLabel={mobilePreviewShowViewportLabel}
+          className="w-full max-w-full"
+        />
       </div>
     );
   }
@@ -103,6 +118,9 @@ export function HtmlProfileHeroCarousel({
   fillHeight = false,
   desktopPreviewFit = "width",
   desktopPreviewViewportHeight,
+  mobileFrameMinHeightClass = "min-h-0",
+  mobilePreviewMaxHeight,
+  mobilePreviewShowViewportLabel = false,
 }: HtmlProfileHeroCarouselProps) {
   const fallbackSlide = useMemo(
     () => emptyFallbackSlide ?? {
@@ -139,8 +157,13 @@ export function HtmlProfileHeroCarousel({
     }
   };
 
-  const previewFrameClassName = previewMode === "mobile-frame"
-    ? "min-h-[560px] flex-1 overflow-hidden rounded-md border border-border bg-inset/20 lg:min-h-[620px]"
+  const isMobileFrame = previewMode === "mobile-frame";
+
+  const previewFrameClassName = isMobileFrame
+    ? cn(
+        "w-full min-w-0 overflow-hidden rounded-md border border-border bg-inset/20",
+        mobileFrameMinHeightClass,
+      )
     : previewMode === "desktop-scaled" && fillHeight
       ? "relative min-h-0 flex-1 overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
       : previewMode === "desktop-scaled"
@@ -148,16 +171,27 @@ export function HtmlProfileHeroCarousel({
         : "min-h-[320px] flex-1 overflow-hidden rounded-md border border-border bg-black lg:min-h-[480px]";
 
   return (
-    <div className={`overflow-hidden rounded-md border border-border bg-inset/30 ${fillHeight ? "flex h-full min-h-0 flex-col" : "h-full"}`}>
+    <div className={cn(
+      "overflow-hidden rounded-md border border-border bg-inset/30",
+      fillHeight && !isMobileFrame ? "flex h-full min-h-0 flex-col" : "min-w-0",
+      !isMobileFrame && !fillHeight && "h-full",
+    )}>
       <div
-        className={`flex ${fillHeight ? "h-full min-h-0 flex-1" : "h-full"} ${animate ? "transition-transform duration-500 ease-out" : ""}`}
+        className={cn(
+          "flex",
+          fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
+          animate && "transition-transform duration-500 ease-out",
+        )}
         style={{ transform: `translateX(-${index * 100}%)` }}
         onTransitionEnd={handleTransitionEnd}
       >
         {loopSlides.map((slide, slideIndex) => (
           <article
             key={`${slide.name}-${slideIndex}`}
-            className={`flex min-w-full flex-col p-3 ${fillHeight ? "h-full min-h-0 flex-1" : ""}`}
+            className={cn(
+              "flex min-w-full flex-col p-3",
+              fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
+            )}
           >
             <div className={previewFrameClassName}>
               <CarouselPreviewFrame
@@ -165,14 +199,19 @@ export function HtmlProfileHeroCarousel({
                 previewMode={previewMode}
                 desktopPreviewFit={desktopPreviewFit}
                 desktopPreviewViewportHeight={desktopPreviewViewportHeight}
+                mobilePreviewMaxHeight={mobilePreviewMaxHeight}
+                mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
               />
             </div>
-            <div className={`mt-3 ${fillHeight ? "shrink-0" : ""}`}>
+            <div className={cn("mt-3 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
               <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
               <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
               <div className="mt-2 flex items-center justify-between gap-2">
                 <span className="text-sm font-semibold text-primary">From {slide.price}</span>
-                <Link href={slide.href} className="text-xs font-medium text-primary hover:underline">
+                <Link
+                  href={slide.href}
+                  className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
+                >
                   {ctaLabel}
                 </Link>
               </div>

@@ -9,6 +9,7 @@ import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLig
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
 import { WebsiteTemplateHtmlMobilePreviewSection } from "@/components/sections/WebsiteTemplateHtmlMobilePreviewSection";
+import { WebsiteTemplateHtmlProductPreviewHighlights } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
@@ -866,14 +867,14 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
     return (
       <>
-        <Section className="pb-4 pt-6 sm:pb-6 sm:pt-8">
-          <Container width="shell">
+        <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
+          <Container width="content">
             <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
               <ArrowLeftIcon className="size-4" /> Back to products
             </Link>
 
-            <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_400px] lg:items-start xl:grid-cols-[1fr_420px]">
-              <div className="min-w-0">
+            <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
+              <div className="min-w-0 space-y-6">
                 <div className="lg:hidden">
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                     {product.category} &middot; {product.type}
@@ -881,13 +882,12 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
                 </div>
 
-                <div id="preview" className="mt-0 min-w-0 overflow-hidden rounded-2xl border border-border lg:mt-0">
+                <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border">
                   {product.embeddedPreviewUrl ? (
                     <WebsiteTemplateHtmlDesktopPreviewFrame
                       previewUrl={product.embeddedPreviewUrl}
                       title={`${product.name} desktop preview`}
                       fit="width"
-                      viewportHeight={1100}
                       frameClassName="rounded-2xl"
                     />
                   ) : (
@@ -895,24 +895,45 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   )}
                 </div>
 
-                <div className="mt-8 space-y-8">
-                  <div>
-                    <h2 className="font-display text-xl font-semibold tracking-tight">Template overview</h2>
-                    <p className="mt-3 leading-7 text-text-muted">{product.teaser}</p>
-                    <p className="mt-3 leading-7 text-text-muted">{product.summary}</p>
-                  </div>
+                <WebsiteTemplateHtmlProductPreviewHighlights />
 
-                  <div>
-                    <h2 className="font-display text-xl font-semibold tracking-tight">Who this is for</h2>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">{product.audience}</p>
-                    <ul className="mt-4 space-y-2">
-                      {useCases.map((item, index) => (
-                        <li key={`${item}-${index}`} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
-                          <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Template overview</h2>
+                  <p className="mt-3 text-sm leading-7 text-text-muted">{product.summary}</p>
+                </div>
+
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">Who this is for</h2>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">{product.audience}</p>
+                  <ul className="mt-3 space-y-2">
+                    {useCases.slice(0, 3).map((item, index) => (
+                      <li key={`${item}-${index}`} className="flex items-start gap-2.5 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight">What&apos;s included</h2>
+                  <ul className="mt-3 space-y-2">
+                    {product.includes.slice(0, 3).map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {product.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-border bg-inset/40 px-3 py-1 text-xs text-text-muted"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1020,8 +1041,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         </Section>
 
         {product.embeddedPreviewUrl ? (
-          <Section className="border-t border-border pt-10 pb-10 sm:pt-14 sm:pb-12">
-            <Container width="shell">
+          <Section className="border-t border-border py-10 sm:py-12">
+            <Container width="content">
               <WebsiteTemplateHtmlMobilePreviewSection
                 previewUrl={product.embeddedPreviewUrl}
                 templateTitle={product.name}
@@ -1032,7 +1053,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         ) : null}
 
         <Section tone="inset" className="py-10 sm:py-12">
-          <Container width="shell">
+          <Container width="content">
             <div className="space-y-10">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-tight">At a glance</h2>
@@ -1078,7 +1099,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         </Section>
 
         <Section className="border-t border-border py-10 sm:py-12">
-          <Container width="shell">
+          <Container width="content">
             <div className="space-y-8">
               <div className="max-w-4xl">
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
@@ -1205,7 +1226,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {customizationUpsells.length > 0 ? (
           <Section tone="inset" className="py-10 sm:py-12">
-            <Container width="shell">
+            <Container width="content">
               <h2 className="font-display text-2xl font-semibold tracking-tight">Customization and implementation</h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {customizationUpsells.map((upsell) => (
@@ -1226,7 +1247,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {displayRelatedServices.length > 0 ? (
           <Section className="border-t border-border py-10 sm:py-12">
-            <Container width="shell">
+            <Container width="content">
               <h2 className="font-display text-2xl font-semibold tracking-tight">Related services</h2>
               <p className="mt-2 text-sm leading-6 text-text-muted">
                 Need help beyond the template itself? These services are the most common next steps.
@@ -1246,7 +1267,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {related.length > 0 ? (
           <Section className="border-t border-border py-12 sm:py-16">
-            <Container width="shell">
+            <Container width="content">
               <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
               <p className="mt-2 text-sm text-text-muted">Browse more website template HTML previews from this category.</p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">

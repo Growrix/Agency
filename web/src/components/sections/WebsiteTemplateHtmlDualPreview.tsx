@@ -1,31 +1,216 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import {
+  ArrowPathIcon,
+  BoltIcon,
+  CheckIcon,
+  CodeBracketSquareIcon,
+  ComputerDesktopIcon,
+  CursorArrowRaysIcon,
+  GlobeAltIcon,
+  ShieldCheckIcon,
+} from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
 import { Card } from "@/components/primitives/Card";
 import {
   HtmlProfileHeroCarousel,
   type HtmlProfileHeroSlide,
 } from "@/components/sections/HtmlProfileHeroCarousel";
+import { WebsiteTemplateHtmlMobilePreviewMarketing } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { cn } from "@/lib/utils";
 import { HTML_DESKTOP_VIEWPORT_WIDTH } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
-import { HTML_MOBILE_VIEWPORT_WIDTH } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 
 type WebsiteTemplateHtmlDualPreviewProps = {
   slides: HtmlProfileHeroSlide[];
   emptyFallbackSlide?: HtmlProfileHeroSlide;
 };
 
+function useMobilePreviewMaxHeight(defaultMax = 380) {
+  const [maxHeight, setMaxHeight] = useState(defaultMax);
+
+  useEffect(() => {
+    const update = () => {
+      const viewportHeight = window.innerHeight;
+      const budget = Math.min(defaultMax, Math.max(280, viewportHeight * 0.4));
+      setMaxHeight(Math.round(budget));
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [defaultMax]);
+
+  return maxHeight;
+}
+
+const DESKTOP_BENEFITS = [
+  "Conversion-ready layout — hero, services, proof, and contact in place",
+  "Live HTML at full width — judge spacing and brand feel before you buy",
+] as const;
+
+const HERO_PREVIEW_HIGHLIGHTS = [
+  { icon: CodeBracketSquareIcon, label: "Live HTML", hint: "Real pages in-frame" },
+  { icon: ArrowPathIcon, label: "Auto-rotate", hint: "Browse the catalog" },
+  { icon: CursorArrowRaysIcon, label: "Scrollable", hint: "Explore every section" },
+  { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Links to checkout" },
+] as const;
+
+export function WebsiteTemplateHtmlHeroPreviewFooter({ previewCount }: { previewCount: number }) {
+  return (
+    <div className="mt-4 shrink-0 border-t border-border pt-4">
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Preview highlights</p>
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {HERO_PREVIEW_HIGHLIGHTS.map((item, index) => {
+          const Icon = item.icon;
+          const hint = item.label === "Auto-rotate" && previewCount > 0
+            ? `${previewCount} template${previewCount === 1 ? "" : "s"}`
+            : item.hint;
+
+          return (
+            <motion.div
+              key={item.label}
+              className="rounded-md border border-border/80 bg-surface/70 px-2.5 py-2.5"
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
+            >
+              <Icon className="size-4 text-primary" aria-hidden />
+              <p className="mt-1.5 text-xs font-semibold leading-5">{item.label}</p>
+              <p className="text-[11px] leading-4 text-text-muted">{hint}</p>
+            </motion.div>
+          );
+        })}
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-text-muted">
+        <span className="inline-flex items-center gap-1.5">
+          <BoltIcon className="size-3.5 text-primary" aria-hidden />
+          No mockups or static screenshots
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <GlobeAltIcon className="size-3.5 text-primary" aria-hidden />
+          Desktop + mobile previews below
+        </span>
+      </div>
+    </div>
+  );
+}
+
+type WebsiteTemplateHtmlDesktopPreviewCarouselProps = WebsiteTemplateHtmlDualPreviewProps & {
+  className?: string;
+  minHeightClass?: string;
+  fillHeight?: boolean;
+  desktopPreviewFit?: "width" | "cover";
+};
+
 export function WebsiteTemplateHtmlDesktopPreviewCarousel({
   slides,
   emptyFallbackSlide,
-}: WebsiteTemplateHtmlDualPreviewProps) {
+  className,
+  minHeightClass = "min-h-[420px] lg:min-h-[560px]",
+  fillHeight = false,
+  desktopPreviewFit = "width",
+}: WebsiteTemplateHtmlDesktopPreviewCarouselProps) {
   return (
-    <div className="min-h-[420px] lg:min-h-[560px]">
+    <div className={cn(minHeightClass, fillHeight && "flex min-h-0 flex-1 flex-col", className)}>
       <HtmlProfileHeroCarousel
         slides={slides}
         ctaLabel="View Product"
         emptyFallbackSlide={emptyFallbackSlide}
         previewMode="desktop-scaled"
+        fillHeight={fillHeight}
+        desktopPreviewFit={desktopPreviewFit}
       />
     </div>
+  );
+}
+
+export function WebsiteTemplateHtmlDesktopPreviewBlock({
+  slides,
+  emptyFallbackSlide,
+}: WebsiteTemplateHtmlDualPreviewProps) {
+  return (
+    <Card className="min-w-0 overflow-hidden p-5 sm:p-6">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-12 lg:items-center">
+        <div className="min-w-0 lg:col-span-4">
+          <Reveal>
+            <div className="flex items-center gap-2">
+              <ComputerDesktopIcon className="size-4 text-primary" aria-hidden />
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Desktop Preview</p>
+            </div>
+            <h3 className="mt-2.5 font-display text-xl sm:text-2xl tracking-tight text-balance">
+              See the full desktop experience before you commit
+            </h3>
+            <p className="mt-2.5 text-sm leading-6 text-text-muted">
+              Scroll live HTML at {HTML_DESKTOP_VIEWPORT_WIDTH}px. The layout you preview is the template you can
+              launch.
+            </p>
+          </Reveal>
+
+          <RevealGroup className="mt-3.5 space-y-2" stagger={0.05}>
+            {DESKTOP_BENEFITS.map((item) => (
+              <RevealItem key={item}>
+                <div className="flex items-start gap-2">
+                  <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                  <p className="text-sm leading-6 text-text-muted">{item}</p>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+
+          <Reveal className="mt-3.5">
+            <p className="flex items-start gap-2 text-sm leading-6 text-text-muted">
+              <ShieldCheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+              <span>
+                <span className="font-display text-text">Preview equals product.</span> Choose template-only,
+                branded setup, or done-for-you launch.
+              </span>
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="min-w-0 lg:col-span-8">
+          <WebsiteTemplateHtmlDesktopPreviewCarousel
+            slides={slides}
+            emptyFallbackSlide={emptyFallbackSlide}
+            minHeightClass="min-h-[280px] sm:min-h-[320px] lg:min-h-[360px]"
+          />
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+export function WebsiteTemplateHtmlMobilePreviewBlock({
+  slides,
+  emptyFallbackSlide,
+}: WebsiteTemplateHtmlDualPreviewProps) {
+  const mobilePreviewMaxHeight = useMobilePreviewMaxHeight(380);
+
+  return (
+    <Card className="min-w-0 overflow-hidden p-5 sm:p-6">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-12 lg:items-start">
+        <div className="min-w-0 lg:col-span-7">
+          <div className="mx-auto w-full min-w-0 max-w-full overflow-hidden">
+            <HtmlProfileHeroCarousel
+              slides={slides}
+              ctaLabel="View Product"
+              emptyFallbackSlide={emptyFallbackSlide}
+              previewMode="mobile-frame"
+              mobileFrameMinHeightClass="min-h-0"
+              mobilePreviewMaxHeight={mobilePreviewMaxHeight}
+              mobilePreviewShowViewportLabel={false}
+            />
+          </div>
+        </div>
+
+        <div className="min-w-0 lg:col-span-5">
+          <WebsiteTemplateHtmlMobilePreviewMarketing />
+        </div>
+      </div>
+    </Card>
   );
 }
 
@@ -34,45 +219,9 @@ export function WebsiteTemplateHtmlDualPreview({
   emptyFallbackSlide,
 }: WebsiteTemplateHtmlDualPreviewProps) {
   return (
-    <div className="space-y-6">
-      <Card className="p-5 sm:p-6">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-4">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Desktop Preview</p>
-            <h3 className="mt-3 font-display text-2xl tracking-tight">Full-width desktop layout</h3>
-            <p className="mt-3 text-sm leading-7 text-text-muted">
-              Rendered at a {HTML_DESKTOP_VIEWPORT_WIDTH}px viewport and scaled to fit this panel, cycling through every
-              HTML preview template in this category.
-            </p>
-          </div>
-          <div className="lg:col-span-8">
-            <WebsiteTemplateHtmlDesktopPreviewCarousel slides={slides} emptyFallbackSlide={emptyFallbackSlide} />
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-5 sm:p-6">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-          <div className="order-2 lg:order-1 lg:col-span-7">
-            <div className="min-h-[420px] lg:min-h-[620px]">
-              <HtmlProfileHeroCarousel
-                slides={slides}
-                ctaLabel="View Product"
-                emptyFallbackSlide={emptyFallbackSlide}
-                previewMode="mobile-frame"
-              />
-            </div>
-          </div>
-          <div className="order-1 lg:order-2 lg:col-span-5">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Mobile Preview</p>
-            <h3 className="mt-3 font-display text-2xl tracking-tight">Standard phone viewport</h3>
-            <p className="mt-3 text-sm leading-7 text-text-muted">
-              Shown inside a {HTML_MOBILE_VIEWPORT_WIDTH}px-wide device frame, auto-rotating through each available HTML
-              preview template so responsive breakpoints match real mobile behavior.
-            </p>
-          </div>
-        </div>
-      </Card>
+    <div className="w-full min-w-0 space-y-6">
+      <WebsiteTemplateHtmlDesktopPreviewBlock slides={slides} emptyFallbackSlide={emptyFallbackSlide} />
+      <WebsiteTemplateHtmlMobilePreviewBlock slides={slides} emptyFallbackSlide={emptyFallbackSlide} />
     </div>
   );
 }

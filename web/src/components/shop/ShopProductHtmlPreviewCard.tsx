@@ -7,13 +7,20 @@ import { Card } from "@/components/primitives/Card";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
 
-export function ShopProductHtmlPreviewCard({ product }: { product: ShopProduct }) {
+export function ShopProductHtmlPreviewCard({
+  product,
+  variant = "default",
+}: {
+  product: ShopProduct;
+  variant?: "default" | "catalog-wide";
+}) {
   const previewUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
   const hasExternalPreview = Boolean(previewUrl);
+  const isCatalogWide = variant === "catalog-wide";
 
   return (
-    <Card hoverable className="shop-product-html-preview-card group flex h-full flex-col overflow-hidden p-0">
-      <div className="shop-product-html-preview-card__preview relative aspect-16/10 w-full overflow-hidden bg-[#0a0a0a]">
+    <Card hoverable className="shop-product-html-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
+      <div className="shop-product-html-preview-card__preview relative aspect-16/10 w-full max-w-full overflow-hidden bg-[#0a0a0a]">
         {previewUrl ? (
           <WebsiteTemplateHtmlDesktopPreviewFrame
             previewUrl={previewUrl}
@@ -34,12 +41,18 @@ export function ShopProductHtmlPreviewCard({ product }: { product: ShopProduct }
         ) : null}
       </div>
 
-      <div className="shop-product-html-preview-card__body flex flex-1 flex-col gap-2 p-4">
+      <div className={`shop-product-html-preview-card__body flex flex-1 flex-col gap-2 ${isCatalogWide ? "p-5" : "p-4"}`}>
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
           {product.category} &middot; {product.type}
         </p>
 
-        <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text">
+        <h3
+          className={
+            isCatalogWide
+              ? "line-clamp-2 font-display text-lg font-semibold leading-snug tracking-tight text-text"
+              : "line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text"
+          }
+        >
           <Link href={getProductHref(product)} className="hover:text-primary">
             {product.name}
           </Link>

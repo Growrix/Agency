@@ -6,7 +6,7 @@ import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
-import { WebsiteTemplateHtmlDesktopPreviewCarousel, WebsiteTemplateHtmlDualPreview } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
+import { WebsiteTemplateHtmlDesktopPreviewCarousel, WebsiteTemplateHtmlDesktopPreviewBlock, WebsiteTemplateHtmlMobilePreviewBlock, WebsiteTemplateHtmlHeroPreviewFooter } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getProductHref, type ShopProduct } from "@/lib/shop";
@@ -57,7 +57,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
   const catalogProducts = products.filter(
     (product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
   );
-  const featuredProducts = catalogProducts.slice(0, 8);
+  const catalogGridProducts = catalogProducts.slice(0, 12);
   const standardPrice = getVariantPrice(products, "standard", "$149");
   const premiumPrice = getVariantPrice(products, "premium", "$499");
   const launchPrice = getVariantPrice(products, "done-for-you", "Custom Pricing");
@@ -75,17 +75,17 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
 
   return (
     <>
-      <Section className="pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
+      <Section className="relative overflow-x-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
-        <Container>
+        <Container className="min-w-0">
           <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
             ← All products
           </Link>
 
-          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-stretch xl:gap-10">
-            <div className="lg:col-span-5">
+          <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-stretch xl:gap-10">
+            <div className="min-w-0 lg:col-span-5">
               <Badge tone="primary" dot>HTML Preview Edition</Badge>
-              <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-balance">
+              <h1 className="mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
                 Website templates with embedded HTML live preview.
               </h1>
               <p className="mt-5 max-w-3xl text-lg leading-7 text-text-muted">
@@ -93,7 +93,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                 Review the template in-frame, then continue with your preferred purchase or customization path.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href="/products/category/website-templates-html-preview" size="lg">
+                <LinkButton href="#profiles" size="lg">
                   Browse HTML Preview Collection <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton
@@ -119,20 +119,28 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
               </div>
             </div>
 
-            <div className="lg:col-span-7">
-              <Card className="h-full p-5 sm:p-6">
-                <WebsiteTemplateHtmlDesktopPreviewCarousel
-                  slides={htmlPreviewSlides}
-                  emptyFallbackSlide={htmlPreviewFallbackSlide}
-                />
+            <div className="min-w-0 lg:col-span-7">
+              <Card className="flex h-full min-w-0 flex-col overflow-hidden p-5 sm:p-6">
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Live template preview</p>
+                <div className="mt-4 flex min-h-[320px] flex-1 flex-col lg:min-h-0">
+                  <WebsiteTemplateHtmlDesktopPreviewCarousel
+                    slides={htmlPreviewSlides}
+                    emptyFallbackSlide={htmlPreviewFallbackSlide}
+                    fillHeight
+                    desktopPreviewFit="cover"
+                    minHeightClass="min-h-[320px] lg:min-h-0"
+                    className="flex-1"
+                  />
+                </div>
+                <WebsiteTemplateHtmlHeroPreviewFooter previewCount={htmlPreviewSlides.length} />
               </Card>
             </div>
           </div>
         </Container>
       </Section>
 
-      <Section className="pt-10 pb-10 sm:pt-14 sm:pb-12">
-        <Container>
+      <Section className="overflow-x-hidden pt-10 pb-8 sm:pt-14 sm:pb-10">
+        <Container className="min-w-0">
           <div className="flex flex-col gap-3 text-center">
             <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-balance">
               Desktop and mobile preview, side by side
@@ -143,8 +151,8 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
             </p>
           </div>
 
-          <div className="mt-8">
-            <WebsiteTemplateHtmlDualPreview
+          <div className="mt-8 min-w-0 w-full">
+            <WebsiteTemplateHtmlDesktopPreviewBlock
               slides={htmlPreviewSlides}
               emptyFallbackSlide={htmlPreviewFallbackSlide}
             />
@@ -152,21 +160,43 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         </Container>
       </Section>
 
-      <Section id="profiles" tone="inset">
-        <Container>
+      <Section className="overflow-x-hidden pb-10 sm:pb-12">
+        <Container className="min-w-0">
+          <div className="min-w-0 w-full">
+            <WebsiteTemplateHtmlMobilePreviewBlock
+              slides={htmlPreviewSlides}
+              emptyFallbackSlide={htmlPreviewFallbackSlide}
+            />
+          </div>
+        </Container>
+      </Section>
+
+      <Section id="profiles" tone="inset" className="overflow-x-hidden py-10 sm:py-14">
+        <Container className="min-w-0">
           <SectionHeading
             eyebrow="Template catalog"
             title="HTML preview templates you can buy right now"
-            description="Products in this category use the dedicated HTML preview card layout."
+            description="Twelve live HTML website templates in a compact three-column grid — preview in-frame, then open the product page to buy."
           />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
-            {featuredProducts.map((product) => (
-              <ShopProductHtmlPreviewCard key={product.slug} product={product} />
+          <div className="mt-8 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {catalogGridProducts.map((product) => (
+              <div key={product.slug} className="min-w-0">
+                <ShopProductHtmlPreviewCard product={product} />
+              </div>
             ))}
           </div>
-          <div className="mt-8">
-            <LinkButton href="/products/category/website-templates" variant="outline">
-              View CMS Website Templates <ArrowUpRightIcon className="size-4" />
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <LinkButton
+              href={primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates-html-preview#profiles"}
+              size="lg"
+            >
+              Open Featured Template <ArrowRightIcon className="size-4" />
+            </LinkButton>
+            <LinkButton href="/products/category/website-templates-html-preview#profiles" variant="outline" size="lg">
+              Browse HTML Preview Category <ArrowUpRightIcon className="size-4" />
+            </LinkButton>
+            <LinkButton href="/products/category/website-templates" variant="ghost" size="lg">
+              View CMS Website Templates
             </LinkButton>
           </div>
         </Container>

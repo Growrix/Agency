@@ -102,33 +102,33 @@ export function HtmlBusinessProfilesCategoryLanding({
 
   return (
     <>
-      <Section className="pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
+      <Section className="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container>
-          <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            â† All services
+          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+            ← All products
           </Link>
 
-          <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:items-stretch">
-            <div className="lg:col-span-7">
+          <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-start xl:gap-10">
+            <div className="min-w-0 lg:col-span-5">
               <Badge tone="primary" dot>HTML Business Profiles</Badge>
-              <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-balance">
+              <h1 className="mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
                 Professional Business Profile Websites Ready in 24 Hours
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-7 text-text-muted">
+              <p className="mt-5 text-lg leading-7 text-text-muted">
                 Choose a category-specific HTML business profile, customize it if needed, and launch a professional
                 online presence without a full website project.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href="/products/category/html-business-profiles" size="lg">
+                <LinkButton href="#profiles" size="lg">
                   Browse Business Profiles <ArrowRightIcon className="size-4" />
                 </LinkButton>
-                <LinkButton href="#profiles" variant="outline" size="lg">
+                <LinkButton href="/products/category/html-business-profiles" variant="outline" size="lg">
                   View Live Examples
                 </LinkButton>
               </div>
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-2">
                 {[
                   { value: "50+", label: "Business Profiles" },
                   { value: "24h", label: "Response Time" },
@@ -143,11 +143,16 @@ export function HtmlBusinessProfilesCategoryLanding({
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <Card className="h-full p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Live profile carousel</p>
-                <div className="mt-4">
-                  <HtmlProfileHeroCarousel slides={heroSlides} />
+            <div className="min-w-0 lg:col-span-7">
+              <Card className="p-5 sm:p-6">
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Live mobile profile preview</p>
+                <div className="mt-4 min-w-0">
+                  <HtmlProfileHeroCarousel
+                    slides={heroSlides}
+                    previewMode="mobile-frame"
+                    mobilePreviewMaxHeight={400}
+                    mobilePreviewShowViewportLabel={false}
+                  />
                 </div>
               </Card>
             </div>
@@ -155,7 +160,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section id="profiles" tone="inset">
+      <Section id="profiles" tone="inset" className="py-10 sm:py-14">
         <Container>
           <SectionHeading
             eyebrow="Featured profiles"

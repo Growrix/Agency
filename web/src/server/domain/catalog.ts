@@ -6,7 +6,11 @@ import {
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
   getHtmlBusinessProfilePreviewUrl,
 } from "@/lib/html-business-profiles";
-import { getWebsiteTemplateHtmlPreviewUrl } from "@/lib/website-templates-html-preview";
+import {
+  getWebsiteTemplateHtmlPreviewProductSlug,
+  getWebsiteTemplateHtmlPreviewUrl,
+  listWebsiteTemplateHtmlPreviews,
+} from "@/lib/website-templates-html-preview";
 import { getProductTypeDefinition, PRODUCT_PARENT_CATEGORY_LABELS } from "@/lib/product-taxonomy";
 import { isReservedProductRouteSlug } from "@/lib/shop";
 import type {
@@ -256,75 +260,78 @@ function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
 }
 
 function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] {
-  const previewUrl = getWebsiteTemplateHtmlPreviewUrl("01-bedrock-construction");
+  return listWebsiteTemplateHtmlPreviews().map((template) => {
+    const previewUrl = getWebsiteTemplateHtmlPreviewUrl(template.slug);
+    const slug = getWebsiteTemplateHtmlPreviewProductSlug(template.slug);
 
-  return ([{
-    slug: "website-template-html-preview-bedrock-construction",
-    name: "Bedrock Construction HTML Preview",
-    price: "$149",
-    livePreviewUrl: previewUrl,
-    embeddedPreviewUrl: previewUrl,
-    parentCategoryLabel: PRODUCT_PARENT_CATEGORY_LABELS["business-professional"],
-    parentCategorySlug: "business-professional",
-    category: "Website Templates HTML Preview",
-    categorySlug: "website-templates-html-preview",
-    type: "Website Template HTML",
-    typeSlug: "website-template-html",
-    industry: "Website Templates",
-    industrySlug: "website-templates",
-    tag: "Preview",
-    published: true,
-    teaser: "Embedded HTML preview product card for Bedrock Construction website template.",
-    summary: "A preview-first website template card powered by local HTML rendering and category-based shop routing.",
-    audience: "Buyers who want to inspect live HTML before purchasing template packages.",
-    features: [
-      "Iframe-safe embedded HTML preview",
-      "Template-only, setup, and done-for-you pricing paths",
-      "Shop-ready category routing",
-    ],
-    previewVariant: "marketing",
-    includes: ["Template files", "Responsive layout baseline", "Launch-ready sections"],
-    inScope: ["Template package", "Embedded preview", "Category routing"],
-    outOfScope: ["Custom development", "Complex integrations"],
-    enhancementPlan: ["Add more template previews", "Connect more HTML files to this category"],
-    stack: ["HTML5", "CSS3", "JavaScript"],
-    variants: [
-      {
-        slug: "standard",
-        tier_name: "Standard",
-        title: "Bedrock Construction Standard",
-        price: "$149",
-        fulfillment_type: "digital_download",
-        includes: ["Template files", "Responsive layout", "Setup notes"],
-        comparison_points: ["Self-serve launch", "Template files"],
-        recommended: true,
-      },
-      {
-        slug: "premium",
-        tier_name: "Premium",
-        title: "Bedrock Construction Premium",
-        price: "$499",
-        fulfillment_type: "hybrid_support",
-        includes: ["Brand setup", "Content population", "Core integrations"],
-        comparison_points: ["Brand setup", "Integration support"],
-      },
-      {
-        slug: "done-for-you",
-        tier_name: "Done-For-You",
-        title: "Bedrock Construction Done-For-You",
-        price: "Custom Pricing",
-        fulfillment_type: "done_for_you_service",
-        includes: ["Planning", "Full implementation", "Launch support"],
-        comparison_points: ["Full implementation", "Launch support"],
-      },
-    ],
-    highlights: [
-      { label: "Preview", value: "Live HTML" },
-      { label: "Category", value: "Website Templates HTML Preview" },
-    ],
-    image: null,
-    gallery: [],
-  }] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
+    return withParentTaxonomy({
+      slug,
+      name: `${template.title} HTML Preview`,
+      price: template.price,
+      livePreviewUrl: previewUrl,
+      embeddedPreviewUrl: previewUrl,
+      parentCategoryLabel: PRODUCT_PARENT_CATEGORY_LABELS["business-professional"],
+      parentCategorySlug: "business-professional",
+      category: "Website Templates HTML Preview",
+      categorySlug: "website-templates-html-preview",
+      type: template.type,
+      typeSlug: "website-template-html",
+      industry: template.industry ?? "Website Templates",
+      industrySlug: "website-templates",
+      tag: "Preview",
+      published: true,
+      teaser: template.teaser ?? `Embedded HTML preview for the ${template.title} website template.`,
+      summary: template.summary ?? `Preview-first ${template.title} template with live HTML rendering and shop-ready routing.`,
+      audience: "Buyers who want to inspect live HTML before purchasing template packages.",
+      features: [
+        "Iframe-safe embedded HTML preview",
+        "Template-only, setup, and done-for-you pricing paths",
+        "Responsive layout baseline",
+      ],
+      previewVariant: "marketing",
+      includes: ["Template files", "Responsive layout baseline", "Launch-ready sections"],
+      inScope: ["Template package", "Embedded preview", "Category routing"],
+      outOfScope: ["Custom development", "Complex integrations"],
+      enhancementPlan: ["Expand HTML preview catalog", "Connect additional template files"],
+      stack: ["HTML5", "CSS3", "JavaScript"],
+      variants: [
+        {
+          slug: "standard",
+          tier_name: "Standard",
+          title: `${template.title} Standard`,
+          price: template.price,
+          fulfillment_type: "digital_download",
+          includes: ["Template files", "Responsive layout", "Setup notes"],
+          comparison_points: ["Self-serve launch", "Template files"],
+          recommended: true,
+        },
+        {
+          slug: "premium",
+          tier_name: "Premium",
+          title: `${template.title} Premium`,
+          price: "$499",
+          fulfillment_type: "hybrid_support",
+          includes: ["Brand setup", "Content population", "Core integrations"],
+          comparison_points: ["Brand setup", "Integration support"],
+        },
+        {
+          slug: "done-for-you",
+          tier_name: "Done-For-You",
+          title: `${template.title} Done-For-You`,
+          price: "Custom Pricing",
+          fulfillment_type: "done_for_you_service",
+          includes: ["Planning", "Full implementation", "Launch support"],
+          comparison_points: ["Full implementation", "Launch support"],
+        },
+      ],
+      highlights: [
+        { label: "Preview", value: "Live HTML" },
+        { label: "Industry", value: template.industry ?? template.type },
+      ],
+      image: null,
+      gallery: [],
+    });
+  }) satisfies ManagedProductRecord[];
 }
 
 function getDefaultAnchorProducts(): ManagedProductRecord[] {
