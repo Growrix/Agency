@@ -44,17 +44,13 @@ const htmlPreviewCsp =
 
 const nextConfig: NextConfig = {
   allowedDevOrigins,
-  outputFileTracingRoot: path.join(__dirname, ".."),
+  outputFileTracingRoot: path.join(__dirname),
   outputFileTracingIncludes: {
     "/api/html-business-profiles/[templateSlug]": [
-      "data/html-business-profiles/**/*",
-      "../Shop/business-professional/business-profile-pages/**/*",
-      "Shop/business-professional/business-profile-pages/**/*",
+      "shop/business-professional/business-profile-pages/**/*",
     ],
     "/api/website-templates-html-preview/[templateSlug]": [
-      "data/website-templates-html/**/*",
-      "../Shop/website-templates-html/**/*",
-      "Shop/website-templates-html/**/*",
+      "shop/website-templates-html/**/*",
     ],
   },
   images: {
