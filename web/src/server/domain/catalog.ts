@@ -258,7 +258,7 @@ function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
 function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] {
   const previewUrl = getWebsiteTemplateHtmlPreviewUrl("01-bedrock-construction");
 
-  return [{
+  return ([{
     slug: "website-template-html-preview-bedrock-construction",
     name: "Bedrock Construction HTML Preview",
     price: "$149",
@@ -324,7 +324,7 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
     ],
     image: null,
     gallery: [],
-  }].map(withParentTaxonomy);
+  }] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }
 
 function getDefaultAnchorProducts(): ManagedProductRecord[] {

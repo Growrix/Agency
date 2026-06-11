@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { HtmlBusinessProfilesServicePage } from "@/app/services/[slug]/page";
+import { HtmlBusinessProfilesCategoryLanding } from "@/components/sections/HtmlBusinessProfilesCategoryLanding";
 import { WebsiteTemplatesCategoryLanding } from "@/components/sections/WebsiteTemplatesCategoryLanding";
 import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
 import { listPublicShopProducts } from "@/server/domain/catalog";
@@ -16,7 +16,7 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
 
   if (category === "html-business-profiles") {
     const products = await listPublicShopProducts({ category: "html-business-profiles" });
-    return <HtmlBusinessProfilesServicePage products={products} />;
+    return <HtmlBusinessProfilesCategoryLanding products={products} />;
   }
   if (category === "website-templates") {
     const products = await listPublicShopProducts({ category: "website-templates" });

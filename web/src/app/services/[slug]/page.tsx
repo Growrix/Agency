@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -21,7 +21,6 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
-import { HtmlProfileHeroCarousel } from "@/components/sections/HtmlProfileHeroCarousel";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
@@ -29,8 +28,6 @@ import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
-import { ShopProductCard } from "@/components/shop/ShopProductCard";
-import { getProductHref } from "@/lib/shop";
 import { getPublicService, listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
 import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 
@@ -129,12 +126,12 @@ const COPY: Record<
       { name: "Custom Build Scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: [
-      { question: "Do you handle content?", answer: "Yes — content production is offered as an add-on. We can also collaborate with your in-house content team." },
+      { question: "Do you handle content?", answer: "Yes â€” content production is offered as an add-on. We can also collaborate with your in-house content team." },
       { question: "What about CMS?", answer: "We integrate with Sanity, Contentful, Payload, or static MDX depending on editorial needs." },
-      { question: "How fast can we launch?", answer: "Launch sprints are 4–6 weeks. Redesigns typically land in 8–10 weeks." },
+      { question: "How fast can we launch?", answer: "Launch sprints are 4â€“6 weeks. Redesigns typically land in 8â€“10 weeks." },
     ],
     stats: [
-      { value: "4–10 wk", label: "Launch window" },
+      { value: "4â€“10 wk", label: "Launch window" },
       { value: "94", label: "Avg LCP score" },
       { value: "+64%", label: "Demo bookings" },
       { value: "12", label: "Sites shipped (12mo)" },
@@ -205,7 +202,7 @@ const COPY: Record<
     eyebrow: "Template Customization",
     headline: "Bought a template? We will customize and launch it for you.",
     description:
-      "Done-For-You setup for product buyers who need branding, deployment, forms, payments, and QA — without learning how to edit code or manage hosting.",
+      "Done-For-You setup for product buyers who need branding, deployment, forms, payments, and QA â€” without learning how to edit code or manage hosting.",
     primaryCta: "Request setup scope",
     secondaryCta: "Browse products first",
     secondaryHref: "/products",
@@ -218,7 +215,7 @@ const COPY: Record<
       { title: "Launch QA and handoff", description: "Cross-device QA, performance checks, and operator documentation." },
     ],
     differentiators: [
-      { title: "Product-aware delivery", description: "We start from the exact template or tier you purchased — no mystery scope." },
+      { title: "Product-aware delivery", description: "We start from the exact template or tier you purchased â€” no mystery scope." },
       { title: "Non-technical friendly", description: "You bring brand inputs and goals; we handle implementation details." },
       { title: "Clear package boundaries", description: "Basic, business, and advanced setup tiers keep expectations explicit." },
       { title: "Upgrade path to custom work", description: "When scope exceeds the template, we transition into a scoped custom engagement." },
@@ -251,7 +248,7 @@ const COPY: Record<
       },
     ],
     faq: [
-      { question: "Do I need to buy the template first?", answer: "Usually yes — we customize from a purchased Standard, Premium, or Done-For-You product so scope stays tied to a real asset." },
+      { question: "Do I need to buy the template first?", answer: "Usually yes â€” we customize from a purchased Standard, Premium, or Done-For-You product so scope stays tied to a real asset." },
       { question: "What is not included?", answer: "Custom automation platforms, net-new features outside the template, and large infrastructure programs are scoped separately." },
       { question: "How fast can you launch?", answer: "Most setup packages land in 3-14 days depending on content readiness and integration count." },
     ],
@@ -282,15 +279,15 @@ const COPY: Record<
       { title: "Auth & access by design", description: "OAuth, API keys, scoped tokens, and clear human-in-the-loop boundaries." },
       { title: "Observability built-in", description: "Trace every tool call, log every input, surface every failure with context." },
       { title: "Schema-first tools", description: "Strict JSON schemas, examples, and behaviour notes agents can rely on." },
-      { title: "Deployable anywhere", description: "Self-host or deploy to your cloud — Cloudflare Workers, Fly, Vercel, or AWS." },
+      { title: "Deployable anywhere", description: "Self-host or deploy to your cloud â€” Cloudflare Workers, Fly, Vercel, or AWS." },
     ],
     tiers: [
       { name: "Starter MCP", price: "$249", cadence: "one-time", description: "Productized starter with auth, logging, and example tools.", features: ["TypeScript codebase", "Auth + secrets handling", "Example tools", "Deployment guide"], cta: { label: "Buy starter", href: "/products" } },
-      { name: "Custom Integration", price: "$8.5k", cadence: "/ project", description: "A focused MCP server scoped around 1–2 systems with secure access.", features: ["Discovery + scoping", "Auth + permission model", "Tool design + tests", "Deployment + handoff"], cta: { label: "Scope an MCP", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
+      { name: "Custom Integration", price: "$8.5k", cadence: "/ project", description: "A focused MCP server scoped around 1â€“2 systems with secure access.", features: ["Discovery + scoping", "Auth + permission model", "Tool design + tests", "Deployment + handoff"], cta: { label: "Scope an MCP", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
       { name: "Platform Engagement", price: "Custom", description: "Multi-system MCP platform with shared infra, observability, and governance.", features: ["Shared auth layer", "Tool registry", "Audit + governance", "Ongoing support"], cta: { label: "Plan platform", href: "/book-appointment" } },
     ],
     faq: [
-      { question: "What is MCP?", answer: "Model Context Protocol — an open standard for giving AI agents structured, auditable access to tools and data." },
+      { question: "What is MCP?", answer: "Model Context Protocol â€” an open standard for giving AI agents structured, auditable access to tools and data." },
       { question: "Where do you deploy?", answer: "We deploy to your cloud or recommended hosts: Cloudflare Workers, Fly, Vercel, or AWS." },
       { question: "How do you handle security?", answer: "Scoped auth, secrets via your existing vault, full call logging, and explicit human-in-the-loop boundaries." },
     ],
@@ -303,7 +300,7 @@ const COPY: Record<
   },
   automation: {
     eyebrow: "Automation",
-    headline: "Operational systems that remove repetitive work — measurably.",
+    headline: "Operational systems that remove repetitive work â€” measurably.",
     description:
       "We map workflows, design exception logic, and ship integrations that turn manual work into measurable operational speed.",
     primaryCta: "Audit My Workflow",
@@ -318,7 +315,7 @@ const COPY: Record<
       { title: "Content workflows", description: "Multi-channel publishing pipelines with review gates and version history." },
     ],
     differentiators: [
-      { title: "Real workflow mapping", description: "We document exceptions, owners, and edge cases — not just the happy path." },
+      { title: "Real workflow mapping", description: "We document exceptions, owners, and edge cases â€” not just the happy path." },
       { title: "Exception-first design", description: "Failures route to humans with full context, never to silent dead-ends." },
       { title: "Observability included", description: "Every run logged, retryable, and reportable from day one." },
       { title: "Predictable cost & speed", description: "We model integration costs and latency before recommending a tool." },
@@ -329,7 +326,7 @@ const COPY: Record<
       { name: "Optimization Retainer", price: "$3.2k", cadence: "/ month", description: "Continuous monitoring, tuning, and new workflow rollouts.", features: ["Monthly review", "New workflows shipped", "Failure monitoring", "Quarterly cost review"], cta: { label: "Start retainer", href: "/book-appointment" } },
     ],
     faq: [
-      { question: "What tools do you use?", answer: "We use the right tool for the workflow — Zapier, n8n, custom Node services, or direct API integrations depending on volume and complexity." },
+      { question: "What tools do you use?", answer: "We use the right tool for the workflow â€” Zapier, n8n, custom Node services, or direct API integrations depending on volume and complexity." },
       { question: "How do you handle failures?", answer: "Every workflow has explicit retry, escalation, and human handoff paths. Failures never silently disappear." },
       { question: "Can you connect AI safely?", answer: "Yes. We design AI steps with clear inputs, outputs, and human checkpoints where decisions matter." },
     ],
@@ -341,403 +338,6 @@ const COPY: Record<
     ],
   },
 };
-
-const HTML_PROFILE_FAQ = [
-  {
-    question: "Can I preview profiles before purchasing?",
-    answer: "Yes. Every profile includes a live preview so you can review the layout, style, and content flow before buying.",
-  },
-  {
-    question: "Are these connected to checkout?",
-    answer: "Yes. Each profile links directly to a product page and checkout flow.",
-  },
-  {
-    question: "Can you customize the template?",
-    answer: "Yes. We offer branding setup, content population, and integration add-ons.",
-  },
-  {
-    question: "Do you provide hosting?",
-    answer: "Hosting and deployment support are available under Business Launch packages.",
-  },
-  {
-    question: "Can this become a full website later?",
-    answer: "Yes. Every profile is built as a foundation you can expand into a full website.",
-  },
-  {
-    question: "How quickly can you deliver?",
-    answer: "Most customization projects begin within 24 business hours after requirements are confirmed.",
-  },
-] as const;
-
-const HTML_PROFILE_INCLUDED = [
-  "Mobile responsive",
-  "Clean HTML structure",
-  "SEO-friendly layout",
-  "Fast loading",
-  "Commercial license",
-  "Easy content editing",
-  "Upgrade-ready architecture",
-] as const;
-
-const HTML_PROFILE_CUSTOMIZATION = [
-  {
-    title: "Branding",
-    items: ["Logo", "Colors", "Fonts"],
-  },
-  {
-    title: "Content Setup",
-    items: ["Pages", "Business Information", "Images"],
-  },
-  {
-    title: "Integrations",
-    items: ["Forms", "Booking Systems", "Maps", "Analytics"],
-  },
-  {
-    title: "Expansion",
-    items: ["Additional Pages", "Blog", "Service Pages", "Full Website Upgrade"],
-  },
-] as const;
-
-const HTML_PROFILE_UPGRADE_PATH = [
-  "Template",
-  "Branded Profile",
-  "Business Launch",
-  "Full Website",
-  "Custom SaaS / Portal",
-] as const;
-
-export function HtmlBusinessProfilesServicePage({
-  products,
-}: {
-  products: Awaited<ReturnType<typeof listPublicShopProducts>>;
-}) {
-  const featuredProfiles = products.slice(0, 8);
-  const carouselProfiles = products.length > 0
-    ? products
-    : [
-      { slug: "", name: "Cafe Business Profile", type: "Cafe", price: "$19" },
-      { slug: "", name: "Law Firm Business Profile", type: "Law Firm", price: "$19" },
-      { slug: "", name: "Agency Business Profile", type: "Agency", price: "$19" },
-      { slug: "", name: "Cleaning Business Profile", type: "Cleaning", price: "$19" },
-    ];
-  const heroSlides = carouselProfiles.map((profile) => {
-    const previewSource = profile as {
-      embeddedPreviewUrl?: string;
-      livePreviewUrl?: string;
-    };
-    return {
-      name: profile.name,
-      type: profile.type,
-      price: profile.price,
-      href: profile.slug ? getProductHref(profile) : "/products/category/html-business-profiles",
-      previewUrl: previewSource.embeddedPreviewUrl ?? previewSource.livePreviewUrl ?? undefined,
-    };
-  });
-
-  return (
-    <>
-      <Section className="pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
-        <Container>
-          <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All services
-          </Link>
-
-          <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:items-stretch">
-            <div className="lg:col-span-7">
-              <Badge tone="primary" dot>HTML Business Profiles</Badge>
-              <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-balance">
-                Professional Business Profile Websites Ready in 24 Hours
-              </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-7 text-text-muted">
-                Choose a category-specific HTML business profile, customize it if needed, and launch a professional
-                online presence without a full website project.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href="/products/category/html-business-profiles" size="lg">
-                  Browse Business Profiles <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href="#profiles" variant="outline" size="lg">
-                  View Live Examples
-                </LinkButton>
-              </div>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {[
-                  { value: "50+", label: "Business Profiles" },
-                  { value: "24h", label: "Response Time" },
-                  { value: "4", label: "Service Levels" },
-                  { value: "100%", label: "Mobile Responsive" },
-                ].map((metric) => (
-                  <Card key={metric.label} className="p-4">
-                    <p className="font-display text-2xl tracking-tight">{metric.value}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.16em] text-text-muted">{metric.label}</p>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <Card className="h-full p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">Live profile carousel</p>
-                <div className="mt-4">
-                  <HtmlProfileHeroCarousel slides={heroSlides} />
-                </div>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="profiles" tone="inset">
-        <Container>
-          <SectionHeading
-            eyebrow="Featured profiles"
-            title="Browse Popular HTML Business Profiles"
-            description="Business profile templates built for real businesses."
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {featuredProfiles.map((product) => (
-              <ShopProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-          <div className="mt-8">
-            <LinkButton href="/products/category/html-business-profiles" variant="outline">
-              View All Business Profiles <ArrowUpRightIcon className="size-4" />
-            </LinkButton>
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="pricing" className="py-14 sm:py-16">
-        <Container>
-          <SectionHeading
-            eyebrow="Pricing"
-            title="Choose a profile. Customize it. Launch faster."
-            align="center"
-          />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {[
-              {
-                tier: "Template Only",
-                price: "$19",
-                desc: "For developers, agencies, and DIY users.",
-                includes: ["HTML files", "Responsive design", "Documentation", "Commercial usage"],
-                cta: "Download Template",
-                href: "/products/category/html-business-profiles",
-              },
-              {
-                tier: "Branded Setup",
-                price: "$49",
-                desc: "You provide logo, colors, and content. We customize and deliver.",
-                includes: ["Branding setup", "Content insertion", "Basic customization", "Delivery ready"],
-                cta: "Request Branding",
-                href: "/contact?intent=customize_template&category=html-business-profiles",
-                featured: true,
-              },
-              {
-                tier: "Business Launch",
-                price: "$299-$799",
-                desc: "Done-for-you launch support for businesses that want everything prepared.",
-                includes: ["Full content setup", "Contact forms", "Images", "SEO basics", "Deployment support", "Launch assistance"],
-                cta: "Request Quote",
-                href: "/contact?intent=done-for-you&category=html-business-profiles",
-              },
-            ].map((plan) => (
-              <Card
-                key={plan.tier}
-                className={`flex h-full flex-col ${plan.featured ? "contrast-surface bg-contrast text-contrast-text border-white/10 ring-1 ring-primary/40 shadow-(--shadow-2)" : ""}`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="font-display text-xl tracking-tight">{plan.tier}</h3>
-                  {plan.featured ? <Badge tone="primary">Most Popular</Badge> : null}
-                </div>
-                <p className="mt-3 font-display text-4xl tracking-tight">{plan.price}</p>
-                <p className={`mt-3 text-sm leading-6 ${plan.featured ? "text-white/75" : "text-text-muted"}`}>{plan.desc}</p>
-                <ul className="mt-5 flex-1 space-y-2">
-                  {plan.includes.map((item) => (
-                    <li key={item} className={`flex items-start gap-2 text-sm ${plan.featured ? "text-white/80" : "text-text-muted"}`}>
-                      <CheckIcon className="size-4 shrink-0 mt-0.5 text-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto pt-6">
-                  <LinkButton href={plan.href} variant={plan.featured ? "primary" : "outline"} fullWidth>
-                    {plan.cta}
-                  </LinkButton>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="py-14 sm:py-16">
-        <Container>
-          <SectionHeading
-            eyebrow="Why business profiles"
-            title="Why Choose a Business Profile Instead of a Full Website?"
-            description="Not every business needs a custom website from day one. Launch with a professional business profile now, establish your online presence quickly, and expand when your business is ready."
-            align="center"
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {[
-              {
-                title: "Launch Faster",
-                subtitle: "Launch Faster. Start Showing Up Online Sooner.",
-                description:
-                  "Go live in days instead of waiting weeks or months for a traditional website project. Every profile is pre-structured for a specific business category, helping you present your services professionally from the start.",
-                label: "Perfect for",
-                items: [
-                  "New businesses launching quickly",
-                  "Service providers needing an online presence",
-                  "Agencies validating new offers",
-                  "Founders testing a new business idea",
-                ],
-                result:
-                  "Start promoting your business sooner and stop losing opportunities while waiting for a website to be built.",
-              },
-              {
-                title: "Lower Cost",
-                subtitle: "Professional Presence Without the Agency Price Tag.",
-                description:
-                  "A custom website isn&apos;t always the first step. Start with a professionally designed business profile from just $19 and only invest in additional services when your business genuinely needs them.",
-                label: "Benefits",
-                items: [
-                  "Affordable starting point",
-                  "No large upfront commitment",
-                  "Immediate launch value",
-                  "Upgrade only when required",
-                ],
-                result:
-                  "Preserve your budget for marketing, operations, and growth while still looking credible online.",
-              },
-              {
-                title: "Easy Upgrade Path",
-                subtitle: "Start Small. Expand When You&apos;re Ready.",
-                description:
-                  "Your business profile isn&apos;t a dead-end template. It can evolve into a branded website, lead generation platform, booking system, customer portal, or even a full SaaS product over time.",
-                label: "Growth Path",
-                items: [
-                  "Template → Branded Profile → Business Launch → Full Website → Custom Platform",
-                  "",
-                  "",
-                  "",
-                ],
-                result:
-                  "Build once, grow gradually, and avoid restarting your online presence every time your business reaches a new stage.",
-              },
-            ].map((card) => (
-              <Card key={card.title} hoverable className="flex h-full flex-col">
-                <h3 className="font-display text-xl tracking-tight">{card.title}</h3>
-                <p className="mt-1 min-h-12 text-base font-medium leading-6 text-text">{card.subtitle}</p>
-                <p className="mt-3 min-h-40 text-sm leading-6 text-text-muted">{card.description}</p>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.15em] text-text-muted">{card.label}</p>
-                <ul className="mt-2 min-h-32 space-y-2">
-                  {card.items.map((item, index) => (
-                    <li key={`${card.title}-${index}`} className="flex items-start gap-2 text-sm leading-6 text-text-muted">
-                      {item ? <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" /> : <span className="size-4 shrink-0" />}
-                      {item || <span className="opacity-0">placeholder</span>}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-auto border-t border-border pt-4 text-sm leading-6 text-text">
-                  <strong>Result:</strong> {card.result}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section tone="inset">
-        <Container>
-          <SectionHeading eyebrow="What's included" title="Every profile includes" align="center" />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {HTML_PROFILE_INCLUDED.map((item) => (
-              <Card key={item} className="p-4">
-                <div className="flex items-start gap-2">
-                  <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
-                  <p className="text-sm leading-6 text-text-muted">{item}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="customization" className="py-14 sm:py-16">
-        <Container>
-          <SectionHeading
-            eyebrow="Customization options"
-            title="Need changes? We can customize any profile."
-            align="center"
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {HTML_PROFILE_CUSTOMIZATION.map((group) => (
-              <Card key={group.title} className="h-full">
-                <h3 className="font-display text-lg tracking-tight">{group.title}</h3>
-                <ul className="mt-4 space-y-2">
-                  {group.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm leading-6 text-text-muted">
-                      <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section tone="inset">
-        <Container width="reading">
-          <SectionHeading eyebrow="Upgrade path" title="Start small. Grow later." align="center" />
-          <div className="mt-10 space-y-3">
-            {HTML_PROFILE_UPGRADE_PATH.map((step, index) => (
-              <div key={step} className="flex items-center gap-3">
-                <div className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-sm font-medium text-primary">
-                  {index + 1}
-                </div>
-                <p className="font-display text-lg tracking-tight">{step}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="py-14 sm:py-16">
-        <Container width="reading">
-          <Card className="p-8 text-center">
-            <h2 className="font-display text-3xl tracking-tight">Need More Than a Business Profile?</h2>
-            <p className="mt-3 text-base leading-7 text-text-muted">
-              If you need custom functionality, booking systems, automation, or a complete website, let&apos;s discuss your project.
-            </p>
-            <p className="mt-3 text-sm text-text-muted">Average response time: under 24 business hours.</p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <LinkButton href="/book-appointment">Book Consultation</LinkButton>
-              <LinkButton href="/products/category/html-business-profiles" variant="outline">
-                Browse Profiles
-              </LinkButton>
-            </div>
-          </Card>
-        </Container>
-      </Section>
-
-      <Section id="faq" tone="inset">
-        <Container width="reading">
-          <SectionHeading eyebrow="FAQ" title="HTML Business Profiles questions, answered." align="center" />
-          <div className="mt-10">
-            <Accordion items={[...HTML_PROFILE_FAQ]} />
-          </div>
-        </Container>
-      </Section>
-
-    </>
-  );
-}
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -789,7 +389,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All services
+            â† All services
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7">
@@ -853,7 +453,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <SectionHeading
               eyebrow="Our stack"
               title="Our SaaS Development Stack"
-              description="We build modern, scalable SaaS applications using a proven, flexible tech stack—carefully selected for performance, scalability, and speed of execution."
+              description="We build modern, scalable SaaS applications using a proven, flexible tech stackâ€”carefully selected for performance, scalability, and speed of execution."
             />
             <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
               {[
@@ -910,7 +510,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               ))}
             </RevealGroup>
             <p className="mt-8 text-center text-sm text-text-muted max-w-2xl mx-auto">
-              We don&apos;t just pick tools—we combine them into a system that can build, launch, and scale SaaS products efficiently.
+              We don&apos;t just pick toolsâ€”we combine them into a system that can build, launch, and scale SaaS products efficiently.
             </p>
           </Container>
         </Section>
@@ -1021,7 +621,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       <CTABand
-        title={`${copy.primaryCta} — let's talk specifics.`}
+        title={`${copy.primaryCta} â€” let's talk specifics.`}
         description="A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
         primary={{ label: copy.primaryCta, href: "/book-appointment" }}
         secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}

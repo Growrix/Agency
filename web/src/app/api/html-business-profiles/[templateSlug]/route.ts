@@ -26,29 +26,21 @@ export async function GET(_: Request, context: RouteContext) {
     return new Response("Template not found.", { status: 404 });
   }
 
-  const attemptedPaths: string[] = [];
+  const filePath = path.join(runtime.htmlBusinessProfiles.directory, template.fileName);
 
-  for (const directory of runtime.htmlBusinessProfiles.directoryCandidates) {
-    const filePath = path.join(directory, template.fileName);
-    attemptedPaths.push(filePath);
-
-    try {
-      const html = await readFile(filePath, "utf8");
-      return new Response(html, {
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-          "Cache-Control": "no-store",
-          "X-Frame-Options": "SAMEORIGIN",
-          "Content-Security-Policy": PREVIEW_CSP,
-        },
-      });
-    } catch {
-      // Try the next candidate directory.
-    }
+  try {
+    const html = await readFile(filePath, "utf8");
+    return new Response(html, {
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Security-Policy": PREVIEW_CSP,
+      },
+    });
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : "unknown";
+    console.warn(`[html-business-profiles] preview file unavailable: ${filePath} (${reason})`);
+    return new Response("Template file is unavailable.", { status: 404 });
   }
-
-  console.warn(
-    `[html-business-profiles] preview file unavailable for ${template.fileName}. attempted=${attemptedPaths.join(" | ")}`,
-  );
-  return new Response("Template file is unavailable.", { status: 404 });
 }
