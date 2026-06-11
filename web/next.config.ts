@@ -46,9 +46,9 @@ const nextConfig: NextConfig = {
   allowedDevOrigins,
   outputFileTracingRoot: path.join(__dirname, ".."),
   outputFileTracingIncludes: {
-    "/api/html-business-profiles/[templateSlug]/route": [
-      "./public/previews/html-business-profiles/**/*",
-      "../web/public/previews/html-business-profiles/**/*",
+    "/api/html-business-profiles/[templateSlug]": [
+      "../Shop/business-professional/business-profile-pages/**/*",
+      "Shop/business-professional/business-profile-pages/**/*",
     ],
   },
   images: {
@@ -89,106 +89,6 @@ const nextConfig: NextConfig = {
       {
         source: "/products/category/ready-websites",
         destination: "/products/category/website-templates",
-        permanent: true,
-      },
-      {
-        source: "/products/category/business-cards",
-        destination: "/products/category/digital-business-cards",
-        permanent: true,
-      },
-      {
-        source: "/products/category/faq",
-        destination: "/products/category/faq-knowledge-base-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/checklist-tracker",
-        destination: "/products/category/checklists-trackers",
-        permanent: true,
-      },
-      {
-        source: "/products/category/annual-report",
-        destination: "/products/category/annual-report-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/resume",
-        destination: "/products/category/html-resumes-cv",
-        permanent: true,
-      },
-      {
-        source: "/products/category/proposal",
-        destination: "/products/category/proposal-templates",
-        permanent: true,
-      },
-      {
-        source: "/products/category/invoice",
-        destination: "/products/category/html-invoice-templates",
-        permanent: true,
-      },
-      {
-        source: "/products/category/restaurant-menu",
-        destination: "/products/category/restaurant-menu-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/app-promo",
-        destination: "/products/category/app-promo-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/affiliate-landing",
-        destination: "/products/category/affiliate-landing-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/course-landing",
-        destination: "/products/category/course-landing-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/event-webinar",
-        destination: "/products/category/event-webinar-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/lead-magnet",
-        destination: "/products/category/lead-magnet-download-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/portfolio",
-        destination: "/products/category/portfolio-templates",
-        permanent: true,
-      },
-      {
-        source: "/products/category/product-launch",
-        destination: "/products/category/product-launch-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/link-in-bio",
-        destination: "/products/category/link-in-bio-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/coming-soon",
-        destination: "/products/category/coming-soon-maintenance-pages",
-        permanent: true,
-      },
-      {
-        source: "/products/category/cold-outreach",
-        destination: "/products/category/cold-outreach-templates",
-        permanent: true,
-      },
-      {
-        source: "/products/category/promo-blast",
-        destination: "/products/category/promotional-email-blasts",
-        permanent: true,
-      },
-      {
-        source: "/products/category/transactional",
-        destination: "/products/category/transactional-email-templates",
         permanent: true,
       },
     ];

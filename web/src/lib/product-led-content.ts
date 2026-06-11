@@ -43,12 +43,6 @@ export const PRODUCT_CATEGORY_CHIPS = [
   { label: "All products", href: "/products" },
   { label: "HTML templates", href: "/products/category/html-business-profiles" },
   { label: "Website templates", href: "/products/category/website-templates" },
-  { label: "Business profile pages", href: "/products/category/business-profile-pages" },
-  { label: "Digital business cards", href: "/products/category/digital-business-cards" },
-  { label: "Newsletter templates", href: "/products/category/newsletter-templates" },
-  { label: "Course landing pages", href: "/products/category/course-landing-pages" },
-  { label: "Bundles", href: "/products/bundles" },
-  { label: "Free starters", href: "/products/free" },
 ] as const;
 
 export type SolutionAudience = {

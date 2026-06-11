@@ -65,7 +65,7 @@ export function Header() {
                       {item.label}
                       <ChevronDownIcon className="size-3.5" aria-hidden />
                     </Popover.Button>
-                    <Popover.Panel className="absolute left-0 top-full mt-2 w-105 rounded-[16px] border border-border bg-surface p-2 shadow-(--shadow-3)">
+                    <Popover.Panel className="absolute left-0 top-full mt-2 w-80 rounded-md border border-border bg-surface p-2 shadow-(--shadow-3)">
                       {item.children.map((c) => (
                         <Link
                           key={c.href}
@@ -74,7 +74,6 @@ export function Header() {
                           className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
                         >
                           <div className="font-medium text-[15px]">{c.label}</div>
-                          <div className="text-sm leading-snug text-text-muted">{c.description}</div>
                         </Link>
                       ))}
                     </Popover.Panel>
