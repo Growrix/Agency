@@ -6,11 +6,12 @@ import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
-import { HtmlProfileHeroCarousel, type HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
-import { WebsiteTemplateHtmlDualPreview } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
+import { WebsiteTemplateHtmlDesktopPreviewCarousel, WebsiteTemplateHtmlDualPreview } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
+import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getProductHref, type ShopProduct } from "@/lib/shop";
 import {
+  buildWebsiteTemplateHtmlPreviewSlides,
   getWebsiteTemplateHtmlPreviewUrl,
   listWebsiteTemplateHtmlPreviews,
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
@@ -61,42 +62,19 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
   const premiumPrice = getVariantPrice(products, "premium", "$499");
   const launchPrice = getVariantPrice(products, "done-for-you", "Custom Pricing");
   const primaryTemplate = catalogProducts[0] ?? products[0];
-  const primaryHtmlPreview = listWebsiteTemplateHtmlPreviews()[0];
-  const primaryHtmlPreviewUrl = primaryHtmlPreview
-    ? getWebsiteTemplateHtmlPreviewUrl(primaryHtmlPreview.slug)
-    : undefined;
-  const htmlPreviewSlides: HtmlProfileHeroSlide[] = listWebsiteTemplateHtmlPreviews().map((template) => ({
-    name: template.title,
-    type: template.type,
-    price: template.price,
-    href: template.href,
-    previewUrl: getWebsiteTemplateHtmlPreviewUrl(template.slug),
-  }));
+  const htmlPreviewSlides: HtmlProfileHeroSlide[] = buildWebsiteTemplateHtmlPreviewSlides(catalogProducts);
+  const htmlPreviewFallbackSlide: HtmlProfileHeroSlide = {
+    name: primaryTemplate?.name ?? "Website Template",
+    type: primaryTemplate?.type ?? "HTML Preview",
+    price: primaryTemplate?.price ?? "$149",
+    href: primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates-html-preview",
+    previewUrl: listWebsiteTemplateHtmlPreviews()[0]
+      ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
+      : undefined,
+  };
 
   return (
     <>
-      <Section className="pt-10 pb-10 sm:pt-14 sm:pb-12">
-        <Container>
-          <div className="flex flex-col gap-3 text-center">
-            <Badge tone="primary" dot>New Preview Concept</Badge>
-            <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-balance">
-              Desktop and mobile preview, side by side
-            </h2>
-            <p className="mx-auto max-w-3xl text-base leading-7 text-text-muted">
-              This section is preview-first by design, so users can inspect the same HTML template in desktop and
-              mobile form before moving into purchase or customization.
-            </p>
-          </div>
-
-          <div className="mt-8">
-            <WebsiteTemplateHtmlDualPreview
-              previewUrl={primaryHtmlPreviewUrl}
-              templateTitle={primaryHtmlPreview?.title ?? "Website Template"}
-            />
-          </div>
-        </Container>
-      </Section>
-
       <Section className="pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container>
@@ -104,8 +82,8 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
             ← All products
           </Link>
 
-          <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:items-stretch">
-            <div className="lg:col-span-7">
+          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-stretch xl:gap-10">
+            <div className="lg:col-span-5">
               <Badge tone="primary" dot>HTML Preview Edition</Badge>
               <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-balance">
                 Website templates with embedded HTML live preview.
@@ -141,23 +119,35 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <Card className="h-full p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">HTML template preview</p>
-                <div className="mt-4 min-h-[420px] lg:min-h-[560px]">
-                  <HtmlProfileHeroCarousel
-                    slides={htmlPreviewSlides}
-                    ctaLabel="View Product"
-                    emptyFallbackSlide={{
-                      name: "Website Template",
-                      type: "HTML Preview",
-                      price: "$149",
-                      href: "/products/category/website-templates-html-preview",
-                    }}
-                  />
-                </div>
+            <div className="lg:col-span-7">
+              <Card className="h-full p-5 sm:p-6">
+                <WebsiteTemplateHtmlDesktopPreviewCarousel
+                  slides={htmlPreviewSlides}
+                  emptyFallbackSlide={htmlPreviewFallbackSlide}
+                />
               </Card>
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section className="pt-10 pb-10 sm:pt-14 sm:pb-12">
+        <Container>
+          <div className="flex flex-col gap-3 text-center">
+            <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-balance">
+              Desktop and mobile preview, side by side
+            </h2>
+            <p className="mx-auto max-w-3xl text-base leading-7 text-text-muted">
+              This section is preview-first by design, so users can inspect the same HTML template in desktop and
+              mobile form before moving into purchase or customization.
+            </p>
+          </div>
+
+          <div className="mt-8">
+            <WebsiteTemplateHtmlDualPreview
+              slides={htmlPreviewSlides}
+              emptyFallbackSlide={htmlPreviewFallbackSlide}
+            />
           </div>
         </Container>
       </Section>

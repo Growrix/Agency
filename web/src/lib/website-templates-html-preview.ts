@@ -31,3 +31,27 @@ export function listWebsiteTemplateHtmlPreviews() {
 export function getWebsiteTemplateHtmlPreviewUrl(templateSlug: string) {
   return `/api/website-templates-html-preview/${templateSlug}`;
 }
+
+type WebsiteTemplateHtmlPreviewCatalogProduct = {
+  slug: string;
+  price: string;
+  embeddedPreviewUrl?: string;
+  livePreviewUrl?: string;
+};
+
+export function buildWebsiteTemplateHtmlPreviewSlides(catalogProducts: WebsiteTemplateHtmlPreviewCatalogProduct[]) {
+  return listWebsiteTemplateHtmlPreviews().map((template) => {
+    const previewUrl = getWebsiteTemplateHtmlPreviewUrl(template.slug);
+    const catalogProduct = catalogProducts.find(
+      (item) => item.embeddedPreviewUrl === previewUrl || item.livePreviewUrl === previewUrl,
+    );
+
+    return {
+      name: template.title,
+      type: template.type,
+      price: catalogProduct?.price ?? template.price,
+      href: catalogProduct ? `/products/${catalogProduct.slug}` : template.href,
+      previewUrl,
+    };
+  });
+}

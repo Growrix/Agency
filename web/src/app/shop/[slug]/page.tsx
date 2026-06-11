@@ -8,8 +8,12 @@ import { PreviewableImageFrame } from "@/components/media/PreviewableImageFrame"
 import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLightbox";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
+import { WebsiteTemplateHtmlMobilePreviewSection } from "@/components/sections/WebsiteTemplateHtmlMobilePreviewSection";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
+import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
+import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
+import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
 import {
   getTierCardBadgeClass,
   getTierCardCheckClass,
@@ -388,13 +392,18 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   if (!product) notFound();
 
   const allProducts = await listPublicShopProducts();
+  const isWebsiteTemplatesHtmlPreview = product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG;
   const explicitRelated = (product.related_product_slugs ?? [])
     .map((relatedSlug) => allProducts.find((item) => item.slug === relatedSlug))
     .filter((item): item is (typeof allProducts)[number] => item !== undefined)
     .filter((item) => item.slug !== product.slug);
-  const related = (explicitRelated.length > 0
-    ? explicitRelated
-    : allProducts.filter((item) => item.slug !== product.slug)).slice(0, 3);
+  const related = isWebsiteTemplatesHtmlPreview
+    ? allProducts
+      .filter((item) => item.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG && item.slug !== product.slug)
+      .slice(0, 3)
+    : (explicitRelated.length > 0
+      ? explicitRelated
+      : allProducts.filter((item) => item.slug !== product.slug)).slice(0, 3);
 
   const serviceMap = new Map<string, (typeof SERVICES)[number]>(SERVICES.map((service) => [service.slug, service]));
   const relatedServices = (product.related_service_slugs ?? [])
@@ -454,6 +463,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const basePriceLabel = variants[0]?.price ?? product.price;
   const isHtmlBusinessProfile = product.categorySlug === "html-business-profiles";
   const isWebsiteTemplatesCategory = product.categorySlug === "website-templates";
+  const useShellLayout = isWebsiteTemplatesCategory || isWebsiteTemplatesHtmlPreview;
   const isWebsiteTemplateProduct =
     isWebsiteTemplatesCategory ||
     product.categorySlug === "saas-templates" ||
@@ -848,11 +858,442 @@ export default async function ShopPreviewPage({ params }: PageProps) {
     );
   }
 
+  if (isWebsiteTemplatesHtmlPreview) {
+    const standardVariant = variants.find((variant) => variant.slug === "standard") ?? variants[0];
+    const premiumVariant = variants.find((variant) => variant.slug === "premium") ?? variants[1] ?? variants[0];
+    const launchVariant = variants.find((variant) => variant.slug === "done-for-you") ?? variants[2] ?? variants[0];
+    const htmlPreviewPathVariants = [standardVariant, premiumVariant, launchVariant];
+
+    return (
+      <>
+        <Section className="pb-4 pt-6 sm:pb-6 sm:pt-8">
+          <Container width="shell">
+            <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+              <ArrowLeftIcon className="size-4" /> Back to products
+            </Link>
+
+            <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_400px] lg:items-start xl:grid-cols-[1fr_420px]">
+              <div className="min-w-0">
+                <div className="lg:hidden">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
+                    {product.category} &middot; {product.type}
+                  </p>
+                  <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
+                </div>
+
+                <div id="preview" className="mt-0 min-w-0 overflow-hidden rounded-2xl border border-border lg:mt-0">
+                  {product.embeddedPreviewUrl ? (
+                    <WebsiteTemplateHtmlDesktopPreviewFrame
+                      previewUrl={product.embeddedPreviewUrl}
+                      title={`${product.name} desktop preview`}
+                      fit="width"
+                      viewportHeight={1100}
+                      frameClassName="rounded-2xl"
+                    />
+                  ) : (
+                    <ProductPreviewSurface variant={product.previewVariant} />
+                  )}
+                </div>
+
+                <div className="mt-8 space-y-8">
+                  <div>
+                    <h2 className="font-display text-xl font-semibold tracking-tight">Template overview</h2>
+                    <p className="mt-3 leading-7 text-text-muted">{product.teaser}</p>
+                    <p className="mt-3 leading-7 text-text-muted">{product.summary}</p>
+                  </div>
+
+                  <div>
+                    <h2 className="font-display text-xl font-semibold tracking-tight">Who this is for</h2>
+                    <p className="mt-2 text-sm leading-6 text-text-muted">{product.audience}</p>
+                    <ul className="mt-4 space-y-2">
+                      {useCases.map((item, index) => (
+                        <li key={`${item}-${index}`} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                          <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <aside className="min-w-0 space-y-4 lg:sticky lg:top-24">
+                <div className="hidden lg:block">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
+                    {product.category} &middot; {product.type}
+                  </p>
+                  <h1 className="mt-2 font-display text-2xl font-bold leading-snug tracking-tight">{product.name}</h1>
+                  <p className="mt-3 text-sm leading-6 text-text-muted">{product.summary}</p>
+                </div>
+
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Starting from</p>
+                  <p className="mt-1 font-display text-4xl font-bold tracking-tight">
+                    {WEBSITE_TEMPLATE_TIER_PRESETS.standard.price}
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <LinkButton
+                    href={getCheckoutHref(product, {
+                      variantSlug: standardVariant.slug,
+                      tierName: standardVariant.tier_name,
+                      fulfillmentType: standardVariant.fulfillment_type,
+                    })}
+                    size="lg"
+                    fullWidth
+                  >
+                    <ShoppingBagIcon className="size-5" /> Get Template Access
+                  </LinkButton>
+                  <LinkButton
+                    href={previewHref}
+                    variant="outline"
+                    size="lg"
+                    fullWidth
+                    target={hasExternalPreview ? "_blank" : undefined}
+                    rel={hasExternalPreview ? "noreferrer" : undefined}
+                  >
+                    Live Preview <ArrowUpRightIcon className="size-4" />
+                  </LinkButton>
+                </div>
+
+                <div className="rounded-2xl border border-border bg-inset/40 p-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Quick tier links</p>
+                  <div className="mt-3 space-y-2">
+                    {htmlPreviewPathVariants.map((variant) => (
+                      <Link
+                        key={variant.slug}
+                        href={variant.slug === "done-for-you"
+                          ? "/book-appointment"
+                          : getCheckoutHref(product, {
+                              variantSlug: variant.slug,
+                              tierName: variant.tier_name,
+                              fulfillmentType: variant.fulfillment_type,
+                            })}
+                        className="flex items-center justify-between rounded-xl border border-border px-3 py-2 text-sm hover:border-primary/60 hover:bg-primary/5"
+                      >
+                        <span>{getWebsiteTemplateTierLabel(variant)}</span>
+                        <span className="font-medium text-text-muted">
+                          {WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug]?.price ?? variant.price}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <hr className="border-border" />
+
+                <dl className="space-y-2 text-sm">
+                  {[
+                    { label: "Category", value: product.category },
+                    { label: "Type", value: product.type },
+                    { label: "Industry", value: product.industry },
+                  ].map((row) => (
+                    <div key={row.label} className="flex min-w-0 items-start justify-between gap-4">
+                      <dt className="shrink-0 font-medium text-text-muted">{row.label}</dt>
+                      <dd className="min-w-0 flex-1 wrap-anywhere text-right text-text">{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <hr className="border-border" />
+
+                <div className="rounded-2xl border border-border bg-inset/40 p-4 text-sm leading-6 text-text-muted">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Ideal for</p>
+                  <p className="mt-2">{product.audience}</p>
+                </div>
+
+                <div className="text-center">
+                  <LinkButton
+                    href="/book-appointment"
+                    variant="ghost"
+                    size="sm"
+                    fullWidth
+                    className="h-auto whitespace-normal px-4 py-2.5 leading-5"
+                  >
+                    Need flexible payment or a custom fit? Talk to us first
+                  </LinkButton>
+                </div>
+              </aside>
+            </div>
+          </Container>
+        </Section>
+
+        {product.embeddedPreviewUrl ? (
+          <Section className="border-t border-border pt-10 pb-10 sm:pt-14 sm:pb-12">
+            <Container width="shell">
+              <WebsiteTemplateHtmlMobilePreviewSection
+                previewUrl={product.embeddedPreviewUrl}
+                templateTitle={product.name}
+                previewOnRight
+              />
+            </Container>
+          </Section>
+        ) : null}
+
+        <Section tone="inset" className="py-10 sm:py-12">
+          <Container width="shell">
+            <div className="space-y-10">
+              <div>
+                <h2 className="font-display text-2xl font-semibold tracking-tight">At a glance</h2>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {product.highlights.map((highlight) => (
+                    <div key={highlight.label} className="rounded-2xl border border-border bg-surface px-4 py-4">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">{highlight.label}</p>
+                      <p className="mt-2 font-display text-lg font-semibold tracking-tight">{highlight.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {features.length > 0 ? (
+                <div>
+                  <h2 className="font-display text-2xl font-semibold tracking-tight">Key features</h2>
+                  <ul className="mt-4 space-y-2">
+                    {features.map((item, index) => (
+                      <li key={`${item}-${index}`} className="flex items-start gap-3 text-sm leading-6 text-text-muted">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              <div>
+                <h2 className="font-display text-2xl font-semibold tracking-tight">Stack</h2>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {product.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm text-text-muted"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </Section>
+
+        <Section className="border-t border-border py-10 sm:py-12">
+          <Container width="shell">
+            <div className="space-y-8">
+              <div className="max-w-4xl">
+                <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
+                <p className="mt-2 text-base leading-7 text-text-muted">
+                  Start with the template, let us customize it for your business, or partner with us for a fully tailored website experience.
+                </p>
+                <p className="mt-3 text-base font-medium text-text">Quick Buyer Guide</p>
+                <p className="mt-2 text-sm leading-6 text-text-muted">
+                  <strong>Template Only</strong><br />
+                  You already have the skills or team to customize, deploy, and manage the website yourself.
+                </p>
+                <p className="mt-2 text-sm leading-6 text-text-muted">
+                  <strong>Template Customization</strong><br />
+                  You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
+                </p>
+                <p className="mt-2 text-sm leading-6 text-text-muted">
+                  <strong>Business Launch</strong><br />
+                  You need a fully tailored website strategy, custom structure, unlimited pages, ongoing support, and a long-term digital partner.
+                </p>
+              </div>
+
+              <div className="grid gap-5 lg:grid-cols-3">
+                {htmlPreviewPathVariants.map((variant) => {
+                  const preset = WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug];
+                  const isRecommended = variant.slug === "premium";
+                  const isFeaturedCard = isRecommended;
+                  const variantHref = variant.slug === "done-for-you"
+                    ? "/book-appointment"
+                    : getCheckoutHref(product, {
+                        variantSlug: variant.slug,
+                        tierName: variant.tier_name,
+                        fulfillmentType: variant.fulfillment_type,
+                      });
+
+                  return (
+                    <article key={variant.slug} className={getTierCardContainerClass(isFeaturedCard)}>
+                      <div className="flex items-center justify-between gap-3">
+                        <p className={`font-mono text-[10px] uppercase tracking-[0.18em] ${getTierCardMutedTextClass(isFeaturedCard)}`}>{variant.tier_name}</p>
+                        {isRecommended ? (
+                          <span className={getTierCardBadgeClass(isFeaturedCard)}>Recommended</span>
+                        ) : null}
+                      </div>
+                      <h3 className="mt-2 font-display text-xl font-semibold tracking-tight">{preset?.label ?? variant.title}</h3>
+                      <p className="mt-2 font-display text-3xl font-bold tracking-tight">{preset?.price ?? variant.price}</p>
+                      {preset?.description ? (
+                        <p className={`mt-3 text-sm leading-6 ${getTierCardMutedTextClass(isFeaturedCard)}`}>{preset.description}</p>
+                      ) : null}
+
+                      <p className={`mt-4 text-xs font-semibold uppercase tracking-[0.15em] ${getTierCardMutedTextClass(isFeaturedCard)}`}>
+                        {preset?.includesHeading ?? "Includes"}
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {(preset?.includes ?? variant.includes).map((item) => (
+                          <li key={item} className={`flex items-start gap-2 text-sm leading-6 ${getTierCardMutedTextClass(isFeaturedCard)}`}>
+                            <CheckIcon className={`mt-1 size-4 shrink-0 ${getTierCardCheckClass()}`} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+
+                      {(preset?.notIncluded?.length ?? 0) > 0 ? (
+                        <>
+                          <p className={`mt-4 text-xs font-semibold uppercase tracking-[0.15em] ${getTierCardMutedTextClass(isFeaturedCard)}`}>Not Included</p>
+                          <ul className="mt-2 space-y-2">
+                            {preset?.notIncluded.map((item) => (
+                              <li key={item} className={`flex items-start gap-2 text-sm leading-6 ${getTierCardMutedTextClass(isFeaturedCard)}`}>
+                                <span className={`mt-[6px] inline-flex h-4 w-4 items-center justify-center text-xs leading-none ${getTierCardMutedTextClass(isFeaturedCard)}`}>✗</span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : null}
+
+                      {preset?.bestFor ? (
+                        <>
+                          <p className={`mt-4 text-xs font-semibold uppercase tracking-[0.15em] ${getTierCardMutedTextClass(isFeaturedCard)}`}>Best For</p>
+                          <p className={`mt-2 text-sm leading-6 ${getTierCardMutedTextClass(isFeaturedCard)}`}>{preset.bestFor}</p>
+                        </>
+                      ) : null}
+
+                      <div className="mt-auto pt-5">
+                        <LinkButton href={variantHref} variant={isFeaturedCard ? "primary" : "outline"} size="sm" fullWidth>
+                          {preset?.cta ?? `Continue with ${variant.tier_name}`}
+                        </LinkButton>
+                      </div>
+
+                      {preset?.helper ? (
+                        <p className={`mt-2 min-h-10 text-xs leading-5 ${getTierCardMutedTextClass(isFeaturedCard)}`}>{preset.helper}</p>
+                      ) : null}
+                    </article>
+                  );
+                })}
+              </div>
+
+              <div>
+                <h2 className="font-display text-xl font-semibold tracking-tight">Tier comparison</h2>
+                <div className="mt-4 overflow-x-auto rounded-2xl border border-border">
+                  <table className="min-w-full divide-y divide-border text-left text-sm">
+                    <thead className="bg-inset/50 text-text-muted">
+                      <tr>
+                        <th className="px-4 py-3 font-medium">Capability</th>
+                        <th className="px-4 py-3 font-medium">Template Only</th>
+                        <th className="px-4 py-3 font-medium">Template Customization</th>
+                        <th className="px-4 py-3 font-medium">Business Launch</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {WEBSITE_TEMPLATE_COMPARISON_ROWS.map((row) => (
+                        <tr key={row.capability}>
+                          <td className="px-4 py-3 text-text">{row.capability}</td>
+                          <td className="px-4 py-3 text-text-muted">{row.templateOnly ? "Included" : "-"}</td>
+                          <td className="px-4 py-3 text-text-muted">{row.configuredTemplate ? "Included" : "-"}</td>
+                          <td className="px-4 py-3 text-text-muted">{row.businessLaunch ? "Included" : "-"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </Section>
+
+        {customizationUpsells.length > 0 ? (
+          <Section tone="inset" className="py-10 sm:py-12">
+            <Container width="shell">
+              <h2 className="font-display text-2xl font-semibold tracking-tight">Customization and implementation</h2>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                {customizationUpsells.map((upsell) => (
+                  <div key={`${upsell.title}-${upsell.cta_href}`} className="rounded-2xl border border-border bg-surface p-4">
+                    <h3 className="font-display text-lg font-semibold tracking-tight">{upsell.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-text-muted">{upsell.description}</p>
+                    <div className="mt-4">
+                      <LinkButton href={upsell.cta_href} variant="outline" size="sm">
+                        {upsell.cta_label} <ArrowUpRightIcon className="size-4" />
+                      </LinkButton>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Container>
+          </Section>
+        ) : null}
+
+        {displayRelatedServices.length > 0 ? (
+          <Section className="border-t border-border py-10 sm:py-12">
+            <Container width="shell">
+              <h2 className="font-display text-2xl font-semibold tracking-tight">Related services</h2>
+              <p className="mt-2 text-sm leading-6 text-text-muted">
+                Need help beyond the template itself? These services are the most common next steps.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {displayRelatedServices.map((service) => (
+                  <LinkButton key={service.slug} href={`/services/${service.slug}`} variant="outline" size="sm">
+                    {service.name}
+                  </LinkButton>
+                ))}
+              </div>
+            </Container>
+          </Section>
+        ) : null}
+
+        {faqs.length > 0 ? <ProductFaqSection items={faqs} title="Product FAQ" /> : null}
+
+        {related.length > 0 ? (
+          <Section className="border-t border-border py-12 sm:py-16">
+            <Container width="shell">
+              <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
+              <p className="mt-2 text-sm text-text-muted">Browse more website template HTML previews from this category.</p>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
+                {related.map((item) => (
+                  <ShopProductHtmlPreviewCard key={item.slug} product={item} />
+                ))}
+              </div>
+            </Container>
+          </Section>
+        ) : null}
+
+        <div className="h-20 lg:hidden" aria-hidden />
+
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 p-3 backdrop-blur lg:hidden">
+          <div className="mx-auto grid max-w-3xl grid-cols-2 gap-2">
+            <LinkButton
+              href={getCheckoutHref(product, {
+                variantSlug: standardVariant.slug,
+                tierName: standardVariant.tier_name,
+                fulfillmentType: standardVariant.fulfillment_type,
+              })}
+              size="sm"
+              fullWidth
+            >
+              Get Template Access
+            </LinkButton>
+            <LinkButton
+              href={previewHref}
+              variant="outline"
+              size="sm"
+              fullWidth
+              target={hasExternalPreview ? "_blank" : undefined}
+              rel={hasExternalPreview ? "noreferrer" : undefined}
+            >
+              Live Preview
+            </LinkButton>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       {/* Main product layout */}
       <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
-        <Container width={isWebsiteTemplatesCategory ? "shell" : "content"}>
+        <Container width={useShellLayout ? "shell" : "content"}>
           <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
             <ArrowLeftIcon className="size-4" /> Back to products
           </Link>
