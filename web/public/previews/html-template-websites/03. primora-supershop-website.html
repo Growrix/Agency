@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="The premium super shop for groceries, fresh produce, electronics, beauty and more — same-day delivery, easy returns and member rewards.">
 
   <meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0a120e" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#040E1E" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e6b4f'/%3E%3Cpath d='M10 23V9h6.2c3.2 0 5.3 1.9 5.3 4.8s-2.1 4.8-5.3 4.8H13.4V23z' fill='%23eebc56'/%3E%3C/svg%3E">
 
   <script type="application/ld+json">
@@ -190,29 +190,29 @@
       --color-primary: #3dbd92;
       --color-primary-hover: #5acda5;
       --color-primary-active: #2da17b;
-      --color-primary-soft: #11302a;
-      --color-secondary: #dfe9e3;
+      --color-primary-soft: #0D1E38;
+      --color-secondary: #E8F2FF;
       --color-accent: #e3b35a;
       --color-accent-strong: #ecc77f;
-      --color-accent-soft: #2b2410;
+      --color-accent-soft: #1A2540;
       --color-success: #4ade80;
-      --color-success-soft: #0d2418;
+      --color-success-soft: #0A1F18;
       --color-warning: #fbbf24;
-      --color-warning-soft: #2a200a;
+      --color-warning-soft: #2A200A;
       --color-error: #f4796d;
-      --color-error-soft: #2e1512;
+      --color-error-soft: #2E1512;
       --color-deal: #ff7a6e;
-      --color-bg: #0a120e;
-      --color-surface: #101b15;
-      --color-surface-2: #17251e;
-      --color-text: #e6efe9;
-      --color-text-muted: #9db1a6;
-      --color-border: #233830;
-      --color-border-strong: #355146;
+      --color-bg: #040E1E;
+      --color-surface: #091629;
+      --color-surface-2: #0F2040;
+      --color-text: #E8F2FF;
+      --color-text-muted: #8FA8C4;
+      --color-border: #152840;
+      --color-border-strong: #1E3858;
       --color-on-primary: #06281d;
       --color-on-accent: #271d06;
-      --color-hero-bg: linear-gradient(135deg, #0b1d16 0%, #0e2f23 55%, #114433 100%);
-      --color-card-art-bg: #15221b;
+      --color-hero-bg: linear-gradient(135deg, #040E1E 0%, #091629 55%, #0F2040 100%);
+      --color-card-art-bg: #0D1E38;
       --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
       --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
       --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.55);
@@ -238,6 +238,7 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: clip;
       max-width: 100%;
+      width: 100%;
     }
     img, svg, video { display: block; max-width: 100%; }
     input, button, textarea, select { font: inherit; color: inherit; }
@@ -267,8 +268,10 @@
       width: min(100% - 2 * var(--space-4), var(--container-max));
       margin-inline: auto;
       max-width: 100%;
+      min-width: 0;
+      overflow-x: clip;
     }
-    .container--wide { width: min(100% - 2 * var(--space-4), var(--container-wide)); max-width: 100%; }
+    .container--wide { width: min(100% - 2 * var(--space-4), var(--container-wide)); max-width: 100%; min-width: 0; overflow-x: clip; }
     .visually-hidden {
       position: absolute;
       width: 1px; height: 1px;
@@ -635,7 +638,7 @@
       font-size: var(--text-sm);
       overflow: hidden;
     }
-    [data-theme="dark"] .announce { background: #03130c; }
+    [data-theme="dark"] .announce { background: #040E1E; }
     .announce__inner {
       display: flex;
       align-items: center;
@@ -1058,18 +1061,27 @@
     @media (min-width: 768px) { .pgrid { grid-template-columns: repeat(3, 1fr); gap: var(--space-6); } }
     @media (min-width: 1024px) { .pgrid { grid-template-columns: repeat(4, 1fr); } }
     .prow {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(11.5rem, 16rem);
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
       gap: var(--space-4);
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       padding-bottom: var(--space-3);
       scrollbar-width: thin;
+      width: 100%;
       max-width: 100%;
       min-width: 0;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
     }
-    .prow > * { scroll-snap-align: start; }
+    .prow > * {
+      flex: 0 0 clamp(11.5rem, 42vw, 16rem);
+      width: clamp(11.5rem, 42vw, 16rem);
+      max-width: 16rem;
+      min-width: 0;
+      scroll-snap-align: start;
+    }
     .pcard {
       position: relative;
       display: flex;
@@ -1079,6 +1091,8 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+      min-width: 0;
+      height: 100%;
     }
     .pcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
     @media (prefers-reduced-motion: reduce) { .pcard:hover { transform: none; } }
@@ -1153,7 +1167,7 @@
        SECTION: Flash sale
        ========================================================================== */
     .flash { background: var(--color-secondary); color: #f0ece1; }
-    [data-theme="dark"] .flash { background: #07100b; }
+    [data-theme="dark"] .flash { background: #091629; }
     .flash .section-head__title { color: #fff; }
     .flash .section-head__lede { color: #b9c6bc; }
     .flash__timer { display: flex; align-items: center; gap: var(--space-2); }
@@ -1637,11 +1651,13 @@
     /* ==========================================================================
        VIEW: Cart
        ========================================================================== */
-    .cart__layout { display: grid; gap: var(--space-8); padding-bottom: var(--space-16); min-width: 0; }
-    @media (min-width: 1024px) { .cart__layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; } }
-    .cart__layout > * { min-width: 0; }
-    .cart__lines { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
-    [data-cart-cross-wrap] { min-width: 0; overflow: hidden; }
+    .cart__layout { display: grid; gap: var(--space-8); padding-bottom: var(--space-16); min-width: 0; width: 100%; max-width: 100%; }
+    @media (min-width: 1024px) { .cart__layout { grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem); align-items: start; } }
+    .cart__layout > * { min-width: 0; max-width: 100%; }
+    .cart__main { min-width: 0; max-width: 100%; overflow: hidden; }
+    .cart__lines { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; max-width: 100%; }
+    [data-cart-cross-wrap] { min-width: 0; max-width: 100%; overflow: hidden; }
+    [data-cart-cross-wrap] .prow { margin-inline: 0; }
     .cart-line {
       display: grid;
       grid-template-columns: 5rem minmax(0, 1fr);
@@ -1905,7 +1921,7 @@
        COMPONENT: Footer
        ========================================================================== */
     .footer { background: var(--color-secondary); color: #c8d2ca; margin-top: var(--space-16); }
-    [data-theme="dark"] .footer { background: #060d09; }
+    [data-theme="dark"] .footer { background: #040E1E; }
     .footer__newsletter { border-bottom: 1px solid rgb(255 255 255 / 0.12); padding-block: var(--space-10); }
     .footer__newsletter-inner { display: grid; gap: var(--space-6); align-items: center; }
     @media (min-width: 1024px) { .footer__newsletter-inner { grid-template-columns: 1fr 1fr; } }
@@ -2684,26 +2700,26 @@
             </div>
             <div class="app-promo__art" aria-hidden="true">
               <svg viewBox="0 0 300 360" aria-hidden="true" focusable="false">
-                <rect x="60" y="10" width="180" height="340" rx="28" fill="#0a120e" stroke="#355146" stroke-width="3"/>
-                <rect x="74" y="40" width="152" height="280" rx="12" fill="#101b15"/>
-                <rect x="120" y="22" width="60" height="8" rx="4" fill="#233830"/>
-                <rect x="86" y="56" width="128" height="36" rx="8" fill="#17251e"/>
+                <rect x="60" y="10" width="180" height="340" rx="28" fill="#040E1E" stroke="#1E3858" stroke-width="3"/>
+                <rect x="74" y="40" width="152" height="280" rx="12" fill="#091629"/>
+                <rect x="120" y="22" width="60" height="8" rx="4" fill="#152840"/>
+                <rect x="86" y="56" width="128" height="36" rx="8" fill="#0F2040"/>
                 <circle cx="104" cy="74" r="9" fill="#3dbd92"/>
-                <rect x="120" y="64" width="70" height="7" rx="3" fill="#2c4338"/>
-                <rect x="120" y="77" width="48" height="7" rx="3" fill="#233830"/>
-                <rect x="86" y="102" width="60" height="60" rx="8" fill="#17251e"/>
+                <rect x="120" y="64" width="70" height="7" rx="3" fill="#1E3858"/>
+                <rect x="120" y="77" width="48" height="7" rx="3" fill="#152840"/>
+                <rect x="86" y="102" width="60" height="60" rx="8" fill="#0F2040"/>
                 <circle cx="116" cy="126" r="14" fill="#e8533f"/>
-                <rect x="92" y="146" width="48" height="6" rx="3" fill="#2c4338"/>
-                <rect x="154" y="102" width="60" height="60" rx="8" fill="#17251e"/>
+                <rect x="92" y="146" width="48" height="6" rx="3" fill="#1E3858"/>
+                <rect x="154" y="102" width="60" height="60" rx="8" fill="#0F2040"/>
                 <circle cx="184" cy="126" r="14" fill="#eebc56"/>
-                <rect x="160" y="146" width="48" height="6" rx="3" fill="#2c4338"/>
-                <rect x="86" y="172" width="128" height="44" rx="8" fill="#17251e"/>
-                <rect x="94" y="182" width="80" height="7" rx="3" fill="#2c4338"/>
-                <rect x="94" y="196" width="56" height="7" rx="3" fill="#233830"/>
+                <rect x="160" y="146" width="48" height="6" rx="3" fill="#1E3858"/>
+                <rect x="86" y="172" width="128" height="44" rx="8" fill="#0F2040"/>
+                <rect x="94" y="182" width="80" height="7" rx="3" fill="#1E3858"/>
+                <rect x="94" y="196" width="56" height="7" rx="3" fill="#152840"/>
                 <rect x="86" y="226" width="128" height="40" rx="20" fill="#0e6b4f"/>
                 <rect x="118" y="241" width="64" height="9" rx="4" fill="#bfe8d9"/>
-                <rect x="86" y="280" width="128" height="26" rx="8" fill="#17251e"/>
-                <rect x="100" y="289" width="100" height="7" rx="3" fill="#2c4338"/>
+                <rect x="86" y="280" width="128" height="26" rx="8" fill="#0F2040"/>
+                <rect x="100" y="289" width="100" height="7" rx="3" fill="#1E3858"/>
               </svg>
             </div>
           </div>
@@ -3037,7 +3053,7 @@
           <a class="btn btn--primary" href="#/shop">Start shopping</a>
         </div>
         <div class="cart__layout" data-cart-layout>
-          <div>
+          <div class="cart__main">
             <div class="cart__lines" data-cart-lines></div>
             <div class="section section--tight" data-cart-cross-wrap>
               <div class="section-head section-head--row">
