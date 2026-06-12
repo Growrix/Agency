@@ -45,6 +45,36 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     teaser: "Premium super shop layout with fresh produce, member rewards, same-day delivery, and conversion-ready category pages.",
     summary: "A polished grocery and multi-category retail website template with loyalty messaging, promos, and mobile-first shopping UX.",
   },
+  {
+    slug: "04-prime-climate-hvac",
+    fileName: "04-PrimeClimateHVAC.html",
+    title: "Prime Climate HVAC",
+    type: "HVAC & Home Services",
+    price: "$149",
+    industry: "HVAC",
+    teaser: "Premium HVAC services template with repair, installation, maintenance plans, and 24/7 emergency CTAs.",
+    summary: "A conversion-ready HVAC website template with service tiers, trust proof, and quote-ready sections for local climate businesses.",
+  },
+  {
+    slug: "05-elite-estates-realty",
+    fileName: "05-EliteEstatesRealty.html",
+    title: "Elite Estates Realty",
+    type: "Real Estate",
+    price: "$149",
+    industry: "Real Estate",
+    teaser: "Luxury real estate advisory layout with premium listings, market highlights, and concierge-style lead capture.",
+    summary: "A high-end property website template built for luxury brokers, off-market showcases, and international market positioning.",
+  },
+  {
+    slug: "06-elite-medical-clinic",
+    fileName: "06-EliteMedicalClinic.html",
+    title: "EliteMed Clinic",
+    type: "Healthcare",
+    price: "$149",
+    industry: "Healthcare",
+    teaser: "Medical clinic template with specialist profiles, same-day booking, telemedicine, and patient trust sections.",
+    summary: "A healthcare website template with appointment flows, service departments, and credibility-first layout for clinics and medical groups.",
+  },
 ];
 
 export function getWebsiteTemplateHtmlPreviewBySlug(templateSlug: string) {
