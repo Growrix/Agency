@@ -225,7 +225,7 @@
        ========================================================================== */
     *, *::before, *::after { box-sizing: border-box; }
     * { margin: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
@@ -236,6 +236,8 @@
       color: var(--color-text);
       background: var(--color-bg);
       -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+      max-width: 100%;
     }
     img, svg, video { display: block; max-width: 100%; }
     input, button, textarea, select { font: inherit; color: inherit; }
@@ -264,8 +266,9 @@
     .container {
       width: min(100% - 2 * var(--space-4), var(--container-max));
       margin-inline: auto;
+      max-width: 100%;
     }
-    .container--wide { width: min(100% - 2 * var(--space-4), var(--container-wide)); }
+    .container--wide { width: min(100% - 2 * var(--space-4), var(--container-wide)); max-width: 100%; }
     .visually-hidden {
       position: absolute;
       width: 1px; height: 1px;
@@ -321,7 +324,7 @@
     }
 
     /* View skeleton shimmer (route transitions) */
-    .view { position: relative; }
+    .view { position: relative; max-width: 100%; overflow-x: clip; }
     .view[hidden] { display: none; }
     .view.is-loading > * { opacity: 0.25; }
     .view.is-loading::after {
@@ -641,8 +644,9 @@
       min-height: 2.5rem;
       padding-block: var(--space-1);
       padding-right: var(--space-10);
+      min-width: 0;
     }
-    .announce__track { position: relative; min-height: 1.5rem; flex: 0 1 auto; display: grid; }
+    .announce__track { position: relative; min-height: 1.5rem; flex: 1 1 auto; display: grid; min-width: 0; max-width: 100%; }
     .announce__msg {
       grid-area: 1 / 1;
       display: inline-flex;
@@ -654,6 +658,9 @@
       transform: translateY(0.5rem);
       transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out), visibility 0s linear var(--duration-slow);
       text-align: center;
+      flex-wrap: wrap;
+      max-width: 100%;
+      padding-inline: var(--space-2);
     }
     .announce__msg.is-active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
     .announce__msg strong { color: var(--color-accent); font-weight: var(--font-bold); }
@@ -696,6 +703,7 @@
       gap: var(--space-3);
       min-height: var(--header-height);
       padding-block: var(--space-2);
+      min-width: 0;
     }
     .header__brand {
       display: inline-flex;
@@ -1058,6 +1066,8 @@
       scroll-snap-type: x mandatory;
       padding-bottom: var(--space-3);
       scrollbar-width: thin;
+      max-width: 100%;
+      min-width: 0;
     }
     .prow > * { scroll-snap-align: start; }
     .pcard {
@@ -1627,27 +1637,31 @@
     /* ==========================================================================
        VIEW: Cart
        ========================================================================== */
-    .cart__layout { display: grid; gap: var(--space-8); padding-bottom: var(--space-16); }
-    @media (min-width: 1024px) { .cart__layout { grid-template-columns: 1.6fr 1fr; align-items: start; } }
-    .cart__lines { display: flex; flex-direction: column; gap: var(--space-4); }
+    .cart__layout { display: grid; gap: var(--space-8); padding-bottom: var(--space-16); min-width: 0; }
+    @media (min-width: 1024px) { .cart__layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; } }
+    .cart__layout > * { min-width: 0; }
+    .cart__lines { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+    [data-cart-cross-wrap] { min-width: 0; overflow: hidden; }
     .cart-line {
       display: grid;
-      grid-template-columns: 5rem 1fr;
+      grid-template-columns: 5rem minmax(0, 1fr);
       gap: var(--space-4);
       padding: var(--space-4);
       background: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
+      min-width: 0;
     }
-    @media (min-width: 640px) { .cart-line { grid-template-columns: 6rem 1fr auto; align-items: center; } }
-    .cart-line__art { width: 5rem; height: 5rem; border-radius: var(--radius-md); overflow: hidden; background: var(--color-card-art-bg); border: 1px solid var(--color-border); }
+    @media (min-width: 640px) { .cart-line { grid-template-columns: 6rem minmax(0, 1fr) auto; align-items: center; } }
+    .cart-line__body { min-width: 0; }
+    .cart-line__art { width: 5rem; height: 5rem; border-radius: var(--radius-md); overflow: hidden; background: var(--color-card-art-bg); border: 1px solid var(--color-border); flex: none; }
     @media (min-width: 640px) { .cart-line__art { width: 6rem; height: 6rem; } }
     .cart-line__art svg { width: 100%; height: 100%; }
-    .cart-line__name { font-weight: var(--font-bold); font-size: var(--text-sm); }
+    .cart-line__name { font-weight: var(--font-bold); font-size: var(--text-sm); overflow-wrap: anywhere; }
     .cart-line__name a { color: inherit; text-decoration: none; }
     .cart-line__name a:hover { color: var(--color-primary); }
     .cart-line__variant { font-size: var(--text-caption); color: var(--color-text-muted); }
-    .cart-line__unit { font-size: var(--text-caption); color: var(--color-text-muted); }
+    .cart-line__unit { font-size: var(--text-caption); color: var(--color-text-muted); overflow-wrap: anywhere; }
     .cart-line__controls { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-2); flex-wrap: wrap; }
     .cart-line__remove {
       display: inline-flex;
@@ -1660,7 +1674,17 @@
     }
     .cart-line__remove:hover { color: var(--color-error); }
     .cart-line__remove svg { width: 1rem; height: 1rem; }
-    .cart-line__total { font-size: var(--text-subheading); text-align: right; }
+    .cart-line__total {
+      grid-column: 2;
+      font-size: var(--text-subheading);
+      text-align: right;
+      margin-top: var(--space-2);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    @media (min-width: 640px) {
+      .cart-line__total { grid-column: 3; grid-row: 1; margin-top: 0; align-self: center; }
+    }
     .summary {
       display: flex;
       flex-direction: column;
@@ -1669,6 +1693,7 @@
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
+      min-width: 0;
     }
     @media (min-width: 1024px) { .summary { position: sticky; top: calc(var(--header-height) + var(--space-4)); } }
     .summary__title { font-size: var(--text-h3); font-weight: var(--font-black); }
@@ -1689,7 +1714,7 @@
       transform-origin: left;
       transition: transform var(--duration-slow) var(--ease-out);
     }
-    .coupon { display: flex; gap: var(--space-2); }
+    .coupon { display: flex; gap: var(--space-2); flex-wrap: wrap; }
     .coupon .form__input { flex: 1; min-width: 0; text-transform: uppercase; }
     .coupon__applied {
       display: flex;
@@ -2142,7 +2167,7 @@
     /* ==========================================================================
        MISC: deals hero, wide-screen caps, main spacing
        ========================================================================== */
-    main { min-height: 60vh; }
+    main { min-height: 60vh; max-width: 100%; overflow-x: clip; }
     .deals-hero {
       background: linear-gradient(135deg, #7a1410, var(--color-deal));
       color: #fff;
@@ -4928,7 +4953,7 @@
           if (!p) return '';
           return '<div class="cart-line" data-line="' + idx + '">' +
             '<div class="cart-line__art">' + productArt(p, 0) + '</div>' +
-            '<div><h3 class="cart-line__name"><a href="#/product/' + p.id + '">' + escapeHtml(p.name) + '</a></h3>' +
+            '<div class="cart-line__body"><h3 class="cart-line__name"><a href="#/product/' + p.id + '">' + escapeHtml(p.name) + '</a></h3>' +
             (l.variant ? '<p class="cart-line__variant">' + escapeHtml(l.variant) + '</p>' : '') +
             '<p class="cart-line__unit">' + money(p.price) + ' each' + (p.compareAt ? ' · <span style="color: var(--color-success);">saving ' + money((p.compareAt - p.price) * l.qty) + '</span>' : '') + '</p>' +
             '<div class="cart-line__controls">' +
