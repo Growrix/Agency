@@ -75,6 +75,16 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     teaser: "Medical clinic template with specialist profiles, same-day booking, telemedicine, and patient trust sections.",
     summary: "A healthcare website template with appointment flows, service departments, and credibility-first layout for clinics and medical groups.",
   },
+  {
+    slug: "07-proflow-plumbing",
+    fileName: "07-ProFlowPlumbing.html",
+    title: "ProFlow Plumbing",
+    type: "Plumbing & Home Services",
+    price: "$149",
+    industry: "Plumbing",
+    teaser: "24/7 emergency plumbing template with drain cleaning, water heaters, sewer lines, and same-day service CTAs.",
+    summary: "A conversion-ready plumbing website template with emergency response, service tiers, trust proof, and quote-ready sections for local trades.",
+  },
 ];
 
 export function getWebsiteTemplateHtmlPreviewBySlug(templateSlug: string) {
