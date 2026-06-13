@@ -11,6 +11,7 @@ type WebsiteTemplateHtmlPreviewShowcaseSectionsProps = {
   reverseMobileLayout?: boolean;
   showMobileSectionDivider?: boolean;
   showDesktopSection?: boolean;
+  autoPlayMobileCarousel?: boolean;
 };
 
 export function WebsiteTemplateHtmlPreviewShowcaseSections({
@@ -19,6 +20,7 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
   reverseMobileLayout = false,
   showMobileSectionDivider = true,
   showDesktopSection = true,
+  autoPlayMobileCarousel = true,
 }: WebsiteTemplateHtmlPreviewShowcaseSectionsProps) {
   return (
     <>
@@ -57,6 +59,7 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
             reverseLayout={reverseMobileLayout}
+            autoPlay={autoPlayMobileCarousel}
           />
         </Container>
       </Section>

@@ -1971,6 +1971,10 @@
       font-size: var(--text-caption);
     }
     @media (min-width: 1024px) { .footer__bottom { padding-bottom: var(--space-6); } }
+    .footer__copy { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; color: rgb(255 255 255 / 0.72); }
+    .footer__copy-sep { opacity: 0.35; }
+    .footer__brand { color: var(--color-accent); font-weight: var(--font-semibold); text-decoration: none; }
+    .footer__brand:hover { color: #fff; text-decoration: underline; }
     .footer__payments { display: flex; gap: var(--space-2); align-items: center; }
     .footer__payments svg { height: 1.5rem; width: auto; }
 
@@ -4601,7 +4605,7 @@
         if (VIEW_RENDERERS[route.view]) VIEW_RENDERERS[route.view](route);
 
         updateNavCurrent(route);
-        window.scrollTo(0, 0);
+        window.self===window.top&&window.scrollTo(0,0);
 
         /* skeleton shimmer on route change (not first paint) */
         if (!firstRoute && !reducedMotion.matches) {
@@ -5099,7 +5103,7 @@
           var panel = $('[data-checkout-panel="' + step + '"]');
           var title = panel && panel.querySelector('.checkout__panel-title');
           if (title) { title.setAttribute('tabindex', '-1'); title.focus(); }
-          window.scrollTo(0, 0);
+          window.self===window.top&&window.scrollTo(0,0);
         }
       }
       function renderCheckoutReview() {

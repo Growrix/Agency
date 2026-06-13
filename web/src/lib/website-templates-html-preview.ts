@@ -85,6 +85,16 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     teaser: "24/7 emergency plumbing template with drain cleaning, water heaters, sewer lines, and same-day service CTAs.",
     summary: "A conversion-ready plumbing website template with emergency response, service tiers, trust proof, and quote-ready sections for local trades.",
   },
+  {
+    slug: "08-voltcore-power",
+    fileName: "08-VoltCorePower.html",
+    title: "VoltCore Power",
+    type: "Electrical & Home Services",
+    price: "$149",
+    industry: "Electrical",
+    teaser: "Premium electrical services template with 24/7 emergency response, EV chargers, smart-home installs, and master electrician trust proof.",
+    summary: "A conversion-ready electrical contractor website template with emergency CTAs, service tiers, maintenance plans, and mobile-first booking UX.",
+  },
 ];
 
 export function getWebsiteTemplateHtmlPreviewBySlug(templateSlug: string) {

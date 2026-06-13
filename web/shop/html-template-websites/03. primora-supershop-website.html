@@ -1971,6 +1971,10 @@
       font-size: var(--text-caption);
     }
     @media (min-width: 1024px) { .footer__bottom { padding-bottom: var(--space-6); } }
+    .footer__copy { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; color: rgb(255 255 255 / 0.72); }
+    .footer__copy-sep { opacity: 0.35; }
+    .footer__brand { color: var(--color-accent); font-weight: var(--font-semibold); text-decoration: none; }
+    .footer__brand:hover { color: #fff; text-decoration: underline; }
     .footer__payments { display: flex; gap: var(--space-2); align-items: center; }
     .footer__payments svg { height: 1.5rem; width: auto; }
 
@@ -3912,7 +3916,11 @@
       </div>
     </div>
     <div class="container footer__bottom">
-      <p>© <span data-year>2026</span> Primora Super Shop. All rights reserved.</p>
+      <div class="footer__copy">
+        <span>&copy; <span data-year>2026</span> Primora Super Shop. All rights reserved.</span>
+        <span class="footer__copy-sep" aria-hidden="true">&middot;</span>
+        <span>Built &amp; Maintenance by <a href="https://www.growrixos.com" target="_blank" rel="noopener noreferrer" class="footer__brand">GrowrixOS</a></span>
+      </div>
       <div class="footer__payments" aria-label="Accepted payment methods">
         <svg viewBox="0 0 38 24" role="img" aria-label="Visa" focusable="false"><rect width="38" height="24" rx="4" fill="#1a1f71"/><text x="19" y="16" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="800" font-style="italic" fill="#fff">VISA</text></svg>
         <svg viewBox="0 0 38 24" role="img" aria-label="Mastercard" focusable="false"><rect width="38" height="24" rx="4" fill="#16191c"/><circle cx="15" cy="12" r="7" fill="#eb001b"/><circle cx="23" cy="12" r="7" fill="#f79e1b" opacity="0.9"/></svg>
@@ -4601,7 +4609,7 @@
         if (VIEW_RENDERERS[route.view]) VIEW_RENDERERS[route.view](route);
 
         updateNavCurrent(route);
-        window.scrollTo(0, 0);
+        window.self===window.top&&window.scrollTo(0,0);
 
         /* skeleton shimmer on route change (not first paint) */
         if (!firstRoute && !reducedMotion.matches) {
@@ -5099,7 +5107,7 @@
           var panel = $('[data-checkout-panel="' + step + '"]');
           var title = panel && panel.querySelector('.checkout__panel-title');
           if (title) { title.setAttribute('tabindex', '-1'); title.focus(); }
-          window.scrollTo(0, 0);
+          window.self===window.top&&window.scrollTo(0,0);
         }
       }
       function renderCheckoutReview() {

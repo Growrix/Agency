@@ -1148,7 +1148,7 @@ function initFab(){
     mainBtn.innerHTML=isOpen?SVG.x:SVG.phone;
   });
 
-  topBtn?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  topBtn?.addEventListener('click',()=>window.self===window.top&&window.scrollTo({top:0,behavior:'smooth'}));
 
   // show back-to-top when scrolled far
   window.addEventListener('scroll',()=>{
@@ -1303,7 +1303,7 @@ function showPage(id){
   }
 
   // Scroll to top smoothly
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.self===window.top&&window.scrollTo({top:0,behavior:'smooth'});
 
   // Update all nav-link active states (top navbar)
   document.querySelectorAll('.nav-link, .drawer-link').forEach(a=>{

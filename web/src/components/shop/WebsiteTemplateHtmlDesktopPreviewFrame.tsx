@@ -149,6 +149,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
           height={iframeHeight}
           className="block border-0 bg-white"
           loading={iframeLoading}
+          tabIndex={-1}
           referrerPolicy="strict-origin-when-cross-origin"
           onLoad={handleIframeLoad}
         />

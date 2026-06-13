@@ -86,6 +86,7 @@ type WebsiteTemplateHtmlDesktopPreviewCarouselProps = WebsiteTemplateHtmlDualPre
   minHeightClass?: string;
   fillHeight?: boolean;
   desktopPreviewFit?: "width" | "cover";
+  autoPlay?: boolean;
 };
 
 export function WebsiteTemplateHtmlDesktopPreviewCarousel({
@@ -95,6 +96,7 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
   minHeightClass = "min-h-[420px] lg:min-h-[560px]",
   fillHeight = false,
   desktopPreviewFit = "width",
+  autoPlay = true,
 }: WebsiteTemplateHtmlDesktopPreviewCarouselProps) {
   return (
     <div className={cn(minHeightClass, fillHeight && "flex min-h-0 flex-1 flex-col", className)}>
@@ -105,6 +107,7 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
         previewMode="desktop-scaled"
         fillHeight={fillHeight}
         desktopPreviewFit={desktopPreviewFit}
+        autoPlay={autoPlay}
       />
     </div>
   );
@@ -116,8 +119,8 @@ export function WebsiteTemplateHtmlDesktopPreviewBlock({
 }: WebsiteTemplateHtmlDualPreviewProps) {
   return (
     <Card className="min-w-0 overflow-hidden p-5 sm:p-6">
-      <div className="grid min-w-0 gap-6 lg:grid-cols-12 lg:items-center">
-        <div className="min-w-0 lg:col-span-4">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-12 lg:items-start">
+        <div className="min-w-0 self-start lg:col-span-4 lg:sticky lg:top-24">
           <Reveal>
             <div className="flex items-center gap-2">
               <ComputerDesktopIcon className="size-4 text-primary" aria-hidden />
@@ -170,13 +173,15 @@ export function WebsiteTemplateHtmlMobilePreviewBlock({
   slides,
   emptyFallbackSlide,
   reverseLayout = false,
+  autoPlay = true,
 }: WebsiteTemplateHtmlDualPreviewProps & {
   reverseLayout?: boolean;
+  autoPlay?: boolean;
 }) {
   return (
     <Card className="overflow-hidden p-5 sm:p-6">
-      <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
-        <div className={cn("min-w-0 lg:col-span-5", reverseLayout && "lg:order-2")}>
+      <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
+        <div className={cn("min-w-0 self-start lg:col-span-5 lg:sticky lg:top-24", reverseLayout && "lg:order-2")}>
           <WebsiteTemplateHtmlMobilePreviewMarketing />
         </div>
 
@@ -189,6 +194,7 @@ export function WebsiteTemplateHtmlMobilePreviewBlock({
             mobileFrameMinHeightClass="min-h-0"
             mobilePreviewMaxHeight={MOBILE_PREVIEW_MAX_FRAME_HEIGHT}
             mobilePreviewShowViewportLabel={false}
+            autoPlay={autoPlay}
           />
         </div>
       </div>

@@ -83,8 +83,8 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
             ← All products
           </Link>
 
-          <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-stretch xl:gap-10">
-            <div className="min-w-0 lg:col-span-4">
+          <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-start xl:gap-10">
+            <div className="min-w-0 self-start lg:col-span-4 lg:sticky lg:top-24">
               <Badge tone="primary" dot>HTML Preview Edition</Badge>
               <h1 className="mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
                 Website templates with embedded HTML live preview.
@@ -145,6 +145,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         reverseMobileLayout
         showDesktopSection={false}
         showMobileSectionDivider={false}
+        autoPlayMobileCarousel={false}
       />
 
       <Section id="profiles" tone="inset" className="overflow-x-hidden py-10 sm:py-14">

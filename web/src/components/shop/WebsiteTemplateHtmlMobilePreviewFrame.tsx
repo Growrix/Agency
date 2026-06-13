@@ -83,6 +83,7 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
                   height: HTML_MOBILE_VIEWPORT_HEIGHT,
                 }}
                 loading={iframeLoading}
+                tabIndex={-1}
                 referrerPolicy="strict-origin-when-cross-origin"
               />
             </div>

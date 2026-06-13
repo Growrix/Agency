@@ -38,6 +38,7 @@ type HtmlProfileHeroCarouselProps = {
   /** Max height budget for scaling the phone frame (use HTML_MOBILE_FRAME_HEIGHT for native size). */
   mobilePreviewMaxHeight?: number;
   mobilePreviewShowViewportLabel?: boolean;
+  autoPlay?: boolean;
 };
 
 function slideHasPreview(slide: HtmlProfileHeroSlide) {
@@ -105,6 +106,7 @@ function CarouselPreviewFrame({
         title={`${slide.name} preview`}
         className="h-full w-full border-0"
         loading="eager"
+        tabIndex={-1}
         referrerPolicy="strict-origin-when-cross-origin"
       />
     );
@@ -145,7 +147,9 @@ export function HtmlProfileHeroCarousel({
   mobileFrameMinHeightClass = "min-h-0",
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
+  autoPlay = true,
 }: HtmlProfileHeroCarouselProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const fallbackSlide = useMemo(
     () => emptyFallbackSlide ?? {
       name: "Business Profile Template",
@@ -171,6 +175,7 @@ export function HtmlProfileHeroCarousel({
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const isTransitioningRef = useRef(false);
 
   const canNavigate = safeSlides.length > 1;
@@ -238,7 +243,23 @@ export function HtmlProfileHeroCarousel({
   }, [canNavigate, cloneIndex, index, safeSlides.length]);
 
   useEffect(() => {
-    if (isPaused || !canNavigate) {
+    const node = rootRef.current;
+    if (!node) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.15, rootMargin: "80px 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || !canNavigate || !autoPlay || !isVisible) {
       return;
     }
 
@@ -247,7 +268,7 @@ export function HtmlProfileHeroCarousel({
     }, HTML_PROFILE_CAROUSEL_AUTOPLAY_MS);
 
     return () => window.clearTimeout(timer);
-  }, [isPaused, canNavigate, goNext, logicalIndex]);
+  }, [isPaused, canNavigate, goNext, logicalIndex, autoPlay, isVisible]);
 
   const handleTransitionEnd = useCallback(
     (event: React.TransitionEvent<HTMLDivElement>) => {
@@ -305,8 +326,9 @@ export function HtmlProfileHeroCarousel({
 
   return (
     <div
+      ref={rootRef}
       className={cn(
-        "overflow-hidden rounded-md border border-border bg-inset/30",
+        "overflow-hidden rounded-md border border-border bg-inset/30 [overflow-anchor:none]",
         fillHeight && !isMobileFrame ? "flex h-full min-h-0 flex-col" : "min-w-0",
         !isMobileFrame && !fillHeight && "h-full",
       )}
@@ -355,6 +377,7 @@ export function HtmlProfileHeroCarousel({
           style={{
             transform: `translateX(-${index * 100}%)`,
             transition: animate ? `transform ${HTML_PROFILE_CAROUSEL_TRANSITION_MS}ms ease-out` : "none",
+            willChange: animate ? "transform" : undefined,
           }}
           onTransitionEnd={handleTransitionEnd}
         >
@@ -381,7 +404,7 @@ export function HtmlProfileHeroCarousel({
                     loadPreview={loadPreview}
                   />
                 </div>
-                <div className={cn("mt-3 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
+                <div className={cn("mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
                   <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
                   <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
                   <div className="mt-2 flex items-center justify-between gap-2">
