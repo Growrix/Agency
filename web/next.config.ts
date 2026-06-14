@@ -95,6 +95,7 @@ const nextConfig: NextConfig = {
       {
         source: "/previews/html-template-websites/:path*",
         headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -107,6 +108,7 @@ const nextConfig: NextConfig = {
       {
         source: "/previews/website-templates-html/:path*",
         headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -119,6 +121,7 @@ const nextConfig: NextConfig = {
       {
         source: "/previews/html-business-profiles/:path*",
         headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -131,6 +134,7 @@ const nextConfig: NextConfig = {
       {
         source: "/api/html-business-profiles/:path*",
         headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -143,6 +147,7 @@ const nextConfig: NextConfig = {
       {
         source: "/api/website-templates-html-preview/:path*",
         headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

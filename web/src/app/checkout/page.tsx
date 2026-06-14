@@ -12,6 +12,7 @@ import { CheckoutExperience } from "./CheckoutExperience";
 export const metadata: Metadata = {
   title: "Checkout",
   description: "Secure Stripe-powered checkout opens with the website product launch.",
+  robots: { index: false, follow: false },
 };
 
 type CheckoutPageProps = {

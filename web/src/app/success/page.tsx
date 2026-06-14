@@ -9,6 +9,7 @@ import { getOrderById } from "@/server/domain/orders";
 export const metadata: Metadata = {
   title: "Order Success",
   description: "Checkout success and next-step guidance for Growrix OS orders.",
+  robots: { index: false, follow: false },
 };
 
 type SuccessPageProps = {

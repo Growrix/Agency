@@ -20,6 +20,8 @@ type HtmlBusinessProfilesCategoryHeroProps = {
   products: HtmlBusinessProfilesCategoryHeroProduct[];
   showBackLink?: boolean;
   profilesAnchorId?: string;
+  /** Disable on pages that already render another autoplay carousel above the fold. */
+  autoPlayCarousel?: boolean;
 };
 
 const FALLBACK_CAROUSEL_PROFILES = [
@@ -33,6 +35,7 @@ export function HtmlBusinessProfilesCategoryHero({
   products,
   showBackLink = true,
   profilesAnchorId = "profiles",
+  autoPlayCarousel = true,
 }: HtmlBusinessProfilesCategoryHeroProps) {
   const carouselProfiles = products.length > 0 ? products : [...FALLBACK_CAROUSEL_PROFILES];
   const heroSlides = carouselProfiles.map((profile) => ({
@@ -98,6 +101,7 @@ export function HtmlBusinessProfilesCategoryHero({
                   previewMode="mobile-frame"
                   mobilePreviewMaxHeight={400}
                   mobilePreviewShowViewportLabel={false}
+                  autoPlay={autoPlayCarousel}
                 />
               </div>
             </Card>

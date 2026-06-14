@@ -3,6 +3,7 @@
 import { Card } from "@/components/primitives/Card";
 import { WebsiteTemplateHtmlMobilePreviewMarketing, HtmlBusinessProfileMobilePreviewMarketing } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 
 type WebsiteTemplateHtmlMobilePreviewSectionProps = {
   previewUrl?: string;
@@ -18,6 +19,7 @@ export function WebsiteTemplateHtmlMobilePreviewSection({
   previewOnRight = false,
   marketingVariant = "website-template",
 }: WebsiteTemplateHtmlMobilePreviewSectionProps) {
+  const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>();
   const marketingCopy = marketingVariant === "business-profile"
     ? <HtmlBusinessProfileMobilePreviewMarketing />
     : <WebsiteTemplateHtmlMobilePreviewMarketing />;
@@ -29,6 +31,7 @@ export function WebsiteTemplateHtmlMobilePreviewSection({
 
   const preview = (
     <div
+      ref={previewRef}
       className={
         previewOnRight
           ? "min-w-0 lg:col-span-7"
@@ -36,11 +39,17 @@ export function WebsiteTemplateHtmlMobilePreviewSection({
       }
     >
       {previewUrl ? (
-        <WebsiteTemplateHtmlMobilePreviewFrame
-          previewUrl={previewUrl}
-          title={`${templateTitle} mobile preview`}
-          maxFrameHeight={480}
-        />
+        shouldRenderPreview ? (
+          <WebsiteTemplateHtmlMobilePreviewFrame
+            previewUrl={previewUrl}
+            title={`${templateTitle} mobile preview`}
+            maxFrameHeight={480}
+          />
+        ) : (
+          <div className="flex h-[480px] items-center justify-center rounded-xl border border-dashed border-border font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
+            Loading preview…
+          </div>
+        )
       ) : (
         <div className="flex h-[320px] items-center justify-center rounded-xl border border-dashed border-border text-sm text-text-muted">
           Preview unavailable

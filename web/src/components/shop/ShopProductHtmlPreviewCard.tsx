@@ -5,6 +5,7 @@ import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
+import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
 
 export function ShopProductHtmlPreviewCard({
@@ -17,10 +18,12 @@ export function ShopProductHtmlPreviewCard({
   const previewUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
+  const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>();
 
   return (
     <Card hoverable className="shop-product-html-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
       <div
+        ref={previewRef}
         className={
           isCatalogWide
             ? "shop-product-html-preview-card__preview relative aspect-16/10 min-h-[240px] w-full max-w-full overflow-hidden bg-[#0a0a0a] sm:min-h-[280px]"
@@ -28,14 +31,20 @@ export function ShopProductHtmlPreviewCard({
         }
       >
         {previewUrl ? (
-          <WebsiteTemplateHtmlDesktopPreviewFrame
-            previewUrl={previewUrl}
-            title={`${product.name} desktop preview`}
-            fit="cover"
-            className="absolute inset-0 h-full w-full"
-            frameClassName={isCatalogWide ? "shop-product-html-preview-card__frame h-full" : "shop-product-html-preview-card__frame"}
-            iframeLoading="eager"
-          />
+          shouldRenderPreview ? (
+            <WebsiteTemplateHtmlDesktopPreviewFrame
+              previewUrl={previewUrl}
+              title={`${product.name} desktop preview`}
+              fit="cover"
+              className="absolute inset-0 h-full w-full"
+              frameClassName={isCatalogWide ? "shop-product-html-preview-card__frame h-full" : "shop-product-html-preview-card__frame"}
+              iframeLoading="lazy"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+              Loading preview…
+            </div>
+          )
         ) : (
           <div className="flex h-full min-h-[200px] items-center justify-center px-4 text-sm text-text-muted">
             Preview unavailable

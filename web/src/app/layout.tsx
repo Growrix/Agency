@@ -3,6 +3,11 @@ import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
+import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
+
+const SITE_DESCRIPTION =
+  "Growrix OS is a product-minded web development studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.";
+const DEFAULT_OG_IMAGE = "/images/home/studio-hero.jpg";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -23,12 +28,38 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
     template: "%s | Growrix OS",
   },
-  description:
-    "Growrix OS is a product-minded web development studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
+    description: SITE_DESCRIPTION,
+    locale: "en_US",
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
+    description: SITE_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+  },
+  robots: SITE_INDEXING_ENABLED
+    ? {
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true, "max-image-preview": "large" },
+      }
+    : { index: false, follow: false },
   icons: {
     icon: "/Favicon.svg?v=20260504",
     shortcut: "/Favicon.svg?v=20260504",
@@ -40,6 +71,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

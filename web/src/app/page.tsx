@@ -37,6 +37,8 @@ import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { HtmlBusinessProfilesCategoryHero } from "@/components/sections/HtmlBusinessProfilesCategoryHero";
 import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
+import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 import {
   buildWebsiteTemplateHtmlPreviewSlides,
   getWebsiteTemplateHtmlPreviewUrl,
@@ -100,8 +102,26 @@ export default async function Home() {
       ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
       : undefined,
   };
+  const homeStructuredData: JsonLdData[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: absoluteUrl("/Favicon.svg"),
+      sameAs: [],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  ];
+
   return (
     <>
+      <JsonLd data={homeStructuredData} />
       {/* Hero */}
       <Section className="pt-12 sm:pt-16 lg:pt-20 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
@@ -169,12 +189,14 @@ export default async function Home() {
         emptyFallbackSlide={htmlPreviewFallbackSlide}
         reverseMobileLayout
         showMobileSectionDivider={false}
+        autoPlayMobileCarousel={false}
       />
 
       <HtmlBusinessProfilesCategoryHero
         products={htmlBusinessProfileProducts}
         showBackLink={false}
         profilesAnchorId="profiles"
+        autoPlayCarousel={false}
       />
 
       <TrustBar />

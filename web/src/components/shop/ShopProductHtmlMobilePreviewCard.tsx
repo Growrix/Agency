@@ -5,6 +5,7 @@ import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import { cn } from "@/lib/utils";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
 
@@ -20,24 +21,32 @@ export function ShopProductHtmlMobilePreviewCard({
   const previewUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
+  const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>();
 
   return (
     <Card hoverable className="shop-product-html-mobile-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
       <div
+        ref={previewRef}
         className={cn(
           "shop-product-html-mobile-preview-card__preview relative flex w-full max-w-full items-start justify-center overflow-hidden bg-[#0a0a0a]",
           isCatalogWide ? "min-h-[300px] px-3 py-5 sm:min-h-[340px]" : "min-h-[260px] px-2 py-4 sm:min-h-[300px]",
         )}
       >
         {previewUrl ? (
-          <WebsiteTemplateHtmlMobilePreviewFrame
-            previewUrl={previewUrl}
-            title={`${product.name} mobile preview`}
-            maxFrameHeight={isCatalogWide ? MOBILE_CARD_PREVIEW_MAX_HEIGHT + 20 : MOBILE_CARD_PREVIEW_MAX_HEIGHT}
-            showViewportLabel={false}
-            iframeLoading="eager"
-            className="w-full max-w-full"
-          />
+          shouldRenderPreview ? (
+            <WebsiteTemplateHtmlMobilePreviewFrame
+              previewUrl={previewUrl}
+              title={`${product.name} mobile preview`}
+              maxFrameHeight={isCatalogWide ? MOBILE_CARD_PREVIEW_MAX_HEIGHT + 20 : MOBILE_CARD_PREVIEW_MAX_HEIGHT}
+              showViewportLabel={false}
+              iframeLoading="lazy"
+              className="w-full max-w-full"
+            />
+          ) : (
+            <div className="flex h-full min-h-[inherit] w-full items-center justify-center px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+              Loading preview…
+            </div>
+          )
         ) : (
           <div className="flex h-full min-h-[inherit] w-full items-center justify-center px-4 text-sm text-text-muted">
             Preview unavailable

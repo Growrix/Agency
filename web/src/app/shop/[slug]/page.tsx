@@ -13,6 +13,8 @@ import { WebsiteTemplateHtmlMobilePreviewSection } from "@/components/sections/W
 import { HtmlBusinessProfileProductPreviewHighlights, WebsiteTemplateHtmlProductPreviewHighlights } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
+import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
@@ -40,9 +42,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const product = await getPublicShopProduct(slug).catch(() => null);
   if (!product) return {};
+
+  const canonical = `/products/${product.slug}`;
+  const description = product.summary ?? product.teaser ?? undefined;
+  const ogImage = product.image?.src;
+
   return {
-    title: `${product.name} — Shop`,
-    description: product.summary,
+    title: product.name,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title: product.name,
+      description,
+      url: canonical,
+      type: "website",
+      images: ogImage ? [{ url: ogImage, alt: product.image?.alt ?? product.name }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
   };
 }
 
@@ -488,6 +509,43 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       "Founders choosing between DIY and Done-For-You paths",
     ];
 
+  const productCanonicalUrl = absoluteUrl(`/products/${product.slug}`);
+  const productPriceMatch = /([0-9][0-9,]*(?:\.[0-9]+)?)/.exec(product.price ?? "");
+  const productPriceValue = productPriceMatch ? productPriceMatch[1].replace(/,/g, "") : undefined;
+  const productJsonLd: JsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.summary ?? product.teaser ?? undefined,
+    url: productCanonicalUrl,
+    category: product.category,
+    ...(product.image?.src ? { image: absoluteUrl(product.image.src) } : {}),
+    brand: { "@type": "Brand", name: "Growrix OS" },
+    ...(productPriceValue
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: productPriceValue,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: productCanonicalUrl,
+          },
+        }
+      : {}),
+  };
+  const faqJsonLd: JsonLdData | null = faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      }
+    : null;
+  const productStructuredData: JsonLdData[] = faqJsonLd ? [productJsonLd, faqJsonLd] : [productJsonLd];
+
   if (isHtmlBusinessProfile) {
     const standardVariant = variants.find((variant) => variant.slug === "standard") ?? variants[0];
     const premiumVariant = variants.find((variant) => variant.slug === "premium") ?? variants[1] ?? variants[0];
@@ -497,6 +555,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
     return (
       <>
+        <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
           <Container width="content">
             <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
@@ -954,6 +1013,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
     return (
       <>
+        <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
           <Container width="content">
             <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
@@ -1399,6 +1459,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd data={productStructuredData} />
       {/* Main product layout */}
       <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
         <Container width={useShellLayout ? "shell" : "content"}>
