@@ -101,12 +101,12 @@
   --c-secondary: #e8895a;
   --c-secondary-hover: #f1a37c;
   --c-accent: #4aa3ff;
-  --c-bg: #0d1014;
-  --c-surface: #15191f;
-  --c-inset: #1d222a;
+  --c-bg: #000000;
+  --c-surface: #0a0a0a;
+  --c-inset: #111111;
   --c-overlay: rgba(0, 0, 0, 0.78);
-  --c-border: #262d36;
-  --c-border-strong: #3b4350;
+  --c-border: #1a1a1a;
+  --c-border-strong: #2a2a2a;
   --c-text: #f1ece1;
   --c-text-muted: #9aa3b0;
   --c-success: #34d399;
@@ -114,9 +114,9 @@
   --c-destructive: #f87171;
   --c-info: #5eb0ff;
 
-  /* In dark mode the "contrast" slab stays dark but a touch deeper than the surface
-     so it still reads as an intentional, separated panel. */
-  --c-contrast: #06080b;
+  /* In dark mode the "contrast" slab matches the pure-black page base;
+     elevated surfaces use --c-surface for separation. */
+  --c-contrast: #000000;
   --c-contrast-text: #f1ece1;
   --c-contrast-muted: rgba(241, 236, 225, 0.6);
 
@@ -146,19 +146,19 @@
     --c-secondary: #e8895a;
     --c-secondary-hover: #f1a37c;
     --c-accent: #4aa3ff;
-    --c-bg: #0d1014;
-    --c-surface: #15191f;
-    --c-inset: #1d222a;
+    --c-bg: #000000;
+    --c-surface: #0a0a0a;
+    --c-inset: #111111;
     --c-overlay: rgba(0, 0, 0, 0.78);
-    --c-border: #262d36;
-    --c-border-strong: #3b4350;
+    --c-border: #1a1a1a;
+    --c-border-strong: #2a2a2a;
     --c-text: #f1ece1;
     --c-text-muted: #9aa3b0;
     --c-success: #34d399;
     --c-warning: #f0b96b;
     --c-destructive: #f87171;
     --c-info: #5eb0ff;
-    --c-contrast: #06080b;
+    --c-contrast: #000000;
     --c-contrast-text: #f1ece1;
     --c-contrast-muted: rgba(241, 236, 225, 0.6);
     --bg-grid-line: rgba(255, 255, 255, 0.045);

@@ -34,9 +34,20 @@ recommended_next_reads:
 - Destructive: `#B73A3A`.
 - Info: `#1769C2`.
 
+### Dark theme tokens
+- Background: `#000000` (pure black page base).
+- Surface: `#0A0A0A`.
+- Inset surface: `#111111`.
+- Contrast slab: `#000000`.
+- Border: `#1A1A1A`.
+- Border strong: `#2A2A2A`.
+- Text primary: `#F1ECE1`.
+- Text muted: `#9AA3B0`.
+- Primary: `#2DD4BF` (teal accent for dark mode actions).
+
 ## Theme Logic
 - Light mode is the default public experience because it better supports editorial whitespace and premium contrast.
-- Dark mode uses deep graphite surfaces, muted sand text, teal primary actions, and restrained glow accents.
+- Dark mode uses a pure-black page base (`#000000`), near-black elevated surfaces, muted sand text, teal primary actions, and restrained glow accents.
 - Accent usage stays below 12 percent of the screen at any moment to preserve perceived sophistication.
 
 ## Typography
