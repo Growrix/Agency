@@ -1,0 +1,31 @@
+{
+  "slug": "industries",
+  "title": "Sectors",
+  "description": "Deep domain expertise across the markets where engineering reliability is non-negotiable.",
+  "hero": {
+    "breadcrumb": "Sectors",
+    "eyebrow": "Sectors",
+    "title": "Industries we\nserve.",
+    "lede": "Deep domain expertise across the markets where engineering reliability is non-negotiable.",
+    "image": "https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=2000&q=80"
+  },
+  "industries": [
+    { "title": "Commercial Real Estate", "description": "Office towers, mixed-use developments and retail destinations.", "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Government & Civic", "description": "Courts, prisons, defence facilities and public infrastructure.", "image": "https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Healthcare", "description": "Hospitals, research centres and pharmaceutical manufacturing.", "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Education", "description": "Universities, schools, student accommodation and research labs.", "image": "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Hospitality", "description": "Hotels, resorts, convention centres and leisure facilities.", "image": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Manufacturing & Industrial", "description": "Factories, warehouses, cold-chain and automotive plants.", "image": "https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Logistics & Distribution", "description": "Automated DCs, port facilities and last-mile hubs.", "image": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Energy & Utilities", "description": "Power stations, substations, water treatment and renewables.", "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80" },
+    { "title": "Residential", "description": "Master-planned communities, apartments and luxury villas.", "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" }
+  ],
+  "stats": [
+    { "counter": 9, "label": "Industry verticals" },
+    { "counter": 27, "label": "Countries served" },
+    { "counter": 1240, "suffix": "+", "label": "Projects delivered" },
+    { "counter": 38, "label": "Years experience" },
+    { "counter": 98, "suffix": "%", "label": "Client satisfaction" },
+    { "counter": 6500, "suffix": "+", "label": "Team members" }
+  ]
+}

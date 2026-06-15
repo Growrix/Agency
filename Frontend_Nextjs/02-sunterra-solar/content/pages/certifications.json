@@ -1,0 +1,25 @@
+{
+  "slug": "certifications",
+  "title": "CEC Certifications",
+  "description": "Clean Energy Council accreditation and industry memberships.",
+  "hero": {
+    "title": "CEC Certifications",
+    "lede": "Clean Energy Council accreditation and industry memberships.",
+    "breadcrumb": "CEC Certifications"
+  },
+  "prose": [
+    "<div class=\"cert-grid\">\r\n<div class=\"cert\"><div class=\"cert__icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg></div><div>",
+    "<p class=\"cert__title\">CEC Accredited Installer</p>",
+    "<p class=\"cert__text\">License SA-CEC-2014-0847. Authorised to claim STCs and install grid-connected systems nationally.</p></div></div>\r\n<div class=\"cert\"><div class=\"cert__icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg></div><div>",
+    "<p class=\"cert__title\">CEC Accredited Designer</p>",
+    "<p class=\"cert__text\">Custom system designs meet AS/NZS 5033 and AS/NZS 4777 standards.</p></div></div>\r\n<div class=\"cert\"><div class=\"cert__icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg></div><div>",
+    "<p class=\"cert__title\">Smart Energy Council Member</p>",
+    "<p class=\"cert__text\">Committed to best-practice installation and consumer protection.</p></div></div>\r\n<div class=\"cert\"><div class=\"cert__icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg></div><div>",
+    "<p class=\"cert__title\">ISO 9001:2015</p>",
+    "<p class=\"cert__text\">Quality management system for design, installation and customer service.</p></div></div>\r\n</div>"
+  ]
+}

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industry Website Templates Master List</title>
+<style>
+:root {
+  --bg: #0c0c0e;
+  --bg2: #131317;
+  --bg3: #1a1a1f;
+  --bg4: #1f1f26;
+  --border: rgba(255,255,255,0.065);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e2e2e8;
+  --text2: #8a8a98;
+  --text3: #52525f;
+  --accent: #f97316;
+  --accent2: #fb923c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+
+/* HEADER */
+.header { padding: 36px 32px 28px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+.header-inner { max-width: 1160px; margin: 0 auto; }
+.badge { display: inline-block; background: rgba(249,115,22,0.12); color: var(--accent2); border: 1px solid rgba(249,115,22,0.28); border-radius: 100px; padding: 3px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+.header h1 { font-size: 26px; font-weight: 700; color: #fff; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 6px; }
+.header p { color: var(--text2); font-size: 13.5px; max-width: 560px; }
+.stats-row { display: flex; gap: 28px; margin-top: 20px; flex-wrap: wrap; }
+.stat { display: flex; align-items: baseline; gap: 7px; font-size: 13px; color: var(--text2); }
+.stat strong { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+
+/* CONTROLS */
+.controls { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 14px 32px; position: sticky; top: 0; z-index: 100; }
+.controls-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 340px; }
+.search-wrap svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--text3); pointer-events: none; }
+#search { width: 100%; background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 8px 12px 8px 34px; color: var(--text); font-size: 13px; outline: none; }
+#search:focus { border-color: var(--accent); }
+#search::placeholder { color: var(--text3); }
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: 7px; color: var(--text2); padding: 5px 12px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.filter-btn:hover { border-color: var(--border2); color: var(--text); }
+.filter-btn.active { background: rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.35); color: var(--accent2); }
+.result-count { font-size: 12px; color: var(--text3); margin-left: auto; white-space: nowrap; }
+
+/* MAIN */
+.main { max-width: 1160px; margin: 0 auto; padding: 28px 32px 60px; }
+
+/* CATEGORY SECTION */
+.category { margin-bottom: 36px; }
+.cat-title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.cat-icon-wrap { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.cat-title { font-size: 16px; font-weight: 600; color: #fff; }
+.cat-count-badge { background: var(--bg3); border: 1px solid var(--border); border-radius: 100px; padding: 2px 10px; font-size: 11px; color: var(--text3); font-weight: 500; }
+.cat-desc { font-size: 12px; color: var(--text3); margin-left: auto; }
+
+/* TEMPLATE GRID */
+.tpl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.tpl-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; transition: border-color 0.15s, transform 0.12s; cursor: default; display: flex; flex-direction: column; gap: 6px; }
+.tpl-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.tpl-card.hidden { display: none; }
+.tpl-name { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; }
+.tpl-desc { font-size: 11.5px; color: var(--text2); line-height: 1.45; }
+.tpl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
+.tpl-tag { font-size: 10px; padding: 2px 7px; border-radius: 100px; font-weight: 600; border: 1px solid; letter-spacing: 0.01em; }
+
+/* Tags color classes */
+.t-hot   { color: #f97316; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.08); }
+.t-high  { color: #22c55e; border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.08); }
+.t-med   { color: #60a5fa; border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.08); }
+.t-new   { color: #a78bfa; border-color: rgba(167,139,250,0.3);background: rgba(167,139,250,0.08); }
+.t-boost { color: #f59e0b; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+.t-local { color: #14b8a6; border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.08); }
+.t-niche { color: #ec4899; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.08); }
+
+/* HIDDEN STATE */
+.category.hidden { display: none; }
+
+/* EMPTY STATE */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text3); }
+.empty-state p { font-size: 14px; }
+
+/* FOOTER */
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--text3); font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="badge">Web Dev Agency · Template Library</div>
+    <h1>Industry Website Templates — Master List</h1>
+    <p>ThemeForest/Envato-style template ideas organized by industry. Every template type a real business owner would buy.</p>
+    <div class="stats-row">
+      <div class="stat"><strong id="cat-count">22</strong><span>Categories</span></div>
+      <div class="stat"><strong id="total-count">—</strong><span>Template Ideas</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+      <input id="search" type="text" placeholder="Search templates, e.g. plumber, dentist…">
+    </div>
+    <div class="filter-row" id="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="hot">🔥 Hot</button>
+      <button class="filter-btn" data-filter="high">High Demand</button>
+      <button class="filter-btn" data-filter="local">Local Business</button>
+      <button class="filter-btn" data-filter="new">Trending</button>
+    </div>
+    <span class="result-count" id="result-count"></span>
+  </div>
+</div>
+
+<div class="main" id="main"></div>
+<div class="empty-state" id="empty-state" style="display:none;"><p>No templates found. Try a different search.</p></div>
+
+<footer>Mohammad's Web Dev Agency · Industry Templates Build List 2025–2026 · 22 Categories · ThemeForest/Envato style</footer>
+
+<script>
+const DATA = [
+  {
+    id: 'home-services',
+    icon: '🔧',
+    color: '#f97316',
+    colorBg: 'rgba(249,115,22,0.13)',
+    title: 'Home Services & Trades',
+    desc: 'The biggest local template market — every city has hundreds of these businesses',
+    templates: [
+      { name: 'Plumber Website', desc: 'Emergency call button, service areas map, before/after gallery, booking form', tags: ['hot','local'] },
+      { name: 'Electrician Website', desc: 'Safety certifications, residential & commercial services, quote request', tags: ['hot','local'] },
+      { name: 'HVAC / Air Conditioning', desc: 'Seasonal promotions, maintenance plans, 24/7 service highlight', tags: ['hot','local'] },
+      { name: 'Roofer / Roofing Company', desc: 'Damage inspection, free estimate CTA, financing options, warranty display', tags: ['high','local'] },
+      { name: 'Pest Control Service', desc: 'Treatment types, pest library, recurring plan pricing, guarantee badge', tags: ['high','local'] },
+      { name: 'Landscaping & Lawn Care', desc: 'Before/after gallery, seasonal packages, service area map, quote form', tags: ['high','local'] },
+      { name: 'Handyman Service', desc: 'Service checklist, hourly rate display, job request form, reviews', tags: ['local','high'] },
+      { name: 'House Painter', desc: 'Color gallery, project portfolio, paint brand partnerships, free estimate', tags: ['local'] },
+      { name: 'Flooring & Tiling', desc: 'Material showcase, room visualizer mockup, installation process, quote', tags: ['local'] },
+      { name: 'Window & Door Installer', desc: 'Product catalog, energy savings calculator, showroom gallery', tags: ['local'] },
+      { name: 'Pool Service & Cleaning', desc: 'Weekly service plans, pool types, chemical testing info, booking', tags: ['local','niche'] },
+      { name: 'Fence Installation', desc: 'Material types (wood, vinyl, iron), gallery, free estimate form', tags: ['local'] },
+      { name: 'Garage Door Repair', desc: 'Emergency service, brand list, same-day booking, warranty info', tags: ['local','hot'] },
+      { name: 'Cleaning Service / Maid', desc: 'Residential & commercial, package pricing, green products, scheduling', tags: ['hot','local'] },
+      { name: 'Tree Service / Arborist', desc: 'Emergency tree removal, trimming, stump grinding, ISA cert badge', tags: ['local'] },
+      { name: 'Gutter Cleaning & Repair', desc: 'Seasonal specials, gutter guard upsell, inspection form, reviews', tags: ['local'] },
+      { name: 'Locksmith Service', desc: '24/7 emergency, car/home/commercial, response time highlight, trust badges', tags: ['hot','local'] },
+      { name: 'Pressure Washing / Power Washing', desc: 'Before/after gallery, surface types, packages, free quote form', tags: ['local','new'] },
+      { name: 'Septic System Services', desc: 'Pump schedule, inspections, service area, emergency contact', tags: ['local','niche'] },
+      { name: 'Appliance Repair', desc: 'Brand list, same-day service, parts warranty, online scheduling', tags: ['local','high'] },
+    ]
+  },
+  {
+    id: 'construction',
+    icon: '🏗️',
+    color: '#f59e0b',
+    colorBg: 'rgba(245,158,11,0.13)',
+    title: 'Construction & Renovation',
+    desc: 'High-ticket clients, portfolio-driven. Premium template pricing justified',
+    templates: [
+      { name: 'General Contractor', desc: 'Project portfolio, licensing & insurance display, free estimate CTA', tags: ['hot','high'] },
+      { name: 'Custom Home Builder', desc: 'Floor plan gallery, build process timeline, model homes, financing info', tags: ['high','boost'] },
+      { name: 'Kitchen & Bath Remodeler', desc: 'Before/after gallery, 3D design mockup, material samples, showroom CTA', tags: ['hot','high'] },
+      { name: 'Interior Design Studio', desc: 'Portfolio grid, design styles, mood boards, consultation booking', tags: ['hot','new'] },
+      { name: 'Architecture Firm', desc: 'Project showcase, team profiles, awards, detailed case studies', tags: ['high','boost'] },
+      { name: 'Civil Engineering Company', desc: 'Project types, sectors served, technical specs, RFQ form', tags: ['high'] },
+      { name: 'Commercial Construction', desc: 'Sectors (retail, office, industrial), project scale, bonds & certifications', tags: ['high'] },
+      { name: 'Demolition Company', desc: 'Residential & commercial demo, safety protocols, debris removal, contact', tags: ['niche'] },
+      { name: 'Concrete & Masonry', desc: 'Driveway, foundation, stamped concrete gallery, free estimate', tags: ['local'] },
+      { name: 'Drywall & Plastering', desc: 'Repair & installation, finishing grades, residential/commercial, quote', tags: ['local'] },
+      { name: 'Insulation Contractor', desc: 'Types (spray foam, batt), energy savings chart, attic/crawl space, quote', tags: ['local','new'] },
+      { name: 'Waterproofing Company', desc: 'Basement, foundation, deck waterproofing, warranty guarantee, booking', tags: ['local'] },
+    ]
+  },
+  {
+    id: 'green-energy',
+    icon: '☀️',
+    color: '#22c55e',
+    colorBg: 'rgba(34,197,94,0.13)',
+    title: 'Green Energy & Environment',
+    desc: 'Fastest growing local business sector. Solar alone is a $300B+ global industry',
+    templates: [
+      { name: 'Solar Panel Installer', desc: 'Savings calculator, panel brands, financing options, incentives/tax credits CTA', tags: ['hot','new','high'] },
+      { name: 'Solar Farm / Commercial Solar', desc: 'Capacity specs, PPA & lease options, corporate sustainability pitch', tags: ['high','boost'] },
+      { name: 'EV Charging Station Installer', desc: 'Home & commercial chargers, brand partnerships, installation process', tags: ['new','hot'] },
+      { name: 'Wind Energy Company', desc: 'Turbine types, land requirements, ROI projection, inquiry form', tags: ['niche','high'] },
+      { name: 'Energy Audit Service', desc: 'Home & commercial audits, before/after savings, report sample, booking', tags: ['local','new'] },
+      { name: 'Green / Eco Building Contractor', desc: 'LEED certifications, sustainable materials, energy-efficient builds', tags: ['new','niche'] },
+      { name: 'Battery Storage Solutions', desc: 'Home & grid storage, brand list (Tesla, Enphase), ROI calculator, quote', tags: ['new','hot'] },
+      { name: 'Rainwater Harvesting Systems', desc: 'System types, installation process, water savings stats, quote form', tags: ['niche'] },
+      { name: 'Electric Vehicle Dealership', desc: 'EV model catalog, range calculator, charging guide, test drive booking', tags: ['new','high'] },
+      { name: 'Recycling & Waste Management', desc: 'Material types, pickup schedule, commercial plans, environmental impact stats', tags: ['niche'] },
+    ]
+  },
+  {
+    id: 'automotive',
+    icon: '🚗',
+    color: '#3b82f6',
+    colorBg: 'rgba(59,130,246,0.13)',
+    title: 'Automotive & Transport',
+    desc: 'Every town has 10+ auto shops. Most have terrible websites — huge opportunity',
+    templates: [
+      { name: 'Auto Repair Shop', desc: 'Services list, ASE certified badge, online scheduling, specials/coupons', tags: ['hot','local'] },
+      { name: 'Car Dealership', desc: 'Inventory listings, finance calculator, trade-in form, compare models', tags: ['high','boost'] },
+      { name: 'Used Car Dealer', desc: 'Vehicle search/filter, Carfax badge, financing for all credit, contact', tags: ['local','high'] },
+      { name: 'Auto Detailing', desc: 'Package tiers, before/after photos, add-on services, online booking', tags: ['hot','local'] },
+      { name: 'Car Wash', desc: 'Package comparison, monthly membership CTA, location finder, gift cards', tags: ['local','high'] },
+      { name: 'Tire Shop', desc: 'Brand catalog, size finder, installation price, rebate promotions', tags: ['local'] },
+      { name: 'Auto Body & Collision Repair', desc: 'Insurance claims process, free estimate, color matching, rental info', tags: ['local','high'] },
+      { name: 'Trucking & Freight', desc: 'Load types, route coverage map, tracking feature, carrier request form', tags: ['high'] },
+      { name: 'Motorcycle Shop', desc: 'New & used bikes, parts catalog, service dept, riding events', tags: ['niche'] },
+      { name: 'Car Rental Company', desc: 'Fleet gallery, booking calendar, pricing tiers, airport pickup CTA', tags: ['local'] },
+      { name: 'RV & Boat Dealer', desc: 'Inventory grid, financing, storage services, service center', tags: ['niche'] },
+      { name: 'Towing Service', desc: '24/7 emergency, coverage map, flatbed/wheel lift, instant quote', tags: ['local','hot'] },
+    ]
+  },
+  {
+    id: 'healthcare',
+    icon: '🏥',
+    color: '#06b6d4',
+    colorBg: 'rgba(6,182,212,0.13)',
+    title: 'Healthcare & Medical',
+    desc: 'High willingness to pay, HIPAA-aware design, trust-first layout needed',
+    templates: [
+      { name: 'General Practice / Medical Clinic', desc: 'Doctor profiles, online appointment, insurance acceptance, telehealth CTA', tags: ['hot','high'] },
+      { name: 'Dental Office', desc: 'Smile gallery, treatment menu, new patient offer, insurance & payment plans', tags: ['hot','local'] },
+      { name: 'Orthodontist / Braces', desc: 'Before/after smiles, Invisalign vs braces, free consult CTA, payment plans', tags: ['hot','high'] },
+      { name: 'Chiropractic Clinic', desc: 'Condition list, adjustment video, new patient special, booking form', tags: ['local','high'] },
+      { name: 'Physical Therapy / Rehab', desc: 'Condition specialties, team credentials, progress tracking, patient portal', tags: ['local','high'] },
+      { name: 'Eye Care / Optometrist', desc: 'Frame catalog, eye exam booking, contact lens store, insurance info', tags: ['local'] },
+      { name: 'Dermatologist / Skin Clinic', desc: 'Treatment menu, before/after, virtual skin analysis, appointment form', tags: ['high','hot'] },
+      { name: 'Med Spa / Aesthetic Clinic', desc: 'Treatment menu (Botox, filler, laser), before/after, packages, booking', tags: ['hot','new'] },
+      { name: 'Mental Health / Therapy Practice', desc: 'Therapist profiles, specialties, telehealth, insurance, booking form', tags: ['hot','new','high'] },
+      { name: 'Pediatric Clinic', desc: 'Child-friendly design, vaccination schedule, after-hours line, online booking', tags: ['local'] },
+      { name: 'Urgent Care Center', desc: 'Wait time display, services list, walk-in CTA, locations, insurance', tags: ['local','hot'] },
+      { name: 'Pharmacy / Drug Store', desc: 'Prescription refill CTA, compounding services, flu shot booking, delivery', tags: ['local'] },
+      { name: 'Veterinary Clinic', desc: 'Pet profiles, appointment booking, emergency line, wellness plans', tags: ['local','high'] },
+      { name: 'Hearing Aid / Audiologist', desc: 'Hearing test booking, device catalog, insurance info, fitting process', tags: ['local','niche'] },
+      { name: 'Fertility & IVF Clinic', desc: 'Treatment options, success rates, financial aid, compassionate design', tags: ['high','niche'] },
+    ]
+  },
+  {
+    id: 'fitness',
+    icon: '💪',
+    color: '#f97316',
+    colorBg: 'rgba(249,115,22,0.13)',
+    title: 'Fitness & Wellness',
+    desc: 'High consumer spending, recurring memberships, visually impactful templates',
+    templates: [
+      { name: 'Gym / Fitness Center', desc: 'Membership tiers, class schedule, trainer profiles, free trial CTA', tags: ['hot','local'] },
+      { name: 'Yoga Studio', desc: 'Class schedule, teacher bios, workshop events, online booking, retreats', tags: ['hot','local'] },
+      { name: 'CrossFit Box / Functional Fitness', desc: 'WOD feed, membership, community photos, intro class CTA', tags: ['local','high'] },
+      { name: 'Personal Trainer', desc: 'Transformation gallery, program packages, testimonials, consult booking', tags: ['hot','local'] },
+      { name: 'Pilates Studio', desc: 'Class types (mat, reformer), schedule, intro offer, instructor team', tags: ['local'] },
+      { name: 'Martial Arts / MMA Academy', desc: 'Classes by age/skill, program list, free trial, competition results', tags: ['local'] },
+      { name: 'Dance Studio', desc: 'Style catalog, age groups, performance gallery, registration form', tags: ['local'] },
+      { name: 'Spa & Massage Therapy', desc: 'Service menu, therapist profiles, gift cards, online booking', tags: ['hot','local'] },
+      { name: 'Nutritionist / Dietitian', desc: 'Specialty areas, program packages, meal plan preview, consultation', tags: ['local','new'] },
+      { name: 'Meditation / Mindfulness Studio', desc: 'Session types, guided audio previews, memberships, retreat calendar', tags: ['new','niche'] },
+      { name: 'Swimming Pool / Swim School', desc: 'Level programs, instructor team, schedule, enrollment form', tags: ['local'] },
+      { name: 'Boxing Gym', desc: 'Class types, punch-by-punch program layout, free class CTA, gallery', tags: ['local','niche'] },
+    ]
+  },
+  {
+    id: 'beauty',
+    icon: '💅',
+    color: '#ec4899',
+    colorBg: 'rgba(236,72,153,0.13)',
+    title: 'Beauty & Salon',
+    desc: 'Visual-first, Instagram-linked, booking-centric. Huge template market',
+    templates: [
+      { name: 'Hair Salon', desc: 'Style gallery, service menu with pricing, stylist profiles, online booking', tags: ['hot','local'] },
+      { name: 'Barbershop', desc: 'Barber profiles, cut gallery, waitlist / booking, shop culture vibe', tags: ['hot','local'] },
+      { name: 'Nail Salon', desc: 'Nail art gallery, service & pricing, gel/acrylic options, online booking', tags: ['hot','local'] },
+      { name: 'Makeup Artist', desc: 'Portfolio, bridal & event packages, look gallery, inquiry form', tags: ['local','niche'] },
+      { name: 'Tattoo Studio', desc: 'Artist portfolios, style gallery, booking/deposit form, flash sale events', tags: ['hot','local'] },
+      { name: 'Esthetics / Facial Spa', desc: 'Skin treatment menu, before/after, membership program, booking form', tags: ['local','new'] },
+      { name: 'Eyebrow Threading / Microblading', desc: 'Before/after brows, service menu, pricing, booking', tags: ['local'] },
+      { name: 'Lash Extension Studio', desc: 'Lash style gallery, fill schedules, pricing tiers, book online', tags: ['hot','local'] },
+      { name: 'Tanning Salon', desc: 'Bed types, session packages, membership, spray tan booking', tags: ['local'] },
+      { name: 'Permanent Makeup Artist', desc: 'Portfolio (brows, lips, liner), process photos, booking, healing guide', tags: ['niche','new'] },
+    ]
+  },
+  {
+    id: 'food',
+    icon: '🍽️',
+    color: '#f59e0b',
+    colorBg: 'rgba(245,158,11,0.13)',
+    title: 'Food, Restaurant & Hospitality',
+    desc: 'Restaurants are the #1 most-searched local business category online',
+    templates: [
+      { name: 'Fine Dining Restaurant', desc: 'Tasting menu, chef story, ambiance gallery, reservation system', tags: ['hot','high'] },
+      { name: 'Casual Restaurant / Bistro', desc: 'Full menu, online order CTA, events, location & hours', tags: ['hot','local'] },
+      { name: 'Fast Food / Quick Service', desc: 'Menu with photos, combo deals, mobile order CTA, location finder', tags: ['hot','local'] },
+      { name: 'Cafe / Coffee Shop', desc: 'Seasonal menu, brewing guide, loyalty program, subscribe & save beans', tags: ['hot','local'] },
+      { name: 'Bakery & Patisserie', desc: 'Product gallery, custom order form, daily specials, pickup scheduling', tags: ['hot','local'] },
+      { name: 'Pizza Restaurant', desc: 'Online order + delivery, build-your-own mockup, loyalty, locations', tags: ['hot','local'] },
+      { name: 'Food Truck', desc: 'Schedule/location tracker, menu, catering inquiry, social feed', tags: ['local','hot'] },
+      { name: 'Bar & Pub', desc: 'Drinks menu, events calendar, happy hour promo, live music listing', tags: ['local','high'] },
+      { name: 'Brewery / Craft Beer', desc: 'Tap room info, brew list with tasting notes, taproom events, tours', tags: ['new','niche'] },
+      { name: 'Winery / Vineyard', desc: 'Wine club membership, tasting room booking, vintage catalog, events', tags: ['niche','high'] },
+      { name: 'Catering Service', desc: 'Menu packages, gallery of past events, event types, quote form', tags: ['local','high'] },
+      { name: 'Meal Prep & Delivery Service', desc: 'Subscription plans, menu selection, dietary filters, delivery zones', tags: ['new','hot'] },
+      { name: 'Food Blog & Recipe Site', desc: 'Recipe cards, category filter, video embeds, newsletter opt-in, cookbook CTA', tags: ['new','niche'] },
+      { name: 'Butcher / Meat Shop', desc: 'Cut catalog, custom orders, sourcing story, farm partnerships, delivery', tags: ['local','niche'] },
+      { name: 'Ice Cream Parlor / Dessert Shop', desc: 'Flavor menu, seasonal specials, catering, event packages, gift cards', tags: ['local'] },
+    ]
+  },
+  {
+    id: 'real-estate',
+    icon: '🏠',
+    color: '#a78bfa',
+    colorBg: 'rgba(167,139,250,0.13)',
+    title: 'Real Estate & Property',
+    desc: 'High transaction values = buyers who invest in quality websites',
+    templates: [
+      { name: 'Real Estate Agency / Brokerage', desc: 'MLS listings integration, agent roster, neighborhood guides, valuation tool', tags: ['hot','high'] },
+      { name: 'Real Estate Agent Portfolio', desc: 'Personal brand, sold listings, client reviews, market report, contact', tags: ['hot','local'] },
+      { name: 'Property Management Company', desc: 'Tenant portal CTA, owner services, vacancy listings, maintenance request', tags: ['high'] },
+      { name: 'Luxury Real Estate', desc: 'Full-screen property photos, virtual tour, lifestyle content, concierge CTA', tags: ['high','boost'] },
+      { name: 'Commercial Real Estate', desc: 'Property type filter, square footage, ROI data, broker contacts', tags: ['high'] },
+      { name: 'Mortgage Broker / Lender', desc: 'Rate calculator, loan types, pre-approval CTA, testimonials, apply form', tags: ['high','local'] },
+      { name: 'Home Inspector', desc: 'Inspection types, report sample, booking calendar, certifications', tags: ['local'] },
+      { name: 'Land Developer / Subdivision', desc: 'Site map, lot availability, future community renders, contact form', tags: ['niche','high'] },
+      { name: 'Vacation Rental / Short-Term Rental', desc: 'Photo gallery, availability calendar, amenities list, direct booking', tags: ['hot','new'] },
+      { name: 'Real Estate Investor / Flipper', desc: 'Portfolio of flips, buying criteria, sell-your-home-fast CTA', tags: ['niche'] },
+    ]
+  },
+  {
+    id: 'legal',
+    icon: '⚖️',
+    color: '#64748b',
+    colorBg: 'rgba(100,116,139,0.13)',
+    title: 'Legal Services',
+    desc: 'High LTV clients. Personal injury alone spends billions on web marketing',
+    templates: [
+      { name: 'Personal Injury Law Firm', desc: 'No-fee-unless-win badge, case types, settlement results, free consult', tags: ['hot','high','boost'] },
+      { name: 'Family Law Attorney', desc: 'Divorce, custody, adoption — compassionate tone, booking, FAQ', tags: ['hot','local'] },
+      { name: 'Criminal Defense Lawyer', desc: 'Case types, 24/7 availability, confidentiality pledge, free consultation', tags: ['local','high'] },
+      { name: 'Immigration Law Firm', desc: 'Visa types, multi-language option, case evaluation form, testimonials', tags: ['high','niche'] },
+      { name: 'Corporate / Business Law', desc: 'Practice areas, industry expertise, partner bios, client list', tags: ['high'] },
+      { name: 'Real Estate Attorney', desc: 'Transaction types, title services, settlement process, contact form', tags: ['local'] },
+      { name: 'Estate Planning / Elder Law', desc: 'Trust & will services, free guide download, consultation booking', tags: ['local','niche'] },
+      { name: 'Employment & Labor Law', desc: 'Worker rights, wrongful termination, class action, free case review', tags: ['high'] },
+      { name: 'Bankruptcy Attorney', desc: 'Chapter types, debt relief calculator, free consultation, hope-focused design', tags: ['local','niche'] },
+      { name: 'DUI / Traffic Attorney', desc: 'Urgent CTA, case success rate, 24/7 line, license defense info', tags: ['local','hot'] },
+    ]
+  },
+  {
+    id: 'finance',
+    icon: '💰',
+    color: '#22c55e',
+    colorBg: 'rgba(34,197,94,0.13)',
+    title: 'Finance & Insurance',
+    desc: 'Regulated industry — trust signals and credentials are the key design element',
+    templates: [
+      { name: 'Financial Advisor / Wealth Manager', desc: 'Fiduciary badge, services, team credentials, retirement calculator, consult CTA', tags: ['high','boost'] },
+      { name: 'Accounting Firm / CPA', desc: 'Service list, industry specialties, tax deadline alerts, client portal', tags: ['hot','local'] },
+      { name: 'Bookkeeping Service', desc: 'Monthly packages, QuickBooks/Xero badges, SMB focus, free consult', tags: ['local','hot'] },
+      { name: 'Insurance Agency', desc: 'Policy types, instant quote form, carrier partners, local agent profiles', tags: ['hot','local'] },
+      { name: 'Mortgage Company / Broker', desc: 'Rate comparison, loan calculator, pre-approval, testimonials, apply online', tags: ['high','hot'] },
+      { name: 'Tax Preparation Service', desc: 'Service tiers, drop-off info, deadline countdown, guarantee, booking', tags: ['hot','local'] },
+      { name: 'Credit Repair Service', desc: 'Score improvement stats, process steps, testimonials, free score check CTA', tags: ['local','niche'] },
+      { name: 'Payroll Services', desc: 'SMB-focused, plans, integrations, compliance badges, free trial', tags: ['high'] },
+      { name: 'Business Loans / Lending', desc: 'Loan types, fast funding CTA, calculator, eligibility quiz, apply', tags: ['high','new'] },
+    ]
+  },
+  {
+    id: 'education',
+    icon: '📚',
+    color: '#06b6d4',
+    colorBg: 'rgba(6,182,212,0.13)',
+    title: 'Education & Learning',
+    desc: 'From preschool to online courses — every education format needs a template',
+    templates: [
+      { name: 'Private School / Academy', desc: 'Campus photos, curriculum highlights, admissions form, events calendar', tags: ['high'] },
+      { name: 'Preschool / Daycare Center', desc: 'Safe environment photos, curriculum, enrollment form, parent testimonials', tags: ['local','high'] },
+      { name: 'Tutoring Service', desc: 'Subject list, tutor profiles, grade levels, free session CTA, parent reviews', tags: ['hot','local'] },
+      { name: 'Language School', desc: 'Course levels, teacher team, cultural events, enrollment form, placement test', tags: ['local','niche'] },
+      { name: 'Online Course Creator', desc: 'Course catalog, promo video, student reviews, free module CTA, pricing', tags: ['hot','new'] },
+      { name: 'Coding Bootcamp', desc: 'Curriculum, outcomes/salary data, alumni network, scholarship, apply form', tags: ['hot','new'] },
+      { name: 'Music School', desc: 'Instrument catalog, teacher bios, recital gallery, free lesson booking', tags: ['local'] },
+      { name: 'Art & Craft Studio', desc: 'Class gallery, skill levels, workshop calendar, supply list, enroll', tags: ['local'] },
+      { name: 'Test Prep / SAT & GRE', desc: 'Score improvement guarantee, study plans, practice test access, pricing', tags: ['local','high'] },
+      { name: 'Driving School', desc: 'Course types (teen/adult/commercial), scheduling, pricing, pass rate badge', tags: ['local'] },
+      { name: 'Vocational / Trade School', desc: 'Program catalog, certification outcomes, financial aid, enrollment form', tags: ['niche','high'] },
+      { name: 'Corporate Training Company', desc: 'Industry specialties, LMS demo, team training packages, case studies', tags: ['high','boost'] },
+    ]
+  },
+  {
+    id: 'creative',
+    icon: '🎨',
+    color: '#a78bfa',
+    colorBg: 'rgba(167,139,250,0.13)',
+    title: 'Creative & Portfolio',
+    desc: 'Visual-forward templates. Portfolio grid and case study format are key',
+    templates: [
+      { name: 'Photography Studio', desc: 'Gallery by category, session packages, booking form, print store', tags: ['hot','local'] },
+      { name: 'Wedding Photographer', desc: 'Love story gallery, packages, engagement FAQ, inquiry form, blog', tags: ['hot','niche'] },
+      { name: 'Videography / Film Production', desc: 'Showreel hero, project types, client list, quote form, gear showcase', tags: ['high','hot'] },
+      { name: 'Graphic Design Agency', desc: 'Portfolio grid, service list, process steps, pricing tiers, contact', tags: ['hot','new'] },
+      { name: 'Web Design & Dev Agency', desc: 'Case studies, tech stack, team page, discovery call CTA, testimonials', tags: ['hot','high'] },
+      { name: 'Illustration / Digital Artist', desc: 'Gallery, print shop, commission form, licensing info, newsletter', tags: ['niche','new'] },
+      { name: 'Architecture Portfolio', desc: 'Project case studies, floor plans, awards, firm story, contact', tags: ['high'] },
+      { name: 'Interior Design Portfolio', desc: 'Project gallery by style, room type filter, consultation booking', tags: ['high','hot'] },
+      { name: 'Music Artist / Band', desc: 'Discography, tour dates, merch store, press kit, Spotify/YouTube embed', tags: ['niche'] },
+      { name: 'Podcast Website', desc: 'Episode player, show notes, guest archive, Patreon CTA, subscribe', tags: ['new','niche'] },
+      { name: 'Motion Graphics / Animation Studio', desc: 'Showreel, brand animation examples, client logos, project inquiry', tags: ['niche','high'] },
+      { name: 'UX/UI Designer Portfolio', desc: 'Case studies with process, wireframe gallery, skills & tools, hire CTA', tags: ['hot','new'] },
+    ]
+  },
+  {
+    id: 'business',
+    icon: '💼',
+    color: '#60a5fa',
+    colorBg: 'rgba(96,165,250,0.13)',
+    title: 'Business & Corporate Services',
+    desc: 'B2B templates — trust, credibility, and lead generation are the focus',
+    templates: [
+      { name: 'Management Consulting Firm', desc: 'Industry verticals, case studies, thought leadership, partner bios, contact', tags: ['high','boost'] },
+      { name: 'Marketing & Advertising Agency', desc: 'Portfolio, services, client logos, results stats, proposal CTA', tags: ['hot','high'] },
+      { name: 'Digital Marketing / SEO Agency', desc: 'Service breakdown, ranking results, audit tool CTA, pricing, case studies', tags: ['hot','new'] },
+      { name: 'PR & Communications Firm', desc: 'Media placements, crisis comms, brand story, journalist contacts', tags: ['high','niche'] },
+      { name: 'HR Consulting / Staffing Agency', desc: 'Service menu, industry expertise, candidate portal, employer portal', tags: ['high'] },
+      { name: 'Business Coach / Executive Coach', desc: 'Coach bio, program packages, results/outcomes, podcast, book a call', tags: ['hot','new'] },
+      { name: 'IT Services / MSP', desc: 'Services list, managed plans, response time SLA, case studies, free audit', tags: ['high','hot'] },
+      { name: 'Virtual Assistant Agency', desc: 'Service packages, task categories, time zone coverage, hire now CTA', tags: ['new','hot'] },
+      { name: 'Logistics & Supply Chain', desc: 'Service types, route network map, tracking feature, RFQ form', tags: ['high'] },
+      { name: 'Security Guard Company', desc: 'Service types, certifications, 24/7 coverage, industries served, quote', tags: ['local','niche'] },
+      { name: 'Translation & Localization', desc: 'Language pairs, industry specialties, turnaround time, quote form', tags: ['niche'] },
+      { name: 'Printing & Signage Company', desc: 'Product catalog, file upload form, quantity pricing, turnaround guide', tags: ['local'] },
+    ]
+  },
+  {
+    id: 'ecommerce',
+    icon: '🛍️',
+    color: '#f97316',
+    colorBg: 'rgba(249,115,22,0.13)',
+    title: 'E-commerce & Retail',
+    desc: 'Product-first templates. Shopify/WooCommerce-ready with conversion focus',
+    templates: [
+      { name: 'Fashion & Clothing Store', desc: 'Lookbook gallery, size guide, seasonal collections, wishlist, reviews', tags: ['hot','high'] },
+      { name: 'Jewelry Store', desc: 'Elegant product grid, metal/stone filter, custom order, gift packaging', tags: ['high','boost'] },
+      { name: 'Electronics & Gadgets Store', desc: 'Comparison tool, spec sheets, compatibility checker, warranty info', tags: ['high','hot'] },
+      { name: 'Furniture & Home Decor', desc: 'Room scene photos, style filter, AR preview mockup CTA, delivery zones', tags: ['high','new'] },
+      { name: 'Sports & Outdoor Gear', desc: 'Activity filter, gear guide, size chart, loyalty points, reviews', tags: ['high'] },
+      { name: 'Pet Products Store', desc: 'Pet type filter, subscription food, vet-recommended badge, reviews', tags: ['hot','local'] },
+      { name: 'Health & Supplements Store', desc: 'Goal-based filter, ingredient transparency, subscription, clinical badges', tags: ['hot','new'] },
+      { name: 'Beauty & Cosmetics Store', desc: 'Shade finder, ingredient lists, bundle deals, routine builder, reviews', tags: ['hot','high'] },
+      { name: 'Baby & Kids Products', desc: 'Age-based filter, safety certifications, gift registry, subscription', tags: ['high'] },
+      { name: 'Book & Stationery Store', desc: 'Genre filter, staff picks, reading list, author events, subscription box', tags: ['niche'] },
+      { name: 'Organic / Natural Food Store', desc: 'Farm sourcing story, dietary filter, CSA box subscription, pickup', tags: ['new','niche'] },
+      { name: 'Luxury Brand Store', desc: 'Minimalist hero, editorial photography, concierge chat, exclusivity CTA', tags: ['high','boost'] },
+      { name: 'Dropshipping / Print-on-Demand Store', desc: 'Product showcase, trending items, automated fulfillment note, reviews', tags: ['hot','new'] },
+      { name: 'B2B Wholesale Platform', desc: 'MOQ display, tiered pricing, net-terms application, bulk RFQ form', tags: ['high','niche'] },
+    ]
+  },
+  {
+    id: 'hospitality-travel',
+    icon: '✈️',
+    color: '#14b8a6',
+    colorBg: 'rgba(20,184,166,0.13)',
+    title: 'Hospitality & Travel',
+    desc: 'Experience-driven designs. Photography and storytelling are paramount',
+    templates: [
+      { name: 'Hotel / Resort', desc: 'Room gallery, availability calendar, amenities list, direct booking CTA', tags: ['hot','high'] },
+      { name: 'Boutique Hotel', desc: 'Story-driven brand, unique room showcase, local experiences, book direct', tags: ['high','boost'] },
+      { name: 'Bed & Breakfast / Inn', desc: 'Cozy photography, rooms, local attractions, seasonal packages, booking', tags: ['local','niche'] },
+      { name: 'Hostel', desc: 'Bed types, common areas, events board, reviews, online booking', tags: ['niche'] },
+      { name: 'Travel Agency', desc: 'Destination galleries, package tours, cruise deals, custom trip builder', tags: ['hot','high'] },
+      { name: 'Tour Operator', desc: 'Tour catalog, itinerary pages, group booking, activity calendar, reviews', tags: ['hot','high'] },
+      { name: 'Airbnb / Vacation Rental', desc: 'Property photos, amenities, availability, local guide, direct booking', tags: ['hot','new'] },
+      { name: 'Cruise Line / Charter', desc: 'Itinerary maps, cabin types, excursion catalog, onboard experience', tags: ['niche','high'] },
+      { name: 'Camping & Glamping', desc: 'Site map, campfire amenities, activity list, booking calendar, gallery', tags: ['new','niche'] },
+      { name: 'Ski Resort / Mountain Lodge', desc: 'Trail map, snow report, lift ticket pricing, accommodation, lessons', tags: ['niche','high'] },
+    ]
+  },
+  {
+    id: 'events-entertainment',
+    icon: '🎉',
+    color: '#f59e0b',
+    colorBg: 'rgba(245,158,11,0.13)',
+    title: 'Events & Entertainment',
+    desc: 'High visual impact, inquiry-driven. Urgency and emotion are key design triggers',
+    templates: [
+      { name: 'Wedding Planner', desc: 'Portfolio by style/venue, packages, real weddings blog, inquiry form', tags: ['hot','high'] },
+      { name: 'Event Management Company', desc: 'Event types, past events gallery, vendor network, corporate inquiry', tags: ['high','local'] },
+      { name: 'Wedding Venue', desc: 'Venue photo tour, capacity info, catering options, availability calendar', tags: ['hot','high'] },
+      { name: 'DJ / Entertainment', desc: 'Mix samples, event types, packages, rig photos, booking calendar', tags: ['local','niche'] },
+      { name: 'Comedian / Speaker / Emcee', desc: 'Showreel, press kit, upcoming shows, booking inquiry, media logos', tags: ['niche'] },
+      { name: 'Party Rentals (Tent, Table, Chair)', desc: 'Product catalog, package pricing, delivery zones, availability, quote', tags: ['local','niche'] },
+      { name: 'Photo Booth Rental', desc: 'Booth styles, sample strips, add-ons, booking form, event gallery', tags: ['local','niche'] },
+      { name: 'Kids Party Entertainment', desc: 'Character lineup, package tiers, safety badge, parent reviews, booking', tags: ['local'] },
+      { name: 'Corporate Event Planner', desc: 'Industry expertise, venue relationships, budget consulting, case studies', tags: ['high','boost'] },
+      { name: 'Nightclub / Lounge', desc: 'Event calendar, artist lineup, table booking, dress code, membership', tags: ['local','niche'] },
+      { name: 'Escape Room', desc: 'Room themes, difficulty rating, group booking, leaderboard, gift cards', tags: ['local','new'] },
+    ]
+  },
+  {
+    id: 'nonprofit',
+    icon: '❤️',
+    color: '#ef4444',
+    colorBg: 'rgba(239,68,68,0.13)',
+    title: 'Nonprofit & Community',
+    desc: 'Emotion-first design. Storytelling and donation conversion are the goals',
+    templates: [
+      { name: 'Charity / NGO', desc: 'Mission story, impact stats, donation form, volunteer signup, annual report', tags: ['niche','new'] },
+      { name: 'Church / Religious Organization', desc: 'Service times, sermon archive, events calendar, giving portal, ministries', tags: ['local','high'] },
+      { name: 'Community Foundation', desc: 'Grant programs, donor stories, apply for funding, board roster, contact', tags: ['niche'] },
+      { name: 'Animal Shelter & Rescue', desc: 'Adoptable pets gallery, foster signup, donation, volunteer, events', tags: ['local','niche'] },
+      { name: 'Environmental Organization', desc: 'Mission, campaigns, volunteer map, petition CTA, donate, blog', tags: ['niche','new'] },
+      { name: 'Youth & After-School Program', desc: 'Program listing, age groups, enrollment, volunteer, impact photos', tags: ['local'] },
+      { name: 'Food Bank / Pantry', desc: 'Donation form (money & food), volunteer shifts, distribution schedule', tags: ['local'] },
+      { name: 'Mental Health Nonprofit', desc: 'Resources, hotline CTA, community stories, awareness campaigns, donate', tags: ['niche','hot'] },
+    ]
+  },
+  {
+    id: 'agriculture',
+    icon: '🌾',
+    color: '#84cc16',
+    colorBg: 'rgba(132,204,22,0.13)',
+    title: 'Agriculture & Food Production',
+    desc: 'Farm-to-table storytelling. Authenticity and origin stories drive conversions',
+    templates: [
+      { name: 'Farm / Ranch Website', desc: 'Farm story, seasonal produce, CSA box subscription, farm store, events', tags: ['niche','new'] },
+      { name: 'Organic Farm', desc: 'Certification badges, growing practices, pick-your-own events, local delivery', tags: ['niche','new'] },
+      { name: 'Winery / Vineyard', desc: 'Varietal catalog, wine club membership, tasting room, tour booking', tags: ['niche','high'] },
+      { name: 'Craft Brewery', desc: 'Tap list, taproom info, distribution map, events, growler fill schedule', tags: ['niche','new'] },
+      { name: 'Greenhouse / Plant Nursery', desc: 'Plant catalog, care guides, seasonal availability, local delivery, workshops', tags: ['local','niche'] },
+      { name: 'Beekeeping / Honey Products', desc: 'Honey varieties, bee education, hive sponsorship, shop, workshops', tags: ['niche'] },
+      { name: 'Aquaculture / Fish Farm', desc: 'Species catalog, sourcing story, wholesale inquiry, sustainability certs', tags: ['niche'] },
+      { name: 'Agricultural Equipment Dealer', desc: 'Inventory catalog, brand partnerships, service dept, financing, parts', tags: ['niche','high'] },
+    ]
+  },
+  {
+    id: 'pet-services',
+    icon: '🐾',
+    color: '#f97316',
+    colorBg: 'rgba(249,115,22,0.13)',
+    title: 'Pet Services',
+    desc: 'Pet owners spend more per year than they do on themselves. Huge loyal market',
+    templates: [
+      { name: 'Pet Grooming Salon', desc: 'Service menu by breed/size, before/after photos, booking form, gallery', tags: ['hot','local'] },
+      { name: 'Dog Training Academy', desc: 'Training methods, class levels, trainer certs, success stories, enroll', tags: ['local','high'] },
+      { name: 'Pet Boarding & Daycare', desc: 'Facility photos, daily schedule, webcam feature, rates, booking', tags: ['local','high'] },
+      { name: 'Dog Walking Service', desc: 'Walker profiles, route tracking feature, insurance badge, subscribe/book', tags: ['local','hot'] },
+      { name: 'Pet Photography', desc: 'Portfolio gallery, session packages, studio & outdoor, booking form', tags: ['local','niche'] },
+      { name: 'Pet Supplies Store', desc: 'Category grid, brand list, subscription food, vet-approved badge, reviews', tags: ['local','hot'] },
+      { name: 'Exotic Animal Care', desc: 'Species specialties, vet credentials, care guides, appointment form', tags: ['niche'] },
+    ]
+  },
+  {
+    id: 'commodity-industrial',
+    icon: '🏭',
+    color: '#64748b',
+    colorBg: 'rgba(100,116,139,0.13)',
+    title: 'Commodity, Industrial & B2B',
+    desc: 'Functional, trust-heavy designs. RFQ and compliance are the conversion goals',
+    templates: [
+      { name: 'Import/Export & Trading Company', desc: 'Product categories, countries of origin, shipping terms, RFQ form, certifications', tags: ['high','niche'] },
+      { name: 'Wholesale Distributor', desc: 'Category catalog, MOQ display, trade account application, pricing tiers', tags: ['high','niche'] },
+      { name: 'Manufacturing Company', desc: 'Product lines, production capacity, quality certs (ISO), factory tour video', tags: ['high','boost'] },
+      { name: 'Steel & Metal Supplier', desc: 'Grade catalog, cut-to-size service, weight calculator, RFQ form, delivery', tags: ['niche','high'] },
+      { name: 'Timber & Wood Processing', desc: 'Species list, sustainability certs, lumber grades, quote form, delivery', tags: ['niche'] },
+      { name: 'Chemical Manufacturer', desc: 'SDS sheets, product applications, compliance certs, inquiry form', tags: ['niche','high'] },
+      { name: 'Mining & Quarry', desc: 'Material types, reserve data, site photos, ESG report, partner inquiry', tags: ['niche','high'] },
+      { name: 'Oil & Gas Services', desc: 'Service types, rig equipment, safety record, compliance, contact form', tags: ['niche','high'] },
+      { name: 'Textile & Fabric Supplier', desc: 'Fabric catalog, material specs, minimum orders, customization, samples', tags: ['niche'] },
+      { name: 'Packaging Solutions', desc: 'Material types, custom printing, MOQ calculator, eco-options, RFQ', tags: ['niche','high'] },
+    ]
+  },
+  {
+    id: 'technology',
+    icon: '💻',
+    color: '#8b5cf6',
+    colorBg: 'rgba(139,92,246,0.13)',
+    title: 'Technology & Software Companies',
+    desc: 'Conversion-focused, feature-rich landing pages for tech businesses',
+    templates: [
+      { name: 'IT Services / Managed Service Provider', desc: 'Service plans, response SLA, tech stack badges, free network audit CTA', tags: ['hot','high'] },
+      { name: 'Cybersecurity Company', desc: 'Threat landscape, compliance services, penetration testing, case studies', tags: ['high','new'] },
+      { name: 'App Development Agency', desc: 'Platform showcase, tech stack, case studies with results, discovery call', tags: ['hot','high'] },
+      { name: 'AI & Machine Learning Company', desc: 'Use cases, demo CTA, data privacy pledge, enterprise case studies', tags: ['hot','new'] },
+      { name: 'Blockchain / Web3 Company', desc: 'Token or protocol explainer, team credentials, whitepaper download, roadmap', tags: ['niche','new'] },
+      { name: 'Cloud Hosting Provider', desc: 'Plans comparison, uptime SLA, datacenter map, migration guide, pricing', tags: ['high','boost'] },
+      { name: 'Data Analytics Company', desc: 'Dashboard demo, industry use cases, integration list, ROI stats, trial CTA', tags: ['high','new'] },
+      { name: 'Game Studio / Developer', desc: 'Game trailers, release dates, platform list, community forum CTA, merch', tags: ['niche'] },
+      { name: 'Drone Services Company', desc: 'Use cases (real estate, agriculture, inspection), footage samples, quote', tags: ['new','niche'] },
+      { name: '3D Printing Service', desc: 'Material catalog, use cases, file upload for quote, turnaround time', tags: ['niche','new'] },
+    ]
+  },
+];
+
+// ---- BUILD DOM ----
+let activeFilter = 'all';
+let searchTerm = '';
+
+function getTagClass(tag) {
+  const map = { hot: 't-hot', high: 't-high', med: 't-med', new: 't-new', boost: 't-boost', local: 't-local', niche: 't-niche' };
+  return map[tag] || 't-med';
+}
+function getTagLabel(tag) {
+  const map = { hot:'🔥 Hot', high:'⭐ High Demand', med:'Medium', new:'📈 Trending', boost:'💎 Premium', local:'📍 Local', niche:'🎯 Niche' };
+  return map[tag] || tag;
+}
+
+function build() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  let totalTemplates = 0;
+  let visibleTemplates = 0;
+
+  DATA.forEach(cat => {
+    const section = document.createElement('div');
+    section.className = 'category';
+    section.dataset.catId = cat.id;
+
+    // filter templates
+    const filteredTemplates = cat.templates.filter(t => {
+      const matchSearch = !searchTerm || t.name.toLowerCase().includes(searchTerm) || t.desc.toLowerCase().includes(searchTerm) || cat.title.toLowerCase().includes(searchTerm);
+      const matchFilter = activeFilter === 'all' || t.tags.includes(activeFilter);
+      return matchSearch && matchFilter;
+    });
+
+    totalTemplates += cat.templates.length;
+    if (filteredTemplates.length === 0) {
+      section.classList.add('hidden');
+      main.appendChild(section);
+      return;
+    }
+    visibleTemplates += filteredTemplates.length;
+
+    section.innerHTML = `
+      <div class="cat-title-row">
+        <div class="cat-icon-wrap" style="background:${cat.colorBg}; font-size:18px;">${cat.icon}</div>
+        <div class="cat-title">${cat.title}</div>
+        <span class="cat-count-badge">${filteredTemplates.length} templates</span>
+        <span class="cat-desc">${cat.desc}</span>
+      </div>
+      <div class="tpl-grid" id="grid-${cat.id}"></div>`;
+    main.appendChild(section);
+
+    const grid = section.querySelector(`#grid-${cat.id}`);
+    filteredTemplates.forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'tpl-card';
+      const tagsHTML = (t.tags || []).map(tag => `<span class="tpl-tag ${getTagClass(tag)}">${getTagLabel(tag)}</span>`).join('');
+      card.innerHTML = `
+        <div class="tpl-name">${t.name}</div>
+        <div class="tpl-desc">${t.desc}</div>
+        <div class="tpl-tags">${tagsHTML}</div>`;
+      grid.appendChild(card);
+    });
+  });
+
+  document.getElementById('total-count').textContent = totalTemplates;
+  document.getElementById('result-count').textContent = `${visibleTemplates} of ${totalTemplates} shown`;
+  const emptyState = document.getElementById('empty-state');
+  emptyState.style.display = visibleTemplates === 0 ? 'block' : 'none';
+}
+
+// Search
+document.getElementById('search').addEventListener('input', e => {
+  searchTerm = e.target.value.trim().toLowerCase();
+  build();
+});
+
+// Filter buttons
+document.getElementById('filter-row').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  activeFilter = btn.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  build();
+});
+
+build();
+</script>
+</body>
+</html>

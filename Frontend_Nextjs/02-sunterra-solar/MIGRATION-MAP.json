@@ -1,0 +1,324 @@
+{
+  "source": "f:/PROJECTS/Cursorhtmlwebsite/sites/02. sunterra-solar-website.html",
+  "fileName": "02. sunterra-solar-website.html",
+  "targetFolder": "02-sunterra-solar",
+  "targetPath": "Frontend_Nextjs/02-sunterra-solar/",
+  "generatedAt": "2026-06-11T14:23:11.538Z",
+  "sections": [],
+  "routes": [
+    {
+      "htmlRoute": "404",
+      "nextPath": "/not-found"
+    },
+    {
+      "htmlRoute": "about",
+      "nextPath": "/about"
+    },
+    {
+      "htmlRoute": "batteries",
+      "nextPath": "/batteries"
+    },
+    {
+      "htmlRoute": "blog",
+      "nextPath": "/blog"
+    },
+    {
+      "htmlRoute": "blog-article",
+      "nextPath": "/blog/[slug]"
+    },
+    {
+      "htmlRoute": "calculator",
+      "nextPath": "/calculator"
+    },
+    {
+      "htmlRoute": "case-studies",
+      "nextPath": "/case-studies"
+    },
+    {
+      "htmlRoute": "case-study",
+      "nextPath": "/case-studies/[slug]"
+    },
+    {
+      "htmlRoute": "certifications",
+      "nextPath": "/certifications"
+    },
+    {
+      "htmlRoute": "commercial",
+      "nextPath": "/commercial"
+    },
+    {
+      "htmlRoute": "contact",
+      "nextPath": "/contact"
+    },
+    {
+      "htmlRoute": "cookies",
+      "nextPath": "/cookies"
+    },
+    {
+      "htmlRoute": "ev-chargers",
+      "nextPath": "/ev-chargers"
+    },
+    {
+      "htmlRoute": "faq",
+      "nextPath": "/faq"
+    },
+    {
+      "htmlRoute": "finance",
+      "nextPath": "/finance"
+    },
+    {
+      "htmlRoute": "home",
+      "nextPath": "/"
+    },
+    {
+      "htmlRoute": "inspection",
+      "nextPath": "/inspection"
+    },
+    {
+      "htmlRoute": "maintenance",
+      "nextPath": "/maintenance"
+    },
+    {
+      "htmlRoute": "off-grid",
+      "nextPath": "/off-grid"
+    },
+    {
+      "htmlRoute": "privacy",
+      "nextPath": "/privacy"
+    },
+    {
+      "htmlRoute": "quote",
+      "nextPath": "/quote"
+    },
+    {
+      "htmlRoute": "rebates",
+      "nextPath": "/rebates"
+    },
+    {
+      "htmlRoute": "residential",
+      "nextPath": "/residential"
+    },
+    {
+      "htmlRoute": "reviews",
+      "nextPath": "/reviews"
+    },
+    {
+      "htmlRoute": "terms",
+      "nextPath": "/terms"
+    },
+    {
+      "htmlRoute": "warranty",
+      "nextPath": "/warranty"
+    },
+    {
+      "htmlRoute": "why-solar",
+      "nextPath": "/why-solar"
+    },
+    {
+      "htmlRoute": "why-us",
+      "nextPath": "/why-us"
+    }
+  ],
+  "initFunctions": [
+    {
+      "html": "initActions",
+      "suggestedHook": "useActions"
+    },
+    {
+      "html": "initAnnounce",
+      "suggestedHook": "useAnnounce"
+    },
+    {
+      "html": "initBottomNav",
+      "suggestedHook": "useBottomNav"
+    },
+    {
+      "html": "initCounters",
+      "suggestedHook": "useCounters"
+    },
+    {
+      "html": "initDrawer",
+      "suggestedHook": "useDrawer"
+    },
+    {
+      "html": "initFab",
+      "suggestedHook": "useFab"
+    },
+    {
+      "html": "initForms",
+      "suggestedHook": "useForms"
+    },
+    {
+      "html": "initHeaderScroll",
+      "suggestedHook": "useHeaderScroll"
+    },
+    {
+      "html": "initMega",
+      "suggestedHook": "useMega"
+    },
+    {
+      "html": "initQuoteForm",
+      "suggestedHook": "useQuoteForm"
+    },
+    {
+      "html": "initRouter",
+      "suggestedHook": "useRouter"
+    },
+    {
+      "html": "initScrollReveal",
+      "suggestedHook": "useScrollReveal"
+    },
+    {
+      "html": "initThemeToggle",
+      "suggestedHook": "useThemeToggle"
+    },
+    {
+      "html": "initYear",
+      "suggestedHook": "useYear"
+    }
+  ],
+  "contentExtractions": [
+    {
+      "htmlVariable": "BLOG",
+      "suggestedFile": "content/blog.json"
+    },
+    {
+      "htmlVariable": "CASES",
+      "suggestedFile": "content/cases.json"
+    },
+    {
+      "htmlVariable": "STATES",
+      "suggestedFile": "content/states.json"
+    },
+    {
+      "htmlVariable": "VIEW_RENDERERS",
+      "suggestedFile": "content/view-renderers.json"
+    },
+    {
+      "htmlVariable": "VIEW_TITLES",
+      "suggestedFile": "content/view-titles.json"
+    },
+    {
+      "htmlVariable": "ZONE_FACTORS",
+      "suggestedFile": "content/zone-factors.json"
+    }
+  ],
+  "designTokens": {
+    "lightCount": 79,
+    "darkCount": 31,
+    "light": {
+      "--color-primary": "#0c2d4a",
+      "--color-primary-hover": "#0f3a5e",
+      "--color-primary-active": "#082338",
+      "--color-primary-soft": "#e6f4fc",
+      "--color-secondary": "#0ea5e9",
+      "--color-secondary-hover": "#38bdf8",
+      "--color-accent": "#f5a623",
+      "--color-accent-strong": "#c47d0a",
+      "--color-accent-soft": "#fef6e8",
+      "--color-success": "#15803d",
+      "--color-success-soft": "#ecfdf3",
+      "--color-warning": "#b45309",
+      "--color-warning-soft": "#fff7e8",
+      "--color-error": "#c2362b",
+      "--color-error-soft": "#fdf0ee",
+      "--color-deal": "#0ea5e9",
+      "--color-bg": "#f8fafc",
+      "--color-surface": "#f1f5f9",
+      "--color-surface-2": "#e2e8f0",
+      "--color-text": "#0f172a",
+      "--color-text-muted": "#475569",
+      "--color-border": "#cbd5e1",
+      "--color-border-strong": "#94a3b8",
+      "--color-on-primary": "#ffffff",
+      "--color-on-accent": "#1a1204",
+      "--color-hero-bg": "linear-gradient(135deg, #061a2b 0%, #0c2d4a 50%, #0f3d62 100%)",
+      "--color-card-art-bg": "#ffffff",
+      "--font-sans": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+      "--font-display": "var(--font-sans)",
+      "--text-display": "clamp(2.25rem, 4.5vw + 1rem, 3.75rem)",
+      "--text-h1": "clamp(1.875rem, 3vw + 0.75rem, 2.75rem)",
+      "--text-h2": "clamp(1.5rem, 2.2vw + 0.5rem, 2rem)",
+      "--text-h3": "clamp(1.2rem, 1.2vw + 0.5rem, 1.4rem)",
+      "--text-subheading": "1.125rem",
+      "--text-body": "1rem",
+      "--text-sm": "0.875rem",
+      "--text-caption": "0.8125rem",
+      "--leading-tight": "1.12",
+      "--leading-normal": "1.6",
+      "--font-regular": "400",
+      "--font-medium": "500",
+      "--font-semibold": "600",
+      "--font-bold": "700",
+      "--font-black": "800",
+      "--tracking-wide": "0.08em",
+      "--space-1": "0.25rem",
+      "--space-2": "0.5rem",
+      "--space-3": "0.75rem",
+      "--space-4": "1rem",
+      "--space-5": "1.25rem",
+      "--space-6": "1.5rem",
+      "--space-8": "2rem",
+      "--space-10": "2.5rem",
+      "--space-12": "3rem",
+      "--space-16": "4rem",
+      "--space-20": "5rem",
+      "--space-24": "6rem",
+      "--radius-sm": "6px",
+      "--radius-md": "10px",
+      "--radius-lg": "16px",
+      "--radius-xl": "24px",
+      "--radius-full": "9999px",
+      "--shadow-sm": "0 1px 2px rgb(12 45 74 / 0.06)",
+      "--shadow-md": "0 4px 12px rgb(12 45 74 / 0.08)",
+      "--shadow-lg": "0 12px 32px rgb(12 45 74 / 0.12)",
+      "--shadow-xl": "0 24px 60px rgb(12 45 74 / 0.18)",
+      "--shadow-gold": "0 6px 20px rgb(245 166 35 / 0.35)",
+      "--container-max": "75rem",
+      "--container-wide": "85rem",
+      "--duration-fast": "150ms",
+      "--duration-base": "250ms",
+      "--duration-slow": "400ms",
+      "--ease-out": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "--ease-in-out": "cubic-bezier(0.65, 0, 0.35, 1)",
+      "--ease-spring": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "--reveal-distance": "24px",
+      "--header-height": "4rem",
+      "--bottomnav-height": "3.75rem",
+      "--sticky-cta-height": "3.25rem"
+    },
+    "dark": {
+      "--color-primary": "#38bdf8",
+      "--color-primary-hover": "#7dd3fc",
+      "--color-primary-active": "#0ea5e9",
+      "--color-primary-soft": "#0c2d4a",
+      "--color-secondary": "#7dd3fc",
+      "--color-accent": "#f5a623",
+      "--color-accent-strong": "#fbbf24",
+      "--color-accent-soft": "#2a1f08",
+      "--color-success": "#4ade80",
+      "--color-success-soft": "#0d2418",
+      "--color-warning": "#fbbf24",
+      "--color-warning-soft": "#2a200a",
+      "--color-error": "#f4796d",
+      "--color-error-soft": "#2e1512",
+      "--color-deal": "#38bdf8",
+      "--color-bg": "#050a10",
+      "--color-surface": "#0a1219",
+      "--color-surface-2": "#111c27",
+      "--color-text": "#e2e8f0",
+      "--color-text-muted": "#94a3b8",
+      "--color-border": "#1e293b",
+      "--color-border-strong": "#334155",
+      "--color-on-primary": "#041018",
+      "--color-on-accent": "#1a1204",
+      "--color-hero-bg": "linear-gradient(135deg, #020810 0%, #061a2b 50%, #0c2d4a 100%)",
+      "--color-card-art-bg": "#0f172a",
+      "--shadow-sm": "0 1px 2px rgb(0 0 0 / 0.4)",
+      "--shadow-md": "0 4px 12px rgb(0 0 0 / 0.5)",
+      "--shadow-lg": "0 12px 32px rgb(0 0 0 / 0.55)",
+      "--shadow-xl": "0 24px 60px rgb(0 0 0 / 0.6)",
+      "--shadow-gold": "0 6px 20px rgb(245 166 35 / 0.18)"
+    }
+  }
+}

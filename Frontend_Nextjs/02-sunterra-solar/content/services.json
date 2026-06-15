@@ -1,0 +1,44 @@
+[
+  {
+    "id": "residential",
+    "title": "Residential Solar",
+    "description": "Tier-one panels, CEC-accredited installs and STC rebates applied at point of sale.",
+    "href": "/residential",
+    "icon": "home"
+  },
+  {
+    "id": "commercial",
+    "title": "Commercial Solar",
+    "description": "NEM tariff modelling, demand-charge reduction and accelerated depreciation.",
+    "href": "/commercial",
+    "icon": "building"
+  },
+  {
+    "id": "batteries",
+    "title": "Home Batteries",
+    "description": "Tesla Powerwall, Sungrow and BYD — blackout backup and peak shaving.",
+    "href": "/batteries",
+    "icon": "battery"
+  },
+  {
+    "id": "ev-chargers",
+    "title": "EV Chargers",
+    "description": "Solar-smart EV charging aligned with export and off-peak tariffs.",
+    "href": "/ev-chargers",
+    "icon": "ev"
+  },
+  {
+    "id": "off-grid",
+    "title": "Off-Grid Systems",
+    "description": "Hybrid solar-diesel-battery for rural properties beyond the grid.",
+    "href": "/off-grid",
+    "icon": "offgrid"
+  },
+  {
+    "id": "maintenance",
+    "title": "Maintenance",
+    "description": "Annual inspections, inverter firmware and panel cleaning.",
+    "href": "/maintenance",
+    "icon": "wrench"
+  }
+]

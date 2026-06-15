@@ -1,0 +1,37 @@
+{
+  "slug": "careers",
+  "title": "Work with us",
+  "description": "Join 6,500 professionals who take pride in building structures that define cities.",
+  "hero": {
+    "breadcrumb": "Work with us",
+    "eyebrow": "Work with us",
+    "title": "Where engineers lead.\nWhere careers are built.",
+    "lede": "Join 6,500 professionals who take pride in building structures that define cities.",
+    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=2000&q=80"
+  },
+  "culture": {
+    "eyebrow": "Our culture",
+    "title": "What we offer",
+    "benefits": [
+      { "title": "Career growth", "text": "Structured promotion pathways, mentorship programmes and funded professional accreditation from day one." },
+      { "title": "Global mobility", "text": "27 countries, one team. International rotations and expat packages are available from Associate level upward." },
+      { "title": "Safety culture", "text": "12.4M hours without a lost-time incident. Safety is our most important value — never traded for cost or schedule." },
+      { "title": "Market-leading pay", "text": "Competitive base salaries, performance bonuses, equity participation at senior levels and comprehensive benefits." },
+      { "title": "Diverse teams", "text": "We hire the best engineers regardless of background. Our DEIB programme is externally benchmarked and reported annually." },
+      { "title": "Sustainability mission", "text": "Join a team committed to net-zero. Our ESG targets are science-based and our sustainability report is published every year." }
+    ]
+  },
+  "openings": {
+    "eyebrow": "Open positions",
+    "title": "Join the team",
+    "cta": { "label": "Send a speculative CV", "href": "/contact" },
+    "jobs": [
+      { "title": "Senior Project Manager", "excerpt": "We are looking for a Senior PM with 10+ years of large-scale commercial construction experience to l...", "location": "Chicago, IL", "sector": "Commercial", "type": "Full-time" },
+      { "title": "Structural Engineer", "excerpt": "Join our infrastructure team to design and oversee structural systems on bridges, viaducts and civil...", "location": "London, UK", "sector": "Infrastructure", "type": "Full-time" },
+      { "title": "BIM Coordinator", "excerpt": "Lead BIM coordination across multi-discipline project teams. Revit, Navisworks and clash detection e...", "location": "Singapore", "sector": "Design & Build", "type": "Full-time" },
+      { "title": "HSE Manager", "excerpt": "Own site safety culture across our Dutch industrial portfolio. ISO 45001 certification and 8+ years ...", "location": "Rotterdam, NL", "sector": "Industrial", "type": "Full-time" },
+      { "title": "Site Supervisor", "excerpt": "Experienced site supervisors required for our growing German portfolio. German and English fluency e...", "location": "Munich, DE", "sector": "All sectors", "type": "Contract" },
+      { "title": "Graduate Engineer", "excerpt": "Our two-year graduate programme rotates you across commercial, industrial and infrastructure project...", "location": "Multiple locations", "sector": "All sectors", "type": "Full-time" }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "meridian",
+    "name": "Meridian Financial Tower",
+    "sector": "Commercial",
+    "scope": "62-storey LEED Platinum HQ",
+    "location": "Singapore",
+    "year": "2024",
+    "value": "$480M",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    "span2": true
+  },
+  {
+    "id": "cascade",
+    "name": "Cascade Cross-Harbour Bridge",
+    "sector": "Infrastructure",
+    "scope": "2.4km cable-stayed span",
+    "location": "Vancouver",
+    "year": "2025",
+    "value": "$1.1B",
+    "image": "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=1200&q=80",
+    "span2": false
+  },
+  {
+    "id": "harbor",
+    "name": "Harbor Logistics Park",
+    "sector": "Industrial",
+    "scope": "180,000 m² automated DC",
+    "location": "Rotterdam",
+    "year": "2023",
+    "value": "$210M",
+    "image": "https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=1200&q=80",
+    "span2": false
+  },
+  {
+    "id": "linden",
+    "name": "The Linden Residences",
+    "sector": "Residential",
+    "scope": "340-home master community",
+    "location": "Austin",
+    "year": "2024",
+    "value": "$185M",
+    "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    "span2": true
+  },
+  {
+    "id": "solaris",
+    "name": "Solaris Research Campus",
+    "sector": "Design & Build",
+    "scope": "Net-zero R&D campus",
+    "location": "Munich",
+    "year": "2023",
+    "value": "$320M",
+    "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+    "span2": false
+  }
+]

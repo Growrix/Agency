@@ -1,0 +1,23 @@
+{
+  "slug": "contact",
+  "title": "Contact Sunterra Solar",
+  "description": "Speak with our CEC-accredited team. Mon–Fri 8am–6pm AEST.",
+  "hero": {
+    "title": "Contact Sunterra Solar",
+    "lede": "Speak with our CEC-accredited team. Mon–Fri 8am–6pm AEST.",
+    "breadcrumb": "Contact"
+  },
+  "prose": [
+    "<h2 class=\"section-head__title\" style=\"font-size:1.25rem\">State offices</h2>",
+    "<div class=\"areas\" style=\"margin-top:1rem\">",
+    "<div class=\"areas__item\"><p class=\"areas__state\">New South Wales</p><p class=\"areas__dns\">Ausgrid / Endeavour / Essential</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">Victoria</p><p class=\"areas__dns\">CitiPower / Powercor / Jemena</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">Queensland</p><p class=\"areas__dns\">Energex / Ergon</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">South Australia</p><p class=\"areas__dns\">SA Power Networks</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">Western Australia</p><p class=\"areas__dns\">Western Power / Horizon</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">Tasmania</p><p class=\"areas__dns\">TasNetworks</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">Northern Territory</p><p class=\"areas__dns\">Power and Water</p></div>",
+    "<div class=\"areas__item\"><p class=\"areas__state\">Australian Capital Territory</p><p class=\"areas__dns\">Evoenergy</p></div>",
+    "</div>"
+  ]
+}

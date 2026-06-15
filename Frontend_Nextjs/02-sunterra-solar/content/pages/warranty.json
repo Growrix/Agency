@@ -1,0 +1,22 @@
+{
+  "slug": "warranty",
+  "title": "Warranty Coverage",
+  "description": "Comprehensive protection on panels, inverters and workmanship.",
+  "hero": {
+    "title": "Warranty Coverage",
+    "lede": "Comprehensive protection on panels, inverters and workmanship.",
+    "breadcrumb": "Warranty Coverage"
+  },
+  "prose": [
+    "<h2>Panel warranty</h2>",
+    "<p>25-year linear performance warranty (minimum 80–84% output) and 12–15 year product warranty from tier-one manufacturers.</p>",
+    "<h2>Inverter warranty</h2>",
+    "<p>10–15 years standard; extended warranties available for Fronius, SolarEdge and Sungrow.</p>",
+    "<h2>Battery warranty</h2>",
+    "<p>10 years or throughput limit (brand dependent) on Tesla Powerwall, Sungrow and BYD systems.</p>",
+    "<h2>Sunterra workmanship</h2>",
+    "<p>10-year workmanship warranty covering installation defects, roof penetrations and electrical work.</p>",
+    "<h2>Making a claim</h2>",
+    "<p>Contact hello@sunterra.com.au or 1300 786 837. We coordinate manufacturer warranty claims on your behalf.</p>"
+  ]
+}

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FixHaus — Your Home's On-Demand Maintenance Team</title>
+<meta name="description" content="FixHaus is your home's on-demand maintenance team. Book vetted, insured handymen for repairs, installations, assembly, TV mounting, drywall &amp; more. Same-week availability, free estimates, home maintenance plans."/>
+<meta name="theme-color" content="#0E141F"/>
+<meta property="og:title" content="FixHaus — Your Home's On-Demand Maintenance Team"/>
+<meta property="og:description" content="One team for every home repair. Book vetted, insured handymen in minutes. Repairs, installs, assembly, maintenance plans."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0E1525;
+  --bg:#E7ECF4;--surface:#EDF1F8;--surface2:#DEE4EE;--elevated:#F3F6FB;
+  --text:#15223C;--muted:#566381;--faint:#8E9BB3;
+  --accent:#2D6CFF;--accent-h:#1B53E0;--accent-t:#2D6CFF;--accent-soft:rgba(45,108,255,.10);
+  --emerald:#0FA968;--emerald-t:#10B981;--emerald-soft:rgba(16,185,129,.12);
+  --amber:#E0890B;--amber-t:#F59E0B;
+  --slate:#475569;
+  --border:rgba(120,138,170,.22);--borders:rgba(120,138,170,.40);
+  --nm-d:rgba(166,180,209,.62);--nm-l:rgba(255,255,255,.95);
+  --fd:'Sora',sans-serif;--fb:'Inter',sans-serif;--fm:'IBM Plex Mono',monospace;
+  --rc:22px;--rb:14px;--ri:14px;--maxw:1380px;
+  --shadow:7px 7px 16px var(--nm-d),-7px -7px 16px var(--nm-l);
+  --shadow-sm:4px 4px 9px var(--nm-d),-4px -4px 9px var(--nm-l);
+  --shadow-lg:12px 12px 30px var(--nm-d),-10px -10px 26px var(--nm-l);
+  --inset:inset 4px 4px 9px var(--nm-d),inset -4px -4px 9px var(--nm-l);
+  --inset-sm:inset 2px 2px 5px var(--nm-d),inset -2px -2px 5px var(--nm-l);
+}
+[data-theme=dark]{
+  --navy:#070B12;
+  --bg:#0E141F;--surface:#131B29;--surface2:#0A0F18;--elevated:#16202F;
+  --text:#E9EEF7;--muted:#94A3B8;--faint:#566381;
+  --accent:#3D78FF;--accent-h:#5B8BFF;--accent-t:#6E97FF;--accent-soft:rgba(61,120,255,.14);
+  --emerald:#34D399;--emerald-t:#34D399;--emerald-soft:rgba(52,211,153,.14);
+  --amber:#F59E0B;--amber-t:#FBBF24;
+  --slate:#94A3B8;
+  --border:rgba(120,150,200,.14);--borders:rgba(120,150,200,.26);
+  --nm-d:rgba(0,0,0,.55);--nm-l:rgba(46,62,90,.32);
+  --shadow:6px 6px 15px var(--nm-d),-6px -6px 15px var(--nm-l);
+  --shadow-sm:3px 3px 8px var(--nm-d),-3px -3px 8px var(--nm-l);
+  --shadow-lg:11px 11px 28px var(--nm-d),-8px -8px 22px var(--nm-l);
+  --inset:inset 4px 4px 9px var(--nm-d),inset -4px -4px 9px var(--nm-l);
+  --inset-sm:inset 2px 2px 5px var(--nm-d),inset -2px -2px 5px var(--nm-l);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;transition:background .4s,color .4s;overflow-x:hidden}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+::selection{background:var(--accent);color:#fff}
+.skip{position:absolute;left:12px;top:-60px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:12px;z-index:300;font-weight:600;transition:top .2s}
+.skip:focus{top:12px}
+*:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.container{max-width:var(--maxw);margin:0 auto;padding-inline:clamp(16px,4vw,56px)}
+.section{padding-block:clamp(56px,7.5vw,104px)}
+.section-sm{padding-block:clamp(36px,5vw,60px)}
+
+/* ---- type ---- */
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--fm);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.eyebrow::before{content:'';width:22px;height:2px;border-radius:2px;background:var(--accent)}
+.eyebrow.em{color:var(--emerald)}.eyebrow.em::before{background:var(--emerald)}
+.h-d{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.04;letter-spacing:-.025em;color:var(--text);margin-top:15px}
+.h-sub{color:var(--muted);font-size:17px;line-height:1.7;margin-top:15px;max-width:600px}
+.center{text-align:center}.center .h-sub{margin-inline:auto}.center .eyebrow{justify-content:center}
+
+/* ---- neumorphic primitives ---- */
+.nm{background:var(--bg);box-shadow:var(--shadow);border-radius:var(--rc)}
+.nm-sm{background:var(--bg);box-shadow:var(--shadow-sm);border-radius:var(--rb)}
+.nm-inset{background:var(--bg);box-shadow:var(--inset);border-radius:var(--rc)}
+.nm-well{background:var(--bg);box-shadow:var(--inset-sm);border-radius:12px}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fb);font-weight:600;font-size:14px;padding:12px 22px;border-radius:var(--rb);line-height:1;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,color .2s;white-space:nowrap;border:none}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-p{background:var(--accent);color:#fff;box-shadow:5px 5px 13px rgba(45,108,255,.34),-4px -4px 12px var(--nm-l)}
+.btn-p:hover{background:var(--accent-h);transform:translateY(-2px);box-shadow:7px 9px 20px rgba(45,108,255,.42),-4px -4px 12px var(--nm-l)}
+.btn-em{background:var(--emerald);color:#fff;box-shadow:5px 5px 13px rgba(15,169,104,.30),-4px -4px 12px var(--nm-l)}
+.btn-em:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.btn-s{background:var(--bg);color:var(--text);box-shadow:var(--shadow-sm)}
+.btn-s:hover{transform:translateY(-2px);box-shadow:var(--shadow);color:var(--accent)}
+.btn-s:active{box-shadow:var(--inset-sm)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+.btn-full{width:100%}.btn-lg{padding:15px 28px;font-size:15px}.btn-sm{padding:9px 16px;font-size:13px}
+.btn-ico{width:42px;height:42px;padding:0;border-radius:13px;background:var(--bg);box-shadow:var(--shadow-sm);color:var(--text);display:grid;place-items:center;transition:transform .2s,box-shadow .2s,color .2s}
+.btn-ico:hover{color:var(--accent);transform:translateY(-1px)}
+.btn-ico:active{box-shadow:var(--inset-sm)}
+
+/* ---- form ---- */
+.f-label{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.f-input{width:100%;font-family:var(--fb);font-size:14px;color:var(--text);background:var(--bg);box-shadow:var(--inset-sm);border:none;border-radius:var(--ri);padding:13px 15px;transition:box-shadow .2s}
+.f-input:focus{outline:none;box-shadow:var(--inset-sm),0 0 0 2px var(--accent)}
+.f-input::placeholder{color:var(--faint)}
+select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238E9BB3' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+
+/* ---- ticker ---- */
+.ticker-wrap{background:var(--navy);overflow:hidden;height:40px;position:relative}
+.ticker{display:flex;align-items:center;height:40px;white-space:nowrap;animation:ticker 42s linear infinite}
+.ticker:hover{animation-play-state:paused}
+.t-item{display:inline-flex;align-items:center;gap:13px;padding-inline:26px;font-family:var(--fm);font-size:12px;color:rgba(233,238,247,.82);font-weight:500}
+.t-sep{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ---- navbar ---- */
+.navbar{position:sticky;top:0;z-index:60;transition:background .3s,box-shadow .3s,padding .3s;padding-block:10px}
+.navbar.scrolled{background:var(--bg);box-shadow:0 6px 20px -10px var(--nm-d)}
+[data-theme=dark] .navbar.scrolled{background:rgba(14,20,31,.92);backdrop-filter:saturate(180%) blur(14px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:14px}
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-icon{width:42px;height:42px;border-radius:13px;background:var(--bg);box-shadow:var(--shadow-sm);display:grid;place-items:center;color:var(--accent);flex-shrink:0}
+.logo-text{font-family:var(--fd);font-weight:800;font-size:21px;color:var(--text);letter-spacing:-.02em}
+.logo-dot{color:var(--accent)}
+.nav-pill{display:flex;align-items:center;gap:2px;background:var(--bg);box-shadow:var(--shadow-sm);border-radius:16px;padding:5px}
+.nav-link{font-size:13.5px;font-weight:500;color:var(--muted);padding:9px 13px;border-radius:11px;transition:color .2s,box-shadow .2s,background .2s}
+.nav-link:hover{color:var(--text)}
+.nav-link.active{color:var(--accent);box-shadow:var(--inset-sm)}
+.nav-acts{display:flex;align-items:center;gap:9px}
+.hamburger{width:42px;height:42px;border-radius:13px;background:var(--bg);box-shadow:var(--shadow-sm);color:var(--text);display:none;place-items:center;cursor:pointer}
+.drawer{position:fixed;inset:0;z-index:90;background:var(--bg);padding:22px;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:none;overflow-y:auto}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.drawer-links{display:grid;gap:10px}
+.drawer-link{display:flex;justify-content:space-between;align-items:center;font-family:var(--fd);font-weight:700;font-size:21px;color:var(--text);padding:16px 20px;border-radius:16px;background:var(--bg);box-shadow:var(--shadow-sm)}
+.drawer-link .dn{font-family:var(--fm);font-size:12px;color:var(--faint)}
+.drawer-link.active{color:var(--accent);box-shadow:var(--inset-sm)}
+
+/* ---- bottom nav + fab (mobile widgets) ---- */
+.bottom-nav{position:fixed;left:12px;right:12px;bottom:12px;z-index:100;background:var(--bg);box-shadow:var(--shadow-lg);border-radius:22px;padding:9px 6px;display:none;justify-content:space-around}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);padding:6px 8px;flex:1;transition:color .2s;font-size:10px;font-weight:600}
+.bn-item svg{width:21px;height:21px;transition:transform .2s}
+.bn-item.active{color:var(--accent)}.bn-item.active svg{transform:scale(1.12)}
+.fab-wrap{position:fixed;right:18px;bottom:26px;z-index:80;display:flex;flex-direction:column;align-items:center;gap:11px}
+.fab-main{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;box-shadow:6px 8px 22px -6px rgba(45,108,255,.6);cursor:pointer;transition:transform .25s,background .25s}
+.fab-main:hover{transform:scale(1.08)}.fab-main.open{background:var(--slate)}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:11px;overflow:hidden;max-height:0;opacity:0;transition:max-height .42s cubic-bezier(.16,1,.3,1),opacity .3s}
+.fab-opts.open{max-height:360px;opacity:1}
+.fab-opt{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s;position:relative}
+.fab-opt:hover{transform:scale(1.1)}
+.fab-opt.call{background:var(--emerald);color:#fff}.fab-opt.wa{background:#25D366;color:#fff}
+.fab-opt.book{background:var(--accent);color:#fff}.fab-opt.ai{background:linear-gradient(135deg,var(--accent),#7C3AED);color:#fff}
+.fab-opt.top{background:var(--bg);color:var(--text);box-shadow:var(--shadow);display:none}
+.fab-tip{position:absolute;right:58px;top:50%;transform:translateY(-50%) translateX(4px);background:var(--bg);color:var(--text);box-shadow:var(--shadow-sm);font-family:var(--fm);font-size:11px;padding:6px 11px;border-radius:9px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ---- AI assistant panel ---- */
+.ai-panel{position:fixed;right:18px;bottom:96px;z-index:85;width:min(360px,calc(100vw - 36px));background:var(--bg);box-shadow:var(--shadow-lg);border-radius:24px;overflow:hidden;transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s}
+.ai-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+.ai-head{display:flex;align-items:center;gap:11px;padding:16px 18px;background:linear-gradient(135deg,var(--accent),#7C3AED);color:#fff}
+.ai-av{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.ai-body{padding:16px 18px;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ai-msg{font-size:13.5px;line-height:1.55;padding:11px 14px;border-radius:14px;max-width:85%}
+.ai-msg.bot{background:var(--bg);box-shadow:var(--shadow-sm);color:var(--text);align-self:flex-start}
+.ai-msg.me{background:var(--accent);color:#fff;align-self:flex-end}
+.ai-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 12px}
+.ai-chip{font-size:12px;font-weight:500;padding:7px 12px;border-radius:999px;background:var(--bg);box-shadow:var(--shadow-sm);color:var(--accent);cursor:pointer;transition:transform .15s}
+.ai-chip:hover{transform:translateY(-1px)}
+.ai-foot{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+.ai-foot input{flex:1;font-family:var(--fb);font-size:13px;color:var(--text);background:var(--bg);box-shadow:var(--inset-sm);border:none;border-radius:12px;padding:11px 13px}
+.ai-foot input:focus{outline:none}
+.ai-send{width:42px;height:42px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;flex-shrink:0}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<style>
+/* ===== HERO : service command center ===== */
+.hero{position:relative;padding-top:clamp(28px,4vw,48px);padding-bottom:clamp(40px,6vw,80px);overflow:hidden}
+.hero-glow{position:absolute;top:-12%;right:-8%;width:55%;height:70%;background:radial-gradient(circle,var(--accent-soft),transparent 65%);pointer-events:none;filter:blur(10px)}
+.hero-grid{display:grid;grid-template-columns:1.02fr 1.05fr;gap:clamp(28px,4vw,56px);align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:var(--bg);box-shadow:var(--shadow-sm);border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:600;color:var(--text)}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 4px var(--emerald-soft)}
+.hero-h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.5rem,5.4vw,4rem);line-height:1.02;letter-spacing:-.032em;margin-top:20px;color:var(--text)}
+.hero-h1 .hl{color:var(--accent)}
+.hero-p{color:var(--muted);font-size:clamp(16px,1.4vw,18px);line-height:1.7;margin-top:20px;max-width:480px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+.hero-trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:30px}
+.ht-item{display:flex;align-items:center;gap:10px}
+.ht-ico{width:38px;height:38px;border-radius:11px;background:var(--bg);box-shadow:var(--shadow-sm);display:grid;place-items:center;color:var(--accent);flex-shrink:0}
+.ht-ico svg{width:18px;height:18px}
+.ht-n{font-family:var(--fd);font-weight:700;font-size:17px;color:var(--text);line-height:1}
+.ht-l{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* bento dashboard */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:108px;gap:14px}
+.bento-head{grid-column:span 4;display:flex;align-items:center;justify-content:space-between;background:var(--bg);box-shadow:var(--shadow-sm);border-radius:16px;padding:13px 18px;grid-row:span 1;height:auto}
+.bh-l{display:flex;align-items:center;gap:11px}
+.bh-ava{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent)}
+.bh-status{display:flex;align-items:center;gap:7px;font-family:var(--fm);font-size:11px;color:var(--emerald);font-weight:500}
+.bh-status .lv{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 3px var(--emerald-soft);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.tile{position:relative;background:var(--bg);box-shadow:var(--shadow-sm);border-radius:18px;padding:15px;cursor:pointer;overflow:hidden;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;display:flex;flex-direction:column;justify-content:space-between}
+.tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.tile.x2{grid-column:span 2}
+.tile-ico{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent);transition:background .3s,color .3s}
+.tile:hover .tile-ico{background:var(--accent);color:#fff}
+.tile-name{font-family:var(--fd);font-weight:700;font-size:13.5px;color:var(--text);margin-top:9px;line-height:1.2}
+.tile-meta{font-family:var(--fm);font-size:10.5px;color:var(--muted);margin-top:3px;transition:opacity .3s}
+.tile-go{position:absolute;right:13px;top:13px;width:24px;height:24px;border-radius:8px;background:var(--bg);box-shadow:var(--shadow-sm);display:grid;place-items:center;color:var(--accent);opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s}
+.tile:hover .tile-go{opacity:1;transform:translateX(0)}
+.tile-go svg{width:13px;height:13px}
+
+/* ===== generic grids ===== */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,3.5vw,48px)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.sec-head{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end}
+
+/* ===== smart job estimator ===== */
+.tool{background:var(--bg);box-shadow:var(--shadow-lg);border-radius:28px;padding:clamp(24px,3vw,40px);position:relative;overflow:hidden}
+.tool-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,3vw,40px);align-items:stretch}
+.opt-row{display:grid;gap:9px;margin-bottom:18px}
+.opt-chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{font-size:13px;font-weight:500;padding:10px 15px;border-radius:13px;background:var(--bg);box-shadow:var(--shadow-sm);color:var(--muted);cursor:pointer;transition:transform .18s,box-shadow .18s,color .18s;display:inline-flex;align-items:center;gap:7px}
+.chip:hover{transform:translateY(-1px);color:var(--text)}
+.chip.on{color:var(--accent);box-shadow:var(--inset-sm);font-weight:600}
+.chip.on.em{color:var(--emerald)}
+.estimate{background:var(--bg);box-shadow:var(--inset);border-radius:20px;padding:24px;display:flex;flex-direction:column;justify-content:center;min-height:100%}
+.est-label{font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.est-big{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,4vw,2.6rem);color:var(--accent);line-height:1;margin-top:6px;letter-spacing:-.02em}
+.est-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}
+.est-row:last-of-type{border-bottom:none}
+.est-k{font-size:13px;color:var(--muted)}
+.est-v{font-size:13.5px;font-weight:600;color:var(--text);text-align:right}
+.est-v.em{color:var(--emerald)}
+
+/* ===== service category bento ===== */
+.cat-card{background:var(--bg);box-shadow:var(--shadow-sm);border-radius:20px;padding:24px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;height:100%;display:flex;flex-direction:column}
+.cat-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.cat-card.feat{grid-column:span 2;grid-row:span 2}
+.cat-ico{width:54px;height:54px;border-radius:16px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent);transition:transform .3s}
+.cat-card:hover .cat-ico{transform:scale(1.08) rotate(-4deg)}
+.cat-title{font-family:var(--fd);font-weight:700;font-size:19px;color:var(--text);margin-top:16px}
+.cat-desc{color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px;flex:1}
+.cat-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.cat-tag{font-family:var(--fm);font-size:11px;color:var(--muted);background:var(--bg);box-shadow:var(--inset-sm);border-radius:8px;padding:5px 10px}
+.cat-card.feat .cat-img{width:100%;height:150px;object-fit:cover;border-radius:14px;margin-top:16px;box-shadow:var(--shadow-sm)}
+
+/* ===== popular fixes ===== */
+.fix-card{display:flex;align-items:center;gap:15px;background:var(--bg);box-shadow:var(--shadow-sm);border-radius:16px;padding:16px 18px;transition:transform .25s,box-shadow .25s}
+.fix-card:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.fix-ico{width:46px;height:46px;border-radius:13px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent);flex-shrink:0}
+.fix-name{font-family:var(--fd);font-weight:600;font-size:15px;color:var(--text)}
+.fix-time{font-family:var(--fm);font-size:11.5px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:5px}
+.fix-price{margin-left:auto;text-align:right;flex-shrink:0}
+.fix-price .p{font-family:var(--fd);font-weight:700;font-size:15px;color:var(--emerald)}
+.fix-price .l{font-family:var(--fm);font-size:10px;color:var(--faint)}
+
+/* ===== how it works ===== */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
+.flow-step{background:var(--bg);box-shadow:var(--shadow-sm);border-radius:18px;padding:22px 18px;text-align:center;transition:transform .25s,box-shadow .25s}
+.flow-step:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.flow-num{width:44px;height:44px;border-radius:14px;background:var(--bg);box-shadow:var(--inset-sm);display:grid;place-items:center;margin:0 auto;color:var(--accent)}
+.flow-num svg{width:20px;height:20px}
+.flow-t{font-family:var(--fd);font-weight:700;font-size:16px;color:var(--text);margin-top:14px}
+.flow-d{color:var(--muted);font-size:13px;line-height:1.5;margin-top:6px}
+.flow-tag{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:10px;display:inline-block}
+
+/* ===== plans ===== */
+.plan{background:var(--bg);box-shadow:var(--shadow);border-radius:22px;padding:30px 26px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;position:relative}
+.plan:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.plan.feat{box-shadow:var(--shadow-lg),inset 0 0 0 2px var(--accent)}
+.plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 15px;border-radius:999px;box-shadow:4px 5px 13px rgba(45,108,255,.36)}
+.plan-tier{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.plan-name{font-family:var(--fd);font-weight:700;font-size:23px;color:var(--text)}
+.plan-price{display:flex;align-items:baseline;gap:5px;margin-top:12px}
+.plan-price .a{font-family:var(--fd);font-weight:800;font-size:40px;color:var(--text);letter-spacing:-.02em}
+.plan-price .per{color:var(--muted);font-size:14px}
+.plan-feats{margin:20px 0;flex:1;display:grid;gap:11px}
+.pf{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);line-height:1.4}
+.pf svg{width:18px;height:18px;color:var(--emerald);flex-shrink:0;margin-top:1px}
+
+/* ===== home health score ===== */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.gauge{position:relative;width:200px;height:200px}
+.gauge svg{transform:rotate(-90deg)}
+.gauge-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge-n{font-family:var(--fd);font-weight:800;font-size:54px;color:var(--text);line-height:1}
+.gauge-l{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.score-band{display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-weight:700;font-size:18px;margin-top:16px}
+
+/* ===== projects gallery ===== */
+.filter-bar{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+.proj-card{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/3;transition:transform .3s,box-shadow .3s}
+.proj-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.proj-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.proj-card:hover img{transform:scale(1.07)}
+.proj-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,20,.05) 35%,rgba(8,12,20,.86) 100%)}
+.proj-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.proj-cat{align-self:flex-start;font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:5px 11px;border-radius:999px;backdrop-filter:blur(6px);margin-bottom:auto}
+.proj-title{font-family:var(--fd);font-weight:700;font-size:18px;color:#fff;line-height:1.15}
+.proj-meta{font-family:var(--fm);font-size:11.5px;color:rgba(255,255,255,.8);margin-top:5px}
+.hide{display:none!important}
+
+/* ===== stats ===== */
+.stats-s{position:relative;overflow:hidden;background:var(--navy);padding-block:clamp(56px,7vw,90px)}
+.stats-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(45,108,255,.18),transparent 60%)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
+.stat{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:26px 18px;backdrop-filter:blur(4px)}
+.stat-n{font-family:var(--fd);font-weight:800;color:#fff;font-size:clamp(2.2rem,4vw,3rem);letter-spacing:-.02em;line-height:1}
+.stat-suf{color:var(--accent-t)}
+.stat-l{font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(233,238,247,.6);margin-top:11px}
+
+/* ===== reviews ===== */
+.review{background:var(--bg);box-shadow:var(--shadow-sm);border-radius:20px;padding:24px;transition:transform .3s,box-shadow .3s;height:100%;display:flex;flex-direction:column}
+.review:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.r-stars{display:flex;gap:2px;color:var(--amber-t);margin-bottom:13px}
+.r-stars svg{width:15px;height:15px}
+.r-q{color:var(--text);font-size:14.5px;line-height:1.65;flex:1}
+.r-author{display:flex;align-items:center;gap:12px;margin-top:18px}
+.r-av{width:42px;height:42px;border-radius:13px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--fd);font-weight:700;font-size:15px;flex-shrink:0}
+.r-name{font-family:var(--fd);font-weight:600;font-size:14px;color:var(--text)}
+.r-role{font-family:var(--fm);font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* ===== service area ===== */
+.area-pill{display:inline-flex;align-items:center;gap:7px;background:var(--bg);box-shadow:var(--shadow-sm);border-radius:999px;padding:10px 17px;font-size:13.5px;font-weight:500;color:var(--text);transition:transform .2s,color .2s}
+.area-pill:hover{transform:translateY(-2px);color:var(--accent)}
+.area-pill svg{width:14px;height:14px;color:var(--accent)}
+
+/* ===== faq ===== */
+.faq-item{background:var(--bg);box-shadow:var(--shadow-sm);border-radius:16px;margin-bottom:13px;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:19px 22px;font-family:var(--fd);font-weight:600;font-size:15.5px;color:var(--text);cursor:pointer;list-style:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-ic{width:30px;height:30px;border-radius:10px;background:var(--bg);box-shadow:var(--shadow-sm);display:grid;place-items:center;color:var(--accent);flex-shrink:0;transition:transform .3s}
+.faq-item[open] .faq-ic{transform:rotate(45deg)}
+.faq-a{padding:0 22px 20px;color:var(--muted);font-size:14.5px;line-height:1.7}
+
+/* ===== final cta ===== */
+.cta-band{position:relative;overflow:hidden;background:var(--navy);border-radius:32px;padding:clamp(40px,6vw,72px);text-align:center}
+.cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(45,108,255,.2),transparent 62%)}
+
+/* ===== footer ===== */
+footer{background:var(--navy);color:#E9EEF7;margin-top:0}
+.footer-grid{display:grid;grid-template-columns:1.7fr repeat(4,1fr);gap:38px}
+.ft-desc{color:rgba(233,238,247,.6);font-size:14px;line-height:1.65;margin-top:16px;max-width:300px}
+.ft-nl{display:flex;gap:8px;margin-top:20px;max-width:320px}
+.ft-nl input{flex:1;font-family:var(--fb);font-size:13px;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px}
+.ft-nl input::placeholder{color:rgba(233,238,247,.45)}
+.ft-nl input:focus{outline:none;border-color:var(--accent)}
+.ft-nl button{width:46px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;flex-shrink:0}
+.ft-col-h{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(233,238,247,.45);margin-bottom:16px}
+.ft-links{display:grid;gap:11px}
+.ft-link{color:rgba(233,238,247,.72);font-size:14px;transition:color .2s}
+.ft-link:hover{color:#fff}
+.ft-bottom{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1)}
+.ft-copy{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:rgba(233,238,247,.55)}
+.ft-brand{color:var(--accent-t);font-weight:600}
+.ft-legal{display:flex;gap:18px}.ft-legal a{font-size:13px;color:rgba(233,238,247,.55)}.ft-legal a:hover{color:#fff}
+
+/* ===== spa pages + page hero ===== */
+.spa-page{display:none}.spa-page.active{display:block}
+.page-hero{position:relative;padding-block:clamp(60px,8vw,110px);overflow:hidden;background:var(--navy);color:#fff}
+.ph-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 0%,rgba(45,108,255,.22),transparent 60%)}
+.ph-content{position:relative;z-index:2}
+.breadcrumb{display:flex;gap:8px;align-items:center;font-family:var(--fm);font-size:12px;color:rgba(233,238,247,.6)}
+.breadcrumb a:hover{color:#fff}
+.ph-h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.1rem,4.6vw,3.3rem);line-height:1.04;letter-spacing:-.025em;margin-top:14px;color:#fff}
+.ph-sub{color:rgba(233,238,247,.72);font-size:17px;line-height:1.65;margin-top:14px;max-width:560px}
+
+/* ===== reveal ===== */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* ===== responsive ===== */
+@media (max-width:1080px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .tool-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr 1fr}
+}
+@media (max-width:860px){
+  .nav-pill{display:none}.hamburger{display:grid}.drawer{display:flex}
+  .bottom-nav{display:flex}.fab-wrap{bottom:84px}
+  .grid3{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:1fr 1fr}
+  .cat-card.feat{grid-column:span 2;grid-row:auto}
+  body{padding-bottom:78px}
+}
+@media (max-width:680px){
+  .grid2{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}
+  .bento{grid-auto-rows:96px}.tile.x2{grid-column:span 2}
+  .cat-card.feat{grid-column:span 2}.hero-trust{gap:14px}
+  .review,.cat-card{height:auto}
+}
+@media (max-width:440px){
+  .grid4{grid-template-columns:1fr}.bento{grid-template-columns:repeat(2,1fr)}
+  .bento-head{grid-column:span 2}.tile.x2{grid-column:span 2}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+
+<!-- ====== ANNOUNCEMENT TICKER ====== -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker" id="ticker">
+    <span class="t-item">Same-week availability</span><span class="t-sep"></span>
+    <span class="t-item">Fully insured, background-checked technicians</span><span class="t-sep"></span>
+    <span class="t-item">Free estimates on every job</span><span class="t-sep"></span>
+    <span class="t-item">Home maintenance plans from $19/mo</span><span class="t-sep"></span>
+    <span class="t-item">4.9&#9733; from 6,800+ homes</span><span class="t-sep"></span>
+    <span class="t-item">Same-week availability</span><span class="t-sep"></span>
+    <span class="t-item">Fully insured, background-checked technicians</span><span class="t-sep"></span>
+    <span class="t-item">Free estimates on every job</span><span class="t-sep"></span>
+    <span class="t-item">Home maintenance plans from $19/mo</span><span class="t-sep"></span>
+    <span class="t-item">4.9&#9733; from 6,800+ homes</span><span class="t-sep"></span>
+  </div>
+</div>
+
+<!-- ====== NAVBAR ====== -->
+<header class="navbar" id="navbar"><div class="container"><div class="nav-inner">
+  <a href="#home" class="logo" data-page="home" aria-label="FixHaus home">
+    <span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+    <span class="logo-text">Fix<span class="logo-dot">Haus</span></span>
+  </a>
+  <nav class="nav-pill" aria-label="Primary">
+    <a href="#services" class="nav-link" data-page="services">Services</a>
+    <a href="#home" class="nav-link" data-page="home" data-scroll="repairs">Repairs</a>
+    <a href="#home" class="nav-link" data-page="home" data-scroll="categories">Installations</a>
+    <a href="#projects" class="nav-link" data-page="projects">Projects</a>
+    <a href="#plans" class="nav-link" data-page="plans">Plans</a>
+    <a href="#reviews" class="nav-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+  </nav>
+  <div class="nav-acts">
+    <button class="btn-ico theme-btn" aria-label="Toggle theme"></button>
+    <a href="#book" class="btn btn-p" data-page="book">Book a Handyman</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+  </div>
+</div></div></header>
+
+<!-- ====== DRAWER ====== -->
+<div class="drawer" id="drawer">
+  <div class="drawer-hd">
+    <span class="logo-text">Fix<span class="logo-dot">Haus</span></span>
+    <button class="btn-ico" id="drawer-close" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="drawer-links">
+    <a href="#home" class="drawer-link" data-page="home">Home <span class="dn">01</span></a>
+    <a href="#services" class="drawer-link" data-page="services">Services <span class="dn">02</span></a>
+    <a href="#projects" class="drawer-link" data-page="projects">Projects <span class="dn">03</span></a>
+    <a href="#plans" class="drawer-link" data-page="plans">Membership Plans <span class="dn">04</span></a>
+    <a href="#reviews" class="drawer-link" data-page="reviews">Reviews <span class="dn">05</span></a>
+    <a href="#contact" class="drawer-link" data-page="contact">Contact <span class="dn">06</span></a>
+  </div>
+  <a href="#book" class="btn btn-p btn-lg btn-full" data-page="book" style="margin-top:22px">Book a Handyman</a>
+</div>
+
+<main id="main">
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- HERO -->
+<section class="hero"><div class="hero-glow"></div><div class="container"><div class="hero-grid">
+  <div>
+    <span class="hero-badge reveal"><span class="dot"></span> Your home's on-demand maintenance team</span>
+    <h1 class="hero-h1 reveal" data-d="60">One team for every <span class="hl">home repair.</span></h1>
+    <p class="hero-p reveal" data-d="120">Skip the five-contractor scramble. Book a vetted, insured FixHaus pro for repairs, installs, assembly and ongoing upkeep &mdash; all from one dashboard, often the same week.</p>
+    <div class="hero-cta reveal" data-d="180">
+      <a href="#book" class="btn btn-p btn-lg" data-page="book">Book Service <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="#estimator" class="btn btn-s btn-lg" data-scroll="estimator">Get Estimate</a>
+    </div>
+    <div class="hero-trust reveal" data-d="240">
+      <div class="ht-item"><span class="ht-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></span><div><div class="ht-n">Insured</div><div class="ht-l">&amp; background-checked</div></div></div>
+      <div class="ht-item"><span class="ht-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div class="ht-n">Same week</div><div class="ht-l">availability</div></div></div>
+      <div class="ht-item"><span class="ht-ico"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><div><div class="ht-n">4.9 / 5.0</div><div class="ht-l">6,800+ reviews</div></div></div>
+    </div>
+  </div>
+  <!-- bento dashboard -->
+  <div class="bento reveal" data-d="160" role="list" aria-label="Service quick-book dashboard">
+    <div class="bento-head">
+      <div class="bh-l"><span class="bh-ava"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
+      <div><div style="font-family:var(--fd);font-weight:700;font-size:14px;color:var(--text)">Service dashboard</div><div style="font-family:var(--fm);font-size:10.5px;color:var(--muted)">Tap a task to book</div></div></div>
+      <div class="bh-status"><span class="lv"></span> 12 pros nearby</div>
+    </div>
+    <div class="tile x2" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 4 18 3-9h5"/></svg></span><div><div class="tile-name">Plumbing repairs</div><div class="tile-meta">Leaks &middot; faucets &middot; toilets</div></div></div>
+    <div class="tile" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h6"/></svg></span><div><div class="tile-name">Drywall</div><div class="tile-meta">Patch &amp; paint</div></div></div>
+    <div class="tile" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V8l6-4 6 4v12M9 20v-6h6v6"/></svg></span><div><div class="tile-name">Assembly</div><div class="tile-meta">Furniture</div></div></div>
+    <div class="tile" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span><div><div class="tile-name">TV mounting</div><div class="tile-meta">Any size</div></div></div>
+    <div class="tile" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="15" cy="12" r="1"/></svg></span><div><div class="tile-name">Door repair</div><div class="tile-meta">Hinges &amp; locks</div></div></div>
+    <div class="tile" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m0 0 3-3m-3 3L9 5M5 12h14a2 2 0 0 1 2 2v6H3v-6a2 2 0 0 1 2-2z"/></svg></span><div><div class="tile-name">Fixtures</div><div class="tile-meta">Lights &amp; fans</div></div></div>
+    <div class="tile x2" data-page="book" role="listitem"><span class="tile-go"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span><span class="tile-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><div><div class="tile-name">Home maintenance &amp; seasonal tasks</div><div class="tile-meta">Gutters &middot; weatherproofing &middot; tune-ups</div></div></div>
+  </div>
+</div></div></section>
+
+<!-- SMART JOB ESTIMATOR -->
+<section class="section" id="estimator"><div class="container">
+  <div class="center reveal" style="max-width:680px;margin-inline:auto">
+    <span class="eyebrow">Smart Job Estimator</span>
+    <h2 class="h-d">Get a ballpark in 20 seconds</h2>
+    <p class="h-sub">Tell us what you need. We'll estimate the time, suggest the right service, and you can lock in a visit &mdash; no call required.</p>
+  </div>
+  <div class="tool reveal" data-d="100" style="margin-top:42px"><div class="tool-grid">
+    <div>
+      <div class="opt-row">
+        <span class="f-label">1 &middot; Service category</span>
+        <div class="opt-chips" data-group="cat">
+          <button class="chip on" data-v="plumbing" data-h="2.0">Plumbing</button>
+          <button class="chip" data-v="electrical" data-h="1.8">Electrical / fixtures</button>
+          <button class="chip" data-v="drywall" data-h="2.4">Drywall &amp; paint</button>
+          <button class="chip" data-v="assembly" data-h="1.5">Furniture assembly</button>
+          <button class="chip" data-v="mounting" data-h="1.2">TV / wall mounting</button>
+          <button class="chip" data-v="doors" data-h="1.6">Doors &amp; locks</button>
+          <button class="chip" data-v="general" data-h="2.2">General handyman</button>
+        </div>
+      </div>
+      <div class="opt-row">
+        <span class="f-label">2 &middot; Property type</span>
+        <div class="opt-chips" data-group="prop">
+          <button class="chip on" data-v="apartment" data-m="0.9">Apartment</button>
+          <button class="chip" data-v="house" data-m="1.0">House</button>
+          <button class="chip" data-v="condo" data-m="0.95">Condo</button>
+          <button class="chip" data-v="commercial" data-m="1.25">Commercial</button>
+        </div>
+      </div>
+      <div class="opt-row">
+        <span class="f-label">3 &middot; Urgency</span>
+        <div class="opt-chips" data-group="urg">
+          <button class="chip on" data-v="flexible" data-s="0" data-lbl="Flexible">Flexible</button>
+          <button class="chip" data-v="week" data-s="0" data-lbl="This week">This week</button>
+          <button class="chip" data-v="sameday" data-s="49" data-lbl="Same day">Same day</button>
+          <button class="chip" data-v="emergency" data-s="99" data-lbl="Emergency">Emergency</button>
+        </div>
+      </div>
+      <div class="opt-row" style="margin-bottom:0">
+        <span class="f-label">4 &middot; Job size</span>
+        <div class="opt-chips" data-group="size">
+          <button class="chip on" data-v="small" data-m="0.7" data-lbl="Small">Small &mdash; one quick fix</button>
+          <button class="chip" data-v="medium" data-m="1.0" data-lbl="Medium">Medium &mdash; a few tasks</button>
+          <button class="chip" data-v="large" data-m="1.7" data-lbl="Large">Large &mdash; half-day+</button>
+        </div>
+      </div>
+    </div>
+    <div class="estimate">
+      <div class="est-label">Estimated on-site time</div>
+      <div class="est-big" id="est-time">1.4&ndash;1.9 hrs</div>
+      <div style="margin-top:14px">
+        <div class="est-row"><span class="est-k">Recommended</span><span class="est-v" id="est-rec">FixHaus Plumbing Pro</span></div>
+        <div class="est-row"><span class="est-k">Typical range</span><span class="est-v em" id="est-price">$140&ndash;$220</span></div>
+        <div class="est-row"><span class="est-k">Earliest visit</span><span class="est-v" id="est-eta">Within 3 days</span></div>
+      </div>
+      <form class="lead-form" style="margin-top:18px;display:grid;gap:10px">
+        <input class="f-input" type="tel" placeholder="Mobile number for confirmation" required aria-label="Phone"/>
+        <button type="submit" class="btn btn-p btn-full">Request consultation <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <div style="font-family:var(--fm);font-size:10.5px;color:var(--faint);text-align:center">Free estimate &middot; no obligation &middot; insured pros</div>
+      </form>
+    </div>
+  </div></div>
+</div></section>
+
+<!-- SERVICE CATEGORIES BENTO -->
+<section class="section" id="categories" style="background:var(--surface)"><div class="container">
+  <div class="sec-head reveal">
+    <div><span class="eyebrow">Service categories</span><h2 class="h-d">Everything your home needs,<br>under one roof</h2></div>
+    <a href="#services" class="btn btn-s" data-page="services">View all services <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="grid4" style="margin-top:40px;grid-auto-rows:1fr">
+    <div class="cat-card feat reveal" data-d="0">
+      <div class="cat-ico"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      <div class="cat-title">Repairs</div>
+      <div class="cat-desc">Leaky faucets, running toilets, cracked drywall, sticky doors, flickering fixtures &mdash; the small stuff that piles up. One visit, list cleared.</div>
+      <img class="cat-img" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" alt="Handyman repairing a fixture" loading="lazy"/>
+      <div class="cat-list"><span class="cat-tag">Plumbing</span><span class="cat-tag">Drywall</span><span class="cat-tag">Electrical</span><span class="cat-tag">Doors</span></div>
+    </div>
+    <div class="cat-card reveal" data-d="80"><div class="cat-ico"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m0 0 3-3m-3 3L9 5M5 12h14a2 2 0 0 1 2 2v6H3v-6a2 2 0 0 1 2-2z"/></svg></div><div class="cat-title">Installations</div><div class="cat-desc">Ceiling fans, light fixtures, shelving, faucets and smart devices, mounted and wired right.</div></div>
+    <div class="cat-card reveal" data-d="160"><div class="cat-ico"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="cat-title">Maintenance</div><div class="cat-desc">Recurring upkeep that keeps small issues from becoming big repairs.</div></div>
+    <div class="cat-card reveal" data-d="0"><div class="cat-ico"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V8l6-4 6 4v12M9 20v-6h6v6"/></svg></div><div class="cat-title">Assembly</div><div class="cat-desc">Flat-pack furniture, cribs, desks and equipment &mdash; built fast, built sturdy.</div></div>
+    <div class="cat-card reveal" data-d="80"><div class="cat-ico"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M2 12l4-7h12l4 7M5 12v7h14v-7"/></svg></div><div class="cat-title">Exterior tasks</div><div class="cat-desc">Gutters, fences, decks, pressure washing and weatherproofing for the outside of your home.</div></div>
+    <div class="cat-card reveal" data-d="160"><div class="cat-ico"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="9" y1="13" x2="9" y2="13.01"/></svg></div><div class="cat-title">Interior improvements</div><div class="cat-desc">Trim, caulking, backsplash, painting and the finishing touches that lift a room.</div></div>
+  </div>
+</div></section>
+
+<!-- POPULAR FIXES -->
+<section class="section"><div class="container">
+  <div class="center reveal" style="max-width:640px;margin-inline:auto"><span class="eyebrow em">Popular home fixes</span><h2 class="h-d">The jobs we knock out daily</h2><p class="h-sub">Transparent timing and starting prices on the requests we see most.</p></div>
+  <div class="grid2" style="margin-top:40px;gap:16px">
+    <div class="fix-card reveal" data-d="0"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 4 18 3-9h5"/></svg></span><div><div class="fix-name">Leaky faucet repair</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~45 min avg</div></div><div class="fix-price"><div class="p">$89+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="60"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h6"/></svg></span><div><div class="fix-name">Drywall hole patch</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~1.5 hr avg</div></div><div class="fix-price"><div class="p">$120+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="120"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="15" cy="12" r="1"/></svg></span><div><div class="fix-name">Door &amp; lock repair</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~1 hr avg</div></div><div class="fix-price"><div class="p">$99+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="0"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18"/><line x1="9" y1="9" x2="9" y2="9.01"/></svg></span><div><div class="fix-name">Shelf &amp; rack installation</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~1 hr avg</div></div><div class="fix-price"><div class="p">$95+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="60"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m0 0 3-3m-3 3L9 5M5 12h14a2 2 0 0 1 2 2v6H3v-6a2 2 0 0 1 2-2z"/></svg></span><div><div class="fix-name">Ceiling fan install</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~1.5 hr avg</div></div><div class="fix-price"><div class="p">$135+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="120"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span><div><div class="fix-name">TV mounting</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~1 hr avg</div></div><div class="fix-price"><div class="p">$110+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="0"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V8l6-4 6 4v12"/></svg></span><div><div class="fix-name">Furniture assembly</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~1.5 hr avg</div></div><div class="fix-price"><div class="p">$85+</div><div class="l">starting</div></div></div>
+    <div class="fix-card reveal" data-d="60"><span class="fix-ico"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M2 12l4-7h12l4 7M5 12v7h14v-7"/></svg></span><div><div class="fix-name">Gutter clean &amp; reseal</div><div class="fix-time"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>~2 hr avg</div></div><div class="fix-price"><div class="p">$160+</div><div class="l">starting</div></div></div>
+  </div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background:var(--surface)"><div class="container">
+  <div class="center reveal" style="max-width:620px;margin-inline:auto"><span class="eyebrow">How it works</span><h2 class="h-d">From to-do to done in five steps</h2></div>
+  <div class="flow" style="margin-top:44px">
+    <div class="flow-step reveal" data-d="0"><div class="flow-num"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="flow-t">Book</div><div class="flow-d">Pick a task and a window online, or tap a tile.</div><span class="flow-tag">Step 01</span></div>
+    <div class="flow-step reveal" data-d="70"><div class="flow-num"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6"/><path d="M16 2v4M8 2v4M3 10h18M16 18l2 2 4-4"/></svg></div><div class="flow-t">Schedule</div><div class="flow-d">We match a vetted local pro and confirm fast.</div><span class="flow-tag">Step 02</span></div>
+    <div class="flow-step reveal" data-d="140"><div class="flow-num"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="flow-t">Complete</div><div class="flow-d">Your pro arrives, works clean, finishes the list.</div><span class="flow-tag">Step 03</span></div>
+    <div class="flow-step reveal" data-d="210"><div class="flow-num"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="flow-t">Review</div><div class="flow-d">Approve the work and rate your pro in-app.</div><span class="flow-tag">Step 04</span></div>
+    <div class="flow-step reveal" data-d="280"><div class="flow-num"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div><div class="flow-t">Maintain</div><div class="flow-d">Set reminders so nothing sneaks up on you again.</div><span class="flow-tag">Step 05</span></div>
+  </div>
+</div></section>
+
+<!-- MEMBERSHIP PLANS -->
+<section class="section" id="plans-anchor"><div class="container">
+  <div class="center reveal" style="max-width:640px;margin-inline:auto"><span class="eyebrow em">Membership plans</span><h2 class="h-d">Home care on autopilot</h2><p class="h-sub">Members get scheduled inspections, priority booking and member-only pricing. Cancel anytime.</p></div>
+  <div class="grid3" style="margin-top:48px;align-items:stretch">
+    <div class="reveal" data-d="0"><div class="plan">
+      <div class="plan-tier">For apartments &amp; condos</div><div class="plan-name">Basic Home Care</div>
+      <div class="plan-price"><span class="a">$19</span><span class="per">/month</span></div>
+      <div class="plan-feats">
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1 annual home inspection</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority scheduling</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>10% off all repairs</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Seasonal maintenance reminders</div>
+      </div>
+      <a href="#book" class="btn btn-s btn-full" data-page="book">Choose Basic</a>
+    </div></div>
+    <div class="reveal" data-d="90"><div class="plan feat">
+      <div class="plan-badge">Most popular</div>
+      <div class="plan-tier">For most homeowners</div><div class="plan-name">Pro Maintenance</div>
+      <div class="plan-price"><span class="a">$39</span><span class="per">/month</span></div>
+      <div class="plan-feats">
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2 annual inspections</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority same-week booking</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>20% off all repairs</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2 hours of handyman time / yr</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Smart maintenance reminders</div>
+      </div>
+      <a href="#book" class="btn btn-p btn-full" data-page="book">Choose Pro</a>
+    </div></div>
+    <div class="reveal" data-d="180"><div class="plan">
+      <div class="plan-tier">For larger &amp; older homes</div><div class="plan-name">Total Home Protection</div>
+      <div class="plan-price"><span class="a">$69</span><span class="per">/month</span></div>
+      <div class="plan-feats">
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 seasonal inspections</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>VIP same-day priority</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>25% off all repairs</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>5 hours of handyman time / yr</div>
+        <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account &amp; reminders</div>
+      </div>
+      <a href="#book" class="btn btn-s btn-full" data-page="book">Choose Total</a>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- HOME HEALTH SCORE -->
+<section class="section" id="healthscore" style="background:var(--surface)"><div class="container">
+  <div class="center reveal" style="max-width:640px;margin-inline:auto"><span class="eyebrow">Home Health Score</span><h2 class="h-d">How healthy is your home?</h2><p class="h-sub">Answer three quick questions and we'll generate a maintenance score with a tailored care plan.</p></div>
+  <div class="tool reveal" data-d="100" style="margin-top:42px"><div class="tool-grid">
+    <div>
+      <div class="opt-row"><span class="f-label">How old is your home?</span>
+        <div class="opt-chips" data-group="age">
+          <button class="chip on" data-pen="4" data-lbl="Under 10 yrs">Under 10 yrs</button>
+          <button class="chip" data-pen="10" data-lbl="10&ndash;25 yrs">10&ndash;25 yrs</button>
+          <button class="chip" data-pen="18" data-lbl="25&ndash;50 yrs">25&ndash;50 yrs</button>
+          <button class="chip" data-pen="26" data-lbl="50+ yrs">50+ yrs</button>
+        </div>
+      </div>
+      <div class="opt-row"><span class="f-label">Last professional maintenance?</span>
+        <div class="opt-chips" data-group="maint">
+          <button class="chip on" data-pen="3" data-lbl="Within 6 months">Within 6 months</button>
+          <button class="chip" data-pen="9" data-lbl="About a year ago">About a year ago</button>
+          <button class="chip" data-pen="17" data-lbl="2+ years ago">2+ years ago</button>
+          <button class="chip" data-pen="25" data-lbl="Never / not sure">Never / not sure</button>
+        </div>
+      </div>
+      <div class="opt-row" style="margin-bottom:0"><span class="f-label">Any of these going on? (tap all that apply)</span>
+        <div class="opt-chips" data-group="issues" data-multi="1">
+          <button class="chip" data-pen="7" data-lbl="Leaks/drips">Leaks or drips</button>
+          <button class="chip" data-pen="7" data-lbl="Flickering lights">Flickering lights</button>
+          <button class="chip" data-pen="6" data-lbl="Drafts">Drafts / poor seals</button>
+          <button class="chip" data-pen="5" data-lbl="Sticky doors">Sticky doors / windows</button>
+          <button class="chip" data-pen="8" data-lbl="Visible cracks">Visible cracks</button>
+        </div>
+      </div>
+    </div>
+    <div class="estimate gauge-wrap">
+      <div class="gauge">
+        <svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="86" fill="none" stroke="var(--surface2)" stroke-width="16"/>
+          <circle id="gauge-arc" cx="100" cy="100" r="86" fill="none" stroke="var(--emerald)" stroke-width="16" stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="135" style="transition:stroke-dashoffset .8s cubic-bezier(.16,1,.3,1),stroke .4s"/>
+        </svg>
+        <div class="gauge-num"><div class="gauge-n" id="score-n">86</div><div class="gauge-l">/ 100</div></div>
+      </div>
+      <div class="score-band" id="score-band" style="color:var(--emerald)">Excellent shape</div>
+      <p id="score-msg" style="color:var(--muted);font-size:13.5px;line-height:1.55;margin-top:8px;max-width:280px">Your home is in great shape. A light annual tune-up keeps it that way.</p>
+      <form class="lead-form" style="margin-top:16px;display:grid;gap:10px;width:100%;max-width:280px">
+        <input class="f-input" type="email" placeholder="Email my full report" required aria-label="Email"/>
+        <button type="submit" class="btn btn-em btn-full">Get my care plan</button>
+      </form>
+    </div>
+  </div></div>
+</div></section>
+
+<!-- PROJECT GALLERY -->
+<section class="section" id="gallery"><div class="container">
+  <div class="sec-head reveal">
+    <div><span class="eyebrow">Project gallery</span><h2 class="h-d">Recent work around the neighborhood</h2></div>
+  </div>
+  <div class="filter-bar reveal" data-d="80" data-group="filter">
+    <button class="chip on" data-f="all">All</button>
+    <button class="chip" data-f="repair">Quick fixes</button>
+    <button class="chip" data-f="install">Installations</button>
+    <button class="chip" data-f="maintenance">Maintenance</button>
+  </div>
+  <div class="grid3" style="margin-top:28px" id="proj-grid">
+    <div class="reveal proj-item" data-cat="install" data-d="0"><div class="proj-card"><img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80" alt="Floating shelf installation" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Installation</span><div class="proj-title">Floating shelf wall</div><div class="proj-meta">Riverside Loft &middot; 2 hrs</div></div></div></div>
+    <div class="reveal proj-item" data-cat="repair" data-d="80"><div class="proj-card"><img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=80" alt="Kitchen faucet repair" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Quick fix</span><div class="proj-title">Kitchen faucet swap</div><div class="proj-meta">Maple Street &middot; 50 min</div></div></div></div>
+    <div class="reveal proj-item" data-cat="install" data-d="160"><div class="proj-card"><img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=80" alt="TV wall mount" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Installation</span><div class="proj-title">75&quot; TV flush mount</div><div class="proj-meta">Oakwood Condo &middot; 1 hr</div></div></div></div>
+    <div class="reveal proj-item" data-cat="repair" data-d="0"><div class="proj-card"><img src="https://images.unsplash.com/photo-1572297870735-d6f4e5d7e739?auto=format&fit=crop&w=800&q=80" alt="Drywall patch and paint" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Quick fix</span><div class="proj-title">Drywall patch &amp; paint</div><div class="proj-meta">Cedar Park &middot; 2 hrs</div></div></div></div>
+    <div class="reveal proj-item" data-cat="maintenance" data-d="80"><div class="proj-card"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Seasonal gutter maintenance" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Maintenance</span><div class="proj-title">Gutter clean &amp; reseal</div><div class="proj-meta">Highland Home &middot; 2.5 hrs</div></div></div></div>
+    <div class="reveal proj-item" data-cat="maintenance" data-d="160"><div class="proj-card"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Door weatherproofing" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Maintenance</span><div class="proj-title">Whole-home weatherproof</div><div class="proj-meta">Lakeside &middot; Half day</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="stats-s"><div class="stats-glow"></div><div class="container"><div class="stats-grid">
+  <div class="stat reveal" data-d="0"><div class="stat-n"><span data-counter="42800">0</span><span class="stat-suf">+</span></div><div class="stat-l">Jobs completed</div></div>
+  <div class="stat reveal" data-d="80"><div class="stat-n"><span data-counter="11500">0</span><span class="stat-suf">+</span></div><div class="stat-l">Homes maintained</div></div>
+  <div class="stat reveal" data-d="160"><div class="stat-n"><span data-counter="2">0</span><span class="stat-suf">.4 hr</span></div><div class="stat-l">Avg response time</div></div>
+  <div class="stat reveal" data-d="240"><div class="stat-n"><span data-counter="98">0</span><span class="stat-suf">%</span></div><div class="stat-l">Satisfaction rate</div></div>
+</div></div></section>
+
+<!-- SERVICE AREA -->
+<section class="section"><div class="container"><div class="grid2" style="align-items:center">
+  <div class="reveal">
+    <span class="eyebrow em">Service area</span>
+    <h2 class="h-d">Fast, local pros across the metro</h2>
+    <p class="h-sub">We dispatch from neighborhood hubs, so most bookings see a pro within 2&ndash;3 days &mdash; same day for emergencies. Live coverage across 12+ cities and growing.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;max-width:380px">
+      <div class="nm-sm" style="padding:18px"><div style="font-family:var(--fd);font-weight:800;font-size:26px;color:var(--accent)">12+</div><div style="font-family:var(--fm);font-size:11px;color:var(--muted);margin-top:4px">cities covered</div></div>
+      <div class="nm-sm" style="padding:18px"><div style="font-family:var(--fd);font-weight:800;font-size:26px;color:var(--emerald)">&lt;3 days</div><div style="font-family:var(--fm);font-size:11px;color:var(--muted);margin-top:4px">typical wait</div></div>
+    </div>
+    <a href="#book" class="btn btn-p" style="margin-top:24px" data-page="book">Check your address <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="reveal" data-d="100"><div class="nm" style="padding:22px">
+    <div style="display:flex;flex-wrap:wrap;gap:9px">
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Downtown</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Riverside</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Cedar Park</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Highland</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Oakwood</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Maple Grove</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Lakeside</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Westfield</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Brookhaven</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Pinehurst</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Fairview</span>
+      <span class="area-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Glenwood</span>
+    </div>
+    <div class="nm-well" style="margin-top:18px;padding:16px;display:flex;align-items:center;gap:12px"><span style="color:var(--emerald)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><div style="font-size:13px;color:var(--muted)">Not sure if you're covered? Enter your ZIP at checkout for instant confirmation.</div></div>
+  </div></div>
+</div></div></section>
+
+<!-- REVIEWS -->
+<section class="section" style="background:var(--surface)"><div class="container">
+  <div class="center reveal" style="max-width:640px;margin-inline:auto"><span class="eyebrow">Customer reviews</span><h2 class="h-d">Trusted by 6,800+ homes</h2></div>
+  <div class="filter-bar reveal" data-d="60" data-group="rfilter" style="justify-content:center;margin-top:22px">
+    <button class="chip on" data-rf="all">All</button>
+    <button class="chip" data-rf="repair">Repairs</button>
+    <button class="chip" data-rf="install">Installations</button>
+    <button class="chip" data-rf="plan">Maintenance plans</button>
+  </div>
+  <div class="grid3" style="margin-top:30px" id="review-grid">
+    <div class="reveal review-item" data-rcat="repair" data-d="0"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Booked at 9am, leak fixed by 1pm. The pro was tidy, friendly and walked me through what failed. This is how home repair should work."</div><div class="r-author"><div class="r-av">MA</div><div><div class="r-name">Maya A.</div><div class="r-role">Plumbing repair &middot; Riverside</div></div></div></div></div>
+    <div class="reveal review-item" data-rcat="install" data-d="80"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Mounted a 75-inch TV perfectly flush, hid every cable, cleaned up after. Looks like it came with the house. Booking the rest of my list now."</div><div class="r-author"><div class="r-av">JT</div><div><div class="r-name">Jordan T.</div><div class="r-role">TV mounting &middot; Oakwood</div></div></div></div></div>
+    <div class="reveal review-item" data-rcat="plan" data-d="160"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"The Pro plan pays for itself. They caught a slow leak during a seasonal check before it wrecked our floor. The reminders alone are worth it."</div><div class="r-author"><div class="r-av">DK</div><div><div class="r-name">Devon K.</div><div class="r-role">Pro Maintenance &middot; Highland</div></div></div></div></div>
+    <div class="reveal review-item" data-rcat="repair" data-d="0"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Three squeaky doors and a busted cabinet hinge, all sorted in under an hour. Honest pricing, no upsell. Found my go-to handyman."</div><div class="r-author"><div class="r-av">PR</div><div><div class="r-name">Priya R.</div><div class="r-role">Door repair &middot; Cedar Park</div></div></div></div></div>
+    <div class="reveal review-item" data-rcat="install" data-d="80"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Assembled an entire nursery in one visit &mdash; crib, dresser, glider. Came with all the right tools and left nothing for me to do. Lifesaver."</div><div class="r-author"><div class="r-av">SL</div><div><div class="r-name">Sam L.</div><div class="r-role">Furniture assembly &middot; Lakeside</div></div></div></div></div>
+    <div class="reveal review-item" data-rcat="plan" data-d="160"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"As a property manager I juggle a dozen units. One FixHaus account, consistent pros, predictable pricing. It replaced five vendors for me."</div><div class="r-author"><div class="r-av">CW</div><div><div class="r-name">Carmen W.</div><div class="r-role">Total Home Protection &middot; Westfield</div></div></div></div></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section"><div class="container"><div class="grid2" style="align-items:start">
+  <div class="reveal"><span class="eyebrow em">FAQ</span><h2 class="h-d">Good questions,<br>straight answers</h2><p class="h-sub">Everything people ask before their first booking. Still stuck? Our team replies within the hour.</p><a href="#contact" class="btn btn-s" style="margin-top:22px" data-page="contact">Ask us anything <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+  <div class="reveal" data-d="100">
+    <details class="faq-item" open><summary class="faq-q">How is pricing calculated?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><p class="faq-a">Most jobs are flat-rate by task with the starting prices shown above, plus materials. Larger jobs are quoted hourly after a free estimate. You approve the price before any work begins &mdash; no surprises.</p></details>
+    <details class="faq-item"><summary class="faq-q">How fast can someone come out?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><p class="faq-a">Same-week availability is standard, and most bookings land within 2&ndash;3 days. Same-day and emergency slots are available for urgent issues like active leaks.</p></details>
+    <details class="faq-item"><summary class="faq-q">Are your handymen insured and vetted?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><p class="faq-a">Every FixHaus pro is background-checked, skills-assessed and covered by our liability insurance. We also stand behind our work with a satisfaction guarantee.</p></details>
+    <details class="faq-item"><summary class="faq-q">What's covered by a membership plan?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><p class="faq-a">Plans bundle scheduled inspections, priority booking, member-only repair discounts and (on Pro and Total) included handyman hours each year. You can use the credit on any service.</p></details>
+    <details class="faq-item"><summary class="faq-q">Do you handle emergencies?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><p class="faq-a">Yes. Tag a booking as Emergency in the estimator or call our line directly. For active leaks, electrical faults or security issues we prioritize same-day dispatch.</p></details>
+    <details class="faq-item"><summary class="faq-q">Is there a warranty on the work?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><p class="faq-a">All workmanship is backed by a 1-year guarantee. If something we fixed fails, we come back and make it right at no charge.</p></details>
+  </div>
+</div></div></section>
+
+<!-- FINAL CTA -->
+<section class="section"><div class="container"><div class="cta-band reveal"><div class="cta-glow"></div><div style="position:relative">
+  <h2 style="font-family:var(--fd);font-weight:800;color:#fff;font-size:clamp(2rem,4.6vw,3rem);letter-spacing:-.025em">Let's cross your to-do list off today.</h2>
+  <p style="color:rgba(233,238,247,.78);font-size:17px;max-width:520px;margin:14px auto 0;line-height:1.65">One team, one dashboard, every home repair. Book in minutes &mdash; insured pros, upfront pricing, same-week slots.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:30px">
+    <a href="#book" class="btn btn-p btn-lg" data-page="book">Book Service <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></a>
+    <a href="#estimator" class="btn btn-ghost btn-lg" data-scroll="estimator">Request Estimate</a>
+    <a href="tel:+15125550150" class="btn btn-ghost btn-lg">Call Now <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+  </div>
+</div></div></div></section>
+
+<!-- CONTACT -->
+<section class="section" id="contact-home" style="background:var(--surface)"><div class="container"><div class="grid2">
+  <div class="reveal"><span class="eyebrow">Contact</span><h2 class="h-d">Booking, questions, emergencies</h2><p class="h-sub">Reach the FixHaus team however you like. We answer fast and dispatch faster.</p>
+    <div style="display:grid;gap:14px;margin-top:24px">
+      <div style="display:flex;gap:12px;align-items:center"><span class="btn-ico" style="color:var(--emerald)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Call or text</div><div style="font-size:16px;font-weight:600">(512) 555-0150</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center"><span class="btn-ico" style="color:var(--accent)"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Email</div><div style="font-size:15px;font-weight:600">hello@fixhaus.com</div></div></div>
+      <div style="display:flex;gap:12px;align-items:center"><span class="btn-ico" style="color:var(--accent)"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Hours</div><div style="font-size:15px;font-weight:600">Mon&ndash;Sat 7am&ndash;8pm &middot; Emergency 24/7</div></div></div>
+    </div>
+  </div>
+  <div class="reveal" data-d="100"><form class="lead-form nm" style="padding:clamp(22px,3vw,32px);display:grid;gap:14px">
+    <div style="font-family:var(--fd);font-weight:700;font-size:20px">Book a handyman</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Full name</label><input class="f-input" required placeholder="Jane Cooper"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+    <div><label class="f-label">Service needed</label><select class="f-input"><option>Plumbing repair</option><option>Electrical / fixtures</option><option>Drywall &amp; paint</option><option>Furniture assembly</option><option>TV / wall mounting</option><option>Door &amp; lock repair</option><option>Seasonal maintenance</option><option>Membership plan</option><option>Something else</option></select></div>
+    <div><label class="f-label">Tell us about the job</label><textarea class="f-input" rows="3" style="resize:vertical" placeholder="e.g. dripping kitchen faucet + two pictures to hang"></textarea></div>
+    <button type="submit" class="btn btn-p btn-full btn-lg">Send booking request <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    <div style="text-align:center;font-family:var(--fm);font-size:11px;color:var(--faint)">Insured pros &middot; upfront pricing &middot; satisfaction guaranteed</div>
+  </form></div>
+</div></div></section>
+
+</div><!-- /page-home -->
+
+<!-- ============ SERVICES PAGE ============ -->
+<div id="page-services" class="spa-page">
+  <section class="page-hero"><div class="hero-glow"></div><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Services</span></nav>
+    <span class="eyebrow" style="color:var(--accent-2)">What we fix, install &amp; maintain</span>
+    <h1 class="ph-h1">Every job your home needs, <br/>under one roof.</h1>
+    <p class="ph-sub">From a dripping faucet to a full seasonal tune-up, FixHaus pros handle the long tail of home maintenance most contractors won't touch &mdash; vetted, insured, and priced upfront.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+      <a href="#book" class="btn btn-p btn-lg" data-page="book">Book a Service</a>
+      <a href="#estimator" class="btn btn-ghost btn-lg" data-scroll="estimator" data-page="home">Get an Estimate</a>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="container">
+    <div class="grid3">
+      <div class="reveal"><div class="svc-detail nm"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6"/><path d="M3 21l8.5-8.5"/><path d="M14.5 5.5l4 4"/><path d="M3 3l4.5 4.5"/></svg></div><h3 class="svc-h">Plumbing repair</h3><p class="svc-p">Leaky faucets, running toilets, clogged drains, garbage disposals, supply-line swaps and fixture replacements &mdash; tidy, code-aware work with no surprise upsells.</p><div class="svc-meta"><span>Avg 1&ndash;2 hrs</span><span class="svc-price">from $120</span></div></div></div>
+      <div class="reveal" data-d="70"><div class="svc-detail nm"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3 class="svc-h">Electrical &amp; fixtures</h3><p class="svc-p">Light fixtures, ceiling fans, dimmers, outlets, smart switches and flickering-light diagnostics. Licensed partners for anything inside the panel.</p><div class="svc-meta"><span>Avg 1&ndash;2 hrs</span><span class="svc-price">from $130</span></div></div></div>
+      <div class="reveal" data-d="140"><div class="svc-detail nm"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><h3 class="svc-h">Drywall &amp; paint</h3><p class="svc-p">Holes, cracks, water-stain patches, texture matching and clean repaints. We blend the repair so you can't tell where the damage was.</p><div class="svc-meta"><span>Avg 2&ndash;3 hrs</span><span class="svc-price">from $150</span></div></div></div>
+      <div class="reveal"><div class="svc-detail nm"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13"/><path d="M2 21h20"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><h3 class="svc-h">Furniture assembly</h3><p class="svc-p">Flat-pack wardrobes, beds, desks, nursery sets and complex modular units. We bring the tools and haul the boxes away.</p><div class="svc-meta"><span>Avg 1&ndash;2 hrs</span><span class="svc-price">from $90</span></div></div></div>
+      <div class="reveal" data-d="70"><div class="svc-detail nm"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3 class="svc-h">TV &amp; wall mounting</h3><p class="svc-p">Flush TV mounts up to 85", floating shelves, mirrors, art and heavy decor &mdash; perfectly level, anchored to studs, with cables hidden.</p><div class="svc-meta"><span>Avg 1 hr</span><span class="svc-price">from $99</span></div></div></div>
+      <div class="reveal" data-d="140"><div class="svc-detail nm"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M9 7h.01"/><path d="M9 11h.01"/><path d="M9 15h.01"/></svg></div><h3 class="svc-h">Doors, locks &amp; seasonal</h3><p class="svc-p">Sticky doors, hinge and lock repair, weatherstripping, gutter clears and full seasonal maintenance to keep your home tight year-round.</p><div class="svc-meta"><span>Avg 1&ndash;3 hrs</span><span class="svc-price">from $110</span></div></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#book" class="btn btn-p btn-lg" data-page="book">Book any service &rarr;</a></div>
+  </div></section>
+</div>
+
+<!-- ============ PROJECTS PAGE ============ -->
+<div id="page-projects" class="spa-page">
+  <section class="page-hero"><div class="hero-glow"></div><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Projects</span></nav>
+    <span class="eyebrow" style="color:var(--accent-2)">Recent work</span>
+    <h1 class="ph-h1">Real homes, real fixes,<br/>done right the first time.</h1>
+    <p class="ph-sub">A look at jobs our pros completed this season &mdash; from five-minute fixes to full half-day projects. Every one booked, tracked and reviewed through the FixHaus dashboard.</p>
+  </div></section>
+
+  <section class="section"><div class="container">
+    <div class="grid4">
+      <div class="reveal proj-item"><div class="proj-card"><img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80" alt="Floating shelf installation" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Installation</span><div class="proj-title">Floating shelf wall</div><div class="proj-meta">Riverside Loft &middot; 2 hrs</div></div></div></div>
+      <div class="reveal proj-item" data-d="60"><div class="proj-card"><img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=80" alt="Kitchen faucet repair" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Quick fix</span><div class="proj-title">Kitchen faucet swap</div><div class="proj-meta">Maple Street &middot; 50 min</div></div></div></div>
+      <div class="reveal proj-item" data-d="120"><div class="proj-card"><img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=80" alt="TV wall mount" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Installation</span><div class="proj-title">75&quot; TV flush mount</div><div class="proj-meta">Oakwood Condo &middot; 1 hr</div></div></div></div>
+      <div class="reveal proj-item" data-d="180"><div class="proj-card"><img src="https://images.unsplash.com/photo-1572297870735-d6f4e5d7e739?auto=format&fit=crop&w=800&q=80" alt="Drywall patch and paint" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Quick fix</span><div class="proj-title">Drywall patch &amp; paint</div><div class="proj-meta">Cedar Park &middot; 2 hrs</div></div></div></div>
+      <div class="reveal proj-item"><div class="proj-card"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Seasonal gutter maintenance" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Maintenance</span><div class="proj-title">Gutter clean &amp; reseal</div><div class="proj-meta">Highland Home &middot; 2.5 hrs</div></div></div></div>
+      <div class="reveal proj-item" data-d="60"><div class="proj-card"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Door weatherproofing" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Maintenance</span><div class="proj-title">Whole-home weatherproof</div><div class="proj-meta">Lakeside &middot; Half day</div></div></div></div>
+      <div class="reveal proj-item" data-d="120"><div class="proj-card"><img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=800&q=80" alt="Nursery furniture assembly" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Assembly</span><div class="proj-title">Full nursery build-out</div><div class="proj-meta">Westfield &middot; 3 hrs</div></div></div></div>
+      <div class="reveal proj-item" data-d="180"><div class="proj-card"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Smart home fixture upgrade" loading="lazy"/><div class="proj-ov"></div><div class="proj-body"><span class="proj-cat">Installation</span><div class="proj-title">Smart fixture upgrade</div><div class="proj-meta">Downtown Flat &middot; 1.5 hrs</div></div></div></div>
+    </div>
+    <div class="stats-s reveal" style="margin-top:56px;border-radius:var(--rc)"><div class="stats-glow"></div><div class="stats-grid">
+      <div class="stat"><div class="stat-n"><span data-counter="42800">0</span><span class="stat-suf">+</span></div><div class="stat-l">Jobs completed</div></div>
+      <div class="stat"><div class="stat-n"><span data-counter="11500">0</span><span class="stat-suf">+</span></div><div class="stat-l">Homes served</div></div>
+      <div class="stat"><div class="stat-n"><span data-counter="98">0</span><span class="stat-suf">%</span></div><div class="stat-l">Five-star rated</div></div>
+      <div class="stat"><div class="stat-n"><span data-counter="2">0</span><span class="stat-suf">.4 hr</span></div><div class="stat-l">Avg response</div></div>
+    </div></div>
+    <div class="center" style="margin-top:48px"><a href="#book" class="btn btn-p btn-lg" data-page="book">Start your project &rarr;</a></div>
+  </div></section>
+</div>
+
+<!-- ============ PLANS PAGE ============ -->
+<div id="page-plans" class="spa-page">
+  <section class="page-hero"><div class="hero-glow"></div><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Membership Plans</span></nav>
+    <span class="eyebrow em" style="color:var(--emerald)">Home care on autopilot</span>
+    <h1 class="ph-h1">Stop reacting to repairs.<br/>Start preventing them.</h1>
+    <p class="ph-sub">A FixHaus membership turns home upkeep into a calm, scheduled routine &mdash; inspections, priority booking and member pricing, so small issues never grow into expensive ones.</p>
+  </div></section>
+
+  <section class="section"><div class="container">
+    <div class="grid3" style="align-items:stretch">
+      <div class="reveal"><div class="plan">
+        <div class="plan-tier">For apartments &amp; condos</div><div class="plan-name">Basic Home Care</div>
+        <div class="plan-price"><span class="a">$19</span><span class="per">/month</span></div>
+        <div class="plan-feats">
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1 annual home inspection</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority scheduling</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>10% off all repairs</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Seasonal maintenance reminders</div>
+        </div>
+        <a href="#book" class="btn btn-s btn-full" data-page="book">Choose Basic</a>
+      </div></div>
+      <div class="reveal" data-d="90"><div class="plan feat">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-tier">For most homeowners</div><div class="plan-name">Pro Maintenance</div>
+        <div class="plan-price"><span class="a">$39</span><span class="per">/month</span></div>
+        <div class="plan-feats">
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2 annual inspections</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority same-week booking</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>20% off all repairs</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>2 hours of handyman time / yr</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Smart maintenance reminders</div>
+        </div>
+        <a href="#book" class="btn btn-p btn-full" data-page="book">Choose Pro</a>
+      </div></div>
+      <div class="reveal" data-d="180"><div class="plan">
+        <div class="plan-tier">For larger &amp; older homes</div><div class="plan-name">Total Home Protection</div>
+        <div class="plan-price"><span class="a">$69</span><span class="per">/month</span></div>
+        <div class="plan-feats">
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 seasonal inspections</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>VIP same-day priority</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>25% off all repairs</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>5 hours of handyman time / yr</div>
+          <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account &amp; reminders</div>
+        </div>
+        <a href="#book" class="btn btn-s btn-full" data-page="book">Choose Total</a>
+      </div></div>
+    </div>
+    <div class="reveal nm" style="margin-top:48px;padding:clamp(22px,3vw,32px);text-align:center;max-width:760px;margin-inline:auto">
+      <h3 style="font-family:var(--fd);font-weight:700;font-size:20px">Every plan includes the FixHaus guarantee</h3>
+      <p style="color:var(--muted);font-size:15px;line-height:1.65;margin-top:10px">Vetted, insured, background-checked pros &middot; upfront pricing with no surprise fees &middot; satisfaction guaranteed or we make it right. Cancel or change your plan anytime &mdash; no lock-in.</p>
+      <a href="#book" class="btn btn-em btn-lg" data-page="book" style="margin-top:20px">Become a member &rarr;</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ REVIEWS PAGE ============ -->
+<div id="page-reviews" class="spa-page">
+  <section class="page-hero"><div class="hero-glow"></div><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Reviews</span></nav>
+    <span class="eyebrow" style="color:var(--accent-2)">4.9 average &middot; 6,200+ ratings</span>
+    <h1 class="ph-h1">Homeowners keep coming<br/>back to FixHaus.</h1>
+    <p class="ph-sub">We're rated five stars by the people who matter most &mdash; the ones whose homes we keep running. Here's what they say after the job is done.</p>
+  </div></section>
+
+  <section class="section"><div class="container">
+    <div class="grid3">
+      <div class="reveal review-item"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Booked at 9am, leak fixed by 1pm. Tidy, friendly, walked me through what failed. This is how home repair should work."</div><div class="r-author"><div class="r-av">MA</div><div><div class="r-name">Maya A.</div><div class="r-role">Plumbing repair &middot; Riverside</div></div></div></div></div>
+      <div class="reveal review-item" data-d="70"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Mounted a 75-inch TV perfectly flush, hid every cable, cleaned up after. Looks like it came with the house."</div><div class="r-author"><div class="r-av">JT</div><div><div class="r-name">Jordan T.</div><div class="r-role">TV mounting &middot; Oakwood</div></div></div></div></div>
+      <div class="reveal review-item" data-d="140"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"The Pro plan pays for itself. They caught a slow leak during a seasonal check before it wrecked our floor."</div><div class="r-author"><div class="r-av">DK</div><div><div class="r-name">Devon K.</div><div class="r-role">Pro Maintenance &middot; Highland</div></div></div></div></div>
+      <div class="reveal review-item"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Three squeaky doors and a busted cabinet hinge, all sorted in under an hour. Honest pricing, no upsell."</div><div class="r-author"><div class="r-av">PR</div><div><div class="r-name">Priya R.</div><div class="r-role">Door repair &middot; Cedar Park</div></div></div></div></div>
+      <div class="reveal review-item" data-d="70"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"Assembled an entire nursery in one visit &mdash; crib, dresser, glider. Left nothing for me to do. Lifesaver."</div><div class="r-author"><div class="r-av">SL</div><div><div class="r-name">Sam L.</div><div class="r-role">Furniture assembly &middot; Lakeside</div></div></div></div></div>
+      <div class="reveal review-item" data-d="140"><div class="review"><div class="r-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="r-q">"As a property manager I juggle a dozen units. One FixHaus account replaced five vendors for me."</div><div class="r-author"><div class="r-av">CW</div><div><div class="r-name">Carmen W.</div><div class="r-role">Total Home Protection &middot; Westfield</div></div></div></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#book" class="btn btn-p btn-lg" data-page="book">Join thousands of happy homeowners &rarr;</a></div>
+  </div></section>
+</div>
+
+<!-- ============ CONTACT PAGE ============ -->
+<div id="page-contact" class="spa-page">
+  <section class="page-hero"><div class="hero-glow"></div><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Contact</span></nav>
+    <span class="eyebrow" style="color:var(--accent-2)">We answer fast</span>
+    <h1 class="ph-h1">Talk to the FixHaus team.</h1>
+    <p class="ph-sub">Booking a job, asking a question, or handling an emergency &mdash; reach us however you prefer and we'll dispatch a pro fast.</p>
+  </div></section>
+
+  <section class="section"><div class="container"><div class="grid2">
+    <div class="reveal">
+      <h2 class="h-d">Ways to reach us</h2>
+      <p class="h-sub">Our coordinators are real people, based locally, who know our pros by name.</p>
+      <div style="display:grid;gap:14px;margin-top:24px">
+        <div class="nm-sm" style="display:flex;gap:12px;align-items:center;padding:16px"><span class="btn-ico" style="color:var(--emerald)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Call or text</div><div style="font-size:16px;font-weight:600">(512) 555-0150</div></div></div>
+        <div class="nm-sm" style="display:flex;gap:12px;align-items:center;padding:16px"><span class="btn-ico" style="color:var(--accent)"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Email</div><div style="font-size:15px;font-weight:600">hello@fixhaus.com</div></div></div>
+        <div class="nm-sm" style="display:flex;gap:12px;align-items:center;padding:16px"><span class="btn-ico" style="color:var(--accent)"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Hours</div><div style="font-size:15px;font-weight:600">Mon&ndash;Sat 7am&ndash;8pm &middot; Emergency 24/7</div></div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="100"><form class="lead-form nm" style="padding:clamp(22px,3vw,32px);display:grid;gap:14px">
+      <div style="font-family:var(--fd);font-weight:700;font-size:20px">Send us a message</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Full name</label><input class="f-input" required placeholder="Jane Cooper"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label">Email</label><input class="f-input" type="email" required placeholder="jane@email.com"/></div>
+      <div><label class="f-label">How can we help?</label><textarea class="f-input" rows="3" style="resize:vertical" placeholder="Tell us what you need..."></textarea></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg">Send message</button>
+    </form></div>
+  </div></div></section>
+</div>
+
+<!-- ============ BOOK PAGE ============ -->
+<div id="page-book" class="spa-page">
+  <section class="page-hero"><div class="hero-glow"></div><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Book a Handyman</span></nav>
+    <span class="eyebrow em" style="color:var(--emerald)">Same-week availability</span>
+    <h1 class="ph-h1">Book your handyman<br/>in under two minutes.</h1>
+    <p class="ph-sub">Tell us what needs doing and when. We'll match you with the right vetted pro, confirm your slot, and send upfront pricing before anyone lifts a tool.</p>
+  </div></section>
+
+  <section class="section"><div class="container"><div class="grid2" style="align-items:start">
+    <div class="reveal">
+      <h2 class="h-d">What happens next</h2>
+      <div class="flow vflow" style="margin-top:24px">
+        <div class="flow-step"><div class="flow-num">1</div><div><div class="fs-h">You send the details</div><div class="fs-p">Pick a service, describe the job and choose a time window that works for you.</div></div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div><div class="fs-h">We confirm &amp; price it</div><div class="fs-p">A coordinator confirms your slot and sends transparent, upfront pricing &mdash; no surprises.</div></div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div><div class="fs-h">Your pro arrives</div><div class="fs-p">A vetted, insured FixHaus pro shows up on time with the right tools and gets it done.</div></div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div><div class="fs-h">You review &amp; relax</div><div class="fs-p">Rate the work, save your pro, and book your next job in one tap. We'll remember the rest.</div></div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="100"><form class="lead-form nm" style="padding:clamp(22px,3vw,34px);display:grid;gap:14px">
+      <div style="font-family:var(--fd);font-weight:700;font-size:22px">Request a booking</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Full name</label><input class="f-input" required placeholder="Jane Cooper"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label">Email</label><input class="f-input" type="email" required placeholder="jane@email.com"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div><label class="f-label">Service needed</label><select class="f-input"><option>Plumbing repair</option><option>Electrical / fixtures</option><option>Drywall &amp; paint</option><option>Furniture assembly</option><option>TV / wall mounting</option><option>Door &amp; lock repair</option><option>Seasonal maintenance</option><option>Membership plan</option><option>Something else</option></select></div>
+        <div><label class="f-label">When?</label><select class="f-input"><option>As soon as possible</option><option>This week</option><option>Next week</option><option>Flexible / not urgent</option><option>Emergency (24/7)</option></select></div>
+      </div>
+      <div><label class="f-label">Describe the job</label><textarea class="f-input" rows="3" style="resize:vertical" placeholder="e.g. dripping kitchen faucet + two pictures to hang"></textarea></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg">Request my booking <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      <div style="text-align:center;font-family:var(--fm);font-size:11px;color:var(--faint)">Insured pros &middot; upfront pricing &middot; satisfaction guaranteed</div>
+    </form></div>
+  </div></div></section>
+</div>
+
+</main>
+
+<!-- ====== SUPPLEMENTAL CSS (subpages + widgets) ====== -->
+<style>
+.svc-detail{padding:26px 24px;height:100%;display:flex;flex-direction:column;border-radius:var(--rc);transition:transform .25s,box-shadow .25s}
+.svc-detail:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.svc-ic{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;color:var(--accent);background:var(--bg);box-shadow:var(--inset-sm);margin-bottom:16px}
+.svc-h{font-family:var(--fd);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.svc-p{color:var(--muted);font-size:14px;line-height:1.6;margin-top:9px;flex:1}
+.svc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--fm);font-size:12px;color:var(--faint)}
+.svc-price{color:var(--emerald);font-weight:600}
+.flow.vflow{display:flex;flex-direction:column;gap:14px}
+.flow.vflow .flow-step{display:flex;gap:16px;align-items:flex-start;text-align:left;padding:18px 20px}
+.flow.vflow .flow-num{flex:0 0 auto;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:16px;color:#fff;background:var(--accent);box-shadow:0 6px 16px -6px var(--accent)}
+.fs-h{font-family:var(--fd);font-weight:700;font-size:16px}
+.fs-p{color:var(--muted);font-size:13.5px;line-height:1.55;margin-top:4px}
+.form-ok{text-align:center;padding:clamp(28px,4vw,40px);border-radius:var(--rc);background:var(--bg);box-shadow:var(--shadow);animation:okPop .5s cubic-bezier(.16,1,.3,1)}
+.bottom-nav{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.form-ok-ic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;margin:0 auto;color:#fff;background:var(--emerald);box-shadow:0 10px 24px -8px var(--emerald)}
+@keyframes okPop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+</style>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container" style="padding-block:clamp(54px,7vw,80px)">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="logo" data-page="home" aria-label="FixHaus home"><span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><span class="logo-text" style="color:#fff">Fix<span style="color:var(--accent-t)">Haus</span></span></a>
+        <p class="ft-desc">Your home's on-demand maintenance team. One dashboard for every repair, install and tune-up &mdash; vetted pros, upfront pricing, same-week slots.</p>
+        <form class="ft-nl" aria-label="Newsletter signup">
+          <input type="email" required placeholder="Email for home-care tips" aria-label="Email"/>
+          <button type="submit" aria-label="Subscribe"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
+      </div>
+      <div>
+        <div class="ft-col-h">Services</div>
+        <div class="ft-links">
+          <a href="#services" class="ft-link" data-page="services">Plumbing repair</a>
+          <a href="#services" class="ft-link" data-page="services">Electrical &amp; fixtures</a>
+          <a href="#services" class="ft-link" data-page="services">Drywall &amp; paint</a>
+          <a href="#services" class="ft-link" data-page="services">Furniture assembly</a>
+          <a href="#services" class="ft-link" data-page="services">TV &amp; wall mounting</a>
+          <a href="#services" class="ft-link" data-page="services">Seasonal maintenance</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Membership</div>
+        <div class="ft-links">
+          <a href="#plans" class="ft-link" data-page="plans">Basic Home Care</a>
+          <a href="#plans" class="ft-link" data-page="plans">Pro Maintenance</a>
+          <a href="#plans" class="ft-link" data-page="plans">Total Home Protection</a>
+          <a href="#home" class="ft-link" data-page="home" data-scroll="healthscore">Home Health Score</a>
+          <a href="#home" class="ft-link" data-page="home" data-scroll="estimator">Job Estimator</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Company</div>
+        <div class="ft-links">
+          <a href="#projects" class="ft-link" data-page="projects">Projects</a>
+          <a href="#reviews" class="ft-link" data-page="reviews">Reviews</a>
+          <a href="#contact" class="ft-link" data-page="contact">Contact</a>
+          <a href="#book" class="ft-link" data-page="book">Book a Handyman</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Contact</div>
+        <div class="ft-links">
+          <a href="tel:+15125550150" class="ft-link">(512) 555-0150</a>
+          <a href="mailto:hello@fixhaus.com" class="ft-link">hello@fixhaus.com</a>
+          <span class="ft-link" style="cursor:default">Mon&ndash;Sat 7am&ndash;8pm</span>
+          <span class="ft-link" style="cursor:default">Emergency line 24/7</span>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div class="ft-copy"><span>&copy; <span class="yr">2026</span> FixHaus Home Services.</span><span>All rights reserved.</span></div>
+      <div class="ft-legal">Built &amp; Maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener" class="ft-brand">GrowrixOS</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== BOTTOM NAV (mobile) ====== -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <a href="tel:+15125550150" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+  <a href="#services" class="bn-item" data-page="services"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Services</a>
+  <a href="#book" class="bn-item" data-page="book"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book</a>
+  <a href="#plans" class="bn-item" data-page="plans"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.91 8.84 8.56 21.18a4.2 4.2 0 0 1-5.94-5.94L14.96 2.9a3 3 0 0 1 4.24 4.24l-9.9 9.9"/></svg>Plans</a>
+  <button class="bn-item" id="bn-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>Menu</button>
+</nav>
+
+<!-- ====== AI ASSISTANT PANEL ====== -->
+<div class="ai-panel" id="ai-panel" role="dialog" aria-label="FixHaus assistant" aria-hidden="true">
+  <div class="ai-head"><div class="ai-av"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></div><div><div style="font-weight:700;font-size:15px">FixHaus Assistant</div><div style="font-size:11.5px;opacity:.85">Ask about any home repair</div></div><button id="ai-close" aria-label="Close assistant" style="margin-left:auto;color:#fff;opacity:.85"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="ai-body" id="ai-body"><div class="ai-msg bot">Hi! I'm the FixHaus assistant. Tell me what's going on at home and I'll point you to the right service, time estimate, or booking. 🔧</div></div>
+  <div class="ai-chips" id="ai-chips">
+    <button class="ai-chip" data-q="My faucet is leaking">Leaky faucet</button>
+    <button class="ai-chip" data-q="I need a TV mounted">Mount my TV</button>
+    <button class="ai-chip" data-q="What does a plan cost?">Plan pricing</button>
+    <button class="ai-chip" data-q="How soon can someone come?">Availability</button>
+  </div>
+  <form class="ai-foot" id="ai-form"><input id="ai-input" placeholder="Type your question..." aria-label="Message"/><button class="ai-send" type="submit" aria-label="Send"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></form>
+</div>
+
+<!-- ====== FAB ====== -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fab-opts">
+    <button class="fab-opt top" id="fab-top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <button class="fab-opt ai" id="fab-ai" aria-label="AI assistant"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg><span class="fab-tip">Ask FixHaus AI</span></button>
+    <a href="https://wa.me/15125550150" target="_blank" rel="noopener" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1A7.93 7.93 0 0 0 12 19.9a7.95 7.95 0 0 0 5.6-13.6zM12 18.5a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25A6.59 6.59 0 1 1 12 18.5zm3.61-4.94c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.39 5.39 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.08a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.6-1.46s-.32-.34-.44-.34h-.38a.72.72 0 0 0-.52.24 2.2 2.2 0 0 0-.68 1.64A3.83 3.83 0 0 0 8.6 12a8.7 8.7 0 0 0 3.33 2.94c1.96.85 1.96.57 2.32.53a2 2 0 0 0 1.32-.93 1.64 1.64 0 0 0 .11-.93c-.05-.08-.18-.13-.38-.23z"/></svg><span class="fab-tip">WhatsApp us</span></a>
+    <a href="tel:+15125550150" class="fab-opt call" aria-label="Call"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Call now</span></a>
+  </div>
+  <button class="fab-main" id="fab-main" aria-label="Quick actions" aria-expanded="false"><svg id="fab-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var doc=document, root=doc.documentElement;
+  var SUN='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+  var MOON='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>';
+
+  /* ---------- THEME ---------- */
+  var themeBtns=[].slice.call(doc.querySelectorAll('.theme-btn'));
+  function applyTheme(t){
+    root.setAttribute('data-theme',t);
+    themeBtns.forEach(function(b){ b.innerHTML = t==='dark'?SUN:MOON; });
+    try{ localStorage.setItem('fh-theme',t); }catch(e){}
+  }
+  (function initTheme(){
+    var saved;
+    try{ saved=localStorage.getItem('fh-theme'); }catch(e){}
+    if(!saved){ saved=(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light'; }
+    applyTheme(saved);
+  })();
+  themeBtns.forEach(function(b){ b.addEventListener('click',function(){ applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'); }); });
+
+  /* ---------- NAVBAR SCROLL ---------- */
+  var navbar=doc.getElementById('navbar');
+  var bottomNav=doc.getElementById('bottom-nav');
+  var lastY=window.pageYOffset;
+  function onScroll(){
+    var y=window.pageYOffset;
+    if(navbar) navbar.classList.toggle('scrolled', y>10);
+    // bottom nav auto-hide on scroll down
+    if(bottomNav){
+      if(y>lastY && y>240){ bottomNav.style.transform='translateY(140%)'; }
+      else { bottomNav.style.transform='translateY(0)'; }
+    }
+    // FAB back-to-top visibility
+    var top=doc.getElementById('fab-top');
+    if(top) top.style.display = y>500?'grid':'none';
+    lastY=y;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* ---------- DRAWER ---------- */
+  var drawer=doc.getElementById('drawer');
+  function openDrawer(){ if(drawer){ drawer.classList.add('open'); doc.body.style.overflow='hidden'; } }
+  function closeDrawer(){ if(drawer){ drawer.classList.remove('open'); doc.body.style.overflow=''; } }
+  var ham=doc.getElementById('hamburger'); if(ham) ham.addEventListener('click',openDrawer);
+  var dc=doc.getElementById('drawer-close'); if(dc) dc.addEventListener('click',closeDrawer);
+  var bnMenu=doc.getElementById('bn-menu'); if(bnMenu) bnMenu.addEventListener('click',openDrawer);
+  doc.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeDrawer(); closeAI(); } });
+
+  /* ---------- REVEAL ---------- */
+  var revealObs;
+  function observeReveals(scope){
+    var els=(scope||doc).querySelectorAll('.reveal:not(.in)');
+    if(!('IntersectionObserver' in window)){ [].forEach.call(els,function(el){el.classList.add('in');}); return; }
+    if(!revealObs){
+      revealObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){
+            var d=parseInt(en.target.getAttribute('data-d')||'0',10);
+            setTimeout(function(){ en.target.classList.add('in'); }, d);
+            revealObs.unobserve(en.target);
+          }
+        });
+      },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    }
+    [].forEach.call(els,function(el){ revealObs.observe(el); });
+  }
+
+  /* ---------- COUNTERS ---------- */
+  function countUp(el){
+    var target=parseFloat(el.getAttribute('data-counter'))||0;
+    var dec=(target%1!==0)?1:0;
+    var start=null, dur=1600;
+    function step(ts){
+      if(!start) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var eased=1-Math.pow(1-p,3);
+      var val=target*eased;
+      el.textContent = dec? val.toFixed(1) : Math.floor(val).toLocaleString();
+      if(p<1) requestAnimationFrame(step); else el.textContent= dec? target.toFixed(1): target.toLocaleString();
+    }
+    requestAnimationFrame(step);
+  }
+  var counterObs;
+  function observeCounters(scope){
+    var els=(scope||doc).querySelectorAll('[data-counter]');
+    if(!('IntersectionObserver' in window)){ [].forEach.call(els,function(el){countUp(el);}); return; }
+    if(!counterObs){
+      counterObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ countUp(en.target); counterObs.unobserve(en.target); } });
+      },{threshold:.5});
+    }
+    [].forEach.call(els,function(el){ if(!el.dataset.counted){ el.dataset.counted='1'; counterObs.observe(el); } });
+  }
+
+  /* ---------- OPTION CHIP GROUPS (shared) ---------- */
+  function wireGroup(group, onChange){
+    var multi=group.getAttribute('data-multi')==='1';
+    group.addEventListener('click',function(e){
+      var chip=e.target.closest('.chip'); if(!chip||!group.contains(chip)) return;
+      if(multi){ chip.classList.toggle('on'); }
+      else { [].forEach.call(group.querySelectorAll('.chip'),function(c){c.classList.remove('on');}); chip.classList.add('on'); }
+      onChange();
+    });
+  }
+  function sel(group){ return group?group.querySelector('.chip.on'):null; }
+
+  /* ---------- ESTIMATOR ---------- */
+  (function(){
+    var est=doc.getElementById('estimator'); if(!est) return;
+    var gCat=est.querySelector('[data-group="cat"]'), gProp=est.querySelector('[data-group="prop"]'),
+        gUrg=est.querySelector('[data-group="urg"]'), gSize=est.querySelector('[data-group="size"]');
+    var oTime=doc.getElementById('est-time'), oRec=doc.getElementById('est-rec'),
+        oPrice=doc.getElementById('est-price'), oEta=doc.getElementById('est-eta');
+    var RATE=78, CALLOUT=39;
+    var RECS={plumbing:'FixHaus Plumbing Pro',electrical:'Licensed Electrical Pro',drywall:'Drywall & Paint Pro',assembly:'Assembly Specialist',mounting:'Mounting Specialist',doors:'Doors & Locks Pro',general:'General Handyman Pro'};
+    var ETAS={flexible:'Within 3&ndash;5 days',week:'This week',sameday:'Today',emergency:'Within ~2 hours'};
+    function calc(){
+      var c=sel(gCat),p=sel(gProp),u=sel(gUrg),s=sel(gSize);
+      if(!(c&&p&&u&&s)) return;
+      var base=parseFloat(c.getAttribute('data-h'))||2;
+      var pm=parseFloat(p.getAttribute('data-m'))||1;
+      var sm=parseFloat(s.getAttribute('data-m'))||1;
+      var hrs=base*pm*sm;
+      var lo=Math.max(0.5,hrs*0.85), hi=hrs*1.15;
+      oTime.innerHTML=lo.toFixed(1)+'&ndash;'+hi.toFixed(1)+' hrs';
+      oRec.textContent=RECS[c.getAttribute('data-v')]||'FixHaus Pro';
+      var surcharge=parseFloat(u.getAttribute('data-s'))||0;
+      var pLo=Math.round((lo*RATE+CALLOUT+surcharge)/10)*10;
+      var pHi=Math.round((hi*RATE+CALLOUT+surcharge)/10)*10;
+      oPrice.innerHTML='$'+pLo+'&ndash;$'+pHi;
+      oEta.innerHTML=ETAS[u.getAttribute('data-v')]||'This week';
+    }
+    [gCat,gProp,gUrg,gSize].forEach(function(g){ if(g) wireGroup(g,calc); });
+    calc();
+  })();
+
+  /* ---------- HOME HEALTH SCORE ---------- */
+  (function(){
+    var hs=doc.getElementById('healthscore'); if(!hs) return;
+    var gAge=hs.querySelector('[data-group="age"]'), gMaint=hs.querySelector('[data-group="maint"]'), gIssues=hs.querySelector('[data-group="issues"]');
+    var arc=doc.getElementById('gauge-arc'), nEl=doc.getElementById('score-n'),
+        band=doc.getElementById('score-band'), msg=doc.getElementById('score-msg');
+    var C=540; var animTimer;
+    function penFor(group){ var t=0; [].forEach.call(group.querySelectorAll('.chip.on'),function(c){ t+=parseFloat(c.getAttribute('data-pen'))||0; }); return t; }
+    function animateNum(to){
+      var from=parseInt(nEl.textContent,10)||0, start=null;
+      cancelAnimationFrame(animTimer);
+      function step(ts){ if(!start)start=ts; var p=Math.min((ts-start)/600,1); nEl.textContent=Math.round(from+(to-from)*p); if(p<1) animTimer=requestAnimationFrame(step); }
+      animTimer=requestAnimationFrame(step);
+    }
+    function calc(){
+      var pen=penFor(gAge)+penFor(gMaint)+penFor(gIssues);
+      var score=Math.max(0,Math.min(100,100-pen));
+      animateNum(score);
+      if(arc) arc.style.strokeDashoffset=(C-(C*score/100)).toFixed(1);
+      var color,label,text;
+      if(score>=85){ color='var(--emerald)'; label='Excellent shape'; text='Your home is in great shape. A light annual tune-up keeps it that way.'; }
+      else if(score>=70){ color='var(--emerald)'; label='Good condition'; text='Solid overall. A seasonal check or two will keep small issues from growing.'; }
+      else if(score>=50){ color='#F5A524'; label='Fair &mdash; needs attention'; text='A few things need looking at. Our Pro plan would catch these before they escalate.'; }
+      else { color='#F5455C'; label='Needs attention soon'; text='Several risk factors stacked up. We recommend a full inspection and the Total Home plan.'; }
+      if(arc) arc.style.stroke=color;
+      if(band){ band.style.color=color; band.innerHTML=label; }
+      if(msg) msg.innerHTML=text;
+    }
+    [gAge,gMaint,gIssues].forEach(function(g){ if(g) wireGroup(g,calc); });
+    calc();
+  })();
+
+  /* ---------- FILTERS (gallery + reviews) ---------- */
+  // gallery
+  (function(){
+    var bar=doc.querySelector('[data-group="filter"]'); if(!bar) return;
+    bar.addEventListener('click',function(e){
+      var chip=e.target.closest('.chip'); if(!chip) return;
+      [].forEach.call(bar.querySelectorAll('.chip'),function(c){c.classList.remove('on');}); chip.classList.add('on');
+      var val=chip.getAttribute('data-f');
+      [].forEach.call(doc.querySelectorAll('#proj-grid .proj-item'),function(it){
+        it.classList.toggle('hide', !(val==='all'||it.getAttribute('data-cat')===val));
+      });
+    });
+  })();
+  // reviews
+  (function(){
+    var bar=doc.querySelector('[data-group="rfilter"]'); if(!bar) return;
+    bar.addEventListener('click',function(e){
+      var chip=e.target.closest('.chip'); if(!chip) return;
+      [].forEach.call(bar.querySelectorAll('.chip'),function(c){c.classList.remove('on');}); chip.classList.add('on');
+      var val=chip.getAttribute('data-rf');
+      [].forEach.call(doc.querySelectorAll('#review-grid .review-item'),function(it){
+        it.classList.toggle('hide', !(val==='all'||it.getAttribute('data-rcat')===val));
+      });
+    });
+  })();
+
+  /* ---------- FORMS ---------- */
+  function handleForm(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(form.classList.contains('ft-nl')){
+        var inp=form.querySelector('input'); if(inp){ inp.value=''; inp.placeholder='Subscribed ✓'; } return;
+      }
+      var ok=doc.createElement('div');
+      ok.className='form-ok';
+      ok.setAttribute('role','status');
+      ok.innerHTML='<div class="form-ok-ic"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="font-family:var(--fd);font-weight:700;font-size:18px;margin-top:12px">Request received!</div><p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6">Thanks &mdash; a FixHaus coordinator will confirm your slot and send upfront pricing shortly.</p>';
+      form.replaceWith(ok);
+    });
+  }
+  [].forEach.call(doc.querySelectorAll('.lead-form, .ft-nl'),handleForm);
+
+  /* ---------- FAB ---------- */
+  var fabMain=doc.getElementById('fab-main'), fabOpts=doc.getElementById('fab-opts'), fabIcon=doc.getElementById('fab-icon');
+  var fabOpen=false;
+  function toggleFab(){
+    fabOpen=!fabOpen;
+    fabOpts.classList.toggle('open',fabOpen);
+    fabMain.classList.toggle('open',fabOpen);
+    fabMain.setAttribute('aria-expanded',fabOpen?'true':'false');
+    fabIcon.style.transform=fabOpen?'rotate(45deg)':'rotate(0)';
+  }
+  if(fabMain) fabMain.addEventListener('click',toggleFab);
+  var fabTop=doc.getElementById('fab-top');
+  if(fabTop) fabTop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ---------- AI PANEL ---------- */
+  var aiPanel=doc.getElementById('ai-panel'), aiBody=doc.getElementById('ai-body'), aiForm=doc.getElementById('ai-form'), aiInput=doc.getElementById('ai-input');
+  function openAI(){ if(aiPanel){ aiPanel.classList.add('open'); aiPanel.setAttribute('aria-hidden','false'); if(fabOpen) toggleFab(); setTimeout(function(){ aiInput&&aiInput.focus(); },300); } }
+  function closeAI(){ if(aiPanel){ aiPanel.classList.remove('open'); aiPanel.setAttribute('aria-hidden','true'); } }
+  var fabAI=doc.getElementById('fab-ai'); if(fabAI) fabAI.addEventListener('click',openAI);
+  var aiClose=doc.getElementById('ai-close'); if(aiClose) aiClose.addEventListener('click',closeAI);
+  function aiReply(q){
+    var t=q.toLowerCase(), r;
+    if(/leak|faucet|drip|plumb|toilet|drain/.test(t)) r="Sounds like a plumbing repair — typically 1–2 hours, starting around $120. Want me to open the booking form?";
+    else if(/tv|mount|shelf|hang|wall/.test(t)) r="TV & wall mounting is one of our fastest jobs — about an hour, from $99, cables hidden. I can get you booked.";
+    else if(/plan|member|price|cost|subscription/.test(t)) r="We have three plans: Basic ($19/mo), Pro ($39/mo, most popular) and Total Home Protection ($69/mo). All include inspections + member pricing.";
+    else if(/soon|when|available|today|emergency|fast/.test(t)) r="Most jobs get a same-week slot, same-day for urgent ones, and we run a 24/7 emergency line. Try the Job Estimator for an exact ETA.";
+    else if(/assembl|furniture|ikea|crib|desk/.test(t)) r="Furniture assembly runs about 1–2 hours from $90 — we bring the tools and take the boxes away.";
+    else if(/drywall|paint|hole|crack|patch/.test(t)) r="Drywall & paint repairs average 2–3 hours from $150, and we blend the patch so it disappears.";
+    else r="Got it! For anything from repairs to installs, the fastest path is the Job Estimator or a quick booking — want me to take you there?";
+    return r;
+  }
+  function aiPush(text,me){
+    var m=doc.createElement('div'); m.className='ai-msg '+(me?'me':'bot'); m.textContent=text;
+    aiBody.appendChild(m); aiBody.scrollTop=aiBody.scrollHeight;
+  }
+  function aiAsk(q){
+    aiPush(q,true);
+    setTimeout(function(){ aiPush(aiReply(q),false); },420);
+  }
+  var aiChips=doc.getElementById('ai-chips');
+  if(aiChips) aiChips.addEventListener('click',function(e){ var c=e.target.closest('.ai-chip'); if(c) aiAsk(c.getAttribute('data-q')); });
+  if(aiForm) aiForm.addEventListener('submit',function(e){ e.preventDefault(); var v=aiInput.value.trim(); if(!v) return; aiInput.value=''; aiAsk(v); });
+
+  /* ---------- YEAR ---------- */
+  [].forEach.call(doc.querySelectorAll('.yr'),function(el){ el.textContent=new Date().getFullYear(); });
+
+  /* ---------- SPA ROUTER ---------- */
+  var PAGES={
+    home:{el:'page-home',title:'FixHaus — Your Home\u2019s On-Demand Maintenance Team'},
+    services:{el:'page-services',title:'Services — FixHaus Handyman'},
+    projects:{el:'page-projects',title:'Projects — FixHaus Handyman'},
+    plans:{el:'page-plans',title:'Membership Plans — FixHaus Handyman'},
+    reviews:{el:'page-reviews',title:'Reviews — FixHaus Handyman'},
+    contact:{el:'page-contact',title:'Contact — FixHaus Handyman'},
+    book:{el:'page-book',title:'Book a Handyman — FixHaus'}
+  };
+  var navLinks=[].slice.call(doc.querySelectorAll('[data-page]'));
+  function setActiveNav(page){
+    [].forEach.call(doc.querySelectorAll('.nav-link'),function(l){ l.classList.toggle('active', l.getAttribute('data-page')===page && !l.getAttribute('data-scroll')); });
+    [].forEach.call(doc.querySelectorAll('.bn-item'),function(l){ l.classList.toggle('active', l.getAttribute('data-page')===page); });
+  }
+  function showPage(page,opts){
+    opts=opts||{};
+    if(!PAGES[page]) page='home';
+    [].forEach.call(doc.querySelectorAll('.spa-page'),function(p){ p.classList.remove('active'); });
+    var target=doc.getElementById(PAGES[page].el);
+    if(target){ target.classList.add('active'); }
+    doc.title=PAGES[page].title;
+    setActiveNav(page);
+    // re-run reveals + counters for the now-visible page
+    observeReveals(target||doc);
+    observeCounters(target||doc);
+    if(opts.scrollTo){
+      var s=doc.getElementById(opts.scrollTo);
+      if(s){ setTimeout(function(){ s.scrollIntoView({behavior:'smooth',block:'start'}); },60); return; }
+    }
+    if(!opts.noScroll) window.scrollTo({top:0,behavior:opts.instant?'auto':'smooth'});
+  }
+  function navigate(page,scrollTo){
+    var hash='#'+page;
+    if(location.hash!==hash){ history.pushState({page:page},'',hash); }
+    showPage(page,{scrollTo:scrollTo});
+  }
+  doc.addEventListener('click',function(e){
+    var a=e.target.closest('[data-page]'); if(!a) return;
+    var page=a.getAttribute('data-page');
+    if(!PAGES[page]) return;
+    e.preventDefault();
+    closeDrawer();
+    var scrollTo=a.getAttribute('data-scroll')||null;
+    navigate(page,scrollTo);
+  });
+  // in-page scroll links that aren't page changes (data-scroll without page change handled above; standalone)
+  doc.addEventListener('click',function(e){
+    var a=e.target.closest('[data-scroll]'); if(!a||a.getAttribute('data-page')) return;
+    var id=a.getAttribute('data-scroll'); var s=doc.getElementById(id);
+    if(s){ e.preventDefault(); closeDrawer(); s.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+  window.addEventListener('popstate',function(e){
+    var page=(e.state&&e.state.page)||(location.hash||'#home').replace('#','');
+    showPage(PAGES[page]?page:'home',{instant:true});
+  });
+
+  /* ---------- INIT ---------- */
+  function init(){
+    var initial=(location.hash||'#home').replace('#','');
+    if(!PAGES[initial]) initial='home';
+    showPage(initial,{instant:true,noScroll:true});
+    observeReveals(doc);
+    observeCounters(doc);
+    onScroll();
+  }
+  if(doc.readyState==='loading') doc.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>

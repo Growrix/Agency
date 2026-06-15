@@ -1,0 +1,51 @@
+---
+description: Mandatory anatomy and conventions for single-file HTML template websites
+globs: **/*.html
+alwaysApply: false
+---
+
+# Single-File HTML Standards
+
+Every delivered website is exactly one self-contained `.html` file in `sites/`, named `NN. site-name-website.html`.
+
+## Mandatory file anatomy (in order)
+
+1. `<!doctype html>` and `<html lang="en" data-theme="light">` (set `lang` appropriately)
+2. `<head>`:
+   - `<meta charset="utf-8">`, `<meta name="viewport" content="width=device-width, initial-scale=1">`
+   - `<title>` (50–60 chars, brand + value proposition)
+   - `<meta name="description">` (140–160 chars)
+   - Open Graph + Twitter card meta tags
+   - `<meta name="theme-color">` for light and dark via `media`
+   - Inline SVG favicon via data URI (`<link rel="icon" href="data:image/svg+xml,...">`)
+   - JSON-LD structured data (`<script type="application/ld+json">`) appropriate to the site type
+   - One single `<style>` block containing the entire stylesheet
+3. `<body>`:
+   - Skip link as first element: `<a class="skip-link" href="#main">Skip to content</a>`
+   - `<header>` with `<nav aria-label="Main">`
+   - `<main id="main">` containing `<section>` elements, each with an `id` and an HTML comment boundary: `<!-- ========== SECTION: Hero ========== -->`
+   - `<footer>`
+   - One single `<script>` block as the last child of `<body>` (no `src`, no `type="module"` needed)
+
+## CSS conventions
+
+- All design tokens as CSS custom properties in `:root`; dark theme overrides under `[data-theme="dark"]`, with a `prefers-color-scheme: dark` default for first paint
+- Order inside the `<style>` block: tokens → reset/base → utilities → components (alphabetical-ish) → sections → media queries are co-located with their component via `min-width` queries
+- BEM-style scoped class names: `.block`, `.block__element`, `.block--modifier`. No deep descendant selectors (max 2 levels), no `!important`, no inline styles except dynamic JS-driven values
+- Mobile-first: base = mobile; breakpoints only via `min-width`
+
+## JS conventions
+
+- Single IIFE or plain top-level script with `'use strict'`
+- One `init()` entry point invoked on `DOMContentLoaded`; it calls per-component initializers: `initNav()`, `initThemeToggle()`, `initScrollReveal()`, `initForms()`, etc.
+- No global leakage: everything inside the IIFE or namespaced under one `const app = {}`
+- Scroll reveals via `IntersectionObserver`; always guard animation with `window.matchMedia('(prefers-reduced-motion: reduce)')`
+- Event delegation where lists are involved; `defer`-like behavior is implicit since the script is at the end of `<body>`
+
+## Migration-ready structure
+
+The file must be trivially portable to React/Vue/Svelte later:
+
+- Each section is a self-contained component: its markup is contiguous, its classes are scoped to its block name, its JS lives in one `initX()` function
+- Comment boundaries (`<!-- ========== SECTION: X ========== -->` ... `<!-- ========== /SECTION: X ========== -->`) delimit every extractable component
+- No cross-section CSS or JS coupling other than shared tokens and utilities

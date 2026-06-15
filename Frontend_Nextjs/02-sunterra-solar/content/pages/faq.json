@@ -1,0 +1,37 @@
+{
+  "slug": "faq",
+  "title": "Frequently Asked Questions",
+  "description": "Everything you need to know about solar, STCs, CEC accreditation and the NEM.",
+  "hero": {
+    "title": "Frequently Asked Questions",
+    "lede": "Everything you need to know about solar, STCs, CEC accreditation and the NEM.",
+    "breadcrumb": "FAQ"
+  },
+  "prose": [
+    "<div class=\"faq\"><details><summary>How much do solar panels cost in Australia in 2026?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>A quality 6.6 kW residential system typically ranges from $5,500–$9,500 AUD after STC rebates, depending on panel tier, inverter brand, roof complexity and state.</p></div></details><details><summary>What are STCs and how do they reduce my price?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Small-scale Technology Certificates (STCs) are created when eligible solar is installed. Your retailer claims them upfront as a point-of-sale discount based on system size, postcode zone factor and deeming period under the RET.</p></div></details><details><summary>Do I need CEC accreditation?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Yes — only Clean Energy Council (CEC) accredited designers and installers can claim STCs and connect systems under Australian standards. Sunterra is fully CEC accredited.</p></div></details><details><summary>How long does installation take?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Most residential installs complete in 1–2 days after DNSP approval. From contract to switch-on, allow 4–8 weeks for approvals and inspection.</p></div></details><details><summary>Will solar work during a blackout?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Standard grid-tied systems shut down for safety. With a battery and backup gateway, essential or whole-home circuits can stay powered.</p></div></details><details><summary>What feed-in tariff will I get?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>FiTs vary by retailer and state across the NEM. We model export using current market rates and recommend retailers aligned with your usage.</p></div></details><details><summary>Is finance available?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Yes — Sunterra partners with Australian green loan providers offering $0 upfront options subject to approval.</p></div></details><details><summary>What warranty do you offer?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>25-year panel performance, 10–15 year inverter warranties, plus Sunterra's 10-year workmanship guarantee.</p></div></details><details><summary>Can I add a battery later?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Most systems can be retrofitted. We design with future AC coupling in mind.</p></div></details><details><summary>Do you service commercial sites?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Yes — from 10 kW cafés to 500 kW warehouses with NEM tariff analysis and three-phase connections.</p></div></details><details><summary>Which states do you install in?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>We install across NSW, VIC, QLD, SA, WA, TAS, NT and ACT with local CEC-accredited crews.</p></div></details><details><summary>How do I claim state battery rebates?</summary>",
+    "<div class=\"faq__answer\">",
+    "<p>Eligibility varies — Solar Victoria, NSW battery incentive and other programs have specific requirements we verify during your quote.</p></div></details></div>"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "main": [{ "label": "Home", "href": "/" }],
+  "footer": {
+    "company": [{ "label": "About", "href": "/about" }]
+  }
+}

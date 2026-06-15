@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growrixos — 150 Digital Business Cards · Master Plan</title>
+<style>
+:root {
+  --bg: #0b0b0d;
+  --bg2: #111114;
+  --bg3: #18181d;
+  --bg4: #1e1e25;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.11);
+  --text: #e0e0e8;
+  --text2: #8888a0;
+  --text3: #4a4a60;
+  --accent: #7c5cfc;
+  --accent2: #9b7dff;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --coral: #f97316;
+  --teal: #14b8a6;
+  --blue: #60a5fa;
+  --pink: #f472b6;
+  --red: #ef4444;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 32px 24px;
+}
+.header-inner { max-width: 1400px; margin: 0 auto; }
+.header-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(124,92,252,0.12); border: 1px solid rgba(124,92,252,0.28);
+  color: var(--accent2); border-radius: 100px; padding: 4px 14px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.header h1 {
+  font-size: 28px; font-weight: 800; color: #fff;
+  letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 8px;
+}
+.header p { color: var(--text2); font-size: 13.5px; max-width: 680px; }
+.stats-bar {
+  display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;
+}
+.stat-chip {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 7px 14px;
+  font-size: 12px; color: var(--text2);
+}
+.stat-chip strong { color: #fff; font-size: 16px; font-weight: 700; }
+
+/* ── CONTROLS ── */
+.controls-wrap {
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 12px 32px; position: sticky; top: 0; z-index: 100;
+}
+.controls-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+}
+.search-box {
+  position: relative; flex: 1; min-width: 200px; max-width: 360px;
+}
+.search-box input {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 8px 12px 8px 36px;
+  color: var(--text); font-size: 13px; outline: none;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box input::placeholder { color: var(--text3); }
+.search-icon {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  font-size: 14px; color: var(--text3); pointer-events: none;
+}
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.fbtn {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 7px; color: var(--text2); padding: 5px 11px;
+  font-size: 11.5px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; white-space: nowrap;
+}
+.fbtn:hover { border-color: var(--border2); color: var(--text); }
+.fbtn.on { background: rgba(124,92,252,0.12); border-color: rgba(124,92,252,0.35); color: var(--accent2); }
+.view-toggles { display: flex; gap: 4px; margin-left: auto; }
+.vtbtn {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text3); padding: 6px 10px;
+  font-size: 13px; cursor: pointer; transition: all 0.15s;
+}
+.vtbtn.on { color: var(--accent2); border-color: rgba(124,92,252,0.35); }
+.count-badge {
+  font-size: 11px; color: var(--text3);
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 5px 10px; white-space: nowrap;
+}
+
+/* ── MAIN ── */
+.main { max-width: 1400px; margin: 0 auto; padding: 24px 32px 60px; }
+
+/* ── SECTION DIVIDERS ── */
+.group-header {
+  display: flex; align-items: center; gap: 12px;
+  margin: 32px 0 14px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.group-icon { font-size: 18px; }
+.group-title { font-size: 14px; font-weight: 700; color: #fff; }
+.group-sub { font-size: 11.5px; color: var(--text3); margin-top: 1px; }
+.group-count {
+  margin-left: auto; font-size: 11px; font-weight: 700;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 100px; padding: 3px 10px; color: var(--text3);
+}
+
+/* ── CARD GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
+.cards-grid.list-view {
+  grid-template-columns: 1fr;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: default; position: relative; overflow: hidden;
+}
+.card:hover {
+  border-color: var(--border2);
+  box-shadow: 0 0 0 1px rgba(124,92,252,0.12);
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  border-radius: 12px 12px 0 0;
+  opacity: 0.7;
+}
+
+/* accent stripe colours by style-tag */
+.card[data-style="minimal"]::before    { background: #94a3b8; }
+.card[data-style="glassmorphism"]::before { background: linear-gradient(90deg,#60a5fa,#a78bfa); }
+.card[data-style="neubrutalism"]::before  { background: #facc15; }
+.card[data-style="neumorphism"]::before   { background: #c4b5fd; }
+.card[data-style="dark-luxury"]::before   { background: linear-gradient(90deg,#f59e0b,#d97706); }
+.card[data-style="bento"]::before         { background: linear-gradient(90deg,#22c55e,#16a34a); }
+.card[data-style="swiss-typography"]::before { background: #ef4444; }
+.card[data-style="retro-vintage"]::before  { background: linear-gradient(90deg,#d97706,#92400e); }
+.card[data-style="3d-perspective"]::before { background: linear-gradient(90deg,#8b5cf6,#6d28d9); }
+.card[data-style="organic-nature"]::before { background: linear-gradient(90deg,#4ade80,#16a34a); }
+.card[data-style="neon-cyberpunk"]::before { background: linear-gradient(90deg,#f0abfc,#c084fc); }
+.card[data-style="editorial-magazine"]::before { background: linear-gradient(90deg,#f87171,#dc2626); }
+.card[data-style="aurora-gradient"]::before { background: linear-gradient(90deg,#67e8f9,#818cf8,#f472b6); }
+.card[data-style="claymorphism"]::before   { background: linear-gradient(90deg,#fda4af,#fb923c); }
+.card[data-style="material-design"]::before{ background: #2196f3; }
+.card[data-style="art-deco"]::before       { background: linear-gradient(90deg,#d97706,#f59e0b); }
+.card[data-style="isometric"]::before      { background: linear-gradient(90deg,#38bdf8,#0284c7); }
+.card[data-style="dark-mode-pro"]::before  { background: linear-gradient(90deg,#1d4ed8,#7c3aed); }
+.card[data-style="handcrafted"]::before    { background: linear-gradient(90deg,#f97316,#ea580c); }
+.card[data-style="corporate-clean"]::before { background: #1e3a5f; }
+
+.card-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 10px; margin-bottom: 10px;
+}
+.card-num {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--text3); font-variant-numeric: tabular-nums;
+  white-space: nowrap; margin-top: 1px;
+}
+.card-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.3; flex: 1; }
+.card-filename {
+  font-size: 10px; color: var(--text3);
+  font-family: 'Courier New', monospace;
+  margin-top: 3px;
+}
+.card-desc { font-size: 11.5px; color: var(--text2); line-height: 1.5; margin-bottom: 12px; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  display: inline-flex; align-items: center;
+  font-size: 10px; padding: 2px 8px;
+  border-radius: 100px; font-weight: 600; border: 1px solid;
+  white-space: nowrap;
+}
+.tag-style   { color: var(--accent2); border-color: rgba(155,125,255,0.3); background: rgba(124,92,252,0.1); }
+.tag-industry{ color: var(--teal);    border-color: rgba(20,184,166,0.3);  background: rgba(20,184,166,0.08); }
+.tag-theme   { color: var(--amber);   border-color: rgba(245,158,11,0.3);  background: rgba(245,158,11,0.08); }
+.tag-priority{ color: var(--green);   border-color: rgba(34,197,94,0.3);   background: rgba(34,197,94,0.08); }
+.tag-new     { color: var(--pink);    border-color: rgba(244,114,182,0.3); background: rgba(244,114,182,0.08); }
+.tag-hot     { color: var(--coral);   border-color: rgba(249,115,22,0.3);  background: rgba(249,115,22,0.08); }
+.tag-price   { color: var(--blue);    border-color: rgba(96,165,250,0.3);  background: rgba(96,165,250,0.08); }
+
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.font-pair { font-size: 10.5px; color: var(--text3); }
+.font-pair span { color: var(--text2); }
+.price-badge {
+  font-size: 10.5px; font-weight: 700;
+  border-radius: 6px; padding: 2px 8px;
+}
+.price-budget { background: rgba(34,197,94,0.1); color: var(--green); }
+.price-mid    { background: rgba(96,165,250,0.1); color: var(--blue); }
+.price-premium{ background: rgba(245,158,11,0.1); color: var(--amber); }
+
+/* LIST VIEW OVERRIDES */
+.list-view .card {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  gap: 0 16px;
+  align-items: center;
+  padding: 12px 16px;
+}
+.list-view .card::before { width: 3px; height: 100%; top: 0; left: 0; border-radius: 12px 0 0 12px; }
+.list-view .card-left { display: flex; flex-direction: column; gap: 2px; }
+.list-view .card-mid { min-width: 0; }
+.list-view .card-right { display: flex; align-items: center; gap: 8px; }
+.list-view .card-desc { margin-bottom: 6px; }
+.list-view .card-footer { display: none; }
+.list-view .list-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* ── LEGEND ── */
+.legend {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 24px;
+  font-size: 11.5px; color: var(--text2);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── EMPTY STATE ── */
+.empty { text-align: center; padding: 60px 20px; color: var(--text3); }
+.empty big { font-size: 40px; display: block; margin-bottom: 12px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .header { padding: 20px; }
+  .controls-wrap { padding: 10px 16px; }
+  .main { padding: 16px 16px 60px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">⚡ Growrixos · Digital Products</div>
+    <h1>150 Digital Business Cards — Master Build Plan</h1>
+    <p>Complete production roadmap for all 150 digital business card HTML files. Every card has a unique design style, industry target, font pairing, color direction, and file name. Built with the 5-phase pipeline.</p>
+    <div class="stats-bar">
+      <div class="stat-chip">🃏 <strong>150</strong>&nbsp;Cards Total</div>
+      <div class="stat-chip">🎨 <strong>20</strong>&nbsp;Design Styles</div>
+      <div class="stat-chip">🏢 <strong>40+</strong>&nbsp;Industries</div>
+      <div class="stat-chip">💡 <strong>8</strong>&nbsp;Theme Families</div>
+      <div class="stat-chip">💰 <strong>$9–$49</strong>&nbsp;Price Range</div>
+      <div class="stat-chip">📁 <strong>Single-File</strong>&nbsp;HTML Output</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls-wrap">
+  <div class="controls-inner">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search cards, industries, styles…" oninput="filterCards()">
+    </div>
+    <div class="filters" id="styleFilters">
+      <button class="fbtn on" data-filter="all" onclick="setFilter('all',this,'style')">All Styles</button>
+      <button class="fbtn" data-filter="minimal" onclick="setFilter('minimal',this,'style')">Minimal</button>
+      <button class="fbtn" data-filter="glassmorphism" onclick="setFilter('glassmorphism',this,'style')">Glass</button>
+      <button class="fbtn" data-filter="neubrutalism" onclick="setFilter('neubrutalism',this,'style')">Neubrutal</button>
+      <button class="fbtn" data-filter="dark-luxury" onclick="setFilter('dark-luxury',this,'style')">Dark Luxury</button>
+      <button class="fbtn" data-filter="bento" onclick="setFilter('bento',this,'style')">Bento</button>
+      <button class="fbtn" data-filter="neon-cyberpunk" onclick="setFilter('neon-cyberpunk',this,'style')">Neon</button>
+      <button class="fbtn" data-filter="swiss-typography" onclick="setFilter('swiss-typography',this,'style')">Swiss</button>
+      <button class="fbtn" data-filter="retro-vintage" onclick="setFilter('retro-vintage',this,'style')">Retro</button>
+      <button class="fbtn" data-filter="aurora-gradient" onclick="setFilter('aurora-gradient',this,'style')">Aurora</button>
+      <button class="fbtn" data-filter="editorial-magazine" onclick="setFilter('editorial-magazine',this,'style')">Editorial</button>
+    </div>
+    <div class="view-toggles">
+      <button class="vtbtn on" id="btn-grid" onclick="setView('grid')">⊞</button>
+      <button class="vtbtn" id="btn-list" onclick="setView('list')">≡</button>
+    </div>
+    <span class="count-badge" id="count-badge">150 / 150</span>
+  </div>
+</div>
+
+<div class="main">
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div><span class="tag tag-style">Design Style</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div><span class="tag tag-industry">Industry</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span class="tag tag-theme">Theme</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span class="tag tag-priority">Build Priority</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span class="tag tag-price">Price Tier</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div><span class="tag tag-hot">🔥 High Demand</span></div>
+    <div class="legend-item" style="margin-left:auto; color:var(--text3); font-size:11px;">Click any card to copy filename</div>
+  </div>
+
+  <div class="cards-grid" id="cardsGrid"></div>
+  <div class="empty" id="emptyState" style="display:none">
+    <big>🔍</big>
+    <div style="color:var(--text2);font-size:14px;">No cards match your search.</div>
+    <div style="font-size:12px;margin-top:6px;">Try a different style, industry, or keyword.</div>
+  </div>
+</div>
+
+<script>
+const CARDS = [
+/* ══════════════════════════════════════════════════
+   GROUP 1 — MINIMAL & CLEAN (01–10)
+   ══════════════════════════════════════════════════ */
+{n:'01',group:'minimal-clean',title:'Pure White Minimal',file:'dbc-01-minimal-pure-white.html',style:'minimal',industry:'Freelancer / Consultant',theme:'Light',fonts:'Playfair Display + Inter',color:'White #FFFFFF · Charcoal #1a1a1a · Sage #6b7280',desc:'Ultra-clean white card with generous whitespace, serif name, hairline rule dividers. Timeless and professional.',tags:['minimal','light','freelancer','P1'],hot:true,price:'mid'},
+{n:'02',group:'minimal-clean',title:'Soft Cream Minimal',file:'dbc-02-minimal-cream.html',style:'minimal',industry:'Interior Designer',theme:'Light Warm',fonts:'Cormorant Garamond + Lato',color:'Cream #FAF8F5 · Warm Gray · Terracotta accent',desc:'Warm cream background, elegant serif, botanical-inspired thin border. Perfect for creative professionals.',tags:['minimal','warm','interior-design','P1'],price:'mid'},
+{n:'03',group:'minimal-clean',title:'Ink Black Minimal',file:'dbc-03-minimal-ink-black.html',style:'minimal',industry:'Photographer',theme:'Dark Minimal',fonts:'DM Serif Display + DM Sans',color:'Ink #0a0a0a · Off-white #f5f5f5 · White',desc:'Dead-simple dark card. Name in white serif on black. Email, phone below in small caps. No decoration.',tags:['minimal','dark','photography','P1'],hot:true,price:'budget'},
+{n:'04',group:'minimal-clean',title:'Grid Line Minimal',file:'dbc-04-minimal-grid-line.html',style:'minimal',industry:'Architect',theme:'Light + Grid',fonts:'Space Grotesk + Space Mono',color:'White · Light Gray #e5e7eb · Black',desc:'Subtle grid background (2px lines), monospace contact details, architectural precision. Hover reveals QR code.',tags:['minimal','grid','architecture','P2'],price:'mid'},
+{n:'05',group:'minimal-clean',title:'Two-Color Block Minimal',file:'dbc-05-minimal-two-color-block.html',style:'minimal',industry:'Brand Strategist',theme:'Dual Block',fonts:'Fraunces + Plus Jakarta Sans',color:'Cream + Deep Navy split layout',desc:'Card splits 60/40 into cream and navy. Name straddles the split. Classic two-tone block design.',tags:['minimal','split-color','branding','P1'],price:'mid'},
+{n:'06',group:'minimal-clean',title:'Japanese Minimalism',file:'dbc-06-minimal-japanese.html',style:'minimal',industry:'Zen / Wellness / Tea',theme:'Wabi-Sabi',fonts:'Noto Serif JP + Noto Sans',color:'Off-white #FAFAF8 · Ink #2d2d2d · Bamboo green',desc:'Inspired by Japanese meishi. Vertical text option, generous ma (negative space), subtle paper texture via CSS.',tags:['minimal','japanese','wellness','P2'],price:'mid'},
+{n:'07',group:'minimal-clean',title:'Single-Line Statement',file:'dbc-07-minimal-single-line.html',style:'minimal',industry:'Copywriter / Writer',theme:'Type-Driven',fonts:'Bebas Neue + IBM Plex Mono',color:'White · Black · One red dot accent',desc:'Entire card is typographic. Name in massive display type, single thin horizontal line, mono contact info. Bold.',tags:['minimal','type-driven','writing','P2'],price:'budget'},
+{n:'08',group:'minimal-clean',title:'Swiss Cross Minimal',file:'dbc-08-minimal-swiss-cross.html',style:'minimal',industry:'Graphic Designer',theme:'Swiss',fonts:'Helvetica Neue + Arial Narrow',color:'White · Red #E02020 · Black',desc:'Swiss International Style. Red cross mark as logo placeholder. Grid-locked layout, no decoration.',tags:['minimal','swiss','graphic-design','P1'],hot:true,price:'mid'},
+{n:'09',group:'minimal-clean',title:'Pastel Softcard',file:'dbc-09-minimal-pastel-soft.html',style:'minimal',industry:'Life Coach / Therapist',theme:'Soft Pastel',fonts:'Nunito + Source Serif 4',color:'Lavender #EDE9FE · Soft Plum text',desc:'Gentle pastels, rounded corners, soft shadow. Safe, inviting, professional for care-oriented industries.',tags:['minimal','pastel','coaching','P2'],price:'budget'},
+{n:'10',group:'minimal-clean',title:'Monochrome Gradient Fade',file:'dbc-10-minimal-mono-gradient.html',style:'minimal',industry:'UX Designer',theme:'Mono Gradient',fonts:'Outfit + Outfit',color:'Near-white to near-gray gradient bg',desc:'Single font family, gradient background fading from white to mist gray. Hover reveals expanded contact details.',tags:['minimal','gradient','ux-design','P1'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 2 — GLASSMORPHISM (11–20)
+   ══════════════════════════════════════════════════ */
+{n:'11',group:'glass',title:'Deep Ocean Glass',file:'dbc-11-glass-ocean.html',style:'glassmorphism',industry:'Tech Startup Founder',theme:'Dark Glass Blue',fonts:'Sora + Inter',color:'Deep blue gradient bg · frosted white panel',desc:'Frosted glass card floating on deep blue gradient. Blurred background particles. Name in bright white.',tags:['glass','dark','tech','P1'],hot:true,price:'mid'},
+{n:'12',group:'glass',title:'Purple Haze Glass',file:'dbc-12-glass-purple-haze.html',style:'glassmorphism',industry:'Music Producer / DJ',theme:'Dark Glass Purple',fonts:'Raleway + Rajdhani',color:'Purple #6D28D9 · Fuchsia · Glass white 15%',desc:'Vibrant purple-to-fuchsia gradient behind translucent frosted card. Pulsing glow ring on avatar circle.',tags:['glass','purple','music','P2'],hot:true,price:'mid'},
+{n:'13',group:'glass',title:'Sunset Glass Card',file:'dbc-13-glass-sunset.html',style:'glassmorphism',industry:'Event Planner / Host',theme:'Warm Glass',fonts:'Poppins + Poppins',color:'Coral-to-gold gradient · warm frosted glass',desc:'Warm sunset gradient beneath glass panel. Social icons glow on hover. Perfect for hospitality.',tags:['glass','warm','events','P2'],price:'mid'},
+{n:'14',group:'glass',title:'Emerald Forest Glass',file:'dbc-14-glass-emerald.html',style:'glassmorphism',industry:'Sustainability Consultant',theme:'Glass Green',fonts:'Josefin Sans + Josefin Serif',color:'Deep forest green · Emerald · Glass panel',desc:'Rich green gradient, frosted card, leaf-shaped decorative accents drawn in CSS. Eco-signal.',tags:['glass','green','sustainability','P2'],price:'mid'},
+{n:'15',group:'glass',title:'Arctic Frost Glass',file:'dbc-15-glass-arctic-frost.html',style:'glassmorphism',industry:'Data Analyst / Researcher',theme:'Cool Glass',fonts:'Space Grotesk + Source Code Pro',color:'Ice blue · Steel gray · Frosted ultra-white',desc:'Cold, clinical glass card for data-driven professionals. Animated number ticker counts stats on load.',tags:['glass','cool','data','P1'],price:'premium'},
+{n:'16',group:'glass',title:'Midnight Glass Luxury',file:'dbc-16-glass-midnight-luxury.html',style:'glassmorphism',industry:'Wealth Manager / Finance',theme:'Dark Luxury Glass',fonts:'Playfair Display + Montserrat',color:'Obsidian #080808 · Gold #D4AF37 · Glass',desc:'Ultra-premium feel. Gold foil-effect text, obsidian dark bg, glass panel with gold border glow.',tags:['glass','gold','finance','P1'],hot:true,price:'premium'},
+{n:'17',group:'glass',title:'Neon Glass Card',file:'dbc-17-glass-neon.html',style:'glassmorphism',industry:'Game Developer / Streamer',theme:'Neon Glass',fonts:'Orbitron + Exo 2',color:'Dark bg · Neon cyan #00FFFF · Glass 10% white',desc:'Neon glowing outlines on frosted dark panel. Scanline CSS overlay for retro-tech feel.',tags:['glass','neon','gaming','P2'],hot:true,price:'mid'},
+{n:'18',group:'glass',title:'Rose Quartz Glass',file:'dbc-18-glass-rose-quartz.html',style:'glassmorphism',industry:'Beauty / Makeup Artist',theme:'Feminine Glass',fonts:'Abril Fatface + Quicksand',color:'Blush #FFE4E1 · Rose #F43F5E · Soft glass',desc:'Feminine and luxurious. Soft rose gradient, delicate glass panel, rounded everything, sparkle accents.',tags:['glass','pink','beauty','P2'],price:'mid'},
+{n:'19',group:'glass',title:'Storm Glass',file:'dbc-19-glass-storm.html',style:'glassmorphism',industry:'Security Consultant / Lawyer',theme:'Dramatic Glass',fonts:'Bebas Neue + Inter',color:'Storm gray #1F2937 · Silver · Glass',desc:'Serious, dramatic. Gray storm gradient, silver glass panel, condensed heading. Authority and power.',tags:['glass','gray','legal','P1'],price:'mid'},
+{n:'20',group:'glass',title:'Holographic Glass',file:'dbc-20-glass-holographic.html',style:'glassmorphism',industry:'NFT Artist / Creative Tech',theme:'Holographic',fonts:'Raleway + Space Grotesk',color:'Shifting holo gradient · prismatic glass',desc:'CSS animated rainbow holographic shimmer on the card background. Unique, eye-catching, on-trend.',tags:['glass','holographic','art','P2'],hot:true,price:'premium'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 3 — NEUBRUTALISM (21–30)
+   ══════════════════════════════════════════════════ */
+{n:'21',group:'neubrut',title:'Classic Neubrut Yellow',file:'dbc-21-neubrut-classic-yellow.html',style:'neubrutalism',industry:'Creative Agency / Art Director',theme:'Bold Yellow',fonts:'Space Grotesk + Space Grotesk',color:'Yellow #FBBF24 · Black · White',desc:'The canonical neubrut card. Yellow fill, thick black 3px border, hard box-shadow offset, bold name.',tags:['neubrutalism','yellow','agency','P1'],hot:true,price:'budget'},
+{n:'22',group:'neubrut',title:'Neubrut Electric Coral',file:'dbc-22-neubrut-coral.html',style:'neubrutalism',industry:'Social Media Manager',theme:'Bold Coral',fonts:'Archivo Black + Archivo',color:'Coral #FF6B6B · Black · White',desc:'Coral-punched card. Stacked layout, oversized job title, offset black shadow. Young and energetic.',tags:['neubrutalism','coral','social-media','P1'],price:'budget'},
+{n:'23',group:'neubrut',title:'Neubrut Lime Punch',file:'dbc-23-neubrut-lime.html',style:'neubrutalism',industry:'App Developer / SaaS Founder',theme:'Bold Lime',fonts:'Barlow Condensed + Barlow',color:'Lime #84CC16 · Black · White',desc:'Lime green background, black chunky border, white info strip across bottom. Developer edge.',tags:['neubrutalism','lime','tech','P1'],price:'budget'},
+{n:'24',group:'neubrut',title:'Neubrut Blueprint',file:'dbc-24-neubrut-blueprint.html',style:'neubrutalism',industry:'Engineer / Product Manager',theme:'Blueprint',fonts:'Space Mono + Space Mono',color:'Blueprint blue #0047AB · White ink',desc:'Inverted neubrut — dark navy with white thick border and white offset shadow. Engineering precision.',tags:['neubrutalism','blue','engineering','P2'],price:'budget'},
+{n:'25',group:'neubrut',title:'Neubrut Magazine Cut',file:'dbc-25-neubrut-magazine.html',style:'neubrutalism',industry:'Journalist / Content Creator',theme:'Collage',fonts:'Anton + DM Sans',color:'Off-white · Marker black · Highlighter yellow accent',desc:'Newspaper column layout. Ransom-note headline style. Bold editorial energy.',tags:['neubrutalism','editorial','media','P2'],price:'budget'},
+{n:'26',group:'neubrut',title:'Neubrut Hot Pink',file:'dbc-26-neubrut-hot-pink.html',style:'neubrutalism',industry:'Fashion Designer / Stylist',theme:'Bold Pink',fonts:'Abril Fatface + Montserrat',color:'Hot pink #EC4899 · Black · White',desc:'Hot pink brutalist card. Diagonal name placement, thick border, hard shadow. Fashion-forward.',tags:['neubrutalism','pink','fashion','P1'],hot:true,price:'budget'},
+{n:'27',group:'neubrut',title:'Neubrut Checkerboard',file:'dbc-27-neubrut-checkerboard.html',style:'neubrutalism',industry:'Illustrator / Comic Artist',theme:'Pattern',fonts:'Boogaloo + Nunito',color:'Black & white checkerboard · One accent color',desc:'CSS checkerboard pattern background (background-image CSS trick). Super bold, playful, artistic.',tags:['neubrutalism','pattern','illustration','P2'],price:'budget'},
+{n:'28',group:'neubrut',title:'Neubrut Data Stats',file:'dbc-28-neubrut-stats.html',style:'neubrutalism',industry:'Growth Marketer / Analyst',theme:'Stats Bold',fonts:'Oswald + IBM Plex Sans',color:'Black bg · White · Neon green accent',desc:'Neubrut meets data dashboard. Key stat numbers displayed big (e.g. "8 Years", "200+ Clients") in a bold grid.',tags:['neubrutalism','stats','marketing','P2'],price:'mid'},
+{n:'29',group:'neubrut',title:'Neubrut Sticker Pack',file:'dbc-29-neubrut-sticker.html',style:'neubrutalism',industry:'Sticker Designer / Merch Creator',theme:'Sticker',fonts:'Fredoka One + Nunito',color:'Multiple bright fills, each section sticker-shaped',desc:'CSS-drawn sticker shapes with white outline and shadow. Each section is a different color sticker.',tags:['neubrutalism','sticker','creative','P2'],price:'budget'},
+{n:'30',group:'neubrut',title:'Neubrut Corporate Riot',file:'dbc-30-neubrut-corporate.html',style:'neubrutalism',industry:'Disruption Consultant / Startup',theme:'Anti-Corporate',fonts:'Kanit + Inter',color:'White bg · Orange #F97316 · Black',desc:'Neubrut take on the corporate card. Mocks the convention but stays readable. Great for startup founders.',tags:['neubrutalism','orange','startup','P1'],price:'budget'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 4 — DARK LUXURY (31–42)
+   ══════════════════════════════════════════════════ */
+{n:'31',group:'dark-luxury',title:'Obsidian Gold Executive',file:'dbc-31-dark-luxury-obsidian-gold.html',style:'dark-luxury',industry:'C-Suite Executive / CEO',theme:'Gold on Black',fonts:'Playfair Display + Cormorant Garamond',color:'Obsidian #080808 · Gold #D4AF37 · Champagne',desc:'Deep black with gold serif name. Champagne divider line. Animated gold shimmer on hover. Prestige.',tags:['dark-luxury','gold','executive','P1'],hot:true,price:'premium'},
+{n:'32',group:'dark-luxury',title:'Navy Brass Law Firm',file:'dbc-32-dark-luxury-navy-brass.html',style:'dark-luxury',industry:'Attorney / Law Firm Partner',theme:'Navy + Brass',fonts:'EB Garamond + Lato',color:'Deep navy #0c1425 · Brass #B5884C · White',desc:'Deep navy, brass accent lines, classical serif. Screams Ivy League credibility.',tags:['dark-luxury','navy','legal','P1'],hot:true,price:'premium'},
+{n:'33',group:'dark-luxury',title:'Platinum Silver Tech',file:'dbc-33-dark-luxury-platinum.html',style:'dark-luxury',industry:'CTO / Tech Executive',theme:'Platinum',fonts:'Exo 2 + Inter',color:'Near-black · Platinum #E5E4E2 · Electric blue',desc:'Dark card with platinum sheen effect. Name in platinum, subtle electric blue lines. High-tech executive.',tags:['dark-luxury','platinum','tech','P1'],price:'premium'},
+{n:'34',group:'dark-luxury',title:'Velvet Purple VIP',file:'dbc-34-dark-luxury-velvet.html',style:'dark-luxury',industry:'Events Director / VIP Host',theme:'Velvet Purple',fonts:'Cinzel + Raleway',color:'Deep plum #1a0a2e · Gold · White',desc:'Rich velvet purple feel. Gold outlined lettering, cinema-style layout. VIP, exclusive.',tags:['dark-luxury','purple','events','P2'],hot:true,price:'premium'},
+{n:'35',group:'dark-luxury',title:'Emerald Prestige',file:'dbc-35-dark-luxury-emerald.html',style:'dark-luxury',industry:'Private Equity / Investment',theme:'Emerald',fonts:'Spectral + Roboto',color:'Forest black · Emerald green #059669 · Cream',desc:'Deep dark green on near-black. Investment and growth color symbolism. Confident and composed.',tags:['dark-luxury','emerald','finance','P2'],price:'premium'},
+{n:'36',group:'dark-luxury',title:'Carbon Black Tech',file:'dbc-36-dark-luxury-carbon.html',style:'dark-luxury',industry:'Automotive / Engineering Exec',theme:'Carbon',fonts:'Rajdhani + Rajdhani',color:'Carbon gray gradient · White · Red accent',desc:'CSS carbon fiber texture pattern, white name in condensed sans. Masculine, precision, speed.',tags:['dark-luxury','carbon','automotive','P1'],hot:true,price:'premium'},
+{n:'37',group:'dark-luxury',title:'Rose Gold Feminine Luxury',file:'dbc-37-dark-luxury-rose-gold.html',style:'dark-luxury',industry:'Luxury Brand Consultant',theme:'Rose Gold',fonts:'Cormorant Garamond + Josefin Sans',color:'Charcoal #1c1c1e · Rose gold #B76E79 · Blush',desc:'Dark charcoal base, rose-gold accent typography. Feminine luxury. Delicate but powerful.',tags:['dark-luxury','rose-gold','luxury','P2'],hot:true,price:'premium'},
+{n:'38',group:'dark-luxury',title:'Midnight Oil Creative',file:'dbc-38-dark-luxury-midnight-oil.html',style:'dark-luxury',industry:'Art Director / Creative Director',theme:'Midnight Creative',fonts:'Fraunces + Plus Jakarta Sans',color:'Deep midnight #05070f · Amber · White',desc:'Deep dark card for creative directors. Amber name with slight glow. Minimal information, maximal style.',tags:['dark-luxury','amber','creative','P1'],price:'premium'},
+{n:'39',group:'dark-luxury',title:'Gunmetal Modern',file:'dbc-39-dark-luxury-gunmetal.html',style:'dark-luxury',industry:'Defense / Security Firm',theme:'Gunmetal',fonts:'Barlow Condensed + Barlow',color:'Gunmetal #2C3333 · Silver · White',desc:'Military-grade serious. Gunmetal gradient, condensed sans, silver underline rule. Authoritative.',tags:['dark-luxury','gunmetal','security','P2'],price:'premium'},
+{n:'40',group:'dark-luxury',title:'Noir Detective',file:'dbc-40-dark-luxury-noir.html',style:'dark-luxury',industry:'Private Investigator / Risk Analyst',theme:'Film Noir',fonts:'Oswald + Merriweather',color:'True black · Cream · Faded red',desc:'Film noir aesthetic. Sepia-toned type, vintage texture via CSS radial gradients, old photo feel.',tags:['dark-luxury','noir','investigation','P2'],price:'mid'},
+{n:'41',group:'dark-luxury',title:'Burgundy Premium',file:'dbc-41-dark-luxury-burgundy.html',style:'dark-luxury',industry:'Wine Consultant / Sommelier',theme:'Burgundy',fonts:'Libre Baskerville + Quattrocento',color:'Burgundy #4a0e1a · Gold serif · Cream',desc:'Deep burgundy, old-world serif, gold title. Perfect for wine, spirits, and gastronomy professionals.',tags:['dark-luxury','burgundy','hospitality','P2'],price:'premium'},
+{n:'42',group:'dark-luxury',title:'Stealth Black Premium',file:'dbc-42-dark-luxury-stealth.html',style:'dark-luxury',industry:'Executive Recruiter / Headhunter',theme:'Stealth',fonts:'Montserrat + Montserrat',color:'Matte black · White · Single teal accent',desc:'Near-invisible card. Name in white, role in tiny teal, everything else stripped away. Deliberate restraint.',tags:['dark-luxury','stealth','recruiting','P1'],price:'premium'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 5 — BENTO GRID (43–53)
+   ══════════════════════════════════════════════════ */
+{n:'43',group:'bento',title:'Classic 3-Cell Bento',file:'dbc-43-bento-3cell-classic.html',style:'bento',industry:'Product Designer',theme:'Light Bento',fonts:'Inter + Inter',color:'Light gray bg · White cards · Accent blobs',desc:'Three-cell bento: large name cell, medium bio cell, small contact cell. The classic bento pattern.',tags:['bento','light','product-design','P1'],hot:true,price:'mid'},
+{n:'44',group:'bento',title:'Dark Bento Dev Card',file:'dbc-44-bento-dark-dev.html',style:'bento',industry:'Software Developer',theme:'Dark Bento',fonts:'JetBrains Mono + Inter',color:'Dark #111 · Darker cells · Green accent',desc:'Dark bento with code-style elements. Terminal-green accent, monospace type, GitHub stats-style cells.',tags:['bento','dark','developer','P1'],hot:true,price:'mid'},
+{n:'45',group:'bento',title:'Colorful Tile Bento',file:'dbc-45-bento-colorful-tiles.html',style:'bento',industry:'UX/UI Designer',theme:'Color Bento',fonts:'Nunito + Nunito',color:'Each cell different pastel · White text',desc:'Each cell has its own pastel background. Skills tile, location tile, social tile, stats tile.',tags:['bento','colorful','design','P2'],hot:true,price:'mid'},
+{n:'46',group:'bento',title:'Bento Skill Dashboard',file:'dbc-46-bento-skills-dashboard.html',style:'bento',industry:'Freelance Developer / Designer',theme:'Skills Bento',fonts:'Space Grotesk + Space Mono',color:'Off-white · Skill tags with colors',desc:'Bento cells show skills as interactive tags, years of experience, and project count stats.',tags:['bento','skills','freelancer','P1'],price:'mid'},
+{n:'47',group:'bento',title:'Social Hub Bento',file:'dbc-47-bento-social-hub.html',style:'bento',industry:'Creator / Influencer',theme:'Social Bento',fonts:'Poppins + Inter',color:'Gradient bg · White frosted cells',desc:'Bento card with cells per platform: LinkedIn, Twitter/X, Instagram, YouTube, TikTok. Each cell = one platform.',tags:['bento','social','creator','P1'],hot:true,price:'mid'},
+{n:'48',group:'bento',title:'Bento Photographer Grid',file:'dbc-48-bento-photographer.html',style:'bento',industry:'Photographer / Videographer',theme:'Portfolio Bento',fonts:'DM Serif Display + DM Sans',color:'Dark bg · White · Amber accent',desc:'Portfolio-first bento. Large image cells (CSS gradient placeholder), small contact cells. Visual-first.',tags:['bento','photo','photography','P2'],price:'premium'},
+{n:'49',group:'bento',title:'Bento Startup Profile',file:'dbc-49-bento-startup.html',style:'bento',industry:'Startup Founder / CEO',theme:'Startup Bento',fonts:'Sora + Inter',color:'Off-white · Lime green accent · Navy',desc:'Startup-style bento. Company name large, role, key metrics (MRR, team size, founded year) as stat cells.',tags:['bento','startup','founder','P2'],hot:true,price:'mid'},
+{n:'50',group:'bento',title:'Bento Creative Director',file:'dbc-50-bento-creative-director.html',style:'bento',industry:'Creative Director / Art Director',theme:'Bold Color Bento',fonts:'Fraunces + Plus Jakarta Sans',color:'Yellow · Red · Black · White cells',desc:'High-contrast bento with primary colors. Mondrian-inspired grid. Unmissable in a stack of cards.',tags:['bento','primary-colors','creative','P1'],price:'premium'},
+{n:'51',group:'bento',title:'Bento Academic Profile',file:'dbc-51-bento-academic.html',style:'bento',industry:'Professor / Researcher',theme:'Academic Bento',fonts:'Merriweather + Source Sans 3',color:'Warm white · Blue accent · Serif type',desc:'Clean academic profile. Publication count, institution, research area, office hours — all in cells.',tags:['bento','academic','education','P2'],price:'budget'},
+{n:'52',group:'bento',title:'Bento Wellness Coach',file:'dbc-52-bento-wellness.html',style:'bento',industry:'Life Coach / Wellness Expert',theme:'Soft Bento',fonts:'Quicksand + Nunito',color:'Sage green · Peach · White cells',desc:'Soft, rounded bento with wellness vibe. Booking link cell, philosophy quote cell, service cells.',tags:['bento','soft','wellness','P2'],price:'mid'},
+{n:'53',group:'bento',title:'Bento Finance Dashboard',file:'dbc-53-bento-finance.html',style:'bento',industry:'Financial Advisor / CFP',theme:'Data Bento',fonts:'IBM Plex Sans + IBM Plex Mono',color:'Navy · Steel gray · White cells',desc:'Data-style bento. Certifications cell, years experience, specialties, contact. Numbers large and clear.',tags:['bento','finance','data','P1'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 6 — SWISS / INTERNATIONAL TYPOGRAPHIC (54–63)
+   ══════════════════════════════════════════════════ */
+{n:'54',group:'swiss',title:'Helvetica Red Grid',file:'dbc-54-swiss-helvetica-red.html',style:'swiss-typography',industry:'Graphic Designer / Print Designer',theme:'Swiss Red',fonts:'Inter + Inter',color:'White · Red #E02020 · Black',desc:'Classic Swiss grid. Red column on left, white main area. Name in Helvetica. Ruled lines every 24px.',tags:['swiss','red','graphic-design','P1'],hot:true,price:'mid'},
+{n:'55',group:'swiss',title:'Swiss Black Condensed',file:'dbc-55-swiss-black-condensed.html',style:'swiss-typography',industry:'Editorial Designer',theme:'Swiss Black',fonts:'Barlow Condensed + Barlow',color:'White · Black',desc:'Information in condensed vertical column. Huge weight contrast between name and contact. No color.',tags:['swiss','monochrome','editorial','P2'],price:'budget'},
+{n:'56',group:'swiss',title:'Swiss Postal Inspired',file:'dbc-56-swiss-postal.html',style:'swiss-typography',industry:'Logistics / Courier Service',theme:'Postal',fonts:'Archivo + Archivo Black',color:'Yellow #FFCD00 · Black · White',desc:'Swiss postal system inspiration. Yellow safety yellow, black bold type. Directional arrows as design elements.',tags:['swiss','yellow','logistics','P2'],price:'budget'},
+{n:'57',group:'swiss',title:'Swiss System Magazine',file:'dbc-57-swiss-system-mag.html',style:'swiss-typography',industry:'Magazine Editor / Publisher',theme:'Swiss Editorial',fonts:'Libre Franklin + Libre Baskerville',color:'White · Dark gray · Salmon accent',desc:'Multi-column Swiss layout. Section labels in small caps on the left column. Methodical, professional.',tags:['swiss','editorial','publishing','P2'],price:'mid'},
+{n:'58',group:'swiss',title:'Swiss Rules Only',file:'dbc-58-swiss-rules-only.html',style:'swiss-typography',industry:'Typographer / Type Designer',theme:'Rules',fonts:'Work Sans + Work Sans',color:'White · Black · No other colors',desc:'Pure typography. Horizontal rules as only decoration. Every decision justified by grid.',tags:['swiss','rules','typography','P2'],price:'budget'},
+{n:'59',group:'swiss',title:'International Style Blue',file:'dbc-59-swiss-international-blue.html',style:'swiss-typography',industry:'UN / NGO / International Affairs',theme:'International Blue',fonts:'Roboto + Roboto Condensed',color:'White · UN Blue #4B92DB · Black',desc:'Clean international style inspired by global organization design systems. Formal and neutral.',tags:['swiss','blue','international','P2'],price:'mid'},
+{n:'60',group:'swiss',title:'Swiss Bauhaus',file:'dbc-60-swiss-bauhaus.html',style:'swiss-typography',industry:'Industrial Designer / Product Design',theme:'Bauhaus',fonts:'Oswald + Open Sans',color:'Cream · Black · Red · Yellow',desc:'Bauhaus meets Swiss. Primary color blocks, geometric shapes, clean sans type. Historical and modern.',tags:['swiss','bauhaus','industrial','P1'],price:'mid'},
+{n:'61',group:'swiss',title:'Constructivist Grid',file:'dbc-61-swiss-constructivist.html',style:'swiss-typography',industry:'Political Campaign / Activist',theme:'Constructivist',fonts:'Exo + Exo 2',color:'Red · Black · White · Cream',desc:'Soviet constructivist poster energy applied to business card format. Diagonal type, red blocks, bold.',tags:['swiss','constructivist','political','P2'],price:'budget'},
+{n:'62',group:'swiss',title:'Swiss Pharmaceutical',file:'dbc-62-swiss-pharma.html',style:'swiss-typography',industry:'Pharmaceutical / Healthcare',theme:'Medical White',fonts:'DM Sans + DM Mono',color:'Clinical white · Blue #0056A0 · Gray',desc:'Clinical precision layout. Regulated-looking grid, small caps labels, zero decoration. Trust-first.',tags:['swiss','medical','healthcare','P1'],price:'mid'},
+{n:'63',group:'swiss',title:'Swiss Currency Clean',file:'dbc-63-swiss-currency.html',style:'swiss-typography',industry:'Financial Institution / Bank',theme:'Finance Grid',fonts:'Barlow + Barlow Condensed',color:'White · Navy · Gold rule',desc:'Bank-style card. Grid lock, gold thin rule as only flourish, crisp sans type. Institutional trust.',tags:['swiss','finance','banking','P1'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 7 — RETRO / VINTAGE (64–74)
+   ══════════════════════════════════════════════════ */
+{n:'64',group:'retro',title:'1970s Groovy Retro',file:'dbc-64-retro-70s-groovy.html',style:'retro-vintage',industry:'Music Band / Record Label',theme:'70s Groovy',fonts:'Righteous + Lato',color:'Mustard · Burnt orange · Brown · Cream',desc:'Swirling 70s organic shapes in CSS. Warm mustard and burnt orange. Wavy divider lines. Groovy energy.',tags:['retro','70s','music','P1'],hot:true,price:'budget'},
+{n:'65',group:'retro',title:'1920s Art Deco Revival',file:'dbc-65-retro-art-deco.html',style:'retro-vintage',industry:'Hotel / Fine Dining / Theatre',theme:'Art Deco',fonts:'Cinzel Decorative + Cormorant',color:'Cream · Gold · Black · Dark green',desc:'Golden age Art Deco. Fan patterns in CSS, gold outlined letters, geometric border frames.',tags:['retro','art-deco','hospitality','P1'],hot:true,price:'mid'},
+{n:'66',group:'retro',title:'1950s American Diner',file:'dbc-66-retro-50s-diner.html',style:'retro-vintage',industry:'Diner / Burger Restaurant',theme:'50s Diner',fonts:'Boogaloo + Fredoka One',color:'Red · Cream · Chrome silver · Turquoise',desc:'Classic 1950s americana. Checkerboard accents, retro neon sign feel, jukebox colors.',tags:['retro','50s','food-service','P2'],price:'budget'},
+{n:'67',group:'retro',title:'1980s Synthwave',file:'dbc-67-retro-80s-synthwave.html',style:'retro-vintage',industry:'80s Event / Retro Gaming',theme:'Synthwave',fonts:'Orbitron + Exo 2',color:'Dark purple · Magenta · Cyan · Grid lines',desc:'Retrowave aesthetic. Purple to pink gradient, cyan grid perspective lines, glowing text.',tags:['retro','80s','gaming','P1'],hot:true,price:'mid'},
+{n:'68',group:'retro',title:'Victorian Script',file:'dbc-68-retro-victorian.html',style:'retro-vintage',industry:'Antique Shop / Florist / Bookshop',theme:'Victorian',fonts:'Playfair Display + Lora',color:'Aged paper #FAF0E6 · Dark sepia · Burgundy',desc:'Victorian ornamental border patterns, flourish dividers, serif in multiple weights. Heritage feel.',tags:['retro','victorian','boutique','P2'],price:'mid'},
+{n:'69',group:'retro',title:'Western Outlaw',file:'dbc-69-retro-western.html',style:'retro-vintage',industry:'BBQ Restaurant / Ranch / Country',theme:'Western',fonts:'Rye + PT Serif',color:'Sand #D4A853 · Brown · Off-white',desc:'Wild west badge-style layout. Star shape in CSS, wanted poster typography, distressed text via CSS filter.',tags:['retro','western','food-service','P2'],price:'budget'},
+{n:'70',group:'retro',title:'Punk Zine Cut-Up',file:'dbc-70-retro-punk-zine.html',style:'retro-vintage',industry:'Tattoo Artist / Punk Band',theme:'Zine / Punk',fonts:'Special Elite + Courier New',color:'Newsprint #F5F0E8 · Black · Red stamp',desc:'DIY zine cut-and-paste energy. Rotated elements, typewriter font, red rubber stamp effect in CSS.',tags:['retro','punk','tattoo','P2'],hot:true,price:'budget'},
+{n:'71',group:'retro',title:'Mid-Century Modern',file:'dbc-71-retro-midcentury.html',style:'retro-vintage',industry:'Furniture Designer / Architect',theme:'Mid-Century',fonts:'Josefin Sans + Cormorant',color:'Teal #0D9488 · Warm orange · White · Wood brown',desc:'1950s-60s design sensibility. Atomic-age shape accents, period-accurate color palette, clean geometry.',tags:['retro','midcentury','interior-design','P1'],price:'mid'},
+{n:'72',group:'retro',title:'Polaroid Photo Card',file:'dbc-72-retro-polaroid.html',style:'retro-vintage',industry:'Photographer / Blogger',theme:'Polaroid',fonts:'Caveat + Nunito',color:'White · Polaroid off-white · Handwritten blue',desc:'CSS-rendered Polaroid frame as business card. Handwritten font, slightly rotated, instant photo aesthetic.',tags:['retro','polaroid','photography','P2'],hot:true,price:'budget'},
+{n:'73',group:'retro',title:'Cassette Tape Card',file:'dbc-73-retro-cassette.html',style:'retro-vintage',industry:'Music Teacher / Podcast Host',theme:'Cassette',fonts:'VT323 + Press Start 2P',color:'Plastic off-white · Black reels · Label color',desc:'CSS-drawn cassette tape shape as the card itself. Spools, label area, all pure HTML/CSS.',tags:['retro','cassette','music','P2'],hot:true,price:'mid'},
+{n:'74',group:'retro',title:'Retro Neon Sign',file:'dbc-74-retro-neon-sign.html',style:'retro-vintage',industry:'Bar / Club / Entertainment',theme:'Neon Sign',fonts:'Pacifico + Open Sans',color:'Dark charcoal · Hot pink neon · Electric blue',desc:'CSS neon glow text-shadow effect simulating real neon tubing. Bar/lounge instant atmosphere.',tags:['retro','neon','nightlife','P1'],hot:true,price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 8 — 3D & PERSPECTIVE (75–83)
+   ══════════════════════════════════════════════════ */
+{n:'75',group:'3d',title:'CSS 3D Flip Card',file:'dbc-75-3d-flip-card.html',style:'3d-perspective',industry:'Any / Universal',theme:'3D Flip',fonts:'Poppins + Inter',color:'Front: white · Back: navy',desc:'Classic CSS 3D flip on hover. Front shows name and role, back shows contact + QR code. Smooth perspective transform.',tags:['3d','flip','universal','P1'],hot:true,price:'mid'},
+{n:'76',group:'3d',title:'Floating Stacked Cards',file:'dbc-76-3d-stacked-float.html',style:'3d-perspective',industry:'Real Estate Agent',theme:'Stack 3D',fonts:'Raleway + Open Sans',color:'White · Shadow layers · Blue accent',desc:'Three stacked cards with CSS 3D offset. Hover separates the stack. Real estate "portfolio" visual metaphor.',tags:['3d','stack','real-estate','P1'],hot:true,price:'premium'},
+{n:'77',group:'3d',title:'Tilt Glass 3D',file:'dbc-77-3d-tilt-glass.html',style:'3d-perspective',industry:'Tech Product Manager',theme:'Tilt 3D',fonts:'Sora + Inter',color:'Dark bg · Frosted tilt panel',desc:'Mouse-following 3D tilt effect via JS CSS transform. Card tilts in perspective as you move mouse over it.',tags:['3d','tilt','tech','P1'],hot:true,price:'premium'},
+{n:'78',group:'3d',title:'Isometric Name Block',file:'dbc-78-3d-isometric-block.html',style:'isometric',industry:'Game Designer / 3D Artist',theme:'Isometric',fonts:'Space Mono + Space Grotesk',color:'Cyan · Blue · Dark · Light faces',desc:'CSS isometric box with name on front face, role on side face, contact on top face. Pure CSS 3D.',tags:['3d','isometric','gaming','P2'],hot:true,price:'premium'},
+{n:'79',group:'3d',title:'Origami Fold Card',file:'dbc-79-3d-origami.html',style:'3d-perspective',industry:'Paper Artist / Stationery Brand',theme:'Origami',fonts:'Zen Kaku Gothic + Noto Serif JP',color:'White · Cream · Soft shadows',desc:'CSS clip-path creates origami fold visual. Card appears to fold and unfold. Elegant and technical.',tags:['3d','origami','stationery','P2'],price:'premium'},
+{n:'80',group:'3d',title:'Parallax Depth Card',file:'dbc-80-3d-parallax.html',style:'3d-perspective',industry:'Cinematographer / Film Director',theme:'Parallax Depth',fonts:'Bebas Neue + Montserrat',color:'Dark · Multiple depth layers',desc:'Multiple layers move at different speeds on mouse move. Depth illusion without WebGL. Cinematic.',tags:['3d','parallax','film','P2'],price:'premium'},
+{n:'81',group:'3d',title:'Cube Business Card',file:'dbc-81-3d-cube.html',style:'3d-perspective',industry:'Industrial Designer',theme:'Cube 3D',fonts:'Exo + Rajdhani',color:'Dark · Cyan faces · Steel edges',desc:'CSS 3D cube that slowly rotates. Each face has different info: name, company, services, contact, social, quote.',tags:['3d','cube','industrial','P2'],price:'premium'},
+{n:'82',group:'3d',title:'Pop-Out Card',file:'dbc-82-3d-pop-out.html',style:'3d-perspective',industry:'Event Speaker / Keynote',theme:'Pop-Out',fonts:'Montserrat + Open Sans',color:'White · Navy · Coral accent',desc:'Elements appear to pop out of the card on hover using translateZ. Speaker name leaps forward.',tags:['3d','pop','speaking','P2'],price:'mid'},
+{n:'83',group:'3d',title:'Folded Corner Card',file:'dbc-83-3d-folded-corner.html',style:'3d-perspective',industry:'Book Author / Publisher',theme:'Dog-Ear',fonts:'Merriweather + Source Sans 3',color:'Cream · Dark · Gold fold',desc:'CSS folded corner effect (the classic dog-ear). Adds depth and physical-page feel. Book-world aesthetic.',tags:['3d','folded','publishing','P2'],price:'budget'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 9 — ORGANIC & NATURE (84–91)
+   ══════════════════════════════════════════════════ */
+{n:'84',group:'organic',title:'Botanical Leaf Card',file:'dbc-84-organic-botanical-leaf.html',style:'organic-nature',industry:'Florist / Botanist / Garden Center',theme:'Botanical',fonts:'Playfair Display + Nunito',color:'Forest green · Cream · Warm ivory',desc:'SVG leaf and botanical line-art shapes. Cream background, forest green type. Handcrafted feel.',tags:['organic','green','botanical','P1'],hot:true,price:'mid'},
+{n:'85',group:'organic',title:'Ocean Wave Card',file:'dbc-85-organic-ocean-wave.html',style:'organic-nature',industry:'Marine Biologist / Surfing / Yacht Club',theme:'Ocean',fonts:'Quicksand + Lato',color:'Ocean blue · Sand · Seafoam',desc:'CSS wave animation at bottom of card. Layered wave shapes. Name floats above the ocean.',tags:['organic','blue','ocean','P2'],hot:true,price:'mid'},
+{n:'86',group:'organic',title:'Desert Sand Textured',file:'dbc-86-organic-desert-sand.html',style:'organic-nature',industry:'Travel Agent / Adventure Tourism',theme:'Desert',fonts:'Josefin Sans + Raleway',color:'Sand dune #C4A882 · Terracotta · Dusty sky',desc:'Warm sandy tones, subtle noise texture via CSS, low horizon line divider. Adventure and warmth.',tags:['organic','warm','travel','P2'],price:'mid'},
+{n:'87',group:'organic',title:'Aurora Borealis Card',file:'dbc-87-organic-aurora.html',style:'aurora-gradient',industry:'Photographer / Traveller',theme:'Aurora',fonts:'Quicksand + Open Sans',color:'Deep night · Green · Purple · Pink aurora',desc:'Animated CSS gradient simulating aurora borealis. Dark sky card with drifting color bands.',tags:['organic','aurora','travel','P1'],hot:true,price:'premium'},
+{n:'88',group:'organic',title:'Wildflower Card',file:'dbc-88-organic-wildflower.html',style:'organic-nature',industry:'Wedding Planner / Florist',theme:'Wildflower',fonts:'Dancing Script + Lato',color:'Blush · Sage · Lavender',desc:'Delicate CSS-drawn wildflower illustrations, script name, soft layered pastels. Romantic and dreamy.',tags:['organic','floral','weddings','P2'],price:'mid'},
+{n:'89',group:'organic',title:'Mountain Peak Card',file:'dbc-89-organic-mountain.html',style:'organic-nature',industry:'Hiking Guide / Outdoor Instructor',theme:'Mountain',fonts:'Exo + Roboto',color:'Steel blue · Pine · Snow white',desc:'CSS mountain silhouette made of clip-path polygons. Altitude and clarity for outdoor brands.',tags:['organic','mountain','outdoor','P2'],price:'budget'},
+{n:'90',group:'organic',title:'Bamboo Zen Card',file:'dbc-90-organic-bamboo-zen.html',style:'organic-nature',industry:'Yoga Studio / Meditation Teacher',theme:'Zen Bamboo',fonts:'Zen Dots + Noto Serif',color:'Bamboo green · Ink black · White rice paper',desc:'Bamboo vertical lines in CSS, Japanese-influenced layout, calligraphy-style name in serif.',tags:['organic','zen','yoga','P2'],price:'mid'},
+{n:'91',group:'organic',title:'Rain Drop Card',file:'dbc-91-organic-raindrop.html',style:'organic-nature',industry:'Weather Scientist / Environmental NGO',theme:'Rain',fonts:'Roboto + Roboto Mono',color:'Steel gray · Blue · Rain white',desc:'Animated CSS raindrops falling behind frosted card. Environmental and data-driven feel.',tags:['organic','rain','environment','P2'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 10 — NEON CYBERPUNK (92–100)
+   ══════════════════════════════════════════════════ */
+{n:'92',group:'neon',title:'Cyberpunk Grid Neon',file:'dbc-92-neon-cyberpunk-grid.html',style:'neon-cyberpunk',industry:'Esports Player / Streamer',theme:'Cyberpunk',fonts:'Orbitron + Exo 2',color:'Black · Cyan #00FFFF · Magenta',desc:'Neon cyan and magenta on black. Diagonal grid lines, glitch text effect on name, scanlines overlay.',tags:['neon','cyberpunk','gaming','P1'],hot:true,price:'mid'},
+{n:'93',group:'neon',title:'Terminal Green Hacker',file:'dbc-93-neon-terminal-green.html',style:'neon-cyberpunk',industry:'Ethical Hacker / Penetration Tester',theme:'Terminal',fonts:'Source Code Pro + JetBrains Mono',color:'True black · Terminal green #00FF41',desc:'Pure terminal aesthetic. Green monospace on black. Cursor blinking animation. Boot-sequence intro.',tags:['neon','terminal','cybersecurity','P1'],hot:true,price:'mid'},
+{n:'94',group:'neon',title:'Vaporwave Pink Card',file:'dbc-94-neon-vaporwave.html',style:'neon-cyberpunk',industry:'Aesthetic Brand / Artist',theme:'Vaporwave',fonts:'Righteous + Space Grotesk',color:'Purple #2D1B69 · Pink #FF71CE · Cyan · White',desc:'Vaporwave color palette. Grid, palm tree silhouette, gradient sunset. Aesthetic brand nostalgia.',tags:['neon','vaporwave','creative','P2'],hot:true,price:'mid'},
+{n:'95',group:'neon',title:'Neon Tokyo Card',file:'dbc-95-neon-tokyo.html',style:'neon-cyberpunk',industry:'Japanese Restaurant / Izakaya',theme:'Neon Tokyo',fonts:'Noto Sans JP + Rajdhani',color:'Dark street black · Neon red · Neon gold',desc:'Tokyo night street signage energy. Multiple small neon-effect elements, Japanese characters accent.',tags:['neon','japanese','food-service','P2'],price:'mid'},
+{n:'96',group:'neon',title:'Electric Blue Agency',file:'dbc-96-neon-electric-blue.html',style:'neon-cyberpunk',industry:'Digital Agency / Performance Marketer',theme:'Electric',fonts:'Sora + Inter',color:'Near-black · Electric blue #00B4FC · White',desc:'Electric blue on near-black. Subtle animated pulse glow on key contact info. Confident and modern.',tags:['neon','blue','agency','P1'],hot:true,price:'mid'},
+{n:'97',group:'neon',title:'Glitch Art Card',file:'dbc-97-neon-glitch-art.html',style:'neon-cyberpunk',industry:'VJ / Glitch Artist / Digital Art',theme:'Glitch',fonts:'Exo + Space Mono',color:'Black · Cyan · Red · White offset',desc:'CSS glitch animation on name (RGB channel split effect). Unstable visual energy, glitch art aesthetic.',tags:['neon','glitch','art','P2'],hot:true,price:'mid'},
+{n:'98',group:'neon',title:'Crypto Blockchain Card',file:'dbc-98-neon-blockchain.html',style:'neon-cyberpunk',industry:'Crypto / Web3 / DeFi',theme:'Blockchain',fonts:'Space Grotesk + IBM Plex Mono',color:'Dark · Electric purple · Green hash',desc:'Blockchain-native feel. Hash string as decorative element, wallet-style address display, network nodes.',tags:['neon','crypto','web3','P2'],hot:true,price:'mid'},
+{n:'99',group:'neon',title:'Dark Matter Science',file:'dbc-99-neon-dark-matter.html',style:'neon-cyberpunk',industry:'Astrophysicist / Science Communicator',theme:'Space',fonts:'Rajdhani + Space Mono',color:'Space black · Star white · Nebula purple',desc:'Animated star-field CSS particles, nebula gradient, constellation connector lines between card elements.',tags:['neon','space','science','P2'],price:'mid'},
+{n:'100',group:'neon',title:'AI Neural Network Card',file:'dbc-100-neon-ai-neural.html',style:'neon-cyberpunk',industry:'AI Researcher / ML Engineer',theme:'Neural',fonts:'Space Grotesk + JetBrains Mono',color:'Dark · Cyan nodes · Purple connections',desc:'Animated neural network node connections in canvas/CSS. AI/ML researcher identity card.',tags:['neon','ai','tech','P1'],hot:true,price:'premium'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 11 — EDITORIAL / MAGAZINE (101–111)
+   ══════════════════════════════════════════════════ */
+{n:'101',group:'editorial',title:'Vogue-Inspired Editorial',file:'dbc-101-editorial-vogue.html',style:'editorial-magazine',industry:'Fashion Photographer / Stylist',theme:'High Fashion',fonts:'Playfair Display + Bodoni Moda',color:'White · Black · Shock red accent',desc:'Fashion magazine mastheads as inspiration. Name in massive display serif, role in tiny elegant caps.',tags:['editorial','fashion','high-end','P1'],hot:true,price:'premium'},
+{n:'102',group:'editorial',title:'Newspaper Front Page',file:'dbc-102-editorial-newspaper.html',style:'editorial-magazine',industry:'Journalist / News Anchor',theme:'Broadsheet',fonts:'Libre Baskerville + Source Serif 4',color:'Newsprint #F8F4ED · Black · Red rule',desc:'Broadsheet newspaper layout. Column rules, headline hierarchy, dateline, byline. Serious journalism.',tags:['editorial','newspaper','journalism','P1'],price:'mid'},
+{n:'103',group:'editorial',title:'Architectural Digest',file:'dbc-103-editorial-arch-digest.html',style:'editorial-magazine',industry:'Interior Architect / Designer',theme:'Architecture Mag',fonts:'Cormorant Garamond + Montserrat',color:'Warm white · Champagne · Charcoal',desc:'AD-inspired large image container (CSS gradient), refined typography, generous whitespace.',tags:['editorial','architecture','interior','P2'],price:'premium'},
+{n:'104',group:'editorial',title:'Scientific Journal',file:'dbc-104-editorial-science.html',style:'editorial-magazine',industry:'Academic / Medical Doctor / PhD',theme:'Journal',fonts:'Lora + IBM Plex Sans',color:'White · Academic blue · Black',desc:'Academic journal layout. Citation-style name with credentials. Grid structure, footnote-style contacts.',tags:['editorial','academic','science','P2'],price:'mid'},
+{n:'105',group:'editorial',title:'Tech Magazine Bold',file:'dbc-105-editorial-tech-mag.html',style:'editorial-magazine',industry:'Tech Journalist / Startup CTO',theme:'Tech Mag',fonts:'Barlow + Space Grotesk',color:'Dark · Vivid red · White',desc:'WIRED/VICE energy. Large bold pull-quote as name, tech-forward color blocking.',tags:['editorial','tech','media','P1'],hot:true,price:'mid'},
+{n:'106',group:'editorial',title:'Luxury Brand Editorial',file:'dbc-106-editorial-luxury-brand.html',style:'editorial-magazine',industry:'Luxury Brand Manager',theme:'Luxury Mag',fonts:'Didact Gothic + Cinzel',color:'Matte black · Cream · Gold hairline',desc:'Editorial luxury. Minimal words, large whitespace, gold hairline borders, display serif name.',tags:['editorial','luxury','branding','P1'],price:'premium'},
+{n:'107',group:'editorial',title:'Travel Magazine Card',file:'dbc-107-editorial-travel.html',style:'editorial-magazine',industry:'Travel Writer / Tourism Brand',theme:'Travel Mag',fonts:'Josefin Sans + Lora',color:'Warm white · Terracotta · Sky blue',desc:'Nat Geo-inspired. Location coordinates as design element, compass rose in CSS, warm earthy tones.',tags:['editorial','travel','tourism','P2'],price:'mid'},
+{n:'108',group:'editorial',title:'Music Festival Card',file:'dbc-108-editorial-festival.html',style:'editorial-magazine',industry:'Festival Producer / Live Events',theme:'Festival',fonts:'Anton + Bebas Neue',color:'Fluorescent yellow · Black · Hot pink',desc:'Festival poster typography adapted to card format. Oversized condensed type, bright hi-vis colors.',tags:['editorial','festival','events','P2'],hot:true,price:'mid'},
+{n:'109',group:'editorial',title:'Health Magazine Card',file:'dbc-109-editorial-health-mag.html',style:'editorial-magazine',industry:'Nutritionist / Personal Trainer',theme:'Health Mag',fonts:'Nunito + Source Serif 4',color:'Fresh green · White · Warm coral',desc:'Clean-eating magazine aesthetic. Fresh green, clean layout, health-focused messaging in card copy.',tags:['editorial','health','fitness','P2'],price:'mid'},
+{n:'110',group:'editorial',title:'Business Week Card',file:'dbc-110-editorial-business-week.html',style:'editorial-magazine',industry:'Business Consultant / MBA',theme:'Business Pub',fonts:'Libre Franklin + Libre Franklin',color:'Dark navy · Red rule · White',desc:'Business publication style. Bold column rules, tight information hierarchy, MBA-grade authority.',tags:['editorial','business','consulting','P1'],price:'mid'},
+{n:'111',group:'editorial',title:'Art Magazine Bleed',file:'dbc-111-editorial-art-mag.html',style:'editorial-magazine',industry:'Gallery Curator / Art Dealer',theme:'Art Pub',fonts:'EB Garamond + Oswald',color:'White · Deep black · Single vivid accent color',desc:'Full-bleed image concept (CSS gradient art). Art world sophistication. Name as artwork title.',tags:['editorial','art','gallery','P2'],price:'premium'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 12 — CLAYMORPHISM (112–117)
+   ══════════════════════════════════════════════════ */
+{n:'112',group:'clay',title:'Clay Soft Professional',file:'dbc-112-clay-soft-professional.html',style:'claymorphism',industry:'UX Designer / App Designer',theme:'Clay Pastel',fonts:'Nunito + Quicksand',color:'Soft lavender · White · Peach shadow',desc:'Inflated 3D soft shadow (thick multi-layer box-shadow). Pastel background. Friendly and modern.',tags:['claymorphism','pastel','design','P1'],hot:true,price:'mid'},
+{n:'113',group:'clay',title:'Clay Dark Mode',file:'dbc-113-clay-dark.html',style:'claymorphism',industry:'Mobile App Developer',theme:'Clay Dark',fonts:'Poppins + Inter',color:'Dark #1a1a2e · Purple clay · Blue glow shadow',desc:'Clay in dark mode. Inflated elements with dark glow shadows. Softer and friendlier than standard dark cards.',tags:['claymorphism','dark','mobile','P1'],price:'mid'},
+{n:'114',group:'clay',title:'Clay Kids Education',file:'dbc-114-clay-kids-education.html',style:'claymorphism',industry:'EdTech / Children\'s Brand',theme:'Clay Fun',fonts:'Fredoka One + Nunito',color:'Multi-color pastels · Clay shapes',desc:'Maximum playfulness. Clay-style bubbles and blobs as layout elements. Childlike joy with professionalism.',tags:['claymorphism','fun','education','P2'],price:'budget'},
+{n:'115',group:'clay',title:'Clay Health & Wellness',file:'dbc-115-clay-wellness.html',style:'claymorphism',industry:'Dietitian / Health App',theme:'Clay Green',fonts:'Nunito + Source Sans 3',color:'Fresh white · Mint · Clay green shadows',desc:'Health-forward soft clay. Pill-shaped elements, mint accents, ultra-soft shadow depths.',tags:['claymorphism','green','health','P2'],price:'mid'},
+{n:'116',group:'clay',title:'Clay Financial',file:'dbc-116-clay-financial.html',style:'claymorphism',industry:'Fintech Startup',theme:'Clay Blue',fonts:'Sora + DM Sans',color:'Light bg · Royal blue clay · White',desc:'Friendly finance. Clay style applied to a fintech card. Removes the cold from financial products.',tags:['claymorphism','blue','fintech','P2'],price:'mid'},
+{n:'117',group:'clay',title:'Clay E-Commerce',file:'dbc-117-clay-ecommerce.html',style:'claymorphism',industry:'E-Commerce Brand / Shopify Store',theme:'Clay Shop',fonts:'Nunito + Open Sans',color:'Warm white · Orange clay shadow · Cream',desc:'Shoppable-feeling card. Clay buttons, product-style layout, warm and trustworthy for e-commerce.',tags:['claymorphism','warm','ecommerce','P2'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 13 — AURORA / GRADIENT (118–125)
+   ══════════════════════════════════════════════════ */
+{n:'118',group:'aurora',title:'Northern Lights Aurora',file:'dbc-118-aurora-northern-lights.html',style:'aurora-gradient',industry:'Travel Photographer / Nordic Brand',theme:'Aurora',fonts:'Quicksand + Raleway',color:'Deep night · Teal · Purple · Pink aurora',desc:'Animated CSS aurora gradient. Slow-drifting hue-rotation bands. Dark sky card, white text.',tags:['aurora','animated','travel','P1'],hot:true,price:'premium'},
+{n:'119',group:'aurora',title:'Mesh Gradient Card',file:'dbc-119-aurora-mesh-gradient.html',style:'aurora-gradient',industry:'Creative Studio / Brand Agency',theme:'Mesh Gradient',fonts:'Outfit + Outfit',color:'Multi-point radial mesh gradients',desc:'CSS multi-radial-gradient mesh background. Trendy 2024-2025 mesh look. Clean text on complex bg.',tags:['aurora','mesh','agency','P1'],hot:true,price:'mid'},
+{n:'120',group:'aurora',title:'Sunset Gradient Warm',file:'dbc-120-aurora-sunset-warm.html',style:'aurora-gradient',industry:'Life Coach / Motivational Speaker',theme:'Sunset',fonts:'Raleway + Open Sans',color:'Peach · Coral · Golden yellow gradient',desc:'Warm sunset gradient behind centered card. Uplifting, positive, emotional pull.',tags:['aurora','warm','coaching','P2'],price:'mid'},
+{n:'121',group:'aurora',title:'Ocean Depth Gradient',file:'dbc-121-aurora-ocean-depth.html',style:'aurora-gradient',industry:'Marine Research / Oceanographer',theme:'Ocean Depth',fonts:'Josefin Sans + Lato',color:'Deep navy · Teal → Black gradient',desc:'Deep ocean color gradient from teal surface to black depth. Mysterious and scientific.',tags:['aurora','blue','science','P2'],price:'mid'},
+{n:'122',group:'aurora',title:'Rainbow Prism Card',file:'dbc-122-aurora-rainbow-prism.html',style:'aurora-gradient',industry:'Pride / LGBTQ+ Brand / Inclusive',theme:'Rainbow',fonts:'Nunito + Nunito',color:'Full rainbow gradient · White text · Clean',desc:'Tasteful rainbow gradient card. Vibrant but professional. Inclusive brand signal.',tags:['aurora','rainbow','inclusive','P2'],price:'budget'},
+{n:'123',group:'aurora',title:'Candy Gradient Card',file:'dbc-123-aurora-candy.html',style:'aurora-gradient',industry:'Confectionery / Dessert Brand',theme:'Candy',fonts:'Fredoka One + Nunito',color:'Pink · Lilac · Mint · Peach gradient',desc:'Pastel candy gradient. Playful but not juvenile. Sweet brand territory.',tags:['aurora','pastel','food-service','P2'],price:'budget'},
+{n:'124',group:'aurora',title:'Dark Galaxy Gradient',file:'dbc-124-aurora-dark-galaxy.html',style:'aurora-gradient',industry:'Astronomy / Space Tech',theme:'Galaxy',fonts:'Exo + Space Mono',color:'Space black · Purple · Deep blue galaxy',desc:'Galaxy color sweep. Deep indigo to near-black. Star-dust particle effect in CSS.',tags:['aurora','space','science','P2'],price:'premium'},
+{n:'125',group:'aurora',title:'Corporate Gradient Modern',file:'dbc-125-aurora-corporate.html',style:'aurora-gradient',industry:'Management Consulting / Big 4',theme:'Corporate Gradient',fonts:'Inter + DM Sans',color:'Navy → Royal blue gradient · White · Light gray',desc:'Professional gradient card. Not too wild. Navy-to-blue gradient gives freshness to a corporate card.',tags:['aurora','corporate','consulting','P1'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 14 — NEUMORPHISM (126–132)
+   ══════════════════════════════════════════════════ */
+{n:'126',group:'neumorphism',title:'Soft UI Neumorphic Light',file:'dbc-126-neumorphism-soft-light.html',style:'neumorphism',industry:'Product Designer / UI Designer',theme:'Soft UI Light',fonts:'Nunito + Poppins',color:'#E0E5EC base · Dark shadow · Light shadow',desc:'Classic neumorphism. Pressed and raised elements using dual-shadow technique. Light background.',tags:['neumorphism','light','design','P2'],price:'mid'},
+{n:'127',group:'neumorphism',title:'Dark Neumorphic',file:'dbc-127-neumorphism-dark.html',style:'neumorphism',industry:'Developer / Tech Product',theme:'Soft UI Dark',fonts:'DM Sans + DM Mono',color:'#1e1e2e base · Subtle dark neumorphism',desc:'Dark mode neumorphism. Subtler than light mode. Works better for tech and developer audiences.',tags:['neumorphism','dark','developer','P2'],price:'mid'},
+{n:'128',group:'neumorphism',title:'Neumorphic Finance',file:'dbc-128-neumorphism-finance.html',style:'neumorphism',industry:'Investment Advisor',theme:'Soft Finance',fonts:'IBM Plex Sans + IBM Plex Serif',color:'Silver-gray base · Navy shadow tone',desc:'Neumorphic applied to a finance card. Embossed number stats and certification labels.',tags:['neumorphism','finance','light','P2'],price:'mid'},
+{n:'129',group:'neumorphism',title:'Neumorphic Music Player',file:'dbc-129-neumorphism-music.html',style:'neumorphism',industry:'Music Producer / Sound Engineer',theme:'Soft Audio',fonts:'Raleway + Roboto Mono',color:'#2b2d42 dark · Neumorphic controls',desc:'Card styled like a physical audio device. Embossed buttons, VU meter visual, vinyl record element.',tags:['neumorphism','music','dark','P2'],price:'mid'},
+{n:'130',group:'neumorphism',title:'Neumorphic Wellness',file:'dbc-130-neumorphism-wellness.html',style:'neumorphism',industry:'Spa / Massage Therapist',theme:'Soft Wellness',fonts:'Nunito + Nunito',color:'Warm beige #F0EBE3 · Soft wellness neumorphism',desc:'Warm beige neumorphism. Soft shadows feel like pressed clay. Spa and wellness perfect fit.',tags:['neumorphism','wellness','warm','P2'],price:'mid'},
+{n:'131',group:'neumorphism',title:'Neumorphic Healthcare',file:'dbc-131-neumorphism-healthcare.html',style:'neumorphism',industry:'Doctor / Healthcare Provider',theme:'Medical Soft',fonts:'DM Sans + Source Serif 4',color:'Clinical white #F5F7FA · Blue accent neumorphism',desc:'Clinical soft UI. Embossed contact details, raised specialty tags. Modern medical feel.',tags:['neumorphism','healthcare','light','P1'],price:'mid'},
+{n:'132',group:'neumorphism',title:'Neumorphic Smart Home',file:'dbc-132-neumorphism-smart-home.html',style:'neumorphism',industry:'IoT / Smart Home Startup',theme:'Smart UI',fonts:'Poppins + Roboto',color:'Slate #DDE6EE · Smart blue accent',desc:'Smart device UI applied to a card. Embossed toggle elements, status indicators, device-app feel.',tags:['neumorphism','tech','iot','P2'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 15 — MATERIAL DESIGN (133–138)
+   ══════════════════════════════════════════════════ */
+{n:'133',group:'material',title:'Material 3 Light Card',file:'dbc-133-material-3-light.html',style:'material-design',industry:'Android Developer / Google Partner',theme:'Material You Light',fonts:'Roboto + Roboto',color:'Material surface #FFFBFE · Tonal primaries',desc:'Google Material Design 3 spec. Dynamic color tones, proper elevation levels, MD3 components.',tags:['material','light','android','P1'],hot:true,price:'mid'},
+{n:'134',group:'material',title:'Material 3 Dark Card',file:'dbc-134-material-3-dark.html',style:'material-design',industry:'Mobile Developer',theme:'Material You Dark',fonts:'Roboto + Roboto Condensed',color:'Material dark #141218 · Tonal dark surfaces',desc:'Material Design 3 dark theme. Tonal surface colors, MD3 dark elevation overlays.',tags:['material','dark','mobile','P1'],price:'mid'},
+{n:'135',group:'material',title:'Material Indigo Classic',file:'dbc-135-material-indigo.html',style:'material-design',industry:'Enterprise Software / B2B SaaS',theme:'Material Indigo',fonts:'Roboto + Roboto Slab',color:'Indigo #3F51B5 · White · Light gray',desc:'Classic Material 1/2 era styling. Indigo top bar, white content area, floating action-style accent.',tags:['material','indigo','enterprise','P2'],price:'budget'},
+{n:'136',group:'material',title:'Material Teal & Amber',file:'dbc-136-material-teal-amber.html',style:'material-design',industry:'Education App / EdTech',theme:'Material Teal',fonts:'Roboto + Roboto',color:'Teal #009688 · Amber #FFC107 · White',desc:'Teal primary and amber accent — the classic Material pair. Clean, cheerful, educational.',tags:['material','teal','education','P2'],price:'budget'},
+{n:'137',group:'material',title:'Material Deep Purple',file:'dbc-137-material-deep-purple.html',style:'material-design',industry:'Music App / Entertainment Platform',theme:'Material Purple',fonts:'Roboto + Roboto',color:'Deep Purple #673AB7 · Pink #E91E63',desc:'Deep purple with pink accent. Entertainment app energy within Material system.',tags:['material','purple','entertainment','P2'],price:'budget'},
+{n:'138',group:'material',title:'Material Red Branding',file:'dbc-138-material-red-brand.html',style:'material-design',industry:'Food Delivery / Restaurant Chain',theme:'Material Red',fonts:'Roboto + Roboto Condensed',color:'Red #F44336 · White · Light gray surface',desc:'High-energy Material red. Food delivery and QSR brand color territory. Bold and action-first.',tags:['material','red','food-service','P1'],price:'budget'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 16 — HANDCRAFTED / ILLUSTRATED (139–144)
+   ══════════════════════════════════════════════════ */
+{n:'139',group:'handcrafted',title:'Watercolor Splash Card',file:'dbc-139-hand-watercolor.html',style:'handcrafted',industry:'Watercolor Artist / Illustrator',theme:'Watercolor',fonts:'Caveat + Nunito',color:'Soft watercolor wash · Handwritten name',desc:'CSS box-shadow stacked technique simulates watercolor blob. Script name over color wash. Handmade soul.',tags:['handcrafted','watercolor','art','P2'],hot:true,price:'mid'},
+{n:'140',group:'handcrafted',title:'Chalkboard Card',file:'dbc-140-hand-chalkboard.html',style:'handcrafted',industry:'Teacher / Tutor / Educator',theme:'Chalkboard',fonts:'Caveat Brush + Nunito',color:'Slate #2C3E50 · Chalk white · Colorful chalk accents',desc:'CSS chalkboard texture. Handwritten text in chalk effect. Lines like a real classroom board.',tags:['handcrafted','chalk','education','P2'],price:'budget'},
+{n:'141',group:'handcrafted',title:'Stamp & Ink Card',file:'dbc-141-hand-stamp-ink.html',style:'handcrafted',industry:'Stationery Brand / Calligrapher',theme:'Stamp',fonts:'Special Elite + IM Fell English',color:'Kraft #C4A882 · Ink black · Wax red seal',desc:'Rubber stamp aesthetic. CSS wax seal circle, letterpress ink feel, kraft paper background.',tags:['handcrafted','stamp','stationery','P2'],hot:true,price:'mid'},
+{n:'142',group:'handcrafted',title:'Sketch Wireframe Card',file:'dbc-142-hand-sketch.html',style:'handcrafted',industry:'UX Designer / Product Strategist',theme:'Sketch',fonts:'Caveat + JetBrains Mono',color:'White paper · Pencil gray · Accent blue sketch',desc:'Card looks like a wireframe sketch. Imperfect borders, handwritten labels, designer notebook aesthetic.',tags:['handcrafted','sketch','ux-design','P2'],price:'mid'},
+{n:'143',group:'handcrafted',title:'Woodcut Print Card',file:'dbc-143-hand-woodcut.html',style:'handcrafted',industry:'Craft Brewery / Artisan Brand',theme:'Woodcut',fonts:'Rye + IM Fell English',color:'Woodgrain brown · Cream · Black print ink',desc:'Woodcut printmaking style. Rough edges, high contrast, grain texture via CSS pattern. Craft and artisan.',tags:['handcrafted','craft','artisan','P2'],price:'mid'},
+{n:'144',group:'handcrafted',title:'Embroidery Patch Card',file:'dbc-144-hand-embroidery.html',style:'handcrafted',industry:'Fashion Brand / Streetwear',theme:'Embroidery',fonts:'Bebas Neue + Nunito',color:'Fabric dark #1a1a2e · Embroidery thread colors',desc:'CSS simulates embroidery stitching via dotted borders and text-stroke. Patch-style card.',tags:['handcrafted','embroidery','fashion','P2'],price:'mid'},
+
+/* ══════════════════════════════════════════════════
+   GROUP 17 — CORPORATE CLEAN MODERN (145–150)
+   ══════════════════════════════════════════════════ */
+{n:'145',group:'corporate',title:'Corporate Light Classic',file:'dbc-145-corporate-light-classic.html',style:'corporate-clean',industry:'Management Consultant / Big 4',theme:'Corporate Light',fonts:'Libre Franklin + Source Sans 3',color:'White · Navy #1E3A5F · Gray',desc:'The all-time classic corporate card. Navy logo zone, white content, sans-serif, reliable and respected.',tags:['corporate','light','consulting','P1'],hot:true,price:'mid'},
+{n:'146',group:'corporate',title:'Corporate Dark Pro',file:'dbc-146-corporate-dark-pro.html',style:'dark-mode-pro',industry:'Enterprise Software Sales',theme:'Corporate Dark',fonts:'Inter + Inter',color:'#0F1117 · Electric blue · White',desc:'Dark professional card for enterprise-facing roles. Precise grid, electric blue accent only on key info.',tags:['corporate','dark','enterprise','P1'],hot:true,price:'mid'},
+{n:'147',group:'corporate',title:'HR & People Ops',file:'dbc-147-corporate-hr.html',style:'corporate-clean',industry:'HR Director / People Ops',theme:'Warm Corporate',fonts:'Nunito + Open Sans',color:'Warm white · Warm blue · Friendly orange',desc:'Corporate but warm. Human Resources should feel approachable. Warm blue, friendly layout, open tone.',tags:['corporate','warm','hr','P2'],price:'budget'},
+{n:'148',group:'corporate',title:'Healthcare Professional',file:'dbc-148-corporate-healthcare.html',style:'corporate-clean',industry:'Hospital / Healthcare Exec',theme:'Medical Corporate',fonts:'DM Sans + Merriweather',color:'Clinical white · Trust blue #005B96 · Gray',desc:'Medical establishment card. Trust blue, clean hierarchy, credentials prominent, no clutter.',tags:['corporate','healthcare','medical','P1'],hot:true,price:'mid'},
+{n:'149',group:'corporate',title:'Real Estate Corporate',file:'dbc-149-corporate-real-estate.html',style:'corporate-clean',industry:'Real Estate Agent / Broker',theme:'Real Estate',fonts:'Raleway + Open Sans',color:'Navy · Gold · White',desc:'Classic real estate agent card. Photo placeholder circle, name large, company small, phone prominent.',tags:['corporate','real-estate','light','P1'],hot:true,price:'mid'},
+{n:'150',group:'corporate',title:'Universal Professional',file:'dbc-150-corporate-universal-pro.html',style:'corporate-clean',industry:'Any Professional Industry',theme:'Universal',fonts:'Inter + Source Serif 4',color:'White · Dark · One configurable accent',desc:'The swiss-army card. Easy to customize for any profession. Clean grid, reliable typography, one accent color variable at the top.',tags:['corporate','universal','all-industry','P1'],hot:true,price:'budget'}
+];
+
+const GROUPS = {
+  'minimal-clean':  {label:'Minimal & Clean',          icon:'◻',  sub:'Cards 01–10 · Pure restraint, powerful whitespace'},
+  'glass':          {label:'Glassmorphism',             icon:'🪟', sub:'Cards 11–20 · Frosted panels, depth, translucency'},
+  'neubrut':        {label:'Neubrutalism',              icon:'⬛', sub:'Cards 21–30 · Bold borders, offset shadows, raw energy'},
+  'dark-luxury':    {label:'Dark Luxury & Premium',     icon:'✦',  sub:'Cards 31–42 · Obsidian, gold, prestige aesthetics'},
+  'bento':          {label:'Bento Grid Layout',         icon:'⊞',  sub:'Cards 43–53 · Multi-cell grid personality cards'},
+  'swiss':          {label:'Swiss / International Type',icon:'✚',  sub:'Cards 54–63 · Grid systems, typographic precision'},
+  'retro':          {label:'Retro & Vintage',           icon:'📼', sub:'Cards 64–74 · Era-accurate period design styles'},
+  '3d':             {label:'3D & Perspective',          icon:'◈',  sub:'Cards 75–83 · CSS transforms, depth, flip animations'},
+  'organic':        {label:'Organic & Nature',          icon:'🌿', sub:'Cards 84–91 · Flowing, biomorphic, earth tones'},
+  'neon':           {label:'Neon & Cyberpunk',          icon:'⚡', sub:'Cards 92–100 · Glowing, electric, digital dystopia'},
+  'editorial':      {label:'Editorial & Magazine',      icon:'📰', sub:'Cards 101–111 · Publication-inspired typographic layouts'},
+  'clay':           {label:'Claymorphism',              icon:'🫧', sub:'Cards 112–117 · Inflated 3D, soft shadows, puffy feel'},
+  'aurora':         {label:'Aurora & Gradient',         icon:'🌈', sub:'Cards 118–125 · Mesh gradients, aurora, color sweeps'},
+  'neumorphism':    {label:'Neumorphism / Soft UI',     icon:'◍',  sub:'Cards 126–132 · Pressed & raised dual-shadow surfaces'},
+  'material':       {label:'Material Design (MD3)',     icon:'◆',  sub:'Cards 133–138 · Google MD3 spec, tonal palettes'},
+  'handcrafted':    {label:'Handcrafted & Illustrated', icon:'✏️', sub:'Cards 139–144 · Watercolor, chalk, woodcut, stamp'},
+  'corporate':      {label:'Corporate Clean Modern',    icon:'🏢', sub:'Cards 145–150 · Professional, polished, universal'}
+};
+
+let currentFilter = 'all';
+let currentView = 'grid';
+let filterType = 'style';
+
+function buildCards(list) {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+  if (!list.length) {
+    document.getElementById('emptyState').style.display = 'block';
+    document.getElementById('count-badge').textContent = '0 / 150';
+    return;
+  }
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('count-badge').textContent = list.length + ' / 150';
+
+  let lastGroup = null;
+  list.forEach(c => {
+    if (c.group !== lastGroup) {
+      const g = GROUPS[c.group];
+      if (g) {
+        const div = document.createElement('div');
+        div.className = 'group-header';
+        div.style.gridColumn = '1 / -1';
+        div.innerHTML = `<span class="group-icon">${g.icon}</span>
+          <div><div class="group-title">${g.label}</div>
+          <div class="group-sub">${g.sub}</div></div>
+          <span class="group-count">${list.filter(x=>x.group===c.group).length}</span>`;
+        grid.appendChild(div);
+      }
+      lastGroup = c.group;
+    }
+
+    const priceCls = c.price === 'premium' ? 'price-premium' : c.price === 'mid' ? 'price-mid' : 'price-budget';
+    const priceLabel = c.price === 'premium' ? '$29–$49' : c.price === 'mid' ? '$14–$29' : '$9–$14';
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.setAttribute('data-style', c.style);
+    card.setAttribute('data-group', c.group);
+    card.setAttribute('title', 'Click to copy filename');
+    card.onclick = () => {
+      navigator.clipboard?.writeText(c.file);
+      card.style.borderColor = 'var(--green)';
+      setTimeout(() => card.style.borderColor = '', 1200);
+    };
+
+    const tagsHtml = c.tags.map(t => {
+      if (t === 'P1') return `<span class="tag tag-priority">🔼 P1 Build First</span>`;
+      if (t === 'P2') return `<span class="tag tag-theme">P2</span>`;
+      if (t === c.style) return `<span class="tag tag-style">${t}</span>`;
+      return `<span class="tag tag-industry">${t}</span>`;
+    }).join('') + (c.hot ? '<span class="tag tag-hot">🔥 Hot</span>' : '');
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div>
+          <div class="card-num">#${c.n}</div>
+          <div class="card-title">${c.title}</div>
+          <div class="card-filename">${c.file}</div>
+        </div>
+      </div>
+      <div class="card-desc">${c.desc}</div>
+      <div class="card-tags">${tagsHtml}</div>
+      <div class="card-footer">
+        <div class="font-pair">🔤 <span>${c.fonts}</span></div>
+        <div class="price-badge ${priceCls}">${priceLabel}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function filterCards() {
+  const q = document.getElementById('search').value.toLowerCase();
+  let list = CARDS.filter(c => {
+    const matchFilter = currentFilter === 'all' || c.style === currentFilter || c.group === currentFilter;
+    const matchSearch = !q || [c.title, c.file, c.style, c.industry, c.theme, c.desc, ...c.tags].join(' ').toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  buildCards(list);
+}
+
+function setFilter(val, btn, type) {
+  currentFilter = val;
+  filterType = type;
+  document.querySelectorAll('#styleFilters .fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  filterCards();
+}
+
+function setView(v) {
+  currentView = v;
+  const grid = document.getElementById('cardsGrid');
+  grid.classList.toggle('list-view', v === 'list');
+  document.getElementById('btn-grid').classList.toggle('on', v === 'grid');
+  document.getElementById('btn-list').classList.toggle('on', v === 'list');
+}
+
+buildCards(CARDS);
+</script>
+</body>
+</html>

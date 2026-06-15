@@ -1,0 +1,22 @@
+{
+  "slug": "why-us",
+  "title": "Why Choose Sunterra",
+  "description": "CEC accreditation, transparent pricing and local teams in every state.",
+  "hero": {
+    "title": "Why Choose Sunterra",
+    "lede": "CEC accreditation, transparent pricing and local teams in every state.",
+    "breadcrumb": "Why Choose Sunterra"
+  },
+  "prose": [
+    "<div class=\"why-us__list\">\r\n<div class=\"why-us__item\"><span class=\"why-us__num\">1</span><div>",
+    "<p class=\"why-us__title\">CEC-accredited excellence</p>",
+    "<p class=\"why-us__text\">Only CEC-approved products and certified installers. Your STCs and warranties are protected.</p></div></div>\r\n<div class=\"why-us__item\"><span class=\"why-us__num\">2</span><div>",
+    "<p class=\"why-us__title\">End-to-end project management</p>",
+    "<p class=\"why-us__text\">We handle DNSP applications, meter upgrades, STC paperwork and inspection bookings.</p></div></div>\r\n<div class=\"why-us__item\"><span class=\"why-us__num\">3</span><div>",
+    "<p class=\"why-us__title\">No-pressure sales</p>",
+    "<p class=\"why-us__text\">Itemised quotes in AUD. We recommend right-sized systems — not oversized arrays.</p></div></div>\r\n<div class=\"why-us__item\"><span class=\"why-us__num\">4</span><div>",
+    "<p class=\"why-us__title\">After-install support</p>",
+    "<p class=\"why-us__text\">Monitoring setup, warranty support and annual maintenance plans keep your system performing.</p></div></div>\r\n</div>",
+    "<p style=\"margin-top:2rem\"><a class=\"btn btn--accent\" href=\"#/quote\">Get your free quote</a></p>"
+  ]
+}

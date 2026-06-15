@@ -1,0 +1,30 @@
+{
+  "slug": "cookies",
+  "title": "Cookie Policy",
+  "description": "How we use cookies and local storage on sunterra.com.au.",
+  "hero": {
+    "title": "Cookie Policy",
+    "lede": "How we use cookies and local storage on sunterra.com.au.",
+    "breadcrumb": "Cookie Policy"
+  },
+  "prose": [
+    "<h2>Cookie policy</h2>",
+    "<p>This site uses localStorage for theme preference, quote drafts and lead data — no third-party tracking cookies.</p>",
+    "<h2>Cookie type 2</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 3</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 4</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 5</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 6</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 7</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 8</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>",
+    "<h2>Cookie type 9</h2>",
+    "<p>Functional storage only. No advertising cookies. You can clear localStorage via browser settings.</p>"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "ev-chargers",
+  "title": "EV Chargers",
+  "description": "Charge your EV from rooftop solar with smart diversion and off-peak scheduling.",
+  "hero": {
+    "title": "EV Chargers",
+    "lede": "Charge your EV from rooftop solar with smart diversion and off-peak scheduling.",
+    "breadcrumb": "EV Chargers"
+  },
+  "prose": [
+    "<p>Charge your EV from rooftop solar with smart diversion and off-peak scheduling.</p>",
+    "<h2>What's included</h2>",
+    "<ul class='feature-list'><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Zappi, Fronius Wattpilot, Tesla Wall Connector</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> CT clamp solar diversion</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Three-phase options for commercial</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> CEC-approved installation</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Integration with existing solar monitoring</li></ul>",
+    "<p style='margin-top:2rem'><a class='btn btn--accent' href='#/quote'>Get a EV Chargers quote</a> <a class='btn btn--secondary' href='#/inspection'>Book inspection</a></p>"
+  ]
+}

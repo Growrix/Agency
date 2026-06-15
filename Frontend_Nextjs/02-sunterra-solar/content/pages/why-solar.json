@@ -1,0 +1,21 @@
+{
+  "slug": "why-solar",
+  "title": "Why Go Solar in Australia",
+  "description": "Electricity prices, STC rebates and NEM feed-in tariffs make 2026 the right time to switch.",
+  "hero": {
+    "title": "Why Go Solar in Australia",
+    "lede": "Electricity prices, STC rebates and NEM feed-in tariffs make 2026 the right time to switch.",
+    "breadcrumb": "Why Go Solar in Australia"
+  },
+  "prose": [
+    "<p>Australia has the highest residential solar penetration in the world — and for good reason. Abundant sunshine, falling equipment costs and federal STC rebates create compelling economics for homeowners and businesses.</p>",
+    "<h2>Bill savings</h2>",
+    "<p>The average 6.6 kW system saves $1,200–$2,400 AUD per year depending on self-consumption, state irradiance and electricity retailer.</p>",
+    "<h2>Environmental impact</h2>",
+    "<p>Each kW of solar avoids approximately 1.5 tonnes of CO₂ annually. An 8 kW system offsets the equivalent of planting 150 trees per year.</p>",
+    "<h2>Energy security</h2>",
+    "<p>With batteries and EV chargers, you control more of your energy supply — reducing exposure to NEM price volatility and grid outages.</p>",
+    "<h2>Government support</h2>",
+    "<p>STCs remain available in 2026, with state battery incentives in NSW, Victoria, SA and ACT stacking for eligible households.</p>"
+  ]
+}

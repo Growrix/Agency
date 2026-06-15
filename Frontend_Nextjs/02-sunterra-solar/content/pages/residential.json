@@ -1,0 +1,22 @@
+{
+  "slug": "residential",
+  "title": "Residential Solar",
+  "description": "CEC-accredited rooftop solar for Australian homes with STC rebates applied upfront.",
+  "hero": {
+    "title": "Residential Solar",
+    "lede": "CEC-accredited rooftop solar for Australian homes with STC rebates applied upfront.",
+    "breadcrumb": "Residential Solar"
+  },
+  "prose": [
+    "<p>CEC-accredited rooftop solar for Australian homes with STC rebates applied upfront.</p>",
+    "<h2>What's included</h2>",
+    "<ul class='feature-list'><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Tier-one monocrystalline panels (REC, Jinko, Trina)</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> String or microinverter options (Fronius, SolarEdge, Enphase)</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> DNSP approval and meter upgrade coordination</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> STC rebate claimed at point of sale</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Monitoring app with production and export data</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> 10-year Sunterra workmanship warranty</li></ul><div class='info-box'><strong>Typical system:</strong> 6.6 kW (16–18 panels) generates ~9,500 kWh/year in Sydney (Zone 3), saving $1,400–$2,000 AUD annually at 32¢/kWh self-consumption.</div>",
+    "<p style='margin-top:2rem'><a class='btn btn--accent' href='#/quote'>Get a Residential Solar quote</a> <a class='btn btn--secondary' href='#/inspection'>Book inspection</a></p>"
+  ]
+}

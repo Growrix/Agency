@@ -1,0 +1,42 @@
+{
+  "NSW": {
+    "name": "New South Wales",
+    "zone": 3,
+    "psh": 4.2
+  },
+  "VIC": {
+    "name": "Victoria",
+    "zone": 3,
+    "psh": 3.8
+  },
+  "QLD": {
+    "name": "Queensland",
+    "zone": 2,
+    "psh": 5
+  },
+  "SA": {
+    "name": "South Australia",
+    "zone": 3,
+    "psh": 4.4
+  },
+  "WA": {
+    "name": "Western Australia",
+    "zone": 3,
+    "psh": 4.8
+  },
+  "TAS": {
+    "name": "Tasmania",
+    "zone": 4,
+    "psh": 3.4
+  },
+  "NT": {
+    "name": "Northern Territory",
+    "zone": 2,
+    "psh": 5.6
+  },
+  "ACT": {
+    "name": "Australian Capital Territory",
+    "zone": 3,
+    "psh": 4.3
+  }
+}

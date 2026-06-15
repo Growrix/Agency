@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "eyebrow": "Engineering the built world since 1987",
+    "title": "We build",
+    "titleLine2": "what endures.",
+    "titleHighlight": "endures.",
+    "lede": "A global construction and engineering partner delivering large-scale commercial, industrial and infrastructure projects with precision, safety and certainty.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=80",
+    "ctas": [
+      { "label": "Request a proposal", "href": "/contact", "variant": "primary" },
+      { "label": "View projects", "href": "/projects", "variant": "ghost" }
+    ],
+    "metrics": [
+      { "value": "1,240+", "label": "Projects delivered" },
+      { "value": "38", "label": "Years experience" },
+      { "value": "6,500+", "label": "Team members" },
+      { "value": "27", "label": "Countries served" }
+    ]
+  },
+  "clientStrip": {
+    "label": "Trusted by industry leaders",
+    "clients": ["MERIDIAN", "SOLARIS", "HARBOR", "CASCADE", "LINDEN", "WESTGATE"]
+  },
+  "overview": {
+    "eyebrow": "Who we are",
+    "title": "A construction partner built on engineering discipline",
+    "lede": "For nearly four decades, Bedrock has self-performed the work most firms subcontract — giving our clients tighter control over cost, schedule and quality on the projects that matter most.",
+    "cta": { "label": "Download company profile", "href": "/about" },
+    "cards": [
+      { "num": "01", "title": "Mission", "text": "To deliver complex projects that create lasting value for clients and communities." },
+      { "num": "02", "title": "Vision", "text": "To be the most trusted builder in every market we operate in." },
+      { "num": "03", "title": "Values", "text": "Safety first. Quality without compromise. Absolute integrity." }
+    ]
+  },
+  "servicesPreview": {
+    "eyebrow": "What we do",
+    "title": "End-to-end delivery across every asset class",
+    "lede": "Six core capabilities, one accountable team — from feasibility to handover.",
+    "cta": { "label": "All services", "href": "/services" }
+  },
+  "projectsPreview": {
+    "eyebrow": "Featured work",
+    "title": "Projects that define skylines",
+    "cta": { "label": "All case studies", "href": "/projects" }
+  },
+  "stats": [
+    { "counter": 1240, "suffix": "+", "label": "Projects delivered" },
+    { "counter": 38, "label": "Years of experience" },
+    { "counter": 6500, "suffix": "+", "label": "Team members" },
+    { "counter": 27, "label": "Countries served" },
+    { "counter": 124, "suffix": "M+", "label": "Sq. ft built" },
+    { "counter": 98, "suffix": "%", "label": "Client satisfaction" }
+  ],
+  "process": {
+    "eyebrow": "How we deliver",
+    "title": "A disciplined path from idea to handover",
+    "steps": [
+      { "num": 1, "title": "Consultation", "desc": "Define objectives, constraints and the business case." },
+      { "num": 2, "title": "Planning", "desc": "Feasibility, scheduling and budget modelling." },
+      { "num": 3, "title": "Design", "desc": "Architecture and BIM coordination across disciplines." },
+      { "num": 4, "title": "Engineering", "desc": "Structural, MEP and value engineering sign-off." },
+      { "num": 5, "title": "Construction", "desc": "Self-perform delivery with live site telemetry." },
+      { "num": 6, "title": "QA", "desc": "Independent inspection and commissioning." },
+      { "num": 7, "title": "Handover", "desc": "Documentation, training and post-occupancy support." }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Client voices",
+    "title": "Trusted on the projects that matter"
+  },
+  "sustainability": {
+    "eyebrow": "ESG & Innovation",
+    "title": "Building responsibly, at scale",
+    "lede": "Sustainability is engineered into every programme — not bolted on afterward.",
+    "stat": "-42%",
+    "statLabel": "Embodied carbon vs. baseline",
+    "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80",
+    "items": [
+      "LEED & BREEAM delivery",
+      "Low-carbon concrete programmes",
+      "Smart-site energy monitoring",
+      "Circular material sourcing",
+      "Net-zero design pathways"
+    ]
+  },
+  "faqPreview": {
+    "eyebrow": "FAQ",
+    "title": "Answers before you ask",
+    "lede": "Common questions from owners, developers and partners.",
+    "cta": { "label": "Ask a question", "href": "/contact" }
+  },
+  "ctaBand": {
+    "title": "Let's build what endures, together.",
+    "lede": "From a single building to nationwide infrastructure — bring us the brief that keeps you up at night.",
+    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=2000&q=80",
+    "actions": [
+      { "label": "Schedule consultation", "href": "/contact", "variant": "primary" },
+      { "label": "Free site assessment", "href": "/contact", "variant": "ghost" }
+    ]
+  }
+}

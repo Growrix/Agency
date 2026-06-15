@@ -1,0 +1,50 @@
+[
+  {
+    "question": "How much do solar panels cost in Australia in 2026?",
+    "answer": "A quality 6.6 kW residential system typically ranges from $5,500–$9,500 AUD after STC rebates, depending on panel tier, inverter brand, roof complexity and state."
+  },
+  {
+    "question": "What are STCs and how do they reduce my price?",
+    "answer": "Small-scale Technology Certificates (STCs) are created when eligible solar is installed. Your retailer claims them upfront as a point-of-sale discount based on system size, postcode zone factor and deeming period under the RET."
+  },
+  {
+    "question": "Do I need CEC accreditation?",
+    "answer": "Yes — only Clean Energy Council (CEC) accredited designers and installers can claim STCs and connect systems under Australian standards. Sunterra is fully CEC accredited."
+  },
+  {
+    "question": "How long does installation take?",
+    "answer": "Most residential installs complete in 1–2 days after DNSP approval. From contract to switch-on, allow 4–8 weeks for approvals and inspection."
+  },
+  {
+    "question": "Will solar work during a blackout?",
+    "answer": "Standard grid-tied systems shut down for safety. With a battery and backup gateway, essential or whole-home circuits can stay powered."
+  },
+  {
+    "question": "What feed-in tariff will I get?",
+    "answer": "FiTs vary by retailer and state across the NEM. We model export using current market rates and recommend retailers aligned with your usage."
+  },
+  {
+    "question": "Is finance available?",
+    "answer": "Yes — Sunterra partners with Australian green loan providers offering $0 upfront options subject to approval."
+  },
+  {
+    "question": "What warranty do you offer?",
+    "answer": "25-year panel performance, 10–15 year inverter warranties, plus Sunterra's 10-year workmanship guarantee."
+  },
+  {
+    "question": "Can I add a battery later?",
+    "answer": "Most systems can be retrofitted. We design with future AC coupling in mind."
+  },
+  {
+    "question": "Do you service commercial sites?",
+    "answer": "Yes — from 10 kW cafés to 500 kW warehouses with NEM tariff analysis and three-phase connections."
+  },
+  {
+    "question": "Which states do you install in?",
+    "answer": "We install across NSW, VIC, QLD, SA, WA, TAS, NT and ACT with local CEC-accredited crews."
+  },
+  {
+    "question": "How do I claim state battery rebates?",
+    "answer": "Eligibility varies — Solar Victoria, NSW battery incentive and other programs have specific requirements we verify during your quote."
+  }
+]

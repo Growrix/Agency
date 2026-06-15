@@ -1,0 +1,68 @@
+---
+description: Mandatory standards for Next.js production apps migrated from HTML templates
+globs: Frontend_Nextjs/**/*
+alwaysApply: false
+---
+
+# Next.js Production Standards
+
+Every production app lives under `Frontend_Nextjs/NN-site-name/` and is migrated from an approved HTML file in `sites/`.
+
+## Tech contract
+
+- **Next.js 15** App Router, **React 19**, **TypeScript**, **Tailwind CSS v4**
+- Dark mode via `next-themes` with CSS custom properties mirroring HTML token names
+- No inline copy blocks, nav arrays, or brand constants in TSX — use `config/` and `content/`
+- Content accessed through repository interfaces in `lib/content/` (local JSON now, CMS/API later)
+
+## Mandatory folder anatomy
+
+```
+Frontend_Nextjs/NN-site-name/
+  app/                    # App Router pages + layouts
+  components/
+    ui/                   # Button, Card, Badge, FormField, Container
+    layout/               # Header, Footer, MobileNav, ThemeToggle
+    sections/             # Homepage sections
+    views/                # Full-page view components
+    seo/                  # JsonLd, metadata helpers
+  config/site.config.ts   # Brand, locale, SEO defaults, env-driven domain
+  content/                # JSON (+ optional MDX for long prose)
+  lib/content/            # types, repositories, providers
+  hooks/                  # Client behavior ported from initX()
+  public/                 # Static assets
+```
+
+## No-hardcoding rules (blocking)
+
+- Brand name, phone, domain → `config/site.config.ts` or env (`NEXT_PUBLIC_SITE_URL`)
+- Navigation, footer links → `content/navigation.json` via repository
+- Page copy, FAQ, testimonials, products → typed `content/` files
+- Colors, spacing, radius, shadows → Tailwind theme tokens + CSS vars (same names as HTML `--color-*`, `--space-*`)
+- Data fetching → repository layer, never embedded in UI components
+
+## Component conventions
+
+- Server Components by default; `'use client'` only for interactivity (nav drawer, forms, theme toggle, calculators)
+- BEM class names from HTML may map to Tailwind utilities but preserve semantic component boundaries
+- One hook per former `initX()` function; compose in client wrappers
+- Props typed with interfaces from `lib/content/types.ts`
+
+## Quality targets
+
+- Lighthouse: Performance 95+, Accessibility 100, SEO 100, Best Practices 100
+- WCAG 2.2 AA+; keyboard navigation; `prefers-reduced-motion` respected
+- `pnpm build` passes with zero TypeScript errors
+- Visual parity with source HTML at 320px–2560px in both themes
+
+## Parity enforcement (blocking before sign-off)
+
+- **Interactive routes** (quote, calculator, contact, rebates, inspection) MUST be React views — never prose JSON with embedded `<form>` HTML
+- **No emoji** as icon substitutes in production components — use `components/icons/`
+- **Component CSS port** required in `@layer components` before Phase 9 sign-off
+- **Sticky CTA** mobile-only (`lg:hidden`); bottom nav with SVG icons + scroll-hide
+- **FAB**, toast, and lead-save hooks required when present in source HTML
+
+## Migration reference
+
+Follow `.cursor/skills/nextjs-site-migrator/SKILL.md` for the full phase-by-phase playbook.

@@ -1,0 +1,27 @@
+{
+  "source": "sites/01-BedrockConstruction.html",
+  "icons": [
+    { "name": "BrandMark", "component": "components/icons/index.tsx" },
+    { "name": "IconArrowRight", "component": "components/icons/index.tsx" },
+    { "name": "IconArrowUpRight", "component": "components/icons/index.tsx" },
+    { "name": "IconSun", "component": "components/icons/index.tsx" },
+    { "name": "IconMoon", "component": "components/icons/index.tsx" },
+    { "name": "IconPhone", "component": "components/icons/index.tsx" },
+    { "name": "IconClose", "component": "components/icons/index.tsx" },
+    { "name": "IconMenu", "component": "components/icons/index.tsx" },
+    { "name": "IconArrowUp", "component": "components/icons/index.tsx" },
+    { "name": "IconStar", "component": "components/icons/index.tsx" },
+    { "name": "IconQuote", "component": "components/icons/index.tsx" },
+    { "name": "IconChevLeft", "component": "components/icons/index.tsx" },
+    { "name": "IconChevRight", "component": "components/icons/index.tsx" },
+    { "name": "IconCheck", "component": "components/icons/index.tsx" },
+    { "name": "IconMapPin", "component": "components/icons/index.tsx" },
+    { "name": "IconSend", "component": "components/icons/index.tsx" },
+    { "name": "IconMail", "component": "components/icons/index.tsx" },
+    { "name": "IconPlus", "component": "components/icons/index.tsx" },
+    { "name": "IconMinus", "component": "components/icons/index.tsx" },
+    { "name": "BottomNavIcon", "component": "components/icons/index.tsx" },
+    { "name": "ServiceIcon", "component": "components/icons/index.tsx" }
+  ],
+  "emojiReplaced": ["📍 → IconMapPin"]
+}

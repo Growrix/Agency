@@ -1,0 +1,22 @@
+{
+  "slug": "commercial",
+  "title": "Commercial Solar",
+  "description": "Reduce NEM demand charges and operating costs with engineered commercial arrays from 10 kW to 500 kW.",
+  "hero": {
+    "title": "Commercial Solar",
+    "lede": "Reduce NEM demand charges and operating costs with engineered commercial arrays from 10 kW to 500 kW.",
+    "breadcrumb": "Commercial Solar"
+  },
+  "prose": [
+    "<p>Reduce NEM demand charges and operating costs with engineered commercial arrays from 10 kW to 500 kW.</p>",
+    "<h2>What's included</h2>",
+    "<ul class='feature-list'><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Three-phase inverter systems and export limiting</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> NEM tariff and demand charge analysis</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Accelerated depreciation guidance</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Remote monitoring and fleet dashboards</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Maintenance contracts available</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> CEC commercial accreditation</li></ul><div class='info-box'><strong>NEM note:</strong> Commercial sites on SAPN, Ausgrid, Energex and other DNSPs may require export limiting — we handle applications.</div>",
+    "<p style='margin-top:2rem'><a class='btn btn--accent' href='#/quote'>Get a Commercial Solar quote</a> <a class='btn btn--secondary' href='#/inspection'>Book inspection</a></p>"
+  ]
+}

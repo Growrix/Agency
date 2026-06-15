@@ -1,0 +1,16 @@
+{
+  "slug": "finance",
+  "title": "Solar Finance",
+  "description": "$0 upfront green loans from accredited Australian lenders.",
+  "hero": {
+    "title": "Solar Finance",
+    "lede": "$0 upfront green loans from accredited Australian lenders.",
+    "breadcrumb": "Solar Finance"
+  },
+  "prose": [
+    "<p>Spread the cost of your solar system with finance designed for renewable energy. STC rebates are still applied upfront, reducing the amount you finance.</p>",
+    "<h2>Example (indicative)</h2>\r\n<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th>Item</th><th>Amount (AUD)</th></tr></thead><tbody>\r\n<tr><td>6.6 kW system (before STCs)</td><td>$9,500</td></tr>\r\n<tr><td>STC rebate</td><td>−$2,680</td></tr>\r\n<tr><td>Amount financed</td><td>$6,820</td></tr>\r\n<tr><td>Fortnightly repayment (5 yr, 6.9% p.a.)</td><td>~$89</td></tr>\r\n</tbody></table></div>",
+    "<p>Subject to lender approval. Comparison rate 6.9% p.a. based on $30,000 loan over 5 years. Fees and charges apply.</p>",
+    "<p><a class=\"btn btn--accent\" href=\"#/quote\">Apply with your quote</a></p>"
+  ]
+}

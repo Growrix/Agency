@@ -1,0 +1,72 @@
+{
+  "slug": "about",
+  "title": "Our story",
+  "description": "For nearly four decades, Bedrock has self-performed the work most firms subcontract.",
+  "hero": {
+    "breadcrumb": "Our story",
+    "eyebrow": "Our story",
+    "title": "Engineering discipline.\nAbsolute certainty.",
+    "lede": "For nearly four decades, Bedrock has self-performed the work most firms subcontract.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=80"
+  },
+  "intro": {
+    "eyebrow": "Who we are",
+    "title": "Built on the belief that great construction requires great character",
+    "paragraphs": [
+      "Founded in Chicago in 1987, Bedrock began as a regional commercial contractor. Today we operate in 27 countries, self-performing core trades to maintain quality and schedule certainty.",
+      "Our 6,500-person team includes chartered engineers, certified PMs, licensed safety professionals and specialist tradespeople who take personal pride in every structure we deliver."
+    ],
+    "cta": { "label": "Start a conversation", "href": "/contact" },
+    "stats": [
+      { "counter": 38, "label": "Years of experience" },
+      { "counter": 1240, "suffix": "+", "label": "Projects delivered globally" },
+      { "counter": 27, "label": "Countries of operation" }
+    ]
+  },
+  "foundation": {
+    "eyebrow": "Our foundation",
+    "title": "Mission, Vision & Values",
+    "cards": [
+      {
+        "title": "Mission",
+        "text": "To deliver complex projects that create lasting value for clients and communities — on budget, on schedule, without compromise."
+      },
+      {
+        "title": "Vision",
+        "text": "To be the most trusted builder in every market — recognized for engineering excellence, safety leadership and sustainable practice."
+      },
+      {
+        "title": "Values",
+        "text": "Safety first. Quality without compromise. Absolute integrity with clients, partners and communities."
+      }
+    ]
+  },
+  "leadership": {
+    "eyebrow": "Leadership",
+    "title": "Engineers who lead from the front",
+    "cta": { "label": "View open roles", "href": "/careers" },
+    "team": [
+      { "initials": "DW", "name": "Diane Whitfield", "role": "Chief Executive Officer" },
+      { "initials": "RO", "name": "Raymond Osei", "role": "Chief Operating Officer" },
+      { "initials": "SM", "name": "Sofia Marchetti", "role": "Director of Engineering" },
+      { "initials": "JC", "name": "James Caldwell", "role": "Head of Safety & Sustainability" },
+      { "initials": "LP", "name": "Laura Patel", "role": "Chief Financial Officer" },
+      { "initials": "MK", "name": "Marcus Kim", "role": "VP, Commercial Projects" },
+      { "initials": "AV", "name": "Amelia Voss", "role": "Director, Infrastructure" },
+      { "initials": "TC", "name": "Tariq Chandra", "role": "Head of Innovation & Technology" }
+    ]
+  },
+  "awards": {
+    "eyebrow": "Recognition",
+    "title": "Awards & certifications",
+    "lede": "Independently verified proof that our standards match our promises.",
+    "items": [
+      "ENR Top 50 Global Contractor",
+      "ISO 9001 / 14001 / 45001",
+      "LEED Proven Provider",
+      "RoSPA Gold Award",
+      "BREEAM Outstanding",
+      "OSHA VPP Star"
+    ]
+  }
+}

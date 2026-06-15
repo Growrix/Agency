@@ -1,0 +1,86 @@
+{
+  "slug": "projects",
+  "title": "Our portfolio",
+  "description": "Over 1,240 projects delivered across 27 countries.",
+  "hero": {
+    "breadcrumb": "Our portfolio",
+    "eyebrow": "Our portfolio",
+    "title": "Landmark projects\nworldwide.",
+    "lede": "Over 1,240 projects delivered across 27 countries.",
+    "image": "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=2000&q=80"
+  },
+  "gridHead": {
+    "eyebrow": "All projects",
+    "title": "1,240+ projects. 27 countries."
+  },
+  "featuredCaseStudy": {
+    "eyebrow": "Featured case study",
+    "title": "Meridian Financial Tower",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    "stats": [
+      { "value": "62", "label": "Storeys" },
+      { "value": "11wk", "label": "Early delivery" },
+      { "value": "0", "label": "Change orders" },
+      { "value": "Pt", "label": "LEED Platinum" }
+    ],
+    "body": "Bedrock was appointed as design-build contractor for Meridian's new 62-storey HQ in Singapore's Marina Bay district. The brief demanded LEED Platinum certification, a fixed GMP and delivery before the client's fiscal year end. We delivered eleven weeks early with zero surprise change orders — a first for the client's capital programme in 20 years.",
+    "cta": { "label": "Discuss a similar project", "href": "/contact" }
+  },
+  "projects": [
+    {
+      "id": "meridian",
+      "name": "Meridian Financial Tower",
+      "sector": "Commercial",
+      "scope": "62-storey LEED Platinum headquarters for Meridian Financial Group. Delivered 11 weeks ahead of programme. First high-rise in the region to achieve LEED Platinum under v4.",
+      "location": "Singapore",
+      "year": "2024",
+      "value": "$480M",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+      "span2": true
+    },
+    {
+      "id": "cascade",
+      "name": "Cascade Cross-Harbour Bridge",
+      "sector": "Infrastructure",
+      "scope": "2.4km cable-stayed span connecting the North Shore with downtown Vancouver. Canada's longest cable-stayed bridge. 3,200 workers at peak; zero lost-time incidents.",
+      "location": "Vancouver",
+      "year": "2025",
+      "value": "$1.1B",
+      "image": "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=1200&q=80",
+      "span2": false
+    },
+    {
+      "id": "harbor",
+      "name": "Harbor Logistics Park",
+      "sector": "Industrial",
+      "scope": "180,000 m² fully automated distribution centre for a global e-commerce operator. 98% robotics integration. BREEAM Outstanding rating.",
+      "location": "Rotterdam",
+      "year": "2023",
+      "value": "$210M",
+      "image": "https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=1200&q=80",
+      "span2": false
+    },
+    {
+      "id": "linden",
+      "name": "The Linden Residences",
+      "sector": "Residential",
+      "scope": "340-home master-planned community with shared amenity spaces, sustainable landscaping and a 6-star energy rating across all dwellings.",
+      "location": "Austin",
+      "year": "2024",
+      "value": "$185M",
+      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+      "span2": true
+    },
+    {
+      "id": "solaris",
+      "name": "Solaris Research Campus",
+      "sector": "Design & Build",
+      "scope": "Net-zero R&D campus for Solaris Group. 12 laboratory buildings, 4 office towers and a central energy hub. 42% embodied carbon reduction vs. baseline.",
+      "location": "Munich",
+      "year": "2023",
+      "value": "$320M",
+      "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+      "span2": false
+    }
+  ]
+}

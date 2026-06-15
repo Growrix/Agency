@@ -1,0 +1,22 @@
+{
+  "slug": "off-grid",
+  "title": "Off-Grid Solar",
+  "description": "Hybrid solar-battery-diesel systems for properties beyond the grid.",
+  "hero": {
+    "title": "Off-Grid Solar",
+    "lede": "Hybrid solar-battery-diesel systems for properties beyond the grid.",
+    "breadcrumb": "Off-Grid Solar"
+  },
+  "prose": [
+    "<p>Hybrid solar-battery-diesel systems for properties beyond the grid.</p>",
+    "<h2>What's included</h2>",
+    "<ul class='feature-list'><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Ground-mount and pole-mount arrays</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Large-capacity lithium storage</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Backup generator integration</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Load profiling and appliance scheduling</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Remote monitoring</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> CEC off-grid design certification</li></ul>",
+    "<p style='margin-top:2rem'><a class='btn btn--accent' href='#/quote'>Get a Off-Grid Solar quote</a> <a class='btn btn--secondary' href='#/inspection'>Book inspection</a></p>"
+  ]
+}

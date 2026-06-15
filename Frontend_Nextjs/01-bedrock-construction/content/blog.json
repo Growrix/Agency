@@ -1,0 +1,56 @@
+[
+  {
+    "id": "prefab-future",
+    "category": "Industry",
+    "title": "The future of prefabricated construction",
+    "excerpt": "How offsite manufacturing is cutting programme times by up to 40% on complex commercial projects — and what it means for quality control.",
+    "date": "May 2025",
+    "readTime": "8 min read",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "bim-clash",
+    "category": "Technology",
+    "title": "How BIM is eliminating clash surprises on site",
+    "excerpt": "When every discipline models in the same shared environment, costly last-minute clashes become a thing of the past. A deep dive into our BIM workflow.",
+    "date": "Apr 2025",
+    "readTime": "6 min read",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "net-zero-pathway",
+    "category": "Sustainability",
+    "title": "Our pathway to net-zero embodied carbon by 2035",
+    "excerpt": "The steps we are taking across concrete specification, steel procurement and logistics to cut embodied carbon — and how we are measuring progress.",
+    "date": "Mar 2025",
+    "readTime": "10 min read",
+    "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "safety-record",
+    "category": "Safety",
+    "title": "What 12.4M hours without a lost-time incident teaches you",
+    "excerpt": "The leadership behaviours, reporting systems and site interventions behind our industry-leading safety record.",
+    "date": "Feb 2025",
+    "readTime": "7 min read",
+    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "cascade-bridge",
+    "category": "Infrastructure",
+    "title": "The hidden complexity of cable-stayed bridge construction",
+    "excerpt": "A behind-the-scenes look at the engineering challenges we solved on the Cascade Cross-Harbour Bridge in Vancouver.",
+    "date": "Jan 2025",
+    "readTime": "9 min read",
+    "image": "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "harbor-logistics",
+    "category": "Project Spotlight",
+    "title": "Harbor Logistics Park: automating at 180,000 m²",
+    "excerpt": "How we delivered the largest fully-automated distribution centre in the Benelux region — on time and under budget.",
+    "date": "Dec 2024",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=800&q=80"
+  }
+]

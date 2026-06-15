@@ -1,0 +1,116 @@
+{
+  "main": [
+    { "label": "Home", "href": "/" },
+    { "label": "Services", "href": "/residential" },
+    { "label": "Calculator", "href": "/calculator" },
+    { "label": "Rebates", "href": "/rebates" },
+    { "label": "Get Quote", "href": "/quote", "accent": true },
+    { "label": "Case Studies", "href": "/case-studies" },
+    { "label": "Blog", "href": "/blog" },
+    { "label": "About", "href": "/about" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "mega": {
+    "groups": [
+      {
+        "title": "Solar Solutions",
+        "links": [
+          { "label": "Residential Solar", "href": "/residential" },
+          { "label": "Commercial Solar", "href": "/commercial" },
+          { "label": "Home Batteries", "href": "/batteries" },
+          { "label": "EV Chargers", "href": "/ev-chargers" },
+          { "label": "Off-Grid Systems", "href": "/off-grid" },
+          { "label": "Maintenance", "href": "/maintenance" }
+        ]
+      },
+      {
+        "title": "Plan & Save",
+        "links": [
+          { "label": "Savings Calculator", "href": "/calculator" },
+          { "label": "STC & State Rebates", "href": "/rebates" },
+          { "label": "$0 Upfront Finance", "href": "/finance" },
+          { "label": "Free Site Inspection", "href": "/inspection" }
+        ]
+      },
+      {
+        "title": "Why Sunterra",
+        "links": [
+          { "label": "Why Go Solar", "href": "/why-solar" },
+          { "label": "Why Choose Us", "href": "/why-us" },
+          { "label": "CEC Certifications", "href": "/certifications" },
+          { "label": "Warranty", "href": "/warranty" },
+          { "label": "Customer Reviews", "href": "/reviews" }
+        ]
+      }
+    ],
+    "promo": {
+      "title": "Free solar assessment",
+      "description": "CEC-accredited designer visits your property, models STC rebates and NEM tariff savings.",
+      "cta": { "label": "Book inspection", "href": "/inspection" }
+    }
+  },
+  "drawer": [
+    {
+      "title": "Services",
+      "links": [
+        { "label": "Residential Solar", "href": "/residential" },
+        { "label": "Commercial Solar", "href": "/commercial" },
+        { "label": "Home Batteries", "href": "/batteries" },
+        { "label": "EV Chargers", "href": "/ev-chargers" },
+        { "label": "Off-Grid Systems", "href": "/off-grid" },
+        { "label": "Maintenance", "href": "/maintenance" }
+      ]
+    },
+    {
+      "title": "Tools",
+      "links": [
+        { "label": "Calculator", "href": "/calculator" },
+        { "label": "Get Quote", "href": "/quote" },
+        { "label": "Rebates", "href": "/rebates" },
+        { "label": "Book Inspection", "href": "/inspection" }
+      ]
+    },
+    {
+      "title": "Company",
+      "links": [
+        { "label": "About", "href": "/about" },
+        { "label": "FAQ", "href": "/faq" },
+        { "label": "Blog", "href": "/blog" },
+        { "label": "Contact", "href": "/contact" }
+      ]
+    }
+  ],
+  "bottomNav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Services", "href": "/residential" },
+    { "label": "Calculator", "href": "/calculator" },
+    { "label": "Quote", "href": "/quote" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footer": {
+    "services": [
+      { "label": "Residential Solar", "href": "/residential" },
+      { "label": "Commercial Solar", "href": "/commercial" },
+      { "label": "Home Batteries", "href": "/batteries" },
+      { "label": "EV Chargers", "href": "/ev-chargers" },
+      { "label": "Off-Grid Systems", "href": "/off-grid" },
+      { "label": "Maintenance", "href": "/maintenance" }
+    ],
+    "company": [
+      { "label": "About", "href": "/about" },
+      { "label": "Why Solar", "href": "/why-solar" },
+      { "label": "Case Studies", "href": "/case-studies" },
+      { "label": "Reviews", "href": "/reviews" },
+      { "label": "Blog", "href": "/blog" },
+      { "label": "FAQ", "href": "/faq" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "legal": [
+      { "label": "Privacy", "href": "/privacy" },
+      { "label": "Terms", "href": "/terms" },
+      { "label": "Cookies", "href": "/cookies" },
+      { "label": "Warranty", "href": "/warranty" },
+      { "label": "Certifications", "href": "/certifications" }
+    ]
+  }
+}

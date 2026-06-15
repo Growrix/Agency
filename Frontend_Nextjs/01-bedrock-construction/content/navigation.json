@@ -1,0 +1,59 @@
+{
+  "main": [
+    { "label": "About", "href": "/about" },
+    { "label": "Services", "href": "/services" },
+    { "label": "Projects", "href": "/projects" },
+    { "label": "Industries", "href": "/industries" },
+    { "label": "Careers", "href": "/careers" },
+    { "label": "Insights", "href": "/insights" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "drawer": [
+    { "label": "About", "href": "/about", "num": "01" },
+    { "label": "Services", "href": "/services", "num": "02" },
+    { "label": "Projects", "href": "/projects", "num": "03" },
+    { "label": "Industries", "href": "/industries", "num": "04" },
+    { "label": "Careers", "href": "/careers", "num": "05" },
+    { "label": "Insights", "href": "/insights", "num": "06" },
+    { "label": "Contact", "href": "/contact", "num": "07" }
+  ],
+  "bottomNav": [
+    { "label": "Home", "href": "/", "icon": "home" },
+    { "label": "Services", "href": "/services", "icon": "services" },
+    { "label": "Projects", "href": "/projects", "icon": "projects" },
+    { "label": "Jobs", "href": "/careers", "icon": "careers" },
+    { "label": "Contact", "href": "/contact", "icon": "contact" }
+  ],
+  "footer": {
+    "company": [
+      { "label": "About", "href": "/about" },
+      { "label": "Leadership", "href": "/about#leadership" },
+      { "label": "Careers", "href": "/careers" },
+      { "label": "Newsroom", "href": "/insights" }
+    ],
+    "services": [
+      { "label": "Commercial", "href": "/services" },
+      { "label": "Industrial", "href": "/services" },
+      { "label": "Infrastructure", "href": "/services" },
+      { "label": "Design & Build", "href": "/services" }
+    ],
+    "industries": [
+      { "label": "Healthcare", "href": "/industries" },
+      { "label": "Energy", "href": "/industries" },
+      { "label": "Logistics", "href": "/industries" },
+      { "label": "Government", "href": "/industries" }
+    ],
+    "resources": [
+      { "label": "Projects", "href": "/projects" },
+      { "label": "Insights", "href": "/insights" },
+      { "label": "Safety", "href": "/about#safety" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "legal": [
+      { "label": "Privacy", "href": "#" },
+      { "label": "Terms", "href": "#" },
+      { "label": "Cookies", "href": "#" }
+    ]
+  },
+  "cta": { "label": "Get a quote", "href": "/contact" }
+}

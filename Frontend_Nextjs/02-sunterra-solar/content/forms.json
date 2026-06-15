@@ -1,0 +1,59 @@
+{
+  "quote": {
+    "steps": ["Property", "Energy", "System", "Contact"],
+    "propertyTypes": ["Detached house", "Townhouse", "Unit/apartment", "Commercial"],
+    "roofTypes": ["Tile", "Metal/tin", "Flat/concrete", "Other"],
+    "billOptions": [
+      { "value": "250", "label": "Under $250" },
+      { "value": "400", "label": "$250–$400" },
+      { "value": "550", "label": "$400–$600" },
+      { "value": "750", "label": "$600–$900" },
+      { "value": "1000", "label": "$900+" }
+    ],
+    "phaseOptions": ["Single phase", "Three phase"],
+    "batteryOptions": ["No battery", "10 kWh", "13.5 kWh (Powerwall)", "Custom size"],
+    "evOptions": ["Not needed", "Single phase 7 kW", "Three phase 22 kW"],
+    "consentLabel": "I agree to Sunterra Solar contacting me about this quote and accept the",
+    "privacyHref": "/privacy",
+    "submitSuccess": "Quote submitted! A Sunterra specialist will call within 24 hours.",
+    "submitToast": "Quote submitted — we'll be in touch!",
+    "demoNote": "Demo template — connects to your CRM in production."
+  },
+  "hero": {
+    "submitSuccess": "Thanks! We'll call you shortly.",
+    "submitToast": "Callback requested"
+  },
+  "contact": {
+    "subjects": ["Quote request", "Existing customer", "Commercial enquiry", "Media"],
+    "submitSuccess": "Message sent — we reply within one business day."
+  },
+  "inspection": {
+    "timeSlots": ["Morning (8am–12pm)", "Afternoon (12pm–4pm)", "Evening (4pm–6pm)"],
+    "notesPlaceholder": "Roof access, shading concerns, existing solar…",
+    "submitSuccess": "Inspection booked! Confirmation email sent.",
+    "submitToast": "Inspection booked"
+  },
+  "rebates": {
+    "infoBox": "2026 deeming period: 8 years remaining. STCs reduce each year — installing sooner maximises your rebate.",
+    "stateMessages": {
+      "VIC_battery": "You may be eligible for the Solar Victoria battery rebate (subject to eligibility criteria).",
+      "NSW_battery": "NSW battery incentive may apply — our team will verify eligibility.",
+      "ACT_battery": "ACT Sustainable Household Scheme may offer additional support.",
+      "default_battery": "Check state government websites for current battery and solar programs in {state}.",
+      "default": "Check state government websites for current battery and solar programs in {state}."
+    }
+  },
+  "calculator": {
+    "defaultCost": 9500
+  },
+  "fab": {
+    "items": [
+      { "label": "Call {phone}", "href": "tel:{phoneTel}", "type": "tel" },
+      { "label": "Get quote", "href": "/quote" },
+      { "label": "Calculator", "href": "/calculator" },
+      { "label": "Book inspection", "href": "/inspection" }
+    ],
+    "openLabel": "Open quick actions menu",
+    "closeLabel": "Close quick actions menu"
+  }
+}

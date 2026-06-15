@@ -1,0 +1,62 @@
+[
+  {
+    "id": "penrith-family",
+    "title": "Penrith Family Cuts Bills 78% with 8.8 kW + Powerwall",
+    "loc": "Penrith, NSW",
+    "size": "8.8 kW",
+    "save": "$2,840/yr",
+    "sum": "Four-bedroom home on time-of-use tariff paired tier-one panels with Tesla Powerwall 3.",
+    "body": [
+      "<p>The Harrington family faced summer bills exceeding $620 per quarter on Ausgrid time-of-use.</p>",
+      "<p>Sunterra installed 22× 400 W REC Alpha Pure panels (8.8 kW) with Tesla Powerwall 3. STCs reduced upfront cost by $2,680.</p>",
+      "<p>Twelve months post-commissioning, grid imports fell 78%. Self-consumption reached 71%.</p>"
+    ]
+  },
+  {
+    "id": "adelaide-warehouse",
+    "title": "Adelaide Warehouse Saves $48k on Demand Charges",
+    "loc": "Gillman, SA",
+    "size": "99 kW",
+    "save": "$48,200/yr",
+    "sum": "Commercial array targeting peak demand between 2–8 PM on SAPN business tariff.",
+    "body": [
+      "<p>A logistics operator paid significant demand charges on their SAPN business tariff.</p>",
+      "<p>Sunterra engineered a 99 kW rooftop system with Sungrow inverters and export limiting per DNSP requirements.</p>",
+      "<p>Year-one savings: $48,200 AUD with 3.9-year simple payback after STCs and depreciation.</p>"
+    ]
+  },
+  {
+    "id": "brisbane-offgrid",
+    "title": "Off-Grid Property Near Noosa",
+    "loc": "Sunshine Coast, QLD",
+    "size": "12 kW hybrid",
+    "save": "Diesel cut 92%",
+    "sum": "Hybrid solar-diesel-battery for rural property outside Ergon grid extension.",
+    "body": [
+      "<p>12 kW ground-mount with 30 kWh lithium and backup diesel gen-set replaced nightly generator runs.</p>",
+      "<p>Zone 2 irradiance delivers strong winter performance. CEC-compliant islanding protects onsite machinery.</p>"
+    ]
+  },
+  {
+    "id": "melbourne-townhouse",
+    "title": "Melbourne Strata Adds Shared Solar",
+    "loc": "Footscray, VIC",
+    "size": "15.2 kW",
+    "save": "$6,100/yr",
+    "sum": "Solar Victoria battery rebate stacked with STCs for six townhouses.",
+    "body": [
+      "<p>Six-unit strata shared roof space with individual smart meters and Solar Victoria eligibility verified.</p>"
+    ]
+  },
+  {
+    "id": "perth-retail",
+    "title": "Perth Retail Strip Tenancy Solar",
+    "loc": "Joondalup, WA",
+    "size": "22 kW",
+    "save": "$11,400/yr",
+    "sum": "Synergy tariff optimisation with west-facing tilt for afternoon load matching.",
+    "body": [
+      "<p>West-facing tilt maximised generation during retail peak hours. Western Power approval in 10 business days.</p>"
+    ]
+  }
+]

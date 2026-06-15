@@ -1,0 +1,77 @@
+[
+  {
+    "id": "stc-rebates-2026",
+    "title": "STC Rebates in 2026: What Australian Homeowners Need to Know",
+    "date": "4 Jun 2026",
+    "read": "7 min",
+    "author": "Maya Chen",
+    "excerpt": "How Small-scale Technology Certificates work under the RET, and why acting before the deeming period drops matters.",
+    "body": [
+      "<p>Australia's Small-scale Renewable Energy Scheme (SRES) provides upfront discounts on rooftop solar through STCs — certificates your installer trades on your behalf at the point of sale.</p>",
+      "<p>In 2026, the deeming period for residential systems continues to step down annually. A 6.6 kW system in Sydney (Zone 3) typically generates enough STCs to reduce your out-of-pocket cost by $2,400–$2,900 AUD depending on the spot STC price.</p>",
+      "<h2>CEC accreditation matters</h2><p>Only Clean Energy Council (CEC) accredited installers can claim STCs and connect systems under AS/NZS 4777. Sunterra Solar maintains full CEC accreditation and uses only CEC-approved modules and inverters.</p>",
+      "<h2>State overlays</h2><p>Some states add battery rebates or interest-free loans on top of federal STCs. We model both federal and state incentives in every quote.</p>"
+    ]
+  },
+  {
+    "id": "nem-feed-in-tariffs",
+    "title": "NEM Feed-in Tariffs: Maximising Export Value in 2026",
+    "date": "22 May 2026",
+    "read": "6 min",
+    "author": "James Okonkwo",
+    "excerpt": "Retailers across the National Electricity Market offer widely different feed-in rates — here's how to pick the right plan.",
+    "body": [
+      "<p>The National Electricity Market (NEM) connects Queensland, NSW, Victoria, SA and Tasmania. Your retailer sets the feed-in tariff (FiT) for surplus solar exported to the grid.</p>",
+      "<p>In 2026, competitive plans range from 4¢ to 12¢ per kWh depending on state and retailer. Self-consumption plus a modest battery often beats chasing the highest FiT alone.</p>",
+      "<h2>Time-of-use alignment</h2><p>Pairing solar with controlled loads during peak generation lifts self-consumption above 65% without oversizing your array.</p>"
+    ]
+  },
+  {
+    "id": "battery-backup-guide",
+    "title": "Battery Backup During Grid Outages: A Practical Guide",
+    "date": "8 May 2026",
+    "read": "8 min",
+    "author": "Priya Nair",
+    "excerpt": "Not every battery provides true backup. Learn whole-home vs essential-circuit islanding.",
+    "body": [
+      "<p>When storms or bushfire risk trigger outages, a correctly configured battery keeps lights, refrigeration and communications online.</p>",
+      "<p>Whole-home backup requires adequate capacity and a gateway that isolates your home from the grid — mandatory under AS/NZS 4777.</p>",
+      "<h2>Sizing for backup</h2><p>Essential-circuit backup typically needs 10–15 kWh usable storage. We map critical loads during your free site inspection.</p>"
+    ]
+  },
+  {
+    "id": "commercial-solar-roi",
+    "title": "Commercial Solar ROI: Demand Charges and Depreciation",
+    "date": "15 Apr 2026",
+    "read": "9 min",
+    "author": "James Okonkwo",
+    "excerpt": "How Australian businesses cut demand charges and leverage temporary full expensing.",
+    "body": [
+      "<p>Commercial sites on NEM tariffs often pay demand charges based on peak kW draw. Solar plus load shifting can trim peaks by 20–40%.</p>",
+      "<p>Eligible businesses may access temporary full expensing for solar assets, improving after-tax payback to under four years in high-irradiance states.</p>"
+    ]
+  },
+  {
+    "id": "ev-solar-charging",
+    "title": "Charging Your EV with Solar",
+    "date": "2 Apr 2026",
+    "read": "5 min",
+    "author": "Maya Chen",
+    "excerpt": "Three ways to ensure your EV draws from rooftop generation before the grid.",
+    "body": [
+      "<p>Smart EV chargers with CT clamp monitoring throttle charge rate to match real-time solar export.</p>",
+      "<p>Sunterra installs CEC-approved chargers with solar diversion modes compatible with major inverter brands.</p>"
+    ]
+  },
+  {
+    "id": "panel-degradation",
+    "title": "Solar Panel Degradation: 25-Year Warranties Explained",
+    "date": "19 Mar 2026",
+    "read": "6 min",
+    "author": "Priya Nair",
+    "excerpt": "Tier-one modules degrade roughly 0.5% per year. How linear performance warranties protect your investment.",
+    "body": [
+      "<p>Reputable manufacturers guarantee at least 80–84% of nameplate output after 25 years. Sunterra only specifies panels with independent testing and Australian warranty support.</p>"
+    ]
+  }
+]

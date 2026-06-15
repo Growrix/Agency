@@ -1,0 +1,66 @@
+---
+description: Design system token rules — apply when creating or modifying the visual design, theme, colors, typography, spacing, or any CSS token system for a website
+alwaysApply: false
+---
+
+# Design System Rules
+
+Before building any page, define the complete design system as CSS custom properties in `:root`. Never hardcode raw values in component CSS — always consume tokens.
+
+## Required token groups
+
+### Colors (light + dark values for each role)
+
+- `--color-primary` (+ `-hover`, `-active`, `-soft`)
+- `--color-secondary`
+- `--color-accent`
+- `--color-success`, `--color-warning`, `--color-error` (+ `-soft` surfaces for banners/badges)
+- `--color-bg` (page background), `--color-surface` (cards/panels), `--color-surface-2` (nested)
+- `--color-text`, `--color-text-muted`, `--color-border`
+- All text/background pairs must meet WCAG AA contrast: 4.5:1 body text, 3:1 large text and UI components
+
+### Typography
+
+- Font stacks: prefer system stack (`--font-sans`, optional `--font-display`); if a webfont is essential, embed via `@font-face` with `font-display: swap` — never a render-blocking `<link>`
+- Scale (fluid with `clamp()`):
+  - `--text-display` (~clamp(2.5rem, 5vw + 1rem, 4.5rem))
+  - `--text-h1`, `--text-h2`, `--text-h3` (headings)
+  - `--text-subheading`
+  - `--text-body` (1rem), `--text-sm`, `--text-caption` (0.75–0.8125rem)
+- Line heights: `--leading-tight` (1.1–1.2 display/headings), `--leading-normal` (1.5–1.7 body)
+- Weights: `--font-regular: 400`, `--font-medium: 500`, `--font-semibold: 600`, `--font-bold: 700`
+
+### Spacing scale (px values, expressed in rem)
+
+`--space-1: 0.25rem` (4) · `--space-2: 0.5rem` (8) · `--space-3: 0.75rem` (12) · `--space-4: 1rem` (16) · `--space-6: 1.5rem` (24) · `--space-8: 2rem` (32) · `--space-12: 3rem` (48) · `--space-16: 4rem` (64) · `--space-24: 6rem` (96)
+
+### Radius
+
+`--radius-sm: 6px` · `--radius-md: 10px` · `--radius-lg: 16px` · `--radius-xl: 24px` · `--radius-full: 9999px`
+
+### Shadows
+
+`--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl` — layered, low-opacity shadows; adjust opacity for dark mode (shadows nearly invisible on dark surfaces; prefer borders/elevation color shifts)
+
+### Grid and layout
+
+- `--container-max: 72rem` (1152px) default; `--container-wide: 80rem` for ultra-wide sections
+- `.container` utility: `width: min(100% - 2 * var(--space-4), var(--container-max)); margin-inline: auto;`
+- 12-column mental model implemented with CSS Grid (`grid-template-columns: repeat(12, 1fr)` or `auto-fit/minmax` for card grids)
+
+### Breakpoints (min-width)
+
+`--bp-sm: 640px` · `--bp-md: 768px` · `--bp-lg: 1024px` · `--bp-xl: 1280px` · `--bp-2xl: 1536px`
+(Media queries cannot use custom properties — document these as comments and use the raw values consistently.)
+
+### Motion
+
+- Durations: `--duration-fast: 150ms`, `--duration-base: 250ms`, `--duration-slow: 400ms`
+- Easings: `--ease-out: cubic-bezier(0.22, 1, 0.36, 1)`, `--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1)`
+- Reveal distance: `--reveal-distance: 24px`
+- Every animation must be disabled or reduced under `@media (prefers-reduced-motion: reduce)`
+
+## Dark mode
+
+- Default theme chosen by `prefers-color-scheme`; explicit override via `[data-theme="light"|"dark"]` on `<html>`, toggled by JS and persisted to `localStorage`
+- Only token values change between themes — component CSS never branches on theme

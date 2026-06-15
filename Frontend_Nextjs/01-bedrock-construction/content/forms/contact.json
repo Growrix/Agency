@@ -1,0 +1,31 @@
+{
+  "contact": {
+    "projectTypes": [
+      "Commercial Construction",
+      "Residential Construction",
+      "Industrial Construction",
+      "Infrastructure Development",
+      "Renovation & Remodeling",
+      "Design & Build",
+      "Other"
+    ],
+    "budgetOptions": [
+      "Under $10M",
+      "$10M – $50M",
+      "$50M – $200M",
+      "$200M – $500M",
+      "$500M+"
+    ],
+    "submitSuccess": "Request received — we'll be in touch within one business day.",
+    "submitLabel": "Send request"
+  },
+  "newsletter": {
+    "placeholder": "Your work email",
+    "footerPlaceholder": "Email address",
+    "successMessage": "Subscribed — thank you!"
+  },
+  "fab": {
+    "openLabel": "Contact options",
+    "closeLabel": "Close contact options"
+  }
+}

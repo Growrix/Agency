@@ -1,0 +1,57 @@
+---
+description: Performance (Core Web Vitals) and SEO requirements for all HTML output
+globs: **/*.html
+alwaysApply: false
+---
+
+# Performance and SEO Rules
+
+Targets: Lighthouse Performance 95+, SEO 100, Best Practices 100. Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms.
+
+## Performance
+
+### Images
+
+- Prefer inline SVG (illustrations, icons, patterns, logos) and CSS gradients — zero network cost, infinitely scalable
+- For photographic placeholders use lightweight SVG data-URI placeholders, not external image services
+- Any `<img>` MUST have explicit `width` and `height` (or `aspect-ratio` in CSS) to prevent CLS
+- Below-the-fold images: `loading="lazy" decoding="async"`; the LCP/hero image must NOT be lazy-loaded (use `fetchpriority="high"` if it is an `<img>`)
+
+### Fonts
+
+- Default to the system font stack (zero cost). If a webfont is essential: embed via `@font-face` + `font-display: swap`, subset, WOFF2 only — never a render-blocking stylesheet `<link>`
+- Avoid FOIT; size-adjust fallback metrics if the design is font-sensitive
+
+### CSS / JS
+
+- Single `<style>` in `<head>` (inherently render-non-blocking-critical), single `<script>` at end of `<body>`
+- No external scripts, no third-party embeds by default
+- Animate only `transform` and `opacity`; never animate layout properties (width/height/top/left)
+- Use `IntersectionObserver` (not scroll listeners) for reveals; passive event listeners for any scroll/touch handlers
+- Debounce/throttle resize handlers; prefer CSS-only solutions over JS where possible
+- Avoid layout thrash: batch DOM reads/writes; use `requestAnimationFrame` for visual updates
+
+### CLS discipline
+
+- Reserve space for everything that loads or toggles (aspect-ratio boxes, min-heights on dynamic regions)
+- No content insertion above existing content after load
+
+## SEO
+
+### Head (mandatory)
+
+- `<title>` 50–60 chars; `<meta name="description">` 140–160 chars
+- Canonical: `<link rel="canonical">` (use a placeholder domain comment if unknown)
+- Open Graph: `og:title`, `og:description`, `og:type`, `og:url`, `og:image`
+- Twitter: `twitter:card` (summary_large_image), `twitter:title`, `twitter:description`
+- `<meta name="robots" content="index, follow">`
+
+### Structured data
+
+- JSON-LD `<script type="application/ld+json">` matched to site type: `Organization`/`WebSite` always; plus `Product`, `LocalBusiness`, `FAQPage`, `Service`, etc. as relevant
+
+### Content
+
+- Single `<h1>` containing the primary keyword/value proposition; descriptive heading hierarchy
+- Descriptive link text (never "click here"); `rel="noopener"` on `target="_blank"` links
+- Semantic HTML throughout — it is the SEO backbone of a static template

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "commercial",
+    "num": "01",
+    "title": "Commercial Construction",
+    "description": "Office towers, business parks and retail developments delivered to spec, on schedule.",
+    "icon": "building"
+  },
+  {
+    "id": "residential",
+    "num": "02",
+    "title": "Residential Construction",
+    "description": "Luxury villas, apartments and master-planned communities built to endure.",
+    "icon": "home"
+  },
+  {
+    "id": "industrial",
+    "num": "03",
+    "title": "Industrial Construction",
+    "description": "Factories, warehouses and logistics centres engineered for throughput.",
+    "icon": "factory"
+  },
+  {
+    "id": "infrastructure",
+    "num": "04",
+    "title": "Infrastructure Development",
+    "description": "Roads, bridges and utilities that move cities forward.",
+    "icon": "road"
+  },
+  {
+    "id": "renovation",
+    "num": "05",
+    "title": "Renovation & Remodeling",
+    "description": "Modernisation and fit-out of complex live environments.",
+    "icon": "hammer"
+  },
+  {
+    "id": "design-build",
+    "num": "06",
+    "title": "Design & Build",
+    "description": "End-to-end delivery under a single point of accountability.",
+    "icon": "design"
+  }
+]

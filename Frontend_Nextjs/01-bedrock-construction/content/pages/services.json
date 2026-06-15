@@ -1,0 +1,62 @@
+{
+  "slug": "services",
+  "title": "Our capabilities",
+  "description": "Six core service lines. One accountable team. From first feasibility to final handover.",
+  "hero": {
+    "breadcrumb": "Our capabilities",
+    "eyebrow": "Our capabilities",
+    "title": "End-to-end delivery\nacross every asset class.",
+    "lede": "Six core service lines. One accountable team. From first feasibility to final handover.",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80"
+  },
+  "sections": [
+    {
+      "num": "01",
+      "title": "Office towers, retail & business parks",
+      "lede": "Large-scale office towers, mixed-use business parks and flagship retail destinations. We deliver every major component in-house — structure, envelope, fit-out — giving owners single-point accountability and tighter cost control than any multi-subcontract model.",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+      "imageAlt": "Commercial Construction",
+      "imageFirst": true
+    },
+    {
+      "num": "02",
+      "title": "Luxury homes, apartments & communities",
+      "lede": "From signature single-family villas to high-rise apartment towers and master-planned residential communities. Our dedicated residential division brings construction finance structuring, design coordination and sales-phasing expertise together under one roof.",
+      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+      "imageAlt": "Residential Construction",
+      "imageFirst": false
+    },
+    {
+      "num": "03",
+      "title": "Factories, warehouses & logistics centres",
+      "lede": "Greenfield and brownfield industrial facilities — automotive plants, pharmaceutical manufacturing, e-commerce fulfilment centres and cold-chain logistics hubs. Engineered for maximum throughput, energy efficiency and future adaptability.",
+      "image": "https://images.unsplash.com/photo-1565610222536-ef125c59da2e?auto=format&fit=crop&w=1200&q=80",
+      "imageAlt": "Industrial Construction",
+      "imageFirst": true
+    },
+    {
+      "num": "04",
+      "title": "Roads, bridges, rail & utilities",
+      "lede": "Civil infrastructure at scale — from urban road networks and cable-stayed bridges to rail viaducts, water treatment plants and power transmission corridors. We have delivered over $8B in infrastructure value across four continents.",
+      "image": "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=1200&q=80",
+      "imageAlt": "Infrastructure Development",
+      "imageFirst": false
+    },
+    {
+      "num": "05",
+      "title": "Modernisation of complex live environments",
+      "lede": "Structural upgrades, seismic retrofits, interior renovations and full strip-out-and-rebuild programmes — often while buildings remain occupied. Our live-environment protocols protect tenants, meet OSHA requirements and keep schedules intact.",
+      "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+      "imageAlt": "Renovation & Remodeling",
+      "imageFirst": true
+    },
+    {
+      "num": "06",
+      "title": "One contract. One point of accountability.",
+      "lede": "Integrated design-and-build delivery means architects, engineers and contractors work from a single brief under a single contract. Faster decisions, no scope gaps, and a GMP price established earlier in the project lifecycle.",
+      "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
+      "imageAlt": "Design & Build",
+      "imageFirst": false
+    }
+  ]
+}

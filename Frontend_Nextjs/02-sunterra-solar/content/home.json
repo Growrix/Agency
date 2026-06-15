@@ -1,0 +1,176 @@
+{
+  "hero": {
+    "eyebrow": "CEC Accredited · 12+ Years · 8,400+ Installs",
+    "title": "Reduce your electricity bills by up to",
+    "titleHighlight": "80%",
+    "lede": "Power your home with Australia's solar experts — tier-one solar, battery storage and EV charging across the NEM, with STC rebates applied upfront and DNSP approvals handled end to end.",
+    "ctas": [
+      { "label": "Get free quote", "href": "/quote" },
+      { "label": "Calculate savings", "href": "/calculator" }
+    ],
+    "trustChips": ["STC rebates included", "10-year workmanship", "$0 upfront finance"],
+    "form": {
+      "title": "60-second quote",
+      "subtitle": "Tell us about your property — we'll model STCs and annual savings in AUD.",
+      "submitLabel": "Request callback",
+      "billOptions": [
+        { "value": "300", "label": "Under $300" },
+        { "value": "450", "label": "$300–$500" },
+        { "value": "650", "label": "$500–$800" },
+        { "value": "900", "label": "$800+" }
+      ]
+    }
+  },
+  "trustBar": [
+    "CEC Accredited Installer",
+    "Clean Energy Council Member",
+    "Tier-one panel partners",
+    "4.9★ from 847 reviews"
+  ],
+  "calcPreview": {
+    "eyebrow": "Savings calculator",
+    "title": "See your STC rebate and payback in AUD",
+    "lede": "Model annual generation using your state irradiance, electricity rate and system size. Includes 2026 deeming period and zone factors.",
+    "cta": { "label": "Open full calculator", "href": "/calculator" }
+  },
+  "services": {
+    "eyebrow": "Our services",
+    "title": "Complete solar solutions for Australian homes and businesses",
+    "link": { "label": "View all services", "href": "/residential" }
+  },
+  "whySolar": {
+    "eyebrow": "Why solar",
+    "title": "Four reasons Australians are switching now",
+    "pillars": [
+      {
+        "title": "Cut electricity bills",
+        "text": "Average households save $1,200–$2,400 AUD per year by self-consuming solar across the NEM."
+      },
+      {
+        "title": "STC rebates",
+        "text": "Federal STCs reduce upfront cost by thousands. We claim them at point of sale — no paperwork for you."
+      },
+      {
+        "title": "Energy independence",
+        "text": "Batteries and EV chargers let you store and use your own power during peak tariffs and outages."
+      },
+      {
+        "title": "Increase property value",
+        "text": "Homes with CEC-installed solar sell faster. Buyers value lower running costs and warranty transferability."
+      }
+    ]
+  },
+  "rebatesBand": {
+    "title": "Maximise STC and state rebates in 2026",
+    "lede": "Federal STCs plus state battery incentives in NSW, VIC, SA and ACT can stack for eligible households.",
+    "items": [
+      "STC spot price applied at quote — typically $36–$40 per certificate",
+      "Solar Victoria battery rebate eligibility checks",
+      "NSW battery incentive and interest-free loan guidance",
+      "ACT Sustainable Household Scheme support"
+    ],
+    "cta": { "label": "Check your rebates", "href": "/rebates" }
+  },
+  "whyUs": {
+    "eyebrow": "Why Sunterra",
+    "title": "Australia's trusted solar partner since 2014",
+    "lede": "We're CEC accredited across every state in the NEM. Our in-house designers, installers and customer care team manage DNSP approvals, STC claims and commissioning — so you switch on with confidence.",
+    "items": [
+      {
+        "num": "1",
+        "title": "CEC-accredited design & install",
+        "text": "Every system uses Clean Energy Council approved products and certified installers."
+      },
+      {
+        "num": "2",
+        "title": "Transparent AUD pricing",
+        "text": "Itemised quotes with STC breakdown, no hidden fees, and finance options explained clearly."
+      },
+      {
+        "num": "3",
+        "title": "Local teams in every state",
+        "text": "NSW, VIC, QLD, SA, WA, TAS, NT and ACT — we know your DNSP rules."
+      },
+      {
+        "num": "4",
+        "title": "10-year workmanship warranty",
+        "text": "Plus manufacturer panel and inverter warranties up to 25 years."
+      }
+    ],
+    "cta": { "label": "Why choose us", "href": "/why-us" }
+  },
+  "stats": [
+    { "value": "8400", "label": "Installations completed", "counter": 8400, "suffix": "+" },
+    { "value": "62 MW", "label": "Total capacity deployed", "counter": 62 },
+    { "value": "4.9★", "label": "Average customer rating" },
+    { "value": "12", "label": "Years serving Australia", "counter": 12, "suffix": "+" }
+  ],
+  "caseStudies": {
+    "eyebrow": "Case studies",
+    "title": "Real results across the NEM",
+    "link": { "label": "All case studies", "href": "/case-studies" }
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "Trusted by homeowners and businesses nationwide"
+  },
+  "partners": {
+    "eyebrow": "Partners",
+    "title": "Tier-one equipment partners",
+    "items": [
+      { "name": "REC" },
+      { "name": "Jinko Solar" },
+      { "name": "Sungrow" },
+      { "name": "Fronius" },
+      { "name": "Tesla" },
+      { "name": "BYD" },
+      { "name": "SolarEdge" },
+      { "name": "Enphase" }
+    ]
+  },
+  "finance": {
+    "eyebrow": "Finance",
+    "title": "$0 upfront solar finance",
+    "lede": "Green loans from accredited Australian lenders. Repayments often less than your pre-solar electricity bill.",
+    "features": [
+      "Rates from 6.9% p.a. comparison rate",
+      "Terms up to 7 years",
+      "STC rebate still applied upfront"
+    ],
+    "cta": { "label": "Explore finance", "href": "/finance" },
+    "cardTitle": "From $0 upfront",
+    "cardText": "Subject to lender approval. Example: 6.6 kW system at $8,200 after STCs, $89/fortnight over 5 years."
+  },
+  "serviceAreas": {
+    "eyebrow": "Service areas",
+    "title": "Installing across every Australian state and territory",
+    "areas": [
+      { "state": "New South Wales", "dnsps": "Ausgrid / Endeavour / Essential" },
+      { "state": "Victoria", "dnsps": "CitiPower / Powercor / Jemena" },
+      { "state": "Queensland", "dnsps": "Energex / Ergon" },
+      { "state": "South Australia", "dnsps": "SA Power Networks" },
+      { "state": "Western Australia", "dnsps": "Western Power / Horizon" },
+      { "state": "Tasmania", "dnsps": "TasNetworks" },
+      { "state": "Northern Territory", "dnsps": "Power and Water" },
+      { "state": "Australian Capital Territory", "dnsps": "Evoenergy" }
+    ]
+  },
+  "blog": {
+    "eyebrow": "Blog",
+    "title": "Solar insights for Australian homeowners",
+    "link": { "label": "All articles", "href": "/blog" }
+  },
+  "faqPreview": {
+    "eyebrow": "FAQ",
+    "title": "Common questions",
+    "cta": { "label": "View all FAQs", "href": "/faq" }
+  },
+  "ctaBand": {
+    "title": "Ready to power your home with solar?",
+    "lede": "Book a free CEC site inspection or get an instant quote.",
+    "actions": [
+      { "label": "Get free quote", "href": "/quote" },
+      { "label": "Call us", "href": "tel:1300786837" }
+    ]
+  }
+}

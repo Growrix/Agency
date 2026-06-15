@@ -1,0 +1,77 @@
+{
+  "source": "sites/01-BedrockConstruction.html",
+  "fileName": "01-BedrockConstruction.html",
+  "targetFolder": null,
+  "targetPath": null,
+  "generatedAt": "2026-06-11T17:24:15.654Z",
+  "sections": [],
+  "routes": [],
+  "initFunctions": [
+    {
+      "html": "initBottomNav",
+      "suggestedHook": "useBottomNav"
+    },
+    {
+      "html": "initContactForm",
+      "suggestedHook": "useContactForm"
+    },
+    {
+      "html": "initCounters",
+      "suggestedHook": "useCounters"
+    },
+    {
+      "html": "initDrawer",
+      "suggestedHook": "useDrawer"
+    },
+    {
+      "html": "initFab",
+      "suggestedHook": "useFab"
+    },
+    {
+      "html": "initNavbar",
+      "suggestedHook": "useNavbar"
+    },
+    {
+      "html": "initNewsletters",
+      "suggestedHook": "useNewsletters"
+    },
+    {
+      "html": "initReveal",
+      "suggestedHook": "useReveal"
+    },
+    {
+      "html": "initRouter",
+      "suggestedHook": "useRouter"
+    },
+    {
+      "html": "initTestimonials",
+      "suggestedHook": "useTestimonials"
+    }
+  ],
+  "contentExtractions": [],
+  "designTokens": {
+    "lightCount": 18,
+    "darkCount": 0,
+    "light": {
+      "--accent": "#FF5A1F",
+      "--accent-t": "#FF7A47",
+      "--accent2": "#FFC400",
+      "--bg": "#0B0C0E",
+      "--surface": "#14161A",
+      "--surface2": "#1B1E23",
+      "--elevated": "#1F2329",
+      "--border": "#2A2F36",
+      "--borders": "#3A4049",
+      "--text": "#F2F4F6",
+      "--muted": "#9AA2AB",
+      "--faint": "#6B727B",
+      "--fd": "'Archivo','Arial Narrow',sans-serif",
+      "--fb": "'Space Grotesk','Helvetica Neue',Arial,sans-serif",
+      "--fm": "'IBM Plex Mono',ui-monospace,monospace",
+      "--rc": "18px",
+      "--rb": "14px",
+      "--ri": "14px"
+    },
+    "dark": {}
+  }
+}

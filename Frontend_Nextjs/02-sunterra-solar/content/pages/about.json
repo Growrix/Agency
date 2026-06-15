@@ -1,0 +1,18 @@
+{
+  "slug": "about",
+  "title": "About Sunterra Solar",
+  "description": "CEC-accredited solar specialists serving Australia since 2014.",
+  "hero": {
+    "title": "About Sunterra Solar",
+    "lede": "CEC-accredited solar specialists serving Australia since 2014.",
+    "breadcrumb": "About"
+  },
+  "prose": [
+    "<p>Sunterra Solar was founded in Sydney with a simple mission: make premium solar accessible to every Australian household and business. Today we operate across all states and territories in the National Electricity Market, with over 8,400 installations and 62 MW deployed.</p>",
+    "<h2>Our credentials</h2>",
+    "<ul><li>Clean Energy Council accredited installer and designer</li><li>Member of Smart Energy Council</li><li>ISO 9001 quality management</li><li>$20M public liability insurance</li></ul>",
+    "<h2>Our process</h2>",
+    "<p>Every project follows our Sunterra Standard: free site assessment → custom design → itemised AUD quote with STC breakdown → DNSP approval → CEC install → commissioning and handover → lifetime support.</p>",
+    "<p><a class=\"btn btn--primary\" href=\"#/contact\">Contact our team</a></p>"
+  ]
+}

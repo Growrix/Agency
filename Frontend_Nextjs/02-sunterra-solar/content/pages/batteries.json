@@ -1,0 +1,22 @@
+{
+  "slug": "batteries",
+  "title": "Home Battery Storage",
+  "description": "Store solar for evening peaks, backup power and higher self-consumption across the NEM.",
+  "hero": {
+    "title": "Home Battery Storage",
+    "lede": "Store solar for evening peaks, backup power and higher self-consumption across the NEM.",
+    "breadcrumb": "Home Battery Storage"
+  },
+  "prose": [
+    "<p>Store solar for evening peaks, backup power and higher self-consumption across the NEM.</p>",
+    "<h2>What's included</h2>",
+    "<ul class='feature-list'><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Tesla Powerwall 3, Sungrow SBR, BYD Battery-Box</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> Essential-circuit or whole-home backup</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> AS/NZS 4777 compliant islanding</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> State battery rebate eligibility checks</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> AC-coupled retrofit options</li><li><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" aria-hidden=\"true\" focusable=\"false\">",
+    "<path d=\"m5 13 4 4L19 7\"/></svg> 10-year battery warranty (brand dependent)</li></ul>",
+    "<p style='margin-top:2rem'><a class='btn btn--accent' href='#/quote'>Get a Home Battery Storage quote</a> <a class='btn btn--secondary' href='#/inspection'>Book inspection</a></p>"
+  ]
+}

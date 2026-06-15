@@ -1,0 +1,47 @@
+---
+description: WCAG AA+ accessibility requirements for all HTML output
+globs: **/*.html
+alwaysApply: false
+---
+
+# Accessibility Rules (WCAG AA+)
+
+Never sacrifice accessibility for aesthetics. Target: Lighthouse Accessibility 100, WCAG 2.2 AA minimum.
+
+## Structure and semantics
+
+- One `<h1>` per page; heading levels never skip (h1 → h2 → h3)
+- Landmarks: `<header>`, `<nav aria-label="Main">`, `<main id="main">`, `<footer>`; multiple navs get distinct `aria-label`s
+- Skip link (`.skip-link`) as the first focusable element, visually hidden until focused
+- Use native elements before ARIA: `<button>` for actions, `<a>` for navigation, `<details>` for simple disclosure
+- Lists are real `<ul>/<ol>`; tables have `<th scope>`; images have meaningful `alt` (or `alt=""` if decorative)
+
+## Keyboard
+
+- Every interactive element reachable and operable by keyboard alone (Tab/Shift+Tab, Enter/Space, Escape, arrows where idiomatic)
+- Visible focus: style `:focus-visible` with a 2px+ outline token (`--color-primary` based), offset 2px; never `outline: none` without replacement
+- Mobile nav drawer: trap focus while open, close on Escape, return focus to the toggle button
+- Custom widgets (tabs, accordion, carousel) follow WAI-ARIA Authoring Practices keyboard patterns
+
+## ARIA
+
+- Toggle buttons: `aria-expanded` + `aria-controls`
+- Accordions: button in heading, `aria-expanded`, region with `aria-labelledby` (or use `<details>/<summary>`)
+- Tabs: `role="tablist"/"tab"/"tabpanel"`, `aria-selected`, roving tabindex, arrow-key navigation
+- Live feedback (form success/error, async states): `role="status"` or `aria-live="polite"`
+- Icon-only buttons: `aria-label`; decorative SVGs: `aria-hidden="true" focusable="false"`
+
+## Forms
+
+- Every input has a programmatically associated `<label>` (`for`/`id`)
+- Required fields: `required` + visible indicator explained in text, not color alone
+- Errors: inline message linked via `aria-describedby`, `aria-invalid="true"` on the field, focus moved to first invalid field on submit
+- Autocomplete attributes on identity fields (`autocomplete="email"`, `name`, etc.)
+
+## Visual
+
+- Contrast: 4.5:1 normal text, 3:1 large text (≥24px or ≥18.7px bold), 3:1 UI components and focus indicators — in BOTH themes
+- Never convey meaning by color alone (pair with icon/text)
+- Touch targets ≥ 44×44px (or 24px with sufficient spacing)
+- Text resizable to 200% without loss of content; layout survives 320px width
+- `prefers-reduced-motion: reduce` disables/reduces all non-essential animation
