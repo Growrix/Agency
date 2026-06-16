@@ -88,7 +88,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Section className="pt-12 sm:pt-16 pb-12 relative overflow-hidden">
+      <Section className="hero-section pt-12 sm:pt-16 pb-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="max-w-3xl">

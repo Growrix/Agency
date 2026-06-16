@@ -152,7 +152,7 @@ export function PricingPageClient() {
 
   return (
     <>
-      <Section className="relative overflow-hidden pb-12 pt-12 sm:pt-16">
+      <Section className="hero-section relative overflow-hidden pb-12 pt-12 sm:pt-16">
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
         <Container>
           <div className="max-w-3xl">

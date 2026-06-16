@@ -30,7 +30,7 @@ const DESTINATIONS = [
 
 export default function NotFound() {
   return (
-    <Section className="pt-16 sm:pt-24 pb-24 relative overflow-hidden">
+    <Section className="hero-section pt-16 sm:pt-24 pb-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
       <Container width="content">
         <div className="text-center max-w-2xl mx-auto">

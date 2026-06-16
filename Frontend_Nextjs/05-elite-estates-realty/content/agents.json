@@ -1,0 +1,30 @@
+[
+  {
+    "id": "victoria-lane",
+    "name": "Victoria Lane",
+    "role": "Global Luxury Director",
+    "languages": "20 yrs exp - English, French, Italian",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "id": "james-moreau",
+    "name": "James Moreau",
+    "role": "Commercial and Investment",
+    "languages": "17 yrs exp - English, Spanish",
+    "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "id": "sofia-chen",
+    "name": "Sofia Chen",
+    "role": "Residential and New Development",
+    "languages": "14 yrs exp - English, Mandarin, Cantonese",
+    "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "id": "alexei-romanov",
+    "name": "Alexei Romanov",
+    "role": "International Sales",
+    "languages": "22 yrs exp - English, Russian, German",
+    "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=700&q=80"
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "main": [
+    { "label": "Properties", "href": "/properties" },
+    { "label": "Buy", "href": "/buy" },
+    { "label": "Rent", "href": "/rent" },
+    { "label": "Commercial", "href": "/commercial" },
+    { "label": "Agents", "href": "/agents" },
+    { "label": "Investment", "href": "/investment" },
+    { "label": "About", "href": "/about" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "bottom": [
+    { "label": "Home", "href": "/" },
+    { "label": "Search", "href": "/properties" },
+    { "label": "Listings", "href": "/properties" },
+    { "label": "Invest", "href": "/investment" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "ticker": [
+    "NEW LISTING - Palm Jumeirah Villa - $12.5M - 5 BD - Waterfront",
+    "INVESTMENT OPPORTUNITY - Singapore CBD Penthouse - 7.2% Yield",
+    "EXCLUSIVE LAUNCH - The Clarendon, Knightsbridge - Register Now",
+    "OFF-MARKET - French Riviera Villa - EUR18M - Cote d'Azur"
+  ],
+  "headerCtas": {
+    "consultation": { "label": "Consultation", "href": "/contact" },
+    "browse": { "label": "Browse Properties", "href": "/properties", "accent": true }
+  },
+  "accessibility": {
+    "skipToContentLabel": "Skip to content",
+    "tickerAriaLabel": "Market updates",
+    "primaryNavLabel": "Primary navigation",
+    "mobileNavLabel": "Mobile navigation",
+    "drawerLabel": "Mobile menu",
+    "openMenuLabel": "Open menu",
+    "closeMenuLabel": "Close menu",
+    "closeDrawerLabel": "Close drawer",
+    "toggleThemeLabel": "Toggle theme",
+    "drawerLinksLabel": "Drawer links",
+    "homepageLinkLabel": "Go to homepage",
+    "tickerPauseLabel": "Pause updates",
+    "tickerPlayLabel": "Play updates"
+  },
+  "footerLabels": {
+    "properties": "Properties",
+    "company": "Company",
+    "resources": "Resources",
+    "globalHq": "Global HQ",
+    "allRightsReserved": "All Rights Reserved."
+  },
+  "footerNewsletter": {
+    "title": "Weekly Market Brief",
+    "emailLabel": "Email for newsletter updates",
+    "placeholder": "name@company.com",
+    "submitLabel": "Subscribe",
+    "successMessage": "You are subscribed. Our next market brief will arrive shortly.",
+    "invalidMessage": "Enter a valid email address to subscribe."
+  },
+  "footer": {
+    "properties": [
+      { "label": "Buy", "href": "/buy" },
+      { "label": "Rent", "href": "/rent" },
+      { "label": "Commercial", "href": "/commercial" },
+      { "label": "Investment", "href": "/investment" }
+    ],
+    "company": [
+      { "label": "About Us", "href": "/about" },
+      { "label": "Our Agents", "href": "/agents" },
+      { "label": "Listings", "href": "/properties" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "resources": [
+      { "label": "Market Reports", "href": "/investment" },
+      { "label": "ROI Insights", "href": "/investment" },
+      { "label": "Buyer Guide", "href": "/buy" },
+      { "label": "Property Alerts", "href": "/contact" }
+    ],
+    "legal": [
+      { "label": "Privacy", "href": "/about" },
+      { "label": "Terms", "href": "/about" },
+      { "label": "Cookies", "href": "/about" }
+    ]
+  }
+}

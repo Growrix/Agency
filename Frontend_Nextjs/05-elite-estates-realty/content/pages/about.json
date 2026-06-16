@@ -1,0 +1,30 @@
+{
+  "slug": "about",
+  "hero": {
+    "eyebrow": "About Us",
+    "title": "20 years defining luxury real estate.",
+    "lede": "Elite Estates was founded in 2005 with a singular mission: provide discerning clients with unparalleled access to the world's finest properties.",
+    "backgroundImage": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "About Us"
+  },
+  "seo": {
+    "title": "About",
+    "description": "Learn how Elite Estates built a global luxury advisory rooted in discretion, expertise, and long-term client trust."
+  },
+  "section": {
+    "eyebrow": "Our Story",
+    "title": "Built on discretion, delivered with excellence",
+    "lede": "What began as a boutique London agency has grown into a global advisory operation while preserving the discretion and specialist guidance our clients expect.",
+    "bullets": [
+      "RICS member firm and international partner network",
+      "Award-winning advisory across residential and commercial segments",
+      "Long-term client relationships built on trust and confidentiality"
+    ],
+    "stats": [
+      { "value": "20+", "label": "Years in Business", "counter": 20, "suffix": "+" },
+      { "value": "480+", "label": "Global Agents", "counter": 480, "suffix": "+" },
+      { "value": "62", "label": "Offices Worldwide", "counter": 62 },
+      { "value": "4.9", "label": "Client Rating" }
+    ]
+  }
+}

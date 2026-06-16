@@ -88,7 +88,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
 
   return (
     <>
-      <Section className="pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
+      <Section className="hero-section pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container>
           <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">

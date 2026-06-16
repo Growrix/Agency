@@ -92,11 +92,18 @@ Run `classify-routes.mjs`. Build interactive routes as React views per `referenc
 
 ### Phase 7 — Audit trio
 
-Delegate `nextjs-accessibility-auditor`, `nextjs-performance-optimizer`, `nextjs-code-reviewer`. Fix all blocking findings.
+Delegate `nextjs-accessibility-auditor`, `nextjs-performance-optimizer`, `nextjs-code-reviewer`. Fix all blocking findings until there are **zero P0/P1 blockers**.
 
 ### Phase 8 — Build verify
 
 `pnpm build` passes with zero TypeScript errors.
+
+### Phase 8.5 — Dev server runtime validation (blocking)
+
+- Check terminal metadata first for an existing `pnpm dev` process in the same target folder.
+- If already running for the migrated site, **do not launch a duplicate**. Validate health from logs (`Local` + `Ready`) and verify an HTTP `200` response from the local URL.
+- If not running, start `pnpm dev`, wait for startup readiness, and verify an HTTP `200` response.
+- Resolve startup errors/warnings that indicate broken runtime behavior before sign-off.
 
 ### Phase 9 — Visual parity gate (blocking)
 
@@ -142,7 +149,8 @@ Delegate `nextjs-visual-parity-auditor`. Fix all P0/P1 findings. Update `PARITY-
 - [ ] No brand/copy hardcoded in TSX outside allowed structural constants
 - [ ] All routes from MIGRATION-MAP implemented
 - [ ] Dark mode + reduced motion work
-- [ ] Audit trio PASS
+- [ ] Audit trio PASS with zero P0/P1 blockers
 - [ ] Visual parity gate PASS (`nextjs-visual-parity-auditor`, zero P0/P1)
+- [ ] Dev server validated (`pnpm dev` ready + HTTP 200, no duplicate server for same target)
 - [ ] Zero emoji icons; zero interactive HTML in prose JSON
 - [ ] Component CSS ported to `@layer components`

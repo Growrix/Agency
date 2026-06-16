@@ -1,0 +1,28 @@
+{
+  "slug": "agents",
+  "hero": {
+    "eyebrow": "Our Agents",
+    "title": "Meet the experts behind your success.",
+    "lede": "Our global team of luxury specialists brings unmatched market knowledge, multilingual capability, and white-glove service.",
+    "backgroundImage": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "Our Agents"
+  },
+  "seo": {
+    "title": "Our Agents",
+    "description": "Meet Elite Estates specialists for residential, commercial, and investment mandates worldwide."
+  },
+  "section": {
+    "eyebrow": "Advisory Team",
+    "title": "Specialists for every mandate",
+    "lede": "From private residential acquisitions to institutional commercial transactions, our advisors pair local intelligence with global execution.",
+    "cardCta": {
+      "label": "Enquire",
+      "href": "/contact",
+      "accent": true
+    },
+    "primaryCta": {
+      "label": "Speak with an Advisor",
+      "href": "/contact"
+    }
+  }
+}

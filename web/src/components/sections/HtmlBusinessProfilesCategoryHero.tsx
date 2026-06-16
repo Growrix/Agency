@@ -49,7 +49,7 @@ export function HtmlBusinessProfilesCategoryHero({
   }));
 
   return (
-    <Section className="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
+    <Section className="hero-section relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
       <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
       <Container>
         {showBackLink ? (

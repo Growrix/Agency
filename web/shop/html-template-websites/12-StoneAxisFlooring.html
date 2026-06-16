@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>StoneAxis — Precision Flooring & Tile Installation</title>
+<meta name="description" content="StoneAxis delivers premium hardwood, vinyl, laminate, stone and tile installations with 15+ years of certified craftsmanship. Free on-site measurement. 10-year warranty."/>
+<meta name="keywords" content="flooring installation, tile installation, hardwood floors, luxury vinyl, porcelain tile, natural stone, floor estimate, certified installers"/>
+<meta property="og:title" content="StoneAxis — Precision Flooring & Tile Installation"/>
+<meta property="og:description" content="500+ projects. 15 years. Certified craftsmen. Free on-site measurement within 24 hours."/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="theme-color" content="#121212"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Crect x='4' y='4' width='10' height='10' fill='%23C79A63'/%3E%3Crect x='18' y='4' width='10' height='10' fill='%233D3D3D'/%3E%3Crect x='4' y='18' width='10' height='10' fill='%233D3D3D'/%3E%3Crect x='18' y='18' width='10' height='10' fill='%23C79A63' opacity='.5'/%3E%3C/svg%3E"/>
+<style>
+/* =========================================================
+   STONEAXIS — INDUSTRIAL MODERN DESIGN SYSTEM
+   Tokens → Components → Sections → Responsive
+   ========================================================= */
+:root{
+  /* — Palette — */
+  --coal:#121212; --stone:#3D3D3D; --steel:#5A5A5A;
+  --concrete:#F7F7F5; --concrete-2:#EEEDE9; --concrete-3:#E3E1DB;
+  --oak:#C79A63; --gold:#D8B16A; --oak-d:#A8803F; --gold-t:#E8CC9A;
+  --white:#FFFFFF; --off-white:#F0EEE8;
+  /* — Semantic — */
+  --bg:var(--concrete); --bg-2:var(--concrete-2); --bg-3:var(--concrete-3);
+  --surface:var(--white); --surface-2:var(--off-white);
+  --panel:var(--coal); --panel-text:#F0EEE8;
+  --text:var(--coal); --muted:var(--stone); --faint:var(--steel);
+  --accent:var(--oak); --accent-d:var(--oak-d); --accent-t:var(--gold-t);
+  --line:#D5D2CB; --line-2:#C0BDB4;
+  /* — Shadow (industrial: offset, no blur) — */
+  --sh1:2px 2px 0 rgba(18,18,18,.12);
+  --sh2:4px 4px 0 rgba(18,18,18,.14);
+  --sh3:6px 8px 0 rgba(18,18,18,.16),0 20px 40px -18px rgba(18,18,18,.2);
+  --sh4:0 30px 60px -20px rgba(18,18,18,.28);
+  /* — Type — */
+  --fd:'Barlow Condensed',system-ui,sans-serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  /* — Scale — */
+  --rc:0px; --rb:8px; --rs:4px; --maxw:1360px;
+}
+[data-theme=dark]{
+  --bg:#0E0E0C; --bg-2:#161614; --bg-3:#1E1E1B;
+  --surface:#1A1A17; --surface-2:#222220;
+  --panel:#F0EEE8; --panel-text:#121212;
+  --text:#F0EEE8; --muted:#A8A49C; --faint:#6E6B64;
+  --line:#2A2A26; --line-2:#383530;
+  --concrete:#0E0E0C; --concrete-2:#161614; --concrete-3:#1E1E1B;
+  --sh1:2px 2px 0 rgba(0,0,0,.45); --sh2:4px 4px 0 rgba(0,0,0,.5);
+  --sh3:6px 8px 0 rgba(0,0,0,.55),0 20px 40px -18px rgba(0,0,0,.5);
+}
+
+/* ---- BASE ---- */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+::selection{background:var(--oak);color:#fff}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,48px);position:relative;z-index:2}
+.section{padding-block:clamp(72px,10vw,140px);position:relative}
+.center{text-align:center}
+.skip-link{position:absolute;left:16px;top:-80px;background:var(--coal);color:var(--off-white);padding:12px 20px;font-weight:700;font-size:14px;z-index:500;transition:top .2s}
+.skip-link:focus{top:14px}
+:focus-visible{outline:2px solid var(--oak);outline-offset:3px}
+
+/* ---- TYPE SYSTEM ---- */
+.label{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:10px}
+.label::before{content:"";width:28px;height:1px;background:var(--accent);display:inline-block}
+.label.muted{color:var(--faint)}.label.muted::before{background:var(--faint)}
+.label.light{color:var(--gold-t)}.label.light::before{background:var(--gold-t)}
+.h1{font-family:var(--fd);font-weight:900;font-size:clamp(3.4rem,8vw,7rem);line-height:.95;letter-spacing:-.01em;text-transform:uppercase}
+.h2{font-family:var(--fd);font-weight:800;font-size:clamp(2.4rem,5vw,4.8rem);line-height:.98;letter-spacing:-.005em;text-transform:uppercase}
+.h3{font-family:var(--fd);font-weight:700;font-size:clamp(1.6rem,3vw,2.8rem);line-height:1.02;text-transform:uppercase;letter-spacing:.005em}
+.h4{font-family:var(--fd);font-weight:700;font-size:clamp(1.2rem,2vw,1.8rem);line-height:1.05;text-transform:uppercase}
+.body-lg{font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.62;color:var(--muted)}
+.serif-accent{font-style:italic;font-family:Georgia,serif;text-transform:none;font-weight:400;color:var(--accent)}
+
+/* ---- GRID ---- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,28px)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,20px)}
+
+/* ---- INDUSTRIAL PRIMITIVES ---- */
+.slab{background:var(--surface);border:1px solid var(--line)}
+.slab-dark{background:var(--panel);color:var(--panel-text);border:1px solid transparent}
+.rule{height:1px;background:var(--line);border:none}
+.rule-accent{height:2px;background:var(--accent);border:none;width:48px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--line-2);color:var(--muted)}
+
+/* ---- BUTTONS ---- */
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--fb);font-weight:700;font-size:14.5px;letter-spacing:.02em;padding:15px 26px;border-radius:var(--rs);transition:transform .2s,box-shadow .2s,background .2s,color .2s;white-space:nowrap;line-height:1;cursor:pointer;border:none}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-lg{padding:18px 32px;font-size:15.5px}
+.btn-sm{padding:11px 18px;font-size:13px}
+.btn-full{width:100%;justify-content:center}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:var(--sh2)}
+.btn-primary:hover{background:var(--accent-d);transform:translate(-2px,-2px);box-shadow:var(--sh3)}
+.btn-dark{background:var(--coal);color:var(--off-white);box-shadow:var(--sh2)}
+[data-theme=dark] .btn-dark{background:var(--off-white);color:var(--coal)}
+.btn-dark:hover{transform:translate(-2px,-2px);box-shadow:var(--sh3)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--line-2)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost-light{background:transparent;color:var(--off-white);border:1.5px solid rgba(240,238,232,.35)}
+.btn-ghost-light:hover{background:rgba(240,238,232,.1);border-color:var(--gold-t)}
+
+/* ---- FORM ---- */
+.f-label{display:block;font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;font-weight:600}
+.f-input{width:100%;background:var(--bg-2);border:1.5px solid var(--line-2);border-radius:var(--rs);padding:13px 16px;font-size:15px;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.f-input::placeholder{color:var(--faint)}
+.f-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(199,154,99,.15)}
+select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A5A5A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:44px}
+
+/* ---- TICKER ---- */
+.ticker{background:var(--coal);color:var(--off-white);overflow:hidden;border-bottom:1px solid #222;position:relative;z-index:4}
+.ticker-inner{display:flex;white-space:nowrap;animation:tick 42s linear infinite}
+.ticker:hover .ticker-inner{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:10px 32px;font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,238,232,.75)}
+.ticker-item strong{color:var(--gold-t)}
+.ticker-sep{color:var(--oak);font-size:16px;padding:0 4px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---- NAVBAR ---- */
+.navbar{position:sticky;top:0;z-index:120;transition:background .3s,border-color .3s,box-shadow .3s;border-bottom:1px solid transparent}
+.navbar.scrolled{background:rgba(18,18,18,.94);backdrop-filter:blur(14px) saturate(150%);border-bottom-color:#222;box-shadow:0 4px 32px rgba(0,0,0,.3)}
+[data-theme=dark] .navbar.scrolled{background:rgba(14,14,12,.95)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.logo{display:flex;align-items:center;gap:0;flex-shrink:0}
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:28px;height:28px;flex-shrink:0}
+.logo-grid span{display:block;background:var(--oak)}
+.logo-grid span:nth-child(2){background:var(--coal)}
+.logo-grid span:nth-child(3){background:var(--stone)}
+.logo-grid span:nth-child(4){background:var(--oak);opacity:.55}
+[data-theme=dark] .logo-grid span:nth-child(2){background:var(--off-white)}
+.logo-name{font-family:var(--fd);font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--panel-text);margin-left:12px;line-height:1}
+.logo-name b{color:var(--oak)}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{font-family:var(--fb);font-size:13.5px;font-weight:600;color:rgba(240,238,232,.7);padding:8px 14px;border-radius:4px;transition:color .2s,background .2s;letter-spacing:.01em}
+.nav-link:hover{color:var(--off-white);background:rgba(240,238,232,.08)}
+.nav-link.active{color:var(--gold-t)}
+.nav-acts{display:flex;align-items:center;gap:10px}
+.theme-btn{width:40px;height:40px;border-radius:4px;display:grid;place-items:center;background:rgba(240,238,232,.08);color:var(--off-white);border:1px solid rgba(240,238,232,.14);transition:background .2s}
+.theme-btn:hover{background:rgba(240,238,232,.15)}
+.hamburger{display:none;width:40px;height:40px;border-radius:4px;place-items:center;background:rgba(240,238,232,.08);color:var(--off-white);border:1px solid rgba(240,238,232,.14)}
+
+/* ---- DRAWER ---- */
+.drawer{position:fixed;inset:0 0 0 auto;width:min(340px,88vw);background:var(--coal);z-index:200;transform:translateX(110%);transition:transform .38s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;padding:26px;overflow-y:auto;border-left:1px solid #2a2a26}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;padding-bottom:18px;border-bottom:1px solid #2a2a26}
+.drawer-link{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid #1e1e1a;font-family:var(--fd);font-size:22px;font-weight:700;text-transform:uppercase;color:var(--off-white);letter-spacing:.04em;transition:color .2s}
+.drawer-link:hover{color:var(--gold-t)}
+.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;opacity:0;pointer-events:none;transition:opacity .3s}
+.drawer-ov.open{opacity:1;pointer-events:auto}
+
+/* ---- BOTTOM NAV ---- */
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--coal);border-top:1px solid #2a2a26;display:none;justify-content:space-around;align-items:stretch;transition:transform .3s}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(240,238,232,.55);padding:10px 6px 12px;flex:1;font-family:var(--fm);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:500;transition:color .2s;border:none;background:none;cursor:pointer}
+.bn-item svg{width:20px;height:20px;transition:transform .2s}
+.bn-item.active{color:var(--gold-t)}.bn-item.active svg{transform:scale(1.1)}
+
+/* ---- FAB ---- */
+.fab-wrap{position:fixed;right:20px;bottom:24px;z-index:90;display:flex;flex-direction:column;align-items:center;gap:10px}
+.fab-main{width:54px;height:54px;border-radius:4px;background:var(--accent);color:#fff;display:grid;place-items:center;box-shadow:var(--sh3);transition:transform .2s,background .2s}
+.fab-main:hover{transform:translate(-2px,-2px);background:var(--accent-d)}.fab-main.open{background:var(--coal)}
+[data-theme=dark] .fab-main.open{background:var(--off-white)}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:10px;overflow:hidden;max-height:0;opacity:0;transition:max-height .38s cubic-bezier(.16,1,.3,1),opacity .25s}
+.fab-opts.open{max-height:320px;opacity:1}
+.fab-opt{width:46px;height:46px;border-radius:4px;display:grid;place-items:center;box-shadow:var(--sh2);transition:transform .18s;position:relative;flex-shrink:0}
+.fab-opt:hover{transform:translate(-2px,-2px)}
+.fab-opt.call{background:#1F3A2E;color:#F0EEE8}.fab-opt.wa{background:#25D366;color:#fff}
+.fab-opt.bk{background:var(--coal);color:var(--off-white)}.fab-opt.ai{background:var(--accent);color:#fff}
+.fab-opt.top{background:var(--surface);color:var(--text);border:1px solid var(--line);display:none}
+.fab-tip{position:absolute;right:54px;top:50%;transform:translateY(-50%) translateX(6px);background:var(--coal);color:var(--off-white);font-family:var(--fm);font-size:10.5px;padding:6px 10px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s,transform .18s;border-radius:4px;letter-spacing:.06em}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ---- AI PANEL ---- */
+.ai-panel{position:fixed;right:20px;bottom:88px;z-index:95;width:min(360px,calc(100vw-40px));background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh4);border-radius:var(--rb);overflow:hidden;transform:translateY(14px) scale(.98);opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.16,1,.3,1),opacity .25s}
+.ai-panel.open{transform:none;opacity:1;pointer-events:auto}
+.ai-head{display:flex;align-items:center;gap:10px;padding:15px 17px;background:var(--coal);color:var(--off-white)}
+.ai-av{width:36px;height:36px;border-radius:4px;background:var(--accent);display:grid;place-items:center}
+.ai-body{padding:14px 17px;max-height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ai-msg{font-size:13px;line-height:1.55;padding:10px 13px;border-radius:var(--rs);max-width:88%}
+.ai-msg.bot{background:var(--bg-2);border:1px solid var(--line);color:var(--text);align-self:flex-start;border-bottom-left-radius:2px}
+.ai-msg.me{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:2px}
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 17px 12px}
+.ai-chip{font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:4px;background:var(--bg-2);border:1px solid var(--line);color:var(--muted);transition:border-color .18s,color .18s;font-family:var(--fm);letter-spacing:.04em}
+.ai-chip:hover{border-color:var(--accent);color:var(--accent)}
+.ai-foot{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+.ai-foot input{flex:1;font-size:13px;background:var(--bg-2);border:1px solid var(--line);border-radius:4px;padding:10px 12px;color:var(--text)}
+.ai-foot input:focus{outline:none;border-color:var(--accent)}
+.ai-send{width:40px;height:40px;border-radius:4px;background:var(--accent);color:#fff;display:grid;place-items:center;flex-shrink:0}
+
+/* ---- REVEAL ---- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .72s cubic-bezier(.16,1,.3,1),transform .72s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.scroll-bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:400;width:0;pointer-events:none;transition:width .08s linear}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ticker-inner{animation:none}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
+<style>
+/* =========================================================
+   SECTION COMPONENTS
+   ========================================================= */
+
+/* ---- HERO ---- */
+.hero{background:var(--coal);color:var(--off-white);overflow:hidden;position:relative;min-height:94vh;display:flex;flex-direction:column}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.hero-left{padding:clamp(48px,6vw,80px) clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center;border-right:1px solid #2a2a26;position:relative;z-index:2}
+.hero-right{position:relative;overflow:hidden;min-height:480px}
+.hero-h1{font-family:var(--fd);font-weight:900;font-size:clamp(3.6rem,8.5vw,7.6rem);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;color:var(--off-white)}
+.hero-h1 .accent-line{display:block;color:var(--gold-t)}
+.hero-sub{font-size:clamp(1rem,1.4vw,1.15rem);color:rgba(240,238,232,.65);line-height:1.62;margin-top:24px;max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}
+.hero-trust{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:42px;padding-top:32px;border-top:1px solid #2a2a26}
+.ht{padding:16px clamp(8px,1.5vw,16px) 16px 0;border-right:1px solid #2a2a26}
+.ht:last-child{border-right:none;padding-right:0}
+.ht-n{font-family:var(--fd);font-weight:900;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;color:var(--gold-t)}
+.ht-l{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,238,232,.5);margin-top:3px}
+
+/* Hero room switcher — the SIGNATURE tile-flip */
+.room-switcher{position:absolute;inset:0;overflow:hidden}
+.room-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s;z-index:1}
+.room-img.active{opacity:1;z-index:2}
+.room-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(18,18,12,.7) 0%,transparent 50%);z-index:3}
+.room-tabs{position:absolute;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);z-index:4;border-top:1px solid rgba(240,238,232,.18)}
+.rtab{padding:13px 10px;font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:rgba(240,238,232,.55);background:rgba(18,18,12,.75);border-right:1px solid rgba(240,238,232,.1);text-align:center;cursor:pointer;transition:color .2s,background .2s;border:none;backdrop-filter:blur(6px)}
+.rtab:last-child{border-right:none}
+.rtab.on{color:var(--gold-t);background:rgba(18,18,12,.88)}
+.room-mat-badge{position:absolute;top:18px;left:18px;z-index:4;background:rgba(18,18,12,.82);backdrop-filter:blur(6px);padding:10px 15px;border-left:2px solid var(--oak)}
+.room-mat-badge .k{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t)}
+.room-mat-badge .v{font-family:var(--fd);font-size:18px;font-weight:700;text-transform:uppercase;color:var(--off-white);margin-top:2px;letter-spacing:.04em}
+
+/* tile-grid overlay (signature element) */
+.tile-grid{position:absolute;inset:0;z-index:5;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(6,1fr);pointer-events:none;opacity:0;transition:opacity .1s}
+.tile-cell{background:var(--coal);transform:scaleY(0);transform-origin:top;transition:transform .0s}
+
+/* ---- VISUALIZER / BEFORE-AFTER ---- */
+.viz-section{background:var(--bg-2)}
+.viz-shell{display:grid;grid-template-columns:1fr 420px;gap:0;background:var(--surface);border:1px solid var(--line)}
+.viz-stage{position:relative;overflow:hidden;min-height:480px;background:#1a1a17;border-right:1px solid var(--line)}
+.viz-before,.viz-after{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.viz-after{clip-path:inset(0 50% 0 0)}
+.viz-divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;z-index:4;box-shadow:0 0 12px rgba(0,0,0,.4);transform:translateX(-50%)}
+.viz-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:4px;background:#fff;z-index:5;display:grid;place-items:center;box-shadow:var(--sh3);cursor:ew-resize}
+.viz-handle svg{color:var(--coal);width:22px;height:22px}
+.viz-range{position:absolute;inset:0;opacity:0;cursor:ew-resize;z-index:6;margin:0}
+.viz-labels{position:absolute;top:16px;left:0;right:0;display:flex;justify-content:space-between;padding:0 16px;z-index:3;pointer-events:none}
+.viz-label{font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:4px}
+.viz-label.before{background:rgba(18,18,12,.78);color:rgba(240,238,232,.85)}
+.viz-label.after{background:rgba(199,154,99,.9);color:#fff}
+.viz-mat-badge{position:absolute;left:16px;bottom:16px;z-index:3;background:rgba(18,18,12,.88);padding:10px 14px;border-left:2px solid var(--oak)}
+.viz-mat-badge .k{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t)}
+.viz-mat-badge .v{font-family:var(--fd);font-size:16px;font-weight:700;color:var(--off-white);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.viz-panel{padding:clamp(22px,2.8vw,32px);display:flex;flex-direction:column;gap:18px;overflow-y:auto}
+.vp-h{font-family:var(--fd);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--text)}
+.vp-lbl{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;font-weight:600}
+.mat-list{display:grid;gap:7px}
+.mat-btn{display:flex;align-items:center;gap:13px;padding:11px 13px;border:1.5px solid var(--line);background:var(--bg-2);cursor:pointer;transition:border-color .2s,background .2s;text-align:left;border-radius:var(--rs)}
+.mat-btn:hover{border-color:var(--line-2)}
+.mat-btn.on{border-color:var(--accent);background:var(--surface)}
+.mat-swatch{width:42px;height:42px;border-radius:4px;background-size:cover;background-position:center;flex-shrink:0;border:1px solid var(--line)}
+.mat-btn .mb-n{font-family:var(--fd);font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--text)}
+.mat-btn .mb-s{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.05em}
+.mat-btn.on .mb-n{color:var(--accent)}
+.viz-cost{background:var(--coal);color:var(--off-white);padding:16px;border-radius:var(--rs);display:flex;justify-content:space-between;align-items:center}
+.viz-cost .vc-l{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,232,.55)}
+.viz-cost .vc-v{font-family:var(--fd);font-size:22px;font-weight:800;color:var(--gold-t);text-transform:uppercase}
+
+/* ---- MATERIAL CARDS ---- */
+.mat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.mat-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative;cursor:pointer;background:var(--surface)}
+.mat-card:hover .mc-img{transform:scale(1.05)}
+.mc-img-wrap{aspect-ratio:4/3;overflow:hidden;position:relative}
+.mc-img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.mc-body{padding:20px 22px}
+.mc-name{font-family:var(--fd);font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:.04em;color:var(--text)}
+.mc-sub{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.mc-meta{display:flex;gap:0;margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.mc-stat{flex:1;border-right:1px solid var(--line);padding-right:12px;margin-right:12px}
+.mc-stat:last-child{border-right:none;padding-right:0;margin-right:0}
+.mc-stat .k{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.mc-stat .v{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;margin-top:2px}
+.mc-hover-strip{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.mat-card:hover .mc-hover-strip{transform:scaleX(1)}
+
+/* ---- PROCESS TIMELINE ---- */
+.process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);position:relative}
+.proc-step{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(22px,3vw,32px) clamp(18px,2vw,26px);position:relative;background:var(--surface);transition:background .3s}
+.proc-step:hover{background:var(--bg-2)}
+.proc-num{font-family:var(--fd);font-weight:900;font-size:clamp(3rem,5vw,5rem);line-height:1;color:var(--line-2);letter-spacing:-.01em;transition:color .3s}
+.proc-step:hover .proc-num{color:var(--accent)}
+.proc-h{font-family:var(--fd);font-weight:700;font-size:clamp(1.1rem,2vw,1.5rem);text-transform:uppercase;letter-spacing:.04em;color:var(--text);margin-top:10px}
+.proc-p{font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:8px}
+
+/* ---- BEFORE/AFTER GALLERY ---- */
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.ba-item{border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden;cursor:pointer}
+.ba-compare{position:relative;aspect-ratio:16/10;overflow:hidden;user-select:none}
+.ba-b,.ba-a{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba-a{clip-path:inset(0 50% 0 0)}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-50%);z-index:3;box-shadow:0 0 8px rgba(0,0,0,.4)}
+.ba-hdl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:4px;background:#fff;z-index:4;display:grid;place-items:center;box-shadow:var(--sh2);cursor:ew-resize}
+.ba-hdl svg{width:18px;height:18px;color:var(--coal)}
+.ba-rng{position:absolute;inset:0;opacity:0;cursor:ew-resize;z-index:5;margin:0}
+.ba-caps{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:2;pointer-events:none}
+.ba-cap-lbl{font-family:var(--fm);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:4px}
+.ba-cap-lbl.b{background:rgba(18,18,12,.75);color:rgba(240,238,232,.8)}
+.ba-cap-lbl.a{background:rgba(199,154,99,.9);color:#fff}
+.ba-info{padding:18px 22px;background:var(--surface);border-top:1px solid var(--line);display:flex;gap:24px;align-items:center}
+.ba-info h4{font-family:var(--fd);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.03em;color:var(--text)}
+.ba-info .bi-meta{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.07em;margin-top:3px}
+.ba-tags{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.ba-tag{font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--line-2);color:var(--muted);border-radius:4px}
+
+/* ---- MATERIAL EXPLORER (swatch wall) ---- */
+.explorer-grid{display:grid;grid-template-columns:240px 1fr;gap:0;background:var(--surface);border:1px solid var(--line)}
+.exp-filters{border-right:1px solid var(--line);padding:24px 20px;display:flex;flex-direction:column;gap:8px}
+.exp-filter-btn{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border:1.5px solid transparent;background:transparent;cursor:pointer;border-radius:var(--rs);transition:border-color .18s,background .18s;font-family:var(--fd);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.exp-filter-btn:hover{border-color:var(--line);color:var(--text)}
+.exp-filter-btn.on{border-color:var(--accent);background:var(--bg-2);color:var(--text)}
+.exp-filter-btn .ef-n{font-family:var(--fm);font-size:10px;color:var(--faint);font-weight:500;text-transform:none;letter-spacing:0}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0;border-left:1px solid var(--line)}
+.exp-swatch{border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .2s}
+.exp-swatch:hover{opacity:.88}
+.exp-swatch.hide{display:none}
+.exp-swatch-img{aspect-ratio:1;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.exp-swatch-img::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(18,18,12,.7));opacity:0;transition:opacity .25s}
+.exp-swatch:hover .exp-swatch-img::after{opacity:1}
+.exp-sw-body{padding:12px 13px;border-top:1px solid var(--line);background:var(--surface)}
+.exp-sw-name{font-family:var(--fd);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text)}
+.exp-sw-sub{font-family:var(--fm);font-size:9.5px;color:var(--faint);letter-spacing:.06em;margin-top:2px}
+.exp-sw-bar{height:2px;background:var(--line);border-radius:1px;margin-top:8px;overflow:hidden}
+.exp-sw-fill{height:100%;background:var(--accent);border-radius:1px;transition:width .4s}
+
+/* ---- STATS ---- */
+.stats-band{background:var(--coal);color:var(--off-white)}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-left:1px solid #2a2a26}
+.stat-cell{padding:clamp(28px,4vw,48px) clamp(16px,2vw,24px);border-right:1px solid #2a2a26;text-align:center}
+.stat-n{font-family:var(--fd);font-weight:900;font-size:clamp(2.4rem,4.5vw,4rem);line-height:1;color:var(--gold-t);letter-spacing:-.01em}
+.stat-suf{font-size:.65em;color:var(--oak)}
+.stat-l{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,238,232,.5);margin-top:8px}
+
+/* ---- FEATURED PROJECTS ---- */
+.proj-filter-bar{display:flex;gap:0;border:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.proj-filter-bar::-webkit-scrollbar{display:none}
+.pfbtn{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px;border-right:1px solid var(--line);color:var(--muted);background:var(--surface);white-space:nowrap;cursor:pointer;transition:color .2s,background .2s;border:none;border-right:1px solid var(--line)}
+.pfbtn:last-child{border-right:none}
+.pfbtn.on{background:var(--coal);color:var(--gold-t)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.proj-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--surface);position:relative}
+.proj-card.hide{display:none}
+.proj-card:hover .pc-img{transform:scale(1.04)}
+.pc-img-wrap{aspect-ratio:4/3;overflow:hidden;position:relative}
+.pc-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pc-cat{position:absolute;top:14px;left:14px;font-family:var(--fm);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;background:rgba(18,18,12,.82);color:var(--gold-t);border-radius:4px}
+.pc-body{padding:18px 22px;border-top:1px solid var(--line)}
+.pc-h{font-family:var(--fd);font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--text)}
+.pc-meta{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:4px}
+.pc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+
+/* ---- PARTNERS LOGO WALL ---- */
+.partners-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.partner{padding:26px 32px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:1;min-width:140px;opacity:.5;transition:opacity .25s}
+.partner:hover{opacity:1}
+.partner-name{font-family:var(--fd);font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:var(--text)}
+.trust-badges{display:flex;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.trust-badge{flex:1;display:flex;align-items:center;gap:12px;padding:20px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.trust-badge svg{width:22px;height:22px;color:var(--accent);flex-shrink:0}
+.trust-badge span{font-family:var(--fd);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text)}
+
+/* ---- REVIEWS ---- */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.rv-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(22px,3vw,32px);background:var(--surface)}
+.rv-stars{display:flex;gap:3px;color:var(--gold);font-size:16px;margin-bottom:12px}
+.rv-q{font-size:15px;line-height:1.62;color:var(--muted);font-style:italic}
+.rv-q::before{content:"\201C";font-family:Georgia,serif;font-size:28px;color:var(--accent);line-height:1;display:block;margin-bottom:4px}
+.rv-author{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.rv-av{width:38px;height:38px;border-radius:4px;background:var(--coal);display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:16px;color:var(--gold-t);text-transform:uppercase;flex-shrink:0}
+.rv-name{font-family:var(--fd);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text)}
+.rv-role{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:2px}
+
+/* ---- COST ESTIMATOR ---- */
+.est-shell{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--line)}
+.est-form{padding:clamp(24px,3.5vw,42px);border-right:1px solid var(--line)}
+.est-out{background:var(--coal);color:var(--off-white);padding:clamp(24px,3.5vw,42px);display:flex;flex-direction:column;gap:16px}
+.est-out-h{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);text-transform:uppercase;color:var(--gold-t);line-height:1}
+.eo-rows{display:grid;gap:1px;background:rgba(240,238,232,.08);border-radius:var(--rs);overflow:hidden;margin-top:4px}
+.eo-row{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;background:var(--coal);font-size:14px}
+.eo-row .k{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,238,232,.5)}
+.eo-row .v{font-family:var(--fd);font-weight:700;font-size:17px;color:var(--off-white);text-transform:uppercase}
+.eo-row .v.em{color:var(--gold-t)}
+.eo-note{font-family:var(--fm);font-size:11px;color:rgba(240,238,232,.45);line-height:1.6;letter-spacing:.03em}
+.chip-group{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.echip{font-family:var(--fm);font-size:11.5px;font-weight:600;padding:9px 13px;border:1.5px solid var(--line-2);color:var(--muted);cursor:pointer;background:var(--bg-2);border-radius:var(--rs);transition:all .18s;letter-spacing:.04em}
+.echip:hover{border-color:var(--accent);color:var(--text)}
+.echip.on{border-color:var(--accent);background:var(--surface);color:var(--accent)}
+
+/* ---- FAQ ---- */
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;padding:22px clamp(16px,2.5vw,28px);cursor:pointer;list-style:none;font-family:var(--fd);font-size:clamp(1rem,2vw,1.3rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text);transition:color .2s;gap:16px}
+.faq-item summary:hover{color:var(--accent)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-ic{width:30px;height:30px;border:1.5px solid var(--line-2);border-radius:4px;display:grid;place-items:center;flex-shrink:0;color:var(--muted);transition:transform .28s,border-color .2s,color .2s}
+.faq-item[open] summary .faq-ic{transform:rotate(45deg);border-color:var(--accent);color:var(--accent)}
+.faq-body{padding:0 clamp(16px,2.5vw,28px) 20px;color:var(--muted);font-size:15.5px;line-height:1.65}
+
+/* ---- CTA BAND ---- */
+.cta-band{background:var(--coal);color:var(--off-white);padding-block:clamp(72px,10vw,130px);position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent 80px,rgba(240,238,232,.025) 80px,rgba(240,238,232,.025) 81px),repeating-linear-gradient(transparent 0,transparent 80px,rgba(240,238,232,.025) 80px,rgba(240,238,232,.025) 81px)}
+.cta-h{font-family:var(--fd);font-weight:900;font-size:clamp(3rem,8vw,6.4rem);line-height:.92;text-transform:uppercase;letter-spacing:-.01em;color:var(--off-white)}
+.cta-h em{display:block;color:var(--gold-t);font-style:italic;font-family:Georgia,serif;text-transform:none;font-size:.72em;font-weight:400;letter-spacing:0;line-height:1.2;margin-bottom:4px}
+
+/* ---- CONTACT ---- */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:0;background:var(--surface);border:1px solid var(--line)}
+.contact-info{padding:clamp(28px,4vw,52px);border-right:1px solid var(--line)}
+.contact-info-item{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line)}
+.contact-info-item:last-child{border-bottom:none}
+.ci-ic{width:40px;height:40px;border-radius:4px;background:var(--bg-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--accent);flex-shrink:0}
+.ci-ic svg{width:20px;height:20px}
+.ci-l{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.ci-v{font-family:var(--fd);font-size:17px;font-weight:700;text-transform:uppercase;color:var(--text);margin-top:3px;letter-spacing:.03em}
+.contact-form{padding:clamp(28px,4vw,52px)}
+
+/* ---- FOOTER ---- */
+footer{background:var(--coal);color:var(--off-white)}
+.foot-top{padding-block:clamp(54px,8vw,96px)}
+.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1.3fr;gap:40px}
+.foot-brand-name{font-family:var(--fd);font-weight:900;font-size:28px;text-transform:uppercase;letter-spacing:.06em;color:var(--off-white)}
+.foot-brand-name b{color:var(--oak)}
+.foot-desc{font-size:14px;color:rgba(240,238,232,.55);line-height:1.65;margin-top:14px;max-width:280px}
+.foot-nl{display:flex;gap:0;margin-top:20px;border:1px solid #2a2a26;max-width:300px}
+.foot-nl input{flex:1;background:transparent;border:none;padding:12px 14px;color:var(--off-white);font-size:13px}
+.foot-nl input::placeholder{color:rgba(240,238,232,.38)}
+.foot-nl input:focus{outline:none}
+.foot-nl button{padding:12px 16px;background:var(--accent);color:#fff;font-family:var(--fb);font-weight:700;font-size:13px;white-space:nowrap;border:none;cursor:pointer;transition:background .2s}
+.foot-nl button:hover{background:var(--accent-d)}
+.foot-h{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,238,232,.38);margin-bottom:16px;font-weight:600}
+.foot-links{display:grid;gap:11px}
+.foot-link{font-size:14px;color:rgba(240,238,232,.65);transition:color .2s;cursor:pointer}
+.foot-link:hover{color:var(--gold-t)}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;padding:22px 0;border-top:1px solid #2a2a26;font-family:var(--fm);font-size:11.5px;color:rgba(240,238,232,.4);letter-spacing:.04em}
+.foot-credit a{color:var(--gold-t);font-weight:600}
+.foot-credit a:hover{text-decoration:underline}
+
+/* ---- SPA PAGES ---- */
+.spa-page{display:none}.spa-page.active{display:block}
+.page-hero{background:var(--coal);color:var(--off-white);padding-block:clamp(60px,8vw,108px);border-bottom:1px solid #2a2a26;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent 80px,rgba(240,238,232,.03) 80px,rgba(240,238,232,.03) 81px)}
+.breadcrumb{display:flex;gap:9px;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,238,232,.45);margin-bottom:20px}
+.breadcrumb a:hover{color:var(--gold-t)}
+.ph-h{font-family:var(--fd);font-weight:900;font-size:clamp(2.8rem,6vw,5.2rem);line-height:.92;text-transform:uppercase;letter-spacing:-.005em;color:var(--off-white)}
+.ph-h em{font-style:italic;font-family:Georgia,serif;text-transform:none;color:var(--gold-t);font-weight:400}
+.ph-sub{font-size:16.5px;color:rgba(240,238,232,.62);line-height:1.62;margin-top:18px;max-width:60ch}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1080px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-left{border-right:none;border-bottom:1px solid #2a2a26;padding-block:clamp(40px,6vw,64px)}
+  .hero-right{min-height:380px}
+  .hero-h1{font-size:clamp(3.4rem,11vw,6rem)}
+  .viz-shell,.est-shell,.contact-grid{grid-template-columns:1fr}
+  .viz-panel,.est-out,.contact-form{border-top:1px solid var(--line)}
+  .explorer-grid{grid-template-columns:1fr}
+  .exp-filters{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;border-right:none;border-bottom:1px solid var(--line)}
+  .mat-grid,.process-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+  .reviews-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:repeat(2,1fr)}
+  .g4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:860px){
+  .nav-links{display:none}.hamburger{display:grid}
+  .bottom-nav{display:flex}.fab-wrap{bottom:74px}
+  body{padding-bottom:60px}
+  .ba-grid,.g2{grid-template-columns:1fr}
+  .mat-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-trust{grid-template-columns:repeat(2,1fr)}
+  .ht{border-bottom:1px solid #2a2a26}
+  .ht:nth-child(even){border-right:none;padding-right:0}
+}
+@media(max-width:560px){
+  .mat-grid,.process-grid,.stats-grid,.proj-grid,.reviews-grid,.g3,.g4{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-trust{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="scroll-bar" id="scroll-bar"></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true" id="ticker"><div class="ticker-inner" id="ticker-inner">
+  <span class="ticker-item"><strong>Free On-Site Measurement &amp; Quote</strong> within 24 hours</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>10-Year Installation Warranty</strong> available</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>500+ Projects</strong> completed across the region</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>Certified Installers</strong> — licensed, insured &amp; background-checked</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>Free On-Site Measurement &amp; Quote</strong> within 24 hours</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>10-Year Installation Warranty</strong> available</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>500+ Projects</strong> completed across the region</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>Certified Installers</strong> — licensed, insured &amp; background-checked</span><span class="ticker-sep">·</span>
+</div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar" style="background:var(--coal)"><div class="container"><div class="nav-in">
+  <a href="#home" class="logo" data-page="home" aria-label="StoneAxis home">
+    <span class="logo-grid"><span></span><span></span><span></span><span></span></span>
+    <span class="logo-name">Stone<b>Axis</b></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#flooring-types" class="nav-link" data-page="types">Flooring Types</a>
+    <a href="#projects" class="nav-link" data-page="projects">Projects</a>
+    <a href="#visualizer" class="nav-link" data-page="home" data-scroll="visualizer-sec">Visualizer</a>
+    <a href="#process" class="nav-link" data-page="home" data-scroll="process-sec">Process</a>
+    <a href="#reviews" class="nav-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+  </nav>
+  <div class="nav-acts">
+    <a href="tel:+15125550182" class="btn btn-ghost-light btn-sm">Call Now</a>
+    <a href="#contact" class="btn btn-primary btn-sm" data-page="contact">Free Estimate</a>
+    <button class="theme-btn" aria-label="Toggle theme" id="theme-btn"></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+  </div>
+</div></div></header>
+
+<!-- DRAWER -->
+<div class="drawer-ov" id="drawer-ov"></div>
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <div class="drawer-hd"><span class="logo-name" style="color:var(--off-white)">Stone<b style="color:var(--oak)">Axis</b></span><button style="color:var(--off-white);width:36px;height:36px;border-radius:4px;display:grid;place-items:center;background:rgba(240,238,232,.08);border:1px solid rgba(240,238,232,.12)" id="drawer-close" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <nav>
+    <a href="#home" class="drawer-link" data-page="home">Home</a>
+    <a href="#flooring-types" class="drawer-link" data-page="types">Flooring Types</a>
+    <a href="#projects" class="drawer-link" data-page="projects">Projects</a>
+    <a href="#reviews" class="drawer-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="drawer-link" data-page="contact">Contact</a>
+  </nav>
+  <div style="margin-top:28px;display:grid;gap:10px">
+    <a href="tel:+15125550182" class="btn btn-ghost-light btn-lg btn-full">Call Now</a>
+    <a href="#contact" class="btn btn-primary btn-lg btn-full" data-page="contact">Free Estimate</a>
+  </div>
+  <div style="margin-top:auto;padding-top:24px;font-family:var(--fm);font-size:11px;color:rgba(240,238,232,.38);line-height:1.8;letter-spacing:.04em">Mon–Fri 7am–6pm · Sat 8am–4pm<br/>(512) 555-0182 · hello@stoneaxis.com</div>
+</aside>
+
+<main id="main">
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="tile-grid" id="tile-grid"></div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <span class="label light reveal">Precision flooring craftsmen</span>
+      <h1 class="hero-h1 reveal" data-d="60">Floors that<span class="accent-line">define</span>every room.</h1>
+      <p class="hero-sub reveal" data-d="130">Premium hardwood, vinyl, laminate, stone and tile — measured precisely, installed by certified craftsmen, warrantied for a decade.</p>
+      <div class="hero-cta reveal" data-d="200">
+        <a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Get Free Estimate <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#flooring-types" class="btn btn-ghost-light btn-lg" data-page="types">Explore Materials</a>
+      </div>
+      <div class="hero-trust reveal" data-d="270">
+        <div class="ht"><div class="ht-n"><span data-counter="500">0</span><span class="stat-suf">+</span></div><div class="ht-l">Projects</div></div>
+        <div class="ht"><div class="ht-n">15<span class="stat-suf">yrs</span></div><div class="ht-l">Experience</div></div>
+        <div class="ht"><div class="ht-n"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-t)"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/></svg></div><div class="ht-l">Certified</div></div>
+        <div class="ht"><div class="ht-n">10<span class="stat-suf">yr</span></div><div class="ht-l">Warranty</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="room-switcher" id="room-switcher">
+        <img class="room-img active" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=80" alt="Living room with premium hardwood" data-mat="European Oak" data-room="living"/>
+        <img class="room-img" src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1100&q=80" alt="Kitchen with porcelain tile" data-mat="Calacatta Porcelain" data-room="kitchen"/>
+        <img class="room-img" src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1100&q=80" alt="Bathroom with marble tile" data-mat="Carrara Marble" data-room="bath"/>
+        <img class="room-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1100&q=80" alt="Commercial floor with luxury vinyl" data-mat="Commercial LVT" data-room="commercial"/>
+        <div class="room-overlay"></div>
+        <div class="room-mat-badge"><div class="k">Installed material</div><div class="v" id="room-mat-v">European Oak</div></div>
+        <div class="room-tabs" id="room-tabs">
+          <button class="rtab on" data-r="0">Living Room</button>
+          <button class="rtab" data-r="1">Kitchen</button>
+          <button class="rtab" data-r="2">Bathroom</button>
+          <button class="rtab" data-r="3">Commercial</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUALIZER / BEFORE-AFTER -->
+<section class="section viz-section" id="visualizer-sec"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(26px,3.5vw,40px)">
+    <div class="reveal"><span class="label">Floor Visualizer</span><h2 class="h2" style="margin-top:14px;color:var(--text)">See it before<br/>you commit.</h2></div>
+    <p class="body-lg reveal" data-d="60" style="max-width:44ch">Drag the slider to compare before and after. Pick any material and watch the cost estimate update instantly.</p>
+  </div>
+  <div class="viz-shell reveal" data-d="80">
+    <div class="viz-stage">
+      <img class="viz-before" src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=1100&q=80" alt="Before flooring installation"/>
+      <img class="viz-after" id="viz-after-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=80" alt="After flooring installation"/>
+      <div class="viz-divider" id="viz-div"></div>
+      <div class="viz-handle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div>
+      <input type="range" class="viz-range" id="viz-range" min="0" max="100" value="50" aria-label="Reveal slider"/>
+      <div class="viz-labels"><span class="viz-label before">Before</span><span class="viz-label after">After</span></div>
+      <div class="viz-mat-badge"><div class="k">Now showing</div><div class="v" id="viz-mat-name">European Oak</div></div>
+    </div>
+    <div class="viz-panel">
+      <div><div class="vp-h">Choose material</div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);margin-top:4px;letter-spacing:.04em">Click to preview in the room</div></div>
+      <div class="mat-list" id="viz-mat-list"></div>
+      <div class="viz-cost">
+        <div><div class="vc-l">Est. material cost</div><div class="vc-v" id="viz-cost-v">from $8.50/sqft</div></div>
+        <a href="#estimator-sec" class="btn btn-primary btn-sm" data-scroll="estimator-sec">Calculate</a>
+      </div>
+      <form id="viz-form" style="display:grid;gap:9px">
+        <label class="f-label" for="viz-email">Email me this design</label>
+        <div style="display:flex;gap:8px"><input class="f-input" id="viz-email" type="email" placeholder="your@email.com" aria-label="Email"/><button class="btn btn-dark btn-sm" type="submit">Save</button></div>
+      </form>
+      <div id="viz-saved" style="display:none;font-family:var(--fm);font-size:11.5px;color:var(--accent);letter-spacing:.04em">✓ Saved — design &amp; quote on their way.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FLOORING CATEGORIES -->
+<section class="section" id="types-home" style="padding-top:0"><div class="container">
+  <div style="margin-bottom:clamp(22px,3vw,36px)" class="reveal"><span class="label">Material library</span><h2 class="h2" style="margin-top:14px;color:var(--text)">Six collections.<br/>Every room covered.</h2></div>
+  <div class="mat-grid">
+    <div class="mat-card reveal"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=700&q=80" alt="Hardwood flooring"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Hardwood</div><div class="mc-sub">Premium residential</div><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">50+ yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$8.50/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Living, dining</div></div></div></div></div>
+    <div class="mat-card reveal" data-d="60"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=700&q=80" alt="Luxury vinyl plank"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Luxury Vinyl</div><div class="mc-sub">Durable &amp; waterproof</div><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">25 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$4.20/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Kitchen, bath</div></div></div></div></div>
+    <div class="mat-card reveal" data-d="120"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?auto=format&fit=crop&w=700&q=80" alt="Laminate flooring"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Laminate</div><div class="mc-sub">Affordable elegance</div><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">20 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$3.10/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Bedrooms</div></div></div></div></div>
+    <div class="mat-card reveal"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=700&q=80" alt="Ceramic tile"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Ceramic Tile</div><div class="mc-sub">Modern &amp; durable</div><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">20 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$4.80/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Kitchen, entry</div></div></div></div></div>
+    <div class="mat-card reveal" data-d="60"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?auto=format&fit=crop&w=700&q=80" alt="Porcelain tile"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Porcelain Tile</div><div class="mc-sub">Luxury finish</div><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$6.90/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">All spaces</div></div></div></div></div>
+    <div class="mat-card reveal" data-d="120"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=80" alt="Natural stone"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Natural Stone</div><div class="mc-sub">Architectural statement</div><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">100 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$12.40/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Luxury, lobby</div></div></div></div></div>
+  </div>
+</div></section>
+
+<!-- PROCESS -->
+<section class="section" id="process-sec" style="background:var(--bg-2);padding-block:clamp(64px,8vw,112px)"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:clamp(26px,3.5vw,42px)">
+    <div class="reveal"><span class="label">How it works</span><h2 class="h2" style="margin-top:14px;color:var(--text)">From assessment<br/>to walkthrough.</h2></div>
+    <a href="#contact" class="btn btn-dark reveal" data-page="contact" data-d="60">Book consultation <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="process-grid reveal" data-d="80">
+    <div class="proc-step"><div class="proc-num">01</div><div class="proc-h">Consultation</div><p class="proc-p">On-site assessment of your space, subfloor condition, lighting and lifestyle requirements. No cost, no pressure.</p></div>
+    <div class="proc-step"><div class="proc-num">02</div><div class="proc-h">Material Selection</div><p class="proc-p">Expert guidance through our library. We bring samples to your home so you see every finish in your own light.</p></div>
+    <div class="proc-step"><div class="proc-num">03</div><div class="proc-h">Measurement</div><p class="proc-p">Laser-measured to the inch. Layout, waste and transitions planned and priced — all in writing before we start.</p></div>
+    <div class="proc-step"><div class="proc-num">04</div><div class="proc-h">Installation</div><p class="proc-p">Certified craftsmen, clean site every day. We protect your home, prep the subfloor and install to specification.</p></div>
+    <div class="proc-step"><div class="proc-num">05</div><div class="proc-h">Final Inspection</div><p class="proc-p">We walk through together. Every seam, every edge. We don't sign off until you're completely satisfied.</p></div>
+  </div>
+</div></section>
+
+<!-- BEFORE & AFTER GALLERY -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Transformation gallery</span><h2 class="h2" style="margin-top:14px;color:var(--text)">Before &amp; after.<br/>Drag to reveal.</h2></div>
+  <div class="ba-grid" id="ba-grid">
+    <div class="ba-item reveal"><div class="ba-compare" id="ba0"><img class="ba-b" src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=900&q=80" alt="Kitchen before"/><img class="ba-a" src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=900&q=80" alt="Kitchen after"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before after reveal"/><div class="ba-caps"><span class="ba-cap-lbl b">Before</span><span class="ba-cap-lbl a">After</span></div></div><div class="ba-info"><div><h4>Kitchen Renovation</h4><div class="bi-meta">Calacatta Porcelain · 180 sqft · 4 days</div></div><div class="ba-tags"><span class="ba-tag">Porcelain</span><span class="ba-tag">Kitchen</span></div></div></div>
+    <div class="ba-item reveal" data-d="80"><div class="ba-compare" id="ba1"><img class="ba-b" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" alt="Bathroom before"/><img class="ba-a" src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="Bathroom after"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before after reveal"/><div class="ba-caps"><span class="ba-cap-lbl b">Before</span><span class="ba-cap-lbl a">After</span></div></div><div class="ba-info"><div><h4>Bathroom Tile Upgrade</h4><div class="bi-meta">Carrara Marble Mosaic · 90 sqft · 3 days</div></div><div class="ba-tags"><span class="ba-tag">Stone</span><span class="ba-tag">Bathroom</span></div></div></div>
+    <div class="ba-item reveal"><div class="ba-compare" id="ba2"><img class="ba-b" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80" alt="Living room before"/><img class="ba-a" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Living room after"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before after reveal"/><div class="ba-caps"><span class="ba-cap-lbl b">Before</span><span class="ba-cap-lbl a">After</span></div></div><div class="ba-info"><div><h4>Hardwood Replacement</h4><div class="bi-meta">European Oak Wide Plank · 420 sqft · 5 days</div></div><div class="ba-tags"><span class="ba-tag">Hardwood</span><span class="ba-tag">Living room</span></div></div></div>
+    <div class="ba-item reveal" data-d="80"><div class="ba-compare" id="ba3"><img class="ba-b" src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=900&q=80" alt="Commercial before"/><img class="ba-a" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="Commercial after"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before after reveal"/><div class="ba-caps"><span class="ba-cap-lbl b">Before</span><span class="ba-cap-lbl a">After</span></div></div><div class="ba-info"><div><h4>Commercial Flooring</h4><div class="bi-meta">Slate-Look Commercial LVT · 3,800 sqft · 6 days</div></div><div class="ba-tags"><span class="ba-tag">Commercial</span><span class="ba-tag">LVT</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- MATERIAL EXPLORER -->
+<section class="section" style="background:var(--bg-2);padding-block:clamp(64px,8vw,112px)"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Material explorer</span><h2 class="h2" style="margin-top:14px;color:var(--text)">The material wall.</h2><p class="body-lg" style="margin-top:12px;max-width:52ch">Filter by category. Every swatch shows durability rating, maintenance level and price tier.</p></div>
+  <div class="explorer-grid reveal" data-d="80">
+    <div class="exp-filters">
+      <div style="font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;padding:0 4px">Filter by type</div>
+      <button class="exp-filter-btn on" data-ef="all"><span>All materials</span><span class="ef-n">30+</span></button>
+      <button class="exp-filter-btn" data-ef="wood"><span>Wood</span><span class="ef-n">8</span></button>
+      <button class="exp-filter-btn" data-ef="tile"><span>Tile</span><span class="ef-n">10</span></button>
+      <button class="exp-filter-btn" data-ef="stone"><span>Stone</span><span class="ef-n">6</span></button>
+      <button class="exp-filter-btn" data-ef="vinyl"><span>Vinyl</span><span class="ef-n">4</span></button>
+      <button class="exp-filter-btn" data-ef="commercial"><span>Commercial</span><span class="ef-n">4</span></button>
+    </div>
+    <div class="exp-grid" id="exp-grid">
+      <div class="exp-swatch" data-ec="wood"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">European Oak</div><div class="exp-sw-sub">Hardwood · Matte</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:90%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="wood"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1622372738946-62e02505feb3?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Walnut Herringbone</div><div class="exp-sw-sub">Hardwood · Oiled</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:85%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="wood"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Smoked Hickory LVP</div><div class="exp-sw-sub">Vinyl · Waterproof</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:88%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="tile"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1615971677499-5467cbab01c0?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Calacatta Porcelain</div><div class="exp-sw-sub">Porcelain · Polished</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:95%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="tile"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Concrete-Look</div><div class="exp-sw-sub">Porcelain · Matte</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:80%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="stone"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Honed Limestone</div><div class="exp-sw-sub">Natural Stone · Sealed</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:75%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="stone"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Carrara Marble</div><div class="exp-sw-sub">Natural Stone · Polished</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:82%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="vinyl"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Slate-Look LVT</div><div class="exp-sw-sub">Vinyl · Waterproof</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:87%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="commercial"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Commercial LVT</div><div class="exp-sw-sub">Commercial · High-wear</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:98%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="tile"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Zellige Ceramic</div><div class="exp-sw-sub">Ceramic · Handmade</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:72%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="wood"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Wide Plank Oak</div><div class="exp-sw-sub">Hardwood · Natural</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:88%"></div></div></div></div>
+      <div class="exp-swatch" data-ec="stone"><div class="exp-swatch-img" style="background-image:url('https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?auto=format&fit=crop&w=400&q=70')"></div><div class="exp-sw-body"><div class="exp-sw-name">Basalt Paver</div><div class="exp-sw-sub">Stone · Frost-proof</div><div class="exp-sw-bar"><div class="exp-sw-fill" style="width:92%"></div></div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="stats-band"><div class="container" style="padding-block:0"><div class="stats-grid">
+  <div class="stat-cell reveal"><div class="stat-n"><span data-counter="500">0</span><span class="stat-suf">+</span></div><div class="stat-l">Projects completed</div></div>
+  <div class="stat-cell reveal" data-d="60"><div class="stat-n"><span data-counter="98">0</span><span class="stat-suf">%</span></div><div class="stat-l">Customer satisfaction</div></div>
+  <div class="stat-cell reveal" data-d="120"><div class="stat-n"><span data-counter="15">0</span><span class="stat-suf">+</span></div><div class="stat-l">Years experience</div></div>
+  <div class="stat-cell reveal" data-d="180"><div class="stat-n"><span data-counter="30">0</span><span class="stat-suf">+</span></div><div class="stat-l">Material options</div></div>
+  <div class="stat-cell reveal" data-d="240"><div class="stat-n"><span data-counter="10">0</span><span class="stat-suf">yr</span></div><div class="stat-l">Warranty available</div></div>
+</div></div></section>
+
+<!-- FEATURED PROJECTS -->
+<section class="section"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:clamp(22px,3vw,36px)">
+    <div class="reveal"><span class="label">Portfolio</span><h2 class="h2" style="margin-top:14px;color:var(--text)">Featured projects.</h2></div>
+    <a href="#projects" class="btn btn-outline reveal" data-page="projects" data-d="60">View all projects <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="proj-filter-bar reveal" data-d="40" id="proj-filter" style="margin-bottom:0">
+    <button class="pfbtn on" data-pf="all">All</button>
+    <button class="pfbtn" data-pf="residential">Residential</button>
+    <button class="pfbtn" data-pf="luxury">Luxury</button>
+    <button class="pfbtn" data-pf="apartment">Apartment</button>
+    <button class="pfbtn" data-pf="office">Office</button>
+    <button class="pfbtn" data-pf="retail">Retail</button>
+  </div>
+  <div class="proj-grid" id="proj-grid">
+    <div class="proj-card reveal" data-pc="residential"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Riverside residence"/><span class="pc-cat">Residential</span></div><div class="pc-body"><div class="pc-h">Riverside Residence</div><div class="pc-meta">European Oak · 420 sqft · 5 days</div><div class="pc-tags"><span class="ba-tag">Hardwood</span><span class="ba-tag">Living room</span></div></div></div>
+    <div class="proj-card reveal" data-d="60" data-pc="luxury"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=700&q=80" alt="Highland estate"/><span class="pc-cat">Luxury Home</span></div><div class="pc-body"><div class="pc-h">Highland Estate</div><div class="pc-meta">Walnut Herringbone · 1,250 sqft · 9 days</div><div class="pc-tags"><span class="ba-tag">Hardwood</span><span class="ba-tag">Whole home</span></div></div></div>
+    <div class="proj-card reveal" data-d="120" data-pc="apartment"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=700&q=80" alt="City apartment kitchen"/><span class="pc-cat">Apartment</span></div><div class="pc-body"><div class="pc-h">City Flat Kitchen</div><div class="pc-meta">Calacatta Porcelain · 180 sqft · 3 days</div><div class="pc-tags"><span class="ba-tag">Porcelain</span><span class="ba-tag">Kitchen</span></div></div></div>
+    <div class="proj-card reveal" data-pc="office"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="Foundry coworking"/><span class="pc-cat">Office</span></div><div class="pc-body"><div class="pc-h">Foundry Coworking</div><div class="pc-meta">Commercial LVT · 3,800 sqft · 6 days</div><div class="pc-tags"><span class="ba-tag">Vinyl</span><span class="ba-tag">Commercial</span></div></div></div>
+    <div class="proj-card reveal" data-d="60" data-pc="retail"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=700&q=80" alt="Retail boutique"/><span class="pc-cat">Retail</span></div><div class="pc-body"><div class="pc-h">Marble Boutique</div><div class="pc-meta">Honed Limestone · 620 sqft · 5 days</div><div class="pc-tags"><span class="ba-tag">Stone</span><span class="ba-tag">Retail</span></div></div></div>
+    <div class="proj-card reveal" data-d="120" data-pc="luxury"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=700&q=80" alt="Crestline luxury home"/><span class="pc-cat">Luxury Home</span></div><div class="pc-body"><div class="pc-h">Crestline Penthouse</div><div class="pc-meta">Wide-Plank Oak · 980 sqft · 7 days</div><div class="pc-tags"><span class="ba-tag">Hardwood</span><span class="ba-tag">Penthouse</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- PARTNERS -->
+<section style="background:var(--bg-2);padding-block:clamp(48px,6vw,80px)"><div class="container">
+  <div class="center reveal" style="margin-bottom:32px"><span class="label muted">Supplier partners</span></div>
+  <div class="partners-row reveal" data-d="60">
+    <div class="partner"><span class="partner-name">Shaw Floors</span></div>
+    <div class="partner"><span class="partner-name">Armstrong</span></div>
+    <div class="partner"><span class="partner-name">Mannington</span></div>
+    <div class="partner"><span class="partner-name">Daltile</span></div>
+    <div class="partner"><span class="partner-name">Mohawk</span></div>
+    <div class="partner"><span class="partner-name">MSI Stone</span></div>
+  </div>
+  <div class="trust-badges reveal" data-d="100" style="margin-top:0">
+    <div class="trust-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 11 2 2 4-4"/></svg><span>Licensed &amp; Insured</span></div>
+    <div class="trust-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.5 7.5-8.5 9C7.5 19.5 4 17 4 12V6l8-3 8 3z"/></svg><span>NWFA Certified</span></div>
+    <div class="trust-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 22V13M15 22V13"/></svg><span>CTEF Certified Tile</span></div>
+    <div class="trust-badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Background Checked</span></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Verified reviews</span><h2 class="h2" style="margin-top:14px;color:var(--text)">What clients say.</h2></div>
+  <div class="reviews-grid">
+    <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-q">The crew was punctual every day, protected the whole house and the herringbone pattern is flawless. I've had multiple people ask who did my floors. Worth every penny.</div><div class="rv-author"><div class="rv-av">MA</div><div><div class="rv-name">Maya Aldridge</div><div class="rv-role">Walnut Herringbone · Highland Estate</div></div></div></div>
+    <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-q">StoneAxis replaced three separate contractors' quotes with one fair, transparent number. They came in on time and the porcelain grout lines are ruler-straight. Exceptional.</div><div class="rv-author"><div class="rv-av">JT</div><div><div class="rv-name">James Thornton</div><div class="rv-role">Calacatta Porcelain · City Kitchen</div></div></div></div>
+    <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-q">Refloored 3,800 sqft of commercial space over two weekends with zero business downtime. The planning was meticulous and the finish is genuinely impressive.</div><div class="rv-author"><div class="rv-av">CW</div><div><div class="rv-name">Carmen Wu</div><div class="rv-role">Commercial LVT · Foundry Coworking</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- COST ESTIMATOR -->
+<section class="section" id="estimator-sec" style="background:var(--bg-2);padding-block:clamp(64px,8vw,112px)"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Budget calculator</span><h2 class="h2" style="margin-top:14px;color:var(--text)">Know the number<br/>before we visit.</h2></div>
+  <div class="est-shell reveal" data-d="80">
+    <div class="est-form">
+      <div style="font-family:var(--fd);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--text);margin-bottom:22px">Project details</div>
+      <div style="margin-bottom:18px"><label class="f-label">Room dimensions</label><div style="display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end"><div><label class="f-label" for="el">Length (ft)</label><input class="f-input" id="el" type="number" min="1" value="16" inputmode="decimal"/></div><div style="font-family:var(--fd);font-size:24px;color:var(--faint);padding-bottom:12px;font-weight:700">×</div><div><label class="f-label" for="ew">Width (ft)</label><input class="f-input" id="ew" type="number" min="1" value="14" inputmode="decimal"/></div></div></div>
+      <div style="margin-bottom:18px"><label class="f-label">Material type</label><div class="chip-group" data-eg="type"><button class="echip on" data-v="hardwood" data-r="8.5">Hardwood</button><button class="echip" data-v="vinyl" data-r="4.4">Luxury Vinyl</button><button class="echip" data-v="laminate" data-r="3.1">Laminate</button><button class="echip" data-v="ceramic" data-r="4.8">Ceramic Tile</button><button class="echip" data-v="porcelain" data-r="6.9">Porcelain</button><button class="echip" data-v="stone" data-r="12.4">Natural Stone</button></div></div>
+      <div style="margin-bottom:18px"><label class="f-label">Remove existing floor?</label><div class="chip-group" data-eg="removal"><button class="echip on" data-v="no" data-add="0">No removal needed</button><button class="echip" data-v="yes" data-add="1.8">Yes — include removal</button></div></div>
+      <div style="margin-bottom:18px"><label class="f-label">Timeline</label><div class="chip-group" data-eg="timeline"><button class="echip on" data-v="standard" data-mult="1" data-tl="Standard (2–4 wks)">Standard</button><button class="echip" data-v="priority" data-mult="1.12" data-tl="Priority (1 wk)">Priority</button><button class="echip" data-v="urgent" data-mult="1.25" data-tl="Urgent (3–5 days)">Urgent</button></div></div>
+      <form id="est-form" style="display:grid;gap:9px;margin-top:4px"><label class="f-label" for="est-email">Email my detailed estimate</label><div style="display:flex;gap:8px"><input class="f-input" id="est-email" type="email" placeholder="your@email.com" required/><button class="btn btn-primary" type="submit">Send</button></div></form>
+      <div id="est-sent" style="display:none;font-family:var(--fm);font-size:11.5px;color:var(--accent);margin-top:8px;letter-spacing:.04em">✓ Estimate on its way to your inbox.</div>
+    </div>
+    <div class="est-out">
+      <div class="est-out-h" id="est-total">$0</div>
+      <div style="font-family:var(--fm);font-size:10.5px;color:rgba(240,238,232,.45);letter-spacing:.06em;margin-top:4px">Estimated project total</div>
+      <div class="eo-rows" style="margin-top:18px">
+        <div class="eo-row"><span class="k">Floor area</span><span class="v" id="eo-area">224 sqft</span></div>
+        <div class="eo-row"><span class="k">With 10% waste</span><span class="v" id="eo-mat-sf">246 sqft</span></div>
+        <div class="eo-row"><span class="k">Material cost</span><span class="v" id="eo-matcost">$0</span></div>
+        <div class="eo-row"><span class="k">Labor &amp; installation</span><span class="v" id="eo-labor">$0</span></div>
+        <div class="eo-row"><span class="k">Timeline</span><span class="v em" id="eo-tl">Standard (2–4 wks)</span></div>
+      </div>
+      <p class="eo-note" style="margin-top:14px">Ballpark estimate — confirmed to the penny at your free on-site measurement. Permits and structural work quoted separately.</p>
+      <a href="#contact" class="btn btn-primary btn-full" data-page="contact" style="margin-top:18px">Book free measurement <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section"><div class="container">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:clamp(28px,5vw,72px);align-items:start">
+    <div class="reveal" style="position:sticky;top:96px"><span class="label">FAQ</span><h2 class="h2" style="margin-top:14px;color:var(--text)">Common questions.</h2><p class="body-lg" style="margin-top:14px">Can't find your answer? Call us — we pick up.</p><a href="tel:+15125550182" class="btn btn-dark" style="margin-top:20px">(512) 555-0182</a></div>
+    <div class="faq-list reveal" data-d="60">
+      <details class="faq-item" open><summary>How long does flooring installation take?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Most residential projects finish in 2–5 days depending on square footage, material and subfloor prep required. We give you a precise timeline in writing before starting.</div></details>
+      <details class="faq-item"><summary>Which flooring is best for kitchens?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Porcelain tile and luxury vinyl are our top recommendations — fully waterproof, easy to clean and rated for heavy traffic. We'll bring samples to show you in your own kitchen light.</div></details>
+      <details class="faq-item"><summary>Do you remove existing flooring?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Yes. Removal and disposal is an add-on service priced per square foot. We'll assess your existing floor and include it in your written quote.</div></details>
+      <details class="faq-item"><summary>Are materials included in the price?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Our quotes include everything — material, underlayment, adhesive, trims and labor. No line items appear on the day of installation that weren't in your written estimate.</div></details>
+      <details class="faq-item"><summary>Is financing available?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Yes — we work with several financing partners offering 0% promotional periods. Ask us at your consultation and we'll walk you through the options.</div></details>
+      <details class="faq-item"><summary>What warranties do you offer?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">We offer a 10-year installation warranty covering workmanship, plus manufacturer material warranties registered in your name at project completion. Lifetime repair support is included.</div></details>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA BAND -->
+<section class="cta-band"><div class="container"><div class="center reveal">
+  <span class="label light" style="justify-content:center">Free measurement · no obligation</span>
+  <h2 class="cta-h" style="margin-top:20px"><em>Ready to transform</em>Your floors?</h2>
+  <p style="font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(240,238,232,.6);max-width:52ch;margin:20px auto 0;line-height:1.62">Book a free consultation. We'll visit, measure precisely and give you a written quote before any decision is made.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:32px">
+    <a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Schedule a visit <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="#estimator-sec" class="btn btn-ghost-light btn-lg" data-scroll="estimator-sec">Request estimate</a>
+  </div>
+</div></div></section>
+
+</div><!-- /page-home -->
+
+<!-- ============ FLOORING TYPES PAGE ============ -->
+<div id="page-types" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Flooring Types</span></div><span class="label light" style="margin-bottom:14px">Six material collections</span><h1 class="ph-h"><em>Materials</em> that outlast trends.</h1><p class="ph-sub">Every material we install is chosen for how it performs over years — not just how it photographs. Find the right fit for your space.</p><div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap"><a href="#estimator-sec" class="btn btn-primary btn-lg" data-page="home" data-scroll="estimator-sec">Estimate project cost</a><a href="#contact" class="btn btn-ghost-light btn-lg" data-page="contact">Request samples</a></div></div></section>
+  <section class="section"><div class="container">
+    <div class="mat-grid">
+      <div class="mat-card reveal"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=700&q=80" alt="Hardwood"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Hardwood</div><div class="mc-sub">Premium residential — refinishable for decades</div><p style="font-size:13.5px;color:var(--muted);margin-top:9px;line-height:1.55">European oak, walnut and hickory in wide plank and herringbone. Warm, repairable and refinishable. The classic choice that adds appraised value.</p><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">50+ yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$8.50/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Living, dining</div></div></div></div></div>
+      <div class="mat-card reveal" data-d="60"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=700&q=80" alt="Luxury Vinyl"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Luxury Vinyl</div><div class="mc-sub">Durable, waterproof &amp; impact-resistant</div><p style="font-size:13.5px;color:var(--muted);margin-top:9px;line-height:1.55">100% waterproof LVP and LVT that convincingly mimics wood and stone. Ideal for kitchens, bathrooms and busy households with children or pets.</p><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">25 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$4.20/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Kitchen, bath</div></div></div></div></div>
+      <div class="mat-card reveal" data-d="120"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?auto=format&fit=crop&w=700&q=80" alt="Laminate"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Laminate</div><div class="mc-sub">Affordable elegance with scratch resistance</div><p style="font-size:13.5px;color:var(--muted);margin-top:9px;line-height:1.55">High-definition printed core with tough AC4–AC5 wear layers. Great visual results at a sensible budget — especially for bedrooms and home offices.</p><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">20 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$3.10/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Bedrooms</div></div></div></div></div>
+      <div class="mat-card reveal"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=700&q=80" alt="Ceramic Tile"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Ceramic Tile</div><div class="mc-sub">Modern, durable &amp; low-maintenance</div><p style="font-size:13.5px;color:var(--muted);margin-top:9px;line-height:1.55">Versatile, hard-wearing and easy to clean. From sleek large-format slabs to classic 6×6 — works in every room and suits both traditional and contemporary styles.</p><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">20 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$4.80/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">All rooms</div></div></div></div></div>
+      <div class="mat-card reveal" data-d="60"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?auto=format&fit=crop&w=700&q=80" alt="Porcelain Tile"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Porcelain Tile</div><div class="mc-sub">Luxury finish — exterior-rated options available</div><p style="font-size:13.5px;color:var(--muted);margin-top:9px;line-height:1.55">Denser, less porous and more durable than ceramic. Our top-selling category — Calacatta, concrete-look and basalt options for any aesthetic.</p><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$6.90/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">All spaces</div></div></div></div></div>
+      <div class="mat-card reveal" data-d="120"><div class="mc-img-wrap"><img class="mc-img" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=80" alt="Natural Stone"/><span class="mc-hover-strip"></span></div><div class="mc-body"><div class="mc-name">Natural Stone</div><div class="mc-sub">Architectural statement — sealed for life</div><p style="font-size:13.5px;color:var(--muted);margin-top:9px;line-height:1.55">Limestone, marble, travertine and basalt. Quarried character you can't replicate. We seal every natural stone installation to protect against staining and wear.</p><div class="mc-meta"><div class="mc-stat"><div class="k">Lifespan</div><div class="v">100 yrs</div></div><div class="mc-stat"><div class="k">From</div><div class="v">$12.40/sf</div></div><div class="mc-stat"><div class="k">Best for</div><div class="v">Luxury, lobby</div></div></div></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Get material samples delivered</a></div>
+  </div></section>
+</div>
+
+<!-- ============ PROJECTS PAGE ============ -->
+<div id="page-projects" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Projects</span></div><span class="label light" style="margin-bottom:14px">500+ completed</span><h1 class="ph-h"><em>Work</em> that speaks for itself.</h1><p class="ph-sub">Every project is measured, installed and inspected by our own certified crew. Browse by category to find something like yours.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="proj-filter-bar reveal" id="proj-filter-2" style="margin-bottom:0">
+      <button class="pfbtn on" data-pf2="all">All</button>
+      <button class="pfbtn" data-pf2="residential">Residential</button>
+      <button class="pfbtn" data-pf2="luxury">Luxury</button>
+      <button class="pfbtn" data-pf2="apartment">Apartment</button>
+      <button class="pfbtn" data-pf2="office">Office</button>
+      <button class="pfbtn" data-pf2="retail">Retail</button>
+    </div>
+    <div class="proj-grid" id="proj-grid-2">
+      <div class="proj-card reveal" data-pc2="residential"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Riverside"/><span class="pc-cat">Residential</span></div><div class="pc-body"><div class="pc-h">Riverside Residence</div><div class="pc-meta">European Oak · 420 sqft · 5 days</div></div></div>
+      <div class="proj-card reveal" data-d="60" data-pc2="luxury"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=700&q=80" alt="Highland"/><span class="pc-cat">Luxury</span></div><div class="pc-body"><div class="pc-h">Highland Estate</div><div class="pc-meta">Walnut Herringbone · 1,250 sqft · 9 days</div></div></div>
+      <div class="proj-card reveal" data-d="120" data-pc2="apartment"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=700&q=80" alt="City flat"/><span class="pc-cat">Apartment</span></div><div class="pc-body"><div class="pc-h">City Flat Kitchen</div><div class="pc-meta">Calacatta Porcelain · 180 sqft · 3 days</div></div></div>
+      <div class="proj-card reveal" data-pc2="office"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="Foundry"/><span class="pc-cat">Office</span></div><div class="pc-body"><div class="pc-h">Foundry Coworking</div><div class="pc-meta">Commercial LVT · 3,800 sqft · 6 days</div></div></div>
+      <div class="proj-card reveal" data-d="60" data-pc2="retail"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=700&q=80" alt="Retail boutique"/><span class="pc-cat">Retail</span></div><div class="pc-body"><div class="pc-h">Marble Boutique</div><div class="pc-meta">Honed Limestone · 620 sqft · 5 days</div></div></div>
+      <div class="proj-card reveal" data-d="120" data-pc2="luxury"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=700&q=80" alt="Crestline"/><span class="pc-cat">Luxury</span></div><div class="pc-body"><div class="pc-h">Crestline Penthouse</div><div class="pc-meta">Wide-Plank Oak · 980 sqft · 7 days</div></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Start your project</a></div>
+  </div></section>
+</div>
+
+<!-- ============ REVIEWS PAGE ============ -->
+<div id="page-reviews" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Reviews</span></div><h1 class="ph-h"><em>4.9 stars.</em> 1,800+ verified reviews.</h1><p class="ph-sub">Real clients, real projects. Every review is verified against a completed job.</p></div></section>
+  <section class="section"><div class="container"><div class="reviews-grid">
+    <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-q">The crew was punctual every day, protected the whole house and the herringbone pattern is flawless. Worth every penny.</div><div class="rv-author"><div class="rv-av">MA</div><div><div class="rv-name">Maya Aldridge</div><div class="rv-role">Walnut Herringbone · Highland</div></div></div></div>
+    <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-q">Transparent pricing, on-time crew, ruler-straight grout lines. I've already referred three neighbours.</div><div class="rv-author"><div class="rv-av">JT</div><div><div class="rv-name">James Thornton</div><div class="rv-role">Calacatta Porcelain · City Kitchen</div></div></div></div>
+    <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-q">Refloored 3,800 sqft over two weekends with zero business downtime. Meticulous planning.</div><div class="rv-author"><div class="rv-av">CW</div><div><div class="rv-name">Carmen Wu</div><div class="rv-role">Commercial LVT · Foundry</div></div></div></div>
+    <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-q">Brought three different wood samples to our house in natural light. Made the choice easy. Install was immaculate.</div><div class="rv-author"><div class="rv-av">PR</div><div><div class="rv-name">Priya Rajaram</div><div class="rv-role">Wide-Plank Oak · Crestline</div></div></div></div>
+    <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-q">They fixed a moisture issue the previous installer ignored, then laid the vinyl perfectly. No more warping.</div><div class="rv-author"><div class="rv-av">DL</div><div><div class="rv-name">David Lin</div><div class="rv-role">LVT · City Apartment</div></div></div></div>
+    <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-q">As a property developer we've used six flooring companies. StoneAxis is the only one we use now.</div><div class="rv-author"><div class="rv-av">SK</div><div><div class="rv-name">Sara Kowalski</div><div class="rv-role">Property developer · 14 units</div></div></div></div>
+  </div><div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Book your project</a></div></div></section>
+</div>
+
+<!-- ============ CONTACT PAGE ============ -->
+<div id="page-contact" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Contact</span></div><h1 class="ph-h">Let's start your <em>project.</em></h1><p class="ph-sub">Free on-site measurement within 24 hours. Fixed written quote before any work begins. No pressure.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 style="font-family:var(--fd);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--text);margin-bottom:6px">Get in touch</h2>
+        <p style="font-size:14px;color:var(--muted);line-height:1.6">Our team responds within one business hour during working hours.</p>
+        <div class="contact-info-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div class="ci-l">Call or text</div><div class="ci-v">(512) 555-0182</div></div></div>
+        <div class="contact-info-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><div class="ci-l">Email</div><div class="ci-v">hello@stoneaxis.com</div></div></div>
+        <div class="contact-info-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div class="ci-l">Hours</div><div class="ci-v">Mon–Fri 7am–6pm · Sat 8am–4pm</div></div></div>
+        <div class="contact-info-item" style="border-bottom:none"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div class="ci-l">Service area</div><div class="ci-v">Greater Metro Area · 50mi radius</div></div></div>
+      </div>
+      <div class="contact-form"><form id="contact-form" style="display:grid;gap:16px">
+        <div style="font-family:var(--fd);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--text)">Request free estimate</div>
+        <div class="g2" style="gap:13px"><div><label class="f-label" for="cf-name">Full name</label><input class="f-input" id="cf-name" required placeholder="Jane Cooper"/></div><div><label class="f-label" for="cf-phone">Phone</label><input class="f-input" id="cf-phone" type="tel" required placeholder="(555) 000-0000"/></div></div>
+        <div><label class="f-label" for="cf-email">Email</label><input class="f-input" id="cf-email" type="email" required placeholder="jane@email.com"/></div>
+        <div class="g2" style="gap:13px">
+          <div><label class="f-label" for="cf-type">Material interest</label><select class="f-input" id="cf-type"><option>Hardwood</option><option>Luxury Vinyl</option><option>Laminate</option><option>Ceramic Tile</option><option>Porcelain Tile</option><option>Natural Stone</option><option>Not sure yet</option></select></div>
+          <div><label class="f-label" for="cf-room">Room type</label><select class="f-input" id="cf-room"><option>Kitchen</option><option>Bathroom</option><option>Living room</option><option>Whole home</option><option>Commercial space</option><option>Other</option></select></div>
+        </div>
+        <div><label class="f-label" for="cf-notes">Project details</label><textarea class="f-input" id="cf-notes" rows="3" style="resize:vertical" placeholder="Approx. square footage, timing, any questions…"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-full">Request free measurement <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        <div style="text-align:center;font-family:var(--fm);font-size:10.5px;color:var(--faint);letter-spacing:.06em">Confirmed within 1 business hour · free &amp; no obligation</div>
+      </form></div>
+    </div>
+  </div></section>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer><div class="container"><div class="foot-top"><div class="foot-grid">
+  <div><div class="foot-brand-name">Stone<b>Axis</b></div><p class="foot-desc">Precision flooring and tile installation by certified craftsmen. 500+ projects. 15 years. 10-year warranty.</p><form class="foot-nl" id="foot-nl"><input type="email" required placeholder="Design tips in your inbox"/><button type="submit">Subscribe</button></form></div>
+  <div><div class="foot-h">Flooring</div><div class="foot-links"><span class="foot-link" data-page="types">Hardwood</span><span class="foot-link" data-page="types">Luxury Vinyl</span><span class="foot-link" data-page="types">Laminate</span><span class="foot-link" data-page="types">Porcelain Tile</span><span class="foot-link" data-page="types">Natural Stone</span></div></div>
+  <div><div class="foot-h">Services</div><div class="foot-links"><span class="foot-link" data-page="home" data-scroll="visualizer-sec">Floor Visualizer</span><span class="foot-link" data-page="home" data-scroll="estimator-sec">Cost Estimator</span><span class="foot-link" data-page="projects">Project Portfolio</span><span class="foot-link" data-page="contact">Free Measurement</span></div></div>
+  <div><div class="foot-h">Company</div><div class="foot-links"><span class="foot-link" data-page="projects">Our Work</span><span class="foot-link" data-page="reviews">Reviews</span><span class="foot-link" data-page="contact">Contact</span></div></div>
+  <div><div class="foot-h">Contact</div><div class="foot-links"><a href="tel:+15125550182" class="foot-link" style="display:block">(512) 555-0182</a><a href="mailto:hello@stoneaxis.com" class="foot-link" style="display:block">hello@stoneaxis.com</a><span class="foot-link" style="cursor:default">Mon–Fri 7am–6pm</span><span class="foot-link" style="cursor:default">Sat 8am–4pm</span></div></div>
+</div></div><div class="foot-bottom"><div class="foot-copy" style="font-size:11.5px">&copy; <span class="yr">2026</span> StoneAxis Floors &amp; Tile. All rights reserved.</div><div class="foot-credit">Built &amp; Maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener">GrowrixOS</a></div></div></div></footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <a href="#home" class="bn-item active" data-page="home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</a>
+  <a href="#flooring-types" class="bn-item" data-page="types"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Flooring</a>
+  <a href="#visualizer-sec" class="bn-item" data-page="home" data-scroll="visualizer-sec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 12l5-3 4 2 5-4 6 4"/></svg>Visualize</a>
+  <a href="#estimator-sec" class="bn-item" data-page="home" data-scroll="estimator-sec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>Estimate</a>
+  <button class="bn-item" id="bn-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>Menu</button>
+</nav>
+
+<!-- AI PANEL -->
+<div class="ai-panel" id="ai-panel" role="dialog" aria-label="StoneAxis floor guide" aria-hidden="true">
+  <div class="ai-head"><div class="ai-av"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div><div style="font-family:var(--fd);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.06em">Floor Guide AI</div><div style="font-size:11px;color:rgba(240,238,232,.65);margin-top:2px">Ask anything about flooring</div></div><button id="ai-close" aria-label="Close" style="margin-left:auto;color:rgba(240,238,232,.7);display:grid;place-items:center;width:32px;height:32px;border-radius:4px;border:1px solid rgba(240,238,232,.14);background:rgba(240,238,232,.07)"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="ai-body" id="ai-body"><div class="ai-msg bot">Hi — I'm the StoneAxis floor guide. Ask me about materials, cost, installation timelines or what works best for your space. 🪵</div></div>
+  <div class="ai-chips" id="ai-chips">
+    <button class="ai-chip" data-q="Best floor for a kitchen?">Best for kitchens</button>
+    <button class="ai-chip" data-q="How much does hardwood cost?">Hardwood cost</button>
+    <button class="ai-chip" data-q="What's waterproof?">Waterproof options</button>
+    <button class="ai-chip" data-q="How long does installation take?">Install timeline</button>
+  </div>
+  <form class="ai-foot" id="ai-form"><input id="ai-input" placeholder="Ask a flooring question…" aria-label="Message"/><button class="ai-send" type="submit" aria-label="Send"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></form>
+</div>
+
+<!-- FAB -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fab-opts">
+    <button class="fab-opt top" id="fab-top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <button class="fab-opt ai" id="fab-ai" aria-label="Floor Guide AI"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="fab-tip">Floor Guide AI</span></button>
+    <a href="https://wa.me/15125550182" target="_blank" rel="noopener" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1A7.93 7.93 0 0 0 12 19.9a7.95 7.95 0 0 0 5.6-13.6zM12 18.5a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25A6.59 6.59 0 1 1 12 18.5zm3.61-4.94c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.39 5.39 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.08a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.6-1.46s-.32-.34-.44-.34h-.38a.72.72 0 0 0-.52.24 2.2 2.2 0 0 0-.68 1.64A3.83 3.83 0 0 0 8.6 12a8.7 8.7 0 0 0 3.33 2.94c1.96.85 1.96.57 2.32.53a2 2 0 0 0 1.32-.93 1.64 1.64 0 0 0 .11-.93c-.05-.08-.18-.13-.38-.23z"/></svg><span class="fab-tip">WhatsApp us</span></a>
+    <a href="tel:+15125550182" class="fab-opt call" aria-label="Call now"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Call now</span></a>
+  </div>
+  <button class="fab-main" id="fab-main" aria-label="Quick actions" aria-expanded="false"><svg id="fab-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+</div>
+<script>
+(function(){"use strict";
+var doc=document,root=doc.documentElement,W=window;
+var SUN='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>';
+var MOON='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>';
+
+/* THEME */
+var themeBtn=doc.getElementById('theme-btn');
+function applyTheme(t){root.setAttribute('data-theme',t);if(themeBtn)themeBtn.innerHTML=t==='dark'?SUN:MOON;try{localStorage.setItem('sa-theme',t);}catch(e){}}
+(function(){var s;try{s=localStorage.getItem('sa-theme');}catch(e){}if(!s)s=(W.matchMedia&&W.matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';applyTheme(s);})();
+if(themeBtn)themeBtn.addEventListener('click',function(){applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');});
+
+/* SCROLL */
+var navbar=doc.getElementById('navbar'),scrollBar=doc.getElementById('scroll-bar'),bnav=doc.getElementById('bottom-nav'),lastY=W.pageYOffset;
+function onScroll(){
+  var y=W.pageYOffset,h=doc.documentElement.scrollHeight-W.innerHeight;
+  if(navbar)navbar.classList.toggle('scrolled',y>12);
+  if(scrollBar)scrollBar.style.width=(h>0?(y/h*100):0)+'%';
+  if(bnav)bnav.style.transform=(y>lastY&&y>200)?'translateY(100%)':'translateY(0)';
+  var t=doc.getElementById('fab-top');if(t)t.style.display=y>480?'grid':'none';
+  lastY=y;
+}
+W.addEventListener('scroll',onScroll,{passive:true});
+
+/* DRAWER */
+var drawer=doc.getElementById('drawer'),dov=doc.getElementById('drawer-ov');
+function openD(){if(drawer){drawer.classList.add('open');dov.classList.add('open');doc.body.style.overflow='hidden';}}
+function closeD(){if(drawer){drawer.classList.remove('open');dov.classList.remove('open');doc.body.style.overflow='';}}
+[['hamburger',openD],['drawer-close',closeD],['bn-menu',openD]].forEach(function(p){var el=doc.getElementById(p[0]);if(el)el.addEventListener('click',p[1]);});
+if(dov)dov.addEventListener('click',closeD);
+doc.addEventListener('keydown',function(e){if(e.key==='Escape'){closeD();closeAI();}});
+
+/* REVEAL */
+var rObs;
+function observeReveals(scope){
+  var els=(scope||doc).querySelectorAll('.reveal:not(.in)');
+  if(!('IntersectionObserver' in W)){[].forEach.call(els,function(e){e.classList.add('in');});return;}
+  if(!rObs)rObs=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){var d=parseInt(x.target.getAttribute('data-d')||'0',10);setTimeout(function(){x.target.classList.add('in');},d);rObs.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+  [].forEach.call(els,function(e){rObs.observe(e);});
+}
+
+/* COUNTERS */
+function countUp(el){var t=parseFloat(el.getAttribute('data-counter'))||0,dec=t%1!==0,s=null,dur=1400;
+  function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/dur,1),ease=1-Math.pow(1-p,3),v=t*ease;el.textContent=dec?v.toFixed(1):Math.floor(v).toLocaleString();if(p<1)requestAnimationFrame(step);else el.textContent=dec?t.toFixed(1):t.toLocaleString();}
+  requestAnimationFrame(step);}
+var cObs;
+function observeCounters(scope){
+  var els=(scope||doc).querySelectorAll('[data-counter]');
+  if(!('IntersectionObserver' in W)){[].forEach.call(els,countUp);return;}
+  if(!cObs)cObs=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){countUp(x.target);cObs.unobserve(x.target);}});},{threshold:.5});
+  [].forEach.call(els,function(e){if(!e.dataset.counted){e.dataset.counted='1';cObs.observe(e);}});
+}
+
+/* TILE-FLIP TRANSITION (signature) */
+var tileGrid=doc.getElementById('tile-grid');
+if(tileGrid){
+  var COLS=8,ROWS=6;
+  for(var i=0;i<COLS*ROWS;i++){var c=doc.createElement('div');c.className='tile-cell';tileGrid.appendChild(c);}
+}
+function doTileFlip(cb){
+  if(!tileGrid)return;
+  var cells=tileGrid.querySelectorAll('.tile-cell');
+  tileGrid.style.opacity='1';
+  [].forEach.call(cells,function(c,i){
+    var col=i%8,row=Math.floor(i/8);
+    var delay=(col+row)*22;
+    setTimeout(function(){c.style.transition='transform '+(Math.random()*.06+.08)+'s ease';c.style.transform='scaleY(1)';},delay);
+  });
+  setTimeout(function(){
+    if(cb)cb();
+    setTimeout(function(){
+      [].forEach.call(cells,function(c,i){
+        var col=i%8,row=Math.floor(i/8);
+        var delay=(col+row)*18;
+        setTimeout(function(){c.style.transform='scaleY(0)';},delay);
+      });
+      setTimeout(function(){tileGrid.style.opacity='0';},800);
+    },80);
+  },480);
+}
+
+/* HERO ROOM SWITCHER */
+(function(){
+  var tabs=doc.getElementById('room-tabs');if(!tabs)return;
+  var imgs=doc.querySelectorAll('.room-img'),matV=doc.getElementById('room-mat-v');
+  tabs.addEventListener('click',function(e){
+    var t=e.target.closest('.rtab');if(!t)return;
+    var r=parseInt(t.getAttribute('data-r'));
+    [].forEach.call(tabs.querySelectorAll('.rtab'),function(x){x.classList.remove('on');});t.classList.add('on');
+    doTileFlip(function(){
+      [].forEach.call(imgs,function(im,i){im.classList.toggle('active',i===r);});
+      var active=imgs[r];if(active&&matV)matV.textContent=active.getAttribute('data-mat')||'';
+    });
+  });
+})();
+
+/* MAIN BEFORE/AFTER SLIDER */
+(function(){
+  var range=doc.getElementById('viz-range'),div=doc.getElementById('viz-div'),after=doc.querySelector('.viz-after');
+  if(!range||!div||!after)return;
+  function setViz(v){after.style.clipPath='inset(0 '+(100-v)+'% 0 0)';div.style.left=v+'%';}
+  range.addEventListener('input',function(){setViz(parseFloat(range.value));});
+  setViz(50);
+  var drag=false,stage=doc.querySelector('.viz-stage');
+  if(stage){stage.addEventListener('pointerdown',function(){drag=true;});W.addEventListener('pointermove',function(e){if(!drag)return;var r=stage.getBoundingClientRect();setViz(Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100)));});W.addEventListener('pointerup',function(){drag=false;});}
+})();
+
+/* BA GALLERY SLIDERS */
+[].forEach.call(doc.querySelectorAll('.ba-compare'),function(c){
+  var a=c.querySelector('.ba-a'),line=c.querySelector('.ba-line'),hdl=c.querySelector('.ba-hdl'),rng=c.querySelector('.ba-rng');
+  function set(v){v=Math.max(0,Math.min(100,v));a.style.clipPath='inset(0 '+(100-v)+'% 0 0)';line.style.left=v+'%';hdl.style.left=v+'%';if(rng)rng.value=v;}
+  if(rng)rng.addEventListener('input',function(){set(parseFloat(rng.value));});
+  var drag=false;
+  c.addEventListener('pointerdown',function(){drag=true;});
+  W.addEventListener('pointermove',function(e){if(!drag)return;var r=c.getBoundingClientRect();set((e.clientX-r.left)/r.width*100);});
+  W.addEventListener('pointerup',function(){drag=false;});
+  set(50);
+});
+
+/* VISUALIZER MATERIAL LIST */
+(function(){
+  var T='?auto=format&fit=crop&w=900&q=80';
+  var MATS=[
+    {n:'European Oak',p:'$8.50/sqft',u:'photo-1600585154340-be6161a56a0c',sw:'photo-1604762524889-3e2fcc145683'},
+    {n:'Walnut Herringbone',p:'$13.80/sqft',u:'photo-1618221195710-dd6b41faaea6',sw:'photo-1622372738946-62e02505feb3'},
+    {n:'Calacatta Porcelain',p:'$6.90/sqft',u:'photo-1556909212-d5b604d0c90d',sw:'photo-1615971677499-5467cbab01c0'},
+    {n:'Natural Stone',p:'$12.40/sqft',u:'photo-1600607687920-4e2a09cf159d',sw:'photo-1603204077779-bed963ea7d0e'},
+    {n:'Smoked Hickory LVP',p:'$4.20/sqft',u:'photo-1503174971373-b1f69850bded',sw:'photo-1493606278519-11aa9f86e40a'},
+    {n:'Commercial LVT',p:'$4.80/sqft',u:'photo-1497366216548-37526070297c',sw:'photo-1584622650111-993a426fbf0a'},
+  ];
+  var list=doc.getElementById('viz-mat-list'),nameEl=doc.getElementById('viz-mat-name'),costEl=doc.getElementById('viz-cost-v'),afterImg=doc.getElementById('viz-after-img');
+  if(!list)return;
+  MATS.forEach(function(m,i){
+    var btn=doc.createElement('button');btn.className='mat-btn'+(i===0?' on':'');
+    btn.innerHTML='<div class="mat-swatch" style="background-image:url(\'https://images.unsplash.com/'+m.sw+'?auto=format&fit=crop&w=100&q=60\')"></div><div><div class="mb-n">'+m.n+'</div><div class="mb-s">'+m.p+'</div></div>';
+    btn.addEventListener('click',function(){
+      [].forEach.call(list.querySelectorAll('.mat-btn'),function(b){b.classList.remove('on');});btn.classList.add('on');
+      if(nameEl)nameEl.textContent=m.n;if(costEl)costEl.textContent='from '+m.p;
+      if(afterImg){afterImg.src='https://images.unsplash.com/'+m.u+T;}
+    });
+    list.appendChild(btn);
+  });
+  var vf=doc.getElementById('viz-form'),vs=doc.getElementById('viz-saved');
+  if(vf)vf.addEventListener('submit',function(e){e.preventDefault();vf.style.display='none';vs.style.display='block';});
+})();
+
+/* ESTIMATOR */
+(function(){
+  var el=doc.getElementById('el'),ew=doc.getElementById('ew');if(!el||!ew)return;
+  function getChip(g){var c=doc.querySelector('[data-eg="'+g+'"] .echip.on');return c||null;}
+  function money(n){return '$'+Math.round(n).toLocaleString();}
+  function calc(){
+    var L=parseFloat(el.value)||0,Wd=parseFloat(ew.value)||0,area=L*Wd;
+    var tc=getChip('type'),rc=getChip('removal'),tl=getChip('timeline');
+    var rate=tc?parseFloat(tc.getAttribute('data-r')):8.5;
+    var add=rc?parseFloat(rc.getAttribute('data-add')):0;
+    var mult=tl?parseFloat(tl.getAttribute('data-mult')):1;
+    var tlLabel=tl?tl.getAttribute('data-tl'):'Standard (2–4 wks)';
+    var matSf=area*1.10,matCost=matSf*rate*mult,labor=area*(3.2+add)*mult,total=matCost+labor;
+    var setT=doc.getElementById('est-total'),sa=doc.getElementById('eo-area'),sm=doc.getElementById('eo-mat-sf'),sc=doc.getElementById('eo-matcost'),sl=doc.getElementById('eo-labor'),stl=doc.getElementById('eo-tl');
+    if(setT)setT.textContent=money(total);
+    if(sa)sa.textContent=Math.round(area).toLocaleString()+' sqft';
+    if(sm)sm.textContent=Math.round(matSf).toLocaleString()+' sqft';
+    if(sc)sc.textContent=money(matCost);
+    if(sl)sl.textContent=money(labor);
+    if(stl)stl.textContent=tlLabel;
+  }
+  [el,ew].forEach(function(i){i.addEventListener('input',calc);});
+  [].forEach.call(doc.querySelectorAll('[data-eg]'),function(g){g.addEventListener('click',function(e){
+    var c=e.target.closest('.echip');if(!c)return;
+    var multi=g.getAttribute('data-multi')==='1';
+    if(!multi)[].forEach.call(g.querySelectorAll('.echip'),function(x){x.classList.remove('on');});
+    c.classList.toggle('on');calc();
+  });});
+  calc();
+  var ef=doc.getElementById('est-form'),es=doc.getElementById('est-sent');
+  if(ef)ef.addEventListener('submit',function(e){e.preventDefault();ef.style.display='none';es.style.display='block';});
+})();
+
+/* EXPLORER FILTER */
+(function(){
+  var ef=doc.getElementById('exp-grid');if(!ef)return;
+  doc.addEventListener('click',function(e){
+    var b=e.target.closest('.exp-filter-btn');if(!b)return;
+    [].forEach.call(doc.querySelectorAll('.exp-filter-btn'),function(x){x.classList.remove('on');});b.classList.add('on');
+    var v=b.getAttribute('data-ef');
+    [].forEach.call(doc.querySelectorAll('.exp-swatch'),function(s){s.classList.toggle('hide',!(v==='all'||s.getAttribute('data-ec')===v));});
+  });
+})();
+
+/* PROJECT FILTERS */
+function wireProj(barId,gridId,attr){
+  var bar=doc.getElementById(barId);if(!bar)return;
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('.pfbtn');if(!b)return;
+    [].forEach.call(bar.querySelectorAll('.pfbtn'),function(x){x.classList.remove('on');});b.classList.add('on');
+    var v=b.getAttribute(attr);
+    [].forEach.call(doc.getElementById(gridId).querySelectorAll('.proj-card'),function(c){c.classList.toggle('hide',!(v==='all'||c.getAttribute('data-'+attr.slice(5))===v));});
+  });
+}
+wireProj('proj-filter','proj-grid','data-pf');
+wireProj('proj-filter-2','proj-grid-2','data-pf2');
+
+/* FORMS */
+function makeOk(){var d=doc.createElement('div');d.setAttribute('role','status');d.style.cssText='padding:40px;text-align:center;background:var(--surface);border:1px solid var(--line)';d.innerHTML='<div style="width:56px;height:56px;margin:0 auto;border-radius:4px;background:#1F3A2E;display:grid;place-items:center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0EEE8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="font-family:var(--fd);font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--text);margin-top:16px">Request received</div><p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6;max-width:34ch;margin-inline:auto">A StoneAxis coordinator will confirm your measurement slot within one business hour.</p>';return d;}
+var cf=doc.getElementById('contact-form');if(cf)cf.addEventListener('submit',function(e){e.preventDefault();cf.replaceWith(makeOk());});
+var fnl=doc.getElementById('foot-nl');if(fnl)fnl.addEventListener('submit',function(e){e.preventDefault();var i=fnl.querySelector('input');if(i){i.value='';i.placeholder='Subscribed ✓';}});
+
+/* FAB */
+var fabMain=doc.getElementById('fab-main'),fabOpts=doc.getElementById('fab-opts'),fabIcon=doc.getElementById('fab-icon'),fabOpen=false;
+function toggleFab(){fabOpen=!fabOpen;fabOpts.classList.toggle('open',fabOpen);fabMain.classList.toggle('open',fabOpen);fabMain.setAttribute('aria-expanded',fabOpen?'true':'false');fabIcon.style.transform=fabOpen?'rotate(45deg)':'none';}
+if(fabMain)fabMain.addEventListener('click',toggleFab);
+var fabTop=doc.getElementById('fab-top');if(fabTop)fabTop.addEventListener('click',function(){W.scrollTo({top:0,behavior:'smooth'});});
+
+/* AI PANEL */
+var aiPanel=doc.getElementById('ai-panel'),aiBody=doc.getElementById('ai-body'),aiInput=doc.getElementById('ai-input');
+function openAI(){if(aiPanel){aiPanel.classList.add('open');aiPanel.setAttribute('aria-hidden','false');if(fabOpen)toggleFab();setTimeout(function(){if(aiInput)aiInput.focus();},280);}}
+function closeAI(){if(aiPanel){aiPanel.classList.remove('open');aiPanel.setAttribute('aria-hidden','true');}}
+var fabAI=doc.getElementById('fab-ai');if(fabAI)fabAI.addEventListener('click',openAI);
+var aiClose=doc.getElementById('ai-close');if(aiClose)aiClose.addEventListener('click',closeAI);
+function aiReply(q){var t=q.toLowerCase();
+  if(/kitchen/.test(t))return'For kitchens: porcelain tile or luxury vinyl — both fully waterproof, easy to clean and rated for heavy traffic. We bring samples to your kitchen so you see every finish in your own light.';
+  if(/bath|wet|shower/.test(t))return'Bathrooms need waterproof flooring with a good slip rating. Porcelain tile and natural stone (sealed) are our top picks. Avoid solid hardwood near standing water.';
+  if(/waterproof|water/.test(t))return'Fully waterproof options: luxury vinyl (LVP/LVT) and porcelain tile. Perfect for kitchens, bathrooms and basements.';
+  if(/hardwood|wood|oak|walnut/.test(t))return'Hardwood runs $8.50–$13.80/sqft installed depending on species and pattern. Refinishable multiple times — an investment that adds appraised property value.';
+  if(/cost|price|much|\$|budget/.test(t))return'Material starts at $3.10/sqft. Enter your room dimensions in the estimator above and get a transparent breakdown — material, labor and timeline.';
+  if(/long|time|days|install|week/.test(t))return'Most residential jobs take 2–5 days. Commercial projects we schedule in phases to minimize downtime. We give you a precise timeline in writing before starting.';
+  if(/stone|marble|limestone/.test(t))return'Natural stone — limestone, marble, travertine, basalt — runs $12.40/sqft and up. We seal every stone installation to protect against staining and wear.';
+  if(/warrant|guarantee/.test(t))return'We offer a 10-year installation warranty and register manufacturer material warranties in your name at project handover. Lifetime repair support included.';
+  return'Good question! For specific material recs, cost or timeline — try the estimator above or book a free visit and we\'ll advise you in person with samples in hand.';
+}
+function aiPush(txt,me){var m=doc.createElement('div');m.className='ai-msg '+(me?'me':'bot');m.textContent=txt;if(aiBody){aiBody.appendChild(m);aiBody.scrollTop=aiBody.scrollHeight;}}
+function aiAsk(q){aiPush(q,true);setTimeout(function(){aiPush(aiReply(q),false);},380);}
+var aiChips=doc.getElementById('ai-chips');if(aiChips)aiChips.addEventListener('click',function(e){var c=e.target.closest('.ai-chip');if(c)aiAsk(c.getAttribute('data-q'));});
+var aiForm=doc.getElementById('ai-form');if(aiForm)aiForm.addEventListener('submit',function(e){e.preventDefault();if(!aiInput)return;var v=aiInput.value.trim();if(!v)return;aiInput.value='';aiAsk(v);});
+
+/* YEAR */
+[].forEach.call(doc.querySelectorAll('.yr'),function(e){e.textContent=new Date().getFullYear();});
+
+/* SPA ROUTER */
+var PAGES={home:{el:'page-home',t:'StoneAxis — Precision Flooring & Tile Installation'},types:{el:'page-types',t:'Flooring Types — StoneAxis'},projects:{el:'page-projects',t:'Projects — StoneAxis'},reviews:{el:'page-reviews',t:'Reviews — StoneAxis'},contact:{el:'page-contact',t:'Contact & Free Estimate — StoneAxis'}};
+function setActive(page){[].forEach.call(doc.querySelectorAll('.nav-link,.bn-item'),function(l){var p=l.getAttribute('data-page');var noScroll=!l.getAttribute('data-scroll');l.classList.toggle('active',p===page&&noScroll);});}
+function showPage(page,opts){opts=opts||{};if(!PAGES[page])page='home';[].forEach.call(doc.querySelectorAll('.spa-page'),function(p){p.classList.remove('active');});var tgt=doc.getElementById(PAGES[page].el);if(tgt)tgt.classList.add('active');doc.title=PAGES[page].t;setActive(page);observeReveals(tgt||doc);observeCounters(tgt||doc);if(opts.scrollTo){var s=doc.getElementById(opts.scrollTo);if(s){setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},60);return;}}if(!opts.noScroll)W.scrollTo({top:0,behavior:opts.instant?'auto':'smooth'});}
+function navigate(page,scrollTo){var h='#'+page;if(location.hash!==h)history.pushState({page:page},'',h);showPage(page,{scrollTo:scrollTo});}
+doc.addEventListener('click',function(e){
+  var a=e.target.closest('[data-page]');if(a&&!a.classList.contains('foot-link')){var page=a.getAttribute('data-page');if(PAGES[page]){e.preventDefault();closeD();navigate(page,a.getAttribute('data-scroll')||null);return;}}
+  if(a&&a.classList.contains('foot-link')){var page=a.getAttribute('data-page');if(PAGES[page]){e.preventDefault();closeD();navigate(page,a.getAttribute('data-scroll')||null);return;}}
+  var sc=e.target.closest('[data-scroll]');if(sc&&!sc.getAttribute('data-page')){var id=sc.getAttribute('data-scroll'),s=doc.getElementById(id);if(s){e.preventDefault();closeD();s.scrollIntoView({behavior:'smooth',block:'start'});}}
+});
+W.addEventListener('popstate',function(e){var page=(e.state&&e.state.page)||(location.hash||'#home').replace('#','');showPage(PAGES[page]?page:'home',{instant:true});});
+function init(){var initial=(location.hash||'#home').replace('#','');if(!PAGES[initial])initial='home';showPage(initial,{instant:true,noScroll:true});observeReveals(doc);observeCounters(doc);onScroll();}
+if(doc.readyState==='loading')doc.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
+</html>

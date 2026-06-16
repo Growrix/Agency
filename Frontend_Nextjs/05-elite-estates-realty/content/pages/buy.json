@@ -1,0 +1,35 @@
+{
+  "slug": "buy",
+  "hero": {
+    "eyebrow": "Buy Property",
+    "title": "Your ideal home is waiting.",
+    "lede": "Expert buyer representation in every major luxury market. Let us find your perfect property.",
+    "backgroundImage": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "Buy Property"
+  },
+  "seo": {
+    "title": "Buy Property",
+    "description": "Work with Elite Estates buyer advisors for private listings, negotiation, and full transaction support."
+  },
+  "section": {
+    "eyebrow": "Buying Guide",
+    "title": "Why buy with Elite Estates?",
+    "lede": "Our buyer advisory service gives you access to exclusive listings, expert negotiation, and seamless transaction management from search to handover.",
+    "bullets": [
+      "Access to off-market listings",
+      "Expert negotiation with below-ask outcomes",
+      "Legal and financial coordination",
+      "Multilingual advisors in 60+ markets",
+      "Concierge support through move-in"
+    ],
+    "fallbackCard": {
+      "title": "Tailored advisory, every step",
+      "text": "We align every recommendation to your goals, timeline, and risk profile while preserving full confidentiality."
+    }
+  },
+  "cta": {
+    "label": "Start Your Search",
+    "href": "/contact",
+    "accent": true
+  }
+}

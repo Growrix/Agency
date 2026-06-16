@@ -23,12 +23,12 @@ depends_on:
 ### 1. Utility Ribbon
 - Content: fast-trust items, average response time, WhatsApp shortcut, and limited-time product bundle notice.
 - Components: utility strip, badge, link buttons.
-- Interaction notes: sticky after slight scroll on desktop, condensed on mobile.
+- Interaction notes: grouped with the header inside `SiteTopChrome`; both hide on scroll down and reappear on scroll up (desktop only — ribbon hidden on mobile).
 
 ### 2. Header and Mega Navigation
 - Content: logo, service categories, shop, portfolio, pricing, AI concierge, booking CTA, cart, chat.
 - Components: header, mega menu, icon buttons.
-- State requirements: default, scrolled, menu open, mobile drawer open.
+- State requirements: default, scrolled, menu open, mobile drawer open, hidden-on-scroll-down, visible-on-scroll-up.
 
 ### 3. Hero Statement and Proof Deck
 - Content: product-led headline — ready-made SaaS templates, AI tools, and custom development support — with Browse Products, Book a Free Consultation, Need Custom Work, WhatsApp, and Ask AI Assistant actions.

@@ -1,0 +1,38 @@
+{
+  "slug": "investment",
+  "hero": {
+    "eyebrow": "Investment",
+    "title": "Intelligent property investment worldwide.",
+    "lede": "Our investment advisory team identifies high-yield opportunities across prime markets using proprietary data and deep market access.",
+    "backgroundImage": "https://images.unsplash.com/photo-1534951009808-766178b47a4f?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "Investment"
+  },
+  "seo": {
+    "title": "Investment",
+    "description": "Data-driven property investment advisory with high-yield market intelligence and portfolio strategy."
+  },
+  "section": {
+    "eyebrow": "Investment Advisory",
+    "title": "A data-led approach to property wealth",
+    "lede": "We combine macroeconomic analysis, local supply intelligence, and private deal flow to construct portfolios that outperform benchmarks.",
+    "bullets": [
+      "Portfolio strategy and asset allocation",
+      "ROI modeling and yield analysis",
+      "Off-market deal origination",
+      "Tax-efficient structure advisory",
+      "Ongoing portfolio management"
+    ],
+    "stats": [
+      { "value": "7.2%", "label": "Dubai Gross Yield" },
+      { "value": "4.8%", "label": "London Prime Yield" },
+      { "value": "5.1%", "label": "Singapore Residential Yield" },
+      { "value": "6.4%", "label": "Lisbon Growth Yield" },
+      { "value": "7.8%", "label": "Abu Dhabi Yield" }
+    ]
+  },
+  "cta": {
+    "label": "Book Investment Consultation",
+    "href": "/contact",
+    "accent": true
+  }
+}

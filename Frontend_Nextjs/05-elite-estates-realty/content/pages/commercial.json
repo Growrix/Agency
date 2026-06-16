@@ -1,0 +1,37 @@
+{
+  "slug": "commercial",
+  "hero": {
+    "eyebrow": "Commercial Real Estate",
+    "title": "Office, retail and investment grade assets.",
+    "lede": "From boutique office suites to landmark towers, we advise and transact across every commercial asset class.",
+    "backgroundImage": "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "Commercial Real Estate"
+  },
+  "seo": {
+    "title": "Commercial Real Estate",
+    "description": "Institutional-grade advisory for office, retail, mixed-use, and logistics assets."
+  },
+  "section": {
+    "eyebrow": "Commercial",
+    "title": "End-to-end commercial property advisory",
+    "lede": "Our commercial division supports institutional investors, family offices, REITs, and owner-occupiers across acquisition, disposal, and leasing mandates.",
+    "bullets": [
+      "Office towers and mixed-use assets",
+      "Retail high streets and shopping centers",
+      "Industrial and logistics portfolios",
+      "Healthcare and hospitality strategies",
+      "Land development and planning support"
+    ],
+    "stats": [
+      { "value": "GBP2.4B", "label": "Commercial Transactions" },
+      { "value": "42", "label": "Countries Covered" },
+      { "value": "7.1%", "label": "Average Net Initial Yield" },
+      { "value": "95%", "label": "Client Retention Rate" }
+    ]
+  },
+  "cta": {
+    "label": "Book Commercial Consultation",
+    "href": "/contact",
+    "accent": true
+  }
+}

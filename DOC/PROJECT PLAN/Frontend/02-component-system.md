@@ -83,7 +83,9 @@ recommended_next_reads:
 
 ### Header and Navbar
 - Includes utility strip, main nav, mega menu for services, chat shortcut, WhatsApp link, and booking CTA.
-- States: default, scrolled, mobile open, submenu open.
+- Wrapped in `SiteTopChrome`: utility ribbon and header move together as one sticky top stack.
+- States: default, scrolled, mobile open, submenu open, hidden-on-scroll-down, visible-on-scroll-up.
+- Scroll behavior: hide the full top chrome while scrolling down (after leaving the top offset); reveal immediately when scrolling up; always visible near the top of the page and while the mobile drawer is open.
 
 ### Footer
 - Includes grouped navigation, trust badges, support links, newsletter or updates opt-in, and legal routes.

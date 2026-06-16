@@ -1,0 +1,126 @@
+{
+  "source": "web/shop/html-template-websites/05-EliteEstatesRealty.html",
+  "fileName": "05-EliteEstatesRealty.html",
+  "targetFolder": "05-elite-estates-realty",
+  "targetPath": "Frontend_Nextjs/05-elite-estates-realty/",
+  "generatedAt": "2026-06-16T03:35:00.000Z",
+  "sections": [
+    { "name": "Header + Ticker + Shell", "suggestedComponent": "components/layout/SiteShell.tsx" },
+    { "name": "Home Hero + Search", "suggestedComponent": "components/views/HomeView.tsx" },
+    { "name": "Featured Properties", "suggestedComponent": "components/sections/PropertyCard.tsx" },
+    { "name": "Markets + Investment", "suggestedComponent": "components/views/HomeView.tsx" },
+    { "name": "FAQ + CTA Band", "suggestedComponent": "components/ui/FaqAccordion.tsx" },
+    { "name": "Route Hero System", "suggestedComponent": "components/sections/PageHero.tsx" },
+    { "name": "Footer + Bottom Nav + FAB", "suggestedComponent": "components/layout/Footer.tsx" }
+  ],
+  "routes": [
+    { "htmlRoute": "home", "nextPath": "/" },
+    { "htmlRoute": "properties", "nextPath": "/properties" },
+    { "htmlRoute": "buy", "nextPath": "/buy" },
+    { "htmlRoute": "rent", "nextPath": "/rent" },
+    { "htmlRoute": "commercial", "nextPath": "/commercial" },
+    { "htmlRoute": "agents", "nextPath": "/agents" },
+    { "htmlRoute": "investment", "nextPath": "/investment" },
+    { "htmlRoute": "about", "nextPath": "/about" },
+    { "htmlRoute": "contact", "nextPath": "/contact" }
+  ],
+  "initFunctions": [
+    {
+      "html": "initCounters",
+      "suggestedHook": "use-countup"
+    },
+    {
+      "html": "initDrawer",
+      "suggestedHook": "use-drawer"
+    },
+    {
+      "html": "initFab",
+      "suggestedHook": "use-fab"
+    },
+    {
+      "html": "initForms",
+      "suggestedHook": "use-contact-form"
+    },
+    {
+      "html": "initNavbar",
+      "suggestedHook": "use-navbar"
+    },
+    {
+      "html": "initReveal",
+      "suggestedHook": "use-reveal"
+    },
+    {
+      "html": "initRouter",
+      "suggestedHook": "next-app-router"
+    }
+  ],
+  "contentExtractions": [
+    { "htmlVariable": "navigation", "suggestedFile": "content/navigation.json" },
+    { "htmlVariable": "home", "suggestedFile": "content/home.json" },
+    { "htmlVariable": "properties", "suggestedFile": "content/properties.json" },
+    { "htmlVariable": "agents", "suggestedFile": "content/agents.json" },
+    { "htmlVariable": "faq", "suggestedFile": "content/faq.json" },
+    { "htmlVariable": "forms", "suggestedFile": "content/forms/contact.json" },
+    { "htmlVariable": "pages", "suggestedFile": "content/pages/*.json" }
+  ],
+  "designTokens": {
+    "lightCount": 25,
+    "darkCount": 25,
+    "light": {
+      "--gold": "#B8922A",
+      "--gold-t": "#D4AC4E",
+      "--gold-l": "#F0D080",
+      "--gold-d": "#8A6A1A",
+      "--stone": "#9C8B7A",
+      "--stone-t": "#B5A595",
+      "--emerald": "#10B981",
+      "--royal": "#2563EB",
+      "--bg": "#FFFFFF",
+      "--surface": "#F8F6F3",
+      "--surface2": "#F0EDE8",
+      "--elevated": "#FFFFFF",
+      "--border": "#E8E2DA",
+      "--borders": "#D4CCC2",
+      "--text": "#1A1209",
+      "--muted": "#6B6058",
+      "--faint": "#A09080",
+      "--fd": "'Archivo',sans-serif",
+      "--fb": "'Space Grotesk',sans-serif",
+      "--fm": "'IBM Plex Mono',monospace",
+      "--rc": "20px",
+      "--rb": "14px",
+      "--ri": "14px",
+      "--maxw": "1440px",
+      "--shadow": "0 4px 16px rgba(26,18,9,.07)",
+      "--shadow-lg": "0 24px 56px rgba(26,18,9,.12)"
+    },
+    "dark": {
+      "--gold": "#D4AC4E",
+      "--gold-t": "#F0D080",
+      "--gold-l": "#B8922A",
+      "--gold-d": "#F0D080",
+      "--stone": "#9C8B7A",
+      "--stone-t": "#B5A595",
+      "--emerald": "#34D399",
+      "--royal": "#60A5FA",
+      "--bg": "#0C0A07",
+      "--surface": "#14110D",
+      "--surface2": "#1E1910",
+      "--elevated": "#1A1610",
+      "--border": "#2A2218",
+      "--borders": "#3A3020",
+      "--text": "#F5EFE6",
+      "--muted": "#A09080",
+      "--faint": "#6B6058",
+      "--fd": "var(--font-archivo),sans-serif",
+      "--fb": "var(--font-space-grotesk),sans-serif",
+      "--fm": "var(--font-ibm-plex-mono),monospace",
+      "--rc": "20px",
+      "--rb": "14px",
+      "--ri": "14px",
+      "--maxw": "1440px",
+      "--shadow": "0 4px 16px rgba(0,0,0,.45)",
+      "--shadow-lg": "0 24px 56px rgba(0,0,0,.55)"
+    }
+  }
+}

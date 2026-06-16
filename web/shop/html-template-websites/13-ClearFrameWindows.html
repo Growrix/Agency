@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ClearFrame — Premium Window & Door Installation</title>
+<meta name="description" content="ClearFrame installs energy-efficient windows and custom doors that save up to 35% on energy costs. Free in-home measurement. Lifetime installation warranty. Serving homeowners, developers and contractors."/>
+<meta name="keywords" content="window installation, door installation, energy efficient windows, replacement windows, custom doors, entry doors, patio doors, casement windows, double hung windows"/>
+<meta property="og:title" content="ClearFrame — Premium Window & Door Installation"/>
+<meta property="og:description" content="Beautiful windows. Secure doors. Built to last. Free in-home consultation and lifetime installation warranty."/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=1200&q=80"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="theme-color" content="#171717"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23171717'/%3E%3Crect x='4' y='4' width='11' height='11' rx='1' fill='none' stroke='%23B98A5A' stroke-width='2'/%3E%3Crect x='17' y='4' width='11' height='11' rx='1' fill='none' stroke='%23B98A5A' stroke-width='2'/%3E%3Crect x='4' y='17' width='11' height='11' rx='1' fill='none' stroke='%23B98A5A' stroke-width='2'/%3E%3Crect x='17' y='17' width='11' height='11' rx='1' fill='none' stroke='%23B98A5A' stroke-width='2'/%3E%3C/svg%3E"/>
+<style>
+/* ============================================================
+   CLEARFRAME — ARCHITECTURAL GLASS DESIGN SYSTEM
+   Tokens → Components → Layout → Responsive
+   ============================================================ */
+:root{
+  /* Palette */
+  --graphite:#171717; --steel:#4B5563; --slate:#6B7280;
+  --soft-white:#F8F8F6; --white:#FFFFFF; --off-white:#F0F0EE;
+  --bronze:#B98A5A; --bronze-d:#9A7044; --bronze-t:#D4AA7D;
+  --gold:#D6B27C; --gold-t:#E8D0A8;
+  /* Glass surfaces */
+  --glass-light:rgba(255,255,255,0.62); --glass-border:rgba(255,255,255,0.28);
+  --glass-dark:rgba(23,23,23,0.72); --glass-dark-border:rgba(255,255,255,0.14);
+  /* Semantic */
+  --bg:var(--soft-white); --bg-2:#EFEEEC; --bg-3:#E5E4E0;
+  --surface:var(--white); --surface-2:var(--off-white);
+  --panel:#171717; --panel-txt:#F0F0EE;
+  --text:#171717; --muted:#4B5563; --faint:#9CA3AF;
+  --line:#E0DFDB; --line-2:#CCCAC4;
+  --accent:var(--bronze); --accent-d:var(--bronze-d); --accent-t:var(--bronze-t);
+  /* Shadows */
+  --sh0:0 1px 3px rgba(23,23,23,.08);
+  --sh1:0 4px 16px rgba(23,23,23,.1);
+  --sh2:0 12px 32px rgba(23,23,23,.14);
+  --sh3:0 24px 56px rgba(23,23,23,.18),0 6px 16px rgba(23,23,23,.1);
+  --sh4:0 40px 80px rgba(23,23,23,.22);
+  --glow:0 0 0 3px rgba(185,138,90,.25);
+  /* Type */
+  --fd:'Poppins',system-ui,sans-serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'DM Mono',monospace;
+  /* Scale */
+  --rc:12px; --rb:8px; --rs:6px; --maxw:1340px;
+}
+[data-theme=dark]{
+  --bg:#0F0F0D; --bg-2:#161614; --bg-3:#1E1D1A;
+  --surface:#1A1918; --surface-2:#222120;
+  --text:#F0F0EE; --muted:#9CA3AF; --faint:#6B7280;
+  --line:#2A2926; --line-2:#38362F;
+  --panel:#F0F0EE; --panel-txt:#171717;
+  --glass-light:rgba(26,25,24,0.82); --glass-border:rgba(255,255,255,.1);
+  --glass-dark:rgba(15,15,13,0.88); --glass-dark-border:rgba(255,255,255,.08);
+  --sh0:0 1px 3px rgba(0,0,0,.3); --sh1:0 4px 16px rgba(0,0,0,.4);
+  --sh2:0 12px 32px rgba(0,0,0,.5); --sh3:0 24px 56px rgba(0,0,0,.55),0 6px 16px rgba(0,0,0,.4);
+}
+
+/* ---- BASE ---- */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block;border-radius:inherit}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+::selection{background:var(--bronze);color:#fff}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,48px);position:relative;z-index:2}
+.section{padding-block:clamp(72px,9vw,130px);position:relative}
+.center{text-align:center}
+.skip-link{position:absolute;left:16px;top:-80px;background:var(--graphite);color:#F0F0EE;padding:11px 20px;font-weight:700;font-size:14px;border-radius:var(--rb);z-index:500;transition:top .2s}
+.skip-link:focus{top:14px}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:3px;border-radius:4px}
+
+/* ---- TYPOGRAPHY ---- */
+.label{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:10px}
+.label::before{content:"";width:24px;height:1.5px;background:var(--accent);display:inline-block}
+.label.lt{color:var(--gold-t)}.label.lt::before{background:var(--gold-t)}
+.label.muted{color:var(--faint)}.label.muted::before{background:var(--faint)}
+.h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.8rem,6.5vw,5.6rem);line-height:1.0;letter-spacing:-.025em;color:var(--text)}
+.h2{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,4.5vw,4rem);line-height:1.05;letter-spacing:-.02em;color:var(--text)}
+.h3{font-family:var(--fd);font-weight:700;font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.12;letter-spacing:-.015em;color:var(--text)}
+.h4{font-family:var(--fd);font-weight:700;font-size:clamp(1.1rem,1.8vw,1.5rem);line-height:1.18;letter-spacing:-.01em;color:var(--text)}
+.body-lg{font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.65;color:var(--muted)}
+.em{color:var(--accent)}
+
+/* ---- GRIDS ---- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,28px)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,20px)}
+
+/* ---- GLASS & SURFACE PRIMITIVES ---- */
+.glass{background:var(--glass-light);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid var(--glass-border)}
+.glass-dark{background:var(--glass-dark);backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%);border:1px solid var(--glass-dark-border)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);box-shadow:var(--sh1);transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--sh3)}
+.panel-dark{background:var(--panel);color:var(--panel-txt)}
+
+/* ---- BUTTONS ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fd);font-weight:700;font-size:14.5px;letter-spacing:-.005em;padding:14px 26px;border-radius:var(--rb);transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s,background .2s,color .2s;white-space:nowrap;line-height:1;cursor:pointer;border:none}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-lg{padding:17px 32px;font-size:15.5px}
+.btn-sm{padding:10px 18px;font-size:13.5px}
+.btn-full{width:100%}
+.btn-primary{background:var(--bronze);color:#fff;box-shadow:0 6px 20px -6px rgba(185,138,90,.6)}
+.btn-primary:hover{background:var(--bronze-d);transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(185,138,90,.65)}
+.btn-dark{background:var(--graphite);color:#F0F0EE;box-shadow:var(--sh1)}
+[data-theme=dark] .btn-dark{background:#F0F0EE;color:#171717}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:var(--sh3)}
+.btn-outline{background:transparent;border:1.5px solid var(--line-2);color:var(--text)}
+.btn-outline:hover{border-color:var(--bronze);color:var(--bronze)}
+.btn-ghost{background:rgba(240,240,238,.12);color:#F0F0EE;border:1.5px solid rgba(240,240,238,.28);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(240,240,238,.2);border-color:rgba(240,240,238,.5)}
+
+/* ---- FORM ---- */
+.f-label{display:block;font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;font-weight:500}
+.f-input{width:100%;background:var(--bg-2);border:1.5px solid var(--line-2);border-radius:var(--rb);padding:13px 16px;font-size:15px;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.f-input::placeholder{color:var(--faint)}
+.f-input:focus{outline:none;border-color:var(--bronze);box-shadow:var(--glow)}
+select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:44px}
+
+/* ---- TICKER ---- */
+.ticker{background:var(--graphite);color:#F0F0EE;overflow:hidden;position:relative;z-index:4;border-bottom:1px solid rgba(255,255,255,.06)}
+.ticker-inner{display:flex;white-space:nowrap;animation:tick 46s linear infinite}
+.ticker:hover .ticker-inner{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:11px;padding:10px 34px;font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;color:rgba(240,240,238,.75)}
+.ticker-item strong{color:var(--gold-t)}
+.ticker-dot{color:var(--bronze-t);margin:0 6px;font-size:14px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---- NAVBAR ---- */
+.navbar{position:sticky;top:0;z-index:120;transition:background .35s,backdrop-filter .35s,box-shadow .35s,border-color .35s;border-bottom:1px solid transparent;background:var(--graphite)}
+.navbar.scrolled{background:rgba(23,23,23,.82);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-bottom-color:rgba(255,255,255,.08);box-shadow:0 4px 30px rgba(0,0,0,.25)}
+[data-theme=dark] .navbar.scrolled{background:rgba(15,15,13,.88)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-icon{width:34px;height:34px;border-radius:6px;border:1.5px solid rgba(185,138,90,.7);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;padding:5px;flex-shrink:0}
+.logo-icon span{border:1.5px solid rgba(185,138,90,.6);border-radius:2px}
+.logo-name{font-family:var(--fd);font-weight:800;font-size:19px;letter-spacing:-.02em;color:#F0F0EE}
+.logo-name b{color:var(--bronze-t)}
+.nav-links{display:flex;align-items:center;gap:1px}
+.nav-link{font-size:13.5px;font-weight:600;color:rgba(240,240,238,.7);padding:8px 13px;border-radius:6px;transition:color .2s,background .2s}
+.nav-link:hover{color:#F0F0EE;background:rgba(240,240,238,.08)}
+.nav-link.active{color:var(--gold-t)}
+.nav-acts{display:flex;align-items:center;gap:9px}
+.theme-btn{width:38px;height:38px;border-radius:6px;display:grid;place-items:center;background:rgba(240,240,238,.08);color:#F0F0EE;border:1px solid rgba(240,240,238,.12);transition:background .2s}
+.theme-btn:hover{background:rgba(240,240,238,.16)}
+.hamburger{display:none;width:38px;height:38px;border-radius:6px;place-items:center;background:rgba(240,240,238,.08);color:#F0F0EE;border:1px solid rgba(240,240,238,.12)}
+
+/* ---- DRAWER ---- */
+.drawer{position:fixed;inset:0 0 0 auto;width:min(340px,88vw);background:var(--graphite);z-index:200;transform:translateX(110%);transition:transform .38s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;padding:26px;overflow-y:auto;border-left:1px solid rgba(255,255,255,.08)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.drawer-link{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.06);font-family:var(--fd);font-size:20px;font-weight:700;color:#F0F0EE;letter-spacing:-.01em;transition:color .2s}
+.drawer-link:hover{color:var(--gold-t)}
+.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:190;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(2px)}
+.drawer-ov.open{opacity:1;pointer-events:auto}
+
+/* ---- BOTTOM NAV ---- */
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:rgba(23,23,23,.94);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.08);display:none;justify-content:space-around;align-items:stretch;transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:rgba(240,240,238,.5);padding:10px 8px 12px;flex:1;font-family:var(--fm);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;border:none;background:none;cursor:pointer}
+.bn-item svg{width:20px;height:20px;transition:transform .18s}
+.bn-item.active{color:var(--gold-t)}.bn-item.active svg{transform:scale(1.1)}
+
+/* ---- FAB ---- */
+.fab-wrap{position:fixed;right:20px;bottom:26px;z-index:90;display:flex;flex-direction:column;align-items:center;gap:10px}
+.fab-main{width:54px;height:54px;border-radius:50%;background:var(--bronze);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(185,138,90,.55);transition:transform .22s,background .2s}
+.fab-main:hover{transform:scale(1.08)}.fab-main.open{background:var(--graphite)}
+[data-theme=dark] .fab-main.open{background:#F0F0EE;color:#171717}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:10px;max-height:0;overflow:hidden;opacity:0;transition:max-height .38s cubic-bezier(.16,1,.3,1),opacity .28s}
+.fab-opts.open{max-height:320px;opacity:1}
+.fab-opt{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--sh2);transition:transform .18s;position:relative;flex-shrink:0}
+.fab-opt:hover{transform:scale(1.1)}
+.fab-opt.call{background:#1A3A28;color:#F0F0EE}.fab-opt.wa{background:#25D366;color:#fff}
+.fab-opt.bk{background:var(--graphite);color:#F0F0EE}.fab-opt.ai-opt{background:var(--bronze);color:#fff}
+.fab-opt.top{background:var(--surface);border:1px solid var(--line);color:var(--text);display:none}
+.fab-tip{position:absolute;right:54px;top:50%;transform:translateY(-50%) translateX(6px);background:var(--graphite);color:#F0F0EE;font-family:var(--fm);font-size:10.5px;padding:6px 11px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s,transform .18s;letter-spacing:.04em}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ---- AI PANEL ---- */
+.ai-panel{position:fixed;right:20px;bottom:90px;z-index:95;width:min(358px,calc(100vw - 40px));background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh4);overflow:hidden;transform:translateY(16px) scale(.97);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .28s}
+.ai-panel.open{transform:none;opacity:1;pointer-events:auto}
+.ai-head{display:flex;align-items:center;gap:10px;padding:14px 17px;background:var(--graphite);color:#F0F0EE}
+.ai-av{width:36px;height:36px;border-radius:8px;background:var(--bronze);display:grid;place-items:center;flex-shrink:0}
+.ai-body{padding:14px 17px;max-height:270px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ai-msg{font-size:13px;line-height:1.55;padding:10px 13px;border-radius:10px;max-width:88%}
+.ai-msg.bot{background:var(--bg-2);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}
+.ai-msg.me{background:var(--bronze);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 17px 12px}
+.ai-chip{font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:999px;background:var(--bg-2);border:1px solid var(--line);color:var(--muted);transition:border-color .2s,color .2s;font-family:var(--fm);letter-spacing:.03em;cursor:pointer}
+.ai-chip:hover{border-color:var(--bronze);color:var(--bronze)}
+.ai-foot{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+.ai-foot input{flex:1;font-size:13px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:10px 13px;color:var(--text)}
+.ai-foot input:focus{outline:none;border-color:var(--bronze);box-shadow:var(--glow)}
+.ai-send{width:40px;height:40px;border-radius:8px;background:var(--bronze);color:#fff;display:grid;place-items:center;flex-shrink:0;border:none;cursor:pointer}
+
+/* ---- REVEAL ---- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--bronze),var(--gold));z-index:400;width:0;pointer-events:none;transition:width .1s linear}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ticker-inner{animation:none}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
+<style>
+/* ============================================================
+   SECTION COMPONENTS
+   ============================================================ */
+
+/* ---- HERO: WINDOW-FRAME SIGNATURE ---- */
+.hero{position:relative;min-height:95vh;display:flex;flex-direction:column;background:var(--graphite);color:#F0F0EE;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.18;transition:opacity .8s}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(23,23,23,.95) 40%,rgba(23,23,23,.6))}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;flex:1;position:relative;z-index:2;align-items:center;gap:0}
+.hero-left{padding:clamp(48px,6vw,80px) clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.hero-h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.8rem,6vw,5.4rem);line-height:.98;letter-spacing:-.025em;color:#F0F0EE}
+.hero-h1 .accent-word{color:var(--gold-t);display:block}
+.hero-sub{font-size:clamp(1rem,1.4vw,1.12rem);color:rgba(240,240,238,.68);line-height:1.64;margin-top:22px;max-width:44ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-trust{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1)}
+.ht{padding:14px clamp(6px,1.2vw,14px) 14px 0;border-right:1px solid rgba(255,255,255,.1)}
+.ht:last-child{border-right:none;padding-right:0}
+.ht-n{font-family:var(--fd);font-weight:800;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1;color:var(--gold-t)}
+.ht-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,240,238,.48);margin-top:4px}
+
+/* Right panel — the SIGNATURE window-frame UI */
+.hero-right{position:relative;height:100%;min-height:520px;display:flex;align-items:center;justify-content:center;padding:32px}
+.win-frame-wrap{position:relative;width:100%;max-width:520px}
+/* The architectural window frame overlay */
+.win-frame{position:relative;border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh4)}
+.win-frame-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:opacity .6s cubic-bezier(.16,1,.3,1)}
+.win-frame-img.out{opacity:0}
+/* SVG window-frame overlay drawn in CSS */
+.win-frame-overlay{position:absolute;inset:0;pointer-events:none;z-index:3}
+.win-frame-overlay::before{/* horizontal muntin */content:"";position:absolute;left:0;right:0;top:50%;height:5px;background:rgba(23,23,23,.55);backdrop-filter:blur(2px);transform:translateY(-50%)}
+.win-frame-overlay::after{/* vertical muntin */content:"";position:absolute;top:0;bottom:0;left:50%;width:5px;background:rgba(23,23,23,.55);backdrop-filter:blur(2px);transform:translateX(-50%)}
+/* Corner hardware dots */
+.win-frame-overlay .hw{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px rgba(23,23,23,.5),0 2px 6px rgba(0,0,0,.4);z-index:4}
+.win-frame-overlay .hw.tl{top:calc(50% - 6px);left:calc(50% - 6px);margin:-6px 0 0 -6px} /* intersect center */
+/* Frame border */
+.win-frame-border{position:absolute;inset:0;border:8px solid rgba(23,23,23,.7);border-radius:var(--rc);z-index:2;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+/* Style selector tabs */
+.win-tabs{display:flex;gap:0;margin-top:14px;border-radius:var(--rb);overflow:hidden;border:1px solid rgba(255,255,255,.15)}
+.wtab{flex:1;padding:11px 10px;font-family:var(--fm);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,240,238,.6);background:rgba(23,23,23,.65);backdrop-filter:blur(8px);text-align:center;cursor:pointer;border-right:1px solid rgba(255,255,255,.1);transition:color .2s,background .2s;border:none}
+.wtab:last-child{border-right:none}
+.wtab.on{color:var(--gold-t);background:rgba(185,138,90,.22)}
+/* Material badge */
+.win-badge{position:absolute;bottom:18px;left:18px;z-index:5}
+.win-badge-inner{background:var(--glass-dark);backdrop-filter:blur(12px);border:1px solid var(--glass-dark-border);border-radius:8px;padding:10px 14px}
+.win-badge .k{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t)}
+.win-badge .v{font-family:var(--fd);font-size:17px;font-weight:700;color:#F0F0EE;margin-top:2px;letter-spacing:-.01em}
+
+/* ---- VISUALIZER / BEFORE-AFTER ---- */
+.viz-shell{display:grid;grid-template-columns:1fr 400px;border-radius:var(--rc);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh3)}
+.viz-stage{position:relative;min-height:440px;background:var(--bg-3);overflow:hidden}
+.viz-before,.viz-after{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.viz-after{clip-path:inset(0 50% 0 0);transition:clip-path 0s}
+.viz-div{position:absolute;top:0;bottom:0;left:50%;width:2.5px;background:#fff;z-index:4;transform:translateX(-50%);box-shadow:0 0 10px rgba(0,0,0,.35)}
+.viz-hdl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;z-index:5;display:grid;place-items:center;box-shadow:var(--sh3);cursor:ew-resize}
+.viz-hdl svg{color:var(--graphite);width:22px;height:22px}
+.viz-range{position:absolute;inset:0;opacity:0;cursor:ew-resize;z-index:6;margin:0}
+.viz-lbl-row{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:3;pointer-events:none}
+.viz-lbl{font-family:var(--fm);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:6px}
+.viz-lbl.b{background:rgba(23,23,23,.76);color:rgba(240,240,238,.85)}
+.viz-lbl.a{background:rgba(185,138,90,.9);color:#fff}
+.viz-mat-info{position:absolute;bottom:14px;left:14px;z-index:3;background:var(--glass-dark);backdrop-filter:blur(10px);border:1px solid var(--glass-dark-border);border-radius:8px;padding:9px 14px}
+.viz-mat-info .k{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t)}
+.viz-mat-info .v{font-family:var(--fd);font-size:15px;font-weight:700;color:#F0F0EE;margin-top:2px}
+.viz-panel{background:var(--surface);padding:clamp(20px,2.8vw,30px);display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+.viz-panel-h{font-family:var(--fd);font-weight:800;font-size:20px;letter-spacing:-.01em;color:var(--text)}
+.viz-cat-tabs{display:flex;gap:0;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.vctab{flex:1;padding:9px 6px;font-family:var(--fm);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--muted);background:var(--bg-2);text-align:center;cursor:pointer;border-right:1px solid var(--line);transition:all .2s;border:none}
+.vctab:last-child{border-right:none}
+.vctab.on{background:var(--graphite);color:var(--gold-t)}
+.viz-list{display:grid;gap:7px}
+.viz-btn{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1.5px solid var(--line);background:var(--bg-2);border-radius:var(--rb);cursor:pointer;transition:border-color .2s,background .2s;text-align:left}
+.viz-btn:hover{border-color:var(--line-2)}
+.viz-btn.on{border-color:var(--bronze);background:var(--surface)}
+.viz-btn.on .vb-n{color:var(--bronze)}
+.viz-thumb{width:40px;height:40px;border-radius:6px;flex-shrink:0;border:1px solid var(--line);background-size:cover;background-position:center}
+.vb-n{font-family:var(--fd);font-weight:700;font-size:14px;letter-spacing:-.005em;color:var(--text);transition:color .2s}
+.vb-s{font-family:var(--fm);font-size:9.5px;color:var(--faint);letter-spacing:.04em;margin-top:1px}
+.viz-energy{background:linear-gradient(135deg,var(--graphite),#2a2a26);color:#F0F0EE;border-radius:var(--rb);padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.viz-energy .ve-l{font-family:var(--fm);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,240,238,.55)}
+.viz-energy .ve-v{font-family:var(--fd);font-size:20px;font-weight:800;color:var(--gold-t);letter-spacing:-.01em}
+
+/* ---- PRODUCT CARDS ---- */
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:var(--rc);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh1)}
+.prod-card{background:var(--surface);border-right:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative;transition:transform .28s cubic-bezier(.16,1,.3,1)}
+.prod-card:hover{z-index:2}
+.prod-card:hover .pc-img{transform:scale(1.06)}
+.pc-img-wrap{aspect-ratio:4/3;overflow:hidden;position:relative}
+.pc-img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.pc-cat-badge{position:absolute;top:12px;left:12px;font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;background:rgba(23,23,23,.8);color:var(--gold-t);border-radius:6px}
+.pc-body{padding:20px 22px}
+.pc-name{font-family:var(--fd);font-weight:700;font-size:18px;letter-spacing:-.01em;color:var(--text)}
+.pc-sub{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:2px}
+.pc-feats{list-style:none;margin-top:12px;display:grid;gap:6px}
+.pc-feats li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--muted)}
+.pc-feats li svg{width:14px;height:14px;color:var(--bronze);flex-shrink:0;margin-top:3px}
+.pc-meta{display:flex;gap:0;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.pc-stat{flex:1;padding-right:12px;border-right:1px solid var(--line);margin-right:12px}
+.pc-stat:last-child{border-right:none;padding-right:0;margin-right:0}
+.pc-stat .k{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.pc-stat .v{font-family:var(--fd);font-size:13.5px;font-weight:700;color:var(--text);margin-top:2px;letter-spacing:-.005em}
+.pc-accent-strip{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--bronze),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.prod-card:hover .pc-accent-strip{transform:scaleX(1)}
+
+/* ---- BENEFITS CARDS ---- */
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.benefit-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:clamp(22px,3vw,30px);transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s,border-color .28s;position:relative;overflow:hidden}
+.benefit-card:hover{transform:translateY(-5px);box-shadow:var(--sh3);border-color:var(--line-2)}
+.benefit-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--bronze),var(--gold));opacity:0;transition:opacity .3s}
+.benefit-card:hover::before{opacity:1}
+.benefit-ic{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,rgba(185,138,90,.12),rgba(214,178,124,.08));border:1px solid rgba(185,138,90,.2);display:grid;place-items:center;color:var(--bronze);margin-bottom:16px}
+.benefit-ic svg{width:24px;height:24px}
+.benefit-card h3{font-family:var(--fd);font-weight:700;font-size:18px;letter-spacing:-.01em;color:var(--text)}
+.benefit-card p{font-size:14px;color:var(--muted);line-height:1.6;margin-top:8px}
+
+/* ---- PROCESS TIMELINE ---- */
+.process-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+.process-flow::before{content:"";position:absolute;top:38px;left:calc(100%/12);right:calc(100%/12);height:1px;background:linear-gradient(90deg,var(--bronze),var(--gold),var(--bronze));opacity:.4;z-index:0}
+.proc-node{display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(12px,2vw,20px) clamp(8px,1vw,14px);position:relative;z-index:1}
+.proc-dot{width:76px;height:76px;border-radius:50%;background:var(--surface);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;transition:border-color .3s,background .3s,transform .3s;box-shadow:var(--sh0)}
+.proc-num{font-family:var(--fm);font-size:10px;letter-spacing:.12em;color:var(--faint);line-height:1}
+.proc-dot svg{width:22px;height:22px;color:var(--muted);transition:color .3s}
+.proc-node:hover .proc-dot{border-color:var(--bronze);background:var(--bg-2);transform:scale(1.08)}
+.proc-node:hover .proc-dot svg{color:var(--bronze)}
+.proc-label{font-family:var(--fd);font-weight:700;font-size:clamp(.85rem,1.5vw,1rem);letter-spacing:-.01em;color:var(--text);margin-top:12px;line-height:1.2}
+.proc-desc{font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:6px}
+
+/* ---- BEFORE/AFTER GALLERY ---- */
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,22px)}
+.ba-item{border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh1);border:1px solid var(--line)}
+.ba-compare{position:relative;aspect-ratio:16/10;overflow:hidden;user-select:none}
+.ba-b,.ba-a{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba-a{clip-path:inset(0 50% 0 0)}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:2.5px;background:#fff;z-index:3;transform:translateX(-50%);box-shadow:0 0 10px rgba(0,0,0,.3)}
+.ba-hdl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;z-index:4;display:grid;place-items:center;box-shadow:var(--sh2);cursor:ew-resize}
+.ba-hdl svg{width:18px;height:18px;color:var(--graphite)}
+.ba-rng{position:absolute;inset:0;opacity:0;cursor:ew-resize;z-index:5;margin:0}
+.ba-cap-row{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:2;pointer-events:none}
+.ba-cap{font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:5px}
+.ba-cap.b{background:rgba(23,23,23,.75);color:rgba(240,240,238,.8)}
+.ba-cap.a{background:rgba(185,138,90,.9);color:#fff}
+.ba-info{padding:16px 20px;background:var(--surface);border-top:1px solid var(--line);display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ba-info h4{font-family:var(--fd);font-weight:700;font-size:16px;letter-spacing:-.01em;color:var(--text)}
+.bi-meta{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:2px}
+.ba-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.ba-tag{font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);color:var(--muted);border-radius:5px}
+
+/* ---- ENERGY CALCULATOR ---- */
+.energy-shell{display:grid;grid-template-columns:1.1fr 1fr;border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh3);border:1px solid var(--line)}
+.energy-form{background:var(--surface);padding:clamp(26px,3.5vw,44px)}
+.energy-out{background:linear-gradient(150deg,#171717,#242420);color:#F0F0EE;padding:clamp(26px,3.5vw,44px);display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.energy-out::before{content:"";position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(185,138,90,.15),transparent 70%);top:-180px;right:-140px;pointer-events:none}
+.eo-main{font-family:var(--fd);font-weight:800;font-size:clamp(2.4rem,4.5vw,3.6rem);line-height:1;color:var(--gold-t);position:relative}
+.eo-rows{display:grid;gap:1px;background:rgba(240,240,238,.07);border-radius:var(--rb);overflow:hidden;position:relative}
+.eo-row{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;background:#171717}
+.eo-row .k{font-family:var(--fm);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,240,238,.5)}
+.eo-row .v{font-family:var(--fd);font-weight:700;font-size:16px;color:#F0F0EE}
+.eo-row .v.hl{color:var(--gold-t)}
+.eo-note{font-family:var(--fm);font-size:11px;color:rgba(240,240,238,.42);line-height:1.55;letter-spacing:.02em;position:relative}
+.echip{font-family:var(--fm);font-size:11.5px;font-weight:500;padding:9px 13px;border:1.5px solid var(--line-2);color:var(--muted);cursor:pointer;background:var(--bg-2);border-radius:var(--rb);transition:all .18s;letter-spacing:.03em}
+.echip:hover{border-color:var(--bronze);color:var(--text)}
+.echip.on{border-color:var(--bronze);background:rgba(185,138,90,.08);color:var(--bronze)}
+.echip-group{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+
+/* ---- STATS ---- */
+.stats-band{background:linear-gradient(135deg,#171717,#1f1e1a);color:#F0F0EE}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-left:1px solid rgba(255,255,255,.07)}
+.stat-cell{padding:clamp(28px,4vw,48px) clamp(14px,2vw,22px);border-right:1px solid rgba(255,255,255,.07);text-align:center}
+.stat-n{font-family:var(--fd);font-weight:800;font-size:clamp(2.2rem,4vw,3.6rem);line-height:1;color:var(--gold-t);letter-spacing:-.02em}
+.stat-suf{font-size:.6em;color:var(--bronze-t)}
+.stat-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,240,238,.48);margin-top:10px}
+
+/* ---- FEATURED PROJECTS ---- */
+.proj-filter-row{display:flex;gap:0;border-radius:var(--rb);overflow:hidden;border:1px solid var(--line);width:fit-content}
+.pfbtn{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:11px 18px;border-right:1px solid var(--line);color:var(--muted);background:var(--surface);white-space:nowrap;cursor:pointer;transition:all .2s;border:none;border-right:1px solid var(--line)}
+.pfbtn:last-child{border-right:none}
+.pfbtn.on{background:var(--graphite);color:var(--gold-t)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.proj-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh0);transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s}
+.proj-card:hover{transform:translateY(-5px);box-shadow:var(--sh3)}
+.proj-card.hide{display:none}
+.proj-card:hover .prj-img{transform:scale(1.05)}
+.prj-img-wrap{aspect-ratio:4/3;overflow:hidden;position:relative}
+.prj-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prj-cat{position:absolute;top:12px;left:12px;font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;background:rgba(23,23,23,.82);color:var(--gold-t);border-radius:6px}
+.prj-body{padding:18px 20px}
+.prj-h{font-family:var(--fd);font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--text)}
+.prj-meta{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.05em;margin-top:3px}
+.prj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+
+/* ---- COMPARISON TABLE ---- */
+.comp-table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh1)}
+.comp-table th{background:var(--graphite);color:#F0F0EE;font-family:var(--fd);font-weight:700;font-size:14px;letter-spacing:-.005em;padding:14px 18px;text-align:left;border-bottom:1px solid rgba(255,255,255,.1)}
+.comp-table th:first-child{background:rgba(23,23,23,.95)}
+.comp-table td{padding:13px 18px;font-size:14px;border-bottom:1px solid var(--line);color:var(--muted)}
+.comp-table td:first-child{font-family:var(--fd);font-weight:600;font-size:14px;color:var(--text);background:var(--bg-2)}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table tr:hover td{background:var(--bg-3)}
+.comp-table tr:hover td:first-child{background:var(--bg-3)}
+.comp-star{color:var(--bronze)}
+.comp-check{color:#22c55e;font-size:16px}
+
+/* ---- PARTNERS ---- */
+.partners-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:var(--rc);overflow:hidden}
+.partner{padding:24px 32px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:1;min-width:130px;opacity:.5;transition:opacity .25s;cursor:default}
+.partner:hover{opacity:1}
+.partner-name{font-family:var(--fd);font-weight:800;font-size:15px;letter-spacing:.04em;color:var(--text);text-transform:uppercase}
+.cert-row{display:flex;gap:0;border:1px solid var(--line);border-radius:var(--rb);overflow:hidden;margin-top:0}
+.cert{flex:1;display:flex;align-items:center;gap:11px;padding:18px 22px;border-right:1px solid var(--line);background:var(--surface)}
+.cert:last-child{border-right:none}
+.cert-ic{width:38px;height:38px;border-radius:8px;background:rgba(185,138,90,.1);border:1px solid rgba(185,138,90,.2);display:grid;place-items:center;color:var(--bronze);flex-shrink:0}
+.cert-ic svg{width:19px;height:19px}
+.cert-text{font-family:var(--fd);font-weight:700;font-size:13.5px;color:var(--text)}
+
+/* ---- REVIEWS ---- */
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.rv-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:clamp(20px,2.8vw,28px);box-shadow:var(--sh0);transition:transform .28s,box-shadow .28s}
+.rv-card:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
+.rv-stars{display:flex;gap:2px;color:var(--gold);font-size:15px;margin-bottom:12px}
+.rv-text{font-size:14.5px;line-height:1.65;color:var(--muted);font-style:italic}
+.rv-text::before{content:"\201C";font-family:Georgia,serif;font-size:26px;color:var(--bronze);line-height:1;display:block;margin-bottom:4px}
+.rv-author{display:flex;gap:11px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.rv-av{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--bronze),var(--gold));display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+.rv-name{font-family:var(--fd);font-weight:700;font-size:13.5px;color:var(--text)}
+.rv-role{font-family:var(--fm);font-size:9.5px;color:var(--faint);letter-spacing:.05em;margin-top:2px}
+
+/* ---- FINANCING ---- */
+.fin-shell{display:grid;grid-template-columns:1fr 1.1fr;border-radius:var(--rc);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh2)}
+.fin-info{padding:clamp(28px,4vw,50px);background:var(--surface);display:flex;flex-direction:column;gap:22px}
+.fin-calc{background:var(--graphite);color:#F0F0EE;padding:clamp(28px,4vw,50px);display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden}
+.fin-calc::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px)}
+.fin-result{background:rgba(240,240,238,.06);border-radius:var(--rb);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;position:relative}
+.fin-result .fr-l{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(240,240,238,.5)}
+.fin-result .fr-v{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);color:var(--gold-t);line-height:1}
+.fin-partners{display:flex;gap:10px;flex-wrap:wrap}
+.fin-partner{background:rgba(240,240,238,.08);border:1px solid rgba(240,240,238,.12);border-radius:6px;padding:8px 14px;font-family:var(--fd);font-weight:700;font-size:13px;color:rgba(240,240,238,.75)}
+
+/* ---- FAQ ---- */
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;padding:20px clamp(14px,2.5vw,28px);cursor:pointer;list-style:none;font-family:var(--fd);font-size:clamp(.95rem,1.8vw,1.2rem);font-weight:700;color:var(--text);transition:color .2s;gap:14px;letter-spacing:-.01em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--bronze)}
+.faq-ic{width:28px;height:28px;border:1.5px solid var(--line-2);border-radius:6px;display:grid;place-items:center;flex-shrink:0;color:var(--muted);transition:transform .28s,border-color .2s,color .2s}
+.faq-item[open] summary .faq-ic{transform:rotate(45deg);border-color:var(--bronze);color:var(--bronze)}
+.faq-body{padding:0 clamp(14px,2.5vw,28px) 20px;color:var(--muted);font-size:15.5px;line-height:1.66;max-width:72ch}
+
+/* ---- CTA BAND ---- */
+.cta-band{background:linear-gradient(135deg,#171717,#232320);color:#F0F0EE;padding-block:clamp(80px,10vw,140px);position:relative;overflow:hidden}
+.cta-band::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 70% 50%,rgba(185,138,90,.12),transparent 70%);pointer-events:none}
+.cta-h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.6rem,7vw,6rem);line-height:.96;letter-spacing:-.025em;color:#F0F0EE}
+.cta-h1 em{display:block;color:var(--gold-t);font-style:italic;font-family:Georgia,serif;font-size:.75em;font-weight:400;letter-spacing:0;line-height:1.2;margin-bottom:4px}
+
+/* ---- CONTACT ---- */
+.contact-shell{display:grid;grid-template-columns:1fr 1.2fr;border-radius:var(--rc);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh2)}
+.contact-info{background:var(--graphite);color:#F0F0EE;padding:clamp(28px,4vw,52px)}
+.ci-item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.ci-item:last-child{border-bottom:none}
+.ci-ic{width:40px;height:40px;border-radius:8px;background:rgba(185,138,90,.18);border:1px solid rgba(185,138,90,.3);display:grid;place-items:center;color:var(--bronze-t);flex-shrink:0}
+.ci-ic svg{width:19px;height:19px}
+.ci-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,240,238,.45)}
+.ci-v{font-family:var(--fd);font-size:16px;font-weight:700;color:#F0F0EE;margin-top:3px;letter-spacing:-.01em}
+.contact-form-wrap{background:var(--surface);padding:clamp(28px,4vw,52px)}
+
+/* ---- SHOWROOM / VIRTUAL SECTION ---- */
+.showroom-cell{border-radius:var(--rc);overflow:hidden;position:relative;aspect-ratio:16/9;background:var(--bg-3)}
+.showroom-cell img{width:100%;height:100%;object-fit:cover}
+.showroom-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(23,23,23,.82) 0%,rgba(23,23,23,.35) 55%,transparent);display:flex;align-items:flex-end;padding:clamp(24px,4vw,48px)}
+.showroom-tag{position:absolute;top:18px;right:18px;background:var(--glass-dark);backdrop-filter:blur(10px);border:1px solid var(--glass-dark-border);border-radius:8px;padding:8px 14px}
+.showroom-tag span{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-t)}
+
+/* ---- FOOTER ---- */
+footer{background:var(--graphite);color:#F0F0EE}
+.foot-top{padding-block:clamp(54px,7vw,90px)}
+.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1.2fr;gap:36px}
+.foot-logo-name{font-family:var(--fd);font-weight:800;font-size:26px;letter-spacing:-.02em;color:#F0F0EE}
+.foot-logo-name b{color:var(--bronze-t)}
+.foot-desc{font-size:13.5px;color:rgba(240,240,238,.52);line-height:1.65;margin-top:12px;max-width:270px}
+.foot-nl{display:flex;gap:0;margin-top:18px;border:1px solid rgba(255,255,255,.1);border-radius:var(--rb);overflow:hidden;max-width:290px}
+.foot-nl input{flex:1;background:transparent;border:none;padding:11px 14px;color:#F0F0EE;font-size:13px}
+.foot-nl input::placeholder{color:rgba(240,240,238,.38)}
+.foot-nl input:focus{outline:none}
+.foot-nl button{padding:11px 16px;background:var(--bronze);color:#fff;font-family:var(--fb);font-weight:700;font-size:13px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.foot-nl button:hover{background:var(--bronze-d)}
+.foot-h{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,240,238,.35);margin-bottom:14px;font-weight:500}
+.foot-links{display:grid;gap:10px}
+.foot-link{font-size:13.5px;color:rgba(240,240,238,.62);transition:color .2s;cursor:pointer}
+.foot-link:hover{color:var(--gold-t)}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid rgba(255,255,255,.08);font-family:var(--fm);font-size:11px;color:rgba(240,240,238,.38);letter-spacing:.04em}
+.foot-credit a{color:var(--bronze-t);font-weight:500;transition:color .2s}
+.foot-credit a:hover{color:var(--gold-t);text-decoration:underline}
+
+/* ---- SPA PAGES ---- */
+.spa-page{display:none}.spa-page.active{display:block}
+.page-hero{background:var(--graphite);color:#F0F0EE;padding-block:clamp(60px,8vw,110px);position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 80% 50%,rgba(185,138,90,.1),transparent 70%)}
+.breadcrumb{display:flex;gap:8px;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,240,238,.42);margin-bottom:18px;position:relative;z-index:2}
+.breadcrumb a:hover{color:var(--gold-t)}
+.ph-h{font-family:var(--fd);font-weight:800;font-size:clamp(2.4rem,5.5vw,5rem);line-height:.98;letter-spacing:-.025em;color:#F0F0EE;position:relative;z-index:2}
+.ph-h em{font-style:italic;font-family:Georgia,serif;font-size:.82em;font-weight:400;color:var(--gold-t);letter-spacing:0;line-height:1.2}
+.ph-sub{font-size:16.5px;color:rgba(240,240,238,.62);line-height:1.65;margin-top:16px;max-width:58ch;position:relative;z-index:2}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1080px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-right{min-height:380px;border-top:1px solid rgba(255,255,255,.08)}
+  .win-frame-wrap{max-width:420px;margin:0 auto}
+  .hero-h1{font-size:clamp(2.6rem,9vw,4.8rem)}
+  .viz-shell,.energy-shell,.fin-shell,.contact-shell{grid-template-columns:1fr}
+  .viz-panel,.energy-out,.fin-calc,.contact-form-wrap{border-top:1px solid var(--line)}
+  .prod-grid,.benefit-grid,.process-flow{grid-template-columns:repeat(2,1fr)}
+  .process-flow::before{display:none}
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  .proj-grid,.rv-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:repeat(2,1fr)}
+  .g4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:860px){
+  .nav-links{display:none}.hamburger{display:grid}
+  .bottom-nav{display:flex}.fab-wrap{bottom:78px}
+  body{padding-bottom:60px}
+  .hero-trust{grid-template-columns:1fr 1fr}
+  .ba-grid{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .prod-grid,.benefit-grid,.process-flow,.stats-grid,.proj-grid,.rv-grid,.g3,.g4{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-trust{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="scroll-bar" id="scroll-bar"></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true"><div class="ticker-inner" id="ticker-inner">
+  <span class="ticker-item"><strong>Free In-Home Measurement &amp; Consultation</strong> — booked within 24 hours</span><span class="ticker-dot">·</span>
+  <span class="ticker-item">Save up to <strong>35% on energy costs</strong> with modern window systems</span><span class="ticker-dot">·</span>
+  <span class="ticker-item"><strong>Lifetime installation warranty</strong> — workmanship guaranteed</span><span class="ticker-dot">·</span>
+  <span class="ticker-item"><strong>Financing available</strong> — upgrade today, pay over time</span><span class="ticker-dot">·</span>
+  <span class="ticker-item"><strong>Free In-Home Measurement &amp; Consultation</strong> — booked within 24 hours</span><span class="ticker-dot">·</span>
+  <span class="ticker-item">Save up to <strong>35% on energy costs</strong> with modern window systems</span><span class="ticker-dot">·</span>
+  <span class="ticker-item"><strong>Lifetime installation warranty</strong> — workmanship guaranteed</span><span class="ticker-dot">·</span>
+  <span class="ticker-item"><strong>Financing available</strong> — upgrade today, pay over time</span><span class="ticker-dot">·</span>
+</div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar"><div class="container"><div class="nav-in">
+  <a href="#home" class="logo" data-page="home" aria-label="ClearFrame home">
+    <span class="logo-icon"><span></span><span></span><span></span><span></span></span>
+    <span class="logo-name">Clear<b>Frame</b></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#windows" class="nav-link" data-page="windows">Windows</a>
+    <a href="#doors" class="nav-link" data-page="doors">Doors</a>
+    <a href="#gallery" class="nav-link" data-page="gallery">Gallery</a>
+    <a href="#showroom" class="nav-link" data-page="home" data-scroll="showroom-sec">Showroom</a>
+    <a href="#process" class="nav-link" data-page="home" data-scroll="process-sec">Process</a>
+    <a href="#reviews" class="nav-link" data-page="reviews">Reviews</a>
+  </nav>
+  <div class="nav-acts">
+    <a href="tel:+15125550196" class="btn btn-ghost btn-sm">Call Now</a>
+    <a href="#contact" class="btn btn-primary btn-sm" data-page="contact">Free Estimate</a>
+    <button class="theme-btn" id="theme-btn" aria-label="Toggle theme"></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+  </div>
+</div></div></header>
+
+<!-- DRAWER -->
+<div class="drawer-ov" id="drawer-ov"></div>
+<aside class="drawer" id="drawer" aria-label="Navigation menu">
+  <div class="drawer-hd"><span class="logo-name" style="color:#F0F0EE">Clear<b style="color:var(--bronze-t)">Frame</b></span><button style="color:#F0F0EE;width:34px;height:34px;border-radius:6px;display:grid;place-items:center;background:rgba(240,240,238,.08);border:1px solid rgba(240,240,238,.12)" id="drawer-close" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <nav>
+    <a href="#home" class="drawer-link" data-page="home">Home</a>
+    <a href="#windows" class="drawer-link" data-page="windows">Windows</a>
+    <a href="#doors" class="drawer-link" data-page="doors">Doors</a>
+    <a href="#gallery" class="drawer-link" data-page="gallery">Gallery</a>
+    <a href="#reviews" class="drawer-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="drawer-link" data-page="contact">Contact</a>
+  </nav>
+  <div style="display:grid;gap:10px;margin-top:26px">
+    <a href="tel:+15125550196" class="btn btn-ghost btn-lg btn-full">Call Now</a>
+    <a href="#contact" class="btn btn-primary btn-lg btn-full" data-page="contact">Free Estimate</a>
+  </div>
+  <div style="margin-top:auto;padding-top:24px;font-family:var(--fm);font-size:10.5px;color:rgba(240,240,238,.35);line-height:1.9;letter-spacing:.05em">Mon–Fri 8am–6pm · Sat 9am–4pm<br/>(512) 555-0196 · hello@clearframe.co</div>
+</aside>
+
+<main id="main">
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- HERO — CINEMATIC SPLIT WITH WINDOW-FRAME SIGNATURE -->
+<section class="hero" id="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=1800&q=80" alt="Modern home exterior"/></div>
+  <div class="hero-grid container" style="max-width:100%;padding:0">
+    <div class="hero-left container">
+      <div class="hero-eyebrow"><span class="label lt">Premium window &amp; door installation</span></div>
+      <h1 class="hero-h1 reveal"><span class="accent-word">Beautiful</span>windows. Secure doors. Built to last.</h1>
+      <p class="hero-sub reveal" data-d="80">Premium installation services for energy-efficient windows and custom doors. Free in-home measurement. Lifetime workmanship warranty.</p>
+      <div class="hero-cta reveal" data-d="150">
+        <a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Get Free Estimate <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#windows" class="btn btn-ghost btn-lg" data-page="windows">Explore Products</a>
+      </div>
+      <div class="hero-trust reveal" data-d="220">
+        <div class="ht"><div class="ht-n">15+</div><div class="ht-l">Years experience</div></div>
+        <div class="ht"><div class="ht-n">Life<span style="font-size:.6em">time</span></div><div class="ht-l">Install warranty</div></div>
+        <div class="ht"><div class="ht-n"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold-t)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 11 2 2 4-4"/></svg></div><div class="ht-l">Certified</div></div>
+        <div class="ht"><div class="ht-n">0%</div><div class="ht-l">Financing avail.</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="win-frame-wrap reveal" data-d="180">
+        <div class="win-frame">
+          <img class="win-frame-img" id="wf-img" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=900&q=80" alt="Modern home with premium windows"/>
+          <div class="win-frame-overlay"><span class="hw tl"></span></div>
+          <div class="win-frame-border"></div>
+          <div class="win-badge"><div class="win-badge-inner"><div class="k">Style selected</div><div class="v" id="wf-style">Modern Casement</div></div></div>
+        </div>
+        <div class="win-tabs" id="win-tabs" role="tablist" aria-label="Home style">
+          <button class="wtab on" data-wi="0" role="tab" aria-selected="true">Modern</button>
+          <button class="wtab" data-wi="1" role="tab" aria-selected="false">Traditional</button>
+          <button class="wtab" data-wi="2" role="tab" aria-selected="false">Luxury</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUALIZER / BEFORE-AFTER -->
+<section class="section" id="visualizer-sec" style="background:var(--bg-2)"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(26px,3.5vw,42px)">
+    <div class="reveal"><span class="label">Interactive visualizer</span><h2 class="h2" style="margin-top:14px">See it on your<br/>home first.</h2></div>
+    <p class="body-lg reveal" data-d="60" style="max-width:42ch">Drag the slider. Switch window or door types and watch the "after" update instantly with cost guidance.</p>
+  </div>
+  <div class="viz-shell reveal" data-d="80">
+    <div class="viz-stage">
+      <img class="viz-before" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1100&q=80" alt="Home before window replacement"/>
+      <img class="viz-after" id="viz-after" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=1100&q=80" alt="Home after window replacement"/>
+      <div class="viz-div" id="viz-div"></div>
+      <div class="viz-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div>
+      <input type="range" class="viz-range" id="viz-range" min="0" max="100" value="50" aria-label="Reveal before/after"/>
+      <div class="viz-lbl-row"><span class="viz-lbl b">Before</span><span class="viz-lbl a">After</span></div>
+      <div class="viz-mat-info"><div class="k">Installed</div><div class="v" id="viz-prod-name">Casement Windows</div></div>
+    </div>
+    <div class="viz-panel">
+      <div><div class="viz-panel-h">Product preview</div><div style="font-family:var(--fm);font-size:10.5px;color:var(--faint);margin-top:4px;letter-spacing:.03em">Select a product type to preview</div></div>
+      <div><div style="font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:8px">Category</div><div class="viz-cat-tabs" id="viz-cat-tabs"><button class="vctab on" data-vc="windows">Windows</button><button class="vctab" data-vc="doors">Doors</button></div></div>
+      <div class="viz-list" id="viz-list"></div>
+      <div class="viz-energy"><div><div class="ve-l">Energy rating</div><div class="ve-v" id="viz-energy-v">ENERGY STAR®</div></div><div style="text-align:right"><div class="ve-l">Est. savings</div><div class="ve-v" id="viz-savings-v">Up to 30%</div></div></div>
+      <form id="viz-form" style="display:grid;gap:9px"><label class="f-label" for="viz-email">Email me this preview</label><div style="display:flex;gap:8px"><input class="f-input" id="viz-email" type="email" placeholder="your@email.com" aria-label="Email"/><button class="btn btn-dark btn-sm" type="submit">Save</button></div></form>
+      <div id="viz-saved" style="display:none;font-family:var(--fm);font-size:11.5px;color:var(--bronze);letter-spacing:.04em">✓ Saved — preview &amp; quote coming to you.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PRODUCT SHOWCASE — WINDOWS -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(24px,3.5vw,40px)" class="reveal"><span class="label">Window solutions</span><h2 class="h2" style="margin-top:14px">Five window families. One expert installer.</h2></div>
+  <div class="prod-grid">
+    <div class="prod-card reveal"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=700&q=80" alt="Energy efficient casement windows"/><span class="pc-cat-badge">Energy Efficient</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Casement Windows</div><div class="pc-sub">Full-seal ventilation</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Triple-pane insulation option</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full opening for max airflow</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>ENERGY STAR® certified</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A+</div></div><div class="pc-stat"><div class="k">From</div><div class="v">$380</div></div></div></div></div>
+    <div class="prod-card reveal" data-d="70"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="Double hung windows"/><span class="pc-cat-badge">Classic</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Double Hung</div><div class="pc-sub">Top &amp; bottom sash operation</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Easy interior cleaning</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Fits any architectural style</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Low-maintenance vinyl frame</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">Lifespan</div><div class="v">25 yrs</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">From</div><div class="v">$290</div></div></div></div></div>
+    <div class="prod-card reveal" data-d="140"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80" alt="Bay and bow windows"/><span class="pc-cat-badge">Statement</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Bay &amp; Bow</div><div class="pc-sub">Architectural projection windows</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Adds interior space &amp; light</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom angle configurations</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Increases property value</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">From</div><div class="v">$890</div></div></div></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:0">
+    <div class="prod-card reveal" style="border-top:none"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Sliding windows"/><span class="pc-cat-badge">Modern</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Sliding Windows</div><div class="pc-sub">Horizontal gliding sash</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Space-saving no swing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Wide view options</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$260</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div></div></div></div>
+    <div class="prod-card reveal" data-d="70" style="border-top:none"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=700&q=80" alt="Picture windows"/><span class="pc-cat-badge">View</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Picture Windows</div><div class="pc-sub">Maximum uninterrupted view</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Best energy efficiency</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom sizes available</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$420</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A+</div></div></div></div></div>
+    <div class="prod-card reveal" data-d="140" style="border-top:none;background:var(--graphite);color:#F0F0EE"><div class="pc-body" style="padding:clamp(28px,4vw,40px);display:flex;flex-direction:column;justify-content:center;height:100%;min-height:200px"><h3 style="font-family:var(--fd);font-size:24px;font-weight:800;color:#F0F0EE;letter-spacing:-.01em">Need a custom<br/>window solution?</h3><p style="color:rgba(240,240,238,.65);font-size:14px;line-height:1.6;margin-top:12px">Custom shapes, sizes, hardware and finishes — spec'd to your architecture.</p><a href="#contact" class="btn btn-primary" data-page="contact" style="margin-top:20px;align-self:flex-start">Request custom quote</a></div></div>
+  </div>
+</div></section>
+
+<!-- ENERGY SAVINGS CALCULATOR -->
+<section class="section" id="energy-sec" style="background:var(--bg-2)"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Energy calculator</span><h2 class="h2" style="margin-top:14px">How much could you save?</h2><p class="body-lg" style="margin-top:12px;max-width:54ch">Enter your home details for an instant estimate of your energy savings and payback period.</p></div>
+  <div class="energy-shell reveal" data-d="80">
+    <div class="energy-form">
+      <div style="font-family:var(--fd);font-weight:800;font-size:21px;letter-spacing:-.01em;color:var(--text);margin-bottom:22px">Calculate your savings</div>
+      <div style="margin-bottom:18px"><label class="f-label">Home size</label><div class="echip-group" data-g="size"><button class="echip on" data-v="small" data-sf="1200" data-bl="$120">Under 1,500 sqft</button><button class="echip" data-v="med" data-sf="2200" data-bl="$185">1,500–3,000 sqft</button><button class="echip" data-v="large" data-sf="3800" data-bl="$260">Over 3,000 sqft</button></div></div>
+      <div style="margin-bottom:18px"><label class="f-label">Current window age</label><div class="echip-group" data-g="age"><button class="echip on" data-v="old" data-eff=".28" data-yrs="20+">20+ years old</button><button class="echip" data-v="med" data-eff=".18" data-yrs="10–20">10–20 years</button><button class="echip" data-v="new" data-eff=".10" data-yrs="5–10">5–10 years</button></div></div>
+      <div style="margin-bottom:22px"><label class="f-label">Climate zone</label><div class="echip-group" data-g="zone"><button class="echip on" data-v="cold" data-m="1.35">Cold climate</button><button class="echip" data-v="mixed" data-m="1.12">Mixed climate</button><button class="echip" data-v="hot" data-m="1.18">Hot climate</button></div></div>
+      <form id="energy-form" style="display:grid;gap:9px"><label class="f-label" for="en-email">Email my full savings report</label><div style="display:flex;gap:8px"><input class="f-input" id="en-email" type="email" placeholder="your@email.com" required/><button class="btn btn-dark" type="submit">Send</button></div></form>
+      <div id="en-sent" style="display:none;font-family:var(--fm);font-size:11.5px;color:var(--bronze);margin-top:8px;letter-spacing:.03em">✓ Full savings report sent to your inbox.</div>
+    </div>
+    <div class="energy-out">
+      <div class="eo-main" id="en-save">$0/yr</div>
+      <div style="font-family:var(--fm);font-size:9.5px;color:rgba(240,240,238,.45);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;position:relative">Estimated annual energy savings</div>
+      <div class="eo-rows" style="margin-top:14px">
+        <div class="eo-row"><span class="k">Monthly saving</span><span class="v" id="en-mo">$0</span></div>
+        <div class="eo-row"><span class="k">10-year saving</span><span class="v hl" id="en-10yr">$0</span></div>
+        <div class="eo-row"><span class="k">Avg. payback period</span><span class="v" id="en-pb">0 years</span></div>
+        <div class="eo-row"><span class="k">Recommended product</span><span class="v hl" id="en-rec">Casement, triple-pane</span></div>
+      </div>
+      <p class="eo-note">Estimates based on DOE typical savings data. Actual results vary by home and local energy rates. Final ROI confirmed at your free consultation.</p>
+      <a href="#contact" class="btn btn-primary btn-full" data-page="contact" style="margin-top:auto">Book free consultation <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</div></section>
+
+<!-- BENEFITS -->
+<section class="section"><div class="container">
+  <div class="center reveal" style="margin-bottom:clamp(26px,3.5vw,42px);max-width:640px;margin-inline:auto"><span class="label" style="justify-content:center">Why replace your windows</span><h2 class="h2" style="margin-top:14px">Six reasons homeowners say yes.</h2></div>
+  <div class="benefit-grid">
+    <div class="benefit-card reveal"><div class="benefit-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5h3L12 7"/><path d="M10 14v-3a6 6 0 0 1 12 0v3"/><path d="M2 14h20"/><path d="M6 14v3a6 6 0 0 0 12 0v-3"/></svg></div><h3>Lower energy bills</h3><p>Modern low-E glass and insulated frames can cut heating and cooling costs by up to 35%. Savings you see from month one.</p></div>
+    <div class="benefit-card reveal" data-d="70"><div class="benefit-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Better home security</h3><p>Multi-point locking systems, laminated glass options and reinforced frames that deter forced entry.</p></div>
+    <div class="benefit-card reveal" data-d="140"><div class="benefit-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3>Noise reduction</h3><p>Double and triple glazing cuts outside noise by up to 40 decibels — a measurably quieter home.</p></div>
+    <div class="benefit-card reveal"><div class="benefit-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Increased property value</h3><p>New windows deliver an average 70–80% return on investment at resale. Appraisers notice immediately.</p></div>
+    <div class="benefit-card reveal" data-d="70"><div class="benefit-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h3>Improved comfort</h3><p>Eliminate cold draughts, condensation and hot spots. Every room stays at the temperature you set it.</p></div>
+    <div class="benefit-card reveal" data-d="140"><div class="benefit-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Modern appearance</h3><p>Clean sight lines, slimmer frames and custom finishes that transform your home's kerb appeal in a single day.</p></div>
+  </div>
+</div></section>
+
+<!-- INSTALLATION PROCESS -->
+<section class="section" id="process-sec" style="background:var(--bg-2)"><div class="container">
+  <div style="margin-bottom:clamp(30px,4vw,50px)" class="reveal"><span class="label">Installation process</span><h2 class="h2" style="margin-top:14px">Six steps to a<br/>perfect installation.</h2></div>
+  <div class="process-flow reveal" data-d="60">
+    <div class="proc-node"><div class="proc-dot"><div class="proc-num">01</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="proc-label">Free Consultation</div><p class="proc-desc">On-site assessment of your needs, architecture and priorities</p></div>
+    <div class="proc-node"><div class="proc-dot"><div class="proc-num">02</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 3v18"/></svg></div><div class="proc-label">Measurement</div><p class="proc-desc">Laser-precise measurements of every opening</p></div>
+    <div class="proc-node"><div class="proc-dot"><div class="proc-num">03</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="proc-label">Product Selection</div><p class="proc-desc">Style, glass, frame and hardware chosen together</p></div>
+    <div class="proc-node"><div class="proc-dot"><div class="proc-num">04</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="proc-label">Custom Order</div><p class="proc-desc">Factory-ordered to your exact specifications</p></div>
+    <div class="proc-node"><div class="proc-dot"><div class="proc-num">05</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6-9 9-6 1 1-6z"/></svg></div><div class="proc-label">Installation</div><p class="proc-desc">Certified crew, clean site, typically one day</p></div>
+    <div class="proc-node"><div class="proc-dot"><div class="proc-num">06</div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="proc-label">Quality Check</div><p class="proc-desc">Final walkthrough — we don't leave until you're satisfied</p></div>
+  </div>
+</div></section>
+
+<!-- BEFORE & AFTER GALLERY -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Transformation gallery</span><h2 class="h2" style="margin-top:14px">Drag to see<br/>the difference.</h2></div>
+  <div class="ba-grid">
+    <div class="ba-item reveal"><div class="ba-compare" id="ba0"><img class="ba-b" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80" alt="Before window replacement"/><img class="ba-a" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=900&q=80" alt="After window replacement"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after slider"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Window Replacement</h4><div class="bi-meta">Casement · 14 windows · 2 days</div></div><div class="ba-tags"><span class="ba-tag">Residential</span><span class="ba-tag">Casement</span></div></div></div>
+    <div class="ba-item reveal" data-d="80"><div class="ba-compare" id="ba1"><img class="ba-b" src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=900&q=80" alt="Before front door upgrade"/><img class="ba-a" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="After front door upgrade"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after slider"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Front Door Upgrade</h4><div class="bi-meta">Steel entry door · 1 day</div></div><div class="ba-tags"><span class="ba-tag">Entry Door</span><span class="ba-tag">Security</span></div></div></div>
+    <div class="ba-item reveal"><div class="ba-compare" id="ba2"><img class="ba-b" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80" alt="Before patio door renovation"/><img class="ba-a" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80" alt="After patio door renovation"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after slider"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Patio Door Renovation</h4><div class="bi-meta">Sliding glass · 1 day</div></div><div class="ba-tags"><span class="ba-tag">Patio Door</span><span class="ba-tag">Energy</span></div></div></div>
+    <div class="ba-item reveal" data-d="80"><div class="ba-compare" id="ba3"><img class="ba-b" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="Before commercial installation"/><img class="ba-a" src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=900&q=80" alt="After commercial installation"/><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after slider"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Commercial Installation</h4><div class="bi-meta">Aluminium storefront · 3 days</div></div><div class="ba-tags"><span class="ba-tag">Commercial</span><span class="ba-tag">Aluminium</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- VIRTUAL SHOWROOM -->
+<section class="section" id="showroom-sec" style="background:var(--bg-2)"><div class="container">
+  <div class="g2" style="gap:clamp(24px,4vw,52px);align-items:center">
+    <div class="reveal">
+      <span class="label">Showroom experience</span>
+      <h2 class="h2" style="margin-top:14px">Come in and touch<br/>every product.</h2>
+      <p class="body-lg" style="margin-top:14px">Our showroom displays 80+ window and door products in full-size frames. See every glass option, hardware finish and colour in natural light — with a design consultant at your side.</p>
+      <div style="display:grid;gap:13px;margin-top:26px">
+        <div style="display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--rb);padding:14px 18px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--bronze)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Hours</div><div style="font-family:var(--fd);font-weight:700;font-size:15px;color:var(--text);letter-spacing:-.01em">Mon–Fri 8am–6pm · Sat 9am–4pm</div></div></div>
+        <div style="display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--rb);padding:14px 18px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--bronze)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg><div><div style="font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">Location</div><div style="font-family:var(--fd);font-weight:700;font-size:15px;color:var(--text);letter-spacing:-.01em">1240 Architectural Way, Suite 100</div></div></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Book showroom visit</a><a href="tel:+15125550196" class="btn btn-outline btn-lg">Call us</a></div>
+    </div>
+    <div class="reveal" data-d="80">
+      <div class="showroom-cell">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=80" alt="ClearFrame showroom interior"/>
+        <div class="showroom-overlay"><div style="color:#F0F0EE"><h3 style="font-family:var(--fd);font-weight:800;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.015em;line-height:1.1">80+ products in full-size display</h3><p style="font-size:14px;color:rgba(240,240,238,.7);margin-top:8px;line-height:1.55">Every glass, frame and hardware option you can see and feel before you decide.</p></div></div>
+        <div class="showroom-tag"><span>Virtual tour available</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- COMPARISON TABLE -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Product comparison</span><h2 class="h2" style="margin-top:14px">Compare window types side by side.</h2></div>
+  <div class="reveal" data-d="60" style="overflow-x:auto;border-radius:var(--rc)">
+    <table class="comp-table">
+      <thead><tr><th>Window Type</th><th>Energy Rating</th><th>Best For</th><th>Maintenance</th><th>Starting Price</th><th>Warranty</th></tr></thead>
+      <tbody>
+        <tr><td>Casement</td><td><span class="comp-star">★★★★★</span></td><td>Living rooms, bedrooms</td><td>Very low</td><td>From $380</td><td>Lifetime</td></tr>
+        <tr><td>Double Hung</td><td><span class="comp-star">★★★★</span></td><td>Any room</td><td>Low</td><td>From $290</td><td>Lifetime</td></tr>
+        <tr><td>Bay &amp; Bow</td><td><span class="comp-star">★★★★</span></td><td>Front rooms, feature walls</td><td>Low</td><td>From $890</td><td>Lifetime</td></tr>
+        <tr><td>Sliding</td><td><span class="comp-star">★★★</span></td><td>Kitchens, secondary rooms</td><td>Very low</td><td>From $260</td><td>Lifetime</td></tr>
+        <tr><td>Picture</td><td><span class="comp-star">★★★★★</span></td><td>Views, light gathering</td><td>Minimal</td><td>From $420</td><td>Lifetime</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="stats-band"><div class="container" style="padding-block:0"><div class="stats-grid">
+  <div class="stat-cell reveal"><div class="stat-n"><span data-counter="3000">0</span><span class="stat-suf">+</span></div><div class="stat-l">Installations</div></div>
+  <div class="stat-cell reveal" data-d="60"><div class="stat-n"><span data-counter="98">0</span><span class="stat-suf">%</span></div><div class="stat-l">Satisfaction</div></div>
+  <div class="stat-cell reveal" data-d="120"><div class="stat-n"><span data-counter="15">0</span><span class="stat-suf">+</span></div><div class="stat-l">Years experience</div></div>
+  <div class="stat-cell reveal" data-d="180"><div class="stat-n"><span data-counter="50">0</span><span class="stat-suf">+</span></div><div class="stat-l">Product styles</div></div>
+  <div class="stat-cell reveal" data-d="240"><div class="stat-n" style="font-size:clamp(1.6rem,3vw,2.4rem)">Life<span class="stat-suf">time</span></div><div class="stat-l">Warranty available</div></div>
+</div></div></section>
+
+<!-- FEATURED PROJECTS -->
+<section class="section"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:clamp(22px,3vw,36px)">
+    <div class="reveal"><span class="label">Featured projects</span><h2 class="h2" style="margin-top:14px">Recent installations.</h2></div>
+    <a href="#gallery" class="btn btn-outline reveal" data-page="gallery" data-d="60">View all projects <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="proj-filter-row reveal" data-d="30" id="proj-filter" style="margin-bottom:18px">
+    <button class="pfbtn on" data-pf="all">All</button>
+    <button class="pfbtn" data-pf="residential">Residential</button>
+    <button class="pfbtn" data-pf="luxury">Luxury</button>
+    <button class="pfbtn" data-pf="commercial">Commercial</button>
+    <button class="pfbtn" data-pf="apartment">Apartment</button>
+  </div>
+  <div class="proj-grid" id="proj-grid">
+    <div class="proj-card reveal" data-pc="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=700&q=80" alt="Riverside residence"/><span class="prj-cat">Residential</span></div><div class="prj-body"><div class="prj-h">Riverside Residence</div><div class="prj-meta">14× Casement · 2 days · ENERGY STAR</div><div class="prj-tags"><span class="ba-tag">Windows</span><span class="ba-tag">Casement</span></div></div></div>
+    <div class="proj-card reveal" data-d="70" data-pc="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80" alt="Highland luxury home"/><span class="prj-cat">Luxury Home</span></div><div class="prj-body"><div class="prj-h">Highland Estate</div><div class="prj-meta">Bay windows + French doors · 3 days</div><div class="prj-tags"><span class="ba-tag">Bay Window</span><span class="ba-tag">French Door</span></div></div></div>
+    <div class="proj-card reveal" data-d="140" data-pc="commercial"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=700&q=80" alt="Commercial storefront"/><span class="prj-cat">Commercial</span></div><div class="prj-body"><div class="prj-h">Foundry Office Block</div><div class="prj-meta">Aluminium storefront · 5 days</div><div class="prj-tags"><span class="ba-tag">Commercial</span><span class="ba-tag">Aluminium</span></div></div></div>
+    <div class="proj-card reveal" data-pc="apartment"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="City apartment windows"/><span class="prj-cat">Apartment</span></div><div class="prj-body"><div class="prj-h">City Apartment Block</div><div class="prj-meta">24× Double-hung · 4 days</div><div class="prj-tags"><span class="ba-tag">Windows</span><span class="ba-tag">Double Hung</span></div></div></div>
+    <div class="proj-card reveal" data-d="70" data-pc="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Heritage home doors"/><span class="prj-cat">Residential</span></div><div class="prj-body"><div class="prj-h">Maple Street Heritage</div><div class="prj-meta">Entry + patio doors · 1 day</div><div class="prj-tags"><span class="ba-tag">Entry Door</span><span class="ba-tag">Patio Door</span></div></div></div>
+    <div class="proj-card reveal" data-d="140" data-pc="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Penthouse sliding doors"/><span class="prj-cat">Luxury</span></div><div class="prj-body"><div class="prj-h">Crestline Penthouse</div><div class="prj-meta">Floor-to-ceiling sliding · 2 days</div><div class="prj-tags"><span class="ba-tag">Sliding Door</span><span class="ba-tag">Luxury</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- PARTNERS -->
+<section style="background:var(--bg-2);padding-block:clamp(48px,6vw,80px)"><div class="container">
+  <div class="center reveal" style="margin-bottom:28px"><span class="label muted">Manufacturer partnerships</span></div>
+  <div class="partners-row reveal" data-d="50"><div class="partner"><span class="partner-name">Andersen</span></div><div class="partner"><span class="partner-name">Pella</span></div><div class="partner"><span class="partner-name">Marvin</span></div><div class="partner"><span class="partner-name">Milgard</span></div><div class="partner"><span class="partner-name">Simonton</span></div><div class="partner"><span class="partner-name">JELD-WEN</span></div></div>
+  <div class="cert-row reveal" data-d="80" style="margin-top:0">
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5h3L12 7"/><path d="M10 14v-3a6 6 0 0 1 12 0v3"/><path d="M2 14h20"/><path d="M6 14v3a6 6 0 0 0 12 0v-3"/></svg></span><div class="cert-text">ENERGY STAR®</div></div>
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/></svg></span><div class="cert-text">Licensed &amp; Insured</div></div>
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></span><div class="cert-text">Certified Installers</div></div>
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.5 7.5-8.5 9C7.5 19.5 4 17 4 12V6l8-3 8 3z"/></svg></span><div class="cert-text">Background Checked</div></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Verified reviews</span><h2 class="h2" style="margin-top:14px">What homeowners say.</h2></div>
+  <div class="rv-grid">
+    <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-text">The casement windows are spectacular. Our heating bill dropped $140 in the first month and the draughts we'd lived with for 15 years are completely gone.</div><div class="rv-author"><div class="rv-av">MA</div><div><div class="rv-name">Maya Aldridge</div><div class="rv-role">14× Casement · Riverside</div></div></div></div>
+    <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-text">From measurement to installation in under three weeks. The crew were meticulous — they even painted the interior reveals before they left. Remarkable finish.</div><div class="rv-author"><div class="rv-av">JT</div><div><div class="rv-name">James Thornton</div><div class="rv-role">Bay window + entry door · Highland</div></div></div></div>
+    <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-text">We've done commercial fitouts with many glazing companies. ClearFrame is the only one we specify now — precision, warranty and communication are all first-class.</div><div class="rv-author"><div class="rv-av">SK</div><div><div class="rv-name">Sara Kowalski</div><div class="rv-role">Property developer · 3 commercial projects</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- FINANCING -->
+<section class="section" id="financing-sec" style="background:var(--bg-2)"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal center"><span class="label" style="justify-content:center">Financing options</span><h2 class="h2" style="margin-top:14px">Upgrade today.<br/>Pay over time.</h2></div>
+  <div class="fin-shell reveal" data-d="80">
+    <div class="fin-info">
+      <div><span class="label">How it works</span><h3 class="h3" style="margin-top:12px;font-size:clamp(1.3rem,2.5vw,2rem)">Three steps to financing.</h3></div>
+      <div style="display:grid;gap:16px">
+        <div style="display:flex;gap:16px;align-items:flex-start"><div style="width:44px;height:44px;border-radius:50%;background:rgba(185,138,90,.1);border:1px solid rgba(185,138,90,.25);display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:18px;color:var(--bronze);flex-shrink:0">1</div><div><div class="h4" style="font-size:16px">Check your rate</div><p style="font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.55">No impact on your credit score. Results in 60 seconds.</p></div></div>
+        <div style="display:flex;gap:16px;align-items:flex-start"><div style="width:44px;height:44px;border-radius:50%;background:rgba(185,138,90,.1);border:1px solid rgba(185,138,90,.25);display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:18px;color:var(--bronze);flex-shrink:0">2</div><div><div class="h4" style="font-size:16px">Choose your term</div><p style="font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.55">12, 24, 36 or 60-month plans. 0% promotional periods available.</p></div></div>
+        <div style="display:flex;gap:16px;align-items:flex-start"><div style="width:44px;height:44px;border-radius:50%;background:rgba(185,138,90,.1);border:1px solid rgba(185,138,90,.25);display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:18px;color:var(--bronze);flex-shrink:0">3</div><div><div class="h4" style="font-size:16px">Book your installation</div><p style="font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.55">Approved funds cover your full project cost. We start immediately.</p></div></div>
+      </div>
+      <div><div class="f-label" style="margin-bottom:10px">Financing partners</div><div class="fin-partners"><span class="fin-partner" style="background:var(--bg-2);border-color:var(--line-2);color:var(--muted)">GreenSky</span><span class="fin-partner" style="background:var(--bg-2);border-color:var(--line-2);color:var(--muted)">Synchrony</span><span class="fin-partner" style="background:var(--bg-2);border-color:var(--line-2);color:var(--muted)">Wells Fargo</span></div></div>
+    </div>
+    <div class="fin-calc">
+      <div style="font-family:var(--fd);font-weight:800;font-size:21px;color:#F0F0EE;position:relative;letter-spacing:-.01em">Monthly payment calculator</div>
+      <div style="position:relative"><label class="f-label" style="color:rgba(240,240,238,.45)" for="fin-amt">Project total ($)</label><input class="f-input" id="fin-amt" type="number" min="500" value="8000" style="background:rgba(240,240,238,.07);border-color:rgba(240,240,238,.14);color:#F0F0EE"/></div>
+      <div style="position:relative"><label class="f-label" style="color:rgba(240,240,238,.45)" for="fin-term">Loan term</label><select class="f-input" id="fin-term" style="background:rgba(240,240,238,.07);border-color:rgba(240,240,238,.14);color:#F0F0EE"><option value="12">12 months</option><option value="24" selected>24 months</option><option value="36">36 months</option><option value="60">60 months</option></select></div>
+      <div style="position:relative"><label class="f-label" style="color:rgba(240,240,238,.45)" for="fin-rate">Interest rate (%)</label><input class="f-input" id="fin-rate" type="number" min="0" max="30" step="0.1" value="0" style="background:rgba(240,240,238,.07);border-color:rgba(240,240,238,.14);color:#F0F0EE"/></div>
+      <div class="fin-result"><div><div class="fr-l">Monthly payment</div><div class="fr-v" id="fin-mo">$333</div></div><div style="text-align:right"><div class="fr-l">Total cost</div><div style="font-family:var(--fd);font-size:17px;font-weight:700;color:rgba(240,240,238,.8)" id="fin-total">$8,000</div></div></div>
+      <a href="#contact" class="btn btn-primary btn-full" data-page="contact" style="position:relative">Apply for financing now</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section"><div class="container">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:clamp(28px,5vw,72px);align-items:start">
+    <div class="reveal" style="position:sticky;top:96px"><span class="label">FAQ</span><h2 class="h2" style="margin-top:14px;font-size:clamp(1.8rem,3.5vw,3rem)">Questions?<br/>We've got answers.</h2><p class="body-lg" style="margin-top:14px">Can't find what you need — we answer the phone.</p><a href="tel:+15125550196" class="btn btn-dark" style="margin-top:18px">(512) 555-0196</a></div>
+    <div class="faq-list reveal" data-d="60">
+      <details class="faq-item" open><summary>How long does window installation take?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Most residential window replacements complete in one day. Bay windows, bow windows and whole-home projects typically run two to three days. We provide your exact schedule in writing before starting.</div></details>
+      <details class="faq-item"><summary>Are your products energy efficient?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Yes — all our core range is ENERGY STAR® certified. We offer double and triple-pane glass options with low-E coatings and argon-gas fills that can cut heat transfer by up to 70% versus single-pane windows.</div></details>
+      <details class="faq-item"><summary>Do you offer financing?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">We do. We work with GreenSky, Synchrony and Wells Fargo Home Projects to offer 12–60 month plans with 0% promotional periods for qualified applicants. Use our calculator above to estimate your monthly payment.</div></details>
+      <details class="faq-item"><summary>What warranties are included?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">All installations carry our lifetime workmanship warranty. Product warranties are provided by the manufacturer — typically 20–30 years on vinyl and aluminium frames, and 10–20 years on glass units. Every warranty is registered in your name at project completion.</div></details>
+      <details class="faq-item"><summary>Can I customise colours and finishes?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Absolutely. We offer 30+ exterior and interior colour options, multiple hardware finishes and glass choices including obscured, tinted, laminated and decorative options. Our consultants bring full sample sets to your home.</div></details>
+      <details class="faq-item"><summary>Do I need permits for window replacement?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Like-for-like window replacements generally don't require permits in most jurisdictions. Structural changes, enlarging openings or adding new windows typically do. We handle all permit applications on your behalf and include the cost in your written quote.</div></details>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA BAND -->
+<section class="cta-band"><div class="container"><div class="center reveal">
+  <span class="label lt" style="justify-content:center">Free consultation · no obligation</span>
+  <h2 class="cta-h1" style="margin-top:20px"><em>Ready to upgrade</em>your home?</h2>
+  <p style="font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(240,240,238,.6);max-width:50ch;margin:18px auto 0;line-height:1.65">Book your free consultation. We'll visit, measure and recommend the perfect windows and doors — with a written quote before any commitment.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px">
+    <a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Schedule consultation <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="#energy-sec" class="btn btn-ghost btn-lg" data-scroll="energy-sec">Calculate my savings</a>
+  </div>
+</div></div></section>
+
+</div><!-- /page-home -->
+
+<!-- ============ WINDOWS PAGE ============ -->
+<div id="page-windows" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Windows</span></div><h1 class="ph-h">Every window.<br/><em>Every home.</em></h1><p class="ph-sub">Five window families engineered for energy efficiency, security and long-term performance. Installed by our certified crew with a lifetime workmanship warranty.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:2"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Get free estimate</a><a href="#visualizer-sec" class="btn btn-ghost btn-lg" data-page="home" data-scroll="visualizer-sec">Try the visualizer</a></div></div></section>
+  <section class="section"><div class="container">
+    <div class="prod-grid">
+      <div class="prod-card reveal"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=700&q=80" alt="Casement window"/><span class="pc-cat-badge">Energy Efficient</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Casement Windows</div><div class="pc-sub">Full-seal ventilation · ENERGY STAR® certified</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Triple-pane insulation option</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full opening for max airflow</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Best seal when closed</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A+</div></div><div class="pc-stat"><div class="k">From</div><div class="v">$380</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="70"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="Double hung window"/><span class="pc-cat-badge">Classic</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Double Hung</div><div class="pc-sub">Top &amp; bottom sash · any architectural style</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Easy interior cleaning</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tilt-in sash on most models</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Low-maintenance vinyl</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">Lifespan</div><div class="v">25 yrs</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">From</div><div class="v">$290</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="140"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80" alt="Bay and bow window"/><span class="pc-cat-badge">Statement</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Bay &amp; Bow</div><div class="pc-sub">Architectural projection · adds interior space</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom angle configurations</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Adds appraised value</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Panoramic natural light</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">From</div><div class="v">$890</div></div></div></div></div>
+      <div class="prod-card reveal"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Sliding window"/><span class="pc-cat-badge">Modern</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Sliding Windows</div><div class="pc-sub">Horizontal glide · space-saving operation</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>No swing clearance needed</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Wide unobstructed view</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$260</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">Lifespan</div><div class="v">25 yrs</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="70"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=700&q=80" alt="Picture window"/><span class="pc-cat-badge">Max View</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Picture Windows</div><div class="pc-sub">Maximum uninterrupted view · best efficiency</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Best energy performance</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom sizes available</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$420</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A+</div></div><div class="pc-stat"><div class="k">Lifespan</div><div class="v">30+ yrs</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="140" style="background:var(--graphite)"><div class="pc-body" style="padding:clamp(28px,4vw,42px);display:flex;flex-direction:column;justify-content:center;min-height:260px"><h3 style="font-family:var(--fd);font-size:22px;font-weight:800;color:#F0F0EE;letter-spacing:-.01em">Custom &amp; shaped windows</h3><p style="color:rgba(240,240,238,.62);font-size:14px;line-height:1.6;margin-top:10px">Arches, circles, triangles — any shape, any size, spec'd to your architecture.</p><a href="#contact" class="btn btn-primary" data-page="contact" style="margin-top:20px;align-self:flex-start">Request custom quote</a></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Book a window consultation</a></div>
+  </div></section>
+</div>
+
+<!-- ============ DOORS PAGE ============ -->
+<div id="page-doors" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Doors</span></div><h1 class="ph-h">Doors that make<br/><em>an entrance.</em></h1><p class="ph-sub">Five door categories — from dramatic entry statements to seamless indoor-outdoor transitions. Installed precisely. Warrantied for life.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:2"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Get free estimate</a></div></div></section>
+  <section class="section"><div class="container">
+    <div class="prod-grid">
+      <div class="prod-card reveal"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Entry door"/><span class="pc-cat-badge">Security</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Entry Doors</div><div class="pc-sub">Steel, fibreglass &amp; solid wood options</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-point locking standard</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>30+ colour options</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sidelight &amp; transom options</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$890</div></div><div class="pc-stat"><div class="k">Security</div><div class="v">A+</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="70"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=700&q=80" alt="Patio sliding door"/><span class="pc-cat-badge">Indoor-Outdoor</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Patio Doors</div><div class="pc-sub">Sliding &amp; folding — seamless transitions</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full-width opening options</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Flush track for level threshold</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>ENERGY STAR® glass units</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$1,200</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">Life</div><div class="v">25+ yrs</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="140"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=700&q=80" alt="French doors"/><span class="pc-cat-badge">Classic</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">French Doors</div><div class="pc-sub">Dual-leaf elegance · interior &amp; exterior</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Wide glazing areas</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Inswing &amp; outswing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom grille patterns</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$1,400</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">Life</div><div class="v">30+ yrs</div></div></div></div></div>
+      <div class="prod-card reveal"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Sliding glass door"/><span class="pc-cat-badge">Modern</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Sliding Doors</div><div class="pc-sub">Slimline frames · maximum glass</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-track configurations</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pocket door option</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$980</div></div><div class="pc-stat"><div class="k">Energy</div><div class="v">A</div></div><div class="pc-stat"><div class="k">Life</div><div class="v">25+ yrs</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="70"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="Security door"/><span class="pc-cat-badge">Protection</span><span class="pc-accent-strip"></span></div><div class="pc-body"><div class="pc-name">Security Doors</div><div class="pc-sub">Reinforced steel · commercial-grade locking</div><ul class="pc-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Police-preferred specification</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Anti-crowbar hinges</li></ul><div class="pc-meta"><div class="pc-stat"><div class="k">From</div><div class="v">$1,100</div></div><div class="pc-stat"><div class="k">Security</div><div class="v">A+++</div></div><div class="pc-stat"><div class="k">Life</div><div class="v">30+ yrs</div></div></div></div></div>
+      <div class="prod-card reveal" data-d="140" style="background:var(--graphite)"><div class="pc-body" style="padding:clamp(28px,4vw,42px);display:flex;flex-direction:column;justify-content:center;min-height:260px"><h3 style="font-family:var(--fd);font-size:22px;font-weight:800;color:#F0F0EE;letter-spacing:-.01em">Bi-fold &amp; lift-slide</h3><p style="color:rgba(240,240,238,.62);font-size:14px;line-height:1.6;margin-top:10px">Wide-span door systems that fold completely clear. Ideal for luxury homes and commercial spaces.</p><a href="#contact" class="btn btn-primary" data-page="contact" style="margin-top:20px;align-self:flex-start">Request custom quote</a></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Book a door consultation</a></div>
+  </div></section>
+</div>
+
+<!-- ============ GALLERY PAGE ============ -->
+<div id="page-gallery" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Gallery</span></div><h1 class="ph-h"><em>3,000+ installations.</em><br/>Browse the work.</h1><p class="ph-sub">Real homes, real results. Filter by project type and see every installation in detail.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="proj-filter-row reveal" id="gallery-filter" style="margin-bottom:22px">
+      <button class="pfbtn on" data-gf="all">All</button>
+      <button class="pfbtn" data-gf="residential">Residential</button>
+      <button class="pfbtn" data-gf="luxury">Luxury</button>
+      <button class="pfbtn" data-gf="commercial">Commercial</button>
+      <button class="pfbtn" data-gf="apartment">Apartment</button>
+    </div>
+    <div class="proj-grid" id="gallery-grid">
+      <div class="proj-card reveal" data-gcat="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1600607688066-890987f19a02?auto=format&fit=crop&w=700&q=80" alt="Riverside windows"/><span class="prj-cat">Residential</span></div><div class="prj-body"><div class="prj-h">Riverside Residence</div><div class="prj-meta">14× Casement · 2 days · ENERGY STAR</div><div class="prj-tags"><span class="ba-tag">Windows</span></div></div></div>
+      <div class="proj-card reveal" data-d="70" data-gcat="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80" alt="Highland estate"/><span class="prj-cat">Luxury</span></div><div class="prj-body"><div class="prj-h">Highland Estate</div><div class="prj-meta">Bay + French doors · 3 days</div><div class="prj-tags"><span class="ba-tag">Bay Window</span><span class="ba-tag">French Door</span></div></div></div>
+      <div class="proj-card reveal" data-d="140" data-gcat="commercial"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=700&q=80" alt="Office block"/><span class="prj-cat">Commercial</span></div><div class="prj-body"><div class="prj-h">Foundry Office Block</div><div class="prj-meta">Aluminium storefront · 5 days</div><div class="prj-tags"><span class="ba-tag">Commercial</span></div></div></div>
+      <div class="proj-card reveal" data-gcat="apartment"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="City apartments"/><span class="prj-cat">Apartment</span></div><div class="prj-body"><div class="prj-h">City Apartment Block</div><div class="prj-meta">24× Double-hung · 4 days</div><div class="prj-tags"><span class="ba-tag">Windows</span></div></div></div>
+      <div class="proj-card reveal" data-d="70" data-gcat="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Maple street doors"/><span class="prj-cat">Residential</span></div><div class="prj-body"><div class="prj-h">Maple Street Heritage</div><div class="prj-meta">Entry + patio doors · 1 day</div><div class="prj-tags"><span class="ba-tag">Entry Door</span></div></div></div>
+      <div class="proj-card reveal" data-d="140" data-gcat="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Penthouse sliding"/><span class="prj-cat">Luxury</span></div><div class="prj-body"><div class="prj-h">Crestline Penthouse</div><div class="prj-meta">Floor-to-ceiling sliding · 2 days</div><div class="prj-tags"><span class="ba-tag">Sliding Door</span></div></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Start your project</a></div>
+  </div></section>
+</div>
+
+<!-- ============ REVIEWS PAGE ============ -->
+<div id="page-reviews" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Reviews</span></div><h1 class="ph-h">4.9 stars.<br/><em>2,800+ reviews.</em></h1><p class="ph-sub">Every review tied to a completed installation. Real homeowners, real results.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="rv-grid">
+      <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-text">The casement windows are spectacular. Heating bill down $140 in month one and the draughts we'd lived with for 15 years are gone.</div><div class="rv-author"><div class="rv-av">MA</div><div><div class="rv-name">Maya Aldridge</div><div class="rv-role">14× Casement · Riverside</div></div></div></div>
+      <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-text">Measurement to installation in under three weeks. The crew painted interior reveals before they left. Remarkable finish.</div><div class="rv-author"><div class="rv-av">JT</div><div><div class="rv-name">James Thornton</div><div class="rv-role">Bay window + entry door</div></div></div></div>
+      <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-text">We've done commercial fitouts with many glazing companies. ClearFrame is the only one we specify now.</div><div class="rv-author"><div class="rv-av">SK</div><div><div class="rv-name">Sara Kowalski</div><div class="rv-role">Property developer · 3 projects</div></div></div></div>
+      <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-text">French doors changed the entire feel of the living room. Light pours in where before it was a dark corridor. Could not be happier.</div><div class="rv-author"><div class="rv-av">PR</div><div><div class="rv-name">Priya Rajaram</div><div class="rv-role">French doors · Crestline</div></div></div></div>
+      <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-text">Fixed a draught the previous installer left behind, then installed the new windows perfectly. No more cold spots near the glass.</div><div class="rv-author"><div class="rv-av">DL</div><div><div class="rv-name">David Lin</div><div class="rv-role">Double hung · City apartment</div></div></div></div>
+      <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-text">Security doors and entry set installed same week as quote. The finish is flawless and the locking system gives real peace of mind.</div><div class="rv-author"><div class="rv-av">CW</div><div><div class="rv-name">Carmen Wu</div><div class="rv-role">Security door · Mapleton</div></div></div></div>
+    </div>
+    <div class="center" style="margin-top:48px"><a href="#contact" class="btn btn-primary btn-lg" data-page="contact">Book your installation</a></div>
+  </div></section>
+</div>
+
+<!-- ============ CONTACT PAGE ============ -->
+<div id="page-contact" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Contact</span></div><h1 class="ph-h">Let's start with<br/><em>a free visit.</em></h1><p class="ph-sub">Book your free in-home consultation. We'll measure, advise and quote — no commitment required.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="contact-shell">
+      <div class="contact-info">
+        <h2 style="font-family:var(--fd);font-weight:800;font-size:22px;letter-spacing:-.01em;color:#F0F0EE;margin-bottom:6px;position:relative">Reach us directly</h2>
+        <p style="font-size:13.5px;color:rgba(240,240,238,.55);line-height:1.65;margin-bottom:8px">We respond within one business hour.</p>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div class="ci-l">Call or text</div><div class="ci-v">(512) 555-0196</div></div></div>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><div class="ci-l">Email</div><div class="ci-v">hello@clearframe.co</div></div></div>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div class="ci-l">Hours</div><div class="ci-v">Mon–Fri 8am–6pm · Sat 9–4</div></div></div>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div class="ci-l">Showroom</div><div class="ci-v">1240 Architectural Way</div></div></div>
+        <div class="ci-item" style="border-bottom:none"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/></svg></span><div><div class="ci-l">Service area</div><div class="ci-v">Metro area · 60mi radius</div></div></div>
+      </div>
+      <div class="contact-form-wrap"><form id="contact-form" style="display:grid;gap:15px">
+        <div style="font-family:var(--fd);font-weight:800;font-size:23px;letter-spacing:-.01em;color:var(--text)">Request free estimate</div>
+        <div class="g2" style="gap:13px"><div><label class="f-label" for="cf-name">Full name</label><input class="f-input" id="cf-name" required placeholder="Jane Cooper"/></div><div><label class="f-label" for="cf-phone">Phone</label><input class="f-input" id="cf-phone" type="tel" required placeholder="(555) 000-0000"/></div></div>
+        <div><label class="f-label" for="cf-email">Email</label><input class="f-input" id="cf-email" type="email" required placeholder="jane@email.com"/></div>
+        <div class="g2" style="gap:13px">
+          <div><label class="f-label" for="cf-type">Product interest</label><select class="f-input" id="cf-type"><option>Windows</option><option>Entry Door</option><option>Patio / French Doors</option><option>Sliding Doors</option><option>Security Doors</option><option>Full home (windows &amp; doors)</option><option>Not sure yet</option></select></div>
+          <div><label class="f-label" for="cf-visit">Visit type</label><select class="f-input" id="cf-visit"><option>Free in-home measurement</option><option>Showroom appointment</option><option>Virtual consultation</option><option>Builder / developer pricing</option></select></div>
+        </div>
+        <div><label class="f-label" for="cf-notes">Project details</label><textarea class="f-input" id="cf-notes" rows="3" style="resize:vertical" placeholder="e.g. 3-bed home, 12 windows, hoping to start next month…"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-full">Request free measurement <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        <div style="text-align:center;font-family:var(--fm);font-size:10.5px;color:var(--faint);letter-spacing:.04em">Confirmed within 1 business hour · free &amp; no obligation · lifetime warranty on all installations</div>
+      </form></div>
+    </div>
+  </div></section>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer><div class="container"><div class="foot-top"><div class="foot-grid">
+  <div>
+    <div class="foot-logo-name">Clear<b>Frame</b></div>
+    <p class="foot-desc">Premium window and door installation. Free in-home measurement. Lifetime workmanship warranty. Serving homeowners and developers since 2010.</p>
+    <form class="foot-nl" id="foot-nl"><input type="email" required placeholder="Energy tips in your inbox"/><button type="submit">Subscribe</button></form>
+  </div>
+  <div><div class="foot-h">Windows</div><div class="foot-links"><span class="foot-link" data-page="windows">Casement Windows</span><span class="foot-link" data-page="windows">Double Hung</span><span class="foot-link" data-page="windows">Bay &amp; Bow</span><span class="foot-link" data-page="windows">Sliding Windows</span><span class="foot-link" data-page="windows">Picture Windows</span></div></div>
+  <div><div class="foot-h">Doors</div><div class="foot-links"><span class="foot-link" data-page="doors">Entry Doors</span><span class="foot-link" data-page="doors">Patio Doors</span><span class="foot-link" data-page="doors">French Doors</span><span class="foot-link" data-page="doors">Sliding Doors</span><span class="foot-link" data-page="doors">Security Doors</span></div></div>
+  <div><div class="foot-h">Resources</div><div class="foot-links"><span class="foot-link" data-page="home" data-scroll="visualizer-sec">Visualizer</span><span class="foot-link" data-page="home" data-scroll="energy-sec">Energy Calculator</span><span class="foot-link" data-page="home" data-scroll="financing-sec">Financing</span><span class="foot-link" data-page="gallery">Gallery</span><span class="foot-link" data-page="reviews">Reviews</span></div></div>
+  <div><div class="foot-h">Contact</div><div class="foot-links"><a href="tel:+15125550196" class="foot-link" style="display:block">(512) 555-0196</a><a href="mailto:hello@clearframe.co" class="foot-link" style="display:block">hello@clearframe.co</a><span class="foot-link" style="cursor:default">Mon–Fri 8am–6pm</span><span class="foot-link" style="cursor:default">Sat 9am–4pm</span></div></div>
+</div></div>
+<div class="foot-bottom"><div>&copy; <span class="yr">2026</span> ClearFrame Windows &amp; Doors. All rights reserved.</div><div class="foot-credit">Built &amp; Maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener">GrowrixOS</a></div></div></div></footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <a href="#home" class="bn-item active" data-page="home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</a>
+  <a href="#windows" class="bn-item" data-page="windows"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Products</a>
+  <a href="#visualizer-sec" class="bn-item" data-page="home" data-scroll="visualizer-sec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 12l5-3 4 2 5-4 6 4"/></svg>Visualize</a>
+  <a href="#energy-sec" class="bn-item" data-page="home" data-scroll="energy-sec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5h3L12 7"/><path d="M10 14v-3a6 6 0 0 1 12 0v3"/><path d="M2 14h20"/><path d="M6 14v3a6 6 0 0 0 12 0v-3"/></svg>Estimate</a>
+  <button class="bn-item" id="bn-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>Menu</button>
+</nav>
+
+<!-- AI PANEL -->
+<div class="ai-panel" id="ai-panel" role="dialog" aria-label="ClearFrame product advisor" aria-hidden="true">
+  <div class="ai-head"><div class="ai-av"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div><div style="font-family:var(--fd);font-weight:700;font-size:14px;letter-spacing:-.005em">Product Advisor</div><div style="font-size:11px;color:rgba(240,240,238,.65);margin-top:1px">Ask about windows &amp; doors</div></div><button id="ai-close" aria-label="Close" style="margin-left:auto;color:rgba(240,240,238,.7);width:30px;height:30px;border-radius:6px;display:grid;place-items:center;background:rgba(240,240,238,.08);border:1px solid rgba(240,240,238,.12)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="ai-body" id="ai-body"><div class="ai-msg bot">Hi! I'm your ClearFrame product advisor. Ask me about window types, energy savings, door options, warranties or installation timelines. 🪟</div></div>
+  <div class="ai-chips" id="ai-chips">
+    <button class="ai-chip" data-q="Best windows for energy savings?">Best for energy</button>
+    <button class="ai-chip" data-q="How much do new windows cost?">Window cost</button>
+    <button class="ai-chip" data-q="What entry door do you recommend?">Entry doors</button>
+    <button class="ai-chip" data-q="How long does installation take?">Install timeline</button>
+  </div>
+  <form class="ai-foot" id="ai-form"><input id="ai-input" placeholder="Ask a question…" aria-label="Message"/><button class="ai-send" type="submit" aria-label="Send"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></form>
+</div>
+
+<!-- FAB -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fab-opts">
+    <button class="fab-opt top" id="fab-top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <button class="fab-opt ai-opt" id="fab-ai" aria-label="Product advisor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="fab-tip">Product advisor</span></button>
+    <a href="https://wa.me/15125550196" target="_blank" rel="noopener" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1A7.93 7.93 0 0 0 12 19.9a7.95 7.95 0 0 0 5.6-13.6zM12 18.5a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25A6.59 6.59 0 1 1 12 18.5zm3.61-4.94c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.39 5.39 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.08a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.6-1.46s-.32-.34-.44-.34h-.38a.72.72 0 0 0-.52.24 2.2 2.2 0 0 0-.68 1.64A3.83 3.83 0 0 0 8.6 12a8.7 8.7 0 0 0 3.33 2.94c1.96.85 1.96.57 2.32.53a2 2 0 0 0 1.32-.93 1.64 1.64 0 0 0 .11-.93c-.05-.08-.18-.13-.38-.23z"/></svg><span class="fab-tip">WhatsApp us</span></a>
+    <a href="tel:+15125550196" class="fab-opt call" aria-label="Call now"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Call now</span></a>
+  </div>
+  <button class="fab-main" id="fab-main" aria-label="Quick actions" aria-expanded="false"><svg id="fab-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+</div>
+<script>
+(function(){"use strict";
+var doc=document,root=doc.documentElement,W=window;
+var SUN='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>';
+var MOON='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>';
+
+/* THEME */
+var themeBtn=doc.getElementById('theme-btn');
+function applyTheme(t){root.setAttribute('data-theme',t);if(themeBtn)themeBtn.innerHTML=t==='dark'?SUN:MOON;try{localStorage.setItem('cf-theme',t);}catch(e){}}
+(function(){var s;try{s=localStorage.getItem('cf-theme');}catch(e){}if(!s)s=(W.matchMedia&&W.matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';applyTheme(s);})();
+if(themeBtn)themeBtn.addEventListener('click',function(){applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');});
+
+/* SCROLL */
+var navbar=doc.getElementById('navbar'),scrollBar=doc.getElementById('scroll-bar'),bnav=doc.getElementById('bottom-nav'),lastY=W.pageYOffset;
+function onScroll(){
+  var y=W.pageYOffset,h=doc.documentElement.scrollHeight-W.innerHeight;
+  if(navbar)navbar.classList.toggle('scrolled',y>14);
+  if(scrollBar)scrollBar.style.width=(h>0?(y/h*100):0)+'%';
+  if(bnav)bnav.style.transform=(y>lastY&&y>220)?'translateY(100%)':'translateY(0)';
+  var ft=doc.getElementById('fab-top');if(ft)ft.style.display=y>500?'grid':'none';
+  lastY=y;
+}
+W.addEventListener('scroll',onScroll,{passive:true});
+
+/* DRAWER */
+var drawer=doc.getElementById('drawer'),dov=doc.getElementById('drawer-ov');
+function openD(){if(drawer){drawer.classList.add('open');dov.classList.add('open');doc.body.style.overflow='hidden';}}
+function closeD(){if(drawer){drawer.classList.remove('open');dov.classList.remove('open');doc.body.style.overflow='';}}
+[['hamburger',openD],['drawer-close',closeD],['bn-menu',openD]].forEach(function(p){var el=doc.getElementById(p[0]);if(el)el.addEventListener('click',p[1]);});
+if(dov)dov.addEventListener('click',closeD);
+doc.addEventListener('keydown',function(e){if(e.key==='Escape'){closeD();closeAI();}});
+
+/* REVEAL */
+var rObs;
+function observeReveals(scope){
+  var els=(scope||doc).querySelectorAll('.reveal:not(.in)');
+  if(!('IntersectionObserver' in W)){[].forEach.call(els,function(e){e.classList.add('in');});return;}
+  if(!rObs)rObs=new IntersectionObserver(function(entries){entries.forEach(function(x){if(x.isIntersecting){var d=parseInt(x.target.getAttribute('data-d')||'0',10);setTimeout(function(){x.target.classList.add('in');},d);rObs.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+  [].forEach.call(els,function(e){rObs.observe(e);});
+}
+
+/* COUNTERS */
+function countUp(el){var t=parseFloat(el.getAttribute('data-counter'))||0,dec=t%1!==0,s=null,dur=1400;function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/dur,1),ease=1-Math.pow(1-p,3),v=t*ease;el.textContent=dec?v.toFixed(1):Math.floor(v).toLocaleString();if(p<1)requestAnimationFrame(step);else el.textContent=dec?t.toFixed(1):t.toLocaleString();}requestAnimationFrame(step);}
+var cObs;
+function observeCounters(scope){var els=(scope||doc).querySelectorAll('[data-counter]');if(!('IntersectionObserver' in W)){[].forEach.call(els,countUp);return;}if(!cObs)cObs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){countUp(x.target);cObs.unobserve(x.target);}});},{threshold:.5});[].forEach.call(els,function(e){if(!e.dataset.counted){e.dataset.counted='1';cObs.observe(e);}});}
+
+/* HERO WINDOW-FRAME SWITCHER */
+(function(){
+  var tabs=doc.getElementById('win-tabs');if(!tabs)return;
+  var img=doc.getElementById('wf-img'),styleEl=doc.getElementById('wf-style');
+  var STYLES=[
+    {label:'Modern Casement',src:'photo-1600607688066-890987f19a02'},
+    {label:'Traditional Double Hung',src:'photo-1558618666-fcd25c85cd64'},
+    {label:'Luxury Bay Window',src:'photo-1512917774080-9991f1c4c750'}
+  ];
+  tabs.addEventListener('click',function(e){
+    var t=e.target.closest('.wtab');if(!t)return;
+    var i=parseInt(t.getAttribute('data-wi'));
+    [].forEach.call(tabs.querySelectorAll('.wtab'),function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+    t.classList.add('on');t.setAttribute('aria-selected','true');
+    if(img){img.classList.add('out');setTimeout(function(){img.src='https://images.unsplash.com/'+STYLES[i].src+'?auto=format&fit=crop&w=900&q=80';img.onload=function(){img.classList.remove('out');};},300);}
+    if(styleEl)styleEl.textContent=STYLES[i].label;
+  });
+})();
+
+/* MAIN BEFORE/AFTER SLIDER */
+(function(){
+  var range=doc.getElementById('viz-range'),div=doc.getElementById('viz-div'),after=doc.querySelector('.viz-after');if(!range||!div||!after)return;
+  function set(v){after.style.clipPath='inset(0 '+(100-v)+'% 0 0)';div.style.left=v+'%';}
+  range.addEventListener('input',function(){set(parseFloat(range.value));});
+  var drag=false,stage=doc.querySelector('.viz-stage');
+  if(stage){stage.addEventListener('pointerdown',function(){drag=true;});W.addEventListener('pointermove',function(e){if(!drag)return;var r=stage.getBoundingClientRect();set(Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100)));});W.addEventListener('pointerup',function(){drag=false;});}
+  set(50);
+})();
+
+/* BA GALLERY SLIDERS */
+[].forEach.call(doc.querySelectorAll('.ba-compare'),function(c){
+  var a=c.querySelector('.ba-a'),ln=c.querySelector('.ba-line'),hd=c.querySelector('.ba-hdl'),rng=c.querySelector('.ba-rng');
+  function set(v){v=Math.max(0,Math.min(100,v));a.style.clipPath='inset(0 '+(100-v)+'% 0 0)';ln.style.left=v+'%';hd.style.left=v+'%';if(rng)rng.value=v;}
+  if(rng)rng.addEventListener('input',function(){set(parseFloat(rng.value));});
+  var drag=false;c.addEventListener('pointerdown',function(){drag=true;});W.addEventListener('pointermove',function(e){if(!drag)return;var r=c.getBoundingClientRect();set((e.clientX-r.left)/r.width*100);});W.addEventListener('pointerup',function(){drag=false;});
+  set(50);
+});
+
+/* VISUALIZER PRODUCT LIST */
+(function(){
+  var T='?auto=format&fit=crop&w=1100&q=80';
+  var PRODS={
+    windows:[
+      {n:'Casement Windows',e:'ENERGY STAR® A+',s:'Up to 32%',u:'photo-1600607688066-890987f19a02',sw:'photo-1604762524889-3e2fcc145683'},
+      {n:'Double Hung',e:'ENERGY STAR® A',s:'Up to 24%',u:'photo-1558618666-fcd25c85cd64',sw:'photo-1503174971373-b1f69850bded'},
+      {n:'Bay & Bow Windows',e:'ENERGY STAR® A',s:'Up to 26%',u:'photo-1512917774080-9991f1c4c750',sw:'photo-1493606278519-11aa9f86e40a'},
+      {n:'Picture Windows',e:'ENERGY STAR® A+',s:'Up to 35%',u:'photo-1567767292278-a4f21aa2d36e',sw:'photo-1615971677499-5467cbab01c0'},
+    ],
+    doors:[
+      {n:'Entry Doors',e:'ENERGY STAR® A',s:'Up to 18%',u:'photo-1600607687939-ce8a6c25118c',sw:'photo-1584622650111-993a426fbf0a'},
+      {n:'Patio Sliding Doors',e:'ENERGY STAR® A',s:'Up to 22%',u:'photo-1600585154526-990dced4db0d',sw:'photo-1591474200742-8e512e6f98f8'},
+      {n:'French Doors',e:'ENERGY STAR® A',s:'Up to 20%',u:'photo-1600607688066-890987f19a02',sw:'photo-1603204077779-bed963ea7d0e'},
+    ]
+  };
+  var catTabs=doc.getElementById('viz-cat-tabs'),list=doc.getElementById('viz-list');
+  var nameEl=doc.getElementById('viz-prod-name'),energyEl=doc.getElementById('viz-energy-v'),savingsEl=doc.getElementById('viz-savings-v');
+  var afterImg=doc.querySelector('.viz-after');
+  var cur='windows';
+  if(!list)return;
+  function renderList(){
+    list.innerHTML='';
+    PRODS[cur].forEach(function(p,i){
+      var btn=doc.createElement('button');btn.className='viz-btn'+(i===0?' on':'');
+      btn.innerHTML='<div class="viz-thumb" style="background-image:url(\'https://images.unsplash.com/'+p.sw+'?auto=format&fit=crop&w=100&q=60\')"></div><div><div class="vb-n">'+p.n+'</div><div class="vb-s">'+p.e+'</div></div>';
+      btn.addEventListener('click',function(){
+        [].forEach.call(list.querySelectorAll('.viz-btn'),function(b){b.classList.remove('on');});btn.classList.add('on');
+        if(nameEl)nameEl.textContent=p.n;if(energyEl)energyEl.textContent=p.e;if(savingsEl)savingsEl.textContent=p.s;
+        if(afterImg)afterImg.src='https://images.unsplash.com/'+p.u+T;
+      });
+      list.appendChild(btn);
+    });
+    var first=PRODS[cur][0];
+    if(nameEl)nameEl.textContent=first.n;if(energyEl)energyEl.textContent=first.e;if(savingsEl)savingsEl.textContent=first.s;
+    if(afterImg)afterImg.src='https://images.unsplash.com/'+first.u+T;
+  }
+  if(catTabs)catTabs.addEventListener('click',function(e){var t=e.target.closest('.vctab');if(!t)return;[].forEach.call(catTabs.querySelectorAll('.vctab'),function(x){x.classList.remove('on');});t.classList.add('on');cur=t.getAttribute('data-vc');renderList();});
+  renderList();
+  var vf=doc.getElementById('viz-form'),vs=doc.getElementById('viz-saved');if(vf)vf.addEventListener('submit',function(e){e.preventDefault();vf.style.display='none';vs.style.display='block';});
+})();
+
+/* ENERGY SAVINGS CALCULATOR */
+(function(){
+  function getChip(g){return doc.querySelector('[data-g="'+g+'"] .echip.on');}
+  function money(n){return '$'+Math.round(n).toLocaleString();}
+  function calc(){
+    var sc=getChip('size'),ac=getChip('age'),zc=getChip('zone');if(!sc||!ac||!zc)return;
+    var bl=parseFloat(sc.getAttribute('data-bl').replace('$',''))||150;
+    var eff=parseFloat(ac.getAttribute('data-eff'))||0.22;
+    var m=parseFloat(zc.getAttribute('data-m'))||1;
+    var annual=Math.round(bl*eff*m*12);
+    var monthly=Math.round(annual/12);
+    var cost=parseFloat(sc.getAttribute('data-sf'))||2000;
+    var pb=Math.max(3,Math.round((cost*4)/(annual)));
+    var recs={old:'Casement, triple-pane',med:'Double-hung, low-E',new:'Casement or sliding'};
+    var rec=recs[ac.getAttribute('data-v')]||'Casement, low-E';
+    var sv=doc.getElementById('en-save'),mo=doc.getElementById('en-mo'),yr=doc.getElementById('en-10yr'),pb2=doc.getElementById('en-pb'),rc=doc.getElementById('en-rec');
+    if(sv)sv.textContent=money(annual)+'/yr';if(mo)mo.textContent=money(monthly);if(yr)yr.textContent=money(annual*10);if(pb2)pb2.textContent=pb+' yrs approx';if(rc)rc.textContent=rec;
+  }
+  [].forEach.call(doc.querySelectorAll('[data-g]'),function(g){g.addEventListener('click',function(e){var c=e.target.closest('.echip');if(!c)return;[].forEach.call(g.querySelectorAll('.echip'),function(x){x.classList.remove('on');});c.classList.add('on');calc();});});
+  calc();
+  var ef=doc.getElementById('energy-form'),es=doc.getElementById('en-sent');if(ef)ef.addEventListener('submit',function(e){e.preventDefault();ef.style.display='none';es.style.display='block';});
+})();
+
+/* FINANCING CALCULATOR */
+(function(){
+  var amt=doc.getElementById('fin-amt'),term=doc.getElementById('fin-term'),rate=doc.getElementById('fin-rate');
+  var moEl=doc.getElementById('fin-mo'),totEl=doc.getElementById('fin-total');
+  function calc(){
+    var P=parseFloat(amt&&amt.value)||0,n=parseInt(term&&term.value)||24,r=parseFloat(rate&&rate.value)||0;
+    var mo,tot;
+    if(r===0){mo=P/n;tot=P;}
+    else{var mr=r/100/12;mo=P*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);tot=mo*n;}
+    if(moEl)moEl.textContent='$'+Math.round(mo).toLocaleString();
+    if(totEl)totEl.textContent='$'+Math.round(tot).toLocaleString();
+  }
+  [amt,term,rate].forEach(function(el){if(el)el.addEventListener('input',calc);});
+  calc();
+})();
+
+/* PROJECT FILTERS */
+function wireFilter(barId,gridId,attr){
+  var bar=doc.getElementById(barId);if(!bar)return;
+  bar.addEventListener('click',function(e){var b=e.target.closest('.pfbtn');if(!b)return;
+    [].forEach.call(bar.querySelectorAll('.pfbtn'),function(x){x.classList.remove('on');});b.classList.add('on');
+    var v=b.getAttribute(attr);
+    [].forEach.call(doc.getElementById(gridId).querySelectorAll('.proj-card'),function(c){
+      c.classList.toggle('hide',!(v==='all'||c.getAttribute('data-'+attr.slice(5))===v));
+    });
+  });
+}
+wireFilter('proj-filter','proj-grid','data-pf');
+wireFilter('gallery-filter','gallery-grid','data-gf');
+
+/* FORMS */
+function makeOk(){var d=doc.createElement('div');d.setAttribute('role','status');d.style.cssText='padding:36px 28px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--rc)';d.innerHTML='<div style="width:56px;height:56px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,var(--bronze),var(--gold));display:grid;place-items:center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="font-family:var(--fd);font-weight:800;font-size:22px;letter-spacing:-.01em;color:var(--text);margin-top:16px">Request received</div><p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6;max-width:34ch;margin-inline:auto">A ClearFrame consultant will confirm your visit within one business hour.</p>';return d;}
+var cf=doc.getElementById('contact-form');if(cf)cf.addEventListener('submit',function(e){e.preventDefault();cf.replaceWith(makeOk());});
+var fnl=doc.getElementById('foot-nl');if(fnl)fnl.addEventListener('submit',function(e){e.preventDefault();var i=fnl.querySelector('input');if(i){i.value='';i.placeholder='Subscribed ✓';}});
+
+/* FAB */
+var fabMain=doc.getElementById('fab-main'),fabOpts=doc.getElementById('fab-opts'),fabIcon=doc.getElementById('fab-icon'),fabOpen=false;
+function toggleFab(){fabOpen=!fabOpen;fabOpts.classList.toggle('open',fabOpen);fabMain.classList.toggle('open',fabOpen);fabMain.setAttribute('aria-expanded',fabOpen?'true':'false');fabIcon.style.transform=fabOpen?'rotate(45deg)':'none';}
+if(fabMain)fabMain.addEventListener('click',toggleFab);
+var fabTop=doc.getElementById('fab-top');if(fabTop)fabTop.addEventListener('click',function(){W.scrollTo({top:0,behavior:'smooth'});});
+
+/* AI PANEL */
+var aiPanel=doc.getElementById('ai-panel'),aiBody=doc.getElementById('ai-body'),aiInput=doc.getElementById('ai-input');
+function openAI(){if(aiPanel){aiPanel.classList.add('open');aiPanel.setAttribute('aria-hidden','false');if(fabOpen)toggleFab();setTimeout(function(){if(aiInput)aiInput.focus();},280);}}
+function closeAI(){if(aiPanel){aiPanel.classList.remove('open');aiPanel.setAttribute('aria-hidden','true');}}
+var fabAI=doc.getElementById('fab-ai');if(fabAI)fabAI.addEventListener('click',openAI);
+var aiClose=doc.getElementById('ai-close');if(aiClose)aiClose.addEventListener('click',closeAI);
+function aiReply(q){var t=q.toLowerCase();
+  if(/energy|saving|bill|cost/.test(t))return'Our casement and picture windows with triple-pane glass typically save 25–35% on energy bills. Use the energy calculator above to estimate your specific savings.';
+  if(/casement/.test(t))return'Casement windows offer the best seal when closed and maximum airflow when open. They\'re our most energy-efficient option — ENERGY STAR® A+ rated, from $380 installed.';
+  if(/double.hung|hung/.test(t))return'Double-hung windows suit any home style and are easy to clean from inside. Great value at $290+ and available in 30+ colours. Tilt-in sash on most models.';
+  if(/bay|bow/.test(t))return'Bay and bow windows add interior space, panoramic light and significant kerb appeal. Custom angle configurations from $890. They also add measurable appraised value.';
+  if(/door|entry|french|patio|sliding/.test(t))return'We install five door types: entry doors, patio doors, French doors, sliding doors and security doors. All carry lifetime installation warranty. Ask for a quote on the specific type you need.';
+  if(/cost|price|much|\$/.test(t))return'Windows start from $260 (sliding) to $890+ (bay/bow), installed. Entry doors from $890. Use the energy calculator — your savings will often offset the cost faster than you expect.';
+  if(/long|time|days|install/.test(t))return'Most residential window replacements complete in one day. Bay windows and full-home projects run two to three days. We give you a precise schedule in writing before starting.';
+  if(/warrant|guarantee/.test(t))return'Every installation carries our lifetime workmanship warranty. Manufacturer product warranties — typically 20–30 years — are registered in your name at project completion.';
+  if(/financ|pay|month/.test(t))return'We offer 12–60 month financing with 0% promotional periods for qualified applicants through GreenSky, Synchrony and Wells Fargo. Use the calculator in the Financing section.';
+  if(/permit/.test(t))return'Like-for-like replacements generally don\'t need permits. Structural changes or enlarging openings typically do — we handle all permit applications on your behalf.';
+  return'Happy to help! Ask about a specific window type, door style, energy savings, cost, warranty or our financing options — or book a free in-home visit and we\'ll advise you in person.';}
+function aiPush(txt,me){var m=doc.createElement('div');m.className='ai-msg '+(me?'me':'bot');m.textContent=txt;if(aiBody){aiBody.appendChild(m);aiBody.scrollTop=aiBody.scrollHeight;}}
+function aiAsk(q){aiPush(q,true);setTimeout(function(){aiPush(aiReply(q),false);},380);}
+var aiChips=doc.getElementById('ai-chips');if(aiChips)aiChips.addEventListener('click',function(e){var c=e.target.closest('.ai-chip');if(c)aiAsk(c.getAttribute('data-q'));});
+var aiForm=doc.getElementById('ai-form');if(aiForm)aiForm.addEventListener('submit',function(e){e.preventDefault();if(!aiInput)return;var v=aiInput.value.trim();if(!v)return;aiInput.value='';aiAsk(v);});
+
+/* YEAR */
+[].forEach.call(doc.querySelectorAll('.yr'),function(e){e.textContent=new Date().getFullYear();});
+
+/* SPA ROUTER */
+var PAGES={
+  home:{el:'page-home',t:'ClearFrame — Premium Window & Door Installation'},
+  windows:{el:'page-windows',t:'Windows — ClearFrame'},
+  doors:{el:'page-doors',t:'Doors — ClearFrame'},
+  gallery:{el:'page-gallery',t:'Gallery — ClearFrame'},
+  reviews:{el:'page-reviews',t:'Reviews — ClearFrame'},
+  contact:{el:'page-contact',t:'Free Estimate — ClearFrame'}
+};
+function setActive(pg){[].forEach.call(doc.querySelectorAll('.nav-link,.bn-item'),function(l){l.classList.toggle('active',l.getAttribute('data-page')===pg&&!l.getAttribute('data-scroll'));});}
+function showPage(pg,opts){opts=opts||{};if(!PAGES[pg])pg='home';[].forEach.call(doc.querySelectorAll('.spa-page'),function(p){p.classList.remove('active');});var tgt=doc.getElementById(PAGES[pg].el);if(tgt)tgt.classList.add('active');doc.title=PAGES[pg].t;setActive(pg);observeReveals(tgt||doc);observeCounters(tgt||doc);if(opts.scrollTo){var s=doc.getElementById(opts.scrollTo);if(s){setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},70);return;}}if(!opts.noScroll)W.scrollTo({top:0,behavior:opts.instant?'auto':'smooth'});}
+function navigate(pg,scrollTo){var h='#'+pg;if(location.hash!==h)history.pushState({page:pg},'',h);showPage(pg,{scrollTo:scrollTo});}
+doc.addEventListener('click',function(e){
+  var a=e.target.closest('[data-page]');
+  if(a){var pg=a.getAttribute('data-page');if(PAGES[pg]){e.preventDefault();closeD();navigate(pg,a.getAttribute('data-scroll')||null);return;}}
+  var sc=e.target.closest('[data-scroll]');if(sc&&!sc.getAttribute('data-page')){var id=sc.getAttribute('data-scroll'),s=doc.getElementById(id);if(s){e.preventDefault();closeD();s.scrollIntoView({behavior:'smooth',block:'start'});}}
+});
+W.addEventListener('popstate',function(e){var pg=(e.state&&e.state.page)||(location.hash||'#home').replace('#','');showPage(PAGES[pg]?pg:'home',{instant:true});});
+function init(){var initial=(location.hash||'#home').replace('#','');if(!PAGES[initial])initial='home';showPage(initial,{instant:true,noScroll:true});observeReveals(doc);observeCounters(doc);onScroll();}
+if(doc.readyState==='loading')doc.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
+</html>

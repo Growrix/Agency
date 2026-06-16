@@ -20,10 +20,20 @@ import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
 
-export function Header() {
+type HeaderProps = {
+  mobileOpen?: boolean;
+  onMobileOpenChange?: (open: boolean) => void;
+};
+
+export function Header({
+  mobileOpen: mobileOpenProp,
+  onMobileOpenChange,
+}: HeaderProps = {}) {
   const openConcierge = useConciergeStore((state) => state.open);
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpenInternal, setMobileOpenInternal] = useState(false);
+  const mobileOpen = mobileOpenProp ?? mobileOpenInternal;
+  const setMobileOpen = onMobileOpenChange ?? setMobileOpenInternal;
   const reduced = useReducedMotion();
 
   useEffect(() => {
@@ -36,7 +46,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
+        "transition-all duration-300",
         scrolled
           ? "border-b border-border bg-surface/85 backdrop-blur"
           : "bg-transparent"
@@ -124,7 +134,7 @@ export function Header() {
           <button
             className="inline-flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-inset lg:hidden"
             aria-label="Toggle menu"
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <XMarkIcon className="size-5" /> : <Bars3Icon className="size-5" />}
           </button>

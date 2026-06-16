@@ -61,7 +61,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Section className="pt-12 sm:pt-16 pb-16 relative overflow-hidden">
+      <Section className="hero-section pt-12 sm:pt-16 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 items-center">

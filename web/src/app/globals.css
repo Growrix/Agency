@@ -80,8 +80,7 @@
 
   --bg-grid-line: rgba(23, 26, 31, 0.04);
   --bg-grid-line-strong: rgba(23, 26, 31, 0.06);
-  --body-radial-1: rgba(15, 118, 110, 0.06);
-  --body-radial-2: rgba(197, 106, 59, 0.05);
+  --body-background-image: none;
 
   --button-outline-bg: var(--c-surface);
   --button-outline-bg-hover: color-mix(in srgb, var(--c-inset) 72%, transparent);
@@ -122,8 +121,9 @@
 
   --bg-grid-line: rgba(255, 255, 255, 0.045);
   --bg-grid-line-strong: rgba(255, 255, 255, 0.07);
-  --body-radial-1: rgba(45, 212, 191, 0.07);
-  --body-radial-2: rgba(232, 137, 90, 0.06);
+  --body-background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(45, 212, 191, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(232, 137, 90, 0.06), transparent 60%);
 
   --button-outline-bg: var(--c-surface);
   --button-outline-bg-hover: color-mix(in srgb, var(--c-inset) 72%, transparent);
@@ -163,8 +163,9 @@
     --c-contrast-muted: rgba(241, 236, 225, 0.6);
     --bg-grid-line: rgba(255, 255, 255, 0.045);
     --bg-grid-line-strong: rgba(255, 255, 255, 0.07);
-    --body-radial-1: rgba(45, 212, 191, 0.07);
-    --body-radial-2: rgba(232, 137, 90, 0.06);
+    --body-background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(45, 212, 191, 0.07), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(232, 137, 90, 0.06), transparent 60%);
     --button-outline-bg: var(--c-surface);
     --button-outline-bg-hover: color-mix(in srgb, var(--c-inset) 72%, transparent);
     --button-outline-text: var(--c-text);
@@ -214,9 +215,20 @@ html {
 }
 
 body {
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, var(--body-radial-1), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, var(--body-radial-2), transparent 60%);
+  background-image: var(--body-background-image, none);
+}
+
+/* Light theme: flat page/hero surfaces — no colored ambient washes */
+[data-theme="light"] .hero-glow,
+[data-theme="light"] .hero-section > .bg-grid {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .hero-glow,
+  :root:not([data-theme]) .hero-section > .bg-grid {
+    display: none;
+  }
 }
 
 /* subtle blueprint grid texture */

@@ -76,7 +76,7 @@ recommended_next_reads:
 - Content alignment: left-led for trust and scanning clarity, centered only for hero and CTA moments.
 
 ## Surface System
-- Page base: warm paper texture with subtle grid noise.
+- Page base: flat warm paper (`#F5F1E8`) with no colored background gradients in light mode; optional subtle grid texture on hero sections in dark mode only.
 - Elevated surface: soft white with hairline border and mild shadow.
 - Inset surface: slightly darker neutral for filters, code wells, and specification panels.
 - Overlay surface: blurred dark translucent sheet for modals, menus, and chat.

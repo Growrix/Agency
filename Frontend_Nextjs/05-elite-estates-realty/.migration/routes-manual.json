@@ -1,0 +1,18 @@
+{
+  "source": "web/shop/html-template-websites/05-EliteEstatesRealty.html",
+  "note": "Template uses data-page hash routing instead of data-route; manual classification derived from PAGES array and route containers.",
+  "routes": [
+    { "route": "home", "tier": "shell", "nextPattern": "/" },
+    { "route": "properties", "tier": "prose", "nextPattern": "/properties" },
+    { "route": "buy", "tier": "prose", "nextPattern": "/buy" },
+    { "route": "rent", "tier": "prose", "nextPattern": "/rent" },
+    { "route": "commercial", "tier": "prose", "nextPattern": "/commercial" },
+    { "route": "agents", "tier": "prose", "nextPattern": "/agents" },
+    { "route": "investment", "tier": "prose", "nextPattern": "/investment" },
+    { "route": "about", "tier": "prose", "nextPattern": "/about" },
+    { "route": "contact", "tier": "interactive", "nextPattern": "/contact", "component": "ContactView" }
+  ],
+  "interactive": ["contact"],
+  "prose": ["properties", "buy", "rent", "commercial", "agents", "investment", "about"],
+  "dynamic": []
+}

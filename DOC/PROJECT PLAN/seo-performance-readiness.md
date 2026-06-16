@@ -53,6 +53,33 @@ Record LCP, INP, CLS, TBT, total network bytes, and the number of iframes
 mounted at initial load for each route, then compare against the success
 criteria below.
 
+### Captured baseline (2026-06-16, production)
+
+The following values were captured against `https://www.growrixos.com` before
+Cloudflare proxy cutover.
+
+#### Network/header baseline
+
+| URL | HTTP | TTFB | Total | Size | Cache-Control | Server/CDN |
+| --- | --- | --- | --- | --- | --- | --- |
+| `/` | 200 | 0.285s | 1.448s | 363,169 B | `public, max-age=0, must-revalidate` | `Server: Vercel`, `X-Vercel-Cache: HIT`, `Age: 227` |
+| `/products/category/website-templates-html-preview` | 200 | 4.127s | 5.660s | 192,211 B | `private, no-cache, no-store, max-age=0, must-revalidate` | `Server: Vercel`, `X-Vercel-Cache: MISS`, `Age: 0` |
+| `/blog` | 200 | 0.949s | 1.409s | 81,120 B | `private, no-cache, no-store, max-age=0, must-revalidate` | `Server: Vercel`, `X-Vercel-Cache: MISS`, `Age: 0` |
+| `/images/home/studio-hero.jpg` | 200 | 1.050s | 2.749s | 241,098 B | `public, max-age=0, must-revalidate` | `Server: Vercel`, `X-Vercel-Cache: HIT`, `Age: 239` |
+| `/previews/html-template-websites/08-VoltCorePower.html` | 200 | 0.545s | 2.375s | 170,197 B | `public, max-age=0, must-revalidate` | `Server: Vercel`, `X-Vercel-Cache: HIT`, `Age: 242` |
+
+#### Lighthouse mobile baseline (production URL)
+
+| Page | Performance | LCP | CLS | TBT |
+| --- | --- | --- | --- | --- |
+| `/` | 52 | 3.70s | 0.000 | 4,764ms |
+| `/products/category/website-templates-html-preview` | 54 | 2.92s | 0.000 | 3,335ms |
+| `/blog` | 89 | 2.49s | 0.000 | 342ms |
+
+Notes:
+- INP was not emitted in this headless run export (`n/a`).
+- `cf-cache-status` is not present yet because Cloudflare proxy is not active.
+
 ## 2. Changes shipped
 
 ### Performance (Phase 1)
@@ -137,3 +164,58 @@ Run before merging preview-affecting changes and before opening the crawl.
 Once every box above is checked, set `SITE_INDEXING_ENABLED=true` (and
 `NEXT_PUBLIC_SITE_URL` if the canonical host differs) in the production
 environment and redeploy. No code change is required to flip indexing on.
+
+## 4. Cloudflare rollout status
+
+### Implemented in codebase
+
+- `web/next.config.ts` now sets explicit cache policy headers for Cloudflare/Vercel edge:
+  - `/previews/**` -> `public, max-age=31536000, immutable`
+  - `/images/**`, `/Favicon.svg`, `/Favicon.png` ->
+    `public, max-age=86400, stale-while-revalidate=604800`
+  - `/api/**`, `/admin/**`, `/dashboard/**`, `/checkout/**`, `/success/**` ->
+    `no-store`
+
+### External Cloudflare state
+
+- Cloudflare account is reachable (`3c79f9ec31a2bc54f0821844897778cd`).
+- `growrixos.com` zone is **active**:
+  - zone id: `03e38f1923d7650dfe466ce708924321`
+  - activated on: `2026-06-16T18:31:45Z`
+  - nameservers: `chance.ns.cloudflare.com`, `sydney.ns.cloudflare.com`
+- DNS records in Cloudflare are configured and proxied:
+  - apex `growrixos.com` -> `7031fc4fc549cbb1.vercel-dns-017.com`
+  - `www.growrixos.com` -> `7031fc4fc549cbb1.vercel-dns-017.com`
+- Cloudflare transport/security settings applied:
+  - `ssl = strict`
+  - `always_use_https = on`
+  - `automatic_https_rewrites = on`
+  - managed WAF ruleset execution enabled
+- Cloudflare rulesets applied:
+  - cache ruleset (`http_request_cache_settings`) with 4 rules:
+    - bypass dynamic/auth/commerce routes and Stripe webhook
+    - cache `/previews/*` for 1 year
+    - cache `/images/*` + favicon for 1 day
+  - rate-limit ruleset (`http_ratelimit`) with one combined rule for:
+    - `/api/v1/contact`
+    - `/api/v1/leads`
+    - `/api/v1/ai-concierge`
+
+### Post-cutover validation (2026-06-16)
+
+| Check | Result |
+| --- | --- |
+| Public NS delegation | `chance.ns.cloudflare.com`, `sydney.ns.cloudflare.com` |
+| `www` resolves to Cloudflare anycast | `104.21.70.20`, `172.67.217.239` |
+| `https://www.growrixos.com/` | `200`, `server: cloudflare`, `cf-ray` present |
+| Apex redirect | `307` -> `https://www.growrixos.com/` |
+| `/Favicon.svg` repeat request | `cf-cache-status: HIT` |
+| `/previews/html-template-websites/08-VoltCorePower.html` | `200`, `x-robots-tag: noindex, nofollow`, repeat `cf-cache-status: HIT` |
+| `/checkout` | `200`, `cf-cache-status: DYNAMIC` (not cached) |
+| `/admin` | `307` -> `/admin/login?next=%2Fadmin` |
+| `/robots.txt`, `/sitemap.xml` | `200` |
+| Homepage TTFB (curl, DAC edge) | ~584 ms start transfer, ~813 ms total |
+
+Note: live origin `Cache-Control` for previews/favicon still shows Vercel defaults
+(`max-age=14400`) until the `next.config.ts` cache-header deploy reaches production.
+Cloudflare edge caching still shows `HIT` on repeat requests.

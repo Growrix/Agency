@@ -385,7 +385,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const related = (await listPublicPortfolio()).filter((p) => p.service === slug).slice(0, 3);
   return (
     <>
-      <Section className="pt-12 sm:pt-16 pb-16 relative overflow-hidden">
+      <Section className="hero-section pt-12 sm:pt-16 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">

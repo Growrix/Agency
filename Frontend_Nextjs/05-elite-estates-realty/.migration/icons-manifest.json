@@ -1,0 +1,72 @@
+{
+  "source": "web/shop/html-template-websites/05-EliteEstatesRealty.html",
+  "totalSvgInstances": 139,
+  "uniquePatterns": 7,
+  "topPatterns": [
+    {
+      "id": 1,
+      "count": 67,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 2"
+    },
+    {
+      "id": 2,
+      "count": 20,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" viewBox=\"0 0 24 2"
+    },
+    {
+      "id": 3,
+      "count": 18,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 2"
+    },
+    {
+      "id": 4,
+      "count": 16,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 0 24 2"
+    },
+    {
+      "id": 5,
+      "count": 12,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"13\" height=\"13\" viewBox=\"0 0 24 2"
+    },
+    {
+      "id": 6,
+      "count": 4,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 2"
+    },
+    {
+      "id": 7,
+      "count": 2,
+      "preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 2"
+    }
+  ],
+  "suggestedComponents": [
+    {
+      "name": "IconCheck",
+      "pattern": "m5 13 4 4L19 7"
+    },
+    {
+      "name": "IconStar",
+      "pattern": "M12 2l2.9 6.9H22"
+    },
+    {
+      "name": "IconPhone",
+      "pattern": "M22 16.9v3a2"
+    },
+    {
+      "name": "IconSun",
+      "pattern": "circle cx=\"12\" cy=\"12\" r=\"4\""
+    },
+    {
+      "name": "IconMenu",
+      "pattern": "M3 6h18M3 12h18"
+    },
+    {
+      "name": "IconClose",
+      "pattern": "M18 6 6 18M6 6l12 12"
+    },
+    {
+      "name": "BrandMark",
+      "pattern": "viewBox=\"0 0 32 32\""
+    }
+  ]
+}

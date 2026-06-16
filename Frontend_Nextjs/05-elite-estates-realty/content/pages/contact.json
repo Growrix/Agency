@@ -1,0 +1,26 @@
+{
+  "slug": "contact",
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Begin your property journey with us.",
+    "lede": "Private consultations are available in person, by video, or by telephone. Every enquiry is handled with complete discretion.",
+    "backgroundImage": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "Contact"
+  },
+  "seo": {
+    "title": "Contact",
+    "description": "Book a private consultation with Elite Estates advisors for buying, renting, commercial, or investment opportunities."
+  },
+  "section": {
+    "eyebrow": "Get in Touch",
+    "title": "Private consultations available worldwide",
+    "lede": "Our advisors are available across all major time zones. Every enquiry is handled with absolute discretion.",
+    "regionalOfficesLabel": "Regional Offices",
+    "contactRows": [
+      { "label": "Main Office", "value": "", "type": "phone" },
+      { "label": "Email", "value": "", "type": "email" },
+      { "label": "Global HQ", "value": "", "type": "location" }
+    ],
+    "regionalOffices": []
+  }
+}

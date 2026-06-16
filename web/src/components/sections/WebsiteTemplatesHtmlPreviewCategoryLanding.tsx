@@ -76,7 +76,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
 
   return (
     <>
-      <Section className="relative overflow-x-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
+      <Section className="hero-section relative overflow-x-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container className="min-w-0">
           <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">

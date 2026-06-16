@@ -1,0 +1,34 @@
+{
+  "slug": "properties",
+  "hero": {
+    "eyebrow": "Properties",
+    "title": "Exceptional listings worldwide.",
+    "lede": "Browse our curated collection of luxury homes, penthouses, villas, and commercial properties across global prime markets.",
+    "backgroundImage": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=80",
+    "breadcrumb": "Properties"
+  },
+  "seo": {
+    "title": "Properties",
+    "description": "Browse curated luxury listings across residential, penthouse, villa, and commercial categories."
+  },
+  "section": {
+    "eyebrow": "Portfolio",
+    "title": "Curated by market specialists",
+    "lede": "Every listing is reviewed for location quality, long-term value potential, and client fit.",
+    "filters": ["All", "Villas", "Penthouses", "Apartments", "Commercial"],
+    "bullets": [
+      "Residential, commercial, and hybrid asset classes",
+      "Private viewing and virtual tour options",
+      "Transaction support from offer to completion"
+    ],
+    "fallbackCard": {
+      "title": "Tailored advisory, every step",
+      "text": "We align every recommendation to your goals, timeline, and risk profile while preserving full confidentiality."
+    }
+  },
+  "cta": {
+    "label": "Speak to an Advisor",
+    "href": "/contact",
+    "accent": true
+  }
+}

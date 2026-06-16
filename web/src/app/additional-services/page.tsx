@@ -138,9 +138,9 @@ export default function AdditionalServicesPage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-12 sm:pt-16 pb-14 relative overflow-hidden">
+      <Section className="hero-section pt-12 sm:pt-16 pb-14 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <div className="pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
+        <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
         <Container>
           <div className="max-w-3xl">
             <Badge tone="primary" dot>SEO Service</Badge>

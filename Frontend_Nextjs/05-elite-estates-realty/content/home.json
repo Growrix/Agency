@@ -1,0 +1,303 @@
+{
+  "seo": {
+    "title": "Home",
+    "description": "Elite Estates represents exceptional properties and global investment opportunities."
+  },
+  "hero": {
+    "eyebrow": "Luxury Real Estate, Worldwide",
+    "title": "Discover extraordinary living.",
+    "lede": "Elite Estates represents the world's most exceptional properties. From Manhattan penthouses to Cote d'Azur villas, your ideal home is within reach.",
+    "backgroundImage": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=2000&q=80",
+    "ctas": [
+      { "label": "Browse Properties", "href": "/properties", "accent": true },
+      { "label": "Book Consultation", "href": "/contact" }
+    ],
+    "searchTabs": [
+      { "label": "Buy", "href": "/buy", "active": true },
+      { "label": "Rent", "href": "/rent" },
+      { "label": "Commercial", "href": "/commercial" }
+    ],
+    "counters": [
+      { "value": "4200+", "label": "Transactions", "counter": 4200 },
+      { "value": "60+", "label": "Countries", "counter": 60 },
+      { "value": "$28B+", "label": "Assets Managed", "counter": 28, "prefix": "$", "suffix": "B+" }
+    ],
+    "searchSubmitHref": "/properties",
+    "searchLabels": {
+      "location": "Location",
+      "propertyType": "Property Type",
+      "budget": "Budget",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "submit": "Search"
+    },
+    "searchFields": {
+      "location": ["Dubai, UAE", "London, UK", "New York, USA", "Singapore", "French Riviera", "All Locations"],
+      "propertyType": ["All Types", "Villa", "Penthouse", "Apartment", "Commercial", "Land"],
+      "budget": ["$1M - $3M", "$3M - $10M", "$10M - $25M", "$25M+"],
+      "bedrooms": ["Any", "1+", "2+", "3+", "4+", "5+"],
+      "bathrooms": ["Any", "2+", "3+", "4+", "5+"]
+    }
+  },
+  "featured": {
+    "eyebrow": "Featured Properties",
+    "title": "Extraordinary homes, exceptional locations",
+    "cta": { "label": "All Listings", "href": "/properties" },
+    "properties": [
+      {
+        "id": "palm-jumeirah-penthouse",
+        "title": "Palm Jumeirah Penthouse",
+        "image": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?auto=format&fit=crop&w=900&q=80",
+        "location": "Palm Jumeirah, Dubai",
+        "price": "$12,500,000",
+        "tag": "Luxury Villa",
+        "status": "For Sale",
+        "beds": "5 BD",
+        "baths": "6 BA",
+        "size": "8,200 sq ft",
+        "ctaLabel": "Enquire",
+        "ctaHref": "/contact"
+      },
+      {
+        "id": "grand-penthouse",
+        "title": "The Grand Penthouse",
+        "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80",
+        "location": "Manhattan, New York",
+        "price": "$8,900,000",
+        "tag": "Penthouse",
+        "status": "For Sale",
+        "beds": "4 BD",
+        "baths": "4 BA",
+        "size": "5,400 sq ft",
+        "ctaLabel": "Enquire",
+        "ctaHref": "/contact"
+      },
+      {
+        "id": "cotedazur-villa",
+        "title": "Cote d'Azur Villa",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
+        "location": "French Riviera, France",
+        "price": "EUR18,000,000",
+        "tag": "Villa Estate",
+        "status": "For Sale",
+        "beds": "7 BD",
+        "baths": "9 BA",
+        "size": "14,000 sq ft",
+        "ctaLabel": "Enquire",
+        "ctaHref": "/contact"
+      }
+    ]
+  },
+  "categories": {
+    "eyebrow": "Property Categories",
+    "title": "Browse by type",
+    "items": [
+      { "id": "luxury-villas", "title": "Luxury Villas", "subtitle": "From $5M", "href": "/properties" },
+      { "id": "apartments", "title": "Apartments", "subtitle": "From $800K", "href": "/properties" },
+      { "id": "penthouses", "title": "Penthouses", "subtitle": "From $3M", "href": "/properties" },
+      { "id": "commercial", "title": "Commercial", "subtitle": "Office and retail", "href": "/commercial" },
+      { "id": "estates", "title": "Estates", "subtitle": "Private and gated", "href": "/properties" },
+      { "id": "new-projects", "title": "New Projects", "subtitle": "Off-plan opportunities", "href": "/properties" },
+      { "id": "land", "title": "Land Plots", "subtitle": "Development ready", "href": "/investment" },
+      { "id": "investment", "title": "Investment", "subtitle": "High-yield focus", "href": "/investment" }
+    ]
+  },
+  "whyUs": {
+    "eyebrow": "Why Elite Estates",
+    "title": "The global standard in luxury real estate",
+    "items": [
+      { "title": "Exclusive Listings", "text": "Access to off-market and pre-launch luxury properties worldwide." },
+      { "title": "Market Expertise", "text": "20+ years of market intelligence across every major global city." },
+      { "title": "Investment Guidance", "text": "Data-driven ROI analysis, yield modeling and portfolio strategy." },
+      { "title": "Luxury Concierge", "text": "White-glove service from first viewing to final key handover." },
+      { "title": "Global Network", "text": "Partnerships with leading agencies in more than 60 countries." },
+      { "title": "Property Management", "text": "End-to-end lettings, maintenance, and tenant management." },
+      { "title": "Negotiation Power", "text": "Clients consistently achieve below-ask pricing." },
+      { "title": "Personalized Service", "text": "Dedicated advisors aligned to your exact requirements." }
+    ]
+  },
+  "markets": {
+    "eyebrow": "Investment Intelligence",
+    "title": "Prime markets. Superior returns.",
+    "lede": "Our investment advisory team analyses global demand and supply data to identify opportunities before they become mainstream.",
+    "cta": { "label": "Explore Opportunities", "href": "/investment", "accent": true },
+    "cardCtaLabel": "Explore",
+    "cardCtaHref": "/investment",
+    "items": [
+      { "name": "Dubai", "yield": "7.2%", "note": "Annual gross yield" },
+      { "name": "London", "yield": "4.8%", "note": "Prime central yield" },
+      { "name": "Singapore", "yield": "5.1%", "note": "Residential yield" },
+      { "name": "Lisbon", "yield": "6.4%", "note": "Tax-advantaged growth" }
+    ]
+  },
+  "developments": {
+    "eyebrow": "New Developments",
+    "title": "Off-plan opportunities",
+    "completionLabel": "Completion",
+    "cardCta": { "label": "Register Interest", "href": "/contact", "accent": true },
+    "items": [
+      {
+        "id": "one-residences",
+        "title": "One Residences",
+        "phase": "Luxury - Q4 2026",
+        "location": "Marina District, Dubai",
+        "completion": "78%",
+        "image": "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        "id": "clarendon",
+        "title": "The Clarendon",
+        "phase": "Boutique - Q2 2026",
+        "location": "Knightsbridge, London",
+        "completion": "92%",
+        "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        "id": "pinnacle-suites",
+        "title": "Pinnacle Suites",
+        "phase": "Ultra-Luxury - Q1 2027",
+        "location": "Orchard Road, Singapore",
+        "completion": "45%",
+        "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80"
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "The Client Journey",
+    "title": "Our proven 7-step process",
+    "steps": [
+      { "step": "1", "title": "Consultation", "text": "Private briefing to understand your goals." },
+      { "step": "2", "title": "Discovery", "text": "Curated shortlist from on and off-market inventory." },
+      { "step": "3", "title": "Viewings", "text": "Private site visits with your dedicated agent." },
+      { "step": "4", "title": "Negotiation", "text": "Expert representation to secure the best terms." },
+      { "step": "5", "title": "Documentation", "text": "Legal due diligence and contract coordination." },
+      { "step": "6", "title": "Closing", "text": "Transaction management to completion." },
+      { "step": "7", "title": "Move-In", "text": "Concierge handover and after-sales support." }
+    ]
+  },
+  "statsBand": [
+    { "value": "4200+", "label": "Properties Sold", "counter": 4200, "suffix": "+" },
+    { "value": "$28B", "label": "Transaction Volume", "counter": 28, "prefix": "$", "suffix": "B" },
+    { "value": "1850+", "label": "Active Listings", "counter": 1850, "suffix": "+" },
+    { "value": "3600+", "label": "Investors Served", "counter": 3600, "suffix": "+" },
+    { "value": "60+", "label": "Countries", "counter": 60, "suffix": "+" }
+  ],
+  "agents": {
+    "eyebrow": "Our Agents",
+    "title": "Expert advisors worldwide",
+    "cardCtaLabel": "Enquire",
+    "cardCtaHref": "/contact"
+  },
+  "testimonials": {
+    "eyebrow": "Client Success Stories",
+    "title": "Results that speak for themselves",
+    "items": [
+      {
+        "id": "jonathan-mercer",
+        "quote": "Victoria and her team found us our dream penthouse in Manhattan. Their market knowledge is unparalleled, and we secured well below asking.",
+        "name": "Jonathan Mercer",
+        "role": "Penthouse Acquisition - NYC"
+      },
+      {
+        "id": "thornton-family",
+        "quote": "Elite Estates managed our commercial portfolio across three cities for six years. The ROI analysis and tenant quality have been outstanding.",
+        "name": "Sarah and David Thornton",
+        "role": "Commercial Portfolio - London"
+      },
+      {
+        "id": "isabella-fontaine",
+        "quote": "After searching for two years, Elite Estates found our Riviera villa in just three months. The concierge support was flawless.",
+        "name": "Isabella Fontaine",
+        "role": "Villa Purchase - French Riviera"
+      },
+      {
+        "id": "wei-chang",
+        "quote": "The investment guidance delivered consistent annual yield growth. They treat your portfolio like their own.",
+        "name": "Wei Chang",
+        "role": "Investment Portfolio - Singapore"
+      }
+    ]
+  },
+  "awards": {
+    "eyebrow": "Awards and Recognition",
+    "items": [
+      { "id": "global-partner", "title": "Sotheby's Global Partner 2025", "subtitle": "International alliance status" },
+      { "id": "gcc-brokerage", "title": "No.1 Luxury Brokerage GCC", "subtitle": "Property Finder Awards" },
+      { "id": "intl-agency", "title": "Best International Agency", "subtitle": "International Property Awards" },
+      { "id": "rics", "title": "RICS Member Firm", "subtitle": "Royal Institution Chartered" }
+    ]
+  },
+  "insights": {
+    "eyebrow": "Real Estate Insights",
+    "title": "Market intelligence",
+    "items": [
+      {
+        "id": "dubai-q1",
+        "category": "Market Trends",
+        "title": "Dubai luxury market records $28B in Q1",
+        "excerpt": "Ultra-high-net-worth demand continues to push transaction volumes in prime residential corridors.",
+        "date": "Jun 2025",
+        "readTime": "5 min read",
+        "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        "id": "london-prime",
+        "category": "Investment",
+        "title": "Why London prime remains a safe haven",
+        "excerpt": "Currency resilience, constrained supply, and institutional demand continue to support central London values.",
+        "date": "May 2025",
+        "readTime": "5 min read",
+        "image": "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=900&q=80"
+      },
+      {
+        "id": "singapore-penthouses",
+        "category": "Luxury Living",
+        "title": "Inside Singapore's super-penthouse boom",
+        "excerpt": "Family offices are driving unprecedented demand for turnkey sky residences with private amenities.",
+        "date": "May 2025",
+        "readTime": "5 min read",
+        "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Common questions",
+    "lede": "Answers to what our global clients ask us most often.",
+    "cta": { "label": "Speak with an agent", "href": "/contact" },
+    "items": [
+      {
+        "question": "How do you access off-market listings?",
+        "answer": "Our private global network and developer relationships provide opportunities that never reach public portals."
+      },
+      {
+        "question": "Do you assist international buyers?",
+        "answer": "Yes. We support clients across 60+ countries with multilingual advisors and cross-border legal coordination."
+      },
+      {
+        "question": "What investment returns can I expect?",
+        "answer": "Returns vary by market and asset class. We provide data-backed ROI modeling before every acquisition."
+      },
+      {
+        "question": "How does the search process work?",
+        "answer": "We run a confidential briefing, curate options, coordinate private viewings, and negotiate on your behalf."
+      },
+      {
+        "question": "Do you offer property management?",
+        "answer": "Yes. We provide tenant sourcing, rent administration, maintenance coordination, and reporting."
+      },
+      {
+        "question": "What documentation is required to buy?",
+        "answer": "Typically identity verification, proof of funds, and financing documentation where applicable."
+      }
+    ]
+  },
+  "ctaBand": {
+    "title": "Find your extraordinary property.",
+    "lede": "Join thousands of discerning clients who trust Elite Estates to deliver the world's finest real estate opportunities.",
+    "actions": [
+      { "label": "Book a Private Consultation", "href": "/contact", "accent": true },
+      { "label": "Browse Properties", "href": "/properties" }
+    ]
+  }
+}

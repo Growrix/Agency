@@ -15,13 +15,19 @@ Parse command arguments as the source HTML path (e.g. `sites/02. sunterra-solar-
 5. **Migrate**: delegate to `nextjs-migration-architect` with:
    - Source HTML path
    - Target folder path
-   - Instruction to follow `nextjs-site-migrator` skill phases 2–8
+   - Instruction to follow `nextjs-site-migrator` skill phases 2–9
    - Phase 3: delegate `tailwind-design-system-architect` for token port
-   - Phase 7: full Next.js audit trio before delivery
-6. **Confirm**: report source path, target path, MIGRATION-MAP summary, routes migrated, and audit status.
+   - Phase 7: full Next.js audit trio before delivery, with **zero P0/P1 blockers**
+   - Phase 9: visual parity gate before delivery, with **zero P0/P1 blockers**
+6. **Dev server validation (required)**:
+   - Check existing terminals first for a running `pnpm dev` in the target folder.
+   - If already running for the same migrated site, **do not start a duplicate**; validate readiness from logs and confirm HTTP `200` from `http://localhost:3000` (or active port).
+   - If not running, start `pnpm dev`, wait for readiness (`Ready`/`Local` log), then confirm HTTP `200`.
+7. **Confirm**: report source path, target path, MIGRATION-MAP summary, routes migrated, gate status (P0/P1), and dev-server validation status.
 
 ## Do not
 
 - Modify the source HTML file
 - Use `frontend-architect` for this workflow
 - Mix HTML tech contract into Next.js output
+- Start duplicate dev servers for the same migrated site

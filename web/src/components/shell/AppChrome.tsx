@@ -1,10 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Header } from "@/components/shell/Header";
+import { SiteTopChrome } from "@/components/shell/SiteTopChrome";
 import { Footer } from "@/components/shell/Footer";
 import { MobileBottomNav } from "@/components/shell/MobileBottomNav";
-import { UtilityRibbon } from "@/components/shell/UtilityRibbon";
 import { ChatLauncher } from "@/components/shell/ChatLauncher";
 import { ConciergeModal } from "@/components/ai/ConciergeModal";
 import { RouteTransition } from "@/components/motion/Motion";
@@ -19,8 +18,7 @@ export function AppChrome({ children }: AppChromeProps) {
 
   return (
     <>
-      {!isAdminSurface && <UtilityRibbon />}
-      {!isAdminSurface && <Header />}
+      {!isAdminSurface && <SiteTopChrome key={pathname} />}
       <main id="main" className={isAdminSurface ? "flex-1" : "flex-1 pb-24 lg:pb-0"}>
         <RouteTransition>{children}</RouteTransition>
       </main>

@@ -1,0 +1,32 @@
+{
+  "headings": {
+    "title": "Book a Private Consultation",
+    "privacyNote": "All enquiries are handled with strict confidentiality.",
+    "successMessage": "Submitted successfully. Our advisory team will contact you shortly."
+  },
+  "fields": {
+    "fullNameLabel": "Full name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "budgetLabel": "Budget range",
+    "enquiryTypeLabel": "Enquiry type",
+    "locationLabel": "Preferred location",
+    "requirementsLabel": "Requirements"
+  },
+  "options": {
+    "budget": ["$500K - $1M", "$1M - $3M", "$3M - $10M", "$10M - $25M", "$25M+"],
+    "enquiryType": ["Buying", "Renting", "Investment", "Commercial", "Property Management"],
+    "preferredLocation": ["Dubai", "London", "New York", "Singapore", "French Riviera", "Other"]
+  },
+  "placeholders": {
+    "fullName": "Jonathan Mercer",
+    "email": "j.mercer@email.com",
+    "phone": "+1 (555) 000-0000",
+    "requirements": "Describe your ideal property..."
+  },
+  "validation": {
+    "required": "This field is required.",
+    "invalidEmail": "Please enter a valid email address."
+  },
+  "submitLabel": "Submit Consultation Request"
+}
