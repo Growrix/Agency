@@ -14,7 +14,8 @@ export function SiteTopChrome() {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    setReady(true);
+    const id = window.setTimeout(() => setReady(true), 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   const hidden = !mobileOpen && !chromeVisible;
