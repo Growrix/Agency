@@ -84,7 +84,7 @@ export function HtmlBusinessProfilesCategoryLanding({
     <>
       <HtmlBusinessProfilesCategoryHero products={products} />
 
-      <Section id="profiles" tone="inset" className="py-10 sm:py-14">
+      <Section id="profiles" size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured profiles"
@@ -106,7 +106,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section id="pricing" className="py-14 sm:py-16">
+      <Section id="pricing" size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow="Pricing"
@@ -170,7 +170,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section className="py-14 sm:py-16">
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow="Why business profiles"
@@ -248,7 +248,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading eyebrow="What's included" title="Every profile includes" align="center" />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -264,7 +264,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section id="customization" className="py-14 sm:py-16">
+      <Section id="customization" size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow="Customization options"
@@ -289,7 +289,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="Upgrade path" title="Start small. Grow later." align="center" />
           <div className="mt-10 space-y-3">
@@ -305,7 +305,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section className="py-14 sm:py-16">
+      <Section size="standard" layout="viewport">
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need More Than a Business Profile?</h2>
@@ -323,7 +323,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section id="faq" tone="inset">
+      <Section id="faq" size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="HTML Business Profiles questions, answered." align="center" />
           <div className="mt-10">

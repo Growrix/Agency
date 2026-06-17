@@ -6,7 +6,7 @@ import { THREE_PATH_ROWS } from "@/lib/product-led-content";
 
 export function ThreePathExplainer() {
   return (
-    <Section tone="inset">
+    <Section size="standard" layout="viewport" tone="inset">
       <Container>
         <SectionHeading
           eyebrow="Choose your path"

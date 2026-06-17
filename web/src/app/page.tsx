@@ -123,7 +123,7 @@ export default async function Home() {
     <>
       <JsonLd data={homeStructuredData} />
       {/* Hero */}
-      <Section className="hero-section pt-12 sm:pt-16 lg:pt-20 pb-20 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
         <div className="hero-glow pointer-events-none absolute right-12 top-24 h-40 w-40 rounded-full bg-secondary/20 blur-3xl" aria-hidden />
@@ -197,6 +197,7 @@ export default async function Home() {
         showBackLink={false}
         profilesAnchorId="profiles"
         autoPlayCarousel={false}
+        sectionSize="standard"
       />
 
       <TrustBar />
@@ -219,7 +220,7 @@ export default async function Home() {
 
       <ServiceCards services={services} />
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
@@ -257,7 +258,7 @@ export default async function Home() {
       </Section>
 
       {/* Featured Builds */}
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading
               eyebrow={homeContent?.featuredBuilds?.eyebrow ?? "Featured builds"}
@@ -283,7 +284,7 @@ export default async function Home() {
 
       {/* # muted by request: keep Live SaaS section in code but hide on homepage */}
       {SHOW_LIVE_SAAS_SECTION ? (
-        <Section tone="inset">
+        <Section size="standard" layout="viewport" tone="inset">
           <Container>
             <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
               <SectionHeading
@@ -350,7 +351,7 @@ export default async function Home() {
       ) : null}
 
       {/* Process */}
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="How we work"
@@ -364,7 +365,7 @@ export default async function Home() {
       </Section>
 
       {/* AI + Live Chat */}
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 items-center">
             <div className="lg:col-span-5">
@@ -419,7 +420,7 @@ export default async function Home() {
       <Testimonials />
 
       {SHOW_GOOGLE_REVIEWS && (
-        <Section>
+        <Section size="standard" layout="viewport">
           <Container>
             <GoogleReviews
               eyebrow="Voices"
@@ -431,7 +432,7 @@ export default async function Home() {
       )}
 
       {/* Field notes (Blog) */}
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading

@@ -88,7 +88,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Section className="hero-section pt-12 sm:pt-16 pb-12 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="max-w-3xl">
@@ -111,7 +111,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section className="py-8">
+      <Section size="compact">
         <Container>
           <SectionHeading eyebrow="Channels" title="Pick the route that fits." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -150,7 +150,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section id="form" tone="inset">
+      <Section id="form" size="standard" layout="viewport" tone="inset">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -248,7 +248,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Common questions before you write." align="center" />
           <div className="mt-10">

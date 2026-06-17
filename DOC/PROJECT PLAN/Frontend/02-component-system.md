@@ -94,6 +94,15 @@ recommended_next_reads:
 - Must support editorial heading, value stack, proof, media panel, and dual CTA logic.
 - Variants: service hero, product hero, portfolio hero, utility hero.
 
+### Section primitive contract
+- `Section` owns rhythm and viewport behavior through explicit props:
+  - `size`: `hero | standard | compact | dense | none`
+  - `layout`: `content | viewport`
+  - `tone`: `default | inset | dark`
+- `layout="viewport"` applies desktop-first full-screen sections (`lg+`) using chrome-aware min-height.
+- `layout="content"` is the default for utility flows and compact bands.
+- Avoid ad-hoc `py-*` section overrides in page files; prefer `size` variants to keep spacing deterministic.
+
 ### FeatureSection and ContentSection
 - Support text-plus-media, cards, comparison rows, and process storytelling.
 - Responsive rule: preserve content order and readability without collapsing meaning.

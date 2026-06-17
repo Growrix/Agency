@@ -85,7 +85,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
   return (
     <>
       {/* Hero / featured */}
-      <Section className="hero-section pt-12 sm:pt-16 pb-10 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="max-w-2xl">
@@ -158,7 +158,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
       </Section>
 
       {/* Grid + sidebar */}
-      <Section className="py-12">
+      <Section size="standard" layout="viewport">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">

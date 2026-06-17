@@ -23,10 +23,10 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
   autoPlayMobileCarousel = true,
 }: WebsiteTemplateHtmlPreviewShowcaseSectionsProps) {
   return (
-    <>
-      {showDesktopSection ? (
-        <Section className="overflow-x-hidden pt-10 pb-8 sm:pt-14 sm:pb-10">
-          <Container className="min-w-0">
+    <Section size="standard" layout="viewport" className="overflow-x-hidden">
+      <Container className="min-w-0">
+        {showDesktopSection ? (
+          <>
             <div className="flex flex-col gap-3 text-center">
               <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-balance">
                 Desktop and mobile preview, side by side
@@ -36,33 +36,24 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
                 mobile form before moving into purchase or customization.
               </p>
             </div>
-
             <div className="mt-8 min-w-0 w-full">
               <WebsiteTemplateHtmlDesktopPreviewBlock
                 slides={slides}
                 emptyFallbackSlide={emptyFallbackSlide}
               />
             </div>
-          </Container>
-        </Section>
-      ) : null}
+          </>
+        ) : null}
 
-      <Section
-        className={
-          showMobileSectionDivider
-            ? "overflow-x-hidden border-t border-border py-10 sm:py-12"
-            : "overflow-x-hidden py-10 sm:py-12"
-        }
-      >
-        <Container>
+        <div className={showDesktopSection && showMobileSectionDivider ? "mt-8 border-t border-border pt-8" : "mt-8"}>
           <WebsiteTemplateHtmlMobilePreviewBlock
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
             reverseLayout={reverseMobileLayout}
             autoPlay={autoPlayMobileCarousel}
           />
-        </Container>
-      </Section>
-    </>
+        </div>
+      </Container>
+    </Section>
   );
 }

@@ -38,7 +38,12 @@ export function FeaturedProducts({
   const isHtmlPreview = variant === "html-preview";
 
   return (
-    <Section tone={isHtmlPreview ? "inset" : undefined} className={isHtmlPreview ? "overflow-x-hidden py-10 sm:py-14" : undefined}>
+    <Section
+      size="standard"
+      layout="viewport"
+      tone={isHtmlPreview ? "inset" : undefined}
+      className={isHtmlPreview ? "overflow-x-hidden" : undefined}
+    >
       <Container className={isHtmlPreview ? "min-w-0" : undefined}>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading eyebrow={eyebrow} title={title} description={description} />

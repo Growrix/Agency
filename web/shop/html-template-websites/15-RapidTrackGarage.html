@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RapidTrack Garage — 24/7 Emergency Garage Door Repair &amp; Same-Day Service</title>
+<meta name="description" content="RapidTrack Garage — real-time garage door dispatch. Emergency spring repair, opener repair, off-track doors, new installation &amp; smart openers. 24/7 response, average 43-min arrival. Licensed, insured, certified technicians."/>
+<meta name="keywords" content="garage door repair, emergency garage door, broken spring repair, garage door opener repair, off track garage door, same day garage door service, garage door installation, smart garage opener"/>
+<meta property="og:title" content="RapidTrack Garage — We're Already On The Way"/>
+<meta property="og:description" content="Real-time garage door dispatch with 43-minute average arrival. Emergency repair, spring replacement, opener service &amp; same-day installation."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --steel:#101820;--steel2:#0A0F16;--graphite:#1F2937;--graphite2:#283544;
+  --orange:#FF6B00;--orange-h:#E55F00;--orange-t:#FF8124;
+  --blue:#00A8CC;--blue-t:#00C2EB;--blue-raw:#00D4FF;
+  --green:#16A34A;--green-t:#22C55E;--amber:#F59E0B;--amber-t:#FBBF24;--red:#DC2626;--red-t:#EF4444;
+  --bg:#F7F8FA;--surface:#FFFFFF;--surface2:#EDF0F4;--elevated:#FFFFFF;
+  --border:#DBE1E9;--borders:#C2CBD7;
+  --text:#101820;--muted:#52606D;--faint:#8A97A6;
+  --on-steel:#E8EDF2;--on-steel-mut:rgba(232,237,242,.62);
+  --fd:'Bebas Neue',sans-serif;--fb:'Inter',sans-serif;--fm:'JetBrains Mono',monospace;
+  --rc:16px;--rb:12px;--ri:11px;--maxw:1440px;
+  --shadow:0 4px 18px rgba(16,24,32,.08);--shadow-lg:0 24px 60px rgba(16,24,32,.16);
+  --grid-line:rgba(16,24,32,.05);
+}
+[data-theme=dark]{
+  --orange:#FF7A1A;--orange-h:#FF6B00;--orange-t:#FF9347;
+  --blue:#22C8EE;--blue-t:#5BDCF7;--blue-raw:#00D4FF;
+  --green:#22C55E;--green-t:#4ADE80;--amber:#FBBF24;--amber-t:#FCD34D;--red:#F87171;--red-t:#FCA5A5;
+  --bg:#0A0F16;--surface:#101820;--surface2:#1A2330;--elevated:#141C26;
+  --border:#243040;--borders:#324153;
+  --text:#E8EDF2;--muted:#9AA8B8;--faint:#5C6B7D;
+  --on-steel:#E8EDF2;--on-steel-mut:rgba(232,237,242,.62);
+  --shadow:0 4px 18px rgba(0,0,0,.45);--shadow-lg:0 24px 60px rgba(0,0,0,.6);
+  --grid-line:rgba(0,212,255,.05);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;line-height:1.5;transition:background .35s,color .35s;overflow-x:hidden}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}input,select,textarea{font-family:inherit}
+::selection{background:var(--orange);color:#fff}
+h1,h2,h3{font-family:var(--fd);font-weight:400;letter-spacing:.01em;line-height:.96}
+.skip{position:absolute;left:12px;top:-60px;background:var(--orange);color:#fff;padding:10px 16px;border-radius:10px;z-index:400;transition:top .2s;font-weight:600;font-size:14px}
+.skip:focus{top:12px}
+*:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:4px}
+.container{max-width:var(--maxw);margin:0 auto;padding-inline:clamp(16px,4vw,64px)}
+.section{padding-block:clamp(60px,8vw,104px)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--fm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);font-weight:600}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--orange);flex-shrink:0}
+.eyebrow.blue{color:var(--blue)}.eyebrow.blue::before{background:var(--blue)}
+.h-d{font-family:var(--fd);font-weight:400;font-size:clamp(2.6rem,6vw,4.4rem);line-height:.94;letter-spacing:.015em;color:var(--text);margin-top:14px}
+.h-d .ac{color:var(--orange)}.h-d .bl{color:var(--blue)}
+.h-sub{color:var(--muted);font-size:17px;line-height:1.65;margin-top:16px;max-width:600px}
+.center{text-align:center}.center .h-sub{margin-inline:auto}
+.mono-label{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fb);font-weight:600;font-size:14px;padding:13px 24px;border-radius:var(--rb);border:1.5px solid transparent;line-height:1;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn svg{width:17px;height:17px;flex-shrink:0}
+.btn-p{background:var(--orange);color:#fff;box-shadow:0 10px 26px -10px rgba(255,107,0,.6)}.btn-p:hover{background:var(--orange-h)}
+.btn-blue{background:var(--blue);color:#03252E;box-shadow:0 10px 26px -10px rgba(0,168,204,.55)}.btn-blue:hover{filter:brightness(1.06)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 26px -10px rgba(220,38,38,.5)}.btn-red:hover{filter:brightness(1.05)}
+.btn-s{background:transparent;color:var(--text);border-color:var(--borders)}.btn-s:hover{background:var(--surface2);border-color:var(--orange)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28);backdrop-filter:blur(8px)}.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.btn-lg{padding:15px 30px;font-size:15px}.btn-sm{padding:10px 17px;font-size:13px}
+.btn-full{width:100%}
+.btn-ico{width:42px;height:42px;padding:0;border-radius:11px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);display:grid;place-items:center;transition:all .2s;flex-shrink:0}
+.btn-ico:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ---- forms ---- */
+.f-label{display:block;font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;font-weight:500}
+.f-input{width:100%;font-family:var(--fb);font-size:14px;color:var(--text);background:var(--bg);border:1.5px solid var(--border);border-radius:var(--ri);padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+.f-input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,107,0,.12)}
+.f-input::placeholder{color:var(--faint)}
+select.f-input{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A97A6' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+
+/* ---- chips ---- */
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:.02em;padding:8px 14px;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:var(--orange);color:var(--text)}
+.chip.on{background:var(--orange);border-color:var(--orange);color:#fff}
+.chip.on.blue{background:var(--blue);border-color:var(--blue);color:#03252E}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:5px 11px;border-radius:7px}
+.tag-green{background:rgba(22,163,74,.12);color:var(--green)}
+.tag-orange{background:rgba(255,107,0,.12);color:var(--orange)}
+.tag-blue{background:rgba(0,168,204,.14);color:var(--blue)}
+.tag-red{background:rgba(220,38,38,.12);color:var(--red)}
+.tag-amber{background:rgba(245,158,11,.14);color:var(--amber)}
+
+/* ---- live status dot ---- */
+.dot{width:9px;height:9px;border-radius:50%;background:var(--green);position:relative;flex-shrink:0}
+.dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:var(--green);opacity:.4;animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{75%,100%{transform:scale(2.4);opacity:0}}
+
+/* ---- ticker / announcement ---- */
+.ticker-wrap{background:var(--steel);overflow:hidden;height:42px;position:relative;border-bottom:1px solid rgba(0,212,255,.14)}
+.ticker-status{position:absolute;left:0;top:0;bottom:0;z-index:3;display:flex;align-items:center;gap:9px;padding:0 18px;background:var(--steel);font-family:var(--fm);font-size:11.5px;font-weight:600;color:var(--green-t);border-right:1px solid rgba(0,212,255,.14);white-space:nowrap}
+.ticker-status::after{content:'';position:absolute;right:-22px;top:0;bottom:0;width:22px;background:linear-gradient(90deg,var(--steel),transparent)}
+.ticker{display:flex;align-items:center;height:42px;white-space:nowrap;animation:ticker 40s linear infinite;padding-left:230px}
+.ticker:hover{animation-play-state:paused}
+.t-item{display:inline-flex;align-items:center;gap:11px;padding-inline:26px;font-family:var(--fm);font-size:11.5px;color:var(--on-steel-mut);font-weight:500}
+.t-item b{color:var(--orange-t);font-weight:600}
+.t-sep{width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0;box-shadow:0 0 8px var(--orange)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media(max-width:640px){.ticker-status{font-size:10.5px;padding:0 12px}.ticker{padding-left:170px}}
+
+/* ---- navbar ---- */
+.navbar{position:sticky;top:0;z-index:80;background:var(--bg);transition:background .3s,box-shadow .3s,border-color .3s;border-bottom:1px solid transparent}
+.navbar.scrolled{box-shadow:var(--shadow);border-color:var(--border)}
+[data-theme=dark] .navbar.scrolled{background:rgba(10,15,22,.92);backdrop-filter:saturate(170%) blur(14px)}
+[data-theme=light] .navbar.scrolled{background:rgba(247,248,250,.9);backdrop-filter:saturate(170%) blur(14px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:42px;height:42px;border-radius:11px;background:var(--steel);display:grid;place-items:center;flex-shrink:0;overflow:hidden;position:relative;box-shadow:0 4px 14px -4px rgba(16,24,32,.5)}
+.logo-door{position:absolute;inset:5px;display:flex;flex-direction:column;gap:2px;justify-content:flex-end}
+.logo-slat{height:4px;border-radius:1px;background:var(--orange);opacity:.9;animation:logoSlat 3.5s ease-in-out infinite}
+.logo-slat:nth-child(1){animation-delay:0s}.logo-slat:nth-child(2){animation-delay:.12s;background:var(--orange-t)}.logo-slat:nth-child(3){animation-delay:.24s;background:var(--blue)}.logo-slat:nth-child(4){animation-delay:.36s;background:var(--blue)}
+@keyframes logoSlat{0%,82%,100%{transform:scaleY(1);opacity:.9}88%{transform:scaleY(.15);opacity:.4}}
+.logo-text{font-family:var(--fd);font-size:26px;color:var(--text);letter-spacing:.02em;line-height:1}.logo-text .ac{color:var(--orange)}
+.logo-sub{font-family:var(--fm);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:3px}
+.nav-link{font-size:13.5px;font-weight:500;color:var(--muted);padding:9px 13px;border-radius:9px;transition:color .2s,background .2s}
+.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2)}
+.nav-acts{display:flex;align-items:center;gap:9px}
+.nav-call{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15}
+.nav-call .lbl{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.nav-call .num{font-family:var(--fd);font-size:21px;color:var(--text);letter-spacing:.02em}
+.hamburger{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);display:none;place-items:center;cursor:pointer}
+.btn-desktop{display:inline-flex}
+@media(max-width:1100px){.nav-links{display:none}.hamburger{display:grid}.nav-call{display:none}}
+@media(max-width:560px){.btn-desktop{display:none}}
+
+/* ---- drawer ---- */
+.drawer{position:fixed;inset:0;z-index:120;background:var(--bg);padding:22px;flex-direction:column;transform:translateX(100%);transition:transform .38s cubic-bezier(.16,1,.3,1);display:none;overflow-y:auto}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.drawer-links{display:grid;gap:2px}
+.drawer-link{display:flex;justify-content:space-between;align-items:center;font-family:var(--fd);font-size:30px;color:var(--text);padding:13px 0;border-bottom:1px solid var(--border);letter-spacing:.02em}
+.drawer-link .num{font-family:var(--fm);font-size:12px;color:var(--faint);font-weight:500}
+.drawer-link:hover{color:var(--orange)}
+
+/* ---- bottom nav (mobile) ---- */
+.bottom-nav{position:fixed;left:10px;right:10px;bottom:10px;z-index:110;background:var(--elevated);border:1px solid var(--border);border-radius:18px;box-shadow:0 16px 40px -14px rgba(16,24,32,.34);padding:7px 5px;display:none;justify-content:space-around}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);padding:6px 8px;flex:1;transition:color .2s;font-size:10px;font-weight:600;text-decoration:none;position:relative}
+.bn-item svg{width:21px;height:21px;flex-shrink:0;transition:transform .2s}
+.bn-item.active{color:var(--orange)}.bn-item.active svg{transform:translateY(-2px) scale(1.08)}
+.bn-item.call-hl{color:var(--red)}
+.bn-item.call-hl svg{animation:callPulse 1.8s ease-in-out infinite}
+@keyframes callPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
+@media(max-width:1100px){.bottom-nav{display:flex}main{padding-bottom:84px}}
+
+/* ---- FAB ---- */
+.fab-wrap{position:fixed;right:18px;bottom:24px;z-index:100;display:flex;flex-direction:column;align-items:center;gap:11px}
+@media(max-width:1100px){.fab-wrap{bottom:90px}}
+.fab-main{width:56px;height:56px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(255,107,0,.6),0 0 0 4px rgba(255,107,0,.1);cursor:pointer;transition:transform .2s,background .2s}
+.fab-main:hover{transform:scale(1.08)}.fab-main.open{background:var(--graphite)}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:11px;overflow:hidden;max-height:0;opacity:0;transition:max-height .4s cubic-bezier(.16,1,.3,1),opacity .3s}
+.fab-opts.open{max-height:340px;opacity:1}
+.fab-opt{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s;text-decoration:none;position:relative}
+.fab-opt:hover{transform:scale(1.1)}
+.fab-opt.call{background:var(--red);color:#fff}.fab-opt.wa{background:#25D366;color:#fff}
+.fab-opt.ai{background:linear-gradient(135deg,var(--blue),var(--steel));color:#fff}
+.fab-opt.top{background:var(--surface);color:var(--text);border:1.5px solid var(--border);display:none}
+.fab-tip{position:absolute;right:58px;top:50%;transform:translateY(-50%) translateX(4px);background:var(--steel);color:#fff;font-family:var(--fm);font-size:11px;padding:6px 11px;border-radius:8px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ---- reveal + spa ---- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.spa-page{display:none;animation:pageIn .4s cubic-bezier(.16,1,.3,1)}
+.spa-page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---- grids ---- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.5vw,44px)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:980px){.grid3,.grid4{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr;gap:32px}}
+@media(max-width:560px){.grid3,.grid4{grid-template-columns:1fr}}
+
+/* ===== HERO + SIGNATURE GARAGE DOOR ===== */
+.hero{position:relative;background:var(--steel);overflow:hidden;color:var(--on-steel)}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.045) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at 60% 40%,#000,transparent 78%)}
+.hero-glow{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-glow.a{top:-120px;right:-60px;background:radial-gradient(circle,rgba(0,212,255,.22),transparent 70%)}
+.hero-glow.b{bottom:-160px;left:-80px;background:radial-gradient(circle,rgba(255,107,0,.16),transparent 70%)}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.04fr .96fr;gap:clamp(28px,4vw,56px);align-items:center;padding-block:clamp(48px,7vw,84px)}
+.hero-h1{font-family:var(--fd);font-size:clamp(3rem,7.2vw,5.6rem);line-height:.9;letter-spacing:.012em;color:#fff;margin-top:18px}
+.hero-h1 .ac{color:var(--orange-t)}.hero-h1 .bl{color:var(--blue-t)}
+.hero-sub{color:var(--on-steel-mut);font-size:clamp(15px,1.7vw,18px);line-height:1.62;margin-top:18px;max-width:480px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:28px}
+.hero-trust{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px}
+.hero-trust span{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--on-steel-mut)}
+.hero-trust svg{width:15px;height:15px;color:var(--blue-t);flex-shrink:0}
+
+/* live dispatch console card (left readout) */
+.dispatch-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);padding:8px 15px;border-radius:999px;font-family:var(--fm);font-size:11.5px;font-weight:600;color:var(--blue-t);letter-spacing:.04em}
+
+/* === SIGNATURE: garage door panel (right) === */
+.door-frame{position:relative;background:linear-gradient(180deg,#070B11,#0E141C);border:1px solid rgba(0,212,255,.16);border-radius:18px;padding:14px;box-shadow:0 30px 70px -24px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04)}
+.door-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 12px}
+.door-head .ttl{font-family:var(--fm);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-steel-mut)}
+.door-head .live{display:flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10.5px;color:var(--green-t);font-weight:600}
+.door-opening{position:relative;height:clamp(300px,40vw,380px);border-radius:12px;overflow:hidden;background:#05080C}
+/* the rolling door slats */
+.door-slats{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;transform-origin:top;animation:doorRoll 2.6s cubic-bezier(.7,0,.3,1) .5s forwards}
+.door-slat{flex:1;background:linear-gradient(180deg,#222C38 0%,#1A232E 48%,#11181F 52%,#1E2833 100%);border-bottom:1px solid rgba(0,0,0,.55);box-shadow:inset 0 2px 3px rgba(255,255,255,.05),inset 0 -2px 3px rgba(0,0,0,.4);position:relative}
+.door-slat::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,212,255,.06)}
+@keyframes doorRoll{0%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+.door-handle{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:54px;height:9px;border-radius:5px;background:var(--orange);box-shadow:0 0 14px rgba(255,107,0,.6);z-index:4;animation:handleUp 2.6s cubic-bezier(.7,0,.3,1) .5s forwards}
+@keyframes handleUp{0%{top:14px;opacity:1}90%{opacity:1}100%{top:-20px;opacity:0}}
+/* live map revealed inside the garage opening */
+.dispatch-map{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 60%,#0B2733,#05080C 75%)}
+.map-roads{position:absolute;inset:0;opacity:.5}
+.radar-sweep{position:absolute;left:50%;top:55%;width:240px;height:240px;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 0deg,rgba(0,212,255,.28),transparent 40%);animation:radar 4s linear infinite;mix-blend-mode:screen}
+@keyframes radar{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.radar-ring{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);border:1px solid rgba(0,212,255,.18);border-radius:50%}
+.tech-pin{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--green-t);box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:pinPulse 2.2s ease-out infinite;z-index:2}
+.tech-pin.busy{background:var(--amber-t);animation-delay:.6s}
+.tech-pin.you{background:var(--orange);width:13px;height:13px;animation-delay:.3s}
+@keyframes pinPulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}100%{box-shadow:0 0 0 16px rgba(34,197,94,0)}}
+.map-overlay{position:absolute;left:12px;bottom:12px;z-index:3;display:flex;flex-direction:column;gap:6px}
+.map-stat{display:flex;align-items:center;gap:8px;background:rgba(7,11,17,.78);border:1px solid rgba(0,212,255,.16);border-radius:9px;padding:7px 11px;font-family:var(--fm);font-size:10.5px;color:var(--on-steel);backdrop-filter:blur(6px)}
+.map-stat b{color:var(--blue-t);font-weight:600}
+.map-eta{position:absolute;right:12px;top:12px;z-index:3;background:rgba(255,107,0,.92);color:#fff;border-radius:10px;padding:9px 13px;text-align:right;box-shadow:0 8px 20px -8px rgba(255,107,0,.6)}
+.map-eta .n{font-family:var(--fd);font-size:26px;line-height:1}.map-eta .l{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+
+/* ===== DIAGNOSIS TOOL ===== */
+.diag{background:var(--steel);border-radius:var(--rc);overflow:hidden;position:relative;box-shadow:var(--shadow-lg)}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:880px){.diag-grid{grid-template-columns:1fr}}
+.diag-left{padding:clamp(26px,3.5vw,40px);color:var(--on-steel);position:relative;overflow:hidden}
+.diag-left .hero-grid-bg{mask-image:none;opacity:.6}
+.diag-right{padding:clamp(26px,3.5vw,40px);background:var(--surface);border-left:1px solid var(--border)}
+@media(max-width:880px){.diag-right{border-left:none;border-top:1px solid var(--border)}}
+.sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:22px}
+@media(max-width:480px){.sym-grid{grid-template-columns:1fr}}
+.sym{display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--rb);border:1.5px solid rgba(232,237,242,.14);background:rgba(232,237,242,.04);cursor:pointer;transition:all .18s;text-align:left;width:100%}
+.sym:hover{border-color:var(--orange);background:rgba(255,107,0,.08)}
+.sym.on{border-color:var(--orange);background:rgba(255,107,0,.14);box-shadow:0 0 0 1px var(--orange)}
+.sym-ico{width:38px;height:38px;border-radius:10px;background:rgba(0,212,255,.12);display:grid;place-items:center;color:var(--blue-t);flex-shrink:0}
+.sym.on .sym-ico{background:var(--orange);color:#fff}
+.sym-t{font-weight:600;font-size:14px;color:#fff}
+.sym-d{font-family:var(--fm);font-size:10.5px;color:var(--on-steel-mut);margin-top:2px}
+.diag-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:300px;color:var(--muted)}
+.diag-empty svg{width:46px;height:46px;color:var(--faint);margin-bottom:14px}
+.diag-out{display:none}.diag-out.show{display:block;animation:pageIn .4s}
+.diag-readout{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.ro-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--rb);padding:15px}
+.ro-card .l{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.ro-card .v{font-family:var(--fd);font-size:30px;color:var(--text);line-height:1;margin-top:6px}
+.ro-card .v.sm{font-size:22px}
+.prio-bar{height:8px;border-radius:999px;background:var(--surface2);overflow:hidden;margin-top:9px}
+.prio-fill{height:100%;border-radius:999px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+
+/* ===== METRICS DASHBOARD ===== */
+.metrics{background:var(--steel);position:relative;overflow:hidden}
+.metric-card{background:rgba(232,237,242,.04);border:1px solid rgba(0,212,255,.14);border-radius:var(--rc);padding:24px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+.metric-card:hover{border-color:rgba(0,212,255,.4);transform:translateY(-3px)}
+.metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--blue))}
+.metric-ico{width:42px;height:42px;border-radius:11px;background:rgba(0,212,255,.1);display:grid;place-items:center;color:var(--blue-t);margin-bottom:16px}
+.metric-n{font-family:var(--fd);font-size:clamp(2.4rem,4.4vw,3.2rem);color:#fff;line-height:1;letter-spacing:.01em}
+.metric-n .suf{color:var(--orange-t)}
+.metric-l{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-steel-mut);margin-top:8px}
+.metric-live{position:absolute;top:18px;right:18px;display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-t)}
+
+/* ===== SERVICE HUB (control panel) ===== */
+.hub-mod{border:1px solid var(--border);border-radius:var(--rc);background:var(--surface);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.hub-mod.open{border-color:var(--orange);box-shadow:var(--shadow)}
+.hub-head{display:flex;align-items:center;gap:16px;padding:20px 22px;cursor:pointer;width:100%;text-align:left}
+.hub-ico{width:48px;height:48px;border-radius:12px;background:var(--surface2);display:grid;place-items:center;color:var(--orange);flex-shrink:0;transition:background .2s,color .2s}
+.hub-mod.open .hub-ico{background:var(--orange);color:#fff}
+.hub-tt{flex:1}
+.hub-tt h3{font-family:var(--fd);font-size:24px;color:var(--text);letter-spacing:.02em;line-height:1}
+.hub-tt p{font-family:var(--fm);font-size:11px;color:var(--faint);margin-top:4px;letter-spacing:.04em}
+.hub-toggle{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);transition:transform .3s,background .2s;flex-shrink:0}
+.hub-mod.open .hub-toggle{transform:rotate(45deg);background:var(--orange);color:#fff;border-color:var(--orange)}
+.hub-body{max-height:0;overflow:hidden;transition:max-height .42s cubic-bezier(.16,1,.3,1)}
+.hub-body-inner{padding:0 22px 24px;border-top:1px solid var(--border);margin-top:0;display:grid;grid-template-columns:1.4fr 1fr;gap:26px;padding-top:22px}
+@media(max-width:680px){.hub-body-inner{grid-template-columns:1fr;gap:18px}}
+.hub-feat{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--muted);padding:5px 0}
+.hub-feat svg{width:16px;height:16px;color:var(--green);flex-shrink:0;margin-top:2px}
+.hub-price{background:var(--surface2);border-radius:var(--rb);padding:18px}
+.hub-price .l{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.hub-price .v{font-family:var(--fd);font-size:34px;color:var(--orange);line-height:1;margin-top:5px}
+.hub-price .m{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* ===== BEFORE / AFTER ===== */
+.ba{position:relative;border-radius:var(--rc);overflow:hidden;user-select:none;aspect-ratio:16/11;box-shadow:var(--shadow);background:var(--surface2)}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--orange);transform:translateX(-50%);z-index:3;pointer-events:none;box-shadow:0 0 16px rgba(255,107,0,.7)}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--orange);display:grid;place-items:center;color:#fff;z-index:4;pointer-events:none;box-shadow:0 6px 18px -4px rgba(255,107,0,.7)}
+.ba-lbl{position:absolute;top:12px;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:7px;background:rgba(7,11,17,.78);color:#fff;z-index:3;backdrop-filter:blur(4px)}
+.ba-lbl.l{left:12px}.ba-lbl.r{right:12px}
+.ba-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px}
+.ba-meta div{font-family:var(--fm);font-size:11px;color:var(--muted)}.ba-meta b{color:var(--text);font-weight:600}
+
+/* ===== DISPATCH TIMELINE ===== */
+.timeline{position:relative;margin-top:46px}
+.tl-track{position:absolute;left:0;right:0;top:30px;height:3px;background:var(--border);border-radius:2px}
+.tl-prog{position:absolute;left:0;top:30px;height:3px;background:linear-gradient(90deg,var(--orange),var(--blue));border-radius:2px;width:0;transition:width 1.6s cubic-bezier(.16,1,.3,1)}
+.tl-truck{position:absolute;top:12px;left:0;transform:translateX(-50%);z-index:4;color:var(--orange);transition:left 1.6s cubic-bezier(.16,1,.3,1)}
+.tl-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;position:relative;z-index:2}
+@media(max-width:760px){.tl-track,.tl-prog,.tl-truck{display:none}.tl-steps{grid-template-columns:1fr 1fr;gap:18px}}
+.tl-step{text-align:center}
+.tl-dot{width:62px;height:62px;border-radius:50%;background:var(--surface);border:3px solid var(--border);display:grid;place-items:center;margin:0 auto;color:var(--faint);transition:all .4s;position:relative}
+.tl-step.done .tl-dot{border-color:var(--orange);color:var(--orange);background:var(--surface)}
+.tl-num{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--steel);color:#fff;font-family:var(--fm);font-size:11px;font-weight:600;display:grid;place-items:center}
+.tl-step.done .tl-num{background:var(--orange)}
+.tl-t{font-family:var(--fd);font-size:18px;color:var(--text);margin-top:12px;letter-spacing:.02em}
+.tl-d{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* ===== SMART GARAGE ===== */
+.smart-card{background:rgba(232,237,242,.05);border:1px solid rgba(0,212,255,.16);border-radius:var(--rc);padding:24px;backdrop-filter:blur(6px);transition:transform .25s,border-color .25s}
+.smart-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.4)}
+.smart-ico{font-size:30px;margin-bottom:12px}
+
+/* ===== AREA CHECKER ===== */
+.area-result{display:none;margin-top:20px;animation:pageIn .4s}
+.area-result.show{display:block}
+.area-row{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--border);border-radius:var(--rb);background:var(--surface);margin-bottom:10px}
+.area-row .ico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;flex-shrink:0}
+
+/* ===== PLANS ===== */
+.plan-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rc);padding:30px 26px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s;position:relative}
+.plan-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.plan-card.feat{border-color:var(--orange);background:linear-gradient(180deg,rgba(255,107,0,.04),var(--surface))}
+.plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 15px;border-radius:999px;white-space:nowrap}
+.plan-name{font-family:var(--fd);font-size:30px;color:var(--text);letter-spacing:.02em}
+.plan-price{font-family:var(--fd);font-size:54px;color:var(--text);line-height:1;margin-top:10px}
+.plan-price .per{font-family:var(--fb);font-size:15px;color:var(--muted);font-weight:500}
+.plan-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);padding:8px 0;border-top:1px solid var(--border)}
+.plan-feat svg{width:17px;height:17px;color:var(--green);flex-shrink:0;margin-top:1px}
+.plan-feat.off{opacity:.45}.plan-feat.off svg{color:var(--faint)}
+
+/* ===== REVIEWS (work orders) ===== */
+.wo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;box-shadow:var(--shadow)}
+.wo-head{background:var(--steel);color:var(--on-steel);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.wo-id{font-family:var(--fm);font-size:11px;letter-spacing:.1em;color:var(--blue-t)}
+.wo-body{padding:22px 24px}
+.wo-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.wo-row:last-child{border-bottom:none}
+.wo-k{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);width:88px;flex-shrink:0;padding-top:2px}
+.wo-v{font-size:14px;color:var(--text);line-height:1.5}
+.wo-stars{display:flex;gap:2px;color:var(--amber)}
+.wo-foot{padding:16px 24px;background:var(--surface2);display:flex;align-items:center;justify-content:space-between}
+
+/* ===== FAQ ===== */
+.faq-item{border:1px solid var(--border);border-radius:var(--rb);background:var(--surface);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.faq-item.open{border-color:var(--orange)}
+.faq-q{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;width:100%;text-align:left;font-weight:600;font-size:15.5px;color:var(--text)}
+.faq-q .qn{font-family:var(--fm);font-size:12px;color:var(--orange);flex-shrink:0}
+.faq-q .ar{margin-left:auto;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-q .ar{transform:rotate(180deg);color:var(--orange)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)}
+.faq-a-in{padding:0 20px 20px 54px;color:var(--muted);font-size:14.5px;line-height:1.65}
+
+/* ===== FINAL CTA ===== */
+.final-cta{position:relative;background:var(--steel);overflow:hidden;color:#fff}
+.final-cta .hero-grid-bg{mask-image:radial-gradient(ellipse at center,#000,transparent 80%)}
+
+/* ===== AI ASSISTANT ===== */
+.ai-overlay{position:fixed;inset:0;z-index:200;background:rgba(7,11,17,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.ai-overlay.open{opacity:1;pointer-events:auto}
+.ai-panel{position:fixed;right:18px;bottom:18px;z-index:201;width:min(400px,calc(100vw - 36px));height:min(580px,calc(100vh - 36px));background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;transform:translateY(20px) scale(.97);opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .3s}
+.ai-panel.open{transform:none;opacity:1;pointer-events:auto}
+.ai-head{background:var(--steel);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.ai-avatar{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--orange));display:grid;place-items:center;flex-shrink:0}
+.ai-head .nm{font-family:var(--fd);font-size:20px;letter-spacing:.02em;line-height:1}
+.ai-head .st{font-family:var(--fm);font-size:10px;color:var(--green-t);display:flex;align-items:center;gap:5px;margin-top:3px}
+.ai-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:var(--bg)}
+.ai-msg{max-width:84%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5;animation:pageIn .3s}
+.ai-msg.bot{background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start;color:var(--text)}
+.ai-msg.user{background:var(--orange);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.ai-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 12px;background:var(--bg)}
+.ai-chip{font-family:var(--fm);font-size:11px;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .18s}
+.ai-chip:hover{border-color:var(--orange);color:var(--orange)}
+.ai-input{display:flex;gap:9px;padding:14px 16px;border-top:1px solid var(--border);background:var(--surface)}
+.ai-input input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:11px;padding:11px 14px;font-size:14px;color:var(--text)}
+.ai-input input:focus{outline:none;border-color:var(--orange)}
+.ai-send{width:44px;height:44px;border-radius:11px;background:var(--orange);color:#fff;display:grid;place-items:center;flex-shrink:0;transition:transform .2s}
+.ai-send:hover{transform:scale(1.06)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--steel);color:var(--on-steel);position:relative;overflow:hidden}
+footer .hero-grid-bg{mask-image:linear-gradient(180deg,#000,transparent)}
+.ft-grid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:30px;position:relative;z-index:2}
+@media(max-width:980px){.ft-grid{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:560px){.ft-grid{grid-template-columns:1fr}}
+.ft-desc{color:var(--on-steel-mut);font-size:14px;line-height:1.65;margin-top:16px;max-width:300px}
+.ft-col-h{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-t);margin-bottom:16px}
+.ft-links{display:grid;gap:11px}
+.ft-link{font-size:14px;color:var(--on-steel-mut);transition:color .2s}.ft-link:hover{color:#fff}
+.ft-emergency{background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.3);border-radius:var(--rb);padding:16px;margin-top:18px}
+.ft-bottom{border-top:1px solid rgba(232,237,242,.1);margin-top:44px;padding-top:24px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.ft-copy{display:flex;flex-wrap:wrap;gap:5px 16px;align-items:center;font-family:var(--fm);font-size:12px;color:var(--on-steel-mut)}
+.ft-brand{color:var(--blue-t);font-weight:600}
+.ft-legal{display:flex;gap:18px;font-size:13px}.ft-legal a{color:var(--on-steel-mut);transition:color .2s}.ft-legal a:hover{color:#fff}
+
+/* ---- page hero (inner) ---- */
+.page-hero{background:var(--steel);color:var(--on-steel);position:relative;overflow:hidden;padding-block:clamp(48px,6vw,80px)}
+.ph-h1{font-family:var(--fd);font-size:clamp(2.4rem,5vw,3.8rem);color:#fff;letter-spacing:.015em;line-height:.96;margin-top:12px}
+.ph-sub{color:var(--on-steel-mut);font-size:16px;line-height:1.6;margin-top:14px;max-width:540px}
+.crumb{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:11px;letter-spacing:.06em;color:var(--on-steel-mut)}
+.crumb a:hover{color:var(--blue-t)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .door-slats{transform:scaleY(0)}.door-handle{display:none}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- ANNOUNCEMENT TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-status"><span class="dot"></span> Technicians Available Now</div>
+  <div class="ticker">
+    <div class="t-item">Average Response Time Today: <b>43 Minutes</b></div><span class="t-sep"></span>
+    <div class="t-item">🟢 <b>9 Trucks</b> on the road right now</div><span class="t-sep"></span>
+    <div class="t-item">Same-Day Spring Replacement Available</div><span class="t-sep"></span>
+    <div class="t-item">Licensed · Insured · <b>Lifetime Parts Warranty</b></div><span class="t-sep"></span>
+    <div class="t-item">24/7 Emergency Dispatch — No Overtime Charges</div><span class="t-sep"></span>
+    <div class="t-item">Average Response Time Today: <b>43 Minutes</b></div><span class="t-sep"></span>
+    <div class="t-item">🟢 <b>9 Trucks</b> on the road right now</div><span class="t-sep"></span>
+    <div class="t-item">Same-Day Spring Replacement Available</div><span class="t-sep"></span>
+    <div class="t-item">Licensed · Insured · <b>Lifetime Parts Warranty</b></div><span class="t-sep"></span>
+    <div class="t-item">24/7 Emergency Dispatch — No Overtime Charges</div><span class="t-sep"></span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar"><div class="container"><div class="nav-inner">
+  <a href="#home" class="logo" data-page="home" aria-label="RapidTrack Garage home">
+    <span class="logo-mark"><span class="logo-door"><span class="logo-slat"></span><span class="logo-slat"></span><span class="logo-slat"></span><span class="logo-slat"></span></span></span>
+    <span><span class="logo-text">RAPID<span class="ac">TRACK</span></span><span class="logo-sub">Garage Door Dispatch</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#repairs" class="nav-link" data-page="repairs">Repairs</a>
+    <a href="#doors" class="nav-link" data-page="doors">New Doors</a>
+    <a href="#openers" class="nav-link" data-page="openers">Openers</a>
+    <a href="#areas" class="nav-link" data-page="areas">Service Areas</a>
+    <a href="#plans" class="nav-link" data-page="plans">Protection Plan</a>
+    <a href="#reviews" class="nav-link" data-page="reviews">Reviews</a>
+  </div>
+  <div class="nav-acts">
+    <button class="theme-btn btn-ico" aria-label="Toggle dark mode"></button>
+    <a href="tel:+18005550147" class="nav-call"><span class="lbl">24/7 Dispatch</span><span class="num">(800) 555-0147</span></a>
+    <a href="tel:+18005550147" class="btn btn-red btn-desktop btn-sm" aria-label="Emergency service">🚨 Emergency</a>
+    <a href="#book" data-page="book" class="btn btn-p btn-desktop btn-sm">Book Service</a>
+    <button class="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+</div></div></nav>
+
+<!-- DRAWER -->
+<div class="drawer">
+  <div class="drawer-hd">
+    <span class="logo-text" style="font-size:24px">RAPID<span class="ac">TRACK</span></span>
+    <button id="drawer-close" class="btn-ico" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav class="drawer-links">
+    <a href="#repairs" class="drawer-link" data-page="repairs">Repairs<span class="num">01</span></a>
+    <a href="#doors" class="drawer-link" data-page="doors">New Doors<span class="num">02</span></a>
+    <a href="#openers" class="drawer-link" data-page="openers">Openers<span class="num">03</span></a>
+    <a href="#areas" class="drawer-link" data-page="areas">Service Areas<span class="num">04</span></a>
+    <a href="#plans" class="drawer-link" data-page="plans">Protection Plan<span class="num">05</span></a>
+    <a href="#reviews" class="drawer-link" data-page="reviews">Reviews<span class="num">06</span></a>
+    <a href="#faq" class="drawer-link" data-page="faq">FAQ<span class="num">07</span></a>
+    <a href="#contact" class="drawer-link" data-page="contact">Contact<span class="num">08</span></a>
+  </nav>
+  <div style="margin-top:24px;display:grid;gap:10px">
+    <a href="#book" data-page="book" class="btn btn-p btn-full btn-lg">Book Service Now</a>
+    <a href="tel:+18005550147" class="btn btn-red btn-full btn-lg">🚨 Emergency: (800) 555-0147</a>
+  </div>
+</div>
+
+<main id="main">
+<!-- ============ HOME ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow a"></div><div class="hero-glow b"></div>
+  <div class="container"><div class="hero-inner">
+    <div>
+      <div class="reveal"><span class="dispatch-badge"><span class="dot"></span> Live Dispatch · 9 technicians active</span></div>
+      <h1 class="hero-h1 reveal" data-d="80">Garage Door Stuck?<br><span class="ac">We're Already</span><br>On The <span class="bl">Way.</span></h1>
+      <p class="hero-sub reveal" data-d="160">Emergency repairs, broken-spring replacement, opener service and same-day installation — dispatched in real time from the truck nearest you. No callbacks, no waiting around.</p>
+      <div class="hero-cta reveal" data-d="240">
+        <a href="#book" data-page="book" class="btn btn-p btn-lg">Request Immediate Service <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#diagnose" class="btn btn-ghost btn-lg js-scroll" data-target="diagnose">Get Instant Estimate</a>
+      </div>
+      <div class="hero-trust reveal" data-d="320">
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Licensed &amp; Insured</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Certified Technicians</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 43-Min Avg Arrival</span>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: garage door rolls up to reveal the live dispatch map -->
+    <div class="reveal" data-d="200">
+      <div class="door-frame">
+        <div class="door-head"><span class="ttl">Bay 01 · Live Dispatch Map</span><span class="live"><span class="dot"></span> Streaming</span></div>
+        <div class="door-opening">
+          <!-- live map underneath -->
+          <div class="dispatch-map">
+            <svg class="map-roads" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g stroke="rgba(0,212,255,.18)" stroke-width="1.5" fill="none">
+                <path d="M0 90 H400 M0 200 H400 M0 300 H400 M70 0 V380 M180 0 V380 M300 0 V380"/>
+              </g>
+              <path id="truckRoute" d="M70 380 V300 H180 V200 H300 V120" stroke="rgba(255,107,0,.55)" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+            </svg>
+            <div class="radar-ring" style="width:120px;height:120px"></div>
+            <div class="radar-ring" style="width:200px;height:200px"></div>
+            <div class="radar-ring" style="width:280px;height:280px"></div>
+            <div class="radar-sweep"></div>
+            <span class="tech-pin you" style="left:75%;top:32%"></span>
+            <span class="tech-pin" style="left:18%;top:24%"></span>
+            <span class="tech-pin" style="left:44%;top:68%"></span>
+            <span class="tech-pin busy" style="left:62%;top:48%"></span>
+            <span class="tech-pin" style="left:30%;top:82%"></span>
+            <svg class="map-truck" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;z-index:2" aria-hidden="true">
+              <g><circle r="6" fill="#FF6B00"/><circle r="11" fill="none" stroke="#FF6B00" stroke-width="1.5" opacity=".5"/>
+                <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath href="#truckRoute"/></animateMotion>
+              </g>
+            </svg>
+            <div class="map-eta"><div class="n">12<span style="font-size:14px">m</span></div><div class="l">ETA Your Area</div></div>
+            <div class="map-overlay">
+              <div class="map-stat"><span class="dot"></span> <b>5</b> techs nearby</div>
+              <div class="map-stat">📍 <b>Unit 7</b> · 1.4 mi out</div>
+            </div>
+          </div>
+          <!-- the rolling door (signature animation) -->
+          <div class="door-handle"></div>
+          <div class="door-slats">
+            <div class="door-slat"></div><div class="door-slat"></div><div class="door-slat"></div>
+            <div class="door-slat"></div><div class="door-slat"></div><div class="door-slat"></div>
+            <div class="door-slat"></div><div class="door-slat"></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 6px 4px;font-family:var(--fm);font-size:10px;color:var(--on-steel-mut)">
+          <span>STATUS: <span style="color:var(--green-t)">DISPATCH READY</span></span>
+          <span>UPDATED 00:00:03 AGO</span>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- HERO METRIC STRIP -->
+<div style="background:var(--steel2);border-bottom:1px solid var(--border)"><div class="container"><div class="reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-block:22px;text-align:center">
+  <div><div style="font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--orange-t)"><span data-counter="25000">0</span>+</div><div class="mono-label" style="color:var(--on-steel-mut)">Repairs Completed</div></div>
+  <div><div style="font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--orange-t)">43<span style="font-size:.6em">min</span></div><div class="mono-label" style="color:var(--on-steel-mut)">Avg Arrival Today</div></div>
+  <div><div style="font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--orange-t)"><span data-counter="98">0</span>.7%</div><div class="mono-label" style="color:var(--on-steel-mut)">Satisfaction Rate</div></div>
+  <div><div style="font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--orange-t)">24/7</div><div class="mono-label" style="color:var(--on-steel-mut)">Emergency Dispatch</div></div>
+</div></div></div>
+
+<!-- INSTANT REPAIR DIAGNOSIS TOOL (centerpiece) -->
+<section class="section" id="diagnose" style="background:var(--bg)"><div class="container">
+  <div class="center reveal" style="max-width:680px;margin-inline:auto">
+    <span class="eyebrow blue" style="justify-content:center">Instant Repair Diagnosis</span>
+    <h2 class="h-d">What's wrong with<br>your <span class="ac">garage door?</span></h2>
+    <p class="h-sub">Pick the symptom you're seeing. Our dispatch engine returns the likely cause, a transparent cost range, repair time and priority — before a technician even arrives.</p>
+  </div>
+  <div class="diag reveal" data-d="100" style="margin-top:40px">
+    <div class="diag-grid">
+      <div class="diag-left">
+        <div class="hero-grid-bg"></div>
+        <div style="position:relative;z-index:2">
+          <div class="mono-label" style="color:var(--blue-t)">STEP 1 — SELECT SYMPTOM</div>
+          <div class="sym-grid" id="symGrid"></div>
+        </div>
+      </div>
+      <div class="diag-right">
+        <div class="diag-empty" id="diagEmpty">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+          <div style="font-family:var(--fd);font-size:24px;color:var(--text)">Awaiting diagnosis</div>
+          <p style="max-width:260px;margin-top:8px;font-size:14px">Select a symptom on the left and we'll run an instant assessment.</p>
+        </div>
+        <div class="diag-out" id="diagOut">
+          <div style="display:flex;align-items:center;gap:10px"><span id="diagTag" class="tag"></span><span class="mono-label">DIAGNOSIS COMPLETE</span></div>
+          <h3 style="font-family:var(--fd);font-size:30px;color:var(--text);margin-top:12px;letter-spacing:.02em" id="diagCause"></h3>
+          <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px" id="diagDesc"></p>
+          <div class="diag-readout">
+            <div class="ro-card"><div class="l">Typical Cost</div><div class="v sm" id="diagCost"></div></div>
+            <div class="ro-card"><div class="l">Repair Time</div><div class="v sm" id="diagTime"></div></div>
+          </div>
+          <div class="ro-card" style="margin-top:12px"><div class="l">Priority Level</div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px"><span class="v sm" id="diagPrioLbl"></span></div><div class="prio-bar"><div class="prio-fill" id="diagPrioFill"></div></div></div>
+          <div style="display:grid;gap:9px;margin-top:18px">
+            <a href="#book" data-page="book" class="btn btn-p btn-full">Book This Repair <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            <a href="tel:+18005550147" class="btn btn-s btn-full">Or call dispatch directly</a>
+          </div>
+          <p style="font-family:var(--fm);font-size:10.5px;color:var(--faint);text-align:center;margin-top:12px">Estimate only · final quote confirmed on-site, in writing, before any work</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- EMERGENCY RESPONSE METRICS -->
+<section class="metrics section"><div class="hero-grid-bg"></div>
+  <div class="hero-glow a" style="top:auto;bottom:-200px;right:10%"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end">
+      <div><span class="eyebrow blue">Live Response Metrics</span><h2 class="h-d" style="color:#fff">Real numbers from<br>the dispatch floor</h2></div>
+      <span class="map-stat" style="position:static"><span class="dot"></span> Updated continuously</span>
+    </div>
+    <div class="grid4 reveal" data-d="100" style="margin-top:42px">
+      <div class="metric-card"><span class="metric-live"><span class="dot"></span> Live</span><div class="metric-ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="metric-n">43<span class="suf" style="font-size:.5em">min</span></div><div class="metric-l">Average Arrival Time</div></div>
+      <div class="metric-card"><span class="metric-live"><span class="dot"></span> Live</span><div class="metric-ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M21 3 3 21"/></svg></div><div class="metric-n"><span data-counter="9">0</span></div><div class="metric-l">Technicians Available</div></div>
+      <div class="metric-card"><div class="metric-ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="metric-n"><span data-counter="1840">0</span></div><div class="metric-l">Repairs This Month</div></div>
+      <div class="metric-card"><div class="metric-ico"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="metric-n">4.9<span class="suf">/5</span></div><div class="metric-l">Customer Rating</div></div>
+    </div>
+    <div class="reveal" data-d="200" style="margin-top:18px;display:flex;align-items:center;gap:16px;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.3);border-radius:var(--rc);padding:20px 24px;flex-wrap:wrap">
+      <div style="font-family:var(--fd);font-size:44px;color:var(--orange-t);line-height:1">94%</div>
+      <div style="flex:1;min-width:200px"><div style="font-weight:600;color:#fff;font-size:16px">First-Time Fix Rate</div><div style="color:var(--on-steel-mut);font-size:14px;margin-top:3px">Trucks arrive stocked with springs, cables, rollers and opener parts for every major brand — so most repairs are done in a single visit.</div></div>
+      <a href="#book" data-page="book" class="btn btn-p">Book a technician</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE HUB (mechanical control panel) -->
+<section class="section" style="background:var(--bg)"><div class="container">
+  <div class="reveal" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end">
+    <div><span class="eyebrow">Service Hub</span><h2 class="h-d">Every garage door system,<br>one dispatch team</h2></div>
+    <a href="#repairs" data-page="repairs" class="btn btn-s">View all repairs <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div id="hubList" style="margin-top:40px;display:grid;gap:14px"></div>
+</div></section>
+
+<!-- COMMON PROBLEMS — diagnostic journey -->
+<section class="section" style="background:var(--surface)"><div class="container">
+  <div class="center reveal" style="max-width:640px;margin-inline:auto">
+    <span class="eyebrow" style="justify-content:center">Common Problems</span>
+    <h2 class="h-d">When a small issue<br>becomes <span class="ac">dangerous</span></h2>
+    <p class="h-sub">Garage door systems are under enormous tension. Here's how a common fault escalates — and where we step in.</p>
+  </div>
+  <div class="grid4 reveal" data-d="100" style="margin-top:44px">
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:26px;position:relative">
+      <span class="tag tag-amber">Warning sign</span>
+      <h3 style="font-family:var(--fd);font-size:26px;color:var(--text);margin-top:14px;letter-spacing:.02em">Broken Spring</h3>
+      <p style="color:var(--muted);font-size:14px;line-height:1.55;margin-top:8px">A loud bang, a door that won't lift, or a visible gap in the torsion spring coil.</p>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:26px">
+      <span class="tag tag-red">Safety risk</span>
+      <h3 style="font-family:var(--fd);font-size:26px;color:var(--text);margin-top:14px;letter-spacing:.02em">Door Falls Hard</h3>
+      <p style="color:var(--muted);font-size:14px;line-height:1.55;margin-top:8px">Without spring tension, a 150–300 lb door can drop with no warning — a serious injury hazard.</p>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:26px">
+      <span class="tag tag-orange">We dispatch</span>
+      <h3 style="font-family:var(--fd);font-size:26px;color:var(--text);margin-top:14px;letter-spacing:.02em">Emergency Repair</h3>
+      <p style="color:var(--muted);font-size:14px;line-height:1.55;margin-top:8px">Nearest truck is routed to you with the correct spring on board for same-visit replacement.</p>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:26px">
+      <span class="tag tag-green">Resolved</span>
+      <h3 style="font-family:var(--fd);font-size:26px;color:var(--text);margin-top:14px;letter-spacing:.02em">Problem Solved</h3>
+      <p style="color:var(--muted);font-size:14px;line-height:1.55;margin-top:8px">Door balanced, tested 10× and backed by our lifetime parts warranty before we leave.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- BEFORE / AFTER COMMAND CENTER -->
+<section class="section" style="background:var(--bg)"><div class="container">
+  <div class="reveal"><span class="eyebrow blue">Before / After Command Center</span><h2 class="h-d">Drag to see the<br>transformation</h2></div>
+  <div class="grid2 reveal" data-d="100" style="margin-top:40px">
+    <div>
+      <div class="ba" data-ba><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=1000&q=70" alt="Old worn garage door before replacement"/><img class="ba-after" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=70" alt="New modern garage door after installation"/><span class="ba-lbl l">Before</span><span class="ba-lbl r">After</span><div class="ba-handle"></div><div class="ba-knob"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6" transform="translate(0)"/></svg></div></div>
+      <div class="ba-meta"><div><b>Type:</b> Full Replacement</div><div><b>Duration:</b> 1 day</div><div><b>Result:</b> Insulated steel, smart opener</div></div>
+    </div>
+    <div>
+      <div class="ba" data-ba><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1000&q=70" alt="Damaged off-track residential garage door"/><img class="ba-after" src="https://images.unsplash.com/photo-1597047084897-51e81819a499?auto=format&fit=crop&w=1000&q=70" alt="Repaired and re-tracked garage door"/><span class="ba-lbl l">Before</span><span class="ba-lbl r">After</span><div class="ba-handle"></div><div class="ba-knob"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6"/></svg></div></div>
+      <div class="ba-meta"><div><b>Type:</b> Off-Track Repair</div><div><b>Duration:</b> 90 min</div><div><b>Result:</b> Re-aligned, new rollers</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SMART GARAGE SHOWCASE -->
+<section class="section" style="background:var(--steel);color:var(--on-steel);position:relative;overflow:hidden">
+  <div class="hero-grid-bg"></div><div class="hero-glow a" style="top:-100px;left:-60px"></div>
+  <div class="container" style="position:relative;z-index:2"><div class="grid2" style="align-items:center">
+    <div class="reveal">
+      <span class="eyebrow blue">Smart Garage</span>
+      <h2 class="h-d" style="color:#fff">Open, close and<br>watch from <span class="bl">anywhere</span></h2>
+      <p class="hero-sub" style="margin-top:16px">We install and integrate WiFi openers that turn your garage into part of your connected home — with real-time alerts, voice control and bank-grade security.</p>
+      <div style="display:grid;gap:11px;margin-top:22px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--on-steel)"><span style="color:var(--blue-t)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Smartphone open / close from any distance</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--on-steel)"><span style="color:var(--blue-t)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Alexa, Google Home &amp; Apple Home integration</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--on-steel)"><span style="color:var(--blue-t)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Auto-close timers &amp; left-open alerts</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--on-steel)"><span style="color:var(--blue-t)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Built-in camera &amp; rolling-code encryption</div>
+      </div>
+      <a href="#openers" data-page="openers" class="btn btn-blue btn-lg" style="margin-top:26px">Explore smart openers <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="reveal" data-d="100" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="smart-card"><div class="smart-ico">📲</div><div style="font-family:var(--fd);font-size:20px;color:#fff;letter-spacing:.02em">App Control</div><div style="color:var(--on-steel-mut);font-size:13px;margin-top:5px">myQ, Aladdin Connect &amp; LiftMaster certified</div></div>
+      <div class="smart-card"><div class="smart-ico">🔔</div><div style="font-family:var(--fd);font-size:20px;color:#fff;letter-spacing:.02em">Live Alerts</div><div style="color:var(--on-steel-mut);font-size:13px;margin-top:5px">Push notification every open &amp; close</div></div>
+      <div class="smart-card"><div class="smart-ico">🎥</div><div style="font-family:var(--fd);font-size:20px;color:#fff;letter-spacing:.02em">Camera Built-In</div><div style="color:var(--on-steel-mut);font-size:13px;margin-top:5px">1080p with two-way talk &amp; night vision</div></div>
+      <div class="smart-card"><div class="smart-ico">🔐</div><div style="font-family:var(--fd);font-size:20px;color:#fff;letter-spacing:.02em">Secure</div><div style="color:var(--on-steel-mut);font-size:13px;margin-top:5px">Rolling-code encryption, guest access</div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- DISPATCH TIMELINE (process) -->
+<section class="section" id="dispatchTl" style="background:var(--bg)"><div class="container">
+  <div class="center reveal" style="max-width:600px;margin-inline:auto">
+    <span class="eyebrow" style="justify-content:center">Service Dispatch Timeline</span>
+    <h2 class="h-d">From your call to<br>door fixed</h2>
+    <p class="h-sub">Track every step in real time — just like ordering a ride.</p>
+  </div>
+  <div class="timeline reveal" data-d="100">
+    <div class="tl-track"></div><div class="tl-prog" id="tlProg"></div>
+    <div class="tl-truck" id="tlTruck"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="var(--orange)" stroke="none"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5" fill="#101820"/><circle cx="17.5" cy="17.5" r="2.5" fill="#101820"/></svg></div>
+    <div class="tl-steps">
+      <div class="tl-step" data-step><div class="tl-dot"><span class="tl-num">1</span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="tl-t">Request</div><div class="tl-d">Book online or call</div></div>
+      <div class="tl-step" data-step><div class="tl-dot"><span class="tl-num">2</span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div><div class="tl-t">Assigned</div><div class="tl-d">Nearest tech matched</div></div>
+      <div class="tl-step" data-step><div class="tl-dot"><span class="tl-num">3</span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3V5h12v12h-1"/><path d="M14 9h4l3 3v5h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div><div class="tl-t">En Route</div><div class="tl-d">Live GPS tracking</div></div>
+      <div class="tl-step" data-step><div class="tl-dot"><span class="tl-num">4</span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></div><div class="tl-t">Diagnosis</div><div class="tl-d">On-site, written quote</div></div>
+      <div class="tl-step" data-step><div class="tl-dot"><span class="tl-num">5</span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="tl-t">Repair</div><div class="tl-d">Parts on the truck</div></div>
+      <div class="tl-step" data-step><div class="tl-dot"><span class="tl-num">6</span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="tl-t">Completion</div><div class="tl-d">Tested &amp; warrantied</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SERVICE AREA CHECKER -->
+<section class="section" id="areaCheck" style="background:var(--surface)"><div class="container"><div class="grid2" style="align-items:center">
+  <div class="reveal">
+    <span class="eyebrow">Service Area Checker</span>
+    <h2 class="h-d">Are we in<br>your neighborhood?</h2>
+    <p class="h-sub">Enter your ZIP code and we'll show coverage status, the nearest available technician and your estimated arrival window — instantly.</p>
+    <div style="display:flex;gap:10px;margin-top:24px;max-width:420px">
+      <input id="zipInput" class="f-input" inputmode="numeric" maxlength="5" placeholder="Enter ZIP code (e.g. 90210)" aria-label="ZIP code"/>
+      <button id="zipBtn" class="btn btn-p" style="white-space:nowrap">Check ZIP</button>
+    </div>
+    <div class="area-result" id="areaResult">
+      <div class="area-row"><div class="ico" style="background:rgba(22,163,74,.12);color:var(--green)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><div style="font-weight:600;color:var(--text)" id="areaStatus">Covered</div><div style="font-size:13px;color:var(--muted)" id="areaCity"></div></div></div>
+      <div class="area-row"><div class="ico" style="background:rgba(255,107,0,.12);color:var(--orange)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div style="font-weight:600;color:var(--text)">Estimated arrival</div><div style="font-size:13px;color:var(--muted)" id="areaEta"></div></div></div>
+      <div class="area-row"><div class="ico" style="background:rgba(0,168,204,.14);color:var(--blue)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div style="font-weight:600;color:var(--text)">Nearest technician</div><div style="font-size:13px;color:var(--muted)" id="areaTech"></div></div></div>
+      <a href="#book" data-page="book" class="btn btn-p btn-full" style="margin-top:6px">Dispatch a technician here</a>
+    </div>
+  </div>
+  <div class="reveal" data-d="100">
+    <div class="door-frame" style="padding:18px">
+      <div class="door-head"><span class="ttl">Coverage Grid · 60-mile radius</span><span class="live"><span class="dot"></span> 9 active</span></div>
+      <div style="position:relative;height:320px;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#0B2733,#05080C 75%)">
+        <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0" aria-hidden="true"><g stroke="rgba(0,212,255,.16)" stroke-width="1" fill="none"><path d="M0 80 H400 M0 160 H400 M0 240 H400 M100 0 V320 M200 0 V320 M300 0 V320"/></g></svg>
+        <div class="radar-ring" style="left:50%;top:50%;width:140px;height:140px"></div><div class="radar-ring" style="left:50%;top:50%;width:230px;height:230px"></div><div class="radar-sweep" style="top:50%"></div>
+        <span class="tech-pin you" style="left:50%;top:50%"></span>
+        <span class="tech-pin" style="left:22%;top:30%"></span><span class="tech-pin" style="left:70%;top:26%"></span><span class="tech-pin busy" style="left:64%;top:64%"></span><span class="tech-pin" style="left:30%;top:70%"></span><span class="tech-pin" style="left:80%;top:50%"></span>
+        <div class="map-overlay"><div class="map-stat"><span class="dot"></span> Coverage: <b>active</b></div></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- STATISTICS -->
+<section class="section" style="background:var(--steel2);color:var(--on-steel);position:relative;overflow:hidden">
+  <div class="hero-grid-bg"></div>
+  <div class="container" style="position:relative;z-index:2"><div class="reveal" style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center" id="statGrid">
+    <div><div style="font-family:var(--fd);font-size:clamp(2.2rem,4vw,3rem);color:#fff"><span data-counter="25000">0</span><span style="color:var(--orange-t)">+</span></div><div class="mono-label" style="color:var(--on-steel-mut)">Repairs Completed</div></div>
+    <div><div style="font-family:var(--fd);font-size:clamp(2.2rem,4vw,3rem);color:#fff"><span data-counter="98">0</span><span style="color:var(--orange-t)">.7%</span></div><div class="mono-label" style="color:var(--on-steel-mut)">Satisfaction</div></div>
+    <div><div style="font-family:var(--fd);font-size:clamp(2.2rem,4vw,3rem);color:#fff">40<span style="color:var(--orange-t)">min</span></div><div class="mono-label" style="color:var(--on-steel-mut)">Avg Arrival</div></div>
+    <div><div style="font-family:var(--fd);font-size:clamp(2.2rem,4vw,3rem);color:#fff">24/7</div><div class="mono-label" style="color:var(--on-steel-mut)">Availability</div></div>
+    <div><div style="font-family:var(--fd);font-size:clamp(2.2rem,4vw,3rem);color:#fff"><span data-counter="15">0</span><span style="color:var(--orange-t)">+</span></div><div class="mono-label" style="color:var(--on-steel-mut)">Years Experience</div></div>
+  </div></div>
+</section>
+
+<!-- MEMBERSHIP PLANS -->
+<section class="section" id="plansHome" style="background:var(--bg)"><div class="container">
+  <div class="center reveal" style="max-width:620px;margin-inline:auto">
+    <span class="eyebrow blue" style="justify-content:center">Garage Protection Plan</span>
+    <h2 class="h-d">Stop emergencies<br>before they start</h2>
+    <p class="h-sub">Members get annual tune-ups, priority dispatch and discounted parts — so a $15 spring catch becomes a phone call, not a 9 p.m. crisis.</p>
+  </div>
+  <div class="grid3 reveal" data-d="100" style="margin-top:50px;align-items:stretch">
+    <div class="plan-card">
+      <div class="mono-label" style="color:var(--orange)">ESSENTIAL</div>
+      <div class="plan-name">Tune-Up</div>
+      <div class="plan-price">$8<span class="per">/mo</span></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">Billed annually · $96/yr</div>
+      <div style="margin-top:20px;flex:1">
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1 annual safety inspection</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lubrication &amp; balance check</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>10% off parts &amp; labor</div>
+        <div class="plan-feat off"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>Priority emergency dispatch</div>
+        <div class="plan-feat off"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>Waived trip fees</div>
+      </div>
+      <a href="#book" data-page="book" class="btn btn-s btn-full" style="margin-top:18px">Choose Tune-Up</a>
+    </div>
+    <div class="plan-card feat">
+      <div class="plan-badge">Most Popular</div>
+      <div class="mono-label" style="color:var(--orange)">RECOMMENDED</div>
+      <div class="plan-name">Priority</div>
+      <div class="plan-price">$18<span class="per">/mo</span></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">Billed annually · $216/yr</div>
+      <div style="margin-top:20px;flex:1">
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><b>2</b>&nbsp;inspections per year</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority emergency dispatch</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>20% off parts &amp; labor</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Waived trip &amp; diagnostic fees</div>
+        <div class="plan-feat off"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>Spring &amp; cable coverage</div>
+      </div>
+      <a href="#book" data-page="book" class="btn btn-p btn-full" style="margin-top:18px">Choose Priority</a>
+    </div>
+    <div class="plan-card">
+      <div class="mono-label" style="color:var(--orange)">COMPLETE</div>
+      <div class="plan-name">Total Care</div>
+      <div class="plan-price">$32<span class="per">/mo</span></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px">Billed annually · $384/yr</div>
+      <div style="margin-top:20px;flex:1">
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited inspections</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Front-of-line emergency access</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>30% off all parts &amp; labor</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Spring &amp; cable coverage included</div>
+        <div class="plan-feat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>No overtime charges, ever</div>
+      </div>
+      <a href="#book" data-page="book" class="btn btn-s btn-full" style="margin-top:18px">Choose Total Care</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- REVIEWS (work orders) -->
+<section class="section" id="reviewsHome" style="background:var(--surface)"><div class="container">
+  <div class="reveal" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end">
+    <div><span class="eyebrow">Command Center</span><h2 class="h-d">Completed work orders</h2></div>
+    <div style="display:flex;gap:8px"><button class="btn-ico" id="woPrev" aria-label="Previous review"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button><button class="btn-ico" id="woNext" aria-label="Next review"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+  </div>
+  <div class="grid3 reveal" data-d="100" id="woGrid" style="margin-top:40px"></div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section" id="faqHome" style="background:var(--bg)"><div class="container"><div class="grid2" style="align-items:start;gap:clamp(28px,4vw,60px)">
+  <div class="reveal" style="position:sticky;top:96px">
+    <span class="eyebrow blue">Maintenance Manual</span>
+    <h2 class="h-d">Questions,<br>answered straight</h2>
+    <p class="h-sub">No upsell scripts. Just clear answers about cost, timing and how our dispatch works.</p>
+    <a href="tel:+18005550147" class="btn btn-p btn-lg" style="margin-top:22px">Still unsure? Call us</a>
+  </div>
+  <div class="reveal" data-d="100" id="faqList"></div>
+</div></div></section>
+
+<!-- FINAL CTA -->
+<section class="final-cta section">
+  <div class="hero-grid-bg"></div><div class="hero-glow b" style="bottom:auto;top:-100px;right:0"></div>
+  <div class="container center" style="position:relative;z-index:2">
+    <div class="reveal"><span class="dispatch-badge" style="margin-inline:auto"><span class="dot" style="background:var(--orange)"></span> Technicians available now</span></div>
+    <h2 class="h-d reveal" data-d="80" style="color:#fff;font-size:clamp(2.6rem,6vw,5rem);margin-top:18px">Need garage door<br>service <span class="ac">right now?</span></h2>
+    <p class="hero-sub reveal" data-d="160" style="margin-inline:auto;text-align:center">A certified technician can be dispatched to your door immediately. No call centers, no waiting on hold.</p>
+    <div class="reveal" data-d="240" style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:30px">
+      <a href="tel:+18005550147" class="btn btn-red btn-lg">🚨 Emergency Service <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+      <a href="#book" data-page="book" class="btn btn-ghost btn-lg">Book a Technician</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page-home -->
+
+<!-- ============ REPAIRS ============ -->
+<div id="page-repairs" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Repairs</div>
+    <span class="eyebrow blue" style="margin-top:14px">Garage Door Repairs</span>
+    <h1 class="ph-h1">Fast, warrantied repairs<br>for every door system</h1>
+    <p class="ph-sub">Springs, cables, rollers, tracks, openers and panels — diagnosed on-site with a written quote before any work begins.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container">
+    <div class="grid3" id="repairsGrid"></div>
+    <div class="reveal" style="margin-top:40px;background:var(--steel);border-radius:var(--rc);padding:clamp(28px,4vw,44px);color:#fff;display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between">
+      <div><h2 class="h-d" style="color:#fff;font-size:clamp(2rem,4vw,2.8rem)">Not sure what broke?</h2><p style="color:var(--on-steel-mut);margin-top:10px;max-width:460px">Run the free instant diagnosis and get a likely cause, cost and priority in seconds.</p></div>
+      <a href="#home" data-page="home" class="btn btn-blue btn-lg js-after-home" data-target="diagnose">Run Instant Diagnosis</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ NEW DOORS ============ -->
+<div id="page-doors" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / New Doors</div>
+    <span class="eyebrow blue" style="margin-top:14px">Door Installation</span>
+    <h1 class="ph-h1">A new door,<br>installed in a day</h1>
+    <p class="ph-sub">Insulated steel, modern aluminum &amp; glass, carriage-house and full-view commercial doors — measured, supplied and fitted by our own crews.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container">
+    <div class="grid3" id="doorsGrid"></div>
+  </div></section>
+  <section class="section" style="background:var(--surface)"><div class="container center reveal" style="max-width:560px;margin-inline:auto">
+    <h2 class="h-d">Get a same-week<br>replacement estimate</h2>
+    <p class="h-sub">Free measurement, transparent pricing, financing available.</p>
+    <a href="#book" data-page="book" class="btn btn-p btn-lg" style="margin-top:22px">Get Instant Estimate</a>
+  </div></section>
+</div>
+
+<!-- ============ OPENERS ============ -->
+<div id="page-openers" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Openers</div>
+    <span class="eyebrow blue" style="margin-top:14px">Smart Openers</span>
+    <h1 class="ph-h1">Quieter, smarter,<br>app-connected openers</h1>
+    <p class="ph-sub">Belt-drive, wall-mount and battery-backup openers from LiftMaster, Chamberlain &amp; Genie — installed and synced to your phone.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container">
+    <div class="grid3" id="openersGrid"></div>
+  </div></section>
+</div>
+
+<!-- ============ SERVICE AREAS ============ -->
+<div id="page-areas" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Service Areas</div>
+    <span class="eyebrow blue" style="margin-top:14px">Coverage</span>
+    <h1 class="ph-h1">60-mile dispatch radius,<br>9 trucks rolling</h1>
+    <p class="ph-sub">Same-day coverage across the metro and surrounding counties. Check your ZIP for live arrival estimates.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container">
+    <div style="max-width:480px;margin-bottom:36px">
+      <label class="f-label">Check your ZIP code</label>
+      <div style="display:flex;gap:10px"><input id="zipInput2" class="f-input" inputmode="numeric" maxlength="5" placeholder="Enter ZIP code"/><button id="zipBtn2" class="btn btn-p">Check</button></div>
+      <div class="area-result" id="areaResult2" style="max-width:480px"><div class="area-row"><div class="ico" style="background:rgba(22,163,74,.12);color:var(--green)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><div style="font-weight:600;color:var(--text)" id="areaStatus2"></div><div style="font-size:13px;color:var(--muted)" id="areaCity2"></div></div></div><div class="area-row"><div class="ico" style="background:rgba(255,107,0,.12);color:var(--orange)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div style="font-weight:600;color:var(--text)">Estimated arrival</div><div style="font-size:13px;color:var(--muted)" id="areaEta2"></div></div></div></div>
+    </div>
+    <div class="grid4" id="areaCities"></div>
+  </div></section>
+</div>
+
+<!-- ============ PLANS ============ -->
+<div id="page-plans" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Protection Plan</div>
+    <span class="eyebrow blue" style="margin-top:14px">Garage Protection Plan</span>
+    <h1 class="ph-h1">Membership that pays<br>for itself in one visit</h1>
+    <p class="ph-sub">Annual inspections, priority repairs, discounted parts and front-of-line emergency access.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container">
+    <div style="overflow-x:auto"><table id="planTable" style="width:100%;border-collapse:collapse;min-width:620px"></table></div>
+    <div class="center" style="margin-top:36px"><a href="#book" data-page="book" class="btn btn-p btn-lg">Join the Protection Plan</a></div>
+  </div></section>
+</div>
+
+<!-- ============ REVIEWS ============ -->
+<div id="page-reviews" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Reviews</div>
+    <span class="eyebrow blue" style="margin-top:14px">Customer Reviews</span>
+    <h1 class="ph-h1">25,000 doors fixed.<br>Here's the proof.</h1>
+    <p class="ph-sub">Every review is a real, closed work order — problem, resolution, time and verdict.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container"><div class="grid3" id="reviewsAll"></div></div></section>
+</div>
+
+<!-- ============ FAQ ============ -->
+<div id="page-faq" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / FAQ</div>
+    <span class="eyebrow blue" style="margin-top:14px">Maintenance Manual</span>
+    <h1 class="ph-h1">Frequently asked<br>questions</h1>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container" style="max-width:820px"><div id="faqListFull"></div></div></section>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div id="page-contact" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Contact</div>
+    <span class="eyebrow blue" style="margin-top:14px">Get In Touch</span>
+    <h1 class="ph-h1">Reach dispatch<br>any way you like</h1>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container"><div class="grid2" style="gap:clamp(28px,4vw,56px)">
+    <div class="reveal">
+      <div style="display:grid;gap:12px">
+        <a href="tel:+18005550147" class="area-row" style="text-decoration:none"><div class="ico" style="background:rgba(220,38,38,.12);color:var(--red)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div style="font-weight:600;color:var(--text)">Emergency Hotline</div><div style="font-size:14px;color:var(--muted)">(800) 555-0147 · 24/7</div></div></a>
+        <a href="sms:+18005550147" class="area-row" style="text-decoration:none"><div class="ico" style="background:rgba(0,168,204,.14);color:var(--blue)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div style="font-weight:600;color:var(--text)">Text a Request</div><div style="font-size:14px;color:var(--muted)">Send a photo of the problem</div></div></a>
+        <a href="https://wa.me/18005550147" target="_blank" rel="noopener noreferrer" class="area-row" style="text-decoration:none"><div class="ico" style="background:rgba(37,211,102,.14);color:#25D366"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></div><div><div style="font-weight:600;color:var(--text)">WhatsApp</div><div style="font-size:14px;color:var(--muted)">Chat with a dispatcher</div></div></a>
+        <div class="area-row"><div class="ico" style="background:rgba(255,107,0,.12);color:var(--orange)"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div style="font-weight:600;color:var(--text)">Headquarters</div><div style="font-size:14px;color:var(--muted)">2400 Industrial Pkwy, Suite 12</div></div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="100"><form class="lead-form" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:clamp(22px,3vw,32px);display:grid;gap:15px;box-shadow:var(--shadow)">
+      <div style="font-family:var(--fd);font-size:24px;color:var(--text);letter-spacing:.02em">Instant Booking Request</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Name</label><input class="f-input" required placeholder="Your name"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label">Service needed</label><select class="f-input"><option>Emergency Repair</option><option>Broken Spring</option><option>Opener Repair</option><option>Off-Track Door</option><option>New Door Estimate</option><option>Smart Opener Install</option><option>Maintenance / Tune-Up</option></select></div>
+      <div><label class="f-label">Describe the issue</label><textarea class="f-input" rows="3" style="resize:vertical" placeholder="Tell us what's happening with your door"></textarea></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg">Send Request</button>
+    </form></div>
+  </div></div></section>
+</div>
+
+<!-- ============ BOOK ============ -->
+<div id="page-book" class="spa-page">
+  <section class="page-hero"><div class="hero-grid-bg"></div><div class="container" style="position:relative;z-index:2">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Book Service</div>
+    <span class="eyebrow blue" style="margin-top:14px">Emergency Booking</span>
+    <h1 class="ph-h1">Dispatch a technician<br>to your door</h1>
+    <p class="ph-sub">Fill this out and we'll match you to the nearest available truck. For active emergencies, calling is fastest.</p>
+  </div></section>
+  <section class="section" style="background:var(--bg)"><div class="container"><div class="grid2" style="gap:clamp(28px,4vw,56px);align-items:start">
+    <div class="reveal"><form class="lead-form" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:clamp(22px,3vw,34px);display:grid;gap:15px;box-shadow:var(--shadow)">
+      <div style="font-family:var(--fd);font-size:26px;color:var(--text);letter-spacing:.02em">Request Immediate Service</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Full name</label><input class="f-input" required placeholder="Your name"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Service type</label><select class="f-input"><option>Emergency Repair</option><option>Broken Spring</option><option>Opener Repair</option><option>Off-Track Door</option><option>New Door Estimate</option><option>Maintenance</option></select></div><div><label class="f-label">Property</label><select class="f-input"><option>Residential</option><option>Commercial</option><option>Property Manager</option><option>HOA / Community</option></select></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">ZIP code</label><input class="f-input" inputmode="numeric" maxlength="5" required placeholder="90210"/></div><div><label class="f-label">Preferred time</label><select class="f-input"><option>ASAP / Emergency</option><option>Today</option><option>Tomorrow</option><option>This week</option></select></div></div>
+      <div><label class="f-label">Anything we should know?</label><textarea class="f-input" rows="3" style="resize:vertical" placeholder="Brand, age of door, symptoms…"></textarea></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg">Dispatch a Technician</button>
+      <div style="text-align:center;font-family:var(--fm);font-size:11px;color:var(--faint)">⚡ No upfront charge · written quote before any work</div>
+    </form></div>
+    <div class="reveal" data-d="100">
+      <div style="background:var(--steel);border-radius:var(--rc);padding:28px;color:#fff;position:relative;overflow:hidden">
+        <div class="hero-grid-bg"></div>
+        <div style="position:relative;z-index:2">
+          <div class="dispatch-badge"><span class="dot"></span> 9 techs active now</div>
+          <h3 style="font-family:var(--fd);font-size:30px;margin-top:16px;letter-spacing:.02em">Why book with dispatch?</h3>
+          <div style="display:grid;gap:14px;margin-top:18px">
+            <div style="display:flex;gap:12px"><span style="color:var(--orange-t);font-family:var(--fd);font-size:22px">01</span><div><div style="font-weight:600">Real-time matching</div><div style="color:var(--on-steel-mut);font-size:14px">You're routed to the closest truck, not a queue.</div></div></div>
+            <div style="display:flex;gap:12px"><span style="color:var(--orange-t);font-family:var(--fd);font-size:22px">02</span><div><div style="font-weight:600">Live arrival tracking</div><div style="color:var(--on-steel-mut);font-size:14px">Follow your technician's ETA by text.</div></div></div>
+            <div style="display:flex;gap:12px"><span style="color:var(--orange-t);font-family:var(--fd);font-size:22px">03</span><div><div style="font-weight:600">Fixed in one visit</div><div style="color:var(--on-steel-mut);font-size:14px">94% first-time fix — parts ride on the truck.</div></div></div>
+          </div>
+          <a href="tel:+18005550147" class="btn btn-red btn-full btn-lg" style="margin-top:24px">Or call now: (800) 555-0147</a>
+        </div>
+      </div>
+    </div>
+  </div></div></section>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer><div class="hero-grid-bg"></div>
+  <div class="container" style="padding-block:clamp(52px,7vw,80px)">
+    <div class="ft-grid">
+      <div>
+        <a href="#home" class="logo" data-page="home"><span class="logo-mark"><span class="logo-door"><span class="logo-slat"></span><span class="logo-slat"></span><span class="logo-slat"></span><span class="logo-slat"></span></span></span><span><span class="logo-text" style="color:#fff">RAPID<span class="ac">TRACK</span></span><span class="logo-sub">Garage Door Dispatch</span></span></a>
+        <p class="ft-desc">Real-time garage door dispatch for homes, businesses and property managers. Emergency repair, installation and smart openers — 24/7, with a 43-minute average arrival.</p>
+        <div class="ft-emergency"><div style="font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-t)">24/7 Emergency Hotline</div><a href="tel:+18005550147" style="font-family:var(--fd);font-size:28px;color:#fff;letter-spacing:.02em">(800) 555-0147</a></div>
+      </div>
+      <div><div class="ft-col-h">Repairs</div><div class="ft-links"><a href="#repairs" data-page="repairs" class="ft-link">Spring Repair</a><a href="#repairs" data-page="repairs" class="ft-link">Cable Repair</a><a href="#repairs" data-page="repairs" class="ft-link">Off-Track Doors</a><a href="#repairs" data-page="repairs" class="ft-link">Roller Replacement</a><a href="#repairs" data-page="repairs" class="ft-link">Panel Repair</a></div></div>
+      <div><div class="ft-col-h">Install &amp; Smart</div><div class="ft-links"><a href="#doors" data-page="doors" class="ft-link">New Doors</a><a href="#doors" data-page="doors" class="ft-link">Commercial Doors</a><a href="#openers" data-page="openers" class="ft-link">Smart Openers</a><a href="#openers" data-page="openers" class="ft-link">Opener Repair</a><a href="#openers" data-page="openers" class="ft-link">WiFi Integration</a></div></div>
+      <div><div class="ft-col-h">Company</div><div class="ft-links"><a href="#plans" data-page="plans" class="ft-link">Protection Plan</a><a href="#areas" data-page="areas" class="ft-link">Service Areas</a><a href="#reviews" data-page="reviews" class="ft-link">Reviews</a><a href="#faq" data-page="faq" class="ft-link">FAQ</a><a href="#contact" data-page="contact" class="ft-link">Contact</a></div></div>
+      <div><div class="ft-col-h">Resources</div><div class="ft-links"><a href="#book" data-page="book" class="ft-link">Book Service</a><a href="#home" data-page="home" class="ft-link js-after-home" data-target="diagnose">Repair Diagnosis</a><a href="#areas" data-page="areas" class="ft-link">ZIP Checker</a><a href="tel:+18005550147" class="ft-link">Emergency Hotline</a></div></div>
+    </div>
+    <div class="ft-bottom">
+      <div class="ft-copy"><span>&copy; <span class="yr"></span> RapidTrack Garage. All Rights Reserved.</span><span style="opacity:.4">·</span><span>Built &amp; Maintenance by <a href="https://www.growrixos.com" target="_blank" rel="noopener noreferrer" class="ft-brand">GrowrixOS</a></span></div>
+      <div class="ft-legal"><a href="#faq" data-page="faq">Privacy</a><a href="#faq" data-page="faq">Terms</a><a href="#faq" data-page="faq">Warranty</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Mobile navigation">
+  <a href="#home" data-page="home" class="bn-item active"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
+  <a href="#home" data-page="home" class="bn-item js-after-home" data-target="diagnose"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>Diagnose</a>
+  <a href="#book" data-page="book" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book</a>
+  <a href="#areas" data-page="areas" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3V5h12v12h-1"/><path d="M14 9h4l3 3v5h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>Track Tech</a>
+  <a href="tel:+18005550147" class="bn-item call-hl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+</nav>
+
+<!-- AI ASSISTANT -->
+<div class="ai-overlay" id="aiOverlay"></div>
+<div class="ai-panel" id="aiPanel" role="dialog" aria-label="AI Garage Door Assistant">
+  <div class="ai-head"><div class="ai-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg></div>
+    <div style="flex:1"><div class="nm">RapidTrack Assistant</div><div class="st"><span class="dot"></span> Online · replies instantly</div></div>
+    <button id="aiClose" class="btn-ico" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff" aria-label="Close assistant"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="ai-body" id="aiBody"></div>
+  <div class="ai-chips" id="aiChips"></div>
+  <div class="ai-input"><input id="aiInput" placeholder="Ask about your garage door…" aria-label="Message to assistant"/><button class="ai-send" id="aiSend" aria-label="Send message"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
+</div>
+
+<!-- FAB -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fabOpts">
+    <button class="fab-opt top" id="fabTop" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <a href="https://wa.me/18005550147" target="_blank" rel="noopener noreferrer" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg><span class="fab-tip">WhatsApp</span></a>
+    <button class="fab-opt ai" id="fabAi" aria-label="AI assistant"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg><span class="fab-tip">AI Assistant</span></button>
+    <a href="tel:+18005550147" class="fab-opt call" aria-label="Call dispatch"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Call dispatch</span></a>
+  </div>
+  <button id="fabMain" class="fab-main" aria-label="Quick actions" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+</div>
+
+<script>
+"use strict";
+/* ===== ICON HELPERS ===== */
+const ic=(p,sw)=>'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||2)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const CHECK='<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+const SUN=ic('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>');
+const MOON=ic('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>');
+const STAR='<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+
+/* ===== DATA ===== */
+const SYMPTOMS=[
+ {id:'wont-open',t:"Door Won't Open",d:"No movement at all",icon:ic('<path d="M5 17H3V5h12v12h-1"/><path d="M14 9h4l3 3v5h-2"/>'),cause:"Likely Broken Torsion Spring",cd:"When a door won't lift, a snapped spring is the cause about 70% of the time. The opener strains but can't raise the door's full weight.",cost:"$180 – $320",time:"60–90 min",prio:88,pl:"High",tag:"tag-red"},
+ {id:'spring',t:"Broken Spring",d:"Loud bang heard",icon:ic('<path d="M3 12h4l2-7 4 14 2-7h6"/>'),cause:"Torsion or Extension Spring Failure",cd:"A loud bang usually means a spring snapped under tension. This is the single most common garage door failure — and the most dangerous to DIY.",cost:"$180 – $350",time:"60–90 min",prio:92,pl:"Urgent",tag:"tag-red"},
+ {id:'off-track',t:"Door Off Track",d:"Door is crooked / stuck",icon:ic('<path d="m6 9 6 6 6-6"/><path d="M3 4h18"/>'),cause:"Derailed Roller / Bent Track",cd:"A door off its track is unsafe to operate. Forcing the opener can bend panels. We re-seat the rollers, straighten or replace the track and re-balance.",cost:"$150 – $290",time:"60–120 min",prio:80,pl:"High",tag:"tag-orange"},
+ {id:'remote',t:"Remote Not Working",d:"Wall button works, remote doesn't",icon:ic('<rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="14" r="2"/>'),cause:"Remote Battery or Re-Sync",cd:"If the wall button works but the remote doesn't, it's usually a dead battery or lost pairing. A quick fix — often resolved on the phone before dispatch.",cost:"$0 – $90",time:"15–30 min",prio:24,pl:"Low",tag:"tag-green"},
+ {id:'opener',t:"Opener Failure",d:"Motor runs, nothing moves",icon:ic('<rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/>'),cause:"Stripped Gear or Logic Board",cd:"A humming motor with no movement points to a stripped drive gear or failed logic board. We diagnose whether a repair or opener replacement is the better value.",cost:"$140 – $420",time:"45–90 min",prio:58,pl:"Medium",tag:"tag-amber"},
+ {id:'noise',t:"Strange Noise",d:"Grinding, squealing, rattling",icon:ic('<path d="M2 10v3M6 6v11M10 3v18M14 8v7M18 5v13M22 10v3"/>'),cause:"Worn Rollers or Dry Hardware",cd:"Grinding or squealing usually means worn rollers, loose hardware or dry hinges. Catching this early prevents a more expensive failure down the line.",cost:"$90 – $220",time:"45–75 min",prio:40,pl:"Medium",tag:"tag-amber"}
+];
+const HUB=[
+ {icon:ic('<path d="M3 12h4l2-7 4 14 2-7h6"/>'),t:"Spring Repair",c:"SVC-01",d:"Torsion & extension spring replacement",f:["High-cycle springs rated 20,000+ cycles","Both springs replaced as a matched pair","Door re-balanced & safety-tested","Lifetime parts warranty"],p:"$180+",pm:"Most jobs done same-visit"},
+ {icon:ic('<path d="M4 6c4 0 4 12 8 12s4-12 8-12"/>'),t:"Cable Repair",c:"SVC-02",d:"Frayed or snapped lift cable replacement",f:["Aircraft-grade galvanized cables","Drums inspected & re-seated","Both sides replaced for even lift","Tension calibrated to door weight"],p:"$140+",pm:"60–90 minute repair"},
+ {icon:ic('<circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><path d="M9 12h6"/>'),t:"Roller Replacement",c:"SVC-03",d:"Quiet nylon roller upgrade",f:["13-ball nylon sealed rollers","Dramatically quieter operation","Reduces strain on opener","Full set replaced, not patched"],p:"$120+",pm:"Whisper-quiet result"},
+ {icon:ic('<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18"/>'),t:"Door Installation",c:"SVC-04",d:"New residential door supply & fit",f:["Insulated steel, glass or carriage styles","Free in-home measurement","Old door haul-away included","Installed in a single day"],p:"$850+",pm:"Financing available"},
+ {icon:ic('<rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/>'),t:"Smart Openers",c:"SVC-05",d:"WiFi opener install & integration",f:["LiftMaster, Chamberlain & Genie","App control + voice assistant sync","Battery backup for power cuts","Camera & rolling-code security"],p:"$320+",pm:"Synced to your phone"},
+ {icon:ic('<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-3"/>'),t:"Commercial Doors",c:"SVC-06",d:"Rolling steel & sectional service",f:["Warehouse & loading-dock doors","High-cycle commercial springs","Preventative maintenance contracts","Priority response for businesses"],p:"Quote",pm:"Minimal downtime"},
+ {icon:ic('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),t:"Preventative Maintenance",c:"SVC-07",d:"Annual tune-up & safety inspection",f:["25-point system inspection","Lubrication & hardware tightening","Spring tension & balance check","Catches failures before they happen"],p:"$8/mo",pm:"Protection Plan members"}
+];
+const REPAIRS=[
+ {t:"Broken Spring Repair",d:"The #1 garage door failure. We replace torsion and extension springs in matched pairs with high-cycle hardware.",tag:"Same-day",cls:"tag-red"},
+ {t:"Cable Replacement",d:"Snapped or frayed lift cables re-strung with galvanized aircraft-grade cable and recalibrated tension.",tag:"60–90 min",cls:"tag-orange"},
+ {t:"Off-Track Repair",d:"Derailed doors re-seated, bent tracks straightened or replaced, rollers renewed and the door re-balanced.",tag:"High priority",cls:"tag-orange"},
+ {t:"Opener Repair",d:"Stripped gears, failed logic boards, sensor faults and worn belts diagnosed and fixed — or replaced if smarter.",tag:"All brands",cls:"tag-amber"},
+ {t:"Roller & Hinge Service",d:"Worn rollers and loose hinges swapped for quiet nylon hardware — eliminates grinding and squealing.",tag:"Quiet result",cls:"tag-green"},
+ {t:"Panel & Section Repair",d:"Dented or cracked panels repaired or replaced to match, restoring both looks and structural integrity.",tag:"Color-matched",cls:"tag-blue"}
+];
+const DOORS=[
+ {t:"Insulated Steel",d:"The all-rounder. Durable, energy-efficient and low-maintenance with R-values up to 18.",p:"From $950"},
+ {t:"Modern Aluminum & Glass",d:"Full-view contemporary doors that flood the garage with light. A statement entrance.",p:"From $2,400"},
+ {t:"Carriage House",d:"Classic swing-style looks with modern sectional convenience and insulation.",p:"From $1,800"},
+ {t:"Wood & Composite",d:"Natural warmth in cedar or low-maintenance composite, custom-stained to your home.",p:"From $2,900"},
+ {t:"Commercial Sectional",d:"Heavy-duty insulated doors for warehouses, fleets and loading docks.",p:"Quote"},
+ {t:"Rolling Steel",d:"Security shutters and rolling steel doors for storefronts and industrial bays.",p:"Quote"}
+];
+const OPENERS=[
+ {t:"Belt-Drive Smart",d:"Near-silent belt drive with WiFi, battery backup and built-in camera. Our most popular upgrade.",p:"From $380"},
+ {t:"Wall-Mount (Jackshaft)",d:"Frees up ceiling space, ultra-quiet, ideal for high or cathedral garage ceilings.",p:"From $460"},
+ {t:"Chain-Drive Heavy-Duty",d:"Rugged and reliable for heavier doors and detached garages on a budget.",p:"From $290"},
+ {t:"Battery Backup Add-On",d:"Keeps your door working through power outages — required in some states.",p:"From $120"},
+ {t:"Smart Hub Integration",d:"Connect existing openers to myQ, Alexa, Google Home and Apple Home.",p:"From $90"},
+ {t:"Opener Tune-Up",d:"Re-align sensors, lubricate, replace worn gears and re-program remotes.",p:"From $80"}
+];
+const CITIES=["Riverside","Oak Park","Lakeview","Westfield","Brookhaven","Summit Hills","Fairmont","Cedar Grove","Northgate","Bayside","Greenwood","Maplewood"];
+const TECHS=["Marcus T.","Diego R.","Sam K.","Priya N.","Wade O.","Luis A.","Jordan B.","Chris D."];
+const WORKORDERS=[
+ {id:"WO-24817",prob:"Spring snapped at 6am, car trapped inside",res:"Both torsion springs replaced, door re-balanced",time:"52 min on-site",name:"Jennifer M.",loc:"Riverside",fb:"Truck showed up in under an hour and I was off to work on time. Genuinely impressed.",stars:5},
+ {id:"WO-24793",prob:"Door grinding loudly and moving slowly",res:"Full nylon roller set + hinge service",time:"1 hr 5 min",name:"David & Sons LLC",loc:"Northgate",fb:"Our warehouse door sounds brand new. Quoted on-site, no surprises on the invoice.",stars:5},
+ {id:"WO-24761",prob:"Opener humming, door wouldn't budge",res:"Stripped drive gear replaced, remotes re-synced",time:"48 min",name:"Aisha R.",loc:"Lakeview",fb:"The tech explained exactly what was wrong and showed me the worn part. Honest work.",stars:5},
+ {id:"WO-24738",prob:"Door came off the track overnight",res:"Track straightened, rollers replaced, re-aligned",time:"1 hr 20 min",name:"Tom B.",loc:"Cedar Grove",fb:"Came out same evening at no extra charge. Door is smoother than it's been in years.",stars:5},
+ {id:"WO-24702",prob:"Old door failing, wanted a quiet upgrade",res:"New insulated steel door + smart belt opener",time:"Full day install",name:"The Patels",loc:"Summit Hills",fb:"From quote to install in three days. The app control is a game changer for us.",stars:5},
+ {id:"WO-24689",prob:"Remote stopped working, panicking",res:"Re-paired remote, replaced battery, no charge",time:"18 min",name:"Greg S.",loc:"Bayside",fb:"Honestly expected a sales pitch. Instead they fixed it for free in 20 minutes.",stars:5}
+];
+const FAQ=[
+ {q:"How much does spring repair cost?",a:"Most torsion spring replacements run $180–$350 depending on door size and spring type. We always replace springs in matched pairs and confirm the exact price in writing on-site before any work begins — no surprises."},
+ {q:"How quickly can you arrive?",a:"Our average arrival time today is 43 minutes. Because we dispatch the nearest available truck rather than working off a queue, most customers see a technician within the hour. Use the ZIP checker for a live estimate for your area."},
+ {q:"Do you repair all brands?",a:"Yes. Our trucks carry parts for every major brand — LiftMaster, Chamberlain, Genie, Clopay, Wayne Dalton, Amarr and more. That's how we hit a 94% first-time fix rate."},
+ {q:"Should I repair or replace my door?",a:"As a rule of thumb: if a repair costs less than half the price of a new door and the door is under 15 years old, repair usually wins. Our technician gives you an honest both-ways comparison on-site so you can decide."},
+ {q:"Do you offer warranties?",a:"Every repair is backed by a lifetime parts warranty and a workmanship guarantee. New door installations carry the manufacturer warranty plus our own labor warranty."},
+ {q:"Are emergency repairs available 24/7?",a:"Yes — we dispatch around the clock, including nights, weekends and holidays, with no overtime surcharge. For active emergencies (a door stuck open, a snapped spring, a car trapped), calling is always fastest."}
+];
+const AI=[
+ {k:["spring","snap","bang","broke","broken"],r:"A loud bang and a door that won't lift almost always means a broken torsion spring — the most common failure we see. Springs are under extreme tension and dangerous to DIY. Typical replacement is $180–$350 and takes 60–90 minutes. Want me to start a booking?"},
+ {k:["opener","motor","hum","remote","won't open","wont open"],r:"If the motor runs but nothing moves, it's usually a stripped drive gear or a failed logic board ($140–$420). If only the remote is dead, it's often just a battery or a quick re-sync — sometimes free. Tell me which is happening and I'll narrow it down."},
+ {k:["off track","off-track","crooked","derail","stuck"],r:"A door off its track is unsafe to keep operating — forcing the opener can bend the panels. We re-seat the rollers, straighten or replace the track and re-balance the door, usually $150–$290. I'd treat this as high priority. Shall I dispatch someone?"},
+ {k:["noise","grind","squeal","loud","rattle"],r:"Grinding or squealing is usually worn rollers, dry hinges or loose hardware ($90–$220). Catching it early prevents a bigger failure. A roller-and-hinge service makes most doors whisper-quiet."},
+ {k:["cost","price","much","quote","estimate","how much"],r:"Ballpark ranges: spring repair $180–$350, cable repair $140+, roller service $120+, opener repair $140–$420, new doors from $850. Every job gets a written on-site quote before work starts. Want a tailored estimate? Try the Instant Repair Diagnosis tool."},
+ {k:["how long","arrive","time","fast","eta","quick","when"],r:"Average arrival today is 43 minutes — we route the closest truck to you. Drop your ZIP into the Service Area Checker for a live estimate for your specific neighborhood."},
+ {k:["smart","wifi","app","myq","alexa","google","camera"],r:"We install and integrate smart openers (LiftMaster, Chamberlain, Genie) with app control, voice assistant sync, battery backup and built-in cameras — from $320. We can also connect your existing opener to a smart hub from $90."},
+ {k:["warranty","guarantee"],r:"Repairs carry a lifetime parts warranty plus a workmanship guarantee. New installs add the manufacturer warranty on top of our labor warranty. Everything in writing."},
+ {k:["plan","membership","protection","subscribe"],r:"The Garage Protection Plan starts at $8/mo and includes annual inspections, discounted parts and priority dispatch. Most members save the cost back in a single repair. Want the comparison?"},
+ {k:["commercial","warehouse","business","property"],r:"We service commercial rolling steel and sectional doors with high-cycle springs, maintenance contracts and priority business response. Property managers get a dedicated dispatch line."},
+ {k:["emergency","now","urgent","trapped","help"],r:"We dispatch 24/7 with no overtime charge. For an active emergency, calling (800) 555-0147 is fastest — a technician can be on the way in minutes. Want me to open the booking form instead?"}
+];
+
+/* ===== RENDER ===== */
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function stars(n){return Array(n).fill(STAR).join('');}
+
+function renderSymptoms(){const g=document.getElementById('symGrid');if(!g)return;g.innerHTML=SYMPTOMS.map(s=>'<button class="sym" data-sym="'+s.id+'"><span class="sym-ico">'+s.icon+'</span><span><span class="sym-t">'+s.t+'</span><span class="sym-d">'+s.d+'</span></span></button>').join('');}
+function renderHub(){const l=document.getElementById('hubList');if(!l)return;l.innerHTML=HUB.map((m,i)=>'<div class="hub-mod'+(i===0?' open':'')+'" data-hub><button class="hub-head" aria-expanded="'+(i===0)+'"><span class="hub-ico">'+m.icon+'</span><span class="hub-tt"><h3>'+m.t+'</h3><p>'+m.c+' · '+m.d+'</p></span><span class="hub-toggle">'+ic('<path d="M12 5v14M5 12h14"/')+'</span></button><div class="hub-body"><div class="hub-body-inner"><div>'+m.f.map(f=>'<div class="hub-feat">'+CHECK+'<span>'+f+'</span></div>').join('')+'</div><div class="hub-price"><div class="l">Starting at</div><div class="v">'+m.p+'</div><div class="m">'+m.pm+'</div><a href="#book" data-page="book" class="btn btn-p btn-sm btn-full" style="margin-top:14px">Book this service</a></div></div></div></div>').join('');
+  l.querySelectorAll('[data-hub]').forEach(mod=>{const head=mod.querySelector('.hub-head'),body=mod.querySelector('.hub-body');if(mod.classList.contains('open'))body.style.maxHeight=body.scrollHeight+'px';head.addEventListener('click',()=>{const open=mod.classList.toggle('open');head.setAttribute('aria-expanded',open);body.style.maxHeight=open?body.scrollHeight+'px':'0';});});}
+function cardGrid(id,arr,kind){const g=document.getElementById(id);if(!g)return;g.innerHTML=arr.map(c=>{let foot=kind==='repair'?'<span class="tag '+c.cls+'">'+c.tag+'</span>':'<span style="font-family:var(--fd);font-size:22px;color:var(--orange)">'+c.p+'</span>';return '<div class="reveal" data-d="60"><div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:26px;height:100%;display:flex;flex-direction:column;transition:transform .2s,border-color .2s" onmouseover="this.style.transform=\'translateY(-4px)\';this.style.borderColor=\'var(--orange)\'" onmouseout="this.style.transform=\'\';this.style.borderColor=\'var(--border)\'"><h3 style="font-family:var(--fd);font-size:24px;color:var(--text);letter-spacing:.02em">'+c.t+'</h3><p style="color:var(--muted);font-size:14px;line-height:1.55;margin-top:8px;flex:1">'+c.d+'</p><div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between">'+foot+'<a href="#book" data-page="book" class="btn btn-s btn-sm">Book '+ic('<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',2)+'</a></div></div></div>';}).join('');}
+function renderAreaCities(){const g=document.getElementById('areaCities');if(!g)return;g.innerHTML=CITIES.map(c=>'<div class="reveal" data-d="40"><div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rb);padding:18px;display:flex;align-items:center;gap:12px"><span class="dot"></span><div><div style="font-weight:600;color:var(--text)">'+c+'</div><div style="font-family:var(--fm);font-size:11px;color:var(--green)">Active · same-day</div></div></div></div>').join('');}
+function renderWO(grid,arr){const g=document.getElementById(grid);if(!g)return;g.innerHTML=arr.map(w=>'<div class="reveal" data-d="60"><div class="wo-card"><div class="wo-head"><span class="wo-id">'+w.id+'</span><span class="wo-stars">'+stars(w.stars)+'</span></div><div class="wo-body"><div class="wo-row"><span class="wo-k">Problem</span><span class="wo-v">'+w.prob+'</span></div><div class="wo-row"><span class="wo-k">Resolution</span><span class="wo-v">'+w.res+'</span></div><div class="wo-row"><span class="wo-k">Time</span><span class="wo-v">'+w.time+'</span></div><div class="wo-row"><span class="wo-k">Verdict</span><span class="wo-v" style="font-style:italic;color:var(--muted)">"'+w.fb+'"</span></div></div><div class="wo-foot"><span style="font-weight:600;font-size:14px;color:var(--text)">'+w.name+'</span><span style="font-family:var(--fm);font-size:11px;color:var(--faint)">'+w.loc+'</span></div></div></div>').join('');}
+function renderFaq(id){const l=document.getElementById(id);if(!l)return;l.innerHTML=FAQ.map((f,i)=>'<div class="faq-item" data-faq><button class="faq-q" aria-expanded="false"><span class="qn">0'+(i+1)+'</span><span>'+f.q+'</span><span class="ar">'+ic('<polyline points="6 9 12 15 18 9"/>')+'</span></button><div class="faq-a"><div class="faq-a-in">'+f.a+'</div></div></div>').join('');
+  l.querySelectorAll('[data-faq]').forEach(item=>{const q=item.querySelector('.faq-q'),a=item.querySelector('.faq-a');q.addEventListener('click',()=>{const open=item.classList.toggle('open');q.setAttribute('aria-expanded',open);a.style.maxHeight=open?a.scrollHeight+'px':'0';});});}
+function renderPlanTable(){const t=document.getElementById('planTable');if(!t)return;const rows=[["Annual inspections","1×","2×","Unlimited"],["Priority emergency dispatch","—","Yes","Front-of-line"],["Parts & labor discount","10%","20%","30%"],["Waived trip / diagnostic fees","—","Yes","Yes"],["Spring & cable coverage","—","—","Included"],["No overtime charges","—","—","Ever"],["Price / month","$8","$18","$32"]];
+  t.innerHTML='<thead><tr><th style="text-align:left;padding:16px;font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);border-bottom:2px solid var(--border)">Benefit</th><th style="padding:16px;font-family:var(--fd);font-size:22px;color:var(--text);border-bottom:2px solid var(--border)">Tune-Up</th><th style="padding:16px;font-family:var(--fd);font-size:22px;color:var(--orange);border-bottom:2px solid var(--orange)">Priority</th><th style="padding:16px;font-family:var(--fd);font-size:22px;color:var(--text);border-bottom:2px solid var(--border)">Total Care</th></tr></thead><tbody>'+rows.map(r=>'<tr><td style="padding:14px 16px;font-size:14px;color:var(--text);border-bottom:1px solid var(--border)">'+r[0]+'</td><td style="padding:14px 16px;text-align:center;font-size:14px;color:var(--muted);border-bottom:1px solid var(--border)">'+r[1]+'</td><td style="padding:14px 16px;text-align:center;font-size:14px;font-weight:600;color:var(--text);border-bottom:1px solid var(--border);background:rgba(255,107,0,.04)">'+r[2]+'</td><td style="padding:14px 16px;text-align:center;font-size:14px;color:var(--muted);border-bottom:1px solid var(--border)">'+r[3]+'</td></tr>').join('')+'</tbody>';}
+
+/* ===== DIAGNOSIS TOOL ===== */
+function initDiagnosis(){const grid=document.getElementById('symGrid');if(!grid)return;
+  grid.addEventListener('click',e=>{const btn=e.target.closest('[data-sym]');if(!btn)return;
+    grid.querySelectorAll('.sym').forEach(s=>s.classList.remove('on'));btn.classList.add('on');
+    const s=SYMPTOMS.find(x=>x.id===btn.dataset.sym);if(!s)return;
+    document.getElementById('diagEmpty').style.display='none';
+    const out=document.getElementById('diagOut');out.classList.add('show');
+    const tag=document.getElementById('diagTag');tag.className='tag '+s.tag;tag.textContent=s.pl+' Priority';
+    document.getElementById('diagCause').textContent=s.cause;
+    document.getElementById('diagDesc').textContent=s.cd;
+    document.getElementById('diagCost').textContent=s.cost;
+    document.getElementById('diagTime').textContent=s.time;
+    document.getElementById('diagPrioLbl').textContent=s.pl;
+    const fill=document.getElementById('diagPrioFill');
+    const col=s.prio>=80?'var(--red)':s.prio>=50?'var(--amber)':'var(--green)';
+    fill.style.background=col;fill.style.width='0';
+    requestAnimationFrame(()=>{setTimeout(()=>fill.style.width=s.prio+'%',60);});
+  });}
+
+/* ===== AREA CHECKER ===== */
+function checkZip(zip,sEl,cEl,eEl,tEl,wrap){
+  if(!/^\d{5}$/.test(zip)){wrap.classList.remove('show');alert('Please enter a valid 5-digit ZIP code.');return;}
+  const h=zip.split('').reduce((a,d)=>a+ +d,0);
+  const city=CITIES[h%CITIES.length];const eta=28+(h%34);const tech=TECHS[(h*3)%TECHS.length];const dist=(1+(h%9)*0.4).toFixed(1);
+  wrap.classList.add('show');
+  if(sEl)sEl.textContent='Covered — same-day service';
+  if(cEl)cEl.textContent=city+' service zone · ZIP '+zip;
+  if(eEl)eEl.textContent='~'+eta+' minutes from now';
+  if(tEl)tEl.textContent=tech+' · '+dist+' miles away';
+}
+function initArea(){
+  const b1=document.getElementById('zipBtn'),i1=document.getElementById('zipInput');
+  if(b1&&i1){const run=()=>checkZip(i1.value.trim(),document.getElementById('areaStatus'),document.getElementById('areaCity'),document.getElementById('areaEta'),document.getElementById('areaTech'),document.getElementById('areaResult'));b1.addEventListener('click',run);i1.addEventListener('keydown',e=>{if(e.key==='Enter')run();});}
+  const b2=document.getElementById('zipBtn2'),i2=document.getElementById('zipInput2');
+  if(b2&&i2){const run2=()=>checkZip(i2.value.trim(),document.getElementById('areaStatus2'),document.getElementById('areaCity2'),document.getElementById('areaEta2'),null,document.getElementById('areaResult2'));b2.addEventListener('click',run2);i2.addEventListener('keydown',e=>{if(e.key==='Enter')run2();});}
+}
+
+/* ===== BEFORE/AFTER ===== */
+function initBA(){document.querySelectorAll('[data-ba]').forEach(ba=>{const after=ba.querySelector('.ba-after'),handle=ba.querySelector('.ba-handle'),knob=ba.querySelector('.ba-knob');let drag=false;
+  const set=x=>{const r=ba.getBoundingClientRect();let p=((x-r.left)/r.width)*100;p=Math.max(2,Math.min(98,p));after.style.clipPath='inset(0 0 0 '+p+'%)';handle.style.left=p+'%';knob.style.left=p+'%';};
+  const start=()=>drag=true;const end=()=>drag=false;
+  const move=e=>{if(!drag)return;set((e.touches?e.touches[0]:e).clientX);};
+  ba.addEventListener('mousedown',e=>{start();set(e.clientX);});ba.addEventListener('touchstart',e=>{start();set(e.touches[0].clientX);},{passive:true});
+  window.addEventListener('mousemove',move);window.addEventListener('touchmove',move,{passive:true});
+  window.addEventListener('mouseup',end);window.addEventListener('touchend',end);
+  ba.addEventListener('click',e=>{if(!drag)set(e.clientX);});});}
+
+/* ===== TIMELINE ===== */
+function animateTimeline(){const sec=document.getElementById('dispatchTl');if(!sec||sec.dataset.run)return;const steps=sec.querySelectorAll('[data-step]'),prog=document.getElementById('tlProg'),truck=document.getElementById('tlTruck');
+  const io=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){sec.dataset.run='1';steps.forEach((s,i)=>setTimeout(()=>s.classList.add('done'),i*260));setTimeout(()=>{if(prog){prog.style.width='100%';}if(truck){truck.style.left='100%';}},200);io.disconnect();}});},{threshold:.3});io.observe(sec);}
+
+/* ===== WORK ORDER CAROUSEL (scroll) ===== */
+function initWoCarousel(){const g=document.getElementById('woGrid');if(!g)return;let idx=0;const order=[...WORKORDERS];
+  const next=document.getElementById('woNext'),prev=document.getElementById('woPrev');
+  const rot=dir=>{idx=(idx+dir+order.length)%order.length;const view=[];for(let k=0;k<3;k++)view.push(order[(idx+k)%order.length]);renderWO('woGrid',view);bindData(g);};
+  if(next)next.addEventListener('click',()=>rot(1));if(prev)prev.addEventListener('click',()=>rot(-1));}
+
+/* ===== AI ASSISTANT ===== */
+const aiPanel=()=>document.getElementById('aiPanel'),aiOv=()=>document.getElementById('aiOverlay');
+function aiAdd(text,who){const body=document.getElementById('aiBody');const m=el('div','ai-msg '+who,text);body.appendChild(m);body.scrollTop=body.scrollHeight;}
+function aiReply(q){const t=q.toLowerCase();let best=null;for(const intent of AI){if(intent.k.some(k=>t.includes(k))){best=intent.r;break;}}
+  if(!best)best="I can help with springs, openers, off-track doors, noises, costs, arrival times, smart openers, warranties and our Protection Plan. What's going on with your door? Or call (800) 555-0147 for immediate dispatch.";
+  setTimeout(()=>aiAdd(best,'bot'),420);}
+function aiOpen(){aiPanel().classList.add('open');aiOv().classList.add('open');const body=document.getElementById('aiBody');if(!body.dataset.init){body.dataset.init='1';aiAdd("Hi! I'm the RapidTrack Assistant. Tell me what your garage door is doing and I'll point you to the likely fix, cost and next step.",'bot');}document.getElementById('aiInput').focus();}
+function aiClose(){aiPanel().classList.remove('open');aiOv().classList.remove('open');}
+function initAi(){const chips=["Broken spring?","How much is opener repair?","How fast can you arrive?","Smart openers"];
+  document.getElementById('aiChips').innerHTML=chips.map(c=>'<button class="ai-chip">'+c+'</button>').join('');
+  document.getElementById('aiChips').addEventListener('click',e=>{const c=e.target.closest('.ai-chip');if(!c)return;aiAdd(c.textContent,'user');aiReply(c.textContent);});
+  const input=document.getElementById('aiInput'),send=document.getElementById('aiSend');
+  const fire=()=>{const v=input.value.trim();if(!v)return;aiAdd(v,'user');aiReply(v);input.value='';};
+  send.addEventListener('click',fire);input.addEventListener('keydown',e=>{if(e.key==='Enter')fire();});
+  document.getElementById('fabAi').addEventListener('click',aiOpen);
+  document.getElementById('aiClose').addEventListener('click',aiClose);aiOv().addEventListener('click',aiClose);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')aiClose();});}
+
+/* ===== CORE: theme, nav, reveal, counters ===== */
+const Theme={init(){this.apply(localStorage.getItem('rt-theme')||'light');},apply(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('rt-theme',t);}catch(e){}document.querySelectorAll('.theme-btn').forEach(b=>b.innerHTML=t==='dark'?SUN:MOON);},toggle(){this.apply(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}};
+function initNavbar(){const n=document.querySelector('.navbar');if(n)window.addEventListener('scroll',()=>n.classList.toggle('scrolled',scrollY>20),{passive:true});}
+function initDrawer(){const d=document.querySelector('.drawer'),o=document.querySelector('.hamburger'),c=document.getElementById('drawer-close');if(!d)return;o&&o.addEventListener('click',()=>d.classList.add('open'));c&&c.addEventListener('click',()=>d.classList.remove('open'));d.querySelectorAll('[data-page]').forEach(a=>a.addEventListener('click',()=>d.classList.remove('open')));}
+function initFab(){const m=document.getElementById('fabMain'),opts=document.getElementById('fabOpts'),top=document.getElementById('fabTop');if(!m)return;let open=false;m.addEventListener('click',()=>{open=!open;opts.classList.toggle('open',open);m.classList.toggle('open',open);m.setAttribute('aria-expanded',String(open));});top&&top.addEventListener('click',()=>window.self===window.top&&window.scrollTo({top:0,behavior:'smooth'}));window.addEventListener('scroll',()=>{if(top)top.style.display=scrollY>600?'grid':'none';},{passive:true});if(top)top.style.display='none';}
+const RIO=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){const d=e.target.dataset.d;if(d)e.target.style.transitionDelay=d+'ms';e.target.classList.add('in');RIO.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -3% 0px'});
+function observeReveals(scope){const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;(scope||document).querySelectorAll('.reveal:not(.in)').forEach(el=>{if(rm)el.classList.add('in');else RIO.observe(el);});}
+function countUp(el,target){if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=target.toLocaleString();return;}let s=null;const dur=1500;const step=t=>{if(!s)s=t;const p=Math.min((t-s)/dur,1);el.textContent=Math.round(target*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+function observeCounters(scope){(scope||document).querySelectorAll('[data-counter]:not([data-counted])').forEach(el=>{const io=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){el.dataset.counted='1';countUp(el,parseInt(el.dataset.counter));io.unobserve(el);}});},{threshold:.5});io.observe(el);});}
+function initForms(){document.querySelectorAll('.lead-form').forEach(f=>{f.addEventListener('submit',e=>{e.preventDefault();const b=f.querySelector('[type=submit]');if(!b)return;b.innerHTML=CHECK+' Request Sent — Dispatching';b.disabled=true;b.style.cssText='background:var(--green);cursor:default;color:#fff';});});}
+function setYear(){document.querySelectorAll('.yr').forEach(el=>el.textContent=new Date().getFullYear());}
+
+/* bind data-page links + js-scroll within dynamically-rendered nodes */
+function bindData(scope){(scope||document).querySelectorAll('[data-page]:not([data-bound])').forEach(a=>{a.setAttribute('data-bound','1');});}
+
+/* ===== SPA ROUTER ===== */
+const PAGES=['home','repairs','doors','openers','areas','plans','reviews','faq','contact','book'];
+let pendingScroll=null;
+function showPage(id){if(!PAGES.includes(id))id='home';
+  document.querySelectorAll('.spa-page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  const pg=document.getElementById('page-'+id);if(pg){pg.style.display='block';pg.classList.add('active');}
+  document.querySelectorAll('.nav-link,.drawer-link').forEach(a=>a.classList.toggle('active',a.getAttribute('data-page')===id));
+  document.querySelectorAll('.bn-item').forEach(a=>a.classList.toggle('active',a.getAttribute('data-page')===id&&!a.classList.contains('call-hl')));
+  observeReveals(pg);observeCounters(pg);
+  if(id==='home')animateTimeline();
+  if(pendingScroll){const tgt=pendingScroll;pendingScroll=null;setTimeout(()=>{const el=document.getElementById(tgt);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},120);}
+  else window.scrollTo({top:0,behavior:'auto'});
+  const labels={home:'24/7 Emergency Garage Door Repair',repairs:'Garage Door Repairs',doors:'New Garage Doors',openers:'Smart Openers',areas:'Service Areas',plans:'Garage Protection Plan',reviews:'Reviews',faq:'FAQ',contact:'Contact',book:'Book Service'};
+  document.title='RapidTrack Garage — '+(labels[id]||id);
+}
+function initRouter(){document.addEventListener('click',e=>{
+  const sc=e.target.closest('.js-scroll');if(sc){e.preventDefault();const t=document.getElementById(sc.dataset.target);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const ah=e.target.closest('.js-after-home');if(ah){e.preventDefault();pendingScroll=ah.dataset.target;try{history.pushState(null,'','#home');}catch(x){}showPage('home');return;}
+  const l=e.target.closest('[data-page]');if(!l)return;const p=l.getAttribute('data-page');if(PAGES.includes(p)){e.preventDefault();try{history.pushState(null,'','#'+p);}catch(x){}showPage(p);}
+});
+  window.addEventListener('popstate',()=>{const h=(location.hash||'#home').replace('#','');showPage(PAGES.includes(h)?h:'home');});
+}
+
+/* ===== BOOT ===== */
+document.addEventListener('DOMContentLoaded',()=>{
+  Theme.init();document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',()=>Theme.toggle()));
+  renderSymptoms();renderHub();
+  cardGrid('repairsGrid',REPAIRS,'repair');cardGrid('doorsGrid',DOORS,'price');cardGrid('openersGrid',OPENERS,'price');
+  renderAreaCities();renderWO('woGrid',WORKORDERS.slice(0,3));renderWO('reviewsAll',WORKORDERS);
+  renderFaq('faqList');renderFaq('faqListFull');renderPlanTable();
+  initDiagnosis();initArea();initBA();initWoCarousel();initAi();
+  initNavbar();initDrawer();initFab();initForms();setYear();initRouter();
+  bindData(document);
+  const start=(location.hash||'#home').replace('#','');showPage(PAGES.includes(start)?start:'home');
+  observeReveals(document);observeCounters(document);
+});
+</script>
+</body>
+</html>

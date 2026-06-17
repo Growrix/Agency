@@ -47,12 +47,24 @@ for (const dir of dirs) {
   }
 }
 
-const shopVolt = path.join(root, "shop/html-template-websites/08-VoltCorePower.html");
-const previewVolt = path.join(root, "public/previews/html-template-websites/08-VoltCorePower.html");
+const shopTemplatesDir = path.join(root, "shop/html-template-websites");
+const previewTemplatesDir = path.join(root, "public/previews/html-template-websites");
+let synced = 0;
 
-if (fs.existsSync(shopVolt)) {
-  fs.copyFileSync(shopVolt, previewVolt);
-  console.log(`synced preview ${path.relative(root, previewVolt)}`);
+if (fs.existsSync(shopTemplatesDir)) {
+  fs.mkdirSync(previewTemplatesDir, { recursive: true });
+
+  for (const file of fs.readdirSync(shopTemplatesDir)) {
+    if (!file.endsWith(".html")) {
+      continue;
+    }
+
+    const sourcePath = path.join(shopTemplatesDir, file);
+    const destinationPath = path.join(previewTemplatesDir, file);
+    fs.copyFileSync(sourcePath, destinationPath);
+    synced += 1;
+  }
 }
 
 console.log(`total patched files: ${patched}`);
+console.log(`total synced preview files: ${synced}`);

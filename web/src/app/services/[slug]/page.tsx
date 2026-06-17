@@ -385,7 +385,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const related = (await listPublicPortfolio()).filter((p) => p.service === slug).slice(0, 3);
   return (
     <>
-      <Section className="hero-section pt-12 sm:pt-16 pb-16 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
@@ -442,13 +442,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       {slug !== "mcp-servers" && slug !== "automation" && (
-        <Section className="py-12">
+        <Section size="compact">
           <StatBlock stats={HOME_STATS} />
         </Section>
       )}
 
       {slug === "saas-applications" && (
-        <Section tone="inset">
+        <Section size="standard" layout="viewport" tone="inset">
           <Container>
             <SectionHeading
               eyebrow="Our stack"
@@ -516,7 +516,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading eyebrow="What gets built" title="The actual surfaces and systems we ship." />
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
@@ -532,7 +532,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow="What makes it different"
@@ -553,7 +553,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading eyebrow="Delivery" title="How an engagement runs end-to-end." />
           <div className="mt-10">
@@ -563,7 +563,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       {related.length > 0 && (
-        <Section>
+        <Section size="standard" layout="viewport">
           <Container>
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
@@ -582,7 +582,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Engagement models"
@@ -600,7 +600,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       {SHOW_GOOGLE_REVIEWS && (
-        <Section>
+        <Section size="standard" layout="viewport">
           <Container>
             <GoogleReviews
               eyebrow="Google reviews"
@@ -611,7 +611,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title={`${copy.eyebrow} questions, answered.`} align="center" />
           <div className="mt-10">

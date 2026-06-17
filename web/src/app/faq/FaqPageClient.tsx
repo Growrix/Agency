@@ -46,7 +46,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
 
   return (
     <>
-      <Section className="hero-section pt-12 sm:pt-16 pb-12 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="max-w-3xl">
@@ -106,7 +106,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section className="py-12">
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading eyebrow="Quick answers" title="The most common ones up front." />
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -120,7 +120,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="Browse by category" title="All questions grouped together." />
           <div className="mt-10">
@@ -140,7 +140,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading eyebrow="Still stuck" title="Pick a faster route." align="center" />
           <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">

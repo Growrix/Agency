@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Width = "shell" | "content" | "reading" | "dense" | "full";
+type SectionSize = "hero" | "standard" | "compact" | "dense" | "none";
+type SectionLayout = "content" | "viewport";
 
 const widths: Record<Width, string> = {
   shell: "max-w-[1440px]",
@@ -9,6 +11,19 @@ const widths: Record<Width, string> = {
   reading: "max-w-[960px]",
   dense: "max-w-[768px]",
   full: "max-w-none",
+};
+
+const sectionSizeClass: Record<SectionSize, string> = {
+  hero: "pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16",
+  standard: "py-12 sm:py-16 lg:py-24",
+  compact: "py-8 sm:py-12",
+  dense: "py-6 sm:py-8",
+  none: "py-0",
+};
+
+const sectionLayoutClass: Record<SectionLayout, string> = {
+  content: "",
+  viewport: "lg:flex lg:min-h-[calc(100dvh-var(--site-chrome-height))] lg:flex-col lg:justify-center",
 };
 
 export function Container({
@@ -37,11 +52,15 @@ export function Section({
   className,
   id,
   tone = "default",
+  size = "standard",
+  layout = "content",
 }: {
   children: ReactNode;
   className?: string;
   id?: string;
   tone?: "default" | "inset" | "dark";
+  size?: SectionSize;
+  layout?: SectionLayout;
 }) {
   const toneClass =
     tone === "inset"
@@ -53,7 +72,8 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "py-16 sm:py-20 lg:py-24",
+        sectionSizeClass[size],
+        sectionLayoutClass[layout],
         toneClass,
         className
       )}

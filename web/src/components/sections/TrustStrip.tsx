@@ -1,9 +1,13 @@
+import { Section } from "@/components/primitives/Container";
 import { cn } from "@/lib/utils";
 
 export function TrustStrip({ items, className }: { items: string[]; className?: string }) {
   const doubled = [...items, ...items];
   return (
-    <div className={cn("marquee-pause marquee-mask relative overflow-hidden border-y border-border bg-surface py-6", className)}>
+    <Section
+      size="compact"
+      className={cn("marquee-pause marquee-mask relative overflow-hidden border-y border-border bg-surface", className)}
+    >
       <div className="flex w-max animate-marquee gap-12 px-6">
         {doubled.map((item, i) => (
           <span
@@ -14,6 +18,6 @@ export function TrustStrip({ items, className }: { items: string[]; className?: 
           </span>
         ))}
       </div>
-    </div>
+    </Section>
   );
 }

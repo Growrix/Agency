@@ -35,7 +35,7 @@ export function ServiceCards({ services }: { services: PublicServiceRecord[] }) 
   ].slice(0, 5);
 
   return (
-    <Section className="py-16 sm:py-20" tone="inset">
+    <Section size="standard" layout="viewport" tone="inset">
       <Container>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading

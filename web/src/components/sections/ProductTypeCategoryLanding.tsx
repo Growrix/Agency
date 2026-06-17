@@ -31,7 +31,7 @@ export function ProductTypeCategoryLanding({
 
   return (
     <>
-      <Section className="pb-14 pt-12 sm:pb-16 sm:pt-16">
+      <Section size="hero" layout="viewport" className="hero-section">
         <Container>
           <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
             ← All products
@@ -68,7 +68,7 @@ export function ProductTypeCategoryLanding({
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured products"

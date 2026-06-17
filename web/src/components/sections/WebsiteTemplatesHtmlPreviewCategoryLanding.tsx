@@ -76,7 +76,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
 
   return (
     <>
-      <Section className="hero-section relative overflow-x-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-x-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container className="min-w-0">
           <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
@@ -148,7 +148,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         autoPlayMobileCarousel={false}
       />
 
-      <Section id="profiles" tone="inset" className="overflow-x-hidden py-10 sm:py-14">
+      <Section id="profiles" size="standard" layout="viewport" tone="inset" className="overflow-x-hidden">
         <Container className="min-w-0">
           <SectionHeading
             eyebrow="Template catalog"
@@ -179,7 +179,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         </Container>
       </Section>
 
-      <Section id="pricing" className="py-14 sm:py-16">
+      <Section id="pricing" size="standard" layout="viewport">
         <Container>
           <SectionHeading eyebrow="Pricing paths" title="Choose your preferred implementation level." align="center" />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -239,7 +239,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="HTML preview page questions, answered." align="center" />
           <div className="mt-10">
@@ -248,7 +248,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         </Container>
       </Section>
 
-      <Section className="py-14 sm:py-16">
+      <Section size="standard" layout="viewport">
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need a custom website rollout plan?</h2>

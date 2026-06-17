@@ -11,7 +11,7 @@ import type { SolutionAudience } from "@/lib/product-led-content";
 export function SolutionsLanding({ solution }: { solution: SolutionAudience }) {
   return (
     <>
-      <Section className="pt-12 sm:pt-16 lg:pt-20">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <Container width="shell">
           <div className="mx-auto max-w-3xl text-center">
             <Badge tone="primary">{solution.eyebrow}</Badge>
@@ -33,7 +33,7 @@ export function SolutionsLanding({ solution }: { solution: SolutionAudience }) {
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading eyebrow="Pain points" title="Built for the problems you are solving now." />
           <ul className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -47,7 +47,7 @@ export function SolutionsLanding({ solution }: { solution: SolutionAudience }) {
         </Container>
       </Section>
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading eyebrow="Recommended offers" title="Start with products, upgrade to services when ready." />
           <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>

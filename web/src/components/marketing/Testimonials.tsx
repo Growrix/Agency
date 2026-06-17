@@ -6,7 +6,7 @@ import { TESTIMONIALS } from "@/lib/content";
 
 export function Testimonials() {
   return (
-    <Section>
+    <Section size="standard" layout="viewport">
       <Container>
         <SectionHeading
           eyebrow="Proof"

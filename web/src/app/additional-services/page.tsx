@@ -138,7 +138,7 @@ export default function AdditionalServicesPage() {
   return (
     <>
       {/* Hero */}
-      <Section className="hero-section pt-12 sm:pt-16 pb-14 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
         <Container>
@@ -163,7 +163,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Category Cards */}
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="What we cover"
@@ -213,7 +213,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Why It Matters */}
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow="Why it matters"
@@ -240,7 +240,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Delivery Model */}
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Delivery model"
@@ -306,7 +306,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Process Steps */}
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow="How we do it"
@@ -338,7 +338,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* FAQ */}
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading
             eyebrow="FAQ"

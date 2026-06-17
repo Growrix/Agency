@@ -152,7 +152,7 @@ export function PricingPageClient() {
 
   return (
     <>
-      <Section className="hero-section relative overflow-hidden pb-12 pt-12 sm:pt-16">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
         <Container>
           <div className="max-w-3xl">
@@ -172,7 +172,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section className="py-4">
+      <Section size="dense">
         <Container>
           <div className="flex flex-wrap gap-2">
             {TAB_IDS.map((tab) => (
@@ -193,7 +193,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section className="py-8">
+      <Section size="standard" layout="viewport">
         <Container>
           <RevealGroup className="grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {activeTiers.map((tier) => (
@@ -205,7 +205,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Range guide"
@@ -235,7 +235,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading eyebrow="What influences cost" title="Variables that move the number." />
           <div className="mt-10">
@@ -244,7 +244,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Pricing questions, answered plainly." align="center" />
           <div className="mt-10">

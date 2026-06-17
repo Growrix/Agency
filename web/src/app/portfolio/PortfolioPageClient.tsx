@@ -40,7 +40,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
 
   return (
     <>
-      <Section className="hero-section pt-12 sm:pt-16 pb-12 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="max-w-3xl">
@@ -58,7 +58,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </div>
       </Section>
 
-      <Section className="py-8" tone="inset">
+      <Section size="compact" tone="inset">
         <Container>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
@@ -100,7 +100,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </Container>
       </Section>
 
-      <Section className="py-16">
+      <Section size="standard" layout="viewport">
         <Container>
           {filtered.length === 0 ? (
             <div className="rounded-[16px] border border-dashed border-border-strong bg-surface p-12 text-center">
@@ -131,7 +131,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
       <TrustStrip items={trustItems} />
 
       {SHOW_GOOGLE_REVIEWS ? (
-        <Section>
+        <Section size="standard" layout="viewport">
           <Container>
             <GoogleReviews
               eyebrow="Voices"

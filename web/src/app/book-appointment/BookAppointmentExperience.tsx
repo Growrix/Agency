@@ -143,7 +143,7 @@ export function BookAppointmentExperience() {
 
   return (
     <>
-      <Section className="hero-section pt-16 sm:pt-24 pb-24 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container width="content">
           <div className="grid gap-8 lg:grid-cols-[1fr_0.92fr] lg:items-start">
@@ -302,7 +302,7 @@ export function BookAppointmentExperience() {
         </Container>
       </Section>
 
-      <Section className="pt-0 pb-20">
+      <Section size="compact">
         <Container>
           <div className="mx-auto max-w-3xl">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

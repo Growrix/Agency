@@ -88,7 +88,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
 
   return (
     <>
-      <Section className="hero-section pt-12 pb-14 sm:pt-16 sm:pb-16 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container>
           <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
@@ -154,7 +154,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section id="profiles" tone="inset">
+      <Section id="profiles" size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured templates"
@@ -174,7 +174,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section id="pricing" className="py-14 sm:py-16">
+      <Section id="pricing" size="standard" layout="viewport">
         <Container>
           <SectionHeading eyebrow="Pricing paths" title="Pick your launch speed and involvement level." align="center" />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -234,7 +234,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Website templates questions, answered." align="center" />
           <div className="mt-10">
@@ -243,7 +243,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section className="py-14 sm:py-16">
+      <Section size="standard" layout="viewport">
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need More Than a Template?</h2>

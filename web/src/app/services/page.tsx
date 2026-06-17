@@ -142,7 +142,7 @@ export default async function ServicesPage() {
 
 	return (
 		<>
-			<Section className="hero-section pt-12 sm:pt-16 pb-14 relative overflow-hidden">
+			<Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
 				<div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
 				<Container>
 					<div className="max-w-3xl">
@@ -202,7 +202,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section id="compare" tone="inset">
+			<Section id="compare" size="standard" layout="viewport" tone="inset">
 				<Container>
 					<SectionHeading
 						eyebrow="Comparison"
@@ -261,7 +261,7 @@ export default async function ServicesPage() {
 
 			<AdditionalServices />
 
-			<Section>
+			<Section size="standard" layout="viewport">
 				<Container>
 					<SectionHeading
 						eyebrow="Delivery system"
@@ -274,7 +274,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section tone="inset">
+			<Section size="standard" layout="viewport" tone="inset">
 				<Container>
 					<SectionHeading
 						eyebrow="Stack and integrations"
@@ -293,7 +293,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section>
+			<Section size="standard" layout="viewport">
 				<Container>
 					<SectionHeading
 						eyebrow="Proof by service"
@@ -318,7 +318,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section tone="inset">
+			<Section size="standard" layout="viewport" tone="inset">
 				<Container width="reading">
 					<SectionHeading
 						eyebrow="FAQ"

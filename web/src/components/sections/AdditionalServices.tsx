@@ -21,7 +21,7 @@ const CATEGORY_ICONS = [
 
 export function AdditionalServices() {
   return (
-    <Section tone="inset">
+    <Section size="standard" layout="viewport" tone="inset">
       <Container>
         <SectionHeading
           eyebrow="SEO Service"

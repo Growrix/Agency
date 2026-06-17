@@ -89,6 +89,7 @@
   --button-outline-border-hover: var(--c-border-strong);
 
   --shell-offset: 4rem;
+  --site-chrome-height: 4rem;
 
   color-scheme: light;
 }
@@ -178,12 +179,14 @@
 @media (min-width: 768px) {
   :root {
     --shell-offset: 6rem;
+    --site-chrome-height: calc(2.25rem + 4rem);
   }
 }
 
 @media (min-width: 1024px) {
   :root {
     --shell-offset: 6.5rem;
+    --site-chrome-height: calc(2.25rem + 4.5rem);
     --admin-shell-top: 1.25rem;
     --admin-sidebar-top: 1.25rem;
   }

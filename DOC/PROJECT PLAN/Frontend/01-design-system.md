@@ -69,6 +69,19 @@ recommended_next_reads:
 - Section rhythm on mobile: 48px top and bottom.
 - Card padding defaults: 24px standard, 32px premium, 16px dense mobile.
 
+### Section spacing tiers
+- `hero`: `pt-12 sm:pt-16 lg:pt-20` + `pb-12 sm:pb-16`.
+- `standard`: `py-12 sm:py-16 lg:py-24` (default marketing rhythm).
+- `compact`: `py-8 sm:py-12` (bridges, support bands).
+- `dense`: `py-6 sm:py-8` (tabs/filter rails only).
+- `none`: `py-0` (outer shells around already-padded slabs like CTA cards).
+
+### Desktop viewport mode
+- Major marketing sections use desktop-first viewport filling (`lg:min-h-[calc(100dvh-var(--site-chrome-height))]`).
+- Viewport mode is additive to spacing tiers: spacing controls inner breathing room, viewport controls section height.
+- Compact utilities (`TrustBar`, `TrustStrip`, tab bars, CTA bands) stay content-height and do not use viewport mode.
+- Mobile and tablet stay content-driven in this pass; only desktop (`lg+`) enforces viewport min-height.
+
 ## Layout Tokens
 - Containers: 640px, 768px, 960px, 1200px, 1440px.
 - Grid: 12 columns desktop, 8 tablet, 4 mobile logic for dense card spans.

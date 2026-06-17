@@ -416,7 +416,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
 
   return (
     <>
-      <Section className="hero-section pt-12 sm:pt-16 pb-8 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" aria-hidden />
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -462,7 +462,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         </Container>
       </Section>
 
-      <Section className="pt-0 pb-12 sm:pb-16">
+      <Section size="compact">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             {conversationCard}

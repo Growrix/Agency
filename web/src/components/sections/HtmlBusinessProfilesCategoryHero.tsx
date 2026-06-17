@@ -22,6 +22,7 @@ type HtmlBusinessProfilesCategoryHeroProps = {
   profilesAnchorId?: string;
   /** Disable on pages that already render another autoplay carousel above the fold. */
   autoPlayCarousel?: boolean;
+  sectionSize?: "hero" | "standard";
 };
 
 const FALLBACK_CAROUSEL_PROFILES = [
@@ -36,6 +37,7 @@ export function HtmlBusinessProfilesCategoryHero({
   showBackLink = true,
   profilesAnchorId = "profiles",
   autoPlayCarousel = true,
+  sectionSize = "hero",
 }: HtmlBusinessProfilesCategoryHeroProps) {
   const carouselProfiles = products.length > 0 ? products : [...FALLBACK_CAROUSEL_PROFILES];
   const heroSlides = carouselProfiles.map((profile) => ({
@@ -49,7 +51,7 @@ export function HtmlBusinessProfilesCategoryHero({
   }));
 
   return (
-    <Section className="hero-section relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-16">
+    <Section size={sectionSize} layout="viewport" className="hero-section relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
       <Container>
         {showBackLink ? (

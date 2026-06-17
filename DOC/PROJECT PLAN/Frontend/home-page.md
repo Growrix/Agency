@@ -98,6 +98,22 @@ depends_on:
 - Content: deep links, support, legal, social, response-time promise.
 - Components: footer, menu groups, small badges.
 
+## Section Size + Layout Map (Desktop-First)
+- Hero statement: `size=hero`, `layout=viewport`.
+- HTML preview showcase: `size=standard`, `layout=viewport` (desktop + mobile previews merged into one section container).
+- HTML business profiles spotlight hero: `size=hero`, `layout=viewport`.
+- Trust bar: `size=compact`, `layout=content`.
+- Featured products: `size=standard`, `layout=viewport`.
+- Three-path explainer: `size=standard`, `layout=viewport`.
+- Service cards: `size=standard`, `layout=viewport`.
+- HTML business profiles grid spotlight: `size=standard`, `layout=viewport`.
+- Featured builds: `size=standard`, `layout=viewport`.
+- Trust strip marquee: `size=compact`, `layout=content`.
+- Process and collaboration model: `size=standard`, `layout=viewport`.
+- AI concierge and live chat section: `size=standard`, `layout=viewport`.
+- Testimonials and Google reviews: `size=standard`, `layout=viewport`.
+- Final conversion band (`CTABand`): outer wrapper `size=none`, `layout=content` (inner CTA slab keeps its own padding).
+
 ## State Requirements
 - Home hero media loads with skeleton frames.
 - Featured work and shop cards handle empty and loading states.

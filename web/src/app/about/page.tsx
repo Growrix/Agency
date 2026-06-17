@@ -61,7 +61,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Section className="hero-section pt-12 sm:pt-16 pb-16 relative overflow-hidden">
+      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 items-center">
@@ -106,7 +106,7 @@ export default async function AboutPage() {
         <StatBlock stats={HOME_STATS} />
       </div>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading eyebrow="Principles" title="Four operating choices we don't compromise on." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -121,7 +121,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <SectionHeading
             eyebrow={aboutContent?.founder?.eyebrow ?? "Founder's Note"}
@@ -157,7 +157,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section id="process" tone="inset">
+      <Section id="process" size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow={aboutContent?.process?.eyebrow ?? "How we work"}
@@ -171,7 +171,7 @@ export default async function AboutPage() {
 
       <TrustStrip items={HOME_STACK_MARQUEE} />
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[60%_40%] lg:items-start">
             <SectionHeading
@@ -200,7 +200,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section tone="inset">
+      <Section size="standard" layout="viewport" tone="inset">
         <Container>
           <SectionHeading
             eyebrow={aboutContent?.team?.eyebrow ?? "The team"}
@@ -232,7 +232,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section>
+      <Section size="standard" layout="viewport">
         <Container width="reading">
           <SectionHeading
             eyebrow="Frontend philosophy"
@@ -252,7 +252,7 @@ export default async function AboutPage() {
       </Section>
 
       {SHOW_GOOGLE_REVIEWS && (
-        <Section>
+        <Section size="standard" layout="viewport">
           <Container>
             <GoogleReviews
               eyebrow="Voices"
