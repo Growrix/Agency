@@ -41,9 +41,8 @@ export const PRODUCT_INDEX_COPY = {
 
 export const HOME_DIGITAL_PRODUCTS_COPY = {
   eyebrow: "Digital products",
-  title: "Browse the catalog without leaving the homepage",
-  description:
-    "Filter by category, type, or industry to preview templates, starters, and toolkits — then open the full shop for checkout or Done-For-You setup.",
+  title: "Shop templates and toolkits",
+  description: "Filter the catalog and preview a short list — open the full shop when you are ready to buy.",
   ctaLabel: "Open full catalog",
 } as const;
 

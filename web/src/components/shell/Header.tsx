@@ -169,9 +169,6 @@ export function Header({
                 )}
               </div>
             ))}
-            <Link href="/contact" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
-              Contact
-            </Link>
             <Link href="/faq" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
               FAQ
             </Link>

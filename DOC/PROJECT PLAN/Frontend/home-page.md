@@ -23,7 +23,7 @@ depends_on:
 ### 1. Utility Ribbon
 - Content: fast-trust items, average response time, WhatsApp shortcut, and limited-time product bundle notice.
 - Components: utility strip, badge, link buttons.
-- Interaction notes: grouped with the header inside `SiteTopChrome`; both hide on scroll down and reappear on scroll up (desktop only — ribbon hidden on mobile).
+- Interaction notes: grouped with the header inside `SiteTopChrome` (fixed top chrome); both hide on scroll down and reappear on scroll up via a shared visibility provider.
 
 ### 2. Header and Mega Navigation
 - Content: logo, service categories, shop, portfolio, pricing, AI concierge, booking CTA, cart, chat.
@@ -48,23 +48,14 @@ depends_on:
 - Content: category-based HTML business profile spotlight with template counts and direct links to preview hub and shop category.
 - Components: `HtmlBusinessProfilesCategoryHero`.
 
-### 7. HTML Business Profiles Grid Spotlight
-- Content: featured HTML business profile product cards with direct catalog links.
-- Components: section heading, `ShopProductHtmlMobilePreviewCard`, CTA pair.
-- Interaction notes: occupies the former Trust Bar slot; Trust Bar is hidden on homepage.
-
-### 8. Featured Products
-- Content: CMS-selected or fallback featured catalog items with product-tier positioning.
-- Components: `FeaturedProducts`, `ShopProductCard`.
-
-### 9. Three-Path Explainer
+### 7. Three-Path Explainer
 - Content: DIY buyer, non-technical owner, serious founder, curious visitor funnels.
 - Components: `ThreePathExplainer`.
 
-### 10. Digital Products Showcase
-- Content: short-form shop browse with sidebar filters for category, type, and industry; shows a capped grid with link to full catalog.
-- Components: `HomeDigitalProductsShowcase`, `ShopProductCatalogCard`.
-- Interaction notes: full-viewport section (`layout=viewport`) with client-side filter state.
+### 8. Digital Products Showcase
+- Content: compact full-viewport shop browse with filter sidebar/chips and a capped product grid linking to the full catalog.
+- Components: `HomeDigitalProductsShowcase`, `ShopProductCard`.
+- Interaction notes: `min-h-[100dvh]` section with client-side filter state; Featured Products block removed from homepage.
 
 ### 4. Trust Bar (hidden on homepage)
 - Content: production-ready products, Done-For-You entry pricing, response window, secure checkout.
@@ -118,10 +109,8 @@ depends_on:
 - Service cards: `size=standard`, `layout=viewport`.
 - HTML preview showcase: `size=standard`, `layout=viewport` (desktop + mobile previews merged into one section container).
 - HTML business profiles spotlight hero: `size=hero`, `layout=viewport`.
-- HTML business profiles grid spotlight: `size=standard`, `layout=viewport`.
-- Featured products: `size=standard`, `layout=viewport`.
 - Three-path explainer: `size=standard`, `layout=viewport`.
-- Digital products showcase: `size=standard`, `layout=viewport`.
+- Digital products showcase: `min-h-[100dvh]`, full width.
 - Featured builds: `size=standard`, `layout=viewport`.
 - Trust strip marquee: `size=compact`, `layout=content`.
 - Process and collaboration model: `size=standard`, `layout=viewport`.

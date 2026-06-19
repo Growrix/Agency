@@ -3,10 +3,8 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
-import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { cn } from "@/lib/utils";
 import {
   buildShopFilterGroups,
@@ -19,13 +17,13 @@ import {
 import { HOME_DIGITAL_PRODUCTS_COPY } from "@/lib/product-led-content";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
-const HOME_DISPLAY_LIMIT = 6;
+const HOME_DISPLAY_LIMIT = 4;
 
 type HomeDigitalProductsShowcaseProps = {
   products: PublicShopProductRecord[];
 };
 
-function SidebarFilterButton({
+function FilterChip({
   label,
   isActive,
   onClick,
@@ -39,10 +37,10 @@ function SidebarFilterButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors",
+        "shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
         isActive
-          ? "border-l-2 border-primary bg-primary/10 font-semibold text-primary"
-          : "text-text-muted hover:bg-inset hover:text-text",
+          ? "border-primary bg-primary/10 text-primary"
+          : "border-border bg-surface text-text-muted hover:border-primary/40 hover:text-text",
       )}
     >
       {label}
@@ -50,7 +48,7 @@ function SidebarFilterButton({
   );
 }
 
-function FilterGroupPanel({
+function SidebarGroup({
   group,
   onSelect,
 }: {
@@ -58,28 +56,23 @@ function FilterGroupPanel({
   onSelect: (patch: Partial<ShopFilterState>) => void;
 }) {
   return (
-    <div>
-      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
-        {group.label}
-      </p>
-      <ul className="space-y-0.5">
-        <li>
-          <SidebarFilterButton
-            label={`All ${group.label}`}
-            isActive={!group.activeValue}
-            onClick={() => onSelect({ [group.key]: undefined })}
-          />
-        </li>
+    <div className="min-w-0">
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">{group.label}</p>
+      <div className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+        <FilterChip
+          label={`All ${group.label}`}
+          isActive={!group.activeValue}
+          onClick={() => onSelect({ [group.key]: undefined })}
+        />
         {group.options.map((option) => (
-          <li key={option.value}>
-            <SidebarFilterButton
-              label={option.label}
-              isActive={group.activeValue === option.value}
-              onClick={() => onSelect({ [group.key]: option.value })}
-            />
-          </li>
+          <FilterChip
+            key={option.value}
+            label={option.label}
+            isActive={group.activeValue === option.value}
+            onClick={() => onSelect({ [group.key]: option.value })}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -110,72 +103,54 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
   }
 
   return (
-    <Section
+    <section
       id="digital-products-showcase"
-      size="standard"
-      layout="viewport"
-      tone="inset"
-      className="overflow-x-hidden"
+      className="flex min-h-[100dvh] w-full flex-col bg-inset"
+      aria-labelledby="home-digital-products-title"
     >
-      <Container width="shell" className="min-w-0">
-        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading
-            eyebrow={HOME_DIGITAL_PRODUCTS_COPY.eyebrow}
-            title={HOME_DIGITAL_PRODUCTS_COPY.title}
-            description={HOME_DIGITAL_PRODUCTS_COPY.description}
-          />
-          <LinkButton href="/digital-products" variant="outline">
+      <div className="mx-auto flex w-full max-w-shell flex-1 flex-col px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+        <div className="flex shrink-0 flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+              {HOME_DIGITAL_PRODUCTS_COPY.eyebrow}
+            </p>
+            <h2
+              id="home-digital-products-title"
+              className="mt-2 font-display text-2xl font-semibold tracking-tight sm:text-3xl"
+            >
+              {HOME_DIGITAL_PRODUCTS_COPY.title}
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-text-muted">{HOME_DIGITAL_PRODUCTS_COPY.description}</p>
+          </div>
+          <LinkButton href="/digital-products" variant="outline" size="sm" className="shrink-0">
             {HOME_DIGITAL_PRODUCTS_COPY.ctaLabel} <ArrowUpRightIcon className="size-4" />
           </LinkButton>
         </div>
 
-        <div className="mt-10 grid min-w-0 gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start">
-          <aside className="min-w-0 space-y-6 rounded-2xl border border-border bg-surface p-5 lg:sticky lg:top-24">
-            <div className="flex items-center justify-between gap-3">
+        <div className="mt-6 flex min-h-0 flex-1 flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] lg:items-stretch lg:gap-6">
+          <aside className="flex min-h-0 flex-col gap-4 overflow-y-auto rounded-xl border border-border bg-surface p-4 lg:max-h-none">
+            <div className="flex items-center justify-between gap-2">
               <p className="font-display text-sm font-semibold tracking-tight">Filters</p>
               {hasActiveFilter ? (
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-1 text-xs text-text-muted transition-colors hover:text-primary"
+                  className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-primary"
                 >
                   <XMarkIcon className="size-3.5" aria-hidden />
-                  Clear all
+                  Clear
                 </button>
               ) : null}
             </div>
-
-            <div className="space-y-6 lg:block">
-              {filterGroups.map((group) => (
-                <FilterGroupPanel
-                  key={group.key}
-                  group={group}
-                  onSelect={updateFilters}
-                />
-              ))}
-            </div>
-
-            <div className="border-t border-border pt-4">
-              <p className="text-xs leading-5 text-text-muted">
-                {filteredProducts.length} product{filteredProducts.length === 1 ? "" : "s"} match
-                {hasActiveFilter ? " these filters" : " the catalog"}.
-              </p>
-              {hasActiveFilter ? (
-                <Link
-                  href={buildShopHref(filters, {})}
-                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
-                >
-                  Open full catalog <ArrowUpRightIcon className="size-3.5" />
-                </Link>
-              ) : null}
-            </div>
+            {filterGroups.map((group) => (
+              <SidebarGroup key={group.key} group={group} onSelect={updateFilters} />
+            ))}
           </aside>
 
-          <div className="min-w-0">
-            <div className="mb-6 flex flex-wrap items-center gap-2">
-              <span className="text-sm text-text-muted">
-                Showing {visibleProducts.length} of {filteredProducts.length} result
-                {filteredProducts.length === 1 ? "" : "s"}
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              <span className="text-xs text-text-muted">
+                {visibleProducts.length} of {filteredProducts.length} shown
               </span>
               {filterGroups
                 .filter((group) => group.activeValue)
@@ -184,48 +159,50 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
                     key={group.key}
                     type="button"
                     onClick={() => updateFilters({ [group.key]: undefined })}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs text-text-muted transition-colors hover:border-primary/40 hover:text-text"
+                    className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-2.5 py-0.5 text-[11px] text-text-muted hover:border-primary/40"
                   >
                     {group.options.find((option) => option.value === group.activeValue)?.label ??
                       group.activeValue}
-                    <XMarkIcon className="size-3" aria-hidden />
+                    <XMarkIcon className="size-2.5" aria-hidden />
                   </button>
                 ))}
             </div>
 
-            {visibleProducts.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-border bg-surface p-10 text-center">
-                <p className="font-display text-xl tracking-tight">No products match those filters.</p>
-                <p className="mt-2 text-sm text-text-muted">
-                  Clear a filter or browse the full digital products catalog.
-                </p>
-                <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <LinkButton href="/digital-products" size="sm">
-                    Browse all digital products
-                  </LinkButton>
-                  <button type="button" onClick={clearFilters} className="text-sm text-primary hover:underline">
-                    Reset filters
-                  </button>
+            <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+              {visibleProducts.length === 0 ? (
+                <div className="flex h-full min-h-[220px] flex-col items-center justify-center rounded-xl border border-dashed border-border bg-surface p-8 text-center">
+                  <p className="font-display text-lg tracking-tight">No products match those filters.</p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    <LinkButton href="/digital-products" size="sm">
+                      Browse catalog
+                    </LinkButton>
+                    <button type="button" onClick={clearFilters} className="text-sm text-primary hover:underline">
+                      Reset filters
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="grid min-w-0 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                {visibleProducts.map((product) => (
-                  <ShopProductCatalogCard key={product.slug} product={product} variant="catalog-wide" />
-                ))}
-              </div>
-            )}
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
+                  {visibleProducts.map((product) => (
+                    <ShopProductCard key={product.slug} product={product} />
+                  ))}
+                </div>
+              )}
+            </div>
 
             {filteredProducts.length > HOME_DISPLAY_LIMIT ? (
-              <div className="mt-8 flex justify-center">
-                <LinkButton href={buildShopHref(filters, {})} variant="outline">
-                  View all {filteredProducts.length} products
-                </LinkButton>
+              <div className="mt-4 flex shrink-0 justify-center border-t border-border pt-4">
+                <Link
+                  href={buildShopHref(filters, {})}
+                  className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                >
+                  View all {filteredProducts.length} products <ArrowUpRightIcon className="size-4" />
+                </Link>
               </div>
             ) : null}
           </div>
         </div>
-      </Container>
-    </Section>
+      </div>
+    </section>
   );
 }
