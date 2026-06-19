@@ -116,6 +116,11 @@ export default async function Home() {
       "@type": "WebSite",
       name: SITE_NAME,
       url: SITE_URL,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE_URL}/products?search={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
     },
   ];
 
@@ -188,7 +193,7 @@ export default async function Home() {
         slides={htmlPreviewSlides}
         emptyFallbackSlide={htmlPreviewFallbackSlide}
         reverseMobileLayout
-        showMobileSectionDivider={false}
+        showMobileSectionDivider
         autoPlayMobileCarousel={false}
       />
 

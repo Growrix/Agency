@@ -1353,7 +1353,7 @@ footer{background:var(--navy);color:#E9EEF7;margin-top:0}
   }
   if(fabMain) fabMain.addEventListener('click',toggleFab);
   var fabTop=doc.getElementById('fab-top');
-  if(fabTop) fabTop.addEventListener('click',function(){ window.self===window.top&&window.scrollTo({top:0,behavior:'smooth'}); });
+  if(fabTop) fabTop.addEventListener('click',function(){ window.self===window.top&&window.self===window.top&&window.scrollTo({top:0,behavior:'smooth'}); });
 
   /* ---------- AI PANEL ---------- */
   var aiPanel=doc.getElementById('ai-panel'), aiBody=doc.getElementById('ai-body'), aiForm=doc.getElementById('ai-form'), aiInput=doc.getElementById('ai-input');

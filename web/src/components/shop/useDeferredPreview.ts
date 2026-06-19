@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
  * the iframe's initial load underway before the next queued preview starts,
  * which smooths the network/main-thread burst on preview-heavy pages.
  */
-const MAX_CONCURRENT_MOUNTS = 4;
-const SLOT_HOLD_MS = 1200;
+const MAX_CONCURRENT_MOUNTS = 2;
+const SLOT_HOLD_MS = 1500;
 
 let activeMounts = 0;
 const pendingGrants: Array<() => void> = [];

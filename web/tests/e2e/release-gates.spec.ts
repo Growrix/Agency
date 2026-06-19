@@ -41,3 +41,47 @@ test("health endpoints respond and homepage loads within smoke threshold", async
   // Homepage embeds multiple HTML preview iframes; allow headroom for SSR + first paint in CI.
   expect(duration).toBeLessThan(15_000);
 });
+
+test("preview iframe budget stays constrained on homepage and category page", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  const homePreviewIframeCount = await page.evaluate(() =>
+    document.querySelectorAll('iframe[src*="/api/website-templates-html-preview/"]').length,
+  );
+  expect(homePreviewIframeCount).toBeLessThanOrEqual(2);
+
+  await page.goto("/products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
+  const categoryPreviewIframeCount = await page.evaluate(() =>
+    document.querySelectorAll('iframe[src*="/api/website-templates-html-preview/"]').length,
+  );
+  expect(categoryPreviewIframeCount).toBeLessThanOrEqual(3);
+});
+
+test("technical SEO baseline metadata exists on key category route", async ({ page }) => {
+  await page.goto("/products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
+
+  const canonicalHref = await page
+    .locator('head link[rel="canonical"]')
+    .first()
+    .getAttribute("href");
+  expect(canonicalHref).toContain("/products/category/website-templates-html-preview");
+
+  const hasCollectionPageJsonLd = await page.evaluate(() => {
+    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+    return scripts.some((script) => {
+      try {
+        const parsed = JSON.parse(script.textContent || "null");
+        const entries = Array.isArray(parsed) ? parsed : [parsed];
+        return entries.some(
+          (entry) =>
+            entry &&
+            typeof entry === "object" &&
+            entry["@type"] === "CollectionPage" &&
+            String(entry.url || "").includes("/products/category/website-templates-html-preview"),
+        );
+      } catch {
+        return false;
+      }
+    });
+  });
+  expect(hasCollectionPageJsonLd).toBeTruthy();
+});

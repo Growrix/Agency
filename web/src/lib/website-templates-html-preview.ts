@@ -2,6 +2,7 @@ export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG = "website-templates-h
 
 /** Public URL segment and shop folder name for HTML website template files. */
 export const WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT = "html-template-websites" as const;
+const WEBSITE_TEMPLATE_HTML_PREVIEW_API_ROOT = "website-templates-html-preview" as const;
 
 export type WebsiteTemplateHtmlPreviewRecord = {
   slug: string;
@@ -185,6 +186,16 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     teaser: "Certified arborist template with emergency removal calls, risk-assessment sections, and long-term tree health service positioning.",
     summary: "A professional tree care website template for arborists and landscaping teams that need authority-led local lead conversion.",
   },
+  {
+    slug: "18-mint-pearl-dental",
+    fileName: "18-MintPearlDental.html",
+    title: "Mint & Pearl Dental",
+    type: "Healthcare",
+    price: "$149",
+    industry: "Dentistry",
+    teaser: "Modern dental studio template with cosmetic care, same-week booking, transparent pricing, and smile-design conversion flows.",
+    summary: "A gentle, conversion-ready dental website template for general, cosmetic, and orthodontic practices that need trust-first appointment booking.",
+  },
 ];
 
 export function getWebsiteTemplateHtmlPreviewBySlug(templateSlug: string) {
@@ -196,12 +207,22 @@ export function listWebsiteTemplateHtmlPreviews() {
 }
 
 export function getWebsiteTemplateHtmlPreviewUrl(templateSlug: string) {
+  return `/api/${WEBSITE_TEMPLATE_HTML_PREVIEW_API_ROOT}/${encodeURIComponent(templateSlug)}`;
+}
+
+export function getWebsiteTemplateHtmlPreviewStaticUrl(templateSlug: string) {
   const template = getWebsiteTemplateHtmlPreviewBySlug(templateSlug);
   if (!template) {
     return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${templateSlug}.html`;
   }
 
   return `/previews/${WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT}/${encodePreviewFileName(template.fileName)}`;
+}
+
+export function getWebsiteTemplateHtmlPreviewByProductSlug(productSlug: string) {
+  return listWebsiteTemplateHtmlPreviews().find(
+    (template) => getWebsiteTemplateHtmlPreviewProductSlug(template.slug) === productSlug,
+  ) ?? null;
 }
 
 function encodePreviewFileName(fileName: string) {

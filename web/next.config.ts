@@ -43,13 +43,23 @@ const htmlPreviewCsp =
 
 const nextConfig: NextConfig = {
   allowedDevOrigins,
+  compress: true,
+  poweredByHeader: false,
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
+  },
+  experimental: {
+    optimizePackageImports: ["@heroicons/react", "framer-motion"],
   },
   async redirects() {
     return [

@@ -7,6 +7,11 @@ import { Card } from "@/components/primitives/Card";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import {
+  getWebsiteTemplateHtmlPreviewByProductSlug,
+  getWebsiteTemplateHtmlPreviewUrl,
+  WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+} from "@/lib/website-templates-html-preview";
 
 export function ShopProductHtmlPreviewCard({
   product,
@@ -15,7 +20,12 @@ export function ShopProductHtmlPreviewCard({
   product: ShopProduct;
   variant?: "default" | "catalog-wide";
 }) {
-  const previewUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
+  const websiteTemplatePreview = product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
+    ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
+    : null;
+  const previewUrl = websiteTemplatePreview
+    ? getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug)
+    : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
   const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>();

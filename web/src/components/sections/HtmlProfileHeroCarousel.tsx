@@ -79,7 +79,7 @@ function CarouselPreviewFrame({
           maxFrameHeight={mobilePreviewMaxHeight}
           showViewportLabel={mobilePreviewShowViewportLabel}
           className="w-full max-w-full"
-          iframeLoading="eager"
+          iframeLoading="lazy"
         />
       </div>
     );
@@ -94,7 +94,7 @@ function CarouselPreviewFrame({
         viewportHeight={desktopPreviewViewportHeight}
         className={desktopPreviewFit === "cover" ? "absolute inset-0 h-full w-full" : undefined}
         frameClassName={desktopPreviewFit === "cover" ? "h-full" : "rounded-md border border-border"}
-        iframeLoading="eager"
+        iframeLoading="lazy"
       />
     );
   }
@@ -105,7 +105,7 @@ function CarouselPreviewFrame({
         src={slide.previewUrl}
         title={`${slide.name} preview`}
         className="h-full w-full border-0"
-        loading="eager"
+        loading="lazy"
         tabIndex={-1}
         referrerPolicy="strict-origin-when-cross-origin"
       />
@@ -147,7 +147,7 @@ export function HtmlProfileHeroCarousel({
   mobileFrameMinHeightClass = "min-h-0",
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
-  autoPlay = true,
+  autoPlay = false,
 }: HtmlProfileHeroCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const fallbackSlide = useMemo(
@@ -175,22 +175,16 @@ export function HtmlProfileHeroCarousel({
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(
+    () => typeof window !== "undefined" && typeof window.IntersectionObserver === "undefined",
+  );
   const isTransitioningRef = useRef(false);
 
   const canNavigate = safeSlides.length > 1;
 
   const logicalIndex = index >= cloneIndex ? 0 : index;
 
-  const previewLoadIndexes = useMemo(
-    () =>
-      new Set([
-        logicalIndex,
-        (logicalIndex - 1 + safeSlides.length) % safeSlides.length,
-        (logicalIndex + 1) % safeSlides.length,
-      ]),
-    [logicalIndex, safeSlides.length],
-  );
+  const previewLoadIndexes = useMemo(() => new Set([logicalIndex]), [logicalIndex]);
 
   const finishLoopReset = useCallback(() => {
     isTransitioningRef.current = true;
@@ -245,6 +239,10 @@ export function HtmlProfileHeroCarousel({
   useEffect(() => {
     const node = rootRef.current;
     if (!node) {
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
       return;
     }
 
@@ -383,7 +381,7 @@ export function HtmlProfileHeroCarousel({
         >
           {loopSlides.map((slide, slideIndex) => {
             const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
-            const loadPreview = previewLoadIndexes.has(slideLogicalIndex);
+            const loadPreview = isVisible && previewLoadIndexes.has(slideLogicalIndex);
 
             return (
               <article

@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { HtmlBusinessProfilesCategoryLanding } from "@/components/sections/HtmlBusinessProfilesCategoryLanding";
 import { WebsiteTemplatesCategoryLanding } from "@/components/sections/WebsiteTemplatesCategoryLanding";
 import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
+import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 type PageProps = {
@@ -59,17 +61,69 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
     redirect("/products/category/website-templates");
   }
 
+  const categoryMetadata = CATEGORY_METADATA[category];
+  const categoryPath = `/products/category/${category}`;
+  const categoryStructuredData: JsonLdData[] | null = categoryMetadata
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: categoryMetadata.title,
+          description: categoryMetadata.description,
+          url: absoluteUrl(categoryPath),
+          isPartOf: {
+            "@type": "WebSite",
+            name: SITE_NAME,
+            url: SITE_URL,
+          },
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Products",
+              item: absoluteUrl("/products"),
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: categoryMetadata.title,
+              item: absoluteUrl(categoryPath),
+            },
+          ],
+        },
+      ]
+    : null;
+
   if (category === "html-business-profiles") {
     const products = await listPublicShopProducts({ category: "html-business-profiles" });
-    return <HtmlBusinessProfilesCategoryLanding products={products} />;
+    return (
+      <>
+        {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}
+        <HtmlBusinessProfilesCategoryLanding products={products} />
+      </>
+    );
   }
   if (category === "website-templates") {
     const products = await listPublicShopProducts({ category: "website-templates" });
-    return <WebsiteTemplatesCategoryLanding products={products} />;
+    return (
+      <>
+        {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}
+        <WebsiteTemplatesCategoryLanding products={products} />
+      </>
+    );
   }
   if (category === "website-templates-html-preview") {
     const products = await listPublicShopProducts({ category: "website-templates-html-preview" });
-    return <WebsiteTemplatesHtmlPreviewCategoryLanding products={products} />;
+    return (
+      <>
+        {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}
+        <WebsiteTemplatesHtmlPreviewCategoryLanding products={products} />
+      </>
+    );
   }
 
   redirect("/products");

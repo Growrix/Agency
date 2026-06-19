@@ -128,6 +128,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                     slides={htmlPreviewSlides}
                     fillHeight
                     desktopPreviewFit="width"
+                    autoPlay={false}
                     minHeightClass="min-h-[380px] sm:min-h-[440px] lg:min-h-[520px] xl:min-h-[560px]"
                     className="flex-1"
                   />

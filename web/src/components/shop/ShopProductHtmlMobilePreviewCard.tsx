@@ -8,6 +8,11 @@ import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/Website
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import { cn } from "@/lib/utils";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import {
+  getWebsiteTemplateHtmlPreviewByProductSlug,
+  getWebsiteTemplateHtmlPreviewUrl,
+  WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+} from "@/lib/website-templates-html-preview";
 
 const MOBILE_CARD_PREVIEW_MAX_HEIGHT = 340;
 
@@ -18,7 +23,12 @@ export function ShopProductHtmlMobilePreviewCard({
   product: ShopProduct;
   variant?: "default" | "catalog-wide";
 }) {
-  const previewUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
+  const websiteTemplatePreview = product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
+    ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
+    : null;
+  const previewUrl = websiteTemplatePreview
+    ? getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug)
+    : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
   const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>();

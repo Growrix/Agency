@@ -84,7 +84,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        <link rel="dns-prefetch" href="//cdn.sanity.io" />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
+        <link rel="dns-prefetch" href="//images.unsplash.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <a
           href="#main"

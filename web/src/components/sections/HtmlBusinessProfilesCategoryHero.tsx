@@ -36,7 +36,7 @@ export function HtmlBusinessProfilesCategoryHero({
   products,
   showBackLink = true,
   profilesAnchorId = "profiles",
-  autoPlayCarousel = true,
+  autoPlayCarousel = false,
   sectionSize = "hero",
 }: HtmlBusinessProfilesCategoryHeroProps) {
   const carouselProfiles = products.length > 0 ? products : [...FALLBACK_CAROUSEL_PROFILES];

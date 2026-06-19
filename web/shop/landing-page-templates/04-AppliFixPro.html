@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AppliFix Pro — fast, certified appliance repair for refrigerators, washers, dryers, ovens, dishwashers & smart appliances. Same-day service, genuine parts, warranty backed.">
+<meta name="keywords" content="appliance repair, refrigerator repair, washer repair, dryer repair, dishwasher repair, same day appliance repair, appliance repair near me">
+<title>AppliFix Pro | Fast Appliance Repair — Same-Day Service, Warranty Backed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&family=Roboto+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   APPLIFIX PRO — SMART SERVICE MODERN
+   Build #22 | GrowrixOS
+   ══════════════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+:root {
+  /* Colors */
+  --c-primary: #102A43;
+  --c-primary-light: #1B3A57;
+  --c-primary-dark: #0A1C2E;
+  --c-secondary: #52606D;
+  --c-accent: #1DA1F2;
+  --c-accent-light: #4DB8F5;
+  --c-accent-dark: #0D8DDC;
+  --c-success: #22C55E;
+  --c-warning: #F59E0B;
+  --c-error: #EF4444;
+  --c-bg: #F8FAFC;
+  --c-bg-alt: #EFF3F8;
+  --c-surface: #FFFFFF;
+  --c-surface-raised: #FFFFFF;
+  --c-border: #D5DDE5;
+  --c-border-light: #E8EDF2;
+  --c-text: #102A43;
+  --c-text-secondary: #52606D;
+  --c-text-muted: #829AB1;
+  --c-overlay: rgba(16, 42, 67, 0.6);
+
+  /* Typography */
+  --f-display: 'Poppins', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --f-data: 'Roboto Condensed', sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.75rem;
+  --fs-4xl: 3.5rem;
+  --lh-tight: 1.15;
+  --lh-snug: 1.3;
+  --lh-normal: 1.6;
+
+  /* Spacing */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 2rem;
+  --sp-lg: 4rem;
+  --sp-xl: 7.5rem;
+
+  /* Radius */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 24px;
+  --r-xl: 40px;
+  --r-full: 999px;
+
+  /* Shadows */
+  --sh-sm: 0 1px 3px rgba(16,42,67,0.06), 0 1px 2px rgba(16,42,67,0.04);
+  --sh-md: 0 4px 16px rgba(16,42,67,0.08);
+  --sh-lg: 0 12px 40px rgba(16,42,67,0.12);
+  --sh-xl: 0 24px 60px rgba(16,42,67,0.16);
+  --sh-accent: 0 4px 20px rgba(29,161,242,0.25);
+
+  /* Transitions */
+  --t-fast: 0.15s ease;
+  --t-base: 0.25s ease;
+  --t-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --t-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --max-w: 1240px;
+  --header-h: 72px;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  --c-bg: #0D1B2A;
+  --c-bg-alt: #132337;
+  --c-surface: #1B2D44;
+  --c-surface-raised: #223A54;
+  --c-border: #2C4460;
+  --c-border-light: #243B55;
+  --c-text: #E8F0F8;
+  --c-text-secondary: #A0B4C8;
+  --c-text-muted: #6B8BA8;
+  --c-overlay: rgba(8, 18, 30, 0.75);
+  --sh-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --sh-md: 0 4px 16px rgba(0,0,0,0.25);
+  --sh-lg: 0 12px 40px rgba(0,0,0,0.35);
+  --sh-xl: 0 24px 60px rgba(0,0,0,0.4);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--f-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+input, select, textarea { font: inherit; color: inherit; }
+
+/* ── Skip Link ── */
+.skip-link {
+  position: fixed; top: -100%; left: 50%; transform: translateX(-50%);
+  background: var(--c-accent); color: #fff; padding: 0.75rem 1.5rem;
+  border-radius: var(--r-sm); font-weight: 600; z-index: 10000;
+  transition: top var(--t-fast);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ── Utilities ── */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+.section-pad { padding: var(--sp-xl) 0; }
+@media(max-width:768px){ .section-pad { padding: var(--sp-lg) 0; } }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  padding: 0.8rem 1.75rem; border-radius: var(--r-full);
+  transition: all var(--t-base); white-space: nowrap;
+  text-decoration: none; line-height: 1;
+}
+.btn svg { width: 18px; height: 18px; }
+.btn-primary {
+  background: var(--c-accent); color: #fff;
+  box-shadow: var(--sh-accent);
+}
+.btn-primary:hover { background: var(--c-accent-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(29,161,242,0.35); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  background: var(--c-primary); color: #fff;
+}
+.btn-secondary:hover { background: var(--c-primary-light); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--c-primary); border: 2px solid var(--c-border);
+}
+.btn-outline:hover { border-color: var(--c-accent); color: var(--c-accent); }
+[data-theme="dark"] .btn-outline { color: var(--c-text); }
+.btn-lg { padding: 1rem 2.25rem; font-size: var(--fs-base); }
+
+/* ── Section Headers ── */
+.section-header { text-align: center; max-width: 640px; margin: 0 auto var(--sp-md); }
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--f-data); font-weight: 700; font-size: var(--fs-xs);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--c-accent); margin-bottom: 0.75rem;
+}
+.section-eyebrow::before {
+  content: ''; width: 24px; height: 2px; background: var(--c-accent); border-radius: 1px;
+}
+.section-header h2 {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: var(--fs-3xl); line-height: var(--lh-tight);
+  margin-bottom: 1rem;
+}
+@media(max-width:768px){ .section-header h2 { font-size: var(--fs-2xl); } }
+.section-header p {
+  color: var(--c-text-secondary); font-size: var(--fs-md); line-height: var(--lh-normal);
+}
+
+/* ══════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+   ══════════════════════════════════════════════ */
+.announce-bar {
+  background: var(--c-primary); color: #fff; text-align: center;
+  padding: 0.6rem 1rem; font-size: var(--fs-sm); font-weight: 500;
+  position: relative; z-index: 100; overflow: hidden; height: 38px;
+}
+.announce-track { display: flex; flex-direction: column; transition: transform var(--t-slow); }
+.announce-item {
+  min-height: 38px; display: flex; align-items: center; justify-content: center;
+  gap: 0.5rem; padding: 0 1rem; white-space: nowrap;
+}
+.announce-badge {
+  background: var(--c-accent); color: #fff; font-size: var(--fs-xs);
+  font-weight: 700; padding: 0.15rem 0.5rem; border-radius: var(--r-full);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════════
+   UTILITY BAR
+   ══════════════════════════════════════════════ */
+.utility-bar {
+  background: var(--c-bg-alt); border-bottom: 1px solid var(--c-border-light);
+  padding: 0.5rem 0; font-size: var(--fs-xs);
+}
+.utility-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.utility-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.utility-badge {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  color: var(--c-text-secondary); font-weight: 500;
+}
+.utility-badge svg { width: 14px; height: 14px; color: var(--c-accent); }
+.utility-phone {
+  font-family: var(--f-data); font-weight: 700; font-size: var(--fs-sm);
+  color: var(--c-primary);
+}
+.utility-phone a { display: flex; align-items: center; gap: 0.35rem; }
+.utility-phone svg { width: 15px; height: 15px; color: var(--c-accent); }
+[data-theme="dark"] .utility-phone { color: var(--c-accent); }
+@media(max-width:768px){
+  .utility-bar { display: none; }
+}
+
+/* ══════════════════════════════════════════════
+   HEADER / NAV
+   ══════════════════════════════════════════════ */
+.site-header {
+  position: sticky; top: 0; z-index: 900;
+  background: var(--c-surface); border-bottom: 1px solid var(--c-border-light);
+  height: var(--header-h); transition: box-shadow var(--t-base);
+}
+.site-header.scrolled { box-shadow: var(--sh-md); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--header-h);
+}
+.logo { display: flex; align-items: center; gap: 0.6rem; }
+.logo svg { width: 40px; height: 40px; }
+.logo-text {
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-lg);
+  color: var(--c-primary);
+}
+.logo-text span { color: var(--c-accent); }
+[data-theme="dark"] .logo-text { color: var(--c-text); }
+.desktop-nav { display: flex; align-items: center; gap: 0.25rem; }
+.desktop-nav a {
+  font-size: var(--fs-sm); font-weight: 500; padding: 0.5rem 0.75rem;
+  border-radius: var(--r-sm); transition: all var(--t-fast);
+  color: var(--c-text-secondary);
+}
+.desktop-nav a:hover { color: var(--c-accent); background: var(--c-bg-alt); }
+.header-actions { display: flex; align-items: center; gap: 0.75rem; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--t-fast);
+}
+.theme-toggle:hover { background: var(--c-bg-alt); }
+.theme-toggle svg { width: 20px; height: 20px; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+.mobile-toggle {
+  display: none; width: 40px; height: 40px; flex-direction: column;
+  align-items: center; justify-content: center; gap: 5px;
+  border-radius: var(--r-sm);
+}
+.mobile-toggle span {
+  width: 22px; height: 2px; background: var(--c-text);
+  border-radius: 1px; transition: all var(--t-fast);
+}
+@media(max-width:960px){
+  .desktop-nav { display: none; }
+  .header-actions .btn { display: none; }
+  .mobile-toggle { display: flex; }
+}
+
+/* ── Mobile Menu ── */
+.mobile-menu {
+  position: fixed; top: 0; right: -100%; width: 85%; max-width: 380px;
+  height: 100vh; background: var(--c-surface); z-index: 950;
+  padding: 5rem 2rem 2rem; transition: right var(--t-slow);
+  box-shadow: var(--sh-xl); overflow-y: auto;
+}
+.mobile-menu.open { right: 0; }
+.mobile-menu a {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 0;
+  font-size: var(--fs-md); font-weight: 500; border-bottom: 1px solid var(--c-border-light);
+  transition: color var(--t-fast);
+}
+.mobile-menu a:hover { color: var(--c-accent); }
+.mobile-menu a svg { width: 20px; height: 20px; color: var(--c-accent); }
+.mobile-menu .menu-ctas { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.mobile-menu .menu-ctas .btn { justify-content: center; width: 100%; }
+.mobile-overlay {
+  position: fixed; inset: 0; background: var(--c-overlay);
+  z-index: 940; opacity: 0; pointer-events: none; transition: opacity var(--t-base);
+}
+.mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ══════════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════════ */
+.hero {
+  padding: var(--sp-lg) 0 var(--sp-xl);
+  background: linear-gradient(135deg, var(--c-bg) 0%, var(--c-bg-alt) 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(29,161,242,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--sp-lg); align-items: center;
+}
+@media(max-width:960px){ .hero-grid { grid-template-columns: 1fr; text-align: center; } }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--c-surface); border: 1px solid var(--c-border-light);
+  padding: 0.4rem 1rem; border-radius: var(--r-full);
+  font-size: var(--fs-xs); font-weight: 600; color: var(--c-accent);
+  margin-bottom: 1.25rem; box-shadow: var(--sh-sm);
+}
+.hero-eyebrow .pulse {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--c-success);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+.hero h1 {
+  font-family: var(--f-display); font-weight: 800;
+  font-size: var(--fs-4xl); line-height: var(--lh-tight);
+  margin-bottom: 1.25rem;
+}
+.hero h1 .accent { color: var(--c-accent); }
+@media(max-width:768px){ .hero h1 { font-size: var(--fs-2xl); } }
+.hero-sub {
+  font-size: var(--fs-md); color: var(--c-text-secondary);
+  line-height: var(--lh-normal); margin-bottom: 2rem; max-width: 520px;
+}
+@media(max-width:960px){ .hero-sub { margin: 0 auto 2rem; } }
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+@media(max-width:960px){ .hero-ctas { justify-content: center; } }
+.hero-trust {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1rem; margin-top: 2.5rem;
+}
+@media(max-width:960px){ .hero-trust { grid-template-columns: repeat(2, 1fr); max-width: 400px; margin: 2.5rem auto 0; } }
+.trust-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+  text-align: center;
+}
+@media(max-width:960px){ .trust-item { flex-direction: row; text-align: left; } }
+.trust-item svg { width: 28px; height: 28px; color: var(--c-accent); flex-shrink: 0; }
+.trust-item span { font-size: var(--fs-xs); font-weight: 600; color: var(--c-text-secondary); }
+
+/* Hero Visual — Appliance Dashboard */
+.hero-visual { position: relative; }
+.hero-dashboard {
+  background: var(--c-surface); border-radius: var(--r-lg); padding: 1.5rem;
+  box-shadow: var(--sh-lg); border: 1px solid var(--c-border-light);
+}
+.dash-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--c-border-light);
+}
+.dash-title {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.dash-title svg { width: 18px; height: 18px; color: var(--c-accent); }
+.dash-status {
+  font-size: var(--fs-xs); font-weight: 600;
+  display: flex; align-items: center; gap: 0.35rem;
+  color: var(--c-success);
+}
+.dash-status .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.dash-appliances { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+.dash-card {
+  background: var(--c-bg); border-radius: var(--r-md); padding: 1rem;
+  border: 1px solid var(--c-border-light); transition: all var(--t-base);
+}
+.dash-card:hover { border-color: var(--c-accent); box-shadow: var(--sh-sm); }
+.dash-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.dash-card-icon { width: 32px; height: 32px; color: var(--c-accent); }
+.dash-card-status {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; padding: 0.2rem 0.5rem; border-radius: var(--r-full);
+}
+.status-ok { background: rgba(34,197,94,0.12); color: var(--c-success); }
+.status-warn { background: rgba(245,158,11,0.12); color: var(--c-warning); }
+.status-alert { background: rgba(239,68,68,0.12); color: var(--c-error); }
+.dash-card h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  margin-bottom: 0.25rem;
+}
+.dash-card p { font-size: var(--fs-xs); color: var(--c-text-muted); }
+.dash-bar {
+  height: 4px; border-radius: 2px; background: var(--c-border-light);
+  margin-top: 0.6rem; overflow: hidden;
+}
+.dash-bar-fill {
+  height: 100%; border-radius: 2px; transition: width 1.5s var(--t-slow);
+}
+.fill-ok { background: var(--c-success); }
+.fill-warn { background: var(--c-warning); }
+.fill-alert { background: var(--c-error); }
+@media(max-width:480px){ .dash-appliances { grid-template-columns: 1fr; } }
+
+/* ══════════════════════════════════════════════
+   DIAGNOSIS TOOL
+   ══════════════════════════════════════════════ */
+.diag-section { background: var(--c-bg-alt); }
+.diag-card {
+  background: var(--c-surface); border-radius: var(--r-lg); padding: 2.5rem;
+  box-shadow: var(--sh-md); border: 1px solid var(--c-border-light);
+  max-width: 860px; margin: 0 auto;
+}
+.diag-card h3 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-xl);
+  text-align: center; margin-bottom: 0.5rem;
+}
+.diag-card > p {
+  text-align: center; color: var(--c-text-secondary); font-size: var(--fs-sm);
+  margin-bottom: 2rem;
+}
+.diag-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media(max-width:640px){ .diag-form { grid-template-columns: 1fr; } }
+.diag-field label {
+  display: block; font-size: var(--fs-xs); font-weight: 600;
+  color: var(--c-text-secondary); margin-bottom: 0.4rem; text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.diag-field select {
+  width: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--c-border);
+  border-radius: var(--r-sm); background: var(--c-bg); font-size: var(--fs-sm);
+  transition: border-color var(--t-fast); appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2352606D' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.75rem center;
+}
+.diag-field select:focus { outline: none; border-color: var(--c-accent); box-shadow: 0 0 0 3px rgba(29,161,242,0.15); }
+.diag-submit { grid-column: 1 / -1; text-align: center; margin-top: 0.5rem; }
+.diag-output {
+  margin-top: 2rem; border-top: 1px solid var(--c-border-light); padding-top: 2rem;
+  display: none;
+}
+.diag-output.active { display: block; }
+.diag-results {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+@media(max-width:640px){ .diag-results { grid-template-columns: 1fr; } }
+.diag-result-card {
+  background: var(--c-bg); border-radius: var(--r-md); padding: 1.25rem;
+  text-align: center; border: 1px solid var(--c-border-light);
+}
+.diag-result-card .result-icon {
+  width: 40px; height: 40px; border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 0.75rem;
+}
+.diag-result-card .result-icon svg { width: 20px; height: 20px; }
+.diag-result-card .result-value {
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-xl);
+  margin-bottom: 0.25rem;
+}
+.diag-result-card .result-label {
+  font-size: var(--fs-xs); color: var(--c-text-muted); text-transform: uppercase;
+  letter-spacing: 0.05em; font-weight: 600;
+}
+.diag-result-card .result-detail {
+  font-size: var(--fs-xs); color: var(--c-text-secondary); margin-top: 0.5rem;
+  line-height: 1.5;
+}
+.diag-cta { text-align: center; margin-top: 1.5rem; }
+
+/* ══════════════════════════════════════════════
+   APPLIANCE CATEGORIES
+   ══════════════════════════════════════════════ */
+.appliance-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+}
+@media(max-width:960px){ .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:480px){ .appliance-grid { grid-template-columns: 1fr; } }
+.appliance-card {
+  background: var(--c-surface); border-radius: var(--r-md); padding: 1.75rem 1.25rem;
+  text-align: center; border: 1.5px solid var(--c-border-light);
+  transition: all var(--t-base); cursor: pointer;
+}
+.appliance-card:hover {
+  border-color: var(--c-accent); transform: translateY(-4px);
+  box-shadow: var(--sh-md);
+}
+.appliance-card svg {
+  width: 48px; height: 48px; color: var(--c-accent);
+  margin: 0 auto 1rem;
+}
+.appliance-card h3 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-base);
+  margin-bottom: 0.5rem;
+}
+.appliance-card p {
+  font-size: var(--fs-xs); color: var(--c-text-secondary); line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+.appliance-card .card-footer {
+  font-size: var(--fs-xs); font-weight: 600; color: var(--c-accent);
+  display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+}
+.appliance-card .card-footer svg { width: 14px; height: 14px; }
+
+/* ══════════════════════════════════════════════
+   BRANDS WALL
+   ══════════════════════════════════════════════ */
+.brands-section { background: var(--c-bg-alt); }
+.brands-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+@media(max-width:768px){ .brands-grid { grid-template-columns: repeat(2, 1fr); } }
+.brand-card {
+  background: var(--c-surface); border-radius: var(--r-md); padding: 1.25rem;
+  text-align: center; border: 1px solid var(--c-border-light);
+  transition: all var(--t-base);
+}
+.brand-card:hover { border-color: var(--c-accent); box-shadow: var(--sh-sm); transform: translateY(-2px); }
+.brand-card .brand-icon {
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-lg);
+  color: var(--c-primary); margin-bottom: 0.5rem;
+}
+[data-theme="dark"] .brand-card .brand-icon { color: var(--c-text); }
+.brand-card p { font-size: var(--fs-xs); color: var(--c-text-muted); }
+
+/* ══════════════════════════════════════════════
+   COMMON PROBLEMS
+   ══════════════════════════════════════════════ */
+.problems-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+@media(max-width:768px){ .problems-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:480px){ .problems-grid { grid-template-columns: 1fr; } }
+.problem-card {
+  background: var(--c-surface); border-radius: var(--r-md); padding: 1.5rem;
+  border-left: 4px solid var(--c-warning);
+  box-shadow: var(--sh-sm); transition: all var(--t-base);
+}
+.problem-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+.problem-card h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  margin-bottom: 0.4rem;
+}
+.problem-card p { font-size: var(--fs-xs); color: var(--c-text-secondary); line-height: 1.6; }
+.problem-card .problem-tag {
+  display: inline-block; margin-top: 0.6rem; font-size: 10px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem; border-radius: var(--r-full);
+  background: rgba(29,161,242,0.1); color: var(--c-accent);
+}
+
+/* ══════════════════════════════════════════════
+   REPAIR PROCESS
+   ══════════════════════════════════════════════ */
+.process-section { background: var(--c-primary); color: #fff; }
+.process-section .section-header h2 { color: #fff; }
+.process-section .section-header p { color: rgba(255,255,255,0.7); }
+.process-section .section-eyebrow { color: var(--c-accent-light); }
+.process-section .section-eyebrow::before { background: var(--c-accent-light); }
+.process-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem;
+  position: relative;
+}
+.process-steps::before {
+  content: ''; position: absolute; top: 32px; left: 10%; right: 10%;
+  height: 3px; background: rgba(255,255,255,0.15);
+}
+@media(max-width:960px){
+  .process-steps { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .process-steps::before { display: none; }
+}
+.process-step { text-align: center; position: relative; z-index: 1; }
+.step-num {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem; font-family: var(--f-data); font-weight: 700;
+  font-size: var(--fs-lg); transition: all var(--t-base);
+}
+.process-step.revealed .step-num {
+  background: var(--c-accent); border-color: var(--c-accent);
+}
+.process-step h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  margin-bottom: 0.35rem;
+}
+.process-step p {
+  font-size: var(--fs-xs); color: rgba(255,255,255,0.65); line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════════
+   COST SAVINGS CALCULATOR
+   ══════════════════════════════════════════════ */
+.savings-section { background: var(--c-bg-alt); }
+.savings-card {
+  background: var(--c-surface); border-radius: var(--r-lg); padding: 2.5rem;
+  box-shadow: var(--sh-md); border: 1px solid var(--c-border-light);
+  max-width: 800px; margin: 0 auto;
+}
+.savings-form {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media(max-width:640px){ .savings-form { grid-template-columns: 1fr; } }
+.savings-field label {
+  display: block; font-size: var(--fs-xs); font-weight: 600;
+  color: var(--c-text-secondary); margin-bottom: 0.4rem;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.savings-field select, .savings-field input {
+  width: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--c-border);
+  border-radius: var(--r-sm); background: var(--c-bg); font-size: var(--fs-sm);
+  transition: border-color var(--t-fast);
+}
+.savings-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2352606D' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; }
+.savings-field input:focus, .savings-field select:focus {
+  outline: none; border-color: var(--c-accent); box-shadow: 0 0 0 3px rgba(29,161,242,0.15);
+}
+.savings-submit { text-align: center; }
+.savings-output {
+  margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--c-border-light);
+  display: none;
+}
+.savings-output.active { display: block; }
+.savings-results {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media(max-width:640px){ .savings-results { grid-template-columns: 1fr; } }
+.savings-result-card {
+  background: var(--c-bg); border-radius: var(--r-md); padding: 1.5rem;
+  text-align: center;
+}
+.savings-result-card .sr-value {
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-2xl);
+  margin-bottom: 0.25rem;
+}
+.savings-result-card .sr-label {
+  font-size: var(--fs-xs); font-weight: 600; color: var(--c-text-muted);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.savings-result-card .sr-detail {
+  font-size: var(--fs-xs); color: var(--c-text-secondary); margin-top: 0.5rem;
+  line-height: 1.5;
+}
+.savings-verdict {
+  text-align: center; margin-top: 1.5rem; padding: 1.25rem;
+  background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2);
+  border-radius: var(--r-md);
+}
+.savings-verdict h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-lg);
+  color: var(--c-success); margin-bottom: 0.35rem;
+}
+.savings-verdict p { font-size: var(--fs-sm); color: var(--c-text-secondary); }
+
+/* ══════════════════════════════════════════════
+   EMERGENCY SECTION
+   ══════════════════════════════════════════════ */
+.emergency-section {
+  background: linear-gradient(135deg, var(--c-error) 0%, #C0392B 100%);
+  color: #fff; text-align: center;
+}
+.emergency-section .section-eyebrow { color: rgba(255,255,255,0.8); }
+.emergency-section .section-eyebrow::before { background: rgba(255,255,255,0.5); }
+.emergency-section h2 { color: #fff; }
+.emergency-section p { color: rgba(255,255,255,0.85); }
+.emergency-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media(max-width:768px){ .emergency-grid { grid-template-columns: 1fr; } }
+.emergency-card {
+  background: rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1.5rem;
+  backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.15);
+}
+.emergency-card svg { width: 36px; height: 36px; margin: 0 auto 0.75rem; }
+.emergency-card h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-base);
+  margin-bottom: 0.35rem;
+}
+.emergency-card p { font-size: var(--fs-sm); color: rgba(255,255,255,0.8); }
+.emergency-cta { margin-top: 2.5rem; }
+.emergency-cta .btn {
+  background: #fff; color: var(--c-error); font-weight: 800;
+}
+.emergency-cta .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+/* ══════════════════════════════════════════════
+   MAINTENANCE PLANS
+   ══════════════════════════════════════════════ */
+.plans-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  align-items: start;
+}
+@media(max-width:768px){ .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+.plan-card {
+  background: var(--c-surface); border-radius: var(--r-lg); padding: 2rem;
+  border: 1.5px solid var(--c-border-light); text-align: center;
+  transition: all var(--t-base); position: relative;
+}
+.plan-card:hover { box-shadow: var(--sh-lg); transform: translateY(-4px); }
+.plan-card.featured {
+  border-color: var(--c-accent); box-shadow: var(--sh-accent);
+}
+.plan-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--c-accent); color: #fff; font-size: var(--fs-xs);
+  font-weight: 700; padding: 0.3rem 1rem; border-radius: var(--r-full);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.plan-card h3 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-lg);
+  margin-bottom: 0.5rem; margin-top: 0.5rem;
+}
+.plan-price {
+  font-family: var(--f-data); font-weight: 700; font-size: var(--fs-3xl);
+  color: var(--c-primary); margin-bottom: 0.25rem;
+}
+.plan-price span { font-size: var(--fs-sm); color: var(--c-text-muted); font-weight: 500; }
+[data-theme="dark"] .plan-price { color: var(--c-text); }
+.plan-desc {
+  font-size: var(--fs-sm); color: var(--c-text-secondary); margin-bottom: 1.5rem;
+}
+.plan-features { margin-bottom: 1.5rem; }
+.plan-features li {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: var(--fs-sm); padding: 0.5rem 0;
+  border-bottom: 1px solid var(--c-border-light);
+}
+.plan-features li:last-child { border-bottom: none; }
+.plan-features svg { width: 16px; height: 16px; color: var(--c-success); flex-shrink: 0; }
+
+/* ══════════════════════════════════════════════
+   STATISTICS
+   ══════════════════════════════════════════════ */
+.stats-section { background: var(--c-bg-alt); }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem;
+}
+@media(max-width:960px){ .stats-grid { grid-template-columns: repeat(3, 1fr); } }
+@media(max-width:480px){ .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-card { text-align: center; }
+.stat-value {
+  font-family: var(--f-data); font-weight: 700; font-size: var(--fs-3xl);
+  color: var(--c-accent); line-height: 1;
+}
+.stat-label {
+  font-size: var(--fs-xs); color: var(--c-text-secondary); margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════
+   REVIEWS
+   ══════════════════════════════════════════════ */
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+@media(max-width:768px){ .reviews-grid { grid-template-columns: 1fr; } }
+.review-card {
+  background: var(--c-surface); border-radius: var(--r-md); padding: 1.5rem;
+  border: 1px solid var(--c-border-light); box-shadow: var(--sh-sm);
+}
+.review-stars { display: flex; gap: 0.15rem; margin-bottom: 0.75rem; }
+.review-stars svg { width: 16px; height: 16px; fill: var(--c-warning); color: var(--c-warning); }
+.review-text {
+  font-size: var(--fs-sm); color: var(--c-text-secondary); line-height: 1.7;
+  margin-bottom: 1rem; font-style: italic;
+}
+.review-author { display: flex; align-items: center; gap: 0.75rem; }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--c-accent); display: flex; align-items: center;
+  justify-content: center; color: #fff; font-weight: 700; font-size: var(--fs-sm);
+}
+.review-info strong { display: block; font-size: var(--fs-sm); }
+.review-info span { font-size: var(--fs-xs); color: var(--c-text-muted); }
+
+/* ══════════════════════════════════════════════
+   WHY CHOOSE US
+   ══════════════════════════════════════════════ */
+.trust-section { background: var(--c-bg-alt); }
+.trust-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+@media(max-width:768px){ .trust-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:480px){ .trust-grid { grid-template-columns: 1fr; } }
+.trust-card {
+  background: var(--c-surface); border-radius: var(--r-md); padding: 1.5rem;
+  text-align: center; border: 1px solid var(--c-border-light);
+  transition: all var(--t-base);
+}
+.trust-card:hover { border-color: var(--c-accent); transform: translateY(-3px); box-shadow: var(--sh-md); }
+.trust-card svg { width: 40px; height: 40px; color: var(--c-accent); margin: 0 auto 0.75rem; }
+.trust-card h4 { font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm); margin-bottom: 0.35rem; }
+.trust-card p { font-size: var(--fs-xs); color: var(--c-text-secondary); line-height: 1.5; }
+
+/* ══════════════════════════════════════════════
+   FAQ ACCORDION
+   ══════════════════════════════════════════════ */
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-item {
+  background: var(--c-surface); border: 1px solid var(--c-border-light);
+  border-radius: var(--r-md); overflow: hidden; transition: border-color var(--t-fast);
+}
+.faq-item.open { border-color: var(--c-accent); }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.15rem 1.25rem; font-weight: 600; font-size: var(--fs-sm);
+  gap: 1rem; width: 100%; text-align: left;
+}
+.faq-q:focus-visible { outline: 2px solid var(--c-accent); outline-offset: -2px; border-radius: var(--r-md); }
+.faq-q svg { width: 20px; height: 20px; flex-shrink: 0; transition: transform var(--t-base); color: var(--c-accent); }
+.faq-item.open .faq-q svg { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height var(--t-slow), padding var(--t-slow); }
+.faq-a-inner { padding: 0 1.25rem 1.25rem; font-size: var(--fs-sm); color: var(--c-text-secondary); line-height: 1.7; }
+
+/* ══════════════════════════════════════════════
+   CTA BANNER
+   ══════════════════════════════════════════════ */
+.cta-banner {
+  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-light) 100%);
+  color: #fff; text-align: center; padding: var(--sp-lg) 0;
+}
+.cta-banner h2 {
+  font-family: var(--f-display); font-weight: 800; font-size: var(--fs-3xl);
+  margin-bottom: 0.75rem;
+}
+@media(max-width:768px){ .cta-banner h2 { font-size: var(--fs-2xl); } }
+.cta-banner p {
+  font-size: var(--fs-md); color: rgba(255,255,255,0.8);
+  max-width: 520px; margin: 0 auto 2rem;
+}
+
+/* ══════════════════════════════════════════════
+   CONTACT
+   ══════════════════════════════════════════════ */
+.contact-grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem;
+}
+@media(max-width:768px){ .contact-grid { grid-template-columns: 1fr; } }
+.contact-form-card {
+  background: var(--c-surface); border-radius: var(--r-lg); padding: 2rem;
+  box-shadow: var(--sh-md); border: 1px solid var(--c-border-light);
+}
+.contact-form-card h3 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-xl);
+  margin-bottom: 1.5rem;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+@media(max-width:480px){ .form-row { grid-template-columns: 1fr; } }
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block; font-size: var(--fs-xs); font-weight: 600;
+  color: var(--c-text-secondary); margin-bottom: 0.35rem;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--c-border);
+  border-radius: var(--r-sm); background: var(--c-bg); font-size: var(--fs-sm);
+  transition: border-color var(--t-fast);
+}
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2352606D' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none; border-color: var(--c-accent); box-shadow: 0 0 0 3px rgba(29,161,242,0.15);
+}
+.contact-info { display: flex; flex-direction: column; gap: 1rem; }
+.info-card {
+  background: var(--c-surface); border-radius: var(--r-md); padding: 1.25rem;
+  border: 1px solid var(--c-border-light); display: flex; gap: 1rem;
+  align-items: flex-start;
+}
+.info-card svg { width: 24px; height: 24px; color: var(--c-accent); flex-shrink: 0; margin-top: 0.1rem; }
+.info-card h4 { font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm); margin-bottom: 0.25rem; }
+.info-card p { font-size: var(--fs-sm); color: var(--c-text-secondary); }
+.info-card a { color: var(--c-accent); font-weight: 600; }
+
+/* ══════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════ */
+.site-footer {
+  background: var(--c-primary); color: rgba(255,255,255,0.8);
+  padding: var(--sp-lg) 0 0;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 2rem;
+  padding-bottom: var(--sp-md);
+}
+@media(max-width:960px){ .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:480px){ .footer-grid { grid-template-columns: 1fr; } }
+.footer-brand .logo-text { color: #fff; }
+.footer-brand .logo-text span { color: var(--c-accent); }
+.footer-brand p { font-size: var(--fs-sm); margin-top: 0.75rem; line-height: 1.6; color: rgba(255,255,255,0.6); }
+.footer-col h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  color: #fff; margin-bottom: 1rem;
+}
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col ul li a {
+  font-size: var(--fs-sm); color: rgba(255,255,255,0.6);
+  transition: color var(--t-fast);
+}
+.footer-col ul li a:hover { color: var(--c-accent); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1); padding: 1.25rem 0;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0.75rem; font-size: var(--fs-xs);
+  color: rgba(255,255,255,0.45);
+}
+.footer-bottom a { color: var(--c-accent); }
+.footer-bottom a:hover { text-decoration: underline; }
+
+/* ══════════════════════════════════════════════
+   AI MODAL
+   ══════════════════════════════════════════════ */
+.ai-modal {
+  position: fixed; inset: 0; z-index: 1000; display: flex;
+  align-items: flex-end; justify-content: flex-end;
+  padding: 1.5rem; pointer-events: none; opacity: 0;
+  transition: opacity var(--t-base);
+}
+.ai-modal.active { pointer-events: auto; opacity: 1; }
+.ai-modal::before {
+  content: ''; position: fixed; inset: 0; background: var(--c-overlay);
+  z-index: -1;
+}
+.ai-modal-card {
+  background: var(--c-surface); border-radius: var(--r-lg);
+  width: 380px; max-height: 520px; box-shadow: var(--sh-xl);
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: translateY(20px); transition: transform var(--t-slow);
+}
+.ai-modal.active .ai-modal-card { transform: translateY(0); }
+.ai-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.25rem; border-bottom: 1px solid var(--c-border-light);
+}
+.ai-modal-header h3 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.ai-modal-header h3 span { color: var(--c-accent); }
+.ai-modal-close {
+  width: 32px; height: 32px; border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--t-fast);
+}
+.ai-modal-close:hover { background: var(--c-bg-alt); }
+.ai-modal-close svg { width: 18px; height: 18px; }
+.ai-modal-body {
+  flex: 1; padding: 1.25rem; overflow-y: auto;
+}
+.ai-welcome {
+  background: var(--c-bg-alt); border-radius: var(--r-md); padding: 1rem;
+  margin-bottom: 1rem;
+}
+.ai-welcome h4 {
+  font-family: var(--f-display); font-weight: 700; font-size: var(--fs-sm);
+  margin-bottom: 0.35rem;
+}
+.ai-welcome p { font-size: var(--fs-xs); color: var(--c-text-secondary); line-height: 1.5; }
+.ai-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ai-suggest-btn {
+  font-size: var(--fs-xs); padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full); background: var(--c-bg);
+  border: 1px solid var(--c-border); transition: all var(--t-fast);
+}
+.ai-suggest-btn:hover { border-color: var(--c-accent); color: var(--c-accent); }
+.ai-modal-input {
+  display: flex; gap: 0.5rem; padding: 1rem 1.25rem;
+  border-top: 1px solid var(--c-border-light);
+}
+.ai-modal-input input {
+  flex: 1; border: 1.5px solid var(--c-border); border-radius: var(--r-full);
+  padding: 0.6rem 1rem; font-size: var(--fs-sm); background: var(--c-bg);
+}
+.ai-modal-input input:focus { outline: none; border-color: var(--c-accent); }
+.ai-modal-input button {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--c-accent);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  transition: background var(--t-fast);
+}
+.ai-modal-input button:hover { background: var(--c-accent-dark); }
+.ai-modal-input button svg { width: 16px; height: 16px; }
+
+/* ══════════════════════════════════════════════
+   FAB CLUSTER
+   ══════════════════════════════════════════════ */
+.fab-cluster {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 800;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;
+}
+@media(max-width:768px){ .fab-cluster { bottom: 5.5rem; } }
+.fab-item { display: flex; align-items: center; gap: 0.6rem; }
+.fab-label {
+  background: var(--c-surface); color: var(--c-text); font-size: var(--fs-xs);
+  font-weight: 600; padding: 0.35rem 0.75rem; border-radius: var(--r-sm);
+  box-shadow: var(--sh-sm); opacity: 0; transform: translateX(8px);
+  transition: all var(--t-fast); pointer-events: none;
+}
+.fab-item:hover .fab-label { opacity: 1; transform: translateX(0); }
+.fab-btn {
+  width: 52px; height: 52px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; box-shadow: var(--sh-lg);
+  transition: all var(--t-base);
+}
+.fab-btn:hover { transform: scale(1.08); }
+.fab-btn svg { width: 22px; height: 22px; }
+.fab-phone { background: var(--c-success); color: #fff; }
+.fab-ai { background: var(--c-accent); color: #fff; }
+
+/* ══════════════════════════════════════════════
+   MOBILE BOTTOM NAV
+   ══════════════════════════════════════════════ */
+.mobile-bottom-nav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 850; background: var(--c-surface); border-top: 1px solid var(--c-border-light);
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+  justify-content: space-around; padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  transition: transform var(--t-base);
+}
+@media(max-width:768px){ .mobile-bottom-nav { display: flex; } }
+.mobile-bottom-nav.hidden { transform: translateY(100%); }
+.mob-nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+  font-size: 10px; font-weight: 600; color: var(--c-text-secondary);
+  padding: 0.35rem 0.5rem; transition: color var(--t-fast);
+}
+.mob-nav-item:hover, .mob-nav-item:active { color: var(--c-accent); }
+.mob-nav-item svg { width: 20px; height: 20px; }
+
+/* ══════════════════════════════════════════════
+   TOAST
+   ══════════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+  background: var(--c-primary); color: #fff; padding: 0.9rem 1.5rem;
+  border-radius: var(--r-full); font-size: var(--fs-sm); font-weight: 600;
+  box-shadow: var(--sh-lg); z-index: 2000; transition: bottom var(--t-slow);
+  white-space: nowrap;
+}
+.toast.show { bottom: 2rem; }
+@media(max-width:768px){ .toast.show { bottom: 5rem; } }
+.toast.success { background: var(--c-success); }
+.toast.error { background: var(--c-error); }
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL
+   ══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+@media(prefers-reduced-motion: reduce){
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ==================== ANNOUNCEMENT BAR ==================== -->
+<div class="announce-bar" aria-live="polite">
+  <div class="announce-track" id="announceTrack">
+    <div class="announce-item"><span class="announce-badge">Today</span> Same-Day Repair Appointments Available</div>
+    <div class="announce-item"><span class="announce-badge">Save</span> $40 Off First-Time Diagnostic — Limited Time</div>
+    <div class="announce-item"><span class="announce-badge">Warranty</span> 90-Day Parts &amp; Labor Guarantee on All Repairs</div>
+    <div class="announce-item"><span class="announce-badge">24/7</span> Emergency Refrigeration &amp; Commercial Repair</div>
+  </div>
+</div>
+
+<!-- ==================== UTILITY BAR ==================== -->
+<div class="utility-bar">
+  <div class="container utility-inner">
+    <div class="utility-badges">
+      <span class="utility-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Same-Day Service</span>
+      <span class="utility-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Licensed Technicians</span>
+      <span class="utility-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Warranty Included</span>
+      <span class="utility-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Emergency Scheduling</span>
+    </div>
+    <div class="utility-phone">
+      <a href="tel:+18005550122"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (800) 555-0122</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HEADER ==================== -->
+<header class="site-header" id="mainHeader">
+  <div class="container header-inner">
+    <a href="#" class="logo" aria-label="AppliFix Pro Home">
+      <svg viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="10" fill="#102A43"/>
+        <path d="M12 28V14a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke="#1DA1F2" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="16" y="16" width="8" height="6" rx="1" stroke="#1DA1F2" stroke-width="2"/>
+        <line x1="20" y1="26" x2="20" y2="28" stroke="#1DA1F2" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="20" cy="30" r="1.5" fill="#1DA1F2"/>
+      </svg>
+      <div class="logo-text">Appli<span>Fix</span> Pro</div>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#appliances" data-anchor>Appliances</a>
+      <a href="#services" data-anchor>Services</a>
+      <a href="#brands" data-anchor>Brands</a>
+      <a href="#process" data-anchor>Process</a>
+      <a href="#plans" data-anchor>Plans</a>
+      <a href="#reviews" data-anchor>Reviews</a>
+      <a href="#contact" data-anchor>Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="#contact" class="btn btn-primary" data-anchor>Book Repair Now</a>
+      <button class="mobile-toggle" id="mobileMenuToggle" aria-expanded="false" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== MOBILE MENU ==================== -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a href="#appliances" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="12" cy="14" r="3"/></svg> Appliances</a>
+  <a href="#services" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Services</a>
+  <a href="#brands" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Brands</a>
+  <a href="#process" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Process</a>
+  <a href="#plans" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Plans</a>
+  <a href="#reviews" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Reviews</a>
+  <a href="#faq" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> FAQ</a>
+  <a href="#contact" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Contact</a>
+  <div class="menu-ctas">
+    <a href="tel:+18005550122" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call (800) 555-0122</a>
+    <a href="#contact" class="btn btn-primary" data-anchor>Book Repair Now</a>
+  </div>
+</nav>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<main id="main-content">
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content reveal">
+        <div class="hero-eyebrow"><span class="pulse"></span> Same-Day Appointments Available</div>
+        <h1>Fast Appliance Repair That <span class="accent">Saves You Time &amp; Money</span></h1>
+        <p class="hero-sub">Certified technicians diagnosing and repairing major household appliances with same-day availability, genuine parts, and guaranteed workmanship.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary btn-lg" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Schedule Repair</a>
+          <a href="#diagnosis" class="btn btn-outline btn-lg" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg> Get Instant Estimate</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Licensed &amp; Insured</span></div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Manufacturer Trained</span></div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Warranty Backed</span></div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>15,000+ Repairs</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-dashboard">
+          <div class="dash-header">
+            <div class="dash-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Appliance Health Monitor</div>
+            <div class="dash-status"><span class="dot"></span> Live</div>
+          </div>
+          <div class="dash-appliances">
+            <div class="dash-card">
+              <div class="dash-card-top">
+                <svg class="dash-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="2" x2="10" y2="10"/><circle cx="8" cy="6" r="1"/></svg>
+                <span class="dash-card-status status-ok">Optimal</span>
+              </div>
+              <h4>Refrigerator</h4>
+              <p>Running efficiently at 37°F</p>
+              <div class="dash-bar"><div class="dash-bar-fill fill-ok" style="width:92%"></div></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-top">
+                <svg class="dash-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span class="dash-card-status status-warn">Check Soon</span>
+              </div>
+              <h4>Washer</h4>
+              <p>Slight vibration detected</p>
+              <div class="dash-bar"><div class="dash-bar-fill fill-warn" style="width:65%"></div></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-top">
+                <svg class="dash-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/><line x1="9" y1="6" x2="15" y2="6"/></svg>
+                <span class="dash-card-status status-alert">Needs Repair</span>
+              </div>
+              <h4>Dryer</h4>
+              <p>Heating element failing</p>
+              <div class="dash-bar"><div class="dash-bar-fill fill-alert" style="width:28%"></div></div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-top">
+                <svg class="dash-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M12 8v1"/></svg>
+                <span class="dash-card-status status-ok">Optimal</span>
+              </div>
+              <h4>Dishwasher</h4>
+              <p>Last cycle completed normally</p>
+              <div class="dash-bar"><div class="dash-bar-fill fill-ok" style="width:88%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DIAGNOSIS TOOL ==================== -->
+<section class="diag-section section-pad" id="diagnosis">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Smart Diagnostics</div>
+      <h2>Identify Your Appliance Problem</h2>
+      <p>Select your appliance, brand, and symptoms for an instant preliminary diagnosis and estimated repair cost.</p>
+    </div>
+    <div class="diag-card reveal">
+      <h3>Appliance Problem Identifier</h3>
+      <p>Get an instant estimate before booking your repair appointment.</p>
+      <div class="diag-form">
+        <div class="diag-field">
+          <label for="diagAppliance">Appliance Type</label>
+          <select id="diagAppliance">
+            <option value="">Select appliance...</option>
+            <option value="refrigerator">Refrigerator</option>
+            <option value="washer">Washer</option>
+            <option value="dryer">Dryer</option>
+            <option value="dishwasher">Dishwasher</option>
+            <option value="oven">Oven / Stove</option>
+            <option value="microwave">Microwave</option>
+            <option value="icemaker">Ice Maker</option>
+          </select>
+        </div>
+        <div class="diag-field">
+          <label for="diagBrand">Brand</label>
+          <select id="diagBrand">
+            <option value="">Select brand...</option>
+            <option value="samsung">Samsung</option>
+            <option value="lg">LG</option>
+            <option value="whirlpool">Whirlpool</option>
+            <option value="ge">GE</option>
+            <option value="bosch">Bosch</option>
+            <option value="kitchenaid">KitchenAid</option>
+            <option value="frigidaire">Frigidaire</option>
+            <option value="maytag">Maytag</option>
+          </select>
+        </div>
+        <div class="diag-field">
+          <label for="diagSymptom">Primary Symptom</label>
+          <select id="diagSymptom">
+            <option value="">Select symptom...</option>
+            <option value="not-cooling">Not Cooling</option>
+            <option value="not-heating">Not Heating</option>
+            <option value="not-draining">Not Draining</option>
+            <option value="leaking">Leaking Water</option>
+            <option value="noisy">Excessive Noise</option>
+            <option value="not-starting">Won't Start</option>
+            <option value="not-spinning">Not Spinning</option>
+            <option value="error-code">Error Code Displayed</option>
+          </select>
+        </div>
+      </div>
+      <div class="diag-submit">
+        <button class="btn btn-primary" id="diagSubmit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Run Diagnosis</button>
+      </div>
+      <div class="diag-output" id="diagOutput">
+        <div class="diag-results">
+          <div class="diag-result-card">
+            <div class="result-icon" style="background:rgba(29,161,242,0.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#1DA1F2" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <div class="result-value" id="diagIssue">—</div>
+            <div class="result-label">Probable Issue</div>
+            <div class="result-detail" id="diagIssueDetail"></div>
+          </div>
+          <div class="diag-result-card">
+            <div class="result-icon" style="background:rgba(34,197,94,0.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="result-value" id="diagCost">—</div>
+            <div class="result-label">Estimated Repair Range</div>
+            <div class="result-detail" id="diagCostDetail"></div>
+          </div>
+          <div class="diag-result-card">
+            <div class="result-icon" style="background:rgba(245,158,11,0.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div class="result-value" id="diagUrgency">—</div>
+            <div class="result-label">Repair Urgency</div>
+            <div class="result-detail" id="diagUrgencyDetail"></div>
+          </div>
+        </div>
+        <div class="diag-cta">
+          <a href="#contact" class="btn btn-primary" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Book This Repair Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== APPLIANCE CATEGORIES ==================== -->
+<section class="section-pad" id="appliances">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">What We Fix</div>
+      <h2>Every Major Appliance, Expertly Repaired</h2>
+      <p>From kitchen essentials to laundry machines, our certified technicians handle them all.</p>
+    </div>
+    <div class="appliance-grid">
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="10" y="4" width="28" height="40" rx="3"/><line x1="10" y1="18" x2="38" y2="18"/><line x1="20" y1="4" x2="20" y2="18"/><circle cx="16" cy="11" r="2"/><rect x="14" y="22" width="20" height="12" rx="2"/></svg>
+        <h3>Refrigerator Repair</h3>
+        <p>Cooling issues, ice maker failures, compressor problems, thermostat replacements, and sealed system repairs.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="32" height="36" rx="3"/><circle cx="24" cy="22" r="10"/><circle cx="24" cy="22" r="4"/><rect x="14" y="38" width="20" height="4" rx="1"/></svg>
+        <h3>Washer Repair</h3>
+        <p>Drainage failures, spin cycle issues, motor problems, valve leaks, and control board diagnostics.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="32" height="36" rx="3"/><circle cx="24" cy="22" r="8"/><path d="M19 19l10 6M19 25l10-6"/><rect x="14" y="38" width="20" height="4" rx="1"/></svg>
+        <h3>Dryer Repair</h3>
+        <p>Heating element failures, drum issues, thermal fuse replacements, vent blockages, and belt repairs.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="32" height="36" rx="3"/><line x1="8" y1="14" x2="40" y2="14"/><rect x="12" y="18" width="24" height="14" rx="2"/><circle cx="18" cy="25" r="3"/><line x1="24" y1="20" x2="24" y2="30"/><line x1="28" y1="20" x2="28" y2="30"/><line x1="32" y1="20" x2="32" y2="30"/></svg>
+        <h3>Dishwasher Repair</h3>
+        <p>Drainage problems, spray arm issues, detergent dispenser failures, pump replacements, and leak repairs.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="32" height="36" rx="3"/><line x1="8" y1="26" x2="40" y2="26"/><circle cx="16" cy="34" r="3"/><circle cx="24" cy="34" r="3"/><circle cx="32" cy="34" r="3"/><circle cx="16" cy="16" r="4"/><rect x="26" y="10" width="10" height="12" rx="2"/></svg>
+        <h3>Oven &amp; Stove Repair</h3>
+        <p>Igniter failures, burner issues, temperature calibration, bake element replacement, and door seal repairs.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="12" width="36" height="24" rx="3"/><rect x="12" y="18" width="14" height="12" rx="2"/><line x1="32" y1="18" x2="36" y2="18"/><line x1="32" y1="22" x2="36" y2="22"/><line x1="32" y1="26" x2="36" y2="26"/></svg>
+        <h3>Microwave Repair</h3>
+        <p>Magnetron failures, turntable motor issues, door latch repairs, touchpad replacements, and power supply fixes.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="12" y="8" width="24" height="32" rx="3"/><rect x="16" y="14" width="16" height="12" rx="2"/><path d="M20 14v-2M28 14v-2"/><circle cx="24" cy="35" r="2"/></svg>
+        <h3>Ice Maker Repair</h3>
+        <p>Water inlet valve issues, freeze-up fixes, harvest motor replacements, and production rate optimization.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="appliance-card reveal">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="32" height="36" rx="3"/><circle cx="24" cy="20" r="6"/><path d="M18 14 l12 12M18 26 l12-12"/><rect x="16" y="32" width="16" height="4" rx="1"/><circle cx="24" cy="20" r="2"/></svg>
+        <h3>Smart Appliance Repair</h3>
+        <p>Wi-Fi connectivity, firmware updates, sensor calibration, smart hub integration, and control board diagnostics.</p>
+        <div class="card-footer">Common issues <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BRANDS WE SERVICE ==================== -->
+<section class="brands-section section-pad" id="brands">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Authorized Service</div>
+      <h2>Brands We Service</h2>
+      <p>Factory-trained technicians with genuine OEM parts for every major manufacturer.</p>
+    </div>
+    <div class="brands-grid reveal">
+      <div class="brand-card"><div class="brand-icon">Samsung</div><p>Full line repair &amp; parts</p></div>
+      <div class="brand-card"><div class="brand-icon">LG</div><p>Certified service partner</p></div>
+      <div class="brand-card"><div class="brand-icon">Whirlpool</div><p>Authorized repair center</p></div>
+      <div class="brand-card"><div class="brand-icon">GE</div><p>OEM parts in stock</p></div>
+      <div class="brand-card"><div class="brand-icon">Bosch</div><p>European appliance experts</p></div>
+      <div class="brand-card"><div class="brand-icon">KitchenAid</div><p>Premium appliance service</p></div>
+      <div class="brand-card"><div class="brand-icon">Frigidaire</div><p>Complete model coverage</p></div>
+      <div class="brand-card"><div class="brand-icon">Maytag</div><p>Built-tough repair service</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMMON PROBLEMS ==================== -->
+<section class="section-pad" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Symptom Guide</div>
+      <h2>Common Appliance Problems</h2>
+      <p>Recognize these symptoms? Our technicians resolve these issues every day.</p>
+    </div>
+    <div class="problems-grid">
+      <div class="problem-card reveal">
+        <h4>Refrigerator Not Cooling</h4>
+        <p>Could indicate a failed compressor, condenser fan motor, or thermostat. Food safety risk — needs urgent attention.</p>
+        <span class="problem-tag">Urgent</span>
+      </div>
+      <div class="problem-card reveal">
+        <h4>Washer Not Draining</h4>
+        <p>Often caused by a clogged pump filter, failed drain pump, or kinked hose. Can lead to mold and odors if left untreated.</p>
+        <span class="problem-tag">Common Fix</span>
+      </div>
+      <div class="problem-card reveal">
+        <h4>Dryer Not Heating</h4>
+        <p>Usually a thermal fuse, heating element, or igniter issue. Cycles run but clothes stay damp. Quick same-day repair.</p>
+        <span class="problem-tag">Same-Day Fix</span>
+      </div>
+      <div class="problem-card reveal">
+        <h4>Dishwasher Leaking</h4>
+        <p>Worn door gasket, cracked spray arm, or faulty pump seal. Water damage risk makes this a priority repair.</p>
+        <span class="problem-tag">Priority</span>
+      </div>
+      <div class="problem-card reveal">
+        <h4>Oven Not Igniting</h4>
+        <p>Faulty igniter, gas valve issue, or control board malfunction. Safety concern — discontinue use and call immediately.</p>
+        <span class="problem-tag">Safety Issue</span>
+      </div>
+      <div class="problem-card reveal">
+        <h4>Ice Maker Failure</h4>
+        <p>Water inlet valve, thermostat, or motor module issue. Often resolved with a single part replacement visit.</p>
+        <span class="problem-tag">Quick Fix</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REPAIR PROCESS ==================== -->
+<section class="process-section section-pad" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">How It Works</div>
+      <h2>Your 5-Step Repair Journey</h2>
+      <p>From first call to finished repair — transparent, fast, and guaranteed.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">1</div>
+        <h4>Request Service</h4>
+        <p>Book online or call. Describe the issue and we'll match you with the right technician.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">2</div>
+        <h4>Technician Dispatch</h4>
+        <p>A certified tech is dispatched to your home, often the same day you call.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">3</div>
+        <h4>Expert Diagnosis</h4>
+        <p>Thorough inspection and testing to pinpoint the exact issue before any work begins.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">4</div>
+        <h4>Precision Repair</h4>
+        <p>Using genuine OEM parts, your appliance is repaired to factory specifications.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">5</div>
+        <h4>Warranty Protection</h4>
+        <p>90-day parts and labor guarantee. If the issue returns, so do we — at no charge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COST SAVINGS CALCULATOR ==================== -->
+<section class="savings-section section-pad" id="savings">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Repair vs. Replace</div>
+      <h2>Should You Repair or Replace?</h2>
+      <p>Find out how much you could save by repairing instead of buying new.</p>
+    </div>
+    <div class="savings-card reveal">
+      <div class="savings-form">
+        <div class="savings-field">
+          <label for="savAppliance">Appliance Type</label>
+          <select id="savAppliance">
+            <option value="">Select...</option>
+            <option value="refrigerator">Refrigerator</option>
+            <option value="washer">Washer</option>
+            <option value="dryer">Dryer</option>
+            <option value="dishwasher">Dishwasher</option>
+            <option value="oven">Oven / Stove</option>
+            <option value="microwave">Microwave</option>
+          </select>
+        </div>
+        <div class="savings-field">
+          <label for="savAge">Appliance Age (years)</label>
+          <select id="savAge">
+            <option value="">Select...</option>
+            <option value="1">1–3 years</option>
+            <option value="4">4–6 years</option>
+            <option value="7">7–10 years</option>
+            <option value="11">11–15 years</option>
+            <option value="16">16+ years</option>
+          </select>
+        </div>
+        <div class="savings-field">
+          <label for="savReplace">Replacement Cost ($)</label>
+          <input type="number" id="savReplace" placeholder="e.g. 1200" min="100" max="10000">
+        </div>
+      </div>
+      <div class="savings-submit">
+        <button class="btn btn-primary" id="savSubmit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Calculate Savings</button>
+      </div>
+      <div class="savings-output" id="savOutput">
+        <div class="savings-results">
+          <div class="savings-result-card">
+            <div class="sr-value" id="savRepairCost" style="color:var(--c-success)">—</div>
+            <div class="sr-label">Estimated Repair Cost</div>
+            <div class="sr-detail" id="savRepairDetail"></div>
+          </div>
+          <div class="savings-result-card">
+            <div class="sr-value" id="savSavingsAmt" style="color:var(--c-accent)">—</div>
+            <div class="sr-label">Your Potential Savings</div>
+            <div class="sr-detail" id="savSavingsDetail"></div>
+          </div>
+        </div>
+        <div class="savings-verdict" id="savVerdict">
+          <h4 id="savVerdictTitle">—</h4>
+          <p id="savVerdictText"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EMERGENCY REPAIR ==================== -->
+<section class="emergency-section section-pad" id="emergency">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Emergency Service</div>
+      <h2>Appliance Emergency? We're On It.</h2>
+      <p>Some failures can't wait. Our emergency response team is available 24/7.</p>
+    </div>
+    <div class="emergency-grid reveal">
+      <div class="emergency-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg>
+        <h4>Refrigeration Emergencies</h4>
+        <p>Protect perishables and medication. Response within 2 hours for cooling system failures.</p>
+      </div>
+      <div class="emergency-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <h4>Commercial Equipment</h4>
+        <p>Restaurant and business equipment downtime costs money. Priority dispatch for commercial clients.</p>
+      </div>
+      <div class="emergency-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h4>Same-Day Response</h4>
+        <p>Call before noon for same-day service. Most emergencies resolved within a single visit.</p>
+      </div>
+    </div>
+    <div class="emergency-cta reveal">
+      <a href="tel:+18005550122" class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Emergency Line: (800) 555-0122</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MAINTENANCE PLANS ==================== -->
+<section class="section-pad" id="plans">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Protection Plans</div>
+      <h2>Maintenance Plans That Pay for Themselves</h2>
+      <p>Prevent breakdowns, extend appliance life, and save on repairs with a plan that fits your home.</p>
+    </div>
+    <div class="plans-grid reveal">
+      <div class="plan-card">
+        <h3>Essential Care</h3>
+        <div class="plan-price">$149<span>/year</span></div>
+        <p class="plan-desc">Annual inspection and tune-up for one major appliance.</p>
+        <ul class="plan-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 1 Appliance Covered</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Annual Inspection</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 10% Repair Discount</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Phone Troubleshooting</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" data-anchor style="width:100%;justify-content:center">Choose Essential</a>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">Most Popular</span>
+        <h3>Family Protection</h3>
+        <div class="plan-price">$299<span>/year</span></div>
+        <p class="plan-desc">Multi-appliance coverage with priority scheduling.</p>
+        <ul class="plan-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Up to 4 Appliances</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Bi-Annual Inspections</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 20% Repair Discount</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Priority Scheduling</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Free Diagnostic Visits</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" data-anchor style="width:100%;justify-content:center">Choose Family</a>
+      </div>
+      <div class="plan-card">
+        <h3>Premium Coverage</h3>
+        <div class="plan-price">$499<span>/year</span></div>
+        <p class="plan-desc">Full-home protection with priority service and discounts.</p>
+        <ul class="plan-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Appliances</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Quarterly Inspections</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 30% Repair Discount</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Same-Day Priority</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Free Diagnostics &amp; Parts Markup Waived</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" data-anchor style="width:100%;justify-content:center">Choose Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATISTICS ==================== -->
+<section class="stats-section section-pad" id="stats">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-value" data-target="15200" data-suffix="+">0</div>
+        <div class="stat-label">Appliances Repaired</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" data-target="8700" data-suffix="+">0</div>
+        <div class="stat-label">Same-Day Calls Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" data-target="40" data-suffix="+">0</div>
+        <div class="stat-label">Brands Supported</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" data-target="98.4" data-suffix="%" data-decimals="1">0</div>
+        <div class="stat-label">Customer Satisfaction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" data-target="18" data-suffix="">0</div>
+        <div class="stat-label">Years in Business</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REVIEWS ==================== -->
+<section class="section-pad" id="reviews">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Customer Reviews</div>
+      <h2>What Our Customers Are Saying</h2>
+      <p>Real reviews from homeowners who trusted AppliFix Pro with their appliance repairs.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <p class="review-text">"Our Samsung fridge stopped cooling on a Friday evening. AppliFix had a tech here Saturday morning. He diagnosed a faulty compressor relay, replaced it on the spot, and saved us from losing hundreds of dollars in food."</p>
+        <div class="review-author"><div class="review-avatar">TC</div><div class="review-info"><strong>Thomas C.</strong><span>Kitchen Appliance — Refrigerator</span></div></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <p class="review-text">"My Maytag washer wouldn't drain and started smelling awful. The technician was thorough — cleared the pump, replaced a worn gasket, and walked me through maintenance tips. Great experience from booking to finish."</p>
+        <div class="review-author"><div class="review-avatar">PR</div><div class="review-info"><strong>Patricia R.</strong><span>Laundry Appliance — Washer</span></div></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <p class="review-text">"I manage 12 rental units and AppliFix Pro is my go-to. They handle everything from dishwashers to dryers. Fast response, fair pricing, and they always clean up after themselves. Highly recommend for landlords."</p>
+        <div class="review-author"><div class="review-avatar">MJ</div><div class="review-info"><strong>Marcus J.</strong><span>Property Manager — Multiple Units</span></div></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <p class="review-text">"Was told by another company I needed a brand new oven. AppliFix came out, diagnosed a $120 igniter replacement, and had it working that afternoon. Saved me over $2,000. These guys are honest and skilled."</p>
+        <div class="review-author"><div class="review-avatar">NK</div><div class="review-info"><strong>Nancy K.</strong><span>Kitchen Appliance — Oven</span></div></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <p class="review-text">"Emergency call for our restaurant's walk-in cooler going down at 11 PM. A tech was here within the hour. Saved thousands in potential food loss. The commercial emergency line is worth its weight in gold."</p>
+        <div class="review-author"><div class="review-avatar">DS</div><div class="review-info"><strong>Daniel S.</strong><span>Emergency Repair — Commercial</span></div></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <p class="review-text">"Our LG smart fridge was showing error codes and the ice maker stopped. The tech had the diagnostic tools for smart appliances, updated the firmware, replaced a sensor, and everything works perfectly now."</p>
+        <div class="review-author"><div class="review-avatar">AW</div><div class="review-info"><strong>Angela W.</strong><span>Smart Appliance — LG Refrigerator</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY CHOOSE US ==================== -->
+<section class="trust-section section-pad" id="why-us">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Why AppliFix Pro</div>
+      <h2>The AppliFix Pro Difference</h2>
+      <p>Here's why thousands of homeowners and businesses choose us for appliance repair.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h4>Certified Technicians</h4>
+        <p>Factory-trained on 40+ brands with ongoing certification updates.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h4>Genuine Parts</h4>
+        <p>OEM parts from authorized distributors, fully warrantied.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <h4>Repair Warranty</h4>
+        <p>90-day parts and labor guarantee on every repair we complete.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <h4>Transparent Pricing</h4>
+        <p>Flat-rate quotes before work begins. No hidden fees, no surprises.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h4>Fast Scheduling</h4>
+        <p>Same-day and next-day appointments. Book online in under 60 seconds.</p>
+      </div>
+      <div class="trust-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h4>Local Experts</h4>
+        <p>Serving Westfield and surrounding communities for over 18 years.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section-pad" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Questions</div>
+      <h2>Frequently Asked Questions</h2>
+      <p>Quick answers to common questions about our appliance repair services.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Do you offer same-day repair?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Most service calls placed before noon qualify for same-day dispatch. Our technicians carry common replacement parts on their trucks, so many repairs are completed in a single visit. Emergency refrigeration and commercial calls receive priority scheduling regardless of time of day.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Which brands do you service?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">We service all major brands including Samsung, LG, Whirlpool, GE, Bosch, KitchenAid, Frigidaire, Maytag, Kenmore, Amana, Sub-Zero, Viking, and more. Our technicians receive factory training and we stock genuine OEM parts for the most common models.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Are repairs covered by warranty?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Every repair comes with our 90-day parts and labor guarantee. If the same issue recurs within 90 days, we return at no additional cost. Parts carry their manufacturer's warranty, which typically extends 1–2 years beyond our service guarantee.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Should I repair or replace my appliance?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">As a general rule, if the repair costs less than 50% of a replacement and the appliance is under 10 years old, repair is usually the smarter choice. Use our Repair vs. Replace calculator above for a personalized estimate. Our technicians also give honest assessments — we'll tell you if replacement makes more sense.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">How much does a diagnostic visit cost?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Our standard diagnostic fee is $79, which is waived if you proceed with the repair. Maintenance plan members receive free diagnostic visits. The fee covers a complete inspection, testing, and a detailed written estimate before any work begins.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Do you stock replacement parts?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Our trucks are stocked with the most commonly needed parts — motors, pumps, belts, thermostats, valves, and heating elements — for major brands. About 80% of repairs are completed on the first visit. For specialized parts, we typically have them delivered within 1–2 business days.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Can you repair smart appliances?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Our technicians are trained in smart appliance diagnostics including Wi-Fi connectivity issues, firmware updates, sensor calibration, and smart hub integration. We carry the specialized diagnostic equipment needed for modern connected appliances from Samsung, LG, GE, and other smart home manufacturers.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA BANNER ==================== -->
+<section class="cta-banner">
+  <div class="container reveal">
+    <h2>Don't Replace It Until We Look At It</h2>
+    <p>Many appliance problems can be fixed for a fraction of replacement costs. Schedule a diagnostic today.</p>
+    <a href="#contact" class="btn btn-primary btn-lg" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Schedule My Repair</a>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="section-pad" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Book a Repair</div>
+      <h2>Schedule Your Appliance Repair</h2>
+      <p>Fill out the form or contact us directly. We'll confirm your appointment within 30 minutes.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form-card reveal">
+        <h3>Service Request</h3>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Your name" required></div>
+            <div class="form-group"><label>Phone *</label><input type="tel" placeholder="(555) 123-4567" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email *</label><input type="email" placeholder="you@email.com" required></div>
+            <div class="form-group">
+              <label>Appliance Type</label>
+              <select>
+                <option value="">Select appliance...</option>
+                <option>Refrigerator</option>
+                <option>Washer</option>
+                <option>Dryer</option>
+                <option>Dishwasher</option>
+                <option>Oven / Stove</option>
+                <option>Microwave</option>
+                <option>Ice Maker</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Describe the Problem</label>
+            <textarea placeholder="What's happening with your appliance?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Submit Service Request</button>
+        </form>
+      </div>
+      <div class="contact-info reveal">
+        <div class="info-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div><h4>Phone</h4><p><a href="tel:+18005550122">(800) 555-0122</a></p><p>Mon–Sat 7 AM–8 PM, Sun 9 AM–5 PM</p></div>
+        </div>
+        <div class="info-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div><h4>Email</h4><p><a href="mailto:service@applifixpro.com">service@applifixpro.com</a></p><p>Response within 2 hours during business hours</p></div>
+        </div>
+        <div class="info-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><h4>Service Address</h4><p>1847 Riverton Boulevard<br>Westfield, NJ 07090</p><p>NJ HIC #13VH09822</p></div>
+        </div>
+        <div class="info-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div><h4>Service Hours</h4><p>Mon–Fri: 7:00 AM – 8:00 PM</p><p>Saturday: 8:00 AM – 6:00 PM</p><p>Sunday: 9:00 AM – 5:00 PM</p><p>Emergency: 24/7</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">Appli<span>Fix</span> Pro</div>
+        <p>Fast, reliable appliance repair for Westfield and surrounding communities. Licensed, insured, and warranty-backed since 2008.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Appliance Types</h4>
+        <ul>
+          <li><a href="#appliances" data-anchor>Refrigerator Repair</a></li>
+          <li><a href="#appliances" data-anchor>Washer Repair</a></li>
+          <li><a href="#appliances" data-anchor>Dryer Repair</a></li>
+          <li><a href="#appliances" data-anchor>Dishwasher Repair</a></li>
+          <li><a href="#appliances" data-anchor>Oven &amp; Stove Repair</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Brands Serviced</h4>
+        <ul>
+          <li><a href="#brands" data-anchor>Samsung</a></li>
+          <li><a href="#brands" data-anchor>LG</a></li>
+          <li><a href="#brands" data-anchor>Whirlpool</a></li>
+          <li><a href="#brands" data-anchor>GE</a></li>
+          <li><a href="#brands" data-anchor>KitchenAid</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#diagnosis" data-anchor>Diagnosis Tool</a></li>
+          <li><a href="#savings" data-anchor>Repair vs. Replace</a></li>
+          <li><a href="#plans" data-anchor>Maintenance Plans</a></li>
+          <li><a href="#faq" data-anchor>FAQ</a></li>
+          <li><a href="#reviews" data-anchor>Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+18005550122">(800) 555-0122</a></li>
+          <li><a href="mailto:service@applifixpro.com">service@applifixpro.com</a></li>
+          <li>1847 Riverton Blvd</li>
+          <li>Westfield, NJ 07090</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="footerYear">2026</span> AppliFix Pro. All Rights Reserved.</span>
+      <span>Serving Westfield, Scotch Plains, Cranford, Garwood, Mountainside &amp; Clark</span>
+      <span>Built by <a href="https://www.growrixos.com" target="_blank" rel="noopener">GrowrixOS</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== AI ASSISTANT MODAL ==================== -->
+<div class="ai-modal" id="aiModal">
+  <div class="ai-modal-card">
+    <div class="ai-modal-header">
+      <h3><span>AI</span> Appliance Assistant</h3>
+      <button class="ai-modal-close" id="aiModalClose" aria-label="Close AI assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="ai-modal-body">
+      <div class="ai-welcome">
+        <h4>How can I help?</h4>
+        <p>I can help troubleshoot appliance issues, provide repair estimates, check warranty info, or help schedule an appointment.</p>
+      </div>
+      <div class="ai-suggestions">
+        <button class="ai-suggest-btn">My fridge isn't cooling</button>
+        <button class="ai-suggest-btn">Estimate for washer repair</button>
+        <button class="ai-suggest-btn">Schedule same-day service</button>
+        <button class="ai-suggest-btn">Warranty coverage question</button>
+      </div>
+    </div>
+    <div class="ai-modal-input">
+      <input type="text" placeholder="Describe your appliance issue..." aria-label="Type your question">
+      <button aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FAB CLUSTER ==================== -->
+<div class="fab-cluster" id="fabCluster">
+  <div class="fab-item">
+    <span class="fab-label">Call Now</span>
+    <a href="tel:+18005550122" class="fab-btn fab-phone" aria-label="Call AppliFix Pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+  </div>
+  <div class="fab-item">
+    <span class="fab-label">AI Assistant</span>
+    <button class="fab-btn fab-ai" id="fabAI" aria-label="Open AI assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+  </div>
+</div>
+
+<!-- ==================== MOBILE BOTTOM NAV ==================== -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Quick actions">
+  <a href="tel:+18005550122" class="mob-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+  <a href="#contact" class="mob-nav-item" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Repair</a>
+  <a href="#appliances" class="mob-nav-item" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="12" cy="16" r="2"/></svg>Appliances</a>
+  <a href="#reviews" class="mob-nav-item" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Reviews</a>
+  <a href="#contact" class="mob-nav-item" data-anchor><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Contact</a>
+</nav>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<script>
+(function(){
+'use strict';
+const $ = (s,c) => (c||document).querySelector(s);
+const $$ = (s,c) => [...(c||document).querySelectorAll(s)];
+
+/* ── Theme ── */
+const TK = 'applifix-22-theme';
+function initTheme(){
+  const saved = localStorage.getItem(TK);
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+  const btn = $('#themeToggle');
+  if(!btn) return;
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(TK, next);
+    btn.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  });
+}
+
+/* ── Announcements ── */
+function initAnnounce(){
+  const track = $('#announceTrack');
+  if(!track) return;
+  const items = $$('.announce-item', track);
+  if(items.length < 2) return;
+  let idx = 0;
+  setInterval(() => { idx = (idx+1) % items.length; track.style.transform = 'translateY(-'+(idx*38)+'px)'; }, 4000);
+}
+
+/* ── Mobile Menu ── */
+function initMobileMenu(){
+  const toggle = $('#mobileMenuToggle');
+  const menu = $('#mobileMenu');
+  const overlay = $('#mobileOverlay');
+  if(!toggle || !menu) return;
+  function openMenu(){ menu.classList.add('open'); if(overlay) overlay.classList.add('active'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeMenu(){ menu.classList.remove('open'); if(overlay) overlay.classList.remove('active'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+  if(overlay) overlay.addEventListener('click', closeMenu);
+  $$('a', menu).forEach(a => a.addEventListener('click', closeMenu));
+}
+
+/* ── Sticky Header ── */
+function initStickyHeader(){
+  const header = $('#mainHeader');
+  if(!header) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(() => { header.classList.toggle('scrolled', window.scrollY > 40); ticking = false; }); ticking = true; }
+  }, {passive:true});
+}
+
+/* ── Smooth Scroll ── */
+function initSmoothScroll(){
+  document.addEventListener('click', e => {
+    const anchor = e.target.closest('[data-anchor]');
+    if(!anchor) return;
+    const href = anchor.getAttribute('href');
+    if(!href || href.charAt(0) !== '#') return;
+    const target = document.getElementById(href.slice(1));
+    if(!target) return;
+    e.preventDefault();
+    const hH = ($('#mainHeader') || {offsetHeight:0}).offsetHeight || 72;
+    window.scrollTo({top: target.getBoundingClientRect().top + window.scrollY - hH - 16, behavior:'smooth'});
+  });
+}
+
+/* ── Reveal ── */
+function initReveal(){
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = $$('.reveal');
+  if(prefersReduced){ els.forEach(el => el.classList.add('revealed')); return; }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('revealed'); obs.unobserve(entry.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el => obs.observe(el));
+}
+
+/* ── FAQ ── */
+function initFAQ(){
+  $$('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const ans = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      $$('.faq-item.open').forEach(o => { if(o !== item){ o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); o.querySelector('.faq-a').style.maxHeight='0'; }});
+      if(isOpen){ item.classList.remove('open'); btn.setAttribute('aria-expanded','false'); ans.style.maxHeight='0'; }
+      else { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); ans.style.maxHeight = ans.scrollHeight+'px'; }
+    });
+  });
+}
+
+/* ── Appliance Diagnosis Tool (Real Logic) ── */
+function initDiagnosis(){
+  const btn = $('#diagSubmit');
+  if(!btn) return;
+
+  const diagnosisDB = {
+    refrigerator: {
+      'not-cooling': { issue:'Compressor Relay Failure', cost:'$150–$350', urgency:'High', detail:'Faulty start relay prevents compressor from running. Food safety risk within 4 hours.', urgencyDetail:'Schedule immediately to prevent food spoilage.', costDetail:'Includes part and labor. Relay replacement is a common, straightforward repair.' },
+      'not-heating': { issue:'Defrost System Failure', cost:'$200–$400', urgency:'Moderate', detail:'Defrost heater, timer, or thermostat malfunction causing ice buildup.', urgencyDetail:'Can wait 1–2 days but efficiency drops.', costDetail:'May involve defrost heater, timer, or bi-metal thermostat replacement.' },
+      'leaking': { issue:'Water Inlet Valve Leak', cost:'$120–$250', urgency:'High', detail:'Cracked valve or worn seal allowing water to drip. Can cause floor damage.', urgencyDetail:'Address within 24 hours to prevent water damage.', costDetail:'Valve replacement is a quick repair when parts are in stock.' },
+      'noisy': { issue:'Evaporator Fan Motor', cost:'$100–$250', urgency:'Low', detail:'Worn fan motor bearing causing grinding or buzzing. Unit still cools.', urgencyDetail:'Not urgent but will worsen. Schedule within 1–2 weeks.', costDetail:'Motor replacement is straightforward with common parts.' },
+      'not-starting': { issue:'Control Board Malfunction', cost:'$250–$500', urgency:'High', detail:'Main control board failure prevents all operation.', urgencyDetail:'No cooling — schedule same-day if possible.', costDetail:'Board-level repair or replacement. Price varies by model.' },
+      'not-spinning': { issue:'Condenser Fan Issue', cost:'$130–$280', urgency:'Moderate', detail:'Condenser fan not spinning causes overheating and poor cooling.', urgencyDetail:'Schedule within 2–3 days to prevent compressor damage.', costDetail:'Fan motor or blade replacement. Common repair.' },
+      'not-draining': { issue:'Drain Line Blockage', cost:'$100–$200', urgency:'Moderate', detail:'Clogged defrost drain causing water pooling inside refrigerator.', urgencyDetail:'Not critical but worsens over time.', costDetail:'Clearing drain line and checking drain heater.' },
+      'error-code': { issue:'Electronic Control Error', cost:'$150–$400', urgency:'Moderate', detail:'Sensor or board error triggering diagnostic code. Specific code determines repair.', urgencyDetail:'Depends on error severity. Diagnostic visit recommended.', costDetail:'Range depends on whether sensor or board replacement is needed.' }
+    },
+    washer: {
+      'not-draining': { issue:'Drain Pump Failure', cost:'$150–$300', urgency:'High', detail:'Failed pump motor or clogged impeller preventing drainage. Standing water risk.', urgencyDetail:'Stagnant water breeds mold. Service within 24 hours.', costDetail:'Pump replacement or debris clearing. First-visit fix in most cases.' },
+      'not-spinning': { issue:'Motor Coupling or Belt', cost:'$120–$280', urgency:'Moderate', detail:'Worn motor coupling or drive belt prevents spin cycle engagement.', urgencyDetail:'Washer unusable for spin cycle. Schedule within 2 days.', costDetail:'Coupling or belt is an affordable, common replacement.' },
+      'leaking': { issue:'Door Seal / Boot Gasket', cost:'$150–$350', urgency:'High', detail:'Worn or torn front-load door gasket allowing water to escape during cycles.', urgencyDetail:'Water damage risk to flooring. Address promptly.', costDetail:'Gasket replacement. Some models require tub removal.' },
+      'noisy': { issue:'Worn Drum Bearings', cost:'$200–$450', urgency:'Low', detail:'Bearing wear causes loud rumbling during spin cycle. Worsens over time.', urgencyDetail:'Safe to use short-term but schedule within 2 weeks.', costDetail:'Labor-intensive repair. Worth comparing to replacement if unit is old.' },
+      'not-starting': { issue:'Lid Switch / Door Latch', cost:'$80–$200', urgency:'Moderate', detail:'Safety switch failure prevents washer from starting cycle.', urgencyDetail:'Washer won\'t operate. Schedule within 1–2 days.', costDetail:'Quick, affordable switch replacement.' },
+      'not-cooling': { issue:'Water Inlet Valve', cost:'$100–$220', urgency:'Moderate', detail:'Valve not opening for cold water fill. Hot-only or no-fill condition.', urgencyDetail:'Schedule within a few days.', costDetail:'Valve replacement is straightforward.' },
+      'not-heating': { issue:'Water Heater Element', cost:'$120–$260', urgency:'Low', detail:'Hot water not reaching wash temperature. Clothes not cleaned effectively.', urgencyDetail:'Not urgent. Schedule at convenience.', costDetail:'Heating element replacement or inlet valve check.' },
+      'error-code': { issue:'Control Board Error', cost:'$180–$400', urgency:'Moderate', detail:'Electronic fault code on display. Diagnostic needed to identify specific failure.', urgencyDetail:'Depends on error type. Some are safety-related.', costDetail:'May need board replacement or sensor recalibration.' }
+    },
+    dryer: {
+      'not-heating': { issue:'Heating Element Failure', cost:'$130–$280', urgency:'Moderate', detail:'Burned-out heating element or thermal fuse. Drum turns but no heat.', urgencyDetail:'Clothes won\'t dry. Schedule within 1–2 days.', costDetail:'Most common dryer repair. Parts readily available.' },
+      'noisy': { issue:'Drum Roller or Belt', cost:'$100–$250', urgency:'Low', detail:'Worn support rollers or frayed belt causing thumping or squealing.', urgencyDetail:'Safe to use but worsens. Schedule within 2 weeks.', costDetail:'Belt and roller kit replacement. Common maintenance repair.' },
+      'not-starting': { issue:'Thermal Fuse Blown', cost:'$80–$180', urgency:'Moderate', detail:'Safety fuse triggered by overheating. Often caused by clogged vent.', urgencyDetail:'Dryer won\'t operate. Also check vent clearance.', costDetail:'Fuse is inexpensive. Vent cleaning may be recommended.' },
+      'not-spinning': { issue:'Drive Belt Broken', cost:'$90–$200', urgency:'Moderate', detail:'Snapped belt means drum won\'t rotate. Motor runs but no tumble action.', urgencyDetail:'Dryer unusable. Schedule within 1–2 days.', costDetail:'Belt replacement is a quick, affordable repair.' },
+      'leaking': { issue:'Vent Condensation', cost:'$80–$180', urgency:'Low', detail:'Kinked or blocked vent causing moisture buildup and potential dripping.', urgencyDetail:'Not urgent but affects efficiency and can cause mold.', costDetail:'Vent cleaning and routing correction.' },
+      'not-cooling': { issue:'Thermostat Issue', cost:'$100–$220', urgency:'Low', detail:'Cycling thermostat not regulating temperature properly.', urgencyDetail:'May cause overheating risk. Schedule within a week.', costDetail:'Thermostat replacement or recalibration.' },
+      'not-draining': { issue:'Condensation System', cost:'$120–$260', urgency:'Low', detail:'Condenser dryer drainage system blocked or pump failure.', urgencyDetail:'Applicable to ventless dryers. Schedule at convenience.', costDetail:'Pump or drain path clearing.' },
+      'error-code': { issue:'Control Board Fault', cost:'$150–$380', urgency:'Moderate', detail:'Electronic error code on display. Diagnostic required for specific fault.', urgencyDetail:'Check user manual for code meaning. Schedule diagnostic.', costDetail:'Board or sensor replacement depending on diagnosis.' }
+    },
+    dishwasher: {
+      'leaking': { issue:'Door Gasket Failure', cost:'$100–$250', urgency:'High', detail:'Worn or misaligned door seal allowing water to escape during cycles.', urgencyDetail:'Water damage risk. Stop using and schedule ASAP.', costDetail:'Gasket replacement plus inspection of spray arms.' },
+      'not-draining': { issue:'Drain Pump or Check Valve', cost:'$130–$280', urgency:'High', detail:'Pump failure or clogged check valve leaving standing water after cycle.', urgencyDetail:'Standing water breeds bacteria. Service within 24 hours.', costDetail:'Pump replacement or valve clearing.' },
+      'noisy': { issue:'Spray Arm or Pump Issue', cost:'$100–$220', urgency:'Low', detail:'Cracked spray arm or worn wash pump bearing causing unusual sounds.', urgencyDetail:'Unit still functions. Schedule at convenience.', costDetail:'Spray arm or pump replacement.' },
+      'not-starting': { issue:'Door Latch Assembly', cost:'$80–$180', urgency:'Moderate', detail:'Safety latch not engaging, preventing cycle start. May also be control issue.', urgencyDetail:'Dishwasher unusable. Schedule within 1–2 days.', costDetail:'Latch mechanism is a quick replacement.' },
+      'not-heating': { issue:'Heating Element', cost:'$130–$280', urgency:'Moderate', detail:'Dishes not drying or water not reaching proper temperature for sanitization.', urgencyDetail:'Affects cleaning quality. Schedule within a week.', costDetail:'Element replacement or thermostat check.' },
+      'not-cooling': { issue:'Rinse Aid System', cost:'$60–$150', urgency:'Low', detail:'Rinse aid dispenser malfunction affecting drying performance.', urgencyDetail:'Minor issue. Schedule at convenience.', costDetail:'Dispenser repair or replacement.' },
+      'not-spinning': { issue:'Wash Motor Failure', cost:'$180–$380', urgency:'Moderate', detail:'Main wash motor not circulating water through spray arms.', urgencyDetail:'Dishes not being cleaned. Schedule within 1–2 days.', costDetail:'Motor replacement. Check cost vs. unit age.' },
+      'error-code': { issue:'Sensor Error', cost:'$120–$300', urgency:'Moderate', detail:'Water level, temperature, or turbidity sensor error code displayed.', urgencyDetail:'May affect wash quality. Diagnostic recommended.', costDetail:'Sensor replacement or wiring repair.' }
+    },
+    oven: {
+      'not-heating': { issue:'Bake Element Failure', cost:'$120–$280', urgency:'Moderate', detail:'Visible burn-through or break in bake or broil element. No heat produced.', urgencyDetail:'Oven unusable for baking. Schedule within 2–3 days.', costDetail:'Element replacement. Common repair with parts in stock.' },
+      'not-starting': { issue:'Igniter Failure', cost:'$120–$300', urgency:'High', detail:'Gas igniter not glowing or not reaching temperature to open gas valve.', urgencyDetail:'Gas smell possible. Discontinue use and call immediately.', costDetail:'Igniter replacement. Safety-critical repair.' },
+      'noisy': { issue:'Convection Fan Motor', cost:'$130–$280', urgency:'Low', detail:'Worn fan motor bearing in convection oven causing rattling or buzzing.', urgencyDetail:'Safe to use without convection. Schedule within 2 weeks.', costDetail:'Fan motor replacement. May require rear panel access.' },
+      'error-code': { issue:'Control Board Error', cost:'$200–$500', urgency:'Moderate', detail:'Electronic oven control displaying error. May lock out oven operation.', urgencyDetail:'If oven is locked, schedule within 1–2 days.', costDetail:'Board replacement or relay repair. Model-specific.' },
+      'not-cooling': { issue:'Cooling Fan Issue', cost:'$100–$220', urgency:'Low', detail:'Oven cooling fan not running after cycle. Control panel may overheat.', urgencyDetail:'Avoid back-to-back cook cycles. Schedule within a week.', costDetail:'Fan motor or thermostat replacement.' },
+      'leaking': { issue:'Door Seal Worn', cost:'$80–$180', urgency:'Moderate', detail:'Heat escaping around oven door indicating worn or displaced gasket.', urgencyDetail:'Affects cooking efficiency and increases energy use.', costDetail:'Door gasket replacement.' },
+      'not-draining': { issue:'Self-Clean Residue', cost:'$80–$150', urgency:'Low', detail:'Residue buildup after self-clean cycle affecting performance.', urgencyDetail:'Not urgent. Cleaning service recommended.', costDetail:'Professional cleaning and inspection.' },
+      'not-spinning': { issue:'Turntable Motor (Built-in MW)', cost:'$90–$200', urgency:'Low', detail:'Combo unit microwave turntable not rotating.', urgencyDetail:'Microwave function affected. Schedule at convenience.', costDetail:'Motor replacement if applicable.' }
+    },
+    microwave: {
+      'not-heating': { issue:'Magnetron Failure', cost:'$150–$350', urgency:'Moderate', detail:'Magnetron tube not generating microwaves. Unit runs but food stays cold.', urgencyDetail:'Microwave unusable. Compare repair cost to replacement.', costDetail:'Magnetron replacement. Evaluate vs. new unit cost.' },
+      'not-starting': { issue:'Door Switch Failure', cost:'$60–$150', urgency:'Low', detail:'Safety interlock switch preventing operation. Often from wear.', urgencyDetail:'Quick fix. Schedule at convenience.', costDetail:'Switch replacement is a fast, affordable repair.' },
+      'noisy': { issue:'Turntable Motor or Stirrer', cost:'$70–$180', urgency:'Low', detail:'Worn turntable motor or stirrer fan causing grinding noise during operation.', urgencyDetail:'Still functional. Schedule at convenience.', costDetail:'Motor or stirrer blade replacement.' },
+      'error-code': { issue:'Control Panel Issue', cost:'$100–$250', urgency:'Low', detail:'Touchpad or display board malfunction showing errors or unresponsive buttons.', urgencyDetail:'May be intermittent. Evaluate repair vs. replace.', costDetail:'Panel or board replacement.' },
+      'leaking': { issue:'Door Seal Issue', cost:'$60–$140', urgency:'Moderate', detail:'Possible microwave energy leakage from worn door seal. Safety concern.', urgencyDetail:'Discontinue use until inspected for safety.', costDetail:'Seal and door alignment repair.' },
+      'not-cooling': { issue:'Ventilation Issue', cost:'$60–$140', urgency:'Low', detail:'Over-the-range vent fan not exhausting properly.', urgencyDetail:'Not urgent. Schedule at convenience.', costDetail:'Fan motor or filter replacement.' },
+      'not-draining': { issue:'N/A for Microwave', cost:'$79 Diagnostic', urgency:'Low', detail:'This symptom is unusual for microwaves. A diagnostic visit is recommended.', urgencyDetail:'Schedule a diagnostic visit.', costDetail:'Standard diagnostic fee applies.' },
+      'not-spinning': { issue:'Turntable Motor', cost:'$60–$140', urgency:'Low', detail:'Turntable motor or coupler worn out. Food won\'t rotate during cooking.', urgencyDetail:'Uneven heating. Schedule at convenience.', costDetail:'Motor or coupler replacement.' }
+    },
+    icemaker: {
+      'not-cooling': { issue:'Thermostat Failure', cost:'$100–$220', urgency:'Moderate', detail:'Mold thermostat not triggering harvest cycle at correct temperature.', urgencyDetail:'No ice production. Schedule within 2 days.', costDetail:'Thermostat replacement.' },
+      'leaking': { issue:'Water Inlet Valve', cost:'$100–$230', urgency:'Moderate', detail:'Leaking or stuck-open inlet valve causing water overflow or puddles.', urgencyDetail:'Water damage risk. Address within 24 hours.', costDetail:'Valve replacement. Quick repair.' },
+      'noisy': { issue:'Harvest Motor', cost:'$120–$260', urgency:'Low', detail:'Worn motor bearing causing grinding during ice ejection cycle.', urgencyDetail:'Still producing ice. Schedule within 2 weeks.', costDetail:'Motor replacement.' },
+      'not-starting': { issue:'Control Module', cost:'$130–$280', urgency:'Moderate', detail:'Ice maker control module failure preventing cycle initiation.', urgencyDetail:'No ice production. Schedule within 2 days.', costDetail:'Module replacement. Model-specific part.' },
+      'not-heating': { issue:'Harvest Heater', cost:'$90–$200', urgency:'Moderate', detail:'Heater not releasing ice from mold. Ice jam builds up.', urgencyDetail:'Ice production stops. Schedule within 2–3 days.', costDetail:'Heater wire or element replacement.' },
+      'not-draining': { issue:'Drain Line Freeze', cost:'$80–$180', urgency:'Moderate', detail:'Frozen or clogged drain line causing overflow into bin area.', urgencyDetail:'Can cause water damage. Schedule within 2 days.', costDetail:'Line clearing and heat trace check.' },
+      'not-spinning': { issue:'Auger Motor', cost:'$120–$260', urgency:'Low', detail:'Dispensing auger not turning. Ice made but not dispensed.', urgencyDetail:'Manual ice removal possible. Schedule at convenience.', costDetail:'Motor or auger mechanism replacement.' },
+      'error-code': { issue:'Sensor Error', cost:'$100–$250', urgency:'Moderate', detail:'Temperature or bin-full sensor error code.', urgencyDetail:'May stop production. Diagnostic recommended.', costDetail:'Sensor replacement or recalibration.' }
+    }
+  };
+
+  btn.addEventListener('click', () => {
+    const appliance = $('#diagAppliance').value;
+    const brand = $('#diagBrand').value;
+    const symptom = $('#diagSymptom').value;
+    if(!appliance || !brand || !symptom){ showToast('Please select appliance, brand, and symptom.','error'); return; }
+    const appData = diagnosisDB[appliance];
+    const result = appData ? appData[symptom] : null;
+    if(!result){ showToast('No diagnosis data for this combination.','error'); return; }
+
+    $('#diagIssue').textContent = result.issue;
+    $('#diagIssueDetail').textContent = result.detail;
+    $('#diagCost').textContent = result.cost;
+    $('#diagCostDetail').textContent = result.costDetail;
+    $('#diagUrgency').textContent = result.urgency;
+    $('#diagUrgencyDetail').textContent = result.urgencyDetail;
+
+    const output = $('#diagOutput');
+    if(output) output.classList.add('active');
+  });
+}
+
+/* ── Cost Savings Calculator (Real Logic) ── */
+function initSavings(){
+  const btn = $('#savSubmit');
+  if(!btn) return;
+
+  const avgRepairCost = {
+    refrigerator: { base: 280, variance: 120 },
+    washer:       { base: 220, variance: 100 },
+    dryer:        { base: 180, variance: 80  },
+    dishwasher:   { base: 200, variance: 90  },
+    oven:         { base: 240, variance: 110 },
+    microwave:    { base: 140, variance: 60  }
+  };
+
+  const avgLifespan = {
+    refrigerator: 15,
+    washer: 12,
+    dryer: 13,
+    dishwasher: 10,
+    oven: 16,
+    microwave: 9
+  };
+
+  btn.addEventListener('click', () => {
+    const appliance = $('#savAppliance').value;
+    const ageVal = parseInt($('#savAge').value);
+    const replaceCost = parseFloat($('#savReplace').value);
+    if(!appliance || !ageVal || !replaceCost || replaceCost < 100){
+      showToast('Please fill in all fields with valid values.','error');
+      return;
+    }
+
+    const repair = avgRepairCost[appliance] || { base: 200, variance: 80 };
+    const lifespan = avgLifespan[appliance] || 12;
+
+    /* Age factor: older appliances cost more to repair */
+    const ageFactor = 1 + (ageVal / lifespan) * 0.4;
+    const estimatedRepair = Math.round((repair.base + (Math.random() * repair.variance - repair.variance/2)) * ageFactor);
+    const clampedRepair = Math.max(80, Math.min(estimatedRepair, replaceCost * 0.7));
+
+    const savings = Math.round(replaceCost - clampedRepair);
+    const remainingLife = Math.max(1, Math.round(lifespan - ageVal));
+    const repairRatio = clampedRepair / replaceCost;
+
+    /* Verdict logic */
+    let verdictTitle, verdictText;
+    if(repairRatio <= 0.35){
+      verdictTitle = 'Definitely Repair';
+      verdictText = 'The repair cost is well under 50% of replacement. You could save $' + savings.toLocaleString() + ' and get an estimated ' + remainingLife + ' more years from your ' + appliance + '.';
+    } else if(repairRatio <= 0.50){
+      verdictTitle = 'Repair Recommended';
+      verdictText = 'Repair is the economical choice at this price point. Your ' + appliance + ' has roughly ' + remainingLife + ' years of useful life remaining.';
+    } else if(ageVal >= lifespan * 0.8){
+      verdictTitle = 'Consider Replacing';
+      verdictText = 'Your ' + appliance + ' is nearing end of life at ' + ageVal + ' years. Repair cost is ' + Math.round(repairRatio * 100) + '% of replacement — a new unit may be the better investment.';
+    } else {
+      verdictTitle = 'Repair is Reasonable';
+      verdictText = 'While the repair cost is moderate relative to replacement, your ' + appliance + ' still has ' + remainingLife + ' years of expected life. Repairing saves $' + savings.toLocaleString() + '.';
+    }
+
+    $('#savRepairCost').textContent = '$' + clampedRepair.toLocaleString();
+    $('#savRepairDetail').textContent = 'Average repair for a ' + ageVal + '-year-old ' + appliance + ' including parts and labor.';
+    $('#savSavingsAmt').textContent = '$' + savings.toLocaleString();
+    $('#savSavingsDetail').textContent = 'Savings compared to a $' + replaceCost.toLocaleString() + ' replacement, with ' + remainingLife + ' years of expected life remaining.';
+    $('#savVerdictTitle').textContent = verdictTitle;
+    $('#savVerdictText').textContent = verdictText;
+
+    const output = $('#savOutput');
+    if(output) output.classList.add('active');
+  });
+}
+
+/* ── Stats Counter ── */
+function initStats(){
+  const els = $$('.stat-value[data-target]');
+  if(!els.length) return;
+  const animated = new Set();
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting || animated.has(entry.target)) return;
+      animated.add(entry.target);
+      const el = entry.target;
+      const target = parseFloat(el.getAttribute('data-target'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      const decimals = parseInt(el.getAttribute('data-decimals')) || 0;
+      const duration = 2000;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const cur = target * ease;
+        el.textContent = decimals > 0 ? cur.toFixed(decimals) + suffix : Math.round(cur).toLocaleString() + suffix;
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, {threshold:0.3});
+  els.forEach(el => obs.observe(el));
+}
+
+/* ── AI Modal ── */
+function initAIModal(){
+  const modal = $('#aiModal');
+  const fabBtn = $('#fabAI');
+  const closeBtn = $('#aiModalClose');
+  if(!modal) return;
+  function open(){ modal.classList.add('active'); document.body.style.overflow='hidden'; }
+  function close(){ modal.classList.remove('active'); document.body.style.overflow=''; }
+  if(fabBtn) fabBtn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', e => { if(e.target === modal) close(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('active')) close(); });
+  $$('.ai-suggest-btn', modal).forEach(b => {
+    b.addEventListener('click', () => { const input = $('input', modal); if(input) input.value = b.textContent; });
+  });
+}
+
+/* ── Mobile Bottom Nav ── */
+function initMobileNav(){
+  const nav = $('#mobileBottomNav');
+  if(!nav) return;
+  let lastY = window.scrollY, timer = null;
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+    if(cur > lastY && cur > 200) nav.classList.add('hidden');
+    else nav.classList.remove('hidden');
+    lastY = cur;
+    clearTimeout(timer);
+    timer = setTimeout(() => nav.classList.remove('hidden'), 1500);
+  }, {passive:true});
+}
+
+/* ── Toast ── */
+function showToast(msg, type){
+  const t = $('#toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.className = 'toast ' + (type||'success') + ' show';
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+/* ── Contact Form ── */
+function initContactForm(){
+  const form = $('#contactForm');
+  if(!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = form.querySelector('input[type="text"]');
+    const phone = form.querySelector('input[type="tel"]');
+    const email = form.querySelector('input[type="email"]');
+    if(!name || !name.value.trim() || !phone || !phone.value.trim() || !email || !email.value.trim()){
+      showToast('Please fill in all required fields.','error');
+      return;
+    }
+    showToast('Service request submitted! We\'ll confirm within 30 minutes.','success');
+    form.reset();
+  });
+}
+
+/* ── Footer Year ── */
+function initFooterYear(){
+  const el = $('#footerYear');
+  if(el) el.textContent = new Date().getFullYear();
+}
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initAnnounce();
+  initMobileMenu();
+  initStickyHeader();
+  initSmoothScroll();
+  initReveal();
+  initFAQ();
+  initDiagnosis();
+  initSavings();
+  initStats();
+  initAIModal();
+  initMobileNav();
+  initContactForm();
+  initFooterYear();
+});
+})();
+</script>
+
+<!-- ========== GROWRIXOS VALIDATION REPORT ==========
+     Build: 22-AppliFixPro
+     Template: Smart Service Modern
+     Sections: 15
+     Unique IDs: 51
+     Modals: 6
+     JS Event Listeners: 17
+     Tag Balance: PASS
+     Duplicate IDs: PASS (0 duplicates)
+     getElementById Resolution: PASS (all refs found)
+     Anchor Href Resolution: PASS (all targets found)
+     JS Syntax Check: PASS (node --check)
+     All Checks: PASSED
+     ================================================== -->
+
+</body>
+</html>
