@@ -22,7 +22,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
 
   if (status === "success") {
     return (
-      <div className="rounded-[16px] border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
+      <div className="rounded-md border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
         Payment flow returned successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}{orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be processing.
       </div>
     );
@@ -30,7 +30,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
 
   if (status === "cancelled") {
     return (
-      <div className="rounded-[16px] border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
+      <div className="rounded-md border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
         Checkout was cancelled before payment. {selectedTierLabel ? `Tier ${selectedTierLabel} is still selected. ` : ""}Your order draft is still available for follow-up if you restart the flow.
       </div>
     );

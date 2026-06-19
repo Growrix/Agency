@@ -51,11 +51,11 @@ function MarketingPreview() {
               <div className="aspect-4/3 rounded-[14px] bg-linear-to-br from-primary/30 via-accent/20 to-secondary/25" />
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-[16px] border border-white/10 bg-white/4 p-4">
+              <div className="rounded-md border border-white/10 bg-white/4 p-4">
                 <div className="h-3 w-16 rounded-full bg-white/30" />
                 <div className="mt-4 h-16 rounded-[14px] bg-white/6" />
               </div>
-              <div className="rounded-[16px] border border-white/10 bg-white/4 p-4">
+              <div className="rounded-md border border-white/10 bg-white/4 p-4">
                 <div className="h-3 w-20 rounded-full bg-white/30" />
                 <div className="mt-4 h-16 rounded-[14px] bg-white/6" />
               </div>
@@ -136,7 +136,7 @@ function McpPreview() {
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {["crm_lookup", "list_invoices", "inventory_sync", "route_ticket"].map((tool) => (
-              <div key={tool} className="rounded-[16px] border border-white/10 bg-black/25 p-4">
+              <div key={tool} className="rounded-md border border-white/10 bg-black/25 p-4">
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{tool}</p>
                 <div className="mt-4 h-2 rounded-full bg-white/8">
                   <div className="h-full w-3/4 rounded-full bg-linear-to-r from-primary to-accent" />
@@ -182,7 +182,7 @@ function AutomationPreview() {
             { title: "CRM synced", note: "Slack + follow-up" },
           ].map((step, index) => (
             <>
-              <div key={step.title} className="rounded-[16px] border border-white/10 bg-black/25 p-4">
+              <div key={step.title} className="rounded-md border border-white/10 bg-black/25 p-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">0{index + 1}</p>
                 <p className="mt-2 font-display text-lg tracking-tight text-white">{step.title}</p>
                 <p className="mt-2 text-sm text-white/58">{step.note}</p>
@@ -206,7 +206,7 @@ function MobilePreview() {
     <BrowserShell>
       <div className="grid min-w-0 gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <div className="mx-auto w-full max-w-[13.75rem] rounded-[32px] border border-white/10 bg-black/35 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-          <div className="overflow-hidden rounded-[24px] border border-white/10 bg-linear-to-b from-[#16202a] via-[#10151f] to-[#0f1218] p-4">
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-linear-to-b from-[#16202a] via-[#10151f] to-[#0f1218] p-4">
             <div className="mx-auto h-1.5 w-20 rounded-full bg-white/15" />
             <div className="mt-6 h-20 rounded-[18px] bg-linear-to-br from-primary/30 via-accent/20 to-secondary/20" />
             <div className="mt-5 h-4 w-24 rounded-full bg-white/70" />
@@ -214,7 +214,7 @@ function MobilePreview() {
             <div className="mt-2 h-3 w-5/6 rounded-full bg-white/10" />
             <div className="mt-5 grid grid-cols-2 gap-3">
               {[1, 2, 3, 4].map((item) => (
-                <div key={item} className="h-16 rounded-[16px] bg-white/6" />
+                <div key={item} className="h-16 rounded-md bg-white/6" />
               ))}
             </div>
           </div>
@@ -252,21 +252,21 @@ function BookingPreview() {
               { title: "Pick schedule", note: "Timezone aware" },
               { title: "Confirm + pay", note: "Stripe linked" },
             ].map((item, index) => (
-              <div key={item.title} className="rounded-[16px] border border-white/10 bg-black/25 p-4">
+              <div key={item.title} className="rounded-md border border-white/10 bg-black/25 p-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">0{index + 1}</p>
                 <p className="mt-2 font-display text-lg tracking-tight text-white">{item.title}</p>
                 <p className="mt-2 text-sm text-white/58">{item.note}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 rounded-[16px] border border-white/10 bg-black/25 p-4">
+          <div className="mt-5 rounded-md border border-white/10 bg-black/25 p-4">
             <div className="flex items-center justify-between gap-3">
               <div className="h-4 w-40 rounded-full bg-white/75" />
               <div className="h-8 w-24 rounded-full bg-primary/25" />
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="h-24 rounded-[16px] bg-white/6" />
-              <div className="h-24 rounded-[16px] bg-white/6" />
+              <div className="h-24 rounded-md bg-white/6" />
+              <div className="h-24 rounded-md bg-white/6" />
             </div>
           </div>
         </div>

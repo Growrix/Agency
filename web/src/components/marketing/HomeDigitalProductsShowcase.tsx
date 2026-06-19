@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
-import { HomeShopProductTile } from "@/components/shop/HomeShopProductTile";
+import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { cn } from "@/lib/utils";
 import {
   buildShopFilterGroups,
@@ -178,7 +178,7 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
               ) : (
                 <div className="grid h-full auto-rows-fr grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-3">
                   {visibleProducts.map((product) => (
-                    <HomeShopProductTile key={product.slug} product={product} />
+                    <ShopProductCatalogCard key={product.slug} product={product} variant="compact" />
                   ))}
                 </div>
               )}

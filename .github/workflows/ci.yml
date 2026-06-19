@@ -32,6 +32,9 @@ jobs:
       - name: Run lint
         run: npm run lint --prefix web
 
+      - name: Enforce preview performance budgets
+        run: npm run perf:budgets --prefix web
+
       - name: Run unit and integration tests
         run: npm run test --prefix web
 

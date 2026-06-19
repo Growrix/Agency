@@ -83,7 +83,7 @@ export default function TermsPage() {
           <p className="mt-4 text-text-muted text-pretty">
             Last updated April 19, 2026. These terms cover services, products, payments, refunds, and acceptable use.
           </p>
-          <nav className="mt-8 rounded-[16px] border border-border bg-surface p-5">
+          <nav className="mt-8 rounded-md border border-border bg-surface p-5">
             <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">On this page</p>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {SECTIONS.map((s) => (

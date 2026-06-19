@@ -1,5 +1,6 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { SERVICES } from "@/lib/content";
 import {
   HTML_BUSINESS_PROFILE_TEMPLATES,
@@ -106,6 +107,7 @@ const RETIRED_SEED_CATEGORY_SLUGS = new Set([
 
 const LEGACY_MOCK_PORTFOLIO_PLACEHOLDER_SLUGS = new Set(["new-project"]);
 const PRODUCT_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const CATALOG_REVALIDATE_SECONDS = 300;
 
 function isLikelyPlaceholderUrl(value: string | undefined) {
   if (!value) {
@@ -910,7 +912,7 @@ function mergeCatalogProducts(...productGroups: ManagedProductRecord[][]) {
   return Array.from(merged.values());
 }
 
-async function listAllPublicProducts() {
+async function listAllPublicProductsUncached() {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
   const cmsHtmlTemplates = await listSanityHtmlBusinessProfileTemplates().catch(() => []);
@@ -925,6 +927,12 @@ async function listAllPublicProducts() {
   return mergeCatalogProducts(localHtmlTemplates, localWebsiteTemplateHtmlPreviews, managedProducts, cmsProducts, cmsHtmlTemplates)
     .filter((product) => !isPlaceholderProduct(product));
 }
+
+const listAllPublicProductsCached = unstable_cache(
+  async () => listAllPublicProductsUncached(),
+  ["catalog-public-products"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-products"] },
+);
 
 function getDefaultServices(): ManagedServiceRecord[] {
   return SERVICES.map((service) => ({
@@ -987,11 +995,21 @@ async function ensureCatalogSeeded() {
   return seeded;
 }
 
-export async function listPublicServices(): Promise<PublicServiceRecord[]> {
+async function listPublicServicesUncached(): Promise<PublicServiceRecord[]> {
   const database = await ensureCatalogSeeded();
   const fallbackServices = getEffectiveServices(database.services);
   const cmsServices = await listSanityServicePages().catch(() => []);
   return mergeServices(fallbackServices, cmsServices);
+}
+
+const listPublicServicesCached = unstable_cache(
+  async () => listPublicServicesUncached(),
+  ["catalog-public-services"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-services"] },
+);
+
+export async function listPublicServices(): Promise<PublicServiceRecord[]> {
+  return listPublicServicesCached();
 }
 
 export async function getPublicService(serviceId: string): Promise<PublicServiceRecord | null> {
@@ -1011,7 +1029,7 @@ export async function getPublicService(serviceId: string): Promise<PublicService
   };
 }
 
-export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
+async function listPublicPortfolioUncached(): Promise<PublicPortfolioRecord[]> {
   const database = await ensureCatalogSeeded();
   const cmsProjects = await listSanityCaseStudies().catch(() => []);
   const publicProjects = cmsProjects.length > 0 ? cmsProjects : database.portfolio_projects;
@@ -1032,6 +1050,16 @@ export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   }));
 }
 
+const listPublicPortfolioCached = unstable_cache(
+  async () => listPublicPortfolioUncached(),
+  ["catalog-public-portfolio"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-portfolio"] },
+);
+
+export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
+  return listPublicPortfolioCached();
+}
+
 export async function getPublicPortfolioProject(slug: string): Promise<PublicPortfolioDetailRecord | null> {
   const database = await ensureCatalogSeeded();
   const cmsProjects = await listSanityCaseStudies().catch(() => []);
@@ -1046,7 +1074,7 @@ export async function getPublicPortfolioProject(slug: string): Promise<PublicPor
 }
 
 export async function listPublicShopCategories(): Promise<PublicShopCategoryRecord[]> {
-  const products = await listAllPublicProducts();
+  const products = await listAllPublicProductsCached();
 
   const categoryMap = new Map<string, string>();
 
@@ -1071,7 +1099,7 @@ export async function listPublicShopProducts(filters?: {
   industry?: string;
   search?: string;
 }) {
-  const products = await listAllPublicProducts();
+  const products = await listAllPublicProductsCached();
   const q = filters?.search?.trim().toLowerCase();
 
   return products.filter((product) => {
@@ -1108,7 +1136,7 @@ export async function listPublicShopProducts(filters?: {
 }
 
 export async function getPublicShopProduct(slug: string): Promise<PublicShopProductRecord | null> {
-  const products = await listAllPublicProducts();
+  const products = await listAllPublicProductsCached();
   const alternateHtmlSlug = toHtmlProductSlug(slug);
   const product = products.find(
     (item) => (item.slug === slug || item.slug === alternateHtmlSlug) && item.published !== false,

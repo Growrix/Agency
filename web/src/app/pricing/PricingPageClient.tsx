@@ -212,7 +212,7 @@ export function PricingPageClient() {
             title={`${TAB_LABELS[activeTab]} at a glance`}
             description="Use this as a planning baseline. Final pricing is confirmed after scope and constraints are reviewed."
           />
-          <div className="mt-10 overflow-hidden rounded-[16px] border border-border bg-surface">
+          <div className="mt-10 overflow-hidden rounded-md border border-border bg-surface">
             <table className="w-full text-left text-sm">
               <thead className="bg-inset/60">
                 <tr>

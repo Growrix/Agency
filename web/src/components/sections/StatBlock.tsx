@@ -27,7 +27,7 @@ export function StatBlock({
     <Container width={containerWidth} className={containerClassName}>
       <dl
         className={cn(
-          "grid gap-px rounded-[16px] border border-border bg-border overflow-hidden",
+          "grid gap-px rounded-md border border-border bg-border overflow-hidden",
           dense ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2 lg:grid-cols-4",
           className
         )}

@@ -129,7 +129,7 @@ export default async function AboutPage() {
             description={aboutContent?.founder?.description ?? "Starting in digital marketing taught me the value of growth and adaptability. Over time, I've built a toolkit that combines technical expertise with AI-powered systems, ensuring every project is both innovative and practical."}
           />
           <div className="mt-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <Card className="p-0 overflow-hidden rounded-[24px]">
+            <Card className="p-0 overflow-hidden rounded-lg">
               <div className="relative aspect-4/5 overflow-hidden">
                 <Image
                   src={ABOUT_IMAGES.founder.src}
@@ -179,7 +179,7 @@ export default async function AboutPage() {
               title={aboutContent?.beyond?.title ?? "We don't just build software\u2014we build businesses."}
               description={aboutContent?.beyond?.description ?? "Whether you're a startup, an individual with an idea, or an established company, we can collaborate in a way that fits your goals. We can build, maintain, operate, or even partner with you long-term. With the rise of micro SaaS, we are actively creating and supporting products that generate real revenue\u2014not just code."}
             />
-            <Card variant="inset" className="rounded-[24px] p-6 sm:p-8 flex flex-col h-full">
+            <Card variant="inset" className="rounded-lg p-6 sm:p-8 flex flex-col h-full">
               <div className="flex flex-col gap-4 h-full">
                 <h4 className="font-display text-lg tracking-tight text-primary mb-2">Why partner with us?</h4>
                 <hr className="border-border mb-3" />

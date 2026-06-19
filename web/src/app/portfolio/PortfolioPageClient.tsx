@@ -103,7 +103,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
       <Section size="standard" layout="viewport">
         <Container>
           {filtered.length === 0 ? (
-            <div className="rounded-[16px] border border-dashed border-border-strong bg-surface p-12 text-center">
+            <div className="rounded-md border border-dashed border-border-strong bg-surface p-12 text-center">
               <p className="font-display text-xl tracking-tight">No projects match those filters.</p>
               <p className="mt-2 text-text-muted">Try clearing search or selecting a different practice.</p>
               <button

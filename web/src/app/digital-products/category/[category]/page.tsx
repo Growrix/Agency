@@ -11,6 +11,8 @@ type PageProps = {
   params: Promise<{ category: string }>;
 };
 
+export const revalidate = 180;
+
 const CATEGORY_METADATA: Record<string, { title: string; description: string }> = {
   "website-templates": {
     title: "Website Templates",

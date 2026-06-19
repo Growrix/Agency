@@ -6,6 +6,8 @@ export type PreviewVariant =
   | "mobile"
   | "booking";
 
+export type ShopCatalogCardVariant = "default" | "catalog-wide" | "compact";
+
 export type ShopProduct = {
   slug: string;
   name: string;

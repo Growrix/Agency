@@ -10,7 +10,7 @@ export function ProcessSteps({ steps }: { steps: Step[]; eyebrow?: ReactNode }) 
         <RevealItem
           as="li"
           key={step.title}
-          className="relative rounded-[16px] border border-border bg-surface p-6 shadow-(--shadow-1) transition-[transform,box-shadow,border-color] duration-300 ease-linear hover:-translate-y-1 hover:shadow-(--shadow-2) hover:border-border-strong"
+          className="relative rounded-md border border-border bg-surface p-6 shadow-(--shadow-1) transition-[transform,box-shadow,border-color] duration-300 ease-linear hover:-translate-y-1 hover:shadow-(--shadow-2) hover:border-border-strong"
         >
           <div className="flex items-center justify-between">
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted">

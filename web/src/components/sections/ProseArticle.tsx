@@ -69,7 +69,7 @@ export function ProseArticle({ blocks }: { blocks: BlogBodyBlock[] }) {
           case "image":
             return (
               <figure key={i} className="my-10">
-                <div className="relative w-full overflow-hidden rounded-[16px] border border-border bg-inset aspect-16/10">
+                <div className="relative w-full overflow-hidden rounded-md border border-border bg-inset aspect-16/10">
                   <Image
                     src={b.url}
                     alt={b.alt}

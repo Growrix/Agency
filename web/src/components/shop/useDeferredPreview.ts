@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
  * the iframe's initial load underway before the next queued preview starts,
  * which smooths the network/main-thread burst on preview-heavy pages.
  */
-const MAX_CONCURRENT_MOUNTS = 2;
-const SLOT_HOLD_MS = 1500;
+const MAX_CONCURRENT_MOUNTS = 1;
+const SLOT_HOLD_MS = 1800;
 
 let activeMounts = 0;
 const pendingGrants: Array<() => void> = [];
@@ -49,7 +49,7 @@ export function useDeferredPreview<T extends HTMLElement>(options?: UseDeferredP
   const ref = useRef<T>(null);
   const [shouldRender, setShouldRender] = useState(false);
   const requestedRef = useRef(false);
-  const rootMargin = options?.rootMargin ?? "300px 0px";
+  const rootMargin = options?.rootMargin ?? "160px 0px";
 
   useEffect(() => {
     const node = ref.current;

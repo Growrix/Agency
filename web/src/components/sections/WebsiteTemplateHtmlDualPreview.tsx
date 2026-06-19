@@ -35,7 +35,7 @@ const DESKTOP_BENEFITS = [
 
 const HERO_PREVIEW_HIGHLIGHTS = [
   { icon: CodeBracketSquareIcon, label: "Live HTML", hint: "Real pages in-frame" },
-  { icon: ArrowPathIcon, label: "Auto-rotate", hint: "Browse the catalog" },
+  { icon: ArrowPathIcon, label: "Carousel", hint: "Manual + optional autoplay" },
   { icon: CursorArrowRaysIcon, label: "Scrollable", hint: "Explore every section" },
   { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Links to checkout" },
 ] as const;
@@ -47,7 +47,7 @@ export function WebsiteTemplateHtmlHeroPreviewFooter({ previewCount }: { preview
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {HERO_PREVIEW_HIGHLIGHTS.map((item, index) => {
           const Icon = item.icon;
-          const hint = item.label === "Auto-rotate" && previewCount > 0
+          const hint = item.label === "Carousel" && previewCount > 0
             ? `${previewCount} template${previewCount === 1 ? "" : "s"}`
             : item.hint;
 
@@ -96,7 +96,7 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
   minHeightClass = "min-h-[420px] lg:min-h-[560px]",
   fillHeight = false,
   desktopPreviewFit = "width",
-  autoPlay = true,
+  autoPlay = false,
 }: WebsiteTemplateHtmlDesktopPreviewCarouselProps) {
   return (
     <div className={cn(minHeightClass, fillHeight && "flex min-h-0 flex-1 flex-col", className)}>
@@ -173,7 +173,7 @@ export function WebsiteTemplateHtmlMobilePreviewBlock({
   slides,
   emptyFallbackSlide,
   reverseLayout = false,
-  autoPlay = true,
+  autoPlay = false,
 }: WebsiteTemplateHtmlDualPreviewProps & {
   reverseLayout?: boolean;
   autoPlay?: boolean;

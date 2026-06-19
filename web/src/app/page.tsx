@@ -13,6 +13,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { TrustBar } from "@/components/marketing/TrustBar";
+import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 import { HomeDigitalProductsShowcase } from "@/components/marketing/HomeDigitalProductsShowcase";
 import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
 import { ServiceCards } from "@/components/marketing/ServiceCards";
@@ -25,6 +26,7 @@ import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { ShopProductHtmlMobilePreviewCard } from "@/components/shop/ShopProductHtmlMobilePreviewCard";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import {
   HOME_STACK_MARQUEE,
@@ -34,9 +36,16 @@ import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
-import { HtmlBusinessProfilesCategoryHero } from "@/components/sections/HtmlBusinessProfilesCategoryHero";
+import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
+import {
+  buildWebsiteTemplateHtmlPreviewSlides,
+  getWebsiteTemplateHtmlPreviewUrl,
+  listWebsiteTemplateHtmlPreviews,
+  WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+} from "@/lib/website-templates-html-preview";
+import { getProductHref } from "@/lib/shop";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
 import { unstable_cache } from "next/cache";
 
@@ -78,12 +87,30 @@ export default async function Home() {
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
   const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
+  const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
+  const htmlPreviewCatalogProducts = publicProducts.filter(
+    (product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+  );
+  const featuredHtmlWebsiteTemplates = htmlPreviewCatalogProducts.slice(0, 3);
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
     liveSaasProducts,
     homeContent?.liveSaas?.productSlugs,
     liveSaasProducts.slice(0, 4),
   );
+  const htmlPreviewSlides = buildWebsiteTemplateHtmlPreviewSlides(htmlPreviewCatalogProducts);
+  const htmlPreviewPrimaryTemplate = htmlPreviewCatalogProducts[0];
+  const htmlPreviewFallbackSlide = {
+    name: htmlPreviewPrimaryTemplate?.name ?? "Website Template",
+    type: htmlPreviewPrimaryTemplate?.type ?? "HTML Preview",
+    price: htmlPreviewPrimaryTemplate?.price ?? "$149",
+    href: htmlPreviewPrimaryTemplate
+      ? getProductHref(htmlPreviewPrimaryTemplate)
+      : "/digital-products/category/website-templates-html-preview",
+    previewUrl: listWebsiteTemplateHtmlPreviews()[0]
+      ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
+      : undefined,
+  };
   const homeStructuredData: JsonLdData[] = [
     {
       "@context": "https://schema.org",
@@ -173,15 +200,66 @@ export default async function Home() {
 
       <ServiceCards services={services} />
 
-      <HtmlBusinessProfilesCategoryHero
-        products={htmlBusinessProfileProducts}
-        showBackLink={false}
-        profilesAnchorId="profiles"
-        autoPlayCarousel={false}
-        sectionSize="standard"
+      <WebsiteTemplateHtmlPreviewShowcaseSections
+        slides={htmlPreviewSlides}
+        emptyFallbackSlide={htmlPreviewFallbackSlide}
+        reverseMobileLayout
+        showMobileSectionDivider
+        autoPlayMobileCarousel={false}
       />
 
+      <Section size="standard" layout="viewport">
+        <Container>
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="New service"
+              title="HTML Business Profiles - category-based digital products"
+              description="Preview every built HTML business profile by category, then purchase directly from the product catalog with a clear template-to-checkout path."
+            />
+            <div className="flex flex-wrap gap-3">
+              <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
+                Preview all profiles <ArrowUpRightIcon className="size-4" />
+              </LinkButton>
+              <LinkButton href="/digital-products/category/html-business-profiles">
+                Browse category <ArrowRightIcon className="size-4" />
+              </LinkButton>
+            </div>
+          </div>
+
+          <RevealGroup className="mt-10 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" stagger={0.07}>
+            {featuredHtmlBusinessProfileProducts.map((product) => (
+              <RevealItem key={product.slug} className="h-full min-w-0">
+                <ShopProductHtmlMobilePreviewCard product={product} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          {featuredHtmlBusinessProfileProducts.length === 0 && (
+            <Card className="mt-10 text-center">
+              <p className="font-display text-2xl tracking-tight">No published HTML Business Profile items yet.</p>
+              <p className="mt-2 text-text-muted">
+                Publish HTML business profile products to display cards in this section.
+              </p>
+            </Card>
+          )}
+
+        </Container>
+      </Section>
+
       {SHOW_HOME_TRUST_BAR ? <TrustBar /> : null}
+
+      <FeaturedProducts
+        products={featuredHtmlWebsiteTemplates}
+        variant="html-preview"
+        maxProducts={3}
+        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "HTML website templates"}
+        title={homeContent?.shopSpotlight?.title ?? "Production-ready templates with live desktop preview"}
+        description={
+          homeContent?.shopSpotlight?.description ??
+          "Browse HTML website templates with embedded desktop previews — open a product page to buy or request Done-For-You setup."
+        }
+        ctaHref="/digital-products/category/website-templates-html-preview#profiles"
+        ctaLabel="Browse HTML templates"
+      />
 
       <ThreePathExplainer />
 

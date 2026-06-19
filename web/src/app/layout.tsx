@@ -11,18 +11,21 @@ const DEFAULT_OG_IMAGE = "/images/home/studio-hero.jpg";
 
 const sans = Manrope({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-manrope",
   display: "swap",
 });
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-bricolage",
   display: "swap",
 });
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
@@ -62,7 +65,6 @@ export const metadata: Metadata = {
     : { index: false, follow: false },
   icons: {
     icon: "/Favicon.svg?v=20260504",
-    shortcut: "/Favicon.svg?v=20260504",
     apple: "/Favicon.png?v=20260504",
   },
 };

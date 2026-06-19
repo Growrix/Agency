@@ -144,7 +144,7 @@ select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg x
 .fab-pulse{position:absolute;inset:0;border-radius:50%;animation:pulse-glow 2.4s ease-out infinite;pointer-events:none}
 /* hero */
 .hero{position:relative;overflow:hidden;min-height:94vh;display:flex;align-items:center;padding-block:60px}
-.hero-bg{position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80) center/cover;transform:scale(1.06)}
+.hero-bg{position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1280&q=70) center/cover;transform:scale(1.06)}
 .hero-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(11,24,15,.92) 0%,rgba(11,24,15,.72) 42%,rgba(11,24,15,.4) 100%)}
 .hero-ov2{position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,24,15,.85),transparent 40%)}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;position:relative;z-index:3;width:100%}
@@ -285,7 +285,7 @@ select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg x
 .diag-p{color:var(--muted);font-size:13px;line-height:1.5;margin-top:6px}
 /* === STORM COMMAND === */
 .storm{background:linear-gradient(135deg,#1A1410,#2A1A12);position:relative;overflow:hidden}
-.storm-bg{position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=2000&q=80) center/cover;opacity:.2}
+.storm-bg{position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=1280&q=70) center/cover;opacity:.2}
 .storm-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,20,16,.92),rgba(42,26,18,.8))}
 .storm-panel{background:rgba(11,24,15,.5);border:1px solid rgba(244,241,232,.14);border-radius:16px;padding:22px;backdrop-filter:blur(10px)}
 .storm-stat{display:flex;align-items:center;gap:14px}
@@ -306,7 +306,7 @@ select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg x
 /* === STATS === */
 .stats-s{position:relative;overflow:hidden;background:var(--forest);color:#F4F1E8}
 [data-theme=dark] .stats-s{background:#0A130C;border-block:1px solid var(--border)}
-.stats-s::before{content:'';position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2000&q=80) center/cover;opacity:.12}
+.stats-s::before{content:'';position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1280&q=70) center/cover;opacity:.12}
 .stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;position:relative;z-index:2}
 .stat{text-align:center;padding:10px}
 .stat-n{font-family:var(--fd);font-weight:700;font-size:clamp(2.1rem,4vw,3rem);letter-spacing:-.01em;line-height:1}
@@ -399,7 +399,7 @@ select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg x
 @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
 /* === FOOTER === */
 footer{background:#0A130C;color:#E8EFE4;position:relative;overflow:hidden}
-footer::before{content:'';position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=2000&q=80) center/cover;opacity:.06}
+footer::before{content:'';position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1280&q=70) center/cover;opacity:.06}
 .ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1.2fr;gap:36px;position:relative}
 .ft-desc{opacity:.6;font-size:14px;line-height:1.65;margin-top:16px;max-width:300px}
 .ft-social{display:flex;gap:10px;margin-top:20px}
@@ -677,12 +677,12 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
     <p class="h-sub">Recognize common tree problems by sight. Tap any symptom to learn what it means — then let our AI Arborist guide your next step.</p>
   </div>
   <div class="grid3" style="grid-template-columns:repeat(3,1fr)">
-    <div class="reveal" data-d="0"><div class="diag-card" data-diag="dead"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Dead Branches</div><div class="diag-p">Bare limbs with no buds signal dieback — a falling hazard and entry point for decay.</div></div></div></div>
-    <div class="reveal" data-d="80"><div class="diag-card" data-diag="root"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1610847499832-918a1c3c6811?auto=format&fit=crop&w=800&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Root Damage</div><div class="diag-p">Lifting soil, exposed or severed roots threaten stability and anchorage.</div></div></div></div>
-    <div class="reveal" data-d="160"><div class="diag-card" data-diag="fungus"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1611735341450-74d61e660ad2?auto=format&fit=crop&w=800&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Fungus Growth</div><div class="diag-p">Conks or mushrooms at the base indicate internal rot and compromised wood.</div></div></div></div>
-    <div class="reveal" data-d="0"><div class="diag-card" data-diag="pest"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1453349914620-1190b3b3d3a7?auto=format&fit=crop&w=800&q=80)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Pest Infestation</div><div class="diag-p">Boreholes, sawdust or thinning canopy point to active insect damage.</div></div></div></div>
-    <div class="reveal" data-d="80"><div class="diag-card" data-diag="storm"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=800&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">Urgent</span></div><div class="diag-body"><div class="diag-h">Storm Damage</div><div class="diag-p">Hanging limbs, split crotches or partial uprooting need immediate assessment.</div></div></div></div>
-    <div class="reveal" data-d="160"><div class="diag-card" data-diag="crack"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Structural Cracks</div><div class="diag-p">Vertical splits, seams or included bark warn of imminent structural failure.</div></div></div></div>
+    <div class="reveal" data-d="0"><div class="diag-card" data-diag="dead"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=70)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Dead Branches</div><div class="diag-p">Bare limbs with no buds signal dieback — a falling hazard and entry point for decay.</div></div></div></div>
+    <div class="reveal" data-d="80"><div class="diag-card" data-diag="root"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1610847499832-918a1c3c6811?auto=format&fit=crop&w=800&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Root Damage</div><div class="diag-p">Lifting soil, exposed or severed roots threaten stability and anchorage.</div></div></div></div>
+    <div class="reveal" data-d="160"><div class="diag-card" data-diag="fungus"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1611735341450-74d61e660ad2?auto=format&fit=crop&w=800&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Fungus Growth</div><div class="diag-p">Conks or mushrooms at the base indicate internal rot and compromised wood.</div></div></div></div>
+    <div class="reveal" data-d="0"><div class="diag-card" data-diag="pest"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1453349914620-1190b3b3d3a7?auto=format&fit=crop&w=800&q=70)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Pest Infestation</div><div class="diag-p">Boreholes, sawdust or thinning canopy point to active insect damage.</div></div></div></div>
+    <div class="reveal" data-d="80"><div class="diag-card" data-diag="storm"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=800&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">Urgent</span></div><div class="diag-body"><div class="diag-h">Storm Damage</div><div class="diag-p">Hanging limbs, split crotches or partial uprooting need immediate assessment.</div></div></div></div>
+    <div class="reveal" data-d="160"><div class="diag-card" data-diag="crack"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Structural Cracks</div><div class="diag-p">Vertical splits, seams or included bark warn of imminent structural failure.</div></div></div></div>
   </div>
   <!-- AI ARBORIST CALLOUT -->
   <div class="reveal" data-d="80" style="margin-top:36px"><div class="card" style="padding:clamp(24px,3vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:26px;justify-content:space-between;background:linear-gradient(135deg,var(--forest),var(--forest-h));border:none">
@@ -733,15 +733,15 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
   </div>
   <div class="grid3">
     <div class="reveal" data-d="0"><div class="ba-card">
-      <div class="ba-slider" data-ba><div class="ba-img" style="background-image:url(https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=800&q=80)"></div><div class="ba-img ba-after" style="background-image:url(https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80)"></div><div class="ba-handle"><span class="arr">⟷</span></div><span class="ba-lbl b">Before</span><span class="ba-lbl a">After</span></div>
+      <div class="ba-slider" data-ba><div class="ba-img" style="background-image:url(https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=800&q=70)"></div><div class="ba-img ba-after" style="background-image:url(https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=70)"></div><div class="ba-handle"><span class="arr">⟷</span></div><span class="ba-lbl b">Before</span><span class="ba-lbl a">After</span></div>
       <div class="ba-body"><span class="ba-cat">Storm Recovery</span><div class="ba-h">Fallen Oak, Residential</div><div class="ba-meta"><span>🌳 White Oak</span><span>🏠 Suburban</span></div></div>
     </div></div>
     <div class="reveal" data-d="80"><div class="ba-card">
-      <div class="ba-slider" data-ba><div class="ba-img" style="background-image:url(https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=800&q=80)"></div><div class="ba-img ba-after" style="background-image:url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80)"></div><div class="ba-handle"><span class="arr">⟷</span></div><span class="ba-lbl b">Before</span><span class="ba-lbl a">After</span></div>
+      <div class="ba-slider" data-ba><div class="ba-img" style="background-image:url(https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=800&q=70)"></div><div class="ba-img ba-after" style="background-image:url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=70)"></div><div class="ba-handle"><span class="arr">⟷</span></div><span class="ba-lbl b">Before</span><span class="ba-lbl a">After</span></div>
       <div class="ba-body"><span class="ba-cat">Tree Preservation</span><div class="ba-h">Crown Reduction, Estate</div><div class="ba-meta"><span>🌳 Sugar Maple</span><span>🏛️ Estate</span></div></div>
     </div></div>
     <div class="reveal" data-d="160"><div class="ba-card">
-      <div class="ba-slider" data-ba><div class="ba-img" style="background-image:url(https://images.unsplash.com/photo-1597495747958-5b08e57c1ec9?auto=format&fit=crop&w=800&q=80)"></div><div class="ba-img ba-after" style="background-image:url(https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?auto=format&fit=crop&w=800&q=80)"></div><div class="ba-handle"><span class="arr">⟷</span></div><span class="ba-lbl b">Before</span><span class="ba-lbl a">After</span></div>
+      <div class="ba-slider" data-ba><div class="ba-img" style="background-image:url(https://images.unsplash.com/photo-1597495747958-5b08e57c1ec9?auto=format&fit=crop&w=800&q=70)"></div><div class="ba-img ba-after" style="background-image:url(https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?auto=format&fit=crop&w=800&q=70)"></div><div class="ba-handle"><span class="arr">⟷</span></div><span class="ba-lbl b">Before</span><span class="ba-lbl a">After</span></div>
       <div class="ba-body"><span class="ba-cat">Hazard Removal</span><div class="ba-h">Diseased Pine, Commercial</div><div class="ba-meta"><span>🌲 Lodgepole Pine</span><span>🏢 Commercial</span></div></div>
     </div></div>
   </div>
@@ -808,7 +808,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- FINAL CTA -->
 <section class="section" style="position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=2200&q=80) center/cover"></div>
+  <div style="position:absolute;inset:0;background:url(https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=1280&q=70) center/cover"></div>
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,24,15,.82),rgba(11,24,15,.92))"></div>
   <div class="container center" style="position:relative;z-index:2">
     <div class="reveal"><span class="eyebrow" style="justify-content:center;color:var(--gold-t)">Protect What Grows</span>
@@ -826,7 +826,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== SERVICES =================== -->
 <div id="page-services" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Tree Care</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">The Ecosystem</span>
     <h1 class="ph-h1">Tree care services,<br>from <em>canopy to root.</em></h1>
@@ -849,7 +849,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== SPECIES LIBRARY =================== -->
 <div id="page-species" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Tree Library</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Interactive Species Explorer</span>
     <h1 class="ph-h1">Know your trees,<br><em>protect them better.</em></h1>
@@ -862,7 +862,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== DIAGNOSE =================== -->
 <div id="page-diagnose" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Tree Health</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Tree Health Center</span>
     <h1 class="ph-h1">Diagnose problems<br><em>before they spread.</em></h1>
@@ -874,14 +874,14 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
       <button class="btn btn-p" data-open-ai>🌳 Ask the AI Arborist</button>
     </div>
     <div class="grid4">
-      <div class="reveal"><div class="diag-card" data-diag="dead"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Dead Branches</div><div class="diag-p">Falling hazard &amp; decay entry point.</div></div></div></div>
-      <div class="reveal" data-d="80"><div class="diag-card" data-diag="root"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1610847499832-918a1c3c6811?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Root Damage</div><div class="diag-p">Threatens stability &amp; anchorage.</div></div></div></div>
-      <div class="reveal" data-d="160"><div class="diag-card" data-diag="fungus"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1611735341450-74d61e660ad2?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Fungus Growth</div><div class="diag-p">Signals internal wood rot.</div></div></div></div>
-      <div class="reveal" data-d="240"><div class="diag-card" data-diag="pest"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1453349914620-1190b3b3d3a7?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Pest Infestation</div><div class="diag-p">Active insect damage present.</div></div></div></div>
-      <div class="reveal"><div class="diag-card" data-diag="storm"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">Urgent</span></div><div class="diag-body"><div class="diag-h">Storm Damage</div><div class="diag-p">Needs immediate assessment.</div></div></div></div>
-      <div class="reveal" data-d="80"><div class="diag-card" data-diag="crack"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Structural Cracks</div><div class="diag-p">Risk of structural failure.</div></div></div></div>
-      <div class="reveal" data-d="160"><div class="diag-card" data-diag="lean"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Sudden Lean</div><div class="diag-p">Possible root-plate failure.</div></div></div></div>
-      <div class="reveal" data-d="240"><div class="diag-card" data-diag="yellow"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1507371341162-763b5e419408?auto=format&fit=crop&w=600&q=80)"><span class="diag-sev" style="background:rgba(78,139,90,.85);color:#fff">Low</span></div><div class="diag-body"><div class="diag-h">Yellowing Leaves</div><div class="diag-p">Stress, nutrient or water issue.</div></div></div></div>
+      <div class="reveal"><div class="diag-card" data-diag="dead"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Dead Branches</div><div class="diag-p">Falling hazard &amp; decay entry point.</div></div></div></div>
+      <div class="reveal" data-d="80"><div class="diag-card" data-diag="root"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1610847499832-918a1c3c6811?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Root Damage</div><div class="diag-p">Threatens stability &amp; anchorage.</div></div></div></div>
+      <div class="reveal" data-d="160"><div class="diag-card" data-diag="fungus"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1611735341450-74d61e660ad2?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Fungus Growth</div><div class="diag-p">Signals internal wood rot.</div></div></div></div>
+      <div class="reveal" data-d="240"><div class="diag-card" data-diag="pest"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1453349914620-1190b3b3d3a7?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(201,138,43,.85);color:#fff">Moderate</span></div><div class="diag-body"><div class="diag-h">Pest Infestation</div><div class="diag-p">Active insect damage present.</div></div></div></div>
+      <div class="reveal"><div class="diag-card" data-diag="storm"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">Urgent</span></div><div class="diag-body"><div class="diag-h">Storm Damage</div><div class="diag-p">Needs immediate assessment.</div></div></div></div>
+      <div class="reveal" data-d="80"><div class="diag-card" data-diag="crack"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Structural Cracks</div><div class="diag-p">Risk of structural failure.</div></div></div></div>
+      <div class="reveal" data-d="160"><div class="diag-card" data-diag="lean"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(178,58,46,.85);color:#fff">High</span></div><div class="diag-body"><div class="diag-h">Sudden Lean</div><div class="diag-p">Possible root-plate failure.</div></div></div></div>
+      <div class="reveal" data-d="240"><div class="diag-card" data-diag="yellow"><div class="diag-img" style="background-image:url(https://images.unsplash.com/photo-1507371341162-763b5e419408?auto=format&fit=crop&w=600&q=70)"><span class="diag-sev" style="background:rgba(78,139,90,.85);color:#fff">Low</span></div><div class="diag-body"><div class="diag-h">Yellowing Leaves</div><div class="diag-p">Stress, nutrient or water issue.</div></div></div></div>
     </div>
     <div class="reveal" style="margin-top:32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:clamp(22px,3vw,34px)">
       <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
@@ -894,7 +894,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== PROJECTS =================== -->
 <div id="page-projects" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Projects</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Documentary Case Studies</span>
     <h1 class="ph-h1">Every project is a<br><em>story of preservation.</em></h1>
@@ -903,7 +903,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
   <section class="section" style="background:var(--bg)"><div class="container">
     <div class="proj-list">
       <article class="reveal proj-case">
-        <div class="proj-media" style="background-image:url(https://images.unsplash.com/photo-1610847499832-918a1c3c6811?auto=format&fit=crop&w=1000&q=80)"><span class="proj-tag">Heritage Preservation</span></div>
+        <div class="proj-media" style="background-image:url(https://images.unsplash.com/photo-1610847499832-918a1c3c6811?auto=format&fit=crop&w=1000&q=70)"><span class="proj-tag">Heritage Preservation</span></div>
         <div class="proj-info">
           <div class="proj-meta"><span>🌳 Heritage White Oak</span><span>🏡 Estate Residence</span><span>📍 Lake Oswego, OR</span></div>
           <h3 class="proj-h">Saving a 180-year-old oak from decline</h3>
@@ -916,7 +916,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
         </div>
       </article>
       <article class="reveal proj-case" data-d="80" style="flex-direction:row-reverse">
-        <div class="proj-media" style="background-image:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=1000&q=80)"><span class="proj-tag" style="background:var(--red)">Storm Recovery</span></div>
+        <div class="proj-media" style="background-image:url(https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=1000&q=70)"><span class="proj-tag" style="background:var(--red)">Storm Recovery</span></div>
         <div class="proj-info">
           <div class="proj-meta"><span>🌲 Douglas Fir Stand</span><span>🏢 Commercial Campus</span><span>📍 Beaverton, OR</span></div>
           <h3 class="proj-h">Emergency response after a windstorm</h3>
@@ -929,7 +929,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
         </div>
       </article>
       <article class="reveal proj-case" data-d="80">
-        <div class="proj-media" style="background-image:url(https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=80)"><span class="proj-tag" style="background:var(--moss)">Hazard Removal</span></div>
+        <div class="proj-media" style="background-image:url(https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=70)"><span class="proj-tag" style="background:var(--moss)">Hazard Removal</span></div>
         <div class="proj-info">
           <div class="proj-meta"><span>🌴 Mixed Hardwoods</span><span>⛳ Golf Course</span><span>📍 Tualatin, OR</span></div>
           <h3 class="proj-h">Clearing hazards along a public fairway</h3>
@@ -948,7 +948,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== ABOUT =================== -->
 <div id="page-about" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">About</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Our Story</span>
     <h1 class="ph-h1">Arborists who treat trees<br><em>as living assets.</em></h1>
@@ -986,7 +986,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== REVIEWS =================== -->
 <div id="page-reviews" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Reviews</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Property Owner Stories</span>
     <h1 class="ph-h1">From problem to<br><em>peace of mind.</em></h1>
@@ -1037,7 +1037,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== FAQ =================== -->
 <div id="page-faq" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Knowledge Center</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Tree Knowledge Center</span>
     <h1 class="ph-h1">Questions, answered<br><em>by certified arborists.</em></h1>
@@ -1059,7 +1059,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== CONTACT =================== -->
 <div id="page-contact" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Contact</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Get In Touch</span>
     <h1 class="ph-h1">Let's protect<br><em>your trees together.</em></h1>
@@ -1093,7 +1093,7 @@ footer::before{content:'';position:absolute;inset:0;background:url(https://image
 
 <!-- =================== BOOK =================== -->
 <div id="page-book" class="spa-page">
-  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=80)"></div><div class="ph-ov"></div><div class="container ph-content">
+  <section class="page-hero"><div class="ph-bg" style="background-image:url(https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1280&q=70)"></div><div class="ph-ov"></div><div class="container ph-content">
     <nav class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span style="color:rgba(244,241,232,.7)">Book Inspection</span></nav>
     <span class="eyebrow" style="color:var(--gold-t);margin-top:14px;display:inline-flex">Inspection Booking Platform</span>
     <h1 class="ph-h1">Schedule your<br><em>arborist inspection.</em></h1>
@@ -1453,22 +1453,22 @@ select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg x
 
   /* ---------- SPECIES EXPLORER ---------- */
   var SPECIES=[
-    {key:'oak',name:'Oak',latin:'Quercus',emoji:'🌳',life:'200–300 yrs',rate:'Slow',height:'60–80 ft',img:'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1000&q=80',
+    {key:'oak',name:'Oak',latin:'Quercus',emoji:'🌳',life:'200–300 yrs',rate:'Slow',height:'60–80 ft',img:'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1000&q=70',
      diseases:['Oak wilt — a lethal fungal disease spread by beetles and root grafts','Powdery mildew on young foliage in humid conditions','Anthracnose causing leaf blotch and early drop'],
      care:'Avoid pruning in spring when beetles are active. Mulch the root zone, water deeply during drought, and inspect annually for wilt and decay.'},
-    {key:'maple',name:'Maple',latin:'Acer',emoji:'🍁',life:'80–120 yrs',rate:'Moderate',height:'40–70 ft',img:'https://images.unsplash.com/photo-1507371341162-763b5e419408?auto=format&fit=crop&w=1000&q=80',
+    {key:'maple',name:'Maple',latin:'Acer',emoji:'🍁',life:'80–120 yrs',rate:'Moderate',height:'40–70 ft',img:'https://images.unsplash.com/photo-1507371341162-763b5e419408?auto=format&fit=crop&w=1000&q=70',
      diseases:['Verticillium wilt causing branch dieback','Tar spot — cosmetic black leaf spots','Girdling roots that slowly strangle the trunk'],
      care:'Check for girdling roots at planting and maturity. Provide consistent moisture, avoid trunk wounds, and prune in late summer to limit sap bleeding.'},
-    {key:'pine',name:'Pine',latin:'Pinus',emoji:'🌲',life:'100–250 yrs',rate:'Moderate',height:'50–100 ft',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80',
+    {key:'pine',name:'Pine',latin:'Pinus',emoji:'🌲',life:'100–250 yrs',rate:'Moderate',height:'50–100 ft',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=70',
      diseases:['Pine wilt nematode — rapid and often fatal','Diplodia tip blight killing new shoots','Bark beetle infestation in stressed trees'],
      care:'Keep pines vigorous with proper spacing and watering during drought. Remove dead or beetle-hit wood promptly and avoid soil compaction over roots.'},
-    {key:'palm',name:'Palm',latin:'Arecaceae',emoji:'🌴',life:'70–100 yrs',rate:'Moderate',height:'30–60 ft',img:'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=80',
+    {key:'palm',name:'Palm',latin:'Arecaceae',emoji:'🌴',life:'70–100 yrs',rate:'Moderate',height:'30–60 ft',img:'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=70',
      diseases:['Fusarium wilt spread by contaminated tools','Ganoderma butt rot at the trunk base','Lethal yellowing causing frond decline'],
      care:'Only remove fully dead fronds — over-pruning weakens palms. Sterilize tools between trees, maintain balanced nutrition, and watch for trunk conks.'},
-    {key:'birch',name:'Birch',latin:'Betula',emoji:'🌿',life:'40–70 yrs',rate:'Fast',height:'40–60 ft',img:'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80',
+    {key:'birch',name:'Birch',latin:'Betula',emoji:'🌿',life:'40–70 yrs',rate:'Fast',height:'40–60 ft',img:'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=70',
      diseases:['Bronze birch borer — a major killer of stressed birches','Leaf spot and rust in wet seasons','Aphid infestations causing honeydew and sooty mold'],
      care:'Birches hate heat and drought stress. Keep roots cool and moist with mulch, water in dry spells, and prune in summer to deter the bronze birch borer.'},
-    {key:'cedar',name:'Cedar',latin:'Cedrus',emoji:'🌲',life:'150–300 yrs',rate:'Slow',height:'40–70 ft',img:'https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=1000&q=80',
+    {key:'cedar',name:'Cedar',latin:'Cedrus',emoji:'🌲',life:'150–300 yrs',rate:'Slow',height:'40–70 ft',img:'https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?auto=format&fit=crop&w=1000&q=70',
      diseases:['Root rot in poorly drained soils','Cedar-apple rust (galls and orange spores)','Spider mites causing needle bronzing'],
      care:'Plant in well-drained soil to avoid root rot. Provide deep, infrequent watering, keep good air circulation, and monitor for mites in hot, dry weather.'}
   ];

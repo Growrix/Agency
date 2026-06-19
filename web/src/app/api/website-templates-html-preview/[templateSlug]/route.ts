@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { getWebsiteTemplateHtmlPreviewBySlug, WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT } from "@/lib/website-templates-html-preview";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 900;
 
 type RouteContext = {
   params: Promise<{ templateSlug: string }>;
@@ -23,7 +23,7 @@ export async function GET(_request: Request, context: RouteContext) {
   return new Response(optimizedHtml, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "public, max-age=300, stale-while-revalidate=86400",
+      "Cache-Control": "public, max-age=900, stale-while-revalidate=86400",
       "X-Robots-Tag": "noindex, nofollow",
     },
   });

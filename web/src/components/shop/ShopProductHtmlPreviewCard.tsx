@@ -6,7 +6,8 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
-import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import { cn } from "@/lib/utils";
+import { getCheckoutHref, getProductHref, type ShopCatalogCardVariant, type ShopProduct } from "@/lib/shop";
 import {
   getWebsiteTemplateHtmlPreviewByProductSlug,
   getWebsiteTemplateHtmlPreviewUrl,
@@ -18,7 +19,7 @@ export function ShopProductHtmlPreviewCard({
   variant = "default",
 }: {
   product: ShopProduct;
-  variant?: "default" | "catalog-wide";
+  variant?: ShopCatalogCardVariant;
 }) {
   const websiteTemplatePreview = product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
     ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
@@ -28,17 +29,19 @@ export function ShopProductHtmlPreviewCard({
     : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
+  const isCompact = variant === "compact";
   const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>();
 
   return (
     <Card hoverable className="shop-product-html-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
       <div
         ref={previewRef}
-        className={
-          isCatalogWide
-            ? "shop-product-html-preview-card__preview relative aspect-16/10 min-h-[240px] w-full max-w-full overflow-hidden bg-[#0a0a0a] sm:min-h-[280px]"
-            : "shop-product-html-preview-card__preview relative aspect-16/10 min-h-[200px] w-full max-w-full overflow-hidden bg-[#0a0a0a]"
-        }
+        className={cn(
+          "shop-product-html-preview-card__preview relative w-full max-w-full overflow-hidden bg-[#0a0a0a]",
+          isCompact && "aspect-[16/10] min-h-[120px]",
+          !isCompact && isCatalogWide && "relative aspect-16/10 min-h-[240px] sm:min-h-[280px]",
+          !isCompact && !isCatalogWide && "relative aspect-16/10 min-h-[200px]",
+        )}
       >
         {previewUrl ? (
           shouldRenderPreview ? (
@@ -67,49 +70,70 @@ export function ShopProductHtmlPreviewCard({
         ) : null}
       </div>
 
-      <div className={`shop-product-html-preview-card__body flex flex-1 flex-col gap-2 ${isCatalogWide ? "p-5" : "p-4"}`}>
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
-          {product.category} &middot; {product.type}
-        </p>
+      <div
+        className={cn(
+          "shop-product-html-preview-card__body flex flex-1 flex-col gap-2",
+          isCompact ? "gap-1 p-2.5" : isCatalogWide ? "p-5" : "p-4",
+        )}
+      >
+        {!isCompact ? (
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
+            {product.category} &middot; {product.type}
+          </p>
+        ) : (
+          <p className="truncate font-mono text-[9px] uppercase tracking-[0.16em] text-text-muted">{product.category}</p>
+        )}
 
         <h3
-          className={
-            isCatalogWide
-              ? "line-clamp-2 font-display text-lg font-semibold leading-snug tracking-tight text-text"
-              : "line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text"
-          }
+          className={cn(
+            "line-clamp-2 font-display font-semibold leading-snug tracking-tight text-text",
+            isCompact ? "text-[13px]" : isCatalogWide ? "text-lg" : "text-base",
+          )}
         >
           <Link href={getProductHref(product)} className="hover:text-primary">
             {product.name}
           </Link>
         </h3>
 
-        <p className="font-display text-2xl font-bold tracking-tight text-text">{product.price}</p>
+        <p className={cn("font-display font-bold tracking-tight text-text", isCompact ? "text-base" : "text-2xl")}>
+          {product.price}
+        </p>
 
-        <div className="mt-auto flex items-center gap-2 pt-3">
-          <LinkButton
-            href={getCheckoutHref(product)}
-            variant="outline"
-            size="sm"
-            aria-label={`Add ${product.name} to cart`}
-            className="shrink-0 px-3"
+        {isCompact ? (
+          <Link
+            href={getProductHref(product)}
+            className="mt-auto inline-flex items-center gap-0.5 pt-1 text-[11px] font-medium text-primary hover:underline"
           >
-            <ShoppingBagIcon className="size-4" />
-          </LinkButton>
-          <LinkButton
-            href={previewUrl ?? getProductHref(product)}
-            variant="outline"
-            size="sm"
-            fullWidth
-            target={hasExternalPreview ? "_blank" : undefined}
-            rel={hasExternalPreview ? "noreferrer" : undefined}
-          >
-            Live Preview <ArrowUpRightIcon className="size-3.5" />
-          </LinkButton>
-        </div>
-        <Link href={getProductHref(product)} className="text-sm font-medium text-primary hover:underline">
-          View details
-        </Link>
+            View <ArrowUpRightIcon className="size-3" />
+          </Link>
+        ) : (
+          <>
+            <div className="mt-auto flex items-center gap-2 pt-3">
+              <LinkButton
+                href={getCheckoutHref(product)}
+                variant="outline"
+                size="sm"
+                aria-label={`Add ${product.name} to cart`}
+                className="shrink-0 px-3"
+              >
+                <ShoppingBagIcon className="size-4" />
+              </LinkButton>
+              <LinkButton
+                href={previewUrl ?? getProductHref(product)}
+                variant="outline"
+                size="sm"
+                fullWidth
+                target={hasExternalPreview ? "_blank" : undefined}
+                rel={hasExternalPreview ? "noreferrer" : undefined}
+              >
+                Live Preview <ArrowUpRightIcon className="size-3.5" />
+              </LinkButton>
+            </div>
+            <Link href={getProductHref(product)} className="text-sm font-medium text-primary hover:underline">
+              View details
+            </Link>
+          </>
+        )}
       </div>
     </Card>
   );

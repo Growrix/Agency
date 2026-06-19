@@ -21,7 +21,7 @@ export function CTABand({
   return (
     <Section size="none">
       <Container>
-        <div className="contrast-surface relative overflow-hidden rounded-[24px] border border-border bg-contrast px-8 py-14 text-contrast-text sm:px-12 sm:py-16">
+        <div className="contrast-surface relative overflow-hidden rounded-lg border border-border bg-contrast px-8 py-14 text-contrast-text sm:px-12 sm:py-16">
           <div className="absolute inset-0 bg-grid-strong opacity-[0.06]" aria-hidden />
           <div
             className="signal-drift-1 absolute -top-32 -right-24 size-96 rounded-full opacity-30 blur-3xl"

@@ -39,7 +39,7 @@ test("health endpoints respond and homepage loads within smoke threshold", async
   await page.goto("/", { waitUntil: "domcontentloaded" });
   const duration = Date.now() - started;
   // Homepage embeds multiple HTML preview iframes; allow headroom for SSR + first paint in CI.
-  expect(duration).toBeLessThan(15_000);
+  expect(duration).toBeLessThan(12_000);
 });
 
 test("preview iframe budget stays constrained on homepage and category page", async ({ page }) => {
@@ -84,4 +84,57 @@ test("technical SEO baseline metadata exists on key category route", async ({ pa
     });
   });
   expect(hasCollectionPageJsonLd).toBeTruthy();
+
+  const hasBreadcrumbJsonLd = await page.evaluate(() => {
+    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+    return scripts.some((script) => {
+      try {
+        const parsed = JSON.parse(script.textContent || "null");
+        const entries = Array.isArray(parsed) ? parsed : [parsed];
+        return entries.some(
+          (entry) =>
+            entry &&
+            typeof entry === "object" &&
+            entry["@type"] === "BreadcrumbList",
+        );
+      } catch {
+        return false;
+      }
+    });
+  });
+  expect(hasBreadcrumbJsonLd).toBeTruthy();
+});
+
+test("homepage keeps canonical and SearchAction schema", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const canonicalHref = await page
+    .locator('head link[rel="canonical"]')
+    .first()
+    .getAttribute("href");
+  expect(canonicalHref).toContain("/");
+
+  const hasSearchAction = await page.evaluate(() => {
+    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
+    return scripts.some((script) => {
+      try {
+        const parsed = JSON.parse(script.textContent || "null");
+        const entries = Array.isArray(parsed) ? parsed : [parsed];
+        return entries.some((entry) => {
+          if (!entry || typeof entry !== "object" || entry["@type"] !== "WebSite") {
+            return false;
+          }
+          const action = entry.potentialAction;
+          if (!action || typeof action !== "object" || action["@type"] !== "SearchAction") {
+            return false;
+          }
+          return String(action.target || "").includes("/digital-products?search=");
+        });
+      } catch {
+        return false;
+      }
+    });
+  });
+
+  expect(hasSearchAction).toBeTruthy();
 });

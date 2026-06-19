@@ -3,6 +3,8 @@ import { absoluteUrl } from "@/lib/site";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 
+export const revalidate = 900;
+
 const STATIC_ROUTES = [
   "/",
   "/digital-products",
