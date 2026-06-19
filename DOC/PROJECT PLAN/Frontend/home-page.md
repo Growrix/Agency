@@ -40,11 +40,7 @@ depends_on:
 - Components: `ServiceCards`, `FeatureCard`.
 - Interaction notes: rendered immediately after the hero as the second homepage section.
 
-### 5. HTML Preview Showcase
-- Content: merged desktop + mobile website template preview carousel.
-- Components: `WebsiteTemplateHtmlPreviewShowcaseSections`.
-
-### 6. HTML Business Profiles Category Hero
+### 5. HTML Business Profiles Category Hero
 - Content: category-based HTML business profile spotlight with template counts and direct links to preview hub and shop category.
 - Components: `HtmlBusinessProfilesCategoryHero`.
 
@@ -107,7 +103,6 @@ depends_on:
 ## Section Size + Layout Map (Desktop-First)
 - Hero statement: `size=hero`, `layout=viewport`.
 - Service cards: `size=standard`, `layout=viewport`.
-- HTML preview showcase: `size=standard`, `layout=viewport` (desktop + mobile previews merged into one section container).
 - HTML business profiles spotlight hero: `size=hero`, `layout=viewport`.
 - Three-path explainer: `size=standard`, `layout=viewport`.
 - Digital products showcase: `min-h-[100dvh]`, full width.

@@ -35,16 +35,8 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { HtmlBusinessProfilesCategoryHero } from "@/components/sections/HtmlBusinessProfilesCategoryHero";
-import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
-import {
-  buildWebsiteTemplateHtmlPreviewSlides,
-  getWebsiteTemplateHtmlPreviewUrl,
-  listWebsiteTemplateHtmlPreviews,
-  WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
-} from "@/lib/website-templates-html-preview";
-import { getProductHref } from "@/lib/shop";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
 import { unstable_cache } from "next/cache";
 
@@ -86,28 +78,12 @@ export default async function Home() {
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
   const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
-  const htmlPreviewCatalogProducts = publicProducts.filter(
-    (product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
-  );
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
     liveSaasProducts,
     homeContent?.liveSaas?.productSlugs,
     liveSaasProducts.slice(0, 4),
   );
-  const htmlPreviewSlides = buildWebsiteTemplateHtmlPreviewSlides(htmlPreviewCatalogProducts);
-  const htmlPreviewPrimaryTemplate = htmlPreviewCatalogProducts[0];
-  const htmlPreviewFallbackSlide = {
-    name: htmlPreviewPrimaryTemplate?.name ?? "Website Template",
-    type: htmlPreviewPrimaryTemplate?.type ?? "HTML Preview",
-    price: htmlPreviewPrimaryTemplate?.price ?? "$149",
-    href: htmlPreviewPrimaryTemplate
-      ? getProductHref(htmlPreviewPrimaryTemplate)
-      : "/digital-products/category/website-templates-html-preview",
-    previewUrl: listWebsiteTemplateHtmlPreviews()[0]
-      ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
-      : undefined,
-  };
   const homeStructuredData: JsonLdData[] = [
     {
       "@context": "https://schema.org",
@@ -196,14 +172,6 @@ export default async function Home() {
       </Section>
 
       <ServiceCards services={services} />
-
-      <WebsiteTemplateHtmlPreviewShowcaseSections
-        slides={htmlPreviewSlides}
-        emptyFallbackSlide={htmlPreviewFallbackSlide}
-        reverseMobileLayout
-        showMobileSectionDivider
-        autoPlayMobileCarousel={false}
-      />
 
       <HtmlBusinessProfilesCategoryHero
         products={htmlBusinessProfileProducts}
