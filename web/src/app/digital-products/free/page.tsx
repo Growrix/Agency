@@ -32,8 +32,8 @@ export default async function FreeProductsPage() {
             title="Free products"
             description="Starter templates and resources you can use before committing to paid bundles."
           />
-          <LinkButton href="/products" variant="outline" size="sm">
-            Browse all products
+          <LinkButton href="/digital-products" variant="outline" size="sm">
+            Browse all digital products
           </LinkButton>
         </div>
 

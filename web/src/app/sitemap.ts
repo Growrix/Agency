@@ -5,9 +5,9 @@ import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from 
 
 const STATIC_ROUTES = [
   "/",
-  "/products",
-  "/products/bundles",
-  "/products/free",
+  "/digital-products",
+  "/digital-products/bundles",
+  "/digital-products/free",
   "/pricing",
   "/services",
   "/additional-services",
@@ -51,14 +51,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const categoryEntries: MetadataRoute.Sitemap = PRODUCT_CATEGORY_SLUGS.map((slug) => ({
-    url: absoluteUrl(`/products/category/${slug}`),
+    url: absoluteUrl(`/digital-products/category/${slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
   const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
-    url: absoluteUrl(`/products/${product.slug}`),
+    url: absoluteUrl(`/digital-products/${product.slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.7,

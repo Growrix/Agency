@@ -39,7 +39,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   if (!product) {
     return (
       <div className="flex flex-wrap gap-3">
-        <LinkButton href="/products" size="lg">Go to products</LinkButton>
+        <LinkButton href="/digital-products" size="lg">Go to digital products</LinkButton>
         <LinkButton href="/contact" variant="outline" size="lg">Request invoice</LinkButton>
       </div>
     );

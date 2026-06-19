@@ -97,7 +97,7 @@ export default async function Home() {
     price: htmlPreviewPrimaryTemplate?.price ?? "$149",
     href: htmlPreviewPrimaryTemplate
       ? getProductHref(htmlPreviewPrimaryTemplate)
-      : "/products/category/website-templates-html-preview",
+      : "/digital-products/category/website-templates-html-preview",
     previewUrl: listWebsiteTemplateHtmlPreviews()[0]
       ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
       : undefined,
@@ -118,7 +118,7 @@ export default async function Home() {
       url: SITE_URL,
       potentialAction: {
         "@type": "SearchAction",
-        target: `${SITE_URL}/products?search={search_term_string}`,
+        target: `${SITE_URL}/digital-products?search={search_term_string}`,
         "query-input": "required name=search_term_string",
       },
     },
@@ -153,8 +153,8 @@ export default async function Home() {
               className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
               style={{ animationDelay: "270ms" }}
             >
-              <LinkButton href="/products" size="lg">
-                Browse Products <ArrowRightIcon className="size-4" />
+              <LinkButton href="/digital-products" size="lg">
+                Browse Digital Products <ArrowRightIcon className="size-4" />
               </LinkButton>
               <LinkButton href="/book-appointment" variant="outline" size="lg">
                 Book a Free Consultation
@@ -217,7 +217,7 @@ export default async function Home() {
           homeContent?.shopSpotlight?.description ??
           "Browse HTML website templates with embedded desktop previews — open a product page to buy or request Done-For-You setup."
         }
-        ctaHref="/products/category/website-templates-html-preview#profiles"
+        ctaHref="/digital-products/category/website-templates-html-preview#profiles"
         ctaLabel="Browse HTML templates"
       />
 
@@ -234,10 +234,10 @@ export default async function Home() {
               description="Preview every built HTML business profile by category, then purchase directly from the product catalog with a clear template-to-checkout path."
             />
             <div className="flex flex-wrap gap-3">
-              <LinkButton href="/products/category/html-business-profiles" variant="outline">
+              <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
                 Preview all profiles <ArrowUpRightIcon className="size-4" />
               </LinkButton>
-              <LinkButton href="/products/category/html-business-profiles">
+              <LinkButton href="/digital-products/category/html-business-profiles">
                 Browse category <ArrowRightIcon className="size-4" />
               </LinkButton>
             </div>
@@ -297,7 +297,7 @@ export default async function Home() {
                 title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
                 description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
               />
-              <LinkButton href="/products" variant="outline">
+              <LinkButton href="/digital-products" variant="outline">
                 Explore Live SaaS <ArrowUpRightIcon className="size-4" />
               </LinkButton>
             </div>
@@ -343,7 +343,7 @@ export default async function Home() {
                 Use it. Test it. Validate it. Then make your move with confidence.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <LinkButton href="/products">
+                <LinkButton href="/digital-products">
                   Explore All Live SaaS <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton href="/book-appointment" variant="outline">
@@ -474,8 +474,8 @@ export default async function Home() {
           homeContent?.finalCta?.description ??
           "Pick a digital product for instant delivery, request Done-For-You setup, or scope a custom build."
         }
-        primaryLabel={homeContent?.finalCta?.primaryLabel ?? "Browse Products"}
-        primaryHref="/products"
+        primaryLabel={homeContent?.finalCta?.primaryLabel ?? "Browse Digital Products"}
+        primaryHref="/digital-products"
         secondaryLabel={homeContent?.finalCta?.secondaryLabel ?? "Book a Free Consultation"}
         secondaryHref="/book-appointment"
       />

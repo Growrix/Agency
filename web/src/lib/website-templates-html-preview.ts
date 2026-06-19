@@ -259,7 +259,7 @@ export function buildWebsiteTemplateHtmlPreviewSlides(catalogProducts: WebsiteTe
       name: template.title,
       type: template.type,
       price: catalogProduct?.price ?? template.price,
-      href: catalogProduct ? `/products/${catalogProduct.slug}` : `/products/${productSlug}`,
+      href: catalogProduct ? `/digital-products/${catalogProduct.slug}` : `/digital-products/${productSlug}`,
       previewUrl,
     };
   });

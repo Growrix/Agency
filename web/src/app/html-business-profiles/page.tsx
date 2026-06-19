@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function HtmlBusinessProfilesPage() {
-  redirect("/products/category/html-business-profiles");
+  redirect("/digital-products/category/html-business-profiles");
 }

@@ -9,13 +9,13 @@ import { NextRequest, NextResponse } from "next/server";
 const REVALIDATION_MAP: Record<string, string[]> = {
   blogPost: ["/", "/blog", "/blog/[slug]"],
   caseStudy: ["/", "/portfolio", "/portfolio/[slug]"],
-  shopItem: ["/", "/products", "/products/[slug]"],
-  shopCategory: ["/products"],
+  shopItem: ["/", "/digital-products", "/digital-products/[slug]"],
+  shopCategory: ["/digital-products"],
   servicePage: ["/", "/services", "/services/[slug]"],
   faqItem: ["/faq", "/services", "/"],
   homePage: ["/"],
   aboutPage: ["/about"],
-  siteSettings: ["/", "/about", "/services", "/portfolio", "/products", "/faq", "/blog"],
+  siteSettings: ["/", "/about", "/services", "/portfolio", "/digital-products", "/faq", "/blog"],
 };
 
 export async function POST(request: NextRequest) {

@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
-  const canonical = `/products/category/${category}`;
+  const canonical = `/digital-products/category/${category}`;
   return {
     title: entry.title,
     description: entry.description,
@@ -58,11 +58,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProductsCategoryPage({ params }: PageProps) {
   const { category } = await params;
   if (category === "saas-templates" || category === "ready-websites") {
-    redirect("/products/category/website-templates");
+    redirect("/digital-products/category/website-templates");
   }
 
   const categoryMetadata = CATEGORY_METADATA[category];
-  const categoryPath = `/products/category/${category}`;
+  const categoryPath = `/digital-products/category/${category}`;
   const categoryStructuredData: JsonLdData[] | null = categoryMetadata
     ? [
         {
@@ -84,8 +84,8 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Products",
-              item: absoluteUrl("/products"),
+              name: "Digital Products",
+              item: absoluteUrl("/digital-products"),
             },
             {
               "@type": "ListItem",
@@ -126,5 +126,5 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
     );
   }
 
-  redirect("/products");
+  redirect("/digital-products");
 }

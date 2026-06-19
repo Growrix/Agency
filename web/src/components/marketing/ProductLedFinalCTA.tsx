@@ -5,8 +5,8 @@ export function ProductLedFinalCTA({
   eyebrow = "Start with a product or a conversation",
   title = "Browse ready-made assets or book a free consultation.",
   description = "Pick a digital product for instant delivery, request Done-For-You setup, or scope a custom build — we will route you to the right next step.",
-  primaryLabel = "Browse Products",
-  primaryHref = "/products",
+  primaryLabel = "Browse Digital Products",
+  primaryHref = "/digital-products",
   secondaryLabel = "Book a Free Consultation",
   secondaryHref = "/book-appointment",
 }: {

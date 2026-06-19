@@ -49,7 +49,7 @@ test("preview iframe budget stays constrained on homepage and category page", as
   );
   expect(homePreviewIframeCount).toBeLessThanOrEqual(2);
 
-  await page.goto("/products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
+  await page.goto("/digital-products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
   const categoryPreviewIframeCount = await page.evaluate(() =>
     document.querySelectorAll('iframe[src*="/api/website-templates-html-preview/"]').length,
   );
@@ -57,13 +57,13 @@ test("preview iframe budget stays constrained on homepage and category page", as
 });
 
 test("technical SEO baseline metadata exists on key category route", async ({ page }) => {
-  await page.goto("/products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
+  await page.goto("/digital-products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
 
   const canonicalHref = await page
     .locator('head link[rel="canonical"]')
     .first()
     .getAttribute("href");
-  expect(canonicalHref).toContain("/products/category/website-templates-html-preview");
+  expect(canonicalHref).toContain("/digital-products/category/website-templates-html-preview");
 
   const hasCollectionPageJsonLd = await page.evaluate(() => {
     const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
@@ -76,7 +76,7 @@ test("technical SEO baseline metadata exists on key category route", async ({ pa
             entry &&
             typeof entry === "object" &&
             entry["@type"] === "CollectionPage" &&
-            String(entry.url || "").includes("/products/category/website-templates-html-preview"),
+            String(entry.url || "").includes("/digital-products/category/website-templates-html-preview"),
         );
       } catch {
         return false;

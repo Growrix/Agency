@@ -27,3 +27,28 @@ test("top chrome hides on scroll down and reappears on scroll up", async ({ page
   await page.waitForTimeout(200);
   await expect(chrome).toHaveAttribute("data-chrome-hidden", "false");
 });
+
+test("mobile bottom nav hides on scroll down and reappears on scroll up", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const nav = page.getByTestId("mobile-bottom-nav");
+  await expect(nav).toHaveAttribute("data-nav-visible", "true");
+
+  await page.evaluate(async () => {
+    for (let y = 0; y <= 800; y += 80) {
+      window.scrollTo(0, y);
+      await new Promise((resolve) => setTimeout(resolve, 16));
+    }
+  });
+  await page.waitForTimeout(250);
+  await expect(nav).toHaveAttribute("data-nav-visible", "false");
+
+  await page.evaluate(async () => {
+    for (let y = window.scrollY; y >= 792; y -= 2) {
+      window.scrollTo(0, y);
+      await new Promise((resolve) => setTimeout(resolve, 16));
+    }
+  });
+  await page.waitForTimeout(200);
+  await expect(nav).toHaveAttribute("data-nav-visible", "true");
+});

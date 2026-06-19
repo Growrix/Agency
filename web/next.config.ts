@@ -64,33 +64,43 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/products",
+        destination: "/digital-products",
+        permanent: true,
+      },
+      {
+        source: "/products/:path*",
+        destination: "/digital-products/:path*",
+        permanent: true,
+      },
+      {
         source: "/shop",
-        destination: "/products",
+        destination: "/digital-products",
         permanent: true,
       },
       {
         source: "/shop/:slug",
-        destination: "/products/:slug",
+        destination: "/digital-products/:slug",
         permanent: true,
       },
       {
         source: "/services/html-business-profiles",
-        destination: "/products/category/html-business-profiles",
+        destination: "/digital-products/category/html-business-profiles",
         permanent: true,
       },
       {
         source: "/html-business-profiles",
-        destination: "/products/category/html-business-profiles",
+        destination: "/digital-products/category/html-business-profiles",
         permanent: true,
       },
       {
-        source: "/products/category/saas-templates",
-        destination: "/products/category/website-templates",
+        source: "/digital-products/category/saas-templates",
+        destination: "/digital-products/category/website-templates",
         permanent: true,
       },
       {
-        source: "/products/category/ready-websites",
-        destination: "/products/category/website-templates",
+        source: "/digital-products/category/ready-websites",
+        destination: "/digital-products/category/website-templates",
         permanent: true,
       },
       {

@@ -10,7 +10,7 @@ export const THREE_PATH_ROWS = [
     visitor: "DIY buyer",
     want: "Template or toolkit",
     funnel: "Browse product → Standard/Premium tier → Checkout → Dashboard download",
-    cta: { label: "Browse products", href: "/products" },
+    cta: { label: "Browse digital products", href: "/digital-products" },
   },
   {
     visitor: "Non-technical owner",
@@ -40,10 +40,10 @@ export const PRODUCT_INDEX_COPY = {
 } as const;
 
 export const PRODUCT_CATEGORY_CHIPS = [
-  { label: "All products", href: "/products" },
-  { label: "HTML templates", href: "/products/category/html-business-profiles" },
-  { label: "Website templates", href: "/products/category/website-templates" },
-  { label: "Website templates HTML preview", href: "/products/category/website-templates-html-preview" },
+  { label: "All digital products", href: "/digital-products" },
+  { label: "HTML templates", href: "/digital-products/category/html-business-profiles" },
+  { label: "Website templates", href: "/digital-products/category/website-templates" },
+  { label: "Website templates HTML preview", href: "/digital-products/category/website-templates-html-preview" },
 ] as const;
 
 export type SolutionAudience = {
@@ -70,11 +70,11 @@ export const SOLUTION_AUDIENCES: SolutionAudience[] = [
       "Need a credible site live in days, not months",
     ],
     offers: [
-      { title: "SaaS landing templates", description: "From $49 — marketing site with pricing and FAQ.", href: "/products" },
-      { title: "Next.js SaaS starters", description: "From $99 — auth-ready foundation with docs.", href: "/products" },
+      { title: "SaaS landing templates", description: "From $49 — marketing site with pricing and FAQ.", href: "/digital-products" },
+      { title: "Next.js SaaS starters", description: "From $99 — auth-ready foundation with docs.", href: "/digital-products" },
       { title: "MVP build scope", description: "Discovery-based custom SaaS engineering.", href: "/services/saas-applications" },
     ],
-    primaryCta: { label: "Browse SaaS products", href: "/products" },
+    primaryCta: { label: "Browse SaaS products", href: "/digital-products" },
     secondaryCta: { label: "Book startup consult", href: "/book-appointment" },
   },
   {
@@ -89,11 +89,11 @@ export const SOLUTION_AUDIENCES: SolutionAudience[] = [
       "Want contact forms and hosting connected properly",
     ],
     offers: [
-      { title: "HTML business profiles", description: "From $19 — responsive category templates.", href: "/products/category/html-business-profiles" },
-      { title: "Category storefront", description: "Browse featured templates, pricing tiers, and launch options.", href: "/products/category/html-business-profiles" },
+      { title: "HTML business profiles", description: "From $19 — responsive category templates.", href: "/digital-products/category/html-business-profiles" },
+      { title: "Category storefront", description: "Browse featured templates, pricing tiers, and launch options.", href: "/digital-products/category/html-business-profiles" },
       { title: "Done-For-You setup", description: "From $299 — branding, deploy, and forms.", href: "/services/template-customization" },
     ],
-    primaryCta: { label: "Browse business templates", href: "/products/category/html-business-profiles" },
+    primaryCta: { label: "Browse business templates", href: "/digital-products/category/html-business-profiles" },
     secondaryCta: { label: "Request setup help", href: "/services/template-customization" },
   },
   {
@@ -108,11 +108,11 @@ export const SOLUTION_AUDIENCES: SolutionAudience[] = [
       "Custom automation and agent tooling are becoming table stakes",
     ],
     offers: [
-      { title: "Template bundles", description: "Multi-product packs for agency delivery.", href: "/products/bundles" },
+      { title: "Template bundles", description: "Multi-product packs for agency delivery.", href: "/digital-products/bundles" },
       { title: "Automation services", description: "Workflow design and integration support.", href: "/services/automation" },
       { title: "MCP server development", description: "Agent-ready tooling for client stacks.", href: "/services/mcp-servers" },
     ],
-    primaryCta: { label: "View agency bundles", href: "/products/bundles" },
+    primaryCta: { label: "View agency bundles", href: "/digital-products/bundles" },
     secondaryCta: { label: "Discuss agency workflow", href: "/contact" },
   },
   {
@@ -127,11 +127,11 @@ export const SOLUTION_AUDIENCES: SolutionAudience[] = [
       "Need a partner who understands product-led delivery",
     ],
     offers: [
-      { title: "SaaS Founder Bundle", description: "Landing + starter + SEO components.", href: "/products/bundles" },
-      { title: "Technical SEO kits", description: "From $19 — checklists and Next.js SEO components.", href: "/products" },
+      { title: "SaaS Founder Bundle", description: "Landing + starter + SEO components.", href: "/digital-products/bundles" },
+      { title: "Technical SEO kits", description: "From $19 — checklists and Next.js SEO components.", href: "/digital-products" },
       { title: "SEO implementation", description: "Audit and implementation services.", href: "/additional-services" },
     ],
-    primaryCta: { label: "Browse founder products", href: "/products/bundles" },
+    primaryCta: { label: "Browse founder products", href: "/digital-products/bundles" },
     secondaryCta: { label: "Book technical review", href: "/book-appointment" },
   },
 ];

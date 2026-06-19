@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = await getPublicShopProduct(slug).catch(() => null);
   if (!product) return {};
 
-  const canonical = `/products/${product.slug}`;
+  const canonical = `/digital-products/${product.slug}`;
   const description = product.summary ?? product.teaser ?? undefined;
   const ogImage = product.image?.src;
 
@@ -509,7 +509,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       "Founders choosing between DIY and Done-For-You paths",
     ];
 
-  const productCanonicalUrl = absoluteUrl(`/products/${product.slug}`);
+  const productCanonicalUrl = absoluteUrl(`/digital-products/${product.slug}`);
   const productPriceMatch = /([0-9][0-9,]*(?:\.[0-9]+)?)/.exec(product.price ?? "");
   const productPriceValue = productPriceMatch ? productPriceMatch[1].replace(/,/g, "") : undefined;
   const productJsonLd: JsonLdData = {
@@ -558,8 +558,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
           <Container width="content">
-            <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-              <ArrowLeftIcon className="size-4" /> Back to products
+            <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+              <ArrowLeftIcon className="size-4" /> Back to digital products
             </Link>
 
             <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
@@ -1016,8 +1016,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
           <Container width="content">
-            <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-              <ArrowLeftIcon className="size-4" /> Back to products
+            <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+              <ArrowLeftIcon className="size-4" /> Back to digital products
             </Link>
 
             <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
@@ -1463,8 +1463,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       {/* Main product layout */}
       <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
         <Container width={useShellLayout ? "shell" : "content"}>
-          <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-            <ArrowLeftIcon className="size-4" /> Back to products
+          <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+            <ArrowLeftIcon className="size-4" /> Back to digital products
           </Link>
 
           <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">

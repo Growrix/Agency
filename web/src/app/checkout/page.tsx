@@ -45,8 +45,8 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   return (
     <Section className="pb-12 pt-12 sm:pb-16 sm:pt-16">
       <Container>
-        <Link href={product ? getProductHref(product) : "/products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
-          <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to products"}
+        <Link href={product ? getProductHref(product) : "/digital-products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
+          <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to digital products"}
         </Link>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">

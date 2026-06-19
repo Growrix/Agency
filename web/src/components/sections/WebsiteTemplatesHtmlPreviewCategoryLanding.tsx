@@ -68,7 +68,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
     name: primaryTemplate?.name ?? "Website Template",
     type: primaryTemplate?.type ?? "HTML Preview",
     price: primaryTemplate?.price ?? "$149",
-    href: primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates-html-preview",
+    href: primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates-html-preview",
     previewUrl: listWebsiteTemplateHtmlPreviews()[0]
       ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
       : undefined,
@@ -79,8 +79,8 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
       <Section size="hero" layout="viewport" className="hero-section relative overflow-x-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container className="min-w-0">
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All products
+          <Link href="/digital-products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+            ← All digital products
           </Link>
 
           <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-start xl:gap-10">
@@ -98,7 +98,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                   Browse HTML Preview Collection <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton
-                  href={primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates"}
+                  href={primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates"}
                   variant="outline"
                   size="lg"
                 >
@@ -165,15 +165,15 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <LinkButton
-              href={primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates-html-preview#profiles"}
+              href={primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates-html-preview#profiles"}
               size="lg"
             >
               Open Featured Template <ArrowRightIcon className="size-4" />
             </LinkButton>
-            <LinkButton href="/products/category/website-templates-html-preview#profiles" variant="outline" size="lg">
+            <LinkButton href="/digital-products/category/website-templates-html-preview#profiles" variant="outline" size="lg">
               Browse HTML Preview Category <ArrowUpRightIcon className="size-4" />
             </LinkButton>
-            <LinkButton href="/products/category/website-templates" variant="ghost" size="lg">
+            <LinkButton href="/digital-products/category/website-templates" variant="ghost" size="lg">
               View CMS Website Templates
             </LinkButton>
           </div>
@@ -191,7 +191,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                 desc: "Download the template and deploy with your own team.",
                 includes: ["Template files", "Responsive structure", "Basic setup guidance", "Commercial usage rights"],
                 cta: "Get Template",
-                href: "/products/category/website-templates",
+                href: "/digital-products/category/website-templates",
               },
               {
                 tier: "Branded Setup",
@@ -259,7 +259,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <LinkButton href="/book-appointment">Book Consultation</LinkButton>
-              <LinkButton href="/products/category/website-templates-html-preview" variant="outline">
+              <LinkButton href="/digital-products/category/website-templates-html-preview" variant="outline">
                 Reopen Preview Page <ArrowUpRightIcon className="size-4" />
               </LinkButton>
             </div>

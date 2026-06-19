@@ -155,7 +155,7 @@ export function HtmlProfileHeroCarousel({
       name: "Business Profile Template",
       type: "Category Template",
       price: "$19",
-      href: "/products/category/html-business-profiles",
+      href: "/digital-products/category/html-business-profiles",
     },
     [emptyFallbackSlide],
   );

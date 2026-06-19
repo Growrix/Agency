@@ -27,8 +27,8 @@ export default async function ProductBundlesPage() {
             title="Product bundles"
             description="Curated packs and grouped offers designed for faster launch decisions."
           />
-          <LinkButton href="/products" variant="outline" size="sm">
-            Browse all products
+          <LinkButton href="/digital-products" variant="outline" size="sm">
+            Browse all digital products
           </LinkButton>
         </div>
 

@@ -56,7 +56,7 @@ export type PublicShopProductRecord = ManagedProductRecord & { price_cents: numb
  * 1) CMS content is always included when published.
  * 2) Local fallback products are included only from explicitly curated seed sets.
  * 3) Placeholder/legacy mock records are filtered before public exposure.
- * 4) Canonical product detail paths stay flat at /products/[slug].
+ * 4) Canonical product detail paths stay flat at /digital-products/[slug].
  *    Reserved slug segments are blocked to avoid route collisions.
  */
 const FALLBACK_CATALOG_POLICY = {
@@ -1185,7 +1185,7 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
   }
 
   if (isReservedProductRouteSlug(normalizedSlug)) {
-    throw new Error("RESERVED_PRODUCT_SLUG: Product slug conflicts with a reserved /products route segment.");
+    throw new Error("RESERVED_PRODUCT_SLUG: Product slug conflicts with a reserved /digital-products route segment.");
   }
 
   const existingProducts = await listManagedProducts();
@@ -1203,7 +1203,7 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
   });
 
   if (duplicatePublicSlug) {
-    throw new Error(`DUPLICATE_PRODUCT_SLUG: Another product already resolves to /products/${nextPublicSlug}.`);
+    throw new Error(`DUPLICATE_PRODUCT_SLUG: Another product already resolves to /digital-products/${nextPublicSlug}.`);
   }
 
   const nextRecord = {

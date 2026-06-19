@@ -44,7 +44,7 @@ export function HtmlBusinessProfilesCategoryHero({
     name: profile.name,
     type: profile.type,
     price: profile.price,
-    href: profile.slug ? getProductHref(profile) : "/products/category/html-business-profiles",
+    href: profile.slug ? getProductHref(profile) : "/digital-products/category/html-business-profiles",
     previewUrl:
       ("embeddedPreviewUrl" in profile ? profile.embeddedPreviewUrl : undefined) ??
       ("livePreviewUrl" in profile ? profile.livePreviewUrl : undefined),
@@ -55,8 +55,8 @@ export function HtmlBusinessProfilesCategoryHero({
       <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
       <Container>
         {showBackLink ? (
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All products
+          <Link href="/digital-products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+            ← All digital products
           </Link>
         ) : null}
 
@@ -71,10 +71,10 @@ export function HtmlBusinessProfilesCategoryHero({
               online presence without a full website project.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href={`/products/category/html-business-profiles#${profilesAnchorId}`} size="lg">
+              <LinkButton href={`/digital-products/category/html-business-profiles#${profilesAnchorId}`} size="lg">
                 Browse Business Profiles <ArrowRightIcon className="size-4" />
               </LinkButton>
-              <LinkButton href="/products/category/html-business-profiles" variant="outline" size="lg">
+              <LinkButton href="/digital-products/category/html-business-profiles" variant="outline" size="lg">
                 View Live Examples
               </LinkButton>
             </div>

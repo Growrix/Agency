@@ -1,4 +1,4 @@
-﻿import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -99,7 +99,7 @@ export function HtmlBusinessProfilesCategoryLanding({
             ))}
           </div>
           <div className="mt-8">
-            <LinkButton href="/products/category/html-business-profiles" variant="outline">
+            <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
               View All Business Profiles <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
@@ -121,7 +121,7 @@ export function HtmlBusinessProfilesCategoryLanding({
                 desc: "For developers, agencies, and DIY users.",
                 includes: ["HTML files", "Responsive design", "Documentation", "Commercial usage"],
                 cta: "Download Template",
-                href: "/products/category/html-business-profiles",
+                href: "/digital-products/category/html-business-profiles",
               },
               {
                 tier: "Branded Setup",
@@ -217,7 +217,7 @@ export function HtmlBusinessProfilesCategoryLanding({
                   "Your business profile isn&apos;t a dead-end template. It can evolve into a branded website, lead generation platform, booking system, customer portal, or even a full SaaS product over time.",
                 label: "Growth Path",
                 items: [
-                  "Template â†’ Branded Profile â†’ Business Launch â†’ Full Website â†’ Custom Platform",
+                  "Template → Branded Profile → Business Launch → Full Website → Custom Platform",
                   "",
                   "",
                   "",
@@ -315,7 +315,7 @@ export function HtmlBusinessProfilesCategoryLanding({
             <p className="mt-3 text-sm text-text-muted">Average response time: under 24 business hours.</p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <LinkButton href="/book-appointment">Book Consultation</LinkButton>
-              <LinkButton href="/products/category/html-business-profiles" variant="outline">
+              <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
                 Browse Profiles
               </LinkButton>
             </div>

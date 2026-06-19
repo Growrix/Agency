@@ -555,7 +555,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
       headerControls={<DashboardHeaderControls profileName={fullName} profileEmail={user?.email ?? "customer@growrixos.com"} notifications={[]} />}
       utilityActions={(
         <div className="space-y-2">
-          <LinkButton href="/products" variant="outline" size="sm" fullWidth>Browse products</LinkButton>
+          <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth>Browse digital products</LinkButton>
           <Button type="button" variant="ghost" size="sm" fullWidth onClick={() => void handleLogout()}>
             Sign out
           </Button>

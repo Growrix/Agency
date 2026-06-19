@@ -21,7 +21,7 @@ const DIGITAL_PRODUCT_TIERS: Tier[] = [
     cadence: "one-time",
     description: "DIY product files and setup docs.",
     features: ["Template or toolkit files", "Basic documentation", "Personal or small-team usage"],
-    cta: { label: "Browse products", href: "/products" },
+    cta: { label: "Browse digital products", href: "/digital-products" },
   },
   {
     name: "Premium",
@@ -29,7 +29,7 @@ const DIGITAL_PRODUCT_TIERS: Tier[] = [
     cadence: "one-time",
     description: "Expanded package with extra sections, variants, and support.",
     features: ["Everything in Standard", "Expanded assets", "Priority support", "Update-ready package"],
-    cta: { label: "View premium options", href: "/products" },
+    cta: { label: "View premium options", href: "/digital-products" },
     featured: true,
     badge: "Most chosen",
   },
@@ -39,7 +39,7 @@ const DIGITAL_PRODUCT_TIERS: Tier[] = [
     cadence: "one-time",
     description: "Curated packs for faster launch decisions.",
     features: ["Multi-product collections", "Pack-level pricing", "Upgrade to Done-For-You anytime"],
-    cta: { label: "See bundles", href: "/products/bundles" },
+    cta: { label: "See bundles", href: "/digital-products/bundles" },
   },
 ];
 
@@ -165,7 +165,7 @@ export function PricingPageClient() {
               delivery for full platform work.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/products" size="lg">Browse products</LinkButton>
+              <LinkButton href="/digital-products" size="lg">Browse digital products</LinkButton>
               <LinkButton href="/book-appointment" variant="outline" size="lg">Book a consultation</LinkButton>
             </div>
           </div>

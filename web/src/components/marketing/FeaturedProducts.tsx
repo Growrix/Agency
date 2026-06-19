@@ -24,8 +24,8 @@ export function FeaturedProducts({
   eyebrow = "Featured products",
   title = "Production-ready digital products",
   description = "Templates, starters, and toolkits with Standard, Premium, and Done-For-You options — buy now or hire us to launch it for you.",
-  ctaHref = "/products",
-  ctaLabel = "Browse all products",
+  ctaHref = "/digital-products",
+  ctaLabel = "Browse all digital products",
   variant = "default",
   maxProducts,
 }: FeaturedProductsProps) {

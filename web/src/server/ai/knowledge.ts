@@ -32,7 +32,7 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse products at /products.",
+      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse digital products at /digital-products.",
   },
   {
     id: "pricing-ready-websites",
@@ -40,15 +40,15 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /products.",
+      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /digital-products.",
   },
   {
     id: "pricing-html-business-profiles",
     label: "HTML Business Profiles pricing",
-    sourcePath: "/products/category/html-business-profiles",
+    sourcePath: "/digital-products/category/html-business-profiles",
     sourceType: "pricing",
     content:
-      "HTML Business Profiles are category-based digital templates with three clear options: Template Only at $19, Branded Setup at $49, and Business Launch at $299-$799 depending on scope. Browse the canonical product-line page at /products/category/html-business-profiles.",
+      "HTML Business Profiles are category-based digital templates with three clear options: Template Only at $19, Branded Setup at $49, and Business Launch at $299-$799 depending on scope. Browse the canonical product-line page at /digital-products/category/html-business-profiles.",
   },
   {
     id: "pricing-custom-build",
@@ -147,7 +147,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
   {
     id: "offering-shop-structure",
     label: "Shop structure and categories",
-    sourcePath: "/products",
+    sourcePath: "/digital-products",
     sourceType: "offering",
     content:
       "The Growrix shop has three main categories: Website Templates (from $500 one-time — basic, standard, premium tiers), HTML Business Profiles (Template Only $19, Branded Setup $49, Business Launch $299-$799), and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
