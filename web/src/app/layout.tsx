@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionRoot>
           <AppChrome>{children}</AppChrome>
         </MotionRoot>
+        <SpeedInsights />
       </body>
     </html>
   );
