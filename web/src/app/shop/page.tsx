@@ -5,6 +5,13 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
+import {
+  buildShopFilterGroups,
+  buildShopFilterOptions,
+  buildShopHref,
+  type ShopFilterGroup,
+  type ShopFilterState,
+} from "@/lib/shop-filters";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = {
@@ -19,69 +26,7 @@ type SearchParams = Promise<{
   industry?: string;
 }>;
 
-type FilterState = {
-  category?: string;
-  type?: string;
-  industry?: string;
-};
-
-function buildShopHref(filters: FilterState, patch: Partial<FilterState>) {
-  const next = new URLSearchParams();
-  const merged = { ...filters, ...patch };
-  if (merged.category) next.set("category", merged.category);
-  if (merged.type) next.set("type", merged.type);
-  if (merged.industry) next.set("industry", merged.industry);
-  const query = next.toString();
-  return query ? `/digital-products?${query}` : "/digital-products";
-}
-
-type FilterGroup = {
-  label: string;
-  key: keyof FilterState;
-  options: { value: string; label: string }[];
-  activeValue: string | undefined;
-};
-
-function buildFilterOptions(
-  items: Array<{ category: string; categorySlug: string; type: string; typeSlug: string; industry: string; industrySlug: string }>,
-) {
-  const categoryOrder = new Map([
-    ["html-business-profiles", 0],
-    ["html-templates", 1],
-    ["saas-templates", 2],
-    ["ai-automation", 3],
-    ["mcp-servers", 4],
-    ["seo-toolkits", 5],
-    ["bundles", 6],
-    ["free-products", 7],
-  ]);
-
-  const sortOptions = (left: { value: string; label: string }, right: { value: string; label: string }) => {
-    const leftRank = categoryOrder.get(left.value) ?? 999;
-    const rightRank = categoryOrder.get(right.value) ?? 999;
-    if (leftRank !== rightRank) {
-      return leftRank - rightRank;
-    }
-    return left.label.localeCompare(right.label);
-  };
-
-  return {
-    categories: Array.from(
-      new Map(items.map((item) => [item.categorySlug, item.category])).entries(),
-      ([value, label]) => ({ value, label })
-    ).sort(sortOptions),
-    types: Array.from(
-      new Map(items.map((item) => [item.typeSlug, item.type])).entries(),
-      ([value, label]) => ({ value, label })
-    ).sort((left, right) => left.label.localeCompare(right.label)),
-    industries: Array.from(
-      new Map(items.map((item) => [item.industrySlug, item.industry])).entries(),
-      ([value, label]) => ({ value, label })
-    ).sort((left, right) => left.label.localeCompare(right.label)),
-  };
-}
-
-function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterState }) {
+function SidebarGroup({ group, filters }: { group: ShopFilterGroup; filters: ShopFilterState }) {
   const allHref = buildShopHref(filters, { [group.key]: undefined });
   const isAllActive = !group.activeValue;
 
@@ -135,15 +80,11 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     listPublicShopProducts(),
     listPublicShopProducts(filters),
   ]);
-  const filterOptions = buildFilterOptions(allProducts);
+  const filterOptions = buildShopFilterOptions(allProducts);
 
   const hasActiveFilter = !!(filters.category || filters.type || filters.industry);
 
-  const filterGroups: FilterGroup[] = [
-    { label: "Category", key: "category", options: filterOptions.categories, activeValue: filters.category },
-    { label: "Type", key: "type", options: filterOptions.types, activeValue: filters.type },
-    { label: "Industry", key: "industry", options: filterOptions.industries, activeValue: filters.industry },
-  ];
+  const filterGroups: ShopFilterGroup[] = buildShopFilterGroups(filterOptions, filters);
 
   return (
     <>

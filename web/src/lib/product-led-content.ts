@@ -39,6 +39,14 @@ export const PRODUCT_INDEX_COPY = {
   eyebrow: "Marketplace",
 } as const;
 
+export const HOME_DIGITAL_PRODUCTS_COPY = {
+  eyebrow: "Digital products",
+  title: "Browse the catalog without leaving the homepage",
+  description:
+    "Filter by category, type, or industry to preview templates, starters, and toolkits — then open the full shop for checkout or Done-For-You setup.",
+  ctaLabel: "Open full catalog",
+} as const;
+
 export const PRODUCT_CATEGORY_CHIPS = [
   { label: "All digital products", href: "/digital-products" },
   { label: "HTML templates", href: "/digital-products/category/html-business-profiles" },

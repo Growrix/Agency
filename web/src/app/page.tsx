@@ -14,6 +14,7 @@ import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { TrustBar } from "@/components/marketing/TrustBar";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
+import { HomeDigitalProductsShowcase } from "@/components/marketing/HomeDigitalProductsShowcase";
 import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
 import { ServiceCards } from "@/components/marketing/ServiceCards";
 import { Testimonials } from "@/components/marketing/Testimonials";
@@ -47,8 +48,17 @@ import {
 } from "@/lib/website-templates-html-preview";
 import { getProductHref } from "@/lib/shop";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
+import { unstable_cache } from "next/cache";
 
 const SHOW_LIVE_SAAS_SECTION = false;
+const SHOW_HOME_TRUST_BAR = false;
+export const revalidate = 120;
+
+const getCachedHomePageContent = unstable_cache(
+  async () => getSanityHomePageContent().catch(() => null),
+  ["home-page-marketing-content"],
+  { revalidate: 120, tags: ["home-content"] },
+);
 
 function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | undefined, fallback: T[]) {
   if (!slugs || slugs.length === 0) {
@@ -70,7 +80,7 @@ function isLiveSaasProduct(product: { category: string; categorySlug: string }) 
 export default async function Home() {
   const [latestBlogPosts, homeContent, services, portfolio, publicProducts] = await Promise.all([
     listBlogPosts().then((items) => items.slice(0, 3)),
-    getSanityHomePageContent().catch(() => null),
+    getCachedHomePageContent(),
     listPublicServices(),
     listPublicPortfolio(),
     listPublicShopProducts(),
@@ -189,6 +199,8 @@ export default async function Home() {
         </Container>
       </Section>
 
+      <ServiceCards services={services} />
+
       <WebsiteTemplateHtmlPreviewShowcaseSections
         slides={htmlPreviewSlides}
         emptyFallbackSlide={htmlPreviewFallbackSlide}
@@ -204,26 +216,6 @@ export default async function Home() {
         autoPlayCarousel={false}
         sectionSize="standard"
       />
-
-      <TrustBar />
-
-      <FeaturedProducts
-        products={featuredHtmlWebsiteTemplates}
-        variant="html-preview"
-        maxProducts={3}
-        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "HTML website templates"}
-        title={homeContent?.shopSpotlight?.title ?? "Production-ready templates with live desktop preview"}
-        description={
-          homeContent?.shopSpotlight?.description ??
-          "Browse HTML website templates with embedded desktop previews — open a product page to buy or request Done-For-You setup."
-        }
-        ctaHref="/digital-products/category/website-templates-html-preview#profiles"
-        ctaLabel="Browse HTML templates"
-      />
-
-      <ThreePathExplainer />
-
-      <ServiceCards services={services} />
 
       <Section size="standard" layout="viewport">
         <Container>
@@ -261,6 +253,26 @@ export default async function Home() {
 
         </Container>
       </Section>
+
+      {SHOW_HOME_TRUST_BAR ? <TrustBar /> : null}
+
+      <FeaturedProducts
+        products={featuredHtmlWebsiteTemplates}
+        variant="html-preview"
+        maxProducts={3}
+        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "HTML website templates"}
+        title={homeContent?.shopSpotlight?.title ?? "Production-ready templates with live desktop preview"}
+        description={
+          homeContent?.shopSpotlight?.description ??
+          "Browse HTML website templates with embedded desktop previews — open a product page to buy or request Done-For-You setup."
+        }
+        ctaHref="/digital-products/category/website-templates-html-preview#profiles"
+        ctaLabel="Browse HTML templates"
+      />
+
+      <ThreePathExplainer />
+
+      <HomeDigitalProductsShowcase products={publicProducts} />
 
       {/* Featured Builds */}
       <Section size="standard" layout="viewport">

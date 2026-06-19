@@ -35,26 +35,41 @@ depends_on:
 - Components: hero section, stat blocks, stack line.
 - Interaction notes: centered single-column hero with product-led proof stats.
 
-### 4. Trust Bar
-- Content: production-ready products, Done-For-You entry pricing, response window, secure checkout.
-- Components: `TrustBar`.
+### 4. Service Cards
+- Content: services as upsell path with Template Customization featured first.
+- Components: `ServiceCards`, `FeatureCard`.
+- Interaction notes: rendered immediately after the hero as the second homepage section.
 
-### 5. Featured Products
+### 5. HTML Preview Showcase
+- Content: merged desktop + mobile website template preview carousel.
+- Components: `WebsiteTemplateHtmlPreviewShowcaseSections`.
+
+### 6. HTML Business Profiles Category Hero
+- Content: category-based HTML business profile spotlight with template counts and direct links to preview hub and shop category.
+- Components: `HtmlBusinessProfilesCategoryHero`.
+
+### 7. HTML Business Profiles Grid Spotlight
+- Content: featured HTML business profile product cards with direct catalog links.
+- Components: section heading, `ShopProductHtmlMobilePreviewCard`, CTA pair.
+- Interaction notes: occupies the former Trust Bar slot; Trust Bar is hidden on homepage.
+
+### 8. Featured Products
 - Content: CMS-selected or fallback featured catalog items with product-tier positioning.
 - Components: `FeaturedProducts`, `ShopProductCard`.
 
-### 6. Three-Path Explainer
+### 9. Three-Path Explainer
 - Content: DIY buyer, non-technical owner, serious founder, curious visitor funnels.
 - Components: `ThreePathExplainer`.
 
-### 7. Service Cards
-- Content: services as upsell path with Template Customization featured first.
-- Components: `ServiceCards`, `FeatureCard`.
+### 10. Digital Products Showcase
+- Content: short-form shop browse with sidebar filters for category, type, and industry; shows a capped grid with link to full catalog.
+- Components: `HomeDigitalProductsShowcase`, `ShopProductCatalogCard`.
+- Interaction notes: full-viewport section (`layout=viewport`) with client-side filter state.
 
-### 8. HTML Business Profiles Spotlight
-- Content: category-based HTML business profile service spotlight with template counts and direct links to preview hub and shop category.
-- Components: section heading, category cards, CTA pair.
-- Interaction notes: category cards route into `/html-business-profiles?category=...`.
+### 4. Trust Bar (hidden on homepage)
+- Content: production-ready products, Done-For-You entry pricing, response window, secure checkout.
+- Components: `TrustBar`.
+- Interaction notes: retained in code behind `SHOW_HOME_TRUST_BAR`; not rendered on `/` by default.
 
 ### 6. Featured Builds and Outcomes
 - Content: selected case studies weighted toward websites, SaaS applications, mobile launch work, and ready-to-deploy website systems.
@@ -100,13 +115,13 @@ depends_on:
 
 ## Section Size + Layout Map (Desktop-First)
 - Hero statement: `size=hero`, `layout=viewport`.
+- Service cards: `size=standard`, `layout=viewport`.
 - HTML preview showcase: `size=standard`, `layout=viewport` (desktop + mobile previews merged into one section container).
 - HTML business profiles spotlight hero: `size=hero`, `layout=viewport`.
-- Trust bar: `size=compact`, `layout=content`.
+- HTML business profiles grid spotlight: `size=standard`, `layout=viewport`.
 - Featured products: `size=standard`, `layout=viewport`.
 - Three-path explainer: `size=standard`, `layout=viewport`.
-- Service cards: `size=standard`, `layout=viewport`.
-- HTML business profiles grid spotlight: `size=standard`, `layout=viewport`.
+- Digital products showcase: `size=standard`, `layout=viewport`.
 - Featured builds: `size=standard`, `layout=viewport`.
 - Trust strip marquee: `size=compact`, `layout=content`.
 - Process and collaboration model: `size=standard`, `layout=viewport`.
