@@ -4,6 +4,8 @@ import {
   WebsiteTemplateHtmlMobilePreviewBlock,
 } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
+import type { HomeSectionShellProps } from "@/lib/homepage-composition";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 
 type WebsiteTemplateHtmlPreviewShowcaseSectionsProps = {
   slides: HtmlProfileHeroSlide[];
@@ -12,6 +14,8 @@ type WebsiteTemplateHtmlPreviewShowcaseSectionsProps = {
   showMobileSectionDivider?: boolean;
   showDesktopSection?: boolean;
   autoPlayMobileCarousel?: boolean;
+  sectionTitleClassName?: string;
+  sectionShell?: Partial<HomeSectionShellProps>;
 };
 
 export function WebsiteTemplateHtmlPreviewShowcaseSections({
@@ -21,19 +25,26 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
   showMobileSectionDivider = true,
   showDesktopSection = true,
   autoPlayMobileCarousel = true,
+  sectionTitleClassName = "font-display text-3xl sm:text-4xl tracking-tight text-balance",
+  sectionShell,
 }: WebsiteTemplateHtmlPreviewShowcaseSectionsProps) {
   return (
-    <Section size="standard" layout="viewport" className="overflow-x-hidden">
+    <Section
+      size={sectionShell?.size ?? "standard"}
+      layout={sectionShell?.layout ?? "content"}
+      tone={sectionShell?.tone}
+      spacing={sectionShell?.spacing ?? "default"}
+      className="overflow-x-hidden"
+    >
       <Container className="min-w-0">
         {showDesktopSection ? (
           <>
             <div className="flex flex-col gap-3 text-center">
-              <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-balance">
+              <h2 className={sectionTitleClassName}>
                 Desktop and mobile preview, side by side
               </h2>
               <p className="mx-auto max-w-3xl text-base leading-7 text-text-muted">
-                This section is preview-first by design, so users can inspect the same HTML template in desktop and
-                mobile form before moving into purchase or customization.
+                {WEBSITE_TEMPLATE_PREVIEW.showcaseDescription}
               </p>
             </div>
             <div className="mt-8 min-w-0 w-full">

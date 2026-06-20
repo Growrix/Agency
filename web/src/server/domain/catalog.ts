@@ -12,6 +12,10 @@ import {
   getWebsiteTemplateHtmlPreviewUrl,
   listWebsiteTemplateHtmlPreviews,
 } from "@/lib/website-templates-html-preview";
+import {
+  websiteTemplatePreviewProductName,
+  WEBSITE_TEMPLATE_PREVIEW,
+} from "@/lib/preview-terminology";
 import { getProductTypeDefinition, PRODUCT_PARENT_CATEGORY_LABELS } from "@/lib/product-taxonomy";
 import { isReservedProductRouteSlug } from "@/lib/shop";
 import type {
@@ -268,13 +272,13 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
 
     return withParentTaxonomy({
       slug,
-      name: `${template.title} HTML Preview`,
+      name: websiteTemplatePreviewProductName(template.title),
       price: template.price,
       livePreviewUrl: previewUrl,
       embeddedPreviewUrl: previewUrl,
       parentCategoryLabel: PRODUCT_PARENT_CATEGORY_LABELS["business-professional"],
       parentCategorySlug: "business-professional",
-      category: "Website Templates HTML Preview",
+      category: WEBSITE_TEMPLATE_PREVIEW.productCategoryLabel,
       categorySlug: "website-templates-html-preview",
       type: template.type,
       typeSlug: "website-template-html",
@@ -282,11 +286,11 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
       industrySlug: "website-templates",
       tag: "Preview",
       published: true,
-      teaser: template.teaser ?? `Embedded HTML preview for the ${template.title} website template.`,
-      summary: template.summary ?? `Preview-first ${template.title} template with live HTML rendering and shop-ready routing.`,
-      audience: "Buyers who want to inspect live HTML before purchasing template packages.",
+      teaser: template.teaser ?? `Embedded live preview for the ${template.title} website template.`,
+      summary: template.summary ?? `Preview-first ${template.title} template with live website preview and shop-ready routing.`,
+      audience: "Buyers who want to inspect a live website preview before purchasing template packages.",
       features: [
-        "Iframe-safe embedded HTML preview",
+        "Iframe-safe embedded live preview",
         "Template-only, setup, and done-for-you pricing paths",
         "Responsive layout baseline",
       ],
@@ -294,7 +298,7 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
       includes: ["Template files", "Responsive layout baseline", "Launch-ready sections"],
       inScope: ["Template package", "Embedded preview", "Category routing"],
       outOfScope: ["Custom development", "Complex integrations"],
-      enhancementPlan: ["Expand HTML preview catalog", "Connect additional template files"],
+      enhancementPlan: ["Expand live preview catalog", "Connect additional template files"],
       stack: ["HTML5", "CSS3", "JavaScript"],
       variants: [
         {
@@ -327,7 +331,7 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
         },
       ],
       highlights: [
-        { label: "Preview", value: "Live HTML" },
+        { label: "Preview", value: "Live preview" },
         { label: "Industry", value: template.industry ?? template.type },
       ],
       image: null,

@@ -3,16 +3,21 @@ import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { TESTIMONIALS } from "@/lib/content";
+import { homeSection } from "@/lib/homepage-composition";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 
 export function Testimonials() {
+  const shell = homeSection("testimonials");
+
   return (
-    <Section size="standard" layout="viewport">
+    <Section {...shell}>
       <Container>
         <SectionHeading
           eyebrow="Proof"
           title="Teams that shipped with GrowrixOS"
           description="Product buyers and service clients share the same bar — launch-ready quality, clear communication, and measurable outcomes."
           align="center"
+          titleClassName={HERO_TITLE_CLASS}
         />
         <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
           {TESTIMONIALS.map((item) => (

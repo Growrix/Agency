@@ -24,7 +24,7 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     price: "$149",
     industry: "Construction",
     teaser: "Bold construction company template with services, proof, and quote-ready sections.",
-    summary: "A trades-focused website template with embedded HTML preview, built for contractors who need credibility fast.",
+    summary: "A trades-focused website template with embedded live preview, built for contractors who need credibility fast.",
   },
   {
     slug: "02-super-shop-commerce",

@@ -106,7 +106,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading eyebrow="Quick answers" title="The most common ones up front." />
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -120,7 +120,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="Browse by category" title="All questions grouped together." />
           <div className="mt-10">
@@ -140,7 +140,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading eyebrow="Still stuck" title="Pick a faster route." align="center" />
           <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">

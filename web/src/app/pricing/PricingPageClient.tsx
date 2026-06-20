@@ -193,7 +193,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <RevealGroup className="grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {activeTiers.map((tier) => (
@@ -205,7 +205,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Range guide"
@@ -235,7 +235,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading eyebrow="What influences cost" title="Variables that move the number." />
           <div className="mt-10">
@@ -244,7 +244,7 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Pricing questions, answered plainly." align="center" />
           <div className="mt-10">

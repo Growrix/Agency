@@ -15,6 +15,8 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { FeatureCard } from "@/components/sections/FeatureCard";
 import type { PublicServiceRecord } from "@/server/domain/catalog";
+import { homeSection } from "@/lib/homepage-composition";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 
 const ICONS: Record<string, typeof WindowIcon> = {
   "template-customization": WrenchScrewdriverIcon,
@@ -34,14 +36,17 @@ export function ServiceCards({ services }: { services: PublicServiceRecord[] }) 
     ...services.filter((service) => !HIGHLIGHT_SLUGS.includes(service.slug as (typeof HIGHLIGHT_SLUGS)[number])),
   ].slice(0, 5);
 
+  const shell = homeSection("services");
+
   return (
-    <Section size="standard" layout="viewport" tone="inset">
+    <Section {...shell}>
       <Container>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
             eyebrow="Services"
             title="Need more than a download? We implement and scale."
             description="Products create the entry point. Services turn buyers into launched businesses — customization, full builds, MCP, and automation when your roadmap needs it."
+            titleClassName={HERO_TITLE_CLASS}
           />
           <Link
             href="/services"

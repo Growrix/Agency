@@ -154,7 +154,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section id="profiles" size="standard" layout="viewport" tone="inset">
+      <Section id="profiles" size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured templates"
@@ -174,7 +174,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section id="pricing" size="standard" layout="viewport">
+      <Section id="pricing" size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading eyebrow="Pricing paths" title="Pick your launch speed and involvement level." align="center" />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -234,7 +234,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Website templates questions, answered." align="center" />
           <div className="mt-10">
@@ -243,7 +243,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need More Than a Template?</h2>

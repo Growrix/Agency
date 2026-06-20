@@ -106,7 +106,7 @@ export default async function AboutPage() {
         <StatBlock stats={HOME_STATS} />
       </div>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading eyebrow="Principles" title="Four operating choices we don't compromise on." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -121,7 +121,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow={aboutContent?.founder?.eyebrow ?? "Founder's Note"}
@@ -157,7 +157,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section id="process" size="standard" layout="viewport" tone="inset">
+      <Section id="process" size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow={aboutContent?.process?.eyebrow ?? "How we work"}
@@ -169,9 +169,9 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <TrustStrip items={HOME_STACK_MARQUEE} />
+      <TrustStrip items={HOME_STACK_MARQUEE} tone="inset" />
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[60%_40%] lg:items-start">
             <SectionHeading
@@ -200,7 +200,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow={aboutContent?.team?.eyebrow ?? "The team"}
@@ -232,7 +232,7 @@ export default async function AboutPage() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container width="reading">
           <SectionHeading
             eyebrow="Frontend philosophy"
@@ -252,7 +252,7 @@ export default async function AboutPage() {
       </Section>
 
       {SHOW_GOOGLE_REVIEWS && (
-        <Section size="standard" layout="viewport">
+        <Section size="standard" layout="content" spacing="split">
           <Container>
             <GoogleReviews
               eyebrow="Voices"

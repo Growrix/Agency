@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
+import { Container, Section } from "@/components/primitives/Container";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { cn } from "@/lib/utils";
 import {
@@ -15,6 +16,8 @@ import {
   type ShopFilterState,
 } from "@/lib/shop-filters";
 import { HOME_DIGITAL_PRODUCTS_COPY } from "@/lib/product-led-content";
+import { homeSection } from "@/lib/homepage-composition";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
 const HOME_DISPLAY_LIMIT = 8;
@@ -102,21 +105,24 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
     return null;
   }
 
+  const shell = homeSection("digital-products");
+
   return (
-    <section
+    <Section
       id="digital-products-showcase"
-      className="flex h-[100dvh] max-h-[100dvh] w-full flex-col overflow-hidden bg-inset"
+      {...shell}
+      className="overflow-x-hidden"
       aria-labelledby="home-digital-products-title"
     >
-      <div className="mx-auto flex h-full w-full max-w-shell flex-col px-4 py-5 sm:px-6 lg:px-8 lg:py-6">
-        <div className="flex shrink-0 items-end justify-between gap-3">
+      <Container className="min-w-0">
+        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <div className="min-w-0">
             <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
               {HOME_DIGITAL_PRODUCTS_COPY.eyebrow}
             </p>
             <h2
               id="home-digital-products-title"
-              className="mt-1 font-display text-xl font-semibold tracking-tight sm:text-2xl"
+              className={cn("mt-1", HERO_TITLE_CLASS)}
             >
               {HOME_DIGITAL_PRODUCTS_COPY.title}
             </h2>
@@ -126,7 +132,7 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
           </LinkButton>
         </div>
 
-        <div className="mt-4 grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] gap-3 lg:grid-cols-[11rem_minmax(0,1fr)] lg:grid-rows-1 lg:gap-5">
+        <div className="mt-8 grid min-w-0 gap-3 lg:grid-cols-[11rem_minmax(0,1fr)] lg:gap-5">
           <aside className="flex max-h-[28dvh] shrink-0 flex-col gap-3 overflow-y-auto rounded-lg border border-border bg-surface p-3 lg:max-h-none">
             <div className="flex items-center justify-between gap-2">
               <p className="font-display text-xs font-semibold tracking-tight">Filters</p>
@@ -146,8 +152,8 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
             ))}
           </aside>
 
-          <div className="flex min-h-0 min-w-0 flex-col">
-            <div className="mb-2 flex shrink-0 flex-wrap items-center gap-1.5">
+          <div className="flex min-w-0 flex-col">
+            <div className="mb-2 flex flex-wrap items-center gap-1.5">
               <span className="text-[11px] text-text-muted">
                 {visibleProducts.length} of {filteredProducts.length}
               </span>
@@ -167,25 +173,27 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
                 ))}
             </div>
 
-            <div className="min-h-0 flex-1">
+            <div>
               {visibleProducts.length === 0 ? (
-                <div className="flex h-full min-h-[160px] flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-6 text-center">
+                <div className="flex min-h-[160px] flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-6 text-center">
                   <p className="font-display text-base tracking-tight">No products match.</p>
                   <LinkButton href="/digital-products" size="sm" className="mt-3">
                     Browse catalog
                   </LinkButton>
                 </div>
               ) : (
-                <div className="grid h-full auto-rows-fr grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-3">
+                <div className="grid auto-rows-fr grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 lg:gap-3">
                   {visibleProducts.map((product) => (
-                    <ShopProductCatalogCard key={product.slug} product={product} variant="compact" />
+                    <div key={product.slug} className="min-w-0">
+                      <ShopProductCatalogCard product={product} variant="compact" />
+                    </div>
                   ))}
                 </div>
               )}
             </div>
 
             {filteredProducts.length > HOME_DISPLAY_LIMIT ? (
-              <div className="mt-2 flex shrink-0 justify-center pt-2">
+              <div className="mt-6 flex justify-center">
                 <Link
                   href={buildShopHref(filters, {})}
                   className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
@@ -196,7 +204,7 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
             ) : null}
           </div>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

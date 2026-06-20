@@ -6,7 +6,9 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
+import { homeSection } from "@/lib/homepage-composition";
 
 type FeaturedProductsProps = {
   products: PublicShopProductRecord[];
@@ -36,17 +38,16 @@ export function FeaturedProducts({
   }
 
   const isHtmlPreview = variant === "html-preview";
+  const shell = homeSection("featured-templates");
 
   return (
     <Section
-      size="standard"
-      layout="viewport"
-      tone={isHtmlPreview ? "inset" : undefined}
+      {...shell}
       className={isHtmlPreview ? "overflow-x-hidden" : undefined}
     >
       <Container className={isHtmlPreview ? "min-w-0" : undefined}>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+          <SectionHeading eyebrow={eyebrow} title={title} description={description} titleClassName={HERO_TITLE_CLASS} />
           <LinkButton href={ctaHref} variant="outline">
             {ctaLabel} <ArrowUpRightIcon className="size-4" />
           </LinkButton>

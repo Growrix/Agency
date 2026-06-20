@@ -19,6 +19,7 @@ import {
 import { WebsiteTemplateHtmlMobilePreviewMarketing } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { HTML_DESKTOP_VIEWPORT_WIDTH } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 
 type WebsiteTemplateHtmlDualPreviewProps = {
@@ -30,11 +31,11 @@ const MOBILE_PREVIEW_MAX_FRAME_HEIGHT = 480;
 
 const DESKTOP_BENEFITS = [
   "Conversion-ready layout — hero, services, proof, and contact in place",
-  "Live HTML at full width — judge spacing and brand feel before you buy",
+  WEBSITE_TEMPLATE_PREVIEW.livePreviewAtFullWidth,
 ] as const;
 
 const HERO_PREVIEW_HIGHLIGHTS = [
-  { icon: CodeBracketSquareIcon, label: "Live HTML", hint: "Real pages in-frame" },
+  { icon: CodeBracketSquareIcon, label: WEBSITE_TEMPLATE_PREVIEW.livePreviewChip, hint: WEBSITE_TEMPLATE_PREVIEW.livePreviewChipHint },
   { icon: ArrowPathIcon, label: "Carousel", hint: "Manual + optional autoplay" },
   { icon: CursorArrowRaysIcon, label: "Scrollable", hint: "Explore every section" },
   { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Links to checkout" },
@@ -130,8 +131,7 @@ export function WebsiteTemplateHtmlDesktopPreviewBlock({
               See the full desktop experience before you commit
             </h3>
             <p className="mt-2.5 text-sm leading-6 text-text-muted">
-              Scroll live HTML at {HTML_DESKTOP_VIEWPORT_WIDTH}px. The layout you preview is the template you can
-              launch.
+              {WEBSITE_TEMPLATE_PREVIEW.scrollLivePreviewCopy(HTML_DESKTOP_VIEWPORT_WIDTH)}
             </p>
           </Reveal>
 

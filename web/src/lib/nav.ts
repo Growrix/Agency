@@ -1,3 +1,5 @@
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
+
 export const PRIMARY_NAV = [
   { label: "Home", href: "/" },
   {
@@ -19,7 +21,7 @@ export const PRIMARY_NAV = [
       { label: "All Digital Products", href: "/digital-products", description: "Browse the full digital product catalog." },
       { label: "HTML Business Profiles", href: "/digital-products/category/html-business-profiles", description: "Category-based templates with self-serve and done-for-you upgrade paths." },
       { label: "Website Templates", href: "/digital-products/category/website-templates", description: "Ready website and SaaS templates for faster launches." },
-      { label: "Website Templates HTML Preview", href: "/digital-products/category/website-templates-html-preview", description: "Preview-first website templates page with embedded HTML rendering." },
+      { label: WEBSITE_TEMPLATE_PREVIEW.categoryNavLabel, href: "/digital-products/category/website-templates-html-preview", description: WEBSITE_TEMPLATE_PREVIEW.categoryNavDescription },
       { label: "Bundles", href: "/digital-products/bundles", description: "Curated packs for agencies and founders." },
       { label: "Free Starters", href: "/digital-products/free", description: "Lead magnets and free launch-ready starters." },
     ],
@@ -56,7 +58,7 @@ export const FOOTER_NAV = {
     { label: "Free Starters", href: "/digital-products/free" },
     { label: "HTML Business Profiles", href: "/digital-products/category/html-business-profiles" },
     { label: "Website Templates", href: "/digital-products/category/website-templates" },
-    { label: "Website Templates HTML Preview", href: "/digital-products/category/website-templates-html-preview" },
+    { label: WEBSITE_TEMPLATE_PREVIEW.categoryNavLabel, href: "/digital-products/category/website-templates-html-preview" },
   ],
   Solutions: [
     { label: "For Startups", href: "/solutions/for-startups" },

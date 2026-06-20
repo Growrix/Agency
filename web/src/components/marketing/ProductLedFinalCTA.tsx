@@ -1,5 +1,7 @@
 import { CTABand } from "@/components/sections/CTABand";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { homeSection } from "@/lib/homepage-composition";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 
 export function ProductLedFinalCTA({
   eyebrow = "Start with a product or a conversation",
@@ -18,13 +20,17 @@ export function ProductLedFinalCTA({
   secondaryLabel?: string;
   secondaryHref?: string;
 }) {
+  const shell = homeSection("final-cta");
+
   return (
     <CTABand
+      {...shell}
       eyebrow={eyebrow}
       title={title}
       description={description}
       primary={{ label: primaryLabel, href: primaryHref }}
       secondary={{ label: secondaryLabel, href: secondaryHref ?? WHATSAPP_HREF }}
+      titleClassName={HERO_TITLE_CLASS}
     />
   );
 }

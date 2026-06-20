@@ -1,3 +1,5 @@
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
+
 export const TRUST_BAR_ITEMS = [
   { label: "Production-ready products", value: "Templates, starters, and toolkits" },
   { label: "Done-For-You setup", value: "From $299" },
@@ -50,7 +52,7 @@ export const PRODUCT_CATEGORY_CHIPS = [
   { label: "All digital products", href: "/digital-products" },
   { label: "HTML templates", href: "/digital-products/category/html-business-profiles" },
   { label: "Website templates", href: "/digital-products/category/website-templates" },
-  { label: "Website templates HTML preview", href: "/digital-products/category/website-templates-html-preview" },
+  { label: WEBSITE_TEMPLATE_PREVIEW.productLedNavChip, href: "/digital-products/category/website-templates-html-preview" },
 ] as const;
 
 export type SolutionAudience = {

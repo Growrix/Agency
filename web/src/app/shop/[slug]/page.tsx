@@ -18,6 +18,7 @@ import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import {
   getTierCardBadgeClass,
   getTierCardCheckClass,
@@ -1416,7 +1417,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           <Section className="border-t border-border py-12 sm:py-16">
             <Container width="content">
               <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
-              <p className="mt-2 text-sm text-text-muted">Browse more website template HTML previews from this category.</p>
+              <p className="mt-2 text-sm text-text-muted">{WEBSITE_TEMPLATE_PREVIEW.relatedProductsCopy}</p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
                 {related.map((item) => (
                   <ShopProductCatalogCard key={item.slug} product={item} />

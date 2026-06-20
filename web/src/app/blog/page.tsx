@@ -158,7 +158,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
       </Section>
 
       {/* Grid + sidebar */}
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">

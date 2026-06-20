@@ -163,7 +163,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Category Cards */}
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="What we cover"
@@ -213,7 +213,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Why It Matters */}
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow="Why it matters"
@@ -240,7 +240,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Delivery Model */}
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Delivery model"
@@ -306,7 +306,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* Process Steps */}
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow="How we do it"
@@ -338,7 +338,7 @@ export default function AdditionalServicesPage() {
       </Section>
 
       {/* FAQ */}
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading
             eyebrow="FAQ"

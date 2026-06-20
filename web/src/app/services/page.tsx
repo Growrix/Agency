@@ -202,7 +202,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section id="compare" size="standard" layout="viewport" tone="inset">
+			<Section id="compare" size="standard" layout="content" spacing="split" tone="inset">
 				<Container>
 					<SectionHeading
 						eyebrow="Comparison"
@@ -261,7 +261,7 @@ export default async function ServicesPage() {
 
 			<AdditionalServices />
 
-			<Section size="standard" layout="viewport">
+			<Section size="standard" layout="content" spacing="split">
 				<Container>
 					<SectionHeading
 						eyebrow="Delivery system"
@@ -274,7 +274,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section size="standard" layout="viewport" tone="inset">
+			<Section size="standard" layout="content" spacing="split" tone="inset">
 				<Container>
 					<SectionHeading
 						eyebrow="Stack and integrations"
@@ -293,7 +293,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section size="standard" layout="viewport">
+			<Section size="standard" layout="content" spacing="split">
 				<Container>
 					<SectionHeading
 						eyebrow="Proof by service"
@@ -318,7 +318,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section size="standard" layout="viewport" tone="inset">
+			<Section size="standard" layout="content" spacing="split" tone="inset">
 				<Container width="reading">
 					<SectionHeading
 						eyebrow="FAQ"

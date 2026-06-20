@@ -16,12 +16,17 @@ export function Eyebrow({ children, className }: { children: ReactNode; classNam
   );
 }
 
+import { SECTION_TITLE_CLASS } from "@/lib/typography";
+
+const DEFAULT_TITLE_CLASS = SECTION_TITLE_CLASS;
+
 export function SectionHeading({
   eyebrow,
   title,
   description,
   align = "left",
   className,
+  titleClassName,
   as: Tag = "h2",
 }: {
   eyebrow?: ReactNode;
@@ -29,6 +34,7 @@ export function SectionHeading({
   description?: ReactNode;
   align?: "left" | "center";
   className?: string;
+  titleClassName?: string;
   as?: React.ElementType;
 }) {
   return (
@@ -45,7 +51,7 @@ export function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={eyebrow ? 0.07 : 0}>
-        <Tag className="font-display text-3xl sm:text-4xl lg:text-[44px] leading-[1.05] tracking-tight text-balance">
+        <Tag className={cn(titleClassName ?? DEFAULT_TITLE_CLASS)}>
           {title}
         </Tag>
       </Reveal>

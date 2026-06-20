@@ -150,7 +150,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section id="form" size="standard" layout="viewport" tone="inset">
+      <Section id="form" size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -248,7 +248,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Common questions before you write." align="center" />
           <div className="mt-10">

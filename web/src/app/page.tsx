@@ -34,6 +34,9 @@ import {
 } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
+import { homeSection } from "@/lib/homepage-composition";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
@@ -47,6 +50,7 @@ import {
 } from "@/lib/website-templates-html-preview";
 import { getProductHref } from "@/lib/shop";
 import { getSanityHomePageContent } from "@/server/sanity/marketing";
+import { cn } from "@/lib/utils";
 import { unstable_cache } from "next/cache";
 
 const SHOW_LIVE_SAAS_SECTION = false;
@@ -102,7 +106,7 @@ export default async function Home() {
   const htmlPreviewPrimaryTemplate = htmlPreviewCatalogProducts[0];
   const htmlPreviewFallbackSlide = {
     name: htmlPreviewPrimaryTemplate?.name ?? "Website Template",
-    type: htmlPreviewPrimaryTemplate?.type ?? "HTML Preview",
+    type: htmlPreviewPrimaryTemplate?.type ?? WEBSITE_TEMPLATE_PREVIEW.previewBadge,
     price: htmlPreviewPrimaryTemplate?.price ?? "$149",
     href: htmlPreviewPrimaryTemplate
       ? getProductHref(htmlPreviewPrimaryTemplate)
@@ -137,7 +141,7 @@ export default async function Home() {
     <>
       <JsonLd data={homeStructuredData} />
       {/* Hero */}
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+      <Section {...homeSection("hero")} className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
         <div className="hero-glow pointer-events-none absolute right-12 top-24 h-40 w-40 rounded-full bg-secondary/20 blur-3xl" aria-hidden />
@@ -147,7 +151,7 @@ export default async function Home() {
               <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Productized SaaS studio + digital marketplace"}</Badge>
             </div>
             <h1
-              className="signal-rise mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance"
+              className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
               style={{ animationDelay: "90ms" }}
             >
               {homeContent?.heroTitle ?? "Launch faster with ready-made SaaS templates, AI tools, and custom development support."}
@@ -198,6 +202,8 @@ export default async function Home() {
         </Container>
       </Section>
 
+      <HomeDigitalProductsShowcase products={publicProducts} />
+
       <ServiceCards services={services} />
 
       <WebsiteTemplateHtmlPreviewShowcaseSections
@@ -206,15 +212,18 @@ export default async function Home() {
         reverseMobileLayout
         showMobileSectionDivider
         autoPlayMobileCarousel={false}
+        sectionTitleClassName={HERO_TITLE_CLASS}
+        sectionShell={homeSection("html-preview")}
       />
 
-      <Section size="standard" layout="viewport">
+      <Section {...homeSection("html-profiles")}>
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
               eyebrow="New service"
               title="HTML Business Profiles - category-based digital products"
               description="Preview every built HTML business profile by category, then purchase directly from the product catalog with a clear template-to-checkout path."
+              titleClassName={HERO_TITLE_CLASS}
             />
             <div className="flex flex-wrap gap-3">
               <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
@@ -251,27 +260,26 @@ export default async function Home() {
         products={featuredHtmlWebsiteTemplates}
         variant="html-preview"
         maxProducts={3}
-        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "HTML website templates"}
+        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? WEBSITE_TEMPLATE_PREVIEW.shopSpotlightEyebrow}
         title={homeContent?.shopSpotlight?.title ?? "Production-ready templates with live desktop preview"}
         description={
           homeContent?.shopSpotlight?.description ??
-          "Browse HTML website templates with embedded desktop previews — open a product page to buy or request Done-For-You setup."
+          WEBSITE_TEMPLATE_PREVIEW.shopSpotlightDescription
         }
         ctaHref="/digital-products/category/website-templates-html-preview#profiles"
-        ctaLabel="Browse HTML templates"
+        ctaLabel={WEBSITE_TEMPLATE_PREVIEW.browseTemplatePreviewsCta}
       />
 
       <ThreePathExplainer />
 
-      <HomeDigitalProductsShowcase products={publicProducts} />
-
       {/* Featured Builds */}
-      <Section size="standard" layout="viewport">
+      <Section {...homeSection("featured-builds")}>
         <Container>
           <SectionHeading
               eyebrow={homeContent?.featuredBuilds?.eyebrow ?? "Featured builds"}
               title={homeContent?.featuredBuilds?.title ?? "Proof from launches, rebuilds, and growth."}
               description={homeContent?.featuredBuilds?.description ?? "A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."}
+              titleClassName={HERO_TITLE_CLASS}
           />
           <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
             {featuredProjects.map((p) => (
@@ -288,17 +296,18 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <TrustStrip items={HOME_STACK_MARQUEE} />
+      <TrustStrip items={HOME_STACK_MARQUEE} tone={homeSection("trust-strip").tone} />
 
       {/* # muted by request: keep Live SaaS section in code but hide on homepage */}
       {SHOW_LIVE_SAAS_SECTION ? (
-        <Section size="standard" layout="viewport" tone="inset">
+        <Section size="standard" layout="content" spacing="split" tone="inset">
           <Container>
             <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
               <SectionHeading
                 eyebrow={homeContent?.liveSaas?.eyebrow ?? "Live SaaS"}
                 title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
                 description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
+                titleClassName={HERO_TITLE_CLASS}
               />
               <LinkButton href="/digital-products" variant="outline">
                 Explore Live SaaS <ArrowUpRightIcon className="size-4" />
@@ -359,12 +368,13 @@ export default async function Home() {
       ) : null}
 
       {/* Process */}
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section {...homeSection("process")}>
         <Container>
           <SectionHeading
             eyebrow="How we work"
             title="An operating system you can actually plan around."
             description="No mystery process. Every engagement runs through these four phases with explicit outputs and clear cadence."
+            titleClassName={HERO_TITLE_CLASS}
           />
           <div className="mt-10">
             <ProcessSteps steps={PROCESS_STEPS} />
@@ -373,7 +383,7 @@ export default async function Home() {
       </Section>
 
       {/* AI + Live Chat */}
-      <Section size="standard" layout="viewport">
+      <Section {...homeSection("ai-concierge")}>
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 items-center">
             <div className="lg:col-span-5">
@@ -381,6 +391,7 @@ export default async function Home() {
                 eyebrow={homeContent?.ai?.eyebrow ?? "AI Growrix OS"}
                 title={homeContent?.ai?.title ?? "Get the right answer before you book."}
                 description={homeContent?.ai?.description ?? "Ask about website scope, SaaS roadmaps, ready website fit, pricing, or timelines. The concierge keeps MCP and automation in context when they support the main build."}
+                titleClassName={HERO_TITLE_CLASS}
               />
               <div className="mt-8 flex flex-wrap gap-3">
                 <ConciergeTriggerButton>
@@ -428,25 +439,27 @@ export default async function Home() {
       <Testimonials />
 
       {SHOW_GOOGLE_REVIEWS && (
-        <Section size="standard" layout="viewport">
+        <Section size="standard" layout="content" spacing="split">
           <Container>
             <GoogleReviews
               eyebrow="Voices"
               title="Teams we've shipped with."
               description="Live Google reviews from the public Growrix OS business profile."
+              titleClassName={HERO_TITLE_CLASS}
             />
           </Container>
         </Section>
       )}
 
       {/* Field notes (Blog) */}
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section {...homeSection("field-notes")}>
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
               eyebrow={homeContent?.fieldNotes?.eyebrow ?? "Field notes"}
               title={homeContent?.fieldNotes?.title ?? "Long-form writing from the studio."}
               description={homeContent?.fieldNotes?.description ?? "Engineering deep-dives, design system reflections, and quarterly notes on what we shipped."}
+              titleClassName={HERO_TITLE_CLASS}
             />
             <LinkButton href="/blog" variant="outline">
               Visit the blog <ArrowUpRightIcon className="size-4" />

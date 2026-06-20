@@ -126,12 +126,12 @@ const COPY: Record<
       { name: "Custom Build Scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: [
-      { question: "Do you handle content?", answer: "Yes â€” content production is offered as an add-on. We can also collaborate with your in-house content team." },
+      { question: "Do you handle content?", answer: "Yes — content production is offered as an add-on. We can also collaborate with your in-house content team." },
       { question: "What about CMS?", answer: "We integrate with Sanity, Contentful, Payload, or static MDX depending on editorial needs." },
-      { question: "How fast can we launch?", answer: "Launch sprints are 4â€“6 weeks. Redesigns typically land in 8â€“10 weeks." },
+      { question: "How fast can we launch?", answer: "Launch sprints are 4–6 weeks. Redesigns typically land in 8–10 weeks." },
     ],
     stats: [
-      { value: "4â€“10 wk", label: "Launch window" },
+      { value: "4–10 wk", label: "Launch window" },
       { value: "94", label: "Avg LCP score" },
       { value: "+64%", label: "Demo bookings" },
       { value: "12", label: "Sites shipped (12mo)" },
@@ -202,7 +202,7 @@ const COPY: Record<
     eyebrow: "Template Customization",
     headline: "Bought a template? We will customize and launch it for you.",
     description:
-      "Done-For-You setup for product buyers who need branding, deployment, forms, payments, and QA â€” without learning how to edit code or manage hosting.",
+      "Done-For-You setup for product buyers who need branding, deployment, forms, payments, and QA — without learning how to edit code or manage hosting.",
     primaryCta: "Request setup scope",
     secondaryCta: "Browse digital products first",
     secondaryHref: "/digital-products",
@@ -215,7 +215,7 @@ const COPY: Record<
       { title: "Launch QA and handoff", description: "Cross-device QA, performance checks, and operator documentation." },
     ],
     differentiators: [
-      { title: "Product-aware delivery", description: "We start from the exact template or tier you purchased â€” no mystery scope." },
+      { title: "Product-aware delivery", description: "We start from the exact template or tier you purchased — no mystery scope." },
       { title: "Non-technical friendly", description: "You bring brand inputs and goals; we handle implementation details." },
       { title: "Clear package boundaries", description: "Basic, business, and advanced setup tiers keep expectations explicit." },
       { title: "Upgrade path to custom work", description: "When scope exceeds the template, we transition into a scoped custom engagement." },
@@ -248,7 +248,7 @@ const COPY: Record<
       },
     ],
     faq: [
-      { question: "Do I need to buy the template first?", answer: "Usually yes â€” we customize from a purchased Standard, Premium, or Done-For-You product so scope stays tied to a real asset." },
+      { question: "Do I need to buy the template first?", answer: "Usually yes — we customize from a purchased Standard, Premium, or Done-For-You product so scope stays tied to a real asset." },
       { question: "What is not included?", answer: "Custom automation platforms, net-new features outside the template, and large infrastructure programs are scoped separately." },
       { question: "How fast can you launch?", answer: "Most setup packages land in 3-14 days depending on content readiness and integration count." },
     ],
@@ -279,15 +279,15 @@ const COPY: Record<
       { title: "Auth & access by design", description: "OAuth, API keys, scoped tokens, and clear human-in-the-loop boundaries." },
       { title: "Observability built-in", description: "Trace every tool call, log every input, surface every failure with context." },
       { title: "Schema-first tools", description: "Strict JSON schemas, examples, and behaviour notes agents can rely on." },
-      { title: "Deployable anywhere", description: "Self-host or deploy to your cloud â€” Cloudflare Workers, Fly, Vercel, or AWS." },
+      { title: "Deployable anywhere", description: "Self-host or deploy to your cloud — Cloudflare Workers, Fly, Vercel, or AWS." },
     ],
     tiers: [
       { name: "Starter MCP", price: "$249", cadence: "one-time", description: "Productized starter with auth, logging, and example tools.", features: ["TypeScript codebase", "Auth + secrets handling", "Example tools", "Deployment guide"], cta: { label: "Buy starter", href: "/digital-products" } },
-      { name: "Custom Integration", price: "$8.5k", cadence: "/ project", description: "A focused MCP server scoped around 1â€“2 systems with secure access.", features: ["Discovery + scoping", "Auth + permission model", "Tool design + tests", "Deployment + handoff"], cta: { label: "Scope an MCP", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
+      { name: "Custom Integration", price: "$8.5k", cadence: "/ project", description: "A focused MCP server scoped around 1–2 systems with secure access.", features: ["Discovery + scoping", "Auth + permission model", "Tool design + tests", "Deployment + handoff"], cta: { label: "Scope an MCP", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
       { name: "Platform Engagement", price: "Custom", description: "Multi-system MCP platform with shared infra, observability, and governance.", features: ["Shared auth layer", "Tool registry", "Audit + governance", "Ongoing support"], cta: { label: "Plan platform", href: "/book-appointment" } },
     ],
     faq: [
-      { question: "What is MCP?", answer: "Model Context Protocol â€” an open standard for giving AI agents structured, auditable access to tools and data." },
+      { question: "What is MCP?", answer: "Model Context Protocol — an open standard for giving AI agents structured, auditable access to tools and data." },
       { question: "Where do you deploy?", answer: "We deploy to your cloud or recommended hosts: Cloudflare Workers, Fly, Vercel, or AWS." },
       { question: "How do you handle security?", answer: "Scoped auth, secrets via your existing vault, full call logging, and explicit human-in-the-loop boundaries." },
     ],
@@ -300,7 +300,7 @@ const COPY: Record<
   },
   automation: {
     eyebrow: "Automation",
-    headline: "Operational systems that remove repetitive work â€” measurably.",
+    headline: "Operational systems that remove repetitive work — measurably.",
     description:
       "We map workflows, design exception logic, and ship integrations that turn manual work into measurable operational speed.",
     primaryCta: "Audit My Workflow",
@@ -315,7 +315,7 @@ const COPY: Record<
       { title: "Content workflows", description: "Multi-channel publishing pipelines with review gates and version history." },
     ],
     differentiators: [
-      { title: "Real workflow mapping", description: "We document exceptions, owners, and edge cases â€” not just the happy path." },
+      { title: "Real workflow mapping", description: "We document exceptions, owners, and edge cases — not just the happy path." },
       { title: "Exception-first design", description: "Failures route to humans with full context, never to silent dead-ends." },
       { title: "Observability included", description: "Every run logged, retryable, and reportable from day one." },
       { title: "Predictable cost & speed", description: "We model integration costs and latency before recommending a tool." },
@@ -326,7 +326,7 @@ const COPY: Record<
       { name: "Optimization Retainer", price: "$3.2k", cadence: "/ month", description: "Continuous monitoring, tuning, and new workflow rollouts.", features: ["Monthly review", "New workflows shipped", "Failure monitoring", "Quarterly cost review"], cta: { label: "Start retainer", href: "/book-appointment" } },
     ],
     faq: [
-      { question: "What tools do you use?", answer: "We use the right tool for the workflow â€” Zapier, n8n, custom Node services, or direct API integrations depending on volume and complexity." },
+      { question: "What tools do you use?", answer: "We use the right tool for the workflow — Zapier, n8n, custom Node services, or direct API integrations depending on volume and complexity." },
       { question: "How do you handle failures?", answer: "Every workflow has explicit retry, escalation, and human handoff paths. Failures never silently disappear." },
       { question: "Can you connect AI safely?", answer: "Yes. We design AI steps with clear inputs, outputs, and human checkpoints where decisions matter." },
     ],
@@ -389,7 +389,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container>
           <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            â† All services
+            ← All services
           </Link>
           <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7">
@@ -448,12 +448,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       )}
 
       {slug === "saas-applications" && (
-        <Section size="standard" layout="viewport" tone="inset">
+        <Section size="standard" layout="content" spacing="split" tone="inset">
           <Container>
             <SectionHeading
               eyebrow="Our stack"
               title="Our SaaS Development Stack"
-              description="We build modern, scalable SaaS applications using a proven, flexible tech stackâ€”carefully selected for performance, scalability, and speed of execution."
+              description="We build modern, scalable SaaS applications using a proven, flexible tech stack—carefully selected for performance, scalability, and speed of execution."
             />
             <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
               {[
@@ -510,13 +510,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               ))}
             </RevealGroup>
             <p className="mt-8 text-center text-sm text-text-muted max-w-2xl mx-auto">
-              We don&apos;t just pick toolsâ€”we combine them into a system that can build, launch, and scale SaaS products efficiently.
+              We don&apos;t just pick tools—we combine them into a system that can build, launch, and scale SaaS products efficiently.
             </p>
           </Container>
         </Section>
       )}
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading eyebrow="What gets built" title="The actual surfaces and systems we ship." />
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
@@ -532,7 +532,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow="What makes it different"
@@ -553,7 +553,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading eyebrow="Delivery" title="How an engagement runs end-to-end." />
           <div className="mt-10">
@@ -563,7 +563,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       {related.length > 0 && (
-        <Section size="standard" layout="viewport">
+        <Section size="standard" layout="content" spacing="split">
           <Container>
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
@@ -582,7 +582,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Engagement models"
@@ -600,7 +600,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       {SHOW_GOOGLE_REVIEWS && (
-        <Section size="standard" layout="viewport">
+        <Section size="standard" layout="content" spacing="split">
           <Container>
             <GoogleReviews
               eyebrow="Google reviews"
@@ -611,7 +611,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title={`${copy.eyebrow} questions, answered.`} align="center" />
           <div className="mt-10">
@@ -621,7 +621,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       <CTABand
-        title={`${copy.primaryCta} â€” let's talk specifics.`}
+        title={`${copy.primaryCta} — let's talk specifics.`}
         description="A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
         primary={{ label: copy.primaryCta, href: "/book-appointment" }}
         secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}

@@ -5,6 +5,7 @@ import { WebsiteTemplatesCategoryLanding } from "@/components/sections/WebsiteTe
 import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 type PageProps = {
@@ -20,9 +21,8 @@ const CATEGORY_METADATA: Record<string, { title: string; description: string }> 
       "Production-ready website templates with Standard, Premium, and Done-For-You options. Buy a polished template or have Growrix OS launch it for you.",
   },
   "website-templates-html-preview": {
-    title: "HTML Website Templates with Live Preview",
-    description:
-      "Browse HTML website templates with embedded desktop and mobile previews. Inspect each template live, then purchase or request Done-For-You setup.",
+    title: WEBSITE_TEMPLATE_PREVIEW.categoryPageTitle,
+    description: WEBSITE_TEMPLATE_PREVIEW.categoryPageDescription,
   },
   "html-business-profiles": {
     title: "HTML Business Profiles",

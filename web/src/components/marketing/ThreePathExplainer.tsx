@@ -3,15 +3,20 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { THREE_PATH_ROWS } from "@/lib/product-led-content";
+import { homeSection } from "@/lib/homepage-composition";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 
 export function ThreePathExplainer() {
+  const shell = homeSection("three-path");
+
   return (
-    <Section size="standard" layout="viewport" tone="inset">
+    <Section {...shell}>
       <Container>
         <SectionHeading
           eyebrow="Choose your path"
           title="Three ways to work with GrowrixOS"
           description="Whether you want a DIY download, done-for-you setup, or a full custom build, the site is designed to route you to the right offer."
+          titleClassName={HERO_TITLE_CLASS}
         />
         <div className="mt-10 overflow-x-auto rounded-2xl border border-border bg-surface">
           <table className="min-w-full divide-y divide-border text-left text-sm">

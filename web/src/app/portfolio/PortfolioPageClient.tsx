@@ -100,7 +100,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           {filtered.length === 0 ? (
             <div className="rounded-md border border-dashed border-border-strong bg-surface p-12 text-center">
@@ -128,10 +128,10 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </Container>
       </Section>
 
-      <TrustStrip items={trustItems} />
+      <TrustStrip items={trustItems} tone="inset" />
 
       {SHOW_GOOGLE_REVIEWS ? (
-        <Section size="standard" layout="viewport">
+        <Section size="standard" layout="content" spacing="split">
           <Container>
             <GoogleReviews
               eyebrow="Voices"
