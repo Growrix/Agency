@@ -1,3 +1,5 @@
+"use client";
+
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ShopProductHtmlMobilePreviewCard } from "@/components/shop/ShopProductHtmlMobilePreviewCard";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
