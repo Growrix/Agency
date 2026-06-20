@@ -6,7 +6,10 @@ import {
 	CheckIcon,
 	CodeBracketSquareIcon,
 	CpuChipIcon,
+	DevicePhoneMobileIcon,
 	DocumentTextIcon,
+	MagnifyingGlassCircleIcon,
+	SparklesIcon,
 	WrenchScrewdriverIcon,
 	WindowIcon,
 } from "@heroicons/react/24/outline";
@@ -28,87 +31,92 @@ import {
 } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { marketingSection } from "@/lib/marketing-composition";
+import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
+import { cn } from "@/lib/utils";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 import { listSanityFaqItems } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = {
-	title: "Services | Websites, HTML Profiles, SaaS, MCP, and Automation",
+	title: "Services | Websites, SaaS, Mobile Apps, Automation, and Technical SEO",
 	description:
-		"Compare the agency's services with primary emphasis on websites, HTML business profiles, SaaS applications, and launch systems, plus secondary MCP and automation work.",
+		"Compare the agency's services: premium websites, SaaS applications, mobile app launch systems, automation, and technical SEO — plus template customization for product buyers.",
 };
 
 const ICONS = {
-	"saas-applications": CodeBracketSquareIcon,
 	websites: WindowIcon,
-	"html-business-profiles": DocumentTextIcon,
+	"saas-applications": CodeBracketSquareIcon,
+	"mobile-apps": DevicePhoneMobileIcon,
 	"template-customization": WrenchScrewdriverIcon,
-	"mcp-servers": CpuChipIcon,
 	automation: BoltIcon,
+	"technical-seo": MagnifyingGlassCircleIcon,
+	"html-business-profiles": DocumentTextIcon,
+	"mcp-servers": CpuChipIcon,
 } as const;
 
 const FIT_NOTES: Record<string, string> = {
-	"saas-applications": "Best when you need a real product team across SaaS, dashboards, and companion mobile experiences.",
 	websites: "Best when brand perception, conversion architecture, and speed all matter at once.",
-	"html-business-profiles": "Best when you need category-specific HTML business profile templates with a fast purchase path.",
+	"saas-applications": "Best when you need a real product team across SaaS, dashboards, and companion mobile experiences.",
+	"mobile-apps": "Best when you need an app launch site, companion app, or store-ready mobile surface alongside your product.",
 	"template-customization": "Best after you buy a template and need branding, deployment, forms, and launch support without touching code.",
-	"mcp-servers": "Best when agent workflows need to support the website or SaaS product behind the scenes.",
 	automation: "Best when repetitive ops work around sales, support, reporting, or onboarding is slowing the main product.",
+	"technical-seo": "Best when search visibility, analytics, and Core Web Vitals need to be configured correctly from launch.",
 };
 
 const GOAL_ROWS = [
 	{
 		label: "Primary goal",
 		values: {
-			"saas-applications": "Ship or rebuild a product",
 			websites: "Convert and position the brand",
-			"html-business-profiles": "Launch category-ready profile pages quickly",
+			"saas-applications": "Ship or rebuild a product",
+			"mobile-apps": "Launch a credible mobile surface",
 			"template-customization": "Launch a purchased template with expert setup",
-			"mcp-servers": "Expose trusted tools to agents",
 			automation: "Remove manual operational work",
+			"technical-seo": "Get found and measured from day one",
 		},
 	},
 	{
 		label: "Complexity",
 		values: {
-			"saas-applications": "High",
 			websites: "Medium",
-			"html-business-profiles": "Low to medium",
+			"saas-applications": "High",
+			"mobile-apps": "Medium to high",
 			"template-customization": "Low to medium",
-			"mcp-servers": "Medium to high",
 			automation: "Medium",
+			"technical-seo": "Low to medium",
 		},
 	},
 	{
 		label: "Typical timeline",
 		values: {
-			"saas-applications": "8–24 weeks",
 			websites: "4–10 weeks",
-			"html-business-profiles": "1–7 days",
+			"saas-applications": "8–24 weeks",
+			"mobile-apps": "4–16 weeks",
 			"template-customization": "3–14 days",
-			"mcp-servers": "3–12 weeks",
 			automation: "2–8 weeks",
+			"technical-seo": "3–10 days",
 		},
 	},
 	{
 		label: "Maintenance model",
 		values: {
-			"saas-applications": "Roadmap + ongoing releases",
 			websites: "CRO, CMS, experiments",
-			"html-business-profiles": "Template updates + optional customization",
+			"saas-applications": "Roadmap + ongoing releases",
+			"mobile-apps": "Release cadence + store updates",
 			"template-customization": "Launch support + optional maintenance",
-			"mcp-servers": "Observability + tool governance",
 			automation: "Monitoring + optimization",
+			"technical-seo": "One-time setup + optional audits",
 		},
 	},
 	{
 		label: "Best engagement",
 		values: {
-			"saas-applications": "MVP sprint or product partner",
 			websites: "Launch sprint or redesign track",
-			"html-business-profiles": "Direct purchase with optional upgrade",
+			"saas-applications": "MVP sprint or product partner",
+			"mobile-apps": "Launch site sprint or companion MVP",
 			"template-customization": "Done-For-You setup package",
-			"mcp-servers": "Scoped build or platform engagement",
 			automation: "Audit sprint then implementation",
+			"technical-seo": "Essentials or full technical SEO sprint",
 		},
 	},
 ];
@@ -142,16 +150,16 @@ export default async function ServicesPage() {
 
 	return (
 		<>
-			<Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+			<Section {...marketingSection("services", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
 				<div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-				<Container>
+				<Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
 					<div className="max-w-3xl">
 						<Badge tone="primary" dot>Services</Badge>
-						<h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
+						<h1 className={cn("mt-5", HERO_TITLE_CLASS)}>
 							Choose the delivery path that fits the launch and the long-term product.
 						</h1>
 						<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-							We lead with premium websites, SaaS applications, template customization, MCP server development, and automation systems. Productized templates and business profiles live under Products.
+							We lead with premium websites, SaaS applications, mobile app launch systems, automation, and technical SEO. Template customization supports product buyers; HTML business profiles live under Digital Products.
 						</p>
 						<div className="mt-8 flex flex-wrap gap-3">
 							<LinkButton href="/book-appointment" size="lg">
@@ -160,10 +168,14 @@ export default async function ServicesPage() {
 							<LinkButton href="#compare" variant="outline" size="lg">Compare services</LinkButton>
 						</div>
 					</div>
+				</Container>
+			</Section>
 
-					<RevealGroup className="mt-12 grid gap-4 lg:grid-cols-4 sm:grid-cols-2" stagger={0.06}>
+			<Section {...marketingSection("services", "highlights")}>
+				<Container>
+					<RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
 							{services.map((service) => {
-							const Icon = ICONS[service.slug as keyof typeof ICONS];
+							const Icon = ICONS[service.slug as keyof typeof ICONS] ?? SparklesIcon;
 
 							return (
 								<RevealItem key={service.slug} className="h-full">
@@ -202,7 +214,7 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section id="compare" size="standard" layout="content" spacing="split" tone="inset">
+			<Section id="compare" {...marketingSection("services", "compare")}>
 				<Container>
 					<SectionHeading
 						eyebrow="Comparison"

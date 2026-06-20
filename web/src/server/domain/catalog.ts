@@ -2,6 +2,7 @@ import "server-only";
 
 import { unstable_cache } from "next/cache";
 import { SERVICES } from "@/lib/content";
+import { isHiddenServiceSlug } from "@/lib/feature-flags";
 import {
   HTML_BUSINESS_PROFILE_TEMPLATES,
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
@@ -1003,7 +1004,9 @@ async function listPublicServicesUncached(): Promise<PublicServiceRecord[]> {
   const database = await ensureCatalogSeeded();
   const fallbackServices = getEffectiveServices(database.services);
   const cmsServices = await listSanityServicePages().catch(() => []);
-  return mergeServices(fallbackServices, cmsServices);
+  return mergeServices(fallbackServices, cmsServices).filter(
+    (service) => !isHiddenServiceSlug(service.slug),
+  );
 }
 
 const listPublicServicesCached = unstable_cache(
@@ -1017,6 +1020,9 @@ export async function listPublicServices(): Promise<PublicServiceRecord[]> {
 }
 
 export async function getPublicService(serviceId: string): Promise<PublicServiceRecord | null> {
+  if (isHiddenServiceSlug(serviceId)) {
+    return null;
+  }
   const database = await ensureCatalogSeeded();
   const fallbackServices = getEffectiveServices(database.services);
   const fallback = fallbackServices.find((service) => service.slug === serviceId || service.id === serviceId) ?? null;

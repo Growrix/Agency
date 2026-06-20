@@ -75,14 +75,6 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
       "SaaS Applications engagement options: MVP Sprint at $24k per project (8-week sprint with discovery, design system, auth, billing, primary flows, analytics, and launch). Product Partner at $14k per month (embedded lead + designer + engineer, continuous shipping, quarterly strategy, stack ownership). Rebuild Engagement at custom pricing (architecture review, migration plan, phased shipping, knowledge transfer).",
   },
   {
-    id: "pricing-mcp-tiers",
-    label: "MCP Servers engagement tiers",
-    sourcePath: "/services/mcp-servers",
-    sourceType: "pricing",
-    content:
-      "MCP Servers options: Starter MCP at $249 one-time (TypeScript codebase, auth, secrets, example tools, deployment guide). Custom Integration at $8.5k per project (discovery, auth model, tool design, tests, deployment, handoff). Platform Engagement at custom pricing (shared auth layer, tool registry, audit, governance, ongoing support).",
-  },
-  {
     id: "pricing-automation-tiers",
     label: "Automation engagement tiers",
     sourcePath: "/services/automation",
@@ -242,7 +234,7 @@ async function buildDocuments(): Promise<KnowledgeDocument[]> {
   const additionalServiceDocs = ADDITIONAL_SERVICES_CATEGORIES.map((category) => ({
     id: `additional-service-${category.id}`,
     label: category.title,
-    sourcePath: "/additional-services",
+    sourcePath: "/services/technical-seo",
     sourceType: "additional_service" as const,
     content: `${category.title}. ${category.badge ? `${category.badge}. ` : ""}Includes: ${category.items.join(", ")}.`,
   }));

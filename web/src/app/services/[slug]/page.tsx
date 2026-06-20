@@ -8,7 +8,9 @@ import {
   CheckIcon,
   CodeBracketSquareIcon,
   CpuChipIcon,
+  DevicePhoneMobileIcon,
   DocumentTextIcon,
+  MagnifyingGlassCircleIcon,
   WrenchScrewdriverIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
@@ -25,8 +27,12 @@ import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { isHiddenServiceSlug } from "@/lib/feature-flags";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { marketingSection } from "@/lib/marketing-composition";
+import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
+import { cn } from "@/lib/utils";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { getPublicService, listPublicPortfolio } from "@/server/domain/catalog";
 import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
@@ -34,10 +40,12 @@ import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 const ICONS = {
   "saas-applications": CodeBracketSquareIcon,
   websites: WindowIcon,
+  "mobile-apps": DevicePhoneMobileIcon,
   "html-business-profiles": DocumentTextIcon,
   "template-customization": WrenchScrewdriverIcon,
   "mcp-servers": CpuChipIcon,
   automation: BoltIcon,
+  "technical-seo": MagnifyingGlassCircleIcon,
 } as const;
 
 type SlugKey = keyof typeof ICONS;
@@ -135,6 +143,45 @@ const COPY: Record<
       { value: "94", label: "Avg LCP score" },
       { value: "+64%", label: "Demo bookings" },
       { value: "12", label: "Sites shipped (12mo)" },
+    ],
+  },
+  "mobile-apps": {
+    eyebrow: "Mobile Apps",
+    headline: "Mobile launch systems that feel product-grade on day one.",
+    description:
+      "App launch sites, React Native companion apps, and mobile-first UX for founders who need store-ready credibility without rebuilding their entire stack.",
+    primaryCta: "Plan a mobile launch",
+    secondaryCta: "Browse mobile launch products",
+    secondaryHref: "/digital-products",
+    builds: [
+      { title: "App launch marketing sites", description: "High-converting launch pages with store badges, feature storytelling, and waitlist flows." },
+      { title: "Companion mobile apps", description: "React Native or Expo apps that extend your SaaS or service with on-the-go workflows." },
+      { title: "Onboarding & activation flows", description: "Permission prompts, progressive profiling, and first-session paths tuned for retention." },
+      { title: "Push & lifecycle messaging", description: "Notification strategy, deep links, and lifecycle hooks tied to your product events." },
+      { title: "Store readiness", description: "App Store and Play Store assets, privacy disclosures, and submission support." },
+      { title: "Mobile dashboards", description: "Operator and customer views optimized for thumb reach, sheets, and offline-tolerant states." },
+    ],
+    differentiators: [
+      { title: "Launch + product continuity", description: "Mobile work stays aligned with your web brand, billing, and analytics—not a disconnected side project." },
+      { title: "Performance-first mobile UX", description: "Sheets, sticky actions, skeleton states, and reduced-motion-safe interactions by default." },
+      { title: "Store submission support", description: "We help you navigate review requirements, screenshots, and release cadence with less guesswork." },
+      { title: "Companion, not replacement", description: "We scope mobile as an extension of your core product—auth, roles, and data stay consistent." },
+    ],
+    tiers: [
+      { name: "Launch Site Sprint", price: "From $4.5k", cadence: "/ project", description: "A polished app launch site with store CTAs, analytics, and SEO foundations.", features: ["Launch page architecture", "Store badge + CTA flows", "Analytics instrumentation", "Performance pass"], cta: { label: "Scope launch site", href: "/book-appointment" } },
+      { name: "Companion App MVP", price: "From $18k", cadence: "/ project", description: "A focused mobile companion with auth, core flows, and release support.", features: ["React Native / Expo build", "Auth + primary flows", "Push-ready architecture", "Store submission support"], cta: { label: "Scope companion app", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
+      { name: "Mobile Product Partner", price: "Custom", description: "Embedded mobile pod for ongoing releases, experiments, and platform expansion.", features: ["Roadmap alignment", "Continuous shipping", "Release management", "Cross-platform parity"], cta: { label: "Discuss partnership", href: "/book-appointment" } },
+    ],
+    faq: [
+      { question: "Do you build native iOS and Android apps?", answer: "We default to React Native or Expo for speed and shared logic. Native modules are scoped when the product truly requires them." },
+      { question: "Can mobile work run alongside a website or SaaS build?", answer: "Yes. We frequently ship launch sites first, then companion apps once the core product surface is stable." },
+      { question: "Do you handle App Store submission?", answer: "Yes. We prepare assets, privacy disclosures, and submission packages, and support review cycles through launch." },
+    ],
+    stats: [
+      { value: "4–16 wk", label: "Typical window" },
+      { value: "2", label: "Store platforms" },
+      { value: "100%", label: "Analytics wired" },
+      { value: "1", label: "Shared design system" },
     ],
   },
   "html-business-profiles": {
@@ -337,10 +384,51 @@ const COPY: Record<
       { value: "100%", label: "Logged runs" },
     ],
   },
+  "technical-seo": {
+    eyebrow: "Technical SEO",
+    headline: "Get discovered, tracked, and optimized from day one.",
+    description:
+      "One-time technical SEO, Search Console, analytics, schema, and Core Web Vitals configuration so your product ranks, measures, and converts correctly after launch.",
+    primaryCta: "Book SEO setup",
+    secondaryCta: "See what's included",
+    secondaryHref: "#pricing",
+    builds: [
+      { title: "Search Console & indexing", description: "Property setup, sitemap submission, and crawlability fixes." },
+      { title: "On-page SEO fundamentals", description: "Titles, meta descriptions, Open Graph, and canonical hygiene." },
+      { title: "Google Analytics 4", description: "Property setup, data streams, and conversion event verification." },
+      { title: "Meta Pixel & ad readiness", description: "Base pixel installation with verified core events." },
+      { title: "Structured data", description: "Schema markup for key page types so algorithms understand your content." },
+      { title: "Core Web Vitals", description: "Performance audit with actionable fixes for LCP, INP, and CLS." },
+    ],
+    differentiators: [
+      { title: "Launch-aligned setup", description: "We configure tracking and SEO foundations in parallel with website or SaaS delivery—not weeks later." },
+      { title: "Verified, not assumed", description: "Every configuration is tested: indexing active, events firing, schema validating." },
+      { title: "Documentation handoff", description: "You receive clear documentation for every setting—no black boxes after we leave." },
+      { title: "One-time foundation", description: "These are durable configurations designed to run without ongoing retainers unless you want them." },
+    ],
+    tiers: [
+      { name: "Essentials Setup", price: "From $750", cadence: "one-time", description: "Search Console, sitemap, GA4, and core meta coverage for a focused site.", features: ["Search Console setup", "Sitemap + robots.txt", "GA4 property + stream", "Meta tag review"], cta: { label: "Book essentials", href: "/book-appointment" } },
+      { name: "Full Technical SEO Sprint", price: "From $1.5k", cadence: "one-time", description: "Complete technical SEO foundation with analytics, schema, and performance fixes.", features: ["Everything in Essentials", "Meta Pixel setup", "Schema for key templates", "Core Web Vitals fixes"], cta: { label: "Book full sprint", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
+      { name: "Launch + Product Bundle", price: "Custom", description: "Run SEO and analytics setup alongside an active website or SaaS build.", features: ["Parallel with build team", "Event map aligned to product", "Post-launch verification", "Handoff workshop"], cta: { label: "Discuss bundle", href: "/book-appointment" } },
+    ],
+    faq: [
+      { question: "Do I need this if you built my site?", answer: "Often yes. Many launches ship without Search Console, pixels, or schema configured—even when the build quality is strong." },
+      { question: "Is this ongoing SEO?", answer: "No. This is a one-time technical foundation. Content strategy, link building, and retainers are separate engagements." },
+      { question: "How long does setup take?", answer: "Most engagements complete in 3–10 business days depending on site size and existing technical debt." },
+    ],
+    stats: [
+      { value: "3–10d", label: "Typical setup" },
+      { value: "100%", label: "Verified events" },
+      { value: "GA4", label: "Analytics ready" },
+      { value: "Schema", label: "Structured data" },
+    ],
+  },
 };
 
 export function generateStaticParams() {
-  return SERVICES.map((s) => ({ slug: s.slug }));
+  return SERVICES.filter((service) => !isHiddenServiceSlug(service.slug)).map((service) => ({
+    slug: service.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -355,6 +443,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (isHiddenServiceSlug(slug)) {
+    notFound();
+  }
   if (slug === "html-business-profiles") {
     redirect("/digital-products/category/html-business-profiles");
   }
@@ -385,9 +476,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const related = (await listPublicPortfolio()).filter((p) => p.service === slug).slice(0, 3);
   return (
     <>
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+      <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <Container>
+        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
           <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
             ← All services
           </Link>
@@ -397,7 +488,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 <Badge tone="primary" dot>{copy.eyebrow}</Badge>
               </div>
               <h1
-                className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance signal-rise"
+                className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
                 style={{ animationDelay: "70ms" }}
               >
                 {copy.headline}
@@ -582,7 +673,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section size="standard" layout="content" spacing="split" tone="inset">
+      <Section id="pricing" size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Engagement models"

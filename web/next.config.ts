@@ -108,6 +108,21 @@ const nextConfig: NextConfig = {
         destination: "/previews/html-template-websites/:path*",
         permanent: true,
       },
+      {
+        source: "/services/mcp-servers",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/solutions/:path*",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/additional-services",
+        destination: "/services/technical-seo",
+        permanent: true,
+      },
     ];
   },
   async headers() {
