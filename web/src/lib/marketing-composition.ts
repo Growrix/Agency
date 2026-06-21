@@ -170,8 +170,11 @@ export const MARKETING_SECTIONS: Record<
   contact: {
     hero: section("default", "hero"),
     channels: section("default", "compact"),
+    process: section("inset"),
+    routes: section("default"),
     form: section("inset"),
-    map: section("default"),
+    explore: section("default"),
+    faq: section("inset"),
   },
   faq: {
     hero: section("default", "hero"),
