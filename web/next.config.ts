@@ -114,6 +114,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/services/template-customization",
+        destination: "/services/ai-business-systems",
+        permanent: true,
+      },
+      {
         source: "/services/mcp-servers",
         destination: "/services",
         permanent: true,

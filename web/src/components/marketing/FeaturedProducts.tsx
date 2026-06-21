@@ -77,7 +77,7 @@ export function FeaturedProducts({
 
         <p className="mt-6 text-sm text-text-muted">
           Every product supports{" "}
-          <Link href="/services/template-customization" className="font-medium text-primary hover:underline">
+          <Link href="/book-appointment" className="font-medium text-primary hover:underline">
             Done-For-You customization
           </Link>{" "}
           when you need branding, deployment, or integration help.

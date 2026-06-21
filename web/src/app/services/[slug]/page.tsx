@@ -11,7 +11,7 @@ import {
   DevicePhoneMobileIcon,
   DocumentTextIcon,
   MagnifyingGlassCircleIcon,
-  WrenchScrewdriverIcon,
+  SparklesIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
@@ -21,6 +21,10 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { WebsiteLaunchProcessTimeline } from "@/components/sections/WebsiteLaunchProcessTimeline";
+import { AutomationWorkflowShowcase } from "@/components/sections/AutomationWorkflowShowcase";
+import { SeoVisibilityFoundation } from "@/components/sections/SeoVisibilityFoundation";
+import { SeoDeliverablesChecklist } from "@/components/sections/SeoDeliverablesChecklist";
+import { TechnicalSeoSetupCategories } from "@/components/sections/TechnicalSeoSetupCategories";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
@@ -58,20 +62,79 @@ import {
   WEBSITES_SERVICE_STATS,
   WEBSITES_WHY_CHOOSE_SECTION,
 } from "@/lib/websites-service-content";
+import {
+  SAAS_ENGAGEMENT_SECTION,
+  SAAS_LAUNCH_PROCESS_SECTION,
+  SAAS_PRODUCT_TYPES_SECTION,
+  SAAS_SERVICE_CTA,
+  SAAS_SERVICE_FAQ,
+  SAAS_SERVICE_HERO,
+  SAAS_SERVICE_STATS,
+  SAAS_STACK_GROUPS,
+  SAAS_STACK_SECTION,
+  SAAS_SYSTEMS_SECTION,
+  SAAS_WHY_FOUNDERS_SECTION,
+} from "@/lib/saas-applications-service-content";
+import {
+  MOBILE_APPS_SERVICE_CTA,
+  MOBILE_APPS_SERVICE_FAQ,
+  MOBILE_APPS_SERVICE_HERO,
+  MOBILE_APPS_SERVICE_STATS,
+  MOBILE_ENGAGEMENT_SECTION,
+  MOBILE_LAUNCH_PROCESS_SECTION,
+  MOBILE_PRODUCT_TYPES_SECTION,
+  MOBILE_SYSTEMS_SECTION,
+  MOBILE_WHY_BUILD_SECTION,
+} from "@/lib/mobile-apps-service-content";
+import {
+  AUTOMATION_ENGAGEMENT_SECTION,
+  AUTOMATION_OUTCOMES_SECTION,
+  AUTOMATION_PROCESS_SECTION,
+  AUTOMATION_SERVICE_CTA,
+  AUTOMATION_SERVICE_FAQ,
+  AUTOMATION_SERVICE_HERO,
+  AUTOMATION_SERVICE_STATS,
+  AUTOMATION_TYPES_SECTION,
+  AUTOMATION_WHY_BUILD_SECTION,
+  AUTOMATION_WORKFLOW_SHOWCASE_SECTION,
+} from "@/lib/automation-service-content";
+import {
+  TECHNICAL_SEO_DELIVERABLES_SECTION,
+  TECHNICAL_SEO_ENGAGEMENT_SECTION,
+  TECHNICAL_SEO_FOUNDATIONS_SECTION,
+  TECHNICAL_SEO_PROCESS_SECTION,
+  TECHNICAL_SEO_SERVICE_CTA,
+  TECHNICAL_SEO_SERVICE_FAQ,
+  TECHNICAL_SEO_SERVICE_HERO,
+  TECHNICAL_SEO_SETUP_CATEGORIES_SECTION,
+  TECHNICAL_SEO_VISIBILITY_SECTION,
+  TECHNICAL_SEO_WHY_SECTION,
+} from "@/lib/technical-seo-service-content";
+import {
+  AI_BUSINESS_SYSTEMS_PROCESS_SECTION,
+  AI_BUSINESS_SYSTEMS_SERVICE_CTA,
+  AI_BUSINESS_SYSTEMS_SERVICE_FAQ,
+  AI_BUSINESS_SYSTEMS_SERVICE_HERO,
+  AI_BUSINESS_SYSTEMS_SERVICE_STATS,
+  AI_ENGAGEMENT_SECTION,
+  AI_SOLUTIONS_SECTION,
+  AI_VALUE_SECTION,
+  AI_WHY_BUILD_SECTION,
+} from "@/lib/ai-business-systems-service-content";
 
 const ICONS = {
   "saas-applications": CodeBracketSquareIcon,
   websites: WindowIcon,
   "mobile-apps": DevicePhoneMobileIcon,
   "html-business-profiles": DocumentTextIcon,
-  "template-customization": WrenchScrewdriverIcon,
+  "ai-business-systems": SparklesIcon,
   "mcp-servers": CpuChipIcon,
   automation: BoltIcon,
   "technical-seo": MagnifyingGlassCircleIcon,
 } as const;
 
 type SlugKey = keyof typeof ICONS;
-const PRICE_MUTED_SERVICE_SLUGS = new Set<SlugKey>(["mcp-servers", "automation"]);
+const PRICE_MUTED_SERVICE_SLUGS = new Set<SlugKey>(["mcp-servers"]);
 
 const COPY: Record<
   SlugKey,
@@ -91,42 +154,19 @@ const COPY: Record<
 > = {
   "saas-applications": {
     eyebrow: "SaaS Applications",
-    headline: "SaaS products built like real products, not long demos.",
-    description:
-      "End-to-end product strategy, design systems, and engineering for founders and product teams launching or rebuilding SaaS.",
+    headline: SAAS_SERVICE_HERO.headline,
+    description: SAAS_SERVICE_HERO.description,
     primaryCta: "Start a SaaS Build",
-    secondaryCta: "See SaaS work",
-    secondaryHref: "/portfolio",
-    builds: [
-      { title: "Admin & ops panels", description: "Operator-grade dashboards, role-aware access, audit trails." },
-      { title: "User portals & onboarding", description: "Activation-first flows, billing, and self-serve upgrades." },
-      { title: "Billing & subscriptions", description: "Stripe metering, plans, coupons, dunning, and tax handling." },
-      { title: "Dashboards & reporting", description: "Live charts, exports, and segmentable filters built for clarity." },
-      { title: "Internal tools", description: "Replacements for spreadsheets, no-code stacks, and brittle scripts." },
-      { title: "AI-assisted features", description: "LLM workflows that respect data boundaries and explain themselves." },
-    ],
-    differentiators: [
-      { title: "Product strategy first", description: "MVP shaping, monetization inputs, and information architecture before any pixel." },
-      { title: "Scalable design system", description: "Tokens, primitives, and accessible patterns that survive feature growth." },
-      { title: "App-like mobile behavior", description: "Sheets, sticky utilities, thumb-friendly tap targets, real responsive depth." },
-      { title: "Production-ready engineering", description: "Tests, CI, observability, and ops-ready release cadence from day one." },
-    ],
-    tiers: [
-      { name: "MVP Sprint", price: "$24k", cadence: "/ project", description: "An 8-week sprint to validated MVP with core flows shipped.", features: ["Discovery + product framing", "Design system", "Auth, billing, primary flows", "Launch & analytics"], cta: { label: "Scope MVP", href: "/book-appointment" } },
-      { name: "Product Partner", price: "$14k", cadence: "/ month", description: "An embedded studio building features alongside your team.", features: ["Lead + designer + engineer", "Quarterly strategy", "Continuous shipping", "Stack ownership"], cta: { label: "Plan partnership", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
-      { name: "Rebuild Engagement", price: "Custom", description: "A focused rebuild of an aging SaaS product with measurable handoff.", features: ["Architecture review", "Migration plan", "Phased shipping", "Knowledge transfer"], cta: { label: "Talk rebuilds", href: "/book-appointment" } },
-    ],
-    faq: [
-      { question: "How fast can we launch?", answer: "Most MVP sprints land in 8 weeks. Larger products are split into phased releases starting at week 6." },
-      { question: "Do you work with our existing engineers?", answer: "Yes. We frequently embed alongside in-house teams as a product pod or design + frontend specialists." },
-      { question: "Stack preferences?", answer: "We default to Next.js + Postgres + Stripe + OpenAI/Anthropic, but adapt to existing stacks where it makes sense." },
-    ],
-    stats: [
-      { value: "8 wk", label: "MVP sprint" },
-      { value: "47", label: "Products shipped" },
-      { value: "$18M+", label: "Client funding raised" },
-      { value: "98", label: "NPS" },
-    ],
+    secondaryCta: SAAS_SERVICE_HERO.secondaryCta,
+    secondaryHref: SAAS_SERVICE_HERO.secondaryHref,
+    builds: SAAS_SYSTEMS_SECTION.builds.map((item) => ({ ...item })),
+    differentiators: SAAS_WHY_FOUNDERS_SECTION.cards.map((item) => ({ ...item })),
+    tiers: SAAS_ENGAGEMENT_SECTION.tiers.map((tier) => ({
+      ...tier,
+      features: [...tier.features],
+    })),
+    faq: SAAS_SERVICE_FAQ.map((item) => ({ ...item })),
+    stats: SAAS_SERVICE_STATS.map((item) => ({ ...item })),
   },
   websites: {
     eyebrow: "Websites",
@@ -147,42 +187,19 @@ const COPY: Record<
   },
   "mobile-apps": {
     eyebrow: "Mobile Apps",
-    headline: "Mobile launch systems that feel product-grade on day one.",
-    description:
-      "App launch sites, React Native companion apps, and mobile-first UX for founders who need store-ready credibility without rebuilding their entire stack.",
-    primaryCta: "Plan a mobile launch",
-    secondaryCta: "Browse mobile launch products",
-    secondaryHref: "/digital-products",
-    builds: [
-      { title: "App launch marketing sites", description: "High-converting launch pages with store badges, feature storytelling, and waitlist flows." },
-      { title: "Companion mobile apps", description: "React Native or Expo apps that extend your SaaS or service with on-the-go workflows." },
-      { title: "Onboarding & activation flows", description: "Permission prompts, progressive profiling, and first-session paths tuned for retention." },
-      { title: "Push & lifecycle messaging", description: "Notification strategy, deep links, and lifecycle hooks tied to your product events." },
-      { title: "Store readiness", description: "App Store and Play Store assets, privacy disclosures, and submission support." },
-      { title: "Mobile dashboards", description: "Operator and customer views optimized for thumb reach, sheets, and offline-tolerant states." },
-    ],
-    differentiators: [
-      { title: "Launch + product continuity", description: "Mobile work stays aligned with your web brand, billing, and analytics—not a disconnected side project." },
-      { title: "Performance-first mobile UX", description: "Sheets, sticky actions, skeleton states, and reduced-motion-safe interactions by default." },
-      { title: "Store submission support", description: "We help you navigate review requirements, screenshots, and release cadence with less guesswork." },
-      { title: "Companion, not replacement", description: "We scope mobile as an extension of your core product—auth, roles, and data stay consistent." },
-    ],
-    tiers: [
-      { name: "Launch Site Sprint", price: "From $4.5k", cadence: "/ project", description: "A polished app launch site with store CTAs, analytics, and SEO foundations.", features: ["Launch page architecture", "Store badge + CTA flows", "Analytics instrumentation", "Performance pass"], cta: { label: "Scope launch site", href: "/book-appointment" } },
-      { name: "Companion App MVP", price: "From $18k", cadence: "/ project", description: "A focused mobile companion with auth, core flows, and release support.", features: ["React Native / Expo build", "Auth + primary flows", "Push-ready architecture", "Store submission support"], cta: { label: "Scope companion app", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
-      { name: "Mobile Product Partner", price: "Custom", description: "Embedded mobile pod for ongoing releases, experiments, and platform expansion.", features: ["Roadmap alignment", "Continuous shipping", "Release management", "Cross-platform parity"], cta: { label: "Discuss partnership", href: "/book-appointment" } },
-    ],
-    faq: [
-      { question: "Do you build native iOS and Android apps?", answer: "We default to React Native or Expo for speed and shared logic. Native modules are scoped when the product truly requires them." },
-      { question: "Can mobile work run alongside a website or SaaS build?", answer: "Yes. We frequently ship launch sites first, then companion apps once the core product surface is stable." },
-      { question: "Do you handle App Store submission?", answer: "Yes. We prepare assets, privacy disclosures, and submission packages, and support review cycles through launch." },
-    ],
-    stats: [
-      { value: "4–16 wk", label: "Typical window" },
-      { value: "2", label: "Store platforms" },
-      { value: "100%", label: "Analytics wired" },
-      { value: "1", label: "Shared design system" },
-    ],
+    headline: MOBILE_APPS_SERVICE_HERO.headline,
+    description: MOBILE_APPS_SERVICE_HERO.description,
+    primaryCta: "Plan Mobile Launch",
+    secondaryCta: MOBILE_APPS_SERVICE_HERO.secondaryCta,
+    secondaryHref: MOBILE_APPS_SERVICE_HERO.secondaryHref,
+    builds: MOBILE_SYSTEMS_SECTION.builds.map((item) => ({ ...item })),
+    differentiators: MOBILE_WHY_BUILD_SECTION.cards.map((item) => ({ ...item })),
+    tiers: MOBILE_ENGAGEMENT_SECTION.tiers.map((tier) => ({
+      ...tier,
+      features: [...tier.features],
+    })),
+    faq: MOBILE_APPS_SERVICE_FAQ.map((item) => ({ ...item })),
+    stats: MOBILE_APPS_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "html-business-profiles": {
     eyebrow: "HTML Business Profiles",
@@ -245,66 +262,21 @@ const COPY: Record<
       { value: "100%", label: "Shop purchase coverage" },
     ],
   },
-  "template-customization": {
-    eyebrow: "Template Customization",
-    headline: "Bought a template? We will customize and launch it for you.",
-    description:
-      "Done-For-You setup for product buyers who need branding, deployment, forms, payments, and QA — without learning how to edit code or manage hosting.",
-    primaryCta: "Request setup scope",
-    secondaryCta: "Browse digital products first",
-    secondaryHref: "/digital-products",
-    builds: [
-      { title: "Brand and content adaptation", description: "Logo, palette, typography, and copy updates aligned to your offer." },
-      { title: "Deployment and domain setup", description: "Hosting, SSL, environment configuration, and launch checklist." },
-      { title: "Forms and lead routing", description: "Contact flows connected to email, CRM, or internal notifications." },
-      { title: "Payments and integrations", description: "Stripe, analytics, and template-native integrations wired correctly." },
-      { title: "Additional pages", description: "Extra sections or pages within the purchased template structure." },
-      { title: "Launch QA and handoff", description: "Cross-device QA, performance checks, and operator documentation." },
-    ],
-    differentiators: [
-      { title: "Product-aware delivery", description: "We start from the exact template or tier you purchased — no mystery scope." },
-      { title: "Non-technical friendly", description: "You bring brand inputs and goals; we handle implementation details." },
-      { title: "Clear package boundaries", description: "Basic, business, and advanced setup tiers keep expectations explicit." },
-      { title: "Upgrade path to custom work", description: "When scope exceeds the template, we transition into a scoped custom engagement." },
-    ],
-    tiers: [
-      {
-        name: "Basic Setup",
-        price: "$299",
-        cadence: "one-time",
-        description: "Branding refresh, deployment, and essential configuration for a single template.",
-        features: ["Brand colors and logo placement", "Deployment to your host", "Contact form wiring", "Launch checklist"],
-        cta: { label: "Request basic setup", href: "/contact?intent=customize_template" },
-      },
-      {
-        name: "Business Setup",
-        price: "$599",
-        cadence: "one-time",
-        description: "Expanded customization with extra sections, analytics, and payment readiness.",
-        features: ["Everything in Basic", "Extra sections or pages", "Analytics setup", "Stripe or payment wiring"],
-        cta: { label: "Request business setup", href: "/contact?intent=customize_template" },
-        featured: true,
-        badge: "Most chosen",
-      },
-      {
-        name: "Advanced Setup",
-        price: "$999+",
-        description: "Complex integrations, multi-environment rollout, and deeper QA for demanding launches.",
-        features: ["Everything in Business", "Advanced integrations", "Multi-environment support", "Extended QA window"],
-        cta: { label: "Discuss advanced scope", href: "/book-appointment" },
-      },
-    ],
-    faq: [
-      { question: "Do I need to buy the template first?", answer: "Usually yes — we customize from a purchased Standard, Premium, or Done-For-You product so scope stays tied to a real asset." },
-      { question: "What is not included?", answer: "Custom automation platforms, net-new features outside the template, and large infrastructure programs are scoped separately." },
-      { question: "How fast can you launch?", answer: "Most setup packages land in 3-14 days depending on content readiness and integration count." },
-    ],
-    stats: [
-      { value: "3-14d", label: "Typical setup window" },
-      { value: "$299+", label: "Entry setup tier" },
-      { value: "100%", label: "Product-linked scope" },
-      { value: "1yr", label: "Support option" },
-    ],
+  "ai-business-systems": {
+    eyebrow: "AI Business Systems",
+    headline: AI_BUSINESS_SYSTEMS_SERVICE_HERO.headline,
+    description: AI_BUSINESS_SYSTEMS_SERVICE_HERO.description,
+    primaryCta: "Book AI Discovery",
+    secondaryCta: AI_BUSINESS_SYSTEMS_SERVICE_HERO.secondaryCta,
+    secondaryHref: AI_BUSINESS_SYSTEMS_SERVICE_HERO.secondaryHref,
+    builds: AI_VALUE_SECTION.builds.map((item) => ({ ...item })),
+    differentiators: AI_WHY_BUILD_SECTION.cards.map((item) => ({ ...item })),
+    tiers: AI_ENGAGEMENT_SECTION.tiers.map((tier) => ({
+      ...tier,
+      features: [...tier.features],
+    })),
+    faq: AI_BUSINESS_SYSTEMS_SERVICE_FAQ.map((item) => ({ ...item })),
+    stats: AI_BUSINESS_SYSTEMS_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "mcp-servers": {
     eyebrow: "MCP Servers",
@@ -347,81 +319,35 @@ const COPY: Record<
   },
   automation: {
     eyebrow: "Automation",
-    headline: "Operational systems that remove repetitive work — measurably.",
-    description:
-      "We map workflows, design exception logic, and ship integrations that turn manual work into measurable operational speed.",
+    headline: AUTOMATION_SERVICE_HERO.headline,
+    description: AUTOMATION_SERVICE_HERO.description,
     primaryCta: "Audit My Workflow",
-    secondaryCta: "View automation examples",
-    secondaryHref: "/portfolio",
-    builds: [
-      { title: "Lead routing & enrichment", description: "Inbound leads scored, enriched, and routed to the right owner instantly." },
-      { title: "CRM sync & pipelines", description: "Bi-directional sync between CRM, billing, and product systems." },
-      { title: "Support triage", description: "Automated routing, tagging, and first-response drafts via LLM workflows." },
-      { title: "Reporting & dashboards", description: "Scheduled exports, executive digests, and live dashboards." },
-      { title: "Onboarding & approvals", description: "Step-based flows with exceptions, escalations, and human checkpoints." },
-      { title: "Content workflows", description: "Multi-channel publishing pipelines with review gates and version history." },
-    ],
-    differentiators: [
-      { title: "Real workflow mapping", description: "We document exceptions, owners, and edge cases — not just the happy path." },
-      { title: "Exception-first design", description: "Failures route to humans with full context, never to silent dead-ends." },
-      { title: "Observability included", description: "Every run logged, retryable, and reportable from day one." },
-      { title: "Predictable cost & speed", description: "We model integration costs and latency before recommending a tool." },
-    ],
-    tiers: [
-      { name: "Audit Sprint", price: "$3.5k", cadence: "/ project", description: "Two-week audit of one or two workflows with prioritized recommendations.", features: ["Workflow mapping", "Cost & risk model", "Prioritized roadmap", "Implementation handoff"], cta: { label: "Book audit", href: "/book-appointment" } },
-      { name: "Implementation", price: "$8k", cadence: "/ project", description: "Build and ship a complete automation system with exception handling.", features: ["Discovery + design", "Build + integrations", "Observability setup", "Documentation + handoff"], cta: { label: "Scope build", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
-      { name: "Optimization Retainer", price: "$3.2k", cadence: "/ month", description: "Continuous monitoring, tuning, and new workflow rollouts.", features: ["Monthly review", "New workflows shipped", "Failure monitoring", "Quarterly cost review"], cta: { label: "Start retainer", href: "/book-appointment" } },
-    ],
-    faq: [
-      { question: "What tools do you use?", answer: "We use the right tool for the workflow — Zapier, n8n, custom Node services, or direct API integrations depending on volume and complexity." },
-      { question: "How do you handle failures?", answer: "Every workflow has explicit retry, escalation, and human handoff paths. Failures never silently disappear." },
-      { question: "Can you connect AI safely?", answer: "Yes. We design AI steps with clear inputs, outputs, and human checkpoints where decisions matter." },
-    ],
-    stats: [
-      { value: "5h/wk", label: "Avg time saved" },
-      { value: "−38%", label: "No-show rate" },
-      { value: "2 wk", label: "Audit window" },
-      { value: "100%", label: "Logged runs" },
-    ],
+    secondaryCta: AUTOMATION_SERVICE_HERO.secondaryCta,
+    secondaryHref: AUTOMATION_SERVICE_HERO.secondaryHref,
+    builds: AUTOMATION_OUTCOMES_SECTION.builds.map((item) => ({ ...item })),
+    differentiators: AUTOMATION_WHY_BUILD_SECTION.cards.map((item) => ({ ...item })),
+    tiers: AUTOMATION_ENGAGEMENT_SECTION.tiers.map((tier) => ({
+      ...tier,
+      features: [...tier.features],
+    })),
+    faq: AUTOMATION_SERVICE_FAQ.map((item) => ({ ...item })),
+    stats: AUTOMATION_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "technical-seo": {
     eyebrow: "Technical SEO",
-    headline: "Get discovered, tracked, and optimized from day one.",
-    description:
-      "One-time technical SEO, Search Console, analytics, schema, and Core Web Vitals configuration so your product ranks, measures, and converts correctly after launch.",
-    primaryCta: "Book SEO setup",
-    secondaryCta: "See what's included",
-    secondaryHref: "#pricing",
-    builds: [
-      { title: "Search Console & indexing", description: "Property setup, sitemap submission, and crawlability fixes." },
-      { title: "On-page SEO fundamentals", description: "Titles, meta descriptions, Open Graph, and canonical hygiene." },
-      { title: "Google Analytics 4", description: "Property setup, data streams, and conversion event verification." },
-      { title: "Meta Pixel & ad readiness", description: "Base pixel installation with verified core events." },
-      { title: "Structured data", description: "Schema markup for key page types so algorithms understand your content." },
-      { title: "Core Web Vitals", description: "Performance audit with actionable fixes for LCP, INP, and CLS." },
-    ],
-    differentiators: [
-      { title: "Launch-aligned setup", description: "We configure tracking and SEO foundations in parallel with website or SaaS delivery—not weeks later." },
-      { title: "Verified, not assumed", description: "Every configuration is tested: indexing active, events firing, schema validating." },
-      { title: "Documentation handoff", description: "You receive clear documentation for every setting—no black boxes after we leave." },
-      { title: "One-time foundation", description: "These are durable configurations designed to run without ongoing retainers unless you want them." },
-    ],
-    tiers: [
-      { name: "Essentials Setup", price: "From $750", cadence: "one-time", description: "Search Console, sitemap, GA4, and core meta coverage for a focused site.", features: ["Search Console setup", "Sitemap + robots.txt", "GA4 property + stream", "Meta tag review"], cta: { label: "Book essentials", href: "/book-appointment" } },
-      { name: "Full Technical SEO Sprint", price: "From $1.5k", cadence: "one-time", description: "Complete technical SEO foundation with analytics, schema, and performance fixes.", features: ["Everything in Essentials", "Meta Pixel setup", "Schema for key templates", "Core Web Vitals fixes"], cta: { label: "Book full sprint", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
-      { name: "Launch + Product Bundle", price: "Custom", description: "Run SEO and analytics setup alongside an active website or SaaS build.", features: ["Parallel with build team", "Event map aligned to product", "Post-launch verification", "Handoff workshop"], cta: { label: "Discuss bundle", href: "/book-appointment" } },
-    ],
-    faq: [
-      { question: "Do I need this if you built my site?", answer: "Often yes. Many launches ship without Search Console, pixels, or schema configured—even when the build quality is strong." },
-      { question: "Is this ongoing SEO?", answer: "No. This is a one-time technical foundation. Content strategy, link building, and retainers are separate engagements." },
-      { question: "How long does setup take?", answer: "Most engagements complete in 3–10 business days depending on site size and existing technical debt." },
-    ],
-    stats: [
-      { value: "3–10d", label: "Typical setup" },
-      { value: "100%", label: "Verified events" },
-      { value: "GA4", label: "Analytics ready" },
-      { value: "Schema", label: "Structured data" },
-    ],
+    headline: TECHNICAL_SEO_SERVICE_HERO.headline,
+    description: TECHNICAL_SEO_SERVICE_HERO.description,
+    primaryCta: "Book SEO Setup",
+    secondaryCta: TECHNICAL_SEO_SERVICE_HERO.secondaryCta,
+    secondaryHref: TECHNICAL_SEO_SERVICE_HERO.secondaryHref,
+    builds: TECHNICAL_SEO_FOUNDATIONS_SECTION.builds.map((item) => ({ ...item })),
+    differentiators: TECHNICAL_SEO_WHY_SECTION.cards.map((item) => ({ ...item })),
+    tiers: TECHNICAL_SEO_ENGAGEMENT_SECTION.tiers.map((tier) => ({
+      ...tier,
+      features: [...tier.features],
+    })),
+    faq: TECHNICAL_SEO_SERVICE_FAQ.map((item) => ({ ...item })),
+    stats: [],
   },
 };
 
@@ -449,6 +375,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (slug === "html-business-profiles") {
     redirect("/digital-products/category/html-business-profiles");
   }
+  if (slug === "template-customization") {
+    redirect("/services/ai-business-systems");
+  }
   const service = await getPublicService(slug);
   const fallbackCopy = COPY[slug as SlugKey];
   if (!service || !fallbackCopy) notFound();
@@ -474,6 +403,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   const Icon = ICONS[slug as SlugKey];
   const isWebsitesService = slug === "websites";
+  const isSaasService = slug === "saas-applications";
+  const isMobileAppsService = slug === "mobile-apps";
+  const isAutomationService = slug === "automation";
+  const isTechnicalSeoService = slug === "technical-seo";
+  const isAiBusinessSystemsService = slug === "ai-business-systems";
+  const isConversionServicePage =
+    isWebsitesService ||
+    isSaasService ||
+    isMobileAppsService ||
+    isAutomationService ||
+    isTechnicalSeoService ||
+    isAiBusinessSystemsService;
   const [related, publicProducts] = await Promise.all([
     listPublicPortfolio().then((items) => items.filter((p) => p.service === slug).slice(0, 3)),
     isWebsitesService ? listPublicShopProducts() : Promise.resolve([]),
@@ -501,29 +442,122 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       }
     : undefined;
 
-  const serviceSectionPage = isWebsitesService ? "service-detail-websites" : "service-detail";
+  const serviceSectionPage = isWebsitesService
+    ? "service-detail-websites"
+    : isSaasService
+      ? "service-detail-saas-applications"
+      : isMobileAppsService
+        ? "service-detail-mobile-apps"
+        : isAutomationService
+          ? "service-detail-automation"
+          : isTechnicalSeoService
+            ? "service-detail-technical-seo"
+            : isAiBusinessSystemsService
+              ? "service-detail-ai-business-systems"
+              : "service-detail";
+
+  const heroServiceStats = isWebsitesService
+    ? WEBSITES_SERVICE_STATS
+    : isSaasService
+      ? SAAS_SERVICE_STATS
+      : isMobileAppsService
+        ? MOBILE_APPS_SERVICE_STATS
+        : isAutomationService
+          ? AUTOMATION_SERVICE_STATS
+          : isAiBusinessSystemsService
+            ? AI_BUSINESS_SYSTEMS_SERVICE_STATS
+            : null;
 
   const engagementModelsSection = (
     <Section
       id="pricing"
       {...marketingSection(
         serviceSectionPage,
-        isWebsitesService ? "engagement" : "overview",
+        isWebsitesService ||
+        isSaasService ||
+        isMobileAppsService ||
+        isAutomationService ||
+        isTechnicalSeoService ||
+        isAiBusinessSystemsService
+          ? "engagement"
+          : "overview",
       )}
     >
       <Container>
         <SectionHeading
-          eyebrow="Engagement models"
-          title="Pick the surface area that matches the work."
+          eyebrow={
+            isSaasService
+              ? SAAS_ENGAGEMENT_SECTION.eyebrow
+              : isMobileAppsService
+                ? MOBILE_ENGAGEMENT_SECTION.eyebrow
+                : isAutomationService
+                  ? AUTOMATION_ENGAGEMENT_SECTION.eyebrow
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_ENGAGEMENT_SECTION.eyebrow
+                    : isAiBusinessSystemsService
+                      ? AI_ENGAGEMENT_SECTION.eyebrow
+                      : "Engagement models"
+          }
+          title={
+            isSaasService
+              ? SAAS_ENGAGEMENT_SECTION.title
+              : isMobileAppsService
+                ? MOBILE_ENGAGEMENT_SECTION.title
+                : isAutomationService
+                  ? AUTOMATION_ENGAGEMENT_SECTION.title
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_ENGAGEMENT_SECTION.title
+                    : isAiBusinessSystemsService
+                      ? AI_ENGAGEMENT_SECTION.title
+                      : "Pick the surface area that matches the work."
+          }
+          description={
+            isSaasService
+              ? SAAS_ENGAGEMENT_SECTION.description
+              : isMobileAppsService
+                ? MOBILE_ENGAGEMENT_SECTION.description
+                : isAutomationService
+                  ? AUTOMATION_ENGAGEMENT_SECTION.description
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_ENGAGEMENT_SECTION.description
+                    : isAiBusinessSystemsService
+                      ? AI_ENGAGEMENT_SECTION.description
+                      : undefined
+          }
           align="center"
         />
-        <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
+        <RevealGroup className="mt-12 grid auto-rows-fr gap-5 lg:grid-cols-3" stagger={0.08}>
           {copy.tiers.map((t) => (
             <RevealItem key={t.name} className="h-full">
-              <PricingTier tier={t} />
+              <PricingTier tier={t} className="h-full" />
             </RevealItem>
           ))}
         </RevealGroup>
+        {isSaasService ? (
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-6 text-text-muted">
+            {SAAS_ENGAGEMENT_SECTION.trustNote}
+          </p>
+        ) : null}
+        {isMobileAppsService ? (
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-6 text-text-muted">
+            {MOBILE_ENGAGEMENT_SECTION.trustNote}
+          </p>
+        ) : null}
+        {isAutomationService ? (
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-6 text-text-muted">
+            {AUTOMATION_ENGAGEMENT_SECTION.trustNote}
+          </p>
+        ) : null}
+        {isTechnicalSeoService ? (
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-6 text-text-muted">
+            {TECHNICAL_SEO_ENGAGEMENT_SECTION.trustNote}
+          </p>
+        ) : null}
+        {isAiBusinessSystemsService ? (
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-6 text-text-muted">
+            {AI_ENGAGEMENT_SECTION.trustNote}
+          </p>
+        ) : null}
       </Container>
     </Section>
   );
@@ -583,13 +617,119 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </Card>
             </div>
           </div>
-          {isWebsitesService ? (
+          {heroServiceStats ? (
             <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
-              <StatBlock stats={WEBSITES_SERVICE_STATS} containerWidth="shell" />
+              <StatBlock stats={heroServiceStats} containerWidth="shell" />
             </div>
           ) : null}
         </Container>
       </Section>
+
+      {isAiBusinessSystemsService ? (
+        <Section
+          id={AI_SOLUTIONS_SECTION.id}
+          {...marketingSection("service-detail-ai-business-systems", "ai-solutions")}
+        >
+          <Container>
+            <SectionHeading
+              eyebrow={AI_SOLUTIONS_SECTION.eyebrow}
+              title={AI_SOLUTIONS_SECTION.title}
+              description={AI_SOLUTIONS_SECTION.description}
+            />
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+              {AI_SOLUTIONS_SECTION.items.map((item) => (
+                <RevealItem key={item.title} className="h-full">
+                  <Card hoverable className="h-full">
+                    <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                  </Card>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </Container>
+        </Section>
+      ) : null}
+
+      {isAutomationService ? (
+        <>
+          <Section
+            id={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.id}
+            {...marketingSection("service-detail-automation", "workflow-showcase")}
+            className="overflow-x-hidden"
+          >
+            <Container className="min-w-0">
+              <SectionHeading
+                eyebrow={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.eyebrow}
+                title={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.title}
+                description={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.description}
+              />
+              <AutomationWorkflowShowcase
+                workflows={[...AUTOMATION_WORKFLOW_SHOWCASE_SECTION.workflows]}
+              />
+            </Container>
+          </Section>
+
+          <Section {...marketingSection("service-detail-automation", "automation-types")}>
+            <Container>
+              <SectionHeading
+                eyebrow={AUTOMATION_TYPES_SECTION.eyebrow}
+                title={AUTOMATION_TYPES_SECTION.title}
+                description={AUTOMATION_TYPES_SECTION.description}
+              />
+              <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+                {AUTOMATION_TYPES_SECTION.items.map((item) => (
+                  <RevealItem key={item.title} className="h-full">
+                    <Card hoverable className="h-full">
+                      <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                    </Card>
+                  </RevealItem>
+                ))}
+              </RevealGroup>
+            </Container>
+          </Section>
+        </>
+      ) : null}
+
+      {isTechnicalSeoService ? (
+        <Section
+          id={TECHNICAL_SEO_VISIBILITY_SECTION.id}
+          {...marketingSection("service-detail-technical-seo", "search-foundation")}
+          className="overflow-x-hidden"
+        >
+          <Container className="min-w-0">
+            <SectionHeading
+              eyebrow={TECHNICAL_SEO_VISIBILITY_SECTION.eyebrow}
+              title={TECHNICAL_SEO_VISIBILITY_SECTION.title}
+              description={TECHNICAL_SEO_VISIBILITY_SECTION.description}
+            />
+            <SeoVisibilityFoundation
+              flow={TECHNICAL_SEO_VISIBILITY_SECTION.flow}
+              withoutSetup={TECHNICAL_SEO_VISIBILITY_SECTION.withoutSetup}
+              withSetup={TECHNICAL_SEO_VISIBILITY_SECTION.withSetup}
+            />
+          </Container>
+        </Section>
+      ) : null}
+
+      {isTechnicalSeoService ? (
+        <Section
+          id={TECHNICAL_SEO_SETUP_CATEGORIES_SECTION.id}
+          {...marketingSection("service-detail-technical-seo", "setup-categories")}
+        >
+          <Container>
+            <SectionHeading
+              eyebrow={TECHNICAL_SEO_SETUP_CATEGORIES_SECTION.eyebrow}
+              title={TECHNICAL_SEO_SETUP_CATEGORIES_SECTION.title}
+              description={TECHNICAL_SEO_SETUP_CATEGORIES_SECTION.description}
+            />
+            <TechnicalSeoSetupCategories
+              categories={[...TECHNICAL_SEO_SETUP_CATEGORIES_SECTION.categories]}
+              footerNote={TECHNICAL_SEO_SETUP_CATEGORIES_SECTION.footerNote}
+            />
+          </Container>
+        </Section>
+      ) : null}
 
       {isWebsitesService ? (
         <>
@@ -621,59 +761,76 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </>
       ) : null}
 
-      {slug !== "mcp-servers" && slug !== "automation" && !isWebsitesService && (
+      {slug !== "mcp-servers" && !isConversionServicePage && (
         <Section size="compact">
           <StatBlock stats={HOME_STATS} />
         </Section>
       )}
 
-      {slug === "saas-applications" && (
-        <Section size="standard" layout="content" spacing="split" tone="inset">
+      {isMobileAppsService ? (
+        <Section {...marketingSection("service-detail-mobile-apps", "product-types")}>
           <Container>
             <SectionHeading
-              eyebrow="Our stack"
-              title="Our SaaS Development Stack"
-              description="We build modern, scalable SaaS applications using a proven, flexible tech stack—carefully selected for performance, scalability, and speed of execution."
+              eyebrow={MOBILE_PRODUCT_TYPES_SECTION.eyebrow}
+              title={MOBILE_PRODUCT_TYPES_SECTION.title}
+              description={MOBILE_PRODUCT_TYPES_SECTION.description}
             />
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+              {MOBILE_PRODUCT_TYPES_SECTION.items.map((item) => (
+                <RevealItem key={item.title} className="h-full">
+                  <Card hoverable className="h-full">
+                    <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                  </Card>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </Container>
+        </Section>
+      ) : null}
+
+      {isSaasService ? (
+        <Section {...marketingSection("service-detail-saas-applications", "product-types")}>
+          <Container>
+            <SectionHeading
+              eyebrow={SAAS_PRODUCT_TYPES_SECTION.eyebrow}
+              title={SAAS_PRODUCT_TYPES_SECTION.title}
+              description={SAAS_PRODUCT_TYPES_SECTION.description}
+            />
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+              {SAAS_PRODUCT_TYPES_SECTION.items.map((item) => (
+                <RevealItem key={item.title} className="h-full">
+                  <Card hoverable className="h-full">
+                    <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                  </Card>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </Container>
+        </Section>
+      ) : null}
+
+      {isSaasService ? (
+        <Section {...marketingSection("service-detail-saas-applications", "stack")}>
+          <Container>
+            <SectionHeading
+              eyebrow={SAAS_STACK_SECTION.eyebrow}
+              title={SAAS_STACK_SECTION.title}
+              description={SAAS_STACK_SECTION.description}
+            />
+            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+              {SAAS_STACK_SECTION.benefits.map((benefit) => (
+                <RevealItem key={benefit.title} className="h-full">
+                  <Card hoverable className="h-full">
+                    <h3 className="font-display text-lg tracking-tight">{benefit.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-text-muted">{benefit.description}</p>
+                  </Card>
+                </RevealItem>
+              ))}
+            </RevealGroup>
             <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-              {[
-                {
-                  category: "Core Development",
-                  items: ["Python", "Django", "JavaScript", "TypeScript", "Node.js", "REST APIs", "GraphQL"],
-                },
-                {
-                  category: "Frontend & Frameworks",
-                  items: ["Next.js", "React", "Vite", "Tailwind CSS", "ShadCN UI"],
-                },
-                {
-                  category: "AI & Automation Systems",
-                  items: ["Custom MCP servers", "AI-driven workflows", "API automation", "Background job systems", "Cron pipelines"],
-                },
-                {
-                  category: "Cloud & Infrastructure",
-                  items: ["AWS (S3, EC2, Lambda)", "Vercel", "Docker", "CI/CD pipelines", "Serverless architecture"],
-                },
-                {
-                  category: "Databases",
-                  items: ["PostgreSQL", "MongoDB", "Redis"],
-                },
-                {
-                  category: "Payments & Monetization",
-                  items: ["Stripe", "Webhooks", "Subscription systems"],
-                },
-                {
-                  category: "Email & Communication",
-                  items: ["SendGrid", "Resend", "SMTP systems", "Transactional email pipelines"],
-                },
-                {
-                  category: "CMS & Content Systems",
-                  items: ["Sanity", "Payload CMS", "Headless CMS architectures"],
-                },
-                {
-                  category: "Integrations & Tools",
-                  items: ["Third-party APIs", "OAuth systems", "Webhook integrations", "Zapier-style automation bridges"],
-                },
-              ].map((group) => (
+              {SAAS_STACK_GROUPS.map((group) => (
                 <RevealItem key={group.category} className="h-full">
                   <Card hoverable className="h-full">
                     <p className="font-mono text-[11px] uppercase tracking-wider text-primary">{group.category}</p>
@@ -690,22 +847,60 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               ))}
             </RevealGroup>
             <p className="mt-8 text-center text-sm text-text-muted max-w-2xl mx-auto">
-              We don&apos;t just pick tools—we combine them into a system that can build, launch, and scale SaaS products efficiently.
+              {SAAS_STACK_SECTION.footerNote}
             </p>
           </Container>
         </Section>
-      )}
+      ) : null}
 
       <Section {...marketingSection(serviceSectionPage, "overview")}>
         <Container>
           <SectionHeading
-            eyebrow={isWebsitesService ? WEBSITES_OUTCOMES_SECTION.eyebrow : "What gets built"}
+            eyebrow={
+              isWebsitesService
+                ? WEBSITES_OUTCOMES_SECTION.eyebrow
+                : isSaasService
+                  ? SAAS_SYSTEMS_SECTION.eyebrow
+                  : isMobileAppsService
+                    ? MOBILE_SYSTEMS_SECTION.eyebrow
+                    : isAutomationService
+                      ? AUTOMATION_OUTCOMES_SECTION.eyebrow
+                      : isTechnicalSeoService
+                        ? TECHNICAL_SEO_FOUNDATIONS_SECTION.eyebrow
+                        : isAiBusinessSystemsService
+                          ? AI_VALUE_SECTION.eyebrow
+                          : "What gets built"
+            }
             title={
               isWebsitesService
                 ? WEBSITES_OUTCOMES_SECTION.title
-                : "The actual surfaces and systems we ship."
+                : isSaasService
+                  ? SAAS_SYSTEMS_SECTION.title
+                  : isMobileAppsService
+                    ? MOBILE_SYSTEMS_SECTION.title
+                    : isAutomationService
+                      ? AUTOMATION_OUTCOMES_SECTION.title
+                      : isTechnicalSeoService
+                        ? TECHNICAL_SEO_FOUNDATIONS_SECTION.title
+                        : isAiBusinessSystemsService
+                          ? AI_VALUE_SECTION.title
+                          : "The actual surfaces and systems we ship."
             }
-            description={isWebsitesService ? WEBSITES_OUTCOMES_SECTION.description : undefined}
+            description={
+              isWebsitesService
+                ? WEBSITES_OUTCOMES_SECTION.description
+                : isSaasService
+                  ? SAAS_SYSTEMS_SECTION.description
+                  : isMobileAppsService
+                    ? MOBILE_SYSTEMS_SECTION.description
+                    : isAutomationService
+                      ? AUTOMATION_OUTCOMES_SECTION.description
+                      : isTechnicalSeoService
+                        ? TECHNICAL_SEO_FOUNDATIONS_SECTION.description
+                        : isAiBusinessSystemsService
+                          ? AI_VALUE_SECTION.description
+                          : undefined
+            }
           />
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {copy.builds.map((b) => (
@@ -724,27 +919,64 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <Container>
           <SectionHeading
             eyebrow={
-              isWebsitesService ? WEBSITES_WHY_CHOOSE_SECTION.eyebrow : "What makes it different"
+              isWebsitesService
+                ? WEBSITES_WHY_CHOOSE_SECTION.eyebrow
+                : isSaasService
+                  ? SAAS_WHY_FOUNDERS_SECTION.eyebrow
+                  : isMobileAppsService
+                    ? MOBILE_WHY_BUILD_SECTION.eyebrow
+                    : isAutomationService
+                      ? AUTOMATION_WHY_BUILD_SECTION.eyebrow
+                      : isTechnicalSeoService
+                        ? TECHNICAL_SEO_WHY_SECTION.eyebrow
+                        : isAiBusinessSystemsService
+                          ? AI_WHY_BUILD_SECTION.eyebrow
+                          : "What makes it different"
             }
             title={
               isWebsitesService
                 ? WEBSITES_WHY_CHOOSE_SECTION.title
-                : "Operating choices, not adjectives."
+                : isSaasService
+                  ? SAAS_WHY_FOUNDERS_SECTION.title
+                  : isMobileAppsService
+                    ? MOBILE_WHY_BUILD_SECTION.title
+                    : isAutomationService
+                      ? AUTOMATION_WHY_BUILD_SECTION.title
+                      : isTechnicalSeoService
+                        ? TECHNICAL_SEO_WHY_SECTION.title
+                        : isAiBusinessSystemsService
+                          ? AI_WHY_BUILD_SECTION.title
+                          : "Operating choices, not adjectives."
             }
             description={
               isWebsitesService
                 ? WEBSITES_WHY_CHOOSE_SECTION.description
-                : "The decisions that shape how this work actually feels to use, ship, and maintain."
+                : isSaasService
+                  ? SAAS_WHY_FOUNDERS_SECTION.description
+                  : isMobileAppsService
+                    ? MOBILE_WHY_BUILD_SECTION.description
+                    : isAutomationService
+                      ? AUTOMATION_WHY_BUILD_SECTION.description
+                      : isTechnicalSeoService
+                        ? TECHNICAL_SEO_WHY_SECTION.description
+                        : isAiBusinessSystemsService
+                          ? AI_WHY_BUILD_SECTION.description
+                          : "The decisions that shape how this work actually feels to use, ship, and maintain."
             }
           />
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
             {copy.differentiators.map((d) => (
               <RevealItem key={d.title} className="h-full">
                 <div className="h-full rounded-md border border-border bg-surface p-6">
-                  {!isWebsitesService ? (
+                  {!isConversionServicePage ? (
                     <div className="font-mono text-xs uppercase tracking-wider text-primary">Principle</div>
                   ) : null}
-                  <h3 className={cn("font-display text-xl tracking-tight", !isWebsitesService && "mt-2")}>
+                  <h3
+                    className={cn(
+                      "font-display text-xl tracking-tight",
+                      !isConversionServicePage && "mt-2",
+                    )}
+                  >
                     {d.title}
                   </h3>
                   <p className="mt-2 text-text-muted leading-7 text-pretty">{d.description}</p>
@@ -768,6 +1000,61 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 <WebsiteLaunchProcessTimeline steps={[...WEBSITES_LAUNCH_PROCESS_SECTION.steps]} />
               </div>
             </>
+          ) : isSaasService ? (
+            <>
+              <SectionHeading
+                eyebrow={SAAS_LAUNCH_PROCESS_SECTION.eyebrow}
+                title={SAAS_LAUNCH_PROCESS_SECTION.title}
+                description={SAAS_LAUNCH_PROCESS_SECTION.description}
+              />
+              <div className="mt-10">
+                <WebsiteLaunchProcessTimeline steps={[...SAAS_LAUNCH_PROCESS_SECTION.steps]} />
+              </div>
+            </>
+          ) : isMobileAppsService ? (
+            <>
+              <SectionHeading
+                eyebrow={MOBILE_LAUNCH_PROCESS_SECTION.eyebrow}
+                title={MOBILE_LAUNCH_PROCESS_SECTION.title}
+                description={MOBILE_LAUNCH_PROCESS_SECTION.description}
+              />
+              <div className="mt-10">
+                <WebsiteLaunchProcessTimeline steps={[...MOBILE_LAUNCH_PROCESS_SECTION.steps]} />
+              </div>
+            </>
+          ) : isAutomationService ? (
+            <>
+              <SectionHeading
+                eyebrow={AUTOMATION_PROCESS_SECTION.eyebrow}
+                title={AUTOMATION_PROCESS_SECTION.title}
+                description={AUTOMATION_PROCESS_SECTION.description}
+              />
+              <div className="mt-10">
+                <WebsiteLaunchProcessTimeline steps={[...AUTOMATION_PROCESS_SECTION.steps]} />
+              </div>
+            </>
+          ) : isTechnicalSeoService ? (
+            <>
+              <SectionHeading
+                eyebrow={TECHNICAL_SEO_PROCESS_SECTION.eyebrow}
+                title={TECHNICAL_SEO_PROCESS_SECTION.title}
+                description={TECHNICAL_SEO_PROCESS_SECTION.description}
+              />
+              <div className="mt-10">
+                <WebsiteLaunchProcessTimeline steps={[...TECHNICAL_SEO_PROCESS_SECTION.steps]} />
+              </div>
+            </>
+          ) : isAiBusinessSystemsService ? (
+            <>
+              <SectionHeading
+                eyebrow={AI_BUSINESS_SYSTEMS_PROCESS_SECTION.eyebrow}
+                title={AI_BUSINESS_SYSTEMS_PROCESS_SECTION.title}
+                description={AI_BUSINESS_SYSTEMS_PROCESS_SECTION.description}
+              />
+              <div className="mt-10">
+                <WebsiteLaunchProcessTimeline steps={[...AI_BUSINESS_SYSTEMS_PROCESS_SECTION.steps]} />
+              </div>
+            </>
           ) : (
             <>
               <SectionHeading eyebrow="Delivery" title="How an engagement runs end-to-end." />
@@ -779,7 +1066,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      {related.length > 0 && (
+      {related.length > 0 &&
+        !isSaasService &&
+        !isMobileAppsService &&
+        !isAutomationService &&
+        !isTechnicalSeoService &&
+        !isAiBusinessSystemsService && (
         <Section {...marketingSection(serviceSectionPage, "proof")}>
           <Container>
             <div className="flex items-end justify-between gap-6 flex-wrap">
@@ -798,6 +1090,22 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </Container>
         </Section>
       )}
+
+      {isTechnicalSeoService ? (
+        <Section
+          id={TECHNICAL_SEO_DELIVERABLES_SECTION.id}
+          {...marketingSection("service-detail-technical-seo", "whats-included")}
+        >
+          <Container className="min-w-0">
+            <SectionHeading
+              eyebrow={TECHNICAL_SEO_DELIVERABLES_SECTION.eyebrow}
+              title={TECHNICAL_SEO_DELIVERABLES_SECTION.title}
+              description={TECHNICAL_SEO_DELIVERABLES_SECTION.description}
+            />
+            <SeoDeliverablesChecklist categories={[...TECHNICAL_SEO_DELIVERABLES_SECTION.categories]} />
+          </Container>
+        </Section>
+      ) : null}
 
       {!isWebsitesService ? engagementModelsSection : null}
 
@@ -820,12 +1128,32 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             title={
               isWebsitesService
                 ? "Common website project questions, answered."
-                : `${copy.eyebrow} questions, answered.`
+                : isSaasService
+                  ? "Common SaaS project questions, answered."
+                  : isMobileAppsService
+                    ? "Common mobile product questions, answered."
+                    : isAutomationService
+                      ? "Common automation questions, answered."
+                      : isTechnicalSeoService
+                        ? "Common technical SEO questions, answered."
+                        : isAiBusinessSystemsService
+                          ? "Common AI implementation questions, answered."
+                          : `${copy.eyebrow} questions, answered.`
             }
             description={
               isWebsitesService
                 ? "Timelines, ownership, platforms, support, and pricing—covered before you book a call."
-                : undefined
+                : isSaasService
+                  ? "MVP timelines, stack, ownership, integrations, and post-launch support—covered before you book a call."
+                  : isMobileAppsService
+                    ? "Platforms, MVPs, store submission, ownership, and post-launch support—covered before you book a call."
+                    : isAutomationService
+                      ? "Platforms, failures, data handling, implementation timelines, and expansion—covered before you book a call."
+                      : isTechnicalSeoService
+                        ? "Setup scope, rankings, analytics, schema, Core Web Vitals, and post-launch support—covered before you book a call."
+                        : isAiBusinessSystemsService
+                          ? "Use cases, integrations, data handling, implementation timelines, and ongoing support—covered before you book a call."
+                          : undefined
             }
             align="center"
           />
@@ -836,20 +1164,90 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       <CTABand
-        title={isWebsitesService ? WEBSITES_SERVICE_CTA.title : `${copy.primaryCta} — let's talk specifics.`}
+        title={
+          isWebsitesService
+            ? WEBSITES_SERVICE_CTA.title
+            : isSaasService
+              ? SAAS_SERVICE_CTA.title
+              : isMobileAppsService
+                ? MOBILE_APPS_SERVICE_CTA.title
+                : isAutomationService
+                  ? AUTOMATION_SERVICE_CTA.title
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_SERVICE_CTA.title
+                    : isAiBusinessSystemsService
+                      ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.title
+                      : `${copy.primaryCta} — let's talk specifics.`
+        }
         description={
           isWebsitesService
             ? WEBSITES_SERVICE_CTA.description
-            : "A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
+            : isSaasService
+              ? SAAS_SERVICE_CTA.description
+              : isMobileAppsService
+                ? MOBILE_APPS_SERVICE_CTA.description
+                : isAutomationService
+                  ? AUTOMATION_SERVICE_CTA.description
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_SERVICE_CTA.description
+                    : isAiBusinessSystemsService
+                      ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.description
+                      : "A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
         }
         primary={{
-          label: isWebsitesService ? WEBSITES_SERVICE_CTA.primaryLabel : copy.primaryCta,
-          href: isWebsitesService ? WEBSITES_SERVICE_CTA.primaryHref : "/book-appointment",
+          label: isWebsitesService
+            ? WEBSITES_SERVICE_CTA.primaryLabel
+            : isSaasService
+              ? SAAS_SERVICE_CTA.primaryLabel
+              : isMobileAppsService
+                ? MOBILE_APPS_SERVICE_CTA.primaryLabel
+                : isAutomationService
+                  ? AUTOMATION_SERVICE_CTA.primaryLabel
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_SERVICE_CTA.primaryLabel
+                    : isAiBusinessSystemsService
+                      ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.primaryLabel
+                      : copy.primaryCta,
+          href: isWebsitesService
+            ? WEBSITES_SERVICE_CTA.primaryHref
+            : isSaasService
+              ? SAAS_SERVICE_CTA.primaryHref
+              : isMobileAppsService
+                ? MOBILE_APPS_SERVICE_CTA.primaryHref
+                : isAutomationService
+                  ? AUTOMATION_SERVICE_CTA.primaryHref
+                  : isTechnicalSeoService
+                    ? TECHNICAL_SEO_SERVICE_CTA.primaryHref
+                    : isAiBusinessSystemsService
+                      ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.primaryHref
+                      : "/book-appointment",
         }}
         secondary={
           isWebsitesService
             ? { label: WEBSITES_SERVICE_CTA.secondaryLabel, href: WEBSITES_SERVICE_CTA.secondaryHref }
-            : { label: "Open WhatsApp", href: WHATSAPP_HREF }
+            : isSaasService
+              ? { label: SAAS_SERVICE_CTA.secondaryLabel, href: SAAS_SERVICE_CTA.secondaryHref }
+              : isMobileAppsService
+                ? {
+                    label: MOBILE_APPS_SERVICE_CTA.secondaryLabel,
+                    href: MOBILE_APPS_SERVICE_CTA.secondaryHref,
+                  }
+                : isAutomationService
+                  ? {
+                      label: AUTOMATION_SERVICE_CTA.secondaryLabel,
+                      href: AUTOMATION_SERVICE_CTA.secondaryHref,
+                    }
+                  : isTechnicalSeoService
+                    ? {
+                        label: TECHNICAL_SEO_SERVICE_CTA.secondaryLabel,
+                        href: TECHNICAL_SEO_SERVICE_CTA.secondaryHref,
+                      }
+                    : isAiBusinessSystemsService
+                      ? {
+                          label: AI_BUSINESS_SYSTEMS_SERVICE_CTA.secondaryLabel,
+                          href: AI_BUSINESS_SYSTEMS_SERVICE_CTA.secondaryHref,
+                        }
+                      : { label: "Open WhatsApp", href: WHATSAPP_HREF }
         }
       />
     </>

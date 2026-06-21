@@ -436,7 +436,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           answer: "Yes. It is built as a launch foundation and designed to be extended with your product logic.",
         },
       ],
-      related_service_slugs: ["template-customization", "saas-applications"],
+      related_service_slugs: ["ai-business-systems", "saas-applications"],
     },
     {
       slug: "ai-chatbot-qualification-starter",
@@ -495,7 +495,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           comparison_points: ["Implementation setup", "Integration QA"],
         },
       ],
-      related_service_slugs: ["automation", "template-customization"],
+      related_service_slugs: ["automation", "ai-business-systems"],
     },
     {
       slug: "mcp-server-kickstart-kit",
@@ -666,7 +666,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           comparison_points: ["Setup by Growrix", "Launch QA"],
         },
       ],
-      related_service_slugs: ["template-customization", "websites"],
+      related_service_slugs: ["ai-business-systems", "websites"],
     },
     {
       slug: "free-conversion-landing-starter",
@@ -722,7 +722,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           comparison_points: ["Deploy + integration", "Launch QA"],
         },
       ],
-      related_service_slugs: ["template-customization"],
+      related_service_slugs: ["ai-business-systems"],
     },
   ] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }
@@ -786,7 +786,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
           comparison_points: ["Brand customization", "ESP setup support"],
         },
       ],
-      related_service_slugs: ["template-customization", "automation"],
+      related_service_slugs: ["ai-business-systems", "automation"],
     },
     {
       slug: "email-pack-ecommerce-revenue",
@@ -845,7 +845,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
           comparison_points: ["Brand customization", "Testing support"],
         },
       ],
-      related_service_slugs: ["template-customization", "automation"],
+      related_service_slugs: ["ai-business-systems", "automation"],
     },
     {
       slug: "email-pack-business-operations",
@@ -904,7 +904,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
           comparison_points: ["Brand customization", "ESP setup support"],
         },
       ],
-      related_service_slugs: ["template-customization", "automation"],
+      related_service_slugs: ["ai-business-systems", "automation"],
     },
   ] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }

@@ -116,7 +116,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 ))}
               </div>
             </div>
-            <LinkButton href="/services/template-customization" variant="outline" size="sm">
+            <LinkButton href="/book-appointment" variant="outline" size="sm">
               Need Done-For-You setup?
             </LinkButton>
           </div>

@@ -253,7 +253,7 @@ const WEBSITE_TEMPLATE_TIER_PRESETS: Record<string, WebsiteTemplateTierPreset> =
     helper: "Best for teams that prefer managing everything themselves.",
   },
   premium: {
-    label: "Template Customization",
+    label: "Done-For-You Setup",
     price: "$499",
     description:
       "We'll transform the template into your business website, configure available integrations, and deploy it for launch. This is the fastest and most cost-effective way to get a professional website online.",
@@ -284,7 +284,7 @@ const WEBSITE_TEMPLATE_TIER_PRESETS: Record<string, WebsiteTemplateTierPreset> =
     price: "Custom Pricing",
     description:
       "A fully tailored website engagement designed around your business goals, structure, and growth plans. Instead of adapting your business to a template, we design the website experience around your business.",
-    includesHeading: "Includes Everything in Template Customization Plus",
+    includesHeading: "Includes Everything in Done-For-You Setup Plus",
     includes: [
       "Discovery and planning workshops",
       "Website strategy",
@@ -1263,7 +1263,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   You already have the skills or team to customize, deploy, and manage the website yourself.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Template Customization</strong><br />
+                  <strong>Done-For-You Setup</strong><br />
                   You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
@@ -1354,7 +1354,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       <tr>
                         <th className="px-4 py-3 font-medium">Capability</th>
                         <th className="px-4 py-3 font-medium">Template Only</th>
-                        <th className="px-4 py-3 font-medium">Template Customization</th>
+                        <th className="px-4 py-3 font-medium">Done-For-You Setup</th>
                         <th className="px-4 py-3 font-medium">Business Launch</th>
                       </tr>
                     </thead>
@@ -1771,7 +1771,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       You already have the skills or team to customize, deploy, and manage the website yourself.
                     </p>
                     <p className="mt-2 text-sm leading-6 text-text-muted">
-                      <strong>Template Customization</strong><br />
+                      <strong>Done-For-You Setup</strong><br />
                       You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
                     </p>
                     <p className="mt-2 text-sm leading-6 text-text-muted">
@@ -1877,7 +1877,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                           <tr>
                             <th className="px-4 py-3 font-medium">Capability</th>
                             <th className="px-4 py-3 font-medium">Template Only</th>
-                            <th className="px-4 py-3 font-medium">Template Customization</th>
+                            <th className="px-4 py-3 font-medium">Done-For-You Setup</th>
                             <th className="px-4 py-3 font-medium">Business Launch</th>
                           </tr>
                         </thead>
@@ -2080,7 +2080,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   You already have the skills or team to customize, deploy, and manage the website yourself.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Template Customization</strong><br />
+                  <strong>Done-For-You Setup</strong><br />
                   You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
@@ -2186,7 +2186,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       <tr>
                         <th className="px-4 py-3 font-medium">Capability</th>
                         <th className="px-4 py-3 font-medium">Template Only</th>
-                        <th className="px-4 py-3 font-medium">Template Customization</th>
+                        <th className="px-4 py-3 font-medium">Done-For-You Setup</th>
                         <th className="px-4 py-3 font-medium">Business Launch</th>
                       </tr>
                     </thead>

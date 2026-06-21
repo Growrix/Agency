@@ -18,7 +18,7 @@ export const HOME_SERVICE_OUTCOME_DESCRIPTIONS: Record<string, string> = {
   "mobile-apps": "Turn mobile ideas into credible launch experiences that convert downloads into users.",
   automation: "Eliminate repetitive tasks and free up your team to focus on growth.",
   "technical-seo": "Get discovered faster with search, analytics, and performance tuned from day one.",
-  "template-customization": "Go live in days with expert setup—branding, deploy, and integrations handled for you.",
+  "ai-business-systems": "Implement AI assistants, knowledge systems, and workflows that improve operations—not hype.",
 };
 
 export const HOME_TEMPLATES_MARKETPLACE_COPY = {

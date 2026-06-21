@@ -15,6 +15,11 @@ export type MarketingPageId =
   | "services"
   | "service-detail"
   | "service-detail-websites"
+  | "service-detail-saas-applications"
+  | "service-detail-mobile-apps"
+  | "service-detail-automation"
+  | "service-detail-technical-seo"
+  | "service-detail-ai-business-systems"
   | "pricing"
   | "contact"
   | "faq"
@@ -64,10 +69,13 @@ export const MARKETING_SECTIONS: Record<
   },
   services: {
     hero: section("default", "hero"),
-    compare: section("inset"),
     highlights: section("default"),
+    compare: section("inset"),
+    ecosystem: section("default"),
     process: section("inset"),
-    reviews: section("default"),
+    stack: section("default"),
+    proof: section("inset"),
+    faq: section("default"),
     cta: section("default", "compact"),
   },
   "service-detail": {
@@ -92,11 +100,67 @@ export const MARKETING_SECTIONS: Record<
     faq: section("inset"),
     cta: section("default", "compact"),
   },
+  "service-detail-saas-applications": {
+    hero: section("default", "hero"),
+    "product-types": section("inset"),
+    stack: section("default"),
+    overview: section("inset"),
+    deliverables: section("default"),
+    process: section("inset"),
+    engagement: section("default"),
+    faq: section("inset"),
+    cta: section("default", "compact"),
+  },
+  "service-detail-mobile-apps": {
+    hero: section("default", "hero"),
+    "product-types": section("inset"),
+    overview: section("default"),
+    deliverables: section("inset"),
+    process: section("default"),
+    engagement: section("inset"),
+    faq: section("default"),
+    cta: section("default", "compact"),
+  },
+  "service-detail-automation": {
+    hero: section("default", "hero"),
+    "workflow-showcase": section("inset"),
+    "automation-types": section("default"),
+    overview: section("inset"),
+    deliverables: section("default"),
+    process: section("inset"),
+    engagement: section("default"),
+    faq: section("inset"),
+    cta: section("default", "compact"),
+  },
+  "service-detail-technical-seo": {
+    hero: section("default", "hero"),
+    "search-foundation": section("inset"),
+    "setup-categories": section("default"),
+    overview: section("inset"),
+    deliverables: section("default"),
+    "whats-included": section("inset"),
+    process: section("default"),
+    engagement: section("inset"),
+    faq: section("default"),
+    cta: section("default", "compact"),
+  },
+  "service-detail-ai-business-systems": {
+    hero: section("default", "hero"),
+    "ai-solutions": section("inset"),
+    overview: section("default"),
+    deliverables: section("inset"),
+    process: section("default"),
+    engagement: section("inset"),
+    faq: section("default"),
+    cta: section("default", "compact"),
+  },
   pricing: {
     hero: section("default", "hero"),
-    tabs: section("default", "compact"),
-    tiers: section("inset"),
-    compare: section("default"),
+    startingPoints: section("default"),
+    serviceRanges: section("inset"),
+    deliveryComparison: section("default"),
+    scoping: section("inset"),
+    journeys: section("default"),
     faq: section("inset"),
     cta: section("default", "compact"),
   },
@@ -120,8 +184,10 @@ export const MARKETING_SECTIONS: Record<
     hero: section("default", "hero"),
     filters: section("default", "compact"),
     grid: section("inset"),
-    trust: section("inset", "compact"),
+    capabilities: section("default"),
+    delivery: section("inset"),
     reviews: section("default"),
+    faq: section("inset"),
     cta: section("default", "compact"),
   },
   "additional-services": {

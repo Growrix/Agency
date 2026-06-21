@@ -11,7 +11,7 @@ export const PRIMARY_NAV = [
       { label: "Mobile Apps", href: "/services/mobile-apps", description: "App launch sites, companion apps, and store-ready mobile experiences." },
       { label: "Automation", href: "/services/automation", description: "Operational systems that remove repetitive work." },
       { label: "Technical SEO", href: "/services/technical-seo", description: "One-time search, analytics, and Core Web Vitals setup." },
-      { label: "Template Customization", href: "/services/template-customization", description: "Done-For-You setup for purchased templates — branding, deploy, and integrations." },
+      { label: "AI Business Systems", href: "/services/ai-business-systems", description: "Practical AI implementation for assistants, knowledge systems, and operational workflows." },
     ],
   },
   {
@@ -39,7 +39,7 @@ export const FOOTER_NAV = {
     { label: "Mobile Apps", href: "/services/mobile-apps" },
     { label: "Automation", href: "/services/automation" },
     { label: "Technical SEO", href: "/services/technical-seo" },
-    { label: "Template Customization", href: "/services/template-customization" },
+    { label: "AI Business Systems", href: "/services/ai-business-systems" },
   ],
   "Digital Products": [
     { label: "All Digital Products", href: "/digital-products" },

@@ -188,7 +188,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
                 href: "/digital-products/category/website-templates",
               },
               {
-                tier: "Template Customization",
+                tier: "Done-For-You Setup",
                 price: premiumPrice,
                 desc: "Branding, content setup, and deployment-ready handoff by our team.",
                 includes: ["Brand setup", "Content population", "Core integrations", "Launch handoff"],

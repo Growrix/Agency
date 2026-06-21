@@ -18,7 +18,7 @@ export const THREE_PATH_ROWS = [
     visitor: "Non-technical owner",
     want: "Setup and customization",
     funnel: "Product page → Done-For-You tier → Service request → Book call",
-    cta: { label: "See customization", href: "/services/template-customization" },
+    cta: { label: "Request setup", href: "/book-appointment" },
   },
   {
     visitor: "Serious founder",

@@ -10,7 +10,6 @@ import {
 	DocumentTextIcon,
 	MagnifyingGlassCircleIcon,
 	SparklesIcon,
-	WrenchScrewdriverIcon,
 	WindowIcon,
 } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
@@ -21,33 +20,42 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
-import { AdditionalServices } from "@/components/sections/AdditionalServices";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import {
-	FAQ_GENERAL,
-	PROCESS_STEPS,
-} from "@/lib/content";
+	ServiceEcosystemGrid,
+	ServicesHeroEcosystem,
+} from "@/components/sections/ServicesHeroEcosystem";
+import { PROCESS_STEPS } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
-import { WHATSAPP_HREF } from "@/lib/nav";
 import { marketingSection } from "@/lib/marketing-composition";
+import {
+	SERVICES_DELIVERY_FRAMEWORK,
+	SERVICES_ECOSYSTEM_SECTION,
+	SERVICES_HERO_ECOSYSTEM_LINKS,
+	SERVICES_LANDING_CTA,
+	SERVICES_LANDING_FAQ,
+	SERVICES_LANDING_HERO,
+	SERVICES_LANDING_HIGHLIGHT_SLUGS,
+	SERVICES_LANDING_INTRO,
+	SERVICES_SUPPORTING_SYSTEMS,
+} from "@/lib/services-landing-content";
 import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
-import { listSanityFaqItems } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = {
-	title: "Services | Websites, SaaS, Mobile Apps, Automation, and Technical SEO",
+	title: "Services | Choose the Right Path for Your Business",
 	description:
-		"Compare the agency's services: premium websites, SaaS applications, mobile app launch systems, automation, and technical SEO — plus template customization for product buyers.",
+		"Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
 };
 
 const ICONS = {
 	websites: WindowIcon,
 	"saas-applications": CodeBracketSquareIcon,
 	"mobile-apps": DevicePhoneMobileIcon,
-	"template-customization": WrenchScrewdriverIcon,
+	"ai-business-systems": SparklesIcon,
 	automation: BoltIcon,
 	"technical-seo": MagnifyingGlassCircleIcon,
 	"html-business-profiles": DocumentTextIcon,
@@ -58,7 +66,7 @@ const FIT_NOTES: Record<string, string> = {
 	websites: "Best when brand perception, conversion architecture, and speed all matter at once.",
 	"saas-applications": "Best when you need a real product team across SaaS, dashboards, and companion mobile experiences.",
 	"mobile-apps": "Best when you need an app launch site, companion app, or store-ready mobile surface alongside your product.",
-	"template-customization": "Best after you buy a template and need branding, deployment, forms, and launch support without touching code.",
+	"ai-business-systems": "Best when you need practical AI assistants, knowledge systems, or operational workflows—not experiments.",
 	automation: "Best when repetitive ops work around sales, support, reporting, or onboarding is slowing the main product.",
 	"technical-seo": "Best when search visibility, analytics, and Core Web Vitals need to be configured correctly from launch.",
 };
@@ -70,7 +78,7 @@ const GOAL_ROWS = [
 			websites: "Convert and position the brand",
 			"saas-applications": "Ship or rebuild a product",
 			"mobile-apps": "Launch a credible mobile surface",
-			"template-customization": "Launch a purchased template with expert setup",
+			"ai-business-systems": "Implement AI where it creates measurable value",
 			automation: "Remove manual operational work",
 			"technical-seo": "Get found and measured from day one",
 		},
@@ -81,7 +89,7 @@ const GOAL_ROWS = [
 			websites: "Medium",
 			"saas-applications": "High",
 			"mobile-apps": "Medium to high",
-			"template-customization": "Low to medium",
+			"ai-business-systems": "Medium to high",
 			automation: "Medium",
 			"technical-seo": "Low to medium",
 		},
@@ -92,7 +100,7 @@ const GOAL_ROWS = [
 			websites: "4–10 weeks",
 			"saas-applications": "8–24 weeks",
 			"mobile-apps": "4–16 weeks",
-			"template-customization": "3–14 days",
+			"ai-business-systems": "2–6 weeks",
 			automation: "2–8 weeks",
 			"technical-seo": "3–10 days",
 		},
@@ -103,7 +111,7 @@ const GOAL_ROWS = [
 			websites: "CRO, CMS, experiments",
 			"saas-applications": "Roadmap + ongoing releases",
 			"mobile-apps": "Release cadence + store updates",
-			"template-customization": "Launch support + optional maintenance",
+			"ai-business-systems": "Optimization + expansion",
 			automation: "Monitoring + optimization",
 			"technical-seo": "One-time setup + optional audits",
 		},
@@ -114,58 +122,52 @@ const GOAL_ROWS = [
 			websites: "Launch sprint or redesign track",
 			"saas-applications": "MVP sprint or product partner",
 			"mobile-apps": "Launch site sprint or companion MVP",
-			"template-customization": "Done-For-You setup package",
+			"ai-business-systems": "Discovery, build, or operations partner",
 			automation: "Audit sprint then implementation",
 			"technical-seo": "Essentials or full technical SEO sprint",
 		},
 	},
 ];
 
-const STACK_AREAS = [
-	{
-		title: "Website systems",
-		detail: "Next.js, design systems, responsive UI, motion, accessibility, and high-conversion page architecture.",
-	},
-	{
-		title: "SaaS products",
-		detail: "Typed APIs, auth, billing, dashboards, CMS, databases, and the product infrastructure behind real launches.",
-	},
-	{
-		title: "AI and agent tooling",
-		detail: "MCP servers, retrieval, evaluation-aware flows, approvals, and traceable automations when the roadmap needs them.",
-	},
-	{
-		title: "Commerce and growth",
-		detail: "Stripe, booking, analytics, SEO, experimentation, CRM and lifecycle integration.",
-	},
-];
-
 export default async function ServicesPage() {
 	const portfolio = await listPublicPortfolio();
-	const services = (await listPublicServices()).filter((service) => service.slug !== "html-business-profiles");
-	const cmsFaqItems = await listSanityFaqItems().catch(() => []);
-	const faqItems = cmsFaqItems.length > 0
-		? cmsFaqItems.slice(0, 5).map(({ question, answer }) => ({ question, answer }))
-		: FAQ_GENERAL.slice(0, 5);
+	const allServices = (await listPublicServices()).filter(
+		(service) => service.slug !== "html-business-profiles" && service.slug !== "mcp-servers",
+	);
+	const serviceBySlug = new Map(allServices.map((service) => [service.slug, service]));
+	const highlightServices = SERVICES_LANDING_HIGHLIGHT_SLUGS.map((slug) => serviceBySlug.get(slug)).filter(
+		(service): service is NonNullable<typeof service> => Boolean(service),
+	);
 
 	return (
 		<>
-			<Section {...marketingSection("services", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+			<Section
+				{...marketingSection("services", "hero")}
+				layout="viewport"
+				className="hero-section relative overflow-hidden"
+			>
 				<div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
 				<Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-					<div className="max-w-3xl">
-						<Badge tone="primary" dot>Services</Badge>
-						<h1 className={cn("mt-5", HERO_TITLE_CLASS)}>
-							Choose the delivery path that fits the launch and the long-term product.
-						</h1>
-						<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-							We lead with premium websites, SaaS applications, mobile app launch systems, automation, and technical SEO. Template customization supports product buyers; HTML business profiles live under Digital Products.
-						</p>
-						<div className="mt-8 flex flex-wrap gap-3">
-							<LinkButton href="/book-appointment" size="lg">
-								Discuss my project <ArrowRightIcon className="size-4" />
-							</LinkButton>
-							<LinkButton href="#compare" variant="outline" size="lg">Compare services</LinkButton>
+					<div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+						<div className="lg:col-span-6 xl:col-span-7">
+							<Badge tone="primary" dot>
+								{SERVICES_LANDING_HERO.eyebrow}
+							</Badge>
+							<h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{SERVICES_LANDING_HERO.title}</h1>
+							<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
+								{SERVICES_LANDING_HERO.description}
+							</p>
+							<div className="mt-8 flex flex-wrap gap-3">
+								<LinkButton href={SERVICES_LANDING_HERO.primaryHref} size="lg">
+									{SERVICES_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+								</LinkButton>
+								<LinkButton href={SERVICES_LANDING_HERO.secondaryHref} variant="outline" size="lg">
+									{SERVICES_LANDING_HERO.secondaryCta}
+								</LinkButton>
+							</div>
+						</div>
+						<div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+							<ServicesHeroEcosystem links={[...SERVICES_HERO_ECOSYSTEM_LINKS]} />
 						</div>
 					</div>
 				</Container>
@@ -173,28 +175,33 @@ export default async function ServicesPage() {
 
 			<Section {...marketingSection("services", "highlights")}>
 				<Container>
-					<RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-							{services.map((service) => {
+					<SectionHeading
+						eyebrow={SERVICES_LANDING_INTRO.eyebrow}
+						title={SERVICES_LANDING_INTRO.title}
+						description={SERVICES_LANDING_INTRO.description}
+					/>
+					<RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+						{highlightServices.map((service) => {
 							const Icon = ICONS[service.slug as keyof typeof ICONS] ?? SparklesIcon;
 
 							return (
-								<RevealItem key={service.slug} className="h-full">
-									<Card hoverable className="h-full flex flex-col">
+								<RevealItem key={service.slug} className="h-full min-w-0">
+									<Card hoverable className="flex h-full flex-col">
 										<div className="flex items-start justify-between gap-4">
-											  <div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
+											<div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
 												<Icon className="size-6" />
 											</div>
-													<Badge tone="secondary">{service.delivery_timeline}</Badge>
+											<Badge tone="secondary">{service.delivery_timeline}</Badge>
 										</div>
-											<h2 className="mt-5 font-display text-2xl tracking-tight">{service.title}</h2>
-											<p className="mt-3 text-sm text-text-muted leading-6">{service.description}</p>
-											<p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
-												{service.short_description}
+										<h2 className="mt-5 font-display text-2xl tracking-tight">{service.title}</h2>
+										<p className="mt-3 text-sm text-text-muted leading-6">{service.description}</p>
+										<p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
+											{service.short_description}
 										</p>
-										<div className="mt-6 space-y-2 flex-1">
+										<div className="mt-6 flex-1 space-y-2">
 											{service.pillars.map((pillar) => (
 												<div key={pillar} className="flex items-center gap-2 text-sm">
-													  <CheckIcon className="size-4 text-primary" />
+													<CheckIcon className="size-4 shrink-0 text-primary" />
 													<span>{pillar}</span>
 												</div>
 											))}
@@ -202,7 +209,7 @@ export default async function ServicesPage() {
 										<p className="mt-5 text-sm text-text-muted leading-6">{FIT_NOTES[service.slug]}</p>
 										<Link
 											href={`/services/${service.slug}`}
-											  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover"
+											className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover"
 										>
 											Explore this service <ArrowRightIcon className="size-4" />
 										</Link>
@@ -221,13 +228,18 @@ export default async function ServicesPage() {
 						title="See the difference before you commit to a scope."
 						description="Compare the business shape of the work, where it sits in the larger launch, and when supporting systems are actually necessary."
 					/>
-					  <div className="mt-10 hidden lg:block overflow-hidden rounded-[18px] border border-border bg-surface">
+					<div className="mt-10 hidden overflow-hidden rounded-[18px] border border-border bg-surface lg:block">
 						<table className="w-full text-left text-sm">
-							  <thead className="bg-inset/70">
+							<thead className="bg-inset/70">
 								<tr>
-									  <th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">Decision point</th>
-									{services.map((service) => (
-										<th key={service.slug} className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">
+									<th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">
+										Decision point
+									</th>
+									{highlightServices.map((service) => (
+										<th
+											key={service.slug}
+											className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted"
+										>
 											{service.title}
 										</th>
 									))}
@@ -235,10 +247,13 @@ export default async function ServicesPage() {
 							</thead>
 							<tbody>
 								{GOAL_ROWS.map((row) => (
-									  <tr key={row.label} className="border-t border-border align-top">
+									<tr key={row.label} className="border-t border-border align-top">
 										<td className="px-5 py-4 font-display text-base tracking-tight">{row.label}</td>
-										{services.map((service) => (
-											  <td key={`${row.label}-${service.slug}`} className="px-5 py-4 text-text-muted leading-6">
+										{highlightServices.map((service) => (
+											<td
+												key={`${row.label}-${service.slug}`}
+												className="px-5 py-4 text-text-muted leading-6"
+											>
 												{row.values[service.slug as keyof typeof row.values]}
 											</td>
 										))}
@@ -249,7 +264,7 @@ export default async function ServicesPage() {
 					</div>
 
 					<RevealGroup className="mt-10 grid gap-4 lg:hidden" stagger={0.06}>
-						{services.map((service) => (
+						{highlightServices.map((service) => (
 							<RevealItem key={service.slug}>
 								<Card>
 									<div className="flex items-center justify-between gap-4">
@@ -259,8 +274,12 @@ export default async function ServicesPage() {
 									<dl className="mt-5 space-y-4">
 										{GOAL_ROWS.map((row) => (
 											<div key={`${service.slug}-${row.label}`}>
-												<dt className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{row.label}</dt>
-												<dd className="mt-1 text-sm leading-6">{row.values[service.slug as keyof typeof row.values]}</dd>
+												<dt className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+													{row.label}
+												</dt>
+												<dd className="mt-1 text-sm leading-6">
+													{row.values[service.slug as keyof typeof row.values]}
+												</dd>
 											</div>
 										))}
 									</dl>
@@ -271,14 +290,23 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<AdditionalServices />
-
-			<Section size="standard" layout="content" spacing="split">
+			<Section {...marketingSection("services", "ecosystem")}>
 				<Container>
 					<SectionHeading
-						eyebrow="Delivery system"
-						title="A consistent build method across every service."
-						description="Discovery, strategy, design, engineering, launch, and post-launch optimization are handled as one system instead of disconnected vendors."
+						eyebrow={SERVICES_ECOSYSTEM_SECTION.eyebrow}
+						title={SERVICES_ECOSYSTEM_SECTION.title}
+						description={SERVICES_ECOSYSTEM_SECTION.description}
+					/>
+					<ServiceEcosystemGrid combinations={[...SERVICES_ECOSYSTEM_SECTION.combinations]} />
+				</Container>
+			</Section>
+
+			<Section {...marketingSection("services", "process")}>
+				<Container>
+					<SectionHeading
+						eyebrow={SERVICES_DELIVERY_FRAMEWORK.eyebrow}
+						title={SERVICES_DELIVERY_FRAMEWORK.title}
+						description={SERVICES_DELIVERY_FRAMEWORK.description}
 					/>
 					<div className="mt-10">
 						<ProcessSteps steps={PROCESS_STEPS} />
@@ -286,18 +314,18 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section size="standard" layout="content" spacing="split" tone="inset">
+			<Section {...marketingSection("services", "stack")} tone="inset">
 				<Container>
 					<SectionHeading
-						eyebrow="Stack and integrations"
-						title="The surrounding systems matter as much as the page or app itself."
+						eyebrow={SERVICES_SUPPORTING_SYSTEMS.eyebrow}
+						title={SERVICES_SUPPORTING_SYSTEMS.title}
 					/>
 					<RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
-						{STACK_AREAS.map((area) => (
+						{SERVICES_SUPPORTING_SYSTEMS.areas.map((area) => (
 							<RevealItem key={area.title} className="h-full">
 								<Card hoverable className="h-full">
 									<h3 className="font-display text-lg tracking-tight">{area.title}</h3>
-									  <p className="mt-3 text-sm text-text-muted leading-6">{area.detail}</p>
+									<p className="mt-3 text-sm text-text-muted leading-6">{area.detail}</p>
 								</Card>
 							</RevealItem>
 						))}
@@ -305,12 +333,12 @@ export default async function ServicesPage() {
 				</Container>
 			</Section>
 
-			<Section size="standard" layout="content" spacing="split">
+			<Section {...marketingSection("services", "proof")}>
 				<Container>
 					<SectionHeading
 						eyebrow="Proof by service"
 						title="Recent work mapped to the capability behind it."
-						description="Most proof here is weighted toward websites and SaaS work, with supporting systems shown where they helped the main outcome."
+						description="Explore projects tagged by service category to see how each capability shows up in real launches."
 					/>
 					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
 						{portfolio.slice(0, 3).map((project) => (
@@ -320,34 +348,43 @@ export default async function ServicesPage() {
 						))}
 					</RevealGroup>
 
-					{SHOW_GOOGLE_REVIEWS && (
-						<GoogleReviews
-							eyebrow="Google reviews"
-							title="What clients say after launch."
-							description="Live reviews from the agency Google Business profile."
-						/>
-					)}
+					{SHOW_GOOGLE_REVIEWS ? (
+						<div className="mt-12">
+							<GoogleReviews
+								eyebrow="Google reviews"
+								title="What clients say after launch."
+								description="Live reviews from the agency Google Business profile."
+							/>
+						</div>
+					) : null}
 				</Container>
 			</Section>
 
-			<Section size="standard" layout="content" spacing="split" tone="inset">
+			<Section {...marketingSection("services", "faq")} tone="inset">
 				<Container width="reading">
 					<SectionHeading
 						eyebrow="FAQ"
-						title="Questions buyers usually ask before choosing a service."
+						title="Questions buyers ask before choosing a service."
+						description="Service selection, combinations, timelines, and what happens after launch—covered before you book a strategy call."
 						align="center"
 					/>
 					<div className="mt-10">
-							<Accordion items={faqItems} />
+						<Accordion items={[...SERVICES_LANDING_FAQ]} />
 					</div>
 				</Container>
 			</Section>
 
 			<CTABand
-				title="Need help choosing between a website, a SaaS build, or a ready launch?"
-				description="Tell us the business problem, the current bottleneck, and the timeline. We will map it to the right delivery model and the supporting systems only if they matter."
-				primary={{ label: "Book Appointment", href: "/book-appointment" }}
-				secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
+				title={SERVICES_LANDING_CTA.title}
+				description={SERVICES_LANDING_CTA.description}
+				primary={{
+					label: SERVICES_LANDING_CTA.primaryLabel,
+					href: SERVICES_LANDING_CTA.primaryHref,
+				}}
+				secondary={{
+					label: SERVICES_LANDING_CTA.secondaryLabel,
+					href: SERVICES_LANDING_CTA.secondaryHref,
+				}}
 			/>
 		</>
 	);
