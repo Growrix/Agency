@@ -59,11 +59,14 @@ export const MARKETING_SECTIONS: Record<
 > = {
   about: {
     hero: section("default", "hero"),
-    story: section("inset"),
     principles: section("default"),
+    founder: section("inset"),
+    whyExist: section("default"),
     process: section("inset"),
-    stack: section("default"),
-    team: section("inset"),
+    ecosystem: section("default"),
+    businessFirst: section("inset"),
+    howWeWork: section("default"),
+    clientValue: section("inset"),
     reviews: section("default"),
     cta: section("default", "compact"),
   },
