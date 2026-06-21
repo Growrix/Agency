@@ -15,7 +15,7 @@ export function ContactProcessTimeline() {
   return (
     <RevealGroup
       as="ol"
-      className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3"
+      className="relative mt-10 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-3"
       stagger={0.06}
       aria-label="What happens after you get in touch"
     >
@@ -24,12 +24,12 @@ export function ContactProcessTimeline() {
           as="li"
           key={step.title}
           className={cn(
-            "relative min-w-0",
+            "relative flex h-full min-w-0 flex-col",
             index < CONTACT_PROCESS.steps.length - 1 &&
               "lg:after:absolute lg:after:top-9 lg:after:left-[calc(50%+1.25rem)] lg:after:h-px lg:after:w-[calc(100%-2.5rem)] lg:after:bg-border/80 lg:after:content-['']",
           )}
         >
-          <div className="relative flex gap-4 lg:block">
+          <div className="relative flex h-full w-full gap-4 lg:block">
             <span
               className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-surface font-mono text-xs text-text-muted lg:absolute lg:-top-3 lg:left-4 lg:size-7"
               aria-hidden
@@ -37,12 +37,12 @@ export function ContactProcessTimeline() {
               {index + 1}
             </span>
             <span className="absolute left-4 top-10 bottom-0 w-px bg-border sm:hidden" aria-hidden />
-            <Card className="relative flex-1 p-5 sm:p-6 lg:pt-8">
+            <Card className="relative flex h-full min-h-0 flex-1 flex-col p-5 sm:p-6 lg:pt-8">
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
                 Step {step.number}
               </span>
               <h3 className="mt-2 font-display text-lg tracking-tight">{step.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-text-muted">{step.description}</p>
+              <p className="mt-2 flex-1 text-sm leading-6 text-text-muted">{step.description}</p>
             </Card>
           </div>
         </RevealItem>
