@@ -22,6 +22,7 @@ export type MarketingPageId =
   | "service-detail-ai-business-systems"
   | "pricing"
   | "contact"
+  | "book-appointment"
   | "faq"
   | "blog"
   | "portfolio"
@@ -175,6 +176,11 @@ export const MARKETING_SECTIONS: Record<
     form: section("inset"),
     explore: section("default"),
     faq: section("inset"),
+  },
+  "book-appointment": {
+    hero: section("default", "hero"),
+    form: section("inset"),
+    alternatives: section("default", "compact"),
   },
   faq: {
     hero: section("default", "hero"),
