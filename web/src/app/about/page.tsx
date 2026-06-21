@@ -1,11 +1,11 @@
-﻿import Image from "next/image";
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ArrowRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
+import { AboutFounderStory } from "@/components/sections/AboutFounderStory";
 import { AboutHeroPanel } from "@/components/sections/AboutHeroPanel";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { CTABand } from "@/components/sections/CTABand";
@@ -26,7 +26,6 @@ import {
 import { PROCESS_STEPS } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { marketingSection } from "@/lib/marketing-composition";
-import { ABOUT_IMAGES } from "@/lib/site-images";
 import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 
@@ -97,43 +96,7 @@ export default function AboutPage() {
       <Section {...marketingSection("about", "founder")} tone="inset">
         <Container>
           <SectionHeading eyebrow={ABOUT_FOUNDER_SECTION.eyebrow} title={ABOUT_FOUNDER_SECTION.title} />
-          <div className="mt-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            <Card className="overflow-hidden rounded-lg p-0">
-              <div className="relative aspect-4/5 overflow-hidden">
-                <Image
-                  src={ABOUT_IMAGES.founder.src}
-                  alt={`${ABOUT_FOUNDER_SECTION.founder.name}, Founder of GrowrixOS`}
-                  fill
-                  sizes="(min-width: 1024px) 34vw, 100vw"
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" aria-hidden />
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                  <p className="font-display text-xl tracking-tight">{ABOUT_FOUNDER_SECTION.founder.name}</p>
-                  <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-white/75">
-                    {ABOUT_FOUNDER_SECTION.founder.role}
-                  </p>
-                </div>
-              </div>
-            </Card>
-            <div className="space-y-4">
-              <Card className="p-5 sm:p-6">
-                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">Founder</p>
-                <h3 className="mt-2 font-display text-2xl tracking-tight">{ABOUT_FOUNDER_SECTION.founder.name}</h3>
-                <p className="mt-1 text-sm font-medium text-text-muted">{ABOUT_FOUNDER_SECTION.founder.role}</p>
-                <p className="mt-4 text-base leading-7 text-text-muted text-pretty">{ABOUT_FOUNDER_SECTION.founder.intro}</p>
-              </Card>
-              {ABOUT_FOUNDER_SECTION.timeline.map((card) => (
-                <Card key={card.title} className="p-5 sm:p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">{card.eyebrow}</p>
-                  <h3 className="mt-3 font-display text-xl tracking-tight sm:text-2xl">{card.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-text-muted text-pretty sm:text-base sm:leading-7">
-                    {card.description}
-                  </p>
-                </Card>
-              ))}
-            </div>
-          </div>
+          <AboutFounderStory />
         </Container>
       </Section>
 
