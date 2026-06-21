@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { HtmlBusinessProfilesCategoryLanding } from "@/components/sections/HtmlBusinessProfilesCategoryLanding";
-import { WebsiteTemplatesCategoryLanding } from "@/components/sections/WebsiteTemplatesCategoryLanding";
 import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { isHiddenProductCategorySlug } from "@/lib/feature-flags";
 import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { listPublicShopProducts } from "@/server/domain/catalog";
@@ -15,11 +15,6 @@ type PageProps = {
 export const revalidate = 180;
 
 const CATEGORY_METADATA: Record<string, { title: string; description: string }> = {
-  "website-templates": {
-    title: "Website Templates",
-    description:
-      "Production-ready website templates with Standard, Premium, and Done-For-You options. Buy a polished template or have Growrix OS launch it for you.",
-  },
   "website-templates-html-preview": {
     title: WEBSITE_TEMPLATE_PREVIEW.categoryPageTitle,
     description: WEBSITE_TEMPLATE_PREVIEW.categoryPageDescription,
@@ -59,8 +54,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductsCategoryPage({ params }: PageProps) {
   const { category } = await params;
+  if (isHiddenProductCategorySlug(category)) {
+    redirect("/digital-products");
+  }
   if (category === "saas-templates" || category === "ready-websites") {
-    redirect("/digital-products/category/website-templates");
+    redirect("/digital-products");
   }
 
   const categoryMetadata = CATEGORY_METADATA[category];
@@ -106,15 +104,6 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
       <>
         {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}
         <HtmlBusinessProfilesCategoryLanding products={products} />
-      </>
-    );
-  }
-  if (category === "website-templates") {
-    const products = await listPublicShopProducts({ category: "website-templates" });
-    return (
-      <>
-        {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}
-        <WebsiteTemplatesCategoryLanding products={products} />
       </>
     );
   }

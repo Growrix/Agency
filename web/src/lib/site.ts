@@ -37,6 +37,9 @@ export const DISALLOWED_CRAWL_PATHS = [
   "/dashboard",
   "/checkout",
   "/success",
+  "/Business-profile",
+  "/business-profile",
+  "/businessprofile",
 ] as const;
 
 export function absoluteUrl(path = "/") {

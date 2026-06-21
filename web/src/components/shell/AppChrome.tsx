@@ -16,8 +16,12 @@ type AppChromeProps = {
 export function AppChrome({ children }: AppChromeProps) {
   const pathname = usePathname();
   const isAdminSurface = pathname.startsWith("/admin");
+  const isStandaloneProfile =
+    pathname === "/Business-profile" ||
+    pathname === "/business-profile" ||
+    pathname === "/businessprofile";
 
-  if (isAdminSurface) {
+  if (isAdminSurface || isStandaloneProfile) {
     return (
       <>
         <main id="main" className="flex-1">

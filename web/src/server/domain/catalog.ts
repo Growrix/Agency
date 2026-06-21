@@ -2,7 +2,7 @@ import "server-only";
 
 import { unstable_cache } from "next/cache";
 import { SERVICES } from "@/lib/content";
-import { isHiddenServiceSlug } from "@/lib/feature-flags";
+import { isHiddenServiceSlug, isHiddenProductCategorySlug } from "@/lib/feature-flags";
 import {
   HTML_BUSINESS_PROFILE_TEMPLATES,
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
@@ -1089,7 +1089,7 @@ export async function listPublicShopCategories(): Promise<PublicShopCategoryReco
   const categoryMap = new Map<string, string>();
 
   for (const product of products) {
-    if (product.published === false) {
+    if (product.published === false || isHiddenProductCategorySlug(product.categorySlug)) {
       continue;
     }
 
@@ -1114,6 +1114,10 @@ export async function listPublicShopProducts(filters?: {
 
   return products.filter((product) => {
     if (product.published === false) {
+      return false;
+    }
+
+    if (isHiddenProductCategorySlug(product.categorySlug)) {
       return false;
     }
 
@@ -1152,7 +1156,7 @@ export async function getPublicShopProduct(slug: string): Promise<PublicShopProd
     (item) => (item.slug === slug || item.slug === alternateHtmlSlug) && item.published !== false,
   ) ?? null;
 
-  if (!product || isPlaceholderProduct(product)) {
+  if (!product || isPlaceholderProduct(product) || isHiddenProductCategorySlug(product.categorySlug)) {
     return null;
   }
 

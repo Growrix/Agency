@@ -26,7 +26,6 @@ const STATIC_ROUTES = [
 ] as const;
 
 const PRODUCT_CATEGORY_SLUGS = [
-  "website-templates",
   "website-templates-html-preview",
   "html-business-profiles",
 ] as const;

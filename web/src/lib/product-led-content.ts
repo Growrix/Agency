@@ -49,8 +49,7 @@ export const HOME_DIGITAL_PRODUCTS_COPY = {
 } as const;
 
 export const PRODUCT_CATEGORY_CHIPS = [
-  { label: "All digital products", href: "/digital-products" },
-  { label: "HTML templates", href: "/digital-products/category/html-business-profiles" },
-  { label: "Website templates", href: "/digital-products/category/website-templates" },
-  { label: WEBSITE_TEMPLATE_PREVIEW.productLedNavChip, href: "/digital-products/category/website-templates-html-preview" },
+  { label: "All Digital Products", href: "/digital-products" },
+  { label: "HTML Business Profiles", href: "/digital-products/category/html-business-profiles" },
+  { label: WEBSITE_TEMPLATE_PREVIEW.categoryNavLabel, href: "/digital-products/category/website-templates-html-preview" },
 ] as const;

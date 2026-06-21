@@ -1,4 +1,5 @@
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
+import { isHiddenProductCategorySlug } from "@/lib/feature-flags";
 
 export type ShopFilterState = {
   category?: string;
@@ -46,7 +47,9 @@ export function buildShopFilterOptions(
     categories: Array.from(
       new Map(items.map((item) => [item.categorySlug, item.category])).entries(),
       ([value, label]) => ({ value, label }),
-    ).sort(sortCategoryOptions),
+    )
+      .filter((option) => !isHiddenProductCategorySlug(option.value))
+      .sort(sortCategoryOptions),
     types: Array.from(
       new Map(items.map((item) => [item.typeSlug, item.type])).entries(),
       ([value, label]) => ({ value, label }),

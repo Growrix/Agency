@@ -81,7 +81,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                   {WEBSITE_TEMPLATE_PREVIEW.browseCollectionCta} <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton
-                  href={primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates"}
+                  href={primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates-html-preview#profiles"}
                   variant="outline"
                   size="lg"
                 >
@@ -157,9 +157,6 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
             <LinkButton href="/digital-products/category/website-templates-html-preview#profiles" variant="outline" size="lg">
               {WEBSITE_TEMPLATE_PREVIEW.browseCategoryCta} <ArrowUpRightIcon className="size-4" />
             </LinkButton>
-            <LinkButton href="/digital-products/category/website-templates" variant="ghost" size="lg">
-              View CMS Website Templates
-            </LinkButton>
           </div>
         </Container>
       </Section>
@@ -175,7 +172,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                 desc: "Download the template and deploy with your own team.",
                 includes: ["Template files", "Responsive structure", "Basic setup guidance", "Commercial usage rights"],
                 cta: "Get Template",
-                href: "/digital-products/category/website-templates",
+                href: primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products",
               },
               {
                 tier: "Branded Setup",

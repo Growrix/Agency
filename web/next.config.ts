@@ -95,13 +95,18 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/digital-products/category/saas-templates",
-        destination: "/digital-products/category/website-templates",
-        permanent: true,
+        destination: "/digital-products",
+        permanent: false,
       },
       {
         source: "/digital-products/category/ready-websites",
-        destination: "/digital-products/category/website-templates",
-        permanent: true,
+        destination: "/digital-products",
+        permanent: false,
+      },
+      {
+        source: "/digital-products/category/website-templates",
+        destination: "/digital-products",
+        permanent: false,
       },
       {
         source: "/previews/website-templates-html/:path*",
@@ -127,6 +132,20 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      {
+        source: "/Business-profile",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+          { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
+        ],
+      },
+      {
+        source: "/business-profile",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+          { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
+        ],
+      },
       {
         source: "/images/:path*",
         headers: [

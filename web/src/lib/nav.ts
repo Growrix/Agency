@@ -20,7 +20,6 @@ export const PRIMARY_NAV = [
     children: [
       { label: "All Digital Products", href: "/digital-products", description: "Browse the full digital product catalog." },
       { label: "HTML Business Profiles", href: "/digital-products/category/html-business-profiles", description: "Category-based templates with self-serve and done-for-you upgrade paths." },
-      { label: "Website Templates", href: "/digital-products/category/website-templates", description: "Ready website and SaaS templates for faster launches." },
       { label: WEBSITE_TEMPLATE_PREVIEW.categoryNavLabel, href: "/digital-products/category/website-templates-html-preview", description: WEBSITE_TEMPLATE_PREVIEW.categoryNavDescription },
       { label: "Bundles", href: "/digital-products/bundles", description: "Curated packs for agencies and founders." },
       { label: "Free Starters", href: "/digital-products/free", description: "Lead magnets and free launch-ready starters." },
@@ -47,7 +46,6 @@ export const FOOTER_NAV = {
     { label: "Bundles", href: "/digital-products/bundles" },
     { label: "Free Starters", href: "/digital-products/free" },
     { label: "HTML Business Profiles", href: "/digital-products/category/html-business-profiles" },
-    { label: "Website Templates", href: "/digital-products/category/website-templates" },
     { label: WEBSITE_TEMPLATE_PREVIEW.categoryNavLabel, href: "/digital-products/category/website-templates-html-preview" },
   ],
   Company: [

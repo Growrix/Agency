@@ -5,6 +5,14 @@ import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/
 const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
 
 export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (pathname === "/Business-profile" || pathname === "/business-profile") {
+    const response = NextResponse.rewrite(new URL("/businessprofile", request.url));
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return response;
+  }
+
   if (
     request.nextUrl.pathname.startsWith("/admin/login") ||
     request.nextUrl.pathname.startsWith("/dashboard/login")
@@ -55,5 +63,5 @@ function reject(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/dashboard/:path*", "/api/v1/admin/:path*", "/api/v1/me/:path*"],
+  matcher: ["/Business-profile", "/business-profile", "/admin/:path*", "/dashboard/:path*", "/api/v1/admin/:path*", "/api/v1/me/:path*"],
 };

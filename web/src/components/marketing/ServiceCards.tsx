@@ -7,6 +7,7 @@ import {
   MagnifyingGlassCircleIcon,
   SparklesIcon,
   WindowIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
@@ -22,6 +23,7 @@ const ICONS: Record<string, typeof WindowIcon> = {
   "mobile-apps": DevicePhoneMobileIcon,
   automation: BoltIcon,
   "technical-seo": MagnifyingGlassCircleIcon,
+  "template-customization": WrenchScrewdriverIcon,
 };
 
 const HIGHLIGHT_SLUGS = [
@@ -30,6 +32,7 @@ const HIGHLIGHT_SLUGS = [
   "mobile-apps",
   "automation",
   "technical-seo",
+  "template-customization",
 ] as const;
 
 export function ServiceCards({ services }: { services: PublicServiceRecord[] }) {
