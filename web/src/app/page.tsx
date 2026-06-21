@@ -12,7 +12,8 @@ import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { TrustBar } from "@/components/marketing/TrustBar";
+import { HeroTrustStrip } from "@/components/marketing/HeroTrustStrip";
+import { ReadyMadeSolutionsSection } from "@/components/marketing/ReadyMadeSolutionsSection";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 import { HomeDigitalProductsShowcase } from "@/components/marketing/HomeDigitalProductsShowcase";
 import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
@@ -37,6 +38,13 @@ import { WHATSAPP_HREF } from "@/lib/nav";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 import { homeSection } from "@/lib/homepage-composition";
+import {
+  HOME_AI_COPY,
+  HOME_CASE_STUDIES_COPY,
+  HOME_OPERATING_SYSTEM_COPY,
+  HOME_PREVIEW_COPY,
+  HOME_TEMPLATES_MARKETPLACE_COPY,
+} from "@/lib/home-conversion-content";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
@@ -54,7 +62,6 @@ import { cn } from "@/lib/utils";
 import { unstable_cache } from "next/cache";
 
 const SHOW_LIVE_SAAS_SECTION = false;
-const SHOW_HOME_TRUST_BAR = false;
 export const revalidate = 120;
 
 const getCachedHomePageContent = unstable_cache(
@@ -154,13 +161,13 @@ export default async function Home() {
               className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
               style={{ animationDelay: "90ms" }}
             >
-              {homeContent?.heroTitle ?? "Launch faster with ready-made SaaS templates, AI tools, and custom development support."}
+              {homeContent?.heroTitle ?? "Launch faster with ready-made systems, digital products, and expert growth support."}
             </h1>
             <p
               className="signal-rise mx-auto mt-6 max-w-3xl text-lg leading-7 text-pretty text-text-muted"
               style={{ animationDelay: "180ms" }}
             >
-              {homeContent?.heroDescription ?? "Buy production-ready digital products, customize them yourself, or hire GrowrixOS to set up, modify, and scale them for your business."}
+              {homeContent?.heroDescription ?? "Buy production-ready digital products, customize them yourself, or partner with GrowrixOS to implement, optimize, and scale what your business needs next."}
             </p>
             <div
               className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
@@ -191,6 +198,9 @@ export default async function Home() {
                 Ask AI Assistant
               </ConciergeTriggerButton>
             </div>
+            <div className="signal-rise mt-6" style={{ animationDelay: "340ms" }}>
+              <HeroTrustStrip />
+            </div>
             <p
               className="signal-rise mx-auto mt-6 max-w-2xl font-mono text-xs uppercase tracking-wider text-text-muted"
               style={{ animationDelay: "360ms" }}
@@ -202,40 +212,28 @@ export default async function Home() {
         </Container>
       </Section>
 
-      <HomeDigitalProductsShowcase products={publicProducts} />
-
       <ServiceCards services={services} />
-
-      <WebsiteTemplateHtmlPreviewShowcaseSections
-        slides={htmlPreviewSlides}
-        emptyFallbackSlide={htmlPreviewFallbackSlide}
-        reverseMobileLayout
-        showMobileSectionDivider
-        autoPlayMobileCarousel={false}
-        sectionTitleClassName={HERO_TITLE_CLASS}
-        sectionShell={homeSection("html-preview")}
-      />
 
       <Section {...homeSection("html-profiles")}>
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="New service"
-              title="HTML Business Profiles - category-based digital products"
-              description="Preview every built HTML business profile by category, then purchase directly from the product catalog with a clear template-to-checkout path."
+              eyebrow={HOME_TEMPLATES_MARKETPLACE_COPY.eyebrow}
+              title={HOME_TEMPLATES_MARKETPLACE_COPY.title}
+              description={HOME_TEMPLATES_MARKETPLACE_COPY.description}
               titleClassName={HERO_TITLE_CLASS}
             />
             <div className="flex flex-wrap gap-3">
               <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
                 Preview all profiles <ArrowUpRightIcon className="size-4" />
               </LinkButton>
-              <LinkButton href="/digital-products/category/html-business-profiles">
-                Browse category <ArrowRightIcon className="size-4" />
+              <LinkButton href="/digital-products/category/website-templates-html-preview">
+                Browse templates <ArrowRightIcon className="size-4" />
               </LinkButton>
             </div>
           </div>
 
-          <RevealGroup className="mt-10 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" stagger={0.07}>
+          <RevealGroup className="mt-8 grid w-full min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:mt-10 sm:gap-5" stagger={0.07}>
             {featuredHtmlBusinessProfileProducts.map((product) => (
               <RevealItem key={product.slug} className="h-full min-w-0">
                 <ShopProductHtmlMobilePreviewCard product={product} />
@@ -254,36 +252,47 @@ export default async function Home() {
         </Container>
       </Section>
 
-      {SHOW_HOME_TRUST_BAR ? <TrustBar /> : null}
-
       <FeaturedProducts
         products={featuredHtmlWebsiteTemplates}
         variant="html-preview"
         maxProducts={3}
-        eyebrow={homeContent?.shopSpotlight?.eyebrow ?? WEBSITE_TEMPLATE_PREVIEW.shopSpotlightEyebrow}
-        title={homeContent?.shopSpotlight?.title ?? "Production-ready templates with live desktop preview"}
-        description={
-          homeContent?.shopSpotlight?.description ??
-          WEBSITE_TEMPLATE_PREVIEW.shopSpotlightDescription
-        }
+        eyebrow="Featured templates"
+        title="Production-ready templates with live desktop preview"
+        description="Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems."
         ctaHref="/digital-products/category/website-templates-html-preview#profiles"
         ctaLabel={WEBSITE_TEMPLATE_PREVIEW.browseTemplatePreviewsCta}
       />
 
+      <WebsiteTemplateHtmlPreviewShowcaseSections
+        slides={htmlPreviewSlides}
+        emptyFallbackSlide={htmlPreviewFallbackSlide}
+        reverseMobileLayout
+        showMobileSectionDivider
+        autoPlayMobileCarousel={false}
+        sectionTitleClassName={HERO_TITLE_CLASS}
+        sectionShell={homeSection("html-preview")}
+        title={HOME_PREVIEW_COPY.title}
+        description={HOME_PREVIEW_COPY.description}
+      />
+
+      <HomeDigitalProductsShowcase products={publicProducts} />
+
+      <ReadyMadeSolutionsSection />
+
       <ThreePathExplainer />
 
-      {/* Featured Builds */}
+      {/* Featured Builds / Case Studies */}
       <Section {...homeSection("featured-builds")}>
         <Container>
           <SectionHeading
-              eyebrow={homeContent?.featuredBuilds?.eyebrow ?? "Featured builds"}
-              title={homeContent?.featuredBuilds?.title ?? "Proof from launches, rebuilds, and growth."}
-              description={homeContent?.featuredBuilds?.description ?? "A selection of websites and SaaS products we've shipped recently, plus the systems that kept them moving. Each engagement is shaped around a measurable result."}
+              eyebrow={HOME_CASE_STUDIES_COPY.eyebrow}
+              title={homeContent?.featuredBuilds?.title ?? HOME_CASE_STUDIES_COPY.title}
+              description={homeContent?.featuredBuilds?.description ?? HOME_CASE_STUDIES_COPY.description}
               titleClassName={HERO_TITLE_CLASS}
           />
-          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
+          <RevealGroup className="mt-8 grid auto-rows-fr gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-3" stagger={0.08}>
             {featuredProjects.map((p) => (
-              <RevealItem key={p.slug}>
+              <RevealItem key={p.slug} className="h-full">
                 <PortfolioCard project={p} />
               </RevealItem>
             ))}
@@ -297,6 +306,75 @@ export default async function Home() {
       </Section>
 
       <TrustStrip items={HOME_STACK_MARQUEE} tone={homeSection("trust-strip").tone} />
+
+      {/* Process / Operating System */}
+      <Section {...homeSection("process")}>
+        <Container>
+          <SectionHeading
+            eyebrow={HOME_OPERATING_SYSTEM_COPY.eyebrow}
+            title={HOME_OPERATING_SYSTEM_COPY.title}
+            description={HOME_OPERATING_SYSTEM_COPY.description}
+            titleClassName={HERO_TITLE_CLASS}
+          />
+          <div className="mt-8 sm:mt-10">
+            <ProcessSteps steps={PROCESS_STEPS} />
+          </div>
+        </Container>
+      </Section>
+
+      {/* AI Assistant */}
+      <Section {...homeSection("ai-concierge")}>
+        <Container>
+          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-5">
+              <SectionHeading
+                eyebrow={homeContent?.ai?.eyebrow ?? HOME_AI_COPY.eyebrow}
+                title={homeContent?.ai?.title ?? HOME_AI_COPY.title}
+                description={homeContent?.ai?.description ?? HOME_AI_COPY.description}
+                titleClassName={HERO_TITLE_CLASS}
+              />
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ConciergeTriggerButton>
+                  <SparklesIcon className="size-4" /> Ask AI Growrix OS
+                </ConciergeTriggerButton>
+                <LinkButton href={WHATSAPP_HREF} variant="outline">
+                  <ChatBubbleLeftRightIcon className="size-4" /> WhatsApp
+                </LinkButton>
+              </div>
+              <p className="mt-5 flex items-center gap-1.5 text-xs text-text-muted">
+                <ShieldCheckIcon className="size-3.5" /> {homeContent?.ai?.privacyNote ?? "Conversations are private and never used to train models."}
+              </p>
+            </div>
+            <div className="lg:col-span-7">
+              <Card className="border-white/10 bg-contrast text-contrast-text">
+                <div className="space-y-4">
+                  <div className="flex max-w-md gap-3">
+                    <div className="size-8 shrink-0 rounded-full bg-secondary" aria-hidden />
+                    <div className="rounded-[14px] bg-white/5 px-4 py-3 text-sm leading-6">
+                      Hey — I&apos;m thinking about rebuilding our SaaS dashboard. We&apos;re 12 people, 8k MAUs.
+                    </div>
+                  </div>
+                  <div className="ml-auto flex max-w-md justify-end gap-3">
+                    <div className="rounded-[14px] bg-primary px-4 py-3 text-sm leading-6 text-white">
+                      That sounds like a Product Partner engagement. We typically scope these in a 1-week discovery sprint. Want timelines and team sizing?
+                    </div>
+                    <div className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10">
+                      <CubeTransparentIcon className="size-4" aria-hidden />
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {["Show timelines", "Team & rates", "Talk to a human"].map((s) => (
+                      <span key={s} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </Container>
+      </Section>
 
       {/* # muted by request: keep Live SaaS section in code but hide on homepage */}
       {SHOW_LIVE_SAAS_SECTION ? (
@@ -366,75 +444,6 @@ export default async function Home() {
           </Container>
         </Section>
       ) : null}
-
-      {/* Process */}
-      <Section {...homeSection("process")}>
-        <Container>
-          <SectionHeading
-            eyebrow="How we work"
-            title="An operating system you can actually plan around."
-            description="No mystery process. Every engagement runs through these four phases with explicit outputs and clear cadence."
-            titleClassName={HERO_TITLE_CLASS}
-          />
-          <div className="mt-10">
-            <ProcessSteps steps={PROCESS_STEPS} />
-          </div>
-        </Container>
-      </Section>
-
-      {/* AI + Live Chat */}
-      <Section {...homeSection("ai-concierge")}>
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-5">
-              <SectionHeading
-                eyebrow={homeContent?.ai?.eyebrow ?? "AI Growrix OS"}
-                title={homeContent?.ai?.title ?? "Get the right answer before you book."}
-                description={homeContent?.ai?.description ?? "Ask about website scope, SaaS roadmaps, ready website fit, pricing, or timelines. The concierge keeps MCP and automation in context when they support the main build."}
-                titleClassName={HERO_TITLE_CLASS}
-              />
-              <div className="mt-8 flex flex-wrap gap-3">
-                <ConciergeTriggerButton>
-                  <SparklesIcon className="size-4" /> Ask AI Growrix OS
-                </ConciergeTriggerButton>
-                <LinkButton href={WHATSAPP_HREF} variant="outline">
-                  <ChatBubbleLeftRightIcon className="size-4" /> WhatsApp
-                </LinkButton>
-              </div>
-              <p className="mt-5 flex items-center gap-1.5 text-xs text-text-muted">
-                <ShieldCheckIcon className="size-3.5" /> {homeContent?.ai?.privacyNote ?? "Conversations are private and never used to train models."}
-              </p>
-            </div>
-            <div className="lg:col-span-7">
-              <Card className="border-white/10 bg-contrast text-contrast-text">
-                <div className="space-y-4">
-                  <div className="flex gap-3 max-w-md">
-                    <div className="size-8 shrink-0 rounded-full bg-secondary" aria-hidden />
-                    <div className="rounded-[14px] bg-white/5 px-4 py-3 text-sm leading-6">
-                      Hey — I&apos;m thinking about rebuilding our SaaS dashboard. We&apos;re 12 people, 8k MAUs.
-                    </div>
-                  </div>
-                  <div className="flex gap-3 max-w-md ml-auto justify-end">
-                    <div className="rounded-[14px] bg-primary px-4 py-3 text-sm leading-6 text-white">
-                      That sounds like a Product Partner engagement. We typically scope these in a 1-week discovery sprint. Want timelines and team sizing?
-                    </div>
-                    <div className="size-8 rounded-full bg-white/10 inline-flex items-center justify-center shrink-0">
-                      <CubeTransparentIcon className="size-4" aria-hidden />
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {["Show timelines", "Team & rates", "Talk to a human"].map((s) => (
-                      <span key={s} className="rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </Section>
 
       <Testimonials />
 

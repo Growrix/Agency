@@ -15,7 +15,7 @@ import {
   type ShopFilterGroup,
   type ShopFilterState,
 } from "@/lib/shop-filters";
-import { HOME_DIGITAL_PRODUCTS_COPY } from "@/lib/product-led-content";
+import { HOME_DIGITAL_PRODUCTS_CONVERSION_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
@@ -118,17 +118,20 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <div className="min-w-0">
             <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
-              {HOME_DIGITAL_PRODUCTS_COPY.eyebrow}
+              {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.eyebrow}
             </p>
             <h2
               id="home-digital-products-title"
               className={cn("mt-1", HERO_TITLE_CLASS)}
             >
-              {HOME_DIGITAL_PRODUCTS_COPY.title}
+              {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.title}
             </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-text-muted sm:text-base">
+              {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.description}
+            </p>
           </div>
           <LinkButton href="/digital-products" variant="outline" size="sm" className="shrink-0">
-            {HOME_DIGITAL_PRODUCTS_COPY.ctaLabel} <ArrowUpRightIcon className="size-3.5" />
+            {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.ctaLabel} <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>
         </div>
 

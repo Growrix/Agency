@@ -16,6 +16,8 @@ type WebsiteTemplateHtmlPreviewShowcaseSectionsProps = {
   autoPlayMobileCarousel?: boolean;
   sectionTitleClassName?: string;
   sectionShell?: Partial<HomeSectionShellProps>;
+  title?: string;
+  description?: string;
 };
 
 export function WebsiteTemplateHtmlPreviewShowcaseSections({
@@ -27,6 +29,8 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
   autoPlayMobileCarousel = true,
   sectionTitleClassName = "font-display text-3xl sm:text-4xl tracking-tight text-balance",
   sectionShell,
+  title = "Desktop and mobile preview, side by side",
+  description = WEBSITE_TEMPLATE_PREVIEW.showcaseDescription,
 }: WebsiteTemplateHtmlPreviewShowcaseSectionsProps) {
   return (
     <Section
@@ -41,10 +45,10 @@ export function WebsiteTemplateHtmlPreviewShowcaseSections({
           <>
             <div className="flex flex-col gap-3 text-center">
               <h2 className={sectionTitleClassName}>
-                Desktop and mobile preview, side by side
+                {title}
               </h2>
               <p className="mx-auto max-w-3xl text-base leading-7 text-text-muted">
-                {WEBSITE_TEMPLATE_PREVIEW.showcaseDescription}
+                {description}
               </p>
             </div>
             <div className="mt-8 min-w-0 w-full">

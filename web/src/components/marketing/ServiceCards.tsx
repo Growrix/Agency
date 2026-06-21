@@ -14,6 +14,7 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { FeatureCard } from "@/components/sections/FeatureCard";
 import type { PublicServiceRecord } from "@/server/domain/catalog";
+import { HOME_SERVICES_COPY, HOME_SERVICE_OUTCOME_DESCRIPTIONS } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 
@@ -48,9 +49,9 @@ export function ServiceCards({ services }: { services: PublicServiceRecord[] }) 
       <Container>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
-            eyebrow="Services"
-            title="Need more than a download? We implement and scale."
-            description="Products create the entry point. Services turn buyers into launched businesses — websites, SaaS, mobile apps, automation, and technical SEO when your roadmap needs hands-on delivery."
+            eyebrow={HOME_SERVICES_COPY.eyebrow}
+            title={HOME_SERVICES_COPY.title}
+            description={HOME_SERVICES_COPY.description}
             titleClassName={HERO_TITLE_CLASS}
           />
           <Link
@@ -69,7 +70,9 @@ export function ServiceCards({ services }: { services: PublicServiceRecord[] }) 
                   href={`/services/${service.slug}`}
                   icon={<Icon className="size-5" />}
                   title={service.title}
-                  description={service.short_description}
+                  description={
+                    HOME_SERVICE_OUTCOME_DESCRIPTIONS[service.slug] ?? service.short_description
+                  }
                   meta={service.delivery_timeline}
                 />
               </RevealItem>

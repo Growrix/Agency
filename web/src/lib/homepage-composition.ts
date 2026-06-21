@@ -22,6 +22,7 @@ export type HomeSectionId =
   | "ai-concierge"
   | "testimonials"
   | "field-notes"
+  | "ready-made-solutions"
   | "final-cta";
 
 export type HomeSectionConfig = {
@@ -39,6 +40,7 @@ export const HOME_SECTIONS: Record<HomeSectionId, HomeSectionConfig> = {
   "html-profiles": { tone: "default", size: "standard", layout: "content", spacing: "split" },
   "featured-templates": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
   "three-path": { tone: "default", size: "standard", layout: "content", spacing: "split" },
+  "ready-made-solutions": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
   "featured-builds": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
   "trust-strip": { tone: "inset", size: "compact", layout: "content", spacing: "default" },
   process: { tone: "default", size: "standard", layout: "content", spacing: "split" },
