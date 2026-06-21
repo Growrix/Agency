@@ -8,6 +8,7 @@ import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
+import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { homeSection } from "@/lib/homepage-composition";
 
 type FeaturedProductsProps = {
@@ -19,6 +20,7 @@ type FeaturedProductsProps = {
   ctaLabel?: string;
   variant?: "default" | "html-preview";
   maxProducts?: number;
+  sectionShell?: Partial<HomeSectionShellProps>;
 };
 
 export function FeaturedProducts({
@@ -30,6 +32,7 @@ export function FeaturedProducts({
   ctaLabel = "Browse all digital products",
   variant = "default",
   maxProducts,
+  sectionShell,
 }: FeaturedProductsProps) {
   const visibleProducts = maxProducts ? products.slice(0, maxProducts) : products;
 
@@ -38,7 +41,7 @@ export function FeaturedProducts({
   }
 
   const isHtmlPreview = variant === "html-preview";
-  const shell = homeSection("featured-templates");
+  const shell = { ...homeSection("featured-templates"), ...sectionShell };
 
   return (
     <Section

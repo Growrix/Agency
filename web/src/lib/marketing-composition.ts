@@ -14,6 +14,7 @@ export type MarketingPageId =
   | "about"
   | "services"
   | "service-detail"
+  | "service-detail-websites"
   | "pricing"
   | "contact"
   | "faq"
@@ -77,6 +78,18 @@ export const MARKETING_SECTIONS: Record<
     proof: section("default"),
     reviews: section("inset"),
     faq: section("default"),
+    cta: section("default", "compact"),
+  },
+  "service-detail-websites": {
+    hero: section("default", "hero"),
+    "featured-templates": section("inset"),
+    preview: section("inset"),
+    engagement: section("default"),
+    overview: section("inset"),
+    deliverables: section("default"),
+    process: section("inset"),
+    proof: section("default"),
+    faq: section("inset"),
     cta: section("default", "compact"),
   },
   pricing: {

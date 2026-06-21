@@ -20,13 +20,26 @@ import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { WebsiteLaunchProcessTimeline } from "@/components/sections/WebsiteLaunchProcessTimeline";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
+import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
+import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
+import { pickPreviewProducts } from "@/lib/ready-made-solutions";
+import { getProductHref } from "@/lib/shop";
+import {
+  buildWebsiteTemplateHtmlPreviewSlides,
+  getWebsiteTemplateHtmlPreviewUrl,
+  listWebsiteTemplateHtmlPreviews,
+  WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+} from "@/lib/website-templates-html-preview";
 import { isHiddenServiceSlug } from "@/lib/feature-flags";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
@@ -34,8 +47,17 @@ import { marketingSection } from "@/lib/marketing-composition";
 import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
-import { getPublicService, listPublicPortfolio } from "@/server/domain/catalog";
+import { getPublicService, listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
 import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
+import {
+  WEBSITES_LAUNCH_PROCESS_SECTION,
+  WEBSITES_OUTCOMES_SECTION,
+  WEBSITES_SERVICE_CTA,
+  WEBSITES_SERVICE_FAQ,
+  WEBSITES_SERVICE_HERO,
+  WEBSITES_SERVICE_STATS,
+  WEBSITES_WHY_CHOOSE_SECTION,
+} from "@/lib/websites-service-content";
 
 const ICONS = {
   "saas-applications": CodeBracketSquareIcon,
@@ -108,42 +130,20 @@ const COPY: Record<
   },
   websites: {
     eyebrow: "Websites",
-    headline: "Websites that look like the brand you wanted to be.",
-    description:
-      "Editorial design, motion discipline, and engineering quality for marketing sites, product launches, and content-rich hubs.",
+    headline: WEBSITES_SERVICE_HERO.headline,
+    description: WEBSITES_SERVICE_HERO.description,
     primaryCta: "Plan My Website",
-    secondaryCta: "View website portfolio",
-    secondaryHref: "/portfolio",
-    builds: [
-      { title: "Marketing & company sites", description: "Conversion-first architecture and a story your team can ship to." },
-      { title: "Product launch sites", description: "Hero moments, fast load, structured data, and analytics-ready instrumentation." },
-      { title: "Content hubs & blogs", description: "Editorial-grade typography, search, and CMS integration that scales." },
-      { title: "Landing pages", description: "Iterable variants tied to acquisition channels and experiments." },
-      { title: "Ecommerce fronts", description: "Shopify or headless commerce with brand-tier visual systems." },
-      { title: "Headless CMS handoff", description: "Sanity, Contentful, or Payload integration with editor-friendly schemas." },
-    ],
-    differentiators: [
-      { title: "Conversion architecture", description: "CTA strategy, proof sequencing, lead capture, chat, and booking woven into the page model." },
-      { title: "Motion as language", description: "Controlled, accessible motion that supports comprehension instead of distracting from it." },
-      { title: "Performance by default", description: "Core Web Vitals as a build target, not a post-launch fix." },
-      { title: "App-like mobile UX", description: "Sticky utilities, sheets, and thumb-friendly interactions that feel like product UI." },
-    ],
+    secondaryCta: WEBSITES_SERVICE_HERO.secondaryCta,
+    secondaryHref: WEBSITES_SERVICE_HERO.secondaryHref,
+    builds: WEBSITES_OUTCOMES_SECTION.builds.map((item) => ({ ...item })),
+    differentiators: WEBSITES_WHY_CHOOSE_SECTION.cards.map((item) => ({ ...item })),
     tiers: [
       { name: "Template Packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/digital-products" } },
       { name: "Ready Websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/digital-products" }, featured: true, badge: "Most chosen" },
       { name: "Custom Build Scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
-    faq: [
-      { question: "Do you handle content?", answer: "Yes — content production is offered as an add-on. We can also collaborate with your in-house content team." },
-      { question: "What about CMS?", answer: "We integrate with Sanity, Contentful, Payload, or static MDX depending on editorial needs." },
-      { question: "How fast can we launch?", answer: "Launch sprints are 4–6 weeks. Redesigns typically land in 8–10 weeks." },
-    ],
-    stats: [
-      { value: "4–10 wk", label: "Launch window" },
-      { value: "94", label: "Avg LCP score" },
-      { value: "+64%", label: "Demo bookings" },
-      { value: "12", label: "Sites shipped (12mo)" },
-    ],
+    faq: WEBSITES_SERVICE_FAQ.map((item) => ({ ...item })),
+    stats: WEBSITES_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "mobile-apps": {
     eyebrow: "Mobile Apps",
@@ -473,7 +473,61 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   };
 
   const Icon = ICONS[slug as SlugKey];
-  const related = (await listPublicPortfolio()).filter((p) => p.service === slug).slice(0, 3);
+  const isWebsitesService = slug === "websites";
+  const [related, publicProducts] = await Promise.all([
+    listPublicPortfolio().then((items) => items.filter((p) => p.service === slug).slice(0, 3)),
+    isWebsitesService ? listPublicShopProducts() : Promise.resolve([]),
+  ]);
+
+  const htmlPreviewCatalogProducts = isWebsitesService
+    ? publicProducts.filter((product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG)
+    : [];
+  const featuredHtmlWebsiteTemplates = isWebsitesService
+    ? pickPreviewProducts(publicProducts, WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG, 3, "start")
+    : [];
+  const htmlPreviewSlides = isWebsitesService ? buildWebsiteTemplateHtmlPreviewSlides(htmlPreviewCatalogProducts) : [];
+  const htmlPreviewPrimaryTemplate = htmlPreviewCatalogProducts[0];
+  const htmlPreviewFallbackSlide = isWebsitesService
+    ? {
+        name: htmlPreviewPrimaryTemplate?.name ?? "Website Template",
+        type: htmlPreviewPrimaryTemplate?.type ?? WEBSITE_TEMPLATE_PREVIEW.previewBadge,
+        price: htmlPreviewPrimaryTemplate?.price ?? "$149",
+        href: htmlPreviewPrimaryTemplate
+          ? getProductHref(htmlPreviewPrimaryTemplate)
+          : "/digital-products/category/website-templates-html-preview",
+        previewUrl: listWebsiteTemplateHtmlPreviews()[0]
+          ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
+          : undefined,
+      }
+    : undefined;
+
+  const serviceSectionPage = isWebsitesService ? "service-detail-websites" : "service-detail";
+
+  const engagementModelsSection = (
+    <Section
+      id="pricing"
+      {...marketingSection(
+        serviceSectionPage,
+        isWebsitesService ? "engagement" : "overview",
+      )}
+    >
+      <Container>
+        <SectionHeading
+          eyebrow="Engagement models"
+          title="Pick the surface area that matches the work."
+          align="center"
+        />
+        <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
+          {copy.tiers.map((t) => (
+            <RevealItem key={t.name} className="h-full">
+              <PricingTier tier={t} />
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Container>
+    </Section>
+  );
+
   return (
     <>
       <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
@@ -529,10 +583,45 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </Card>
             </div>
           </div>
+          {isWebsitesService ? (
+            <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
+              <StatBlock stats={WEBSITES_SERVICE_STATS} containerWidth="shell" />
+            </div>
+          ) : null}
         </Container>
       </Section>
 
-      {slug !== "mcp-servers" && slug !== "automation" && (
+      {isWebsitesService ? (
+        <>
+          <FeaturedProducts
+            products={featuredHtmlWebsiteTemplates}
+            variant="html-preview"
+            maxProducts={3}
+            sectionShell={marketingSection("service-detail-websites", "featured-templates")}
+            eyebrow="Featured templates"
+            title="Production-ready templates with live desktop preview"
+            description="Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems."
+            ctaHref="/digital-products/category/website-templates-html-preview#profiles"
+            ctaLabel={WEBSITE_TEMPLATE_PREVIEW.browseTemplatePreviewsCta}
+          />
+
+          <WebsiteTemplateHtmlPreviewShowcaseSections
+            slides={htmlPreviewSlides}
+            emptyFallbackSlide={htmlPreviewFallbackSlide}
+            reverseMobileLayout
+            showMobileSectionDivider
+            autoPlayMobileCarousel={false}
+            sectionTitleClassName={HERO_TITLE_CLASS}
+            sectionShell={marketingSection("service-detail-websites", "preview")}
+            title={HOME_PREVIEW_COPY.title}
+            description={HOME_PREVIEW_COPY.description}
+          />
+
+          {engagementModelsSection}
+        </>
+      ) : null}
+
+      {slug !== "mcp-servers" && slug !== "automation" && !isWebsitesService && (
         <Section size="compact">
           <StatBlock stats={HOME_STATS} />
         </Section>
@@ -607,9 +696,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section size="standard" layout="content" spacing="split" tone="inset">
+      <Section {...marketingSection(serviceSectionPage, "overview")}>
         <Container>
-          <SectionHeading eyebrow="What gets built" title="The actual surfaces and systems we ship." />
+          <SectionHeading
+            eyebrow={isWebsitesService ? WEBSITES_OUTCOMES_SECTION.eyebrow : "What gets built"}
+            title={
+              isWebsitesService
+                ? WEBSITES_OUTCOMES_SECTION.title
+                : "The actual surfaces and systems we ship."
+            }
+            description={isWebsitesService ? WEBSITES_OUTCOMES_SECTION.description : undefined}
+          />
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
             {copy.builds.map((b) => (
               <RevealItem key={b.title} className="h-full">
@@ -623,19 +720,33 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section size="standard" layout="content" spacing="split">
+      <Section {...marketingSection(serviceSectionPage, "deliverables")}>
         <Container>
           <SectionHeading
-            eyebrow="What makes it different"
-            title="Operating choices, not adjectives."
-            description="The decisions that shape how this work actually feels to use, ship, and maintain."
+            eyebrow={
+              isWebsitesService ? WEBSITES_WHY_CHOOSE_SECTION.eyebrow : "What makes it different"
+            }
+            title={
+              isWebsitesService
+                ? WEBSITES_WHY_CHOOSE_SECTION.title
+                : "Operating choices, not adjectives."
+            }
+            description={
+              isWebsitesService
+                ? WEBSITES_WHY_CHOOSE_SECTION.description
+                : "The decisions that shape how this work actually feels to use, ship, and maintain."
+            }
           />
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
             {copy.differentiators.map((d) => (
               <RevealItem key={d.title} className="h-full">
                 <div className="h-full rounded-md border border-border bg-surface p-6">
-                  <div className="font-mono text-xs uppercase tracking-wider text-primary">Principle</div>
-                  <h3 className="mt-2 font-display text-xl tracking-tight">{d.title}</h3>
+                  {!isWebsitesService ? (
+                    <div className="font-mono text-xs uppercase tracking-wider text-primary">Principle</div>
+                  ) : null}
+                  <h3 className={cn("font-display text-xl tracking-tight", !isWebsitesService && "mt-2")}>
+                    {d.title}
+                  </h3>
                   <p className="mt-2 text-text-muted leading-7 text-pretty">{d.description}</p>
                 </div>
               </RevealItem>
@@ -644,17 +755,32 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Container>
       </Section>
 
-      <Section size="standard" layout="content" spacing="split" tone="inset">
+      <Section {...marketingSection(serviceSectionPage, "process")}>
         <Container>
-          <SectionHeading eyebrow="Delivery" title="How an engagement runs end-to-end." />
-          <div className="mt-10">
-            <ProcessSteps steps={PROCESS_STEPS} />
-          </div>
+          {isWebsitesService ? (
+            <>
+              <SectionHeading
+                eyebrow={WEBSITES_LAUNCH_PROCESS_SECTION.eyebrow}
+                title={WEBSITES_LAUNCH_PROCESS_SECTION.title}
+                description={WEBSITES_LAUNCH_PROCESS_SECTION.description}
+              />
+              <div className="mt-10">
+                <WebsiteLaunchProcessTimeline steps={[...WEBSITES_LAUNCH_PROCESS_SECTION.steps]} />
+              </div>
+            </>
+          ) : (
+            <>
+              <SectionHeading eyebrow="Delivery" title="How an engagement runs end-to-end." />
+              <div className="mt-10">
+                <ProcessSteps steps={PROCESS_STEPS} />
+              </div>
+            </>
+          )}
         </Container>
       </Section>
 
       {related.length > 0 && (
-        <Section size="standard" layout="content" spacing="split">
+        <Section {...marketingSection(serviceSectionPage, "proof")}>
           <Container>
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
@@ -673,22 +799,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section id="pricing" size="standard" layout="content" spacing="split" tone="inset">
-        <Container>
-          <SectionHeading
-            eyebrow="Engagement models"
-            title="Pick the surface area that matches the work."
-            align="center"
-          />
-          <RevealGroup className="mt-12 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {copy.tiers.map((t) => (
-              <RevealItem key={t.name} className="h-full">
-                <PricingTier tier={t} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </Container>
-      </Section>
+      {!isWebsitesService ? engagementModelsSection : null}
 
       {SHOW_GOOGLE_REVIEWS && (
         <Section size="standard" layout="content" spacing="split">
@@ -702,9 +813,22 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </Section>
       )}
 
-      <Section size="standard" layout="content" spacing="split" tone="inset">
+      <Section {...marketingSection(serviceSectionPage, "faq")}>
         <Container width="reading">
-          <SectionHeading eyebrow="FAQ" title={`${copy.eyebrow} questions, answered.`} align="center" />
+          <SectionHeading
+            eyebrow="FAQ"
+            title={
+              isWebsitesService
+                ? "Common website project questions, answered."
+                : `${copy.eyebrow} questions, answered.`
+            }
+            description={
+              isWebsitesService
+                ? "Timelines, ownership, platforms, support, and pricing—covered before you book a call."
+                : undefined
+            }
+            align="center"
+          />
           <div className="mt-10">
             <Accordion items={copy.faq} />
           </div>
@@ -712,10 +836,21 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       </Section>
 
       <CTABand
-        title={`${copy.primaryCta} — let's talk specifics.`}
-        description="A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
-        primary={{ label: copy.primaryCta, href: "/book-appointment" }}
-        secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}
+        title={isWebsitesService ? WEBSITES_SERVICE_CTA.title : `${copy.primaryCta} — let's talk specifics.`}
+        description={
+          isWebsitesService
+            ? WEBSITES_SERVICE_CTA.description
+            : "A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
+        }
+        primary={{
+          label: isWebsitesService ? WEBSITES_SERVICE_CTA.primaryLabel : copy.primaryCta,
+          href: isWebsitesService ? WEBSITES_SERVICE_CTA.primaryHref : "/book-appointment",
+        }}
+        secondary={
+          isWebsitesService
+            ? { label: WEBSITES_SERVICE_CTA.secondaryLabel, href: WEBSITES_SERVICE_CTA.secondaryHref }
+            : { label: "Open WhatsApp", href: WHATSAPP_HREF }
+        }
       />
     </>
   );
