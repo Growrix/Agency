@@ -27,7 +27,10 @@ const sectionSplitSizeClass: Partial<Record<SectionSize, string>> = {
   compact: "py-8 sm:py-8",
 };
 
-function resolveSectionPadding(size: SectionSize, spacing: SectionSpacing): string {
+function resolveSectionPadding(size: SectionSize, spacing: SectionSpacing, layout: SectionLayout): string {
+  if (layout === "viewport" && size === "hero") {
+    return "py-0";
+  }
   if (spacing === "split" && sectionSplitSizeClass[size]) {
     return sectionSplitSizeClass[size]!;
   }
@@ -36,7 +39,7 @@ function resolveSectionPadding(size: SectionSize, spacing: SectionSpacing): stri
 
 const sectionLayoutClass: Record<SectionLayout, string> = {
   content: "",
-  viewport: "lg:flex lg:min-h-[calc(100dvh-var(--site-chrome-height))] lg:flex-col lg:justify-center",
+  viewport: "hero-viewport-band",
 };
 
 export function Container({
@@ -90,7 +93,7 @@ export function Section({
       id={id}
       aria-labelledby={ariaLabelledBy}
       className={cn(
-        resolveSectionPadding(size, spacing),
+        resolveSectionPadding(size, spacing, layout),
         sectionLayoutClass[layout],
         toneClass,
         className

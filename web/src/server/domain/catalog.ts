@@ -43,6 +43,28 @@ import {
   upsertSanityShopItem,
 } from "@/server/sanity/management";
 
+function withPublicDataCache<T extends () => Promise<unknown>>(
+  fn: T,
+  keyParts: string[],
+  options: { revalidate: number; tags: string[] },
+): T {
+  let cachedFn: T | null = null;
+
+  const resolve = (async () => {
+    if (process.env.NODE_ENV === "test") {
+      return fn();
+    }
+
+    if (!cachedFn) {
+      cachedFn = unstable_cache(fn, keyParts, options) as T;
+    }
+
+    return cachedFn();
+  }) as T;
+
+  return resolve;
+}
+
 export type PublicServiceRecord = ManagedServiceRecord;
 
 export type PublicPortfolioRecord = Omit<ManagedPortfolioRecord, "detail">;
@@ -212,7 +234,7 @@ function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
       industry: template.categoryLabel,
       industrySlug: template.categorySlug,
       tag: template.tag,
-      published: true,
+      published: template.profileNumber !== null,
       teaser: template.teaser,
       summary: template.summary,
       audience: template.audience,
@@ -933,7 +955,7 @@ async function listAllPublicProductsUncached() {
     .filter((product) => !isPlaceholderProduct(product));
 }
 
-const listAllPublicProductsCached = unstable_cache(
+const listAllPublicProductsCached = withPublicDataCache(
   async () => listAllPublicProductsUncached(),
   ["catalog-public-products"],
   { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-products"] },
@@ -1009,7 +1031,7 @@ async function listPublicServicesUncached(): Promise<PublicServiceRecord[]> {
   );
 }
 
-const listPublicServicesCached = unstable_cache(
+const listPublicServicesCached = withPublicDataCache(
   async () => listPublicServicesUncached(),
   ["catalog-public-services"],
   { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-services"] },
@@ -1060,7 +1082,7 @@ async function listPublicPortfolioUncached(): Promise<PublicPortfolioRecord[]> {
   }));
 }
 
-const listPublicPortfolioCached = unstable_cache(
+const listPublicPortfolioCached = withPublicDataCache(
   async () => listPublicPortfolioUncached(),
   ["catalog-public-portfolio"],
   { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-portfolio"] },

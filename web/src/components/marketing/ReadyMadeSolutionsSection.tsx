@@ -4,11 +4,13 @@ import { useMemo, useState } from "react";
 import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { ShopProductHtmlMobilePreviewCard } from "@/components/shop/ShopProductHtmlMobilePreviewCard";
+import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { HOME_READY_MADE_SOLUTIONS_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
 import {
   getReadyMadeSolutionCategoryHref,
+  getReadyMadeSolutionGridClassName,
   type ReadyMadeSolutionTabDefinition,
 } from "@/lib/ready-made-solutions";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
@@ -78,28 +80,31 @@ export function ReadyMadeSolutionsSection({ tabs, productsByTabId }: ReadyMadeSo
           </p>
         ) : null}
 
-        <div
-          className="mt-6 grid auto-rows-fr items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          role="tabpanel"
-        >
-          {activeProducts.length > 0 ? (
-            activeProducts.map((product) => (
-              <div key={product.slug} className="flex h-full min-h-0 min-w-0">
-                <ShopProductCatalogCard product={product} variant="compact" />
+        <div role="tabpanel" key={activeTab?.id}>
+          <div className={activeTab ? getReadyMadeSolutionGridClassName(activeTab.previewMode) : undefined}>
+            {activeProducts.length > 0 ? (
+              activeProducts.map((product) => (
+                <div key={product.slug} className="h-full min-w-0">
+                  {activeTab?.previewMode === "website-template-wide" ? (
+                    <ShopProductHtmlPreviewCard product={product} variant="catalog-wide" />
+                  ) : (
+                    <ShopProductHtmlMobilePreviewCard product={product} />
+                  )}
+                </div>
+              ))
+            ) : activeTab ? (
+              <div className="col-span-full flex min-h-[160px] flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-6 text-center">
+                <p className="font-display text-base tracking-tight">No preview products in this category yet.</p>
+                <LinkButton
+                  href={getReadyMadeSolutionCategoryHref(activeTab.categorySlug)}
+                  size="sm"
+                  className="mt-4"
+                >
+                  Browse category
+                </LinkButton>
               </div>
-            ))
-          ) : activeTab ? (
-            <div className="col-span-full flex min-h-[160px] flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-6 text-center">
-              <p className="font-display text-base tracking-tight">No preview products in this category yet.</p>
-              <LinkButton
-                href={getReadyMadeSolutionCategoryHref(activeTab.categorySlug)}
-                size="sm"
-                className="mt-4"
-              >
-                Browse category
-              </LinkButton>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
       </Container>
     </Section>

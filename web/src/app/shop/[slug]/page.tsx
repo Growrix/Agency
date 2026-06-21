@@ -572,18 +572,21 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
                 </div>
 
-                <div id="preview" className="min-w-0 w-full max-w-[440px]">
+                <div id="preview" className="min-w-0 w-full">
                   {product.embeddedPreviewUrl ? (
-                    <Card className="overflow-hidden p-5 sm:p-6">
-                      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">
-                        Live mobile profile preview
-                      </p>
-                      <div className="mt-4 min-w-0">
+                    <Card className="overflow-hidden p-0">
+                      <div className="border-b border-border px-5 py-4 sm:px-6">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">
+                          Live mobile profile preview
+                        </p>
+                      </div>
+                      <div className="flex min-h-[320px] w-full items-center justify-center bg-[#0a0a0a] px-4 py-6 sm:min-h-[420px] sm:px-6 sm:py-8">
                         <WebsiteTemplateHtmlMobilePreviewFrame
                           previewUrl={product.embeddedPreviewUrl}
                           title={`${product.name} mobile preview`}
                           maxFrameHeight={480}
                           showViewportLabel={false}
+                          className="w-[410px] max-w-full shrink-0"
                         />
                       </div>
                     </Card>

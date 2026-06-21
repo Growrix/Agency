@@ -37,7 +37,8 @@ import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
-import { buildReadyMadeSolutionTabs } from "@/lib/ready-made-solutions";
+import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
+import { buildReadyMadeSolutionTabs, pickPreviewProducts } from "@/lib/ready-made-solutions";
 import {
   HOME_AI_COPY,
   HOME_CASE_STUDIES_COPY,
@@ -99,12 +100,21 @@ export default async function Home() {
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
   const readyMadeSolutions = buildReadyMadeSolutionTabs(publicProducts);
-  const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
-  const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
+  const featuredHtmlBusinessProfileProducts = pickPreviewProducts(
+    publicProducts,
+    HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug,
+    4,
+    "start",
+  );
   const htmlPreviewCatalogProducts = publicProducts.filter(
     (product) => product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
   );
-  const featuredHtmlWebsiteTemplates = htmlPreviewCatalogProducts.slice(0, 3);
+  const featuredHtmlWebsiteTemplates = pickPreviewProducts(
+    publicProducts,
+    WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
+    3,
+    "start",
+  );
   const liveSaasProducts = publicProducts.filter(isLiveSaasProduct);
   const featuredLiveSaasProducts = pickBySlugs(
     liveSaasProducts,

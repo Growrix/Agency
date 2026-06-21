@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { ShopStickyFilterSidebar } from "@/components/shop/ShopStickyFilterSidebar";
 import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
 import {
   buildShopFilterGroups,
@@ -125,10 +126,9 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
       {/* Sidebar + product grid */}
       <Section className="py-8 sm:py-12">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-[240px_1fr] lg:items-start">
+          <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-stretch">
 
-            {/* Sidebar filter nav */}
-            <aside className="space-y-6 rounded-2xl border border-border bg-surface p-5 lg:sticky lg:top-24">
+            <ShopStickyFilterSidebar>
               <div className="flex items-center justify-between">
                 <p className="font-display text-sm font-semibold tracking-tight">Filters</p>
                 {hasActiveFilter ? (
@@ -145,7 +145,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
               {filterGroups.map((group) => (
                 <SidebarGroup key={group.key} group={group} filters={filters} />
               ))}
-            </aside>
+            </ShopStickyFilterSidebar>
 
             {/* Product grid area */}
             <div>

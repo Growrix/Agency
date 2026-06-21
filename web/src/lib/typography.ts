@@ -4,3 +4,6 @@ export const HERO_TITLE_CLASS =
 
 /** Site-wide marketing section heading scale (matches hero). */
 export const SECTION_TITLE_CLASS = HERO_TITLE_CLASS;
+
+/** Fills and vertically centers content inside a viewport hero Section. */
+export const HERO_VIEWPORT_CONTAINER_CLASS = "hero-viewport-band__inner";

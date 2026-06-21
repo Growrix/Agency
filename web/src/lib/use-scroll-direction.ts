@@ -83,7 +83,9 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
 
     lastY.current = getScrollY();
     evaluate();
-    setReady(true);
+    const readyRaf = window.requestAnimationFrame(() => {
+      setReady(true);
+    });
 
     window.addEventListener("scroll", onScroll, { passive: true, capture: true });
     document.addEventListener("scroll", onScroll, { passive: true, capture: true });
@@ -94,7 +96,10 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
       if (rafId) {
         window.cancelAnimationFrame(rafId);
       }
-      setReady(false);
+      window.cancelAnimationFrame(readyRaf);
+      queueMicrotask(() => {
+        setReady(false);
+      });
     };
   }, [hideDelta, showDelta, topOffset]);
 
