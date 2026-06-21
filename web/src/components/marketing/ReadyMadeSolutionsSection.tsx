@@ -1,24 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { useMemo, useState } from "react";
 import { LinkButton } from "@/components/primitives/Button";
-import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import {
-  HOME_READY_MADE_SOLUTIONS_COPY,
-  READY_MADE_SOLUTION_TABS,
-} from "@/lib/home-conversion-content";
+import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { HOME_READY_MADE_SOLUTIONS_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
+import {
+  getReadyMadeSolutionCategoryHref,
+  type ReadyMadeSolutionTabDefinition,
+} from "@/lib/ready-made-solutions";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
+import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
-export function ReadyMadeSolutionsSection() {
-  const [activeTabId, setActiveTabId] = useState(READY_MADE_SOLUTION_TABS[0]?.id ?? "templates");
-  const activeTab =
-    READY_MADE_SOLUTION_TABS.find((tab) => tab.id === activeTabId) ?? READY_MADE_SOLUTION_TABS[0];
+type ReadyMadeSolutionsSectionProps = {
+  tabs: ReadyMadeSolutionTabDefinition[];
+  productsByTabId: Record<string, PublicShopProductRecord[]>;
+};
+
+export function ReadyMadeSolutionsSection({ tabs, productsByTabId }: ReadyMadeSolutionsSectionProps) {
+  const [activeTabId, setActiveTabId] = useState(tabs[0]?.id ?? "");
+  const activeTab = useMemo(
+    () => tabs.find((tab) => tab.id === activeTabId) ?? tabs[0],
+    [activeTabId, tabs],
+  );
+  const activeProducts = activeTab ? (productsByTabId[activeTab.id] ?? []) : [];
   const shell = homeSection("ready-made-solutions");
+
+  if (tabs.length === 0) {
+    return null;
+  }
 
   return (
     <Section {...shell} className="overflow-x-hidden">
@@ -30,56 +43,63 @@ export function ReadyMadeSolutionsSection() {
           titleClassName={HERO_TITLE_CLASS}
         />
 
-        <div
-          className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden"
-          role="tablist"
-          aria-label="Solution categories"
-        >
-          {READY_MADE_SOLUTION_TABS.map((tab) => {
-            const isActive = tab.id === activeTabId;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveTabId(tab.id)}
-                className={cn(
-                  "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
-                  isActive
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border bg-surface text-text-muted hover:border-primary/40 hover:text-text",
-                )}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
+        {tabs.length > 1 ? (
+          <div
+            className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden"
+            role="tablist"
+            aria-label="Solution categories"
+          >
+            {tabs.map((tab) => {
+              const isActive = tab.id === activeTab?.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveTabId(tab.id)}
+                  className={cn(
+                    "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                    isActive
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border bg-surface text-text-muted hover:border-primary/40 hover:text-text",
+                  )}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        ) : null}
 
-        <div className="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3" role="tabpanel">
-          {activeTab.solutions.map((solution) => (
-            <Card key={solution.title} className="flex h-full flex-col overflow-hidden p-0">
-              <div
-                className={cn(
-                  "flex h-36 items-end border-b border-border bg-gradient-to-br p-5",
-                  solution.accent,
-                )}
-                aria-hidden
+        {activeTab ? (
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-text-muted sm:mt-5">
+            {activeTab.description}
+          </p>
+        ) : null}
+
+        <div
+          className="mt-6 grid auto-rows-fr items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          role="tabpanel"
+        >
+          {activeProducts.length > 0 ? (
+            activeProducts.map((product) => (
+              <div key={product.slug} className="flex h-full min-h-0 min-w-0">
+                <ShopProductCatalogCard product={product} variant="compact" />
+              </div>
+            ))
+          ) : activeTab ? (
+            <div className="col-span-full flex min-h-[160px] flex-col items-center justify-center rounded-lg border border-dashed border-border bg-surface p-6 text-center">
+              <p className="font-display text-base tracking-tight">No preview products in this category yet.</p>
+              <LinkButton
+                href={getReadyMadeSolutionCategoryHref(activeTab.categorySlug)}
+                size="sm"
+                className="mt-4"
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
-                  {solution.imageAlt}
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="font-display text-xl tracking-tight">{solution.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-6 text-text-muted">{solution.description}</p>
-                <LinkButton href={solution.href} variant="outline" size="sm" className="mt-5 w-full sm:w-auto">
-                  View Solution <ArrowUpRightIcon className="size-3.5" />
-                </LinkButton>
-              </div>
-            </Card>
-          ))}
+                Browse category
+              </LinkButton>
+            </div>
+          ) : null}
         </div>
       </Container>
     </Section>

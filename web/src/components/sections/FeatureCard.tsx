@@ -22,33 +22,39 @@ export function FeatureCard({
   const inner = (
     <>
       {icon && (
-        <div className="mb-5 inline-flex size-11 items-center justify-center rounded-sm bg-primary/10 text-primary">
+        <div className="mb-5 inline-flex size-11 shrink-0 items-center justify-center rounded-sm bg-primary/10 text-primary">
           {icon}
         </div>
       )}
       <h3 className="font-display text-xl tracking-tight">{title}</h3>
-      <p className="mt-2 text-text-muted leading-7 text-pretty">{description}</p>
-      {meta && (
-        <p className="mt-4 font-mono text-xs uppercase tracking-wider text-text-muted">
-          {meta}
-        </p>
-      )}
-      {href && (
-        <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
-          Explore <ArrowUpRightIcon className="size-4" />
-        </span>
-      )}
+      <p className="mt-2 flex-1 text-text-muted leading-7 text-pretty">{description}</p>
+      <div className="mt-auto pt-4">
+        {meta && (
+          <p className="font-mono text-xs uppercase tracking-wider text-text-muted">
+            {meta}
+          </p>
+        )}
+        {href && (
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
+            Explore <ArrowUpRightIcon className="size-4" />
+          </span>
+        )}
+      </div>
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className={cn("group block", className)}>
-        <Card hoverable className="h-full">
+      <Link href={href} className={cn("group flex h-full min-h-0", className)}>
+        <Card hoverable className="flex h-full w-full flex-col">
           {inner}
         </Card>
       </Link>
     );
   }
-  return <Card hoverable={false} className={cn("h-full", className)}>{inner}</Card>;
+  return (
+    <Card hoverable={false} className={cn("flex h-full flex-col", className)}>
+      {inner}
+    </Card>
+  );
 }

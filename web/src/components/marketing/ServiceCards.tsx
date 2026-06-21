@@ -61,12 +61,13 @@ export function ServiceCards({ services }: { services: PublicServiceRecord[] }) 
             Compare all services <ArrowUpRightIcon className="size-4" />
           </Link>
         </div>
-        <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
+        <RevealGroup className="mt-10 grid auto-rows-fr items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.07}>
           {ordered.map((service) => {
             const Icon = ICONS[service.slug] ?? SparklesIcon;
             return (
-              <RevealItem key={service.slug} className="h-full">
+              <RevealItem key={service.slug} className="flex h-full min-h-0">
                 <FeatureCard
+                  className="w-full"
                   href={`/services/${service.slug}`}
                   icon={<Icon className="size-5" />}
                   title={service.title}

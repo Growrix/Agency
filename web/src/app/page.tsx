@@ -37,7 +37,7 @@ import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
-import { homeSection } from "@/lib/homepage-composition";
+import { buildReadyMadeSolutionTabs } from "@/lib/ready-made-solutions";
 import {
   HOME_AI_COPY,
   HOME_CASE_STUDIES_COPY,
@@ -45,6 +45,7 @@ import {
   HOME_PREVIEW_COPY,
   HOME_TEMPLATES_MARKETPLACE_COPY,
 } from "@/lib/home-conversion-content";
+import { homeSection } from "@/lib/homepage-composition";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
@@ -97,6 +98,7 @@ export default async function Home() {
   ]);
 
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
+  const readyMadeSolutions = buildReadyMadeSolutionTabs(publicProducts);
   const htmlBusinessProfileProducts = publicProducts.filter((product) => product.categorySlug === "html-business-profiles");
   const featuredHtmlBusinessProfileProducts = htmlBusinessProfileProducts.slice(0, 4);
   const htmlPreviewCatalogProducts = publicProducts.filter(
@@ -214,6 +216,11 @@ export default async function Home() {
 
       <ServiceCards services={services} />
 
+      <ReadyMadeSolutionsSection
+        tabs={readyMadeSolutions.tabs}
+        productsByTabId={readyMadeSolutions.productsByTabId}
+      />
+
       <Section {...homeSection("html-profiles")}>
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
@@ -276,8 +283,6 @@ export default async function Home() {
       />
 
       <HomeDigitalProductsShowcase products={publicProducts} />
-
-      <ReadyMadeSolutionsSection />
 
       <ThreePathExplainer />
 
