@@ -49,17 +49,20 @@ type Message = {
 };
 
 const STARTER_PROMPTS = [
-  "How fast can you launch a marketing site?",
-  "What does a Product Partner engagement usually cost?",
-  "Do you build MCP servers for internal tools?",
-  "What should I book if I need a SaaS rebuild?",
+  "What do Website Templates with Live Preview cost?",
+  "Which path fits a local business launching online?",
+  "What's included in Done-For-You setup?",
+  "How much does a SaaS MVP usually cost?",
 ];
 
 const KNOWLEDGE_AREAS = [
-  { title: "Services", detail: "Websites, HTML business profiles, SaaS apps, MCP servers, and automation." },
-  { title: "Pricing", detail: "Ranges, deposits, retainers, and shop pricing." },
-  { title: "Proof", detail: "Portfolio outcomes and launch results already on the site." },
-  { title: "Next steps", detail: "Book a call, use contact, or escalate to WhatsApp." },
+  {
+    title: "Services",
+    detail: "Websites, SaaS, mobile apps, automation, technical SEO, and AI business systems.",
+  },
+  { title: "Digital products", detail: "HTML business profiles, live-preview templates, and purchase tiers." },
+  { title: "Pricing", detail: "Investment guide paths, service ranges, and marketplace tiers." },
+  { title: "Next steps", detail: "Book a call, browse products, use contact, or escalate to WhatsApp." },
 ];
 
 const INITIAL_MESSAGE: Message = {
