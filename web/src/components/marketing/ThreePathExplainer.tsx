@@ -1,48 +1,61 @@
-import Link from "next/link";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/24/outline";
+import { LinkButton } from "@/components/primitives/Button";
+import { Badge } from "@/components/primitives/Badge";
+import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { THREE_PATH_ROWS } from "@/lib/product-led-content";
+import { Reveal } from "@/components/motion/Motion";
+import { HOME_THREE_PATH_CARDS, HOME_THREE_PATH_COPY } from "@/lib/home-conversion-content";
+import { homeSection } from "@/lib/homepage-composition";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
+import { cn } from "@/lib/utils";
 
 export function ThreePathExplainer() {
+  const shell = homeSection("three-path");
+
   return (
-    <Section size="standard" layout="viewport" tone="inset">
+    <Section {...shell}>
       <Container>
         <SectionHeading
-          eyebrow="Choose your path"
-          title="Three ways to work with GrowrixOS"
-          description="Whether you want a DIY download, done-for-you setup, or a full custom build, the site is designed to route you to the right offer."
+          eyebrow={HOME_THREE_PATH_COPY.eyebrow}
+          title={HOME_THREE_PATH_COPY.title}
+          description={HOME_THREE_PATH_COPY.description}
+          titleClassName={HERO_TITLE_CLASS}
         />
-        <div className="mt-10 overflow-x-auto rounded-2xl border border-border bg-surface">
-          <table className="min-w-full divide-y divide-border text-left text-sm">
-            <thead className="bg-inset/50 text-text-muted">
-              <tr>
-                <th className="px-4 py-3 font-medium">Visitor</th>
-                <th className="px-4 py-3 font-medium">What they want</th>
-                <th className="px-4 py-3 font-medium">Recommended funnel</th>
-                <th className="px-4 py-3 font-medium">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {THREE_PATH_ROWS.map((row) => (
-                <tr key={row.visitor}>
-                  <td className="px-4 py-4 font-medium text-text">{row.visitor}</td>
-                  <td className="px-4 py-4 text-text-muted">{row.want}</td>
-                  <td className="px-4 py-4 text-text-muted">{row.funnel}</td>
-                  <td className="px-4 py-4">
-                    <Link
-                      href={row.cta.href}
-                      className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
-                    >
-                      {row.cta.label}
-                      <ArrowUpRightIcon className="size-3.5" />
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <Reveal className="mt-8 sm:mt-10">
+          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {HOME_THREE_PATH_CARDS.map((card) => (
+              <Card
+                key={card.title}
+                className={cn(
+                  "flex h-full flex-col",
+                  "featured" in card && card.featured && "border-primary/40 ring-1 ring-primary/20",
+                )}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="font-display text-xl tracking-tight">{card.title}</h3>
+                  {"featured" in card && card.featured ? <Badge tone="primary">Recommended</Badge> : null}
+                </div>
+                <p className="mt-3 text-sm leading-6 text-text-muted">{card.description}</p>
+                <ul className="mt-5 flex-1 space-y-2">
+                  {card.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-2 text-sm text-text-muted">
+                      <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+                <LinkButton
+                  href={card.cta.href}
+                  className="mt-6 w-full"
+                  variant={"featured" in card && card.featured ? "primary" : "outline"}
+                >
+                  {card.cta.label}
+                </LinkButton>
+              </Card>
+            ))}
+          </div>
+        </Reveal>
       </Container>
     </Section>
   );
