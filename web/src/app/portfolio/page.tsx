@@ -1,20 +1,10 @@
-import { HOME_STACK_MARQUEE, HOME_STATS, SERVICES } from "@/lib/content";
 import { listPublicPortfolio } from "@/server/domain/catalog";
+import { buildPortfolioFilters, filterPortfolioProjects } from "@/lib/portfolio-landing-content";
 import { PortfolioPageClient } from "./PortfolioPageClient";
 
 export default async function PortfolioPage() {
-  const projects = await listPublicPortfolio();
-  const filters = [
-    { label: "All work", value: "all" },
-    ...SERVICES.map((service) => ({ label: service.name, value: service.slug })),
-  ];
+  const projects = filterPortfolioProjects(await listPublicPortfolio());
+  const filters = buildPortfolioFilters(projects);
 
-  return (
-    <PortfolioPageClient
-      projects={projects}
-      filters={filters}
-      stats={[...HOME_STATS]}
-      trustItems={[...HOME_STACK_MARQUEE]}
-    />
-  );
+  return <PortfolioPageClient projects={projects} filters={filters} />;
 }

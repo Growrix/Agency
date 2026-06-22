@@ -74,7 +74,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             <LinkButton href={canViewOrder ? "/dashboard/downloads" : "/dashboard/login?next=/dashboard"}>
               {canViewOrder ? "Open dashboard" : "Sign in to dashboard"}
             </LinkButton>
-            <LinkButton href="/products" variant="outline">Browse more products</LinkButton>
+            <LinkButton href="/digital-products" variant="outline">Browse more digital products</LinkButton>
             <LinkButton href="/contact" variant="outline">Contact the team</LinkButton>
           </div>
 

@@ -239,7 +239,7 @@ export function getHtmlBusinessProfilePreviewUrl(templateSlug: string) {
 }
 
 export function getHtmlBusinessProfilesCategoryPath(categorySlug: HtmlBusinessProfileCategorySlug) {
-  return `/products?category=html-business-profiles&type=${categorySlug}`;
+  return `/digital-products?category=html-business-profiles&type=${categorySlug}`;
 }
 
 export function getHtmlBusinessProfileBySlug(templateSlug: string) {

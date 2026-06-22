@@ -3,14 +3,16 @@ import { absoluteUrl } from "@/lib/site";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
 
+export const revalidate = 900;
+
 const STATIC_ROUTES = [
   "/",
-  "/products",
-  "/products/bundles",
-  "/products/free",
+  "/digital-products",
+  "/digital-products/bundles",
+  "/digital-products/free",
   "/pricing",
   "/services",
-  "/additional-services",
+  "/services/technical-seo",
   "/portfolio",
   "/blog",
   "/about",
@@ -19,16 +21,11 @@ const STATIC_ROUTES = [
   "/book-appointment",
   "/ai-concierge",
   "/html-business-profiles",
-  "/solutions/for-startups",
-  "/solutions/for-saas-founders",
-  "/solutions/for-agencies",
-  "/solutions/for-local-businesses",
   "/privacy-policy",
   "/terms-of-service",
 ] as const;
 
 const PRODUCT_CATEGORY_SLUGS = [
-  "website-templates",
   "website-templates-html-preview",
   "html-business-profiles",
 ] as const;
@@ -51,14 +48,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const categoryEntries: MetadataRoute.Sitemap = PRODUCT_CATEGORY_SLUGS.map((slug) => ({
-    url: absoluteUrl(`/products/category/${slug}`),
+    url: absoluteUrl(`/digital-products/category/${slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
   const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
-    url: absoluteUrl(`/products/${product.slug}`),
+    url: absoluteUrl(`/digital-products/${product.slug}`),
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.7,

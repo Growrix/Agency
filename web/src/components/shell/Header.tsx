@@ -112,9 +112,9 @@ export function Header({
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </button>
           <Link
-            href="/products"
+            href="/digital-products"
             className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
-            aria-label="Browse products"
+            aria-label="Browse digital products"
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
           </Link>
@@ -169,9 +169,6 @@ export function Header({
                 )}
               </div>
             ))}
-            <Link href="/contact" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
-              Contact
-            </Link>
             <Link href="/faq" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
               FAQ
             </Link>

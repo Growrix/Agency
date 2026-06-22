@@ -1,28 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
+import { LinkButton } from "@/components/primitives/Button";
+import { Card } from "@/components/primitives/Card";
 import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { StatBlock } from "@/components/sections/StatBlock";
-import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
-import { WHATSAPP_HREF } from "@/lib/nav";
+import { PortfolioHeroPanel } from "@/components/sections/PortfolioHeroPanel";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
+import { Accordion } from "@/components/sections/Accordion";
+import { WebsiteLaunchProcessTimeline } from "@/components/sections/WebsiteLaunchProcessTimeline";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
+import { marketingSection } from "@/lib/marketing-composition";
+import {
+  PORTFOLIO_CAPABILITIES_SECTION,
+  PORTFOLIO_DELIVERY_SECTION,
+  PORTFOLIO_LANDING_CTA,
+  PORTFOLIO_LANDING_FAQ,
+  PORTFOLIO_LANDING_HERO,
+  type PortfolioFilter,
+} from "@/lib/portfolio-landing-content";
+import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 
 type PortfolioPageClientProps = {
   projects: PublicPortfolioRecord[];
-  filters: Array<{ label: string; value: string }>;
-  stats: Array<{ value: string; label: string; hint?: string }>;
-  trustItems: string[];
+  filters: PortfolioFilter[];
 };
 
-export function PortfolioPageClient({ projects, filters, stats, trustItems }: PortfolioPageClientProps) {
+export function PortfolioPageClient({ projects, filters }: PortfolioPageClientProps) {
   const [filter, setFilter] = useState<string>("all");
   const [q, setQ] = useState("");
 
@@ -38,39 +49,54 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
     return true;
   });
 
+  function handleHeroFilterSelect(value: string) {
+    setFilter(value);
+    setQ("");
+    document.getElementById("portfolio-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <>
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+      <Section {...marketingSection("portfolio", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <Container>
-          <div className="max-w-3xl">
-            <Badge tone="primary" dot>Portfolio</Badge>
-            <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-              Outcomes you can see and metrics you can verify.
-            </h1>
-            <p className="mt-6 text-lg text-text-muted leading-7">
-              A filterable showcase of products, websites, MCP integrations, and automations we&apos;ve shipped recently.
-            </p>
+        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
+          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+            <div className="lg:col-span-6 xl:col-span-7">
+              <Badge tone="primary" dot>
+                {PORTFOLIO_LANDING_HERO.eyebrow}
+              </Badge>
+              <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{PORTFOLIO_LANDING_HERO.title}</h1>
+              <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{PORTFOLIO_LANDING_HERO.description}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <LinkButton href={PORTFOLIO_LANDING_HERO.primaryHref} size="lg">
+                  {PORTFOLIO_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+                </LinkButton>
+                <LinkButton href={PORTFOLIO_LANDING_HERO.secondaryHref} variant="outline" size="lg">
+                  {PORTFOLIO_LANDING_HERO.secondaryCta}
+                </LinkButton>
+              </div>
+            </div>
+            <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+              <PortfolioHeroPanel projects={projects} filters={filters} onFilterSelect={handleHeroFilterSelect} />
+            </div>
           </div>
         </Container>
-        <div className="mt-12">
-          <StatBlock stats={stats} />
-        </div>
       </Section>
 
-      <Section size="compact" tone="inset">
+      <Section {...marketingSection("portfolio", "filters")} tone="inset">
         <Container>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
               {filters.map((item) => (
                 <button
                   key={item.value}
+                  type="button"
                   onClick={() => setFilter(item.value)}
                   className={cn(
                     "rounded-full px-4 py-2 text-sm font-medium border transition-colors",
                     filter === item.value
                       ? "bg-primary text-surface border-primary"
-                      : "bg-surface border-border hover:border-border-strong"
+                      : "bg-surface border-border hover:border-border-strong",
                   )}
                 >
                   {item.label}
@@ -78,7 +104,10 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
               ))}
             </div>
             <div className="relative max-w-sm w-full">
-              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-text-muted" aria-hidden />
+              <MagnifyingGlassIcon
+                className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-text-muted"
+                aria-hidden
+              />
               <input
                 type="search"
                 value={q}
@@ -88,6 +117,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
               />
               {q ? (
                 <button
+                  type="button"
                   onClick={() => setQ("")}
                   aria-label="Clear search"
                   className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-text-muted hover:text-text"
@@ -100,13 +130,14 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section {...marketingSection("portfolio", "grid")} layout="content" spacing="split" id="portfolio-grid">
         <Container>
           {filtered.length === 0 ? (
-            <div className="rounded-[16px] border border-dashed border-border-strong bg-surface p-12 text-center">
+            <div className="rounded-md border border-dashed border-border-strong bg-surface p-12 text-center">
               <p className="font-display text-xl tracking-tight">No projects match those filters.</p>
-              <p className="mt-2 text-text-muted">Try clearing search or selecting a different practice.</p>
+              <p className="mt-2 text-text-muted">Try clearing search or selecting a different category.</p>
               <button
+                type="button"
                 onClick={() => {
                   setFilter("all");
                   setQ("");
@@ -119,7 +150,7 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
           ) : (
             <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
               {filtered.map((project) => (
-                <RevealItem key={project.slug}>
+                <RevealItem key={project.slug} className="h-full">
                   <PortfolioCard project={project} />
                 </RevealItem>
               ))}
@@ -128,10 +159,41 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </Container>
       </Section>
 
-      <TrustStrip items={trustItems} />
+      <Section {...marketingSection("portfolio", "capabilities")}>
+        <Container>
+          <SectionHeading
+            eyebrow={PORTFOLIO_CAPABILITIES_SECTION.eyebrow}
+            title={PORTFOLIO_CAPABILITIES_SECTION.title}
+            description={PORTFOLIO_CAPABILITIES_SECTION.description}
+          />
+          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+            {PORTFOLIO_CAPABILITIES_SECTION.items.map((item) => (
+              <RevealItem key={item.title} className="h-full min-w-0">
+                <Card hoverable className="h-full p-5 sm:p-6">
+                  <h3 className="font-display text-lg tracking-tight sm:text-xl">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                </Card>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </Container>
+      </Section>
+
+      <Section {...marketingSection("portfolio", "delivery")} tone="inset">
+        <Container>
+          <SectionHeading
+            eyebrow={PORTFOLIO_DELIVERY_SECTION.eyebrow}
+            title={PORTFOLIO_DELIVERY_SECTION.title}
+            description={PORTFOLIO_DELIVERY_SECTION.description}
+          />
+          <div className="mt-10">
+            <WebsiteLaunchProcessTimeline steps={[...PORTFOLIO_DELIVERY_SECTION.steps]} />
+          </div>
+        </Container>
+      </Section>
 
       {SHOW_GOOGLE_REVIEWS ? (
-        <Section size="standard" layout="viewport">
+        <Section {...marketingSection("portfolio", "reviews")} layout="content" spacing="split">
           <Container>
             <GoogleReviews
               eyebrow="Voices"
@@ -142,10 +204,26 @@ export function PortfolioPageClient({ projects, filters, stats, trustItems }: Po
         </Section>
       ) : null}
 
+      <Section {...marketingSection("portfolio", "faq")} tone="inset">
+        <Container width="reading">
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Questions about our work."
+            description="Common questions about similar projects, customization, timelines, and support."
+            align="center"
+          />
+          <div className="mt-10">
+            <Accordion items={[...PORTFOLIO_LANDING_FAQ]} />
+          </div>
+        </Container>
+      </Section>
+
       <CTABand
-        title="See something close to what you need? Let's build yours."
-        primary={{ label: "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
+        title={PORTFOLIO_LANDING_CTA.title}
+        description={PORTFOLIO_LANDING_CTA.description}
+        primary={{ label: PORTFOLIO_LANDING_CTA.primaryCta, href: PORTFOLIO_LANDING_CTA.primaryHref }}
+        secondary={{ label: PORTFOLIO_LANDING_CTA.secondaryCta, href: PORTFOLIO_LANDING_CTA.secondaryHref }}
+        {...marketingSection("portfolio", "cta")}
       />
     </>
   );

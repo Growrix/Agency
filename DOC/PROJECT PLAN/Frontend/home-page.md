@@ -23,7 +23,7 @@ depends_on:
 ### 1. Utility Ribbon
 - Content: fast-trust items, average response time, WhatsApp shortcut, and limited-time product bundle notice.
 - Components: utility strip, badge, link buttons.
-- Interaction notes: grouped with the header inside `SiteTopChrome`; both hide on scroll down and reappear on scroll up (desktop only — ribbon hidden on mobile).
+- Interaction notes: grouped with the header inside `SiteTopChrome` (fixed top chrome); both hide on scroll down and reappear on scroll up via a shared visibility provider.
 
 ### 2. Header and Mega Navigation
 - Content: logo, service categories, shop, portfolio, pricing, AI concierge, booking CTA, cart, chat.
@@ -35,26 +35,28 @@ depends_on:
 - Components: hero section, stat blocks, stack line.
 - Interaction notes: centered single-column hero with product-led proof stats.
 
-### 4. Trust Bar
-- Content: production-ready products, Done-For-You entry pricing, response window, secure checkout.
-- Components: `TrustBar`.
+### 4. Service Cards
+- Content: services as upsell path with Template Customization featured first.
+- Components: `ServiceCards`, `FeatureCard`.
+- Interaction notes: rendered immediately after the hero as the second homepage section.
 
-### 5. Featured Products
-- Content: CMS-selected or fallback featured catalog items with product-tier positioning.
-- Components: `FeaturedProducts`, `ShopProductCard`.
+### 5. HTML Business Profiles Category Hero
+- Content: category-based HTML business profile spotlight with template counts and direct links to preview hub and shop category.
+- Components: `HtmlBusinessProfilesCategoryHero`.
 
-### 6. Three-Path Explainer
+### 7. Three-Path Explainer
 - Content: DIY buyer, non-technical owner, serious founder, curious visitor funnels.
 - Components: `ThreePathExplainer`.
 
-### 7. Service Cards
-- Content: services as upsell path with Template Customization featured first.
-- Components: `ServiceCards`, `FeatureCard`.
+### 8. Digital Products Showcase
+- Content: compact full-viewport shop browse with filter sidebar/chips and a capped product grid linking to the full catalog.
+- Components: `HomeDigitalProductsShowcase`, `ShopProductCard`.
+- Interaction notes: `min-h-[100dvh]` section with client-side filter state; Featured Products block removed from homepage.
 
-### 8. HTML Business Profiles Spotlight
-- Content: category-based HTML business profile service spotlight with template counts and direct links to preview hub and shop category.
-- Components: section heading, category cards, CTA pair.
-- Interaction notes: category cards route into `/html-business-profiles?category=...`.
+### 4. Trust Bar (hidden on homepage)
+- Content: production-ready products, Done-For-You entry pricing, response window, secure checkout.
+- Components: `TrustBar`.
+- Interaction notes: retained in code behind `SHOW_HOME_TRUST_BAR`; not rendered on `/` by default.
 
 ### 6. Featured Builds and Outcomes
 - Content: selected case studies weighted toward websites, SaaS applications, mobile launch work, and ready-to-deploy website systems.
@@ -100,13 +102,10 @@ depends_on:
 
 ## Section Size + Layout Map (Desktop-First)
 - Hero statement: `size=hero`, `layout=viewport`.
-- HTML preview showcase: `size=standard`, `layout=viewport` (desktop + mobile previews merged into one section container).
-- HTML business profiles spotlight hero: `size=hero`, `layout=viewport`.
-- Trust bar: `size=compact`, `layout=content`.
-- Featured products: `size=standard`, `layout=viewport`.
-- Three-path explainer: `size=standard`, `layout=viewport`.
 - Service cards: `size=standard`, `layout=viewport`.
-- HTML business profiles grid spotlight: `size=standard`, `layout=viewport`.
+- HTML business profiles spotlight hero: `size=hero`, `layout=viewport`.
+- Three-path explainer: `size=standard`, `layout=viewport`.
+- Digital products showcase: `min-h-[100dvh]`, full width.
 - Featured builds: `size=standard`, `layout=viewport`.
 - Trust strip marquee: `size=compact`, `layout=content`.
 - Process and collaboration model: `size=standard`, `layout=viewport`.

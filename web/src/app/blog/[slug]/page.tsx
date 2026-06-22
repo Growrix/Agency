@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         </Container>
 
         <Container width="content" className="mt-8 sm:mt-10">
-          <div className={`relative aspect-4/3 overflow-hidden rounded-[24px] bg-linear-to-br sm:aspect-21/9 ${post.accent}`}>
+          <div className={`relative aspect-4/3 overflow-hidden rounded-lg bg-linear-to-br sm:aspect-21/9 ${post.accent}`}>
             {heroImage ? (
               <Image
                 src={heroImage.src}

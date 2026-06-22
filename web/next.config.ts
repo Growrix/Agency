@@ -64,44 +64,93 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/products",
+        destination: "/digital-products",
+        permanent: true,
+      },
+      {
+        source: "/products/:path*",
+        destination: "/digital-products/:path*",
+        permanent: true,
+      },
+      {
         source: "/shop",
-        destination: "/products",
+        destination: "/digital-products",
         permanent: true,
       },
       {
         source: "/shop/:slug",
-        destination: "/products/:slug",
+        destination: "/digital-products/:slug",
         permanent: true,
       },
       {
         source: "/services/html-business-profiles",
-        destination: "/products/category/html-business-profiles",
+        destination: "/digital-products/category/html-business-profiles",
         permanent: true,
       },
       {
         source: "/html-business-profiles",
-        destination: "/products/category/html-business-profiles",
+        destination: "/digital-products/category/html-business-profiles",
         permanent: true,
       },
       {
-        source: "/products/category/saas-templates",
-        destination: "/products/category/website-templates",
-        permanent: true,
+        source: "/digital-products/category/saas-templates",
+        destination: "/digital-products",
+        permanent: false,
       },
       {
-        source: "/products/category/ready-websites",
-        destination: "/products/category/website-templates",
-        permanent: true,
+        source: "/digital-products/category/ready-websites",
+        destination: "/digital-products",
+        permanent: false,
+      },
+      {
+        source: "/digital-products/category/website-templates",
+        destination: "/digital-products",
+        permanent: false,
       },
       {
         source: "/previews/website-templates-html/:path*",
         destination: "/previews/html-template-websites/:path*",
         permanent: true,
       },
+      {
+        source: "/services/template-customization",
+        destination: "/services/ai-business-systems",
+        permanent: true,
+      },
+      {
+        source: "/services/mcp-servers",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/solutions/:path*",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/additional-services",
+        destination: "/services/technical-seo",
+        permanent: true,
+      },
     ];
   },
   async headers() {
     return [
+      {
+        source: "/Business-profile",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+          { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
+        ],
+      },
+      {
+        source: "/business-profile",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+          { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
+        ],
+      },
       {
         source: "/images/:path*",
         headers: [

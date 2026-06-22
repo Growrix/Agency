@@ -62,7 +62,7 @@ describe("leads domain", () => {
   });
 
   it("records lead events, accumulates score, and promotes temperature", async () => {
-    const view = await recordLeadEvent({ email: "hot@example.com", eventType: "product_view", route: "/products/x" });
+    const view = await recordLeadEvent({ email: "hot@example.com", eventType: "product_view", route: "/digital-products/x" });
     assert.equal(view.lead.score, 1);
     assert.equal(view.lead.temperature, "cold");
 

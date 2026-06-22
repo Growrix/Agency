@@ -4,7 +4,15 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { ShopStickyFilterSidebar } from "@/components/shop/ShopStickyFilterSidebar";
 import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
+import {
+  buildShopFilterGroups,
+  buildShopFilterOptions,
+  buildShopHref,
+  type ShopFilterGroup,
+  type ShopFilterState,
+} from "@/lib/shop-filters";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = {
@@ -19,69 +27,7 @@ type SearchParams = Promise<{
   industry?: string;
 }>;
 
-type FilterState = {
-  category?: string;
-  type?: string;
-  industry?: string;
-};
-
-function buildShopHref(filters: FilterState, patch: Partial<FilterState>) {
-  const next = new URLSearchParams();
-  const merged = { ...filters, ...patch };
-  if (merged.category) next.set("category", merged.category);
-  if (merged.type) next.set("type", merged.type);
-  if (merged.industry) next.set("industry", merged.industry);
-  const query = next.toString();
-  return query ? `/products?${query}` : "/products";
-}
-
-type FilterGroup = {
-  label: string;
-  key: keyof FilterState;
-  options: { value: string; label: string }[];
-  activeValue: string | undefined;
-};
-
-function buildFilterOptions(
-  items: Array<{ category: string; categorySlug: string; type: string; typeSlug: string; industry: string; industrySlug: string }>,
-) {
-  const categoryOrder = new Map([
-    ["html-business-profiles", 0],
-    ["html-templates", 1],
-    ["saas-templates", 2],
-    ["ai-automation", 3],
-    ["mcp-servers", 4],
-    ["seo-toolkits", 5],
-    ["bundles", 6],
-    ["free-products", 7],
-  ]);
-
-  const sortOptions = (left: { value: string; label: string }, right: { value: string; label: string }) => {
-    const leftRank = categoryOrder.get(left.value) ?? 999;
-    const rightRank = categoryOrder.get(right.value) ?? 999;
-    if (leftRank !== rightRank) {
-      return leftRank - rightRank;
-    }
-    return left.label.localeCompare(right.label);
-  };
-
-  return {
-    categories: Array.from(
-      new Map(items.map((item) => [item.categorySlug, item.category])).entries(),
-      ([value, label]) => ({ value, label })
-    ).sort(sortOptions),
-    types: Array.from(
-      new Map(items.map((item) => [item.typeSlug, item.type])).entries(),
-      ([value, label]) => ({ value, label })
-    ).sort((left, right) => left.label.localeCompare(right.label)),
-    industries: Array.from(
-      new Map(items.map((item) => [item.industrySlug, item.industry])).entries(),
-      ([value, label]) => ({ value, label })
-    ).sort((left, right) => left.label.localeCompare(right.label)),
-  };
-}
-
-function SidebarGroup({ group, filters }: { group: FilterGroup; filters: FilterState }) {
+function SidebarGroup({ group, filters }: { group: ShopFilterGroup; filters: ShopFilterState }) {
   const allHref = buildShopHref(filters, { [group.key]: undefined });
   const isAllActive = !group.activeValue;
 
@@ -135,15 +81,11 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     listPublicShopProducts(),
     listPublicShopProducts(filters),
   ]);
-  const filterOptions = buildFilterOptions(allProducts);
+  const filterOptions = buildShopFilterOptions(allProducts);
 
   const hasActiveFilter = !!(filters.category || filters.type || filters.industry);
 
-  const filterGroups: FilterGroup[] = [
-    { label: "Category", key: "category", options: filterOptions.categories, activeValue: filters.category },
-    { label: "Type", key: "type", options: filterOptions.types, activeValue: filters.type },
-    { label: "Industry", key: "industry", options: filterOptions.industries, activeValue: filters.industry },
-  ];
+  const filterGroups: ShopFilterGroup[] = buildShopFilterGroups(filterOptions, filters);
 
   return (
     <>
@@ -174,7 +116,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 ))}
               </div>
             </div>
-            <LinkButton href="/services/template-customization" variant="outline" size="sm">
+            <LinkButton href="/book-appointment" variant="outline" size="sm">
               Need Done-For-You setup?
             </LinkButton>
           </div>
@@ -184,15 +126,14 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
       {/* Sidebar + product grid */}
       <Section className="py-8 sm:py-12">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-[240px_1fr] lg:items-start">
+          <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-stretch">
 
-            {/* Sidebar filter nav */}
-            <aside className="space-y-6 rounded-2xl border border-border bg-surface p-5 lg:sticky lg:top-24">
+            <ShopStickyFilterSidebar>
               <div className="flex items-center justify-between">
                 <p className="font-display text-sm font-semibold tracking-tight">Filters</p>
                 {hasActiveFilter ? (
                   <Link
-                    href="/products"
+                    href="/digital-products"
                     scroll={false}
                     className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-primary"
                   >
@@ -204,7 +145,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
               {filterGroups.map((group) => (
                 <SidebarGroup key={group.key} group={group} filters={filters} />
               ))}
-            </aside>
+            </ShopStickyFilterSidebar>
 
             {/* Product grid area */}
             <div>
@@ -233,7 +174,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                   <p className="font-display text-xl tracking-tight">No products match those filters.</p>
                   <p className="mt-2 text-sm text-text-muted">Clear a filter to see more of the catalog.</p>
                   <div className="mt-6 flex justify-center">
-                    <LinkButton href="/products" size="sm">Reset filters</LinkButton>
+                    <LinkButton href="/digital-products" size="sm">Reset filters</LinkButton>
                   </div>
                 </div>
               ) : (

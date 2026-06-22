@@ -129,7 +129,7 @@ describe("catalog domain", () => {
     assert.equal(emailPacks.length, 0);
   });
 
-  it("rejects reserved product slugs that conflict with /products routes", async () => {
+  it("rejects reserved product slugs that conflict with /digital-products routes", async () => {
     await assert.rejects(
       upsertManagedProduct({
         slug: "free",
@@ -145,7 +145,7 @@ describe("catalog domain", () => {
         industrySlug: "saas",
         published: true,
         teaser: "Reserved slug test product.",
-        summary: "Should fail because reserved /products route segment is blocked.",
+        summary: "Should fail because reserved /digital-products route segment is blocked.",
         audience: "Test audience",
         previewVariant: "marketing",
         includes: ["Starter files"],
@@ -173,7 +173,7 @@ describe("catalog domain", () => {
       industrySlug: "saas",
       published: true,
       teaser: "Base product for collision test.",
-      summary: "Creates /products/html-business-profile-collision-demo path as non-html category.",
+      summary: "Creates /digital-products/html-business-profile-collision-demo path as non-html category.",
       audience: "Test audience",
       previewVariant: "marketing",
       includes: ["Starter files"],

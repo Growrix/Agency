@@ -91,8 +91,8 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
       <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container>
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All products
+          <Link href="/digital-products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+            ← All digital products
           </Link>
 
           <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:items-stretch">
@@ -106,11 +106,11 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
                 without waiting for a full custom build cycle.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href="/products/category/website-templates" size="lg">
+                <LinkButton href="/digital-products/category/website-templates" size="lg">
                   Browse Website Templates <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton
-                  href={primaryTemplate ? `/products/${primaryTemplate.slug}` : "/products/category/website-templates"}
+                  href={primaryTemplate ? `/digital-products/${primaryTemplate.slug}` : "/digital-products/category/website-templates"}
                   variant="outline"
                   size="lg"
                 >
@@ -143,7 +143,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
                       name: "Website Template",
                       type: "Category Template",
                       price: "$149",
-                      href: "/products/category/website-templates",
+                      href: "/digital-products/category/website-templates",
                       previewImage: getProductImage("Atelier Marketing Theme") ?? null,
                     }}
                   />
@@ -154,7 +154,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section id="profiles" size="standard" layout="viewport" tone="inset">
+      <Section id="profiles" size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured templates"
@@ -167,14 +167,14 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
             ))}
           </div>
           <div className="mt-8">
-            <LinkButton href="/products/category/website-templates" variant="outline">
+            <LinkButton href="/digital-products/category/website-templates" variant="outline">
               View All Website Templates <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
         </Container>
       </Section>
 
-      <Section id="pricing" size="standard" layout="viewport">
+      <Section id="pricing" size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading eyebrow="Pricing paths" title="Pick your launch speed and involvement level." align="center" />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -185,10 +185,10 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
                 desc: "Best for teams that can customize and launch internally.",
                 includes: ["Template files", "Responsive layout", "Documentation", "Commercial usage"],
                 cta: "Get Template Access",
-                href: "/products/category/website-templates",
+                href: "/digital-products/category/website-templates",
               },
               {
-                tier: "Template Customization",
+                tier: "Done-For-You Setup",
                 price: premiumPrice,
                 desc: "Branding, content setup, and deployment-ready handoff by our team.",
                 includes: ["Brand setup", "Content population", "Core integrations", "Launch handoff"],
@@ -234,7 +234,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="Website templates questions, answered." align="center" />
           <div className="mt-10">
@@ -243,7 +243,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need More Than a Template?</h2>
@@ -253,7 +253,7 @@ export function WebsiteTemplatesCategoryLanding({ products }: { products: Public
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <LinkButton href="/book-appointment">Book Consultation</LinkButton>
-              <LinkButton href="/products/category/website-templates" variant="outline">
+              <LinkButton href="/digital-products/category/website-templates" variant="outline">
                 Browse Templates <ArrowUpRightIcon className="size-4" />
               </LinkButton>
             </div>

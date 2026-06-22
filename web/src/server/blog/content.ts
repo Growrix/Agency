@@ -1,5 +1,6 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import type { BlogPost } from "@/lib/content";
 import { listSanityBlogPosts } from "@/server/sanity/blog";
 
@@ -11,8 +12,14 @@ async function listCmsPosts(): Promise<BlogPost[]> {
   }
 }
 
+const listCmsPostsCached = unstable_cache(
+  async () => listCmsPosts(),
+  ["blog-cms-posts"],
+  { revalidate: 120, tags: ["blog-posts"] },
+);
+
 export async function listBlogPosts(): Promise<BlogPost[]> {
-  const posts = await listCmsPosts();
+  const posts = await listCmsPostsCached();
   return [...posts].sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
 }
 
@@ -22,7 +29,7 @@ export async function listBlogSlugs(): Promise<string[]> {
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-  const posts = await listCmsPosts();
+  const posts = await listCmsPostsCached();
   return posts.find((post) => post.slug === slug);
 }
 

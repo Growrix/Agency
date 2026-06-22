@@ -509,6 +509,11 @@ const SERVICE_SLUG_ALIASES: Record<string, string> = {
   "mcp-servers": "mcp-servers",
   automation: "automation",
   automations: "automation",
+  mobile: "mobile-apps",
+  "mobile-app": "mobile-apps",
+  "mobile-apps": "mobile-apps",
+  seo: "technical-seo",
+  "technical-seo": "technical-seo",
 };
 
 function normalizeServiceSlug(value: string | undefined) {

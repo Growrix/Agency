@@ -6,6 +6,8 @@ export type PreviewVariant =
   | "mobile"
   | "booking";
 
+export type ShopCatalogCardVariant = "default" | "catalog-wide" | "compact";
+
 export type ShopProduct = {
   slug: string;
   name: string;
@@ -270,11 +272,13 @@ export type CheckoutSelection = {
   fulfillmentType?: string;
 };
 
+export const DIGITAL_PRODUCTS_BASE_PATH = "/digital-products" as const;
+
 export const RESERVED_PRODUCT_ROUTE_SEGMENTS = ["free", "bundles", "category"] as const;
 
 export function getProductHref(productOrSlug: Pick<ShopProduct, "slug"> | string) {
   const slug = typeof productOrSlug === "string" ? productOrSlug : productOrSlug.slug;
-  return `/products/${slug}`;
+  return `${DIGITAL_PRODUCTS_BASE_PATH}/${slug}`;
 }
 
 export function isReservedProductRouteSlug(slug: string) {

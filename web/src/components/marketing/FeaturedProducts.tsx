@@ -6,7 +6,10 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
+import type { HomeSectionShellProps } from "@/lib/homepage-composition";
+import { homeSection } from "@/lib/homepage-composition";
 
 type FeaturedProductsProps = {
   products: PublicShopProductRecord[];
@@ -17,6 +20,7 @@ type FeaturedProductsProps = {
   ctaLabel?: string;
   variant?: "default" | "html-preview";
   maxProducts?: number;
+  sectionShell?: Partial<HomeSectionShellProps>;
 };
 
 export function FeaturedProducts({
@@ -24,10 +28,11 @@ export function FeaturedProducts({
   eyebrow = "Featured products",
   title = "Production-ready digital products",
   description = "Templates, starters, and toolkits with Standard, Premium, and Done-For-You options — buy now or hire us to launch it for you.",
-  ctaHref = "/products",
-  ctaLabel = "Browse all products",
+  ctaHref = "/digital-products",
+  ctaLabel = "Browse all digital products",
   variant = "default",
   maxProducts,
+  sectionShell,
 }: FeaturedProductsProps) {
   const visibleProducts = maxProducts ? products.slice(0, maxProducts) : products;
 
@@ -36,17 +41,16 @@ export function FeaturedProducts({
   }
 
   const isHtmlPreview = variant === "html-preview";
+  const shell = { ...homeSection("featured-templates"), ...sectionShell };
 
   return (
     <Section
-      size="standard"
-      layout="viewport"
-      tone={isHtmlPreview ? "inset" : undefined}
+      {...shell}
       className={isHtmlPreview ? "overflow-x-hidden" : undefined}
     >
       <Container className={isHtmlPreview ? "min-w-0" : undefined}>
         <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+          <SectionHeading eyebrow={eyebrow} title={title} description={description} titleClassName={HERO_TITLE_CLASS} />
           <LinkButton href={ctaHref} variant="outline">
             {ctaLabel} <ArrowUpRightIcon className="size-4" />
           </LinkButton>
@@ -77,7 +81,7 @@ export function FeaturedProducts({
 
         <p className="mt-6 text-sm text-text-muted">
           Every product supports{" "}
-          <Link href="/services/template-customization" className="font-medium text-primary hover:underline">
+          <Link href="/book-appointment" className="font-medium text-primary hover:underline">
             Done-For-You customization
           </Link>{" "}
           when you need branding, deployment, or integration help.

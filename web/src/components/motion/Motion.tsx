@@ -9,7 +9,6 @@ import {
   type HTMLMotionProps,
   type Variants,
 } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 const EASE_SIGNAL = [0.22, 1, 0.36, 1] as const;
@@ -196,8 +195,6 @@ export function MotionRoot({ children }: { children: ReactNode }) {
 }
 
 export function RouteTransition({ children }: { children: ReactNode }) {
-  usePathname();
-  useReducedMotion();
   return <>{children}</>;
 }
 

@@ -10,10 +10,18 @@ import {
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { HTML_MOBILE_VIEWPORT_WIDTH } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 
-const MOBILE_FEATURES = [
+const TEMPLATE_MOBILE_FEATURES = [
   { icon: DevicePhoneMobileIcon, label: "390px frame", hint: "Standard mobile width" },
-  { icon: SignalIcon, label: "Live HTML", hint: "Not a screenshot" },
+  { icon: SignalIcon, label: WEBSITE_TEMPLATE_PREVIEW.livePreviewChip, hint: "Not a screenshot" },
+  { icon: FingerPrintIcon, label: "Touch-ready", hint: "Built for thumbs" },
+  { icon: GlobeAltIcon, label: "Responsive", hint: "Breakpoints included" },
+] as const;
+
+const PROFILE_MOBILE_FEATURES = [
+  { icon: DevicePhoneMobileIcon, label: "390px frame", hint: "Standard mobile width" },
+  { icon: SignalIcon, label: "Live preview", hint: "Not a screenshot" },
   { icon: FingerPrintIcon, label: "Touch-ready", hint: "Built for thumbs" },
   { icon: GlobeAltIcon, label: "Responsive", hint: "Breakpoints included" },
 ] as const;
@@ -74,7 +82,7 @@ export function WebsiteTemplateHtmlMobilePreviewMarketing() {
       </p>
 
       <div className="mt-3.5 grid grid-cols-2 gap-2">
-        {MOBILE_FEATURES.map((feature, index) => (
+        {TEMPLATE_MOBILE_FEATURES.map((feature, index) => (
           <MobileFeatureTile key={feature.label} {...feature} index={index} />
         ))}
       </div>
@@ -82,7 +90,7 @@ export function WebsiteTemplateHtmlMobilePreviewMarketing() {
       <p className="mt-3.5 flex items-start gap-2 text-sm leading-6 text-text-muted">
         <SparklesIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
         <span>
-          <span className="font-display text-text">Same HTML as desktop.</span> One template, consistent brand on every
+          <span className="font-display text-text">{WEBSITE_TEMPLATE_PREVIEW.sameAsDesktopCopy}</span> One template, consistent brand on every
           screen.
         </span>
       </p>
@@ -114,7 +122,7 @@ export function HtmlBusinessProfileMobilePreviewMarketing() {
       </p>
 
       <div className="mt-3.5 grid grid-cols-2 gap-2">
-        {MOBILE_FEATURES.map((feature, index) => (
+        {PROFILE_MOBILE_FEATURES.map((feature, index) => (
           <MobileFeatureTile key={feature.label} {...feature} index={index} />
         ))}
       </div>
@@ -132,7 +140,7 @@ export function HtmlBusinessProfileMobilePreviewMarketing() {
 
 export function HtmlBusinessProfileProductPreviewHighlights() {
   const items = [
-    { icon: SignalIcon, label: "Live HTML", hint: "Real profile in-frame" },
+    { icon: SignalIcon, label: "Live preview", hint: "Real profile in-frame" },
     { icon: DevicePhoneMobileIcon, label: "Responsive", hint: "Desktop + mobile ready" },
     { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Three launch paths" },
     { icon: GlobeAltIcon, label: "Scrollable", hint: "Explore every section" },
@@ -159,7 +167,7 @@ export function HtmlBusinessProfileProductPreviewHighlights() {
 
 export function WebsiteTemplateHtmlProductPreviewHighlights() {
   const items = [
-    { icon: SignalIcon, label: "Live HTML", hint: "Real pages in-frame" },
+    { icon: SignalIcon, label: WEBSITE_TEMPLATE_PREVIEW.livePreviewChip, hint: WEBSITE_TEMPLATE_PREVIEW.livePreviewChipHint },
     { icon: DevicePhoneMobileIcon, label: "Responsive", hint: "Desktop + mobile ready" },
     { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Three launch paths" },
     { icon: GlobeAltIcon, label: "Scrollable", hint: "Explore every section" },

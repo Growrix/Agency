@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Width = "shell" | "content" | "reading" | "dense" | "full";
-type SectionSize = "hero" | "standard" | "compact" | "dense" | "none";
-type SectionLayout = "content" | "viewport";
+export type SectionSize = "hero" | "standard" | "compact" | "dense" | "none";
+export type SectionLayout = "content" | "viewport";
+export type SectionSpacing = "default" | "split";
 
 const widths: Record<Width, string> = {
   shell: "max-w-[1440px]",
@@ -21,9 +22,24 @@ const sectionSizeClass: Record<SectionSize, string> = {
   none: "py-0",
 };
 
+const sectionSplitSizeClass: Partial<Record<SectionSize, string>> = {
+  standard: "py-12 sm:py-16 lg:py-12",
+  compact: "py-8 sm:py-8",
+};
+
+function resolveSectionPadding(size: SectionSize, spacing: SectionSpacing, layout: SectionLayout): string {
+  if (layout === "viewport" && size === "hero") {
+    return "py-0";
+  }
+  if (spacing === "split" && sectionSplitSizeClass[size]) {
+    return sectionSplitSizeClass[size]!;
+  }
+  return sectionSizeClass[size];
+}
+
 const sectionLayoutClass: Record<SectionLayout, string> = {
   content: "",
-  viewport: "lg:flex lg:min-h-[calc(100dvh-var(--site-chrome-height))] lg:flex-col lg:justify-center",
+  viewport: "hero-viewport-band",
 };
 
 export function Container({
@@ -54,6 +70,8 @@ export function Section({
   tone = "default",
   size = "standard",
   layout = "content",
+  spacing = "default",
+  "aria-labelledby": ariaLabelledBy,
 }: {
   children: ReactNode;
   className?: string;
@@ -61,6 +79,8 @@ export function Section({
   tone?: "default" | "inset" | "dark";
   size?: SectionSize;
   layout?: SectionLayout;
+  spacing?: SectionSpacing;
+  "aria-labelledby"?: string;
 }) {
   const toneClass =
     tone === "inset"
@@ -71,8 +91,9 @@ export function Section({
   return (
     <section
       id={id}
+      aria-labelledby={ariaLabelledBy}
       className={cn(
-        sectionSizeClass[size],
+        resolveSectionPadding(size, spacing, layout),
         sectionLayoutClass[layout],
         toneClass,
         className

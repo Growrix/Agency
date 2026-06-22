@@ -109,7 +109,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
           {!isFiltering && featured && (
             <Link
               href={`/blog/${featured.slug}`}
-              className="group mt-12 grid overflow-hidden rounded-[24px] border border-border bg-surface hover:shadow-(--shadow-3) transition-all lg:grid-cols-12"
+              className="group mt-12 grid overflow-hidden rounded-lg border border-border bg-surface hover:shadow-(--shadow-3) transition-all lg:grid-cols-12"
             >
               <div className={`relative aspect-16/10 lg:aspect-auto lg:col-span-7 overflow-hidden bg-linear-to-br ${featured.accent}`}>
                 {featuredImage ? (
@@ -158,7 +158,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
       </Section>
 
       {/* Grid + sidebar */}
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">

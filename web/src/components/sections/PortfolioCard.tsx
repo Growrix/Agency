@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { SERVICES } from "@/lib/content";
+import { SERVICE_PORTFOLIO_TAG_LABELS } from "@/lib/services-landing-content";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 
 type Project = PublicPortfolioRecord;
@@ -9,6 +10,10 @@ type Project = PublicPortfolioRecord;
 export function PortfolioCard({ project }: { project: Project }) {
   const image = project.hero_image;
   const embeddedPreview = !image ? project.embeddedPreviewUrl : undefined;
+  const serviceLabel =
+    SERVICE_PORTFOLIO_TAG_LABELS[project.service] ??
+    SERVICES.find((service) => service.slug === project.service)?.name ??
+    "Project";
 
   return (
     <Link
@@ -37,7 +42,7 @@ export function PortfolioCard({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-linear-to-t from-black/78 via-black/22 to-transparent" aria-hidden />
         <div className="absolute top-4 left-4">
           <span className="rounded-full bg-black/40 backdrop-blur px-3 py-1 text-[11px] font-mono uppercase tracking-wider text-white">
-            {SERVICES.find((service) => service.slug === project.service)?.name ?? "Project"}
+            {serviceLabel}
           </span>
         </div>
         {project.metric ? (

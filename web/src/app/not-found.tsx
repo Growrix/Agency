@@ -23,7 +23,7 @@ export const metadata = {
 const DESTINATIONS = [
   { icon: Squares2X2Icon, label: "Services", description: "Browse the four practices.", href: "/services" },
   { icon: BriefcaseIcon, label: "Portfolio", description: "See recent shipped work.", href: "/portfolio" },
-  { icon: ShoppingBagIcon, label: "Products", description: "Templates and starters.", href: "/products" },
+  { icon: ShoppingBagIcon, label: "Digital Products", description: "Templates and starters.", href: "/digital-products" },
   { icon: CurrencyDollarIcon, label: "Pricing", description: "Engagement models and ranges.", href: "/pricing" },
   { icon: CalendarDaysIcon, label: "Book a call", description: "30-minute discovery.", href: "/book-appointment" },
 ];

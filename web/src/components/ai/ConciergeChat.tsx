@@ -197,7 +197,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
         "flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden",
         isModal
           ? "h-full bg-surface"
-          : "min-h-[70vh] rounded-[16px] border border-border bg-surface shadow-(--shadow-1)"
+          : "min-h-[70vh] rounded-md border border-border bg-surface shadow-(--shadow-1)"
       )}
     >
       {!isModal && (

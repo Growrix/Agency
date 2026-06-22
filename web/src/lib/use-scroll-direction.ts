@@ -11,6 +11,13 @@ type UseTopChromeVisibilityOptions = {
   topOffset?: number;
 };
 
+function getScrollY() {
+  if (typeof window === "undefined") {
+    return 0;
+  }
+  return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+}
+
 /**
  * Returns whether the top chrome (utility ribbon + header) should be visible.
  * Hides while scrolling down (after leaving topOffset); shows on any upward scroll.
@@ -20,18 +27,29 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
   const showDelta = options?.showDelta ?? 1;
   const topOffset = options?.topOffset ?? 64;
   const [visible, setVisible] = useState(true);
+  const [ready, setReady] = useState(false);
   const lastY = useRef(0);
   const downAccum = useRef(0);
   const upAccum = useRef(0);
+  const visibleRef = useRef(true);
 
   useEffect(() => {
-    lastY.current = window.scrollY;
+    let rafId = 0;
 
-    const onScroll = () => {
-      const y = window.scrollY;
+    const applyVisibility = (next: boolean) => {
+      if (visibleRef.current === next) {
+        return;
+      }
+      visibleRef.current = next;
+      setVisible(next);
+    };
+
+    const evaluate = () => {
+      rafId = 0;
+      const y = getScrollY();
 
       if (y <= topOffset) {
-        setVisible(true);
+        applyVisibility(true);
         downAccum.current = 0;
         upAccum.current = 0;
       } else {
@@ -40,15 +58,14 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
           upAccum.current += -movement;
           downAccum.current = 0;
           if (upAccum.current >= showDelta) {
-            setVisible(true);
+            applyVisibility(true);
             upAccum.current = 0;
           }
         } else if (movement > 0) {
-          // Hide only after cumulative downward motion crosses threshold.
           downAccum.current += movement;
           upAccum.current = 0;
           if (downAccum.current >= hideDelta) {
-            setVisible(false);
+            applyVisibility(false);
             downAccum.current = 0;
           }
         }
@@ -57,20 +74,44 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
       lastY.current = y;
     };
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const onScroll = () => {
+      if (rafId) {
+        return;
+      }
+      rafId = window.requestAnimationFrame(evaluate);
+    };
+
+    lastY.current = getScrollY();
+    evaluate();
+    const readyRaf = window.requestAnimationFrame(() => {
+      setReady(true);
+    });
+
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll, { capture: true });
+      document.removeEventListener("scroll", onScroll, { capture: true });
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.cancelAnimationFrame(readyRaf);
+      queueMicrotask(() => {
+        setReady(false);
+      });
+    };
   }, [hideDelta, showDelta, topOffset]);
 
-  return visible;
+  return { visible, ready };
 }
 
 /** @deprecated Use useTopChromeVisibility — kept for any legacy imports. */
 export function useScrollDirection(options?: UseTopChromeVisibilityOptions) {
-  const visible = useTopChromeVisibility(options);
+  const { visible } = useTopChromeVisibility(options);
   return {
     direction: visible ? null : ("down" as const),
     isAtTop: visible,
-    scrollY: typeof window !== "undefined" ? window.scrollY : 0,
+    scrollY: typeof window !== "undefined" ? getScrollY() : 0,
   };
 }

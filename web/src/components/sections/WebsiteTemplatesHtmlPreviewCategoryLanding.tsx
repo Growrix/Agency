@@ -11,6 +11,8 @@ import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/section
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getProductHref, type ShopProduct } from "@/lib/shop";
+import { marketingSection } from "@/lib/marketing-composition";
+import { WEBSITE_TEMPLATE_PREVIEW, WEBSITE_TEMPLATE_PREVIEW_FAQ } from "@/lib/preview-terminology";
 import {
   buildWebsiteTemplateHtmlPreviewSlides,
   getWebsiteTemplateHtmlPreviewUrl,
@@ -26,25 +28,6 @@ type PublicProduct = ShopProduct & {
     fulfillment_type: "digital_download" | "hybrid_support" | "done_for_you_service";
   }>;
 };
-
-const WEBSITE_TEMPLATE_HTML_PREVIEW_FAQ = [
-  {
-    question: "Is this page different from the CMS-driven website templates page?",
-    answer: "Yes. This preview page is a dedicated HTML showcase while the existing website templates page remains connected to Sanity as-is.",
-  },
-  {
-    question: "Can I interact with a real HTML preview here?",
-    answer: "Yes. The hero preview is rendered from local HTML using the same secure iframe pattern used by the HTML business profiles previews.",
-  },
-  {
-    question: "Can this be expanded with more HTML previews later?",
-    answer: "Yes. Additional HTML files can be added to the preview mapping and immediately surfaced in this page carousel.",
-  },
-  {
-    question: "Can I still buy from the regular product catalog?",
-    answer: "Yes. Product cards below still come from the existing website templates catalog so checkout flow stays unchanged.",
-  },
-];
 
 function getVariantPrice(products: PublicProduct[], slug: string, fallback: string) {
   for (const product of products) {
@@ -66,9 +49,9 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
   const htmlPreviewSlides: HtmlProfileHeroSlide[] = buildWebsiteTemplateHtmlPreviewSlides(catalogProducts);
   const htmlPreviewFallbackSlide: HtmlProfileHeroSlide = {
     name: primaryTemplate?.name ?? "Website Template",
-    type: primaryTemplate?.type ?? "HTML Preview",
+    type: primaryTemplate?.type ?? WEBSITE_TEMPLATE_PREVIEW.previewBadge,
     price: primaryTemplate?.price ?? "$149",
-    href: primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates-html-preview",
+    href: primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates-html-preview",
     previewUrl: listWebsiteTemplateHtmlPreviews()[0]
       ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
       : undefined,
@@ -76,29 +59,29 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
 
   return (
     <>
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-x-hidden">
+      <Section {...marketingSection("category-website-templates-preview", "hero")} className="hero-section relative overflow-x-hidden">
         <div className="absolute inset-0 bg-grid opacity-45 pointer-events-none" aria-hidden />
         <Container className="min-w-0">
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All products
+          <Link href="/digital-products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+            ← All digital products
           </Link>
 
           <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-start xl:gap-10">
             <div className="min-w-0 self-start lg:col-span-4 lg:sticky lg:top-24">
-              <Badge tone="primary" dot>HTML Preview Edition</Badge>
+              <Badge tone="primary" dot>{WEBSITE_TEMPLATE_PREVIEW.heroBadge}</Badge>
               <h1 className="mt-5 font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
-                Website templates with embedded HTML live preview.
+                {WEBSITE_TEMPLATE_PREVIEW.heroTitle}
               </h1>
               <p className="mt-5 text-lg leading-7 text-text-muted">
-                This page mirrors the website templates experience but focuses on direct HTML preview-first discovery.
+                {WEBSITE_TEMPLATE_PREVIEW.heroDescription}
                 Review the template in-frame, then continue with your preferred purchase or customization path.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <LinkButton href="#profiles" size="lg">
-                  Browse HTML Preview Collection <ArrowRightIcon className="size-4" />
+                  {WEBSITE_TEMPLATE_PREVIEW.browseCollectionCta} <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton
-                  href={primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates"}
+                  href={primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates-html-preview#profiles"}
                   variant="outline"
                   size="lg"
                 >
@@ -108,7 +91,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {[
                   { value: `${catalogProducts.length}+`, label: "Catalog Items" },
-                  { value: `${htmlPreviewSlides.length}`, label: "HTML Previews" },
+                  { value: `${htmlPreviewSlides.length}`, label: WEBSITE_TEMPLATE_PREVIEW.statPreviewsLabel },
                   { value: "3", label: "Delivery Paths" },
                   { value: "Live", label: "Embedded Preview" },
                 ].map((metric) => (
@@ -147,14 +130,15 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         showDesktopSection={false}
         showMobileSectionDivider={false}
         autoPlayMobileCarousel={false}
+        sectionShell={marketingSection("category-website-templates-preview", "showcase")}
       />
 
-      <Section id="profiles" size="standard" layout="viewport" tone="inset" className="overflow-x-hidden">
+      <Section id="profiles" {...marketingSection("category-website-templates-preview", "catalog")} className="overflow-x-hidden">
         <Container className="min-w-0">
           <SectionHeading
             eyebrow="Template catalog"
-            title="HTML preview templates you can buy right now"
-            description="Live HTML website templates in a compact grid — preview in-frame, then open the product page to buy."
+            title={WEBSITE_TEMPLATE_PREVIEW.catalogSectionTitle}
+            description={WEBSITE_TEMPLATE_PREVIEW.catalogSectionDescription}
           />
           <div className="mt-8 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {catalogGridProducts.map((product) => (
@@ -165,22 +149,19 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <LinkButton
-              href={primaryTemplate ? getProductHref(primaryTemplate) : "/products/category/website-templates-html-preview#profiles"}
+              href={primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products/category/website-templates-html-preview#profiles"}
               size="lg"
             >
               Open Featured Template <ArrowRightIcon className="size-4" />
             </LinkButton>
-            <LinkButton href="/products/category/website-templates-html-preview#profiles" variant="outline" size="lg">
-              Browse HTML Preview Category <ArrowUpRightIcon className="size-4" />
-            </LinkButton>
-            <LinkButton href="/products/category/website-templates" variant="ghost" size="lg">
-              View CMS Website Templates
+            <LinkButton href="/digital-products/category/website-templates-html-preview#profiles" variant="outline" size="lg">
+              {WEBSITE_TEMPLATE_PREVIEW.browseCategoryCta} <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
         </Container>
       </Section>
 
-      <Section id="pricing" size="standard" layout="viewport">
+      <Section id="pricing" {...marketingSection("category-website-templates-preview", "pricing")}>
         <Container>
           <SectionHeading eyebrow="Pricing paths" title="Choose your preferred implementation level." align="center" />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -191,7 +172,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                 desc: "Download the template and deploy with your own team.",
                 includes: ["Template files", "Responsive structure", "Basic setup guidance", "Commercial usage rights"],
                 cta: "Get Template",
-                href: "/products/category/website-templates",
+                href: primaryTemplate ? getProductHref(primaryTemplate) : "/digital-products",
               },
               {
                 tier: "Branded Setup",
@@ -240,26 +221,29 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section {...marketingSection("category-website-templates-preview", "faq")}>
         <Container width="reading">
-          <SectionHeading eyebrow="FAQ" title="HTML preview page questions, answered." align="center" />
+          <SectionHeading eyebrow="FAQ" title={WEBSITE_TEMPLATE_PREVIEW.faqTitle} align="center" />
           <div className="mt-10">
-            <Accordion items={WEBSITE_TEMPLATE_HTML_PREVIEW_FAQ} />
+            <Accordion items={[...WEBSITE_TEMPLATE_PREVIEW_FAQ, {
+              question: "Can I still buy from the regular product catalog?",
+              answer: "Yes. Product cards below still come from the existing website templates catalog so checkout flow stays unchanged.",
+            }]} />
           </div>
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section {...marketingSection("category-website-templates-preview", "cta")}>
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need a custom website rollout plan?</h2>
             <p className="mt-3 text-base leading-7 text-text-muted">
-              Start from this HTML preview flow, then move into customization or full implementation with our team
+              {WEBSITE_TEMPLATE_PREVIEW.bottomCtaCopy}
               when you are ready to launch.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <LinkButton href="/book-appointment">Book Consultation</LinkButton>
-              <LinkButton href="/products/category/website-templates-html-preview" variant="outline">
+              <LinkButton href="/digital-products/category/website-templates-html-preview" variant="outline">
                 Reopen Preview Page <ArrowUpRightIcon className="size-4" />
               </LinkButton>
             </div>

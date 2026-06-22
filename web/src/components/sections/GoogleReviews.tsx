@@ -87,6 +87,7 @@ type GoogleReviewsProps = {
   limit?: number;
   showSummary?: boolean;
   title: string;
+  titleClassName?: string;
 };
 
 function getGoogleMapsWindow(): GoogleMapsWindow {
@@ -254,6 +255,7 @@ export function GoogleReviews({
   limit = 3,
   showSummary = true,
   title,
+  titleClassName,
 }: GoogleReviewsProps) {
   const [errorText, setErrorText] = useState<string | null>(null);
   const [reviews, setReviews] = useState<LiveReview[]>([]);
@@ -331,7 +333,7 @@ export function GoogleReviews({
 
   return (
     <div className={className}>
-      <SectionHeading eyebrow={eyebrow} title={title} description={description} align={align} />
+      <SectionHeading eyebrow={eyebrow} title={title} description={description} align={align} titleClassName={titleClassName} />
 
       {showSummary && (status === "ready" || status === "empty") && summary && (
         <Reveal className="mt-8">

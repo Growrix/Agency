@@ -66,7 +66,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search the FAQ…"
-                className="h-14 w-full rounded-[16px] border border-border bg-surface pl-12 pr-12 text-base placeholder:text-text-muted outline-none shadow-(--shadow-1) focus:border-primary"
+                className="h-14 w-full rounded-md border border-border bg-surface pl-12 pr-12 text-base placeholder:text-text-muted outline-none shadow-(--shadow-1) focus:border-primary"
               />
               {query ? (
                 <button
@@ -106,7 +106,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading eyebrow="Quick answers" title="The most common ones up front." />
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -120,12 +120,12 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="Browse by category" title="All questions grouped together." />
           <div className="mt-10">
             {filtered.length === 0 ? (
-              <div className="rounded-[16px] border border-dashed border-border-strong bg-surface p-10 text-center">
+              <div className="rounded-md border border-dashed border-border-strong bg-surface p-10 text-center">
                 <p className="font-display text-xl tracking-tight">No matches.</p>
                 <p className="mt-2 text-text-muted">Try a different keyword or open the concierge.</p>
                 <div className="mt-5 flex justify-center gap-3">
@@ -140,7 +140,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading eyebrow="Still stuck" title="Pick a faster route." align="center" />
           <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">

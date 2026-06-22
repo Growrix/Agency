@@ -21,7 +21,7 @@ export function UtilityRibbon() {
             <ChatBubbleLeftRightIcon className="size-3.5" aria-hidden />
             WhatsApp
           </Link>
-          <Link href="/products" className="text-secondary hover:opacity-90">
+          <Link href="/digital-products" className="text-secondary hover:opacity-90">
             Spring bundle: 20% off MCP starters →
           </Link>
         </div>

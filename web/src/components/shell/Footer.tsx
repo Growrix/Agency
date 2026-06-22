@@ -20,7 +20,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-text-muted leading-7">
-              A product-minded studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.
+              A product-minded studio building websites, HTML business profiles, SaaS applications, automation systems, and AI business systems for ambitious teams.
             </p>
             <p className="mt-6 font-mono text-xs uppercase tracking-wider text-text-muted">
               Average response time

@@ -1,7 +1,11 @@
 import type { ReactNode } from "react";
 import { LinkButton } from "@/components/primitives/Button";
-import { Container, Section } from "@/components/primitives/Container";
+import { Container, Section, type SectionLayout, type SectionSize, type SectionSpacing } from "@/components/primitives/Container";
 import { Eyebrow } from "@/components/primitives/SectionHeading";
+import { SECTION_TITLE_CLASS } from "@/lib/typography";
+import { cn } from "@/lib/utils";
+
+const DEFAULT_TITLE_CLASS = SECTION_TITLE_CLASS;
 
 export function CTABand({
   eyebrow = "Next step",
@@ -10,6 +14,11 @@ export function CTABand({
   primary,
   secondary,
   children,
+  titleClassName,
+  size = "compact",
+  layout = "content",
+  spacing = "default",
+  tone = "default",
 }: {
   eyebrow?: ReactNode;
   title: ReactNode;
@@ -17,11 +26,16 @@ export function CTABand({
   primary: { label: string; href: string };
   secondary?: { label: string; href: string };
   children?: ReactNode;
+  titleClassName?: string;
+  size?: SectionSize;
+  layout?: SectionLayout;
+  spacing?: SectionSpacing;
+  tone?: "default" | "inset" | "dark";
 }) {
   return (
-    <Section size="none">
+    <Section size={size} layout={layout} spacing={spacing} tone={tone}>
       <Container>
-        <div className="contrast-surface relative overflow-hidden rounded-[24px] border border-border bg-contrast px-8 py-14 text-contrast-text sm:px-12 sm:py-16">
+        <div className="contrast-surface relative overflow-hidden rounded-lg border border-border bg-contrast px-8 py-14 text-contrast-text sm:px-12 sm:py-16">
           <div className="absolute inset-0 bg-grid-strong opacity-[0.06]" aria-hidden />
           <div
             className="signal-drift-1 absolute -top-32 -right-24 size-96 rounded-full opacity-30 blur-3xl"
@@ -38,7 +52,7 @@ export function CTABand({
               <span className="h-px w-6 bg-secondary/60" aria-hidden />
               {eyebrow}
             </Eyebrow>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
+            <h2 className={cn(titleClassName ?? DEFAULT_TITLE_CLASS)}>
               {title}
             </h2>
             {description && (

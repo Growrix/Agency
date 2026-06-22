@@ -1,6 +1,8 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { SERVICES } from "@/lib/content";
+import { isHiddenServiceSlug, isHiddenProductCategorySlug } from "@/lib/feature-flags";
 import {
   HTML_BUSINESS_PROFILE_TEMPLATES,
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
@@ -11,6 +13,10 @@ import {
   getWebsiteTemplateHtmlPreviewUrl,
   listWebsiteTemplateHtmlPreviews,
 } from "@/lib/website-templates-html-preview";
+import {
+  websiteTemplatePreviewProductName,
+  WEBSITE_TEMPLATE_PREVIEW,
+} from "@/lib/preview-terminology";
 import { getProductTypeDefinition, PRODUCT_PARENT_CATEGORY_LABELS } from "@/lib/product-taxonomy";
 import { isReservedProductRouteSlug } from "@/lib/shop";
 import type {
@@ -37,6 +43,28 @@ import {
   upsertSanityShopItem,
 } from "@/server/sanity/management";
 
+function withPublicDataCache<T extends () => Promise<unknown>>(
+  fn: T,
+  keyParts: string[],
+  options: { revalidate: number; tags: string[] },
+): T {
+  let cachedFn: T | null = null;
+
+  const resolve = (async () => {
+    if (process.env.NODE_ENV === "test") {
+      return fn();
+    }
+
+    if (!cachedFn) {
+      cachedFn = unstable_cache(fn, keyParts, options) as T;
+    }
+
+    return cachedFn();
+  }) as T;
+
+  return resolve;
+}
+
 export type PublicServiceRecord = ManagedServiceRecord;
 
 export type PublicPortfolioRecord = Omit<ManagedPortfolioRecord, "detail">;
@@ -56,7 +84,7 @@ export type PublicShopProductRecord = ManagedProductRecord & { price_cents: numb
  * 1) CMS content is always included when published.
  * 2) Local fallback products are included only from explicitly curated seed sets.
  * 3) Placeholder/legacy mock records are filtered before public exposure.
- * 4) Canonical product detail paths stay flat at /products/[slug].
+ * 4) Canonical product detail paths stay flat at /digital-products/[slug].
  *    Reserved slug segments are blocked to avoid route collisions.
  */
 const FALLBACK_CATALOG_POLICY = {
@@ -106,6 +134,7 @@ const RETIRED_SEED_CATEGORY_SLUGS = new Set([
 
 const LEGACY_MOCK_PORTFOLIO_PLACEHOLDER_SLUGS = new Set(["new-project"]);
 const PRODUCT_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const CATALOG_REVALIDATE_SECONDS = 300;
 
 function isLikelyPlaceholderUrl(value: string | undefined) {
   if (!value) {
@@ -205,7 +234,7 @@ function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
       industry: template.categoryLabel,
       industrySlug: template.categorySlug,
       tag: template.tag,
-      published: true,
+      published: template.profileNumber !== null,
       teaser: template.teaser,
       summary: template.summary,
       audience: template.audience,
@@ -266,13 +295,13 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
 
     return withParentTaxonomy({
       slug,
-      name: `${template.title} HTML Preview`,
+      name: websiteTemplatePreviewProductName(template.title),
       price: template.price,
       livePreviewUrl: previewUrl,
       embeddedPreviewUrl: previewUrl,
       parentCategoryLabel: PRODUCT_PARENT_CATEGORY_LABELS["business-professional"],
       parentCategorySlug: "business-professional",
-      category: "Website Templates HTML Preview",
+      category: WEBSITE_TEMPLATE_PREVIEW.productCategoryLabel,
       categorySlug: "website-templates-html-preview",
       type: template.type,
       typeSlug: "website-template-html",
@@ -280,11 +309,11 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
       industrySlug: "website-templates",
       tag: "Preview",
       published: true,
-      teaser: template.teaser ?? `Embedded HTML preview for the ${template.title} website template.`,
-      summary: template.summary ?? `Preview-first ${template.title} template with live HTML rendering and shop-ready routing.`,
-      audience: "Buyers who want to inspect live HTML before purchasing template packages.",
+      teaser: template.teaser ?? `Embedded live preview for the ${template.title} website template.`,
+      summary: template.summary ?? `Preview-first ${template.title} template with live website preview and shop-ready routing.`,
+      audience: "Buyers who want to inspect a live website preview before purchasing template packages.",
       features: [
-        "Iframe-safe embedded HTML preview",
+        "Iframe-safe embedded live preview",
         "Template-only, setup, and done-for-you pricing paths",
         "Responsive layout baseline",
       ],
@@ -292,7 +321,7 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
       includes: ["Template files", "Responsive layout baseline", "Launch-ready sections"],
       inScope: ["Template package", "Embedded preview", "Category routing"],
       outOfScope: ["Custom development", "Complex integrations"],
-      enhancementPlan: ["Expand HTML preview catalog", "Connect additional template files"],
+      enhancementPlan: ["Expand live preview catalog", "Connect additional template files"],
       stack: ["HTML5", "CSS3", "JavaScript"],
       variants: [
         {
@@ -325,7 +354,7 @@ function getDefaultWebsiteTemplateHtmlPreviewProducts(): ManagedProductRecord[] 
         },
       ],
       highlights: [
-        { label: "Preview", value: "Live HTML" },
+        { label: "Preview", value: "Live preview" },
         { label: "Industry", value: template.industry ?? template.type },
       ],
       image: null,
@@ -407,7 +436,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           answer: "Yes. It is built as a launch foundation and designed to be extended with your product logic.",
         },
       ],
-      related_service_slugs: ["template-customization", "saas-applications"],
+      related_service_slugs: ["ai-business-systems", "saas-applications"],
     },
     {
       slug: "ai-chatbot-qualification-starter",
@@ -466,7 +495,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           comparison_points: ["Implementation setup", "Integration QA"],
         },
       ],
-      related_service_slugs: ["automation", "template-customization"],
+      related_service_slugs: ["automation", "ai-business-systems"],
     },
     {
       slug: "mcp-server-kickstart-kit",
@@ -637,7 +666,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           comparison_points: ["Setup by Growrix", "Launch QA"],
         },
       ],
-      related_service_slugs: ["template-customization", "websites"],
+      related_service_slugs: ["ai-business-systems", "websites"],
     },
     {
       slug: "free-conversion-landing-starter",
@@ -693,7 +722,7 @@ function getDefaultAnchorProducts(): ManagedProductRecord[] {
           comparison_points: ["Deploy + integration", "Launch QA"],
         },
       ],
-      related_service_slugs: ["template-customization"],
+      related_service_slugs: ["ai-business-systems"],
     },
   ] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }
@@ -757,7 +786,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
           comparison_points: ["Brand customization", "ESP setup support"],
         },
       ],
-      related_service_slugs: ["template-customization", "automation"],
+      related_service_slugs: ["ai-business-systems", "automation"],
     },
     {
       slug: "email-pack-ecommerce-revenue",
@@ -816,7 +845,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
           comparison_points: ["Brand customization", "Testing support"],
         },
       ],
-      related_service_slugs: ["template-customization", "automation"],
+      related_service_slugs: ["ai-business-systems", "automation"],
     },
     {
       slug: "email-pack-business-operations",
@@ -875,7 +904,7 @@ function getDefaultHtmlEmailTemplateProducts(): ManagedProductRecord[] {
           comparison_points: ["Brand customization", "ESP setup support"],
         },
       ],
-      related_service_slugs: ["template-customization", "automation"],
+      related_service_slugs: ["ai-business-systems", "automation"],
     },
   ] satisfies ManagedProductRecord[]).map(withParentTaxonomy);
 }
@@ -910,7 +939,7 @@ function mergeCatalogProducts(...productGroups: ManagedProductRecord[][]) {
   return Array.from(merged.values());
 }
 
-async function listAllPublicProducts() {
+async function listAllPublicProductsUncached() {
   const database = await ensureCatalogSeeded();
   const cmsProducts = await listSanityShopItems().catch(() => []);
   const cmsHtmlTemplates = await listSanityHtmlBusinessProfileTemplates().catch(() => []);
@@ -925,6 +954,12 @@ async function listAllPublicProducts() {
   return mergeCatalogProducts(localHtmlTemplates, localWebsiteTemplateHtmlPreviews, managedProducts, cmsProducts, cmsHtmlTemplates)
     .filter((product) => !isPlaceholderProduct(product));
 }
+
+const listAllPublicProductsCached = withPublicDataCache(
+  async () => listAllPublicProductsUncached(),
+  ["catalog-public-products"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-products"] },
+);
 
 function getDefaultServices(): ManagedServiceRecord[] {
   return SERVICES.map((service) => ({
@@ -987,14 +1022,29 @@ async function ensureCatalogSeeded() {
   return seeded;
 }
 
-export async function listPublicServices(): Promise<PublicServiceRecord[]> {
+async function listPublicServicesUncached(): Promise<PublicServiceRecord[]> {
   const database = await ensureCatalogSeeded();
   const fallbackServices = getEffectiveServices(database.services);
   const cmsServices = await listSanityServicePages().catch(() => []);
-  return mergeServices(fallbackServices, cmsServices);
+  return mergeServices(fallbackServices, cmsServices).filter(
+    (service) => !isHiddenServiceSlug(service.slug),
+  );
+}
+
+const listPublicServicesCached = withPublicDataCache(
+  async () => listPublicServicesUncached(),
+  ["catalog-public-services"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-services"] },
+);
+
+export async function listPublicServices(): Promise<PublicServiceRecord[]> {
+  return listPublicServicesCached();
 }
 
 export async function getPublicService(serviceId: string): Promise<PublicServiceRecord | null> {
+  if (isHiddenServiceSlug(serviceId)) {
+    return null;
+  }
   const database = await ensureCatalogSeeded();
   const fallbackServices = getEffectiveServices(database.services);
   const fallback = fallbackServices.find((service) => service.slug === serviceId || service.id === serviceId) ?? null;
@@ -1011,7 +1061,7 @@ export async function getPublicService(serviceId: string): Promise<PublicService
   };
 }
 
-export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
+async function listPublicPortfolioUncached(): Promise<PublicPortfolioRecord[]> {
   const database = await ensureCatalogSeeded();
   const cmsProjects = await listSanityCaseStudies().catch(() => []);
   const publicProjects = cmsProjects.length > 0 ? cmsProjects : database.portfolio_projects;
@@ -1032,6 +1082,16 @@ export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   }));
 }
 
+const listPublicPortfolioCached = withPublicDataCache(
+  async () => listPublicPortfolioUncached(),
+  ["catalog-public-portfolio"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-portfolio"] },
+);
+
+export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
+  return listPublicPortfolioCached();
+}
+
 export async function getPublicPortfolioProject(slug: string): Promise<PublicPortfolioDetailRecord | null> {
   const database = await ensureCatalogSeeded();
   const cmsProjects = await listSanityCaseStudies().catch(() => []);
@@ -1046,12 +1106,12 @@ export async function getPublicPortfolioProject(slug: string): Promise<PublicPor
 }
 
 export async function listPublicShopCategories(): Promise<PublicShopCategoryRecord[]> {
-  const products = await listAllPublicProducts();
+  const products = await listAllPublicProductsCached();
 
   const categoryMap = new Map<string, string>();
 
   for (const product of products) {
-    if (product.published === false) {
+    if (product.published === false || isHiddenProductCategorySlug(product.categorySlug)) {
       continue;
     }
 
@@ -1071,11 +1131,15 @@ export async function listPublicShopProducts(filters?: {
   industry?: string;
   search?: string;
 }) {
-  const products = await listAllPublicProducts();
+  const products = await listAllPublicProductsCached();
   const q = filters?.search?.trim().toLowerCase();
 
   return products.filter((product) => {
     if (product.published === false) {
+      return false;
+    }
+
+    if (isHiddenProductCategorySlug(product.categorySlug)) {
       return false;
     }
 
@@ -1108,13 +1172,13 @@ export async function listPublicShopProducts(filters?: {
 }
 
 export async function getPublicShopProduct(slug: string): Promise<PublicShopProductRecord | null> {
-  const products = await listAllPublicProducts();
+  const products = await listAllPublicProductsCached();
   const alternateHtmlSlug = toHtmlProductSlug(slug);
   const product = products.find(
     (item) => (item.slug === slug || item.slug === alternateHtmlSlug) && item.published !== false,
   ) ?? null;
 
-  if (!product || isPlaceholderProduct(product)) {
+  if (!product || isPlaceholderProduct(product) || isHiddenProductCategorySlug(product.categorySlug)) {
     return null;
   }
 
@@ -1185,7 +1249,7 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
   }
 
   if (isReservedProductRouteSlug(normalizedSlug)) {
-    throw new Error("RESERVED_PRODUCT_SLUG: Product slug conflicts with a reserved /products route segment.");
+    throw new Error("RESERVED_PRODUCT_SLUG: Product slug conflicts with a reserved /digital-products route segment.");
   }
 
   const existingProducts = await listManagedProducts();
@@ -1203,7 +1267,7 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
   });
 
   if (duplicatePublicSlug) {
-    throw new Error(`DUPLICATE_PRODUCT_SLUG: Another product already resolves to /products/${nextPublicSlug}.`);
+    throw new Error(`DUPLICATE_PRODUCT_SLUG: Another product already resolves to /digital-products/${nextPublicSlug}.`);
   }
 
   const nextRecord = {

@@ -45,8 +45,8 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   return (
     <Section className="pb-12 pt-12 sm:pb-16 sm:pt-16">
       <Container>
-        <Link href={product ? getProductHref(product) : "/products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
-          <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to products"}
+        <Link href={product ? getProductHref(product) : "/digital-products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
+          <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to digital products"}
         </Link>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
@@ -70,7 +70,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">Order summary</p>
             {product ? (
               <>
-                <div className="mt-4 rounded-[16px] border border-border bg-surface p-4">
+                <div className="mt-4 rounded-md border border-border bg-surface p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="font-display text-2xl tracking-tight">{product.name}</p>
@@ -108,7 +108,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                 </div>
               </>
             ) : (
-              <div className="mt-4 rounded-[16px] border border-dashed border-border bg-surface p-5 text-sm leading-6 text-text-muted">
+              <div className="mt-4 rounded-md border border-dashed border-border bg-surface p-5 text-sm leading-6 text-text-muted">
                 Choose a product from the catalog to land here with a preselected website order summary.
               </div>
             )}

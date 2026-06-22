@@ -24,7 +24,7 @@ const WEBSITE_TEMPLATE_HTML_PREVIEWS: WebsiteTemplateHtmlPreviewRecord[] = [
     price: "$149",
     industry: "Construction",
     teaser: "Bold construction company template with services, proof, and quote-ready sections.",
-    summary: "A trades-focused website template with embedded HTML preview, built for contractors who need credibility fast.",
+    summary: "A trades-focused website template with embedded live preview, built for contractors who need credibility fast.",
   },
   {
     slug: "02-super-shop-commerce",
@@ -263,7 +263,7 @@ export function buildWebsiteTemplateHtmlPreviewSlides(catalogProducts: WebsiteTe
       name: template.title,
       type: template.type,
       price: catalogProduct?.price ?? template.price,
-      href: catalogProduct ? `/products/${catalogProduct.slug}` : `/products/${productSlug}`,
+      href: catalogProduct ? `/digital-products/${catalogProduct.slug}` : `/digital-products/${productSlug}`,
       previewUrl,
     };
   });

@@ -16,6 +16,7 @@ export type Tier = {
   mutePrice?: boolean;
   description: string;
   features: string[];
+  timeline?: string;
   cta: { label: string; href: string };
   featured?: boolean;
   badge?: string;
@@ -50,6 +51,11 @@ export function PricingTier({ tier, className }: { tier: Tier; className?: strin
       <p className={cn("mt-3 leading-7 text-pretty", getTierCardMutedTextClass(isFeatured))}>
         {tier.description}
       </p>
+      {tier.timeline ? (
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-primary">
+          Timeline · {tier.timeline}
+        </p>
+      ) : null}
       <ul className="mt-6 space-y-3 flex-1">
         {tier.features.map((f) => (
           <li key={f} className="flex gap-3 text-sm leading-6">

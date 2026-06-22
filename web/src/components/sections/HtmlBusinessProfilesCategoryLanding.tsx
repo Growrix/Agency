@@ -1,4 +1,4 @@
-﻿import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -84,7 +84,7 @@ export function HtmlBusinessProfilesCategoryLanding({
     <>
       <HtmlBusinessProfilesCategoryHero products={products} />
 
-      <Section id="profiles" size="standard" layout="viewport" tone="inset">
+      <Section id="profiles" size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured profiles"
@@ -99,14 +99,14 @@ export function HtmlBusinessProfilesCategoryLanding({
             ))}
           </div>
           <div className="mt-8">
-            <LinkButton href="/products/category/html-business-profiles" variant="outline">
+            <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
               View All Business Profiles <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
         </Container>
       </Section>
 
-      <Section id="pricing" size="standard" layout="viewport">
+      <Section id="pricing" size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow="Pricing"
@@ -121,7 +121,7 @@ export function HtmlBusinessProfilesCategoryLanding({
                 desc: "For developers, agencies, and DIY users.",
                 includes: ["HTML files", "Responsive design", "Documentation", "Commercial usage"],
                 cta: "Download Template",
-                href: "/products/category/html-business-profiles",
+                href: "/digital-products/category/html-business-profiles",
               },
               {
                 tier: "Branded Setup",
@@ -170,7 +170,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow="Why business profiles"
@@ -217,7 +217,7 @@ export function HtmlBusinessProfilesCategoryLanding({
                   "Your business profile isn&apos;t a dead-end template. It can evolve into a branded website, lead generation platform, booking system, customer portal, or even a full SaaS product over time.",
                 label: "Growth Path",
                 items: [
-                  "Template â†’ Branded Profile â†’ Business Launch â†’ Full Website â†’ Custom Platform",
+                  "Template → Branded Profile → Business Launch → Full Website → Custom Platform",
                   "",
                   "",
                   "",
@@ -248,7 +248,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading eyebrow="What's included" title="Every profile includes" align="center" />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -264,7 +264,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section id="customization" size="standard" layout="viewport">
+      <Section id="customization" size="standard" layout="content" spacing="split">
         <Container>
           <SectionHeading
             eyebrow="Customization options"
@@ -289,7 +289,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="Upgrade path" title="Start small. Grow later." align="center" />
           <div className="mt-10 space-y-3">
@@ -305,7 +305,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport">
+      <Section size="standard" layout="content" spacing="split">
         <Container width="reading">
           <Card className="p-8 text-center">
             <h2 className="font-display text-3xl tracking-tight">Need More Than a Business Profile?</h2>
@@ -315,7 +315,7 @@ export function HtmlBusinessProfilesCategoryLanding({
             <p className="mt-3 text-sm text-text-muted">Average response time: under 24 business hours.</p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <LinkButton href="/book-appointment">Book Consultation</LinkButton>
-              <LinkButton href="/products/category/html-business-profiles" variant="outline">
+              <LinkButton href="/digital-products/category/html-business-profiles" variant="outline">
                 Browse Profiles
               </LinkButton>
             </div>
@@ -323,7 +323,7 @@ export function HtmlBusinessProfilesCategoryLanding({
         </Container>
       </Section>
 
-      <Section id="faq" size="standard" layout="viewport" tone="inset">
+      <Section id="faq" size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
           <SectionHeading eyebrow="FAQ" title="HTML Business Profiles questions, answered." align="center" />
           <div className="mt-10">

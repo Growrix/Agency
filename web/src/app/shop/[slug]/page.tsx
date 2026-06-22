@@ -18,6 +18,7 @@ import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import {
   getTierCardBadgeClass,
   getTierCardCheckClass,
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = await getPublicShopProduct(slug).catch(() => null);
   if (!product) return {};
 
-  const canonical = `/products/${product.slug}`;
+  const canonical = `/digital-products/${product.slug}`;
   const description = product.summary ?? product.teaser ?? undefined;
   const ogImage = product.image?.src;
 
@@ -252,7 +253,7 @@ const WEBSITE_TEMPLATE_TIER_PRESETS: Record<string, WebsiteTemplateTierPreset> =
     helper: "Best for teams that prefer managing everything themselves.",
   },
   premium: {
-    label: "Template Customization",
+    label: "Done-For-You Setup",
     price: "$499",
     description:
       "We'll transform the template into your business website, configure available integrations, and deploy it for launch. This is the fastest and most cost-effective way to get a professional website online.",
@@ -283,7 +284,7 @@ const WEBSITE_TEMPLATE_TIER_PRESETS: Record<string, WebsiteTemplateTierPreset> =
     price: "Custom Pricing",
     description:
       "A fully tailored website engagement designed around your business goals, structure, and growth plans. Instead of adapting your business to a template, we design the website experience around your business.",
-    includesHeading: "Includes Everything in Template Customization Plus",
+    includesHeading: "Includes Everything in Done-For-You Setup Plus",
     includes: [
       "Discovery and planning workshops",
       "Website strategy",
@@ -509,7 +510,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       "Founders choosing between DIY and Done-For-You paths",
     ];
 
-  const productCanonicalUrl = absoluteUrl(`/products/${product.slug}`);
+  const productCanonicalUrl = absoluteUrl(`/digital-products/${product.slug}`);
   const productPriceMatch = /([0-9][0-9,]*(?:\.[0-9]+)?)/.exec(product.price ?? "");
   const productPriceValue = productPriceMatch ? productPriceMatch[1].replace(/,/g, "") : undefined;
   const productJsonLd: JsonLdData = {
@@ -558,8 +559,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
           <Container width="content">
-            <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-              <ArrowLeftIcon className="size-4" /> Back to products
+            <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+              <ArrowLeftIcon className="size-4" /> Back to digital products
             </Link>
 
             <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
@@ -571,18 +572,21 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
                 </div>
 
-                <div id="preview" className="min-w-0 w-full max-w-[440px]">
+                <div id="preview" className="min-w-0 w-full">
                   {product.embeddedPreviewUrl ? (
-                    <Card className="overflow-hidden p-5 sm:p-6">
-                      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">
-                        Live mobile profile preview
-                      </p>
-                      <div className="mt-4 min-w-0">
+                    <Card className="overflow-hidden p-0">
+                      <div className="border-b border-border px-5 py-4 sm:px-6">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-text-muted">
+                          Live mobile profile preview
+                        </p>
+                      </div>
+                      <div className="flex min-h-[320px] w-full items-center justify-center bg-[#0a0a0a] px-4 py-6 sm:min-h-[420px] sm:px-6 sm:py-8">
                         <WebsiteTemplateHtmlMobilePreviewFrame
                           previewUrl={product.embeddedPreviewUrl}
                           title={`${product.name} mobile preview`}
                           maxFrameHeight={480}
                           showViewportLabel={false}
+                          className="w-[410px] max-w-full shrink-0"
                         />
                       </div>
                     </Card>
@@ -1016,8 +1020,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
           <Container width="content">
-            <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-              <ArrowLeftIcon className="size-4" /> Back to products
+            <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+              <ArrowLeftIcon className="size-4" /> Back to digital products
             </Link>
 
             <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
@@ -1259,7 +1263,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   You already have the skills or team to customize, deploy, and manage the website yourself.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Template Customization</strong><br />
+                  <strong>Done-For-You Setup</strong><br />
                   You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
@@ -1350,7 +1354,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       <tr>
                         <th className="px-4 py-3 font-medium">Capability</th>
                         <th className="px-4 py-3 font-medium">Template Only</th>
-                        <th className="px-4 py-3 font-medium">Template Customization</th>
+                        <th className="px-4 py-3 font-medium">Done-For-You Setup</th>
                         <th className="px-4 py-3 font-medium">Business Launch</th>
                       </tr>
                     </thead>
@@ -1416,7 +1420,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           <Section className="border-t border-border py-12 sm:py-16">
             <Container width="content">
               <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
-              <p className="mt-2 text-sm text-text-muted">Browse more website template HTML previews from this category.</p>
+              <p className="mt-2 text-sm text-text-muted">{WEBSITE_TEMPLATE_PREVIEW.relatedProductsCopy}</p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
                 {related.map((item) => (
                   <ShopProductCatalogCard key={item.slug} product={item} />
@@ -1463,8 +1467,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       {/* Main product layout */}
       <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
         <Container width={useShellLayout ? "shell" : "content"}>
-          <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-            <ArrowLeftIcon className="size-4" /> Back to products
+          <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+            <ArrowLeftIcon className="size-4" /> Back to digital products
           </Link>
 
           <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">
@@ -1767,7 +1771,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       You already have the skills or team to customize, deploy, and manage the website yourself.
                     </p>
                     <p className="mt-2 text-sm leading-6 text-text-muted">
-                      <strong>Template Customization</strong><br />
+                      <strong>Done-For-You Setup</strong><br />
                       You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
                     </p>
                     <p className="mt-2 text-sm leading-6 text-text-muted">
@@ -1873,7 +1877,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                           <tr>
                             <th className="px-4 py-3 font-medium">Capability</th>
                             <th className="px-4 py-3 font-medium">Template Only</th>
-                            <th className="px-4 py-3 font-medium">Template Customization</th>
+                            <th className="px-4 py-3 font-medium">Done-For-You Setup</th>
                             <th className="px-4 py-3 font-medium">Business Launch</th>
                           </tr>
                         </thead>
@@ -2076,7 +2080,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   You already have the skills or team to customize, deploy, and manage the website yourself.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Template Customization</strong><br />
+                  <strong>Done-For-You Setup</strong><br />
                   You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
                 </p>
                 <p className="mt-2 text-sm leading-6 text-text-muted">
@@ -2182,7 +2186,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       <tr>
                         <th className="px-4 py-3 font-medium">Capability</th>
                         <th className="px-4 py-3 font-medium">Template Only</th>
-                        <th className="px-4 py-3 font-medium">Template Customization</th>
+                        <th className="px-4 py-3 font-medium">Done-For-You Setup</th>
                         <th className="px-4 py-3 font-medium">Business Launch</th>
                       </tr>
                     </thead>

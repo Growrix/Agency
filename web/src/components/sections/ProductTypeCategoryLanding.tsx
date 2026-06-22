@@ -27,14 +27,14 @@ export function ProductTypeCategoryLanding({
 }) {
   const featured = products.slice(0, 8);
   const sample = products[0];
-  const canonicalHref = `/products/category/${type.slug}`;
+  const canonicalHref = `/digital-products/category/${type.slug}`;
 
   return (
     <>
       <Section size="hero" layout="viewport" className="hero-section">
         <Container>
-          <Link href="/products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All products
+          <Link href="/digital-products" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+            ← All digital products
           </Link>
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-8">
@@ -51,7 +51,7 @@ export function ProductTypeCategoryLanding({
                   Browse {type.label} <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 {sample ? (
-                  <LinkButton href={`/products/${sample.slug}`} variant="outline">
+                  <LinkButton href={`/digital-products/${sample.slug}`} variant="outline">
                     View Example Product
                   </LinkButton>
                 ) : null}
@@ -68,7 +68,7 @@ export function ProductTypeCategoryLanding({
         </Container>
       </Section>
 
-      <Section size="standard" layout="viewport" tone="inset">
+      <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
           <SectionHeading
             eyebrow="Featured products"

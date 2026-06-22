@@ -92,7 +92,7 @@ export function AdditionalServices() {
               .
             </p>
             <Link
-              href="/additional-services"
+              href="/services/technical-seo"
               className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-2 hover:underline"
             >
               See full SEO service details

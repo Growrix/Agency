@@ -40,7 +40,7 @@ function CommentItem({
   const open = pendingReplyId === comment.id;
 
   return (
-    <li className="rounded-[16px] border border-border bg-surface p-4 sm:p-5">
+    <li className="rounded-md border border-border bg-surface p-4 sm:p-5">
       <div className="flex items-start gap-3">
         <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-inset font-mono text-[11px] font-semibold">
           {comment.initials}
