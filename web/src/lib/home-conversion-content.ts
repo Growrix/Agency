@@ -5,6 +5,17 @@ export const HERO_TRUST_PILLS = [
   "Built for Startups & Agencies",
 ] as const;
 
+export const HOME_HERO_COPY = {
+  badge: "Productized SaaS studio + digital marketplace",
+  title: "Launch faster with ready-made systems.",
+  description:
+    "Production-ready templates, expert implementation, and AI workflows—buy today or build with us.",
+  primaryCta: "Browse Digital Products",
+  secondaryCta: "Book a Free Consultation",
+  stackLabel: "Built with",
+  stackItems: ["Next.js", "React", "TypeScript", "Python", "Stripe", "Supabase"],
+} as const;
+
 export const HOME_SERVICES_COPY = {
   eyebrow: "Services",
   title: "Launch faster. Scale smarter.",

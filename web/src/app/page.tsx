@@ -8,11 +8,10 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
-import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
-import { HeroTrustStrip } from "@/components/marketing/HeroTrustStrip";
+import { HomeHero } from "@/components/marketing/HomeHero";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
 import { ServiceCards } from "@/components/marketing/ServiceCards";
@@ -56,7 +55,6 @@ import {
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
 } from "@/lib/website-templates-html-preview";
 import { getProductHref } from "@/lib/shop";
-import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
 const ReadyMadeSolutionsSection = dynamic(
@@ -153,70 +151,19 @@ export default async function Home() {
   return (
     <>
       <JsonLd data={homeStructuredData} />
-      {/* Hero */}
-      <Section {...homeSection("hero")} className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
-        <div className="hero-glow pointer-events-none absolute right-12 top-24 h-40 w-40 rounded-full bg-secondary/20 blur-3xl" aria-hidden />
-        <Container width="shell">
-          <div className="mx-auto max-w-5xl text-center">
-            <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Productized SaaS studio + digital marketplace"}</Badge>
-            </div>
-            <h1
-              className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
-              style={{ animationDelay: "90ms" }}
-            >
-              {homeContent?.heroTitle ?? "Launch faster with ready-made systems, digital products, and expert growth support."}
-            </h1>
-            <p
-              className="signal-rise mx-auto mt-6 max-w-3xl text-lg leading-7 text-pretty text-text-muted"
-              style={{ animationDelay: "180ms" }}
-            >
-              {homeContent?.heroDescription ?? "Buy production-ready digital products, customize them yourself, or partner with GrowrixOS to implement, optimize, and scale what your business needs next."}
-            </p>
-            <div
-              className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
-              style={{ animationDelay: "270ms" }}
-            >
-              <LinkButton href="/digital-products" size="lg">
-                Browse Digital Products <ArrowRightIcon className="size-4" />
-              </LinkButton>
-              <LinkButton href="/book-appointment" variant="outline" size="lg">
-                Book a Free Consultation
-              </LinkButton>
-            </div>
-            <div
-              className="signal-rise mt-4 flex flex-wrap items-center justify-center gap-2"
-              style={{ animationDelay: "320ms" }}
-            >
-              <LinkButton href="/contact" variant="ghost" size="sm">
-                Need Custom Work?
-              </LinkButton>
-              <LinkButton href={WHATSAPP_HREF} variant="ghost" size="sm" target="_blank" rel="noreferrer">
-                Chat on WhatsApp
-              </LinkButton>
-              <ConciergeTriggerButton
-                variant="ghost"
-                size="sm"
-                prompt="I need help choosing between a product purchase and a done-for-you custom build."
-              >
-                Ask AI Assistant
-              </ConciergeTriggerButton>
-            </div>
-            <div className="signal-rise mt-6" style={{ animationDelay: "340ms" }}>
-              <HeroTrustStrip />
-            </div>
-            <p
-              className="signal-rise mx-auto mt-6 max-w-2xl font-mono text-xs uppercase tracking-wider text-text-muted"
-              style={{ animationDelay: "360ms" }}
-            >
-              Next.js · React · TypeScript · Python · Django · Stripe · Supabase
-            </p>
-          </div>
-
-        </Container>
-      </Section>
+      <HomeHero
+        badge={homeContent?.heroBadge}
+        title={homeContent?.heroTitle}
+        description={homeContent?.heroDescription}
+        visual={{
+          templateName: htmlPreviewPrimaryTemplate?.name,
+          templateType: htmlPreviewPrimaryTemplate?.type,
+          templatePrice: htmlPreviewPrimaryTemplate?.price,
+          templateHref: htmlPreviewPrimaryTemplate
+            ? getProductHref(htmlPreviewPrimaryTemplate)
+            : undefined,
+        }}
+      />
 
       <ServiceCards services={services} />
 
