@@ -22,26 +22,12 @@ export const HOME_HERO_COPY = {
   trustedByLabel: "Trusted by businesses worldwide",
 } as const;
 
-export const HOME_HERO_TRUSTED_LOGOS = [
-  { name: "Stripe", src: "/images/logos/trusted/stripe.svg", width: 96, height: 40, variant: "wordmark" as const },
-  {
-    name: "Next.js",
-    src: "/images/logos/trusted/nextjs.svg",
-    srcDark: "/images/logos/trusted/nextjs-dark.svg",
-    width: 24,
-    height: 24,
-    variant: "mark" as const,
-  },
-  { name: "Supabase", src: "/images/logos/trusted/supabase.svg", width: 24, height: 24, variant: "mark" as const },
-  {
-    name: "Vercel",
-    src: "/images/logos/trusted/vercel.svg",
-    srcDark: "/images/logos/trusted/vercel-dark.svg",
-    width: 24,
-    height: 24,
-    variant: "mark" as const,
-  },
-  { name: "AWS", src: "/images/logos/trusted/aws.svg", width: 24, height: 24, variant: "mark" as const },
+export const HOME_HERO_TRUSTED_NAMES = [
+  "Stripe",
+  "Next.js",
+  "Supabase",
+  "Vercel",
+  "AWS",
 ] as const;
 
 export const HOME_SERVICES_COPY = {

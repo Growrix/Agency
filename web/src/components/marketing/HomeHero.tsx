@@ -39,7 +39,11 @@ export function HomeHero({
   const useStructuredTitle = !title;
 
   return (
-    <Section {...homeSection("hero")} className="hero-section relative overflow-hidden">
+    <Section
+      {...homeSection("hero")}
+      layout="viewport"
+      className="hero-section relative min-h-[calc(100dvh-var(--site-chrome-height))] overflow-hidden"
+    >
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" aria-hidden />
       <div
         className="hero-glow signal-drift-1 pointer-events-none absolute left-[8%] top-12 h-56 w-56 rounded-full bg-primary/20 blur-3xl"
@@ -51,10 +55,12 @@ export function HomeHero({
       />
 
       <Container
-        width="shell"
-        className={cn(HERO_VIEWPORT_CONTAINER_CLASS, "px-4 sm:px-8 lg:px-12")}
+        className={cn(
+          HERO_VIEWPORT_CONTAINER_CLASS,
+          "flex flex-1 flex-col justify-center py-8 sm:py-10 lg:py-12",
+        )}
       >
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-10 xl:gap-14">
+        <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-10 xl:gap-14">
           <div className="text-center lg:text-left">
             <div className="signal-rise" style={{ animationDelay: "0ms" }}>
               <Badge tone="primary" dot className="border-0 bg-primary text-surface">

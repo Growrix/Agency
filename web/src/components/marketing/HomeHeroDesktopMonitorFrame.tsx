@@ -34,11 +34,11 @@ export function HomeHeroDesktopMonitorFrame({
       </div>
 
       <div
-        className="mx-auto mt-0 h-6 w-[16%] min-w-[3.5rem] rounded-b-md border border-t-0 border-border/70 bg-linear-to-b from-surface/80 to-border/40"
+        className="mx-auto mt-0 h-6 w-[16%] min-w-14 rounded-b-md border border-t-0 border-border/70 bg-linear-to-b from-surface/80 to-border/40"
         aria-hidden
       />
       <div
-        className="mx-auto -mt-px h-2 w-[34%] min-w-[5rem] rounded-full bg-border/55 shadow-sm"
+        className="mx-auto -mt-px h-2 w-[34%] min-w-20 rounded-full bg-border/55 shadow-sm"
         aria-hidden
       />
     </div>

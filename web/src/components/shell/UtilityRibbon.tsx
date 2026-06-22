@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ClockIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
+import { cn } from "@/lib/utils";
 
 export function UtilityRibbon() {
   return (
     <div className="hidden md:block bg-contrast text-contrast-text">
-      <div className="mx-auto flex max-w-shell items-center justify-between gap-6 px-5 sm:px-8 lg:px-12 py-2 text-[12px] tracking-wide">
+      <div className={cn("mx-auto flex max-w-shell items-center justify-between gap-6 py-2 text-[12px] tracking-wide", CONTAINER_X_CLASS)}>
         <div className="flex items-center gap-5 text-white/75">
           <span className="inline-flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden />

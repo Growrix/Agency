@@ -20,7 +20,7 @@ export function ComingSoon({
   return (
     <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-      <Container width="content">
+      <Container>
         <div className="text-center max-w-2xl mx-auto">
           <Badge tone="secondary" dot>{eyebrow}</Badge>
           <h1 className="mt-5 font-display text-5xl sm:text-6xl tracking-tight text-balance">{title}</h1>

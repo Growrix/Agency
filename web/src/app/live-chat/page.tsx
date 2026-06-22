@@ -45,7 +45,7 @@ export default function LiveChatPage() {
 
   return (
     <Section className="py-16 sm:py-24">
-      <Container width="content">
+      <Container>
         <div className="grid gap-6 lg:grid-cols-[1fr_0.92fr] lg:items-start">
           <div>
             <Badge tone="primary" dot>Live chat</Badge>

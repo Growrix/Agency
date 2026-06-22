@@ -14,6 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
+import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { useReducedMotion } from "framer-motion";
@@ -52,7 +53,7 @@ export function Header({
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-shell items-center gap-2 px-4 sm:px-8 lg:h-18 lg:gap-6 lg:px-12">
+      <div className={cn("mx-auto flex h-16 max-w-shell items-center gap-2 lg:h-18 lg:gap-6", CONTAINER_X_CLASS)}>
         <Link href="/" className="group flex min-w-0 flex-1 items-center gap-2.5 lg:flex-none lg:shrink-0">
           <Image
             src="/website logo main.svg"
@@ -143,7 +144,7 @@ export function Header({
 
       {(() => {
         const menuContent = (
-          <nav className="mx-auto flex max-w-shell flex-col px-5 py-4 sm:px-8">
+          <nav className={cn("mx-auto flex max-w-shell flex-col py-4", CONTAINER_X_CLASS)}>
             {PRIMARY_NAV.map((item) => (
               <div key={item.label} className="py-1">
                 <Link

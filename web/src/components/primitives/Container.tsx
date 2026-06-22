@@ -6,9 +6,12 @@ export type SectionSize = "hero" | "standard" | "compact" | "dense" | "none";
 export type SectionLayout = "content" | "viewport";
 export type SectionSpacing = "default" | "split";
 
+/** Shared horizontal inset — matches header and hero alignment. */
+export const CONTAINER_X_CLASS = "px-4 sm:px-8 lg:px-12";
+
 const widths: Record<Width, string> = {
-  shell: "max-w-[1440px]",
-  content: "max-w-[1200px]",
+  shell: "max-w-shell",
+  content: "max-w-shell",
   reading: "max-w-[960px]",
   dense: "max-w-[768px]",
   full: "max-w-none",
@@ -44,7 +47,7 @@ const sectionLayoutClass: Record<SectionLayout, string> = {
 
 export function Container({
   children,
-  width = "content",
+  width = "shell",
   className,
 }: {
   children: ReactNode;
@@ -54,7 +57,7 @@ export function Container({
   return (
     <div className={cn(
       "mx-auto w-full",
-      width === "full" ? "px-4 sm:px-6 lg:px-8" : "px-5 sm:px-8 lg:px-12",
+      width === "full" ? "px-4 sm:px-6 lg:px-8" : CONTAINER_X_CLASS,
       widths[width],
       className,
     )}>

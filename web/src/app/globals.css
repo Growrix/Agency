@@ -43,7 +43,7 @@
 
   --ease-signal: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --container-content: 1200px;
+  --container-content: 1440px;
   --container-shell: 1440px;
   --admin-shell-top: 1rem;
   --admin-sidebar-top: 1rem;
@@ -239,6 +239,8 @@ body {
 .hero-viewport-band {
   box-sizing: border-box;
   display: flex;
+  width: 100%;
+  min-height: calc(100svh - var(--site-chrome-height));
   min-height: calc(100dvh - var(--site-chrome-height));
   flex-direction: column;
   justify-content: center;

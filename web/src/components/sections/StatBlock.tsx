@@ -12,7 +12,7 @@ export function StatBlock({
   stats,
   className,
   dense,
-  containerWidth = "content",
+  containerWidth = "shell",
   containerClassName,
 }: {
   stats: Stat[];

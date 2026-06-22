@@ -487,7 +487,6 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const basePriceLabel = variants[0]?.price ?? product.price;
   const isHtmlBusinessProfile = product.categorySlug === "html-business-profiles";
   const isWebsiteTemplatesCategory = product.categorySlug === "website-templates";
-  const useShellLayout = isWebsiteTemplatesCategory || isWebsiteTemplatesHtmlPreview;
   const isWebsiteTemplateProduct =
     isWebsiteTemplatesCategory ||
     product.categorySlug === "saas-templates" ||
@@ -558,7 +557,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       <>
         <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
-          <Container width="content">
+          <Container>
             <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
               <ArrowLeftIcon className="size-4" /> Back to digital products
             </Link>
@@ -757,7 +756,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {product.embeddedPreviewUrl ? (
           <Section className="border-t border-border py-10 sm:py-12">
-            <Container width="content">
+            <Container>
               <WebsiteTemplateHtmlMobilePreviewSection
                 previewUrl={product.embeddedPreviewUrl}
                 templateTitle={product.name}
@@ -769,7 +768,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         ) : null}
 
         <Section tone="inset" className="py-10 sm:py-12">
-          <Container width="content">
+          <Container>
             <div className="space-y-10">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-tight">At a glance</h2>
@@ -815,7 +814,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         </Section>
 
         <Section className="border-t border-border py-10 sm:py-12">
-          <Container width="content">
+          <Container>
             <div className="space-y-8">
               <div className="max-w-4xl">
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Plan</h2>
@@ -966,7 +965,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {related.length > 0 ? (
           <Section className="border-t border-border py-12 sm:py-16">
-            <Container width="content">
+            <Container>
               <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
               <p className="mt-2 text-sm text-text-muted">
                 Browse more published products from the live catalog.
@@ -1019,7 +1018,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       <>
         <JsonLd data={productStructuredData} />
         <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
-          <Container width="content">
+          <Container>
             <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
               <ArrowLeftIcon className="size-4" /> Back to digital products
             </Link>
@@ -1193,7 +1192,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {product.embeddedPreviewUrl ? (
           <Section className="border-t border-border py-10 sm:py-12">
-            <Container width="content">
+            <Container>
               <WebsiteTemplateHtmlMobilePreviewSection
                 previewUrl={product.embeddedPreviewUrl}
                 templateTitle={product.name}
@@ -1204,7 +1203,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         ) : null}
 
         <Section tone="inset" className="py-10 sm:py-12">
-          <Container width="content">
+          <Container>
             <div className="space-y-10">
               <div>
                 <h2 className="font-display text-2xl font-semibold tracking-tight">At a glance</h2>
@@ -1250,7 +1249,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         </Section>
 
         <Section className="border-t border-border py-10 sm:py-12">
-          <Container width="content">
+          <Container>
             <div className="space-y-8">
               <div className="max-w-4xl">
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
@@ -1377,7 +1376,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {customizationUpsells.length > 0 ? (
           <Section tone="inset" className="py-10 sm:py-12">
-            <Container width="content">
+            <Container>
               <h2 className="font-display text-2xl font-semibold tracking-tight">Customization and implementation</h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {customizationUpsells.map((upsell) => (
@@ -1398,7 +1397,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {displayRelatedServices.length > 0 ? (
           <Section className="border-t border-border py-10 sm:py-12">
-            <Container width="content">
+            <Container>
               <h2 className="font-display text-2xl font-semibold tracking-tight">Related services</h2>
               <p className="mt-2 text-sm leading-6 text-text-muted">
                 Need help beyond the template itself? These services are the most common next steps.
@@ -1418,7 +1417,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
         {related.length > 0 ? (
           <Section className="border-t border-border py-12 sm:py-16">
-            <Container width="content">
+            <Container>
               <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
               <p className="mt-2 text-sm text-text-muted">{WEBSITE_TEMPLATE_PREVIEW.relatedProductsCopy}</p>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-2">
@@ -1466,7 +1465,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       <JsonLd data={productStructuredData} />
       {/* Main product layout */}
       <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
-        <Container width={useShellLayout ? "shell" : "content"}>
+        <Container>
           <Link href="/digital-products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
             <ArrowLeftIcon className="size-4" /> Back to digital products
           </Link>
@@ -2067,7 +2066,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
       {isWebsiteTemplatesCategory ? (
         <Section className="border-t border-border pt-6 sm:pt-8">
-          <Container width="shell">
+          <Container>
             <div className="space-y-8">
               <div className="max-w-4xl">
                 <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
@@ -2248,7 +2247,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       {/* Screenshot gallery */}
       {galleryImages.length > 0 ? (
         <Section>
-          <Container width={isWebsiteTemplatesCategory ? "shell" : "content"}>
+          <Container>
             <SectionHeading eyebrow="Template gallery" title="Surfaces from the template." />
             <PortfolioGalleryLightbox images={galleryImages} />
           </Container>
@@ -2258,7 +2257,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       {/* Related products */}
       {related.length > 0 ? (
         <Section className="border-t border-border py-12 sm:py-16">
-          <Container width={isWebsiteTemplatesCategory ? "shell" : "content"}>
+          <Container>
             <h2 className="font-display text-2xl font-bold tracking-tight">More in the catalog</h2>
             <p className="mt-2 text-sm text-text-muted">
               Browse more published products from the live catalog.

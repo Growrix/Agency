@@ -6,7 +6,7 @@ import { Container } from "@/components/primitives/Container";
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <Container width="shell">
+      <Container>
         <div className="grid gap-10 py-16 lg:grid-cols-6">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2">

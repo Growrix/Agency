@@ -32,7 +32,7 @@ export default function NotFound() {
   return (
     <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-      <Container width="content">
+      <Container>
         <div className="text-center max-w-2xl mx-auto">
           <Badge tone="warning" dot>404</Badge>
           <h1 className="mt-5 font-display text-6xl sm:text-7xl tracking-tight">

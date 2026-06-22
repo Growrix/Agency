@@ -119,7 +119,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           </div>
         </Container>
 
-        <Container width="content" className="mt-8 sm:mt-10">
+        <Container className="mt-8 sm:mt-10">
           <div className={`relative aspect-4/3 overflow-hidden rounded-lg bg-linear-to-br sm:aspect-21/9 ${post.accent}`}>
             {heroImage ? (
               <Image
@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
       {/* Body + share rail */}
       <Section className="pt-12 pb-8">
-        <Container width="content">
+        <Container>
           <div className="grid gap-6 xl:grid-cols-[72px_minmax(0,1fr)_280px] xl:items-start">
             <article className="order-1 min-w-0 max-w-180 xl:order-2 xl:max-w-none">
               <ProseArticle blocks={post.body} />
