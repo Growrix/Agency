@@ -16,6 +16,8 @@ type WebsiteTemplateHtmlDesktopPreviewFrameProps = {
   viewportWidth?: number;
   viewportHeight?: number;
   fit?: FitMode;
+  /** When fit is cover, anchor the scaled preview to the top instead of centering vertically. */
+  verticalAlign?: "top" | "center";
   /** Used only when fit="contain" and no height class is applied. */
   containerHeight?: number;
   iframeLoading?: "lazy" | "eager";
@@ -29,6 +31,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
   viewportWidth = HTML_DESKTOP_VIEWPORT_WIDTH,
   viewportHeight = HTML_DESKTOP_VIEWPORT_HEIGHT,
   fit = "width",
+  verticalAlign = "center",
   containerHeight,
   iframeLoading = "lazy",
 }: WebsiteTemplateHtmlDesktopPreviewFrameProps) {
@@ -54,7 +57,11 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
       const safeScale = nextScale > 0 ? nextScale : 1;
       setScale(safeScale);
       setOffsetX((container.clientWidth - viewportWidth * safeScale) / 2);
-      setOffsetY((container.clientHeight - viewportHeight * safeScale) / 2);
+      setOffsetY(
+        verticalAlign === "top"
+          ? 0
+          : (container.clientHeight - viewportHeight * safeScale) / 2,
+      );
       return;
     }
 
@@ -72,7 +79,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
     setScale(nextScale);
     setOffsetX(0);
     setOffsetY(0);
-  }, [viewportWidth, viewportHeight, contentHeight, containerHeight, fit]);
+  }, [viewportWidth, viewportHeight, contentHeight, containerHeight, fit, verticalAlign]);
 
   useEffect(() => {
     updateScale();
@@ -110,6 +117,8 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
   }, [viewportHeight]);
 
   const handleIframeLoad = () => {
+    updateScale();
+
     if (fit !== "contain") {
       return;
     }

@@ -40,7 +40,14 @@ type HtmlProfileHeroCarouselProps = {
   mobilePreviewMaxHeight?: number;
   mobilePreviewShowViewportLabel?: boolean;
   autoPlay?: boolean;
+  autoPlayIntervalMs?: number;
   posterFirst?: boolean;
+  className?: string;
+  showSlideMeta?: boolean;
+  showPagination?: boolean;
+  onActiveIndexChange?: (index: number) => void;
+  /** Tighter hero showcase layout — preview fills the carousel height. */
+  compactPresentation?: boolean;
 };
 
 function slideHasPreview(slide: HtmlProfileHeroSlide) {
@@ -55,6 +62,8 @@ function CarouselPreviewFrame({
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
   loadPreview = true,
+  desktopPreviewVerticalAlign = "center",
+  iframeLoading = "lazy",
 }: {
   slide: HtmlProfileHeroSlide;
   previewMode: HtmlProfileHeroCarouselPreviewMode;
@@ -63,6 +72,8 @@ function CarouselPreviewFrame({
   mobilePreviewMaxHeight?: number;
   mobilePreviewShowViewportLabel?: boolean;
   loadPreview?: boolean;
+  desktopPreviewVerticalAlign?: "top" | "center";
+  iframeLoading?: "lazy" | "eager";
 }) {
   if (!loadPreview) {
     return (
@@ -93,10 +104,15 @@ function CarouselPreviewFrame({
         previewUrl={slide.previewUrl}
         title={`${slide.name} desktop preview`}
         fit={desktopPreviewFit}
+        verticalAlign={desktopPreviewVerticalAlign}
         viewportHeight={desktopPreviewViewportHeight}
-        className={desktopPreviewFit === "cover" ? "absolute inset-0 h-full w-full" : undefined}
-        frameClassName={desktopPreviewFit === "cover" ? "h-full" : "rounded-md border border-border"}
-        iframeLoading="lazy"
+        className={
+          desktopPreviewFit === "cover"
+            ? "absolute inset-0 h-full w-full"
+            : "h-full min-h-full w-full"
+        }
+        frameClassName="h-full w-full rounded-none border-0"
+        iframeLoading={iframeLoading}
       />
     );
   }
@@ -150,7 +166,13 @@ export function HtmlProfileHeroCarousel({
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
   autoPlay = false,
+  autoPlayIntervalMs,
   posterFirst = false,
+  className,
+  showSlideMeta = true,
+  showPagination = false,
+  onActiveIndexChange,
+  compactPresentation = false,
 }: HtmlProfileHeroCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [livePreviewEnabled, setLivePreviewEnabled] = useState(!posterFirst);
@@ -187,6 +209,10 @@ export function HtmlProfileHeroCarousel({
   const canNavigate = safeSlides.length > 1;
 
   const logicalIndex = index >= cloneIndex ? 0 : index;
+
+  useEffect(() => {
+    onActiveIndexChange?.(logicalIndex);
+  }, [logicalIndex, onActiveIndexChange]);
 
   const previewLoadIndexes = useMemo(() => new Set([logicalIndex]), [logicalIndex]);
 
@@ -260,6 +286,8 @@ export function HtmlProfileHeroCarousel({
     return () => observer.disconnect();
   }, []);
 
+  const autoplayDelayMs = autoPlayIntervalMs ?? HTML_PROFILE_CAROUSEL_AUTOPLAY_MS;
+
   useEffect(() => {
     if (isPaused || !canNavigate || !autoPlay || !isVisible) {
       return;
@@ -267,10 +295,10 @@ export function HtmlProfileHeroCarousel({
 
     const timer = window.setTimeout(() => {
       goNext();
-    }, HTML_PROFILE_CAROUSEL_AUTOPLAY_MS);
+    }, autoplayDelayMs);
 
     return () => window.clearTimeout(timer);
-  }, [isPaused, canNavigate, goNext, logicalIndex, autoPlay, isVisible]);
+  }, [isPaused, canNavigate, goNext, logicalIndex, autoPlay, isVisible, autoplayDelayMs]);
 
   const handleTransitionEnd = useCallback(
     (event: React.TransitionEvent<HTMLDivElement>) => {
@@ -321,7 +349,12 @@ export function HtmlProfileHeroCarousel({
         mobileFrameMinHeightClass,
       )
     : previewMode === "desktop-scaled" && fillHeight
-      ? "relative min-h-[320px] min-w-0 flex-1 overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
+      ? cn(
+          "relative min-h-0 min-w-0 flex-1 overflow-hidden",
+          compactPresentation
+            ? "h-full min-h-[240px] border-0 rounded-none bg-transparent"
+            : "min-h-[320px] rounded-md border border-border bg-[#0a0a0a]",
+        )
       : previewMode === "desktop-scaled"
         ? "overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
         : "min-h-[320px] flex-1 overflow-hidden rounded-md border border-border bg-black lg:min-h-[480px]";
@@ -333,6 +366,8 @@ export function HtmlProfileHeroCarousel({
         "overflow-hidden rounded-md border border-border bg-inset/30 [overflow-anchor:none]",
         fillHeight && !isMobileFrame ? "flex h-full min-h-0 flex-col" : "min-w-0",
         !isMobileFrame && !fillHeight && "h-full",
+        compactPresentation && "border-0 bg-transparent shadow-none",
+        className,
       )}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -350,7 +385,12 @@ export function HtmlProfileHeroCarousel({
         )}
       >
         {canNavigate ? (
-          <div className="pointer-events-none absolute inset-x-0 top-3 bottom-23 z-20 flex items-center justify-between px-1.5 sm:px-2">
+          <div
+            className={cn(
+              "pointer-events-none absolute inset-x-0 top-3 z-20 flex items-center justify-between px-1.5 sm:px-2",
+              showSlideMeta ? "bottom-23" : showPagination ? "bottom-14" : "bottom-3",
+            )}
+          >
             <button
               type="button"
               className={carouselNavButtonClassName}
@@ -387,7 +427,7 @@ export function HtmlProfileHeroCarousel({
             const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
             const isActiveSlide = slideLogicalIndex === logicalIndex;
             const loadPreview =
-              isVisible &&
+              (compactPresentation || isVisible) &&
               previewLoadIndexes.has(slideLogicalIndex) &&
               (!posterFirst || livePreviewEnabled);
 
@@ -395,11 +435,18 @@ export function HtmlProfileHeroCarousel({
               <article
                 key={`${slide.name}-${slideIndex}`}
                 className={cn(
-                  "flex min-w-full flex-col p-3",
+                  "flex min-w-full flex-col",
+                  compactPresentation ? "h-full min-h-0 flex-1 pb-11" : "p-3",
                   fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
                 )}
               >
-                <div className={cn(previewFrameClassName, fillHeight && !isMobileFrame && "flex flex-col", "relative")}>
+                <div
+                  className={cn(
+                    previewFrameClassName,
+                    fillHeight && !isMobileFrame && "flex h-full min-h-0 flex-col",
+                    "relative",
+                  )}
+                >
                   {posterFirst && !livePreviewEnabled && isActiveSlide ? (
                     <PreviewPosterPlaceholder
                       title={slide.name}
@@ -414,26 +461,56 @@ export function HtmlProfileHeroCarousel({
                       mobilePreviewMaxHeight={mobilePreviewMaxHeight}
                       mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
                       loadPreview={loadPreview}
+                      desktopPreviewVerticalAlign={compactPresentation ? "top" : "center"}
+                      iframeLoading={compactPresentation ? "eager" : "lazy"}
                     />
                   )}
                 </div>
-                <div className={cn("mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
-                  <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
-                  <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
-                  <div className="mt-2 flex items-center justify-between gap-2">
-                    <span className="text-sm font-semibold text-primary">From {slide.price}</span>
-                    <Link
-                      href={slide.href}
-                      className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
-                    >
-                      {ctaLabel}
-                    </Link>
+                {showSlideMeta ? (
+                  <div className={cn("mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
+                    <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
+                    <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
+                    <div className="mt-2 flex items-center justify-between gap-2">
+                      <span className="text-sm font-semibold text-primary">From {slide.price}</span>
+                      <Link
+                        href={slide.href}
+                        className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
+                      >
+                        {ctaLabel}
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                ) : null}
               </article>
             );
           })}
         </div>
+
+        {showPagination && canNavigate ? (
+          <div className="absolute inset-x-0 bottom-3 z-20 flex items-center justify-center gap-2">
+            {safeSlides.map((slide, dotIndex) => (
+              <button
+                key={slide.name}
+                type="button"
+                className={cn(
+                  "size-2 rounded-full transition-colors",
+                  dotIndex === logicalIndex ? "bg-primary" : "bg-white/25 hover:bg-white/40",
+                )}
+                aria-label={`Show preview ${dotIndex + 1}`}
+                aria-current={dotIndex === logicalIndex ? "true" : undefined}
+                onClick={() => {
+                  if (dotIndex === logicalIndex || isTransitioningRef.current) {
+                    return;
+                  }
+
+                  isTransitioningRef.current = true;
+                  setAnimate(true);
+                  setIndex(dotIndex);
+                }}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -155,14 +155,8 @@ export default async function Home() {
         badge={homeContent?.heroBadge}
         title={homeContent?.heroTitle}
         description={homeContent?.heroDescription}
-        visual={{
-          templateName: htmlPreviewPrimaryTemplate?.name,
-          templateType: htmlPreviewPrimaryTemplate?.type,
-          templatePrice: htmlPreviewPrimaryTemplate?.price,
-          templateHref: htmlPreviewPrimaryTemplate
-            ? getProductHref(htmlPreviewPrimaryTemplate)
-            : undefined,
-        }}
+        slides={htmlPreviewSlides}
+        emptyFallbackSlide={htmlPreviewFallbackSlide}
       />
 
       <ServiceCards services={services} />

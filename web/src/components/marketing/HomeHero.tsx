@@ -1,69 +1,97 @@
-import Link from "next/link";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
-import { HeroTrustStrip } from "@/components/marketing/HeroTrustStrip";
-import { HomeHeroVisual, type HomeHeroVisualProps } from "@/components/marketing/HomeHeroVisual";
+import {
+  ArrowRightIcon,
+  CodeBracketSquareIcon,
+  CubeTransparentIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
+import { HomeHeroShowcase } from "@/components/marketing/HomeHeroShowcase";
+import { HomeHeroTrustedBy } from "@/components/marketing/HomeHeroTrustedBy";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section } from "@/components/primitives/Container";
-import { HOME_HERO_COPY } from "@/lib/home-conversion-content";
+import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
+import { HOME_HERO_COPY, HOME_HERO_HIGHLIGHTS } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
-import { WHATSAPP_HREF } from "@/lib/nav";
-import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
+import { HERO_DISPLAY_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
+import { cn } from "@/lib/utils";
+
+const highlightIcons = {
+  cube: CubeTransparentIcon,
+  code: CodeBracketSquareIcon,
+  users: UserGroupIcon,
+} as const;
 
 type HomeHeroProps = {
   badge?: string;
   title?: string;
   description?: string;
-  visual?: HomeHeroVisualProps;
+  slides: HtmlProfileHeroSlide[];
+  emptyFallbackSlide?: HtmlProfileHeroSlide;
 };
 
 export function HomeHero({
   badge = HOME_HERO_COPY.badge,
-  title = HOME_HERO_COPY.title,
+  title,
   description = HOME_HERO_COPY.description,
-  visual,
+  slides,
+  emptyFallbackSlide,
 }: HomeHeroProps) {
+  const useStructuredTitle = !title;
+
   return (
     <Section {...homeSection("hero")} className="hero-section relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" aria-hidden />
       <div
-        className="hero-glow signal-drift-1 pointer-events-none absolute left-[12%] top-10 h-56 w-56 rounded-full bg-primary/20 blur-3xl"
+        className="hero-glow signal-drift-1 pointer-events-none absolute left-[8%] top-12 h-56 w-56 rounded-full bg-primary/20 blur-3xl"
         aria-hidden
       />
       <div
-        className="hero-glow signal-drift-2 pointer-events-none absolute bottom-8 right-[8%] h-44 w-44 rounded-full bg-secondary/15 blur-3xl"
+        className="hero-glow signal-drift-2 pointer-events-none absolute bottom-10 right-[10%] h-44 w-44 rounded-full bg-secondary/15 blur-3xl"
         aria-hidden
       />
 
-      <Container width="shell" className={HERO_VIEWPORT_CONTAINER_CLASS}>
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-          <div className="lg:col-span-6 xl:col-span-7">
+      <Container
+        width="shell"
+        className={cn(HERO_VIEWPORT_CONTAINER_CLASS, "px-4 sm:px-8 lg:px-12")}
+      >
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-10 xl:gap-14">
+          <div className="text-center lg:text-left">
             <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>
+              <Badge tone="primary" dot className="border-0 bg-primary text-surface">
                 {badge}
               </Badge>
             </div>
 
             <h1
-              className="signal-rise mt-5 max-w-xl font-display text-3xl leading-[1.06] tracking-tight text-balance sm:text-4xl lg:text-5xl"
+              className={`signal-rise mt-5 ${HERO_DISPLAY_TITLE_CLASS}`}
               style={{ animationDelay: "80ms" }}
             >
-              {title}
+              {useStructuredTitle ? (
+                <>
+                  {HOME_HERO_COPY.titleLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                  <span className="block text-primary">{HOME_HERO_COPY.titleAccent}</span>
+                </>
+              ) : (
+                title
+              )}
             </h1>
 
             <p
-              className="signal-rise mt-5 max-w-lg text-base leading-7 text-pretty text-text-muted sm:text-lg"
+              className="signal-rise mx-auto mt-5 max-w-xl text-base leading-7 text-pretty text-text-muted sm:text-lg lg:mx-0"
               style={{ animationDelay: "160ms" }}
             >
               {description}
             </p>
 
             <div
-              className="signal-rise mt-8 flex flex-wrap gap-3"
+              className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
               style={{ animationDelay: "240ms" }}
             >
-              <LinkButton href="/digital-products" size="lg">
+              <LinkButton href="/digital-products" size="lg" className="text-surface">
                 {HOME_HERO_COPY.primaryCta}
                 <ArrowRightIcon className="size-4" />
               </LinkButton>
@@ -72,52 +100,32 @@ export function HomeHero({
               </LinkButton>
             </div>
 
-            <div
-              className="signal-rise mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm"
-              style={{ animationDelay: "300ms" }}
+            <ul
+              className="signal-rise mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-6 sm:gap-y-3 lg:justify-start"
+              style={{ animationDelay: "320ms" }}
+              aria-label="Platform highlights"
             >
-              <Link href="/contact" className="font-medium text-text-muted transition-colors hover:text-primary">
-                Need custom work?
-              </Link>
-              <span className="hidden text-border sm:inline" aria-hidden>
-                ·
-              </span>
-              <Link
-                href={WHATSAPP_HREF}
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-text-muted transition-colors hover:text-primary"
-              >
-                Chat on WhatsApp
-              </Link>
-              <span className="hidden text-border sm:inline" aria-hidden>
-                ·
-              </span>
-              <ConciergeTriggerButton
-                variant="ghost"
-                size="sm"
-                prompt="I need help choosing between a product purchase and a done-for-you custom build."
-              >
-                Ask AI Assistant
-              </ConciergeTriggerButton>
-            </div>
+              {HOME_HERO_HIGHLIGHTS.map((item) => {
+                const Icon = highlightIcons[item.icon];
+                return (
+                  <li key={item.label} className="inline-flex items-center gap-2 text-sm text-text-muted">
+                    <Icon className="size-4 shrink-0 text-primary" aria-hidden />
+                    <span>{item.label}</span>
+                  </li>
+                );
+              })}
+            </ul>
 
-            <div className="signal-rise mt-8" style={{ animationDelay: "360ms" }}>
-              <HeroTrustStrip className="justify-start" />
+            <div className="signal-rise mt-8" style={{ animationDelay: "400ms" }}>
+              <HomeHeroTrustedBy className="text-center lg:text-left" />
             </div>
-
-            <p
-              className="signal-rise mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted sm:text-xs"
-              style={{ animationDelay: "420ms" }}
-            >
-              {HOME_HERO_COPY.stackLabel}{" "}
-              {HOME_HERO_COPY.stackItems.join(" · ")}
-            </p>
           </div>
 
-          <div className="lg:col-span-6 xl:col-span-5">
-            <HomeHeroVisual {...visual} />
-          </div>
+          <HomeHeroShowcase
+            slides={slides}
+            emptyFallbackSlide={emptyFallbackSlide}
+            className="signal-spring-in w-full lg:justify-self-stretch"
+          />
         </div>
       </Container>
     </Section>
