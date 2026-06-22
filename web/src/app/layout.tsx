@@ -3,6 +3,7 @@ import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const SITE_DESCRIPTION =
@@ -11,18 +12,22 @@ const DEFAULT_OG_IMAGE = "/images/home/studio-hero.jpg";
 
 const sans = Manrope({
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
   variable: "--font-manrope",
   display: "swap",
 });
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
   variable: "--font-bricolage",
   display: "swap",
+  preload: true,
 });
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
@@ -62,7 +67,6 @@ export const metadata: Metadata = {
     : { index: false, follow: false },
   icons: {
     icon: "/Favicon.svg?v=20260504",
-    shortcut: "/Favicon.svg?v=20260504",
     apple: "/Favicon.png?v=20260504",
   },
 };
@@ -100,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionRoot>
           <AppChrome>{children}</AppChrome>
         </MotionRoot>
+        <SpeedInsights />
       </body>
     </html>
   );

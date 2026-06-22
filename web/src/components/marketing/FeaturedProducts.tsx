@@ -60,10 +60,14 @@ export function FeaturedProducts({
           }
           stagger={0.07}
         >
-          {visibleProducts.map((product) => (
+          {visibleProducts.map((product, index) => (
             <RevealItem key={product.slug} className="h-full min-w-0">
               {isHtmlPreview ? (
-                <ShopProductHtmlPreviewCard product={product} variant="catalog-wide" />
+                <ShopProductHtmlPreviewCard
+                  product={product}
+                  variant="catalog-wide"
+                  loadPriority={index === 0}
+                />
               ) : (
                 <ShopProductCard product={product} />
               )}

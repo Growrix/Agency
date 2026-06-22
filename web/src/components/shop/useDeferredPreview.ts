@@ -8,24 +8,34 @@ import { useEffect, useRef, useState } from "react";
  * the iframe's initial load underway before the next queued preview starts,
  * which smooths the network/main-thread burst on preview-heavy pages.
  */
-const MAX_CONCURRENT_MOUNTS = 2;
-const SLOT_HOLD_MS = 1500;
+const MAX_CONCURRENT_MOUNTS = 1;
+const SLOT_HOLD_MS = 1800;
+const DEFAULT_ROOT_MARGIN = "320px 0px";
 
 let activeMounts = 0;
-const pendingGrants: Array<() => void> = [];
+const pendingGrants: Array<{ grant: () => void; priority: boolean }> = [];
 
-function acquireMountSlot(onGrant: () => void) {
+function dequeueNextGrant() {
+  const priorityIndex = pendingGrants.findIndex((entry) => entry.priority);
+  if (priorityIndex >= 0) {
+    return pendingGrants.splice(priorityIndex, 1)[0]?.grant;
+  }
+
+  return pendingGrants.shift()?.grant;
+}
+
+function acquireMountSlot(onGrant: () => void, priority = false) {
   if (activeMounts < MAX_CONCURRENT_MOUNTS) {
     activeMounts += 1;
     onGrant();
     return;
   }
 
-  pendingGrants.push(onGrant);
+  pendingGrants.push({ grant: onGrant, priority });
 }
 
 function releaseMountSlot() {
-  const next = pendingGrants.shift();
+  const next = dequeueNextGrant();
   if (next) {
     // Hand the slot directly to the next waiter without changing the count.
     next();
@@ -38,6 +48,8 @@ function releaseMountSlot() {
 type UseDeferredPreviewOptions = {
   /** How far outside the viewport (px) a card can be before it starts loading. */
   rootMargin?: string;
+  /** Jump to the front of the mount queue when this card becomes eligible. */
+  priority?: boolean;
 };
 
 /**
@@ -49,7 +61,8 @@ export function useDeferredPreview<T extends HTMLElement>(options?: UseDeferredP
   const ref = useRef<T>(null);
   const [shouldRender, setShouldRender] = useState(false);
   const requestedRef = useRef(false);
-  const rootMargin = options?.rootMargin ?? "300px 0px";
+  const rootMargin = options?.rootMargin ?? DEFAULT_ROOT_MARGIN;
+  const priority = options?.priority ?? false;
 
   useEffect(() => {
     const node = ref.current;
@@ -75,14 +88,14 @@ export function useDeferredPreview<T extends HTMLElement>(options?: UseDeferredP
         acquireMountSlot(() => {
           setShouldRender(true);
           window.setTimeout(releaseMountSlot, SLOT_HOLD_MS);
-        });
+        }, priority);
       },
       { rootMargin },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [rootMargin]);
+  }, [priority, rootMargin]);
 
   return { ref, shouldRender };
 }

@@ -21,6 +21,7 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
             src={image.src}
             alt={image.alt}
             fill
+            loading="lazy"
             sizes={compact ? "(min-width: 640px) 40vw, 100vw" : "(min-width: 1024px) 35vw, 100vw"}
             className="object-cover transition-transform duration-500 ease-signal group-hover:scale-[1.03]"
           />

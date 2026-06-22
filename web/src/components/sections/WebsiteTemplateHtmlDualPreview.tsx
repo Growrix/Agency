@@ -19,6 +19,7 @@ import {
 import { WebsiteTemplateHtmlMobilePreviewMarketing } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { HTML_DESKTOP_VIEWPORT_WIDTH } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 
 type WebsiteTemplateHtmlDualPreviewProps = {
@@ -30,12 +31,12 @@ const MOBILE_PREVIEW_MAX_FRAME_HEIGHT = 480;
 
 const DESKTOP_BENEFITS = [
   "Conversion-ready layout — hero, services, proof, and contact in place",
-  "Live HTML at full width — judge spacing and brand feel before you buy",
+  WEBSITE_TEMPLATE_PREVIEW.livePreviewAtFullWidth,
 ] as const;
 
 const HERO_PREVIEW_HIGHLIGHTS = [
-  { icon: CodeBracketSquareIcon, label: "Live HTML", hint: "Real pages in-frame" },
-  { icon: ArrowPathIcon, label: "Auto-rotate", hint: "Browse the catalog" },
+  { icon: CodeBracketSquareIcon, label: WEBSITE_TEMPLATE_PREVIEW.livePreviewChip, hint: WEBSITE_TEMPLATE_PREVIEW.livePreviewChipHint },
+  { icon: ArrowPathIcon, label: "Carousel", hint: "Manual + optional autoplay" },
   { icon: CursorArrowRaysIcon, label: "Scrollable", hint: "Explore every section" },
   { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Links to checkout" },
 ] as const;
@@ -47,7 +48,7 @@ export function WebsiteTemplateHtmlHeroPreviewFooter({ previewCount }: { preview
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {HERO_PREVIEW_HIGHLIGHTS.map((item, index) => {
           const Icon = item.icon;
-          const hint = item.label === "Auto-rotate" && previewCount > 0
+          const hint = item.label === "Carousel" && previewCount > 0
             ? `${previewCount} template${previewCount === 1 ? "" : "s"}`
             : item.hint;
 
@@ -87,6 +88,7 @@ type WebsiteTemplateHtmlDesktopPreviewCarouselProps = WebsiteTemplateHtmlDualPre
   fillHeight?: boolean;
   desktopPreviewFit?: "width" | "cover";
   autoPlay?: boolean;
+  posterFirst?: boolean;
 };
 
 export function WebsiteTemplateHtmlDesktopPreviewCarousel({
@@ -96,7 +98,8 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
   minHeightClass = "min-h-[420px] lg:min-h-[560px]",
   fillHeight = false,
   desktopPreviewFit = "width",
-  autoPlay = true,
+  autoPlay = false,
+  posterFirst = false,
 }: WebsiteTemplateHtmlDesktopPreviewCarouselProps) {
   return (
     <div className={cn(minHeightClass, fillHeight && "flex min-h-0 flex-1 flex-col", className)}>
@@ -108,6 +111,7 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
         fillHeight={fillHeight}
         desktopPreviewFit={desktopPreviewFit}
         autoPlay={autoPlay}
+        posterFirst={posterFirst}
       />
     </div>
   );
@@ -116,7 +120,8 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
 export function WebsiteTemplateHtmlDesktopPreviewBlock({
   slides,
   emptyFallbackSlide,
-}: WebsiteTemplateHtmlDualPreviewProps) {
+  posterFirst = false,
+}: WebsiteTemplateHtmlDualPreviewProps & { posterFirst?: boolean }) {
   return (
     <Card className="min-w-0 overflow-hidden p-5 sm:p-6">
       <div className="grid min-w-0 gap-6 lg:grid-cols-12 lg:items-start">
@@ -130,8 +135,7 @@ export function WebsiteTemplateHtmlDesktopPreviewBlock({
               See the full desktop experience before you commit
             </h3>
             <p className="mt-2.5 text-sm leading-6 text-text-muted">
-              Scroll live HTML at {HTML_DESKTOP_VIEWPORT_WIDTH}px. The layout you preview is the template you can
-              launch.
+              {WEBSITE_TEMPLATE_PREVIEW.scrollLivePreviewCopy(HTML_DESKTOP_VIEWPORT_WIDTH)}
             </p>
           </Reveal>
 
@@ -162,6 +166,7 @@ export function WebsiteTemplateHtmlDesktopPreviewBlock({
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
             minHeightClass="min-h-[280px] sm:min-h-[320px] lg:min-h-[360px]"
+            posterFirst={posterFirst}
           />
         </div>
       </div>
@@ -173,7 +178,7 @@ export function WebsiteTemplateHtmlMobilePreviewBlock({
   slides,
   emptyFallbackSlide,
   reverseLayout = false,
-  autoPlay = true,
+  autoPlay = false,
 }: WebsiteTemplateHtmlDualPreviewProps & {
   reverseLayout?: boolean;
   autoPlay?: boolean;

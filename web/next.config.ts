@@ -121,7 +121,45 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/api/:path*",
+        source: "/api/website-templates-html-preview/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      {
+        source: "/api/html-business-profiles/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      {
+        source: "/api/v1/:path*",
+        headers: [
+          { key: "Cache-Control", value: "no-store" },
+        ],
+      },
+      {
+        source: "/api/contact",
+        headers: [
+          { key: "Cache-Control", value: "no-store" },
+        ],
+      },
+      {
+        source: "/api/preview/:path*",
+        headers: [
+          { key: "Cache-Control", value: "no-store" },
+        ],
+      },
+      {
+        source: "/api/revalidate",
+        headers: [
+          { key: "Cache-Control", value: "no-store" },
+        ],
+      },
+      {
+        source: "/api/cron/:path*",
         headers: [
           { key: "Cache-Control", value: "no-store" },
         ],

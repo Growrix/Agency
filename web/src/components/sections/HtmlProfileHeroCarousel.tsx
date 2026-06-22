@@ -10,6 +10,7 @@ import {
   HTML_PROFILE_CAROUSEL_AUTOPLAY_MS,
   HTML_PROFILE_CAROUSEL_TRANSITION_MS,
 } from "@/lib/html-profile-carousel-config";
+import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceholder";
 import { cn } from "@/lib/utils";
 
 export type HtmlProfileHeroSlide = {
@@ -39,6 +40,7 @@ type HtmlProfileHeroCarouselProps = {
   mobilePreviewMaxHeight?: number;
   mobilePreviewShowViewportLabel?: boolean;
   autoPlay?: boolean;
+  posterFirst?: boolean;
 };
 
 function slideHasPreview(slide: HtmlProfileHeroSlide) {
@@ -148,8 +150,10 @@ export function HtmlProfileHeroCarousel({
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
   autoPlay = false,
+  posterFirst = false,
 }: HtmlProfileHeroCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const [livePreviewEnabled, setLivePreviewEnabled] = useState(!posterFirst);
   const fallbackSlide = useMemo(
     () => emptyFallbackSlide ?? {
       name: "Business Profile Template",
@@ -381,7 +385,11 @@ export function HtmlProfileHeroCarousel({
         >
           {loopSlides.map((slide, slideIndex) => {
             const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
-            const loadPreview = isVisible && previewLoadIndexes.has(slideLogicalIndex);
+            const isActiveSlide = slideLogicalIndex === logicalIndex;
+            const loadPreview =
+              isVisible &&
+              previewLoadIndexes.has(slideLogicalIndex) &&
+              (!posterFirst || livePreviewEnabled);
 
             return (
               <article
@@ -391,16 +399,23 @@ export function HtmlProfileHeroCarousel({
                   fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
                 )}
               >
-                <div className={cn(previewFrameClassName, fillHeight && !isMobileFrame && "flex flex-col")}>
-                  <CarouselPreviewFrame
-                    slide={slide}
-                    previewMode={previewMode}
-                    desktopPreviewFit={desktopPreviewFit}
-                    desktopPreviewViewportHeight={desktopPreviewViewportHeight}
-                    mobilePreviewMaxHeight={mobilePreviewMaxHeight}
-                    mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
-                    loadPreview={loadPreview}
-                  />
+                <div className={cn(previewFrameClassName, fillHeight && !isMobileFrame && "flex flex-col", "relative")}>
+                  {posterFirst && !livePreviewEnabled && isActiveSlide ? (
+                    <PreviewPosterPlaceholder
+                      title={slide.name}
+                      onActivate={() => setLivePreviewEnabled(true)}
+                    />
+                  ) : (
+                    <CarouselPreviewFrame
+                      slide={slide}
+                      previewMode={previewMode}
+                      desktopPreviewFit={desktopPreviewFit}
+                      desktopPreviewViewportHeight={desktopPreviewViewportHeight}
+                      mobilePreviewMaxHeight={mobilePreviewMaxHeight}
+                      mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
+                      loadPreview={loadPreview}
+                    />
+                  )}
                 </div>
                 <div className={cn("mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
                   <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>

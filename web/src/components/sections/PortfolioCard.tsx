@@ -21,6 +21,7 @@ export function PortfolioCard({ project }: { project: Project }) {
             src={image.src}
             alt={image.alt}
             fill
+            loading="lazy"
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
             className="object-contain bg-[#070b12]"
           />
