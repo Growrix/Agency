@@ -63,3 +63,17 @@ This workspace supports **two delivery tracks**. They are independent; never mix
 - **Commands:** `/migrate-to-next`, `/parity-pass`
 
 **Workflow:** Build and approve HTML in `sites/` first → run `/migrate-to-next` to produce the production Next.js app → run `/parity-pass` for pixel-perfect fidelity before client delivery.
+
+---
+
+## Zero-gate health check (all tracks)
+
+After **any** change, agents must verify **0 gate failures** before declaring work complete. See `.cursor/rules/60-zero-gate-health-check.mdc`.
+
+| Track | Directory | Full verification |
+|-------|-----------|-------------------|
+| Production site | `web/` | `npm run health:check` (lint → typecheck → perf:budgets → test → build → release gates) |
+| HTML templates | `sites/` | html-website-builder QA checklist + auditor subagents |
+| Next.js migrations | `Frontend_Nextjs/` | build + nextjs-code-reviewer + parity pass |
+
+Also run `ReadLints` on every touched file and keep root `cspell.json` updated for project-specific terms.

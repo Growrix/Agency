@@ -9,7 +9,6 @@ const PREVIEW_DIRECTORIES = [
 ];
 
 const UNSPLASH_URL_PATTERN = /https:\/\/images\.unsplash\.com\/[^\s"'()<>]+/g;
-const IMG_TAG_PATTERN = /<img\b([^>]*)>/gi;
 
 const limits = {
   w: 1280,

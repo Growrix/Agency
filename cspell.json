@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "autoplay",
+    "Bricolage",
+    "cloudflareinsights",
+    "domcontentloaded",
+    "Growrix",
+    "growrixos",
+    "GrowrixOS",
+    "Grotesque",
+    "JetBrains",
+    "Manrope",
+    "Pingdom",
+    "Supabase",
+    "TTFB",
+    "unstable",
+    "vercel"
+  ],
+  "ignorePaths": [
+    ".next/**",
+    "node_modules/**",
+    "web/.next/**",
+    "web/node_modules/**",
+    "Frontend_Nextjs/**/node_modules/**",
+    "Frontend_Nextjs/**/.next/**",
+    "**/*.pack.gz",
+    "Ongoing DOCS/**"
+  ]
+}

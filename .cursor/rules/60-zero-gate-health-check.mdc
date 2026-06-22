@@ -1,0 +1,66 @@
+---
+description: Mandatory zero-gate health verification after any site or web app change — lint, typecheck, budgets, build, and release gates must pass with 0 failures before declaring work complete
+alwaysApply: true
+---
+
+# Zero-Gate Health Check (mandatory)
+
+After **any** change under `web/`, `sites/`, or `Frontend_Nextjs/`, you MUST verify **0 gate failures** before telling the user the task is done. Do not skip gates because a change "looks small."
+
+## Definition: zero gate
+
+**Zero gate = every applicable check exits 0 with no errors, no test failures, and no unresolved diagnostics on touched files** (TypeScript, ESLint, cSpell, build, CI release gates).
+
+If a gate fails, fix the root cause and re-run until all pass. Never hand off with known red diagnostics.
+
+## Post-change verification matrix
+
+### Always (every edit)
+
+1. **IDE diagnostics** — run `ReadLints` on every file you created or modified; fix all errors and warnings (including cSpell on markdown/TSX).
+2. **Project dictionary** — brand and tech terms belong in root `cspell.json`; do not silence legitimate typos with inline ignores.
+
+### `web/` (Growrix OS production app)
+
+Run from `web/` in this order; stop and fix on first failure:
+
+```bash
+npm run lint
+npm run typecheck
+npm run perf:budgets
+npm run test
+npm run build
+npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome
+```
+
+Or the bundled script:
+
+```bash
+npm run health:check
+```
+
+**Release gates (must be 0 failures):** accessibility smoke, security headers, health endpoints, homepage load ≤5s, resource budget ≤30, preview iframe budgets, SEO metadata checks — see `web/tests/e2e/release-gates.spec.ts`.
+
+### `sites/` (HTML templates)
+
+- Valid HTML structure; zero console errors when opened locally
+- Run the QA checklist in `.cursor/skills/html-website-builder/SKILL.md`
+- Delegate `accessibility-auditor` + `performance-optimizer` + `code-reviewer` before sign-off
+
+### `Frontend_Nextjs/` (migrated apps)
+
+- `pnpm build` / `npm run build` with zero TypeScript errors
+- Follow `.cursor/skills/nextjs-site-migrator/SKILL.md` Phase 9+ gates
+- Run `nextjs-code-reviewer` before delivery
+
+## Never declare done when
+
+- Module-not-found, TypeScript, or ESLint errors remain
+- cSpell or other linter diagnostics remain on touched files
+- `npm run build` or release gates fail
+- Homepage sections were removed to "fix" performance without explicit user approval
+- Merge conflict markers (`<<<<<<<`) remain in any file
+
+## Before commit or push (when requested)
+
+Re-run the full `web/` health check if any `web/` file changed. Confirm `git status` has no accidental `.next/`, `.cursor/tmp-*`, or secret files staged.

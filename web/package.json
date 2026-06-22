@@ -11,6 +11,8 @@
     "build": "next build --webpack",
     "start": "next start -p 5000 -H 0.0.0.0",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "health:check": "npm run lint && npm run typecheck && npm run perf:budgets && npm run test && npm run build && npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "tsx --test src/server/auth/users.test.ts src/server/domain/catalog.test.ts src/server/domain/orders.test.ts src/server/domain/leads.test.ts",
     "test:integration": "tsx --test tests/integration/api-flows.test.ts",
