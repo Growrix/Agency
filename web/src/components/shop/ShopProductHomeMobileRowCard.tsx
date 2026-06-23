@@ -72,8 +72,9 @@ export function ShopProductHomeMobileRowCard({
       </div>
 
       <div className="home-mobile-marketing__product-row-body">
-        <p className="home-mobile-marketing__product-row-label">
-          {product.category} &middot; {product.type}
+        <p className="home-mobile-marketing__product-row-label">{product.category}</p>
+        <p className="home-mobile-marketing__product-row-label home-mobile-marketing__product-row-label--sub">
+          {product.type}
         </p>
         <h3 className="home-mobile-marketing__product-row-title">
           <Link href={getProductHref(product)}>{product.name}</Link>

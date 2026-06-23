@@ -8,6 +8,7 @@ import {
 } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { Container, Section } from "@/components/primitives/Container";
+import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 
@@ -27,21 +28,25 @@ function HomeHtmlPreviewMobile({
 }: Omit<HomeHtmlPreviewSectionProps, "sectionShell">) {
   return (
     <div className="home-mobile-marketing">
-      <MobileMarketingSectionHeader eyebrow="See every experience" title={title} description={description} />
+      <MobileMarketingSectionHeader
+        eyebrow={HOME_PREVIEW_COPY.eyebrow}
+        title={title}
+        description={description}
+      />
 
-      <div className="home-mobile-marketing__stack">
-        <div className="home-mobile-marketing__path-card">
+      <div className="home-mobile-marketing__preview-stack">
+        <div className="home-mobile-marketing__preview-panel">
           <WebsiteTemplateHtmlDesktopPreviewBlock
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
             posterFirst={false}
           />
         </div>
-        <div className="home-mobile-marketing__path-card">
+        <div className="home-mobile-marketing__preview-panel">
           <WebsiteTemplateHtmlMobilePreviewBlock
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
-            reverseLayout
+            reverseLayout={false}
             autoPlay={false}
           />
         </div>

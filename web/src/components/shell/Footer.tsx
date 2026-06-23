@@ -1,63 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import { FOOTER_NAV } from "@/lib/nav";
-import { Container } from "@/components/primitives/Container";
+"use client";
+
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { FooterDesktop, FooterMobile } from "@/components/shell/FooterMobile";
 
 export function Footer() {
-  return (
-    <footer className="border-t border-border bg-surface">
-      <Container>
-        <div className="grid gap-10 py-16 lg:grid-cols-6">
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/website logo main.svg"
-                alt="Growrix logo"
-                width={140}
-                height={36}
-                unoptimized
-                className="h-8 w-auto object-contain"
-              />
-            </Link>
-            <p className="mt-4 max-w-sm text-text-muted leading-7">
-              A product-minded studio building websites, HTML business profiles, SaaS applications, automation systems, and AI business systems for ambitious teams.
-            </p>
-            <p className="mt-6 font-mono text-xs uppercase tracking-wider text-text-muted">
-              Average response time
-            </p>
-            <p className="mt-1 font-display text-2xl tracking-tight">Under 2 business hours</p>
-          </div>
-
-          {Object.entries(FOOTER_NAV).map(([group, items]) => (
-            <div key={group}>
-              <h3 className="font-mono text-xs uppercase tracking-wider text-text-muted">
-                {group}
-              </h3>
-              <ul className="mt-4 space-y-2.5">
-                {items.map((it) => (
-                  <li key={it.label}>
-                    <Link
-                      href={it.href}
-                      className="text-sm hover:text-primary transition-colors"
-                    >
-                      {it.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-3 border-t border-border pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-6 sm:flex-row sm:items-center sm:justify-between sm:pb-6">
-          <p className="text-xs text-text-muted">
-            © {new Date().getFullYear()} Growrix OS. All rights reserved.
-          </p>
-          <p className="text-xs text-text-muted font-mono">
-            Built deliberately. Shipped with care.
-          </p>
-        </div>
-      </Container>
-    </footer>
-  );
+  return <MarketingViewportGate mobile={<FooterMobile />} desktop={<FooterDesktop />} />;
 }

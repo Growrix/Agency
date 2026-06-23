@@ -1,14 +1,17 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { MobileMarketingTabs } from "@/components/marketing/mobile/MobileMarketingTabs";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { HOME_CASE_STUDIES_COPY } from "@/lib/home-conversion-content";
+import { PortfolioCardMobile } from "@/components/sections/PortfolioCardMobile";
+import { HOME_CASE_STUDIES_COPY, HOME_CASE_STUDY_TABS } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
@@ -20,6 +23,13 @@ type HomeFeaturedBuildsSectionProps = {
 };
 
 function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeaturedBuildsSectionProps) {
+  const [activeTabId, setActiveTabId] = useState<string>(HOME_CASE_STUDY_TABS[0].id);
+  const websiteProjects = useMemo(
+    () => projects.filter((project) => project.service === "websites"),
+    [projects],
+  );
+  const visibleProjects = activeTabId === "website-projects" ? websiteProjects : projects;
+
   return (
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
@@ -30,15 +40,40 @@ function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeatured
         className="home-mobile-marketing__header--left max-w-none"
       />
 
-      <RevealGroup className="home-mobile-marketing__stack">
-        {projects.map((project) => (
-          <RevealItem key={project.slug}>
-            <PortfolioCard project={project} />
-          </RevealItem>
-        ))}
-      </RevealGroup>
+      <MobileMarketingTabs
+        tabs={HOME_CASE_STUDY_TABS.map((tab) => ({ id: tab.id, label: tab.label }))}
+        activeTabId={activeTabId}
+        onTabChange={setActiveTabId}
+        ariaLabel="Case study categories"
+        className="home-mobile-marketing__case-tabs"
+      />
 
-      <LinkButton href="/portfolio" variant="outline" className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mx-auto mt-[var(--home-mobile-marketing-gap-section-stack)]">
+      {activeTabId === "about-product" ? (
+        <div className="home-mobile-marketing__path-card mt-[var(--home-mobile-marketing-gap-section-stack)]">
+          <p className="home-mobile-marketing__path-card-title">Portfolio as a product</p>
+          <p className="home-mobile-marketing__path-card-description">
+            Every case study documents a launch-ready system with measurable outcomes — the same quality bar we ship for
+            product buyers and service clients.
+          </p>
+          <LinkButton href="/portfolio" className="home-mobile-marketing__path-card-cta mt-4">
+            Explore the full portfolio
+          </LinkButton>
+        </div>
+      ) : (
+        <RevealGroup className="home-mobile-marketing__stack">
+          {visibleProjects.map((project) => (
+            <RevealItem key={project.slug}>
+              <PortfolioCardMobile project={project} />
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      )}
+
+      <LinkButton
+        href="/portfolio"
+        variant="outline"
+        className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mx-auto mt-[var(--home-mobile-marketing-gap-section-stack)]"
+      >
         <span className="home-mobile-marketing__cta-inner">
           See all projects
           <ArrowUpRightIcon className="home-mobile-marketing__cta-icon" aria-hidden />

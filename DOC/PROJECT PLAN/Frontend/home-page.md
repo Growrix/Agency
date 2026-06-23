@@ -47,24 +47,26 @@ depends_on:
 
 ### 4c. Templates Marketplace (HTML Business Profiles)
 - Content: featured HTML business profile cards with preview CTAs.
-- Components: `HomeTemplatesMarketplaceSection`.
-- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and stacked profile preview cards.
+- Components: `HomeTemplatesMarketplaceSection`, `ShopProductHomeMobileRowCard`.
+- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and stacked horizontal row cards (phone preview left, dual teal category labels, price, cart + Live Preview, View details link).
 
 ### 4d. Featured Templates
 - Components: `FeaturedProducts` with mobile gate — centered header, browse CTA, horizontal row cards for html-preview variant.
 
 ### 4e. HTML Preview Showcase
 - Components: `HomeHtmlPreviewSection`.
-- Interaction notes: mobile stacks desktop + mobile preview blocks inside token-backed card shells.
+- Interaction notes: mobile uses centered eyebrow header; stacks desktop preview panel then mobile preview panel inside `.home-mobile-marketing__preview-stack` token-backed shells.
 
 ### 4f. Digital Products Showcase
-- Components: `HomeDigitalProductsShowcase` with mobile filter card + 2-column compact grid.
+- Components: `HomeDigitalProductsShowcase`, `ShopProductHomeCatalogMobileCard`.
+- Interaction notes: mobile filter card (category/type chips), product count + sort toolbar, 2-column compact catalog grid.
 
 ### 4g. Three-Path Explainer
 - Components: `ThreePathExplainerMobile` / `ThreePathExplainerDesktop` — stacked path cards with icon, bullets, and pill CTAs on mobile.
 
 ### 4h. Case Studies / Featured Builds
-- Components: `HomeFeaturedBuildsSection`.
+- Components: `HomeFeaturedBuildsSection`, `PortfolioCardMobile`, `MobileMarketingTabs`.
+- Interaction notes: mobile left-aligned header, pill tabs (Website projects / About this product), stacked portfolio cards with tag row and footer links.
 
 ### 4i. Operating System (Process)
 - Components: `HomeProcessSection`, `ProcessStepsMobile` — vertical timeline cards on mobile.
@@ -77,6 +79,18 @@ depends_on:
 
 ### 4l. Final CTA
 - Components: `ProductLedFinalCTAMobile` — dark contrast card with stacked CTAs and 3-column feature grid on mobile.
+
+### 4m. Field Notes (Blog)
+- Components: `HomeFieldNotesSection`, `BlogCardMobile`.
+- Interaction notes: mobile left-aligned header, outline blog CTA, stacked article cards with excerpt clamp.
+
+### 4n. Footer
+- Components: `Footer` (`MarketingViewportGate`), `FooterMobile`, `FooterDesktop`.
+- Interaction notes: mobile response-time card, 2-column services icon grid, chevron digital-products list, Company/Support/Legal columns, copyright + social links.
+
+### 4o. Mobile Bottom Nav
+- Components: `MobileBottomNav`.
+- Interaction notes: five-item bar; digital products tab label is **Products** (space-saving).
 
 ### 5. HTML Business Profiles Category Hero
 - Content: category-based HTML business profile spotlight with template counts and direct links to preview hub and shop category.

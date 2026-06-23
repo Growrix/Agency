@@ -24,19 +24,9 @@ import { GoogleReviews } from "@/components/sections/GoogleReviews";
 
 import { TrustStrip } from "@/components/sections/TrustStrip";
 
-import { BlogCard } from "@/components/sections/BlogCard";
-
-import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { HomeFieldNotesSection } from "@/components/marketing/HomeFieldNotesSection";
 
 import { Container, Section } from "@/components/primitives/Container";
-
-import { LinkButton } from "@/components/primitives/Button";
-
-import { Card } from "@/components/primitives/Card";
-
-import { SectionHeading } from "@/components/primitives/SectionHeading";
-
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 
 import { HOME_STACK_MARQUEE } from "@/lib/content";
 
@@ -370,67 +360,12 @@ export default async function Home() {
 
 
 
-      <Section {...homeSection("field-notes")}>
-
-        <Container>
-
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-
-            <SectionHeading
-
-              eyebrow={homeContent?.fieldNotes?.eyebrow ?? "Field notes"}
-
-              title={homeContent?.fieldNotes?.title ?? "Long-form writing from the studio."}
-
-              description={
-
-                homeContent?.fieldNotes?.description ??
-
-                "Engineering deep-dives, design system reflections, and quarterly notes on what we shipped."
-
-              }
-
-              titleClassName={HERO_TITLE_CLASS}
-
-            />
-
-            <LinkButton href="/blog" variant="outline">
-
-              Visit the blog <ArrowUpRightIcon className="size-4" />
-
-            </LinkButton>
-
-          </div>
-
-          <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
-
-            {latestBlogPosts.map((post) => (
-
-              <RevealItem key={post.slug}>
-
-                <BlogCard post={post} />
-
-              </RevealItem>
-
-            ))}
-
-          </RevealGroup>
-
-          {latestBlogPosts.length === 0 && (
-
-            <Card className="mt-8 text-center">
-
-              <p className="font-display text-2xl tracking-tight">No published blog posts yet.</p>
-
-              <p className="mt-2 text-text-muted">Publish your first post in Sanity to show it here.</p>
-
-            </Card>
-
-          )}
-
-        </Container>
-
-      </Section>
+      <HomeFieldNotesSection
+        posts={latestBlogPosts}
+        eyebrow={homeContent?.fieldNotes?.eyebrow}
+        title={homeContent?.fieldNotes?.title}
+        description={homeContent?.fieldNotes?.description}
+      />
 
 
 

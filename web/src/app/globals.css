@@ -403,6 +403,7 @@ body {
   --home-mobile-marketing-feature-grid-icon-size: 0.875rem;
   --home-mobile-marketing-feature-grid-label-size: 0.5625rem;
   --home-mobile-marketing-feature-grid-desc-size: 0.5625rem;
+  --home-mobile-marketing-footer-inset-x: 1rem;
 }
 
 @media (max-width: 1023px) {
@@ -1190,7 +1191,7 @@ body {
   font-size: var(--home-mobile-marketing-card-label-size);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-primary);
 }
 
 .home-mobile-marketing__product-row-title {
@@ -1657,6 +1658,481 @@ body {
   font-size: var(--home-mobile-marketing-tab-size);
   font-weight: 500;
   color: var(--color-primary);
+  text-decoration: none;
+}
+
+.home-mobile-marketing__product-row-label--sub {
+  margin-top: 0.125rem;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__preview-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-mobile-marketing-card-gap);
+  margin-top: var(--home-mobile-marketing-gap-section-stack);
+}
+
+.home-mobile-marketing__preview-panel {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--home-mobile-marketing-card-radius);
+  background: var(--color-surface);
+}
+
+.home-mobile-marketing__preview-panel > article,
+.home-mobile-marketing__preview-panel > div {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.home-mobile-marketing__preview-panel h3 {
+  font-size: var(--home-mobile-marketing-card-title-size);
+  line-height: 1.25;
+}
+
+.home-mobile-marketing__preview-panel p {
+  font-size: var(--home-mobile-marketing-desc-size);
+  line-height: var(--home-mobile-marketing-desc-leading);
+}
+
+.home-mobile-marketing__filters-card {
+  margin-top: var(--home-mobile-marketing-gap-section-stack);
+  padding: var(--home-mobile-marketing-card-padding);
+  border: 1px solid var(--color-border);
+  border-radius: var(--home-mobile-marketing-card-radius);
+  background: var(--color-surface);
+}
+
+.home-mobile-marketing__filters-title {
+  font-size: var(--home-mobile-marketing-card-title-size);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home-mobile-marketing__catalog-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: var(--home-mobile-marketing-gap-desc-content);
+}
+
+.home-mobile-marketing__catalog-count,
+.home-mobile-marketing__catalog-sort {
+  font-size: var(--home-mobile-marketing-tab-size);
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--home-mobile-marketing-card-gap);
+  margin-top: var(--home-mobile-marketing-gap-desc-content);
+}
+
+.home-mobile-marketing__catalog-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--home-mobile-marketing-card-radius);
+  background: var(--color-surface);
+}
+
+.home-mobile-marketing__catalog-card-preview {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-inset) 80%, #0a0a0a);
+}
+
+.home-mobile-marketing__catalog-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.625rem;
+}
+
+.home-mobile-marketing__catalog-card-label {
+  font-family: var(--font-mono);
+  font-size: var(--home-mobile-marketing-card-label-size);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__catalog-card-title {
+  font-size: var(--home-mobile-marketing-card-title-size);
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home-mobile-marketing__catalog-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-mobile-marketing__catalog-card-price {
+  font-size: var(--home-mobile-marketing-card-price-size);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__catalog-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.home-mobile-marketing__catalog-card-view {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  font-size: var(--home-mobile-marketing-tab-size);
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.home-mobile-marketing__case-tabs {
+  margin-top: var(--home-mobile-marketing-gap-desc-content);
+}
+
+.home-mobile-marketing__path-card-description {
+  margin-top: 0.375rem;
+  font-size: var(--home-mobile-marketing-desc-size);
+  line-height: var(--home-mobile-marketing-desc-leading);
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__path-card-cta {
+  width: 100%;
+}
+
+.home-mobile-marketing__portfolio-card {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--home-mobile-marketing-card-radius);
+  background: var(--color-surface);
+  padding: var(--home-mobile-marketing-card-padding);
+}
+
+.home-mobile-marketing__portfolio-card-tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.home-mobile-marketing__portfolio-card-tag {
+  font-family: var(--font-mono);
+  font-size: var(--home-mobile-marketing-card-label-size);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__portfolio-card-tag--accent {
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__portfolio-card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: calc(var(--home-mobile-marketing-card-radius) - 0.25rem);
+  background: #070b12;
+}
+
+.home-mobile-marketing__portfolio-card-title {
+  margin-top: 0.75rem;
+  font-size: var(--home-mobile-marketing-card-title-size);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home-mobile-marketing__portfolio-card-summary {
+  margin-top: 0.375rem;
+  font-size: var(--home-mobile-marketing-desc-size);
+  line-height: var(--home-mobile-marketing-desc-leading);
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__portfolio-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-mobile-marketing__portfolio-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  font-size: var(--home-mobile-marketing-tab-size);
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.home-mobile-marketing__portfolio-card-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--home-mobile-marketing-card-label-size);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__portfolio-card-live-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: var(--color-primary);
+}
+
+.home-mobile-marketing__blog-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--home-mobile-marketing-card-radius);
+  background: var(--color-surface);
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-mobile-marketing__blog-card-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.home-mobile-marketing__blog-card-category {
+  position: absolute;
+  left: 0.625rem;
+  top: 0.625rem;
+  z-index: 1;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-bg) 45%, transparent);
+  padding: 0.1875rem 0.4375rem;
+  font-family: var(--font-mono);
+  font-size: var(--home-mobile-marketing-card-label-size);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-surface);
+}
+
+.home-mobile-marketing__blog-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: var(--home-mobile-marketing-card-padding);
+}
+
+.home-mobile-marketing__blog-card-title {
+  font-size: var(--home-mobile-marketing-card-title-size);
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home-mobile-marketing__blog-card-excerpt {
+  font-size: var(--home-mobile-marketing-desc-size);
+  line-height: var(--home-mobile-marketing-desc-leading);
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-mobile-marketing__blog-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: var(--home-mobile-marketing-card-label-size);
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__blog-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  margin-top: 0.25rem;
+  font-size: var(--home-mobile-marketing-tab-size);
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__footer {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+.home-mobile-marketing__footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-mobile-marketing-gap-section-stack);
+  padding: var(--home-mobile-marketing-gap-section-stack) var(--home-mobile-marketing-footer-inset-x, 1rem);
+}
+
+.home-mobile-marketing__footer-response {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: var(--home-mobile-marketing-card-padding);
+  border: 1px solid var(--color-border);
+  border-radius: var(--home-mobile-marketing-card-radius);
+  background: var(--color-surface);
+}
+
+.home-mobile-marketing__footer-response-icon {
+  width: var(--home-mobile-marketing-cta-icon-size);
+  height: var(--home-mobile-marketing-cta-icon-size);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__footer-response-label {
+  font-family: var(--font-mono);
+  font-size: var(--home-mobile-marketing-card-label-size);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__footer-response-value {
+  margin-top: 0.25rem;
+  font-size: var(--home-mobile-marketing-card-title-size);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home-mobile-marketing__footer-heading {
+  font-family: var(--font-mono);
+  font-size: var(--home-mobile-marketing-card-label-size);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__footer-service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--home-mobile-marketing-card-gap);
+  margin-top: 0.625rem;
+  list-style: none;
+}
+
+.home-mobile-marketing__footer-service-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--home-mobile-marketing-card-radius) - 0.125rem);
+  background: var(--color-surface);
+  font-size: var(--home-mobile-marketing-tab-size);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.home-mobile-marketing__footer-service-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__footer-list {
+  margin-top: 0.625rem;
+  list-style: none;
+}
+
+.home-mobile-marketing__footer-list-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-block: 0.625rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--home-mobile-marketing-tab-size);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.home-mobile-marketing__footer-list-chevron {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.home-mobile-marketing__footer-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.home-mobile-marketing__footer-column-list {
+  margin-top: 0.5rem;
+  list-style: none;
+}
+
+.home-mobile-marketing__footer-column-link {
+  display: block;
+  padding-block: 0.25rem;
+  font-size: var(--home-mobile-marketing-tab-size);
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.home-mobile-marketing__footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-mobile-marketing__footer-copyright,
+.home-mobile-marketing__footer-tagline {
+  font-size: var(--home-mobile-marketing-card-label-size);
+  color: var(--color-text-muted);
+}
+
+.home-mobile-marketing__footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.home-mobile-marketing__footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding-inline: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  font-size: var(--home-mobile-marketing-card-label-size);
+  color: var(--color-text-muted);
   text-decoration: none;
 }
 

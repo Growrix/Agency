@@ -49,3 +49,9 @@ export function absoluteUrl(path = "/") {
 
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
+
+export const SITE_SOCIAL_LINKS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/growrixos" },
+  { label: "X", href: "https://x.com/growrixos" },
+  { label: "YouTube", href: "https://www.youtube.com/@growrixos" },
+] as const;

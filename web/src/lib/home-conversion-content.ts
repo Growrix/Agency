@@ -76,10 +76,31 @@ export const HOME_TEMPLATES_MARKETPLACE_COPY = {
 } as const;
 
 export const HOME_PREVIEW_COPY = {
+  eyebrow: "See every experience",
   title: "See every experience before you launch.",
   description:
     "Preview desktop and mobile versions side-by-side to ensure your website, portal, or application looks and performs exactly as intended.",
 } as const;
+
+export const HOME_FIELD_NOTES_COPY = {
+  eyebrow: "Field notes",
+  title: "Long-form writing from the studio.",
+  description:
+    "Engineering deep-dives, design system reflections, and quarterly notes on what we shipped.",
+  ctaLabel: "Visit the blog",
+  ctaHref: "/blog",
+} as const;
+
+export const HOME_FOOTER_COPY = {
+  responseLabel: "Average response time",
+  responseValue: "Under 2 business hours",
+  tagline: "Built deliberately. Shipped with care.",
+} as const;
+
+export const HOME_CASE_STUDY_TABS = [
+  { id: "website-projects", label: "Website projects" },
+  { id: "about-product", label: "About this product" },
+] as const;
 
 export const HOME_DIGITAL_PRODUCTS_CONVERSION_COPY = {
   eyebrow: "Digital products",

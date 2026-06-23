@@ -7,6 +7,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section } from "@/components/primitives/Container";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { ShopProductHomeCatalogMobileCard } from "@/components/shop/ShopProductHomeCatalogMobileCard";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { cn } from "@/lib/utils";
 import {
@@ -97,12 +98,10 @@ function HomeDigitalProductsMobile({ products }: HomeDigitalProductsShowcaseProp
         eyebrow={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.eyebrow}
         title={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.title}
         description={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
       />
 
-      <div className="home-mobile-marketing__path-card mt-[var(--home-mobile-marketing-gap-section-stack)]">
-        <p className="home-mobile-marketing__path-card-title">Filters</p>
+      <div className="home-mobile-marketing__filters-card">
+        <p className="home-mobile-marketing__filters-title">Filters</p>
         <div className="mt-3 space-y-3">
           {filterGroups.map((group) => (
             <SidebarGroup
@@ -115,18 +114,16 @@ function HomeDigitalProductsMobile({ products }: HomeDigitalProductsShowcaseProp
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-2">
-        <span className="text-[length:var(--home-mobile-marketing-tab-size)] text-primary">
+      <div className="home-mobile-marketing__catalog-toolbar">
+        <span className="home-mobile-marketing__catalog-count">
           {visibleProducts.length} of {filteredProducts.length} products
         </span>
-        <span className="text-[length:var(--home-mobile-marketing-tab-size)] text-primary">Sort by: Popular</span>
+        <span className="home-mobile-marketing__catalog-sort">Sort by: Popular</span>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2">
-        {visibleProducts.map((product) => (
-          <div key={product.slug} className="min-w-0">
-            <ShopProductCatalogCard product={product} variant="compact" />
-          </div>
+      <div className="home-mobile-marketing__catalog-grid">
+        {visibleProducts.map((product, index) => (
+          <ShopProductHomeCatalogMobileCard key={product.slug} product={product} loadPriority={index === 0} />
         ))}
       </div>
 

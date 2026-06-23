@@ -13,6 +13,7 @@ import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/Mobi
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { ShopProductHomeMobileRowCard } from "@/components/shop/ShopProductHomeMobileRowCard";
 import { ShopProductHtmlMobilePreviewCard } from "@/components/shop/ShopProductHtmlMobilePreviewCard";
 import { HOME_TEMPLATES_MARKETPLACE_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
@@ -56,7 +57,7 @@ function HomeTemplatesMarketplaceMobile({ products }: HomeTemplatesMarketplaceSe
       <RevealGroup className="home-mobile-marketing__stack">
         {products.map((product, index) => (
           <RevealItem key={product.slug}>
-            <ShopProductHtmlMobilePreviewCard product={product} loadPriority={index === 0} />
+            <ShopProductHomeMobileRowCard product={product} loadPriority={index === 0} />
           </RevealItem>
         ))}
       </RevealGroup>
