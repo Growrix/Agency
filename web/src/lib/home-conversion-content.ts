@@ -51,6 +51,8 @@ export const HOME_SERVICES_COPY = {
   title: "Launch faster. Scale smarter.",
   description:
     "Choose the templates you need—or let our experts customize, deploy, and grow them alongside your business.",
+  compareCta: "Compare all services",
+  compareCtaHref: "/services",
 } as const;
 
 export const HOME_SERVICE_OUTCOME_DESCRIPTIONS: Record<string, string> = {
@@ -67,6 +69,10 @@ export const HOME_TEMPLATES_MARKETPLACE_COPY = {
   title: "Launch weeks faster using proven systems.",
   description:
     "Browse category-based business profiles and website templates you can preview, purchase, and launch without starting from scratch.",
+  previewProfilesCta: "Preview all profiles",
+  previewProfilesHref: "/digital-products/category/html-business-profiles",
+  browseTemplatesCta: "Browse templates",
+  browseTemplatesHref: "/digital-products/category/website-templates-html-preview",
 } as const;
 
 export const HOME_PREVIEW_COPY = {
@@ -86,6 +92,8 @@ export const HOME_DIGITAL_PRODUCTS_CONVERSION_COPY = {
 export const HOME_READY_MADE_SOLUTIONS_COPY = {
   eyebrow: "Ready-made solutions",
   title: "Explore Ready-Made Solutions",
+  titleLead: "Explore Ready-Made",
+  titleAccent: "Solutions",
   description:
     "Browse professionally built systems designed to help businesses launch faster, operate smarter, and scale with confidence.",
 } as const;
@@ -103,6 +111,7 @@ export const HOME_THREE_PATH_CARDS = [
     description: "Perfect for founders and teams who want a fast start.",
     bullets: ["Instant access", "Ready-made templates", "Self implementation"],
     cta: { label: "Explore Templates", href: "/digital-products/category/website-templates-html-preview" },
+    icon: "rocket-launch",
   },
   {
     title: "Guided Setup",
@@ -110,12 +119,14 @@ export const HOME_THREE_PATH_CARDS = [
     bullets: ["Setup support", "Integrations", "Optimization guidance"],
     cta: { label: "Book Consultation", href: "/book-appointment" },
     featured: true,
+    icon: "users",
   },
   {
     title: "Custom Build",
     description: "A complete solution tailored to your business goals.",
     bullets: ["Custom development", "Full implementation", "Ongoing support"],
     cta: { label: "Start Project", href: "/contact?intent=custom_build" },
+    icon: "code-bracket",
   },
 ] as const;
 
@@ -138,4 +149,18 @@ export const HOME_AI_COPY = {
   title: "Make better decisions and move faster with AI-powered assistance.",
   description:
     "Ask about scope, pricing, product fit, or timelines before you book—then route into the right product or service path.",
+  privacyNote: "Conversations are private and never used to train models.",
+  quickReplies: ["Show timelines", "Team & rates", "Talk to a human"] as const,
+  highlights: [
+    { label: "Private", description: "Secure by design" },
+    { label: "Fast routing", description: "Right path, faster" },
+    { label: "Expert guided", description: "Human handoff when needed" },
+    { label: "No spam", description: "Never used to train models" },
+  ] as const,
 } as const;
+
+export const HOME_FINAL_CTA_FEATURES = [
+  { label: "Instant Access", description: "Buy and get instant digital delivery." },
+  { label: "Expert Guidance", description: "Speak with our team and get the right path." },
+  { label: "Built to Scale", description: "Launch with confidence and grow faster." },
+] as const;

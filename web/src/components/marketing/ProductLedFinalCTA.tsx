@@ -1,3 +1,7 @@
+"use client";
+
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { CTABand } from "@/components/sections/CTABand";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { homeSection } from "@/lib/homepage-composition";
@@ -23,14 +27,29 @@ export function ProductLedFinalCTA({
   const shell = homeSection("final-cta");
 
   return (
-    <CTABand
-      {...shell}
-      eyebrow={eyebrow}
-      title={title}
-      description={description}
-      primary={{ label: primaryLabel, href: primaryHref }}
-      secondary={{ label: secondaryLabel, href: secondaryHref ?? WHATSAPP_HREF }}
-      titleClassName={HERO_TITLE_CLASS}
+    <MarketingViewportGate
+      mobile={
+        <ProductLedFinalCTAMobile
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+          primaryLabel={primaryLabel}
+          primaryHref={primaryHref}
+          secondaryLabel={secondaryLabel}
+          secondaryHref={secondaryHref}
+        />
+      }
+      desktop={
+        <CTABand
+          {...shell}
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+          primary={{ label: primaryLabel, href: primaryHref }}
+          secondary={{ label: secondaryLabel, href: secondaryHref ?? WHATSAPP_HREF }}
+          titleClassName={HERO_TITLE_CLASS}
+        />
+      }
     />
   );
 }

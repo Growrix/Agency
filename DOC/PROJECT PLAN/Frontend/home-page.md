@@ -37,8 +37,46 @@ depends_on:
 
 ### 4. Service Cards
 - Content: services as upsell path with Template Customization featured first.
-- Components: `ServiceCards`, `FeatureCard`.
-- Interaction notes: rendered immediately after the hero as the second homepage section.
+- Components: `ServiceCards`, `ServiceCardsMobile`, `ServiceCardsDesktop`, `FeatureCard`.
+- Interaction notes: rendered immediately after the hero as the second homepage section. Below `lg`, `MarketingViewportGate` mounts a centered editorial header (badge, title, description, outline compare CTA) and a vertical stack of horizontal service rows (icon, copy, duration pill, chevron) backed by shared `--mobile-type-*` tokens via `.home-services-mobile__*` classes. At `lg+`, the existing `SectionHeading` + `FeatureCard` grid is unchanged.
+
+### 4b. Ready-Made Solutions
+- Content: tabbed website templates and HTML business profile previews.
+- Components: `ReadyMadeSolutionsSection`, `ReadyMadeSolutionsMobile`, `ReadyMadeSolutionsDesktop`, `ShopProductHomeMobileRowCard`.
+- Interaction notes: section 3 on `/`. Mobile uses `.home-mobile-marketing__*` tokens, accent title split, pill tabs, monitor note, and horizontal product rows.
+
+### 4c. Templates Marketplace (HTML Business Profiles)
+- Content: featured HTML business profile cards with preview CTAs.
+- Components: `HomeTemplatesMarketplaceSection`.
+- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and stacked profile preview cards.
+
+### 4d. Featured Templates
+- Components: `FeaturedProducts` with mobile gate — centered header, browse CTA, horizontal row cards for html-preview variant.
+
+### 4e. HTML Preview Showcase
+- Components: `HomeHtmlPreviewSection`.
+- Interaction notes: mobile stacks desktop + mobile preview blocks inside token-backed card shells.
+
+### 4f. Digital Products Showcase
+- Components: `HomeDigitalProductsShowcase` with mobile filter card + 2-column compact grid.
+
+### 4g. Three-Path Explainer
+- Components: `ThreePathExplainerMobile` / `ThreePathExplainerDesktop` — stacked path cards with icon, bullets, and pill CTAs on mobile.
+
+### 4h. Case Studies / Featured Builds
+- Components: `HomeFeaturedBuildsSection`.
+
+### 4i. Operating System (Process)
+- Components: `HomeProcessSection`, `ProcessStepsMobile` — vertical timeline cards on mobile.
+
+### 4j. AI Concierge
+- Components: `HomeAiConciergeSection` — mobile chat demo card with quick-reply pills and highlight grid.
+
+### 4k. Proof (Testimonials)
+- Components: `TestimonialsMobile` / `TestimonialsDesktop`.
+
+### 4l. Final CTA
+- Components: `ProductLedFinalCTAMobile` — dark contrast card with stacked CTAs and 3-column feature grid on mobile.
 
 ### 5. HTML Business Profiles Category Hero
 - Content: category-based HTML business profile spotlight with template counts and direct links to preview hub and shop category.

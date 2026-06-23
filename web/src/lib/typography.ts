@@ -17,3 +17,9 @@ export const HERO_MOBILE_DISPLAY_TITLE_CLASS = "home-hero-mobile__title font-dis
 
 /** Mobile homepage hero trust eyebrow — uses `--mobile-type-eyebrow-*` via `.home-hero-mobile__eyebrow`. */
 export const HERO_MOBILE_EYEBROW_CLASS = "home-hero-mobile__eyebrow";
+
+/** Mobile homepage services section title — uses `--mobile-type-display-*` via `.home-services-mobile__title`. */
+export const SERVICES_MOBILE_TITLE_CLASS = "home-services-mobile__title font-display";
+
+/** Shared mobile marketing section title — uses `--mobile-type-display-*` via `.home-mobile-marketing__title`. */
+export const MOBILE_MARKETING_TITLE_CLASS = "home-mobile-marketing__title font-display";
