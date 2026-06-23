@@ -9,6 +9,7 @@ export const HOME_HERO_HIGHLIGHTS = [
   { label: "100+ Ready-Made Templates", icon: "cube" as const },
   { label: "Custom Development Available", icon: "code" as const },
   { label: "Built for Startups & Agencies", icon: "users" as const },
+  { label: "Secure & Scalable Systems", icon: "shield" as const },
 ] as const;
 
 export const HOME_HERO_COPY = {
@@ -17,8 +18,15 @@ export const HOME_HERO_COPY = {
   titleAccent: "Grow with confidence.",
   description:
     "Access production-ready systems, powerful digital products, and expert growth support — all in one place.",
+  /** Mobile hero — balanced for two lines at ~390px with token typography. */
+  mobileDescriptionLines: [
+    "Production-ready systems, digital products,",
+    "and expert growth support — all in one place.",
+  ],
   primaryCta: "Browse Digital Products",
+  primaryCtaHref: "/digital-products",
   secondaryCta: "Book a Free Consultation",
+  secondaryCtaHref: "/book-appointment",
   trustedByLabel: "Trusted by businesses worldwide",
 } as const;
 
@@ -28,6 +36,14 @@ export const HOME_HERO_TRUSTED_NAMES = [
   "Supabase",
   "Vercel",
   "AWS",
+] as const;
+
+export const HOME_HERO_TRUSTED_LOGOS = [
+  { name: "Stripe", src: "/images/logos/trusted/stripe.svg", width: 52, height: 22 },
+  { name: "Next.js", src: "/images/logos/trusted/nextjs-dark.svg", width: 72, height: 18 },
+  { name: "Supabase", src: "/images/logos/trusted/supabase.svg", width: 88, height: 20 },
+  { name: "Vercel", src: "/images/logos/trusted/vercel-dark.svg", width: 72, height: 16 },
+  { name: "AWS", src: "/images/logos/trusted/aws.svg", width: 44, height: 28 },
 ] as const;
 
 export const HOME_SERVICES_COPY = {

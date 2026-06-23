@@ -11,3 +11,9 @@ export const SECTION_TITLE_CLASS = HERO_TITLE_CLASS;
 
 /** Fills and vertically centers content inside a viewport hero Section. */
 export const HERO_VIEWPORT_CONTAINER_CLASS = "hero-viewport-band__inner";
+
+/** Mobile homepage hero display title — uses `--mobile-type-display-*` via `.home-hero-mobile__title`. */
+export const HERO_MOBILE_DISPLAY_TITLE_CLASS = "home-hero-mobile__title font-display";
+
+/** Mobile homepage hero trust eyebrow — uses `--mobile-type-eyebrow-*` via `.home-hero-mobile__eyebrow`. */
+export const HERO_MOBILE_EYEBROW_CLASS = "home-hero-mobile__eyebrow";

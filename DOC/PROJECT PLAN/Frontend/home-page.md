@@ -121,7 +121,8 @@ depends_on:
 ## Responsive Adaptation
 - Desktop uses split hero with layered panels.
 - Tablet keeps two-column hero but compresses stats into a swipe row.
-- Mobile uses a single-column hero, sticky bottom dock, swipeable proofs, and sheet-based quick previews.
+- Mobile uses a single-column hero (`HomeHeroMobile`): **center-aligned** copy matching the approved mock — compact title scale (`clamp(1.875rem, 8.2vw, 2.25rem)`), 15px description, pill CTAs (48px height), divider-flanked trust logos (SVG manifest), live preview monitor with CSS phone bezel (desktop-scaled preview), carousel pagination, and a 2×2 feature grid with icon+label rows. `HomeHeroViewportGate` mounts only one hero layout for iframe budget (≤2). Sizing and spacing are token-driven via `.home-hero-mobile` in `globals.css`; mobile band does not force full viewport height.
+- Sticky bottom dock, swipeable proofs, and sheet-based quick previews apply elsewhere on the page.
 
 ## SEO and Metadata
 - Title: Premium Websites, HTML Business Profiles, SaaS Applications, Ready Websites, and Mobile App Launch Systems.

@@ -9,6 +9,7 @@ import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/Website
 import {
   HTML_PROFILE_CAROUSEL_AUTOPLAY_MS,
   HTML_PROFILE_CAROUSEL_TRANSITION_MS,
+  HOME_HERO_SHOWCASE_FADE_MS,
 } from "@/lib/html-profile-carousel-config";
 import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceholder";
 import { cn } from "@/lib/utils";
@@ -26,6 +27,14 @@ export type HtmlProfileHeroSlide = {
 };
 
 type HtmlProfileHeroCarouselPreviewMode = "iframe" | "mobile-frame" | "desktop-scaled";
+
+type HtmlProfileHeroCarouselTransitionMode = "slide" | "fade";
+
+export type HtmlProfileHeroCarouselNavigation = {
+  canNavigate: boolean;
+  goNext: () => void;
+  goPrev: () => void;
+};
 
 type HtmlProfileHeroCarouselProps = {
   slides: HtmlProfileHeroSlide[];
@@ -48,6 +57,13 @@ type HtmlProfileHeroCarouselProps = {
   onActiveIndexChange?: (index: number) => void;
   /** Tighter hero showcase layout — preview fills the carousel height. */
   compactPresentation?: boolean;
+  /** Crossfade instead of horizontal slide (homepage hero showcase). */
+  transitionMode?: HtmlProfileHeroCarouselTransitionMode;
+  /** Opacity crossfade duration when `transitionMode="fade"`. */
+  transitionDurationMs?: number;
+  /** Render prev/next controls via `onNavigationReady` instead of inside the preview. */
+  hideNavigation?: boolean;
+  onNavigationReady?: (navigation: HtmlProfileHeroCarouselNavigation) => void;
 };
 
 function slideHasPreview(slide: HtmlProfileHeroSlide) {
@@ -152,7 +168,9 @@ function CarouselPreviewFrame({
 }
 
 const carouselNavButtonClassName =
-  "pointer-events-auto inline-flex size-9 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text shadow-sm backdrop-blur-sm transition hover:border-primary/40 hover:bg-surface hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:pointer-events-none disabled:opacity-40";
+  "pointer-events-auto inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text shadow-sm backdrop-blur-sm transition hover:border-primary/40 hover:bg-surface hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:pointer-events-none disabled:opacity-40";
+
+export { carouselNavButtonClassName };
 
 export function HtmlProfileHeroCarousel({
   slides,
@@ -173,9 +191,15 @@ export function HtmlProfileHeroCarousel({
   showPagination = false,
   onActiveIndexChange,
   compactPresentation = false,
+  transitionMode = "slide",
+  transitionDurationMs,
+  hideNavigation = false,
+  onNavigationReady,
 }: HtmlProfileHeroCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [livePreviewEnabled, setLivePreviewEnabled] = useState(!posterFirst);
+  const isFadeMode = transitionMode === "fade";
+  const fadeDurationMs = transitionDurationMs ?? HOME_HERO_SHOWCASE_FADE_MS;
   const fallbackSlide = useMemo(
     () => emptyFallbackSlide ?? {
       name: "Business Profile Template",
@@ -201,6 +225,7 @@ export function HtmlProfileHeroCarousel({
   const [index, setIndex] = useState(0);
   const [animate, setAnimate] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isVisible, setIsVisible] = useState(
     () => typeof window !== "undefined" && typeof window.IntersectionObserver === "undefined",
   );
@@ -208,7 +233,7 @@ export function HtmlProfileHeroCarousel({
 
   const canNavigate = safeSlides.length > 1;
 
-  const logicalIndex = index >= cloneIndex ? 0 : index;
+  const logicalIndex = isFadeMode ? index : index >= cloneIndex ? 0 : index;
 
   useEffect(() => {
     onActiveIndexChange?.(logicalIndex);
@@ -228,8 +253,28 @@ export function HtmlProfileHeroCarousel({
     });
   }, []);
 
+  const beginFadeTransition = useCallback(() => {
+    isTransitioningRef.current = true;
+    setIsTransitioning(true);
+  }, []);
+
+  const completeFadeTransition = useCallback(() => {
+    if (!isTransitioningRef.current) {
+      return;
+    }
+
+    isTransitioningRef.current = false;
+    setIsTransitioning(false);
+  }, []);
+
   const goNext = useCallback(() => {
     if (!canNavigate || isTransitioningRef.current) {
+      return;
+    }
+
+    if (isFadeMode) {
+      beginFadeTransition();
+      setIndex((prev) => (prev + 1) % safeSlides.length);
       return;
     }
 
@@ -241,10 +286,16 @@ export function HtmlProfileHeroCarousel({
     isTransitioningRef.current = true;
     setAnimate(true);
     setIndex((prev) => prev + 1);
-  }, [canNavigate, cloneIndex, finishLoopReset, index]);
+  }, [beginFadeTransition, canNavigate, cloneIndex, finishLoopReset, index, isFadeMode, safeSlides.length]);
 
   const goPrev = useCallback(() => {
     if (!canNavigate || isTransitioningRef.current) {
+      return;
+    }
+
+    if (isFadeMode) {
+      beginFadeTransition();
+      setIndex((prev) => (prev - 1 + safeSlides.length) % safeSlides.length);
       return;
     }
 
@@ -264,7 +315,15 @@ export function HtmlProfileHeroCarousel({
 
     setAnimate(true);
     setIndex((prev) => prev - 1);
-  }, [canNavigate, cloneIndex, index, safeSlides.length]);
+  }, [beginFadeTransition, canNavigate, cloneIndex, index, isFadeMode, safeSlides.length]);
+
+  useEffect(() => {
+    onNavigationReady?.({
+      canNavigate,
+      goNext,
+      goPrev,
+    });
+  }, [canNavigate, goNext, goPrev, onNavigationReady]);
 
   useEffect(() => {
     const node = rootRef.current;
@@ -289,7 +348,7 @@ export function HtmlProfileHeroCarousel({
   const autoplayDelayMs = autoPlayIntervalMs ?? HTML_PROFILE_CAROUSEL_AUTOPLAY_MS;
 
   useEffect(() => {
-    if (isPaused || !canNavigate || !autoPlay || !isVisible) {
+    if (isPaused || !canNavigate || !autoPlay || !isVisible || isTransitioning) {
       return;
     }
 
@@ -298,10 +357,23 @@ export function HtmlProfileHeroCarousel({
     }, autoplayDelayMs);
 
     return () => window.clearTimeout(timer);
-  }, [isPaused, canNavigate, goNext, logicalIndex, autoPlay, isVisible, autoplayDelayMs]);
+  }, [isPaused, canNavigate, goNext, logicalIndex, autoPlay, isVisible, autoplayDelayMs, isTransitioning]);
 
   const handleTransitionEnd = useCallback(
     (event: React.TransitionEvent<HTMLDivElement>) => {
+      if (isFadeMode) {
+        if (event.propertyName !== "opacity") {
+          return;
+        }
+
+        if ((event.currentTarget as HTMLElement).getAttribute("aria-hidden") === "true") {
+          return;
+        }
+
+        completeFadeTransition();
+        return;
+      }
+
       if (event.target !== event.currentTarget || event.propertyName !== "transform") {
         return;
       }
@@ -313,10 +385,22 @@ export function HtmlProfileHeroCarousel({
 
       isTransitioningRef.current = false;
     },
-    [cloneIndex, finishLoopReset, index],
+    [cloneIndex, completeFadeTransition, finishLoopReset, index, isFadeMode],
   );
 
   useEffect(() => {
+    if (isFadeMode) {
+      if (!isTransitioning) {
+        return;
+      }
+
+      const failSafe = window.setTimeout(() => {
+        completeFadeTransition();
+      }, fadeDurationMs + 250);
+
+      return () => window.clearTimeout(failSafe);
+    }
+
     if (index > cloneIndex) {
       const recoveryTimer = window.setTimeout(() => {
         finishLoopReset();
@@ -339,7 +423,7 @@ export function HtmlProfileHeroCarousel({
     }, HTML_PROFILE_CAROUSEL_TRANSITION_MS + 250);
 
     return () => window.clearTimeout(failSafe);
-  }, [cloneIndex, finishLoopReset, index]);
+  }, [cloneIndex, completeFadeTransition, fadeDurationMs, finishLoopReset, index, isFadeMode, isTransitioning]);
 
   const isMobileFrame = previewMode === "mobile-frame";
 
@@ -384,7 +468,7 @@ export function HtmlProfileHeroCarousel({
           fillHeight && !isMobileFrame && "flex min-h-0 flex-1 flex-col",
         )}
       >
-        {canNavigate ? (
+        {canNavigate && !hideNavigation ? (
           <div
             className={cn(
               "pointer-events-none absolute inset-x-0 top-3 z-20 flex items-center justify-between px-1.5 sm:px-2",
@@ -410,81 +494,167 @@ export function HtmlProfileHeroCarousel({
           </div>
         ) : null}
 
-        <div
-          className={cn(
-            "flex",
-            fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
-            animate && "ease-out",
-          )}
-          style={{
-            transform: `translateX(-${index * 100}%)`,
-            transition: animate ? `transform ${HTML_PROFILE_CAROUSEL_TRANSITION_MS}ms ease-out` : "none",
-            willChange: animate ? "transform" : undefined,
-          }}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {loopSlides.map((slide, slideIndex) => {
-            const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
-            const isActiveSlide = slideLogicalIndex === logicalIndex;
-            const loadPreview =
-              (compactPresentation || isVisible) &&
-              previewLoadIndexes.has(slideLogicalIndex) &&
-              (!posterFirst || livePreviewEnabled);
+        {isFadeMode ? (
+          <div
+            className={cn(
+              "relative min-w-0",
+              fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
+              compactPresentation ? "min-h-0 flex-1 pb-11" : "min-h-[240px] p-3",
+            )}
+          >
+            {safeSlides.map((slide, slideIndex) => {
+              const isActiveSlide = slideIndex === logicalIndex;
+              const loadPreview =
+                (compactPresentation || isVisible) &&
+                previewLoadIndexes.has(slideIndex) &&
+                (!posterFirst || livePreviewEnabled) &&
+                isActiveSlide;
 
-            return (
-              <article
-                key={`${slide.name}-${slideIndex}`}
-                className={cn(
-                  "flex min-w-full flex-col",
-                  compactPresentation ? "h-full min-h-0 flex-1 pb-11" : "p-3",
-                  fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
-                )}
-              >
-                <div
+              return (
+                <article
+                  key={slide.name}
+                  aria-hidden={!isActiveSlide}
                   className={cn(
-                    previewFrameClassName,
-                    fillHeight && !isMobileFrame && "flex h-full min-h-0 flex-col",
-                    "relative",
+                    "absolute inset-0 flex flex-col",
+                    compactPresentation ? "pb-0" : "p-0",
+                    fillHeight && !isMobileFrame && "h-full min-h-0",
+                    isActiveSlide ? "z-10" : "z-0",
+                  )}
+                  style={{
+                    opacity: isActiveSlide ? 1 : 0,
+                    transition: `opacity ${fadeDurationMs}ms ease-out`,
+                    pointerEvents: isActiveSlide ? "auto" : "none",
+                  }}
+                  onTransitionEnd={handleTransitionEnd}
+                >
+                  <div
+                    className={cn(
+                      previewFrameClassName,
+                      fillHeight && !isMobileFrame && "flex h-full min-h-0 flex-col",
+                      "relative",
+                    )}
+                  >
+                    {posterFirst && !livePreviewEnabled && isActiveSlide ? (
+                      <PreviewPosterPlaceholder
+                        title={slide.name}
+                        onActivate={() => setLivePreviewEnabled(true)}
+                      />
+                    ) : (
+                      <CarouselPreviewFrame
+                        slide={slide}
+                        previewMode={previewMode}
+                        desktopPreviewFit={desktopPreviewFit}
+                        desktopPreviewViewportHeight={desktopPreviewViewportHeight}
+                        mobilePreviewMaxHeight={mobilePreviewMaxHeight}
+                        mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
+                        loadPreview={loadPreview}
+                        desktopPreviewVerticalAlign={compactPresentation ? "top" : "center"}
+                        iframeLoading={compactPresentation ? "eager" : "lazy"}
+                      />
+                    )}
+                  </div>
+                  {showSlideMeta ? (
+                    <div
+                      className={cn(
+                        "mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3",
+                        fillHeight && !isMobileFrame && "shrink-0",
+                      )}
+                    >
+                      <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
+                      <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
+                      <div className="mt-2 flex items-center justify-between gap-2">
+                        <span className="text-sm font-semibold text-primary">From {slide.price}</span>
+                        <Link
+                          href={slide.href}
+                          className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
+                        >
+                          {ctaLabel}
+                        </Link>
+                      </div>
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div
+            className={cn(
+              "flex",
+              fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
+              animate && "ease-out",
+            )}
+            style={{
+              transform: `translateX(-${index * 100}%)`,
+              transition: animate ? `transform ${HTML_PROFILE_CAROUSEL_TRANSITION_MS}ms ease-out` : "none",
+              willChange: animate ? "transform" : undefined,
+            }}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            {loopSlides.map((slide, slideIndex) => {
+              const slideLogicalIndex = slideIndex >= cloneIndex ? 0 : slideIndex;
+              const isActiveSlide = slideLogicalIndex === logicalIndex;
+              const loadPreview =
+                (compactPresentation || isVisible) &&
+                previewLoadIndexes.has(slideLogicalIndex) &&
+                (!posterFirst || livePreviewEnabled) &&
+                (!compactPresentation || slideIndex === index);
+
+              return (
+                <article
+                  key={`${slide.name}-${slideIndex}`}
+                  className={cn(
+                    "flex min-w-full flex-col",
+                    compactPresentation ? "h-full min-h-0 flex-1 pb-11" : "p-3",
+                    fillHeight && !isMobileFrame && "h-full min-h-0 flex-1",
                   )}
                 >
-                  {posterFirst && !livePreviewEnabled && isActiveSlide ? (
-                    <PreviewPosterPlaceholder
-                      title={slide.name}
-                      onActivate={() => setLivePreviewEnabled(true)}
-                    />
-                  ) : (
-                    <CarouselPreviewFrame
-                      slide={slide}
-                      previewMode={previewMode}
-                      desktopPreviewFit={desktopPreviewFit}
-                      desktopPreviewViewportHeight={desktopPreviewViewportHeight}
-                      mobilePreviewMaxHeight={mobilePreviewMaxHeight}
-                      mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
-                      loadPreview={loadPreview}
-                      desktopPreviewVerticalAlign={compactPresentation ? "top" : "center"}
-                      iframeLoading={compactPresentation ? "eager" : "lazy"}
-                    />
-                  )}
-                </div>
-                {showSlideMeta ? (
-                  <div className={cn("mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
-                    <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
-                    <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
-                    <div className="mt-2 flex items-center justify-between gap-2">
-                      <span className="text-sm font-semibold text-primary">From {slide.price}</span>
-                      <Link
-                        href={slide.href}
-                        className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
-                      >
-                        {ctaLabel}
-                      </Link>
-                    </div>
+                  <div
+                    className={cn(
+                      previewFrameClassName,
+                      fillHeight && !isMobileFrame && "flex h-full min-h-0 flex-col",
+                      "relative",
+                    )}
+                  >
+                    {posterFirst && !livePreviewEnabled && isActiveSlide ? (
+                      <PreviewPosterPlaceholder
+                        title={slide.name}
+                        onActivate={() => setLivePreviewEnabled(true)}
+                      />
+                    ) : (
+                      <CarouselPreviewFrame
+                        slide={slide}
+                        previewMode={previewMode}
+                        desktopPreviewFit={desktopPreviewFit}
+                        desktopPreviewViewportHeight={desktopPreviewViewportHeight}
+                        mobilePreviewMaxHeight={mobilePreviewMaxHeight}
+                        mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
+                        loadPreview={loadPreview}
+                        desktopPreviewVerticalAlign={compactPresentation ? "top" : "center"}
+                        iframeLoading={compactPresentation ? "eager" : "lazy"}
+                      />
+                    )}
                   </div>
-                ) : null}
-              </article>
-            );
-          })}
-        </div>
+                  {showSlideMeta ? (
+                    <div className={cn("mt-3 min-h-22 shrink-0 border-t border-border/70 pt-3", fillHeight && !isMobileFrame && "shrink-0")}>
+                      <p className="line-clamp-1 text-sm font-semibold text-text">{slide.name}</p>
+                      <p className="mt-1 text-xs text-text-muted">{slide.type}</p>
+                      <div className="mt-2 flex items-center justify-between gap-2">
+                        <span className="text-sm font-semibold text-primary">From {slide.price}</span>
+                        <Link
+                          href={slide.href}
+                          className="inline-flex items-center rounded-md border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold text-primary hover:bg-primary/10"
+                        >
+                          {ctaLabel}
+                        </Link>
+                      </div>
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
+          </div>
+        )}
 
         {showPagination && canNavigate ? (
           <div className="absolute inset-x-0 bottom-3 z-20 flex items-center justify-center gap-2">
@@ -500,6 +670,12 @@ export function HtmlProfileHeroCarousel({
                 aria-current={dotIndex === logicalIndex ? "true" : undefined}
                 onClick={() => {
                   if (dotIndex === logicalIndex || isTransitioningRef.current) {
+                    return;
+                  }
+
+                  if (isFadeMode) {
+                    beginFadeTransition();
+                    setIndex(dotIndex);
                     return;
                   }
 

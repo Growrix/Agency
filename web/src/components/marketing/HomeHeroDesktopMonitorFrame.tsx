@@ -5,12 +5,15 @@ type HomeHeroDesktopMonitorFrameProps = {
   children: ReactNode;
   className?: string;
   screenClassName?: string;
+  /** Rendered inside the live-preview screen (e.g. mobile phone overlay). */
+  screenOverlay?: ReactNode;
 };
 
 export function HomeHeroDesktopMonitorFrame({
   children,
   className,
   screenClassName,
+  screenOverlay,
 }: HomeHeroDesktopMonitorFrameProps) {
   return (
     <div className={cn("relative mx-auto w-full", className)}>
@@ -30,6 +33,7 @@ export function HomeHeroDesktopMonitorFrame({
           )}
         >
           {children}
+          {screenOverlay}
         </div>
       </div>
 
