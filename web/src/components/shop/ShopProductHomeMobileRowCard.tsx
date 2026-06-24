@@ -11,17 +11,22 @@ import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
 import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
+import { cn } from "@/lib/utils";
 import {
   getWebsiteTemplateHtmlPreviewByProductSlug,
   getWebsiteTemplateHtmlPreviewUrl,
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
 } from "@/lib/website-templates-html-preview";
 
+const PROFILE_ROW_PREVIEW_MAX_HEIGHT = 120;
+
 type ShopProductHomeMobileRowCardProps = {
   product: ShopProduct;
   previewLoadMode?: ShopPreviewLoadMode;
   loadPriority?: boolean;
   previewBadgeLabel?: string;
+  /** Profile marketplace rows use a compact phone frame; catalog rows use a 50/50 desktop preview split. */
+  previewLayout?: "profile-mobile" | "split-desktop";
 };
 
 export function ShopProductHomeMobileRowCard({
@@ -29,6 +34,7 @@ export function ShopProductHomeMobileRowCard({
   previewLoadMode = "auto",
   loadPriority = false,
   previewBadgeLabel = "Preview",
+  previewLayout = "split-desktop",
 }: ShopProductHomeMobileRowCardProps) {
   const websiteTemplatePreview =
     product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
@@ -38,6 +44,7 @@ export function ShopProductHomeMobileRowCard({
     ? getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug)
     : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
   const isProfile = product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug;
+  const useProfileMobileLayout = previewLayout === "profile-mobile" || isProfile;
   const hasExternalPreview = Boolean(previewUrl);
   const usePosterFirst = previewLoadMode === "poster-first";
   const requiresClickToLoad = usePosterFirst;
@@ -49,14 +56,20 @@ export function ShopProductHomeMobileRowCard({
   const shouldMountIframe = requiresClickToLoad ? liveActivated : shouldRenderPreview;
 
   return (
-    <article className="home-mobile-marketing__product-row">
+    <article
+      className={cn(
+        "home-mobile-marketing__product-row",
+        useProfileMobileLayout && "home-mobile-marketing__product-row--profile-mobile",
+      )}
+    >
       <div ref={previewRef} className="home-mobile-marketing__product-row-preview">
         {previewUrl ? (
           shouldMountIframe ? (
-            isProfile ? (
+            useProfileMobileLayout ? (
               <WebsiteTemplateHtmlMobilePreviewFrame
                 previewUrl={previewUrl}
                 title={`${product.name} preview`}
+                maxFrameHeight={PROFILE_ROW_PREVIEW_MAX_HEIGHT}
                 showViewportLabel={false}
                 iframeLoading="lazy"
                 className="home-mobile-marketing__product-row-frame"

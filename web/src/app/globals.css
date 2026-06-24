@@ -391,8 +391,11 @@ body {
   --home-mobile-marketing-card-label-size: var(--mobile-type-card-label-size);
   --home-mobile-marketing-card-price-size: var(--mobile-type-card-price-size);
   --home-mobile-marketing-card-meta-size: 0.5rem;
-  --home-mobile-marketing-product-row-preview-width: minmax(0, 1fr);
+  --home-mobile-marketing-product-row-preview-width-compact: 5.5rem;
+  --home-mobile-marketing-product-row-preview-height-compact: 6.75rem;
   --home-mobile-marketing-product-row-preview-min-height: 8.5rem;
+  --home-mobile-marketing-preview-panel-min-height: 13.5rem;
+  --home-mobile-marketing-preview-panel-desktop-min-height: 16rem;
   --home-mobile-marketing-product-row-action-size: 2rem;
   --home-mobile-marketing-product-row-action-icon-size: 0.875rem;
   --home-mobile-marketing-note-size: var(--mobile-type-body-size);
@@ -1168,6 +1171,17 @@ body {
   color: var(--color-primary);
 }
 
+.home-mobile-marketing__product-row--profile-mobile {
+  grid-template-columns: var(--home-mobile-marketing-product-row-preview-width-compact) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.home-mobile-marketing__product-row--profile-mobile .home-mobile-marketing__product-row-preview {
+  width: var(--home-mobile-marketing-product-row-preview-width-compact);
+  height: var(--home-mobile-marketing-product-row-preview-height-compact);
+  min-height: 0;
+}
+
 .home-mobile-marketing__product-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -1177,6 +1191,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--home-mobile-marketing-card-radius);
   background: var(--color-surface);
+  overflow-anchor: none;
 }
 
 .home-mobile-marketing__product-row-preview {
@@ -1187,6 +1202,7 @@ body {
   flex-shrink: 0;
   border-radius: calc(var(--home-mobile-marketing-card-radius) - 0.25rem);
   background: color-mix(in srgb, var(--color-inset) 80%, #0a0a0a);
+  overflow-anchor: none;
 }
 
 .home-mobile-marketing__product-row-frame {
@@ -1723,13 +1739,21 @@ body {
   flex-direction: column;
   gap: var(--home-mobile-marketing-card-gap);
   margin-top: var(--home-mobile-marketing-gap-section-stack);
+  overflow-anchor: none;
 }
 
 .home-mobile-marketing__preview-panel {
   overflow: hidden;
+  overflow-anchor: none;
+  contain: layout style;
   border: 1px solid var(--color-border);
   border-radius: var(--home-mobile-marketing-card-radius);
   background: var(--color-surface);
+  min-height: var(--home-mobile-marketing-preview-panel-min-height);
+}
+
+.home-mobile-marketing__preview-panel--desktop {
+  min-height: var(--home-mobile-marketing-preview-panel-desktop-min-height);
 }
 
 .home-mobile-marketing__preview-panel > article,

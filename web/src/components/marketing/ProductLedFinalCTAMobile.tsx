@@ -19,7 +19,7 @@ const FEATURE_ICONS = [BoltIcon, UserGroupIcon, ShieldCheckIcon];
 
 type ProductLedFinalCTAMobileProps = {
   eyebrow: string;
-  title: string;
+  title?: string;
   description: string;
   primaryLabel: string;
   primaryHref: string;

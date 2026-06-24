@@ -47,8 +47,8 @@ depends_on:
 
 ### 4c. Templates Marketplace (HTML Business Profiles)
 - Content: featured HTML business profile cards with preview CTAs.
-- Components: `HomeTemplatesMarketplaceSection`, `ShopProductHomeMobileRowCard`.
-- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and stacked horizontal row cards (phone preview left, dual teal category labels, price, cart + Live Preview, View details link).
+- Components: `HomeTemplatesMarketplaceSection`, `ShopProductHomeMobileRowCard` (`previewLayout="profile-mobile"`).
+- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and compact horizontal row cards with **phone-frame** previews (narrow column + mobile iframe).
 
 ### 4d. Featured Templates
 - Components: `FeaturedProducts` with mobile gate — centered header, browse CTA, horizontal row cards for html-preview variant.

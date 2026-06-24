@@ -58,7 +58,11 @@ function HomeTemplatesMarketplaceMobile({ products }: HomeTemplatesMarketplaceSe
       <RevealGroup className="home-mobile-marketing__stack">
         {products.map((product, index) => (
           <RevealItem key={product.slug}>
-            <ShopProductHomeMobileRowCard product={product} loadPriority={index === 0} />
+            <ShopProductHomeMobileRowCard
+              product={product}
+              loadPriority={index === 0}
+              previewLayout="profile-mobile"
+            />
           </RevealItem>
         ))}
       </RevealGroup>

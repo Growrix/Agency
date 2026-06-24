@@ -19,7 +19,7 @@ function getServerSnapshot() {
 }
 
 type MarketingViewportGateProps = {
-  mobile: ReactNode;
+  mobile: ReactNode | null;
   desktop: ReactNode;
 };
 

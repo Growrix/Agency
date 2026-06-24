@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section } from "@/components/primitives/Container";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { cn } from "@/lib/utils";
 import {
@@ -195,15 +196,20 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
   const shell = homeSection("digital-products");
 
   return (
-    <Section
-      id="digital-products-showcase"
-      {...shell}
-      className="hidden overflow-x-hidden lg:block"
-      aria-labelledby="home-digital-products-title"
-    >
-      <Container className="min-w-0">
-        <HomeDigitalProductsDesktop products={products} />
-      </Container>
-    </Section>
+    <MarketingViewportGate
+      mobile={null}
+      desktop={
+        <Section
+          id="digital-products-showcase"
+          {...shell}
+          className="overflow-x-hidden [overflow-anchor:none]"
+          aria-labelledby="home-digital-products-title"
+        >
+          <Container className="min-w-0">
+            <HomeDigitalProductsDesktop products={products} />
+          </Container>
+        </Section>
+      }
+    />
   );
 }

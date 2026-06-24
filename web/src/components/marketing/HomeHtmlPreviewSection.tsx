@@ -4,13 +4,19 @@ import { MarketingViewportGate } from "@/components/marketing/MarketingViewportG
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
 import {
   WebsiteTemplateHtmlDesktopPreviewBlock,
+  WebsiteTemplateHtmlDesktopPreviewCarousel,
   WebsiteTemplateHtmlMobilePreviewBlock,
 } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
-import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
+import {
+  HtmlProfileHeroCarousel,
+  type HtmlProfileHeroSlide,
+} from "@/components/sections/HtmlProfileHeroCarousel";
 import { Container, Section } from "@/components/primitives/Container";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
+
+const MOBILE_HTML_PREVIEW_MAX_FRAME_HEIGHT = 480;
 
 type HomeHtmlPreviewSectionProps = {
   slides: HtmlProfileHeroSlide[];
@@ -37,19 +43,26 @@ function HomeHtmlPreviewMobile({
       />
 
       <div className="home-mobile-marketing__preview-stack">
-        <div className="home-mobile-marketing__preview-panel">
-          <WebsiteTemplateHtmlDesktopPreviewBlock
+        <div className="home-mobile-marketing__preview-panel home-mobile-marketing__preview-panel--desktop">
+          <WebsiteTemplateHtmlDesktopPreviewCarousel
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
-            posterFirst={false}
+            minHeightClass="min-h-[200px] sm:min-h-[240px]"
+            desktopPreviewFit="cover"
+            posterFirst
           />
         </div>
         <div className="home-mobile-marketing__preview-panel">
-          <WebsiteTemplateHtmlMobilePreviewBlock
+          <HtmlProfileHeroCarousel
             slides={slides}
+            ctaLabel="View Product"
             emptyFallbackSlide={emptyFallbackSlide}
-            reverseLayout={false}
+            previewMode="mobile-frame"
+            mobileFrameMinHeightClass="min-h-0"
+            mobilePreviewMaxHeight={MOBILE_HTML_PREVIEW_MAX_FRAME_HEIGHT}
+            mobilePreviewShowViewportLabel={false}
             autoPlay={false}
+            posterFirst
           />
         </div>
       </div>
@@ -97,7 +110,7 @@ export function HomeHtmlPreviewSection({
       layout={sectionShell?.layout ?? "content"}
       tone={sectionShell?.tone}
       spacing={sectionShell?.spacing ?? "default"}
-      className="overflow-x-hidden"
+      className="overflow-x-hidden [overflow-anchor:none]"
     >
       <Container className="min-w-0">
         <MarketingViewportGate
