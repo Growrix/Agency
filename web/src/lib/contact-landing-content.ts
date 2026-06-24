@@ -1,6 +1,8 @@
 export const CONTACT_HERO = {
   eyebrow: "Contact",
   title: "Let's plan the fastest path from idea to launch.",
+  titleLead: "Let's plan the fastest path",
+  titleAccent: "from idea to launch.",
   description:
     "Whether you're launching a website, SaaS platform, mobile app, automation system, AI implementation, or technical SEO project, we'll help identify the right approach and next steps.",
   proofPoints: [
@@ -199,6 +201,8 @@ export const CONTACT_EXPLORE = {
 export const CONTACT_FAQ = {
   eyebrow: "FAQ",
   title: "Questions before you write.",
+  titleLead: "Questions",
+  titleAccent: "before you write.",
   items: [
     {
       question: "How do projects typically start?",

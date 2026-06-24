@@ -7,6 +7,8 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { BlogGrid } from "@/components/sections/BlogGrid";
 import { BlogSidebar } from "@/components/sections/BlogSidebar";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
 import {
   formatBlogDate,
   type BlogPost,
@@ -85,28 +87,47 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
   return (
     <>
       {/* Hero / featured */}
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <Container>
-          <div className="max-w-2xl">
-            <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>The Growrix OS blog</Badge>
-            </div>
-            <h1
-              className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"
-              style={{ animationDelay: "70ms" }}
-            >
-              Field notes from a studio that ships.
-            </h1>
-            <p
-              className="mt-5 text-lg text-text-muted leading-7 text-pretty signal-rise"
-              style={{ animationDelay: "140ms" }}
-            >
-              Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.
-            </p>
-          </div>
+      <MarketingViewportGate
+        mobile={
+          <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow="Field notes"
+                titleLead="From a studio"
+                titleAccent="that ships."
+                description="Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving."
+                primaryCta="Browse posts"
+                primaryHref="#blog-grid"
+                secondaryCta="Book a call"
+                secondaryHref="/book-appointment"
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <div className="max-w-2xl">
+                <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+                  <Badge tone="primary" dot>The Growrix OS blog</Badge>
+                </div>
+                <h1
+                  className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"
+                  style={{ animationDelay: "70ms" }}
+                >
+                  Field notes from a studio that ships.
+                </h1>
+                <p
+                  className="mt-5 text-lg text-text-muted leading-7 text-pretty signal-rise"
+                  style={{ animationDelay: "140ms" }}
+                >
+                  Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.
+                </p>
+              </div>
 
-          {!isFiltering && featured && (
+              {!isFiltering && featured && (
             <Link
               href={`/blog/${featured.slug}`}
               className="group mt-12 grid overflow-hidden rounded-lg border border-border bg-surface hover:shadow-(--shadow-3) transition-all lg:grid-cols-12"
@@ -156,9 +177,11 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
           )}
         </Container>
       </Section>
+        }
+      />
 
       {/* Grid + sidebar */}
-      <Section size="standard" layout="content" spacing="split">
+      <Section size="standard" layout="content" spacing="split" id="blog-grid">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">

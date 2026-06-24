@@ -4,6 +4,8 @@ import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 export const PORTFOLIO_LANDING_HERO = {
   eyebrow: "Portfolio",
   title: "Real projects. Real business outcomes.",
+  titleLead: "Real projects.",
+  titleAccent: "Real business outcomes.",
   description:
     "A curated collection of websites, systems, and digital experiences designed to improve visibility, operations, and customer engagement.",
   primaryCta: "Browse Projects",
@@ -54,6 +56,8 @@ export function filterPortfolioProjects(projects: PublicPortfolioRecord[]): Publ
 export const PORTFOLIO_CAPABILITIES_SECTION = {
   eyebrow: "Capabilities",
   title: "The capabilities behind the projects.",
+  titleLead: "The capabilities",
+  titleAccent: "behind the projects.",
   description:
     "Every project demonstrates a specific business capability designed to support growth, visibility, operations, or customer engagement.",
   items: [
@@ -146,6 +150,8 @@ export const PORTFOLIO_LANDING_FAQ = [
 
 export const PORTFOLIO_LANDING_CTA = {
   title: "Need something similar for your business?",
+  titleLead: "Need something similar",
+  titleAccent: "for your business?",
   description:
     "Use these projects as inspiration. We'll adapt the strategy, functionality, and delivery approach to your goals.",
   primaryCta: "Book Strategy Call",

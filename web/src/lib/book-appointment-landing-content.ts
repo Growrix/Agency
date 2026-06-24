@@ -1,6 +1,8 @@
 export const BOOK_APPOINTMENT_HERO = {
   eyebrow: "Book a call",
   title: "Plan your next step with a focused discovery session.",
+  titleLead: "Plan your next step",
+  titleAccent: "with a focused session.",
   description:
     "A 30-minute conversation to clarify goals, scope, timeline, and the right path forward for websites, SaaS products, mobile apps, automation, technical SEO, or AI business systems.",
   proofPoints: [

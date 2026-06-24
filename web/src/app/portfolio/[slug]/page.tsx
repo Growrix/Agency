@@ -11,6 +11,8 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { PortfolioGalleryLightbox } from "@/components/media/PortfolioGalleryLightbox";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
 import { SERVICES } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { getPublicPortfolioProject, listPublicPortfolio } from "@/server/domain/catalog";
@@ -56,22 +58,47 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <>
-      <Section className="pt-12 sm:pt-16 pb-12">
-        <Container>
-          <Link href="/portfolio" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All projects
-          </Link>
-          <div className="mt-6 grid gap-12 lg:grid-cols-12 items-start">
-            <div className="lg:col-span-6">
-              <div className="flex items-center gap-2 flex-wrap">
+      <MarketingViewportGate
+        mobile={
+          <Section className="pt-8 pb-8">
+            <Container>
+              <Link href="/portfolio" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary mb-4">
+                ← All projects
+              </Link>
+              <div className="flex items-center gap-2 flex-wrap mb-4">
                 <Badge tone="primary">{project.industry}</Badge>
                 {service && <Badge tone="neutral">{service.name}</Badge>}
                 <Badge tone="accent">{detail.year}</Badge>
               </div>
-              <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-                {project.name}
-              </h1>
-              <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{project.summary}</p>
+              <MarketingPageHeroMobile
+                eyebrow={project.industry}
+                title={project.name}
+                description={project.summary}
+                primaryCta="Build something similar"
+                primaryHref="/book-appointment"
+                secondaryCta="More work"
+                secondaryHref="/portfolio"
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section className="pt-12 sm:pt-16 pb-12">
+            <Container>
+              <Link href="/portfolio" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+                ← All projects
+              </Link>
+              <div className="mt-6 grid gap-12 lg:grid-cols-12 items-start">
+                <div className="lg:col-span-6">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Badge tone="primary">{project.industry}</Badge>
+                    {service && <Badge tone="neutral">{service.name}</Badge>}
+                    <Badge tone="accent">{detail.year}</Badge>
+                  </div>
+                  <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
+                    {project.name}
+                  </h1>
+                  <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{project.summary}</p>
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 <div className="rounded-[14px] border border-border bg-surface px-4 py-3">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-muted">Client</p>
@@ -134,6 +161,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </Container>
       </Section>
+        }
+      />
 
       {/* StatBlock counter banner removed as requested */}
 

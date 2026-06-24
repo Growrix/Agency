@@ -14,6 +14,8 @@ import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { BookAppointmentHeroPanel } from "@/components/sections/BookAppointmentHeroPanel";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
 import {
   BOOK_APPOINTMENT_ALTERNATIVES,
   BOOK_APPOINTMENT_FORM,
@@ -148,39 +150,62 @@ export function BookAppointmentExperience() {
 
   return (
     <>
-      <Section {...marketingSection("book-appointment", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
-        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-            <div className="lg:col-span-6 xl:col-span-7">
-              <Badge tone="primary" dot>
-                {BOOK_APPOINTMENT_HERO.eyebrow}
-              </Badge>
-              <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{BOOK_APPOINTMENT_HERO.title}</h1>
-              <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{BOOK_APPOINTMENT_HERO.description}</p>
-              <ul className="mt-6 space-y-2">
-                {BOOK_APPOINTMENT_HERO.proofPoints.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5 text-sm text-text">
-                    <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href={BOOK_APPOINTMENT_HERO.primaryHref} size="lg">
-                  {BOOK_APPOINTMENT_HERO.primaryCta} <ArrowRightIcon className="size-4" aria-hidden />
-                </LinkButton>
-                <LinkButton href={BOOK_APPOINTMENT_HERO.secondaryHref} variant="outline" size="lg">
-                  {BOOK_APPOINTMENT_HERO.secondaryCta}
-                </LinkButton>
+      {/* Hero */}
+      <MarketingViewportGate
+        mobile={
+          <Section {...marketingSection("book-appointment", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow={BOOK_APPOINTMENT_HERO.eyebrow}
+                titleLead={BOOK_APPOINTMENT_HERO.titleLead}
+                titleAccent={BOOK_APPOINTMENT_HERO.titleAccent}
+                description={BOOK_APPOINTMENT_HERO.description}
+                primaryCta={BOOK_APPOINTMENT_HERO.primaryCta}
+                primaryHref={BOOK_APPOINTMENT_HERO.primaryHref}
+                secondaryCta={BOOK_APPOINTMENT_HERO.secondaryCta}
+                secondaryHref={BOOK_APPOINTMENT_HERO.secondaryHref}
+                proofPoints={BOOK_APPOINTMENT_HERO.proofPoints}
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section {...marketingSection("book-appointment", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+            <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+                <div className="lg:col-span-6 xl:col-span-7">
+                  <Badge tone="primary" dot>
+                    {BOOK_APPOINTMENT_HERO.eyebrow}
+                  </Badge>
+                  <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{BOOK_APPOINTMENT_HERO.title}</h1>
+                  <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{BOOK_APPOINTMENT_HERO.description}</p>
+                  <ul className="mt-6 space-y-2">
+                    {BOOK_APPOINTMENT_HERO.proofPoints.map((point) => (
+                      <li key={point} className="flex items-start gap-2.5 text-sm text-text">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <LinkButton href={BOOK_APPOINTMENT_HERO.primaryHref} size="lg">
+                      {BOOK_APPOINTMENT_HERO.primaryCta} <ArrowRightIcon className="size-4" aria-hidden />
+                    </LinkButton>
+                    <LinkButton href={BOOK_APPOINTMENT_HERO.secondaryHref} variant="outline" size="lg">
+                      {BOOK_APPOINTMENT_HERO.secondaryCta}
+                    </LinkButton>
+                  </div>
+                </div>
+                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+                  <BookAppointmentHeroPanel />
+                </div>
               </div>
-            </div>
-            <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-              <BookAppointmentHeroPanel />
-            </div>
-          </div>
-        </Container>
-      </Section>
+            </Container>
+          </Section>
+        }
+      />
 
       <Section id="booking" {...marketingSection("book-appointment", "form")}>
         <Container>

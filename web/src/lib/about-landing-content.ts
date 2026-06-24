@@ -1,6 +1,8 @@
 export const ABOUT_HERO = {
   eyebrow: "About GrowrixOS",
   title: "A product-focused studio building systems that help businesses grow.",
+  titleLead: "A product-focused studio",
+  titleAccent: "building systems that grow.",
   description:
     "GrowrixOS combines websites, SaaS applications, mobile products, automation systems, technical SEO, and AI business systems into practical solutions designed for long-term business value.",
   proofPoints: [
@@ -31,6 +33,8 @@ export const ABOUT_HERO_PANEL = {
 export const ABOUT_PRINCIPLES_SECTION = {
   eyebrow: "Our principles",
   title: "The principles behind every project we ship.",
+  titleLead: "The principles behind",
+  titleAccent: "every project we ship.",
   description: "The decisions that shape how we plan, build, launch, and support digital products.",
   principles: [
     {
@@ -111,6 +115,8 @@ export const ABOUT_WHY_EXIST_SECTION = {
 export const ABOUT_PROCESS_SECTION = {
   eyebrow: "Delivery framework",
   title: "How we deliver work.",
+  titleLead: "How we",
+  titleAccent: "deliver work.",
   description:
     "Every project follows a structured process designed to reduce risk, improve visibility, and create measurable outcomes.",
 } as const;
@@ -149,6 +155,8 @@ export const ABOUT_BUSINESS_FIRST_SECTION = {
 export const ABOUT_HOW_WE_WORK_SECTION = {
   eyebrow: "How we work",
   title: "Small by design. Focused by choice.",
+  titleLead: "Small by design.",
+  titleAccent: "Focused by choice.",
   description:
     "We intentionally keep engagements selective to maintain quality, accountability, and direct communication.",
   cards: [
@@ -185,6 +193,8 @@ export const ABOUT_CLIENT_VALUE_SECTION = {
 
 export const ABOUT_CTA = {
   title: "Ready to discuss your project?",
+  titleLead: "Ready to discuss",
+  titleAccent: "your project?",
   description: "Book a strategy call and we'll explore the fastest path from idea to launch.",
   primaryCta: "Book Strategy Call",
   primaryHref: "/book-appointment",

@@ -10,6 +10,8 @@ export const MOBILE_APPS_SERVICE_STATS: Stat[] = [
 
 export const MOBILE_APPS_SERVICE_HERO = {
   headline: "Launch mobile products without rebuilding your entire business.",
+  headlineLead: "Launch mobile products",
+  headlineAccent: "without rebuilding your entire business.",
   description:
     "From companion apps and customer portals to mobile-first products, we help founders and businesses launch practical mobile experiences that support growth.",
   secondaryCta: "View engagement models",
@@ -19,6 +21,8 @@ export const MOBILE_APPS_SERVICE_HERO = {
 export const MOBILE_PRODUCT_TYPES_SECTION = {
   eyebrow: "Product types",
   title: "Examples of mobile products we can build.",
+  titleLead: "Examples of mobile products",
+  titleAccent: "we can build.",
   description:
     "From internal business tools to customer-facing applications, we help businesses launch mobile experiences designed around real user needs and workflows.",
   items: [
@@ -61,6 +65,8 @@ export const MOBILE_PRODUCT_TYPES_SECTION = {
 export const MOBILE_SYSTEMS_SECTION = {
   eyebrow: "What we deliver",
   title: "Mobile experiences designed around user actions.",
+  titleLead: "Mobile experiences designed",
+  titleAccent: "around user actions.",
   description:
     "Practical mobile systems that help businesses engage users, streamline operations, and support growth.",
   builds: [
@@ -94,6 +100,8 @@ export const MOBILE_SYSTEMS_SECTION = {
 export const MOBILE_WHY_BUILD_SECTION = {
   eyebrow: "Why businesses build mobile products with GrowrixOS",
   title: "Built for adoption, scalability, and long-term growth.",
+  titleLead: "Built for adoption, scalability, and",
+  titleAccent: "long-term growth.",
   description:
     "Every mobile project is designed around usability, maintainability, and measurable business outcomes.",
   cards: [
@@ -119,6 +127,8 @@ export const MOBILE_WHY_BUILD_SECTION = {
 export const MOBILE_LAUNCH_PROCESS_SECTION = {
   eyebrow: "Our process",
   title: "How we take mobile products from concept to launch.",
+  titleLead: "How we take mobile products",
+  titleAccent: "from concept to launch.",
   description:
     "A structured process designed to reduce risk, improve clarity, and accelerate product delivery.",
   steps: [
@@ -148,6 +158,8 @@ export const MOBILE_LAUNCH_PROCESS_SECTION = {
 export const MOBILE_ENGAGEMENT_SECTION = {
   eyebrow: "Engagement models",
   title: "Choose the build path that matches your product stage.",
+  titleLead: "Choose the build path",
+  titleAccent: "that matches your product stage.",
   description:
     "Whether you're validating an idea, extending an existing platform, or launching a new mobile product, we'll recommend the right approach for your goals.",
   trustNote:
@@ -155,6 +167,7 @@ export const MOBILE_ENGAGEMENT_SECTION = {
   tiers: [
     {
       name: "Mobile Launch Package",
+      iconKey: "mobile-launch",
       price: "From $6,500",
       description:
         "Perfect for businesses needing mobile-ready experiences, launch support, and product validation.",
@@ -170,6 +183,7 @@ export const MOBILE_ENGAGEMENT_SECTION = {
     },
     {
       name: "Companion App MVP",
+      iconKey: "companion-mvp",
       price: "From $14,000",
       description:
         "For businesses extending existing products, SaaS platforms, or customer workflows into mobile experiences.",
@@ -187,6 +201,7 @@ export const MOBILE_ENGAGEMENT_SECTION = {
     },
     {
       name: "Mobile Product Build",
+      iconKey: "mobile-product-build",
       price: "Custom Scope",
       description:
         "For startups and businesses building complete mobile products with advanced requirements.",
@@ -256,8 +271,19 @@ export const MOBILE_APPS_SERVICE_FAQ = [
   },
 ] as const;
 
+export const MOBILE_APPS_SERVICE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Common mobile product questions, answered.",
+  titleLead: "Common mobile product questions,",
+  titleAccent: "answered.",
+  description:
+    "Platforms, MVPs, store submission, ownership, and post-launch support—covered before you book a call.",
+} as const;
+
 export const MOBILE_APPS_SERVICE_CTA = {
   title: "Let's map your mobile product.",
+  titleLead: "Let's map your",
+  titleAccent: "mobile product.",
   description:
     "Book a 30-minute discovery session and leave with a clearer roadmap, feature scope, and launch strategy.",
   primaryLabel: "Plan Mobile Launch",

@@ -14,6 +14,11 @@ import {
   ServiceInvestmentGrid,
 } from "@/components/sections/InvestmentGuideSections";
 import { InvestmentGuideHeroPanel } from "@/components/sections/InvestmentGuideHeroPanel";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { MobilePricingCards } from "@/components/marketing/MobilePricingCards";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { marketingSection } from "@/lib/marketing-composition";
 import {
   INVESTMENT_CLIENT_JOURNEYS,
@@ -31,40 +36,78 @@ import { cn } from "@/lib/utils";
 export function PricingPageClient() {
   return (
     <>
-      <Section {...marketingSection("pricing", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
-        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-            <div className="lg:col-span-6 xl:col-span-7">
-              <Badge tone="primary" dot>
-                {INVESTMENT_GUIDE_HERO.eyebrow}
-              </Badge>
-              <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{INVESTMENT_GUIDE_HERO.title}</h1>
-              <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{INVESTMENT_GUIDE_HERO.description}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href={INVESTMENT_GUIDE_HERO.primaryHref} size="lg">
-                  {INVESTMENT_GUIDE_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href={INVESTMENT_GUIDE_HERO.secondaryHref} variant="outline" size="lg">
-                  {INVESTMENT_GUIDE_HERO.secondaryCta}
-                </LinkButton>
+      {/* Hero */}
+      <MarketingViewportGate
+        mobile={
+          <Section {...marketingSection("pricing", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow={INVESTMENT_GUIDE_HERO.eyebrow}
+                titleLead={INVESTMENT_GUIDE_HERO.titleLead}
+                titleAccent={INVESTMENT_GUIDE_HERO.titleAccent}
+                description={INVESTMENT_GUIDE_HERO.description}
+                primaryCta={INVESTMENT_GUIDE_HERO.primaryCta}
+                primaryHref={INVESTMENT_GUIDE_HERO.primaryHref}
+                secondaryCta={INVESTMENT_GUIDE_HERO.secondaryCta}
+                secondaryHref={INVESTMENT_GUIDE_HERO.secondaryHref}
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section {...marketingSection("pricing", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+            <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+                <div className="lg:col-span-6 xl:col-span-7">
+                  <Badge tone="primary" dot>
+                    {INVESTMENT_GUIDE_HERO.eyebrow}
+                  </Badge>
+                  <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{INVESTMENT_GUIDE_HERO.title}</h1>
+                  <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{INVESTMENT_GUIDE_HERO.description}</p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <LinkButton href={INVESTMENT_GUIDE_HERO.primaryHref} size="lg">
+                      {INVESTMENT_GUIDE_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+                    </LinkButton>
+                    <LinkButton href={INVESTMENT_GUIDE_HERO.secondaryHref} variant="outline" size="lg">
+                      {INVESTMENT_GUIDE_HERO.secondaryCta}
+                    </LinkButton>
+                  </div>
+                </div>
+                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+                  <InvestmentGuideHeroPanel />
+                </div>
               </div>
-            </div>
-            <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-              <InvestmentGuideHeroPanel />
-            </div>
-          </div>
-        </Container>
-      </Section>
+            </Container>
+          </Section>
+        }
+      />
 
+      {/* Starting points */}
       <Section {...marketingSection("pricing", "startingPoints")} id="starting-points">
         <Container>
-          <SectionHeading
-            eyebrow={INVESTMENT_STARTING_POINTS.eyebrow}
-            title={INVESTMENT_STARTING_POINTS.title}
-            description={INVESTMENT_STARTING_POINTS.description}
+          <MarketingViewportGate
+            mobile={
+              <MobilePricingCards
+                eyebrow={INVESTMENT_STARTING_POINTS.eyebrow}
+                titleLead={INVESTMENT_STARTING_POINTS.titleLead}
+                titleAccent={INVESTMENT_STARTING_POINTS.titleAccent}
+                description={INVESTMENT_STARTING_POINTS.description}
+                cards={INVESTMENT_STARTING_POINTS.cards}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={INVESTMENT_STARTING_POINTS.eyebrow}
+                  title={INVESTMENT_STARTING_POINTS.title}
+                  description={INVESTMENT_STARTING_POINTS.description}
+                />
+                <InvestmentStartingPoints />
+              </>
+            }
           />
-          <InvestmentStartingPoints />
         </Container>
       </Section>
 
@@ -111,26 +154,60 @@ export function PricingPageClient() {
         </Container>
       </Section>
 
+      {/* FAQ */}
       <Section {...marketingSection("pricing", "faq")} tone="inset">
         <Container width="reading">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Investment questions, answered plainly."
-            description="Path selection, upgrades, milestones, discovery, and support—before you commit."
-            align="center"
+          <MarketingViewportGate
+            mobile={
+              <ServiceFaqMobile
+                eyebrow="FAQ"
+                title="Investment questions, answered plainly."
+                titleLead="Investment questions,"
+                titleAccent="answered plainly."
+                description="Path selection, upgrades, milestones, discovery, and support—before you commit."
+                items={[...INVESTMENT_GUIDE_FAQ]}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="FAQ"
+                  title="Investment questions, answered plainly."
+                  description="Path selection, upgrades, milestones, discovery, and support—before you commit."
+                  align="center"
+                />
+                <div className="mt-10">
+                  <Accordion items={[...INVESTMENT_GUIDE_FAQ]} />
+                </div>
+              </>
+            }
           />
-          <div className="mt-10">
-            <Accordion items={[...INVESTMENT_GUIDE_FAQ]} />
-          </div>
         </Container>
       </Section>
 
-      <CTABand
-        title={INVESTMENT_GUIDE_CTA.title}
-        description={INVESTMENT_GUIDE_CTA.description}
-        primary={{ label: INVESTMENT_GUIDE_CTA.primaryCta, href: INVESTMENT_GUIDE_CTA.primaryHref }}
-        secondary={{ label: INVESTMENT_GUIDE_CTA.secondaryCta, href: INVESTMENT_GUIDE_CTA.secondaryHref }}
-        {...marketingSection("pricing", "cta")}
+      {/* CTA */}
+      <MarketingViewportGate
+        mobile={
+          <ProductLedFinalCTAMobile
+            eyebrow="Next step"
+            titleLead={INVESTMENT_GUIDE_CTA.titleLead}
+            titleAccent={INVESTMENT_GUIDE_CTA.titleAccent}
+            description={INVESTMENT_GUIDE_CTA.description}
+            primaryLabel={INVESTMENT_GUIDE_CTA.primaryCta}
+            primaryHref={INVESTMENT_GUIDE_CTA.primaryHref}
+            secondaryLabel={INVESTMENT_GUIDE_CTA.secondaryCta}
+            secondaryHref={INVESTMENT_GUIDE_CTA.secondaryHref}
+          />
+        }
+        desktop={
+          <CTABand
+            title={INVESTMENT_GUIDE_CTA.title}
+            description={INVESTMENT_GUIDE_CTA.description}
+            primary={{ label: INVESTMENT_GUIDE_CTA.primaryCta, href: INVESTMENT_GUIDE_CTA.primaryHref }}
+            secondary={{ label: INVESTMENT_GUIDE_CTA.secondaryCta, href: INVESTMENT_GUIDE_CTA.secondaryHref }}
+            {...marketingSection("pricing", "cta")}
+          />
+        }
       />
     </>
   );

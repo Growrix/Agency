@@ -1,6 +1,8 @@
 export const INVESTMENT_GUIDE_HERO = {
   eyebrow: "Investment guide",
   title: "Choose the investment path that fits your goals.",
+  titleLead: "Choose the investment path",
+  titleAccent: "that fits your goals.",
   description:
     "Whether you're purchasing a ready-made digital product, launching with implementation support, or building a custom platform, we'll help you choose the right path.",
   primaryCta: "Browse Digital Products",
@@ -25,6 +27,8 @@ export const INVESTMENT_HERO_PANEL = {
 export const INVESTMENT_STARTING_POINTS = {
   eyebrow: "Starting points",
   title: "Three ways businesses typically work with GrowrixOS.",
+  titleLead: "Three ways to work",
+  titleAccent: "with GrowrixOS.",
   description: "Choose the path that best matches your current stage, budget, and goals.",
   cards: [
     {
@@ -221,6 +225,8 @@ export const INVESTMENT_GUIDE_FAQ = [
 
 export const INVESTMENT_GUIDE_CTA = {
   title: "Not sure which investment path fits?",
+  titleLead: "Not sure which",
+  titleAccent: "investment path fits?",
   description:
     "Book a strategy call and we'll recommend the fastest, most cost-effective route based on your goals, timeline, and requirements.",
   primaryCta: "Book Strategy Call",

@@ -24,6 +24,9 @@ import {
   ContactRouteCards,
 } from "@/components/sections/ContactSections";
 import { motion } from "@/components/motion/Motion";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import {
   CONTACT_BUDGET_BANDS,
   CONTACT_CHANNELS,
@@ -86,31 +89,54 @@ export function ContactPageClient() {
 
   return (
     <>
-      <Section {...marketingSection("contact", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-            <div className="lg:col-span-6 xl:col-span-7">
-              <Badge tone="primary" dot>
-                {CONTACT_HERO.eyebrow}
-              </Badge>
-              <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{CONTACT_HERO.title}</h1>
-              <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{CONTACT_HERO.description}</p>
-              <ul className="mt-6 space-y-2">
-                {CONTACT_HERO.proofPoints.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5 text-sm text-text">
-                    <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-              <ContactHeroPanel />
-            </div>
-          </div>
-        </Container>
-      </Section>
+      {/* Hero */}
+      <MarketingViewportGate
+        mobile={
+          <Section {...marketingSection("contact", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow={CONTACT_HERO.eyebrow}
+                titleLead={CONTACT_HERO.titleLead}
+                titleAccent={CONTACT_HERO.titleAccent}
+                description={CONTACT_HERO.description}
+                primaryCta="Book a Call"
+                primaryHref="/book-appointment"
+                secondaryCta="WhatsApp us"
+                secondaryHref={WHATSAPP_HREF}
+                proofPoints={CONTACT_HERO.proofPoints}
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section {...marketingSection("contact", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+                <div className="lg:col-span-6 xl:col-span-7">
+                  <Badge tone="primary" dot>
+                    {CONTACT_HERO.eyebrow}
+                  </Badge>
+                  <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{CONTACT_HERO.title}</h1>
+                  <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{CONTACT_HERO.description}</p>
+                  <ul className="mt-6 space-y-2">
+                    {CONTACT_HERO.proofPoints.map((point) => (
+                      <li key={point} className="flex items-start gap-2.5 text-sm text-text">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+                  <ContactHeroPanel />
+                </div>
+              </div>
+            </Container>
+          </Section>
+        }
+      />
 
       <Section {...marketingSection("contact", "channels")}>
         <Container>
@@ -305,12 +331,28 @@ export function ContactPageClient() {
         </Container>
       </Section>
 
+      {/* FAQ */}
       <Section {...marketingSection("contact", "faq")}>
         <Container width="reading">
-          <SectionHeading eyebrow={CONTACT_FAQ.eyebrow} title={CONTACT_FAQ.title} align="center" />
-          <div className="mt-10">
-            <Accordion items={[...CONTACT_FAQ.items]} />
-          </div>
+          <MarketingViewportGate
+            mobile={
+              <ServiceFaqMobile
+                eyebrow={CONTACT_FAQ.eyebrow}
+                title={CONTACT_FAQ.title}
+                titleLead={CONTACT_FAQ.titleLead}
+                titleAccent={CONTACT_FAQ.titleAccent}
+                items={[...CONTACT_FAQ.items]}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading eyebrow={CONTACT_FAQ.eyebrow} title={CONTACT_FAQ.title} align="center" />
+                <div className="mt-10">
+                  <Accordion items={[...CONTACT_FAQ.items]} />
+                </div>
+              </>
+            }
+          />
         </Container>
       </Section>
     </>

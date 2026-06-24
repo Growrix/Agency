@@ -11,6 +11,11 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { ProcessStepsMobile } from "@/components/marketing/ProcessStepsMobile";
+import { MobilePrincipleList } from "@/components/marketing/mobile/MobilePrincipleList";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import {
   ABOUT_BUSINESS_FIRST_SECTION,
   ABOUT_CLIENT_VALUE_SECTION,
@@ -38,58 +43,97 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Section {...marketingSection("about", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
-        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-            <div className="lg:col-span-6 xl:col-span-7">
-              <Badge tone="primary" dot>
-                {ABOUT_HERO.eyebrow}
-              </Badge>
-              <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{ABOUT_HERO.title}</h1>
-              <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{ABOUT_HERO.description}</p>
-              <ul className="mt-6 space-y-2">
-                {ABOUT_HERO.proofPoints.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5 text-sm text-text">
-                    <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href={ABOUT_HERO.primaryHref} size="lg">
-                  {ABOUT_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href={ABOUT_HERO.secondaryHref} variant="outline" size="lg">
-                  {ABOUT_HERO.secondaryCta}
-                </LinkButton>
+      {/* Hero */}
+      <MarketingViewportGate
+        mobile={
+          <Section {...marketingSection("about", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow={ABOUT_HERO.eyebrow}
+                titleLead={ABOUT_HERO.titleLead}
+                titleAccent={ABOUT_HERO.titleAccent}
+                description={ABOUT_HERO.description}
+                primaryCta={ABOUT_HERO.primaryCta}
+                primaryHref={ABOUT_HERO.primaryHref}
+                secondaryCta={ABOUT_HERO.secondaryCta}
+                secondaryHref={ABOUT_HERO.secondaryHref}
+                proofPoints={ABOUT_HERO.proofPoints}
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section {...marketingSection("about", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
+            <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+                <div className="lg:col-span-6 xl:col-span-7">
+                  <Badge tone="primary" dot>
+                    {ABOUT_HERO.eyebrow}
+                  </Badge>
+                  <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{ABOUT_HERO.title}</h1>
+                  <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{ABOUT_HERO.description}</p>
+                  <ul className="mt-6 space-y-2">
+                    {ABOUT_HERO.proofPoints.map((point) => (
+                      <li key={point} className="flex items-start gap-2.5 text-sm text-text">
+                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <LinkButton href={ABOUT_HERO.primaryHref} size="lg">
+                      {ABOUT_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+                    </LinkButton>
+                    <LinkButton href={ABOUT_HERO.secondaryHref} variant="outline" size="lg">
+                      {ABOUT_HERO.secondaryCta}
+                    </LinkButton>
+                  </div>
+                </div>
+                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+                  <AboutHeroPanel />
+                </div>
               </div>
-            </div>
-            <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-              <AboutHeroPanel />
-            </div>
-          </div>
-        </Container>
-      </Section>
+            </Container>
+          </Section>
+        }
+      />
 
+      {/* Principles */}
       <Section {...marketingSection("about", "principles")}>
         <Container>
-          <SectionHeading
-            eyebrow={ABOUT_PRINCIPLES_SECTION.eyebrow}
-            title={ABOUT_PRINCIPLES_SECTION.title}
-            description={ABOUT_PRINCIPLES_SECTION.description}
+          <MarketingViewportGate
+            mobile={
+              <MobilePrincipleList
+                eyebrow={ABOUT_PRINCIPLES_SECTION.eyebrow}
+                titleLead={ABOUT_PRINCIPLES_SECTION.titleLead}
+                titleAccent={ABOUT_PRINCIPLES_SECTION.titleAccent}
+                description={ABOUT_PRINCIPLES_SECTION.description}
+                items={ABOUT_PRINCIPLES_SECTION.principles}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={ABOUT_PRINCIPLES_SECTION.eyebrow}
+                  title={ABOUT_PRINCIPLES_SECTION.title}
+                  description={ABOUT_PRINCIPLES_SECTION.description}
+                />
+                <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2" stagger={0.06}>
+                  {ABOUT_PRINCIPLES_SECTION.principles.map((principle) => (
+                    <RevealItem key={principle.title}>
+                      <Card hoverable className="h-full p-5 sm:p-6">
+                        <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Principle</p>
+                        <h3 className="mt-2 font-display text-xl tracking-tight">{principle.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-text-muted text-pretty">{principle.description}</p>
+                      </Card>
+                    </RevealItem>
+                  ))}
+                </RevealGroup>
+              </>
+            }
           />
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2" stagger={0.06}>
-            {ABOUT_PRINCIPLES_SECTION.principles.map((principle) => (
-              <RevealItem key={principle.title}>
-                <Card hoverable className="h-full p-5 sm:p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-primary">Principle</p>
-                  <h3 className="mt-2 font-display text-xl tracking-tight">{principle.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-text-muted text-pretty">{principle.description}</p>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealGroup>
         </Container>
       </Section>
 
@@ -120,16 +164,32 @@ export default function AboutPage() {
         </Container>
       </Section>
 
+      {/* Process */}
       <Section {...marketingSection("about", "process")} tone="inset" id="process">
         <Container>
-          <SectionHeading
-            eyebrow={ABOUT_PROCESS_SECTION.eyebrow}
-            title={ABOUT_PROCESS_SECTION.title}
-            description={ABOUT_PROCESS_SECTION.description}
+          <MarketingViewportGate
+            mobile={
+              <ProcessStepsMobile
+                steps={PROCESS_STEPS}
+                eyebrow={ABOUT_PROCESS_SECTION.eyebrow}
+                titleLead={ABOUT_PROCESS_SECTION.titleLead}
+                titleAccent={ABOUT_PROCESS_SECTION.titleAccent}
+                description={ABOUT_PROCESS_SECTION.description}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={ABOUT_PROCESS_SECTION.eyebrow}
+                  title={ABOUT_PROCESS_SECTION.title}
+                  description={ABOUT_PROCESS_SECTION.description}
+                />
+                <div className="mt-10">
+                  <ProcessSteps steps={PROCESS_STEPS} />
+                </div>
+              </>
+            }
           />
-          <div className="mt-10">
-            <ProcessSteps steps={PROCESS_STEPS} />
-          </div>
         </Container>
       </Section>
 
@@ -184,23 +244,39 @@ export default function AboutPage() {
         </Container>
       </Section>
 
+      {/* How we work */}
       <Section {...marketingSection("about", "howWeWork")}>
         <Container>
-          <SectionHeading
-            eyebrow={ABOUT_HOW_WE_WORK_SECTION.eyebrow}
-            title={ABOUT_HOW_WE_WORK_SECTION.title}
-            description={ABOUT_HOW_WE_WORK_SECTION.description}
+          <MarketingViewportGate
+            mobile={
+              <MobilePrincipleList
+                eyebrow={ABOUT_HOW_WE_WORK_SECTION.eyebrow}
+                titleLead={ABOUT_HOW_WE_WORK_SECTION.titleLead}
+                titleAccent={ABOUT_HOW_WE_WORK_SECTION.titleAccent}
+                description={ABOUT_HOW_WE_WORK_SECTION.description}
+                items={ABOUT_HOW_WE_WORK_SECTION.cards}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={ABOUT_HOW_WE_WORK_SECTION.eyebrow}
+                  title={ABOUT_HOW_WE_WORK_SECTION.title}
+                  description={ABOUT_HOW_WE_WORK_SECTION.description}
+                />
+                <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+                  {ABOUT_HOW_WE_WORK_SECTION.cards.map((item) => (
+                    <RevealItem key={item.title} className="h-full min-w-0">
+                      <Card hoverable className="h-full p-5 sm:p-6">
+                        <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                      </Card>
+                    </RevealItem>
+                  ))}
+                </RevealGroup>
+              </>
+            }
           />
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-            {ABOUT_HOW_WE_WORK_SECTION.cards.map((item) => (
-              <RevealItem key={item.title} className="h-full min-w-0">
-                <Card hoverable className="h-full p-5 sm:p-6">
-                  <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealGroup>
         </Container>
       </Section>
 
@@ -232,12 +308,29 @@ export default function AboutPage() {
         </Section>
       ) : null}
 
-      <CTABand
-        title={ABOUT_CTA.title}
-        description={ABOUT_CTA.description}
-        primary={{ label: ABOUT_CTA.primaryCta, href: ABOUT_CTA.primaryHref }}
-        secondary={{ label: ABOUT_CTA.secondaryCta, href: ABOUT_CTA.secondaryHref }}
-        {...marketingSection("about", "cta")}
+      {/* CTA */}
+      <MarketingViewportGate
+        mobile={
+          <ProductLedFinalCTAMobile
+            eyebrow="Next step"
+            titleLead={ABOUT_CTA.titleLead}
+            titleAccent={ABOUT_CTA.titleAccent}
+            description={ABOUT_CTA.description}
+            primaryLabel={ABOUT_CTA.primaryCta}
+            primaryHref={ABOUT_CTA.primaryHref}
+            secondaryLabel={ABOUT_CTA.secondaryCta}
+            secondaryHref={ABOUT_CTA.secondaryHref}
+          />
+        }
+        desktop={
+          <CTABand
+            title={ABOUT_CTA.title}
+            description={ABOUT_CTA.description}
+            primary={{ label: ABOUT_CTA.primaryCta, href: ABOUT_CTA.primaryHref }}
+            secondary={{ label: ABOUT_CTA.secondaryCta, href: ABOUT_CTA.secondaryHref }}
+            {...marketingSection("about", "cta")}
+          />
+        }
       />
     </>
   );

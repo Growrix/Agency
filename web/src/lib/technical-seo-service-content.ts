@@ -26,6 +26,8 @@ export const TECHNICAL_SEO_SERVICE_STATS: Stat[] = [
 
 export const TECHNICAL_SEO_SERVICE_HERO = {
   headline: "Get discovered, tracked, and optimized from day one.",
+  headlineLead: "Get discovered, tracked, and",
+  headlineAccent: "optimized from day one.",
   description:
     "Ensure your website is properly indexed, measured, and understood by search engines from the moment it launches.",
   secondaryCta: "View what's included",
@@ -43,6 +45,8 @@ export const TECHNICAL_SEO_SETUP_CATEGORIES_SECTION = {
   id: "setup-categories",
   eyebrow: "Setup categories",
   title: "Get discovered, tracked, and optimized from day one.",
+  titleLead: "Get discovered, tracked, and",
+  titleAccent: "optimized from day one.",
   description:
     "Beyond development, we configure the essential systems that help your product get discovered, tracked, and optimized from the moment it launches.",
   categories: [
@@ -86,6 +90,8 @@ export const TECHNICAL_SEO_VISIBILITY_SECTION = {
   id: "search-foundation",
   eyebrow: "Search visibility foundation",
   title: "What technical SEO actually fixes.",
+  titleLead: "What technical SEO",
+  titleAccent: "actually fixes.",
   description: "A properly configured website is easier to discover, measure, and improve over time.",
   flow: {
     title: "How Search Visibility Works",
@@ -125,6 +131,8 @@ export const TECHNICAL_SEO_VISIBILITY_SECTION = {
 export const TECHNICAL_SEO_FOUNDATIONS_SECTION = {
   eyebrow: "What we deliver",
   title: "The technical foundations every website needs.",
+  titleLead: "The technical foundations",
+  titleAccent: "every website needs.",
   description:
     "Everything required to help search engines understand, index, and measure your website correctly.",
   builds: [
@@ -158,6 +166,8 @@ export const TECHNICAL_SEO_FOUNDATIONS_SECTION = {
 export const TECHNICAL_SEO_WHY_SECTION = {
   eyebrow: "Why technical SEO matters before growth marketing",
   title: "The foundation every marketing effort depends on.",
+  titleLead: "The foundation every marketing",
+  titleAccent: "effort depends on.",
   description:
     "Technical SEO ensures your website can be discovered, measured, and improved before investing in growth activities.",
   cards: [
@@ -185,6 +195,8 @@ export const TECHNICAL_SEO_DELIVERABLES_SECTION = {
   id: "whats-included",
   eyebrow: "Deliverables",
   title: "What's included in a Technical SEO setup.",
+  titleLead: "What's included in a",
+  titleAccent: "Technical SEO setup.",
   description: "A practical checklist covering visibility, measurement, performance, and launch readiness.",
   categories: [
     {
@@ -219,6 +231,8 @@ export const TECHNICAL_SEO_DELIVERABLES_SECTION = {
 export const TECHNICAL_SEO_PROCESS_SECTION = {
   eyebrow: "Our process",
   title: "How we prepare your website for search visibility.",
+  titleLead: "How we prepare your website",
+  titleAccent: "for search visibility.",
   description:
     "A structured implementation process designed to ensure technical readiness before launch or marketing investment.",
   steps: [
@@ -248,6 +262,8 @@ export const TECHNICAL_SEO_PROCESS_SECTION = {
 export const TECHNICAL_SEO_ENGAGEMENT_SECTION = {
   eyebrow: "Engagement models",
   title: "Choose the technical SEO engagement that fits your project.",
+  titleLead: "Choose the technical SEO engagement",
+  titleAccent: "that fits your project.",
   description:
     "Whether you need a foundational setup or a complete implementation alongside a launch, we'll recommend the most practical path forward.",
   trustNote:
@@ -255,6 +271,7 @@ export const TECHNICAL_SEO_ENGAGEMENT_SECTION = {
   tiers: [
     {
       name: "SEO Essentials",
+      iconKey: "seo-essentials",
       price: "From $750",
       description: "A foundational setup for websites requiring search visibility and measurement readiness.",
       features: [
@@ -267,6 +284,7 @@ export const TECHNICAL_SEO_ENGAGEMENT_SECTION = {
     },
     {
       name: "Technical SEO Foundation",
+      iconKey: "seo-foundation",
       price: "From $1,500",
       description:
         "A complete technical SEO implementation covering analytics, indexing, schema, and performance readiness.",
@@ -284,6 +302,7 @@ export const TECHNICAL_SEO_ENGAGEMENT_SECTION = {
     },
     {
       name: "SEO Launch Bundle",
+      iconKey: "seo-launch-bundle",
       price: "Custom Scope",
       description: "Technical SEO implementation delivered alongside website launches and larger digital projects.",
       features: [
@@ -350,8 +369,19 @@ export const TECHNICAL_SEO_SERVICE_FAQ = [
   },
 ] as const;
 
+export const TECHNICAL_SEO_SERVICE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Common technical SEO questions, answered.",
+  titleLead: "Common technical SEO questions,",
+  titleAccent: "answered.",
+  description:
+    "Setup scope, rankings, analytics, schema, Core Web Vitals, and post-launch support—covered before you book a call.",
+} as const;
+
 export const TECHNICAL_SEO_SERVICE_CTA = {
   title: "Let's prepare your website for search visibility.",
+  titleLead: "Let's prepare your website",
+  titleAccent: "for search visibility.",
   description:
     "Book a discovery session and receive a practical plan covering indexing, analytics, structured data, and technical SEO foundations.",
   primaryLabel: "Book SEO Setup",

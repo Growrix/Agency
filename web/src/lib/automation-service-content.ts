@@ -16,6 +16,8 @@ export const AUTOMATION_SERVICE_STATS: Stat[] = [
 
 export const AUTOMATION_SERVICE_HERO = {
   headline: "Operational systems that remove repetitive work — measurably.",
+  headlineLead: "Operational systems that remove",
+  headlineAccent: "repetitive work — measurably.",
   description:
     "We map workflows, identify bottlenecks, and build automation systems that reduce manual effort, improve consistency, and create operational speed.",
   secondaryCta: "View automation examples",
@@ -26,6 +28,8 @@ export const AUTOMATION_WORKFLOW_SHOWCASE_SECTION = {
   id: "workflow-examples",
   eyebrow: "Workflow examples",
   title: "Examples of automation systems we can build.",
+  titleLead: "Examples of automation systems",
+  titleAccent: "we can build.",
   description:
     "Practical workflows designed to eliminate manual work, reduce delays, and improve operational efficiency.",
   workflows: [
@@ -83,6 +87,8 @@ export const AUTOMATION_WORKFLOW_SHOWCASE_SECTION = {
 export const AUTOMATION_TYPES_SECTION = {
   eyebrow: "Automation types",
   title: "Automation systems designed around business operations.",
+  titleLead: "Automation systems designed",
+  titleAccent: "around business operations.",
   description:
     "From lead management to AI workflows, we build practical systems that improve efficiency and reduce manual effort.",
   items: [
@@ -116,6 +122,8 @@ export const AUTOMATION_TYPES_SECTION = {
 export const AUTOMATION_OUTCOMES_SECTION = {
   eyebrow: "What we deliver",
   title: "Automation systems that create measurable operational gains.",
+  titleLead: "Automation systems that create",
+  titleAccent: "measurable operational gains.",
   description:
     "Every workflow is designed to save time, reduce errors, and improve visibility across your business.",
   builds: [
@@ -149,6 +157,8 @@ export const AUTOMATION_OUTCOMES_SECTION = {
 export const AUTOMATION_WHY_BUILD_SECTION = {
   eyebrow: "Why businesses automate with GrowrixOS",
   title: "Built around reliability, visibility, and operational improvement.",
+  titleLead: "Built around reliability, visibility, and",
+  titleAccent: "operational improvement.",
   description: "Automation should simplify operations, not create new complexity.",
   cards: [
     {
@@ -173,6 +183,8 @@ export const AUTOMATION_WHY_BUILD_SECTION = {
 export const AUTOMATION_PROCESS_SECTION = {
   eyebrow: "Our process",
   title: "How we transform manual processes into scalable systems.",
+  titleLead: "How we transform manual processes",
+  titleAccent: "into scalable systems.",
   description:
     "A structured approach designed to identify opportunities, reduce risk, and deliver measurable operational improvements.",
   steps: [
@@ -202,6 +214,8 @@ export const AUTOMATION_PROCESS_SECTION = {
 export const AUTOMATION_ENGAGEMENT_SECTION = {
   eyebrow: "Engagement models",
   title: "Choose the automation engagement that fits your business.",
+  titleLead: "Choose the automation engagement",
+  titleAccent: "that fits your business.",
   description:
     "Whether you need an audit, implementation, or ongoing optimization, we'll recommend the most practical path forward.",
   trustNote:
@@ -209,6 +223,7 @@ export const AUTOMATION_ENGAGEMENT_SECTION = {
   tiers: [
     {
       name: "Workflow Audit",
+      iconKey: "workflow-audit",
       price: "From $1,500",
       description: "Identify bottlenecks, manual effort, and automation opportunities.",
       features: [
@@ -222,6 +237,7 @@ export const AUTOMATION_ENGAGEMENT_SECTION = {
     },
     {
       name: "Automation Build",
+      iconKey: "automation-build",
       price: "From $5,000",
       description: "Design, build, and deploy a complete automation system.",
       features: [
@@ -238,6 +254,7 @@ export const AUTOMATION_ENGAGEMENT_SECTION = {
     },
     {
       name: "Optimization Partner",
+      iconKey: "optimization-partner",
       price: "Custom Scope",
       description: "Continuous monitoring, refinement, and expansion of automation systems.",
       features: [
@@ -305,8 +322,19 @@ export const AUTOMATION_SERVICE_FAQ = [
   },
 ] as const;
 
+export const AUTOMATION_SERVICE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Common automation questions, answered.",
+  titleLead: "Common automation questions,",
+  titleAccent: "answered.",
+  description:
+    "Platforms, failures, data handling, implementation timelines, and expansion—covered before you book a call.",
+} as const;
+
 export const AUTOMATION_SERVICE_CTA = {
   title: "Let's find where your business is losing time.",
+  titleLead: "Let's find where your business",
+  titleAccent: "is losing time.",
   description:
     "Book a workflow audit and receive a practical roadmap for automation opportunities, implementation priorities, and expected operational gains.",
   primaryLabel: "Audit My Workflow",

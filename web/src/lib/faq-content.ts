@@ -1,3 +1,12 @@
+export const FAQ_HERO = {
+  eyebrow: "FAQ",
+  title: "Answers before you ask.",
+  titleLead: "Answers",
+  titleAccent: "before you ask.",
+  description:
+    "Search by keyword or browse by category. Most questions here are about websites, SaaS builds, ready websites, and payment terms.",
+} as const;
+
 export const FAQ_CATEGORIES = [
   { id: "services", label: "Services" },
   { id: "pricing", label: "Pricing" },

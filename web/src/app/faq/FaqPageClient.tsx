@@ -17,6 +17,11 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { ConciergeTrigger, ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { MobileFilterChips } from "@/components/marketing/MobileFilterChips";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
+import { FAQ_HERO } from "@/lib/faq-content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
@@ -44,67 +49,118 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
     });
   }, [questions, query, category]);
 
+  const allCategories = [{ id: "all", label: "All" }, ...categories];
+
   return (
     <>
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <Container>
-          <div className="max-w-3xl">
-            <Badge tone="primary" dot>FAQ</Badge>
-            <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-              Answers before you ask.
-            </h1>
-            <p className="mt-6 text-lg text-text-muted leading-7">
-              Search by keyword or browse by category. Most questions here are about websites, SaaS builds, ready websites, and payment terms.
-            </p>
-          </div>
-
-          <div className="mt-10 max-w-2xl">
-            <div className="relative">
-              <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-text-muted" aria-hidden />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search the FAQ…"
-                className="h-14 w-full rounded-md border border-border bg-surface pl-12 pr-12 text-base placeholder:text-text-muted outline-none shadow-(--shadow-1) focus:border-primary"
+      {/* Hero */}
+      <MarketingViewportGate
+        mobile={
+          <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow={FAQ_HERO.eyebrow}
+                titleLead={FAQ_HERO.titleLead}
+                titleAccent={FAQ_HERO.titleAccent}
+                description={FAQ_HERO.description}
+                primaryCta="Book a Call"
+                primaryHref="/book-appointment"
+                secondaryCta="WhatsApp us"
+                secondaryHref={WHATSAPP_HREF}
               />
-              {query ? (
-                <button
-                  onClick={() => setQuery("")}
-                  aria-label="Clear"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 hover:bg-inset"
-                >
-                  <XMarkIcon className="size-5" />
-                </button>
-              ) : null}
-            </div>
+              <div className="mt-6">
+                <div className="relative">
+                  <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-text-muted" aria-hidden />
+                  <input
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search the FAQ…"
+                    className="h-12 w-full rounded-md border border-border bg-surface pl-12 pr-12 text-sm placeholder:text-text-muted outline-none focus:border-primary"
+                  />
+                  {query ? (
+                    <button
+                      onClick={() => setQuery("")}
+                      aria-label="Clear"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 hover:bg-inset"
+                    >
+                      <XMarkIcon className="size-4" />
+                    </button>
+                  ) : null}
+                </div>
+                <div className="mt-4">
+                  <MobileFilterChips
+                    items={allCategories.map((c) => ({ label: c.label, value: c.id }))}
+                    active={category}
+                    onSelect={setCategory}
+                  />
+                </div>
+              </div>
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <div className="max-w-3xl">
+                <Badge tone="primary" dot>FAQ</Badge>
+                <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
+                  Answers before you ask.
+                </h1>
+                <p className="mt-6 text-lg text-text-muted leading-7">
+                  Search by keyword or browse by category. Most questions here are about websites, SaaS builds, ready websites, and payment terms.
+                </p>
+              </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              <button
-                onClick={() => setCategory("all")}
-                className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-sm font-medium",
-                  category === "all" ? "border-primary bg-primary text-white" : "border-border bg-surface"
-                )}
-              >
-                All
-              </button>
-              {categories.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => setCategory(item.id)}
-                  className={cn(
-                    "rounded-full border px-3.5 py-1.5 text-sm font-medium",
-                    category === item.id ? "border-primary bg-primary text-white" : "border-border bg-surface"
-                  )}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
+              <div className="mt-10 max-w-2xl">
+                <div className="relative">
+                  <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-text-muted" aria-hidden />
+                  <input
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search the FAQ…"
+                    className="h-14 w-full rounded-md border border-border bg-surface pl-12 pr-12 text-base placeholder:text-text-muted outline-none shadow-(--shadow-1) focus:border-primary"
+                  />
+                  {query ? (
+                    <button
+                      onClick={() => setQuery("")}
+                      aria-label="Clear"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 hover:bg-inset"
+                    >
+                      <XMarkIcon className="size-5" />
+                    </button>
+                  ) : null}
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <button
+                    onClick={() => setCategory("all")}
+                    className={cn(
+                      "rounded-full border px-3.5 py-1.5 text-sm font-medium",
+                      category === "all" ? "border-primary bg-primary text-white" : "border-border bg-surface"
+                    )}
+                  >
+                    All
+                  </button>
+                  {categories.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setCategory(item.id)}
+                      className={cn(
+                        "rounded-full border px-3.5 py-1.5 text-sm font-medium",
+                        category === item.id ? "border-primary bg-primary text-white" : "border-border bg-surface"
+                      )}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Container>
+          </Section>
+        }
+      />
 
       <Section size="standard" layout="content" spacing="split">
         <Container>
@@ -122,21 +178,36 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
 
       <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
-          <SectionHeading eyebrow="Browse by category" title="All questions grouped together." />
-          <div className="mt-10">
-            {filtered.length === 0 ? (
-              <div className="rounded-md border border-dashed border-border-strong bg-surface p-10 text-center">
-                <p className="font-display text-xl tracking-tight">No matches.</p>
-                <p className="mt-2 text-text-muted">Try a different keyword or open the concierge.</p>
-                <div className="mt-5 flex justify-center gap-3">
-                  <ConciergeTriggerButton variant="outline"><SparklesIcon className="size-4" /> Ask AI</ConciergeTriggerButton>
-                  <LinkButton href={WHATSAPP_HREF}><ChatBubbleLeftRightIcon className="size-4" /> WhatsApp</LinkButton>
+          <MarketingViewportGate
+            mobile={
+              <ServiceFaqMobile
+                eyebrow="Browse by category"
+                title="All questions grouped together."
+                titleLead="All questions"
+                titleAccent="grouped together."
+                items={filtered.map(({ question, answer }) => ({ question, answer }))}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading eyebrow="Browse by category" title="All questions grouped together." />
+                <div className="mt-10">
+                  {filtered.length === 0 ? (
+                    <div className="rounded-md border border-dashed border-border-strong bg-surface p-10 text-center">
+                      <p className="font-display text-xl tracking-tight">No matches.</p>
+                      <p className="mt-2 text-text-muted">Try a different keyword or open the concierge.</p>
+                      <div className="mt-5 flex justify-center gap-3">
+                        <ConciergeTriggerButton variant="outline"><SparklesIcon className="size-4" /> Ask AI</ConciergeTriggerButton>
+                        <LinkButton href={WHATSAPP_HREF}><ChatBubbleLeftRightIcon className="size-4" /> WhatsApp</LinkButton>
+                      </div>
+                    </div>
+                  ) : (
+                    <Accordion items={filtered.map(({ question, answer }) => ({ question, answer }))} />
+                  )}
                 </div>
-              </div>
-            ) : (
-              <Accordion items={filtered.map(({ question, answer }) => ({ question, answer }))} />
-            )}
-          </div>
+              </>
+            }
+          />
         </Container>
       </Section>
 

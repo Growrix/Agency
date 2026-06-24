@@ -10,6 +10,8 @@ export const AI_BUSINESS_SYSTEMS_SERVICE_STATS: Stat[] = [
 
 export const AI_BUSINESS_SYSTEMS_SERVICE_HERO = {
   headline: "AI systems that create leverage, not complexity.",
+  headlineLead: "AI systems that create leverage,",
+  headlineAccent: "not complexity.",
   description:
     "From AI assistants and content workflows to internal knowledge systems and customer support automation, we help businesses apply AI where it creates measurable value.",
   secondaryCta: "Explore AI Systems",
@@ -20,6 +22,8 @@ export const AI_SOLUTIONS_SECTION = {
   id: "ai-solutions",
   eyebrow: "AI solutions",
   title: "Practical AI systems built for business operations.",
+  titleLead: "Practical AI systems built",
+  titleAccent: "for business operations.",
   description:
     "We focus on real-world AI applications that improve efficiency, support teams, and create measurable outcomes.",
   items: [
@@ -61,6 +65,8 @@ export const AI_SOLUTIONS_SECTION = {
 export const AI_VALUE_SECTION = {
   eyebrow: "Business impact",
   title: "How AI creates operational leverage.",
+  titleLead: "How AI creates",
+  titleAccent: "operational leverage.",
   description: undefined,
   builds: [
     {
@@ -93,6 +99,8 @@ export const AI_VALUE_SECTION = {
 export const AI_WHY_BUILD_SECTION = {
   eyebrow: "Why businesses implement AI with GrowrixOS",
   title: "Focused on business outcomes, not AI hype.",
+  titleLead: "Focused on business outcomes,",
+  titleAccent: "not AI hype.",
   description:
     "Every AI implementation is designed around practical value, measurable improvements, and operational impact.",
   cards: [
@@ -118,6 +126,8 @@ export const AI_WHY_BUILD_SECTION = {
 export const AI_BUSINESS_SYSTEMS_PROCESS_SECTION = {
   eyebrow: "Our process",
   title: "How we implement AI systems that businesses actually use.",
+  titleLead: "How we implement AI systems",
+  titleAccent: "businesses actually use.",
   description: undefined,
   steps: [
     {
@@ -146,6 +156,8 @@ export const AI_BUSINESS_SYSTEMS_PROCESS_SECTION = {
 export const AI_ENGAGEMENT_SECTION = {
   eyebrow: "Engagement models",
   title: "Choose the AI implementation path that fits your business.",
+  titleLead: "Choose the AI implementation path",
+  titleAccent: "that fits your business.",
   description:
     "Whether you're exploring opportunities or deploying operational AI systems, we'll recommend the most suitable approach.",
   trustNote:
@@ -153,6 +165,7 @@ export const AI_ENGAGEMENT_SECTION = {
   tiers: [
     {
       name: "AI Discovery",
+      iconKey: "ai-discovery",
       price: "From $1,500",
       description: "Identify opportunities, use cases, and implementation priorities.",
       features: [
@@ -166,6 +179,7 @@ export const AI_ENGAGEMENT_SECTION = {
     },
     {
       name: "AI System Build",
+      iconKey: "ai-system-build",
       price: "From $5,000",
       description: "Design and implement AI-powered business systems.",
       features: [
@@ -182,6 +196,7 @@ export const AI_ENGAGEMENT_SECTION = {
     },
     {
       name: "AI Operations Partner",
+      iconKey: "ai-operations-partner",
       price: "Custom Scope",
       description: "Ongoing optimization, monitoring, and AI system expansion.",
       features: [
@@ -249,8 +264,19 @@ export const AI_BUSINESS_SYSTEMS_SERVICE_FAQ = [
   },
 ] as const;
 
+export const AI_BUSINESS_SYSTEMS_SERVICE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Common AI implementation questions, answered.",
+  titleLead: "Common AI implementation questions,",
+  titleAccent: "answered.",
+  description:
+    "Use cases, integrations, data handling, implementation timelines, and ongoing support—covered before you book a call.",
+} as const;
+
 export const AI_BUSINESS_SYSTEMS_SERVICE_CTA = {
   title: "Let's identify where AI can create the most value.",
+  titleLead: "Let's identify where AI",
+  titleAccent: "can create the most value.",
   description:
     "Book a discovery session and receive a practical roadmap for AI opportunities, implementation priorities, and expected business outcomes.",
   primaryLabel: "Book AI Discovery",

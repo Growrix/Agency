@@ -22,6 +22,10 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { CTABand } from "@/components/sections/CTABand";
 import { Accordion } from "@/components/sections/Accordion";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { ADDITIONAL_SERVICES_CATEGORIES } from "@/lib/content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
@@ -138,29 +142,50 @@ export default function AdditionalServicesPage() {
   return (
     <>
       {/* Hero */}
-      <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
-        <Container>
-          <div className="max-w-3xl">
-            <Badge tone="primary" dot>SEO Service</Badge>
-            <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-              Get discovered, tracked, and optimized from day one.
-            </h1>
-            <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-              Beyond development, we offer essential one-time setup services to give your product a strong technical foundation. Search visibility, analytics, and SEO configuration handled right from the start.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/book-appointment" size="lg">
-                Book Appointment <ArrowRightIcon className="size-4" />
-              </LinkButton>
-              <LinkButton href={WHATSAPP_HREF} variant="outline" size="lg">
-                WhatsApp us
-              </LinkButton>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <MarketingViewportGate
+        mobile={
+          <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow="SEO Service"
+                titleLead="Get discovered, tracked,"
+                titleAccent="and optimized from day one."
+                description="Beyond development, we offer essential one-time setup services to give your product a strong technical foundation. Search visibility, analytics, and SEO configuration handled right from the start."
+                primaryCta="Book Appointment"
+                primaryHref="/book-appointment"
+                secondaryCta="WhatsApp us"
+                secondaryHref={WHATSAPP_HREF}
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <div className="hero-glow pointer-events-none absolute left-1/2 top-8 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" aria-hidden />
+            <Container>
+              <div className="max-w-3xl">
+                <Badge tone="primary" dot>SEO Service</Badge>
+                <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
+                  Get discovered, tracked, and optimized from day one.
+                </h1>
+                <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
+                  Beyond development, we offer essential one-time setup services to give your product a strong technical foundation. Search visibility, analytics, and SEO configuration handled right from the start.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <LinkButton href="/book-appointment" size="lg">
+                    Book Appointment <ArrowRightIcon className="size-4" />
+                  </LinkButton>
+                  <LinkButton href={WHATSAPP_HREF} variant="outline" size="lg">
+                    WhatsApp us
+                  </LinkButton>
+                </div>
+              </div>
+            </Container>
+          </Section>
+        }
+      />
 
       {/* Category Cards */}
       <Section size="standard" layout="content" spacing="split" tone="inset">
@@ -340,24 +365,55 @@ export default function AdditionalServicesPage() {
       {/* FAQ */}
       <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container width="reading">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Common questions about SEO service."
-            align="center"
+          <MarketingViewportGate
+            mobile={
+              <ServiceFaqMobile
+                eyebrow="FAQ"
+                title="Common questions about SEO service."
+                titleLead="Common questions"
+                titleAccent="about SEO service."
+                items={FAQ_ITEMS}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="FAQ"
+                  title="Common questions about SEO service."
+                  align="center"
+                />
+                <div className="mt-10">
+                  <Accordion items={FAQ_ITEMS} />
+                </div>
+              </>
+            }
           />
-          <div className="mt-10">
-            <Accordion items={FAQ_ITEMS} />
-          </div>
         </Container>
       </Section>
 
       {/* CTA Band */}
-      <CTABand
-        eyebrow="Get started"
-        title="Ready to set a strong technical foundation?"
-        description="One-time configurations that pay for themselves. Book a quick discovery call or message us on WhatsApp."
-        primary={{ label: "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
+      <MarketingViewportGate
+        mobile={
+          <ProductLedFinalCTAMobile
+            eyebrow="Get started"
+            titleLead="Ready to set a strong"
+            titleAccent="technical foundation?"
+            description="One-time configurations that pay for themselves. Book a quick discovery call or message us on WhatsApp."
+            primaryLabel="Book Appointment"
+            primaryHref="/book-appointment"
+            secondaryLabel="WhatsApp us"
+            secondaryHref={WHATSAPP_HREF}
+          />
+        }
+        desktop={
+          <CTABand
+            eyebrow="Get started"
+            title="Ready to set a strong technical foundation?"
+            description="One-time configurations that pay for themselves. Book a quick discovery call or message us on WhatsApp."
+            primary={{ label: "Book Appointment", href: "/book-appointment" }}
+            secondary={{ label: "WhatsApp us", href: WHATSAPP_HREF }}
+          />
+        }
       />
     </>
   );

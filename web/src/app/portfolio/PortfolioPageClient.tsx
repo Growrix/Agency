@@ -14,6 +14,12 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
 import { WebsiteLaunchProcessTimeline } from "@/components/sections/WebsiteLaunchProcessTimeline";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { MobileFilterChips } from "@/components/marketing/MobileFilterChips";
+import { MobilePrincipleList } from "@/components/marketing/mobile/MobilePrincipleList";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { marketingSection } from "@/lib/marketing-composition";
 import {
@@ -57,76 +63,135 @@ export function PortfolioPageClient({ projects, filters }: PortfolioPageClientPr
 
   return (
     <>
-      <Section {...marketingSection("portfolio", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
-        <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-            <div className="lg:col-span-6 xl:col-span-7">
-              <Badge tone="primary" dot>
-                {PORTFOLIO_LANDING_HERO.eyebrow}
-              </Badge>
-              <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{PORTFOLIO_LANDING_HERO.title}</h1>
-              <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{PORTFOLIO_LANDING_HERO.description}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <LinkButton href={PORTFOLIO_LANDING_HERO.primaryHref} size="lg">
-                  {PORTFOLIO_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href={PORTFOLIO_LANDING_HERO.secondaryHref} variant="outline" size="lg">
-                  {PORTFOLIO_LANDING_HERO.secondaryCta}
-                </LinkButton>
+      {/* Hero */}
+      <MarketingViewportGate
+        mobile={
+          <Section {...marketingSection("portfolio", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container>
+              <MarketingPageHeroMobile
+                eyebrow={PORTFOLIO_LANDING_HERO.eyebrow}
+                titleLead={PORTFOLIO_LANDING_HERO.titleLead}
+                titleAccent={PORTFOLIO_LANDING_HERO.titleAccent}
+                description={PORTFOLIO_LANDING_HERO.description}
+                primaryCta={PORTFOLIO_LANDING_HERO.primaryCta}
+                primaryHref={PORTFOLIO_LANDING_HERO.primaryHref}
+                secondaryCta={PORTFOLIO_LANDING_HERO.secondaryCta}
+                secondaryHref={PORTFOLIO_LANDING_HERO.secondaryHref}
+              />
+            </Container>
+          </Section>
+        }
+        desktop={
+          <Section {...marketingSection("portfolio", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
+            <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+                <div className="lg:col-span-6 xl:col-span-7">
+                  <Badge tone="primary" dot>
+                    {PORTFOLIO_LANDING_HERO.eyebrow}
+                  </Badge>
+                  <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{PORTFOLIO_LANDING_HERO.title}</h1>
+                  <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{PORTFOLIO_LANDING_HERO.description}</p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <LinkButton href={PORTFOLIO_LANDING_HERO.primaryHref} size="lg">
+                      {PORTFOLIO_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+                    </LinkButton>
+                    <LinkButton href={PORTFOLIO_LANDING_HERO.secondaryHref} variant="outline" size="lg">
+                      {PORTFOLIO_LANDING_HERO.secondaryCta}
+                    </LinkButton>
+                  </div>
+                </div>
+                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+                  <PortfolioHeroPanel projects={projects} filters={filters} onFilterSelect={handleHeroFilterSelect} />
+                </div>
               </div>
-            </div>
-            <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-              <PortfolioHeroPanel projects={projects} filters={filters} onFilterSelect={handleHeroFilterSelect} />
-            </div>
-          </div>
-        </Container>
-      </Section>
+            </Container>
+          </Section>
+        }
+      />
 
+      {/* Filters */}
       <Section {...marketingSection("portfolio", "filters")} tone="inset">
         <Container>
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap gap-2">
-              {filters.map((item) => (
-                <button
-                  key={item.value}
-                  type="button"
-                  onClick={() => setFilter(item.value)}
-                  className={cn(
-                    "rounded-full px-4 py-2 text-sm font-medium border transition-colors",
-                    filter === item.value
-                      ? "bg-primary text-surface border-primary"
-                      : "bg-surface border-border hover:border-border-strong",
-                  )}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-            <div className="relative max-w-sm w-full">
-              <MagnifyingGlassIcon
-                className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-text-muted"
-                aria-hidden
-              />
-              <input
-                type="search"
-                value={q}
-                onChange={(event) => setQ(event.target.value)}
-                placeholder="Search projects, industries…"
-                className="w-full h-11 rounded-sm border border-border bg-surface pl-9 pr-9 text-sm placeholder:text-text-muted focus:border-primary outline-none"
-              />
-              {q ? (
-                <button
-                  type="button"
-                  onClick={() => setQ("")}
-                  aria-label="Clear search"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-text-muted hover:text-text"
-                >
-                  <XMarkIcon className="size-4" />
-                </button>
-              ) : null}
-            </div>
-          </div>
+          <MarketingViewportGate
+            mobile={
+              <div className="flex flex-col gap-4">
+                <MobileFilterChips
+                  items={filters}
+                  active={filter}
+                  onSelect={(value) => { setFilter(value); setQ(""); }}
+                />
+                <div className="relative w-full">
+                  <MagnifyingGlassIcon
+                    className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-text-muted"
+                    aria-hidden
+                  />
+                  <input
+                    type="search"
+                    value={q}
+                    onChange={(event) => setQ(event.target.value)}
+                    placeholder="Search projects, industries…"
+                    className="w-full h-11 rounded-sm border border-border bg-surface pl-9 pr-9 text-sm placeholder:text-text-muted focus:border-primary outline-none"
+                  />
+                  {q ? (
+                    <button
+                      type="button"
+                      onClick={() => setQ("")}
+                      aria-label="Clear search"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-text-muted hover:text-text"
+                    >
+                      <XMarkIcon className="size-4" />
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+            }
+            desktop={
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {filters.map((item) => (
+                    <button
+                      key={item.value}
+                      type="button"
+                      onClick={() => setFilter(item.value)}
+                      className={cn(
+                        "rounded-full px-4 py-2 text-sm font-medium border transition-colors",
+                        filter === item.value
+                          ? "bg-primary text-surface border-primary"
+                          : "bg-surface border-border hover:border-border-strong",
+                      )}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+                <div className="relative max-w-sm w-full">
+                  <MagnifyingGlassIcon
+                    className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-text-muted"
+                    aria-hidden
+                  />
+                  <input
+                    type="search"
+                    value={q}
+                    onChange={(event) => setQ(event.target.value)}
+                    placeholder="Search projects, industries…"
+                    className="w-full h-11 rounded-sm border border-border bg-surface pl-9 pr-9 text-sm placeholder:text-text-muted focus:border-primary outline-none"
+                  />
+                  {q ? (
+                    <button
+                      type="button"
+                      onClick={() => setQ("")}
+                      aria-label="Clear search"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-text-muted hover:text-text"
+                    >
+                      <XMarkIcon className="size-4" />
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+            }
+          />
         </Container>
       </Section>
 
@@ -159,23 +224,39 @@ export function PortfolioPageClient({ projects, filters }: PortfolioPageClientPr
         </Container>
       </Section>
 
+      {/* Capabilities */}
       <Section {...marketingSection("portfolio", "capabilities")}>
         <Container>
-          <SectionHeading
-            eyebrow={PORTFOLIO_CAPABILITIES_SECTION.eyebrow}
-            title={PORTFOLIO_CAPABILITIES_SECTION.title}
-            description={PORTFOLIO_CAPABILITIES_SECTION.description}
+          <MarketingViewportGate
+            mobile={
+              <MobilePrincipleList
+                eyebrow={PORTFOLIO_CAPABILITIES_SECTION.eyebrow}
+                titleLead={PORTFOLIO_CAPABILITIES_SECTION.titleLead}
+                titleAccent={PORTFOLIO_CAPABILITIES_SECTION.titleAccent}
+                description={PORTFOLIO_CAPABILITIES_SECTION.description}
+                items={PORTFOLIO_CAPABILITIES_SECTION.items}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={PORTFOLIO_CAPABILITIES_SECTION.eyebrow}
+                  title={PORTFOLIO_CAPABILITIES_SECTION.title}
+                  description={PORTFOLIO_CAPABILITIES_SECTION.description}
+                />
+                <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+                  {PORTFOLIO_CAPABILITIES_SECTION.items.map((item) => (
+                    <RevealItem key={item.title} className="h-full min-w-0">
+                      <Card hoverable className="h-full p-5 sm:p-6">
+                        <h3 className="font-display text-lg tracking-tight sm:text-xl">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                      </Card>
+                    </RevealItem>
+                  ))}
+                </RevealGroup>
+              </>
+            }
           />
-          <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-            {PORTFOLIO_CAPABILITIES_SECTION.items.map((item) => (
-              <RevealItem key={item.title} className="h-full min-w-0">
-                <Card hoverable className="h-full p-5 sm:p-6">
-                  <h3 className="font-display text-lg tracking-tight sm:text-xl">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealGroup>
         </Container>
       </Section>
 
@@ -204,26 +285,60 @@ export function PortfolioPageClient({ projects, filters }: PortfolioPageClientPr
         </Section>
       ) : null}
 
+      {/* FAQ */}
       <Section {...marketingSection("portfolio", "faq")} tone="inset">
         <Container width="reading">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Questions about our work."
-            description="Common questions about similar projects, customization, timelines, and support."
-            align="center"
+          <MarketingViewportGate
+            mobile={
+              <ServiceFaqMobile
+                eyebrow="FAQ"
+                title="Questions about our work."
+                titleLead="Questions"
+                titleAccent="about our work."
+                description="Common questions about similar projects, customization, timelines, and support."
+                items={[...PORTFOLIO_LANDING_FAQ]}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="FAQ"
+                  title="Questions about our work."
+                  description="Common questions about similar projects, customization, timelines, and support."
+                  align="center"
+                />
+                <div className="mt-10">
+                  <Accordion items={[...PORTFOLIO_LANDING_FAQ]} />
+                </div>
+              </>
+            }
           />
-          <div className="mt-10">
-            <Accordion items={[...PORTFOLIO_LANDING_FAQ]} />
-          </div>
         </Container>
       </Section>
 
-      <CTABand
-        title={PORTFOLIO_LANDING_CTA.title}
-        description={PORTFOLIO_LANDING_CTA.description}
-        primary={{ label: PORTFOLIO_LANDING_CTA.primaryCta, href: PORTFOLIO_LANDING_CTA.primaryHref }}
-        secondary={{ label: PORTFOLIO_LANDING_CTA.secondaryCta, href: PORTFOLIO_LANDING_CTA.secondaryHref }}
-        {...marketingSection("portfolio", "cta")}
+      {/* CTA */}
+      <MarketingViewportGate
+        mobile={
+          <ProductLedFinalCTAMobile
+            eyebrow="Next step"
+            titleLead={PORTFOLIO_LANDING_CTA.titleLead}
+            titleAccent={PORTFOLIO_LANDING_CTA.titleAccent}
+            description={PORTFOLIO_LANDING_CTA.description}
+            primaryLabel={PORTFOLIO_LANDING_CTA.primaryCta}
+            primaryHref={PORTFOLIO_LANDING_CTA.primaryHref}
+            secondaryLabel={PORTFOLIO_LANDING_CTA.secondaryCta}
+            secondaryHref={PORTFOLIO_LANDING_CTA.secondaryHref}
+          />
+        }
+        desktop={
+          <CTABand
+            title={PORTFOLIO_LANDING_CTA.title}
+            description={PORTFOLIO_LANDING_CTA.description}
+            primary={{ label: PORTFOLIO_LANDING_CTA.primaryCta, href: PORTFOLIO_LANDING_CTA.primaryHref }}
+            secondary={{ label: PORTFOLIO_LANDING_CTA.secondaryCta, href: PORTFOLIO_LANDING_CTA.secondaryHref }}
+            {...marketingSection("portfolio", "cta")}
+          />
+        }
       />
     </>
   );

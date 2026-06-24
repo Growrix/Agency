@@ -12,6 +12,8 @@ import { ShareRail } from "@/components/sections/ShareRail";
 import { Comments } from "@/components/sections/Comments";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { CTABand } from "@/components/sections/CTABand";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import {
   formatBlogDate,
 } from "@/lib/content";
@@ -247,12 +249,28 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         </Section>
       )}
 
-      <CTABand
-        eyebrow="Work with us"
-        title="Want this kind of thinking on your project?"
-        description="Tell us what you're building. We'll respond with a written plan within 48 hours."
-        primary={{ label: "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: "See services", href: "/services" }}
+      <MarketingViewportGate
+        mobile={
+          <ProductLedFinalCTAMobile
+            eyebrow="Work with us"
+            titleLead="Want this kind of thinking"
+            titleAccent="on your project?"
+            description="Tell us what you're building. We'll respond with a written plan within 48 hours."
+            primaryLabel="Book Appointment"
+            primaryHref="/book-appointment"
+            secondaryLabel="See services"
+            secondaryHref="/services"
+          />
+        }
+        desktop={
+          <CTABand
+            eyebrow="Work with us"
+            title="Want this kind of thinking on your project?"
+            description="Tell us what you're building. We'll respond with a written plan within 48 hours."
+            primary={{ label: "Book Appointment", href: "/book-appointment" }}
+            secondary={{ label: "See services", href: "/services" }}
+          />
+        }
       />
     </>
   );
