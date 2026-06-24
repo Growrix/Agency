@@ -45,6 +45,7 @@ function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeatured
         activeTabId={activeTabId}
         onTabChange={setActiveTabId}
         ariaLabel="Case study categories"
+        variant="segmented"
         className="home-mobile-marketing__case-tabs"
       />
 

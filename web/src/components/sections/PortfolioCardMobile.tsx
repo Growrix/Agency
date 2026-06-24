@@ -20,8 +20,10 @@ export function PortfolioCardMobile({ project }: PortfolioCardMobileProps) {
   return (
     <article className="home-mobile-marketing__portfolio-card">
       <div className="home-mobile-marketing__portfolio-card-tags">
-        <span className="home-mobile-marketing__portfolio-card-tag">{serviceLabel}</span>
-        <span className="home-mobile-marketing__portfolio-card-tag home-mobile-marketing__portfolio-card-tag--accent">
+        <span className="home-mobile-marketing__portfolio-card-tag home-mobile-marketing__portfolio-card-tag--service">
+          {serviceLabel}
+        </span>
+        <span className="home-mobile-marketing__portfolio-card-tag home-mobile-marketing__portfolio-card-tag--industry">
           {project.industry}
         </span>
       </div>
@@ -34,7 +36,7 @@ export function PortfolioCardMobile({ project }: PortfolioCardMobileProps) {
             fill
             loading="lazy"
             sizes="100vw"
-            className="object-cover"
+            className="object-contain bg-[#070b12]"
           />
         ) : embeddedPreview ? (
           <iframe
@@ -52,13 +54,16 @@ export function PortfolioCardMobile({ project }: PortfolioCardMobileProps) {
 
       <div className="home-mobile-marketing__portfolio-card-footer">
         <Link href={`/portfolio/${project.slug}`} className="home-mobile-marketing__portfolio-card-cta">
-          View case study <ArrowUpRightIcon className="size-3.5" aria-hidden />
+          View case study <ArrowUpRightIcon className="home-mobile-marketing__portfolio-card-cta-icon" aria-hidden />
         </Link>
         {project.livePreviewUrl ? (
-          <span className="home-mobile-marketing__portfolio-card-live">
-            <span className="home-mobile-marketing__portfolio-card-live-dot" aria-hidden />
-            Live site available
-          </span>
+          <>
+            <span className="home-mobile-marketing__portfolio-card-footer-divider" aria-hidden />
+            <span className="home-mobile-marketing__portfolio-card-live">
+              <span className="home-mobile-marketing__portfolio-card-live-dot" aria-hidden />
+              Live site available
+            </span>
+          </>
         ) : null}
       </div>
     </article>

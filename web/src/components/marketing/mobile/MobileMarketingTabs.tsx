@@ -12,6 +12,7 @@ type MobileMarketingTabsProps = {
   activeTabId: string;
   onTabChange: (tabId: string) => void;
   ariaLabel: string;
+  variant?: "pills" | "segmented";
   className?: string;
 };
 
@@ -20,6 +21,7 @@ export function MobileMarketingTabs({
   activeTabId,
   onTabChange,
   ariaLabel,
+  variant = "pills",
   className,
 }: MobileMarketingTabsProps) {
   if (tabs.length <= 1) {
@@ -28,7 +30,11 @@ export function MobileMarketingTabs({
 
   return (
     <div
-      className={cn("home-mobile-marketing__tabs", className)}
+      className={cn(
+        "home-mobile-marketing__tabs",
+        variant === "segmented" && "home-mobile-marketing__tabs--segmented",
+        className,
+      )}
       role="tablist"
       aria-label={ariaLabel}
     >
@@ -43,7 +49,9 @@ export function MobileMarketingTabs({
             onClick={() => onTabChange(tab.id)}
             className={cn(
               "home-mobile-marketing__tab",
-              isActive && "home-mobile-marketing__tab--active",
+              variant === "segmented" && "home-mobile-marketing__tab--segmented",
+              variant === "pills" && isActive && "home-mobile-marketing__tab--active",
+              variant === "segmented" && isActive && "home-mobile-marketing__tab--segmented-active",
             )}
           >
             {tab.label}

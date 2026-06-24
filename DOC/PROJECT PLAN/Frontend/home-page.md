@@ -65,8 +65,8 @@ depends_on:
 - Components: `ThreePathExplainerMobile` / `ThreePathExplainerDesktop` — stacked path cards with icon, bullets, and pill CTAs on mobile.
 
 ### 4h. Case Studies / Featured Builds
-- Components: `HomeFeaturedBuildsSection`, `PortfolioCardMobile`, `MobileMarketingTabs`.
-- Interaction notes: mobile left-aligned header, pill tabs (Website projects / About this product), stacked portfolio cards with tag row and footer links.
+- Components: `HomeFeaturedBuildsSection`, `PortfolioCardMobile`, `MobileMarketingTabs` (`variant="segmented"`).
+- Interaction notes: mobile left-aligned header with teal eyebrow rule; full-width segmented tab bar (Website projects / About this product) with teal underline on active; stacked cards with filled teal service badge, industry label, contained preview, divider-separated footer links, and centered outline CTA.
 
 ### 4i. Operating System (Process)
 - Components: `HomeProcessSection`, `ProcessStepsMobile` — vertical timeline cards on mobile.
