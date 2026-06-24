@@ -1,6 +1,8 @@
 export const SERVICES_LANDING_HERO = {
   eyebrow: "GrowrixOS services",
   title: "Choose the right path to launch, grow, or optimize your business.",
+  headlineLead: "Choose the right path to",
+  headlineAccent: "launch, grow, or optimize.",
   description:
     "Whether you need a website, SaaS platform, mobile app, automation system, technical SEO foundation, or AI implementation, we'll help you choose the right solution for your goals.",
   primaryCta: "Book Strategy Call",
@@ -22,6 +24,8 @@ export const SERVICES_LANDING_HIGHLIGHT_SLUGS = [
 export const SERVICES_LANDING_INTRO = {
   eyebrow: "Services",
   title: "Choose the capability that matches your goal.",
+  titleLead: "Choose the capability",
+  titleAccent: "that matches your goal.",
   description:
     "Each service supports a different stage of digital growth—from launching your first website to implementing AI-powered business systems.",
 } as const;
@@ -71,6 +75,8 @@ export const SERVICES_HERO_ECOSYSTEM_LINKS: ServiceEcosystemLink[] = [
 export const SERVICES_ECOSYSTEM_SECTION = {
   eyebrow: "Service ecosystem",
   title: "Most projects combine multiple services.",
+  titleLead: "Most projects combine",
+  titleAccent: "multiple services.",
   description:
     "The best results often come from combining complementary services rather than treating each initiative separately.",
   combinations: [

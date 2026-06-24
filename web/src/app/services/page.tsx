@@ -27,6 +27,10 @@ import {
 	ServiceEcosystemGrid,
 	ServicesHeroEcosystem,
 } from "@/components/sections/ServicesHeroEcosystem";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MobileFeatureGrid } from "@/components/marketing/mobile/MobileFeatureGrid";
+import { ServicesLandingHeroMobile } from "@/components/marketing/services/ServicesLandingHeroMobile";
+import { ServicesLandingGridMobile } from "@/components/marketing/services/ServicesLandingGridMobile";
 import { PROCESS_STEPS } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { marketingSection } from "@/lib/marketing-composition";
@@ -148,76 +152,105 @@ export default async function ServicesPage() {
 			>
 				<div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
 				<Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-					<div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-						<div className="lg:col-span-6 xl:col-span-7">
-							<Badge tone="primary" dot>
-								{SERVICES_LANDING_HERO.eyebrow}
-							</Badge>
-							<h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{SERVICES_LANDING_HERO.title}</h1>
-							<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-								{SERVICES_LANDING_HERO.description}
-							</p>
-							<div className="mt-8 flex flex-wrap gap-3">
-								<LinkButton href={SERVICES_LANDING_HERO.primaryHref} size="lg">
-									{SERVICES_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-								</LinkButton>
-								<LinkButton href={SERVICES_LANDING_HERO.secondaryHref} variant="outline" size="lg">
-									{SERVICES_LANDING_HERO.secondaryCta}
-								</LinkButton>
+					<MarketingViewportGate
+						mobile={
+							<ServicesLandingHeroMobile
+								eyebrow={SERVICES_LANDING_HERO.eyebrow}
+								headlineLead={SERVICES_LANDING_HERO.headlineLead}
+								headlineAccent={SERVICES_LANDING_HERO.headlineAccent}
+								description={SERVICES_LANDING_HERO.description}
+								primaryCta={SERVICES_LANDING_HERO.primaryCta}
+								primaryHref={SERVICES_LANDING_HERO.primaryHref}
+								secondaryCta={SERVICES_LANDING_HERO.secondaryCta}
+								secondaryHref={SERVICES_LANDING_HERO.secondaryHref}
+							/>
+						}
+						desktop={
+							<div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
+								<div className="lg:col-span-6 xl:col-span-7">
+									<Badge tone="primary" dot>
+										{SERVICES_LANDING_HERO.eyebrow}
+									</Badge>
+									<h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{SERVICES_LANDING_HERO.title}</h1>
+									<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
+										{SERVICES_LANDING_HERO.description}
+									</p>
+									<div className="mt-8 flex flex-wrap gap-3">
+										<LinkButton href={SERVICES_LANDING_HERO.primaryHref} size="lg">
+											{SERVICES_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+										</LinkButton>
+										<LinkButton href={SERVICES_LANDING_HERO.secondaryHref} variant="outline" size="lg">
+											{SERVICES_LANDING_HERO.secondaryCta}
+										</LinkButton>
+									</div>
+								</div>
+								<div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+									<ServicesHeroEcosystem links={[...SERVICES_HERO_ECOSYSTEM_LINKS]} />
+								</div>
 							</div>
-						</div>
-						<div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-							<ServicesHeroEcosystem links={[...SERVICES_HERO_ECOSYSTEM_LINKS]} />
-						</div>
-					</div>
+						}
+					/>
 				</Container>
 			</Section>
 
 			<Section {...marketingSection("services", "highlights")}>
 				<Container>
-					<SectionHeading
-						eyebrow={SERVICES_LANDING_INTRO.eyebrow}
-						title={SERVICES_LANDING_INTRO.title}
-						description={SERVICES_LANDING_INTRO.description}
-					/>
-					<RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-						{highlightServices.map((service) => {
-							const Icon = ICONS[service.slug as keyof typeof ICONS] ?? SparklesIcon;
+					<MarketingViewportGate
+						mobile={
+							<ServicesLandingGridMobile
+								services={highlightServices}
+								icons={ICONS}
+								fitNotes={FIT_NOTES}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_LANDING_INTRO.eyebrow}
+									title={SERVICES_LANDING_INTRO.title}
+									description={SERVICES_LANDING_INTRO.description}
+								/>
+								<RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+									{highlightServices.map((service) => {
+										const Icon = ICONS[service.slug as keyof typeof ICONS] ?? SparklesIcon;
 
-							return (
-								<RevealItem key={service.slug} className="h-full min-w-0">
-									<Card hoverable className="flex h-full flex-col">
-										<div className="flex items-start justify-between gap-4">
-											<div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
-												<Icon className="size-6" />
-											</div>
-											<Badge tone="secondary">{service.delivery_timeline}</Badge>
-										</div>
-										<h2 className="mt-5 font-display text-2xl tracking-tight">{service.title}</h2>
-										<p className="mt-3 text-sm text-text-muted leading-6">{service.description}</p>
-										<p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
-											{service.short_description}
-										</p>
-										<div className="mt-6 flex-1 space-y-2">
-											{service.pillars.map((pillar) => (
-												<div key={pillar} className="flex items-center gap-2 text-sm">
-													<CheckIcon className="size-4 shrink-0 text-primary" />
-													<span>{pillar}</span>
-												</div>
-											))}
-										</div>
-										<p className="mt-5 text-sm text-text-muted leading-6">{FIT_NOTES[service.slug]}</p>
-										<Link
-											href={`/services/${service.slug}`}
-											className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover"
-										>
-											Explore this service <ArrowRightIcon className="size-4" />
-										</Link>
-									</Card>
-								</RevealItem>
-							);
-						})}
-					</RevealGroup>
+										return (
+											<RevealItem key={service.slug} className="h-full min-w-0">
+												<Card hoverable className="flex h-full flex-col">
+													<div className="flex items-start justify-between gap-4">
+														<div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
+															<Icon className="size-6" />
+														</div>
+														<Badge tone="secondary">{service.delivery_timeline}</Badge>
+													</div>
+													<h2 className="mt-5 font-display text-2xl tracking-tight">{service.title}</h2>
+													<p className="mt-3 text-sm text-text-muted leading-6">{service.description}</p>
+													<p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-primary">
+														{service.short_description}
+													</p>
+													<div className="mt-6 flex-1 space-y-2">
+														{service.pillars.map((pillar) => (
+															<div key={pillar} className="flex items-center gap-2 text-sm">
+																<CheckIcon className="size-4 shrink-0 text-primary" />
+																<span>{pillar}</span>
+															</div>
+														))}
+													</div>
+													<p className="mt-5 text-sm text-text-muted leading-6">{FIT_NOTES[service.slug]}</p>
+													<Link
+														href={`/services/${service.slug}`}
+														className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover"
+													>
+														Explore this service <ArrowRightIcon className="size-4" />
+													</Link>
+												</Card>
+											</RevealItem>
+										);
+									})}
+								</RevealGroup>
+							</>
+						}
+					/>
 				</Container>
 			</Section>
 
@@ -292,12 +325,27 @@ export default async function ServicesPage() {
 
 			<Section {...marketingSection("services", "ecosystem")}>
 				<Container>
-					<SectionHeading
-						eyebrow={SERVICES_ECOSYSTEM_SECTION.eyebrow}
-						title={SERVICES_ECOSYSTEM_SECTION.title}
-						description={SERVICES_ECOSYSTEM_SECTION.description}
+					<MarketingViewportGate
+						mobile={
+							<MobileFeatureGrid
+								eyebrow={SERVICES_ECOSYSTEM_SECTION.eyebrow}
+								titleLead={SERVICES_ECOSYSTEM_SECTION.titleLead}
+								titleAccent={SERVICES_ECOSYSTEM_SECTION.titleAccent}
+								description={SERVICES_ECOSYSTEM_SECTION.description}
+								items={[...SERVICES_ECOSYSTEM_SECTION.combinations]}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_ECOSYSTEM_SECTION.eyebrow}
+									title={SERVICES_ECOSYSTEM_SECTION.title}
+									description={SERVICES_ECOSYSTEM_SECTION.description}
+								/>
+								<ServiceEcosystemGrid combinations={[...SERVICES_ECOSYSTEM_SECTION.combinations]} />
+							</>
+						}
 					/>
-					<ServiceEcosystemGrid combinations={[...SERVICES_ECOSYSTEM_SECTION.combinations]} />
 				</Container>
 			</Section>
 
