@@ -1746,6 +1746,7 @@ body {
   overflow: hidden;
   overflow-anchor: none;
   contain: layout style;
+  padding: var(--home-mobile-marketing-card-padding);
   border: 1px solid var(--color-border);
   border-radius: var(--home-mobile-marketing-card-radius);
   background: var(--color-surface);

@@ -61,7 +61,7 @@ function SidebarGroup({
 }) {
   return (
     <div className="min-w-0">
-      <p className={cn("mb-1.5 font-mono uppercase tracking-[0.16em] text-primary", mobile ? "text-[length:var(--home-mobile-marketing-card-label-size)]" : "text-[9px] text-text-muted")}>
+      <p className={cn("mb-1.5 font-mono uppercase tracking-[0.16em] text-primary", mobile ? "text-(length:--home-mobile-marketing-card-label-size)" : "text-[9px] text-text-muted")}>
         {group.label}
       </p>
       <div className={cn("flex flex-wrap gap-1.5", !mobile && "lg:flex-col")}>

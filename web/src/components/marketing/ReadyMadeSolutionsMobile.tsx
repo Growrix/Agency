@@ -47,7 +47,7 @@ export function ReadyMadeSolutionsMobile({ tabs, productsByTabId }: ReadyMadeSol
         className="justify-center"
       />
 
-      <p className="home-mobile-marketing__note mx-auto max-w-[var(--home-mobile-marketing-header-max-width)]">
+      <p className="home-mobile-marketing__note mx-auto max-w-(--home-mobile-marketing-header-max-width)">
         <ComputerDesktopIcon className="home-mobile-marketing__note-icon" aria-hidden />
         <span>{activeTab.description}</span>
       </p>

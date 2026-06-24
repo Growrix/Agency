@@ -43,7 +43,7 @@ function HomeFieldNotesMobile({
       <LinkButton
         href={HOME_FIELD_NOTES_COPY.ctaHref}
         variant="outline"
-        className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mt-[var(--home-mobile-marketing-gap-desc-content)]"
+        className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mt-(--home-mobile-marketing-gap-desc-content)"
       >
         <span className="home-mobile-marketing__cta-inner">
           {HOME_FIELD_NOTES_COPY.ctaLabel}
@@ -60,7 +60,7 @@ function HomeFieldNotesMobile({
       </RevealGroup>
 
       {posts.length === 0 ? (
-        <Card className="mt-[var(--home-mobile-marketing-gap-section-stack)] text-center">
+        <Card className="mt-(--home-mobile-marketing-gap-section-stack) text-center">
           <p className="font-display text-base tracking-tight">No published blog posts yet.</p>
           <p className="mt-2 text-text-muted">Publish your first post in Sanity to show it here.</p>
         </Card>

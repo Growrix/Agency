@@ -53,7 +53,7 @@ function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeatured
       />
 
       {activeTabId === "about-product" ? (
-        <div className="home-mobile-marketing__path-card mt-[var(--home-mobile-marketing-gap-section-stack)]">
+        <div className="home-mobile-marketing__path-card mt-(--home-mobile-marketing-gap-section-stack)">
           <p className="home-mobile-marketing__path-card-title">Portfolio as a product</p>
           <p className="home-mobile-marketing__path-card-description">
             Every case study documents a launch-ready system with measurable outcomes — the same quality bar we ship for
@@ -76,7 +76,7 @@ function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeatured
       <LinkButton
         href="/portfolio"
         variant="outline"
-        className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mx-auto mt-[var(--home-mobile-marketing-gap-section-stack)]"
+        className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mx-auto mt-(--home-mobile-marketing-gap-section-stack)"
       >
         <span className="home-mobile-marketing__cta-inner">
           See all projects

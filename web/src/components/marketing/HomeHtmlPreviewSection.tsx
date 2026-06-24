@@ -4,19 +4,13 @@ import { MarketingViewportGate } from "@/components/marketing/MarketingViewportG
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
 import {
   WebsiteTemplateHtmlDesktopPreviewBlock,
-  WebsiteTemplateHtmlDesktopPreviewCarousel,
   WebsiteTemplateHtmlMobilePreviewBlock,
 } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
-import {
-  HtmlProfileHeroCarousel,
-  type HtmlProfileHeroSlide,
-} from "@/components/sections/HtmlProfileHeroCarousel";
+import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { Container, Section } from "@/components/primitives/Container";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
-
-const MOBILE_HTML_PREVIEW_MAX_FRAME_HEIGHT = 480;
 
 type HomeHtmlPreviewSectionProps = {
   slides: HtmlProfileHeroSlide[];
@@ -44,25 +38,18 @@ function HomeHtmlPreviewMobile({
 
       <div className="home-mobile-marketing__preview-stack">
         <div className="home-mobile-marketing__preview-panel home-mobile-marketing__preview-panel--desktop">
-          <WebsiteTemplateHtmlDesktopPreviewCarousel
+          <WebsiteTemplateHtmlDesktopPreviewBlock
             slides={slides}
             emptyFallbackSlide={emptyFallbackSlide}
-            minHeightClass="min-h-[200px] sm:min-h-[240px]"
-            desktopPreviewFit="cover"
-            posterFirst
+            posterFirst={false}
           />
         </div>
         <div className="home-mobile-marketing__preview-panel">
-          <HtmlProfileHeroCarousel
+          <WebsiteTemplateHtmlMobilePreviewBlock
             slides={slides}
-            ctaLabel="View Product"
             emptyFallbackSlide={emptyFallbackSlide}
-            previewMode="mobile-frame"
-            mobileFrameMinHeightClass="min-h-0"
-            mobilePreviewMaxHeight={MOBILE_HTML_PREVIEW_MAX_FRAME_HEIGHT}
-            mobilePreviewShowViewportLabel={false}
+            reverseLayout={false}
             autoPlay={false}
-            posterFirst
           />
         </div>
       </div>

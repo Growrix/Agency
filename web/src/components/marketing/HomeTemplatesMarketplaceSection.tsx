@@ -67,7 +67,7 @@ function HomeTemplatesMarketplaceMobile({ products }: HomeTemplatesMarketplaceSe
         ))}
       </RevealGroup>
       {products.length === 0 ? (
-        <Card className="mt-[var(--home-mobile-marketing-gap-section-stack)] text-center">
+        <Card className="mt-(--home-mobile-marketing-gap-section-stack) text-center">
           <p className="font-display text-base tracking-tight">No published HTML Business Profile items yet.</p>
           <p className="mt-2 text-text-muted">Publish HTML business profile products to display cards in this section.</p>
         </Card>
