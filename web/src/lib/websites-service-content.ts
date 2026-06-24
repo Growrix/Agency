@@ -10,15 +10,35 @@ export const WEBSITES_SERVICE_STATS: Stat[] = [
 
 export const WEBSITES_SERVICE_HERO = {
   headline: "Websites built to convert, not just look good.",
+  headlineLead: "Websites built to",
+  headlineAccent: "convert, not just look good.",
   description:
     "Launch a high-performance website designed to generate enquiries, support sales conversations, and grow your business.",
   secondaryCta: "View website portfolio",
   secondaryHref: "/portfolio",
 } as const;
 
+export const WEBSITES_FEATURED_TEMPLATES_COPY = {
+  eyebrow: "Featured templates",
+  title: "Production-ready templates with live desktop preview",
+  titleLead: "Production-ready templates with",
+  titleAccent: "live desktop preview",
+  description:
+    "Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems.",
+} as const;
+
+export const WEBSITES_ENGAGEMENT_SECTION = {
+  eyebrow: "Engagement models",
+  title: "Pick the surface area that matches the work.",
+  titleLead: "Pick the surface area",
+  titleAccent: "that matches the work.",
+} as const;
+
 export const WEBSITES_OUTCOMES_SECTION = {
   eyebrow: "What we deliver",
   title: "Solutions designed around business outcomes.",
+  titleLead: "Solutions designed around",
+  titleAccent: "business outcomes.",
   description:
     "Every website and system we build is designed to solve a specific business problem, improve customer experience, and support growth.",
   builds: [
@@ -52,6 +72,8 @@ export const WEBSITES_OUTCOMES_SECTION = {
 export const WEBSITES_WHY_CHOOSE_SECTION = {
   eyebrow: "Why clients choose GrowrixOS",
   title: "Built for performance, growth, and long-term scalability.",
+  titleLead: "Built for performance, growth, and",
+  titleAccent: "long-term scalability.",
   description:
     "Every project is designed around outcomes that help businesses grow, convert, and operate more efficiently.",
   cards: [
@@ -74,9 +96,27 @@ export const WEBSITES_WHY_CHOOSE_SECTION = {
   ],
 } as const;
 
+export const WEBSITES_PROOF_SECTION = {
+  eyebrow: "Featured proof",
+  title: "Recent work in this practice.",
+  titleLead: "Recent work",
+  titleAccent: "in this practice.",
+} as const;
+
+export const WEBSITES_SERVICE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Common website project questions, answered.",
+  titleLead: "Common website project questions,",
+  titleAccent: "answered.",
+  description:
+    "Timelines, ownership, platforms, support, and pricing—covered before you book a call.",
+} as const;
+
 export const WEBSITES_LAUNCH_PROCESS_SECTION = {
   eyebrow: "Our process",
   title: "How we take you from idea to launch.",
+  titleLead: "How we take you from",
+  titleAccent: "idea to launch.",
   description:
     "A clear process designed to reduce uncertainty, improve collaboration, and keep projects moving forward.",
   steps: [
@@ -168,6 +208,8 @@ export const WEBSITES_SERVICE_FAQ = [
 
 export const WEBSITES_SERVICE_CTA = {
   title: "Let's map your next website.",
+  titleLead: "Let's map your next",
+  titleAccent: "website.",
   description:
     "Book a 30-minute strategy session and leave with a clear roadmap, scope, and next steps for your project.",
   primaryLabel: "Plan My Website",

@@ -12,16 +12,36 @@ const PROCESS_ICONS = [MagnifyingGlassIcon, ShareIcon, CodeBracketSquareIcon, Ro
 
 type ProcessStepsMobileProps = {
   steps: Step[];
+  eyebrow?: string;
+  title?: string;
+  titleLead?: string;
+  titleAccent?: string;
+  description?: string;
 };
 
-export function ProcessStepsMobile({ steps }: ProcessStepsMobileProps) {
+export function ProcessStepsMobile({
+  steps,
+  eyebrow,
+  title,
+  titleLead,
+  titleAccent,
+  description,
+}: ProcessStepsMobileProps) {
+  const headerEyebrow = eyebrow ?? HOME_OPERATING_SYSTEM_COPY.eyebrow;
+  const headerTitleLead = titleLead ?? HOME_OPERATING_SYSTEM_COPY.titleLead;
+  const headerTitleAccent = titleAccent ?? HOME_OPERATING_SYSTEM_COPY.titleAccent;
+  const headerTitle = title;
+  const headerDescription = description ?? HOME_OPERATING_SYSTEM_COPY.description;
+  const useAccentTitle = !headerTitle && Boolean(headerTitleLead && headerTitleAccent);
+
   return (
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
-        eyebrow={HOME_OPERATING_SYSTEM_COPY.eyebrow}
-        titleLead={HOME_OPERATING_SYSTEM_COPY.titleLead}
-        titleAccent={HOME_OPERATING_SYSTEM_COPY.titleAccent}
-        description={HOME_OPERATING_SYSTEM_COPY.description}
+        eyebrow={headerEyebrow}
+        titleLead={useAccentTitle ? headerTitleLead : undefined}
+        titleAccent={useAccentTitle ? headerTitleAccent : undefined}
+        title={useAccentTitle ? undefined : headerTitle}
+        description={headerDescription}
         align="left"
         className="home-mobile-marketing__header--left max-w-none"
       />

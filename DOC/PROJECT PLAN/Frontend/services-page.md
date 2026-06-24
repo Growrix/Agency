@@ -62,6 +62,25 @@ depends_on:
 - Desktop uses a two-row capability layout with persistent comparison anchor nav.
 - Mobile turns comparison into stacked accordions and keeps a sticky choose-service action.
 
+## Service Detail — Websites (`/services/websites`)
+
+Mobile layout below `lg` mirrors the homepage mobile marketing system (`MarketingViewportGate`, `.home-mobile-marketing__*`, `.service-detail-hero-mobile__*`).
+
+| Section | Mobile component | Notes |
+|---------|------------------|-------|
+| Hero | `ServiceDetailHeroMobile` | Left-aligned editorial hero, engagement card, stats |
+| Featured templates | `FeaturedProductsMobile` | Reused from homepage; accent title splits |
+| HTML preview | `HomeHtmlPreviewSection` | Reused gated preview stack |
+| Engagement models | `EngagementTiersMobile` | Path-card stack from tier data |
+| What we deliver | `OutcomeCardsMobile` | Stacked outcome cards |
+| Why choose | `PrincipleCardsMobile` | Stacked principle cards |
+| Process | `ProcessStepsMobile` | Vertical timeline (generalized header props) |
+| Featured proof | `ServiceFeaturedProofMobile` | `PortfolioCardMobile` stack, no tabs |
+| FAQ | `ServiceFaqMobile` | Mobile header + `Accordion` |
+| Final CTA | `ProductLedFinalCTAMobile` | Dark contrast card with service copy |
+
+Desktop trees for `/services/websites` are unchanged.
+
 ## SEO and Metadata
 - Title: Web Development Services | SaaS Apps, Websites, HTML Business Profiles, MCP Servers, Automation.
 - Description: Compare the agency's service offerings with primary emphasis on websites, HTML business profiles, SaaS applications, mobile launch work, and ready websites, plus secondary MCP and automation services.

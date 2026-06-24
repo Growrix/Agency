@@ -31,7 +31,16 @@ import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
-import { WebsiteTemplateHtmlPreviewShowcaseSections } from "@/components/sections/WebsiteTemplateHtmlPreviewShowcaseSections";
+import { HomeHtmlPreviewSection } from "@/components/marketing/HomeHtmlPreviewSection";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { ProcessStepsMobile } from "@/components/marketing/ProcessStepsMobile";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
+import { EngagementTiersMobile } from "@/components/marketing/services/EngagementTiersMobile";
+import { OutcomeCardsMobile } from "@/components/marketing/services/OutcomeCardsMobile";
+import { PrincipleCardsMobile } from "@/components/marketing/services/PrincipleCardsMobile";
+import { ServiceDetailHeroMobile } from "@/components/marketing/services/ServiceDetailHeroMobile";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
+import { ServiceFeaturedProofMobile } from "@/components/marketing/services/ServiceFeaturedProofMobile";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
@@ -54,10 +63,14 @@ import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { getPublicService, listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
 import { getSanityServiceDetailContent } from "@/server/sanity/marketing";
 import {
+  WEBSITES_ENGAGEMENT_SECTION,
+  WEBSITES_FEATURED_TEMPLATES_COPY,
   WEBSITES_LAUNCH_PROCESS_SECTION,
   WEBSITES_OUTCOMES_SECTION,
+  WEBSITES_PROOF_SECTION,
   WEBSITES_SERVICE_CTA,
   WEBSITES_SERVICE_FAQ,
+  WEBSITES_SERVICE_FAQ_SECTION,
   WEBSITES_SERVICE_HERO,
   WEBSITES_SERVICE_STATS,
   WEBSITES_WHY_CHOOSE_SECTION,
@@ -484,6 +497,36 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       )}
     >
       <Container>
+        {isWebsitesService ? (
+          <MarketingViewportGate
+            mobile={
+              <EngagementTiersMobile
+                eyebrow={WEBSITES_ENGAGEMENT_SECTION.eyebrow}
+                title={WEBSITES_ENGAGEMENT_SECTION.title}
+                titleLead={WEBSITES_ENGAGEMENT_SECTION.titleLead}
+                titleAccent={WEBSITES_ENGAGEMENT_SECTION.titleAccent}
+                tiers={copy.tiers}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={WEBSITES_ENGAGEMENT_SECTION.eyebrow}
+                  title={WEBSITES_ENGAGEMENT_SECTION.title}
+                  align="center"
+                />
+                <RevealGroup className="mt-12 grid auto-rows-fr gap-5 lg:grid-cols-3" stagger={0.08}>
+                  {copy.tiers.map((t) => (
+                    <RevealItem key={t.name} className="h-full">
+                      <PricingTier tier={t} className="h-full" />
+                    </RevealItem>
+                  ))}
+                </RevealGroup>
+              </>
+            }
+          />
+        ) : (
+          <>
         <SectionHeading
           eyebrow={
             isSaasService
@@ -533,6 +576,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             </RevealItem>
           ))}
         </RevealGroup>
+          </>
+        )}
         {isSaasService ? (
           <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-6 text-text-muted">
             {SAAS_ENGAGEMENT_SECTION.trustNote}
@@ -567,61 +612,141 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-            ← All services
-          </Link>
-          <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-7">
-              <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-                <Badge tone="primary" dot>{copy.eyebrow}</Badge>
-              </div>
-              <h1
-                className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
-                style={{ animationDelay: "70ms" }}
-              >
-                {copy.headline}
-              </h1>
-              <p
-                className="mt-6 text-lg text-text-muted leading-7 signal-rise"
-                style={{ animationDelay: "140ms" }}
-              >
-                {copy.description}
-              </p>
-              <div
-                className="mt-8 flex flex-wrap gap-3 signal-rise"
-                style={{ animationDelay: "210ms" }}
-              >
-                <LinkButton href="/book-appointment" size="lg">
-                  {copy.primaryCta} <ArrowRightIcon className="size-4" />
-                </LinkButton>
-                <LinkButton href={copy.secondaryHref} variant="outline" size="lg">{copy.secondaryCta}</LinkButton>
-              </div>
-            </div>
-            <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
-              <Card className="overflow-hidden">
-                <div className="flex items-center justify-between mb-5">
-                  <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
-                    <Icon className="size-6" />
+          {isWebsitesService && heroServiceStats ? (
+            <MarketingViewportGate
+              mobile={
+                <ServiceDetailHeroMobile
+                  eyebrow={copy.eyebrow}
+                  headlineLead={WEBSITES_SERVICE_HERO.headlineLead}
+                  headlineAccent={WEBSITES_SERVICE_HERO.headlineAccent}
+                  description={copy.description}
+                  primaryCta={copy.primaryCta}
+                  secondaryCta={copy.secondaryCta}
+                  secondaryHref={copy.secondaryHref}
+                  deliveryTimeline={service.delivery_timeline}
+                  engagementSummary={service.short_description}
+                  pillars={service.pillars}
+                  stats={heroServiceStats}
+                  icon={Icon}
+                />
+              }
+              desktop={
+                <>
+                  <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+                    ← All services
+                  </Link>
+                  <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
+                    <div className="lg:col-span-7">
+                      <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+                        <Badge tone="primary" dot>{copy.eyebrow}</Badge>
+                      </div>
+                      <h1
+                        className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
+                        style={{ animationDelay: "70ms" }}
+                      >
+                        {copy.headline}
+                      </h1>
+                      <p
+                        className="mt-6 text-lg text-text-muted leading-7 signal-rise"
+                        style={{ animationDelay: "140ms" }}
+                      >
+                        {copy.description}
+                      </p>
+                      <div
+                        className="mt-8 flex flex-wrap gap-3 signal-rise"
+                        style={{ animationDelay: "210ms" }}
+                      >
+                        <LinkButton href="/book-appointment" size="lg">
+                          {copy.primaryCta} <ArrowRightIcon className="size-4" />
+                        </LinkButton>
+                        <LinkButton href={copy.secondaryHref} variant="outline" size="lg">{copy.secondaryCta}</LinkButton>
+                      </div>
+                    </div>
+                    <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
+                      <Card className="overflow-hidden">
+                        <div className="flex items-center justify-between mb-5">
+                          <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
+                            <Icon className="size-6" />
+                          </div>
+                          <Badge tone="secondary">{service.delivery_timeline}</Badge>
+                        </div>
+                        <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
+                        <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
+                        <ul className="mt-6 space-y-2.5">
+                          {service.pillars.map((pillar) => (
+                            <li key={pillar} className="flex items-center gap-2 text-sm">
+                              <CheckIcon className="size-4 text-primary" /> {pillar}
+                            </li>
+                          ))}
+                        </ul>
+                      </Card>
+                    </div>
                   </div>
-                  <Badge tone="secondary">{service.delivery_timeline}</Badge>
+                  <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
+                    <StatBlock stats={heroServiceStats} containerWidth="shell" />
+                  </div>
+                </>
+              }
+            />
+          ) : (
+            <>
+              <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+                ← All services
+              </Link>
+              <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
+                <div className="lg:col-span-7">
+                  <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+                    <Badge tone="primary" dot>{copy.eyebrow}</Badge>
+                  </div>
+                  <h1
+                    className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
+                    style={{ animationDelay: "70ms" }}
+                  >
+                    {copy.headline}
+                  </h1>
+                  <p
+                    className="mt-6 text-lg text-text-muted leading-7 signal-rise"
+                    style={{ animationDelay: "140ms" }}
+                  >
+                    {copy.description}
+                  </p>
+                  <div
+                    className="mt-8 flex flex-wrap gap-3 signal-rise"
+                    style={{ animationDelay: "210ms" }}
+                  >
+                    <LinkButton href="/book-appointment" size="lg">
+                      {copy.primaryCta} <ArrowRightIcon className="size-4" />
+                    </LinkButton>
+                    <LinkButton href={copy.secondaryHref} variant="outline" size="lg">{copy.secondaryCta}</LinkButton>
+                  </div>
                 </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
-                <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
-                <ul className="mt-6 space-y-2.5">
-                  {service.pillars.map((pillar) => (
-                    <li key={pillar} className="flex items-center gap-2 text-sm">
-                      <CheckIcon className="size-4 text-primary" /> {pillar}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            </div>
-          </div>
-          {heroServiceStats ? (
-            <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
-              <StatBlock stats={heroServiceStats} containerWidth="shell" />
-            </div>
-          ) : null}
+                <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
+                  <Card className="overflow-hidden">
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
+                        <Icon className="size-6" />
+                      </div>
+                      <Badge tone="secondary">{service.delivery_timeline}</Badge>
+                    </div>
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
+                    <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
+                    <ul className="mt-6 space-y-2.5">
+                      {service.pillars.map((pillar) => (
+                        <li key={pillar} className="flex items-center gap-2 text-sm">
+                          <CheckIcon className="size-4 text-primary" /> {pillar}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </div>
+              </div>
+              {heroServiceStats ? (
+                <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
+                  <StatBlock stats={heroServiceStats} containerWidth="shell" />
+                </div>
+              ) : null}
+            </>
+          )}
         </Container>
       </Section>
 
@@ -738,20 +863,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             variant="html-preview"
             maxProducts={3}
             sectionShell={marketingSection("service-detail-websites", "featured-templates")}
-            eyebrow="Featured templates"
-            title="Production-ready templates with live desktop preview"
-            description="Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems."
+            eyebrow={WEBSITES_FEATURED_TEMPLATES_COPY.eyebrow}
+            title={WEBSITES_FEATURED_TEMPLATES_COPY.title}
+            titleLead={WEBSITES_FEATURED_TEMPLATES_COPY.titleLead}
+            titleAccent={WEBSITES_FEATURED_TEMPLATES_COPY.titleAccent}
+            description={WEBSITES_FEATURED_TEMPLATES_COPY.description}
             ctaHref="/digital-products/category/website-templates-html-preview#profiles"
             ctaLabel={WEBSITE_TEMPLATE_PREVIEW.browseTemplatePreviewsCta}
           />
 
-          <WebsiteTemplateHtmlPreviewShowcaseSections
+          <HomeHtmlPreviewSection
             slides={htmlPreviewSlides}
             emptyFallbackSlide={htmlPreviewFallbackSlide}
-            reverseMobileLayout
-            showMobileSectionDivider
-            autoPlayMobileCarousel={false}
-            sectionTitleClassName={HERO_TITLE_CLASS}
             sectionShell={marketingSection("service-detail-websites", "preview")}
             title={HOME_PREVIEW_COPY.title}
             description={HOME_PREVIEW_COPY.description}
@@ -855,51 +978,79 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <Section {...marketingSection(serviceSectionPage, "overview")}>
         <Container>
+          {isWebsitesService ? (
+            <MarketingViewportGate
+              mobile={
+                <OutcomeCardsMobile
+                  eyebrow={WEBSITES_OUTCOMES_SECTION.eyebrow}
+                  title={WEBSITES_OUTCOMES_SECTION.title}
+                  titleLead={WEBSITES_OUTCOMES_SECTION.titleLead}
+                  titleAccent={WEBSITES_OUTCOMES_SECTION.titleAccent}
+                  description={WEBSITES_OUTCOMES_SECTION.description}
+                  cards={copy.builds.map((build) => ({ ...build }))}
+                />
+              }
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={WEBSITES_OUTCOMES_SECTION.eyebrow}
+                    title={WEBSITES_OUTCOMES_SECTION.title}
+                    description={WEBSITES_OUTCOMES_SECTION.description}
+                  />
+                  <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+                    {copy.builds.map((b) => (
+                      <RevealItem key={b.title} className="h-full">
+                        <Card hoverable className="h-full">
+                          <h3 className="font-display text-lg tracking-tight">{b.title}</h3>
+                          <p className="mt-2 text-sm text-text-muted leading-6">{b.description}</p>
+                        </Card>
+                      </RevealItem>
+                    ))}
+                  </RevealGroup>
+                </>
+              }
+            />
+          ) : (
+            <>
           <SectionHeading
             eyebrow={
-              isWebsitesService
-                ? WEBSITES_OUTCOMES_SECTION.eyebrow
-                : isSaasService
-                  ? SAAS_SYSTEMS_SECTION.eyebrow
-                  : isMobileAppsService
-                    ? MOBILE_SYSTEMS_SECTION.eyebrow
-                    : isAutomationService
-                      ? AUTOMATION_OUTCOMES_SECTION.eyebrow
-                      : isTechnicalSeoService
-                        ? TECHNICAL_SEO_FOUNDATIONS_SECTION.eyebrow
-                        : isAiBusinessSystemsService
-                          ? AI_VALUE_SECTION.eyebrow
-                          : "What gets built"
+              isSaasService
+                ? SAAS_SYSTEMS_SECTION.eyebrow
+                : isMobileAppsService
+                  ? MOBILE_SYSTEMS_SECTION.eyebrow
+                  : isAutomationService
+                    ? AUTOMATION_OUTCOMES_SECTION.eyebrow
+                    : isTechnicalSeoService
+                      ? TECHNICAL_SEO_FOUNDATIONS_SECTION.eyebrow
+                      : isAiBusinessSystemsService
+                        ? AI_VALUE_SECTION.eyebrow
+                        : "What gets built"
             }
             title={
-              isWebsitesService
-                ? WEBSITES_OUTCOMES_SECTION.title
-                : isSaasService
-                  ? SAAS_SYSTEMS_SECTION.title
-                  : isMobileAppsService
-                    ? MOBILE_SYSTEMS_SECTION.title
-                    : isAutomationService
-                      ? AUTOMATION_OUTCOMES_SECTION.title
-                      : isTechnicalSeoService
-                        ? TECHNICAL_SEO_FOUNDATIONS_SECTION.title
-                        : isAiBusinessSystemsService
-                          ? AI_VALUE_SECTION.title
-                          : "The actual surfaces and systems we ship."
+              isSaasService
+                ? SAAS_SYSTEMS_SECTION.title
+                : isMobileAppsService
+                  ? MOBILE_SYSTEMS_SECTION.title
+                  : isAutomationService
+                    ? AUTOMATION_OUTCOMES_SECTION.title
+                    : isTechnicalSeoService
+                      ? TECHNICAL_SEO_FOUNDATIONS_SECTION.title
+                      : isAiBusinessSystemsService
+                        ? AI_VALUE_SECTION.title
+                        : "The actual surfaces and systems we ship."
             }
             description={
-              isWebsitesService
-                ? WEBSITES_OUTCOMES_SECTION.description
-                : isSaasService
-                  ? SAAS_SYSTEMS_SECTION.description
-                  : isMobileAppsService
-                    ? MOBILE_SYSTEMS_SECTION.description
-                    : isAutomationService
-                      ? AUTOMATION_OUTCOMES_SECTION.description
-                      : isTechnicalSeoService
-                        ? TECHNICAL_SEO_FOUNDATIONS_SECTION.description
-                        : isAiBusinessSystemsService
-                          ? AI_VALUE_SECTION.description
-                          : undefined
+              isSaasService
+                ? SAAS_SYSTEMS_SECTION.description
+                : isMobileAppsService
+                  ? MOBILE_SYSTEMS_SECTION.description
+                  : isAutomationService
+                    ? AUTOMATION_OUTCOMES_SECTION.description
+                    : isTechnicalSeoService
+                      ? TECHNICAL_SEO_FOUNDATIONS_SECTION.description
+                      : isAiBusinessSystemsService
+                        ? AI_VALUE_SECTION.description
+                        : undefined
             }
           />
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
@@ -912,56 +1063,86 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </RevealItem>
             ))}
           </RevealGroup>
+            </>
+          )}
         </Container>
       </Section>
 
       <Section {...marketingSection(serviceSectionPage, "deliverables")}>
         <Container>
+          {isWebsitesService ? (
+            <MarketingViewportGate
+              mobile={
+                <PrincipleCardsMobile
+                  eyebrow={WEBSITES_WHY_CHOOSE_SECTION.eyebrow}
+                  title={WEBSITES_WHY_CHOOSE_SECTION.title}
+                  titleLead={WEBSITES_WHY_CHOOSE_SECTION.titleLead}
+                  titleAccent={WEBSITES_WHY_CHOOSE_SECTION.titleAccent}
+                  description={WEBSITES_WHY_CHOOSE_SECTION.description}
+                  cards={copy.differentiators.map((card) => ({ ...card }))}
+                />
+              }
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={WEBSITES_WHY_CHOOSE_SECTION.eyebrow}
+                    title={WEBSITES_WHY_CHOOSE_SECTION.title}
+                    description={WEBSITES_WHY_CHOOSE_SECTION.description}
+                  />
+                  <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
+                    {copy.differentiators.map((d) => (
+                      <RevealItem key={d.title} className="h-full">
+                        <div className="h-full rounded-md border border-border bg-surface p-6">
+                          <h3 className="font-display text-xl tracking-tight">{d.title}</h3>
+                          <p className="mt-2 text-text-muted leading-7 text-pretty">{d.description}</p>
+                        </div>
+                      </RevealItem>
+                    ))}
+                  </RevealGroup>
+                </>
+              }
+            />
+          ) : (
+            <>
           <SectionHeading
             eyebrow={
-              isWebsitesService
-                ? WEBSITES_WHY_CHOOSE_SECTION.eyebrow
-                : isSaasService
-                  ? SAAS_WHY_FOUNDERS_SECTION.eyebrow
-                  : isMobileAppsService
-                    ? MOBILE_WHY_BUILD_SECTION.eyebrow
-                    : isAutomationService
-                      ? AUTOMATION_WHY_BUILD_SECTION.eyebrow
-                      : isTechnicalSeoService
-                        ? TECHNICAL_SEO_WHY_SECTION.eyebrow
-                        : isAiBusinessSystemsService
-                          ? AI_WHY_BUILD_SECTION.eyebrow
-                          : "What makes it different"
+              isSaasService
+                ? SAAS_WHY_FOUNDERS_SECTION.eyebrow
+                : isMobileAppsService
+                  ? MOBILE_WHY_BUILD_SECTION.eyebrow
+                  : isAutomationService
+                    ? AUTOMATION_WHY_BUILD_SECTION.eyebrow
+                    : isTechnicalSeoService
+                      ? TECHNICAL_SEO_WHY_SECTION.eyebrow
+                      : isAiBusinessSystemsService
+                        ? AI_WHY_BUILD_SECTION.eyebrow
+                        : "What makes it different"
             }
             title={
-              isWebsitesService
-                ? WEBSITES_WHY_CHOOSE_SECTION.title
-                : isSaasService
-                  ? SAAS_WHY_FOUNDERS_SECTION.title
-                  : isMobileAppsService
-                    ? MOBILE_WHY_BUILD_SECTION.title
-                    : isAutomationService
-                      ? AUTOMATION_WHY_BUILD_SECTION.title
-                      : isTechnicalSeoService
-                        ? TECHNICAL_SEO_WHY_SECTION.title
-                        : isAiBusinessSystemsService
-                          ? AI_WHY_BUILD_SECTION.title
-                          : "Operating choices, not adjectives."
+              isSaasService
+                ? SAAS_WHY_FOUNDERS_SECTION.title
+                : isMobileAppsService
+                  ? MOBILE_WHY_BUILD_SECTION.title
+                  : isAutomationService
+                    ? AUTOMATION_WHY_BUILD_SECTION.title
+                    : isTechnicalSeoService
+                      ? TECHNICAL_SEO_WHY_SECTION.title
+                      : isAiBusinessSystemsService
+                        ? AI_WHY_BUILD_SECTION.title
+                        : "Operating choices, not adjectives."
             }
             description={
-              isWebsitesService
-                ? WEBSITES_WHY_CHOOSE_SECTION.description
-                : isSaasService
-                  ? SAAS_WHY_FOUNDERS_SECTION.description
-                  : isMobileAppsService
-                    ? MOBILE_WHY_BUILD_SECTION.description
-                    : isAutomationService
-                      ? AUTOMATION_WHY_BUILD_SECTION.description
-                      : isTechnicalSeoService
-                        ? TECHNICAL_SEO_WHY_SECTION.description
-                        : isAiBusinessSystemsService
-                          ? AI_WHY_BUILD_SECTION.description
-                          : "The decisions that shape how this work actually feels to use, ship, and maintain."
+              isSaasService
+                ? SAAS_WHY_FOUNDERS_SECTION.description
+                : isMobileAppsService
+                  ? MOBILE_WHY_BUILD_SECTION.description
+                  : isAutomationService
+                    ? AUTOMATION_WHY_BUILD_SECTION.description
+                    : isTechnicalSeoService
+                      ? TECHNICAL_SEO_WHY_SECTION.description
+                      : isAiBusinessSystemsService
+                        ? AI_WHY_BUILD_SECTION.description
+                        : "The decisions that shape how this work actually feels to use, ship, and maintain."
             }
           />
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
@@ -984,22 +1165,37 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </RevealItem>
             ))}
           </RevealGroup>
+            </>
+          )}
         </Container>
       </Section>
 
       <Section {...marketingSection(serviceSectionPage, "process")}>
         <Container>
           {isWebsitesService ? (
-            <>
-              <SectionHeading
-                eyebrow={WEBSITES_LAUNCH_PROCESS_SECTION.eyebrow}
-                title={WEBSITES_LAUNCH_PROCESS_SECTION.title}
-                description={WEBSITES_LAUNCH_PROCESS_SECTION.description}
-              />
-              <div className="mt-10">
-                <WebsiteLaunchProcessTimeline steps={[...WEBSITES_LAUNCH_PROCESS_SECTION.steps]} />
-              </div>
-            </>
+            <MarketingViewportGate
+              mobile={
+                <ProcessStepsMobile
+                  steps={[...WEBSITES_LAUNCH_PROCESS_SECTION.steps]}
+                  eyebrow={WEBSITES_LAUNCH_PROCESS_SECTION.eyebrow}
+                  titleLead={WEBSITES_LAUNCH_PROCESS_SECTION.titleLead}
+                  titleAccent={WEBSITES_LAUNCH_PROCESS_SECTION.titleAccent}
+                  description={WEBSITES_LAUNCH_PROCESS_SECTION.description}
+                />
+              }
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={WEBSITES_LAUNCH_PROCESS_SECTION.eyebrow}
+                    title={WEBSITES_LAUNCH_PROCESS_SECTION.title}
+                    description={WEBSITES_LAUNCH_PROCESS_SECTION.description}
+                  />
+                  <div className="mt-10">
+                    <WebsiteLaunchProcessTimeline steps={[...WEBSITES_LAUNCH_PROCESS_SECTION.steps]} />
+                  </div>
+                </>
+              }
+            />
           ) : isSaasService ? (
             <>
               <SectionHeading
@@ -1074,6 +1270,37 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         !isAiBusinessSystemsService && (
         <Section {...marketingSection(serviceSectionPage, "proof")}>
           <Container>
+            {isWebsitesService ? (
+              <MarketingViewportGate
+                mobile={
+                  <ServiceFeaturedProofMobile
+                    eyebrow={WEBSITES_PROOF_SECTION.eyebrow}
+                    title={WEBSITES_PROOF_SECTION.title}
+                    titleLead={WEBSITES_PROOF_SECTION.titleLead}
+                    titleAccent={WEBSITES_PROOF_SECTION.titleAccent}
+                    projects={related}
+                  />
+                }
+                desktop={
+                  <>
+                    <div className="flex items-end justify-between gap-6 flex-wrap">
+                      <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
+                      <Link href="/portfolio" className="text-sm font-medium text-primary">
+                        View all <ArrowUpRightIcon className="inline size-4" />
+                      </Link>
+                    </div>
+                    <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
+                      {related.map((p) => (
+                        <RevealItem key={p.slug} className="h-full">
+                          <PortfolioCard project={p} />
+                        </RevealItem>
+                      ))}
+                    </RevealGroup>
+                  </>
+                }
+              />
+            ) : (
+              <>
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
               <Link href="/portfolio" className="text-sm font-medium text-primary">
@@ -1087,6 +1314,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 </RevealItem>
               ))}
             </RevealGroup>
+              </>
+            )}
           </Container>
         </Section>
       )}
@@ -1123,51 +1352,105 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <Section {...marketingSection(serviceSectionPage, "faq")}>
         <Container width="reading">
+          {isWebsitesService ? (
+            <MarketingViewportGate
+              mobile={
+                <ServiceFaqMobile
+                  eyebrow={WEBSITES_SERVICE_FAQ_SECTION.eyebrow}
+                  title={WEBSITES_SERVICE_FAQ_SECTION.title}
+                  titleLead={WEBSITES_SERVICE_FAQ_SECTION.titleLead}
+                  titleAccent={WEBSITES_SERVICE_FAQ_SECTION.titleAccent}
+                  description={WEBSITES_SERVICE_FAQ_SECTION.description}
+                  items={copy.faq.map((item) => ({ ...item }))}
+                />
+              }
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow="FAQ"
+                    title="Common website project questions, answered."
+                    description="Timelines, ownership, platforms, support, and pricing—covered before you book a call."
+                    align="center"
+                  />
+                  <div className="mt-10">
+                    <Accordion items={copy.faq} />
+                  </div>
+                </>
+              }
+            />
+          ) : (
+            <>
           <SectionHeading
             eyebrow="FAQ"
             title={
-              isWebsitesService
-                ? "Common website project questions, answered."
-                : isSaasService
-                  ? "Common SaaS project questions, answered."
-                  : isMobileAppsService
-                    ? "Common mobile product questions, answered."
-                    : isAutomationService
-                      ? "Common automation questions, answered."
-                      : isTechnicalSeoService
-                        ? "Common technical SEO questions, answered."
-                        : isAiBusinessSystemsService
-                          ? "Common AI implementation questions, answered."
-                          : `${copy.eyebrow} questions, answered.`
+              isSaasService
+                ? "Common SaaS project questions, answered."
+                : isMobileAppsService
+                  ? "Common mobile product questions, answered."
+                  : isAutomationService
+                    ? "Common automation questions, answered."
+                    : isTechnicalSeoService
+                      ? "Common technical SEO questions, answered."
+                      : isAiBusinessSystemsService
+                        ? "Common AI implementation questions, answered."
+                        : `${copy.eyebrow} questions, answered.`
             }
             description={
-              isWebsitesService
-                ? "Timelines, ownership, platforms, support, and pricing—covered before you book a call."
-                : isSaasService
-                  ? "MVP timelines, stack, ownership, integrations, and post-launch support—covered before you book a call."
-                  : isMobileAppsService
-                    ? "Platforms, MVPs, store submission, ownership, and post-launch support—covered before you book a call."
-                    : isAutomationService
-                      ? "Platforms, failures, data handling, implementation timelines, and expansion—covered before you book a call."
-                      : isTechnicalSeoService
-                        ? "Setup scope, rankings, analytics, schema, Core Web Vitals, and post-launch support—covered before you book a call."
-                        : isAiBusinessSystemsService
-                          ? "Use cases, integrations, data handling, implementation timelines, and ongoing support—covered before you book a call."
-                          : undefined
+              isSaasService
+                ? "MVP timelines, stack, ownership, integrations, and post-launch support—covered before you book a call."
+                : isMobileAppsService
+                  ? "Platforms, MVPs, store submission, ownership, and post-launch support—covered before you book a call."
+                  : isAutomationService
+                    ? "Platforms, failures, data handling, implementation timelines, and expansion—covered before you book a call."
+                    : isTechnicalSeoService
+                      ? "Setup scope, rankings, analytics, schema, Core Web Vitals, and post-launch support—covered before you book a call."
+                      : isAiBusinessSystemsService
+                        ? "Use cases, integrations, data handling, implementation timelines, and ongoing support—covered before you book a call."
+                        : undefined
             }
             align="center"
           />
           <div className="mt-10">
             <Accordion items={copy.faq} />
           </div>
+            </>
+          )}
         </Container>
       </Section>
 
-      <CTABand
-        title={
-          isWebsitesService
-            ? WEBSITES_SERVICE_CTA.title
-            : isSaasService
+      {isWebsitesService ? (
+        <MarketingViewportGate
+          mobile={
+            <ProductLedFinalCTAMobile
+              eyebrow="Next step"
+              titleLead={WEBSITES_SERVICE_CTA.titleLead}
+              titleAccent={WEBSITES_SERVICE_CTA.titleAccent}
+              description={WEBSITES_SERVICE_CTA.description}
+              primaryLabel={WEBSITES_SERVICE_CTA.primaryLabel}
+              primaryHref={WEBSITES_SERVICE_CTA.primaryHref}
+              secondaryLabel={WEBSITES_SERVICE_CTA.secondaryLabel}
+              secondaryHref={WEBSITES_SERVICE_CTA.secondaryHref}
+            />
+          }
+          desktop={
+            <CTABand
+              title={WEBSITES_SERVICE_CTA.title}
+              description={WEBSITES_SERVICE_CTA.description}
+              primary={{
+                label: WEBSITES_SERVICE_CTA.primaryLabel,
+                href: WEBSITES_SERVICE_CTA.primaryHref,
+              }}
+              secondary={{
+                label: WEBSITES_SERVICE_CTA.secondaryLabel,
+                href: WEBSITES_SERVICE_CTA.secondaryHref,
+              }}
+            />
+          }
+        />
+      ) : (
+        <CTABand
+          title={
+            isSaasService
               ? SAAS_SERVICE_CTA.title
               : isMobileAppsService
                 ? MOBILE_APPS_SERVICE_CTA.title
@@ -1178,11 +1461,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     : isAiBusinessSystemsService
                       ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.title
                       : `${copy.primaryCta} — let's talk specifics.`
-        }
-        description={
-          isWebsitesService
-            ? WEBSITES_SERVICE_CTA.description
-            : isSaasService
+          }
+          description={
+            isSaasService
               ? SAAS_SERVICE_CTA.description
               : isMobileAppsService
                 ? MOBILE_APPS_SERVICE_CTA.description
@@ -1193,11 +1474,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     : isAiBusinessSystemsService
                       ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.description
                       : "A 30-minute discovery call. A written plan within 48 hours. Your call on whether to move forward."
-        }
-        primary={{
-          label: isWebsitesService
-            ? WEBSITES_SERVICE_CTA.primaryLabel
-            : isSaasService
+          }
+          primary={{
+            label: isSaasService
               ? SAAS_SERVICE_CTA.primaryLabel
               : isMobileAppsService
                 ? MOBILE_APPS_SERVICE_CTA.primaryLabel
@@ -1208,9 +1487,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     : isAiBusinessSystemsService
                       ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.primaryLabel
                       : copy.primaryCta,
-          href: isWebsitesService
-            ? WEBSITES_SERVICE_CTA.primaryHref
-            : isSaasService
+            href: isSaasService
               ? SAAS_SERVICE_CTA.primaryHref
               : isMobileAppsService
                 ? MOBILE_APPS_SERVICE_CTA.primaryHref
@@ -1221,11 +1498,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     : isAiBusinessSystemsService
                       ? AI_BUSINESS_SYSTEMS_SERVICE_CTA.primaryHref
                       : "/book-appointment",
-        }}
-        secondary={
-          isWebsitesService
-            ? { label: WEBSITES_SERVICE_CTA.secondaryLabel, href: WEBSITES_SERVICE_CTA.secondaryHref }
-            : isSaasService
+          }}
+          secondary={
+            isSaasService
               ? { label: SAAS_SERVICE_CTA.secondaryLabel, href: SAAS_SERVICE_CTA.secondaryHref }
               : isMobileAppsService
                 ? {
@@ -1248,8 +1523,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                           href: AI_BUSINESS_SYSTEMS_SERVICE_CTA.secondaryHref,
                         }
                       : { label: "Open WhatsApp", href: WHATSAPP_HREF }
-        }
-      />
+          }
+        />
+      )}
     </>
   );
 }

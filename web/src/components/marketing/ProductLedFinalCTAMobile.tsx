@@ -20,6 +20,8 @@ const FEATURE_ICONS = [BoltIcon, UserGroupIcon, ShieldCheckIcon];
 type ProductLedFinalCTAMobileProps = {
   eyebrow: string;
   title?: string;
+  titleLead?: string;
+  titleAccent?: string;
   description: string;
   primaryLabel: string;
   primaryHref: string;
@@ -29,6 +31,9 @@ type ProductLedFinalCTAMobileProps = {
 
 export function ProductLedFinalCTAMobile({
   eyebrow,
+  title,
+  titleLead,
+  titleAccent,
   description,
   primaryLabel,
   primaryHref,
@@ -36,6 +41,9 @@ export function ProductLedFinalCTAMobile({
   secondaryHref,
 }: ProductLedFinalCTAMobileProps) {
   const shell = homeSection("final-cta");
+  const resolvedTitleLead = titleLead ?? HOME_FINAL_CTA_MOBILE_COPY.titleLead;
+  const resolvedTitleAccent = titleAccent ?? HOME_FINAL_CTA_MOBILE_COPY.titleAccent;
+  const useAccentTitle = !title && Boolean(resolvedTitleLead && resolvedTitleAccent);
 
   return (
     <Section {...shell}>
@@ -43,8 +51,9 @@ export function ProductLedFinalCTAMobile({
         <div className="home-mobile-marketing__final-cta-card">
           <MobileMarketingSectionHeader
             eyebrow={eyebrow}
-            titleLead={HOME_FINAL_CTA_MOBILE_COPY.titleLead}
-            titleAccent={HOME_FINAL_CTA_MOBILE_COPY.titleAccent}
+            titleLead={useAccentTitle ? resolvedTitleLead : undefined}
+            titleAccent={useAccentTitle ? resolvedTitleAccent : undefined}
+            title={useAccentTitle ? undefined : title}
             description={description}
             align="left"
             className="home-mobile-marketing__header--left max-w-none"
