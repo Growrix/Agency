@@ -53,18 +53,16 @@ function FilterChip({
 function SidebarGroup({
   group,
   onSelect,
-  mobile = false,
 }: {
   group: ShopFilterGroup;
   onSelect: (patch: Partial<ShopFilterState>) => void;
-  mobile?: boolean;
 }) {
   return (
     <div className="min-w-0">
-      <p className={cn("mb-1.5 font-mono uppercase tracking-[0.16em] text-primary", mobile ? "text-(length:--home-mobile-marketing-card-label-size)" : "text-[9px] text-text-muted")}>
+      <p className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-text-muted">
         {group.label}
       </p>
-      <div className={cn("flex flex-wrap gap-1.5", !mobile && "lg:flex-col")}>
+      <div className="flex flex-wrap gap-1.5 lg:flex-col">
         <FilterChip
           label={`All ${group.label}`}
           isActive={!group.activeValue}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
@@ -17,8 +17,6 @@ import {
   getWebsiteTemplateHtmlPreviewUrl,
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
 } from "@/lib/website-templates-html-preview";
-
-const PROFILE_ROW_PREVIEW_MAX_HEIGHT = 120;
 
 type ShopProductHomeMobileRowCardProps = {
   product: ShopProduct;
@@ -54,34 +52,64 @@ export function ShopProductHomeMobileRowCard({
     rootMargin: requiresClickToLoad ? "0px 0px" : undefined,
   });
   const shouldMountIframe = requiresClickToLoad ? liveActivated : shouldRenderPreview;
+  const previewCellRef = useRef<HTMLDivElement>(null);
+  const [profilePreviewHeight, setProfilePreviewHeight] = useState<number | undefined>();
+
+  useEffect(() => {
+    if (!useProfileMobileLayout) {
+      return;
+    }
+
+    const node = previewCellRef.current;
+    if (!node) {
+      return;
+    }
+
+    const updateHeight = () => setProfilePreviewHeight(node.clientHeight);
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [useProfileMobileLayout]);
+
+  const setPreviewCellRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      previewRef.current = node;
+      previewCellRef.current = node;
+    },
+    [previewRef],
+  );
 
   return (
     <article
       className={cn(
         "home-mobile-marketing__product-row",
         useProfileMobileLayout && "home-mobile-marketing__product-row--profile-mobile",
+        !useProfileMobileLayout && "home-mobile-marketing__product-row--split-desktop",
       )}
     >
-      <div ref={previewRef} className="home-mobile-marketing__product-row-preview">
+      <div ref={setPreviewCellRef} className="home-mobile-marketing__product-row-preview">
         {previewUrl ? (
           shouldMountIframe ? (
             useProfileMobileLayout ? (
               <WebsiteTemplateHtmlMobilePreviewFrame
                 previewUrl={previewUrl}
                 title={`${product.name} preview`}
-                maxFrameHeight={PROFILE_ROW_PREVIEW_MAX_HEIGHT}
+                maxFrameHeight={profilePreviewHeight}
+                contentAlign="start"
                 showViewportLabel={false}
                 iframeLoading="lazy"
-                className="home-mobile-marketing__product-row-frame"
+                className="home-mobile-marketing__product-row-frame home-mobile-marketing__product-row-frame--profile"
               />
             ) : (
               <WebsiteTemplateHtmlDesktopPreviewFrame
                 previewUrl={previewUrl}
                 title={`${product.name} preview`}
-                fit="cover"
+                fit="contain"
+                measureDocumentHeight={false}
                 verticalAlign="top"
-                className="home-mobile-marketing__product-row-frame home-mobile-marketing__product-row-frame--desktop"
-                frameClassName="h-full"
+                className="home-mobile-marketing__product-row-frame home-mobile-marketing__product-row-frame--fit-width"
                 iframeLoading="lazy"
               />
             )

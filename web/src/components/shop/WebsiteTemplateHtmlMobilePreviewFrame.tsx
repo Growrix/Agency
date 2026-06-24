@@ -17,6 +17,8 @@ type WebsiteTemplateHtmlMobilePreviewFrameProps = {
   className?: string;
   /** Scales the device down so the frame fits this max height (px). Omit for native 390×844 frame height. */
   maxFrameHeight?: number;
+  /** Vertical alignment when the scaled frame is shorter than its container. */
+  contentAlign?: "center" | "start";
   showViewportLabel?: boolean;
   iframeLoading?: "lazy" | "eager";
 };
@@ -26,6 +28,7 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
   title,
   className,
   maxFrameHeight,
+  contentAlign = "center",
   showViewportLabel = true,
   iframeLoading = "lazy",
 }: WebsiteTemplateHtmlMobilePreviewFrameProps) {
@@ -60,8 +63,21 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
   const scaledHeight = HTML_MOBILE_FRAME_HEIGHT * scale;
 
   return (
-    <div ref={containerRef} className={cn("w-full min-w-0 overflow-hidden", className)}>
-      <div className="flex w-full justify-center" style={{ height: scaledHeight }}>
+    <div
+      ref={containerRef}
+      className={cn(
+        "w-full min-w-0 overflow-hidden",
+        contentAlign === "start" && "h-full",
+        className,
+      )}
+    >
+      <div
+        className={cn(
+          "flex w-full",
+          contentAlign === "start" ? "h-full items-start justify-center" : "justify-center",
+        )}
+        style={contentAlign === "center" ? { height: scaledHeight } : undefined}
+      >
         <div
           className="origin-top"
           style={{

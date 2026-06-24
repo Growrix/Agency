@@ -1178,8 +1178,13 @@ body {
 
 .home-mobile-marketing__product-row--profile-mobile .home-mobile-marketing__product-row-preview {
   width: var(--home-mobile-marketing-product-row-preview-width-compact);
-  height: var(--home-mobile-marketing-product-row-preview-height-compact);
-  min-height: 0;
+  min-height: var(--home-mobile-marketing-product-row-preview-height-compact);
+  height: auto;
+  align-self: stretch;
+}
+
+.home-mobile-marketing__product-row--split-desktop .home-mobile-marketing__product-row-preview {
+  min-height: var(--home-mobile-marketing-product-row-preview-min-height);
 }
 
 .home-mobile-marketing__product-row {
@@ -1215,6 +1220,19 @@ body {
 .home-mobile-marketing__product-row-frame--desktop {
   position: absolute;
   inset: 0;
+}
+
+.home-mobile-marketing__product-row-frame--profile {
+  position: relative;
+  inset: auto;
+  height: 100%;
+  min-height: 0;
+}
+
+.home-mobile-marketing__product-row-frame--fit-width {
+  position: absolute;
+  inset: 0;
+  height: 100%;
 }
 
 .home-mobile-marketing__product-row-loading {

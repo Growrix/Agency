@@ -20,6 +20,8 @@ type WebsiteTemplateHtmlDesktopPreviewFrameProps = {
   verticalAlign?: "top" | "center";
   /** Used only when fit="contain" and no height class is applied. */
   containerHeight?: number;
+  /** When false, contain scaling uses the viewport height instead of measured document height. */
+  measureDocumentHeight?: boolean;
   iframeLoading?: "lazy" | "eager";
 };
 
@@ -33,6 +35,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
   fit = "width",
   verticalAlign = "center",
   containerHeight,
+  measureDocumentHeight = true,
   iframeLoading = "lazy",
 }: WebsiteTemplateHtmlDesktopPreviewFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,7 +122,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
   const handleIframeLoad = () => {
     updateScale();
 
-    if (fit !== "contain") {
+    if (fit !== "contain" || !measureDocumentHeight) {
       return;
     }
 

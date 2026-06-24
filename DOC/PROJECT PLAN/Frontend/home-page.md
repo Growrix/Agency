@@ -43,12 +43,12 @@ depends_on:
 ### 4b. Ready-Made Solutions
 - Content: tabbed website templates and HTML business profile previews.
 - Components: `ReadyMadeSolutionsSection`, `ReadyMadeSolutionsMobile`, `ReadyMadeSolutionsDesktop`, `ShopProductHomeMobileRowCard`.
-- Interaction notes: section 3 on `/`. Mobile uses `.home-mobile-marketing__*` tokens, accent title split, pill tabs, monitor note, and horizontal product rows with **50/50 desktop preview** (`WebsiteTemplateHtmlDesktopPreviewFrame`).
+- Interaction notes: section 3 on `/`. Mobile uses `.home-mobile-marketing__*` tokens, accent title split, pill tabs, monitor note, and horizontal product rows with **50/50 desktop preview** (`WebsiteTemplateHtmlDesktopPreviewFrame`, `fit="contain"` viewport-fit).
 
 ### 4c. Templates Marketplace (HTML Business Profiles)
 - Content: featured HTML business profile cards with preview CTAs.
 - Components: `HomeTemplatesMarketplaceSection`, `ShopProductHomeMobileRowCard` (`previewLayout="profile-mobile"`).
-- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and compact horizontal row cards with **phone-frame** previews (narrow column + mobile iframe).
+- Interaction notes: mobile uses centered marketing header, dual pill CTAs, and compact horizontal row cards with **phone-frame** previews (narrow column stretches to card body height; mobile iframe scales to fill the preview cell).
 
 ### 4d. Featured Templates
 - Components: `FeaturedProducts` with mobile gate — centered header, browse CTA, horizontal row cards for html-preview variant.
