@@ -49,6 +49,8 @@ export const HOME_HERO_TRUSTED_LOGOS = [
 export const HOME_SERVICES_COPY = {
   eyebrow: "Services",
   title: "Launch faster. Scale smarter.",
+  titleLead: "Launch faster.",
+  titleAccent: "Scale smarter.",
   description:
     "Choose the templates you need—or let our experts customize, deploy, and grow them alongside your business.",
   compareCta: "Compare all services",
@@ -67,6 +69,8 @@ export const HOME_SERVICE_OUTCOME_DESCRIPTIONS: Record<string, string> = {
 export const HOME_TEMPLATES_MARKETPLACE_COPY = {
   eyebrow: "Templates marketplace",
   title: "Launch weeks faster using proven systems.",
+  titleLead: "Launch weeks faster using",
+  titleAccent: "proven systems.",
   description:
     "Browse category-based business profiles and website templates you can preview, purchase, and launch without starting from scratch.",
   previewProfilesCta: "Preview all profiles",
@@ -78,6 +82,8 @@ export const HOME_TEMPLATES_MARKETPLACE_COPY = {
 export const HOME_PREVIEW_COPY = {
   eyebrow: "See every experience",
   title: "See every experience before you launch.",
+  titleLead: "See every experience",
+  titleAccent: "before you launch.",
   description:
     "Preview desktop and mobile versions side-by-side to ensure your website, portal, or application looks and performs exactly as intended.",
 } as const;
@@ -85,6 +91,8 @@ export const HOME_PREVIEW_COPY = {
 export const HOME_FIELD_NOTES_COPY = {
   eyebrow: "Field notes",
   title: "Long-form writing from the studio.",
+  titleLead: "Long-form writing from",
+  titleAccent: "the studio.",
   description:
     "Engineering deep-dives, design system reflections, and quarterly notes on what we shipped.",
   ctaLabel: "Visit the blog",
@@ -105,6 +113,8 @@ export const HOME_CASE_STUDY_TABS = [
 export const HOME_DIGITAL_PRODUCTS_CONVERSION_COPY = {
   eyebrow: "Digital products",
   title: "Launch proven digital products in days, not months.",
+  titleLead: "Launch proven digital products in",
+  titleAccent: "days, not months.",
   description:
     "Ready-made business systems, client portals, directories, dashboards, and niche applications designed to accelerate growth.",
   ctaLabel: "Open full catalog",
@@ -119,9 +129,20 @@ export const HOME_READY_MADE_SOLUTIONS_COPY = {
     "Browse professionally built systems designed to help businesses launch faster, operate smarter, and scale with confidence.",
 } as const;
 
+export const HOME_FEATURED_TEMPLATES_COPY = {
+  eyebrow: "Featured templates",
+  title: "Production-ready templates with live desktop preview",
+  titleLead: "Production-ready templates with",
+  titleAccent: "live desktop preview",
+  description:
+    "Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems.",
+} as const;
+
 export const HOME_THREE_PATH_COPY = {
   eyebrow: "Choose your path",
   title: "Choose the way you want to build.",
+  titleLead: "Choose the way you want",
+  titleAccent: "to build.",
   description:
     "Whether you want to launch yourself, work alongside experts, or hand everything off, GrowrixOS adapts to your workflow.",
 } as const;
@@ -154,6 +175,8 @@ export const HOME_THREE_PATH_CARDS = [
 export const HOME_CASE_STUDIES_COPY = {
   eyebrow: "Case studies",
   title: "Proof from launches that moved the needle.",
+  titleLead: "Proof from launches that",
+  titleAccent: "moved the needle.",
   description:
     "Real outcomes from product buyers and service clients—launch-ready quality, clear communication, and measurable growth.",
 } as const;
@@ -161,6 +184,8 @@ export const HOME_CASE_STUDIES_COPY = {
 export const HOME_OPERATING_SYSTEM_COPY = {
   eyebrow: "Operating system",
   title: "An operating system you can plan launches around.",
+  titleLead: "An operating system you can",
+  titleAccent: "plan launches around.",
   description:
     "Every engagement runs through a clear phase model with explicit outputs, so you always know what ships next.",
 } as const;
@@ -168,6 +193,8 @@ export const HOME_OPERATING_SYSTEM_COPY = {
 export const HOME_AI_COPY = {
   eyebrow: "AI Growrix OS",
   title: "Make better decisions and move faster with AI-powered assistance.",
+  titleLead: "Make better decisions and",
+  titleAccent: "move faster with AI-powered assistance.",
   description:
     "Ask about scope, pricing, product fit, or timelines before you book—then route into the right product or service path.",
   privacyNote: "Conversations are private and never used to train models.",
@@ -178,6 +205,20 @@ export const HOME_AI_COPY = {
     { label: "Expert guided", description: "Human handoff when needed" },
     { label: "No spam", description: "Never used to train models" },
   ] as const,
+} as const;
+
+export const HOME_TESTIMONIALS_COPY = {
+  eyebrow: "Proof",
+  title: "Teams that shipped with GrowrixOS",
+  titleLead: "Teams that shipped with",
+  titleAccent: "GrowrixOS",
+  description:
+    "Product buyers and service clients share the same bar — launch-ready quality, clear communication, and measurable outcomes.",
+} as const;
+
+export const HOME_FINAL_CTA_MOBILE_COPY = {
+  titleLead: "Browse ready-made assets or",
+  titleAccent: "book a free consultation.",
 } as const;
 
 export const HOME_FINAL_CTA_FEATURES = [

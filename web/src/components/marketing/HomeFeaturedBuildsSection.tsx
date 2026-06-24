@@ -29,12 +29,15 @@ function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeatured
     [projects],
   );
   const visibleProjects = activeTabId === "website-projects" ? websiteProjects : projects;
+  const displayTitle = title ?? HOME_CASE_STUDIES_COPY.title;
 
   return (
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={HOME_CASE_STUDIES_COPY.eyebrow}
-        title={title ?? HOME_CASE_STUDIES_COPY.title}
+        titleLead={displayTitle === HOME_CASE_STUDIES_COPY.title ? HOME_CASE_STUDIES_COPY.titleLead : undefined}
+        titleAccent={displayTitle === HOME_CASE_STUDIES_COPY.title ? HOME_CASE_STUDIES_COPY.titleAccent : undefined}
+        title={displayTitle}
         description={description ?? HOME_CASE_STUDIES_COPY.description}
         align="left"
         className="home-mobile-marketing__header--left max-w-none"

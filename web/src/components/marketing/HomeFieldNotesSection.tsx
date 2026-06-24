@@ -32,6 +32,8 @@ function HomeFieldNotesMobile({
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={eyebrow}
+        titleLead={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleLead : undefined}
+        titleAccent={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleAccent : undefined}
         title={title}
         description={description}
         align="left"

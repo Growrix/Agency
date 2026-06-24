@@ -30,6 +30,8 @@ function HomeHtmlPreviewMobile({
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={HOME_PREVIEW_COPY.eyebrow}
+        titleLead={title === HOME_PREVIEW_COPY.title ? HOME_PREVIEW_COPY.titleLead : undefined}
+        titleAccent={title === HOME_PREVIEW_COPY.title ? HOME_PREVIEW_COPY.titleAccent : undefined}
         title={title}
         description={description}
       />

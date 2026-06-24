@@ -19,7 +19,8 @@ export function ProcessStepsMobile({ steps }: ProcessStepsMobileProps) {
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={HOME_OPERATING_SYSTEM_COPY.eyebrow}
-        title={HOME_OPERATING_SYSTEM_COPY.title}
+        titleLead={HOME_OPERATING_SYSTEM_COPY.titleLead}
+        titleAccent={HOME_OPERATING_SYSTEM_COPY.titleAccent}
         description={HOME_OPERATING_SYSTEM_COPY.description}
         align="left"
         className="home-mobile-marketing__header--left max-w-none"

@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
-import { HOME_FINAL_CTA_FEATURES } from "@/lib/home-conversion-content";
+import { HOME_FINAL_CTA_FEATURES, HOME_FINAL_CTA_MOBILE_COPY } from "@/lib/home-conversion-content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { homeSection } from "@/lib/homepage-composition";
 import { Container, Section } from "@/components/primitives/Container";
@@ -29,7 +29,6 @@ type ProductLedFinalCTAMobileProps = {
 
 export function ProductLedFinalCTAMobile({
   eyebrow,
-  title,
   description,
   primaryLabel,
   primaryHref,
@@ -44,7 +43,8 @@ export function ProductLedFinalCTAMobile({
         <div className="home-mobile-marketing__final-cta-card">
           <MobileMarketingSectionHeader
             eyebrow={eyebrow}
-            title={title}
+            titleLead={HOME_FINAL_CTA_MOBILE_COPY.titleLead}
+            titleAccent={HOME_FINAL_CTA_MOBILE_COPY.titleAccent}
             description={description}
             align="left"
             className="home-mobile-marketing__header--left max-w-none"

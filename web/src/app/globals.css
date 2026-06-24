@@ -259,6 +259,7 @@ body {
 /* Mobile marketing typography scale (< lg) — shared by hero and downstream sections */
 :root {
   --mobile-type-display-size: clamp(1.3125rem, 5.8vw, 1.5rem);
+  --mobile-type-hero-display-size: clamp(1.875rem, 8.2vw, 2.25rem);
   --mobile-type-display-leading: 1.05;
   --mobile-type-display-line-gap: 0;
   --mobile-type-display-tracking: -0.03em;
@@ -280,7 +281,7 @@ body {
   --home-hero-mobile-copy-max-width: min(100%, 20rem);
   --home-hero-mobile-eyebrow-size: var(--mobile-type-eyebrow-size);
   --home-hero-mobile-eyebrow-tracking: var(--mobile-type-eyebrow-tracking);
-  --home-hero-mobile-title-size: var(--mobile-type-display-size);
+  --home-hero-mobile-title-size: var(--mobile-type-hero-display-size);
   --home-hero-mobile-title-leading: var(--mobile-type-display-leading);
   --home-hero-mobile-title-line-gap: var(--mobile-type-display-line-gap);
   --home-hero-mobile-title-tracking: var(--mobile-type-display-tracking);
@@ -390,8 +391,8 @@ body {
   --home-mobile-marketing-card-label-size: var(--mobile-type-card-label-size);
   --home-mobile-marketing-card-price-size: var(--mobile-type-card-price-size);
   --home-mobile-marketing-card-meta-size: 0.5rem;
-  --home-mobile-marketing-product-row-preview-width: 5.5rem;
-  --home-mobile-marketing-product-row-preview-height: 6.75rem;
+  --home-mobile-marketing-product-row-preview-width: minmax(0, 1fr);
+  --home-mobile-marketing-product-row-preview-min-height: 8.5rem;
   --home-mobile-marketing-product-row-action-size: 2rem;
   --home-mobile-marketing-product-row-action-icon-size: 0.875rem;
   --home-mobile-marketing-note-size: var(--mobile-type-body-size);
@@ -1009,6 +1010,10 @@ body {
   text-wrap: balance;
 }
 
+.home-mobile-marketing__title-accent {
+  color: var(--color-primary);
+}
+
 .home-mobile-marketing__description {
   margin-top: var(--home-mobile-marketing-gap-title-desc);
   font-size: var(--home-mobile-marketing-desc-size);
@@ -1165,8 +1170,9 @@ body {
 
 .home-mobile-marketing__product-row {
   display: grid;
-  grid-template-columns: var(--home-mobile-marketing-product-row-preview-width) minmax(0, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.625rem;
+  align-items: stretch;
   padding: var(--home-mobile-marketing-card-padding);
   border: 1px solid var(--color-border);
   border-radius: var(--home-mobile-marketing-card-radius);
@@ -1176,16 +1182,23 @@ body {
 .home-mobile-marketing__product-row-preview {
   position: relative;
   overflow: hidden;
-  width: var(--home-mobile-marketing-product-row-preview-width);
-  height: var(--home-mobile-marketing-product-row-preview-height);
+  width: 100%;
+  min-height: var(--home-mobile-marketing-product-row-preview-min-height);
   flex-shrink: 0;
   border-radius: calc(var(--home-mobile-marketing-card-radius) - 0.25rem);
   background: color-mix(in srgb, var(--color-inset) 80%, #0a0a0a);
 }
 
 .home-mobile-marketing__product-row-frame {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.home-mobile-marketing__product-row-frame--desktop {
+  position: absolute;
+  inset: 0;
 }
 
 .home-mobile-marketing__product-row-loading {

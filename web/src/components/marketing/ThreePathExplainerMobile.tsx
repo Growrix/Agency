@@ -25,7 +25,8 @@ export function ThreePathExplainerMobile() {
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={HOME_THREE_PATH_COPY.eyebrow}
-        title={HOME_THREE_PATH_COPY.title}
+        titleLead={HOME_THREE_PATH_COPY.titleLead}
+        titleAccent={HOME_THREE_PATH_COPY.titleAccent}
         description={HOME_THREE_PATH_COPY.description}
         align="left"
         className="home-mobile-marketing__header--left max-w-none"

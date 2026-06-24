@@ -11,6 +11,7 @@ import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import type { PublicServiceRecord } from "@/server/domain/catalog";
 import { HOME_SERVICES_COPY, HOME_SERVICE_OUTCOME_DESCRIPTIONS } from "@/lib/home-conversion-content";
 import { HOME_SERVICE_ICONS } from "@/lib/home-services";
+import { MobileMarketingAccentTitle } from "@/components/marketing/mobile/MobileMarketingAccentTitle";
 import { SERVICES_MOBILE_TITLE_CLASS } from "@/lib/typography";
 
 type ServiceCardsMobileProps = {
@@ -27,7 +28,12 @@ export function ServiceCardsMobile({ services }: ServiceCardsMobileProps) {
           </Badge>
         </div>
 
-        <h2 className={SERVICES_MOBILE_TITLE_CLASS}>{HOME_SERVICES_COPY.title}</h2>
+        <h2 className={SERVICES_MOBILE_TITLE_CLASS}>
+          <MobileMarketingAccentTitle
+            lead={HOME_SERVICES_COPY.titleLead}
+            accent={HOME_SERVICES_COPY.titleAccent}
+          />
+        </h2>
 
         <p className="home-services-mobile__description">{HOME_SERVICES_COPY.description}</p>
 

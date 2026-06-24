@@ -34,12 +34,8 @@ export function ReadyMadeSolutionsMobile({ tabs, productsByTabId }: ReadyMadeSol
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={HOME_READY_MADE_SOLUTIONS_COPY.eyebrow}
-        title={
-          <>
-            {HOME_READY_MADE_SOLUTIONS_COPY.titleLead}{" "}
-            <span className="text-primary">{HOME_READY_MADE_SOLUTIONS_COPY.titleAccent}</span>
-          </>
-        }
+        titleLead={HOME_READY_MADE_SOLUTIONS_COPY.titleLead}
+        titleAccent={HOME_READY_MADE_SOLUTIONS_COPY.titleAccent}
         description={HOME_READY_MADE_SOLUTIONS_COPY.description}
       />
 

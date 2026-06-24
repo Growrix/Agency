@@ -5,9 +5,6 @@ import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section } from "@/components/primitives/Container";
-import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
-import { ShopProductHomeCatalogMobileCard } from "@/components/shop/ShopProductHomeCatalogMobileCard";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { cn } from "@/lib/utils";
 import {
@@ -81,57 +78,6 @@ function SidebarGroup({
           />
         ))}
       </div>
-    </div>
-  );
-}
-
-function HomeDigitalProductsMobile({ products }: HomeDigitalProductsShowcaseProps) {
-  const [filters, setFilters] = useState<ShopFilterState>({});
-  const filterOptions = useMemo(() => buildShopFilterOptions(products), [products]);
-  const filterGroups = useMemo(() => buildShopFilterGroups(filterOptions, filters), [filterOptions, filters]);
-  const filteredProducts = useMemo(() => filterShopProducts(products, filters), [products, filters]);
-  const visibleProducts = filteredProducts.slice(0, HOME_DISPLAY_LIMIT);
-
-  return (
-    <div className="home-mobile-marketing">
-      <MobileMarketingSectionHeader
-        eyebrow={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.eyebrow}
-        title={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.title}
-        description={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.description}
-      />
-
-      <div className="home-mobile-marketing__filters-card">
-        <p className="home-mobile-marketing__filters-title">Filters</p>
-        <div className="mt-3 space-y-3">
-          {filterGroups.map((group) => (
-            <SidebarGroup
-              key={group.key}
-              group={group}
-              mobile
-              onSelect={(patch) => setFilters((current) => ({ ...current, ...patch }))}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="home-mobile-marketing__catalog-toolbar">
-        <span className="home-mobile-marketing__catalog-count">
-          {visibleProducts.length} of {filteredProducts.length} products
-        </span>
-        <span className="home-mobile-marketing__catalog-sort">Sort by: Popular</span>
-      </div>
-
-      <div className="home-mobile-marketing__catalog-grid">
-        {visibleProducts.map((product, index) => (
-          <ShopProductHomeCatalogMobileCard key={product.slug} product={product} loadPriority={index === 0} />
-        ))}
-      </div>
-
-      {filteredProducts.length > HOME_DISPLAY_LIMIT ? (
-        <Link href={buildShopHref(filters, {})} className="home-mobile-marketing__footer-link mx-auto">
-          View all {filteredProducts.length} products <ArrowUpRightIcon className="size-3.5" aria-hidden />
-        </Link>
-      ) : null}
     </div>
   );
 }
@@ -252,14 +198,11 @@ export function HomeDigitalProductsShowcase({ products }: HomeDigitalProductsSho
     <Section
       id="digital-products-showcase"
       {...shell}
-      className="overflow-x-hidden"
+      className="hidden overflow-x-hidden lg:block"
       aria-labelledby="home-digital-products-title"
     >
       <Container className="min-w-0">
-        <MarketingViewportGate
-          mobile={<HomeDigitalProductsMobile products={products} />}
-          desktop={<HomeDigitalProductsDesktop products={products} />}
-        />
+        <HomeDigitalProductsDesktop products={products} />
       </Container>
     </Section>
   );

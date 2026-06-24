@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { HOME_TESTIMONIALS_COPY } from "@/lib/home-conversion-content";
 import { TESTIMONIALS } from "@/lib/content";
 
 export function TestimonialsMobile() {
   return (
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
-        eyebrow="Proof"
-        title="Teams that shipped with GrowrixOS"
-        description="Product buyers and service clients share the same bar — launch-ready quality, clear communication, and measurable outcomes."
+        eyebrow={HOME_TESTIMONIALS_COPY.eyebrow}
+        titleLead={HOME_TESTIMONIALS_COPY.titleLead}
+        titleAccent={HOME_TESTIMONIALS_COPY.titleAccent}
+        description={HOME_TESTIMONIALS_COPY.description}
       />
 
       <div className="home-mobile-marketing__stack">

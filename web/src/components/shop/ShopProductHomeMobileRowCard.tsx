@@ -5,17 +5,17 @@ import Link from "next/link";
 import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceholder";
+import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
 import {
   getWebsiteTemplateHtmlPreviewByProductSlug,
   getWebsiteTemplateHtmlPreviewUrl,
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
 } from "@/lib/website-templates-html-preview";
-
-const ROW_PREVIEW_MAX_HEIGHT = 120;
 
 type ShopProductHomeMobileRowCardProps = {
   product: ShopProduct;
@@ -37,6 +37,7 @@ export function ShopProductHomeMobileRowCard({
   const previewUrl = websiteTemplatePreview
     ? getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug)
     : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
+  const isProfile = product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug;
   const hasExternalPreview = Boolean(previewUrl);
   const usePosterFirst = previewLoadMode === "poster-first";
   const requiresClickToLoad = usePosterFirst;
@@ -52,14 +53,25 @@ export function ShopProductHomeMobileRowCard({
       <div ref={previewRef} className="home-mobile-marketing__product-row-preview">
         {previewUrl ? (
           shouldMountIframe ? (
-            <WebsiteTemplateHtmlMobilePreviewFrame
-              previewUrl={previewUrl}
-              title={`${product.name} preview`}
-              maxFrameHeight={ROW_PREVIEW_MAX_HEIGHT}
-              showViewportLabel={false}
-              iframeLoading="lazy"
-              className="home-mobile-marketing__product-row-frame"
-            />
+            isProfile ? (
+              <WebsiteTemplateHtmlMobilePreviewFrame
+                previewUrl={previewUrl}
+                title={`${product.name} preview`}
+                showViewportLabel={false}
+                iframeLoading="lazy"
+                className="home-mobile-marketing__product-row-frame"
+              />
+            ) : (
+              <WebsiteTemplateHtmlDesktopPreviewFrame
+                previewUrl={previewUrl}
+                title={`${product.name} preview`}
+                fit="cover"
+                verticalAlign="top"
+                className="home-mobile-marketing__product-row-frame home-mobile-marketing__product-row-frame--desktop"
+                frameClassName="h-full"
+                iframeLoading="lazy"
+              />
+            )
           ) : requiresClickToLoad ? (
             <PreviewPosterPlaceholder title={product.name} onActivate={() => setLiveActivated(true)} />
           ) : (

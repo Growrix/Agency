@@ -43,7 +43,7 @@ depends_on:
 ### 4b. Ready-Made Solutions
 - Content: tabbed website templates and HTML business profile previews.
 - Components: `ReadyMadeSolutionsSection`, `ReadyMadeSolutionsMobile`, `ReadyMadeSolutionsDesktop`, `ShopProductHomeMobileRowCard`.
-- Interaction notes: section 3 on `/`. Mobile uses `.home-mobile-marketing__*` tokens, accent title split, pill tabs, monitor note, and horizontal product rows.
+- Interaction notes: section 3 on `/`. Mobile uses `.home-mobile-marketing__*` tokens, accent title split, pill tabs, monitor note, and horizontal product rows with **50/50 desktop preview** (`WebsiteTemplateHtmlDesktopPreviewFrame`).
 
 ### 4c. Templates Marketplace (HTML Business Profiles)
 - Content: featured HTML business profile cards with preview CTAs.
@@ -59,7 +59,7 @@ depends_on:
 
 ### 4f. Digital Products Showcase
 - Components: `HomeDigitalProductsShowcase`, `ShopProductHomeCatalogMobileCard`.
-- Interaction notes: mobile filter card (category/type chips), product count + sort toolbar, 2-column compact catalog grid.
+- Interaction notes: **hidden below `lg`** on homepage mobile; desktop filter sidebar + compact grid only.
 
 ### 4g. Three-Path Explainer
 - Components: `ThreePathExplainerMobile` / `ThreePathExplainerDesktop` — stacked path cards with icon, bullets, and pill CTAs on mobile.
@@ -173,7 +173,8 @@ depends_on:
 ## Responsive Adaptation
 - Desktop uses split hero with layered panels.
 - Tablet keeps two-column hero but compresses stats into a swipe row.
-- Mobile uses a single-column hero (`HomeHeroMobile`): **center-aligned** copy matching the approved mock — compact title scale (`clamp(1.875rem, 8.2vw, 2.25rem)`), 15px description, pill CTAs (48px height), divider-flanked trust logos (SVG manifest), live preview monitor with CSS phone bezel (desktop-scaled preview), carousel pagination, and a 2×2 feature grid with icon+label rows. `HomeHeroViewportGate` mounts only one hero layout for iframe budget (≤2). Sizing and spacing are token-driven via `.home-hero-mobile` in `globals.css`; mobile band does not force full viewport height.
+- Mobile uses a single-column hero (`HomeHeroMobile`): **center-aligned** copy matching the approved mock — title scale `clamp(1.875rem, 8.2vw, 2.25rem)` via `--mobile-type-hero-display-size`, 15px description, pill CTAs (48px height), divider-flanked trust logos (SVG manifest), live preview monitor with CSS phone bezel (desktop-scaled preview), carousel pagination, and a 2×2 feature grid with icon+label rows. `HomeHeroViewportGate` mounts only one hero layout for iframe budget (≤2). Sizing and spacing are token-driven via `.home-hero-mobile` in `globals.css`; mobile band does not force full viewport height.
+- Mobile marketing sections use `titleLead` + `titleAccent` copy pairs and `MobileMarketingAccentTitle` for teal punch-word highlights (same pattern as hero).
 - Sticky bottom dock, swipeable proofs, and sheet-based quick previews apply elsewhere on the page.
 
 ## SEO and Metadata

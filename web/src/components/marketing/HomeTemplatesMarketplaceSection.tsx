@@ -29,7 +29,8 @@ function HomeTemplatesMarketplaceMobile({ products }: HomeTemplatesMarketplaceSe
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
         eyebrow={HOME_TEMPLATES_MARKETPLACE_COPY.eyebrow}
-        title={HOME_TEMPLATES_MARKETPLACE_COPY.title}
+        titleLead={HOME_TEMPLATES_MARKETPLACE_COPY.titleLead}
+        titleAccent={HOME_TEMPLATES_MARKETPLACE_COPY.titleAccent}
         description={HOME_TEMPLATES_MARKETPLACE_COPY.description}
       />
 
