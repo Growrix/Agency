@@ -5,6 +5,8 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { ShopStickyFilterSidebar } from "@/components/shop/ShopStickyFilterSidebar";
+import { ShopPageMobile } from "@/components/shop/ShopPageMobile";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { PRODUCT_CATEGORY_CHIPS, PRODUCT_INDEX_COPY } from "@/lib/product-led-content";
 import {
   buildShopFilterGroups,
@@ -87,7 +89,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
 
   const filterGroups: ShopFilterGroup[] = buildShopFilterGroups(filterOptions, filters);
 
-  return (
+  const desktopView = (
     <>
       {/* Page header */}
       <Section className="border-b border-border pb-6 pt-10 sm:pt-14">
@@ -190,5 +192,21 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
         </Container>
       </Section>
     </>
+  );
+
+  const mobileView = (
+    <ShopPageMobile
+      filters={filters}
+      filterGroups={filterGroups}
+      allProducts={allProducts}
+      filteredProducts={filteredProducts}
+    />
+  );
+
+  return (
+    <MarketingViewportGate
+      desktop={desktopView}
+      mobile={mobileView}
+    />
   );
 }

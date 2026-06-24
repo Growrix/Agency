@@ -600,6 +600,42 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   )}
                 </div>
 
+                {/* Mobile buy box — visible on small screens, right below preview */}
+                <div className="lg:hidden rounded-2xl border border-border bg-surface p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Starting from</p>
+                      <p className="mt-1 font-display text-2xl font-bold tracking-tight">{standardVariant.price}</p>
+                    </div>
+                    <span className="rounded-full border border-border bg-inset/40 px-2 py-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-text-muted">
+                      {product.type}
+                    </span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    <LinkButton
+                      href={getCheckoutHref(product, {
+                        variantSlug: standardVariant.slug,
+                        tierName: standardVariant.tier_name,
+                        fulfillmentType: standardVariant.fulfillment_type,
+                      })}
+                      size="sm"
+                      fullWidth
+                    >
+                      Download Template
+                    </LinkButton>
+                    <LinkButton
+                      href={previewHref}
+                      variant="outline"
+                      size="sm"
+                      fullWidth
+                      target={hasExternalPreview ? "_blank" : undefined}
+                      rel={hasExternalPreview ? "noreferrer" : undefined}
+                    >
+                      Live Preview
+                    </LinkButton>
+                  </div>
+                </div>
+
                 <HtmlBusinessProfileProductPreviewHighlights />
 
                 <div>
@@ -1043,6 +1079,44 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   ) : (
                     <ProductPreviewSurface variant={product.previewVariant} />
                   )}
+                </div>
+
+                {/* Mobile buy box — visible on small screens, right below preview */}
+                <div className="lg:hidden rounded-2xl border border-border bg-surface p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Starting from</p>
+                      <p className="mt-1 font-display text-2xl font-bold tracking-tight">
+                        {WEBSITE_TEMPLATE_TIER_PRESETS.standard.price}
+                      </p>
+                    </div>
+                    <span className="rounded-full border border-border bg-inset/40 px-2 py-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-text-muted">
+                      {product.type}
+                    </span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    <LinkButton
+                      href={getCheckoutHref(product, {
+                        variantSlug: standardVariant.slug,
+                        tierName: standardVariant.tier_name,
+                        fulfillmentType: standardVariant.fulfillment_type,
+                      })}
+                      size="sm"
+                      fullWidth
+                    >
+                      Get Template Access
+                    </LinkButton>
+                    <LinkButton
+                      href={previewHref}
+                      variant="outline"
+                      size="sm"
+                      fullWidth
+                      target={hasExternalPreview ? "_blank" : undefined}
+                      rel={hasExternalPreview ? "noreferrer" : undefined}
+                    >
+                      Live Preview
+                    </LinkButton>
+                  </div>
                 </div>
 
                 <WebsiteTemplateHtmlProductPreviewHighlights />
@@ -1503,6 +1577,42 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 ) : (
                   <ProductPreviewSurface variant={product.previewVariant} />
                 )}
+              </div>
+
+              {/* Mobile buy box — visible on small screens, right below preview */}
+              <div className="lg:hidden rounded-2xl border border-border bg-surface p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Starting from</p>
+                    <p className="mt-1 font-display text-2xl font-bold tracking-tight">{sidebarBasePriceLabel}</p>
+                  </div>
+                  <span className="rounded-full border border-border bg-inset/40 px-2 py-0.5 text-[10px] font-mono uppercase tracking-[0.18em] text-text-muted">
+                    {product.type}
+                  </span>
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <LinkButton
+                    href={getCheckoutHref(product, {
+                      variantSlug: sidebarPrimaryVariant.slug,
+                      tierName: sidebarPrimaryVariant.tier_name,
+                      fulfillmentType: sidebarPrimaryVariant.fulfillment_type,
+                    })}
+                    size="sm"
+                    fullWidth
+                  >
+                    {isWebsiteTemplateProduct ? "Get Template Access" : "Buy Now"}
+                  </LinkButton>
+                  <LinkButton
+                    href={previewHref}
+                    variant="outline"
+                    size="sm"
+                    fullWidth
+                    target={hasExternalPreview ? "_blank" : undefined}
+                    rel={hasExternalPreview ? "noreferrer" : undefined}
+                  >
+                    Preview
+                  </LinkButton>
+                </div>
               </div>
 
               {/* Template overview */}
