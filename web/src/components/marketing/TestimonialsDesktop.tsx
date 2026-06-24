@@ -1,6 +1,7 @@
 import { Card } from "@/components/primitives/Card";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Reveal } from "@/components/motion/Motion";
+import { HOME_TESTIMONIALS_COPY } from "@/lib/home-conversion-content";
 import { TESTIMONIALS } from "@/lib/content";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 
@@ -8,9 +9,11 @@ export function TestimonialsDesktop() {
   return (
     <>
       <SectionHeading
-        eyebrow="Proof"
-        title="Teams that shipped with GrowrixOS"
-        description="Product buyers and service clients share the same bar — launch-ready quality, clear communication, and measurable outcomes."
+        eyebrow={HOME_TESTIMONIALS_COPY.eyebrow}
+        title={HOME_TESTIMONIALS_COPY.title}
+        titleLead={HOME_TESTIMONIALS_COPY.titleLead}
+        titleAccent={HOME_TESTIMONIALS_COPY.titleAccent}
+        description={HOME_TESTIMONIALS_COPY.description}
         align="center"
         titleClassName={HERO_TITLE_CLASS}
       />

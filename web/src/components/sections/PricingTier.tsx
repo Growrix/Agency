@@ -9,6 +9,8 @@ import {
   getTierCardMutedTextClass,
 } from "@/components/sections/tierCardTheme";
 
+import type { MarketingTierIconKey } from "@/lib/marketing-tier-icons";
+
 export type Tier = {
   name: string;
   price: string;
@@ -20,6 +22,7 @@ export type Tier = {
   cta: { label: string; href: string };
   featured?: boolean;
   badge?: string;
+  iconKey?: MarketingTierIconKey;
 };
 
 export function PricingTier({ tier, className }: { tier: Tier; className?: string }) {

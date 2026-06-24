@@ -10,6 +10,8 @@ export const SAAS_SERVICE_STATS: Stat[] = [
 
 export const SAAS_SERVICE_HERO = {
   headline: "Build SaaS products that users actually adopt.",
+  headlineLead: "Build SaaS products",
+  headlineAccent: "users actually adopt.",
   description:
     "From MVPs and internal platforms to subscription products, we help founders and teams launch scalable SaaS applications without wasting months on unnecessary development.",
   secondaryCta: "View engagement models",
@@ -19,6 +21,8 @@ export const SAAS_SERVICE_HERO = {
 export const SAAS_PRODUCT_TYPES_SECTION = {
   eyebrow: "Product types",
   title: "Examples of SaaS applications we can build.",
+  titleLead: "Examples of SaaS applications",
+  titleAccent: "we can build.",
   description:
     "From internal business tools to customer-facing platforms, we help teams launch software designed around real workflows and measurable outcomes.",
   items: [
@@ -62,6 +66,8 @@ export const SAAS_PRODUCT_TYPES_SECTION = {
 export const SAAS_STACK_SECTION = {
   eyebrow: "Our stack",
   title: "Built for scale, speed, and long-term ownership.",
+  titleLead: "Built for scale, speed, and",
+  titleAccent: "long-term ownership.",
   description:
     "Every technology choice is made to support product growth, maintainability, performance, and future flexibility.",
   benefits: [
@@ -139,6 +145,8 @@ export const SAAS_STACK_GROUPS = [
 export const SAAS_SYSTEMS_SECTION = {
   eyebrow: "What we deliver",
   title: "The SaaS systems we help teams launch.",
+  titleLead: "The SaaS systems we help",
+  titleAccent: "teams launch.",
   description:
     "Practical software solutions designed to improve operations, customer experience, and business performance.",
   builds: [
@@ -172,6 +180,8 @@ export const SAAS_SYSTEMS_SECTION = {
 export const SAAS_WHY_FOUNDERS_SECTION = {
   eyebrow: "Why founders work with GrowrixOS",
   title: "Built for product growth, not just project delivery.",
+  titleLead: "Built for product growth,",
+  titleAccent: "not just project delivery.",
   description:
     "Every engagement is structured around creating usable products that can evolve, scale, and generate value long after launch.",
   cards: [
@@ -197,6 +207,8 @@ export const SAAS_WHY_FOUNDERS_SECTION = {
 export const SAAS_LAUNCH_PROCESS_SECTION = {
   eyebrow: "Our process",
   title: "How we take SaaS products from idea to launch.",
+  titleLead: "How we take SaaS products",
+  titleAccent: "from idea to launch.",
   description:
     "A structured approach designed to reduce risk, improve clarity, and accelerate product delivery.",
   steps: [
@@ -276,9 +288,20 @@ export const SAAS_SERVICE_FAQ = [
   },
 ] as const;
 
+export const SAAS_SERVICE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Common SaaS project questions, answered.",
+  titleLead: "Common SaaS project questions,",
+  titleAccent: "answered.",
+  description:
+    "MVP timelines, stack, ownership, integrations, and post-launch support—covered before you book a call.",
+} as const;
+
 export const SAAS_ENGAGEMENT_SECTION = {
   eyebrow: "Engagement models",
   title: "Choose the build path that matches your product stage.",
+  titleLead: "Choose the build path",
+  titleAccent: "that matches your product stage.",
   description:
     "Every SaaS product starts differently. Whether you're validating an idea, building a production-ready platform, or scaling a complex system, we'll recommend the right approach for your goals.",
   trustNote:
@@ -286,6 +309,7 @@ export const SAAS_ENGAGEMENT_SECTION = {
   tiers: [
     {
       name: "MVP Launch",
+      iconKey: "mvp-launch",
       price: "From $9,500",
       description:
         "For founders validating an idea and launching a functional first version of their product.",
@@ -303,6 +327,7 @@ export const SAAS_ENGAGEMENT_SECTION = {
     },
     {
       name: "Product Build",
+      iconKey: "product-build",
       price: "From $18,000",
       description:
         "For businesses building a production-ready SaaS platform designed for real users and growth.",
@@ -322,6 +347,7 @@ export const SAAS_ENGAGEMENT_SECTION = {
     },
     {
       name: "Custom Platform",
+      iconKey: "custom-platform",
       price: "Custom Scope",
       description:
         "For startups and organizations requiring advanced architecture, integrations, and custom business logic.",
@@ -342,6 +368,8 @@ export const SAAS_ENGAGEMENT_SECTION = {
 
 export const SAAS_SERVICE_CTA = {
   title: "Let's map your SaaS product.",
+  titleLead: "Let's map your",
+  titleAccent: "SaaS product.",
   description:
     "Book a 30-minute discovery session and leave with a clearer roadmap, technical approach, and launch strategy.",
   primaryLabel: "Start a SaaS Build",

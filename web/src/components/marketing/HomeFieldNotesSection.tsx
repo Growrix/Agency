@@ -78,7 +78,14 @@ function HomeFieldNotesDesktop({
   return (
     <>
       <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-        <SectionHeading eyebrow={eyebrow} title={title} description={description} titleClassName={HERO_TITLE_CLASS} />
+        <SectionHeading
+          eyebrow={eyebrow}
+          title={title}
+          titleLead={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleLead : undefined}
+          titleAccent={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleAccent : undefined}
+          description={description}
+          titleClassName={HERO_TITLE_CLASS}
+        />
         <LinkButton href={HOME_FIELD_NOTES_COPY.ctaHref} variant="outline">
           {HOME_FIELD_NOTES_COPY.ctaLabel} <ArrowUpRightIcon className="size-4" />
         </LinkButton>

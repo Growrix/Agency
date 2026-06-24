@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/motion/Motion";
+import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitle";
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -23,6 +24,8 @@ const DEFAULT_TITLE_CLASS = SECTION_TITLE_CLASS;
 export function SectionHeading({
   eyebrow,
   title,
+  titleLead,
+  titleAccent,
   description,
   align = "left",
   className,
@@ -30,13 +33,22 @@ export function SectionHeading({
   as: Tag = "h2",
 }: {
   eyebrow?: ReactNode;
-  title: ReactNode;
+  title?: ReactNode;
+  titleLead?: string;
+  titleAccent?: string;
   description?: ReactNode;
   align?: "left" | "center";
   className?: string;
   titleClassName?: string;
   as?: React.ElementType;
 }) {
+  const resolvedTitle =
+    titleLead && titleAccent ? (
+      <MarketingAccentTitle lead={titleLead} accent={titleAccent} />
+    ) : (
+      title
+    );
+
   return (
     <div
       className={cn(
@@ -52,7 +64,7 @@ export function SectionHeading({
       )}
       <Reveal delay={eyebrow ? 0.07 : 0}>
         <Tag className={cn(titleClassName ?? DEFAULT_TITLE_CLASS)}>
-          {title}
+          {resolvedTitle}
         </Tag>
       </Reveal>
       {description && (

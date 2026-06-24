@@ -23,6 +23,8 @@ export function HomeProcessSection() {
               <SectionHeading
                 eyebrow={HOME_OPERATING_SYSTEM_COPY.eyebrow}
                 title={HOME_OPERATING_SYSTEM_COPY.title}
+                titleLead={HOME_OPERATING_SYSTEM_COPY.titleLead}
+                titleAccent={HOME_OPERATING_SYSTEM_COPY.titleAccent}
                 description={HOME_OPERATING_SYSTEM_COPY.description}
                 titleClassName={HERO_TITLE_CLASS}
               />

@@ -8,6 +8,7 @@ import {
 } from "@/components/sections/WebsiteTemplateHtmlDualPreview";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 import { Container, Section } from "@/components/primitives/Container";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
@@ -65,10 +66,16 @@ function HomeHtmlPreviewDesktop({
 }: Omit<HomeHtmlPreviewSectionProps, "sectionShell">) {
   return (
     <>
-      <div className="flex flex-col gap-3 text-center">
-        <h2 className={HERO_TITLE_CLASS}>{title}</h2>
-        <p className="mx-auto max-w-3xl text-base leading-7 text-text-muted">{description}</p>
-      </div>
+      <SectionHeading
+        eyebrow={HOME_PREVIEW_COPY.eyebrow}
+        title={title}
+        titleLead={title === HOME_PREVIEW_COPY.title ? HOME_PREVIEW_COPY.titleLead : undefined}
+        titleAccent={title === HOME_PREVIEW_COPY.title ? HOME_PREVIEW_COPY.titleAccent : undefined}
+        description={description}
+        align="center"
+        titleClassName={HERO_TITLE_CLASS}
+        className="mx-auto max-w-3xl"
+      />
       <div className="mt-8 min-w-0 w-full">
         <WebsiteTemplateHtmlDesktopPreviewBlock slides={slides} emptyFallbackSlide={emptyFallbackSlide} posterFirst={false} />
       </div>

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section, type SectionLayout, type SectionSize, type SectionSpacing } from "@/components/primitives/Container";
 import { Eyebrow } from "@/components/primitives/SectionHeading";
+import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitle";
 import { SECTION_TITLE_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +11,8 @@ const DEFAULT_TITLE_CLASS = SECTION_TITLE_CLASS;
 export function CTABand({
   eyebrow = "Next step",
   title,
+  titleLead,
+  titleAccent,
   description,
   primary,
   secondary,
@@ -21,7 +24,9 @@ export function CTABand({
   tone = "default",
 }: {
   eyebrow?: ReactNode;
-  title: ReactNode;
+  title?: ReactNode;
+  titleLead?: string;
+  titleAccent?: string;
   description?: ReactNode;
   primary: { label: string; href: string };
   secondary?: { label: string; href: string };
@@ -32,6 +37,13 @@ export function CTABand({
   spacing?: SectionSpacing;
   tone?: "default" | "inset" | "dark";
 }) {
+  const resolvedTitle =
+    titleLead && titleAccent ? (
+      <MarketingAccentTitle lead={titleLead} accent={titleAccent} />
+    ) : (
+      title
+    );
+
   return (
     <Section size={size} layout={layout} spacing={spacing} tone={tone}>
       <Container>
@@ -53,7 +65,7 @@ export function CTABand({
               {eyebrow}
             </Eyebrow>
             <h2 className={cn(titleClassName ?? DEFAULT_TITLE_CLASS)}>
-              {title}
+              {resolvedTitle}
             </h2>
             {description && (
               <p className="mt-5 text-lg leading-7 text-contrast-muted text-pretty">{description}</p>

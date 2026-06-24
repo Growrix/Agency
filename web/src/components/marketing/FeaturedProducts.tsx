@@ -90,18 +90,30 @@ function FeaturedProductsDesktop({
   products,
   eyebrow,
   title,
+  titleLead,
+  titleAccent,
   description,
   ctaHref,
   ctaLabel,
   variant,
 }: Required<Pick<FeaturedProductsProps, "products">> &
-  Pick<FeaturedProductsProps, "eyebrow" | "title" | "description" | "ctaHref" | "ctaLabel" | "variant">) {
+  Pick<
+    FeaturedProductsProps,
+    "eyebrow" | "title" | "titleLead" | "titleAccent" | "description" | "ctaHref" | "ctaLabel" | "variant"
+  >) {
   const isHtmlPreview = variant === "html-preview";
 
   return (
     <>
       <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-        <SectionHeading eyebrow={eyebrow!} title={title!} description={description} titleClassName={HERO_TITLE_CLASS} />
+        <SectionHeading
+          eyebrow={eyebrow!}
+          title={title!}
+          titleLead={titleLead}
+          titleAccent={titleAccent}
+          description={description}
+          titleClassName={HERO_TITLE_CLASS}
+        />
         <LinkButton href={ctaHref!} variant="outline">
           {ctaLabel} <ArrowUpRightIcon className="size-4" />
         </LinkButton>

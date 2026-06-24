@@ -4,6 +4,7 @@ import { MarketingViewportGate } from "@/components/marketing/MarketingViewportG
 import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { CTABand } from "@/components/sections/CTABand";
 import { WHATSAPP_HREF } from "@/lib/nav";
+import { HOME_FINAL_CTA_MOBILE_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 
@@ -25,6 +26,7 @@ export function ProductLedFinalCTA({
   secondaryHref?: string;
 }) {
   const shell = homeSection("final-cta");
+  const useAccentTitle = title === "Browse ready-made assets or book a free consultation.";
 
   return (
     <MarketingViewportGate
@@ -44,6 +46,8 @@ export function ProductLedFinalCTA({
           {...shell}
           eyebrow={eyebrow}
           title={title}
+          titleLead={useAccentTitle ? HOME_FINAL_CTA_MOBILE_COPY.titleLead : undefined}
+          titleAccent={useAccentTitle ? HOME_FINAL_CTA_MOBILE_COPY.titleAccent : undefined}
           description={description}
           primary={{ label: primaryLabel, href: primaryHref }}
           secondary={{ label: secondaryLabel, href: secondaryHref ?? WHATSAPP_HREF }}

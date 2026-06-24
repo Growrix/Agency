@@ -45,26 +45,32 @@ export const WEBSITES_OUTCOMES_SECTION = {
     {
       title: "Lead Generation Websites",
       description: "Turn website traffic into qualified enquiries and sales conversations.",
+      icon: "lead-generation",
     },
     {
       title: "Product Launch Websites",
       description: "Launch new products, offers, and services with confidence.",
+      icon: "product-launch",
     },
     {
       title: "Client Portals",
       description: "Create smoother client experiences while reducing manual administration.",
+      icon: "client-portals",
     },
     {
       title: "Landing Pages",
       description: "Improve campaign performance and maximize conversion rates.",
+      icon: "landing-pages",
     },
     {
       title: "Internal Business Systems",
       description: "Streamline operations and reduce repetitive work.",
+      icon: "internal-systems",
     },
     {
       title: "Resource & Content Hubs",
       description: "Build authority, improve SEO visibility, and educate your audience.",
+      icon: "content-hubs",
     },
   ],
 } as const;
@@ -80,18 +86,22 @@ export const WEBSITES_WHY_CHOOSE_SECTION = {
     {
       title: "Conversion Frameworks",
       description: "Built around lead generation, customer actions, and measurable business goals.",
+      icon: "conversion-frameworks",
     },
     {
       title: "Modern Infrastructure",
       description: "Fast, secure, scalable foundations designed for long-term growth.",
+      icon: "modern-infrastructure",
     },
     {
       title: "Performance by Default",
       description: "Optimized for speed, responsiveness, and user experience from day one.",
+      icon: "performance-default",
     },
     {
       title: "Mobile-First UX",
       description: "Designed around how modern users browse, research, and make decisions.",
+      icon: "mobile-first-ux",
     },
   ],
 } as const;

@@ -83,6 +83,8 @@ function HomeTemplatesMarketplaceDesktop({ products }: HomeTemplatesMarketplaceS
         <SectionHeading
           eyebrow={HOME_TEMPLATES_MARKETPLACE_COPY.eyebrow}
           title={HOME_TEMPLATES_MARKETPLACE_COPY.title}
+          titleLead={HOME_TEMPLATES_MARKETPLACE_COPY.titleLead}
+          titleAccent={HOME_TEMPLATES_MARKETPLACE_COPY.titleAccent}
           description={HOME_TEMPLATES_MARKETPLACE_COPY.description}
           titleClassName={HERO_TITLE_CLASS}
         />

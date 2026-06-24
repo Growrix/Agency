@@ -88,11 +88,16 @@ function HomeFeaturedBuildsMobile({ projects, title, description }: HomeFeatured
 }
 
 function HomeFeaturedBuildsDesktop({ projects, title, description }: HomeFeaturedBuildsSectionProps) {
+  const displayTitle = title ?? HOME_CASE_STUDIES_COPY.title;
+  const useAccentTitle = displayTitle === HOME_CASE_STUDIES_COPY.title;
+
   return (
     <>
       <SectionHeading
         eyebrow={HOME_CASE_STUDIES_COPY.eyebrow}
-        title={title ?? HOME_CASE_STUDIES_COPY.title}
+        title={displayTitle}
+        titleLead={useAccentTitle ? HOME_CASE_STUDIES_COPY.titleLead : undefined}
+        titleAccent={useAccentTitle ? HOME_CASE_STUDIES_COPY.titleAccent : undefined}
         description={description ?? HOME_CASE_STUDIES_COPY.description}
         titleClassName={HERO_TITLE_CLASS}
       />

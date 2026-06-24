@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Container, Section } from "@/components/primitives/Container";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
 import { cn } from "@/lib/utils";
@@ -96,15 +97,14 @@ function HomeDigitalProductsDesktop({ products }: HomeDigitalProductsShowcasePro
   return (
     <>
       <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-        <div className="min-w-0">
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
-            {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.eyebrow}
-          </p>
-          <h2 className={cn("mt-1", HERO_TITLE_CLASS)}>{HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.title}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-text-muted sm:text-base">
-            {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.description}
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.eyebrow}
+          title={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.title}
+          titleLead={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.titleLead}
+          titleAccent={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.titleAccent}
+          description={HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.description}
+          titleClassName={HERO_TITLE_CLASS}
+        />
         <LinkButton href="/digital-products" variant="outline" size="sm" className="shrink-0">
           {HOME_DIGITAL_PRODUCTS_CONVERSION_COPY.ctaLabel} <ArrowUpRightIcon className="size-3.5" />
         </LinkButton>

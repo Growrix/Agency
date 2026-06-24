@@ -112,6 +112,8 @@ function HomeAiConciergeDesktop({
         <SectionHeading
           eyebrow={eyebrow}
           title={title}
+          titleLead={title === HOME_AI_COPY.title ? HOME_AI_COPY.titleLead : undefined}
+          titleAccent={title === HOME_AI_COPY.title ? HOME_AI_COPY.titleAccent : undefined}
           description={description}
           titleClassName={HERO_TITLE_CLASS}
         />

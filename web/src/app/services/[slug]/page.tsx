@@ -14,6 +14,7 @@ import {
   SparklesIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
+import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitle";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -35,9 +36,15 @@ import { HomeHtmlPreviewSection } from "@/components/marketing/HomeHtmlPreviewSe
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { ProcessStepsMobile } from "@/components/marketing/ProcessStepsMobile";
 import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
+import { MobileFeatureGrid } from "@/components/marketing/mobile/MobileFeatureGrid";
+import { MobilePrincipleList } from "@/components/marketing/mobile/MobilePrincipleList";
+import { SaasProductTypesMobile } from "@/components/marketing/services/SaasProductTypesMobile";
+import { SaasStackSectionMobile } from "@/components/marketing/services/SaasStackSectionMobile";
 import { EngagementTiersMobile } from "@/components/marketing/services/EngagementTiersMobile";
 import { OutcomeCardsMobile } from "@/components/marketing/services/OutcomeCardsMobile";
 import { PrincipleCardsMobile } from "@/components/marketing/services/PrincipleCardsMobile";
+import { WebsitesOutcomesDesktop } from "@/components/marketing/services/WebsitesOutcomesDesktop";
+import { WebsitesPrinciplesDesktop } from "@/components/marketing/services/WebsitesPrinciplesDesktop";
 import { ServiceDetailHeroMobile } from "@/components/marketing/services/ServiceDetailHeroMobile";
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ServiceFeaturedProofMobile } from "@/components/marketing/services/ServiceFeaturedProofMobile";
@@ -81,6 +88,7 @@ import {
   SAAS_PRODUCT_TYPES_SECTION,
   SAAS_SERVICE_CTA,
   SAAS_SERVICE_FAQ,
+  SAAS_SERVICE_FAQ_SECTION,
   SAAS_SERVICE_HERO,
   SAAS_SERVICE_STATS,
   SAAS_STACK_GROUPS,
@@ -191,9 +199,9 @@ const COPY: Record<
     builds: WEBSITES_OUTCOMES_SECTION.builds.map((item) => ({ ...item })),
     differentiators: WEBSITES_WHY_CHOOSE_SECTION.cards.map((item) => ({ ...item })),
     tiers: [
-      { name: "Template Packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/digital-products" } },
-      { name: "Ready Websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/digital-products" }, featured: true, badge: "Most chosen" },
-      { name: "Custom Build Scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
+      { name: "Template Packs", iconKey: "template-packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/digital-products" } },
+      { name: "Ready Websites", iconKey: "ready-websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/digital-products" }, featured: true, badge: "Most chosen" },
+      { name: "Custom Build Scope", iconKey: "custom-build-scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: WEBSITES_SERVICE_FAQ.map((item) => ({ ...item })),
     stats: WEBSITES_SERVICE_STATS.map((item) => ({ ...item })),
@@ -513,6 +521,39 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 <SectionHeading
                   eyebrow={WEBSITES_ENGAGEMENT_SECTION.eyebrow}
                   title={WEBSITES_ENGAGEMENT_SECTION.title}
+                  titleLead={WEBSITES_ENGAGEMENT_SECTION.titleLead}
+                  titleAccent={WEBSITES_ENGAGEMENT_SECTION.titleAccent}
+                  align="center"
+                />
+                <RevealGroup className="mt-12 grid auto-rows-fr gap-5 lg:grid-cols-3" stagger={0.08}>
+                  {copy.tiers.map((t) => (
+                    <RevealItem key={t.name} className="h-full">
+                      <PricingTier tier={t} className="h-full" />
+                    </RevealItem>
+                  ))}
+                </RevealGroup>
+              </>
+            }
+          />
+        ) : isSaasService ? (
+          <MarketingViewportGate
+            mobile={
+              <EngagementTiersMobile
+                eyebrow={SAAS_ENGAGEMENT_SECTION.eyebrow}
+                title={SAAS_ENGAGEMENT_SECTION.title}
+                titleLead={SAAS_ENGAGEMENT_SECTION.titleLead}
+                titleAccent={SAAS_ENGAGEMENT_SECTION.titleAccent}
+                tiers={copy.tiers}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={SAAS_ENGAGEMENT_SECTION.eyebrow}
+                  title={SAAS_ENGAGEMENT_SECTION.title}
+                  titleLead={SAAS_ENGAGEMENT_SECTION.titleLead}
+                  titleAccent={SAAS_ENGAGEMENT_SECTION.titleAccent}
+                  description={SAAS_ENGAGEMENT_SECTION.description}
                   align="center"
                 />
                 <RevealGroup className="mt-12 grid auto-rows-fr gap-5 lg:grid-cols-3" stagger={0.08}>
@@ -612,13 +653,21 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          {isWebsitesService && heroServiceStats ? (
+          {(isWebsitesService || isSaasService) && heroServiceStats ? (
             <MarketingViewportGate
               mobile={
                 <ServiceDetailHeroMobile
                   eyebrow={copy.eyebrow}
-                  headlineLead={WEBSITES_SERVICE_HERO.headlineLead}
-                  headlineAccent={WEBSITES_SERVICE_HERO.headlineAccent}
+                  headlineLead={
+                    isWebsitesService
+                      ? WEBSITES_SERVICE_HERO.headlineLead
+                      : SAAS_SERVICE_HERO.headlineLead
+                  }
+                  headlineAccent={
+                    isWebsitesService
+                      ? WEBSITES_SERVICE_HERO.headlineAccent
+                      : SAAS_SERVICE_HERO.headlineAccent
+                  }
                   description={copy.description}
                   primaryCta={copy.primaryCta}
                   secondaryCta={copy.secondaryCta}
@@ -644,7 +693,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                         className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
                         style={{ animationDelay: "70ms" }}
                       >
-                        {copy.headline}
+                        <MarketingAccentTitle
+                          lead={
+                            isWebsitesService
+                              ? WEBSITES_SERVICE_HERO.headlineLead
+                              : SAAS_SERVICE_HERO.headlineLead
+                          }
+                          accent={
+                            isWebsitesService
+                              ? WEBSITES_SERVICE_HERO.headlineAccent
+                              : SAAS_SERVICE_HERO.headlineAccent
+                          }
+                        />
                       </h1>
                       <p
                         className="mt-6 text-lg text-text-muted leading-7 signal-rise"
@@ -915,21 +975,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {isSaasService ? (
         <Section {...marketingSection("service-detail-saas-applications", "product-types")}>
           <Container>
-            <SectionHeading
-              eyebrow={SAAS_PRODUCT_TYPES_SECTION.eyebrow}
-              title={SAAS_PRODUCT_TYPES_SECTION.title}
-              description={SAAS_PRODUCT_TYPES_SECTION.description}
+            <MarketingViewportGate
+              mobile={<SaasProductTypesMobile />}
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={SAAS_PRODUCT_TYPES_SECTION.eyebrow}
+                    title={SAAS_PRODUCT_TYPES_SECTION.title}
+                    titleLead={SAAS_PRODUCT_TYPES_SECTION.titleLead}
+                    titleAccent={SAAS_PRODUCT_TYPES_SECTION.titleAccent}
+                    description={SAAS_PRODUCT_TYPES_SECTION.description}
+                  />
+                  <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+                    {SAAS_PRODUCT_TYPES_SECTION.items.map((item) => (
+                      <RevealItem key={item.title} className="h-full">
+                        <Card hoverable className="h-full">
+                          <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
+                        </Card>
+                      </RevealItem>
+                    ))}
+                  </RevealGroup>
+                </>
+              }
             />
-            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-              {SAAS_PRODUCT_TYPES_SECTION.items.map((item) => (
-                <RevealItem key={item.title} className="h-full">
-                  <Card hoverable className="h-full">
-                    <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
-                  </Card>
-                </RevealItem>
-              ))}
-            </RevealGroup>
           </Container>
         </Section>
       ) : null}
@@ -937,41 +1006,50 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {isSaasService ? (
         <Section {...marketingSection("service-detail-saas-applications", "stack")}>
           <Container>
-            <SectionHeading
-              eyebrow={SAAS_STACK_SECTION.eyebrow}
-              title={SAAS_STACK_SECTION.title}
-              description={SAAS_STACK_SECTION.description}
+            <MarketingViewportGate
+              mobile={<SaasStackSectionMobile />}
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={SAAS_STACK_SECTION.eyebrow}
+                    title={SAAS_STACK_SECTION.title}
+                    titleLead={SAAS_STACK_SECTION.titleLead}
+                    titleAccent={SAAS_STACK_SECTION.titleAccent}
+                    description={SAAS_STACK_SECTION.description}
+                  />
+                  <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+                    {SAAS_STACK_SECTION.benefits.map((benefit) => (
+                      <RevealItem key={benefit.title} className="h-full">
+                        <Card hoverable className="h-full">
+                          <h3 className="font-display text-lg tracking-tight">{benefit.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-text-muted">{benefit.description}</p>
+                        </Card>
+                      </RevealItem>
+                    ))}
+                  </RevealGroup>
+                  <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+                    {SAAS_STACK_GROUPS.map((group) => (
+                      <RevealItem key={group.category} className="h-full">
+                        <Card hoverable className="h-full">
+                          <p className="font-mono text-[11px] uppercase tracking-wider text-primary">{group.category}</p>
+                          <ul className="mt-3 space-y-1.5">
+                            {group.items.map((item) => (
+                              <li key={item} className="flex items-center gap-2 text-sm text-text-muted">
+                                <CheckIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </Card>
+                      </RevealItem>
+                    ))}
+                  </RevealGroup>
+                  <p className="mt-8 text-center text-sm text-text-muted max-w-2xl mx-auto">
+                    {SAAS_STACK_SECTION.footerNote}
+                  </p>
+                </>
+              }
             />
-            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-              {SAAS_STACK_SECTION.benefits.map((benefit) => (
-                <RevealItem key={benefit.title} className="h-full">
-                  <Card hoverable className="h-full">
-                    <h3 className="font-display text-lg tracking-tight">{benefit.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">{benefit.description}</p>
-                  </Card>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-            <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-              {SAAS_STACK_GROUPS.map((group) => (
-                <RevealItem key={group.category} className="h-full">
-                  <Card hoverable className="h-full">
-                    <p className="font-mono text-[11px] uppercase tracking-wider text-primary">{group.category}</p>
-                    <ul className="mt-3 space-y-1.5">
-                      {group.items.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-sm text-text-muted">
-                          <CheckIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-            <p className="mt-8 text-center text-sm text-text-muted max-w-2xl mx-auto">
-              {SAAS_STACK_SECTION.footerNote}
-            </p>
           </Container>
         </Section>
       ) : null}
@@ -987,15 +1065,40 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   titleLead={WEBSITES_OUTCOMES_SECTION.titleLead}
                   titleAccent={WEBSITES_OUTCOMES_SECTION.titleAccent}
                   description={WEBSITES_OUTCOMES_SECTION.description}
-                  cards={copy.builds.map((build) => ({ ...build }))}
+                  cards={WEBSITES_OUTCOMES_SECTION.builds}
+                />
+              }
+              desktop={
+                <WebsitesOutcomesDesktop
+                  eyebrow={WEBSITES_OUTCOMES_SECTION.eyebrow}
+                  title={WEBSITES_OUTCOMES_SECTION.title}
+                  titleLead={WEBSITES_OUTCOMES_SECTION.titleLead}
+                  titleAccent={WEBSITES_OUTCOMES_SECTION.titleAccent}
+                  description={WEBSITES_OUTCOMES_SECTION.description}
+                  items={WEBSITES_OUTCOMES_SECTION.builds}
+                />
+              }
+            />
+          ) : isSaasService ? (
+            <MarketingViewportGate
+              mobile={
+                <MobileFeatureGrid
+                  eyebrow={SAAS_SYSTEMS_SECTION.eyebrow}
+                  title={SAAS_SYSTEMS_SECTION.title}
+                  titleLead={SAAS_SYSTEMS_SECTION.titleLead}
+                  titleAccent={SAAS_SYSTEMS_SECTION.titleAccent}
+                  description={SAAS_SYSTEMS_SECTION.description}
+                  items={SAAS_SYSTEMS_SECTION.builds}
                 />
               }
               desktop={
                 <>
                   <SectionHeading
-                    eyebrow={WEBSITES_OUTCOMES_SECTION.eyebrow}
-                    title={WEBSITES_OUTCOMES_SECTION.title}
-                    description={WEBSITES_OUTCOMES_SECTION.description}
+                    eyebrow={SAAS_SYSTEMS_SECTION.eyebrow}
+                    title={SAAS_SYSTEMS_SECTION.title}
+                    titleLead={SAAS_SYSTEMS_SECTION.titleLead}
+                    titleAccent={SAAS_SYSTEMS_SECTION.titleAccent}
+                    description={SAAS_SYSTEMS_SECTION.description}
                   />
                   <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
                     {copy.builds.map((b) => (
@@ -1079,15 +1182,40 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   titleLead={WEBSITES_WHY_CHOOSE_SECTION.titleLead}
                   titleAccent={WEBSITES_WHY_CHOOSE_SECTION.titleAccent}
                   description={WEBSITES_WHY_CHOOSE_SECTION.description}
-                  cards={copy.differentiators.map((card) => ({ ...card }))}
+                  cards={WEBSITES_WHY_CHOOSE_SECTION.cards}
+                />
+              }
+              desktop={
+                <WebsitesPrinciplesDesktop
+                  eyebrow={WEBSITES_WHY_CHOOSE_SECTION.eyebrow}
+                  title={WEBSITES_WHY_CHOOSE_SECTION.title}
+                  titleLead={WEBSITES_WHY_CHOOSE_SECTION.titleLead}
+                  titleAccent={WEBSITES_WHY_CHOOSE_SECTION.titleAccent}
+                  description={WEBSITES_WHY_CHOOSE_SECTION.description}
+                  items={WEBSITES_WHY_CHOOSE_SECTION.cards}
+                />
+              }
+            />
+          ) : isSaasService ? (
+            <MarketingViewportGate
+              mobile={
+                <MobilePrincipleList
+                  eyebrow={SAAS_WHY_FOUNDERS_SECTION.eyebrow}
+                  title={SAAS_WHY_FOUNDERS_SECTION.title}
+                  titleLead={SAAS_WHY_FOUNDERS_SECTION.titleLead}
+                  titleAccent={SAAS_WHY_FOUNDERS_SECTION.titleAccent}
+                  description={SAAS_WHY_FOUNDERS_SECTION.description}
+                  items={SAAS_WHY_FOUNDERS_SECTION.cards}
                 />
               }
               desktop={
                 <>
                   <SectionHeading
-                    eyebrow={WEBSITES_WHY_CHOOSE_SECTION.eyebrow}
-                    title={WEBSITES_WHY_CHOOSE_SECTION.title}
-                    description={WEBSITES_WHY_CHOOSE_SECTION.description}
+                    eyebrow={SAAS_WHY_FOUNDERS_SECTION.eyebrow}
+                    title={SAAS_WHY_FOUNDERS_SECTION.title}
+                    titleLead={SAAS_WHY_FOUNDERS_SECTION.titleLead}
+                    titleAccent={SAAS_WHY_FOUNDERS_SECTION.titleAccent}
+                    description={SAAS_WHY_FOUNDERS_SECTION.description}
                   />
                   <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
                     {copy.differentiators.map((d) => (
@@ -1188,6 +1316,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   <SectionHeading
                     eyebrow={WEBSITES_LAUNCH_PROCESS_SECTION.eyebrow}
                     title={WEBSITES_LAUNCH_PROCESS_SECTION.title}
+                    titleLead={WEBSITES_LAUNCH_PROCESS_SECTION.titleLead}
+                    titleAccent={WEBSITES_LAUNCH_PROCESS_SECTION.titleAccent}
                     description={WEBSITES_LAUNCH_PROCESS_SECTION.description}
                   />
                   <div className="mt-10">
@@ -1197,16 +1327,31 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               }
             />
           ) : isSaasService ? (
-            <>
-              <SectionHeading
-                eyebrow={SAAS_LAUNCH_PROCESS_SECTION.eyebrow}
-                title={SAAS_LAUNCH_PROCESS_SECTION.title}
-                description={SAAS_LAUNCH_PROCESS_SECTION.description}
-              />
-              <div className="mt-10">
-                <WebsiteLaunchProcessTimeline steps={[...SAAS_LAUNCH_PROCESS_SECTION.steps]} />
-              </div>
-            </>
+            <MarketingViewportGate
+              mobile={
+                <ProcessStepsMobile
+                  steps={[...SAAS_LAUNCH_PROCESS_SECTION.steps]}
+                  eyebrow={SAAS_LAUNCH_PROCESS_SECTION.eyebrow}
+                  titleLead={SAAS_LAUNCH_PROCESS_SECTION.titleLead}
+                  titleAccent={SAAS_LAUNCH_PROCESS_SECTION.titleAccent}
+                  description={SAAS_LAUNCH_PROCESS_SECTION.description}
+                />
+              }
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={SAAS_LAUNCH_PROCESS_SECTION.eyebrow}
+                    title={SAAS_LAUNCH_PROCESS_SECTION.title}
+                    titleLead={SAAS_LAUNCH_PROCESS_SECTION.titleLead}
+                    titleAccent={SAAS_LAUNCH_PROCESS_SECTION.titleAccent}
+                    description={SAAS_LAUNCH_PROCESS_SECTION.description}
+                  />
+                  <div className="mt-10">
+                    <WebsiteLaunchProcessTimeline steps={[...SAAS_LAUNCH_PROCESS_SECTION.steps]} />
+                  </div>
+                </>
+              }
+            />
           ) : isMobileAppsService ? (
             <>
               <SectionHeading
@@ -1284,7 +1429,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 desktop={
                   <>
                     <div className="flex items-end justify-between gap-6 flex-wrap">
-                      <SectionHeading eyebrow="Featured proof" title="Recent work in this practice." />
+                      <SectionHeading
+                        eyebrow={WEBSITES_PROOF_SECTION.eyebrow}
+                        title={WEBSITES_PROOF_SECTION.title}
+                        titleLead={WEBSITES_PROOF_SECTION.titleLead}
+                        titleAccent={WEBSITES_PROOF_SECTION.titleAccent}
+                      />
                       <Link href="/portfolio" className="text-sm font-medium text-primary">
                         View all <ArrowUpRightIcon className="inline size-4" />
                       </Link>
@@ -1367,9 +1517,39 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               desktop={
                 <>
                   <SectionHeading
-                    eyebrow="FAQ"
-                    title="Common website project questions, answered."
-                    description="Timelines, ownership, platforms, support, and pricing—covered before you book a call."
+                    eyebrow={WEBSITES_SERVICE_FAQ_SECTION.eyebrow}
+                    title={WEBSITES_SERVICE_FAQ_SECTION.title}
+                    titleLead={WEBSITES_SERVICE_FAQ_SECTION.titleLead}
+                    titleAccent={WEBSITES_SERVICE_FAQ_SECTION.titleAccent}
+                    description={WEBSITES_SERVICE_FAQ_SECTION.description}
+                    align="center"
+                  />
+                  <div className="mt-10">
+                    <Accordion items={copy.faq} />
+                  </div>
+                </>
+              }
+            />
+          ) : isSaasService ? (
+            <MarketingViewportGate
+              mobile={
+                <ServiceFaqMobile
+                  eyebrow={SAAS_SERVICE_FAQ_SECTION.eyebrow}
+                  title={SAAS_SERVICE_FAQ_SECTION.title}
+                  titleLead={SAAS_SERVICE_FAQ_SECTION.titleLead}
+                  titleAccent={SAAS_SERVICE_FAQ_SECTION.titleAccent}
+                  description={SAAS_SERVICE_FAQ_SECTION.description}
+                  items={copy.faq.map((item) => ({ ...item }))}
+                />
+              }
+              desktop={
+                <>
+                  <SectionHeading
+                    eyebrow={SAAS_SERVICE_FAQ_SECTION.eyebrow}
+                    title={SAAS_SERVICE_FAQ_SECTION.title}
+                    titleLead={SAAS_SERVICE_FAQ_SECTION.titleLead}
+                    titleAccent={SAAS_SERVICE_FAQ_SECTION.titleAccent}
+                    description={SAAS_SERVICE_FAQ_SECTION.description}
                     align="center"
                   />
                   <div className="mt-10">
@@ -1435,6 +1615,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           desktop={
             <CTABand
               title={WEBSITES_SERVICE_CTA.title}
+              titleLead={WEBSITES_SERVICE_CTA.titleLead}
+              titleAccent={WEBSITES_SERVICE_CTA.titleAccent}
               description={WEBSITES_SERVICE_CTA.description}
               primary={{
                 label: WEBSITES_SERVICE_CTA.primaryLabel,
@@ -1443,6 +1625,37 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               secondary={{
                 label: WEBSITES_SERVICE_CTA.secondaryLabel,
                 href: WEBSITES_SERVICE_CTA.secondaryHref,
+              }}
+            />
+          }
+        />
+      ) : isSaasService ? (
+        <MarketingViewportGate
+          mobile={
+            <ProductLedFinalCTAMobile
+              eyebrow="Next step"
+              titleLead={SAAS_SERVICE_CTA.titleLead}
+              titleAccent={SAAS_SERVICE_CTA.titleAccent}
+              description={SAAS_SERVICE_CTA.description}
+              primaryLabel={SAAS_SERVICE_CTA.primaryLabel}
+              primaryHref={SAAS_SERVICE_CTA.primaryHref}
+              secondaryLabel={SAAS_SERVICE_CTA.secondaryLabel}
+              secondaryHref={SAAS_SERVICE_CTA.secondaryHref}
+            />
+          }
+          desktop={
+            <CTABand
+              title={SAAS_SERVICE_CTA.title}
+              titleLead={SAAS_SERVICE_CTA.titleLead}
+              titleAccent={SAAS_SERVICE_CTA.titleAccent}
+              description={SAAS_SERVICE_CTA.description}
+              primary={{
+                label: SAAS_SERVICE_CTA.primaryLabel,
+                href: SAAS_SERVICE_CTA.primaryHref,
+              }}
+              secondary={{
+                label: SAAS_SERVICE_CTA.secondaryLabel,
+                href: SAAS_SERVICE_CTA.secondaryHref,
               }}
             />
           }

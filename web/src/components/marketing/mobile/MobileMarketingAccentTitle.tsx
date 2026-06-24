@@ -1,3 +1,5 @@
+import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitle";
+
 type MobileMarketingAccentTitleProps = {
   lead: string;
   accent: string;
@@ -5,9 +7,10 @@ type MobileMarketingAccentTitleProps = {
 
 export function MobileMarketingAccentTitle({ lead, accent }: MobileMarketingAccentTitleProps) {
   return (
-    <>
-      {lead}{" "}
-      <span className="home-mobile-marketing__title-accent">{accent}</span>
-    </>
+    <MarketingAccentTitle
+      lead={lead}
+      accent={accent}
+      accentClassName="home-mobile-marketing__title-accent"
+    />
   );
 }

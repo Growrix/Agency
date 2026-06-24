@@ -33,6 +33,8 @@ export function ReadyMadeSolutionsDesktop({ tabs, productsByTabId }: ReadyMadeSo
       <SectionHeading
         eyebrow={HOME_READY_MADE_SOLUTIONS_COPY.eyebrow}
         title={HOME_READY_MADE_SOLUTIONS_COPY.title}
+        titleLead={HOME_READY_MADE_SOLUTIONS_COPY.titleLead}
+        titleAccent={HOME_READY_MADE_SOLUTIONS_COPY.titleAccent}
         description={HOME_READY_MADE_SOLUTIONS_COPY.description}
         titleClassName={HERO_TITLE_CLASS}
       />

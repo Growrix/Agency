@@ -19,6 +19,8 @@ export function ServiceCardsDesktop({ services }: ServiceCardsDesktopProps) {
         <SectionHeading
           eyebrow={HOME_SERVICES_COPY.eyebrow}
           title={HOME_SERVICES_COPY.title}
+          titleLead={HOME_SERVICES_COPY.titleLead}
+          titleAccent={HOME_SERVICES_COPY.titleAccent}
           description={HOME_SERVICES_COPY.description}
           titleClassName={HERO_TITLE_CLASS}
         />
