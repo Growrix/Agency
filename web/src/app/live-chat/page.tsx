@@ -44,12 +44,12 @@ export default function LiveChatPage() {
   };
 
   return (
-    <Section className="py-16 sm:py-24">
-      <Container>
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.92fr] lg:items-start">
-          <div>
+    <Section className="overflow-x-hidden py-12 sm:py-16 md:py-24">
+      <Container className="min-w-0">
+        <div className="grid min-w-0 gap-6 lg:grid-cols-[1fr_0.92fr] lg:items-start">
+          <div className="min-w-0">
             <Badge tone="primary" dot>Live chat</Badge>
-            <h1 className="mt-5 font-display text-5xl sm:text-6xl tracking-tight text-balance">
+            <h1 className="mt-5 font-display text-4xl tracking-tight text-balance sm:text-5xl lg:text-6xl">
               Start a real support handoff.
             </h1>
             <p className="mt-6 text-lg leading-7 text-text-muted">
@@ -61,7 +61,7 @@ export default function LiveChatPage() {
             </div>
           </div>
 
-          <Card>
+          <Card className="min-w-0">
             {status === "success" ? (
               <div>
                 <h2 className="font-display text-3xl tracking-tight">Request queued.</h2>

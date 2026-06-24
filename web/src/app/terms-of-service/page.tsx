@@ -76,8 +76,8 @@ const SECTIONS = [
 export default function TermsPage() {
   return (
     <>
-      <Section className="pt-12 sm:pt-16 pb-8">
-        <Container width="reading">
+      <Section className="overflow-x-hidden pt-10 sm:pt-12 md:pt-16 pb-8">
+        <Container width="reading" className="min-w-0 px-4 sm:px-6">
           <Badge tone="primary" dot>Legal</Badge>
           <h1 className="mt-5 font-display text-4xl sm:text-5xl tracking-tight text-balance">Terms of Service</h1>
           <p className="mt-4 text-text-muted text-pretty">
@@ -98,8 +98,8 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section className="py-8">
-        <Container width="reading">
+      <Section className="overflow-x-hidden py-8">
+        <Container width="reading" className="min-w-0 px-4 sm:px-6">
           <div className="space-y-12">
             {SECTIONS.map((s) => (
               <section key={s.id} id={s.id} className="scroll-mt-24">
@@ -115,8 +115,8 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section className="py-12">
-        <Container width="reading">
+      <Section className="overflow-x-hidden py-10 sm:py-12">
+        <Container width="reading" className="min-w-0 px-4 sm:px-6">
           <div className="rounded-[20px] border border-border bg-surface p-8">
             <h3 className="font-display text-xl tracking-tight">Need clarification?</h3>
             <p className="mt-2 text-text-muted">We&apos;re happy to walk through any term in detail.</p>
