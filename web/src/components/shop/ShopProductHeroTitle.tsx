@@ -8,8 +8,8 @@ type ShopProductHeroTitleProps = {
 };
 
 const VARIANT_CLASS = {
-  mobile: "mt-2 font-display text-3xl font-bold tracking-tight",
-  sidebar: "mt-2 font-display text-2xl font-bold leading-snug tracking-tight",
+  mobile: "mt-2 font-display text-3xl sm:text-3xl font-bold tracking-tight",
+  sidebar: "mt-2 font-display text-2xl sm:text-2xl font-bold leading-snug tracking-tight",
 } as const;
 
 export function ShopProductHeroTitle({ name, variant = "mobile", className }: ShopProductHeroTitleProps) {

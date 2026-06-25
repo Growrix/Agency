@@ -31,7 +31,7 @@ import {
   type PortfolioFilter,
 } from "@/lib/portfolio-landing-content";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
-import { HERO_VIEWPORT_CONTAINER_CLASS, MARKETING_LANDING_HERO_TITLE_CLASS } from "@/lib/typography";
+import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 
@@ -93,7 +93,7 @@ export function PortfolioPageClient({ projects, filters }: PortfolioPageClientPr
                     {PORTFOLIO_LANDING_HERO.eyebrow}
                   </Badge>
                   <MarketingHeroTitle
-                    className={cn("mt-5", MARKETING_LANDING_HERO_TITLE_CLASS)}
+                    className="mt-5"
                     title={PORTFOLIO_LANDING_HERO.title}
                     titleLead={PORTFOLIO_LANDING_HERO.titleLead}
                     titleAccent={PORTFOLIO_LANDING_HERO.titleAccent}

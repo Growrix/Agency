@@ -13,6 +13,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata = {
@@ -35,9 +36,7 @@ export default function NotFound() {
       <Container>
         <div className="text-center max-w-2xl mx-auto">
           <Badge tone="warning" dot>404</Badge>
-          <h1 className="mt-5 font-display text-6xl sm:text-7xl tracking-tight">
-            That page slipped off the grid.
-          </h1>
+          <MarketingHeroTitle className="mt-5" title="That page slipped off the grid." />
           <p className="mt-6 text-lg text-text-muted leading-7">
             The URL might be old, or we&apos;ve moved things around. Pick a useful destination — or open the concierge.
           </p>

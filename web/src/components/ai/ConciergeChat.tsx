@@ -15,6 +15,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { cn } from "@/lib/utils";
@@ -427,9 +428,7 @@ export function ConciergeExperience({ initialPrompt, mode = "page", onClose }: C
               <Badge tone="primary" dot>
                 AI Growrix OS
               </Badge>
-              <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-                Get the right answer before you book.
-              </h1>
+              <MarketingHeroTitle className="mt-5" title="Get the right answer before you book." />
               <p className="mt-6 text-lg text-text-muted leading-7">
                 Ask about scope, pricing, delivery timelines, products, or product fit. This assistant answers only from approved Growrix site content and routes you to the right next step.
               </p>

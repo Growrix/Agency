@@ -14,7 +14,7 @@ import {
   SparklesIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
-import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitle";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -71,7 +71,7 @@ import { isHiddenServiceSlug } from "@/lib/feature-flags";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { marketingSection } from "@/lib/marketing-composition";
-import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
+import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { getPublicService, listPublicPortfolio, listPublicShopProducts } from "@/server/domain/catalog";
@@ -503,6 +503,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               ? AI_BUSINESS_SYSTEMS_SERVICE_STATS
               : null;
 
+  const serviceHeroHeadlineLead = isWebsitesService
+    ? WEBSITES_SERVICE_HERO.headlineLead
+    : isSaasService
+      ? SAAS_SERVICE_HERO.headlineLead
+      : isMobileAppsService
+        ? MOBILE_APPS_SERVICE_HERO.headlineLead
+        : isAutomationService
+          ? AUTOMATION_SERVICE_HERO.headlineLead
+          : isTechnicalSeoService
+            ? TECHNICAL_SEO_SERVICE_HERO.headlineLead
+            : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineLead;
+
+  const serviceHeroHeadlineAccent = isWebsitesService
+    ? WEBSITES_SERVICE_HERO.headlineAccent
+    : isSaasService
+      ? SAAS_SERVICE_HERO.headlineAccent
+      : isMobileAppsService
+        ? MOBILE_APPS_SERVICE_HERO.headlineAccent
+        : isAutomationService
+          ? AUTOMATION_SERVICE_HERO.headlineAccent
+          : isTechnicalSeoService
+            ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
+            : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent;
+
   const engagementModelsSection = (
     <Section
       id="pricing"
@@ -843,39 +867,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                       <div className="signal-rise" style={{ animationDelay: "0ms" }}>
                         <Badge tone="primary" dot>{copy.eyebrow}</Badge>
                       </div>
-                      <h1
-                        className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
-                        style={{ animationDelay: "70ms" }}
-                      >
-                        <MarketingAccentTitle
-                          lead={
-                            isWebsitesService
-                              ? WEBSITES_SERVICE_HERO.headlineLead
-                              : isSaasService
-                                ? SAAS_SERVICE_HERO.headlineLead
-                                : isMobileAppsService
-                                  ? MOBILE_APPS_SERVICE_HERO.headlineLead
-                                  : isAutomationService
-                                    ? AUTOMATION_SERVICE_HERO.headlineLead
-                                    : isTechnicalSeoService
-                                      ? TECHNICAL_SEO_SERVICE_HERO.headlineLead
-                                      : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineLead
-                          }
-                          accent={
-                            isWebsitesService
-                              ? WEBSITES_SERVICE_HERO.headlineAccent
-                              : isSaasService
-                                ? SAAS_SERVICE_HERO.headlineAccent
-                                : isMobileAppsService
-                                  ? MOBILE_APPS_SERVICE_HERO.headlineAccent
-                                  : isAutomationService
-                                    ? AUTOMATION_SERVICE_HERO.headlineAccent
-                                    : isTechnicalSeoService
-                                      ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
-                                      : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent
-                          }
-                        />
-                      </h1>
+                      <MarketingHeroTitle
+                        className="signal-rise mt-5"
+                        titleLead={serviceHeroHeadlineLead}
+                        titleAccent={serviceHeroHeadlineAccent}
+                      />
                       <p
                         className="mt-6 text-lg text-text-muted leading-7 signal-rise"
                         style={{ animationDelay: "140ms" }}
@@ -928,39 +924,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   <div className="signal-rise" style={{ animationDelay: "0ms" }}>
                     <Badge tone="primary" dot>{copy.eyebrow}</Badge>
                   </div>
-                  <h1
-                    className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
-                    style={{ animationDelay: "70ms" }}
-                  >
-                    <MarketingAccentTitle
-                      lead={
-                        isWebsitesService
-                          ? WEBSITES_SERVICE_HERO.headlineLead
-                          : isSaasService
-                            ? SAAS_SERVICE_HERO.headlineLead
-                            : isMobileAppsService
-                              ? MOBILE_APPS_SERVICE_HERO.headlineLead
-                              : isAutomationService
-                                ? AUTOMATION_SERVICE_HERO.headlineLead
-                                : isTechnicalSeoService
-                                  ? TECHNICAL_SEO_SERVICE_HERO.headlineLead
-                                  : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineLead
-                      }
-                      accent={
-                        isWebsitesService
-                          ? WEBSITES_SERVICE_HERO.headlineAccent
-                          : isSaasService
-                            ? SAAS_SERVICE_HERO.headlineAccent
-                            : isMobileAppsService
-                              ? MOBILE_APPS_SERVICE_HERO.headlineAccent
-                              : isAutomationService
-                                ? AUTOMATION_SERVICE_HERO.headlineAccent
-                                : isTechnicalSeoService
-                                  ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
-                                  : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent
-                      }
-                    />
-                  </h1>
+                  <MarketingHeroTitle
+                    className="signal-rise mt-5"
+                    titleLead={serviceHeroHeadlineLead}
+                    titleAccent={serviceHeroHeadlineAccent}
+                  />
                   <p
                     className="mt-6 text-lg text-text-muted leading-7 signal-rise"
                     style={{ animationDelay: "140ms" }}

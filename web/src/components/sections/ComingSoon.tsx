@@ -4,6 +4,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export function ComingSoon({
@@ -23,7 +24,7 @@ export function ComingSoon({
       <Container>
         <div className="text-center max-w-2xl mx-auto">
           <Badge tone="secondary" dot>{eyebrow}</Badge>
-          <h1 className="mt-5 font-display text-5xl sm:text-6xl tracking-tight text-balance">{title}</h1>
+          <MarketingHeroTitle className="mt-5" title={title} />
           <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <LinkButton href="/contact" size="lg">

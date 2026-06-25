@@ -96,7 +96,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     <Badge tone="accent">{detail.year}</Badge>
                   </div>
                   <MarketingHeroTitle
-                    className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance"
+                    className="mt-5"
                     title={project.name}
                     layout="block"
                   />

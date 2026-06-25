@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               <div className="mt-8">
                 <Badge tone="primary">{post.category}</Badge>
                 <MarketingHeroTitle
-                  className="mt-5 font-display text-3xl leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[56px]"
+                  className="mt-5"
                   title={post.title}
                   layout="block"
                 />

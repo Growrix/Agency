@@ -110,7 +110,7 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
               <div className="max-w-3xl">
                 <Badge tone="primary" dot>FAQ</Badge>
                 <MarketingHeroTitle
-                  className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance"
+                  className="mt-5"
                   title={FAQ_HERO.title}
                   titleLead={FAQ_HERO.titleLead}
                   titleAccent={FAQ_HERO.titleAccent}

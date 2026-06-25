@@ -126,7 +126,7 @@ export default function LiveChatPage() {
               <div className="min-w-0">
                 <p className="font-mono text-[11px] uppercase tracking-wider text-primary">{LIVE_CHAT_HERO.eyebrow}</p>
                 <MarketingHeroTitle
-                  className="mt-5 font-display text-4xl tracking-tight text-balance sm:text-5xl lg:text-6xl"
+                  className="mt-5"
                   titleLead={LIVE_CHAT_HERO.titleLead}
                   titleAccent={LIVE_CHAT_HERO.titleAccent}
                 />

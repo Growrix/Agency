@@ -20,7 +20,7 @@ export function MarketingHeroTitle({
   layout = "inline",
 }: MarketingHeroTitleProps) {
   const resolved = resolveMarketingTitle({ title, titleLead, titleAccent });
-  const titleClass = cn(className ?? HERO_TITLE_CLASS);
+  const titleClass = cn(HERO_TITLE_CLASS, className);
 
   if (resolved.kind === "accent" && layout === "block") {
     return (

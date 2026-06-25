@@ -4,6 +4,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { LegalDocumentMobile } from "@/components/marketing/legal/LegalDocumentMobile";
 
 export const metadata: Metadata = {
@@ -96,7 +97,7 @@ export default function PrivacyPage() {
               <Badge tone="primary" dot>
                 Legal
               </Badge>
-              <h1 className="mt-5 font-display text-4xl sm:text-5xl tracking-tight text-balance">Privacy Policy</h1>
+              <MarketingHeroTitle className="mt-5" title="Privacy Policy" />
               <p className="mt-4 text-text-muted text-pretty">{intro}</p>
               <nav className="mt-8 rounded-md border border-border bg-surface p-5">
                 <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">On this page</p>

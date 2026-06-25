@@ -173,7 +173,7 @@ export default function AdditionalServicesPage() {
               <div className="max-w-3xl">
                 <Badge tone="primary" dot>SEO Service</Badge>
                 <MarketingHeroTitle
-                  className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance"
+                  className="mt-5"
                   title="Get discovered, tracked, and optimized from day one."
                   titleLead="Get discovered, tracked,"
                   titleAccent="and optimized from day one."

@@ -129,7 +129,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                   <Badge tone="primary" dot>The Growrix OS blog</Badge>
                 </div>
                 <MarketingHeroTitle
-                  className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"
+                  className="mt-5 signal-rise"
                   title={BLOG_LANDING_HERO.title}
                   titleLead={BLOG_LANDING_HERO.titleLead}
                   titleAccent={BLOG_LANDING_HERO.titleAccent}
