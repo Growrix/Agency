@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isClerkConfigured } from "@/server/auth/clerk-config";
 import { ApiError, createRequestContext, errorResponse } from "@/server/core/api";
 import { applySessionCookie } from "@/server/auth/guards";
 import { issueSessionToken } from "@/server/auth/token";
@@ -12,6 +13,10 @@ export async function POST(request: NextRequest) {
   const context = createRequestContext(request);
 
   try {
+    if (isClerkConfigured()) {
+      throw new ApiError("GONE", 410, "Password login is deprecated. Use Clerk sign-in.");
+    }
+
     getRequiredAdminCredentialsConfigured();
     assertRateLimit({
       scope: "auth",

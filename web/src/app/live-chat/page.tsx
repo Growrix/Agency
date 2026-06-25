@@ -1,10 +1,14 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Badge } from "@/components/primitives/Badge";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { LiveChatHeroMobile } from "@/components/marketing/live-chat/LiveChatHeroMobile";
+import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { LIVE_CHAT_FORM, LIVE_CHAT_HERO } from "@/lib/live-chat-landing-content";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export default function LiveChatPage() {
@@ -28,7 +32,10 @@ export default function LiveChatPage() {
         body: JSON.stringify(data),
       });
 
-      const payload = (await response.json().catch(() => null)) as { data?: { session_id?: string }; error?: { message?: string } } | null;
+      const payload = (await response.json().catch(() => null)) as {
+        data?: { session_id?: string };
+        error?: { message?: string };
+      } | null;
       if (!response.ok) {
         setMessage(payload?.error?.message ?? "Could not start live chat.");
         setStatus("error");
@@ -43,59 +50,100 @@ export default function LiveChatPage() {
     }
   };
 
+  const formCard = (
+    <Card className="contact-form-mobile__form-card">
+      {status === "success" ? (
+        <div>
+          <h2 className="font-display text-2xl tracking-tight">{LIVE_CHAT_FORM.successTitle}</h2>
+          <p className="mt-4 text-sm leading-6 text-text-muted">{LIVE_CHAT_FORM.successDescription(sessionId)}</p>
+          <div className="mt-6 flex flex-col gap-3">
+            <Button
+              type="button"
+              fullWidth
+              onClick={() => {
+                setStatus("idle");
+                setSessionId(null);
+              }}
+            >
+              {LIVE_CHAT_FORM.resetLabel}
+            </Button>
+            <LinkButton href={WHATSAPP_HREF} variant="outline" fullWidth>
+              {LIVE_CHAT_FORM.escalateLabel}
+            </LinkButton>
+          </div>
+        </div>
+      ) : (
+        <form onSubmit={onSubmit} className="contact-form-mobile__form space-y-5" aria-busy={status === "submitting"} data-ready={isHydrated ? "true" : "false"}>
+          <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
+          <label className="block">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Topic *</span>
+            <input
+              name="topic"
+              required
+              className="signal-input mt-1.5 w-full"
+              placeholder={LIVE_CHAT_FORM.topicPlaceholder}
+            />
+          </label>
+          <label className="block">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Context</span>
+            <textarea
+              name="context"
+              rows={4}
+              className="signal-input mt-1.5 w-full min-h-28 resize-y py-3"
+              placeholder={LIVE_CHAT_FORM.contextPlaceholder}
+            />
+          </label>
+          {status === "error" ? <p className="text-sm text-destructive">{message}</p> : null}
+          <div className="contact-form-mobile__submit">
+            <Button type="submit" fullWidth disabled={!isHydrated || status === "submitting"}>
+              {status === "submitting" ? LIVE_CHAT_FORM.submittingLabel : LIVE_CHAT_FORM.submitLabel}
+            </Button>
+          </div>
+        </form>
+      )}
+    </Card>
+  );
+
   return (
     <Section className="overflow-x-hidden py-12 sm:py-16 md:py-24">
       <Container className="min-w-0">
-        <div className="grid min-w-0 gap-6 lg:grid-cols-[1fr_0.92fr] lg:items-start">
-          <div className="min-w-0">
-            <Badge tone="primary" dot>Live chat</Badge>
-            <h1 className="mt-5 font-display text-4xl tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              Start a real support handoff.
-            </h1>
-            <p className="mt-6 text-lg leading-7 text-text-muted">
-              This route creates a tracked live-chat request in the backend so the team can follow up with the right context. For urgent conversations, WhatsApp is still the fastest path.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href={WHATSAPP_HREF} size="lg">Open WhatsApp</LinkButton>
-              <LinkButton href="/contact" variant="outline" size="lg">Send a written brief</LinkButton>
+        <MarketingViewportGate
+          mobile={
+            <div className="home-mobile-marketing contact-form-mobile">
+              <LiveChatHeroMobile />
+              <MobileMarketingSectionHeader
+                eyebrow={LIVE_CHAT_FORM.eyebrow}
+                titleLead={LIVE_CHAT_FORM.titleLead}
+                titleAccent={LIVE_CHAT_FORM.titleAccent}
+                align="left"
+                className="home-mobile-marketing__header--left max-w-none mt-8"
+              />
+              {formCard}
             </div>
-          </div>
-
-          <Card className="min-w-0">
-            {status === "success" ? (
-              <div>
-                <h2 className="font-display text-3xl tracking-tight">Request queued.</h2>
-                <p className="mt-4 text-sm leading-6 text-text-muted">
-                  {sessionId ? `Live chat session ${sessionId} has been recorded.` : "Your request has been recorded."} Continue on WhatsApp if you need an immediate response.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Button type="button" onClick={() => { setStatus("idle"); setSessionId(null); }}>Start another request</Button>
-                  <LinkButton href={WHATSAPP_HREF} variant="outline">Escalate now</LinkButton>
+          }
+          desktop={
+            <div className="grid min-w-0 gap-6 lg:grid-cols-[1fr_0.92fr] lg:items-start">
+              <div className="min-w-0">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-primary">{LIVE_CHAT_HERO.eyebrow}</p>
+                <MarketingHeroTitle
+                  className="mt-5 font-display text-4xl tracking-tight text-balance sm:text-5xl lg:text-6xl"
+                  titleLead={LIVE_CHAT_HERO.titleLead}
+                  titleAccent={LIVE_CHAT_HERO.titleAccent}
+                />
+                <p className="mt-6 text-lg leading-7 text-text-muted">{LIVE_CHAT_HERO.description}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <LinkButton href={WHATSAPP_HREF} size="lg">
+                    {LIVE_CHAT_HERO.primaryCta}
+                  </LinkButton>
+                  <LinkButton href={LIVE_CHAT_HERO.secondaryHref} variant="outline" size="lg">
+                    {LIVE_CHAT_HERO.secondaryCta}
+                  </LinkButton>
                 </div>
               </div>
-            ) : (
-              <form onSubmit={onSubmit} className="space-y-4" aria-busy={status === "submitting"} data-ready={isHydrated ? "true" : "false"}>
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Queue request</p>
-                  <h2 className="mt-2 font-display text-3xl tracking-tight">Tell us what this conversation is about.</h2>
-                </div>
-                <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
-                <label className="block">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Topic *</span>
-                  <input name="topic" required className="signal-input mt-1.5" placeholder="New project, support, pricing, or delivery question" />
-                </label>
-                <label className="block">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Context</span>
-                  <textarea name="context" rows={4} className="signal-input mt-1.5 min-h-28 resize-y py-3" placeholder="What happened, what you need, and how urgent it is." />
-                </label>
-                {status === "error" ? <p className="text-sm text-destructive">{message}</p> : null}
-                <Button type="submit" disabled={!isHydrated || status === "submitting"}>
-                  {status === "submitting" ? "Queuing..." : "Start live chat"}
-                </Button>
-              </form>
-            )}
-          </Card>
-        </div>
+              {formCard}
+            </div>
+          }
+        />
       </Container>
     </Section>
   );

@@ -17,7 +17,7 @@ export function HomeHeroDesktopMonitorFrame({
 }: HomeHeroDesktopMonitorFrameProps) {
   return (
     <div className={cn("relative mx-auto w-full", className)}>
-      <div className="rounded-[1.25rem] border border-border/80 bg-linear-to-b from-surface/95 to-surface/75 p-2 shadow-(--shadow-2) backdrop-blur-sm">
+      <div className="home-hero-desktop__monitor-shell rounded-[1.35rem] border border-border/70 bg-linear-to-b from-surface/95 to-surface/70 p-2.5 shadow-(--shadow-3) backdrop-blur-sm">
         <div className="flex items-center gap-1.5 border-b border-border/40 px-2.5 py-2">
           <span className="size-2.5 rounded-full bg-[#ff5f57]" aria-hidden />
           <span className="size-2.5 rounded-full bg-[#febc2e]" aria-hidden />

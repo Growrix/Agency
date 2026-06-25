@@ -59,6 +59,9 @@ export const ABOUT_PRINCIPLES_SECTION = {
 export const ABOUT_FOUNDER_SECTION = {
   eyebrow: "Founder story",
   title: "Why I Built GrowrixOS",
+  titleLead: "Why I Built",
+  titleAccent: "GrowrixOS",
+  timelineEyebrow: "The path to GrowrixOS",
   founder: {
     name: "Nayeem",
     role: "Founder & Product Builder",
@@ -90,6 +93,8 @@ export const ABOUT_FOUNDER_SECTION = {
 export const ABOUT_WHY_EXIST_SECTION = {
   eyebrow: "Why we exist",
   title: "Built to bridge the gap between products and implementation.",
+  titleLead: "Built to bridge the gap",
+  titleAccent: "between products and implementation.",
   description:
     "Most businesses don't struggle because they lack tools. They struggle because websites, software, SEO, automation, and AI are often treated as separate projects. GrowrixOS exists to connect these systems into a single operational ecosystem.",
   pillars: [
@@ -124,6 +129,8 @@ export const ABOUT_PROCESS_SECTION = {
 export const ABOUT_ECOSYSTEM_SECTION = {
   eyebrow: "The ecosystem",
   title: "Every service supports the same business outcome.",
+  titleLead: "Every service supports",
+  titleAccent: "the same business outcome.",
   description:
     "GrowrixOS is designed as a connected ecosystem rather than a collection of disconnected services.",
   services: [
@@ -139,6 +146,8 @@ export const ABOUT_ECOSYSTEM_SECTION = {
 export const ABOUT_BUSINESS_FIRST_SECTION = {
   eyebrow: "Business first",
   title: "Business outcomes before technology choices.",
+  titleLead: "Business outcomes",
+  titleAccent: "before technology choices.",
   description:
     "Technology only matters when it supports visibility, operations, customer experience, and growth.",
   cardTitle: "Why partner with us?",
@@ -182,6 +191,8 @@ export const ABOUT_HOW_WE_WORK_SECTION = {
 export const ABOUT_CLIENT_VALUE_SECTION = {
   eyebrow: "What clients value",
   title: "What clients actually care about.",
+  titleLead: "What clients",
+  titleAccent: "actually care about.",
   items: [
     { title: "Clarity", description: "Visitors immediately understand what you do." },
     { title: "Trust", description: "Professional presentation that supports credibility." },
@@ -189,6 +200,14 @@ export const ABOUT_CLIENT_VALUE_SECTION = {
     { title: "Performance", description: "Fast, reliable experiences across devices." },
     { title: "Conversion", description: "More enquiries, conversations, and opportunities." },
   ],
+} as const;
+
+export const ABOUT_REVIEWS_SECTION = {
+  eyebrow: "Voices",
+  title: "What clients say after launch.",
+  titleLead: "What clients say",
+  titleAccent: "after launch.",
+  description: "Proof from launches, redesigns, and ongoing product work.",
 } as const;
 
 export const ABOUT_CTA = {

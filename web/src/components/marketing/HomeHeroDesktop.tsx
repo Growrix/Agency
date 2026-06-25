@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { HomeHeroShowcase } from "@/components/marketing/HomeHeroShowcase";
 import { HomeHeroTrustedBy } from "@/components/marketing/HomeHeroTrustedBy";
+import { HomeHeroTrustedByDesktop } from "@/components/marketing/HomeHeroTrustedByDesktop";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
@@ -38,16 +39,16 @@ export function HomeHeroDesktop({
   const useStructuredTitle = !title;
 
   return (
-    <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)] lg:gap-10 xl:gap-14">
-      <div className="text-center lg:text-left">
+    <div className="home-hero-desktop">
+      <div className="home-hero-desktop__copy">
         <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-          <Badge tone="primary" dot className="border-0 bg-primary text-surface">
+          <Badge tone="primary" dot className="home-hero-desktop__badge">
             {badge}
           </Badge>
         </div>
 
         <h1
-          className={`signal-rise mt-5 ${HERO_DISPLAY_TITLE_CLASS}`}
+          className={`signal-rise home-hero-desktop__title ${HERO_DISPLAY_TITLE_CLASS}`}
           style={{ animationDelay: "80ms" }}
         >
           {useStructuredTitle ? (
@@ -57,7 +58,7 @@ export function HomeHeroDesktop({
                   {line}
                 </span>
               ))}
-              <span className="block text-primary">{HOME_HERO_COPY.titleAccent}</span>
+              <span className="block marketing-title-accent">{HOME_HERO_COPY.titleAccent}</span>
             </>
           ) : (
             title
@@ -65,52 +66,58 @@ export function HomeHeroDesktop({
         </h1>
 
         <p
-          className="signal-rise mx-auto mt-5 max-w-xl text-base leading-7 text-pretty text-text-muted sm:text-lg lg:mx-0"
+          className="signal-rise home-hero-desktop__description"
           style={{ animationDelay: "160ms" }}
         >
           {description}
         </p>
 
-        <div
-          className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
-          style={{ animationDelay: "240ms" }}
-        >
-          <LinkButton href={HOME_HERO_COPY.primaryCtaHref} size="lg" className="text-surface">
+        <div className="signal-rise home-hero-desktop__actions" style={{ animationDelay: "240ms" }}>
+          <LinkButton href={HOME_HERO_COPY.primaryCtaHref} size="lg" className="home-hero-desktop__cta-primary">
             {HOME_HERO_COPY.primaryCta}
             <ArrowRightIcon className="size-4" />
           </LinkButton>
-          <LinkButton href={HOME_HERO_COPY.secondaryCtaHref} variant="outline" size="lg">
+          <LinkButton
+            href={HOME_HERO_COPY.secondaryCtaHref}
+            variant="outline"
+            size="lg"
+            className="home-hero-desktop__cta-secondary"
+          >
             {HOME_HERO_COPY.secondaryCta}
           </LinkButton>
         </div>
 
+        <div className="signal-rise home-hero-desktop__trust-wrap" style={{ animationDelay: "320ms" }}>
+          <HomeHeroTrustedByDesktop />
+          <HomeHeroTrustedBy className="home-hero-desktop__trust-names" />
+        </div>
+
         <ul
-          className="signal-rise mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-6 sm:gap-y-3 lg:justify-start"
-          style={{ animationDelay: "320ms" }}
+          className="signal-rise home-hero-desktop__highlights"
+          style={{ animationDelay: "400ms" }}
           aria-label="Platform highlights"
         >
           {HOME_HERO_HIGHLIGHTS.map((item) => {
             const Icon = highlightIcons[item.icon];
             return (
-              <li key={item.label} className="inline-flex items-center gap-2 text-sm text-text-muted">
+              <li key={item.label} className="home-hero-desktop__highlight">
                 <Icon className="size-4 shrink-0 text-primary" aria-hidden />
                 <span>{item.label}</span>
               </li>
             );
           })}
         </ul>
-
-        <div className="signal-rise mt-8" style={{ animationDelay: "400ms" }}>
-          <HomeHeroTrustedBy className="text-center lg:text-left" />
-        </div>
       </div>
 
-      <HomeHeroShowcase
-        slides={slides}
-        emptyFallbackSlide={emptyFallbackSlide}
-        layout="desktop"
-        className="signal-spring-in w-full lg:justify-self-stretch"
-      />
+      <div className="home-hero-desktop__showcase">
+        <div className="home-hero-desktop__showcase-glow" aria-hidden />
+        <HomeHeroShowcase
+          slides={slides}
+          emptyFallbackSlide={emptyFallbackSlide}
+          layout="desktop"
+          className="signal-spring-in home-hero-desktop__showcase-frame"
+        />
+      </div>
     </div>
   );
 }

@@ -28,25 +28,33 @@ import {
 	ServicesHeroEcosystem,
 } from "@/components/sections/ServicesHeroEcosystem";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { ProcessStepsMobile } from "@/components/marketing/ProcessStepsMobile";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { MobileFeatureGrid } from "@/components/marketing/mobile/MobileFeatureGrid";
 import { ServicesLandingHeroMobile } from "@/components/marketing/services/ServicesLandingHeroMobile";
 import { ServicesLandingGridMobile } from "@/components/marketing/services/ServicesLandingGridMobile";
+import { ServicesLandingCompareMobile } from "@/components/marketing/services/ServicesLandingCompareMobile";
+import { ServiceFeaturedProofMobile } from "@/components/marketing/services/ServiceFeaturedProofMobile";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { PROCESS_STEPS } from "@/lib/content";
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { marketingSection } from "@/lib/marketing-composition";
 import {
+	SERVICES_COMPARE_SECTION,
 	SERVICES_DELIVERY_FRAMEWORK,
 	SERVICES_ECOSYSTEM_SECTION,
 	SERVICES_HERO_ECOSYSTEM_LINKS,
 	SERVICES_LANDING_CTA,
 	SERVICES_LANDING_FAQ,
+	SERVICES_LANDING_FAQ_SECTION,
 	SERVICES_LANDING_HERO,
 	SERVICES_LANDING_HIGHLIGHT_SLUGS,
 	SERVICES_LANDING_INTRO,
+	SERVICES_PROOF_SECTION,
 	SERVICES_SUPPORTING_SYSTEMS,
 } from "@/lib/services-landing-content";
-import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
-import { cn } from "@/lib/utils";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
 export const metadata: Metadata = {
@@ -163,6 +171,7 @@ export default async function ServicesPage() {
 								primaryHref={SERVICES_LANDING_HERO.primaryHref}
 								secondaryCta={SERVICES_LANDING_HERO.secondaryCta}
 								secondaryHref={SERVICES_LANDING_HERO.secondaryHref}
+								ecosystemLinks={SERVICES_HERO_ECOSYSTEM_LINKS}
 							/>
 						}
 						desktop={
@@ -171,7 +180,12 @@ export default async function ServicesPage() {
 									<Badge tone="primary" dot>
 										{SERVICES_LANDING_HERO.eyebrow}
 									</Badge>
-									<h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{SERVICES_LANDING_HERO.title}</h1>
+									<MarketingHeroTitle
+										className="mt-5"
+										title={SERVICES_LANDING_HERO.title}
+										titleLead={SERVICES_LANDING_HERO.headlineLead}
+										titleAccent={SERVICES_LANDING_HERO.headlineAccent}
+									/>
 									<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
 										{SERVICES_LANDING_HERO.description}
 									</p>
@@ -256,70 +270,61 @@ export default async function ServicesPage() {
 
 			<Section id="compare" {...marketingSection("services", "compare")}>
 				<Container>
-					<SectionHeading
-						eyebrow="Comparison"
-						title="See the difference before you commit to a scope."
-						description="Compare the business shape of the work, where it sits in the larger launch, and when supporting systems are actually necessary."
+					<MarketingViewportGate
+						mobile={
+							<ServicesLandingCompareMobile
+								eyebrow={SERVICES_COMPARE_SECTION.eyebrow}
+								titleLead={SERVICES_COMPARE_SECTION.titleLead}
+								titleAccent={SERVICES_COMPARE_SECTION.titleAccent}
+								description={SERVICES_COMPARE_SECTION.description}
+								services={highlightServices}
+								rows={GOAL_ROWS}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_COMPARE_SECTION.eyebrow}
+									title={SERVICES_COMPARE_SECTION.title}
+									description={SERVICES_COMPARE_SECTION.description}
+								/>
+								<div className="mt-10 overflow-hidden rounded-[18px] border border-border bg-surface">
+									<table className="w-full text-left text-sm">
+										<thead className="bg-inset/70">
+											<tr>
+												<th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">
+													Decision point
+												</th>
+												{highlightServices.map((service) => (
+													<th
+														key={service.slug}
+														className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted"
+													>
+														{service.title}
+													</th>
+												))}
+											</tr>
+										</thead>
+										<tbody>
+											{GOAL_ROWS.map((row) => (
+												<tr key={row.label} className="border-t border-border align-top">
+													<td className="px-5 py-4 font-display text-base tracking-tight">{row.label}</td>
+													{highlightServices.map((service) => (
+														<td
+															key={`${row.label}-${service.slug}`}
+															className="px-5 py-4 text-text-muted leading-6"
+														>
+															{row.values[service.slug as keyof typeof row.values]}
+														</td>
+													))}
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							</>
+						}
 					/>
-					<div className="mt-10 hidden overflow-hidden rounded-[18px] border border-border bg-surface lg:block">
-						<table className="w-full text-left text-sm">
-							<thead className="bg-inset/70">
-								<tr>
-									<th className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted">
-										Decision point
-									</th>
-									{highlightServices.map((service) => (
-										<th
-											key={service.slug}
-											className="px-5 py-4 font-mono text-[11px] uppercase tracking-wider text-text-muted"
-										>
-											{service.title}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody>
-								{GOAL_ROWS.map((row) => (
-									<tr key={row.label} className="border-t border-border align-top">
-										<td className="px-5 py-4 font-display text-base tracking-tight">{row.label}</td>
-										{highlightServices.map((service) => (
-											<td
-												key={`${row.label}-${service.slug}`}
-												className="px-5 py-4 text-text-muted leading-6"
-											>
-												{row.values[service.slug as keyof typeof row.values]}
-											</td>
-										))}
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-
-					<RevealGroup className="mt-10 grid gap-4 lg:hidden" stagger={0.06}>
-						{highlightServices.map((service) => (
-							<RevealItem key={service.slug}>
-								<Card>
-									<div className="flex items-center justify-between gap-4">
-										<h3 className="font-display text-xl tracking-tight">{service.title}</h3>
-										<Badge tone="primary">{service.delivery_timeline}</Badge>
-									</div>
-									<dl className="mt-5 space-y-4">
-										{GOAL_ROWS.map((row) => (
-											<div key={`${service.slug}-${row.label}`}>
-												<dt className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
-													{row.label}
-												</dt>
-												<dd className="mt-1 text-sm leading-6">
-													{row.values[service.slug as keyof typeof row.values]}
-												</dd>
-											</div>
-										))}
-									</dl>
-								</Card>
-							</RevealItem>
-						))}
-					</RevealGroup>
 				</Container>
 			</Section>
 
@@ -351,50 +356,97 @@ export default async function ServicesPage() {
 
 			<Section {...marketingSection("services", "process")}>
 				<Container>
-					<SectionHeading
-						eyebrow={SERVICES_DELIVERY_FRAMEWORK.eyebrow}
-						title={SERVICES_DELIVERY_FRAMEWORK.title}
-						description={SERVICES_DELIVERY_FRAMEWORK.description}
+					<MarketingViewportGate
+						mobile={
+							<ProcessStepsMobile
+								steps={PROCESS_STEPS}
+								eyebrow={SERVICES_DELIVERY_FRAMEWORK.eyebrow}
+								titleLead={SERVICES_DELIVERY_FRAMEWORK.titleLead}
+								titleAccent={SERVICES_DELIVERY_FRAMEWORK.titleAccent}
+								description={SERVICES_DELIVERY_FRAMEWORK.description}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_DELIVERY_FRAMEWORK.eyebrow}
+									title={SERVICES_DELIVERY_FRAMEWORK.title}
+									description={SERVICES_DELIVERY_FRAMEWORK.description}
+								/>
+								<div className="mt-10">
+									<ProcessSteps steps={PROCESS_STEPS} />
+								</div>
+							</>
+						}
 					/>
-					<div className="mt-10">
-						<ProcessSteps steps={PROCESS_STEPS} />
-					</div>
 				</Container>
 			</Section>
 
 			<Section {...marketingSection("services", "stack")} tone="inset">
 				<Container>
-					<SectionHeading
-						eyebrow={SERVICES_SUPPORTING_SYSTEMS.eyebrow}
-						title={SERVICES_SUPPORTING_SYSTEMS.title}
+					<MarketingViewportGate
+						mobile={
+							<MobileFeatureGrid
+								eyebrow={SERVICES_SUPPORTING_SYSTEMS.eyebrow}
+								titleLead={SERVICES_SUPPORTING_SYSTEMS.titleLead}
+								titleAccent={SERVICES_SUPPORTING_SYSTEMS.titleAccent}
+								items={SERVICES_SUPPORTING_SYSTEMS.areas.map((area) => ({
+									title: area.title,
+									description: area.detail,
+								}))}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_SUPPORTING_SYSTEMS.eyebrow}
+									title={SERVICES_SUPPORTING_SYSTEMS.title}
+								/>
+								<RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
+									{SERVICES_SUPPORTING_SYSTEMS.areas.map((area) => (
+										<RevealItem key={area.title} className="h-full">
+											<Card hoverable className="h-full">
+												<h3 className="font-display text-lg tracking-tight">{area.title}</h3>
+												<p className="mt-3 text-sm text-text-muted leading-6">{area.detail}</p>
+											</Card>
+										</RevealItem>
+									))}
+								</RevealGroup>
+							</>
+						}
 					/>
-					<RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.06}>
-						{SERVICES_SUPPORTING_SYSTEMS.areas.map((area) => (
-							<RevealItem key={area.title} className="h-full">
-								<Card hoverable className="h-full">
-									<h3 className="font-display text-lg tracking-tight">{area.title}</h3>
-									<p className="mt-3 text-sm text-text-muted leading-6">{area.detail}</p>
-								</Card>
-							</RevealItem>
-						))}
-					</RevealGroup>
 				</Container>
 			</Section>
 
 			<Section {...marketingSection("services", "proof")}>
 				<Container>
-					<SectionHeading
-						eyebrow="Proof by service"
-						title="Recent work mapped to the capability behind it."
-						description="Explore projects tagged by service category to see how each capability shows up in real launches."
+					<MarketingViewportGate
+						mobile={
+							<ServiceFeaturedProofMobile
+								eyebrow={SERVICES_PROOF_SECTION.eyebrow}
+								title={SERVICES_PROOF_SECTION.title}
+								titleLead={SERVICES_PROOF_SECTION.titleLead}
+								titleAccent={SERVICES_PROOF_SECTION.titleAccent}
+								projects={portfolio.slice(0, 3)}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_PROOF_SECTION.eyebrow}
+									title={SERVICES_PROOF_SECTION.title}
+									description={SERVICES_PROOF_SECTION.description}
+								/>
+								<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
+									{portfolio.slice(0, 3).map((project) => (
+										<RevealItem key={project.slug} className="h-full">
+											<PortfolioCard project={project} />
+										</RevealItem>
+									))}
+								</RevealGroup>
+							</>
+						}
 					/>
-					<RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.07}>
-						{portfolio.slice(0, 3).map((project) => (
-							<RevealItem key={project.slug} className="h-full">
-								<PortfolioCard project={project} />
-							</RevealItem>
-						))}
-					</RevealGroup>
 
 					{SHOW_GOOGLE_REVIEWS ? (
 						<div className="mt-12">
@@ -410,29 +462,61 @@ export default async function ServicesPage() {
 
 			<Section {...marketingSection("services", "faq")} tone="inset">
 				<Container width="reading">
-					<SectionHeading
-						eyebrow="FAQ"
-						title="Questions buyers ask before choosing a service."
-						description="Service selection, combinations, timelines, and what happens after launch—covered before you book a strategy call."
-						align="center"
+					<MarketingViewportGate
+						mobile={
+							<ServiceFaqMobile
+								eyebrow={SERVICES_LANDING_FAQ_SECTION.eyebrow}
+								title={SERVICES_LANDING_FAQ_SECTION.title}
+								titleLead={SERVICES_LANDING_FAQ_SECTION.titleLead}
+								titleAccent={SERVICES_LANDING_FAQ_SECTION.titleAccent}
+								description={SERVICES_LANDING_FAQ_SECTION.description}
+								items={[...SERVICES_LANDING_FAQ]}
+							/>
+						}
+						desktop={
+							<>
+								<SectionHeading
+									eyebrow={SERVICES_LANDING_FAQ_SECTION.eyebrow}
+									title={SERVICES_LANDING_FAQ_SECTION.title}
+									description={SERVICES_LANDING_FAQ_SECTION.description}
+									align="center"
+								/>
+								<div className="mt-10">
+									<Accordion items={[...SERVICES_LANDING_FAQ]} />
+								</div>
+							</>
+						}
 					/>
-					<div className="mt-10">
-						<Accordion items={[...SERVICES_LANDING_FAQ]} />
-					</div>
 				</Container>
 			</Section>
 
-			<CTABand
-				title={SERVICES_LANDING_CTA.title}
-				description={SERVICES_LANDING_CTA.description}
-				primary={{
-					label: SERVICES_LANDING_CTA.primaryLabel,
-					href: SERVICES_LANDING_CTA.primaryHref,
-				}}
-				secondary={{
-					label: SERVICES_LANDING_CTA.secondaryLabel,
-					href: SERVICES_LANDING_CTA.secondaryHref,
-				}}
+			<MarketingViewportGate
+				mobile={
+					<ProductLedFinalCTAMobile
+						eyebrow="Next step"
+						titleLead={SERVICES_LANDING_CTA.titleLead}
+						titleAccent={SERVICES_LANDING_CTA.titleAccent}
+						description={SERVICES_LANDING_CTA.description}
+						primaryLabel={SERVICES_LANDING_CTA.primaryLabel}
+						primaryHref={SERVICES_LANDING_CTA.primaryHref}
+						secondaryLabel={SERVICES_LANDING_CTA.secondaryLabel}
+						secondaryHref={SERVICES_LANDING_CTA.secondaryHref}
+					/>
+				}
+				desktop={
+					<CTABand
+						title={SERVICES_LANDING_CTA.title}
+						description={SERVICES_LANDING_CTA.description}
+						primary={{
+							label: SERVICES_LANDING_CTA.primaryLabel,
+							href: SERVICES_LANDING_CTA.primaryHref,
+						}}
+						secondary={{
+							label: SERVICES_LANDING_CTA.secondaryLabel,
+							href: SERVICES_LANDING_CTA.secondaryHref,
+						}}
+					/>
+				}
 			/>
 		</>
 	);

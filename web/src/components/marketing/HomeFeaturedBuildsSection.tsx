@@ -4,16 +4,16 @@ import { useMemo, useState } from "react";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { HomeDesktopSectionRail } from "@/components/marketing/desktop/HomeDesktopSectionRail";
+import { HomeDesktopSplitSection } from "@/components/marketing/desktop/HomeDesktopSplitSection";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
 import { MobileMarketingTabs } from "@/components/marketing/mobile/MobileMarketingTabs";
 import { Container, Section } from "@/components/primitives/Container";
-import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { PortfolioCardMobile } from "@/components/sections/PortfolioCardMobile";
 import { HOME_CASE_STUDIES_COPY, HOME_CASE_STUDY_TABS } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
-import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
 
 type HomeFeaturedBuildsSectionProps = {
@@ -92,28 +92,30 @@ function HomeFeaturedBuildsDesktop({ projects, title, description }: HomeFeature
   const useAccentTitle = displayTitle === HOME_CASE_STUDIES_COPY.title;
 
   return (
-    <>
-      <SectionHeading
-        eyebrow={HOME_CASE_STUDIES_COPY.eyebrow}
-        title={displayTitle}
-        titleLead={useAccentTitle ? HOME_CASE_STUDIES_COPY.titleLead : undefined}
-        titleAccent={useAccentTitle ? HOME_CASE_STUDIES_COPY.titleAccent : undefined}
-        description={description ?? HOME_CASE_STUDIES_COPY.description}
-        titleClassName={HERO_TITLE_CLASS}
-      />
-      <RevealGroup className="mt-8 grid auto-rows-fr gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-3" stagger={0.08}>
-        {projects.map((project) => (
-          <RevealItem key={project.slug} className="h-full">
-            <PortfolioCard project={project} />
-          </RevealItem>
-        ))}
-      </RevealGroup>
-      <div className="mt-8 flex justify-center">
-        <LinkButton href="/portfolio" variant="outline">
-          See all projects
-        </LinkButton>
-      </div>
-    </>
+    <HomeDesktopSplitSection
+      rail={
+        <HomeDesktopSectionRail
+          eyebrow={HOME_CASE_STUDIES_COPY.eyebrow}
+          title={useAccentTitle ? undefined : displayTitle}
+          titleLead={useAccentTitle ? HOME_CASE_STUDIES_COPY.titleLead : undefined}
+          titleAccent={useAccentTitle ? HOME_CASE_STUDIES_COPY.titleAccent : undefined}
+          description={description ?? HOME_CASE_STUDIES_COPY.description}
+          ctaHref="/portfolio"
+          ctaLabel="See all projects"
+        />
+      }
+      content={
+        <>
+          <RevealGroup className="home-desktop-marketing__portfolio-grid" stagger={0.08}>
+            {projects.map((project) => (
+              <RevealItem key={project.slug} className="h-full">
+                <PortfolioCard project={project} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </>
+      }
+    />
   );
 }
 

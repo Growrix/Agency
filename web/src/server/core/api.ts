@@ -10,6 +10,8 @@ export type ApiErrorCode =
   | "CONFLICT"
   | "UNAUTHORIZED"
   | "FORBIDDEN"
+  | "GONE"
+  | "METHOD_NOT_ALLOWED"
   | "RATE_LIMIT_EXCEEDED"
   | "SERVICE_UNAVAILABLE"
   | "INTERNAL_ERROR";

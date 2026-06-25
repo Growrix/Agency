@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { LegalDocumentMobile } from "@/components/marketing/legal/LegalDocumentMobile";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -69,61 +71,73 @@ const SECTIONS = [
 ];
 
 export default function PrivacyPage() {
+  const intro =
+    "Last updated April 19, 2026. This policy explains how we handle data across the website, AI chat, booking, and payments.";
+
   return (
-    <>
-      <Section className="overflow-x-hidden pt-10 sm:pt-12 md:pt-16 pb-8">
-        <Container width="reading" className="min-w-0 px-4 sm:px-6">
-          <Badge tone="primary" dot>Legal</Badge>
-          <h1 className="mt-5 font-display text-4xl sm:text-5xl tracking-tight text-balance">Privacy Policy</h1>
-          <p className="mt-4 text-text-muted text-pretty">
-            Last updated April 19, 2026. This policy explains how we handle data across the website, AI chat, booking, and payments.
-          </p>
-          <nav className="mt-8 rounded-md border border-border bg-surface p-5">
-            <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">On this page</p>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {SECTIONS.map((s) => (
-                <li key={s.id}>
-                  <a href={`#${s.id}`} className="text-sm text-primary hover:underline">
-                    {s.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </Container>
-      </Section>
-
-      <Section className="overflow-x-hidden py-8">
-        <Container width="reading" className="min-w-0 px-4 sm:px-6">
-          <div className="space-y-12">
-            {SECTIONS.map((s) => (
-              <section key={s.id} id={s.id} className="scroll-mt-24">
-                <h2 className="font-display text-2xl tracking-tight">{s.title}</h2>
-                <div className="mt-4 space-y-3 text-text-muted leading-7 text-pretty">
-                  {s.body.map((p, i) => (
-                    <p key={i}>{p}</p>
+    <Section className="overflow-x-hidden py-10 sm:py-12">
+      <Container width="reading" className="min-w-0 px-4 sm:px-6">
+        <MarketingViewportGate
+          mobile={
+            <LegalDocumentMobile
+              eyebrow="Legal"
+              titleLead="Privacy"
+              titleAccent="Policy"
+              intro={intro}
+              sections={SECTIONS}
+              footerTitle="Questions about your data?"
+              footerDescription="We respond to privacy questions within 5 business days."
+              primaryCta={{ label: "Contact us", href: "/contact" }}
+              secondaryLink={{ label: "Read terms of service →", href: "/terms-of-service" }}
+            />
+          }
+          desktop={
+            <>
+              <Badge tone="primary" dot>
+                Legal
+              </Badge>
+              <h1 className="mt-5 font-display text-4xl sm:text-5xl tracking-tight text-balance">Privacy Policy</h1>
+              <p className="mt-4 text-text-muted text-pretty">{intro}</p>
+              <nav className="mt-8 rounded-md border border-border bg-surface p-5">
+                <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">On this page</p>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {SECTIONS.map((s) => (
+                    <li key={s.id}>
+                      <a href={`#${s.id}`} className="text-sm text-primary hover:underline">
+                        {s.title}
+                      </a>
+                    </li>
                   ))}
-                </div>
-              </section>
-            ))}
-          </div>
-        </Container>
-      </Section>
+                </ul>
+              </nav>
 
-      <Section className="overflow-x-hidden py-10 sm:py-12">
-        <Container width="reading" className="min-w-0 px-4 sm:px-6">
-          <div className="rounded-[20px] border border-border bg-surface p-8">
-            <h3 className="font-display text-xl tracking-tight">Questions about your data?</h3>
-            <p className="mt-2 text-text-muted">We respond to privacy questions within 5 business days.</p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <LinkButton href="/contact">Contact us</LinkButton>
-              <Link href="/terms-of-service" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
-                Read terms of service →
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </Section>
-    </>
+              <div className="mt-12 space-y-12">
+                {SECTIONS.map((s) => (
+                  <section key={s.id} id={s.id} className="scroll-mt-24">
+                    <h2 className="font-display text-2xl tracking-tight">{s.title}</h2>
+                    <div className="mt-4 space-y-3 text-text-muted leading-7 text-pretty">
+                      {s.body.map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+
+              <div className="mt-12 rounded-[20px] border border-border bg-surface p-8">
+                <h3 className="font-display text-xl tracking-tight">Questions about your data?</h3>
+                <p className="mt-2 text-text-muted">We respond to privacy questions within 5 business days.</p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <LinkButton href="/contact">Contact us</LinkButton>
+                  <Link href="/terms-of-service" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
+                    Read terms of service →
+                  </Link>
+                </div>
+              </div>
+            </>
+          }
+        />
+      </Container>
+    </Section>
   );
 }

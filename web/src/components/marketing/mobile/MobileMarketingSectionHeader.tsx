@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/primitives/SectionHeading";
 import { MobileMarketingAccentTitle } from "@/components/marketing/mobile/MobileMarketingAccentTitle";
+import { resolveMarketingTitle } from "@/lib/marketing-title";
 import { MOBILE_MARKETING_TITLE_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 
@@ -25,9 +26,10 @@ export function MobileMarketingSectionHeader({
   className,
   children,
 }: MobileMarketingSectionHeaderProps) {
+  const resolved = resolveMarketingTitle({ title, titleLead, titleAccent });
   const resolvedTitle =
-    titleLead && titleAccent ? (
-      <MobileMarketingAccentTitle lead={titleLead} accent={titleAccent} />
+    resolved.kind === "accent" ? (
+      <MobileMarketingAccentTitle lead={resolved.titleLead} accent={resolved.titleAccent} />
     ) : (
       title
     );

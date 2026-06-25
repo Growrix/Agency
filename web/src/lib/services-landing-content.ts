@@ -107,9 +107,20 @@ export const SERVICES_ECOSYSTEM_SECTION = {
   ],
 } as const;
 
+export const SERVICES_COMPARE_SECTION = {
+  eyebrow: "Comparison",
+  title: "See the difference before you commit to a scope.",
+  titleLead: "See the difference before you",
+  titleAccent: "commit to a scope.",
+  description:
+    "Compare the business shape of the work, where it sits in the larger launch, and when supporting systems are actually necessary.",
+} as const;
+
 export const SERVICES_DELIVERY_FRAMEWORK = {
   eyebrow: "Delivery framework",
   title: "A consistent delivery framework across every service.",
+  titleLead: "A consistent delivery framework",
+  titleAccent: "across every service.",
   description:
     "Every project follows a structured process designed to reduce risk, improve visibility, and deliver measurable outcomes.",
 } as const;
@@ -117,6 +128,8 @@ export const SERVICES_DELIVERY_FRAMEWORK = {
 export const SERVICES_SUPPORTING_SYSTEMS = {
   eyebrow: "Stack and integrations",
   title: "The surrounding systems matter as much as the page or app itself.",
+  titleLead: "The surrounding systems matter",
+  titleAccent: "as much as the page or app itself.",
   areas: [
     {
       title: "Digital Experience Systems",
@@ -139,6 +152,24 @@ export const SERVICES_SUPPORTING_SYSTEMS = {
         "Stripe, booking, analytics, SEO foundations, experimentation, CRM, and lifecycle integration.",
     },
   ],
+} as const;
+
+export const SERVICES_PROOF_SECTION = {
+  eyebrow: "Proof by service",
+  title: "Recent work mapped to the capability behind it.",
+  titleLead: "Recent work mapped to",
+  titleAccent: "the capability behind it.",
+  description:
+    "Explore projects tagged by service category to see how each capability shows up in real launches.",
+} as const;
+
+export const SERVICES_LANDING_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Questions buyers ask before choosing a service.",
+  titleLead: "Questions buyers ask",
+  titleAccent: "before choosing a service.",
+  description:
+    "Service selection, combinations, timelines, and what happens after launch—covered before you book a strategy call.",
 } as const;
 
 export const SERVICE_PORTFOLIO_TAG_LABELS: Record<string, string> = {
@@ -206,6 +237,8 @@ export const SERVICES_LANDING_FAQ = [
 
 export const SERVICES_LANDING_CTA = {
   title: "Not sure which service fits your project?",
+  titleLead: "Not sure which service",
+  titleAccent: "fits your project?",
   description:
     "Book a strategy session and we'll help identify the right combination of services, timelines, and delivery approach based on your goals.",
   primaryLabel: "Book Strategy Call",

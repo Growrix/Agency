@@ -9,7 +9,7 @@ export function ServiceCards({ services }: { services: PublicServiceRecord[] }) 
   const shell = homeSection("services");
 
   return (
-    <Section {...shell}>
+    <Section {...shell} className="home-services-desktop-section">
       <Container>
         <ServiceCardsViewportGate services={ordered} />
       </Container>

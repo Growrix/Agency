@@ -1,0 +1,204 @@
+.product-choose-path {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.product-choose-path__header {
+  max-width: 42rem;
+}
+
+.product-choose-path__eyebrow {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.product-choose-path__title {
+  margin-top: 0.625rem;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.product-choose-path__description {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.product-choose-path__guide-panel {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--color-inset) 40%, var(--color-surface));
+}
+
+.product-choose-path__guide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.875rem;
+}
+
+.product-choose-path__guide-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.125rem 1.125rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.875rem;
+  background: var(--color-surface);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.product-choose-path__guide-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 0.875rem 0.875rem 0 0;
+  background: color-mix(in srgb, var(--color-border) 70%, transparent);
+  opacity: 0.65;
+}
+
+.product-choose-path__guide-card--featured {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+.product-choose-path__guide-card--featured::before {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-primary) 85%, transparent),
+    color-mix(in srgb, var(--color-primary) 35%, transparent)
+  );
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-choose-path__guide-card:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--color-text) 6%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+.product-choose-path__guide-card-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.875rem;
+}
+
+.product-choose-path__icon {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  color: var(--color-primary);
+}
+
+.product-choose-path__guide-card--featured .product-choose-path__icon {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface));
+}
+
+.product-choose-path__icon-glyph {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.product-choose-path__guide-card-meta {
+  min-width: 0;
+}
+
+.product-choose-path__guide-card-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.625rem;
+}
+
+.product-choose-path__step {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--color-primary) 75%, var(--color-text-muted));
+}
+
+.product-choose-path__guide-title {
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.product-choose-path__badge {
+  margin-left: auto;
+}
+
+.product-choose-path__guide-description {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .product-choose-path__guide-panel {
+    padding: 1.25rem;
+  }
+
+  .product-choose-path__guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .product-choose-path__guide-card {
+    height: 100%;
+  }
+
+  .product-choose-path__guide-card-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.875rem;
+  }
+
+  .product-choose-path__guide-card-title-row {
+    flex-wrap: nowrap;
+  }
+
+  .product-choose-path__badge {
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-choose-path {
+    gap: 2rem;
+  }
+
+  .product-choose-path__guide-card {
+    padding: 1.25rem 1.25rem 1.375rem;
+  }
+}

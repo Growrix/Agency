@@ -84,6 +84,7 @@ type GoogleReviewsProps = {
   description?: string;
   displayMode?: "grid" | "single";
   eyebrow?: string;
+  hideHeading?: boolean;
   limit?: number;
   showSummary?: boolean;
   title: string;
@@ -252,6 +253,7 @@ export function GoogleReviews({
   description,
   displayMode = "grid",
   eyebrow = "Google reviews",
+  hideHeading = false,
   limit = 3,
   showSummary = true,
   title,
@@ -333,10 +335,12 @@ export function GoogleReviews({
 
   return (
     <div className={className}>
-      <SectionHeading eyebrow={eyebrow} title={title} description={description} align={align} titleClassName={titleClassName} />
+      {hideHeading ? null : (
+        <SectionHeading eyebrow={eyebrow} title={title} description={description} align={align} titleClassName={titleClassName} />
+      )}
 
       {showSummary && (status === "ready" || status === "empty") && summary && (
-        <Reveal className="mt-8">
+        <Reveal className={hideHeading ? "mt-0" : "mt-8"}>
           <Card variant="inset" className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">

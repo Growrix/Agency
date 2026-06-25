@@ -12,6 +12,8 @@ import { Accordion } from "@/components/sections/Accordion";
 import { WebsiteTemplateHtmlMobilePreviewSection } from "@/components/sections/WebsiteTemplateHtmlMobilePreviewSection";
 import { HtmlBusinessProfileProductPreviewHighlights, WebsiteTemplateHtmlProductPreviewHighlights } from "@/components/sections/WebsiteTemplateHtmlPreviewMarketing";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { ShopProductHeroTitle } from "@/components/shop/ShopProductHeroTitle";
+import { WebsiteTemplateChoosePathIntro } from "@/components/shop/WebsiteTemplateChoosePathIntro";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { absoluteUrl } from "@/lib/site";
@@ -568,7 +570,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                     {product.category} &middot; {product.type}
                   </p>
-                  <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
+                  <ShopProductHeroTitle name={product.name} variant="mobile" />
                 </div>
 
                 <div id="preview" className="min-w-0 w-full">
@@ -697,7 +699,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                     {product.category} &middot; {product.type}
                   </p>
-                  <h1 className="mt-2 font-display text-2xl font-bold leading-snug tracking-tight">{product.name}</h1>
+                  <ShopProductHeroTitle name={product.name} variant="sidebar" />
                   <p className="mt-3 text-sm leading-6 text-text-muted">{product.summary}</p>
                 </div>
 
@@ -1065,7 +1067,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                     {product.category} &middot; {product.type}
                   </p>
-                  <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
+                  <ShopProductHeroTitle name={product.name} variant="mobile" />
                 </div>
 
                 <div id="preview" className="min-w-0 overflow-hidden rounded-2xl border border-border">
@@ -1167,7 +1169,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                     {product.category} &middot; {product.type}
                   </p>
-                  <h1 className="mt-2 font-display text-2xl font-bold leading-snug tracking-tight">{product.name}</h1>
+                  <ShopProductHeroTitle name={product.name} variant="sidebar" />
                   <p className="mt-3 text-sm leading-6 text-text-muted">{product.summary}</p>
                 </div>
 
@@ -1325,25 +1327,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <Section className="border-t border-border py-10 sm:py-12">
           <Container>
             <div className="space-y-8">
-              <div className="max-w-4xl">
-                <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
-                <p className="mt-2 text-base leading-7 text-text-muted">
-                  Start with the template, let us customize it for your business, or partner with us for a fully tailored website experience.
-                </p>
-                <p className="mt-3 text-base font-medium text-text">Quick Buyer Guide</p>
-                <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Template Only</strong><br />
-                  You already have the skills or team to customize, deploy, and manage the website yourself.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Done-For-You Setup</strong><br />
-                  You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Business Launch</strong><br />
-                  You need a fully tailored website strategy, custom structure, unlimited pages, ongoing support, and a long-term digital partner.
-                </p>
-              </div>
+              <WebsiteTemplateChoosePathIntro />
 
               <div className="grid gap-5 lg:grid-cols-3">
                 {htmlPreviewPathVariants.map((variant) => {
@@ -1553,7 +1537,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                   {product.category} &middot; {product.type}
                 </p>
-                <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{product.name}</h1>
+                <ShopProductHeroTitle name={product.name} variant="mobile" />
               </div>
 
               {/* Preview surface */}
@@ -1869,25 +1853,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
 
               {isWebsiteTemplateProduct && !isWebsiteTemplatesCategory ? (
                 <div className="space-y-8">
-                  <div className="max-w-4xl">
-                    <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
-                    <p className="mt-2 text-base leading-7 text-text-muted">
-                      Start with the template, let us customize it for your business, or partner with us for a fully tailored website experience.
-                    </p>
-                    <p className="mt-3 text-base font-medium text-text">Quick Buyer Guide</p>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">
-                      <strong>Template Only</strong><br />
-                      You already have the skills or team to customize, deploy, and manage the website yourself.
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">
-                      <strong>Done-For-You Setup</strong><br />
-                      You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">
-                      <strong>Business Launch</strong><br />
-                      You need a fully tailored website strategy, custom structure, unlimited pages, ongoing support, and a long-term digital partner.
-                    </p>
-                  </div>
+                  <WebsiteTemplateChoosePathIntro />
 
                   <div className="grid gap-5 lg:grid-cols-3">
                     {websiteTemplatePathVariants.map((variant) => {
@@ -2049,7 +2015,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
                   {product.category} &middot; {product.type}
                 </p>
-                <h1 className="mt-2 font-display text-2xl font-bold leading-snug tracking-tight">{product.name}</h1>
+                <ShopProductHeroTitle name={product.name} variant="sidebar" />
               </div>
 
               {/* Rating row */}
@@ -2178,25 +2144,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <Section className="border-t border-border pt-6 sm:pt-8">
           <Container>
             <div className="space-y-8">
-              <div className="max-w-4xl">
-                <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Path</h2>
-                <p className="mt-2 text-base leading-7 text-text-muted">
-                  Start with the template, let us customize it for your business, or partner with us for a fully tailored website experience.
-                </p>
-                <p className="mt-3 text-base font-medium text-text">Quick Buyer Guide</p>
-                <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Template Only</strong><br />
-                  You already have the skills or team to customize, deploy, and manage the website yourself.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Done-For-You Setup</strong><br />
-                  You want the website customized, branded, integrated, and deployed without hiring a developer or building from scratch.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-text-muted">
-                  <strong>Business Launch</strong><br />
-                  You need a fully tailored website strategy, custom structure, unlimited pages, ongoing support, and a long-term digital partner.
-                </p>
-              </div>
+              <WebsiteTemplateChoosePathIntro />
 
               <div className="grid gap-5 lg:grid-cols-3">
                 {websiteTemplatePathVariants.map((variant) => {
@@ -2358,7 +2306,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       {galleryImages.length > 0 ? (
         <Section>
           <Container>
-            <SectionHeading eyebrow="Template gallery" title="Surfaces from the template." />
+            <SectionHeading eyebrow="Template gallery" titleLead="Surfaces from" titleAccent="the template." />
             <PortfolioGalleryLightbox images={galleryImages} />
           </Container>
         </Section>

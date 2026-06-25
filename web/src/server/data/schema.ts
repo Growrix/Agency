@@ -108,6 +108,7 @@ export type OrderRecord = {
 
 export type UserRecord = {
   id: string;
+  clerk_user_id?: string;
   email: string;
   password_hash: string;
   role: Role;

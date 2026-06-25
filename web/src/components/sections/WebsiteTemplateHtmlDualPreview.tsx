@@ -87,6 +87,7 @@ type WebsiteTemplateHtmlDesktopPreviewCarouselProps = WebsiteTemplateHtmlDualPre
   minHeightClass?: string;
   fillHeight?: boolean;
   desktopPreviewFit?: "width" | "cover";
+  desktopPreviewVerticalAlign?: "top" | "center";
   autoPlay?: boolean;
   posterFirst?: boolean;
 };
@@ -98,6 +99,7 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
   minHeightClass = "min-h-[420px] lg:min-h-[560px]",
   fillHeight = false,
   desktopPreviewFit = "width",
+  desktopPreviewVerticalAlign = "center",
   autoPlay = false,
   posterFirst = false,
 }: WebsiteTemplateHtmlDesktopPreviewCarouselProps) {
@@ -110,6 +112,7 @@ export function WebsiteTemplateHtmlDesktopPreviewCarousel({
         previewMode="desktop-scaled"
         fillHeight={fillHeight}
         desktopPreviewFit={desktopPreviewFit}
+        desktopPreviewVerticalAlign={desktopPreviewVerticalAlign}
         autoPlay={autoPlay}
         posterFirst={posterFirst}
       />

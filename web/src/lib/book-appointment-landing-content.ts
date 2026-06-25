@@ -75,6 +75,8 @@ export const BOOK_APPOINTMENT_SERVICE_OPTIONS = [
 export const BOOK_APPOINTMENT_ALTERNATIVES = {
   eyebrow: "Other routes",
   title: "Prefer a different starting point?",
+  titleLead: "Prefer a different",
+  titleAccent: "starting point?",
   cards: [
     {
       title: "WhatsApp",

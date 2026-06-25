@@ -4,8 +4,17 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import type { BlogPost } from "@/lib/content";
 import { formatBlogDate } from "@/lib/content";
 import { getBlogImage } from "@/lib/site-images";
+import { cn } from "@/lib/utils";
 
-export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: boolean }) {
+export function BlogCard({
+  post,
+  compact = false,
+  className,
+}: {
+  post: BlogPost;
+  compact?: boolean;
+  className?: string;
+}) {
   const image = post.coverImage
     ? { src: post.coverImage.url, alt: post.coverImage.alt }
     : getBlogImage(post.slug);
@@ -13,7 +22,10 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col h-full overflow-hidden rounded-[20px] border border-border bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-signal hover:-translate-y-1 hover:shadow-(--shadow-2) hover:border-border-strong"
+      className={cn(
+        "group flex h-full flex-col overflow-hidden rounded-[20px] border border-border bg-surface transition-[transform,box-shadow,border-color] duration-300 ease-signal hover:-translate-y-1 hover:border-border-strong hover:shadow-(--shadow-2)",
+        className,
+      )}
     >
       <div className={`relative ${compact ? "aspect-5/3" : "aspect-video"} overflow-hidden bg-linear-to-br ${post.accent}`}>
         {image ? (
@@ -31,14 +43,24 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
           {post.category}
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-xl tracking-tight leading-snug group-hover:text-primary transition-colors">
+      <div className={cn("flex flex-1 flex-col", compact ? "gap-2 p-4" : "p-5")}>
+        <h3
+          className={cn(
+            "font-display tracking-tight leading-snug transition-colors group-hover:text-primary",
+            compact ? "text-base" : "text-xl",
+          )}
+        >
           {post.title}
         </h3>
-        <p className="mt-2 text-sm text-text-muted leading-6 text-pretty line-clamp-3">
+        <p
+          className={cn(
+            "text-text-muted leading-6 text-pretty",
+            compact ? "line-clamp-2 text-xs" : "mt-2 line-clamp-3 text-sm",
+          )}
+        >
           {post.excerpt}
         </p>
-        <div className="mt-4 flex items-center justify-between text-xs text-text-muted">
+        <div className={cn("flex items-center justify-between text-text-muted", compact ? "mt-2 text-[11px]" : "mt-4 text-xs")}>
           <div className="flex items-center gap-2">
             <span className="inline-flex size-7 items-center justify-center rounded-full bg-inset font-mono text-[10px] font-semibold text-text">
               {post.author.initials}
@@ -49,7 +71,7 @@ export function BlogCard({ post, compact = false }: { post: BlogPost; compact?: 
             {formatBlogDate(post.publishedAt)} · {post.readMinutes} min
           </span>
         </div>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
+        <span className={cn("inline-flex items-center gap-1 font-medium text-primary transition-all group-hover:gap-2", compact ? "mt-2 text-xs" : "mt-4 text-sm")}>
           Read article <ArrowUpRightIcon className="size-4" />
         </span>
       </div>

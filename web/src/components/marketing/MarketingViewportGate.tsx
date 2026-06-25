@@ -1,29 +1,19 @@
-"use client";
-
-import { useSyncExternalStore, type ReactNode } from "react";
-
-const DESKTOP_MEDIA_QUERY = "(min-width: 1024px)";
-
-function subscribe(onStoreChange: () => void) {
-  const mediaQueryList = window.matchMedia(DESKTOP_MEDIA_QUERY);
-  mediaQueryList.addEventListener("change", onStoreChange);
-  return () => mediaQueryList.removeEventListener("change", onStoreChange);
-}
-
-function getDesktopSnapshot() {
-  return window.matchMedia(DESKTOP_MEDIA_QUERY).matches;
-}
-
-function getServerSnapshot() {
-  return false;
-}
+import type { ReactNode } from "react";
 
 type MarketingViewportGateProps = {
   mobile: ReactNode | null;
   desktop: ReactNode;
 };
 
+/**
+ * Renders mobile and desktop variants together; visibility is controlled by CSS
+ * media queries so the correct layout paints on first frame (no SSR → mobile flash).
+ */
 export function MarketingViewportGate({ mobile, desktop }: MarketingViewportGateProps) {
-  const isDesktop = useSyncExternalStore(subscribe, getDesktopSnapshot, getServerSnapshot);
-  return isDesktop ? desktop : mobile;
+  return (
+    <div className="marketing-viewport-gate">
+      {mobile !== null ? <div className="marketing-viewport-gate__mobile">{mobile}</div> : null}
+      <div className="marketing-viewport-gate__desktop">{desktop}</div>
+    </div>
+  );
 }

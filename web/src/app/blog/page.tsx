@@ -7,8 +7,11 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { BlogGrid } from "@/components/sections/BlogGrid";
 import { BlogSidebar } from "@/components/sections/BlogSidebar";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { BlogIndexListingMobile } from "@/components/marketing/blog/BlogIndexListingMobile";
+import { BlogLandingHeroMobile } from "@/components/marketing/blog/BlogLandingHeroMobile";
+import { BLOG_LANDING_HERO } from "@/lib/blog-landing-content";
 import {
   formatBlogDate,
   type BlogPost,
@@ -70,18 +73,39 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
   const categories = getBlogCategoryCounts(sorted);
   const tags = getBlogTagCounts(sorted);
 
-  const activeChips: { label: string; key: "category" | "tag" | "q"; value: string }[] = [];
-  if (params.category) activeChips.push({ label: `Category: ${params.category}`, key: "category", value: params.category });
-  if (params.tag) activeChips.push({ label: `Tag: ${params.tag}`, key: "tag", value: params.tag });
-  if (params.q) activeChips.push({ label: `Search: "${params.q}"`, key: "q", value: params.q });
-
-  function chipHref(removeKey: string) {
+  function buildChipHref(removeKey: string) {
     const next = new URLSearchParams();
     for (const [k, v] of Object.entries(params)) {
       if (v && k !== removeKey) next.set(k, v);
     }
     const qs = next.toString();
     return qs ? `/blog?${qs}` : "/blog";
+  }
+
+  const activeChips: { label: string; key: "category" | "tag" | "q"; value: string; href: string }[] = [];
+  if (params.category) {
+    activeChips.push({
+      label: `Category: ${params.category}`,
+      key: "category",
+      value: params.category,
+      href: buildChipHref("category"),
+    });
+  }
+  if (params.tag) {
+    activeChips.push({
+      label: `Tag: ${params.tag}`,
+      key: "tag",
+      value: params.tag,
+      href: buildChipHref("tag"),
+    });
+  }
+  if (params.q) {
+    activeChips.push({
+      label: `Search: "${params.q}"`,
+      key: "q",
+      value: params.q,
+      href: buildChipHref("q"),
+    });
   }
 
   return (
@@ -92,16 +116,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
           <Section size="hero" layout="viewport" className="hero-section relative overflow-hidden">
             <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
             <Container>
-              <MarketingPageHeroMobile
-                eyebrow="Field notes"
-                titleLead="From a studio"
-                titleAccent="that ships."
-                description="Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving."
-                primaryCta="Browse posts"
-                primaryHref="#blog-grid"
-                secondaryCta="Book a call"
-                secondaryHref="/book-appointment"
-              />
+              <BlogLandingHeroMobile />
             </Container>
           </Section>
         }
@@ -113,12 +128,12 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                 <div className="signal-rise" style={{ animationDelay: "0ms" }}>
                   <Badge tone="primary" dot>The Growrix OS blog</Badge>
                 </div>
-                <h1
+                <MarketingHeroTitle
                   className="mt-5 font-display text-5xl sm:text-6xl tracking-tight leading-[1.05] text-balance signal-rise"
-                  style={{ animationDelay: "70ms" }}
-                >
-                  Field notes from a studio that ships.
-                </h1>
+                  title={BLOG_LANDING_HERO.title}
+                  titleLead={BLOG_LANDING_HERO.titleLead}
+                  titleAccent={BLOG_LANDING_HERO.titleAccent}
+                />
                 <p
                   className="mt-5 text-lg text-text-muted leading-7 text-pretty signal-rise"
                   style={{ animationDelay: "140ms" }}
@@ -183,58 +198,75 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
       {/* Grid + sidebar */}
       <Section size="standard" layout="content" spacing="split" id="blog-grid">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <SectionHeading
-                  eyebrow={isFiltering ? "Filtered" : "Latest writing"}
-                  title={isFiltering ? `${filtered.length} article${filtered.length === 1 ? "" : "s"}` : "More from the studio"}
-                />
-              </div>
+          <MarketingViewportGate
+            mobile={
+              <BlogIndexListingMobile
+                grid={grid}
+                featured={featured}
+                featuredImage={featuredImage}
+                categories={categories}
+                tags={tags}
+                initialSearch={params.q ?? ""}
+                isFiltering={isFiltering}
+                filteredCount={filtered.length}
+                activeChips={activeChips}
+              />
+            }
+            desktop={
+              <div className="grid gap-10 lg:grid-cols-12">
+                <div className="lg:col-span-8">
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <SectionHeading
+                      eyebrow={isFiltering ? "Filtered" : "Latest writing"}
+                      title={isFiltering ? `${filtered.length} article${filtered.length === 1 ? "" : "s"}` : "More from the studio"}
+                    />
+                  </div>
 
-              {activeChips.length > 0 && (
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {activeChips.map((c) => (
-                    <Link
-                      key={c.key}
-                      href={chipHref(c.key)}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary hover:bg-primary/15"
-                    >
-                      {c.label}
-                      <XMarkIcon className="size-3.5" />
-                    </Link>
-                  ))}
-                  <Link
-                    href="/blog"
-                    className="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-text-muted hover:bg-inset"
-                  >
-                    Clear all
-                  </Link>
+                  {activeChips.length > 0 && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {activeChips.map((c) => (
+                        <Link
+                          key={c.key}
+                          href={c.href}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary hover:bg-primary/15"
+                        >
+                          {c.label}
+                          <XMarkIcon className="size-3.5" />
+                        </Link>
+                      ))}
+                      <Link
+                        href="/blog"
+                        className="inline-flex items-center rounded-full border border-border px-3 py-1 text-xs font-medium text-text-muted hover:bg-inset"
+                      >
+                        Clear all
+                      </Link>
+                    </div>
+                  )}
+
+                  {grid.length === 0 ? (
+                    <div className="mt-10 rounded-[20px] border border-dashed border-border bg-surface p-10 text-center">
+                      <p className="font-display text-2xl tracking-tight">No matching articles.</p>
+                      <p className="mt-2 text-text-muted">Try clearing filters or searching for a different term.</p>
+                      <Link
+                        href="/blog"
+                        className="mt-4 inline-block text-sm font-medium text-primary"
+                      >
+                        Reset filters →
+                      </Link>
+                    </div>
+                  ) : (
+                    <BlogGrid posts={grid} />
+                  )}
                 </div>
-              )}
 
-              {grid.length === 0 ? (
-                <div className="mt-10 rounded-[20px] border border-dashed border-border bg-surface p-10 text-center">
-                  <p className="font-display text-2xl tracking-tight">No matching articles.</p>
-                  <p className="mt-2 text-text-muted">Try clearing filters or searching for a different term.</p>
-                  <Link
-                    href="/blog"
-                    className="mt-4 inline-block text-sm font-medium text-primary"
-                  >
-                    Reset filters →
-                  </Link>
+                <div className="lg:col-span-4">
+                  <div className="lg:sticky lg:top-24">
+                    <BlogSidebar categories={categories} tags={tags} initialSearch={params.q ?? ""} />
+                  </div>
                 </div>
-              ) : (
-                <BlogGrid posts={grid} />
-              )}
-            </div>
-
-            <div className="lg:col-span-4">
-              <div className="lg:sticky lg:top-24">
-                <BlogSidebar categories={categories} tags={tags} initialSearch={params.q ?? ""} />
               </div>
-            </div>
-          </div>
+            }
+          />
         </Container>
       </Section>
     </>

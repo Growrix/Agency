@@ -15,8 +15,11 @@ import {
 } from "@/components/sections/InvestmentGuideSections";
 import { InvestmentGuideHeroPanel } from "@/components/sections/InvestmentGuideHeroPanel";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
 import { MobilePricingCards } from "@/components/marketing/MobilePricingCards";
+import { InvestmentClientJourneysMobile } from "@/components/marketing/pricing/InvestmentClientJourneysMobile";
+import { InvestmentDeliveryComparisonMobile } from "@/components/marketing/pricing/InvestmentDeliveryComparisonMobile";
+import { InvestmentGuideHeroMobile } from "@/components/marketing/pricing/InvestmentGuideHeroMobile";
+import { InvestmentServiceRangesMobile } from "@/components/marketing/pricing/InvestmentServiceRangesMobile";
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { marketingSection } from "@/lib/marketing-composition";
@@ -25,14 +28,14 @@ import {
   INVESTMENT_DELIVERY_COMPARISON,
   INVESTMENT_GUIDE_CTA,
   INVESTMENT_GUIDE_FAQ,
+  INVESTMENT_GUIDE_FAQ_SECTION,
   INVESTMENT_GUIDE_HERO,
   INVESTMENT_PROJECT_SCOPING,
   INVESTMENT_SERVICE_RANGES,
   INVESTMENT_STARTING_POINTS,
 } from "@/lib/investment-guide-content";
-import { HERO_TITLE_CLASS, HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
-import { cn } from "@/lib/utils";
-
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 export function PricingPageClient() {
   return (
     <>
@@ -42,16 +45,7 @@ export function PricingPageClient() {
           <Section {...marketingSection("pricing", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
             <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
             <Container>
-              <MarketingPageHeroMobile
-                eyebrow={INVESTMENT_GUIDE_HERO.eyebrow}
-                titleLead={INVESTMENT_GUIDE_HERO.titleLead}
-                titleAccent={INVESTMENT_GUIDE_HERO.titleAccent}
-                description={INVESTMENT_GUIDE_HERO.description}
-                primaryCta={INVESTMENT_GUIDE_HERO.primaryCta}
-                primaryHref={INVESTMENT_GUIDE_HERO.primaryHref}
-                secondaryCta={INVESTMENT_GUIDE_HERO.secondaryCta}
-                secondaryHref={INVESTMENT_GUIDE_HERO.secondaryHref}
-              />
+              <InvestmentGuideHeroMobile />
             </Container>
           </Section>
         }
@@ -64,7 +58,12 @@ export function PricingPageClient() {
                   <Badge tone="primary" dot>
                     {INVESTMENT_GUIDE_HERO.eyebrow}
                   </Badge>
-                  <h1 className={cn("mt-5", HERO_TITLE_CLASS)}>{INVESTMENT_GUIDE_HERO.title}</h1>
+                  <MarketingHeroTitle
+                    className="mt-5"
+                    title={INVESTMENT_GUIDE_HERO.title}
+                    titleLead={INVESTMENT_GUIDE_HERO.titleLead}
+                    titleAccent={INVESTMENT_GUIDE_HERO.titleAccent}
+                  />
                   <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{INVESTMENT_GUIDE_HERO.description}</p>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <LinkButton href={INVESTMENT_GUIDE_HERO.primaryHref} size="lg">
@@ -94,7 +93,10 @@ export function PricingPageClient() {
                 titleLead={INVESTMENT_STARTING_POINTS.titleLead}
                 titleAccent={INVESTMENT_STARTING_POINTS.titleAccent}
                 description={INVESTMENT_STARTING_POINTS.description}
-                cards={INVESTMENT_STARTING_POINTS.cards}
+                cards={INVESTMENT_STARTING_POINTS.cards.map((card) => ({
+                  ...card,
+                  featured: "featured" in card ? Boolean(card.featured) : undefined,
+                }))}
               />
             }
             desktop={
@@ -113,44 +115,80 @@ export function PricingPageClient() {
 
       <Section {...marketingSection("pricing", "serviceRanges")} tone="inset" id="service-investment-ranges">
         <Container>
-          <SectionHeading
-            eyebrow={INVESTMENT_SERVICE_RANGES.eyebrow}
-            title={INVESTMENT_SERVICE_RANGES.title}
-            description={INVESTMENT_SERVICE_RANGES.description}
+          <MarketingViewportGate
+            mobile={<InvestmentServiceRangesMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={INVESTMENT_SERVICE_RANGES.eyebrow}
+                  title={INVESTMENT_SERVICE_RANGES.title}
+                  description={INVESTMENT_SERVICE_RANGES.description}
+                />
+                <ServiceInvestmentGrid />
+              </>
+            }
           />
-          <ServiceInvestmentGrid />
         </Container>
       </Section>
 
       <Section {...marketingSection("pricing", "deliveryComparison")}>
         <Container>
-          <SectionHeading
-            eyebrow={INVESTMENT_DELIVERY_COMPARISON.eyebrow}
-            title={INVESTMENT_DELIVERY_COMPARISON.title}
+          <MarketingViewportGate
+            mobile={<InvestmentDeliveryComparisonMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={INVESTMENT_DELIVERY_COMPARISON.eyebrow}
+                  title={INVESTMENT_DELIVERY_COMPARISON.title}
+                />
+                <DeliveryComparisonGrid />
+              </>
+            }
           />
-          <DeliveryComparisonGrid />
         </Container>
       </Section>
 
       <Section {...marketingSection("pricing", "scoping")} tone="inset">
         <Container>
-          <SectionHeading
-            eyebrow={INVESTMENT_PROJECT_SCOPING.eyebrow}
-            title={INVESTMENT_PROJECT_SCOPING.title}
+          <MarketingViewportGate
+            mobile={
+              <ServiceFaqMobile
+                eyebrow={INVESTMENT_PROJECT_SCOPING.eyebrow}
+                title={INVESTMENT_PROJECT_SCOPING.title}
+                titleLead={INVESTMENT_PROJECT_SCOPING.titleLead}
+                titleAccent={INVESTMENT_PROJECT_SCOPING.titleAccent}
+                items={[...INVESTMENT_PROJECT_SCOPING.factors]}
+              />
+            }
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={INVESTMENT_PROJECT_SCOPING.eyebrow}
+                  title={INVESTMENT_PROJECT_SCOPING.title}
+                />
+                <div className="mt-10">
+                  <Accordion items={[...INVESTMENT_PROJECT_SCOPING.factors]} />
+                </div>
+              </>
+            }
           />
-          <div className="mt-10">
-            <Accordion items={[...INVESTMENT_PROJECT_SCOPING.factors]} />
-          </div>
         </Container>
       </Section>
 
       <Section {...marketingSection("pricing", "journeys")}>
         <Container>
-          <SectionHeading
-            eyebrow={INVESTMENT_CLIENT_JOURNEYS.eyebrow}
-            title={INVESTMENT_CLIENT_JOURNEYS.title}
+          <MarketingViewportGate
+            mobile={<InvestmentClientJourneysMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow={INVESTMENT_CLIENT_JOURNEYS.eyebrow}
+                  title={INVESTMENT_CLIENT_JOURNEYS.title}
+                />
+                <ClientJourneyFlow />
+              </>
+            }
           />
-          <ClientJourneyFlow />
         </Container>
       </Section>
 
@@ -160,20 +198,20 @@ export function PricingPageClient() {
           <MarketingViewportGate
             mobile={
               <ServiceFaqMobile
-                eyebrow="FAQ"
-                title="Investment questions, answered plainly."
-                titleLead="Investment questions,"
-                titleAccent="answered plainly."
-                description="Path selection, upgrades, milestones, discovery, and support—before you commit."
+                eyebrow={INVESTMENT_GUIDE_FAQ_SECTION.eyebrow}
+                title={INVESTMENT_GUIDE_FAQ_SECTION.title}
+                titleLead={INVESTMENT_GUIDE_FAQ_SECTION.titleLead}
+                titleAccent={INVESTMENT_GUIDE_FAQ_SECTION.titleAccent}
+                description={INVESTMENT_GUIDE_FAQ_SECTION.description}
                 items={[...INVESTMENT_GUIDE_FAQ]}
               />
             }
             desktop={
               <>
                 <SectionHeading
-                  eyebrow="FAQ"
-                  title="Investment questions, answered plainly."
-                  description="Path selection, upgrades, milestones, discovery, and support—before you commit."
+                  eyebrow={INVESTMENT_GUIDE_FAQ_SECTION.eyebrow}
+                  title={INVESTMENT_GUIDE_FAQ_SECTION.title}
+                  description={INVESTMENT_GUIDE_FAQ_SECTION.description}
                   align="center"
                 />
                 <div className="mt-10">

@@ -4,15 +4,25 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import type { BlogPost } from "@/lib/content";
 import { formatBlogDate } from "@/lib/content";
 import { getBlogImage } from "@/lib/site-images";
+import { cn } from "@/lib/utils";
 
-export function BlogCardMobile({ post }: { post: BlogPost }) {
+export function BlogCardMobile({ post, compact = false }: { post: BlogPost; compact?: boolean }) {
   const image = post.coverImage
     ? { src: post.coverImage.url, alt: post.coverImage.alt }
     : getBlogImage(post.slug);
 
   return (
-    <Link href={`/blog/${post.slug}`} className="home-mobile-marketing__blog-card">
-      <div className={`home-mobile-marketing__blog-card-media relative overflow-hidden bg-linear-to-br ${post.accent}`}>
+    <Link
+      href={`/blog/${post.slug}`}
+      className={cn("home-mobile-marketing__blog-card", compact && "home-mobile-marketing__blog-card--compact")}
+    >
+      <div
+        className={cn(
+          "home-mobile-marketing__blog-card-media relative overflow-hidden bg-linear-to-br",
+          post.accent,
+          compact && "home-mobile-marketing__blog-card-media--compact",
+        )}
+      >
         {image ? (
           <Image
             src={image.src}

@@ -48,7 +48,7 @@ export function HomeHeroMobile({
                   {line}
                 </span>
               ))}
-              <span className="block text-primary">{HOME_HERO_COPY.titleAccent}</span>
+              <span className="block marketing-title-accent">{HOME_HERO_COPY.titleAccent}</span>
             </>
           ) : (
             title

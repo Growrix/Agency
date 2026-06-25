@@ -1,18 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowUpRightIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
-import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
-import { ShopProductCard } from "@/components/shop/ShopProductCard";
-import { ShopProductHomeMobileRowCard } from "@/components/shop/ShopProductHomeMobileRowCard";
 import { ShopProductHtmlPreviewCard } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { HomeDesktopSectionRail } from "@/components/marketing/desktop/HomeDesktopSectionRail";
+import { HomeDesktopSplitSection } from "@/components/marketing/desktop/HomeDesktopSplitSection";
+import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { FeaturedProductRowsMobile } from "@/components/marketing/mobile/FeaturedProductRowsMobile";
+import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { HOME_FEATURED_TEMPLATES_COPY } from "@/lib/home-conversion-content";
-import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { homeSection } from "@/lib/homepage-composition";
@@ -71,17 +70,17 @@ function FeaturedProductsMobile({
         </LinkButton>
       </div>
 
-      <RevealGroup className="home-mobile-marketing__stack">
-        {products.map((product, index) => (
-          <RevealItem key={product.slug}>
-            {isHtmlPreview ? (
-              <ShopProductHomeMobileRowCard product={product} loadPriority={index === 0} />
-            ) : (
+      {isHtmlPreview ? (
+        <FeaturedProductRowsMobile products={products} />
+      ) : (
+        <RevealGroup className="home-mobile-marketing__stack">
+          {products.map((product) => (
+            <RevealItem key={product.slug}>
               <ShopProductCard product={product} />
-            )}
-          </RevealItem>
-        ))}
-      </RevealGroup>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      )}
     </div>
   );
 }
@@ -95,57 +94,34 @@ function FeaturedProductsDesktop({
   description,
   ctaHref,
   ctaLabel,
-  variant,
 }: Required<Pick<FeaturedProductsProps, "products">> &
   Pick<
     FeaturedProductsProps,
     "eyebrow" | "title" | "titleLead" | "titleAccent" | "description" | "ctaHref" | "ctaLabel" | "variant"
   >) {
-  const isHtmlPreview = variant === "html-preview";
-
   return (
-    <>
-      <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-        <SectionHeading
+    <HomeDesktopSplitSection
+      rail={
+        <HomeDesktopSectionRail
           eyebrow={eyebrow!}
-          title={title!}
+          title={titleLead && titleAccent ? undefined : title}
           titleLead={titleLead}
           titleAccent={titleAccent}
           description={description}
-          titleClassName={HERO_TITLE_CLASS}
+          ctaHref={ctaHref}
+          ctaLabel={ctaLabel}
         />
-        <LinkButton href={ctaHref!} variant="outline">
-          {ctaLabel} <ArrowUpRightIcon className="size-4" />
-        </LinkButton>
-      </div>
-
-      <RevealGroup
-        className={
-          isHtmlPreview
-            ? "mt-8 grid w-full min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-            : "mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-        }
-        stagger={0.07}
-      >
-        {products.map((product, index) => (
-          <RevealItem key={product.slug} className="h-full min-w-0">
-            {isHtmlPreview ? (
+      }
+      content={
+        <RevealGroup className="home-desktop-marketing__product-grid" stagger={0.07}>
+          {products.map((product, index) => (
+            <RevealItem key={product.slug} className="h-full min-w-0">
               <ShopProductHtmlPreviewCard product={product} variant="catalog-wide" loadPriority={index === 0} />
-            ) : (
-              <ShopProductCard product={product} />
-            )}
-          </RevealItem>
-        ))}
-      </RevealGroup>
-
-      <p className="mt-6 text-sm text-text-muted">
-        Every product supports{" "}
-        <Link href="/book-appointment" className="font-medium text-primary hover:underline">
-          Done-For-You customization
-        </Link>{" "}
-        when you need branding, deployment, or integration help.
-      </p>
-    </>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      }
+    />
   );
 }
 

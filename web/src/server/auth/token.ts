@@ -2,6 +2,7 @@ import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { getRuntimeConfig, requireRuntimeValue } from "@/server/config/runtime";
 
 export const SESSION_COOKIE_NAME = "agency_session";
+export const LEGACY_SESSION_COOKIE_NAME = SESSION_COOKIE_NAME;
 
 export type SessionPayload = JWTPayload & {
   sub: string;

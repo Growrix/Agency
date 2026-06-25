@@ -16,8 +16,7 @@ import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
-import { AnimatePresence, motion } from "@/components/motion/Motion";
-import { useReducedMotion } from "framer-motion";
+import { HeaderMobileNav } from "@/components/shell/HeaderMobileNav";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
 
@@ -35,7 +34,6 @@ export function Header({
   const [mobileOpenInternal, setMobileOpenInternal] = useState(false);
   const mobileOpen = mobileOpenProp ?? mobileOpenInternal;
   const setMobileOpen = onMobileOpenChange ?? setMobileOpenInternal;
-  const reduced = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -44,13 +42,34 @@ export function Header({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [mobileOpen, setMobileOpen]);
+
   return (
     <header
       className={cn(
         "transition-all duration-300",
         scrolled
           ? "border-b border-border bg-surface/85 backdrop-blur"
-          : "bg-transparent"
+          : "bg-transparent",
       )}
     >
       <div className={cn("mx-auto flex h-16 max-w-shell items-center gap-2 lg:h-18 lg:gap-6", CONTAINER_X_CLASS)}>
@@ -99,7 +118,7 @@ export function Header({
               >
                 {item.label}
               </Link>
-            )
+            ),
           )}
         </nav>
 
@@ -133,8 +152,11 @@ export function Header({
             Book Appointment
           </LinkButton>
           <button
+            type="button"
             className="inline-flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-inset lg:hidden"
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <XMarkIcon className="size-5" /> : <Bars3Icon className="size-5" />}
@@ -142,67 +164,22 @@ export function Header({
         </div>
       </div>
 
-      {(() => {
-        const menuContent = (
-          <nav className={cn("mx-auto flex max-w-shell flex-col py-4", CONTAINER_X_CLASS)}>
-            {PRIMARY_NAV.map((item) => (
-              <div key={item.label} className="py-1">
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block py-2 text-base font-medium"
-                >
-                  {item.label}
-                </Link>
-                {item.children && (
-                  <div className="mb-2 ml-1 space-y-1 border-l border-border pl-3">
-                    {item.children.map((c) => (
-                      <Link
-                        key={c.href}
-                        href={c.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="block py-1.5 text-sm text-text-muted"
-                      >
-                        {c.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <Link href="/faq" onClick={() => setMobileOpen(false)} className="block py-2 text-base font-medium">
-              FAQ
-            </Link>
-            <LinkButton href="/book-appointment" className="mt-3" fullWidth>
-              Book Appointment
-            </LinkButton>
-          </nav>
-        );
-        // Reduced motion: render plain DOM, no AnimatePresence/motion.
-        if (reduced) {
-          return mobileOpen ? (
-            <div className="border-t border-border bg-surface lg:hidden">
-              {menuContent}
-            </div>
-          ) : null;
-        }
-        return (
-          <AnimatePresence initial={false}>
-            {mobileOpen && (
-              <motion.div
-                key="mobile-menu"
-                className="overflow-hidden border-t border-border bg-surface lg:hidden"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {menuContent}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        );
-      })()}
+      <div
+        className={cn(
+          "site-mobile-nav__panel lg:hidden",
+          mobileOpen && "site-mobile-nav__panel--open",
+        )}
+        aria-hidden={!mobileOpen}
+      >
+        <div className="site-mobile-nav__panel-inner">
+          {mobileOpen ? (
+            <HeaderMobileNav
+              onClose={() => setMobileOpen(false)}
+              onOpenConcierge={() => openConcierge()}
+            />
+          ) : null}
+        </div>
+      </div>
     </header>
   );
 }

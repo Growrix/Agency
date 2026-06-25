@@ -89,7 +89,7 @@ export const HOME_PREVIEW_COPY = {
 } as const;
 
 export const HOME_FIELD_NOTES_COPY = {
-  eyebrow: "Field notes",
+  eyebrow: "Blog",
   title: "Long-form writing from the studio.",
   titleLead: "Long-form writing from",
   titleAccent: "the studio.",
@@ -205,6 +205,22 @@ export const HOME_AI_COPY = {
     { label: "Expert guided", description: "Human handoff when needed" },
     { label: "No spam", description: "Never used to train models" },
   ] as const,
+} as const;
+
+export const HOME_AI_DEMO_SCRIPT = {
+  turns: [
+    {
+      user: "Hey — I'm thinking about rebuilding our SaaS dashboard. We're 12 people, 8k MAUs.",
+      assistant:
+        "That sounds like a Product Partner engagement. We typically scope these in a 1-week discovery sprint. Want timelines and team sizing?",
+    },
+    {
+      user: "What does a typical SaaS MVP timeline look like for a team our size?",
+      assistant:
+        "Most MVPs in the 8k–15k MAU range ship in 10–14 weeks with a dedicated squad. I can outline phases and investment ranges if helpful.",
+    },
+  ],
+  quickReplies: HOME_AI_COPY.quickReplies,
 } as const;
 
 export const HOME_TESTIMONIALS_COPY = {

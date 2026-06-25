@@ -62,6 +62,8 @@ export const INVESTMENT_STARTING_POINTS = {
 export const INVESTMENT_SERVICE_RANGES = {
   eyebrow: "Service investment ranges",
   title: "Typical investment ranges by service.",
+  titleLead: "Typical investment ranges",
+  titleAccent: "by service.",
   description:
     "These ranges provide guidance only. Final pricing depends on scope, complexity, integrations, and delivery requirements.",
   services: [
@@ -107,6 +109,8 @@ export const INVESTMENT_SERVICE_RANGES = {
 export const INVESTMENT_DELIVERY_COMPARISON = {
   eyebrow: "Delivery comparison",
   title: "Which path fits your situation?",
+  titleLead: "Which path fits",
+  titleAccent: "your situation?",
   paths: [
     {
       title: "Digital Products",
@@ -127,6 +131,8 @@ export const INVESTMENT_DELIVERY_COMPARISON = {
 export const INVESTMENT_PROJECT_SCOPING = {
   eyebrow: "Project scoping",
   title: "What affects project investment?",
+  titleLead: "What affects",
+  titleAccent: "project investment?",
   factors: [
     {
       question: "Scope complexity",
@@ -154,6 +160,8 @@ export const INVESTMENT_PROJECT_SCOPING = {
 export const INVESTMENT_CLIENT_JOURNEYS = {
   eyebrow: "Client journeys",
   title: "How businesses typically grow with GrowrixOS.",
+  titleLead: "How businesses typically grow",
+  titleAccent: "with GrowrixOS.",
   journeys: [
     {
       persona: "Startup Founder",
@@ -222,6 +230,15 @@ export const INVESTMENT_GUIDE_FAQ = [
       "Yes. Most clients combine complementary services—such as Website + Technical SEO, or Automation + AI Business Systems—for stronger outcomes.",
   },
 ] as const;
+
+export const INVESTMENT_GUIDE_FAQ_SECTION = {
+  eyebrow: "FAQ",
+  title: "Investment questions, answered plainly.",
+  titleLead: "Investment questions,",
+  titleAccent: "answered plainly.",
+  description:
+    "Path selection, upgrades, milestones, discovery, and support—before you commit.",
+} as const;
 
 export const INVESTMENT_GUIDE_CTA = {
   title: "Not sure which investment path fits?",

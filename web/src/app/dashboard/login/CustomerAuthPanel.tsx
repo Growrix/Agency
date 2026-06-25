@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { ClerkSignInPanel } from "@/components/auth/ClerkSignInPanel";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
+import { isClerkConfiguredClient } from "@/lib/clerk-client";
 
 type CustomerAuthPanelProps = {
   nextPath?: string;
@@ -11,7 +13,7 @@ type CustomerAuthPanelProps = {
 
 type Mode = "signin" | "register";
 
-export function CustomerAuthPanel({ nextPath = "/dashboard" }: CustomerAuthPanelProps) {
+function LegacyCustomerAuthPanel({ nextPath = "/dashboard" }: CustomerAuthPanelProps) {
   const [mode, setMode] = useState<Mode>("signin");
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("Authentication failed.");
@@ -51,18 +53,20 @@ export function CustomerAuthPanel({ nextPath = "/dashboard" }: CustomerAuthPanel
     <Section className="py-16 sm:py-24">
       <Container width="reading">
         <Card>
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Customer portal</p>
-          <h1 className="mt-3 font-display text-4xl tracking-tight">Access your dashboard</h1>
+          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Customer access</p>
+          <h1 className="mt-3 font-display text-4xl tracking-tight">
+            {isRegister ? "Create your account" : "Sign in to your dashboard"}
+          </h1>
           <p className="mt-3 text-sm leading-6 text-text-muted">
-            Sign in to view downloads, order history, and appointments, or create an account with the same email you used at checkout.
+            Access downloads, orders, appointments, and support from one customer portal.
           </p>
 
           <div className="mt-6 flex gap-2">
-            <Button type="button" variant={isRegister ? "outline" : "primary"} size="sm" onClick={() => setMode("signin")}>
+            <Button type="button" size="sm" variant={mode === "signin" ? "primary" : "ghost"} onClick={() => setMode("signin")}>
               Sign in
             </Button>
-            <Button type="button" variant={isRegister ? "primary" : "outline"} size="sm" onClick={() => setMode("register")}>
-              Create account
+            <Button type="button" size="sm" variant={mode === "register" ? "primary" : "ghost"} onClick={() => setMode("register")}>
+              Register
             </Button>
           </div>
 
@@ -70,37 +74,44 @@ export function CustomerAuthPanel({ nextPath = "/dashboard" }: CustomerAuthPanel
             {isRegister ? (
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-xs uppercase tracking-[0.18em] text-text-muted">First name</span>
-                  <input name="first_name" required className="signal-input mt-1.5" placeholder="First name" />
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">First name</span>
+                  <input type="text" name="firstName" className="signal-input mt-1.5" />
                 </label>
                 <label className="block">
-                  <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Last name</span>
-                  <input name="last_name" required className="signal-input mt-1.5" placeholder="Last name" />
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Last name</span>
+                  <input type="text" name="lastName" className="signal-input mt-1.5" />
                 </label>
               </div>
             ) : null}
             <label className="block">
-              <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Email</span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Email</span>
               <input type="email" name="email" required className="signal-input mt-1.5" placeholder="you@company.com" />
             </label>
             <label className="block">
-              <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Password</span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Password</span>
               <input type="password" name="password" required className="signal-input mt-1.5" placeholder="••••••••" />
             </label>
-            {isRegister ? (
-              <p className="text-sm text-text-muted">
-                Passwords must be at least 8 characters and include uppercase, lowercase, number, and special character.
-              </p>
-            ) : null}
             {status === "error" ? <p className="text-sm text-destructive">{errorMessage}</p> : null}
             <Button type="submit" disabled={status === "submitting"}>
-              {status === "submitting"
-                ? (isRegister ? "Creating account..." : "Signing in...")
-                : (isRegister ? "Create account" : "Sign in")}
+              {status === "submitting" ? "Working..." : isRegister ? "Create account" : "Sign in"}
             </Button>
           </form>
         </Card>
       </Container>
     </Section>
   );
+}
+
+export function CustomerAuthPanel({ nextPath = "/dashboard" }: CustomerAuthPanelProps) {
+  if (isClerkConfiguredClient()) {
+    return (
+      <ClerkSignInPanel
+        redirectUrl={nextPath}
+        title="Sign in to your dashboard"
+        description="Access downloads, orders, appointments, and support from one customer portal."
+      />
+    );
+  }
+
+  return <LegacyCustomerAuthPanel nextPath={nextPath} />;
 }

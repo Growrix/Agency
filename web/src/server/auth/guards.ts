@@ -1,9 +1,17 @@
 import "server-only";
 
+import { auth } from "@clerk/nextjs/server";
 import { type NextRequest, NextResponse } from "next/server";
 import { ApiError } from "@/server/core/api";
+import { isClerkConfigured, isLegacyTestAuthEnabled } from "@/server/auth/clerk-config";
+import { getUserByClerkId, syncClerkUser } from "@/server/auth/clerk-sync";
 import { getUserById } from "@/server/auth/users";
-import { parseSessionTokenFromCookieHeader, SESSION_COOKIE_NAME, verifySessionToken, type SessionPayload } from "@/server/auth/token";
+import {
+  LEGACY_SESSION_COOKIE_NAME,
+  parseSessionTokenFromCookieHeader,
+  verifySessionToken,
+  type SessionPayload,
+} from "@/server/auth/token";
 
 export type AuthenticatedUser = {
   id: string;
@@ -11,9 +19,25 @@ export type AuthenticatedUser = {
   role: SessionPayload["role"];
   firstName?: string;
   lastName?: string;
+  clerkUserId?: string;
 };
 
-export async function getAuthenticatedUser(request: Request | NextRequest): Promise<AuthenticatedUser | null> {
+function mapUserRecord(user: NonNullable<Awaited<ReturnType<typeof getUserById>>>): AuthenticatedUser {
+  return {
+    id: user.id,
+    email: user.email,
+    role: user.role,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    clerkUserId: user.clerk_user_id,
+  };
+}
+
+async function getLegacyAuthenticatedUser(request: Request | NextRequest): Promise<AuthenticatedUser | null> {
+  if (!isLegacyTestAuthEnabled()) {
+    return null;
+  }
+
   const token = parseSessionTokenFromCookieHeader(request.headers.get("cookie"));
   if (!token) {
     return null;
@@ -26,16 +50,36 @@ export async function getAuthenticatedUser(request: Request | NextRequest): Prom
       return null;
     }
 
-    return {
-      id: user.id,
-      email: user.email,
-      role: user.role,
-      firstName: user.first_name,
-      lastName: user.last_name,
-    };
+    return mapUserRecord(user);
   } catch {
     return null;
   }
+}
+
+async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
+  const { userId } = await auth();
+  if (!userId) {
+    return null;
+  }
+
+  let user = await getUserByClerkId(userId);
+  if (!user) {
+    user = await syncClerkUser(userId);
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  return mapUserRecord(user);
+}
+
+export async function getAuthenticatedUser(request: Request | NextRequest): Promise<AuthenticatedUser | null> {
+  if (isClerkConfigured()) {
+    return getClerkAuthenticatedUser();
+  }
+
+  return getLegacyAuthenticatedUser(request);
 }
 
 export async function requireAuthenticatedUser(request: Request | NextRequest) {
@@ -58,7 +102,7 @@ export async function requireAdminUser(request: Request | NextRequest) {
 
 export function applySessionCookie(response: NextResponse, token: string) {
   response.cookies.set({
-    name: SESSION_COOKIE_NAME,
+    name: LEGACY_SESSION_COOKIE_NAME,
     value: token,
     httpOnly: true,
     sameSite: "strict",
@@ -72,7 +116,7 @@ export function applySessionCookie(response: NextResponse, token: string) {
 
 export function clearSessionCookie(response: NextResponse) {
   response.cookies.set({
-    name: SESSION_COOKIE_NAME,
+    name: LEGACY_SESSION_COOKIE_NAME,
     value: "",
     httpOnly: true,
     sameSite: "strict",

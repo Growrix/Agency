@@ -932,7 +932,34 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     className={cn("signal-rise mt-5", HERO_TITLE_CLASS)}
                     style={{ animationDelay: "70ms" }}
                   >
-                    {copy.headline}
+                    <MarketingAccentTitle
+                      lead={
+                        isWebsitesService
+                          ? WEBSITES_SERVICE_HERO.headlineLead
+                          : isSaasService
+                            ? SAAS_SERVICE_HERO.headlineLead
+                            : isMobileAppsService
+                              ? MOBILE_APPS_SERVICE_HERO.headlineLead
+                              : isAutomationService
+                                ? AUTOMATION_SERVICE_HERO.headlineLead
+                                : isTechnicalSeoService
+                                  ? TECHNICAL_SEO_SERVICE_HERO.headlineLead
+                                  : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineLead
+                      }
+                      accent={
+                        isWebsitesService
+                          ? WEBSITES_SERVICE_HERO.headlineAccent
+                          : isSaasService
+                            ? SAAS_SERVICE_HERO.headlineAccent
+                            : isMobileAppsService
+                              ? MOBILE_APPS_SERVICE_HERO.headlineAccent
+                              : isAutomationService
+                                ? AUTOMATION_SERVICE_HERO.headlineAccent
+                                : isTechnicalSeoService
+                                  ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
+                                  : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent
+                      }
+                    />
                   </h1>
                   <p
                     className="mt-6 text-lg text-text-muted leading-7 signal-rise"

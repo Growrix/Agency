@@ -1,0 +1,112 @@
+/* Shared shop merchandising bands (desktop + mobile) */
+
+:root {
+  --shop-section-gap: 1.75rem;
+  --shop-carousel-gap: 0.875rem;
+}
+
+.shop-merch-band__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.shop-merch-band__heading {
+  min-width: 0;
+}
+
+.shop-merch-band__eyebrow {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.shop-merch-band__title {
+  margin-top: 0.35rem;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.shop-merch-band__description {
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.shop-merch-band__see-all {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.shop-merch-band__see-all:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+.shop-merch-band__grid {
+  display: grid;
+  gap: var(--shop-desktop-grid-gap, 1.25rem);
+}
+
+.shop-merch-band__grid-item {
+  position: relative;
+  min-width: 0;
+}
+
+.shop-merch-band__badge {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 2;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  pointer-events: none;
+}
+
+.shop-merch-band__carousel {
+  display: flex;
+  gap: var(--shop-carousel-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  padding-bottom: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shop-merch-band__carousel-item {
+  position: relative;
+  flex: 0 0 min(85vw, 18.5rem);
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-merch-band__carousel {
+    scroll-snap-type: none;
+  }
+}

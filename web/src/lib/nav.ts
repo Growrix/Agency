@@ -68,3 +68,16 @@ export const FOOTER_NAV = {
 };
 
 export const WHATSAPP_HREF = "https://wa.me/8801986925425";
+
+/** Secondary links surfaced in the mobile header menu (not duplicated in PRIMARY_NAV). */
+export const MOBILE_NAV_SUPPORT_LINKS = [
+  { label: "FAQ", href: "/faq" },
+  { label: "Book Appointment", href: "/book-appointment" },
+  { label: "SEO Service", href: "/additional-services" },
+  { label: "Live Chat", href: "/live-chat" },
+] as const;
+
+export const MOBILE_NAV_LEGAL_LINKS = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
+] as const;

@@ -37,6 +37,8 @@ export const CONTACT_HERO_PANEL = {
 export const CONTACT_CHANNELS = {
   eyebrow: "Channels",
   title: "Pick the route that fits.",
+  titleLead: "Pick the route",
+  titleAccent: "that fits.",
   items: [
     {
       name: "Project Inquiry",
@@ -44,13 +46,13 @@ export const CONTACT_CHANNELS = {
         "Best for websites, SaaS products, mobile apps, automation projects, AI systems, and technical SEO engagements.",
       action: "Use the form below",
       href: "#form",
-      recommended: true,
     },
     {
       name: "WhatsApp",
       description: "Best for quick questions, timelines, pricing clarification, and project discussions.",
       action: "Open WhatsApp",
       href: "whatsapp",
+      hotline: true,
     },
     {
       name: "Instant Answers",
@@ -70,6 +72,8 @@ export const CONTACT_CHANNELS = {
 export const CONTACT_PROCESS = {
   eyebrow: "Process",
   title: "What happens after you get in touch.",
+  titleLead: "What happens after",
+  titleAccent: "you get in touch.",
   description: "A simple process designed to quickly identify the right next step.",
   steps: [
     {
@@ -103,6 +107,8 @@ export const CONTACT_PROCESS = {
 export const CONTACT_ROUTES = {
   eyebrow: "Starting points",
   title: "Choose the route that matches your goal.",
+  titleLead: "Choose the route",
+  titleAccent: "that matches your goal.",
   cards: [
     {
       title: "I Need A Website",
@@ -130,6 +136,8 @@ export const CONTACT_ROUTES = {
 export const CONTACT_FORM = {
   eyebrow: "Inquiry form",
   title: "Tell us what you're planning.",
+  titleLead: "Tell us what",
+  titleAccent: "you're planning.",
   description:
     "Share your project, business goals, timeline, or challenge. We'll recommend the most suitable next step.",
   trustHeading: "What happens to your information?",
@@ -172,7 +180,10 @@ export const CONTACT_BUDGET_BANDS = [
 export const CONTACT_URGENCY = ["Exploring", "Within 30 days", "Within 90 days", "ASAP"] as const;
 
 export const CONTACT_EXPLORE = {
+  eyebrow: "Explore",
   title: "Still exploring your options?",
+  titleLead: "Still exploring",
+  titleAccent: "your options?",
   description: "Learn more about our services, work, and delivery approach before starting a conversation.",
   cards: [
     {

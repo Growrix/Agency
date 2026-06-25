@@ -48,7 +48,7 @@ export function ServiceDetailHeroMobile({
 
         <h1 className="service-detail-hero-mobile__title">
           <span className="block">{headlineLead}</span>
-          <span className="block text-primary">{headlineAccent}</span>
+          <span className="block marketing-title-accent">{headlineAccent}</span>
         </h1>
 
         <p className="service-detail-hero-mobile__description">{description}</p>

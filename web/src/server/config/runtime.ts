@@ -21,6 +21,15 @@ type RuntimeConfig = {
     adminEmail?: string;
     adminPassword?: string;
   };
+  clerk: {
+    publishableKey?: string;
+    secretKey?: string;
+    webhookSigningSecret?: string;
+    signInUrl?: string;
+    signUpUrl?: string;
+    afterSignInUrl?: string;
+    afterSignUpUrl?: string;
+  };
   supabase: {
     url?: string;
     anonKey?: string;
@@ -94,6 +103,15 @@ export function getRuntimeConfig(): RuntimeConfig {
       jwtSecret: process.env.AUTH_JWT_SECRET,
       adminEmail: process.env.ADMIN_EMAIL,
       adminPassword: process.env.ADMIN_PASSWORD,
+    },
+    clerk: {
+      publishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      secretKey: process.env.CLERK_SECRET_KEY,
+      webhookSigningSecret: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
+      signInUrl: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL ?? "/dashboard/login",
+      signUpUrl: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL ?? "/dashboard/login",
+      afterSignInUrl: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL ?? "/dashboard",
+      afterSignUpUrl: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL ?? "/dashboard",
     },
     supabase: {
       url: process.env.SUPABASE_URL,

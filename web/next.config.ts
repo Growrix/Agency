@@ -30,10 +30,11 @@ const allowedDevOrigins = [
 ];
 
 const connectSrc = ["'self'", "https:", ...(isDevelopment ? ["http:", "ws:", "wss:"] : [])].join(" ");
+const clerkCspHosts = " https://*.clerk.accounts.dev https://clerk.com https://img.clerk.com";
 const defaultCsp =
-  `default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; ` +
+  `default-src 'self'; img-src 'self' data: https:${clerkCspHosts}; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:${clerkCspHosts}; ` +
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; ` +
-  `connect-src ${connectSrc}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
+  `connect-src ${connectSrc}${clerkCspHosts}; frame-src 'self'${clerkCspHosts}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
 
 const htmlPreviewCsp =
   `default-src 'self' data: https: http: 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:; ` +

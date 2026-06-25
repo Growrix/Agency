@@ -93,7 +93,7 @@ export function buildShopFilterGroups(
   filterOptions: ReturnType<typeof buildShopFilterOptions>,
   filters: ShopFilterState,
 ): ShopFilterGroup[] {
-  return [
+  const groups: ShopFilterGroup[] = [
     {
       label: "Category",
       key: "category",
@@ -113,4 +113,14 @@ export function buildShopFilterGroups(
       activeValue: filters.industry,
     },
   ];
+
+  return groups.filter((group) => group.options.length > 0);
+}
+
+export function countShopProductsForFilter(
+  items: Pick<PublicShopProductRecord, "categorySlug" | "typeSlug" | "industrySlug">[],
+  key: keyof Pick<PublicShopProductRecord, "categorySlug" | "typeSlug" | "industrySlug">,
+  value: string,
+) {
+  return items.filter((item) => item[key] === value).length;
 }

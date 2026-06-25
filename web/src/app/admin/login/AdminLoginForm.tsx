@@ -1,15 +1,17 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { ClerkSignInPanel } from "@/components/auth/ClerkSignInPanel";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
+import { isClerkConfiguredClient } from "@/lib/clerk-client";
 
 type AdminLoginFormProps = {
   nextPath?: string;
 };
 
-export function AdminLoginForm({ nextPath }: AdminLoginFormProps) {
+function LegacyAdminLoginForm({ nextPath }: AdminLoginFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("Sign-in failed.");
 
@@ -69,4 +71,20 @@ export function AdminLoginForm({ nextPath }: AdminLoginFormProps) {
       </Container>
     </Section>
   );
+}
+
+export function AdminLoginForm({ nextPath }: AdminLoginFormProps) {
+  const redirectUrl = nextPath && nextPath.startsWith("/") ? nextPath : "/admin";
+
+  if (isClerkConfiguredClient()) {
+    return (
+      <ClerkSignInPanel
+        redirectUrl={redirectUrl}
+        title="Admin sign in"
+        description="Sign in with your Clerk account. Admin access requires the admin role in Clerk public metadata."
+      />
+    );
+  }
+
+  return <LegacyAdminLoginForm nextPath={nextPath} />;
 }

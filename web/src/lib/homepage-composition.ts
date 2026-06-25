@@ -34,19 +34,19 @@ export type HomeSectionConfig = {
 
 export const HOME_SECTIONS: Record<HomeSectionId, HomeSectionConfig> = {
   hero: { tone: "default", size: "hero", layout: "viewport", spacing: "default" },
-  "digital-products": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
+  "digital-products": { tone: "default", size: "standard", layout: "content", spacing: "split" },
   services: { tone: "default", size: "standard", layout: "content", spacing: "split" },
   "html-preview": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
   "html-profiles": { tone: "default", size: "standard", layout: "content", spacing: "split" },
-  "featured-templates": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
-  "three-path": { tone: "default", size: "standard", layout: "content", spacing: "split" },
+  "featured-templates": { tone: "default", size: "standard", layout: "content", spacing: "split" },
+  "three-path": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
   "ready-made-solutions": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
-  "featured-builds": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
+  "featured-builds": { tone: "default", size: "standard", layout: "content", spacing: "split" },
   "trust-strip": { tone: "inset", size: "compact", layout: "content", spacing: "default" },
-  process: { tone: "default", size: "standard", layout: "content", spacing: "split" },
-  "ai-concierge": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
-  testimonials: { tone: "default", size: "standard", layout: "content", spacing: "split" },
-  "field-notes": { tone: "inset", size: "standard", layout: "content", spacing: "split" },
+  process: { tone: "inset", size: "standard", layout: "content", spacing: "split" },
+  "ai-concierge": { tone: "default", size: "standard", layout: "content", spacing: "split" },
+  testimonials: { tone: "inset", size: "standard", layout: "content", spacing: "split" },
+  "field-notes": { tone: "default", size: "standard", layout: "content", spacing: "split" },
   "final-cta": { tone: "default", size: "compact", layout: "content", spacing: "default" },
 };
 

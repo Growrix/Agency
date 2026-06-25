@@ -35,15 +35,15 @@ export function HomeHero({
     <Section
       {...homeSection("hero")}
       layout="viewport"
-      className="hero-section hero-section--responsive-band relative min-h-0 overflow-hidden lg:min-h-[calc(100dvh-var(--site-chrome-height))]"
+      className="hero-section hero-section--responsive-band home-hero-desktop-section relative min-h-0 overflow-hidden lg:min-h-[calc(100dvh-var(--site-chrome-height))]"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40 lg:opacity-20" aria-hidden />
       <div
-        className="hero-glow signal-drift-1 pointer-events-none absolute left-[8%] top-12 h-56 w-56 rounded-full bg-primary/20 blur-3xl"
+        className="hero-glow signal-drift-1 pointer-events-none absolute left-[8%] top-12 hidden h-56 w-56 rounded-full bg-primary/20 blur-3xl lg:block"
         aria-hidden
       />
       <div
-        className="hero-glow signal-drift-2 pointer-events-none absolute bottom-10 right-[10%] h-44 w-44 rounded-full bg-secondary/15 blur-3xl"
+        className="hero-glow signal-drift-2 pointer-events-none absolute bottom-10 right-[10%] hidden h-44 w-44 rounded-full bg-primary/10 blur-3xl lg:block"
         aria-hidden
       />
 

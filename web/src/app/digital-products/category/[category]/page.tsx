@@ -4,8 +4,11 @@ import { HtmlBusinessProfilesCategoryLanding } from "@/components/sections/HtmlB
 import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { isHiddenProductCategorySlug } from "@/lib/feature-flags";
+import { HTML_BUSINESS_PROFILES_CATEGORY_METADATA } from "@/lib/html-business-profiles-category-content";
+import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
+import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_METADATA } from "@/lib/website-templates-html-preview-category-content";
+import { WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG } from "@/lib/website-templates-html-preview";
 import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
-import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 type PageProps = {
@@ -15,14 +18,13 @@ type PageProps = {
 export const revalidate = 180;
 
 const CATEGORY_METADATA: Record<string, { title: string; description: string }> = {
-  "website-templates-html-preview": {
-    title: WEBSITE_TEMPLATE_PREVIEW.categoryPageTitle,
-    description: WEBSITE_TEMPLATE_PREVIEW.categoryPageDescription,
+  [WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG]: {
+    title: WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_METADATA.title,
+    description: WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_METADATA.description,
   },
-  "html-business-profiles": {
-    title: "HTML Business Profiles",
-    description:
-      "Category-specific HTML business profile websites ready in 24 hours. Preview live mobile profiles and launch a professional online presence fast.",
+  [HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug]: {
+    title: HTML_BUSINESS_PROFILES_CATEGORY_METADATA.title,
+    description: HTML_BUSINESS_PROFILES_CATEGORY_METADATA.description,
   },
 };
 
@@ -98,8 +100,8 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
       ]
     : null;
 
-  if (category === "html-business-profiles") {
-    const products = await listPublicShopProducts({ category: "html-business-profiles" });
+  if (category === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug) {
+    const products = await listPublicShopProducts({ category: HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug });
     return (
       <>
         {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}
@@ -107,8 +109,8 @@ export default async function ProductsCategoryPage({ params }: PageProps) {
       </>
     );
   }
-  if (category === "website-templates-html-preview") {
-    const products = await listPublicShopProducts({ category: "website-templates-html-preview" });
+  if (category === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG) {
+    const products = await listPublicShopProducts({ category: WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG });
     return (
       <>
         {categoryStructuredData ? <JsonLd data={categoryStructuredData} /> : null}

@@ -22,8 +22,13 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { CTABand } from "@/components/sections/CTABand";
 import { Accordion } from "@/components/sections/Accordion";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
+import { AdditionalServicesCategoriesMobile } from "@/components/marketing/additional-services/AdditionalServicesCategoriesMobile";
+import { AdditionalServicesDeliveryMobile } from "@/components/marketing/additional-services/AdditionalServicesDeliveryMobile";
+import { AdditionalServicesProcessMobile } from "@/components/marketing/additional-services/AdditionalServicesProcessMobile";
+import { AdditionalServicesValueMobile } from "@/components/marketing/additional-services/AdditionalServicesValueMobile";
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { ADDITIONAL_SERVICES_CATEGORIES } from "@/lib/content";
@@ -167,9 +172,12 @@ export default function AdditionalServicesPage() {
             <Container>
               <div className="max-w-3xl">
                 <Badge tone="primary" dot>SEO Service</Badge>
-                <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-                  Get discovered, tracked, and optimized from day one.
-                </h1>
+                <MarketingHeroTitle
+                  className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance"
+                  title="Get discovered, tracked, and optimized from day one."
+                  titleLead="Get discovered, tracked,"
+                  titleAccent="and optimized from day one."
+                />
                 <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
                   Beyond development, we offer essential one-time setup services to give your product a strong technical foundation. Search visibility, analytics, and SEO configuration handled right from the start.
                 </p>
@@ -190,175 +198,185 @@ export default function AdditionalServicesPage() {
       {/* Category Cards */}
       <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
-          <SectionHeading
-            eyebrow="What we cover"
-            title="Three categories. One strong foundation."
-            description="These configurations are designed to work together—visibility, tracking, and technical structure as a single setup sprint."
+          <MarketingViewportGate
+            mobile={<AdditionalServicesCategoriesMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="What we cover"
+                  title="Three categories. One strong foundation."
+                  description="These configurations are designed to work together—visibility, tracking, and technical structure as a single setup sprint."
+                />
+                <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
+                  {ADDITIONAL_SERVICES_CATEGORIES.map((cat, i) => {
+                    const Icon = CATEGORY_ICONS[i];
+                    return (
+                      <RevealItem key={cat.id} className="h-full">
+                        <Card hoverable className="flex h-full flex-col">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
+                              <Icon className="size-6" aria-hidden />
+                            </div>
+                            {cat.badge ? <Badge tone="secondary">{cat.badge}</Badge> : null}
+                          </div>
+                          <h2 className="mt-5 font-display text-xl tracking-tight">{cat.title}</h2>
+                          <div className="mt-4 border-t border-border" />
+                          <ul className="mt-4 flex-1 space-y-3">
+                            {cat.items.map((item) => (
+                              <li key={item} className="flex items-start gap-2.5">
+                                <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                                <span className="text-sm leading-6 text-text-muted">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </Card>
+                      </RevealItem>
+                    );
+                  })}
+                </RevealGroup>
+              </>
+            }
           />
-          <RevealGroup className="mt-10 grid gap-5 lg:grid-cols-3" stagger={0.08}>
-            {ADDITIONAL_SERVICES_CATEGORIES.map((cat, i) => {
-              const Icon = CATEGORY_ICONS[i];
-              return (
-                <RevealItem key={cat.id} className="h-full">
-                  <Card hoverable className="flex h-full flex-col">
-                    {/* Icon + badge row */}
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="inline-flex size-12 items-center justify-center rounded-[14px] bg-primary/10 text-primary">
-                        <Icon className="size-6" aria-hidden />
-                      </div>
-                      {cat.badge && (
-                        <Badge tone="secondary">{cat.badge}</Badge>
-                      )}
-                    </div>
-                    {/* Title */}
-                    <h2 className="mt-5 font-display text-xl tracking-tight">
-                      {cat.title}
-                    </h2>
-                    <div className="mt-4 border-t border-border" />
-                    {/* Items */}
-                    <ul className="mt-4 flex-1 space-y-3">
-                      {cat.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2.5">
-                          <CheckCircleIcon
-                            className="mt-0.5 size-4 shrink-0 text-primary"
-                            aria-hidden
-                          />
-                          <span className="text-sm leading-6 text-text-muted">
-                            {item}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </RevealItem>
-              );
-            })}
-          </RevealGroup>
         </Container>
       </Section>
 
       {/* Why It Matters */}
       <Section size="standard" layout="content" spacing="split">
         <Container>
-          <SectionHeading
-            eyebrow="Why it matters"
-            title="The foundation most products launch without."
-            description="These are not optional add-ons. They're the configurations that determine whether your product gets found, measured, and ranked correctly."
+          <MarketingViewportGate
+            mobile={<AdditionalServicesValueMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="Why it matters"
+                  title="The foundation most products launch without."
+                  description="These are not optional add-ons. They're the configurations that determine whether your product gets found, measured, and ranked correctly."
+                />
+                <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.07}>
+                  {VALUE_POINTS.map((point) => {
+                    const Icon = point.icon;
+                    return (
+                      <RevealItem key={point.title} className="h-full">
+                        <Card hoverable className="h-full">
+                          <div className="inline-flex size-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
+                            <Icon className="size-5" aria-hidden />
+                          </div>
+                          <h3 className="mt-4 font-display text-lg tracking-tight">{point.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-text-muted">{point.description}</p>
+                        </Card>
+                      </RevealItem>
+                    );
+                  })}
+                </RevealGroup>
+              </>
+            }
           />
-          <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.07}>
-            {VALUE_POINTS.map((point) => {
-              const Icon = point.icon;
-              return (
-                <RevealItem key={point.title} className="h-full">
-                  <Card hoverable className="h-full">
-                    <div className="inline-flex size-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
-                      <Icon className="size-5" aria-hidden />
-                    </div>
-                    <h3 className="mt-4 font-display text-lg tracking-tight">{point.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">{point.description}</p>
-                  </Card>
-                </RevealItem>
-              );
-            })}
-          </RevealGroup>
         </Container>
       </Section>
 
       {/* Delivery Model */}
       <Section size="standard" layout="content" spacing="split" tone="inset">
         <Container>
-          <SectionHeading
-            eyebrow="Delivery model"
-            title="One-time setup. Permanent results."
-            description="We audit, configure, verify, and hand off everything with documentation. You own the setup and understand every decision made."
-          />
-          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface">
-            {/* Header */}
-            <div className="border-b border-border px-6 py-6 sm:px-8 sm:py-7">
-              <Badge tone="primary" className="mb-3">What&apos;s covered</Badge>
-              <h3 className="font-display text-xl tracking-tight sm:text-2xl">
-                Everything included in a standard SEO service engagement.
-              </h3>
-            </div>
-            {/* Two-column grid */}
-            <div className="grid divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
-              {/* Included */}
-              <div className="px-6 py-6 sm:px-8 sm:py-7">
-                <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
-                  Included — Setup &amp; Configuration Scope
-                </p>
-                <p className="mb-5 text-sm leading-6 text-text-muted">
-                  Everything we configure, verify, and hand off documentation for:
-                </p>
-                <ul className="space-y-3">
-                  {INCLUDED.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm">
-                      <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {/* Not included */}
-              <div className="px-6 py-6 sm:px-8 sm:py-7">
-                <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
-                  Not included — Out of Scope
-                </p>
-                <ul className="space-y-3">
-                  {NOT_INCLUDED.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm">
-                      <XCircleIcon className="mt-0.5 size-4 shrink-0 text-text-muted" aria-hidden />
-                      <span className="text-text-muted">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 border-t border-border pt-6">
-                  <p className="text-sm leading-6 text-text-muted">
-                    These are mostly one-time configurations designed to set a strong foundation for your growth.
-                    If you need ongoing SEO, automation, or scaling—we can support that as well through custom collaboration.
-                  </p>
-                  <Link
-                    href="/book-appointment"
-                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-                  >
-                    Let&apos;s talk custom <ArrowRightIcon className="size-3.5" />
-                  </Link>
+          <MarketingViewportGate
+            mobile={<AdditionalServicesDeliveryMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="Delivery model"
+                  title="One-time setup. Permanent results."
+                  description="We audit, configure, verify, and hand off everything with documentation. You own the setup and understand every decision made."
+                />
+                <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface">
+                  <div className="border-b border-border px-6 py-6 sm:px-8 sm:py-7">
+                    <Badge tone="primary" className="mb-3">What&apos;s covered</Badge>
+                    <h3 className="font-display text-xl tracking-tight sm:text-2xl">
+                      Everything included in a standard SEO service engagement.
+                    </h3>
+                  </div>
+                  <div className="grid divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+                    <div className="px-6 py-6 sm:px-8 sm:py-7">
+                      <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+                        Included — Setup &amp; Configuration Scope
+                      </p>
+                      <p className="mb-5 text-sm leading-6 text-text-muted">
+                        Everything we configure, verify, and hand off documentation for:
+                      </p>
+                      <ul className="space-y-3">
+                        {INCLUDED.map((item) => (
+                          <li key={item} className="flex items-start gap-3 text-sm">
+                            <CheckCircleIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="px-6 py-6 sm:px-8 sm:py-7">
+                      <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
+                        Not included — Out of Scope
+                      </p>
+                      <ul className="space-y-3">
+                        {NOT_INCLUDED.map((item) => (
+                          <li key={item} className="flex items-start gap-3 text-sm">
+                            <XCircleIcon className="mt-0.5 size-4 shrink-0 text-text-muted" aria-hidden />
+                            <span className="text-text-muted">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6 border-t border-border pt-6">
+                        <p className="text-sm leading-6 text-text-muted">
+                          These are mostly one-time configurations designed to set a strong foundation for your growth.
+                          If you need ongoing SEO, automation, or scaling—we can support that as well through custom collaboration.
+                        </p>
+                        <Link
+                          href="/book-appointment"
+                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                        >
+                          Let&apos;s talk custom <ArrowRightIcon className="size-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </>
+            }
+          />
         </Container>
       </Section>
 
       {/* Process Steps */}
       <Section size="standard" layout="content" spacing="split">
         <Container>
-          <SectionHeading
-            eyebrow="How we do it"
-            title="Four steps from audit to handoff."
-            description="No guesswork, no black boxes. Every configuration is audited, implemented, verified, and handed over with documentation you own."
+          <MarketingViewportGate
+            mobile={<AdditionalServicesProcessMobile />}
+            desktop={
+              <>
+                <SectionHeading
+                  eyebrow="How we do it"
+                  title="Four steps from audit to handoff."
+                  description="No guesswork, no black boxes. Every configuration is audited, implemented, verified, and handed over with documentation you own."
+                />
+                <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.07}>
+                  {PROCESS_ITEMS.map((step) => {
+                    const Icon = step.icon;
+                    return (
+                      <RevealItem key={step.number} className="h-full">
+                        <Card className="h-full">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="inline-flex size-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
+                              <Icon className="size-5" aria-hidden />
+                            </div>
+                            <span className="font-mono text-3xl font-semibold text-border">{step.number}</span>
+                          </div>
+                          <h3 className="mt-4 font-display text-lg tracking-tight">{step.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-text-muted">{step.description}</p>
+                        </Card>
+                      </RevealItem>
+                    );
+                  })}
+                </RevealGroup>
+              </>
+            }
           />
-          <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" stagger={0.07}>
-            {PROCESS_ITEMS.map((step) => {
-              const Icon = step.icon;
-              return (
-                <RevealItem key={step.number} className="h-full">
-                  <Card className="h-full">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="inline-flex size-10 items-center justify-center rounded-sm bg-primary/10 text-primary">
-                        <Icon className="size-5" aria-hidden />
-                      </div>
-                      <span className="font-mono text-3xl font-semibold text-border">
-                        {step.number}
-                      </span>
-                    </div>
-                    <h3 className="mt-4 font-display text-lg tracking-tight">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-text-muted">{step.description}</p>
-                  </Card>
-                </RevealItem>
-              );
-            })}
-          </RevealGroup>
         </Container>
       </Section>
 

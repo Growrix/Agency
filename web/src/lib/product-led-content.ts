@@ -41,6 +41,149 @@ export const PRODUCT_INDEX_COPY = {
   eyebrow: "Marketplace",
 } as const;
 
+export const SHOP_DESKTOP_COPY = {
+  breadcrumbs: { home: "Home", current: "Digital Products" },
+  hero: {
+    eyebrow: "Digital Products",
+    titleLead: "Ready-to-launch digital products",
+    titleAccent: "built for real results.",
+    description:
+      "High-performance templates, SaaS starters, and automation systems designed to help you launch faster, convert better, and scale with confidence.",
+    features: [
+      { label: "Instant Download", icon: "download" as const },
+      { label: "Secure & Reliable", icon: "shield" as const },
+      { label: "Lifetime Updates", icon: "refresh" as const },
+    ],
+    primaryCta: { label: "Browse All Products", href: "#shop-catalog" },
+    secondaryCta: { label: "How it works", href: "/services" },
+  },
+  stats: [
+    { label: "Premium Products", icon: "cube" as const, valueKey: "productCount" as const },
+    { label: "Happy Customers", icon: "users" as const, value: "8,000+" },
+    { label: "Average Rating", icon: "star" as const, value: "4.9/5" },
+    { label: "Support & Updates", icon: "support" as const, value: "24/7" },
+  ],
+  catalog: {
+    allTabLabel: "All Products",
+    filterTitle: "Filter Products",
+    clearAll: "Clear all",
+    showingTemplate: "Showing {start}–{end} of {total} products",
+    sortLabel: "Sort by",
+    sortOptions: [
+      { value: "popular", label: "Popular" },
+      { value: "price-asc", label: "Price: Low to High" },
+      { value: "price-desc", label: "Price: High to Low" },
+      { value: "name", label: "Name A–Z" },
+    ] as const,
+    bundlePromo: {
+      title: "Looking for a bundle?",
+      description: "Save when you buy curated product bundles tailored for faster launches.",
+      ctaLabel: "Explore Bundles",
+      ctaHref: "/digital-products/bundles",
+    },
+    emptyTitle: "No products match those filters.",
+    emptyDescription: "Clear a filter to see more of the catalog.",
+    resetLabel: "Reset filters",
+  },
+  valueProps: [
+    {
+      title: "Built for Speed",
+      description: "Launch in hours, not weeks — every product ships production-ready.",
+      icon: "bolt" as const,
+    },
+    {
+      title: "Premium Quality",
+      description: "Clean code, modern design, and scalable architecture out of the box.",
+      icon: "sparkles" as const,
+    },
+    {
+      title: "Secure & Reliable",
+      description: "Tested, documented, and ready for real-world deployment.",
+      icon: "shield" as const,
+    },
+    {
+      title: "One-time Payment",
+      description: "No monthly fees. Own it forever with lifetime updates included.",
+      icon: "wallet" as const,
+    },
+  ],
+  finalCta: {
+    eyebrow: "Need something custom?",
+    titleLead: "Can't find the perfect",
+    titleAccent: "fit?",
+    title: "Can't find the perfect fit?",
+    description:
+      "Let's build a custom solution designed specifically for your business goals, brand, and launch timeline.",
+    primary: { label: "Book a Free Call", href: "/book-appointment" },
+    secondary: { label: "Request Custom Quote", href: "/contact" },
+  },
+} as const;
+
+export const SHOP_MARKETPLACE_COPY = {
+  caps: {
+    maxFeatured: 4,
+    maxPremium: 3,
+    maxNew: 3,
+    maxBundles: 2,
+  },
+  curatedSlugs: {
+    featured: [] as string[],
+    premium: [] as string[],
+    newArrivals: [] as string[],
+    bundles: [] as string[],
+  },
+  bands: {
+    featured: {
+      id: "featured" as const,
+      eyebrow: "Editor's picks",
+      title: "Featured templates",
+      description: "High-trust products chosen for launch speed and conversion quality.",
+      seeAllHref: "/digital-products",
+      seeAllLabel: "See all",
+      gridColumns: 2 as const,
+    },
+    premium: {
+      id: "premium" as const,
+      eyebrow: "Premium tier",
+      title: "Premium collection",
+      description: "Expanded packages with Standard, Premium, and Done-For-You options.",
+      seeAllHref: "/digital-products",
+      seeAllLabel: "See all",
+      gridColumns: 3 as const,
+      badgeLabel: "Premium",
+    },
+    newArrivals: {
+      id: "new" as const,
+      eyebrow: "Just added",
+      title: "New arrivals",
+      description: "Fresh releases added to the marketplace this season.",
+      seeAllHref: "/digital-products",
+      seeAllLabel: "See all",
+      gridColumns: 3 as const,
+    },
+    bundles: {
+      id: "bundles" as const,
+      eyebrow: "Save more",
+      title: "Bundle spotlight",
+      description: "Curated product bundles for faster launches at a better value.",
+      seeAllHref: "/digital-products/bundles",
+      seeAllLabel: "Explore bundles",
+      gridColumns: 2 as const,
+    },
+    allProducts: {
+      title: "All products",
+      description: "Browse the full catalog with live previews.",
+    },
+  },
+  mobile: {
+    filterLabel: "Filters",
+    clearAllLabel: "Clear all",
+    resultsLabel: "results",
+    drawerTitle: "Filters",
+    doneForYouCta: { label: "Need Done-For-You setup?", href: "/book-appointment" },
+  },
+} as const;
+
 export const HOME_DIGITAL_PRODUCTS_COPY = {
   eyebrow: "Digital products",
   title: "Shop templates and toolkits",

@@ -139,7 +139,7 @@ export function HomeHeroShowcase({
 
             {activeSlide?.previewUrl && !isMobileLayout && shouldRenderPhoneOverlay ? (
               <div
-                className="pointer-events-none absolute -bottom-2 right-0 z-30 hidden w-[34%] max-w-[176px] drop-shadow-[0_18px_40px_rgba(0,0,0,0.45)] lg:block xl:-right-4"
+                className="home-hero-desktop__phone pointer-events-none absolute -bottom-3 right-0 z-30 hidden w-[38%] max-w-[190px] lg:block xl:-right-6"
                 aria-hidden
               >
                 <div

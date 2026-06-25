@@ -18,21 +18,13 @@ import { HomeHtmlPreviewSection } from "@/components/marketing/HomeHtmlPreviewSe
 
 import { HomeProcessSection } from "@/components/marketing/HomeProcessSection";
 
-import { HomeTemplatesMarketplaceSection } from "@/components/marketing/HomeTemplatesMarketplaceSection";
-
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-
-import { TrustStrip } from "@/components/sections/TrustStrip";
 
 import { HomeFieldNotesSection } from "@/components/marketing/HomeFieldNotesSection";
 
 import { Container, Section } from "@/components/primitives/Container";
 
-import { HOME_STACK_MARQUEE } from "@/lib/content";
-
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
-
-import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
 
 import { buildReadyMadeSolutionTabs, pickPreviewProducts } from "@/lib/ready-made-solutions";
 
@@ -86,10 +78,6 @@ const HomeDigitalProductsShowcase = dynamic(
 
 export const revalidate = 120;
 
-
-
-const HOME_PROFILE_PREVIEW_COUNT = 4;
-
 function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | undefined, fallback: T[]) {
   if (!slugs || slugs.length === 0) {
     return fallback;
@@ -109,18 +97,6 @@ export default async function Home() {
   const featuredProjects = pickBySlugs(portfolio, homeContent?.featuredBuilds?.projectSlugs, portfolio.slice(0, 3));
 
   const readyMadeSolutions = buildReadyMadeSolutionTabs(publicProducts);
-
-  const featuredHtmlBusinessProfileProducts = pickPreviewProducts(
-
-    publicProducts,
-
-    HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug,
-
-    HOME_PROFILE_PREVIEW_COUNT,
-
-    "start",
-
-  );
 
   const htmlPreviewCatalogProducts = publicProducts.filter(
 
@@ -216,6 +192,7 @@ export default async function Home() {
 
       <JsonLd data={homeStructuredData} />
 
+      <div className="home-desktop-marketing">
       <HomeHero
 
         badge={homeContent?.heroBadge}
@@ -243,10 +220,6 @@ export default async function Home() {
         productsByTabId={readyMadeSolutions.productsByTabId}
 
       />
-
-
-
-      <HomeTemplatesMarketplaceSection products={featuredHtmlBusinessProfileProducts} />
 
 
 
@@ -308,10 +281,6 @@ export default async function Home() {
 
 
 
-      <TrustStrip items={HOME_STACK_MARQUEE} tone={homeSection("trust-strip").tone} />
-
-
-
       <HomeProcessSection />
 
 
@@ -336,7 +305,7 @@ export default async function Home() {
 
       {SHOW_GOOGLE_REVIEWS && (
 
-        <Section size="standard" layout="content" spacing="split">
+        <Section size="standard" layout="content" spacing="split" tone="default">
 
           <Container>
 
@@ -393,6 +362,7 @@ export default async function Home() {
 
       />
 
+      </div>
     </>
 
   );

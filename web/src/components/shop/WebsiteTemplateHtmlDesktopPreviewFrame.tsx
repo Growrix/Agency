@@ -139,7 +139,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
   return (
     <div
       ref={containerRef}
-      className={cn("relative w-full overflow-hidden bg-[#0a0a0a]", frameClassName, className)}
+      className={cn("relative w-full overflow-hidden bg-inset", frameClassName, className)}
       style={fit === "contain" ? containStyle : fit === "cover" ? coverStyle : { height: scaledHeight }}
     >
       <div
@@ -159,7 +159,7 @@ export function WebsiteTemplateHtmlDesktopPreviewFrame({
           title={title}
           width={viewportWidth}
           height={iframeHeight}
-          className="block border-0 bg-white"
+          className="block border-0 bg-surface"
           loading={iframeLoading}
           tabIndex={-1}
           referrerPolicy="strict-origin-when-cross-origin"

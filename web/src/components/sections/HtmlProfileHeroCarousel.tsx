@@ -44,6 +44,7 @@ type HtmlProfileHeroCarouselProps = {
   fillHeight?: boolean;
   desktopPreviewFit?: "width" | "cover";
   desktopPreviewViewportHeight?: number;
+  desktopPreviewVerticalAlign?: "top" | "center";
   mobileFrameMinHeightClass?: string;
   /** Max height budget for scaling the phone frame (use HTML_MOBILE_FRAME_HEIGHT for native size). */
   mobilePreviewMaxHeight?: number;
@@ -180,6 +181,7 @@ export function HtmlProfileHeroCarousel({
   fillHeight = false,
   desktopPreviewFit = "width",
   desktopPreviewViewportHeight,
+  desktopPreviewVerticalAlign = "center",
   mobileFrameMinHeightClass = "min-h-0",
   mobilePreviewMaxHeight,
   mobilePreviewShowViewportLabel = false,
@@ -432,16 +434,22 @@ export function HtmlProfileHeroCarousel({
         "w-full min-w-0 overflow-hidden rounded-md border border-border bg-inset/20",
         mobileFrameMinHeightClass,
       )
-    : previewMode === "desktop-scaled" && fillHeight
+    : previewMode === "desktop-scaled"
       ? cn(
-          "relative min-h-0 min-w-0 flex-1 overflow-hidden",
-          compactPresentation
-            ? "h-full min-h-[240px] border-0 rounded-none bg-transparent"
-            : "min-h-[320px] rounded-md border border-border bg-[#0a0a0a]",
+          "relative min-w-0 overflow-hidden",
+          fillHeight
+            ? cn(
+                "min-h-0 flex-1",
+                compactPresentation
+                  ? "h-full min-h-[240px] border-0 rounded-none bg-transparent"
+                  : "min-h-[320px] rounded-md border border-border bg-[#0a0a0a]",
+              )
+            : cn(
+                "rounded-md border border-border bg-[#0a0a0a]",
+                desktopPreviewFit === "cover" && "min-h-0",
+              ),
         )
-      : previewMode === "desktop-scaled"
-        ? "overflow-hidden rounded-md border border-border bg-[#0a0a0a]"
-        : "min-h-[320px] flex-1 overflow-hidden rounded-md border border-border bg-black lg:min-h-[480px]";
+      : "min-h-[320px] flex-1 overflow-hidden rounded-md border border-border bg-black lg:min-h-[480px]";
 
   return (
     <div
@@ -548,7 +556,9 @@ export function HtmlProfileHeroCarousel({
                         mobilePreviewMaxHeight={mobilePreviewMaxHeight}
                         mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
                         loadPreview={loadPreview}
-                        desktopPreviewVerticalAlign={compactPresentation ? "top" : "center"}
+                        desktopPreviewVerticalAlign={
+                          compactPresentation ? "top" : desktopPreviewVerticalAlign
+                        }
                         iframeLoading={compactPresentation ? "eager" : "lazy"}
                       />
                     )}
@@ -630,7 +640,9 @@ export function HtmlProfileHeroCarousel({
                         mobilePreviewMaxHeight={mobilePreviewMaxHeight}
                         mobilePreviewShowViewportLabel={mobilePreviewShowViewportLabel}
                         loadPreview={loadPreview}
-                        desktopPreviewVerticalAlign={compactPresentation ? "top" : "center"}
+                        desktopPreviewVerticalAlign={
+                          compactPresentation ? "top" : desktopPreviewVerticalAlign
+                        }
                         iframeLoading={compactPresentation ? "eager" : "lazy"}
                       />
                     )}

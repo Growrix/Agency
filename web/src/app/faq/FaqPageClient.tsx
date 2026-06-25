@@ -17,9 +17,13 @@ import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { ConciergeTrigger, ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
+import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { MarketingPageHeroMobile } from "@/components/marketing/MarketingPageHeroMobile";
 import { MobileFilterChips } from "@/components/marketing/MobileFilterChips";
+import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
+import { FaqQuickAnswersMobile } from "@/components/marketing/faq/FaqQuickAnswersMobile";
+import { FaqRoutesMobile } from "@/components/marketing/faq/FaqRoutesMobile";
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { FAQ_HERO } from "@/lib/faq-content";
 import { WHATSAPP_HREF } from "@/lib/nav";
@@ -105,9 +109,12 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
             <Container>
               <div className="max-w-3xl">
                 <Badge tone="primary" dot>FAQ</Badge>
-                <h1 className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance">
-                  Answers before you ask.
-                </h1>
+                <MarketingHeroTitle
+                  className="mt-5 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance"
+                  title={FAQ_HERO.title}
+                  titleLead={FAQ_HERO.titleLead}
+                  titleAccent={FAQ_HERO.titleAccent}
+                />
                 <p className="mt-6 text-lg text-text-muted leading-7">
                   Search by keyword or browse by category. Most questions here are about websites, SaaS builds, ready websites, and payment terms.
                 </p>
@@ -164,15 +171,22 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
 
       <Section size="standard" layout="content" spacing="split">
         <Container>
-          <SectionHeading eyebrow="Quick answers" title="The most common ones up front." />
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {quick.map((item) => (
-              <Card key={item.question} className="h-full">
-                <h3 className="font-display text-lg tracking-tight">{item.question}</h3>
-                <p className="mt-2 text-sm text-text-muted leading-6">{item.answer}</p>
-              </Card>
-            ))}
-          </div>
+          <MarketingViewportGate
+            mobile={<FaqQuickAnswersMobile items={quick} />}
+            desktop={
+              <>
+                <SectionHeading eyebrow="Quick answers" title="The most common ones up front." />
+                <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                  {quick.map((item) => (
+                    <Card key={item.question} className="h-full">
+                      <h3 className="font-display text-lg tracking-tight">{item.question}</h3>
+                      <p className="mt-2 text-sm text-text-muted leading-6">{item.answer}</p>
+                    </Card>
+                  ))}
+                </div>
+              </>
+            }
+          />
         </Container>
       </Section>
 
@@ -213,34 +227,58 @@ export function FaqPageClient({ categories, questions, quick }: FaqPageClientPro
 
       <Section size="standard" layout="content" spacing="split">
         <Container>
-          <SectionHeading eyebrow="Still stuck" title="Pick a faster route." align="center" />
-          <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
-            <ConciergeTrigger className="text-left">
-              <Card hoverable className="text-center">
-                <SparklesIcon className="mx-auto size-7 text-primary" aria-hidden />
-                <p className="mt-3 font-display text-lg tracking-tight">AI Growrix OS</p>
-              </Card>
-            </ConciergeTrigger>
-            <Link href={WHATSAPP_HREF}>
-              <Card hoverable className="text-center">
-                <ChatBubbleLeftRightIcon className="mx-auto size-7 text-primary" aria-hidden />
-                <p className="mt-3 font-display text-lg tracking-tight">WhatsApp</p>
-              </Card>
-            </Link>
-            <Link href="/book-appointment">
-              <Card hoverable className="text-center">
-                <CalendarDaysIcon className="mx-auto size-7 text-primary" aria-hidden />
-                <p className="mt-3 font-display text-lg tracking-tight">Book a call</p>
-              </Card>
-            </Link>
-          </div>
+          <MarketingViewportGate
+            mobile={<FaqRoutesMobile />}
+            desktop={
+              <>
+                <SectionHeading eyebrow="Still stuck" title="Pick a faster route." align="center" />
+                <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+                  <ConciergeTrigger className="text-left">
+                    <Card hoverable className="text-center">
+                      <SparklesIcon className="mx-auto size-7 text-primary" aria-hidden />
+                      <p className="mt-3 font-display text-lg tracking-tight">AI Growrix OS</p>
+                    </Card>
+                  </ConciergeTrigger>
+                  <Link href={WHATSAPP_HREF}>
+                    <Card hoverable className="text-center">
+                      <ChatBubbleLeftRightIcon className="mx-auto size-7 text-primary" aria-hidden />
+                      <p className="mt-3 font-display text-lg tracking-tight">WhatsApp</p>
+                    </Card>
+                  </Link>
+                  <Link href="/book-appointment">
+                    <Card hoverable className="text-center">
+                      <CalendarDaysIcon className="mx-auto size-7 text-primary" aria-hidden />
+                      <p className="mt-3 font-display text-lg tracking-tight">Book a call</p>
+                    </Card>
+                  </Link>
+                </div>
+              </>
+            }
+          />
         </Container>
       </Section>
 
-      <CTABand
-        title="Got the answer? Let's scope the right website or product."
-        primary={{ label: "Book Appointment", href: "/book-appointment" }}
-        secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}
+      <MarketingViewportGate
+        mobile={
+          <ProductLedFinalCTAMobile
+            eyebrow="Next step"
+            titleLead="Got the answer? Let's scope"
+            titleAccent="the right website or product."
+            description="Book a discovery call or message us on WhatsApp to move from questions to a scoped plan."
+            primaryLabel="Book Appointment"
+            primaryHref="/book-appointment"
+            secondaryLabel="Open WhatsApp"
+            secondaryHref={WHATSAPP_HREF}
+          />
+        }
+        desktop={
+          <CTABand
+            titleLead="Got the answer? Let's scope"
+            titleAccent="the right website or product."
+            primary={{ label: "Book Appointment", href: "/book-appointment" }}
+            secondary={{ label: "Open WhatsApp", href: WHATSAPP_HREF }}
+          />
+        }
       />
     </>
   );

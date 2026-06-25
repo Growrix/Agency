@@ -1,18 +1,18 @@
 "use client";
 
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { HomeDesktopSectionRail } from "@/components/marketing/desktop/HomeDesktopSectionRail";
+import { HomeDesktopSplitSection } from "@/components/marketing/desktop/HomeDesktopSplitSection";
+import { FeaturedBlogPostsMobile } from "@/components/marketing/mobile/FeaturedBlogPostsMobile";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
 import { Container, Section } from "@/components/primitives/Container";
-import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { BlogCard } from "@/components/sections/BlogCard";
-import { BlogCardMobile } from "@/components/sections/BlogCardMobile";
 import { HOME_FIELD_NOTES_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
-import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { BlogPost } from "@/lib/content";
 
 type HomeFieldNotesSectionProps = {
@@ -22,88 +22,91 @@ type HomeFieldNotesSectionProps = {
   description?: string;
 };
 
-function HomeFieldNotesMobile({
-  posts,
-  eyebrow = HOME_FIELD_NOTES_COPY.eyebrow,
-  title = HOME_FIELD_NOTES_COPY.title,
-  description = HOME_FIELD_NOTES_COPY.description,
-}: HomeFieldNotesSectionProps) {
+function resolveBlogCopy(props: HomeFieldNotesSectionProps) {
+  const title = props.title ?? HOME_FIELD_NOTES_COPY.title;
+  const useAccentTitle = title === HOME_FIELD_NOTES_COPY.title;
+
+  return {
+    eyebrow: props.eyebrow ?? HOME_FIELD_NOTES_COPY.eyebrow,
+    title,
+    titleLead: useAccentTitle ? HOME_FIELD_NOTES_COPY.titleLead : undefined,
+    titleAccent: useAccentTitle ? HOME_FIELD_NOTES_COPY.titleAccent : undefined,
+    description: props.description ?? HOME_FIELD_NOTES_COPY.description,
+    ctaHref: HOME_FIELD_NOTES_COPY.ctaHref,
+    ctaLabel: HOME_FIELD_NOTES_COPY.ctaLabel,
+  };
+}
+
+function HomeFieldNotesMobile(props: HomeFieldNotesSectionProps) {
+  const { posts } = props;
+  const copy = resolveBlogCopy(props);
+
   return (
     <div className="home-mobile-marketing">
       <MobileMarketingSectionHeader
-        eyebrow={eyebrow}
-        titleLead={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleLead : undefined}
-        titleAccent={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleAccent : undefined}
-        title={title}
-        description={description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
+        eyebrow={copy.eyebrow}
+        titleLead={copy.titleLead}
+        titleAccent={copy.titleAccent}
+        title={copy.titleLead && copy.titleAccent ? undefined : copy.title}
+        description={copy.description}
       />
 
-      <LinkButton
-        href={HOME_FIELD_NOTES_COPY.ctaHref}
-        variant="outline"
-        className="home-mobile-marketing__cta home-mobile-marketing__cta--outline mt-(--home-mobile-marketing-gap-desc-content)"
-      >
-        <span className="home-mobile-marketing__cta-inner">
-          {HOME_FIELD_NOTES_COPY.ctaLabel}
-          <ArrowUpRightIcon className="home-mobile-marketing__cta-icon" aria-hidden />
-        </span>
-      </LinkButton>
+      <div className="home-mobile-marketing__cta-row home-mobile-marketing__cta-row--center">
+        <LinkButton href={copy.ctaHref} className="home-mobile-marketing__cta">
+          <span className="home-mobile-marketing__cta-inner">
+            <EyeIcon className="home-mobile-marketing__cta-icon" aria-hidden />
+            {copy.ctaLabel}
+            <ArrowUpRightIcon className="home-mobile-marketing__cta-icon" aria-hidden />
+          </span>
+        </LinkButton>
+      </div>
 
-      <RevealGroup className="home-mobile-marketing__stack">
-        {posts.map((post) => (
-          <RevealItem key={post.slug}>
-            <BlogCardMobile post={post} />
-          </RevealItem>
-        ))}
-      </RevealGroup>
-
-      {posts.length === 0 ? (
+      {posts.length > 0 ? (
+        <FeaturedBlogPostsMobile posts={posts} />
+      ) : (
         <Card className="mt-(--home-mobile-marketing-gap-section-stack) text-center">
           <p className="font-display text-base tracking-tight">No published blog posts yet.</p>
           <p className="mt-2 text-text-muted">Publish your first post in Sanity to show it here.</p>
         </Card>
-      ) : null}
+      )}
     </div>
   );
 }
 
-function HomeFieldNotesDesktop({
-  posts,
-  eyebrow = HOME_FIELD_NOTES_COPY.eyebrow,
-  title = HOME_FIELD_NOTES_COPY.title,
-  description = HOME_FIELD_NOTES_COPY.description,
-}: HomeFieldNotesSectionProps) {
+function HomeFieldNotesDesktop(props: HomeFieldNotesSectionProps) {
+  const { posts } = props;
+  const copy = resolveBlogCopy(props);
+
   return (
-    <>
-      <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-        <SectionHeading
-          eyebrow={eyebrow}
-          title={title}
-          titleLead={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleLead : undefined}
-          titleAccent={title === HOME_FIELD_NOTES_COPY.title ? HOME_FIELD_NOTES_COPY.titleAccent : undefined}
-          description={description}
-          titleClassName={HERO_TITLE_CLASS}
+    <HomeDesktopSplitSection
+      rail={
+        <HomeDesktopSectionRail
+          eyebrow={copy.eyebrow}
+          title={copy.titleLead && copy.titleAccent ? undefined : copy.title}
+          titleLead={copy.titleLead}
+          titleAccent={copy.titleAccent}
+          description={copy.description}
+          ctaHref={copy.ctaHref}
+          ctaLabel={copy.ctaLabel}
         />
-        <LinkButton href={HOME_FIELD_NOTES_COPY.ctaHref} variant="outline">
-          {HOME_FIELD_NOTES_COPY.ctaLabel} <ArrowUpRightIcon className="size-4" />
-        </LinkButton>
-      </div>
-      <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
-        {posts.map((post) => (
-          <RevealItem key={post.slug}>
-            <BlogCard post={post} />
-          </RevealItem>
-        ))}
-      </RevealGroup>
-      {posts.length === 0 ? (
-        <Card className="mt-8 text-center">
-          <p className="font-display text-2xl tracking-tight">No published blog posts yet.</p>
-          <p className="mt-2 text-text-muted">Publish your first post in Sanity to show it here.</p>
-        </Card>
-      ) : null}
-    </>
+      }
+      content={
+        posts.length > 0 ? (
+          <RevealGroup className="home-desktop-marketing__product-grid" stagger={0.07}>
+            {posts.map((post) => (
+              <RevealItem key={post.slug} className="h-full min-w-0">
+                <BlogCard post={post} compact className="home-desktop-marketing__blog-card h-full" />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        ) : (
+          <Card className="text-center">
+            <p className="font-display text-xl tracking-tight">No published blog posts yet.</p>
+            <p className="mt-2 text-text-muted">Publish your first post in Sanity to show it here.</p>
+          </Card>
+        )
+      }
+    />
   );
 }
 
@@ -111,8 +114,8 @@ export function HomeFieldNotesSection(props: HomeFieldNotesSectionProps) {
   const shell = homeSection("field-notes");
 
   return (
-    <Section {...shell}>
-      <Container>
+    <Section {...shell} className="overflow-x-hidden">
+      <Container className="min-w-0">
         <MarketingViewportGate
           mobile={<HomeFieldNotesMobile {...props} />}
           desktop={<HomeFieldNotesDesktop {...props} />}

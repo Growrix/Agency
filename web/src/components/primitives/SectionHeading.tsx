@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/motion/Motion";
 import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitle";
+import { resolveMarketingTitle } from "@/lib/marketing-title";
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -42,11 +43,12 @@ export function SectionHeading({
   titleClassName?: string;
   as?: React.ElementType;
 }) {
+  const resolved = resolveMarketingTitle({ title, titleLead, titleAccent });
   const resolvedTitle =
-    titleLead && titleAccent ? (
-      <MarketingAccentTitle lead={titleLead} accent={titleAccent} />
+    resolved.kind === "accent" ? (
+      <MarketingAccentTitle lead={resolved.titleLead} accent={resolved.titleAccent} />
     ) : (
-      title
+      resolved.title
     );
 
   return (

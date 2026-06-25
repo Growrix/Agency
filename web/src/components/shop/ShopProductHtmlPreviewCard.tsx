@@ -16,7 +16,7 @@ import {
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
 } from "@/lib/website-templates-html-preview";
 
-export type ShopPreviewLoadMode = "auto" | "poster-first";
+export type ShopPreviewLoadMode = "auto" | "poster-first" | "eager";
 
 export function ShopProductHtmlPreviewCard({
   product,
@@ -40,23 +40,25 @@ export function ShopProductHtmlPreviewCard({
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
   const isCompact = variant === "compact";
+  const isEager = previewLoadMode === "eager";
   const usePosterFirst = previewLoadMode === "poster-first";
   const requiresClickToLoad = usePosterFirst && !autoLoadLive;
   const [liveActivated, setLiveActivated] = useState(!requiresClickToLoad);
   const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>({
     priority: loadPriority,
     rootMargin: requiresClickToLoad ? "0px 0px" : undefined,
+    disabled: isEager,
   });
   const shouldMountIframe = requiresClickToLoad
     ? liveActivated
-    : shouldRenderPreview;
+    : isEager || shouldRenderPreview;
 
   return (
     <Card hoverable className="shop-product-html-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
       <div
         ref={previewRef}
         className={cn(
-          "shop-product-html-preview-card__preview relative w-full max-w-full overflow-hidden bg-[#0a0a0a]",
+          "shop-product-html-preview-card__preview relative w-full max-w-full overflow-hidden bg-inset",
           isCompact && "aspect-[16/10] min-h-[120px]",
           !isCompact && isCatalogWide && "relative aspect-16/10 min-h-[240px] sm:min-h-[280px]",
           !isCompact && !isCatalogWide && "relative aspect-16/10 min-h-[200px]",
@@ -68,14 +70,15 @@ export function ShopProductHtmlPreviewCard({
               previewUrl={previewUrl}
               title={`${product.name} desktop preview`}
               fit="cover"
+              verticalAlign="top"
               className="absolute inset-0 h-full w-full"
               frameClassName={isCatalogWide ? "shop-product-html-preview-card__frame h-full" : "shop-product-html-preview-card__frame"}
-              iframeLoading="lazy"
+              iframeLoading={isEager ? "eager" : "lazy"}
             />
           ) : requiresClickToLoad ? (
             <PreviewPosterPlaceholder title={product.name} onActivate={() => setLiveActivated(true)} />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            <div className="absolute inset-0 flex items-center justify-center px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
               Loading preview…
             </div>
           )
@@ -85,7 +88,7 @@ export function ShopProductHtmlPreviewCard({
           </div>
         )}
         {product.tag ? (
-          <div className="absolute left-3 top-3 z-10 rounded-full bg-primary px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white shadow">
+          <div className="absolute left-3 top-3 z-10 rounded-full bg-primary px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-surface shadow">
             {product.tag}
           </div>
         ) : null}

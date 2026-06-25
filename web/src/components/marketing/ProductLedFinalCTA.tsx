@@ -44,6 +44,7 @@ export function ProductLedFinalCTA({
       desktop={
         <CTABand
           {...shell}
+          desktopLayout="marketing"
           eyebrow={eyebrow}
           title={title}
           titleLead={useAccentTitle ? HOME_FINAL_CTA_MOBILE_COPY.titleLead : undefined}

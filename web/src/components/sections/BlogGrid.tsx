@@ -5,17 +5,33 @@ import { Button } from "@/components/primitives/Button";
 import { BlogCard } from "@/components/sections/BlogCard";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import type { BlogPost } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 const PAGE_SIZE = 9;
 
-export function BlogGrid({ posts }: { posts: BlogPost[] }) {
+export function BlogGrid({
+  posts,
+  layout = "responsive",
+  className,
+}: {
+  posts: BlogPost[];
+  layout?: "responsive" | "single";
+  className?: string;
+}) {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const shown = posts.slice(0, visible);
   const hasMore = posts.length > visible;
 
   return (
     <>
-      <RevealGroup className="mt-8 grid gap-5 sm:grid-cols-2" stagger={0.07}>
+      <RevealGroup
+        className={cn(
+          "mt-8 grid gap-5",
+          layout === "single" ? "grid-cols-1" : "sm:grid-cols-2",
+          className,
+        )}
+        stagger={0.07}
+      >
         {shown.map((p) => (
           <RevealItem key={p.slug}>
             <BlogCard post={p} />

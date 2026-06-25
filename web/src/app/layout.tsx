@@ -3,6 +3,7 @@ import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
+import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -102,7 +103,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <MotionRoot>
-          <AppChrome>{children}</AppChrome>
+          <ClerkAppProvider>
+            <AppChrome>{children}</AppChrome>
+          </ClerkAppProvider>
         </MotionRoot>
         <SpeedInsights />
       </body>

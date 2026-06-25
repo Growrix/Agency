@@ -1,6 +1,7 @@
 import { ArrowRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
+import { resolveMarketingTitle } from "@/lib/marketing-title";
 
 type MarketingPageHeroMobileProps = {
   eyebrow: string;
@@ -28,6 +29,8 @@ export function MarketingPageHeroMobile({
   secondaryHref,
   proofPoints,
 }: MarketingPageHeroMobileProps) {
+  const resolved = resolveMarketingTitle({ title, titleLead, titleAccent });
+
   return (
     <div className="marketing-page-hero-mobile">
       <div className="marketing-page-hero-mobile__copy">
@@ -35,13 +38,13 @@ export function MarketingPageHeroMobile({
           {eyebrow}
         </Badge>
 
-        {titleLead && titleAccent ? (
+        {resolved.kind === "accent" ? (
           <h1 className="service-detail-hero-mobile__title">
-            <span className="block">{titleLead}</span>
-            <span className="block text-primary">{titleAccent}</span>
+            <span className="block">{resolved.titleLead}</span>
+            <span className="block marketing-title-accent">{resolved.titleAccent}</span>
           </h1>
         ) : (
-          <h1 className="service-detail-hero-mobile__title">{title}</h1>
+          <h1 className="service-detail-hero-mobile__title">{resolved.title}</h1>
         )}
 
         <p className="service-detail-hero-mobile__description">{description}</p>

@@ -42,23 +42,25 @@ export function ShopProductHtmlMobilePreviewCard({
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
   const isCompact = variant === "compact";
+  const isEager = previewLoadMode === "eager";
   const usePosterFirst = previewLoadMode === "poster-first";
   const requiresClickToLoad = usePosterFirst && !autoLoadLive;
   const [liveActivated, setLiveActivated] = useState(!requiresClickToLoad);
   const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>({
     priority: loadPriority,
     rootMargin: requiresClickToLoad ? "0px 0px" : undefined,
+    disabled: isEager,
   });
   const shouldMountIframe = requiresClickToLoad
     ? liveActivated
-    : shouldRenderPreview;
+    : isEager || shouldRenderPreview;
 
   return (
     <Card hoverable className="shop-product-html-mobile-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
       <div
         ref={previewRef}
         className={cn(
-          "shop-product-html-mobile-preview-card__preview relative flex w-full max-w-full items-start justify-center overflow-hidden bg-[#0a0a0a]",
+          "shop-product-html-mobile-preview-card__preview relative flex w-full max-w-full items-start justify-center overflow-hidden bg-inset",
           isCompact && "min-h-[150px] px-1.5 py-2",
           !isCompact && isCatalogWide && "min-h-[300px] px-3 py-5 sm:min-h-[340px]",
           !isCompact && !isCatalogWide && "min-h-[260px] px-2 py-4 sm:min-h-[300px]",
@@ -77,13 +79,13 @@ export function ShopProductHtmlMobilePreviewCard({
                     : MOBILE_CARD_PREVIEW_MAX_HEIGHT
               }
               showViewportLabel={false}
-              iframeLoading="lazy"
+              iframeLoading={isEager ? "eager" : "lazy"}
               className="w-full max-w-full"
             />
           ) : requiresClickToLoad ? (
             <PreviewPosterPlaceholder title={product.name} onActivate={() => setLiveActivated(true)} />
           ) : (
-            <div className="flex h-full min-h-[inherit] w-full items-center justify-center px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+            <div className="flex h-full min-h-[inherit] w-full items-center justify-center px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">
               Loading preview…
             </div>
           )
@@ -95,7 +97,7 @@ export function ShopProductHtmlMobilePreviewCard({
         {product.tag ? (
           <div
             className={cn(
-              "absolute left-3 top-3 z-10 rounded-full bg-primary font-mono uppercase tracking-[0.18em] text-white shadow",
+              "absolute left-3 top-3 z-10 rounded-full bg-primary font-mono uppercase tracking-[0.18em] text-surface shadow",
               isCompact ? "px-2 py-0.5 text-[8px]" : "px-2.5 py-0.5 text-[10px]",
             )}
           >
