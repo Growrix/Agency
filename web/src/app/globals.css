@@ -5716,7 +5716,6 @@ textarea.booking-input {
 @import "../styles/shop-desktop.css";
 @import "../styles/shop-mobile.css";
 @import "../styles/product-choose-path.css";
-@import "../styles/product-detail.css";
 
 .preview-device-chrome__notch {
   background: var(--preview-device-bar);

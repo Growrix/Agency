@@ -58,7 +58,7 @@ export function HomeHeroKineticHeadline({
 
     let cancelled = false;
     let shimmerInterval: ReturnType<typeof setInterval> | undefined;
-    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
+    let fallbackTimer: number | undefined;
 
     const revealAllChars = () => {
       const root = headlineRef.current;
