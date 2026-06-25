@@ -893,6 +893,7 @@ body {
 
   .home-hero-desktop__showcase {
     position: relative;
+    z-index: 2;
     min-width: 0;
   }
 
@@ -5708,12 +5709,14 @@ textarea.booking-input {
   }
 }
 
+@import "../components/marketing/hero-motion/hero-motion.css";
 @import "../styles/site-mobile-nav.css";
 @import "../styles/home-desktop-marketing.css";
 @import "../styles/shop-merchandising.css";
 @import "../styles/shop-desktop.css";
 @import "../styles/shop-mobile.css";
 @import "../styles/product-choose-path.css";
+@import "../styles/product-detail.css";
 
 .preview-device-chrome__notch {
   background: var(--preview-device-bar);

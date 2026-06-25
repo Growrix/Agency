@@ -60,7 +60,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["@heroicons/react", "framer-motion"],
+    optimizePackageImports: ["@heroicons/react", "framer-motion", "gsap", "three"],
   },
   async redirects() {
     return [

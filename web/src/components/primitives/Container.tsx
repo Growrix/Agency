@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { forwardRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Width = "shell" | "content" | "reading" | "dense" | "full";
@@ -66,25 +66,31 @@ export function Container({
   );
 }
 
-export function Section({
-  children,
-  className,
-  id,
-  tone = "default",
-  size = "standard",
-  layout = "content",
-  spacing = "default",
-  "aria-labelledby": ariaLabelledBy,
-}: {
-  children: ReactNode;
-  className?: string;
-  id?: string;
-  tone?: "default" | "inset" | "dark";
-  size?: SectionSize;
-  layout?: SectionLayout;
-  spacing?: SectionSpacing;
-  "aria-labelledby"?: string;
-}) {
+export const Section = forwardRef<
+  HTMLElement,
+  {
+    children: ReactNode;
+    className?: string;
+    id?: string;
+    tone?: "default" | "inset" | "dark";
+    size?: SectionSize;
+    layout?: SectionLayout;
+    spacing?: SectionSpacing;
+    "aria-labelledby"?: string;
+  }
+>(function Section(
+  {
+    children,
+    className,
+    id,
+    tone = "default",
+    size = "standard",
+    layout = "content",
+    spacing = "default",
+    "aria-labelledby": ariaLabelledBy,
+  },
+  ref,
+) {
   const toneClass =
     tone === "inset"
       ? "bg-inset"
@@ -93,6 +99,7 @@ export function Section({
         : "";
   return (
     <section
+      ref={ref}
       id={id}
       aria-labelledby={ariaLabelledBy}
       className={cn(
@@ -105,4 +112,4 @@ export function Section({
       {children}
     </section>
   );
-}
+});

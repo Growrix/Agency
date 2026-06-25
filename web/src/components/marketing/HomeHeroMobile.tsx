@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowRightIcon,
   CalendarDaysIcon,
@@ -6,6 +8,15 @@ import {
 import { HomeHeroMobileFeatures } from "@/components/marketing/HomeHeroMobileFeatures";
 import { HomeHeroShowcase } from "@/components/marketing/HomeHeroShowcase";
 import { HomeHeroTrustedBy } from "@/components/marketing/HomeHeroTrustedBy";
+import {
+  HomeHeroCtaMotion,
+  HomeHeroCtaStackMotion,
+  HomeHeroKineticHeadline,
+  HomeHeroKineticSubheadLines,
+  HomeHeroMotionReveal,
+  HomeHeroShowcaseMotion,
+  HomeHeroTrustMotion,
+} from "@/components/marketing/hero-motion";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
@@ -31,78 +42,75 @@ export function HomeHeroMobile({
   return (
     <div className="home-hero-mobile w-full">
       <div className="home-hero-mobile__copy">
-        <div className="signal-rise home-hero-mobile__badge-wrap" style={{ animationDelay: "0ms" }}>
+        <HomeHeroMotionReveal delay={0} className="home-hero-mobile__badge-wrap">
           <Badge tone="primary" dot className="home-hero-mobile__badge">
             {badge}
           </Badge>
-        </div>
+        </HomeHeroMotionReveal>
 
-        <h1
-          className={`signal-rise ${HERO_MOBILE_DISPLAY_TITLE_CLASS}`}
-          style={{ animationDelay: "80ms" }}
-        >
-          {useStructuredTitle ? (
-            <>
-              {HOME_HERO_COPY.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-              <span className="block marketing-title-accent">{HOME_HERO_COPY.titleAccent}</span>
-            </>
-          ) : (
-            title
-          )}
-        </h1>
+        {useStructuredTitle ? (
+          <HomeHeroKineticHeadline
+            titleLines={HOME_HERO_COPY.titleLines}
+            titleAccent={HOME_HERO_COPY.titleAccent}
+            className={HERO_MOBILE_DISPLAY_TITLE_CLASS}
+            variant="mobile"
+          />
+        ) : (
+          <h1 className={HERO_MOBILE_DISPLAY_TITLE_CLASS}>{title}</h1>
+        )}
 
-        <p className="signal-rise home-hero-mobile__description" style={{ animationDelay: "160ms" }}>
-          {HOME_HERO_COPY.mobileDescriptionLines.map((line) => (
-            <span key={line} className="home-hero-mobile__description-line">
-              {line}
-            </span>
-          ))}
-        </p>
+        <HomeHeroKineticSubheadLines
+          lines={HOME_HERO_COPY.mobileDescriptionLines}
+          className="home-hero-mobile__description"
+          lineClassName="home-hero-mobile__description-line"
+        />
 
-        <div className="signal-rise home-hero-mobile__cta-stack" style={{ animationDelay: "240ms" }}>
-          <LinkButton
-            href={HOME_HERO_COPY.primaryCtaHref}
-            fullWidth
-            className="home-hero-mobile__cta-primary"
-          >
-            <span className="home-hero-mobile__cta-inner">
-              <ShoppingBagIcon className="home-hero-mobile__cta-icon" aria-hidden />
-              <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.primaryCta}</span>
-              <ArrowRightIcon className="home-hero-mobile__cta-icon" aria-hidden />
-            </span>
-          </LinkButton>
-          <LinkButton
-            href={HOME_HERO_COPY.secondaryCtaHref}
-            variant="outline"
-            fullWidth
-            className="home-hero-mobile__cta-secondary"
-          >
-            <span className="home-hero-mobile__cta-inner">
-              <CalendarDaysIcon className="home-hero-mobile__cta-icon" aria-hidden />
-              <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.secondaryCta}</span>
-            </span>
-          </LinkButton>
-        </div>
+        <HomeHeroCtaStackMotion className="home-hero-mobile__cta-stack">
+          <HomeHeroCtaMotion variant="primary">
+            <LinkButton
+              href={HOME_HERO_COPY.primaryCtaHref}
+              fullWidth
+              className="home-hero-mobile__cta-primary"
+            >
+              <span className="home-hero-mobile__cta-inner">
+                <ShoppingBagIcon className="home-hero-mobile__cta-icon" aria-hidden />
+                <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.primaryCta}</span>
+                <ArrowRightIcon className="home-hero-mobile__cta-icon" aria-hidden />
+              </span>
+            </LinkButton>
+          </HomeHeroCtaMotion>
+          <HomeHeroCtaMotion variant="secondary">
+            <LinkButton
+              href={HOME_HERO_COPY.secondaryCtaHref}
+              variant="outline"
+              fullWidth
+              className="home-hero-mobile__cta-secondary"
+            >
+              <span className="home-hero-mobile__cta-inner">
+                <CalendarDaysIcon className="home-hero-mobile__cta-icon" aria-hidden />
+                <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.secondaryCta}</span>
+              </span>
+            </LinkButton>
+          </HomeHeroCtaMotion>
+        </HomeHeroCtaStackMotion>
       </div>
 
-      <div className="signal-rise home-hero-mobile__trust" style={{ animationDelay: "320ms" }}>
-        <HomeHeroTrustedBy variant="mobile" />
-      </div>
+      <HomeHeroTrustMotion delay={320} className="home-hero-mobile__trust">
+        <HomeHeroTrustedBy variant="mobile" animated />
+      </HomeHeroTrustMotion>
 
-      <HomeHeroShowcase
-        slides={slides}
-        emptyFallbackSlide={emptyFallbackSlide}
-        layout="mobile"
-        className="signal-spring-in home-hero-mobile__showcase"
-      />
+      <HomeHeroShowcaseMotion className="home-hero-mobile__showcase">
+        <HomeHeroShowcase
+          slides={slides}
+          emptyFallbackSlide={emptyFallbackSlide}
+          layout="mobile"
+          className="home-hero-mobile__showcase-inner"
+        />
+      </HomeHeroShowcaseMotion>
 
-      <div className="signal-rise w-full" style={{ animationDelay: "480ms" }}>
+      <HomeHeroMotionReveal delay={480} className="w-full">
         <HomeHeroMobileFeatures />
-      </div>
+      </HomeHeroMotionReveal>
     </div>
   );
 }

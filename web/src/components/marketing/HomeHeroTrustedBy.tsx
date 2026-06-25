@@ -1,12 +1,16 @@
+"use client";
+
 import { HOME_HERO_COPY, HOME_HERO_TRUSTED_NAMES } from "@/lib/home-conversion-content";
+import { HomeHeroTrustNameMotion } from "@/components/marketing/hero-motion/HomeHeroTrustMotion";
 import { cn } from "@/lib/utils";
 
 type HomeHeroTrustedByProps = {
   className?: string;
   variant?: "desktop" | "mobile";
+  animated?: boolean;
 };
 
-export function HomeHeroTrustedBy({ className, variant = "desktop" }: HomeHeroTrustedByProps) {
+export function HomeHeroTrustedBy({ className, variant = "desktop", animated = false }: HomeHeroTrustedByProps) {
   const isMobile = variant === "mobile";
 
   return (
@@ -29,17 +33,29 @@ export function HomeHeroTrustedBy({ className, variant = "desktop" }: HomeHeroTr
         )}
         aria-label={HOME_HERO_COPY.trustedByLabel}
       >
-        {HOME_HERO_TRUSTED_NAMES.map((name) => (
-          <li
-            key={name}
-            className={cn(
-              "font-semibold tracking-wide text-text-muted",
-              isMobile ? "home-hero-mobile__trust-name" : "text-sm",
-            )}
-          >
-            {name}
-          </li>
-        ))}
+        {HOME_HERO_TRUSTED_NAMES.map((name, index) =>
+          animated ? (
+            <HomeHeroTrustNameMotion
+              key={name}
+              name={name}
+              index={index}
+              className={cn(
+                "font-semibold tracking-wide text-text-muted",
+                isMobile ? "home-hero-mobile__trust-name" : "text-sm",
+              )}
+            />
+          ) : (
+            <li
+              key={name}
+              className={cn(
+                "font-semibold tracking-wide text-text-muted",
+                isMobile ? "home-hero-mobile__trust-name" : "text-sm",
+              )}
+            >
+              {name}
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );
