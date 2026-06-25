@@ -6,6 +6,10 @@ export const HERO_TITLE_CLASS =
 export const HERO_DISPLAY_TITLE_CLASS =
   "font-display text-4xl sm:text-5xl lg:text-[2.85rem] xl:text-[3.15rem] leading-[1.05] tracking-tight text-balance";
 
+/** Desktop marketing landing viewport hero — portfolio, FAQ, blog, additional services, etc. */
+export const MARKETING_LANDING_HERO_TITLE_CLASS =
+  "font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight text-balance";
+
 /** Site-wide marketing section heading scale (matches hero). */
 export const SECTION_TITLE_CLASS = HERO_TITLE_CLASS;
 
