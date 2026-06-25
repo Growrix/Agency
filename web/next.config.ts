@@ -1,4 +1,5 @@
 import os from "node:os";
+import path from "node:path";
 import type { NextConfig } from "next";
 
 function getLocalIpv4Origins() {
@@ -46,6 +47,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins,
   compress: true,
   poweredByHeader: false,
+  outputFileTracingRoot: path.join(__dirname),
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

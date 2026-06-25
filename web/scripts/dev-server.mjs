@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
-import { readdir } from "node:fs/promises";
+import { readFile, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { setTimeout as delay } from "node:timers/promises";
@@ -11,6 +11,7 @@ const require = createRequire(import.meta.url);
 const scriptPath = fileURLToPath(import.meta.url);
 const webRoot = path.resolve(path.dirname(scriptPath), "..");
 const nextCliPath = require.resolve("next/dist/bin/next");
+const nextDevLockPath = path.join(webRoot, ".next", "dev", "lock");
 const defaultPort = Number.parseInt(process.env.PORT ?? "5000", 10) || 5000;
 const host = process.env.HOST || "0.0.0.0";
 
@@ -23,6 +24,8 @@ async function main() {
       return;
     }
   }
+
+  await cleanupStaleNextDevLock();
 
   let port = defaultPort;
   const occupant = await getPortOccupant(port);
@@ -42,6 +45,65 @@ async function main() {
   }
 
   startNextDevServer(port);
+}
+
+async function cleanupStaleNextDevLock() {
+  let lock;
+  try {
+    lock = JSON.parse(await readFile(nextDevLockPath, "utf8"));
+  } catch {
+    return;
+  }
+
+  const lockPid = Number(lock?.pid);
+  if (!Number.isFinite(lockPid) || lockPid <= 0) {
+    await rm(nextDevLockPath, { force: true });
+    return;
+  }
+
+  const occupant = await getProcessByPid(lockPid);
+  const isLiveWorkspaceNext =
+    occupant && isWorkspaceNextProcess(occupant);
+
+  if (!occupant || isLiveWorkspaceNext) {
+    if (isLiveWorkspaceNext) {
+      console.log(
+        `Stopping existing Next.js dev server for this workspace (PID ${lockPid}, port ${lock.port ?? "unknown"})...`,
+      );
+      await stopProcess(lockPid);
+      await delay(400);
+    }
+
+    await rm(nextDevLockPath, { force: true });
+  }
+}
+
+async function getProcessByPid(pid) {
+  if (process.platform !== "win32") {
+    try {
+      process.kill(pid, 0);
+      return { pid, name: "node", commandLine: null };
+    } catch {
+      return null;
+    }
+  }
+
+  const script = [
+    `$process = Get-CimInstance Win32_Process -Filter \"ProcessId = ${pid}\" | Select-Object @{Name='pid';Expression={$_.ProcessId}}, @{Name='name';Expression={$_.Name}}, @{Name='commandLine';Expression={$_.CommandLine}}`,
+    `if (-not $process) { exit 0 }`,
+    `$process | ConvertTo-Json -Compress`,
+  ].join("; ");
+
+  const result = await runCommand("powershell.exe", ["-NoProfile", "-Command", script]);
+  if (result.exitCode !== 0 || !result.stdout.trim()) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(result.stdout.trim());
+  } catch {
+    return null;
+  }
 }
 
 async function enforceNode20() {
