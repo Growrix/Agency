@@ -4,16 +4,16 @@
   --hero-px: 0;
   --hero-py: 0;
   --hero-scroll-progress: 0;
-  --hero-fg: #f8fafc;
-  --hero-fg-muted: #94a3b8;
-  --hero-surface-deep: #020617;
-  --hero-surface-mid: #0b1120;
+  --hero-fg: var(--color-text);
+  --hero-fg-muted: var(--color-text-muted);
+  --hero-surface-deep: var(--color-bg);
+  --hero-surface-mid: var(--color-surface);
   isolation: isolate;
-  color: var(--hero-fg);
+  color: var(--color-text);
   background:
-    radial-gradient(ellipse 90% 70% at 12% -10%, rgba(15, 118, 110, 0.18), transparent 55%),
-    radial-gradient(ellipse 70% 55% at 88% 8%, rgba(30, 64, 175, 0.22), transparent 52%),
-    linear-gradient(180deg, var(--hero-surface-deep) 0%, var(--hero-surface-mid) 52%, #030712 100%);
+    radial-gradient(circle at 78% 42%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 42%),
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 36%),
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
 }
 
 .hero-section--motion .home-hero-desktop__title,
@@ -41,9 +41,25 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 0.55), transparent 58%),
-    linear-gradient(180deg, rgba(2, 6, 23, 0.35) 0%, rgba(2, 6, 23, 0.72) 100%);
-  opacity: 0.95;
+    radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--color-text) 8%, transparent), transparent 58%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-text) 4%, transparent) 0%, color-mix(in srgb, var(--color-text) 10%, transparent) 100%);
+  opacity: 0.22;
+}
+
+[data-theme="dark"] .hero-section--motion .hero-ambient__scrim {
+  background:
+    radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 0.45), transparent 58%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.28) 0%, rgba(2, 6, 23, 0.58) 100%);
+  opacity: 0.65;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .hero-section--motion .hero-ambient__scrim {
+    background:
+      radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 0.45), transparent 58%),
+      linear-gradient(180deg, rgba(2, 6, 23, 0.28) 0%, rgba(2, 6, 23, 0.58) 100%);
+    opacity: 0.65;
+  }
 }
 
 /* Content sits above ambient background layers */
@@ -263,28 +279,6 @@
   display: block;
 }
 
-.hero-kinetic-accent-text {
-  display: inline-block;
-  background: linear-gradient(
-    90deg,
-    #2dd4bf,
-    #22d3ee,
-    #6ee7b7,
-    #2dd4bf
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: hero-accent-gradient 8s linear infinite;
-}
-
-@keyframes hero-accent-gradient {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-
 .hero-kinetic-headline--shimmer::after {
   content: "";
   position: absolute;
@@ -480,9 +474,9 @@
 @media (min-width: 1024px) {
   .hero-section--motion.home-hero-desktop-section {
     background:
-      radial-gradient(ellipse 90% 70% at 12% -10%, rgba(15, 118, 110, 0.2), transparent 55%),
-      radial-gradient(ellipse 70% 55% at 88% 8%, rgba(30, 64, 175, 0.24), transparent 52%),
-      linear-gradient(180deg, var(--hero-surface-deep) 0%, var(--hero-surface-mid) 52%, #030712 100%);
+      radial-gradient(circle at 78% 42%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 42%),
+      radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 36%),
+      linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
   }
 }
 [data-theme="light"] .hero-section--motion .hero-ambient__living-grid,
@@ -493,27 +487,5 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) .hero-section--motion .hero-ambient__living-grid {
     opacity: 0.28 !important;
-  }
-}
-
-[data-theme="light"] .hero-section--motion .marketing-title-accent,
-[data-theme="light"] .hero-section--motion .hero-kinetic-accent-text {
-  background: linear-gradient(90deg, #14b8a6, #06b6d4, #34d399, #14b8a6);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .hero-section--motion .marketing-title-accent,
-  :root:not([data-theme]) .hero-section--motion .hero-kinetic-accent-text {
-    background: linear-gradient(90deg, #14b8a6, #06b6d4, #34d399, #14b8a6);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
   }
 }

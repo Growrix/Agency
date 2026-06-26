@@ -214,10 +214,12 @@ export function HomeHeroKineticHeadline({
           {renderLineWords(line.text, line.text)}
         </span>
       ))}
-      <span className="hero-kinetic-line hero-kinetic-accent marketing-title-accent block" data-depth={2}>
-        <span ref={accentRef} className="hero-kinetic-accent-text">
-          {titleAccent}
-        </span>
+      <span
+        ref={accentRef}
+        className="hero-kinetic-line hero-kinetic-accent marketing-title-accent block"
+        data-depth={2}
+      >
+        {titleAccent}
       </span>
     </h1>
   );
