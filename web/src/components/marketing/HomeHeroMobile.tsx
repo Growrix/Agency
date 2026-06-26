@@ -11,12 +11,12 @@ import { HomeHeroTrustedBy } from "@/components/marketing/HomeHeroTrustedBy";
 import {
   HomeHeroCtaMotion,
   HomeHeroCtaStackMotion,
-  HomeHeroKineticHeadline,
-  HomeHeroKineticSubheadLines,
   HomeHeroMotionReveal,
-  HomeHeroShowcaseMotion,
-  HomeHeroTrustMotion,
-} from "@/components/marketing/hero-motion";
+} from "@/components/marketing/hero-motion/HomeHeroCtaMotion";
+import { HomeHeroKineticHeadline } from "@/components/marketing/hero-motion/HomeHeroKineticHeadline";
+import { HomeHeroKineticSubheadLines } from "@/components/marketing/hero-motion/HomeHeroKineticSubhead";
+import { HomeHeroShowcaseMotion } from "@/components/marketing/hero-motion/HomeHeroShowcaseMotion";
+import { HomeHeroTrustMotion } from "@/components/marketing/hero-motion/HomeHeroTrustMotion";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
