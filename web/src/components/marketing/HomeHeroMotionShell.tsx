@@ -41,8 +41,9 @@ export function HomeHeroMotionShell({
         <Container
           className={cn(
             HERO_VIEWPORT_CONTAINER_CLASS,
-            "hero-section__content relative flex flex-1 flex-col justify-center py-6 sm:py-8 lg:py-12",
-            "pt-[calc(var(--site-chrome-height)+1.5rem)] sm:pt-[calc(var(--site-chrome-height)+2rem)] lg:pt-[calc(var(--site-chrome-height)+3rem)]",
+            "hero-section__content relative flex flex-1 flex-col",
+            "justify-start py-0 lg:justify-center lg:py-12",
+            "pt-0 lg:pt-[calc(var(--site-chrome-height)+3rem)]",
           )}
         >
           <MarketingViewportGate

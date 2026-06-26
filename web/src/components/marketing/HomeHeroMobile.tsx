@@ -41,76 +41,80 @@ export function HomeHeroMobile({
 
   return (
     <div className="home-hero-mobile w-full">
-      <div className="home-hero-mobile__copy">
-        <HomeHeroMotionReveal delay={0} className="home-hero-mobile__badge-wrap">
-          <Badge tone="primary" dot className="home-hero-mobile__badge">
-            {badge}
-          </Badge>
-        </HomeHeroMotionReveal>
+      <section className="home-hero-mobile__intro" aria-label="Growrix OS hero">
+        <div className="home-hero-mobile__copy">
+          <HomeHeroMotionReveal delay={0} className="home-hero-mobile__badge-wrap">
+            <Badge tone="primary" dot className="home-hero-mobile__badge">
+              {badge}
+            </Badge>
+          </HomeHeroMotionReveal>
 
-        {useStructuredTitle ? (
-          <HomeHeroKineticHeadline
-            titleLines={HOME_HERO_COPY.titleLines}
-            titleAccent={HOME_HERO_COPY.titleAccent}
-            className={HERO_MOBILE_DISPLAY_TITLE_CLASS}
-            variant="mobile"
+          {useStructuredTitle ? (
+            <HomeHeroKineticHeadline
+              titleLines={HOME_HERO_COPY.titleLines}
+              titleAccent={HOME_HERO_COPY.titleAccent}
+              className={HERO_MOBILE_DISPLAY_TITLE_CLASS}
+              variant="mobile"
+            />
+          ) : (
+            <h1 className={HERO_MOBILE_DISPLAY_TITLE_CLASS}>{title}</h1>
+          )}
+
+          <HomeHeroKineticSubheadLines
+            lines={HOME_HERO_COPY.mobileDescriptionLines}
+            className="home-hero-mobile__description"
+            lineClassName="home-hero-mobile__description-line"
           />
-        ) : (
-          <h1 className={HERO_MOBILE_DISPLAY_TITLE_CLASS}>{title}</h1>
-        )}
 
-        <HomeHeroKineticSubheadLines
-          lines={HOME_HERO_COPY.mobileDescriptionLines}
-          className="home-hero-mobile__description"
-          lineClassName="home-hero-mobile__description-line"
-        />
+          <HomeHeroCtaStackMotion className="home-hero-mobile__cta-stack">
+            <HomeHeroCtaMotion variant="primary">
+              <LinkButton
+                href={HOME_HERO_COPY.primaryCtaHref}
+                fullWidth
+                className="home-hero-mobile__cta-primary"
+              >
+                <span className="home-hero-mobile__cta-inner">
+                  <ShoppingBagIcon className="home-hero-mobile__cta-icon" aria-hidden />
+                  <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.primaryCta}</span>
+                  <ArrowRightIcon className="home-hero-mobile__cta-icon" aria-hidden />
+                </span>
+              </LinkButton>
+            </HomeHeroCtaMotion>
+            <HomeHeroCtaMotion variant="secondary">
+              <LinkButton
+                href={HOME_HERO_COPY.secondaryCtaHref}
+                variant="outline"
+                fullWidth
+                className="home-hero-mobile__cta-secondary"
+              >
+                <span className="home-hero-mobile__cta-inner">
+                  <CalendarDaysIcon className="home-hero-mobile__cta-icon" aria-hidden />
+                  <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.secondaryCta}</span>
+                </span>
+              </LinkButton>
+            </HomeHeroCtaMotion>
+          </HomeHeroCtaStackMotion>
+        </div>
 
-        <HomeHeroCtaStackMotion className="home-hero-mobile__cta-stack">
-          <HomeHeroCtaMotion variant="primary">
-            <LinkButton
-              href={HOME_HERO_COPY.primaryCtaHref}
-              fullWidth
-              className="home-hero-mobile__cta-primary"
-            >
-              <span className="home-hero-mobile__cta-inner">
-                <ShoppingBagIcon className="home-hero-mobile__cta-icon" aria-hidden />
-                <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.primaryCta}</span>
-                <ArrowRightIcon className="home-hero-mobile__cta-icon" aria-hidden />
-              </span>
-            </LinkButton>
-          </HomeHeroCtaMotion>
-          <HomeHeroCtaMotion variant="secondary">
-            <LinkButton
-              href={HOME_HERO_COPY.secondaryCtaHref}
-              variant="outline"
-              fullWidth
-              className="home-hero-mobile__cta-secondary"
-            >
-              <span className="home-hero-mobile__cta-inner">
-                <CalendarDaysIcon className="home-hero-mobile__cta-icon" aria-hidden />
-                <span className="home-hero-mobile__cta-label">{HOME_HERO_COPY.secondaryCta}</span>
-              </span>
-            </LinkButton>
-          </HomeHeroCtaMotion>
-        </HomeHeroCtaStackMotion>
-      </div>
+        <HomeHeroTrustMotion delay={320} className="home-hero-mobile__trust">
+          <HomeHeroTrustedBy variant="mobile" animated />
+        </HomeHeroTrustMotion>
+      </section>
 
-      <HomeHeroTrustMotion delay={320} className="home-hero-mobile__trust">
-        <HomeHeroTrustedBy variant="mobile" animated />
-      </HomeHeroTrustMotion>
+      <section className="home-hero-mobile__stage" aria-label="Live template preview">
+        <HomeHeroShowcaseMotion className="home-hero-mobile__showcase">
+          <HomeHeroShowcase
+            slides={slides}
+            emptyFallbackSlide={emptyFallbackSlide}
+            layout="mobile"
+            className="home-hero-mobile__showcase-inner"
+          />
+        </HomeHeroShowcaseMotion>
 
-      <HomeHeroShowcaseMotion className="home-hero-mobile__showcase">
-        <HomeHeroShowcase
-          slides={slides}
-          emptyFallbackSlide={emptyFallbackSlide}
-          layout="mobile"
-          className="home-hero-mobile__showcase-inner"
-        />
-      </HomeHeroShowcaseMotion>
-
-      <HomeHeroMotionReveal delay={480} className="w-full">
-        <HomeHeroMobileFeatures />
-      </HomeHeroMotionReveal>
+        <HomeHeroMotionReveal delay={480} className="home-hero-mobile__features-wrap">
+          <HomeHeroMobileFeatures />
+        </HomeHeroMotionReveal>
+      </section>
     </div>
   );
 }
