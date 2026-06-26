@@ -43,7 +43,7 @@ test("mobile bottom nav hides on scroll down and reappears on scroll up", async 
   await page.waitForSelector("[data-scroll-listener-ready='true']", { state: "attached", timeout: 15_000 });
 
   const nav = page.getByTestId("mobile-bottom-nav");
-  await expect(nav).toHaveAttribute("data-nav-visible", "true");
+  await expect(nav).toHaveAttribute("data-nav-visible", "false");
 
   await scrollDown(page);
   await expect(nav).toHaveAttribute("data-nav-visible", "false", { timeout: 5000 });

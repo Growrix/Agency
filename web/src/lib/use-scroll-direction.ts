@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type UseTopChromeVisibilityOptions = {
+type UseScrollChromeVisibilityOptions = {
   /** Minimum scroll delta (px) before toggling visibility. */
   hideDelta?: number;
   /** Upward movement needed before re-showing chrome. */
   showDelta?: number;
-  /** Always show the chrome while scrollY is at or below this value. */
+  /** Top chrome stays visible while scrollY is at or below this value. */
   topOffset?: number;
 };
 
@@ -19,29 +19,40 @@ function getScrollY() {
 }
 
 /**
- * Returns whether the top chrome (utility ribbon + header) should be visible.
- * Hides while scrolling down (after leaving topOffset); shows on any upward scroll.
+ * Scroll-driven visibility for fixed top chrome and mobile bottom nav.
+ * Top chrome: visible at page top; hides on scroll down; returns on scroll up.
+ * Bottom nav: hidden at page top and while scrolling down; only appears on scroll up.
  */
-export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) {
+export function useScrollChromeVisibility(options?: UseScrollChromeVisibilityOptions) {
   const hideDelta = options?.hideDelta ?? 8;
   const showDelta = options?.showDelta ?? 1;
   const topOffset = options?.topOffset ?? 64;
-  const [visible, setVisible] = useState(true);
+  const [topVisible, setTopVisible] = useState(true);
+  const [bottomNavVisible, setBottomNavVisible] = useState(false);
   const [ready, setReady] = useState(false);
   const lastY = useRef(0);
   const downAccum = useRef(0);
   const upAccum = useRef(0);
-  const visibleRef = useRef(true);
+  const topVisibleRef = useRef(true);
+  const bottomNavVisibleRef = useRef(false);
 
   useEffect(() => {
     let rafId = 0;
 
-    const applyVisibility = (next: boolean) => {
-      if (visibleRef.current === next) {
+    const applyTopVisibility = (next: boolean) => {
+      if (topVisibleRef.current === next) {
         return;
       }
-      visibleRef.current = next;
-      setVisible(next);
+      topVisibleRef.current = next;
+      setTopVisible(next);
+    };
+
+    const applyBottomNavVisibility = (next: boolean) => {
+      if (bottomNavVisibleRef.current === next) {
+        return;
+      }
+      bottomNavVisibleRef.current = next;
+      setBottomNavVisible(next);
     };
 
     const evaluate = () => {
@@ -49,7 +60,8 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
       const y = getScrollY();
 
       if (y <= topOffset) {
-        applyVisibility(true);
+        applyTopVisibility(true);
+        applyBottomNavVisibility(false);
         downAccum.current = 0;
         upAccum.current = 0;
       } else {
@@ -58,14 +70,16 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
           upAccum.current += -movement;
           downAccum.current = 0;
           if (upAccum.current >= showDelta) {
-            applyVisibility(true);
+            applyTopVisibility(true);
+            applyBottomNavVisibility(true);
             upAccum.current = 0;
           }
         } else if (movement > 0) {
           downAccum.current += movement;
           upAccum.current = 0;
           if (downAccum.current >= hideDelta) {
-            applyVisibility(false);
+            applyTopVisibility(false);
+            applyBottomNavVisibility(false);
             downAccum.current = 0;
           }
         }
@@ -103,15 +117,21 @@ export function useTopChromeVisibility(options?: UseTopChromeVisibilityOptions) 
     };
   }, [hideDelta, showDelta, topOffset]);
 
-  return { visible, ready };
+  return { topVisible, bottomNavVisible, ready };
 }
 
-/** @deprecated Use useTopChromeVisibility — kept for any legacy imports. */
-export function useScrollDirection(options?: UseTopChromeVisibilityOptions) {
-  const { visible } = useTopChromeVisibility(options);
+/** @deprecated Use useScrollChromeVisibility — kept for legacy imports. */
+export function useTopChromeVisibility(options?: UseScrollChromeVisibilityOptions) {
+  const { topVisible, ready } = useScrollChromeVisibility(options);
+  return { visible: topVisible, ready };
+}
+
+/** @deprecated Use useScrollChromeVisibility — kept for any legacy imports. */
+export function useScrollDirection(options?: UseScrollChromeVisibilityOptions) {
+  const { topVisible } = useScrollChromeVisibility(options);
   return {
-    direction: visible ? null : ("down" as const),
-    isAtTop: visible,
+    direction: topVisible ? null : ("down" as const),
+    isAtTop: topVisible,
     scrollY: typeof window !== "undefined" ? getScrollY() : 0,
   };
 }

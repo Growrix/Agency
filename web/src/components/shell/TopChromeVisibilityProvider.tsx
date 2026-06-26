@@ -1,29 +1,35 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { useTopChromeVisibility } from "@/lib/use-scroll-direction";
+import { useScrollChromeVisibility } from "@/lib/use-scroll-direction";
 
-type TopChromeVisibilityContextValue = {
-  visible: boolean;
+type ScrollChromeVisibilityContextValue = {
+  topVisible: boolean;
+  bottomNavVisible: boolean;
   ready: boolean;
 };
 
-const TopChromeVisibilityContext = createContext<TopChromeVisibilityContextValue>({
-  visible: true,
+const ScrollChromeVisibilityContext = createContext<ScrollChromeVisibilityContextValue>({
+  topVisible: true,
+  bottomNavVisible: false,
   ready: false,
 });
 
 export function TopChromeVisibilityProvider({ children }: { children: ReactNode }) {
-  const { visible, ready } = useTopChromeVisibility();
+  const { topVisible, bottomNavVisible, ready } = useScrollChromeVisibility();
 
   return (
-    <TopChromeVisibilityContext.Provider value={{ visible, ready }}>
+    <ScrollChromeVisibilityContext.Provider value={{ topVisible, bottomNavVisible, ready }}>
       <div data-scroll-listener-ready={ready ? "true" : "false"} hidden aria-hidden />
       {children}
-    </TopChromeVisibilityContext.Provider>
+    </ScrollChromeVisibilityContext.Provider>
   );
 }
 
 export function useTopChromeVisibilityState() {
-  return useContext(TopChromeVisibilityContext).visible;
+  return useContext(ScrollChromeVisibilityContext).topVisible;
+}
+
+export function useMobileBottomNavVisibilityState() {
+  return useContext(ScrollChromeVisibilityContext).bottomNavVisible;
 }

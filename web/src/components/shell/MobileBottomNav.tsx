@@ -19,7 +19,7 @@ import {
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
-import { useTopChromeVisibilityState } from "@/components/shell/TopChromeVisibilityProvider";
+import { useMobileBottomNavVisibilityState } from "@/components/shell/TopChromeVisibilityProvider";
 
 const ITEMS = [
   { label: "Home", href: "/", icon: HomeIcon, active: HomeFilled },
@@ -33,7 +33,7 @@ export function MobileBottomNav() {
   const openConcierge = useConciergeStore((state) => state.open);
   const isConciergeOpen = useConciergeStore((state) => state.isOpen);
   const pathname = usePathname();
-  const navVisible = useTopChromeVisibilityState();
+  const navVisible = useMobileBottomNavVisibilityState();
   const reduced = useReducedMotion();
 
   if (isConciergeOpen) {
