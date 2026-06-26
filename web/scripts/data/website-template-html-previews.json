@@ -1,0 +1,20 @@
+[
+  { "slug": "01-bedrock-construction", "fileName": "01-BedrockConstruction.html", "title": "Bedrock Construction" },
+  { "slug": "02-super-shop-commerce", "fileName": "02-SuperShopCommerce.html", "title": "SuperShop Commerce" },
+  { "slug": "03-primora-supershop", "fileName": "03. primora-supershop-website.html", "title": "Primora Super Shop" },
+  { "slug": "04-prime-climate-hvac", "fileName": "04-PrimeClimateHVAC.html", "title": "Prime Climate HVAC" },
+  { "slug": "05-elite-estates-realty", "fileName": "05-EliteEstatesRealty.html", "title": "Elite Estates Realty" },
+  { "slug": "06-elite-medical-clinic", "fileName": "06-EliteMedicalClinic.html", "title": "EliteMed Clinic" },
+  { "slug": "07-proflow-plumbing", "fileName": "07-ProFlowPlumbing.html", "title": "ProFlow Plumbing" },
+  { "slug": "08-voltcore-power", "fileName": "08-VoltCorePower.html", "title": "VoltCore Power" },
+  { "slug": "09-guardian-pest-pro", "fileName": "09-GuardianPestPro.html", "title": "Guardian Pest Pro" },
+  { "slug": "10-fixhaus-handyman", "fileName": "10-FixHausHandyman.html", "title": "FixHaus Handyman" },
+  { "slug": "11-terragrove-flooring", "fileName": "11-TerraGroveFlooring.html", "title": "TerraGrove Flooring" },
+  { "slug": "12-stoneaxis-flooring", "fileName": "12-StoneAxisFlooring.html", "title": "StoneAxis Flooring" },
+  { "slug": "13-clearframe-windows", "fileName": "13-ClearFrameWindows.html", "title": "ClearFrame Windows" },
+  { "slug": "14-aquaverde-pool", "fileName": "14-AquaVerdePool.html", "title": "AquaVerde Pool" },
+  { "slug": "15-rapidtrack-garage", "fileName": "15-RapidTrackGarage.html", "title": "RapidTrack Garage" },
+  { "slug": "16-maison-clair", "fileName": "16-MaisonClair.html", "title": "Maison Clair" },
+  { "slug": "17-heartwood-arbor", "fileName": "17-HeartwoodArbor.html", "title": "Heartwood Arbor" },
+  { "slug": "18-mint-pearl-dental", "fileName": "18-MintPearlDental.html", "title": "Mint & Pearl Dental" }
+]

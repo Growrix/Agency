@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
+import { WebsiteTemplateHtmlDesktopPosterFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPosterFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import {
   HTML_PROFILE_CAROUSEL_AUTOPLAY_MS,
@@ -21,6 +22,10 @@ export type HtmlProfileHeroSlide = {
   href: string;
   previewUrl?: string;
   previewImage?: {
+    src: string;
+    alt: string;
+  } | null;
+  previewMobileImage?: {
     src: string;
     alt: string;
   } | null;
@@ -65,6 +70,10 @@ type HtmlProfileHeroCarouselProps = {
   /** Render prev/next controls via `onNavigationReady` instead of inside the preview. */
   hideNavigation?: boolean;
   onNavigationReady?: (navigation: HtmlProfileHeroCarouselNavigation) => void;
+  /** Prefer auto-generated poster images over iframe live previews. */
+  preferPoster?: boolean;
+  /** Stretch width-fit posters to fill the preview container (hero monitor). */
+  posterFillContainer?: boolean;
 };
 
 function slideHasPreview(slide: HtmlProfileHeroSlide) {
@@ -81,6 +90,8 @@ function CarouselPreviewFrame({
   loadPreview = true,
   desktopPreviewVerticalAlign = "center",
   iframeLoading = "lazy",
+  preferPoster = false,
+  posterFillContainer = false,
 }: {
   slide: HtmlProfileHeroSlide;
   previewMode: HtmlProfileHeroCarouselPreviewMode;
@@ -91,12 +102,53 @@ function CarouselPreviewFrame({
   loadPreview?: boolean;
   desktopPreviewVerticalAlign?: "top" | "center";
   iframeLoading?: "lazy" | "eager";
+  preferPoster?: boolean;
+  posterFillContainer?: boolean;
 }) {
   if (!loadPreview) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-[#0a0a0a] px-4 text-center text-xs text-white/50">
         {slide.name}
       </div>
+    );
+  }
+
+  if (preferPoster && slide.previewImage?.src) {
+    if (previewMode === "mobile-frame") {
+      const mobileImage = slide.previewMobileImage;
+      if (!mobileImage?.src) {
+        return (
+          <div className="flex h-full w-full items-center justify-center bg-[#0a0a0a] px-4 text-center text-xs text-white/50">
+            {slide.name}
+          </div>
+        );
+      }
+      return (
+        <div className="flex h-full w-full min-w-0 items-start justify-center overflow-hidden px-1 py-1">
+          <WebsiteTemplateHtmlMobilePreviewFrame
+            posterImage={mobileImage}
+            title={`${slide.name} mobile preview`}
+            maxFrameHeight={mobilePreviewMaxHeight}
+            showViewportLabel={mobilePreviewShowViewportLabel}
+            className="w-full max-w-full"
+          />
+        </div>
+      );
+    }
+
+    return (
+      <WebsiteTemplateHtmlDesktopPosterFrame
+        posterImage={slide.previewImage}
+        fit={desktopPreviewFit}
+        verticalAlign={desktopPreviewVerticalAlign}
+        fillContainer={posterFillContainer}
+        className={
+          desktopPreviewFit === "cover" || posterFillContainer
+            ? "absolute inset-0 h-full w-full"
+            : "h-full min-h-full w-full"
+        }
+        frameClassName="h-full w-full rounded-none border-0 bg-[#0a0a0a]"
+      />
     );
   }
 
@@ -197,6 +249,8 @@ export function HtmlProfileHeroCarousel({
   transitionDurationMs,
   hideNavigation = false,
   onNavigationReady,
+  preferPoster = false,
+  posterFillContainer = false,
 }: HtmlProfileHeroCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [livePreviewEnabled, setLivePreviewEnabled] = useState(!posterFirst);
@@ -560,6 +614,8 @@ export function HtmlProfileHeroCarousel({
                           compactPresentation ? "top" : desktopPreviewVerticalAlign
                         }
                         iframeLoading={compactPresentation ? "eager" : "lazy"}
+                        preferPoster={preferPoster}
+                        posterFillContainer={posterFillContainer}
                       />
                     )}
                   </div>
@@ -644,6 +700,8 @@ export function HtmlProfileHeroCarousel({
                           compactPresentation ? "top" : desktopPreviewVerticalAlign
                         }
                         iframeLoading={compactPresentation ? "eager" : "lazy"}
+                        preferPoster={preferPoster}
+                        posterFillContainer={posterFillContainer}
                       />
                     )}
                   </div>

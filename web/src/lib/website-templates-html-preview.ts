@@ -2,7 +2,10 @@ export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG = "website-templates-h
 
 /** Public URL segment and shop folder name for HTML website template files. */
 export const WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT = "html-template-websites" as const;
+export const PREVIEW_POSTER_ROOT = "posters" as const;
 const WEBSITE_TEMPLATE_HTML_PREVIEW_API_ROOT = "website-templates-html-preview" as const;
+
+export type PreviewPosterVariant = "desktop" | "mobile";
 
 export type WebsiteTemplateHtmlPreviewRecord = {
   slug: string;
@@ -248,6 +251,10 @@ type WebsiteTemplateHtmlPreviewCatalogProduct = {
   livePreviewUrl?: string;
 };
 
+export function getPreviewPosterUrl(templateSlug: string, variant: PreviewPosterVariant) {
+  return `/previews/${PREVIEW_POSTER_ROOT}/${templateSlug}-${variant}.png`;
+}
+
 export function buildWebsiteTemplateHtmlPreviewSlides(catalogProducts: WebsiteTemplateHtmlPreviewCatalogProduct[]) {
   return listWebsiteTemplateHtmlPreviews().map((template) => {
     const previewUrl = getWebsiteTemplateHtmlPreviewUrl(template.slug);
@@ -265,6 +272,37 @@ export function buildWebsiteTemplateHtmlPreviewSlides(catalogProducts: WebsiteTe
       price: catalogProduct?.price ?? template.price,
       href: catalogProduct ? `/digital-products/${catalogProduct.slug}` : `/digital-products/${productSlug}`,
       previewUrl,
+    };
+  });
+}
+
+/** Poster-based slides for the homepage hero pilot — no iframe URLs on the slide payload. */
+export function buildWebsiteTemplateHtmlPreviewHeroSlides(
+  catalogProducts: WebsiteTemplateHtmlPreviewCatalogProduct[],
+) {
+  return listWebsiteTemplateHtmlPreviews().map((template) => {
+    const previewUrl = getWebsiteTemplateHtmlPreviewUrl(template.slug);
+    const productSlug = getWebsiteTemplateHtmlPreviewProductSlug(template.slug);
+    const catalogProduct = catalogProducts.find(
+      (item) =>
+        item.slug === productSlug ||
+        item.embeddedPreviewUrl === previewUrl ||
+        item.livePreviewUrl === previewUrl,
+    );
+
+    return {
+      name: template.title,
+      type: template.type,
+      price: catalogProduct?.price ?? template.price,
+      href: catalogProduct ? `/digital-products/${catalogProduct.slug}` : `/digital-products/${productSlug}`,
+      previewImage: {
+        src: getPreviewPosterUrl(template.slug, "desktop"),
+        alt: `${template.title} desktop preview`,
+      },
+      previewMobileImage: {
+        src: getPreviewPosterUrl(template.slug, "mobile"),
+        alt: `${template.title} mobile preview`,
+      },
     };
   });
 }

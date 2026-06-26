@@ -9,14 +9,14 @@ import {
   type HtmlProfileHeroCarouselNavigation,
   type HtmlProfileHeroSlide,
 } from "@/components/sections/HtmlProfileHeroCarousel";
-import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
-import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
-import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
-import { HOME_HERO_SHOWCASE_AUTOPLAY_MS, HOME_HERO_SHOWCASE_FADE_MS } from "@/lib/html-profile-carousel-config";
+import { WebsiteTemplateHtmlDesktopPosterFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPosterFrame";
 import {
   HTML_MOBILE_VIEWPORT_HEIGHT,
   HTML_MOBILE_VIEWPORT_WIDTH,
+  WebsiteTemplateHtmlMobilePreviewFrame,
 } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
+import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
+import { HOME_HERO_SHOWCASE_AUTOPLAY_MS, HOME_HERO_SHOWCASE_FADE_MS } from "@/lib/html-profile-carousel-config";
 import { cn } from "@/lib/utils";
 
 const HERO_SHOWCASE_SLIDE_LIMIT = 4;
@@ -33,13 +33,32 @@ type HomeHeroShowcaseProps = {
   emptyFallbackSlide?: HtmlProfileHeroSlide;
   layout?: HomeHeroShowcaseLayout;
   className?: string;
+  /** Hero pilot: poster images instead of live HTML iframes. Frame layout unchanged from legacy iframe path. */
+  preferPoster?: boolean;
 };
+
+function getSlideMobilePoster(slide: HtmlProfileHeroSlide | undefined) {
+  return slide?.previewMobileImage;
+}
+
+function slideHasHeroPreview(slide: HtmlProfileHeroSlide | undefined, preferPoster: boolean) {
+  if (!slide) {
+    return false;
+  }
+
+  if (preferPoster) {
+    return Boolean(slide.previewImage?.src || slide.previewMobileImage?.src);
+  }
+
+  return Boolean(slide.previewUrl);
+}
 
 export function HomeHeroShowcase({
   slides,
   emptyFallbackSlide,
   layout = "desktop",
   className,
+  preferPoster = true,
 }: HomeHeroShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [navigation, setNavigation] = useState<HtmlProfileHeroCarouselNavigation | null>(null);
@@ -51,6 +70,8 @@ export function HomeHeroShowcase({
   const showcaseSlides = useMemo(() => slides.slice(0, HERO_SHOWCASE_SLIDE_LIMIT), [slides]);
 
   const activeSlide = showcaseSlides[activeIndex] ?? emptyFallbackSlide ?? showcaseSlides[0];
+  const activeSlideMobilePoster = getSlideMobilePoster(activeSlide);
+  const activeSlideHasPreview = slideHasHeroPreview(activeSlide, preferPoster);
 
   const monitorHeightClass = isMobileLayout
     ? HERO_MONITOR_SCREEN_HEIGHT_MOBILE
@@ -61,25 +82,23 @@ export function HomeHeroShowcase({
   }, []);
 
   const mobilePhoneOverlay =
-    activeSlide?.previewUrl && isMobileLayout && shouldRenderPhoneOverlay ? (
+    activeSlideHasPreview && isMobileLayout && activeSlideMobilePoster && shouldRenderPhoneOverlay ? (
       <div className="home-hero-mobile__phone-overlay" aria-hidden>
         <div className="home-hero-mobile__phone-bezel">
           <span className="home-hero-mobile__phone-notch" aria-hidden />
           <div className="home-hero-mobile__phone-screen">
             <div
-              key={`${activeSlide.name}-${activeIndex}`}
+              key={`${activeSlide?.name}-${activeIndex}`}
               className="home-hero-mobile__phone-screen-inner"
             >
-              <WebsiteTemplateHtmlDesktopPreviewFrame
-                previewUrl={activeSlide.previewUrl}
-                title={`${activeSlide.name} mobile preview`}
+              <WebsiteTemplateHtmlDesktopPosterFrame
+                posterImage={activeSlideMobilePoster}
                 viewportWidth={HTML_MOBILE_VIEWPORT_WIDTH}
                 viewportHeight={HTML_MOBILE_VIEWPORT_HEIGHT}
                 fit="cover"
                 verticalAlign="top"
                 className="h-full w-full"
                 frameClassName="h-full w-full rounded-none border-0 bg-white"
-                iframeLoading="lazy"
               />
             </div>
           </div>
@@ -131,28 +150,29 @@ export function HomeHeroShowcase({
                 showSlideMeta={false}
                 showPagination
                 onActiveIndexChange={setActiveIndex}
+                preferPoster={preferPoster}
+                posterFillContainer={preferPoster}
                 className={cn("h-full border-0 bg-transparent", monitorHeightClass)}
               />
             </HomeHeroDesktopMonitorFrame>
 
             {mobilePhoneOverlay}
 
-            {activeSlide?.previewUrl && !isMobileLayout && shouldRenderPhoneOverlay ? (
+            {activeSlideHasPreview && !isMobileLayout && activeSlideMobilePoster && shouldRenderPhoneOverlay ? (
               <div
                 className="home-hero-desktop__phone pointer-events-none absolute -bottom-3 right-0 z-30 hidden w-[38%] max-w-[190px] lg:block xl:-right-6"
                 aria-hidden
               >
                 <div
-                  key={`${activeSlide.name}-${activeIndex}`}
+                  key={`${activeSlide?.name}-${activeIndex}`}
                   className="home-hero-showcase__phone-fade w-full"
                 >
                   <WebsiteTemplateHtmlMobilePreviewFrame
-                    previewUrl={activeSlide.previewUrl}
+                    posterImage={activeSlideMobilePoster}
                     title={`${activeSlide.name} mobile preview`}
                     maxFrameHeight={280}
                     showViewportLabel={false}
                     className="w-full max-w-full"
-                    iframeLoading="lazy"
                   />
                 </div>
               </div>

@@ -12,7 +12,8 @@ export const HTML_MOBILE_FRAME_WIDTH = HTML_MOBILE_VIEWPORT_WIDTH + 20;
 export const HTML_MOBILE_FRAME_HEIGHT = HTML_MOBILE_VIEWPORT_HEIGHT + 52;
 
 type WebsiteTemplateHtmlMobilePreviewFrameProps = {
-  previewUrl: string;
+  previewUrl?: string;
+  posterImage?: { src: string; alt: string };
   title: string;
   className?: string;
   /** Scales the device down so the frame fits this max height (px). Omit for native 390×844 frame height. */
@@ -23,8 +24,66 @@ type WebsiteTemplateHtmlMobilePreviewFrameProps = {
   iframeLoading?: "lazy" | "eager";
 };
 
+function MobilePreviewScreenContent({
+  posterImage,
+  previewUrl,
+  title,
+  iframeLoading,
+}: {
+  posterImage?: { src: string; alt: string };
+  previewUrl?: string;
+  title: string;
+  iframeLoading: "lazy" | "eager";
+}) {
+  const screenStyle = {
+    width: HTML_MOBILE_VIEWPORT_WIDTH,
+    height: HTML_MOBILE_VIEWPORT_HEIGHT,
+  };
+
+  if (posterImage) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- poster must mirror iframe box model inside scale transform
+      <img
+        src={posterImage.src}
+        alt={posterImage.alt}
+        width={HTML_MOBILE_VIEWPORT_WIDTH}
+        height={HTML_MOBILE_VIEWPORT_HEIGHT}
+        className="block max-h-none max-w-none border-0 bg-surface"
+        style={screenStyle}
+        decoding="async"
+      />
+    );
+  }
+
+  if (previewUrl) {
+    return (
+      <iframe
+        src={previewUrl}
+        title={title}
+        width={HTML_MOBILE_VIEWPORT_WIDTH}
+        height={HTML_MOBILE_VIEWPORT_HEIGHT}
+        className="block border-0 bg-surface"
+        style={screenStyle}
+        loading={iframeLoading}
+        tabIndex={-1}
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
+    );
+  }
+
+  return (
+    <div
+      className="flex items-center justify-center bg-inset text-xs text-text-muted"
+      style={screenStyle}
+    >
+      Preview unavailable
+    </div>
+  );
+}
+
 export function WebsiteTemplateHtmlMobilePreviewFrame({
   previewUrl,
+  posterImage,
   title,
   className,
   maxFrameHeight,
@@ -42,14 +101,24 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
       return;
     }
 
-    const widthScale = container.clientWidth / HTML_MOBILE_FRAME_WIDTH;
+    const containerWidth = container.clientWidth;
+    if (containerWidth <= 0) {
+      return;
+    }
+
+    const widthScale = containerWidth / HTML_MOBILE_FRAME_WIDTH;
     const heightScale = heightBudget / HTML_MOBILE_FRAME_HEIGHT;
     const nextScale = Math.min(1, widthScale, heightScale);
-    setScale(nextScale > 0 ? nextScale : 1);
+    if (nextScale <= 0) {
+      return;
+    }
+
+    setScale(nextScale);
   }, [heightBudget]);
 
   useEffect(() => {
     updateScale();
+
     const container = containerRef.current;
     if (!container) {
       return;
@@ -57,7 +126,15 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
 
     const observer = new ResizeObserver(updateScale);
     observer.observe(container);
-    return () => observer.disconnect();
+
+    const rafId = window.requestAnimationFrame(() => {
+      updateScale();
+    });
+
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(rafId);
+    };
   }, [updateScale]);
 
   const scaledHeight = HTML_MOBILE_FRAME_HEIGHT * scale;
@@ -88,19 +165,11 @@ export function WebsiteTemplateHtmlMobilePreviewFrame({
           <div className="preview-device-chrome rounded-[2.75rem] border border-border bg-contrast p-2.5 shadow-(--shadow-2)">
             <div className="preview-device-chrome__notch mx-auto mb-2 h-1.5 w-24 rounded-full" aria-hidden />
             <div className="overflow-hidden rounded-[2.25rem] border border-border bg-surface">
-              <iframe
-                src={previewUrl}
+              <MobilePreviewScreenContent
+                posterImage={posterImage}
+                previewUrl={previewUrl}
                 title={title}
-                width={HTML_MOBILE_VIEWPORT_WIDTH}
-                height={HTML_MOBILE_VIEWPORT_HEIGHT}
-                className="block border-0 bg-surface"
-                style={{
-                  width: HTML_MOBILE_VIEWPORT_WIDTH,
-                  height: HTML_MOBILE_VIEWPORT_HEIGHT,
-                }}
-                loading={iframeLoading}
-                tabIndex={-1}
-                referrerPolicy="strict-origin-when-cross-origin"
+                iframeLoading={iframeLoading}
               />
             </div>
             <div className="preview-device-chrome__home-bar mx-auto mt-2 h-1 w-28 rounded-full" aria-hidden />

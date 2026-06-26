@@ -19,6 +19,7 @@
     "test:e2e": "playwright test",
     "test:release": "npm run test && npm run build && npm run test:e2e",
     "perf:budgets": "node ./scripts/check-preview-budgets.mjs",
+    "generate:preview-posters": "node ./scripts/generate-preview-posters.mjs",
     "cms:import": "node ./scripts/import-cms-content.mjs",
     "cms:import:inbox": "node ./scripts/import-cms-content.mjs",
     "cms:import:inbox:dry": "node ./scripts/import-cms-content.mjs --dry-run",

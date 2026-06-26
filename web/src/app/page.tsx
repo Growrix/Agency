@@ -42,7 +42,11 @@ import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 
 import {
 
+  buildWebsiteTemplateHtmlPreviewHeroSlides,
+
   buildWebsiteTemplateHtmlPreviewSlides,
+
+  getPreviewPosterUrl,
 
   getWebsiteTemplateHtmlPreviewUrl,
 
@@ -118,7 +122,11 @@ export default async function Home() {
 
   const htmlPreviewSlides = buildWebsiteTemplateHtmlPreviewSlides(htmlPreviewCatalogProducts);
 
+  const heroPreviewSlides = buildWebsiteTemplateHtmlPreviewHeroSlides(htmlPreviewCatalogProducts);
+
   const htmlPreviewPrimaryTemplate = htmlPreviewCatalogProducts[0];
+
+  const htmlPreviewFallbackTemplate = listWebsiteTemplateHtmlPreviews()[0];
 
   const htmlPreviewFallbackSlide = {
 
@@ -134,9 +142,41 @@ export default async function Home() {
 
       : "/digital-products/category/website-templates-html-preview",
 
-    previewUrl: listWebsiteTemplateHtmlPreviews()[0]
+    previewUrl: htmlPreviewFallbackTemplate
 
-      ? getWebsiteTemplateHtmlPreviewUrl(listWebsiteTemplateHtmlPreviews()[0].slug)
+      ? getWebsiteTemplateHtmlPreviewUrl(htmlPreviewFallbackTemplate.slug)
+
+      : undefined,
+
+  };
+
+  const heroPreviewFallbackSlide = {
+
+    ...htmlPreviewFallbackSlide,
+
+    previewUrl: undefined,
+
+    previewImage: htmlPreviewFallbackTemplate
+
+      ? {
+
+          src: getPreviewPosterUrl(htmlPreviewFallbackTemplate.slug, "desktop"),
+
+          alt: `${htmlPreviewFallbackTemplate.title} desktop preview`,
+
+        }
+
+      : undefined,
+
+    previewMobileImage: htmlPreviewFallbackTemplate
+
+      ? {
+
+          src: getPreviewPosterUrl(htmlPreviewFallbackTemplate.slug, "mobile"),
+
+          alt: `${htmlPreviewFallbackTemplate.title} mobile preview`,
+
+        }
 
       : undefined,
 
@@ -201,9 +241,9 @@ export default async function Home() {
 
         description={homeContent?.heroDescription}
 
-        slides={htmlPreviewSlides}
+        slides={heroPreviewSlides}
 
-        emptyFallbackSlide={htmlPreviewFallbackSlide}
+        emptyFallbackSlide={heroPreviewFallbackSlide}
 
       />
 
