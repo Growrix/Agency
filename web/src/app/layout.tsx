@@ -82,6 +82,18 @@ export const viewport: Viewport = {
   ],
 };
 
+function AppShell({ children }: { children: React.ReactNode }) {
+  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+    return <AppChrome>{children}</AppChrome>;
+  }
+
+  return (
+    <ClerkAppProvider>
+      <AppChrome>{children}</AppChrome>
+    </ClerkAppProvider>
+  );
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -103,9 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <MotionRoot>
-          <ClerkAppProvider>
-            <AppChrome>{children}</AppChrome>
-          </ClerkAppProvider>
+          <AppShell>{children}</AppShell>
         </MotionRoot>
         <SpeedInsights />
       </body>
