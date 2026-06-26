@@ -1,4 +1,4 @@
-import { HomeHeroSection } from "@/components/marketing/HomeHeroSection";
+import { HomeHero } from "@/components/marketing/HomeHero";
 
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 
@@ -193,7 +193,7 @@ export default async function Home() {
       <JsonLd data={homeStructuredData} />
 
       <div className="home-desktop-marketing">
-      <HomeHeroSection
+      <HomeHero
 
         badge={homeContent?.heroBadge}
 

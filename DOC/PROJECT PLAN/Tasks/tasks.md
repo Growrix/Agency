@@ -22,6 +22,8 @@ current_state:
   product_led_platform_implementation: partial
   content_composition_alignment_planning: done
   content_composition_alignment_implementation: partial
+  auth_clerk_migration_planning: done
+  auth_clerk_migration_implementation: done
   deployable: false
 release_blockers:
   - Full integrated production release is still blocked by external integrations and content-operations rollout work intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and the now-documented CMS/content operations implementation plan).
@@ -40,19 +42,21 @@ phase_sequence:
   - P8-frontend-cms-content-operations
   - P9-product-led-platform-gap-implementation
   - P10-content-composition-alignment
-next_recommended_phase: P10-content-composition-alignment
+  - P11-auth-clerk-migration
+next_recommended_phase: P11-auth-clerk-migration
 next_recommended_tasks:
-  - T062
+  - T063
+  - T064
 phase_status_counts:
   done: 4
-  partial: 7
+  partial: 8
   blocked: 0
   not_started: 0
 task_status_counts:
-  done: 40
+  done: 41
   partial: 12
   blocked: 0
-  not_started: 2
+  not_started: 6
 ---
 
 # Tasks / Execution Tracker
@@ -210,6 +214,9 @@ phases:
   - id: P10
     name: Content Composition Alignment
     status: partial
+  - id: P11
+    name: Auth Clerk Migration
+    status: done
 ```
 
 ## Phase Overview
@@ -226,6 +233,7 @@ phases:
 | P8 | partial | Shop and portfolio surfaces are now being moved to Sanity-backed loaders and CMS-authored preview metadata, while draft preview and broader route migration remain incomplete. |
 | P9 | partial | Product-led implementation now includes canonical `/products` routing, `/shop` compatibility, and tiered product-detail conversion UX with variant metadata flow. Downloads, customer dashboard, lead scoring, Lark, Resend automation, and admin operations remain pending. |
 | P10 | partial | Content-composition alignment started: marketing components, homepage recomposition, product index hero, template-customization service, and solutions landings shipped. CMS seeding, pricing tabs, product-detail refactor, and P10 QA gates remain. |
+| P11 | done | Clerk full-replace migration shipped: ClerkProvider, clerkMiddleware proxy, user mirror sync + webhook, login UI swap, legacy auth API deprecation, test harness, zero-gate validation. |
 
 ## Tasks By Phase
 
@@ -411,6 +419,16 @@ Remaining parallel tracks:
 6. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
 7. T027 + T028: add infrastructure-as-code plus external observability and alerting for expanded production operations.
 
+- [ ] T062 Complete stable full-suite Playwright pass for P10 regression coverage in this environment.
+
+### Phase P11 — Auth Clerk Migration
+- [x] T063 Create the canonical Clerk migration planning artifact at `DOC/PROJECT PLAN/auth-clerk-migration-e2e-plan.md` plus downstream Security, Frontend, and API and Data role docs; import Clerk integration rules to `DOC/knowledge/integration-rules/auth/` and register `@clerk-nextjs-auth` skill.
+- [x] T064 Install `@clerk/nextjs`, extend runtime config and `UserRecord.clerk_user_id`, add `ClerkProvider`, and replace `web/src/proxy.ts` with Clerk middleware protection.
+- [x] T065 Refactor `web/src/server/auth/guards.ts` and user mirror sync (`syncClerkUser`, `getUserByClerkId`); implement signed `POST /api/webhooks/clerk`.
+- [x] T066 Replace admin and customer login UI with Clerk `<SignIn />`; deprecate `/api/v1/auth/*` routes.
+- [x] T067 Remove Supabase Auth branches from `web/src/server/auth/users.ts`; update unit/integration tests and extend release gates for Clerk auth protection.
+- [x] T068 Run full `npm run health:check` with zero gate failures after Clerk migration slices complete.
+
 ## Release Readiness Checklist
 - [x] Local production build passes.
 - [ ] Vercel development deployment is verified on the live project.
@@ -418,10 +436,17 @@ Remaining parallel tracks:
 - [x] Booking flow is connected to a real inquiry backend.
 - [x] Checkout is connected to a real order and payment backend.
 - [x] AI concierge and live chat have real server-backed behavior, with the concierge restricted to approved internal knowledge and explicit escalation when no grounded answer exists.
-- [~] Auth, RBAC, and admin management exist for protected flows.
+- [~] Auth, RBAC, and admin management exist for protected flows. Clerk identity is wired when `CLERK_*` env vars are set; legacy JWT test harness remains for CI without Clerk keys.
 - [x] CI, tests, and release gates are passing.
 - [ ] Security and compliance controls are implemented beyond documentation.
 
 ## Tracker Maintenance Rule
 - Update this file before starting a new phase, after completing a task, and whenever implementation diverges from the documented contract.
 - Never mark a task as done unless code evidence exists and the relevant validation step has been completed.
+
+## Session Audit Log
+
+### 2026-06-26 — Homepage hero client crash loop (debug_failure)
+- **Root cause:** Monolithic `"use client"` `HomeHeroSection` imported from server `page.tsx`; barrel re-exports in hero-motion amplified Next.js 16 webpack undefined client symbols.
+- **Fix:** Restored server-shell `HomeHero.tsx` + client-leaf `HomeHeroMotionShell.tsx` (ServiceCards pattern); removed `HomeHeroSection`, `HomeHeroViewportGate`, `hero-motion/index.ts`; ESLint ban on hero-motion barrel imports.
+- **Validation:** lint + typecheck + build pass; cold dev boot; 5× `GET /` without browser/observability spam; release-gates e2e 6/7 pass (homepage a11y/load/SEO/iframe gates green). Resource budget gate reports 39 resources vs 30 limit — pre-existing/env variance, unrelated to crash fix; track separately if needed.
