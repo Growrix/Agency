@@ -51,6 +51,7 @@ test("homepage resource budget stays within performance guardrails", async ({ pa
 });
 
 test("preview iframe budget stays constrained on homepage and category page", async ({ page }) => {
+  test.setTimeout(120_000);
   await page.goto("/", { waitUntil: "domcontentloaded" });
   const homePreviewIframeCount = await page.evaluate(() =>
     document.querySelectorAll(

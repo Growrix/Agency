@@ -17,7 +17,7 @@ async function postWithRetry<T>(execute: () => Promise<T>, attempts = 3): Promis
 
 test("contact inquiry flow works", async ({ page, request }) => {
   await page.goto("/contact", { waitUntil: "domcontentloaded" });
-  await expect(page.getByRole("heading", { name: "The fastest way to start the right conversation." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Let's plan the fastest path from idea to launch." })).toBeVisible();
   const uniqueSeed = Date.now();
   const response = await request.post("/api/v1/contact", {
     headers: {
@@ -38,7 +38,7 @@ test("contact inquiry flow works", async ({ page, request }) => {
 
 test("booking flow works", async ({ page, request }) => {
   await page.goto("/book-appointment", { waitUntil: "domcontentloaded" });
-  await expect(page.getByRole("heading", { name: "Reserve a real discovery slot." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Plan your next step with a focused session." })).toBeVisible();
   const uniqueSeed = Date.now();
   const bookingDate = new Date(Date.now() + (14 + (uniqueSeed % 60)) * 24 * 60 * 60 * 1000);
   const response = await postWithRetry(() => request.post("/api/v1/appointments", {

@@ -5,7 +5,6 @@ import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
-import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { getCheckoutHref, getProductHref, type CheckoutSelection } from "@/lib/shop";
 import { getPublicShopProduct } from "@/server/domain/catalog";
 import { CheckoutExperience } from "./CheckoutExperience";
@@ -106,34 +105,14 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
     </Card>
   );
 
-  const desktopView = (
-    <Section className="pb-12 pt-12 sm:pb-16 sm:pt-16">
+  return (
+    <Section className="pb-10 pt-8 sm:pb-12 sm:pt-12 lg:pb-16 lg:pt-16">
       <Container>
         <Link href={product ? getProductHref(product) : "/digital-products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
           <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to digital products"}
         </Link>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          {checkoutForm}
-
-          <Card variant="inset">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">Order summary</p>
-            {orderSummaryInner}
-          </Card>
-        </div>
-      </Container>
-    </Section>
-  );
-
-  const mobileView = (
-    <Section className="pb-10 pt-8">
-      <Container>
-        <Link href={product ? getProductHref(product) : "/digital-products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
-          <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to digital products"}
-        </Link>
-
-        {/* Collapsible order summary accordion — HTML-native, no JS required */}
-        <details className="group mt-4 rounded-2xl border border-border bg-inset/40">
+        <details className="group mt-4 rounded-2xl border border-border bg-inset/40 lg:hidden">
           <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-4 [&::-webkit-details-marker]:hidden">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">
               {product ? `Order summary — ${product.price}` : "Order summary"}
@@ -147,23 +126,18 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
               <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
             </svg>
           </summary>
-          <div className="border-t border-border px-4 pb-4">
-            {orderSummaryInner}
-          </div>
+          <div className="border-t border-border px-4 pb-4">{orderSummaryInner}</div>
         </details>
 
-        {/* Single-column checkout form */}
-        <div className="mt-4">
+        <div className="mt-4 grid gap-6 lg:mt-6 lg:grid-cols-[1.1fr_0.9fr]">
           {checkoutForm}
+
+          <Card variant="inset" className="hidden lg:block">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">Order summary</p>
+            {orderSummaryInner}
+          </Card>
         </div>
       </Container>
     </Section>
-  );
-
-  return (
-    <MarketingViewportGate
-      desktop={desktopView}
-      mobile={mobileView}
-    />
   );
 }
