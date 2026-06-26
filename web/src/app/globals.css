@@ -182,17 +182,9 @@
   }
 }
 
-@media (min-width: 768px) {
-  :root {
-    --shell-offset: 6rem;
-    --site-chrome-height: calc(2.25rem + 4rem);
-  }
-}
-
 @media (min-width: 1024px) {
   :root {
-    --shell-offset: 6.5rem;
-    --site-chrome-height: calc(2.25rem + 4.5rem);
+    --site-chrome-height: 4.5rem;
     --admin-shell-top: 1.25rem;
     --admin-sidebar-top: 1.25rem;
   }
@@ -260,6 +252,26 @@ body {
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
+}
+
+/* Homepage hero fills the viewport; fixed chrome floats over it transparently. */
+.hero-section--under-chrome.hero-viewport-band {
+  min-height: 100svh;
+  min-height: 100dvh;
+}
+
+.hero-section--under-chrome .hero-ambient__living-grid {
+  background-position: 0 calc(var(--site-chrome-height) * -1);
+}
+
+@media (max-width: 1023px) {
+  .hero-section--under-chrome.hero-section--responsive-band {
+    min-height: 100dvh;
+  }
+
+  .hero-section--under-chrome.hero-section--responsive-band .hero-viewport-band__inner {
+    padding-top: 0;
+  }
 }
 
 /* Mobile marketing typography scale (< lg) â€” shared by hero and downstream sections */

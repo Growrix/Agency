@@ -23,24 +23,31 @@ import { useConciergeStore } from "@/lib/concierge-store";
 type HeaderProps = {
   mobileOpen?: boolean;
   onMobileOpenChange?: (open: boolean) => void;
+  scrolled?: boolean;
 };
 
 export function Header({
   mobileOpen: mobileOpenProp,
   onMobileOpenChange,
+  scrolled: scrolledProp,
 }: HeaderProps = {}) {
   const openConcierge = useConciergeStore((state) => state.open);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolledInternal, setScrolledInternal] = useState(false);
   const [mobileOpenInternal, setMobileOpenInternal] = useState(false);
   const mobileOpen = mobileOpenProp ?? mobileOpenInternal;
   const setMobileOpen = onMobileOpenChange ?? setMobileOpenInternal;
+  const scrolled = scrolledProp ?? scrolledInternal;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    if (scrolledProp !== undefined) {
+      return;
+    }
+
+    const onScroll = () => setScrolledInternal(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [scrolledProp]);
 
   useEffect(() => {
     if (!mobileOpen) {
@@ -66,10 +73,8 @@ export function Header({
   return (
     <header
       className={cn(
-        "transition-all duration-300",
-        scrolled
-          ? "border-b border-border bg-surface/85 backdrop-blur"
-          : "bg-transparent",
+        "border-0 shadow-none transition-all duration-300",
+        scrolled ? "bg-surface/85 backdrop-blur" : "bg-transparent",
       )}
     >
       <div className={cn("mx-auto flex h-16 max-w-shell items-center gap-2 lg:h-18 lg:gap-6", CONTAINER_X_CLASS)}>
