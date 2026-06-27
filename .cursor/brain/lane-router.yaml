@@ -1,0 +1,197 @@
+version: 1
+purpose: >-
+  Machine-readable lane router for Agent Brain. Agents read this first to resolve
+  brain file, execution ledger, quality gates, and primary skill/agent for a path prefix.
+last_updated: 2026-06-26
+
+context_recovery_order:
+  - .cursor/brain/lane-router.yaml
+  - .cursor/rules/70-execution-constitution.mdc
+  - lane-specific brain file (see lanes below)
+  - lane-specific ledger file
+  - lane-specific ai-context or skill entrypoint
+
+lanes:
+  web_saas:
+    path_prefixes:
+      - web/
+    brain: memories/repo/site-brain.md
+    ledger: DOC/PROJECT PLAN/Tasks/tasks.md
+    ledger_ai: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    routing_root: DOC/PROJECT PLAN/ai-context.yaml
+    primary_agents:
+      - senior-saas-developer
+      - senior-frontend-specialist
+    primary_skills:
+      - senior-saas-developer
+      - senior-frontend-specialist
+      - clerk-nextjs-auth
+    phase_end_gate_agent: frontend-quality-enforcer
+    verify_command: npm run health:check
+    verify_cwd: web/
+    pre_push_verify_command: npm run ci:check --prefix web
+    pre_push_verify_cwd: .
+    ci_workflow: .github/workflows/ci.yml
+
+  html_templates:
+    path_prefixes:
+      - sites/
+    brain: .cursor/brain/template-brain.md
+    ledger: .cursor/execution/template-tasks.md
+    primary_agents:
+      - frontend-architect
+      - design-system-architect
+      - frontend-content-strategist
+    primary_skills:
+      - html-website-builder
+      - frontend-content-strategist
+    phase_end_gate_agent: frontend-quality-enforcer
+    verify_skill: .cursor/skills/html-website-builder/SKILL.md
+    commands:
+      - /new-site
+      - /new-site-phase2
+
+  nextjs_migrations:
+    path_prefixes:
+      - Frontend_Nextjs/
+    brain: .cursor/brain/migration-brain.md
+    ledger: .cursor/execution/template-tasks.md
+    primary_agents:
+      - nextjs-migration-architect
+      - senior-frontend-specialist
+      - tailwind-design-system-architect
+    primary_skills:
+      - nextjs-site-migrator
+      - senior-frontend-specialist
+    phase_end_gate_agent: frontend-quality-enforcer
+    verify_command: pnpm build
+    commands:
+      - /migrate-to-next
+      - /parity-pass
+
+  conversion:
+    path_prefixes:
+      - scripts/conversion/
+    brain: .cursor/brain/migration-brain.md
+    ledger: .cursor/execution/template-tasks.md
+    scope_template: .cursor/brain/conversion-scope.template.json
+    primary_agents:
+      - frontend-system-architect
+    primary_skills:
+      - frontend-ui-converter
+    phase_end_gate_agent: frontend-quality-enforcer
+    commands:
+      - /convert-ui
+
+  backend_platform:
+    path_prefixes:
+      - web/src/server/
+      - web/src/app/api/
+    brain: .cursor/brain/backend-brain.md
+    ledger: DOC/PROJECT PLAN/Tasks/tasks.md
+    ledger_ai: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    routing_roots:
+      - DOC/PROJECT PLAN/Backend/ai-context.yaml
+      - DOC/PROJECT PLAN/API and Data/ai-context.yaml
+    primary_agents:
+      - senior-backend-devops-developer
+      - api-contract-architect
+      - integration-platform-engineer
+    primary_skills:
+      - senior-backend-devops-developer
+      - api-contract-architect
+      - integration-platform
+      - clerk-nextjs-auth
+    phase_end_gate_agent: backend-quality-enforcer
+    verify_command: npm run health:check
+    verify_cwd: web/
+    commands:
+      - /backend-factory
+      - /phase-gate-backend
+      - /integration-plan
+      - /resume-backend-brain
+
+  devops_release:
+    path_prefixes:
+      - web/.github/
+      - studio/
+      - DOC/PROJECT PLAN/DevOps/
+    brain: .cursor/brain/devops-brain.md
+    ledger: DOC/PROJECT PLAN/Tasks/tasks.md
+    routing_root: DOC/PROJECT PLAN/DevOps/ai-context.yaml
+    primary_agents:
+      - devops-release-engineer
+    primary_skills:
+      - devops-release-engineer
+    phase_end_gate_agent: backend-quality-enforcer
+    commands:
+      - /backend-factory
+      - /resume-backend-brain
+
+  agent_system:
+    path_prefixes:
+      - .cursor/agents/
+      - .cursor/skills/
+      - .cursor/rules/
+      - .cursor/brain/
+      - .cursor/commands/
+    brain: .cursor/brain/lane-router.yaml
+    ledger: tasks.md
+    primary_skills:
+      - system-builder
+    phase_end_gate_agent: null
+
+  blueprints:
+    path_prefixes:
+      - blueprints/
+    brain: .cursor/brain/template-brain.md
+    ledger: .cursor/execution/template-tasks.md
+    primary_agents:
+      - bp-director
+    primary_skills:
+      - website-blueprint-factory
+    phase_end_gate_agent: null
+
+frontend_production_factory:
+  description: Agency-grade frontend agents for SaaS and migration work
+  agents:
+    - senior-saas-developer
+    - senior-frontend-specialist
+    - frontend-system-architect
+    - frontend-content-strategist
+    - frontend-quality-enforcer
+  commands:
+    - /frontend-factory
+    - /convert-ui
+    - /phase-gate
+    - /pre-push-check
+    - /resume-brain
+
+backend_devops_factory:
+  description: Backend API, integrations, and DevOps release factory for web/ monolith
+  agents:
+    - senior-backend-devops-developer
+    - api-contract-architect
+    - integration-platform-engineer
+    - devops-release-engineer
+    - backend-quality-enforcer
+  commands:
+    - /backend-factory
+    - /phase-gate-backend
+    - /integration-plan
+    - /resume-backend-brain
+
+intent_routing:
+  full_stack_saas: senior-saas-developer
+  frontend_build: senior-frontend-specialist
+  framework_conversion: frontend-system-architect
+  copy_seo_content: frontend-content-strategist
+  phase_gate: frontend-quality-enforcer
+  html_template: frontend-architect
+  nextjs_migration: nextjs-migration-architect
+  agent_system: system-builder
+  backend_api: senior-backend-devops-developer
+  api_contract: api-contract-architect
+  integration_wiring: integration-platform
+  devops_release: devops-release-engineer
+  backend_phase_gate: backend-quality-enforcer

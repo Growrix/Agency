@@ -1,0 +1,67 @@
+---
+description: Git discipline for agents — local commit at phase completion; never push, merge, or force unless user explicitly requests. No hook bypass.
+alwaysApply: true
+---
+
+# Git Discipline
+
+## Commit policy
+
+- **Commit locally** when a phase completes and validation passes
+- Include all relevant changed files in one coherent commit per phase
+- Use clear commit messages focused on **why**, not just what
+
+## Before push (mandatory when user requests push)
+
+Any push that includes changes under `web/` **must** pass local CI parity first:
+
+```bash
+npm run ci:check --prefix web
+```
+
+Run from **repository root** (same as `.github/workflows/ci.yml`). Exit code must be **0** before `git push`.
+
+| Check | Why |
+|-------|-----|
+| `npm run ci:check --prefix web` | Matches GitHub `lint-and-build` job exactly |
+| `ReadLints` on touched files | Catches IDE-only issues before ESLint in CI |
+
+**Never push** after only `typecheck` or partial lint — ESLint rules (e.g. `react-hooks/set-state-in-effect`) fail CI in ~1 minute.
+
+### Remote CI verification (after push)
+
+- Command: `/pre-push-check` for full protocol
+- Windows `gh` path when not on PATH: `C:\Program Files\GitHub CLI\gh.exe`
+- Requires one-time `gh auth login` in the user terminal; without auth, check GitHub Actions in the browser
+- Do not claim "CI green" without run evidence on the pushed SHA
+
+## Never without explicit user request
+
+- `git push` (any remote)
+- `git merge`
+- Force push (`--force`, `--force-with-lease`)
+- Opening PRs (use user rule workflow when requested)
+- `git commit --amend` except when user rule conditions are fully met
+
+## Never
+
+- `git push --force` to `main` or `master` — warn user if requested
+- `--no-verify`, `--no-gpg-sign`, or other hook bypass unless user explicitly requests
+- Updating git config
+
+## When to commit
+
+| Work type | Commit timing |
+|-----------|---------------|
+| SaaS (`web/`) | After phase validation + ledger update |
+| HTML/Next templates | After phase-end gate pass |
+| Agent system changes | After compatibility validation |
+| Docs-only sync | After doc matches implementation |
+
+## Monorepo routing
+
+When touching multiple roots (`web/`, `sites/`, `Frontend_Nextjs/`), confirm write target before commit. Defer ambiguous topology to git workspace manager patterns in `VSCODE AGENTS/Testing-Cursor_dev/.github/git-workspace-manager/`.
+
+## Evidence in ledger
+
+Record commit hash in session log / tasks ledger after successful local commit.

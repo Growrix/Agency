@@ -1,0 +1,53 @@
+---
+description: Phase gate discipline — narrow checks mid-phase; full quality enforcer at phase boundary only. Do not run full E2E after every file edit.
+alwaysApply: true
+---
+
+# Phase Gate Discipline
+
+## Principle
+
+**Mid-phase:** narrow, fast checks while editing.
+**Phase-end:** full gate matrix via `frontend-quality-enforcer` or lane verify command.
+
+Do not run full E2E, release gates, or audit trio after every single file edit.
+
+## Mid-phase checks (during implementation)
+
+Allowed after substantive edits within a phase:
+
+- `ReadLints` on touched files
+- Narrow lint/typecheck on touched package (`eslint` scoped, `tsc --noEmit` if fast)
+- Single component or section smoke when explicitly in P2/P3
+
+## Phase-end gates (mandatory before phase sign-off)
+
+Delegate to `frontend-quality-enforcer` or run lane bundle:
+
+| Lane | Phase-end bundle |
+|------|------------------|
+| `web/` (frontend) | `npm run health:check` from `web/` |
+| `web/src/server/`, `web/src/app/api/` (backend) | `@backend-quality-enforcer` via `/phase-gate-backend` |
+| `Frontend_Nextjs/` | `pnpm build` + nextjs audit trio (+ parity if migration) |
+| `sites/` | html-website-builder Final QA + audit trio subagents |
+
+## Phase model (senior-frontend-specialist)
+
+| Phase | Phase-end requirement |
+|-------|----------------------|
+| P0 Discovery | Scope doc on disk |
+| P1 Tokens/DS | DS audit / contrast table |
+| P2 Primitives | Component smoke |
+| P3 Sections | a11y + perf subagents |
+| P4 Integration | Integration smoke |
+| P5 Verify | `@frontend-quality-enforcer` full matrix |
+
+## Failure protocol
+
+If phase-end gate fails: STOP → DEBUG → FIX → RE-RUN phase-end gates. Do not advance to next phase with red gates.
+
+## Zero-gate rule interaction
+
+Rule `60-zero-gate-health-check.mdc` still applies when **declaring work complete** for delivery. Phase discipline governs **when** to run heavy checks during multi-step work — not whether to skip them at completion.
+
+**Exception — user requests push:** Always run full `npm run ci:check --prefix web` from repo root before push, regardless of phase. See `/pre-push-check` and rule `71-git-discipline.mdc`.

@@ -27,6 +27,7 @@ Route agency-grade frontend work to the correct Frontend Production Factory agen
 - **Scope match** — If the user only asks for text/copy changes, edit content sources (e.g. `web/src/lib/*-content.ts`) and reuse existing components. Do not refactor JSX/CSS unless layout or structure is explicitly broken.
 - **Compose safely** — Before wrapping a child component, read what root element it renders (`li`, `button`, etc.). Never nest the same semantic element (e.g. `<li>` inside `<li>`).
 - Phase-end gates via `/phase-gate` — not full E2E after every edit
-- **Validation tier** — Copy-only: `ReadLints` + `npm run typecheck` on touched files. Component/UI changes: lint + typecheck. Full `npm run health:check` only at phase gate or when user requests it.
+- **Before push** — when user requests push and `web/` changed: run `npm run ci:check --prefix web` from repo root (see `/pre-push-check`). Must exit 0.
+- **Validation tier (mid-phase only)** — Copy-only: `ReadLints` + `npm run typecheck` in `web/`. Component/UI: `npm run lint` + `typecheck`. Full bundle is for phase-end and **always before push**.
 - Commit at phase completion; never push unless user asks
 - Materialize disk artifacts before ledger updates

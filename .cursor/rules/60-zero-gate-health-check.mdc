@@ -63,4 +63,7 @@ npm run health:check
 
 ## Before commit or push (when requested)
 
-Re-run the full `web/` health check if any `web/` file changed. Confirm `git status` has no accidental `.next/`, `.cursor/tmp-*`, or secret files staged.
+1. Re-run **`npm run ci:check --prefix web`** from repository root if any `web/` file changed (CI parity — see rule `71-git-discipline.mdc` and `/pre-push-check`).
+2. Confirm `git status` has no accidental `.next/`, `.cursor/tmp-*`, or secret files staged.
+
+Mid-phase work may use narrow lint/typecheck only; **push never skips full `ci:check`.**
