@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FunnelIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ShopFilterDrawer } from "@/components/shop/ShopFilterDrawer";
 import { ShopMerchandisingBand } from "@/components/shop/ShopMerchandisingBand";
-import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import { ShopProductHomeMobileRowCard } from "@/components/shop/ShopProductHomeMobileRowCard";
 import { LinkButton } from "@/components/primitives/Button";
 import { SHOP_DESKTOP_COPY, SHOP_MARKETPLACE_COPY } from "@/lib/product-led-content";
 import { buildShopHref, type ShopFilterGroup, type ShopFilterState } from "@/lib/shop-filters";
@@ -25,7 +25,6 @@ export type ShopMobileMarketplaceProps = {
 export function ShopMobileMarketplace({
   filters,
   filterGroups,
-  allProducts,
   merchandising,
   hasActiveFilter,
   categoryOptions,
@@ -53,9 +52,6 @@ export function ShopMobileMarketplace({
           <span className="block marketing-title-accent">{SHOP_DESKTOP_COPY.hero.titleAccent}</span>
         </h1>
         <p className="shop-mobile__description">{SHOP_DESKTOP_COPY.hero.description}</p>
-        <p className="shop-mobile__count">
-          {allProducts.length} product{allProducts.length === 1 ? "" : "s"} published
-        </p>
 
         <nav aria-label="Product categories" className="shop-mobile__category-scroller">
           {categoryChips.map((chip) => (
@@ -69,6 +65,30 @@ export function ShopMobileMarketplace({
             </Link>
           ))}
         </nav>
+
+        <div className="shop-mobile__toolbar">
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(true)}
+            className="shop-mobile__toolbar-filter-btn"
+            aria-label="Open filters"
+            data-testid="shop-mobile-filter-btn"
+          >
+            <FunnelIcon className="size-4" aria-hidden />
+            {mobile.filterLabel}
+            {activeFilterCount > 0 ? (
+              <span className="shop-mobile__toolbar-filter-badge">{activeFilterCount}</span>
+            ) : null}
+          </button>
+          <p className="shop-mobile__toolbar-meta">
+            {catalogProducts.length} {mobile.resultsLabel}
+          </p>
+          {hasActiveFilter ? (
+            <Link href="/digital-products" scroll={false} className="shop-mobile__toolbar-clear">
+              {mobile.clearAllLabel}
+            </Link>
+          ) : null}
+        </div>
 
         {hasActiveFilter ? (
           <div className="shop-mobile__active-filters">
@@ -97,24 +117,14 @@ export function ShopMobileMarketplace({
               copy={bands.featured}
               products={merchandising.featured}
               layout="carousel"
-              eagerPreviewCount={2}
-            />
-            <ShopMerchandisingBand
-              copy={bands.premium}
-              products={merchandising.premium}
-              layout="carousel"
+              cardVariant="compact"
               eagerPreviewCount={2}
             />
             <ShopMerchandisingBand
               copy={bands.newArrivals}
               products={merchandising.newArrivals}
               layout="carousel"
-              eagerPreviewCount={2}
-            />
-            <ShopMerchandisingBand
-              copy={bands.bundles}
-              products={merchandising.bundles}
-              layout="carousel"
+              cardVariant="compact"
               eagerPreviewCount={2}
             />
 
@@ -138,7 +148,7 @@ export function ShopMobileMarketplace({
         ) : (
           <div className="shop-mobile__product-list">
             {catalogProducts.map((product, index) => (
-              <ShopProductCatalogCard
+              <ShopProductHomeMobileRowCard
                 key={product.slug}
                 product={product}
                 previewLoadMode={index < 6 ? "eager" : "auto"}
@@ -147,29 +157,6 @@ export function ShopMobileMarketplace({
             ))}
           </div>
         )}
-      </div>
-
-      <div className="shop-mobile__filter-dock" data-drawer-open={drawerOpen ? "true" : "false"}>
-        <button
-          type="button"
-          onClick={() => setDrawerOpen(true)}
-          className="shop-mobile__filter-dock-btn"
-          aria-label="Open filters"
-        >
-          <FunnelIcon className="size-4" aria-hidden />
-          {mobile.filterLabel}
-          {activeFilterCount > 0 ? (
-            <span className="shop-mobile__filter-dock-badge">{activeFilterCount}</span>
-          ) : null}
-        </button>
-        <p className="shop-mobile__filter-dock-meta">
-          {catalogProducts.length} {mobile.resultsLabel}
-        </p>
-        {hasActiveFilter ? (
-          <Link href="/digital-products" scroll={false} className="shop-mobile__filter-dock-clear">
-            {mobile.clearAllLabel}
-          </Link>
-        ) : null}
       </div>
 
       <ShopFilterDrawer

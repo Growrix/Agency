@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard";
+import type { ShopCatalogCardVariant } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +23,7 @@ export type ShopMerchandisingBandProps = {
   products: PublicShopProductRecord[];
   layout: "grid" | "carousel";
   eagerPreviewCount?: number;
+  cardVariant?: ShopCatalogCardVariant;
   className?: string;
 };
 
@@ -30,6 +32,7 @@ export function ShopMerchandisingBand({
   products,
   layout,
   eagerPreviewCount = 4,
+  cardVariant = "default",
   className,
 }: ShopMerchandisingBandProps) {
   if (products.length === 0) {
@@ -78,6 +81,7 @@ export function ShopMerchandisingBand({
               ) : null}
               <ShopProductCatalogCard
                 product={product}
+                variant={cardVariant}
                 previewLoadMode={index < eagerPreviewCount ? "eager" : "auto"}
                 loadPriority={index === 0}
               />
@@ -93,6 +97,7 @@ export function ShopMerchandisingBand({
               ) : null}
               <ShopProductCatalogCard
                 product={product}
+                variant={cardVariant}
                 previewLoadMode={index < eagerPreviewCount ? "eager" : "auto"}
                 loadPriority={index < 2}
               />
