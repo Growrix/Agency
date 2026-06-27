@@ -31,6 +31,7 @@ import {
   type PortfolioFilter,
 } from "@/lib/portfolio-landing-content";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
@@ -87,31 +88,33 @@ export function PortfolioPageClient({ projects, filters }: PortfolioPageClientPr
           <Section {...marketingSection("portfolio", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
             <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
             <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-                <div className="lg:col-span-6 xl:col-span-7">
-                  <Badge tone="primary" dot>
-                    {PORTFOLIO_LANDING_HERO.eyebrow}
-                  </Badge>
-                  <MarketingHeroTitle
-                    className="mt-5"
-                    title={PORTFOLIO_LANDING_HERO.title}
-                    titleLead={PORTFOLIO_LANDING_HERO.titleLead}
-                    titleAccent={PORTFOLIO_LANDING_HERO.titleAccent}
-                  />
-                  <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{PORTFOLIO_LANDING_HERO.description}</p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <LinkButton href={PORTFOLIO_LANDING_HERO.primaryHref} size="lg">
-                      {PORTFOLIO_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-                    </LinkButton>
-                    <LinkButton href={PORTFOLIO_LANDING_HERO.secondaryHref} variant="outline" size="lg">
-                      {PORTFOLIO_LANDING_HERO.secondaryCta}
-                    </LinkButton>
-                  </div>
-                </div>
-                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
+              <MarketingSplitHero
+                copy={
+                  <>
+                    <Badge tone="primary" dot>
+                      {PORTFOLIO_LANDING_HERO.eyebrow}
+                    </Badge>
+                    <MarketingHeroTitle
+                      className="mt-5"
+                      title={PORTFOLIO_LANDING_HERO.title}
+                      titleLead={PORTFOLIO_LANDING_HERO.titleLead}
+                      titleAccent={PORTFOLIO_LANDING_HERO.titleAccent}
+                    />
+                    <p className="mt-6 text-lg text-text-muted leading-7 text-pretty">{PORTFOLIO_LANDING_HERO.description}</p>
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      <LinkButton href={PORTFOLIO_LANDING_HERO.primaryHref} size="lg">
+                        {PORTFOLIO_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+                      </LinkButton>
+                      <LinkButton href={PORTFOLIO_LANDING_HERO.secondaryHref} variant="outline" size="lg">
+                        {PORTFOLIO_LANDING_HERO.secondaryCta}
+                      </LinkButton>
+                    </div>
+                  </>
+                }
+                panel={
                   <PortfolioHeroPanel projects={projects} filters={filters} onFilterSelect={handleHeroFilterSelect} />
-                </div>
-              </div>
+                }
+              />
             </Container>
           </Section>
         }

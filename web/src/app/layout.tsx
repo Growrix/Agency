@@ -5,7 +5,9 @@ import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
 import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
 import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
+import { ThemeInit } from "@/components/shell/ThemeInit";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 const SITE_DESCRIPTION =
   "Growrix OS is a product-minded web development studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.";
@@ -77,10 +79,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+  themeColor: "#000000",
 };
 
 function AppShell({ children }: { children: React.ReactNode }) {
@@ -100,10 +99,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
+      data-theme="dark"
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
+        <ThemeInit />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-primary focus:text-surface focus:px-3 focus:py-2 focus:rounded-md"

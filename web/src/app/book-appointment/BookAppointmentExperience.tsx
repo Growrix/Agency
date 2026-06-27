@@ -27,6 +27,7 @@ import {
 import { marketingSection } from "@/lib/marketing-composition";
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { useConciergeStore } from "@/lib/concierge-store";
 type SubmitState = "idle" | "submitting" | "success" | "error";
@@ -280,39 +281,39 @@ export function BookAppointmentExperience() {
           <Section {...marketingSection("book-appointment", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
             <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
             <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-                <div className="lg:col-span-6 xl:col-span-7">
-                  <Badge tone="primary" dot>
-                    {BOOK_APPOINTMENT_HERO.eyebrow}
-                  </Badge>
-                  <MarketingHeroTitle
-                    className="mt-5"
-                    title={BOOK_APPOINTMENT_HERO.title}
-                    titleLead={BOOK_APPOINTMENT_HERO.titleLead}
-                    titleAccent={BOOK_APPOINTMENT_HERO.titleAccent}
-                  />
-                  <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{BOOK_APPOINTMENT_HERO.description}</p>
-                  <ul className="mt-6 space-y-2">
-                    {BOOK_APPOINTMENT_HERO.proofPoints.map((point) => (
-                      <li key={point} className="flex items-start gap-2.5 text-sm text-text">
-                        <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <LinkButton href={BOOK_APPOINTMENT_HERO.primaryHref} size="lg">
-                      {BOOK_APPOINTMENT_HERO.primaryCta} <ArrowRightIcon className="size-4" aria-hidden />
-                    </LinkButton>
-                    <LinkButton href={BOOK_APPOINTMENT_HERO.secondaryHref} variant="outline" size="lg">
-                      {BOOK_APPOINTMENT_HERO.secondaryCta}
-                    </LinkButton>
-                  </div>
-                </div>
-                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-                  <BookAppointmentHeroPanel />
-                </div>
-              </div>
+              <MarketingSplitHero
+                copy={
+                  <>
+                    <Badge tone="primary" dot>
+                      {BOOK_APPOINTMENT_HERO.eyebrow}
+                    </Badge>
+                    <MarketingHeroTitle
+                      className="mt-5"
+                      title={BOOK_APPOINTMENT_HERO.title}
+                      titleLead={BOOK_APPOINTMENT_HERO.titleLead}
+                      titleAccent={BOOK_APPOINTMENT_HERO.titleAccent}
+                    />
+                    <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{BOOK_APPOINTMENT_HERO.description}</p>
+                    <ul className="mt-6 space-y-2">
+                      {BOOK_APPOINTMENT_HERO.proofPoints.map((point) => (
+                        <li key={point} className="flex items-start gap-2.5 text-sm text-text">
+                          <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      <LinkButton href={BOOK_APPOINTMENT_HERO.primaryHref} size="lg">
+                        {BOOK_APPOINTMENT_HERO.primaryCta} <ArrowRightIcon className="size-4" aria-hidden />
+                      </LinkButton>
+                      <LinkButton href={BOOK_APPOINTMENT_HERO.secondaryHref} variant="outline" size="lg">
+                        {BOOK_APPOINTMENT_HERO.secondaryCta}
+                      </LinkButton>
+                    </div>
+                  </>
+                }
+                panel={<BookAppointmentHeroPanel />}
+              />
             </Container>
           </Section>
         }

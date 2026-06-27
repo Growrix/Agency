@@ -35,6 +35,7 @@ import {
   INVESTMENT_STARTING_POINTS,
 } from "@/lib/investment-guide-content";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 export function PricingPageClient() {
   return (
@@ -53,31 +54,31 @@ export function PricingPageClient() {
           <Section {...marketingSection("pricing", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
             <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden />
             <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-                <div className="lg:col-span-6 xl:col-span-7">
-                  <Badge tone="primary" dot>
-                    {INVESTMENT_GUIDE_HERO.eyebrow}
-                  </Badge>
-                  <MarketingHeroTitle
-                    className="mt-5"
-                    title={INVESTMENT_GUIDE_HERO.title}
-                    titleLead={INVESTMENT_GUIDE_HERO.titleLead}
-                    titleAccent={INVESTMENT_GUIDE_HERO.titleAccent}
-                  />
-                  <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{INVESTMENT_GUIDE_HERO.description}</p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <LinkButton href={INVESTMENT_GUIDE_HERO.primaryHref} size="lg">
-                      {INVESTMENT_GUIDE_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-                    </LinkButton>
-                    <LinkButton href={INVESTMENT_GUIDE_HERO.secondaryHref} variant="outline" size="lg">
-                      {INVESTMENT_GUIDE_HERO.secondaryCta}
-                    </LinkButton>
-                  </div>
-                </div>
-                <div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-                  <InvestmentGuideHeroPanel />
-                </div>
-              </div>
+              <MarketingSplitHero
+                copy={
+                  <>
+                    <Badge tone="primary" dot>
+                      {INVESTMENT_GUIDE_HERO.eyebrow}
+                    </Badge>
+                    <MarketingHeroTitle
+                      className="mt-5"
+                      title={INVESTMENT_GUIDE_HERO.title}
+                      titleLead={INVESTMENT_GUIDE_HERO.titleLead}
+                      titleAccent={INVESTMENT_GUIDE_HERO.titleAccent}
+                    />
+                    <p className="mt-6 text-lg leading-7 text-text-muted text-pretty">{INVESTMENT_GUIDE_HERO.description}</p>
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      <LinkButton href={INVESTMENT_GUIDE_HERO.primaryHref} size="lg">
+                        {INVESTMENT_GUIDE_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+                      </LinkButton>
+                      <LinkButton href={INVESTMENT_GUIDE_HERO.secondaryHref} variant="outline" size="lg">
+                        {INVESTMENT_GUIDE_HERO.secondaryCta}
+                      </LinkButton>
+                    </div>
+                  </>
+                }
+                panel={<InvestmentGuideHeroPanel />}
+              />
             </Container>
           </Section>
         }

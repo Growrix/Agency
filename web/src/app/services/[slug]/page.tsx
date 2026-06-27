@@ -15,6 +15,7 @@ import {
   WindowIcon,
 } from "@heroicons/react/24/outline";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -527,6 +528,69 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
             : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent;
 
+  const serviceDetailDesktopHero = (
+    <MarketingSplitHero
+      prefix={
+        <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
+          ← All services
+        </Link>
+      }
+      copy={
+        <>
+          <div className="signal-rise" style={{ animationDelay: "0ms" }}>
+            <Badge tone="primary" dot>
+              {copy.eyebrow}
+            </Badge>
+          </div>
+          <MarketingHeroTitle
+            className="signal-rise mt-5"
+            titleLead={serviceHeroHeadlineLead}
+            titleAccent={serviceHeroHeadlineAccent}
+          />
+          <p className="mt-6 text-lg text-text-muted leading-7 signal-rise" style={{ animationDelay: "140ms" }}>
+            {copy.description}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3 signal-rise" style={{ animationDelay: "210ms" }}>
+            <LinkButton href="/book-appointment" size="lg">
+              {copy.primaryCta} <ArrowRightIcon className="size-4" />
+            </LinkButton>
+            <LinkButton href={copy.secondaryHref} variant="outline" size="lg">
+              {copy.secondaryCta}
+            </LinkButton>
+          </div>
+        </>
+      }
+      panel={
+        <div className="signal-rise relative min-w-0 w-full lg:max-w-md lg:ml-auto" style={{ animationDelay: "280ms" }}>
+          <Card className="overflow-hidden">
+            <div className="mb-5 flex items-center justify-between">
+              <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
+                <Icon className="size-6" />
+              </div>
+              <Badge tone="secondary">{service.delivery_timeline}</Badge>
+            </div>
+            <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
+            <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
+            <ul className="mt-6 space-y-2.5">
+              {service.pillars.map((pillar) => (
+                <li key={pillar} className="flex items-center gap-2 text-sm">
+                  <CheckIcon className="size-4 text-primary" /> {pillar}
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </div>
+      }
+      footer={
+        heroServiceStats ? (
+          <div className="signal-rise" style={{ animationDelay: "350ms" }}>
+            <StatBlock stats={heroServiceStats} containerWidth="shell" />
+          </div>
+        ) : null
+      }
+    />
+  );
+
   const engagementModelsSection = (
     <Section
       id="pricing"
@@ -857,120 +921,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   icon={Icon}
                 />
               }
-              desktop={
-                <>
-                  <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-                    ← All services
-                  </Link>
-                  <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
-                    <div className="lg:col-span-7">
-                      <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-                        <Badge tone="primary" dot>{copy.eyebrow}</Badge>
-                      </div>
-                      <MarketingHeroTitle
-                        className="signal-rise mt-5"
-                        titleLead={serviceHeroHeadlineLead}
-                        titleAccent={serviceHeroHeadlineAccent}
-                      />
-                      <p
-                        className="mt-6 text-lg text-text-muted leading-7 signal-rise"
-                        style={{ animationDelay: "140ms" }}
-                      >
-                        {copy.description}
-                      </p>
-                      <div
-                        className="mt-8 flex flex-wrap gap-3 signal-rise"
-                        style={{ animationDelay: "210ms" }}
-                      >
-                        <LinkButton href="/book-appointment" size="lg">
-                          {copy.primaryCta} <ArrowRightIcon className="size-4" />
-                        </LinkButton>
-                        <LinkButton href={copy.secondaryHref} variant="outline" size="lg">{copy.secondaryCta}</LinkButton>
-                      </div>
-                    </div>
-                    <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
-                      <Card className="overflow-hidden">
-                        <div className="flex items-center justify-between mb-5">
-                          <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
-                            <Icon className="size-6" />
-                          </div>
-                          <Badge tone="secondary">{service.delivery_timeline}</Badge>
-                        </div>
-                        <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
-                        <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
-                        <ul className="mt-6 space-y-2.5">
-                          {service.pillars.map((pillar) => (
-                            <li key={pillar} className="flex items-center gap-2 text-sm">
-                              <CheckIcon className="size-4 text-primary" /> {pillar}
-                            </li>
-                          ))}
-                        </ul>
-                      </Card>
-                    </div>
-                  </div>
-                  <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
-                    <StatBlock stats={heroServiceStats} containerWidth="shell" />
-                  </div>
-                </>
-              }
+              desktop={serviceDetailDesktopHero}
             />
           ) : (
-            <>
-              <Link href="/services" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
-                ← All services
-              </Link>
-              <div className="mt-6 grid gap-12 lg:grid-cols-12 items-center">
-                <div className="lg:col-span-7">
-                  <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-                    <Badge tone="primary" dot>{copy.eyebrow}</Badge>
-                  </div>
-                  <MarketingHeroTitle
-                    className="signal-rise mt-5"
-                    titleLead={serviceHeroHeadlineLead}
-                    titleAccent={serviceHeroHeadlineAccent}
-                  />
-                  <p
-                    className="mt-6 text-lg text-text-muted leading-7 signal-rise"
-                    style={{ animationDelay: "140ms" }}
-                  >
-                    {copy.description}
-                  </p>
-                  <div
-                    className="mt-8 flex flex-wrap gap-3 signal-rise"
-                    style={{ animationDelay: "210ms" }}
-                  >
-                    <LinkButton href="/book-appointment" size="lg">
-                      {copy.primaryCta} <ArrowRightIcon className="size-4" />
-                    </LinkButton>
-                    <LinkButton href={copy.secondaryHref} variant="outline" size="lg">{copy.secondaryCta}</LinkButton>
-                  </div>
-                </div>
-                <div className="lg:col-span-5 signal-rise" style={{ animationDelay: "280ms" }}>
-                  <Card className="overflow-hidden">
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="inline-flex size-12 items-center justify-center rounded-sm bg-primary/10 text-primary">
-                        <Icon className="size-6" />
-                      </div>
-                      <Badge tone="secondary">{service.delivery_timeline}</Badge>
-                    </div>
-                    <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Engagement style</p>
-                    <p className="mt-1 font-display text-2xl tracking-tight">{service.short_description}</p>
-                    <ul className="mt-6 space-y-2.5">
-                      {service.pillars.map((pillar) => (
-                        <li key={pillar} className="flex items-center gap-2 text-sm">
-                          <CheckIcon className="size-4 text-primary" /> {pillar}
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </div>
-              </div>
-              {heroServiceStats ? (
-                <div className="mt-12 signal-rise" style={{ animationDelay: "350ms" }}>
-                  <StatBlock stats={heroServiceStats} containerWidth="shell" />
-                </div>
-              ) : null}
-            </>
+            serviceDetailDesktopHero
           )}
         </Container>
       </Section>
