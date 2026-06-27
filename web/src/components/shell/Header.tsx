@@ -3,18 +3,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Popover } from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
   ShoppingBagIcon,
   CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
-  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import { PRIMARY_NAV } from "@/lib/nav";
 import { LinkButton } from "@/components/primitives/Button";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
+import { DesktopHeaderNav } from "@/components/shell/DesktopHeaderNav";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { HeaderMobileNav } from "@/components/shell/HeaderMobileNav";
 import { cn } from "@/lib/utils";
@@ -90,42 +88,7 @@ export function Header({
           />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 ml-4">
-          {PRIMARY_NAV.map((item) =>
-            item.children ? (
-              <Popover key={item.label} className="relative">
-                {({ close }: { close: () => void }) => (
-                  <>
-                    <Popover.Button className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary data-open:text-primary">
-                      {item.label}
-                      <ChevronDownIcon className="size-3.5" aria-hidden />
-                    </Popover.Button>
-                    <Popover.Panel className="absolute left-0 top-full mt-2 w-80 rounded-md border border-border bg-surface p-2 shadow-(--shadow-3)">
-                      {item.children.map((c) => (
-                        <Link
-                          key={c.href}
-                          href={c.href}
-                          onClick={() => close()}
-                          className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
-                        >
-                          <div className="font-medium text-[15px]">{c.label}</div>
-                        </Link>
-                      ))}
-                    </Popover.Panel>
-                  </>
-                )}
-              </Popover>
-            ) : (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="px-3 py-2 text-sm font-medium transition-colors hover:text-primary"
-              >
-                {item.label}
-              </Link>
-            ),
-          )}
-        </nav>
+        <DesktopHeaderNav />
 
         <div className="ml-auto flex shrink-0 items-center gap-1 lg:gap-2">
           <button
