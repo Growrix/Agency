@@ -27,16 +27,23 @@ export const HOME_HERO_COPY = {
   primaryCtaHref: "/digital-products",
   secondaryCta: "Book a Free Consultation",
   secondaryCtaHref: "/book-appointment",
-  trustedByLabel: "Trusted by businesses worldwide",
 } as const;
 
-export const HOME_HERO_TRUSTED_NAMES = [
-  "Stripe",
-  "Next.js",
-  "Supabase",
-  "Vercel",
-  "AWS",
-] as const;
+export const HOME_HERO_SOCIAL_PROOF = {
+  ratingLabel: "Rated by growing businesses",
+  reviewLinks: [
+    { label: "Google Reviews", href: "#home-google-reviews" },
+    { label: "Trustpilot Reviews", href: "https://www.trustpilot.com", external: true },
+  ],
+} as const;
+
+export const HOME_HERO_TECH_STACK = {
+  label: "Powered by technologies we trust",
+  technologies: ["Next.js", "Supabase", "Stripe", "AWS", "Python", "React", "Vercel"] as const,
+} as const;
+
+/** @deprecated Use HOME_HERO_TECH_STACK.technologies — kept for legacy logo strip references. */
+export const HOME_HERO_TRUSTED_NAMES = HOME_HERO_TECH_STACK.technologies;
 
 export const HOME_HERO_TRUSTED_LOGOS = [
   { name: "Stripe", src: "/images/logos/trusted/stripe.svg", width: 52, height: 22 },
@@ -48,11 +55,11 @@ export const HOME_HERO_TRUSTED_LOGOS = [
 
 export const HOME_SERVICES_COPY = {
   eyebrow: "Services",
-  title: "Launch faster. Scale smarter.",
-  titleLead: "Launch faster.",
-  titleAccent: "Scale smarter.",
+  title: "Solutions built for modern businesses",
+  titleLead: "Solutions built for",
+  titleAccent: "modern businesses",
   description:
-    "Choose the templates you need—or let our experts customize, deploy, and grow them alongside your business.",
+    "From SaaS platforms to AI-powered workflows, we design and build products that solve real business problems.",
   compareCta: "Compare all services",
   compareCtaHref: "/services",
 } as const;
@@ -131,11 +138,11 @@ export const HOME_READY_MADE_SOLUTIONS_COPY = {
 
 export const HOME_FEATURED_TEMPLATES_COPY = {
   eyebrow: "Featured templates",
-  title: "Production-ready templates with live desktop preview",
-  titleLead: "Production-ready templates with",
-  titleAccent: "live desktop preview",
+  title: "Built on systems that scale",
+  titleLead: "Built on systems that",
+  titleAccent: "scale",
   description:
-    "Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems.",
+    "Reduce development time without compromising quality, performance or flexibility.",
 } as const;
 
 export const HOME_THREE_PATH_COPY = {

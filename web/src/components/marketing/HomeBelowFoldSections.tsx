@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { Container, Section } from "@/components/primitives/Container";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
-import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
+import { HOME_FEATURED_TEMPLATES_COPY, HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import type { HomeSectionShellProps } from "@/lib/homepage-composition";
 import { HERO_TITLE_CLASS } from "@/lib/typography";
 import type { PublicPortfolioRecord, PublicServiceRecord, PublicShopProductRecord } from "@/server/domain/catalog";
@@ -144,9 +144,11 @@ export function HomeBelowFoldSections({
         products={featuredHtmlWebsiteTemplates}
         variant="html-preview"
         maxProducts={3}
-        eyebrow="Featured templates"
-        title="Production-ready templates with live desktop preview"
-        description="Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems."
+        eyebrow={HOME_FEATURED_TEMPLATES_COPY.eyebrow}
+        title={HOME_FEATURED_TEMPLATES_COPY.title}
+        titleLead={HOME_FEATURED_TEMPLATES_COPY.titleLead}
+        titleAccent={HOME_FEATURED_TEMPLATES_COPY.titleAccent}
+        description={HOME_FEATURED_TEMPLATES_COPY.description}
         ctaHref={featuredTemplatesCtaHref}
         ctaLabel={featuredTemplatesCtaLabel}
       />
@@ -181,7 +183,7 @@ export function HomeBelowFoldSections({
       <Testimonials />
 
       {showGoogleReviews ? (
-        <Section size="standard" layout="content" spacing="split" tone="default">
+        <Section id="home-google-reviews" size="standard" layout="content" spacing="split" tone="default">
           <Container>
             <GoogleReviews
               eyebrow="Voices"

@@ -650,6 +650,140 @@ body {
   max-height: var(--home-hero-mobile-logo-max-height);
 }
 
+.home-hero-trust-panel {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.home-hero-trust-panel--mobile {
+  align-items: center;
+  text-align: center;
+}
+
+.home-hero-trust-panel__social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.home-hero-trust-panel--mobile .home-hero-trust-panel__social {
+  align-items: center;
+}
+
+.home-hero-trust-panel__rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-hero-trust-panel--mobile .home-hero-trust-panel__rating {
+  justify-content: center;
+}
+
+.home-hero-trust-panel__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.home-hero-trust-panel__star {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--color-primary);
+}
+
+.home-hero-trust-panel__rating-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.home-hero-trust-panel__review-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.home-hero-trust-panel__review-link-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.home-hero-trust-panel__review-link {
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.home-hero-trust-panel__review-link:hover {
+  text-decoration: underline;
+}
+
+.home-hero-trust-panel__review-separator {
+  color: var(--color-text-muted);
+}
+
+.home-hero-trust-panel__tech {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+}
+
+.home-hero-trust-panel__tech-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.home-hero-trust-panel--mobile .home-hero-trust-panel__tech-label {
+  text-align: center;
+}
+
+.home-hero-trust-panel__tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.home-hero-trust-panel--mobile .home-hero-trust-panel__tech-list {
+  justify-content: center;
+}
+
+.home-hero-trust-panel__tech-item {
+  display: inline-flex;
+}
+
+.home-hero-trust-panel__tech-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+}
+
+.home-hero-trust-panel--desktop .home-hero-trust-panel__rating-label {
+  font-size: 0.875rem;
+}
+
+.home-hero-trust-panel--desktop .home-hero-trust-panel__tech-name {
+  font-size: 0.8125rem;
+}
+
 .home-hero-mobile__showcase {
   width: 100%;
   min-height: var(--home-hero-mobile-showcase-min-height);
@@ -846,73 +980,6 @@ body {
 
   .home-hero-desktop__trust-wrap {
     margin-top: 1.75rem;
-  }
-
-  .home-hero-desktop__trust-names > p:first-child {
-    display: none;
-  }
-
-  .home-hero-desktop__trust-names ul {
-    margin-top: 0.75rem;
-  }
-
-  .home-hero-desktop__trust {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1rem;
-    margin-top: 0;
-  }
-
-  .home-hero-desktop__trust-avatars {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .home-hero-desktop__trust-avatar {
-    display: flex;
-    width: 2.125rem;
-    height: 2.125rem;
-    align-items: center;
-    justify-content: center;
-    margin-left: -0.45rem;
-    overflow: hidden;
-    border: 2px solid var(--color-bg);
-    border-radius: 9999px;
-    background: var(--color-surface);
-  }
-
-  .home-hero-desktop__trust-avatar:first-child {
-    margin-left: 0;
-  }
-
-  .home-hero-desktop__trust-avatar-logo {
-    width: auto;
-    height: 0.75rem;
-    max-width: 1.25rem;
-    object-fit: contain;
-    opacity: 0.88;
-  }
-
-  .home-hero-desktop__trust-rating {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.125rem;
-  }
-
-  .home-hero-desktop__trust-star {
-    width: 0.875rem;
-    height: 0.875rem;
-    color: var(--color-primary);
-  }
-
-  .home-hero-desktop__trust-label {
-    font-size: 0.875rem;
-    line-height: 1.4;
-    color: var(--color-text-muted);
   }
 
   .home-hero-desktop__highlights {

@@ -9,7 +9,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { HomeHeroShowcase } from "@/components/marketing/HomeHeroShowcase";
 import { HomeHeroTrustedBy } from "@/components/marketing/HomeHeroTrustedBy";
-import { HomeHeroTrustedByDesktop } from "@/components/marketing/HomeHeroTrustedByDesktop";
 import {
   HomeHeroCtaMotion,
   HomeHeroMotionReveal,
@@ -90,8 +89,7 @@ export function HomeHeroDesktop({
         </HomeHeroMotionReveal>
 
         <HomeHeroTrustMotion delay={320} className="home-hero-desktop__trust-wrap">
-          <HomeHeroTrustedByDesktop />
-          <HomeHeroTrustedBy className="home-hero-desktop__trust-names" animated />
+          <HomeHeroTrustedBy variant="desktop" animated />
         </HomeHeroTrustMotion>
 
         <HomeHeroMotionReveal delay={400}>
