@@ -9,10 +9,7 @@ import {
   type HtmlProfileHeroCarouselNavigation,
   type HtmlProfileHeroSlide,
 } from "@/components/sections/HtmlProfileHeroCarousel";
-import { WebsiteTemplateHtmlDesktopPosterFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPosterFrame";
 import {
-  HTML_MOBILE_VIEWPORT_HEIGHT,
-  HTML_MOBILE_VIEWPORT_WIDTH,
   WebsiteTemplateHtmlMobilePreviewFrame,
 } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
@@ -84,25 +81,14 @@ export function HomeHeroShowcase({
   const mobilePhoneOverlay =
     activeSlideHasPreview && isMobileLayout && activeSlideMobilePoster && shouldRenderPhoneOverlay ? (
       <div className="home-hero-mobile__phone-overlay" aria-hidden>
-        <div className="home-hero-mobile__phone-bezel">
-          <span className="home-hero-mobile__phone-notch" aria-hidden />
-          <div className="home-hero-mobile__phone-screen">
-            <div
-              key={`${activeSlide?.name}-${activeIndex}`}
-              className="home-hero-mobile__phone-screen-inner"
-            >
-              <WebsiteTemplateHtmlDesktopPosterFrame
-                posterImage={activeSlideMobilePoster}
-                viewportWidth={HTML_MOBILE_VIEWPORT_WIDTH}
-                viewportHeight={HTML_MOBILE_VIEWPORT_HEIGHT}
-                fit="cover"
-                verticalAlign="top"
-                className="h-full w-full"
-                frameClassName="h-full w-full rounded-none border-0 bg-white"
-              />
-            </div>
-          </div>
-        </div>
+        <WebsiteTemplateHtmlMobilePreviewFrame
+          posterImage={activeSlideMobilePoster}
+          title={`${activeSlide?.name ?? "Template"} mobile preview`}
+          maxFrameHeight={280}
+          showViewportLabel={false}
+          contentAlign="start"
+          className="home-hero-mobile__phone-frame w-full max-w-full"
+        />
       </div>
     ) : null;
 

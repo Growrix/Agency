@@ -92,6 +92,7 @@ function CarouselPreviewFrame({
   iframeLoading = "lazy",
   preferPoster = false,
   posterFillContainer = false,
+  imagePriority = false,
 }: {
   slide: HtmlProfileHeroSlide;
   previewMode: HtmlProfileHeroCarouselPreviewMode;
@@ -104,6 +105,7 @@ function CarouselPreviewFrame({
   iframeLoading?: "lazy" | "eager";
   preferPoster?: boolean;
   posterFillContainer?: boolean;
+  imagePriority?: boolean;
 }) {
   if (!loadPreview) {
     return (
@@ -142,6 +144,7 @@ function CarouselPreviewFrame({
         fit={desktopPreviewFit}
         verticalAlign={desktopPreviewVerticalAlign}
         fillContainer={posterFillContainer}
+        imagePriority={imagePriority}
         className={
           desktopPreviewFit === "cover" || posterFillContainer
             ? "absolute inset-0 h-full w-full"
@@ -616,6 +619,7 @@ export function HtmlProfileHeroCarousel({
                         iframeLoading={compactPresentation ? "eager" : "lazy"}
                         preferPoster={preferPoster}
                         posterFillContainer={posterFillContainer}
+                        imagePriority={isActiveSlide}
                       />
                     )}
                   </div>
@@ -702,6 +706,7 @@ export function HtmlProfileHeroCarousel({
                         iframeLoading={compactPresentation ? "eager" : "lazy"}
                         preferPoster={preferPoster}
                         posterFillContainer={posterFillContainer}
+                        imagePriority={isActiveSlide}
                       />
                     )}
                   </div>

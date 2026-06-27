@@ -4,7 +4,7 @@ import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
 import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const SITE_DESCRIPTION =
@@ -13,17 +13,17 @@ const DEFAULT_OG_IMAGE = "/images/home/studio-hero.jpg";
 
 const sans = Manrope({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "700"],
   variable: "--font-manrope",
   display: "swap",
 });
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600"],
   variable: "--font-bricolage",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 const mono = JetBrains_Mono({
@@ -31,6 +31,7 @@ const mono = JetBrains_Mono({
   weight: ["400", "500"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -101,12 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="dns-prefetch" href="//cdn.sanity.io" />
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
-        <link rel="dns-prefetch" href="//images.unsplash.com" />
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
-      </head>
+      <head />
       <body className="min-h-full flex flex-col antialiased">
         <a
           href="#main"
@@ -117,7 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionRoot>
           <AppShell>{children}</AppShell>
         </MotionRoot>
-        <SpeedInsights />
+        <DeferredSpeedInsights />
       </body>
     </html>
   );

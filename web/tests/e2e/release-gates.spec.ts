@@ -50,6 +50,19 @@ test("homepage resource budget stays within performance guardrails", async ({ pa
   expect(resourceCount).toBeLessThanOrEqual(30);
 });
 
+test("homepage renders without client runtime errors", async ({ page }) => {
+  const pageErrors: string[] = [];
+  page.on("pageerror", (error) => {
+    pageErrors.push(error.message);
+  });
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(500);
+
+  expect(pageErrors).toEqual([]);
+  await expect(page.locator(".hero-section")).toBeVisible();
+});
+
 test("preview iframe budget stays constrained on homepage and category page", async ({ page }) => {
   test.setTimeout(120_000);
   await page.goto("/", { waitUntil: "domcontentloaded" });

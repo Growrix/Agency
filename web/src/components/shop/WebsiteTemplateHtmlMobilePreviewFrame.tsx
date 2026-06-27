@@ -51,6 +51,8 @@ function MobilePreviewScreenContent({
         className="block max-h-none max-w-none border-0 bg-surface"
         style={screenStyle}
         decoding="async"
+        loading="lazy"
+        fetchPriority="low"
       />
     );
   }

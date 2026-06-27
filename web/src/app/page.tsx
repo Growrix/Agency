@@ -1,38 +1,11 @@
 import { HomeHero } from "@/components/marketing/HomeHero";
-
-import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
-
-import { ThreePathExplainer } from "@/components/marketing/ThreePathExplainer";
-
-import { ServiceCards } from "@/components/marketing/ServiceCards";
-
-import { Testimonials } from "@/components/marketing/Testimonials";
-
-import { ProductLedFinalCTA } from "@/components/marketing/ProductLedFinalCTA";
-
-import { HomeAiConciergeSection } from "@/components/marketing/HomeAiConciergeSection";
-
-import { HomeFeaturedBuildsSection } from "@/components/marketing/HomeFeaturedBuildsSection";
-
-import { HomeHtmlPreviewSection } from "@/components/marketing/HomeHtmlPreviewSection";
-
-import { HomeProcessSection } from "@/components/marketing/HomeProcessSection";
-
-import { GoogleReviews } from "@/components/sections/GoogleReviews";
-
-import { HomeFieldNotesSection } from "@/components/marketing/HomeFieldNotesSection";
-
-import { Container, Section } from "@/components/primitives/Container";
+import { HomeBelowFoldSections } from "@/components/marketing/HomeBelowFoldSections";
 
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 
 import { buildReadyMadeSolutionTabs, pickPreviewProducts } from "@/lib/ready-made-solutions";
 
-import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
-
 import { homeSection } from "@/lib/homepage-composition";
-
-import { HERO_TITLE_CLASS } from "@/lib/typography";
 
 import { getHomePageData } from "@/server/marketing/home-page-data";
 
@@ -59,26 +32,6 @@ import {
 import { getProductHref } from "@/lib/shop";
 
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
-
-import dynamic from "next/dynamic";
-
-
-
-const ReadyMadeSolutionsSection = dynamic(
-
-  () => import("@/components/marketing/ReadyMadeSolutionsSection").then((mod) => mod.ReadyMadeSolutionsSection),
-
-);
-
-
-
-const HomeDigitalProductsShowcase = dynamic(
-
-  () => import("@/components/marketing/HomeDigitalProductsShowcase").then((mod) => mod.HomeDigitalProductsShowcase),
-
-);
-
-
 
 export const revalidate = 120;
 
@@ -247,159 +200,37 @@ export default async function Home() {
 
       />
 
-
-
-      <ServiceCards services={services} />
-
-
-
-      <ReadyMadeSolutionsSection
-
-        tabs={readyMadeSolutions.tabs}
-
-        productsByTabId={readyMadeSolutions.productsByTabId}
-
-      />
-
-
-
-      <FeaturedProducts
-
-        products={featuredHtmlWebsiteTemplates}
-
-        variant="html-preview"
-
-        maxProducts={3}
-
-        eyebrow="Featured templates"
-
-        title="Production-ready templates with live desktop preview"
-
-        description="Deliver flawless experiences across every device—preview, purchase, and launch from proven website systems."
-
-        ctaHref="/digital-products/category/website-templates-html-preview#profiles"
-
-        ctaLabel={WEBSITE_TEMPLATE_PREVIEW.browseTemplatePreviewsCta}
-
-      />
-
-
-
-      <HomeHtmlPreviewSection
-
-        slides={htmlPreviewSlides}
-
-        emptyFallbackSlide={htmlPreviewFallbackSlide}
-
-        sectionShell={homeSection("html-preview")}
-
-        title={HOME_PREVIEW_COPY.title}
-
-        description={HOME_PREVIEW_COPY.description}
-
-      />
-
-
-
-      <HomeDigitalProductsShowcase products={publicProducts} />
-
-
-
-      <ThreePathExplainer />
-
-
-
-      <HomeFeaturedBuildsSection
-
-        projects={featuredProjects}
-
-        title={homeContent?.featuredBuilds?.title}
-
-        description={homeContent?.featuredBuilds?.description}
-
-      />
-
-
-
-      <HomeProcessSection />
-
-
-
-      <HomeAiConciergeSection
-
-        eyebrow={homeContent?.ai?.eyebrow}
-
-        title={homeContent?.ai?.title}
-
-        description={homeContent?.ai?.description}
-
-        privacyNote={homeContent?.ai?.privacyNote}
-
-      />
-
-
-
-      <Testimonials />
-
-
-
-      {SHOW_GOOGLE_REVIEWS && (
-
-        <Section size="standard" layout="content" spacing="split" tone="default">
-
-          <Container>
-
-            <GoogleReviews
-
-              eyebrow="Voices"
-
-              title="Teams we've shipped with."
-
-              description="Live Google reviews from the public Growrix OS business profile."
-
-              titleClassName={HERO_TITLE_CLASS}
-
-            />
-
-          </Container>
-
-        </Section>
-
-      )}
-
-
-
-      <HomeFieldNotesSection
-        posts={latestBlogPosts}
-        eyebrow={homeContent?.fieldNotes?.eyebrow}
-        title={homeContent?.fieldNotes?.title}
-        description={homeContent?.fieldNotes?.description}
-      />
-
-
-
-      <ProductLedFinalCTA
-
-        eyebrow={homeContent?.finalCta?.eyebrow ?? "Start with a product or a conversation"}
-
-        title={homeContent?.finalCta?.title ?? "Browse ready-made assets or book a free consultation."}
-
-        description={
-
+      <HomeBelowFoldSections
+        services={services}
+        readyMadeTabs={readyMadeSolutions.tabs}
+        readyMadeProductsByTabId={readyMadeSolutions.productsByTabId}
+        featuredHtmlWebsiteTemplates={featuredHtmlWebsiteTemplates}
+        htmlPreviewSlides={htmlPreviewSlides}
+        htmlPreviewFallbackSlide={htmlPreviewFallbackSlide}
+        htmlPreviewSectionShell={homeSection("html-preview")}
+        publicProducts={publicProducts}
+        featuredProjects={featuredProjects}
+        featuredBuildsTitle={homeContent?.featuredBuilds?.title}
+        featuredBuildsDescription={homeContent?.featuredBuilds?.description}
+        aiEyebrow={homeContent?.ai?.eyebrow}
+        aiTitle={homeContent?.ai?.title}
+        aiDescription={homeContent?.ai?.description}
+        aiPrivacyNote={homeContent?.ai?.privacyNote}
+        showGoogleReviews={SHOW_GOOGLE_REVIEWS}
+        latestBlogPosts={latestBlogPosts}
+        fieldNotesEyebrow={homeContent?.fieldNotes?.eyebrow}
+        fieldNotesTitle={homeContent?.fieldNotes?.title}
+        fieldNotesDescription={homeContent?.fieldNotes?.description}
+        finalCtaEyebrow={homeContent?.finalCta?.eyebrow ?? "Start with a product or a conversation"}
+        finalCtaTitle={homeContent?.finalCta?.title ?? "Browse ready-made assets or book a free consultation."}
+        finalCtaDescription={
           homeContent?.finalCta?.description ??
-
           "Pick a digital product for instant delivery, request Done-For-You setup, or scope a custom build."
-
         }
-
-        primaryLabel={homeContent?.finalCta?.primaryLabel ?? "Browse Digital Products"}
-
-        primaryHref="/digital-products"
-
-        secondaryLabel={homeContent?.finalCta?.secondaryLabel ?? "Book a Free Consultation"}
-
-        secondaryHref="/book-appointment"
-
+        finalCtaPrimaryLabel={homeContent?.finalCta?.primaryLabel ?? "Browse Digital Products"}
+        finalCtaSecondaryLabel={homeContent?.finalCta?.secondaryLabel ?? "Book a Free Consultation"}
+        featuredTemplatesCtaHref="/digital-products/category/website-templates-html-preview#profiles"
+        featuredTemplatesCtaLabel={WEBSITE_TEMPLATE_PREVIEW.browseTemplatePreviewsCta}
       />
 
       </div>

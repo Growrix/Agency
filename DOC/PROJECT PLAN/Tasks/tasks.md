@@ -431,13 +431,13 @@ Remaining parallel tracks:
 
 ## Release Readiness Checklist
 - [x] Local production build passes.
-- [ ] Vercel development deployment is verified on the live project.
+- [ ] Vercel development deployment is verified on the live project (growrix: post-build `routes-manifest-deterministic.json` finalizer mitigated via `build:vercel`; remote green not yet confirmed).
 - [x] Contact form persists inquiries through a real API.
 - [x] Booking flow is connected to a real inquiry backend.
 - [x] Checkout is connected to a real order and payment backend.
 - [x] AI concierge and live chat have real server-backed behavior, with the concierge restricted to approved internal knowledge and explicit escalation when no grounded answer exists.
 - [~] Auth, RBAC, and admin management exist for protected flows. Clerk identity is wired when `CLERK_*` env vars are set; legacy JWT test harness remains for CI without Clerk keys.
-- [x] CI, tests, and release gates are passing.
+- [~] CI, tests, and release gates are passing locally (`CI=true npm run ci:check` exit 0 on 2026-06-27); remote GitHub Actions + Vercel growrix deploy verification pending push of fix commit.
 - [ ] Security and compliance controls are implemented beyond documentation.
 
 ## Tracker Maintenance Rule
@@ -448,5 +448,18 @@ Remaining parallel tracks:
 
 ### 2026-06-26 — Homepage hero client crash loop (debug_failure)
 - **Root cause:** Monolithic `"use client"` `HomeHeroSection` imported from server `page.tsx`; barrel re-exports in hero-motion amplified Next.js 16 webpack undefined client symbols.
-- **Fix:** Restored server-shell `HomeHero.tsx` + client-leaf `HomeHeroMotionShell.tsx` (ServiceCards pattern); removed `HomeHeroSection`, `HomeHeroViewportGate`, `hero-motion/index.ts`; ESLint ban on hero-motion barrel imports.
-- **Validation:** lint + typecheck + build pass; cold dev boot; 5× `GET /` without browser/observability spam; release-gates e2e 6/7 pass (homepage a11y/load/SEO/iframe gates green). Resource budget gate reports 39 resources vs 30 limit — pre-existing/env variance, unrelated to crash fix; track separately if needed.
+- **Fix (partial, superseded):** Restored server-shell `HomeHero.tsx` + client-leaf `HomeHeroMotionShell.tsx` (ServiceCards pattern); removed `HomeHeroSection`, `HomeHeroViewportGate`, `hero-motion/index.ts`; ESLint ban on hero-motion barrel imports.
+- **Follow-up (2026-06-27):** Crash recurred in dev; final fix collapses hero back to single `"use client"` `HomeHero.tsx` (pre-`8e7f7b7` proven pattern), deletes `HomeHeroMotionShell.tsx`. Resource budget CI gate failed at 37–39 resources (not lint/build).
+
+### 2026-06-27 — CI deploy fix (debug_failure → repair)
+- **CI root cause:** GitHub `lint-and-build` failed release-gates e2e — homepage `domcontentloaded` resource count 37–39 > 30 limit ([Actions run 28282781756](https://github.com/Growrix/Agency/actions/runs/28282781756/job/83801541414)).
+- **Vercel growrix root cause:** Post-build finalization ENOENT for `.next/routes-manifest-deterministic.json` (Next.js 16 + monorepo Root Directory `web/` platform bug); build completes successfully.
+- **Fixes:**
+  - Collapsed hero client boundary into `HomeHero.tsx`; removed `HomeHeroMotionShell.tsx`.
+  - Added `HomeBelowFoldSections.tsx` client wrapper with `dynamic(..., { ssr: false })` for all below-fold homepage sections.
+  - Deferred SpeedInsights, reduced font preloads, lazy poster loading for inactive carousel slides.
+  - Added release-gates `"homepage renders without client runtime errors"` (pageerror + `.hero-section` visible).
+  - Mobile hero overlay aligned to `WebsiteTemplateHtmlMobilePreviewFrame` + poster mode.
+  - Vercel mitigation: `build:vercel` script + `web/vercel.json` buildCommand.
+- **Validation:** `CI=true npm run ci:check` exit 0 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 8/8 including resource budget ≤30 and homepage pageerror gate).
+- **Remote:** GitHub Actions + Vercel growrix green pending push; prior local-only green claims corrected in Release Readiness Checklist.

@@ -20,6 +20,8 @@ type WebsiteTemplateHtmlDesktopPosterFrameProps = {
   containerHeight?: number;
   /** When true, width-fit posters stretch to the container height (hero monitor). */
   fillContainer?: boolean;
+  /** When true, prioritize LCP fetch for the active hero poster. */
+  imagePriority?: boolean;
 };
 
 /** Scaled poster frame — mirrors WebsiteTemplateHtmlDesktopPreviewFrame layout without an iframe. */
@@ -33,6 +35,7 @@ export function WebsiteTemplateHtmlDesktopPosterFrame({
   verticalAlign = "center",
   containerHeight,
   fillContainer = false,
+  imagePriority = false,
 }: WebsiteTemplateHtmlDesktopPosterFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -126,6 +129,8 @@ export function WebsiteTemplateHtmlDesktopPosterFrame({
             height: viewportHeight,
           }}
           decoding="async"
+          loading={imagePriority ? "eager" : "lazy"}
+          fetchPriority={imagePriority ? "high" : "low"}
         />
       </div>
     </div>

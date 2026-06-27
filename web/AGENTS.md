@@ -46,7 +46,7 @@ Shortcut: `npm run health:check` (runs the full sequence above).
 
 ## Homepage hero client boundaries
 
-The homepage hero must follow the **server-shell + client-leaf** pattern (same as `ServiceCards`): `HomeHero.tsx` owns `Section` as a server component; `HomeHeroMotionShell.tsx` is the only client boundary for motion, viewport gates, and mobile/desktop variants. Do not wrap the entire hero in one `"use client"` module imported from `page.tsx`. Import hero-motion symbols from their source files — never from a barrel `index.ts`. Avoid `"use client"` files that only re-export another module's symbols.
+The homepage hero is a single `"use client"` module ([`HomeHero.tsx`](src/components/marketing/HomeHero.tsx)) that owns `Section`, motion, viewport gates, and mobile/desktop variants. Import hero-motion symbols from their source files — never from a barrel `index.ts`. Avoid `"use client"` files that only re-export another module's symbols.
 
 ## Spell-check
 

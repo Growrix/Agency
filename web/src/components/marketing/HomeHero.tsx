@@ -1,7 +1,16 @@
-import { HomeHeroMotionShell } from "@/components/marketing/HomeHeroMotionShell";
-import { Section } from "@/components/primitives/Container";
+"use client";
+
+import { useRef } from "react";
+import { HomeHeroDesktop } from "@/components/marketing/HomeHeroDesktop";
+import { HomeHeroMobile } from "@/components/marketing/HomeHeroMobile";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { HomeHeroMotionRoot } from "@/components/marketing/hero-motion/HomeHeroMotionRoot";
+import { Container, Section } from "@/components/primitives/Container";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
+import { HOME_HERO_COPY } from "@/lib/home-conversion-content";
 import { homeSection } from "@/lib/homepage-composition";
+import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
+import { cn } from "@/lib/utils";
 
 type HomeHeroProps = {
   badge?: string;
@@ -12,25 +21,44 @@ type HomeHeroProps = {
 };
 
 export function HomeHero({
-  badge,
+  badge = HOME_HERO_COPY.badge,
   title,
-  description,
+  description = HOME_HERO_COPY.description,
   slides,
   emptyFallbackSlide,
 }: HomeHeroProps) {
+  const motionHostRef = useRef<HTMLDivElement>(null);
+  const sharedProps = {
+    badge,
+    title,
+    description,
+    slides,
+    emptyFallbackSlide,
+  };
+
   return (
     <Section
       {...homeSection("hero")}
       layout="viewport"
       className="hero-section hero-section--responsive-band hero-section--under-chrome home-hero-desktop-section relative flex min-h-0 flex-col overflow-hidden lg:min-h-dvh"
     >
-      <HomeHeroMotionShell
-        badge={badge}
-        title={title}
-        description={description}
-        slides={slides}
-        emptyFallbackSlide={emptyFallbackSlide}
-      />
+      <div ref={motionHostRef} className="hero-section__motion-host relative min-h-0 flex flex-1 flex-col">
+        <HomeHeroMotionRoot sectionRef={motionHostRef}>
+          <Container
+            className={cn(
+              HERO_VIEWPORT_CONTAINER_CLASS,
+              "hero-section__content relative flex flex-1 flex-col",
+              "justify-start py-0 lg:justify-center lg:py-12",
+              "pt-0 lg:pt-[calc(var(--site-chrome-height)+3rem)]",
+            )}
+          >
+            <MarketingViewportGate
+              mobile={<HomeHeroMobile {...sharedProps} />}
+              desktop={<HomeHeroDesktop {...sharedProps} />}
+            />
+          </Container>
+        </HomeHeroMotionRoot>
+      </div>
     </Section>
   );
 }
