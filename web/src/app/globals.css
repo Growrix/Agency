@@ -739,6 +739,13 @@ body {
   border-top: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
 }
 
+.home-hero-trust-panel--mobile .home-hero-trust-panel__tech {
+  width: 100%;
+  max-width: min(100%, 22rem);
+  padding-top: 0;
+  border-top: none;
+}
+
 .home-hero-trust-panel__tech-label {
   margin: 0;
   font-family: var(--font-mono);

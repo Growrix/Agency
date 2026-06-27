@@ -61,19 +61,45 @@ export function HomeHeroTrustedBy({ className, variant = "desktop", animated = f
       </div>
 
       <div className="home-hero-trust-panel__tech">
-        <p className="home-hero-trust-panel__tech-label">{HOME_HERO_TECH_STACK.label}</p>
-        <ul className="home-hero-trust-panel__tech-list" aria-label={HOME_HERO_TECH_STACK.label}>
+        {isMobile ? (
+          <div className="home-hero-mobile__trust-row">
+            <span className="home-hero-mobile__trust-divider" aria-hidden />
+            <p className="home-hero-mobile__trust-label">{HOME_HERO_TECH_STACK.label}</p>
+            <span className="home-hero-mobile__trust-divider" aria-hidden />
+          </div>
+        ) : (
+          <p className="home-hero-trust-panel__tech-label">{HOME_HERO_TECH_STACK.label}</p>
+        )}
+        <ul
+          className={cn(
+            isMobile
+              ? "home-hero-mobile__trust-names mt-3 flex flex-wrap items-center justify-center"
+              : "home-hero-trust-panel__tech-list",
+          )}
+          aria-label={HOME_HERO_TECH_STACK.label}
+        >
           {HOME_HERO_TECH_STACK.technologies.map((name, index) =>
             animated ? (
               <HomeHeroTrustNameMotion
                 key={name}
                 name={name}
                 index={index}
-                className={cn("home-hero-trust-panel__tech-item", "home-hero-trust-panel__tech-name")}
+                className={cn(
+                  isMobile
+                    ? "home-hero-mobile__trust-name font-semibold tracking-wide text-text-muted"
+                    : "home-hero-trust-panel__tech-item home-hero-trust-panel__tech-name",
+                )}
               />
             ) : (
-              <li key={name} className="home-hero-trust-panel__tech-item">
-                <span className="home-hero-trust-panel__tech-name">{name}</span>
+              <li
+                key={name}
+                className={cn(
+                  isMobile
+                    ? "home-hero-mobile__trust-name font-semibold tracking-wide text-text-muted"
+                    : "home-hero-trust-panel__tech-item",
+                )}
+              >
+                {!isMobile ? <span className="home-hero-trust-panel__tech-name">{name}</span> : name}
               </li>
             ),
           )}

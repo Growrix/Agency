@@ -39,7 +39,7 @@ export const HOME_HERO_SOCIAL_PROOF = {
 
 export const HOME_HERO_TECH_STACK = {
   label: "Powered by technologies we trust",
-  technologies: ["Next.js", "Supabase", "Stripe", "AWS", "Python", "React", "Vercel"] as const,
+  technologies: ["Next.js", "Supabase", "Stripe", "AWS", "Python", "React"] as const,
 } as const;
 
 /** @deprecated Use HOME_HERO_TECH_STACK.technologies — kept for legacy logo strip references. */
