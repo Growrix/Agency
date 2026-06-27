@@ -53,7 +53,7 @@ Full enumeration: `web/.env.example` + `@integration-platform` playbooks.
 
 **Tier 1 (Git Integration):** `npm run build:vercel` runs `next build` then [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) to symlink/copy `web/.next` → repo root `.next` on Vercel.
 
-**Tier 2 (fallback):** GitHub Actions prebuilt deploy — add repo secrets then push or `workflow_dispatch`:
+**Tier 2 (fallback):** GitHub Actions prebuilt deploy — add repo secrets, set repository variable `VERCEL_PREBUILT_ENABLED=true`, then push or `workflow_dispatch`:
 
 | Secret | Source |
 |--------|--------|

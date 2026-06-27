@@ -17,8 +17,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Skip until operator adds Vercel secrets (avoids noisy failures on every push).
-    if: ${{ secrets.VERCEL_TOKEN != '' }}
+    # Set repository variable VERCEL_PREBUILT_ENABLED=true after adding GitHub secrets.
+    if: vars.VERCEL_PREBUILT_ENABLED == 'true'
     defaults:
       run:
         working-directory: web
