@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
@@ -10,7 +10,11 @@ import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/Website
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
-import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
+import {
+  getHtmlBusinessProfilePreviewUrl,
+  HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
+} from "@/lib/html-business-profiles";
+import { SHOP_PROFILE_MOBILE_PREVIEW_MAX_HEIGHT } from "@/lib/shop-mobile-preview";
 import { cn } from "@/lib/utils";
 import {
   getWebsiteTemplateHtmlPreviewByProductSlug,
@@ -27,6 +31,28 @@ type ShopProductHomeMobileRowCardProps = {
   previewLayout?: "profile-mobile" | "split-desktop";
 };
 
+function resolveMobileRowPreviewUrl(product: ShopProduct): string | undefined {
+  const websiteTemplatePreview =
+    product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
+      ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
+      : null;
+
+  if (websiteTemplatePreview) {
+    return getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug);
+  }
+
+  const directUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
+  if (directUrl) {
+    return directUrl;
+  }
+
+  if (product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug) {
+    return getHtmlBusinessProfilePreviewUrl(product.slug);
+  }
+
+  return undefined;
+}
+
 export function ShopProductHomeMobileRowCard({
   product,
   previewLoadMode = "auto",
@@ -34,52 +60,23 @@ export function ShopProductHomeMobileRowCard({
   previewBadgeLabel = "Preview",
   previewLayout = "split-desktop",
 }: ShopProductHomeMobileRowCardProps) {
-  const websiteTemplatePreview =
-    product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
-      ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
-      : null;
-  const previewUrl = websiteTemplatePreview
-    ? getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug)
-    : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
+  const previewUrl = resolveMobileRowPreviewUrl(product);
   const isProfile = product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug;
   const useProfileMobileLayout = previewLayout === "profile-mobile" || isProfile;
   const hasExternalPreview = Boolean(previewUrl);
+  const isEager = previewLoadMode === "eager";
   const usePosterFirst = previewLoadMode === "poster-first";
   const requiresClickToLoad = usePosterFirst;
   const [liveActivated, setLiveActivated] = useState(!requiresClickToLoad);
   const { ref: previewRef, shouldRender: shouldRenderPreview } = useDeferredPreview<HTMLDivElement>({
     priority: loadPriority,
     rootMargin: requiresClickToLoad ? "0px 0px" : undefined,
+    disabled: isEager,
   });
-  const shouldMountIframe = requiresClickToLoad ? liveActivated : shouldRenderPreview;
-  const previewCellRef = useRef<HTMLDivElement>(null);
-  const [profilePreviewHeight, setProfilePreviewHeight] = useState<number | undefined>();
-
-  useEffect(() => {
-    if (!useProfileMobileLayout) {
-      return;
-    }
-
-    const node = previewCellRef.current;
-    if (!node) {
-      return;
-    }
-
-    const updateHeight = () => setProfilePreviewHeight(node.clientHeight);
-    updateHeight();
-
-    const observer = new ResizeObserver(updateHeight);
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [useProfileMobileLayout]);
-
-  const setPreviewCellRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      previewRef.current = node;
-      previewCellRef.current = node;
-    },
-    [previewRef],
-  );
+  const shouldMountIframe = requiresClickToLoad
+    ? liveActivated
+    : isEager || shouldRenderPreview;
+  const iframeLoading = isEager ? "eager" : "lazy";
 
   return (
     <article
@@ -89,17 +86,17 @@ export function ShopProductHomeMobileRowCard({
         !useProfileMobileLayout && "home-mobile-marketing__product-row--split-desktop",
       )}
     >
-      <div ref={setPreviewCellRef} className="home-mobile-marketing__product-row-preview">
+      <div ref={previewRef} className="home-mobile-marketing__product-row-preview">
         {previewUrl ? (
           shouldMountIframe ? (
             useProfileMobileLayout ? (
               <WebsiteTemplateHtmlMobilePreviewFrame
                 previewUrl={previewUrl}
                 title={`${product.name} preview`}
-                maxFrameHeight={profilePreviewHeight}
+                maxFrameHeight={SHOP_PROFILE_MOBILE_PREVIEW_MAX_HEIGHT}
                 contentAlign="start"
                 showViewportLabel={false}
-                iframeLoading="lazy"
+                iframeLoading={iframeLoading}
                 className="home-mobile-marketing__product-row-frame home-mobile-marketing__product-row-frame--profile"
               />
             ) : (
@@ -110,7 +107,7 @@ export function ShopProductHomeMobileRowCard({
                 measureDocumentHeight={false}
                 verticalAlign="top"
                 className="home-mobile-marketing__product-row-frame home-mobile-marketing__product-row-frame--fit-width"
-                iframeLoading="lazy"
+                iframeLoading={iframeLoading}
               />
             )
           ) : requiresClickToLoad ? (

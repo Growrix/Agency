@@ -3551,9 +3551,9 @@ body {
 
 .home-mobile-marketing__product-row--profile-mobile .home-mobile-marketing__product-row-preview {
   width: var(--home-mobile-marketing-product-row-preview-width-compact);
+  height: var(--home-mobile-marketing-product-row-preview-height-compact);
   min-height: var(--home-mobile-marketing-product-row-preview-height-compact);
-  height: auto;
-  align-self: stretch;
+  align-self: start;
 }
 
 .home-mobile-marketing__product-row--split-desktop .home-mobile-marketing__product-row-preview {

@@ -196,6 +196,16 @@
     flex: 0 0 min(72vw, 10.5rem);
   }
 
+  .shop-mobile .home-mobile-marketing__product-row--profile-mobile {
+    grid-template-columns: 7.25rem minmax(0, 1fr);
+  }
+
+  .shop-mobile .home-mobile-marketing__product-row--profile-mobile .home-mobile-marketing__product-row-preview {
+    width: 7.25rem;
+    height: 10.5rem;
+    min-height: 10.5rem;
+  }
+
   .shop-mobile__all-products-header {
     padding-top: 0.25rem;
     border-top: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);

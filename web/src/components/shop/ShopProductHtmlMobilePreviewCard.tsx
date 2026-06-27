@@ -9,8 +9,13 @@ import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceho
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { SHOP_PROFILE_MOBILE_PREVIEW_MAX_HEIGHT } from "@/lib/shop-mobile-preview";
 import { cn } from "@/lib/utils";
 import { getCheckoutHref, getProductHref, type ShopCatalogCardVariant, type ShopProduct } from "@/lib/shop";
+import {
+  getHtmlBusinessProfilePreviewUrl,
+  HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
+} from "@/lib/html-business-profiles";
 import {
   getWebsiteTemplateHtmlPreviewByProductSlug,
   getWebsiteTemplateHtmlPreviewUrl,
@@ -18,7 +23,29 @@ import {
 } from "@/lib/website-templates-html-preview";
 
 const MOBILE_CARD_PREVIEW_MAX_HEIGHT = 340;
-const COMPACT_MOBILE_CARD_PREVIEW_MAX_HEIGHT = 168;
+const COMPACT_MOBILE_CARD_PREVIEW_MAX_HEIGHT = SHOP_PROFILE_MOBILE_PREVIEW_MAX_HEIGHT;
+
+function resolveMobilePreviewCardUrl(product: ShopProduct): string | undefined {
+  const websiteTemplatePreview =
+    product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
+      ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
+      : null;
+
+  if (websiteTemplatePreview) {
+    return getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug);
+  }
+
+  const directUrl = product.embeddedPreviewUrl ?? product.livePreviewUrl;
+  if (directUrl) {
+    return directUrl;
+  }
+
+  if (product.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug) {
+    return getHtmlBusinessProfilePreviewUrl(product.slug);
+  }
+
+  return undefined;
+}
 
 export function ShopProductHtmlMobilePreviewCard({
   product,
@@ -33,12 +60,7 @@ export function ShopProductHtmlMobilePreviewCard({
   autoLoadLive?: boolean;
   loadPriority?: boolean;
 }) {
-  const websiteTemplatePreview = product.categorySlug === WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG
-    ? getWebsiteTemplateHtmlPreviewByProductSlug(product.slug)
-    : null;
-  const previewUrl = websiteTemplatePreview
-    ? getWebsiteTemplateHtmlPreviewUrl(websiteTemplatePreview.slug)
-    : (product.embeddedPreviewUrl ?? product.livePreviewUrl);
+  const previewUrl = resolveMobilePreviewCardUrl(product);
   const hasExternalPreview = Boolean(previewUrl);
   const isCatalogWide = variant === "catalog-wide";
   const isCompact = variant === "compact";
@@ -54,6 +76,11 @@ export function ShopProductHtmlMobilePreviewCard({
   const shouldMountIframe = requiresClickToLoad
     ? liveActivated
     : isEager || shouldRenderPreview;
+  const mobileCardPreviewMaxHeight = isCompact
+    ? COMPACT_MOBILE_CARD_PREVIEW_MAX_HEIGHT
+    : isCatalogWide
+      ? MOBILE_CARD_PREVIEW_MAX_HEIGHT + 20
+      : MOBILE_CARD_PREVIEW_MAX_HEIGHT;
 
   return (
     <Card hoverable className="shop-product-html-mobile-preview-card group flex h-full min-w-0 flex-col overflow-hidden p-0">
@@ -71,13 +98,7 @@ export function ShopProductHtmlMobilePreviewCard({
             <WebsiteTemplateHtmlMobilePreviewFrame
               previewUrl={previewUrl}
               title={`${product.name} mobile preview`}
-              maxFrameHeight={
-                isCompact
-                  ? COMPACT_MOBILE_CARD_PREVIEW_MAX_HEIGHT
-                  : isCatalogWide
-                    ? MOBILE_CARD_PREVIEW_MAX_HEIGHT + 20
-                    : MOBILE_CARD_PREVIEW_MAX_HEIGHT
-              }
+              maxFrameHeight={mobileCardPreviewMaxHeight}
               showViewportLabel={false}
               iframeLoading={isEager ? "eager" : "lazy"}
               className="w-full max-w-full"
