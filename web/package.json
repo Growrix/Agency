@@ -9,7 +9,7 @@
     "dev": "node ./scripts/dev-server.mjs",
     "prebuild": "node ./scripts/optimize-preview-html.mjs && node ./scripts/check-preview-budgets.mjs",
     "build": "next build --webpack",
-    "build:vercel": "next build",
+    "build:vercel": "next build && node ./scripts/vercel-monorepo-finalizer-bridge.mjs",
     "start": "next start -p 5000 -H 0.0.0.0",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",

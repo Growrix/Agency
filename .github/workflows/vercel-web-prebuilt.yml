@@ -1,0 +1,69 @@
+name: Vercel Web Prebuilt Deploy
+
+# Fallback deploy path when Vercel Git Integration finalizer fails on rootDirectory=web.
+# Requires GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID (growrix project).
+# Enable by adding secrets, then push or workflow_dispatch.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - Desktop_version
+    paths:
+      - "web/**"
+      - ".github/workflows/vercel-web-prebuilt.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Skip until operator adds Vercel secrets (avoids noisy failures on every push).
+    if: ${{ secrets.VERCEL_TOKEN != '' }}
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install web dependencies
+        run: npm ci
+
+      - name: Run CI check bundle
+        run: npm run ci:check
+        env:
+          CI: true
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build prebuilt output
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy prebuilt archive
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            vercel deploy --prebuilt --archive=tgz --target=production --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - Complete_Execution
+      - Desktop_version
   pull_request:
 
 jobs:
