@@ -51,7 +51,7 @@ Full enumeration: `web/.env.example` + `@integration-platform` playbooks.
 
 **Known issue:** Git Integration can fail after a successful build with `ENOENT ... /vercel/path0/.next/routes-manifest-deterministic.json` while output lives under `web/.next`. Platform bug with Next.js 16 + Root Directory.
 
-**Tier 1 (Git Integration):** `npm run build:vercel` runs `next build` then [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) to symlink/copy `web/.next` → repo root `.next` on Vercel.
+**Tier 1 (Git Integration):** `npm run build:vercel` runs `next build` then [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) to symlink/copy `web/.next`, `web/public`, and `web/node_modules` to repo root on Vercel (finalizer path bug).
 
 **Tier 2 (fallback):** GitHub Actions prebuilt deploy — add repo secrets, set repository variable `VERCEL_PREBUILT_ENABLED=true`, then push or `workflow_dispatch`:
 

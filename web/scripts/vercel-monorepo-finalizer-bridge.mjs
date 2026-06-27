@@ -1,14 +1,16 @@
 /**
  * Vercel Git Integration finalizer workaround for monorepo Root Directory = web/.
  *
- * Next.js 16 post-build validation can look for manifests at /vercel/path0/.next/
- * while the app builds into /vercel/path0/web/.next/. This script mirrors the
- * app output (and node_modules) to the repository root when running on Vercel.
+ * Next.js 16 post-build validation can resolve paths from the repository root
+ * (/vercel/path0/) instead of the app root (/vercel/path0/web/), causing ENOENT
+ * for .next manifests, public assets, and node_modules.
  *
  * @see https://github.com/vercel/vercel/issues/15937
  */
 import fs from "node:fs";
 import path from "node:path";
+
+const BRIDGE_DIRECTORIES = [".next", "node_modules", "public"];
 
 const CRITICAL_NEXT_FILES = [
   "routes-manifest.json",
@@ -69,6 +71,18 @@ function copyCriticalFiles(sourceDir, targetDir) {
   return copied;
 }
 
+function bridgeDirectory(appRoot, repoRoot, directoryName) {
+  const source = path.join(appRoot, directoryName);
+  const target = path.join(repoRoot, directoryName);
+
+  if (!fs.existsSync(source)) {
+    log(`skip ${directoryName} bridge: source missing at ${source}`);
+    return;
+  }
+
+  symlinkDirectory(source, target);
+}
+
 function main() {
   if (process.env.VERCEL !== "1") {
     log("skip: VERCEL env not set");
@@ -79,8 +93,6 @@ function main() {
   const repoRoot = path.resolve(appRoot, "..");
   const appNext = path.join(appRoot, ".next");
   const repoNext = path.join(repoRoot, ".next");
-  const appNodeModules = path.join(appRoot, "node_modules");
-  const repoNodeModules = path.join(repoRoot, "node_modules");
 
   if (!fs.existsSync(appNext)) {
     console.error("[vercel-monorepo-bridge] error: .next missing after build");
@@ -90,18 +102,19 @@ function main() {
   log(`appRoot=${appRoot}`);
   log(`repoRoot=${repoRoot}`);
 
-  const symlinkedNext = symlinkDirectory(appNext, repoNext);
-  if (!symlinkedNext) {
-    const copied = copyCriticalFiles(appNext, repoNext);
-    log(`copied ${copied} manifest file(s) into ${repoNext}`);
-  } else {
-    copyCriticalFiles(appNext, repoNext);
-  }
+  for (const directoryName of BRIDGE_DIRECTORIES) {
+    if (directoryName === ".next") {
+      const symlinkedNext = symlinkDirectory(appNext, repoNext);
+      if (!symlinkedNext) {
+        const copied = copyCriticalFiles(appNext, repoNext);
+        log(`copied ${copied} manifest file(s) into ${repoNext}`);
+      } else {
+        copyCriticalFiles(appNext, repoNext);
+      }
+      continue;
+    }
 
-  if (fs.existsSync(appNodeModules)) {
-    symlinkDirectory(appNodeModules, repoNodeModules);
-  } else {
-    log("skip node_modules bridge: app node_modules missing");
+    bridgeDirectory(appRoot, repoRoot, directoryName);
   }
 
   log("bridge complete");

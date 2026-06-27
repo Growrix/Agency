@@ -466,7 +466,7 @@ Remaining parallel tracks:
 
 ### 2026-06-27 — Vercel growrix permanent deploy fix (Tier 1 + Tier 2 prep)
 - **Root cause (confirmed):** Vercel Git Integration finalizer looks for `/vercel/path0/.next/routes-manifest-deterministic.json` while app builds to `web/.next` — platform bug, not app compile failure ([vercel/vercel#15937](https://github.com/vercel/vercel/issues/15937)).
-- **Tier 1:** [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) symlinks/copies `web/.next` (+ `node_modules`) to repo root when `VERCEL=1`; wired into `build:vercel`.
+- **Tier 1:** [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) symlinks `web/.next`, `web/public`, and `web/node_modules` to repo root when `VERCEL=1`; wired into `build:vercel`.
 - **Tier 2:** [`.github/workflows/vercel-web-prebuilt.yml`](.github/workflows/vercel-web-prebuilt.yml) — prebuilt deploy fallback; gated on repo variable `VERCEL_PREBUILT_ENABLED=true` + secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
 - **Tier 3:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — added `Desktop_version` to push branches.
 - **Commits:** `a5dfa7c`, `8e6df59` on `Desktop_version` (pushed).
