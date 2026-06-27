@@ -463,3 +463,4 @@ Remaining parallel tracks:
   - Vercel mitigation: `build:vercel` script + `web/vercel.json` buildCommand.
 - **Validation:** `CI=true npm run ci:check` exit 0 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 8/8 including resource budget ≤30 and homepage pageerror gate).
 - **Remote:** GitHub Actions + Vercel growrix green pending push; prior local-only green claims corrected in Release Readiness Checklist.
+- **Commit:** `0b23186` on `Desktop_version`.
