@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
@@ -21,30 +21,13 @@ function DesktopNavDropdown({
   onOpenChange: (open: boolean) => void;
 }) {
   const menuId = useId();
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    const closeIfOutside = (event: PointerEvent) => {
-      const target = event.target;
-      if (!(target instanceof Node)) {
-        return;
-      }
-      if (rootRef.current?.contains(target)) {
-        return;
-      }
-      onOpenChange(false);
-    };
-
-    document.addEventListener("pointerdown", closeIfOutside, true);
-    return () => document.removeEventListener("pointerdown", closeIfOutside, true);
-  }, [isOpen, onOpenChange]);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => onOpenChange(true)}
+      onMouseLeave={() => onOpenChange(false)}
+    >
       <button
         type="button"
         className={cn(
@@ -54,28 +37,30 @@ function DesktopNavDropdown({
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-controls={menuId}
-        onClick={() => onOpenChange(!isOpen)}
+        onFocus={() => onOpenChange(true)}
       >
         {label}
         <ChevronDownIcon className="size-3.5" aria-hidden />
       </button>
       {isOpen ? (
-        <div
-          id={menuId}
-          role="menu"
-          className="absolute left-0 top-full z-50 mt-2 w-80 rounded-md border border-border bg-surface p-2 shadow-(--shadow-3)"
-        >
-          {items.map((child) => (
-            <Link
-              key={child.href}
-              href={child.href}
-              role="menuitem"
-              className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
-              onClick={() => onOpenChange(false)}
-            >
-              <div className="font-medium text-[15px]">{child.label}</div>
-            </Link>
-          ))}
+        <div className="absolute left-0 top-full z-50 w-80 pt-2">
+          <div
+            id={menuId}
+            role="menu"
+            className="rounded-md border border-border bg-surface p-2 shadow-(--shadow-3)"
+          >
+            {items.map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                role="menuitem"
+                className="block rounded-sm px-4 py-3 transition-colors hover:bg-inset"
+                onClick={() => onOpenChange(false)}
+              >
+                <div className="font-medium text-[15px]">{child.label}</div>
+              </Link>
+            ))}
+          </div>
         </div>
       ) : null}
     </div>
@@ -84,11 +69,12 @@ function DesktopNavDropdown({
 
 export function DesktopHeaderNav() {
   const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
-  useEffect(() => {
-    setOpenMenu(null);
-  }, [pathname]);
+  return <DesktopHeaderNavContent key={pathname} />;
+}
+
+function DesktopHeaderNavContent() {
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   useEffect(() => {
     if (!openMenu) {
@@ -121,7 +107,8 @@ export function DesktopHeaderNav() {
             key={item.label}
             href={item.href}
             className="px-3 py-2 text-sm font-medium transition-colors hover:text-primary"
-            onClick={() => setOpenMenu(null)}
+            onMouseEnter={() => setOpenMenu(null)}
+            onFocus={() => setOpenMenu(null)}
           >
             {item.label}
           </Link>
