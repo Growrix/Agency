@@ -431,13 +431,14 @@ Remaining parallel tracks:
 
 ## Release Readiness Checklist
 - [x] Local production build passes.
-- [ ] Vercel development deployment is verified on the live project (growrix: post-build `routes-manifest-deterministic.json` finalizer mitigated via `build:vercel`; remote green not yet confirmed).
+- [~] CI, tests, and release gates are passing locally (`CI=true npm run ci:check` exit 0 on 2026-06-27); GitHub Actions `lint-and-build` now triggers on `Desktop_version`; remote conclusion pending `gh auth login` or Actions UI on commit `8e6df59`.
+- [ ] Vercel growrix deploy verified Ready (Tier 1 monorepo finalizer bridge pushed in `a5dfa7c`/`8e6df59`; confirm in Vercel dashboard or enable Tier 2 prebuilt workflow).
 - [x] Contact form persists inquiries through a real API.
 - [x] Booking flow is connected to a real inquiry backend.
 - [x] Checkout is connected to a real order and payment backend.
 - [x] AI concierge and live chat have real server-backed behavior, with the concierge restricted to approved internal knowledge and explicit escalation when no grounded answer exists.
 - [~] Auth, RBAC, and admin management exist for protected flows. Clerk identity is wired when `CLERK_*` env vars are set; legacy JWT test harness remains for CI without Clerk keys.
-- [~] CI, tests, and release gates are passing locally (`CI=true npm run ci:check` exit 0 on 2026-06-27); remote GitHub Actions + Vercel growrix deploy verification pending push of fix commit.
+- [~] CI, tests, and release gates are passing locally (`CI=true npm run ci:check` exit 0 on 2026-06-27); GitHub Actions `lint-and-build` now triggers on `Desktop_version`; remote conclusion pending `gh auth login` or Actions UI on commit `8e6df59`.
 - [ ] Security and compliance controls are implemented beyond documentation.
 
 ## Tracker Maintenance Rule
@@ -462,5 +463,4 @@ Remaining parallel tracks:
   - Mobile hero overlay aligned to `WebsiteTemplateHtmlMobilePreviewFrame` + poster mode.
   - Vercel mitigation: `build:vercel` script + `web/vercel.json` buildCommand.
 - **Validation:** `CI=true npm run ci:check` exit 0 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 8/8 including resource budget ≤30 and homepage pageerror gate).
-- **Remote:** GitHub Actions + Vercel growrix green pending push; prior local-only green claims corrected in Release Readiness Checklist.
-- **Commit:** `0b23186` on `Desktop_version`.
+- **Remote:** Pushed `619ee2e..07eae13` to `origin/Desktop_version` on 2026-06-27. GitHub Actions + Vercel growrix conclusion pending dashboard check (`gh auth login` required locally for CLI polling).
