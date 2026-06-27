@@ -438,7 +438,6 @@ Remaining parallel tracks:
 - [x] Checkout is connected to a real order and payment backend.
 - [x] AI concierge and live chat have real server-backed behavior, with the concierge restricted to approved internal knowledge and explicit escalation when no grounded answer exists.
 - [~] Auth, RBAC, and admin management exist for protected flows. Clerk identity is wired when `CLERK_*` env vars are set; legacy JWT test harness remains for CI without Clerk keys.
-- [~] CI, tests, and release gates are passing locally (`CI=true npm run ci:check` exit 0 on 2026-06-27); GitHub Actions `lint-and-build` now triggers on `Desktop_version`; remote conclusion pending `gh auth login` or Actions UI on commit `8e6df59`.
 - [ ] Security and compliance controls are implemented beyond documentation.
 
 ## Tracker Maintenance Rule
@@ -464,3 +463,11 @@ Remaining parallel tracks:
   - Vercel mitigation: `build:vercel` script + `web/vercel.json` buildCommand.
 - **Validation:** `CI=true npm run ci:check` exit 0 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 8/8 including resource budget ≤30 and homepage pageerror gate).
 - **Remote:** Pushed `619ee2e..07eae13` to `origin/Desktop_version` on 2026-06-27. GitHub Actions + Vercel growrix conclusion pending dashboard check (`gh auth login` required locally for CLI polling).
+
+### 2026-06-27 — Vercel growrix permanent deploy fix (Tier 1 + Tier 2 prep)
+- **Root cause (confirmed):** Vercel Git Integration finalizer looks for `/vercel/path0/.next/routes-manifest-deterministic.json` while app builds to `web/.next` — platform bug, not app compile failure ([vercel/vercel#15937](https://github.com/vercel/vercel/issues/15937)).
+- **Tier 1:** [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) symlinks/copies `web/.next` (+ `node_modules`) to repo root when `VERCEL=1`; wired into `build:vercel`.
+- **Tier 2:** [`.github/workflows/vercel-web-prebuilt.yml`](.github/workflows/vercel-web-prebuilt.yml) — prebuilt deploy fallback; gated on repo variable `VERCEL_PREBUILT_ENABLED=true` + secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+- **Tier 3:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — added `Desktop_version` to push branches.
+- **Commits:** `a5dfa7c`, `8e6df59` on `Desktop_version` (pushed).
+- **Remote verification:** local pass only — `gh auth login` or `GH_TOKEN` required for Actions polling; Vercel growrix deploy Ready status pending dashboard check on `8e6df59`.
