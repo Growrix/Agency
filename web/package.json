@@ -16,7 +16,7 @@
     "health:check": "npm run lint && npm run typecheck && npm run perf:budgets && npm run test && npm run build && npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome",
     "ci:check": "npm run lint && npm run typecheck && npm run perf:budgets && npm run test && npm run build && npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome",
     "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "tsx --test src/server/auth/users.test.ts src/server/domain/catalog.test.ts src/server/domain/orders.test.ts src/server/domain/leads.test.ts src/server/ai/knowledge.test.ts",
+    "test:unit": "tsx --test src/server/auth/users.test.ts src/server/auth/clerk-sync.test.ts src/server/domain/catalog.test.ts src/server/domain/orders.test.ts src/server/domain/leads.test.ts src/server/ai/knowledge.test.ts",
     "test:integration": "tsx --test tests/integration/api-flows.test.ts",
     "test:e2e": "playwright test",
     "test:release": "npm run test && npm run build && npm run test:e2e",
@@ -27,7 +27,12 @@
     "cms:import:inbox:dry": "node ./scripts/import-cms-content.mjs --dry-run",
     "cms:fix-array-keys": "node ./scripts/fix-sanity-array-keys.mjs",
     "cms:fix-array-keys:dry": "node ./scripts/fix-sanity-array-keys.mjs --dry-run",
-    "db:migrate": "node ./scripts/migrate-supabase.mjs"
+    "db:migrate": "node ./scripts/migrate-supabase.mjs",
+    "clerk:login": "clerk auth login",
+    "clerk:link": "clerk link --app app_3FlyfqLmY1Bp3okOLCmbtF8rTlQ",
+    "clerk:env": "clerk env pull --app app_3FlyfqLmY1Bp3okOLCmbtF8rTlQ",
+    "clerk:doctor": "clerk doctor",
+    "clerk:setup": "npm run clerk:link && npm run clerk:env && npm run clerk:doctor"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.11.0",
@@ -63,6 +68,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.185.0",
+    "clerk": "^1.5.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "pg": "^8.20.0",

@@ -5,7 +5,7 @@ import { isClerkConfigured } from "@/server/auth/clerk-config";
 import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/auth/token";
 
 const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
-const loginPrefixes = ["/admin/login", "/dashboard/login"];
+const loginPrefixes = ["/admin/login", "/dashboard/login", "/sign-in", "/sign-up"];
 
 function businessProfileRewrite(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -98,5 +98,6 @@ export const config = {
     "/business-profile",
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
     "/(api|trpc)(.*)",
+    "/__clerk/:path*",
   ],
 };

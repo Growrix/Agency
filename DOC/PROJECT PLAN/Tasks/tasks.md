@@ -429,6 +429,13 @@ Remaining parallel tracks:
 - [x] T067 Remove Supabase Auth branches from `web/src/server/auth/users.ts`; update unit/integration tests and extend release gates for Clerk auth protection.
 - [x] T068 Run full `npm run health:check` with zero gate failures after Clerk migration slices complete.
 
+#### P11 follow-up — Public buyer auth UX (2026-06-29)
+- [x] T069 Wire Clerk CLI project link (`web/.clerk/config.json`, `clerk` devDependency, `npm run clerk:*` scripts, `web/docs/clerk-setup.md`); reconcile with existing P11 proxy/provider/webhook — do not run `clerk init`.
+- [x] T070 Add `'/__clerk/:path*'` proxy matcher; public `/sign-in` and `/sign-up` routes; `/dashboard/login` redirect alias; update `.env.example` Clerk sign-in/up URLs.
+- [x] T071 Replace header Book Appointment CTAs with `PublicAuthControls` (Sign In / Sign Up / UserButton) in `Header.tsx` + `HeaderMobileNav.tsx` only; legacy fallback when Clerk keys absent.
+- [x] T072 Add `clerk-sync.test.ts` email-match id preservation unit test.
+- [~] T073 Operator: complete `npm run clerk:login` OAuth, then `npm run clerk:env` + `npm run clerk:doctor`; register production webhook in Clerk Dashboard. Manual sign-up smoke pending populated `CLERK_*` keys.
+
 ## Release Readiness Checklist
 - [x] Local production build passes.
 - [~] CI, tests, and release gates are passing locally (`CI=true npm run ci:check` exit 0 on 2026-06-27); GitHub Actions `lint-and-build` now triggers on `Desktop_version`; remote conclusion pending `gh auth login` or Actions UI on commit `8e6df59`.
@@ -437,7 +444,7 @@ Remaining parallel tracks:
 - [x] Booking flow is connected to a real inquiry backend.
 - [x] Checkout is connected to a real order and payment backend.
 - [x] AI concierge and live chat have real server-backed behavior, with the concierge restricted to approved internal knowledge and explicit escalation when no grounded answer exists.
-- [~] Auth, RBAC, and admin management exist for protected flows. Clerk identity is wired when `CLERK_*` env vars are set; legacy JWT test harness remains for CI without Clerk keys.
+- [~] Auth, RBAC, and admin management exist for protected flows. Clerk identity is wired when `CLERK_*` env vars are set; public `/sign-in` + `/sign-up` and header Sign In/Sign Up ship in P11 follow-up; legacy JWT test harness remains for CI without Clerk keys.
 - [ ] Security and compliance controls are implemented beyond documentation.
 
 ## Tracker Maintenance Rule
@@ -479,3 +486,9 @@ Remaining parallel tracks:
 - **Tier 3:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — added `Desktop_version` to push branches.
 - **Commits:** `a5dfa7c`, `8e6df59` on `Desktop_version` (pushed).
 - **Remote verification:** local pass only — `gh auth login` or `GH_TOKEN` required for Actions polling; Vercel growrix deploy Ready status pending dashboard check on `8e6df59`.
+
+### 2026-06-29 — P11 public buyer auth UX (Clerk header + routes)
+- **Scope:** Public `/sign-in` and `/sign-up`, header Sign In/Sign Up replacing Book Appointment in header chrome only, proxy `'/__clerk/:path*'`, Clerk CLI project link for `app_3FlyfqLmY1Bp3okOLCmbtF8rTlQ`, `clerk-sync` email-match unit test.
+- **Code:** `PublicAuthControls.tsx`, `ClerkAuthShell.tsx`, `SignInExperience.tsx`, `SignUpExperience.tsx`, `web/.clerk/config.json`, `web/docs/clerk-setup.md`, `npm run clerk:*` scripts.
+- **Operator pending:** `npm run clerk:login` (OAuth) → `npm run clerk:env` → `npm run clerk:doctor`; production webhook at `/api/webhooks/clerk`.
+- **Validation:** lint 0, typecheck 0, unit 30/30, integration 5/5, `next build` exit 0 (194 SSG routes incl. `/sign-in`, `/sign-up`), release-gates e2e 8/8 desktop-chrome.

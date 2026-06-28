@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { LinkButton } from "@/components/primitives/Button";
+import { PublicAuthControls } from "@/components/shell/PublicAuthControls";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import {
   MOBILE_NAV_LEGAL_LINKS,
@@ -147,9 +147,7 @@ export function HeaderMobileNav({ onClose, onOpenConcierge }: HeaderMobileNavPro
       </div>
 
       <div className="site-mobile-nav__cta">
-        <LinkButton href="/book-appointment" fullWidth onClick={onClose}>
-          Book Appointment
-        </LinkButton>
+        <PublicAuthControls variant="mobileNav" onNavigate={onClose} />
       </div>
     </nav>
   );

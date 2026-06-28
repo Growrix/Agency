@@ -7,14 +7,13 @@ import {
   Bars3Icon,
   XMarkIcon,
   ShoppingBagIcon,
-  CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
-import { LinkButton } from "@/components/primitives/Button";
-import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { DesktopHeaderNav } from "@/components/shell/DesktopHeaderNav";
+import { PublicAuthControls } from "@/components/shell/PublicAuthControls";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { HeaderMobileNav } from "@/components/shell/HeaderMobileNav";
+import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
 
@@ -108,17 +107,7 @@ export function Header({
           </Link>
           <ThemeToggleButton className="lg:hidden" />
           <ThemeToggle className="hidden lg:inline-flex" />
-          <Link
-            href="/book-appointment"
-            className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
-            aria-label="Book appointment"
-            title="Book appointment"
-          >
-            <CalendarDaysIcon className="size-5" aria-hidden />
-          </Link>
-          <LinkButton href="/book-appointment" size="sm" className="ml-1 hidden lg:inline-flex">
-            Book Appointment
-          </LinkButton>
+          <PublicAuthControls />
           <button
             type="button"
             className="inline-flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-inset lg:hidden"
