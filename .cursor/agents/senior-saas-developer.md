@@ -31,10 +31,12 @@ Append session audit log per `session-audit-log.md` in the skill bundle.
 
 When fixing CI, push, merge, or Vercel deploy:
 
-1. Read `.github/workflows/ci.yml` and run `npm run ci:check` from `web/` — **not** a narrower substitute.
-2. After push: verify GitHub Actions `conclusion: success` on the commit SHA before claiming fixed.
-3. Never report "CI green" from local `health:check` alone if it differs from the workflow.
-4. Full protocol: skill bundle `ci-parity-verification.md` + QG9 in `quality-gates.md`.
+1. Read `DOC/PROJECT PLAN/Tasks/tasks.md` Session Audit Log for prior hero/CI failures before changing hero or claiming fixed
+2. Read `.github/workflows/ci.yml` and run `npm run ci:check --prefix web` from repo root — **not** a narrower substitute
+3. **STOP — do not push** if `ci:check` failed, was interrupted, or only lint/typecheck/e2e-subset ran
+4. After push: verify GitHub Actions `conclusion: success` on the commit SHA before claiming fixed
+5. Never report "CI green" from local `health:check` alone if it differs from the workflow
+6. Full protocol: skill bundle `ci-parity-verification.md` + QG9 in `quality-gates.md` + rule `51-web-production-gates.mdc`
 
 ## Modes
 

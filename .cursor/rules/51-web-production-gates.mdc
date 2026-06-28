@@ -1,0 +1,55 @@
+---
+description: Mandatory production gates for the Growrix OS web app — homepage hero invariants, CI parity before push, and release-gate requirements for homepage changes
+globs: web/**/*
+alwaysApply: false
+---
+
+# Web Production Gates (`web/`)
+
+Applies to all work under `web/`. Complements rule `60-zero-gate-health-check.mdc` and `71-git-discipline.mdc`.
+
+## Homepage hero invariants (Next.js 16)
+
+- **Exactly one** `"use client"` hero module: [`web/src/components/marketing/HomeHero.tsx`](web/src/components/marketing/HomeHero.tsx)
+- It owns `Section`, motion root, viewport gate, and mobile/desktop variants
+- **Never** split into server `HomeHero` + client `HomeHeroMotionShell` (or similar) — causes undefined lazy-element crashes
+- **Never** import from `@/components/marketing/hero-motion` barrel — import source files only (ESLint enforced)
+- **Never** add `"use client"` files that only re-export another hero module
+
+## Before push (mandatory when user requests push)
+
+From **repository root**:
+
+```bash
+npm run ci:check --prefix web
+```
+
+Or: `./web/scripts/verify-ci-parity.ps1`
+
+- Exit code **must be 0** — matches [`.github/workflows/ci.yml`](.github/workflows/ci.yml) `lint-and-build` job
+- **Do not push** if a background `ci:check` failed, was interrupted, or only partial checks ran (lint/typecheck/e2e subset)
+- **Do not claim CI green** without GitHub Actions evidence on the pushed SHA (or state *local pass only — remote unverified*)
+
+## Homepage-touching changes — required release gates
+
+After any edit to hero, homepage layout, `page.tsx`, or homepage performance deferrals, the following must pass (included in `ci:check`):
+
+1. `homepage renders without client runtime errors` — zero `pageerror`, `.hero-section` visible
+2. `homepage resource budget stays within performance guardrails` — ≤ 30 resources at `domcontentloaded`
+
+Read [`DOC/PROJECT PLAN/Tasks/tasks.md`](DOC/PROJECT PLAN/Tasks/tasks.md) Session Audit Log before hero or CI work — prior failures are documented there.
+
+## Known CI failure modes
+
+| Symptom | Gate / step | Typical fix |
+|---------|-------------|-------------|
+| Lazy element undefined at HomeHero | pageerror e2e | Single client `HomeHero.tsx`; no server-shell split |
+| SSG `took more than N seconds` | `npm run build` | Raise `staticPageGenerationTimeout` in `next.config.ts`; avoid build-time Sanity thrashing |
+| Resource count 31–39 | resource budget e2e | Defer SpeedInsights until `load`; below-fold `dynamic(..., { ssr: false })`; poster-first hero |
+| ESLint in ~1–2 min | `npm run lint` | Fix reported file; run full `ci:check`, not lint alone |
+
+## Session start checklist (web/ CI or hero work)
+
+1. Read `memories/repo/site-brain.md` → CI and pre-push parity
+2. Read latest Session Audit Log in `DOC/PROJECT PLAN/Tasks/tasks.md`
+3. Run full `ci:check --prefix web` before push — never substitute partial runs

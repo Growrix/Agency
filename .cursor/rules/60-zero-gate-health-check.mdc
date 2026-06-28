@@ -66,4 +66,6 @@ npm run health:check
 1. Re-run **`npm run ci:check --prefix web`** from repository root if any `web/` file changed (CI parity — see rule `71-git-discipline.mdc` and `/pre-push-check`).
 2. Confirm `git status` has no accidental `.next/`, `.cursor/tmp-*`, or secret files staged.
 
-Mid-phase work may use narrow lint/typecheck only; **push never skips full `ci:check`.**
+Mid-phase work may use narrow lint/typecheck only; **push never skips full `ci:check`**.
+
+**Never push** when a background or prior `ci:check` run exited non-zero or was interrupted — re-run `./web/scripts/verify-ci-parity.ps1` until exit 0.

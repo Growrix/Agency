@@ -48,6 +48,28 @@ Shortcut: `npm run health:check` (runs the full sequence above).
 
 The homepage hero is a single `"use client"` module ([`HomeHero.tsx`](src/components/marketing/HomeHero.tsx)) that owns `Section`, motion, viewport gates, and mobile/desktop variants. Import hero-motion symbols from their source files — never from a barrel `index.ts`. Avoid `"use client"` files that only re-export another module's symbols.
 
+**Never** re-introduce `HomeHeroMotionShell` or a server-shell + client-leaf hero split — ESLint blocks imports of the removed module.
+
+## Pre-push checklist (when user requests push)
+
+From repository root (matches GitHub Actions exactly):
+
+```bash
+npm run ci:check --prefix web
+```
+
+Or `./web/scripts/verify-ci-parity.ps1`. Exit code **0** required. Do not push after partial checks or a failed/interrupted background `ci:check`.
+
+## Known CI failure modes
+
+| Failure | Where it surfaces | Mitigation |
+|---------|-------------------|------------|
+| Undefined lazy element at hero | release-gates: homepage client runtime errors | Keep single client `HomeHero.tsx` |
+| SSG page timeout | `npm run build` during ci:check | `staticPageGenerationTimeout` in `next.config.ts` |
+| Homepage resource count > 30 | release-gates: resource budget | Defer SpeedInsights until `load`; below-fold dynamic `ssr: false`; poster-first hero showcase |
+
+See also [`.cursor/rules/51-web-production-gates.mdc`](../.cursor/rules/51-web-production-gates.mdc).
+
 ## Spell-check
 
 Project terms (Growrix, GrowrixOS, Supabase, TTFB, domcontentloaded, etc.) live in root `cspell.json`. Add new brand/API terms there instead of inline suppressions.

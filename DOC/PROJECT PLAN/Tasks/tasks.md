@@ -464,6 +464,14 @@ Remaining parallel tracks:
 - **Validation:** `CI=true npm run ci:check` exit 0 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 8/8 including resource budget ≤30 and homepage pageerror gate).
 - **Remote:** Pushed `619ee2e..07eae13` to `origin/Desktop_version` on 2026-06-27. GitHub Actions + Vercel growrix conclusion pending dashboard check (`gh auth login` required locally for CLI polling).
 
+### 2026-06-28 — CI failure RCA + agent validation hardening (debug_failure + REPAIR)
+- **PR #84 / `1afddb4` agent failure:** Pushed after partial validation (background `ci:check` failed on SSG timeout; only e2e subset passed locally). Violated rules `71-git-discipline`, `60-zero-gate`, `pre-push-check`.
+- **GitHub failure class (prior run 28282781756):** release-gates resource budget 37–39 > 30 at `domcontentloaded` — not lint/build.
+- **Local repro (2026-06-28):** Full `ci:check` failed build when many SSG routes exceeded 120s under 7 workers (Bucket C); standalone build + release-gates 8/8 passed when run separately.
+- **Code fixes:** `staticPageGenerationTimeout` 180; `DeferredSpeedInsights` mounts after `window` load (resource budget); hero remains single client `HomeHero.tsx`.
+- **Agent fixes:** Added `.cursor/rules/51-web-production-gates.mdc`; strengthened `AGENTS.md`, `site-brain.md`, `senior-saas-developer.md`, `60-zero-gate`; ESLint ban on `HomeHeroMotionShell`; `verify-ci-parity.ps1` sets `CI=true`.
+- **Mandatory before push:** `npm run ci:check --prefix web` exit 0 from repo root — no partial checks, no push on interrupted background runs.
+
 ### 2026-06-27 — Vercel growrix permanent deploy fix (Tier 1 + Tier 2 prep)
 - **Root cause (confirmed):** Vercel Git Integration finalizer looks for `/vercel/path0/.next/routes-manifest-deterministic.json` while app builds to `web/.next` — platform bug, not app compile failure ([vercel/vercel#15937](https://github.com/vercel/vercel/issues/15937)).
 - **Tier 1:** [`web/scripts/vercel-monorepo-finalizer-bridge.mjs`](web/scripts/vercel-monorepo-finalizer-bridge.mjs) symlinks `web/.next`, `web/public`, and `web/node_modules` to repo root when `VERCEL=1`; wired into `build:vercel`.

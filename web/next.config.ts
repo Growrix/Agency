@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   /** Heavy marketing routes (Sanity + large client trees) exceed the 60s default during CI SSG. */
-  staticPageGenerationTimeout: 120,
+  staticPageGenerationTimeout: 180,
   outputFileTracingRoot: path.join(__dirname),
   images: {
     formats: ["image/avif", "image/webp"],

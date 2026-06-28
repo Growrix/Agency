@@ -7,6 +7,7 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "../..")
 Push-Location $repoRoot
 
 try {
+    $env:CI = "true"
     Write-Host "Running CI parity bundle (npm run ci:check --prefix web)..." -ForegroundColor Cyan
     npm run ci:check --prefix web
     if ($LASTEXITCODE -ne 0) {

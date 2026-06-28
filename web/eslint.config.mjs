@@ -17,6 +17,11 @@ const eslintConfig = defineConfig([
               message:
                 "Import hero-motion modules from their source files (e.g. @/components/marketing/hero-motion/HomeHeroCtaMotion). Barrel re-exports break Next.js 16 client boundaries.",
             },
+            {
+              name: "@/components/marketing/HomeHeroMotionShell",
+              message:
+                "HomeHeroMotionShell was removed. Use the single client module HomeHero.tsx — never split hero into server-shell + client-leaf.",
+            },
           ],
         },
       ],

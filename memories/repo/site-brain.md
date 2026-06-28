@@ -169,7 +169,15 @@ Auth note: Clerk is the managed identity provider; Supabase is PostgreSQL persis
 - Local push gate (mandatory before push): same command from repo root — `/pre-push-check` or `web/scripts/verify-ci-parity.ps1`
 - `health:check` from `web/` cwd is equivalent to `ci:check` bundle but push verification must use `--prefix web` from root to mirror CI
 - Common CI failure: ESLint (`npm run lint`) — runs first, fails in ~1 min (e.g. `react-hooks/set-state-in-effect`)
+- **Homepage hero edits:** must pass release-gates `homepage renders without client runtime errors` AND `homepage resource budget stays within performance guardrails` — see `DOC/PROJECT PLAN/Tasks/tasks.md` Session Audit Log
 - Remote verify: `gh` at `C:\Program Files\GitHub CLI\gh.exe` (Windows); requires `gh auth login` once
+
+## Homepage hero invariants
+
+- Single `"use client"` module: `web/src/components/marketing/HomeHero.tsx` — owns Section, motion, viewport gate, variants
+- **Forbidden:** server `HomeHero` + client `HomeHeroMotionShell` split (Next.js 16 undefined lazy-element crash loop)
+- **Forbidden:** `@/components/marketing/hero-motion` barrel imports (ESLint enforced)
+- Resource budget flake after hero changes: defer SpeedInsights until `window` load; below-fold sections use `dynamic(..., { ssr: false })` in `HomeBelowFoldSections.tsx`
 
 ## Future Update Checklist
 
