@@ -363,8 +363,8 @@ body {
   --home-hero-mobile-trust-gap: 0.375rem;
   --home-hero-mobile-logo-opacity: 0.7;
   --home-hero-mobile-logo-max-height: 1rem;
-  --home-hero-stack-logo-opacity: 0.88;
-  --home-hero-stack-logo-max-height: 1.5rem;
+  --home-hero-stack-logo-opacity: 1;
+  --home-hero-stack-logo-max-height: 1.625rem;
   --home-hero-stack-logo-max-width: 4.5rem;
   --home-hero-stack-logo-gap: 0.5rem 0.625rem;
   --home-hero-mobile-showcase-min-height: 15.5rem;
@@ -703,29 +703,37 @@ body {
 .home-hero-stack-logos__image {
   display: block;
   width: auto;
-  height: auto;
-  max-height: var(--home-hero-stack-logo-max-height);
+  height: var(--home-hero-stack-logo-max-height);
   max-width: var(--home-hero-stack-logo-max-width);
   object-fit: contain;
   opacity: var(--home-hero-stack-logo-opacity);
-  filter: grayscale(1);
-  transition:
-    opacity 180ms ease,
-    filter 180ms ease;
+  filter: none;
+  transition: filter 180ms ease;
+}
+
+.home-hero-stack-logos__image--mobile {
+  height: var(--home-hero-mobile-logo-max-height);
+  max-width: 3.5rem;
 }
 
 [data-theme="dark"] .home-hero-stack-logos__image {
-  filter: grayscale(1) brightness(0) invert(1);
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="light"] .home-hero-stack-logos__image {
+  filter: grayscale(1);
+  opacity: 0.9;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .home-hero-stack-logos__item:hover .home-hero-stack-logos__image {
-    opacity: 1;
+  [data-theme="light"] .home-hero-stack-logos__item:hover .home-hero-stack-logos__image {
     filter: grayscale(0);
+    opacity: 1;
   }
 
   [data-theme="dark"] .home-hero-stack-logos__item:hover .home-hero-stack-logos__image {
-    filter: grayscale(0) brightness(0) invert(1);
+    filter: brightness(0) invert(1);
+    opacity: 1;
   }
 }
 
@@ -1069,7 +1077,7 @@ body {
   }
 
   .home-hero-trust-panel--desktop {
-    --home-hero-stack-logo-max-height: 1.5rem;
+    --home-hero-stack-logo-max-height: 1.625rem;
     --home-hero-stack-logo-max-width: 4.5rem;
     --home-hero-stack-logo-gap: 0.5rem 0.75rem;
   }

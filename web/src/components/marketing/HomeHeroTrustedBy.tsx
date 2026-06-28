@@ -70,7 +70,7 @@ export function HomeHeroTrustedBy({ className, variant = "desktop", animated = f
         ) : (
           <p className="home-hero-trust-panel__tech-label">{HOME_HERO_TECH_STACK.label}</p>
         )}
-        <HomeHeroStackLogos animated={animated} className="mt-3" />
+        <HomeHeroStackLogos animated={animated} variant={variant} className="mt-3" />
       </div>
     </div>
   );

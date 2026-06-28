@@ -15,7 +15,7 @@ export function HomeHeroTrustedByLogos({ className }: HomeHeroTrustedByLogosProp
         <p className={HERO_MOBILE_EYEBROW_CLASS}>{HOME_HERO_TECH_STACK.label}</p>
         <span className="home-hero-mobile__trust-divider" aria-hidden />
       </div>
-      <HomeHeroStackLogos className="mt-3" />
+      <HomeHeroStackLogos variant="mobile" className="mt-3" />
     </div>
   );
 }

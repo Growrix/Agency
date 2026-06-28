@@ -7,9 +7,16 @@ import { cn } from "@/lib/utils";
 type HomeHeroStackLogosProps = {
   animated?: boolean;
   className?: string;
+  variant?: "desktop" | "mobile";
 };
 
-export function HomeHeroStackLogos({ animated = false, className }: HomeHeroStackLogosProps) {
+export function HomeHeroStackLogos({
+  animated = false,
+  className,
+  variant = "desktop",
+}: HomeHeroStackLogosProps) {
+  const isMobile = variant === "mobile";
+
   return (
     <ul className={cn("home-hero-stack-logos", className)} aria-label={HOME_HERO_TECH_STACK.label}>
       {HOME_HERO_STACK_LOGOS.map((logo, index) => {
@@ -20,9 +27,13 @@ export function HomeHeroStackLogos({ animated = false, className }: HomeHeroStac
             alt={logo.name}
             width={logo.width}
             height={logo.height}
-            className="home-hero-stack-logos__image"
-            loading="lazy"
+            className={cn(
+              "home-hero-stack-logos__image",
+              isMobile && "home-hero-stack-logos__image--mobile",
+            )}
+            loading="eager"
             decoding="async"
+            fetchPriority="high"
           />
         );
 

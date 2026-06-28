@@ -27,7 +27,7 @@ export function HomeHeroTrustMotion({ children, className, delay = 0 }: HomeHero
       className={className}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.5 + delay / 1000, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: 0.6 + delay / 1000, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
@@ -84,11 +84,10 @@ export function HomeHeroTrustLogoMotion({
   return (
     <motion.li
       className={`hero-trust-logo ${className ?? ""}`}
-      initial={{ opacity: 0.82, y: 6 }}
-      animate={{ opacity: [0.82, 1, 0.82], y: 0 }}
+      initial={{ opacity: 1, y: 6 }}
+      animate={{ y: 0 }}
       transition={{
-        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.12 + 0.35 },
-        y: { duration: 0.45, delay: index * 0.08 + 0.35, ease: [0.22, 1, 0.36, 1] },
+        y: { duration: 0.45, delay: index * 0.08 + 0.2, ease: [0.22, 1, 0.36, 1] },
       }}
     >
       {children}
