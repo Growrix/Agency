@@ -363,9 +363,9 @@ body {
   --home-hero-mobile-trust-gap: 0.375rem;
   --home-hero-mobile-logo-opacity: 0.7;
   --home-hero-mobile-logo-max-height: 1rem;
-  --home-hero-stack-logo-opacity: 0.82;
-  --home-hero-stack-logo-max-height: 1.25rem;
-  --home-hero-stack-logo-max-width: 3.75rem;
+  --home-hero-stack-logo-opacity: 0.88;
+  --home-hero-stack-logo-max-height: 1.5rem;
+  --home-hero-stack-logo-max-width: 4.5rem;
   --home-hero-stack-logo-gap: 0.5rem 0.625rem;
   --home-hero-mobile-showcase-min-height: 15.5rem;
   --home-hero-mobile-phone-width: 35%;
@@ -701,6 +701,7 @@ body {
 }
 
 .home-hero-stack-logos__image {
+  display: block;
   width: auto;
   height: auto;
   max-height: var(--home-hero-stack-logo-max-height);
@@ -713,10 +714,18 @@ body {
     filter 180ms ease;
 }
 
+[data-theme="dark"] .home-hero-stack-logos__image {
+  filter: grayscale(1) brightness(0) invert(1);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .home-hero-stack-logos__item:hover .home-hero-stack-logos__image {
     opacity: 1;
     filter: grayscale(0);
+  }
+
+  [data-theme="dark"] .home-hero-stack-logos__item:hover .home-hero-stack-logos__image {
+    filter: grayscale(0) brightness(0) invert(1);
   }
 }
 
@@ -1060,8 +1069,8 @@ body {
   }
 
   .home-hero-trust-panel--desktop {
-    --home-hero-stack-logo-max-height: 1.375rem;
-    --home-hero-stack-logo-max-width: 4rem;
+    --home-hero-stack-logo-max-height: 1.5rem;
+    --home-hero-stack-logo-max-width: 4.5rem;
     --home-hero-stack-logo-gap: 0.5rem 0.75rem;
   }
 

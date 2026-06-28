@@ -39,12 +39,12 @@ export const HOME_HERO_SOCIAL_PROOF = {
 
 /** SVG stack logos shown in the homepage hero trust panel. */
 export const HOME_HERO_STACK_LOGOS = [
-  { name: "FastAPI", src: "/images/logos/logo%20library-512/svg/FastAPI.svg", width: 28, height: 28 },
-  { name: "Next.js", src: "/images/logos/logo%20library-512/svg/Next.js.svg", width: 28, height: 28 },
-  { name: "Python", src: "/images/logos/logo%20library-512/svg/Python.svg", width: 28, height: 28 },
-  { name: "React", src: "/images/logos/logo%20library-512/svg/React.svg", width: 28, height: 28 },
-  { name: "TypeScript", src: "/images/logos/logo%20library-512/svg/TypeScript.svg", width: 28, height: 28 },
-  { name: "Django", src: "/images/logos/logo%20library-512/svg/Django.svg", width: 28, height: 28 },
+  { name: "FastAPI", src: "/images/logos/stacks/FastAPI.svg", width: 28, height: 28 },
+  { name: "Next.js", src: "/images/logos/stacks/Next.js.svg", width: 28, height: 28 },
+  { name: "Python", src: "/images/logos/stacks/Python.svg", width: 28, height: 28 },
+  { name: "React", src: "/images/logos/stacks/React.svg", width: 28, height: 28 },
+  { name: "TypeScript", src: "/images/logos/stacks/TypeScript.svg", width: 28, height: 28 },
+  { name: "Django", src: "/images/logos/stacks/Django.svg", width: 28, height: 28 },
 ] as const;
 
 export const HOME_HERO_TECH_STACK = {

@@ -84,11 +84,11 @@ export function HomeHeroTrustLogoMotion({
   return (
     <motion.li
       className={`hero-trust-logo ${className ?? ""}`}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: [0.72, 0.9, 0.72], y: 0 }}
+      initial={{ opacity: 0.82, y: 6 }}
+      animate={{ opacity: [0.82, 1, 0.82], y: 0 }}
       transition={{
-        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.15 + 1.6 },
-        y: { duration: 0.55, delay: index * 0.1 + 1.6, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.12 + 0.35 },
+        y: { duration: 0.45, delay: index * 0.08 + 0.35, ease: [0.22, 1, 0.36, 1] },
       }}
     >
       {children}
