@@ -43,7 +43,7 @@ export function HomeHeroMobile({
     <div className="home-hero-mobile w-full">
       <section className="home-hero-mobile__intro" aria-label="Growrix OS hero">
         <div className="home-hero-mobile__copy">
-          <HomeHeroMotionReveal delay={0} className="home-hero-mobile__badge-wrap">
+          <HomeHeroMotionReveal phase="badge" className="home-hero-mobile__badge-wrap">
             <Badge tone="primary" dot className="home-hero-mobile__badge">
               {badge}
             </Badge>
@@ -96,7 +96,7 @@ export function HomeHeroMobile({
           </HomeHeroCtaStackMotion>
         </div>
 
-        <HomeHeroTrustMotion delay={320} className="home-hero-mobile__trust">
+        <HomeHeroTrustMotion className="home-hero-mobile__trust">
           <HomeHeroTrustedBy variant="mobile" animated />
         </HomeHeroTrustMotion>
       </section>
@@ -111,7 +111,7 @@ export function HomeHeroMobile({
           />
         </HomeHeroShowcaseMotion>
 
-        <HomeHeroMotionReveal delay={480} className="home-hero-mobile__features-wrap">
+        <HomeHeroMotionReveal phase="features" className="home-hero-mobile__features-wrap">
           <HomeHeroMobileFeatures />
         </HomeHeroMotionReveal>
       </section>

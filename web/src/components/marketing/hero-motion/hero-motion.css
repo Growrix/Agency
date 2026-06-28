@@ -255,8 +255,22 @@
 
 .hero-kinetic-char {
   display: inline-block;
-  opacity: 1;
   will-change: transform, opacity;
+}
+
+.hero-kinetic-headline--animated .hero-kinetic-char {
+  opacity: 0;
+  transform: translateY(12px) rotate(-4deg) scale(0.9);
+}
+
+.hero-kinetic-headline--animated .hero-kinetic-accent {
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+}
+
+.hero-copy-pending {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .hero-kinetic-word--glow::after {

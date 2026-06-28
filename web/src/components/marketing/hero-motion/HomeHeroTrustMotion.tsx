@@ -2,32 +2,31 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useHeroCopyReveal } from "./hooks/useHeroCopyReveal";
 import { useHeroMotionOptional } from "./HeroMotionContext";
+
+const EASE_SIGNAL = [0.22, 1, 0.36, 1] as const;
 
 type HomeHeroTrustMotionProps = {
   children: ReactNode;
   className?: string;
-  delay?: number;
 };
 
-export function HomeHeroTrustMotion({ children, className, delay = 0 }: HomeHeroTrustMotionProps) {
+export function HomeHeroTrustMotion({ children, className }: HomeHeroTrustMotionProps) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal("trust");
 
   if (reduced || motionCtx?.tier === "reduced") {
-    return (
-      <div className={`signal-rise ${className ?? ""}`} style={{ animationDelay: `${delay}ms` }}>
-        {children}
-      </div>
-    );
+    return <div className={className}>{children}</div>;
   }
 
   return (
     <motion.div
-      className={className}
+      className={[className, reveal.pendingClassName].filter(Boolean).join(" ")}
       initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6 + delay / 1000, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      animate={reveal.animate ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ delay: reveal.delay, duration: reveal.duration, ease: EASE_SIGNAL }}
     >
       {children}
     </motion.div>
@@ -45,6 +44,7 @@ export function HomeHeroTrustNameMotion({
 }) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal("trust", { staggerIndex: index + 1 });
 
   if (reduced || motionCtx?.tier === "reduced") {
     return <li className={className}>{name}</li>;
@@ -54,10 +54,14 @@ export function HomeHeroTrustNameMotion({
     <motion.li
       className={`hero-trust-name ${className ?? ""}`}
       initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: [0.7, 0.85, 0.7], y: 0 }}
+      animate={
+        reveal.animate
+          ? { opacity: [0.7, 0.85, 0.7], y: 0 }
+          : { opacity: 0, y: 10 }
+      }
       transition={{
-        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.15 + 1.6 },
-        y: { duration: 0.55, delay: index * 0.1 + 1.6, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: reveal.delay + 0.4 },
+        y: { duration: 0.55, delay: reveal.delay, ease: EASE_SIGNAL },
       }}
     >
       {name}
@@ -76,6 +80,7 @@ export function HomeHeroTrustLogoMotion({
 }) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal("trust", { staggerIndex: index + 1 });
 
   if (reduced || motionCtx?.tier === "reduced") {
     return <li className={className}>{children}</li>;
@@ -84,10 +89,11 @@ export function HomeHeroTrustLogoMotion({
   return (
     <motion.li
       className={`hero-trust-logo ${className ?? ""}`}
-      initial={{ opacity: 1, y: 6 }}
-      animate={{ y: 0 }}
+      initial={{ opacity: 0, y: 6 }}
+      animate={reveal.animate ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
       transition={{
-        y: { duration: 0.45, delay: index * 0.08 + 0.2, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: 0.45, delay: reveal.delay, ease: EASE_SIGNAL },
+        y: { duration: 0.45, delay: reveal.delay, ease: EASE_SIGNAL },
       }}
     >
       {children}
@@ -104,6 +110,7 @@ export function HomeHeroTrustAvatarMotion({
 }) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal("trust", { staggerIndex: index + 1 });
 
   if (reduced || motionCtx?.tier === "reduced") {
     return <li className="home-hero-desktop__trust-avatar">{children}</li>;
@@ -113,8 +120,8 @@ export function HomeHeroTrustAvatarMotion({
     <motion.li
       className="home-hero-desktop__trust-avatar hero-trust-avatar"
       initial={{ opacity: 0, y: 12, scale: 0.92 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 1.55 + index * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      animate={reveal.animate ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 12, scale: 0.92 }}
+      transition={{ delay: reveal.delay, duration: 0.55, ease: EASE_SIGNAL }}
     >
       {children}
     </motion.li>

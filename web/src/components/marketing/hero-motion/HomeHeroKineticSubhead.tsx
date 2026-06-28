@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { HERO_MOTION_TIMINGS } from "./hero-motion-config";
+import { useHeroCopyReveal } from "./hooks/useHeroCopyReveal";
 import { useHeroMotionOptional } from "./HeroMotionContext";
 
 const EASE_SIGNAL = [0.22, 1, 0.36, 1] as const;
@@ -26,33 +27,25 @@ const wordVariants = {
   },
 };
 
-export function HomeHeroKineticSubhead({ children, className }: HomeHeroKineticSubheadProps) {
-  const reduced = useReducedMotion();
-  const motionCtx = useHeroMotionOptional();
-
-  if (reduced || motionCtx?.tier === "reduced") {
-    return <p className={className}>{children}</p>;
-  }
-
-  const textContent =
-    typeof children === "string"
-      ? children
-      : Array.isArray(children)
-        ? children.map((child) => (typeof child === "string" ? child : "")).join("")
-        : "";
-
-  const tokens = tokenizeText(textContent);
+function KineticSubheadContent({
+  className,
+  tokens,
+}: {
+  className?: string;
+  tokens: string[];
+}) {
+  const reveal = useHeroCopyReveal("subhead");
 
   return (
     <motion.p
-      className={`hero-kinetic-subhead ${className ?? ""}`}
+      className={[`hero-kinetic-subhead ${className ?? ""}`, reveal.pendingClassName].filter(Boolean).join(" ")}
       initial="hidden"
-      animate="visible"
+      animate={reveal.animate ? "visible" : "hidden"}
       variants={{
         hidden: {},
         visible: {
           transition: {
-            delayChildren: HERO_MOTION_TIMINGS.subheadDelay,
+            delayChildren: reveal.delay,
             staggerChildren: 0.04,
           },
         },
@@ -71,6 +64,24 @@ export function HomeHeroKineticSubhead({ children, className }: HomeHeroKineticS
   );
 }
 
+export function HomeHeroKineticSubhead({ children, className }: HomeHeroKineticSubheadProps) {
+  const reduced = useReducedMotion();
+  const motionCtx = useHeroMotionOptional();
+
+  if (reduced || motionCtx?.tier === "reduced") {
+    return <p className={className}>{children}</p>;
+  }
+
+  const textContent =
+    typeof children === "string"
+      ? children
+      : Array.isArray(children)
+        ? children.map((child) => (typeof child === "string" ? child : "")).join("")
+        : "";
+
+  return <KineticSubheadContent className={className} tokens={tokenizeText(textContent)} />;
+}
+
 export function HomeHeroKineticSubheadLines({
   lines,
   className,
@@ -82,6 +93,7 @@ export function HomeHeroKineticSubheadLines({
 }) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal("subhead");
 
   if (reduced || motionCtx?.tier === "reduced") {
     return (
@@ -97,14 +109,14 @@ export function HomeHeroKineticSubheadLines({
 
   return (
     <motion.p
-      className={`hero-kinetic-subhead ${className ?? ""}`}
+      className={[`hero-kinetic-subhead ${className ?? ""}`, reveal.pendingClassName].filter(Boolean).join(" ")}
       initial="hidden"
-      animate="visible"
+      animate={reveal.animate ? "visible" : "hidden"}
       variants={{
         hidden: {},
         visible: {
           transition: {
-            delayChildren: HERO_MOTION_TIMINGS.subheadDelay,
+            delayChildren: reveal.delay,
             staggerChildren: 0.04,
           },
         },

@@ -6,7 +6,6 @@ import { HeroMotionProvider } from "./HeroMotionContext";
 import { useHeroMotionProfile } from "./hooks/useHeroMotionProfile";
 import { useHeroPointerParallax } from "./hooks/useHeroPointerParallax";
 import { useHeroScrollTransform } from "./hooks/useHeroScrollTransform";
-import { HERO_LOAD_SEQUENCE } from "./hero-motion-config";
 
 type HomeHeroMotionRootProps = {
   sectionRef: RefObject<HTMLElement | null>;
@@ -17,6 +16,9 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
   const tier = useHeroMotionProfile();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [loadTimelineReady, setLoadTimelineReady] = useState(false);
+  const [copySequenceStarted, setCopySequenceStarted] = useState(false);
+  const [copySequenceStartTime, setCopySequenceStartTime] = useState<number | null>(null);
+  const [headlineComplete, setHeadlineCompleteState] = useState(false);
   const loadTargetsRef = useRef<Map<string, Element>>(new Map());
   const headlineReadyRef = useRef(false);
 
@@ -26,6 +28,20 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
     } else {
       loadTargetsRef.current.delete(key);
     }
+  }, []);
+
+  const setHeadlineComplete = useCallback(() => {
+    setHeadlineCompleteState(true);
+    window.dispatchEvent(new CustomEvent("hero-headline-complete"));
+  }, []);
+
+  const startCopySequence = useCallback(() => {
+    const now = performance.now();
+    setCopySequenceStartTime(now);
+    setCopySequenceStarted(true);
+    headlineReadyRef.current = true;
+    window.dispatchEvent(new CustomEvent("hero-copy-sequence-start"));
+    window.dispatchEvent(new CustomEvent("hero-headline-ready"));
   }, []);
 
   useHeroPointerParallax(sectionRef, tier, tier !== "reduced");
@@ -50,18 +66,13 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
     let cancelled = false;
 
     const runTimeline = async () => {
-      const { gsap } = await import("gsap");
+      await import("gsap");
       if (cancelled) {
         return;
       }
 
       setLoadTimelineReady(true);
-
-      const headlineDelay = HERO_LOAD_SEQUENCE.headline;
-      gsap.delayedCall(headlineDelay, () => {
-        headlineReadyRef.current = true;
-        window.dispatchEvent(new CustomEvent("hero-headline-ready"));
-      });
+      startCopySequence();
     };
 
     const idle = window.requestIdleCallback ?? ((cb: IdleRequestCallback) => window.setTimeout(cb, 1));
@@ -74,7 +85,7 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
       const cancel = window.cancelIdleCallback ?? clearTimeout;
       cancel(idleId);
     };
-  }, [sectionRef, tier]);
+  }, [sectionRef, tier, startCopySequence]);
 
   return (
     <HeroMotionProvider
@@ -85,6 +96,10 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
       loadTimelineReady={loadTimelineReady}
       registerLoadTarget={registerLoadTarget}
       headlineReadyRef={headlineReadyRef}
+      copySequenceStarted={copySequenceStarted}
+      copySequenceStartTime={copySequenceStartTime}
+      headlineComplete={headlineComplete}
+      setHeadlineComplete={setHeadlineComplete}
     >
       {tier !== "reduced" ? <HomeHeroAmbientLayers /> : (
         <>
