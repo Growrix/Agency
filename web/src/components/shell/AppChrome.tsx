@@ -1,7 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { applyTheme, persistTheme, readStoredTheme } from "@/lib/theme";
 import { SiteTopChrome } from "@/components/shell/SiteTopChrome";
 import { TopChromeVisibilityProvider } from "@/components/shell/TopChromeVisibilityProvider";
 import { Footer } from "@/components/shell/Footer";
@@ -24,6 +26,13 @@ type AppChromeProps = {
 
 export function AppChrome({ children }: AppChromeProps) {
   const pathname = usePathname();
+
+  useEffect(() => {
+    const stored = readStoredTheme();
+    applyTheme(stored);
+    persistTheme(stored);
+  }, []);
+
   const isAdminSurface = pathname.startsWith("/admin");
   const isStandaloneProfile =
     pathname === "/Business-profile" ||

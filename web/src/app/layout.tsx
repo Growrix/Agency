@@ -77,10 +77,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+  themeColor: "#000000",
 };
 
 function AppShell({ children }: { children: React.ReactNode }) {
@@ -100,9 +97,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
+      data-theme="dark"
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        {/* Blocking theme bootstrap — must run before paint; async/defer would flash wrong theme */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/theme-init.js" suppressHydrationWarning />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <a
           href="#main"

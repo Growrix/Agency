@@ -46,6 +46,7 @@
   opacity: 0.22;
 }
 
+:root .hero-section--motion .hero-ambient__scrim,
 [data-theme="dark"] .hero-section--motion .hero-ambient__scrim {
   background:
     radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 0.45), transparent 58%),
@@ -53,13 +54,11 @@
   opacity: 0.65;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .hero-section--motion .hero-ambient__scrim {
-    background:
-      radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 0.45), transparent 58%),
-      linear-gradient(180deg, rgba(2, 6, 23, 0.28) 0%, rgba(2, 6, 23, 0.58) 100%);
-    opacity: 0.65;
-  }
+[data-theme="light"] .hero-section--motion .hero-ambient__scrim {
+  background:
+    radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--color-text) 8%, transparent), transparent 58%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-text) 4%, transparent) 0%, color-mix(in srgb, var(--color-text) 10%, transparent) 100%);
+  opacity: 0.22;
 }
 
 /* Content sits above ambient background layers */
@@ -256,8 +255,22 @@
 
 .hero-kinetic-char {
   display: inline-block;
-  opacity: 1;
   will-change: transform, opacity;
+}
+
+.hero-kinetic-headline--animated .hero-kinetic-char {
+  opacity: 0;
+  transform: translateY(12px) rotate(-4deg) scale(0.9);
+}
+
+.hero-kinetic-headline--animated .hero-kinetic-accent {
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+}
+
+.hero-copy-pending {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .hero-kinetic-word--glow::after {
@@ -418,6 +431,7 @@
 }
 
 .hero-trust-name,
+.hero-trust-logo,
 .hero-trust-avatar {
   will-change: transform, opacity;
 }
@@ -479,13 +493,6 @@
       linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
   }
 }
-[data-theme="light"] .hero-section--motion .hero-ambient__living-grid,
-:root:not([data-theme]) .hero-section--motion .hero-ambient__living-grid {
+[data-theme="light"] .hero-section--motion .hero-ambient__living-grid {
   opacity: 0.28 !important;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .hero-section--motion .hero-ambient__living-grid {
-    opacity: 0.28 !important;
-  }
 }

@@ -37,21 +37,33 @@ export const HOME_HERO_SOCIAL_PROOF = {
   ],
 } as const;
 
+/** SVG stack logos shown in the homepage hero trust panel. */
+export const HOME_HERO_STACK_LOGOS = [
+  { name: "FastAPI", src: "/images/logos/stacks/FastAPI.svg", width: 28, height: 28 },
+  { name: "Python", src: "/images/logos/stacks/Python.svg", width: 28, height: 28 },
+  { name: "React", src: "/images/logos/stacks/React.svg", width: 28, height: 28 },
+  { name: "Tailwind CSS", src: "/images/logos/stacks/Tailwind-CSS.svg", width: 28, height: 28 },
+  { name: "CSS3", src: "/images/logos/stacks/CSS3.svg", width: 28, height: 28 },
+  { name: "Docker", src: "/images/logos/stacks/Docker.svg", width: 28, height: 28 },
+  { name: "Figma", src: "/images/logos/stacks/Figma.svg", width: 28, height: 28 },
+  { name: "HTML5", src: "/images/logos/stacks/HTML5.svg", width: 28, height: 28 },
+  { name: "MongoDB", src: "/images/logos/stacks/MongoDB.svg", width: 28, height: 28 },
+  { name: "MySQL", src: "/images/logos/stacks/MySQL.svg", width: 28, height: 28 },
+  { name: "Node.js", src: "/images/logos/stacks/Node.js.svg", width: 28, height: 28 },
+  { name: "PostgreSQL", src: "/images/logos/stacks/PostgresSQL.svg", width: 28, height: 28 },
+  { name: "Sanity", src: "/images/logos/stacks/Sanity.svg", width: 28, height: 28 },
+] as const;
+
 export const HOME_HERO_TECH_STACK = {
   label: "Powered by technologies we trust",
-  technologies: ["Next.js", "Supabase", "Stripe", "AWS", "Python", "React"] as const,
+  logos: HOME_HERO_STACK_LOGOS,
 } as const;
 
-/** @deprecated Use HOME_HERO_TECH_STACK.technologies — kept for legacy logo strip references. */
-export const HOME_HERO_TRUSTED_NAMES = HOME_HERO_TECH_STACK.technologies;
+/** @deprecated Use HOME_HERO_STACK_LOGOS */
+export const HOME_HERO_TRUSTED_NAMES = HOME_HERO_STACK_LOGOS.map((logo) => logo.name);
 
-export const HOME_HERO_TRUSTED_LOGOS = [
-  { name: "Stripe", src: "/images/logos/trusted/stripe.svg", width: 52, height: 22 },
-  { name: "Next.js", src: "/images/logos/trusted/nextjs-dark.svg", width: 72, height: 18 },
-  { name: "Supabase", src: "/images/logos/trusted/supabase.svg", width: 88, height: 20 },
-  { name: "Vercel", src: "/images/logos/trusted/vercel-dark.svg", width: 72, height: 16 },
-  { name: "AWS", src: "/images/logos/trusted/aws.svg", width: 44, height: 28 },
-] as const;
+/** @deprecated Use HOME_HERO_STACK_LOGOS */
+export const HOME_HERO_TRUSTED_LOGOS = HOME_HERO_STACK_LOGOS;
 
 export const HOME_SERVICES_COPY = {
   eyebrow: "Services",

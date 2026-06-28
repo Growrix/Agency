@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Section } from "@/components/primitives/Container";
 import { ServiceCardsViewportGate } from "@/components/marketing/ServiceCardsViewportGate";
 import type { PublicServiceRecord } from "@/server/domain/catalog";

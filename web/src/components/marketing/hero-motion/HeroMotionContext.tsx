@@ -1,7 +1,19 @@
 "use client";
 
-import { createContext, useContext, useRef, type ReactNode, type RefObject } from "react";
-import type { HeroMotionTier } from "./hero-motion-config";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  type ReactNode,
+  type RefObject,
+} from "react";
+import {
+  getCopyPhaseDelay,
+  type HeroCopyPhase,
+  type HeroMotionTier,
+} from "./hero-motion-config";
 
 type HeroMotionContextValue = {
   tier: HeroMotionTier;
@@ -11,6 +23,11 @@ type HeroMotionContextValue = {
   loadTimelineReady: boolean;
   registerLoadTarget: (key: string, el: Element | null) => void;
   headlineReadyRef: React.MutableRefObject<boolean>;
+  copySequenceStarted: boolean;
+  copySequenceStartTime: number | null;
+  headlineComplete: boolean;
+  setHeadlineComplete: () => void;
+  getCopyRevealDelay: (phase: HeroCopyPhase, titleLineCount?: number) => number;
 };
 
 const HeroMotionContext = createContext<HeroMotionContextValue | null>(null);
@@ -24,6 +41,10 @@ export function HeroMotionProvider({
   scrollProgress,
   setScrollProgress,
   headlineReadyRef,
+  copySequenceStarted,
+  copySequenceStartTime,
+  headlineComplete,
+  setHeadlineComplete,
 }: {
   tier: HeroMotionTier;
   sectionRef: RefObject<HTMLElement | null>;
@@ -33,22 +54,48 @@ export function HeroMotionProvider({
   scrollProgress: number;
   setScrollProgress: (value: number) => void;
   headlineReadyRef: React.MutableRefObject<boolean>;
+  copySequenceStarted: boolean;
+  copySequenceStartTime: number | null;
+  headlineComplete: boolean;
+  setHeadlineComplete: () => void;
 }) {
-  return (
-    <HeroMotionContext.Provider
-      value={{
-        tier,
-        sectionRef,
-        scrollProgress,
-        setScrollProgress,
-        loadTimelineReady,
-        registerLoadTarget,
-        headlineReadyRef,
-      }}
-    >
-      {children}
-    </HeroMotionContext.Provider>
+  const getCopyRevealDelay = useCallback(
+    (phase: HeroCopyPhase, titleLineCount = 2) => getCopyPhaseDelay(phase, tier, titleLineCount),
+    [tier],
   );
+
+  const value = useMemo(
+    () => ({
+      tier,
+      sectionRef,
+      scrollProgress,
+      setScrollProgress,
+      loadTimelineReady,
+      registerLoadTarget,
+      headlineReadyRef,
+      copySequenceStarted,
+      copySequenceStartTime,
+      headlineComplete,
+      setHeadlineComplete,
+      getCopyRevealDelay,
+    }),
+    [
+      tier,
+      sectionRef,
+      scrollProgress,
+      setScrollProgress,
+      loadTimelineReady,
+      registerLoadTarget,
+      headlineReadyRef,
+      copySequenceStarted,
+      copySequenceStartTime,
+      headlineComplete,
+      setHeadlineComplete,
+      getCopyRevealDelay,
+    ],
+  );
+
+  return <HeroMotionContext.Provider value={value}>{children}</HeroMotionContext.Provider>;
 }
 
 export function useHeroMotion() {

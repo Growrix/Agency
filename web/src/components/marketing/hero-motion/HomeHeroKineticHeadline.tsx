@@ -1,8 +1,8 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
-import { useEffect, useMemo, useRef } from "react";
-import { HERO_MOTION_TIMINGS } from "./hero-motion-config";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { HERO_COPY_SEQUENCE, HERO_MOTION_TIMINGS } from "./hero-motion-config";
 import { useHeroMotionOptional } from "./HeroMotionContext";
 
 type HomeHeroKineticHeadlineProps = {
@@ -14,6 +14,19 @@ type HomeHeroKineticHeadlineProps = {
 
 function buildAriaLabel(lines: readonly string[], accent: string) {
   return [...lines, accent].join(" ");
+}
+
+function setInitialHiddenState(root: HTMLElement, accentEl: HTMLElement | null) {
+  root.querySelectorAll(".hero-kinetic-line:not(.hero-kinetic-accent) .hero-kinetic-char").forEach((char) => {
+    const el = char as HTMLElement;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(12px) rotate(-4deg) scale(0.9)";
+  });
+
+  if (accentEl) {
+    accentEl.style.opacity = "0";
+    accentEl.style.transform = "translateY(14px) scale(0.96)";
+  }
 }
 
 function renderWord(word: string, wordKey: string) {
@@ -43,7 +56,7 @@ export function HomeHeroKineticHeadline({
   const motion = useHeroMotionOptional();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const accentRef = useRef<HTMLSpanElement>(null);
-  const animatedRef = useRef(false);
+  const timelineStartedRef = useRef(false);
   const ariaLabel = buildAriaLabel(titleLines, titleAccent);
 
   const titleLineEntries = useMemo(
@@ -51,8 +64,18 @@ export function HomeHeroKineticHeadline({
     [titleLines],
   );
 
+  const isAnimatedTier = !reduced && motion?.tier !== "reduced";
+
+  useLayoutEffect(() => {
+    if (!isAnimatedTier || !headlineRef.current) {
+      return;
+    }
+
+    setInitialHiddenState(headlineRef.current, accentRef.current);
+  }, [isAnimatedTier, titleLines, titleAccent]);
+
   useEffect(() => {
-    if (reduced || motion?.tier === "reduced" || !headlineRef.current || animatedRef.current) {
+    if (!isAnimatedTier || !headlineRef.current) {
       return;
     }
 
@@ -75,12 +98,11 @@ export function HomeHeroKineticHeadline({
       }
     };
 
-    const animate = async () => {
-      if (animatedRef.current || cancelled || !headlineRef.current) {
+    const runRevealTimeline = async () => {
+      if (timelineStartedRef.current || cancelled || !headlineRef.current) {
         return;
       }
 
-      animatedRef.current = true;
       const { gsap } = await import("gsap");
       if (cancelled || !headlineRef.current) {
         revealAllChars();
@@ -101,7 +123,9 @@ export function HomeHeroKineticHeadline({
         gsap.set(accentRef.current, { opacity: 0, y: 14, scale: 0.96 });
       }
 
-      const master = gsap.timeline({ delay: HERO_MOTION_TIMINGS.headlineStart });
+      timelineStartedRef.current = true;
+
+      const master = gsap.timeline({ delay: HERO_COPY_SEQUENCE.headlineStart });
 
       lines.forEach((line, lineIndex) => {
         const words = line.querySelectorAll(".hero-kinetic-word");
@@ -118,7 +142,7 @@ export function HomeHeroKineticHeadline({
               stagger: 0.025,
               ease: "power3.out",
             },
-            lineIndex * 0.85 + wordIndex * 0.12,
+            lineIndex * HERO_COPY_SEQUENCE.headlineLineGap + wordIndex * 0.12,
           );
 
           master.to(
@@ -141,10 +165,13 @@ export function HomeHeroKineticHeadline({
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.85,
+            duration: HERO_COPY_SEQUENCE.accentDuration,
             ease: "power3.out",
+            onComplete: () => {
+              motion?.setHeadlineComplete();
+            },
           },
-          titleLines.length * 0.85,
+          titleLines.length * HERO_COPY_SEQUENCE.headlineLineGap,
         );
       }
 
@@ -156,24 +183,26 @@ export function HomeHeroKineticHeadline({
 
     const scheduleAnimation = () => {
       fallbackTimer = window.setTimeout(() => {
-        if (!animatedRef.current) {
+        if (!timelineStartedRef.current) {
           revealAllChars();
         }
       }, 3500);
 
-      void animate().finally(() => {
+      void runRevealTimeline().finally(() => {
         if (fallbackTimer) {
           window.clearTimeout(fallbackTimer);
         }
       });
     };
 
-    if (motion?.loadTimelineReady) {
+    if (motion?.copySequenceStarted || motion?.loadTimelineReady) {
       scheduleAnimation();
     } else {
       const onReady = () => scheduleAnimation();
+      window.addEventListener("hero-copy-sequence-start", onReady, { once: true });
       window.addEventListener("hero-headline-ready", onReady, { once: true });
       fallbackTimer = window.setTimeout(() => {
+        window.removeEventListener("hero-copy-sequence-start", onReady);
         window.removeEventListener("hero-headline-ready", onReady);
         scheduleAnimation();
       }, 1500);
@@ -188,9 +217,9 @@ export function HomeHeroKineticHeadline({
         window.clearTimeout(fallbackTimer);
       }
     };
-  }, [reduced, motion?.tier, motion?.loadTimelineReady, titleLines, titleAccent]);
+  }, [isAnimatedTier, motion?.loadTimelineReady, motion?.copySequenceStarted, titleLines, titleAccent, motion]);
 
-  if (reduced || motion?.tier === "reduced") {
+  if (!isAnimatedTier) {
     return (
       <h1 aria-label={ariaLabel} className={`hero-kinetic-headline ${className ?? ""}`}>
         {titleLines.map((line) => (
@@ -207,7 +236,7 @@ export function HomeHeroKineticHeadline({
     <h1
       ref={headlineRef}
       aria-label={ariaLabel}
-      className={`hero-kinetic-headline hero-kinetic-headline--${variant} ${className ?? ""}`}
+      className={`hero-kinetic-headline hero-kinetic-headline--animated hero-kinetic-headline--${variant} ${className ?? ""}`}
     >
       {titleLineEntries.map((line) => (
         <span key={line.text} className="hero-kinetic-line block" data-depth={line.depth}>

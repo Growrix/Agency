@@ -54,6 +54,7 @@ import {
 	SERVICES_SUPPORTING_SYSTEMS,
 } from "@/lib/services-landing-content";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
@@ -175,33 +176,33 @@ export default async function ServicesPage() {
 							/>
 						}
 						desktop={
-							<div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-								<div className="lg:col-span-6 xl:col-span-7">
-									<Badge tone="primary" dot>
-										{SERVICES_LANDING_HERO.eyebrow}
-									</Badge>
-									<MarketingHeroTitle
-										className="mt-5"
-										title={SERVICES_LANDING_HERO.title}
-										titleLead={SERVICES_LANDING_HERO.headlineLead}
-										titleAccent={SERVICES_LANDING_HERO.headlineAccent}
-									/>
-									<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
-										{SERVICES_LANDING_HERO.description}
-									</p>
-									<div className="mt-8 flex flex-wrap gap-3">
-										<LinkButton href={SERVICES_LANDING_HERO.primaryHref} size="lg">
-											{SERVICES_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
-										</LinkButton>
-										<LinkButton href={SERVICES_LANDING_HERO.secondaryHref} variant="outline" size="lg">
-											{SERVICES_LANDING_HERO.secondaryCta}
-										</LinkButton>
-									</div>
-								</div>
-								<div className="min-w-0 lg:col-span-6 lg:self-center xl:col-span-5">
-									<ServicesHeroEcosystem links={[...SERVICES_HERO_ECOSYSTEM_LINKS]} />
-								</div>
-							</div>
+							<MarketingSplitHero
+								copy={
+									<>
+										<Badge tone="primary" dot>
+											{SERVICES_LANDING_HERO.eyebrow}
+										</Badge>
+										<MarketingHeroTitle
+											className="mt-5"
+											title={SERVICES_LANDING_HERO.title}
+											titleLead={SERVICES_LANDING_HERO.headlineLead}
+											titleAccent={SERVICES_LANDING_HERO.headlineAccent}
+										/>
+										<p className="mt-6 text-lg text-text-muted leading-7 text-pretty">
+											{SERVICES_LANDING_HERO.description}
+										</p>
+										<div className="mt-8 flex flex-wrap gap-3">
+											<LinkButton href={SERVICES_LANDING_HERO.primaryHref} size="lg">
+												{SERVICES_LANDING_HERO.primaryCta} <ArrowRightIcon className="size-4" />
+											</LinkButton>
+											<LinkButton href={SERVICES_LANDING_HERO.secondaryHref} variant="outline" size="lg">
+												{SERVICES_LANDING_HERO.secondaryCta}
+											</LinkButton>
+										</div>
+									</>
+								}
+								panel={<ServicesHeroEcosystem links={[...SERVICES_HERO_ECOSYSTEM_LINKS]} />}
+							/>
 						}
 					/>
 				</Container>

@@ -4,68 +4,34 @@ import { useEffect, useState } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "@/components/motion/Motion";
 import { cn } from "@/lib/utils";
-
-type Mode = "light" | "dark" | "system";
-const STORAGE_KEY = "growrix-os-theme";
-const LEGACY_STORAGE_KEYS = ["growrix-theme", "signal-theme"] as const;
-
-function applyTheme(mode: Mode) {
-  if (typeof document === "undefined") return;
-  const root = document.documentElement;
-  if (mode === "system") {
-    root.removeAttribute("data-theme");
-  } else {
-    root.setAttribute("data-theme", mode);
-  }
-}
-
-function readStored(): Mode {
-  if (typeof window === "undefined") return "system";
-  const v =
-    window.localStorage.getItem(STORAGE_KEY) ??
-    LEGACY_STORAGE_KEYS.map((key) => window.localStorage.getItem(key)).find((value) => value != null);
-  return v === "light" || v === "dark" ? v : "system";
-}
-
-function resolved(mode: Mode): "light" | "dark" {
-  if (mode !== "system") return mode;
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
+import {
+  applyTheme,
+  DEFAULT_THEME,
+  persistTheme,
+  readStoredTheme,
+  type ThemeMode,
+} from "@/lib/theme";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
-  const [mode, setMode] = useState<Mode>("system");
+  const [mode, setMode] = useState<ThemeMode>(DEFAULT_THEME);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    const stored = readStoredTheme();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-flag pattern needed to avoid SSR/CSR theme mismatch
     setMounted(true);
-    const stored = readStored();
     setMode(stored);
-    if (stored !== "system") {
-      try {
-        window.localStorage.setItem(STORAGE_KEY, stored);
-        LEGACY_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
-      } catch {
-        /* ignore storage errors */
-      }
-    }
+    applyTheme(stored);
+    persistTheme(stored);
   }, []);
 
   function cycle() {
-    const current = resolved(mode);
-    const next: Mode = current === "dark" ? "light" : "dark";
+    const next: ThemeMode = mode === "dark" ? "light" : "dark";
     setMode(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-      LEGACY_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
-    } catch {
-      /* ignore storage errors (Safari private mode, etc.) */
-    }
+    persistTheme(next);
     applyTheme(next);
   }
 
-  // Avoid SSR/CSR mismatch: render a neutral placeholder until mounted.
   if (!mounted) {
     return (
       <button
@@ -76,16 +42,13 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
           className
         )}
       >
-        <SunIcon className="size-5" aria-hidden />
+        <MoonIcon className="size-5" aria-hidden />
       </button>
     );
   }
 
-  const isDark = resolved(mode) === "dark";
-  const label =
-    mode === "system"
-      ? `Theme: system (${isDark ? "dark" : "light"}). Click to switch to ${isDark ? "light" : "dark"}.`
-      : `Theme: ${mode}. Click to switch to ${isDark ? "light" : "dark"}.`;
+  const isDark = mode === "dark";
+  const label = `Theme: ${mode}. Click to switch to ${isDark ? "light" : "dark"}.`;
 
   return (
     <button
@@ -116,25 +79,22 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 }
 
 export function ThemeToggleButton({ className = "" }: { className?: string }) {
-  const [mode, setMode] = useState<Mode>("system");
+  const [mode, setMode] = useState<ThemeMode>(DEFAULT_THEME);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    const stored = readStoredTheme();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-flag pattern needed to avoid SSR/CSR theme mismatch
     setMounted(true);
-    setMode(readStored());
+    setMode(stored);
+    applyTheme(stored);
+    persistTheme(stored);
   }, []);
 
   function cycle() {
-    const current = resolved(mode);
-    const next: Mode = current === "dark" ? "light" : "dark";
+    const next: ThemeMode = mode === "dark" ? "light" : "dark";
     setMode(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-      LEGACY_STORAGE_KEYS.forEach((key) => window.localStorage.removeItem(key));
-    } catch {
-      /* ignore storage errors */
-    }
+    persistTheme(next);
     applyTheme(next);
   }
 
@@ -148,12 +108,12 @@ export function ThemeToggleButton({ className = "" }: { className?: string }) {
           className
         )}
       >
-        <SunIcon className="size-5" aria-hidden />
+        <MoonIcon className="size-5" aria-hidden />
       </button>
     );
   }
 
-  const isDark = resolved(mode) === "dark";
+  const isDark = mode === "dark";
   const label = `Theme: ${isDark ? "dark" : "light"}. Click to switch to ${isDark ? "light" : "dark"}.`;
 
   return (

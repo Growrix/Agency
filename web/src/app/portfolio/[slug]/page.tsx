@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -125,7 +126,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 <div className={`relative aspect-16/10 overflow-hidden bg-linear-to-br ${project.accent}`}>
                   {heroImage ? (
                     <Image
-                      src={heroImage.src}
+                      src={toSanityCdnImageSrc(heroImage.src, 1280)}
                       alt={heroImage.alt}
                       fill
                       priority

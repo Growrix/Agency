@@ -1,8 +1,12 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { Children, type ReactNode } from "react";
+import type { HeroCopyPhase } from "./hero-motion-config";
+import { useHeroCopyReveal } from "./hooks/useHeroCopyReveal";
 import { useHeroMotionOptional } from "./HeroMotionContext";
+
+const EASE_SIGNAL = [0.22, 1, 0.36, 1] as const;
 
 type HomeHeroCtaMotionProps = {
   children: ReactNode;
@@ -50,44 +54,46 @@ export function HomeHeroCtaStackMotion({ children, className }: { children: Reac
     return <div className={className}>{children}</div>;
   }
 
+  const items = Children.toArray(children);
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.4, duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
+    <div className={className}>
+      {items.map((child, index) => (
+        <HomeHeroMotionReveal key={index} phase="cta" staggerIndex={index}>
+          {child}
+        </HomeHeroMotionReveal>
+      ))}
+    </div>
   );
 }
 
 export function HomeHeroMotionReveal({
   children,
   className,
-  delay = 0,
+  phase = "badge",
+  staggerIndex = 0,
+  titleLineCount = 2,
 }: {
   children: ReactNode;
   className?: string;
-  delay?: number;
+  phase?: HeroCopyPhase;
+  staggerIndex?: number;
+  titleLineCount?: number;
 }) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal(phase, { staggerIndex, titleLineCount });
 
   if (reduced || motionCtx?.tier === "reduced") {
-    return (
-      <div className={`signal-rise ${className ?? ""}`} style={{ animationDelay: `${delay}ms` }}>
-        {children}
-      </div>
-    );
+    return <div className={className}>{children}</div>;
   }
 
   return (
     <motion.div
-      className={className}
+      className={[className, reveal.pendingClassName].filter(Boolean).join(" ")}
       initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: delay / 1000 + 0.8, duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+      animate={reveal.animate ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+      transition={{ delay: reveal.delay, duration: reveal.duration, ease: EASE_SIGNAL }}
     >
       {children}
     </motion.div>
