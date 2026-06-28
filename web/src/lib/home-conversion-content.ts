@@ -40,17 +40,13 @@ export const HOME_HERO_SOCIAL_PROOF = {
 /** SVG stack logos shown in the homepage hero trust panel. */
 export const HOME_HERO_STACK_LOGOS = [
   { name: "FastAPI", src: "/images/logos/stacks/FastAPI.svg", width: 28, height: 28 },
-  { name: "Next.js", src: "/images/logos/stacks/Next.js.svg", width: 28, height: 28 },
   { name: "Python", src: "/images/logos/stacks/Python.svg", width: 28, height: 28 },
   { name: "React", src: "/images/logos/stacks/React.svg", width: 28, height: 28 },
-  { name: "TypeScript", src: "/images/logos/stacks/TypeScript.svg", width: 28, height: 28 },
   { name: "Tailwind CSS", src: "/images/logos/stacks/Tailwind-CSS.svg", width: 28, height: 28 },
   { name: "CSS3", src: "/images/logos/stacks/CSS3.svg", width: 28, height: 28 },
   { name: "Docker", src: "/images/logos/stacks/Docker.svg", width: 28, height: 28 },
   { name: "Figma", src: "/images/logos/stacks/Figma.svg", width: 28, height: 28 },
-  { name: "Firebase", src: "/images/logos/stacks/Firebase.svg", width: 28, height: 28 },
   { name: "HTML5", src: "/images/logos/stacks/HTML5.svg", width: 28, height: 28 },
-  { name: "JavaScript", src: "/images/logos/stacks/JavaScript.svg", width: 28, height: 28 },
   { name: "MongoDB", src: "/images/logos/stacks/MongoDB.svg", width: 28, height: 28 },
   { name: "MySQL", src: "/images/logos/stacks/MySQL.svg", width: 28, height: 28 },
   { name: "Node.js", src: "/images/logos/stacks/Node.js.svg", width: 28, height: 28 },
