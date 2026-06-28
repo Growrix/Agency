@@ -5,9 +5,7 @@ import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
 import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
 import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
-import { ThemeInit } from "@/components/shell/ThemeInit";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
-import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 const SITE_DESCRIPTION =
   "Growrix OS is a product-minded web development studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.";
@@ -103,10 +101,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {/* Blocking theme bootstrap — must run before paint; async/defer would flash wrong theme */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/theme-init.js" suppressHydrationWarning />
       </head>
       <body className="min-h-full flex flex-col antialiased">
-        <ThemeInit />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-primary focus:text-surface focus:px-3 focus:py-2 focus:rounded-md"
