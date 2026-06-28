@@ -273,6 +273,10 @@
   pointer-events: none;
 }
 
+.home-hero-desktop__showcase:has(.hero-copy-pending) .home-hero-desktop__showcase-glow {
+  opacity: 0;
+}
+
 .hero-kinetic-word--glow::after {
   content: "";
   position: absolute;

@@ -38,9 +38,11 @@ export const HERO_COPY_SEQUENCE = {
   trustChildStagger: 0.1,
   highlightsAfterTrust: 0.2,
   highlightsDuration: 0.62,
-  showcaseAfterHeadlineStart: 0.35,
+  /** Gap after the last left-column phase before the showcase enters */
+  showcaseAfterLeftColumn: 0.2,
   showcaseDuration: 0.72,
-  featuresAfterTrust: 0.2,
+  /** Mobile stage: features follow showcase, not trust */
+  featuresAfterShowcase: 0.2,
   featuresDuration: 0.62,
 } as const;
 
@@ -91,6 +93,28 @@ export function getAccentTimelineOffset(titleLineCount: number): number {
   return titleLineCount * HERO_COPY_SEQUENCE.headlineLineGap;
 }
 
+/** Seconds from sequence start until the left copy column finishes its reveal chain */
+export function getLeftColumnEndDelay(tier: HeroMotionTier, titleLineCount = 2): number {
+  const s = HERO_COPY_SEQUENCE;
+  const scale = tierGapScale(tier);
+  const headlineStart = s.headlineStart * scale;
+  const accentOffset = getAccentTimelineOffset(titleLineCount);
+  const subheadAt = headlineStart + accentOffset + s.subheadAfterAccent * scale;
+  const subheadEnd = subheadAt + s.subheadDuration * scale;
+  const ctaAt = subheadEnd + s.ctaAfterSubhead * scale;
+  const ctaEnd = ctaAt + s.ctaDuration * scale;
+  const trustAt = ctaEnd + s.trustAfterCta * scale;
+  const trustEnd = trustAt + s.trustDuration * scale;
+  const highlightsAt = trustEnd + s.highlightsAfterTrust * scale;
+  const highlightsEnd = highlightsAt + s.highlightsDuration * scale;
+
+  if (tier === "mobile" || tier === "lite") {
+    return trustEnd;
+  }
+
+  return highlightsEnd;
+}
+
 export function getCopyPhaseDuration(phase: HeroCopyPhase): number {
   const s = HERO_COPY_SEQUENCE;
   switch (phase) {
@@ -129,8 +153,9 @@ export function getCopyPhaseDelay(
   const trustAt = ctaEnd + s.trustAfterCta * scale;
   const trustEnd = trustAt + s.trustDuration * scale;
   const highlightsAt = trustEnd + s.highlightsAfterTrust * scale;
-  const showcaseAt = headlineStart + s.showcaseAfterHeadlineStart * scale;
-  const featuresAt = trustEnd + s.featuresAfterTrust * scale;
+  const leftColumnEnd = getLeftColumnEndDelay(tier, titleLineCount);
+  const showcaseAt = leftColumnEnd + s.showcaseAfterLeftColumn * scale;
+  const featuresAt = showcaseAt + s.showcaseDuration * scale + s.featuresAfterShowcase * scale;
 
   switch (phase) {
     case "badge":
