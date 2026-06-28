@@ -75,7 +75,7 @@ const ProductLedFinalCTA = dynamic(
   { ssr: false },
 );
 
-type HomeBelowFoldSectionsProps = {
+export type HomeBelowFoldSectionsProps = {
   services: PublicServiceRecord[];
   readyMadeTabs: ReadyMadeSolutionTabDefinition[];
   readyMadeProductsByTabId: Record<string, PublicShopProductRecord[]>;

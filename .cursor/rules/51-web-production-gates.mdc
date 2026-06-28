@@ -15,6 +15,8 @@ Applies to all work under `web/`. Complements rule `60-zero-gate-health-check.md
 - **Never** split into server `HomeHero` + client `HomeHeroMotionShell` (or similar) — causes undefined lazy-element crashes
 - **Never** import from `@/components/marketing/hero-motion` barrel — import source files only (ESLint enforced)
 - **Never** add `"use client"` files that only re-export another hero module
+- Homepage **must** mount hero through [`HomeHeroGate`](web/src/components/marketing/HomeHeroGate.tsx) + [`HomeHeroPlaceholder`](web/src/components/marketing/HomeHeroPlaceholder.tsx) so heavy hero chunks load after `window.load` (domcontentloaded resource budget ≤ 30)
+- Below-fold homepage sections **must** mount through [`HomeBelowFoldGate`](web/src/components/marketing/HomeBelowFoldGate.tsx) with the same deferral helper ([`homepage-deferred-load.ts`](web/src/lib/homepage-deferred-load.ts))
 
 ## Before push (mandatory when user requests push)
 
@@ -45,7 +47,7 @@ Read [`DOC/PROJECT PLAN/Tasks/tasks.md`](DOC/PROJECT PLAN/Tasks/tasks.md) Sessio
 |---------|-------------|-------------|
 | Lazy element undefined at HomeHero | pageerror e2e | Single client `HomeHero.tsx`; no server-shell split |
 | SSG `took more than N seconds` | `npm run build` | Raise `staticPageGenerationTimeout` in `next.config.ts`; avoid build-time Sanity thrashing |
-| Resource count 31–39 | resource budget e2e | Defer SpeedInsights until `load`; below-fold `dynamic(..., { ssr: false })`; poster-first hero |
+| Resource count 31–39 | resource budget e2e | Defer SpeedInsights until `load`; `HomeHeroGate` + `HomeBelowFoldGate` schedule bundles after `window.load`; static `HomeHeroPlaceholder` keeps `.hero-section` for pageerror gate; poster-first hero |
 | ESLint in ~1–2 min | `npm run lint` | Fix reported file; run full `ci:check`, not lint alone |
 
 ## Session start checklist (web/ CI or hero work)

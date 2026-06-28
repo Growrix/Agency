@@ -1,5 +1,5 @@
-import { HomeHero } from "@/components/marketing/HomeHero";
-import { HomeBelowFoldSections } from "@/components/marketing/HomeBelowFoldSections";
+import { HomeHeroGate } from "@/components/marketing/HomeHeroGate";
+import { HomeBelowFoldGate } from "@/components/marketing/HomeBelowFoldGate";
 
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 
@@ -186,7 +186,7 @@ export default async function Home() {
       <JsonLd data={homeStructuredData} />
 
       <div className="home-desktop-marketing">
-      <HomeHero
+      <HomeHeroGate
 
         badge={homeContent?.heroBadge}
 
@@ -200,7 +200,7 @@ export default async function Home() {
 
       />
 
-      <HomeBelowFoldSections
+      <HomeBelowFoldGate
         services={services}
         readyMadeTabs={readyMadeSolutions.tabs}
         readyMadeProductsByTabId={readyMadeSolutions.productsByTabId}
