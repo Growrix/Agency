@@ -37,21 +37,26 @@ export const HOME_HERO_SOCIAL_PROOF = {
   ],
 } as const;
 
+/** SVG stack logos shown in the homepage hero trust panel. */
+export const HOME_HERO_STACK_LOGOS = [
+  { name: "FastAPI", src: "/images/logos/logo%20library-512/svg/FastAPI.svg", width: 28, height: 28 },
+  { name: "Next.js", src: "/images/logos/logo%20library-512/svg/Next.js.svg", width: 28, height: 28 },
+  { name: "Python", src: "/images/logos/logo%20library-512/svg/Python.svg", width: 28, height: 28 },
+  { name: "React", src: "/images/logos/logo%20library-512/svg/React.svg", width: 28, height: 28 },
+  { name: "TypeScript", src: "/images/logos/logo%20library-512/svg/TypeScript.svg", width: 28, height: 28 },
+  { name: "Django", src: "/images/logos/logo%20library-512/svg/Django.svg", width: 28, height: 28 },
+] as const;
+
 export const HOME_HERO_TECH_STACK = {
   label: "Powered by technologies we trust",
-  technologies: ["Next.js", "Supabase", "Stripe", "AWS", "Python", "React"] as const,
+  logos: HOME_HERO_STACK_LOGOS,
 } as const;
 
-/** @deprecated Use HOME_HERO_TECH_STACK.technologies — kept for legacy logo strip references. */
-export const HOME_HERO_TRUSTED_NAMES = HOME_HERO_TECH_STACK.technologies;
+/** @deprecated Use HOME_HERO_STACK_LOGOS */
+export const HOME_HERO_TRUSTED_NAMES = HOME_HERO_STACK_LOGOS.map((logo) => logo.name);
 
-export const HOME_HERO_TRUSTED_LOGOS = [
-  { name: "Stripe", src: "/images/logos/trusted/stripe.svg", width: 52, height: 22 },
-  { name: "Next.js", src: "/images/logos/trusted/nextjs-dark.svg", width: 72, height: 18 },
-  { name: "Supabase", src: "/images/logos/trusted/supabase.svg", width: 88, height: 20 },
-  { name: "Vercel", src: "/images/logos/trusted/vercel-dark.svg", width: 72, height: 16 },
-  { name: "AWS", src: "/images/logos/trusted/aws.svg", width: 44, height: 28 },
-] as const;
+/** @deprecated Use HOME_HERO_STACK_LOGOS */
+export const HOME_HERO_TRUSTED_LOGOS = HOME_HERO_STACK_LOGOS;
 
 export const HOME_SERVICES_COPY = {
   eyebrow: "Services",

@@ -65,6 +65,37 @@ export function HomeHeroTrustNameMotion({
   );
 }
 
+export function HomeHeroTrustLogoMotion({
+  children,
+  index,
+  className,
+}: {
+  children: ReactNode;
+  index: number;
+  className?: string;
+}) {
+  const reduced = useReducedMotion();
+  const motionCtx = useHeroMotionOptional();
+
+  if (reduced || motionCtx?.tier === "reduced") {
+    return <li className={className}>{children}</li>;
+  }
+
+  return (
+    <motion.li
+      className={`hero-trust-logo ${className ?? ""}`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: [0.72, 0.9, 0.72], y: 0 }}
+      transition={{
+        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.15 + 1.6 },
+        y: { duration: 0.55, delay: index * 0.1 + 1.6, ease: [0.22, 1, 0.36, 1] },
+      }}
+    >
+      {children}
+    </motion.li>
+  );
+}
+
 export function HomeHeroTrustAvatarMotion({
   children,
   index,

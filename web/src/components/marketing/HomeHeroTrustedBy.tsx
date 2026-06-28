@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { StarIcon } from "@heroicons/react/24/solid";
-import { HomeHeroTrustNameMotion } from "@/components/marketing/hero-motion/HomeHeroTrustMotion";
+import { HomeHeroStackLogos } from "@/components/marketing/HomeHeroStackLogos";
 import {
   HOME_HERO_SOCIAL_PROOF,
   HOME_HERO_TECH_STACK,
@@ -70,40 +70,7 @@ export function HomeHeroTrustedBy({ className, variant = "desktop", animated = f
         ) : (
           <p className="home-hero-trust-panel__tech-label">{HOME_HERO_TECH_STACK.label}</p>
         )}
-        <ul
-          className={cn(
-            isMobile
-              ? "home-hero-mobile__trust-names mt-3 flex flex-wrap items-center justify-center"
-              : "home-hero-trust-panel__tech-list",
-          )}
-          aria-label={HOME_HERO_TECH_STACK.label}
-        >
-          {HOME_HERO_TECH_STACK.technologies.map((name, index) =>
-            animated ? (
-              <HomeHeroTrustNameMotion
-                key={name}
-                name={name}
-                index={index}
-                className={cn(
-                  isMobile
-                    ? "home-hero-mobile__trust-name font-semibold tracking-wide text-text-muted"
-                    : "home-hero-trust-panel__tech-item home-hero-trust-panel__tech-name",
-                )}
-              />
-            ) : (
-              <li
-                key={name}
-                className={cn(
-                  isMobile
-                    ? "home-hero-mobile__trust-name font-semibold tracking-wide text-text-muted"
-                    : "home-hero-trust-panel__tech-item",
-                )}
-              >
-                {!isMobile ? <span className="home-hero-trust-panel__tech-name">{name}</span> : name}
-              </li>
-            ),
-          )}
-        </ul>
+        <HomeHeroStackLogos animated={animated} className="mt-3" />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { HOME_HERO_TECH_STACK, HOME_HERO_TRUSTED_LOGOS } from "@/lib/home-conversion-content";
+import { HomeHeroStackLogos } from "@/components/marketing/HomeHeroStackLogos";
+import { HOME_HERO_TECH_STACK } from "@/lib/home-conversion-content";
 import { HERO_MOBILE_EYEBROW_CLASS } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 
@@ -15,20 +15,7 @@ export function HomeHeroTrustedByLogos({ className }: HomeHeroTrustedByLogosProp
         <p className={HERO_MOBILE_EYEBROW_CLASS}>{HOME_HERO_TECH_STACK.label}</p>
         <span className="home-hero-mobile__trust-divider" aria-hidden />
       </div>
-      <ul className="home-hero-mobile__trust-logos mt-3" aria-label={HOME_HERO_TECH_STACK.label}>
-        {HOME_HERO_TRUSTED_LOGOS.map((logo) => (
-          <li key={logo.name}>
-            <Image
-              src={logo.src}
-              alt={logo.name}
-              width={logo.width}
-              height={logo.height}
-              className="home-hero-mobile__trust-logo h-auto w-auto object-contain"
-              unoptimized
-            />
-          </li>
-        ))}
-      </ul>
+      <HomeHeroStackLogos className="mt-3" />
     </div>
   );
 }

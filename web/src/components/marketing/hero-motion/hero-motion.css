@@ -417,6 +417,7 @@
 }
 
 .hero-trust-name,
+.hero-trust-logo,
 .hero-trust-avatar {
   will-change: transform, opacity;
 }
