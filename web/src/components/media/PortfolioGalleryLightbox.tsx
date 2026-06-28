@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import Image from "next/image";
 
 type GalleryImage = {
@@ -72,7 +73,7 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
       });
     };
     probe.onerror = () => setNaturalSize({ width: 1440, height: 2400 });
-    probe.src = source;
+    probe.src = toSanityCdnImageSrc(source, 1920);
   }, [activeIndex, images]);
 
   return (
@@ -87,7 +88,7 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
             aria-label={`Open screen ${index + 1} preview`}
           >
             <Image
-              src={image.src}
+              src={toSanityCdnImageSrc(image.src, 960)}
               alt={image.alt}
               fill
               sizes="(min-width: 640px) 50vw, 100vw"
@@ -128,7 +129,7 @@ export function PortfolioGalleryLightbox({ images }: PortfolioGalleryLightboxPro
               <div className="flex min-h-full min-w-full items-start justify-center p-3 sm:p-6">
                 {naturalSize ? (
                   <Image
-                    src={images[activeIndex].src}
+                    src={toSanityCdnImageSrc(images[activeIndex].src, Math.min(naturalSize.width, 1920))}
                     alt={images[activeIndex].alt}
                     width={naturalSize.width}
                     height={naturalSize.height}

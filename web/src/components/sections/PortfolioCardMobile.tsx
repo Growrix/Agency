@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import { SERVICES } from "@/lib/content";
 import { SERVICE_PORTFOLIO_TAG_LABELS } from "@/lib/services-landing-content";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
@@ -31,11 +32,11 @@ export function PortfolioCardMobile({ project }: PortfolioCardMobileProps) {
       <div className="home-mobile-marketing__portfolio-card-media">
         {image ? (
           <Image
-            src={image.src}
+            src={toSanityCdnImageSrc(image.src, 828)}
             alt={image.alt}
             fill
             loading="lazy"
-            sizes="100vw"
+            sizes="(min-width: 640px) 50vw, 100vw"
             className="object-contain bg-[#070b12]"
           />
         ) : embeddedPreview ? (

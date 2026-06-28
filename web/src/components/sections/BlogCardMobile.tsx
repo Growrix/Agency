@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import type { BlogPost } from "@/lib/content";
 import { formatBlogDate } from "@/lib/content";
+import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import { getBlogImage } from "@/lib/site-images";
 import { cn } from "@/lib/utils";
 
@@ -25,11 +26,11 @@ export function BlogCardMobile({ post, compact = false }: { post: BlogPost; comp
       >
         {image ? (
           <Image
-            src={image.src}
+            src={toSanityCdnImageSrc(image.src, 828)}
             alt={image.alt}
             fill
             loading="lazy"
-            sizes="100vw"
+            sizes="(min-width: 640px) 85vw, 100vw"
             className="object-cover"
           />
         ) : null}

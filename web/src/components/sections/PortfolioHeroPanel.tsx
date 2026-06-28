@@ -9,6 +9,7 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/outline";
 import { Card } from "@/components/primitives/Card";
+import { sanityThumbSrc } from "@/lib/sanity-image";
 import { PORTFOLIO_HERO_PANEL } from "@/lib/portfolio-landing-content";
 import type { PortfolioFilter } from "@/lib/portfolio-landing-content";
 import type { PublicPortfolioRecord } from "@/server/domain/catalog";
@@ -31,7 +32,7 @@ function ProjectPreviewRow({ project }: { project: PublicPortfolioRecord }) {
     >
       <span className="relative size-11 shrink-0 overflow-hidden rounded-md border border-border bg-[#070b12]">
         {image ? (
-          <Image src={image.src} alt="" fill sizes="44px" className="object-cover" aria-hidden />
+          <Image src={sanityThumbSrc(image.src, 44)} alt="" fill sizes="44px" className="object-cover" aria-hidden />
         ) : (
           <span className="absolute inset-0 bg-linear-to-br from-primary/20 to-transparent" aria-hidden />
         )}

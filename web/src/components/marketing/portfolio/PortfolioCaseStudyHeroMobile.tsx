@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
@@ -75,11 +76,11 @@ export function PortfolioCaseStudyHeroMobile({
         <div className={`relative aspect-16/10 overflow-hidden bg-linear-to-br ${accent}`}>
           {heroImage ? (
             <Image
-              src={heroImage.src}
+              src={toSanityCdnImageSrc(heroImage.src, 828)}
               alt={heroImage.alt}
               fill
               priority
-              sizes="100vw"
+              sizes="(min-width: 640px) 85vw, 100vw"
               className="object-contain bg-[#070b12]"
             />
           ) : embeddedPreviewUrl ? (
