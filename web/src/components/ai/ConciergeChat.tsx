@@ -50,7 +50,7 @@ type Message = {
 };
 
 const STARTER_PROMPTS = [
-  "What do Website Templates with Live Preview cost?",
+  "What do Website Templates cost?",
   "Which path fits a local business launching online?",
   "What's included in Done-For-You setup?",
   "How much does a SaaS MVP usually cost?",
@@ -61,7 +61,7 @@ const KNOWLEDGE_AREAS = [
     title: "Services",
     detail: "Websites, SaaS, mobile apps, automation, technical SEO, and AI business systems.",
   },
-  { title: "Digital products", detail: "HTML business profiles, live-preview templates, and purchase tiers." },
+  { title: "Digital products", detail: "HTML business profiles, website templates, and purchase tiers." },
   { title: "Pricing", detail: "Investment guide paths, service ranges, and marketplace tiers." },
   { title: "Next steps", detail: "Book a call, browse products, use contact, or escalate to WhatsApp." },
 ];

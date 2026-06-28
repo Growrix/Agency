@@ -8,6 +8,7 @@ import { Card } from "@/components/primitives/Card";
 import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceholder";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { cn } from "@/lib/utils";
 import { getCheckoutHref, getProductHref, type ShopCatalogCardVariant, type ShopProduct } from "@/lib/shop";
 import {
@@ -150,7 +151,7 @@ export function ShopProductHtmlPreviewCard({
                 target={hasExternalPreview ? "_blank" : undefined}
                 rel={hasExternalPreview ? "noreferrer" : undefined}
               >
-                Live Preview <ArrowUpRightIcon className="size-3.5" />
+                {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-3.5" />
               </LinkButton>
             </div>
             <Link href={getProductHref(product)} className="text-sm font-medium text-primary hover:underline">

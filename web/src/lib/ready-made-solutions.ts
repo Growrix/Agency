@@ -24,7 +24,7 @@ export const READY_MADE_SOLUTION_TAB_DEFINITIONS: ReadyMadeSolutionTabDefinition
     id: "website-templates",
     label: "Website Templates",
     categorySlug: WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
-    description: "Desktop live previews — inspect full website templates before you buy.",
+    description: "Desktop website previews — inspect full website templates before you buy.",
     previewLimit: 3,
     previewMode: "website-template-wide",
   },

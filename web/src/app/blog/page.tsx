@@ -145,7 +145,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
               {!isFiltering && featured && (
             <Link
               href={`/blog/${featured.slug}`}
-              className="group mt-12 grid overflow-hidden rounded-lg border border-border bg-surface hover:shadow-(--shadow-3) transition-all lg:grid-cols-12"
+              className="group marketing-content-split mt-12 overflow-hidden rounded-lg border border-border bg-surface transition-all hover:shadow-(--shadow-3)"
             >
               <div className={`relative aspect-16/10 lg:aspect-auto lg:col-span-7 overflow-hidden bg-linear-to-br ${featured.accent}`}>
                 {featuredImage ? (
@@ -213,7 +213,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
               />
             }
             desktop={
-              <div className="grid gap-10 lg:grid-cols-12">
+              <div className="marketing-content-split gap-10">
                 <div className="lg:col-span-8">
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <SectionHeading

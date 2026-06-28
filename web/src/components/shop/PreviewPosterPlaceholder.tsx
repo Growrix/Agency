@@ -12,7 +12,7 @@ type PreviewPosterPlaceholderProps = {
 
 export function PreviewPosterPlaceholder({
   title,
-  subtitle = "Click to load live preview",
+  subtitle = "Click to load website preview",
   onActivate,
   className,
 }: PreviewPosterPlaceholderProps) {
@@ -24,7 +24,7 @@ export function PreviewPosterPlaceholder({
         "group absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-3 bg-[#0a0a0a] px-4 text-center transition-colors hover:bg-[#111111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
         className,
       )}
-      aria-label={`Load live preview for ${title}`}
+      aria-label={`Load website preview for ${title}`}
     >
       <span className="inline-flex size-11 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/80 transition group-hover:border-primary/50 group-hover:text-primary">
         <PlayCircleIcon className="size-6" aria-hidden />

@@ -207,11 +207,11 @@ export function buildMarketplaceDocuments(): ConciergeKnowledgeDocument[] {
     },
     {
       id: "pricing-website-templates-live-preview",
-      label: "Website Templates with Live Preview pricing",
+      label: "Website Templates pricing",
       sourcePath: "/digital-products/category/website-templates-html-preview",
       sourceType: "pricing",
       content:
-        "Website Templates with Live Preview use three tiers: Standard at $149 (self-serve template download), Premium at $499 (done-for-you setup with branding, content, and core integrations), and Done-For-You at custom pricing for full implementation. Each product includes embedded desktop and mobile live preview. Browse at /digital-products/category/website-templates-html-preview.",
+        "Website Templates use three tiers: Standard at $149 (self-serve template download), Premium at $499 (done-for-you setup with branding, content, and core integrations), and Done-For-You at custom pricing for full implementation. Each product includes desktop and mobile website preview. Browse at /digital-products/category/website-templates-html-preview.",
     },
     {
       id: "offering-marketplace-structure",

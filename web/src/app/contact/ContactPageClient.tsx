@@ -365,7 +365,7 @@ export function ContactPageClient() {
           <MarketingViewportGate
             mobile={<ContactFormMobileSection>{inquiryCard}</ContactFormMobileSection>}
             desktop={
-              <div className="grid gap-10 lg:grid-cols-12">
+              <div className="marketing-content-split gap-10">
                 <div className="lg:col-span-5">
                   <SectionHeading
                     eyebrow={CONTACT_FORM.eyebrow}

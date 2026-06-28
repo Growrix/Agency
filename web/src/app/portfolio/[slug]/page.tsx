@@ -89,7 +89,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <Link href="/portfolio" className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary">
                 ← All projects
               </Link>
-              <div className="mt-6 grid gap-12 lg:grid-cols-12 items-start">
+              <div className="marketing-content-split mt-6 gap-12">
                 <div className="lg:col-span-6">
                   <div className="flex items-center gap-2 flex-wrap">
                     <Badge tone="primary">{project.industry}</Badge>
@@ -136,7 +136,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   ) : project.embeddedPreviewUrl ? (
                     <iframe
                       src={project.embeddedPreviewUrl}
-                      title={`${project.name} live preview`}
+                      title={`${project.name} website preview`}
                       className="absolute inset-0 h-full w-full border-0"
                       loading="lazy"
                       referrerPolicy="strict-origin-when-cross-origin"

@@ -117,7 +117,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryLanding({ products }: { produ
                   ← {WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_HERO.backLabel}
                 </Link>
 
-                <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-12 lg:items-start xl:gap-10">
+                <div className="marketing-content-split mt-6 min-w-0 gap-8 xl:gap-10">
                   <div className="min-w-0 self-start lg:col-span-4 lg:sticky lg:top-24">
                     <Badge tone="primary" dot>
                       {WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_HERO.eyebrow}

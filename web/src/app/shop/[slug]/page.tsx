@@ -633,7 +633,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       target={hasExternalPreview ? "_blank" : undefined}
                       rel={hasExternalPreview ? "noreferrer" : undefined}
                     >
-                      Live Preview
+                      {WEBSITE_TEMPLATE_PREVIEW.previewCta}
                     </LinkButton>
                   </div>
                 </div>
@@ -728,7 +728,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     target={hasExternalPreview ? "_blank" : undefined}
                     rel={hasExternalPreview ? "noreferrer" : undefined}
                   >
-                    Live Preview <ArrowUpRightIcon className="size-4" />
+                    {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-4" />
                   </LinkButton>
                 </div>
 
@@ -1116,7 +1116,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       target={hasExternalPreview ? "_blank" : undefined}
                       rel={hasExternalPreview ? "noreferrer" : undefined}
                     >
-                      Live Preview
+                      {WEBSITE_TEMPLATE_PREVIEW.previewCta}
                     </LinkButton>
                   </div>
                 </div>
@@ -1200,7 +1200,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     target={hasExternalPreview ? "_blank" : undefined}
                     rel={hasExternalPreview ? "noreferrer" : undefined}
                   >
-                    Live Preview <ArrowUpRightIcon className="size-4" />
+                    {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-4" />
                   </LinkButton>
                 </div>
 
@@ -1510,7 +1510,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               target={hasExternalPreview ? "_blank" : undefined}
               rel={hasExternalPreview ? "noreferrer" : undefined}
             >
-              Live Preview
+              {WEBSITE_TEMPLATE_PREVIEW.previewCta}
             </LinkButton>
           </div>
         </div>
@@ -1546,7 +1546,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <div className="aspect-16/10 min-w-0 bg-black">
                     <iframe
                       src={product.embeddedPreviewUrl}
-                      title={`${product.name} live preview`}
+                      title={`${product.name} website preview`}
                       className="h-full w-full border-0"
                       loading="lazy"
                       referrerPolicy="strict-origin-when-cross-origin"
@@ -2062,7 +2062,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   target={hasExternalPreview ? "_blank" : undefined}
                   rel={hasExternalPreview ? "noreferrer" : undefined}
                 >
-                  Live Preview <ArrowUpRightIcon className="size-4" />
+                  {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-4" />
                 </LinkButton>
               </div>
 
@@ -2355,7 +2355,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
             target={hasExternalPreview ? "_blank" : undefined}
             rel={hasExternalPreview ? "noreferrer" : undefined}
           >
-            Live Preview
+            {WEBSITE_TEMPLATE_PREVIEW.previewCta}
           </LinkButton>
         </div>
       </div>

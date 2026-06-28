@@ -157,7 +157,7 @@ export function PortfolioPageClient({ projects, filters }: PortfolioPageClientPr
               </div>
             }
             desktop={
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div className="flex flex-wrap gap-2">
                   {filters.map((item) => (
                     <button

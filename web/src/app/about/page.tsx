@@ -256,7 +256,7 @@ export default function AboutPage() {
           <MarketingViewportGate
             mobile={<AboutBusinessFirstMobile />}
             desktop={
-              <div className="grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-10">
+              <div className="marketing-content-split gap-8 lg:gap-10">
                 <div className="lg:col-span-7">
                   <SectionHeading
                     eyebrow={ABOUT_BUSINESS_FIRST_SECTION.eyebrow}

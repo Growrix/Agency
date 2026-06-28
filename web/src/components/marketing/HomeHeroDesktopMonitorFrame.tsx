@@ -23,7 +23,7 @@ export function HomeHeroDesktopMonitorFrame({
           <span className="size-2.5 rounded-full bg-[#febc2e]" aria-hidden />
           <span className="size-2.5 rounded-full bg-[#28c840]" aria-hidden />
           <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.16em] text-text-muted">
-            Live preview
+            Website preview
           </span>
         </div>
         <div

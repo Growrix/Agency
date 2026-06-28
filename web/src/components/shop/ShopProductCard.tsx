@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { getProductImage } from "@/lib/site-images";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { cn } from "@/lib/utils";
 
 function StarRating({ rating }: { rating: number }) {
@@ -118,7 +119,7 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
             target={hasExternalPreview ? "_blank" : undefined}
             rel={hasExternalPreview ? "noreferrer" : undefined}
           >
-            Live Preview <ArrowUpRightIcon className="size-3.5" />
+            {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>
         </div>
         <Link href={getProductHref(product)} className="text-sm font-medium text-primary hover:underline">

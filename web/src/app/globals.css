@@ -180,6 +180,7 @@ html {
   /* Smooth color transitions when toggling themes â€” short and disabled
      for users who prefer reduced motion (handled below). */
   transition: background-color 240ms var(--ease-signal), color 240ms var(--ease-signal);
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -269,6 +270,27 @@ body {
 
   .marketing-split-hero__panel {
     grid-column: span 5 / span 5;
+  }
+}
+
+/* Shared 12-col content split — avoids Firefox flex/grid centering bugs */
+.marketing-content-split {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: 2rem;
+  align-items: start;
+}
+
+.marketing-content-split > * {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .marketing-content-split {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 2.5rem;
+    row-gap: 2rem;
   }
 }
 
@@ -982,13 +1004,14 @@ body {
   .home-hero-desktop {
     display: grid;
     width: 100%;
-    align-items: center;
+    align-items: start;
     gap: 2.5rem;
     grid-template-columns: minmax(0, 44%) minmax(0, 56%);
   }
 
   .home-hero-desktop__copy {
     text-align: left;
+    align-self: center;
   }
 
   .home-hero-desktop__badge {
@@ -1080,6 +1103,7 @@ body {
     position: relative;
     z-index: 2;
     min-width: 0;
+    align-self: center;
   }
 
   .home-hero-desktop__showcase-glow {

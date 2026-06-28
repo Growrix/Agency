@@ -172,7 +172,7 @@ export const SHOP_MARKETPLACE_COPY = {
     },
     allProducts: {
       title: "All products",
-      description: "Browse the full catalog with live previews.",
+      description: "Browse the full catalog with website previews.",
     },
   },
   mobile: {

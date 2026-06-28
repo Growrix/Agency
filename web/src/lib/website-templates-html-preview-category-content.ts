@@ -21,18 +21,18 @@ export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_METADATA = {
 export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_HERO = {
   eyebrow: WEBSITE_TEMPLATE_PREVIEW.heroBadge,
   title: WEBSITE_TEMPLATE_PREVIEW.heroTitle,
-  titleLead: "Website templates with",
-  titleAccent: "embedded live preview.",
+  titleLead: "Website preview",
+  titleAccent: "for every template.",
   description: `${WEBSITE_TEMPLATE_PREVIEW.heroDescription} Review the template in-frame, then continue with your preferred purchase or customization path.`,
   primaryCta: WEBSITE_TEMPLATE_PREVIEW.browseCollectionCta,
   secondaryCta: "Open Product Details",
-  previewLabel: "Live template preview",
+  previewLabel: "Website preview",
   backLabel: "All digital products",
   backHref: WEBSITE_TEMPLATES_HTML_PREVIEW_DIGITAL_PRODUCTS_PATH,
   statCatalogLabel: "Catalog Items",
   statPreviewsLabel: WEBSITE_TEMPLATE_PREVIEW.statPreviewsLabel,
   statDeliveryPathsLabel: "Delivery Paths",
-  statEmbeddedPreviewLabel: "Embedded Preview",
+  statEmbeddedPreviewLabel: "In-frame preview",
   statDeliveryPathsValue: "3",
   statEmbeddedPreviewValue: "Live",
 } as const;
@@ -63,7 +63,7 @@ export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SHOWCASE_SECTION = {
 export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_CATALOG_SECTION = {
   eyebrow: "Template catalog",
   title: WEBSITE_TEMPLATE_PREVIEW.catalogSectionTitle,
-  titleLead: "Website preview templates",
+  titleLead: "Website templates",
   titleAccent: "you can buy right now",
   description: WEBSITE_TEMPLATE_PREVIEW.catalogSectionDescription,
   browseCta: WEBSITE_TEMPLATE_PREVIEW.browseCategoryCta,
@@ -118,7 +118,7 @@ export function buildWebsiteTemplatesCategoryPricingTiers(
 export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_FAQ_SECTION = {
   eyebrow: "FAQ",
   title: WEBSITE_TEMPLATE_PREVIEW.faqTitle,
-  titleLead: "Live preview page questions,",
+  titleLead: "Website preview questions,",
   titleAccent: "answered.",
 } as const;
 
@@ -139,6 +139,6 @@ export const WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_FINAL_CTA = {
   description: `${WEBSITE_TEMPLATE_PREVIEW.bottomCtaCopy} when you are ready to launch.`,
   primaryCta: "Book Consultation",
   primaryHref: "/book-appointment",
-  secondaryCta: "Reopen Preview Page",
+  secondaryCta: "Reopen Website Preview",
   secondaryHref: WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_PATH,
 } as const;

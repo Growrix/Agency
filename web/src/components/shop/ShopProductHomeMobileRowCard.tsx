@@ -9,6 +9,7 @@ import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/Websit
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
 import {
   getHtmlBusinessProfilePreviewUrl,
@@ -146,7 +147,7 @@ export function ShopProductHomeMobileRowCard({
             target={hasExternalPreview ? "_blank" : undefined}
             rel={hasExternalPreview ? "noreferrer" : undefined}
           >
-            Live Preview <ArrowUpRightIcon className="home-mobile-marketing__product-row-action-icon" aria-hidden />
+            {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="home-mobile-marketing__product-row-action-icon" aria-hidden />
           </LinkButton>
         </div>
         <Link href={getProductHref(product)} className="home-mobile-marketing__product-row-details">

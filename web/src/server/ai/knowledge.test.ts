@@ -58,9 +58,9 @@ describe("searchKnowledgeDocuments", () => {
     assert.match(content, /\$299/);
   });
 
-  it("returns website template live preview pricing", () => {
-    assert.equal(hasMatch("Website template live preview price", /\$149/), true);
-    assert.equal(hasMatch("Website template live preview price", /\$499/), true);
+  it("returns website template pricing", () => {
+    assert.equal(hasMatch("Website Templates price", /\$149/), true);
+    assert.equal(hasMatch("Website Templates price", /\$499/), true);
   });
 
   it("returns current SaaS MVP pricing", () => {

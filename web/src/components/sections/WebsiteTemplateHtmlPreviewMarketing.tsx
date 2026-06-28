@@ -21,7 +21,7 @@ const TEMPLATE_MOBILE_FEATURES = [
 
 const PROFILE_MOBILE_FEATURES = [
   { icon: DevicePhoneMobileIcon, label: "390px frame", hint: "Standard mobile width" },
-  { icon: SignalIcon, label: "Live preview", hint: "Not a screenshot" },
+  { icon: SignalIcon, label: "Website preview", hint: "Not a screenshot" },
   { icon: FingerPrintIcon, label: "Touch-ready", hint: "Built for thumbs" },
   { icon: GlobeAltIcon, label: "Responsive", hint: "Breakpoints included" },
 ] as const;
@@ -140,7 +140,7 @@ export function HtmlBusinessProfileMobilePreviewMarketing() {
 
 export function HtmlBusinessProfileProductPreviewHighlights() {
   const items = [
-    { icon: SignalIcon, label: "Live preview", hint: "Real profile in-frame" },
+    { icon: SignalIcon, label: "Website preview", hint: "Real profile in-frame" },
     { icon: DevicePhoneMobileIcon, label: "Responsive", hint: "Desktop + mobile ready" },
     { icon: ShieldCheckIcon, label: "Buy-ready", hint: "Three launch paths" },
     { icon: GlobeAltIcon, label: "Scrollable", hint: "Explore every section" },

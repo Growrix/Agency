@@ -86,7 +86,7 @@ export function PortfolioCaseStudyHeroMobile({
           ) : embeddedPreviewUrl ? (
             <iframe
               src={embeddedPreviewUrl}
-              title={`${name} live preview`}
+              title={`${name} website preview`}
               className="absolute inset-0 h-full w-full border-0"
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"

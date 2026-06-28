@@ -242,7 +242,7 @@ export const HTML_BUSINESS_PROFILES_CATEGORY_FAQ: AccordionItem[] = [
   {
     question: "Can I preview profiles before purchasing?",
     answer:
-      "Yes. Every profile includes a live preview so you can review the layout, style, and content flow before buying.",
+      "Yes. Every profile includes a website preview so you can review the layout, style, and content flow before buying.",
   },
   {
     question: "Are these connected to checkout?",

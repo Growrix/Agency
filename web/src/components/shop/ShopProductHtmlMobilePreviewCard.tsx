@@ -10,6 +10,7 @@ import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/Website
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { SHOP_PROFILE_MOBILE_PREVIEW_MAX_HEIGHT } from "@/lib/shop-mobile-preview";
+import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { cn } from "@/lib/utils";
 import { getCheckoutHref, getProductHref, type ShopCatalogCardVariant, type ShopProduct } from "@/lib/shop";
 import {
@@ -183,7 +184,7 @@ export function ShopProductHtmlMobilePreviewCard({
                 target={hasExternalPreview ? "_blank" : undefined}
                 rel={hasExternalPreview ? "noreferrer" : undefined}
               >
-                Live Preview <ArrowUpRightIcon className="size-3.5" />
+                {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-3.5" />
               </LinkButton>
             </div>
             <Link href={getProductHref(product)} className="text-sm font-medium text-primary hover:underline">
