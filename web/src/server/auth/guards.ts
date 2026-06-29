@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { type NextRequest, NextResponse } from "next/server";
 import { ApiError } from "@/server/core/api";
 import { isClerkConfigured, isLegacyTestAuthEnabled } from "@/server/auth/clerk-config";
-import { getUserByClerkId, syncClerkUser } from "@/server/auth/clerk-sync";
+import { getUserByClerkId, syncClerkUser, upsertUserFromClerk } from "@/server/auth/clerk-sync";
 import { getUserById } from "@/server/auth/users";
 import {
   LEGACY_SESSION_COOKIE_NAME,
@@ -57,14 +57,38 @@ async function getLegacyAuthenticatedUser(request: Request | NextRequest): Promi
 }
 
 async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
-  const { userId } = await auth();
+  const { userId, sessionClaims } = await auth();
   if (!userId) {
     return null;
   }
 
   let user = await getUserByClerkId(userId);
   if (!user) {
-    user = await syncClerkUser(userId);
+    try {
+      user = await syncClerkUser(userId);
+    } catch {
+      user = null;
+    }
+  }
+
+  if (!user) {
+    const claims = (sessionClaims ?? {}) as Record<string, unknown>;
+    const claimEmail =
+      (typeof claims.email === "string" ? claims.email : undefined) ??
+      (typeof claims.email_address === "string" ? claims.email_address : undefined);
+
+    if (claimEmail) {
+      user = await upsertUserFromClerk({
+        clerkUserId: userId,
+        email: claimEmail,
+        firstName:
+          (typeof claims.first_name === "string" ? claims.first_name : undefined) ??
+          (typeof claims.given_name === "string" ? claims.given_name : undefined),
+        lastName:
+          (typeof claims.last_name === "string" ? claims.last_name : undefined) ??
+          (typeof claims.family_name === "string" ? claims.family_name : undefined),
+      });
+    }
   }
 
   if (!user) {

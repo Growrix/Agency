@@ -4,7 +4,8 @@ import { getRuntimeConfig } from "@/server/config/runtime";
 
 export function isClerkConfigured() {
   const runtime = getRuntimeConfig();
-  return Boolean(runtime.clerk.publishableKey && runtime.clerk.secretKey);
+  // Treat Clerk as active when publishable key is present so middleware and UI stay in sync.
+  return Boolean(runtime.clerk.publishableKey);
 }
 
 export function isLegacyTestAuthEnabled() {
