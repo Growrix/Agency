@@ -434,7 +434,7 @@ Remaining parallel tracks:
 - [x] T070 Add `'/__clerk/:path*'` proxy matcher; public `/sign-in` and `/sign-up` routes; `/dashboard/login` redirect alias; update `.env.example` Clerk sign-in/up URLs.
 - [x] T071 Replace header Book Appointment CTAs with `PublicAuthControls` (Sign In / Sign Up / UserButton) in `Header.tsx` + `HeaderMobileNav.tsx` only; legacy fallback when Clerk keys absent.
 - [x] T072 Add `clerk-sync.test.ts` email-match id preservation unit test.
-- [~] T073 Operator: complete `npm run clerk:login` OAuth, then `npm run clerk:env` + `npm run clerk:doctor`; register production webhook in Clerk Dashboard. Manual sign-up smoke pending populated `CLERK_*` keys.
+- [x] T073 Clerk env activated: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` (pk_test_) + `CLERK_SECRET_KEY` (sk_test_) populated in `web/.env.local` via Clerk Dashboard (2026-06-29). Programmatic smoke: /sign-in 200, /sign-up 200, /dashboard/login 200, /dashboard 307 (Clerk guard). Browser manual smoke pending (sign-up → /dashboard → UserButton). Production webhook + admin metadata still to register post-deploy (see todos: prod-webhook, admin-metadata).
 
 ## Release Readiness Checklist
 - [x] Local production build passes.
@@ -492,3 +492,63 @@ Remaining parallel tracks:
 - **Code:** `PublicAuthControls.tsx`, `ClerkAuthShell.tsx`, `SignInExperience.tsx`, `SignUpExperience.tsx`, `web/.clerk/config.json`, `web/docs/clerk-setup.md`, `npm run clerk:*` scripts.
 - **Operator pending:** `npm run clerk:login` (OAuth) → `npm run clerk:env` → `npm run clerk:doctor`; production webhook at `/api/webhooks/clerk`.
 - **Validation:** lint 0, typecheck 0, unit 30/30, integration 5/5, `next build` exit 0 (194 SSG routes incl. `/sign-in`, `/sign-up`), release-gates e2e 8/8 desktop-chrome.
+
+### Phase P12 — Auth UX Modal + Dashboard Header Controls
+- [x] T074 Switch `PublicAuthControls.tsx` `SignInButton`/`SignUpButton` to `mode="modal"`. Test redirect to `/dashboard` after sign-up. `web/src/components/shell/PublicAuthControls.tsx`
+- [x] T075 Add signed-in desktop state: `UserButton` + "Dashboard" `LinkButton`. Add mobile signed-in state: `UserButton` + dashboard icon link. `web/src/components/shell/PublicAuthControls.tsx`
+- [~] T076 Smoke test modal on dev server; confirm `/sign-in` standalone still works as fallback. Automated gates passed (`lint`, `typecheck`, `test:unit`, `test:integration`, `build`, `release-gates`); manual modal interaction check pending operator browser pass.
+
+### Phase P13 — Cart System (Frontend)
+- [ ] T077 Create `web/src/lib/cart-store.ts` — Zustand + `persist` middleware. Types: `CartItem`, `CartStore`. SSR hydration guard.
+- [ ] T078 Create `web/src/components/shop/CartDrawer.tsx` — slide-over, item list, qty controls, subtotal, checkout CTA, close button. Accessible: focus trap, role=dialog, Escape closes.
+- [ ] T079 Add cart icon + badge to `Header.tsx` (desktop) and `HeaderMobileNav.tsx` (mobile). `ShoppingBagIcon` with item-count badge.
+- [ ] T080 Add "Add to Cart" button to product detail page (`app/shop/[slug]/page.tsx`). Preserve existing "Buy Now" CTA.
+- [ ] T081 Extend `CheckoutExperience.tsx` to read cart items from store. Accept multi-item cart payload. Preserve single-product URL-param fallback. Call `clearCart()` on order success.
+- [ ] T082 Extend `POST /api/v1/orders/route.ts` to accept `items[]` array (multi-item). Backwards compatible with single `product_slug`.
+- [ ] T083 Extend `createOrder()` in `orders.ts` to handle multi-item `items[]` input.
+- [ ] T084 Cart unit tests (`lib/cart-store.test.ts`). Multi-item order creation test.
+
+### Phase P14 — Supabase Activation (Operator + Code)
+- [ ] T090 Append `invoices` and `cart_sessions` SQL to `web/supabase/schema.sql`.
+- [ ] T091 OPERATOR: Add `SUPABASE_DB_URL` to `web/.env.local` (Supabase dashboard → Settings → Database → Connection string → URI). Add to `.gitignore` verification.
+- [ ] T092 OPERATOR: Run `npm run db:migrate` from `web/`. Verify all tables exist: `app_state`, `products`, `product_variants`, `orders`, `order_items`, `downloads`, `licenses`, `invoices`, `cart_sessions`.
+- [ ] T093 Wire `user_id` attachment in `createOrder()`: read Clerk user from request session, look up `users` mirror, attach `user_id` to order record.
+- [ ] T094 Verify store reads from Supabase in dev (log check or `/api/health` extension).
+
+### Phase P15 — Checkout Redesign + Upsell (Frontend)
+- [ ] T085 Create `web/src/components/checkout/PaymentMethodSelector.tsx`. Radio group: Stripe (disabled/coming-soon), Payoneer, Bank Transfer, WU/MG, Invoice (default).
+- [ ] T086 Create `web/src/components/checkout/CheckoutUpsell.tsx`. Fetch 2-3 products same category. Compact product cards with "Add to Cart".
+- [ ] T087 Integrate `PaymentMethodSelector` and `CheckoutUpsell` into `CheckoutExperience.tsx`.
+- [ ] T088 Update `/success` page with "Customers also bought" upsell section (2 products, same category).
+- [ ] T089 Update order summary in checkout: multi-item breakdown, subtotal, payment-method-specific next-steps message.
+
+### Phase P16 — Invoice Payment Flow (Backend)
+- [ ] T095 Add `InvoiceRecord`, `InvoiceStatus`, `PaymentMethodType` to `web/src/server/data/schema.ts`.
+- [ ] T096 Create `web/src/server/domain/invoices.ts` — `createInvoice`, `sendInvoiceEmail`, `markInvoicePaid`, `getInvoiceByOrder`.
+- [ ] T097 Add invoice HTML email template to `commerce-emails.ts`. Per-method payment instructions section (bank, Payoneer, WU/MG, Stripe).
+- [ ] T098 Create `web/data/payment-methods.json` (gitignored). Document in `.gitignore`. Load via server-only runtime.
+- [ ] T099 Extend `POST /api/v1/orders/route.ts`: after order created + payment_method ≠ stripe, auto-create invoice, send email.
+- [ ] T100 Add `POST /api/v1/admin/orders/[orderId]/invoice/send` and `PATCH /api/v1/admin/orders/[orderId]/invoice/paid`.
+- [ ] T101 Invoice domain unit tests.
+
+### Phase P17 — S3 File Storage + Downloads
+- [ ] T102 Install `@aws-sdk/client-s3` and `@aws-sdk/s3-request-presigner` in `web/`.
+- [ ] T103 Create `web/src/server/storage/s3.ts` — `isS3Configured`, `getS3Client`, `generatePresignedDownloadUrl`, `generatePresignedUploadUrl`.
+- [ ] T104 Extend `downloads.ts` — replace `asset_path` stub with real presigned URL; graceful fallback message when S3 absent.
+- [ ] T105 Create `app/admin/files/` upload page + `POST /api/v1/admin/files/upload` presigned upload URL endpoint.
+- [ ] T106 Create `PATCH /api/v1/admin/downloads/[downloadId]/asset` — link asset_path to download record.
+- [ ] T107 S3 module unit tests (mock S3 client). OPERATOR: create AWS S3 bucket `growrix-agency-assets`, configure IAM with minimum required permissions (`s3:GetObject`, `s3:PutObject` only).
+
+### Phase P18 — Admin Order Management UI
+- [ ] T108 Create `app/admin/orders/page.tsx` — order list table, filter bar (status, payment_status, email search), stats row.
+- [ ] T109 Create `app/admin/orders/[orderId]/page.tsx` + `OrderDetailShell.tsx` — order detail with all action buttons (Send Invoice, Mark Paid, Update Fulfillment, Add Delivery URL, Link Asset).
+- [ ] T110 Create `GET /api/v1/admin/orders` — paginated, filterable list.
+- [ ] T111 Create `GET /api/v1/admin/orders/[orderId]` — full detail with invoice, items, downloads, licenses.
+- [ ] T112 Create `PATCH /api/v1/admin/orders/[orderId]/fulfillment` and `POST /api/v1/admin/orders/[orderId]/delivery-url`.
+- [ ] T113 Admin order management integration tests.
+- [ ] T114 Add "Orders" and "Files" links to admin nav.
+
+### Phase P19 — Notifications
+- [ ] T115 Extend `notifications.ts` — `order_placed`, `invoice_sent`, `invoice_paid` event types.
+- [ ] T116 Wire `order_placed` into `createOrder()`. Wire `invoice_sent` into `sendInvoiceEmail()`. Wire `invoice_paid` into `markInvoicePaid()`.
+- [ ] T117 Add admin new-order notification email (Resend to `CONTACT_TO_EMAIL`). Verify Lark fires for new event types.

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { Squares2X2Icon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { isClerkConfiguredClient } from "@/lib/clerk-client";
 import { cn } from "@/lib/utils";
@@ -40,12 +40,12 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
     return (
       <div className={cn("flex flex-col gap-2", className)}>
         <SignedOut>
-          <SignInButton mode="redirect" forceRedirectUrl="/dashboard">
+          <SignInButton mode="modal" forceRedirectUrl="/dashboard">
             <Button fullWidth onClick={onNavigate}>
               Sign in
             </Button>
           </SignInButton>
-          <SignUpButton mode="redirect" forceRedirectUrl="/dashboard">
+          <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
             <Button fullWidth variant="outline" onClick={onNavigate}>
               Sign up
             </Button>
@@ -66,16 +66,18 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
   return (
     <div className={cn("flex items-center gap-1 lg:gap-2", className)}>
       <SignedOut>
-        <Link
-          href="/sign-in"
-          className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
-          aria-label="Sign in"
-          title="Sign in"
-          onClick={onNavigate}
-        >
-          <UserCircleIcon className="size-5" aria-hidden />
-        </Link>
-        <SignInButton mode="redirect" forceRedirectUrl="/dashboard">
+        <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+          <button
+            type="button"
+            className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
+            aria-label="Sign in"
+            title="Sign in"
+            onClick={onNavigate}
+          >
+            <UserCircleIcon className="size-5" aria-hidden />
+          </button>
+        </SignInButton>
+        <SignInButton mode="modal" forceRedirectUrl="/dashboard">
           <button
             type="button"
             className="hidden rounded-full px-4 py-2 text-sm font-semibold text-text transition-colors hover:bg-inset lg:inline-flex"
@@ -84,7 +86,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
             Sign in
           </button>
         </SignInButton>
-        <SignUpButton mode="redirect" forceRedirectUrl="/dashboard">
+        <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
           <Button size="sm" className="ml-1 hidden lg:inline-flex" onClick={onNavigate}>
             Sign up
           </Button>
@@ -98,7 +100,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
           title="My dashboard"
           onClick={onNavigate}
         >
-          <UserCircleIcon className="size-5" aria-hidden />
+          <Squares2X2Icon className="size-5" aria-hidden />
         </Link>
         <div className="hidden items-center gap-2 lg:flex">
           <UserButton afterSignOutUrl="/" />
