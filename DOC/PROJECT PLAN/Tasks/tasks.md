@@ -499,12 +499,12 @@ Remaining parallel tracks:
 - [~] T076 Smoke test modal on dev server; confirm `/sign-in` standalone still works as fallback. Automated gates passed (`lint`, `typecheck`, `test:unit`, `test:integration`, `build`, `release-gates`); manual modal interaction check pending operator browser pass.
 
 ### Phase P13 — Cart System (Frontend)
-- [ ] T077 Create `web/src/lib/cart-store.ts` — Zustand + `persist` middleware. Types: `CartItem`, `CartStore`. SSR hydration guard.
-- [ ] T078 Create `web/src/components/shop/CartDrawer.tsx` — slide-over, item list, qty controls, subtotal, checkout CTA, close button. Accessible: focus trap, role=dialog, Escape closes.
-- [ ] T079 Add cart icon + badge to `Header.tsx` (desktop) and `HeaderMobileNav.tsx` (mobile). `ShoppingBagIcon` with item-count badge.
-- [ ] T080 Add "Add to Cart" button to product detail page (`app/shop/[slug]/page.tsx`). Preserve existing "Buy Now" CTA.
-- [ ] T081 Extend `CheckoutExperience.tsx` to read cart items from store. Accept multi-item cart payload. Preserve single-product URL-param fallback. Call `clearCart()` on order success.
-- [ ] T082 Extend `POST /api/v1/orders/route.ts` to accept `items[]` array (multi-item). Backwards compatible with single `product_slug`.
+- [x] T077 Create `web/src/lib/cart-store.ts` — Zustand + `persist` middleware. Types: `CartItem`, `CartStore`. SSR hydration guard.
+- [x] T078 Create `web/src/components/shop/CartDrawer.tsx` — slide-over, item list, qty controls, subtotal, checkout CTA, close button. Accessible: focus trap, role=dialog, Escape closes.
+- [x] T079 Add cart icon + badge to `Header.tsx` (desktop) and `HeaderMobileNav.tsx` (mobile). `ShoppingBagIcon` with item-count badge.
+- [x] T080 Add "Add to Cart" button to product detail page (`app/shop/[slug]/page.tsx`). Preserve existing "Buy Now" CTA.
+- [x] T081 Extend `CheckoutExperience.tsx` to read cart items from store. Accept multi-item cart payload. Preserve single-product URL-param fallback. Call `clearCart()` on order success.
+- [x] T082 Extend `POST /api/v1/orders/route.ts` to accept `items[]` array (multi-item). Backwards compatible with single `product_slug`.
 - [ ] T083 Extend `createOrder()` in `orders.ts` to handle multi-item `items[]` input.
 - [ ] T084 Cart unit tests (`lib/cart-store.test.ts`). Multi-item order creation test.
 

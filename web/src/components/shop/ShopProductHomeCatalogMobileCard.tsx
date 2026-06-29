@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
-import { LinkButton } from "@/components/primitives/Button";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceholder";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
-import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import { getProductHref, type ShopProduct } from "@/lib/shop";
 import {
   getWebsiteTemplateHtmlPreviewByProductSlug,
   getWebsiteTemplateHtmlPreviewUrl,
@@ -78,14 +78,15 @@ export function ShopProductHomeCatalogMobileCard({
         </h3>
         <p className="home-mobile-marketing__catalog-card-price">{product.price}</p>
         <div className="home-mobile-marketing__catalog-card-actions">
-          <LinkButton
-            href={getCheckoutHref(product)}
+          <AddToCartButton
+            productSlug={product.slug}
+            productName={product.name}
+            productPrice={product.price}
             variant="outline"
-            aria-label={`Add ${product.name} to cart`}
             className="home-mobile-marketing__product-row-cart"
-          >
-            <ShoppingBagIcon className="home-mobile-marketing__product-row-action-icon" aria-hidden />
-          </LinkButton>
+            ariaLabel={`Add ${product.name} to cart`}
+            iconOnly
+          />
           <Link
             href={getProductHref(product)}
             className="home-mobile-marketing__catalog-card-view"

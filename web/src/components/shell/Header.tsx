@@ -13,7 +13,9 @@ import { DesktopHeaderNav } from "@/components/shell/DesktopHeaderNav";
 import { PublicAuthControls } from "@/components/shell/PublicAuthControls";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { HeaderMobileNav } from "@/components/shell/HeaderMobileNav";
+import { CartDrawer } from "@/components/shop/CartDrawer";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
+import { rehydrateCartStore, useCartStore, useCartUiStore } from "@/lib/cart-store";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
 
@@ -29,11 +31,20 @@ export function Header({
   scrolled: scrolledProp,
 }: HeaderProps = {}) {
   const openConcierge = useConciergeStore((state) => state.open);
+  const cartOpen = useCartUiStore((state) => state.isOpen);
+  const openCart = useCartUiStore((state) => state.open);
+  const closeCart = useCartUiStore((state) => state.close);
+  const cartItems = useCartStore((state) => state.items);
+  const [cartHydrated, setCartHydrated] = useState(false);
   const [scrolledInternal, setScrolledInternal] = useState(false);
   const [mobileOpenInternal, setMobileOpenInternal] = useState(false);
   const mobileOpen = mobileOpenProp ?? mobileOpenInternal;
   const setMobileOpen = onMobileOpenChange ?? setMobileOpenInternal;
   const scrolled = scrolledProp ?? scrolledInternal;
+
+  useEffect(() => {
+    void rehydrateCartStore().finally(() => setCartHydrated(true));
+  }, []);
 
   useEffect(() => {
     if (scrolledProp !== undefined) {
@@ -67,6 +78,8 @@ export function Header({
     };
   }, [mobileOpen, setMobileOpen]);
 
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <header
       className={cn(
@@ -98,13 +111,19 @@ export function Header({
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </button>
-          <Link
-            href="/digital-products"
-            className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
-            aria-label="Browse digital products"
+          <button
+            type="button"
+            onClick={() => openCart()}
+            className="relative hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
+            aria-label="Open shopping cart"
           >
             <ShoppingBagIcon className="size-5" aria-hidden />
-          </Link>
+            {cartHydrated && cartCount > 0 ? (
+              <span className="absolute -right-0.5 -top-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-surface">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            ) : null}
+          </button>
           <ThemeToggleButton className="lg:hidden" />
           <ThemeToggle className="hidden lg:inline-flex" />
           <PublicAuthControls />
@@ -137,6 +156,8 @@ export function Header({
           ) : null}
         </div>
       </div>
+
+      <CartDrawer open={cartOpen} onClose={closeCart} />
     </header>
   );
 }

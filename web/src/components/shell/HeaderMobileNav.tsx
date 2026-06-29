@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { PublicAuthControls } from "@/components/shell/PublicAuthControls";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
+import { rehydrateCartStore, useCartStore } from "@/lib/cart-store";
 import {
   MOBILE_NAV_LEGAL_LINKS,
   MOBILE_NAV_SUPPORT_LINKS,
@@ -79,6 +80,13 @@ function CollapsibleNavGroup({
 
 export function HeaderMobileNav({ onClose, onOpenConcierge }: HeaderMobileNavProps) {
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
+  const [cartHydrated, setCartHydrated] = useState(false);
+  const cartItems = useCartStore((state) => state.items);
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  useEffect(() => {
+    void rehydrateCartStore().finally(() => setCartHydrated(true));
+  }, []);
 
   const toggleGroup = useCallback((label: string) => {
     setOpenGroups((current) => ({ ...current, [label]: !current[label] }));
@@ -134,6 +142,15 @@ export function HeaderMobileNav({ onClose, onOpenConcierge }: HeaderMobileNavPro
         >
           WhatsApp
         </a>
+      </div>
+
+      <div className="site-mobile-nav__divider" aria-hidden />
+
+      <div className="site-mobile-nav__secondary">
+        <p className="site-mobile-nav__section-label">Cart</p>
+        <Link href="/checkout?cart=1" onClick={onClose} className="site-mobile-nav__link site-mobile-nav__link--secondary">
+          Cart {cartHydrated && cartCount > 0 ? `(${cartCount})` : ""}
+        </Link>
       </div>
 
       <div className="site-mobile-nav__divider" aria-hidden />

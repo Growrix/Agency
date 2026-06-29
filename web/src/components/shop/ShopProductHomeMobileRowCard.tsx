@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRightIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
+import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { PreviewPosterPlaceholder } from "@/components/shop/PreviewPosterPlaceholder";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
 import { useDeferredPreview } from "@/components/shop/useDeferredPreview";
 import type { ShopPreviewLoadMode } from "@/components/shop/ShopProductHtmlPreviewCard";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
-import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import { getProductHref, type ShopProduct } from "@/lib/shop";
 import {
   getHtmlBusinessProfilePreviewUrl,
   HTML_BUSINESS_PROFILE_SHOP_CATEGORY,
@@ -132,14 +133,15 @@ export function ShopProductHomeMobileRowCard({
         </h3>
         <p className="home-mobile-marketing__product-row-price">{product.price}</p>
         <div className="home-mobile-marketing__product-row-actions">
-          <LinkButton
-            href={getCheckoutHref(product)}
+          <AddToCartButton
+            productSlug={product.slug}
+            productName={product.name}
+            productPrice={product.price}
             variant="outline"
-            aria-label={`Add ${product.name} to cart`}
             className="home-mobile-marketing__product-row-cart"
-          >
-            <ShoppingBagIcon className="home-mobile-marketing__product-row-action-icon" aria-hidden />
-          </LinkButton>
+            ariaLabel={`Add ${product.name} to cart`}
+            iconOnly
+          />
           <LinkButton
             href={previewUrl ?? getProductHref(product)}
             variant="outline"

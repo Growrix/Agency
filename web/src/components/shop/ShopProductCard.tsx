@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBagIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { getProductImage } from "@/lib/site-images";
-import { getCheckoutHref, getProductHref, type ShopProduct } from "@/lib/shop";
+import { getProductHref, type ShopProduct } from "@/lib/shop";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { cn } from "@/lib/utils";
 
@@ -102,15 +103,15 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
 
         {/* CTAs */}
         <div className="mt-auto flex items-center gap-2 pt-3">
-          <LinkButton
-            href={getCheckoutHref(product)}
-            variant="outline"
+          <AddToCartButton
+            productSlug={product.slug}
+            productName={product.name}
+            productPrice={product.price}
             size="sm"
-            aria-label={`Add ${product.name} to cart`}
+            variant="outline"
             className="shrink-0 px-3"
-          >
-            <ShoppingBagIcon className="size-4" />
-          </LinkButton>
+            iconOnly
+          />
           <LinkButton
             href={previewHref}
             variant="outline"

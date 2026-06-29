@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button, LinkButton } from "@/components/primitives/Button";
+import { formatUsdFromCents, rehydrateCartStore, useCartStore } from "@/lib/cart-store";
 import type { CheckoutSelection } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
@@ -15,10 +17,29 @@ type CheckoutExperienceProps = {
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 export function CheckoutExperience({ product, status, orderId, selection }: CheckoutExperienceProps) {
+  const searchParams = useSearchParams();
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [cartHydrated, setCartHydrated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Checkout could not start. Please try again.");
   const [fallbackMessage, setFallbackMessage] = useState<string | null>(null);
+  const cartItems = useCartStore((state) => state.items);
+  const clearCart = useCartStore((state) => state.clearCart);
   const selectedTierLabel = selection?.tierName?.trim();
+  const isCartMode = searchParams.get("cart") === "1";
+
+  useEffect(() => {
+    void rehydrateCartStore().finally(() => setCartHydrated(true));
+  }, []);
+
+  const activeCartItems = useMemo(() => {
+    if (!isCartMode || !cartHydrated) {
+      return [];
+    }
+
+    return cartItems;
+  }, [cartHydrated, cartItems, isCartMode]);
+
+  const activeCartSubtotal = activeCartItems.reduce((sum, item) => sum + item.unit_price_cents * item.quantity, 0);
 
   if (status === "success") {
     return (
@@ -53,6 +74,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
 
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    const hasCartItems = activeCartItems.length > 0;
 
     try {
       const response = await fetch("/api/v1/orders", {
@@ -60,10 +82,11 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
-          product_slug: product.slug,
+          product_slug: hasCartItems ? undefined : product?.slug,
           product_variant_slug: selection?.variantSlug,
           product_tier_name: selection?.tierName,
           fulfillment_type: selection?.fulfillmentType,
+          items: hasCartItems ? activeCartItems : undefined,
         }),
       });
 
@@ -89,6 +112,9 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
           : "Order draft saved. Stripe is not configured yet, so the team will follow up manually."
       );
       setSubmitState("success");
+      if (hasCartItems) {
+        clearCart();
+      }
       form.reset();
     } catch {
       setSubmitState("error");
@@ -116,6 +142,27 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Order notes</span>
         <textarea name="notes" rows={4} className="signal-input mt-1.5 min-h-28 resize-y py-3" placeholder="Anything we should know before fulfillment starts?" />
       </label>
+      {activeCartItems.length > 0 ? (
+        <div className="rounded-[14px] border border-border bg-surface px-4 py-3">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Cart summary</p>
+          <ul className="mt-2 space-y-2 text-sm text-text-muted">
+            {activeCartItems.map((item) => (
+              <li key={`${item.product_slug}::${item.variant_slug ?? "base"}`} className="flex items-start justify-between gap-3">
+                <span>
+                  {item.product_name}
+                  {item.tier_name ? ` · ${item.tier_name}` : ""}
+                  {` x${item.quantity}`}
+                </span>
+                <span className="shrink-0 text-text">{formatUsdFromCents(item.unit_price_cents * item.quantity)}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 flex items-center justify-between text-sm">
+            <span className="text-text-muted">Subtotal</span>
+            <span className="font-semibold text-text">{formatUsdFromCents(activeCartSubtotal)}</span>
+          </p>
+        </div>
+      ) : null}
       {fallbackMessage ? (
         <p className="rounded-[14px] border border-border bg-surface px-4 py-3 text-sm text-text-muted">{fallbackMessage}</p>
       ) : null}

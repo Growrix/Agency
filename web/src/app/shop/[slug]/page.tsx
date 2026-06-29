@@ -15,6 +15,7 @@ import { ShopProductCatalogCard } from "@/components/shop/ShopProductCatalogCard
 import { ShopProductHeroTitle } from "@/components/shop/ShopProductHeroTitle";
 import { WebsiteTemplateChoosePathIntro } from "@/components/shop/WebsiteTemplateChoosePathIntro";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
+import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
@@ -635,6 +636,18 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     >
                       {WEBSITE_TEMPLATE_PREVIEW.previewCta}
                     </LinkButton>
+                    <AddToCartButton
+                      productSlug={product.slug}
+                      productName={product.name}
+                      productPrice={standardVariant.price}
+                      variantSlug={standardVariant.slug}
+                      tierName={standardVariant.tier_name}
+                      fulfillmentType={standardVariant.fulfillment_type}
+                      size="sm"
+                      variant="outline"
+                      fullWidth
+                      className="col-span-2"
+                    />
                   </div>
                 </div>
 
@@ -730,6 +743,17 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   >
                     {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-4" />
                   </LinkButton>
+                  <AddToCartButton
+                    productSlug={product.slug}
+                    productName={product.name}
+                    productPrice={standardVariant.price}
+                    variantSlug={standardVariant.slug}
+                    tierName={standardVariant.tier_name}
+                    fulfillmentType={standardVariant.fulfillment_type}
+                    size="lg"
+                    variant="outline"
+                    fullWidth
+                  />
                 </div>
 
                 <div className="rounded-2xl border border-border bg-inset/40 p-4">
@@ -1118,6 +1142,18 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     >
                       {WEBSITE_TEMPLATE_PREVIEW.previewCta}
                     </LinkButton>
+                    <AddToCartButton
+                      productSlug={product.slug}
+                      productName={product.name}
+                      productPrice={WEBSITE_TEMPLATE_TIER_PRESETS.standard.price}
+                      variantSlug={standardVariant.slug}
+                      tierName={standardVariant.tier_name}
+                      fulfillmentType={standardVariant.fulfillment_type}
+                      size="sm"
+                      variant="outline"
+                      fullWidth
+                      className="col-span-2"
+                    />
                   </div>
                 </div>
 
@@ -1596,6 +1632,18 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   >
                     Preview
                   </LinkButton>
+                  <AddToCartButton
+                    productSlug={product.slug}
+                    productName={product.name}
+                    productPrice={sidebarBasePriceLabel}
+                    variantSlug={sidebarPrimaryVariant.slug}
+                    tierName={sidebarPrimaryVariant.tier_name}
+                    fulfillmentType={sidebarPrimaryVariant.fulfillment_type}
+                    size="sm"
+                    variant="outline"
+                    fullWidth
+                    className="col-span-2"
+                  />
                 </div>
               </div>
 
@@ -2064,6 +2112,17 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 >
                   {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-4" />
                 </LinkButton>
+                <AddToCartButton
+                  productSlug={product.slug}
+                  productName={product.name}
+                  productPrice={sidebarBasePriceLabel}
+                  variantSlug={sidebarPrimaryVariant.slug}
+                  tierName={sidebarPrimaryVariant.tier_name}
+                  fulfillmentType={sidebarPrimaryVariant.fulfillment_type}
+                  size="lg"
+                  variant="outline"
+                  fullWidth
+                />
               </div>
 
               {websiteTemplatePathVariants.length > 1 ? (
