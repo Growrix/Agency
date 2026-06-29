@@ -30,12 +30,24 @@ const allowedDevOrigins = [
   "www.growrixos.com",
 ];
 
+const authCspHosts = [
+  "https://*.clerk.accounts.dev",
+  "https://*.clerk.com",
+  "https://clerk.com",
+  "https://img.clerk.com",
+  "https://challenges.cloudflare.com",
+  "https://accounts.google.com",
+  "https://www.google.com",
+  "https://apis.google.com",
+  "https://www.gstatic.com",
+  "https://*.gstatic.com",
+];
+
 const connectSrc = ["'self'", "https:", ...(isDevelopment ? ["http:", "ws:", "wss:"] : [])].join(" ");
-const clerkCspHosts = " https://*.clerk.accounts.dev https://clerk.com https://img.clerk.com";
 const defaultCsp =
-  `default-src 'self'; img-src 'self' data: https:${clerkCspHosts}; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:${clerkCspHosts}; ` +
+  `default-src 'self'; img-src 'self' data: https: ${authCspHosts.join(" ")}; script-src 'self' 'unsafe-inline' 'unsafe-eval' ${authCspHosts.join(" ")}; ` +
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; ` +
-  `connect-src ${connectSrc}${clerkCspHosts}; frame-src 'self'${clerkCspHosts}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
+  `connect-src ${connectSrc} ${authCspHosts.join(" ")}; frame-src 'self' ${authCspHosts.join(" ")}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
 
 const htmlPreviewCsp =
   `default-src 'self' data: https: http: 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:; ` +
