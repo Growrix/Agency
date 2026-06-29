@@ -27,8 +27,8 @@ type RuntimeConfig = {
     webhookSigningSecret?: string;
     signInUrl?: string;
     signUpUrl?: string;
-    afterSignInUrl?: string;
-    afterSignUpUrl?: string;
+    signInFallbackRedirectUrl?: string;
+    signUpFallbackRedirectUrl?: string;
   };
   supabase: {
     url?: string;
@@ -110,8 +110,8 @@ export function getRuntimeConfig(): RuntimeConfig {
       webhookSigningSecret: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
       signInUrl: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL ?? "/sign-in",
       signUpUrl: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL ?? "/sign-up",
-      afterSignInUrl: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL ?? "/dashboard",
-      afterSignUpUrl: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL ?? "/dashboard",
+      signInFallbackRedirectUrl: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL ?? "/dashboard",
+      signUpFallbackRedirectUrl: process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL ?? "/dashboard",
     },
     supabase: {
       url: process.env.SUPABASE_URL,
