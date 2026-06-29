@@ -15,7 +15,10 @@ type HomeHeroGateProps = {
 
 type HomeHeroComponent = ComponentType<HomeHeroGateProps>;
 
-/** Defers hero JS, motion, and poster assets until after window load (domcontentloaded resource budget). */
+/**
+ * Loads hero JS shortly after DOMContentLoaded so the static placeholder is replaced faster,
+ * while still avoiding eager script fetch during initial HTML parse.
+ */
 export function HomeHeroGate(props: HomeHeroGateProps) {
   const [Hero, setHero] = useState<HomeHeroComponent | null>(null);
 
@@ -26,7 +29,7 @@ export function HomeHeroGate(props: HomeHeroGateProps) {
       });
     };
 
-    return scheduleHomepageBundleLoad(loadHero);
+    return scheduleHomepageBundleLoad(loadHero, { timing: "after-domcontentloaded" });
   }, []);
 
   if (!Hero) {

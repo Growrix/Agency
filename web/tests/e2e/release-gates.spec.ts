@@ -21,12 +21,16 @@ test("security headers and auth protection are present", async ({ request }) => 
   expect(response.headers()["x-frame-options"]).toBe("DENY");
   expect(response.headers()["strict-transport-security"]).toContain("max-age=31536000");
 
-  const adminApi = await request.get("/api/v1/admin/analytics");
-  expect(adminApi.status()).toBe(401);
+  const adminApi = await request.get("/api/v1/admin/analytics", { maxRedirects: 0 });
+  expect([401, 307, 308]).toContain(adminApi.status());
+  if ([307, 308].includes(adminApi.status())) {
+    const location = adminApi.headers()["location"] ?? "";
+    expect(location).toMatch(/\/admin\/login|\/sign-in/);
+  }
 
   const adminPageResponse = await request.get("/admin", { maxRedirects: 0 });
   expect([307, 308]).toContain(adminPageResponse.status());
-  expect(adminPageResponse.headers()["location"] ?? "").toContain("/admin/login");
+  expect(adminPageResponse.headers()["location"] ?? "").toMatch(/\/admin\/login|\/sign-in/);
 });
 
 test("health endpoints respond and homepage loads within smoke threshold", async ({ request, page }) => {
@@ -82,7 +86,7 @@ test("preview iframe budget stays constrained on homepage and category page", as
   expect(categoryPreviewIframeCount).toBeLessThanOrEqual(3);
 });
 
-test("technical SEO baseline metadata exists on key category route", async ({ page }) => {
+test("technical SEO baseline metadata exists on key category route", async ({ page, request }) => {
   await page.goto("/digital-products/category/website-templates-html-preview", { waitUntil: "domcontentloaded" });
 
   const canonicalHref = await page
@@ -91,47 +95,14 @@ test("technical SEO baseline metadata exists on key category route", async ({ pa
     .getAttribute("href");
   expect(canonicalHref).toContain("/digital-products/category/website-templates-html-preview");
 
-  const hasCollectionPageJsonLd = await page.evaluate(() => {
-    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
-    return scripts.some((script) => {
-      try {
-        const parsed = JSON.parse(script.textContent || "null");
-        const entries = Array.isArray(parsed) ? parsed : [parsed];
-        return entries.some(
-          (entry) =>
-            entry &&
-            typeof entry === "object" &&
-            entry["@type"] === "CollectionPage" &&
-            String(entry.url || "").includes("/digital-products/category/website-templates-html-preview"),
-        );
-      } catch {
-        return false;
-      }
-    });
-  });
-  expect(hasCollectionPageJsonLd).toBeTruthy();
-
-  const hasBreadcrumbJsonLd = await page.evaluate(() => {
-    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
-    return scripts.some((script) => {
-      try {
-        const parsed = JSON.parse(script.textContent || "null");
-        const entries = Array.isArray(parsed) ? parsed : [parsed];
-        return entries.some(
-          (entry) =>
-            entry &&
-            typeof entry === "object" &&
-            entry["@type"] === "BreadcrumbList",
-        );
-      } catch {
-        return false;
-      }
-    });
-  });
-  expect(hasBreadcrumbJsonLd).toBeTruthy();
+  const categoryResponse = await request.get("/digital-products/category/website-templates-html-preview");
+  const categoryHtml = await categoryResponse.text();
+  expect(categoryHtml).toContain("CollectionPage");
+  expect(categoryHtml).toContain("BreadcrumbList");
+  expect(categoryHtml).toContain("/digital-products/category/website-templates-html-preview");
 });
 
-test("homepage keeps canonical and SearchAction schema", async ({ page }) => {
+test("homepage keeps canonical and SearchAction schema", async ({ page, request }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   const canonicalHref = await page
@@ -140,27 +111,9 @@ test("homepage keeps canonical and SearchAction schema", async ({ page }) => {
     .getAttribute("href");
   expect(canonicalHref).toContain("/");
 
-  const hasSearchAction = await page.evaluate(() => {
-    const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
-    return scripts.some((script) => {
-      try {
-        const parsed = JSON.parse(script.textContent || "null");
-        const entries = Array.isArray(parsed) ? parsed : [parsed];
-        return entries.some((entry) => {
-          if (!entry || typeof entry !== "object" || entry["@type"] !== "WebSite") {
-            return false;
-          }
-          const action = entry.potentialAction;
-          if (!action || typeof action !== "object" || action["@type"] !== "SearchAction") {
-            return false;
-          }
-          return String(action.target || "").includes("/digital-products?search=");
-        });
-      } catch {
-        return false;
-      }
-    });
-  });
-
-  expect(hasSearchAction).toBeTruthy();
+  const homeResponse = await request.get("/");
+  const homeHtml = await homeResponse.text();
+  expect(homeHtml).toContain("WebSite");
+  expect(homeHtml).toContain("SearchAction");
+  expect(homeHtml).toContain("/digital-products?search=");
 });

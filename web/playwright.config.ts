@@ -23,6 +23,9 @@ export default defineConfig({
       AUTH_JWT_SECRET: "test-secret-key-123!",
       ADMIN_EMAIL: "admin@growrix.test",
       ADMIN_PASSWORD: "Admin123!",
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "",
+      CLERK_SECRET_KEY: "",
+      CLERK_WEBHOOK_SIGNING_SECRET: "",
     },
   },
   projects: [
