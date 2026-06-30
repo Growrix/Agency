@@ -193,3 +193,96 @@ export async function listAppointmentsByEmail(email: string) {
   const database = await readDatabase();
   return database.appointments.filter((appointment) => appointment.visitor_email === email.toLowerCase());
 }
+
+type RescheduleAppointmentInput = {
+  preferred_datetime?: string;
+  cancel?: boolean;
+  requesterEmail: string;
+};
+
+export async function rescheduleAppointment(
+  appointmentId: string,
+  input: RescheduleAppointmentInput,
+): Promise<AppointmentRecord> {
+  const database = await readDatabase();
+  const existing = database.appointments.find((appointment) => appointment.id === appointmentId);
+
+  if (!existing) {
+    throw new ApiError("NOT_FOUND", 404, "Appointment not found.");
+  }
+
+  if (existing.visitor_email.toLowerCase() !== input.requesterEmail.toLowerCase()) {
+    throw new ApiError("FORBIDDEN", 403, "You do not have access to this appointment.");
+  }
+
+  if (existing.status !== "inquiry" && existing.status !== "confirmed") {
+    throw new ApiError(
+      "CONFLICT",
+      409,
+      "Only requested or confirmed appointments can be rescheduled or cancelled.",
+    );
+  }
+
+  let nextDatetime = existing.preferred_datetime;
+  if (input.preferred_datetime) {
+    const parsed = parsePreferredDate(input.preferred_datetime);
+    nextDatetime = parsed.toISOString();
+
+    const clash = database.appointments.find(
+      (appointment) =>
+        appointment.id !== appointmentId &&
+        appointment.preferred_datetime === nextDatetime &&
+        (appointment.status === "inquiry" || appointment.status === "confirmed"),
+    );
+    if (clash) {
+      throw new ApiError("CONFLICT", 409, "That time slot is already reserved. Please choose another one.");
+    }
+  }
+
+  const nextStatus: AppointmentRecord["status"] = input.cancel ? "cancelled" : existing.status;
+  const updated: AppointmentRecord = {
+    ...existing,
+    preferred_datetime: nextDatetime,
+    status: nextStatus,
+    completed_at: nextStatus === "cancelled" ? new Date().toISOString() : existing.completed_at,
+  };
+
+  await writeDatabase((next) => ({
+    ...next,
+    appointments: next.appointments.map((appointment) =>
+      appointment.id === appointmentId ? updated : appointment,
+    ),
+  }));
+
+  await recordAuditLog({
+    level: "info",
+    action: input.cancel ? "appointment.cancelled" : "appointment.rescheduled",
+    actor_email: input.requesterEmail,
+    metadata: {
+      appointment_id: appointmentId,
+      preferred_datetime: nextDatetime,
+      status: nextStatus,
+    },
+  });
+
+  await notifyTeam({
+    kind: "appointment_requested",
+    subject: input.cancel
+      ? `Appointment cancelled by ${existing.visitor_name}`
+      : `Appointment rescheduled by ${existing.visitor_name}`,
+    text: [
+      `Customer: ${existing.visitor_name} <${existing.visitor_email}>`,
+      `Appointment: ${appointmentId}`,
+      `New time: ${nextDatetime}`,
+      `Status: ${nextStatus}`,
+    ].join("\n"),
+    replyTo: existing.visitor_email,
+    payload: {
+      appointment_id: appointmentId,
+      status: nextStatus,
+      preferred_datetime: nextDatetime,
+    },
+  });
+
+  return updated;
+}

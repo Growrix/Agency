@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { AppointmentRescheduleModal } from "@/components/dashboard/AppointmentRescheduleModal";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 
@@ -144,6 +145,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   const [activeDownloadId, setActiveDownloadId] = useState<string | null>(null);
   const [supportStatus, setSupportStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [supportMessage, setSupportMessage] = useState<string | null>(null);
+  const [rescheduleAppointment, setRescheduleAppointment] = useState<DashboardAppointment | null>(null);
 
   const currentMeta = viewMeta[view];
   const fullName = buildFullName(user);
@@ -436,13 +438,28 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   function renderAppointments() {
     return (
       <div className="space-y-4">
-        {appointments.map((appointment) => (
-          <Card key={appointment.id}>
-            <p className="font-medium text-text">{appointment.service_interested_in}</p>
-            <p className="mt-1 text-sm text-text-muted">{formatDateTime(appointment.preferred_datetime)}</p>
-            <p className="mt-1 text-sm text-text-muted">Status: {appointment.status}</p>
-          </Card>
-        ))}
+        {appointments.map((appointment) => {
+          const canModify = appointment.status === "inquiry" || appointment.status === "confirmed";
+          return (
+            <Card key={appointment.id} className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-medium text-text">{appointment.service_interested_in}</p>
+                <p className="mt-1 text-sm text-text-muted">{formatDateTime(appointment.preferred_datetime)}</p>
+                <p className="mt-1 text-sm text-text-muted">Status: {appointment.status}</p>
+              </div>
+              {canModify ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setRescheduleAppointment(appointment)}
+                >
+                  Reschedule or cancel
+                </Button>
+              ) : null}
+            </Card>
+          );
+        })}
         {appointments.length === 0 ? (
           <Card>
             <p className="text-sm text-text-muted">No appointments are linked to this account yet.</p>
@@ -553,6 +570,15 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
       ) : null}
 
       {renderView()}
+
+      <AppointmentRescheduleModal
+        appointment={rescheduleAppointment}
+        onClose={() => setRescheduleAppointment(null)}
+        onUpdated={() => {
+          setRescheduleAppointment(null);
+          void refreshState();
+        }}
+      />
     </div>
   );
 }
