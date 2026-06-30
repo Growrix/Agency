@@ -140,6 +140,8 @@ export type UserRecord = {
   role: Role;
   first_name?: string;
   last_name?: string;
+  phone?: string;
+  marketing_opt_in?: boolean;
   created_at: string;
   updated_at: string;
 };

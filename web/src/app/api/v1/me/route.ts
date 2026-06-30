@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
         role: user.role,
         first_name: user.firstName ?? null,
         last_name: user.lastName ?? null,
+        phone: user.phone ?? null,
+        marketing_opt_in: user.marketingOptIn ?? false,
       },
     });
   } catch (error) {

@@ -1,7 +1,9 @@
 "use client";
 
 import { Popover } from "@headlessui/react";
+import { useState } from "react";
 import { BellIcon, Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { ProfileSettingsModal } from "@/components/dashboard/ProfileSettingsModal";
 import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -50,6 +52,7 @@ export function DashboardHeaderControls({
   notifications = defaultNotifications,
   className,
 }: DashboardHeaderControlsProps) {
+  const [profileOpen, setProfileOpen] = useState(false);
   const unreadCount = notifications.filter((note) => note.unread).length;
 
   return (
@@ -101,6 +104,7 @@ export function DashboardHeaderControls({
           <div className="mt-2 grid gap-1">
             <button
               type="button"
+              onClick={() => setProfileOpen(true)}
               className="inline-flex items-center gap-2 rounded-sm px-3 py-2 text-left text-sm text-text transition-colors hover:bg-inset"
             >
               <Cog6ToothIcon className="size-4" />
@@ -109,6 +113,8 @@ export function DashboardHeaderControls({
           </div>
         </Popover.Panel>
       </Popover>
+
+      <ProfileSettingsModal open={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );
 }

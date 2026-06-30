@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -403,19 +404,24 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
       <div className="space-y-4">
         {orders.map((order) => (
           <Card key={order.id}>
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="font-medium text-text">{order.order_number}</p>
-                <p className="mt-1 text-sm text-text-muted">{order.items.map((item) => item.product_name).join(", ")}</p>
+            <Link
+              href={`/dashboard/orders/${order.id}`}
+              className="block transition-colors hover:opacity-90"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className="font-medium text-text">{order.order_number}</p>
+                  <p className="mt-1 text-sm text-text-muted">{order.items.map((item) => item.product_name).join(", ")}</p>
+                </div>
+                <p className="font-medium text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
               </div>
-              <p className="font-medium text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
-            </div>
-            <div className="mt-4 grid gap-2 text-sm text-text-muted sm:grid-cols-2 lg:grid-cols-4">
-              <p>Payment: {order.payment_status}</p>
-              <p>Fulfillment: {order.fulfillment_status}</p>
-              <p>Created: {formatDateTime(order.created_at)}</p>
-              <p>Completed: {formatDateTime(order.completed_at)}</p>
-            </div>
+              <div className="mt-4 grid gap-2 text-sm text-text-muted sm:grid-cols-2 lg:grid-cols-4">
+                <p>Payment: {order.payment_status}</p>
+                <p>Fulfillment: {order.fulfillment_status}</p>
+                <p>Created: {formatDateTime(order.created_at)}</p>
+                <p>Completed: {formatDateTime(order.completed_at)}</p>
+              </div>
+            </Link>
           </Card>
         ))}
         {orders.length === 0 ? (

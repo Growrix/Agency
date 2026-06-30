@@ -19,6 +19,8 @@ export type AuthenticatedUser = {
   role: SessionPayload["role"];
   firstName?: string;
   lastName?: string;
+  phone?: string;
+  marketingOptIn?: boolean;
   clerkUserId?: string;
 };
 
@@ -29,6 +31,8 @@ function mapUserRecord(user: NonNullable<Awaited<ReturnType<typeof getUserById>>
     role: user.role,
     firstName: user.first_name,
     lastName: user.last_name,
+    phone: user.phone,
+    marketingOptIn: user.marketing_opt_in,
     clerkUserId: user.clerk_user_id,
   };
 }

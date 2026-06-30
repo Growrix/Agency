@@ -12,6 +12,13 @@ export async function POST(request: NextRequest) {
     const updated = await updateUserProfile(user.id, {
       firstName: typeof body.first_name === "string" ? body.first_name : typeof body.firstName === "string" ? body.firstName : undefined,
       lastName: typeof body.last_name === "string" ? body.last_name : typeof body.lastName === "string" ? body.lastName : undefined,
+      phone: typeof body.phone === "string" ? body.phone : undefined,
+      marketingOptIn:
+        typeof body.marketing_opt_in === "boolean"
+          ? body.marketing_opt_in
+          : typeof body.marketingOptIn === "boolean"
+            ? body.marketingOptIn
+            : undefined,
     });
 
     return successResponse({
@@ -21,6 +28,8 @@ export async function POST(request: NextRequest) {
         role: updated.role,
         first_name: updated.first_name ?? null,
         last_name: updated.last_name ?? null,
+        phone: updated.phone ?? null,
+        marketing_opt_in: updated.marketing_opt_in ?? false,
       },
     });
   } catch (error) {
