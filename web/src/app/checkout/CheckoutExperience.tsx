@@ -16,12 +16,36 @@ type CheckoutExperienceProps = {
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
+type CheckoutViewer = {
+  id: string;
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+};
+
+async function fetchCheckoutViewer(): Promise<CheckoutViewer | null> {
+  try {
+    const response = await fetch("/api/v1/me", { credentials: "same-origin" });
+    if (!response.ok) {
+      return null;
+    }
+    const payload = (await response.json().catch(() => null)) as {
+      data?: { user?: CheckoutViewer };
+    } | null;
+    return payload?.data?.user ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export function CheckoutExperience({ product, status, orderId, selection }: CheckoutExperienceProps) {
   const searchParams = useSearchParams();
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [cartHydrated, setCartHydrated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Checkout could not start. Please try again.");
   const [fallbackMessage, setFallbackMessage] = useState<string | null>(null);
+  const [viewer, setViewer] = useState<CheckoutViewer | null>(null);
+  const [viewerLoaded, setViewerLoaded] = useState(false);
   const cartItems = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
   const selectedTierLabel = selection?.tierName?.trim();
@@ -30,6 +54,22 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   useEffect(() => {
     void rehydrateCartStore().finally(() => setCartHydrated(true));
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchCheckoutViewer().then((value) => {
+      if (cancelled) return;
+      setViewer(value);
+      setViewerLoaded(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const viewerFullName = viewer
+    ? [viewer.first_name, viewer.last_name].filter(Boolean).join(" ").trim() || null
+    : null;
 
   const activeCartItems = useMemo(() => {
     if (!isCartMode || !cartHydrated) {
@@ -75,6 +115,12 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
     const hasCartItems = activeCartItems.length > 0;
+
+    if (!viewer) {
+      const next = `${window.location.pathname}${window.location.search}`;
+      window.location.assign(`/sign-in?next=${encodeURIComponent(next)}`);
+      return;
+    }
 
     try {
       const response = await fetch("/api/v1/orders", {
@@ -122,16 +168,34 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4" aria-busy={submitState === "submitting"}>
+    <form
+      key={viewer?.id ?? "anon"}
+      onSubmit={onSubmit}
+      className="space-y-4"
+      aria-busy={submitState === "submitting"}
+    >
       <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Full name *</span>
-          <input name="customer_name" required className="signal-input mt-1.5" placeholder="Your name" />
+          <input
+            name="customer_name"
+            required
+            defaultValue={viewerFullName ?? undefined}
+            className="signal-input mt-1.5"
+            placeholder="Your name"
+          />
         </label>
         <label className="block">
           <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Email *</span>
-          <input type="email" name="customer_email" required className="signal-input mt-1.5" placeholder="you@company.com" />
+          <input
+            type="email"
+            name="customer_email"
+            required
+            defaultValue={viewer?.email ?? undefined}
+            className="signal-input mt-1.5"
+            placeholder="you@company.com"
+          />
         </label>
       </div>
       <label className="block">
@@ -175,8 +239,14 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         </p>
       ) : null}
       <div className="flex flex-wrap gap-3">
-        <Button type="submit" disabled={submitState === "submitting"} size="lg">
-          {submitState === "submitting" ? "Starting checkout..." : "Continue to payment"}
+        <Button type="submit" disabled={submitState === "submitting" || !viewerLoaded} size="lg">
+          {submitState === "submitting"
+            ? "Starting checkout..."
+            : !viewerLoaded
+              ? "Continue to payment"
+              : viewer
+                ? "Place order & continue to Stripe"
+                : "Continue to sign in"}
         </Button>
         <LinkButton href="/contact" variant="outline" size="lg">Need an invoice instead</LinkButton>
       </div>
