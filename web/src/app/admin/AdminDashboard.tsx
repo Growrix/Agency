@@ -7,12 +7,25 @@ import {
   InboxIcon,
   QueueListIcon,
   Squares2X2Icon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import {
+  CatalogServiceForm,
+  type CatalogServiceFormValues,
+} from "@/components/admin/CatalogServiceForm";
+import {
+  CatalogProductForm,
+  type CatalogProductFormValues,
+} from "@/components/admin/CatalogProductForm";
+import {
+  CatalogPortfolioForm,
+  type CatalogPortfolioFormValues,
+} from "@/components/admin/CatalogPortfolioForm";
 
 type AdminDashboardView = "overview" | "activity" | "catalog" | "pipeline";
 
@@ -93,6 +106,98 @@ type DashboardSummary = {
 
 function formatJson(value: unknown) {
   return JSON.stringify(value, null, 2);
+}
+
+const STRUCTURED_PRODUCT_FIELDS = new Set([
+  "slug",
+  "name",
+  "price",
+  "livePreviewUrl",
+  "embeddedPreviewUrl",
+  "category",
+  "categorySlug",
+  "type",
+  "typeSlug",
+  "industry",
+  "industrySlug",
+  "teaser",
+  "summary",
+  "audience",
+  "published",
+  "includes",
+  "stack",
+  "highlights",
+  "previewVariant",
+]);
+
+const STRUCTURED_PORTFOLIO_FIELDS = new Set([
+  "slug",
+  "name",
+  "livePreviewUrl",
+  "embeddedPreviewUrl",
+  "industry",
+  "service",
+  "summary",
+  "metric",
+  "accent",
+]);
+
+function productToFormValues(record: ProductRecord): CatalogProductFormValues {
+  const advanced: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(record)) {
+    if (!STRUCTURED_PRODUCT_FIELDS.has(key)) advanced[key] = value;
+  }
+  return {
+    slug: record.slug,
+    name: record.name,
+    price: record.price,
+    livePreviewUrl: record.livePreviewUrl,
+    embeddedPreviewUrl: record.embeddedPreviewUrl,
+    category: record.category,
+    categorySlug: record.categorySlug,
+    type: record.type,
+    typeSlug: record.typeSlug,
+    industry: record.industry,
+    industrySlug: record.industrySlug,
+    teaser: record.teaser,
+    summary: record.summary,
+    audience: record.audience,
+    published: record.published,
+    includes: record.includes ?? [],
+    stack: record.stack ?? [],
+    highlights: record.highlights ?? [],
+    previewVariant: record.previewVariant,
+    advancedJson: Object.keys(advanced).length > 0 ? formatJson(advanced) : "",
+  };
+}
+
+function portfolioToFormValues(record: PortfolioRecord): CatalogPortfolioFormValues {
+  const advanced: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(record)) {
+    if (!STRUCTURED_PORTFOLIO_FIELDS.has(key)) advanced[key] = value;
+  }
+  return {
+    slug: record.slug,
+    name: record.name,
+    livePreviewUrl: record.livePreviewUrl,
+    embeddedPreviewUrl: record.embeddedPreviewUrl,
+    industry: record.industry,
+    service: record.service,
+    summary: record.summary,
+    metric: record.metric,
+    accent: record.accent,
+    advancedJson: Object.keys(advanced).length > 0 ? formatJson(advanced) : "",
+  };
+}
+
+function mergeAdvancedJson<T extends Record<string, unknown>>(structured: T, advancedJson: string): T {
+  if (!advancedJson.trim()) return structured;
+  try {
+    const parsed = JSON.parse(advancedJson) as Record<string, unknown>;
+    return { ...parsed, ...structured } as T;
+  } catch {
+    return structured;
+  }
 }
 
 function createClientId() {
@@ -237,6 +342,7 @@ const navItems: DashboardNavItem[] = [
   { href: "/admin/catalog", label: "Catalog", icon: <ClipboardDocumentListIcon className="h-4 w-4" /> },
   { href: "/admin/pipeline", label: "Pipeline", icon: <QueueListIcon className="h-4 w-4" /> },
   { href: "/admin/submissions", label: "Submissions", icon: <InboxIcon className="h-4 w-4" /> },
+  { href: "/admin/users", label: "Users", icon: <UsersIcon className="h-4 w-4" /> },
   { href: "/admin/email-log", label: "Email log", icon: <EnvelopeOpenIcon className="h-4 w-4" /> },
 ];
 
@@ -249,9 +355,9 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
   const [inquiries, setInquiries] = useState<InquiryRecord[]>([]);
   const [appointments, setAppointments] = useState<AppointmentRecord[]>([]);
   const [orders, setOrders] = useState<OrderRecord[]>([]);
-  const [serviceEditor, setServiceEditor] = useState<string>(formatJson(buildNewService()));
-  const [productEditor, setProductEditor] = useState<string>(formatJson(buildNewProduct()));
-  const [portfolioEditor, setPortfolioEditor] = useState<string>(formatJson(buildNewPortfolio()));
+  const [editingService, setEditingService] = useState<ServiceRecord>(buildNewService());
+  const [editingProduct, setEditingProduct] = useState<ProductRecord>(buildNewProduct());
+  const [editingPortfolio, setEditingPortfolio] = useState<PortfolioRecord>(buildNewPortfolio());
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -494,7 +600,7 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
               <Card className="rounded-sm border-border p-5 flex flex-col">
                 <div className="flex items-center justify-between gap-3 mb-4">
                   <h3 className="font-display text-lg font-semibold tracking-tight">Manage Services</h3>
-                  <Button type="button" variant="outline" size="sm" onClick={() => setServiceEditor(formatJson(buildNewService()))}>
+                  <Button type="button" variant="outline" size="sm" onClick={() => setEditingService(buildNewService())}>
                     New
                   </Button>
                 </div>
@@ -507,7 +613,7 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
                           <div className="text-xs text-text-muted">{service.slug}</div>
                         </div>
                         <div className="flex gap-1 shrink-0">
-                          <Button type="button" size="sm" variant="outline" onClick={() => setServiceEditor(formatJson(service))}>
+                          <Button type="button" size="sm" variant="outline" onClick={() => setEditingService(service)}>
                             Edit
                           </Button>
                           <Button type="button" size="sm" variant="ghost" onClick={() => void deleteRecord("/api/v1/admin/services", `id=${encodeURIComponent(service.id)}`)}>
@@ -518,16 +624,19 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
                     </div>
                   ))}
                 </div>
-                <textarea value={serviceEditor} onChange={(event) => setServiceEditor(event.target.value)} className="signal-input mt-4 min-h-48 font-mono text-xs" />
-                <Button type="button" size="sm" className="mt-3" onClick={() => void saveEditor("/api/v1/admin/services", serviceEditor)}>
-                  Save service
-                </Button>
+                <div className="mt-4">
+                  <CatalogServiceForm
+                    key={editingService.id}
+                    initial={editingService satisfies CatalogServiceFormValues}
+                    onSubmit={(values) => saveEditor("/api/v1/admin/services", formatJson(values))}
+                  />
+                </div>
               </Card>
 
               <Card className="rounded-sm border-border p-5 flex flex-col">
                 <div className="flex items-center justify-between gap-3 mb-4">
                   <h3 className="font-display text-lg font-semibold tracking-tight">Manage Products</h3>
-                  <Button type="button" variant="outline" size="sm" onClick={() => setProductEditor(formatJson(buildNewProduct()))}>
+                  <Button type="button" variant="outline" size="sm" onClick={() => setEditingProduct(buildNewProduct())}>
                     New
                   </Button>
                 </div>
@@ -540,7 +649,7 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
                           <div className="text-xs text-text-muted">{product.slug}</div>
                         </div>
                         <div className="flex gap-1 shrink-0">
-                          <Button type="button" size="sm" variant="outline" onClick={() => setProductEditor(formatJson(product))}>
+                          <Button type="button" size="sm" variant="outline" onClick={() => setEditingProduct(product)}>
                             Edit
                           </Button>
                           <Button type="button" size="sm" variant="ghost" onClick={() => void deleteRecord("/api/v1/admin/products", `slug=${encodeURIComponent(product.slug)}`)}>
@@ -551,16 +660,23 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
                     </div>
                   ))}
                 </div>
-                <textarea value={productEditor} onChange={(event) => setProductEditor(event.target.value)} className="signal-input mt-4 min-h-48 font-mono text-xs" />
-                <Button type="button" size="sm" className="mt-3" onClick={() => void saveEditor("/api/v1/admin/products", productEditor)}>
-                  Save product
-                </Button>
+                <div className="mt-4">
+                  <CatalogProductForm
+                    key={editingProduct.slug}
+                    initial={productToFormValues(editingProduct)}
+                    onSubmit={(values) => {
+                      const { advancedJson, ...structured } = values;
+                      const merged = mergeAdvancedJson(structured, advancedJson);
+                      return saveEditor("/api/v1/admin/products", formatJson(merged));
+                    }}
+                  />
+                </div>
               </Card>
 
               <Card className="rounded-sm border-border p-5 flex flex-col">
                 <div className="flex items-center justify-between gap-3 mb-4">
                   <h3 className="font-display text-lg font-semibold tracking-tight">Manage Portfolio</h3>
-                  <Button type="button" variant="outline" size="sm" onClick={() => setPortfolioEditor(formatJson(buildNewPortfolio()))}>
+                  <Button type="button" variant="outline" size="sm" onClick={() => setEditingPortfolio(buildNewPortfolio())}>
                     New
                   </Button>
                 </div>
@@ -573,7 +689,7 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
                           <div className="text-xs text-text-muted">{project.slug}</div>
                         </div>
                         <div className="flex gap-1 shrink-0">
-                          <Button type="button" size="sm" variant="outline" onClick={() => setPortfolioEditor(formatJson(project))}>
+                          <Button type="button" size="sm" variant="outline" onClick={() => setEditingPortfolio(project)}>
                             Edit
                           </Button>
                           <Button type="button" size="sm" variant="ghost" onClick={() => void deleteRecord("/api/v1/admin/portfolio", `slug=${encodeURIComponent(project.slug)}`)}>
@@ -584,10 +700,17 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
                     </div>
                   ))}
                 </div>
-                <textarea value={portfolioEditor} onChange={(event) => setPortfolioEditor(event.target.value)} className="signal-input mt-4 min-h-48 font-mono text-xs" />
-                <Button type="button" size="sm" className="mt-3" onClick={() => void saveEditor("/api/v1/admin/portfolio", portfolioEditor)}>
-                  Save project
-                </Button>
+                <div className="mt-4">
+                  <CatalogPortfolioForm
+                    key={editingPortfolio.slug}
+                    initial={portfolioToFormValues(editingPortfolio)}
+                    onSubmit={(values) => {
+                      const { advancedJson, ...structured } = values;
+                      const merged = mergeAdvancedJson(structured, advancedJson);
+                      return saveEditor("/api/v1/admin/portfolio", formatJson(merged));
+                    }}
+                  />
+                </div>
               </Card>
             </div>
           ) : null}

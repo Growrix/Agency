@@ -82,6 +82,10 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
   const [emailCustomer, setEmailCustomer] = useState(false);
   const [statusValue, setStatusValue] = useState("");
   const [assigneeValue, setAssigneeValue] = useState("");
+  const [orderPaymentStatus, setOrderPaymentStatus] = useState("");
+  const [orderFulfillmentStatus, setOrderFulfillmentStatus] = useState("");
+  const [orderDeliveryUrls, setOrderDeliveryUrls] = useState("");
+  const [orderInternalNotes, setOrderInternalNotes] = useState("");
   const [actionState, setActionState] = useState<"idle" | "submitting">("idle");
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -100,6 +104,17 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
       setDetail(payload.data);
       setStatusValue(getCurrentStatus(payload.data));
       setAssigneeValue((payload.data.record.assigned_to_user_id as string) ?? "");
+
+      if (payload.data.type === "order") {
+        const orderRecord = payload.data.record as Record<string, unknown>;
+        setOrderPaymentStatus((orderRecord.payment_status as string) ?? "");
+        setOrderFulfillmentStatus((orderRecord.fulfillment_status as string) ?? "");
+        const deliveryUrls = Array.isArray(orderRecord.delivery_urls)
+          ? (orderRecord.delivery_urls as unknown[]).filter((entry): entry is string => typeof entry === "string")
+          : [];
+        setOrderDeliveryUrls(deliveryUrls.join("\n"));
+        setOrderInternalNotes((orderRecord.notes as string) ?? "");
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to load submission.");
     } finally {
@@ -160,6 +175,41 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
         setFeedback(payload?.error?.message ?? "Update failed.");
         return;
       }
+      await fetchDetail();
+    } finally {
+      setActionState("idle");
+    }
+  }
+
+  async function handleOrderSave() {
+    if (!detail || detail.type !== "order") return;
+    const orderId = (detail.record.id as string) ?? id;
+    setActionState("submitting");
+    setFeedback(null);
+
+    const deliveryUrls = orderDeliveryUrls
+      .split("\n")
+      .map((entry) => entry.trim())
+      .filter(Boolean);
+
+    try {
+      const response = await fetch(`/api/v1/admin/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+          payment_status: orderPaymentStatus || undefined,
+          fulfillment_status: orderFulfillmentStatus || undefined,
+          delivery_urls: deliveryUrls,
+          notes: orderInternalNotes,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as { error?: { message?: string } } | null;
+      if (!response.ok) {
+        setFeedback(payload?.error?.message ?? "Order update failed.");
+        return;
+      }
+      setFeedback("Order updated.");
       await fetchDetail();
     } finally {
       setActionState("idle");
@@ -271,6 +321,79 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
                 ) : null}
               </div>
             </Card>
+
+            {detail.type === "order" ? (
+              <Card>
+                <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Order workflow</p>
+                <div className="mt-3 space-y-3 text-sm">
+                  <div className="grid grid-cols-2 gap-3">
+                    <label className="block">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Payment status</span>
+                      <select
+                        className="signal-input mt-1"
+                        value={orderPaymentStatus}
+                        onChange={(event) => setOrderPaymentStatus(event.target.value)}
+                      >
+                        <option value="">(unchanged)</option>
+                        <option value="pending">pending</option>
+                        <option value="succeeded">succeeded</option>
+                        <option value="failed">failed</option>
+                        <option value="refunded">refunded</option>
+                      </select>
+                    </label>
+                    <label className="block">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Fulfillment status</span>
+                      <select
+                        className="signal-input mt-1"
+                        value={orderFulfillmentStatus}
+                        onChange={(event) => setOrderFulfillmentStatus(event.target.value)}
+                      >
+                        <option value="">(unchanged)</option>
+                        <option value="pending">pending</option>
+                        <option value="intake_pending">intake_pending</option>
+                        <option value="fulfilling">fulfilling</option>
+                        <option value="qa_review">qa_review</option>
+                        <option value="delivered">delivered</option>
+                        <option value="archived">archived</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <label className="block">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+                      Delivery URLs (one per line)
+                    </span>
+                    <textarea
+                      className="signal-input mt-1 min-h-20"
+                      value={orderDeliveryUrls}
+                      onChange={(event) => setOrderDeliveryUrls(event.target.value)}
+                      placeholder="https://downloads.example.com/private/template.zip"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Internal notes</span>
+                    <textarea
+                      className="signal-input mt-1 min-h-20"
+                      value={orderInternalNotes}
+                      onChange={(event) => setOrderInternalNotes(event.target.value)}
+                      placeholder="Operational context for this order."
+                    />
+                  </label>
+
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={actionState === "submitting"}
+                      onClick={() => void handleOrderSave()}
+                    >
+                      Save order
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ) : null}
 
             <Card>
               <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Notes thread</p>
