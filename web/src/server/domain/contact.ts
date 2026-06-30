@@ -1,12 +1,11 @@
 import "server-only";
 
-import { Resend } from "resend";
 import { ApiError } from "@/server/core/api";
-import { getRuntimeConfig } from "@/server/config/runtime";
 import type { ContactInquiryRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { recordLeadEvent } from "@/server/domain/leads";
+import { escapeHtml, notifyTeam } from "@/server/domain/team-notifications";
 
 type CreateContactInquiryInput = {
   visitor_name: string;
@@ -23,28 +22,12 @@ type CreateContactInquiryInput = {
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const EMAIL_DELIVERY_TIMEOUT_MS = 3_000;
-
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 function buildInquirySubject(input: CreateContactInquiryInput) {
   return input.service ? `${input.service} inquiry from ${input.visitor_name}` : `New inquiry from ${input.visitor_name}`;
 }
 
 async function sendInquiryEmail(inquiry: ContactInquiryRecord) {
-  const runtime = getRuntimeConfig();
-  if (!runtime.contact.resendApiKey || !runtime.contact.toEmail || !runtime.contact.fromEmail) {
-    return { delivered: false, fallbackSenderUsed: false };
-  }
-
-  const resend = new Resend(runtime.contact.resendApiKey);
   const html = `
     <h2>New inquiry from Growrix</h2>
     <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
@@ -68,39 +51,23 @@ async function sendInquiryEmail(inquiry: ContactInquiryRecord) {
     message: inquiry.message,
   });
 
-  const send = await resend.emails.send({
-    from: runtime.contact.fromEmail,
-    to: [runtime.contact.toEmail],
-    replyTo: inquiry.visitor_email,
+  const result = await notifyTeam({
+    kind: "contact_inquiry",
     subject,
     html,
-  });
-
-  if (!send.error) {
-    return { delivered: true, fallbackSenderUsed: false };
-  }
-
-  const retry = await resend.emails.send({
-    from: runtime.contact.fallbackFromEmail,
-    to: [runtime.contact.toEmail],
     replyTo: inquiry.visitor_email,
-    subject,
-    html,
-    headers: {
-      "X-Original-From": runtime.contact.fromEmail,
+    payload: {
+      inquiry_id: inquiry.id,
+      name: inquiry.visitor_name,
+      email: inquiry.visitor_email,
+      company: inquiry.company,
+      service: inquiry.service,
+      budget: inquiry.budget,
+      urgency: inquiry.urgency,
     },
   });
 
-  return { delivered: !retry.error, fallbackSenderUsed: !retry.error };
-}
-
-async function sendInquiryEmailWithTimeout(inquiry: ContactInquiryRecord) {
-  return await Promise.race([
-    sendInquiryEmail(inquiry),
-    new Promise<{ delivered: false; fallbackSenderUsed: false }>((resolve) => {
-      setTimeout(() => resolve({ delivered: false, fallbackSenderUsed: false }), EMAIL_DELIVERY_TIMEOUT_MS);
-    }),
-  ]);
+  return { delivered: result.emailDelivered, fallbackSenderUsed: result.emailFallbackUsed };
 }
 
 export async function createContactInquiry(input: CreateContactInquiryInput) {
@@ -138,7 +105,7 @@ export async function createContactInquiry(input: CreateContactInquiryInput) {
     inquiries: [inquiry, ...database.inquiries],
   }));
 
-  const emailDelivery = await sendInquiryEmailWithTimeout(inquiry).catch(async (error: unknown) => {
+  const emailDelivery = await sendInquiryEmail(inquiry).catch(async (error: unknown) => {
     await recordAuditLog({
       level: "error",
       action: "contact.email_failed",

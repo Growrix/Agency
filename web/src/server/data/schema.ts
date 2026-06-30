@@ -339,6 +339,9 @@ export type NotificationChannel = "lark" | "resend" | "console";
 export type NotificationKind =
   | "lead_created"
   | "lead_hot"
+  | "contact_inquiry"
+  | "newsletter_subscribed"
+  | "purchase_created"
   | "purchase_completed"
   | "service_request_created"
   | "appointment_requested"

@@ -5,8 +5,8 @@ import type { ServiceRequestRecord, ServiceRequestStatus } from "@/server/data/s
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { recordLeadEvent } from "@/server/domain/leads";
-import { dispatchNotification } from "@/server/domain/notifications";
 import { safeSendServiceRequestConfirmationEmail } from "@/server/domain/commerce-emails";
+import { notifyTeam } from "@/server/domain/team-notifications";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -114,9 +114,24 @@ export async function createServiceRequest(input: CreateServiceRequestInput): Pr
         lead_id: lead.id,
       },
     }),
-    dispatchNotification({
+    notifyTeam({
       kind: "service_request_created",
-      title: `New service request: ${record.customer_name}`,
+      subject: `New service request: ${record.customer_name}`,
+      text: [
+        `Request: ${record.request_number}`,
+        `Name: ${record.customer_name}`,
+        `Email: ${record.customer_email}`,
+        `Phone: ${record.customer_phone ?? "N/A"}`,
+        `Company: ${record.company ?? "N/A"}`,
+        `Product: ${record.product_name ?? record.product_slug ?? "N/A"}`,
+        `Tier: ${record.variant_tier_name ?? "N/A"}`,
+        `Budget: ${record.budget ?? "N/A"}`,
+        `Timeline: ${record.timeline ?? "N/A"}`,
+        ``,
+        `Brief:`,
+        record.brief,
+      ].join("\n"),
+      replyTo: record.customer_email,
       payload: {
         request_number: record.request_number,
         email: record.customer_email,

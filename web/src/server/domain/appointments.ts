@@ -1,12 +1,11 @@
 import "server-only";
 
-import { Resend } from "resend";
 import { ApiError } from "@/server/core/api";
-import { getRuntimeConfig } from "@/server/config/runtime";
 import type { AppointmentRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { recordLeadEvent } from "@/server/domain/leads";
+import { notifyTeam } from "@/server/domain/team-notifications";
 
 type CreateAppointmentInput = {
   visitor_name: string;
@@ -36,12 +35,6 @@ function parsePreferredDate(value: string) {
 }
 
 async function sendAppointmentEmail(appointment: AppointmentRecord) {
-  const runtime = getRuntimeConfig();
-  if (!runtime.contact.resendApiKey || !runtime.contact.toEmail || !runtime.contact.fromEmail) {
-    return { delivered: false };
-  }
-
-  const resend = new Resend(runtime.contact.resendApiKey);
   const summary = [
     `Name: ${appointment.visitor_name}`,
     `Email: ${appointment.visitor_email}`,
@@ -52,15 +45,23 @@ async function sendAppointmentEmail(appointment: AppointmentRecord) {
     `Notes: ${appointment.notes ?? "N/A"}`,
   ].join("\n");
 
-  const result = await resend.emails.send({
-    from: runtime.contact.fromEmail,
-    to: [runtime.contact.toEmail],
-    replyTo: appointment.visitor_email,
+  const result = await notifyTeam({
+    kind: "appointment_requested",
     subject: `New booking request from ${appointment.visitor_name}`,
     text: summary,
+    replyTo: appointment.visitor_email,
+    payload: {
+      appointment_id: appointment.id,
+      name: appointment.visitor_name,
+      email: appointment.visitor_email,
+      phone: appointment.visitor_phone,
+      service: appointment.service_interested_in,
+      preferred_datetime: appointment.preferred_datetime,
+      timezone: appointment.timezone,
+    },
   });
 
-  return { delivered: !result.error };
+  return { delivered: result.emailDelivered };
 }
 
 export async function createAppointment(input: CreateAppointmentInput) {

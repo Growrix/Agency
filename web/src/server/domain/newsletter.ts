@@ -6,6 +6,7 @@ import { getRuntimeConfig } from "@/server/config/runtime";
 import type { NewsletterSubscriberRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent } from "@/server/logging/observability";
+import { notifyTeam } from "@/server/domain/team-notifications";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -83,6 +84,16 @@ export async function subscribeToNewsletter(email: string, source = "blog_sideba
 
   // Fire-and-forget welcome email — do not block the API response
   void sendWelcomeEmail(email).catch(() => undefined);
+  void notifyTeam({
+    kind: "newsletter_subscribed",
+    subject: `Newsletter subscriber: ${email}`,
+    text: `New newsletter subscriber\n\nEmail: ${email}\nSource: ${source}`,
+    payload: {
+      subscriber_id: record.id,
+      email,
+      source,
+    },
+  }).catch(() => undefined);
 
   return { alreadySubscribed: false };
 }

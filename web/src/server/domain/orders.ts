@@ -17,6 +17,7 @@ import {
   safeSendPurchaseConfirmationEmail,
 } from "@/server/domain/commerce-emails";
 import { dispatchNotification } from "@/server/domain/notifications";
+import { notifyTeam } from "@/server/domain/team-notifications";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { getCheckoutHref } from "@/lib/shop";
 
@@ -352,6 +353,37 @@ export async function createOrder(input: CreateOrderInput) {
         item_count: order.items.length,
         stripe_ready: Boolean(checkoutUrl),
       },
+    }),
+    notifyTeam({
+      kind: "purchase_created",
+      subject: `New order created: ${order.order_number}`,
+      text: [
+        `Order: ${order.order_number}`,
+        `Customer: ${order.customer_name ?? "N/A"} <${order.customer_email}>`,
+        `Phone: ${order.customer_phone ?? "N/A"}`,
+        `Total: ${(order.total_cents / 100).toFixed(2)} ${order.currency.toUpperCase()}`,
+        `Stripe ready: ${checkoutUrl ? "yes" : "no"}`,
+        ``,
+        `Items:`,
+        ...order.items.map(
+          (item) =>
+            `  - ${item.product_name}${item.product_tier_name ? ` (${item.product_tier_name})` : ""} x${item.quantity} — ${(item.unit_price_cents / 100).toFixed(2)}`,
+        ),
+        order.notes ? `\nNotes:\n${order.notes}` : "",
+      ]
+        .filter((line) => line !== "")
+        .join("\n"),
+      replyTo: order.customer_email,
+      payload: {
+        order_id: order.id,
+        order_number: order.order_number,
+        customer_email: order.customer_email,
+        total_cents: order.total_cents,
+        currency: order.currency,
+        item_count: order.items.length,
+        stripe_ready: Boolean(checkoutUrl),
+      },
+      relatedOrderId: order.id,
     }),
   ]);
 

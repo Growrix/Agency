@@ -3,7 +3,10 @@ import "server-only";
 type RuntimeConfig = {
   appBaseUrl: string;
   contact: {
+    /** First configured recipient; kept for legacy call sites (e.g. replyTo addresses). */
     toEmail?: string;
+    /** All configured recipients (CONTACT_TO_EMAIL is comma-separated). */
+    toEmails: string[];
     fromEmail?: string;
     fallbackFromEmail: string;
     resendApiKey?: string;
@@ -66,6 +69,26 @@ function parseNumber(value: string | undefined, fallback: number) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function parseRecipientList(value: string | undefined): string[] {
+  if (!value) {
+    return [];
+  }
+
+  const seen = new Set<string>();
+  const recipients: string[] = [];
+
+  for (const raw of value.split(",")) {
+    const trimmed = raw.trim();
+    if (!trimmed) continue;
+    const key = trimmed.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    recipients.push(trimmed);
+  }
+
+  return recipients;
+}
+
 function parseBaseUrl(value: string | undefined) {
   if (!value) {
     return "http://localhost:5000";
@@ -83,10 +106,13 @@ export function getRuntimeConfig(): RuntimeConfig {
     return cachedRuntimeConfig;
   }
 
+  const toEmails = parseRecipientList(process.env.CONTACT_TO_EMAIL);
+
   cachedRuntimeConfig = {
     appBaseUrl: parseBaseUrl(process.env.NEXT_PUBLIC_SITE_URL),
     contact: {
-      toEmail: process.env.CONTACT_TO_EMAIL,
+      toEmail: toEmails[0],
+      toEmails,
       fromEmail: process.env.CONTACT_FROM_EMAIL,
       fallbackFromEmail: process.env.CONTACT_FROM_FALLBACK_EMAIL ?? DEFAULT_FALLBACK_FROM_EMAIL,
       resendApiKey: process.env.RESEND_API_KEY,
