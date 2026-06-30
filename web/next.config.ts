@@ -59,8 +59,10 @@ const nextConfig: NextConfig = {
   allowedDevOrigins,
   compress: true,
   poweredByHeader: false,
-  /** Heavy marketing routes (Sanity + large client trees) exceed the 60s default during CI SSG. */
-  staticPageGenerationTimeout: 300,
+  /** Heavy marketing routes (Sanity + large client trees) exceed the 60s default during CI SSG.
+   *  Sanity fetches themselves cap at 10s via web/src/server/sanity/catalog.ts; the 600s budget
+   *  here is headroom for slow Vercel build runners across many parallel SSG pages. */
+  staticPageGenerationTimeout: 600,
   outputFileTracingRoot: path.join(__dirname),
   images: {
     formats: ["image/avif", "image/webp"],

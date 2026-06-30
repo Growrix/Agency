@@ -1092,9 +1092,15 @@ export async function listPublicPortfolio(): Promise<PublicPortfolioRecord[]> {
   return listPublicPortfolioCached();
 }
 
+const listSanityCaseStudiesCached = withPublicDataCache(
+  async () => listSanityCaseStudies().catch(() => []),
+  ["sanity-case-studies"],
+  { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["catalog-portfolio"] },
+);
+
 export async function getPublicPortfolioProject(slug: string): Promise<PublicPortfolioDetailRecord | null> {
   const database = await ensureCatalogSeeded();
-  const cmsProjects = await listSanityCaseStudies().catch(() => []);
+  const cmsProjects = await listSanityCaseStudiesCached();
 
   if (cmsProjects.length > 0) {
     const cmsProject = cmsProjects.find((project) => project.slug === slug) ?? null;

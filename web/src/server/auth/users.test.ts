@@ -49,8 +49,11 @@ describe("auth users", () => {
     const authenticated = await authenticateUser("user@example.com", "StrongPass1!");
     assert.equal(authenticated?.email, "user@example.com");
 
-    const updated = await updateUserProfile(authenticated!.id, { firstName: "Updated", lastName: "Name" });
-    assert.equal(updated.first_name, "Updated");
-    assert.equal(updated.last_name, "Name");
+    const updated = await updateUserProfile(authenticated!.id, {
+      phone: "+15551234567",
+      marketingOptIn: true,
+    });
+    assert.equal(updated.phone, "+15551234567");
+    assert.equal(updated.marketing_opt_in, true);
   });
 });

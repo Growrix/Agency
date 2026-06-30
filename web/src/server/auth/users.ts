@@ -189,7 +189,7 @@ export async function getUserById(userId: string) {
 
 export async function updateUserProfile(
   userId: string,
-  updates: { firstName?: string; lastName?: string; phone?: string; marketingOptIn?: boolean }
+  updates: { phone?: string; marketingOptIn?: boolean }
 ): Promise<UserRecord> {
   let updatedUser: UserRecord | null = null;
 
@@ -202,8 +202,6 @@ export async function updateUserProfile(
 
       updatedUser = {
         ...user,
-        first_name: updates.firstName !== undefined ? updates.firstName.trim() || undefined : user.first_name,
-        last_name: updates.lastName !== undefined ? updates.lastName.trim() || undefined : user.last_name,
         phone: updates.phone !== undefined ? updates.phone.trim() || undefined : user.phone,
         marketing_opt_in:
           updates.marketingOptIn !== undefined ? updates.marketingOptIn : user.marketing_opt_in,

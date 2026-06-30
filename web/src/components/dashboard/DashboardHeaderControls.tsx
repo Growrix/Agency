@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Popover } from "@headlessui/react";
 import { useCallback, useEffect, useState } from "react";
 import { BellIcon, Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
-import { ProfileSettingsModal } from "@/components/dashboard/ProfileSettingsModal";
 import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -43,7 +42,6 @@ export function DashboardHeaderControls({
   profileEmail = "customer@growrixos.com",
   className,
 }: DashboardHeaderControlsProps) {
-  const [profileOpen, setProfileOpen] = useState(false);
   const [items, setItems] = useState<CustomerNotification[]>([]);
   const [unread, setUnread] = useState(0);
 
@@ -166,19 +164,16 @@ export function DashboardHeaderControls({
             <p className="text-xs text-text-muted">{profileEmail}</p>
           </div>
           <div className="mt-2 grid gap-1">
-            <button
-              type="button"
-              onClick={() => setProfileOpen(true)}
+            <Link
+              href="/dashboard/account"
               className="inline-flex items-center gap-2 rounded-sm px-3 py-2 text-left text-sm text-text transition-colors hover:bg-inset"
             >
               <Cog6ToothIcon className="size-4" />
-              Profile settings
-            </button>
+              Profile and preferences
+            </Link>
           </div>
         </Popover.Panel>
       </Popover>
-
-      <ProfileSettingsModal open={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );
 }

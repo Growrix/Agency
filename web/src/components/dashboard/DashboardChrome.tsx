@@ -22,6 +22,7 @@ const navItems: DashboardNavItem[] = [
   { href: "/dashboard/appointments", label: "Appointments" },
   { href: "/dashboard/submissions", label: "Submissions" },
   { href: "/dashboard/support", label: "Support" },
+  { href: "/dashboard/account", label: "Account" },
 ];
 
 const sectionMeta: Array<{ match: (path: string) => boolean; title: string }> = [
@@ -32,6 +33,7 @@ const sectionMeta: Array<{ match: (path: string) => boolean; title: string }> = 
   { match: (p) => p.startsWith("/dashboard/appointments"), title: "Appointments" },
   { match: (p) => p.startsWith("/dashboard/submissions"), title: "Submissions" },
   { match: (p) => p.startsWith("/dashboard/support"), title: "Support" },
+  { match: (p) => p.startsWith("/dashboard/account"), title: "Account" },
 ];
 
 function resolveTitle(pathname: string) {

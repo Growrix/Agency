@@ -10,8 +10,6 @@ export async function POST(request: NextRequest) {
     const user = await requireAuthenticatedUser(request);
     const body = (await request.json()) as Record<string, unknown>;
     const updated = await updateUserProfile(user.id, {
-      firstName: typeof body.first_name === "string" ? body.first_name : typeof body.firstName === "string" ? body.firstName : undefined,
-      lastName: typeof body.last_name === "string" ? body.last_name : typeof body.lastName === "string" ? body.lastName : undefined,
       phone: typeof body.phone === "string" ? body.phone : undefined,
       marketingOptIn:
         typeof body.marketing_opt_in === "boolean"

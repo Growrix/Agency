@@ -738,6 +738,8 @@ function normalizeService(item: SanityServicePage): ManagedServiceRecord | null 
   };
 }
 
+const SANITY_FETCH_TIMEOUT_MS = 10_000;
+
 async function fetchCatalogEntries<T>(query: string, options: SanityQueryOptions) {
   if (!isSanityConfigured()) {
     return [] as T[];
@@ -745,8 +747,20 @@ async function fetchCatalogEntries<T>(query: string, options: SanityQueryOptions
 
   const client = getSanityClient({ preview: options.preview });
   try {
-    return await client.fetch<T[]>(query, { preview: options.preview === true });
-  } catch {
+    return await Promise.race<T[]>([
+      client.fetch<T[]>(query, { preview: options.preview === true }),
+      new Promise<T[]>((_, reject) =>
+        setTimeout(
+          () => reject(new Error("sanity_fetch_timeout")),
+          SANITY_FETCH_TIMEOUT_MS,
+        ),
+      ),
+    ]);
+  } catch (error) {
+    if (process.env.NODE_ENV !== "test") {
+      const reason = error instanceof Error ? error.message : String(error);
+      console.warn(`[sanity] catalog fetch failed: ${reason}`);
+    }
     return [] as T[];
   }
 }
