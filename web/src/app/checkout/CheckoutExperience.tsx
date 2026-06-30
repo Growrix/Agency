@@ -3,9 +3,13 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button, LinkButton } from "@/components/primitives/Button";
+import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
 import { formatUsdFromCents, rehydrateCartStore, useCartStore } from "@/lib/cart-store";
+import { cn } from "@/lib/utils";
 import type { CheckoutSelection } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type CheckoutExperienceProps = {
   product?: PublicShopProductRecord | null;
@@ -51,6 +55,21 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   const selectedTierLabel = selection?.tierName?.trim();
   const isCartMode = searchParams.get("cart") === "1";
 
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerNameTouched, setCustomerNameTouched] = useState(false);
+  const [customerEmailTouched, setCustomerEmailTouched] = useState(false);
+
+  const nameError = customerNameTouched && customerName.trim().length === 0
+    ? "Full name is required."
+    : null;
+  const emailError = customerEmailTouched && !EMAIL_REGEX.test(customerEmail.trim())
+    ? "Enter a valid email address."
+    : null;
+
+  const formValid =
+    customerName.trim().length > 0 && EMAIL_REGEX.test(customerEmail.trim());
+
   useEffect(() => {
     void rehydrateCartStore().finally(() => setCartHydrated(true));
   }, []);
@@ -61,15 +80,19 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       if (cancelled) return;
       setViewer(value);
       setViewerLoaded(true);
+      if (value) {
+        const composed = [value.first_name, value.last_name]
+          .filter(Boolean)
+          .join(" ")
+          .trim();
+        if (composed) setCustomerName(composed);
+        if (value.email) setCustomerEmail(value.email);
+      }
     });
     return () => {
       cancelled = true;
     };
   }, []);
-
-  const viewerFullName = viewer
-    ? [viewer.first_name, viewer.last_name].filter(Boolean).join(" ").trim() || null
-    : null;
 
   const activeCartItems = useMemo(() => {
     if (!isCartMode || !cartHydrated) {
@@ -81,33 +104,59 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
 
   const activeCartSubtotal = activeCartItems.reduce((sum, item) => sum + item.unit_price_cents * item.quantity, 0);
 
+  let activeStep: CheckoutStepId = "cart";
+  if (status === "success") {
+    activeStep = "payment";
+  } else if (!viewerLoaded || !viewer) {
+    activeStep = "sign-in";
+  } else if (submitState === "submitting") {
+    activeStep = "payment";
+  } else {
+    activeStep = "review";
+  }
+
   if (status === "success") {
     return (
-      <div className="rounded-md border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
-        Payment flow returned successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}{orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be processing.
+      <div className="space-y-4">
+        <CheckoutSteps active="payment" />
+        <div className="rounded-md border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
+          Payment flow returned successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}{orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be processing.
+        </div>
       </div>
     );
   }
 
   if (status === "cancelled") {
     return (
-      <div className="rounded-md border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
-        Checkout was cancelled before payment. {selectedTierLabel ? `Tier ${selectedTierLabel} is still selected. ` : ""}Your order draft is still available for follow-up if you restart the flow.
+      <div className="space-y-4">
+        <CheckoutSteps active="review" />
+        <div className="rounded-md border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
+          Checkout was cancelled before payment. {selectedTierLabel ? `Tier ${selectedTierLabel} is still selected. ` : ""}Your order draft is still available for follow-up if you restart the flow.
+        </div>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="flex flex-wrap gap-3">
-        <LinkButton href="/digital-products" size="lg">Go to digital products</LinkButton>
-        <LinkButton href="/contact" variant="outline" size="lg">Request invoice</LinkButton>
+      <div className="space-y-4">
+        <CheckoutSteps active="cart" />
+        <div className="flex flex-wrap gap-3">
+          <LinkButton href="/digital-products" size="lg">Go to digital products</LinkButton>
+          <LinkButton href="/contact" variant="outline" size="lg">Request invoice</LinkButton>
+        </div>
       </div>
     );
   }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setCustomerNameTouched(true);
+    setCustomerEmailTouched(true);
+    if (!formValid) {
+      return;
+    }
+
     setSubmitState("submitting");
     setErrorMessage("Checkout could not start. Please try again.");
     setFallbackMessage(null);
@@ -128,6 +177,8 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          customer_name: customerName.trim(),
+          customer_email: customerEmail.trim(),
           product_slug: hasCartItems ? undefined : product?.slug,
           product_variant_slug: selection?.variantSlug,
           product_tier_name: selection?.tierName,
@@ -162,6 +213,10 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         clearCart();
       }
       form.reset();
+      setCustomerName("");
+      setCustomerEmail("");
+      setCustomerNameTouched(false);
+      setCustomerEmailTouched(false);
     } catch {
       setSubmitState("error");
     }
@@ -173,7 +228,10 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       onSubmit={onSubmit}
       className="space-y-4"
       aria-busy={submitState === "submitting"}
+      noValidate
     >
+      <CheckoutSteps active={activeStep} />
+
       <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
@@ -181,10 +239,19 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
           <input
             name="customer_name"
             required
-            defaultValue={viewerFullName ?? undefined}
+            value={customerName}
+            onChange={(event) => setCustomerName(event.target.value)}
+            onBlur={() => setCustomerNameTouched(true)}
+            aria-invalid={nameError ? "true" : undefined}
+            aria-describedby={nameError ? "customer-name-error" : undefined}
             className="signal-input mt-1.5"
             placeholder="Your name"
           />
+          {nameError ? (
+            <p id="customer-name-error" className="mt-1 text-xs text-destructive">
+              {nameError}
+            </p>
+          ) : null}
         </label>
         <label className="block">
           <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Email *</span>
@@ -192,10 +259,19 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
             type="email"
             name="customer_email"
             required
-            defaultValue={viewer?.email ?? undefined}
+            value={customerEmail}
+            onChange={(event) => setCustomerEmail(event.target.value)}
+            onBlur={() => setCustomerEmailTouched(true)}
+            aria-invalid={emailError ? "true" : undefined}
+            aria-describedby={emailError ? "customer-email-error" : undefined}
             className="signal-input mt-1.5"
             placeholder="you@company.com"
           />
+          {emailError ? (
+            <p id="customer-email-error" className="mt-1 text-xs text-destructive">
+              {emailError}
+            </p>
+          ) : null}
         </label>
       </div>
       <label className="block">
@@ -230,7 +306,16 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       {fallbackMessage ? (
         <p className="rounded-[14px] border border-border bg-surface px-4 py-3 text-sm text-text-muted">{fallbackMessage}</p>
       ) : null}
-      {submitState === "error" ? <p className="text-sm text-destructive">{errorMessage}</p> : null}
+      <p
+        role="status"
+        aria-live="polite"
+        className={cn(
+          "text-sm",
+          submitState === "error" ? "text-destructive" : "sr-only",
+        )}
+      >
+        {submitState === "error" ? errorMessage : ""}
+      </p>
       {selection?.tierName || selection?.variantSlug || selection?.fulfillmentType ? (
         <p className="text-sm text-text-muted">
           Selected package: {selection?.tierName ?? "Base"}
@@ -239,7 +324,11 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         </p>
       ) : null}
       <div className="flex flex-wrap gap-3">
-        <Button type="submit" disabled={submitState === "submitting" || !viewerLoaded} size="lg">
+        <Button
+          type="submit"
+          disabled={submitState === "submitting" || !viewerLoaded || (viewer ? !formValid : false)}
+          size="lg"
+        >
           {submitState === "submitting"
             ? "Starting checkout..."
             : !viewerLoaded
