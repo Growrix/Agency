@@ -19,6 +19,7 @@ const navItems: DashboardNavItem[] = [
   { href: "/dashboard/downloads", label: "Downloads" },
   { href: "/dashboard/orders", label: "Orders" },
   { href: "/dashboard/appointments", label: "Appointments" },
+  { href: "/dashboard/submissions", label: "Submissions" },
   { href: "/dashboard/support", label: "Support" },
 ];
 
@@ -28,6 +29,7 @@ const sectionMeta: Array<{ match: (path: string) => boolean; title: string }> = 
   { match: (p) => p.startsWith("/dashboard/downloads"), title: "Downloads" },
   { match: (p) => p.startsWith("/dashboard/orders"), title: "Order history" },
   { match: (p) => p.startsWith("/dashboard/appointments"), title: "Appointments" },
+  { match: (p) => p.startsWith("/dashboard/submissions"), title: "Submissions" },
   { match: (p) => p.startsWith("/dashboard/support"), title: "Support" },
 ];
 
