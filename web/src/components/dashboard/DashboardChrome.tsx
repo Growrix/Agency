@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button, LinkButton } from "@/components/primitives/Button";
+import { LinkButton } from "@/components/primitives/Button";
 import { DashboardHeaderControls } from "@/components/dashboard/DashboardHeaderControls";
 import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
+import { DashboardSignOutButton } from "@/components/dashboard/DashboardSignOutButton";
 
 type Viewer = {
   id: string;
@@ -58,17 +59,6 @@ async function fetchViewer(): Promise<Viewer | null> {
   }
 }
 
-async function handleLogout() {
-  try {
-    await fetch("/api/v1/auth/logout", {
-      method: "POST",
-      credentials: "same-origin",
-    });
-  } finally {
-    window.location.assign("/dashboard/login");
-  }
-}
-
 export function DashboardChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "/dashboard";
   const [viewer, setViewer] = useState<Viewer | null>(null);
@@ -101,7 +91,6 @@ export function DashboardChrome({ children }: { children: React.ReactNode }) {
         <DashboardHeaderControls
           profileName={fullName}
           profileEmail={viewer?.email ?? "customer@growrixos.com"}
-          notifications={[]}
         />
       }
       utilityActions={
@@ -109,9 +98,7 @@ export function DashboardChrome({ children }: { children: React.ReactNode }) {
           <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth>
             Browse digital products
           </LinkButton>
-          <Button type="button" variant="ghost" size="sm" fullWidth onClick={() => void handleLogout()}>
-            Sign out
-          </Button>
+          <DashboardSignOutButton />
         </div>
       }
     >
