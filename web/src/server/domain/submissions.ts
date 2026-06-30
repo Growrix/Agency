@@ -19,6 +19,7 @@ import type {
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAuditLog } from "@/server/logging/observability";
 import { notifyTeam, escapeHtml } from "@/server/domain/team-notifications";
+import { fireOrUndefined as createCustomerNotificationOrUndefined } from "@/server/domain/customer-notifications";
 
 const NOTES_PAGE_LIMIT = 500;
 
@@ -405,6 +406,18 @@ export async function addSubmissionNote(input: AddNoteInput): Promise<Submission
       email_customer: input.emailCustomer,
     },
   });
+
+  if (input.customerVisible && input.authorRole === "admin") {
+    await createCustomerNotificationOrUndefined({
+      userEmail: customerEmail,
+      kind: "submission_reply",
+      title: "The Growrix team replied to your submission",
+      body: trimmedBody.length > 240 ? `${trimmedBody.slice(0, 237)}...` : trimmedBody,
+      href: `/dashboard/submissions/${input.type}/${input.id}`,
+      relatedSubmissionId: input.id,
+      relatedSubmissionType: input.type,
+    });
+  }
 
   if (input.customerVisible && input.emailCustomer && input.authorRole === "admin") {
     await notifyTeam({

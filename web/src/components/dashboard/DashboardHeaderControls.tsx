@@ -1,59 +1,93 @@
 "use client";
 
+import Link from "next/link";
 import { Popover } from "@headlessui/react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BellIcon, Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { ProfileSettingsModal } from "@/components/dashboard/ProfileSettingsModal";
 import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { cn } from "@/lib/utils";
 
-type DashboardNotification = {
+type CustomerNotification = {
   id: string;
+  kind: string;
   title: string;
-  detail: string;
-  time: string;
-  unread?: boolean;
+  body?: string;
+  href?: string;
+  read_at?: string;
+  created_at: string;
 };
 
 type DashboardHeaderControlsProps = {
   profileName?: string;
   profileEmail?: string;
-  notifications?: DashboardNotification[];
   className?: string;
 };
 
-const defaultNotifications: DashboardNotification[] = [
-  {
-    id: "n1",
-    title: "Catalog sync completed",
-    detail: "All services and products are up to date.",
-    time: "2m ago",
-    unread: true,
-  },
-  {
-    id: "n2",
-    title: "New inquiry received",
-    detail: "A new enterprise website request arrived.",
-    time: "18m ago",
-    unread: true,
-  },
-  {
-    id: "n3",
-    title: "Pipeline reminder",
-    detail: "2 follow-ups are due today.",
-    time: "1h ago",
-    unread: false,
-  },
-];
+function formatRelative(iso: string) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  const diffMs = Date.now() - date.getTime();
+  const diffMin = Math.floor(diffMs / 60_000);
+  if (diffMin < 1) return "just now";
+  if (diffMin < 60) return `${diffMin}m ago`;
+  const diffHr = Math.floor(diffMin / 60);
+  if (diffHr < 24) return `${diffHr}h ago`;
+  const diffDay = Math.floor(diffHr / 24);
+  if (diffDay < 7) return `${diffDay}d ago`;
+  return date.toLocaleDateString();
+}
 
 export function DashboardHeaderControls({
-  profileName = "Admin User",
-  profileEmail = "admin@growrixos.com",
-  notifications = defaultNotifications,
+  profileName = "Customer",
+  profileEmail = "customer@growrixos.com",
   className,
 }: DashboardHeaderControlsProps) {
   const [profileOpen, setProfileOpen] = useState(false);
-  const unreadCount = notifications.filter((note) => note.unread).length;
+  const [items, setItems] = useState<CustomerNotification[]>([]);
+  const [unread, setUnread] = useState(0);
+
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const response = await fetch("/api/v1/me/notifications", { credentials: "same-origin" });
+      if (!response.ok) return;
+      const payload = (await response.json().catch(() => null)) as
+        | { data?: { items: CustomerNotification[]; unread: number } }
+        | null;
+      if (!payload?.data) return;
+      setItems(payload.data.items);
+      setUnread(payload.data.unread);
+    } catch {
+      // swallow — bell is non-critical
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void fetchNotifications();
+    }, 0);
+    const interval = setInterval(() => {
+      void fetchNotifications();
+    }, 60_000);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
+  }, [fetchNotifications]);
+
+  async function handleMarkAllRead() {
+    try {
+      await fetch("/api/v1/me/notifications/mark-read", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({}),
+      });
+      await fetchNotifications();
+    } catch {
+      // ignore
+    }
+  }
 
   return (
     <div className={cn("flex items-center gap-1.5", className)}>
@@ -65,26 +99,56 @@ export function DashboardHeaderControls({
           aria-label="Open notifications"
         >
           <BellIcon className="size-5" />
-          {unreadCount > 0 ? (
+          {unread > 0 ? (
             <span className="absolute right-1.5 top-1.5 inline-flex h-2.5 w-2.5 rounded-full bg-primary" aria-hidden />
           ) : null}
         </Popover.Button>
         <Popover.Panel className="absolute right-0 z-40 mt-2 w-80 rounded-md border border-border bg-surface p-2 shadow-(--shadow-3)">
-          <div className="border-b border-border/60 px-2 pb-2 pt-1">
-            <p className="text-sm font-semibold">Notifications</p>
-            <p className="text-xs text-text-muted">Recent dashboard activity.</p>
+          <div className="flex items-start justify-between gap-3 border-b border-border/60 px-2 pb-2 pt-1">
+            <div>
+              <p className="text-sm font-semibold">Notifications</p>
+              <p className="text-xs text-text-muted">
+                {unread > 0 ? `${unread} unread` : "All caught up"}
+              </p>
+            </div>
+            {items.length > 0 ? (
+              <button
+                type="button"
+                onClick={() => void handleMarkAllRead()}
+                className="text-xs text-primary hover:underline"
+              >
+                Mark all read
+              </button>
+            ) : null}
           </div>
           <div className="max-h-80 space-y-1 overflow-y-auto p-1">
-            {notifications.map((note) => (
-              <div key={note.id} className="rounded-sm border border-border/55 bg-inset/30 px-3 py-2">
-                <div className="flex items-start justify-between gap-3">
-                  <p className="text-sm font-medium text-text">{note.title}</p>
-                  {note.unread ? <span className="mt-1 h-2 w-2 rounded-full bg-primary" aria-hidden /> : null}
+            {items.map((note) => {
+              const inner = (
+                <div className={cn(
+                  "rounded-sm border border-border/55 px-3 py-2 transition-colors",
+                  note.read_at ? "bg-surface" : "bg-inset/40",
+                )}>
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="text-sm font-medium text-text">{note.title}</p>
+                    {!note.read_at ? (
+                      <span className="mt-1 h-2 w-2 rounded-full bg-primary" aria-hidden />
+                    ) : null}
+                  </div>
+                  {note.body ? <p className="mt-1 text-xs text-text-muted">{note.body}</p> : null}
+                  <p className="mt-1 text-[11px] text-text-muted">{formatRelative(note.created_at)}</p>
                 </div>
-                <p className="mt-1 text-xs text-text-muted">{note.detail}</p>
-                <p className="mt-1 text-[11px] text-text-muted">{note.time}</p>
-              </div>
-            ))}
+              );
+              return note.href ? (
+                <Link key={note.id} href={note.href} className="block hover:opacity-90">
+                  {inner}
+                </Link>
+              ) : (
+                <div key={note.id}>{inner}</div>
+              );
+            })}
+            {items.length === 0 ? (
+              <p className="px-3 py-4 text-xs text-text-muted">No notifications yet.</p>
+            ) : null}
           </div>
         </Popover.Panel>
       </Popover>

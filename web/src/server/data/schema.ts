@@ -77,6 +77,28 @@ export type SubmissionNoteRecord = {
 
 export type CustomerVisibleStatus = "open" | "in_progress" | "resolved" | "closed";
 
+export type CustomerNotificationKind =
+  | "order_created"
+  | "order_completed"
+  | "download_ready"
+  | "submission_reply"
+  | "submission_status";
+
+export type CustomerNotificationRecord = {
+  id: string;
+  user_email: string;
+  user_id?: string;
+  kind: CustomerNotificationKind;
+  title: string;
+  body?: string;
+  href?: string;
+  related_order_id?: string;
+  related_submission_id?: string;
+  related_submission_type?: SubmissionType;
+  read_at?: string;
+  created_at: string;
+};
+
 export type ConversationMessageRecord = {
   id: string;
   role: "user" | "assistant";
@@ -446,6 +468,7 @@ export type DatabaseSchema = {
   downloads: DownloadRecord[];
   licenses: LicenseRecord[];
   submission_notes: SubmissionNoteRecord[];
+  customer_notifications: CustomerNotificationRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -467,4 +490,5 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   downloads: [],
   licenses: [],
   submission_notes: [],
+  customer_notifications: [],
 };

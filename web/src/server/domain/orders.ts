@@ -18,6 +18,7 @@ import {
 } from "@/server/domain/commerce-emails";
 import { dispatchNotification } from "@/server/domain/notifications";
 import { notifyTeam } from "@/server/domain/team-notifications";
+import { fireOrUndefined as createCustomerNotification } from "@/server/domain/customer-notifications";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { getCheckoutHref } from "@/lib/shop";
 
@@ -469,6 +470,14 @@ export async function markOrderPaid(
     const paidOrder: OrderRecord = updatedOrder;
     if (paidOrder.payment_status === "succeeded") {
       await safeSendPurchaseConfirmationEmail(paidOrder);
+      await createCustomerNotification({
+        userEmail: paidOrder.customer_email,
+        kind: "order_completed",
+        title: `Payment received for ${paidOrder.order_number}`,
+        body: `Your order is now in fulfillment. We will notify you when downloads are ready.`,
+        href: `/dashboard/orders/${paidOrder.id}`,
+        relatedOrderId: paidOrder.id,
+      });
       try {
         await dispatchNotification({
           kind: "purchase_completed",
@@ -594,6 +603,14 @@ export async function updateOrderOperations(
       opsOrder.delivery_urls.length > 0
     ) {
       await safeSendDownloadReadyEmail(opsOrder);
+      await createCustomerNotification({
+        userEmail: opsOrder.customer_email,
+        kind: "download_ready",
+        title: `Your downloads are ready · ${opsOrder.order_number}`,
+        body: `${opsOrder.delivery_urls.length} delivery link${opsOrder.delivery_urls.length === 1 ? "" : "s"} available from your dashboard.`,
+        href: `/dashboard/orders/${opsOrder.id}`,
+        relatedOrderId: opsOrder.id,
+      });
       try {
         await dispatchNotification({
           kind: "download_issued",

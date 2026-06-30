@@ -41,6 +41,7 @@ function cloneDefaultDatabase(): DatabaseSchema {
     downloads: [...DEFAULT_DATABASE.downloads],
     licenses: [...DEFAULT_DATABASE.licenses],
     submission_notes: [...DEFAULT_DATABASE.submission_notes],
+    customer_notifications: [...DEFAULT_DATABASE.customer_notifications],
   };
 }
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { AppointmentRescheduleModal } from "@/components/dashboard/AppointmentRescheduleModal";
+import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 
@@ -146,6 +147,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   const [supportStatus, setSupportStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [supportMessage, setSupportMessage] = useState<string | null>(null);
   const [rescheduleAppointment, setRescheduleAppointment] = useState<DashboardAppointment | null>(null);
+  const [activeDownloadDetail, setActiveDownloadDetail] = useState<DashboardDownload | null>(null);
 
   const currentMeta = viewMeta[view];
   const fullName = buildFullName(user);
@@ -381,15 +383,25 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
               <p className="mt-1 text-sm text-text-muted">Usage: {download.download_count}/{download.max_downloads}</p>
               <p className="mt-1 text-sm text-text-muted">Last download: {formatDateTime(download.last_downloaded_at)}</p>
             </div>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              disabled={activeDownloadId === download.id}
-              onClick={() => void handleDownload(download.id)}
-            >
-              {activeDownloadId === download.id ? "Authorizing..." : "Open download"}
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setActiveDownloadDetail(download)}
+              >
+                View details
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={activeDownloadId === download.id}
+                onClick={() => void handleDownload(download.id)}
+              >
+                {activeDownloadId === download.id ? "Authorizing..." : "Open download"}
+              </Button>
+            </div>
           </Card>
         ))}
         {downloads.length === 0 ? (
@@ -576,6 +588,15 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
         onClose={() => setRescheduleAppointment(null)}
         onUpdated={() => {
           setRescheduleAppointment(null);
+          void refreshState();
+        }}
+      />
+
+      <DownloadDetailModal
+        download={activeDownloadDetail}
+        onClose={() => setActiveDownloadDetail(null)}
+        onAuthorized={() => {
+          setActiveDownloadDetail(null);
           void refreshState();
         }}
       />
