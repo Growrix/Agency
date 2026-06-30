@@ -456,6 +456,19 @@ export type LicenseRecord = {
   expires_at?: string;
 };
 
+export type CartItemRecord = {
+  id: string;
+  user_id: string;
+  product_slug: string;
+  product_name: string;
+  product_variant_slug?: string;
+  product_tier_name?: string;
+  fulfillment_type?: string;
+  quantity: number;
+  unit_price_cents: number;
+  updated_at: string;
+};
+
 export type DatabaseSchema = {
   inquiries: ContactInquiryRecord[];
   appointments: AppointmentRecord[];
@@ -476,6 +489,7 @@ export type DatabaseSchema = {
   licenses: LicenseRecord[];
   submission_notes: SubmissionNoteRecord[];
   customer_notifications: CustomerNotificationRecord[];
+  cart_items: CartItemRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -498,4 +512,5 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   licenses: [],
   submission_notes: [],
   customer_notifications: [],
+  cart_items: [],
 };

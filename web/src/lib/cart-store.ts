@@ -120,8 +120,146 @@ export const useCartStore = create<CartStore>()(
   )
 );
 
+type ServerCartItem = {
+  product_slug: string;
+  product_name: string;
+  product_variant_slug?: string | null;
+  product_tier_name?: string | null;
+  fulfillment_type?: string | null;
+  quantity: number;
+  unit_price_cents: number;
+};
+
+type ServerCartResponse = {
+  data?: {
+    items: ServerCartItem[];
+    subtotal_cents: number;
+    item_count: number;
+  };
+};
+
+function localToServerInput(item: CartItem) {
+  return {
+    product_slug: item.product_slug,
+    product_name: item.product_name,
+    product_variant_slug: item.variant_slug,
+    product_tier_name: item.tier_name,
+    fulfillment_type: item.fulfillment_type,
+    quantity: item.quantity,
+    unit_price_cents: item.unit_price_cents,
+  };
+}
+
+function serverToLocalItem(item: ServerCartItem): CartItem {
+  return {
+    product_slug: item.product_slug,
+    product_name: item.product_name,
+    variant_slug: item.product_variant_slug ?? undefined,
+    tier_name: item.product_tier_name ?? undefined,
+    fulfillment_type: item.fulfillment_type ?? undefined,
+    quantity: item.quantity,
+    unit_price_cents: item.unit_price_cents,
+  };
+}
+
+async function fetchServerCart(): Promise<CartItem[] | null> {
+  try {
+    const response = await fetch("/api/v1/me/cart", { credentials: "same-origin" });
+    if (response.status === 401 || response.status === 403) {
+      return null;
+    }
+    if (!response.ok) {
+      return null;
+    }
+    const payload = (await response.json().catch(() => null)) as ServerCartResponse | null;
+    if (!payload?.data) return null;
+    return payload.data.items.map(serverToLocalItem);
+  } catch {
+    return null;
+  }
+}
+
+async function mergeLocalIntoServerCart(localItems: CartItem[]): Promise<CartItem[] | null> {
+  try {
+    const response = await fetch("/api/v1/me/cart", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({
+        mode: "merge",
+        items: localItems.map(localToServerInput),
+      }),
+    });
+    if (!response.ok) return null;
+    const payload = (await response.json().catch(() => null)) as ServerCartResponse | null;
+    if (!payload?.data) return null;
+    return payload.data.items.map(serverToLocalItem);
+  } catch {
+    return null;
+  }
+}
+
+let serverSyncEnabled = false;
+let serverSyncTimer: ReturnType<typeof setTimeout> | null = null;
+let serverSyncUnsubscribe: (() => void) | null = null;
+
+function scheduleServerSync() {
+  if (!serverSyncEnabled || typeof window === "undefined") {
+    return;
+  }
+  if (serverSyncTimer) {
+    clearTimeout(serverSyncTimer);
+  }
+  serverSyncTimer = setTimeout(() => {
+    serverSyncTimer = null;
+    const items = useCartStore.getState().items;
+    void fetch("/api/v1/me/cart", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({
+        mode: "replace",
+        items: items.map(localToServerInput),
+      }),
+    }).catch(() => {
+      // Sync is best-effort; the local store remains the source of truth on failure.
+    });
+  }, 400);
+}
+
 export async function rehydrateCartStore() {
   await useCartStore.persist.rehydrate();
+
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+    return;
+  }
+
+  const localItems = useCartStore.getState().items;
+  const merged = localItems.length > 0
+    ? await mergeLocalIntoServerCart(localItems)
+    : await fetchServerCart();
+
+  if (!merged) {
+    return;
+  }
+
+  serverSyncEnabled = false;
+  useCartStore.setState({ items: merged });
+  serverSyncEnabled = true;
+
+  if (!serverSyncUnsubscribe) {
+    let lastSnapshot = JSON.stringify(merged);
+    serverSyncUnsubscribe = useCartStore.subscribe((state) => {
+      const snapshot = JSON.stringify(state.items);
+      if (snapshot === lastSnapshot) return;
+      lastSnapshot = snapshot;
+      scheduleServerSync();
+    });
+  }
 }
 
 type CartUiState = {

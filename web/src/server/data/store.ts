@@ -42,6 +42,7 @@ function cloneDefaultDatabase(): DatabaseSchema {
     licenses: [...DEFAULT_DATABASE.licenses],
     submission_notes: [...DEFAULT_DATABASE.submission_notes],
     customer_notifications: [...DEFAULT_DATABASE.customer_notifications],
+    cart_items: [...DEFAULT_DATABASE.cart_items],
   };
 }
 

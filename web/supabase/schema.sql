@@ -375,6 +375,30 @@ create index if not exists submission_notes_target_idx
 create index if not exists submission_notes_visible_idx
   on public.submission_notes (submission_type, submission_id, customer_visible);
 
+-- ---------------------------------------------------------------------
+-- Server-synced cart for signed-in customers (Phase P23)
+-- ---------------------------------------------------------------------
+
+create table if not exists public.cart_items (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null,
+  product_slug text not null,
+  product_name text not null,
+  product_variant_slug text,
+  product_tier_name text,
+  fulfillment_type text,
+  quantity integer not null check (quantity > 0),
+  unit_price_cents integer not null check (unit_price_cents >= 0),
+  updated_at timestamptz not null default timezone('utc', now()),
+  unique (user_id, product_slug, coalesce(product_variant_slug, ''), coalesce(product_tier_name, ''))
+);
+create index if not exists cart_items_user_idx on public.cart_items (user_id, updated_at desc);
+
+drop trigger if exists cart_items_set_updated_at on public.cart_items;
+create trigger cart_items_set_updated_at
+before update on public.cart_items
+for each row execute function public.set_updated_at();
+
 -- =====================================================================
 -- RLS policies for the normalized tables
 -- =====================================================================
@@ -399,7 +423,8 @@ begin
     'conversations',
     'conversation_messages',
     'notification_log',
-    'submission_notes'
+    'submission_notes',
+    'cart_items'
   ] loop
     execute format('alter table public.%I enable row level security', tbl);
     execute format('revoke all on table public.%I from anon', tbl);
