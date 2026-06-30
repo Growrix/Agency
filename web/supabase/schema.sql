@@ -336,6 +336,45 @@ create table if not exists public.notification_log (
 create index if not exists notification_log_kind_idx on public.notification_log (kind, created_at desc);
 create index if not exists notification_log_status_idx on public.notification_log (status);
 
+-- ---------------------------------------------------------------------
+-- submission_notes
+-- Polymorphic notes thread for inquiries, appointments, service
+-- requests, orders, and newsletter signups. Decoupled from the parent
+-- tables to keep append-only ergonomics and to support customer-visible
+-- replies (admin/customer threads).
+-- ---------------------------------------------------------------------
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'submission_type') then
+    create type public.submission_type as enum (
+      'inquiry',
+      'appointment',
+      'service_request',
+      'order',
+      'newsletter',
+      'support_thread'
+    );
+  end if;
+end;
+$$;
+
+create table if not exists public.submission_notes (
+  id uuid primary key default gen_random_uuid(),
+  submission_type public.submission_type not null,
+  submission_id uuid not null,
+  author_user_id uuid,
+  author_email text,
+  author_role text not null check (author_role in ('admin','customer','system')),
+  body text not null,
+  customer_visible boolean not null default false,
+  email_customer boolean not null default false,
+  created_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists submission_notes_target_idx
+  on public.submission_notes (submission_type, submission_id, created_at desc);
+create index if not exists submission_notes_visible_idx
+  on public.submission_notes (submission_type, submission_id, customer_visible);
+
 -- =====================================================================
 -- RLS policies for the normalized tables
 -- =====================================================================
@@ -359,7 +398,8 @@ begin
     'service_requests',
     'conversations',
     'conversation_messages',
-    'notification_log'
+    'notification_log',
+    'submission_notes'
   ] loop
     execute format('alter table public.%I enable row level security', tbl);
     execute format('revoke all on table public.%I from anon', tbl);

@@ -46,10 +46,36 @@ export type AppointmentRecord = {
   status: AppointmentStatus;
   notes?: string;
   calendar_event_id?: string;
+  assigned_to_user_id?: string;
   created_at: string;
   confirmed_at?: string;
   completed_at?: string;
 };
+
+export type SubmissionType =
+  | "inquiry"
+  | "appointment"
+  | "service_request"
+  | "order"
+  | "newsletter"
+  | "support_thread";
+
+export type SubmissionAuthorRole = "admin" | "customer" | "system";
+
+export type SubmissionNoteRecord = {
+  id: string;
+  submission_type: SubmissionType;
+  submission_id: string;
+  author_user_id?: string;
+  author_email?: string;
+  author_role: SubmissionAuthorRole;
+  body: string;
+  customer_visible: boolean;
+  email_customer: boolean;
+  created_at: string;
+};
+
+export type CustomerVisibleStatus = "open" | "in_progress" | "resolved" | "closed";
 
 export type ConversationMessageRecord = {
   id: string;
@@ -417,6 +443,7 @@ export type DatabaseSchema = {
   notifications: NotificationLogRecord[];
   downloads: DownloadRecord[];
   licenses: LicenseRecord[];
+  submission_notes: SubmissionNoteRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -437,4 +464,5 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   notifications: [],
   downloads: [],
   licenses: [],
+  submission_notes: [],
 };
