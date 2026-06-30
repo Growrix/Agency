@@ -14,6 +14,11 @@ export type OrderFulfillmentStatus =
   | "delivered"
   | "archived";
 export type Role = "public" | "subscriber" | "customer" | "admin";
+export type SignupIntentSource =
+  | "self_signup"
+  | "purchase_intent"
+  | "invited"
+  | "admin_seed";
 
 export type ContactInquiryRecord = {
   id: string;
@@ -164,6 +169,8 @@ export type UserRecord = {
   last_name?: string;
   phone?: string;
   marketing_opt_in?: boolean;
+  signup_completed_at?: string;
+  signup_intent_source?: SignupIntentSource;
   created_at: string;
   updated_at: string;
 };

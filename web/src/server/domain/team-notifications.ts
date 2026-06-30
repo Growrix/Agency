@@ -72,11 +72,27 @@ async function sendTeamEmail(input: NotifyTeamInput): Promise<{ delivered: boole
 
 export async function notifyTeam(input: NotifyTeamInput): Promise<NotifyTeamResult> {
   const runtime = getRuntimeConfig();
-  const emailAttempted =
-    Boolean(runtime.contact.resendApiKey) &&
-    runtime.contact.toEmails.length > 0 &&
-    Boolean(runtime.contact.fromEmail) &&
-    (input.html !== undefined || input.text !== undefined);
+  const hasBody = input.html !== undefined || input.text !== undefined;
+  const missingConfig: string[] = [];
+
+  if (!runtime.contact.resendApiKey) missingConfig.push("RESEND_API_KEY");
+  if (runtime.contact.toEmails.length === 0) missingConfig.push("CONTACT_TO_EMAIL");
+  if (!runtime.contact.fromEmail) missingConfig.push("CONTACT_FROM_EMAIL");
+  if (!hasBody) missingConfig.push("email_body");
+
+  const emailAttempted = missingConfig.length === 0;
+
+  if (!emailAttempted) {
+    await recordAuditLog({
+      level: "warning",
+      action: "team_notification.email_skipped_missing_config",
+      metadata: {
+        kind: input.kind,
+        subject: input.subject,
+        missing: missingConfig,
+      },
+    });
+  }
 
   const emailPromise = emailAttempted
     ? withTimeout(sendTeamEmail(input), TEAM_EMAIL_TIMEOUT_MS, { delivered: false, fallbackUsed: false }).catch(

@@ -89,6 +89,33 @@ function parseRecipientList(value: string | undefined): string[] {
   return recipients;
 }
 
+const KNOWN_VERIFIED_SENDER_HOSTS = new Set(["growrixos.com", "resend.dev"]);
+let resendSenderDomainWarned = false;
+
+function extractEmailHost(value: string | undefined): string | null {
+  if (!value) return null;
+  const angleMatch = value.match(/<\s*([^<>\s]+@[^<>\s]+)\s*>/);
+  const raw = (angleMatch ? angleMatch[1] : value).trim();
+  const at = raw.lastIndexOf("@");
+  if (at < 0 || at === raw.length - 1) return null;
+  return raw.slice(at + 1).toLowerCase();
+}
+
+function maybeWarnUnverifiedResendSender(fromEmail: string | undefined) {
+  if (resendSenderDomainWarned || !fromEmail) {
+    return;
+  }
+  const host = extractEmailHost(fromEmail);
+  if (!host || KNOWN_VERIFIED_SENDER_HOSTS.has(host)) {
+    return;
+  }
+  resendSenderDomainWarned = true;
+  console.warn(
+    `[runtime] CONTACT_FROM_EMAIL host "${host}" is not in the known-verified Resend sender list. ` +
+      `Verify DKIM/SPF/return-path for this domain in Resend or expect delivery to fall back to the onboarding sender.`,
+  );
+}
+
 function parseBaseUrl(value: string | undefined) {
   if (!value) {
     return "http://localhost:5000";
@@ -162,6 +189,8 @@ export function getRuntimeConfig(): RuntimeConfig {
     },
   };
 
+  maybeWarnUnverifiedResendSender(cachedRuntimeConfig.contact.fromEmail);
+
   return cachedRuntimeConfig;
 }
 
@@ -176,5 +205,6 @@ export function requireRuntimeValue(value: string | undefined, key: string) {
 export function resetRuntimeConfigForTests() {
   if (process.env.NODE_ENV === "test") {
     cachedRuntimeConfig = null;
+    resendSenderDomainWarned = false;
   }
 }

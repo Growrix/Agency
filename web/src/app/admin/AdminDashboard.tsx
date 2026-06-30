@@ -1,6 +1,13 @@
 "use client";
 
-import { ChartBarSquareIcon, ClipboardDocumentListIcon, QueueListIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import {
+  ChartBarSquareIcon,
+  ClipboardDocumentListIcon,
+  EnvelopeOpenIcon,
+  InboxIcon,
+  QueueListIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
@@ -229,6 +236,8 @@ const navItems: DashboardNavItem[] = [
   { href: "/admin/activity", label: "Activity", icon: <ChartBarSquareIcon className="h-4 w-4" /> },
   { href: "/admin/catalog", label: "Catalog", icon: <ClipboardDocumentListIcon className="h-4 w-4" /> },
   { href: "/admin/pipeline", label: "Pipeline", icon: <QueueListIcon className="h-4 w-4" /> },
+  { href: "/admin/submissions", label: "Submissions", icon: <InboxIcon className="h-4 w-4" /> },
+  { href: "/admin/email-log", label: "Email log", icon: <EnvelopeOpenIcon className="h-4 w-4" /> },
 ];
 
 export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardView }) {

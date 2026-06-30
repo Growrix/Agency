@@ -59,6 +59,10 @@ export async function upsertUserFromClerk(input: {
       role,
       first_name: input.firstName?.trim() || existing?.first_name,
       last_name: input.lastName?.trim() || existing?.last_name,
+      phone: existing?.phone,
+      marketing_opt_in: existing?.marketing_opt_in,
+      signup_completed_at: existing?.signup_completed_at,
+      signup_intent_source: existing?.signup_intent_source,
       created_at: existing?.created_at ?? now,
       updated_at: now,
     };

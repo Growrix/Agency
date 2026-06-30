@@ -4,7 +4,7 @@ import { compare, hash } from "bcryptjs";
 import { ApiError } from "@/server/core/api";
 import { isClerkConfigured, isLegacyTestAuthEnabled } from "@/server/auth/clerk-config";
 import { getRuntimeConfig, requireRuntimeValue } from "@/server/config/runtime";
-import type { UserRecord } from "@/server/data/schema";
+import type { SignupIntentSource, UserRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -219,6 +219,54 @@ export async function updateUserProfile(
   }
 
   return updatedUser;
+}
+
+export async function completeUserSignup(
+  userId: string,
+  input: { phone?: string; marketingOptIn?: boolean; intentSource: SignupIntentSource }
+): Promise<UserRecord> {
+  let updated: UserRecord | null = null;
+  let alreadyCompleted = false;
+
+  await writeDatabase((next) => ({
+    ...next,
+    users: next.users.map((user) => {
+      if (user.id !== userId) {
+        return user;
+      }
+
+      if (user.signup_completed_at) {
+        alreadyCompleted = true;
+        updated = user;
+        return user;
+      }
+
+      const now = getNow();
+      const trimmedPhone = input.phone?.trim();
+
+      updated = {
+        ...user,
+        phone: trimmedPhone ? trimmedPhone : user.phone,
+        marketing_opt_in:
+          input.marketingOptIn !== undefined ? input.marketingOptIn : user.marketing_opt_in,
+        signup_completed_at: now,
+        signup_intent_source: input.intentSource,
+        updated_at: now,
+      };
+
+      return updated;
+    }),
+  }));
+
+  if (!updated) {
+    throw new ApiError("NOT_FOUND", 404, "User not found.");
+  }
+
+  if (alreadyCompleted) {
+    throw new ApiError("CONFLICT", 409, "Signup is already completed.");
+  }
+
+  return updated;
 }
 
 export function getRequiredAdminCredentialsConfigured() {

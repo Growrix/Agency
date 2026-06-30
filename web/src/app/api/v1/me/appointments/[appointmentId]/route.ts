@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { ApiError, errorResponse, successResponse } from "@/server/core/api";
-import { requireAuthenticatedUser } from "@/server/auth/guards";
+import { requireCompletedSubscriber } from "@/server/auth/guards";
 import { rescheduleAppointment } from "@/server/domain/appointments";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ type RouteContext = {
 
 export async function PATCH(request: NextRequest, context: RouteContext) {
   try {
-    const user = await requireAuthenticatedUser(request);
+    const user = await requireCompletedSubscriber(request);
     const { appointmentId } = await context.params;
     const body = (await request.json().catch(() => ({}))) as {
       preferred_datetime?: unknown;

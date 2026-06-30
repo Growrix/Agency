@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { ApiError, errorResponse, successResponse } from "@/server/core/api";
-import { requireAuthenticatedUser } from "@/server/auth/guards";
+import { requireCompletedSubscriber } from "@/server/auth/guards";
 import type { SubmissionType } from "@/server/data/schema";
 import { filterCustomerVisibleNotes, getSubmissionDetail } from "@/server/domain/submissions";
 
@@ -31,7 +31,7 @@ function extractOwnerEmail(detail: Awaited<ReturnType<typeof getSubmissionDetail
 
 export async function GET(request: NextRequest, context: RouteContext) {
   try {
-    const user = await requireAuthenticatedUser(request);
+    const user = await requireCompletedSubscriber(request);
     const { type, id } = await context.params;
     if (!ALLOWED_TYPES.includes(type as SubmissionType)) {
       throw new ApiError("FIELD_VALIDATION_FAILED", 400, "Unsupported submission type.");

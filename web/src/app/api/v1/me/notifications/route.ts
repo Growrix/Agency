@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { ApiError, errorResponse, successResponse } from "@/server/core/api";
-import { requireAuthenticatedUser } from "@/server/auth/guards";
+import { requireCompletedSubscriber } from "@/server/auth/guards";
 import {
   listCustomerNotificationsForEmail,
   notificationCounts,
@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const user = await requireAuthenticatedUser(request);
+    const user = await requireCompletedSubscriber(request);
     const items = await listCustomerNotificationsForEmail(user.email, 50);
     const counts = notificationCounts(items);
     return successResponse({ items, ...counts });

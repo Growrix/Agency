@@ -4,8 +4,9 @@ import { auth } from "@clerk/nextjs/server";
 import { type NextRequest, NextResponse } from "next/server";
 import { ApiError } from "@/server/core/api";
 import { isClerkConfigured, isLegacyTestAuthEnabled } from "@/server/auth/clerk-config";
-import { getUserByClerkId, syncClerkUser, upsertUserFromClerk } from "@/server/auth/clerk-sync";
+import { getUserByClerkId, syncClerkUser } from "@/server/auth/clerk-sync";
 import { getUserById } from "@/server/auth/users";
+import { recordAuditLog } from "@/server/logging/observability";
 import {
   LEGACY_SESSION_COOKIE_NAME,
   parseSessionTokenFromCookieHeader,
@@ -22,6 +23,7 @@ export type AuthenticatedUser = {
   phone?: string;
   marketingOptIn?: boolean;
   clerkUserId?: string;
+  signupCompletedAt?: string;
 };
 
 function mapUserRecord(user: NonNullable<Awaited<ReturnType<typeof getUserById>>>): AuthenticatedUser {
@@ -34,6 +36,7 @@ function mapUserRecord(user: NonNullable<Awaited<ReturnType<typeof getUserById>>
     phone: user.phone,
     marketingOptIn: user.marketing_opt_in,
     clerkUserId: user.clerk_user_id,
+    signupCompletedAt: user.signup_completed_at,
   };
 }
 
@@ -61,7 +64,7 @@ async function getLegacyAuthenticatedUser(request: Request | NextRequest): Promi
 }
 
 async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
-  const { userId, sessionClaims } = await auth();
+  const { userId } = await auth();
   if (!userId) {
     return null;
   }
@@ -72,26 +75,6 @@ async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
       user = await syncClerkUser(userId);
     } catch {
       user = null;
-    }
-  }
-
-  if (!user) {
-    const claims = (sessionClaims ?? {}) as Record<string, unknown>;
-    const claimEmail =
-      (typeof claims.email === "string" ? claims.email : undefined) ??
-      (typeof claims.email_address === "string" ? claims.email_address : undefined);
-
-    if (claimEmail) {
-      user = await upsertUserFromClerk({
-        clerkUserId: userId,
-        email: claimEmail,
-        firstName:
-          (typeof claims.first_name === "string" ? claims.first_name : undefined) ??
-          (typeof claims.given_name === "string" ? claims.given_name : undefined),
-        lastName:
-          (typeof claims.last_name === "string" ? claims.last_name : undefined) ??
-          (typeof claims.family_name === "string" ? claims.family_name : undefined),
-      });
     }
   }
 
@@ -123,6 +106,39 @@ export async function requireAdminUser(request: Request | NextRequest) {
   const user = await requireAuthenticatedUser(request);
   if (user.role !== "admin") {
     throw new ApiError("FORBIDDEN", 403, "Admin access is required.");
+  }
+
+  return user;
+}
+
+export async function requireCompletedSubscriber(request: Request | NextRequest) {
+  const user = await requireAuthenticatedUser(request);
+
+  // Admins bypass the completion gate so operator surfaces never lock out the operator.
+  if (user.role === "admin") {
+    return user;
+  }
+
+  // Legacy/test users authenticated via password (no Clerk session) opted in deliberately when
+  // they registered, so the Clerk sign-up gate does not apply to them.
+  if (!user.clerkUserId) {
+    return user;
+  }
+
+  if (!user.signupCompletedAt) {
+    await recordAuditLog({
+      level: "warning",
+      action: "auth.signup_blocked_incomplete",
+      actor_email: user.email,
+      metadata: {
+        path: new URL(request.url).pathname,
+      },
+    });
+    throw new ApiError(
+      "FORBIDDEN",
+      403,
+      "Complete your account before continuing."
+    );
   }
 
   return user;

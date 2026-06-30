@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { ApiError, errorResponse, successResponse } from "@/server/core/api";
-import { requireAuthenticatedUser } from "@/server/auth/guards";
+import { requireCompletedSubscriber } from "@/server/auth/guards";
 import { getOrderById } from "@/server/domain/orders";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ type RouteContext = {
 
 export async function GET(request: NextRequest, context: RouteContext) {
   try {
-    const user = await requireAuthenticatedUser(request);
+    const user = await requireCompletedSubscriber(request);
     const { orderId } = await context.params;
     const order = await getOrderById(orderId);
 
