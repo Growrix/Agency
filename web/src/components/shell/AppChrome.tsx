@@ -34,12 +34,13 @@ export function AppChrome({ children }: AppChromeProps) {
   }, []);
 
   const isAdminSurface = pathname.startsWith("/admin");
+  const isDashboardSurface = pathname === "/dashboard" || pathname.startsWith("/dashboard/");
   const isStandaloneProfile =
     pathname === "/Business-profile" ||
     pathname === "/business-profile" ||
     pathname === "/businessprofile";
 
-  if (isAdminSurface || isStandaloneProfile) {
+  if (isAdminSurface || isDashboardSurface || isStandaloneProfile) {
     return (
       <>
         <main id="main" className="flex-1">

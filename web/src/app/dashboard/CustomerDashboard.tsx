@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { DashboardHeaderControls } from "@/components/dashboard/DashboardHeaderControls";
-import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
-import { usePathname } from "next/navigation";
 
 type CustomerDashboardView = "overview" | "products" | "downloads" | "orders" | "appointments" | "support";
 
@@ -71,15 +68,6 @@ type DashboardAppointment = {
 
 type Envelope<T> = { data: T };
 
-const navItems: DashboardNavItem[] = [
-  { href: "/dashboard", label: "Overview" },
-  { href: "/dashboard/products", label: "Products" },
-  { href: "/dashboard/downloads", label: "Downloads" },
-  { href: "/dashboard/orders", label: "Orders" },
-  { href: "/dashboard/appointments", label: "Appointments" },
-  { href: "/dashboard/support", label: "Support" },
-];
-
 const viewMeta: Record<CustomerDashboardView, { title: string; description: string }> = {
   overview: {
     title: "Customer overview",
@@ -144,7 +132,6 @@ async function loadJson<T>(url: string) {
 }
 
 export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashboardView }) {
-  const pathname = usePathname();
   const [user, setUser] = useState<Viewer | null>(null);
   const [orders, setOrders] = useState<DashboardOrder[]>([]);
   const [downloads, setDownloads] = useState<DashboardDownload[]>([]);
@@ -219,14 +206,6 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
-
-  async function handleLogout() {
-    await fetch("/api/v1/auth/logout", {
-      method: "POST",
-      credentials: "same-origin",
-    });
-    window.location.assign("/dashboard/login");
-  }
 
   async function handleDownload(downloadId: string) {
     setActiveDownloadId(downloadId);
@@ -548,41 +527,26 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   }
 
   return (
-    <DashboardShell
-      title={currentMeta.title}
-      currentPath={pathname}
-      navItems={navItems}
-      headerControls={<DashboardHeaderControls profileName={fullName} profileEmail={user?.email ?? "customer@growrixos.com"} notifications={[]} />}
-      utilityActions={(
-        <div className="space-y-2">
-          <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth>Browse digital products</LinkButton>
-          <Button type="button" variant="ghost" size="sm" fullWidth onClick={() => void handleLogout()}>
-            Sign out
-          </Button>
-        </div>
-      )}
-    >
-      <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Portal summary</p>
-          <h2 className="mt-3 font-display text-3xl tracking-tight">Welcome back, {fullName}</h2>
-          <p className="mt-3 text-sm leading-6 text-text-muted">{currentMeta.description}</p>
+    <div className="space-y-6 p-4 sm:p-5 lg:p-6">
+      <Card variant="inset">
+        <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Portal summary</p>
+        <h2 className="mt-3 font-display text-3xl tracking-tight">Welcome back, {fullName}</h2>
+        <p className="mt-3 text-sm leading-6 text-text-muted">{currentMeta.description}</p>
+      </Card>
+
+      {error ? (
+        <Card>
+          <p className="text-sm text-destructive">{error}</p>
         </Card>
+      ) : null}
 
-        {error ? (
-          <Card>
-            <p className="text-sm text-destructive">{error}</p>
-          </Card>
-        ) : null}
+      {notice ? (
+        <Card>
+          <p className="text-sm text-text-muted">{notice}</p>
+        </Card>
+      ) : null}
 
-        {notice ? (
-          <Card>
-            <p className="text-sm text-text-muted">{notice}</p>
-          </Card>
-        ) : null}
-
-        {renderView()}
-      </div>
-    </DashboardShell>
+      {renderView()}
+    </div>
   );
 }
