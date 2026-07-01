@@ -1,6 +1,7 @@
 "use client";
 
 import { UserProfile } from "@clerk/nextjs";
+import { ShieldCheckIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { AppPreferencesCard } from "@/components/dashboard/AppPreferencesCard";
 import { Card } from "@/components/primitives/Card";
 import { isClerkConfiguredClient } from "@/lib/clerk-client";
@@ -22,35 +23,67 @@ const userProfileAppearance = {
 
 export function AccountSurface() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
-      <header className="mb-8">
-        <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Account</p>
-        <h1 className="mt-1 font-display text-3xl tracking-tight">Profile and preferences</h1>
-        <p className="mt-2 max-w-2xl text-sm text-text-muted">
-          Identity, password, two-factor, connected accounts, and account deletion are managed by
-          Clerk in the panel below. App-specific contact and marketing preferences live in the
-          card underneath.
-        </p>
-      </header>
+    <div className="space-y-4 p-4 sm:p-5 lg:p-6">
+      <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+        <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+        <div className="relative">
+          <p className="text-xs uppercase tracking-[0.18em] text-primary">Account</p>
+          <h1 className="mt-2 max-w-3xl font-display text-5xl leading-tight tracking-tight">Profile and preferences</h1>
+          <p className="mt-3 max-w-3xl text-base text-text-muted">
+            Identity, password, two-factor authentication, connected accounts, and account deletion are managed by Clerk in the panel below.
+          </p>
+        </div>
+      </section>
 
-      <div className="space-y-6">
-        {isClerkConfiguredClient() ? (
-          <UserProfile
-            appearance={userProfileAppearance}
-            routing="hash"
-          />
-        ) : (
-          <Card>
-            <h2 className="font-display text-lg tracking-tight">Profile</h2>
-            <p className="mt-2 text-sm text-text-muted">
-              Clerk is not configured in this environment, so the hosted profile panel is
-              unavailable. Identity changes happen in production where Clerk is enabled.
-            </p>
-          </Card>
-        )}
+      <section className="grid gap-4 xl:grid-cols-[18rem_1fr]">
+        <Card className="dashboard-panel-surface rounded-sm border-border/65 p-5" hoverable={false}>
+          <p className="font-display text-3xl tracking-tight">Account</p>
+          <p className="mt-1 text-sm text-text-muted">Manage your account info.</p>
 
+          <div className="mt-6 space-y-2">
+            <div className="flex items-center gap-2 rounded-sm border border-primary/35 bg-primary/12 px-3 py-2 text-text">
+              <UserCircleIcon className="size-5 text-primary" />
+              <span className="text-base">Profile</span>
+            </div>
+            <div className="flex items-center gap-2 rounded-sm border border-border/55 bg-surface/20 px-3 py-2 text-text-muted">
+              <ShieldCheckIcon className="size-5" />
+              <span className="text-base">Security</span>
+            </div>
+          </div>
+
+          <div className="mt-16 rounded-sm border border-border/50 bg-surface/20 px-3 py-2">
+            <p className="text-sm text-text-muted">Secured by Clerk</p>
+            <p className="text-sm text-warning">Development mode</p>
+          </div>
+        </Card>
+
+        <Card className="dashboard-panel-surface rounded-sm border-border/65 p-0" hoverable={false}>
+          <div className="border-b border-border/55 px-5 py-4">
+            <h2 className="font-display text-3xl tracking-tight">Profile details</h2>
+          </div>
+
+          <div className="p-5">
+            {isClerkConfiguredClient() ? (
+              <UserProfile
+                appearance={userProfileAppearance}
+                routing="hash"
+              />
+            ) : (
+              <Card>
+                <h2 className="font-display text-lg tracking-tight">Profile</h2>
+                <p className="mt-2 text-sm text-text-muted">
+                  Clerk is not configured in this environment, so the hosted profile panel is
+                  unavailable. Identity changes happen in production where Clerk is enabled.
+                </p>
+              </Card>
+            )}
+          </div>
+        </Card>
+      </section>
+
+      <section>
         <AppPreferencesCard />
-      </div>
+      </section>
     </div>
   );
 }

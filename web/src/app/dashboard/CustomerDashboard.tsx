@@ -9,11 +9,18 @@ import {
   BoltIcon,
   CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
+  ChevronRightIcon,
+  ClockIcon,
+  CubeTransparentIcon,
+  FunnelIcon,
   ClipboardDocumentListIcon,
   CubeIcon,
   LifebuoyIcon,
+  MagnifyingGlassIcon,
+  TagIcon,
   ShieldCheckIcon,
   ShoppingBagIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
 import { AppointmentRescheduleModal } from "@/components/dashboard/AppointmentRescheduleModal";
 import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
@@ -84,33 +91,6 @@ type DashboardAppointment = {
 
 type Envelope<T> = { data: T };
 
-const viewMeta: Record<CustomerDashboardView, { title: string; description: string }> = {
-  overview: {
-    title: "Customer overview",
-    description: "Orders, downloads, and next steps from one place.",
-  },
-  products: {
-    title: "Purchased products",
-    description: "Everything you have unlocked, including licenses and fulfillment state.",
-  },
-  downloads: {
-    title: "Downloads",
-    description: "Authorized download access for delivered assets.",
-  },
-  orders: {
-    title: "Order history",
-    description: "Track payment and fulfillment progress for each purchase.",
-  },
-  appointments: {
-    title: "Appointments",
-    description: "Upcoming and requested sessions connected to your account.",
-  },
-  support: {
-    title: "Support",
-    description: "Send a product or delivery request without leaving the portal.",
-  },
-};
-
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -173,7 +153,6 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   const [rescheduleAppointment, setRescheduleAppointment] = useState<DashboardAppointment | null>(null);
   const [activeDownloadDetail, setActiveDownloadDetail] = useState<DashboardDownload | null>(null);
 
-  const currentMeta = viewMeta[view];
   const fullName = buildFullName(user);
 
   const purchasedProducts = useMemo(() => {
@@ -269,7 +248,9 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const brief = String(formData.get("brief") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
+    const details = String(formData.get("details") ?? formData.get("brief") ?? "").trim();
+    const brief = [subject, details].filter(Boolean).join("\n\n").trim();
     const productSlug = String(formData.get("product_slug") ?? "").trim();
 
     try {
@@ -534,26 +515,87 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   }
 
   function renderProducts() {
+    const productKinds = ["All Products", "Website Templates", "Business Profiles", "Landing Pages", "Themes", "Mobile Apps", "Tools"];
+
     return (
-      <div className="grid gap-4 lg:grid-cols-2">
-        {purchasedProducts.map((product) => (
-          <Card key={product.slug}>
-            <p className="text-xs uppercase tracking-[0.18em] text-text-muted">{product.slug}</p>
-            <h2 className="mt-3 font-display text-3xl tracking-tight">{product.name}</h2>
-            <p className="mt-3 text-sm text-text-muted">Order: {product.order_number}</p>
-            <p className="mt-1 text-sm text-text-muted">Fulfillment: {product.fulfillment_status}</p>
-            {product.selected_tier_name ? <p className="mt-1 text-sm text-text-muted">Tier: {product.selected_tier_name}</p> : null}
-            {product.license ? (
-              <div className="mt-4 rounded-sm border border-border/60 bg-inset/35 px-4 py-3 text-sm text-text-muted">
-                <p className="font-medium text-text">License</p>
-                <p className="mt-1 break-all">{product.license.license_key}</p>
-                <p className="mt-1">{product.license.license_type} · {product.license.status}</p>
-              </div>
-            ) : null}
-          </Card>
-        ))}
+      <div className="space-y-4">
+        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+          <div className="relative">
+            <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
+            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+              Welcome back, <span className="text-primary">{fullName}</span>
+            </h2>
+            <p className="mt-3 text-base text-text-muted">Everything you have unlocked, including licenses and fulfillment status.</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {[
+                { label: "Total orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
+                { label: "Downloads", value: downloads.length, icon: <ArrowDownTrayIcon className="size-5" /> },
+                { label: "Licenses", value: licenses.length, icon: <ShieldCheckIcon className="size-5" /> },
+                { label: "Appointments", value: appointments.length, icon: <TagIcon className="size-5" /> },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
+                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-2xl font-semibold text-text">{stat.value}</span></div>
+                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-wrap items-center justify-between gap-3">
+          <div className="dashboard-panel-surface flex flex-wrap gap-2 rounded-sm border border-border/65 p-2">
+            {productKinds.map((kind, index) => (
+              <button
+                key={kind}
+                type="button"
+                className={index === 0 ? "rounded-sm bg-primary/20 px-4 py-2 text-sm font-medium text-primary" : "rounded-sm border border-border/60 px-4 py-2 text-sm text-text-muted hover:border-primary/30"}
+              >
+                {kind}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort by: Latest</button>
+          </div>
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-3">
+          {purchasedProducts.map((product) => {
+            const state = product.fulfillment_status.toLowerCase();
+            const stateTone = state.includes("delivered") || state.includes("complete")
+              ? "border-primary/35 bg-primary/12 text-primary"
+              : "border-warning/40 bg-warning/12 text-warning";
+
+            return (
+              <Card key={product.slug} className="dashboard-panel-surface rounded-sm border-border/65 p-3" hoverable={false}>
+                <div className="grid gap-3 sm:grid-cols-[9rem_1fr]">
+                  <div className="flex h-44 items-end rounded-sm border border-border/60 bg-linear-to-br from-primary/18 to-surface p-3">
+                    <p className="text-sm font-semibold text-text">{product.name.slice(0, 22)}</p>
+                  </div>
+                  <div>
+                    <p className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${stateTone}`}>
+                      {state.includes("delivered") || state.includes("complete") ? "Completed" : "In progress"}
+                    </p>
+                    <h3 className="mt-3 font-display text-3xl leading-tight tracking-tight">{product.name}</h3>
+                    <p className="mt-2 text-sm text-text-muted">{product.slug.replaceAll("-", " ")}</p>
+                    <p className="mt-2 text-sm text-text-muted">Order ID</p>
+                    <p className="text-base text-text">{product.order_number}</p>
+                    {product.selected_tier_name ? <p className="mt-2 text-sm text-text-muted">Tier: {product.selected_tier_name}</p> : null}
+                    <LinkButton href="/dashboard/orders" variant="outline" size="sm" fullWidth className="mt-4 justify-between">
+                      View Details
+                      <ArrowRightIcon className="size-4" />
+                    </LinkButton>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
+        </section>
+
         {purchasedProducts.length === 0 ? (
-          <Card className="lg:col-span-2">
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 text-center" hoverable={false}>
             <p className="text-sm text-text-muted">Your purchased products will appear here after your first order.</p>
           </Card>
         ) : null}
@@ -562,73 +604,196 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   }
 
   function renderDownloads() {
+    const readyDownloads = downloads.filter((entry) => entry.status.toLowerCase() === "delivered");
+
     return (
       <div className="space-y-4">
-        {downloads.map((download) => (
-          <Card key={download.id} className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+          <div className="relative">
+            <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
+            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+            <p className="mt-3 text-base text-text-muted">Manage and access all your downloaded files and assets.</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {[
+                { label: "Ready to download", value: readyDownloads.length, icon: <ArrowDownTrayIcon className="size-5" /> },
+                { label: "Updates available", value: 0, icon: <ArrowPathIcon className="size-5" /> },
+                { label: "Total downloads", value: downloads.length, icon: <CubeTransparentIcon className="size-5" /> },
+                { label: "Products downloaded", value: new Set(downloads.map((item) => item.product_slug)).size, icon: <ShoppingBagIcon className="size-5" /> },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
+                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-2xl font-semibold text-text">{stat.value}</span></div>
+                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-wrap items-center justify-between gap-3">
+          <div className="dashboard-panel-surface flex flex-wrap gap-2 rounded-sm border border-border/65 p-2">
+            {[
+              "All Downloads",
+              "Ready to Download",
+              "Updates Available",
+              "Installed",
+              "Expired",
+            ].map((tab, index) => (
+              <button key={tab} type="button" className={index === 0 ? "rounded-sm bg-primary/20 px-4 py-2 text-sm font-medium text-primary" : "rounded-sm border border-border/60 px-4 py-2 text-sm text-text-muted hover:border-primary/30"}>{tab}</button>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <label className="relative">
+              <MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted" />
+              <input type="text" placeholder="Search downloads..." className="h-11 rounded-sm border border-border/60 bg-surface/45 pl-10 pr-3 text-sm text-text placeholder:text-text-muted" />
+            </label>
+            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort by: Latest</button>
+          </div>
+        </section>
+
+        <Card className="dashboard-panel-surface rounded-md border-border/65 p-4 sm:p-6" hoverable={false}>
+          {downloads.length === 0 ? (
+            <div className="rounded-md border border-border/60 bg-surface/20 px-4 py-12 text-center">
+              <span className="mx-auto inline-flex size-16 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">
+                <ArrowDownTrayIcon className="size-7" />
+              </span>
+              <h3 className="mt-6 font-display text-4xl tracking-tight">No downloads ready yet</h3>
+              <p className="mx-auto mt-3 max-w-lg text-base text-text-muted">
+                Once your orders are completed, your downloadable files will appear here automatically.
+              </p>
+              <LinkButton href="/digital-products" className="mt-6">
+                Browse Products
+                <ArrowRightIcon className="ml-1 size-4" />
+              </LinkButton>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {downloads.map((download) => (
+                <div key={download.id} className="flex flex-wrap items-center gap-3 rounded-sm border border-border/55 bg-surface/25 px-4 py-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold text-text">{download.file_label ?? download.product_slug}</p>
+                    <p className="text-sm text-text-muted">Usage {download.download_count}/{download.max_downloads} · Last: {formatDateTime(download.last_downloaded_at)}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button type="button" variant="ghost" size="sm" onClick={() => setActiveDownloadDetail(download)}>View details</Button>
+                    <Button type="button" variant="outline" size="sm" disabled={activeDownloadId === download.id} onClick={() => void handleDownload(download.id)}>
+                      {activeDownloadId === download.id ? "Authorizing..." : "Open download"}
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {[
+              { title: "Secure & Safe", text: "All files are scanned and 100% secure.", icon: <ShieldCheckIcon className="size-5" /> },
+              { title: "Instant Access", text: "Download your files instantly when they are ready.", icon: <BoltIcon className="size-5" /> },
+              { title: "Cloud Storage", text: "Your downloads are stored safely in the cloud.", icon: <CubeTransparentIcon className="size-5" /> },
+              { title: "Need Help?", text: "Our support team is here to assist you.", icon: <LifebuoyIcon className="size-5" /> },
+            ].map((item) => (
+              <div key={item.title} className="rounded-sm border border-border/60 bg-surface/25 p-3.5">
+                <div className="flex items-center gap-2 text-primary">{item.icon}<p className="text-sm font-semibold text-text">{item.title}</p></div>
+                <p className="mt-1 text-sm text-text-muted">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card className="dashboard-panel-surface rounded-sm border-border/65 px-5 py-4" hoverable={false}>
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="font-medium text-text">{download.file_label ?? download.product_slug}</p>
-              <p className="mt-1 text-sm text-text-muted">Status: {download.status}</p>
-              <p className="mt-1 text-sm text-text-muted">Usage: {download.download_count}/{download.max_downloads}</p>
-              <p className="mt-1 text-sm text-text-muted">Last download: {formatDateTime(download.last_downloaded_at)}</p>
+              <p className="font-semibold text-text">Can&apos;t find your download?</p>
+              <p className="text-sm text-text-muted">If you believe something is missing, our support team can help.</p>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => setActiveDownloadDetail(download)}
-              >
-                View details
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                disabled={activeDownloadId === download.id}
-                onClick={() => void handleDownload(download.id)}
-              >
-                {activeDownloadId === download.id ? "Authorizing..." : "Open download"}
-              </Button>
-            </div>
-          </Card>
-        ))}
-        {downloads.length === 0 ? (
-          <Card>
-            <p className="text-sm text-text-muted">No downloads are ready yet. Delivered assets will appear here automatically.</p>
-          </Card>
-        ) : null}
+            <LinkButton href="/dashboard/support" variant="outline" size="sm" className="justify-between">Contact Support <ArrowRightIcon className="size-4" /></LinkButton>
+          </div>
+        </Card>
       </div>
     );
   }
 
   function renderOrders() {
+    const totalSpent = orders.reduce((sum, order) => sum + order.total_cents, 0);
+    const pendingAction = orders.filter((order) => !["delivered", "completed"].includes(order.fulfillment_status.toLowerCase())).length;
+    const completedCount = orders.filter((order) => ["succeeded", "paid"].includes(order.payment_status.toLowerCase())).length;
+
     return (
       <div className="space-y-4">
-        {orders.map((order) => (
-          <Card key={order.id}>
-            <Link
-              href={`/dashboard/orders/${order.id}`}
-              className="block transition-colors hover:opacity-90"
-            >
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="font-medium text-text">{order.order_number}</p>
-                  <p className="mt-1 text-sm text-text-muted">{order.items.map((item) => item.product_name).join(", ")}</p>
+        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+          <div className="relative grid gap-4 xl:grid-cols-[1.1fr_1fr] xl:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+              <p className="mt-3 text-base text-text-muted">Track payment and fulfillment progress for each purchase.</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {[
+                { label: "Total orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
+                { label: "Total spent", value: currencyFormatter.format(totalSpent / 100), icon: <TagIcon className="size-5" /> },
+                { label: "Pending action", value: pendingAction, icon: <ClockIcon className="size-5" /> },
+                { label: "Completed", value: completedCount, icon: <ShieldCheckIcon className="size-5" /> },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
+                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-xl font-semibold text-text">{stat.value}</span></div>
+                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
                 </div>
-                <p className="font-medium text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
-              </div>
-              <div className="mt-4 grid gap-2 text-sm text-text-muted sm:grid-cols-2 lg:grid-cols-4">
-                <p>Payment: {order.payment_status}</p>
-                <p>Fulfillment: {order.fulfillment_status}</p>
-                <p>Created: {formatDateTime(order.created_at)}</p>
-                <p>Completed: {formatDateTime(order.completed_at)}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-3">
+            {["All Orders", "Processing", "Completed", "Cancelled", "Refunded"].map((tab, index) => (
+              <button key={tab} type="button" className={index === 0 ? "border-b-2 border-primary pb-2 text-base font-medium text-primary" : "pb-2 text-base text-text-muted"}>{tab}</button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button type="button" className="inline-flex h-11 items-center gap-2 rounded-sm border border-border/60 px-4 text-sm text-text"><FunnelIcon className="size-4" />Filter</button>
+            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort: Newest</button>
+          </div>
+        </section>
+
+        <section className="space-y-3">
+          {orders.map((order) => (
+            <Link key={order.id} href={`/dashboard/orders/${order.id}`} className="dashboard-panel-surface block rounded-sm border border-border/65 px-4 py-3 transition-colors hover:border-primary/35">
+              <div className="grid gap-3 xl:grid-cols-[1.35fr_0.55fr_0.65fr_0.6fr_0.75fr_auto] xl:items-center">
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/20 bg-primary/12 text-text-muted">{order.items[0]?.product_name.slice(0, 2).toUpperCase() ?? "PD"}</span>
+                  <div className="min-w-0">
+                    <p className="truncate text-2xl font-semibold tracking-tight text-text">{order.order_number}</p>
+                    <p className="truncate text-base text-text">{order.items[0]?.product_name ?? "Product"}</p>
+                    <p className="truncate text-sm text-text-muted">{order.selected_tier_name ?? "Standard"}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm text-text-muted">Payment status</p>
+                  <p className="mt-1 text-base text-text">{order.payment_status}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-text-muted">Fulfillment status</p>
+                  <p className="mt-1 text-base text-text">{order.fulfillment_status}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-text-muted">Created</p>
+                  <p className="mt-1 text-base text-text">{formatShortDate(order.created_at)}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-3xl font-semibold tracking-tight text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
+                </div>
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-text-muted"><ChevronRightIcon className="size-5" /></span>
               </div>
             </Link>
-          </Card>
-        ))}
+          ))}
+        </section>
+
         {orders.length === 0 ? (
-          <Card>
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 text-center" hoverable={false}>
             <p className="text-sm text-text-muted">No orders yet.</p>
           </Card>
         ) : null}
@@ -637,32 +802,94 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   }
 
   function renderAppointments() {
+    const totalAppointments = appointments.length;
+    const upcomingAppointments = appointments.filter((entry) => ["inquiry", "confirmed"].includes(entry.status.toLowerCase())).length;
+    const pendingAppointments = appointments.filter((entry) => entry.status.toLowerCase().includes("pending") || entry.status.toLowerCase() === "inquiry").length;
+    const completedAppointments = appointments.filter((entry) => entry.status.toLowerCase().includes("complete")).length;
+
     return (
       <div className="space-y-4">
-        {appointments.map((appointment) => {
-          const canModify = appointment.status === "inquiry" || appointment.status === "confirmed";
-          return (
-            <Card key={appointment.id} className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="font-medium text-text">{appointment.service_interested_in}</p>
-                <p className="mt-1 text-sm text-text-muted">{formatDateTime(appointment.preferred_datetime)}</p>
-                <p className="mt-1 text-sm text-text-muted">Status: {appointment.status}</p>
+        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+          <div className="relative grid gap-4 xl:grid-cols-[1.1fr_1fr] xl:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+              <p className="mt-3 text-base text-text-muted">Upcoming and requested sessions connected to your account.</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {[
+                { label: "Total appointments", value: totalAppointments, icon: <CalendarDaysIcon className="size-5" /> },
+                { label: "Upcoming", value: upcomingAppointments, icon: <ClockIcon className="size-5" /> },
+                { label: "Pending", value: pendingAppointments, icon: <TagIcon className="size-5" /> },
+                { label: "Completed", value: completedAppointments, icon: <ShieldCheckIcon className="size-5" /> },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
+                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-xl font-semibold text-text">{stat.value}</span></div>
+                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-3">
+            {["All Appointments", "Upcoming", "Pending", "Completed", "Cancelled"].map((tab, index) => (
+              <button key={tab} type="button" className={index === 0 ? "border-b-2 border-primary pb-2 text-base font-medium text-primary" : "pb-2 text-base text-text-muted"}>{tab}</button>
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort by: Upcoming first</button>
+            <button type="button" className="inline-flex h-11 items-center gap-2 rounded-sm border border-border/60 px-4 text-sm text-text"><FunnelIcon className="size-4" />Filter</button>
+          </div>
+        </section>
+
+        <section className="space-y-3">
+          {appointments.map((appointment) => {
+            const canModify = appointment.status === "inquiry" || appointment.status === "confirmed";
+            const statusLower = appointment.status.toLowerCase();
+            const statusTone = statusLower.includes("complete")
+              ? "border-primary/35 bg-primary/12 text-primary"
+              : statusLower.includes("cancel")
+                ? "border-destructive/40 bg-destructive/10 text-destructive"
+                : "border-warning/40 bg-warning/10 text-warning";
+
+            return (
+              <div key={appointment.id} className="dashboard-panel-surface rounded-sm border border-border/65 px-4 py-3">
+                <div className="grid gap-3 xl:grid-cols-[1.35fr_0.9fr_auto] xl:items-center">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/25 bg-primary/14 text-primary"><CalendarDaysIcon className="size-8" /></span>
+                    <div>
+                      <p className="text-3xl font-semibold tracking-tight text-text">{appointment.service_interested_in}</p>
+                      <p className="mt-1 text-base text-text-muted">{formatDateTime(appointment.preferred_datetime)}</p>
+                      <p className="text-sm text-text-muted">Type: Inquiry</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${statusTone}`}>{appointment.status}</p>
+                    <p className="mt-2 text-sm text-text-muted">{canModify ? "Awaiting confirmation" : "Session completed"}</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {canModify ? (
+                      <Button type="button" variant="outline" size="sm" onClick={() => setRescheduleAppointment(appointment)}>
+                        Reschedule or cancel
+                      </Button>
+                    ) : (
+                      <Button type="button" variant="outline" size="sm">View details</Button>
+                    )}
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-text-muted"><ChevronRightIcon className="size-5" /></span>
+                  </div>
+                </div>
               </div>
-              {canModify ? (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setRescheduleAppointment(appointment)}
-                >
-                  Reschedule or cancel
-                </Button>
-              ) : null}
-            </Card>
-          );
-        })}
+            );
+          })}
+        </section>
+
         {appointments.length === 0 ? (
-          <Card>
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 text-center" hoverable={false}>
             <p className="text-sm text-text-muted">No appointments are linked to this account yet.</p>
           </Card>
         ) : null}
@@ -672,54 +899,118 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
   function renderSupport() {
     return (
-      <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-        <Card>
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Support request</p>
-          <h2 className="mt-3 font-display text-3xl tracking-tight">Send a request to the team</h2>
-          <p className="mt-3 text-sm leading-6 text-text-muted">
-            This creates a tracked service request tied to your account email so the team can follow up from the same operational queue.
-          </p>
-
-          <form onSubmit={handleSupportSubmit} className="mt-6 space-y-4">
-            <label className="block">
-              <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Related product</span>
-              <select name="product_slug" className="signal-input mt-1.5">
-                <option value="">General support</option>
-                {purchasedProducts.map((product) => (
-                  <option key={product.slug} value={product.slug}>{product.name}</option>
-                ))}
-              </select>
-            </label>
-            <label className="block">
-              <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Brief</span>
-              <textarea
-                name="brief"
-                required
-                minLength={20}
-                rows={6}
-                className="signal-input mt-1.5 min-h-36 resize-y py-3"
-                placeholder="Describe the support, delivery, or customization help you need."
-              />
-            </label>
-            {supportMessage ? (
-              <p className={supportStatus === "error" ? "text-sm text-destructive" : "text-sm text-text-muted"}>
-                {supportMessage}
-              </p>
-            ) : null}
-            <Button type="submit" disabled={supportStatus === "submitting"}>
-              {supportStatus === "submitting" ? "Sending..." : "Send request"}
-            </Button>
-          </form>
-        </Card>
-
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Fast paths</p>
-          <div className="mt-4 flex flex-col gap-3">
-            <LinkButton href="/live-chat" variant="outline" fullWidth>Open live chat</LinkButton>
-            <LinkButton href="/contact" variant="outline" fullWidth>Contact the team</LinkButton>
-            <LinkButton href="/book-appointment" variant="outline" fullWidth>Book another session</LinkButton>
+      <div className="space-y-4">
+        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+          <div className="relative">
+            <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
+            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+            <p className="mt-3 text-base text-text-muted">Send a product or service request and get help from our team.</p>
           </div>
-        </Card>
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-[1.12fr_0.88fr]">
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-5" hoverable={false}>
+            <p className="text-xs uppercase tracking-[0.18em] text-primary">Support request</p>
+            <h2 className="mt-3 font-display text-5xl tracking-tight">Send a request to the team</h2>
+            <p className="mt-3 text-base leading-7 text-text-muted">
+              This creates a tracked service request tied to your account and our team can follow up from the same conversation.
+            </p>
+
+            <form onSubmit={handleSupportSubmit} className="mt-7 space-y-4">
+              <label className="block">
+                <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Request category</span>
+                <select name="product_slug" className="signal-input mt-1.5">
+                  <option value="">General support</option>
+                  {purchasedProducts.map((product) => (
+                    <option key={product.slug} value={product.slug}>{product.name}</option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="block">
+                <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Subject</span>
+                <input
+                  name="subject"
+                  required
+                  minLength={6}
+                  className="signal-input mt-1.5"
+                  placeholder="Enter a short summary of your request"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Details</span>
+                <textarea
+                  name="details"
+                  required
+                  minLength={20}
+                  rows={6}
+                  className="signal-input mt-1.5 min-h-36 resize-y py-3"
+                  placeholder="Describe the issue, request, delivery or customization help you need..."
+                />
+              </label>
+
+              {supportMessage ? (
+                <p className={supportStatus === "error" ? "text-sm text-destructive" : "text-sm text-text-muted"}>
+                  {supportMessage}
+                </p>
+              ) : null}
+
+              <Button type="submit" disabled={supportStatus === "submitting"}>
+                {supportStatus === "submitting" ? "Sending..." : "Send request"}
+                <ArrowRightIcon className="ml-1 size-4" />
+              </Button>
+            </form>
+          </Card>
+
+          <div className="space-y-4">
+            <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
+              <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Fast paths</p>
+              <div className="mt-4 space-y-2.5">
+                {[
+                  { href: "/live-chat", title: "Open live chat", hint: "Instant help from our support team", icon: <ChatBubbleLeftRightIcon className="size-5" /> },
+                  { href: "/contact", title: "Contact the team", hint: "Reach out to our support specialists", icon: <LifebuoyIcon className="size-5" /> },
+                  { href: "/book-appointment", title: "Book another session", hint: "Schedule a call or meeting", icon: <CalendarDaysIcon className="size-5" /> },
+                ].map((item) => (
+                  <Link key={item.title} href={item.href} className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3.5 py-3 transition-colors hover:border-primary/35">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">{item.icon}</span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-base font-semibold text-text">{item.title}</p>
+                      <p className="truncate text-sm text-text-muted">{item.hint}</p>
+                    </div>
+                    <ChevronRightIcon className="size-5 text-text-muted" />
+                  </Link>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
+              <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Support hours</p>
+              <div className="mt-4 flex items-center gap-3">
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-primary/25 bg-primary/12 text-primary"><ClockIcon className="size-7" /></span>
+                <div>
+                  <p className="text-base text-text-muted">We&apos;re available</p>
+                  <p className="text-3xl font-semibold tracking-tight text-text">Mon - Fri, 9:00 AM - 6:00 PM (UTC)</p>
+                  <p className="text-sm text-text-muted">Average response time: 2h 14m</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
+              <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Helpful resources</p>
+              <div className="mt-4 space-y-2.5">
+                {["Knowledge base", "Video tutorials", "System status"].map((item) => (
+                  <div key={item} className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3.5 py-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary"><SparklesIcon className="size-5" /></span>
+                    <p className="flex-1 text-base text-text">{item}</p>
+                    <ChevronRightIcon className="size-5 text-text-muted" />
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </section>
       </div>
     );
   }
@@ -752,14 +1043,6 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
   return (
     <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-      {view !== "overview" ? (
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Portal summary</p>
-          <h2 className="mt-3 font-display text-3xl tracking-tight">Welcome back, {fullName}</h2>
-          <p className="mt-3 text-sm leading-6 text-text-muted">{currentMeta.description}</p>
-        </Card>
-      ) : null}
-
       {error ? (
         <Card>
           <p className="text-sm text-destructive">{error}</p>
