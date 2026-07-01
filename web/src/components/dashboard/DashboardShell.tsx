@@ -51,11 +51,11 @@ export function DashboardShell({
 
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-primary/15 bg-[#02070d] transition-transform duration-200 lg:static lg:h-screen lg:w-auto",
+          "dashboard-shell-sidebar fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-primary/15 transition-transform duration-200 lg:static lg:h-screen lg:w-auto",
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(45,212,191,0.14),transparent_45%),radial-gradient(circle_at_10%_95%,rgba(45,212,191,0.12),transparent_35%)]" aria-hidden />
+        <div className="dashboard-shell-sidebar-glow pointer-events-none absolute inset-0" aria-hidden />
 
         <div className="relative flex h-(--dashboard-header-height) items-center justify-between border-b border-primary/15 px-4">
           <div className="flex min-w-0 items-center gap-2.5">
@@ -114,7 +114,7 @@ export function DashboardShell({
                 className={cn(
                   "flex items-center gap-3 rounded-sm border px-3 py-2.5 text-[15px] transition-all whitespace-nowrap",
                   active
-                    ? "border-primary/55 bg-linear-to-r from-primary/25 via-primary/10 to-transparent text-text shadow-[0_8px_20px_rgba(45,212,191,0.16)]"
+                    ? "dashboard-shell-nav-active border-primary/55 text-text"
                     : "border-transparent text-text-muted hover:border-primary/25 hover:bg-primary/8 hover:text-text",
                   collapsed && "justify-center px-2"
                 )}
@@ -138,10 +138,10 @@ export function DashboardShell({
         )}
       </aside>
 
-      <div className="relative z-0 flex h-screen min-h-0 flex-col bg-[#03070d] lg:h-screen">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(45,212,191,0.09),transparent_30%),radial-gradient(circle_at_95%_10%,rgba(45,212,191,0.05),transparent_35%)]" aria-hidden />
+      <div className="dashboard-shell-content relative z-0 flex h-screen min-h-0 flex-col lg:h-screen">
+        <div className="dashboard-shell-content-glow pointer-events-none absolute inset-0" aria-hidden />
 
-        <header className="relative z-30 border-b border-primary/15 bg-[#03070d]/90 backdrop-blur-md">
+        <header className="dashboard-shell-header relative z-30 border-b border-primary/15 backdrop-blur-md">
           <div className="flex h-(--dashboard-header-height) items-center justify-between px-4 sm:px-5">
             <div className="flex items-center gap-2 sm:gap-3">
               <Button

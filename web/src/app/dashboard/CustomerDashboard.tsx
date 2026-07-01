@@ -353,9 +353,9 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
     return (
       <div className="space-y-4">
-        <section className="relative overflow-hidden rounded-md border border-primary/25 bg-linear-to-r from-[#02131e] via-[#06141d] to-[#03111a] p-6 lg:p-7">
+        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
           <div
-            className="pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 bg-[radial-gradient(circle_at_60%_55%,rgba(45,212,191,0.35),transparent_45%),radial-gradient(circle_at_45%_50%,rgba(45,212,191,0.14),transparent_65%)] lg:block"
+            className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block"
             aria-hidden
           />
 
@@ -386,7 +386,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             </div>
 
             <div className="hidden lg:flex lg:justify-center">
-              <div className="relative h-48 w-48 rounded-4xl border border-primary/30 bg-linear-to-br from-[#0b2029] to-[#0b1722] p-5 shadow-[0_20px_48px_rgba(45,212,191,0.25)]">
+              <div className="dashboard-orb relative h-48 w-48 rounded-4xl border border-primary/30 p-5">
                 <div className="grid grid-cols-3 gap-2.5">
                   {Array.from({ length: 9 }).map((_, index) => (
                     <span key={index} className="h-8 rounded-xs border border-primary/20 bg-primary/10" />
@@ -404,7 +404,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             <Link
               key={item.key}
               href={item.href}
-              className="group rounded-sm border border-border/65 bg-[#060d14]/90 p-4 transition-all hover:border-primary/40 hover:shadow-[0_14px_28px_rgba(45,212,191,0.12)]"
+                className="dashboard-panel-surface group rounded-sm border border-border/65 p-4 transition-all hover:border-primary/40 hover:shadow-(--shadow-2)"
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="inline-flex size-11 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">{item.icon}</span>
@@ -420,7 +420,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
         </section>
 
         <section className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-          <Card className="rounded-sm border-border/65 bg-[#060d14]/90 p-4 sm:p-5" hoverable={false}>
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4 sm:p-5" hoverable={false}>
             <div className="flex items-center justify-between gap-3">
               <h3 className="font-display text-2xl tracking-tight">Recent Orders</h3>
               <LinkButton href="/dashboard/orders" variant="outline" size="sm">View all orders</LinkButton>
@@ -433,7 +433,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                   href={`/dashboard/orders/${order.id}`}
                   className="flex flex-wrap items-center gap-3 rounded-sm border border-border/55 bg-surface/25 px-3.5 py-3 transition-colors hover:border-primary/35"
                 >
-                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-sm bg-linear-to-br from-[#1f4d6b] to-[#122b3f] text-sm font-semibold text-text-muted">
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-sm border border-primary/20 bg-primary/12 text-sm font-semibold text-text-muted">
                     {order.items[0]?.product_name?.slice(0, 2).toUpperCase() ?? `P${index + 1}`}
                   </span>
 
@@ -470,7 +470,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             ) : null}
           </Card>
 
-          <Card className="rounded-sm border-border/65 bg-[#060d14]/90 p-4 sm:p-5" hoverable={false}>
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4 sm:p-5" hoverable={false}>
             <h3 className="font-display text-2xl tracking-tight">Downloads Ready</h3>
 
             {readyDownloads.length === 0 ? (
@@ -502,7 +502,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           </Card>
         </section>
 
-        <section className="rounded-md border border-primary/20 bg-linear-to-r from-[#071c28] via-[#051019] to-[#08131f] p-5">
+        <section className="dashboard-strip-surface rounded-md border border-primary/20 p-5">
           <div className="grid gap-5 xl:grid-cols-[1.2fr_1fr] xl:items-center">
             <div>
               <h3 className="font-display text-3xl tracking-tight text-primary">Everything you need in one place</h3>
@@ -518,7 +518,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                 { label: "Expert Support", text: "Real humans, real solutions", icon: <ChatBubbleLeftRightIcon className="size-5" /> },
                 { label: "Always Updated", text: "New features and improvements", icon: <ArrowPathIcon className="size-5" /> },
               ].map((feature) => (
-                <div key={feature.label} className="rounded-sm border border-primary/20 bg-black/25 p-3.5">
+                <div key={feature.label} className="dashboard-strip-tile rounded-sm border border-primary/20 p-3.5">
                   <div className="flex items-center gap-2 text-primary">
                     {feature.icon}
                     <p className="text-sm font-semibold text-text">{feature.label}</p>
