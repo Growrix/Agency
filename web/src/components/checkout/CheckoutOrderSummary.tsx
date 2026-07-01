@@ -49,27 +49,27 @@ export function CheckoutOrderSummary({
           Order summary
         </p>
 
-        <div className="mt-4 flex items-start gap-3">
+        <div className="mt-4 flex items-start gap-4">
           {product.image ? (
-            <div className="relative size-16 shrink-0 overflow-hidden rounded-sm border border-border/60 bg-inset/40 sm:size-20">
+            <div className="relative size-20 shrink-0 overflow-hidden rounded-md border border-border/60 bg-inset/40 sm:size-24">
               <Image
                 src={product.image.src}
                 alt={product.image.alt || product.name}
                 fill
-                sizes="80px"
+                sizes="96px"
                 className="object-cover"
               />
             </div>
           ) : (
-            <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-sm border border-border/60 bg-inset/40 text-xl font-display sm:size-20">
+            <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-md border border-border/60 bg-inset/40 font-display text-2xl sm:size-24">
               {product.name.slice(0, 1)}
             </div>
           )}
 
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
-              <p className="min-w-0 text-sm font-semibold text-text">{product.name}</p>
-              <p className="shrink-0 font-display text-lg tracking-tight">{product.price}</p>
+              <p className="min-w-0 text-base font-semibold text-text">{product.name}</p>
+              <p className="shrink-0 font-display text-xl tracking-tight">{product.price}</p>
             </div>
             <p className="mt-1 text-xs text-text-muted">
               {product.category}
@@ -84,16 +84,16 @@ export function CheckoutOrderSummary({
         </div>
 
         {(selection.variantSlug || selection.fulfillmentType) && (
-          <dl className="mt-4 space-y-1 text-xs text-text-muted">
+          <dl className="mt-4 space-y-1.5 text-xs">
             {selection.variantSlug ? (
               <div className="flex justify-between gap-2">
-                <dt>Variant</dt>
+                <dt className="text-text-muted">Variant:</dt>
                 <dd className="text-text">{selection.variantSlug}</dd>
               </div>
             ) : null}
             {selection.fulfillmentType ? (
               <div className="flex justify-between gap-2">
-                <dt>Fulfillment</dt>
+                <dt className="text-text-muted">Fulfillment:</dt>
                 <dd className="text-text">{selection.fulfillmentType}</dd>
               </div>
             ) : null}
@@ -131,12 +131,10 @@ export function CheckoutOrderSummary({
         </dl>
 
         <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Total</p>
-          </div>
+          <p className="font-display text-lg tracking-tight">Total</p>
           <div className="flex items-baseline gap-2">
             <span className="text-xs text-text-muted">USD</span>
-            <span className="font-display text-2xl tracking-tight">
+            <span className="font-display text-3xl tracking-tight text-text sm:text-4xl">
               {formatCentsAsUsd(totalCents)}
             </span>
           </div>

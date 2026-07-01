@@ -337,10 +337,6 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                   Email address *
                 </span>
                 <div className="relative mt-1">
-                  <EnvelopeIcon
-                    className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
-                    aria-hidden
-                  />
                   <input
                     type="email"
                     required
@@ -349,9 +345,13 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                     onBlur={() => setCustomerEmailTouched(true)}
                     aria-invalid={emailError ? "true" : undefined}
                     aria-describedby={emailError ? "customer-email-error" : undefined}
-                    className="signal-input pl-9"
+                    className="signal-input pr-10"
                     placeholder="you@example.com"
                     autoComplete="email"
+                  />
+                  <EnvelopeIcon
+                    className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
+                    aria-hidden
                   />
                 </div>
                 {emailError ? (
@@ -366,10 +366,6 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                   Full name *
                 </span>
                 <div className="relative mt-1">
-                  <UserIcon
-                    className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
-                    aria-hidden
-                  />
                   <input
                     type="text"
                     required
@@ -378,9 +374,13 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                     onBlur={() => setCustomerNameTouched(true)}
                     aria-invalid={nameError ? "true" : undefined}
                     aria-describedby={nameError ? "customer-name-error" : undefined}
-                    className="signal-input pl-9"
+                    className="signal-input pr-10"
                     placeholder="John Doe"
                     autoComplete="name"
+                  />
+                  <UserIcon
+                    className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-text-muted"
+                    aria-hidden
                   />
                 </div>
                 {nameError ? (
