@@ -20,10 +20,13 @@ test.describe("mobile smoke", () => {
     expect(critical).toEqual([]);
   });
 
-  test("header exposes shopping cart button on mobile", async ({ page }) => {
+  test("header exposes shopping cart control on mobile", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    const cartButton = page.getByRole("button", { name: /open shopping cart/i }).first();
-    await expect(cartButton).toBeVisible();
+    // Mobile link goes straight to /cart; the desktop CartHoverMenu link has aria-haspopup.
+    const cartControl = page
+      .locator("a[href='/cart'][aria-label*='shopping cart' i]:not([aria-haspopup])")
+      .first();
+    await expect(cartControl).toBeVisible();
   });
 
   test("cart page renders steps indicator with Cart active and empty CTA", async ({ page }) => {

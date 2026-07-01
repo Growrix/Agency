@@ -87,7 +87,15 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
           <div className="min-w-0 space-y-6">
-            <CheckoutSteps active="confirmation" />
+            <CheckoutSteps
+              active="confirmation"
+              hrefOverrides={{
+                cart: "/cart",
+                information: "/checkout",
+                payment: orderId ? `/checkout/payment?order=${encodeURIComponent(orderId)}` : "/checkout/payment",
+                confirmation: orderId ? `/success?order=${encodeURIComponent(orderId)}` : "/success",
+              }}
+            />
 
             <Card>
               <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">

@@ -19,7 +19,7 @@ import { DiscountCodeField } from "@/components/checkout/DiscountCodeField";
 import { PaymentMethodTabs, type PaymentMethodId } from "@/components/checkout/PaymentMethodTabs";
 import { parsePriceStringToCents } from "@/components/checkout/checkout-utils";
 import { formatUsdFromCents, rehydrateCartStore, useCartStore } from "@/lib/cart-store";
-import type { CheckoutSelection } from "@/lib/shop";
+import { getCheckoutHref, type CheckoutSelection } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 import type { ProductUpsellRecord } from "@/server/data/schema";
 import { cn } from "@/lib/utils";
@@ -118,6 +118,20 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     if (!isCartMode || !cartHydrated) return [];
     return cartItems;
   }, [cartHydrated, cartItems, isCartMode]);
+
+  const stepHrefOverrides = useMemo<Partial<Record<CheckoutStepId, string>>>(() => {
+    const overrides: Partial<Record<CheckoutStepId, string>> = {
+      cart: "/cart",
+    };
+    overrides.information = product ? getCheckoutHref(product.slug, selection) : "/checkout";
+    overrides.payment = orderId
+      ? `/checkout/payment?order=${encodeURIComponent(orderId)}`
+      : "/checkout/payment";
+    overrides.confirmation = orderId
+      ? `/success?order=${encodeURIComponent(orderId)}`
+      : "/success";
+    return overrides;
+  }, [orderId, product, selection]);
 
   const upsells = useMemo<ProductUpsellRecord[]>(
     () => product?.customization_upsells ?? [],
@@ -256,7 +270,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   if (status === "success") {
     return (
       <div className="space-y-4">
-        <CheckoutSteps active="confirmation" />
+        <CheckoutSteps active="confirmation" hrefOverrides={stepHrefOverrides} />
         <div className="rounded-md border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
           Payment flow returned successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}
           {orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be
@@ -269,7 +283,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   if (status === "cancelled") {
     return (
       <div className="space-y-4">
-        <CheckoutSteps active="information" />
+        <CheckoutSteps active="information" hrefOverrides={stepHrefOverrides} />
         <div className="rounded-md border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
           Checkout was cancelled before payment.{" "}
           {selectedTierLabel ? `Tier ${selectedTierLabel} is still selected. ` : ""}Your order draft
@@ -282,7 +296,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   if (!product) {
     return (
       <div className="space-y-4">
-        <CheckoutSteps active="cart" />
+        <CheckoutSteps active="cart" hrefOverrides={stepHrefOverrides} />
         <div className="flex flex-wrap gap-3">
           <LinkButton href="/digital-products" size="lg">Go to digital products</LinkButton>
           <LinkButton href="/contact" variant="outline" size="lg">Request invoice</LinkButton>
@@ -294,7 +308,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
       <div className="min-w-0 space-y-6">
-        <CheckoutSteps active={activeStep} />
+        <CheckoutSteps active={activeStep} hrefOverrides={stepHrefOverrides} />
 
         <form
           key={viewer?.id ?? "anon"}

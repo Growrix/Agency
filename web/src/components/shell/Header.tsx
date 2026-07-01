@@ -14,6 +14,7 @@ import { PublicAuthControls } from "@/components/shell/PublicAuthControls";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { HeaderMobileNav } from "@/components/shell/HeaderMobileNav";
 import { CartDrawer } from "@/components/shop/CartDrawer";
+import { CartHoverMenu } from "@/components/shop/CartHoverMenu";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { rehydrateCartStore, useCartStore, useCartUiStore } from "@/lib/cart-store";
 import { cn } from "@/lib/utils";
@@ -32,7 +33,6 @@ export function Header({
 }: HeaderProps = {}) {
   const openConcierge = useConciergeStore((state) => state.open);
   const cartOpen = useCartUiStore((state) => state.isOpen);
-  const openCart = useCartUiStore((state) => state.open);
   const closeCart = useCartUiStore((state) => state.close);
   const cartItems = useCartStore((state) => state.items);
   const [cartHydrated, setCartHydrated] = useState(false);
@@ -111,22 +111,9 @@ export function Header({
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </button>
-          <button
-            type="button"
-            onClick={() => openCart()}
-            className="relative hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
-            aria-label="Open shopping cart"
-          >
-            <ShoppingBagIcon className="size-5" aria-hidden />
-            {cartHydrated && cartCount > 0 ? (
-              <span className="absolute -right-0.5 -top-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-surface">
-                {cartCount > 99 ? "99+" : cartCount}
-              </span>
-            ) : null}
-          </button>
-          <button
-            type="button"
-            onClick={() => openCart()}
+          <CartHoverMenu cartHydrated={cartHydrated} className="hidden lg:inline-flex" />
+          <Link
+            href="/cart"
             className="relative inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:hidden"
             aria-label={
               cartHydrated && cartCount > 0
@@ -140,7 +127,7 @@ export function Header({
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
             ) : null}
-          </button>
+          </Link>
           <ThemeToggleButton className="lg:hidden" />
           <ThemeToggle className="hidden lg:inline-flex" />
           <PublicAuthControls />
