@@ -2,6 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import {
+  ArrowDownTrayIcon,
+  ArrowPathIcon,
+  ArrowRightIcon,
+  BoltIcon,
+  CalendarDaysIcon,
+  ChatBubbleLeftRightIcon,
+  ClipboardDocumentListIcon,
+  CubeIcon,
+  LifebuoyIcon,
+  ShieldCheckIcon,
+  ShoppingBagIcon,
+} from "@heroicons/react/24/outline";
 import { AppointmentRescheduleModal } from "@/components/dashboard/AppointmentRescheduleModal";
 import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
 import { Button, LinkButton } from "@/components/primitives/Button";
@@ -110,6 +123,17 @@ function formatDateTime(value: string | undefined) {
 
   const parsed = new Date(value);
   return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleString();
+}
+
+function formatShortDate(value: string | undefined) {
+  if (!value) {
+    return "Not available";
+  }
+
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime())
+    ? value
+    : parsed.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
 function buildFullName(user: Viewer | null) {
@@ -289,57 +313,222 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   }
 
   function renderOverview() {
+    const quickStats = [
+      {
+        key: "orders",
+        label: "Orders",
+        value: orders.length,
+        subtitle: "Total orders",
+        href: "/dashboard/orders",
+        icon: <ShoppingBagIcon className="size-5" />,
+      },
+      {
+        key: "downloads",
+        label: "Downloads",
+        value: downloads.length,
+        subtitle: "Total downloads",
+        href: "/dashboard/downloads",
+        icon: <ArrowDownTrayIcon className="size-5" />,
+      },
+      {
+        key: "licenses",
+        label: "Licenses",
+        value: licenses.length,
+        subtitle: "Active licenses",
+        href: "/dashboard/products",
+        icon: <ShieldCheckIcon className="size-5" />,
+      },
+      {
+        key: "appointments",
+        label: "Appointments",
+        value: appointments.length,
+        subtitle: "Scheduled",
+        href: "/dashboard/appointments",
+        icon: <CalendarDaysIcon className="size-5" />,
+      },
+    ] as const;
+
+    const recentOrders = orders.slice(0, 3);
+    const readyDownloads = downloads.filter((entry) => entry.status.toLowerCase() === "delivered");
+
     return (
-      <div className="grid gap-4 lg:grid-cols-4">
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Orders</p>
-          <p className="mt-3 font-display text-4xl tracking-tight">{orders.length}</p>
-        </Card>
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Downloads</p>
-          <p className="mt-3 font-display text-4xl tracking-tight">{downloads.length}</p>
-        </Card>
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Licenses</p>
-          <p className="mt-3 font-display text-4xl tracking-tight">{licenses.length}</p>
-        </Card>
-        <Card variant="inset">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Appointments</p>
-          <p className="mt-3 font-display text-4xl tracking-tight">{appointments.length}</p>
-        </Card>
+      <div className="space-y-4">
+        <section className="relative overflow-hidden rounded-md border border-primary/25 bg-linear-to-r from-[#02131e] via-[#06141d] to-[#03111a] p-6 lg:p-7">
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 bg-[radial-gradient(circle_at_60%_55%,rgba(45,212,191,0.35),transparent_45%),radial-gradient(circle_at_45%_50%,rgba(45,212,191,0.14),transparent_65%)] lg:block"
+            aria-hidden
+          />
 
-        <Card className="lg:col-span-2">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Recent orders</p>
-          <div className="mt-4 space-y-3">
-            {orders.slice(0, 3).map((order) => (
-              <div key={order.id} className="rounded-sm border border-border/60 bg-inset/35 px-4 py-3">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <p className="font-medium text-text">{order.order_number}</p>
-                    <p className="text-sm text-text-muted">{order.items.map((item) => item.product_name).join(", ")}</p>
-                  </div>
-                  <p className="text-sm text-text-muted">{currencyFormatter.format(order.total_cents / 100)}</p>
+          <div className="relative grid gap-8 lg:grid-cols-[1.35fr_0.65fr] lg:items-center">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+                Welcome back,
+                <br />
+                <span className="text-primary">{fullName}</span>
+              </h2>
+              <p className="mt-3 text-base text-text-muted">Orders, downloads, and next steps from one place.</p>
+
+              <div className="mt-7 grid gap-3 sm:grid-cols-3">
+                <Link href="/digital-products" className="rounded-sm border border-primary/30 bg-primary/10 px-3.5 py-3 transition-colors hover:bg-primary/15">
+                  <div className="flex items-center gap-2 text-primary"><CubeIcon className="size-4" /><span className="text-sm font-semibold">Browse Products</span></div>
+                  <p className="mt-1 text-sm text-text-muted">Explore new products</p>
+                </Link>
+                <Link href="/dashboard/orders" className="rounded-sm border border-border/55 bg-surface/25 px-3.5 py-3 transition-colors hover:border-primary/30">
+                  <div className="flex items-center gap-2 text-text"><ClipboardDocumentListIcon className="size-4" /><span className="text-sm font-semibold">View Orders</span></div>
+                  <p className="mt-1 text-sm text-text-muted">Track your orders</p>
+                </Link>
+                <Link href="/dashboard/support" className="rounded-sm border border-border/55 bg-surface/25 px-3.5 py-3 transition-colors hover:border-primary/30">
+                  <div className="flex items-center gap-2 text-text"><LifebuoyIcon className="size-4" /><span className="text-sm font-semibold">Need Support?</span></div>
+                  <p className="mt-1 text-sm text-text-muted">We are here to help</p>
+                </Link>
+              </div>
+            </div>
+
+            <div className="hidden lg:flex lg:justify-center">
+              <div className="relative h-48 w-48 rounded-4xl border border-primary/30 bg-linear-to-br from-[#0b2029] to-[#0b1722] p-5 shadow-[0_20px_48px_rgba(45,212,191,0.25)]">
+                <div className="grid grid-cols-3 gap-2.5">
+                  {Array.from({ length: 9 }).map((_, index) => (
+                    <span key={index} className="h-8 rounded-xs border border-primary/20 bg-primary/10" />
+                  ))}
                 </div>
+                <div className="pointer-events-none absolute -inset-6 rounded-[2.5rem] border border-primary/15" aria-hidden />
+                <div className="pointer-events-none absolute -inset-12 rounded-[3rem] border border-primary/10" aria-hidden />
               </div>
-            ))}
-            {orders.length === 0 ? <p className="text-sm text-text-muted">No orders yet.</p> : null}
+            </div>
           </div>
-        </Card>
+        </section>
 
-        <Card className="lg:col-span-2">
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Downloads ready</p>
-          <div className="mt-4 space-y-3">
-            {downloads.slice(0, 3).map((download) => (
-              <div key={download.id} className="rounded-sm border border-border/60 bg-inset/35 px-4 py-3">
-                <p className="font-medium text-text">{download.file_label ?? download.product_slug}</p>
-                <p className="mt-1 text-sm text-text-muted">
-                  {download.status} · {download.download_count}/{download.max_downloads} used
-                </p>
+        <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {quickStats.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              className="group rounded-sm border border-border/65 bg-[#060d14]/90 p-4 transition-all hover:border-primary/40 hover:shadow-[0_14px_28px_rgba(45,212,191,0.12)]"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <span className="inline-flex size-11 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">{item.icon}</span>
+                <span className="inline-flex size-9 items-center justify-center rounded-full border border-border/60 text-text-muted transition-colors group-hover:border-primary/45 group-hover:text-primary">
+                  <ArrowRightIcon className="size-4" />
+                </span>
               </div>
-            ))}
-            {downloads.length === 0 ? <p className="text-sm text-text-muted">No delivered downloads yet.</p> : null}
+              <p className="mt-3 text-xs uppercase tracking-[0.14em] text-text-muted">{item.label}</p>
+              <p className="mt-1 font-display text-4xl leading-none tracking-tight">{item.value}</p>
+              <p className="mt-1 text-sm text-text-muted">{item.subtitle}</p>
+            </Link>
+          ))}
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+          <Card className="rounded-sm border-border/65 bg-[#060d14]/90 p-4 sm:p-5" hoverable={false}>
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="font-display text-2xl tracking-tight">Recent Orders</h3>
+              <LinkButton href="/dashboard/orders" variant="outline" size="sm">View all orders</LinkButton>
+            </div>
+
+            <div className="mt-4 space-y-2.5">
+              {recentOrders.map((order, index) => (
+                <Link
+                  key={order.id}
+                  href={`/dashboard/orders/${order.id}`}
+                  className="flex flex-wrap items-center gap-3 rounded-sm border border-border/55 bg-surface/25 px-3.5 py-3 transition-colors hover:border-primary/35"
+                >
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-sm bg-linear-to-br from-[#1f4d6b] to-[#122b3f] text-sm font-semibold text-text-muted">
+                    {order.items[0]?.product_name?.slice(0, 2).toUpperCase() ?? `P${index + 1}`}
+                  </span>
+
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-semibold text-text">{order.order_number}</p>
+                    <p className="truncate text-sm text-text-muted">{order.items[0]?.product_name ?? "Product"}</p>
+                  </div>
+
+                  <div className="ml-auto text-right">
+                    <p className="font-semibold text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
+                    <p className="text-sm text-text-muted">{formatShortDate(order.created_at)}</p>
+                  </div>
+
+                  <span className="rounded-full border border-primary/35 bg-primary/12 px-2.5 py-1 text-xs font-semibold text-primary">
+                    {order.payment_status === "succeeded" ? "Completed" : order.payment_status}
+                  </span>
+                </Link>
+              ))}
+
+              {recentOrders.length === 0 ? (
+                <div className="rounded-sm border border-dashed border-border/65 bg-surface/20 px-4 py-7 text-center text-sm text-text-muted">
+                  No orders yet.
+                </div>
+              ) : null}
+            </div>
+
+            {recentOrders.length > 0 ? (
+              <div className="mt-3 text-center">
+                <Link href="/dashboard/orders" className="inline-flex items-center gap-1 text-sm text-text-muted transition-colors hover:text-primary">
+                  View all orders
+                  <ArrowRightIcon className="size-4" />
+                </Link>
+              </div>
+            ) : null}
+          </Card>
+
+          <Card className="rounded-sm border-border/65 bg-[#060d14]/90 p-4 sm:p-5" hoverable={false}>
+            <h3 className="font-display text-2xl tracking-tight">Downloads Ready</h3>
+
+            {readyDownloads.length === 0 ? (
+              <div className="mt-10 flex flex-col items-center text-center">
+                <span className="inline-flex size-14 items-center justify-center rounded-sm border border-primary/30 bg-primary/14 text-primary">
+                  <ArrowDownTrayIcon className="size-6" />
+                </span>
+                <p className="mt-6 text-xl font-semibold">No delivered downloads yet.</p>
+                <p className="mt-2 max-w-xs text-sm text-text-muted">
+                  When your files are ready, they will appear here.
+                </p>
+                <LinkButton href="/digital-products" variant="outline" className="mt-7">
+                  Browse Products
+                  <ArrowRightIcon className="ml-1 size-4" />
+                </LinkButton>
+              </div>
+            ) : (
+              <div className="mt-4 space-y-2.5">
+                {readyDownloads.slice(0, 3).map((download) => (
+                  <div key={download.id} className="rounded-sm border border-border/55 bg-surface/25 px-3.5 py-3">
+                    <p className="font-semibold text-text">{download.file_label ?? download.product_slug}</p>
+                    <p className="mt-1 text-sm text-text-muted">
+                      {download.download_count}/{download.max_downloads} downloads used
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
+        </section>
+
+        <section className="rounded-md border border-primary/20 bg-linear-to-r from-[#071c28] via-[#051019] to-[#08131f] p-5">
+          <div className="grid gap-5 xl:grid-cols-[1.2fr_1fr] xl:items-center">
+            <div>
+              <h3 className="font-display text-3xl tracking-tight text-primary">Everything you need in one place</h3>
+              <p className="mt-2 max-w-2xl text-base text-text-muted">
+                Manage your orders, access downloads, track appointments, and get support from your dashboard.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                { label: "Secure & Private", text: "Your data is safe and encrypted", icon: <ShieldCheckIcon className="size-5" /> },
+                { label: "Instant Access", text: "Get products and downloads instantly", icon: <BoltIcon className="size-5" /> },
+                { label: "Expert Support", text: "Real humans, real solutions", icon: <ChatBubbleLeftRightIcon className="size-5" /> },
+                { label: "Always Updated", text: "New features and improvements", icon: <ArrowPathIcon className="size-5" /> },
+              ].map((feature) => (
+                <div key={feature.label} className="rounded-sm border border-primary/20 bg-black/25 p-3.5">
+                  <div className="flex items-center gap-2 text-primary">
+                    {feature.icon}
+                    <p className="text-sm font-semibold text-text">{feature.label}</p>
+                  </div>
+                  <p className="mt-1 text-sm text-text-muted">{feature.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </Card>
+        </section>
       </div>
     );
   }
@@ -563,11 +752,13 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
   return (
     <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-      <Card variant="inset">
-        <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Portal summary</p>
-        <h2 className="mt-3 font-display text-3xl tracking-tight">Welcome back, {fullName}</h2>
-        <p className="mt-3 text-sm leading-6 text-text-muted">{currentMeta.description}</p>
-      </Card>
+      {view !== "overview" ? (
+        <Card variant="inset">
+          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Portal summary</p>
+          <h2 className="mt-3 font-display text-3xl tracking-tight">Welcome back, {fullName}</h2>
+          <p className="mt-3 text-sm leading-6 text-text-muted">{currentMeta.description}</p>
+        </Card>
+      ) : null}
 
       {error ? (
         <Card>

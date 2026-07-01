@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Popover } from "@headlessui/react";
 import { useCallback, useEffect, useState } from "react";
-import { BellIcon, Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { BellIcon, Cog6ToothIcon, MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { ThemeToggle } from "@/components/shell/ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +21,7 @@ type DashboardHeaderControlsProps = {
   profileName?: string;
   profileEmail?: string;
   className?: string;
+  showSearch?: boolean;
 };
 
 function formatRelative(iso: string) {
@@ -41,6 +42,7 @@ export function DashboardHeaderControls({
   profileName = "Customer",
   profileEmail = "customer@growrixos.com",
   className,
+  showSearch = false,
 }: DashboardHeaderControlsProps) {
   const [items, setItems] = useState<CustomerNotification[]>([]);
   const [unread, setUnread] = useState(0);
@@ -89,6 +91,18 @@ export function DashboardHeaderControls({
 
   return (
     <div className={cn("flex items-center gap-1.5", className)}>
+      {showSearch ? (
+        <label className="relative hidden w-85 min-w-70 items-center md:flex">
+          <MagnifyingGlassIcon className="pointer-events-none absolute left-3.5 size-4 text-text-muted" aria-hidden />
+          <input
+            type="text"
+            placeholder="Search anything..."
+            className="h-10 w-full rounded-sm border border-border/60 bg-surface/65 pl-10 pr-14 text-sm text-text outline-none transition-colors placeholder:text-text-muted/80 focus:border-primary/55"
+          />
+          <span className="pointer-events-none absolute right-3.5 text-xs text-text-muted">Ctrl K</span>
+        </label>
+      ) : null}
+
       <ThemeToggle className="hover:bg-inset/70" />
 
       <Popover className="relative">

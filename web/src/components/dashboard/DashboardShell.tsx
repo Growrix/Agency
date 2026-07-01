@@ -51,11 +51,13 @@ export function DashboardShell({
 
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-border/40 bg-surface/92 backdrop-blur-md transition-transform duration-200 lg:static lg:h-screen lg:w-auto lg:backdrop-blur-0",
+          "fixed left-0 top-0 z-40 flex h-dvh w-(--dashboard-sidebar-expanded) flex-col border-r border-primary/15 bg-[#02070d] transition-transform duration-200 lg:static lg:h-screen lg:w-auto",
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
-        <div className="flex h-(--dashboard-header-height) items-center justify-between border-b border-border/40 px-4">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(45,212,191,0.14),transparent_45%),radial-gradient(circle_at_10%_95%,rgba(45,212,191,0.12),transparent_35%)]" aria-hidden />
+
+        <div className="relative flex h-(--dashboard-header-height) items-center justify-between border-b border-primary/15 px-4">
           <div className="flex min-w-0 items-center gap-2.5">
             {collapsed ? (
               <Image
@@ -101,7 +103,7 @@ export function DashboardShell({
           </div>
         </div>
 
-        <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-3">
+        <nav className="relative flex-1 space-y-1.5 overflow-y-auto px-3 py-4">
           {navItems.map((item) => {
             const active = item.href === currentPath;
             return (
@@ -110,14 +112,17 @@ export function DashboardShell({
                 href={item.href}
                 onClick={() => setMobileSidebarOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 rounded-md border px-3 py-2.5 text-sm transition-all whitespace-nowrap",
+                  "flex items-center gap-3 rounded-sm border px-3 py-2.5 text-[15px] transition-all whitespace-nowrap",
                   active
-                    ? "border-border-strong bg-inset/60 text-text"
-                    : "border-border/40 text-text-muted hover:border-border-strong hover:text-text",
+                    ? "border-primary/55 bg-linear-to-r from-primary/25 via-primary/10 to-transparent text-text shadow-[0_8px_20px_rgba(45,212,191,0.16)]"
+                    : "border-transparent text-text-muted hover:border-primary/25 hover:bg-primary/8 hover:text-text",
                   collapsed && "justify-center px-2"
                 )}
               >
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary shrink-0">
+                <span className={cn(
+                  "inline-flex h-6 w-6 items-center justify-center shrink-0",
+                  active ? "text-primary" : "text-text-muted"
+                )}>
                   {item.icon ?? <span className="text-xs font-semibold">{item.label.slice(0, 1)}</span>}
                 </span>
                 {!collapsed && <span>{item.label}</span>}
@@ -127,14 +132,16 @@ export function DashboardShell({
         </nav>
 
         {utilityActions && (
-          <div className="mt-auto space-y-2 border-t border-border/40 p-2">
+          <div className="relative mt-auto space-y-2 border-t border-primary/15 p-3">
             {utilityActions}
           </div>
         )}
       </aside>
 
-      <div className="relative z-0 flex h-screen min-h-0 flex-col bg-background lg:h-screen">
-        <header className="z-30 border-b border-border/40 bg-surface/85 backdrop-blur-md">
+      <div className="relative z-0 flex h-screen min-h-0 flex-col bg-[#03070d] lg:h-screen">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(45,212,191,0.09),transparent_30%),radial-gradient(circle_at_95%_10%,rgba(45,212,191,0.05),transparent_35%)]" aria-hidden />
+
+        <header className="relative z-30 border-b border-primary/15 bg-[#03070d]/90 backdrop-blur-md">
           <div className="flex h-(--dashboard-header-height) items-center justify-between px-4 sm:px-5">
             <div className="flex items-center gap-2 sm:gap-3">
               <Button
@@ -153,7 +160,7 @@ export function DashboardShell({
           </div>
         </header>
 
-        <main className="min-h-0 flex-1 overflow-y-auto bg-background">
+        <main className="relative min-h-0 flex-1 overflow-y-auto">
           <div className="h-full w-full">{children}</div>
         </main>
       </div>

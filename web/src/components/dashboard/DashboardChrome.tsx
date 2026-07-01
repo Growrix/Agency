@@ -2,6 +2,17 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import {
+  ArrowRightIcon,
+  ArrowTopRightOnSquareIcon,
+  CalendarDaysIcon,
+  ClipboardDocumentListIcon,
+  CubeIcon,
+  LifebuoyIcon,
+  ShoppingBagIcon,
+  Squares2X2Icon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { DashboardHeaderControls } from "@/components/dashboard/DashboardHeaderControls";
 import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
@@ -15,18 +26,18 @@ type Viewer = {
 };
 
 const navItems: DashboardNavItem[] = [
-  { href: "/dashboard", label: "Overview" },
-  { href: "/dashboard/products", label: "Products" },
-  { href: "/dashboard/downloads", label: "Downloads" },
-  { href: "/dashboard/orders", label: "Orders" },
-  { href: "/dashboard/appointments", label: "Appointments" },
-  { href: "/dashboard/submissions", label: "Submissions" },
-  { href: "/dashboard/support", label: "Support" },
-  { href: "/dashboard/account", label: "Account" },
+  { href: "/dashboard", label: "Overview", icon: <Squares2X2Icon className="size-5" /> },
+  { href: "/dashboard/products", label: "Products", icon: <CubeIcon className="size-5" /> },
+  { href: "/dashboard/downloads", label: "Downloads", icon: <ArrowTopRightOnSquareIcon className="size-5" /> },
+  { href: "/dashboard/orders", label: "Orders", icon: <ShoppingBagIcon className="size-5" /> },
+  { href: "/dashboard/appointments", label: "Appointments", icon: <CalendarDaysIcon className="size-5" /> },
+  { href: "/dashboard/submissions", label: "Submissions", icon: <ClipboardDocumentListIcon className="size-5" /> },
+  { href: "/dashboard/support", label: "Support", icon: <LifebuoyIcon className="size-5" /> },
+  { href: "/dashboard/account", label: "Account", icon: <UserCircleIcon className="size-5" /> },
 ];
 
 const sectionMeta: Array<{ match: (path: string) => boolean; title: string }> = [
-  { match: (p) => p === "/dashboard", title: "Customer overview" },
+  { match: (p) => p === "/dashboard", title: "Overview" },
   { match: (p) => p.startsWith("/dashboard/products"), title: "Purchased products" },
   { match: (p) => p.startsWith("/dashboard/downloads"), title: "Downloads" },
   { match: (p) => p.startsWith("/dashboard/orders"), title: "Order history" },
@@ -93,12 +104,22 @@ export function DashboardChrome({ children }: { children: React.ReactNode }) {
         <DashboardHeaderControls
           profileName={fullName}
           profileEmail={viewer?.email ?? "customer@growrixos.com"}
+          showSearch
         />
       }
       utilityActions={
-        <div className="space-y-2">
-          <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth>
-            Browse digital products
+        <div className="space-y-3">
+          <div className="rounded-md border border-primary/35 bg-linear-to-br from-primary/20 via-primary/10 to-transparent p-4">
+            <p className="text-base font-semibold text-text">Browse digital products</p>
+            <p className="mt-2 text-sm text-text-muted">Premium templates, tools, and systems to grow your business.</p>
+            <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth className="mt-4 justify-between">
+              Explore products
+              <ArrowRightIcon className="size-4" />
+            </LinkButton>
+          </div>
+          <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth className="justify-between">
+            Shop catalog
+            <ArrowRightIcon className="size-4" />
           </LinkButton>
           <DashboardSignOutButton />
         </div>
