@@ -224,6 +224,10 @@ export type ProductUpsellRecord = {
   description: string;
   cta_label: string;
   cta_href: string;
+  price?: string;
+  compare_at_price?: string;
+  savings_label?: string;
+  best_value?: boolean;
 };
 
 export type ManagedProductRecord = {

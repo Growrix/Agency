@@ -124,6 +124,23 @@ export function Header({
               </span>
             ) : null}
           </button>
+          <button
+            type="button"
+            onClick={() => openCart()}
+            className="relative inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:hidden"
+            aria-label={
+              cartHydrated && cartCount > 0
+                ? `Open shopping cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`
+                : "Open shopping cart"
+            }
+          >
+            <ShoppingBagIcon className="size-5" aria-hidden />
+            {cartHydrated && cartCount > 0 ? (
+              <span className="absolute -right-0.5 -top-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-surface">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            ) : null}
+          </button>
           <ThemeToggleButton className="lg:hidden" />
           <ThemeToggle className="hidden lg:inline-flex" />
           <PublicAuthControls />
@@ -148,12 +165,12 @@ export function Header({
         aria-hidden={!mobileOpen}
       >
         <div className="site-mobile-nav__panel-inner">
-          {mobileOpen ? (
-            <HeaderMobileNav
-              onClose={() => setMobileOpen(false)}
-              onOpenConcierge={() => openConcierge()}
-            />
-          ) : null}
+          <HeaderMobileNav
+            onClose={() => setMobileOpen(false)}
+            onOpenConcierge={() => openConcierge()}
+            cartCount={cartCount}
+            cartHydrated={cartHydrated}
+          />
         </div>
       </div>
 

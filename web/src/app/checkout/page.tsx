@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
-import { Badge } from "@/components/primitives/Badge";
-import { LinkButton } from "@/components/primitives/Button";
-import { Card } from "@/components/primitives/Card";
+import { ArrowLeftIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
-import { getCheckoutHref, getProductHref, type CheckoutSelection } from "@/lib/shop";
+import { getProductHref, type CheckoutSelection } from "@/lib/shop";
 import { getPublicShopProduct } from "@/server/domain/catalog";
 import { CheckoutExperience } from "./CheckoutExperience";
 
@@ -26,117 +23,58 @@ type CheckoutPageProps = {
   }>;
 };
 
+function firstString(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
   const resolved = searchParams ? await searchParams : undefined;
-  const productSlug = Array.isArray(resolved?.product) ? resolved?.product[0] : resolved?.product;
+  const productSlug = firstString(resolved?.product);
   const product = productSlug ? await getPublicShopProduct(productSlug).catch(() => null) : undefined;
-  const status = Array.isArray(resolved?.status) ? resolved?.status[0] : resolved?.status;
-  const orderId = Array.isArray(resolved?.order) ? resolved?.order[0] : resolved?.order;
-  const selectedVariantSlug = Array.isArray(resolved?.variant) ? resolved?.variant[0] : resolved?.variant;
-  const selectedTierName = Array.isArray(resolved?.tier) ? resolved?.tier[0] : resolved?.tier;
-  const selectedFulfillmentType = Array.isArray(resolved?.fulfillment) ? resolved?.fulfillment[0] : resolved?.fulfillment;
+  const status = firstString(resolved?.status);
+  const orderId = firstString(resolved?.order);
 
   const selection: CheckoutSelection = {
-    variantSlug: selectedVariantSlug,
-    tierName: selectedTierName,
-    fulfillmentType: selectedFulfillmentType,
+    variantSlug: firstString(resolved?.variant),
+    tierName: firstString(resolved?.tier),
+    fulfillmentType: firstString(resolved?.fulfillment),
   };
 
-  const orderSummaryInner = product ? (
-    <>
-      <div className="mt-4 rounded-md border border-border bg-surface p-4">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="font-display text-2xl tracking-tight">{product.name}</p>
-            <p className="mt-2 text-sm leading-6 text-text-muted">{product.category} · {product.type}</p>
-          </div>
-          <p className="font-display text-2xl tracking-tight">{product.price}</p>
-        </div>
-        {selectedTierName ? (
-          <p className="mt-3 text-sm text-text-muted">Tier: {selectedTierName}</p>
-        ) : null}
-        {selectedVariantSlug ? (
-          <p className="mt-1 text-sm text-text-muted">Variant: {selectedVariantSlug}</p>
-        ) : null}
-        {selectedFulfillmentType ? (
-          <p className="mt-1 text-sm text-text-muted">Fulfillment: {selectedFulfillmentType}</p>
-        ) : null}
-        <p className="mt-4 text-sm leading-6 text-text-muted">{product.summary}</p>
-      </div>
-
-      <div className="mt-5 space-y-2 text-sm leading-6 text-text-muted">
-        {product.includes.slice(0, 4).map((item) => (
-          <div key={item} className="rounded-[14px] border border-border bg-surface px-4 py-3">
-            {item}
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 flex flex-col gap-3">
-        <LinkButton href={getProductHref(product)} variant="outline" fullWidth>
-          Review product details
-        </LinkButton>
-        <LinkButton href={getCheckoutHref(product, selection)} fullWidth>
-          Refresh this checkout <ArrowUpRightIcon className="size-4" />
-        </LinkButton>
-      </div>
-    </>
-  ) : (
-    <div className="mt-4 rounded-md border border-dashed border-border bg-surface p-5 text-sm leading-6 text-text-muted">
-      Choose a product from the catalog to land here with a preselected website order summary.
-    </div>
-  );
-
-  const checkoutForm = (
-    <Card>
-      <Badge tone="primary">Checkout preview</Badge>
-      <h1 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl">
-        {product ? `Checkout for ${product.name}` : "Secure checkout requires a selected product."}
-      </h1>
-      <p className="mt-4 text-base leading-7 text-text-muted">
-        {product
-          ? "This checkout now creates a persisted order and hands off to Stripe when the payment environment is configured. If Stripe is not configured yet, the order is still captured for manual follow-up."
-          : "Choose a product from the catalog to create an order and continue into checkout."}
-      </p>
-
-      <div className="mt-8">
-        <CheckoutExperience product={product} status={status} orderId={orderId} selection={selection} />
-      </div>
-    </Card>
-  );
-
   return (
-    <Section className="pb-10 pt-8 sm:pb-12 sm:pt-12 lg:pb-16 lg:pt-16">
+    <Section size="compact" className="pb-16">
       <Container>
-        <Link href={product ? getProductHref(product) : "/digital-products"} className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary">
-          <ArrowLeftIcon className="size-4" /> {product ? "Back to product" : "Back to digital products"}
-        </Link>
-
-        <details className="group mt-4 rounded-2xl border border-border bg-inset/40 lg:hidden">
-          <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-4 [&::-webkit-details-marker]:hidden">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">
-              {product ? `Order summary — ${product.price}` : "Order summary"}
-            </p>
-            <svg
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="size-4 text-text-muted transition-transform group-open:rotate-180"
-              aria-hidden
-            >
-              <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-            </svg>
-          </summary>
-          <div className="border-t border-border px-4 pb-4">{orderSummaryInner}</div>
-        </details>
-
-        <div className="mt-4 grid gap-6 lg:mt-6 lg:grid-cols-[1.1fr_0.9fr]">
-          {checkoutForm}
-
-          <Card variant="inset" className="hidden lg:block">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">Order summary</p>
-            {orderSummaryInner}
-          </Card>
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          <Link
+            href={product ? getProductHref(product) : "/digital-products"}
+            className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary"
+          >
+            <ArrowLeftIcon className="size-4" />
+            {product ? "Back to product" : "Back to digital products"}
+          </Link>
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+            <LockClosedIcon className="size-3.5" aria-hidden />
+            Secure checkout
+          </span>
         </div>
+
+        <header className="mb-8 max-w-2xl">
+          <h1 className="font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+            {product ? (
+              <>
+                Checkout for <span className="text-primary">{product.name}</span>
+              </>
+            ) : (
+              "Secure checkout requires a selected product."
+            )}
+          </h1>
+          <p className="mt-3 text-sm leading-6 text-text-muted sm:text-base">
+            {product
+              ? "You're minutes away from launching a professional website. Complete your purchase and get instant access."
+              : "Choose a product from the catalog to create an order and continue into checkout."}
+          </p>
+        </header>
+
+        <CheckoutExperience product={product} status={status} orderId={orderId} selection={selection} />
       </Container>
     </Section>
   );

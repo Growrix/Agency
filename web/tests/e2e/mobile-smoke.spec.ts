@@ -20,11 +20,21 @@ test.describe("mobile smoke", () => {
     expect(critical).toEqual([]);
   });
 
-  test("cart page renders empty state and proceed-to-checkout cta", async ({ page }) => {
+  test("header exposes shopping cart button on mobile", async ({ page }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const cartButton = page.getByRole("button", { name: /open shopping cart/i }).first();
+    await expect(cartButton).toBeVisible();
+  });
+
+  test("cart page renders steps indicator with Cart active and empty CTA", async ({ page }) => {
     await page.goto("/cart", { waitUntil: "domcontentloaded" });
 
-    // Empty state OR populated state both render at least one link to digital products.
-    const browseLink = page.getByRole("link", { name: /digital products|browse|continue shopping/i }).first();
+    const steps = page.getByRole("list", { name: "Checkout progress" });
+    await expect(steps).toBeVisible();
+
+    const browseLink = page
+      .getByRole("link", { name: /digital products|browse|continue shopping/i })
+      .first();
     await expect(browseLink).toBeVisible();
   });
 
@@ -33,6 +43,26 @@ test.describe("mobile smoke", () => {
 
     const steps = page.getByRole("list", { name: "Checkout progress" });
     await expect(steps).toBeVisible();
+  });
+
+  test("payment interstitial renders when reached directly", async ({ page }) => {
+    await page.goto("/checkout/payment", { waitUntil: "domcontentloaded" });
+
+    const steps = page.getByRole("list", { name: "Checkout progress" });
+    await expect(steps).toBeVisible();
+
+    const backToCheckout = page.getByRole("link", { name: /back to checkout|return to checkout/i }).first();
+    await expect(backToCheckout).toBeVisible();
+  });
+
+  test("success page renders confirmation step with dashboard CTA", async ({ page }) => {
+    await page.goto("/success", { waitUntil: "domcontentloaded" });
+
+    const steps = page.getByRole("list", { name: "Checkout progress" });
+    await expect(steps).toBeVisible();
+
+    const dashboardLink = page.getByRole("link", { name: /open dashboard|sign in to dashboard/i }).first();
+    await expect(dashboardLink).toBeVisible();
   });
 
   test("dashboard login redirects from /dashboard when unauthenticated", async ({ page }) => {
@@ -48,8 +78,9 @@ test.describe("mobile smoke", () => {
     const main = page.locator("#main").first();
     await expect(main).toBeVisible();
 
-    const bottomNavCount = await page.locator("[data-mobile-bottom-nav], nav.mobile-bottom-nav, .mobile-bottom-nav").count();
-    // Mobile bottom-nav is optional but if present should not overlap main content unintentionally.
+    const bottomNavCount = await page
+      .locator("[data-testid='mobile-bottom-nav'], nav.mobile-bottom-nav, .mobile-bottom-nav")
+      .count();
     expect(bottomNavCount).toBeGreaterThanOrEqual(0);
   });
 });
