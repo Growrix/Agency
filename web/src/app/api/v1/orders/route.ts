@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { ApiError, createRequestContext, errorResponse, successResponse } from "@/server/core/api";
+import { getAuthenticatedUser } from "@/server/auth/guards";
 import { createOrder } from "@/server/domain/orders";
 import { assertNoBotTrap, assertRateLimit } from "@/server/security/rate-limit";
 
@@ -9,6 +10,7 @@ export async function POST(request: NextRequest) {
   const context = createRequestContext(request);
 
   try {
+    const authenticatedUser = await getAuthenticatedUser(request);
     const body = (await request.json()) as Record<string, unknown>;
     const items = Array.isArray(body.items)
       ? body.items
@@ -39,6 +41,7 @@ export async function POST(request: NextRequest) {
       customer_name: typeof body.customer_name === "string" ? body.customer_name : "",
       customer_email: typeof body.customer_email === "string" ? body.customer_email : "",
       customer_phone: typeof body.customer_phone === "string" ? body.customer_phone : undefined,
+      user_id: authenticatedUser?.id,
       notes: typeof body.notes === "string" ? body.notes : undefined,
       requestId: context.requestId,
       ip: context.ip,

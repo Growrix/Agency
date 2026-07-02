@@ -136,6 +136,7 @@ export type OrderItemRecord = {
 export type OrderRecord = {
   id: string;
   order_number: string;
+  user_id?: string;
   customer_email: string;
   customer_name: string;
   customer_phone?: string;

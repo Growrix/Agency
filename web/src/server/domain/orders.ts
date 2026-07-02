@@ -39,6 +39,7 @@ type CreateOrderInput = {
   customer_name: string;
   customer_email: string;
   customer_phone?: string;
+  user_id?: string;
   notes?: string;
   requestId?: string;
   ip?: string;
@@ -206,6 +207,7 @@ export async function createOrder(input: CreateOrderInput) {
   const order: OrderRecord = {
     id: crypto.randomUUID(),
     order_number: buildOrderNumber(),
+    user_id: input.user_id,
     customer_name: input.customer_name.trim(),
     customer_email: input.customer_email.trim().toLowerCase(),
     customer_phone: input.customer_phone?.trim() || undefined,

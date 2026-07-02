@@ -109,6 +109,21 @@ describe("orders domain", () => {
     assert.equal(created.order.items[0]?.fulfillment_type, "done-for-you");
   });
 
+  it("attaches local user ownership when provided", async () => {
+    const ownerUserId = crypto.randomUUID();
+    const created = await createOrder({
+      product_slug: "legal-practice-website",
+      customer_name: "Jamie Owner",
+      customer_email: "jamie@example.com",
+      user_id: ownerUserId,
+    });
+
+    assert.equal(created.order.user_id, ownerUserId);
+
+    const persisted = await getOrderById(created.order.id);
+    assert.equal(persisted?.user_id, ownerUserId);
+  });
+
   it("applies webhook selection metadata when payment completes", async () => {
     const created = await createOrder({
       product_slug: "legal-practice-website",
