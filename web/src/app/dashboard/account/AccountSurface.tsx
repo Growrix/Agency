@@ -26,12 +26,24 @@ export function AccountSurface() {
     <div className="space-y-4 p-4 sm:p-5 lg:p-6">
       <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
         <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
-        <div className="relative">
+        <div className="relative grid gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
           <p className="text-xs uppercase tracking-[0.18em] text-primary">Account</p>
           <h1 className="mt-2 max-w-3xl font-display text-5xl leading-tight tracking-tight">Profile and preferences</h1>
           <p className="mt-3 max-w-3xl text-base text-text-muted">
             Identity, password, two-factor authentication, connected accounts, and account deletion are managed by Clerk in the panel below.
           </p>
+          </div>
+
+          <div className="hidden lg:flex lg:justify-end">
+            <div className="relative flex h-44 w-44 items-center justify-center rounded-4xl border border-primary/25 bg-primary/12">
+              <UserCircleIcon className="size-20 text-primary" />
+              <span className="absolute -bottom-2 -right-2 inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/25 bg-primary/12">
+                <ShieldCheckIcon className="size-7 text-primary" />
+              </span>
+              <span className="pointer-events-none absolute -inset-6 rounded-[2.5rem] border border-primary/15" aria-hidden />
+            </div>
+          </div>
         </div>
       </section>
 

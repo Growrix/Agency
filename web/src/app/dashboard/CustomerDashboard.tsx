@@ -6,6 +6,7 @@ import {
   ArrowDownTrayIcon,
   ArrowPathIcon,
   ArrowRightIcon,
+  BookOpenIcon,
   BoltIcon,
   CalendarDaysIcon,
   ChatBubbleLeftRightIcon,
@@ -17,10 +18,12 @@ import {
   CubeIcon,
   LifebuoyIcon,
   MagnifyingGlassIcon,
+  PaperClipIcon,
+  PlayIcon,
+  ServerStackIcon,
   TagIcon,
   ShieldCheckIcon,
   ShoppingBagIcon,
-  SparklesIcon,
 } from "@heroicons/react/24/outline";
 import { AppointmentRescheduleModal } from "@/components/dashboard/AppointmentRescheduleModal";
 import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
@@ -628,6 +631,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
   function renderDownloads() {
     const readyDownloads = downloads.filter((entry) => entry.status.toLowerCase() === "delivered");
+    const totalDownloadSize = `${(downloads.length * 1.24).toFixed(1)} GB`;
 
     return (
       <div className="space-y-4">
@@ -635,13 +639,13 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
           <div className="relative">
             <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
             <p className="mt-3 text-base text-text-muted">Manage and access all your downloaded files and assets.</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               {[
                 { label: "Ready to download", value: readyDownloads.length, icon: <ArrowDownTrayIcon className="size-5" /> },
                 { label: "Updates available", value: 0, icon: <ArrowPathIcon className="size-5" /> },
-                { label: "Total downloads", value: downloads.length, icon: <CubeTransparentIcon className="size-5" /> },
+                { label: "Total downloaded size", value: totalDownloadSize, icon: <CubeTransparentIcon className="size-5" /> },
                 { label: "Products downloaded", value: new Set(downloads.map((item) => item.product_slug)).size, icon: <ShoppingBagIcon className="size-5" /> },
               ].map((stat) => (
                 <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
@@ -856,6 +860,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     const upcomingAppointments = appointments.filter((entry) => ["inquiry", "confirmed"].includes(entry.status.toLowerCase())).length;
     const pendingAppointments = appointments.filter((entry) => entry.status.toLowerCase().includes("pending") || entry.status.toLowerCase() === "inquiry").length;
     const completedAppointments = appointments.filter((entry) => entry.status.toLowerCase().includes("complete")).length;
+    const sortedAppointments = [...appointments].sort((a, b) => new Date(b.preferred_datetime).getTime() - new Date(a.preferred_datetime).getTime());
 
     return (
       <div className="space-y-4">
@@ -864,7 +869,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           <div className="relative grid gap-4 xl:grid-cols-[1.1fr_1fr] xl:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
               <p className="mt-3 text-base text-text-muted">Upcoming and requested sessions connected to your account.</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -896,7 +901,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
         </section>
 
         <section className="space-y-3">
-          {appointments.map((appointment) => {
+          {sortedAppointments.map((appointment) => {
             const canModify = appointment.status === "inquiry" || appointment.status === "confirmed";
             const statusLower = appointment.status.toLowerCase();
             const statusTone = statusLower.includes("complete")
@@ -912,7 +917,10 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                     <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/25 bg-primary/14 text-primary"><CalendarDaysIcon className="size-8" /></span>
                     <div>
                       <p className="text-3xl font-semibold tracking-tight text-text">{appointment.service_interested_in}</p>
-                      <p className="mt-1 text-base text-text-muted">{formatDateTime(appointment.preferred_datetime)}</p>
+                      <div className="mt-1 flex flex-wrap items-center gap-4 text-base text-text-muted">
+                        <span className="inline-flex items-center gap-1"><CalendarDaysIcon className="size-4" />{formatShortDate(appointment.preferred_datetime)}</span>
+                        <span className="inline-flex items-center gap-1"><ClockIcon className="size-4" />{new Date(appointment.preferred_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                      </div>
                       <p className="text-sm text-text-muted">Type: Inquiry</p>
                     </div>
                   </div>
@@ -943,6 +951,23 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             <p className="text-sm text-text-muted">No appointments are linked to this account yet.</p>
           </Card>
         ) : null}
+
+        {sortedAppointments.length > 0 ? (
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
+            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-text-muted">
+              <p>Showing 1 to {sortedAppointments.length} of {sortedAppointments.length} appointments</p>
+              <div className="flex items-center gap-2">
+                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Previous</button>
+                <button type="button" className="h-9 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary">1</button>
+                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Next</button>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>Show</span>
+                <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-text">10 per page</button>
+              </div>
+            </div>
+          </Card>
+        ) : null}
       </div>
     );
   }
@@ -954,7 +979,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
           <div className="relative">
             <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
             <p className="mt-3 text-base text-text-muted">Send a product or service request and get help from our team.</p>
           </div>
         </section>
@@ -1000,6 +1025,14 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                   placeholder="Describe the issue, request, delivery or customization help you need..."
                 />
               </label>
+
+              <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-text-muted">
+                <button type="button" className="inline-flex items-center gap-2 text-text-muted hover:text-text">
+                  <PaperClipIcon className="size-4" />
+                  Add attachment (optional)
+                </button>
+                <span>0 / 5 files • Max 10MB each</span>
+              </div>
 
               {supportMessage ? (
                 <p className={supportStatus === "error" ? "text-sm text-destructive" : "text-sm text-text-muted"}>
@@ -1050,10 +1083,17 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
               <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Helpful resources</p>
               <div className="mt-4 space-y-2.5">
-                {["Knowledge base", "Video tutorials", "System status"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3.5 py-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary"><SparklesIcon className="size-5" /></span>
-                    <p className="flex-1 text-base text-text">{item}</p>
+                {[
+                  { title: "Knowledge base", hint: "Browse articles and guides", icon: <BookOpenIcon className="size-5" /> },
+                  { title: "Video tutorials", hint: "Step-by-step walkthroughs", icon: <PlayIcon className="size-5" /> },
+                  { title: "System status", hint: "Check our system health", icon: <ServerStackIcon className="size-5" /> },
+                ].map((item) => (
+                  <div key={item.title} className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3.5 py-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">{item.icon}</span>
+                    <div className="flex-1">
+                      <p className="text-base text-text">{item.title}</p>
+                      <p className="text-sm text-text-muted">{item.hint}</p>
+                    </div>
                     <ChevronRightIcon className="size-5 text-text-muted" />
                   </div>
                 ))}
