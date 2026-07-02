@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
     return successResponse({
       ...result.appointment,
       email_delivery: result.email_delivery,
-      status_url: `/api/v1/appointments/${result.appointment.id}`,
     });
   } catch (error) {
     return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to create appointment."));

@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { ApiError, errorResponse, successResponse } from "@/server/core/api";
+import { requireAdminUser } from "@/server/auth/guards";
 import { getAppointmentById } from "@/server/domain/appointments";
 
 export const dynamic = "force-dynamic";
@@ -10,6 +11,7 @@ type RouteContext = {
 
 export async function GET(_request: NextRequest, context: RouteContext) {
   try {
+    await requireAdminUser(_request);
     const { appointmentId } = await context.params;
     const appointment = await getAppointmentById(appointmentId);
     if (!appointment) {
