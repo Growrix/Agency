@@ -16,7 +16,7 @@ import { CartOrderSummary } from "@/components/checkout/CartOrderSummary";
 import { CheckoutOrderSummary } from "@/components/checkout/CheckoutOrderSummary";
 import { CheckoutRecommendations } from "@/components/checkout/CheckoutRecommendations";
 import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
-import { DiscountCodeField } from "@/components/checkout/DiscountCodeField";
+import { DiscountCodeField, type AppliedCoupon } from "@/components/checkout/DiscountCodeField";
 import { PaymentMethodTabs, type PaymentMethodId } from "@/components/checkout/PaymentMethodTabs";
 import { parsePriceStringToCents } from "@/components/checkout/checkout-utils";
 import { formatUsdFromCents, rehydrateCartStore, useCartStore } from "@/lib/cart-store";
@@ -56,15 +56,6 @@ async function fetchCheckoutViewer(): Promise<CheckoutViewer | null> {
   }
 }
 
-function computeDiscountCents(code: string | null, subtotalCents: number): number {
-  if (!code || subtotalCents <= 0) return 0;
-  const normalized = code.trim().toUpperCase();
-  if (normalized === "WELCOME10") {
-    return Math.round(subtotalCents * 0.1);
-  }
-  return 0;
-}
-
 export function CheckoutExperience({ product, status, orderId, selection }: CheckoutExperienceProps) {
   const searchParams = useSearchParams();
   const isCartMode = searchParams.get("cart") === "1";
@@ -86,7 +77,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   const [billing, setBilling] = useState<BillingAddressValues>(EMPTY_BILLING_ADDRESS);
 
   const [selectedUpsells, setSelectedUpsells] = useState<Set<string>>(() => new Set());
-  const [discountCode, setDiscountCode] = useState<string | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
   const [notes, setNotes] = useState("");
 
   const cartItems = useCartStore((state) => state.items);
@@ -154,7 +145,9 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     0,
   );
   const summarySubtotalCents = product ? productCents + upsellsCents : cartCents;
-  const discountCents = computeDiscountCents(discountCode, summarySubtotalCents);
+  const discountCents = appliedCoupon
+    ? Math.min(appliedCoupon.discount_cents, summarySubtotalCents)
+    : 0;
 
   const nameError =
     customerNameTouched && customerName.trim().length === 0
@@ -232,7 +225,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
           fulfillment_type: selection?.fulfillmentType,
           items: hasCartItems ? activeCartItems : undefined,
           payment_method_preference: paymentMethod,
-          discount_code: discountCode,
+          applied_coupon_code: appliedCoupon?.code ?? null,
           selected_upsells: Array.from(selectedUpsells),
           billing_address: billing,
           create_account_on_checkout: createAccountOnCheckout,
@@ -490,9 +483,11 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                 Your payment information is secure and encrypted
               </span>
               <DiscountCodeField
-                applied={discountCode}
-                onApply={(code) => setDiscountCode(code)}
-                onClear={() => setDiscountCode(null)}
+                applied={appliedCoupon}
+                onApply={(coupon) => setAppliedCoupon(coupon)}
+                onClear={() => setAppliedCoupon(null)}
+                subtotalCents={summarySubtotalCents}
+                userEmail={customerEmail || viewer?.email}
               />
             </div>
 
@@ -571,13 +566,13 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
             upsells={upsells}
             selectedUpsells={selectedUpsells}
             onToggleUpsell={toggleUpsell}
-            discountCode={discountCode}
+            discountCode={appliedCoupon?.code ?? null}
             discountCents={discountCents}
           />
         ) : (
           <CartOrderSummary
             items={activeCartItems}
-            discountCode={discountCode}
+            discountCode={appliedCoupon?.code ?? null}
             discountCents={discountCents}
           />
         )}

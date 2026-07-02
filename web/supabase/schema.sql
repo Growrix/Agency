@@ -399,6 +399,34 @@ create trigger cart_items_set_updated_at
 before update on public.cart_items
 for each row execute function public.set_updated_at();
 
+-- ---------------------------------------------------------------------
+-- Discount coupons — percent-only for launch (Phase E1a)
+-- ---------------------------------------------------------------------
+
+create table if not exists public.coupons (
+  id uuid primary key default gen_random_uuid(),
+  code text not null,
+  description text,
+  discount_type text not null check (discount_type in ('percent')),
+  discount_value integer not null check (discount_value > 0 and discount_value <= 100),
+  min_subtotal_cents integer,
+  max_uses integer,
+  times_used integer not null default 0,
+  per_user_limit integer,
+  expires_at timestamptz,
+  active boolean not null default true,
+  created_by_user_id uuid,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+create unique index if not exists coupons_code_uniq on public.coupons (upper(code));
+create index if not exists coupons_active_idx on public.coupons (active, expires_at);
+
+drop trigger if exists coupons_set_updated_at on public.coupons;
+create trigger coupons_set_updated_at
+before update on public.coupons
+for each row execute function public.set_updated_at();
+
 -- =====================================================================
 -- RLS policies for the normalized tables
 -- =====================================================================
@@ -424,7 +452,8 @@ begin
     'conversation_messages',
     'notification_log',
     'submission_notes',
-    'cart_items'
+    'cart_items',
+    'coupons'
   ] loop
     execute format('alter table public.%I enable row level security', tbl);
     execute format('revoke all on table public.%I from anon', tbl);

@@ -11,6 +11,7 @@ import type {
 } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { getPublicShopProduct } from "@/server/domain/catalog";
+import { applyCouponToOrder, validateCouponForCheckout } from "@/server/domain/coupons";
 import { syncOrderEntitlements } from "@/server/domain/downloads";
 import {
   safeSendDownloadReadyEmail,
@@ -41,6 +42,7 @@ type CreateOrderInput = {
   customer_phone?: string;
   user_id?: string;
   notes?: string;
+  applied_coupon_code?: string;
   requestId?: string;
   ip?: string;
 };
@@ -203,6 +205,31 @@ export async function createOrder(input: CreateOrderInput) {
   const primaryOrderItem = orderItems[0];
   const subtotalCents = orderItems.reduce((sum, item) => sum + item.total_cents, 0);
 
+  // Coupon: re-validate server-side using the trusted subtotal. Client-side
+  // validation is convenience; only this server pass decides the final discount.
+  let appliedCouponCode: string | undefined;
+  let appliedDiscountCents = 0;
+  const rawCouponCode = input.applied_coupon_code?.trim();
+  if (rawCouponCode) {
+    const validation = await validateCouponForCheckout({
+      code: rawCouponCode,
+      subtotal_cents: subtotalCents,
+      user_email: input.customer_email,
+    });
+    if (validation.valid) {
+      appliedCouponCode = validation.coupon.code;
+      appliedDiscountCents = Math.min(validation.discount_cents, subtotalCents);
+    } else {
+      throw new ApiError(
+        "FIELD_VALIDATION_FAILED",
+        400,
+        validation.message ?? "This discount code cannot be applied to your order.",
+      );
+    }
+  }
+
+  const totalCents = Math.max(0, subtotalCents - appliedDiscountCents);
+
   const now = new Date().toISOString();
   const order: OrderRecord = {
     id: crypto.randomUUID(),
@@ -215,8 +242,8 @@ export async function createOrder(input: CreateOrderInput) {
     fulfillment_status: "pending",
     subtotal_cents: subtotalCents,
     tax_cents: 0,
-    discount_cents: 0,
-    total_cents: subtotalCents,
+    discount_cents: appliedDiscountCents,
+    total_cents: totalCents,
     currency: "USD",
     items: orderItems,
     selected_variant_slug: primaryOrderItem?.product_variant_slug,
@@ -224,6 +251,8 @@ export async function createOrder(input: CreateOrderInput) {
     selected_fulfillment_type: primaryOrderItem?.fulfillment_type,
     delivery_urls: [],
     notes: input.notes?.trim() || undefined,
+    applied_coupon_code: appliedCouponCode,
+    applied_discount_cents: appliedCouponCode ? appliedDiscountCents : undefined,
     created_at: now,
   };
 
@@ -231,6 +260,28 @@ export async function createOrder(input: CreateOrderInput) {
     ...next,
     orders: [order, ...next.orders],
   }));
+
+  // Increment coupon usage AFTER the order write so we never double-count on
+  // a failed order write. Best-effort — a failure here logs but doesn't roll
+  // back the order (the discount already applied).
+  if (appliedCouponCode) {
+    try {
+      await applyCouponToOrder(appliedCouponCode, order.id, input.customer_email);
+    } catch (couponError) {
+      await recordAuditLog({
+        level: "error",
+        action: "checkout.coupon_apply_failed",
+        request_id: input.requestId,
+        ip: input.ip,
+        actor_email: input.customer_email,
+        metadata: {
+          order_id: order.id,
+          coupon_code: appliedCouponCode,
+          message: couponError instanceof Error ? couponError.message : "unknown_error",
+        },
+      });
+    }
+  }
 
   const runtime = getRuntimeConfig();
   const stripe = createStripeClient();
@@ -282,12 +333,48 @@ export async function createOrder(input: CreateOrderInput) {
       checkoutMetadata.fulfillmentType = order.selected_fulfillment_type;
     }
 
+    if (appliedCouponCode) {
+      checkoutMetadata.appliedCouponCode = appliedCouponCode;
+      checkoutMetadata.appliedDiscountCents = String(appliedDiscountCents);
+    }
+
+    let stripeDiscounts: Array<{ coupon: string }> | undefined;
+    if (appliedCouponCode && appliedDiscountCents > 0) {
+      try {
+        const stripeCoupon = await stripe.coupons.create({
+          amount_off: appliedDiscountCents,
+          currency: "usd",
+          duration: "once",
+          name: `Discount ${appliedCouponCode}`,
+          metadata: {
+            growrix_coupon_code: appliedCouponCode,
+            growrix_order_id: order.id,
+          },
+        });
+        stripeDiscounts = [{ coupon: stripeCoupon.id }];
+      } catch (couponError) {
+        await recordAuditLog({
+          level: "warning",
+          action: "checkout.stripe_coupon_create_failed",
+          request_id: input.requestId,
+          ip: input.ip,
+          actor_email: input.customer_email,
+          metadata: {
+            order_id: order.id,
+            coupon_code: appliedCouponCode,
+            message: couponError instanceof Error ? couponError.message : "unknown_error",
+          },
+        });
+      }
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       success_url: successUrl.toString(),
       cancel_url: cancelUrl.toString(),
       customer_email: order.customer_email,
       metadata: checkoutMetadata,
+      ...(stripeDiscounts ? { discounts: stripeDiscounts } : {}),
       line_items: resolvedItems.map(({ product, orderItem }) => {
         const lineItemName = orderItem.product_tier_name
           ? `${product.name} - ${orderItem.product_tier_name}`

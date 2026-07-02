@@ -43,6 +43,10 @@ export async function POST(request: NextRequest) {
       customer_phone: typeof body.customer_phone === "string" ? body.customer_phone : undefined,
       user_id: authenticatedUser?.id,
       notes: typeof body.notes === "string" ? body.notes : undefined,
+      applied_coupon_code:
+        typeof body.applied_coupon_code === "string" && body.applied_coupon_code.trim()
+          ? body.applied_coupon_code
+          : undefined,
       requestId: context.requestId,
       ip: context.ip,
     });

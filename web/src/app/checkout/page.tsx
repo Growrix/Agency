@@ -20,6 +20,7 @@ type CheckoutPageProps = {
     variant?: string | string[];
     tier?: string | string[];
     fulfillment?: string | string[];
+    cart?: string | string[];
   }>;
 };
 
@@ -33,6 +34,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   const product = productSlug ? await getPublicShopProduct(productSlug).catch(() => null) : undefined;
   const status = firstString(resolved?.status);
   const orderId = firstString(resolved?.order);
+  const isCartMode = firstString(resolved?.cart) === "1";
 
   const selection: CheckoutSelection = {
     variantSlug: firstString(resolved?.variant),
@@ -63,6 +65,10 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
               <>
                 Checkout for <span className="text-primary">{product.name}</span>
               </>
+            ) : isCartMode ? (
+              <>
+                Checkout <span className="text-primary">your cart</span>
+              </>
             ) : (
               "Secure checkout requires a selected product."
             )}
@@ -70,7 +76,9 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           <p className="mt-3 text-sm leading-6 text-text-muted sm:text-base">
             {product
               ? "You're minutes away from launching a professional website. Complete your purchase and get instant access."
-              : "Choose a product from the catalog to create an order and continue into checkout."}
+              : isCartMode
+                ? "Review your cart, apply a discount code, and continue to secure payment."
+                : "Pick a product from the catalog to create an order and continue into checkout."}
           </p>
         </header>
 

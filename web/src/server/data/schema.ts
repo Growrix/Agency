@@ -155,9 +155,32 @@ export type OrderRecord = {
   items: OrderItemRecord[];
   delivery_urls: string[];
   notes?: string;
+  applied_coupon_code?: string;
+  applied_discount_cents?: number;
+  invoice_url?: string;
   created_at: string;
   completed_at?: string;
   refunded_at?: string;
+};
+
+export type CouponDiscountType = "percent";
+
+export type CouponRecord = {
+  id: string;
+  code: string;
+  description?: string;
+  discount_type: CouponDiscountType;
+  /** Percent 1..100 when discount_type is "percent". */
+  discount_value: number;
+  min_subtotal_cents?: number;
+  max_uses?: number;
+  times_used: number;
+  per_user_limit?: number;
+  expires_at?: string;
+  active: boolean;
+  created_by_user_id?: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export type UserRecord = {
@@ -495,6 +518,7 @@ export type DatabaseSchema = {
   submission_notes: SubmissionNoteRecord[];
   customer_notifications: CustomerNotificationRecord[];
   cart_items: CartItemRecord[];
+  coupons: CouponRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -518,4 +542,5 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   submission_notes: [],
   customer_notifications: [],
   cart_items: [],
+  coupons: [],
 };

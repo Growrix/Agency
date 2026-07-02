@@ -17,6 +17,7 @@ import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCa
 import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
 import { CheckoutUpsellsCard } from "@/components/checkout/CheckoutUpsellsCard";
+import { DiscountCodeField, type AppliedCoupon } from "@/components/checkout/DiscountCodeField";
 import {
   formatUsdFromCents,
   rehydrateCartStore,
@@ -42,7 +43,13 @@ export function CartPage() {
 
   const [upsells, setUpsells] = useState<ProductUpsellRecord[]>([]);
   const [selectedUpsells, setSelectedUpsells] = useState<Set<string>>(() => new Set());
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
   const primaryProductSlug = items[0]?.product_slug;
+
+  const discountCents = appliedCoupon
+    ? Math.min(appliedCoupon.discount_cents, totalCents)
+    : 0;
+  const estimatedTotalCents = Math.max(0, totalCents - discountCents);
 
   useEffect(() => {
     void rehydrateCartStore().finally(() => setHydrated(true));
@@ -294,17 +301,42 @@ export function CartPage() {
                     <dt className="text-text-muted">Subtotal</dt>
                     <dd className="tabular-nums">{formatUsdFromCents(totalCents)}</dd>
                   </div>
+                  {discountCents > 0 && appliedCoupon ? (
+                    <div className="flex items-center justify-between">
+                      <dt className="flex items-center gap-2 text-text-muted">
+                        Discount
+                        <span className="rounded-full bg-inset/40 px-2 py-0.5 text-[10px] font-mono text-text">
+                          {appliedCoupon.code}
+                        </span>
+                      </dt>
+                      <dd className="tabular-nums text-success">
+                        -{formatUsdFromCents(discountCents)}
+                      </dd>
+                    </div>
+                  ) : null}
                   <div className="flex items-center justify-between text-xs text-text-muted">
                     <dt>Tax</dt>
                     <dd>Calculated at checkout</dd>
                   </div>
                 </dl>
+
+                {hydrated && items.length > 0 ? (
+                  <div className="mt-4 border-t border-border/50 pt-3">
+                    <DiscountCodeField
+                      applied={appliedCoupon}
+                      onApply={(coupon) => setAppliedCoupon(coupon)}
+                      onClear={() => setAppliedCoupon(null)}
+                      subtotalCents={totalCents}
+                    />
+                  </div>
+                ) : null}
+
                 <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
                   <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                     Estimated total
                   </p>
                   <span className="font-display text-2xl tracking-tight">
-                    {formatUsdFromCents(totalCents)}
+                    {formatUsdFromCents(estimatedTotalCents)}
                   </span>
                 </div>
                 <div className="mt-6 space-y-2">

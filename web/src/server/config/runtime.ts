@@ -45,6 +45,7 @@ type RuntimeConfig = {
     bookingLimitPerMinute: number;
     authLimitPerMinute: number;
     leadEventLimitPerMinute: number;
+    couponValidateLimitPerMinute: number;
   };
   notifications: {
     larkWebhookUrl?: string;
@@ -186,6 +187,7 @@ export function getRuntimeConfig(): RuntimeConfig {
       bookingLimitPerMinute: parseNumber(process.env.RATE_LIMIT_BOOKING_PER_MINUTE, 6),
       authLimitPerMinute: parseNumber(process.env.RATE_LIMIT_AUTH_PER_MINUTE, 10),
       leadEventLimitPerMinute: parseNumber(process.env.RATE_LIMIT_LEAD_EVENT_PER_MINUTE, 60),
+      couponValidateLimitPerMinute: parseNumber(process.env.RATE_LIMIT_COUPON_VALIDATE_PER_MINUTE, 20),
     },
   };
 
