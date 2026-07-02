@@ -516,6 +516,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
   function renderProducts() {
     const productKinds = ["All Products", "Website Templates", "Business Profiles", "Landing Pages", "Themes", "Mobile Apps", "Tools"];
+    const sortedProducts = [...purchasedProducts].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
       <div className="space-y-4">
@@ -524,7 +525,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           <div className="relative">
             <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
             <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">
-              Welcome back, <span className="text-primary">{fullName}</span>
+              Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span>
             </h2>
             <p className="mt-3 text-base text-text-muted">Everything you have unlocked, including licenses and fulfillment status.</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -558,11 +559,19 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
           <div className="flex items-center gap-2">
             <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort by: Latest</button>
+            <button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-primary/30 bg-primary/12 text-primary" aria-label="Grid view">
+              <span className="grid grid-cols-2 gap-0.5">
+                <span className="h-1.5 w-1.5 rounded-xs bg-current" />
+                <span className="h-1.5 w-1.5 rounded-xs bg-current" />
+                <span className="h-1.5 w-1.5 rounded-xs bg-current" />
+                <span className="h-1.5 w-1.5 rounded-xs bg-current" />
+              </span>
+            </button>
           </div>
         </section>
 
         <section className="grid gap-4 xl:grid-cols-3">
-          {purchasedProducts.map((product) => {
+          {sortedProducts.map((product) => {
             const state = product.fulfillment_status.toLowerCase();
             const stateTone = state.includes("delivered") || state.includes("complete")
               ? "border-primary/35 bg-primary/12 text-primary"
@@ -571,17 +580,18 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             return (
               <Card key={product.slug} className="dashboard-panel-surface rounded-sm border-border/65 p-3" hoverable={false}>
                 <div className="grid gap-3 sm:grid-cols-[9rem_1fr]">
-                  <div className="flex h-44 items-end rounded-sm border border-border/60 bg-linear-to-br from-primary/18 to-surface p-3">
-                    <p className="text-sm font-semibold text-text">{product.name.slice(0, 22)}</p>
+                  <div className="flex h-52 items-end rounded-sm border border-border/60 bg-linear-to-br from-primary/18 to-surface p-3">
+                    <p className="text-base font-semibold text-text">{product.name.slice(0, 22)}</p>
                   </div>
                   <div>
                     <p className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${stateTone}`}>
                       {state.includes("delivered") || state.includes("complete") ? "Completed" : "In progress"}
                     </p>
-                    <h3 className="mt-3 font-display text-3xl leading-tight tracking-tight">{product.name}</h3>
-                    <p className="mt-2 text-sm text-text-muted">{product.slug.replaceAll("-", " ")}</p>
-                    <p className="mt-2 text-sm text-text-muted">Order ID</p>
-                    <p className="text-base text-text">{product.order_number}</p>
+                    <h3 className="mt-3 font-display text-4xl leading-tight tracking-tight">{product.name}</h3>
+                    <p className="mt-1 text-2xl text-text-muted">{product.slug.replaceAll("-", " ")}</p>
+                    <p className="mt-2 text-base text-text-muted">Order ID</p>
+                    <p className="text-2xl text-text">{product.order_number}</p>
+                    <p className="mt-1 text-base text-text-muted">Purchased on {orders.find((order) => order.order_number === product.order_number)?.created_at ? formatShortDate(orders.find((order) => order.order_number === product.order_number)?.created_at) : "Not available"}</p>
                     {product.selected_tier_name ? <p className="mt-2 text-sm text-text-muted">Tier: {product.selected_tier_name}</p> : null}
                     <LinkButton href="/dashboard/orders" variant="outline" size="sm" fullWidth className="mt-4 justify-between">
                       View Details
@@ -594,9 +604,22 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           })}
         </section>
 
-        {purchasedProducts.length === 0 ? (
+        {sortedProducts.length === 0 ? (
           <Card className="dashboard-panel-surface rounded-sm border-border/65 text-center" hoverable={false}>
             <p className="text-sm text-text-muted">Your purchased products will appear here after your first order.</p>
+          </Card>
+        ) : null}
+
+        {sortedProducts.length > 0 ? (
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
+            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-text-muted">
+              <p>Showing 1 to {sortedProducts.length} of {sortedProducts.length} products</p>
+              <div className="flex items-center gap-2">
+                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Previous</button>
+                <button type="button" className="h-9 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary">1</button>
+                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Next</button>
+              </div>
+            </div>
           </Card>
         ) : null}
       </div>
