@@ -739,6 +739,12 @@ function normalizeService(item: SanityServicePage): ManagedServiceRecord | null 
 }
 
 const SANITY_FETCH_TIMEOUT_MS = 10_000;
+const SANITY_MAX_ATTEMPTS = 3;
+const SANITY_INITIAL_BACKOFF_MS = 250;
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 async function fetchCatalogEntries<T>(query: string, options: SanityQueryOptions) {
   if (!isSanityConfigured()) {
@@ -746,23 +752,40 @@ async function fetchCatalogEntries<T>(query: string, options: SanityQueryOptions
   }
 
   const client = getSanityClient({ preview: options.preview });
-  try {
-    return await Promise.race<T[]>([
-      client.fetch<T[]>(query, { preview: options.preview === true }),
-      new Promise<T[]>((_, reject) =>
-        setTimeout(
-          () => reject(new Error("sanity_fetch_timeout")),
-          SANITY_FETCH_TIMEOUT_MS,
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= SANITY_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const result = await Promise.race<T[]>([
+        client.fetch<T[]>(query, { preview: options.preview === true }),
+        new Promise<T[]>((_, reject) =>
+          setTimeout(
+            () => reject(new Error("sanity_fetch_timeout")),
+            SANITY_FETCH_TIMEOUT_MS,
+          ),
         ),
-      ),
-    ]);
-  } catch (error) {
-    if (process.env.NODE_ENV !== "test") {
-      const reason = error instanceof Error ? error.message : String(error);
-      console.warn(`[sanity] catalog fetch failed: ${reason}`);
+      ]);
+      return result;
+    } catch (error) {
+      lastError = error;
+      if (attempt < SANITY_MAX_ATTEMPTS) {
+        const backoffMs = SANITY_INITIAL_BACKOFF_MS * 2 ** (attempt - 1);
+        if (process.env.NODE_ENV !== "test") {
+          const reason = error instanceof Error ? error.message : String(error);
+          console.warn(
+            `[sanity] catalog fetch attempt ${attempt}/${SANITY_MAX_ATTEMPTS} failed (${reason}); retrying in ${backoffMs}ms`,
+          );
+        }
+        await sleep(backoffMs);
+      }
     }
-    return [] as T[];
   }
+
+  if (process.env.NODE_ENV !== "test") {
+    const reason = lastError instanceof Error ? lastError.message : String(lastError);
+    console.warn(`[sanity] catalog fetch failed after ${SANITY_MAX_ATTEMPTS} attempts: ${reason}`);
+  }
+  return [] as T[];
 }
 
 export async function listSanityCaseStudies(options: SanityQueryOptions = {}): Promise<ManagedPortfolioRecord[]> {

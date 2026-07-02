@@ -509,10 +509,12 @@ export async function markOrderPaid(
   orderId: string,
   paymentIntentId?: string,
   selection?: StripeCheckoutSelection,
+  receiptUrl?: string,
 ): Promise<OrderRecord | null> {
   const selectedVariantSlug = normalizeVariantSlug(selection?.variantSlug);
   const selectedTierName = normalizeSelectionValue(selection?.tierName);
   const selectedFulfillmentType = normalizeVariantSlug(selection?.fulfillmentType);
+  const normalizedReceiptUrl = receiptUrl?.trim() || undefined;
 
   let updatedOrder: OrderRecord | null = null;
   await writeDatabase((next) => ({
@@ -539,6 +541,7 @@ export async function markOrderPaid(
         payment_status: "succeeded",
         fulfillment_status: nextFulfillment,
         stripe_payment_intent_id: paymentIntentId ?? order.stripe_payment_intent_id,
+        invoice_url: normalizedReceiptUrl ?? order.invoice_url,
         selected_variant_slug: nextVariantSlug,
         selected_tier_name: nextTierName,
         selected_fulfillment_type: nextFulfillmentType,
@@ -729,6 +732,126 @@ export async function updateOrderOperations(
   return updatedOrder;
 }
 
+export async function refundOrder(
+  orderId: string,
+  actorEmail?: string,
+): Promise<{ order: OrderRecord; refundId: string }> {
+  const existing = await getOrderById(orderId);
+  if (!existing) {
+    throw new ApiError("NOT_FOUND", 404, "Order not found.");
+  }
+  if (existing.payment_status !== "succeeded") {
+    throw new ApiError(
+      "CONFLICT",
+      409,
+      `Only succeeded orders can be refunded (current: ${existing.payment_status}).`,
+    );
+  }
+  if (existing.refunded_at) {
+    throw new ApiError("CONFLICT", 409, "Order has already been refunded.");
+  }
+  if (!existing.stripe_payment_intent_id) {
+    throw new ApiError(
+      "CONFLICT",
+      409,
+      "Order has no Stripe payment intent to refund against.",
+    );
+  }
+
+  const stripe = createStripeClient();
+  if (!stripe) {
+    throw new ApiError(
+      "SERVICE_UNAVAILABLE",
+      503,
+      "Stripe is not configured on this environment.",
+    );
+  }
+
+  const refund = await stripe.refunds.create({
+    payment_intent: existing.stripe_payment_intent_id,
+    metadata: {
+      growrix_order_id: existing.id,
+      growrix_order_number: existing.order_number,
+    },
+  });
+
+  const now = new Date().toISOString();
+  let refunded: OrderRecord | null = null;
+  await writeDatabase((next) => ({
+    ...next,
+    orders: next.orders.map((order) => {
+      if (order.id !== orderId) return order;
+      refunded = {
+        ...order,
+        payment_status: "refunded",
+        refunded_at: now,
+      };
+      return refunded;
+    }),
+  }));
+
+  if (!refunded) {
+    throw new ApiError("INTERNAL_ERROR", 500, "Failed to persist refund state.");
+  }
+
+  const refundedOrder: OrderRecord = refunded;
+
+  await recordAuditLog({
+    level: "warning",
+    action: "admin.order_refunded",
+    actor_email: actorEmail,
+    metadata: {
+      order_id: refundedOrder.id,
+      order_number: refundedOrder.order_number,
+      stripe_refund_id: refund.id,
+      stripe_payment_intent_id: refundedOrder.stripe_payment_intent_id,
+      total_cents: refundedOrder.total_cents,
+    },
+  });
+
+  // Customer notification + email fan-out (best-effort).
+  try {
+    await createCustomerNotification({
+      userEmail: refundedOrder.customer_email,
+      kind: "order_completed",
+      title: `Refund issued for ${refundedOrder.order_number}`,
+      body: `Your refund has been submitted to Stripe. It typically settles on the original payment method within 5-10 business days.`,
+      href: `/dashboard/orders/${refundedOrder.id}`,
+      relatedOrderId: refundedOrder.id,
+    });
+  } catch (notifyError) {
+    // Non-fatal — audit already emitted.
+    await recordAuditLog({
+      level: "warning",
+      action: "admin.order_refund_notify_failed",
+      actor_email: actorEmail,
+      metadata: {
+        order_id: refundedOrder.id,
+        message: notifyError instanceof Error ? notifyError.message : "unknown_error",
+      },
+    });
+  }
+
+  try {
+    await notifyTeam({
+      kind: "purchase_completed",
+      subject: `Refund issued: order ${refundedOrder.order_number}`,
+      html: `<p>Order <strong>${refundedOrder.order_number}</strong> (${refundedOrder.customer_email}) was refunded via admin action.</p><p>Stripe refund id: <code>${refund.id}</code></p>`,
+      payload: {
+        order_id: refundedOrder.id,
+        order_number: refundedOrder.order_number,
+        stripe_refund_id: refund.id,
+        customer_email: refundedOrder.customer_email,
+      },
+      relatedOrderId: refundedOrder.id,
+    });
+  } catch {
+    // Non-fatal — audit already captures it.
+  }
+
+  return { order: refundedOrder, refundId: refund.id };
+}
+
 export async function markOrderFailed(orderId: string): Promise<OrderRecord | null> {
   let updatedOrder: OrderRecord | null = null;
   await writeDatabase((next) => ({
@@ -773,14 +896,47 @@ export async function handleStripeWebhook(payload: string, signature: string | n
       : undefined;
 
     if (orderId) {
+      const paymentIntentId =
+        typeof session.payment_intent === "string" ? session.payment_intent : undefined;
+
+      // Fetch the receipt URL from the payment intent's latest charge so we can
+      // persist it as orders.invoice_url and surface it in the customer dashboard.
+      let receiptUrl: string | undefined;
+      if (paymentIntentId) {
+        try {
+          const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId, {
+            expand: ["latest_charge"],
+          });
+          const latestCharge =
+            typeof paymentIntent.latest_charge === "object" && paymentIntent.latest_charge !== null
+              ? (paymentIntent.latest_charge as Stripe.Charge)
+              : null;
+          if (latestCharge?.receipt_url) {
+            receiptUrl = latestCharge.receipt_url;
+          }
+        } catch (retrieveError) {
+          await recordAuditLog({
+            level: "warning",
+            action: "order.receipt_url_lookup_failed",
+            metadata: {
+              order_id: orderId,
+              payment_intent_id: paymentIntentId,
+              message:
+                retrieveError instanceof Error ? retrieveError.message : "unknown_error",
+            },
+          });
+        }
+      }
+
       const order = await markOrderPaid(
         orderId,
-        typeof session.payment_intent === "string" ? session.payment_intent : undefined,
+        paymentIntentId,
         {
           variantSlug,
           tierName,
           fulfillmentType,
         },
+        receiptUrl,
       );
       await recordAuditLog({
         level: "info",
@@ -792,6 +948,7 @@ export async function handleStripeWebhook(payload: string, signature: string | n
           tier_name: order?.selected_tier_name ?? null,
           fulfillment_type: order?.selected_fulfillment_type ?? null,
           delivery_urls: order?.delivery_urls ?? [],
+          invoice_url: order?.invoice_url ?? null,
         },
       });
     }

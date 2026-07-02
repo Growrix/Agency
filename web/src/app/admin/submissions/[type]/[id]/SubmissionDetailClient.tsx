@@ -216,6 +216,43 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
     }
   }
 
+  async function handleOrderRefund() {
+    if (!detail || detail.type !== "order") return;
+    const orderId = (detail.record.id as string) ?? id;
+    const orderNumber = (detail.record.order_number as string) ?? orderId;
+    if (
+      !window.confirm(
+        `Issue refund for order ${orderNumber}? This calls Stripe's refunds API and cannot be undone.`,
+      )
+    ) {
+      return;
+    }
+    setActionState("submitting");
+    setFeedback(null);
+    try {
+      const response = await fetch(`/api/v1/admin/orders/${orderId}/refund`, {
+        method: "POST",
+        credentials: "same-origin",
+      });
+      const payload = (await response.json().catch(() => null)) as {
+        data?: { stripe_refund_id?: string };
+        error?: { message?: string };
+      } | null;
+      if (!response.ok) {
+        setFeedback(payload?.error?.message ?? "Refund failed.");
+        return;
+      }
+      setFeedback(
+        payload?.data?.stripe_refund_id
+          ? `Refund issued (${payload.data.stripe_refund_id}).`
+          : "Refund issued.",
+      );
+      await fetchDetail();
+    } finally {
+      setActionState("idle");
+    }
+  }
+
   const statusOptions = getStatusOptions(type);
 
   return (
@@ -381,7 +418,24 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
                     />
                   </label>
 
-                  <div className="flex justify-end">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    {orderPaymentStatus === "succeeded" && !(detail.record.refunded_at as string | undefined) ? (
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="destructive"
+                        disabled={actionState === "submitting"}
+                        onClick={() => void handleOrderRefund()}
+                      >
+                        Issue refund
+                      </Button>
+                    ) : (detail.record.refunded_at as string | undefined) ? (
+                      <p className="text-xs text-text-muted">
+                        Refunded on {formatDateTime((detail.record.refunded_at as string) ?? "")}
+                      </p>
+                    ) : (
+                      <span />
+                    )}
                     <Button
                       type="button"
                       size="sm"

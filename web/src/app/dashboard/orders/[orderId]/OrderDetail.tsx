@@ -33,6 +33,9 @@ type OrderRecord = {
   items: OrderItem[];
   delivery_urls?: string[];
   notes?: string;
+  applied_coupon_code?: string;
+  applied_discount_cents?: number;
+  invoice_url?: string;
   created_at: string;
   completed_at?: string;
   refunded_at?: string;
@@ -260,6 +263,38 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                       </li>
                     ))}
                   </ul>
+                </Card>
+              ) : null}
+
+              {order.invoice_url ? (
+                <Card>
+                  <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Receipt</p>
+                  <p className="mt-2 text-sm text-text-muted">
+                    Your itemized payment receipt is hosted by Stripe. Download or print it any
+                    time for accounting.
+                  </p>
+                  <a
+                    href={order.invoice_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                  >
+                    View / download receipt →
+                  </a>
+                </Card>
+              ) : null}
+
+              {order.applied_coupon_code ? (
+                <Card>
+                  <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Discount applied</p>
+                  <p className="mt-2 text-sm">
+                    <span className="font-mono">{order.applied_coupon_code}</span>
+                    {typeof order.applied_discount_cents === "number" && order.applied_discount_cents > 0 ? (
+                      <span className="ml-2 text-success">
+                        -${(order.applied_discount_cents / 100).toFixed(2)}
+                      </span>
+                    ) : null}
+                  </p>
                 </Card>
               ) : null}
 

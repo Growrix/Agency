@@ -23,6 +23,7 @@ const STATIC_ROUTES = [
   "/html-business-profiles",
   "/privacy-policy",
   "/terms-of-service",
+  "/refund-policy",
 ] as const;
 
 const PRODUCT_CATEGORY_SLUGS = [

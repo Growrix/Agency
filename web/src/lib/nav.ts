@@ -64,6 +64,7 @@ export const FOOTER_NAV = {
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Refund Policy", href: "/refund-policy" },
   ],
 };
 
@@ -80,4 +81,5 @@ export const MOBILE_NAV_SUPPORT_LINKS = [
 export const MOBILE_NAV_LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Service", href: "/terms-of-service" },
+  { label: "Refund Policy", href: "/refund-policy" },
 ] as const;
