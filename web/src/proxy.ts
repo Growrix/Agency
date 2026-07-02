@@ -2,7 +2,7 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { isClerkConfigured } from "@/server/auth/clerk-config";
-import { getUserByClerkId } from "@/server/auth/clerk-sync";
+import { getUserByClerkId, syncClerkUser } from "@/server/auth/clerk-sync";
 import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/auth/token";
 
 const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
@@ -27,6 +27,10 @@ function isProtectedPath(pathname: string) {
   }
 
   return protectedPrefixes.some((prefix) => pathname.startsWith(prefix));
+}
+
+function isAdminPath(pathname: string) {
+  return pathname === "/admin" || pathname.startsWith("/admin/") || pathname.startsWith("/api/v1/admin");
 }
 
 function rejectLegacy(request: NextRequest) {
@@ -54,6 +58,26 @@ function rejectLegacy(request: NextRequest) {
   return NextResponse.redirect(url);
 }
 
+function rejectForbidden(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/api/")) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "FORBIDDEN",
+          message: "Admin access is required.",
+          details: null,
+        },
+        timestamp: new Date().toISOString(),
+        request_id: crypto.randomUUID(),
+      },
+      { status: 403 }
+    );
+  }
+
+  return NextResponse.redirect(new URL("/dashboard", request.url));
+}
+
 async function legacyProxy(request: NextRequest) {
   const rewrite = businessProfileRewrite(request);
   if (rewrite) {
@@ -70,7 +94,10 @@ async function legacyProxy(request: NextRequest) {
   }
 
   try {
-    await verifySessionToken(token);
+    const payload = await verifySessionToken(token);
+    if (isAdminPath(request.nextUrl.pathname) && payload.role !== "admin") {
+      return rejectForbidden(request);
+    }
     return NextResponse.next();
   } catch {
     return rejectLegacy(request);
@@ -115,6 +142,14 @@ const clerkProxy = clerkMiddleware(async (auth, request) => {
   }
 
   const { userId } = await auth();
+  if (userId && isAdminPath(request.nextUrl.pathname)) {
+    const record = (await getUserByClerkId(userId).catch(() => null)) ?? (await syncClerkUser(userId).catch(() => null));
+
+    if (record?.role !== "admin") {
+      return rejectForbidden(request);
+    }
+  }
+
   if (userId && shouldEnforceCompletion(request.nextUrl.pathname)) {
     const record = await getUserByClerkId(userId).catch(() => null);
     const isCompleted = Boolean(record?.signup_completed_at);

@@ -43,10 +43,11 @@ phase_sequence:
   - P9-product-led-platform-gap-implementation
   - P10-content-composition-alignment
   - P11-auth-clerk-migration
-next_recommended_phase: P11-auth-clerk-migration
+  - P20-customer-dashboard-experience
+next_recommended_phase: P20-customer-dashboard-experience
 next_recommended_tasks:
-  - T063
-  - T064
+  - T118
+  - T119
 phase_status_counts:
   done: 4
   partial: 8
@@ -77,6 +78,7 @@ task_status_counts:
   - category and type remain discovery filters via query params (for example `/digital-products?category=saas-templates`)
   - reserved product slug segments (`free`, `bundles`, `category`) are blocked to prevent route collisions
 - Active tracked sessions:
+  - hardened admin surface authorization by enforcing admin-role checks in both the Next.js proxy and the `/admin` layout, closing the gap where the dashboard shell could render without a server-side admin gate and ensuring signed-out requests now redirect to sign-in before any admin UI loads
   - renamed public product-led surfaces from `/products` to `/digital-products` (route folder, nav/footer/mobile labels, CTAs, sitemap, AI knowledge, revalidation map), added permanent `/products/*` redirects, and aligned mobile bottom nav with scroll-up-only visibility matching the header chrome
   - fixed failing admin sign-in with `.env.local` credentials by hardening `authenticateUser` in `web/src/server/auth/users.ts`: when Supabase Auth is configured but `signInWithPassword` fails (stale/mismatched Supabase admin password), the flow now safely falls back to the configured environment admin credentials (`ADMIN_EMAIL` + `ADMIN_PASSWORD`) and synchronizes a local admin user record, restoring deterministic local admin login without weakening role checks
   - implementing Product Publishing & Shop Management alignment by codifying a hybrid catalog publishing contract in `web/src/server/domain/catalog.ts` (explicit fallback seed sets + legacy placeholder filtering), aligning HTML profile pricing/variants to planned Standard (`$19`) + Premium (`$49`) + Done-For-You (`$299-$799`) in fallback and Sanity-normalized paths, introducing curated HTML Email Template packs with Standard (`$15`) + Premium (`$39`) + Done-For-You (`$199-$499`) tiers, and syncing shop/admin/import taxonomy defaults to `HTML Templates` + `Email Templates` before final validation
@@ -552,3 +554,11 @@ Remaining parallel tracks:
 - [ ] T115 Extend `notifications.ts` — `order_placed`, `invoice_sent`, `invoice_paid` event types.
 - [ ] T116 Wire `order_placed` into `createOrder()`. Wire `invoice_sent` into `sendInvoiceEmail()`. Wire `invoice_paid` into `markInvoicePaid()`.
 - [ ] T117 Add admin new-order notification email (Resend to `CONTACT_TO_EMAIL`). Verify Lark fires for new event types.
+
+### Phase P20 — Customer Dashboard Experience Planning
+- [x] T118 Create canonical customer dashboard planning artifact at `DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md` plus downstream role docs in Frontend, Backend, API and Data, Admin Dashboard, and Security.
+- [x] T119 Audit existing `/dashboard/**` implementation and identify incomplete UX/backend flows: missing public chrome integration, dead-end profile settings, fake notifications, thin order/download/appointment detail flows, and submit-only support history.
+- [ ] T120 Shared-contract alignment for customer dashboard routes, role boundaries, modal taxonomy, and page-to-flow matrix.
+- [ ] T121 Frontend implementation plan execution for public header/footer integration, modal-first settings/detail flows, and route fallbacks across `/dashboard/**`.
+- [ ] T122 Backend + API/data implementation plan execution for profile/preferences, notification feed, support-thread history, appointment action flows, and detail endpoints.
+- [ ] T123 Security/QA implementation planning and release-gate definition for customer dashboard ownership, privacy, and authenticated end-to-end flows.
