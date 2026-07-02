@@ -1,6 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState, type FormEvent } from "react";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChatBubbleLeftRightIcon,
+  ClipboardDocumentListIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 
@@ -102,87 +109,124 @@ export function MySubmissionDetailClient({ type, id }: { type: string; id: strin
     }
   }
 
+  const typeDisplay = type.replace(/_/g, " ");
+
   return (
-    <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">{type}</p>
-          <h1 className="mt-1 font-display text-2xl tracking-tight">Submission detail</h1>
+    <div className="space-y-4 p-4 sm:p-5 lg:p-6">
+
+      {/* Hero */}
+      <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
+        <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
+        <div className="relative flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.18em] text-primary">Submissions</p>
+            <h1 className="mt-2 font-display text-4xl leading-tight tracking-tight capitalize">{typeDisplay} detail</h1>
+            <p className="mt-2 text-base text-text-muted">View your submission and follow the conversation thread below.</p>
+          </div>
+          <LinkButton href="/dashboard/submissions" variant="outline" size="sm" className="shrink-0">
+            <ArrowLeftIcon className="mr-1 size-4" />
+            Back to submissions
+          </LinkButton>
         </div>
-        <LinkButton href="/dashboard/submissions" variant="outline" size="sm">
-          Back to submissions
-        </LinkButton>
-      </header>
+      </section>
 
       {loading ? (
-        <Card>
-          <p className="text-sm text-text-muted">Loading...</p>
+        <Card className="dashboard-panel-surface rounded-sm border-border/65" hoverable={false}>
+          <p className="text-sm text-text-muted">Loading submission...</p>
         </Card>
       ) : null}
 
       {error ? (
-        <Card>
+        <Card className="dashboard-panel-surface rounded-sm border-border/65" hoverable={false}>
           <p className="text-sm text-destructive">{error}</p>
         </Card>
       ) : null}
 
       {detail ? (
-        <div className="space-y-5">
-          <Card>
-            <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Your submission</p>
-            <p className="mt-2 text-sm leading-6 text-text">{pickSummary(detail) || "(no details)"}</p>
-            <p className="mt-3 text-xs text-text-muted">
+        <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+
+          {/* Submission summary */}
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-5" hoverable={false}>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">
+                <ClipboardDocumentListIcon className="size-6" />
+              </span>
+              <div>
+                <p className="text-xs uppercase tracking-[0.18em] text-primary">Your submission</p>
+                <p className="text-2xl font-semibold capitalize text-text">{typeDisplay}</p>
+              </div>
+            </div>
+            <div className="mt-5 rounded-sm border border-border/55 bg-surface/25 px-4 py-4">
+              <p className="text-base leading-7 text-text">{pickSummary(detail) || "(no details provided)"}</p>
+            </div>
+            <p className="mt-3 text-sm text-text-muted">
               Submitted: {formatDateTime((detail.record.created_at as string) ?? "")}
             </p>
           </Card>
 
-          <Card>
-            <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Conversation</p>
-            <ul className="mt-3 space-y-2">
-              {detail.notes.map((note) => (
-                <li
-                  key={note.id}
-                  className="rounded-sm border border-border/60 bg-inset/30 px-3 py-2 text-sm"
-                >
-                  <div className="flex items-center justify-between gap-2 text-xs text-text-muted">
-                    <span>
-                      {note.author_role === "admin"
-                        ? "Growrix team"
-                        : note.author_role === "customer"
-                          ? "You"
-                          : "System"}
-                    </span>
-                    <span>{formatDateTime(note.created_at)}</span>
-                  </div>
-                  <p className="mt-1 whitespace-pre-wrap">{note.body}</p>
-                </li>
-              ))}
+          {/* Conversation thread */}
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-5" hoverable={false}>
+            <div className="flex items-center gap-2">
+              <ChatBubbleLeftRightIcon className="size-5 text-primary" />
+              <p className="text-xs uppercase tracking-[0.18em] text-primary">Conversation</p>
+            </div>
+
+            <ul className="mt-4 space-y-3">
+              {detail.notes.map((note) => {
+                const isTeam = note.author_role === "admin";
+                return (
+                  <li
+                    key={note.id}
+                    className={`rounded-sm border px-4 py-3 ${
+                      isTeam
+                        ? "border-primary/25 bg-primary/8"
+                        : "border-border/55 bg-surface/25"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <UserCircleIcon className={`size-5 ${isTeam ? "text-primary" : "text-text-muted"}`} />
+                        <span className={`text-sm font-semibold ${isTeam ? "text-primary" : "text-text"}`}>
+                          {isTeam ? "Growrix team" : note.author_role === "customer" ? "You" : "System"}
+                        </span>
+                      </div>
+                      <span className="text-sm text-text-muted">{formatDateTime(note.created_at)}</span>
+                    </div>
+                    <p className="mt-2 text-base leading-6 text-text whitespace-pre-wrap">{note.body}</p>
+                  </li>
+                );
+              })}
               {detail.notes.length === 0 ? (
-                <li className="text-sm text-text-muted">
-                  No messages yet. The team will respond here if there are updates.
+                <li className="rounded-sm border border-dashed border-border/55 px-4 py-6 text-center">
+                  <p className="text-base text-text-muted">No messages yet.</p>
+                  <p className="mt-1 text-sm text-text-muted">The team will reply here when there are updates.</p>
                 </li>
               ) : null}
             </ul>
 
             {REPLY_TYPES.has(type) ? (
-              <form onSubmit={handleReplySubmit} className="mt-4 space-y-2">
-                <textarea
-                  className="signal-input min-h-24"
-                  rows={4}
-                  value={reply}
-                  onChange={(event) => setReply(event.target.value)}
-                  placeholder="Type a reply..."
-                  required
-                />
-                {feedback ? <p className="text-xs text-destructive">{feedback}</p> : null}
-                <Button type="submit" size="sm" disabled={replyState === "submitting" || !reply.trim()}>
+              <form onSubmit={handleReplySubmit} className="mt-5 space-y-3">
+                <label className="block">
+                  <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Your reply</span>
+                  <textarea
+                    className="signal-input mt-1.5 min-h-28 resize-y py-3"
+                    rows={4}
+                    value={reply}
+                    onChange={(event) => setReply(event.target.value)}
+                    placeholder="Type a reply to the team..."
+                    required
+                  />
+                </label>
+                {feedback ? <p className="text-sm text-destructive">{feedback}</p> : null}
+                <Button type="submit" disabled={replyState === "submitting" || !reply.trim()}>
                   {replyState === "submitting" ? "Sending..." : "Send reply"}
+                  <ArrowRightIcon className="ml-1 size-4" />
                 </Button>
               </form>
             ) : (
-              <p className="mt-4 text-xs text-text-muted">
-                Replies on this submission type aren&apos;t supported. Use the Support page or contact form
-                if you need to follow up.
+              <p className="mt-5 text-sm text-text-muted">
+                Replies aren&apos;t available for this submission type.
+                Use the <a href="/dashboard/support" className="text-primary hover:underline">Support page</a> to follow up.
               </p>
             )}
           </Card>
