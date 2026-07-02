@@ -46,6 +46,13 @@ The `app_state` table must be created in Supabase before auth/persistence endpoi
 
 The `public.app_state` table is accessed only by the backend via the service-role key (`SUPABASE_SECRET_KEY` / `SUPABASE_SERVICE_ROLE_KEY`). Row-level security is enabled, and client roles (`anon`, `authenticated`) are explicitly blocked by policy.
 
+### Production Fail-Closed Policy
+
+- In production (`APP_ENV=production` or `NODE_ENV=production`), Supabase persistence now fails closed by default when unavailable.
+- Silent fallback to local file storage is blocked unless an explicit emergency override is set:
+   - `ALLOW_SUPABASE_FILE_FALLBACK=1`
+- This override is for incident-only continuity and must be removed after Supabase recovery and data reconciliation.
+
 ## Quick Start
 
 1. **Local Development:**

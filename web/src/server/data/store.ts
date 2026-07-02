@@ -10,7 +10,9 @@ const SUPABASE_APP_STATE_ID = "primary";
 let writeQueue = Promise.resolve();
 
 function canFallbackToFileStore() {
-  return process.env.NODE_ENV !== "production" || process.env.ALLOW_SUPABASE_FILE_FALLBACK === "1";
+  const appEnv = process.env.APP_ENV?.trim().toLowerCase();
+  const runtimeEnv = appEnv || process.env.NODE_ENV;
+  return runtimeEnv !== "production" || process.env.ALLOW_SUPABASE_FILE_FALLBACK === "1";
 }
 
 function getDataDirectory() {
@@ -95,7 +97,11 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
             }`
           );
         }
-        await writeDatabaseToFile(updater);
+        // We are already inside the write queue chain; write directly to file to avoid
+        // recursively re-entering the queued writer and deadlocking on the same promise.
+        const current = await readDatabaseFromFile();
+        const next = await updater(current);
+        await writeFile(getDatabasePath(), JSON.stringify(next, null, 2), "utf8");
       }
     });
 

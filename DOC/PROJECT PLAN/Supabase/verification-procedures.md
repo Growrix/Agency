@@ -258,6 +258,22 @@ npm run build
 
 ```bash
 npm run test
+
+---
+
+## Incident Runbook: Supabase Unavailable (Production)
+
+Use this only for controlled incident response.
+
+1. Default behavior in production is fail-closed for persistence. If Supabase cannot be reached, writes will fail instead of silently diverging to local storage.
+2. For temporary continuity, set emergency override:
+  - `ALLOW_SUPABASE_FILE_FALLBACK=1`
+3. Keep incident scope narrow and time-bound. Capture start/end timestamps and affected flows.
+4. After Supabase recovers:
+  - remove `ALLOW_SUPABASE_FILE_FALLBACK`
+  - replay/reconcile file-backed deltas into Supabase
+  - verify consistency with key domain counts (orders, inquiries, appointments, leads)
+  - attach postmortem details to `DOC/PROJECT PLAN/Tasks/tasks.md`
 ```
 
 **Expected:**
