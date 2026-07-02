@@ -718,6 +718,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     const totalSpent = orders.reduce((sum, order) => sum + order.total_cents, 0);
     const pendingAction = orders.filter((order) => !["delivered", "completed"].includes(order.fulfillment_status.toLowerCase())).length;
     const completedCount = orders.filter((order) => ["succeeded", "paid"].includes(order.payment_status.toLowerCase())).length;
+    const sortedOrders = [...orders].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
     return (
       <div className="space-y-4">
@@ -726,7 +727,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           <div className="relative grid gap-4 xl:grid-cols-[1.1fr_1fr] xl:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span></h2>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
               <p className="mt-3 text-base text-text-muted">Track payment and fulfillment progress for each purchase.</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -737,7 +738,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                 { label: "Completed", value: completedCount, icon: <ShieldCheckIcon className="size-5" /> },
               ].map((stat) => (
                 <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
-                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-xl font-semibold text-text">{stat.value}</span></div>
+                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-2xl font-semibold text-text">{stat.value}</span></div>
                   <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
                 </div>
               ))}
@@ -759,42 +760,68 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
         </section>
 
         <section className="space-y-3">
-          {orders.map((order) => (
-            <Link key={order.id} href={`/dashboard/orders/${order.id}`} className="dashboard-panel-surface block rounded-sm border border-border/65 px-4 py-3 transition-colors hover:border-primary/35">
-              <div className="grid gap-3 xl:grid-cols-[1.35fr_0.55fr_0.65fr_0.6fr_0.75fr_auto] xl:items-center">
+          {sortedOrders.map((order) => {
+            const paymentDone = ["paid", "succeeded"].includes(order.payment_status.toLowerCase());
+            const fulfillmentDone = ["delivered", "completed"].includes(order.fulfillment_status.toLowerCase());
+
+            return (
+              <Link key={order.id} href={`/dashboard/orders/${order.id}`} className="dashboard-panel-surface block rounded-sm border border-border/65 px-4 py-3 transition-colors hover:border-primary/35">
+              <div className="grid gap-3 xl:grid-cols-[1.3fr_0.55fr_0.6fr_0.62fr_0.58fr_0.52fr_auto] xl:items-center">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/20 bg-primary/12 text-text-muted">{order.items[0]?.product_name.slice(0, 2).toUpperCase() ?? "PD"}</span>
+                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/20 bg-linear-to-br from-primary/30 to-surface text-sm font-semibold text-text-muted">{order.items[0]?.product_name.slice(0, 2).toUpperCase() ?? "PD"}</span>
                   <div className="min-w-0">
-                    <p className="truncate text-2xl font-semibold tracking-tight text-text">{order.order_number}</p>
-                    <p className="truncate text-base text-text">{order.items[0]?.product_name ?? "Product"}</p>
-                    <p className="truncate text-sm text-text-muted">{order.selected_tier_name ?? "Standard"}</p>
+                    <p className="truncate text-3xl font-semibold tracking-tight text-text">{order.order_number}</p>
+                    <p className="truncate text-2xl text-text">{order.items[0]?.product_name ?? "Product"}</p>
+                    <p className="truncate text-base text-text-muted">{order.items[0]?.product_slug?.replaceAll("-", " ") ?? "Website Template"} · {order.selected_tier_name ?? "Standard"}</p>
                   </div>
                 </div>
 
                 <div>
                   <p className="text-sm text-text-muted">Payment status</p>
-                  <p className="mt-1 text-base text-text">{order.payment_status}</p>
+                  <p className="mt-1 inline-flex items-center gap-2 text-base text-text"><span className={paymentDone ? "size-2 rounded-full bg-success" : "size-2 rounded-full bg-warning"} aria-hidden />{paymentDone ? "Paid" : order.payment_status}</p>
                 </div>
                 <div>
                   <p className="text-sm text-text-muted">Fulfillment status</p>
-                  <p className="mt-1 text-base text-text">{order.fulfillment_status}</p>
+                  <p className="mt-1 inline-flex items-center gap-2 text-base text-text"><span className={fulfillmentDone ? "size-2 rounded-full bg-success" : "size-2 rounded-full bg-warning"} aria-hidden />{fulfillmentDone ? "Completed" : "Pending"}</p>
                 </div>
                 <div>
                   <p className="text-sm text-text-muted">Created</p>
-                  <p className="mt-1 text-base text-text">{formatShortDate(order.created_at)}</p>
+                  <p className="mt-1 text-base text-text">{formatDateTime(order.created_at)}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-text-muted">Completed</p>
+                  <p className="mt-1 text-base text-text">{order.completed_at ? formatDateTime(order.completed_at) : "Not available"}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-3xl font-semibold tracking-tight text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
+                  <p className="text-4xl font-semibold tracking-tight text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
                 </div>
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-text-muted"><ChevronRightIcon className="size-5" /></span>
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-border/60 bg-surface/35 text-text-muted"><ChevronRightIcon className="size-5" /></span>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </section>
 
-        {orders.length === 0 ? (
+        {sortedOrders.length === 0 ? (
           <Card className="dashboard-panel-surface rounded-sm border-border/65 text-center" hoverable={false}>
             <p className="text-sm text-text-muted">No orders yet.</p>
+          </Card>
+        ) : null}
+
+        {sortedOrders.length > 0 ? (
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
+            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-text-muted">
+              <p>Showing 1 to {sortedOrders.length} of {sortedOrders.length} orders</p>
+              <div className="flex items-center gap-2">
+                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Previous</button>
+                <button type="button" className="h-9 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary">1</button>
+                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Next</button>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>Show</span>
+                <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-text">10 per page</button>
+              </div>
+            </div>
           </Card>
         ) : null}
       </div>
