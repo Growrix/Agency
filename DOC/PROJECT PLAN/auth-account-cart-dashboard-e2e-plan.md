@@ -64,6 +64,12 @@ Completed in this continuation slice:
 2. Public lead intake endpoint no longer defaults to `admin_manual`; defaults to `contact_form` and now enforces authenticated `admin` role for `admin_manual` source.
 3. Supabase persistence now fails closed in production when unavailable, unless an explicit operator override is set (`ALLOW_SUPABASE_FILE_FALLBACK=1`). Silent fallback to file store is retained only for non-production by default.
 
+Operator runbook note:
+
+1. Keep `ALLOW_SUPABASE_FILE_FALLBACK` unset in production under normal operation.
+2. Only set `ALLOW_SUPABASE_FILE_FALLBACK=1` during controlled incident recovery when Supabase is unavailable and business continuity requires temporary degraded writes.
+3. After recovery, remove the override, reconcile file-store deltas back into Supabase, and attach an incident postmortem to the tracker.
+
 Follow-up in next slice:
 
 1. Add targeted tests for `admin_manual` source rejection and production fallback guard behavior.

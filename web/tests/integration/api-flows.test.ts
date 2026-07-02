@@ -244,6 +244,44 @@ describe("API flows", () => {
     assert.match(database.conversations[0]?.messages[0]?.content ?? "", /booking/i);
   });
 
+  it("rejects unauthenticated admin_manual lead creation", async () => {
+    const { POST } = await import("@/app/api/v1/leads/route");
+
+    const response = await POST(
+      new NextRequest("http://localhost/api/v1/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-forwarded-for": "127.0.0.1" },
+        body: JSON.stringify({
+          email: "ops@example.com",
+          source: "admin_manual",
+          name: "Ops Agent",
+        }),
+      })
+    );
+
+    assert.equal(response.status, 403);
+  });
+
+  it("accepts public lead creation without source and avoids admin_manual defaults", async () => {
+    const { POST } = await import("@/app/api/v1/leads/route");
+
+    const response = await POST(
+      new NextRequest("http://localhost/api/v1/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-forwarded-for": "127.0.0.1" },
+        body: JSON.stringify({
+          email: "public-lead@example.com",
+          name: "Public Lead",
+        }),
+      })
+    );
+
+    assert.equal(response.status, 200);
+    const payload = (await response.json()) as { data: { email: string; score: number } };
+    assert.equal(payload.data.email, "public-lead@example.com");
+    assert.equal(payload.data.score, 0);
+  });
+
   it("authorizes private downloads for the owning authenticated customer", async () => {
     await seedManagedProduct();
 
