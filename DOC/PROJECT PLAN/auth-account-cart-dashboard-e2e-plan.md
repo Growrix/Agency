@@ -54,6 +54,22 @@ The customer-dashboard-experience-e2e-plan delivered chrome decoupling, auth-gat
 
 Each phase commits to `ecomerce` behind the full gate set (web/AGENTS.md zero-gate policy). No merge to `main` until the operator approves.
 
+## Security Containment Continuation Log (2026-07-02)
+
+This artifact now tracks the immediate post-Phase-A containment hardening slice as part of P21 execution continuity.
+
+Completed in this continuation slice:
+
+1. Admin role elevation fallback removed from Clerk sync (`admin` is no longer inferred from matching `ADMIN_EMAIL`; only explicit Clerk metadata role or persisted existing role is used).
+2. Public lead intake endpoint no longer defaults to `admin_manual`; defaults to `contact_form` and now enforces authenticated `admin` role for `admin_manual` source.
+3. Supabase persistence now fails closed in production when unavailable, unless an explicit operator override is set (`ALLOW_SUPABASE_FILE_FALLBACK=1`). Silent fallback to file store is retained only for non-production by default.
+
+Follow-up in next slice:
+
+1. Add targeted tests for `admin_manual` source rejection and production fallback guard behavior.
+2. Add startup/operator runbook note for `ALLOW_SUPABASE_FILE_FALLBACK` emergency usage.
+3. Continue with account/profile and cart hardening tasks in this same plan.
+
 ---
 
 ## Phase 1 — Security & Email (P21, BLOCKING)

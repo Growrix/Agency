@@ -9,6 +9,10 @@ const SUPABASE_APP_STATE_ID = "primary";
 
 let writeQueue = Promise.resolve();
 
+function canFallbackToFileStore() {
+  return process.env.NODE_ENV !== "production" || process.env.ALLOW_SUPABASE_FILE_FALLBACK === "1";
+}
+
 function getDataDirectory() {
   return process.env.AGENCY_DATA_DIRECTORY?.trim() || path.join(process.cwd(), ".data");
 }
@@ -50,7 +54,14 @@ export async function readDatabase(): Promise<DatabaseSchema> {
   if (isSupabaseDatabaseConfigured()) {
     try {
       return await readDatabaseFromSupabase();
-    } catch {
+    } catch (error) {
+      if (!canFallbackToFileStore()) {
+        throw new Error(
+          `Supabase persistence is unavailable and file fallback is disabled in production: ${
+            error instanceof Error ? error.message : "unknown"
+          }`
+        );
+      }
       return readDatabaseFromFile();
     }
   }
@@ -76,7 +87,14 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
         const current = await readDatabaseFromSupabase();
         const next = await updater(current);
         await writeDatabaseToSupabase(next);
-      } catch {
+      } catch (error) {
+        if (!canFallbackToFileStore()) {
+          throw new Error(
+            `Supabase persistence write failed and file fallback is disabled in production: ${
+              error instanceof Error ? error.message : "unknown"
+            }`
+          );
+        }
         await writeDatabaseToFile(updater);
       }
     });

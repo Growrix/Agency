@@ -3,7 +3,6 @@ import "server-only";
 import { clerkClient } from "@clerk/nextjs/server";
 import type { UserRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
-import { getRuntimeConfig } from "@/server/config/runtime";
 import { isClerkConfigured } from "@/server/auth/clerk-config";
 
 function getNow() {
@@ -11,19 +10,13 @@ function getNow() {
 }
 
 function resolveRoleFromClerkMetadata(
-  metadata: Record<string, unknown> | undefined,
-  email: string
+  metadata: Record<string, unknown> | undefined
 ): UserRecord["role"] {
-  const configuredAdminEmail = getRuntimeConfig().auth.adminEmail?.trim().toLowerCase();
   if (typeof metadata?.role === "string") {
     const role = metadata.role as UserRecord["role"];
     if (role === "admin" || role === "customer" || role === "subscriber") {
       return role;
     }
-  }
-
-  if (configuredAdminEmail && configuredAdminEmail === email.toLowerCase()) {
-    return "admin";
   }
 
   return "subscriber";
@@ -49,7 +42,7 @@ export async function upsertUserFromClerk(input: {
     const existingByClerk = next.users.find((user) => user.clerk_user_id === input.clerkUserId);
     const existingByEmail = next.users.find((user) => user.email.toLowerCase() === normalizedEmail);
     const existing = existingByClerk ?? existingByEmail;
-    const role = input.role ?? existing?.role ?? resolveRoleFromClerkMetadata(undefined, normalizedEmail);
+    const role = input.role ?? existing?.role ?? resolveRoleFromClerkMetadata(undefined);
 
     const record: UserRecord = {
       id: existing?.id ?? crypto.randomUUID(),
@@ -104,7 +97,7 @@ export async function syncClerkUser(clerkUserId: string) {
     email: primaryEmail,
     firstName: clerkUser.firstName ?? undefined,
     lastName: clerkUser.lastName ?? undefined,
-    role: resolveRoleFromClerkMetadata(metadata, primaryEmail),
+    role: resolveRoleFromClerkMetadata(metadata),
   });
 }
 

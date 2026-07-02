@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { getAuthenticatedUser } from "@/server/auth/guards";
 import { ApiError, createRequestContext, errorResponse, successResponse } from "@/server/core/api";
 import { getRuntimeConfig } from "@/server/config/runtime";
 import { assertNoBotTrap, assertRateLimit } from "@/server/security/rate-limit";
@@ -34,9 +35,16 @@ export async function POST(request: NextRequest) {
     assertNoBotTrap(body.website);
 
     const email = typeof body.email === "string" ? body.email : "";
-    const source = typeof body.source === "string" ? (body.source as LeadSource) : "admin_manual";
+    const source = typeof body.source === "string" ? (body.source as LeadSource) : "contact_form";
     if (!ALLOWED_SOURCES.includes(source)) {
       throw new ApiError("INVALID_REQUEST", 400, "Unsupported source.");
+    }
+
+    if (source === "admin_manual") {
+      const actor = await getAuthenticatedUser(request);
+      if (!actor || actor.role !== "admin") {
+        throw new ApiError("FORBIDDEN", 403, "Admin access is required for admin_manual lead source.");
+      }
     }
 
     const name = typeof body.name === "string" ? body.name : undefined;
