@@ -30,12 +30,29 @@ last_audit_date: 2026-07-01
 
 1. Homepage renders within 8s + critical axe violations = 0
 2. `/cart` exposes a "Browse"/"Continue shopping" link
-3. `/checkout?cart=1` shows the step indicator (regression guard)
-4. `/dashboard` redirects unauthenticated to `/dashboard/login` or `/sign-in`
-5. Homepage safe-area: `#main` is visible (smoke; full safe-area-inset asserted via
+3. `/checkout?cart=1` with an empty cart renders the "empty cart" copy (no `product` fallback should appear)
+4. `/checkout?cart=1` regression guard — the step indicator is visible even when the cart is empty
+5. `/dashboard` redirects unauthenticated to `/dashboard/login` or `/sign-in`
+6. Homepage safe-area: `#main` is visible (smoke; full safe-area-inset asserted via
    `MobileBottomNav` inline style)
 
 The desktop-chrome project keeps owning `release-gates.spec.ts`; mobile-chrome runs alongside.
+
+## Checkout redirect matrix (regression coverage)
+
+| Trigger | Cart size | Expected URL |
+|---|---|---|
+| Product-detail "Buy now" | any | `/checkout?product=<slug>&variant=&tier=&fulfillment=` (built by `getCheckoutHref`) |
+| `CartHoverMenu` "Proceed to Checkout" | 1 | Same single-item URL as above |
+| `CartHoverMenu` "Proceed to Checkout" | 2+ | `/checkout?cart=1` |
+| `CartHoverMenu` "Continue Shopping" | any | `/digital-products` |
+| `CartPage` "Proceed to checkout" | 1 | Single-item URL |
+| `CartPage` "Proceed to checkout" | 2+ | `/checkout?cart=1` |
+| `CartPage` CheckoutSteps Information tab | 0 | non-interactive (no href) |
+| `CartPage` CheckoutSteps Information tab | 1+ | same as Proceed CTA |
+| `/checkout` with no `?product=` and no `?cart=1` | any | Renders the "choose a product" empty state (unchanged) |
+| `/checkout?cart=1` | 0 | Renders "Your cart is empty" empty state |
+| `/checkout?cart=1` | 1+ | Renders the checkout form with `CartOrderSummary` in the right column |
 
 ## Safe-area / bottom-nav
 

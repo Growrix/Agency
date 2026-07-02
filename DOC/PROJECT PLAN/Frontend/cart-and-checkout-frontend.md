@@ -49,11 +49,48 @@ The third row is intentional: until a Clerk user completes `/complete-account`, 
 any `/api/v1/me/*` endpoint. Their cart still works locally; first server sync happens after
 signup completes and they reload.
 
+## Route map + CTA routing rules
+
+The checkout journey has four endpoints. Every CTA must resolve to one of them — no dead ends.
+
+| Route | Purpose | Ownership |
+|---|---|---|
+| `/cart` | Full-page cart. Line items with quantity + remove, order summary, upsells card, "Proceed to checkout" CTA. | `app/cart/page.tsx` + `CartPage.tsx` |
+| `/checkout?product=<slug>&variant=<v>&tier=<t>&fulfillment=<f>` | Single-item express checkout. Uses `getCheckoutHref()` to build. | `app/checkout/page.tsx` + `CheckoutExperience.tsx` |
+| `/checkout?cart=1` | Cart-driven checkout — reads all items from the client cart store. Right column shows `CartOrderSummary` instead of `CheckoutOrderSummary`. | `CheckoutExperience.tsx` (branches on `product` + `isCartMode`) |
+| `/checkout/payment?order=<ref>&checkout=<stripe-url>` | Payment interstitial that auto-redirects to Stripe. | `app/checkout/payment/page.tsx` |
+| `/success?order=<ref>` | Confirmation step. | `app/success/page.tsx` |
+
+**CTA routing** — every surface must pick between single-item and cart-driven URLs based on cart size:
+
+| Surface | Empty cart | 1 item | 2+ items |
+|---|---|---|---|
+| `CartHoverMenu` "Proceed to Checkout" | (hidden — empty state renders instead) | `getCheckoutHref(item)` → single-item URL | `/checkout?cart=1` |
+| `CartPage` "Proceed to checkout" | disabled (opacity + pointer-events-none) | `getCheckoutHref(item)` | `/checkout?cart=1` |
+| `CartPage` CheckoutSteps `information` step | `undefined` (non-interactive) | same as CTA | same as CTA |
+| `CartHoverMenu` "Continue Shopping" | `/digital-products` | `/digital-products` | `/digital-products` |
+| `CheckoutExperience` "no product" empty state | `/digital-products` link + `/contact` | (bypassed — cart flow renders) | (bypassed — cart flow renders) |
+
+`CheckoutExperience` will render the empty state only when `product` is null AND either `?cart=1` is missing OR the client cart hydrated as empty. If cart mode is requested but the cart is still hydrating, a small "Loading your cart…" placeholder renders — the empty state must not flash during hydration.
+
+## Upsells on `/cart`
+
+The right column below the order summary renders `<CheckoutUpsellsCard>` when:
+
+- Cart is hydrated
+- Cart has at least one item
+- The primary (first) cart item's product record — fetched via `GET /api/v1/shop/products/[slug]` — carries a non-empty `customization_upsells` list
+
+The upsells checkbox state is local to the cart page for now. Wiring "Add Selected" to add these upsells as real cart items is a follow-up.
+
 ## Reused primitives
 
 - `Card`, `Button`, `LinkButton`, `Container`, `Section`
 - `useCartStore` selectors (items, itemCount, totalCents, removeItem, updateQuantity)
 - `formatUsdFromCents`
+- `getCheckoutHref` from `@/lib/shop` — the single source of truth for building product-scoped checkout URLs
+- `CheckoutUpsellsCard`, `CheckoutGuaranteeCard`, `CheckoutTrustRow`, `CheckoutSteps` (with `hrefOverrides`)
+- `CartOrderSummary` (new, `web/src/components/checkout/CartOrderSummary.tsx`) — right-column summary for cart-driven checkout
 
 ## Deferred
 

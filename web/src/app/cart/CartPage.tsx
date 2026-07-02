@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeftIcon,
@@ -14,13 +14,22 @@ import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCard";
-import { CheckoutSteps } from "@/components/checkout/CheckoutSteps";
+import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
+import { CheckoutUpsellsCard } from "@/components/checkout/CheckoutUpsellsCard";
 import {
   formatUsdFromCents,
   rehydrateCartStore,
   useCartStore,
 } from "@/lib/cart-store";
+import { getCheckoutHref } from "@/lib/shop";
+import type { ProductUpsellRecord } from "@/server/data/schema";
+
+type ProductFetchEnvelope = {
+  data?: {
+    customization_upsells?: ProductUpsellRecord[] | null;
+  } | null;
+};
 
 export function CartPage() {
   const [hydrated, setHydrated] = useState(false);
@@ -31,9 +40,82 @@ export function CartPage() {
   const totalCents = useCartStore((state) => state.totalCents());
   const itemCount = useCartStore((state) => state.itemCount());
 
+  const [upsells, setUpsells] = useState<ProductUpsellRecord[]>([]);
+  const [selectedUpsells, setSelectedUpsells] = useState<Set<string>>(() => new Set());
+  const primaryProductSlug = items[0]?.product_slug;
+
   useEffect(() => {
     void rehydrateCartStore().finally(() => setHydrated(true));
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const timer = setTimeout(() => {
+      if (cancelled) return;
+      if (!hydrated || !primaryProductSlug) {
+        setUpsells([]);
+        return;
+      }
+
+      void fetch(`/api/v1/shop/products/${encodeURIComponent(primaryProductSlug)}`, {
+        credentials: "same-origin",
+      })
+        .then(async (response) => (response.ok ? ((await response.json()) as ProductFetchEnvelope) : null))
+        .then((payload) => {
+          if (cancelled) return;
+          const list = payload?.data?.customization_upsells ?? [];
+          setUpsells(list.filter((entry) => Boolean(entry?.title)));
+        })
+        .catch(() => {
+          if (!cancelled) setUpsells([]);
+        });
+    }, 0);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [hydrated, primaryProductSlug]);
+
+  function toggleUpsell(title: string) {
+    setSelectedUpsells((prev) => {
+      const next = new Set(prev);
+      if (next.has(title)) {
+        next.delete(title);
+      } else {
+        next.add(title);
+      }
+      return next;
+    });
+  }
+
+  // Route the "Proceed to checkout" CTA + Information step tab to the right
+  // checkout URL: single-item express when the cart has one item, otherwise
+  // cart-driven checkout via ?cart=1.
+  const checkoutHref = useMemo(() => {
+    if (!hydrated || items.length === 0) return "/checkout?cart=1";
+    if (items.length === 1) {
+      const [only] = items;
+      return getCheckoutHref(only.product_slug, {
+        variantSlug: only.variant_slug,
+        tierName: only.tier_name,
+        fulfillmentType: only.fulfillment_type,
+      });
+    }
+    return "/checkout?cart=1";
+  }, [hydrated, items]);
+
+  const stepHrefOverrides = useMemo<Partial<Record<CheckoutStepId, string>>>(() => {
+    // When the cart is empty, only /cart is reachable — everything downstream
+    // is a dead end until items are added. When populated, the Information
+    // tab picks up the same cart-aware href as the Proceed CTA.
+    return {
+      cart: "/cart",
+      information: hydrated && items.length > 0 ? checkoutHref : undefined,
+      payment: undefined,
+      confirmation: undefined,
+    };
+  }, [checkoutHref, hydrated, items.length]);
 
   return (
     <Section size="compact" className="pb-16">
@@ -70,7 +152,7 @@ export function CartPage() {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
           <div className="min-w-0 space-y-6">
-            <CheckoutSteps active="cart" />
+            <CheckoutSteps active="cart" hrefOverrides={stepHrefOverrides} />
 
             {!hydrated ? (
               <Card>
@@ -227,7 +309,7 @@ export function CartPage() {
                 </div>
                 <div className="mt-6 space-y-2">
                   <LinkButton
-                    href="/checkout?cart=1"
+                    href={checkoutHref}
                     fullWidth
                     className={items.length === 0 ? "pointer-events-none opacity-60" : ""}
                   >
@@ -238,6 +320,14 @@ export function CartPage() {
                   </LinkButton>
                 </div>
               </Card>
+
+              {hydrated && items.length > 0 && upsells.length > 0 ? (
+                <CheckoutUpsellsCard
+                  upsells={upsells}
+                  selected={selectedUpsells}
+                  onToggle={toggleUpsell}
+                />
+              ) : null}
 
               <CheckoutGuaranteeCard />
               <CheckoutTrustRow />

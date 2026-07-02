@@ -12,6 +12,7 @@ import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { BillingAddressFieldset, EMPTY_BILLING_ADDRESS, type BillingAddressValues } from "@/components/checkout/BillingAddressFieldset";
 import { CardDetailsPanel } from "@/components/checkout/CardDetailsPanel";
+import { CartOrderSummary } from "@/components/checkout/CartOrderSummary";
 import { CheckoutOrderSummary } from "@/components/checkout/CheckoutOrderSummary";
 import { CheckoutRecommendations } from "@/components/checkout/CheckoutRecommendations";
 import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
@@ -123,7 +124,13 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     const overrides: Partial<Record<CheckoutStepId, string>> = {
       cart: "/cart",
     };
-    overrides.information = product ? getCheckoutHref(product.slug, selection) : "/checkout";
+    if (product) {
+      overrides.information = getCheckoutHref(product.slug, selection);
+    } else if (isCartMode) {
+      overrides.information = "/checkout?cart=1";
+    } else {
+      overrides.information = "/checkout";
+    }
     overrides.payment = orderId
       ? `/checkout/payment?order=${encodeURIComponent(orderId)}`
       : "/checkout/payment";
@@ -131,7 +138,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       ? `/success?order=${encodeURIComponent(orderId)}`
       : "/success";
     return overrides;
-  }, [orderId, product, selection]);
+  }, [isCartMode, orderId, product, selection]);
 
   const upsells = useMemo<ProductUpsellRecord[]>(
     () => product?.customization_upsells ?? [],
@@ -293,10 +300,30 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     );
   }
 
-  if (!product) {
+  // If cart mode is requested but the client cart is still hydrating, show a small
+  // placeholder to avoid flashing the "no product" empty state.
+  if (!product && isCartMode && !cartHydrated) {
+    return (
+      <div className="space-y-4">
+        <CheckoutSteps active="information" hrefOverrides={stepHrefOverrides} />
+        <p className="rounded-md border border-border/60 bg-surface p-5 text-sm text-text-muted">
+          Loading your cart…
+        </p>
+      </div>
+    );
+  }
+
+  // True empty state: no product query AND no cart-driven checkout in play.
+  const hasCartItemsToCheckout = isCartMode && cartHydrated && activeCartItems.length > 0;
+  if (!product && !hasCartItemsToCheckout) {
     return (
       <div className="space-y-4">
         <CheckoutSteps active="cart" hrefOverrides={stepHrefOverrides} />
+        <div className="rounded-md border border-border/60 bg-surface p-5 text-sm text-text-muted">
+          {isCartMode
+            ? "Your cart is empty. Browse the catalog to add a product before continuing to checkout."
+            : "Choose a product from the catalog to create an order and continue into checkout."}
+        </div>
         <div className="flex flex-wrap gap-3">
           <LinkButton href="/digital-products" size="lg">Go to digital products</LinkButton>
           <LinkButton href="/contact" variant="outline" size="lg">Request invoice</LinkButton>
@@ -537,15 +564,23 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       </div>
 
       <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
-        <CheckoutOrderSummary
-          product={product}
-          selection={selection ?? {}}
-          upsells={upsells}
-          selectedUpsells={selectedUpsells}
-          onToggleUpsell={toggleUpsell}
-          discountCode={discountCode}
-          discountCents={discountCents}
-        />
+        {product ? (
+          <CheckoutOrderSummary
+            product={product}
+            selection={selection ?? {}}
+            upsells={upsells}
+            selectedUpsells={selectedUpsells}
+            onToggleUpsell={toggleUpsell}
+            discountCode={discountCode}
+            discountCents={discountCents}
+          />
+        ) : (
+          <CartOrderSummary
+            items={activeCartItems}
+            discountCode={discountCode}
+            discountCents={discountCents}
+          />
+        )}
       </aside>
     </div>
   );

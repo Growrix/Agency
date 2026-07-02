@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { LinkButton, Button } from "@/components/primitives/Button";
+import { LinkButton } from "@/components/primitives/Button";
 import { formatUsdFromCents, useCartStore } from "@/lib/cart-store";
+import { getCheckoutHref } from "@/lib/shop";
 import { cn } from "@/lib/utils";
 
 const OPEN_DELAY_MS = 100;
@@ -62,6 +63,18 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
 
   const previewItems = items.slice(0, MAX_PREVIEW_ITEMS);
   const overflowCount = Math.max(0, items.length - previewItems.length);
+
+  const checkoutHref = useMemo(() => {
+    if (items.length === 1) {
+      const [only] = items;
+      return getCheckoutHref(only.product_slug, {
+        variantSlug: only.variant_slug,
+        tierName: only.tier_name,
+        fulfillmentType: only.fulfillment_type,
+      });
+    }
+    return "/checkout?cart=1";
+  }, [items]);
 
   return (
     <div
@@ -183,7 +196,7 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
 
               <div className="mt-3 flex flex-col gap-2">
                 <LinkButton
-                  href="/checkout?cart=1"
+                  href={checkoutHref}
                   size="sm"
                   fullWidth
                   className="justify-center"
@@ -194,15 +207,14 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
                   <LinkButton href="/cart" variant="outline" size="sm" fullWidth>
                     View cart
                   </LinkButton>
-                  <Button
-                    type="button"
+                  <LinkButton
+                    href="/digital-products"
                     variant="ghost"
                     size="sm"
                     fullWidth
-                    onClick={() => setOpen(false)}
                   >
                     Continue Shopping
-                  </Button>
+                  </LinkButton>
                 </div>
               </div>
             </>

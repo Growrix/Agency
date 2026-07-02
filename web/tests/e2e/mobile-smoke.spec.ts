@@ -48,6 +48,22 @@ test.describe("mobile smoke", () => {
     await expect(steps).toBeVisible();
   });
 
+  test("/checkout?cart=1 with an empty cart renders the empty-cart copy, not the no-product fallback", async ({
+    page,
+  }) => {
+    // Fresh browser context — the cart store is empty. We should see the
+    // cart-empty message rather than the "choose a product" copy.
+    await page.goto("/checkout?cart=1", { waitUntil: "domcontentloaded" });
+
+    // The empty-cart copy is scoped to the checkout empty-state block.
+    const emptyCartMessage = page.getByText(/your cart is empty\. browse the catalog/i).first();
+    await expect(emptyCartMessage).toBeVisible();
+
+    // The generic no-product copy must not be showing.
+    const noProductCopy = page.getByText(/choose a product from the catalog/i);
+    await expect(noProductCopy).toHaveCount(0);
+  });
+
   test("payment interstitial renders when reached directly", async ({ page }) => {
     await page.goto("/checkout/payment", { waitUntil: "domcontentloaded" });
 
