@@ -30,6 +30,8 @@ describe("store fail-closed guardrails", () => {
 
     resetRuntimeConfigForTests();
     resetSupabaseClientsForTests();
+    const { resetStoreCacheForTests } = await import("@/server/data/store");
+    resetStoreCacheForTests();
 
     globalThis.fetch = (async () => {
       throw new Error("Supabase unavailable");
@@ -48,6 +50,8 @@ describe("store fail-closed guardrails", () => {
 
     resetRuntimeConfigForTests();
     resetSupabaseClientsForTests();
+    const { resetStoreCacheForTests } = await import("@/server/data/store");
+    resetStoreCacheForTests();
     await resetDatabase();
   });
 
@@ -91,5 +95,58 @@ describe("store fail-closed guardrails", () => {
     const content = await readFile(databasePath, "utf8");
     const parsed = JSON.parse(content) as { inquiries?: Array<{ visitor_email: string }> };
     assert.equal(parsed.inquiries?.[0]?.visitor_email, "fallback@example.com");
+  });
+
+  it("deduplicates concurrent Supabase reads and reuses the real snapshot on transient failures", async () => {
+    let fetchCalls = 0;
+    const now = Date.now();
+    const originalDateNow = Date.now;
+
+    globalThis.fetch = (async () => {
+      fetchCalls += 1;
+
+      if (fetchCalls === 1) {
+        return new Response(
+          JSON.stringify({
+            payload: {
+              users: [
+                {
+                  id: "user-1",
+                  email: "cached@example.com",
+                  role: "subscriber",
+                  created_at: new Date(now).toISOString(),
+                  updated_at: new Date(now).toISOString(),
+                },
+              ],
+            },
+          }),
+          {
+            status: 200,
+            headers: {
+              "content-type": "application/json",
+              "x-upsert": "0",
+            },
+          }
+        );
+      }
+
+      throw new Error("Supabase unavailable after cache warmup");
+    }) as typeof fetch;
+
+    const { readDatabase } = await import("@/server/data/store");
+
+    const [first, second] = await Promise.all([readDatabase(), readDatabase()]);
+    assert.equal(fetchCalls, 1);
+    assert.equal(first.users[0]?.email, "cached@example.com");
+    assert.equal(second.users[0]?.email, "cached@example.com");
+
+    try {
+      Date.now = () => now + 5_000;
+      const third = await readDatabase();
+      assert.equal(third.users[0]?.email, "cached@example.com");
+      assert.ok(fetchCalls > 1);
+    } finally {
+      Date.now = originalDateNow;
+    }
   });
 });

@@ -298,4 +298,54 @@ describe("catalog domain", () => {
     assert.ok(products.length > 0);
     assert.equal(product?.slug, "three-circles-template");
   });
+
+  it("does not persist seeded fallback catalog data during public portfolio reads", async () => {
+    await writeFile(
+      databasePath,
+      JSON.stringify(
+        {
+          portfolio_projects: [
+            {
+              slug: "three-circles",
+              name: "Three Circles",
+              livePreviewUrl: "https://threecircles.com",
+              embeddedPreviewUrl: "https://threecircles.com/preview",
+              industry: "Interior Design",
+              service: "websites",
+              summary: "A premium company website for an interior design brand.",
+              metric: "+37% qualified inquiries",
+              accent: "from-stone-500 to-amber-700",
+              hero_image: null,
+              detail: {
+                client: "Three Circles",
+                year: "2026",
+                duration: "4 weeks",
+                team: "Strategy, Design, Frontend, CMS",
+                challenge: ["Generic previous site"],
+                strategy: ["Improved structure and proof"],
+                build: [{ label: "Platform", value: "Next.js + Sanity" }],
+                results: [{ label: "Qualified inquiries", value: "+37%", hint: "First 60 days" }],
+                gallery: [],
+              },
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      "utf8",
+    );
+
+    const portfolio = await listPublicPortfolio();
+    const project = await getPublicPortfolioProject("three-circles");
+    const raw = JSON.parse(await (await import("node:fs/promises")).readFile(databasePath, "utf8")) as {
+      services?: unknown[];
+      products?: unknown[];
+    };
+
+    assert.equal(portfolio[0]?.slug, "three-circles");
+    assert.equal(project?.slug, "three-circles");
+    assert.equal(Array.isArray(raw.services), false);
+    assert.equal(Array.isArray(raw.products), false);
+  });
 });

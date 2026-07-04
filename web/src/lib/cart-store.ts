@@ -138,6 +138,11 @@ type ServerCartResponse = {
   };
 };
 
+type ServerCartFetchResult =
+  | { status: "ok"; items: CartItem[] }
+  | { status: "unauthenticated" }
+  | { status: "error" };
+
 function localToServerInput(item: CartItem) {
   return {
     product_slug: item.product_slug,
@@ -162,24 +167,26 @@ function serverToLocalItem(item: ServerCartItem): CartItem {
   };
 }
 
-async function fetchServerCart(): Promise<CartItem[] | null> {
+async function fetchServerCart(): Promise<ServerCartFetchResult> {
   try {
     const response = await fetch("/api/v1/me/cart", { credentials: "same-origin" });
     if (response.status === 401 || response.status === 403) {
-      return null;
+      return { status: "unauthenticated" };
     }
     if (!response.ok) {
-      return null;
+      return { status: "error" };
     }
     const payload = (await response.json().catch(() => null)) as ServerCartResponse | null;
-    if (!payload?.data) return null;
-    return payload.data.items.map(serverToLocalItem);
+    if (!payload?.data) {
+      return { status: "error" };
+    }
+    return { status: "ok", items: payload.data.items.map(serverToLocalItem) };
   } catch {
-    return null;
+    return { status: "error" };
   }
 }
 
-async function mergeLocalIntoServerCart(localItems: CartItem[]): Promise<CartItem[] | null> {
+async function mergeLocalIntoServerCart(localItems: CartItem[]): Promise<ServerCartFetchResult> {
   try {
     const response = await fetch("/api/v1/me/cart", {
       method: "PUT",
@@ -190,12 +197,19 @@ async function mergeLocalIntoServerCart(localItems: CartItem[]): Promise<CartIte
         items: localItems.map(localToServerInput),
       }),
     });
-    if (!response.ok) return null;
+    if (response.status === 401 || response.status === 403) {
+      return { status: "unauthenticated" };
+    }
+    if (!response.ok) {
+      return { status: "error" };
+    }
     const payload = (await response.json().catch(() => null)) as ServerCartResponse | null;
-    if (!payload?.data) return null;
-    return payload.data.items.map(serverToLocalItem);
+    if (!payload?.data) {
+      return { status: "error" };
+    }
+    return { status: "ok", items: payload.data.items.map(serverToLocalItem) };
   } catch {
-    return null;
+    return { status: "error" };
   }
 }
 
@@ -234,25 +248,27 @@ export async function rehydrateCartStore() {
     return;
   }
 
-  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
-    return;
-  }
-
   const localItems = useCartStore.getState().items;
-  const merged = localItems.length > 0
+  const result = localItems.length > 0
     ? await mergeLocalIntoServerCart(localItems)
     : await fetchServerCart();
 
-  if (!merged) {
+  if (result.status === "unauthenticated") {
+    serverSyncEnabled = false;
+    useCartStore.setState({ items: [] });
+    return;
+  }
+
+  if (result.status !== "ok") {
     return;
   }
 
   serverSyncEnabled = false;
-  useCartStore.setState({ items: merged });
+  useCartStore.setState({ items: result.items });
   serverSyncEnabled = true;
 
   if (!serverSyncUnsubscribe) {
-    let lastSnapshot = JSON.stringify(merged);
+    let lastSnapshot = JSON.stringify(result.items);
     serverSyncUnsubscribe = useCartStore.subscribe((state) => {
       const snapshot = JSON.stringify(state.items);
       if (snapshot === lastSnapshot) return;

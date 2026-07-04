@@ -1006,20 +1006,17 @@ function mergeServices(fallback: ManagedServiceRecord[], cms: ManagedServiceReco
   return Array.from(merged.values());
 }
 
-async function ensureCatalogSeeded() {
-  const database = stripLegacyMockCatalog(await readDatabase());
-  if (database.services.length && database.products.length) {
-    return database;
-  }
-
-  const seeded = {
+function withCatalogSeededView(database: Awaited<ReturnType<typeof readDatabase>>) {
+  return {
     ...database,
     services: database.services.length > 0 ? database.services : getDefaultServices(),
     products: database.products.length > 0 ? database.products : getFallbackSeedProducts(),
   };
+}
 
-  await writeDatabase(() => seeded);
-  return seeded;
+async function ensureCatalogSeeded() {
+  const database = stripLegacyMockCatalog(await readDatabase());
+  return withCatalogSeededView(database);
 }
 
 async function listPublicServicesUncached(): Promise<PublicServiceRecord[]> {

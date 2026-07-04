@@ -6,8 +6,12 @@ import { DEFAULT_DATABASE, type DatabaseSchema } from "@/server/data/schema";
 import { getSupabaseAdminClient, isSupabaseDatabaseConfigured } from "@/server/supabase/client";
 
 const SUPABASE_APP_STATE_ID = "primary";
+const SUPABASE_CACHE_TTL_MS = 1500;
 
 let writeQueue = Promise.resolve();
+let cachedSupabaseDatabase: DatabaseSchema | null = null;
+let cachedSupabaseDatabaseAt = 0;
+let inflightSupabaseRead: Promise<DatabaseSchema> | null = null;
 
 function canFallbackToFileStore() {
   const appEnv = process.env.APP_ENV?.trim().toLowerCase();
@@ -56,11 +60,43 @@ function cloneDefaultDatabase(): DatabaseSchema {
   };
 }
 
+function cloneDatabase(database: DatabaseSchema): DatabaseSchema {
+  return structuredClone(database);
+}
+
+function getCachedSupabaseDatabase({ allowStale = false }: { allowStale?: boolean } = {}) {
+  if (!cachedSupabaseDatabase) {
+    return null;
+  }
+
+  if (!allowStale && Date.now() - cachedSupabaseDatabaseAt > SUPABASE_CACHE_TTL_MS) {
+    return null;
+  }
+
+  return cloneDatabase(cachedSupabaseDatabase);
+}
+
+function setCachedSupabaseDatabase(database: DatabaseSchema) {
+  cachedSupabaseDatabase = cloneDatabase(database);
+  cachedSupabaseDatabaseAt = Date.now();
+}
+
+export function resetStoreCacheForTests() {
+  cachedSupabaseDatabase = null;
+  cachedSupabaseDatabaseAt = 0;
+  inflightSupabaseRead = null;
+}
+
 export async function readDatabase(): Promise<DatabaseSchema> {
   if (isSupabaseDatabaseConfigured()) {
     try {
-      return await readDatabaseFromSupabase();
+      return await readDatabaseFromSupabaseCached();
     } catch (error) {
+      const staleDatabase = getCachedSupabaseDatabase({ allowStale: true });
+      if (staleDatabase) {
+        return staleDatabase;
+      }
+
       if (!canFallbackToFileStore()) {
         throw new Error(
           `Supabase persistence is unavailable and file fallback is disabled in production: ${
@@ -90,7 +126,7 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
   if (isSupabaseDatabaseConfigured()) {
     writeQueue = writeQueue.catch(() => undefined).then(async () => {
       try {
-        const current = await readDatabaseFromSupabase();
+        const current = await readDatabaseFromSupabaseCached();
         const next = await updater(current);
         await writeDatabaseToSupabase(next);
       } catch (error) {
@@ -106,6 +142,7 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
         const current = await readDatabaseFromFile();
         const next = await updater(current);
         await writeFile(getDatabasePath(), JSON.stringify(next, null, 2), "utf8");
+        setCachedSupabaseDatabase(next);
       }
     });
 
@@ -131,6 +168,25 @@ async function writeDatabaseToFile(updater: (database: DatabaseSchema) => Databa
 export async function withDatabase<T>(selector: (database: DatabaseSchema) => T | Promise<T>) {
   const database = await readDatabase();
   return selector(database);
+}
+
+async function readDatabaseFromSupabaseCached(): Promise<DatabaseSchema> {
+  const cached = getCachedSupabaseDatabase();
+  if (cached) {
+    return cached;
+  }
+
+  if (!inflightSupabaseRead) {
+    inflightSupabaseRead = (async () => {
+      const database = await readDatabaseFromSupabase();
+      setCachedSupabaseDatabase(database);
+      return cloneDatabase(database);
+    })().finally(() => {
+      inflightSupabaseRead = null;
+    });
+  }
+
+  return cloneDatabase(await inflightSupabaseRead);
 }
 
 async function readDatabaseFromSupabase(): Promise<DatabaseSchema> {
@@ -168,4 +224,6 @@ async function writeDatabaseToSupabase(database: DatabaseSchema) {
   if (error) {
     throw new Error(`Supabase app_state write failed: ${error.message}`);
   }
+
+  setCachedSupabaseDatabase(database);
 }
