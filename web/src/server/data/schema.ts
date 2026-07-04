@@ -497,6 +497,53 @@ export type CartItemRecord = {
   updated_at: string;
 };
 
+export type WishlistItemRecord = {
+  id: string;
+  user_id: string;
+  product_slug: string;
+  created_at: string;
+};
+
+export type ProductReviewStatus = "pending" | "approved" | "rejected";
+
+export type ProductReviewRecord = {
+  id: string;
+  product_slug: string;
+  order_id?: string;
+  user_id?: string;
+  reviewer_email: string;
+  reviewer_name: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  title?: string;
+  body: string;
+  verified_purchase: boolean;
+  status: ProductReviewStatus;
+  moderator_notes?: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type JobStatus = "pending" | "processing" | "completed" | "failed";
+
+export type JobKind =
+  | "notification_retry"
+  | "invoice_regenerate"
+  | "email_retry";
+
+export type JobRecord = {
+  id: string;
+  kind: JobKind;
+  payload: Record<string, unknown>;
+  status: JobStatus;
+  attempts: number;
+  max_attempts: number;
+  next_run_at: string;
+  last_error?: string;
+  completed_at?: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type DatabaseSchema = {
   inquiries: ContactInquiryRecord[];
   appointments: AppointmentRecord[];
@@ -519,6 +566,9 @@ export type DatabaseSchema = {
   customer_notifications: CustomerNotificationRecord[];
   cart_items: CartItemRecord[];
   coupons: CouponRecord[];
+  wishlist_items: WishlistItemRecord[];
+  product_reviews: ProductReviewRecord[];
+  jobs: JobRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -543,4 +593,7 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   customer_notifications: [],
   cart_items: [],
   coupons: [],
+  wishlist_items: [],
+  product_reviews: [],
+  jobs: [],
 };

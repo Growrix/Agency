@@ -2,11 +2,13 @@
 
 import {
   ChartBarSquareIcon,
+  ChartPieIcon,
   ClipboardDocumentListIcon,
   EnvelopeOpenIcon,
   InboxIcon,
   QueueListIcon,
   Squares2X2Icon,
+  StarIcon,
   TicketIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
@@ -345,6 +347,8 @@ const navItems: DashboardNavItem[] = [
   { href: "/admin/submissions", label: "Submissions", icon: <InboxIcon className="h-4 w-4" /> },
   { href: "/admin/users", label: "Users", icon: <UsersIcon className="h-4 w-4" /> },
   { href: "/admin/coupons", label: "Coupons", icon: <TicketIcon className="h-4 w-4" /> },
+  { href: "/admin/reviews", label: "Reviews", icon: <StarIcon className="h-4 w-4" /> },
+  { href: "/admin/reports", label: "Reports", icon: <ChartPieIcon className="h-4 w-4" /> },
   { href: "/admin/email-log", label: "Email log", icon: <EnvelopeOpenIcon className="h-4 w-4" /> },
 ];
 

@@ -400,6 +400,72 @@ before update on public.cart_items
 for each row execute function public.set_updated_at();
 
 -- ---------------------------------------------------------------------
+-- Wishlist — save-for-later per user (Phase E2)
+-- ---------------------------------------------------------------------
+
+create table if not exists public.wishlist_items (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null,
+  product_slug text not null,
+  created_at timestamptz not null default timezone('utc', now()),
+  unique (user_id, product_slug)
+);
+create index if not exists wishlist_items_user_idx on public.wishlist_items (user_id, created_at desc);
+
+-- ---------------------------------------------------------------------
+-- Product reviews (Phase E4)
+-- ---------------------------------------------------------------------
+
+create table if not exists public.product_reviews (
+  id uuid primary key default gen_random_uuid(),
+  product_slug text not null,
+  order_id uuid references public.orders(id) on delete set null,
+  user_id uuid,
+  reviewer_email text not null,
+  reviewer_name text not null,
+  rating integer not null check (rating >= 1 and rating <= 5),
+  title text,
+  body text not null,
+  verified_purchase boolean not null default false,
+  status text not null default 'pending' check (status in ('pending','approved','rejected')),
+  moderator_notes text,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists product_reviews_product_idx on public.product_reviews (product_slug, status, created_at desc);
+create index if not exists product_reviews_status_idx on public.product_reviews (status);
+
+drop trigger if exists product_reviews_set_updated_at on public.product_reviews;
+create trigger product_reviews_set_updated_at
+before update on public.product_reviews
+for each row execute function public.set_updated_at();
+
+-- ---------------------------------------------------------------------
+-- Background job queue — retryable async work (Phase E5)
+-- ---------------------------------------------------------------------
+
+create table if not exists public.job_queue (
+  id uuid primary key default gen_random_uuid(),
+  kind text not null,
+  payload jsonb not null default '{}'::jsonb,
+  status text not null default 'pending' check (status in ('pending','processing','completed','failed')),
+  attempts integer not null default 0,
+  max_attempts integer not null default 3,
+  next_run_at timestamptz not null default timezone('utc', now()),
+  last_error text,
+  completed_at timestamptz,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists job_queue_next_run_idx on public.job_queue (status, next_run_at);
+create index if not exists job_queue_kind_idx on public.job_queue (kind, status);
+
+drop trigger if exists job_queue_set_updated_at on public.job_queue;
+create trigger job_queue_set_updated_at
+before update on public.job_queue
+for each row execute function public.set_updated_at();
+
+-- ---------------------------------------------------------------------
 -- Discount coupons — percent-only for launch (Phase E1a)
 -- ---------------------------------------------------------------------
 
@@ -453,7 +519,10 @@ begin
     'notification_log',
     'submission_notes',
     'cart_items',
-    'coupons'
+    'coupons',
+    'wishlist_items',
+    'product_reviews',
+    'job_queue'
   ] loop
     execute format('alter table public.%I enable row level security', tbl);
     execute format('revoke all on table public.%I from anon', tbl);

@@ -16,6 +16,8 @@ import { ShopProductHeroTitle } from "@/components/shop/ShopProductHeroTitle";
 import { WebsiteTemplateChoosePathIntro } from "@/components/shop/WebsiteTemplateChoosePathIntro";
 import { ProductPreviewSurface } from "@/components/shop/ProductPreviewSurface";
 import { AddToCartButton } from "@/components/shop/AddToCartButton";
+import { ProductReviews } from "@/components/shop/ProductReviews";
+import { WishlistButton } from "@/components/shop/WishlistButton";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
@@ -2123,6 +2125,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   variant="outline"
                   fullWidth
                 />
+                <WishlistButton
+                  productSlug={product.slug}
+                  productName={product.name}
+                  size="lg"
+                  variant="ghost"
+                  fullWidth
+                />
               </div>
 
               {websiteTemplatePathVariants.length > 1 ? (
@@ -2370,6 +2379,13 @@ export default async function ShopPreviewPage({ params }: PageProps) {
           </Container>
         </Section>
       ) : null}
+
+      {/* Customer reviews */}
+      <Section className="border-t border-border py-12 sm:py-16">
+        <Container>
+          <ProductReviews productSlug={product.slug} />
+        </Container>
+      </Section>
 
       {/* Related products */}
       {related.length > 0 ? (

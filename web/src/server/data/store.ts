@@ -50,6 +50,9 @@ function cloneDefaultDatabase(): DatabaseSchema {
     customer_notifications: [...DEFAULT_DATABASE.customer_notifications],
     cart_items: [...DEFAULT_DATABASE.cart_items],
     coupons: [...DEFAULT_DATABASE.coupons],
+    wishlist_items: [...DEFAULT_DATABASE.wishlist_items],
+    product_reviews: [...DEFAULT_DATABASE.product_reviews],
+    jobs: [...DEFAULT_DATABASE.jobs],
   };
 }
 
