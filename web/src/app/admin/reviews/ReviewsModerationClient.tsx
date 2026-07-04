@@ -66,7 +66,10 @@ export function ReviewsModerationClient() {
   }, [filter]);
 
   useEffect(() => {
-    void load();
+    const handle = setTimeout(() => {
+      void load();
+    }, 0);
+    return () => clearTimeout(handle);
   }, [load]);
 
   const moderate = async (id: string, status: ReviewStatus) => {
