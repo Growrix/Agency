@@ -35,11 +35,17 @@ export function HomeHeroPlaceholder({
           )}
         >
           <div className="flex min-h-[50vh] flex-col justify-center gap-4 lg:min-h-0">
-            <p className="text-sm font-medium text-primary">{badge}</p>
-            <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+            <p className="text-sm font-medium text-primary lg:sr-only">{badge}</p>
+            <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:sr-only lg:text-5xl">
               {resolvedTitle}
             </h1>
-            <p className="max-w-xl text-pretty text-base text-muted sm:text-lg">{description}</p>
+            <p className="max-w-xl text-pretty text-base text-muted sm:text-lg lg:sr-only">{description}</p>
+            <div className="hidden flex-col gap-3 lg:flex" aria-hidden>
+              <span className="h-6 w-40 animate-pulse rounded-full bg-inset" />
+              <span className="h-12 w-[min(32rem,72vw)] animate-pulse rounded-lg bg-inset" />
+              <span className="h-12 w-[min(26rem,58vw)] animate-pulse rounded-lg bg-inset" />
+              <span className="mt-2 h-5 w-[min(34rem,70vw)] animate-pulse rounded-md bg-inset" />
+            </div>
           </div>
         </Container>
       </div>

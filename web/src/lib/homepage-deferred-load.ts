@@ -2,6 +2,7 @@ type HomepageBundleLoadTiming = "after-load" | "after-domcontentloaded";
 
 type HomepageBundleLoadOptions = {
   timing?: HomepageBundleLoadTiming;
+  useIdle?: boolean;
 };
 
 function scheduleIdleCallback(callback: () => void): () => void {
@@ -29,12 +30,18 @@ export function scheduleHomepageBundleLoad(
   options: HomepageBundleLoadOptions = {},
 ): () => void {
   const timing = options.timing ?? "after-load";
+  const useIdle = options.useIdle ?? true;
+
+  const run = () => {
+    callback();
+    return () => {};
+  };
 
   if (timing === "after-domcontentloaded") {
     if (document.readyState === "loading") {
       let cancelIdle = () => {};
       const onReady = () => {
-        cancelIdle = scheduleIdleCallback(callback);
+        cancelIdle = useIdle ? scheduleIdleCallback(callback) : run();
       };
       window.addEventListener("DOMContentLoaded", onReady, { once: true });
 
@@ -44,11 +51,11 @@ export function scheduleHomepageBundleLoad(
       };
     }
 
-    return scheduleIdleCallback(callback);
+    return useIdle ? scheduleIdleCallback(callback) : run();
   }
 
   if (document.readyState === "complete") {
-    return scheduleIdleCallback(callback);
+    return useIdle ? scheduleIdleCallback(callback) : run();
   }
 
   window.addEventListener("load", callback, { once: true });

@@ -1,5 +1,6 @@
 "use client";
 
+import { useReducedMotion } from "framer-motion";
 import {
   ArrowRightIcon,
   CodeBracketSquareIcon,
@@ -18,6 +19,7 @@ import { HomeHeroKineticHeadline } from "@/components/marketing/hero-motion/Home
 import { HomeHeroKineticSubhead } from "@/components/marketing/hero-motion/HomeHeroKineticSubhead";
 import { HomeHeroShowcaseMotion } from "@/components/marketing/hero-motion/HomeHeroShowcaseMotion";
 import { HomeHeroTrustMotion } from "@/components/marketing/hero-motion/HomeHeroTrustMotion";
+import { useHeroMotionOptional } from "@/components/marketing/hero-motion/HeroMotionContext";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
@@ -46,11 +48,19 @@ export function HomeHeroDesktop({
   slides,
   emptyFallbackSlide,
 }: HomeHeroDesktopProps) {
+  const reduced = useReducedMotion();
+  const motion = useHeroMotionOptional();
   const useStructuredTitle = !title;
+  const desktopCopyPending = Boolean(
+    !reduced &&
+      motion &&
+      motion.tier !== "reduced" &&
+      !motion.copySequenceStarted,
+  );
 
   return (
     <div className="home-hero-desktop home-hero-desktop__copy-3d">
-      <div className="home-hero-desktop__copy">
+      <div className={`home-hero-desktop__copy ${desktopCopyPending ? "hero-copy-pending" : ""}`}>
         <HomeHeroMotionReveal phase="badge">
           <Badge tone="primary" dot className="home-hero-desktop__badge">
             {badge}

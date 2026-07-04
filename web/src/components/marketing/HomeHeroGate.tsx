@@ -29,7 +29,7 @@ export function HomeHeroGate(props: HomeHeroGateProps) {
       });
     };
 
-    return scheduleHomepageBundleLoad(loadHero, { timing: "after-domcontentloaded" });
+    return scheduleHomepageBundleLoad(loadHero, { timing: "after-domcontentloaded", useIdle: false });
   }, []);
 
   if (!Hero) {

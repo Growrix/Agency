@@ -1,23 +1,33 @@
 /* Mobile header navigation — collapsible panel + accordion groups */
 
 .site-mobile-nav__panel {
-  display: grid;
-  grid-template-rows: 0fr;
+  max-height: 0;
+  overflow: clip;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-0.4rem);
+  pointer-events: none;
   border-top: none;
   background: var(--color-surface);
   transition:
-    grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.18s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.2s ease;
 }
 
 .site-mobile-nav__panel--open {
-  grid-template-rows: 1fr;
+  max-height: calc(100dvh - var(--site-chrome-height, 4rem));
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
   border-top: 1px solid var(--color-border);
   box-shadow: var(--shadow-2, 0 12px 32px color-mix(in srgb, var(--color-text) 8%, transparent));
 }
 
 .site-mobile-nav__panel-inner {
-  overflow: hidden;
+  overflow: clip;
 }
 
 .site-mobile-nav {
