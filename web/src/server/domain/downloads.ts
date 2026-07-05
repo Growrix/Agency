@@ -92,6 +92,14 @@ function normalizeAssetPath(assetPath: string) {
   return trimmed;
 }
 
+function deriveAssetFingerprint(assetPath: string) {
+  return createHash("sha256").update(assetPath).digest("hex");
+}
+
+function getDownloadAssetFingerprint(download: DownloadRecord) {
+  return download.asset_fingerprint ?? deriveAssetFingerprint(download.asset_path);
+}
+
 export async function syncOrderEntitlements(order: OrderRecord) {
   const now = getNow();
   const issuedDownloads: DownloadRecord[] = [];
@@ -137,6 +145,7 @@ export async function syncOrderEntitlements(order: OrderRecord) {
           product_slug: order.items[0]?.product_slug ?? "unknown-product",
           variant_slug: order.selected_variant_slug,
           asset_path: assetPath,
+          asset_fingerprint: deriveAssetFingerprint(assetPath),
           file_label: deriveFileLabel(assetPath),
           max_downloads: 10,
           download_count: 0,
@@ -227,6 +236,7 @@ export async function createAuthorizedDownloadUrl(
       download_id: download.id,
       order_id: download.order_id,
       product_slug: download.product_slug,
+      asset_fingerprint: getDownloadAssetFingerprint(download),
       admin_grant: allowAdmin,
       expires_in_seconds: DOWNLOAD_GRANT_TTL_SECONDS,
       request_ip_hash: hashAuditValue(requestContext?.ip),
@@ -235,7 +245,10 @@ export async function createAuthorizedDownloadUrl(
   }).catch(() => undefined);
 
   return {
-    download,
+    download: {
+      ...download,
+      asset_fingerprint: getDownloadAssetFingerprint(download),
+    },
     download_url: deliveryUrl.toString(),
     expires_in_seconds: DOWNLOAD_GRANT_TTL_SECONDS,
   };
@@ -298,6 +311,7 @@ export async function consumeAuthorizedDownload(
       download_id: consumedDownload.id,
       order_id: consumedDownload.order_id,
       product_slug: consumedDownload.product_slug,
+      asset_fingerprint: getDownloadAssetFingerprint(consumedDownload),
       admin_grant: allowAdmin,
       download_count: consumedDownload.download_count,
       max_downloads: consumedDownload.max_downloads,
@@ -308,7 +322,10 @@ export async function consumeAuthorizedDownload(
   }).catch(() => undefined);
 
   return {
-    download: consumedDownload,
+    download: {
+      ...consumedDownload,
+      asset_fingerprint: getDownloadAssetFingerprint(consumedDownload),
+    },
     asset_url: consumedDownload.asset_path,
   };
 }

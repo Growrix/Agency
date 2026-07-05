@@ -105,11 +105,18 @@ That means the project should:
 	- signed URL now points to internal grant-based delivery route
 	- delivery route redirects to the actual asset only after grant validation
 
+### 2026-07-05: Phase 4 slice started
+
+- Added persistent per-asset fingerprint storage on issued download records (`asset_fingerprint`).
+- Added fingerprint propagation into grant issuance and grant redemption audit logs for improved leak attribution.
+- Added integration assertion coverage to ensure signed download authorization payloads include `asset_fingerprint`.
+
 Status:
 
 - Phase 1 (Immediate Containment): in progress with first containment slice implemented.
 - Phase 3 (Harden Paid Delivery): in progress with first signed-grant slice implemented.
-- Phase 2, Phase 4, Phase 5: not started in code yet.
+- Phase 4 (Add Theft Deterrence): in progress with first fingerprinting slice implemented.
+- Phase 2 and Phase 5: not started in code yet.
 
 ### Phase 1: Immediate Containment
 

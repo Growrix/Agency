@@ -1,4 +1,5 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { isClerkConfigured } from "@/server/auth/clerk-config";
@@ -8,6 +9,11 @@ import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/
 const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
 const loginPrefixes = ["/admin/login", "/dashboard/login", "/sign-in", "/sign-up"];
 const completionExemptApiPaths = ["/api/v1/me", "/api/v1/me/update", "/api/v1/me/complete-signup"];
+const blockedPreviewPrefixes = [
+  "/previews/html-template-websites/",
+  "/previews/html-business-profiles/",
+  "/previews/website-templates-html/",
+];
 
 function businessProfileRewrite(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -19,6 +25,21 @@ function businessProfileRewrite(request: NextRequest) {
   }
 
   return null;
+}
+
+function blockPublicPreviewSource(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  if (!blockedPreviewPrefixes.some((prefix) => pathname.startsWith(prefix))) {
+    return null;
+  }
+
+  return new NextResponse("Not found.", {
+    status: 404,
+    headers: {
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex, nofollow",
+    },
+  });
 }
 
 function isProtectedPath(pathname: string) {
@@ -84,6 +105,11 @@ async function legacyProxy(request: NextRequest) {
     return rewrite;
   }
 
+  const blockedPreview = blockPublicPreviewSource(request);
+  if (blockedPreview) {
+    return blockedPreview;
+  }
+
   if (!isProtectedPath(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
@@ -131,65 +157,79 @@ function shouldEnforceCompletion(pathname: string) {
   return false;
 }
 
-const clerkProxy = clerkMiddleware(async (auth, request) => {
-  const rewrite = businessProfileRewrite(request);
-  if (rewrite) {
-    return rewrite;
-  }
-
-  if (isProtectedPath(request.nextUrl.pathname)) {
-    await auth.protect();
-  }
-
-  const { userId } = await auth();
-  if (userId && isAdminPath(request.nextUrl.pathname)) {
-    const record = (await getUserByClerkId(userId).catch(() => null)) ?? (await syncClerkUser(userId).catch(() => null));
-
-    if (record?.role !== "admin") {
-      return rejectForbidden(request);
+async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
+  return clerkMiddleware(async (auth, nextRequest) => {
+    const rewrite = businessProfileRewrite(nextRequest);
+    if (rewrite) {
+      return rewrite;
     }
-  }
 
-  if (userId && shouldEnforceCompletion(request.nextUrl.pathname)) {
-    const record = await getUserByClerkId(userId).catch(() => null);
-    const isCompleted = Boolean(record?.signup_completed_at);
-    const isAdmin = record?.role === "admin";
+    const blockedPreview = blockPublicPreviewSource(nextRequest);
+    if (blockedPreview) {
+      return blockedPreview;
+    }
 
-    if (!isCompleted && !isAdmin) {
-      if (request.nextUrl.pathname.startsWith("/api/")) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: {
-              code: "FORBIDDEN",
-              message: "Complete your account before continuing.",
-              details: null,
-            },
-            timestamp: new Date().toISOString(),
-            request_id: crypto.randomUUID(),
-          },
-          { status: 403 },
-        );
+    if (isProtectedPath(nextRequest.nextUrl.pathname)) {
+      await auth.protect();
+    }
+
+    const { userId } = await auth();
+    if (userId && isAdminPath(nextRequest.nextUrl.pathname)) {
+      const record = (await getUserByClerkId(userId).catch(() => null)) ?? (await syncClerkUser(userId).catch(() => null));
+
+      if (record?.role !== "admin") {
+        return rejectForbidden(nextRequest);
       }
-
-      const url = request.nextUrl.clone();
-      url.pathname = "/complete-account";
-      url.searchParams.set("next", request.nextUrl.pathname);
-      return NextResponse.redirect(url);
     }
+
+    if (userId && shouldEnforceCompletion(nextRequest.nextUrl.pathname)) {
+      const record = await getUserByClerkId(userId).catch(() => null);
+      const isCompleted = Boolean(record?.signup_completed_at);
+      const isAdmin = record?.role === "admin";
+
+      if (!isCompleted && !isAdmin) {
+        if (nextRequest.nextUrl.pathname.startsWith("/api/")) {
+          return NextResponse.json(
+            {
+              success: false,
+              error: {
+                code: "FORBIDDEN",
+                message: "Complete your account before continuing.",
+                details: null,
+              },
+              timestamp: new Date().toISOString(),
+              request_id: crypto.randomUUID(),
+            },
+            { status: 403 },
+          );
+        }
+
+        const url = nextRequest.nextUrl.clone();
+        url.pathname = "/complete-account";
+        url.searchParams.set("next", nextRequest.nextUrl.pathname);
+        return NextResponse.redirect(url);
+      }
+    }
+
+    return NextResponse.next();
+  })(request, event);
+}
+
+export default async function proxy(request: NextRequest, event: NextFetchEvent) {
+  if (!isClerkConfigured()) {
+    return legacyProxy(request);
   }
 
-  return NextResponse.next();
-});
-
-const proxyHandler = isClerkConfigured() ? clerkProxy : legacyProxy;
-
-export default proxyHandler;
+  return clerkProxy(request, event);
+}
 
 export const config = {
   matcher: [
     "/Business-profile",
     "/business-profile",
+    "/previews/html-template-websites/:path*",
+    "/previews/html-business-profiles/:path*",
+    "/previews/website-templates-html/:path*",
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
     "/(api|trpc)(.*)",
     "/__clerk/:path*",

@@ -343,11 +343,40 @@ describe("API flows", () => {
     const signedUrlPayload = await signedUrlResponse.json() as {
       data: {
         download_url: string;
-        download: { download_count: number };
+        download: { download_count: number; asset_fingerprint?: string };
       };
     };
-    assert.equal(signedUrlPayload.data.download_url, "https://downloads.example.com/private/three-circles-template.zip");
-    assert.equal(signedUrlPayload.data.download.download_count, 1);
+    assert.match(
+      signedUrlPayload.data.download_url,
+      /\/api\/v1\/downloads\/.+\/deliver\?grant=/,
+    );
+    assert.equal(signedUrlPayload.data.download.download_count, 0);
+    assert.equal(typeof signedUrlPayload.data.download.asset_fingerprint, "string");
+    assert.notEqual(signedUrlPayload.data.download.asset_fingerprint?.length, 0);
+
+    const internalDownloadUrl = new URL(signedUrlPayload.data.download_url);
+    const grantToken = internalDownloadUrl.searchParams.get("grant") ?? "";
+    assert.notEqual(grantToken.length, 0);
+
+    const { GET: deliverDownload } = await import("@/app/api/v1/downloads/[downloadId]/deliver/route");
+    const deliverResponse = await deliverDownload(
+      new NextRequest(`http://localhost${internalDownloadUrl.pathname}?grant=${encodeURIComponent(grantToken)}`),
+      { params: Promise.resolve({ downloadId: downloads[0]?.id ?? "" }) }
+    );
+
+    assert.equal(deliverResponse.status, 307);
+    assert.equal(deliverResponse.headers.get("location"), "https://downloads.example.com/private/three-circles-template.zip");
+
+    const downloadsAfterDeliverResponse = await getDownloads(
+      new NextRequest("http://localhost/api/v1/me/downloads", {
+        headers: { cookie },
+      })
+    );
+    assert.equal(downloadsAfterDeliverResponse.status, 200);
+    const downloadsAfterDeliverPayload = await downloadsAfterDeliverResponse.json() as {
+      data: Array<{ id: string; download_count: number }>;
+    };
+    assert.equal(downloadsAfterDeliverPayload.data[0]?.download_count, 1);
 
     const { POST: downloadOrderAsset } = await import("@/app/api/v1/orders/[orderId]/download/route");
     const orderDownloadResponse = await downloadOrderAsset(
@@ -359,6 +388,7 @@ describe("API flows", () => {
     );
 
     assert.equal(orderDownloadResponse.status, 307);
-    assert.equal(orderDownloadResponse.headers.get("location"), "https://downloads.example.com/private/three-circles-template.zip");
+    const orderRedirectLocation = orderDownloadResponse.headers.get("location") ?? "";
+    assert.match(orderRedirectLocation, /\/api\/v1\/downloads\/.+\/deliver\?grant=/);
   });
 });

@@ -460,6 +460,7 @@ export type DownloadRecord = {
   product_slug: string;
   variant_slug?: string;
   asset_path: string;
+  asset_fingerprint?: string;
   file_label?: string;
   max_downloads: number;
   download_count: number;
