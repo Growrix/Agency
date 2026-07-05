@@ -18,7 +18,7 @@ import { CheckoutRecommendations } from "@/components/checkout/CheckoutRecommend
 import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
 import { DiscountCodeField, type AppliedCoupon } from "@/components/checkout/DiscountCodeField";
 import { PaymentMethodTabs, type PaymentMethodId } from "@/components/checkout/PaymentMethodTabs";
-import { parsePriceStringToCents } from "@/components/checkout/checkout-utils";
+import { parsePriceStringToCents, resolveSelectedVariant } from "@/components/checkout/checkout-utils";
 import { formatUsdFromCents, rehydrateCartStore, useCartStore } from "@/lib/cart-store";
 import { getCheckoutHref, type CheckoutSelection } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
@@ -136,7 +136,12 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     [product?.customization_upsells],
   );
 
-  const productCents = parsePriceStringToCents(product?.price);
+  const selectedVariant = useMemo(
+    () => (product ? resolveSelectedVariant(product, selection ?? {}) : null),
+    [product, selection],
+  );
+
+  const productCents = parsePriceStringToCents(selectedVariant?.price ?? product?.price);
   const upsellsCents = upsells
     .filter((upsell) => selectedUpsells.has(upsell.title))
     .reduce((sum, upsell) => sum + parsePriceStringToCents(upsell.price), 0);

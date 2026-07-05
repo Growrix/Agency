@@ -137,6 +137,11 @@ function normalizeVariantSlug(value: string | undefined) {
     .slice(0, 80);
 }
 
+function normalizeTierKey(value: string | undefined) {
+  const normalized = normalizeSelectionValue(value);
+  return normalized ? normalized.toLowerCase() : undefined;
+}
+
 export async function createOrder(input: CreateOrderInput) {
   if (!input.customer_name.trim()) {
     throw new ApiError("MISSING_REQUIRED_FIELD", 400, "Customer name is required.");
@@ -178,11 +183,37 @@ export async function createOrder(input: CreateOrderInput) {
         throw new ApiError("NOT_FOUND", 404, `Selected product could not be found: ${item.productSlug}`);
       }
 
-      const unitPriceCents = parseUsdPriceToCents(product.price);
       const quantity = Number.isFinite(item.quantity) ? Math.max(1, Math.floor(item.quantity ?? 1)) : 1;
-      const selectedVariantSlug = normalizeVariantSlug(item.variantSlug);
-      const selectedTierName = normalizeSelectionValue(item.tierName);
-      const selectedFulfillmentType = normalizeVariantSlug(item.fulfillmentType);
+      const requestedVariantSlug = normalizeVariantSlug(item.variantSlug);
+      const requestedTierName = normalizeSelectionValue(item.tierName);
+      const requestedTierKey = normalizeTierKey(item.tierName);
+      const availableVariants = product.variants ?? [];
+
+      const matchedVariant = availableVariants.length > 0
+        ? (
+            availableVariants.find((variant) => normalizeVariantSlug(variant.slug) === requestedVariantSlug) ??
+            availableVariants.find((variant) => normalizeTierKey(variant.tier_name) === requestedTierKey) ??
+            null
+          )
+        : null;
+
+      if (availableVariants.length > 0 && (requestedVariantSlug || requestedTierName) && !matchedVariant) {
+        throw new ApiError(
+          "FIELD_VALIDATION_FAILED",
+          400,
+          `Selected plan is not available for ${product.name}.`,
+        );
+      }
+
+      const resolvedPrice = matchedVariant?.price ?? product.price;
+      const unitPriceCents = parseUsdPriceToCents(resolvedPrice);
+      const selectedVariantSlug = matchedVariant
+        ? normalizeVariantSlug(matchedVariant.slug)
+        : requestedVariantSlug;
+      const selectedTierName = matchedVariant?.tier_name ?? requestedTierName;
+      const selectedFulfillmentType = matchedVariant
+        ? normalizeVariantSlug(matchedVariant.fulfillment_type)
+        : normalizeVariantSlug(item.fulfillmentType);
 
       return {
         product,

@@ -10,6 +10,7 @@ import { CheckoutUpsellsCard } from "@/components/checkout/CheckoutUpsellsCard";
 import {
   formatCentsAsUsd,
   parsePriceStringToCents,
+  resolveSelectedVariant,
 } from "@/components/checkout/checkout-utils";
 import { Card } from "@/components/primitives/Card";
 
@@ -34,7 +35,9 @@ export function CheckoutOrderSummary({
   discountCents,
   taxCents = 0,
 }: CheckoutOrderSummaryProps) {
-  const productCents = parsePriceStringToCents(product.price);
+  const selectedVariant = resolveSelectedVariant(product, selection);
+  const selectedPriceLabel = selectedVariant?.price ?? product.price;
+  const productCents = parsePriceStringToCents(selectedPriceLabel);
   const upsellsCents = upsells
     .filter((upsell) => selectedUpsells.has(upsell.title))
     .reduce((sum, upsell) => sum + parsePriceStringToCents(upsell.price), 0);
@@ -69,7 +72,7 @@ export function CheckoutOrderSummary({
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
               <p className="min-w-0 text-base font-semibold text-text">{product.name}</p>
-              <p className="shrink-0 font-display text-xl tracking-tight">{product.price}</p>
+              <p className="shrink-0 font-display text-xl tracking-tight">{selectedPriceLabel}</p>
             </div>
             <p className="mt-1 text-xs text-text-muted">
               {product.category}

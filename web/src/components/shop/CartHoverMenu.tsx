@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
-import { formatUsdFromCents, useCartStore } from "@/lib/cart-store";
+import { formatCartItemDisplayName, formatUsdFromCents, useCartStore } from "@/lib/cart-store";
 import { getCheckoutHref } from "@/lib/shop";
 import { cn } from "@/lib/utils";
 
@@ -98,7 +98,7 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
         }
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="relative inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary/60"
+        className="relative inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset focus-visible:outline-2 focus-visible:outline-primary/60"
       >
         <ShoppingBagIcon className="size-5" aria-hidden />
         {cartHydrated && itemCount > 0 ? (
@@ -159,10 +159,14 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
                           href={`/digital-products/${item.product_slug}`}
                           className="block truncate text-sm font-medium text-text hover:text-primary"
                         >
-                          {item.product_name}
+                          {formatCartItemDisplayName(item)}
                         </Link>
                         <p className="mt-0.5 text-[11px] text-text-muted">
-                          {item.tier_name ? `${item.tier_name} · ` : ""}Qty {item.quantity}
+                          {item.tier_name ? `${item.tier_name} · ` : ""}
+                          {item.fulfillment_type
+                            ? `${item.fulfillment_type.replace(/_/g, " ")} · `
+                            : ""}
+                          Qty {item.quantity}
                         </p>
                       </div>
                       <div className="flex flex-col items-end gap-1">

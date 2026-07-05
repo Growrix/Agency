@@ -556,6 +556,17 @@ export default async function ShopPreviewPage({ params }: PageProps) {
     const premiumVariant = variants.find((variant) => variant.slug === "premium") ?? variants[1] ?? variants[0];
     const doneForYouVariantForPath = variants.find((variant) => variant.slug === "done-for-you") ?? variants[2] ?? variants[0];
     const htmlPathVariants = [standardVariant, premiumVariant, doneForYouVariantForPath];
+    const htmlCartPlanOptions = htmlPathVariants.map((variant) => ({
+      slug: variant.slug,
+      title: getHtmlProfileTierLabel(variant),
+      tierName: variant.tier_name,
+      fulfillmentType: variant.fulfillment_type,
+      price: variant.price,
+      redirectHref:
+        variant.slug === "done-for-you"
+          ? `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`
+          : undefined,
+    }));
     const htmlFaqs = product.faqs && product.faqs.length > 0 ? product.faqs : HTML_PROFILE_FAQ_FALLBACK;
 
     return (
@@ -645,6 +656,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       variantSlug={standardVariant.slug}
                       tierName={standardVariant.tier_name}
                       fulfillmentType={standardVariant.fulfillment_type}
+                      planOptions={htmlCartPlanOptions}
+                      forcePlanSelection
                       size="sm"
                       variant="outline"
                       fullWidth
@@ -752,6 +765,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     variantSlug={standardVariant.slug}
                     tierName={standardVariant.tier_name}
                     fulfillmentType={standardVariant.fulfillment_type}
+                    planOptions={htmlCartPlanOptions}
+                    forcePlanSelection
                     size="lg"
                     variant="outline"
                     fullWidth
@@ -1077,6 +1092,14 @@ export default async function ShopPreviewPage({ params }: PageProps) {
     const premiumVariant = variants.find((variant) => variant.slug === "premium") ?? variants[1] ?? variants[0];
     const launchVariant = variants.find((variant) => variant.slug === "done-for-you") ?? variants[2] ?? variants[0];
     const htmlPreviewPathVariants = [standardVariant, premiumVariant, launchVariant];
+    const websiteTemplateCartPlanOptions = htmlPreviewPathVariants.map((variant) => ({
+      slug: variant.slug,
+      title: getWebsiteTemplateTierLabel(variant),
+      tierName: variant.tier_name,
+      fulfillmentType: variant.fulfillment_type,
+      price: WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug]?.price ?? variant.price,
+      redirectHref: variant.slug === "done-for-you" ? "/book-appointment" : undefined,
+    }));
 
     return (
       <>
@@ -1151,6 +1174,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       variantSlug={standardVariant.slug}
                       tierName={standardVariant.tier_name}
                       fulfillmentType={standardVariant.fulfillment_type}
+                      planOptions={websiteTemplateCartPlanOptions}
+                      forcePlanSelection
                       size="sm"
                       variant="outline"
                       fullWidth

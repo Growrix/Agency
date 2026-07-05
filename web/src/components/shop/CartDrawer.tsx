@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { MinusIcon, PlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
-import { formatUsdFromCents, useCartStore } from "@/lib/cart-store";
+import { formatCartItemDisplayName, formatUsdFromCents, useCartStore } from "@/lib/cart-store";
 import { cn } from "@/lib/utils";
 
 function getFocusable(container: HTMLElement | null) {
@@ -98,7 +98,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
         className={cn(
-          "fixed inset-y-0 right-0 z-[60] flex w-full max-w-md translate-x-full flex-col border-l border-border bg-surface shadow-2xl transition-transform duration-300",
+          "fixed inset-y-0 right-0 z-60 flex w-full max-w-md translate-x-full flex-col border-l border-border bg-surface shadow-2xl transition-transform duration-300",
           open && "translate-x-0"
         )}
       >
@@ -125,10 +125,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   <li key={`${item.product_slug}::${item.variant_slug ?? "base"}`} className="rounded-xl border border-border bg-inset/30 p-3">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="font-medium text-text">{item.product_name}</p>
+                        <p className="font-medium text-text">{formatCartItemDisplayName(item)}</p>
                         <p className="text-xs text-text-muted">
                           {item.tier_name ?? "Base package"}
-                          {item.fulfillment_type ? ` · ${item.fulfillment_type}` : ""}
+                          {item.fulfillment_type ? ` · ${item.fulfillment_type.replace(/_/g, " ")}` : ""}
                         </p>
                       </div>
                       <button

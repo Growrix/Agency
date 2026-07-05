@@ -50,6 +50,19 @@ export function formatUsdFromCents(value: number) {
   }).format(value / 100);
 }
 
+export function formatCartItemDisplayName(item: Pick<CartItem, "product_name" | "product_slug">) {
+  const explicit = item.product_name.trim();
+  if (explicit.length > 0) {
+    return explicit;
+  }
+
+  return item.product_slug
+    .split("-")
+    .filter(Boolean)
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(" ");
+}
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
