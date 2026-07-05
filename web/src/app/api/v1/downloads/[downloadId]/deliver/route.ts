@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ApiError, createRequestContext, errorResponse } from "@/server/core/api";
 import { consumeAuthorizedDownload, verifyDownloadGrantToken } from "@/server/domain/downloads";
+import { recordAuditLog } from "@/server/logging/observability";
 import { assertRateLimit } from "@/server/security/rate-limit";
 
 export const dynamic = "force-dynamic";
@@ -10,9 +11,10 @@ type RouteContext = {
 };
 
 export async function GET(request: NextRequest, context: RouteContext) {
+  const requestContext = createRequestContext(request);
+  const { downloadId } = await context.params;
+
   try {
-    const requestContext = createRequestContext(request);
-    const { downloadId } = await context.params;
     const grantToken = request.nextUrl.searchParams.get("grant");
 
     if (!grantToken) {
@@ -58,6 +60,28 @@ export async function GET(request: NextRequest, context: RouteContext) {
       },
     });
   } catch (error) {
-    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to deliver download."));
+    const resolvedError = error instanceof ApiError
+      ? error
+      : error instanceof Error
+        ? error
+        : new ApiError("INTERNAL_ERROR", 500, "Unable to deliver download.");
+
+    if (resolvedError instanceof ApiError && [401, 403, 429].includes(resolvedError.status)) {
+      await recordAuditLog({
+        level: "warning",
+        action: "download.grant_rejected",
+        metadata: {
+          download_id: downloadId,
+          reason_code: resolvedError.code,
+          reason_status: resolvedError.status,
+          reason_message: resolvedError.message,
+          grant_present: Boolean(request.nextUrl.searchParams.get("grant")),
+          request_ip: requestContext.ip,
+          request_user_agent: requestContext.userAgent,
+        },
+      }).catch(() => undefined);
+    }
+
+    return errorResponse(resolvedError);
   }
 }

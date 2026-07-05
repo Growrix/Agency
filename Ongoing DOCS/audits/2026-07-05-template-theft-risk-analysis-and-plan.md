@@ -111,12 +111,19 @@ That means the project should:
 - Added fingerprint propagation into grant issuance and grant redemption audit logs for improved leak attribution.
 - Added integration assertion coverage to ensure signed download authorization payloads include `asset_fingerprint`.
 
+### 2026-07-05: Phase 5 slice started
+
+- Added failed grant redemption auditing in delivery route with a new `download.grant_rejected` event for unauthorized/forbidden/rate-limited attempts.
+- Rejection audit metadata now captures download ID, reason code/status/message, grant presence flag, and request context for incident review.
+- Added integration coverage to verify invalid grant redemption returns `401` and emits `download.grant_rejected` audit evidence.
+
 Status:
 
 - Phase 1 (Immediate Containment): in progress with first containment slice implemented.
 - Phase 3 (Harden Paid Delivery): in progress with first signed-grant slice implemented.
 - Phase 4 (Add Theft Deterrence): in progress with first fingerprinting slice implemented.
-- Phase 2 and Phase 5: not started in code yet.
+- Phase 5 (Monitoring and Enforcement): in progress with first detection/auditing slice implemented.
+- Phase 2: not started in code yet.
 
 ### Phase 1: Immediate Containment
 

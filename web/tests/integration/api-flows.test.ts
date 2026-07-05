@@ -66,6 +66,7 @@ async function readDatabaseFile() {
       selected_fulfillment_type?: string;
     }>;
     conversations: Array<{ id: string; messages: Array<{ content: string }> }>;
+    audit_logs: Array<{ action: string; metadata?: Record<string, unknown> }>;
   };
 }
 
@@ -377,6 +378,21 @@ describe("API flows", () => {
       data: Array<{ id: string; download_count: number }>;
     };
     assert.equal(downloadsAfterDeliverPayload.data[0]?.download_count, 1);
+
+    const rejectedDeliverResponse = await deliverDownload(
+      new NextRequest(`http://localhost${internalDownloadUrl.pathname}?grant=invalid-token`),
+      { params: Promise.resolve({ downloadId: downloads[0]?.id ?? "" }) }
+    );
+    assert.equal(rejectedDeliverResponse.status, 401);
+
+    const databaseAfterRejectedGrant = await readDatabaseFile();
+    const rejectedGrantAudit = databaseAfterRejectedGrant.audit_logs.find(
+      (entry) =>
+        entry.action === "download.grant_rejected"
+        && entry.metadata?.download_id === downloads[0]?.id
+        && entry.metadata?.reason_code === "UNAUTHORIZED",
+    );
+    assert.ok(rejectedGrantAudit);
 
     const { POST: downloadOrderAsset } = await import("@/app/api/v1/orders/[orderId]/download/route");
     const orderDownloadResponse = await downloadOrderAsset(
