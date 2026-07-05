@@ -1,8 +1,54 @@
 import "server-only";
 
+import { createHash } from "node:crypto";
+import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { ApiError } from "@/server/core/api";
+import { getRuntimeConfig, requireRuntimeValue } from "@/server/config/runtime";
 import type { DownloadRecord, LicenseRecord, OrderRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
+import { recordAuditLog } from "@/server/logging/observability";
+
+const DOWNLOAD_GRANT_TTL_SECONDS = 15 * 60;
+
+type DownloadGrantPayload = JWTPayload & {
+  sub: string;
+  email: string;
+  admin: boolean;
+};
+
+type DownloadRequestContext = {
+  ip?: string | null;
+  userAgent?: string | null;
+  grantId?: string | null;
+};
+
+function hashAuditValue(value: string | null | undefined) {
+  if (!value) {
+    return null;
+  }
+
+  return createHash("sha256").update(value).digest("hex");
+}
+
+function getDownloadGrantSecret() {
+  const secret = requireRuntimeValue(getRuntimeConfig().auth.jwtSecret, "AUTH_JWT_SECRET");
+  return new TextEncoder().encode(secret);
+}
+
+async function issueDownloadGrantToken(downloadId: string, userEmail: string, allowAdmin: boolean) {
+  return new SignJWT({ email: userEmail.toLowerCase(), admin: allowAdmin })
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime(`${DOWNLOAD_GRANT_TTL_SECONDS}s`)
+    .setJti(crypto.randomUUID())
+    .setSubject(downloadId)
+    .sign(getDownloadGrantSecret());
+}
+
+export async function verifyDownloadGrantToken(token: string) {
+  const verified = await jwtVerify(token, getDownloadGrantSecret());
+  return verified.payload as DownloadGrantPayload;
+}
 
 function getNow() {
   return new Date().toISOString();
@@ -136,10 +182,73 @@ export async function getDownloadById(downloadId: string) {
   return database.downloads.find((entry) => entry.id === downloadId) ?? null;
 }
 
-export async function createAuthorizedDownloadUrl(downloadId: string, userEmail: string, allowAdmin = false) {
+export async function createAuthorizedDownloadUrl(
+  downloadId: string,
+  userEmail: string,
+  appBaseUrl: string,
+  allowAdmin = false,
+  requestContext?: DownloadRequestContext,
+) {
+  const now = Date.now();
+  const normalizedEmail = userEmail.toLowerCase();
+  const database = await readDatabase();
+  const download = database.downloads.find((entry) => entry.id === downloadId) ?? null;
+
+  if (!download) {
+    throw new ApiError("NOT_FOUND", 404, "Download not found.");
+  }
+
+  if (!allowAdmin && download.user_email !== normalizedEmail) {
+    throw new ApiError("FORBIDDEN", 403, "You do not have access to this download.");
+  }
+
+  if (download.status !== "issued") {
+    throw new ApiError("CONFLICT", 409, "This download is no longer available.");
+  }
+
+  if (download.expires_at && new Date(download.expires_at).getTime() <= now) {
+    throw new ApiError("CONFLICT", 409, "This download link has expired.");
+  }
+
+  if (download.download_count >= download.max_downloads) {
+    throw new ApiError("CONFLICT", 409, "Download limit reached for this file.");
+  }
+
+  const grantToken = await issueDownloadGrantToken(downloadId, userEmail, allowAdmin);
+  const base = new URL(appBaseUrl);
+  const deliveryUrl = new URL(`/api/v1/downloads/${encodeURIComponent(downloadId)}/deliver`, base);
+  deliveryUrl.searchParams.set("grant", grantToken);
+
+  await recordAuditLog({
+    level: "info",
+    action: "download.grant_issued",
+    actor_email: normalizedEmail,
+    metadata: {
+      download_id: download.id,
+      order_id: download.order_id,
+      product_slug: download.product_slug,
+      admin_grant: allowAdmin,
+      expires_in_seconds: DOWNLOAD_GRANT_TTL_SECONDS,
+      request_ip_hash: hashAuditValue(requestContext?.ip),
+      request_user_agent_hash: hashAuditValue(requestContext?.userAgent),
+    },
+  }).catch(() => undefined);
+
+  return {
+    download,
+    download_url: deliveryUrl.toString(),
+    expires_in_seconds: DOWNLOAD_GRANT_TTL_SECONDS,
+  };
+}
+
+export async function consumeAuthorizedDownload(
+  downloadId: string,
+  userEmail: string,
+  allowAdmin = false,
+  requestContext?: DownloadRequestContext,
+) {
   const now = new Date();
-  let resolvedUrl: string | null = null;
-  let updatedDownload: DownloadRecord | null = null;
+  const normalizedEmail = userEmail.toLowerCase();
 
   await writeDatabase((next) => ({
     ...next,
@@ -148,7 +257,7 @@ export async function createAuthorizedDownloadUrl(downloadId: string, userEmail:
         return entry;
       }
 
-      if (!allowAdmin && entry.user_email !== userEmail.toLowerCase()) {
+      if (!allowAdmin && entry.user_email !== normalizedEmail) {
         throw new ApiError("FORBIDDEN", 403, "You do not have access to this download.");
       }
 
@@ -164,8 +273,7 @@ export async function createAuthorizedDownloadUrl(downloadId: string, userEmail:
         throw new ApiError("CONFLICT", 409, "Download limit reached for this file.");
       }
 
-      resolvedUrl = entry.asset_path;
-      updatedDownload = {
+      const updatedDownload: DownloadRecord = {
         ...entry,
         download_count: entry.download_count + 1,
         last_downloaded_at: now.toISOString(),
@@ -175,12 +283,32 @@ export async function createAuthorizedDownloadUrl(downloadId: string, userEmail:
     }),
   }));
 
-  if (!updatedDownload || !resolvedUrl) {
+  const database = await readDatabase();
+  const consumedDownload = database.downloads.find((entry) => entry.id === downloadId) ?? null;
+
+  if (!consumedDownload) {
     throw new ApiError("NOT_FOUND", 404, "Download not found.");
   }
 
+  await recordAuditLog({
+    level: "info",
+    action: "download.grant_redeemed",
+    actor_email: normalizedEmail,
+    metadata: {
+      download_id: consumedDownload.id,
+      order_id: consumedDownload.order_id,
+      product_slug: consumedDownload.product_slug,
+      admin_grant: allowAdmin,
+      download_count: consumedDownload.download_count,
+      max_downloads: consumedDownload.max_downloads,
+      grant_id: requestContext?.grantId ?? null,
+      request_ip_hash: hashAuditValue(requestContext?.ip),
+      request_user_agent_hash: hashAuditValue(requestContext?.userAgent),
+    },
+  }).catch(() => undefined);
+
   return {
-    download: updatedDownload,
-    download_url: resolvedUrl,
+    download: consumedDownload,
+    asset_url: consumedDownload.asset_path,
   };
 }

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ApiError, errorResponse } from "@/server/core/api";
+import { ApiError, createRequestContext, errorResponse } from "@/server/core/api";
 import { requireAuthenticatedUser } from "@/server/auth/guards";
 import { createAuthorizedDownloadUrl, listDownloadsByOrderId } from "@/server/domain/downloads";
 import { getOrderById } from "@/server/domain/orders";
+import { assertRateLimit } from "@/server/security/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,7 @@ type RouteContext = {
 export async function POST(request: NextRequest, context: RouteContext) {
   try {
     const user = await requireAuthenticatedUser(request);
+    const requestContext = createRequestContext(request);
     const { orderId } = await context.params;
     const order = await getOrderById(orderId);
     if (!order) {
@@ -33,7 +35,23 @@ export async function POST(request: NextRequest, context: RouteContext) {
       throw new ApiError("CONFLICT", 409, "No downloadable asset has been issued for this order yet.");
     }
 
-    const result = await createAuthorizedDownloadUrl(primaryDownload.id, user.email, user.role === "admin");
+    assertRateLimit({
+      scope: "order.download.authorize",
+      identifier: `${user.id ?? user.email.toLowerCase()}:${order.id}`,
+      limit: 15,
+      windowMs: 60_000,
+    });
+
+    const result = await createAuthorizedDownloadUrl(
+      primaryDownload.id,
+      user.email,
+      request.nextUrl.origin,
+      user.role === "admin",
+      {
+        ip: requestContext.ip,
+        userAgent: requestContext.userAgent,
+      },
+    );
 
     let redirectUrl: URL;
     try {
