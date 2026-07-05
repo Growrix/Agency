@@ -407,4 +407,26 @@ describe("API flows", () => {
     const orderRedirectLocation = orderDownloadResponse.headers.get("location") ?? "";
     assert.match(orderRedirectLocation, /\/api\/v1\/downloads\/.+\/deliver\?grant=/);
   });
+
+  it("serves constrained preview HTML without script, comments, or active outbound links", async () => {
+    const { GET: getTemplatePreview } = await import("@/app/api/website-templates-html-preview/[templateSlug]/route");
+
+    const response = await getTemplatePreview(
+      new NextRequest("http://localhost/api/website-templates-html-preview/01-bedrock-construction"),
+      { params: Promise.resolve({ templateSlug: "01-bedrock-construction" }) },
+    );
+
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("x-preview-mode"), "redacted");
+    assert.match(response.headers.get("content-security-policy") ?? "", /default-src 'none'/);
+    assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+
+    const html = await response.text();
+    assert.equal(/<script\b/i.test(html), false);
+    assert.equal(/<!--/i.test(html), false);
+    assert.equal(/<meta\b[^>]*http-equiv\s*=\s*("refresh"|'refresh'|refresh)/i.test(html), false);
+    assert.equal(/<base\b/i.test(html), false);
+    assert.equal(/data-preview-link-locked="true"/i.test(html), true);
+    assert.equal(/id="grx-preview-overlay"/i.test(html), true);
+  });
 });

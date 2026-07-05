@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { getWebsiteTemplateHtmlPreviewBySlug, WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT } from "@/lib/website-templates-html-preview";
+import { buildRedactedPreviewHtml } from "@/server/security/preview-redaction";
 
 export const revalidate = 900;
 
@@ -19,12 +20,20 @@ export async function GET(_request: Request, context: RouteContext) {
   const filePath = path.join(process.cwd(), "public", "previews", WEBSITE_TEMPLATE_HTML_PREVIEW_ROOT, template.fileName);
   const html = await readFile(filePath, "utf8");
   const optimizedHtml = optimizePreviewHtml(html);
+  const redactedPreviewHtml = buildRedactedPreviewHtml(optimizedHtml, {
+    watermarkLabel: "Growrix Preview Only",
+    maxVisibleSections: 4,
+  });
 
-  return new Response(optimizedHtml, {
+  return new Response(redactedPreviewHtml, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "public, max-age=900, stale-while-revalidate=86400",
       "X-Robots-Tag": "noindex, nofollow",
+      "X-Preview-Mode": "redacted",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Content-Security-Policy": "default-src 'none'; img-src https: data:; style-src 'unsafe-inline' https:; font-src https: data:; media-src https: data:; form-action 'none'; frame-src 'none'; connect-src 'none'; base-uri 'none'",
     },
   });
 }
