@@ -30,6 +30,19 @@ core_invariants:
   - No business logic can leak into the frontend; all validation and authorization happens backend.
   - All state must be persisted and auditable.
 
+scope_specific_planning_docs:
+  customer_dashboard:
+    canonical_doc: DOC/PROJECT PLAN/Backend/customer-dashboard-backend.md
+    parent_artifact: DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+    use_for:
+      - customer dashboard backend orchestration, profile/preferences services, support-thread flows, and appointment/order follow-up behavior
+  ecommerce_preview_restoration:
+    canonical_doc: DOC/PROJECT PLAN/Backend/ecommerce-preview-restoration-backend.md
+    parent_artifact: DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    use_for:
+      - backend contract for restoring full preview responses while preserving signed paid-delivery protections
+      - service-boundary decisions between public preview delivery and private entitlement delivery
+
 service_boundaries:
   auth_service:
     responsibility: user registration, login, session management, token generation

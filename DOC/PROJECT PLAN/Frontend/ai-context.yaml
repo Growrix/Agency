@@ -37,6 +37,18 @@ scope_specific_planning_docs:
     use_for:
       - route-by-route content source ownership during CMS rollout
       - component reuse, fallback, and preview rules for portfolio, shop, services, FAQ, homepage, and about surfaces
+  customer_dashboard:
+    canonical_doc: DOC/PROJECT PLAN/Frontend/customer-dashboard-frontend.md
+    parent_artifact: DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+    use_for:
+      - customer dashboard IA, page flows, modal patterns, and public-chrome integration
+      - route fallback decisions for profile, security, orders, downloads, appointments, and support
+  ecommerce_preview_restoration:
+    canonical_doc: DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md
+    parent_artifact: DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    use_for:
+      - restoring full preview behavior for template preview surfaces
+      - preserving preview UI reuse while removing constrained-preview assumptions
 
 surfaces:
   public_marketing:
@@ -141,6 +153,22 @@ read_paths:
     - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
     - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+  plan_customer_dashboard:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+    - DOC/PROJECT PLAN/Frontend/customer-dashboard-frontend.md
+    - DOC/PROJECT PLAN/API and Data/customer-dashboard-api-data.md
+    - DOC/PROJECT PLAN/Backend/customer-dashboard-backend.md
+    - DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md
+    - DOC/PROJECT PLAN/Security/customer-dashboard-security.md
+  plan_ecommerce_preview_restoration:
+    - DOC/PROJECT PLAN/Frontend/ai-context.yaml
+    - DOC/PROJECT PLAN/Frontend/README.md
+    - DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    - DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md
+    - DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md
+    - DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md
   build_global_shell:
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/00-master-ui-architecture.md
@@ -239,3 +267,5 @@ document_groups:
     - DOC/PROJECT PLAN/Frontend/404-page.md
   cms_content_operations:
     - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
+  customer_dashboard:
+    - DOC/PROJECT PLAN/Frontend/customer-dashboard-frontend.md

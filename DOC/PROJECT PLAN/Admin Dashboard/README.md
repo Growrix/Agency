@@ -22,6 +22,8 @@ The existing admin routes and APIs are present but operationally shallow for rea
 
 - `DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md` is the canonical admin role doc for the current CMS/content-operations rollout.
 - Read it together with `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` before changing admin routes, workflow ownership, publish controls, or submissions operations.
+- `DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md` is the canonical admin role doc for customer-dashboard-driven operator workflows. Read it with `DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md` before implementing customer support-thread, account-request, or appointment-resolution flows.
+- `DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md` is the canonical admin role doc for preview-restoration risk communication and entitlement incident workflows. Read it with `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` before changing operator response flows.
 
 ## Planning Mode
 

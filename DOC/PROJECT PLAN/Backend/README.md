@@ -9,6 +9,8 @@ This document defines service boundaries, domain models, state machines, integra
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **Customer dashboard scope doc**: `customer-dashboard-backend.md`
+- **Ecommerce preview restoration scope doc**: `ecommerce-preview-restoration-backend.md`
 - **[Service Boundaries](#services)**: auth, catalog, portfolio, shop, orders, appointments, contact, concierge, chat, notifications
 - **[Domain Models](#models)**: User, Service, Product, Order, Appointment, Inquiry
 - **[State Machines](#state-machines)**: appointment and order lifecycle

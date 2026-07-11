@@ -115,9 +115,16 @@ Planning rule:
 
 ## Active Planning Artifacts
 
+- `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md`
 - `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`
 - `DOC/PROJECT PLAN/cms-content-import-automation-plan.md`
 - `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md`
+- `DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md`
+- `DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md`
+- `DOC/PROJECT PLAN/Backend/ecommerce-preview-restoration-backend.md`
+- `DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md`
+- `DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md`
+- `DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md`
 - `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`
 - `DOC/PROJECT PLAN/Frontend/product-led-platform-frontend.md`
 - `DOC/PROJECT PLAN/Backend/product-led-platform-backend.md`
@@ -127,6 +134,11 @@ Planning rule:
 - `DOC/PROJECT PLAN/Security/product-led-platform-security.md`
 - `DOC/PROJECT PLAN/DevOps/product-led-platform-devops.md`
 - `DOC/PROJECT PLAN/QA/product-led-platform-qa.md`
+- `DOC/PROJECT PLAN/Frontend/customer-dashboard-frontend.md`
+- `DOC/PROJECT PLAN/Backend/customer-dashboard-backend.md`
+- `DOC/PROJECT PLAN/API and Data/customer-dashboard-api-data.md`
+- `DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md`
+- `DOC/PROJECT PLAN/Security/customer-dashboard-security.md`
 - `DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md`
 - `DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md`
 - `DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md`

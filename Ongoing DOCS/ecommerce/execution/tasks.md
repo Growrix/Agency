@@ -1,7 +1,7 @@
 # Ecommerce Execution Tasks
 
 Document status: canonical execution tracker
-Last updated: 2026-07-05
+Last updated: 2026-07-11
 
 ## Purpose
 
@@ -44,6 +44,31 @@ This tracker converts the ecommerce blueprint into sequenced execution phases. I
 | 16 | Deployment | Planned | `deployment/`, `security/` | CI/CD, secrets, monitoring, rollback, backups | Staging and production launch paths are repeatable and monitored. |
 | 17 | Optimization | Planned | `deployment/03-scaling-cache-cdn-backups.md`, `testing/03-accessibility-performance-security-release-gates.md` | Performance, caching, search, image and query optimization | Core Web Vitals, search latency, and checkout reliability meet targets. |
 | 18 | Production launch | Planned | all docs | Launch checklist, support runbook, incident response | No critical gates open; support, analytics, rollback, and monitoring are live. |
+
+## Implementation Alignment Snapshot (Growrixos branch)
+
+The table above remains the canonical blueprint phase plan. Current repository implementation is ahead of this initial planned baseline in several areas.
+
+Observed implementation alignment (2026-07-11):
+
+- Project setup: Done (workspace/runtime/test gates and execution trackers are active).
+- Authentication: Partial to advanced (Clerk-based auth flows, protected surfaces, and role-guard patterns implemented; additional hardening remains).
+- Database: Partial (Supabase schema + app state/store patterns and migration tooling exist; full normalized transactional activation is still in progress).
+- Products/Categories: Partial to advanced (catalog and product detail surfaces, category discovery, and admin/catalog operations are implemented).
+- Cart/Checkout: Partial to advanced (cart flows, checkout flow, pricing validation, and order creation are active; remaining blueprint parity continues).
+- Payments/Orders: Partial to advanced (order lifecycle, payment/webhook wiring, delivery operations, and admin order APIs are active; full production reconciliation and provider rollout still pending).
+- Notifications/Analytics: Partial to advanced (event tracking, lead flows, notifications, and admin funnel analytics are active).
+- Admin dashboard: Partial to advanced (multiple admin operations surfaces exist; remaining workflow parity and policy hardening continue).
+- Testing: Active with strong coverage (unit, integration, release-gate e2e, and health-check pipeline are operational).
+- Deployment/Optimization/Launch: Partial (core checks and build gates exist; full production-launch closure remains pending).
+
+Most recent delta from P21 execution:
+
+- Public template preview behavior has been restored to full preview mode while preserving paid-download security controls (signed grants, redemption checks, fingerprinting, rejection auditing, and throttling).
+
+Reference implementation tracker:
+
+- `DOC/PROJECT PLAN/Tasks/tasks.md` is the active execution source for implementation-specific phase/task state in this repository.
 
 ## Backlog Format
 

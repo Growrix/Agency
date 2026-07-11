@@ -44,20 +44,21 @@ phase_sequence:
   - P10-content-composition-alignment
   - P11-auth-clerk-migration
   - P20-customer-dashboard-experience
-next_recommended_phase: P20-customer-dashboard-experience
+  - P21-ecommerce-preview-restoration-blueprint-alignment
+next_recommended_phase: P21-ecommerce-preview-restoration-blueprint-alignment
 next_recommended_tasks:
-  - T118
-  - T119
+  - T124
+  - T125
 phase_status_counts:
   done: 4
   partial: 8
   blocked: 0
-  not_started: 0
+  not_started: 1
 task_status_counts:
   done: 41
   partial: 12
   blocked: 0
-  not_started: 6
+  not_started: 13
 ---
 
 # Tasks / Execution Tracker
@@ -78,6 +79,7 @@ task_status_counts:
   - category and type remain discovery filters via query params (for example `/digital-products?category=saas-templates`)
   - reserved product slug segments (`free`, `bundles`, `category`) are blocked to prevent route collisions
 - Active tracked sessions:
+  - completed codebase and blueprint re-audit for preview policy reversal and ecommerce alignment; materialized canonical hybrid planning artifact `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` with downstream role docs in Frontend, Backend, API and Data, Admin Dashboard, and Security to restore full preview behavior while preserving signed paid-delivery controls
   - continued template-theft remediation with a second Phase 2 hardening increment: preview API responses now emit strict CSP + `nosniff` + `no-referrer` headers, and redaction now strips `meta refresh` + `base` tags to prevent client-side redirect/rewrite behaviors; integration checks now assert these headers and stripped tags
   - continued template-theft remediation with a Phase 2 constrained-preview slice: `preview-redaction` now strips `noscript`/`template` artifacts, replaces iframe embeds with locked placeholders, and neutralizes outbound anchor behavior via preview-locked links, plus integration coverage now asserts redacted preview API output (no scripts/comments, overlay present, links locked)
   - continued template-theft remediation with a Phase 5 detection slice: `/api/v1/downloads/[downloadId]/deliver` now emits `download.grant_rejected` audit events on unauthorized/forbidden/rate-limited redemption attempts (including reason metadata + request context), and integration coverage now asserts invalid grant redemption is rejected and recorded for forensic review
@@ -421,19 +423,20 @@ phases:
 - Shop CMS authoring now includes grouped editor fields, example-driven field labels, real preview URL support, real uploaded image rendering on shop surfaces, and project-specific content templates for shop items, blog posts, and case studies under `DOC/PROJECT PLAN/`.
 
 ## What Is Next To Build
-Use `DOC/PROJECT PLAN/content-composition-alignment-e2e-plan.md` as the canonical input for the active P10 execution work.
+Use `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` as the canonical input for the active P21 execution work.
+
+Immediate P21 priority sequence:
+
+1. T124: restore full preview API behavior for template preview routes.
+2. T125: rebaseline preview integration assertions from redacted mode to full mode while preserving download grant security checks.
+3. T126: keep paid-download hardening controls unchanged and validate no regression in signed delivery protections.
+
+Parallel sequence:
 
 1. T062: complete stable full-suite Playwright pass for P10 regression coverage in this environment.
-
-Remaining parallel tracks:
-
-1. T035: ship production-grade Sanity-backed backend contracts for shop and portfolio admin CRUD, publish/unpublish controls, and media lifecycle handling.
-2. T036: deliver an admin submissions and newsletter-operations stack for subscribers, contact inquiries, and booking requests with status workflow, assignment, notes, unsubscribe handling, and send logs.
-3. T037: harden admin authorization, preview and webhook secret handling, and auditability for the new CMS and operator flows.
-4. T038: enforce dedicated admin dashboard and CMS rollout release gates before migration completion.
-5. T018: replace the temporary manual order delivery artifact with actual product fulfillment assets and production Stripe configuration.
-6. T019 + T020: extend auth and RBAC beyond the current baseline into richer subscriber/customer ownership policy enforcement.
-7. T027 + T028: add infrastructure-as-code plus external observability and alerting for expanded production operations.
+2. T120-T123: continue customer dashboard experience implementation planning and execution.
+3. T035-T038: continue admin/CMS operations hardening slices.
+4. T018-T020, T027-T028: close remaining production readiness gaps.
 
 - [ ] T062 Complete stable full-suite Playwright pass for P10 regression coverage in this environment.
 
@@ -576,3 +579,28 @@ Remaining parallel tracks:
 - [ ] T121 Frontend implementation plan execution for public header/footer integration, modal-first settings/detail flows, and route fallbacks across `/dashboard/**`.
 - [ ] T122 Backend + API/data implementation plan execution for profile/preferences, notification feed, support-thread history, appointment action flows, and detail endpoints.
 - [ ] T123 Security/QA implementation planning and release-gate definition for customer dashboard ownership, privacy, and authenticated end-to-end flows.
+
+### Phase P21 — Ecommerce Preview Restoration + Blueprint Alignment
+- [x] T124 Create canonical hybrid planning artifact `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` and downstream role docs for Frontend, Backend, API and Data, Admin Dashboard, and Security.
+- [x] T125 Complete implementation and documentation re-audit against `Ongoing DOCS/ecommerce` blueprint contracts plus current `web/` preview/download architecture.
+- [x] T126 Restore full template preview behavior in:
+  - `web/src/app/api/website-templates-html-preview/[templateSlug]/route.ts`
+  - `web/src/app/api/html-business-profiles/[templateSlug]/route.ts`
+- [x] T127 Rebaseline preview integration expectations in `web/tests/integration/api-flows.test.ts` from redacted mode to full-preview mode while preserving paid-download security assertions.
+- [x] T128 Preserve and verify signed paid-delivery safeguards (`grant` issuance/redemption, throttling, fingerprint, rejected-grant audit) in:
+  - `web/src/server/domain/downloads.ts`
+  - `web/src/app/api/v1/downloads/[downloadId]/signed-url/route.ts`
+  - `web/src/app/api/v1/downloads/[downloadId]/deliver/route.ts`
+- [x] T129 Update tracker and role docs after implementation validation with final phase-state reconciliation.
+- [x] T130 Run touched-scope health gates and record evidence (`lint`, `typecheck`, `test:integration`, `build`, `health:check`).
+
+#### P21 validation evidence (2026-07-11)
+- `npm --prefix web run test:integration` passed (8/8).
+- `npm --prefix web run health:check` passed end-to-end:
+  - lint passed
+  - typecheck passed
+  - perf budgets passed
+  - unit tests passed (35/35)
+  - integration tests passed (8/8)
+  - production build passed
+  - release-gates e2e passed (8/8, desktop-chrome)

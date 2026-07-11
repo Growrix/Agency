@@ -32,6 +32,42 @@ planning_artifact_contract:
     - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
     - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+  active_canonical_plans:
+    - path: DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+      scope: Restore full public template previews while preserving paid-delivery security controls and blueprint alignment
+      status: active — planning complete, implementation pending
+      phases: P21 through P22
+      downstream_role_docs:
+        - DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md
+        - DOC/PROJECT PLAN/Backend/ecommerce-preview-restoration-backend.md
+        - DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md
+        - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md
+        - DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md
+    - path: DOC/PROJECT PLAN/ecommerce-auth-platform-e2e-plan.md
+      scope: Auth modal UX, cart system, Supabase activation, invoice payment flow, S3 downloads, admin order UI, checkout upsell
+      status: active — not yet executed
+      phases: P12 through P19
+      downstream_role_docs:
+        - DOC/PROJECT PLAN/Frontend/ecommerce-auth-frontend.md
+        - DOC/PROJECT PLAN/API and Data/ecommerce-auth-api-data.md
+        - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-auth-admin-dashboard.md
+        - DOC/PROJECT PLAN/Security/ecommerce-auth-security.md
+    - path: DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+      scope: Customer dashboard UX, public chrome integration, settings, notifications, support history, order/download/appointment end flows
+      status: active — planning complete, implementation not started
+      phases: P20 through P22
+      downstream_role_docs:
+        - DOC/PROJECT PLAN/Frontend/customer-dashboard-frontend.md
+        - DOC/PROJECT PLAN/Backend/customer-dashboard-backend.md
+        - DOC/PROJECT PLAN/API and Data/customer-dashboard-api-data.md
+        - DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md
+        - DOC/PROJECT PLAN/Security/customer-dashboard-security.md
+    - path: DOC/PROJECT PLAN/auth-clerk-migration-e2e-plan.md
+      scope: Clerk full identity migration
+      status: done (P11 complete)
+    - path: DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
+      scope: CMS and content operations rollout
+      status: planned — implementation not started
   rule: >-
     Create or update a concrete planning artifact in DOC/PROJECT PLAN/ before
     updating DOC/PROJECT PLAN/Tasks/tasks.md. Chat summaries are secondary and
@@ -90,14 +126,21 @@ project_docs:
   planning_artifacts:
     root: DOC/PROJECT PLAN/
     active_artifacts:
+      - DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
       - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
       - DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md
       - DOC/PROJECT PLAN/content-composition-alignment-e2e-plan.md
+      - DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
     use_for:
       - canonical fresh, scale, or hybrid planning artifacts created after codebase audits
       - cross-role scope decisions that must exist before tracker updates or implementation
   downstream_role_docs:
     active_docs:
+      - DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md
+      - DOC/PROJECT PLAN/Backend/ecommerce-preview-restoration-backend.md
+      - DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md
+      - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md
+      - DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md
       - DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md
       - DOC/PROJECT PLAN/Frontend/product-led-platform-frontend.md
       - DOC/PROJECT PLAN/Backend/product-led-platform-backend.md
@@ -107,6 +150,11 @@ project_docs:
       - DOC/PROJECT PLAN/Security/product-led-platform-security.md
       - DOC/PROJECT PLAN/DevOps/product-led-platform-devops.md
       - DOC/PROJECT PLAN/QA/product-led-platform-qa.md
+      - DOC/PROJECT PLAN/Frontend/customer-dashboard-frontend.md
+      - DOC/PROJECT PLAN/Backend/customer-dashboard-backend.md
+      - DOC/PROJECT PLAN/API and Data/customer-dashboard-api-data.md
+      - DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md
+      - DOC/PROJECT PLAN/Security/customer-dashboard-security.md
       - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
       - DOC/PROJECT PLAN/Frontend/content-composition-alignment-frontend.md
       - DOC/PROJECT PLAN/QA/content-composition-alignment-qa.md

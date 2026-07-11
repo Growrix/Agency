@@ -9,7 +9,9 @@ This document locks down all API request/response formats, data types, database 
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **Customer dashboard scope doc**: `customer-dashboard-api-data.md`
 - **[CMS/content operations scope doc](#cms-content-operations-scope-doc)**: `cms-content-operations-api-data.md`
+- **Ecommerce preview restoration scope doc**: `ecommerce-preview-restoration-api-data.md`
 - **[Response Envelope](#response-envelope)**: success, paginated, error formats
 - **[Error Codes](#error-codes)**: standardized error handling
 - **[Database Schema](#database)**: users, services, products, orders, appointments, inquiries
@@ -23,6 +25,11 @@ This document locks down all API request/response formats, data types, database 
 
 - `cms-content-operations-api-data.md` is the canonical role-specific planning doc for the current CMS/content-operations rollout.
 - Read it together with `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` before changing API contracts, schema ownership, webhook behavior, or migration sequencing for CMS-backed content and newsletter operations.
+
+## Ecommerce Preview Restoration Scope Doc
+
+- `ecommerce-preview-restoration-api-data.md` is the canonical role-specific planning doc for the preview-restoration and blueprint-alignment scope.
+- Read it together with `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` before changing preview endpoint contracts, preview test assertions, or paid-delivery boundary rules.
 
 ---
 

@@ -39,6 +39,17 @@ scope_specific_planning_docs:
     use_for:
       - preview, webhook, newsletter, and admin-security rules for the CMS rollout
       - token ownership, role enforcement, auditability, and privacy controls for content operations
+  customer_dashboard:
+    canonical_doc: DOC/PROJECT PLAN/Security/customer-dashboard-security.md
+    parent_artifact: DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+    use_for:
+      - ownership, visibility, modal-mutation, account-request, and support-thread protection rules for `/dashboard/**`
+  ecommerce_preview_restoration:
+    canonical_doc: DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md
+    parent_artifact: DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    use_for:
+      - risk-accepted full-preview policy and compensating controls for paid-delivery protection
+      - abuse detection, attribution, and takedown escalation workflow boundaries
 
 planning_read_paths:
   plan_cms_content_operations:
@@ -48,6 +59,18 @@ planning_read_paths:
     - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
     - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
+  plan_customer_dashboard:
+    - DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/customer-dashboard-security.md
+    - DOC/PROJECT PLAN/API and Data/customer-dashboard-api-data.md
+    - DOC/PROJECT PLAN/Backend/customer-dashboard-backend.md
+  plan_ecommerce_preview_restoration:
+    - DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    - DOC/PROJECT PLAN/Security/ai-context.yaml
+    - DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md
+    - DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md
+    - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md
 
 authentication_model:
   method: JWT (JSON Web Token) stateless

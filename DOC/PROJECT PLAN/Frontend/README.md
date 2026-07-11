@@ -40,6 +40,8 @@ read_first:
 
 ## Scope-Specific Planning Docs
 - [cms-content-operations-frontend.md](cms-content-operations-frontend.md): canonical frontend implementation-planning doc for the CMS/content-operations rollout. Read this together with the root e2e artifact when planning or implementing CMS-backed public surfaces.
+- [customer-dashboard-frontend.md](customer-dashboard-frontend.md): canonical frontend planning doc for the customer dashboard experience. Read this together with the root customer dashboard e2e artifact before implementing `/dashboard/**`, modal settings flows, or public-chrome integration for signed-in users.
+- [ecommerce-preview-restoration-frontend.md](ecommerce-preview-restoration-frontend.md): canonical frontend planning doc for restoring full template preview behavior while keeping existing ecommerce preview surfaces and route compatibility.
 
 ## Machine-Readable Task Map
 ```yaml
@@ -214,6 +216,8 @@ tasks:
 
 ### Scope-Specific Planning
 - [cms-content-operations-frontend.md](cms-content-operations-frontend.md)
+- [customer-dashboard-frontend.md](customer-dashboard-frontend.md)
+- [ecommerce-preview-restoration-frontend.md](ecommerce-preview-restoration-frontend.md)
 
 ## Dependency Notes
 - Every route implementation depends on the master architecture, design system, and component system.

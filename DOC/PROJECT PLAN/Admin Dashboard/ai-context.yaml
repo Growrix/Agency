@@ -36,6 +36,16 @@ scope_specific_planning_docs:
     use_for:
       - operator ownership boundaries between Sanity Studio and the admin dashboard
       - admin module map and workflow design for catalog, newsletter, inquiry, and booking operations
+  customer_dashboard:
+    canonical_doc: DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md
+    parent_artifact: DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md
+    use_for:
+      - operator-side workflows required to fulfill customer dashboard actions, replies, account requests, and appointment/order issue handling
+  ecommerce_preview_restoration:
+    canonical_doc: DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md
+    parent_artifact: DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    use_for:
+      - operator workflows for full-preview risk acceptance, misuse triage, and entitlement incident handling
 
 scope:
   includes:
@@ -88,6 +98,13 @@ read_paths:
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
     - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
     - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
+  plan_ecommerce_preview_restoration:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
+    - DOC/PROJECT PLAN/Admin Dashboard/ai-context.yaml
+    - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-preview-restoration-admin-dashboard.md
+    - DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md
+    - DOC/PROJECT PLAN/Security/ecommerce-preview-restoration-security.md
 
 success_criteria:
   - Dedicated admin docs exist and are linked from project root docs.

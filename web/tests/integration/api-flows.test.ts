@@ -408,7 +408,7 @@ describe("API flows", () => {
     assert.match(orderRedirectLocation, /\/api\/v1\/downloads\/.+\/deliver\?grant=/);
   });
 
-  it("serves constrained preview HTML without script, comments, or active outbound links", async () => {
+  it("serves full preview HTML while preserving preview response safeguards", async () => {
     const { GET: getTemplatePreview } = await import("@/app/api/website-templates-html-preview/[templateSlug]/route");
 
     const response = await getTemplatePreview(
@@ -417,16 +417,13 @@ describe("API flows", () => {
     );
 
     assert.equal(response.status, 200);
-    assert.equal(response.headers.get("x-preview-mode"), "redacted");
-    assert.match(response.headers.get("content-security-policy") ?? "", /default-src 'none'/);
+    assert.equal(response.headers.get("x-preview-mode"), "full");
+    assert.equal(response.headers.get("x-robots-tag"), "noindex, nofollow");
     assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 
     const html = await response.text();
-    assert.equal(/<script\b/i.test(html), false);
-    assert.equal(/<!--/i.test(html), false);
-    assert.equal(/<meta\b[^>]*http-equiv\s*=\s*("refresh"|'refresh'|refresh)/i.test(html), false);
-    assert.equal(/<base\b/i.test(html), false);
-    assert.equal(/data-preview-link-locked="true"/i.test(html), true);
-    assert.equal(/id="grx-preview-overlay"/i.test(html), true);
+    assert.match(html, /<html\b/i);
+    assert.equal(/id="grx-preview-overlay"/i.test(html), false);
+    assert.equal(/data-preview-link-locked="true"/i.test(html), false);
   });
 });

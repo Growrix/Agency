@@ -9,7 +9,9 @@ This document defines authentication, authorization, data protection, encryption
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **Customer dashboard scope doc**: `customer-dashboard-security.md`
 - **[CMS/content operations scope doc](#cms-content-operations-scope-doc)**: `cms-content-operations-security.md`
+- **Ecommerce preview restoration scope doc**: `ecommerce-preview-restoration-security.md`
 - **[Authentication](#auth)**: JWT stateless, password policy, MFA
 - **[Authorization](#authz)**: role-based access control, resource ownership
 - **[Data Protection](#data)**: encryption at rest and in transit, retention, classification
@@ -26,6 +28,11 @@ This document defines authentication, authorization, data protection, encryption
 
 - `cms-content-operations-security.md` is the canonical role-specific planning doc for the current CMS/content-operations rollout.
 - Read it together with `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md` before changing preview access, webhook authentication, admin policy, newsletter privacy handling, or publish-related audit controls.
+
+## Ecommerce Preview Restoration Scope Doc
+
+- `ecommerce-preview-restoration-security.md` is the canonical role-specific planning doc for accepted full-preview risk and compensating paid-delivery controls.
+- Read it together with `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` before changing preview security posture, takedown workflow, or download entitlement protections.
 
 ---
 
