@@ -50,7 +50,7 @@ phase_sequence:
 next_recommended_phase: P22-ecommerce-blueprint-realignment-gap-closure
 next_recommended_tasks:
   - T133
-  - T134
+  - T135
 phase_status_counts:
   done: 4
   partial: 10
@@ -81,6 +81,8 @@ task_status_counts:
   - category and type remain discovery filters via query params (for example `/digital-products?category=saas-templates`)
   - reserved product slug segments (`free`, `bundles`, `category`) are blocked to prevent route collisions
 - Active tracked sessions:
+  - implemented invoice lifecycle parity slice for P22: added invoice schema/domain (`create/send/mark-paid/get`), non-Stripe checkout auto-invoice issuance, admin invoice send/paid endpoints, order detail invoice payloads, invoice email + notification events, and invoice unit coverage; validated with `typecheck`, `test:unit` (including `invoices.test.ts`), `test:integration`, and `health:check` full release gates
+  - attempted Supabase normalized activation via `npm --prefix web run db:migrate`; blocked because `SUPABASE_DB_URL` is not available in the current terminal environment (operator secret missing)
   - implemented P22 transactional hardening slice across checkout and payments: order idempotency key dedupe, stock-aware oversell guard (`stock_on_hand`), Stripe webhook duplicate-event ignore guard, and refund analytics event tracking; added regression tests and revalidated with `typecheck`, `test:unit` (`orders.test.ts`), `test:integration`, and full `health:check` release gates
   - completed full ecommerce blueprint reanalysis against `Ongoing DOCS/ecommerce` and materialized the canonical realignment artifact `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md` with downstream role docs in Frontend, Backend, API and Data, Security, DevOps, QA, Admin Dashboard, and Supabase; aligned root planning routing docs for deterministic execution continuity
   - completed codebase and blueprint re-audit for preview policy reversal and ecommerce alignment; materialized canonical hybrid planning artifact `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` with downstream role docs in Frontend, Backend, API and Data, Admin Dashboard, and Security to restore full preview behavior while preserving signed paid-delivery controls
@@ -444,9 +446,9 @@ Use `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md` as the canoni
 
 Immediate P22 priority sequence:
 
-1. T133: complete remaining critical transactional closure (Supabase normalized activation + broader reservation ownership model) after the completed idempotency/webhook/oversell hardening slice.
-2. T134: complete order lifecycle and operator parity (invoice/admin UX and analytics taxonomy standardization).
-3. T135: finalize production readiness closure with explicit blocker sign-off after launch prerequisites are fully met.
+1. T133: complete remaining critical transactional closure by running Supabase migration with operator-provided `SUPABASE_DB_URL` and recording table verification evidence.
+2. T135: close launch blocker sign-off after Supabase activation and production environment confirmations.
+3. T062: complete stable full-suite Playwright pass for P10 regression coverage in this environment.
 
 Parallel sequence:
 
@@ -461,13 +463,13 @@ Parallel sequence:
   - Evidence: `DOC/PROJECT PLAN/ecommerce-blueprint-phase-parity-closure-2026-07-11.md`
 - [~] T133 Implement critical transactional gap closure for phases 3/6/8/9: Supabase transactional activation, inventory reservation invariants, checkout idempotency, webhook reconciliation.
   - Completed in this slice: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard.
+  - Completed in this slice: invoice schema/domain and admin invoice send/mark-paid APIs.
   - Remaining: full Supabase normalized activation and broader reservation ownership model.
-- [~] T134 Implement lifecycle and operator parity closure for phases 10-14: returns/refunds consistency, admin operations UX hardening, notifications + analytics taxonomy standardization.
-  - Completed in this slice: refund analytics event standardization and lifecycle instrumentation extension.
-  - Remaining: invoice/admin UX parity and broader analytics taxonomy standardization.
+- [x] T134 Implement lifecycle and operator parity closure for phases 10-14: returns/refunds consistency, admin operations UX hardening, notifications + analytics taxonomy standardization.
+  - Evidence: invoice lifecycle is now implemented through checkout, admin order APIs, notifications, and unit coverage.
 - [~] T135 Complete production readiness closure for phases 15-18: blueprint-mapped QA matrix, DevOps launch runbook, release blocker sign-off.
   - Completed in this slice: `health:check` pass with lint, typecheck, perf budgets, unit, integration, build, and release-gates e2e.
-  - Remaining: production launch blocker closure and final go-live sign-off.
+  - Remaining: production launch blocker closure and final go-live sign-off after operator Supabase migration step.
 
 - [ ] T062 Complete stable full-suite Playwright pass for P10 regression coverage in this environment.
 

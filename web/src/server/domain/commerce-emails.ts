@@ -2,7 +2,7 @@ import "server-only";
 
 import { Resend } from "resend";
 import { getRuntimeConfig } from "@/server/config/runtime";
-import type { OrderRecord, ServiceRequestRecord } from "@/server/data/schema";
+import type { InvoiceRecord, OrderRecord, ServiceRequestRecord } from "@/server/data/schema";
 import { recordAuditLog } from "@/server/logging/observability";
 
 type EmailResult = { delivered: boolean; skipped?: boolean };
@@ -183,6 +183,44 @@ export async function sendServiceRequestConfirmationEmail(record: ServiceRequest
   return { delivered: !result.error };
 }
 
+export async function sendInvoicePaymentEmail(invoice: InvoiceRecord, order: OrderRecord): Promise<EmailResult> {
+  const resolved = getResendClient();
+  if (!resolved) {
+    return { delivered: false, skipped: true };
+  }
+
+  const { runtime, client } = resolved;
+  const dashboardUrl = `${runtime.appBaseUrl}/dashboard/orders/${order.id}`;
+  const subject = `Invoice ${invoice.invoice_number} for order ${order.order_number}`;
+  const html = `
+    <div style="font-family:sans-serif;font-size:14px;color:#111827">
+      <h2 style="margin:0 0 12px 0">Payment invoice ready</h2>
+      <p style="margin:0 0 10px 0">Invoice <strong>${escapeHtml(invoice.invoice_number)}</strong> is now available for order <strong>${escapeHtml(order.order_number)}</strong>.</p>
+      <p style="margin:0 0 10px 0"><strong>Amount due:</strong> ${formatMoneyCents(invoice.amount_cents, invoice.currency)}</p>
+      <p style="margin:0 0 10px 0"><strong>Payment method:</strong> ${escapeHtml(invoice.payment_method)}</p>
+      <p style="margin:0 0 10px 0"><strong>Due date:</strong> ${escapeHtml(invoice.due_at)}</p>
+      <div style="margin:16px 0;padding:12px;background:#f9fafb;border-radius:6px;white-space:pre-wrap">${escapeHtml(invoice.payment_instructions)}</div>
+      <p style="margin:24px 0 0 0">
+        <a href="${dashboardUrl}" style="display:inline-block;padding:10px 16px;background:#111827;color:#ffffff;text-decoration:none;border-radius:6px">Open order dashboard</a>
+      </p>
+    </div>
+  `;
+
+  const send = withTimeout(
+    client.emails.send({
+      from: runtime.contact.fromEmail!,
+      to: [invoice.customer_email],
+      replyTo: runtime.contact.toEmail,
+      subject,
+      html,
+    }),
+    { error: { name: "EmailTimeout", message: "Send timed out" } } as unknown as Awaited<ReturnType<typeof client.emails.send>>,
+  );
+
+  const result = await send;
+  return { delivered: !result.error };
+}
+
 export async function safeSendPurchaseConfirmationEmail(order: OrderRecord): Promise<EmailResult> {
   try {
     return await sendPurchaseConfirmationEmail(order);
@@ -229,6 +267,27 @@ export async function safeSendServiceRequestConfirmationEmail(
       actor_email: record.customer_email,
       metadata: {
         service_request_id: record.id,
+        message: error instanceof Error ? error.message : "Unknown error",
+      },
+    });
+    return { delivered: false };
+  }
+}
+
+export async function safeSendInvoicePaymentEmail(
+  invoice: InvoiceRecord,
+  order: OrderRecord,
+): Promise<EmailResult> {
+  try {
+    return await sendInvoicePaymentEmail(invoice, order);
+  } catch (error) {
+    await recordAuditLog({
+      level: "warning",
+      action: "invoice.email_send_failed",
+      actor_email: invoice.customer_email,
+      metadata: {
+        invoice_id: invoice.id,
+        order_id: order.id,
         message: error instanceof Error ? error.message : "Unknown error",
       },
     });

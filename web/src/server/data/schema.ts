@@ -6,6 +6,7 @@ import type { CaseStudyDetail, StockImage } from "@/lib/site-images";
 export type InquiryStatus = "new" | "read" | "responded" | "closed" | "spam";
 export type AppointmentStatus = "inquiry" | "confirmed" | "completed" | "cancelled" | "no_show";
 export type OrderPaymentStatus = "pending" | "succeeded" | "failed" | "refunded";
+export type PaymentMethodType = "card" | "paypal" | "stripe" | "bank_transfer" | "invoice";
 export type OrderFulfillmentStatus =
   | "pending"
   | "intake_pending"
@@ -137,10 +138,12 @@ export type OrderRecord = {
   id: string;
   order_number: string;
   idempotency_key?: string;
+  invoice_id?: string;
   user_id?: string;
   customer_email: string;
   customer_name: string;
   customer_phone?: string;
+  payment_method_preference?: PaymentMethodType;
   payment_status: OrderPaymentStatus;
   fulfillment_status: OrderFulfillmentStatus;
   subtotal_cents: number;
@@ -430,6 +433,8 @@ export type NotificationKind =
   | "newsletter_subscribed"
   | "purchase_created"
   | "purchase_completed"
+  | "invoice_sent"
+  | "invoice_paid"
   | "service_request_created"
   | "appointment_requested"
   | "download_issued"
@@ -509,6 +514,26 @@ export type WishlistItemRecord = {
 
 export type ProductReviewStatus = "pending" | "approved" | "rejected";
 
+export type InvoiceStatus = "draft" | "sent" | "paid" | "cancelled" | "overdue";
+
+export type InvoiceRecord = {
+  id: string;
+  order_id: string;
+  invoice_number: string;
+  customer_email: string;
+  amount_cents: number;
+  currency: "USD";
+  payment_method: PaymentMethodType;
+  payment_instructions: string;
+  status: InvoiceStatus;
+  due_at: string;
+  sent_at?: string;
+  paid_at?: string;
+  notes?: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type ProductReviewRecord = {
   id: string;
   product_slug: string;
@@ -571,6 +596,7 @@ export type DatabaseSchema = {
   coupons: CouponRecord[];
   wishlist_items: WishlistItemRecord[];
   product_reviews: ProductReviewRecord[];
+  invoices: InvoiceRecord[];
   jobs: JobRecord[];
 };
 
@@ -598,5 +624,6 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   coupons: [],
   wishlist_items: [],
   product_reviews: [],
+  invoices: [],
   jobs: [],
 };

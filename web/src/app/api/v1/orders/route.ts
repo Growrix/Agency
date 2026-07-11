@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 import { ApiError, createRequestContext, errorResponse, successResponse } from "@/server/core/api";
 import { getAuthenticatedUser } from "@/server/auth/guards";
 import { createOrder } from "@/server/domain/orders";
+import { sendOrCreateInvoiceForOrder } from "@/server/domain/invoices";
+import type { PaymentMethodType } from "@/server/data/schema";
 import { assertNoBotTrap, assertRateLimit } from "@/server/security/rate-limit";
 
 export const dynamic = "force-dynamic";
@@ -14,6 +16,7 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as Record<string, unknown>;
     const idempotencyKeyHeader = request.headers.get("x-idempotency-key");
     const idempotencyKeyBody = typeof body.idempotency_key === "string" ? body.idempotency_key : undefined;
+    const paymentMethod = parsePaymentMethod(body.payment_method_preference);
     const items = Array.isArray(body.items)
       ? body.items
           .filter((entry): entry is Record<string, unknown> => typeof entry === "object" && entry !== null)
@@ -44,6 +47,7 @@ export async function POST(request: NextRequest) {
       customer_email: typeof body.customer_email === "string" ? body.customer_email : "",
       customer_phone: typeof body.customer_phone === "string" ? body.customer_phone : undefined,
       user_id: authenticatedUser?.id,
+      payment_method_preference: paymentMethod,
       idempotency_key: idempotencyKeyHeader ?? idempotencyKeyBody,
       notes: typeof body.notes === "string" ? body.notes : undefined,
       applied_coupon_code:
@@ -54,8 +58,42 @@ export async function POST(request: NextRequest) {
       ip: context.ip,
     });
 
+    if (!result.checkout_url && !canUseStripeCheckout(paymentMethod)) {
+      const invoiceResult = await sendOrCreateInvoiceForOrder(result.order.id, {
+        paymentMethod,
+      });
+
+      return successResponse(
+        {
+          ...result,
+          invoice: {
+            id: invoiceResult.invoice.id,
+            invoice_number: invoiceResult.invoice.invoice_number,
+            payment_method: invoiceResult.invoice.payment_method,
+            status: invoiceResult.invoice.status,
+          },
+          invoice_email_delivered: invoiceResult.delivered,
+        },
+        { status: 201 },
+      );
+    }
+
     return successResponse(result, { status: 201 });
   } catch (error) {
     return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to create order."));
   }
+}
+
+function parsePaymentMethod(value: unknown): PaymentMethodType {
+  if (typeof value !== "string") {
+    return "card";
+  }
+
+  const normalized = value.trim();
+  const supported: PaymentMethodType[] = ["card", "paypal", "stripe", "bank_transfer", "invoice"];
+  return supported.includes(normalized as PaymentMethodType) ? (normalized as PaymentMethodType) : "card";
+}
+
+function canUseStripeCheckout(method: PaymentMethodType): boolean {
+  return method === "card" || method === "stripe" || method === "paypal";
 }

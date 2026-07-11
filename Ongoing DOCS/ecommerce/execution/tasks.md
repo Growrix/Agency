@@ -70,7 +70,9 @@ Most recent delta from P22 execution:
 
 - Phase parity reconciliation completed for blueprint phases 1-18 with evidence in `DOC/PROJECT PLAN/ecommerce-blueprint-phase-parity-closure-2026-07-11.md`.
 - Transactional hardening slice delivered: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard, and refund analytics instrumentation.
-- Release evidence refreshed with passing `typecheck`, targeted `orders.test.ts`, `test:integration`, and full `health:check` including release-gates e2e.
+- Invoice/operator parity slice delivered: invoice schema + domain lifecycle (`create/send/mark-paid/get`), non-Stripe checkout auto-invoice issuance, admin invoice send/paid APIs, and admin order invoice payload wiring.
+- Release evidence refreshed with passing `typecheck`, `test:unit` (including `orders.test.ts` and `invoices.test.ts`), `test:integration`, and full `health:check` including release-gates e2e (8/8).
+- Remaining blocker: Supabase normalized migration requires operator-provided `SUPABASE_DB_URL` in terminal environment.
 
 Reference implementation tracker:
 
@@ -104,5 +106,5 @@ Risks:
 
 ## Current Blockers
 
-- No implementation blockers are known at documentation-suite creation time.
+- Supabase normalized migration remains blocked in this execution environment because `SUPABASE_DB_URL` is not configured; this blocks final T133/T135 production closure.
 - Future application work must choose concrete platform services for payments, email, SMS, storage, search, analytics, shipping, and tax before production launch.

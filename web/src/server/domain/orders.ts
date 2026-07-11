@@ -7,6 +7,7 @@ import type {
   OrderFulfillmentStatus,
   OrderItemRecord,
   OrderPaymentStatus,
+  PaymentMethodType,
   OrderRecord,
 } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
@@ -42,6 +43,7 @@ type CreateOrderInput = {
   customer_phone?: string;
   user_id?: string;
   idempotency_key?: string;
+  payment_method_preference?: PaymentMethodType;
   notes?: string;
   applied_coupon_code?: string;
   requestId?: string;
@@ -143,6 +145,19 @@ function normalizeTierKey(value: string | undefined) {
   return normalized ? normalized.toLowerCase() : undefined;
 }
 
+function normalizePaymentMethod(value: PaymentMethodType | undefined): PaymentMethodType {
+  if (!value) {
+    return "card";
+  }
+
+  const supported: PaymentMethodType[] = ["card", "paypal", "stripe", "bank_transfer", "invoice"];
+  return supported.includes(value) ? value : "card";
+}
+
+function canUseStripeCheckout(method: PaymentMethodType): boolean {
+  return method === "card" || method === "stripe" || method === "paypal";
+}
+
 async function resolveCheckoutUrlForOrder(order: OrderRecord): Promise<string | null> {
   if (!order.stripe_checkout_session_id) {
     return null;
@@ -172,6 +187,7 @@ export async function createOrder(input: CreateOrderInput) {
 
   const normalizedEmail = input.customer_email.trim().toLowerCase();
   const normalizedIdempotencyKey = normalizeSelectionValue(input.idempotency_key)?.slice(0, 128);
+  const paymentMethodPreference = normalizePaymentMethod(input.payment_method_preference);
 
   if (normalizedIdempotencyKey) {
     const existingOrder = (await readDatabase()).orders.find(
@@ -348,6 +364,7 @@ export async function createOrder(input: CreateOrderInput) {
     customer_name: input.customer_name.trim(),
     customer_email: normalizedEmail,
     customer_phone: input.customer_phone?.trim() || undefined,
+    payment_method_preference: paymentMethodPreference,
     payment_status: "pending",
     fulfillment_status: "pending",
     subtotal_cents: subtotalCents,
@@ -397,7 +414,7 @@ export async function createOrder(input: CreateOrderInput) {
   const stripe = createStripeClient();
   let checkoutUrl: string | null = null;
 
-  if (stripe && primaryProduct) {
+  if (stripe && primaryProduct && canUseStripeCheckout(paymentMethodPreference)) {
     const successUrl = new URL("/success", runtime.appBaseUrl);
     successUrl.searchParams.set("order", order.id);
     successUrl.searchParams.set("product", primaryProduct.slug);

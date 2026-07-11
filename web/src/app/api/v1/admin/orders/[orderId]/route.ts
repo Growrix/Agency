@@ -3,6 +3,7 @@ import { requireAdminUser } from "@/server/auth/guards";
 import { ApiError, createRequestContext, errorResponse, successResponse } from "@/server/core/api";
 import type { OrderFulfillmentStatus, OrderPaymentStatus } from "@/server/data/schema";
 import { getOrderById, updateOrderOperations } from "@/server/domain/orders";
+import { getInvoiceByOrder } from "@/server/domain/invoices";
 import { recordAuditLog } from "@/server/logging/observability";
 
 export const dynamic = "force-dynamic";
@@ -79,7 +80,8 @@ export async function GET(request: NextRequest, context: RouteContext) {
       throw new ApiError("NOT_FOUND", 404, "Order not found.");
     }
 
-    return successResponse(order);
+    const invoice = await getInvoiceByOrder(order.id);
+    return successResponse({ ...order, invoice });
   } catch (error) {
     return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to load order."));
   }
