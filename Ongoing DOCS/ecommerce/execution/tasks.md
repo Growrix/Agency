@@ -72,7 +72,8 @@ Most recent delta from P22 execution:
 - Transactional hardening slice delivered: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard, and refund analytics instrumentation.
 - Invoice/operator parity slice delivered: invoice schema + domain lifecycle (`create/send/mark-paid/get`), non-Stripe checkout auto-invoice issuance, admin invoice send/paid APIs, and admin order invoice payload wiring.
 - Release evidence refreshed with passing `typecheck`, `test:unit` (including `orders.test.ts` and `invoices.test.ts`), `test:integration`, and full `health:check` including release-gates e2e (8/8).
-- Remaining blocker: Supabase normalized migration requires operator-provided `SUPABASE_DB_URL` in terminal environment.
+- Supabase normalized migration is now executed successfully with shared pooler connection (`npm --prefix web run db:migrate`).
+- Migration compatibility fix applied: `cart_items` expression-based uniqueness was moved from invalid table constraint syntax to a valid expression unique index in `web/supabase/schema.sql`.
 
 Reference implementation tracker:
 
@@ -106,5 +107,5 @@ Risks:
 
 ## Current Blockers
 
-- Supabase normalized migration remains blocked in this execution environment because `SUPABASE_DB_URL` is not configured; this blocks final T133/T135 production closure.
+- No active Supabase migration credential blocker remains in this execution environment.
 - Future application work must choose concrete platform services for payments, email, SMS, storage, search, analytics, shipping, and tax before production launch.

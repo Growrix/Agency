@@ -389,10 +389,16 @@ create table if not exists public.cart_items (
   fulfillment_type text,
   quantity integer not null check (quantity > 0),
   unit_price_cents integer not null check (unit_price_cents >= 0),
-  updated_at timestamptz not null default timezone('utc', now()),
-  unique (user_id, product_slug, coalesce(product_variant_slug, ''), coalesce(product_tier_name, ''))
+  updated_at timestamptz not null default timezone('utc', now())
 );
 create index if not exists cart_items_user_idx on public.cart_items (user_id, updated_at desc);
+create unique index if not exists cart_items_user_product_variant_tier_uniq
+  on public.cart_items (
+    user_id,
+    product_slug,
+    coalesce(product_variant_slug, ''),
+    coalesce(product_tier_name, '')
+  );
 
 drop trigger if exists cart_items_set_updated_at on public.cart_items;
 create trigger cart_items_set_updated_at

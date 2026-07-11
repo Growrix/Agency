@@ -7,6 +7,7 @@ This snapshot captures T135 release evidence after P22 transactional and invoice
 - `npm --prefix web run typecheck`: pass
 - `npm --prefix web run test:unit`: pass (includes `orders.test.ts` and `invoices.test.ts`)
 - `npm --prefix web run test:integration`: pass (8/8)
+- `npm --prefix web run db:migrate`: pass (shared pooler connection)
 - `npm --prefix web run health:check`: pass
   - lint pass
   - typecheck pass
@@ -29,10 +30,8 @@ This snapshot captures T135 release evidence after P22 transactional and invoice
   - invoice email sender and notification events (`invoice_sent`, `invoice_paid`)
 
 ## Launch Blockers (Open)
-- Supabase normalized migration (`npm --prefix web run db:migrate`) is blocked in this environment because `SUPABASE_DB_URL` is missing.
-- Final production launch sign-off remains blocked until migration evidence and production operator confirmations are complete.
+- Final production launch sign-off remains blocked until production operator confirmations are complete.
 
 ## Required Operator Action
-1. Export `SUPABASE_DB_URL` in secure terminal environment.
-2. Run: `npm --prefix web run db:migrate`.
-3. Record verification evidence for transactional tables and update tracker blocker status.
+1. Record transactional table verification evidence after successful migration run.
+2. Complete production operator confirmations for launch runbook checks.
