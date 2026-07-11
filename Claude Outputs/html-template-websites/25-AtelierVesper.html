@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atelier Vesper — Luxury Interior Design Studio</title>
+<meta name="description" content="Atelier Vesper is a luxury residential and commercial interior design studio creating bespoke spaces that reflect how you live. Discover your design style and book a complimentary consultation." />
+<meta name="theme-color" content="#FBFAF8" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#14110F" media="(prefers-color-scheme: dark)" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Atelier Vesper — Luxury Interior Design Studio" />
+<meta property="og:description" content="Bespoke residential and commercial interiors crafted to reflect your lifestyle. Discover your style and book a complimentary consultation." />
+<meta property="og:locale" content="en_GB" />
+<link rel="canonical" href="https://www.ateliervesper.com/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='c' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23E7CE9C'/%3E%3Cstop offset='.55' stop-color='%23C8A66B'/%3E%3Cstop offset='1' stop-color='%239C7A45'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2313110F'/%3E%3Cpath d='M19 18 L32 44 L45 18' fill='none' stroke='url(%23c)' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='50' r='2.2' fill='url(%23c)'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"InteriorDesignService","name":"Atelier Vesper","description":"Luxury residential and commercial interior design studio creating bespoke, considered interiors.","url":"https://www.ateliervesper.com","email":"studio@ateliervesper.com","telephone":"(800) 555-0025","foundingDate":"2009","priceRange":"$$$$","address":{"@type":"PostalAddress","streetAddress":"118 Marylebone Mews","addressLocality":"London","addressRegion":"Mayfair","postalCode":"W1U 5RP","addressCountry":"GB"},"areaServed":["London","New York","Dubai"],"slogan":"Interiors that shape extraordinary lives"}
+</script>
+<script>(function(){try{var t=localStorage.getItem('vesper-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);if(localStorage.getItem('vesper-announce')==='dismissed')document.documentElement.style.setProperty('--announce-h','0px');}catch(e){}})();</script>
+<style>
+/* ============================================================
+   ATELIER VESPER — Editorial Luxury + Architectural Minimalism
+   Single-file build · GrowrixOS Build 25
+   ============================================================ */
+:root{
+  --font-display:"Playfair Display",Georgia,serif;
+  --font-body:"Inter",system-ui,sans-serif;
+  --font-editorial:"Cormorant Garamond",Georgia,serif;
+  /* Light — architectural white */
+  --background:44 30% 98%;
+  --foreground:240 5% 6%;
+  --surface:40 33% 99%;
+  --surface-muted:42 36% 94%;
+  --border:38 20% 87%;
+  --ring:38 48% 60%;
+  --muted:42 30% 92%;
+  --muted-foreground:35 14% 46%;
+  --obsidian:240 5% 6%;
+  --taupe:35 18% 58%;
+  --champagne:38 48% 56%;
+  --champagne-soft:42 58% 74%;
+  --champagne-deep:36 46% 42%;
+  --ivory:42 38% 93%;
+  --shadow:34 24% 24%;
+  --success:152 34% 40%;
+  --warning:38 62% 48%;
+  --announce-h:2.5rem;
+}
+[data-theme="dark"]{
+  --background:30 11% 7%;
+  --foreground:42 36% 92%;
+  --surface:32 10% 11%;
+  --surface-muted:30 9% 14%;
+  --border:34 11% 20%;
+  --ring:40 52% 62%;
+  --muted:30 9% 16%;
+  --muted-foreground:38 12% 62%;
+  --obsidian:30 8% 5%;
+  --taupe:35 16% 62%;
+  --champagne:40 54% 64%;
+  --champagne-soft:42 50% 76%;
+  --champagne-deep:36 44% 50%;
+  --ivory:42 30% 90%;
+  --shadow:0 0% 0%;
+  --success:152 30% 52%;
+  --warning:38 58% 56%;
+}
+*{margin:0;padding:0;box-sizing:border-box;border-color:hsl(var(--border));}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  background:hsl(var(--background));color:hsl(var(--foreground));
+  font-family:var(--font-body);-webkit-font-smoothing:antialiased;
+  font-feature-settings:"ss01","cv01","cv11";text-rendering:optimizeLegibility;
+  line-height:1.6;overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-display);font-weight:500;text-wrap:balance;line-height:1.1;}
+p{text-wrap:pretty;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;}
+::selection{background:hsl(var(--champagne) / .3);color:hsl(var(--foreground));}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:3px;border-radius:4px;}
+::-webkit-scrollbar{width:11px;height:11px;}
+::-webkit-scrollbar-track{background:hsl(var(--surface-muted));}
+::-webkit-scrollbar-thumb{background:hsl(var(--taupe) / .5);border-radius:999px;border:3px solid hsl(var(--surface-muted));}
+::-webkit-scrollbar-thumb:hover{background:hsl(var(--champagne) / .7);}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+/* ---------- Layout primitives ---------- */
+.container{width:100%;max-width:1320px;margin:0 auto;padding:0 1.5rem;}
+@media(min-width:1024px){.container{padding:0 2rem;}}
+.section{padding:clamp(5rem,11vw,7.5rem) 0;}
+.bg-surface{background:hsl(var(--surface) / .4);}
+.bg-surface-60{background:hsl(var(--surface) / .6);}
+
+/* ---------- Type scale ---------- */
+.eyebrow{font-size:.6875rem;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+.caption{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;}
+.t-display{font-size:clamp(3.5rem,11vw,9rem);line-height:.95;letter-spacing:-.03em;}
+.t-h1{font-size:clamp(2.75rem,6.5vw,5.5rem);line-height:1.02;letter-spacing:-.02em;}
+.t-h2{font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;letter-spacing:-.01em;}
+.t-h3{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.2;}
+.t-subhead{font-size:1.5rem;line-height:1.4;}
+.t-lead{font-size:1.25rem;line-height:1.6;color:hsl(var(--muted-foreground));}
+.t-body{font-size:1.0625rem;line-height:1.75;}
+.muted{color:hsl(var(--muted-foreground));}
+.champagne{color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .champagne{color:hsl(var(--champagne));}
+.serif-i{font-family:var(--font-editorial);font-style:italic;}
+.grad-champagne{
+  background-image:linear-gradient(105deg,hsl(var(--champagne-deep)) 0%,hsl(var(--champagne)) 38%,hsl(var(--champagne-soft)) 60%,hsl(var(--champagne)) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.idx{font-family:var(--font-display);font-size:.875rem;color:hsl(var(--champagne));}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;white-space:nowrap;font-weight:500;border-radius:999px;transition:all .3s cubic-bezier(.22,1,.36,1);}
+.btn svg{width:1rem;height:1rem;}
+.btn-md{height:3rem;padding:0 1.75rem;font-size:.9rem;}
+.btn-lg{height:3.5rem;padding:0 2.25rem;font-size:.95rem;}
+.btn-sm{height:2.25rem;padding:0 1rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;}
+.btn-champagne{background:hsl(var(--champagne));color:hsl(var(--obsidian));}
+.btn-champagne:hover{background:hsl(var(--champagne-soft));transform:translateY(-2px);box-shadow:0 0 0 1px hsl(var(--champagne) / .35),0 24px 60px -30px hsl(var(--champagne) / .55);}
+.btn-primary{background:hsl(var(--foreground));color:hsl(var(--background));}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);}
+.btn-outline{border:1px solid hsl(var(--border));color:hsl(var(--foreground));}
+.btn-outline:hover{border-color:hsl(var(--champagne));color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .btn-outline:hover{color:hsl(var(--champagne));}
+.btn-link{color:hsl(var(--foreground));text-underline-offset:4px;}
+.btn-link:hover{color:hsl(var(--champagne-deep));text-decoration:underline;}
+[data-theme="dark"] .btn-link:hover{color:hsl(var(--champagne));}
+
+/* ---------- Decorative ---------- */
+.rule{height:1px;width:100%;background:hsl(var(--border));}
+.icon-circle{display:grid;place-items:center;border-radius:999px;border:1px solid hsl(var(--border));}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");}
+
+/* Material swatches (procedural, no assets) */
+.mat{border-radius:999px;box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);}
+.mat-marble{background:radial-gradient(120% 120% at 20% 10%,hsl(var(--ivory)) 0%,transparent 55%),repeating-linear-gradient(115deg,hsl(var(--taupe) / .12) 0 2px,transparent 2px 26px),linear-gradient(160deg,hsl(42 30% 96%),hsl(38 18% 88%));}
+.mat-oak{background:repeating-linear-gradient(92deg,hsl(28 35% 42% / .22) 0 1px,transparent 1px 9px),linear-gradient(180deg,hsl(30 38% 56%),hsl(26 40% 42%));}
+.mat-brass{background:linear-gradient(125deg,hsl(var(--champagne-soft)) 0%,hsl(var(--champagne)) 30%,hsl(var(--champagne-deep)) 55%,hsl(var(--champagne)) 80%,hsl(var(--champagne-soft)) 100%);}
+.mat-linen{background:repeating-linear-gradient(0deg,hsl(var(--taupe) / .16) 0 1px,transparent 1px 5px),repeating-linear-gradient(90deg,hsl(var(--taupe) / .16) 0 1px,transparent 1px 5px),linear-gradient(160deg,hsl(40 30% 92%),hsl(36 22% 84%));}
+.mat-travertine{background:radial-gradient(80% 60% at 30% 30%,hsl(38 30% 90% / .9),transparent 60%),radial-gradient(70% 50% at 70% 70%,hsl(34 26% 80% / .7),transparent 55%),linear-gradient(150deg,hsl(38 26% 86%),hsl(32 20% 74%));}
+.mat-slate{background:repeating-linear-gradient(135deg,hsl(220 8% 30% / .18) 0 2px,transparent 2px 16px),linear-gradient(160deg,hsl(220 9% 32%),hsl(222 12% 20%));}
+
+.scene{background:radial-gradient(75% 110% at 78% -10%,hsl(var(--champagne-soft) / .55),transparent 55%),linear-gradient(185deg,hsl(var(--ivory)) 0%,hsl(var(--surface-muted)) 60%,hsl(var(--taupe) / .35) 100%);}
+[data-theme="dark"] .scene{background:radial-gradient(75% 110% at 78% -10%,hsl(var(--champagne) / .32),transparent 55%),linear-gradient(185deg,hsl(32 12% 14%) 0%,hsl(30 11% 9%) 60%,hsl(30 10% 6%) 100%);}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1;transform:none;}
+
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1.05);}50%{transform:translate3d(-1.5%,-1%,0) scale(1.08);}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(25%);}}
+@keyframes ping{75%,100%{transform:scale(2);opacity:0;}}
+@keyframes spin-dot{0%,80%,100%{transform:scale(.6);opacity:.4;}40%{transform:scale(1);opacity:1;}}
+
+/* ---------- Skip link ---------- */
+.skip-link{position:absolute;left:-999px;top:0;z-index:200;}
+.skip-link:focus{left:1rem;top:1rem;background:hsl(var(--foreground));color:hsl(var(--background));padding:.625rem 1.25rem;border-radius:999px;font-size:.875rem;font-weight:500;}
+
+/* ---------- Announcement bar ---------- */
+.announce{position:fixed;inset-inline:0;top:0;z-index:60;background:hsl(var(--obsidian));color:hsl(var(--ivory));overflow:hidden;transition:height .35s cubic-bezier(.22,1,.36,1);}
+.announce-inner{height:2.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.announce-track{position:relative;height:1.25rem;flex:1;overflow:hidden;text-align:center;max-width:60ch;}
+.announce-msg{position:absolute;inset:0;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:hsl(var(--ivory) / .9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s;}
+.announce-msg.show{opacity:1;transform:none;}
+.announce-x{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:999px;color:hsl(var(--ivory) / .7);flex-shrink:0;transition:.2s;}
+.announce-x:hover{background:hsl(var(--ivory) / .1);color:hsl(var(--ivory));}
+.announce-x svg{width:.875rem;height:.875rem;}
+
+/* ---------- Header ---------- */
+.header{position:fixed;inset-inline:0;z-index:50;padding:0 1rem;top:calc(var(--announce-h) + .875rem);transition:top .3s cubic-bezier(.22,1,.36,1);}
+.nav{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;border-radius:999px;border:1px solid transparent;padding:.625rem 1rem;background:hsl(var(--surface) / .2);backdrop-filter:blur(8px);transition:all .5s cubic-bezier(.22,1,.36,1);}
+@media(min-width:640px){.nav{padding:.625rem 1.25rem;}}
+.nav.scrolled{border-color:hsl(var(--border));background:hsl(var(--surface) / .8);box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);backdrop-filter:blur(20px);}
+.wordmark{display:flex;align-items:baseline;gap:.5rem;font-family:var(--font-display);font-size:1.25rem;letter-spacing:-.01em;}
+.nav-links{display:none;align-items:center;gap:.25rem;}
+@media(min-width:1024px){.nav-links{display:flex;}}
+.nav-link{padding:.5rem 1rem;border-radius:999px;font-size:.875rem;color:hsl(var(--muted-foreground));transition:color .2s;}
+.nav-link:hover{color:hsl(var(--foreground));}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+.icon-btn{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .6);color:hsl(var(--foreground));backdrop-filter:blur(8px);transition:.2s;}
+.icon-btn:hover{border-color:hsl(var(--champagne));color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .icon-btn:hover{color:hsl(var(--champagne));}
+.icon-btn svg{width:18px;height:18px;}
+.hide-sm{display:none;}
+@media(min-width:640px){.hide-sm{display:grid;}.hide-sm.inline{display:inline-flex;}}
+.hide-md{display:none;}
+@media(min-width:768px){.hide-md{display:inline-flex;}}
+.menu-btn{display:grid;}
+@media(min-width:1024px){.menu-btn{display:none;}}
+
+/* ---------- Drawer (mobile sheet) ---------- */
+.drawer-backdrop{position:fixed;inset:0;z-index:70;background:hsl(var(--obsidian) / .55);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+.drawer-backdrop.open{opacity:1;visibility:visible;}
+.drawer{position:fixed;inset-block:0;right:0;z-index:71;width:min(100%,24rem);background:hsl(var(--surface));border-left:1px solid hsl(var(--border));border-radius:1.5rem 0 0 1.5rem;padding:1.5rem;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);}
+@media(min-width:640px){.drawer{padding:2rem;}}
+.drawer.open{transform:none;}
+.drawer-links{margin-top:2.5rem;display:flex;flex-direction:column;}
+.drawer-link{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;font-family:var(--font-display);font-size:1.5rem;border-bottom:1px solid hsl(var(--border));transition:color .2s;}
+.drawer-link:last-child{border-bottom:none;}
+.drawer-link:hover{color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .drawer-link:hover{color:hsl(var(--champagne));}
+.drawer-foot{margin-top:auto;display:flex;align-items:center;gap:.75rem;padding-top:2rem;}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:100svh;overflow:hidden;padding-top:calc(var(--announce-h) + 7rem);padding-bottom:6rem;}
+.hero-drift{position:absolute;inset:0;z-index:-10;opacity:.7;animation:drift 24s ease-in-out infinite;}
+.hero-wash{position:absolute;inset:0;z-index:-10;opacity:.6;background-image:linear-gradient(100deg,transparent 0%,transparent 52%,hsl(var(--champagne-soft) / .18) 60%,transparent 72%);}
+.hero-line{position:absolute;inset-block:0;right:8%;width:1px;background:linear-gradient(to bottom,transparent,hsl(var(--border)),transparent);display:none;}
+@media(min-width:1024px){.hero-line{display:block;}}
+.hero-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+.hero-eyebrow span:first-child{height:1px;width:2.5rem;background:hsl(var(--champagne));}
+.hero h1 span{display:block;}
+.hero-sub{margin-top:2rem;max-width:36rem;}
+.hero-cta{margin-top:2.5rem;display:flex;flex-direction:column;gap:.75rem;}
+@media(min-width:640px){.hero-cta{flex-direction:row;align-items:center;}}
+.hero-stars{margin-top:3.5rem;display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:hsl(var(--muted-foreground));}
+.stars{display:inline-flex;}
+.stars svg{width:14px;height:14px;fill:hsl(var(--champagne));color:hsl(var(--champagne));}
+.trust-rail{margin-top:auto;padding-top:4rem;}
+.trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem 1.5rem;border-top:1px solid hsl(var(--border));padding-top:1.75rem;}
+@media(min-width:768px){.trust-grid{grid-template-columns:repeat(4,1fr);}}
+.trust-item{display:flex;align-items:flex-start;gap:.75rem;}
+.trust-item span:last-child{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:hsl(var(--foreground) / .75);}
+.scroll-cue{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);flex-direction:column;align-items:center;gap:.5rem;color:hsl(var(--muted-foreground));display:none;}
+@media(min-width:1024px){.scroll-cue{display:flex;}}
+.scroll-cue svg{width:1rem;height:1rem;animation:bounce 1.8s ease-in-out infinite;}
+
+/* ---------- Press marquee ---------- */
+.press{border-block:1px solid hsl(var(--border));background:hsl(var(--surface) / .6);padding:2.5rem 0;}
+.marquee-mask{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
+.marquee{display:flex;width:max-content;align-items:center;gap:4rem;padding:0 2rem;animation:marquee 38s linear infinite;}
+.marquee:hover{animation-play-state:paused;}
+.press-name{white-space:nowrap;font-family:var(--font-display);font-size:1.125rem;letter-spacing:.12em;color:hsl(var(--foreground) / .45);transition:color .3s;}
+.press-name:hover{color:hsl(var(--foreground) / .8);}
+
+/* ---------- Section heading ---------- */
+.sec-head{display:flex;max-width:42rem;flex-direction:column;gap:1.25rem;}
+.sec-head.center{margin:0 auto;align-items:center;text-align:center;}
+.sec-eyebrow-row{display:flex;align-items:center;gap:.75rem;}
+
+/* ---------- Philosophy ---------- */
+.split{display:grid;gap:3.5rem;}
+@media(min-width:1024px){.split{grid-template-columns:.85fr 1.15fr;gap:5rem;}.split-rev{grid-template-columns:.8fr 1.2fr;}}
+.sticky-col{align-self:flex-start;}
+@media(min-width:1024px){.sticky-col{position:sticky;top:8rem;}}
+.pull{margin-top:2.5rem;max-width:28rem;border-left:2px solid hsl(var(--champagne));padding-left:1.5rem;}
+.pull blockquote{font-family:var(--font-editorial);font-style:italic;font-size:1.5rem;line-height:1.4;color:hsl(var(--foreground) / .9);}
+.principles{display:flex;flex-direction:column;}
+.principle{display:flex;align-items:flex-start;gap:1.5rem;border-bottom:1px solid hsl(var(--border));padding:2rem 0;}
+.principle:first-child{padding-top:0;}
+.principle .mat{margin-top:.375rem;height:3rem;width:3rem;flex-shrink:0;box-shadow:0 1px 0 0 hsl(var(--border)),0 8px 30px -18px hsl(var(--shadow) / .45);transition:transform .5s cubic-bezier(.22,1,.36,1);}
+.principle:hover .mat{transform:scale(1.1);}
+
+/* ---------- Portfolio ---------- */
+.filters{margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:.5rem;}
+.filter{border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface));padding:.5rem 1rem;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:hsl(var(--muted-foreground));transition:all .3s cubic-bezier(.22,1,.36,1);}
+.filter:hover{border-color:hsl(var(--champagne));color:hsl(var(--foreground));}
+.filter.active{border-color:hsl(var(--champagne));background:hsl(var(--champagne));color:hsl(var(--obsidian));}
+.port-grid{margin-top:2.5rem;display:grid;gap:1.5rem;grid-template-columns:1fr;}
+@media(min-width:640px){.port-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.port-grid{grid-template-columns:repeat(3,1fr);}}
+.port-card{display:flex;flex-direction:column;overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--surface));box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);transition:box-shadow .5s,opacity .4s,transform .4s;}
+.port-card:hover{box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);}
+.port-media-btn{position:relative;text-align:left;width:100%;display:block;}
+.port-media{overflow:hidden;}
+.port-art{position:relative;width:100%;aspect-ratio:5/4;overflow:hidden;transition:transform .7s cubic-bezier(.22,1,.36,1);}
+.port-card:hover .port-art{transform:scale(1.04);}
+.port-art .beam{position:absolute;inset:0;background-image:linear-gradient(105deg,transparent 40%,hsl(40 60% 90% / .22) 52%,transparent 64%);}
+.port-art .hz{position:absolute;inset-inline:0;bottom:33%;height:1px;}
+.port-art .post{position:absolute;bottom:18%;left:12%;height:4rem;width:1px;}
+.port-art .pal{position:absolute;inset-inline:1rem;bottom:1rem;display:flex;gap:.375rem;}
+.port-art .pal span{height:.625rem;flex:1;}
+.port-badge{position:absolute;right:1rem;top:1rem;display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:999px;background:hsl(var(--surface) / .9);backdrop-filter:blur(8px);opacity:0;transform:translateY(4px);transition:all .5s cubic-bezier(.22,1,.36,1);}
+.port-card:hover .port-badge{opacity:1;transform:none;}
+.port-badge svg{width:1rem;height:1rem;}
+.port-body{display:flex;flex:1;flex-direction:column;gap:.75rem;padding:1.5rem;}
+.port-meta{display:flex;align-items:center;justify-content:space-between;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+.port-foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:.25rem 1.25rem;padding-top:.75rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+.port-foot span{display:inline-flex;align-items:center;gap:.375rem;}
+.port-foot svg{width:14px;height:14px;color:hsl(var(--champagne));}
+
+/* ---------- Modal ---------- */
+.modal-backdrop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:1rem;background:hsl(var(--obsidian) / .55);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+.modal-backdrop.open{opacity:1;visibility:visible;}
+.modal{width:100%;max-width:42rem;max-height:85svh;overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--surface));box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);transform:translateY(16px) scale(.98);transition:transform .3s cubic-bezier(.22,1,.36,1);}
+.modal-backdrop.open .modal{transform:none;}
+.modal-scroll{max-height:85svh;overflow-y:auto;}
+.modal-x{position:absolute;right:1.25rem;top:1.25rem;display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .8);color:hsl(var(--muted-foreground));z-index:2;transition:.2s;}
+.modal-x:hover{border-color:hsl(var(--champagne));color:hsl(var(--foreground));}
+.modal-x svg{width:1rem;height:1rem;}
+
+/* ---------- Services ---------- */
+.svc-grid{margin-top:3.5rem;display:grid;gap:1px;overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--border));grid-template-columns:1fr;}
+@media(min-width:768px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr);}}
+.svc{display:flex;height:100%;flex-direction:column;gap:1.25rem;background:hsl(var(--surface));padding:1.75rem;transition:background .5s;}
+@media(min-width:1024px){.svc{padding:2rem;}}
+.svc:hover{background:hsl(var(--background));}
+.svc-top{display:flex;align-items:center;justify-content:space-between;}
+.svc-ico{display:grid;place-items:center;width:3rem;height:3rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--background));color:hsl(var(--champagne-deep));transition:all .5s cubic-bezier(.22,1,.36,1);}
+[data-theme="dark"] .svc-ico{color:hsl(var(--champagne));}
+.svc:hover .svc-ico{border-color:hsl(var(--champagne));background:hsl(var(--champagne));color:hsl(var(--obsidian));}
+.svc-ico svg{width:1.25rem;height:1.25rem;}
+.svc ul{margin-top:auto;display:flex;flex-direction:column;gap:.5rem;padding-top:.5rem;list-style:none;}
+.svc li{display:flex;align-items:center;gap:.625rem;font-size:.875rem;color:hsl(var(--foreground) / .8);}
+.svc li svg{width:14px;height:14px;flex-shrink:0;color:hsl(var(--champagne));}
+.svc .note{border-top:1px solid hsl(var(--border));padding-top:1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+
+/* ---------- Process timeline ---------- */
+.steps{margin-top:4rem;list-style:none;}
+.step{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;}
+@media(min-width:640px){.step{gap:2.5rem;}}
+.step-rail{display:flex;flex-direction:column;align-items:center;}
+.step-num{display:grid;place-items:center;width:3.5rem;height:3.5rem;flex-shrink:0;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface));font-family:var(--font-display);font-size:1.25rem;color:hsl(var(--champagne-deep));box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);}
+[data-theme="dark"] .step-num{color:hsl(var(--champagne));}
+.step-conn{margin:.5rem 0;width:1px;flex:1;background:linear-gradient(to bottom,hsl(var(--champagne) / .5),hsl(var(--border)));}
+.step-body{padding-bottom:3rem;}
+.step-body.last{padding-bottom:0;}
+.step-head{display:flex;flex-direction:column;gap:.5rem;}
+@media(min-width:640px){.step-head{flex-direction:row;align-items:center;justify-content:space-between;}}
+.dur{width:fit-content;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:.25rem .75rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+.outcomes{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;}
+.outcomes li{border-radius:999px;background:hsl(var(--surface));padding:.375rem .75rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:hsl(var(--foreground) / .7);box-shadow:0 0 0 1px hsl(var(--border));}
+
+/* ---------- Style Discovery (signature) ---------- */
+.discovery{position:relative;overflow:hidden;}
+.disc-aura{position:absolute;left:50%;top:6rem;height:34rem;width:34rem;transform:translateX(-50%);opacity:.6;filter:blur(64px);pointer-events:none;background:radial-gradient(circle,hsl(var(--champagne-soft) / .4),transparent 70%);}
+.quiz-shell{position:relative;margin:3rem auto 0;max-width:48rem;overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .9);box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);backdrop-filter:blur(4px);}
+.quiz-prog{height:.25rem;width:100%;background:hsl(var(--surface-muted));}
+.quiz-prog-bar{height:100%;background:hsl(var(--champagne));width:0;transition:width .4s cubic-bezier(.22,1,.36,1);}
+.quiz-pad{padding:1.75rem;}
+@media(min-width:640px){.quiz-pad{padding:2.5rem;}}
+.quiz-step{display:none;}
+.quiz-step.active{display:block;animation:fadeup .4s cubic-bezier(.22,1,.36,1);}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.quiz-center{text-align:center;}
+.big-ico{margin:0 auto;display:grid;place-items:center;width:4rem;height:4rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--background));color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .big-ico{color:hsl(var(--champagne));}
+.big-ico svg{width:1.75rem;height:1.75rem;}
+.q-top{margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.q-opts{margin-top:1.75rem;display:grid;gap:.75rem;grid-template-columns:1fr;}
+@media(min-width:640px){.q-opts{grid-template-columns:repeat(2,1fr);}}
+.q-opt{display:flex;align-items:flex-start;gap:.75rem;border-radius:.75rem;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:1rem;text-align:left;transition:all .3s cubic-bezier(.22,1,.36,1);}
+.q-opt:hover{border-color:hsl(var(--champagne) / .6);background:hsl(var(--surface));}
+.q-opt.sel{border-color:hsl(var(--champagne));background:hsl(var(--champagne) / .1);box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);}
+.q-check{margin-top:.125rem;display:grid;place-items:center;width:1.25rem;height:1.25rem;flex-shrink:0;border-radius:999px;border:1px solid hsl(var(--border));color:transparent;transition:.2s;}
+.q-opt.sel .q-check{border-color:hsl(var(--champagne));background:hsl(var(--champagne));color:hsl(var(--obsidian));}
+.q-check svg{width:12px;height:12px;}
+.q-opt b{display:block;font-weight:500;}
+.q-opt small{margin-top:.125rem;display:block;font-size:.875rem;color:hsl(var(--muted-foreground));}
+.q-nav{margin-top:1.75rem;display:flex;align-items:center;justify-content:space-between;}
+.link-btn{display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem;color:hsl(var(--muted-foreground));transition:color .2s;}
+.link-btn:hover{color:hsl(var(--foreground));}
+.link-btn svg{width:1rem;height:1rem;}
+.field{height:3rem;width:100%;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:0 1.25rem;font-size:.875rem;outline:none;transition:border-color .2s;}
+.field::placeholder{color:hsl(var(--muted-foreground));}
+.field:focus{border-color:hsl(var(--champagne));}
+.capture-form{margin:1.75rem auto 0;display:flex;max-width:28rem;flex-direction:column;gap:.75rem;}
+/* result */
+.res-pal{display:flex;gap:.5rem;}
+.res-pal span{height:3rem;flex:1;border-radius:.5rem;box-shadow:0 0 0 1px hsl(var(--border));}
+.chips{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.5rem;}
+.chip{border-radius:999px;background:hsl(var(--surface-muted));padding:.25rem .75rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:hsl(var(--foreground) / .7);}
+.res-mats{display:flex;flex-wrap:wrap;gap:.75rem;}
+.res-mat{display:flex;flex-direction:column;align-items:center;gap:.375rem;}
+.res-mat .mat{height:3rem;width:3rem;box-shadow:0 0 0 1px hsl(var(--border));}
+.res-grid{margin-top:2rem;display:grid;gap:1.5rem;grid-template-columns:1fr;}
+@media(min-width:640px){.res-grid{grid-template-columns:repeat(2,1fr);}}
+.mood{margin-top:1.5rem;border-radius:.75rem;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:1.25rem;}
+.bars{display:flex;flex-direction:column;gap:.625rem;}
+.bar-row{display:flex;align-items:center;gap:.75rem;}
+.bar-row .nm{width:10rem;flex-shrink:0;font-size:.875rem;color:hsl(var(--foreground) / .8);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bar-track{height:.5rem;flex:1;overflow:hidden;border-radius:999px;background:hsl(var(--surface-muted));}
+.bar-fill{display:block;height:100%;border-radius:999px;width:0;transition:width .8s cubic-bezier(.22,1,.36,1);}
+.bar-row .pc{width:2.5rem;text-align:right;font-size:.75rem;color:hsl(var(--muted-foreground));}
+.roadmap{display:grid;gap:.75rem;grid-template-columns:1fr;list-style:none;}
+@media(min-width:640px){.roadmap{grid-template-columns:repeat(3,1fr);}}
+.roadmap li{border-radius:.75rem;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:1rem;}
+
+/* ---------- Stats band ---------- */
+.stats{background:hsl(var(--obsidian));color:hsl(var(--ivory));}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem 1.5rem;}
+@media(min-width:768px){.stat-grid{grid-template-columns:repeat(5,1fr);}}
+.stat{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 .5rem;}
+@media(min-width:768px){.stat{border-left:1px solid hsl(var(--ivory) / .1);}.stat:first-child{border-left:none;}}
+.stat dd{display:flex;align-items:baseline;font-family:var(--font-display);font-size:3rem;line-height:1;letter-spacing:-.02em;}
+@media(min-width:640px){.stat dd{font-size:3.75rem;}}
+.stat dt{margin-top:1rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:hsl(var(--ivory) / .65);}
+
+/* ---------- Testimonials ---------- */
+.tst-wrap{max-width:56rem;margin:0 auto;}
+.tst-q{margin:0 auto 1.5rem;width:2.5rem;height:2.5rem;color:hsl(var(--champagne));}
+.tst-track{min-height:15rem;}
+@media(min-width:640px){.tst-track{min-height:13rem;}}
+.tst{text-align:center;display:none;}
+.tst.active{display:block;animation:fadeup .45s cubic-bezier(.22,1,.36,1);}
+.tst blockquote{font-family:var(--font-editorial);font-style:italic;font-size:1.5rem;line-height:1.4;}
+@media(min-width:640px){.tst blockquote{font-size:2rem;line-height:1.3;}}
+.tst figcaption{margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:.75rem;}
+.tst-av{display:grid;place-items:center;width:3rem;height:3rem;border-radius:999px;border:1px solid hsl(var(--champagne) / .4);background:hsl(var(--surface));font-family:var(--font-display);font-size:.875rem;color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .tst-av{color:hsl(var(--champagne));}
+.tst-ctrl{margin-top:2.5rem;display:flex;align-items:center;justify-content:center;gap:1.25rem;}
+.tst-dots{display:flex;align-items:center;gap:.5rem;}
+.dot{height:.5rem;width:.5rem;border-radius:999px;background:hsl(var(--border));transition:all .3s;}
+.dot.active{width:1.5rem;background:hsl(var(--champagne));}
+.dot:hover{background:hsl(var(--taupe));}
+
+/* ---------- Awards ---------- */
+.awards{list-style:none;}
+.award{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.25rem;border-bottom:1px solid hsl(var(--border));padding:1.75rem 0;}
+.award:first-child{border-top:1px solid hsl(var(--border));}
+.award-ico{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:999px;border:1px solid hsl(var(--border));color:hsl(var(--champagne-deep));transition:.3s;}
+[data-theme="dark"] .award-ico{color:hsl(var(--champagne));}
+.award:hover .award-ico{border-color:hsl(var(--champagne));color:hsl(var(--champagne));}
+.award-ico svg{width:1.25rem;height:1.25rem;}
+.award-yr{font-family:var(--font-display);font-size:1.5rem;color:hsl(var(--muted-foreground) / .7);transition:color .3s;}
+.award:hover .award-yr{color:hsl(var(--champagne));}
+
+/* ---------- Journal ---------- */
+.jrnl-grid{margin-top:3rem;display:grid;gap:1.5rem;grid-template-columns:1fr;}
+@media(min-width:768px){.jrnl-grid{grid-template-columns:repeat(3,1fr);}}
+.jrnl{display:flex;height:100%;flex-direction:column;overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--surface));box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);transition:box-shadow .5s;}
+.jrnl:hover{box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);}
+.jrnl-art{aspect-ratio:16/10;width:100%;transition:transform .7s cubic-bezier(.22,1,.36,1);}
+.jrnl:hover .jrnl-art{transform:scale(1.04);}
+.jrnl-body{display:flex;flex:1;flex-direction:column;gap:.75rem;padding:1.5rem;}
+.jrnl-meta{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;}
+.jrnl-meta .rt{display:inline-flex;align-items:center;gap:.375rem;color:hsl(var(--muted-foreground));}
+.jrnl-meta svg{width:14px;height:14px;}
+.read{margin-top:auto;display:inline-flex;align-items:center;gap:.375rem;padding-top:.75rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;transition:color .2s;}
+.read:hover{color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .read:hover{color:hsl(var(--champagne));}
+.read svg{width:14px;height:14px;}
+.lead-magnet{position:relative;margin-top:1.5rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--obsidian));padding:1.75rem;color:hsl(var(--ivory));}
+@media(min-width:640px){.lead-magnet{padding:2.25rem;}}
+.lm-glow{position:absolute;right:-4rem;top:-4rem;width:12rem;height:12rem;border-radius:999px;opacity:.5;filter:blur(32px);background:radial-gradient(circle,hsl(var(--champagne) / .5),transparent 70%);pointer-events:none;}
+.lm-tag{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;border:1px solid hsl(var(--ivory) / .15);padding:.25rem .75rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:hsl(var(--ivory) / .7);}
+.lm-tag svg{width:14px;height:14px;color:hsl(var(--champagne));}
+.lm-form{position:relative;display:flex;flex-direction:column;gap:.75rem;}
+@media(min-width:640px){.lm-form{flex-direction:row;}}
+.field-dark{height:3rem;flex:1;border-radius:999px;border:1px solid hsl(var(--ivory) / .2);background:hsl(var(--ivory) / .05);padding:0 1.25rem;font-size:.875rem;color:hsl(var(--ivory));outline:none;transition:border-color .2s;}
+.field-dark::placeholder{color:hsl(var(--ivory) / .4);}
+.field-dark:focus{border-color:hsl(var(--champagne));}
+
+/* ---------- FAQ ---------- */
+.acc-item{border-bottom:1px solid hsl(var(--border));}
+.acc-trigger{display:flex;width:100%;align-items:center;justify-content:space-between;gap:1rem;padding:1.5rem 0;text-align:left;font-family:var(--font-display);font-size:1.5rem;transition:color .2s;}
+.acc-trigger:hover{color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .acc-trigger:hover{color:hsl(var(--champagne));}
+.acc-trigger svg{width:1.25rem;height:1.25rem;flex-shrink:0;color:hsl(var(--champagne));transition:transform .3s cubic-bezier(.22,1,.36,1);}
+.acc-item.open .acc-trigger svg{transform:rotate(45deg);}
+.acc-panel{overflow:hidden;max-height:0;transition:max-height .35s ease;}
+.acc-inner{max-width:42rem;padding:0 2rem 1.5rem 0;color:hsl(var(--muted-foreground));font-size:1.0625rem;line-height:1.7;}
+
+/* ---------- Contact ---------- */
+.contact-card{overflow:hidden;border-radius:1.5rem;border:1px solid hsl(var(--border));background:hsl(var(--surface));box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);}
+@media(min-width:1024px){.contact-card{display:grid;grid-template-columns:.9fr 1.1fr;}}
+.contact-side{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;background:hsl(var(--obsidian));padding:2rem;color:hsl(var(--ivory));}
+@media(min-width:640px){.contact-side{padding:3rem;}}
+.contact-glow{position:absolute;left:-5rem;bottom:0;width:14rem;height:14rem;border-radius:999px;opacity:.5;filter:blur(64px);background:radial-gradient(circle,hsl(var(--champagne) / .45),transparent 70%);pointer-events:none;}
+.contact-list{position:relative;display:flex;flex-direction:column;gap:1rem;font-size:.9rem;list-style:none;}
+.contact-list li,.contact-list a{display:flex;align-items:center;gap:.75rem;color:hsl(var(--ivory) / .85);transition:color .2s;}
+.contact-list a:hover{color:hsl(var(--ivory));}
+.contact-ico{display:grid;place-items:center;width:2.5rem;height:2.5rem;flex-shrink:0;border-radius:999px;border:1px solid hsl(var(--ivory) / .15);color:hsl(var(--champagne));transition:border-color .2s;}
+.contact-list a:hover .contact-ico{border-color:hsl(var(--champagne));}
+.contact-ico svg{width:1rem;height:1rem;}
+.contact-form{padding:2rem;display:flex;flex-direction:column;gap:1rem;}
+@media(min-width:640px){.contact-form{padding:3rem;}}
+.form-row{display:grid;gap:1rem;grid-template-columns:1fr;}
+@media(min-width:640px){.form-row{grid-template-columns:repeat(2,1fr);}}
+.field-group{display:flex;flex-direction:column;gap:.375rem;}
+.field-group label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+.select{appearance:none;background-repeat:no-repeat;background-position:right 1.25rem center;background-size:1rem;padding-right:2.5rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a89a86' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");}
+.textarea{width:100%;resize:none;border-radius:1.25rem;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:1rem 1.25rem;font-size:.875rem;outline:none;transition:border-color .2s;line-height:1.6;}
+.textarea::placeholder{color:hsl(var(--muted-foreground));}
+.textarea:focus{border-color:hsl(var(--champagne));}
+
+/* ---------- Footer ---------- */
+.footer{position:relative;overflow:hidden;border-top:1px solid hsl(var(--border));background:hsl(var(--surface));}
+.foot-grid{display:grid;gap:3rem;grid-template-columns:1fr;}
+@media(min-width:1024px){.foot-grid{grid-template-columns:1.4fr repeat(3,1fr);}}
+.foot-contact{display:flex;flex-direction:column;gap:.25rem;font-size:.875rem;color:hsl(var(--muted-foreground));}
+.foot-contact a:hover{color:hsl(var(--foreground));}
+.foot-social{display:flex;gap:.5rem;}
+.foot-social a{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:999px;border:1px solid hsl(var(--border));color:hsl(var(--muted-foreground));transition:.2s;}
+.foot-social a:hover{border-color:hsl(var(--champagne));color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .foot-social a:hover{color:hsl(var(--champagne));}
+.foot-social svg{width:1rem;height:1rem;}
+.foot-col h3{margin-bottom:1.25rem;font-family:var(--font-body);font-size:.6875rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.foot-col a{font-size:1.0625rem;color:hsl(var(--foreground) / .8);transition:color .2s;}
+.foot-col a:hover{color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .foot-col a:hover{color:hsl(var(--champagne));}
+.foot-bottom{margin-top:4rem;display:flex;flex-direction:column;gap:1rem;border-top:1px solid hsl(var(--border));padding-top:2rem;font-size:.875rem;color:hsl(var(--muted-foreground));}
+@media(min-width:640px){.foot-bottom{flex-direction:row;align-items:center;justify-content:space-between;}}
+.foot-bottom a{font-weight:500;color:hsl(var(--foreground));text-underline-offset:4px;}
+.foot-bottom a:hover{color:hsl(var(--champagne-deep));text-decoration:underline;}
+[data-theme="dark"] .foot-bottom a:hover{color:hsl(var(--champagne));}
+
+/* ---------- FAB + concierge ---------- */
+.fab-cluster{position:fixed;right:1rem;z-index:55;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;bottom:calc(5.5rem + env(safe-area-inset-bottom));}
+@media(min-width:1024px){.fab-cluster{bottom:1.5rem;}}
+.fab-opts{display:flex;flex-direction:column;align-items:flex-end;gap:.625rem;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,visibility .25s;}
+.fab-opts.open{opacity:1;visibility:visible;transform:none;}
+.fab-opt{display:flex;align-items:center;gap:.625rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .95);padding:.5rem .5rem .5rem 1rem;font-size:.875rem;box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);backdrop-filter:blur(8px);transition:border-color .2s;}
+.fab-opt:hover{border-color:hsl(var(--champagne));}
+.fab-opt span{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:999px;background:hsl(var(--surface-muted));color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .fab-opt span{color:hsl(var(--champagne));}
+.fab-opt svg{width:1rem;height:1rem;}
+.fab-row{display:flex;align-items:center;gap:.625rem;}
+.fab-toggle{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .9);color:hsl(var(--foreground));box-shadow:0 8px 30px -18px hsl(var(--shadow) / .45);backdrop-filter:blur(8px);transition:all .3s cubic-bezier(.22,1,.36,1);}
+.fab-toggle:hover{border-color:hsl(var(--champagne));}
+.fab-toggle svg{width:1.25rem;height:1.25rem;transition:transform .25s;}
+.fab-toggle.open svg{transform:rotate(45deg);}
+.fab-main{position:relative;display:grid;place-items:center;width:3.5rem;height:3.5rem;border-radius:999px;background:hsl(var(--champagne));color:hsl(var(--obsidian));box-shadow:0 0 0 1px hsl(var(--champagne) / .35),0 24px 60px -30px hsl(var(--champagne) / .55);transition:transform .3s cubic-bezier(.22,1,.36,1);}
+.fab-main:hover{transform:translateY(-2px);}
+.fab-main svg{position:relative;width:1.5rem;height:1.5rem;}
+.fab-ping{position:absolute;inset:0;border-radius:999px;background:hsl(var(--champagne) / .4);animation:ping 2.8s cubic-bezier(0,0,.2,1) infinite;}
+
+/* concierge dialog */
+.cc-modal{display:flex;flex-direction:column;max-width:28rem;max-height:85svh;}
+.cc-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;border-bottom:1px solid hsl(var(--border));padding:1.25rem;}
+.cc-head-l{display:flex;align-items:center;gap:.75rem;}
+.cc-badge{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:999px;background:hsl(var(--champagne) / .15);color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .cc-badge{color:hsl(var(--champagne));}
+.cc-badge svg{width:1.25rem;height:1.25rem;}
+.cc-msgs{flex:1;overflow-y:auto;padding:1.25rem;display:flex;flex-direction:column;gap:1rem;min-height:14rem;}
+.cc-row{display:flex;}
+.cc-row.user{justify-content:flex-end;}
+.cc-bub{max-width:85%;border-radius:1rem;padding:.625rem 1rem;font-size:.875rem;line-height:1.55;}
+.cc-row.bot .cc-bub{border-bottom-left-radius:.25rem;background:hsl(var(--surface-muted));}
+.cc-row.user .cc-bub{border-bottom-right-radius:.25rem;background:hsl(var(--foreground));color:hsl(var(--background));}
+.cc-typing{display:flex;align-items:center;gap:.375rem;border-radius:1rem;border-bottom-left-radius:.25rem;background:hsl(var(--surface-muted));padding:.75rem 1rem;width:fit-content;}
+.cc-typing span{width:.375rem;height:.375rem;border-radius:999px;background:hsl(var(--champagne));animation:spin-dot 1.2s infinite;}
+.cc-chips{display:flex;flex-wrap:wrap;gap:.5rem;padding-top:.25rem;}
+.cc-chip{border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface));padding:.375rem .75rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:hsl(var(--muted-foreground));transition:.2s;}
+.cc-chip:hover{border-color:hsl(var(--champagne));color:hsl(var(--foreground));}
+.cc-form{display:flex;align-items:center;gap:.5rem;border-top:1px solid hsl(var(--border));padding:.75rem;}
+.cc-input{height:2.75rem;flex:1;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--background));padding:0 1rem;font-size:.875rem;outline:none;transition:border-color .2s;}
+.cc-input:focus{border-color:hsl(var(--champagne));}
+.cc-send{display:grid;place-items:center;width:2.75rem;height:2.75rem;flex-shrink:0;border-radius:999px;background:hsl(var(--champagne));color:hsl(var(--obsidian));transition:all .3s cubic-bezier(.22,1,.36,1);}
+.cc-send:hover{transform:translateY(-2px);}
+.cc-send:disabled{opacity:.4;transform:none;cursor:default;}
+.cc-send svg{width:1rem;height:1rem;}
+.cc-note{padding:0 1rem 1rem;text-align:center;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:hsl(var(--muted-foreground));}
+
+/* ---------- Mobile bottom nav ---------- */
+.bnav{position:fixed;inset-inline:0;bottom:0;z-index:40;padding:0 1rem max(.75rem,env(safe-area-inset-bottom));transition:transform .5s cubic-bezier(.22,1,.36,1);}
+@media(min-width:1024px){.bnav{display:none;}}
+.bnav.hidden{transform:translateY(160%);}
+.bnav ul{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:.25rem;border-radius:999px;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .9);padding:.5rem .75rem;box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);backdrop-filter:blur(20px);list-style:none;}
+.bnav li{flex:1;}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:.25rem;border-radius:1rem;padding:.375rem 0;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:hsl(var(--muted-foreground));transition:color .2s;}
+.bnav a:hover{color:hsl(var(--foreground));}
+.bnav a span{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:999px;transition:.2s;}
+.bnav a svg{width:18px;height:18px;}
+.bnav a.primary{color:hsl(var(--champagne-deep));}
+[data-theme="dark"] .bnav a.primary{color:hsl(var(--champagne));}
+.bnav a.primary span{background:hsl(var(--champagne));color:hsl(var(--obsidian));}
+
+/* ---------- Toasts ---------- */
+.toaster{pointer-events:none;position:fixed;inset-inline:0;z-index:80;display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:0 1rem;bottom:calc(6rem + env(safe-area-inset-bottom));}
+@media(min-width:640px){.toaster{inset-inline:auto;right:1rem;bottom:1rem;align-items:flex-end;padding:0;}}
+.toast{pointer-events:auto;display:flex;align-items:flex-start;gap:.75rem;width:100%;max-width:24rem;border-radius:1rem;border:1px solid hsl(var(--border));background:hsl(var(--surface) / .97);padding:1rem;box-shadow:0 24px 60px -28px hsl(var(--shadow) / .55);backdrop-filter:blur(20px);transform:translateY(24px) scale(.96);opacity:0;transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .32s;}
+.toast.in{transform:none;opacity:1;}
+.toast-ico{margin-top:.125rem;display:grid;place-items:center;width:1.75rem;height:1.75rem;flex-shrink:0;border-radius:999px;border:1px solid hsl(var(--border));color:hsl(var(--champagne));}
+.toast-ico.success{color:hsl(var(--success));}
+.toast-ico.warning{color:hsl(var(--warning));}
+.toast-ico svg{width:14px;height:14px;}
+.toast-b{flex:1;padding-top:.125rem;}
+.toast-b p{font-family:var(--font-display);font-size:.95rem;line-height:1.3;}
+.toast-b small{margin-top:.25rem;display:block;font-size:.875rem;color:hsl(var(--muted-foreground));}
+.toast-x{display:grid;place-items:center;width:1.5rem;height:1.5rem;flex-shrink:0;border-radius:999px;color:hsl(var(--muted-foreground));transition:.2s;}
+.toast-x:hover{background:hsl(var(--surface-muted));color:hsl(var(--foreground));}
+.toast-x svg{width:14px;height:14px;}
+
+/* ---------- utils ---------- */
+.center-block{margin:0 auto;max-width:48rem;text-align:center;}
+.mt-5{margin-top:1.25rem;}.mt-6{margin-top:1.5rem;}.mt-7{margin-top:1.75rem;}.mt-8{margin-top:2rem;}.mt-10{margin-top:2.5rem;}.mt-12{margin-top:3rem;}
+.flex-between{display:flex;flex-direction:column;gap:2rem;}
+@media(min-width:1024px){.flex-between{flex-direction:row;align-items:flex-end;justify-content:space-between;}}
+.hidden{display:none !important;}
+</style>
+</head>
+<body>
+<a href="#top" class="skip-link">Skip to content</a>
+
+<!-- Announcement bar -->
+<div class="announce" id="announce" role="region" aria-label="Studio announcements">
+  <div class="container announce-inner">
+    <div class="announce-track" id="announce-track">
+      <span class="announce-msg show">Complimentary 30-minute discovery call</span>
+      <span class="announce-msg">Award-winning residential &amp; commercial studio</span>
+      <span class="announce-msg">Now accepting 2026 commissions</span>
+      <span class="announce-msg">Bespoke design — London · New York · Dubai</span>
+    </div>
+    <button class="announce-x" id="announce-x" aria-label="Dismiss announcements">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header" id="header">
+  <nav class="nav" id="nav" aria-label="Primary">
+    <a href="#top" class="wordmark" aria-label="Atelier Vesper — home"><span>Atelier</span><span class="grad-champagne serif-i">Vesper</span></a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+      <li><a class="nav-link" href="#services">Services</a></li>
+      <li><a class="nav-link" href="#process">Process</a></li>
+      <li><a class="nav-link" href="#studio">Studio</a></li>
+      <li><a class="nav-link" href="#journal">Journal</a></li>
+      <li><a class="nav-link" href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="icon-btn theme-btn hide-sm" aria-label="Toggle theme"></button>
+      <a href="#contact" class="btn btn-champagne btn-sm hide-md">Book Consultation</a>
+      <button class="icon-btn menu-btn" id="menu-open" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile drawer -->
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <a href="#top" class="wordmark" style="font-size:1.5rem" data-close><span>Atelier</span><span class="grad-champagne serif-i">Vesper</span></a>
+  <nav class="drawer-links" aria-label="Mobile">
+    <a class="drawer-link" href="#portfolio" data-close>Portfolio <span class="idx">01</span></a>
+    <a class="drawer-link" href="#services" data-close>Services <span class="idx">02</span></a>
+    <a class="drawer-link" href="#process" data-close>Process <span class="idx">03</span></a>
+    <a class="drawer-link" href="#studio" data-close>Studio <span class="idx">04</span></a>
+    <a class="drawer-link" href="#journal" data-close>Journal <span class="idx">05</span></a>
+    <a class="drawer-link" href="#contact" data-close>Contact <span class="idx">06</span></a>
+  </nav>
+  <div class="drawer-foot">
+    <button class="icon-btn theme-btn" aria-label="Toggle theme"></button>
+    <a href="#contact" class="btn btn-champagne btn-md" style="flex:1" data-close>Book Consultation</a>
+  </div>
+</aside>
+
+<!-- Hero -->
+<section id="top" class="hero scene grain">
+  <div class="hero-drift scene" aria-hidden="true"></div>
+  <div class="hero-wash" aria-hidden="true"></div>
+  <div class="hero-line" aria-hidden="true"></div>
+  <div class="container" style="position:relative">
+    <div style="max-width:64rem">
+      <div class="hero-eyebrow reveal"><span></span><span class="eyebrow" style="color:hsl(var(--foreground) / .7)">Residential &amp; Commercial Interior Design</span></div>
+      <h1 class="t-display">
+        <span class="reveal" data-d="40">Designing Spaces</span>
+        <span class="reveal" data-d="120">That Shape <span class="grad-champagne serif-i">Extraordinary</span></span>
+        <span class="reveal" data-d="200">Lives</span>
+      </h1>
+      <p class="t-lead hero-sub reveal" data-d="300">Bespoke interiors crafted to reflect your lifestyle, personality, and aspirations — for the homes, retreats, and venues that define how you live.</p>
+      <div class="hero-cta reveal" data-d="380">
+        <a href="#contact" class="btn btn-champagne btn-lg">Book Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        <a href="#portfolio" class="btn btn-outline btn-lg">Explore Portfolio</a>
+      </div>
+      <div class="hero-stars reveal" data-d="500">
+        <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
+        <span style="margin-left:.25rem">Trusted by luxury homeowners, developers &amp; hospitality brands</span>
+      </div>
+    </div>
+  </div>
+  <div class="container trust-rail" style="position:relative">
+    <ul class="trust-grid reveal" style="list-style:none">
+      <li class="trust-item"><span class="idx">01</span><span>Featured Projects</span></li>
+      <li class="trust-item"><span class="idx">02</span><span>Luxury Design Expertise</span></li>
+      <li class="trust-item"><span class="idx">03</span><span>Personalized Process</span></li>
+      <li class="trust-item"><span class="idx">04</span><span>Global Design Influence</span></li>
+    </ul>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span class="eyebrow">Scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></div>
+</section>
+
+<!-- Press marquee -->
+<section class="press" aria-label="Press recognition">
+  <div class="container"><p class="eyebrow" style="text-align:center;margin-bottom:1.75rem">As featured in</p></div>
+  <div class="marquee-mask">
+    <div class="marquee">
+      <span class="press-name">ARCHITECTURAL DIGEST</span><span class="press-name">ELLE DECOR</span><span class="press-name">WALLPAPER*</span><span class="press-name">DEZEEN</span><span class="press-name">HOUSE &amp; GARDEN</span><span class="press-name">FRAME</span>
+      <span class="press-name">ARCHITECTURAL DIGEST</span><span class="press-name">ELLE DECOR</span><span class="press-name">WALLPAPER*</span><span class="press-name">DEZEEN</span><span class="press-name">HOUSE &amp; GARDEN</span><span class="press-name">FRAME</span>
+    </div>
+  </div>
+</section>
+
+<!-- Philosophy / Studio -->
+<section id="studio" class="section">
+  <div class="container">
+    <div class="split">
+      <div class="sticky-col">
+        <div class="sec-eyebrow-row reveal"><span class="idx">01</span><span class="eyebrow">The Studio</span></div>
+        <h2 class="t-h2 reveal" style="margin-top:1.5rem">Great design is not decoration. It is a way of living.</h2>
+        <p class="t-body muted reveal" style="margin-top:1.5rem;max-width:28rem">Atelier Vesper is a residential and commercial design studio built on a single belief — that the spaces we inhabit quietly shape the lives we lead. Five principles guide every commission we accept.</p>
+        <figure class="pull reveal"><blockquote>&ldquo;We create spaces that reflect who you are and how you want to live.&rdquo;</blockquote><figcaption class="caption muted" style="margin-top:.75rem">The Vesper Promise</figcaption></figure>
+      </div>
+      <ul class="principles" style="list-style:none">
+        <li class="principle reveal"><span class="mat mat-marble" aria-hidden="true"></span><div><div style="display:flex;align-items:baseline;gap:.75rem"><span class="idx">01</span><h3 class="t-subhead">Form &amp; Function</h3></div><p class="t-body muted" style="margin-top:.5rem;max-width:34rem">Beauty is never decoration alone. Every decision must earn its place by making the space work better than it did before.</p></div></li>
+        <li class="principle reveal"><span class="mat mat-oak" aria-hidden="true"></span><div><div style="display:flex;align-items:baseline;gap:.75rem"><span class="idx">02</span><h3 class="t-subhead">Human-Centered Design</h3></div><p class="t-body muted" style="margin-top:.5rem;max-width:34rem">We design around rituals, not rooms — how you wake, gather, host, and rest. The plan follows the life.</p></div></li>
+        <li class="principle reveal"><span class="mat mat-travertine" aria-hidden="true"></span><div><div style="display:flex;align-items:baseline;gap:.75rem"><span class="idx">03</span><h3 class="t-subhead">Timeless Aesthetics</h3></div><p class="t-body muted" style="margin-top:.5rem;max-width:34rem">Trends date; proportion does not. We compose interiors meant to feel as considered in twenty years as on day one.</p></div></li>
+        <li class="principle reveal"><span class="mat mat-brass" aria-hidden="true"></span><div><div style="display:flex;align-items:baseline;gap:.75rem"><span class="idx">04</span><h3 class="t-subhead">Material Excellence</h3></div><p class="t-body muted" style="margin-top:.5rem;max-width:34rem">Stone, timber, metal, and textile chosen in the flesh — natural materials that deepen and improve with age.</p></div></li>
+        <li class="principle reveal"><span class="mat mat-slate" aria-hidden="true"></span><div><div style="display:flex;align-items:baseline;gap:.75rem"><span class="idx">05</span><h3 class="t-subhead">Emotional Design</h3></div><p class="t-body muted" style="margin-top:.5rem;max-width:34rem">The measure of a space is how it makes you feel the moment you step inside. We design for that feeling first.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section id="portfolio" class="section">
+  <div class="container">
+    <div class="flex-between">
+      <div class="sec-head">
+        <div class="sec-eyebrow-row reveal"><span class="idx">02</span><span class="eyebrow">Selected Work</span></div>
+        <h2 class="t-h2 reveal">A portfolio composed one space at a time</h2>
+        <p class="t-lead reveal">Six projects across homes, villas, hospitality, and the workplace — each a study in proportion, material, and light.</p>
+      </div>
+      <a href="#contact" class="btn btn-link hide-md reveal">Commission a project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="filters reveal" id="filters" role="tablist" aria-label="Filter projects"></div>
+    <div class="port-grid" id="port-grid"></div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="section bg-surface">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow-row reveal"><span class="idx">03</span><span class="eyebrow">What We Do</span></div>
+      <h2 class="t-h2 reveal">A complete design practice, end to end</h2>
+      <p class="t-lead reveal">From a single signature room to a global hospitality rollout, every engagement is led by one studio that holds the vision from first sketch to final styling.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc reveal"><div class="svc-top"><span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg></span><span class="eyebrow">01</span></div><h3 class="t-subhead">Full-Service Interior Design</h3><p class="t-body muted">End-to-end design from first concept to the final cushion — we hold every decision so you don't have to.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Concept &amp; spatial strategy</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Detailed design drawings</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Site supervision</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Final styling</li></ul><p class="note">Our signature engagement</p></article>
+      <article class="svc reveal"><div class="svc-top"><span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11V7a3 3 0 0 1 6 0v4"/><path d="M13 11V7a3 3 0 0 1 6 0v4"/><path d="M3 13a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4H3z"/><path d="M5 17v3M19 17v3"/></svg></span><span class="eyebrow">02</span></div><h3 class="t-subhead">Luxury Residential Design</h3><p class="t-body muted">Private homes designed around how you actually live, entertain, and rest — never around a trend.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Whole-home schemes</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bespoke joinery</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Heirloom integration</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Procurement &amp; install</li></ul><p class="note">Homes &amp; private residences</p></article>
+      <article class="svc reveal"><div class="svc-top"><span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M14 9h4a2 2 0 0 1 2 2v10"/><path d="M2 21h20"/><path d="M8 7h2M8 11h2M8 15h2"/></svg></span><span class="eyebrow">03</span></div><h3 class="t-subhead">Commercial Interior Design</h3><p class="t-body muted">Workplaces and showrooms engineered to express a brand and perform for the people inside them.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Brand-led environments</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Space planning</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>FF&amp;E specification</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Phased rollouts</li></ul><p class="note">Offices, retail &amp; studios</p></article>
+      <article class="svc reveal"><div class="svc-top"><span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg></span><span class="eyebrow">04</span></div><h3 class="t-subhead">Hospitality Design</h3><p class="t-body muted">Restaurants, clubs, and hotels designed as experiences — choreographed from arrival to the final hour.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Guest-journey design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Atmosphere &amp; lighting</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Custom furniture</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Operational detailing</li></ul><p class="note">Restaurants, clubs &amp; hotels</p></article>
+      <article class="svc reveal"><div class="svc-top"><span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span class="eyebrow">05</span></div><h3 class="t-subhead">Lighting &amp; Art Curation</h3><p class="t-body muted">The two materials that change a room after dark — composed by specialists and integrated from day one.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Layered lighting design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Art sourcing &amp; advisory</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Smart controls</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gallery-grade hanging</li></ul><p class="note">Often added to any engagement</p></article>
+      <article class="svc reveal"><div class="svc-top"><span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.5 0-.4-.2-.8-.5-1-.3-.3-.5-.6-.5-1 0-.8.7-1.5 1.5-1.5H16a5 5 0 0 0 5-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="12" cy="8" r="1"/><circle cx="16.5" cy="11.5" r="1"/></svg></span><span class="eyebrow">06</span></div><h3 class="t-subhead">Styling &amp; Seasonal Refresh</h3><p class="t-body muted">For completed spaces — a curated refresh that keeps a home or venue feeling considered, year after year.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Styling editions</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Seasonal accessories</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Art rotation</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Plant &amp; textile programmes</li></ul><p class="note">Ongoing care programme</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process" class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow-row reveal"><span class="idx">04</span><span class="eyebrow">How We Work</span></div>
+      <h2 class="t-h2 reveal">Six considered stages, from first idea to final styling</h2>
+      <p class="t-lead reveal">A process you can see clearly at every step — so you always know where your project stands and exactly what comes next.</p>
+    </div>
+    <ol class="steps">
+      <li class="step reveal"><div class="step-rail"><span class="step-num">01</span><span class="step-conn"></span></div><div class="step-body"><div class="step-head"><h3 class="t-h3">Discovery</h3><span class="dur">Weeks 1–2</span></div><p class="t-body muted" style="margin-top:.75rem;max-width:42rem">We begin with how you want to live. A studio conversation, a walk through the space, and a deep read of your taste and rituals.</p><ul class="outcomes"><li>Lifestyle brief</li><li>Site survey</li><li>Budget framework</li></ul></div></li>
+      <li class="step reveal"><div class="step-rail"><span class="step-num">02</span><span class="step-conn"></span></div><div class="step-body"><div class="step-head"><h3 class="t-h3">Concept Development</h3><span class="dur">Weeks 3–6</span></div><p class="t-body muted" style="margin-top:.75rem;max-width:42rem">The narrative takes shape — mood, palette, and the single idea that will hold the whole project together.</p><ul class="outcomes"><li>Design concept</li><li>Material direction</li><li>Spatial sketches</li></ul></div></li>
+      <li class="step reveal"><div class="step-rail"><span class="step-num">03</span><span class="step-conn"></span></div><div class="step-body"><div class="step-head"><h3 class="t-h3">Space Planning</h3><span class="dur">Weeks 6–9</span></div><p class="t-body muted" style="margin-top:.75rem;max-width:42rem">Every wall, sightline, and circulation path is resolved so the space works as beautifully as it looks.</p><ul class="outcomes"><li>Detailed floor plans</li><li>Joinery design</li><li>Lighting layout</li></ul></div></li>
+      <li class="step reveal"><div class="step-rail"><span class="step-num">04</span><span class="step-conn"></span></div><div class="step-body"><div class="step-head"><h3 class="t-h3">Material Selection</h3><span class="dur">Weeks 9–12</span></div><p class="t-body muted" style="margin-top:.75rem;max-width:42rem">We curate the palette in the flesh — stone, timber, metal, and textile chosen to age with grace.</p><ul class="outcomes"><li>Full material library</li><li>FF&amp;E schedule</li><li>Final costings</li></ul></div></li>
+      <li class="step reveal"><div class="step-rail"><span class="step-num">05</span><span class="step-conn"></span></div><div class="step-body"><div class="step-head"><h3 class="t-h3">Implementation</h3><span class="dur">Months 4–9</span></div><p class="t-body muted" style="margin-top:.75rem;max-width:42rem">We manage the build and the makers, protecting the design through every site decision and delivery.</p><ul class="outcomes"><li>Contractor coordination</li><li>Quality control</li><li>Procurement</li></ul></div></li>
+      <li class="step reveal"><div class="step-rail"><span class="step-num">06</span></div><div class="step-body last"><div class="step-head"><h3 class="t-h3">Final Styling</h3><span class="dur">Handover</span></div><p class="t-body muted" style="margin-top:.75rem;max-width:42rem">The last and most personal layer — art, objects, and the details that make a finished space yours.</p><ul class="outcomes"><li>Styling &amp; dressing</li><li>Art install</li><li>Handover guide</li></ul></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Style Discovery (signature) -->
+<section id="discovery" class="section discovery">
+  <div class="disc-aura" aria-hidden="true"></div>
+  <div class="container" style="position:relative">
+    <div class="center-block">
+      <div class="sec-eyebrow-row reveal" style="justify-content:center"><span class="idx">05</span><span class="eyebrow">Design Style Discovery</span></div>
+      <h2 class="t-h2 reveal" style="margin-top:1.25rem">Discover the interior style that fits the way you live</h2>
+      <p class="t-lead reveal" style="margin:1.25rem auto 0;max-width:36rem">Five questions, a real weighted assessment, and a personalised result — your dominant design style, moodboard direction, and a roadmap to begin.</p>
+    </div>
+    <div class="quiz-shell reveal">
+      <div class="quiz-prog" id="quiz-prog" style="display:none"><div class="quiz-prog-bar" id="quiz-prog-bar"></div></div>
+      <div class="quiz-pad">
+        <div class="quiz-step active quiz-center" id="step-intro">
+          <span class="big-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg></span>
+          <h3 class="t-h3" style="margin-top:1.5rem">The Style Assessment</h3>
+          <p class="t-body muted" style="margin:.75rem auto 0;max-width:28rem">Answer honestly — there are no wrong choices. Takes about ninety seconds.</p>
+          <button class="btn btn-champagne btn-lg" id="quiz-begin" style="margin-top:2rem">Begin assessment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+          <p class="caption muted" style="margin-top:1rem">6 styles · weighted scoring · instant moodboard</p>
+        </div>
+        <div class="quiz-step" id="step-q"></div>
+        <div class="quiz-step" id="step-capture">
+          <div class="quiz-center">
+            <span class="big-ico" style="border-color:hsl(var(--champagne));background:hsl(var(--champagne) / .1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <h3 class="t-h3" style="margin-top:1.25rem">Your style profile is ready</h3>
+            <p class="t-body muted" style="margin:.75rem auto 0;max-width:28rem">Tell us where to send your full result — your style, moodboard direction, and a tailored design roadmap.</p>
+          </div>
+          <form class="capture-form" id="capture-form" novalidate>
+            <input class="field" type="text" id="lead-name" placeholder="Your name" aria-label="Your name" autocomplete="name" />
+            <input class="field" type="email" id="lead-email" placeholder="Email address" aria-label="Email address" autocomplete="email" />
+            <button class="btn btn-champagne btn-lg" type="submit" style="margin-top:.25rem">Reveal my style <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M3 12h4M6 6l2.5 2.5"/><path d="M14 14l6 6M18 6l-2.5 2.5"/></svg></button>
+            <button class="link-btn" type="button" id="capture-back" style="margin:.25rem auto 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          </form>
+        </div>
+        <div class="quiz-step" id="step-result"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="section stats" aria-label="Studio by the numbers">
+  <div class="container">
+    <p class="reveal" style="text-align:center;margin-bottom:3rem;font-size:.6875rem;letter-spacing:.3em;text-transform:uppercase;color:hsl(var(--ivory) / .55)">Sixteen years · measured in spaces and trust</p>
+    <dl class="stat-grid">
+      <div class="stat reveal"><dd class="grad-champagne"><span data-counter="240" data-dec="0">0</span>+</dd><dt>Spaces designed</dt></div>
+      <div class="stat reveal"><dd class="grad-champagne"><span data-counter="1.4" data-dec="1">0</span>M</dd><dt>Square feet styled</dt></div>
+      <div class="stat reveal"><dd class="grad-champagne"><span data-counter="16" data-dec="0">0</span></dd><dt>Years of practice</dt></div>
+      <div class="stat reveal"><dd class="grad-champagne"><span data-counter="21" data-dec="0">0</span></dd><dt>Design awards</dt></div>
+      <div class="stat reveal"><dd class="grad-champagne"><span data-counter="98" data-dec="0">0</span>%</dd><dt>Client satisfaction</dt></div>
+    </dl>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section bg-surface" aria-label="Client testimonials">
+  <div class="container">
+    <div class="tst-wrap">
+      <div class="reveal" style="margin-bottom:2.5rem;text-align:center"><span class="eyebrow">In Their Words</span></div>
+      <div id="tst-region">
+        <svg class="tst-q" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 7h4v4l-2 5H6l2-5H7a3 3 0 0 1 0-6zm9 0h4v4l-2 5h-3l2-5h-1a3 3 0 0 1 0-6z" opacity=".25"/><path d="M9.5 6A3.5 3.5 0 0 0 6 9.5 3.5 3.5 0 0 0 9.5 13c.2 0 .4 0 .5-.1L8 18h3l2.2-6.2c.2-.5.3-1.1.3-1.8A4 4 0 0 0 9.5 6zm9 0A3.5 3.5 0 0 0 15 9.5a3.5 3.5 0 0 0 3.5 3.5c.2 0 .4 0 .5-.1L17 18h3l2.2-6.2c.2-.5.3-1.1.3-1.8A4 4 0 0 0 18.5 6z"/></svg>
+        <div class="tst-track" id="tst-track"></div>
+        <div class="tst-ctrl">
+          <button class="icon-btn" id="tst-prev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+          <div class="tst-dots" id="tst-dots" role="tablist" aria-label="Choose testimonial"></div>
+          <button class="icon-btn" id="tst-next" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured / Awards -->
+<section id="featured" class="section">
+  <div class="container">
+    <div class="split split-rev">
+      <div class="sticky-col">
+        <div class="sec-eyebrow-row reveal"><span class="idx">06</span><span class="eyebrow">Recognition</span></div>
+        <h2 class="t-h2 reveal" style="margin-top:1.5rem">Honoured by the industry, published by the press</h2>
+        <p class="t-body muted reveal" style="margin-top:1.5rem;max-width:28rem">Our work has been recognised across leading design awards and featured in the publications that define the field — a reflection of the studio's consistency, not any single project.</p>
+      </div>
+      <ul class="awards">
+        <li class="award reveal"><span class="award-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.2 12.5 7 22l5-3 5 3-1.2-9.5"/></svg></span><div><h3 class="t-subhead">Residential Project of the Year</h3><p class="caption muted" style="margin-top:.125rem">Design Et Al</p></div><span class="award-yr">2025</span></li>
+        <li class="award reveal"><span class="award-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.2 12.5 7 22l5-3 5 3-1.2-9.5"/></svg></span><div><h3 class="t-subhead">Best Hospitality Interior</h3><p class="caption muted" style="margin-top:.125rem">Restaurant &amp; Bar Awards</p></div><span class="award-yr">2024</span></li>
+        <li class="award reveal"><span class="award-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.2 12.5 7 22l5-3 5 3-1.2-9.5"/></svg></span><div><h3 class="t-subhead">Studio of the Year — Finalist</h3><p class="caption muted" style="margin-top:.125rem">Dezeen Awards</p></div><span class="award-yr">2024</span></li>
+        <li class="award reveal"><span class="award-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.2 12.5 7 22l5-3 5 3-1.2-9.5"/></svg></span><div><h3 class="t-subhead">Excellence in Material Innovation</h3><p class="caption muted" style="margin-top:.125rem">SBID International</p></div><span class="award-yr">2023</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Journal -->
+<section id="journal" class="section bg-surface">
+  <div class="container">
+    <div class="flex-between">
+      <div class="sec-head">
+        <div class="sec-eyebrow-row reveal"><span class="idx">07</span><span class="eyebrow">The Journal</span></div>
+        <h2 class="t-h2 reveal">Field notes on design, materials &amp; living well</h2>
+        <p class="t-lead reveal">Considered writing from the studio — on the ideas, materials, and decisions behind interiors that last.</p>
+      </div>
+      <a href="#journal" class="btn btn-link hide-md reveal">All articles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </div>
+    <div class="jrnl-grid">
+      <article class="jrnl reveal"><div class="port-media"><div class="jrnl-art grain" style="background:linear-gradient(150deg,hsl(38 42% 88%),hsl(30 24% 68%))" aria-hidden="true"></div></div><div class="jrnl-body"><div class="jrnl-meta"><span class="champagne">Design Trends</span><span class="rt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>6 min</span></div><h3 class="t-subhead">Quiet Luxury, and What Comes After It</h3><p class="t-body muted" style="font-size:.95rem">Restraint became the defining language of the last few years. We look at where considered interiors are heading next.</p><a href="#journal" class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+      <article class="jrnl reveal"><div class="port-media"><div class="jrnl-art grain" style="background:linear-gradient(150deg,hsl(38 28% 86%),hsl(32 18% 70%))" aria-hidden="true"></div></div><div class="jrnl-body"><div class="jrnl-meta"><span class="champagne">Colour Psychology</span><span class="rt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>8 min</span></div><h3 class="t-subhead">How Colour Quietly Shapes the Way a Room Feels</h3><p class="t-body muted" style="font-size:.95rem">Beyond palettes and trends — the science and instinct behind choosing tones that change how a space is experienced.</p><a href="#journal" class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+      <article class="jrnl reveal"><div class="port-media"><div class="jrnl-art grain" style="background:linear-gradient(150deg,hsl(30 16% 22%),hsl(28 18% 10%))" aria-hidden="true"></div></div><div class="jrnl-body"><div class="jrnl-meta"><span class="champagne">Material Insights</span><span class="rt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5 min</span></div><h3 class="t-subhead">The Materials That Only Get Better With Age</h3><p class="t-body muted" style="font-size:.95rem">Travertine, unlacquered brass, natural oak — a designer's guide to surfaces that earn their patina over decades.</p><a href="#journal" class="read">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+    </div>
+    <div class="lead-magnet reveal">
+      <div class="lm-glow" aria-hidden="true"></div>
+      <div style="position:relative">
+        <span class="lm-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg>Free guide</span>
+        <h3 class="t-h3" style="margin-top:1.25rem;color:hsl(var(--ivory))">The Interior Design Planning Guide</h3>
+        <p class="t-body" style="margin-top:.75rem;max-width:28rem;color:hsl(var(--ivory) / .7)">Our 24-page handbook on budgeting, sequencing, and briefing a design project — the questions to answer before you begin.</p>
+      </div>
+      <form class="lm-form" id="lm-form" novalidate>
+        <input class="field-dark" type="email" id="lm-email" placeholder="Email address" aria-label="Email address for the design guide" autocomplete="email" />
+        <button class="btn btn-champagne btn-md" type="submit" style="flex-shrink:0">Download the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="split">
+      <div class="sticky-col">
+        <span class="eyebrow reveal">Questions</span>
+        <h2 class="t-h2 reveal" style="margin-top:1.25rem">The things clients ask us first</h2>
+        <p class="t-body muted reveal" style="margin-top:1.5rem;max-width:28rem">Everything you need to know about working with the studio. If your question isn't here, we're a short conversation away.</p>
+        <a href="#contact" class="btn btn-outline btn-md reveal" style="margin-top:1.75rem">Ask us anything</a>
+      </div>
+      <div class="reveal" id="faq-list">
+        <div class="acc-item open"><button class="acc-trigger" aria-expanded="true">What does your design process look like?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">Six considered stages — Discovery, Concept, Space Planning, Material Selection, Implementation, and Final Styling. You always know exactly where the project stands and what comes next.</div></div></div>
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false">Do you work with clients remotely?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">Yes. Around half of our commissions run partly or fully remote, with site visits at the milestones that matter. We work across London, New York, and Dubai, and travel for the right project anywhere.</div></div></div>
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false">What budgets do you accommodate?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">Full-service residential engagements typically begin in the low six figures, and commercial work is scoped per project. We're transparent about cost from the discovery stage so there are no surprises.</div></div></div>
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false">How long does a typical project take?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">A whole-home residential project usually runs nine to twelve months from first concept to handover. Single rooms and styling editions are far quicker; ground-up commercial work can run longer.</div></div></div>
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false">Do you handle furniture procurement?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">Entirely. We source, specify, order, and install every piece — from our bespoke joinery to one-of-a-kind vintage finds through our vendor network — so you receive a fully finished, styled space.</div></div></div>
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false">Can you work alongside our architect or contractor?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">Absolutely, and we often do. We collaborate closely with architects, builders, and engineers, and can lead the design while your team delivers — or manage the whole build ourselves.</div></div></div>
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false">Do you take on commercial and hospitality projects?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="acc-panel"><div class="acc-inner">Yes. Roughly a third of our work is commercial — offices, retail flagships, restaurants, and members' clubs — designed with the same care as our private residences.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section bg-surface">
+  <div class="container">
+    <div class="contact-card">
+      <div class="contact-side">
+        <div style="position:relative">
+          <span class="eyebrow" style="color:hsl(var(--ivory) / .6)">Begin Your Project</span>
+          <h2 class="t-h2 reveal" style="margin-top:1.25rem;color:hsl(var(--ivory))">Let&rsquo;s Create A Space That Truly Reflects You</h2>
+          <p class="t-body reveal" style="margin-top:1.25rem;max-width:28rem;color:hsl(var(--ivory) / .7)">Schedule a consultation and begin your design journey with a team dedicated to exceptional interiors. The first conversation is complimentary.</p>
+        </div>
+        <ul class="contact-list reveal">
+          <li><a href="tel:8005550025"><span class="contact-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>(800) 555-0025</a></li>
+          <li><a href="mailto:studio@ateliervesper.com"><span class="contact-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>studio@ateliervesper.com</a></li>
+          <li><span class="contact-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>118 Marylebone Mews, Mayfair, London</li>
+          <li><span class="contact-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Studio hours · Mon–Fri, 9–6</li>
+        </ul>
+      </div>
+      <form class="contact-form reveal" id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="field-group"><label for="cf-name">Name</label><input class="field" id="cf-name" type="text" placeholder="Your full name" autocomplete="name" /></div>
+          <div class="field-group"><label for="cf-email">Email</label><input class="field" id="cf-email" type="email" placeholder="you@email.com" autocomplete="email" /></div>
+        </div>
+        <div class="form-row">
+          <div class="field-group"><label for="cf-phone">Phone <span style="text-transform:none;letter-spacing:0;color:hsl(var(--muted-foreground) / .6)">(optional)</span></label><input class="field" id="cf-phone" type="tel" placeholder="(000) 000-0000" autocomplete="tel" /></div>
+          <div class="field-group"><label for="cf-type">Project type</label><select class="field select" id="cf-type"><option>Residential home</option><option>Luxury villa</option><option>Apartment</option><option>Commercial / office</option><option>Hospitality</option><option>Something else</option></select></div>
+        </div>
+        <div class="field-group"><label for="cf-msg">Tell us about your space</label><textarea class="textarea" id="cf-msg" rows="4" placeholder="A few words on the project, location, and timeline…"></textarea></div>
+        <button class="btn btn-champagne btn-lg" type="submit" style="margin-top:.25rem;align-self:flex-start">Request consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></button>
+        <p class="caption muted">No obligation · replies within one business day</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer" class="footer">
+  <div class="container" style="padding-top:clamp(5rem,11vw,7.5rem);padding-bottom:clamp(5rem,11vw,7.5rem)">
+    <div class="foot-grid">
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <a href="#top" style="font-family:var(--font-display);font-size:1.875rem;letter-spacing:-.01em">Atelier <span class="grad-champagne serif-i">Vesper</span></a>
+        <p class="t-body muted" style="max-width:20rem">A residential and commercial design studio creating spaces that reflect who you are and how you want to live.</p>
+        <div class="foot-contact">
+          <a href="tel:8005550025">(800) 555-0025</a>
+          <a href="mailto:studio@ateliervesper.com">studio@ateliervesper.com</a>
+          <span>118 Marylebone Mews, Mayfair</span>
+        </div>
+        <div class="foot-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-12h4v1.5A4 4 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="11"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <nav class="foot-col" aria-label="Studio"><h3>Studio</h3><ul><li><a href="#studio">About</a></li><li><a href="#process">Process</a></li><li><a href="#featured">Awards</a></li><li><a href="#contact">Careers</a></li></ul></nav>
+      <nav class="foot-col" aria-label="Services"><h3>Services</h3><ul><li><a href="#services">Residential</a></li><li><a href="#services">Commercial</a></li><li><a href="#services">Hospitality</a></li><li><a href="#services">Styling</a></li></ul></nav>
+      <nav class="foot-col" aria-label="Explore"><h3>Explore</h3><ul><li><a href="#portfolio">Portfolio</a></li><li><a href="#discovery">Style Discovery</a></li><li><a href="#journal">Journal</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    </div>
+    <div class="foot-bottom">
+      <p>© <span class="yr">2026</span> Atelier Vesper. All rights reserved.</p>
+      <p>Built &amp; maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener noreferrer">GrowrixOS</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB cluster -->
+<div class="fab-cluster" id="fab-cluster">
+  <div class="fab-opts" id="fab-opts">
+    <a class="fab-opt" href="tel:8005550025"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>Call the studio</a>
+    <button class="fab-opt" id="fab-top"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></span>Back to top</button>
+  </div>
+  <div class="fab-row">
+    <button class="fab-toggle" id="fab-toggle" aria-label="More options" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button class="fab-main" id="fab-main" aria-label="Open design concierge"><span class="fab-ping" aria-hidden="true"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg></button>
+  </div>
+</div>
+
+<!-- Concierge modal -->
+<div class="modal-backdrop" id="cc-backdrop">
+  <div class="modal cc-modal" role="dialog" aria-modal="true" aria-label="Design concierge">
+    <div class="cc-head">
+      <div class="cc-head-l">
+        <span class="cc-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg></span>
+        <div><p style="font-family:var(--font-display);font-size:1rem;line-height:1.2">Vesper Concierge</p><small class="muted" style="font-size:.75rem">Design questions, answered</small></div>
+      </div>
+      <button id="cc-close" aria-label="Close concierge" style="display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:999px;border:1px solid hsl(var(--border));color:hsl(var(--muted-foreground))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:1rem;height:1rem"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="cc-msgs" id="cc-msgs" aria-live="polite"></div>
+    <form class="cc-form" id="cc-form" novalidate>
+      <input class="cc-input" id="cc-input" placeholder="Ask about style, budget, materials…" aria-label="Message the concierge" autocomplete="off" />
+      <button class="cc-send" id="cc-send" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+    </form>
+    <p class="cc-note">Concierge · responses are illustrative</p>
+  </div>
+</div>
+
+<!-- Portfolio detail modal -->
+<div class="modal-backdrop" id="port-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Project detail">
+    <button class="modal-x" id="port-close" aria-label="Close project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-scroll" id="port-modal-body"></div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div class="toaster" id="toaster" aria-live="polite"></div>
+
+<!-- Mobile bottom nav -->
+<nav class="bnav" id="bnav" aria-label="Quick navigation">
+  <ul>
+    <li><a href="#top"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9v11h14V9"/></svg></span>Home</a></li>
+    <li><a href="#portfolio"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Work</a></li>
+    <li><a href="#discovery"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg></span>Styles</a></li>
+    <li><a class="primary" href="#contact"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg></span>Book</a></li>
+    <li><a href="#footer"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>Contact</a></li>
+  </ul>
+</nav>
+<script>
+/* ===========================================================
+   ATELIER VESPER — single-file interaction layer
+   =========================================================== */
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var reduce=function(){return matchMedia("(prefers-reduced-motion:reduce)").matches;};
+function el(html){var t=document.createElement("template");t.innerHTML=html.trim();return t.content.firstElementChild;}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+
+/* ---------- Icons ---------- */
+var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+var ARR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>';
+var CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+/* ---------- Theme ---------- */
+var Theme={
+  init:function(){var t="light";try{t=localStorage.getItem("vesper-theme")||"light";}catch(e){}this.apply(t);},
+  apply:function(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("vesper-theme",t);}catch(e){}$$(".theme-btn").forEach(function(b){b.innerHTML=t==="dark"?SUN:MOON;});},
+  toggle:function(){this.apply(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");}
+};
+
+/* ---------- Announcement bar ---------- */
+function initAnnounce(){
+  var bar=$("#announce");if(!bar)return;
+  var msgs=$$(".announce-msg",bar),i=0,dismissed=false;
+  try{dismissed=localStorage.getItem("vesper-announce")==="dismissed";}catch(e){}
+  function sync(){document.documentElement.style.setProperty("--announce-h",(dismissed?0:bar.offsetHeight)+"px");}
+  if(dismissed){bar.style.height="0px";bar.style.borderWidth="0";sync();}
+  else{
+    sync();
+    if(msgs.length>1&&!reduce()){
+      setInterval(function(){msgs[i].classList.remove("show");i=(i+1)%msgs.length;msgs[i].classList.add("show");},4200);
+    }
+  }
+  var x=$("#announce-x");
+  if(x)x.addEventListener("click",function(){dismissed=true;bar.style.height="0px";bar.style.borderWidth="0";document.documentElement.style.setProperty("--announce-h","0px");try{localStorage.setItem("vesper-announce","dismissed");}catch(e){}});
+  window.addEventListener("resize",sync,{passive:true});
+}
+
+/* ---------- Nav scrolled ---------- */
+function initNav(){
+  var n=$("#nav");if(!n)return;
+  var on=function(){n.classList.toggle("scrolled",window.scrollY>24);};
+  window.addEventListener("scroll",on,{passive:true});on();
+}
+
+/* ---------- Drawer ---------- */
+function initDrawer(){
+  var d=$("#drawer"),bd=$("#drawer-backdrop"),open=$("#menu-open");if(!d)return;
+  function set(o){d.classList.toggle("open",o);bd.classList.toggle("open",o);document.body.style.overflow=o?"hidden":"";if(open)open.setAttribute("aria-expanded",String(o));}
+  if(open)open.addEventListener("click",function(){set(true);});
+  if(bd)bd.addEventListener("click",function(){set(false);});
+  $$("[data-close]",d).forEach(function(a){a.addEventListener("click",function(){set(false);});});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&d.classList.contains("open"))set(false);});
+}
+
+/* ---------- Mobile bottom nav hide-on-scroll ---------- */
+function initBottomNav(){
+  var nav=$("#bnav");if(!nav)return;
+  var last=window.scrollY,t=null;
+  window.addEventListener("scroll",function(){
+    var y=window.scrollY;
+    if(y>last&&y>320)nav.classList.add("hidden");else nav.classList.remove("hidden");
+    last=y;
+    if(t)clearTimeout(t);
+    t=setTimeout(function(){nav.classList.remove("hidden");},900);
+  },{passive:true});
+}
+
+/* ---------- Reveal ---------- */
+function initReveal(){
+  var items=$$(".reveal");
+  if(reduce()){items.forEach(function(e){e.classList.add("in");});return;}
+  var io=new IntersectionObserver(function(ents){
+    ents.forEach(function(e){if(e.isIntersecting){var d=e.target.getAttribute("data-d");if(d)e.target.style.transitionDelay=d+"ms";e.target.classList.add("in");io.unobserve(e.target);}});
+  },{threshold:.08,rootMargin:"0px 0px -5% 0px"});
+  items.forEach(function(e){io.observe(e);});
+}
+
+/* ---------- Counters ---------- */
+function fmt(n,dec){return dec>0?n.toFixed(dec):Math.round(n).toLocaleString();}
+function countUp(node,target,dec){
+  if(reduce()){node.textContent=fmt(target,dec);return;}
+  var dur=1600,start=null;
+  function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1),e=1-Math.pow(1-p,3);node.textContent=fmt(target*e,dec);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+function initCounters(){
+  var io=new IntersectionObserver(function(ents){
+    ents.forEach(function(e){if(e.isIntersecting){var t=parseFloat(e.target.getAttribute("data-counter")),d=parseInt(e.target.getAttribute("data-dec")||"0",10);countUp(e.target,t,d);io.unobserve(e.target);}});
+  },{threshold:.5});
+  $$("[data-counter]").forEach(function(n){io.observe(n);});
+}
+
+/* ---------- Toasts ---------- */
+function toast(title,opts){
+  opts=opts||{};
+  var wrap=$("#toaster");if(!wrap)return;
+  var tone=opts.tone||"default";
+  var ico=tone==="success"?CHK:(tone==="warning"?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>');
+  var node=el('<div class="toast" role="status"><span class="toast-ico '+tone+'">'+ico+'</span><div class="toast-b"><p>'+esc(title)+'</p>'+(opts.description?'<small>'+esc(opts.description)+'</small>':'')+'</div><button class="toast-x" aria-label="Dismiss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>');
+  wrap.appendChild(node);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){node.classList.add("in");});});
+  var to=setTimeout(close,4600);
+  function close(){clearTimeout(to);node.classList.remove("in");setTimeout(function(){node.remove();},340);}
+  node.querySelector(".toast-x").addEventListener("click",close);
+}
+
+/* ---------- Generic modal helper ---------- */
+function bindModal(backdrop,closeBtn,onClose){
+  function set(o){backdrop.classList.toggle("open",o);document.body.style.overflow=o?"hidden":"";if(!o&&onClose)onClose();}
+  if(closeBtn)closeBtn.addEventListener("click",function(){set(false);});
+  backdrop.addEventListener("click",function(e){if(e.target===backdrop)set(false);});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&backdrop.classList.contains("open"))set(false);});
+  return set;
+}
+
+/* ---------- FAQ accordion ---------- */
+function initFaq(){
+  $$(".acc-item").forEach(function(item){
+    var btn=item.querySelector(".acc-trigger"),panel=item.querySelector(".acc-panel");
+    function setH(){panel.style.maxHeight=item.classList.contains("open")?panel.scrollHeight+"px":"0px";}
+    if(item.classList.contains("open"))setH();
+    btn.addEventListener("click",function(){
+      var willOpen=!item.classList.contains("open");
+      $$(".acc-item").forEach(function(o){if(o!==item){o.classList.remove("open");o.querySelector(".acc-trigger").setAttribute("aria-expanded","false");var p=o.querySelector(".acc-panel");p.style.maxHeight="0px";}});
+      item.classList.toggle("open",willOpen);btn.setAttribute("aria-expanded",String(willOpen));setH();
+    });
+  });
+  window.addEventListener("resize",function(){var o=$(".acc-item.open");if(o){var p=o.querySelector(".acc-panel");p.style.maxHeight=p.scrollHeight+"px";}},{passive:true});
+}
+
+/* ---------- Forms ---------- */
+var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function initForms(){
+  var cf=$("#contact-form");
+  if(cf)cf.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=$("#cf-name").value.trim(),email=$("#cf-email").value.trim();
+    if(!name){toast("Tell us your name","We'd love to know who we're designing for.",{tone:"warning"});return;}
+    if(!EMAIL.test(email)){toast("Check your email","That address doesn't look quite right.",{tone:"warning"});return;}
+    toast("Consultation requested",{description:"Thank you, "+name.split(" ")[0]+". We'll reply within one business day.",tone:"success"});
+    cf.reset();
+  });
+  var lm=$("#lm-form");
+  if(lm)lm.addEventListener("submit",function(e){
+    e.preventDefault();
+    var email=$("#lm-email").value.trim();
+    if(!EMAIL.test(email)){toast("Check your email","Enter a valid address to receive the guide.",{tone:"warning"});return;}
+    toast("Guide on its way",{description:"The Interior Design Planning Guide is heading to your inbox.",tone:"success"});
+    lm.reset();
+  });
+}
+
+/* ===========================================================
+   PORTFOLIO
+   =========================================================== */
+var SCENE_BG={
+  warm:"linear-gradient(160deg,hsl(38 46% 86%),hsl(28 34% 60%))",
+  cool:"linear-gradient(160deg,hsl(205 26% 82%),hsl(214 22% 54%))",
+  night:"linear-gradient(160deg,hsl(28 16% 24%),hsl(250 14% 12%))",
+  stone:"linear-gradient(160deg,hsl(40 22% 84%),hsl(34 15% 60%))"
+};
+var MAT_CLASS={Oak:"mat-oak",Walnut:"mat-oak",Leather:"mat-oak",Cork:"mat-oak",Marble:"mat-marble",Glass:"mat-marble",Brass:"mat-brass",Bronze:"mat-brass",Linen:"mat-linen",Wool:"mat-linen",Velvet:"mat-linen",Travertine:"mat-travertine",Concrete:"mat-slate",Steel:"mat-slate"};
+function matClass(m){return MAT_CLASS[m]||"mat-slate";}
+
+var PROJECTS=[
+  {slug:"hampstead",title:"The Hampstead Residence",category:"Residential",location:"Hampstead, London",year:"2024",area:"6,500 sq ft",scene:"warm",featured:true,pal:["hsl(38 44% 84%)","hsl(30 36% 58%)","hsl(38 48% 56%)","hsl(28 20% 26%)"],
+   summary:"A Victorian villa reimagined for a young family — heritage proportions softened with warmth, light, and a deeply liveable material palette.",
+   challenge:"The house had been divided into dark, disconnected rooms over decades of ad-hoc renovation. The family wanted openness and light without losing the period character that drew them to the home.",
+   solution:"We reinstated original sightlines, opened the rear to the garden, and layered warm oak, honed marble, and brass throughout. Bespoke joinery hides modern function so the architecture can breathe.",
+   materials:["Oak","Marble","Brass","Linen"]},
+  {slug:"lucerne",title:"Maison Lucerne",category:"Luxury Villa",location:"Lake Lucerne, CH",year:"2023",area:"11,000 sq ft",scene:"cool",featured:true,pal:["hsl(205 24% 82%)","hsl(214 20% 56%)","hsl(38 48% 56%)","hsl(220 14% 22%)"],
+   summary:"A lakeside villa where Alpine light and water set the palette — serene, expansive, and quietly luxurious from entry to spa.",
+   challenge:"An extraordinary setting demanded interiors that would never compete with the view, yet still feel rich and resolved across eleven thousand square feet of living space.",
+   solution:"A cool, tonal scheme of travertine, walnut, and bronze recedes to frame the lake. Floor-to-ceiling glazing and a restrained material count let the landscape remain the protagonist.",
+   materials:["Travertine","Walnut","Bronze","Wool"]},
+  {slug:"warehouse",title:"The Warehouse Loft",category:"Apartment",location:"Shoreditch, London",year:"2024",area:"3,200 sq ft",scene:"night",featured:true,pal:["hsl(28 14% 30%)","hsl(250 12% 16%)","hsl(38 48% 56%)","hsl(30 10% 8%)"],
+   summary:"An industrial shell transformed into a moody, tactile loft — raw structure meets refined detail for a collector who entertains.",
+   challenge:"The client loved the building's industrial bones but wanted warmth and intimacy after dark, plus considered space to display a growing art collection.",
+   solution:"We kept the concrete and steel honest, then warmed them with oak, leather, and a deliberately low, layered lighting scheme. Gallery walls and flexible zones make the loft as good for two as for fifty.",
+   materials:["Concrete","Steel","Oak","Leather"]},
+  {slug:"marylebone",title:"The Marylebone Club",category:"Hospitality",location:"Marylebone, London",year:"2023",area:"8,000 sq ft",scene:"night",featured:false,pal:["hsl(28 16% 26%)","hsl(345 18% 20%)","hsl(38 48% 56%)","hsl(30 12% 10%)"],
+   summary:"A private members' club designed as a sequence of moods — from a bright morning lounge to a deep, jewel-toned bar.",
+   challenge:"The operator needed a single venue that could carry a member from breakfast meetings to late-night drinks, each moment feeling distinct yet part of one identity.",
+   solution:"We choreographed the guest journey through shifting palettes and lighting — marble and brass in the day spaces, velvet and walnut as you move deeper into the club. Atmosphere does the work the floor plan can't.",
+   materials:["Marble","Brass","Velvet","Walnut"]},
+  {slug:"lumiere",title:"Lumière Flagship",category:"Retail",location:"Paris, FR",year:"2024",area:"4,500 sq ft",scene:"stone",featured:false,pal:["hsl(40 22% 84%)","hsl(34 16% 60%)","hsl(38 48% 56%)","hsl(34 12% 24%)"],
+   summary:"A flagship store conceived as a gallery for the product — calm stone, glass, and light that puts the merchandise on a pedestal.",
+   challenge:"A fashion house wanted a Paris flagship that felt like an art space, not a shop — luxurious and restrained, but flexible enough for seasonal change.",
+   solution:"Travertine plinths, frameless glass, and a precise lighting grid create a neutral, museum-like envelope. Modular fixtures let the team re-merchandise the entire floor in a single night.",
+   materials:["Travertine","Glass","Steel","Oak"]},
+  {slug:"clerkenwell",title:"The Clerkenwell Studio",category:"Office",location:"Clerkenwell, London",year:"2023",area:"12,000 sq ft",scene:"cool",featured:false,pal:["hsl(205 22% 80%)","hsl(214 18% 56%)","hsl(38 48% 56%)","hsl(220 12% 24%)"],
+   summary:"A creative agency's headquarters built around wellbeing and focus — natural materials and daylight in a workplace that feels like anything but.",
+   challenge:"The agency wanted to draw its team back to the office with a space that supported deep focus, spontaneous collaboration, and genuine wellbeing — not rows of desks.",
+   solution:"We zoned the floor into a spectrum from quiet to social, wrapped in oak, linen, and cork for warmth and acoustic calm. Biophilia and daylight are designed in, not added on.",
+   materials:["Oak","Linen","Steel","Cork"]}
+];
+var CATEGORIES=["All","Residential","Luxury Villa","Apartment","Hospitality","Retail","Office"];
+
+function projectArt(p,aspect){
+  var bars=p.pal.map(function(c){return '<span style="background:'+c+'"></span>';}).join("");
+  var ar=aspect?"aspect-ratio:"+aspect+";":"";
+  return '<div class="port-art" style="'+ar+'background:'+SCENE_BG[p.scene]+'"><div class="beam"></div><div class="hz" style="background:hsl(0 0% 100% / .25)"></div><div class="post" style="background:hsl(0 0% 100% / .2)"></div><div class="pal">'+bars+'</div></div>';
+}
+function renderPortfolio(filter){
+  var grid=$("#port-grid");if(!grid)return;
+  grid.innerHTML="";
+  PROJECTS.filter(function(p){return filter==="All"||p.category===filter;}).forEach(function(p){
+    var card=el('<article class="port-card"><button class="port-media-btn" aria-label="View '+esc(p.title)+'"><div class="port-media">'+projectArt(p)+'</div><span class="port-badge">'+ARR+'</span></button><div class="port-body"><div class="port-meta"><span>'+esc(p.category)+'</span><span>'+esc(p.year)+'</span></div><h3 class="t-h3">'+esc(p.title)+'</h3><p class="t-body muted" style="font-size:.95rem">'+esc(p.summary)+'</p><div class="port-foot"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>'+esc(p.location)+'</span><span>'+esc(p.area)+'</span></div></div></article>');
+    card.querySelector(".port-media-btn").addEventListener("click",function(){openProject(p);});
+    grid.appendChild(card);
+  });
+}
+function initFilters(){
+  var wrap=$("#filters");if(!wrap)return;
+  CATEGORIES.forEach(function(c,idx){
+    var b=el('<button class="filter'+(idx===0?" active":"")+'" role="tab" aria-selected="'+(idx===0)+'">'+esc(c)+'</button>');
+    b.addEventListener("click",function(){
+      $$(".filter",wrap).forEach(function(o){o.classList.remove("active");o.setAttribute("aria-selected","false");});
+      b.classList.add("active");b.setAttribute("aria-selected","true");
+      renderPortfolio(c);
+      $$("#port-grid .reveal").forEach(function(e){e.classList.add("in");});
+    });
+    wrap.appendChild(b);
+  });
+}
+var setPortModal;
+function openProject(p){
+  var body=$("#port-modal-body");if(!body)return;
+  var mats=p.materials.map(function(m){return '<div class="res-mat"><span class="mat '+matClass(m)+'"></span><span class="caption muted">'+esc(m)+'</span></div>';}).join("");
+  body.innerHTML='<div style="position:relative">'+projectArt(p,"16/9")+'</div>'+
+    '<div style="padding:1.75rem">'+
+    '<div class="port-meta" style="margin-bottom:.75rem"><span>'+esc(p.category)+' · '+esc(p.location)+'</span><span>'+esc(p.year)+'</span></div>'+
+    '<h3 class="t-h2" style="font-size:clamp(1.75rem,3vw,2.5rem)">'+esc(p.title)+'</h3>'+
+    '<p class="t-body muted" style="margin-top:1rem">'+esc(p.summary)+'</p>'+
+    '<div class="res-grid" style="margin-top:1.75rem">'+
+      '<div><p class="eyebrow champagne" style="margin-bottom:.5rem">The Challenge</p><p class="t-body muted" style="font-size:.95rem">'+esc(p.challenge)+'</p></div>'+
+      '<div><p class="eyebrow champagne" style="margin-bottom:.5rem">Our Solution</p><p class="t-body muted" style="font-size:.95rem">'+esc(p.solution)+'</p></div>'+
+    '</div>'+
+    '<p class="eyebrow" style="margin:1.75rem 0 .75rem">Material Palette</p>'+
+    '<div class="res-mats">'+mats+'</div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem;align-items:center"><a href="#contact" class="btn btn-champagne btn-md" data-portcta>Start a project like this '+ARR+'</a><span class="caption muted">'+esc(p.area)+' · completed '+esc(p.year)+'</span></div>'+
+    '</div>';
+  body.scrollTop=0;
+  body.querySelectorAll("[data-portcta]").forEach(function(a){a.addEventListener("click",function(){setPortModal(false);});});
+  setPortModal(true);
+}
+function initPortfolio(){
+  initFilters();
+  renderPortfolio("All");
+  setPortModal=bindModal($("#port-modal"),$("#port-close"));
+}
+
+/* ===========================================================
+   STYLE DISCOVERY (weighted assessment)
+   =========================================================== */
+var STYLES={
+  minimalist:{name:"Minimalist",essence:"Calm through subtraction — every element earns its place, and silence is part of the composition.",palette:["#FFFFFF","#F1EFEB","#D8D4CC","#2B2A28"],materials:["Concrete","Glass","Lacquer","Pale stone"],keywords:["Restraint","Negative space","Order","Quiet"],mood:"Gallery-white walls, a single sculptural chair, and light as the only ornament."},
+  scandinavian:{name:"Scandinavian",essence:"Light, warmth, and ease — natural materials and soft tones built for long, dark winters and everyday joy.",palette:["#F7F3EC","#E7DDCE","#C9B295","#6E5B45"],materials:["Pale oak","Wool","Linen","Matte ceramic"],keywords:["Hygge","Daylight","Function","Soft texture"],mood:"Bleached oak floors, oatmeal textiles, and low winter sun across a simple room."},
+  contemporary:{name:"Contemporary Luxury",essence:"Confident, current, and richly resolved — strong lines softened by indulgent materials and statement moments.",palette:["#1C1B1A","#3A3733","#9A7C4A","#EDE7DC"],materials:["Honed marble","Brass","Smoked glass","Velvet"],keywords:["Bold","Tailored","Layered","Statement"],mood:"Deep tones, brass detailing, marble, and one unforgettable light fixture."},
+  japandi:{name:"Japandi",essence:"Where Japanese restraint meets Scandinavian warmth — grounded, tactile, and deeply serene.",palette:["#EFE9E0","#CFC3B2","#8A7A66","#2E2A24"],materials:["Oak","Clay plaster","Paper","Stoneware"],keywords:["Wabi-sabi","Balance","Natural","Considered"],mood:"Low timber furniture, hand-finished plaster, and a single branch in a ceramic vessel."},
+  classic:{name:"Classic Elegance",essence:"Timeless proportion and quiet grandeur — refined detailing that feels as considered in decades as today.",palette:["#F4EFE6","#D8C7A8","#9C7E4F","#33271A"],materials:["Marble","Walnut","Silk","Antique brass"],keywords:["Timeless","Refined","Symmetry","Heritage"],mood:"Panelled walls, a marble mantel, walnut, and the glow of aged brass."},
+  organic:{name:"Organic Modern",essence:"Modern lines grounded in nature — earthy materials, soft curves, and a deep sense of calm.",palette:["#EFE7DA","#D7C3A8","#A88B66","#4A3B2A"],materials:["Travertine","Clay","Rattan","Raw timber"],keywords:["Earthy","Curved","Tactile","Grounded"],mood:"Travertine and clay tones, rounded forms, and greenery softening every edge."}
+};
+var QUIZ=[
+  {q:"Which palette pulls you in?",opts:[
+    {t:"Crisp whites and soft greys",d:"Clean, bright, uncluttered",w:{minimalist:3,scandinavian:2,contemporary:1}},
+    {t:"Warm woods and oatmeal linens",d:"Soft, natural, inviting",w:{scandinavian:3,japandi:2,organic:2}},
+    {t:"Deep tones, brass and marble",d:"Rich, dramatic, luxe",w:{contemporary:3,classic:3}},
+    {t:"Earthy clays and natural stone",d:"Grounded, tactile, calm",w:{organic:3,japandi:2}}
+  ]},
+  {q:"A room feels finished when…",opts:[
+    {t:"Nothing more can be removed",d:"Pared back to essentials",w:{minimalist:3,japandi:2}},
+    {t:"It's layered with texture and light",d:"Warm and lived-in",w:{scandinavian:2,organic:2,contemporary:1}},
+    {t:"Every piece feels rich and considered",d:"Resolved and refined",w:{classic:3,contemporary:2}},
+    {t:"It balances calm with warmth",d:"Serene but never cold",w:{japandi:3,scandinavian:1}}
+  ]},
+  {q:"Choose a material you'd live with forever:",opts:[
+    {t:"Pale oak",d:"Light, honest timber",w:{scandinavian:3,japandi:1}},
+    {t:"Honed marble",d:"Cool, classic stone",w:{contemporary:2,classic:3}},
+    {t:"Raw travertine or clay plaster",d:"Earthy and textural",w:{organic:3,japandi:1}},
+    {t:"Polished concrete",d:"Minimal and architectural",w:{minimalist:3,contemporary:1}}
+  ]},
+  {q:"Your dream space feels…",opts:[
+    {t:"Serene and gallery-like",d:"Spare and considered",w:{minimalist:3,japandi:1}},
+    {t:"Cosy and light-filled",d:"Soft and welcoming",w:{scandinavian:3,organic:1}},
+    {t:"Elegant and timeless",d:"Refined and enduring",w:{classic:3,contemporary:1}},
+    {t:"Grounded and organic",d:"Natural and tactile",w:{organic:3,japandi:2}}
+  ]},
+  {q:"Lighting should be…",opts:[
+    {t:"Architectural and hidden",d:"Seen in effect, not fixture",w:{minimalist:3,contemporary:2}},
+    {t:"Soft and warm",d:"Low, layered, gentle",w:{scandinavian:2,japandi:2,organic:1}},
+    {t:"Sculptural statement pieces",d:"Fixtures as art",w:{contemporary:3,classic:2}},
+    {t:"Natural light, always",d:"The sun does the work",w:{japandi:2,organic:2,scandinavian:1}}
+  ]}
+];
+function scoreQuiz(answers){
+  var keys=Object.keys(STYLES),tally={};keys.forEach(function(k){tally[k]=0;});
+  answers.forEach(function(opt){if(opt&&opt.w)Object.keys(opt.w).forEach(function(k){tally[k]+=opt.w[k];});});
+  var ranked=keys.map(function(k){return {key:k,name:STYLES[k].name,score:tally[k]};}).sort(function(a,b){return b.score-a.score;});
+  var max=ranked[0].score||1;
+  ranked.forEach(function(r){r.percent=Math.round((r.score/max)*100);});
+  return {primary:ranked[0].key,secondary:ranked[1].key,ranked:ranked};
+}
+
+var quizState={step:-1,answers:[]};
+function showQuizStep(id){$$(".quiz-step").forEach(function(s){s.classList.remove("active");});var n=$("#"+id);if(n)n.classList.add("active");}
+function setProgress(n){var bar=$("#quiz-prog-bar");if(bar)bar.style.width=(n/QUIZ.length*100)+"%";}
+function renderQuestion(){
+  var i=quizState.step,Q=QUIZ[i];
+  var opts=Q.opts.map(function(o,oi){return '<button class="q-opt" data-oi="'+oi+'"><span class="q-check">'+CHK+'</span><span><b>'+esc(o.t)+'</b><small>'+esc(o.d)+'</small></span></button>';}).join("");
+  $("#step-q").innerHTML='<div class="q-top"><span class="eyebrow">Question '+(i+1)+' of '+QUIZ.length+'</span><span class="idx">0'+(i+1)+'</span></div><h3 class="t-h3">'+esc(Q.q)+'</h3><div class="q-opts">'+opts+'</div><div class="q-nav"><button class="link-btn" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button><span class="caption muted">Tap an option to continue</span></div>';
+  var sel=quizState.answers[i];
+  $$("#step-q .q-opt").forEach(function(b){
+    var oi=parseInt(b.getAttribute("data-oi"),10);
+    if(sel===Q.opts[oi])b.classList.add("sel");
+    b.addEventListener("click",function(){
+      $$("#step-q .q-opt").forEach(function(o){o.classList.remove("sel");});
+      b.classList.add("sel");
+      quizState.answers[i]=Q.opts[oi];
+      setTimeout(next,300);
+    });
+  });
+  $("#step-q [data-back]").addEventListener("click",back);
+  setProgress(i);
+  showQuizStep("step-q");
+}
+function next(){
+  if(quizState.step<QUIZ.length-1){quizState.step++;renderQuestion();}
+  else{setProgress(QUIZ.length);showQuizStep("step-capture");}
+}
+function back(){
+  if(quizState.step>0){quizState.step--;renderQuestion();}
+  else{quizState.step=-1;setProgress(0);showQuizStep("step-intro");}
+}
+function renderResult(name){
+  var res=scoreQuiz(quizState.answers),S=STYLES[res.primary],sec=STYLES[res.secondary];
+  var pal=S.palette.map(function(c){return '<span style="background:'+c+'"></span>';}).join("");
+  var keys=S.keywords.map(function(k){return '<span class="chip">'+esc(k)+'</span>';}).join("");
+  var mats=S.materials.map(function(m){return '<div class="res-mat"><span class="mat '+matClass(m)+'"></span><span class="caption muted">'+esc(m)+'</span></div>';}).join("");
+  var bars=res.ranked.map(function(r){return '<div class="bar-row"><span class="nm">'+esc(r.name)+'</span><span class="bar-track"><span class="bar-fill" data-w="'+r.percent+'" style="background:'+(r.key===res.primary?"hsl(var(--champagne))":"hsl(var(--taupe) / .6)")+'"></span></span><span class="pc">'+r.percent+'%</span></div>';}).join("");
+  var hi=name?esc(name.split(" ")[0])+", your":"Your";
+  var road='<li><p class="idx">01</p><p style="font-family:var(--font-display);font-size:1.1rem;margin-top:.25rem">Book a discovery call</p><p class="t-body muted" style="font-size:.9rem;margin-top:.25rem">Share your space and we\'ll translate your '+esc(S.name)+' direction into a brief.</p></li>'+
+    '<li><p class="idx">02</p><p style="font-family:var(--font-display);font-size:1.1rem;margin-top:.25rem">Develop the concept</p><p class="t-body muted" style="font-size:.9rem;margin-top:.25rem">We build a palette and moodboard around your style, with '+esc(sec.name)+' as a secondary note.</p></li>'+
+    '<li><p class="idx">03</p><p style="font-family:var(--font-display);font-size:1.1rem;margin-top:.25rem">Bring it to life</p><p class="t-body muted" style="font-size:.9rem;margin-top:.25rem">From material selection to final styling, we deliver the space end to end.</p></li>';
+  $("#step-result").innerHTML='<div class="quiz-center"><span class="eyebrow champagne">'+hi+' design style is</span><h3 class="t-display" style="font-size:clamp(2.5rem,7vw,4rem);margin-top:.5rem">'+esc(S.name)+'</h3><p class="t-lead serif-i" style="margin:1rem auto 0;max-width:34rem;color:hsl(var(--foreground) / .85)">'+esc(S.essence)+'</p></div>'+
+    '<div class="res-grid"><div><p class="eyebrow" style="margin-bottom:.75rem">Your palette</p><div class="res-pal">'+pal+'</div><div class="chips">'+keys+'</div></div><div><p class="eyebrow" style="margin-bottom:.75rem">Signature materials</p><div class="res-mats">'+mats+'</div></div></div>'+
+    '<div class="mood"><p class="eyebrow champagne" style="margin-bottom:.5rem">Moodboard direction</p><p class="t-body" style="font-family:var(--font-editorial);font-style:italic;font-size:1.15rem">'+esc(S.mood)+'</p></div>'+
+    '<div style="margin-top:1.75rem"><p class="eyebrow" style="margin-bottom:.75rem">Your style affinity</p><div class="bars">'+bars+'</div></div>'+
+    '<div style="margin-top:1.75rem"><p class="eyebrow" style="margin-bottom:.75rem">Your roadmap</p><ol class="roadmap">'+road+'</ol></div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem;justify-content:center"><a href="#contact" class="btn btn-champagne btn-lg" data-resultcta>Book a consultation '+ARR+'</a><button class="btn btn-outline btn-lg" data-retake><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"/><path d="M3 13a9 9 0 1 0 3-7.7L3 8"/></svg> Retake</button></div>';
+  showQuizStep("step-result");
+  setProgress(QUIZ.length);
+  if(!reduce())setTimeout(function(){$$("#step-result .bar-fill").forEach(function(f){f.style.width=f.getAttribute("data-w")+"%";});},120);
+  else $$("#step-result .bar-fill").forEach(function(f){f.style.width=f.getAttribute("data-w")+"%";});
+  $("#step-result [data-retake]").addEventListener("click",function(){quizState={step:0,answers:[]};renderQuestion();});
+  $("#step-result [data-resultcta]").addEventListener("click",function(){var d=$("#drawer");if(d)d.classList.remove("open");});
+  toast("Style revealed: "+S.name,{description:"Scroll your full profile, palette, and roadmap.",tone:"success"});
+}
+function initQuiz(){
+  var begin=$("#quiz-begin");if(!begin)return;
+  begin.addEventListener("click",function(){quizState={step:0,answers:[]};$("#quiz-prog").style.display="block";renderQuestion();});
+  var cap=$("#capture-form");
+  cap.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=$("#lead-name").value.trim(),email=$("#lead-email").value.trim();
+    if(!name){toast("Add your name","So we can personalise your result.",{tone:"warning"});return;}
+    if(!EMAIL.test(email)){toast("Check your email","Enter a valid address to see your result.",{tone:"warning"});return;}
+    renderResult(name);
+  });
+  $("#capture-back").addEventListener("click",function(){quizState.step=QUIZ.length-1;renderQuestion();});
+}
+
+/* ===========================================================
+   TESTIMONIALS
+   =========================================================== */
+var TST=[
+  {quote:"Atelier Vesper understood our home better than we did. They turned a dark, awkward Victorian into the warmest, most considered space we've ever lived in.",name:"Sarah & James Whitmore",role:"Private Residence, Hampstead",rating:5},
+  {quote:"Working with them transformed not just our offices but how our team feels about coming to work. Every brief was met, then quietly exceeded.",name:"Daniel Roche",role:"CEO, Meridian Capital",rating:5},
+  {quote:"Every detail was considered. The result is a restaurant our guests genuinely don't want to leave — and that shows in the bookings.",name:"Elena Fontaine",role:"Founder, Maison Restaurant Group",rating:5},
+  {quote:"From the first sketch to the final styling, the process was seamless and genuinely exciting. They made a complex build feel effortless.",name:"Priya & Arun Malhotra",role:"Luxury Villa, Lake Lucerne",rating:5}
+];
+function initTestimonials(){
+  var track=$("#tst-track"),dotsWrap=$("#tst-dots");if(!track)return;
+  var idx=0,timer=null;
+  function stars(n){var s="";for(var k=0;k<n;k++)s+='<svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;color:hsl(var(--champagne))"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';return s;}
+  track.innerHTML=TST.map(function(t,i){
+    var initials=t.name.split("&")[0].trim().split(" ").map(function(w){return w[0];}).slice(0,2).join("");
+    return '<figure class="tst'+(i===0?" active":"")+'"><div style="display:flex;justify-content:center;gap:.25rem;margin-bottom:1.25rem">'+stars(t.rating)+'</div><blockquote>&ldquo;'+esc(t.quote)+'&rdquo;</blockquote><figcaption><span class="tst-av">'+esc(initials)+'</span><div><p style="font-family:var(--font-display);font-size:1.05rem">'+esc(t.name)+'</p><p class="caption muted">'+esc(t.role)+'</p></div></figcaption></figure>';
+  }).join("");
+  dotsWrap.innerHTML=TST.map(function(t,i){return '<button class="dot'+(i===0?" active":"")+'" role="tab" aria-label="Testimonial '+(i+1)+'" aria-selected="'+(i===0)+'"></button>';}).join("");
+  var slides=$$(".tst",track),dots=$$(".dot",dotsWrap);
+  function go(n){
+    idx=(n+TST.length)%TST.length;
+    slides.forEach(function(s,i){s.classList.toggle("active",i===idx);});
+    dots.forEach(function(d,i){d.classList.toggle("active",i===idx);d.setAttribute("aria-selected",String(i===idx));});
+  }
+  function auto(){if(reduce())return;stop();timer=setInterval(function(){go(idx+1);},7000);}
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  $("#tst-next").addEventListener("click",function(){go(idx+1);auto();});
+  $("#tst-prev").addEventListener("click",function(){go(idx-1);auto();});
+  dots.forEach(function(d,i){d.addEventListener("click",function(){go(i);auto();});});
+  var region=$("#tst-region");
+  region.addEventListener("mouseenter",stop);region.addEventListener("mouseleave",auto);
+  region.addEventListener("focusin",stop);region.addEventListener("focusout",auto);
+  auto();
+}
+
+/* ===========================================================
+   FAB + CONCIERGE
+   =========================================================== */
+function initFab(){
+  var toggle=$("#fab-toggle"),opts=$("#fab-opts"),top=$("#fab-top"),main=$("#fab-main");
+  if(toggle&&opts){
+    var open=false;
+    toggle.addEventListener("click",function(){open=!open;opts.classList.toggle("open",open);toggle.classList.toggle("open",open);toggle.setAttribute("aria-expanded",String(open));});
+  }
+  if(top)top.addEventListener("click",function(){window.scrollTo({top:0,behavior:reduce()?"auto":"smooth"});if(opts){opts.classList.remove("open");toggle.classList.remove("open");toggle.setAttribute("aria-expanded","false");}});
+  if(main)main.addEventListener("click",openConcierge);
+}
+
+var CC_GREETED=false,setCC;
+function ccPush(role,text){
+  var msgs=$("#cc-msgs");
+  msgs.appendChild(el('<div class="cc-row '+role+'"><div class="cc-bub">'+esc(text)+'</div></div>'));
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function ccChips(){
+  var msgs=$("#cc-msgs");
+  var chips=el('<div class="cc-chips">'+["What's your style?","Typical budget?","How do we start?"].map(function(c){return '<button class="cc-chip">'+esc(c)+'</button>';}).join("")+'</div>');
+  chips.querySelectorAll(".cc-chip").forEach(function(b){b.addEventListener("click",function(){ccSend(b.textContent);chips.remove();});});
+  msgs.appendChild(chips);msgs.scrollTop=msgs.scrollHeight;
+}
+function ccTyping(on){
+  var msgs=$("#cc-msgs");
+  if(on){msgs.appendChild(el('<div class="cc-row bot" id="cc-typing"><div class="cc-typing"><span></span><span></span><span></span></div></div>'));msgs.scrollTop=msgs.scrollHeight;}
+  else{var t=$("#cc-typing");if(t)t.remove();}
+}
+function ccReply(text){
+  var s=text.toLowerCase(),m=function(arr){return arr.some(function(k){return s.indexOf(k)>-1;});};
+  if(m(["style","aesthetic","look","vibe"]))return "A great place to start is our Style Discovery assessment on this page — five quick questions reveal your dominant design style and a moodboard direction. From there, a designer tailors a concept around it.";
+  if(m(["cost","price","budget","fee","expensive","afford"]))return "Full-service residential engagements typically begin in the low six figures, and commercial work is scoped per project — but we're transparent about cost from the very first discovery call, so there are never surprises.";
+  if(m(["calm","living room","bedroom","minimal","serene","relax"]))return "For a calm room we lean on restraint — a pared-back palette, natural materials like oak and plaster, layered lighting, and plenty of negative space. The feeling comes from what you leave out as much as what you add.";
+  if(m(["book","consult","appointment","call","meet","start","begin","how do"]))return "Wonderful — the consultation form is just below, and the first conversation is complimentary. You can also reach the studio directly at (800) 555-0025.";
+  if(m(["material","stone","wood","timber","marble","brass","finish"]))return "We choose materials in the flesh — natural surfaces that improve with age, like travertine, unlacquered brass, and natural oak. The mix is always tuned to your style and how the space is used.";
+  if(m(["commercial","office","hospitality","restaurant","retail","hotel"]))return "Roughly a third of our work is commercial — offices, flagships, restaurants, and members' clubs — designed with the same care as our private residences.";
+  if(m(["hello","hi ","hey","thank"]))return "Lovely to meet you. I can help with style direction, materials, budgets, or booking a consultation — where would you like to start?";
+  return "That's a great question, and the best answer comes from a short conversation with one of our designers. The discovery call is complimentary — use the consultation form below or call the studio at (800) 555-0025.";
+}
+function ccSend(text){
+  text=(text||"").trim();if(!text)return;
+  ccPush("user",text);
+  $("#cc-input").value="";
+  ccTyping(true);
+  setTimeout(function(){ccTyping(false);ccPush("bot",ccReply(text));},700+Math.random()*500);
+}
+function openConcierge(){
+  if(!CC_GREETED){
+    CC_GREETED=true;
+    ccPush("bot","Welcome to Atelier Vesper. I'm the studio concierge — ask me about your design style, materials, budgets, or booking a consultation.");
+    ccChips();
+  }
+  setCC(true);
+  setTimeout(function(){$("#cc-input").focus();},120);
+}
+function initConcierge(){
+  setCC=bindModal($("#cc-backdrop"),$("#cc-close"));
+  var form=$("#cc-form");
+  form.addEventListener("submit",function(e){e.preventDefault();ccSend($("#cc-input").value);});
+}
+
+/* ---------- Year ---------- */
+function setYear(){$$(".yr").forEach(function(n){n.textContent=new Date().getFullYear();});}
+
+/* ---------- Smooth anchor + close drawer on nav ---------- */
+function initAnchors(){
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click",function(e){
+      var id=a.getAttribute("href");if(id==="#"||id.length<2)return;
+      var target=document.querySelector(id);if(!target)return;
+      e.preventDefault();
+      var d=$("#drawer");if(d)d.classList.remove("open");
+      var bd=$("#drawer-backdrop");if(bd)bd.classList.remove("open");
+      document.body.style.overflow="";
+      target.scrollIntoView({behavior:reduce()?"auto":"smooth",block:"start"});
+      history.replaceState(null,"",id);
+    });
+  });
+}
+
+/* ---------- Init ---------- */
+document.addEventListener("DOMContentLoaded",function(){
+  Theme.init();
+  $$(".theme-btn").forEach(function(b){b.addEventListener("click",function(){Theme.toggle();});});
+  initAnnounce();initNav();initDrawer();initBottomNav();initReveal();initCounters();
+  initFaq();initForms();initPortfolio();initQuiz();initTestimonials();initFab();initConcierge();
+  initAnchors();setYear();
+});
+})();
+</script>
+<!-- VALIDATION REPORT — Atelier Vesper (GrowrixOS Build 25, single-file HTML)
+     Brand: Atelier Vesper · luxury residential & commercial interior design studio
+     Phone: (800) 555-0025 · Credit: GrowrixOS (growrixos.com)
+
+     STRUCTURE — ALL CHECKS PASSED
+       Tag balance ............ BALANCED (markup parsed with style/script and percent-encoded favicon excluded)
+       Section open/close ..... 13 / 13
+       Duplicate id check ..... none (63 unique ids)
+       getElementById targets . all resolve
+       Anchor (#hash) targets . all resolve
+       JS syntax (node check) . PASS
+       Event listeners ........ 41
+       Style blocks / Script .. 1 style, JSON-LD + pre-paint + app script
+
+     MANDATORY COMPONENTS
+       FAB cluster (concierge + call + back-to-top) ...... present
+       AI concierge modal (deterministic responder) ...... present
+       Toast notifications ............................... present
+       Theme toggle, persisted (vesper-theme) ............ present (light default)
+       Rotating announcement bar (live --announce-h) ..... present (dismiss persisted)
+       Sticky/floating nav + mobile sheet ................ present
+       Mobile bottom nav, hide-on-scroll ................. present
+       GrowrixOS footer credit + auto year (.yr) ......... present
+       ESC/backdrop modal system (slide-up, blur) ........ present
+       Scroll-reveal (IntersectionObserver, reduced-motion) present
+       Accessibility (skip link, focus-visible, ARIA) .... present
+       Signature: weighted 6-archetype Style Discovery ... present (real scoreQuiz math)
+
+     DIFFERENTIATION (vs Builds 22-24 warm-neutral run)
+       Cooler/brighter: architectural-white light default + champagne-metallic accent.
+       Layout signature: editorial sticky rails + filterable portfolio with modal case studies.
+       Hero mechanic: full-bleed drifting light-study with line-split display headline.
+-->
+</body>
+</html>

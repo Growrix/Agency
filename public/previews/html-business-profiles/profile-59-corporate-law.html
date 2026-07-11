@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"/><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Sterling & Partners — Corporate Law Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Source Sans 3',sans-serif;background:#1a1410;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f7f4ee;margin:0 auto}
+/* NEWSPAPER MASTHEAD */
+.masthead{background:#1a1410;padding:14px 18px 12px;text-align:center;border-bottom:3px solid #1a1410}
+.mast-rule1{height:1px;background:rgba(255,255,255,.15);margin-bottom:8px}
+.mast-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#f7f4ee;letter-spacing:1px;line-height:1}
+.mast-sub{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(247,244,238,.3);margin-top:4px}
+.mast-rule2{height:1px;background:rgba(255,255,255,.15);margin-top:8px}
+.mast-info{display:flex;justify-content:space-between;margin-top:8px;font-size:9px;color:rgba(247,244,238,.2);letter-spacing:.5px}
+/* COLUMN LAYOUT */
+.hero-cols{display:grid;grid-template-columns:1fr 2px 1fr;background:#f7f4ee;border-bottom:3px solid #1a1410;padding:0}
+.col-divider{background:#1a1410}
+.col{padding:16px 14px}
+.col-label{font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(26,20,16,.3);margin-bottom:8px;border-bottom:1px solid rgba(26,20,16,.1);padding-bottom:6px}
+.col-headline{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#1a1410;line-height:1.1;letter-spacing:-.3px;margin-bottom:6px}
+.col-body{font-size:11px;color:rgba(26,20,16,.55);line-height:1.65;letter-spacing:.1px}
+.col-pull{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:#1a1410;border-left:2px solid #1a1410;padding-left:8px;margin-top:10px;line-height:1.4}
+/* STATS BAR — newspaper style */
+.stats-rule{background:#1a1410;padding:10px 18px;display:flex;justify-content:space-between}
+.sr{text-align:center}
+.sr-n{font-family:'Playfair Display',serif;font-size:18px;color:#f7f4ee;font-weight:700}
+.sr-l{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(247,244,238,.35);margin-top:2px}
+/* BODY NEWSPAPER */
+.body{padding:0}
+.section-header{background:#1a1410;padding:8px 18px;display:flex;align-items:center;gap:12px}
+.sh-text{font-family:'Playfair Display',serif;font-size:13px;color:#f7f4ee;font-style:italic;font-weight:400;letter-spacing:.5px}
+.sh-rule{flex:1;height:1px;background:rgba(247,244,238,.15)}
+.news-grid{display:grid;grid-template-columns:1fr 1px 1fr;background:#f7f4ee;border-bottom:1px solid rgba(26,20,16,.1)}
+.ng-col{padding:14px 14px}
+.ng-divider{background:rgba(26,20,16,.12)}
+.news-item{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(26,20,16,.08)}
+.news-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ni-title{font-family:'Playfair Display',serif;font-size:14px;color:#1a1410;line-height:1.2;margin-bottom:3px;font-weight:700}
+.ni-desc{font-size:10px;color:rgba(26,20,16,.45);line-height:1.5;letter-spacing:.1px}
+.ni-price{font-size:11px;font-weight:600;color:#1a1410;margin-top:4px;font-style:italic;font-family:'Playfair Display',serif}
+/* FULL WIDTH SECTIONS */
+.fw-section{padding:16px 18px;border-bottom:1px solid rgba(26,20,16,.1);background:#f7f4ee}
+.fw-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#1a1410;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(26,20,16,.1)}
+.fw-text{font-size:11px;color:rgba(26,20,16,.5);line-height:1.65}
+.team-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(26,20,16,.1)}
+.tc{padding:14px;border-right:1px solid rgba(26,20,16,.1);border-bottom:1px solid rgba(26,20,16,.1)}
+.tc:nth-child(even){border-right:none}
+.tc:nth-child(3),.tc:nth-child(4){border-bottom:none}
+.tc-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#1a1410}
+.tc-title{font-size:9px;color:rgba(26,20,16,.4);margin-top:2px;letter-spacing:.3px;line-height:1.4}
+/* CLASSIFIEDS BOX */
+.classifieds{background:#1a1410;padding:18px}
+.cl-header{font-family:'Playfair Display',serif;font-size:16px;color:#f7f4ee;font-style:italic;margin-bottom:10px;text-align:center}
+.cl-text{font-size:11px;color:rgba(247,244,238,.4);line-height:1.6;text-align:center;margin-bottom:14px}
+.cl-btn{display:block;border:1px solid rgba(247,244,238,.25);color:rgba(247,244,238,.7);padding:13px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:13px;text-decoration:none;margin-bottom:7px}
+.cl-btn2{display:block;color:rgba(247,244,238,.25);text-align:center;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none}
+.contacts{display:flex;flex-direction:column;gap:0;background:#f7f4ee}
+.cr{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:1px solid rgba(26,20,16,.08);font-size:11px;color:rgba(26,20,16,.5)}
+.cr:last-child{border-bottom:none}
+.cr-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(26,20,16,.25)}
+footer{background:#1a1410;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.f-name{font-family:'Playfair Display',serif;font-size:12px;color:rgba(247,244,238,.3);font-style:italic}
+.f-copy{font-size:9px;color:rgba(247,244,238,.15);letter-spacing:1px}
+</style></head>
+<body><div class="app">
+<div class="masthead">
+  <div class="mast-rule1"></div>
+  <div class="mast-title">Sterling &amp; Partners</div>
+  <div class="mast-sub">Advocates · Solicitors · Notaries</div>
+  <div class="mast-rule2"></div>
+  <div class="mast-info"><span>Est. Dhaka, 1998</span><span>Corporate · Commercial · Litigation</span></div>
+</div>
+<div class="hero-cols">
+  <div class="col">
+    <div class="col-label">Our Firm</div>
+    <div class="col-headline">26 years of corporate legal excellence</div>
+    <div class="col-body">One of Dhaka's foremost corporate law firms, trusted by multinationals, listed companies and financial institutions across Bangladesh.</div>
+    <div class="col-pull">"Justice served with precision and integrity."</div>
+  </div>
+  <div class="col-divider"></div>
+  <div class="col">
+    <div class="col-label">At a Glance</div>
+    <div class="col-body">📋 25+ attorneys<br>⚖️ 1,200+ matters resolved<br>🌍 16 countries served<br>💼 Licensed Bangladesh Bar<br>⭐ Chambers Asia-Pacific listed</div>
+  </div>
+</div>
+<div class="stats-rule">
+  <div class="sr"><div class="sr-n">1,200+</div><div class="sr-l">Matters</div></div>
+  <div class="sr"><div class="sr-n">26yr</div><div class="sr-l">Practice</div></div>
+  <div class="sr"><div class="sr-n">25+</div><div class="sr-l">Attorneys</div></div>
+</div>
+
+<div class="section-header"><div class="sh-rule"></div><div class="sh-text">Practice Areas</div><div class="sh-rule"></div></div>
+<div class="news-grid">
+  <div class="ng-col">
+    <div class="news-item"><div class="ni-title">Corporate & Commercial</div><div class="ni-desc">Company formation, shareholders agreements, M&A, joint ventures</div></div>
+    <div class="news-item"><div class="ni-title">Banking & Finance</div><div class="ni-desc">Loan agreements, security documentation, regulatory compliance</div></div>
+    <div class="news-item"><div class="ni-title">Dispute Resolution</div><div class="ni-desc">Commercial litigation, arbitration, mediation</div></div>
+  </div>
+  <div class="ng-divider"></div>
+  <div class="ng-col">
+    <div class="news-item"><div class="ni-title">Employment Law</div><div class="ni-desc">Contracts, terminations, workplace disputes, HR compliance</div></div>
+    <div class="news-item"><div class="ni-title">Real Estate</div><div class="ni-desc">Land acquisition, title verification, conveyancing</div></div>
+    <div class="news-item"><div class="ni-title">IP & Technology</div><div class="ni-desc">Trademarks, patents, technology agreements</div></div>
+  </div>
+</div>
+
+<div class="section-header"><div class="sh-rule"></div><div class="sh-text">Fee Structure</div><div class="sh-rule"></div></div>
+<div class="news-grid">
+  <div class="ng-col">
+    <div class="news-item"><div class="ni-title">Hourly Retainer</div><div class="ni-desc">Senior partner advise</div><div class="ni-price">$300/hr</div></div>
+    <div class="news-item"><div class="ni-title">Company Setup</div><div class="ni-desc">Full incorporation</div><div class="ni-price">$800</div></div>
+  </div>
+  <div class="ng-divider"></div>
+  <div class="ng-col">
+    <div class="news-item"><div class="ni-title">Monthly Retainer</div><div class="ni-desc">Ongoing corporate counsel</div><div class="ni-price">$1,500+/mo</div></div>
+    <div class="news-item"><div class="ni-title">M&A Advisory</div><div class="ni-desc">Deal structuring</div><div class="ni-price">Custom</div></div>
+  </div>
+</div>
+
+<div class="section-header"><div class="sh-rule"></div><div class="sh-text">The Partnership</div><div class="sh-rule"></div></div>
+<div class="team-cols">
+  <div class="tc"><div class="tc-name">James Sterling</div><div class="tc-title">Managing Partner<br>LLB · LLM London<br>30 years practice</div></div>
+  <div class="tc"><div class="tc-name">Nafisa Ahmed</div><div class="tc-title">Senior Partner<br>Corporate · M&A<br>LLB · MBA INSEAD</div></div>
+  <div class="tc"><div class="tc-name">Rahim Chowdhury</div><div class="tc-title">Partner · Litigation<br>Bangladesh Supreme Court<br>Advocate</div></div>
+  <div class="tc"><div class="tc-name">Priya Sen</div><div class="tc-title">Partner · Employment<br>LLM Cambridge<br>15 years practice</div></div>
+</div>
+
+<div class="classifieds">
+  <div class="cl-header">Request a Confidential Consultation</div>
+  <div class="cl-text">Initial consultations are conducted in strict confidence. All communications are privileged. Contact us to speak with a senior attorney.</div>
+  <a href="mailto:enquiry@sterlinglaw.com.bd" class="cl-btn">Request a Consultation</a>
+  <a href="https://wa.me/8801700000000" class="cl-btn2">WhatsApp enquiry →</a>
+</div>
+<div class="contacts">
+  <div class="cr"><span class="cr-label">Phone</span><span>+880 2-9876543</span></div>
+  <div class="cr"><span class="cr-label">Address</span><span>Gulshan-2, Dhaka 1212</span></div>
+  <div class="cr"><span class="cr-label">Hours</span><span>Sun–Thu · 9am – 6pm</span></div>
+</div>
+<footer><div class="f-name">Sterling &amp; Partners</div><div class="f-copy">© 2025 · All rights reserved</div></footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

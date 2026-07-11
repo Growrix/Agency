@@ -1,0 +1,838 @@
+{
+  "generatedAt": "2026-05-24T09:19:03.030Z",
+  "parityThreshold": 0.03,
+  "sourceBaselineMode": "snapshot-pages",
+  "localBaseUrl": "http://localhost:3100",
+  "sourceBaseUrl": "http://localhost:3100/lumoria-pages",
+  "overallPass": false,
+  "results": [
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "ratio": 0.181883,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 8057
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 9185
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 8057
+      }
+    },
+    {
+      "route": "/404",
+      "viewport": "desktop",
+      "ratio": 0.00114,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 982
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 982
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 982
+      }
+    },
+    {
+      "route": "/about",
+      "viewport": "desktop",
+      "ratio": 0.088611,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 4441
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4377
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 4377
+      }
+    },
+    {
+      "route": "/blog",
+      "viewport": "desktop",
+      "ratio": 0.058925,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 2877
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 2892
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 2877
+      }
+    },
+    {
+      "route": "/career-listing",
+      "viewport": "desktop",
+      "ratio": 0.010542,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 2971
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 2971
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 2971
+      }
+    },
+    {
+      "route": "/contact-us",
+      "viewport": "desktop",
+      "ratio": 0.103668,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3708
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3891
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3708
+      }
+    },
+    {
+      "route": "/core-values",
+      "viewport": "desktop",
+      "ratio": 0.007142,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3867
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3867
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3867
+      }
+    },
+    {
+      "route": "/faq",
+      "viewport": "desktop",
+      "ratio": 0.286945,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 2761
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3472
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 2761
+      }
+    },
+    {
+      "route": "/listings/designing-tomorrows-cities",
+      "viewport": "desktop",
+      "ratio": 0.000339,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3528
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3528
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3528
+      }
+    },
+    {
+      "route": "/our-awards",
+      "viewport": "desktop",
+      "ratio": 0.006382,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 2981
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 2981
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 2981
+      }
+    },
+    {
+      "route": "/our-history",
+      "viewport": "desktop",
+      "ratio": 0.036774,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 4710
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4657
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 4657
+      }
+    },
+    {
+      "route": "/our-process",
+      "viewport": "desktop",
+      "ratio": 0.059213,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3734
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3734
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3734
+      }
+    },
+    {
+      "route": "/our-services",
+      "viewport": "desktop",
+      "ratio": 0.132879,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 6661
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 7333
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 6661
+      }
+    },
+    {
+      "route": "/our-team",
+      "viewport": "desktop",
+      "ratio": 0.00816,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 2720
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 2720
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 2720
+      }
+    },
+    {
+      "route": "/portfolio-style-2",
+      "viewport": "desktop",
+      "ratio": 0.001351,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 1875
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 1875
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 1875
+      }
+    },
+    {
+      "route": "/portfolio-style1",
+      "viewport": "desktop",
+      "ratio": 0.001548,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 1762
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 1762
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 1762
+      }
+    },
+    {
+      "route": "/pricing-plan",
+      "viewport": "desktop",
+      "ratio": 0.222143,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3721
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 5065
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3721
+      }
+    },
+    {
+      "route": "/sustainable-construction-for-long-term-living",
+      "viewport": "desktop",
+      "ratio": 0.000262,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 4568
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4568
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 4568
+      }
+    },
+    {
+      "route": "/urban-development-for-the-next-generation",
+      "viewport": "desktop",
+      "ratio": 0.000284,
+      "pass": true,
+      "sourceSize": {
+        "width": 1512,
+        "height": 4211
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4211
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 4211
+      }
+    },
+    {
+      "route": "/wdt-careers/project-assistant",
+      "viewport": "desktop",
+      "ratio": 0.251935,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3410
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4200
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3410
+      }
+    },
+    {
+      "route": "/wdt-services/custom-construction",
+      "viewport": "desktop",
+      "ratio": 0.067614,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 4163
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4350
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 4163
+      }
+    },
+    {
+      "route": "/with-left-sidebar",
+      "viewport": "desktop",
+      "ratio": 0.0688,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3292
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3307
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3292
+      }
+    },
+    {
+      "route": "/with-right-sidebar",
+      "viewport": "desktop",
+      "ratio": 0.071018,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3292
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3307
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3292
+      }
+    },
+    {
+      "route": "/",
+      "viewport": "mobile",
+      "ratio": 0.162493,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 10466
+      },
+      "localSize": {
+        "width": 390,
+        "height": 13804
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 10466
+      }
+    },
+    {
+      "route": "/404",
+      "viewport": "mobile",
+      "ratio": 0.005146,
+      "pass": true,
+      "sourceSize": {
+        "width": 390,
+        "height": 844
+      },
+      "localSize": {
+        "width": 390,
+        "height": 844
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/about",
+      "viewport": "mobile",
+      "ratio": 0.274526,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5100
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6098
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5100
+      }
+    },
+    {
+      "route": "/blog",
+      "viewport": "mobile",
+      "ratio": 0.086429,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 4554
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5043
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4554
+      }
+    },
+    {
+      "route": "/career-listing",
+      "viewport": "mobile",
+      "ratio": 0.043325,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5649
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6124
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5649
+      }
+    },
+    {
+      "route": "/contact-us",
+      "viewport": "mobile",
+      "ratio": 0.276744,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 3882
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5045
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 3882
+      }
+    },
+    {
+      "route": "/core-values",
+      "viewport": "mobile",
+      "ratio": 0.053202,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5272
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5746
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5272
+      }
+    },
+    {
+      "route": "/faq",
+      "viewport": "mobile",
+      "ratio": 0.348737,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 3987
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6652
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 3987
+      }
+    },
+    {
+      "route": "/listings/designing-tomorrows-cities",
+      "viewport": "mobile",
+      "ratio": 0.029118,
+      "pass": true,
+      "sourceSize": {
+        "width": 390,
+        "height": 4723
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5197
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4723
+      }
+    },
+    {
+      "route": "/our-awards",
+      "viewport": "mobile",
+      "ratio": 0.043522,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 4484
+      },
+      "localSize": {
+        "width": 390,
+        "height": 4958
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4484
+      }
+    },
+    {
+      "route": "/our-history",
+      "viewport": "mobile",
+      "ratio": 0.053702,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 4745
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5219
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4745
+      }
+    },
+    {
+      "route": "/our-process",
+      "viewport": "mobile",
+      "ratio": 0.05084,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 3015
+      },
+      "localSize": {
+        "width": 390,
+        "height": 3489
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 3015
+      }
+    },
+    {
+      "route": "/our-services",
+      "viewport": "mobile",
+      "ratio": 0.156512,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 10125
+      },
+      "localSize": {
+        "width": 390,
+        "height": 12465
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 10125
+      }
+    },
+    {
+      "route": "/our-team",
+      "viewport": "mobile",
+      "ratio": 0.03564,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 6006
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6480
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 6006
+      }
+    },
+    {
+      "route": "/portfolio-style-2",
+      "viewport": "mobile",
+      "ratio": 0.077783,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 1741
+      },
+      "localSize": {
+        "width": 390,
+        "height": 2215
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 1741
+      }
+    },
+    {
+      "route": "/portfolio-style1",
+      "viewport": "mobile",
+      "ratio": 0.080557,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 1671
+      },
+      "localSize": {
+        "width": 390,
+        "height": 2145
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 1671
+      }
+    },
+    {
+      "route": "/pricing-plan",
+      "viewport": "mobile",
+      "ratio": 0.208499,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5874
+      },
+      "localSize": {
+        "width": 390,
+        "height": 8812
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5874
+      }
+    },
+    {
+      "route": "/sustainable-construction-for-long-term-living",
+      "viewport": "mobile",
+      "ratio": 0.094062,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5042
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5516
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5042
+      }
+    },
+    {
+      "route": "/urban-development-for-the-next-generation",
+      "viewport": "mobile",
+      "ratio": 0.11088,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5625
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6038
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5625
+      }
+    },
+    {
+      "route": "/wdt-careers/project-assistant",
+      "viewport": "mobile",
+      "ratio": 0.267688,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5125
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6621
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5125
+      }
+    },
+    {
+      "route": "/wdt-services/custom-construction",
+      "viewport": "mobile",
+      "ratio": 0.152745,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5635
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6207
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5635
+      }
+    },
+    {
+      "route": "/with-left-sidebar",
+      "viewport": "mobile",
+      "ratio": 0.094358,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5514
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6002
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5514
+      }
+    },
+    {
+      "route": "/with-right-sidebar",
+      "viewport": "mobile",
+      "ratio": 0.114401,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5557
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5985
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5557
+      }
+    }
+  ]
+}

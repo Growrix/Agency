@@ -136,6 +136,7 @@ export function ShopProductHomeMobileRowCard({
           <AddToCartButton
             productSlug={product.slug}
             productName={product.name}
+            productImageSrc={product.image?.src}
             productPrice={product.price}
             variant="outline"
             className="home-mobile-marketing__product-row-cart"

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">Brew and Bean logo</title>
+  <desc id="desc">Warm coffee cup monogram for Brew and Bean.</desc>
+  <rect width="120" height="120" rx="28" fill="#7a3d1c" />
+  <path d="M31 41h43c5.523 0 10 4.477 10 10v15c0 10.493-8.507 19-19 19H48c-9.941 0-18-8.059-18-18V41Z" fill="#fef4eb" />
+  <path d="M84 50h7c8.284 0 15 6.716 15 15s-6.716 15-15 15h-4" fill="none" stroke="#fef4eb" stroke-width="8" stroke-linecap="round" />
+  <path d="M45 27c0 8.284 6.716 15 15 15s15 6.716 15 15" fill="none" stroke="#f7d9c5" stroke-width="6" stroke-linecap="round" />
+  <path d="M66 26c0 6.627 5.373 12 12 12 6.627 0 12 5.373 12 12" fill="none" stroke="#f7d9c5" stroke-width="5" stroke-linecap="round" />
+  <text x="60" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="17" fill="#fef4eb">B&amp;B</text>
+</svg>

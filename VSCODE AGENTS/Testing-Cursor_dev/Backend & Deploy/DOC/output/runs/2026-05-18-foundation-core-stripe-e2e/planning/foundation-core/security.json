@@ -1,0 +1,76 @@
+{
+  "headers": {
+    "csp": "Reuse the Foundation Core baseline CSP. Hosted checkout does not require Stripe scripts in the default runtime shell.",
+    "hsts": "max-age=63072000; includeSubDomains; preload",
+    "frame_ancestors": "self",
+    "permissions_policy": "camera=(), microphone=(), geolocation=()"
+  },
+  "cors": {
+    "origins": [
+      "same-origin only"
+    ],
+    "methods": [
+      "POST"
+    ],
+    "headers": [
+      "Content-Type",
+      "Idempotency-Key",
+      "Stripe-Signature"
+    ],
+    "credentials": true
+  },
+  "rate_limits": [
+    {
+      "route": "/api/billing/checkout",
+      "scope": "authenticated_user",
+      "limit_reference": "RATE_LIMIT_MAX_REQUESTS / RATE_LIMIT_WINDOW_SECONDS"
+    },
+    {
+      "route": "/api/billing/portal",
+      "scope": "authenticated_user",
+      "limit_reference": "RATE_LIMIT_MAX_REQUESTS / RATE_LIMIT_WINDOW_SECONDS"
+    },
+    {
+      "route": "/api/webhooks/stripe",
+      "scope": "provider_event_stream",
+      "limit_reference": "idempotent processing with provider-volume-aware safeguards"
+    }
+  ],
+  "audit_log_table": "audit_logs",
+  "secret_scanning": "gitleaks",
+  "dependency_scanning": "npm audit plus Dependabot",
+  "compliance": [
+    "gdpr-ready",
+    "pci-scope-reduction",
+    "soc2-friendly"
+  ],
+  "pii_fields": [
+    {
+      "table": "customers",
+      "field": "user_id",
+      "category": "identity_link"
+    },
+    {
+      "table": "customers",
+      "field": "stripe_customer_id",
+      "category": "payment_reference"
+    },
+    {
+      "table": "subscriptions",
+      "field": "user_id",
+      "category": "identity_link"
+    },
+    {
+      "table": "invoices",
+      "field": "user_id",
+      "category": "identity_link"
+    }
+  ],
+  "billing_security_controls": [
+    "Verify Stripe signatures against the raw request body.",
+    "Never expose STRIPE_SECRET_KEY to the client.",
+    "Do not store card data or other PAN values in Foundation Core.",
+    "Mirror subscription state only from Stripe webhooks.",
+    "Enforce idempotency for checkout requests and webhook event processing."
+  ]
+}

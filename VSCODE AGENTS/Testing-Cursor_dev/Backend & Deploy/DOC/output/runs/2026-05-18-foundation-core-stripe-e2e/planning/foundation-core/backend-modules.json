@@ -1,0 +1,132 @@
+{
+  "modules": [
+    {
+      "name": "stripe_client",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/stripe.client.ts",
+      "classification": "required_before_clone",
+      "purpose": "Single Stripe SDK boundary using server-only secrets.",
+      "depends_on": [
+        "STRIPE_SECRET_KEY"
+      ]
+    },
+    {
+      "name": "offer_resolution_service",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/offer-resolution.service.ts",
+      "classification": "required_before_clone",
+      "purpose": "Resolve template offer keys to active Stripe prices via lookup_key.",
+      "depends_on": [
+        "stripe_client"
+      ]
+    },
+    {
+      "name": "billing_service",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/billing.service.ts",
+      "classification": "required_before_clone",
+      "purpose": "Create checkout sessions, create portal sessions, and dispatch webhook handlers.",
+      "depends_on": [
+        "stripe_client",
+        "offer_resolution_service",
+        "customers_repository",
+        "subscriptions_repository",
+        "invoices_repository",
+        "auth_session",
+        "observability"
+      ]
+    },
+    {
+      "name": "billing_checkout_route",
+      "owner": "Foundation Core",
+      "target_file": "src/app/api/billing/checkout/route.ts",
+      "public_route": "/api/billing/checkout",
+      "method": "POST",
+      "classification": "required_before_clone",
+      "purpose": "Create hosted Stripe Checkout sessions from authenticated billing requests.",
+      "input_schema": "CreateCheckoutInput"
+    },
+    {
+      "name": "billing_portal_route",
+      "owner": "Foundation Core",
+      "target_file": "src/app/api/billing/portal/route.ts",
+      "public_route": "/api/billing/portal",
+      "method": "POST",
+      "classification": "required_before_clone",
+      "purpose": "Create Stripe Billing Portal sessions for authenticated users.",
+      "input_schema": "CreatePortalSessionInput"
+    },
+    {
+      "name": "stripe_webhook_route",
+      "owner": "Foundation Core",
+      "target_file": "src/app/api/webhooks/stripe/route.ts",
+      "public_route": "/api/webhooks/stripe",
+      "method": "POST",
+      "classification": "required_before_clone",
+      "purpose": "Verify Stripe webhook signatures on raw body input and mirror billing state.",
+      "input_schema": "StripeWebhookRawBody"
+    },
+    {
+      "name": "customers_repository",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/customers.repository.ts",
+      "classification": "required_before_clone",
+      "records": [
+        "id",
+        "user_id",
+        "stripe_customer_id",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "subscriptions_repository",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/subscriptions.repository.ts",
+      "classification": "required_before_clone",
+      "records": [
+        "id",
+        "user_id",
+        "stripe_subscription_id",
+        "status",
+        "price_lookup_key",
+        "current_period_end",
+        "cancel_at_period_end",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "invoices_repository",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/invoices.repository.ts",
+      "classification": "required_before_clone",
+      "records": [
+        "id",
+        "user_id",
+        "stripe_invoice_id",
+        "amount_cents",
+        "status",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "billing_diagnostics",
+      "owner": "Foundation Core",
+      "target_file": "src/server/modules/billing/billing.diagnostics.ts",
+      "classification": "required_before_clone",
+      "purpose": "Expose adapter readiness and recent webhook sync health through existing diagnostics surfaces.",
+      "depends_on": [
+        "/api/health",
+        "/api/diagnostics"
+      ]
+    },
+    {
+      "name": "billing_ui_surfaces",
+      "owner": "Template",
+      "classification": "later",
+      "purpose": "Pricing table, checkout CTA placement, success page, cancel page, and billing dashboard presentation remain template-owned."
+    }
+  ]
+}

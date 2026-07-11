@@ -1,0 +1,29 @@
+{
+  "name": "html-profile-builder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "brief:sync": "node scripts/form-sync.js",
+    "copilot:handoff": "node scripts/build.js",
+    "validate:output": "node scripts/validate-output.js",
+    "qa:approve": "node scripts/approve-qa.js",
+    "qr": "node scripts/qr-generate.js",
+    "deploy:record": "node scripts/deploy-netlify.js",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "node scripts/typecheck.js",
+    "test": "node --test",
+    "verify": "npm run lint && npm run typecheck && npm run test"
+  },
+  "dependencies": {
+    "dotenv": "latest",
+    "qrcode": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "eslint": "latest",
+    "globals": "latest"
+  }
+}

@@ -1,0 +1,487 @@
+{
+  "generatedAt": "2026-05-24T09:08:26.283Z",
+  "localBaseUrl": "http://localhost:3100",
+  "overallPass": true,
+  "results": [
+    {
+      "route": "/",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/404",
+      "statusCode": 404,
+      "expectedStatus": 404,
+      "consoleErrors": [],
+      "rawConsoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "pageErrors": [],
+      "axe": {
+        "total": 2,
+        "seriousOrCritical": 0,
+        "ids": [
+          "landmark-one-main",
+          "page-has-heading-one"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/about",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/blog",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/career-listing",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/contact-us",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/core-values",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/faq",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 2,
+        "seriousOrCritical": 0,
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/listings/designing-tomorrows-cities",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 2,
+        "seriousOrCritical": 0,
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/our-awards",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/our-history",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/our-process",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/our-services",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/our-team",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/portfolio-style-2",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 2,
+        "seriousOrCritical": 0,
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/portfolio-style1",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 2,
+        "seriousOrCritical": 0,
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/pricing-plan",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/sustainable-construction-for-long-term-living",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/urban-development-for-the-next-generation",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/wdt-careers/project-assistant",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/wdt-services/custom-construction",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/with-left-sidebar",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    },
+    {
+      "route": "/with-right-sidebar",
+      "statusCode": 200,
+      "expectedStatus": 200,
+      "consoleErrors": [],
+      "rawConsoleErrors": [],
+      "pageErrors": [],
+      "axe": {
+        "total": 3,
+        "seriousOrCritical": 0,
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
+        "severeIds": [],
+        "severeDetails": []
+      },
+      "error": null,
+      "pass": true
+    }
+  ]
+}

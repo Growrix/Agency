@@ -1,0 +1,10 @@
+
+> test:e2e
+> npm --prefix web run test:e2e tests/e2e/release-gates.spec.ts --project=desktop-chrome
+
+
+> web@0.1.0 test:e2e
+> playwright test tests/e2e/release-gates.spec.ts
+
+Error: Process from config.webServer was not able to start. Exit code: 1
+

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Meridian — Precision Timepieces</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;display:flex;justify-content:center;min-height:100vh;background:#dde4e8}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;position:relative;overflow:hidden}
+
+/* BG: warm champagne to cool silver — liquid light feeling */
+.bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 90% 50% at 15% 5%,  rgba(255,235,200,.65) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 70% at 85% 25%,  rgba(200,215,240,.55) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 60% at 45% 90%,  rgba(220,230,250,.45) 0%,transparent 60%),
+    #e8eaf0;
+}
+
+/* === LIQUID GLASS SYSTEM === */
+/* Primary glass surface */
+.lg{
+  background: rgba(255,255,255,.38);
+  backdrop-filter: blur(28px) saturate(200%) brightness(1.06);
+  -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.06);
+  border: 1px solid rgba(255,255,255,.65);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.85) inset,
+    0 -1px 0 rgba(0,0,0,.02) inset,
+    0 8px 32px rgba(80,100,140,.1),
+    0 2px 8px rgba(0,0,0,.05);
+}
+/* Thin glass — for chips, pills */
+.lg-pill{
+  background: rgba(255,255,255,.48);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.72);
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 3px 10px rgba(0,0,0,.05);
+}
+/* Tinted glass — for accent elements */
+.lg-tint{
+  background: rgba(40,60,100,.06);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.5);
+  box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 6px 20px rgba(40,60,100,.08);
+}
+
+.w{position:relative;z-index:1}
+
+/* === HERO === */
+.hero{min-height:320px;padding:30px 20px 26px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.hero-nav{position:absolute;top:28px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:13px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(20,28,50,.4)}
+.logo-em{font-size:8px;letter-spacing:1px;color:rgba(20,28,50,.25)}
+.status{padding:4px 13px;font-size:9px;font-weight:600;color:rgba(20,60,140,.6);border-radius:100px;letter-spacing:.5px}
+
+/* Watch face illustration — pure CSS */
+.watch-face{
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 12px 40px rgba(40,60,100,.14),0 3px 10px rgba(0,0,0,.07);
+  margin-bottom:20px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.watch-emoji{font-size:52px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.15))}
+.watch-ring{position:absolute;inset:-6px;border-radius:50%;border:6px solid rgba(255,255,255,.3)}
+
+.hero-h1{font-size:40px;font-weight:800;color:#181c30;letter-spacing:-2.5px;line-height:.88}
+.hero-h1 i{font-style:italic;font-weight:300;color:rgba(24,28,48,.4)}
+.hero-sub{font-size:11px;color:rgba(24,28,48,.38);margin-top:8px;line-height:1.7;letter-spacing:.1px}
+.hero-rule{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),rgba(180,190,220,.3),transparent);margin-top:18px}
+
+/* === STAT ROW === */
+.stats-row{display:flex;gap:8px;padding:12px 16px 6px}
+.s{flex:1;border-radius:16px;padding:13px 0;text-align:center}
+.s-n{font-size:19px;font-weight:800;color:#181c30;letter-spacing:-1px}
+.s-l{font-size:9px;color:rgba(24,28,48,.35);margin-top:4px;letter-spacing:.5px;font-weight:500}
+
+/* === BODY === */
+.body{padding:4px 14px 44px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(24,28,48,.3);margin:20px 0 11px}
+
+/* Watch collection cards */
+.collection{display:flex;flex-direction:column;gap:9px}
+.watch-card{padding:16px;border-radius:20px;display:flex;gap:14px;align-items:center}
+.wc-face{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:26px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.12))}
+.wc-face.gold{background:linear-gradient(135deg,rgba(255,215,130,.3),rgba(255,235,180,.5));border:1px solid rgba(255,215,130,.5)}
+.wc-face.silver{background:linear-gradient(135deg,rgba(220,225,240,.4),rgba(240,243,250,.6));border:1px solid rgba(220,225,240,.6)}
+.wc-face.black{background:linear-gradient(135deg,rgba(30,30,50,.25),rgba(60,60,90,.15));border:1px solid rgba(80,80,120,.2)}
+.wc-series{font-size:9px;font-weight:600;color:rgba(24,28,48,.3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+.wc-name{font-size:15px;font-weight:700;color:#181c30;letter-spacing:-.4px}
+.wc-spec{font-size:10px;color:rgba(24,28,48,.38);margin-top:2px;line-height:1.4}
+.wc-right{margin-left:auto;text-align:right;flex-shrink:0}
+.wc-price{font-size:17px;font-weight:800;color:#181c30;letter-spacing:-.5px}
+.wc-avail{font-size:9px;color:rgba(60,120,200,.65);font-weight:600;margin-top:3px;display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.wc-avail::before{content:'';width:5px;height:5px;background:rgba(60,120,200,.65);border-radius:50%;display:inline-block}
+
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{padding:13px 16px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.svc-name{font-size:13px;font-weight:600;color:#181c30}
+.svc-desc{font-size:10px;color:rgba(24,28,48,.35);margin-top:2px}
+.svc-price{font-size:14px;font-weight:700;color:rgba(40,80,180,.7);flex-shrink:0}
+
+.cta{padding:24px;border-radius:24px;text-align:center}
+.cta h3{font-size:24px;font-weight:800;color:#181c30;letter-spacing:-1.5px;margin-bottom:7px;line-height:.95}
+.cta h3 i{font-style:italic;font-weight:300;color:rgba(24,28,48,.4)}
+.cta p{font-size:11px;color:rgba(24,28,48,.36);margin-bottom:20px;line-height:1.65}
+.btn-main{display:block;background:rgba(30,60,160,.82);color:#fff;border-radius:14px;padding:14px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:9px;letter-spacing:.2px;
+  box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 8px 24px rgba(30,60,160,.25),0 2px 6px rgba(0,0,0,.1)}
+.btn-sec{display:block;border-radius:14px;padding:13px;font-size:12px;font-weight:600;text-decoration:none;text-align:center;color:rgba(24,28,48,.45);letter-spacing:.2px}
+
+.contact-wrap{border-radius:18px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.45);font-size:12px;color:rgba(24,28,48,.4)}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{padding:18px;text-align:center;font-size:10px;color:rgba(24,28,48,.2);letter-spacing:.5px;font-style:italic}
+</style>
+</head>
+<body><div class="app">
+<div class="bg"></div>
+<div class="w">
+
+<div class="hero">
+  <div class="hero-nav">
+    <div>
+      <div class="logo">Meridian</div>
+      <div class="logo-em">Since 1974 · Geneva</div>
+    </div>
+    <div class="lg-pill status">● Boutique Open</div>
+  </div>
+  <div class="watch-face">
+    <div class="watch-ring"></div>
+    <div class="watch-emoji">⌚</div>
+  </div>
+  <div class="hero-h1">Time is<br><i>everything.</i></div>
+  <div class="hero-sub">Swiss-crafted precision timepieces — mechanical, quartz and smartwatch. Authorised retailer for Seiko, Tissot & Hamilton in Bangladesh.</div>
+  <div class="hero-rule"></div>
+</div>
+
+<div class="stats-row">
+  <div class="s lg"><div class="s-n">500+</div><div class="s-l">In stock</div></div>
+  <div class="s lg"><div class="s-n">50yr</div><div class="s-l">Heritage</div></div>
+  <div class="s lg"><div class="s-n">4.9★</div><div class="s-l">Google</div></div>
+</div>
+
+<div class="body">
+  <div class="sec">Featured Collection</div>
+  <div class="collection">
+    <div class="watch-card lg">
+      <div class="wc-face gold">⌚</div>
+      <div>
+        <div class="wc-series">Seiko · Presage</div>
+        <div class="wc-name">Cocktail Time Blue</div>
+        <div class="wc-spec">Automatic · 23 jewels · 100m WR · Gold-tone</div>
+      </div>
+      <div class="wc-right"><div class="wc-price">$420</div><div class="wc-avail">In stock</div></div>
+    </div>
+    <div class="watch-card lg">
+      <div class="wc-face silver">⌚</div>
+      <div>
+        <div class="wc-series">Tissot · PRX</div>
+        <div class="wc-name">Powermatic 80</div>
+        <div class="wc-spec">Mechanical · 80hr reserve · Sapphire · Silver</div>
+      </div>
+      <div class="wc-right"><div class="wc-price">$680</div><div class="wc-avail">In stock</div></div>
+    </div>
+    <div class="watch-card lg">
+      <div class="wc-face black">⌚</div>
+      <div>
+        <div class="wc-series">Hamilton · Khaki</div>
+        <div class="wc-name">Field Titanium</div>
+        <div class="wc-spec">Auto · 80hr · Titanium case · AR sapphire</div>
+      </div>
+      <div class="wc-right"><div class="wc-price">$795</div><div class="wc-avail">1 left</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Our Services</div>
+  <div class="services">
+    <div class="svc lg"><div><div class="svc-name">Watch Servicing & Repair</div><div class="svc-desc">Full service, movement overhaul, crystal replacement</div></div><div class="svc-price">From $40</div></div>
+    <div class="svc lg"><div><div class="svc-name">Strap Replacement</div><div class="svc-desc">Genuine leather, NATO, metal — fitted in 15 mins</div></div><div class="svc-price">From $15</div></div>
+    <div class="svc lg"><div><div class="svc-name">Battery & Pressure Test</div><div class="svc-desc">Same-day service · water resistance tested</div></div><div class="svc-price">$8</div></div>
+  </div>
+
+  <div class="sec">Visit the Boutique</div>
+  <div class="cta lg">
+    <h3>Find your <i>perfect watch.</i></h3>
+    <p>Visit our boutique or WhatsApp us — we'll help you choose the timepiece that fits your wrist and your story.</p>
+    <a href="https://wa.me/8801700000000" class="btn-main">⌚ Browse & Enquire</a>
+    <a href="tel:+8801700000000" class="btn-sec lg-pill">📞 Call the boutique</a>
+  </div>
+
+  <div class="sec">Find Us</div>
+  <div class="contact-wrap lg">
+    <div class="cr"><div class="ci lg-tint">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci lg-tint">📍</div>Gulshan-1, Dhaka · Level 1, Meridian Boutique</div>
+    <div class="cr"><div class="ci lg-tint">⏰</div>Sat–Thu · 10am – 8pm</div>
+    <div class="cr"><div class="ci lg-tint">📸</div>@meridian.watches.bd</div>
+  </div>
+</div>
+<footer>© 2025 Meridian Timepieces · Authorised Retailer · Gulshan, Dhaka</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></div></body></html>

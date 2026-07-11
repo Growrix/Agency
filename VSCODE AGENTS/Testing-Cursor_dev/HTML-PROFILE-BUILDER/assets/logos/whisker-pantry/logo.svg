@@ -1,0 +1,16 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="28" fill="#F4FAF6"/>
+  <circle cx="64" cy="64" r="42" fill="#16803C" opacity="0.12"/>
+  <path d="M40 40L50 30L56 44" stroke="#16803C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M88 40L78 30L72 44" stroke="#16803C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M45 52C49 45 56 41 64 41C72 41 79 45 83 52" stroke="#07361A" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="52" cy="60" r="5" fill="#07361A"/>
+  <circle cx="76" cy="60" r="5" fill="#07361A"/>
+  <path d="M59 74C61.8 77.2 66.2 77.2 69 74" stroke="#07361A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M64 66V73" stroke="#07361A" stroke-width="6" stroke-linecap="round"/>
+  <path d="M46 70H29" stroke="#16803C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M45 78H25" stroke="#16803C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M82 70H99" stroke="#16803C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M83 78H103" stroke="#16803C" stroke-width="4" stroke-linecap="round"/>
+  <text x="64" y="111" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#07361A">WP</text>
+</svg>

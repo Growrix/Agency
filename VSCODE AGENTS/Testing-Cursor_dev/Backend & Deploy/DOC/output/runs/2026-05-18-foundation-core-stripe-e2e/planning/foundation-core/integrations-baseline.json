@@ -1,0 +1,84 @@
+{
+  "must_have": [
+    {
+      "integration": "stripe",
+      "role": "payments",
+      "server_package": "stripe",
+      "server_env": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "routes": [
+        "/api/billing/checkout",
+        "/api/billing/portal",
+        "/api/webhooks/stripe"
+      ]
+    },
+    {
+      "integration": "database",
+      "role": "billing_mirror",
+      "required_tables": [
+        "customers",
+        "subscriptions",
+        "invoices"
+      ]
+    },
+    {
+      "integration": "auth",
+      "role": "customer_identity",
+      "required_surfaces": [
+        "/api/auth/session"
+      ]
+    },
+    {
+      "integration": "observability",
+      "role": "billing_trace_and_alerting",
+      "required_surfaces": [
+        "/api/diagnostics",
+        "/api/health"
+      ]
+    }
+  ],
+  "optional": [
+    {
+      "integration": "stripe_js",
+      "role": "custom_client_checkout",
+      "public_env": [
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+      ],
+      "when": "Only if an attached template needs Stripe.js or Elements."
+    },
+    {
+      "integration": "resend",
+      "role": "invoice_or_failure_emails",
+      "when": "Only if Foundation chooses to emit billing email notifications."
+    },
+    {
+      "integration": "analytics",
+      "role": "billing_event_measurement",
+      "when": "Only if billing lifecycle events are forwarded beyond logs."
+    }
+  ],
+  "later": [
+    {
+      "integration": "metered_billing",
+      "reason": "Not required for the hosted-checkout subscription baseline."
+    },
+    {
+      "integration": "automatic_tax",
+      "reason": "Can be enabled later without changing the core attach contract."
+    },
+    {
+      "integration": "coupon_or_promo_logic",
+      "reason": "Commercial policy is intentionally outside the first reusable runtime slice."
+    }
+  ],
+  "integration_policy": {
+    "hosted_checkout_default": true,
+    "customer_portal_default": true,
+    "subscription_source_of_truth": "stripe_webhooks",
+    "offer_resolution": "template_offer_key_to_stripe_price_lookup_key",
+    "legacy_env_to_replace": "BILLING_PROVIDER_SECRET",
+    "forbidden_core_pattern": "template_specific_STRIPE_PRICE_ID_envs"
+  }
+}

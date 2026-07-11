@@ -1,0 +1,2215 @@
+{
+  "header": [
+    {
+      "type": "element",
+      "tag": "header",
+      "attrs": {
+        "class": "transparent"
+      },
+      "children": [
+        {
+          "type": "element",
+          "tag": "div",
+          "attrs": {
+            "id": "topbar"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "container"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "row"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "col-lg-12"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "d-flex justify-content-between xs-hide"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "class": "d-flex"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "topbar-widget"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "href": "/appointment"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "img",
+                                          "attrs": {
+                                            "src": "/images/svg-white/bell.svg",
+                                            "class": "",
+                                            "alt": ""
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "text",
+                                          "value": "Book this week and get 15% off your first detailing package."
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "class": "d-flex"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "topbar-widget me-5"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "href": "tel:+12135550198"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "img",
+                                          "attrs": {
+                                            "src": "/images/svg-white/phone.svg",
+                                            "class": "",
+                                            "alt": ""
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "text",
+                                          "value": "Call us: +1 (213) 555-0198"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "div",
+                                  "attrs": {
+                                    "class": "topbar-widget"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "href": "mailto:hello@velocareauto.com"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "img",
+                                          "attrs": {
+                                            "src": "/images/svg-white/envelope.svg",
+                                            "class": "",
+                                            "alt": ""
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "text",
+                                          "value": "Message us: hello@velocareauto.com"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "clearfix"
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "element",
+          "tag": "div",
+          "attrs": {
+            "class": "container"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "row"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-md-12"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "de-flex sm-pt10"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "de-flex-col"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "id": "logo"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "a",
+                                  "attrs": {
+                                    "href": "/"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "img",
+                                      "attrs": {
+                                        "class": "logo-main",
+                                        "src": "/images/logo-velocare.svg",
+                                        "alt": ""
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "img",
+                                      "attrs": {
+                                        "class": "logo-mobile",
+                                        "src": "/images/logo-velocare-mobile.svg",
+                                        "alt": ""
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "de-flex-col header-col-mid"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "ul",
+                              "attrs": {
+                                "id": "mainmenu"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "/"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Home"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "ul",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 1"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-2"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 2"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-3"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 3"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-4"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 4"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-5"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 5"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-6"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 6"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-7"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Homepage 7"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/homepage-8"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "New: Homepage 8"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "/services"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Services"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "ul",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/services"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "All Services Style 1"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/services-2"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "All Services Style 2"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/services-3"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "All Services Style 3"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/service-single"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Service Single"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/faq"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "FAQ"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "#"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Pages"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "ul",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/about"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "About Us"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/gallery"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Gallery"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/blog"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Blog"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/team"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Our Team"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/careers"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Careers"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/testimonials"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Testimonials"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "/shop"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Shop"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "#"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Listing"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "ul",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/car-listing"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Car Listing"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/car-single"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Car Single"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "#"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Gallery"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "ul",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/gallery"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Gallery Filter"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/gallery-carousel"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Gallery Carousel"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/gallery-slider"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Gallery Filter"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "class": "menu-item",
+                                        "href": "#"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Workshop"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "ul",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/locations"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Locations"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "element",
+                                          "tag": "li",
+                                          "attrs": {},
+                                          "children": [
+                                            {
+                                              "type": "element",
+                                              "tag": "a",
+                                              "attrs": {
+                                                "href": "/contact"
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Contact"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "de-flex-col"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "class": "menu_side_area"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "a",
+                                  "attrs": {
+                                    "href": "/appointment",
+                                    "class": "btn-main fx-slide hover-white"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "span",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Make Appointment"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "span",
+                                  "attrs": {
+                                    "id": "menu-btn"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "id": "btn-extra"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "span",
+                                  "attrs": {},
+                                  "children": []
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "span",
+                                  "attrs": {},
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footer": [
+    {
+      "type": "element",
+      "tag": "footer",
+      "attrs": {},
+      "children": [
+        {
+          "type": "element",
+          "tag": "div",
+          "attrs": {
+            "class": "container"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "row gx-5"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-lg-4 col-sm-6"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "img",
+                      "attrs": {
+                        "src": "/images/logo-velocare.svg",
+                        "class": "logo-footer",
+                        "alt": ""
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "spacer-20"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "element",
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "At Velocare Auto Studio, we're dedicated to providing professional, high-quality car detailing services. From routine hand washes to advanced ceramic coatings, we help keep your vehicle looking its best while preserving its value and protecting it from the elements."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "social-icons mb-sm-30"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tag": "a",
+                          "attrs": {
+                            "href": "https://www.facebook.com/velocareauto",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "fa-brands fa-facebook-f"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "a",
+                          "attrs": {
+                            "href": "https://x.com/velocareauto",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "fa-brands fa-x-twitter"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "a",
+                          "attrs": {
+                            "href": "https://wa.me/12135550198",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "fa-brands fa-whatsapp"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "a",
+                          "attrs": {
+                            "href": "https://www.instagram.com/velocare_auto",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "fa-brands fa-instagram"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "a",
+                          "attrs": {
+                            "href": "https://www.youtube.com/@velocareauto",
+                            "target": "_blank",
+                            "rel": "noopener noreferrer"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "fa-brands fa-youtube"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-lg-4 col-sm-12 order-lg-1 order-sm-2"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "row"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "col-lg-5"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "class": "widget"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "h5",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "value": "Company"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "ul",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Home"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/services"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Our Services"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/gallery"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Gallery"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/about"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "About Us"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/blog"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Blog"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/contact"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Contact"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "col-lg-7"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "class": "widget"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "h5",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "value": "Our Services"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "ul",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/service-single"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Exterior Hand Wash & Wax"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/service-single"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Interior Deep Cleaning"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/service-single"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Paint Correction"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/service-single"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Ceramic Coating Protection"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/service-single"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Engine Bay Detailing"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tag": "li",
+                                      "attrs": {},
+                                      "children": [
+                                        {
+                                          "type": "element",
+                                          "tag": "a",
+                                          "attrs": {
+                                            "href": "/service-single"
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "text",
+                                              "value": "Headlight Restoration"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "col-lg-4 col-sm-6 order-lg-2 order-sm-1"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "widget"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tag": "h5",
+                          "attrs": {},
+                          "children": [
+                            {
+                              "type": "text",
+                              "value": "Contact Us"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "fw-bold text-white"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "icofont-location-pin me-2 id-color"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "text",
+                              "value": "Head Office\n                  "
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "value": "\n                  123 Shine Street, Los Angeles, CA\n\n                  "
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "spacer-20"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "fw-bold text-white"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "icofont-phone me-2 id-color"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "text",
+                              "value": "Call Us\n                  "
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "value": "\n                  +1 (213) 555-0198\n\n                  "
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "spacer-20"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "fw-bold text-white"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "i",
+                              "attrs": {
+                                "class": "icofont-envelope me-2 id-color"
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "text",
+                              "value": "Email Us\n                  "
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "value": "\n                  hello@velocareauto.com\n                "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "element",
+          "tag": "div",
+          "attrs": {
+            "class": "subfooter"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "container"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "div",
+                  "attrs": {
+                    "class": "row"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "div",
+                      "attrs": {
+                        "class": "col-md-12"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tag": "div",
+                          "attrs": {
+                            "class": "de-flex"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tag": "div",
+                              "attrs": {
+                                "class": "de-flex-col"
+                              },
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "value": "\n                      &copy; 2026 - Velocare Auto Studio. All rights reserved. Built &amp; maintenance by "
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "a",
+                                  "attrs": {
+                                    "href": "https://www.growrixos.com",
+                                    "target": "_blank",
+                                    "rel": "noopener noreferrer",
+                                    "class": "id-color",
+                                    "style": "margin-left: 4px; text-decoration: underline !important; font-weight: 700;"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "value": "Growrix OS"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "value": ".\n                    "
+                                }
+                              ]
+                            },
+                            {
+                              "type": "element",
+                              "tag": "ul",
+                              "attrs": {
+                                "class": "menu-simple"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "href": "/terms"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Terms &amp; Conditions"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "element",
+                                  "tag": "li",
+                                  "attrs": {},
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tag": "a",
+                                      "attrs": {
+                                        "href": "/privacy"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Privacy Policy"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraPanel": [
+    {
+      "type": "element",
+      "tag": "div",
+      "attrs": {
+        "id": "extra-wrap",
+        "class": "text-light"
+      },
+      "children": [
+        {
+          "type": "element",
+          "tag": "div",
+          "attrs": {
+            "id": "btn-close"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "span",
+              "attrs": {},
+              "children": []
+            },
+            {
+              "type": "element",
+              "tag": "span",
+              "attrs": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "element",
+          "tag": "div",
+          "attrs": {
+            "id": "extra-content"
+          },
+          "children": [
+            {
+              "type": "element",
+              "tag": "img",
+              "attrs": {
+                "src": "/images/logo-velocare.svg",
+                "class": "w-150px",
+                "alt": ""
+              },
+              "children": []
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "spacer-30-line"
+              },
+              "children": []
+            },
+            {
+              "type": "element",
+              "tag": "h5",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Our Services"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "ul",
+              "attrs": {
+                "class": "ul-check"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/service-single"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Exterior Hand Wash & Wax"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/service-single"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Interior Deep Cleaning"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/service-single"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Paint Correction"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/service-single"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Ceramic Coating Protection"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/service-single"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Engine Bay Detailing"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/service-single"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Headlight Restoration"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "spacer-30-line"
+              },
+              "children": []
+            },
+            {
+              "type": "element",
+              "tag": "h5",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Contact Us"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "i",
+                  "attrs": {
+                    "class": "icofont-clock-time me-2 op-5"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "text",
+                  "value": "Monday - Friday 08.00 - 18.00"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "i",
+                  "attrs": {
+                    "class": "icofont-location-pin me-2 op-5"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "text",
+                  "value": "123 Shine Street, Los Angeles, CA "
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "i",
+                  "attrs": {
+                    "class": "icofont-envelope me-2 op-5"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "text",
+                  "value": "hello@velocareauto.com"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "spacer-30-line"
+              },
+              "children": []
+            },
+            {
+              "type": "element",
+              "tag": "h5",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "text",
+                  "value": "About Us"
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "p",
+              "attrs": {},
+              "children": [
+                {
+                  "type": "text",
+                  "value": "At Velocare Auto Studio, we're dedicated to providing professional, high-quality car detailing services. From routine hand washes to advanced ceramic coatings, we help keep your vehicle looking its best while preserving its value and protecting it from the elements."
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "tag": "div",
+              "attrs": {
+                "class": "social-icons"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tag": "a",
+                  "attrs": {
+                    "href": "https://www.facebook.com/velocareauto",
+                    "target": "_blank",
+                    "rel": "noopener noreferrer"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "i",
+                      "attrs": {
+                        "class": "fa-brands fa-facebook-f"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "a",
+                  "attrs": {
+                    "href": "https://x.com/velocareauto",
+                    "target": "_blank",
+                    "rel": "noopener noreferrer"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "i",
+                      "attrs": {
+                        "class": "fa-brands fa-x-twitter"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "a",
+                  "attrs": {
+                    "href": "https://www.instagram.com/velocare_auto",
+                    "target": "_blank",
+                    "rel": "noopener noreferrer"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "i",
+                      "attrs": {
+                        "class": "fa-brands fa-instagram"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "a",
+                  "attrs": {
+                    "href": "https://www.youtube.com/@velocareauto",
+                    "target": "_blank",
+                    "rel": "noopener noreferrer"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "i",
+                      "attrs": {
+                        "class": "fa-brands fa-youtube"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tag": "a",
+                  "attrs": {
+                    "href": "https://wa.me/12135550198",
+                    "target": "_blank",
+                    "rel": "noopener noreferrer"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "tag": "i",
+                      "attrs": {
+                        "class": "fa-brands fa-whatsapp"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

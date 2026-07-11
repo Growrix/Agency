@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Forma Studio — Interior Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#e0dbd4;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#e8e3dc;margin:0 auto;color:#2c2420}
+/* Warm Cream Neumorphic */
+.hero{min-height:276px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 22px 24px;position:relative;background:#e8e3dc}
+.hero-top{position:absolute;top:26px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.hl{font-size:12px;font-weight:700;color:rgba(44,36,32,.3);letter-spacing:2px;text-transform:uppercase}
+.hb{font-size:9px;background:#e8e3dc;border-radius:100px;padding:4px 12px;color:rgba(44,36,32,.35);font-weight:600;box-shadow:-2px -2px 6px rgba(255,255,255,.8),2px 2px 6px rgba(190,175,160,.55)}
+.hero h1{font-size:40px;font-weight:800;color:#2c2420;line-height:.9;letter-spacing:-1.5px}
+.hero h1 .acc{color:#c87840}
+.hero-sub{font-size:11px;color:rgba(44,36,32,.4);margin-top:8px;line-height:1.6}
+.styles-row{display:flex;gap:6px;padding:14px 18px;overflow-x:auto;scrollbar-width:none}
+.styles-row::-webkit-scrollbar{display:none}
+.style-tag{background:#e8e3dc;border-radius:100px;padding:5px 12px;font-size:10px;font-weight:600;color:rgba(44,36,32,.4);flex-shrink:0;box-shadow:-2px -2px 5px rgba(255,255,255,.8),2px 2px 5px rgba(190,175,160,.5)}
+.body{padding:0 16px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(44,36,32,.3);margin:20px 0 12px}
+.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.proj{background:#e8e3dc;border-radius:18px;padding:18px;box-shadow:-4px -4px 10px rgba(255,255,255,.8),4px 4px 10px rgba(190,175,160,.6)}
+.proj-icon{font-size:24px;margin-bottom:8px}
+.proj-type{font-size:10px;font-weight:700;color:rgba(44,36,32,.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.proj-name{font-size:13px;font-weight:700;color:#2c2420}
+.proj-year{font-size:9px;color:#c87840;margin-top:4px;font-weight:600}
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{background:#e8e3dc;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;box-shadow:-4px -4px 10px rgba(255,255,255,.8),4px 4px 10px rgba(190,175,160,.55)}
+.svc-name{font-size:13px;font-weight:700;color:#2c2420}
+.svc-desc{font-size:10px;color:rgba(44,36,32,.38);margin-top:2px;line-height:1.4}
+.svc-price{font-size:14px;font-weight:800;color:#c87840;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(44,36,32,.3);font-weight:500;margin-top:1px}
+.cta{background:#e8e3dc;border-radius:22px;padding:26px;text-align:center;box-shadow:-6px -6px 14px rgba(255,255,255,.85),6px 6px 14px rgba(190,175,160,.65)}
+.cta h3{font-size:22px;font-weight:800;color:#2c2420;letter-spacing:-.5px;margin-bottom:8px;line-height:1.1}
+.cta p{font-size:11px;color:rgba(44,36,32,.38);margin-bottom:20px;line-height:1.6}
+.cta-btn{display:block;background:#c87840;color:#fff;border-radius:14px;padding:14px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 18px rgba(200,120,64,.3)}
+.cta-btn2{display:block;background:#e8e3dc;color:rgba(44,36,32,.45);border-radius:14px;padding:12px;font-size:12px;font-weight:600;text-decoration:none;box-shadow:-3px -3px 8px rgba(255,255,255,.8),3px 3px 8px rgba(190,175,160,.55)}
+.contacts{background:#e8e3dc;border-radius:16px;overflow:hidden;box-shadow:-4px -4px 10px rgba(255,255,255,.8),4px 4px 10px rgba(190,175,160,.5)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(190,175,160,.25);font-size:12px;color:rgba(44,36,32,.4)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#c87840;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;box-shadow:0 3px 10px rgba(200,120,64,.3)}
+footer{background:#ddd8d0;padding:16px;text-align:center;font-size:10px;color:rgba(44,36,32,.2);letter-spacing:.5px}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-top"><div class="hl">Forma Studio</div><div class="hb">Taking projects</div></div>
+  <h1>Spaces that<br>tell your <span class="acc">story.</span></h1>
+  <div class="hero-sub">Interior design for homes, offices and hospitality spaces. From concept to completion — we handle everything.</div>
+</div>
+<div class="styles-row">
+  <div class="style-tag">Modern Minimal</div><div class="style-tag">Japandi</div>
+  <div class="style-tag">Mid-Century</div><div class="style-tag">Industrial</div><div class="style-tag">Maximalist</div>
+</div>
+<div class="body">
+  <div class="sec">Recent Projects</div>
+  <div class="project-grid">
+    <div class="proj"><div class="proj-icon">🏠</div><div class="proj-type">Residential</div><div class="proj-name">Gulshan Penthouse</div><div class="proj-year">2024 · Japandi</div></div>
+    <div class="proj"><div class="proj-icon">🏢</div><div class="proj-type">Commercial</div><div class="proj-name">Nova Tech HQ</div><div class="proj-year">2024 · Modern</div></div>
+    <div class="proj"><div class="proj-icon">🍽️</div><div class="proj-type">Hospitality</div><div class="proj-name">The Garden Café</div><div class="proj-year">2023 · Organic</div></div>
+    <div class="proj"><div class="proj-icon">🛋️</div><div class="proj-type">Residential</div><div class="proj-name">Baridhara Villa</div><div class="proj-year">2023 · Luxury</div></div>
+  </div>
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Full Interior Design</div><div class="svc-desc">Concept, 3D visualisation, drawings, supervision</div></div><div class="svc-price">৳80<span>per sqft</span></div></div>
+    <div class="svc"><div><div class="svc-name">3D Interior Rendering</div><div class="svc-desc">Photorealistic renders for any room</div></div><div class="svc-price">৳8,000<span>per room</span></div></div>
+    <div class="svc"><div><div class="svc-name">Furniture Sourcing</div><div class="svc-desc">Custom & imported furniture procurement</div></div><div class="svc-price">10%<span>of value</span></div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Start Your Project</div>
+  <div class="cta">
+    <h3>Free design consultation.</h3>
+    <p>Tell us your space, your vision and your budget. We'll come to you for a free site visit.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🏠 Book Free Consultation</a>
+    <a href="mailto:hello@formastudio.bd" class="cta-btn2">hello@formastudio.bd</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Banani, Dhaka · Serves nationwide</div>
+    <div class="cr"><div class="ci">📸</div>@formastudio.bd</div>
+  </div>
+</div>
+<footer>© 2025 Forma Studio · Interior Design · Dhaka</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

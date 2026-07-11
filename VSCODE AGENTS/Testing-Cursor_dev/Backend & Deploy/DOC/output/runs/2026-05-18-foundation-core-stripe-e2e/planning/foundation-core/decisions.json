@@ -1,0 +1,34 @@
+{
+  "features": [
+    "stripe_billing",
+    "hosted_checkout",
+    "billing_portal",
+    "webhook_mirrored_subscription_state"
+  ],
+  "integrations": [
+    "stripe",
+    "database",
+    "auth",
+    "observability"
+  ],
+  "architecture_template": "nextjs_foundation_runtime_backend_first",
+  "env_vars": [
+    "STRIPE_SECRET_KEY",
+    "STRIPE_WEBHOOK_SECRET",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+  ],
+  "data_flows": [
+    "checkout_creation",
+    "billing_portal_session_creation",
+    "stripe_webhook_sync",
+    "subscription_state_mirroring"
+  ],
+  "key_decisions": {
+    "interaction_model": "hosted_checkout_and_customer_portal",
+    "price_reference": "template_offer_key_to_stripe_lookup_key",
+    "subscription_source_of_truth": "stripe_webhooks",
+    "template_price_envs_in_core": false,
+    "public_stripe_key_required_in_core_baseline": false
+  },
+  "validation_status": "passed"
+}

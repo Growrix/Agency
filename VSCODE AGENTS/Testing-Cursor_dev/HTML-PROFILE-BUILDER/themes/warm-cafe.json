@@ -1,0 +1,22 @@
+{
+  "name": "warm-cafe",
+  "colorPrimary": "#9a4c1d",
+  "colorAccent": "#7a3d1c",
+  "colorBg": "#fdf7f2",
+  "colorSurface": "#fef4eb",
+  "colorText": "#2c1810",
+  "colorMuted": "#6a4d3a",
+  "colorBorder": "#f0d9c4",
+  "colorTextOnPrimary": "#ffffff",
+  "colorTextOnHero": "#ffffff",
+  "colorMutedOnHero": "#f4dbcd",
+  "colorHeroChipBg": "#fef4eb",
+  "colorHeroChipText": "#2c1810",
+  "colorHeroChipBorder": "#efceb2",
+  "fontHeading": "Playfair Display",
+  "fontBody": "Lato",
+  "fontHeadingWeights": "400;700",
+  "fontBodyWeights": "300;400;700",
+  "borderRadius": "12px",
+  "heroGradient": "linear-gradient(150deg, #9a4c1d 0%, #6f3416 55%, #3d180a 100%)"
+}

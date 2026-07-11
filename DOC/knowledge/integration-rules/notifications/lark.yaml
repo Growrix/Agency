@@ -1,0 +1,18 @@
+integration: lark
+category: notifications
+role: internal_ops
+playbook: ~/.cursor/skills/integration-platform/references/lark.md
+env_source: web/src/server/config/runtime.ts
+
+env_vars:
+  - name: LARK_WEBHOOK_URL
+    required: false
+    scope: server
+  - name: LARK_SIGNING_SECRET
+    required: false
+    scope: server
+  - name: LEAD_HOT_THRESHOLD
+    required: false
+    scope: server
+
+owner_skill: integration-platform

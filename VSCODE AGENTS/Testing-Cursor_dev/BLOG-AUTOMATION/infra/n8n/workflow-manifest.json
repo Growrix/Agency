@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "workflows": [
+    {
+      "id": "keyword-research",
+      "trigger": "manual_or_schedule",
+      "file": "workflows/keyword-research.workflow.json",
+      "routes": ["/api/keywords/research/run", "/api/keywords/opportunities"]
+    },
+    {
+      "id": "brief-generation",
+      "trigger": "keyword_approved",
+      "file": "workflows/brief-generation.workflow.json",
+      "routes": ["/api/briefs/generate", "/api/outlines/generate"]
+    },
+    {
+      "id": "post-creation",
+      "trigger": "brief_approved",
+      "file": "workflows/post-creation.workflow.json",
+      "routes": [
+        "/api/posts/create-draft",
+        "/api/posts/humanize",
+        "/api/posts/enhance-eeat",
+        "/api/posts/insert-stats",
+        "/api/seo/optimize",
+        "/api/quality/run"
+      ]
+    },
+    {
+      "id": "publish-run",
+      "trigger": "post_approved",
+      "file": "workflows/publish-run.workflow.json",
+      "routes": [
+        "/api/publish/draft",
+        "/api/publish/schedule",
+        "/api/publish/run",
+        "/api/publish/notify-sitemap",
+        "/api/publish/invalidate-cache"
+      ]
+    },
+    {
+      "id": "weekly-analytics-sync",
+      "trigger": "weekly_schedule",
+      "file": "workflows/weekly-analytics-sync.workflow.json",
+      "routes": ["/api/analytics/sync", "/api/analytics/weekly-report", "/api/analytics/evaluate-refresh"]
+    }
+  ]
+}

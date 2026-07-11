@@ -1,0 +1,65 @@
+---
+description: Execution constitution — Stage A/B split, Agent Brain read order, materialization gate, session recovery. Apply for all material agent work in this workspace.
+alwaysApply: true
+---
+
+# Execution Constitution (Growrixos)
+
+Ported essentials from `DOC/Universal/Execution Constitution.md`. Governs documentation vs implementation and Agent Brain discipline.
+
+## Three layers (never mix stages)
+
+| Layer | Paths | Purpose |
+|-------|-------|---------|
+| Universal | `DOC/Universal/` | Reusable prompts, roles, enterprise guides |
+| Project plan | `DOC/PROJECT PLAN/` | Generated project-specific docs — SSOT for `web/` SaaS implementation |
+| Code | `web/`, `sites/`, `Frontend_Nextjs/` | Implementation surfaces |
+
+## Two execution stages
+
+### Stage A — Documentation generation
+
+- Entry: universal orchestration prompts, blueprint factory
+- Output: docs under `DOC/PROJECT PLAN/` or `blueprints/`
+- **No code implementation**
+
+### Stage B — Implementation
+
+- Entry: `DOC/PROJECT PLAN/ai-context.yaml` (SaaS) or lane skill (templates/migrations)
+- **Never restart from universal prompts** once project docs exist
+
+## Materialization gate
+
+Before updating any execution ledger:
+
+1. Planning artifact must exist on disk (`*-e2e-plan.md`, `CONVERSION-MAP.md`, scope doc, or blueprint deliverable)
+2. Affected role-specific docs materialized in owning folders when applicable
+3. Chat summaries are **never** canonical — disk artifacts are
+
+## Agent Brain read order
+
+Resolve lane via [`.cursor/brain/lane-router.yaml`](.cursor/brain/lane-router.yaml), then read in order:
+
+| Lane | Brain | Ledger |
+|------|-------|--------|
+| `web/` | `memories/repo/site-brain.md` | `DOC/PROJECT PLAN/Tasks/tasks.md` |
+| `sites/` | `.cursor/brain/template-brain.md` | `.cursor/execution/template-tasks.md` |
+| `Frontend_Nextjs/` | `.cursor/brain/migration-brain.md` | `.cursor/execution/template-tasks.md` |
+| Conversion | `.cursor/brain/migration-brain.md` | `.cursor/execution/template-tasks.md` |
+
+## Session recovery
+
+On resume or `/resume-brain`:
+
+1. Read `lane-router.yaml`
+2. Read lane brain + ledger
+3. Read controlling skill or `ai-context.yaml`
+4. Continue from last `in_progress` or `not_started` task — do not re-plan from chat memory
+
+## Gate failure protocol
+
+STOP → DEBUG → FIX → RE-RUN applicable validations before continuing or declaring complete.
+
+## Task ledger
+
+All material work uses `@task-ledger` discipline. SaaS: `DOC/PROJECT PLAN/Tasks/tasks.md`. Templates/migrations: `.cursor/execution/template-tasks.md`.

@@ -1,0 +1,29 @@
+{
+  "name": "growrix-auto",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --max-old-space-size=4096 ./node_modules/next/dist/bin/next dev --webpack",
+    "dev:linked": "node --max-old-space-size=4096 ./node_modules/next/dist/bin/next dev --webpack --port 3006",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run lint && npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

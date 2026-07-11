@@ -1,0 +1,117 @@
+{
+  "workspace_root": "F:/PROJECTS/testing",
+  "generated_for": "approved-planning-baseline",
+  "repos": [
+    {
+      "id": "testing-factory-backup",
+      "name": "Testing",
+      "path": "F:/PROJECTS/testing",
+      "role": "factory-backup",
+      "operational_source_of_truth": false,
+      "remote": "https://github.com/Growrix/Testing.git",
+      "current_branch": "feature/frontend-second-lane-doc-system",
+      "push_policy": "explicit-factory-backup-only",
+      "notes": "Entire factory snapshot and rollback safety net. Not the default target for project work."
+    },
+    {
+      "id": "foundation-core",
+      "name": "Foundation-Core",
+      "path": "F:/PROJECTS/testing/Backend & Deploy/Foundation-Core",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Foundation_core.git",
+      "current_branch": "CMS",
+      "push_policy": "explicit-manual-only"
+    },
+    {
+      "id": "nexform-consulting-template",
+      "name": "nexform-consulting",
+      "path": "F:/PROJECTS/testing/Backend & Deploy/Templates/local-business/nexform-consulting",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured"
+    },
+    {
+      "id": "blog-automation",
+      "name": "BLOG-AUTOMATION",
+      "path": "F:/PROJECTS/testing/BLOG-AUTOMATION",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Blog_Automation.git",
+      "current_branch": "main",
+      "push_policy": "explicit-manual-only"
+    },
+    {
+      "id": "growrix-auto",
+      "name": "GrowrixAuto",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/GrowrixAuto",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Growrix_Auto.git",
+      "current_branch": "main",
+      "push_policy": "explicit-manual-only"
+    },
+    {
+      "id": "nexform-website",
+      "name": "nexform-website",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/nexform-website",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured"
+    },
+    {
+      "id": "optilux",
+      "name": "optilux",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/optilux",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured"
+    },
+    {
+      "id": "rayiss",
+      "name": "rayiss",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/rayiss",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Rayiss.git",
+      "current_branch": "main",
+      "push_policy": "explicit-manual-only"
+    },
+    {
+      "id": "reference-style-4",
+      "name": "reference-style-4",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/reference-style-4",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured"
+    },
+    {
+      "id": "reference-style-5",
+      "name": "reference-style-5",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/reference-style-5",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured"
+    },
+    {
+      "id": "wostin-waste",
+      "name": "wostin-waste",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/wostin-waste",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+reports/
+state/
+registry/generated/
+*.local
+*.tmp
+*.log

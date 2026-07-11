@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Maison Clair — Luxury Home &amp; Commercial Cleaning · Come Home to Clean</title>
+<meta name="description" content="Maison Clair is a premium cleaning service for homes, offices and short-stay rentals. Recurring housekeeping, deep cleans, move-in/move-out and commercial contracts — background-checked, insured, eco-friendly. Book in 60 seconds."/>
+<meta name="keywords" content="luxury cleaning service, maid service, recurring house cleaning, deep cleaning, move out cleaning, Airbnb cleaning, commercial office cleaning, eco friendly cleaners, housekeeping subscription"/>
+<meta property="og:title" content="Maison Clair — Come Home to Clean"/>
+<meta property="og:description" content="A premium cleaning service that gives you your time back. Recurring housekeeping, deep cleans &amp; commercial care — insured, eco-friendly, beautifully done."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --sage:#7A9D84;--sage-d:#5E8169;--sage-dd:#4C6B56;--sage-soft:#EAF0EB;
+  --gold:#DCC6A0;--gold-d:#B89B6E;--gold-dd:#9A7F52;--gold-soft:#F6EFE2;
+  --ivory:#F7F5F1;--cream:#FBFAF7;
+  --bg:#FFFFFF;--surface:#F7F5F1;--surface2:#EFEBE3;--elevated:#FFFFFF;
+  --border:#EAE5DC;--borders:#DBD4C8;
+  --text:#222222;--text-soft:#3C3A36;--muted:#6E6962;--faint:#A39C90;
+  --on-dark:#F4F1EA;--on-dark-mut:rgba(244,241,234,.66);
+  --fd:'Cormorant Garamond',serif;--fb:'Inter',sans-serif;
+  --rc:20px;--rb:100px;--ri:14px;--maxw:1340px;
+  --shadow:0 10px 40px -16px rgba(34,30,24,.16);--shadow-lg:0 40px 90px -30px rgba(34,30,24,.28);
+  --shadow-soft:0 2px 18px rgba(34,30,24,.05);
+}
+[data-theme=dark]{
+  --sage:#9CBCA5;--sage-d:#B2CDBA;--sage-dd:#C7DBCD;--sage-soft:rgba(122,157,132,.14);
+  --gold:#E3CBA0;--gold-d:#EAD7B4;--gold-dd:#F1E4CB;--gold-soft:rgba(220,198,160,.12);
+  --ivory:#221E1A;--cream:#1F1B17;
+  --bg:#1A1714;--surface:#221E1A;--surface2:#2B2620;--elevated:#231F1B;
+  --border:#332C24;--borders:#43392E;
+  --text:#F2EEE7;--text-soft:#E2DDD3;--muted:#B3AB9D;--faint:#7B7263;
+  --on-dark:#F4F1EA;--on-dark-mut:rgba(244,241,234,.66);
+  --shadow:0 10px 40px -16px rgba(0,0,0,.6);--shadow-lg:0 40px 90px -30px rgba(0,0,0,.7);
+  --shadow-soft:0 2px 18px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;line-height:1.6;transition:background .4s,color .4s;overflow-x:hidden;font-weight:400}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}input,select,textarea{font-family:inherit}
+::selection{background:var(--sage);color:#fff}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:400;line-height:1.04;letter-spacing:-.01em;color:var(--text)}
+.skip{position:absolute;left:16px;top:-60px;background:var(--sage-d);color:#fff;padding:11px 18px;border-radius:100px;z-index:400;transition:top .2s;font-weight:500;font-size:14px}
+.skip:focus{top:14px}
+*:focus-visible{outline:2px solid var(--sage-d);outline-offset:3px;border-radius:4px}
+.container{max-width:var(--maxw);margin:0 auto;padding-inline:clamp(20px,5vw,72px)}
+.narrow{max-width:1080px;margin-inline:auto}
+.section{padding-block:clamp(72px,10vw,140px)}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--sage-d);font-weight:500}
+.eyebrow.gold{color:var(--gold-dd)}
+.h-d{font-family:var(--fd);font-weight:400;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.015em;margin-top:18px}
+.h-d em{font-style:italic;color:var(--sage-d)}
+.h-d .gold{color:var(--gold-dd);font-style:italic}
+.h-sub{color:var(--muted);font-size:clamp(16px,1.7vw,18.5px);line-height:1.7;margin-top:20px;max-width:600px;font-weight:300}
+.center{text-align:center}.center .h-sub{margin-inline:auto}
+.rule{height:1px;background:var(--border);border:none}
+.label-sc{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);font-weight:500}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fb);font-weight:500;font-size:14px;padding:14px 28px;border-radius:var(--rb);border:1px solid transparent;line-height:1;cursor:pointer;transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,box-shadow .25s,border-color .25s,color .25s;white-space:nowrap;letter-spacing:.01em}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-p{background:var(--sage-d);color:#fff;box-shadow:0 12px 30px -12px rgba(94,129,105,.6)}.btn-p:hover{background:var(--sage-dd)}
+.btn-gold{background:var(--gold-d);color:#2A2418;box-shadow:0 12px 30px -12px rgba(184,155,110,.55)}.btn-gold:hover{filter:brightness(1.05)}
+.btn-dark{background:var(--text);color:var(--bg)}.btn-dark:hover{opacity:.88}
+.btn-s{background:transparent;color:var(--text);border-color:var(--borders)}.btn-s:hover{border-color:var(--sage-d);color:var(--sage-d)}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.45);backdrop-filter:blur(10px)}.btn-ghost:hover{background:rgba(255,255,255,.24)}
+.btn-lg{padding:16px 34px;font-size:15px}.btn-sm{padding:11px 20px;font-size:13px}.btn-full{width:100%}
+.btn-ico{width:42px;height:42px;padding:0;border-radius:50%;border:1px solid var(--borders);background:var(--bg);color:var(--text);display:grid;place-items:center;transition:all .25s;flex-shrink:0}
+.btn-ico:hover{border-color:var(--sage-d);color:var(--sage-d)}
+
+/* forms */
+.f-label{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;font-weight:500}
+.f-input{width:100%;font-family:var(--fb);font-size:15px;color:var(--text);background:var(--bg);border:1px solid var(--borders);border-radius:var(--ri);padding:13px 16px;transition:border-color .25s,box-shadow .25s}
+.f-input:focus{outline:none;border-color:var(--sage-d);box-shadow:0 0 0 3px var(--sage-soft)}
+.f-input::placeholder{color:var(--faint)}
+select.f-input{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A39C90' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+
+/* chips / pills */
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg-btn{font-size:13px;font-weight:500;padding:9px 18px;border-radius:100px;color:var(--muted);transition:all .25s;white-space:nowrap}
+.seg-btn.on{background:var(--bg);color:var(--text);box-shadow:var(--shadow-soft)}
+[data-theme=dark] .seg-btn.on{background:var(--elevated)}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;padding:8px 16px;border-radius:100px;border:1px solid var(--borders);background:var(--bg);color:var(--muted);cursor:pointer;transition:all .2s}
+.pill:hover{border-color:var(--sage-d);color:var(--text)}
+.pill.on{background:var(--sage-d);border-color:var(--sage-d);color:#fff}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:6px 13px;border-radius:100px}
+.tag-sage{background:var(--sage-soft);color:var(--sage-d)}
+.tag-gold{background:var(--gold-soft);color:var(--gold-dd)}
+
+/* announcement */
+.announce{background:var(--text);color:var(--on-dark);height:44px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+[data-theme=dark] .announce{background:var(--surface2);border-bottom:1px solid var(--border)}
+.announce-track{position:relative;height:44px;width:100%;max-width:var(--maxw);padding-inline:24px}
+.announce-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;font-size:12.5px;letter-spacing:.06em;opacity:0;transition:opacity .8s;text-align:center}
+.announce-msg.on{opacity:1}
+.announce-msg b{color:var(--gold);font-weight:600}
+
+/* navbar */
+.navbar{position:sticky;top:0;z-index:80;background:transparent;transition:background .4s,box-shadow .4s,border-color .4s;border-bottom:1px solid transparent}
+.navbar.scrolled{background:var(--bg);border-color:var(--border);box-shadow:var(--shadow-soft)}
+[data-theme=light] .navbar.scrolled{background:rgba(255,255,255,.86);backdrop-filter:saturate(160%) blur(16px)}
+[data-theme=dark] .navbar.scrolled{background:rgba(26,23,20,.86);backdrop-filter:saturate(160%) blur(16px)}
+.nav-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:78px;gap:20px}
+.nav-on-hero .navbar:not(.scrolled){--text:#fff;--muted:rgba(255,255,255,.8)}
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:40px;height:40px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;flex-shrink:0;color:var(--sage-d);position:relative}
+.nav-on-hero .navbar:not(.scrolled) .logo-mark{color:var(--gold)}
+.logo-mark svg{width:20px;height:20px}
+.logo-text{font-family:var(--fd);font-size:25px;font-weight:500;letter-spacing:.01em;line-height:1;color:var(--text)}
+.logo-text .it{font-style:italic;color:var(--sage-d)}
+.nav-on-hero .navbar:not(.scrolled) .logo-text{color:#fff}.nav-on-hero .navbar:not(.scrolled) .logo-text .it{color:var(--gold)}
+.logo-sub{font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:6px;justify-content:center}
+.nav-link{font-size:13.5px;font-weight:400;color:var(--muted);padding:9px 14px;border-radius:100px;transition:color .25s,background .25s;letter-spacing:.01em}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-on-hero .navbar:not(.scrolled) .nav-link{color:rgba(255,255,255,.82)}.nav-on-hero .navbar:not(.scrolled) .nav-link:hover{color:#fff}
+.nav-acts{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.nav-on-hero .navbar:not(.scrolled) .theme-btn{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.1)}
+.nav-on-hero .navbar:not(.scrolled) .btn-s{border-color:rgba(255,255,255,.5);color:#fff}
+.hamburger{width:42px;height:42px;border-radius:50%;border:1px solid var(--borders);background:transparent;color:var(--text);display:none;place-items:center;cursor:pointer}
+.nav-on-hero .navbar:not(.scrolled) .hamburger{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-desktop{display:inline-flex}
+@media(max-width:1040px){.nav-links{display:none}.hamburger{display:grid}.nav-inner{grid-template-columns:1fr auto}}
+@media(max-width:520px){.btn-desktop.hide-sm{display:none}}
+
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:120;background:var(--bg);padding:24px;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);display:none;overflow-y:auto}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}
+.drawer-link{display:block;font-family:var(--fd);font-size:34px;color:var(--text);padding:13px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.drawer-link:hover{color:var(--sage-d);font-style:italic}
+
+/* bottom nav */
+.bottom-nav{position:fixed;left:14px;right:14px;bottom:14px;z-index:110;background:var(--elevated);border:1px solid var(--border);border-radius:100px;box-shadow:var(--shadow-lg);padding:8px;display:none;justify-content:space-around;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.bottom-nav.show{opacity:1;transform:none}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);padding:7px 10px;flex:1;transition:color .25s;font-size:9.5px;font-weight:500;letter-spacing:.04em}
+.bn-item svg{width:20px;height:20px;transition:transform .25s}
+.bn-item.active{color:var(--sage-d)}.bn-item.active svg{transform:translateY(-2px)}
+@media(max-width:1040px){.bottom-nav{display:flex}main{padding-bottom:90px}}
+
+/* FAB */
+.fab-wrap{position:fixed;right:20px;bottom:26px;z-index:100;display:flex;flex-direction:column;align-items:center;gap:12px}
+@media(max-width:1040px){.fab-wrap{bottom:96px}}
+.fab-main{width:56px;height:56px;border-radius:50%;background:var(--sage-d);color:#fff;display:grid;place-items:center;box-shadow:0 16px 36px -10px rgba(94,129,105,.6);cursor:pointer;transition:transform .3s,background .3s}
+.fab-main:hover{transform:scale(1.07)}.fab-main.open{background:var(--text)}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;max-height:0;opacity:0;transition:max-height .45s cubic-bezier(.16,1,.3,1),opacity .3s}
+.fab-opts.open{max-height:320px;opacity:1}
+.fab-opt{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .25s;text-decoration:none;position:relative}
+.fab-opt:hover{transform:scale(1.1)}
+.fab-opt.call{background:var(--text);color:var(--bg)}.fab-opt.wa{background:#25D366;color:#fff}.fab-opt.ai{background:var(--gold-d);color:#2A2418}
+.fab-opt.top{background:var(--bg);color:var(--text);border:1px solid var(--border);display:none}
+.fab-tip{position:absolute;right:58px;top:50%;transform:translateY(-50%) translateX(6px);background:var(--text);color:var(--bg);font-size:11.5px;padding:6px 12px;border-radius:8px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s;font-weight:500}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* reveal + spa */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.spa-page{display:none}.spa-page.active{display:block;animation:pageIn .6s cubic-bezier(.16,1,.3,1)}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* grids */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,72px)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.5vw,32px)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:980px){.grid3,.grid4{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+@media(max-width:560px){.grid3,.grid4{grid-template-columns:1fr}}
+
+/* ===== SIGNATURE: cinematic hero ===== */
+.hero{position:relative;min-height:clamp(620px,92vh,880px);display:flex;align-items:center;overflow:hidden;background:#1A1714;margin-top:-78px}
+.hero-scenes{position:absolute;inset:0;z-index:0}
+.hero-scene{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 2s ease;transform:scale(1.06);animation:kenburns 24s ease-in-out infinite}
+.hero-scene.on{opacity:1}
+@keyframes kenburns{0%{transform:scale(1.04) translate(0,0)}100%{transform:scale(1.14) translate(-1.5%,-1.5%)}}
+.hero-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(20,18,15,.72) 0%,rgba(20,18,15,.42) 42%,rgba(20,18,15,.12) 70%,transparent 100%)}
+.hero-sweep{position:absolute;top:-30%;left:-40%;width:55%;height:160%;z-index:1;background:linear-gradient(105deg,transparent,rgba(255,250,238,.10),transparent);transform:rotate(8deg);animation:sweep 9s ease-in-out infinite}
+@keyframes sweep{0%,100%{transform:translateX(-30%) rotate(8deg);opacity:0}50%{transform:translateX(180%) rotate(8deg);opacity:1}}
+.hero-inner{position:relative;z-index:2;width:100%;padding-block:clamp(80px,12vw,120px)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-size:12px;letter-spacing:.34em;text-transform:uppercase;font-weight:500}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--gold)}
+.hero-h1{font-family:var(--fd);font-weight:300;font-size:clamp(3.4rem,9vw,7rem);line-height:.98;letter-spacing:-.02em;color:#fff;margin-top:22px}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{color:rgba(255,255,255,.82);font-size:clamp(16px,1.9vw,20px);line-height:1.65;margin-top:24px;max-width:520px;font-weight:300}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:40px}
+.hero-meta span{display:flex;align-items:center;gap:9px;font-size:13px;color:rgba(255,255,255,.78);font-weight:300}
+.hero-meta svg{width:16px;height:16px;color:var(--gold)}
+.hero-dots{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:3;display:flex;gap:9px}
+.hero-dot{width:30px;height:3px;border-radius:2px;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s}
+.hero-dot.on{background:var(--gold)}
+.hero-scene-label{position:absolute;right:clamp(20px,5vw,72px);bottom:30px;z-index:3;color:rgba(255,255,255,.7);font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:300;text-align:right}
+.hero-scene-label .nm{font-family:var(--fd);font-size:22px;font-style:italic;color:#fff;letter-spacing:0;text-transform:none;display:block;margin-top:2px}
+@media(max-width:680px){.hero-scene-label{display:none}}
+
+/* ===== CALCULATOR ===== */
+.calc{background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);box-shadow:var(--shadow);overflow:hidden}
+.calc-grid{display:grid;grid-template-columns:1.15fr .85fr}
+@media(max-width:880px){.calc-grid{grid-template-columns:1fr}}
+.calc-form{padding:clamp(28px,3.5vw,44px)}
+.calc-field{margin-bottom:24px}
+.calc-out{padding:clamp(28px,3.5vw,44px);background:var(--text);color:var(--on-dark);position:relative;overflow:hidden;display:flex;flex-direction:column}
+[data-theme=dark] .calc-out{background:var(--surface2);border-left:1px solid var(--border)}
+.calc-out-bg{position:absolute;inset:0;opacity:.5;background:radial-gradient(circle at 80% 0%,rgba(122,157,132,.3),transparent 55%),radial-gradient(circle at 0% 100%,rgba(220,198,160,.22),transparent 55%)}
+.calc-price{font-family:var(--fd);font-size:clamp(3.4rem,7vw,5rem);font-weight:300;line-height:1;color:#fff}
+.calc-price .cur{color:var(--gold);font-size:.5em;vertical-align:super}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.calc-row .k{font-size:13px;color:rgba(255,255,255,.6);letter-spacing:.04em}
+.calc-row .v{font-size:15px;color:#fff;font-weight:500;text-align:right}
+[data-theme=dark] .calc-out .calc-price,[data-theme=dark] .calc-out .calc-row .v{color:var(--text)}
+[data-theme=dark] .calc-out .calc-row .k{color:var(--muted)}
+[data-theme=dark] .calc-out .calc-row{border-color:var(--border)}
+.calc-rec{margin-top:auto;padding-top:22px}
+.calc-rec-card{background:rgba(255,255,255,.08);border:1px solid rgba(220,198,160,.3);border-radius:14px;padding:18px}
+[data-theme=dark] .calc-rec-card{background:var(--gold-soft)}
+.range{appearance:none;width:100%;height:4px;border-radius:4px;background:var(--surface2);outline:none;margin-top:6px}
+.range::-webkit-slider-thumb{appearance:none;width:22px;height:22px;border-radius:50%;background:var(--sage-d);cursor:pointer;box-shadow:0 3px 8px -2px rgba(94,129,105,.6);border:3px solid var(--bg)}
+.range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--sage-d);cursor:pointer;border:3px solid var(--bg)}
+
+/* ===== TIME STORY CARDS ===== */
+.time-card{position:relative;border-radius:var(--rc);overflow:hidden;min-height:320px;display:flex;align-items:flex-end;cursor:pointer;box-shadow:var(--shadow-soft)}
+.time-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.time-card:hover img{transform:scale(1.07)}
+.time-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(20,18,15,.82))}
+.time-card-body{position:relative;z-index:2;padding:26px;color:#fff}
+.time-card-body h3{font-family:var(--fd);font-size:30px;font-weight:400;color:#fff}
+.time-card-body p{font-size:14px;color:rgba(255,255,255,.82);margin-top:6px;font-weight:300;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .4s,margin .4s}
+.time-card:hover .time-card-body p{max-height:80px;opacity:1;margin-top:10px}
+
+/* ===== JOURNEY ===== */
+.journey{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin-top:50px}
+@media(max-width:860px){.journey{grid-template-columns:1fr}}
+.journey-col{padding:32px;text-align:center}
+.journey-arrow{display:grid;place-items:center;color:var(--gold-d);padding:0 8px}
+@media(max-width:860px){.journey-arrow{transform:rotate(90deg);padding:14px 0}}
+.journey-stage{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:18px}
+.journey-col.a .journey-stage{color:var(--faint)}.journey-col.b .journey-stage{color:var(--sage-d)}.journey-col.c .journey-stage{color:var(--gold-dd)}
+.journey-word{font-family:var(--fd);font-size:26px;color:var(--text);padding:7px 0}
+.journey-col.a .journey-word{color:var(--muted)}
+
+/* ===== PACKAGES ===== */
+.pkg{background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;transition:box-shadow .35s,transform .35s,border-color .35s;display:flex;flex-direction:column}
+.pkg:hover{box-shadow:var(--shadow-lg);transform:translateY(-5px)}
+.pkg.feat{border-color:var(--gold-d)}
+.pkg-img{height:180px;position:relative;overflow:hidden}
+.pkg-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.pkg:hover .pkg-img img{transform:scale(1.06)}
+.pkg-img .pkg-badge{position:absolute;top:14px;left:14px;background:var(--gold-d);color:#2A2418}
+.pkg-body{padding:26px;display:flex;flex-direction:column;flex:1}
+.pkg-name{font-family:var(--fd);font-size:30px;font-weight:400}
+.pkg-price{font-family:var(--fd);font-size:40px;font-weight:300;margin-top:10px;color:var(--sage-d)}
+.pkg-price .per{font-family:var(--fb);font-size:13px;color:var(--muted);font-weight:400}
+.pkg-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);padding:7px 0;font-weight:300}
+.pkg-feat svg{width:16px;height:16px;color:var(--sage-d);flex-shrink:0;margin-top:3px}
+.pkg-extra{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1)}
+.pkg-toggle{font-size:13px;color:var(--sage-d);font-weight:500;display:flex;align-items:center;gap:6px;margin-top:14px;cursor:pointer}
+.pkg-toggle svg{transition:transform .3s}.pkg.open .pkg-toggle svg{transform:rotate(180deg)}
+
+/* ===== ROOM EXPLORER ===== */
+.room-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;background:var(--bg)}
+@media(max-width:880px){.room-wrap{grid-template-columns:1fr}}
+.room-visual{position:relative;min-height:420px;overflow:hidden}
+.room-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s,transform 6s ease}
+.room-img.on{opacity:1;transform:scale(1.06)}
+.room-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(20,18,15,.55))}
+.room-tabs{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex;gap:8px;padding:18px;flex-wrap:wrap}
+.room-tab{font-size:13px;font-weight:500;padding:9px 16px;border-radius:100px;background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);transition:all .25s}
+.room-tab.on{background:#fff;color:var(--text)}
+.room-detail{padding:clamp(28px,3.5vw,42px)}
+.room-check{display:flex;align-items:flex-start;gap:11px;padding:9px 0;font-size:14.5px;color:var(--text-soft);border-bottom:1px solid var(--border);font-weight:300}
+.room-check svg{width:17px;height:17px;color:var(--sage-d);flex-shrink:0;margin-top:2px}
+
+/* ===== EDITORIAL BEFORE/AFTER ===== */
+.ba{position:relative;border-radius:var(--rc);overflow:hidden;user-select:none;aspect-ratio:16/9;box-shadow:var(--shadow);background:var(--surface2)}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-50%);z-index:3;pointer-events:none;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;color:var(--text);z-index:4;pointer-events:none;box-shadow:0 8px 22px -6px rgba(0,0,0,.4)}
+.ba-lbl{position:absolute;top:16px;font-family:var(--fd);font-style:italic;font-size:17px;padding:6px 16px;border-radius:100px;background:rgba(20,18,15,.5);color:#fff;z-index:3;backdrop-filter:blur(6px)}
+.ba-lbl.l{left:16px}.ba-lbl.r{right:16px}
+
+/* ===== TRUST DASHBOARD ===== */
+.trust-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:30px;text-align:center;transition:transform .3s,box-shadow .3s}
+.trust-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.trust-ico{width:60px;height:60px;border-radius:50%;background:var(--sage-soft);display:grid;place-items:center;color:var(--sage-d);margin:0 auto 18px}
+.trust-ico svg{width:26px;height:26px}
+
+/* ===== COMMERCIAL HUB ===== */
+.comm-select{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:36px}
+.comm-panel{margin-top:36px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;box-shadow:var(--shadow-soft)}
+.comm-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:780px){.comm-grid{grid-template-columns:1fr}}
+.comm-visual{min-height:300px;background-size:cover;background-position:center}
+.comm-body{padding:clamp(28px,3.5vw,44px)}
+
+/* ===== STATS ===== */
+.stat-n{font-family:var(--fd);font-size:clamp(2.8rem,5vw,3.8rem);font-weight:300;color:var(--text);line-height:1}
+.stat-n .s{color:var(--gold-dd)}
+.stat-l{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:10px;font-weight:500}
+
+/* ===== MEMBERSHIP ===== */
+.mem{position:relative;border-radius:var(--rc);overflow:hidden;background:var(--text);color:var(--on-dark);padding:clamp(34px,5vw,64px)}
+[data-theme=dark] .mem{background:var(--surface2);border:1px solid var(--border)}
+.mem-bg{position:absolute;inset:0;opacity:.4;background:radial-gradient(circle at 85% 15%,rgba(122,157,132,.4),transparent 50%),radial-gradient(circle at 10% 90%,rgba(220,198,160,.3),transparent 50%)}
+.mem-feat{display:flex;align-items:flex-start;gap:12px;padding:11px 0;font-size:15px;color:rgba(255,255,255,.86);font-weight:300}
+[data-theme=dark] .mem-feat{color:var(--text-soft)}
+.mem-feat svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;margin-top:3px}
+
+/* ===== REVIEWS (story) ===== */
+.story{background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:clamp(26px,3vw,38px);box-shadow:var(--shadow-soft);height:100%;display:flex;flex-direction:column}
+.story-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.story-av{width:52px;height:52px;border-radius:50%;background-size:cover;background-position:center;flex-shrink:0}
+.story-stage{display:flex;gap:12px;padding:8px 0}
+.story-stage .lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600;width:74px;flex-shrink:0;padding-top:3px}
+.story-stage .txt{font-size:14px;color:var(--text-soft);line-height:1.5;font-weight:300}
+.story-quote{font-family:var(--fd);font-style:italic;font-size:20px;line-height:1.4;color:var(--text);margin-top:auto;padding-top:22px}
+.story-stars{display:flex;gap:2px;color:var(--gold-d);margin-top:14px}
+
+/* ===== FAQ ===== */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{display:flex;align-items:center;gap:18px;padding:24px 4px;cursor:pointer;width:100%;text-align:left;font-family:var(--fd);font-size:clamp(20px,2.4vw,26px);font-weight:400;color:var(--text)}
+.faq-q .ar{margin-left:auto;color:var(--sage-d);transition:transform .35s;flex-shrink:0}
+.faq-item.open .faq-q .ar{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1)}
+.faq-a-in{padding:0 4px 26px;color:var(--muted);font-size:15.5px;line-height:1.75;font-weight:300;max-width:760px}
+
+/* ===== FINAL CTA ===== */
+.final{position:relative;min-height:540px;display:flex;align-items:center;overflow:hidden}
+.final-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.05);animation:kenburns 22s ease-in-out infinite}
+.final::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(20,18,15,.72),rgba(20,18,15,.32))}
+
+/* ===== AI CONCIERGE ===== */
+.ai-overlay{position:fixed;inset:0;z-index:200;background:rgba(20,18,15,.5);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .35s}
+.ai-overlay.open{opacity:1;pointer-events:auto}
+.ai-panel{position:fixed;right:20px;bottom:20px;z-index:201;width:min(400px,calc(100vw - 40px));height:min(580px,calc(100vh - 40px));background:var(--bg);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;transform:translateY(24px) scale(.97);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s}
+.ai-panel.open{transform:none;opacity:1;pointer-events:auto}
+.ai-head{background:var(--text);color:var(--on-dark);padding:18px 20px;display:flex;align-items:center;gap:12px}
+[data-theme=dark] .ai-head{background:var(--surface2);border-bottom:1px solid var(--border)}
+.ai-av{width:42px;height:42px;border-radius:50%;background:var(--gold-d);color:#2A2418;display:grid;place-items:center;flex-shrink:0}
+.ai-head .nm{font-family:var(--fd);font-size:22px;line-height:1}
+.ai-head .st{font-size:11px;color:var(--sage);display:flex;align-items:center;gap:6px;margin-top:3px}
+.ai-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:13px;background:var(--surface)}
+.ai-msg{max-width:85%;padding:12px 15px;border-radius:16px;font-size:14px;line-height:1.55;animation:pageIn .3s;font-weight:300}
+.ai-msg.bot{background:var(--bg);border:1px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start;color:var(--text)}
+.ai-msg.user{background:var(--sage-d);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.ai-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 14px;background:var(--surface)}
+.ai-chip{font-size:12px;padding:8px 14px;border-radius:100px;border:1px solid var(--borders);background:var(--bg);color:var(--muted);cursor:pointer;transition:all .2s}
+.ai-chip:hover{border-color:var(--sage-d);color:var(--sage-d)}
+.ai-input{display:flex;gap:10px;padding:16px;border-top:1px solid var(--border);background:var(--bg)}
+.ai-input input{flex:1;background:var(--surface);border:1px solid var(--borders);border-radius:100px;padding:12px 18px;font-size:14px;color:var(--text)}
+.ai-input input:focus{outline:none;border-color:var(--sage-d)}
+.ai-send{width:46px;height:46px;border-radius:50%;background:var(--sage-d);color:#fff;display:grid;place-items:center;flex-shrink:0;transition:transform .2s}
+.ai-send:hover{transform:scale(1.06)}
+
+/* ===== PAGE HERO (inner) ===== */
+.page-hero{position:relative;overflow:hidden;padding-block:clamp(110px,15vw,170px) clamp(60px,8vw,90px);min-height:340px;display:flex;align-items:flex-end;margin-top:-78px}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04)}
+.page-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(20,18,15,.7),rgba(20,18,15,.3))}
+.page-hero .container{position:relative;z-index:2}
+.ph-h1{font-family:var(--fd);font-weight:300;font-size:clamp(2.8rem,6vw,5rem);color:#fff;line-height:1;letter-spacing:-.02em}
+.ph-h1 em{font-style:italic;color:var(--gold)}
+.ph-sub{color:rgba(255,255,255,.84);font-size:17px;line-height:1.65;margin-top:16px;max-width:560px;font-weight:300}
+.crumb{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.72);text-transform:uppercase;margin-bottom:18px}
+.crumb a:hover{color:var(--gold)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--text);color:var(--on-dark);position:relative;overflow:hidden}
+[data-theme=dark] footer{background:var(--surface);border-top:1px solid var(--border)}
+.ft-grid{display:grid;grid-template-columns:1.7fr repeat(4,1fr);gap:34px;position:relative;z-index:2}
+@media(max-width:980px){.ft-grid{grid-template-columns:1fr 1fr;gap:30px}}
+@media(max-width:560px){.ft-grid{grid-template-columns:1fr}}
+.ft-desc{color:var(--on-dark-mut);font-size:14.5px;line-height:1.7;margin-top:18px;max-width:320px;font-weight:300}
+.ft-col-h{font-family:var(--fd);font-size:18px;color:#fff;margin-bottom:18px;font-style:italic}
+[data-theme=dark] .ft-col-h{color:var(--text)}
+.ft-links{display:grid;gap:12px}
+.ft-link{font-size:14px;color:var(--on-dark-mut);transition:color .25s;font-weight:300}.ft-link:hover{color:var(--gold)}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:50px;padding-top:28px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;position:relative;z-index:2}
+[data-theme=dark] .ft-bottom{border-color:var(--border)}
+.ft-copy{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:13px;color:var(--on-dark-mut);font-weight:300}
+.ft-brand{color:var(--gold);font-weight:500}
+.ft-legal{display:flex;gap:20px;font-size:13px}.ft-legal a{color:var(--on-dark-mut);transition:color .2s;font-weight:300}.ft-legal a:hover{color:var(--gold)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .hero-scene.on{opacity:1}.hero-sweep{display:none}
+}
+</style>
+</head>
+<body class="nav-on-hero">
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce"><div class="announce-track">
+  <div class="announce-msg on">✨ <span>First Cleaning <b>20% Off</b> — new clients, this week only</span></div>
+  <div class="announce-msg"><span>Eco-Friendly Products Included At <b>No Extra Cost</b> · Background-Checked Cleaners</span></div>
+</div></div>
+
+<!-- NAVBAR -->
+<nav class="navbar"><div class="container"><div class="nav-inner">
+  <a href="#home" class="logo" data-page="home" aria-label="Maison Clair home">
+    <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><path d="M9.5 20v-5h5v5"/></svg></span>
+    <span><span class="logo-text">Maison <span class="it">Clair</span></span><span class="logo-sub">Cleaning · Care · Calm</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#residential" class="nav-link" data-page="residential">Home Cleaning</a>
+    <a href="#deep" class="nav-link" data-page="deep">Deep Cleaning</a>
+    <a href="#commercial" class="nav-link" data-page="commercial">Commercial</a>
+    <a href="#pricing" class="nav-link" data-page="pricing">Pricing</a>
+    <a href="#reviews" class="nav-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+  </div>
+  <div class="nav-acts">
+    <button class="theme-btn btn-ico" aria-label="Toggle dark mode"></button>
+    <a href="tel:+18005552468" class="btn btn-s btn-sm btn-desktop hide-sm">Call Now</a>
+    <a href="#book" data-page="book" class="btn btn-p btn-sm btn-desktop">Book Cleaning</a>
+    <button class="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
+</div></div></nav>
+
+<!-- DRAWER -->
+<div class="drawer">
+  <div class="drawer-hd">
+    <span class="logo-text" style="font-size:24px">Maison <span class="it">Clair</span></span>
+    <button id="drawer-close" class="btn-ico" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="#residential" class="drawer-link" data-page="residential">Home Cleaning</a>
+    <a href="#deep" class="drawer-link" data-page="deep">Deep Cleaning</a>
+    <a href="#commercial" class="drawer-link" data-page="commercial">Commercial</a>
+    <a href="#pricing" class="drawer-link" data-page="pricing">Pricing</a>
+    <a href="#membership" class="drawer-link" data-page="membership">Membership</a>
+    <a href="#reviews" class="drawer-link" data-page="reviews">Reviews</a>
+    <a href="#faq" class="drawer-link" data-page="faq">FAQ</a>
+    <a href="#contact" class="drawer-link" data-page="contact">Contact</a>
+  </nav>
+  <div style="margin-top:28px;display:grid;gap:11px">
+    <a href="#book" data-page="book" class="btn btn-p btn-full btn-lg">Book a Cleaning</a>
+    <a href="tel:+18005552468" class="btn btn-s btn-full btn-lg">Call (800) 555-2468</a>
+  </div>
+</div>
+
+<main id="main">
+<!-- ============ HOME ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- SIGNATURE HERO -->
+<section class="hero" id="hero">
+  <div class="hero-scenes" id="heroScenes">
+    <div class="hero-scene on" style="background-image:url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1900&q=72')"></div>
+    <div class="hero-scene" style="background-image:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1900&q=72')"></div>
+    <div class="hero-scene" style="background-image:url('https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1900&q=72')"></div>
+    <div class="hero-scene" style="background-image:url('https://images.unsplash.com/photo-1593476550610-87baa860004a?auto=format&fit=crop&w=1900&q=72')"></div>
+  </div>
+  <div class="hero-veil"></div><div class="hero-sweep"></div>
+  <div class="container"><div class="hero-inner">
+    <div style="max-width:680px">
+      <span class="hero-eyebrow">A Cleaning Service, Reimagined</span>
+      <h1 class="hero-h1">Come Home<br>to <em>Clean.</em></h1>
+      <p class="hero-sub">Professional cleaning designed to give you back your time — for family, for rest, for the things that actually matter.</p>
+      <div class="hero-cta">
+        <a href="#book" data-page="book" class="btn btn-gold btn-lg">Book Cleaning <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#packages" class="btn btn-ghost btn-lg js-scroll" data-target="packages">View Packages</a>
+      </div>
+      <div class="hero-meta">
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Insured &amp; Bonded</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Background-Checked</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg> Eco-Friendly Products</span>
+      </div>
+    </div>
+  </div></div>
+  <div class="hero-scene-label" id="heroLabel"><span class="label-sc" style="color:rgba(255,255,255,.6)">Now showing</span><span class="nm">Family time, reclaimed</span></div>
+  <div class="hero-dots" id="heroDots">
+    <button class="hero-dot on" aria-label="Scene 1"></button><button class="hero-dot" aria-label="Scene 2"></button><button class="hero-dot" aria-label="Scene 3"></button><button class="hero-dot" aria-label="Scene 4"></button>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div style="background:var(--ivory);border-bottom:1px solid var(--border)"><div class="container"><div class="reveal" style="display:flex;flex-wrap:wrap;gap:18px 50px;align-items:center;justify-content:center;padding-block:26px;text-align:center">
+  <span class="label-sc">As featured for</span>
+  <span style="font-family:var(--fd);font-size:22px;color:var(--muted);font-style:italic">Busy Professionals</span>
+  <span style="color:var(--borders)">·</span>
+  <span style="font-family:var(--fd);font-size:22px;color:var(--muted);font-style:italic">Growing Families</span>
+  <span style="color:var(--borders)">·</span>
+  <span style="font-family:var(--fd);font-size:22px;color:var(--muted);font-style:italic">Airbnb Hosts</span>
+  <span style="color:var(--borders)">·</span>
+  <span style="font-family:var(--fd);font-size:22px;color:var(--muted);font-style:italic">Offices</span>
+</div></div></div>
+
+<!-- COST & TIME CALCULATOR -->
+<section class="section" id="calculator"><div class="container narrow">
+  <div class="center reveal">
+    <span class="eyebrow">Instant Estimate</span>
+    <h2 class="h-d">Your home, <em>priced in seconds.</em></h2>
+    <p class="h-sub">Tell us a little about your space and we'll estimate the cost, the time it takes, and the package that fits best — no phone call required.</p>
+  </div>
+  <div class="calc reveal" data-d="100" style="margin-top:48px"><div class="calc-grid">
+    <div class="calc-form">
+      <div class="calc-field">
+        <label class="f-label">Cleaning type</label>
+        <div class="seg" id="calcType" role="tablist">
+          <button class="seg-btn on" data-type="standard">Standard</button>
+          <button class="seg-btn" data-type="deep">Deep Clean</button>
+          <button class="seg-btn" data-type="move">Move In/Out</button>
+        </div>
+      </div>
+      <div class="calc-field">
+        <label class="f-label">Home size — <span id="calcSqftLbl" style="color:var(--sage-d);text-transform:none;letter-spacing:0">1,500 sq ft</span></label>
+        <input type="range" class="range" id="calcSqft" min="600" max="5000" step="100" value="1500"/>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="calc-field">
+          <label class="f-label">Bedrooms</label>
+          <select class="f-input" id="calcBed"><option value="1">1 bedroom</option><option value="2" selected>2 bedrooms</option><option value="3">3 bedrooms</option><option value="4">4 bedrooms</option><option value="5">5+ bedrooms</option></select>
+        </div>
+        <div class="calc-field">
+          <label class="f-label">Bathrooms</label>
+          <select class="f-input" id="calcBath"><option value="1">1 bathroom</option><option value="2" selected>2 bathrooms</option><option value="3">3 bathrooms</option><option value="4">4+ bathrooms</option></select>
+        </div>
+      </div>
+      <div class="calc-field" style="margin-bottom:0">
+        <label class="f-label">Frequency — <span id="calcFreqLbl" style="color:var(--sage-d);text-transform:none;letter-spacing:0">Every 2 weeks · Save 15%</span></label>
+        <div class="seg" id="calcFreq" style="margin-top:4px">
+          <button class="seg-btn" data-freq="once" data-disc="0">One-time</button>
+          <button class="seg-btn" data-freq="weekly" data-disc="0.2">Weekly</button>
+          <button class="seg-btn on" data-freq="biweekly" data-disc="0.15">Bi-weekly</button>
+          <button class="seg-btn" data-freq="monthly" data-disc="0.1">Monthly</button>
+        </div>
+      </div>
+    </div>
+    <div class="calc-out">
+      <div class="calc-out-bg"></div>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%">
+        <span class="label-sc" style="color:rgba(255,255,255,.6)">Estimated price</span>
+        <div class="calc-price"><span class="cur">$</span><span id="calcPrice">168</span></div>
+        <div style="margin-top:18px">
+          <div class="calc-row"><span class="k">Time required</span><span class="v" id="calcTime">~2.5 hours</span></div>
+          <div class="calc-row"><span class="k">Cleaners assigned</span><span class="v" id="calcCrew">2 cleaners</span></div>
+          <div class="calc-row"><span class="k">You save</span><span class="v" id="calcSave" style="color:var(--gold)">$30 / visit</span></div>
+        </div>
+        <div class="calc-rec"><div class="calc-rec-card">
+          <span class="label-sc" style="color:var(--gold)">Recommended package</span>
+          <div style="font-family:var(--fd);font-size:26px;color:#fff;margin-top:4px" id="calcRec">Essential Clean</div>
+          <a href="#book" data-page="book" class="btn btn-gold btn-full btn-sm" style="margin-top:14px">Book this estimate</a>
+        </div></div>
+      </div>
+    </div>
+  </div></div>
+  <p class="center reveal" style="font-size:12.5px;color:var(--faint);margin-top:16px;font-weight:300">Estimates are indicative. Your final quote is confirmed before the first visit — never any hidden fees.</p>
+</div></section>
+
+<!-- MORE TIME STORY -->
+<section class="section" style="background:var(--ivory)"><div class="container">
+  <div class="center reveal narrow">
+    <span class="eyebrow gold">The Real Product</span>
+    <h2 class="h-d">What could you do<br>with <em>more time?</em></h2>
+    <p class="h-sub">We don't really sell cleaning. We sell the hours it gives back — and what you choose to do with them.</p>
+  </div>
+  <div class="grid3 reveal" data-d="100" style="margin-top:50px" id="timeCards"></div>
+</div></section>
+
+<!-- JOURNEY -->
+<section class="section"><div class="container narrow">
+  <div class="center reveal">
+    <span class="eyebrow">The Maison Clair Experience</span>
+    <h2 class="h-d">From overwhelmed<br>to <em>at ease.</em></h2>
+  </div>
+  <div class="journey reveal" data-d="100">
+    <div class="journey-col a">
+      <div class="journey-stage">Before</div>
+      <div class="journey-word">Stress</div><div class="journey-word">Clutter</div><div class="journey-word">Endless to-do lists</div>
+    </div>
+    <div class="journey-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    <div class="journey-col b">
+      <div class="journey-stage">During</div>
+      <div class="journey-word">A trusted team</div><div class="journey-word">Safe, green products</div><div class="journey-word">Quiet attention to detail</div>
+    </div>
+    <div class="journey-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    <div class="journey-col c">
+      <div class="journey-stage">After</div>
+      <div class="journey-word">Relaxation</div><div class="journey-word">Comfort</div><div class="journey-word">Peace of mind</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PACKAGES -->
+<section class="section" id="packages" style="background:var(--ivory)"><div class="container">
+  <div class="reveal" style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end">
+    <div><span class="eyebrow">Curated Packages</span><h2 class="h-d">Cleaning, <em>by the level<br>of care you want.</em></h2></div>
+    <a href="#pricing" data-page="pricing" class="btn btn-s">Compare all pricing</a>
+  </div>
+  <div class="grid4 reveal" data-d="100" style="margin-top:48px" id="pkgGrid"></div>
+</div></section>
+
+<!-- ROOM EXPLORER -->
+<section class="section"><div class="container">
+  <div class="center reveal narrow">
+    <span class="eyebrow gold">Room by Room</span>
+    <h2 class="h-d">See exactly <em>what we touch.</em></h2>
+    <p class="h-sub">Every visit follows a detailed checklist. Explore a room to see the tasks, the time, and the finish you can expect.</p>
+  </div>
+  <div class="room-wrap reveal" data-d="100" style="margin-top:48px">
+    <div class="room-visual" id="roomVisual"></div>
+    <div class="room-detail">
+      <div class="room-tabs-static" id="roomTabsTop" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px"></div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <h3 style="font-family:var(--fd);font-size:34px;font-weight:400" id="roomName">Kitchen</h3>
+        <span class="tag tag-sage" id="roomTime">~35 min</span>
+      </div>
+      <p style="color:var(--muted);font-weight:300;margin-top:8px;font-size:15px" id="roomDesc"></p>
+      <div id="roomChecklist" style="margin-top:18px"></div>
+    </div>
+  </div>
+  <!-- visual tab bar overlaid -->
+</div></section>
+
+<!-- BEFORE / AFTER -->
+<section class="section" style="background:var(--text);color:var(--on-dark);position:relative"><div class="container">
+  <div class="reveal narrow center">
+    <span class="eyebrow gold">The Transformation</span>
+    <h2 class="h-d" style="color:#fff">A space you'll want<br>to <em style="color:var(--gold)">come home to.</em></h2>
+  </div>
+  <div class="reveal" data-d="100" style="margin-top:48px">
+    <div class="ba" data-ba>
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=72" alt="Cluttered living space before cleaning"/>
+      <img class="ba-after" src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=1600&q=72" alt="Spotless, calm living space after Maison Clair cleaning"/>
+      <span class="ba-lbl l">Before</span><span class="ba-lbl r">After</span>
+      <div class="ba-handle"></div>
+      <div class="ba-knob"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+  </div>
+  <div class="reveal" data-d="150" style="display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;margin-top:24px">
+    <span style="color:var(--on-dark-mut);font-size:13px;font-weight:300">Drag to reveal &middot; Apartments</span>
+    <span style="color:var(--on-dark-mut);font-size:13px;font-weight:300">&middot; Luxury Homes</span>
+    <span style="color:var(--on-dark-mut);font-size:13px;font-weight:300">&middot; Offices</span>
+    <span style="color:var(--on-dark-mut);font-size:13px;font-weight:300">&middot; Airbnb Turnovers</span>
+  </div>
+</div></section>
+
+<!-- TRUST DASHBOARD -->
+<section class="section"><div class="container">
+  <div class="center reveal narrow">
+    <span class="eyebrow">Cleaner Verification Center</span>
+    <h2 class="h-d">Trust, <em>built in.</em></h2>
+    <p class="h-sub">Every Maison Clair cleaner passes through the same rigorous process before they ever enter your home.</p>
+  </div>
+  <div class="grid4 reveal" data-d="100" style="margin-top:48px">
+    <div class="trust-card"><div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m17 11 2 2 4-4"/></svg></div><h3 style="font-family:var(--fd);font-size:24px">Background Checked</h3><p style="color:var(--muted);font-size:14px;margin-top:8px;font-weight:300">Nationwide criminal &amp; identity screening on every team member.</p></div>
+    <div class="trust-card"><div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 style="font-family:var(--fd);font-size:24px">Insured &amp; Bonded</h3><p style="color:var(--muted);font-size:14px;margin-top:8px;font-weight:300">$2M liability coverage protecting your home and belongings.</p></div>
+    <div class="trust-card"><div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3 style="font-family:var(--fd);font-size:24px">Trained &amp; Vetted</h3><p style="color:var(--muted);font-size:14px;margin-top:8px;font-weight:300">120-point training program and ongoing quality audits.</p></div>
+    <div class="trust-card"><div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><h3 style="font-family:var(--fd);font-size:24px">100% Guaranteed</h3><p style="color:var(--muted);font-size:14px;margin-top:8px;font-weight:300">Not happy? We re-clean within 24 hours, free of charge.</p></div>
+  </div>
+</div></section>
+
+<!-- COMMERCIAL HUB -->
+<section class="section" style="background:var(--ivory)"><div class="container">
+  <div class="center reveal narrow">
+    <span class="eyebrow">For Business</span>
+    <h2 class="h-d">Commercial spaces,<br><em>impeccably kept.</em></h2>
+    <p class="h-sub">Select your industry to see how we tailor cleaning protocols, scheduling and compliance to your space.</p>
+  </div>
+  <div class="comm-select reveal" data-d="60" id="commSelect"></div>
+  <div class="comm-panel reveal" data-d="100"><div class="comm-grid">
+    <div class="comm-visual" id="commVisual"></div>
+    <div class="comm-body">
+      <span class="tag tag-sage" id="commTag">Offices</span>
+      <h3 style="font-family:var(--fd);font-size:34px;font-weight:400;margin-top:14px" id="commName"></h3>
+      <p style="color:var(--muted);font-weight:300;margin-top:10px;font-size:15px;line-height:1.7" id="commDesc"></p>
+      <div id="commFeat" style="margin-top:18px"></div>
+      <a href="#book" data-page="book" class="btn btn-p" style="margin-top:22px">Request commercial quote</a>
+    </div>
+  </div></div>
+</div></section>
+
+<!-- STATISTICS -->
+<section class="section"><div class="container">
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(5,1fr);gap:24px;text-align:center" id="statGrid">
+    <div><div class="stat-n"><span data-counter="10000">0</span><span class="s">+</span></div><div class="stat-l">Cleanings Delivered</div></div>
+    <div><div class="stat-n"><span data-counter="98">0</span><span class="s">%</span></div><div class="stat-l">Satisfaction Rate</div></div>
+    <div><div class="stat-n"><span data-counter="2000">0</span><span class="s">+</span></div><div class="stat-l">Recurring Clients</div></div>
+    <div><div class="stat-n">24<span class="s">h</span></div><div class="stat-l">Booking Availability</div></div>
+    <div><div class="stat-n">100<span class="s">%</span></div><div class="stat-l">Insured Staff</div></div>
+  </div>
+</div></section>
+
+<!-- MEMBERSHIP -->
+<section class="section" id="memberHome" style="background:var(--ivory)"><div class="container">
+  <div class="mem reveal"><div class="mem-bg"></div>
+    <div style="position:relative;z-index:2"><div class="grid2" style="align-items:center;gap:clamp(30px,5vw,70px)">
+      <div>
+        <span class="eyebrow gold" style="color:var(--gold)">Clean Living Membership</span>
+        <h2 class="h-d" style="color:#fff;margin-top:14px">Join the club that<br><em style="color:var(--gold)">keeps life effortless.</em></h2>
+        <p style="color:rgba(255,255,255,.78);font-weight:300;margin-top:16px;font-size:16px;line-height:1.7">A standing relationship with the same trusted team, member-only rates, and the kind of priority access that makes a clean home feel automatic.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+          <a href="#membership" data-page="membership" class="btn btn-gold btn-lg">Explore Membership</a>
+          <a href="#book" data-page="book" class="btn btn-ghost btn-lg">Start a Plan</a>
+        </div>
+      </div>
+      <div>
+        <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Priority scheduling — first pick of every time slot</div>
+        <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Member rates up to 20% below standard pricing</div>
+        <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> The same dedicated cleaning team, every visit</div>
+        <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Monthly deep-clean credits that roll over</div>
+        <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Free re-clean guarantee, no questions asked</div>
+      </div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS (story) -->
+<section class="section" id="reviewsHome"><div class="container">
+  <div class="center reveal narrow">
+    <span class="eyebrow">In Their Words</span>
+    <h2 class="h-d">Stories from homes<br><em>like yours.</em></h2>
+  </div>
+  <div class="grid3 reveal" data-d="100" style="margin-top:48px" id="storyGrid"></div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section" style="background:var(--ivory)"><div class="container narrow">
+  <div class="center reveal">
+    <span class="eyebrow gold">Concierge</span>
+    <h2 class="h-d">Questions, <em>answered.</em></h2>
+  </div>
+  <div class="reveal" data-d="100" style="margin-top:40px" id="faqList"></div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="final-bg" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1900&q=72')"></div>
+  <div class="container" style="position:relative;z-index:2"><div class="reveal narrow center" style="margin-inline:auto">
+    <span class="eyebrow gold" style="color:var(--gold)">Begin Today</span>
+    <h2 class="h-d" style="color:#fff;font-size:clamp(2.8rem,7vw,5.4rem)">A cleaner home<br>starts <em style="color:var(--gold)">today.</em></h2>
+    <p class="h-sub" style="color:rgba(255,255,255,.85);margin-inline:auto">Book your first cleaning in less than 60 seconds — and feel the difference by this weekend.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:32px">
+      <a href="#book" data-page="book" class="btn btn-gold btn-lg">Schedule Cleaning</a>
+      <a href="#calculator" class="btn btn-ghost btn-lg js-after-home" data-target="calculator">Get Instant Quote</a>
+    </div>
+  </div></div>
+</section>
+
+</div><!-- /page-home -->
+
+<!-- ============ RESIDENTIAL ============ -->
+<div id="page-residential" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Home Cleaning</div>
+    <h1 class="ph-h1">Home <em>Cleaning</em></h1>
+    <p class="ph-sub">Recurring housekeeping that keeps every room effortlessly fresh — on your schedule, by a team you'll come to know by name.</p>
+  </div></section>
+  <section class="section"><div class="container"><div class="grid3" id="resGrid"></div>
+    <div class="reveal" style="margin-top:48px;text-align:center"><a href="#book" data-page="book" class="btn btn-p btn-lg">Book home cleaning</a></div>
+  </div></section>
+</div>
+
+<!-- ============ DEEP ============ -->
+<div id="page-deep" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Deep Cleaning</div>
+    <h1 class="ph-h1">Deep <em>Cleaning</em></h1>
+    <p class="ph-sub">A meticulous top-to-bottom reset for seasonal refreshes, special occasions, or move-in and move-out turnovers.</p>
+  </div></section>
+  <section class="section"><div class="container"><div class="grid3" id="deepGrid"></div>
+    <div class="reveal" style="margin-top:48px;text-align:center"><a href="#book" data-page="book" class="btn btn-p btn-lg">Book a deep clean</a></div>
+  </div></section>
+</div>
+
+<!-- ============ COMMERCIAL ============ -->
+<div id="page-commercial" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Commercial</div>
+    <h1 class="ph-h1">Commercial <em>Care</em></h1>
+    <p class="ph-sub">Offices, retail, medical and hospitality spaces kept to a standard your clients and staff will notice — with flexible contracts and after-hours scheduling.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="comm-select" id="commSelect2"></div>
+    <div class="comm-panel" style="margin-top:36px"><div class="comm-grid">
+      <div class="comm-visual" id="commVisual2"></div>
+      <div class="comm-body">
+        <span class="tag tag-sage" id="commTag2"></span>
+        <h3 style="font-family:var(--fd);font-size:34px;font-weight:400;margin-top:14px" id="commName2"></h3>
+        <p style="color:var(--muted);font-weight:300;margin-top:10px;font-size:15px;line-height:1.7" id="commDesc2"></p>
+        <div id="commFeat2" style="margin-top:18px"></div>
+        <a href="#book" data-page="book" class="btn btn-p" style="margin-top:22px">Request a quote</a>
+      </div>
+    </div></div>
+  </div></section>
+</div>
+
+<!-- ============ PRICING ============ -->
+<div id="page-pricing" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Pricing</div>
+    <h1 class="ph-h1">Simple, honest <em>pricing</em></h1>
+    <p class="ph-sub">No hidden fees, ever. Recurring plans save you more — and the estimate you see is the price you pay.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="grid4" id="pkgGrid2" style="margin-bottom:48px"></div>
+    <div style="overflow-x:auto"><table id="priceTable" style="width:100%;border-collapse:collapse;min-width:640px"></table></div>
+    <div class="center" style="margin-top:40px"><a href="#home" data-page="home" class="btn btn-s btn-lg js-after-home" data-target="calculator">Estimate your home</a></div>
+  </div></section>
+</div>
+
+<!-- ============ MEMBERSHIP ============ -->
+<div id="page-membership" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Membership</div>
+    <h1 class="ph-h1">Clean Living <em>Membership</em></h1>
+    <p class="ph-sub">A premium club for people who simply want it handled. Choose the tier that fits your home and your rhythm.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="grid3" id="memGrid"></div>
+  </div></section>
+</div>
+
+<!-- ============ REVIEWS ============ -->
+<div id="page-reviews" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Reviews</div>
+    <h1 class="ph-h1">Loved by <em>thousands</em></h1>
+    <p class="ph-sub">Real stories from the homes and businesses we care for, week after week.</p>
+  </div></section>
+  <section class="section"><div class="container"><div class="grid3" id="storyGridAll"></div></div></section>
+</div>
+
+<!-- ============ FAQ ============ -->
+<div id="page-faq" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / FAQ</div>
+    <h1 class="ph-h1">Concierge <em>help center</em></h1>
+  </div></section>
+  <section class="section"><div class="container narrow"><div id="faqListFull"></div></div></section>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div id="page-contact" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Contact</div>
+    <h1 class="ph-h1">Let's <em>talk</em></h1>
+    <p class="ph-sub">Reach our concierge any way you like — we typically reply within the hour during business hours.</p>
+  </div></section>
+  <section class="section"><div class="container"><div class="grid2" style="gap:clamp(30px,5vw,72px)">
+    <div class="reveal">
+      <div style="display:grid;gap:12px">
+        <a href="tel:+18005552468" class="trust-card" style="text-align:left;display:flex;align-items:center;gap:16px;padding:20px"><div class="trust-ico" style="margin:0;width:48px;height:48px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div style="font-weight:600">Call the concierge</div><div style="font-size:14px;color:var(--muted)">(800) 555-2468 · 7 days</div></div></a>
+        <a href="https://wa.me/18005552468" target="_blank" rel="noopener noreferrer" class="trust-card" style="text-align:left;display:flex;align-items:center;gap:16px;padding:20px"><div class="trust-ico" style="margin:0;width:48px;height:48px;background:rgba(37,211,102,.12);color:#25D366"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></div><div><div style="font-weight:600">WhatsApp</div><div style="font-size:14px;color:var(--muted)">Quick questions &amp; scheduling</div></div></a>
+        <button class="trust-card js-open-ai" style="text-align:left;display:flex;align-items:center;gap:16px;padding:20px;width:100%;cursor:pointer"><div class="trust-ico" style="margin:0;width:48px;height:48px;background:var(--gold-soft);color:var(--gold-dd)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div style="font-weight:600">Live chat</div><div style="font-size:14px;color:var(--muted)">Chat with our AI concierge now</div></div></button>
+        <div class="trust-card" style="text-align:left;display:flex;align-items:center;gap:16px;padding:20px"><div class="trust-ico" style="margin:0;width:48px;height:48px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div style="font-weight:600">Service areas</div><div style="font-size:14px;color:var(--muted)">Metro &amp; surrounding suburbs · 7-day booking</div></div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="100"><form class="lead-form" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:clamp(24px,3vw,36px);display:grid;gap:16px;box-shadow:var(--shadow)">
+      <h3 style="font-family:var(--fd);font-size:28px;font-weight:400">Smart booking request</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Name</label><input class="f-input" required placeholder="Your name"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label">Service</label><select class="f-input"><option>Recurring home cleaning</option><option>One-time deep clean</option><option>Move in / move out</option><option>Airbnb turnover</option><option>Commercial / office</option><option>Membership enquiry</option></select></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Preferred day</label><select class="f-input"><option>Weekday morning</option><option>Weekday afternoon</option><option>Weekend</option><option>Flexible</option></select></div><div><label class="f-label">Bedrooms</label><select class="f-input"><option>1</option><option>2</option><option>3</option><option>4+</option></select></div></div>
+      <div><label class="f-label">Anything we should know?</label><textarea class="f-input" rows="3" style="resize:vertical" placeholder="Pets, access, focus areas…"></textarea></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg">Send Request</button>
+    </form></div>
+  </div></div></section>
+</div>
+
+<!-- ============ BOOK ============ -->
+<div id="page-book" class="spa-page">
+  <section class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1900&q=72')"></div><div class="container">
+    <div class="crumb"><a href="#home" data-page="home">Home</a> / Book</div>
+    <h1 class="ph-h1">Book in under <em>60 seconds</em></h1>
+    <p class="ph-sub">Tell us about your space and choose a time — we'll confirm your cleaner and send a reminder.</p>
+  </div></section>
+  <section class="section"><div class="container"><div class="grid2" style="gap:clamp(30px,5vw,72px);align-items:start">
+    <div class="reveal"><form class="lead-form" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rc);padding:clamp(24px,3vw,38px);display:grid;gap:16px;box-shadow:var(--shadow)">
+      <h3 style="font-family:var(--fd);font-size:30px;font-weight:400">Schedule your cleaning</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Full name</label><input class="f-input" required placeholder="Your name"/></div><div><label class="f-label">Phone</label><input class="f-input" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label">Email</label><input class="f-input" type="email" required placeholder="you@email.com"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Cleaning type</label><select class="f-input"><option>Standard recurring</option><option>Deep clean</option><option>Move in / out</option><option>Airbnb turnover</option></select></div><div><label class="f-label">Frequency</label><select class="f-input"><option>Weekly</option><option>Bi-weekly</option><option>Monthly</option><option>One-time</option></select></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="f-label">Bedrooms</label><select class="f-input"><option>1</option><option>2</option><option>3</option><option>4+</option></select></div><div><label class="f-label">Preferred date</label><input class="f-input" type="date"/></div></div>
+      <button type="submit" class="btn btn-gold btn-full btn-lg">Confirm Booking</button>
+      <div style="text-align:center;font-size:12px;color:var(--faint);font-weight:300">No payment due now · free cancellation up to 24h before</div>
+    </form></div>
+    <div class="reveal" data-d="100">
+      <div class="mem" style="padding:clamp(28px,4vw,40px)"><div class="mem-bg"></div><div style="position:relative;z-index:2">
+        <span class="eyebrow gold" style="color:var(--gold)">Why book with us</span>
+        <h3 style="font-family:var(--fd);font-size:32px;font-weight:400;color:#fff;margin-top:12px">Effortless from the first click</h3>
+        <div style="margin-top:18px">
+          <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 60-second booking, instant confirmation</div>
+          <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Vetted, insured cleaner matched to your home</div>
+          <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Eco-friendly products included free</div>
+          <div class="mem-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Free re-clean if you're not delighted</div>
+        </div>
+        <div style="margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:14px">
+          <div style="font-family:var(--fd);font-size:48px;font-weight:300;color:var(--gold);line-height:1">98%</div>
+          <div style="color:rgba(255,255,255,.8);font-size:14px;font-weight:300">of clients book us again within 30 days</div>
+        </div>
+      </div></div>
+    </div>
+  </div></div></section>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer><div class="container" style="padding-block:clamp(60px,8vw,92px)">
+  <div class="ft-grid">
+    <div>
+      <a href="#home" class="logo" data-page="home"><span class="logo-mark" style="color:var(--gold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><path d="M9.5 20v-5h5v5"/></svg></span><span><span class="logo-text" style="color:#fff">Maison <span class="it" style="color:var(--gold)">Clair</span></span><span class="logo-sub">Cleaning · Care · Calm</span></span></a>
+      <p class="ft-desc">A premium cleaning service for people who'd rather spend their time living. Insured, background-checked, eco-friendly — and genuinely delightful.</p>
+      <div style="display:flex;gap:10px;margin-top:22px"><a href="tel:+18005552468" class="btn btn-gold btn-sm">Call (800) 555-2468</a></div>
+    </div>
+    <div><div class="ft-col-h">Home Cleaning</div><div class="ft-links"><a href="#residential" data-page="residential" class="ft-link">Recurring Service</a><a href="#deep" data-page="deep" class="ft-link">Deep Cleaning</a><a href="#deep" data-page="deep" class="ft-link">Move In / Out</a><a href="#residential" data-page="residential" class="ft-link">Airbnb Turnover</a></div></div>
+    <div><div class="ft-col-h">Commercial</div><div class="ft-links"><a href="#commercial" data-page="commercial" class="ft-link">Offices</a><a href="#commercial" data-page="commercial" class="ft-link">Retail</a><a href="#commercial" data-page="commercial" class="ft-link">Medical</a><a href="#commercial" data-page="commercial" class="ft-link">Hospitality</a></div></div>
+    <div><div class="ft-col-h">Company</div><div class="ft-links"><a href="#membership" data-page="membership" class="ft-link">Membership</a><a href="#pricing" data-page="pricing" class="ft-link">Pricing</a><a href="#reviews" data-page="reviews" class="ft-link">Reviews</a><a href="#faq" data-page="faq" class="ft-link">FAQ</a></div></div>
+    <div><div class="ft-col-h">Get Started</div><div class="ft-links"><a href="#book" data-page="book" class="ft-link">Book a Cleaning</a><a href="#home" data-page="home" class="ft-link js-after-home" data-target="calculator">Instant Quote</a><a href="#contact" data-page="contact" class="ft-link">Contact</a><a href="#contact" data-page="contact" class="ft-link">Service Areas</a></div></div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy"><span>&copy; <span class="yr"></span> Maison Clair. All Rights Reserved.</span><span style="opacity:.4">·</span><span>Built &amp; Maintenance by <a href="https://www.growrixos.com" target="_blank" rel="noopener noreferrer" class="ft-brand">GrowrixOS</a></span></div>
+    <div class="ft-legal"><a href="#faq" data-page="faq">Privacy</a><a href="#faq" data-page="faq">Terms</a><a href="#faq" data-page="faq">Guarantee</a></div>
+  </div>
+</div></footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottomNav" aria-label="Mobile navigation">
+  <a href="#home" data-page="home" class="bn-item active"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
+  <a href="#residential" data-page="residential" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4h10M11 9h7M11 15h10M11 20h7"/><path d="M3 4h4v6H3zM3 15h4v5H3z"/></svg>Services</a>
+  <a href="#pricing" data-page="pricing" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.2"/></svg>Pricing</a>
+  <a href="#book" data-page="book" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book</a>
+  <a href="#contact" data-page="contact" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Contact</a>
+</nav>
+
+<!-- AI CONCIERGE -->
+<div class="ai-overlay" id="aiOverlay"></div>
+<div class="ai-panel" id="aiPanel" role="dialog" aria-label="AI Cleaning Concierge">
+  <div class="ai-head"><div class="ai-av"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></div>
+    <div style="flex:1"><div class="nm">Clair, your concierge</div><div class="st"><span style="width:7px;height:7px;border-radius:50%;background:var(--sage);display:inline-block"></span> Online · replies instantly</div></div>
+    <button id="aiClose" class="btn-ico" style="border-color:rgba(255,255,255,.25);color:#fff" aria-label="Close concierge"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="ai-body" id="aiBody"></div>
+  <div class="ai-chips" id="aiChips"></div>
+  <div class="ai-input"><input id="aiInput" placeholder="Ask Clair anything…" aria-label="Message to concierge"/><button class="ai-send" id="aiSend" aria-label="Send"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
+</div>
+
+<!-- FAB -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fabOpts">
+    <button class="fab-opt top" id="fabTop" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <a href="https://wa.me/18005552468" target="_blank" rel="noopener noreferrer" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg><span class="fab-tip">WhatsApp</span></a>
+    <button class="fab-opt ai" id="fabAi" aria-label="AI concierge"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg><span class="fab-tip">Ask Clair</span></button>
+    <a href="tel:+18005552468" class="fab-opt call" aria-label="Call"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.23a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Call us</span></a>
+  </div>
+  <button id="fabMain" class="fab-main" aria-label="Quick actions" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+</div>
+
+<script>
+"use strict";
+const ic=(p,sw)=>'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||2)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const CHECK='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+const SUN=ic('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',1.7);
+const MOON=ic('<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',1.7);
+const STAR='<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+const ARR=ic('<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>');
+
+/* ===== DATA ===== */
+const SCENES=[
+ {label:"Family time, reclaimed"},{label:"A calm, modern apartment"},{label:"A kitchen that gleams"},{label:"A home office that clears the mind"}
+];
+const TIMECARDS=[
+ {t:"Family Time",d:"Be present for the moments that pass too quickly.",img:"https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=800&q=72"},
+ {t:"Weekend Freedom",d:"Trade the chore list for actual rest.",img:"https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=800&q=72"},
+ {t:"Productivity",d:"Work in a space that's clear, calm and yours.",img:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=72"},
+ {t:"Hosting Guests",d:"Open your door with pride, on a moment's notice.",img:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=72"},
+ {t:"Self-Care",d:"Reclaim the evenings you've been giving to housework.",img:"https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=72"},
+ {t:"Simply Rest",d:"Come home to calm — and let it stay that way.",img:"https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=72"}
+];
+const PACKAGES=[
+ {name:"Essential Clean",price:"$120",per:"per visit",badge:"",img:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=700&q=72",feat:["Kitchen & bathroom sanitising","Dusting & surface care","Floors vacuumed & mopped","Beds made, tidy finish"],extra:["Ideal for weekly or bi-weekly upkeep","Same trusted cleaner each visit","2-cleaner team, ~2 hours"]},
+ {name:"Deep Refresh",price:"$240",per:"per visit",badge:"Most Loved",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=700&q=72",feat:["Everything in Essential","Inside appliances & cabinets","Baseboards, vents & detail work","Grout, tile & fixture scrubbing"],extra:["Perfect quarterly or first-time clean","Top-to-bottom, nothing skipped","2–3 cleaner team, 3–4 hours"]},
+ {name:"Premium Care",price:"$320",per:"per month",badge:"",img:"https://images.unsplash.com/photo-1600494603989-9650cf6dad51?auto=format&fit=crop&w=700&q=72",feat:["Recurring luxury housekeeping","Dedicated team & priority slots","Monthly deep-clean credit","Member rates on every add-on"],extra:["Concierge-level, hands-off living","Linen, laundry & fridge add-ons","Roll-over credits, cancel anytime"]},
+ {name:"Move In / Out",price:"$360",per:"one-time",badge:"",img:"https://images.unsplash.com/photo-1530000352342-d2ccf5eba0d1?auto=format&fit=crop&w=700&q=72",feat:["Empty-home deep clean","Inside every cabinet & closet","Wall spot-cleaning & fixtures","Handover-ready guarantee"],extra:["Built for property turnovers","Airbnb & landlord friendly","Itemised checklist on completion"]}
+];
+const ROOMS=[
+ {name:"Kitchen",time:"~35 min",img:"https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1100&q=72",desc:"The heart of the home, returned to a spotless, hygienic shine.",tasks:["Countertops degreased & sanitised","Sink & faucet polished","Stovetop & backsplash cleaned","Exterior of appliances wiped","Cabinet fronts spot-cleaned","Floors swept & mopped"]},
+ {name:"Living Room",time:"~25 min",img:"https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1100&q=72",desc:"A calm, dust-free space ready to relax in.",tasks:["All surfaces dusted","Upholstery vacuumed","Cushions plumped & arranged","Mirrors & glass polished","Skirting boards detailed","Floors vacuumed & mopped"]},
+ {name:"Bedroom",time:"~20 min",img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1100&q=72",desc:"A serene retreat, freshly made and tidied.",tasks:["Beds made or linens changed","Surfaces & nightstands dusted","Mirrors polished","Under-bed vacuuming","Wardrobe fronts wiped","Floors vacuumed & mopped"]},
+ {name:"Bathroom",time:"~30 min",img:"https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1100&q=72",desc:"Deep-sanitised, descaled and gleaming.",tasks:["Toilet sanitised inside & out","Shower & tub descaled","Tiles & grout scrubbed","Mirror & chrome polished","Sink & counter disinfected","Floors mopped & sanitised"]}
+];
+const COMM=[
+ {name:"Offices",img:"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=72",desc:"Workspaces that feel as sharp as your team. Desks, common areas, kitchens and washrooms maintained on a schedule that works around your hours.",feat:["After-hours & weekend scheduling","Desk, glass & high-touch sanitising","Kitchen & breakroom care","Restocking & waste management"]},
+ {name:"Retail",img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1100&q=72",desc:"First impressions that sell. Spotless floors, fixtures and fitting rooms that keep your storefront looking its best at open every day.",feat:["Floor care & display dusting","Fitting room & mirror detailing","Entrance & window glass","Daily or peak-hours service"]},
+ {name:"Medical",img:"https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1100&q=72",desc:"Clinical-grade hygiene where it matters most. Disinfection protocols and documentation that meet healthcare standards.",feat:["Hospital-grade disinfectants","High-touch & equipment protocols","Waiting & treatment rooms","Compliance-ready logging"]},
+ {name:"Hospitality",img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1100&q=72",desc:"The five-star feeling, every turnover. Guest-ready rooms and immaculate common spaces for hotels, short-stays and venues.",feat:["Rapid room turnovers","Linen & amenity restocking","Lobby & common-area care","Same-day priority response"]}
+];
+const STORIES=[
+ {name:"Olivia R.",role:"Working parent · Apartment",av:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=70",prob:"Two kids, two jobs, no weekends.",svc:"Bi-weekly Essential Clean, same team.",out:"Saturdays are ours again.",quote:"I genuinely forgot what it felt like to relax in my own home. Now I get that every other Saturday back.",stars:5},
+ {name:"Daniel & Mark",role:"Airbnb hosts · 3 units",av:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=70",prob:"Tight same-day turnovers between guests.",svc:"Premium Care with priority turnovers.",out:"Five-star cleanliness reviews, every time.",quote:"Our cleanliness ratings went straight to five stars and stayed there. They never miss a turnover.",stars:5},
+ {name:"Priya N.",role:"Founder · Home office",av:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=70",prob:"A cluttered space killing my focus.",svc:"Weekly home cleaning + office detail.",out:"A clear desk and a clear head.",quote:"I do my best work in a space that's calm. Maison Clair quietly makes that happen each week.",stars:5},
+ {name:"The Hendersons",role:"Family of five · House",av:"https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=200&q=70",prob:"A big house, never enough hours.",svc:"Monthly deep clean membership.",out:"A home we're proud to host in.",quote:"We host more now because the house is always ready. That confidence is worth every penny.",stars:5},
+ {name:"Marcus T.",role:"Operations lead · Office",av:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=70",prob:"An office that looked tired by noon.",svc:"After-hours commercial contract.",out:"Clients notice the difference.",quote:"Our space looks immaculate at 9am sharp, every day. It's changed how visitors see us.",stars:5},
+ {name:"Sofia L.",role:"Renter · Move-out",av:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=200&q=70",prob:"Needed my full deposit back.",svc:"One-time Move-Out deep clean.",out:"Full deposit, zero stress.",quote:"The landlord said it was the cleanest handover she'd seen. I got every cent of my deposit back.",stars:5}
+];
+const FAQ=[
+ {q:"How do bookings work?",a:"Book online in under a minute or call our concierge. Choose your service, frequency and a time that suits you — we confirm instantly, match a vetted cleaner to your home, and send a reminder before each visit. You can manage or reschedule anytime from your account."},
+ {q:"Are your cleaners insured?",a:"Every Maison Clair cleaner is fully insured and bonded under our $2M liability coverage, and passes nationwide background and identity screening before their first job. Your home and belongings are protected, always."},
+ {q:"Do I need to provide supplies?",a:"Not at all. Our teams arrive with professional, eco-friendly products and equipment at no extra cost. If you'd prefer we use specific products you provide, simply let us know — we're happy to accommodate."},
+ {q:"Can I reschedule or cancel?",a:"Yes — free of charge up to 24 hours before your visit. Life happens, and we keep it flexible. Members enjoy even more generous rescheduling and roll-over credits."},
+ {q:"Are pets okay?",a:"Absolutely — we love them. Just note any pets when booking so we can plan around them and use pet-safe products. Let us know any access or comfort preferences and our cleaners will follow them."},
+ {q:"What if I'm not satisfied?",a:"Our 100% satisfaction guarantee means if anything isn't right, we'll return and re-clean it within 24 hours at no cost. We're not done until your home feels exactly as it should."}
+];
+const RES=[
+ {t:"Weekly Upkeep",d:"A light, consistent touch that keeps every room effortlessly fresh between deeper cleans."},
+ {t:"Bi-Weekly Care",d:"Our most popular rhythm — thorough enough to stay ahead of life, gentle on the budget."},
+ {t:"Monthly Reset",d:"A comprehensive visit that resets the whole home and keeps standards high."},
+ {t:"Airbnb Turnovers",d:"Fast, five-star-ready turnovers with linen changes and restocking between guests."},
+ {t:"Eco Cleaning",d:"Plant-based, family- and pet-safe products included on every single visit."},
+ {t:"Add-On Services",d:"Laundry, inside-fridge, interior windows and more — tailor each visit to your needs."}
+];
+const DEEP=[
+ {t:"Seasonal Deep Clean",d:"A meticulous top-to-bottom refresh for spring, the holidays, or whenever you need a reset."},
+ {t:"Move-In Clean",d:"Start fresh in a spotless new home — every cabinet, surface and corner detailed."},
+ {t:"Move-Out Clean",d:"Handover-ready cleaning that helps secure your full deposit back, guaranteed."},
+ {t:"Post-Renovation",d:"Dust and debris from building work cleared away to reveal your finished space."},
+ {t:"Event Prep & Recovery",d:"Get the home guest-ready before, and back to calm after, any gathering."},
+ {t:"Detail Add-Ons",d:"Inside appliances, grout restoration, baseboards and vents — nothing overlooked."}
+];
+const MEM=[
+ {name:"Refresh",price:"$99",per:"/month",badge:"",feat:[["Two visits per month",1],["Member pricing (10% off)",1],["Priority scheduling",1],["Same dedicated cleaner",0],["Monthly deep-clean credit",0],["Free re-clean guarantee",1]]},
+ {name:"Signature",price:"$199",per:"/month",badge:"Most Popular",feat:[["Weekly visits",1],["Member pricing (15% off)",1],["Priority scheduling",1],["Same dedicated cleaner",1],["Monthly deep-clean credit",1],["Free re-clean guarantee",1]]},
+ {name:"Concierge",price:"$349",per:"/month",badge:"",feat:[["Weekly + on-demand visits",1],["Member pricing (20% off)",1],["First pick of every slot",1],["Dedicated team & manager",1],["2 deep-clean credits / mo",1],["Laundry & linen included",1]]}
+];
+
+/* ===== RENDER ===== */
+function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function stars(n){return Array(n).fill(STAR).join('');}
+function renderTimeCards(){const g=document.getElementById('timeCards');if(!g)return;g.innerHTML=TIMECARDS.map(c=>'<div class="reveal" data-d="50"><div class="time-card"><img src="'+c.img+'" alt="'+c.t+'" loading="lazy"/><div class="time-card-body"><h3>'+c.t+'</h3><p>'+c.d+'</p></div></div></div>').join('');}
+function renderPackages(id){const g=document.getElementById(id);if(!g)return;g.innerHTML=PACKAGES.map(p=>'<div class="reveal pkg'+(p.badge?' feat':'')+'" data-d="60" data-pkg><div class="pkg-img"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"/>'+(p.badge?'<span class="tag pkg-badge">'+p.badge+'</span>':'')+'</div><div class="pkg-body"><div class="pkg-name">'+p.name+'</div><div class="pkg-price">'+p.price+' <span class="per">'+p.per+'</span></div><div style="margin-top:16px;flex:1">'+p.feat.map(f=>'<div class="pkg-feat">'+CHECK+'<span>'+f+'</span></div>').join('')+'<div class="pkg-extra">'+p.extra.map(f=>'<div class="pkg-feat" style="color:var(--faint)">'+ic('<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',1.6)+'<span>'+f+'</span></div>').join('')+'</div></div><button class="pkg-toggle" data-pkg-toggle>More details '+ic('<polyline points="6 9 12 15 18 9"/>',2)+'</button><a href="#book" data-page="book" class="btn '+(p.badge?'btn-gold':'btn-s')+' btn-full" style="margin-top:16px">Choose '+p.name.split(' ')[0]+'</a></div></div>').join('');
+  g.querySelectorAll('[data-pkg]').forEach(card=>{const tg=card.querySelector('[data-pkg-toggle]'),ex=card.querySelector('.pkg-extra');tg&&tg.addEventListener('click',()=>{const open=card.classList.toggle('open');ex.style.maxHeight=open?ex.scrollHeight+'px':'0';tg.firstChild.textContent=open?'Less details ':'More details ';});});}
+function renderCards(id,arr){const g=document.getElementById(id);if(!g)return;g.innerHTML=arr.map(c=>'<div class="reveal" data-d="50"><div class="trust-card" style="text-align:left;height:100%"><h3 style="font-family:var(--fd);font-size:26px;font-weight:400">'+c.t+'</h3><p style="color:var(--muted);font-size:14px;margin-top:10px;font-weight:300;line-height:1.6">'+c.d+'</p><a href="#book" data-page="book" style="color:var(--sage-d);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:6px;margin-top:16px">Book this '+ic('<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',2)+'</a></div></div>').join('');}
+function renderStories(id){const g=document.getElementById(id);if(!g)return;g.innerHTML=STORIES.map(s=>'<div class="reveal" data-d="60"><div class="story"><div class="story-head"><div class="story-av" style="background-image:url('+s.av+')"></div><div><div style="font-weight:600;font-size:15px">'+s.name+'</div><div style="font-size:12px;color:var(--muted)">'+s.role+'</div></div></div><div class="story-stage"><span class="lbl">Problem</span><span class="txt">'+s.prob+'</span></div><div class="story-stage"><span class="lbl">Service</span><span class="txt">'+s.svc+'</span></div><div class="story-stage"><span class="lbl">Outcome</span><span class="txt">'+s.out+'</span></div><div class="story-quote">"'+s.quote+'"</div><div class="story-stars">'+stars(s.stars)+'</div></div></div>').join('');}
+function renderFaq(id){const l=document.getElementById(id);if(!l)return;l.innerHTML=FAQ.map(f=>'<div class="faq-item" data-faq><button class="faq-q" aria-expanded="false"><span>'+f.q+'</span><span class="ar">'+ic('<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',1.6)+'</span></button><div class="faq-a"><div class="faq-a-in">'+f.a+'</div></div></div>').join('');
+  l.querySelectorAll('[data-faq]').forEach(it=>{const q=it.querySelector('.faq-q'),a=it.querySelector('.faq-a');q.addEventListener('click',()=>{const o=it.classList.toggle('open');q.setAttribute('aria-expanded',o);a.style.maxHeight=o?a.scrollHeight+'px':'0';});});}
+function renderMem(){const g=document.getElementById('memGrid');if(!g)return;g.innerHTML=MEM.map(m=>'<div class="reveal pkg'+(m.badge?' feat':'')+'" data-d="60" style="padding:0"><div class="pkg-body" style="padding:32px"><div style="display:flex;justify-content:space-between;align-items:center">'+(m.badge?'<span class="tag tag-gold">'+m.badge+'</span>':'<span class="label-sc">Membership</span>')+'</div><div class="pkg-name" style="margin-top:14px">'+m.name+'</div><div class="pkg-price">'+m.price+'<span class="per">'+m.per+'</span></div><div style="margin-top:18px;flex:1">'+m.feat.map(f=>'<div class="pkg-feat"'+(f[1]?'':' style="opacity:.45"')+'>'+(f[1]?CHECK:ic('<line x1="5" y1="12" x2="19" y2="12"/>',2))+'<span>'+f[0]+'</span></div>').join('')+'</div><a href="#book" data-page="book" class="btn '+(m.badge?'btn-gold':'btn-s')+' btn-full" style="margin-top:18px">Join '+m.name+'</a></div></div>').join('');}
+function renderPriceTable(){const t=document.getElementById('priceTable');if(!t)return;const rows=[["Standard visit","$120","$160","$200"],["Deep clean","$240","$300","$380"],["Move in / out","$320","$380","$460"],["Eco products","Included","Included","Included"],["Recurring discount","10%","15%","20%"]];const heads=["Service","1–2 Bed","3 Bed","4+ Bed"];
+  t.innerHTML='<thead><tr>'+heads.map((h,i)=>'<th style="text-align:'+(i?'center':'left')+';padding:16px;font-family:var(--fd);font-size:'+(i?'22px':'14px')+';font-weight:400;color:var(--text);border-bottom:1px solid var(--borders)'+(i?'':';letter-spacing:.1em;text-transform:uppercase;font-family:var(--fb);font-size:12px;color:var(--faint)')+'">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map((c,i)=>'<td style="padding:15px 16px;text-align:'+(i?'center':'left')+';font-size:14px;color:'+(i?'var(--text-soft)':'var(--text)')+';font-weight:'+(i?'400':'500')+';border-bottom:1px solid var(--border)">'+c+'</td>').join('')+'</tr>').join('')+'</tbody>';}
+
+/* ===== CALCULATOR ===== */
+const Calc={type:'standard',sqft:1500,freq:'biweekly',disc:0.15,
+  rate:{standard:1,deep:1.7,move:2.0},
+  recName:{standard:'Essential Clean',deep:'Deep Refresh',move:'Move In / Out'},
+  compute(){const bed=+document.getElementById('calcBed').value,bath=+document.getElementById('calcBath').value;
+    let base=70+this.sqft*0.045+bed*16+bath*22;base*=this.rate[this.type];
+    const full=Math.round(base/5)*5;const price=Math.round(full*(1-this.disc)/2)*2;
+    const save=full-price;const hours=Math.max(1.5,Math.round((base/55)*2)/2);const crew=this.sqft>2600||this.type!=='standard'?(this.sqft>3800?3:2):2;
+    document.getElementById('calcPrice').textContent=price;
+    document.getElementById('calcTime').textContent='~'+hours+' hours';
+    document.getElementById('calcCrew').textContent=crew+' cleaners';
+    document.getElementById('calcSave').textContent=save>0?'$'+save+' / visit':'—';
+    let rec=this.recName[this.type];if(this.type==='standard'&&this.freq!=='once')rec=this.sqft>2800?'Premium Care':'Essential Clean';
+    document.getElementById('calcRec').textContent=rec;
+  }};
+function initCalc(){if(!document.getElementById('calcSqft'))return;
+  const sq=document.getElementById('calcSqft');sq.addEventListener('input',()=>{Calc.sqft=+sq.value;document.getElementById('calcSqftLbl').textContent=(+sq.value).toLocaleString()+' sq ft';Calc.compute();});
+  document.getElementById('calcBed').addEventListener('change',()=>Calc.compute());
+  document.getElementById('calcBath').addEventListener('change',()=>Calc.compute());
+  document.getElementById('calcType').addEventListener('click',e=>{const b=e.target.closest('[data-type]');if(!b)return;document.querySelectorAll('#calcType .seg-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');Calc.type=b.dataset.type;Calc.compute();});
+  const freqLbls={once:'One-time clean',weekly:'Weekly · Save 20%',biweekly:'Every 2 weeks · Save 15%',monthly:'Monthly · Save 10%'};
+  document.getElementById('calcFreq').addEventListener('click',e=>{const b=e.target.closest('[data-freq]');if(!b)return;document.querySelectorAll('#calcFreq .seg-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');Calc.freq=b.dataset.freq;Calc.disc=+b.dataset.disc;document.getElementById('calcFreqLbl').textContent=freqLbls[b.dataset.freq];Calc.compute();});
+  Calc.compute();}
+
+/* ===== ROOM EXPLORER ===== */
+function initRooms(){const vis=document.getElementById('roomVisual'),tabs=document.getElementById('roomTabsTop');if(!vis)return;
+  vis.innerHTML=ROOMS.map((r,i)=>'<img class="room-img'+(i===0?' on':'')+'" src="'+r.img+'" alt="'+r.name+'" loading="lazy"/>').join('')+'<div class="room-tabs">'+ROOMS.map((r,i)=>'<button class="room-tab'+(i===0?' on':'')+'" data-room="'+i+'">'+r.name+'</button>').join('')+'</div>';
+  tabs.innerHTML=ROOMS.map((r,i)=>'<button class="pill'+(i===0?' on':'')+'" data-room="'+i+'">'+r.name+'</button>').join('');
+  const set=i=>{const r=ROOMS[i];
+    vis.querySelectorAll('.room-img').forEach((im,k)=>im.classList.toggle('on',k===i));
+    vis.querySelectorAll('.room-tab').forEach((tb,k)=>tb.classList.toggle('on',k===i));
+    tabs.querySelectorAll('.pill').forEach((tb,k)=>tb.classList.toggle('on',k===i));
+    document.getElementById('roomName').textContent=r.name;
+    document.getElementById('roomTime').textContent=r.time;
+    document.getElementById('roomDesc').textContent=r.desc;
+    document.getElementById('roomChecklist').innerHTML=r.tasks.map(t=>'<div class="room-check">'+CHECK+'<span>'+t+'</span></div>').join('');
+  };
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-room]');if(!b)return;set(+b.dataset.room);});
+  set(0);}
+
+/* ===== COMMERCIAL SELECTOR ===== */
+function initComm(selId,visId,tagId,nameId,descId,featId){const sel=document.getElementById(selId);if(!sel)return;
+  sel.innerHTML=COMM.map((c,i)=>'<button class="pill'+(i===0?' on':'')+'" data-comm="'+i+'">'+c.name+'</button>').join('');
+  const set=i=>{const c=COMM[i];sel.querySelectorAll('.pill').forEach((p,k)=>p.classList.toggle('on',k===i));
+    document.getElementById(visId).style.backgroundImage="url('"+c.img+"')";
+    document.getElementById(tagId).textContent=c.name;document.getElementById(nameId).textContent=c.name+' Cleaning';
+    document.getElementById(descId).textContent=c.desc;
+    document.getElementById(featId).innerHTML=c.feat.map(f=>'<div class="room-check">'+CHECK+'<span>'+f+'</span></div>').join('');
+  };
+  sel.addEventListener('click',e=>{const b=e.target.closest('[data-comm]');if(!b)return;set(+b.dataset.comm);});set(0);}
+
+/* ===== HERO (signature crossfade) ===== */
+function initHero(){const scenes=document.querySelectorAll('#heroScenes .hero-scene'),dots=document.querySelectorAll('#heroDots .hero-dot'),label=document.getElementById('heroLabel');if(!scenes.length)return;
+  let i=0;const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const go=n=>{i=(n+scenes.length)%scenes.length;scenes.forEach((s,k)=>s.classList.toggle('on',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k===i));if(label)label.querySelector('.nm').textContent=SCENES[i].label;};
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{go(k);reset();}));
+  let timer;const reset=()=>{clearInterval(timer);if(!rm)timer=setInterval(()=>go(i+1),6000);};
+  reset();}
+
+/* ===== ANNOUNCE ===== */
+function initAnnounce(){const msgs=document.querySelectorAll('.announce-msg');if(msgs.length<2)return;let i=0;setInterval(()=>{i=(i+1)%msgs.length;msgs.forEach((m,k)=>m.classList.toggle('on',k===i));},5000);}
+
+/* ===== BEFORE/AFTER ===== */
+function initBA(){document.querySelectorAll('[data-ba]').forEach(ba=>{const after=ba.querySelector('.ba-after'),h=ba.querySelector('.ba-handle'),k=ba.querySelector('.ba-knob');let drag=false;
+  const set=x=>{const r=ba.getBoundingClientRect();let p=((x-r.left)/r.width)*100;p=Math.max(2,Math.min(98,p));after.style.clipPath='inset(0 0 0 '+p+'%)';h.style.left=p+'%';k.style.left=p+'%';};
+  ba.addEventListener('mousedown',e=>{drag=true;set(e.clientX);});ba.addEventListener('touchstart',e=>{drag=true;set(e.touches[0].clientX);},{passive:true});
+  window.addEventListener('mousemove',e=>{if(drag)set(e.clientX);});window.addEventListener('touchmove',e=>{if(drag)set(e.touches[0].clientX);},{passive:true});
+  window.addEventListener('mouseup',()=>drag=false);window.addEventListener('touchend',()=>drag=false);
+  ba.addEventListener('click',e=>{if(!drag)set(e.clientX);});});}
+
+/* ===== AI CONCIERGE ===== */
+const AIQ=[
+ {k:["price","cost","much","quote","estimate","rate"],r:"Pricing depends on your home's size and how often we visit. A standard clean starts around $120, a deep clean from $240. Recurring plans save up to 20%. The Cost Calculator on the home page gives you an instant figure — shall I take you there?"},
+ {k:["book","schedule","when","available","time","slot"],r:"Booking takes under 60 seconds — choose your service, frequency and a time, and we confirm instantly with a vetted cleaner. We have 7-day availability. Tap 'Book Cleaning' whenever you're ready."},
+ {k:["deep","move","movein","moveout","move-out"],r:"Our Deep Refresh is a meticulous top-to-bottom clean — ideal for seasonal resets, move-in/move-out, or post-renovation. It covers inside appliances, baseboards, grout and detail work, from $240."},
+ {k:["recurring","weekly","biweekly","subscription","frequency"],r:"Recurring plans keep your home effortlessly fresh and unlock member savings — weekly (20% off), bi-weekly (15%) or monthly (10%), always with the same trusted cleaner."},
+ {k:["eco","green","product","safe","chemical","pet"],r:"All our products are plant-based, family- and pet-safe, and included free on every visit. Just flag any pets or sensitivities when you book and we'll plan around them."},
+ {k:["insur","bond","trust","safe","background","theft"],r:"Every cleaner is background-checked, fully insured and bonded under $2M coverage. Your home and belongings are protected, and our 100% satisfaction guarantee means we'll re-clean free if anything's not right."},
+ {k:["member","membership","club","loyal"],r:"Clean Living Membership gives you priority slots, member rates up to 20% off, a dedicated team and monthly deep-clean credits. Tiers start at $99/mo. Want me to open the membership page?"},
+ {k:["commercial","office","business","retail","medical","hotel"],r:"We care for offices, retail, medical and hospitality spaces with tailored protocols and after-hours scheduling. The Commercial page lets you pick your industry for the details — or I can arrange a quote."},
+ {k:["cancel","reschedul","change","flexible"],r:"You can reschedule or cancel free up to 24 hours before any visit. Members get even more flexibility and roll-over credits. Life happens — we keep it easy."},
+ {k:["satisf","guarantee","not happy","refund","complain"],r:"We're not done until you're delighted. If anything isn't right, we'll return and re-clean within 24 hours at no charge — that's our 100% satisfaction guarantee."},
+ {k:["airbnb","turnover","rental","guest","host"],r:"We specialise in fast, five-star-ready Airbnb turnovers with linen changes, restocking and same-day priority. Many hosts put us on Premium Care for automatic scheduling between guests."}
+];
+const aiP=()=>document.getElementById('aiPanel'),aiO=()=>document.getElementById('aiOverlay');
+function aiAdd(t,w){const b=document.getElementById('aiBody');b.appendChild(el('div','ai-msg '+w,t));b.scrollTop=b.scrollHeight;}
+function aiReply(q){const t=q.toLowerCase();let r=null;for(const x of AIQ){if(x.k.some(k=>t.includes(k))){r=x.r;break;}}if(!r)r="Happy to help! I can talk you through pricing, booking, our eco products, membership, commercial cleaning or our satisfaction guarantee. What would you like to know? Or call (800) 555-2468.";setTimeout(()=>aiAdd(r,'bot'),420);}
+function aiOpen(){aiP().classList.add('open');aiO().classList.add('open');const b=document.getElementById('aiBody');if(!b.dataset.init){b.dataset.init='1';aiAdd("Hello, I'm Clair — your cleaning concierge. Tell me about your home or what you're looking for, and I'll point you the right way.",'bot');}document.getElementById('aiInput').focus();}
+function aiClose(){aiP().classList.remove('open');aiO().classList.remove('open');}
+function initAi(){const chips=["How much for my home?","Book a cleaning","Are products eco-friendly?","Tell me about membership"];
+  document.getElementById('aiChips').innerHTML=chips.map(c=>'<button class="ai-chip">'+c+'</button>').join('');
+  document.getElementById('aiChips').addEventListener('click',e=>{const c=e.target.closest('.ai-chip');if(!c)return;aiAdd(c.textContent,'user');aiReply(c.textContent);});
+  const inp=document.getElementById('aiInput'),snd=document.getElementById('aiSend');const fire=()=>{const v=inp.value.trim();if(!v)return;aiAdd(v,'user');aiReply(v);inp.value='';};
+  snd.addEventListener('click',fire);inp.addEventListener('keydown',e=>{if(e.key==='Enter')fire();});
+  document.getElementById('fabAi').addEventListener('click',aiOpen);document.getElementById('aiClose').addEventListener('click',aiClose);aiO().addEventListener('click',aiClose);
+  document.querySelectorAll('.js-open-ai').forEach(b=>b.addEventListener('click',aiOpen));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')aiClose();});}
+
+/* ===== CORE ===== */
+const Theme={init(){this.apply(localStorage.getItem('mc-theme')||'light');},apply(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('mc-theme',t);}catch(e){}document.querySelectorAll('.theme-btn').forEach(b=>b.innerHTML=t==='dark'?SUN:MOON);},toggle(){this.apply(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}};
+function initNavbar(){const n=document.querySelector('.navbar');if(n)window.addEventListener('scroll',()=>n.classList.toggle('scrolled',scrollY>30),{passive:true});}
+function initDrawer(){const d=document.querySelector('.drawer'),o=document.querySelector('.hamburger'),c=document.getElementById('drawer-close');if(!d)return;o&&o.addEventListener('click',()=>d.classList.add('open'));c&&c.addEventListener('click',()=>d.classList.remove('open'));d.querySelectorAll('[data-page]').forEach(a=>a.addEventListener('click',()=>d.classList.remove('open')));}
+function initFab(){const m=document.getElementById('fabMain'),o=document.getElementById('fabOpts'),top=document.getElementById('fabTop');if(!m)return;let open=false;m.addEventListener('click',()=>{open=!open;o.classList.toggle('open',open);m.classList.toggle('open',open);m.setAttribute('aria-expanded',String(open));});top&&top.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));window.addEventListener('scroll',()=>{if(top)top.style.display=scrollY>700?'grid':'none';},{passive:true});if(top)top.style.display='none';}
+function initBottomNav(){const bn=document.getElementById('bottomNav');if(!bn)return;const upd=()=>bn.classList.toggle('show',scrollY>340);window.addEventListener('scroll',upd,{passive:true});upd();}
+const RIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const d=e.target.dataset.d;if(d)e.target.style.transitionDelay=d+'ms';e.target.classList.add('in');RIO.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -3% 0px'});
+function observeReveals(s){const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;(s||document).querySelectorAll('.reveal:not(.in)').forEach(e=>{if(rm)e.classList.add('in');else RIO.observe(e);});}
+function countUp(e,t){if(matchMedia('(prefers-reduced-motion:reduce)').matches){e.textContent=t.toLocaleString();return;}let s=null;const step=x=>{if(!s)s=x;const p=Math.min((x-s)/1500,1);e.textContent=Math.round(t*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+function observeCounters(s){(s||document).querySelectorAll('[data-counter]:not([data-counted])').forEach(e=>{const io=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting){e.dataset.counted='1';countUp(e,parseInt(e.dataset.counter));io.unobserve(e);}});},{threshold:.5});io.observe(e);});}
+function initForms(){document.querySelectorAll('.lead-form').forEach(f=>{f.addEventListener('submit',e=>{e.preventDefault();const b=f.querySelector('[type=submit]');if(!b)return;b.innerHTML=CHECK+' Received — we\'ll be in touch';b.disabled=true;b.style.cssText='background:var(--sage-d);color:#fff;cursor:default';});});}
+function setYear(){document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());}
+
+/* ===== ROUTER ===== */
+const PAGES=['home','residential','deep','commercial','pricing','membership','reviews','faq','contact','book'];
+let pendingScroll=null;
+function showPage(id){if(!PAGES.includes(id))id='home';
+  document.querySelectorAll('.spa-page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  const pg=document.getElementById('page-'+id);if(pg){pg.style.display='block';pg.classList.add('active');}
+  const navMap={residential:'residential',deep:'deep',commercial:'commercial',pricing:'pricing',reviews:'reviews',contact:'contact'};
+  document.querySelectorAll('.nav-link').forEach(a=>a.classList.toggle('active',a.dataset.page===id));
+  document.querySelectorAll('.bn-item').forEach(a=>a.classList.toggle('active',a.dataset.page===id));
+  observeReveals(pg);observeCounters(pg);
+  if(pendingScroll){const t=pendingScroll;pendingScroll=null;setTimeout(()=>{const el=document.getElementById(t);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},140);}
+  else scrollTo({top:0,behavior:'auto'});
+  const labels={home:'Come Home to Clean',residential:'Home Cleaning',deep:'Deep Cleaning',commercial:'Commercial Cleaning',pricing:'Pricing',membership:'Membership',reviews:'Reviews',faq:'FAQ',contact:'Contact',book:'Book a Cleaning'};
+  document.title='Maison Clair — '+(labels[id]||id);
+}
+function initRouter(){document.addEventListener('click',e=>{
+  const sc=e.target.closest('.js-scroll');if(sc){e.preventDefault();const t=document.getElementById(sc.dataset.target);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const ah=e.target.closest('.js-after-home');if(ah){e.preventDefault();pendingScroll=ah.dataset.target;try{history.pushState(null,'','#home');}catch(x){}showPage('home');return;}
+  const l=e.target.closest('[data-page]');if(!l)return;const p=l.dataset.page;if(PAGES.includes(p)){e.preventDefault();try{history.pushState(null,'','#'+p);}catch(x){}showPage(p);}});
+  window.addEventListener('popstate',()=>{const h=(location.hash||'#home').replace('#','');showPage(PAGES.includes(h)?h:'home');});
+}
+
+/* ===== BOOT ===== */
+document.addEventListener('DOMContentLoaded',()=>{
+  Theme.init();document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',()=>Theme.toggle()));
+  renderTimeCards();renderPackages('pkgGrid');renderPackages('pkgGrid2');
+  renderCards('resGrid',RES);renderCards('deepGrid',DEEP);
+  renderStories('storyGrid');renderStories('storyGridAll');
+  renderFaq('faqList');renderFaq('faqListFull');renderMem();renderPriceTable();
+  initCalc();initRooms();
+  initComm('commSelect','commVisual','commTag','commName','commDesc','commFeat');
+  initComm('commSelect2','commVisual2','commTag2','commName2','commDesc2','commFeat2');
+  initHero();initAnnounce();initBA();initAi();
+  initNavbar();initDrawer();initFab();initBottomNav();initForms();setYear();initRouter();
+  const start=(location.hash||'#home').replace('#','');showPage(PAGES.includes(start)?start:'home');
+  observeReveals(document);observeCounters(document);
+});
+</script>
+</body>
+</html>

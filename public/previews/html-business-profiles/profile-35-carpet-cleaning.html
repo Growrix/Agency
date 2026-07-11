@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"/><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>FreshWeave — Carpet & Upholstery Cleaning</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito',sans-serif;background:#2a1840;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f8f4ff;margin:0 auto}
+.hero{min-height:248px;background:linear-gradient(155deg,#7b3fa8 0%,#5b1f88 50%,#3a0d60 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 20px}
+.hero-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 8px,transparent 8px,transparent 16px),repeating-linear-gradient(-45deg,rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 8px,transparent 8px,transparent 16px)}
+.hero-diamond{position:absolute;top:20px;right:16px;font-size:52px;opacity:.1;transform:rotate(15deg)}
+.h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:4px 12px;font-size:10px;color:#fff;font-weight:700;margin-bottom:12px;width:fit-content}
+.hero h1{font-size:36px;font-weight:800;color:#fff;line-height:.92;letter-spacing:-.5px}
+.hero h1 span{color:#d8b4fe}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:8px;line-height:1.5}
+.hero-rating{font-size:10px;color:rgba(255,255,255,.4);margin-top:8px}
+.chips{display:flex;gap:6px;padding:12px 16px;background:#fff;border-bottom:1px solid #ede9fe;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{background:#f5f0ff;border:1px solid #ddd6fe;border-radius:100px;padding:4px 11px;font-size:10px;color:#7c3aed;font-weight:700;white-space:nowrap;flex-shrink:0}
+.body{padding:0 16px 36px}
+.sec{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7b3fa8;margin:20px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(123,63,168,.15)}
+.services{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{background:#fff;border:1px solid #ede9fe;border-radius:12px;padding:14px}
+.svc.wide{grid-column:span 2}
+.svc-icon{font-size:24px;margin-bottom:6px}
+.svc-name{font-size:12px;font-weight:800;color:#3a0d60}
+.svc-desc{font-size:10px;color:#9078b0;margin-top:2px;line-height:1.4}
+.svc-price{font-size:15px;font-weight:800;color:#7b3fa8;margin-top:6px}
+.process{display:flex;flex-direction:column;gap:6px}
+.proc{background:#fff;border:1px solid #ede9fe;border-radius:10px;padding:12px;display:flex;gap:10px;align-items:flex-start}
+.proc-num{font-size:22px;font-weight:900;color:#ddd6fe;line-height:1;flex-shrink:0;min-width:28px}
+.proc-title{font-size:12px;font-weight:800;color:#3a0d60}
+.proc-desc{font-size:10px;color:#9078b0;margin-top:2px}
+.cta{background:linear-gradient(135deg,#7b3fa8,#5b1f88);border-radius:14px;padding:20px;text-align:center}
+.cta h3{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px}
+.cta p{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:14px;line-height:1.4}
+.cta-btn{display:block;background:#fff;color:#7b3fa8;border-radius:10px;padding:12px;font-weight:800;font-size:14px;text-decoration:none;margin-bottom:7px}
+.cta-btn2{display:block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px;font-size:11px;text-decoration:none}
+.contacts{background:#fff;border:1px solid #ede9fe;border-radius:10px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #f5f0ff;font-size:12px;color:#555}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:#7b3fa8;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+footer{background:#3a0d60;padding:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-diamond">🔶</div>
+  <div class="h-pill">✨ Free stain treatment on first booking</div>
+  <h1>Fresh<span>Weave</span></h1>
+  <div class="hero-sub">Carpet, rug & upholstery cleaning. We come to you — steam-cleaned and fresh in hours.</div>
+  <div class="hero-rating">⭐ 4.9 · 480 reviews · Eco-friendly products</div>
+</div>
+<div class="chips">
+  <div class="chip">🏠 In-home service</div>
+  <div class="chip">♻️ Eco products</div>
+  <div class="chip">⏱ 2hr drying</div>
+  <div class="chip">🐾 Pet-safe</div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">🟫</div><div class="svc-name">Carpet Steam Clean</div><div class="svc-desc">Hot water extraction</div><div class="svc-price">৳8/sqft</div></div>
+    <div class="svc"><div class="svc-icon">🛋️</div><div class="svc-name">Sofa & Couch</div><div class="svc-desc">All fabric types</div><div class="svc-price">৳1,500</div></div>
+    <div class="svc"><div class="svc-icon">🪑</div><div class="svc-name">Chair & Ottoman</div><div class="svc-desc">Dining, office chairs</div><div class="svc-price">৳400</div></div>
+    <div class="svc"><div class="svc-icon">🛏️</div><div class="svc-name">Mattress Clean</div><div class="svc-desc">Deep clean & sanitise</div><div class="svc-price">৳1,200</div></div>
+    <div class="svc wide"><div class="svc-icon">🧹</div><div class="svc-name">Full Home Package — Sofa + Carpet + 2 Mattresses</div><div class="svc-desc">Best value · Includes odour treatment & deodoriser</div><div class="svc-price">৳4,500 <span style="font-size:11px;color:#9078b0">complete package</span></div></div>
+  </div>
+  <div class="sec">How It Works</div>
+  <div class="process">
+    <div class="proc"><div class="proc-num">1</div><div><div class="proc-title">Book via WhatsApp</div><div class="proc-desc">Tell us what needs cleaning and your address</div></div></div>
+    <div class="proc"><div class="proc-num">2</div><div><div class="proc-title">We arrive with equipment</div><div class="proc-desc">Industrial steam machine, eco solutions</div></div></div>
+    <div class="proc"><div class="proc-num">3</div><div><div class="proc-title">Done in 2–3 hours</div><div class="proc-desc">Dry within 2–4 hours · Ready to use</div></div></div>
+  </div>
+  <div class="sec">Book Today</div>
+  <div class="cta">
+    <h3>✨ Fresh home, fresh feeling.</h3>
+    <p>WhatsApp us — we'll confirm your slot and be at your door within 24 hours.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🧹 Book via WhatsApp</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call to book</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>All Dhaka · We come to you</div>
+    <div class="cr"><div class="ci">⏰</div>Sat–Thu · 8am–7pm</div>
+  </div>
+</div>
+<footer>© 2025 FreshWeave · Carpet & Upholstery Cleaning · Dhaka</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

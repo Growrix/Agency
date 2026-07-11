@@ -1,0 +1,396 @@
+[
+  {
+    "slug": "index",
+    "canonicalPath": "/",
+    "legacyHtmlAlias": "/index.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "about",
+    "canonicalPath": "/about",
+    "legacyHtmlAlias": "/about.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "appointment",
+    "canonicalPath": "/appointment",
+    "legacyHtmlAlias": "/appointment.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "blog",
+    "canonicalPath": "/blog",
+    "legacyHtmlAlias": "/blog.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "blog-single",
+    "canonicalPath": "/blog-single",
+    "legacyHtmlAlias": "/blog-single.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "car-list",
+    "canonicalPath": "/car-list",
+    "legacyHtmlAlias": "/car-list.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "car-listing",
+    "canonicalPath": "/car-listing",
+    "legacyHtmlAlias": "/car-listing.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "car-single",
+    "canonicalPath": "/car-single",
+    "legacyHtmlAlias": "/car-single.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "careers",
+    "canonicalPath": "/careers",
+    "legacyHtmlAlias": "/careers.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "contact",
+    "canonicalPath": "/contact",
+    "legacyHtmlAlias": "/contact.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "faq",
+    "canonicalPath": "/faq",
+    "legacyHtmlAlias": "/faq.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "gallery",
+    "canonicalPath": "/gallery",
+    "legacyHtmlAlias": "/gallery.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "gallery-carousel",
+    "canonicalPath": "/gallery-carousel",
+    "legacyHtmlAlias": "/gallery-carousel.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "gallery-slider",
+    "canonicalPath": "/gallery-slider",
+    "legacyHtmlAlias": "/gallery-slider.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "two",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-2",
+    "canonicalPath": "/homepage-2",
+    "legacyHtmlAlias": "/homepage-2.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-3",
+    "canonicalPath": "/homepage-3",
+    "legacyHtmlAlias": "/homepage-3.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-4",
+    "canonicalPath": "/homepage-4",
+    "legacyHtmlAlias": "/homepage-4.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-5",
+    "canonicalPath": "/homepage-5",
+    "legacyHtmlAlias": "/homepage-5.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-6",
+    "canonicalPath": "/homepage-6",
+    "legacyHtmlAlias": "/homepage-6.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-7",
+    "canonicalPath": "/homepage-7",
+    "legacyHtmlAlias": "/homepage-7.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "homepage-8",
+    "canonicalPath": "/homepage-8",
+    "legacyHtmlAlias": "/homepage-8.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "three",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "locations",
+    "canonicalPath": "/locations",
+    "legacyHtmlAlias": "/locations.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "privacy",
+    "canonicalPath": "/privacy",
+    "legacyHtmlAlias": "/privacy.html",
+    "title": "Velocare Auto Studio - Privacy Policy",
+    "description": "Privacy policy for Velocare Auto Studio website visitors and customers.",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "service-single",
+    "canonicalPath": "/service-single",
+    "legacyHtmlAlias": "/service-single.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js",
+      "/js/swiper.js"
+    ],
+    "sliderVariant": "one",
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "services",
+    "canonicalPath": "/services",
+    "legacyHtmlAlias": "/services.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "services-2",
+    "canonicalPath": "/services-2",
+    "legacyHtmlAlias": "/services-2.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "services-3",
+    "canonicalPath": "/services-3",
+    "legacyHtmlAlias": "/services-3.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "shop",
+    "canonicalPath": "/shop",
+    "legacyHtmlAlias": "/shop.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "shop-product-single",
+    "canonicalPath": "/shop-product-single",
+    "legacyHtmlAlias": "/shop-product-single.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "team",
+    "canonicalPath": "/team",
+    "legacyHtmlAlias": "/team.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "terms",
+    "canonicalPath": "/terms",
+    "legacyHtmlAlias": "/terms.html",
+    "title": "Velocare Auto Studio - Terms and Conditions",
+    "description": "Terms and conditions for Velocare Auto Studio services and website usage.",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  },
+  {
+    "slug": "testimonials",
+    "canonicalPath": "/testimonials",
+    "legacyHtmlAlias": "/testimonials.html",
+    "title": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "description": "Velocare Auto Studio - Premium Detailing and Auto Care",
+    "scripts": [
+      "/js/phase2-flows.js"
+    ],
+    "sliderVariant": null,
+    "bodyClass": "dark-scheme"
+  }
+]

@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Foundation Core API
+  version: 1.0.0
+  description: Reusable backend-first runtime API for screenshot-driven frontend templates.
+servers:
+  - url: https://foundation-core.example.com
+paths:
+  /api/health:
+    get:
+      summary: Health and adapter readiness
+      responses:
+        '200':
+          description: Runtime health envelope
+  /api/diagnostics:
+    get:
+      summary: Runtime diagnostics and categorized readiness
+      responses:
+        '200':
+          description: Diagnostics envelope
+  /api/admin/diagnostics:
+    get:
+      summary: Authenticated diagnostics surface for admin roles
+      responses:
+        '200':
+          description: Admin diagnostics envelope
+        '401':
+          description: Authentication required
+        '403':
+          description: Role forbidden
+  /api/auth/session:
+    get:
+      summary: Session envelope
+      responses:
+        '200':
+          description: Session DTO
+  /api/billing/checkout:
+    post:
+      summary: Create Stripe hosted checkout session using offer_key mapping
+      responses:
+        '200':
+          description: Checkout URL envelope
+        '400':
+          description: Validation error
+        '401':
+          description: Billing auth required
+        '404':
+          description: Offer key not found
+        '503':
+          description: Billing not configured
+  /api/billing/portal:
+    post:
+      summary: Create Stripe customer portal session for authenticated users
+      responses:
+        '200':
+          description: Portal URL envelope
+        '400':
+          description: Validation error
+        '401':
+          description: Billing auth required
+        '409':
+          description: Customer mapping unavailable
+        '503':
+          description: Billing not configured
+  /api/content/pages/{slug}:
+    get:
+      summary: Page DTO lookup
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Page DTO
+        '404':
+          description: Page not found
+        '500':
+          description: Content provider error
+  /api/content/revalidate:
+    post:
+      summary: Validate and process a content revalidation webhook
+      responses:
+        '202':
+          description: Revalidation accepted
+        '400':
+          description: Invalid payload or webhook signature
+        '503':
+          description: Revalidation secret missing
+  /api/forms/{formId}/submit:
+    post:
+      summary: Submit a validated lead form
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: false
+          schema:
+            type: string
+        - in: path
+          name: formId
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Lead accepted
+        '400':
+          description: Invalid payload
+        '429':
+          description: Rate limit exceeded
+        '422':
+          description: Spam or rejected form
+  /api/media/upload:
+    post:
+      summary: Create a media upload intent
+      responses:
+        '200':
+          description: Upload enabled with asset metadata and optional signed read URL
+        '503':
+          description: Storage adapter unavailable
+  /api/preview/enable:
+    post:
+      summary: Enable draft mode
+      responses:
+        '200':
+          description: Draft mode enabled
+        '401':
+          description: Invalid or missing preview token
+  /api/webhooks/stripe:
+    post:
+      summary: Verify and process Stripe billing lifecycle webhooks
+      responses:
+        '200':
+          description: Webhook accepted or replayed idempotently
+        '400':
+          description: Invalid Stripe signature
+        '503':
+          description: Stripe billing is not configured

@@ -1,0 +1,20 @@
+integration: openai
+category: ai
+role: concierge
+playbook: ~/.cursor/skills/integration-platform/references/openai.md
+env_source: web/src/server/config/runtime.ts
+
+env_vars:
+  - name: OPENAI_API_KEY
+    required: true
+    scope: server
+  - name: OPENAI_MODEL
+    required: false
+    scope: server
+    default: o3-mini
+
+routes:
+  - POST /api/v1/ai-concierge
+  - /api/v1/ai-concierge/[sessionId]
+
+owner_skill: integration-platform

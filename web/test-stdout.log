@@ -1,0 +1,563 @@
+
+> web@0.1.0 test
+> npm run test:unit && npm run test:integration
+
+
+> web@0.1.0 test:unit
+> tsx --test src/server/auth/users.test.ts src/server/auth/clerk-sync.test.ts src/server/domain/catalog.test.ts src/server/domain/orders.test.ts src/server/domain/leads.test.ts src/server/ai/knowledge.test.ts
+
+TAP version 13
+# Subtest: concierge knowledge sources
+    # Subtest: includes canonical marketplace pricing documents
+    ok 1 - includes canonical marketplace pricing documents
+      ---
+      duration_ms: 7.1774
+      ...
+    1..1
+ok 1 - concierge knowledge sources
+  ---
+  duration_ms: 10.9101
+  type: 'suite'
+  ...
+# Subtest: searchKnowledgeDocuments
+    # Subtest: returns HTML business profile canonical pricing
+    ok 1 - returns HTML business profile canonical pricing
+      ---
+      duration_ms: 7.6932
+      ...
+    # Subtest: returns website template pricing
+    ok 2 - returns website template pricing
+      ---
+      duration_ms: 5.9432
+      ...
+    # Subtest: returns current SaaS MVP pricing
+    ok 3 - returns current SaaS MVP pricing
+      ---
+      duration_ms: 3.339
+      ...
+    # Subtest: returns current automation audit pricing
+    ok 4 - returns current automation audit pricing
+      ---
+      duration_ms: 3.1032
+      ...
+    # Subtest: surfaces the six public services including AI business systems
+    ok 5 - surfaces the six public services including AI business systems
+      ---
+      duration_ms: 6.3653
+      ...
+    # Subtest: surfaces booking expectations for discovery calls
+    ok 6 - surfaces booking expectations for discovery calls
+      ---
+      duration_ms: 2.861
+      ...
+    1..6
+ok 2 - searchKnowledgeDocuments
+  ---
+  duration_ms: 30.8834
+  type: 'suite'
+  ...
+# Subtest: clerk user mirror
+    # Subtest: preserves internal user id when syncing by email
+    ok 1 - preserves internal user id when syncing by email
+      ---
+      duration_ms: 3598.6833
+      ...
+    1..1
+ok 3 - clerk user mirror
+  ---
+  duration_ms: 3604.3574
+  type: 'suite'
+  ...
+# Subtest: auth users
+    # Subtest: rejects weak passwords
+    ok 1 - rejects weak passwords
+      ---
+      duration_ms: 34.8381
+      ...
+    # Subtest: creates authenticates and updates a subscriber
+    ok 2 - creates authenticates and updates a subscriber
+      ---
+      duration_ms: 3291.6176
+      ...
+    1..2
+ok 4 - auth users
+  ---
+  duration_ms: 3331.0589
+  type: 'suite'
+  ...
+# Subtest: catalog domain
+    # Subtest: keeps html business profiles in the public shop
+    ok 1 - keeps html business profiles in the public shop
+      ---
+      duration_ms: 38.4185
+      ...
+    # Subtest: does not expose retired fallback catalog products
+    ok 2 - does not expose retired fallback catalog products
+      ---
+      duration_ms: 11.7344
+      ...
+    # Subtest: uses planned pricing tiers for html business profiles only
+    ok 3 - uses planned pricing tiers for html business profiles only
+      ---
+      duration_ms: 21.073
+      ...
+    # Subtest: rejects reserved product slugs that conflict with /digital-products routes
+    ok 4 - rejects reserved product slugs that conflict with /digital-products routes
+      ---
+      duration_ms: 7.7188
+      ...
+    # Subtest: rejects slug collisions when two products resolve to the same public product path
+    ok 5 - rejects slug collisions when two products resolve to the same public product path
+      ---
+      duration_ms: 28.3838
+      ...
+    # Subtest: filters known mock shop products from managed sources
+    ok 6 - filters known mock shop products from managed sources
+      ---
+      duration_ms: 14.1002
+      ...
+    # Subtest: lists the seeded public services and details
+    ok 7 - lists the seeded public services and details
+      ---
+      duration_ms: 17.9068
+      ...
+    # Subtest: restores canonical services from stale persisted catalog state
+    ok 8 - restores canonical services from stale persisted catalog state
+      ---
+      duration_ms: 20.8661
+      ...
+    # Subtest: lists portfolio and product catalogs
+    ok 9 - lists portfolio and product catalogs
+      ---
+      duration_ms: 55.4162
+      ...
+    1..9
+ok 5 - catalog domain
+  ---
+  duration_ms: 220.9377
+  type: 'suite'
+  ...
+# Subtest: leads domain
+    # Subtest: computes deterministic score weights for known event types
+    ok 1 - computes deterministic score weights for known event types
+      ---
+      duration_ms: 39.1173
+      ...
+    # Subtest: classifies temperature against the hot-lead threshold
+    ok 2 - classifies temperature against the hot-lead threshold
+      ---
+      duration_ms: 8.1172
+      ...
+    # Subtest: upserts a lead idempotently by email
+    ok 3 - upserts a lead idempotently by email
+      ---
+      duration_ms: 138.0027
+      ...
+# [audit] lead.event_recorded {
+#   lead_id: 'aab7f3e9-aa10-45b4-9d1d-0033ef111ab8',
+#   event_type: 'product_view',
+#   delta: 1,
+#   score: 1,
+#   temperature: 'cold',
+#   promoted: false
+# }
+# [audit] lead.event_recorded {
+#   lead_id: 'aab7f3e9-aa10-45b4-9d1d-0033ef111ab8',
+#   event_type: 'checkout_started',
+#   delta: 10,
+#   score: 11,
+#   temperature: 'warm',
+#   promoted: false
+# }
+# [audit] lead.event_recorded {
+#   lead_id: 'aab7f3e9-aa10-45b4-9d1d-0033ef111ab8',
+#   event_type: 'checkout_completed',
+#   delta: 30,
+#   score: 41,
+#   temperature: 'customer',
+#   promoted: true
+# }
+    # Subtest: records lead events, accumulates score, and promotes temperature
+    ok 4 - records lead events, accumulates score, and promotes temperature
+      ---
+      duration_ms: 1048.4683
+      ...
+    # Subtest: rejects invalid emails
+    ok 5 - rejects invalid emails
+      ---
+      duration_ms: 9.9598
+      ...
+    1..5
+ok 6 - leads domain
+  ---
+  duration_ms: 1249.6819
+  type: 'suite'
+  ...
+# [audit] order.created {
+#   order_id: '3b421c36-443b-43c6-98de-bf5cf804b6ab',
+#   product_slug: 'legal-practice-website',
+#   variant_slug: null,
+#   tier_name: null,
+#   fulfillment_type: null,
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-D4E208 {
+#   order_id: '3b421c36-443b-43c6-98de-bf5cf804b6ab',
+#   order_number: 'ORD-20260630-D4E208',
+#   customer_email: 'morgan@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_completed] Purchase completed for order ORD-20260630-D4E208 {
+#   order_id: '3b421c36-443b-43c6-98de-bf5cf804b6ab',
+#   order_number: 'ORD-20260630-D4E208',
+#   customer_email: 'morgan@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   product_slug: 'legal-practice-website',
+#   fulfillment_status: 'intake_pending'
+# }
+# Subtest: orders domain
+    # Subtest: moves paid orders into intake_pending instead of delivered
+    ok 1 - moves paid orders into intake_pending instead of delivered
+      ---
+      duration_ms: 175.2729
+      ...
+# [audit] order.created {
+#   order_id: '4420ae27-1be3-4c9c-998f-e686a2a9a9fc',
+#   product_slug: 'legal-practice-website',
+#   variant_slug: 'premium-plus',
+#   tier_name: 'Premium Plus',
+#   fulfillment_type: 'done-for-you',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-C62EE4 {
+#   order_id: '4420ae27-1be3-4c9c-998f-e686a2a9a9fc',
+#   order_number: 'ORD-20260630-C62EE4',
+#   customer_email: 'casey@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+    # Subtest: stores selected variant and tier details on order records
+    ok 2 - stores selected variant and tier details on order records
+      ---
+      duration_ms: 66.6856
+      ...
+# [audit] order.created {
+#   order_id: '043dddd2-5db1-4658-93c4-57099fa532ea',
+#   product_slug: 'legal-practice-website',
+#   variant_slug: null,
+#   tier_name: null,
+#   fulfillment_type: null,
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-C461BC {
+#   order_id: '043dddd2-5db1-4658-93c4-57099fa532ea',
+#   order_number: 'ORD-20260630-C461BC',
+#   customer_email: 'riley@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_completed] Purchase completed for order ORD-20260630-C461BC {
+#   order_id: '043dddd2-5db1-4658-93c4-57099fa532ea',
+#   order_number: 'ORD-20260630-C461BC',
+#   customer_email: 'riley@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   product_slug: 'legal-practice-website',
+#   fulfillment_status: 'intake_pending'
+# }
+    # Subtest: applies webhook selection metadata when payment completes
+    ok 3 - applies webhook selection metadata when payment completes
+      ---
+      duration_ms: 171.5386
+      ...
+# [audit] order.created {
+#   order_id: 'b3e293e2-8a15-4dcc-9a68-161ede943217',
+#   product_slug: 'legal-practice-website',
+#   variant_slug: null,
+#   tier_name: null,
+#   fulfillment_type: null,
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-7F7438 {
+#   order_id: 'b3e293e2-8a15-4dcc-9a68-161ede943217',
+#   order_number: 'ORD-20260630-7F7438',
+#   customer_email: 'taylor@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_completed] Purchase completed for order ORD-20260630-7F7438 {
+#   order_id: 'b3e293e2-8a15-4dcc-9a68-161ede943217',
+#   order_number: 'ORD-20260630-7F7438',
+#   customer_email: 'taylor@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   product_slug: 'legal-practice-website',
+#   fulfillment_status: 'intake_pending'
+# }
+    # Subtest: rejects delivered status when no delivery URL exists
+    ok 4 - rejects delivered status when no delivery URL exists
+      ---
+      duration_ms: 365.8521
+      ...
+# [audit] order.created {
+#   order_id: 'e956643c-31fc-4c0c-8de4-cd34527e565a',
+#   product_slug: 'legal-practice-website',
+#   variant_slug: null,
+#   tier_name: null,
+#   fulfillment_type: null,
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-89FA2E {
+#   order_id: 'e956643c-31fc-4c0c-8de4-cd34527e565a',
+#   order_number: 'ORD-20260630-89FA2E',
+#   customer_email: 'jordan@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_completed] Purchase completed for order ORD-20260630-89FA2E {
+#   order_id: 'e956643c-31fc-4c0c-8de4-cd34527e565a',
+#   order_number: 'ORD-20260630-89FA2E',
+#   customer_email: 'jordan@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   product_slug: 'legal-practice-website',
+#   fulfillment_status: 'intake_pending'
+# }
+# [notify:download_issued] Downloads delivered for order ORD-20260630-89FA2E {
+#   order_id: 'e956643c-31fc-4c0c-8de4-cd34527e565a',
+#   order_number: 'ORD-20260630-89FA2E',
+#   customer_email: 'jordan@example.com',
+#   delivery_urls: [ 'https://downloads.example.com/orders/order-1.zip' ],
+#   product_slug: 'legal-practice-website'
+# }
+    # Subtest: allows delivery once a delivery URL is attached
+    ok 5 - allows delivery once a delivery URL is attached
+      ---
+      duration_ms: 474.5103
+      ...
+# [audit] order.created {
+#   order_id: 'e7d5f197-b6e6-441a-bf65-82cdd63a7c75',
+#   product_slug: 'legal-practice-website',
+#   variant_slug: null,
+#   tier_name: null,
+#   fulfillment_type: null,
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-CEC310 {
+#   order_id: 'e7d5f197-b6e6-441a-bf65-82cdd63a7c75',
+#   order_number: 'ORD-20260630-CEC310',
+#   customer_email: 'dana@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_completed] Purchase completed for order ORD-20260630-CEC310 {
+#   order_id: 'e7d5f197-b6e6-441a-bf65-82cdd63a7c75',
+#   order_number: 'ORD-20260630-CEC310',
+#   customer_email: 'dana@example.com',
+#   total_cents: 129900,
+#   currency: 'USD',
+#   product_slug: 'legal-practice-website',
+#   fulfillment_status: 'intake_pending'
+# }
+# [notify:download_issued] Downloads delivered for order ORD-20260630-CEC310 {
+#   order_id: 'e7d5f197-b6e6-441a-bf65-82cdd63a7c75',
+#   order_number: 'ORD-20260630-CEC310',
+#   customer_email: 'dana@example.com',
+#   delivery_urls: [ 'https://downloads.example.com/orders/order-2.zip' ],
+#   product_slug: 'legal-practice-website'
+# }
+# [notify:download_issued] Downloads delivered for order ORD-20260630-CEC310 {
+#   order_id: 'e7d5f197-b6e6-441a-bf65-82cdd63a7c75',
+#   order_number: 'ORD-20260630-CEC310',
+#   customer_email: 'dana@example.com',
+#   delivery_urls: [ 'https://downloads.example.com/orders/order-2.zip' ],
+#   product_slug: 'legal-practice-website'
+# }
+    # Subtest: does not duplicate entitlements when an order is edited after fulfillment
+    ok 6 - does not duplicate entitlements when an order is edited after fulfillment
+      ---
+      duration_ms: 576.6537
+      ...
+    1..6
+ok 7 - orders domain
+  ---
+  duration_ms: 1833.9581
+  type: 'suite'
+  ...
+1..7
+# tests 30
+# suites 7
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9034.5777
+
+> web@0.1.0 test:integration
+> tsx --test tests/integration/api-flows.test.ts
+
+TAP version 13
+# [notify:contact_inquiry] Premium custom website inquiry from Alex Founder {
+#   inquiry_id: 'c48001db-ff6b-41dd-be67-1f8ca93e5441',
+#   name: 'Alex Founder',
+#   email: 'alex@example.com',
+#   company: undefined,
+#   service: 'Premium custom website',
+#   budget: undefined,
+#   urgency: undefined
+# }
+# [audit] contact.created {
+#   inquiry_id: 'c48001db-ff6b-41dd-be67-1f8ca93e5441',
+#   service: 'Premium custom website',
+#   source: 'contact_form'
+# }
+# [audit] lead.event_recorded {
+#   lead_id: 'd1ba3534-5671-425a-a290-e873b8a34c92',
+#   event_type: 'contact_form',
+#   delta: 12,
+#   score: 12,
+#   temperature: 'warm',
+#   promoted: false
+# }
+# Subtest: API flows
+    # Subtest: persists contact inquiries through the v1 route
+    ok 1 - persists contact inquiries through the v1 route
+      ---
+      duration_ms: 691.4772
+      ...
+# [notify:appointment_requested] New booking request from Jamie Builder {
+#   appointment_id: '52b9b5b2-9442-4da0-8b38-505a8c49cb04',
+#   name: 'Jamie Builder',
+#   email: 'jamie@example.com',
+#   phone: undefined,
+#   service: 'SaaS application',
+#   preferred_datetime: '2026-07-02T16:47:03.218Z',
+#   timezone: 'UTC'
+# }
+# [audit] appointment.created {
+#   appointment_id: '52b9b5b2-9442-4da0-8b38-505a8c49cb04',
+#   preferred_datetime: '2026-07-02T16:47:03.218Z',
+#   email_delivered: false
+# }
+# [audit] lead.event_recorded {
+#   lead_id: 'fd7a9aad-cfb7-4454-8ff6-5ea130bbdc7c',
+#   event_type: 'booking',
+#   delta: 20,
+#   score: 20,
+#   temperature: 'warm',
+#   promoted: false
+# }
+    # Subtest: creates appointments and rejects duplicate reserved slots
+    ok 2 - creates appointments and rejects duplicate reserved slots
+      ---
+      duration_ms: 98.9902
+      ...
+# [audit] order.created {
+#   order_id: '4b9724d5-f6ec-426f-b626-a6991e02d0aa',
+#   product_slug: 'three-circles-template',
+#   variant_slug: 'premium-plus',
+#   tier_name: 'Premium Plus',
+#   fulfillment_type: 'done-for-you',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-6E1AD4 {
+#   order_id: '4b9724d5-f6ec-426f-b626-a6991e02d0aa',
+#   order_number: 'ORD-20260630-6E1AD4',
+#   customer_email: 'morgan@example.com',
+#   total_cents: 99900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+    # Subtest: creates persisted orders even when Stripe is not configured
+    ok 3 - creates persisted orders even when Stripe is not configured
+      ---
+      duration_ms: 3251.9136
+      ...
+# [audit] concierge.exchange_recorded {
+#   session_id: '829f84bf-0125-433a-b841-145a8ac12eb3',
+#   response_state: 'answered'
+# }
+    # Subtest: persists concierge conversations through the public route
+    ok 4 - persists concierge conversations through the public route
+      ---
+      duration_ms: 188.7658
+      ...
+# [audit] order.created {
+#   order_id: 'd1b10eff-58ed-4b4a-98a2-af712ed70baa',
+#   product_slug: 'three-circles-template',
+#   variant_slug: null,
+#   tier_name: null,
+#   fulfillment_type: null,
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_created] New order created: ORD-20260630-514ABC {
+#   order_id: 'd1b10eff-58ed-4b4a-98a2-af712ed70baa',
+#   order_number: 'ORD-20260630-514ABC',
+#   customer_email: 'buyer@example.com',
+#   total_cents: 99900,
+#   currency: 'USD',
+#   item_count: 1,
+#   stripe_ready: false
+# }
+# [notify:purchase_completed] Purchase completed for order ORD-20260630-514ABC {
+#   order_id: 'd1b10eff-58ed-4b4a-98a2-af712ed70baa',
+#   order_number: 'ORD-20260630-514ABC',
+#   customer_email: 'buyer@example.com',
+#   total_cents: 99900,
+#   currency: 'USD',
+#   product_slug: 'three-circles-template',
+#   fulfillment_status: 'intake_pending'
+# }
+# [notify:download_issued] Downloads delivered for order ORD-20260630-514ABC {
+#   order_id: 'd1b10eff-58ed-4b4a-98a2-af712ed70baa',
+#   order_number: 'ORD-20260630-514ABC',
+#   customer_email: 'buyer@example.com',
+#   delivery_urls: [
+#     'https://downloads.example.com/private/three-circles-template.zip'
+#   ],
+#   product_slug: 'three-circles-template'
+# }
+    # Subtest: authorizes private downloads for the owning authenticated customer
+    ok 5 - authorizes private downloads for the owning authenticated customer
+      ---
+      duration_ms: 1605.0455
+      ...
+    1..5
+ok 1 - API flows
+  ---
+  duration_ms: 5838.1747
+  type: 'suite'
+  ...
+1..1
+# tests 5
+# suites 1
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6606.9312

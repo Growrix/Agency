@@ -1,0 +1,22 @@
+{
+  "name": "hybrid-canonical-project-starter",
+  "version": 1,
+  "description": "Reusable local continuation scaffold for website projects bootstrapped from the shared workspace agents.",
+  "copyStrategy": "copy-missing-only",
+  "projectRootPattern": "FRONTEND DEV/<project-slug>/",
+  "requiredPaths": [
+    ".github/agents/project-e2e-planning-architect.agent.md",
+    ".github/agents/project-strict-executor.agent.md",
+    ".github/agents/project-quality-enforcer-v2.agent.md",
+    "DOC/MASTER PLAN/Plan.md",
+    "DOC/PROJECT PLAN/ai-context.yaml",
+    "DOC/PROJECT PLAN/Tasks/tasks.md",
+    "DOC/PROJECT PLAN/Shared Contracts/README.md",
+    "memories/repo/site-brain.md"
+  ],
+  "notes": [
+    "Use this starter when a project root needs its own local DOC system and project-local continuation agents.",
+    "The starter package preserves future planning and execution inside the project root.",
+    "Shared phase-1 and DOC-system phase-2 agents may attach this package automatically when the target project root is missing or incomplete."
+  ]
+}

@@ -156,3 +156,73 @@ lets focus on the HTML Business profile only. in the slug page the Done-for-you 
   
 
 
+
+
+
+------------------------------------------
+
+*** there are few jobs that are pending to be done in the codebase as per the new plan and requirements. Here is a summary of what needs to be updated:,
+### 
+The users dashboard should not import the public header and footer on the page after signin/signup. THe dashboard needs to be designed for its all pages, modals for full functionality as well. I need you to plan for the user dashboard. check the existing plan if it is already planned or not. if not then need to plan the frontend and backend, db, schema etc planning further in order the make ui ux functional. also needs to anayze flows and each ux must have an end flow. e.g now it shows profile settings but doesnt have futher ui ux or backend. I need you to identify these and make plans for all the dashboard pages. 
+
+###
+https://www.growrixos.com/checkout?product=website-template-html-preview-14-aquaverde-pool&variant=standard&tier=Standard&fulfillment=digital_download > continue to payment Button flow next to build > after clicking on the continue to payment button, it should take the user to the signup/signin form> after signup/signin, it should take the user to the checkout page with the product and variant pre-selected. The checkout page should have a clear summary of the product, variant, and tier selected, along with the total price and any applicable taxes or fees. The user should be able to review their order and make any necessary changes before proceeding to payment.
+- The checkout form doesnt send the quiry in email, check the lark configurations and make sure the email is sent to the correct email address. Also, make sure the email template is properly formatted and includes all relevant information about the order, including the product, variant, tier, total price, and any applicable taxes or fees. The email should also include a clear call-to-action for the user to complete their payment and finalize their order.
+- additionally I want to receivew all the forms quirie into this email too: growrixos@gmail.com , so reconfigure as per needed, but do not breakexisting working email configurations. Make sure to test the email functionality thoroughly to ensure that all forms and queries are being sent to the correct email address and that the email templates are properly formatted and include all relevant information.
+- make sure to test the email functionality thoroughly to ensure that all forms and queries are being sent to the correct email address and that the email templates are properly formatted and include all relevant information.
+
+- the admin dashboard should have a section to view all the forms and queries submitted by users, along with the ability to filter and search through the submissions. The admin should be able to view the details of each submission, including the product, variant, tier, total price, and any applicable taxes or fees. The admin should also be able to mark submissions as resolved or pending, and add notes or comments as needed. This will help us keep track of all user inquiries and ensure that we are providing timely and effective support to our customers.
+- also for the users dashboard, we need to implement a section where users can view their past orders and submissions, along with the ability to track the status of their orders and any associated queries. Users should be able to view the details of each order, including the product, variant, tier, total price, and any applicable taxes or fees. They should also be able to see the status of their order (e.g., pending, completed, shipped) and any notes or comments from the admin regarding their submission. This will help users stay informed about their orders and ensure that they have a clear understanding of the process from start to finish.
+- ceate db,schema, and backend api for the above functionalities. Make sure to implement proper authentication and authorization for both the admin and user dashboards, ensuring that only authorized users can access the relevant sections and data. Additionally, implement proper validation and error handling for all forms and queries to ensure that the data being submitted is accurate and complete. Finally, make sure to thoroughly test all functionalities to ensure that they are working as expected and that there are no bugs or issues that could impact the user experience.
+###
+The overall goal is to create a seamless and user-friendly experience for both the admin and the users, ensuring that all forms, queries, and orders are properly tracked and managed. This will help us provide better support to our customers and ensure that they have a positive experience with our products and services. 
+
+*** your job is to read the existing codebase and documentations, understand the current implementation, and then plan for the necessary updates and improvements to the user dashboard, admin dashboard, and email functionality as per the new requirements. Make sure to test all changes thoroughly and ensure that everything is working as expected before committing any code.
+
+----------------------------------------------------------
+
+### Issues to fix and further planning as follows :
+
+1. I dont receive any emails from the contact form, checkout form, or any other forms on the site. I need to check the email configurations and make sure that all forms are properly configured to send emails to the correct email address. Additionally, I want to receive all form queries into this email: growrixos@gmail.com, so reconfigure as needed, but do not break existing working email configurations. Make sure to test the email functionality thoroughly to ensure that all forms and queries are being sent to the correct email address and that the email templates are properly formatted and include all relevant information.
+
+
+
+2.actually now the curent auth is very confusing and not done well overall. it is not behaving how it should be. and also not as per a ecommerce site auth flow. I want you to plan for the auth flow and implement it as per the ecommerce site auth flow. The auth flow should be simple and easy to understand for users, with clear instructions and prompts for signing up, signing in, and resetting passwords. Additionally, the auth flow should be integrated with the checkout process, so that users can easily sign up or sign in before completing their purchase. Make sure to test the auth flow thoroughly to ensure that it is working as expected and that there are no bugs or issues that could impact the user experience.
+
+you need to replan and rebuild this flow as well. 
+
+3. there is no cart , it nothing behaves like a cart. I want you to plan for the cart and implement it as per the ecommerce site cart flow. The cart should be simple and easy to understand for users, with clear instructions and prompts for adding items, viewing the cart, and proceeding to checkout. Additionally, the cart should be integrated with the checkout process, so that users can easily review their order and make any necessary changes before completing their purchase. Make sure to test the cart functionality thoroughly to ensure that it is working as expected and that there are no bugs or issues that could impact the user experience.
+
+4. The dashboard each pages needs to have a plan and structure for displaying relevant information and functionalities. The admin dashboard should provide an overview of key metrics, recent activities, and quick access to important sections such as user management, order management, and form submissions. The user dashboard should offer a personalized experience, showing order history, account details, and any relevant notifications or messages. Make sure to design the dashboards with a focus on usability, clarity, and efficiency, ensuring that users can easily navigate and access the information they need.
+
+5. must have e2e functionalities for the dashboard, including the ability to view and manage orders, access account settings, and interact with any relevant features or tools. Additionally, implement proper authentication and authorization for both the admin and user dashboards, ensuring that only authorized users can access the relevant sections and data. Finally, make sure to thoroughly test all functionalities to ensure that they are working as expected and that there are no bugs or issues that could impact the user experience.
+
+6. The checkout process should be streamlined and user-friendly, with clear instructions and prompts for selecting products, entering payment information, and completing the purchase. Additionally, implement proper validation and error handling for all forms and queries to ensure that the data being submitted is accurate and complete. Finally, make sure to thoroughly test the checkout process to ensure that it is working as expected and that there are no bugs or issues that could impact the user experience.
+
+7. The overall goal is to create a seamless and user-friendly experience for both the admin and the users, ensuring that all forms, queries, and orders are properly tracked and managed. This will help us provide better support to our customers and ensure that they have a positive experience with our products and services.
+
+8. now anyne can irectly visit dashboard with signin with the google using the email that wasnt used for signup, and it will create a new account for that email. I want you to fix this issue and make sure that only authorized users can access the dashboard and that the signup process is properly validated to prevent unauthorized access. Additionally, implement proper authentication and authorization for both the admin and user dashboards, ensuring that only authorized users can access the relevant sections and data. Finally, make sure to thoroughly test all functionalities to ensure that they are working as expected and that there are no bugs or issues that could impact the user experience.
+9. the user profile settings has very poor setups and not modern, and there is nothing for add profile photo,no update passswords, eetc. 
+I dont want you just to build simply. build in detailed that planned detailed as well for every inches of the build.
+
+*** you can follow this agent .github\agents\project-e2e-planning-architect.agent.md for planning and play its role . so you will get more context that you might need. 
+
+also can use this agent while execution .github\agents\growrix-strict-executor.agent.md. 
+
+- lets do the analyzing and planning phases first, and then we will move to the execution phase.
+
+----------------------------------------
+
+There are few isseues to be fixed : 
+
+1. clicking on the checkout button from the hover cart modal redirects to a broken page. I have no idea what are these page is it should redirect to this checkout page http://localhost:5000/checkout?product=website-template-html-preview-05-elite-estates-realty&variant=standard&tier=Standard&fulfillment=digital_download . the http://localhost:5000/checkout page should be this actually. I think you redirected wrongly . analye it first and make a logical plan to fix it. and what is this page for http://localhost:5000/checkout?cart=1. In your last builts you have built unnecessary chaos and also has a lot of miss rediections to meaningless pages. I want you to fix all these issues and make sure the checkout flow is logical and user friendly.
+Speially needs to check back the UI UX and the flow of the checkout process, and make sure that it is consistent with the overall design and user experience of the site. Additionally, make sure to test the checkout process thoroughly to ensure that it is working as expected and that there are no bugs or issues that could impact the user experience.
+
+- and also check the continue shopping button also , it has no end point, no redirections. missing flow as well. I want you to analyze the current implementation and make a logical plan to fix these issues. Additionally, make sure to test the checkout process thoroughly to ensure that it is working as expected and that there are no bugs or issues that could impact the user experience.
+2. http://localhost:5000/cart> on the right column I wanted you to build a small section like the mock image has for the add ons, but it is not there. I want you to build that section as per the mock image.
+- the http://localhost:5000/cart page> if I click any of tab pages, it reirects to this page http://localhost:5000/checkout?cart=1. there are tab behaviour and redirection issues that need to be fixed. I want you to analyze the current implementation and make a logical plan to fix these issues. Additionally, make sure to test the cart functionality thoroughly to ensure that it is working as expected and that there are no bugs or issues that could impact the user experience.
+
+
+***Strickt rules***
+- Understand the above tasks and the project focus areas clearly before starting any execution. Always refer to the project plan and documentation for guidance on what needs to be done.
+- read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , and update the documentations if it doenst match the current codebase implimentations. and then start execution as per planned. make sure to run test and 0 gate pass validations before considering any implementation complete. Finally commit the changes but do not push or merge any code, only commit.

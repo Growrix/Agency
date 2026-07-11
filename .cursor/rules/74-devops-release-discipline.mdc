@@ -1,0 +1,37 @@
+---
+description: DevOps release discipline — env enumeration before deploy, smoke routes, isolated web/studio pipelines, no push without user request.
+globs:
+  - web/.github/**
+  - studio/**
+  - DOC/PROJECT PLAN/DevOps/**
+alwaysApply: false
+---
+
+# DevOps Release Discipline
+
+## Before any deploy or env change
+
+1. Read `.cursor/brain/devops-brain.md` and `integration-catalog.yaml`.
+2. Enumerate required env vars from `web/src/server/config/runtime.ts` + `web/.env.example`.
+3. Confirm web and studio pipelines remain **isolated** — no shared postinstall coupling.
+
+## Smoke checklist (minimum)
+
+- `GET /api/health` → 200
+- `GET /api/ready` → 200 when dependencies configured
+- One critical API path (e.g. shop categories or auth entry)
+- Stripe webhook secret present if commerce enabled
+
+## CI / release gates
+
+- Web: `npm run health:check` from `web/` before declaring release-ready.
+- Backend phase P5: delegate `@backend-quality-enforcer` step 11 (deploy readiness).
+
+## Git and remote
+
+- Commit locally after validation passes.
+- **Never push, merge, or deploy to production** unless the user explicitly requests.
+
+## Owner
+
+Release and pipeline work: `@devops-release-engineer` via `/backend-factory` intent routing.

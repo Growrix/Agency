@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AquaVerde — Resort-Quality Pool Service & Maintenance</title>
+<meta name="description" content="AquaVerde keeps every pool crystal clear, safe and resort-ready year-round. Weekly cleaning, chemical balancing, repairs, and emergency service. Free first inspection for new clients."/>
+<meta name="keywords" content="pool service, pool cleaning, pool maintenance, pool repair, chemical balancing, saltwater pool, pool inspection, pool technician"/>
+<meta property="og:title" content="AquaVerde — Resort-Quality Pool Service & Maintenance"/>
+<meta property="og:description" content="Crystal clear pools without the hassle. Certified technicians, 24/7 emergency support, maintenance plans from $89/mo."/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1200&q=70"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="theme-color" content="#0F3D5E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600;1,700&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F3D5E'/%3E%3Cpath d='M6 20c3-3 5-7 10-7s7 4 10 7' stroke='%2316B6C9' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M6 14c3-2 5-5 10-5s7 3 10 5' stroke='%23F4B860' stroke-width='1.8' fill='none' stroke-linecap='round' opacity='.7'/%3E%3C/svg%3E"/>
+<style>
+/* ============================================================
+   AQUAVERDE — RESORT LUXURY POOL SERVICE DESIGN SYSTEM
+   ============================================================ */
+:root{
+  /* Exact brief palette */
+  --ocean:#0F3D5E; --ocean-d:#0A2D46; --ocean-l:#1A5580;
+  --teal:#16B6C9; --teal-d:#0E9FB0; --teal-t:#7DE0EA;
+  --gold:#F4B860; --gold-d:#D99A3E; --gold-t:#FAD898;
+  --aqua:#DDFBFF; --aqua-d:#B8F2F9;
+  --white:#FAFEFF; --off-white:#F0F8FC;
+  /* Semantic */
+  --bg:var(--white); --bg-2:var(--off-white); --bg-3:#E4F4F9;
+  --surface:#FFFFFF; --surface-2:var(--off-white);
+  --panel:var(--ocean); --panel-txt:#DDFBFF;
+  --text:#0A2235; --muted:#3D6278; --faint:#7A9BAD;
+  --line:#D0E8F0; --line-2:#B8D8E6;
+  --accent:var(--teal); --accent-d:var(--teal-d); --gold-acc:var(--gold);
+  /* Water-inspired shadows */
+  --sh0:0 2px 8px rgba(15,61,94,.06);
+  --sh1:0 6px 20px rgba(15,61,94,.1),0 2px 6px rgba(15,61,94,.06);
+  --sh2:0 16px 40px rgba(15,61,94,.14),0 4px 12px rgba(15,61,94,.08);
+  --sh3:0 28px 64px rgba(15,61,94,.18),0 8px 20px rgba(15,61,94,.1);
+  --sh4:0 40px 80px rgba(15,61,94,.22);
+  --teal-glow:0 0 0 3px rgba(22,182,201,.22);
+  /* Type */
+  --fd:'Playfair Display',Georgia,serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'DM Mono',monospace;
+  /* Scale */
+  --rc:16px; --rb:10px; --rs:8px; --maxw:1360px;
+}
+[data-theme=dark]{
+  --bg:#050F16; --bg-2:#091520; --bg-3:#0D1E2C;
+  --surface:#0D1E2C; --surface-2:#112332;
+  --panel:#DDFBFF; --panel-txt:#0A2235;
+  --text:#DDFBFF; --muted:#7ABFCE; --faint:#4A7D90;
+  --line:#0F2D40; --line-2:#163C55;
+  --sh0:0 2px 8px rgba(0,0,0,.3); --sh1:0 6px 20px rgba(0,0,0,.4),0 2px 6px rgba(0,0,0,.25);
+  --sh2:0 16px 40px rgba(0,0,0,.5),0 4px 12px rgba(0,0,0,.3);
+  --sh3:0 28px 64px rgba(0,0,0,.55),0 8px 20px rgba(0,0,0,.35);
+}
+
+/* ---- BASE ---- */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+::selection{background:var(--teal);color:#fff}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,48px);position:relative;z-index:2}
+.section{padding-block:clamp(72px,9vw,128px);position:relative}
+.center{text-align:center}
+.skip-link{position:absolute;left:16px;top:-80px;background:var(--ocean);color:var(--aqua);padding:11px 20px;font-weight:700;font-size:14px;border-radius:var(--rb);z-index:500;transition:top .2s}
+.skip-link:focus{top:14px}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+
+/* ---- WATER SHIMMER ANIMATION (signature) ---- */
+@keyframes waterShimmer{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+@keyframes ripple{
+  0%{transform:scale(0);opacity:.5}
+  100%{transform:scale(2.5);opacity:0}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+@keyframes waveX{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ---- TYPOGRAPHY ---- */
+.label{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:10px}
+.label::before{content:"";width:22px;height:1.5px;background:var(--accent);display:inline-block}
+.label.gold{color:var(--gold-acc)}.label.gold::before{background:var(--gold-acc)}
+.label.lt{color:var(--aqua-d)}.label.lt::before{background:var(--aqua-d)}
+.label.muted{color:var(--faint)}.label.muted::before{background:var(--faint)}
+.h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.8rem,6.5vw,5.4rem);line-height:1.04;letter-spacing:-.02em;color:var(--text)}
+.h1 em,.h2 em,.h3 em{font-style:italic;color:var(--teal);font-weight:600}
+.h1.on-dark em{color:var(--gold-t)}
+.h2{font-family:var(--fd);font-weight:700;font-size:clamp(2rem,4.5vw,4rem);line-height:1.06;letter-spacing:-.018em;color:var(--text)}
+.h3{font-family:var(--fd);font-weight:600;font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.12;letter-spacing:-.014em;color:var(--text)}
+.h4{font-family:var(--fd);font-weight:600;font-size:clamp(1.1rem,1.8vw,1.5rem);line-height:1.18;color:var(--text)}
+.body-lg{font-size:clamp(1rem,1.4vw,1.16rem);line-height:1.68;color:var(--muted)}
+
+/* ---- GRIDS ---- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,28px)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,20px)}
+
+/* ---- SURFACE PRIMITIVES ---- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);box-shadow:var(--sh1);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--sh3)}
+.glass-ocean{background:rgba(15,61,94,.72);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);border:1px solid rgba(221,251,255,.14)}
+.glass-white{background:rgba(250,254,255,.78);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid rgba(221,251,255,.6)}
+
+/* ---- BUTTONS ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fb);font-weight:700;font-size:14.5px;letter-spacing:.01em;padding:14px 26px;border-radius:var(--rb);transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s,background .2s,color .2s;white-space:nowrap;line-height:1;cursor:pointer;border:none}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-lg{padding:17px 32px;font-size:15.5px}
+.btn-sm{padding:10px 18px;font-size:13.5px}
+.btn-full{width:100%}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 6px 20px -6px rgba(22,182,201,.65)}
+.btn-teal:hover{background:var(--teal-d);transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(22,182,201,.6)}
+.btn-gold{background:var(--gold);color:var(--ocean-d);box-shadow:0 6px 20px -6px rgba(244,184,96,.6)}
+.btn-gold:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(244,184,96,.55)}
+.btn-ocean{background:var(--ocean);color:var(--aqua);box-shadow:var(--sh1)}
+[data-theme=dark] .btn-ocean{background:var(--aqua);color:var(--ocean-d)}
+.btn-ocean:hover{background:var(--ocean-d);transform:translateY(-2px);box-shadow:var(--sh3)}
+.btn-outline{background:transparent;border:1.5px solid var(--line-2);color:var(--text)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn-ghost{background:rgba(221,251,255,.14);color:var(--aqua);border:1.5px solid rgba(221,251,255,.35);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(221,251,255,.22);border-color:rgba(221,251,255,.6)}
+
+/* ---- FORM ---- */
+.f-label{display:block;font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;font-weight:500}
+.f-input{width:100%;background:var(--bg-2);border:1.5px solid var(--line-2);border-radius:var(--rb);padding:13px 16px;font-size:15px;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.f-input::placeholder{color:var(--faint)}
+.f-input:focus{outline:none;border-color:var(--teal);box-shadow:var(--teal-glow)}
+select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A9BAD' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:44px}
+
+/* ---- TICKER ---- */
+.ticker{background:var(--ocean);overflow:hidden;position:relative;z-index:4;border-bottom:1px solid rgba(221,251,255,.08)}
+.ticker-inner{display:flex;white-space:nowrap;animation:tick 44s linear infinite}
+.ticker:hover .ticker-inner{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:11px;padding:10px 32px;font-family:var(--fm);font-size:11.5px;letter-spacing:.08em;color:rgba(221,251,255,.75)}
+.ticker-item strong{color:var(--gold-t)}
+.ticker-sep{color:var(--teal-t);margin:0 4px;font-size:16px}
+
+/* ---- NAVBAR ---- */
+.navbar{position:sticky;top:0;z-index:120;transition:background .35s,backdrop-filter .35s,box-shadow .35s,border-color .35s;border-bottom:1px solid transparent;background:var(--ocean)}
+.navbar.scrolled{background:rgba(10,45,70,.88);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border-bottom-color:rgba(221,251,255,.1);box-shadow:0 4px 30px rgba(0,0,0,.2)}
+[data-theme=dark] .navbar.scrolled{background:rgba(5,15,22,.92)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:14px;height:70px}
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-icon{width:36px;height:36px;border-radius:8px;background:rgba(22,182,201,.22);border:1.5px solid rgba(22,182,201,.4);display:grid;place-items:center;flex-shrink:0}
+.logo-icon svg{width:22px;height:22px}
+.logo-name{font-family:var(--fd);font-weight:700;font-size:20px;letter-spacing:-.01em;color:#DDFBFF;line-height:1}
+.logo-name b{color:var(--gold-t)}
+.nav-links{display:flex;align-items:center;gap:1px}
+.nav-link{font-size:13.5px;font-weight:600;color:rgba(221,251,255,.7);padding:8px 13px;border-radius:6px;transition:color .2s,background .2s}
+.nav-link:hover{color:#DDFBFF;background:rgba(221,251,255,.08)}
+.nav-link.active{color:var(--gold-t)}
+.nav-acts{display:flex;align-items:center;gap:9px}
+.theme-btn{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;background:rgba(221,251,255,.1);color:#DDFBFF;border:1px solid rgba(221,251,255,.18);transition:background .2s}
+.theme-btn:hover{background:rgba(221,251,255,.18)}
+.hamburger{display:none;width:38px;height:38px;border-radius:8px;place-items:center;background:rgba(221,251,255,.1);color:#DDFBFF;border:1px solid rgba(221,251,255,.18)}
+
+/* ---- DRAWER ---- */
+.drawer{position:fixed;inset:0 0 0 auto;width:min(340px,88vw);background:var(--ocean-d);z-index:200;transform:translateX(110%);transition:transform .38s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;padding:26px;overflow-y:auto;border-left:1px solid rgba(221,251,255,.1)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid rgba(221,251,255,.08)}
+.drawer-link{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(221,251,255,.06);font-family:var(--fd);font-size:21px;font-weight:600;color:#DDFBFF;letter-spacing:-.01em;transition:color .2s}
+.drawer-link:hover{color:var(--gold-t)}
+.drawer-ov{position:fixed;inset:0;background:rgba(5,20,35,.65);z-index:190;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(2px)}
+.drawer-ov.open{opacity:1;pointer-events:auto}
+
+/* ---- BOTTOM NAV ---- */
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:100;background:rgba(10,45,70,.94);backdrop-filter:blur(14px);border-top:1px solid rgba(221,251,255,.1);display:none;justify-content:space-around;align-items:stretch;transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:rgba(221,251,255,.5);padding:10px 8px 12px;flex:1;font-family:var(--fm);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;border:none;background:none;cursor:pointer}
+.bn-item svg{width:20px;height:20px;transition:transform .18s}
+.bn-item.active{color:var(--gold-t)}.bn-item.active svg{transform:scale(1.12)}
+
+/* ---- FAB ---- */
+.fab-wrap{position:fixed;right:20px;bottom:26px;z-index:90;display:flex;flex-direction:column;align-items:center;gap:10px}
+.fab-main{width:54px;height:54px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(22,182,201,.55);transition:transform .22s,background .2s}
+.fab-main:hover{transform:scale(1.08)}.fab-main.open{background:var(--ocean)}
+[data-theme=dark] .fab-main.open{background:var(--aqua);color:var(--ocean-d)}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:10px;max-height:0;overflow:hidden;opacity:0;transition:max-height .38s cubic-bezier(.16,1,.3,1),opacity .28s}
+.fab-opts.open{max-height:320px;opacity:1}
+.fab-opt{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--sh2);transition:transform .18s;position:relative;flex-shrink:0}
+.fab-opt:hover{transform:scale(1.1)}
+.fab-opt.call{background:#0A3D2E;color:#DDFBFF}.fab-opt.wa{background:#25D366;color:#fff}
+.fab-opt.bk{background:var(--ocean);color:var(--aqua)}.fab-opt.ai-opt{background:var(--teal);color:#fff}
+.fab-opt.top{background:var(--surface);border:1px solid var(--line);color:var(--text);display:none}
+.fab-tip{position:absolute;right:54px;top:50%;transform:translateY(-50%) translateX(6px);background:var(--ocean-d);color:var(--aqua);font-family:var(--fm);font-size:10.5px;padding:6px 11px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s,transform .18s;letter-spacing:.04em}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ---- AI PANEL ---- */
+.ai-panel{position:fixed;right:20px;bottom:90px;z-index:95;width:min(360px,calc(100vw - 40px));background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh4);overflow:hidden;transform:translateY(16px) scale(.97);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .28s}
+.ai-panel.open{transform:none;opacity:1;pointer-events:auto}
+.ai-head{display:flex;align-items:center;gap:10px;padding:14px 17px;background:linear-gradient(135deg,var(--ocean),var(--ocean-l));color:var(--aqua)}
+.ai-av{width:36px;height:36px;border-radius:8px;background:rgba(22,182,201,.28);border:1px solid rgba(22,182,201,.4);display:grid;place-items:center;flex-shrink:0}
+.ai-body{padding:14px 17px;max-height:270px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ai-msg{font-size:13px;line-height:1.55;padding:10px 13px;border-radius:12px;max-width:88%}
+.ai-msg.bot{background:var(--bg-2);border:1px solid var(--line);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.ai-msg.me{background:var(--teal);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 17px 12px}
+.ai-chip{font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:999px;background:var(--bg-2);border:1px solid var(--line);color:var(--muted);transition:border-color .18s,color .18s;cursor:pointer;font-family:var(--fm);letter-spacing:.03em}
+.ai-chip:hover{border-color:var(--teal);color:var(--teal)}
+.ai-foot{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+.ai-foot input{flex:1;font-size:13px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:10px 13px;color:var(--text)}
+.ai-foot input:focus{outline:none;border-color:var(--teal);box-shadow:var(--teal-glow)}
+.ai-send{width:40px;height:40px;border-radius:8px;background:var(--teal);color:#fff;display:grid;place-items:center;flex-shrink:0;border:none;cursor:pointer}
+
+/* ---- REVEAL ---- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.scroll-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));z-index:400;width:0;pointer-events:none;transition:width .1s linear}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ticker-inner{animation:none}.water-wave{animation:none}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
+<style>
+/* ============================================================
+   SECTION COMPONENTS
+   ============================================================ */
+
+/* ---- HERO: WATER SHIMMER SIGNATURE ---- */
+.hero{position:relative;min-height:96vh;display:flex;flex-direction:column;overflow:hidden;background:var(--ocean-d)}
+.hero-img{position:absolute;inset:0;z-index:0}
+.hero-img img{width:100%;height:100%;object-fit:cover;opacity:.35}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(175deg,rgba(10,45,70,.94) 0%,rgba(15,61,94,.72) 50%,rgba(10,45,70,.88))}
+/* Water shimmer — the SIGNATURE */
+.water-wave{position:absolute;bottom:0;left:0;width:200%;height:180px;z-index:1;pointer-events:none}
+.water-wave svg{width:100%;height:100%;animation:waveX 12s linear infinite}
+.water-wave.w2 svg{animation-duration:18s;animation-direction:reverse;opacity:.5}
+.hero-in{position:relative;z-index:2;flex:1;display:flex;align-items:center;padding:clamp(64px,8vw,100px) 0 clamp(80px,10vw,120px)}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero-h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.8rem,6vw,5.2rem);line-height:1.02;letter-spacing:-.022em;color:#DDFBFF}
+.hero-h1 em{font-style:italic;color:var(--gold-t);display:block;font-weight:600}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.14rem);color:rgba(221,251,255,.72);line-height:1.65;margin-top:20px;max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-trust{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;padding-top:28px;border-top:1px solid rgba(221,251,255,.12)}
+.ht{padding:12px clamp(6px,1.2vw,12px) 12px 0;border-right:1px solid rgba(221,251,255,.1)}
+.ht:last-child{border-right:none;padding-right:0}
+.ht-ic{color:var(--teal-t);margin-bottom:6px}
+.ht-ic svg{width:22px;height:22px}
+.ht-n{font-family:var(--fd);font-weight:700;font-size:clamp(1.2rem,2vw,1.6rem);line-height:1;color:#DDFBFF}
+.ht-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(221,251,255,.5);margin-top:3px}
+
+/* Hero right — floating pool card */
+.hero-pool-card{border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45);position:relative}
+.hero-pool-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hpc-overlay{position:absolute;bottom:0;left:0;right:0;padding:22px;background:linear-gradient(transparent,rgba(10,45,70,.88))}
+.hpc-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(22,182,201,.28);border:1px solid rgba(22,182,201,.45);border-radius:999px;padding:7px 14px;font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--aqua-d);margin-bottom:10px}
+.hpc-badge span{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:float 2s ease-in-out infinite}
+.hpc-text{font-family:var(--fd);font-size:19px;font-weight:600;color:#DDFBFF;line-height:1.2}
+
+/* ---- POOL HEALTH ANALYZER ---- */
+.analyzer{background:linear-gradient(150deg,var(--ocean),var(--ocean-l));border-radius:24px;overflow:hidden;box-shadow:var(--sh4);position:relative}
+.analyzer::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 30%,rgba(22,182,201,.14),transparent 70%);pointer-events:none}
+.ana-grid{display:grid;grid-template-columns:1.1fr 1fr;position:relative;z-index:1}
+.ana-form{padding:clamp(28px,4vw,50px);color:var(--aqua)}
+.ana-out{padding:clamp(28px,4vw,50px);border-left:1px solid rgba(221,251,255,.1);display:flex;flex-direction:column;gap:18px}
+.ana-h{font-family:var(--fd);font-weight:700;font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1.06;color:#DDFBFF;letter-spacing:-.018em}
+.ana-sub{font-size:14.5px;color:rgba(221,251,255,.65);line-height:1.6;margin-top:10px}
+/* score gauge */
+.score-ring{position:relative;width:140px;height:140px;flex-shrink:0}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring .sr-bg{fill:none;stroke:rgba(221,251,255,.1);stroke-width:10}
+.score-ring .sr-fill{fill:none;stroke:var(--teal);stroke-width:10;stroke-linecap:round;stroke-dasharray:339;stroke-dashoffset:339;transition:stroke-dashoffset .8s cubic-bezier(.16,1,.3,1),stroke .4s}
+.score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.score-n{font-family:var(--fd);font-weight:700;font-size:32px;line-height:1;color:#DDFBFF}
+.score-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(221,251,255,.5);margin-top:3px}
+.ana-echip{font-family:var(--fm);font-size:11.5px;font-weight:500;padding:9px 13px;border:1.5px solid rgba(221,251,255,.18);color:rgba(221,251,255,.72);cursor:pointer;background:rgba(221,251,255,.06);border-radius:var(--rb);transition:all .18s;letter-spacing:.03em}
+.ana-echip:hover{border-color:var(--teal);color:#DDFBFF}
+.ana-echip.on{border-color:var(--teal);background:rgba(22,182,201,.2);color:#DDFBFF}
+.ana-chip-group{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.ana-rec{background:rgba(221,251,255,.07);border-radius:var(--rb);padding:14px 16px;position:relative}
+.ana-rec .ar-l{font-family:var(--fm);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:rgba(221,251,255,.45)}
+.ana-rec .ar-v{font-family:var(--fd);font-size:16px;font-weight:600;color:#DDFBFF;margin-top:5px;letter-spacing:-.005em}
+.ana-score-row{display:flex;align-items:center;gap:20px}
+
+/* ---- POOL TYPE CARDS ---- */
+.pool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.pool-card{border-radius:20px;overflow:hidden;position:relative;box-shadow:var(--sh2);cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.pool-card:hover{transform:translateY(-6px);box-shadow:var(--sh4)}
+.pool-card:hover .pc-img{transform:scale(1.06)}
+.pc-img-wrap{aspect-ratio:3/2;overflow:hidden;position:relative}
+.pc-img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+/* water shimmer hover overlay */
+.pc-shimmer{position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(22,182,201,.18) 55%,transparent 70%);background-size:200% 200%;opacity:0;transition:opacity .4s}
+.pool-card:hover .pc-shimmer{opacity:1;animation:waterShimmer 2s ease infinite}
+.pc-overlay{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,45,70,.88))}
+.pc-body{position:absolute;bottom:0;left:0;right:0;padding:20px}
+.pc-name{font-family:var(--fd);font-weight:600;font-size:clamp(1rem,1.8vw,1.3rem);color:#DDFBFF;letter-spacing:-.01em}
+.pc-tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-t);margin-top:4px}
+.pc-detail{background:var(--surface);padding:16px 20px}
+.pc-detail h4{font-family:var(--fd);font-weight:600;font-size:15px;color:var(--text)}
+.pc-detail p{font-size:13px;color:var(--muted);line-height:1.55;margin-top:5px}
+.pc-freq{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-top:10px}
+.pc-freq svg{width:13px;height:13px}
+
+/* ---- MAINTENANCE PLANS ---- */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);align-items:start}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--sh1);transition:transform .3s,box-shadow .3s;position:relative}
+.plan:hover{transform:translateY(-5px);box-shadow:var(--sh3)}
+.plan.feat{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),var(--sh3)}
+.plan-header{padding:clamp(22px,3vw,30px);position:relative;overflow:hidden}
+.plan-header.basic{background:var(--bg-2)}
+.plan-header.standard{background:linear-gradient(135deg,var(--ocean),var(--ocean-l));color:#DDFBFF}
+.plan-header.premium{background:linear-gradient(135deg,#0A2235,#0F3D5E);color:#DDFBFF}
+.plan-badge{position:absolute;top:16px;right:16px;background:var(--teal);color:#fff;font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+.plan-name{font-family:var(--fd);font-weight:700;font-size:clamp(1.1rem,1.8vw,1.4rem);letter-spacing:-.01em}
+.plan.feat .plan-name,.plan-header.standard .plan-name,.plan-header.premium .plan-name{color:#DDFBFF}
+.plan-price{margin-top:10px;display:flex;align-items:baseline;gap:4px}
+.plan-price .amt{font-family:var(--fd);font-weight:700;font-size:clamp(2rem,3.5vw,2.8rem);line-height:1;color:inherit}
+.plan-price .per{font-family:var(--fm);font-size:12px;color:inherit;opacity:.65;letter-spacing:.05em}
+.plan-header.basic .plan-price .amt{color:var(--ocean)}
+.plan-header.standard .plan-price .amt,.plan-header.premium .plan-price .amt{color:var(--gold-t)}
+.plan-body{padding:clamp(18px,2.5vw,26px)}
+.plan-feats{list-style:none;display:grid;gap:10px}
+.plan-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.plan-feats li svg{width:16px;height:16px;color:var(--teal);flex-shrink:0;margin-top:3px}
+.plan-feats li.na{opacity:.45}
+.plan-feats li.na svg{color:var(--faint)}
+
+/* ---- SERVICE CARDS ---- */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.svc-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(20px,2.8vw,30px);background:var(--surface);transition:background .25s,transform .25s}
+.svc-card:hover{background:var(--bg-2)}
+.svc-ic{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(22,182,201,.12),rgba(15,61,94,.08));border:1px solid var(--line-2);display:grid;place-items:center;color:var(--teal);margin-bottom:14px;transition:background .25s}
+.svc-ic svg{width:24px;height:24px}
+.svc-card:hover .svc-ic{background:linear-gradient(135deg,rgba(22,182,201,.2),rgba(15,61,94,.12))}
+.svc-h{font-family:var(--fd);font-weight:600;font-size:17px;color:var(--text);letter-spacing:-.01em}
+.svc-p{font-size:13.5px;color:var(--muted);line-height:1.58;margin-top:7px}
+.svc-tag{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-top:12px}
+
+/* ---- BEFORE/AFTER ---- */
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,22px)}
+.ba-item{border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh2);border:1px solid var(--line)}
+.ba-compare{position:relative;aspect-ratio:16/10;overflow:hidden;user-select:none;cursor:ew-resize}
+.ba-b,.ba-a{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba-a{clip-path:inset(0 50% 0 0)}
+.ba-line{position:absolute;top:0;bottom:0;left:50%;width:2.5px;background:#fff;z-index:3;transform:translateX(-50%);box-shadow:0 0 12px rgba(22,182,201,.6)}
+.ba-hdl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:#fff;z-index:4;display:grid;place-items:center;box-shadow:var(--sh3);cursor:ew-resize}
+.ba-hdl svg{width:20px;height:20px;color:var(--ocean)}
+.ba-rng{position:absolute;inset:0;opacity:0;cursor:ew-resize;z-index:5;margin:0}
+.ba-cap-row{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:2;pointer-events:none}
+.ba-cap{font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:6px}
+.ba-cap.b{background:rgba(10,45,70,.78);color:rgba(221,251,255,.85)}
+.ba-cap.a{background:rgba(22,182,201,.88);color:#fff}
+.ba-info{padding:16px 20px;background:var(--surface);border-top:1px solid var(--line);display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ba-info h4{font-family:var(--fd);font-weight:600;font-size:16px;color:var(--text)}
+.bi-meta{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.05em;margin-top:2px}
+.ba-tag{font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);color:var(--muted);border-radius:5px}
+
+/* ---- WATER QUALITY DASHBOARD ---- */
+.wq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,20px)}
+.wq-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:clamp(18px,2.5vw,26px);box-shadow:var(--sh0);position:relative;overflow:hidden}
+.wq-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+.wq-card.ok::before{background:var(--teal)}
+.wq-card.warn::before{background:var(--gold)}
+.wq-card.danger::before{background:#F46060}
+.wq-card.neutral::before{background:var(--ocean-l)}
+.wq-label{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.wq-val{font-family:var(--fd);font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;margin-top:8px;color:var(--text)}
+.wq-unit{font-size:.5em;color:var(--muted)}
+.wq-ideal{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.04em;margin-top:6px}
+.wq-status{display:inline-flex;align-items:center;gap:5px;font-family:var(--fm);font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-top:10px;padding:4px 10px;border-radius:999px}
+.wq-status.ok{color:var(--teal);background:rgba(22,182,201,.1)}
+.wq-status.warn{color:var(--gold-d);background:rgba(244,184,96,.1)}
+.wq-status.danger{color:#F46060;background:rgba(244,96,96,.1)}
+.wq-status svg{width:12px;height:12px}
+
+/* ---- PROCESS ---- */
+.proc-row{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+.proc-row::before{content:"";position:absolute;top:38px;left:8%;right:8%;height:1.5px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal));opacity:.3;z-index:0}
+.proc-node{display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(10px,1.5vw,18px) clamp(6px,1vw,12px);position:relative;z-index:1}
+.proc-circle{width:76px;height:76px;border-radius:50%;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;box-shadow:var(--sh1);transition:border-color .3s,transform .3s,background .3s}
+.proc-circle svg{width:24px;height:24px;color:var(--teal);transition:color .3s}
+.proc-node:hover .proc-circle{border-color:var(--teal);transform:scale(1.1);background:rgba(22,182,201,.06)}
+.proc-num-badge{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-family:var(--fm);font-size:10px;font-weight:500;display:grid;place-items:center}
+.proc-label{font-family:var(--fd);font-weight:600;font-size:clamp(.82rem,1.4vw,.96rem);color:var(--text);margin-top:12px;line-height:1.2}
+.proc-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
+
+/* ---- STATS ---- */
+.stats-band{background:linear-gradient(135deg,var(--ocean-d),var(--ocean));color:var(--aqua)}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-left:1px solid rgba(221,251,255,.08)}
+.stat-cell{padding:clamp(28px,4vw,48px) clamp(14px,2vw,22px);border-right:1px solid rgba(221,251,255,.08);text-align:center}
+.stat-n{font-family:var(--fd);font-weight:700;font-size:clamp(2.2rem,4vw,3.6rem);line-height:1;color:var(--gold-t);letter-spacing:-.02em}
+.stat-suf{font-size:.6em;color:var(--teal-t)}
+.stat-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(221,251,255,.48);margin-top:10px}
+
+/* ---- PROJECTS ---- */
+.proj-filter-row{display:flex;flex-wrap:wrap;gap:0;border-radius:var(--rb);overflow:hidden;border:1px solid var(--line);width:fit-content}
+.pfbtn{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:11px 18px;border-right:1px solid var(--line);color:var(--muted);background:var(--surface);cursor:pointer;transition:all .2s;border:none;border-right:1px solid var(--line);white-space:nowrap}
+.pfbtn:last-child{border-right:none}
+.pfbtn.on{background:var(--ocean);color:var(--aqua)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.proj-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);overflow:hidden;box-shadow:var(--sh0);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.proj-card:hover{transform:translateY(-5px);box-shadow:var(--sh3)}
+.proj-card.hide{display:none}
+.proj-card:hover .prj-img{transform:scale(1.05)}
+.prj-img-wrap{aspect-ratio:4/3;overflow:hidden;position:relative}
+.prj-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prj-cat{position:absolute;top:12px;left:12px;font-family:var(--fm);font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;background:rgba(10,45,70,.85);color:var(--aqua-d);border-radius:6px}
+.prj-body{padding:18px 20px}
+.prj-h{font-family:var(--fd);font-weight:600;font-size:17px;color:var(--text);letter-spacing:-.01em}
+.prj-meta{font-family:var(--fm);font-size:10px;color:var(--faint);letter-spacing:.05em;margin-top:3px}
+.prj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+
+/* ---- PARTNERS ---- */
+.partners-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:var(--rc);overflow:hidden}
+.partner{padding:24px 32px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:1;min-width:130px;opacity:.5;transition:opacity .25s}
+.partner:hover{opacity:1}
+.partner-name{font-family:var(--fd);font-weight:700;font-size:16px;letter-spacing:.02em;color:var(--text)}
+.cert-row{display:flex;gap:0;border:1px solid var(--line);border-radius:var(--rb);overflow:hidden}
+.cert{flex:1;display:flex;align-items:center;gap:11px;padding:18px 22px;border-right:1px solid var(--line);background:var(--surface)}
+.cert:last-child{border-right:none}
+.cert-ic{width:38px;height:38px;border-radius:8px;background:rgba(22,182,201,.1);border:1px solid rgba(22,182,201,.2);display:grid;place-items:center;color:var(--teal);flex-shrink:0}
+.cert-ic svg{width:19px;height:19px}
+.cert-text{font-family:var(--fd);font-weight:600;font-size:14px;color:var(--text)}
+
+/* ---- REVIEWS ---- */
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.rv-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:clamp(20px,2.8vw,28px);box-shadow:var(--sh0);transition:transform .28s,box-shadow .28s}
+.rv-card:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
+.rv-stars{display:flex;gap:2px;color:var(--gold);font-size:15px;margin-bottom:12px}
+.rv-text{font-size:14.5px;line-height:1.65;color:var(--muted);font-style:italic}
+.rv-text::before{content:"\201C";font-family:var(--fd);font-size:36px;color:var(--teal);line-height:1;display:block;margin-bottom:4px;opacity:.7}
+.rv-author{display:flex;gap:11px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.rv-av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--ocean),var(--teal));display:grid;place-items:center;font-family:var(--fd);font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.rv-name{font-family:var(--fd);font-weight:600;font-size:14px;color:var(--text);letter-spacing:-.005em}
+.rv-role{font-family:var(--fm);font-size:9.5px;color:var(--faint);letter-spacing:.05em;margin-top:2px}
+
+/* ---- EMERGENCY ---- */
+.emergency{background:linear-gradient(135deg,#0A1E2C,#0F2E47);border-radius:24px;padding:clamp(32px,5vw,60px);position:relative;overflow:hidden}
+.emergency::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 75% 50%,rgba(244,184,96,.08),transparent 70%);pointer-events:none}
+.emg-grid{display:grid;grid-template-columns:1fr auto;gap:clamp(24px,4vw,48px);align-items:center;position:relative;z-index:1}
+.emg-services{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+.emg-svc{display:flex;gap:11px;align-items:flex-start;background:rgba(221,251,255,.05);border:1px solid rgba(221,251,255,.1);border-radius:12px;padding:14px 16px}
+.emg-svc svg{width:20px;height:20px;color:var(--teal-t);flex-shrink:0;margin-top:2px}
+.emg-svc-h{font-family:var(--fd);font-weight:600;font-size:14.5px;color:#DDFBFF;letter-spacing:-.01em}
+.emg-svc-s{font-family:var(--fm);font-size:10px;color:rgba(221,251,255,.5);letter-spacing:.05em;margin-top:2px}
+.emg-hotline{background:rgba(22,182,201,.12);border:1px solid rgba(22,182,201,.3);border-radius:20px;padding:clamp(24px,3.5vw,36px);text-align:center;flex-shrink:0;min-width:240px}
+.emg-ph-label{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-t);margin-bottom:8px}
+.emg-ph{font-family:var(--fd);font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);color:#DDFBFF;letter-spacing:-.01em}
+.emg-avail{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(221,251,255,.5);margin-top:6px}
+.emg-avail span{color:var(--teal-t)}
+
+/* ---- FAQ ---- */
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;padding:20px clamp(14px,2.5vw,28px);cursor:pointer;list-style:none;font-family:var(--fd);font-size:clamp(.95rem,1.8vw,1.2rem);font-weight:600;color:var(--text);transition:color .2s;gap:14px;letter-spacing:-.01em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--teal)}
+.faq-ic{width:28px;height:28px;border:1.5px solid var(--line-2);border-radius:8px;display:grid;place-items:center;flex-shrink:0;color:var(--muted);transition:transform .28s,border-color .2s,color .2s}
+.faq-item[open] summary .faq-ic{transform:rotate(45deg);border-color:var(--teal);color:var(--teal)}
+.faq-body{padding:0 clamp(14px,2.5vw,28px) 20px;color:var(--muted);font-size:15.5px;line-height:1.66;max-width:72ch}
+
+/* ---- CTA BAND ---- */
+.cta-band{background:linear-gradient(135deg,var(--ocean-d),var(--ocean));color:var(--aqua);position:relative;overflow:hidden}
+.cta-band::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20'%3E%3Cpath d='M0 10q25-10 50 0t50 0' fill='none' stroke='rgba(221,251,255,.06)' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x bottom;pointer-events:none}
+.cta-h{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,6.5vw,5.4rem);line-height:1.02;letter-spacing:-.022em;color:#DDFBFF}
+.cta-h em{font-style:italic;color:var(--gold-t);display:block;font-size:.75em;font-weight:600}
+
+/* ---- CONTACT ---- */
+.contact-shell{display:grid;grid-template-columns:1fr 1.2fr;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh3)}
+.contact-info{background:linear-gradient(150deg,var(--ocean-d),var(--ocean));color:var(--aqua);padding:clamp(28px,4vw,52px)}
+.ci-item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(221,251,255,.08)}
+.ci-item:last-child{border-bottom:none}
+.ci-ic{width:40px;height:40px;border-radius:10px;background:rgba(22,182,201,.18);border:1px solid rgba(22,182,201,.3);display:grid;place-items:center;color:var(--teal-t);flex-shrink:0}
+.ci-ic svg{width:19px;height:19px}
+.ci-l{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(221,251,255,.45)}
+.ci-v{font-family:var(--fd);font-size:17px;font-weight:600;color:#DDFBFF;margin-top:3px;letter-spacing:-.01em}
+.contact-form-wrap{background:var(--surface);padding:clamp(28px,4vw,52px)}
+
+/* ---- FOOTER ---- */
+footer{background:var(--ocean-d);color:var(--aqua)}
+.foot-top{padding-block:clamp(54px,7vw,90px)}
+.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1.2fr;gap:36px}
+.foot-logo-name{font-family:var(--fd);font-weight:700;font-size:24px;letter-spacing:-.01em;color:#DDFBFF}
+.foot-logo-name b{color:var(--gold-t)}
+.foot-desc{font-size:13.5px;color:rgba(221,251,255,.52);line-height:1.65;margin-top:12px;max-width:270px}
+.foot-nl{display:flex;gap:0;margin-top:18px;border:1px solid rgba(221,251,255,.12);border-radius:var(--rb);overflow:hidden;max-width:290px}
+.foot-nl input{flex:1;background:transparent;border:none;padding:11px 14px;color:#DDFBFF;font-size:13px}
+.foot-nl input::placeholder{color:rgba(221,251,255,.38)}
+.foot-nl input:focus{outline:none}
+.foot-nl button{padding:11px 16px;background:var(--teal);color:#fff;font-family:var(--fb);font-weight:700;font-size:13px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.foot-nl button:hover{background:var(--teal-d)}
+.foot-h{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(221,251,255,.35);margin-bottom:14px;font-weight:500}
+.foot-links{display:grid;gap:10px}
+.foot-link{font-size:13.5px;color:rgba(221,251,255,.6);transition:color .2s;cursor:pointer}
+.foot-link:hover{color:var(--gold-t)}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid rgba(221,251,255,.08);font-family:var(--fm);font-size:11px;color:rgba(221,251,255,.36);letter-spacing:.04em}
+.foot-credit a{color:var(--gold-t);font-weight:500;transition:color .2s}
+.foot-credit a:hover{text-decoration:underline}
+
+/* ---- SPA PAGES ---- */
+.spa-page{display:none}.spa-page.active{display:block}
+.page-hero{background:linear-gradient(150deg,var(--ocean-d),var(--ocean));color:var(--aqua);padding-block:clamp(60px,8vw,110px);position:relative;overflow:hidden}
+.page-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 80% 50%,rgba(22,182,201,.1),transparent 70%);pointer-events:none}
+.breadcrumb{display:flex;gap:8px;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(221,251,255,.42);margin-bottom:18px;position:relative;z-index:2}
+.breadcrumb a:hover{color:var(--gold-t)}
+.ph-h{font-family:var(--fd);font-weight:700;font-size:clamp(2.2rem,5.5vw,5rem);line-height:.98;letter-spacing:-.022em;color:#DDFBFF;position:relative;z-index:2}
+.ph-h em{font-style:italic;color:var(--gold-t);font-weight:600}
+.ph-sub{font-size:16.5px;color:rgba(221,251,255,.62);line-height:1.65;margin-top:16px;max-width:58ch;position:relative;z-index:2}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1080px){
+  .hero-grid,.contact-shell{grid-template-columns:1fr}
+  .hero-h1{font-size:clamp(2.6rem,8.5vw,4.2rem)}
+  .hero-pool-card{max-width:480px;margin:0 auto}
+  .ana-grid,.energy-shell,.fin-shell{grid-template-columns:1fr}
+  .ana-out{border-left:none;border-top:1px solid rgba(221,251,255,.1)}
+  .pool-grid,.plans-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  .proc-row{grid-template-columns:repeat(3,1fr)}.proc-row::before{display:none}
+  .proj-grid,.rv-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:repeat(2,1fr)}
+  .wq-grid{grid-template-columns:repeat(2,1fr)}
+  .emg-grid{grid-template-columns:1fr}
+  .emg-hotline{width:100%;max-width:100%}
+  .contact-form-wrap{border-top:1px solid var(--line)}
+}
+@media(max-width:860px){
+  .nav-links{display:none}.hamburger{display:grid}
+  .bottom-nav{display:flex}.fab-wrap{bottom:78px}
+  body{padding-bottom:60px}
+  .hero-trust{grid-template-columns:repeat(2,1fr)}
+  .ht{border-bottom:1px solid rgba(221,251,255,.1)}
+  .ba-grid,.g2{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .pool-grid,.plans-grid,.svc-grid,.stats-grid,.proc-row,.proj-grid,.rv-grid,.g3,.g4,.wq-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-trust{grid-template-columns:1fr 1fr}
+  .emg-services{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="scroll-bar" id="scroll-bar"></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true"><div class="ticker-inner">
+  <span class="ticker-item"><strong>First Pool Inspection Free</strong> for new customers</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">Weekly maintenance plans from <strong>$89/month</strong></span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>24/7 Emergency Service</strong> — rapid response guaranteed</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>1,200+ pools</strong> maintained year-round across the region</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>First Pool Inspection Free</strong> for new customers</span><span class="ticker-sep">·</span>
+  <span class="ticker-item">Weekly maintenance plans from <strong>$89/month</strong></span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>24/7 Emergency Service</strong> — rapid response guaranteed</span><span class="ticker-sep">·</span>
+  <span class="ticker-item"><strong>1,200+ pools</strong> maintained year-round across the region</span><span class="ticker-sep">·</span>
+</div></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar"><div class="container"><div class="nav-in">
+  <a href="#home" class="logo" data-page="home" aria-label="AquaVerde home">
+    <span class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#16B6C9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg></span>
+    <span class="logo-name">Aqua<b>Verde</b></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#services" class="nav-link" data-page="services">Services</a>
+    <a href="#plans" class="nav-link" data-page="plans">Maintenance Plans</a>
+    <a href="#repairs" class="nav-link" data-page="home" data-scroll="emergency-sec">Repairs</a>
+    <a href="#pool-types" class="nav-link" data-page="home" data-scroll="pool-types-sec">Pool Types</a>
+    <a href="#reviews" class="nav-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+  </nav>
+  <div class="nav-acts">
+    <a href="tel:+15125550210" class="btn btn-ghost btn-sm">Emergency Repair</a>
+    <a href="#contact" class="btn btn-gold btn-sm" data-page="contact">Book Service</a>
+    <button class="theme-btn" id="theme-btn" aria-label="Toggle theme"></button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+  </div>
+</div></div></header>
+
+<!-- DRAWER -->
+<div class="drawer-ov" id="drawer-ov"></div>
+<aside class="drawer" id="drawer" aria-label="Navigation menu">
+  <div class="drawer-hd"><span class="logo-name" style="color:#DDFBFF">Aqua<b style="color:var(--gold-t)">Verde</b></span><button style="color:#DDFBFF;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:rgba(221,251,255,.1);border:1px solid rgba(221,251,255,.15)" id="drawer-close" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <nav>
+    <a href="#home" class="drawer-link" data-page="home">Home</a>
+    <a href="#services" class="drawer-link" data-page="services">Services</a>
+    <a href="#plans" class="drawer-link" data-page="plans">Maintenance Plans</a>
+    <a href="#reviews" class="drawer-link" data-page="reviews">Reviews</a>
+    <a href="#contact" class="drawer-link" data-page="contact">Contact</a>
+  </nav>
+  <div style="display:grid;gap:10px;margin-top:26px">
+    <a href="tel:+15125550210" class="btn btn-ghost btn-lg btn-full">Emergency: (512) 555-0210</a>
+    <a href="#contact" class="btn btn-gold btn-lg btn-full" data-page="contact">Book Service</a>
+  </div>
+  <div style="margin-top:auto;padding-top:24px;font-family:var(--fm);font-size:10.5px;color:rgba(221,251,255,.35);line-height:1.9;letter-spacing:.05em">Mon–Sat 7am–7pm · Emergency 24/7<br/>(512) 555-0210 · hello@aquaverde.co</div>
+</aside>
+
+<main id="main">
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- HERO WITH WATER WAVE SIGNATURE -->
+<section class="hero" id="hero-sec">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1280&q=70" alt="Luxury resort pool" loading="lazy" decoding="async"></div>
+  <!-- water wave SVG layers -->
+  <div class="water-wave" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 60q90-30 180 0t180 0 180 0 180 0 180 0 180 0 180 0 180 0" fill="none" stroke="rgba(22,182,201,.22)" stroke-width="2"/><path d="M0 80q90-20 180 0t180 0 180 0 180 0 180 0 180 0 180 0 180 0" fill="none" stroke="rgba(22,182,201,.14)" stroke-width="1.5"/><path d="M0 40q90-22 180 0t180 0 180 0 180 0 180 0 180 0 180 0 180 0" fill="none" stroke="rgba(221,251,255,.1)" stroke-width="1"/></svg></div>
+  <div class="water-wave w2" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 70q90 25 180 0t180 0 180 0 180 0 180 0 180 0 180 0 180 0" fill="none" stroke="rgba(244,184,96,.12)" stroke-width="1.5"/></svg></div>
+  <div class="hero-in"><div class="container"><div class="hero-grid">
+    <div>
+      <div style="margin-bottom:20px"><span class="label lt">Resort-quality pool care</span></div>
+      <h1 class="hero-h1 reveal">Crystal clear pools.<br/><em>Without the hassle.</em></h1>
+      <p class="hero-sub reveal" data-d="80">Professional cleaning, chemical balancing, repairs, and water care — so you enjoy your pool instead of maintaining it.</p>
+      <div class="hero-cta reveal" data-d="150">
+        <a href="#contact" class="btn btn-gold btn-lg" data-page="contact">Schedule Service <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#plans" class="btn btn-ghost btn-lg" data-page="plans">View Plans</a>
+      </div>
+      <div class="hero-trust reveal" data-d="220">
+        <div class="ht"><div class="ht-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 11 2 2 4-4"/></svg></div><div class="ht-n">Certified</div><div class="ht-l">Technicians</div></div>
+        <div class="ht"><div class="ht-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="ht-n">24/7</div><div class="ht-l">Emergency</div></div>
+        <div class="ht"><div class="ht-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg></div><div class="ht-n">1,200+</div><div class="ht-l">Pools served</div></div>
+        <div class="ht"><div class="ht-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="ht-n">98%</div><div class="ht-l">Satisfaction</div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="200">
+      <div class="hero-pool-card">
+        <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=800&q=70" alt="Crystal clear pool maintained by AquaVerde" loading="lazy" decoding="async">
+        <div class="hpc-overlay"><div class="hpc-badge"><span></span>Live monitoring active</div><div class="hpc-text">pH 7.4 · Chlorine 3.0 ppm<br/>Water: <span style="color:var(--teal-t)">Excellent</span></div></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- POOL HEALTH ANALYZER -->
+<section class="section" style="background:var(--bg-2)"><div class="container">
+  <div class="center reveal" style="max-width:600px;margin-inline:auto;margin-bottom:clamp(28px,4vw,46px)">
+    <span class="label">Pool health analyzer</span>
+    <h2 class="h2" style="margin-top:14px">Find out how your<br/>pool is <em>really</em> doing.</h2>
+    <p class="body-lg" style="margin-top:14px">Answer four quick questions and get a water health score, recommended services, and the right maintenance plan for your pool.</p>
+  </div>
+  <div class="analyzer reveal" data-d="80">
+    <div class="ana-grid">
+      <div class="ana-form" id="analyzer-form">
+        <h3 class="ana-h">Pool health check</h3>
+        <p class="ana-sub">Takes under a minute. No login required.</p>
+        <div style="margin-top:24px;display:grid;gap:18px">
+          <div><div class="f-label" style="color:rgba(221,251,255,.48)">Pool type</div><div class="ana-chip-group" data-ag="type"><button class="ana-echip on" data-v="residential" data-s="8">Residential</button><button class="ana-echip" data-v="saltwater" data-s="6">Saltwater</button><button class="ana-echip" data-v="infinity" data-s="7">Infinity</button><button class="ana-echip" data-v="commercial" data-s="5">Commercial</button></div></div>
+          <div><div class="f-label" style="color:rgba(221,251,255,.48)">Pool size</div><div class="ana-chip-group" data-ag="size"><button class="ana-echip on" data-v="small" data-s="2">Under 500 sqft</button><button class="ana-echip" data-v="med" data-s="4">500–1,000 sqft</button><button class="ana-echip" data-v="large" data-s="6">Over 1,000 sqft</button></div></div>
+          <div><div class="f-label" style="color:rgba(221,251,255,.48)">Current water condition</div><div class="ana-chip-group" data-ag="condition"><button class="ana-echip on" data-v="clear" data-pen="0">Clear &amp; clean</button><button class="ana-echip" data-v="cloudy" data-pen="15">Slightly cloudy</button><button class="ana-echip" data-v="green" data-pen="40">Green or murky</button></div></div>
+          <div><div class="f-label" style="color:rgba(221,251,255,.48)">Last professional service</div><div class="ana-chip-group" data-ag="last"><button class="ana-echip on" data-v="recent" data-pen="0">Under 2 weeks</button><button class="ana-echip" data-v="month" data-pen="10">1–3 months ago</button><button class="ana-echip" data-v="old" data-pen="25">Over 3 months</button></div></div>
+        </div>
+      </div>
+      <div class="ana-out" id="analyzer-out">
+        <div class="label lt">Your pool score</div>
+        <div class="ana-score-row" style="margin-top:10px">
+          <div class="score-ring"><svg viewBox="0 0 120 120"><circle class="sr-bg" cx="60" cy="60" r="54"/><circle class="sr-fill" id="score-arc" cx="60" cy="60" r="54"/></svg><div class="score-num"><div class="score-n" id="score-num">85</div><div class="score-l">/ 100</div></div></div>
+          <div><div style="font-family:var(--fd);font-size:22px;font-weight:700;color:#DDFBFF;letter-spacing:-.01em" id="score-label">Good condition</div><div style="font-family:var(--fm);font-size:11px;color:rgba(221,251,255,.55);margin-top:6px;line-height:1.5" id="score-note">Your pool is in good shape. A routine maintenance visit will keep it optimal.</div></div>
+        </div>
+        <div class="ana-rec"><div class="ar-l">Recommended plan</div><div class="ar-v" id="ana-plan">Standard Maintenance</div></div>
+        <div class="ana-rec"><div class="ar-l">Priority services</div><div class="ar-v" id="ana-services">Chemical balancing, filter check</div></div>
+        <div class="ana-rec"><div class="ar-l">Service frequency</div><div class="ar-v" id="ana-freq">Weekly visits recommended</div></div>
+        <form id="ana-form" style="display:grid;gap:9px;margin-top:4px"><div class="f-label" style="color:rgba(221,251,255,.45)">Email my full report</div><div style="display:flex;gap:8px"><input style="flex:1;background:rgba(221,251,255,.08);border:1.5px solid rgba(221,251,255,.18);border-radius:var(--rb);padding:12px 14px;color:#DDFBFF;font-size:13px;font-family:var(--fb)" type="email" id="ana-email" placeholder="your@email.com" aria-label="Email"/><button class="btn btn-gold btn-sm" type="submit">Send</button></div></form>
+        <div id="ana-sent" style="display:none;font-family:var(--fm);font-size:11.5px;color:var(--teal-t);letter-spacing:.04em">✓ Full report sent — check your inbox.</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- POOL TYPES -->
+<section class="section" id="pool-types-sec"><div class="container">
+  <div style="margin-bottom:clamp(24px,3.5vw,40px)" class="reveal"><span class="label">Pool types we service</span><h2 class="h2" style="margin-top:14px">Every pool.<br/><em>Every situation.</em></h2><p class="body-lg" style="margin-top:12px;max-width:52ch">From a backyard splash pool to a resort infinity edge, our certified technicians know exactly what each type needs.</p></div>
+  <div class="pool-grid">
+    <div class="reveal pool-card"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=70" alt="Residential pool" loading="lazy" decoding="async"><div class="pc-shimmer"></div><div class="pc-overlay"></div><div class="pc-body"><div class="pc-name">Residential Pools</div><div class="pc-tag">Most common · standard care</div></div></div><div class="pc-detail"><h4>Backyard &amp; home pools</h4><p>The workhorse of pool care. Regular cleaning, balanced chemicals, and seasonal care keep a residential pool swim-ready year-round.</p><span class="pc-freq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Weekly or bi-weekly</span></div></div>
+    <div class="reveal pool-card" data-d="80"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1439127989242-c3749a012eac?auto=format&fit=crop&w=700&q=70" alt="Infinity pool" loading="lazy" decoding="async"><div class="pc-shimmer"></div><div class="pc-overlay"></div><div class="pc-body"><div class="pc-name">Infinity Pools</div><div class="pc-tag">Specialist care required</div></div></div><div class="pc-detail"><h4>Vanishing edge pools</h4><p>Infinity edges need precise water level management, catch-basin cleaning and specialist chemical balancing to maintain the visual effect.</p><span class="pc-freq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Weekly visits essential</span></div></div>
+    <div class="reveal pool-card" data-d="160"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=700&q=70" alt="Saltwater pool" loading="lazy" decoding="async"><div class="pc-shimmer"></div><div class="pc-overlay"></div><div class="pc-body"><div class="pc-name">Saltwater Pools</div><div class="pc-tag">Salt cell specialists</div></div></div><div class="pc-detail"><h4>Salt chlorination systems</h4><p>Salt cells need regular inspection, cell cleaning and calibration. We monitor salinity, pH and cyanuric acid to protect your investment.</p><span class="pc-freq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Bi-weekly service</span></div></div>
+    <div class="reveal pool-card"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1596813362035-cd9dc1c5f00d?auto=format&fit=crop&w=700&q=70" alt="Commercial pool" loading="lazy" decoding="async"><div class="pc-shimmer"></div><div class="pc-overlay"></div><div class="pc-body"><div class="pc-name">Commercial Pools</div><div class="pc-tag">Code compliance · high-use</div></div></div><div class="pc-detail"><h4>Hotels, gyms &amp; facilities</h4><p>Commercial pools demand daily or twice-weekly service, meticulous records and compliance with health department standards.</p><span class="pc-freq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Daily or twice-weekly</span></div></div>
+    <div class="reveal pool-card" data-d="80"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=700&q=70" alt="Hotel pool" loading="lazy" decoding="async"><div class="pc-shimmer"></div><div class="pc-overlay"></div><div class="pc-body"><div class="pc-name">Hotel &amp; Resort Pools</div><div class="pc-tag">Hospitality standards</div></div></div><div class="pc-detail"><h4>Guest-ready every day</h4><p>We align our service schedule with your housekeeping team so every pool is guest-ready before the first swimmer arrives.</p><span class="pc-freq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Daily service available</span></div></div>
+    <div class="reveal pool-card" data-d="160"><div class="pc-img-wrap"><img class="pc-img" src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=700&q=70" alt="Spa and hot tub" loading="lazy" decoding="async"><div class="pc-shimmer"></div><div class="pc-overlay"></div><div class="pc-body"><div class="pc-name">Spa &amp; Hot Tubs</div><div class="pc-tag">High-temp chemistry</div></div></div><div class="pc-detail"><h4>Spas &amp; attached features</h4><p>Hot temperatures accelerate chemical consumption. We test bromine, calcium and alkalinity at every visit to protect your equipment.</p><span class="pc-freq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Weekly minimum</span></div></div>
+  </div>
+</div></section>
+
+<!-- MAINTENANCE PLANS -->
+<section class="section" id="plans-home" style="background:var(--bg-2)"><div class="container">
+  <div class="center reveal" style="max-width:580px;margin-inline:auto;margin-bottom:clamp(28px,4vw,46px)">
+    <span class="label">Subscription plans</span>
+    <h2 class="h2" style="margin-top:14px">Maintenance on<br/><em>autopilot.</em></h2>
+    <p class="body-lg" style="margin-top:14px">Choose the level of care that fits your pool and lifestyle. All plans include certified technicians, water testing and a service report after every visit.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan reveal"><div class="plan-header basic"><div class="plan-name" style="color:var(--ocean)">Basic Clean</div><div style="font-family:var(--fm);font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.05em">Weekly cleaning service</div><div class="plan-price"><span class="amt">$89</span><span class="per">/month</span></div></div><div class="plan-body"><ul class="plan-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 visits per month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Skim, brush &amp; vacuum</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic water testing</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Chemical balancing</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Equipment inspection</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Emergency priority</li></ul><a href="#contact" class="btn btn-outline btn-full" data-page="contact" style="margin-top:20px">Choose Basic</a></div></div>
+    <div class="plan feat reveal" data-d="80"><div class="plan-badge">Most popular</div><div class="plan-header standard"><div class="plan-name">Standard Care</div><div style="font-family:var(--fm);font-size:10.5px;color:rgba(221,251,255,.62);margin-top:4px;letter-spacing:.05em">Cleaning + water balancing</div><div class="plan-price"><span class="amt">$149</span><span class="per">/month</span></div></div><div class="plan-body"><ul class="plan-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 visits per month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full skim, brush &amp; vacuum</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced water testing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Chemical balancing included</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly equipment check</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Emergency priority</li></ul><a href="#contact" class="btn btn-teal btn-full" data-page="contact" style="margin-top:20px">Choose Standard</a></div></div>
+    <div class="plan reveal" data-d="160"><div class="plan-header premium"><div class="plan-name">Premium Resort</div><div style="font-family:var(--fm);font-size:10.5px;color:rgba(221,251,255,.62);margin-top:4px;letter-spacing:.05em">Full-service · white glove</div><div class="plan-price"><span class="amt">$229</span><span class="per">/month</span></div></div><div class="plan-body"><ul class="plan-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Up to 8 visits per month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full clean every visit</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lab-grade water testing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All chemicals included</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly equipment inspection</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>24/7 emergency priority</li></ul><a href="#contact" class="btn btn-gold btn-full" data-page="contact" style="margin-top:20px">Choose Premium</a></div></div>
+  </div>
+</div></section>
+
+<!-- SERVICE CATEGORIES -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(24px,3.5vw,40px)" class="reveal"><span class="label">All services</span><h2 class="h2" style="margin-top:14px">Everything your<br/>pool could need.</h2></div>
+  <div class="svc-grid">
+    <div class="svc-card reveal"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg></div><div class="svc-h">Pool Cleaning</div><p class="svc-p">Skimming, brushing, vacuuming and tile scrubbing — every surface cleaned at every visit.</p><div class="svc-tag">Core service</div></div>
+    <div class="svc-card reveal" data-d="60"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div><div class="svc-h">Chemical Balancing</div><p class="svc-p">pH, chlorine, alkalinity, stabiliser and calcium hardness — kept in the precise safe zone.</p><div class="svc-tag">Health &amp; safety</div></div>
+    <div class="svc-card reveal" data-d="120"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div><div class="svc-h">Equipment Inspection</div><p class="svc-p">Pump, filter, heater, salt cell and automation system checked at every scheduled visit.</p><div class="svc-tag">Preventive care</div></div>
+    <div class="svc-card reveal" data-d="180"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="svc-h">Filter Cleaning</div><p class="svc-p">Sand, cartridge and DE filter cleaning, backwashing and media replacement on schedule.</p><div class="svc-tag">Monthly service</div></div>
+    <div class="svc-card reveal"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6-9 9-6 1 1-6z"/></svg></div><div class="svc-h">Pool Repairs</div><p class="svc-p">Pumps, heaters, automation, plumbing and structural repairs — diagnosed and fixed correctly.</p><div class="svc-tag">Repair service</div></div>
+    <div class="svc-card reveal" data-d="60"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="svc-h">Leak Detection</div><p class="svc-p">Pressure testing, dye tracing and acoustic detection to find pool leaks before they cost you.</p><div class="svc-tag">Specialist service</div></div>
+    <div class="svc-card reveal" data-d="120"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 19.12c-.47.71.9 1.42 1.38.71C9 14.39 12 12.58 13.87 12.5 17.1 12.4 16.5 19 13 19c-2 0-5-2-5-5M3 12l2 2M7 4.5v2.5M12 2v2.5M16.5 4.5v2.5"/></svg></div><div class="svc-h">Green Pool Recovery</div><p class="svc-p">Algae shock treatment, brushing, clarification and water restoration — pool ready in 48–72 hrs.</p><div class="svc-tag">Emergency service</div></div>
+    <div class="svc-card reveal" data-d="180"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h.01M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg></div><div class="svc-h">Seasonal Service</div><p class="svc-p">Opening and closing packages that protect your pool, equipment and investment through every season.</p><div class="svc-tag">Seasonal</div></div>
+  </div>
+</div></section>
+
+<!-- BEFORE & AFTER -->
+<section class="section" style="background:var(--bg-2)"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,40px)" class="reveal"><span class="label">Water transformation</span><h2 class="h2" style="margin-top:14px">We bring every pool<br/>back to <em>life.</em></h2></div>
+  <div class="ba-grid">
+    <div class="ba-item reveal"><div class="ba-compare" id="ba0"><img class="ba-b" src="https://images.unsplash.com/photo-1551951231-9d52e00a0ea0?auto=format&fit=crop&w=900&q=70" alt="Green algae pool before treatment" loading="lazy" decoding="async"><img class="ba-a" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=900&q=70" alt="Crystal clear pool after treatment" loading="lazy" decoding="async"><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after reveal"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Green Pool Recovery</h4><div class="bi-meta">Algae shock treatment · 72 hours</div></div><div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><span class="ba-tag">Algae</span><span class="ba-tag">Emergency</span></div></div></div>
+    <div class="ba-item reveal" data-d="80"><div class="ba-compare" id="ba1"><img class="ba-b" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=70" alt="Tile buildup before cleaning" loading="lazy" decoding="async"><img class="ba-a" src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=900&q=70" alt="Clean tile after service" loading="lazy" decoding="async"><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after reveal"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Tile &amp; Waterline Cleaning</h4><div class="bi-meta">Calcium removal &amp; polish · 1 visit</div></div><div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><span class="ba-tag">Tile</span><span class="ba-tag">Calcium</span></div></div></div>
+    <div class="ba-item reveal"><div class="ba-compare" id="ba2"><img class="ba-b" src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=900&q=70" alt="Cloudy pool water before treatment" loading="lazy" decoding="async"><img class="ba-a" src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=900&q=70" alt="Crystal clear water after treatment" loading="lazy" decoding="async"><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after reveal"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Water Restoration</h4><div class="bi-meta">Full chemical rebalance · 2 visits</div></div><div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><span class="ba-tag">Chemical</span><span class="ba-tag">Clarity</span></div></div></div>
+    <div class="ba-item reveal" data-d="80"><div class="ba-compare" id="ba3"><img class="ba-b" src="https://images.unsplash.com/photo-1596813362035-cd9dc1c5f00d?auto=format&fit=crop&w=900&q=70" alt="Commercial pool before service" loading="lazy" decoding="async"><img class="ba-a" src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=900&q=70" alt="Commercial pool after service" loading="lazy" decoding="async"><div class="ba-line"></div><div class="ba-hdl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 6 15 12 9 18"/></svg></div><input type="range" class="ba-rng" min="0" max="100" value="50" aria-label="Before/after reveal"/><div class="ba-cap-row"><span class="ba-cap b">Before</span><span class="ba-cap a">After</span></div></div><div class="ba-info"><div><h4>Commercial Pool Reset</h4><div class="bi-meta">Full-service overhaul · 4 visits</div></div><div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><span class="ba-tag">Commercial</span><span class="ba-tag">Resort</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- WATER QUALITY DASHBOARD -->
+<section class="section"><div class="container">
+  <div class="g2" style="gap:clamp(28px,5vw,64px);align-items:center;margin-bottom:clamp(30px,4vw,50px)">
+    <div class="reveal"><span class="label">Water quality guide</span><h2 class="h2" style="margin-top:14px">What the numbers<br/>actually <em>mean.</em></h2><p class="body-lg" style="margin-top:14px">Perfect pool water lives in a narrow range of values. Here's what we monitor at every visit and why each one matters.</p></div>
+    <div class="reveal" data-d="80"><div style="background:var(--bg-2);border:1px solid var(--line);border-radius:var(--rc);padding:22px;font-size:14px;color:var(--muted);line-height:1.6"><strong style="color:var(--teal);font-family:var(--fd);font-size:16px">Why this matters</strong><p style="margin-top:8px">A pool just 0.3 pH units outside the ideal range can irritate swimmers' eyes, corrode equipment and reduce chlorine effectiveness by up to 90%. We don't just test — we correct immediately.</p></div></div>
+  </div>
+  <div class="wq-grid reveal" data-d="60">
+    <div class="wq-card ok"><div class="wq-label">pH Level</div><div class="wq-val">7.4<span class="wq-unit"></span></div><div class="wq-ideal">Ideal: 7.2 – 7.6</div><div class="wq-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Balanced</div></div>
+    <div class="wq-card ok"><div class="wq-label">Free Chlorine</div><div class="wq-val">3.0<span class="wq-unit">ppm</span></div><div class="wq-ideal">Ideal: 2 – 4 ppm</div><div class="wq-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Optimal</div></div>
+    <div class="wq-card warn"><div class="wq-label">Total Alkalinity</div><div class="wq-val">65<span class="wq-unit">ppm</span></div><div class="wq-ideal">Ideal: 80 – 120 ppm</div><div class="wq-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Low — add bicarb</div></div>
+    <div class="wq-card ok"><div class="wq-label">Calcium Hardness</div><div class="wq-val">240<span class="wq-unit">ppm</span></div><div class="wq-ideal">Ideal: 200 – 400 ppm</div><div class="wq-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Good</div></div>
+  </div>
+</div></section>
+
+<!-- PROCESS -->
+<section class="section" style="background:var(--bg-2)"><div class="container">
+  <div class="center reveal" style="max-width:580px;margin-inline:auto;margin-bottom:clamp(28px,4vw,46px)">
+    <span class="label">Our care process</span>
+    <h2 class="h2" style="margin-top:14px">Six steps. <em>Every visit.</em></h2>
+    <p class="body-lg" style="margin-top:14px">Our technicians follow the same rigorous sequence every single visit, then send you a digital report with photos.</p>
+  </div>
+  <div class="proc-row reveal" data-d="60">
+    <div class="proc-node"><div class="proc-circle" style="position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="proc-num-badge">1</span></div><div class="proc-label">Inspection</div><p class="proc-desc">Water clarity, equipment status, visible damage</p></div>
+    <div class="proc-node"><div class="proc-circle" style="position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg><span class="proc-num-badge">2</span></div><div class="proc-label">Testing</div><p class="proc-desc">pH, chlorine, alkalinity, calcium, stabiliser</p></div>
+    <div class="proc-node"><div class="proc-circle" style="position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg><span class="proc-num-badge">3</span></div><div class="proc-label">Cleaning</div><p class="proc-desc">Skim, brush walls, vacuum floor, clean tiles</p></div>
+    <div class="proc-node"><div class="proc-circle" style="position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/></svg><span class="proc-num-badge">4</span></div><div class="proc-label">Treatment</div><p class="proc-desc">Chemicals dosed precisely to restore balance</p></div>
+    <div class="proc-node"><div class="proc-circle" style="position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2"/></svg><span class="proc-num-badge">5</span></div><div class="proc-label">Equipment Check</div><p class="proc-desc">Pump, filter, heater, valves and automation</p></div>
+    <div class="proc-node"><div class="proc-circle" style="position:relative"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="proc-num-badge">6</span></div><div class="proc-label">Report</div><p class="proc-desc">Digital service report sent to you with photos</p></div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="stats-band"><div class="container" style="padding-block:0"><div class="stats-grid">
+  <div class="stat-cell reveal"><div class="stat-n"><span data-counter="5000">0</span><span class="stat-suf">+</span></div><div class="stat-l">Service visits</div></div>
+  <div class="stat-cell reveal" data-d="60"><div class="stat-n"><span data-counter="1200">0</span><span class="stat-suf">+</span></div><div class="stat-l">Pools maintained</div></div>
+  <div class="stat-cell reveal" data-d="120"><div class="stat-n"><span data-counter="98">0</span><span class="stat-suf">%</span></div><div class="stat-l">Customer retention</div></div>
+  <div class="stat-cell reveal" data-d="180"><div class="stat-n">24/7</div><div class="stat-l">Emergency support</div></div>
+  <div class="stat-cell reveal" data-d="240"><div class="stat-n"><span data-counter="15">0</span><span class="stat-suf">+</span></div><div class="stat-l">Years experience</div></div>
+</div></div></section>
+
+<!-- FEATURED PROJECTS -->
+<section class="section"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:clamp(20px,3vw,34px)">
+    <div class="reveal"><span class="label">Featured projects</span><h2 class="h2" style="margin-top:14px">Pools we're proud of.</h2></div>
+    <a href="#gallery" class="btn btn-outline reveal" data-page="gallery" data-d="60">View all projects <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="proj-filter-row reveal" data-d="30" id="proj-filter" style="margin-bottom:18px">
+    <button class="pfbtn on" data-pf="all">All</button>
+    <button class="pfbtn" data-pf="residential">Residential</button>
+    <button class="pfbtn" data-pf="luxury">Luxury</button>
+    <button class="pfbtn" data-pf="hotel">Hotel</button>
+    <button class="pfbtn" data-pf="community">Community</button>
+  </div>
+  <div class="proj-grid" id="proj-grid">
+    <div class="proj-card reveal" data-pc="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=70" alt="Riverside residence pool" loading="lazy" decoding="async"><span class="prj-cat">Residential</span></div><div class="prj-body"><div class="prj-h">Riverside Residence</div><div class="prj-meta">Standard plan · 18 months · 96 visits</div><div class="prj-tags"><span class="ba-tag">Weekly</span><span class="ba-tag">Chemical</span></div></div></div>
+    <div class="proj-card reveal" data-d="70" data-pc="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1439127989242-c3749a012eac?auto=format&fit=crop&w=700&q=70" alt="Highland estate infinity pool" loading="lazy" decoding="async"><span class="prj-cat">Luxury Estate</span></div><div class="prj-body"><div class="prj-h">Highland Estate Infinity</div><div class="prj-meta">Premium plan · infinity edge · resort finish</div><div class="prj-tags"><span class="ba-tag">Infinity</span><span class="ba-tag">Premium</span></div></div></div>
+    <div class="proj-card reveal" data-d="140" data-pc="hotel"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=700&q=70" alt="Resort hotel pool" loading="lazy" decoding="async"><span class="prj-cat">Hotel</span></div><div class="prj-body"><div class="prj-h">Coastal Resort Hotel</div><div class="prj-meta">Daily service · 3 pools · 2 spas</div><div class="prj-tags"><span class="ba-tag">Daily</span><span class="ba-tag">Commercial</span></div></div></div>
+    <div class="proj-card reveal" data-pc="community"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1596813362035-cd9dc1c5f00d?auto=format&fit=crop&w=700&q=70" alt="Community pool" loading="lazy" decoding="async"><span class="prj-cat">Community</span></div><div class="prj-body"><div class="prj-h">Mapleton Community Pool</div><div class="prj-meta">Bi-daily service · code compliance</div><div class="prj-tags"><span class="ba-tag">Commercial</span><span class="ba-tag">Compliance</span></div></div></div>
+    <div class="proj-card reveal" data-d="70" data-pc="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=700&q=70" alt="Luxury saltwater pool" loading="lazy" decoding="async"><span class="prj-cat">Luxury</span></div><div class="prj-body"><div class="prj-h">Crestline Saltwater Pool</div><div class="prj-meta">Saltwater · salt cell management</div><div class="prj-tags"><span class="ba-tag">Saltwater</span><span class="ba-tag">Weekly</span></div></div></div>
+    <div class="proj-card reveal" data-d="140" data-pc="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=700&q=70" alt="Spa and hot tub service" loading="lazy" decoding="async"><span class="prj-cat">Spa</span></div><div class="prj-body"><div class="prj-h">Oakwood Pool &amp; Spa</div><div class="prj-meta">Pool + spa package · green recovery</div><div class="prj-tags"><span class="ba-tag">Spa</span><span class="ba-tag">Recovery</span></div></div></div>
+  </div>
+</div></section>
+
+<!-- PARTNERS -->
+<section style="background:var(--bg-2);padding-block:clamp(48px,6vw,80px)"><div class="container">
+  <div class="center reveal" style="margin-bottom:28px"><span class="label muted">Equipment &amp; product partners</span></div>
+  <div class="partners-row reveal" data-d="50"><div class="partner"><span class="partner-name">Pentair</span></div><div class="partner"><span class="partner-name">Hayward</span></div><div class="partner"><span class="partner-name">Jandy</span></div><div class="partner"><span class="partner-name">Zodiac</span></div><div class="partner"><span class="partner-name">Fluidra</span></div></div>
+  <div class="cert-row reveal" data-d="80" style="margin-top:0">
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 11 2 2 4-4"/></svg></span><div class="cert-text">CPO® Certified</div></div>
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/></svg></span><div class="cert-text">Licensed &amp; Insured</div></div>
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><path d="m16 11 2 2 4-4"/></svg></span><div class="cert-text">Background Checked</div></div>
+    <div class="cert"><span class="cert-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><div class="cert-text">PHTA Member</div></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS -->
+<section class="section"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,42px)" class="reveal"><span class="label">Customer stories</span><h2 class="h2" style="margin-top:14px">Pool owners who<br/><em>stopped worrying.</em></h2></div>
+  <div class="rv-grid">
+    <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-text">Our pool used to turn green every August. Two years with AquaVerde and we've had zero algae issues. The weekly reports are a nice touch — I always know the water is perfect.</div><div class="rv-author"><div class="rv-av">MA</div><div><div class="rv-name">Maya Aldridge</div><div class="rv-role">Standard plan · Riverside · 2 yrs</div></div></div></div>
+    <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-text">We have an infinity pool that three companies couldn't balance correctly. AquaVerde's tech diagnosed a salt cell calibration issue on the first visit. Hasn't been a problem since.</div><div class="rv-author"><div class="rv-av">JT</div><div><div class="rv-name">James Thornton</div><div class="rv-role">Premium plan · Highland Estate</div></div></div></div>
+    <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-text">Managing three vacation rentals, I can't be onsite to check the pools. AquaVerde's digital reports and 24/7 response give me complete peace of mind — and the guests always comment on the water.</div><div class="rv-author"><div class="rv-av">SK</div><div><div class="rv-name">Sara Kowalski</div><div class="rv-role">3 vacation rentals · Premium plan</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- EMERGENCY -->
+<section class="section" id="emergency-sec" style="background:var(--bg-2)"><div class="container">
+  <div style="margin-bottom:clamp(26px,3.5vw,40px)" class="reveal center"><span class="label" style="justify-content:center">24/7 emergency service</span><h2 class="h2" style="margin-top:14px">Pool problem?<br/><em>We respond fast.</em></h2></div>
+  <div class="emergency reveal" data-d="60">
+    <div class="emg-grid">
+      <div>
+        <div style="font-family:var(--fd);font-weight:600;font-size:clamp(1.1rem,2vw,1.4rem);color:#DDFBFF;letter-spacing:-.01em">Don't let a broken pump, green water or a leak ruin your weekend — or your pool season. Our emergency team covers the region 24 hours a day, 7 days a week.</div>
+        <div class="emg-services">
+          <div class="emg-svc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><div><div class="emg-svc-h">Pump failure</div><div class="emg-svc-s">Diagnosis &amp; repair · same day</div></div></div>
+          <div class="emg-svc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><div class="emg-svc-h">Leak detection</div><div class="emg-svc-s">Pressure test &amp; acoustic locate</div></div></div>
+          <div class="emg-svc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/></svg><div><div class="emg-svc-h">Filter &amp; heater issues</div><div class="emg-svc-s">On-site repair or replacement</div></div></div>
+          <div class="emg-svc"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg><div><div class="emg-svc-h">Green pool recovery</div><div class="emg-svc-s">Shock treatment · 72-hr clear</div></div></div>
+        </div>
+      </div>
+      <div class="emg-hotline">
+        <div class="emg-ph-label">Emergency hotline</div>
+        <a href="tel:+15125550210" class="emg-ph" style="display:block;color:#DDFBFF">(512) 555-0210</a>
+        <div class="emg-avail">Available <span>24 hours · 7 days</span></div>
+        <a href="#contact" class="btn btn-teal btn-full" data-page="contact" style="margin-top:18px">Book emergency visit</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section"><div class="container">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:clamp(28px,5vw,72px);align-items:start">
+    <div class="reveal" style="position:sticky;top:96px"><span class="label">FAQ</span><h2 class="h2" style="margin-top:14px;font-size:clamp(1.8rem,3.5vw,3rem)">Common questions.</h2><p class="body-lg" style="margin-top:14px">Ask us anything — we answer the phone.</p><a href="tel:+15125550210" class="btn btn-ocean" style="margin-top:18px">(512) 555-0210</a></div>
+    <div class="faq-list reveal" data-d="60">
+      <details class="faq-item" open><summary>How often should my pool be cleaned?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Most residential pools in warm climates need weekly cleaning. Pools with heavy use, surrounded by trees or in hot humid areas may need bi-weekly service. We assess your specific pool and recommend the right schedule at your free inspection.</div></details>
+      <details class="faq-item"><summary>Do you provide the chemicals?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Standard and Premium plans include all chemicals — chlorine, pH adjusters, alkalinity and stabiliser. Basic plan customers purchase their own chemicals and we do the testing and dosing guidance. No hidden costs.</div></details>
+      <details class="faq-item"><summary>What's included in maintenance plans?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">All plans include skim, brush and vacuum at every visit, water testing, a digital service report with photos, and basic equipment health monitoring. Standard and Premium add chemical balancing, filter cleaning, and priority response. Premium includes all chemicals and 24/7 emergency priority.</div></details>
+      <details class="faq-item"><summary>Can you fix pool equipment?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Yes — we repair and replace pumps, motors, filters, heaters, salt cells, automation systems and plumbing. We're factory-trained on Pentair, Hayward, Jandy and Zodiac equipment and carry common parts in our service vehicles.</div></details>
+      <details class="faq-item"><summary>Do you service saltwater pools?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Absolutely — saltwater pools are a speciality. We monitor salinity, cell output, pH and cyanuric acid at every visit and can clean, test or replace salt cells. We've been servicing saltwater systems since they became mainstream.</div></details>
+      <details class="faq-item"><summary>How quickly can you respond to an emergency?<span class="faq-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="faq-body">Our emergency line is answered 24/7. For urgent issues like pump failures, severe leaks or complete green-water recovery, we aim to have a technician on site within 4–6 hours. Premium plan members receive priority same-day dispatch.</div></details>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA BAND -->
+<section class="cta-band section"><div class="container"><div class="center reveal">
+  <span class="label lt" style="justify-content:center">Free first inspection · no commitment</span>
+  <h2 class="cta-h" style="margin-top:18px"><em>Enjoy your pool.</em>Leave the work to us.</h2>
+  <p style="font-size:clamp(1rem,1.5vw,1.15rem);color:rgba(221,251,255,.65);max-width:50ch;margin:18px auto 0;line-height:1.65">Choose a maintenance plan or schedule a one-time service. First inspection is always free for new customers.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px">
+    <a href="#contact" class="btn btn-gold btn-lg" data-page="contact">Book service <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="#contact" class="btn btn-ghost btn-lg" data-page="contact">Get free inspection</a>
+  </div>
+</div></div></section>
+
+</div><!-- /page-home -->
+
+<!-- ============ SERVICES PAGE ============ -->
+<div id="page-services" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Services</span></div><h1 class="ph-h">Everything your<br/>pool could <em>need.</em></h1><p class="ph-sub">From weekly cleaning to 24/7 emergency repair. Every service performed by certified, insured pool technicians with a digital report after each visit.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:2"><a href="#contact" class="btn btn-gold btn-lg" data-page="contact">Book a service</a><a href="tel:+15125550210" class="btn btn-ghost btn-lg">Call (512) 555-0210</a></div></div></section>
+  <section class="section"><div class="container">
+    <div class="svc-grid">
+      <div class="svc-card reveal"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg></div><div class="svc-h">Pool Cleaning</div><p class="svc-p">Skimming, brushing, vacuuming and tile scrubbing at every visit. We leave your pool looking resort-ready.</p><div class="svc-tag">Weekly</div></div>
+      <div class="svc-card reveal" data-d="60"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div><div class="svc-h">Chemical Balancing</div><p class="svc-p">6-point water testing and precise chemical dosing to keep pH, chlorine and alkalinity in the safe zone.</p><div class="svc-tag">Health &amp; safety</div></div>
+      <div class="svc-card reveal" data-d="120"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div><div class="svc-h">Equipment Inspection</div><p class="svc-p">Pump, filter, heater, salt cell and automation checked at every visit. We catch problems before they become expensive.</p><div class="svc-tag">Preventive</div></div>
+      <div class="svc-card reveal" data-d="180"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="svc-h">Filter Cleaning</div><p class="svc-p">Sand, cartridge and DE filter cleaning, backwashing and media replacement on the right schedule.</p><div class="svc-tag">Monthly</div></div>
+      <div class="svc-card reveal"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6-9 9-6 1 1-6z"/></svg></div><div class="svc-h">Pool Repairs</div><p class="svc-p">Pumps, heaters, automation, plumbing and structural — diagnosed correctly the first time and fixed to last.</p><div class="svc-tag">On-demand</div></div>
+      <div class="svc-card reveal" data-d="60"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="svc-h">Leak Detection</div><p class="svc-p">Pressure test, dye trace and acoustic detection to find pool leaks — structure, plumbing and equipment.</p><div class="svc-tag">Specialist</div></div>
+      <div class="svc-card reveal" data-d="120"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/></svg></div><div class="svc-h">Green Pool Recovery</div><p class="svc-p">Algae shock, brushing, clarification and water restoration — pool swim-ready within 48–72 hours.</p><div class="svc-tag">Emergency</div></div>
+      <div class="svc-card reveal" data-d="180"><div class="svc-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/></svg></div><div class="svc-h">Seasonal Service</div><p class="svc-p">Opening and closing packages to protect your pool, pipes and equipment through every season.</p><div class="svc-tag">Seasonal</div></div>
+    </div>
+    <div class="center" style="margin-top:46px"><a href="#contact" class="btn btn-teal btn-lg" data-page="contact">Book any service</a></div>
+  </div></section>
+</div>
+
+<!-- ============ PLANS PAGE ============ -->
+<div id="page-plans" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Maintenance Plans</span></div><h1 class="ph-h">Maintenance on<br/><em>autopilot.</em></h1><p class="ph-sub">A plan means your pool is always swim-ready — you never have to think about it. Every plan includes certified techs, digital reports and satisfaction guarantee.</p><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:2"><a href="#contact" class="btn btn-gold btn-lg" data-page="contact">Choose a plan</a></div></div></section>
+  <section class="section"><div class="container">
+    <div class="plans-grid">
+      <div class="plan reveal"><div class="plan-header basic"><div class="plan-name" style="color:var(--ocean)">Basic Clean</div><div style="font-family:var(--fm);font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.05em">Weekly cleaning service</div><div class="plan-price"><span class="amt">$89</span><span class="per">/month</span></div></div><div class="plan-body"><ul class="plan-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 visits per month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Skim, brush &amp; vacuum</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic water testing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Digital service report</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Chemical balancing</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Equipment inspection</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Emergency priority</li></ul><a href="#contact" class="btn btn-outline btn-full" data-page="contact" style="margin-top:22px">Choose Basic</a></div></div>
+      <div class="plan feat reveal" data-d="80"><div class="plan-badge">Most popular</div><div class="plan-header standard"><div class="plan-name">Standard Care</div><div style="font-family:var(--fm);font-size:10.5px;color:rgba(221,251,255,.62);margin-top:4px;letter-spacing:.05em">Cleaning + water balancing</div><div class="plan-price"><span class="amt">$149</span><span class="per">/month</span></div></div><div class="plan-body"><ul class="plan-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>4 visits per month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full skim, brush &amp; vacuum</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced 6-point water test</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Chemical balancing included</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly equipment check</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Photo service report</li><li class="na"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Emergency priority</li></ul><a href="#contact" class="btn btn-teal btn-full" data-page="contact" style="margin-top:22px">Choose Standard</a></div></div>
+      <div class="plan reveal" data-d="160"><div class="plan-header premium"><div class="plan-name">Premium Resort</div><div style="font-family:var(--fm);font-size:10.5px;color:rgba(221,251,255,.62);margin-top:4px;letter-spacing:.05em">Full-service · white glove</div><div class="plan-price"><span class="amt">$229</span><span class="per">/month</span></div></div><div class="plan-body"><ul class="plan-feats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Up to 8 visits per month</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Full clean every visit</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lab-grade water testing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All chemicals included</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly equipment inspection</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Video service report</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>24/7 emergency priority</li></ul><a href="#contact" class="btn btn-gold btn-full" data-page="contact" style="margin-top:22px">Choose Premium</a></div></div>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ GALLERY PAGE ============ -->
+<div id="page-gallery" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Projects</span></div><h1 class="ph-h">Pools we're<br/><em>proud of.</em></h1><p class="ph-sub">Over 1,200 pools maintained — from backyard splash pools to five-star resort facilities. Filter by type to find something like yours.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="proj-filter-row reveal" id="gallery-filter" style="margin-bottom:22px">
+      <button class="pfbtn on" data-gf="all">All</button>
+      <button class="pfbtn" data-gf="residential">Residential</button>
+      <button class="pfbtn" data-gf="luxury">Luxury</button>
+      <button class="pfbtn" data-gf="hotel">Hotel</button>
+      <button class="pfbtn" data-gf="community">Community</button>
+    </div>
+    <div class="proj-grid" id="gallery-grid">
+      <div class="proj-card reveal" data-gcat="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=70" alt="Riverside pool" loading="lazy" decoding="async"><span class="prj-cat">Residential</span></div><div class="prj-body"><div class="prj-h">Riverside Residence</div><div class="prj-meta">Standard plan · 18 months</div><div class="prj-tags"><span class="ba-tag">Weekly</span></div></div></div>
+      <div class="proj-card reveal" data-d="70" data-gcat="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1439127989242-c3749a012eac?auto=format&fit=crop&w=700&q=70" alt="Infinity pool" loading="lazy" decoding="async"><span class="prj-cat">Luxury</span></div><div class="prj-body"><div class="prj-h">Highland Infinity Pool</div><div class="prj-meta">Premium plan · infinity edge</div><div class="prj-tags"><span class="ba-tag">Infinity</span></div></div></div>
+      <div class="proj-card reveal" data-d="140" data-gcat="hotel"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?auto=format&fit=crop&w=700&q=70" alt="Resort pool" loading="lazy" decoding="async"><span class="prj-cat">Hotel</span></div><div class="prj-body"><div class="prj-h">Coastal Resort Hotel</div><div class="prj-meta">Daily service · 3 pools</div><div class="prj-tags"><span class="ba-tag">Commercial</span></div></div></div>
+      <div class="proj-card reveal" data-gcat="community"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1596813362035-cd9dc1c5f00d?auto=format&fit=crop&w=700&q=70" alt="Community pool" loading="lazy" decoding="async"><span class="prj-cat">Community</span></div><div class="prj-body"><div class="prj-h">Mapleton Community Pool</div><div class="prj-meta">Bi-daily · code compliance</div><div class="prj-tags"><span class="ba-tag">Commercial</span></div></div></div>
+      <div class="proj-card reveal" data-d="70" data-gcat="luxury"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=700&q=70" alt="Saltwater pool" loading="lazy" decoding="async"><span class="prj-cat">Luxury</span></div><div class="prj-body"><div class="prj-h">Crestline Saltwater Pool</div><div class="prj-meta">Salt cell management</div><div class="prj-tags"><span class="ba-tag">Saltwater</span></div></div></div>
+      <div class="proj-card reveal" data-d="140" data-gcat="residential"><div class="prj-img-wrap"><img class="prj-img" src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=700&q=70" alt="Spa and pool" loading="lazy" decoding="async"><span class="prj-cat">Spa</span></div><div class="prj-body"><div class="prj-h">Oakwood Pool &amp; Spa</div><div class="prj-meta">Pool + spa package</div><div class="prj-tags"><span class="ba-tag">Spa</span></div></div></div>
+    </div>
+    <div class="center" style="margin-top:46px"><a href="#contact" class="btn btn-teal btn-lg" data-page="contact">Start your maintenance plan</a></div>
+  </div></section>
+</div>
+
+<!-- ============ REVIEWS PAGE ============ -->
+<div id="page-reviews" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Reviews</span></div><h1 class="ph-h">1,200 pool owners.<br/><em>98% stay.</em></h1><p class="ph-sub">Customer retention is our proudest statistic. Here's why pool owners keep coming back — and referring their neighbours.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="rv-grid">
+      <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-text">Our pool used to turn green every August. Two years with AquaVerde and zero algae issues. The weekly reports are a great touch.</div><div class="rv-author"><div class="rv-av">MA</div><div><div class="rv-name">Maya Aldridge</div><div class="rv-role">Standard plan · 2 years</div></div></div></div>
+      <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-text">Three companies couldn't balance our infinity pool correctly. AquaVerde diagnosed a salt cell issue on the first visit. Hasn't been a problem since.</div><div class="rv-author"><div class="rv-av">JT</div><div><div class="rv-name">James Thornton</div><div class="rv-role">Premium plan · Highland Estate</div></div></div></div>
+      <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-text">Managing three vacation rentals — AquaVerde's digital reports and 24/7 line give me complete peace of mind. Guests always comment on the water.</div><div class="rv-author"><div class="rv-av">SK</div><div><div class="rv-name">Sara Kowalski</div><div class="rv-role">3 vacation rentals · Premium</div></div></div></div>
+      <div class="rv-card reveal"><div class="rv-stars">★★★★★</div><div class="rv-text">Called at 9pm with a pump failure before a big pool party the next day. Tech was onsite by 7am, fixed it in an hour. Outstanding service.</div><div class="rv-author"><div class="rv-av">PR</div><div><div class="rv-name">Priya Rajaram</div><div class="rv-role">Emergency repair · Crestline</div></div></div></div>
+      <div class="rv-card reveal" data-d="70"><div class="rv-stars">★★★★★</div><div class="rv-text">Switched from DIY to AquaVerde's Standard plan. My chemical costs dropped and the pool looks better than it ever did when I was doing it myself.</div><div class="rv-author"><div class="rv-av">DL</div><div><div class="rv-name">David Lin</div><div class="rv-role">Standard plan · Mapleton</div></div></div></div>
+      <div class="rv-card reveal" data-d="140"><div class="rv-stars">★★★★★</div><div class="rv-text">We have a hotel with three pools and two hot tubs. AquaVerde handles all five. Never a single health department issue in two years.</div><div class="rv-author"><div class="rv-av">CW</div><div><div class="rv-name">Carmen Wu</div><div class="rv-role">Coastal Resort Hotel · Commercial</div></div></div></div>
+    </div>
+    <div class="center" style="margin-top:46px"><a href="#contact" class="btn btn-teal btn-lg" data-page="contact">Join 1,200+ happy pool owners</a></div>
+  </div></section>
+</div>
+
+<!-- ============ CONTACT PAGE ============ -->
+<div id="page-contact" class="spa-page">
+  <section class="page-hero"><div class="container"><div class="breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Contact</span></div><h1 class="ph-h">Let's keep your<br/>pool <em>crystal clear.</em></h1><p class="ph-sub">Book a free first inspection, choose a maintenance plan, or call our 24/7 emergency line. We respond fast.</p></div></section>
+  <section class="section"><div class="container">
+    <div class="contact-shell">
+      <div class="contact-info">
+        <h2 style="font-family:var(--fd);font-weight:700;font-size:22px;letter-spacing:-.01em;color:#DDFBFF;margin-bottom:6px">Get in touch</h2>
+        <p style="font-size:13.5px;color:rgba(221,251,255,.52);line-height:1.65;margin-bottom:8px">First inspection is free. We respond within one hour.</p>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div class="ci-l">Call or text</div><div class="ci-v">(512) 555-0210</div></div></div>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><div class="ci-l">Email</div><div class="ci-v">hello@aquaverde.co</div></div></div>
+        <div class="ci-item"><span class="ci-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div class="ci-l">Hours</div><div class="ci-v">Mon–Sat 7am–7pm</div></div></div>
+        <div class="ci-item" style="border-bottom:none"><span class="ci-ic" style="background:rgba(244,96,96,.18);border-color:rgba(244,96,96,.35);color:#FF8080"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div><div class="ci-l" style="color:rgba(255,128,128,.6)">Emergency line</div><div class="ci-v">(512) 555-0210 · 24/7</div></div></div>
+      </div>
+      <div class="contact-form-wrap"><form id="contact-form" style="display:grid;gap:15px">
+        <div style="font-family:var(--fd);font-weight:700;font-size:23px;letter-spacing:-.01em;color:var(--text)">Request free inspection</div>
+        <div class="g2" style="gap:13px"><div><label class="f-label" for="cf-name">Full name</label><input class="f-input" id="cf-name" required placeholder="Jane Cooper"/></div><div><label class="f-label" for="cf-phone">Phone</label><input class="f-input" id="cf-phone" type="tel" required placeholder="(555) 000-0000"/></div></div>
+        <div><label class="f-label" for="cf-email">Email</label><input class="f-input" id="cf-email" type="email" required placeholder="jane@email.com"/></div>
+        <div class="g2" style="gap:13px">
+          <div><label class="f-label" for="cf-type">Pool type</label><select class="f-input" id="cf-type"><option>Residential</option><option>Saltwater</option><option>Infinity pool</option><option>Commercial / hotel</option><option>Spa / hot tub</option><option>Community pool</option></select></div>
+          <div><label class="f-label" for="cf-svc">Service needed</label><select class="f-input" id="cf-svc"><option>Free first inspection</option><option>Weekly maintenance plan</option><option>One-time cleaning</option><option>Chemical balancing</option><option>Equipment repair</option><option>Green pool recovery</option><option>Emergency service</option></select></div>
+        </div>
+        <div><label class="f-label" for="cf-notes">Notes</label><textarea class="f-input" id="cf-notes" rows="3" style="resize:vertical" placeholder="Pool size, current issues, anything we should know…"></textarea></div>
+        <button type="submit" class="btn btn-teal btn-lg btn-full">Request free inspection <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        <div style="text-align:center;font-family:var(--fm);font-size:10.5px;color:var(--faint);letter-spacing:.04em">First inspection always free · certified technicians · satisfaction guaranteed</div>
+      </form></div>
+    </div>
+  </div></section>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer><div class="container"><div class="foot-top"><div class="foot-grid">
+  <div>
+    <div class="foot-logo-name">Aqua<b>Verde</b></div>
+    <p class="foot-desc">Resort-quality pool service and maintenance. Certified technicians, 24/7 emergency support, and a guarantee that every pool stays crystal clear year-round.</p>
+    <form class="foot-nl" id="foot-nl"><input type="email" required placeholder="Pool tips in your inbox"/><button type="submit">Subscribe</button></form>
+  </div>
+  <div><div class="foot-h">Services</div><div class="foot-links"><span class="foot-link" data-page="services">Pool Cleaning</span><span class="foot-link" data-page="services">Chemical Balancing</span><span class="foot-link" data-page="services">Equipment Inspection</span><span class="foot-link" data-page="services">Leak Detection</span><span class="foot-link" data-page="services">Green Pool Recovery</span></div></div>
+  <div><div class="foot-h">Plans</div><div class="foot-links"><span class="foot-link" data-page="plans">Basic Clean · $89/mo</span><span class="foot-link" data-page="plans">Standard Care · $149/mo</span><span class="foot-link" data-page="plans">Premium Resort · $229/mo</span><span class="foot-link" data-page="home" data-scroll="emergency-sec">Emergency Service</span></div></div>
+  <div><div class="foot-h">Company</div><div class="foot-links"><span class="foot-link" data-page="gallery">Projects</span><span class="foot-link" data-page="reviews">Reviews</span><span class="foot-link" data-page="contact">Contact</span><span class="foot-link" data-page="home" data-scroll="pool-types-sec">Pool Types</span></div></div>
+  <div><div class="foot-h">Contact</div><div class="foot-links"><a href="tel:+15125550210" class="foot-link" style="display:block">(512) 555-0210</a><a href="mailto:hello@aquaverde.co" class="foot-link" style="display:block">hello@aquaverde.co</a><span class="foot-link" style="cursor:default">Mon–Sat 7am–7pm</span><span class="foot-link" style="cursor:default">Emergency line 24/7</span></div></div>
+</div></div>
+<div class="foot-bottom"><div>&copy; <span class="yr">2026</span> AquaVerde Pool Service. All rights reserved.</div><div class="foot-credit">Built &amp; Maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener">GrowrixOS</a></div></div></div></footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <a href="#home" class="bn-item active" data-page="home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</a>
+  <a href="#services" class="bn-item" data-page="services"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg>Services</a>
+  <a href="#plans" class="bn-item" data-page="plans"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Plans</a>
+  <a href="#contact" class="bn-item" data-page="contact"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book</a>
+  <button class="bn-item" id="bn-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>Menu</button>
+</nav>
+
+<!-- AI PANEL -->
+<div class="ai-panel" id="ai-panel" role="dialog" aria-label="AquaVerde pool assistant" aria-hidden="true">
+  <div class="ai-head"><div class="ai-av"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg></div><div><div style="font-family:var(--fd);font-weight:600;font-size:14px;letter-spacing:-.005em">Pool Assistant</div><div style="font-size:11px;color:rgba(221,251,255,.65);margin-top:1px">Ask anything about pool care</div></div><button id="ai-close" aria-label="Close" style="margin-left:auto;color:rgba(221,251,255,.7);width:30px;height:30px;border-radius:6px;display:grid;place-items:center;background:rgba(221,251,255,.08);border:1px solid rgba(221,251,255,.12)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="ai-body" id="ai-body"><div class="ai-msg bot">Hi! I'm your AquaVerde pool assistant. Ask me about cleaning schedules, water chemistry, maintenance plans, green pool recovery or emergency service. 🌊</div></div>
+  <div class="ai-chips" id="ai-chips">
+    <button class="ai-chip" data-q="How often should I clean my pool?">Cleaning frequency</button>
+    <button class="ai-chip" data-q="My pool is green, what should I do?">Green pool help</button>
+    <button class="ai-chip" data-q="What plan is right for me?">Choose a plan</button>
+    <button class="ai-chip" data-q="How quickly can you respond?">Response time</button>
+  </div>
+  <form class="ai-foot" id="ai-form"><input id="ai-input" placeholder="Ask about your pool…" aria-label="Message"/><button class="ai-send" type="submit" aria-label="Send"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></form>
+</div>
+
+<!-- FAB -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fab-opts">
+    <button class="fab-opt top" id="fab-top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <button class="fab-opt ai-opt" id="fab-ai" aria-label="Pool assistant"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.4-4 4.8-6 8-6s5.6 2 8 6"/><path d="M2 17c2.4-3 4.8-5 8-5s5.6 2 8 5"/></svg><span class="fab-tip">Pool assistant</span></button>
+    <a href="https://wa.me/15125550210" target="_blank" rel="noopener" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1A7.93 7.93 0 0 0 12 19.9a7.95 7.95 0 0 0 5.6-13.6zM12 18.5a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25A6.59 6.59 0 1 1 12 18.5zm3.61-4.94c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.39 5.39 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.08a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.6-1.46s-.32-.34-.44-.34h-.38a.72.72 0 0 0-.52.24 2.2 2.2 0 0 0-.68 1.64A3.83 3.83 0 0 0 8.6 12a8.7 8.7 0 0 0 3.33 2.94c1.96.85 1.96.57 2.32.53a2 2 0 0 0 1.32-.93 1.64 1.64 0 0 0 .11-.93c-.05-.08-.18-.13-.38-.23z"/></svg><span class="fab-tip">WhatsApp us</span></a>
+    <a href="tel:+15125550210" class="fab-opt call" aria-label="Call now"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Emergency line</span></a>
+  </div>
+  <button class="fab-main" id="fab-main" aria-label="Quick actions" aria-expanded="false"><svg id="fab-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+</div>
+<script>
+(function(){"use strict";
+var doc=document,root=doc.documentElement,W=window;
+var SUN='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>';
+var MOON='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>';
+
+/* THEME */
+var themeBtn=doc.getElementById('theme-btn');
+function applyTheme(t){root.setAttribute('data-theme',t);if(themeBtn)themeBtn.innerHTML=t==='dark'?SUN:MOON;try{localStorage.setItem('av-theme',t);}catch(e){}}
+(function(){var s;try{s=localStorage.getItem('av-theme');}catch(e){}if(!s)s=(W.matchMedia&&W.matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';applyTheme(s);})();
+if(themeBtn)themeBtn.addEventListener('click',function(){applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');});
+
+/* SCROLL */
+var navbar=doc.getElementById('navbar'),scrollBar=doc.getElementById('scroll-bar'),bnav=doc.getElementById('bottom-nav'),lastY=W.pageYOffset;
+function onScroll(){
+  var y=W.pageYOffset,h=doc.documentElement.scrollHeight-W.innerHeight;
+  if(navbar)navbar.classList.toggle('scrolled',y>14);
+  if(scrollBar)scrollBar.style.width=(h>0?(y/h*100):0)+'%';
+  if(bnav)bnav.style.transform=(y>lastY&&y>220)?'translateY(100%)':'translateY(0)';
+  var ft=doc.getElementById('fab-top');if(ft)ft.style.display=y>500?'grid':'none';
+  lastY=y;
+}
+W.addEventListener('scroll',onScroll,{passive:true});
+
+/* DRAWER */
+var drawer=doc.getElementById('drawer'),dov=doc.getElementById('drawer-ov');
+function openD(){if(drawer){drawer.classList.add('open');dov.classList.add('open');doc.body.style.overflow='hidden';}}
+function closeD(){if(drawer){drawer.classList.remove('open');dov.classList.remove('open');doc.body.style.overflow='';}}
+[['hamburger',openD],['drawer-close',closeD],['bn-menu',openD]].forEach(function(p){var el=doc.getElementById(p[0]);if(el)el.addEventListener('click',p[1]);});
+if(dov)dov.addEventListener('click',closeD);
+doc.addEventListener('keydown',function(e){if(e.key==='Escape'){closeD();closeAI();}});
+
+/* REVEAL */
+var rObs;
+function observeReveals(scope){var els=(scope||doc).querySelectorAll('.reveal:not(.in)');if(!('IntersectionObserver' in W)){[].forEach.call(els,function(e){e.classList.add('in');});return;}if(!rObs)rObs=new IntersectionObserver(function(entries){entries.forEach(function(x){if(x.isIntersecting){var d=parseInt(x.target.getAttribute('data-d')||'0',10);setTimeout(function(){x.target.classList.add('in');},d);rObs.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -36px 0px'});[].forEach.call(els,function(e){rObs.observe(e);});}
+
+/* COUNTERS */
+function countUp(el){var t=parseFloat(el.getAttribute('data-counter'))||0,dec=t%1!==0,s=null,dur=1400;function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/dur,1),ease=1-Math.pow(1-p,3),v=t*ease;el.textContent=dec?v.toFixed(1):Math.floor(v).toLocaleString();if(p<1)requestAnimationFrame(step);else el.textContent=dec?t.toFixed(1):t.toLocaleString();}requestAnimationFrame(step);}
+var cObs;
+function observeCounters(scope){var els=(scope||doc).querySelectorAll('[data-counter]');if(!('IntersectionObserver' in W)){[].forEach.call(els,countUp);return;}if(!cObs)cObs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){countUp(x.target);cObs.unobserve(x.target);}});},{threshold:.5});[].forEach.call(els,function(e){if(!e.dataset.counted){e.dataset.counted='1';cObs.observe(e);}});}
+
+/* BA SLIDERS */
+[].forEach.call(doc.querySelectorAll('.ba-compare'),function(c){
+  var a=c.querySelector('.ba-a'),ln=c.querySelector('.ba-line'),hd=c.querySelector('.ba-hdl'),rng=c.querySelector('.ba-rng');
+  function set(v){v=Math.max(0,Math.min(100,v));a.style.clipPath='inset(0 '+(100-v)+'% 0 0)';ln.style.left=v+'%';hd.style.left=v+'%';if(rng)rng.value=v;}
+  if(rng)rng.addEventListener('input',function(){set(parseFloat(rng.value));});
+  var drag=false;c.addEventListener('pointerdown',function(){drag=true;});W.addEventListener('pointermove',function(e){if(!drag)return;var r=c.getBoundingClientRect();set((e.clientX-r.left)/r.width*100);});W.addEventListener('pointerup',function(){drag=false;});
+  set(50);
+});
+
+/* POOL HEALTH ANALYZER */
+(function(){
+  function getChip(g){return doc.querySelector('[data-ag="'+g+'"] .ana-echip.on');}
+  var arc=doc.getElementById('score-arc');
+  var CIRC=339;
+  function calc(){
+    var t=getChip('type'),sz=getChip('size'),con=getChip('condition'),la=getChip('last');if(!t||!sz||!con||!la)return;
+    var base=parseInt(t.getAttribute('data-s'))||8;
+    var sp=parseInt(sz.getAttribute('data-s'))||3;
+    var pen=parseInt(con.getAttribute('data-pen'))||0;
+    var lp=parseInt(la.getAttribute('data-pen'))||0;
+    var score=Math.max(0,Math.min(100,Math.round((base+sp)*5 - pen - lp)));
+    var numEl=doc.getElementById('score-num'),lblEl=doc.getElementById('score-label'),noteEl=doc.getElementById('score-note');
+    var planEl=doc.getElementById('ana-plan'),svcEl=doc.getElementById('ana-services'),freqEl=doc.getElementById('ana-freq');
+    /* animate number */
+    var cur=parseInt(numEl?numEl.textContent:0)||0,start=null;
+    if(arc)arc.style.strokeDashoffset=(CIRC-(CIRC*score/100)).toFixed(1);
+    var color=score>=80?'#16B6C9':score>=60?'#F4B860':'#F46060';
+    if(arc)arc.style.stroke=color;
+    function animNum(ts){if(!start)start=ts;var p=Math.min((ts-start)/600,1);if(numEl)numEl.textContent=Math.round(cur+(score-cur)*p);if(p<1)requestAnimationFrame(animNum);}
+    requestAnimationFrame(animNum);
+    var lbl,note,plan,svcs,freq;
+    if(score>=85){lbl='Excellent condition';note='Your pool is in great shape. Regular maintenance keeps it this way all year.';plan='Basic Clean · $89/mo';svcs='Weekly skim &amp; brush, routine chemical check';freq='Weekly maintenance'}
+    else if(score>=70){lbl='Good condition';note='A few minor things to watch. Our Standard plan will keep them from becoming issues.';plan='Standard Care · $149/mo';svcs='Chemical balancing, filter inspection';freq='Weekly visits recommended'}
+    else if(score>=50){lbl='Needs attention';note='Some water quality or maintenance issues to address. Book a service this week.';plan='Standard Care · $149/mo';svcs='Chemical rebalance, equipment check, deep clean';freq='Bi-weekly minimum'}
+    else{lbl='Urgent care needed';note='Your pool has significant issues. We recommend a full-service visit as soon as possible.';plan='Premium Resort · $229/mo';svcs='Green recovery, full rebalance, equipment overhaul';freq='Immediate service visit'}
+    if(lblEl)lblEl.textContent=lbl;if(noteEl)noteEl.textContent=note;
+    if(planEl)planEl.innerHTML=plan;if(svcEl)svcEl.innerHTML=svcs;if(freqEl)freqEl.innerHTML=freq;
+  }
+  [].forEach.call(doc.querySelectorAll('[data-ag]'),function(g){g.addEventListener('click',function(e){var c=e.target.closest('.ana-echip');if(!c)return;[].forEach.call(g.querySelectorAll('.ana-echip'),function(x){x.classList.remove('on');});c.classList.add('on');calc();});});
+  calc();
+  var af=doc.getElementById('ana-form'),as=doc.getElementById('ana-sent');if(af)af.addEventListener('submit',function(e){e.preventDefault();af.style.display='none';as.style.display='block';});
+})();
+
+/* PROJECT FILTERS */
+function wireFilter(barId,gridId,attr){var bar=doc.getElementById(barId);if(!bar)return;bar.addEventListener('click',function(e){var b=e.target.closest('.pfbtn');if(!b)return;[].forEach.call(bar.querySelectorAll('.pfbtn'),function(x){x.classList.remove('on');});b.classList.add('on');var v=b.getAttribute(attr);[].forEach.call(doc.getElementById(gridId).querySelectorAll('.proj-card'),function(c){c.classList.toggle('hide',!(v==='all'||c.getAttribute('data-'+attr.slice(5))===v));});});}
+wireFilter('proj-filter','proj-grid','data-pf');
+wireFilter('gallery-filter','gallery-grid','data-gf');
+
+/* FORMS */
+function makeOk(){var d=doc.createElement('div');d.setAttribute('role','status');d.style.cssText='padding:36px 28px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px';d.innerHTML='<div style="width:60px;height:60px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,var(--ocean),var(--teal));display:grid;place-items:center"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#DDFBFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="font-family:var(--fd);font-weight:700;font-size:22px;letter-spacing:-.01em;color:var(--text);margin-top:16px">Request received!</div><p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6;max-width:34ch;margin-inline:auto">We\'ll confirm your free inspection within one hour and get your pool on the path to crystal clear.</p>';return d;}
+var cf=doc.getElementById('contact-form');if(cf)cf.addEventListener('submit',function(e){e.preventDefault();cf.replaceWith(makeOk());});
+var fnl=doc.getElementById('foot-nl');if(fnl)fnl.addEventListener('submit',function(e){e.preventDefault();var i=fnl.querySelector('input');if(i){i.value='';i.placeholder='Subscribed ✓';}});
+
+/* FAB */
+var fabMain=doc.getElementById('fab-main'),fabOpts=doc.getElementById('fab-opts'),fabIcon=doc.getElementById('fab-icon'),fabOpen=false;
+function toggleFab(){fabOpen=!fabOpen;fabOpts.classList.toggle('open',fabOpen);fabMain.classList.toggle('open',fabOpen);fabMain.setAttribute('aria-expanded',fabOpen?'true':'false');fabIcon.style.transform=fabOpen?'rotate(45deg)':'none';}
+if(fabMain)fabMain.addEventListener('click',toggleFab);
+var fabTop=doc.getElementById('fab-top');if(fabTop)fabTop.addEventListener('click',function(){W.scrollTo({top:0,behavior:'smooth'});});
+
+/* AI PANEL */
+var aiPanel=doc.getElementById('ai-panel'),aiBody=doc.getElementById('ai-body'),aiInput=doc.getElementById('ai-input');
+function openAI(){if(aiPanel){aiPanel.classList.add('open');aiPanel.setAttribute('aria-hidden','false');if(fabOpen)toggleFab();setTimeout(function(){if(aiInput)aiInput.focus();},280);}}
+function closeAI(){if(aiPanel){aiPanel.classList.remove('open');aiPanel.setAttribute('aria-hidden','true');}}
+var fabAI=doc.getElementById('fab-ai');if(fabAI)fabAI.addEventListener('click',openAI);
+var aiClose=doc.getElementById('ai-close');if(aiClose)aiClose.addEventListener('click',closeAI);
+function aiReply(q){var t=q.toLowerCase();
+  if(/how often|clean|frequency|weekly|schedule/.test(t))return'Most residential pools need weekly cleaning. Heavy use, trees nearby or hot humid climates often call for bi-weekly. We\'ll recommend the right schedule at your free first inspection.';
+  if(/green|algae|cloudy|murky|dirty/.test(t))return'A green or cloudy pool usually means algae or chemical imbalance. We\'ll do a shock treatment, brush, clarify and rebalance. Most green pools are swim-ready within 48–72 hours of our first visit.';
+  if(/plan|cost|price|how much|\$/.test(t))return'We offer three plans: Basic Clean at $89/mo, Standard Care at $149/mo (most popular, includes chemicals), and Premium Resort at $229/mo (all chemicals + 24/7 priority). First inspection is free.';
+  if(/saltwater|salt|chlorinator|cell/.test(t))return'Saltwater pools are a speciality — we monitor salinity, cell output, pH and cyanuric acid at every visit. We can also clean, test or replace salt cells from all major manufacturers.';
+  if(/emergency|urgent|fast|quick|24|pump|broken|leak/.test(t))return'Our emergency line is answered 24/7 at (512) 555-0210. For urgent issues like pump failures or leaks, we aim for a technician on site within 4–6 hours. Premium plan members get same-day priority dispatch.';
+  if(/chemical|ph|chlorine|alkalinity|balance/.test(t))return'We test six parameters at every visit: pH (ideal 7.2–7.6), free chlorine (2–4 ppm), total alkalinity (80–120 ppm), calcium hardness, cyanuric acid and TDS. Standard and Premium plans include all corrective chemicals.';
+  if(/warrant|guarantee|satisfaction/.test(t))return'Every service comes with our satisfaction guarantee — if you\'re not happy after a visit, we return and make it right at no charge. All maintenance plans also carry a water quality guarantee.';
+  return'Happy to help! You can also ask about specific chemicals, pool types, equipment repairs, or how to choose between our maintenance plans — or book a free inspection and we\'ll assess everything in person.';}
+function aiPush(txt,me){var m=doc.createElement('div');m.className='ai-msg '+(me?'me':'bot');m.textContent=txt;if(aiBody){aiBody.appendChild(m);aiBody.scrollTop=aiBody.scrollHeight;}}
+function aiAsk(q){aiPush(q,true);setTimeout(function(){aiPush(aiReply(q),false);},380);}
+var aiChips=doc.getElementById('ai-chips');if(aiChips)aiChips.addEventListener('click',function(e){var c=e.target.closest('.ai-chip');if(c)aiAsk(c.getAttribute('data-q'));});
+var aiForm=doc.getElementById('ai-form');if(aiForm)aiForm.addEventListener('submit',function(e){e.preventDefault();if(!aiInput)return;var v=aiInput.value.trim();if(!v)return;aiInput.value='';aiAsk(v);});
+
+/* YEAR */
+[].forEach.call(doc.querySelectorAll('.yr'),function(e){e.textContent=new Date().getFullYear();});
+
+/* SPA ROUTER */
+var PAGES={
+  home:{el:'page-home',t:'AquaVerde — Resort-Quality Pool Service & Maintenance'},
+  services:{el:'page-services',t:'Services — AquaVerde Pool Service'},
+  plans:{el:'page-plans',t:'Maintenance Plans — AquaVerde Pool Service'},
+  gallery:{el:'page-gallery',t:'Projects — AquaVerde Pool Service'},
+  reviews:{el:'page-reviews',t:'Reviews — AquaVerde Pool Service'},
+  contact:{el:'page-contact',t:'Book Service — AquaVerde Pool Service'}
+};
+function setActive(pg){[].forEach.call(doc.querySelectorAll('.nav-link,.bn-item'),function(l){l.classList.toggle('active',l.getAttribute('data-page')===pg&&!l.getAttribute('data-scroll'));});}
+function showPage(pg,opts){opts=opts||{};if(!PAGES[pg])pg='home';[].forEach.call(doc.querySelectorAll('.spa-page'),function(p){p.classList.remove('active');});var tgt=doc.getElementById(PAGES[pg].el);if(tgt)tgt.classList.add('active');doc.title=PAGES[pg].t;setActive(pg);observeReveals(tgt||doc);observeCounters(tgt||doc);if(opts.scrollTo){var s=doc.getElementById(opts.scrollTo);if(s){setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},70);return;}}if(!opts.noScroll)W.scrollTo({top:0,behavior:opts.instant?'auto':'smooth'});}
+function navigate(pg,scrollTo){var h='#'+pg;if(location.hash!==h)history.pushState({page:pg},'',h);showPage(pg,{scrollTo:scrollTo});}
+doc.addEventListener('click',function(e){var a=e.target.closest('[data-page]');if(a){var pg=a.getAttribute('data-page');if(PAGES[pg]){e.preventDefault();closeD();navigate(pg,a.getAttribute('data-scroll')||null);return;}}var sc=e.target.closest('[data-scroll]');if(sc&&!sc.getAttribute('data-page')){var id=sc.getAttribute('data-scroll'),s=doc.getElementById(id);if(s){e.preventDefault();closeD();s.scrollIntoView({behavior:'smooth',block:'start'});}}});
+W.addEventListener('popstate',function(e){var pg=(e.state&&e.state.page)||(location.hash||'#home').replace('#','');showPage(PAGES[pg]?pg:'home',{instant:true});});
+function init(){var initial=(location.hash||'#home').replace('#','');if(!PAGES[initial])initial='home';showPage(initial,{instant:true,noScroll:true});observeReveals(doc);observeCounters(doc);onScroll();}
+if(doc.readyState==='loading')doc.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Wanderlust Travel — Travel Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Raleway',sans-serif;background:#0a2040;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;background:#f8fafe}
+
+.hero{min-height:290px;background:linear-gradient(160deg,#0a5a8f 0%,#0a3060 40%,#051a3a 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 24px}
+.sky-stars{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.6) 1px,transparent 1px);background-size:40px 40px;opacity:.08}
+.sun-gradient{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(0deg,rgba(255,140,50,.15),transparent)}
+.plane{position:absolute;top:28px;right:20px;font-size:36px;opacity:.15;transform:rotate(30deg)}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:5px 14px;font-size:10px;color:#fff;font-weight:500;margin-bottom:14px;width:fit-content}
+.hero h1{font-family:'Raleway',sans-serif;font-size:38px;font-weight:800;color:#fff;line-height:.95;letter-spacing:-1px}
+.hero h1 span{background:linear-gradient(135deg,#ffd080,#ff9040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;line-height:1.5}
+.hero-tagline{font-size:11px;color:rgba(255,255,255,.35);margin-top:8px;font-style:italic}
+
+.destinations{display:flex;gap:8px;padding:14px 18px;overflow-x:auto;scrollbar-width:none;background:#fff;border-bottom:1px solid #e8f0f8}
+.destinations::-webkit-scrollbar{display:none}
+.dest{flex-shrink:0;background:#f0f6ff;border:1px solid #dce8f8;border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;color:#0a5a8f;white-space:nowrap}
+.dest.active{background:#0a3060;color:#fff;border-color:#0a3060}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0a5a8f;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(10,90,143,.15)}
+
+.package-cards{display:flex;flex-direction:column;gap:10px}
+.pkg{background:#fff;border:1px solid #dce8f8;border-radius:14px;overflow:hidden}
+.pkg-img{height:100px;position:relative;display:flex;align-items:center;justify-content:center;font-size:36px}
+.pkg-flag{position:absolute;top:10px;left:10px;font-size:20px}
+.pkg-nights{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.4);color:#fff;font-size:9px;font-weight:600;padding:3px 8px;border-radius:100px;letter-spacing:.5px}
+.pkg-body{padding:14px}
+.pkg-name{font-size:15px;font-weight:700;color:#0a2040;letter-spacing:-.3px}
+.pkg-dest{font-size:11px;color:#6080a0;margin-top:2px}
+.pkg-includes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.pkg-inc{background:#f0f6ff;border-radius:100px;padding:3px 9px;font-size:9px;color:#0a5a8f;font-weight:600}
+.pkg-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid #eef4fc}
+.pkg-from{font-size:10px;color:#6080a0}
+.pkg-price{font-size:20px;font-weight:800;color:#0a3060}
+.pkg-per{font-size:10px;color:#6080a0}
+
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{background:#fff;border:1px solid #dce8f8;border-radius:12px;padding:14px}
+.svc-icon{font-size:22px;margin-bottom:6px}
+.svc-name{font-size:12px;font-weight:700;color:#0a2040}
+.svc-desc{font-size:10px;color:#6080a0;margin-top:2px;line-height:1.4}
+
+.why-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.why{background:#fff;border:1px solid #dce8f8;border-radius:10px;padding:14px;text-align:center}
+.why-num{font-size:22px;font-weight:800;color:#0a3060}
+.why-label{font-size:10px;color:#6080a0;margin-top:3px;line-height:1.3}
+
+.book-box{background:linear-gradient(135deg,#0a3060,#0a5a8f);border-radius:16px;padding:22px;text-align:center}
+.book-box h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+.book-box p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:18px;line-height:1.5}
+.book-btn{display:block;background:#ffd080;color:#0a2040;border-radius:10px;padding:14px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.book-btn2{display:block;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px;font-size:11px;text-decoration:none}
+
+.contact-box{background:#fff;border:1px solid #dce8f8;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f0f6ff;font-size:12px;color:#333}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#f0f6ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#0a2040;padding:20px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="sky-stars"></div>
+  <div class="sun-gradient"></div>
+  <div class="plane">✈️</div>
+  <div class="hero-pill">🌍 Worldwide travel packages</div>
+  <h1>Wander<span>lust</span><br>Travel</h1>
+  <div class="hero-sub">Holidays, honeymoons &amp; corporate travel — designed for you.</div>
+  <div class="hero-tagline">"The world is yours to explore. We'll plan every step."</div>
+</div>
+<div class="destinations">
+  <div class="dest active">All</div>
+  <div class="dest">🇹🇭 Thailand</div>
+  <div class="dest">🇲🇻 Maldives</div>
+  <div class="dest">🇦🇪 Dubai</div>
+  <div class="dest">🇮🇳 India</div>
+  <div class="dest">🇸🇬 Singapore</div>
+  <div class="dest">🇹🇷 Turkey</div>
+</div>
+<div class="body">
+  <div class="sec">Popular Packages</div>
+  <div class="package-cards">
+    <div class="pkg">
+      <div class="pkg-img" style="background:linear-gradient(135deg,#00b4d8,#0077b6)">🏝️<div class="pkg-flag">🇲🇻</div><div class="pkg-nights">5 Nights</div></div>
+      <div class="pkg-body"><div class="pkg-name">Maldives Paradise Escape</div><div class="pkg-dest">📍 North Malé Atoll · Water Bungalow</div><div class="pkg-includes"><div class="pkg-inc">✈ Flights</div><div class="pkg-inc">🏨 Hotel</div><div class="pkg-inc">🍽 All-inclusive</div><div class="pkg-inc">🤿 Snorkeling</div></div><div class="pkg-footer"><div><div class="pkg-from">From</div><div class="pkg-price">$1,800</div><div class="pkg-per">per person</div></div></div></div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-img" style="background:linear-gradient(135deg,#f5a623,#e8742a)">🕌<div class="pkg-flag">🇦🇪</div><div class="pkg-nights">4 Nights</div></div>
+      <div class="pkg-body"><div class="pkg-name">Dubai Golden Experience</div><div class="pkg-dest">📍 Downtown Dubai · 5★ Hotel</div><div class="pkg-includes"><div class="pkg-inc">✈ Flights</div><div class="pkg-inc">🏨 Hotel</div><div class="pkg-inc">🚌 Transfers</div><div class="pkg-inc">🏙 City tour</div></div><div class="pkg-footer"><div><div class="pkg-from">From</div><div class="pkg-price">$1,200</div><div class="pkg-per">per person</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="sec">Services</div>
+  <div class="services-grid">
+    <div class="svc"><div class="svc-icon">💍</div><div class="svc-name">Honeymoon Packages</div><div class="svc-desc">Romantic getaways, customised just for you</div></div>
+    <div class="svc"><div class="svc-icon">🏢</div><div class="svc-name">Corporate Travel</div><div class="svc-desc">Business class, hotels &amp; group bookings</div></div>
+    <div class="svc"><div class="svc-icon">🎒</div><div class="svc-name">Custom Itineraries</div><div class="svc-desc">Build your own trip, we plan everything</div></div>
+    <div class="svc"><div class="svc-icon">📋</div><div class="svc-name">Visa Assistance</div><div class="svc-desc">Tourist &amp; business visas for all destinations</div></div>
+  </div>
+
+  <div class="sec">Why Choose Us</div>
+  <div class="why-cards">
+    <div class="why"><div class="why-num">2,000+</div><div class="why-label">Happy travellers</div></div>
+    <div class="why"><div class="why-num">50+</div><div class="why-label">Destinations</div></div>
+    <div class="why"><div class="why-num">12yr</div><div class="why-label">In business</div></div>
+    <div class="why"><div class="why-num">24/7</div><div class="why-label">Travel support</div></div>
+  </div>
+
+  <div class="sec">Plan Your Trip</div>
+  <div class="book-box">
+    <h3>✈️ Where to next?</h3>
+    <p>Tell us your destination, budget and dates. We'll send you a custom itinerary and quote within 24 hours.</p>
+    <a href="https://wa.me/0000000000" class="book-btn">🌍 Get a Free Quote</a>
+    <a href="mailto:travel@wanderlust.com.bd" class="book-btn2">travel@wanderlust.com.bd</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📍</div>Travel House, Dhanmondi-15, Dhaka</div>
+    <div class="c-row"><div class="c-icon">⏰</div>Sat–Thu · 9am – 8pm · Fri 10am–6pm</div>
+    <div class="c-row"><div class="c-icon">📸</div>@wanderlustbd</div>
+  </div>
+</div>
+<footer>© 2025 Wanderlust Travel · Licensed by Bangladesh Tourism Board</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

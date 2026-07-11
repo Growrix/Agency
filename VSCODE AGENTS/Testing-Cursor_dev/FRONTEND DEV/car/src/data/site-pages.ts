@@ -1,0 +1,255 @@
+export type SitePage = {
+  title: string;
+  href: string;
+  summary: string;
+  module: "shell" | "lead_gen" | "commerce" | "inventory_listing" | "content" | "seo" | "legal";
+};
+
+export const sitePages: SitePage[] = [
+  {
+    title: "Home",
+    href: "/",
+    summary: "Shared shell and parity-preserved homepage composition.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 2",
+    href: "/homepage-2",
+    summary: "Baseline homepage variant 2.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 3",
+    href: "/homepage-3",
+    summary: "Baseline homepage variant 3.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 4",
+    href: "/homepage-4",
+    summary: "Baseline homepage variant 4.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 5",
+    href: "/homepage-5",
+    summary: "Baseline homepage variant 5.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 6",
+    href: "/homepage-6",
+    summary: "Baseline homepage variant 6.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 7",
+    href: "/homepage-7",
+    summary: "Baseline homepage variant 7.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 8",
+    href: "/homepage-8",
+    summary: "Baseline homepage variant 8.",
+    module: "shell",
+  },
+  {
+    title: "Services",
+    href: "/services",
+    summary: "Service catalog with native detail routes.",
+    module: "lead_gen",
+  },
+  {
+    title: "Services 2",
+    href: "/services-2",
+    summary: "Baseline services variant style 2.",
+    module: "lead_gen",
+  },
+  {
+    title: "Services 3",
+    href: "/services-3",
+    summary: "Baseline services variant style 3.",
+    module: "lead_gen",
+  },
+  {
+    title: "Service Detail",
+    href: "/services/ceramic-coating-protection",
+    summary: "Typed service content and route-param ownership.",
+    module: "lead_gen",
+  },
+  {
+    title: "Contact",
+    href: "/contact",
+    summary: "Validated contact form through API route handler.",
+    module: "lead_gen",
+  },
+  {
+    title: "Appointment",
+    href: "/appointment",
+    summary: "Booking form with required service/date/time states.",
+    module: "lead_gen",
+  },
+  {
+    title: "Careers",
+    href: "/careers",
+    summary: "Career apply flow with truthful not-configured delivery contract.",
+    module: "lead_gen",
+  },
+  {
+    title: "Shop",
+    href: "/shop",
+    summary: "Native product listing, filters, and search state.",
+    module: "commerce",
+  },
+  {
+    title: "Product Detail",
+    href: "/shop/premium-microfiber-cleaning-towel",
+    summary: "Param route for detail view, quantity controls, and cart/wishlist actions.",
+    module: "commerce",
+  },
+  {
+    title: "Cart",
+    href: "/shop/cart",
+    summary: "Cart module with quantity, remove, empty, and summary states.",
+    module: "commerce",
+  },
+  {
+    title: "Wishlist",
+    href: "/shop/wishlist",
+    summary: "Wishlist module with add-to-cart transition.",
+    module: "commerce",
+  },
+  {
+    title: "Checkout",
+    href: "/shop/checkout",
+    summary: "Checkout entry with explicit not-configured payment and fulfillment status.",
+    module: "commerce",
+  },
+  {
+    title: "Checkout Success",
+    href: "/shop/checkout/success",
+    summary: "Order request confirmation route.",
+    module: "commerce",
+  },
+  {
+    title: "Vehicle Listing",
+    href: "/listing",
+    summary: "Inventory listing with type filtering states.",
+    module: "inventory_listing",
+  },
+  {
+    title: "Vehicle List Alt",
+    href: "/car-list",
+    summary: "Baseline alternate vehicle list layout.",
+    module: "inventory_listing",
+  },
+  {
+    title: "Vehicle Detail",
+    href: "/listing/bmw-x5",
+    summary: "Listing detail page with inquiry form contract.",
+    module: "inventory_listing",
+  },
+  {
+    title: "Blog",
+    href: "/blog",
+    summary: "Content list module with slug routing.",
+    module: "content",
+  },
+  {
+    title: "Blog Detail",
+    href: "/blog/ceramic-coating-benefits-what-every-car-owner-should-know",
+    summary: "Post detail with validated comment/contact form surface.",
+    module: "content",
+  },
+  {
+    title: "FAQ",
+    href: "/faq",
+    summary: "Support and product/service frequently asked questions.",
+    module: "content",
+  },
+  {
+    title: "Gallery",
+    href: "/gallery",
+    summary: "Unified gallery route for all gallery variants.",
+    module: "content",
+  },
+  {
+    title: "Gallery Carousel",
+    href: "/gallery-carousel",
+    summary: "Baseline gallery carousel variant.",
+    module: "content",
+  },
+  {
+    title: "Gallery Slider",
+    href: "/gallery-slider",
+    summary: "Baseline gallery slider variant.",
+    module: "content",
+  },
+  {
+    title: "About",
+    href: "/about",
+    summary: "Brand mission and template intent narrative.",
+    module: "content",
+  },
+  {
+    title: "Team",
+    href: "/team",
+    summary: "Team roster route.",
+    module: "content",
+  },
+  {
+    title: "Testimonials",
+    href: "/testimonials",
+    summary: "Testimonials and social proof route.",
+    module: "content",
+  },
+  {
+    title: "Locations",
+    href: "/locations",
+    summary: "Workshop location directory.",
+    module: "content",
+  },
+  {
+    title: "Sitemap",
+    href: "/sitemap.xml",
+    summary: "SEO sitemap for route discoverability.",
+    module: "seo",
+  },
+  {
+    title: "Robots",
+    href: "/robots.txt",
+    summary: "Crawler policy with sitemap declaration.",
+    module: "seo",
+  },
+  {
+    title: "Privacy Policy",
+    href: "/privacy",
+    summary: "Privacy policy route.",
+    module: "legal",
+  },
+  {
+    title: "Terms and Conditions",
+    href: "/terms",
+    summary: "Terms route.",
+    module: "legal",
+  },
+  {
+    title: "Support",
+    href: "/support",
+    summary: "Customer support route.",
+    module: "legal",
+  },
+  {
+    title: "Shipping Policy",
+    href: "/shipping",
+    summary: "Shipping policy route with explicit integration dependency.",
+    module: "legal",
+  },
+  {
+    title: "Returns Policy",
+    href: "/returns",
+    summary: "Returns policy route with explicit integration dependency.",
+    module: "legal",
+  },
+];

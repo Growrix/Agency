@@ -1,0 +1,8 @@
+**/*.ts
+**/*.map
+tests/**
+scripts/**
+vitest.config.ts
+tsconfig.json
+IMPLEMENTATION_DECISION.md
+node_modules/**

@@ -1,0 +1,17 @@
+
+> web@0.1.0 test:e2e
+> playwright test tests/e2e/release-gates.spec.ts --project=desktop-chrome
+
+
+Running 8 tests using 1 worker
+
+  ok 1 [desktop-chrome] › tests\e2e\release-gates.spec.ts:4:5 › home and contact pages pass accessibility smoke checks (3.3s)
+  ok 2 [desktop-chrome] › tests\e2e\release-gates.spec.ts:18:5 › security headers and auth protection are present (90ms)
+  ok 3 [desktop-chrome] › tests\e2e\release-gates.spec.ts:36:5 › health endpoints respond and homepage loads within smoke threshold (3.2s)
+  ok 4 [desktop-chrome] › tests\e2e\release-gates.spec.ts:49:5 › homepage resource budget stays within performance guardrails (745ms)
+  ok 5 [desktop-chrome] › tests\e2e\release-gates.spec.ts:57:5 › homepage renders without client runtime errors (1.6s)
+  ok 6 [desktop-chrome] › tests\e2e\release-gates.spec.ts:70:5 › preview iframe budget stays constrained on homepage and category page (1.7s)
+  ok 7 [desktop-chrome] › tests\e2e\release-gates.spec.ts:89:5 › technical SEO baseline metadata exists on key category route (1.3s)
+  ok 8 [desktop-chrome] › tests\e2e\release-gates.spec.ts:105:5 › homepage keeps canonical and SearchAction schema (3.1s)
+
+  8 passed (18.9s)

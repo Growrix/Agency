@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">Nexus Digital logo</title>
+  <desc id="desc">Angular N monogram for Nexus Digital.</desc>
+  <rect width="120" height="120" rx="28" fill="#0a1022" />
+  <path d="M28 92V28h16l32 39V28h16v64H76L44 53v39H28Z" fill="#ffffff" />
+  <path d="M83 25 97 11l12 12-14 14z" fill="#05b981" />
+  <circle cx="94" cy="88" r="10" fill="#1155ff" />
+</svg>

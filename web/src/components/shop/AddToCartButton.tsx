@@ -20,6 +20,7 @@ type CartPlanOption = {
 type AddToCartButtonProps = {
   productSlug: string;
   productName: string;
+  productImageSrc?: string;
   productPrice: string;
   variantSlug?: string;
   tierName?: string;
@@ -43,6 +44,7 @@ function normalizePlanText(value: string | undefined) {
 export function AddToCartButton({
   productSlug,
   productName,
+  productImageSrc,
   productPrice,
   variantSlug,
   tierName,
@@ -89,6 +91,7 @@ export function AddToCartButton({
     addItem({
       product_slug: productSlug,
       product_name: productName,
+      product_image_src: productImageSrc,
       variant_slug: selectedPlan.slug,
       tier_name: normalizePlanText(selectedPlan.tierName) || selectedPlan.title,
       fulfillment_type: selectedPlan.fulfillmentType,
@@ -138,6 +141,7 @@ export function AddToCartButton({
           addItem({
             product_slug: productSlug,
             product_name: productName,
+            product_image_src: productImageSrc,
             variant_slug: variantSlug,
             tier_name: tierName,
             fulfillment_type: fulfillmentType,

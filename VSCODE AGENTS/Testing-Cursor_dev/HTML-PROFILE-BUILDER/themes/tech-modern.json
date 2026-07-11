@@ -1,0 +1,22 @@
+{
+  "name": "tech-modern",
+  "colorPrimary": "#1155ff",
+  "colorAccent": "#05b981",
+  "colorBg": "#f5f7ff",
+  "colorSurface": "#ffffff",
+  "colorText": "#0a1022",
+  "colorMuted": "#5f6b85",
+  "colorBorder": "#dce3ff",
+  "colorTextOnPrimary": "#ffffff",
+  "colorTextOnHero": "#ffffff",
+  "colorMutedOnHero": "#d8e4ff",
+  "colorHeroChipBg": "#edf3ff",
+  "colorHeroChipText": "#0a1022",
+  "colorHeroChipBorder": "#bfd2ff",
+  "fontHeading": "Space Grotesk",
+  "fontBody": "DM Sans",
+  "fontHeadingWeights": "500;700",
+  "fontBodyWeights": "400;500;700",
+  "borderRadius": "14px",
+  "heroGradient": "linear-gradient(135deg, #0a1022 0%, #153c96 100%)"
+}

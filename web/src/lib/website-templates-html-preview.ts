@@ -210,10 +210,6 @@ export function listWebsiteTemplateHtmlPreviews() {
 }
 
 export function getWebsiteTemplateHtmlPreviewUrl(templateSlug: string) {
-  if (process.env.NODE_ENV === "production") {
-    return getWebsiteTemplateHtmlPreviewStaticUrl(templateSlug);
-  }
-
   return `/api/${WEBSITE_TEMPLATE_HTML_PREVIEW_API_ROOT}/${encodeURIComponent(templateSlug)}`;
 }
 

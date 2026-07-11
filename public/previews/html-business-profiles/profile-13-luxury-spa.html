@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Aurum Spa — Luxury Wellness & Beauty</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Josefin Sans',sans-serif;background:#1a1208;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0f0d08;margin:0 auto;color:#e8dfc8}
+
+.hero{min-height:320px;background:linear-gradient(170deg,#2a1f0a 0%,#1a1208 60%,#0f0d08 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 26px}
+.hero-arc{position:absolute;top:-60px;right:-60px;width:220px;height:220px;border:1px solid rgba(212,175,55,.1);border-radius:50%}
+.hero-arc2{position:absolute;top:-30px;right:-30px;width:140px;height:140px;border:1px solid rgba(212,175,55,.07);border-radius:50%}
+.hero-arc3{position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border:1px solid rgba(212,175,55,.06);border-radius:50%}
+.hero-gold-strip{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#d4af37,transparent)}
+.hero-eyebrow{font-size:8px;letter-spacing:5px;text-transform:uppercase;color:rgba(212,175,55,.5);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:1;max-width:30px;height:1px;background:rgba(212,175,55,.3)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#e8dfc8;line-height:.85;letter-spacing:2px}
+.hero h1 em{font-style:italic;color:#d4af37}
+.hero-sub{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(232,223,200,.3);margin-top:14px}
+.hero-tag{position:absolute;top:28px;right:22px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,175,55,.5);writing-mode:vertical-rl;transform:rotate(180deg)}
+
+.gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.3),rgba(212,175,55,.6),rgba(212,175,55,.3),transparent);margin:0}
+.stats-row{display:flex;background:#14110b;border-bottom:1px solid rgba(212,175,55,.1)}
+.stat{flex:1;text-align:center;padding:14px 0;border-right:1px solid rgba(212,175,55,.1)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:22px;color:#d4af37;letter-spacing:1px}
+.stat-l{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,223,200,.25);margin-top:4px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(212,175,55,.6);margin:28px 0 14px;display:flex;align-items:center;gap:12px}
+.sec::before,.sec::after{content:'';height:1px;background:rgba(212,175,55,.2)}
+.sec::before{width:16px;flex-shrink:0}
+.sec::after{flex:1}
+
+.treatment-cat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,223,200,.2);margin:16px 0 8px}
+.treatment{display:flex;justify-content:space-between;align-items:flex-start;padding:14px;background:#14110b;border:1px solid rgba(212,175,55,.1);margin-bottom:2px;gap:12px}
+.treatment:first-of-type{border-radius:4px 4px 0 0}
+.treatment:last-of-type{border-radius:0 0 4px 4px}
+.t-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:#e8dfc8;letter-spacing:.3px}
+.t-desc{font-size:10px;color:rgba(232,223,200,.3);margin-top:3px;letter-spacing:.3px;line-height:1.5}
+.t-time{font-size:9px;color:rgba(212,175,55,.5);margin-top:4px;letter-spacing:1px}
+.t-price{font-family:'Cormorant Garamond',serif;font-size:20px;color:#d4af37;flex-shrink:0;text-align:right}
+.t-note{font-size:9px;color:rgba(232,223,200,.2);margin-top:2px;text-align:right;letter-spacing:.5px}
+
+.packages{display:flex;flex-direction:column;gap:10px}
+.pkg{background:#14110b;border:1px solid rgba(212,175,55,.15);border-radius:4px;padding:18px;position:relative}
+.pkg.signature{border-color:rgba(212,175,55,.4)}
+.pkg.signature::after{content:'SIGNATURE';position:absolute;top:-10px;right:16px;font-size:8px;letter-spacing:3px;background:#d4af37;color:#0f0d08;padding:3px 10px;font-weight:600}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#e8dfc8;margin-bottom:4px}
+.pkg-desc{font-size:11px;color:rgba(232,223,200,.35);line-height:1.6;margin-bottom:12px;letter-spacing:.3px}
+.pkg-includes{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.pkg-incl{font-size:11px;color:rgba(232,223,200,.4);display:flex;align-items:center;gap:8px;letter-spacing:.3px}
+.pkg-incl::before{content:'◦';color:rgba(212,175,55,.4);font-size:14px;flex-shrink:0}
+.pkg-footer{display:flex;align-items:center;justify-content:space-between}
+.pkg-price{font-family:'Cormorant Garamond',serif;font-size:24px;color:#d4af37}
+.pkg-duration{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(232,223,200,.2)}
+
+.therapists{display:flex;gap:12px;padding-bottom:4px;overflow-x:auto;scrollbar-width:none}
+.therapists::-webkit-scrollbar{display:none}
+.therapist{flex-shrink:0;text-align:center;width:86px}
+.th-av{width:60px;height:60px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;border:1px solid rgba(212,175,55,.3);background:#14110b;color:#d4af37}
+.th-name{font-family:'Cormorant Garamond',serif;font-size:12px;color:#e8dfc8;font-weight:400}
+.th-spec{font-size:9px;color:rgba(232,223,200,.3);letter-spacing:.5px;margin-top:2px}
+
+.book-box{background:#14110b;border:1px solid rgba(212,175,55,.2);border-radius:4px;padding:24px;text-align:center;position:relative;overflow:hidden}
+.book-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#d4af37,transparent)}
+.book-eyebrow{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(212,175,55,.4);margin-bottom:14px}
+.book-box h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#e8dfc8;margin-bottom:8px;font-style:italic}
+.book-box p{font-size:11px;color:rgba(232,223,200,.35);margin-bottom:20px;line-height:1.7;letter-spacing:.3px}
+.book-btn{display:block;border:1px solid #d4af37;color:#d4af37;border-radius:3px;padding:14px;font-size:9px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;margin-bottom:8px;transition:all .2s}
+.book-btn2{display:block;color:rgba(232,223,200,.25);font-size:9px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;margin-top:6px}
+
+.hours-box{background:#14110b;border:1px solid rgba(212,175,55,.1);border-radius:4px;overflow:hidden}
+.h-row{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(212,175,55,.06);font-size:11px}
+.h-row:last-child{border-bottom:none}
+.h-day{color:rgba(232,223,200,.4);letter-spacing:.5px}
+.h-time{color:rgba(212,175,55,.6);text-align:right}
+.h-closed{color:rgba(232,223,200,.15)}
+
+.contact-list{background:#14110b;border:1px solid rgba(212,175,55,.1);border-radius:4px;overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(212,175,55,.06);font-size:11px;color:rgba(232,223,200,.4);letter-spacing:.3px}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:28px;height:28px;border:1px solid rgba(212,175,55,.2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#080600;border-top:1px solid rgba(212,175,55,.1);padding:24px;text-align:center}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:5px;color:rgba(212,175,55,.3);margin-bottom:8px;font-style:italic}
+.footer-copy{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,223,200,.1)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-arc"></div><div class="hero-arc2"></div><div class="hero-arc3"></div>
+  <div class="hero-gold-strip"></div>
+  <div class="hero-tag">Luxury · Wellness</div>
+  <div class="hero-eyebrow">Established 2012</div>
+  <h1>Aurum<br><em>Spa</em></h1>
+  <div class="hero-sub">Luxury Wellness &amp; Beauty · Dhaka</div>
+</div>
+<div class="gold-divider"></div>
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">12yr</div><div class="stat-l">Est.</div></div>
+  <div class="stat"><div class="stat-n">3,000+</div><div class="stat-l">Clients</div></div>
+  <div class="stat"><div class="stat-n">5★</div><div class="stat-l">Rated</div></div>
+</div>
+<div class="body">
+  <div class="sec">Treatments</div>
+
+  <div class="treatment-cat">Massage Therapy</div>
+  <div class="treatment"><div><div class="t-name">Swedish Relaxation Massage</div><div class="t-desc">Full body · Hot towels · Aromatherapy oils</div><div class="t-time">60 min</div></div><div><div class="t-price">$85</div><div class="t-note">per session</div></div></div>
+  <div class="treatment"><div><div class="t-name">Deep Tissue Therapy</div><div class="t-desc">Muscle release · Sports recovery · Targeted pressure</div><div class="t-time">75 min</div></div><div><div class="t-price">$105</div></div></div>
+  <div class="treatment"><div><div class="t-name">Hot Stone Ritual</div><div class="t-desc">Basalt stones · Full body · Deep warmth</div><div class="t-time">90 min</div></div><div><div class="t-price">$130</div></div></div>
+
+  <div class="treatment-cat">Facial &amp; Skin</div>
+  <div class="treatment"><div><div class="t-name">Gold Luminosity Facial</div><div class="t-desc">24k gold serum · LED therapy · Collagen mask</div><div class="t-time">75 min</div></div><div><div class="t-price">$120</div></div></div>
+  <div class="treatment"><div><div class="t-name">Hydra Renewal Facial</div><div class="t-desc">Deep cleanse · HydraFacial · SPF finish</div><div class="t-time">60 min</div></div><div><div class="t-price">$90</div></div></div>
+
+  <div class="sec">Signature Packages</div>
+  <div class="packages">
+    <div class="pkg signature">
+      <div class="pkg-name">The Golden Day</div>
+      <div class="pkg-desc">Our most exclusive full-day retreat, designed to restore mind, body and radiance.</div>
+      <div class="pkg-includes">
+        <div class="pkg-incl">Hot Stone Massage (90 min)</div>
+        <div class="pkg-incl">Gold Luminosity Facial (75 min)</div>
+        <div class="pkg-incl">Manicure &amp; Pedicure</div>
+        <div class="pkg-incl">Light spa lunch &amp; herbal tea</div>
+      </div>
+      <div class="pkg-footer"><div class="pkg-price">$380</div><div class="pkg-duration">Full day · 6hrs</div></div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-name">Couple's Retreat</div>
+      <div class="pkg-desc">A shared experience of relaxation and renewal for two.</div>
+      <div class="pkg-includes">
+        <div class="pkg-incl">Couples Massage (60 min each)</div>
+        <div class="pkg-incl">Champagne &amp; chocolate</div>
+        <div class="pkg-incl">Private suite access</div>
+      </div>
+      <div class="pkg-footer"><div class="pkg-price">$220</div><div class="pkg-duration">3 hrs · For two</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Our Therapists</div>
+  <div class="therapists">
+    <div class="therapist"><div class="th-av">RA</div><div class="th-name">Rima A.</div><div class="th-spec">Massage · 10yr</div></div>
+    <div class="therapist"><div class="th-av">SN</div><div class="th-name">Sadia N.</div><div class="th-spec">Facials · 8yr</div></div>
+    <div class="therapist"><div class="th-av">LH</div><div class="th-name">Layla H.</div><div class="th-spec">Body · 7yr</div></div>
+    <div class="therapist"><div class="th-av">MP</div><div class="th-name">Maya P.</div><div class="th-spec">Nails · 6yr</div></div>
+  </div>
+
+  <div class="sec">Reserve Your Experience</div>
+  <div class="book-box">
+    <div class="book-eyebrow">Private &amp; Confidential Booking</div>
+    <h3>A sanctuary awaits you.</h3>
+    <p>All bookings are by appointment. We recommend reserving 48 hours in advance to secure your preferred therapist and time.</p>
+    <a href="https://wa.me/0000000000" class="book-btn">Reserve via WhatsApp</a>
+    <a href="tel:+8801700000000" class="book-btn">Call to book</a>
+    <a href="#" class="book-btn2">View full treatment menu →</a>
+  </div>
+
+  <div class="sec">Hours</div>
+  <div class="hours-box">
+    <div class="h-row"><span class="h-day">Monday – Friday</span><span class="h-time">10:00 am – 9:00 pm</span></div>
+    <div class="h-row"><span class="h-day">Saturday</span><span class="h-time">10:00 am – 10:00 pm</span></div>
+    <div class="h-row"><span class="h-day">Sunday</span><span class="h-time">11:00 am – 7:00 pm</span></div>
+    <div class="h-row"><span class="h-day">Public Holidays</span><span class="h-time">11:00 am – 6:00 pm</span></div>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-list">
+    <div class="c-row"><div class="c-icon">📞</div>+880 2-9876543</div>
+    <div class="c-row"><div class="c-icon">📧</div>reserve@aurumspabD.com</div>
+    <div class="c-row"><div class="c-icon">📍</div>Level 8, Gulshan Tower, Dhaka 1212</div>
+    <div class="c-row"><div class="c-icon">🅿️</div>Complimentary valet parking</div>
+  </div>
+</div>
+<footer><div class="footer-logo">Aurum</div><div class="footer-copy">© 2025 Aurum Spa · All rights reserved · By appointment only</div></footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

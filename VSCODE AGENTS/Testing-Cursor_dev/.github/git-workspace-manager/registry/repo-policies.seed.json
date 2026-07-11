@@ -1,0 +1,42 @@
+{
+  "global_rules": {
+    "prefer_explicit_project_path": true,
+    "prefer_active_file_path_over_cwd": true,
+    "require_folder_repo_index_lookup_for_push": true,
+    "block_root_push_when_folder_mapping_remote_differs": true,
+    "require_subtree_prefix_completeness_preflight": true,
+    "block_subtree_push_when_prefix_has_untracked": true,
+    "block_workspace_root_fallback_when_child_repo_exists": true,
+    "require_canonical_path_resolution": true,
+    "require_commit_preflight": true,
+    "require_push_preflight": true,
+    "allow_auto_push": false
+  },
+  "role_policies": {
+    "factory-backup": {
+      "default_action": "block-unless-explicit-factory-backup-request",
+      "commit_allowed": true,
+      "push_allowed": true
+    },
+    "project": {
+      "default_action": "allow-explicit-project-flow",
+      "commit_allowed": true,
+      "push_allowed": true
+    },
+    "project-local-only": {
+      "default_action": "allow-local-commit-only",
+      "commit_allowed": true,
+      "push_allowed": false
+    }
+  },
+  "blocking_conditions": [
+    "ambiguous-repo-target",
+    "missing-canonical-path",
+    "missing-remote-for-push",
+    "alias-path-without-resolution",
+    "workspace-root-selected-for-child-project-task",
+    "folder-mapped-project-resolving-to-root",
+    "folder-mapped-remote-mismatch",
+    "subtree-prefix-has-untracked-files"
+  ]
+}

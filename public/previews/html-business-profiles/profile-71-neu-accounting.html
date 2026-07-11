@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>ClearCount — Accounting & Tax Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:#dde1e7;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#e0e5ec;margin:0 auto;color:#2d3a4a}
+
+/* NEUMORPHIC BASE — soft gray */
+/* neumorphic raised: box-shadow: -5px -5px 12px rgba(255,255,255,.8), 5px 5px 12px rgba(163,177,198,.6) */
+/* neumorphic inset: box-shadow: inset -3px -3px 8px rgba(255,255,255,.8), inset 3px 3px 8px rgba(163,177,198,.6) */
+
+.neu { box-shadow: -5px -5px 12px rgba(255,255,255,.85), 5px 5px 12px rgba(163,177,198,.65); }
+.neu-inset { box-shadow: inset -3px -3px 8px rgba(255,255,255,.8), inset 3px 3px 8px rgba(163,177,198,.55); }
+
+.hero{background:#e0e5ec;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:32px 22px 26px;position:relative;overflow:hidden}
+.hero-top{position:absolute;top:28px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center}
+.hero-logo{font-size:13px;font-weight:800;color:rgba(45,58,74,.4);letter-spacing:2px}
+.hero-avail{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:700;color:rgba(45,58,74,.35);letter-spacing:1px;background:#e0e5ec;border-radius:100px;padding:5px 12px;box-shadow:-2px -2px 6px rgba(255,255,255,.8),2px 2px 6px rgba(163,177,198,.55)}
+.hd{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:b 1.5s infinite}
+@keyframes b{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:42px;font-weight:900;color:#2d3a4a;line-height:.88;letter-spacing:-2px}
+.hero h1 .acc{color:#3a7bff}
+.hero-sub{font-size:11px;color:rgba(45,58,74,.45);margin-top:10px;line-height:1.6}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:20px 18px}
+.stat{background:#e0e5ec;border-radius:16px;padding:16px 0;text-align:center;box-shadow:-5px -5px 12px rgba(255,255,255,.85),5px 5px 12px rgba(163,177,198,.65)}
+.stat-n{font-size:20px;font-weight:900;color:#3a7bff;letter-spacing:-1px}
+.stat-l{font-size:9px;color:rgba(45,58,74,.35);margin-top:4px;letter-spacing:.5px;font-weight:600}
+
+.body{padding:0 16px 40px}
+.sec{font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(45,58,74,.35);margin:20px 0 12px}
+
+.services{display:flex;flex-direction:column;gap:10px}
+.svc{background:#e0e5ec;border-radius:16px;padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;box-shadow:-4px -4px 10px rgba(255,255,255,.8),4px 4px 10px rgba(163,177,198,.6)}
+.svc-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.svc-name{font-size:13px;font-weight:800;color:#2d3a4a;letter-spacing:-.3px}
+.svc-desc{font-size:10px;color:rgba(45,58,74,.4);margin-top:2px;line-height:1.4}
+.svc-price{font-size:16px;font-weight:900;color:#3a7bff;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(45,58,74,.35);font-weight:600;margin-top:1px}
+
+.process{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.proc{background:#e0e5ec;border-radius:16px;padding:16px;box-shadow:-4px -4px 10px rgba(255,255,255,.8),4px 4px 10px rgba(163,177,198,.6);position:relative;overflow:hidden}
+.proc::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:#3a7bff;border-radius:0 2px 2px 0;opacity:.4}
+.proc-n{font-size:26px;font-weight:900;color:rgba(58,123,255,.15);line-height:1;margin-bottom:4px}
+.proc-title{font-size:12px;font-weight:800;color:#2d3a4a;letter-spacing:-.2px}
+.proc-desc{font-size:9px;color:rgba(45,58,74,.35);margin-top:3px;line-height:1.4}
+
+.cta-neu{background:#e0e5ec;border-radius:22px;padding:26px;text-align:center;box-shadow:-6px -6px 14px rgba(255,255,255,.9),6px 6px 14px rgba(163,177,198,.7)}
+.cta-neu h3{font-size:22px;font-weight:900;color:#2d3a4a;letter-spacing:-1px;margin-bottom:8px}
+.cta-neu p{font-size:11px;color:rgba(45,58,74,.4);margin-bottom:22px;line-height:1.6}
+.cta-btn-neu{display:block;background:#3a7bff;color:#fff;border-radius:14px;padding:15px;font-size:14px;font-weight:800;text-decoration:none;margin-bottom:10px;box-shadow:0 6px 20px rgba(58,123,255,.35),-3px -3px 8px rgba(255,255,255,.3),3px 3px 8px rgba(58,123,255,.3)}
+.cta-btn2-neu{display:block;background:#e0e5ec;color:rgba(45,58,74,.5);border-radius:14px;padding:13px;font-size:12px;font-weight:700;text-decoration:none;box-shadow:-3px -3px 8px rgba(255,255,255,.8),3px 3px 8px rgba(163,177,198,.6)}
+
+.contacts{background:#e0e5ec;border-radius:18px;overflow:hidden;box-shadow:-4px -4px 10px rgba(255,255,255,.8),4px 4px 10px rgba(163,177,198,.55)}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(163,177,198,.25);font-size:12px;color:rgba(45,58,74,.5)}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:#3a7bff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;box-shadow:0 4px 12px rgba(58,123,255,.35)}
+
+footer{background:#d8dde6;padding:18px;text-align:center;font-size:10px;color:rgba(45,58,74,.25);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-logo">ClearCount</div>
+    <div class="hero-avail"><span class="hd"></span>Accepting Clients</div>
+  </div>
+  <h1>Numbers<br>done <span class="acc">right.</span></h1>
+  <div class="hero-sub">Accounting, tax filing, payroll and financial advisory for SMEs across Bangladesh. Certified CA firm — 12 years of trust.</div>
+</div>
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">850+</div><div class="stat-l">Clients</div></div>
+  <div class="stat"><div class="stat-n">12yr</div><div class="stat-l">Experience</div></div>
+  <div class="stat"><div class="stat-n">CA</div><div class="stat-l">Certified</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">📊</div><div><div class="svc-name">Monthly Accounting</div><div class="svc-desc">Bookkeeping, ledger maintenance, P&L, balance sheet</div></div><div class="svc-price">৳5,000<span>/ month</span></div></div>
+    <div class="svc"><div class="svc-icon">🏛️</div><div><div class="svc-name">Tax Return Filing</div><div class="svc-desc">Individual & corporate — NBR compliance</div></div><div class="svc-price">৳3,500<span>from</span></div></div>
+    <div class="svc"><div class="svc-icon">💼</div><div><div class="svc-name">Payroll Processing</div><div class="svc-desc">Salary, tax deduction, TDS filing, payslips</div></div><div class="svc-price">৳2,000<span>/ month</span></div></div>
+    <div class="svc"><div class="svc-icon">📋</div><div><div class="svc-name">Audit & Assurance</div><div class="svc-desc">Statutory audit, internal audit, compliance reports</div></div><div class="svc-price">৳25,000<span>from</span></div></div>
+  </div>
+  <div class="sec" style="margin-top:24px">Our Process</div>
+  <div class="process">
+    <div class="proc"><div class="proc-n">01</div><div class="proc-title">Onboarding</div><div class="proc-desc">Free consultation, data collection, system setup</div></div>
+    <div class="proc"><div class="proc-n">02</div><div class="proc-title">Monthly Cycle</div><div class="proc-desc">Entries, reconciliation, management reports</div></div>
+    <div class="proc"><div class="proc-n">03</div><div class="proc-title">Tax Filing</div><div class="proc-desc">Timely NBR submission, optimised liability</div></div>
+    <div class="proc"><div class="proc-n">04</div><div class="proc-title">Advisory</div><div class="proc-desc">CFO-level insight on demand via WhatsApp</div></div>
+  </div>
+  <div class="sec" style="margin-top:24px">Get Started</div>
+  <div class="cta-neu">
+    <h3>Free financial health check.</h3>
+    <p>30-minute review of your books — we'll tell you exactly what needs fixing. No charge, no commitment.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn-neu">📊 Book Free Consultation</a>
+    <a href="tel:+8801700000000" class="cta-btn2-neu">📞 Call us</a>
+  </div>
+  <div class="sec" style="margin-top:24px">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Dhanmondi, Dhaka · Remote nationwide</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 7pm</div>
+  </div>
+</div>
+<footer>© 2025 ClearCount Accounting · ICAB Registered · Dhaka</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

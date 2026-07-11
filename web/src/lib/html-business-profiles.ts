@@ -27,6 +27,8 @@ export const HTML_BUSINESS_PROFILE_SHOP_CATEGORY = {
   slug: "html-business-profiles",
 } as const;
 
+export const HTML_BUSINESS_PROFILE_PREVIEW_ROOT = "html-business-profiles" as const;
+
 const CATEGORY_DETAILS: Record<HtmlBusinessProfileCategorySlug, HtmlBusinessProfileCategory> = {
   "creative-marketing": {
     slug: "creative-marketing",
@@ -230,12 +232,7 @@ export const HTML_BUSINESS_PROFILES_SERVICE = {
 
 export function getHtmlBusinessProfilePreviewUrl(templateSlug: string) {
   const normalizedTemplateSlug = templateSlug.replace(/^html-business-profile-/, "");
-  const template = getHtmlBusinessProfileBySlug(normalizedTemplateSlug);
-  if (!template) {
-    return `/previews/html-business-profiles/${normalizedTemplateSlug}.html`;
-  }
-
-  return `/previews/html-business-profiles/${template.fileName}`;
+  return `/api/html-business-profiles/${encodeURIComponent(normalizedTemplateSlug)}`;
 }
 
 export function getHtmlBusinessProfilesCategoryPath(categorySlug: HtmlBusinessProfileCategorySlug) {

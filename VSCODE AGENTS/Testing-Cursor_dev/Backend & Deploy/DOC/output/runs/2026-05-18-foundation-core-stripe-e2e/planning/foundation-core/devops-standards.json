@@ -1,0 +1,122 @@
+{
+  "environments": {
+    "local": {
+      "stripe_mode": "test",
+      "required_env": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "optional_env": [
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+      ],
+      "webhook_forwarding": "stripe listen --forward-to http://localhost:3000/api/webhooks/stripe"
+    },
+    "preview": {
+      "stripe_mode": "test",
+      "required_env": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "optional_env": [
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+      ],
+      "webhook_endpoint": "/api/webhooks/stripe"
+    },
+    "staging": {
+      "stripe_mode": "test",
+      "required_env": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "optional_env": [
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+      ],
+      "webhook_endpoint": "/api/webhooks/stripe"
+    },
+    "production": {
+      "stripe_mode": "live",
+      "required_env": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "optional_env": [
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+      ],
+      "webhook_endpoint": "/api/webhooks/stripe"
+    }
+  },
+  "billing_release_model": {
+    "deploy_platform": "Vercel",
+    "dashboard_setup": [
+      "Create products and prices in Stripe Dashboard.",
+      "Assign stable lookup_key values that map to template offer_key values.",
+      "Enable Customer Portal.",
+      "Register one webhook endpoint per environment.",
+      "Separate test and live mode secrets."
+    ],
+    "vault_scope": [
+      {
+        "name": "STRIPE_SECRET_KEY",
+        "scopes": [
+          "Development",
+          "Preview",
+          "Production"
+        ]
+      },
+      {
+        "name": "STRIPE_WEBHOOK_SECRET",
+        "scopes": [
+          "Development",
+          "Preview",
+          "Production"
+        ]
+      },
+      {
+        "name": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "scopes": [
+          "Preview",
+          "Production"
+        ],
+        "required_when": "Template uses Stripe.js directly."
+      }
+    ]
+  },
+  "ci_cd": {
+    "required_gates": [
+      "lint",
+      "typecheck",
+      "test",
+      "build",
+      "stripe_integration_tests",
+      "runtime_smoke"
+    ],
+    "deployment_blockers": [
+      "Missing Stripe envs.",
+      "Missing billing migrations.",
+      "Webhook signature verification test failures.",
+      "Offer resolution contract missing lookup_key coverage."
+    ]
+  },
+  "monitoring": {
+    "logs": "Axiom",
+    "errors": "Sentry",
+    "uptime": "Better Stack or platform equivalent",
+    "alerts": [
+      "stripe_webhook_failures",
+      "billing_checkout_error_rate",
+      "billing_portal_error_rate"
+    ]
+  },
+  "rollback": {
+    "supported": true,
+    "strategy": "rollback the deployment and leave webhook endpoint routed to the last healthy release"
+  },
+  "backups": {
+    "database": "Required before production release",
+    "billing_restore_drill": "Required before production release"
+  },
+  "cost": {
+    "monthly_ceiling_usd": "UNKNOWN",
+    "alert_threshold_pct": 80
+  }
+}

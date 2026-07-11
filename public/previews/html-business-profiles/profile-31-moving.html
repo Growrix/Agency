@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SwiftMove — Moving & Shifting Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#1a0a00;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#111;margin:0 auto;color:#f0e8e0}
+
+.hero{min-height:255px;background:linear-gradient(155deg,#f57c00 0%,#e65100 50%,#bf360c 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px}
+.hero-arrows{position:absolute;inset:0;opacity:.07;font-size:40px;display:flex;flex-wrap:wrap;gap:16px;align-content:flex-start;padding:10px}
+.hero-truck{position:absolute;right:10px;bottom:20px;font-size:56px;opacity:.15}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:4px 12px;font-size:9px;color:#fff;font-weight:700;letter-spacing:1px;margin-bottom:12px;width:fit-content}
+.hero h1{font-family:'Oswald',sans-serif;font-size:44px;font-weight:700;color:#fff;line-height:.92;letter-spacing:-.5px;text-transform:uppercase}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.6);margin-top:8px;line-height:1.5}
+.hero-rating{font-size:10px;color:rgba(255,255,255,.4);margin-top:8px}
+
+.info-bar{background:#1a1a1a;border-bottom:1px solid #252525;display:flex}
+.ib{flex:1;text-align:center;padding:12px 0;border-right:1px solid #252525}
+.ib:last-child{border-right:none}
+.ib-val{font-family:'Oswald',sans-serif;font-size:16px;color:#f57c00;font-weight:600}
+.ib-label{font-size:9px;color:rgba(240,232,224,.25);margin-top:3px;letter-spacing:.5px;text-transform:uppercase}
+
+.body{padding:0 18px 40px;background:#111}
+.sec{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;color:#f0e8e0;text-transform:uppercase;letter-spacing:2px;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#f57c00,transparent)}
+
+.services{display:flex;flex-direction:column;gap:6px}
+.svc{background:#1a1a1a;border:1px solid #252525;border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.svc-icon{font-size:22px;margin-bottom:3px}
+.svc-name{font-size:13px;font-weight:700;color:#f0e8e0;letter-spacing:.2px}
+.svc-desc{font-size:11px;color:rgba(240,232,224,.3);margin-top:2px;line-height:1.4}
+.svc-price{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;color:#f57c00;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(240,232,224,.25);font-family:'DM Sans',sans-serif;margin-top:1px}
+
+.features{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.feat{background:#1a1a1a;border:1px solid #252525;border-radius:8px;padding:12px;display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(240,232,224,.5)}
+.feat::before{content:'✓';color:#f57c00;font-weight:700;flex-shrink:0}
+
+.book-box{background:linear-gradient(135deg,#f57c00,#e65100);border-radius:14px;padding:20px;text-align:center}
+.book-box h3{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.book-box p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:16px;line-height:1.5}
+.book-btn{display:block;background:#fff;color:#e65100;border-radius:8px;padding:13px;font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;text-decoration:none;margin-bottom:8px}
+.book-btn2{display:block;background:rgba(0,0,0,.2);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:11px;font-size:11px;text-decoration:none}
+
+.contact-strip{background:#1a1a1a;border:1px solid #252525;border-radius:8px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #252525;font-size:12px;color:rgba(240,232,224,.4)}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:28px;height:28px;background:#f57c00;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#0a0500;border-top:2px solid #f57c00;padding:14px;text-align:center;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;color:rgba(240,232,224,.12);text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-arrows">→→→→→→→→→→→→→→→→→→→</div>
+  <div class="hero-truck">🚛</div>
+  <div class="hero-pill">📦 Serving all of Dhaka</div>
+  <h1>Swift<br>Move</h1>
+  <div class="hero-sub">Home shifting, office relocation, packing & transport. Professional movers — careful with every item.</div>
+  <div class="hero-rating">⭐ 4.8 · 900+ moves completed · Est. 2011</div>
+</div>
+<div class="info-bar">
+  <div class="ib"><div class="ib-val">900+</div><div class="ib-label">Moves Done</div></div>
+  <div class="ib"><div class="ib-val">Same</div><div class="ib-label">Day Available</div></div>
+  <div class="ib"><div class="ib-val">100%</div><div class="ib-label">Insured Cargo</div></div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-icon">🏠</div><div class="svc-name">Home Shifting</div><div class="svc-desc">Pack, load, transport, unpack — full service</div></div><div class="svc-price">৳5,000<span>from / 2BHK</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🏢</div><div class="svc-name">Office Relocation</div><div class="svc-desc">Desks, servers, equipment — weekend moves</div></div><div class="svc-price">৳12,000<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">📦</div><div class="svc-name">Packing Only</div><div class="svc-desc">Professional packing with quality materials</div></div><div class="svc-price">৳2,000<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🪑</div><div class="svc-name">Single Item Move</div><div class="svc-desc">Sofa, fridge, AC, bed — quick delivery</div></div><div class="svc-price">৳800<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-icon">🏗️</div><div class="svc-name">Storage Service</div><div class="svc-desc">Secure warehouse storage by the month</div></div><div class="svc-price">৳3,500<span>/ month</span></div></div>
+  </div>
+
+  <div class="sec">Why Choose Us</div>
+  <div class="features">
+    <div class="feat">Uniformed crew</div>
+    <div class="feat">Cargo insured</div>
+    <div class="feat">Protective wrapping</div>
+    <div class="feat">On-time guarantee</div>
+    <div class="feat">GPS-tracked trucks</div>
+    <div class="feat">Weekend moves</div>
+    <div class="feat">Zero damage policy</div>
+    <div class="feat">Free quote</div>
+  </div>
+
+  <div class="sec">Book Your Move</div>
+  <div class="book-box">
+    <h3>📦 Ready to Move?</h3>
+    <p>Tell us your current and new address, and move date. We'll give you a fixed price — guaranteed.</p>
+    <a href="https://wa.me/8801700000000" class="book-btn">🚛 Get a Free Quote</a>
+    <a href="tel:+8801700000000" class="book-btn2">📞 Call for same-day booking</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-strip">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000 (7am–9pm)</div>
+    <div class="c-row"><div class="c-icon">💬</div>WhatsApp preferred for quotes</div>
+    <div class="c-row"><div class="c-icon">📍</div>Based in Mirpur · All Bangladesh</div>
+  </div>
+</div>
+<footer>SwiftMove · Moving & Shifting · Dhaka · Since 2011</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

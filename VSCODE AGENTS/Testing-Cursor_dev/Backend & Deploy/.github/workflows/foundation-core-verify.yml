@@ -1,0 +1,61 @@
+name: foundation-core-verify
+
+on:
+  pull_request:
+    branches: ["main", "Agents"]
+    paths:
+      - "Foundation-Core/**"
+      - "DOC/agents/foundation_planner.agent.md"
+      - ".github/agents/foundation_planner.agent.md"
+      - "DOC/agents/foundation_developer.agent.md"
+      - ".github/agents/foundation_developer.agent.md"
+      - "DOC/execution/spec-rules/foundation-core-planning-spec.md"
+      - "DOC/execution/spec-rules/foundation-factory-e2e-spec.md"
+      - "DOC/execution/spec-rules/frontend-attach-contract-spec.md"
+      - "DOC/validation/checklists/foundation-factory-readiness-checklist.md"
+  push:
+    branches: ["main", "Agents"]
+    paths:
+      - "Foundation-Core/**"
+      - "DOC/agents/foundation_planner.agent.md"
+      - ".github/agents/foundation_planner.agent.md"
+      - "DOC/agents/foundation_developer.agent.md"
+      - ".github/agents/foundation_developer.agent.md"
+      - "DOC/execution/spec-rules/foundation-core-planning-spec.md"
+      - "DOC/execution/spec-rules/foundation-factory-e2e-spec.md"
+      - "DOC/execution/spec-rules/frontend-attach-contract-spec.md"
+      - "DOC/validation/checklists/foundation-factory-readiness-checklist.md"
+  workflow_dispatch:
+
+jobs:
+  verify-foundation-core:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: Foundation-Core
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: Foundation-Core/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Foundation verify
+        run: npm run verify
+
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation-core-coverage
+          path: Foundation-Core/coverage/**
+          if-no-files-found: warn

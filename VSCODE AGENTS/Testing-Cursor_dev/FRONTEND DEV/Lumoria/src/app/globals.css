@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Force post-load visual state so snapshots do not remain hidden behind legacy overlays. */
+body .pre-loader {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body a#back-to-top,
+body .go-to-top,
+body .wdt-go-to-top {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Keep non-revealed background-only animation containers collapsed like source snapshots. */
+.elementor-invisible .animated-slow.e-con.e-child {
+  min-height: 0 !important;
+  height: 0 !important;
+}
+
+/* Source renders a single subtitle frame at rest; suppress duplicate animation frames. */
+.wdt-heading-subtitle-wrapper .wdt-heading-subtitle-animate:not(:first-child) {
+  display: none !important;
+}

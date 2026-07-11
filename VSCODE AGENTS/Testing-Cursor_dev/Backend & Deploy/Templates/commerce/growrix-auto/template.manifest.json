@@ -1,0 +1,32 @@
+{
+  "name": "growrix-auto",
+  "category": "commerce",
+  "mode": "foundation_attached_or_mock_fallback",
+  "source_runtime": "GrowrixAuto",
+  "foundation_contract": "../../../Foundation-Core/docs/contracts/frontend-attach-contract.json",
+  "template_local_facade_root": "/api/foundation",
+  "required_env": [
+    "FOUNDATION_BASE_URL",
+    "NEXT_PUBLIC_SITE_URL"
+  ],
+  "wired_surfaces": [
+    "shared-site-config",
+    "home-content-shell",
+    "contact-form-submit"
+  ],
+  "routes": [
+    "/",
+    "/shop",
+    "/shop/product/[slug]",
+    "/contact-us",
+    "/api/foundation/health",
+    "/api/foundation/auth/session",
+    "/api/foundation/content/site-config",
+    "/api/foundation/content/pages/[slug]",
+    "/api/foundation/content/collections/[collection]",
+    "/api/foundation/forms/[formId]/submit",
+    "/api/foundation/media/upload",
+    "/api/foundation/preview/enable",
+    "/api/foundation/content/revalidate"
+  ]
+}

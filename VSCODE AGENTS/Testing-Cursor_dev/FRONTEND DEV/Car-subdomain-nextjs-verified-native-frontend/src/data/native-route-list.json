@@ -1,0 +1,194 @@
+[
+  {
+    "slug": "about",
+    "fileName": "about.html",
+    "htmlPath": "/about.html",
+    "canonicalPath": "/about"
+  },
+  {
+    "slug": "appointment",
+    "fileName": "appointment.html",
+    "htmlPath": "/appointment.html",
+    "canonicalPath": "/appointment"
+  },
+  {
+    "slug": "blog-single",
+    "fileName": "blog-single.html",
+    "htmlPath": "/blog-single.html",
+    "canonicalPath": "/blog-single"
+  },
+  {
+    "slug": "blog",
+    "fileName": "blog.html",
+    "htmlPath": "/blog.html",
+    "canonicalPath": "/blog"
+  },
+  {
+    "slug": "car-list",
+    "fileName": "car-list.html",
+    "htmlPath": "/car-list.html",
+    "canonicalPath": "/car-list"
+  },
+  {
+    "slug": "car-listing",
+    "fileName": "car-listing.html",
+    "htmlPath": "/car-listing.html",
+    "canonicalPath": "/car-listing"
+  },
+  {
+    "slug": "car-single",
+    "fileName": "car-single.html",
+    "htmlPath": "/car-single.html",
+    "canonicalPath": "/car-single"
+  },
+  {
+    "slug": "careers",
+    "fileName": "careers.html",
+    "htmlPath": "/careers.html",
+    "canonicalPath": "/careers"
+  },
+  {
+    "slug": "contact",
+    "fileName": "contact.html",
+    "htmlPath": "/contact.html",
+    "canonicalPath": "/contact"
+  },
+  {
+    "slug": "faq",
+    "fileName": "faq.html",
+    "htmlPath": "/faq.html",
+    "canonicalPath": "/faq"
+  },
+  {
+    "slug": "gallery-carousel",
+    "fileName": "gallery-carousel.html",
+    "htmlPath": "/gallery-carousel.html",
+    "canonicalPath": "/gallery-carousel"
+  },
+  {
+    "slug": "gallery-slider",
+    "fileName": "gallery-slider.html",
+    "htmlPath": "/gallery-slider.html",
+    "canonicalPath": "/gallery-slider"
+  },
+  {
+    "slug": "gallery",
+    "fileName": "gallery.html",
+    "htmlPath": "/gallery.html",
+    "canonicalPath": "/gallery"
+  },
+  {
+    "slug": "homepage-2",
+    "fileName": "homepage-2.html",
+    "htmlPath": "/homepage-2.html",
+    "canonicalPath": "/homepage-2"
+  },
+  {
+    "slug": "homepage-3",
+    "fileName": "homepage-3.html",
+    "htmlPath": "/homepage-3.html",
+    "canonicalPath": "/homepage-3"
+  },
+  {
+    "slug": "homepage-4",
+    "fileName": "homepage-4.html",
+    "htmlPath": "/homepage-4.html",
+    "canonicalPath": "/homepage-4"
+  },
+  {
+    "slug": "homepage-5",
+    "fileName": "homepage-5.html",
+    "htmlPath": "/homepage-5.html",
+    "canonicalPath": "/homepage-5"
+  },
+  {
+    "slug": "homepage-6",
+    "fileName": "homepage-6.html",
+    "htmlPath": "/homepage-6.html",
+    "canonicalPath": "/homepage-6"
+  },
+  {
+    "slug": "homepage-7",
+    "fileName": "homepage-7.html",
+    "htmlPath": "/homepage-7.html",
+    "canonicalPath": "/homepage-7"
+  },
+  {
+    "slug": "homepage-8",
+    "fileName": "homepage-8.html",
+    "htmlPath": "/homepage-8.html",
+    "canonicalPath": "/homepage-8"
+  },
+  {
+    "slug": "index",
+    "fileName": "index.html",
+    "htmlPath": "/index.html",
+    "canonicalPath": "/"
+  },
+  {
+    "slug": "locations",
+    "fileName": "locations.html",
+    "htmlPath": "/locations.html",
+    "canonicalPath": "/locations"
+  },
+  {
+    "slug": "privacy",
+    "fileName": "privacy.html",
+    "htmlPath": "/privacy.html",
+    "canonicalPath": "/privacy"
+  },
+  {
+    "slug": "service-single",
+    "fileName": "service-single.html",
+    "htmlPath": "/service-single.html",
+    "canonicalPath": "/service-single"
+  },
+  {
+    "slug": "services-2",
+    "fileName": "services-2.html",
+    "htmlPath": "/services-2.html",
+    "canonicalPath": "/services-2"
+  },
+  {
+    "slug": "services-3",
+    "fileName": "services-3.html",
+    "htmlPath": "/services-3.html",
+    "canonicalPath": "/services-3"
+  },
+  {
+    "slug": "services",
+    "fileName": "services.html",
+    "htmlPath": "/services.html",
+    "canonicalPath": "/services"
+  },
+  {
+    "slug": "shop-product-single",
+    "fileName": "shop-product-single.html",
+    "htmlPath": "/shop-product-single.html",
+    "canonicalPath": "/shop-product-single"
+  },
+  {
+    "slug": "shop",
+    "fileName": "shop.html",
+    "htmlPath": "/shop.html",
+    "canonicalPath": "/shop"
+  },
+  {
+    "slug": "team",
+    "fileName": "team.html",
+    "htmlPath": "/team.html",
+    "canonicalPath": "/team"
+  },
+  {
+    "slug": "terms",
+    "fileName": "terms.html",
+    "htmlPath": "/terms.html",
+    "canonicalPath": "/terms"
+  },
+  {
+    "slug": "testimonials",
+    "fileName": "testimonials.html",
+    "htmlPath": "/testimonials.html",
+    "canonicalPath": "/testimonials"
+  }
+]

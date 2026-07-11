@@ -1,0 +1,50 @@
+{
+  "frameworks": {
+    "unit": "vitest",
+    "integration": "vitest",
+    "e2e": "playwright"
+  },
+  "coverage_thresholds": {
+    "statements": 80,
+    "branches": 80,
+    "functions": 80,
+    "lines": 80
+  },
+  "fixtures_dir": "tests/fixtures",
+  "ci_gates": [
+    "typecheck",
+    "lint",
+    "unit",
+    "integration",
+    "build",
+    "stripe_webhook_contract",
+    "runtime_smoke",
+    "attached_template_billing_smoke"
+  ],
+  "smoke": {
+    "after_deploy": true,
+    "rollback_on_failure": true,
+    "checks": [
+      "Checkout route returns a Stripe checkout URL for an authenticated request.",
+      "Portal route returns a Stripe billing portal URL for an authenticated request.",
+      "Webhook route rejects an invalid signature.",
+      "Webhook route accepts a valid signed fixture and updates mirrored state."
+    ]
+  },
+  "stripe_cases": [
+    "checkout_session_created",
+    "portal_session_created",
+    "webhook_invalid_signature_rejected",
+    "webhook_duplicate_event_id_ignored",
+    "subscription_created_mirrored",
+    "subscription_updated_mirrored",
+    "subscription_deleted_mirrored",
+    "invoice_paid_mirrored",
+    "invoice_payment_failed_mirrored"
+  ],
+  "notes": [
+    "Unit tests must avoid live Stripe API calls.",
+    "Integration tests should use signed webhook fixtures or Stripe CLI replay in controlled environments.",
+    "Attached-template smoke must validate the `offer_key` contract rather than plan-specific env names."
+  ]
+}

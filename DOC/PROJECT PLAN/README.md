@@ -100,6 +100,7 @@ Folders:
 12. `DOC/PROJECT PLAN/QA/README.md`
 13. `DOC/Universal/Template/e2e-planning-template.md`
 14. `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`
+15. `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md`
 
 Planning rule:
 - For any existing-site enhancement or expansion, audit the current codebase first and prefer reuse or extension over net-new architecture.
@@ -115,11 +116,20 @@ Planning rule:
 
 ## Active Planning Artifacts
 
+- `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md`
 - `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md`
 - `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`
 - `DOC/PROJECT PLAN/cms-content-import-automation-plan.md`
 - `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md`
 - `DOC/PROJECT PLAN/customer-dashboard-experience-e2e-plan.md`
+- `DOC/PROJECT PLAN/Frontend/ecommerce-blueprint-realignment-frontend.md`
+- `DOC/PROJECT PLAN/Backend/ecommerce-blueprint-realignment-backend.md`
+- `DOC/PROJECT PLAN/API and Data/ecommerce-blueprint-realignment-api-data.md`
+- `DOC/PROJECT PLAN/Security/ecommerce-blueprint-realignment-security.md`
+- `DOC/PROJECT PLAN/DevOps/ecommerce-blueprint-realignment-devops.md`
+- `DOC/PROJECT PLAN/QA/ecommerce-blueprint-realignment-qa.md`
+- `DOC/PROJECT PLAN/Admin Dashboard/ecommerce-blueprint-realignment-admin-dashboard.md`
+- `DOC/PROJECT PLAN/Supabase/ecommerce-blueprint-realignment-supabase.md`
 - `DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md`
 - `DOC/PROJECT PLAN/Backend/ecommerce-preview-restoration-backend.md`
 - `DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md`

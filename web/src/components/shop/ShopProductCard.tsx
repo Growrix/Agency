@@ -106,6 +106,7 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
           <AddToCartButton
             productSlug={product.slug}
             productName={product.name}
+            productImageSrc={image?.src}
             productPrice={product.price}
             size="sm"
             variant="outline"

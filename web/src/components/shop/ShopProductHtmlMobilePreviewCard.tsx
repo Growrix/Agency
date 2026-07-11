@@ -171,6 +171,7 @@ export function ShopProductHtmlMobilePreviewCard({
               <AddToCartButton
                 productSlug={product.slug}
                 productName={product.name}
+                productImageSrc={product.image?.src}
                 productPrice={product.price}
                 size="sm"
                 variant="outline"

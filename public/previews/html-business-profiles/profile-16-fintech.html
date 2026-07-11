@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>CipherPay — Digital Payments & Fintech</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'JetBrains Mono',monospace;background:#020c02;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#020c02;margin:0 auto;color:#00ff41}
+
+/* Scanlines */
+.app::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.015) 2px,rgba(0,255,65,.015) 4px);pointer-events:none;z-index:999;max-width:420px}
+
+.hero{min-height:280px;background:#020c02;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 18px 24px;border-bottom:1px solid rgba(0,255,65,.15)}
+.hero-matrix{position:absolute;inset:0;font-size:10px;color:rgba(0,255,65,.04);line-height:1.2;overflow:hidden;letter-spacing:2px;padding:8px;word-break:break-all;pointer-events:none}
+.hero-border{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00ff41,transparent);opacity:.4}
+.terminal-prompt{font-size:10px;color:rgba(0,255,65,.4);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.terminal-prompt::before{content:'>';color:rgba(0,255,65,.6)}
+.cursor{display:inline-block;width:8px;height:14px;background:#00ff41;animation:blink .8s infinite;vertical-align:middle;margin-left:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero h1{font-size:40px;font-weight:700;color:#00ff41;line-height:.95;letter-spacing:-1px;text-shadow:0 0 20px rgba(0,255,65,.3)}
+.hero h1 span{color:rgba(0,255,65,.35)}
+.hero-sub{font-size:10px;color:rgba(0,255,65,.4);margin-top:10px;line-height:1.6;letter-spacing:.5px}
+.hero-version{position:absolute;bottom:24px;right:18px;font-size:9px;color:rgba(0,255,65,.2);text-align:right}
+
+.status-bar{background:#020c02;border-top:1px solid rgba(0,255,65,.12);border-bottom:1px solid rgba(0,255,65,.12);padding:8px 18px;display:flex;gap:16px;overflow-x:auto;scrollbar-width:none}
+.status-bar::-webkit-scrollbar{display:none}
+.status-item{font-size:9px;color:rgba(0,255,65,.4);white-space:nowrap;display:flex;align-items:center;gap:5px}
+.status-item .dot{width:5px;height:5px;border-radius:50%;background:#00ff41;animation:blink 2s infinite}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(0,255,65,.4);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.sec::before{content:'//';color:rgba(0,255,65,.25)}
+.sec::after{content:'';flex:1;height:1px;background:rgba(0,255,65,.1)}
+
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.metric{background:#030f03;border:1px solid rgba(0,255,65,.12);padding:16px 14px}
+.metric-val{font-size:24px;font-weight:700;color:#00ff41;letter-spacing:-1px;text-shadow:0 0 12px rgba(0,255,65,.2)}
+.metric-label{font-size:9px;color:rgba(0,255,65,.3);margin-top:4px;letter-spacing:1px}
+.metric-change{font-size:9px;color:rgba(0,255,65,.5);margin-top:4px}
+
+.services-list{display:flex;flex-direction:column;gap:2px}
+.svc{background:#030f03;border:1px solid rgba(0,255,65,.1);padding:16px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#00ff41;opacity:.4}
+.svc-name{font-size:13px;font-weight:500;color:#00ff41;letter-spacing:.3px}
+.svc-desc{font-size:10px;color:rgba(0,255,65,.35);margin-top:4px;line-height:1.5;letter-spacing:.2px}
+.svc-tag{display:inline-block;font-size:8px;background:rgba(0,255,65,.08);border:1px solid rgba(0,255,65,.15);color:rgba(0,255,65,.5);padding:2px 8px;margin-top:6px;letter-spacing:.5px}
+.svc-fee{font-size:13px;color:rgba(0,255,65,.6);text-align:right;flex-shrink:0}
+.svc-fee span{display:block;font-size:8px;color:rgba(0,255,65,.25);margin-top:2px;letter-spacing:.5px}
+
+.code-block{background:#030f03;border:1px solid rgba(0,255,65,.12);padding:16px;font-size:10px;line-height:1.7;letter-spacing:.3px;position:relative}
+.code-block::before{content:'// HOW IT WORKS';color:rgba(0,255,65,.2);font-size:8px;letter-spacing:2px;display:block;margin-bottom:10px;border-bottom:1px solid rgba(0,255,65,.06);padding-bottom:8px}
+.code-line{color:rgba(0,255,65,.4)}
+.code-line .key{color:rgba(0,255,65,.7)}
+.code-line .val{color:rgba(0,200,255,.6)}
+.code-line .comment{color:rgba(0,255,65,.2)}
+
+.pricing-table{display:flex;flex-direction:column;gap:2px}
+.price-row{background:#030f03;border:1px solid rgba(0,255,65,.1);padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.price-row.highlight{border-color:rgba(0,255,65,.35);background:rgba(0,255,65,.03)}
+.pr-plan{font-size:12px;font-weight:500;color:#00ff41;letter-spacing:.5px}
+.pr-detail{font-size:10px;color:rgba(0,255,65,.35);margin-top:2px}
+.pr-price{font-size:14px;color:rgba(0,255,65,.7);text-align:right}
+.pr-badge{font-size:8px;background:rgba(0,255,65,.12);color:rgba(0,255,65,.6);padding:2px 8px;letter-spacing:.5px;border:1px solid rgba(0,255,65,.2)}
+
+.cta-box{background:#030f03;border:1px solid rgba(0,255,65,.2);padding:20px;position:relative;overflow:hidden;margin-top:4px}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00ff41,transparent)}
+.cta-box h3{font-size:18px;font-weight:700;color:#00ff41;margin-bottom:8px;letter-spacing:.5px}
+.cta-box p{font-size:11px;color:rgba(0,255,65,.35);margin-bottom:16px;line-height:1.6;letter-spacing:.3px}
+.cta-btn{display:block;background:#00ff41;color:#020c02;padding:13px;text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;text-decoration:none;font-family:'JetBrains Mono',monospace}
+.cta-btn2{display:block;background:transparent;border:1px solid rgba(0,255,65,.2);color:rgba(0,255,65,.4);padding:11px;text-align:center;font-size:10px;letter-spacing:1.5px;text-decoration:none;margin-top:6px}
+
+.contact-list{background:#030f03;border:1px solid rgba(0,255,65,.1);overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(0,255,65,.06);font-size:11px;color:rgba(0,255,65,.4);letter-spacing:.3px}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:26px;height:26px;border:1px solid rgba(0,255,65,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;color:rgba(0,255,65,.5)}
+
+footer{background:#010801;border-top:1px solid rgba(0,255,65,.1);padding:18px;text-align:center;font-size:9px;color:rgba(0,255,65,.15);letter-spacing:2px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-matrix">01100011 01101001 01110000 01101000 01100101 01110010 00100000 01110000 01100001 01111001 00100000 01110011 01100101 01100011 01110101 01110010 01100101 00100000 01100110 01101001 01101110 01110100 01100101 01100011 01101000 00100000 01110000 01100001 01111001 01101101 01100101 01101110 01110100 01110011</div>
+  <div class="hero-border"></div>
+  <div class="terminal-prompt">initializing CipherPay.v2.4.1<span class="cursor"></span></div>
+  <h1>Cipher<span>Pay</span></h1>
+  <div class="hero-sub">// Secure digital payments &amp; fintech solutions<br>// API-first · Bank-grade encryption · Real-time</div>
+  <div class="hero-version">v2.4.1 stable<br>uptime: 99.98%</div>
+</div>
+<div class="status-bar">
+  <div class="status-item"><span class="dot"></span>Systems: ONLINE</div>
+  <div class="status-item"><span class="dot"></span>API: 99.98%</div>
+  <div class="status-item"><span class="dot"></span>SSL: Active</div>
+  <div class="status-item"><span class="dot"></span>PCI-DSS: Certified</div>
+</div>
+<div class="body">
+  <div class="sec">Live Metrics</div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-val">$2.4M</div><div class="metric-label">Processed Today</div><div class="metric-change">↑ 12% vs yesterday</div></div>
+    <div class="metric"><div class="metric-val">14,200</div><div class="metric-label">Transactions</div><div class="metric-change">↑ 8% vs yesterday</div></div>
+    <div class="metric"><div class="metric-val">&lt;200ms</div><div class="metric-label">Avg. Response</div><div class="metric-change">— stable</div></div>
+    <div class="metric"><div class="metric-val">99.98%</div><div class="metric-label">Uptime (90d)</div><div class="metric-change">SLA: 99.9%</div></div>
+  </div>
+
+  <div class="sec">Services</div>
+  <div class="services-list">
+    <div class="svc"><div><div class="svc-name">Payment Gateway</div><div class="svc-desc">Accept cards, bKash, Nagad &amp; bank transfers. Instant settlement available.</div><div class="svc-tag">REST API</div></div><div class="svc-fee">1.5%<span>per txn</span></div></div>
+    <div class="svc"><div><div class="svc-name">Mobile Money Integration</div><div class="svc-desc">bKash · Nagad · Rocket · Upay. One unified API for all local wallets.</div><div class="svc-tag">SDK available</div></div><div class="svc-fee">0.8%<span>per txn</span></div></div>
+    <div class="svc"><div><div class="svc-name">Bulk Disbursement</div><div class="svc-desc">Send payroll, refunds &amp; commissions to 1000s of recipients in one call.</div><div class="svc-tag">Enterprise</div></div><div class="svc-fee">0.3%<span>per txn</span></div></div>
+    <div class="svc"><div><div class="svc-name">Subscription Billing</div><div class="svc-desc">Recurring payments, dunning management, proration &amp; invoice automation.</div><div class="svc-tag">SaaS-ready</div></div><div class="svc-fee">$49<span>/ month</span></div></div>
+  </div>
+
+  <div class="sec">System</div>
+  <div class="code-block">
+    <div class="code-line"><span class="key">encryption</span>: <span class="val">AES-256-GCM</span> <span class="comment">// military grade</span></div>
+    <div class="code-line"><span class="key">compliance</span>: <span class="val">PCI-DSS Level 1</span></div>
+    <div class="code-line"><span class="key">settlement</span>: <span class="val">T+0</span> <span class="comment">// instant available</span></div>
+    <div class="code-line"><span class="key">currencies</span>: <span class="val">BDT, USD, EUR, GBP</span></div>
+    <div class="code-line"><span class="key">support</span>: <span class="val">24/7/365</span></div>
+    <div class="code-line"><span class="key">sandbox</span>: <span class="val">free</span> <span class="comment">// test before paying</span></div>
+  </div>
+
+  <div class="sec">Pricing</div>
+  <div class="pricing-table">
+    <div class="price-row"><div><div class="pr-plan">Starter</div><div class="pr-detail">Up to $10K/mo volume</div></div><div><div class="pr-badge">FREE</div><div class="pr-price">1.8% per txn</div></div></div>
+    <div class="price-row highlight"><div><div class="pr-plan">Growth</div><div class="pr-detail">Up to $100K/mo volume</div></div><div><div class="pr-badge">POPULAR</div><div class="pr-price">1.2% + $49/mo</div></div></div>
+    <div class="price-row"><div><div class="pr-plan">Enterprise</div><div class="pr-detail">Unlimited · Custom SLA</div></div><div><div class="pr-price">Custom</div></div></div>
+  </div>
+
+  <div class="sec">Get Access</div>
+  <div class="cta-box">
+    <h3>$ start --free-trial</h3>
+    <p>// Sandbox access in under 5 minutes. No credit card. Full API access. Real test payments with mock data.</p>
+    <a href="https://wa.me/0000000000" class="cta-btn">ACTIVATE FREE SANDBOX →</a>
+    <a href="mailto:api@cipherpay.io" class="cta-btn2">api@cipherpay.io</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-list">
+    <div class="c-row"><span class="c-icon">📞</span>+880 1700-000000</div>
+    <div class="c-row"><span class="c-icon">📧</span>hello@cipherpay.io</div>
+    <div class="c-row"><span class="c-icon">💬</span>24/7 developer support via Slack</div>
+    <div class="c-row"><span class="c-icon">📍</span>Fintech Tower, Gulshan, Dhaka</div>
+  </div>
+</div>
+<footer>© 2025 CipherPay Ltd · PCI-DSS Certified · Bangladesh Bank Licensed · All transactions encrypted</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

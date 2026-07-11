@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>BoxRoute — Logistics & Courier</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Space Grotesk',sans-serif;background:#0c0f18;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0e1120;margin:0 auto;overflow:hidden}
+
+/* ============================================
+   ISOMETRIC DESIGN — CSS Clip-path Cubes
+   Classic isometric grid: 30° projection
+   3 visible faces: top (lightest), right (mid), left (darkest)
+   ============================================ */
+
+/* Isometric cube built with clip-path polygons */
+/* Face dimensions at 1:1 block size (unitsize = variable) */
+.iso-scene{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:200px;
+  overflow:visible;
+  margin:0 auto;
+}
+
+/* Each iso-cube is a wrapper; faces are positioned absolutely */
+.iso-cube{position:absolute;display:grid}
+
+/* --- ISO MATH ---
+   For a cube of side S viewed isometrically:
+   Top face   : diamond   w=2S  h=S
+   Left face  : parallelogram pointing left
+   Right face : parallelogram pointing right
+   We use CSS clip-path polygons for clean rendering
+*/
+.iso-face{position:absolute}
+
+/* Top face polygon: 50%,0 → 100%,25% → 50%,50% → 0,25% */
+.f-top{
+  clip-path:polygon(50% 0%, 100% 25%, 50% 50%, 0% 25%);
+}
+/* Left face polygon: 0,25% → 50%,50% → 50%,100% → 0%,75% */
+.f-left{
+  clip-path:polygon(0% 25%, 50% 50%, 50% 100%, 0% 75%);
+}
+/* Right face polygon: 50%,50% → 100%,25% → 100%,75% → 50%,100% */
+.f-right{
+  clip-path:polygon(50% 50%, 100% 25%, 100% 75%, 50% 100%);
+}
+
+/* Cube builder mixin via custom props */
+.ic{position:absolute}
+.ic .f-top, .ic .f-left, .ic .f-right{position:absolute;width:100%;height:100%}
+
+/* === ORANGE LOGISTICS CUBE === */
+.c-orange .f-top{background:#f5a030}
+.c-orange .f-left{background:#a06010}
+.c-orange .f-right{background:#d07020}
+
+/* === BLUE CUBE === */
+.c-blue .f-top{background:#4080f0}
+.c-blue .f-left{background:#1040a0}
+.c-blue .f-right{background:#2060d0}
+
+/* === TEAL CUBE === */
+.c-teal .f-top{background:#20c0a0}
+.c-teal .f-left{background:#007858}
+.c-teal .f-right{background:#10a080}
+
+/* === GRAY CUBE === */
+.c-gray .f-top{background:#5a6080}
+.c-gray .f-left{background:#2a3050}
+.c-gray .f-right{background:#404868}
+
+/* === DARK CUBE (Ground) === */
+.c-dark .f-top{background:#1e2238}
+.c-dark .f-left{background:#0e1020}
+.c-dark .f-right{background:#161828}
+
+/* Grid lines on ground */
+.iso-grid{
+  position:absolute;bottom:0;left:0;right:0;height:80px;
+  background:
+    repeating-linear-gradient(30deg,rgba(64,128,240,.08) 0px,rgba(64,128,240,.08) 1px,transparent 1px,transparent 20px),
+    repeating-linear-gradient(-30deg,rgba(64,128,240,.08) 0px,rgba(64,128,240,.08) 1px,transparent 1px,transparent 20px);
+  pointer-events:none;
+}
+
+/* Arrow on isometric delivery truck */
+.iso-arrow{
+  position:absolute;
+  font-size:20px;
+  animation:iso-move 2s ease-in-out infinite;
+}
+@keyframes iso-move{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+
+/* === HERO === */
+.hero{padding:28px 18px 0;position:relative;overflow:hidden}
+.hero-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.hero-logo{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.hero-logo span{color:#f5a030}
+.hero-badge{font-size:9px;background:rgba(245,160,48,.1);border:1px solid rgba(245,160,48,.2);border-radius:4px;padding:4px 11px;color:rgba(245,160,48,.8);font-family:'DM Mono',monospace;letter-spacing:1px;display:flex;align-items:center;gap:5px}
+.hbd{width:5px;height:5px;background:#f5a030;border-radius:50%;animation:pb 1.2s infinite alternate}
+@keyframes pb{from{opacity:1}to{opacity:.2}}
+
+.hero-text{padding:0 0 16px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;line-height:.9;letter-spacing:-2px}
+.hero h1 .acc{color:#f5a030}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.28);margin-top:9px;line-height:1.65}
+
+/* === LIVE TRACKER === */
+.tracker{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px 18px;margin:0 14px 14px;font-family:'DM Mono',monospace}
+.tracker-label{font-size:8px;color:rgba(245,160,48,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.track-steps{display:flex;align-items:center;gap:0}
+.ts{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
+.ts::after{content:'';position:absolute;left:50%;right:-50%;top:11px;height:2px;background:rgba(255,255,255,.08)}
+.ts:last-child::after{display:none}
+.ts-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;z-index:1}
+.ts-dot.done{background:#f5a030;box-shadow:0 0 10px rgba(245,160,48,.4)}
+.ts-dot.active{background:rgba(245,160,48,.15);border:2px solid #f5a030;animation:pulse-dot 1s infinite alternate}
+@keyframes pulse-dot{from{box-shadow:0 0 8px rgba(245,160,48,.4)}to{box-shadow:0 0 16px rgba(245,160,48,.7)}}
+.ts-dot.pending{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.2);font-size:8px}
+.ts-label{font-size:8px;color:rgba(255,255,255,.25);text-align:center;letter-spacing:.5px;line-height:1.3}
+.ts-label.done-l{color:rgba(245,160,48,.7)}
+.ts-label.active-l{color:#f5a030}
+
+/* === BODY === */
+.body{padding:0 14px 44px}
+.sec{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,160,48,.4);margin:20px 0 11px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(245,160,48,.1)}
+
+.services{display:flex;flex-direction:column;gap:7px}
+.svc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#f5a030;opacity:.4;border-radius:0 2px 2px 0}
+.svc-icon{font-size:20px;flex-shrink:0}
+.svc-name{font-size:13px;font-weight:700;color:#fff}
+.svc-desc{font-size:10px;color:rgba(255,255,255,.25);margin-top:2px;line-height:1.4}
+.svc-price{font-size:14px;font-weight:700;color:#f5a030;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(255,255,255,.2);font-weight:500;margin-top:1px;font-family:'DM Mono',monospace}
+
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sg{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:16px;text-align:center}
+.sg-n{font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:#f5a030;letter-spacing:-1px}
+.sg-l{font-size:9px;color:rgba(255,255,255,.2);margin-top:5px;letter-spacing:.5px}
+
+.cta{background:rgba(245,160,48,.08);border:1px solid rgba(245,160,48,.18);border-radius:20px;padding:24px;text-align:center}
+.cta h3{font-size:22px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.25);margin-bottom:18px;line-height:1.7}
+.cta-btn{display:block;background:#f5a030;color:#0e1120;border-radius:12px;padding:14px;font-size:14px;font-weight:800;text-decoration:none;margin-bottom:8px;box-shadow:0 6px 20px rgba(245,160,48,.35)}
+.cta-btn2{display:block;background:rgba(255,255,255,.04);color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px;font-size:11px;text-decoration:none}
+.contacts{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(255,255,255,.28)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:rgba(245,160,48,.12);border:1px solid rgba(245,160,48,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+footer{border-top:1px solid rgba(255,255,255,.04);padding:16px;text-align:center;font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.1);letter-spacing:2px}
+</style>
+</head>
+<body><div class="app">
+
+<div class="hero">
+  <div class="hero-nav">
+    <div class="hero-logo">Box<span>Route</span></div>
+    <div class="hero-badge"><span class="hbd"></span>LIVE TRACKING</div>
+  </div>
+
+  <!-- === ISOMETRIC SCENE === -->
+  <div class="iso-scene">
+    <div class="iso-grid"></div>
+
+    <!-- Ground platform cubes (dark) -->
+    <div class="ic c-dark" style="position:absolute;width:80px;height:80px;left:50%;top:60px;transform:translateX(-120px)">
+      <div class="f-top"></div><div class="f-left"></div><div class="f-right"></div>
+    </div>
+    <div class="ic c-dark" style="position:absolute;width:80px;height:80px;left:50%;top:60px;transform:translateX(-40px)">
+      <div class="f-top"></div><div class="f-left"></div><div class="f-right"></div>
+    </div>
+    <div class="ic c-dark" style="position:absolute;width:80px;height:80px;left:50%;top:60px;transform:translateX(40px)">
+      <div class="f-top"></div><div class="f-left"></div><div class="f-right"></div>
+    </div>
+
+    <!-- Orange warehouse cube (tall) -->
+    <div class="ic c-orange" style="position:absolute;width:80px;height:120px;left:50%;top:0px;transform:translateX(-120px)">
+      <div class="f-top"></div><div class="f-left"></div><div class="f-right"></div>
+    </div>
+
+    <!-- Blue cube (medium) -->
+    <div class="ic c-blue" style="position:absolute;width:80px;height:80px;left:50%;top:20px;transform:translateX(-40px)">
+      <div class="f-top"></div><div class="f-left"></div><div class="f-right"></div>
+    </div>
+
+    <!-- Teal cube (short) -->
+    <div class="ic c-teal" style="position:absolute;width:80px;height:50px;left:50%;top:50px;transform:translateX(40px)">
+      <div class="f-top"></div><div class="f-left"></div><div class="f-right"></div>
+    </div>
+
+    <!-- Delivery arrow -->
+    <div class="iso-arrow" style="top:88px;left:52%">📦</div>
+  </div>
+
+  <div class="hero-text">
+    <h1>Ship it.<br><span class="acc">Track it.</span><br>Deliver it.</h1>
+    <div class="hero-sub">Bangladesh's fastest last-mile logistics. Same-day Dhaka, next-day nationwide. 99.2% on-time delivery rate.</div>
+  </div>
+</div>
+
+<!-- LIVE TRACKER -->
+<div class="tracker">
+  <div class="tracker-label">// Live shipment · BD-4823910</div>
+  <div class="track-steps">
+    <div class="ts">
+      <div class="ts-dot done">✓</div>
+      <div class="ts-label done-l">Picked<br>Up</div>
+    </div>
+    <div class="ts">
+      <div class="ts-dot done">✓</div>
+      <div class="ts-label done-l">At Hub<br>Dhaka</div>
+    </div>
+    <div class="ts">
+      <div class="ts-dot active">🚚</div>
+      <div class="ts-label active-l">In<br>Transit</div>
+    </div>
+    <div class="ts">
+      <div class="ts-dot pending">○</div>
+      <div class="ts-label">Out for<br>Delivery</div>
+    </div>
+    <div class="ts">
+      <div class="ts-dot pending">○</div>
+      <div class="ts-label">Deli-<br>vered</div>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="sec">Shipping Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">⚡</div><div><div class="svc-name">Same-Day Express</div><div class="svc-desc">Pickup by 12pm · delivery by 8pm · Dhaka only</div></div><div class="svc-price">৳80<span>from</span></div></div>
+    <div class="svc"><div class="svc-icon">🚚</div><div><div class="svc-name">Next-Day Nationwide</div><div class="svc-desc">All 64 districts · full tracking · signature on delivery</div></div><div class="svc-price">৳120<span>from</span></div></div>
+    <div class="svc"><div class="svc-icon">📦</div><div><div class="svc-name">Bulk & B2B Freight</div><div class="svc-desc">Volume rates · dedicated account manager · daily pickup</div></div><div class="svc-price">Custom</div></div>
+    <div class="svc"><div class="svc-icon">🏭</div><div><div class="svc-name">Warehouse & Fulfillment</div><div class="svc-desc">Store, pack, ship · e-commerce fulfillment partner</div></div><div class="svc-price">৳5/unit</div></div>
+  </div>
+
+  <div class="sec">Network Stats</div>
+  <div class="stats-grid">
+    <div class="sg"><div class="sg-n">99.2%</div><div class="sg-l">On-Time Rate</div></div>
+    <div class="sg"><div class="sg-n">64</div><div class="sg-l">Districts Covered</div></div>
+    <div class="sg"><div class="sg-n">1.2M+</div><div class="sg-l">Parcels / Year</div></div>
+    <div class="sg"><div class="sg-n">18 Hubs</div><div class="sg-l">Nationwide</div></div>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Ship Now</div>
+  <div class="cta">
+    <h3>📦 Get a shipping quote.</h3>
+    <p>// Enter origin · destination · weight · get instant rate</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">⚡ Request Pickup Now</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call operations team</a>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>HQ: Tejgaon, Dhaka · 18 hubs nationwide</div>
+    <div class="cr"><div class="ci">⏰</div>Operations 24/7 · Office: Sun–Thu 9am–7pm</div>
+  </div>
+</div>
+<footer>© 2025 BOXROUTE LOGISTICS · DHAKA · 64 DISTRICTS · 24/7</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

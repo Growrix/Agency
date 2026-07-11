@@ -1,0 +1,22 @@
+integration: supabase
+category: database
+role: persistence
+playbook: ~/.cursor/skills/integration-platform/references/supabase.md
+env_source: web/src/server/config/runtime.ts
+
+env_vars:
+  - name: SUPABASE_URL
+    required: true
+    scope: server
+  - name: SUPABASE_ANON_KEY
+    required: true
+    scope: server
+  - name: SUPABASE_SERVICE_ROLE_KEY
+    required: true
+    scope: server
+    fallback: SUPABASE_SECRET_KEY
+
+boundary: >-
+  PostgreSQL persistence only. Clerk owns authentication — not Supabase Auth.
+
+owner_skill: integration-platform

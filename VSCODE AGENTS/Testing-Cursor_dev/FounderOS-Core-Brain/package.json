@@ -1,0 +1,95 @@
+{
+  "name": "founderos-core-brain",
+  "displayName": "FounderOS Core Brain",
+  "description": "Local business operating brain for VS Code and Copilot Chat",
+  "version": "0.1.0",
+  "publisher": "founderos",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "activationEvents": [
+    "onChatParticipant:founderos.agent"
+  ],
+  "main": "./out/src/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "founderos.agent",
+        "name": "founderos",
+        "fullName": "FounderOS Core Brain",
+        "description": "Business context brain with local memory and project isolation",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "new-client",
+            "description": "Create a new client workspace"
+          },
+          {
+            "name": "new-project",
+            "description": "Create a new project workspace"
+          },
+          {
+            "name": "ingest",
+            "description": "Ingest external notes into structured memory"
+          },
+          {
+            "name": "summarize",
+            "description": "Summarize current conversation and save memory"
+          },
+          {
+            "name": "retrieve",
+            "description": "Retrieve memory by topic"
+          },
+          {
+            "name": "tasks",
+            "description": "Show tasks across projects"
+          },
+          {
+            "name": "status",
+            "description": "Show FounderOS runtime status"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "FounderOS Core Brain",
+      "properties": {
+        "founderos.storageRoot": {
+          "type": "string",
+          "default": "",
+          "description": "Storage root for FounderOS memory. Defaults to G:\\founderos_core_brain on Windows and ~/founderos_core_brain elsewhere"
+        },
+        "founderos.autoSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-save chat messages to local memory"
+        },
+        "founderos.maxContextChars": {
+          "type": "number",
+          "default": 6000,
+          "description": "Maximum context characters injected from retrieved memory"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "node -e \"require('node:fs').rmSync('out',{recursive:true,force:true})\" && tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "vitest run",
+    "smoke": "npm run compile && node ./out/scripts/smoke-founder-os.js",
+    "package": "npm run compile && npx @vscode/vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^2.30.0",
+    "typescript": "^5.5.4",
+    "vitest": "^1.6.0"
+  }
+}

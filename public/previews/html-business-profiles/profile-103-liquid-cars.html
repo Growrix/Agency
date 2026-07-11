@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Apex Motors — Luxury Car Dealership</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#e8eaf0;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;margin:0 auto;position:relative;overflow:hidden}
+
+/* LIQUID GLASS — Apple iOS 26 style */
+/* Light background with vivid chromatic gradients */
+.bg-grad{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(180,200,255,.6) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 30%, rgba(200,240,255,.5) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 80%, rgba(220,220,255,.4) 0%, transparent 60%),
+    #e8ecf8;
+}
+
+/* Liquid glass cards — ultra light, very transparent */
+.glass-card{
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:22px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 -1px 0 rgba(0,0,0,.03) inset,
+    0 8px 32px rgba(100,120,180,.12),
+    0 2px 8px rgba(0,0,0,.06);
+}
+
+.glass-pill{
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:100px;
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 12px rgba(0,0,0,.06);
+}
+
+.content{position:relative;z-index:1}
+
+.hero{min-height:310px;padding:28px 20px 26px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.hero-top{position:absolute;top:26px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.hero-wordmark{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(20,30,60,.5)}
+.hero-avail{padding:5px 14px;font-size:10px;font-weight:600;color:rgba(20,80,200,.7);letter-spacing:.5px}
+/* Giant car emoji as hero visual */
+.hero-visual{font-size:88px;text-align:center;margin-bottom:14px;display:block;filter:drop-shadow(0 12px 24px rgba(0,0,0,.15));line-height:1}
+.hero h1{font-size:38px;font-weight:800;color:#10182e;line-height:.9;letter-spacing:-2px}
+.hero h1 .thin{font-weight:300;color:rgba(16,24,46,.45)}
+.hero-sub{font-size:11px;color:rgba(16,24,46,.4);margin-top:8px;line-height:1.65;letter-spacing:.1px}
+
+.stats-row{display:flex;gap:8px;padding:0 16px 14px}
+.stat-g{flex:1;padding:14px 0;text-align:center;border-radius:18px}
+.stat-n{font-size:20px;font-weight:800;color:#10182e;letter-spacing:-1px}
+.stat-l{font-size:9px;color:rgba(16,24,46,.4);margin-top:4px;letter-spacing:.5px;font-weight:500}
+
+.body{padding:0 14px 40px}
+.sec{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(16,24,46,.35);margin:20px 0 12px}
+
+.cars{display:flex;flex-direction:column;gap:9px}
+.car-card{padding:16px;display:flex;gap:14px;align-items:flex-start}
+.car-em{font-size:42px;flex-shrink:0;filter:drop-shadow(0 6px 12px rgba(0,0,0,.12));line-height:1}
+.car-brand{font-size:10px;font-weight:600;color:rgba(16,24,46,.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.car-name{font-size:16px;font-weight:700;color:#10182e;letter-spacing:-.5px}
+.car-spec{font-size:10px;color:rgba(16,24,46,.4);margin-top:2px;line-height:1.4}
+.car-right{margin-left:auto;text-align:right;flex-shrink:0}
+.car-price{font-size:18px;font-weight:800;color:#10182e;letter-spacing:-.5px}
+.car-per{font-size:9px;color:rgba(16,24,46,.3);font-weight:500;margin-top:2px}
+.car-tag{display:inline-block;background:rgba(20,80,200,.08);color:rgba(20,80,200,.7);border-radius:100px;padding:2px 9px;font-size:9px;font-weight:600;margin-top:5px;border:1px solid rgba(20,80,200,.12)}
+
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.svc-name{font-size:13px;font-weight:600;color:#10182e}
+.svc-desc{font-size:10px;color:rgba(16,24,46,.38);margin-top:2px}
+.svc-price{font-size:14px;font-weight:700;color:#1450c8;flex-shrink:0}
+
+.cta-glass{padding:24px;text-align:center}
+.cta-glass h3{font-size:24px;font-weight:800;color:#10182e;letter-spacing:-1px;margin-bottom:8px;line-height:1}
+.cta-glass p{font-size:11px;color:rgba(16,24,46,.38);margin-bottom:20px;line-height:1.6}
+.cta-btn-main{display:block;background:rgba(20,80,200,.9);color:#fff;border-radius:16px;padding:15px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:9px;
+  box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 24px rgba(20,80,200,.3),0 2px 8px rgba(0,0,0,.1)}
+.cta-btn-sec{display:block;border-radius:16px;padding:13px;font-size:12px;font-weight:600;text-decoration:none;text-align:center;color:rgba(16,24,46,.5)}
+
+.contact-glass{overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.5);font-size:12px;color:rgba(16,24,46,.45)}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:rgba(20,80,200,.12);border:1px solid rgba(20,80,200,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{padding:18px;text-align:center;font-size:10px;color:rgba(16,24,46,.25);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="bg-grad"></div>
+<div class="content">
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-wordmark">Apex Motors</div>
+    <div class="glass-pill hero-avail">● Showroom Open</div>
+  </div>
+  <span class="hero-visual">🏎️</span>
+  <h1>Drive your<br><span class="thin">dream.</span></h1>
+  <div class="hero-sub">New & pre-owned luxury vehicles. BMW, Mercedes, Lexus, Land Rover. Finance, insurance & full aftersales service.</div>
+</div>
+<div class="stats-row">
+  <div class="stat-g glass-card"><div class="stat-n">200+</div><div class="stat-l">In stock</div></div>
+  <div class="stat-g glass-card"><div class="stat-n">15yr</div><div class="stat-l">Experience</div></div>
+  <div class="stat-g glass-card"><div class="stat-n">4.9★</div><div class="stat-l">Rating</div></div>
+</div>
+<div class="body">
+  <div class="sec">Featured Vehicles</div>
+  <div class="cars">
+    <div class="car-card glass-card"><div class="car-em">🚗</div><div><div class="car-brand">BMW</div><div class="car-name">5 Series 530i</div><div class="car-spec">2024 · 252hp · Automatic · Luxury Pack</div><div class="car-tag">New Arrival</div></div><div class="car-right"><div class="car-price">$55,000</div><div class="car-per">Finance from<br>$1,200/mo</div></div></div>
+    <div class="car-card glass-card"><div class="car-em">🛻</div><div><div class="car-brand">Land Rover</div><div class="car-name">Defender 110</div><div class="car-spec">2023 · 300hp · 4WD · Panoramic Roof</div><div class="car-tag">Pre-owned</div></div><div class="car-right"><div class="car-price">$48,000</div><div class="car-per">Finance from<br>$980/mo</div></div></div>
+    <div class="car-card glass-card"><div class="car-em">🚙</div><div><div class="car-brand">Lexus</div><div class="car-name">RX 500h F-Sport</div><div class="car-spec">2024 · Hybrid · 367hp · Full spec</div><div class="car-tag">✦ Featured</div></div><div class="car-right"><div class="car-price">$62,000</div><div class="car-per">Finance from<br>$1,350/mo</div></div></div>
+  </div>
+  <div class="sec">Our Services</div>
+  <div class="services">
+    <div class="svc glass-card"><div><div class="svc-name">Vehicle Finance</div><div class="svc-desc">Low rates · up to 60 months</div></div><div class="svc-price">From 4.9%</div></div>
+    <div class="svc glass-card"><div><div class="svc-name">Trade-in & Valuation</div><div class="svc-desc">Best price guarantee for your car</div></div><div class="svc-price">Free</div></div>
+    <div class="svc glass-card"><div><div class="svc-name">Aftersales & Service</div><div class="svc-desc">Authorised service centre on site</div></div><div class="svc-price">From $80</div></div>
+  </div>
+  <div class="sec">Book a Test Drive</div>
+  <div class="cta-glass glass-card">
+    <h3>Feel the road.</h3>
+    <p>Book a test drive today — no commitment, no pressure. Your perfect car is waiting.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn-main">🚗 Book a Test Drive</a>
+    <a href="tel:+8801700000000" class="cta-btn-sec glass-pill">📞 Call the showroom</a>
+  </div>
+  <div class="sec">Contact</div>
+  <div class="contact-glass glass-card">
+    <div class="cr"><div class="ci">📞</div>+880 2-9876543</div>
+    <div class="cr"><div class="ci">📍</div>Tejgaon, Dhaka · Showroom + Workshop</div>
+    <div class="cr"><div class="ci">⏰</div>Sat–Thu · 9am – 7pm</div>
+  </div>
+</div>
+<footer>© 2025 Apex Motors · Luxury Vehicle Dealership · Dhaka</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></div></body></html>

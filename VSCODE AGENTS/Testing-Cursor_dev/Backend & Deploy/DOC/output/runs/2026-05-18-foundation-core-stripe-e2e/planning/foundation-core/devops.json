@@ -1,0 +1,78 @@
+{
+  "environments": [
+    "local",
+    "preview",
+    "staging",
+    "production"
+  ],
+  "secrets_vault": "Vercel environment variables plus GitHub Actions secrets where CI needs them",
+  "pipelines": {
+    "pull_request": [
+      "lint",
+      "typecheck",
+      "unit",
+      "integration",
+      "build"
+    ],
+    "preview": [
+      "deploy_preview",
+      "runtime_smoke",
+      "billing_smoke"
+    ],
+    "production": [
+      "deploy_production",
+      "post_deploy_billing_smoke",
+      "monitoring_confirmation"
+    ]
+  },
+  "iac": {
+    "runtime": "Foundation Core deployment configuration",
+    "stripe_dashboard": "Manual operator setup until billing infrastructure automation is added"
+  },
+  "monitoring": {
+    "logs": "Axiom",
+    "errors": "Sentry",
+    "uptime": "Better Stack",
+    "metrics": "Platform metrics plus billing-specific dashboards"
+  },
+  "alerts": [
+    {
+      "name": "stripe_webhook_failures",
+      "slo": "less than 1 percent failed Stripe webhook deliveries over 15 minutes",
+      "runbook": "Foundation-Core/RUN.md#stripe-billing"
+    },
+    {
+      "name": "billing_checkout_error_rate",
+      "slo": "less than 2 percent 5xx on /api/billing/checkout over 15 minutes",
+      "runbook": "Foundation-Core/RUN.md#stripe-billing"
+    },
+    {
+      "name": "billing_portal_error_rate",
+      "slo": "less than 2 percent 5xx on /api/billing/portal over 15 minutes",
+      "runbook": "Foundation-Core/RUN.md#stripe-billing"
+    }
+  ],
+  "backups": {
+    "schedule": "daily 02:00 UTC",
+    "retention_days": 30,
+    "restore_drill": "quarterly"
+  },
+  "dr": {
+    "rto_minutes": 60,
+    "rpo_minutes": 15
+  },
+  "rollback": {
+    "supported": true,
+    "strategy": "Rollback the deployment and keep Stripe webhook routing pointed at the last healthy environment."
+  },
+  "health": "/api/health",
+  "on_call": {
+    "rotation": "UNKNOWN",
+    "escalation": "UNKNOWN",
+    "paging_tool": "UNKNOWN"
+  },
+  "cost": {
+    "monthly_ceiling_usd": "UNKNOWN",
+    "alert_threshold_pct": 80
+  }
+}

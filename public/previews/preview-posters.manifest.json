@@ -1,0 +1,110 @@
+{
+  "01-bedrock-construction": {
+    "desktop": "/previews/posters/01-bedrock-construction-desktop.png",
+    "mobile": "/previews/posters/01-bedrock-construction-mobile.png",
+    "generatedAt": "2026-06-26T16:36:27.333Z",
+    "sourceFile": "01-BedrockConstruction.html"
+  },
+  "02-super-shop-commerce": {
+    "desktop": "/previews/posters/02-super-shop-commerce-desktop.png",
+    "mobile": "/previews/posters/02-super-shop-commerce-mobile.png",
+    "generatedAt": "2026-06-26T16:36:36.351Z",
+    "sourceFile": "02-SuperShopCommerce.html"
+  },
+  "03-primora-supershop": {
+    "desktop": "/previews/posters/03-primora-supershop-desktop.png",
+    "mobile": "/previews/posters/03-primora-supershop-mobile.png",
+    "generatedAt": "2026-06-26T16:36:41.989Z",
+    "sourceFile": "03. primora-supershop-website.html"
+  },
+  "04-prime-climate-hvac": {
+    "desktop": "/previews/posters/04-prime-climate-hvac-desktop.png",
+    "mobile": "/previews/posters/04-prime-climate-hvac-mobile.png",
+    "generatedAt": "2026-06-26T16:36:49.899Z",
+    "sourceFile": "04-PrimeClimateHVAC.html"
+  },
+  "05-elite-estates-realty": {
+    "desktop": "/previews/posters/05-elite-estates-realty-desktop.png",
+    "mobile": "/previews/posters/05-elite-estates-realty-mobile.png",
+    "generatedAt": "2026-06-26T16:36:55.957Z",
+    "sourceFile": "05-EliteEstatesRealty.html"
+  },
+  "06-elite-medical-clinic": {
+    "desktop": "/previews/posters/06-elite-medical-clinic-desktop.png",
+    "mobile": "/previews/posters/06-elite-medical-clinic-mobile.png",
+    "generatedAt": "2026-06-26T16:37:02.438Z",
+    "sourceFile": "06-EliteMedicalClinic.html"
+  },
+  "07-proflow-plumbing": {
+    "desktop": "/previews/posters/07-proflow-plumbing-desktop.png",
+    "mobile": "/previews/posters/07-proflow-plumbing-mobile.png",
+    "generatedAt": "2026-06-26T16:37:08.701Z",
+    "sourceFile": "07-ProFlowPlumbing.html"
+  },
+  "08-voltcore-power": {
+    "desktop": "/previews/posters/08-voltcore-power-desktop.png",
+    "mobile": "/previews/posters/08-voltcore-power-mobile.png",
+    "generatedAt": "2026-06-26T16:37:15.005Z",
+    "sourceFile": "08-VoltCorePower.html"
+  },
+  "09-guardian-pest-pro": {
+    "desktop": "/previews/posters/09-guardian-pest-pro-desktop.png",
+    "mobile": "/previews/posters/09-guardian-pest-pro-mobile.png",
+    "generatedAt": "2026-06-26T16:37:21.506Z",
+    "sourceFile": "09-GuardianPestPro.html"
+  },
+  "10-fixhaus-handyman": {
+    "desktop": "/previews/posters/10-fixhaus-handyman-desktop.png",
+    "mobile": "/previews/posters/10-fixhaus-handyman-mobile.png",
+    "generatedAt": "2026-06-26T16:37:26.488Z",
+    "sourceFile": "10-FixHausHandyman.html"
+  },
+  "11-terragrove-flooring": {
+    "desktop": "/previews/posters/11-terragrove-flooring-desktop.png",
+    "mobile": "/previews/posters/11-terragrove-flooring-mobile.png",
+    "generatedAt": "2026-06-26T16:37:32.416Z",
+    "sourceFile": "11-TerraGroveFlooring.html"
+  },
+  "12-stoneaxis-flooring": {
+    "desktop": "/previews/posters/12-stoneaxis-flooring-desktop.png",
+    "mobile": "/previews/posters/12-stoneaxis-flooring-mobile.png",
+    "generatedAt": "2026-06-26T16:37:37.990Z",
+    "sourceFile": "12-StoneAxisFlooring.html"
+  },
+  "13-clearframe-windows": {
+    "desktop": "/previews/posters/13-clearframe-windows-desktop.png",
+    "mobile": "/previews/posters/13-clearframe-windows-mobile.png",
+    "generatedAt": "2026-06-26T16:37:43.827Z",
+    "sourceFile": "13-ClearFrameWindows.html"
+  },
+  "14-aquaverde-pool": {
+    "desktop": "/previews/posters/14-aquaverde-pool-desktop.png",
+    "mobile": "/previews/posters/14-aquaverde-pool-mobile.png",
+    "generatedAt": "2026-06-26T16:37:50.122Z",
+    "sourceFile": "14-AquaVerdePool.html"
+  },
+  "15-rapidtrack-garage": {
+    "desktop": "/previews/posters/15-rapidtrack-garage-desktop.png",
+    "mobile": "/previews/posters/15-rapidtrack-garage-mobile.png",
+    "generatedAt": "2026-06-26T16:37:55.979Z",
+    "sourceFile": "15-RapidTrackGarage.html"
+  },
+  "16-maison-clair": {
+    "desktop": "/previews/posters/16-maison-clair-desktop.png",
+    "mobile": "/previews/posters/16-maison-clair-mobile.png",
+    "generatedAt": "2026-06-26T16:38:02.435Z",
+    "sourceFile": "16-MaisonClair.html"
+  },
+  "17-heartwood-arbor": {
+    "desktop": "/previews/posters/17-heartwood-arbor-desktop.png",
+    "mobile": "/previews/posters/17-heartwood-arbor-mobile.png",
+    "generatedAt": "2026-06-26T16:38:09.998Z",
+    "sourceFile": "17-HeartwoodArbor.html"
+  },
+  "18-mint-pearl-dental": {
+    "desktop": "/previews/posters/18-mint-pearl-dental-desktop.png",
+    "mobile": "/previews/posters/18-mint-pearl-dental-mobile.png",
+    "generatedAt": "2026-06-26T16:38:15.983Z",
+    "sourceFile": "18-MintPearlDental.html"
+  }
+}

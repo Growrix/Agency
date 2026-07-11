@@ -1,0 +1,12 @@
+{
+  "workspace_root": "F:/PROJECTS/testing",
+  "mode": "seed",
+  "aliases": [
+    {
+      "alias_path": "F:/PROJECTS/testing/Foundation-Core-Junction",
+      "canonical_repo_id": "foundation-core",
+      "canonical_path": "F:/PROJECTS/testing/Backend & Deploy/Foundation-Core",
+      "reason": "filesystem-junction"
+    }
+  ]
+}

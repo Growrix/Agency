@@ -1,0 +1,175 @@
+
+> web@0.1.0 prebuild
+> node ./scripts/optimize-preview-html.mjs && node ./scripts/check-preview-budgets.mjs
+
+Preview HTML optimizer finished (0 files updated).
+Preview performance budgets passed across 105 files.
+
+> web@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.2.4 (webpack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · optimizePackageImports
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 63s
+  Running TypeScript ...
+  Finished TypeScript in 27.5s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/192) ...
+  Generating static pages using 7 workers (48/192) 
+  Generating static pages using 7 workers (96/192) 
+  Generating static pages using 7 workers (144/192) 
+✓ Generating static pages using 7 workers (192/192) in 82s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)                                                                                       Revalidate  Expire
+┌ ○ /                                                                                                     2m      1y
+├ ○ /_not-found
+├ ○ /about
+├ ○ /additional-services
+├ ○ /admin
+├ ○ /admin/activity
+├ ○ /admin/catalog
+├ ƒ /admin/login
+├ ○ /admin/pipeline
+├ ƒ /admin/submissions
+├ ƒ /admin/submissions/[type]/[id]
+├ ƒ /ai-concierge
+├ ƒ /api/contact
+├ ƒ /api/cron/warm-cache
+├ ƒ /api/health
+├ ƒ /api/html-business-profiles/[templateSlug]
+├ ƒ /api/preview
+├ ƒ /api/preview/disable
+├ ƒ /api/ready
+├ ƒ /api/revalidate
+├ ƒ /api/v1/admin/analytics
+├ ƒ /api/v1/admin/appointments
+├ ƒ /api/v1/admin/downloads
+├ ƒ /api/v1/admin/funnel
+├ ƒ /api/v1/admin/inquiries
+├ ƒ /api/v1/admin/leads
+├ ƒ /api/v1/admin/leads/[leadId]
+├ ƒ /api/v1/admin/licenses
+├ ƒ /api/v1/admin/notifications
+├ ƒ /api/v1/admin/orders
+├ ƒ /api/v1/admin/orders/[orderId]
+├ ƒ /api/v1/admin/portfolio
+├ ƒ /api/v1/admin/products
+├ ƒ /api/v1/admin/service-requests
+├ ƒ /api/v1/admin/service-requests/[id]
+├ ƒ /api/v1/admin/services
+├ ƒ /api/v1/admin/submissions
+├ ƒ /api/v1/admin/submissions/[type]/[id]
+├ ƒ /api/v1/admin/submissions/[type]/[id]/notes
+├ ƒ /api/v1/ai-concierge
+├ ƒ /api/v1/ai-concierge/[sessionId]
+├ ƒ /api/v1/appointments
+├ ƒ /api/v1/appointments/[appointmentId]
+├ ƒ /api/v1/auth/login
+├ ƒ /api/v1/auth/logout
+├ ƒ /api/v1/auth/register
+├ ƒ /api/v1/chat/start
+├ ƒ /api/v1/contact
+├ ƒ /api/v1/cta/whatsapp
+├ ƒ /api/v1/downloads/[downloadId]/signed-url
+├ ƒ /api/v1/events/track
+├ ƒ /api/v1/leads
+├ ƒ /api/v1/me
+├ ƒ /api/v1/me/appointments
+├ ƒ /api/v1/me/appointments/[appointmentId]
+├ ƒ /api/v1/me/downloads
+├ ƒ /api/v1/me/licenses
+├ ƒ /api/v1/me/notifications
+├ ƒ /api/v1/me/notifications/mark-read
+├ ƒ /api/v1/me/orders
+├ ƒ /api/v1/me/orders/[orderId]
+├ ƒ /api/v1/me/submissions
+├ ƒ /api/v1/me/submissions/[type]/[id]
+├ ƒ /api/v1/me/submissions/[type]/[id]/notes
+├ ƒ /api/v1/me/update
+├ ƒ /api/v1/newsletter
+├ ƒ /api/v1/observability/errors
+├ ƒ /api/v1/orders
+├ ƒ /api/v1/orders/[orderId]
+├ ƒ /api/v1/orders/[orderId]/download
+├ ƒ /api/v1/orders/webhook
+├ ƒ /api/v1/portfolio
+├ ƒ /api/v1/portfolio/[slug]
+├ ƒ /api/v1/service-requests
+├ ƒ /api/v1/services
+├ ƒ /api/v1/services/[serviceId]
+├ ƒ /api/v1/shop/categories
+├ ƒ /api/v1/shop/products
+├ ƒ /api/v1/shop/products/[productSlug]
+├ ƒ /api/webhooks/clerk
+├ ƒ /api/website-templates-html-preview/[templateSlug]
+├ ƒ /blog
+├ ● /blog/[slug]                                                                                          1m      1y
+│ ├ /blog/why-service-businesses-lose-leads-before-first-contact                                          1m      1y
+│ └ /blog/from-chaos-to-clarity-how-we-scaled-a-saas-application-from-mvp-to-50-000-active-users          1m      1y
+├ ○ /book
+├ ○ /book-appointment
+├ ƒ /businessprofile
+├ ƒ /checkout
+├ ○ /contact
+├ ○ /dashboard
+├ ○ /dashboard/appointments
+├ ○ /dashboard/downloads
+├ ƒ /dashboard/login
+├ ○ /dashboard/orders
+├ ƒ /dashboard/orders/[orderId]
+├ ○ /dashboard/products
+├ ƒ /dashboard/submissions
+├ ƒ /dashboard/submissions/[type]/[id]
+├ ○ /dashboard/support
+├ ƒ /digital-products
+├ ● /digital-products/[slug]                                                                              5m      1y
+│ ├ /digital-products/html-business-profile-profile-01-brew-and-bean                                      5m      1y
+│ ├ /digital-products/html-business-profile-profile-02-luminary-studio                                    5m      1y
+│ ├ /digital-products/html-business-profile-profile-03-nexus-digital                                      5m      1y
+│ └ [+65 more paths]
+├ ○ /digital-products/bundles                                                                             5m      1y
+├ ƒ /digital-products/category/[category]
+├ ○ /digital-products/free                                                                                5m      1y
+├ ○ /faq
+├ ○ /html-business-profiles
+├ ○ /live-chat
+├ ○ /portfolio                                                                                            5m      1y
+├ ● /portfolio/[slug]                                                                                     5m      1y
+│ ├ /portfolio/three-circles                                                                              5m      1y
+│ ├ /portfolio/rayiss-electrical-and-solar-pty-ltd                                                        5m      1y
+│ ├ /portfolio/casablanca-power                                                                           5m      1y
+│ └ /portfolio/communicators-bd                                                                           5m      1y
+├ ○ /pricing
+├ ○ /privacy-policy
+├ ○ /robots.txt
+├ ○ /services                                                                                             5m      1y
+├ ● /services/[slug]                                                                                      5m      1y
+│ ├ /services/websites                                                                                    5m      1y
+│ ├ /services/saas-applications                                                                           5m      1y
+│ ├ /services/mobile-apps                                                                                 5m      1y
+│ └ [+3 more paths]
+├ ƒ /shop
+├ ● /shop/[slug]                                                                                          5m      1y
+│ ├ /shop/html-business-profile-profile-01-brew-and-bean                                                  5m      1y
+│ ├ /shop/html-business-profile-profile-02-luminary-studio                                                5m      1y
+│ ├ /shop/html-business-profile-profile-03-nexus-digital                                                  5m      1y
+│ └ [+65 more paths]
+├ ƒ /sign-in/[[...sign-in]]
+├ ƒ /sign-up/[[...sign-up]]
+├ ○ /sitemap.xml                                                                                          2m      1y
+├ ƒ /success
+└ ○ /terms-of-service
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1b1b1b;
+  --accent: #ff3434;
+  --accent-dark: #d92424;
+  --muted: #f4f4f4;
+  --motion-fast: 180ms;
+  --motion-base: 420ms;
+  --motion-slow: 760ms;
+  --motion-curve: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-soft {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down-soft {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.65s ease-out both;
+}
+
+.motion-header-enter {
+  animation: slide-down-soft var(--motion-base) var(--motion-curve) both;
+}
+
+.motion-footer-enter {
+  animation: fade-in-soft calc(var(--motion-base) + 80ms) var(--motion-curve) both;
+}
+
+main[data-page-motion="true"] {
+  animation: fade-in-soft var(--motion-base) var(--motion-curve) both;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px) scale(0.985);
+  transition:
+    opacity var(--motion-slow) var(--motion-curve),
+    transform var(--motion-slow) var(--motion-curve);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.motion-lift {
+  transition:
+    transform var(--motion-fast) var(--motion-curve),
+    box-shadow var(--motion-fast) var(--motion-curve);
+}
+
+@media (hover: hover) {
+  .motion-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  transition-property: color, background-color, border-color, transform, box-shadow, opacity;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+input:focus,
+textarea:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #ff3434;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-fade-in-up {
+    animation: none;
+  }
+
+  .motion-header-enter,
+  .motion-footer-enter,
+  main[data-page-motion="true"] {
+    animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-lift {
+    transition: none;
+  }
+}

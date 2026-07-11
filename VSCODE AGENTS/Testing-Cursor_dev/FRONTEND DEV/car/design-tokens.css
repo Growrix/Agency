@@ -1,0 +1,52 @@
+:root {
+  /* Color system extracted from source template CSS */
+  --color-primary: #E9021E;
+  --color-primary-rgb: 233, 2, 30;
+  --color-bg-page: #121212;
+  --color-bg-surface: #222222;
+  --color-bg-elevated: #333333;
+  --color-bg-light: #F8F9FA;
+  --color-bg-muted-even: #E8E8E8;
+  --color-bg-muted-odd: #F4F4F4;
+  --color-bg-neutral: #EEEEEE;
+  --color-border-default: #BBBBBB;
+  --color-text-body: #8A8A8A;
+  --color-text-body-dark: #FFFFFFA6;
+  --color-text-heading: #002060;
+  --color-text-inverse: #FFFFFF;
+  --color-text-muted: #606060;
+
+  /* Typography from source stylesheet */
+  --font-body: "Manrope";
+  --font-heading: "Oxanium";
+  --font-body-size: 16px;
+  --font-body-line: 1.9;
+  --font-body-weight: 400;
+  --font-h1-size: 60px;
+  --font-h2-size: 48px;
+  --font-h3-size: 26px;
+  --font-h4-size: 20px;
+  --font-h5-size: 18px;
+  --font-h6-size: 16px;
+  --font-mainmenu-size: 15px;
+  --font-mainmenu-weight: 500;
+
+  /* Layout and spacing */
+  --layout-container-max: 1240px;
+  --space-section-y: 100px;
+  --space-section-y-mobile: 60px;
+  --space-card-gap: 30px;
+  --space-grid-gap: 24px;
+
+  /* Radius and effects */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 30px;
+  --shadow-soft: 0 10px 30px #00000033;
+  --shadow-card: 0 4px 15px #0000004D;
+
+  /* Gradients used by the reference */
+  --gradient-red-soft: linear-gradient(45deg, #E9021ECC 0%, #E9021E00 100%);
+  --gradient-red-solid: linear-gradient(45deg, #E9021ECC 0%, #E9021ECC 100%);
+}

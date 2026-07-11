@@ -1,0 +1,92 @@
+{
+  "contract_version": 2,
+  "runtime_root": "Foundation-Core",
+  "template_modes": [
+    "foundation_attached",
+    "standalone_template"
+  ],
+  "auth": {
+    "session_endpoint": "/api/auth/session",
+    "role_guards": true
+  },
+  "content": {
+    "seeded": true,
+    "fixtures_supported": true,
+    "revalidation_endpoint": "/api/content/revalidate"
+  },
+  "forms": {
+    "submission_endpoint_pattern": "/api/forms/{formId}/submit",
+    "server_validation": true,
+    "rate_limit": true,
+    "idempotency": true
+  },
+  "media": {
+    "upload_endpoint": "/api/media/upload",
+    "signed_access": true
+  },
+  "billing": {
+    "enabled": true,
+    "checkout_endpoint": "/api/billing/checkout",
+    "portal_endpoint": "/api/billing/portal",
+    "webhook_endpoint": "/api/webhooks/stripe",
+    "interaction_model": "hosted_checkout_and_customer_portal",
+    "requires_auth": true,
+    "offer_ref": {
+      "field": "offer_key",
+      "resolution": "stripe_price.lookup_key"
+    },
+    "response_contract": {
+      "checkout": {
+        "success_field": "checkout_url"
+      },
+      "portal": {
+        "success_field": "portal_url"
+      }
+    },
+    "state_source": "server_mirror_via_webhooks_only",
+    "failure_codes": [
+      "BILLING_NOT_CONFIGURED",
+      "BILLING_OFFER_NOT_FOUND",
+      "BILLING_AUTH_REQUIRED",
+      "BILLING_PORTAL_UNAVAILABLE"
+    ]
+  },
+  "preview": {
+    "draft_mode": true
+  },
+  "diagnostics": {
+    "health_endpoint": "/api/health",
+    "diagnostics_endpoint": "/api/diagnostics",
+    "billing_readiness_included": true
+  },
+  "revalidation": {
+    "content_only": true
+  },
+  "feature_flags": {
+    "billing": true,
+    "analytics": false,
+    "search": false
+  },
+  "env": {
+    "public": [
+      "NEXT_PUBLIC_SITE_URL",
+      "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+    ],
+    "server": [
+      "AUTH_SECRET",
+      "DATABASE_URL",
+      "RATE_LIMIT_WINDOW_SECONDS",
+      "RATE_LIMIT_MAX_REQUESTS",
+      "STRIPE_SECRET_KEY",
+      "STRIPE_WEBHOOK_SECRET"
+    ]
+  },
+  "fallback_mode": {
+    "mock_adapters": true,
+    "fixtures_required": true,
+    "billing": {
+      "enabled": false,
+      "behavior": "Return standardized BILLING_NOT_CONFIGURED errors until Stripe secrets are present."
+    }
+  }
+}

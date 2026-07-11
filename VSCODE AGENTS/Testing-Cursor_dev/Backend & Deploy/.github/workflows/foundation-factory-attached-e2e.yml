@@ -1,0 +1,77 @@
+name: foundation-factory-attached-e2e
+
+on:
+  pull_request:
+    branches: ["main", "Agents"]
+    paths:
+      - "Foundation-Core/**"
+      - "Templates/local-business/mezan/**"
+      - "DOC/agents/foundation_planner.agent.md"
+      - ".github/agents/foundation_planner.agent.md"
+      - "DOC/agents/foundation_developer.agent.md"
+      - ".github/agents/foundation_developer.agent.md"
+      - "DOC/execution/spec-rules/foundation-core-planning-spec.md"
+      - "DOC/execution/spec-rules/foundation-factory-e2e-spec.md"
+      - "DOC/execution/spec-rules/frontend-attach-contract-spec.md"
+      - "DOC/validation/checklists/foundation-factory-readiness-checklist.md"
+  push:
+    branches: ["main", "Agents"]
+    paths:
+      - "Foundation-Core/**"
+      - "Templates/local-business/mezan/**"
+      - "DOC/agents/foundation_planner.agent.md"
+      - ".github/agents/foundation_planner.agent.md"
+      - "DOC/agents/foundation_developer.agent.md"
+      - ".github/agents/foundation_developer.agent.md"
+      - "DOC/execution/spec-rules/foundation-core-planning-spec.md"
+      - "DOC/execution/spec-rules/foundation-factory-e2e-spec.md"
+      - "DOC/execution/spec-rules/frontend-attach-contract-spec.md"
+      - "DOC/validation/checklists/foundation-factory-readiness-checklist.md"
+  workflow_dispatch:
+
+jobs:
+  factory-attached-e2e:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            Foundation-Core/package-lock.json
+            Templates/local-business/mezan/package-lock.json
+
+      - name: Install Foundation dependencies
+        shell: pwsh
+        working-directory: Foundation-Core
+        run: npm ci
+
+      - name: Install validation template dependencies
+        shell: pwsh
+        working-directory: Templates/local-business/mezan
+        run: npm ci
+
+      - name: Verify validation template
+        shell: pwsh
+        working-directory: Templates/local-business/mezan
+        run: npm run verify
+
+      - name: Run Foundation factory verify
+        shell: pwsh
+        working-directory: Foundation-Core
+        env:
+          ATTACHED_TEMPLATE_ROOT: ../Templates/local-business/mezan
+        run: npm run verify:factory
+
+      - name: Upload Foundation coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation-factory-coverage
+          path: Foundation-Core/coverage/**
+          if-no-files-found: warn

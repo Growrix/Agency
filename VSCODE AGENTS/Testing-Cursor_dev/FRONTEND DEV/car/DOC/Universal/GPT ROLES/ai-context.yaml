@@ -1,0 +1,12 @@
+version: 1
+role_system:
+  purpose: reusable orchestration context for project-local planning
+  primary_roles:
+    - planner
+    - frontend
+    - backend
+    - api_and_data
+    - security
+    - devops
+    - qa
+  rule: project-local docs override generic defaults when explicitly defined

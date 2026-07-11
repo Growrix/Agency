@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TerraGrove — Premium Flooring & Tile, Installed by Craftsmen</title>
+<meta name="description" content="TerraGrove transforms every room from ordinary to extraordinary. Hardwood, luxury vinyl, porcelain tile and natural stone — visualized in your space, measured precisely, installed by certified craftsmen. Book a free measurement."/>
+<meta name="keywords" content="flooring, tile installation, hardwood floors, luxury vinyl, porcelain tile, natural stone, floor visualizer, flooring estimate, tile contractor"/>
+<meta name="author" content="TerraGrove Floors & Tile"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="TerraGrove — Premium Flooring & Tile, Installed by Craftsmen"/>
+<meta property="og:description" content="See your new floor before you buy it. Visualize materials in your room, get an instant estimate, and book a free on-site measurement."/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="theme-color" content="#1F3A2E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%231F3A2E'/%3E%3Cpath d='M5 14c3-1 5-5 7-5s4 4 7 5' stroke='%23B5623A' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3Cpath d='M5 9c3-1 5-3 7-3s4 2 7 3' stroke='%239DA98C' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"/>
+<style>
+/* ============ TERRAGROVE — QUARRY & GROVE TOKENS ============ */
+:root{
+  --oat:#F1EBDF; --cream:#FBF7EF; --sand:#E6DCC8; --sand-2:#DED2B9;
+  --bark:#211D17; --ink:#1F3A2E; --forest:#2E5141; --moss:#3F6B50; --sage:#9DA98C; --sage-d:#6F7F62;
+  --clay:#B5623A; --clay-d:#9A4F2C; --clay-t:#D98A5E;
+  --bg:var(--oat); --surface:var(--cream); --surface-2:var(--sand); --well:var(--sand-2);
+  --text:#241F18; --muted:#5E5749; --faint:#8B8273; --line:#D9CDB6; --line-2:#C8BA9E;
+  --brand:var(--ink); --brand-soft:#EAEFE6; --accent:var(--clay); --accent-ink:var(--clay-d);
+  --leaf:#4E7A57; --shadow-c:rgba(40,33,20,.13); --shadow-c2:rgba(40,33,20,.08);
+  --shadow:0 18px 40px -22px var(--shadow-c),0 4px 12px -6px var(--shadow-c2);
+  --shadow-lg:0 36px 70px -30px var(--shadow-c),0 10px 24px -12px var(--shadow-c2);
+  --shadow-sm:0 6px 16px -10px var(--shadow-c);
+  --rc:20px; --rb:13px; --rs:10px; --maxw:1320px;
+  --fd:'Spectral',Georgia,serif; --fb:'Hanken Grotesk',system-ui,sans-serif; --fm:'IBM Plex Mono',monospace;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+[data-theme=dark]{
+  --oat:#181410; --cream:#221C15; --sand:#2A231A; --sand-2:#322A1F;
+  --bg:#15110C; --surface:#1F1910; --surface-2:#2A2318; --well:#0F0C08;
+  --text:#ECE4D6; --muted:#A89C86; --faint:#7C7261; --line:#332B1F; --line-2:#42382A;
+  --brand:#EADFC9; --brand-soft:#22301F; --accent:#D98A5E; --accent-ink:#E5A175;
+  --ink:#DFE7D6; --forest:#A9C0A0; --moss:#8FAA82; --sage:#8E9C7E; --leaf:#8FB389;
+  --shadow-c:rgba(0,0,0,.55); --shadow-c2:rgba(0,0,0,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.6;font-size:16.5px;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+body::before{content:"";position:fixed;inset:0;background-image:var(--grain);background-size:160px;opacity:.5;mix-blend-mode:multiply;pointer-events:none;z-index:1}
+[data-theme=dark] body::before{mix-blend-mode:overlay;opacity:.4}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+::selection{background:var(--clay);color:#fff}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,46px);position:relative;z-index:2}
+.section{padding-block:clamp(64px,9vw,128px);position:relative;z-index:2}
+.center{text-align:center}
+.skip{position:absolute;left:14px;top:-60px;background:var(--ink);color:var(--cream);padding:11px 18px;border-radius:10px;z-index:400;font-weight:700;transition:top .2s}
+.skip:focus{top:14px}
+:focus-visible{outline:2.5px solid var(--clay);outline-offset:3px;border-radius:4px}
+
+/* ---- TYPE ---- */
+.eyebrow{font-family:var(--fm);font-size:11.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-ink);display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--accent);display:inline-block}
+.eyebrow.leaf{color:var(--moss)}.eyebrow.leaf::before{background:var(--leaf)}
+.eyebrow.cream{color:var(--clay-t)}.eyebrow.cream::before{background:var(--clay-t)}
+.h-d{font-family:var(--fd);font-weight:600;font-size:clamp(2rem,4.4vw,3.35rem);line-height:1.06;letter-spacing:-.018em;color:var(--ink)}
+.h-d em{font-style:italic;color:var(--accent-ink);font-weight:500}
+.h-sub{color:var(--muted);font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.62;margin-top:18px;max-width:56ch}
+.serif{font-family:var(--fd)}
+
+/* ---- ORGANIC BLOCK PRIMITIVES ---- */
+.block{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);box-shadow:var(--shadow-sm)}
+.block-r{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);box-shadow:var(--shadow)}
+.well{background:var(--well);border:1px solid var(--line-2);border-radius:var(--rb)}
+.hairline{height:1px;background:var(--line);border:none}
+.blob{position:absolute;border-radius:48% 52% 60% 40%/55% 45% 55% 45%;filter:blur(2px);opacity:.5;pointer-events:none;z-index:0}
+
+/* ---- BUTTONS ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--fb);font-weight:700;font-size:15px;letter-spacing:.005em;padding:14px 24px;border-radius:11px;transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s,background .22s,color .22s;white-space:nowrap;line-height:1}
+.btn svg{width:17px;height:17px}
+.btn-lg{padding:17px 30px;font-size:16px}
+.btn-full{width:100%}
+.btn-p{background:var(--clay);color:#FBF7EF;box-shadow:0 12px 24px -12px rgba(181,98,58,.7)}
+.btn-p:hover{background:var(--clay-d);transform:translateY(-2px);box-shadow:0 18px 30px -12px rgba(181,98,58,.65)}
+.btn-d{background:var(--ink);color:var(--cream)}
+[data-theme=dark] .btn-d{background:var(--brand);color:#181410}
+.btn-d:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--line-2);box-shadow:none}
+.btn-o:hover{border-color:var(--ink);background:var(--surface);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--cream);border:1.5px solid rgba(251,247,239,.4)}
+.btn-ghost:hover{background:rgba(251,247,239,.12);border-color:rgba(251,247,239,.7)}
+.btn-ico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--ink);transition:transform .2s,background .2s,border-color .2s}
+.btn-ico:hover{transform:translateY(-2px);border-color:var(--line-2)}
+
+/* ---- FORM ---- */
+.f-label{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;font-weight:500}
+.f-input{width:100%;background:var(--bg);border:1.5px solid var(--line-2);border-radius:11px;padding:13px 15px;font-size:15px;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.f-input::placeholder{color:var(--faint)}
+.f-input:focus{outline:none;border-color:var(--moss);box-shadow:0 0 0 3.5px var(--brand-soft)}
+select.f-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235E5749' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px}
+
+/* ---- ANNOUNCEMENT TICKER ---- */
+.ticker{background:var(--ink);color:var(--cream);overflow:hidden;position:relative;z-index:3;border-bottom:1px solid rgba(251,247,239,.08)}
+.ticker-track{display:flex;gap:0;white-space:nowrap;animation:tick 46s linear infinite;will-change:transform}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:11px;padding:10px 30px;font-family:var(--fm);font-size:12px;letter-spacing:.05em;color:rgba(251,247,239,.85)}
+.ticker-item svg{width:14px;height:14px;color:var(--clay-t)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---- NAVBAR ---- */
+.navbar{position:sticky;top:0;z-index:120;background:transparent;transition:background .3s,box-shadow .3s,border-color .3s;border-bottom:1px solid transparent}
+.navbar.scrolled{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(160%) blur(16px);border-bottom-color:var(--line);box-shadow:0 4px 24px -18px var(--shadow-c)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:74px}
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:40px;height:40px;border-radius:11px;background:var(--ink);display:grid;place-items:center;flex-shrink:0;box-shadow:var(--shadow-sm)}
+.logo-mark svg{width:23px;height:23px}
+.logo-txt{font-family:var(--fd);font-weight:600;font-size:21px;letter-spacing:-.01em;color:var(--ink)}
+.logo-txt b{color:var(--accent-ink);font-weight:600}
+.nav-links{display:flex;align-items:center;gap:3px}
+.nav-link{font-size:14.5px;font-weight:600;color:var(--muted);padding:9px 14px;border-radius:9px;transition:color .2s,background .2s;position:relative}
+.nav-link:hover{color:var(--ink);background:var(--surface)}
+.nav-link.active{color:var(--ink)}
+.nav-link.active::after{content:"";position:absolute;left:14px;right:14px;bottom:3px;height:2px;background:var(--accent);border-radius:2px}
+.nav-acts{display:flex;align-items:center;gap:10px}
+.hamburger{display:none;width:44px;height:44px;border-radius:11px;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+
+/* ---- DRAWER ---- */
+.drawer{position:fixed;inset:0 0 0 auto;width:min(360px,86vw);background:var(--surface);z-index:200;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;padding:24px;box-shadow:var(--shadow-lg);overflow-y:auto}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.drawer-links{display:flex;flex-direction:column;gap:2px}
+.drawer-link{display:flex;align-items:center;justify-content:space-between;padding:15px 14px;border-radius:12px;font-family:var(--fd);font-size:19px;font-weight:500;color:var(--ink);transition:background .2s}
+.drawer-link:hover{background:var(--bg)}
+.drawer-link .dn{font-family:var(--fm);font-size:11px;color:var(--faint)}
+.drawer-ov{position:fixed;inset:0;background:rgba(33,29,23,.5);z-index:190;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(2px)}
+.drawer-ov.open{opacity:1;pointer-events:auto}
+
+/* ---- BOTTOM NAV (mobile) ---- */
+.bottom-nav{position:fixed;left:12px;right:12px;bottom:12px;z-index:100;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--shadow-lg);border-radius:18px;padding:8px 6px;display:none;justify-content:space-around;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);padding:6px 8px;flex:1;font-size:10px;font-weight:600;transition:color .2s}
+.bn-item svg{width:21px;height:21px;transition:transform .2s}
+.bn-item.active{color:var(--accent-ink)}.bn-item.active svg{transform:scale(1.12)}
+
+/* ---- FAB ---- */
+.fab-wrap{position:fixed;right:18px;bottom:24px;z-index:90;display:flex;flex-direction:column;align-items:center;gap:11px}
+.fab-main{width:56px;height:56px;border-radius:50%;background:var(--clay);color:#FBF7EF;display:grid;place-items:center;box-shadow:0 14px 28px -10px rgba(181,98,58,.7);transition:transform .25s,background .25s}
+.fab-main:hover{transform:scale(1.07)}.fab-main.open{background:var(--ink)}
+.fab-opts{display:flex;flex-direction:column;align-items:center;gap:11px;overflow:hidden;max-height:0;opacity:0;transition:max-height .42s cubic-bezier(.16,1,.3,1),opacity .3s}
+.fab-opts.open{max-height:360px;opacity:1}
+.fab-opt{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--shadow);transition:transform .2s;position:relative}
+.fab-opt:hover{transform:scale(1.1)}
+.fab-opt.call{background:var(--forest);color:#FBF7EF}.fab-opt.wa{background:#25D366;color:#fff}
+.fab-opt.book{background:var(--ink);color:var(--cream)}.fab-opt.ai{background:var(--clay);color:#FBF7EF}
+.fab-opt.top{background:var(--surface);color:var(--ink);border:1px solid var(--line);display:none}
+.fab-tip{position:absolute;right:58px;top:50%;transform:translateY(-50%) translateX(4px);background:var(--ink);color:var(--cream);font-family:var(--fm);font-size:11px;padding:6px 11px;border-radius:8px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s}
+.fab-opt:hover .fab-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* ---- AI PANEL ---- */
+.ai-panel{position:fixed;right:18px;bottom:90px;z-index:95;width:min(366px,calc(100vw - 36px));background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-lg);border-radius:22px;overflow:hidden;transform:translateY(18px) scale(.97);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .3s}
+.ai-panel.open{transform:none;opacity:1;pointer-events:auto}
+.ai-head{display:flex;align-items:center;gap:11px;padding:16px 18px;background:var(--ink);color:var(--cream)}
+.ai-av{width:38px;height:38px;border-radius:11px;background:rgba(251,247,239,.14);display:grid;place-items:center}
+.ai-body{padding:16px 18px;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ai-msg{font-size:13.5px;line-height:1.55;padding:11px 14px;border-radius:13px;max-width:86%}
+.ai-msg.bot{background:var(--bg);border:1px solid var(--line);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.ai-msg.me{background:var(--clay);color:#FBF7EF;align-self:flex-end;border-bottom-right-radius:4px}
+.ai-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 12px}
+.ai-chip{font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--accent-ink);transition:transform .15s,border-color .2s}
+.ai-chip:hover{transform:translateY(-1px);border-color:var(--accent)}
+.ai-foot{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
+.ai-foot input{flex:1;font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--line-2);border-radius:10px;padding:11px 13px}
+.ai-foot input:focus{outline:none;border-color:var(--moss)}
+.ai-send{width:42px;height:42px;border-radius:10px;background:var(--clay);color:#FBF7EF;display:grid;place-items:center;flex-shrink:0}
+</style>
+<style>
+/* ============ SECTION COMPONENTS ============ */
+
+/* ---- HERO: BEFORE / AFTER ---- */
+.hero{position:relative;padding-block:clamp(40px,6vw,76px) clamp(56px,8vw,104px);overflow:hidden}
+.hero .blob.b1{width:520px;height:520px;background:radial-gradient(circle,var(--brand-soft),transparent 70%);top:-120px;right:-140px;opacity:.7}
+.hero .blob.b2{width:360px;height:360px;background:radial-gradient(circle,rgba(181,98,58,.16),transparent 70%);bottom:-100px;left:-100px}
+.hero-grid{display:grid;grid-template-columns:1.04fr 1.14fr;gap:clamp(28px,4vw,58px);align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 15px 7px 11px;font-size:12.5px;font-weight:600;color:var(--muted);box-shadow:var(--shadow-sm)}
+.hero-tag .pip{width:8px;height:8px;border-radius:50%;background:var(--leaf);box-shadow:0 0 0 4px var(--brand-soft)}
+.hero-h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.6rem,5.6vw,4.6rem);line-height:1.02;letter-spacing:-.024em;color:var(--ink);margin-top:22px}
+.hero-h1 em{font-style:italic;color:var(--accent-ink);font-weight:500}
+.hero-p{font-size:clamp(1.04rem,1.5vw,1.2rem);color:var(--muted);line-height:1.6;margin-top:22px;max-width:46ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:26px;margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+.hm{display:flex;flex-direction:column;gap:2px}
+.hm-n{font-family:var(--fd);font-size:26px;font-weight:600;color:var(--ink);line-height:1}
+.hm-l{font-family:var(--fm);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+
+/* before/after compare */
+.compare{position:relative;width:100%;aspect-ratio:4/3.1;border-radius:var(--rc);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);user-select:none;touch-action:pan-y}
+.compare-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.compare-after{clip-path:inset(0 0 0 50%);}
+.compare-lab{position:absolute;top:16px;font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:999px;backdrop-filter:blur(6px);z-index:3}
+.compare-lab.before{left:16px;background:rgba(33,29,23,.72);color:var(--cream)}
+.compare-lab.after{right:16px;background:rgba(181,98,58,.9);color:#FBF7EF}
+.compare-line{position:absolute;top:0;bottom:0;left:50%;width:2.5px;background:var(--cream);transform:translateX(-50%);z-index:4;box-shadow:0 0 14px rgba(0,0,0,.4)}
+.compare-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:var(--cream);z-index:5;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.32);cursor:ew-resize}
+.compare-handle svg{width:24px;height:24px;color:var(--ink)}
+.compare-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:6;margin:0}
+.compare-cap{position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;align-items:flex-end;z-index:3;pointer-events:none}
+.compare-mat{background:rgba(251,247,239,.92);backdrop-filter:blur(4px);border-radius:10px;padding:8px 12px;box-shadow:var(--shadow-sm)}
+.compare-mat .k{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--clay-d)}
+.compare-mat .v{font-family:var(--fd);font-size:15px;font-weight:600;color:var(--bark)}
+
+/* ---- VISUALIZER ---- */
+.viz{background:var(--ink);border-radius:clamp(20px,3vw,30px);overflow:hidden;position:relative;box-shadow:var(--shadow-lg)}
+.viz-glow{position:absolute;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(181,98,58,.22),transparent 70%);top:-160px;right:-120px;pointer-events:none}
+.viz-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:0;position:relative;z-index:2}
+.viz-stage{position:relative;min-height:440px;overflow:hidden;background:#2a2419}
+.viz-room{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.viz-floor{position:absolute;left:0;right:0;bottom:0;height:54%;background-size:cover;background-position:center;transition:background-image .45s ease,filter .45s;clip-path:polygon(0 28%,100% 12%,100% 100%,0 100%);mix-blend-mode:multiply;opacity:.96}
+.viz-floor::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.32),transparent 40%)}
+.viz-stage-foot{position:absolute;left:18px;bottom:18px;right:18px;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.viz-badge{background:rgba(251,247,239,.94);border-radius:11px;padding:9px 13px;box-shadow:var(--shadow)}
+.viz-badge .k{font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--clay-d)}
+.viz-badge .v{font-family:var(--fd);font-size:17px;font-weight:600;color:var(--bark);line-height:1.1}
+.viz-panel{padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:18px;color:var(--cream)}
+.viz-panel .vp-h{font-family:var(--fd);font-size:21px;font-weight:600;color:#FBF7EF}
+.viz-panel .vp-s{font-size:13.5px;color:rgba(251,247,239,.62);line-height:1.5;margin-top:-10px}
+.vp-label{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,247,239,.5)}
+.mat-tabs{display:flex;flex-wrap:wrap;gap:7px}
+.mat-tab{font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:9px;background:rgba(251,247,239,.08);color:rgba(251,247,239,.8);border:1px solid transparent;transition:all .2s}
+.mat-tab:hover{background:rgba(251,247,239,.15)}
+.mat-tab.on{background:var(--clay);color:#FBF7EF;border-color:var(--clay-t)}
+.sw-row{display:flex;flex-wrap:wrap;gap:9px}
+.sw{width:46px;height:46px;border-radius:10px;background-size:cover;background-position:center;cursor:pointer;border:2.5px solid transparent;transition:transform .18s,border-color .2s;position:relative;box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.sw:hover{transform:scale(1.07)}
+.sw.on{border-color:#FBF7EF}
+.sw.on::after{content:"";position:absolute;inset:0;border-radius:7px;box-shadow:inset 0 0 0 2px var(--ink)}
+.viz-readout{display:flex;justify-content:space-between;align-items:center;background:rgba(251,247,239,.07);border-radius:13px;padding:14px 16px;margin-top:2px}
+.viz-readout .ro-k{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(251,247,239,.5)}
+.viz-readout .ro-v{font-family:var(--fd);font-size:20px;font-weight:600;color:#FBF7EF;margin-top:3px}
+.viz-save{display:flex;gap:9px;margin-top:2px}
+.viz-save input{flex:1;background:rgba(251,247,239,.08);border:1px solid rgba(251,247,239,.18);border-radius:10px;padding:12px 13px;color:#FBF7EF;font-size:13.5px}
+.viz-save input::placeholder{color:rgba(251,247,239,.45)}
+.viz-save input:focus{outline:none;border-color:var(--clay-t)}
+
+/* ---- MASONRY GALLERY ---- */
+.mason{columns:3;column-gap:18px}
+.mason-item{break-inside:avoid;margin-bottom:18px;border-radius:var(--rb);overflow:hidden;position:relative;box-shadow:var(--shadow-sm);border:1px solid var(--line);background:var(--surface);transition:transform .3s,box-shadow .3s}
+.mason-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.mason-item img{width:100%;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.mason-item:hover img{transform:scale(1.05)}
+.mason-cap{position:absolute;inset:auto 0 0 0;padding:22px 16px 14px;background:linear-gradient(transparent,rgba(20,16,10,.86));color:var(--cream)}
+.mason-cap .mc-t{font-family:var(--fd);font-size:17px;font-weight:600;line-height:1.15}
+.mason-cap .mc-s{font-family:var(--fm);font-size:10.5px;letter-spacing:.05em;color:rgba(251,247,239,.72);margin-top:4px}
+.cat-pill{position:absolute;top:12px;left:12px;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:rgba(251,247,239,.92);color:var(--clay-d);padding:5px 10px;border-radius:7px}
+
+/* filters */
+.filterbar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.fbtn{font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted);transition:all .2s}
+.fbtn:hover{border-color:var(--line-2);color:var(--ink)}
+.fbtn.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.hide{display:none!important}
+
+/* ---- JOURNEY (scroll storytelling) ---- */
+.journey{position:relative}
+.journey-rail{position:absolute;left:31px;top:14px;bottom:14px;width:2px;background:var(--line);z-index:0}
+.journey-rail span{position:absolute;left:0;top:0;width:100%;height:0;background:var(--clay);transition:height .2s linear}
+.jstep{display:grid;grid-template-columns:64px 1fr;gap:22px;align-items:start;position:relative;z-index:1;padding-block:18px}
+.jdot{width:64px;height:64px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;color:var(--moss);box-shadow:var(--shadow-sm);transition:background .3s,color .3s,border-color .3s,transform .3s}
+.jdot svg{width:26px;height:26px}
+.jstep.lit .jdot{background:var(--ink);color:var(--clay-t);border-color:var(--ink);transform:scale(1.04)}
+.jstep-body{padding-top:4px}
+.jstep-n{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.jstep-h{font-family:var(--fd);font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;color:var(--ink);margin-top:5px;line-height:1.12}
+.jstep-p{color:var(--muted);font-size:15px;line-height:1.6;margin-top:8px;max-width:54ch}
+
+/* ---- ARCHITECTURAL QUALITY BLOCKS ---- */
+.qgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.qblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:clamp(24px,3vw,34px);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.qblock:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.qblock::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:var(--clay);opacity:.8}
+.qblock.g2::before{background:var(--leaf)}.qblock.g3::before{background:var(--sage-d)}.qblock.g4::before{background:var(--forest)}
+.qnum{font-family:var(--fd);font-size:42px;font-weight:600;color:var(--line-2);line-height:1;position:absolute;top:22px;right:26px}
+.qic{width:54px;height:54px;border-radius:14px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink)}
+.qic svg{width:26px;height:26px}
+.qblock h3{font-family:var(--fd);font-size:21px;font-weight:600;color:var(--ink);margin-top:18px}
+.qblock p{color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:9px}
+.qlist{list-style:none;margin-top:14px;display:grid;gap:8px}
+.qlist li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--text)}
+.qlist svg{width:16px;height:16px;color:var(--leaf);flex-shrink:0;margin-top:3px}
+
+/* ---- ESTIMATOR ---- */
+.est{display:grid;grid-template-columns:1.18fr 1fr;gap:clamp(22px,3vw,40px);align-items:start}
+.est-form{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:clamp(24px,3vw,34px);box-shadow:var(--shadow-sm)}
+.est-row{margin-bottom:20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{font-size:13px;font-weight:600;padding:9px 14px;border-radius:10px;background:var(--bg);border:1.5px solid var(--line-2);color:var(--muted);transition:all .18s}
+.chip:hover{border-color:var(--sage-d);color:var(--ink)}
+.chip.on{background:var(--brand-soft);border-color:var(--moss);color:var(--ink)}
+.dim-row{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.dim-x{font-family:var(--fd);font-size:22px;color:var(--faint);padding-bottom:12px}
+.est-out{background:var(--ink);border-radius:var(--rc);padding:clamp(24px,3vw,32px);color:var(--cream);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.est-out .eo-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(181,98,58,.2),transparent 70%);top:-120px;right:-90px}
+.est-out .eo-h{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,247,239,.55);position:relative}
+.est-big{font-family:var(--fd);font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;margin-top:8px;position:relative;color:#FBF7EF}
+.est-big .cents{font-size:.5em;color:var(--clay-t)}
+.eo-rows{margin-top:22px;display:grid;gap:1px;background:rgba(251,247,239,.1);border-radius:12px;overflow:hidden;position:relative}
+.eo-row{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;background:var(--ink);font-size:14px}
+.eo-row .k{color:rgba(251,247,239,.62)}
+.eo-row .v{font-family:var(--fd);font-weight:600;font-size:16px;color:#FBF7EF}
+.eo-row .v.em{color:var(--clay-t)}
+.eo-note{font-size:11.5px;color:rgba(251,247,239,.48);margin-top:14px;line-height:1.5;position:relative}
+
+/* ---- CASE STUDIES ---- */
+.case{display:grid;grid-template-columns:1.15fr 1fr;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);overflow:hidden;box-shadow:var(--shadow-sm)}
+.case.flip{grid-template-columns:1fr 1.15fr}
+.case-media{position:relative;min-height:340px}
+.case-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.case-badge{position:absolute;top:16px;left:16px;font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:rgba(251,247,239,.92);color:var(--clay-d);padding:6px 12px;border-radius:8px}
+.case-body{padding:clamp(26px,3.2vw,42px);display:flex;flex-direction:column;justify-content:center}
+.case-body .cb-loc{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink)}
+.case-body h3{font-family:var(--fd);font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:600;color:var(--ink);margin-top:8px;line-height:1.12}
+.case-seg{margin-top:18px}
+.case-seg .cs-k{font-family:var(--fm);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.case-seg .cs-v{font-size:14.5px;color:var(--text);line-height:1.55}
+.case-stats{display:flex;gap:24px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.case-stats .csn{font-family:var(--fd);font-size:22px;font-weight:600;color:var(--ink);line-height:1}
+.case-stats .csl{font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+
+/* ---- INSPIRATION CARDS ---- */
+.insp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.insp-card{border-radius:var(--rc);overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.insp-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.insp-media{aspect-ratio:3/2;overflow:hidden;position:relative}
+.insp-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.insp-card:hover .insp-media img{transform:scale(1.06)}
+.insp-tag{position:absolute;top:12px;left:12px;font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:rgba(31,58,46,.9);color:var(--cream);padding:5px 10px;border-radius:7px}
+.insp-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.insp-body h3{font-family:var(--fd);font-size:19px;font-weight:600;color:var(--ink);line-height:1.18}
+.insp-body p{color:var(--muted);font-size:14px;line-height:1.55;margin-top:8px;flex:1}
+.insp-read{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin-top:14px;display:inline-flex;align-items:center;gap:6px}
+
+/* ---- WARRANTY + METRICS ---- */
+.warr{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.warr-list{display:grid;gap:12px;margin-top:24px}
+.warr-item{display:flex;gap:15px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--rb);padding:18px 20px}
+.warr-item .wi-ic{width:44px;height:44px;border-radius:11px;background:var(--brand-soft);display:grid;place-items:center;color:var(--moss);flex-shrink:0}
+.warr-item .wi-ic svg{width:22px;height:22px}
+.warr-item h4{font-family:var(--fd);font-size:17px;font-weight:600;color:var(--ink)}
+.warr-item p{font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:3px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.metric{background:var(--ink);border-radius:var(--rc);padding:clamp(22px,3vw,30px);color:var(--cream);position:relative;overflow:hidden}
+.metric:nth-child(2),.metric:nth-child(3){background:var(--surface);border:1px solid var(--line);color:var(--text)}
+.metric .mn{font-family:var(--fd);font-size:clamp(2.2rem,4vw,3rem);font-weight:600;line-height:1}
+.metric:first-child .mn,.metric:nth-child(4) .mn{color:#FBF7EF}
+.metric:nth-child(2) .mn,.metric:nth-child(3) .mn{color:var(--ink)}
+.metric .mn .suf{color:var(--clay-t)}
+.metric:nth-child(2) .mn .suf,.metric:nth-child(3) .mn .suf{color:var(--clay)}
+.metric .ml{font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-top:10px;opacity:.7}
+
+/* ---- BOOKING ---- */
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.book-opt{background:var(--surface);border:1px solid var(--line);border-radius:var(--rc);padding:26px;transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer;display:flex;gap:18px;align-items:flex-start}
+.book-opt:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+.book-opt .bo-ic{width:52px;height:52px;border-radius:14px;background:var(--brand-soft);display:grid;place-items:center;color:var(--ink);flex-shrink:0}
+.book-opt .bo-ic svg{width:25px;height:25px}
+.book-opt h3{font-family:var(--fd);font-size:20px;font-weight:600;color:var(--ink)}
+.book-opt p{font-size:14px;color:var(--muted);line-height:1.5;margin-top:6px}
+.book-opt .bo-meta{font-family:var(--fm);font-size:11px;letter-spacing:.05em;color:var(--accent-ink);margin-top:10px}
+
+/* ---- FOOTER ---- */
+footer{background:var(--ink);color:var(--cream);position:relative;z-index:2;overflow:hidden}
+.foot-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(181,98,58,.12),transparent 68%);top:-280px;left:-120px;pointer-events:none}
+.foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr 1.2fr;gap:36px;position:relative}
+.foot-desc{color:rgba(251,247,239,.62);font-size:14px;line-height:1.65;margin-top:18px;max-width:300px}
+.foot-nl{display:flex;gap:8px;margin-top:20px;max-width:330px}
+.foot-nl input{flex:1;background:rgba(251,247,239,.07);border:1px solid rgba(251,247,239,.16);border-radius:11px;padding:12px 14px;color:#FBF7EF;font-size:13.5px}
+.foot-nl input::placeholder{color:rgba(251,247,239,.42)}
+.foot-nl input:focus{outline:none;border-color:var(--clay-t)}
+.foot-nl button{width:46px;border-radius:11px;background:var(--clay);color:#FBF7EF;display:grid;place-items:center;flex-shrink:0}
+.foot-h{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(251,247,239,.45);margin-bottom:16px}
+.foot-links{display:grid;gap:11px}
+.foot-link{color:rgba(251,247,239,.74);font-size:14px;transition:color .2s}
+.foot-link:hover{color:#FBF7EF}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;margin-top:48px;padding-top:26px;border-top:1px solid rgba(251,247,239,.12);position:relative}
+.foot-copy{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:rgba(251,247,239,.55)}
+.foot-credit a{color:var(--clay-t);font-weight:600}
+.foot-credit a:hover{text-decoration:underline}
+
+/* ---- SPA PAGES ---- */
+.spa-page{display:none}
+.spa-page.active{display:block}
+.page-hero{position:relative;overflow:hidden;background:var(--ink);color:var(--cream);padding-block:clamp(58px,8vw,104px)}
+.page-hero .blob{width:480px;height:480px;background:radial-gradient(circle,rgba(181,98,58,.16),transparent 70%);top:-160px;right:-120px;opacity:.8}
+.breadcrumb{display:flex;gap:9px;align-items:center;font-family:var(--fm);font-size:12px;color:rgba(251,247,239,.55)}
+.breadcrumb a:hover{color:#FBF7EF}
+.ph-h1{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.04;letter-spacing:-.02em;color:#FBF7EF;margin-top:14px}
+.ph-h1 em{font-style:italic;color:var(--clay-t);font-weight:500}
+.ph-sub{color:rgba(251,247,239,.72);font-size:17px;line-height:1.62;margin-top:16px;max-width:60ch}
+
+/* ---- REVEAL ---- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.scroll-prog{position:fixed;top:0;left:0;height:3px;background:var(--clay);z-index:300;width:0;transition:width .1s linear}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ticker-track{animation:none}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* ---- GRIDS ---- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1080px){
+  .mason{columns:2}
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .hero-h1{font-size:clamp(2.4rem,8vw,3.6rem)}
+  .compare{aspect-ratio:16/11}
+  .viz-grid{grid-template-columns:1fr}.viz-stage{min-height:340px}
+  .est{grid-template-columns:1fr}
+  .warr{grid-template-columns:1fr}
+  .case,.case.flip{grid-template-columns:1fr}
+  .case-media{min-height:280px}
+  .insp{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr 1fr}
+}
+@media(max-width:860px){
+  .nav-links{display:none}.hamburger{display:grid}
+  .bottom-nav{display:flex}.fab-wrap{bottom:80px}
+  body{padding-bottom:74px}
+  .qgrid{grid-template-columns:1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .mason{columns:1}
+  .insp{grid-template-columns:1fr}
+  .g2,.g3{grid-template-columns:1fr}
+  .book-grid{grid-template-columns:1fr}
+  .hero-meta{gap:18px}
+  .dim-row{grid-template-columns:1fr 1fr;gap:10px}.dim-x{display:none}
+  .case-stats{flex-wrap:wrap;gap:16px}
+  .foot-grid{grid-template-columns:1fr}
+  .jstep{grid-template-columns:50px 1fr;gap:16px}.journey-rail{left:24px}
+  .jdot{width:50px;height:50px}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<div class="scroll-prog" id="scroll-prog"></div>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker-track">
+  <span class="ticker-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free in-home measurement &amp; quote</span>
+  <span class="ticker-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/></svg>25-year installation warranty</span>
+  <span class="ticker-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 22V13M15 22V13"/></svg>Certified, background-checked craftsmen</span>
+  <span class="ticker-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>FSC-certified hardwood &amp; low-VOC finishes</span>
+</div></div>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" id="navbar"><div class="container"><div class="nav-in">
+  <a href="#home" class="logo" data-page="home" aria-label="TerraGrove home">
+    <span class="logo-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FBF7EF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c3.5-1.5 5-5 8-5s4.5 3.5 8 5"/><path d="M4 9.5C7.5 8 9 5 12 5s4.5 3 8 4.5"/><path d="M4 20h16"/></svg></span>
+    <span class="logo-txt">Terra<b>Grove</b></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#materials" class="nav-link" data-page="materials">Materials</a>
+    <a href="#visualizer" class="nav-link" data-page="home" data-scroll="visualizer">Visualizer</a>
+    <a href="#projects" class="nav-link" data-page="projects">Projects</a>
+    <a href="#estimate" class="nav-link" data-page="home" data-scroll="estimate">Estimate</a>
+    <a href="#inspiration" class="nav-link" data-page="inspiration">Inspiration</a>
+    <a href="#about" class="nav-link" data-page="about">About</a>
+  </nav>
+  <div class="nav-acts">
+    <button class="btn-ico theme-btn" aria-label="Toggle theme"></button>
+    <a href="#book" class="btn btn-p" data-page="book">Free Measurement</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+  </div>
+</div></div></header>
+
+<!-- ===== DRAWER ===== -->
+<div class="drawer-ov" id="drawer-ov"></div>
+<aside class="drawer" id="drawer" aria-label="Menu">
+  <div class="drawer-hd">
+    <span class="logo-txt">Terra<b>Grove</b></span>
+    <button class="btn-ico" id="drawer-close" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav class="drawer-links" aria-label="Mobile">
+    <a href="#home" class="drawer-link" data-page="home">Home <span class="dn">01</span></a>
+    <a href="#materials" class="drawer-link" data-page="materials">Materials <span class="dn">02</span></a>
+    <a href="#projects" class="drawer-link" data-page="projects">Projects <span class="dn">03</span></a>
+    <a href="#inspiration" class="drawer-link" data-page="inspiration">Inspiration <span class="dn">04</span></a>
+    <a href="#about" class="drawer-link" data-page="about">About &amp; Warranty <span class="dn">05</span></a>
+    <a href="#book" class="drawer-link" data-page="book">Book a Visit <span class="dn">06</span></a>
+  </nav>
+  <a href="#book" class="btn btn-p btn-lg btn-full" data-page="book" style="margin-top:22px">Get Free Measurement</a>
+  <div style="margin-top:auto;padding-top:24px;font-family:var(--fm);font-size:11.5px;color:var(--faint);line-height:1.7">
+    (415) 555-0182<br/>hello@terragrove.co<br/>Showroom · Mon–Sat 9–6
+  </div>
+</aside>
+
+<main id="main">
+<!-- ============ HOME ============ -->
+<div id="page-home" class="spa-page active">
+
+<!-- 1 · BEFORE / AFTER HERO -->
+<section class="hero"><span class="blob b1"></span><span class="blob b2"></span><div class="container"><div class="hero-grid">
+  <div>
+    <span class="hero-tag reveal"><span class="pip"></span> Floor &amp; tile visualizer inside</span>
+    <h1 class="hero-h1 reveal" data-d="80">Transform every room from <em>ordinary</em> to extraordinary.</h1>
+    <p class="hero-p reveal" data-d="160">See premium hardwood, luxury vinyl, porcelain and natural stone in your own space before you commit — then let our certified craftsmen install it to last a generation.</p>
+    <div class="hero-cta reveal" data-d="240">
+      <a href="#book" class="btn btn-p btn-lg" data-page="book">Get Free Measurement <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="#materials" class="btn btn-o btn-lg" data-page="materials">Explore Materials</a>
+    </div>
+    <div class="hero-meta reveal" data-d="320">
+      <div class="hm"><span class="hm-n">3,400+</span><span class="hm-l">Rooms transformed</span></div>
+      <div class="hm"><span class="hm-n">25 yr</span><span class="hm-l">Install warranty</span></div>
+      <div class="hm"><span class="hm-n">4.9★</span><span class="hm-l">1,800+ reviews</span></div>
+    </div>
+  </div>
+  <div class="reveal" data-d="200">
+    <div class="compare" id="compare">
+      <img class="compare-img compare-before" src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=1100&q=80" alt="Worn, dated flooring before renovation"/>
+      <img class="compare-img compare-after" id="compare-after" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=80" alt="Premium hardwood flooring after installation"/>
+      <span class="compare-lab before">Before</span>
+      <span class="compare-lab after">After</span>
+      <div class="compare-cap"><div class="compare-mat"><div class="k">Installed</div><div class="v">European Oak · Matte</div></div></div>
+      <div class="compare-line" id="compare-line"><div class="compare-handle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6" opacity="0"/><polyline points="9 6 15 12 9 18"/></svg></div></div>
+      <input type="range" class="compare-range" id="compare-range" min="0" max="100" value="50" aria-label="Reveal before and after"/>
+    </div>
+    <p class="center" style="font-family:var(--fm);font-size:11.5px;color:var(--faint);margin-top:12px">Drag to reveal the transformation →</p>
+  </div>
+</div></div></section>
+
+<!-- 2 · FLOOR VISUALIZER -->
+<section class="section" id="visualizer" style="padding-top:clamp(20px,3vw,40px)"><div class="container">
+  <div class="center reveal" style="max-width:640px;margin-inline:auto;margin-bottom:clamp(34px,4vw,52px)">
+    <span class="eyebrow">Interactive tool</span>
+    <h2 class="h-d" style="margin-top:16px">Try the floor on for size.</h2>
+    <p class="h-sub" style="margin-inline:auto;text-align:center">Switch between materials and finishes on a real room and watch the price-per-square-foot update live. No appointment, no pressure.</p>
+  </div>
+  <div class="viz reveal" data-d="120">
+    <div class="viz-glow"></div>
+    <div class="viz-grid">
+      <div class="viz-stage">
+        <img class="viz-room" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1100&q=80" alt="Living room preview"/>
+        <div class="viz-floor" id="viz-floor"></div>
+        <div class="viz-stage-foot">
+          <div class="viz-badge"><div class="k">Now previewing</div><div class="v" id="viz-name">European Oak</div></div>
+          <div class="viz-badge" style="text-align:right"><div class="k">From</div><div class="v" id="viz-stage-price">$8.50<span style="font-size:.6em;color:var(--faint)">/sqft</span></div></div>
+        </div>
+      </div>
+      <div class="viz-panel">
+        <div>
+          <div class="vp-h">Floor &amp; Tile Visualizer</div>
+          <div class="vp-s">Pick a category, then a finish.</div>
+        </div>
+        <div>
+          <div class="vp-label" style="margin-bottom:9px">Material category</div>
+          <div class="mat-tabs" id="mat-tabs"></div>
+        </div>
+        <div>
+          <div class="vp-label" style="margin-bottom:9px">Finish &amp; color</div>
+          <div class="sw-row" id="sw-row"></div>
+        </div>
+        <div class="viz-readout">
+          <div><div class="ro-k">Material</div><div class="ro-v" id="ro-name">European Oak</div></div>
+          <div style="text-align:right"><div class="ro-k">Durability</div><div class="ro-v" id="ro-dur">High</div></div>
+        </div>
+        <div class="viz-save">
+          <input type="email" id="viz-email" placeholder="Email to save this design" aria-label="Email to save design"/>
+          <button class="btn btn-p" id="viz-save-btn">Save</button>
+        </div>
+        <div id="viz-saved" style="display:none;font-family:var(--fm);font-size:12px;color:var(--clay-t)">✓ Saved — we'll send your design &amp; a matching quote.</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 3 · MATERIAL DISCOVERY GALLERY (masonry) -->
+<section class="section" id="materials-home" style="background:var(--surface-2)"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(28px,3.5vw,44px)">
+    <div class="reveal" style="max-width:560px">
+      <span class="eyebrow leaf">Material library</span>
+      <h2 class="h-d" style="margin-top:16px">Six collections, <em>endless</em> rooms.</h2>
+      <p class="h-sub">From wide-plank oak to honed limestone, every collection is curated for how it lives — underfoot, over years.</p>
+    </div>
+    <a href="#materials" class="btn btn-o reveal" data-page="materials" data-d="80">Browse all materials <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="filterbar reveal" data-d="60" id="mat-filter" style="margin-bottom:26px">
+    <button class="fbtn on" data-mf="all">All</button>
+    <button class="fbtn" data-mf="hardwood">Hardwood</button>
+    <button class="fbtn" data-mf="vinyl">Luxury Vinyl</button>
+    <button class="fbtn" data-mf="tile">Tile</button>
+    <button class="fbtn" data-mf="stone">Stone</button>
+    <button class="fbtn" data-mf="outdoor">Outdoor</button>
+  </div>
+  <div class="mason" id="mat-mason">
+    <div class="mason-item reveal" data-cat="hardwood"><span class="cat-pill">Hardwood</span><img src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=700&q=80" alt="Wide-plank European oak"/><div class="mason-cap"><div class="mc-t">European Oak, Wide Plank</div><div class="mc-s">Matte · from $8.50/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="tile" data-d="60"><span class="cat-pill">Porcelain</span><img src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?auto=format&fit=crop&w=700&q=80" alt="Large-format porcelain tile"/><div class="mason-cap"><div class="mc-t">Calacatta Porcelain</div><div class="mc-s">Large format · from $6.90/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="vinyl" data-d="120"><span class="cat-pill">Luxury Vinyl</span><img src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=700&q=80" alt="Luxury vinyl plank in warm tone"/><div class="mason-cap"><div class="mc-t">Smoked Hickory LVP</div><div class="mc-s">Waterproof · from $4.20/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="stone"><span class="cat-pill">Stone</span><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=80" alt="Honed natural limestone"/><div class="mason-cap"><div class="mc-t">Honed Limestone</div><div class="mc-s">Sealed · from $12.40/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="hardwood" data-d="60"><span class="cat-pill">Hardwood</span><img src="https://images.unsplash.com/photo-1622372738946-62e02505feb3?auto=format&fit=crop&w=700&q=80" alt="Herringbone walnut floor"/><div class="mason-cap"><div class="mc-t">Walnut Herringbone</div><div class="mc-s">Oiled · from $13.80/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="outdoor" data-d="120"><span class="cat-pill">Outdoor</span><img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?auto=format&fit=crop&w=700&q=80" alt="Outdoor patio porcelain paver"/><div class="mason-cap"><div class="mc-t">Basalt Patio Pavers</div><div class="mc-s">Frost-proof · from $7.60/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="tile"><span class="cat-pill">Ceramic</span><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=700&q=80" alt="Zellige ceramic tile"/><div class="mason-cap"><div class="mc-t">Zellige Ceramic</div><div class="mc-s">Handmade · from $9.30/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="vinyl" data-d="60"><span class="cat-pill">Luxury Vinyl</span><img src="https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?auto=format&fit=crop&w=700&q=80" alt="Stone-look luxury vinyl tile"/><div class="mason-cap"><div class="mc-t">Slate-Look LVT</div><div class="mc-s">Waterproof · from $4.80/sqft</div></div></div>
+    <div class="mason-item reveal" data-cat="stone" data-d="120"><span class="cat-pill">Stone</span><img src="https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80" alt="Marble mosaic stone"/><div class="mason-cap"><div class="mc-t">Carrara Marble Mosaic</div><div class="mc-s">Polished · from $16.00/sqft</div></div></div>
+  </div>
+</div></section>
+
+<!-- 4 · SELECTION JOURNEY -->
+<section class="section" id="journey"><div class="container">
+  <div class="g2" style="gap:clamp(30px,5vw,64px);align-items:start">
+    <div class="reveal" style="position:sticky;top:96px">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h-d" style="margin-top:16px">From first look to <em>final</em> walkthrough.</h2>
+      <p class="h-sub">A calm, five-step path. You'll always know what happens next, who's coming, and what it costs — before any work begins.</p>
+      <a href="#book" class="btn btn-d btn-lg" data-page="book" style="margin-top:26px">Start with a free visit <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="journey" id="journey-steps">
+      <div class="journey-rail"><span id="journey-fill"></span></div>
+      <div class="jstep"><div class="jdot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 8 4v14"/><path d="M9 9h.01M9 13h.01M9 17h.01"/></svg></div><div class="jstep-body"><div class="jstep-n">Step 01</div><h3 class="jstep-h">Room assessment</h3><p class="jstep-p">We look at light, subfloor, traffic and moisture to recommend materials that will actually thrive in your space — not just look good in a showroom.</p></div></div>
+      <div class="jstep"><div class="jdot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="jstep-body"><div class="jstep-n">Step 02</div><h3 class="jstep-h">Material selection</h3><p class="jstep-p">Take home samples, preview finishes in the visualizer, and compare warmth, durability and budget side by side until one feels unmistakably right.</p></div></div>
+      <div class="jstep"><div class="jdot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M7 3v18" opacity=".5"/></svg></div><div class="jstep-body"><div class="jstep-n">Step 03</div><h3 class="jstep-h">Measurement &amp; planning</h3><p class="jstep-p">Laser-measured to the inch, with layout, transitions and waste allowance mapped out. You approve a fixed quote and an installation date — no surprises.</p></div></div>
+      <div class="jstep"><div class="jdot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6-9 9-6 1 1-6z"/><path d="M12 6 4 14"/></svg></div><div class="jstep-body"><div class="jstep-n">Step 04</div><h3 class="jstep-h">Professional installation</h3><p class="jstep-p">Certified craftsmen prep the subfloor, protect your home, and lay every plank and tile with the patience it deserves. Clean site, every day.</p></div></div>
+      <div class="jstep"><div class="jdot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="jstep-body"><div class="jstep-n">Step 05</div><h3 class="jstep-h">Final walkthrough</h3><p class="jstep-p">We inspect together, hand over care guidance and warranty paperwork, and don't call it done until you'd happily show the room to anyone.</p></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5 · PROJECT TRANSFORMATION SHOWCASE -->
+<section class="section" id="projects-home" style="background:var(--surface-2)"><div class="container">
+  <div class="center reveal" style="max-width:620px;margin-inline:auto;margin-bottom:clamp(28px,3.5vw,44px)">
+    <span class="eyebrow leaf">Recent transformations</span>
+    <h2 class="h-d" style="margin-top:16px">Proof, room by room.</h2>
+    <p class="h-sub" style="margin-inline:auto;text-align:center">Real homes and spaces we've refloored. Filter by room to find one like yours.</p>
+  </div>
+  <div class="filterbar reveal" data-d="60" id="proj-filter" style="margin-bottom:26px">
+    <button class="fbtn on" data-pf="all">All spaces</button>
+    <button class="fbtn" data-pf="kitchen">Kitchen</button>
+    <button class="fbtn" data-pf="bath">Bathroom</button>
+    <button class="fbtn" data-pf="living">Living Room</button>
+    <button class="fbtn" data-pf="commercial">Commercial</button>
+    <button class="fbtn" data-pf="luxury">Luxury Homes</button>
+    <button class="fbtn" data-pf="outdoor">Outdoor</button>
+  </div>
+  <div class="mason" id="proj-mason">
+    <div class="mason-item reveal" data-pcat="living"><span class="cat-pill">Living Room</span><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Living room with oak floor"/><div class="mason-cap"><div class="mc-t">Riverside Loft</div><div class="mc-s">European Oak · 420 sqft · 3 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="kitchen" data-d="60"><span class="cat-pill">Kitchen</span><img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=700&q=80" alt="Kitchen with porcelain tile"/><div class="mason-cap"><div class="mc-t">Maple Street Kitchen</div><div class="mc-s">Calacatta Porcelain · 180 sqft · 2 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="bath" data-d="120"><span class="cat-pill">Bathroom</span><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=700&q=80" alt="Bathroom with marble mosaic"/><div class="mason-cap"><div class="mc-t">Cedar Park Ensuite</div><div class="mc-s">Carrara Mosaic · 90 sqft · 2 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="luxury"><span class="cat-pill">Luxury Home</span><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=80" alt="Luxury home with herringbone floor"/><div class="mason-cap"><div class="mc-t">Highland Estate</div><div class="mc-s">Walnut Herringbone · 1,250 sqft · 9 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="commercial" data-d="60"><span class="cat-pill">Commercial</span><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="Commercial office flooring"/><div class="mason-cap"><div class="mc-t">Foundry Coworking</div><div class="mc-s">Slate-Look LVT · 3,800 sqft · 6 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="outdoor" data-d="120"><span class="cat-pill">Outdoor</span><img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=700&q=80" alt="Outdoor patio pavers"/><div class="mason-cap"><div class="mc-t">Lakeside Terrace</div><div class="mc-s">Basalt Pavers · 540 sqft · 4 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="kitchen"><span class="cat-pill">Kitchen</span><img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=700&q=80" alt="Modern kitchen with vinyl"/><div class="mason-cap"><div class="mc-t">Oakwood Galley</div><div class="mc-s">Smoked Hickory LVP · 150 sqft · 2 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="living" data-d="60"><span class="cat-pill">Living Room</span><img src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Living room with stone floor"/><div class="mason-cap"><div class="mc-t">Westfield Family Room</div><div class="mc-s">Honed Limestone · 360 sqft · 4 days</div></div></div>
+    <div class="mason-item reveal" data-pcat="luxury" data-d="120"><span class="cat-pill">Luxury Home</span><img src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=700&q=80" alt="Luxury living with wide plank"/><div class="mason-cap"><div class="mc-t">Crestline Residence</div><div class="mc-s">Wide-Plank Oak · 980 sqft · 7 days</div></div></div>
+  </div>
+</div></section>
+
+<!-- 6 · INSTALLATION QUALITY STANDARDS -->
+<section class="section" id="quality"><div class="container">
+  <div class="center reveal" style="max-width:620px;margin-inline:auto;margin-bottom:clamp(28px,3.5vw,44px)">
+    <span class="eyebrow">Built to outlast trends</span>
+    <h2 class="h-d" style="margin-top:16px">The difference is under the surface.</h2>
+    <p class="h-sub" style="margin-inline:auto;text-align:center">Beautiful floors fail when the prep is rushed. Our four-stage standard is why ours don't.</p>
+  </div>
+  <div class="qgrid">
+    <div class="qblock reveal"><div class="qnum">01</div><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg></div><h3>Precision preparation</h3><p>Every job starts below the surface. We test moisture, level the subfloor and correct flaws that would otherwise telegraph through your new floor.</p><ul class="qlist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Moisture &amp; humidity testing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Subfloor leveling to ±2mm</li></ul></div>
+    <div class="qblock g2 reveal" data-d="80"><div class="qnum">02</div><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6-9 9-6 1 1-6z"/><path d="M12 6 4 14"/></svg></div><h3>Expert installation</h3><p>Certified craftsmen who lay floors for a living — not a side job. Tight seams, balanced layouts and clean transitions, every plank and tile.</p><ul class="qlist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>NWFA &amp; CTEF certified installers</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dust-controlled, protected worksite</li></ul></div>
+    <div class="qblock g3 reveal" data-d="40"><div class="qnum">03</div><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/><path d="m9 11 2 2 4-4"/></svg></div><h3>Material protection</h3><p>Premium materials deserve premium handling. We acclimate, store and seal everything correctly so the floor you chose is the floor you keep.</p><ul class="qlist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>48–72hr on-site acclimation</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Manufacturer-spec sealing</li></ul></div>
+    <div class="qblock g4 reveal" data-d="120"><div class="qnum">04</div><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.5 7.5-8.5 9C7.5 19.5 4 17 4 12V6l8-3 8 3z"/></svg></div><h3>Warranty coverage</h3><p>We stand behind the work in writing. Installation is warranted for 25 years, with material warranties from the makers we partner with.</p><ul class="qlist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>25-year installation warranty</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lifetime repair support</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 7 · COST & MATERIAL ESTIMATOR -->
+<section class="section" id="estimate" style="background:var(--surface-2)"><div class="container">
+  <div class="center reveal" style="max-width:620px;margin-inline:auto;margin-bottom:clamp(30px,4vw,48px)">
+    <span class="eyebrow">Instant ballpark</span>
+    <h2 class="h-d" style="margin-top:16px">Know the number <em>before</em> we visit.</h2>
+    <p class="h-sub" style="margin-inline:auto;text-align:center">Enter your room and choices for a transparent estimate — material, waste allowance, labor and timeline. We'll confirm to the penny on-site.</p>
+  </div>
+  <div class="est reveal" data-d="100">
+    <div class="est-form">
+      <div class="est-row">
+        <span class="f-label">Room dimensions</span>
+        <div class="dim-row">
+          <div><label class="f-label" for="dim-l">Length (ft)</label><input class="f-input" id="dim-l" type="number" min="1" value="16" inputmode="decimal"/></div>
+          <span class="dim-x">×</span>
+          <div><label class="f-label" for="dim-w">Width (ft)</label><input class="f-input" id="dim-w" type="number" min="1" value="14" inputmode="decimal"/></div>
+        </div>
+      </div>
+      <div class="est-row">
+        <span class="f-label">Flooring type</span>
+        <div class="chips" data-group="type">
+          <button class="chip on" data-v="hardwood" data-rate="8.5">Hardwood</button>
+          <button class="chip" data-v="laminate" data-rate="3.2">Laminate</button>
+          <button class="chip" data-v="vinyl" data-rate="4.4">Luxury Vinyl</button>
+          <button class="chip" data-v="ceramic" data-rate="5.6">Ceramic Tile</button>
+          <button class="chip" data-v="porcelain" data-rate="6.9">Porcelain Tile</button>
+          <button class="chip" data-v="stone" data-rate="12.4">Natural Stone</button>
+        </div>
+      </div>
+      <div class="est-row">
+        <span class="f-label">Material tier</span>
+        <div class="chips" data-group="tier">
+          <button class="chip" data-v="essential" data-mult="0.8" data-lbl="Essential">Essential</button>
+          <button class="chip on" data-v="signature" data-mult="1" data-lbl="Signature">Signature</button>
+          <button class="chip" data-v="artisan" data-mult="1.4" data-lbl="Artisan">Artisan</button>
+        </div>
+      </div>
+      <div class="est-row" style="margin-bottom:0">
+        <span class="f-label">Installation requirements</span>
+        <div class="chips" data-group="install" data-multi="1">
+          <button class="chip" data-v="removal" data-add="1.4" data-lbl="Old floor removal">Remove old floor</button>
+          <button class="chip" data-v="subfloor" data-add="2.1" data-lbl="Subfloor prep">Subfloor prep</button>
+          <button class="chip" data-v="stairs" data-add="1.8" data-lbl="Stairs / transitions">Stairs &amp; transitions</button>
+        </div>
+      </div>
+    </div>
+    <div class="est-out">
+      <div class="eo-glow"></div>
+      <div class="eo-h">Estimated project total</div>
+      <div class="est-big" id="est-total">$0</div>
+      <div class="eo-rows">
+        <div class="eo-row"><span class="k">Floor area</span><span class="v" id="est-area">224 sqft</span></div>
+        <div class="eo-row"><span class="k">Material + 10% waste</span><span class="v" id="est-mat">246 sqft</span></div>
+        <div class="eo-row"><span class="k">Material cost</span><span class="v" id="est-matcost">$0</span></div>
+        <div class="eo-row"><span class="k">Installation &amp; labor</span><span class="v" id="est-labor">$0</span></div>
+        <div class="eo-row"><span class="k">Estimated timeline</span><span class="v em" id="est-time">2–3 days</span></div>
+      </div>
+      <p class="eo-note">Ballpark only — final pricing is confirmed at your free on-site measurement. Includes standard installation; permits and structural work quoted separately.</p>
+      <form class="viz-save" id="est-form" style="margin-top:16px">
+        <input type="email" id="est-email" placeholder="Email my detailed estimate" aria-label="Email" required/>
+        <button class="btn btn-p" type="submit">Send</button>
+      </form>
+      <div id="est-sent" style="display:none;font-family:var(--fm);font-size:12px;color:var(--clay-t);margin-top:10px">✓ On its way — check your inbox for the full breakdown.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 8 · CUSTOMER TRANSFORMATIONS -->
+<section class="section" id="stories"><div class="container">
+  <div class="center reveal" style="max-width:620px;margin-inline:auto;margin-bottom:clamp(28px,3.5vw,44px)">
+    <span class="eyebrow leaf">Transformation stories</span>
+    <h2 class="h-d" style="margin-top:16px">Challenge in. <em>Beauty</em> out.</h2>
+    <p class="h-sub" style="margin-inline:auto;text-align:center">Three rooms that started rough and ended remarkable.</p>
+  </div>
+  <div style="display:grid;gap:22px">
+    <div class="case reveal">
+      <div class="case-media"><span class="case-badge">Kitchen · 180 sqft</span><img src="https://images.unsplash.com/photo-1556909190-eccf4a8bf97a?auto=format&fit=crop&w=900&q=80" alt="Renovated kitchen with porcelain floor"/></div>
+      <div class="case-body">
+        <div class="cb-loc">Maple Street · 6 days</div>
+        <h3>A water-warped kitchen, made watertight.</h3>
+        <div class="case-seg"><div class="cs-k">Challenge</div><div class="cs-v">Peeling laminate over a moisture-damaged subfloor near the sink — the third failed floor in eight years.</div></div>
+        <div class="case-seg"><div class="cs-k">Solution</div><div class="cs-v">Calacatta porcelain over a fully reset, moisture-sealed subfloor with heated underlay.</div></div>
+        <div class="case-stats"><div><div class="csn">6 days</div><div class="csl">Start to finish</div></div><div><div class="csn">100%</div><div class="csl">Waterproof</div></div><div><div class="csn">25 yr</div><div class="csl">Warranty</div></div></div>
+      </div>
+    </div>
+    <div class="case flip reveal" data-d="60">
+      <div class="case-body">
+        <div class="cb-loc">Highland Estate · 9 days</div>
+        <h3>Builder-grade carpet to walnut herringbone.</h3>
+        <div class="case-seg"><div class="cs-k">Challenge</div><div class="cs-v">1,250 sqft of tired carpet across an open main floor, with three rooms needing seamless transitions.</div></div>
+        <div class="case-seg"><div class="cs-k">Solution</div><div class="cs-v">Oiled walnut in a French herringbone pattern, laid continuous with hand-fitted thresholds.</div></div>
+        <div class="case-stats"><div><div class="csn">1,250</div><div class="csl">Sqft</div></div><div><div class="csn">9 days</div><div class="csl">Installation</div></div><div><div class="csn">+11%</div><div class="csl">Appraised value</div></div></div>
+      </div>
+      <div class="case-media"><span class="case-badge">Luxury home · 1,250 sqft</span><img src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=900&q=80" alt="Herringbone walnut floor in luxury home"/></div>
+    </div>
+    <div class="case reveal" data-d="60">
+      <div class="case-media"><span class="case-badge">Commercial · 3,800 sqft</span><img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=900&q=80" alt="Commercial space with luxury vinyl tile"/></div>
+      <div class="case-body">
+        <div class="cb-loc">Foundry Coworking · 6 days</div>
+        <h3>A working office, refloored over two weekends.</h3>
+        <div class="case-seg"><div class="cs-k">Challenge</div><div class="cs-v">A busy coworking floor that couldn't close — but whose scuffed vinyl was driving members away.</div></div>
+        <div class="case-seg"><div class="cs-k">Solution</div><div class="cs-v">Commercial slate-look LVT installed in phased weekend shifts with zero weekday downtime.</div></div>
+        <div class="case-stats"><div><div class="csn">3,800</div><div class="csl">Sqft</div></div><div><div class="csn">0</div><div class="csl">Days closed</div></div><div><div class="csn">15 yr</div><div class="csl">Commercial wear</div></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 9 · DESIGN INSPIRATION HUB -->
+<section class="section" id="inspiration-home" style="background:var(--surface-2)"><div class="container">
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(28px,3.5vw,44px)">
+    <div class="reveal" style="max-width:560px">
+      <span class="eyebrow">From the journal</span>
+      <h2 class="h-d" style="margin-top:16px">Ideas worth standing on.</h2>
+      <p class="h-sub">Trends, pairings and room-by-room guidance from our design team.</p>
+    </div>
+    <a href="#inspiration" class="btn btn-o reveal" data-page="inspiration" data-d="80">Read the journal <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+  <div class="insp">
+    <article class="insp-card reveal"><div class="insp-media"><span class="insp-tag">Tile</span><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=700&q=80" alt="Trending tile patterns"/></div><div class="insp-body"><h3>The tile patterns defining 2026</h3><p>Zellige, oversized slabs and tonal grout — where modern tile is heading and how to use it without dating your room.</p><span class="insp-read">Read · 6 min <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div></article>
+    <article class="insp-card reveal" data-d="70"><div class="insp-media"><span class="insp-tag">Hardwood</span><img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=700&q=80" alt="Modern wood flooring"/></div><div class="insp-body"><h3>Wide plank vs herringbone</h3><p>Two timeless wood layouts, two very different moods. A practical guide to choosing for your room's size and light.</p><span class="insp-read">Read · 5 min <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div></article>
+    <article class="insp-card reveal" data-d="140"><div class="insp-media"><span class="insp-tag">Bathroom</span><img src="https://images.unsplash.com/photo-1604709177225-055f99402ea3?auto=format&fit=crop&w=700&q=80" alt="Bathroom design ideas"/></div><div class="insp-body"><h3>Floors that survive a wet room</h3><p>What actually holds up in bathrooms — slip ratings, sealing and the materials we'd put in our own.</p><span class="insp-read">Read · 4 min <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div></article>
+  </div>
+</div></section>
+
+<!-- 10 · WARRANTY & METRICS -->
+<section class="section" id="trust"><div class="container">
+  <div class="warr">
+    <div class="reveal">
+      <span class="eyebrow leaf">Our commitment</span>
+      <h2 class="h-d" style="margin-top:16px">Backed in writing, <em>not</em> just words.</h2>
+      <p class="h-sub">A floor is a long-term relationship. Here's what we promise for the years after the crew leaves.</p>
+      <div class="warr-list">
+        <div class="warr-item"><span class="wi-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/></svg></span><div><h4>25-year installation warranty</h4><p>If our workmanship fails, we fix it — labor and materials covered.</p></div></div>
+        <div class="warr-item"><span class="wi-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span><div><h4>Manufacturer material warranties</h4><p>Backed by the makers we partner with, registered for you at handover.</p></div></div>
+        <div class="warr-item"><span class="wi-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4 6 12l-2 6 6-2 8-8z"/><path d="M14 4l4 4"/></svg></span><div><h4>Lifetime repair support</h4><p>Damaged a board years later? We keep your spec on file and make it right.</p></div></div>
+        <div class="warr-item"><span class="wi-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M3 20l9-16 9 16"/></svg></span><div><h4>Care &amp; maintenance guidance</h4><p>A tailored care plan so your floor still looks new in year ten.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="100">
+      <div class="metrics">
+        <div class="metric"><div class="mn"><span data-counter="18">0</span><span class="suf"> yrs</span></div><div class="ml">Crafting floors</div></div>
+        <div class="metric"><div class="mn"><span data-counter="3400">0</span><span class="suf">+</span></div><div class="ml">Rooms transformed</div></div>
+        <div class="metric"><div class="mn"><span data-counter="98">0</span><span class="suf">%</span></div><div class="ml">Client satisfaction</div></div>
+        <div class="metric"><div class="mn"><span data-counter="42">0</span></div><div class="ml">Certified installers</div></div>
+      </div>
+      <div class="block-r reveal" data-d="160" style="margin-top:18px;padding:24px;display:flex;gap:16px;align-items:center">
+        <div style="font-family:var(--fd);font-size:46px;font-weight:600;color:var(--accent-ink);line-height:1">4.9</div>
+        <div>
+          <div style="display:flex;gap:2px;color:var(--clay)">★★★★★</div>
+          <p style="font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.5">Averaged across 1,800+ verified reviews on Google, Houzz &amp; Trustpilot.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 11 · CONSULTATION BOOKING -->
+<section class="section" id="book-home" style="background:var(--surface-2)"><div class="container">
+  <div class="g2" style="gap:clamp(28px,4vw,52px);align-items:center">
+    <div class="reveal">
+      <span class="eyebrow">Let's begin</span>
+      <h2 class="h-d" style="margin-top:16px">Four easy ways to start.</h2>
+      <p class="h-sub">Pick whatever suits you. Every option is free, no-obligation, and ends with a clear plan and price.</p>
+      <div class="book-grid" style="margin-top:26px">
+        <div class="book-opt" data-page="book"><span class="bo-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></span><div><h3>Free measurement</h3><p>We come to you, laser-measure and quote on the spot.</p><div class="bo-meta">~45 min · at your home</div></div></div>
+        <div class="book-opt" data-page="book"><span class="bo-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v14H3z"/><path d="M3 21h18M8 17v4M16 17v4"/></svg></span><div><h3>Showroom visit</h3><p>Feel every material in person with a design lead.</p><div class="bo-meta">By appointment · Mon–Sat</div></div></div>
+        <div class="book-opt" data-page="book"><span class="bo-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 10 6-3v10l-6-3z"/></svg></span><div><h3>Virtual consultation</h3><p>Share your room over video and get tailored picks.</p><div class="bo-meta">30 min · video call</div></div></div>
+        <div class="book-opt" data-page="book"><span class="bo-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div><h3>Builder &amp; contractor</h3><p>Trade pricing, lead times and spec support at scale.</p><div class="bo-meta">For pros · priority line</div></div></div>
+      </div>
+    </div>
+    <div class="reveal" data-d="100"><form class="block-r" id="book-home-form" style="padding:clamp(24px,3vw,34px);display:grid;gap:15px">
+      <div><div style="font-family:var(--fd);font-weight:600;font-size:22px;color:var(--ink)">Book your free visit</div><p style="font-size:13.5px;color:var(--muted);margin-top:4px">We'll confirm within one business hour.</p></div>
+      <div class="g2" style="gap:13px"><div><label class="f-label" for="bh-name">Full name</label><input class="f-input" id="bh-name" required placeholder="Jane Cooper"/></div><div><label class="f-label" for="bh-phone">Phone</label><input class="f-input" id="bh-phone" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label" for="bh-type">I'm interested in</label><select class="f-input" id="bh-type"><option>Free in-home measurement</option><option>Showroom appointment</option><option>Virtual consultation</option><option>Builder / contractor pricing</option></select></div>
+      <div><label class="f-label" for="bh-notes">Project details</label><textarea class="f-input" id="bh-notes" rows="3" style="resize:vertical" placeholder="e.g. ~300 sqft living room, leaning oak hardwood, hoping to start next month"></textarea></div>
+      <button type="submit" class="btn btn-p btn-lg btn-full">Request my free visit <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      <div style="text-align:center;font-family:var(--fm);font-size:11px;color:var(--faint)">No obligation · free quote · certified installers</div>
+    </form></div>
+  </div>
+</div></section>
+
+</div><!-- /page-home -->
+
+<!-- ============ MATERIALS PAGE ============ -->
+<div id="page-materials" class="spa-page">
+  <section class="page-hero"><span class="blob"></span><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Materials</span></nav>
+    <h1 class="ph-h1">Every floor we'd <em>put in our own home.</em></h1>
+    <p class="ph-sub">Six collections, chosen for how they wear, feel and age — not just how they photograph. Filter, compare, and preview any of them in the visualizer.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px"><a href="#visualizer" class="btn btn-p btn-lg" data-page="home" data-scroll="visualizer">Open the visualizer</a><a href="#book" class="btn btn-ghost btn-lg" data-page="book">Order free samples</a></div>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="g3" style="gap:20px">
+      <div class="block-r reveal" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=700&q=80" alt="Hardwood collection" style="aspect-ratio:3/2;object-fit:cover;width:100%"/><div style="padding:24px"><span class="eyebrow leaf">Hardwood</span><h3 class="serif" style="font-size:22px;font-weight:600;color:var(--ink);margin-top:12px">Premium natural finishes</h3><p style="color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:8px">Oak, walnut and hickory in wide plank and herringbone. Warm, repairable, and built to be refinished for decades.</p><div style="font-family:var(--fm);font-size:12px;color:var(--accent-ink);margin-top:14px">From $8.50/sqft</div></div></div>
+      <div class="block-r reveal" data-d="70" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=700&q=80" alt="Luxury vinyl collection" style="aspect-ratio:3/2;object-fit:cover;width:100%"/><div style="padding:24px"><span class="eyebrow leaf">Luxury Vinyl</span><h3 class="serif" style="font-size:22px;font-weight:600;color:var(--ink);margin-top:12px">Durability without compromise</h3><p style="color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:8px">Fully waterproof LVP and LVT that convincingly mimics wood and stone. Ideal for kitchens, baths and busy households.</p><div style="font-family:var(--fm);font-size:12px;color:var(--accent-ink);margin-top:14px">From $4.20/sqft</div></div></div>
+      <div class="block-r reveal" data-d="140" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1615971677499-5467cbab01c0?auto=format&fit=crop&w=700&q=80" alt="Tile collection" style="aspect-ratio:3/2;object-fit:cover;width:100%"/><div style="padding:24px"><span class="eyebrow leaf">Tile</span><h3 class="serif" style="font-size:22px;font-weight:600;color:var(--ink);margin-top:12px">Modern &amp; classic designs</h3><p style="color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:8px">Porcelain, ceramic and handmade zellige — from large-format calm to characterful, light-catching glaze.</p><div style="font-family:var(--fm);font-size:12px;color:var(--accent-ink);margin-top:14px">From $5.60/sqft</div></div></div>
+      <div class="block-r reveal" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=80" alt="Stone collection" style="aspect-ratio:3/2;object-fit:cover;width:100%"/><div style="padding:24px"><span class="eyebrow leaf">Stone</span><h3 class="serif" style="font-size:22px;font-weight:600;color:var(--ink);margin-top:12px">Luxury architectural materials</h3><p style="color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:8px">Limestone, marble and travertine. Quarried character, honed or polished, sealed to live with real life.</p><div style="font-family:var(--fm);font-size:12px;color:var(--accent-ink);margin-top:14px">From $12.40/sqft</div></div></div>
+      <div class="block-r reveal" data-d="70" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?auto=format&fit=crop&w=700&q=80" alt="Outdoor solutions" style="aspect-ratio:3/2;object-fit:cover;width:100%"/><div style="padding:24px"><span class="eyebrow leaf">Outdoor</span><h3 class="serif" style="font-size:22px;font-weight:600;color:var(--ink);margin-top:12px">Patio &amp; exterior tiling</h3><p style="color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:8px">Frost-proof porcelain pavers and basalt for terraces and pool surrounds that flow from the room inside.</p><div style="font-family:var(--fm);font-size:12px;color:var(--accent-ink);margin-top:14px">From $7.60/sqft</div></div></div>
+      <div class="block-r reveal" data-d="140" style="overflow:hidden;background:var(--ink);color:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:28px"><h3 class="serif" style="font-size:24px;font-weight:600;color:#FBF7EF">Not sure what fits?</h3><p style="color:rgba(251,247,239,.7);font-size:14.5px;line-height:1.6;margin-top:10px">Tell us about your room and budget. Our design team will shortlist three materials worth sampling.</p><a href="#book" class="btn btn-p" data-page="book" style="margin-top:18px;align-self:flex-start">Get a shortlist</a></div>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ PROJECTS PAGE ============ -->
+<div id="page-projects" class="spa-page">
+  <section class="page-hero"><span class="blob"></span><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Projects</span></nav>
+    <h1 class="ph-h1">3,400 rooms and <em>counting.</em></h1>
+    <p class="ph-sub">Kitchens, baths, whole homes and commercial floors. Every project measured, installed and walked through by our own certified crews.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="filterbar reveal" id="proj-filter-2" style="margin-bottom:28px">
+      <button class="fbtn on" data-pf2="all">All spaces</button>
+      <button class="fbtn" data-pf2="kitchen">Kitchen</button>
+      <button class="fbtn" data-pf2="bath">Bathroom</button>
+      <button class="fbtn" data-pf2="living">Living Room</button>
+      <button class="fbtn" data-pf2="commercial">Commercial</button>
+      <button class="fbtn" data-pf2="luxury">Luxury Homes</button>
+      <button class="fbtn" data-pf2="outdoor">Outdoor</button>
+    </div>
+    <div class="mason" id="proj-mason-2">
+      <div class="mason-item reveal" data-pcat2="living"><span class="cat-pill">Living Room</span><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Riverside loft"/><div class="mason-cap"><div class="mc-t">Riverside Loft</div><div class="mc-s">European Oak · 420 sqft · 3 days</div></div></div>
+      <div class="mason-item reveal" data-pcat2="kitchen" data-d="60"><span class="cat-pill">Kitchen</span><img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=700&q=80" alt="Maple street kitchen"/><div class="mason-cap"><div class="mc-t">Maple Street Kitchen</div><div class="mc-s">Calacatta Porcelain · 180 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="bath" data-d="120"><span class="cat-pill">Bathroom</span><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=700&q=80" alt="Cedar park ensuite"/><div class="mason-cap"><div class="mc-t">Cedar Park Ensuite</div><div class="mc-s">Carrara Mosaic · 90 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="luxury"><span class="cat-pill">Luxury Home</span><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=80" alt="Highland estate"/><div class="mason-cap"><div class="mc-t">Highland Estate</div><div class="mc-s">Walnut Herringbone · 1,250 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="commercial" data-d="60"><span class="cat-pill">Commercial</span><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="Foundry coworking"/><div class="mason-cap"><div class="mc-t">Foundry Coworking</div><div class="mc-s">Slate-Look LVT · 3,800 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="outdoor" data-d="120"><span class="cat-pill">Outdoor</span><img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=700&q=80" alt="Lakeside terrace"/><div class="mason-cap"><div class="mc-t">Lakeside Terrace</div><div class="mc-s">Basalt Pavers · 540 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="kitchen"><span class="cat-pill">Kitchen</span><img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=700&q=80" alt="Oakwood galley"/><div class="mason-cap"><div class="mc-t">Oakwood Galley</div><div class="mc-s">Smoked Hickory LVP · 150 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="luxury" data-d="60"><span class="cat-pill">Luxury Home</span><img src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=700&q=80" alt="Crestline residence"/><div class="mason-cap"><div class="mc-t">Crestline Residence</div><div class="mc-s">Wide-Plank Oak · 980 sqft</div></div></div>
+      <div class="mason-item reveal" data-pcat2="living" data-d="120"><span class="cat-pill">Living Room</span><img src="https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=700&q=80" alt="Westfield family room"/><div class="mason-cap"><div class="mc-t">Westfield Family Room</div><div class="mc-s">Honed Limestone · 360 sqft</div></div></div>
+    </div>
+    <div class="center" style="margin-top:46px"><a href="#book" class="btn btn-p btn-lg" data-page="book">Start your transformation</a></div>
+  </div></section>
+</div>
+
+<!-- ============ INSPIRATION PAGE ============ -->
+<div id="page-inspiration" class="spa-page">
+  <section class="page-hero"><span class="blob"></span><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Inspiration</span></nav>
+    <h1 class="ph-h1">The TerraGrove <em>journal.</em></h1>
+    <p class="ph-sub">Trends, pairings and room-by-room guidance from the people who install floors for a living.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="insp">
+      <article class="insp-card reveal"><div class="insp-media"><span class="insp-tag">Tile</span><img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=700&q=80" alt="Trending tile patterns"/></div><div class="insp-body"><h3>The tile patterns defining 2026</h3><p>Zellige, oversized slabs and tonal grout — where modern tile is heading.</p><span class="insp-read">Read · 6 min</span></div></article>
+      <article class="insp-card reveal" data-d="70"><div class="insp-media"><span class="insp-tag">Hardwood</span><img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=700&q=80" alt="Modern wood flooring"/></div><div class="insp-body"><h3>Wide plank vs herringbone</h3><p>Two timeless layouts, two different moods. How to choose for your room.</p><span class="insp-read">Read · 5 min</span></div></article>
+      <article class="insp-card reveal" data-d="140"><div class="insp-media"><span class="insp-tag">Bathroom</span><img src="https://images.unsplash.com/photo-1604709177225-055f99402ea3?auto=format&fit=crop&w=700&q=80" alt="Bathroom design"/></div><div class="insp-body"><h3>Floors that survive a wet room</h3><p>What actually holds up in bathrooms — slip ratings, sealing and materials.</p><span class="insp-read">Read · 4 min</span></div></article>
+      <article class="insp-card reveal"><div class="insp-media"><span class="insp-tag">Kitchen</span><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=700&q=80" alt="Kitchen renovation"/></div><div class="insp-body"><h3>Kitchen floors that take a beating</h3><p>Spills, drops and dropped pans — the most forgiving materials for the busiest room.</p><span class="insp-read">Read · 5 min</span></div></article>
+      <article class="insp-card reveal" data-d="70"><div class="insp-media"><span class="insp-tag">Commercial</span><img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=700&q=80" alt="Commercial flooring trends"/></div><div class="insp-body"><h3>Commercial flooring that scales</h3><p>Wear ratings, phased installs and the finishes that survive heavy footfall.</p><span class="insp-read">Read · 7 min</span></div></article>
+      <article class="insp-card reveal" data-d="140"><div class="insp-media"><span class="insp-tag">Care</span><img src="https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?auto=format&fit=crop&w=700&q=80" alt="Floor care guide"/></div><div class="insp-body"><h3>Keeping a floor new in year ten</h3><p>The simple care routine that separates floors that age gracefully from ones that don't.</p><span class="insp-read">Read · 4 min</span></div></article>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ ABOUT PAGE ============ -->
+<div id="page-about" class="spa-page">
+  <section class="page-hero"><span class="blob"></span><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>About &amp; Warranty</span></nav>
+    <h1 class="ph-h1">Craftsmen first, <em>company second.</em></h1>
+    <p class="ph-sub">TerraGrove began on our knees with a trowel. Eighteen years on, we still measure success one perfectly laid room at a time.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="g2" style="gap:clamp(28px,4vw,52px);align-items:center;margin-bottom:clamp(36px,5vw,64px)">
+      <div class="reveal block-r" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80" alt="Craftsman installing floor" style="width:100%;aspect-ratio:4/3;object-fit:cover"/></div>
+      <div class="reveal" data-d="80">
+        <span class="eyebrow leaf">Our story</span>
+        <h2 class="h-d" style="margin-top:16px">A standard you can stand on.</h2>
+        <p class="h-sub">We're a team of certified installers, designers and project leads who believe a floor should outlive the trend that inspired it. That means honest materials, obsessive prep, and never leaving a room we wouldn't show off ourselves.</p>
+        <div class="metrics" style="margin-top:24px">
+          <div class="metric"><div class="mn"><span data-counter="18">0</span><span class="suf"> yrs</span></div><div class="ml">In business</div></div>
+          <div class="metric"><div class="mn"><span data-counter="42">0</span></div><div class="ml">Certified installers</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="center reveal" style="max-width:600px;margin-inline:auto;margin-bottom:32px"><span class="eyebrow">Our commitment</span><h2 class="h-d" style="margin-top:14px">What we guarantee.</h2></div>
+    <div class="qgrid">
+      <div class="qblock reveal"><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5z"/></svg></div><h3>Installation warranty</h3><p>25 years on our workmanship, in writing, covering both labor and materials if our install fails.</p></div>
+      <div class="qblock g2 reveal" data-d="70"><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><h3>Material warranty</h3><p>Manufacturer coverage registered in your name at handover, with all documentation kept on file.</p></div>
+      <div class="qblock g3 reveal" data-d="40"><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4 6 12l-2 6 6-2 8-8z"/></svg></div><h3>Repair support</h3><p>Lifetime support for spot repairs. We keep your exact spec so a fix blends invisibly, years later.</p></div>
+      <div class="qblock g4 reveal" data-d="120"><div class="qic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M3 20l9-16 9 16"/></svg></div><h3>Maintenance guidance</h3><p>A tailored care plan and the right products so your floor still looks new a decade from now.</p></div>
+    </div>
+    <div class="center" style="margin-top:46px"><a href="#book" class="btn btn-p btn-lg" data-page="book">Book a free consultation</a></div>
+  </div></section>
+</div>
+
+<!-- ============ BOOK PAGE ============ -->
+<div id="page-book" class="spa-page">
+  <section class="page-hero"><span class="blob"></span><div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#home" data-page="home">Home</a><span>/</span><span>Book a Visit</span></nav>
+    <h1 class="ph-h1">Book your free <em>measurement.</em></h1>
+    <p class="ph-sub">Tell us about your space and how you'd like to start. We confirm within one business hour and bring samples to your door.</p>
+  </div></section>
+  <section class="section"><div class="container"><div class="g2" style="gap:clamp(28px,4vw,52px);align-items:start">
+    <div class="reveal">
+      <h2 class="h-d">How your visit works</h2>
+      <div class="journey" style="margin-top:24px">
+        <div class="jstep" style="grid-template-columns:54px 1fr"><div class="jdot" style="width:54px;height:54px"><span class="serif" style="font-size:22px;font-weight:600;color:var(--accent-ink)">1</span></div><div class="jstep-body"><h3 class="jstep-h" style="font-size:1.3rem">Pick a time</h3><p class="jstep-p">Choose in-home, showroom, virtual or trade — we'll confirm the slot fast.</p></div></div>
+        <div class="jstep" style="grid-template-columns:54px 1fr"><div class="jdot" style="width:54px;height:54px"><span class="serif" style="font-size:22px;font-weight:600;color:var(--accent-ink)">2</span></div><div class="jstep-body"><h3 class="jstep-h" style="font-size:1.3rem">We measure &amp; advise</h3><p class="jstep-p">Laser measurement, material samples in your light, and honest recommendations.</p></div></div>
+        <div class="jstep" style="grid-template-columns:54px 1fr"><div class="jdot" style="width:54px;height:54px"><span class="serif" style="font-size:22px;font-weight:600;color:var(--accent-ink)">3</span></div><div class="jstep-body"><h3 class="jstep-h" style="font-size:1.3rem">Fixed quote, your call</h3><p class="jstep-p">A clear written price and start date. No pressure, no obligation to proceed.</p></div></div>
+      </div>
+      <div class="block-r" style="margin-top:24px;padding:22px;display:flex;gap:14px;align-items:center"><span class="bo-ic" style="width:48px;height:48px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;color:var(--ink);flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div style="font-family:var(--fm);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em">Prefer to call?</div><div style="font-family:var(--fd);font-size:18px;font-weight:600;color:var(--ink)">(415) 555-0182</div></div></div>
+    </div>
+    <div class="reveal" data-d="100"><form class="block-r" id="book-form" style="padding:clamp(24px,3vw,34px);display:grid;gap:15px">
+      <div style="font-family:var(--fd);font-weight:600;font-size:23px;color:var(--ink)">Request your visit</div>
+      <div class="g2" style="gap:13px"><div><label class="f-label" for="bk-name">Full name</label><input class="f-input" id="bk-name" required placeholder="Jane Cooper"/></div><div><label class="f-label" for="bk-phone">Phone</label><input class="f-input" id="bk-phone" type="tel" required placeholder="(555) 000-0000"/></div></div>
+      <div><label class="f-label" for="bk-email">Email</label><input class="f-input" id="bk-email" type="email" required placeholder="jane@email.com"/></div>
+      <div class="g2" style="gap:13px">
+        <div><label class="f-label" for="bk-type">Visit type</label><select class="f-input" id="bk-type"><option>Free in-home measurement</option><option>Showroom appointment</option><option>Virtual consultation</option><option>Builder / contractor</option></select></div>
+        <div><label class="f-label" for="bk-room">Room</label><select class="f-input" id="bk-room"><option>Kitchen</option><option>Bathroom</option><option>Living room</option><option>Whole home</option><option>Commercial space</option><option>Outdoor / patio</option></select></div>
+      </div>
+      <div><label class="f-label" for="bk-notes">Project details</label><textarea class="f-input" id="bk-notes" rows="3" style="resize:vertical" placeholder="Approx. square footage, materials you're leaning toward, timing…"></textarea></div>
+      <button type="submit" class="btn btn-p btn-lg btn-full">Request my free visit <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      <div style="text-align:center;font-family:var(--fm);font-size:11px;color:var(--faint)">Confirmed within 1 business hour · free &amp; no obligation</div>
+    </form></div>
+  </div></div></section>
+</div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="foot-glow"></div>
+  <div class="container" style="padding-block:clamp(54px,7vw,84px)">
+    <div class="foot-grid">
+      <div>
+        <a href="#home" class="logo" data-page="home" aria-label="TerraGrove home"><span class="logo-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FBF7EF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c3.5-1.5 5-5 8-5s4.5 3.5 8 5"/><path d="M4 9.5C7.5 8 9 5 12 5s4.5 3 8 4.5"/><path d="M4 20h16"/></svg></span><span class="logo-txt" style="color:#FBF7EF">Terra<b style="color:var(--clay-t)">Grove</b></span></a>
+        <p class="foot-desc">Premium flooring and tile, visualized in your space and installed by certified craftsmen. Transforming rooms from ordinary to extraordinary since 2008.</p>
+        <form class="foot-nl" id="foot-nl" aria-label="Newsletter">
+          <input type="email" required placeholder="Design ideas in your inbox" aria-label="Email"/>
+          <button type="submit" aria-label="Subscribe"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
+      </div>
+      <div><div class="foot-h">Materials</div><div class="foot-links">
+        <a href="#materials" class="foot-link" data-page="materials">Hardwood</a>
+        <a href="#materials" class="foot-link" data-page="materials">Luxury Vinyl</a>
+        <a href="#materials" class="foot-link" data-page="materials">Porcelain &amp; Ceramic</a>
+        <a href="#materials" class="foot-link" data-page="materials">Natural Stone</a>
+        <a href="#materials" class="foot-link" data-page="materials">Outdoor Tiling</a>
+      </div></div>
+      <div><div class="foot-h">Services</div><div class="foot-links">
+        <a href="#visualizer" class="foot-link" data-page="home" data-scroll="visualizer">Floor Visualizer</a>
+        <a href="#estimate" class="foot-link" data-page="home" data-scroll="estimate">Cost Estimator</a>
+        <a href="#projects" class="foot-link" data-page="projects">Installation</a>
+        <a href="#trust" class="foot-link" data-page="home" data-scroll="trust">Warranties</a>
+        <a href="#book" class="foot-link" data-page="book">Free Measurement</a>
+      </div></div>
+      <div><div class="foot-h">Company</div><div class="foot-links">
+        <a href="#about" class="foot-link" data-page="about">About Us</a>
+        <a href="#projects" class="foot-link" data-page="projects">Projects</a>
+        <a href="#inspiration" class="foot-link" data-page="inspiration">Journal</a>
+        <a href="#book" class="foot-link" data-page="book">Builder &amp; Trade</a>
+        <a href="#book" class="foot-link" data-page="book">Financing</a>
+      </div></div>
+      <div><div class="foot-h">Visit &amp; contact</div><div class="foot-links">
+        <a href="tel:+14155550182" class="foot-link">(415) 555-0182</a>
+        <a href="mailto:hello@terragrove.co" class="foot-link">hello@terragrove.co</a>
+        <span class="foot-link" style="cursor:default">Showroom · Mon–Sat 9–6</span>
+        <span class="foot-link" style="cursor:default">Serving the Bay Area &amp; Peninsula</span>
+      </div></div>
+    </div>
+    <div class="foot-bottom">
+      <div class="foot-copy"><span>&copy; <span class="yr">2026</span> TerraGrove Floors &amp; Tile.</span><span>All rights reserved.</span></div>
+      <div class="foot-credit">Built &amp; Maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener">GrowrixOS</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <a href="tel:+14155550182" class="bn-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+  <a href="#materials" class="bn-item" data-page="materials"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Materials</a>
+  <a href="#visualizer" class="bn-item" data-page="home" data-scroll="visualizer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 12l5-3 4 2 5-4 6 4"/></svg>Visualize</a>
+  <a href="#book" class="bn-item" data-page="book"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg>Book</a>
+  <button class="bn-item" id="bn-menu" aria-label="Open menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>Menu</button>
+</nav>
+
+<!-- ===== AI PANEL ===== -->
+<div class="ai-panel" id="ai-panel" role="dialog" aria-label="TerraGrove assistant" aria-hidden="true">
+  <div class="ai-head"><div class="ai-av"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FBF7EF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c3.5-1.5 5-5 8-5s4.5 3.5 8 5"/><path d="M4 20h16"/></svg></div><div><div style="font-family:var(--fd);font-weight:600;font-size:15px">Floor Guide</div><div style="font-size:11.5px;opacity:.8">Ask about materials, cost or timing</div></div><button id="ai-close" aria-label="Close assistant" style="margin-left:auto;color:#FBF7EF;opacity:.85"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="ai-body" id="ai-body"><div class="ai-msg bot">Hi! I'm your TerraGrove floor guide. Tell me about your room and I'll point you to the right material, a ballpark cost, or the visualizer. 🌿</div></div>
+  <div class="ai-chips" id="ai-chips">
+    <button class="ai-chip" data-q="What's best for a kitchen?">Best for kitchens</button>
+    <button class="ai-chip" data-q="How much does hardwood cost?">Hardwood cost</button>
+    <button class="ai-chip" data-q="What's waterproof?">Waterproof options</button>
+    <button class="ai-chip" data-q="How long does installation take?">Install timeline</button>
+  </div>
+  <form class="ai-foot" id="ai-form"><input id="ai-input" placeholder="Type your question…" aria-label="Message"/><button class="ai-send" type="submit" aria-label="Send"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></form>
+</div>
+
+<!-- ===== FAB ===== -->
+<div class="fab-wrap">
+  <div class="fab-opts" id="fab-opts">
+    <button class="fab-opt top" id="fab-top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="fab-tip">Back to top</span></button>
+    <button class="fab-opt ai" id="fab-ai" aria-label="Floor guide"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c3.5-1.5 5-5 8-5s4.5 3.5 8 5"/><path d="M4 20h16"/></svg><span class="fab-tip">Ask the floor guide</span></button>
+    <a href="https://wa.me/14155550182" target="_blank" rel="noopener" class="fab-opt wa" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1A7.93 7.93 0 0 0 12 19.9a7.95 7.95 0 0 0 5.6-13.6zM12 18.5a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25A6.59 6.59 0 1 1 12 18.5zm3.61-4.94c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.39 5.39 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.08a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.6-1.46s-.32-.34-.44-.34h-.38a.72.72 0 0 0-.52.24 2.2 2.2 0 0 0-.68 1.64A3.83 3.83 0 0 0 8.6 12a8.7 8.7 0 0 0 3.33 2.94c1.96.85 1.96.57 2.32.53a2 2 0 0 0 1.32-.93 1.64 1.64 0 0 0 .11-.93c-.05-.08-.18-.13-.38-.23z"/></svg><span class="fab-tip">WhatsApp us</span></a>
+    <a href="tel:+14155550182" class="fab-opt call" aria-label="Call"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="fab-tip">Call now</span></a>
+  </div>
+  <button class="fab-main" id="fab-main" aria-label="Quick actions" aria-expanded="false"><svg id="fab-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+</div>
+
+<script>
+(function(){
+"use strict";
+var doc=document, root=doc.documentElement, W=window;
+var SUN='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>';
+var MOON='<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>';
+
+/* THEME */
+var themeBtns=[].slice.call(doc.querySelectorAll('.theme-btn'));
+function applyTheme(t){ root.setAttribute('data-theme',t); themeBtns.forEach(function(b){b.innerHTML=t==='dark'?SUN:MOON;}); try{localStorage.setItem('tg-theme',t);}catch(e){} }
+(function(){ var s; try{s=localStorage.getItem('tg-theme');}catch(e){} if(!s){s=(W.matchMedia&&W.matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';} applyTheme(s); })();
+themeBtns.forEach(function(b){b.addEventListener('click',function(){applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');});});
+
+/* SCROLL: navbar, progress, bottom-nav, journey */
+var navbar=doc.getElementById('navbar'), prog=doc.getElementById('scroll-prog'), bnav=doc.getElementById('bottom-nav');
+var lastY=W.pageYOffset;
+function onScroll(){
+  var y=W.pageYOffset, h=doc.documentElement.scrollHeight-W.innerHeight;
+  if(navbar) navbar.classList.toggle('scrolled',y>8);
+  if(prog) prog.style.width=(h>0?(y/h*100):0)+'%';
+  if(bnav){ bnav.style.transform=(y>lastY&&y>260)?'translateY(150%)':'translateY(0)'; }
+  var top=doc.getElementById('fab-top'); if(top) top.style.display=y>520?'grid':'none';
+  updateJourney();
+  lastY=y;
+}
+W.addEventListener('scroll',onScroll,{passive:true});
+
+/* JOURNEY scroll storytelling */
+function updateJourney(){
+  var steps=doc.getElementById('journey-steps'); if(!steps||!steps.offsetParent) return;
+  var fill=doc.getElementById('journey-fill'); var js=[].slice.call(steps.querySelectorAll('.jstep'));
+  var mid=W.innerHeight*0.5, lit=0;
+  js.forEach(function(s){ var r=s.getBoundingClientRect(); if(r.top<mid){ s.classList.add('lit'); lit++; } else s.classList.remove('lit'); });
+  if(fill) fill.style.height=(lit/js.length*100)+'%';
+}
+
+/* DRAWER */
+var drawer=doc.getElementById('drawer'), dov=doc.getElementById('drawer-ov');
+function openD(){ drawer.classList.add('open'); dov.classList.add('open'); doc.body.style.overflow='hidden'; }
+function closeD(){ drawer.classList.remove('open'); dov.classList.remove('open'); doc.body.style.overflow=''; }
+[['hamburger',openD],['drawer-close',closeD],['bn-menu',openD]].forEach(function(p){var el=doc.getElementById(p[0]);if(el)el.addEventListener('click',p[1]);});
+if(dov) dov.addEventListener('click',closeD);
+doc.addEventListener('keydown',function(e){ if(e.key==='Escape'){closeD();closeAI();} });
+
+/* REVEAL */
+var rObs;
+function observeReveals(scope){
+  var els=(scope||doc).querySelectorAll('.reveal:not(.in)');
+  if(!('IntersectionObserver' in W)){[].forEach.call(els,function(e){e.classList.add('in');});return;}
+  if(!rObs){ rObs=new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){ var d=parseInt(x.target.getAttribute('data-d')||'0',10); setTimeout(function(){x.target.classList.add('in');},d); rObs.unobserve(x.target);} }); },{threshold:.12,rootMargin:'0px 0px -40px 0px'}); }
+  [].forEach.call(els,function(e){rObs.observe(e);});
+}
+
+/* COUNTERS */
+function countUp(el){
+  var t=parseFloat(el.getAttribute('data-counter'))||0, dec=(t%1!==0)?1:0, s=null, dur=1500;
+  function step(ts){ if(!s)s=ts; var p=Math.min((ts-s)/dur,1), e=1-Math.pow(1-p,3), v=t*e; el.textContent=dec?v.toFixed(1):Math.floor(v).toLocaleString(); if(p<1)requestAnimationFrame(step); else el.textContent=dec?t.toFixed(1):t.toLocaleString(); }
+  requestAnimationFrame(step);
+}
+var cObs;
+function observeCounters(scope){
+  var els=(scope||doc).querySelectorAll('[data-counter]');
+  if(!('IntersectionObserver' in W)){[].forEach.call(els,function(e){countUp(e);});return;}
+  if(!cObs){ cObs=new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){countUp(x.target);cObs.unobserve(x.target);} }); },{threshold:.5}); }
+  [].forEach.call(els,function(e){ if(!e.dataset.counted){e.dataset.counted='1';cObs.observe(e);} });
+}
+
+/* BEFORE/AFTER COMPARE */
+(function(){
+  var c=doc.getElementById('compare'); if(!c) return;
+  var after=doc.getElementById('compare-after'), line=doc.getElementById('compare-line'), range=doc.getElementById('compare-range');
+  function set(v){ v=Math.max(0,Math.min(100,v)); after.style.clipPath='inset(0 0 0 '+v+'%)'; line.style.left=v+'%'; if(range)range.value=v; }
+  if(range) range.addEventListener('input',function(){set(parseFloat(range.value));});
+  var drag=false;
+  function fromX(clientX){ var r=c.getBoundingClientRect(); set((clientX-r.left)/r.width*100); }
+  c.addEventListener('pointerdown',function(e){ drag=true; fromX(e.clientX); });
+  W.addEventListener('pointermove',function(e){ if(drag){fromX(e.clientX);} });
+  W.addEventListener('pointerup',function(){drag=false;});
+  set(50);
+})();
+
+/* FLOOR VISUALIZER */
+(function(){
+  var floor=doc.getElementById('viz-floor'); if(!floor) return;
+  var T='?auto=format&fit=crop&w=400&q=70';
+  var MAT={
+    hardwood:{label:'Hardwood',dur:'High',sw:[
+      {n:'European Oak',p:'8.50',u:'photo-1604762524889-3e2fcc145683'},
+      {n:'Walnut Herringbone',p:'13.80',u:'photo-1622372738946-62e02505feb3'},
+      {n:'Smoked Hickory',p:'9.40',u:'photo-1595428774223-ef52624120d2'},
+      {n:'Whitewashed Ash',p:'10.20',u:'photo-1503174971373-b1f69850bded'}]},
+    vinyl:{label:'Luxury Vinyl',dur:'Waterproof',sw:[
+      {n:'Smoked Hickory LVP',p:'4.20',u:'photo-1493606278519-11aa9f86e40a'},
+      {n:'Slate-Look LVT',p:'4.80',u:'photo-1600607687920-4e2a09cf159d'},
+      {n:'Weathered Oak LVP',p:'4.50',u:'photo-1605117882932-f9e32b03fea9'}]},
+    porcelain:{label:'Porcelain Tile',dur:'Very high',sw:[
+      {n:'Calacatta Porcelain',p:'6.90',u:'photo-1615971677499-5467cbab01c0'},
+      {n:'Concrete-Look',p:'6.40',u:'photo-1584622650111-993a426fbf0a'},
+      {n:'Basalt Matte',p:'7.60',u:'photo-1591474200742-8e512e6f98f8'}]},
+    stone:{label:'Natural Stone',dur:'Architectural',sw:[
+      {n:'Honed Limestone',p:'12.40',u:'photo-1600607687920-4e2a09cf159d'},
+      {n:'Carrara Marble',p:'16.00',u:'photo-1603204077779-bed963ea7d0e'},
+      {n:'Travertine',p:'11.20',u:'photo-1600585154526-990dced4db0d'}]}
+  };
+  var order=['hardwood','vinyl','porcelain','stone'];
+  var tabs=doc.getElementById('mat-tabs'), swRow=doc.getElementById('sw-row');
+  var vName=doc.getElementById('viz-name'), vPrice=doc.getElementById('viz-stage-price'), roName=doc.getElementById('ro-name'), roDur=doc.getElementById('ro-dur');
+  var cur='hardwood';
+  function url(u){return 'https://images.unsplash.com/'+u+T;}
+  function applySw(s){
+    floor.style.backgroundImage='url('+url(s.u)+')';
+    vName.textContent=s.n; roName.textContent=s.n;
+    vPrice.innerHTML='$'+s.p+'<span style="font-size:.6em;color:var(--faint)">/sqft</span>';
+    roDur.textContent=MAT[cur].dur;
+  }
+  function renderSw(){
+    swRow.innerHTML='';
+    MAT[cur].sw.forEach(function(s,i){
+      var b=doc.createElement('button'); b.className='sw'+(i===0?' on':''); b.style.backgroundImage='url('+url(s.u)+')';
+      b.setAttribute('aria-label',s.n);
+      b.addEventListener('click',function(){ [].forEach.call(swRow.children,function(c){c.classList.remove('on');}); b.classList.add('on'); applySw(s); });
+      swRow.appendChild(b);
+    });
+    applySw(MAT[cur].sw[0]);
+  }
+  order.forEach(function(k,i){
+    var b=doc.createElement('button'); b.className='mat-tab'+(i===0?' on':''); b.textContent=MAT[k].label;
+    b.addEventListener('click',function(){ cur=k; [].forEach.call(tabs.children,function(c){c.classList.remove('on');}); b.classList.add('on'); renderSw(); });
+    tabs.appendChild(b);
+  });
+  renderSw();
+  var sb=doc.getElementById('viz-save-btn'), se=doc.getElementById('viz-email'), sv=doc.getElementById('viz-saved');
+  if(sb) sb.addEventListener('click',function(){ if(se.value&&se.value.indexOf('@')>0){ se.style.display='none'; sb.style.display='none'; sv.style.display='block'; } else { se.focus(); se.style.borderColor='var(--clay)'; } });
+})();
+
+/* CHIP GROUPS */
+function wireChips(group,cb){
+  if(!group) return; var multi=group.getAttribute('data-multi')==='1';
+  group.addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c||!group.contains(c))return;
+    if(multi){c.classList.toggle('on');} else {[].forEach.call(group.querySelectorAll('.chip'),function(x){x.classList.remove('on');});c.classList.add('on');}
+    cb(); });
+}
+function selOne(g){return g?g.querySelector('.chip.on'):null;}
+
+/* ESTIMATOR */
+(function(){
+  var box=doc.getElementById('estimate'); if(!box) return;
+  var gType=box.querySelector('[data-group="type"]'), gTier=box.querySelector('[data-group="tier"]'), gInst=box.querySelector('[data-group="install"]');
+  var dL=doc.getElementById('dim-l'), dW=doc.getElementById('dim-w');
+  var oTotal=doc.getElementById('est-total'), oArea=doc.getElementById('est-area'), oMat=doc.getElementById('est-mat'),
+      oMatCost=doc.getElementById('est-matcost'), oLabor=doc.getElementById('est-labor'), oTime=doc.getElementById('est-time');
+  function money(n){ return '$'+Math.round(n).toLocaleString(); }
+  function calc(){
+    var L=parseFloat(dL.value)||0, Wd=parseFloat(dW.value)||0; var area=Math.max(0,L*Wd);
+    var matSqft=area*1.10;
+    var t=selOne(gType), tier=selOne(gTier);
+    var rate=t?parseFloat(t.getAttribute('data-rate')):8.5;
+    var mult=tier?parseFloat(tier.getAttribute('data-mult')):1;
+    var matCost=matSqft*rate*mult;
+    var laborRate=3.4; var addl=0;
+    [].forEach.call(gInst.querySelectorAll('.chip.on'),function(c){ addl+=parseFloat(c.getAttribute('data-add'))||0; });
+    var labor=area*(laborRate+addl);
+    var total=matCost+labor;
+    oArea.textContent=Math.round(area).toLocaleString()+' sqft';
+    oMat.textContent=Math.round(matSqft).toLocaleString()+' sqft';
+    oMatCost.textContent=money(matCost);
+    oLabor.textContent=money(labor);
+    oTotal.innerHTML=money(total);
+    var days=Math.max(1,Math.ceil(area/170)+(addl>2?1:0));
+    oTime.textContent=days<=1?'1 day':(days+'–'+(days+1)+' days');
+  }
+  [gType,gTier,gInst].forEach(function(g){wireChips(g,calc);});
+  [dL,dW].forEach(function(i){i.addEventListener('input',calc);});
+  calc();
+  var ef=doc.getElementById('est-form'), es=doc.getElementById('est-sent'), ee=doc.getElementById('est-email');
+  if(ef) ef.addEventListener('submit',function(e){ e.preventDefault(); if(ee.value){ ef.style.display='none'; es.style.display='block'; } });
+})();
+
+/* MASONRY FILTERS */
+function wireFilter(barId,attr,gridSel,itemAttr){
+  var bar=doc.getElementById(barId); if(!bar) return;
+  bar.addEventListener('click',function(e){ var b=e.target.closest('.fbtn'); if(!b)return;
+    [].forEach.call(bar.querySelectorAll('.fbtn'),function(x){x.classList.remove('on');}); b.classList.add('on');
+    var v=b.getAttribute(attr);
+    [].forEach.call(doc.querySelectorAll(gridSel+' .mason-item'),function(it){ it.classList.toggle('hide', !(v==='all'||it.getAttribute(itemAttr)===v)); });
+  });
+}
+wireFilter('mat-filter','data-mf','#mat-mason','data-cat');
+wireFilter('proj-filter','data-pf','#proj-mason','data-pcat');
+wireFilter('proj-filter-2','data-pf2','#proj-mason-2','data-pcat2');
+
+/* FORMS */
+function okBlock(){ var d=doc.createElement('div'); d.className='block-r'; d.setAttribute('role','status'); d.style.cssText='padding:36px;text-align:center';
+  d.innerHTML='<div style="width:58px;height:58px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:var(--leaf);color:#fff"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="font-family:var(--fd);font-weight:600;font-size:21px;color:var(--ink);margin-top:14px">Request received</div><p style="color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6;max-width:34ch;margin-inline:auto">Thanks — a TerraGrove coordinator will confirm your visit within one business hour.</p>';
+  return d; }
+[].forEach.call(doc.querySelectorAll('#book-home-form,#book-form'),function(f){ f.addEventListener('submit',function(e){ e.preventDefault(); f.replaceWith(okBlock()); }); });
+var fnl=doc.getElementById('foot-nl'); if(fnl) fnl.addEventListener('submit',function(e){ e.preventDefault(); var i=fnl.querySelector('input'); i.value=''; i.placeholder='Subscribed ✓'; });
+
+/* FAB */
+var fabMain=doc.getElementById('fab-main'), fabOpts=doc.getElementById('fab-opts'), fabIcon=doc.getElementById('fab-icon'), fabOpen=false;
+function toggleFab(){ fabOpen=!fabOpen; fabOpts.classList.toggle('open',fabOpen); fabMain.classList.toggle('open',fabOpen); fabMain.setAttribute('aria-expanded',fabOpen?'true':'false'); fabIcon.style.transform=fabOpen?'rotate(45deg)':'none'; }
+if(fabMain) fabMain.addEventListener('click',toggleFab);
+var fabTop=doc.getElementById('fab-top'); if(fabTop) fabTop.addEventListener('click',function(){W.scrollTo({top:0,behavior:'smooth'});});
+
+/* AI PANEL */
+var aiPanel=doc.getElementById('ai-panel'), aiBody=doc.getElementById('ai-body'), aiForm=doc.getElementById('ai-form'), aiInput=doc.getElementById('ai-input');
+function openAI(){ aiPanel.classList.add('open'); aiPanel.setAttribute('aria-hidden','false'); if(fabOpen)toggleFab(); setTimeout(function(){aiInput&&aiInput.focus();},300); }
+function closeAI(){ if(aiPanel){aiPanel.classList.remove('open'); aiPanel.setAttribute('aria-hidden','true');} }
+var fabAI=doc.getElementById('fab-ai'); if(fabAI) fabAI.addEventListener('click',openAI);
+var aiClose=doc.getElementById('ai-close'); if(aiClose) aiClose.addEventListener('click',closeAI);
+function aiReply(q){ var t=q.toLowerCase();
+  if(/kitchen/.test(t)) return "For kitchens I'd lean waterproof luxury vinyl or porcelain tile — they shrug off spills and dropped pans. Want a ballpark? Try the estimator.";
+  if(/bath|wet|shower/.test(t)) return "Bathrooms want porcelain or natural stone, properly sealed, with a good slip rating. Avoid solid hardwood near water.";
+  if(/waterproof|water/.test(t)) return "Fully waterproof picks: luxury vinyl (LVP/LVT) and porcelain tile. Great for kitchens, baths and basements.";
+  if(/hardwood|wood|oak|walnut/.test(t)) return "Hardwood runs about $8.50–$13.80/sqft installed depending on species and pattern. It's warm, repairable and refinishable for decades.";
+  if(/cost|price|much|budget|\$/.test(t)) return "Material runs ~$4–$16/sqft plus installation. Pop your room size into the estimator for a transparent total in seconds.";
+  if(/long|time|timeline|days|install/.test(t)) return "Most rooms install in 2–4 days after measurement. Bigger or phased commercial jobs we schedule around you.";
+  if(/stone|marble|limestone/.test(t)) return "Natural stone — limestone, marble, travertine — is the luxury tier (~$11–$16/sqft). Stunning, and we seal it to handle real life.";
+  if(/visual|preview|see/.test(t)) return "Open the Floor Visualizer above — switch materials and finishes on a real room and watch the price update live.";
+  return "Happy to help! Ask me about a specific room, a material, waterproofing, cost or timeline — or open the visualizer to preview finishes.";
+}
+function aiPush(txt,me){ var m=doc.createElement('div'); m.className='ai-msg '+(me?'me':'bot'); m.textContent=txt; aiBody.appendChild(m); aiBody.scrollTop=aiBody.scrollHeight; }
+function aiAsk(q){ aiPush(q,true); setTimeout(function(){aiPush(aiReply(q),false);},420); }
+var aiChips=doc.getElementById('ai-chips'); if(aiChips) aiChips.addEventListener('click',function(e){var c=e.target.closest('.ai-chip');if(c)aiAsk(c.getAttribute('data-q'));});
+if(aiForm) aiForm.addEventListener('submit',function(e){e.preventDefault();var v=aiInput.value.trim();if(!v)return;aiInput.value='';aiAsk(v);});
+
+/* YEAR */
+[].forEach.call(doc.querySelectorAll('.yr'),function(e){e.textContent=new Date().getFullYear();});
+
+/* SPA ROUTER */
+var PAGES={
+  home:{el:'page-home',t:'TerraGrove — Premium Flooring & Tile, Installed by Craftsmen'},
+  materials:{el:'page-materials',t:'Materials — TerraGrove Floors & Tile'},
+  projects:{el:'page-projects',t:'Projects — TerraGrove Floors & Tile'},
+  inspiration:{el:'page-inspiration',t:'Inspiration — TerraGrove Floors & Tile'},
+  about:{el:'page-about',t:'About & Warranty — TerraGrove Floors & Tile'},
+  book:{el:'page-book',t:'Book a Visit — TerraGrove Floors & Tile'}
+};
+function setActive(page){ [].forEach.call(doc.querySelectorAll('.nav-link'),function(l){ l.classList.toggle('active',l.getAttribute('data-page')===page&&!l.getAttribute('data-scroll')); });
+  [].forEach.call(doc.querySelectorAll('.bn-item'),function(l){ l.classList.toggle('active',l.getAttribute('data-page')===page&&!l.getAttribute('data-scroll')); }); }
+function showPage(page,opts){ opts=opts||{}; if(!PAGES[page])page='home';
+  [].forEach.call(doc.querySelectorAll('.spa-page'),function(p){p.classList.remove('active');});
+  var tgt=doc.getElementById(PAGES[page].el); if(tgt)tgt.classList.add('active');
+  doc.title=PAGES[page].t; setActive(page);
+  observeReveals(tgt||doc); observeCounters(tgt||doc);
+  if(opts.scrollTo){ var s=doc.getElementById(opts.scrollTo); if(s){ setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},70); return; } }
+  if(!opts.noScroll) W.scrollTo({top:0,behavior:opts.instant?'auto':'smooth'});
+}
+function navigate(page,scrollTo){ var h='#'+page; if(location.hash!==h){history.pushState({page:page},'',h);} showPage(page,{scrollTo:scrollTo}); }
+doc.addEventListener('click',function(e){
+  var a=e.target.closest('[data-page]'); if(a){ var page=a.getAttribute('data-page'); if(PAGES[page]){ e.preventDefault(); closeD(); navigate(page,a.getAttribute('data-scroll')||null); return; } }
+  var sc=e.target.closest('[data-scroll]'); if(sc&&!sc.getAttribute('data-page')){ var id=sc.getAttribute('data-scroll'),s=doc.getElementById(id); if(s){e.preventDefault();closeD();s.scrollIntoView({behavior:'smooth',block:'start'});} }
+});
+W.addEventListener('popstate',function(e){ var page=(e.state&&e.state.page)||(location.hash||'#home').replace('#',''); showPage(PAGES[page]?page:'home',{instant:true}); });
+
+/* INIT */
+function init(){
+  var initial=(location.hash||'#home').replace('#',''); if(!PAGES[initial])initial='home';
+  showPage(initial,{instant:true,noScroll:true});
+  observeReveals(doc); observeCounters(doc); onScroll();
+}
+if(doc.readyState==='loading') doc.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+version: 1
+contracts:
+  status: placeholder
+  purpose: cross-role source of truth once canonical planning materializes
+  ownership:
+    - route boundaries
+    - data ownership
+    - integration responsibilities
+    - role and permission contracts

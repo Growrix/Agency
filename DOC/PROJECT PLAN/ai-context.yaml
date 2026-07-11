@@ -33,6 +33,19 @@ planning_artifact_contract:
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md
     - DOC/PROJECT PLAN/Security/cms-content-operations-security.md
   active_canonical_plans:
+    - path: DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md
+      scope: Full ecommerce blueprint phase realignment and deterministic gap-closure sequencing across phases 1-18
+      status: active — planning complete, implementation pending
+      phases: P22 through P26
+      downstream_role_docs:
+        - DOC/PROJECT PLAN/Frontend/ecommerce-blueprint-realignment-frontend.md
+        - DOC/PROJECT PLAN/Backend/ecommerce-blueprint-realignment-backend.md
+        - DOC/PROJECT PLAN/API and Data/ecommerce-blueprint-realignment-api-data.md
+        - DOC/PROJECT PLAN/Security/ecommerce-blueprint-realignment-security.md
+        - DOC/PROJECT PLAN/DevOps/ecommerce-blueprint-realignment-devops.md
+        - DOC/PROJECT PLAN/QA/ecommerce-blueprint-realignment-qa.md
+        - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-blueprint-realignment-admin-dashboard.md
+        - DOC/PROJECT PLAN/Supabase/ecommerce-blueprint-realignment-supabase.md
     - path: DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
       scope: Restore full public template previews while preserving paid-delivery security controls and blueprint alignment
       status: active — planning complete, implementation pending
@@ -126,6 +139,7 @@ project_docs:
   planning_artifacts:
     root: DOC/PROJECT PLAN/
     active_artifacts:
+      - DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md
       - DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md
       - DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md
       - DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md
@@ -136,6 +150,14 @@ project_docs:
       - cross-role scope decisions that must exist before tracker updates or implementation
   downstream_role_docs:
     active_docs:
+      - DOC/PROJECT PLAN/Frontend/ecommerce-blueprint-realignment-frontend.md
+      - DOC/PROJECT PLAN/Backend/ecommerce-blueprint-realignment-backend.md
+      - DOC/PROJECT PLAN/API and Data/ecommerce-blueprint-realignment-api-data.md
+      - DOC/PROJECT PLAN/Security/ecommerce-blueprint-realignment-security.md
+      - DOC/PROJECT PLAN/DevOps/ecommerce-blueprint-realignment-devops.md
+      - DOC/PROJECT PLAN/QA/ecommerce-blueprint-realignment-qa.md
+      - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-blueprint-realignment-admin-dashboard.md
+      - DOC/PROJECT PLAN/Supabase/ecommerce-blueprint-realignment-supabase.md
       - DOC/PROJECT PLAN/Frontend/ecommerce-preview-restoration-frontend.md
       - DOC/PROJECT PLAN/Backend/ecommerce-preview-restoration-backend.md
       - DOC/PROJECT PLAN/API and Data/ecommerce-preview-restoration-api-data.md
@@ -260,6 +282,7 @@ read_paths:
     - DOC/PROJECT PLAN/README.md
     - DOC/PROJECT PLAN/Tasks/ai-context.yaml
     - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md
     - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
     - DOC/PROJECT PLAN/Frontend/ai-context.yaml
     - DOC/PROJECT PLAN/Backend/ai-context.yaml
@@ -281,6 +304,14 @@ read_paths:
     - DOC/PROJECT PLAN/Security/product-led-platform-security.md
     - DOC/PROJECT PLAN/DevOps/product-led-platform-devops.md
     - DOC/PROJECT PLAN/QA/product-led-platform-qa.md
+    - DOC/PROJECT PLAN/Frontend/ecommerce-blueprint-realignment-frontend.md
+    - DOC/PROJECT PLAN/Backend/ecommerce-blueprint-realignment-backend.md
+    - DOC/PROJECT PLAN/API and Data/ecommerce-blueprint-realignment-api-data.md
+    - DOC/PROJECT PLAN/Security/ecommerce-blueprint-realignment-security.md
+    - DOC/PROJECT PLAN/DevOps/ecommerce-blueprint-realignment-devops.md
+    - DOC/PROJECT PLAN/QA/ecommerce-blueprint-realignment-qa.md
+    - DOC/PROJECT PLAN/Admin Dashboard/ecommerce-blueprint-realignment-admin-dashboard.md
+    - DOC/PROJECT PLAN/Supabase/ecommerce-blueprint-realignment-supabase.md
     - DOC/PROJECT PLAN/Frontend/cms-content-operations-frontend.md
     - DOC/PROJECT PLAN/API and Data/cms-content-operations-api-data.md
     - DOC/PROJECT PLAN/Admin Dashboard/cms-content-operations-admin-dashboard.md

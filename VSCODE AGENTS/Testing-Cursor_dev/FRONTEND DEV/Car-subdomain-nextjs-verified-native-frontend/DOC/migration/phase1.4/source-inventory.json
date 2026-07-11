@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-05-23T11:27:26.617Z",
+  "sourceRoot": "F:\\PROJECTS\\testing\\FRONTEND DEV\\Car-subdomain",
+  "existingAttemptRoot": "F:\\PROJECTS\\testing\\FRONTEND DEV\\Car-subdomain-nextjs-native-frontend",
+  "outputRoot": "F:\\PROJECTS\\testing\\FRONTEND DEV\\Car-subdomain-nextjs-verified-native-frontend",
+  "routeCount": 32,
+  "htmlPages": [
+    "about.html",
+    "appointment.html",
+    "blog-single.html",
+    "blog.html",
+    "car-list.html",
+    "car-listing.html",
+    "car-single.html",
+    "careers.html",
+    "contact.html",
+    "faq.html",
+    "gallery-carousel.html",
+    "gallery-slider.html",
+    "gallery.html",
+    "homepage-2.html",
+    "homepage-3.html",
+    "homepage-4.html",
+    "homepage-5.html",
+    "homepage-6.html",
+    "homepage-7.html",
+    "homepage-8.html",
+    "index.html",
+    "locations.html",
+    "privacy.html",
+    "service-single.html",
+    "services-2.html",
+    "services-3.html",
+    "services.html",
+    "shop-product-single.html",
+    "shop.html",
+    "team.html",
+    "terms.html",
+    "testimonials.html"
+  ],
+  "cssFileCount": 14,
+  "cssFiles": [
+    "css/bootstrap.min.css",
+    "css/colors/scheme-1.css",
+    "css/custom-swiper-1.css",
+    "css/datepicker.css",
+    "css/plugins.css",
+    "css/style.css",
+    "css/swiper.css",
+    "fonts/elegant_font/HTML_CSS/style.css",
+    "fonts/et-line-font/style.css",
+    "fonts/fontawesome4/css/font-awesome.css",
+    "fonts/fontawesome6/css/brands.css",
+    "fonts/fontawesome6/css/fontawesome.css",
+    "fonts/fontawesome6/css/solid.css",
+    "fonts/icofont/icofont.min.css"
+  ],
+  "jsFileCount": 11,
+  "jsFiles": [
+    "js/custom-swiper-1.js",
+    "js/custom-swiper-2.js",
+    "js/custom-swiper-3.js",
+    "js/designesia.js",
+    "js/jquery.event.move.js",
+    "js/jquery.twentytwenty.js",
+    "js/phase2-flows.js",
+    "js/plugins.js",
+    "js/swiper.js",
+    "js/validation-booking.js",
+    "js/validation-contact.js"
+  ],
+  "mediaFileCount": 180,
+  "formsByPage": [
+    {
+      "slug": "appointment",
+      "placeholders": [
+        "booking"
+      ]
+    },
+    {
+      "slug": "blog-single",
+      "placeholders": [
+        "contact"
+      ]
+    },
+    {
+      "slug": "car-single",
+      "placeholders": [
+        "contact"
+      ]
+    },
+    {
+      "slug": "contact",
+      "placeholders": [
+        "contact"
+      ]
+    }
+  ]
+}

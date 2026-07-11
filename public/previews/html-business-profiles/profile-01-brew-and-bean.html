@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Brew &amp; Bean — Artisan Café</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#1a0d06}
+body{font-family:'Lato',sans-serif;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:0}
+.app{width:100%;max-width:420px;min-height:100vh;background:#fdf7f2;margin:0 auto;position:relative;overflow-x:hidden}
+
+/* HERO */
+.hero{min-height:260px;background:linear-gradient(150deg,#bf6c30 0%,#7a3d1c 55%,#4a200e 100%);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 20px}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);background-size:18px 18px;pointer-events:none}
+.status-pill{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 12px;font-size:11px;color:#fff;letter-spacing:.3px;display:flex;align-items:center;gap:5px}
+.status-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.logo{width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:#7a3d1c;font-weight:700;margin-bottom:12px;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.hero h1{font-family:'Playfair Display',serif;font-size:32px;color:#fff;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.65);margin-top:5px}
+.stars{color:#f5c842;font-size:13px;margin-top:10px;letter-spacing:1px}
+.rating-text{font-size:11px;color:rgba(255,255,255,.55);margin-left:4px}
+
+/* CHIPS */
+.chips{display:flex;gap:7px;padding:14px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid #f0e8df}
+.chips::-webkit-scrollbar{display:none}
+.chip{background:#fef4eb;border:1px solid #f0d9c4;border-radius:100px;padding:6px 13px;font-size:11px;color:#7a3d1c;white-space:nowrap;flex-shrink:0}
+
+/* BODY */
+.body{padding:4px 18px 40px}
+.sec-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#3a1f0d;margin:22px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#e8d8ca,transparent)}
+
+/* MENU */
+.menu-item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #f5ece3}
+.menu-item:last-child{border-bottom:none}
+.m-name{font-size:14px;font-weight:700;color:#2c1810}
+.m-desc{font-size:11px;color:#a07860;margin-top:3px;font-style:italic}
+.m-price{font-size:17px;font-weight:700;color:#bf6c30;font-family:'Playfair Display',serif;flex-shrink:0;margin-left:12px}
+
+/* HOURS */
+.hours-box{background:#fef4eb;border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px;border:1px solid #f0d9c4}
+.h-day{font-size:12px;font-weight:700;color:#3a1f0d}
+.h-time{font-size:11px;color:#a07860;margin-top:3px}
+
+/* MAP */
+.map-box{background:linear-gradient(135deg,#fef4eb,#fde8d0);border-radius:12px;padding:14px 16px;border:1px solid #f0d9c4;font-size:12px;color:#7a3d1c;line-height:1.7}
+.map-box strong{font-size:13px;display:block;margin-bottom:2px;color:#3a1f0d}
+
+/* CTA */
+.cta-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;background:linear-gradient(135deg,#bf6c30,#8a3d18);color:#fff;border:none;width:100%;padding:16px;border-radius:14px;font-size:14px;font-weight:700;font-family:'Lato',sans-serif;letter-spacing:.5px;cursor:pointer;text-decoration:none;box-shadow:0 4px 20px rgba(136,56,20,.35)}
+.social-row{display:flex;gap:8px;margin-top:10px}
+.s-btn{flex:1;background:#fef4eb;border:1px solid #f0d9c4;border-radius:10px;padding:11px 8px;font-size:11px;color:#7a3d1c;text-align:center;cursor:pointer;font-weight:600;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px}
+
+/* FOOTER */
+footer{background:#3a1f0d;color:rgba(255,255,255,.4);text-align:center;padding:20px;font-size:10px;letter-spacing:.5px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hero">
+    <div class="dots"></div>
+    <div class="status-pill"><span class="status-dot"></span> Open Now</div>
+    <div class="logo">B</div>
+    <h1>Brew &amp; Bean</h1>
+    <div class="tagline">Artisan Coffee &amp; Café</div>
+    <div>
+      <span class="stars">★★★★★</span>
+      <span class="rating-text">4.9 · 312 reviews</span>
+    </div>
+  </div>
+
+  <div class="chips">
+    <div class="chip">☕ Specialty Coffee</div>
+    <div class="chip">🥐 Freshly Baked</div>
+    <div class="chip">🛵 Delivery Available</div>
+    <div class="chip">📶 Free WiFi</div>
+    <div class="chip">🌿 Vegan Options</div>
+  </div>
+
+  <div class="body">
+    <div class="sec-title">Our Menu</div>
+
+    <div class="menu-item">
+      <div><div class="m-name">Signature Cold Brew</div><div class="m-desc">12hr steeped, served over ice</div></div>
+      <div class="m-price">৳320</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="m-name">Hazelnut Latte</div><div class="m-desc">Double shot, oat milk, light foam</div></div>
+      <div class="m-price">৳280</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="m-name">Matcha Smoothie</div><div class="m-desc">Ceremonial grade, coconut milk</div></div>
+      <div class="m-price">৳340</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="m-name">Avocado Toast</div><div class="m-desc">Sourdough, chilli flakes, poached egg</div></div>
+      <div class="m-price">৳450</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="m-name">Almond Croissant</div><div class="m-desc">Freshly baked every morning</div></div>
+      <div class="m-price">৳180</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="m-name">Shakshuka Bowl</div><div class="m-desc">Tomato ragout, feta, herbs</div></div>
+      <div class="m-price">৳520</div>
+    </div>
+
+    <div class="sec-title">Hours</div>
+    <div class="hours-box">
+      <div><div class="h-day">Mon – Fri</div><div class="h-time">7:00am – 10:00pm</div></div>
+      <div><div class="h-day">Sat – Sun</div><div class="h-time">8:00am – 11:00pm</div></div>
+      <div><div class="h-day">Public Holidays</div><div class="h-time">9:00am – 9:00pm</div></div>
+      <div><div class="h-day">Kitchen closes</div><div class="h-time">30 min before closing</div></div>
+    </div>
+
+    <div class="sec-title">Find Us</div>
+    <div class="map-box">
+      <strong>📍 Brew &amp; Bean, Gulshan</strong>
+      House 12, Road 64, Gulshan-2<br>
+      Dhaka 1212, Bangladesh<br><br>
+      🚗 Parking available on Road 63
+    </div>
+
+    <div class="sec-title">Order &amp; Connect</div>
+    <a href="https://wa.me/8801700000000?text=Hi!%20I'd%20like%20to%20order..." class="cta-btn">
+      📱 Order via WhatsApp
+    </a>
+    <div class="social-row">
+      <a href="#" class="s-btn">📘 Facebook</a>
+      <a href="#" class="s-btn">📸 Instagram</a>
+      <a href="#" class="s-btn">🗺️ Google Maps</a>
+    </div>
+  </div>
+
+  <footer>© 2025 Brew &amp; Bean · Gulshan-2, Dhaka · All rights reserved</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div>
+</body>
+</html>

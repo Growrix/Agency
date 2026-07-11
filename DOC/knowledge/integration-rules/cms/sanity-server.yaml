@@ -1,0 +1,21 @@
+integration: sanity-server
+category: cms
+role: content
+playbook: ~/.cursor/skills/integration-platform/references/sanity-server.md
+
+env_vars:
+  - name: NEXT_PUBLIC_SANITY_PROJECT_ID
+    required: true
+    scope: public
+  - name: NEXT_PUBLIC_SANITY_DATASET
+    required: true
+    scope: public
+  - name: SANITY_API_READ_TOKEN
+    required: false
+    scope: server
+
+routes:
+  - POST /api/revalidate
+
+owner_skill: integration-platform
+studio_path: studio/

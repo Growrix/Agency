@@ -1,0 +1,87 @@
+version: 1
+project:
+  name: starter-managed project
+  type: local continuation root
+  status: starter-attached
+  canonical_docs_root: DOC/PROJECT PLAN/
+  canonical_ai_entrypoint: DOC/PROJECT PLAN/ai-context.yaml
+  canonical_human_index: DOC/PROJECT PLAN/README.md
+
+starter_package:
+  manifest: starter-manifest.json
+  local_agents_root: .github/agents/
+  source_package: .github/project-starters/hybrid-canonical-project-starter/
+  bootstrap_script: .github/project-starters/bootstrap-hybrid-canonical-project-starter.ps1
+
+planning_artifact_contract:
+  required_for_end_to_end_planning: true
+  location: DOC/PROJECT PLAN/
+  naming_convention: <scope>-e2e-plan.md
+  downstream_role_docs_required: true
+  downstream_role_roots:
+    - DOC/PROJECT PLAN/Frontend/
+    - DOC/PROJECT PLAN/Backend/
+    - DOC/PROJECT PLAN/API and Data/
+    - DOC/PROJECT PLAN/Security/
+    - DOC/PROJECT PLAN/DevOps/
+    - DOC/PROJECT PLAN/QA/
+    - DOC/PROJECT PLAN/Admin Dashboard/
+    - DOC/PROJECT PLAN/Supabase/
+  rule: >-
+    Create or update a canonical planning artifact in DOC/PROJECT PLAN/ before
+    updating DOC/PROJECT PLAN/Tasks/tasks.md. Chat summaries are never the only
+    copy of the plan.
+
+execution_workflow:
+  start_here_for_build: true
+  execution_tracker:
+    ai_entry: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Tasks/tasks.md
+    rule: Update the tracker only after the canonical planning docs exist.
+
+runtime_model:
+  frontend_runtime_root: unresolved
+  optional_runtime_roots:
+    - project root
+    - web/
+  optional_auxiliary_roots:
+    - studio/
+  rule: >-
+    The canonical plan must record the actual runtime roots before implementation
+    expands beyond starter bootstrap.
+
+project_docs:
+  master_plan:
+    human_entry: DOC/MASTER PLAN/Plan.md
+  tasks:
+    ai_entry: DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Tasks/tasks.md
+  shared_contracts:
+    ai_entry: DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    human_index: DOC/PROJECT PLAN/Shared Contracts/README.md
+
+read_paths:
+  start_here:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/README.md
+    - DOC/MASTER PLAN/Plan.md
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Shared Contracts/README.md
+  plan_end_to_end:
+    - DOC/PROJECT PLAN/ai-context.yaml
+    - DOC/PROJECT PLAN/README.md
+    - DOC/MASTER PLAN/Plan.md
+    - DOC/PROJECT PLAN/Tasks/ai-context.yaml
+    - DOC/PROJECT PLAN/Tasks/tasks.md
+    - DOC/PROJECT PLAN/Shared Contracts/ai-context.yaml
+    - DOC/PROJECT PLAN/Shared Contracts/README.md
+    - DOC/Universal/Execution Constitution.md
+    - DOC/Universal/GPT ROLES/ai-context.yaml
+    - DOC/Universal/GPT ROLES/Documentation_Workflow_Playbook.md
+    - DOC/Universal/Template/e2e-planning-template.md
+
+core_invariants:
+  - Shared contracts are the cross-role source of truth once they exist.
+  - Planning artifacts must exist inside DOC/PROJECT PLAN/ before tracker updates.
+  - Project-local agents under .github/agents/ own continuation after starter bootstrap.
+  - The actual runtime root must be made explicit in planning docs before implementation grows.

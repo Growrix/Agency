@@ -1,0 +1,25 @@
+integration: resend
+category: email
+role: transactional_email
+playbook: ~/.cursor/skills/integration-platform/references/resend.md
+env_source: web/src/server/config/runtime.ts
+
+env_vars:
+  - name: RESEND_API_KEY
+    required: true
+    scope: server
+  - name: CONTACT_TO_EMAIL
+    required: true
+    scope: server
+  - name: CONTACT_FROM_EMAIL
+    required: false
+    scope: server
+  - name: CONTACT_FROM_FALLBACK_EMAIL
+    required: false
+    scope: server
+
+routes:
+  - POST /api/v1/contact
+  - POST /api/contact
+
+owner_skill: integration-platform

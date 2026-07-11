@@ -1,0 +1,39 @@
+{
+  "$schema": "growrixos-conversion-scope-v1",
+  "job_id": "YYYY-MM-DD-slug",
+  "track": "C | D | E",
+  "source": {
+    "type": "vite-react | html-single-file | nextjs-app",
+    "path": "absolute or repo-relative source path",
+    "framework": "vite | react | tailwind | vanilla | nextjs"
+  },
+  "target": {
+    "type": "nextjs-app | html-single-file",
+    "path": "absolute or repo-relative output path",
+    "contract": "Frontend_Nextjs stack | sites vanilla HTML"
+  },
+  "locked_paths": [
+    "paths agents must NOT edit"
+  ],
+  "extensible_paths": [
+    "paths agents MAY add files"
+  ],
+  "consumable_paths": [
+    "paths agents read but do not modify"
+  ],
+  "artifacts_required_before_code": [
+    "CONVERSION-MAP.md",
+    "conversion-inventory.json"
+  ],
+  "parity_target": "pixel-perfect | structural | best-effort",
+  "phase_sequence": [
+    "intake",
+    "inventory",
+    "scope-lock",
+    "ds-or-token-port",
+    "implementation",
+    "parity-verify",
+    "phase-gate"
+  ],
+  "notes": ""
+}

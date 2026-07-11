@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"/><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>FurFriends — Pet Care Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito Sans',sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:420px;min-height:100vh;background:linear-gradient(160deg,#ffe0d0 0%,#ffd0f0 40%,#d0e8ff 100%);margin:0 auto}
+.clay{border-radius:22px;box-shadow:0 2px 0 rgba(0,0,0,.06) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 10px 28px rgba(0,0,0,.1),0 3px 8px rgba(0,0,0,.07)}
+.hero{min-height:270px;padding:28px 20px 22px;position:relative;overflow:hidden}
+.em{position:absolute;font-size:40px}
+.em1{top:20px;right:14px;transform:rotate(10deg)}
+.em2{top:72px;left:8px;font-size:28px;transform:rotate(-12deg)}
+.em3{bottom:26px;right:18px;font-size:32px;transform:rotate(7deg)}
+.hb{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:5px 13px;font-size:11px;font-weight:800;color:#801060;margin-bottom:14px;width:fit-content;box-shadow:0 6px 16px rgba(128,16,96,.15)}
+.hero h1{font-family:'Nunito',sans-serif;font-size:40px;font-weight:900;color:#400828;line-height:.9;letter-spacing:-2px}
+.hero h1 .acc{color:#e040a0}
+.hero-sub{font-size:12px;color:rgba(64,8,40,.45);margin-top:9px;line-height:1.55;font-weight:600}
+.body{padding:0 14px 40px}
+.sec{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:rgba(64,8,40,.35);margin:20px 0 12px}
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{background:#fff;border-radius:20px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.08)}
+.svc-icon{font-size:28px;flex-shrink:0}
+.svc-name{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#400828}
+.svc-desc{font-size:10px;color:rgba(64,8,40,.4);margin-top:3px;font-weight:600;line-height:1.4}
+.svc-price{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:#e040a0;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(64,8,40,.3);font-family:'Nunito Sans',sans-serif;font-weight:600}
+.pets{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.pet{background:#fff;border-radius:16px;padding:10px 14px;display:flex;align-items:center;gap:8px;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 6px 14px rgba(0,0,0,.07)}
+.pet-icon{font-size:22px}
+.pet-name{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:#400828}
+.cta{background:linear-gradient(135deg,#d030a0,#ff5070);border-radius:24px;padding:24px;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.1) inset,0 -2px 0 rgba(255,255,255,.25) inset,0 14px 36px rgba(208,48,160,.3)}
+.cta h3{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:18px;line-height:1.5;font-weight:600}
+.cta-btn{display:block;background:#fff;color:#d030a0;border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;text-decoration:none;margin-bottom:9px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.cta-btn2{display:block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);border-radius:16px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;text-decoration:none}
+.contacts{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.04) inset,0 -2px 0 rgba(255,255,255,.9) inset,0 8px 20px rgba(0,0,0,.07)}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(64,8,40,.07);font-size:12px;color:rgba(64,8,40,.45);font-weight:600}
+.cr:last-child{border-bottom:none}
+.ci{width:30px;height:30px;background:linear-gradient(135deg,#d030a0,#ff5070);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 10px rgba(208,48,160,.3)}
+footer{text-align:center;padding:18px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:rgba(64,8,40,.2)}
+</style></head>
+<body><div class="app">
+<div class="hero">
+  <span class="em em1">🐶</span>
+  <span class="em em2">🐱</span>
+  <span class="em em3">🐟</span>
+  <div class="hb">❤️ 2,000+ happy pet parents</div>
+  <h1>Your pets<br>deserve the <span class="acc">best.</span></h1>
+  <div class="hero-sub">Grooming, vet consultations, pet hotel, training and home delivery of premium pet food — all in Dhaka.</div>
+</div>
+<div class="body">
+  <div class="sec">We Care For 🐾</div>
+  <div class="pets">
+    <div class="pet"><div class="pet-icon">🐶</div><div class="pet-name">Dogs</div></div>
+    <div class="pet"><div class="pet-icon">🐱</div><div class="pet-name">Cats</div></div>
+    <div class="pet"><div class="pet-icon">🐰</div><div class="pet-name">Rabbits</div></div>
+    <div class="pet"><div class="pet-icon">🐟</div><div class="pet-name">Fish</div></div>
+    <div class="pet"><div class="pet-icon">🐦</div><div class="pet-name">Birds</div></div>
+  </div>
+  <div class="sec">Services 🛁</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">✂️</div><div><div class="svc-name">Full Grooming</div><div class="svc-desc">Bath, blow-dry, nail trim, ear clean, styling</div></div><div class="svc-price">৳800<span>from</span></div></div>
+    <div class="svc"><div class="svc-icon">🏨</div><div><div class="svc-name">Pet Hotel</div><div class="svc-desc">Comfortable stay with feeding, play and vet check</div></div><div class="svc-price">৳600<span>per night</span></div></div>
+    <div class="svc"><div class="svc-icon">🩺</div><div><div class="svc-name">Vet Consultation</div><div class="svc-desc">In-clinic or home visit · Vaccination available</div></div><div class="svc-price">৳500<span>from</span></div></div>
+    <div class="svc"><div class="svc-icon">🎓</div><div><div class="svc-name">Dog Training</div><div class="svc-desc">Basic obedience · 6-session package with cert</div></div><div class="svc-price">৳5,000<span>package</span></div></div>
+  </div>
+  <div class="sec" style="margin-top:22px">Book Today! 🐾</div>
+  <div class="cta">
+    <h3>🐾 First grooming free!</h3>
+    <p>Your first grooming session is on us. Because every pet deserves to feel beautiful!</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🐶 Book via WhatsApp</a>
+    <a href="tel:+8801700000000" class="cta-btn2">📞 Call the clinic</a>
+  </div>
+  <div class="sec" style="margin-top:22px">Find Us 📍</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Dhanmondi, Dhaka · Home visits available</div>
+    <div class="cr"><div class="ci">⏰</div>Daily 9am–8pm</div>
+  </div>
+</div>
+<footer>© 2025 FurFriends Pet Care · Dhaka · Tails wagging since 2018 🐾</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

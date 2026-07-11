@@ -652,6 +652,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     <AddToCartButton
                       productSlug={product.slug}
                       productName={product.name}
+                      productImageSrc={product.image?.src}
                       productPrice={standardVariant.price}
                       variantSlug={standardVariant.slug}
                       tierName={standardVariant.tier_name}
@@ -761,6 +762,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <AddToCartButton
                     productSlug={product.slug}
                     productName={product.name}
+                    productImageSrc={product.image?.src}
                     productPrice={standardVariant.price}
                     variantSlug={standardVariant.slug}
                     tierName={standardVariant.tier_name}
@@ -1170,6 +1172,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     <AddToCartButton
                       productSlug={product.slug}
                       productName={product.name}
+                      productImageSrc={product.image?.src}
                       productPrice={WEBSITE_TEMPLATE_TIER_PRESETS.standard.price}
                       variantSlug={standardVariant.slug}
                       tierName={standardVariant.tier_name}
@@ -1662,6 +1665,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   <AddToCartButton
                     productSlug={product.slug}
                     productName={product.name}
+                    productImageSrc={product.image?.src}
                     productPrice={sidebarBasePriceLabel}
                     variantSlug={sidebarPrimaryVariant.slug}
                     tierName={sidebarPrimaryVariant.tier_name}
@@ -2142,6 +2146,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                 <AddToCartButton
                   productSlug={product.slug}
                   productName={product.name}
+                  productImageSrc={product.image?.src}
                   productPrice={sidebarBasePriceLabel}
                   variantSlug={sidebarPrimaryVariant.slug}
                   tierName={sidebarPrimaryVariant.tier_name}

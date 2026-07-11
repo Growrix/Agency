@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>GearStrike — Gaming Peripherals</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:#060810;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#08090f;margin:0 auto;overflow:hidden;position:relative}
+
+/* === TACTILE MAXIMALISM — DARK NEON GLOSSY === */
+/* The signature gloss technique: a ::before highlight overlay */
+/* + strong colored glow shadows + inflated border-radius */
+
+/* Dark glossy card */
+.glossy-card{
+  background:linear-gradient(170deg,#12141e 0%,#0e1018 100%);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:22px;
+  position:relative;overflow:hidden;
+}
+.glossy-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:45%;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,0) 100%);
+  border-radius:22px 22px 50% 50%;pointer-events:none;
+}
+
+/* Neon-colored glossy button */
+.btn-neon{
+  display:block;border-radius:18px;padding:15px;font-family:'Rajdhani',sans-serif;
+  font-size:16px;font-weight:700;text-decoration:none;text-align:center;
+  letter-spacing:1px;text-transform:uppercase;
+  position:relative;overflow:hidden;
+}
+.btn-neon::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:48%;
+  background:linear-gradient(180deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 100%);
+  border-radius:18px 18px 50% 50%;pointer-events:none;
+}
+.btn-neon.green{
+  background:linear-gradient(170deg,#00e850,#00b840);color:#001a08;
+  box-shadow:0 0 30px rgba(0,220,70,.35),0 6px 20px rgba(0,220,70,.3),0 2px 6px rgba(0,0,0,.4);
+}
+.btn-neon.outline{
+  background:rgba(255,255,255,.04);color:rgba(255,255,255,.45);
+  border:1.5px solid rgba(255,255,255,.1);
+  box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.btn-neon.outline::before{background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,transparent 100%)}
+
+/* Glossy stat pill */
+.stat-pill{
+  border-radius:16px;padding:13px 0;text-align:center;
+  position:relative;overflow:hidden;
+}
+.stat-pill::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,0) 100%);
+  border-radius:16px 16px 50% 50%;
+}
+
+/* Neon product card */
+.product-card{
+  border-radius:22px;padding:18px;
+  position:relative;overflow:hidden;
+}
+.product-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(180deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,0) 100%);
+  border-radius:22px 22px 60% 60%;pointer-events:none;
+}
+
+/* Glow accent border */
+.glow-green{box-shadow:0 0 20px rgba(0,220,70,.2),0 6px 20px rgba(0,0,0,.4);border:1px solid rgba(0,220,70,.2)}
+.glow-blue{box-shadow:0 0 20px rgba(60,120,255,.2),0 6px 20px rgba(0,0,0,.4);border:1px solid rgba(60,120,255,.2)}
+.glow-purple{box-shadow:0 0 20px rgba(160,60,255,.2),0 6px 20px rgba(0,0,0,.4);border:1px solid rgba(160,60,255,.2)}
+.glow-red{box-shadow:0 0 20px rgba(255,40,80,.2),0 6px 20px rgba(0,0,0,.4);border:1px solid rgba(255,40,80,.2)}
+
+/* Hero */
+.hero{min-height:290px;padding:28px 18px 22px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.hero-bg-lines{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0px,transparent 39px,rgba(0,220,70,.03) 39px,rgba(0,220,70,.03) 40px);pointer-events:none}
+.hero-glow{position:absolute;width:260px;height:260px;background:radial-gradient(circle,rgba(0,220,70,.12) 0%,transparent 70%);top:-60px;right:-40px;filter:blur(30px);pointer-events:none}
+.hero-glow2{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(60,120,255,.1) 0%,transparent 70%);bottom:-40px;left:-30px;filter:blur(30px);pointer-events:none}
+.hero-nav{position:absolute;top:24px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center}
+.hero-logo{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00e850;text-shadow:0 0 20px rgba(0,232,80,.5)}
+.hero-badge{font-size:9px;background:rgba(0,220,70,.1);border:1px solid rgba(0,220,70,.2);border-radius:100px;padding:4px 12px;color:rgba(0,220,70,.8);letter-spacing:1px;display:flex;align-items:center;gap:5px}
+.hb-dot{width:5px;height:5px;background:#00e850;border-radius:50%;animation:p 1s infinite alternate;box-shadow:0 0 6px #00e850}
+@keyframes p{from{opacity:1}to{opacity:.3}}
+.hero-icon{font-size:72px;text-align:center;display:block;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(0,220,70,.3)) drop-shadow(0 8px 16px rgba(0,0,0,.4))}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:46px;font-weight:700;color:#fff;letter-spacing:-1px;line-height:.88;text-transform:uppercase}
+.hero h1 .g{color:#00e850;text-shadow:0 0 24px rgba(0,232,80,.5)}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.28);margin-top:8px;line-height:1.6}
+
+/* Stats */
+.stats-row{display:flex;gap:8px;padding:12px 14px 6px}
+.sp{flex:1}
+.sp.green-p{background:linear-gradient(170deg,rgba(0,220,70,.12),rgba(0,220,70,.06))}
+.sp.blue-p{background:linear-gradient(170deg,rgba(60,120,255,.12),rgba(60,120,255,.06))}
+.sp.purple-p{background:linear-gradient(170deg,rgba(160,60,255,.12),rgba(160,60,255,.06))}
+.sp-n{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.5px}
+.green-p .sp-n{color:#00e850;text-shadow:0 0 10px rgba(0,232,80,.4)}
+.blue-p .sp-n{color:#3c78ff;text-shadow:0 0 10px rgba(60,120,255,.4)}
+.purple-p .sp-n{color:#a03cff;text-shadow:0 0 10px rgba(160,60,255,.4)}
+.sp-l{font-size:9px;color:rgba(255,255,255,.2);margin-top:3px;letter-spacing:.5px}
+
+/* Products */
+.body{padding:0 14px 44px}
+.sec{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);margin:20px 0 11px}
+
+.products{display:flex;flex-direction:column;gap:9px}
+.pc{padding:16px}
+.pc-top{display:flex;gap:14px;align-items:flex-start}
+.pc-icon{font-size:36px;flex-shrink:0;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4)) drop-shadow(0 0 12px currentColor);line-height:1}
+.pc-cat{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
+.green-p .pc-cat, .pc.green-p .pc-cat{color:rgba(0,220,70,.6)}
+.blue-p .pc-cat, .pc.blue-p .pc-cat{color:rgba(60,120,255,.6)}
+.purple-p .pc-cat, .pc.purple-p .pc-cat{color:rgba(160,60,255,.6)}
+.red-p .pc-cat, .pc.red-p .pc-cat{color:rgba(255,40,80,.6)}
+.pc-name{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px}
+.pc-spec{font-size:10px;color:rgba(255,255,255,.28);margin-top:3px;line-height:1.4}
+.pc-right{margin-left:auto;text-align:right;flex-shrink:0}
+.pc-price{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:-.5px}
+.pc-was{font-size:10px;color:rgba(255,255,255,.25);text-decoration:line-through;margin-top:1px}
+.pc-save{font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:4px;display:inline-block}
+.save-green{background:rgba(0,220,70,.15);color:rgba(0,220,70,.9)}
+.save-blue{background:rgba(60,120,255,.15);color:rgba(60,120,255,.9)}
+.save-purple{background:rgba(160,60,255,.15);color:rgba(160,60,255,.9)}
+.save-red{background:rgba(255,40,80,.15);color:rgba(255,40,80,.9)}
+.pc.green-p{background:linear-gradient(160deg,rgba(0,220,70,.1),rgba(0,220,70,.05));border:1px solid rgba(0,220,70,.15);box-shadow:0 0 24px rgba(0,220,70,.08),0 6px 20px rgba(0,0,0,.35)}
+.pc.blue-p{background:linear-gradient(160deg,rgba(60,120,255,.1),rgba(60,120,255,.05));border:1px solid rgba(60,120,255,.15);box-shadow:0 0 24px rgba(60,120,255,.08),0 6px 20px rgba(0,0,0,.35)}
+.pc.purple-p{background:linear-gradient(160deg,rgba(160,60,255,.1),rgba(160,60,255,.05));border:1px solid rgba(160,60,255,.15);box-shadow:0 0 24px rgba(160,60,255,.08),0 6px 20px rgba(0,0,0,.35)}
+.pc.red-p{background:linear-gradient(160deg,rgba(255,40,80,.1),rgba(255,40,80,.05));border:1px solid rgba(255,40,80,.15);box-shadow:0 0 24px rgba(255,40,80,.08),0 6px 20px rgba(0,0,0,.35)}
+.pc-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.pct{font-size:9px;padding:2px 9px;border-radius:100px;background:rgba(255,255,255,.05);color:rgba(255,255,255,.3);font-weight:600}
+
+.cta-section{background:linear-gradient(160deg,rgba(0,220,70,.1),rgba(0,220,70,.04));border:1px solid rgba(0,220,70,.18);border-radius:24px;padding:24px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(180deg,rgba(255,255,255,.06),transparent);border-radius:24px 24px 60% 60%}
+.cta-section h3{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:8px;line-height:.95}
+.cta-section h3 span{color:#00e850;text-shadow:0 0 20px rgba(0,232,80,.5)}
+.cta-section p{font-size:11px;color:rgba(255,255,255,.28);margin-bottom:20px;line-height:1.6}
+.contacts{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:16px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:rgba(255,255,255,.28)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:rgba(0,220,70,.1);border:1px solid rgba(0,220,70,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+footer{border-top:1px solid rgba(255,255,255,.04);padding:16px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:11px;color:rgba(255,255,255,.1);letter-spacing:2px;text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-nav">
+    <div class="hero-logo">GearStrike</div>
+    <div class="hero-badge"><span class="hb-dot"></span>In Stock</div>
+  </div>
+  <span class="hero-icon">🎮</span>
+  <h1>Play at<br><span class="g">peak</span><br>performance.</h1>
+  <div class="hero-sub">Pro-grade gaming mice, keyboards, headsets and controllers. Engineered for competitive play. Ships across Bangladesh.</div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-pill sp green-p"><div class="sp-n">50K+</div><div class="sp-l">Gamers served</div></div>
+  <div class="stat-pill sp blue-p"><div class="sp-n">4.9★</div><div class="sp-l">Reviews</div></div>
+  <div class="stat-pill sp purple-p"><div class="sp-n">2-day</div><div class="sp-l">Delivery</div></div>
+</div>
+
+<div class="body">
+  <div class="sec">Top Picks</div>
+  <div class="products">
+    <div class="product-card pc green-p">
+      <div class="pc-top">
+        <div class="pc-icon" style="color:#00e850">🖱️</div>
+        <div><div class="pc-cat">Gaming Mouse</div><div class="pc-name">Phantom X Pro</div><div class="pc-spec">25K DPI · 650 IPS · 58g ultralight · 72hr battery</div><div class="pc-tags"><span class="pct">Wireless</span><span class="pct">Optical</span><span class="pct">RGB</span></div></div>
+        <div class="pc-right"><div class="pc-price">$89</div><div class="pc-was">$120</div><div class="pc-save save-green">Save 26%</div></div>
+      </div>
+    </div>
+    <div class="product-card pc blue-p">
+      <div class="pc-top">
+        <div class="pc-icon" style="color:#3c78ff">⌨️</div>
+        <div><div class="pc-cat">Mechanical Keyboard</div><div class="pc-name">Strike 60 TKL</div><div class="pc-spec">Custom linear switches · PBT keycaps · per-key RGB · USB-C</div><div class="pc-tags"><span class="pct">TKL 75%</span><span class="pct">Hot-swap</span><span class="pct">Gasket</span></div></div>
+        <div class="pc-right"><div class="pc-price">$120</div><div class="pc-was">$160</div><div class="pc-save save-blue">Save 25%</div></div>
+      </div>
+    </div>
+    <div class="product-card pc purple-p">
+      <div class="pc-top">
+        <div class="pc-icon" style="color:#a03cff">🎧</div>
+        <div><div class="pc-cat">Gaming Headset</div><div class="pc-name">SoundWave 7.1</div><div class="pc-spec">Spatial audio · 40mm drivers · detachable mic · 30hr</div><div class="pc-tags"><span class="pct">Wireless</span><span class="pct">7.1 Surround</span></div></div>
+        <div class="pc-right"><div class="pc-price">$75</div><div class="pc-was">$99</div><div class="pc-save save-purple">Save 24%</div></div>
+      </div>
+    </div>
+    <div class="product-card pc red-p">
+      <div class="pc-top">
+        <div class="pc-icon" style="color:#ff2850">🕹️</div>
+        <div><div class="pc-cat">Controller</div><div class="pc-name">NovaPad Elite</div><div class="pc-spec">PC + Android + iOS · Hall effect sticks · trigger stops</div><div class="pc-tags"><span class="pct">Cross-platform</span><span class="pct">Vibration</span></div></div>
+        <div class="pc-right"><div class="pc-price">$55</div><div class="pc-was">$70</div><div class="pc-save save-red">Save 21%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Order Now</div>
+  <div class="cta-section">
+    <h3>Level up your <span>setup.</span></h3>
+    <p>Free delivery on orders over $50. Genuine products, 1-year warranty, BD support.</p>
+    <a href="https://wa.me/8801700000000" class="btn-neon green" style="margin-bottom:9px">🎮 Order via WhatsApp</a>
+    <a href="tel:+8801700000000" class="btn-neon outline">📞 Call us</a>
+  </div>
+
+  <div class="sec" style="margin-top:22px">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">🌐</div>gearstrike.com.bd</div>
+    <div class="cr"><div class="ci">📦</div>Ships nationwide · 2-day Dhaka</div>
+  </div>
+</div>
+<footer>© 2025 GearStrike · Pro Gaming Peripherals · Bangladesh</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

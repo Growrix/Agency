@@ -6,6 +6,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 export type CartItem = {
   product_slug: string;
   product_name: string;
+  product_image_src?: string;
   variant_slug?: string;
   tier_name?: string;
   fulfillment_type?: string;
@@ -50,13 +51,20 @@ export function formatUsdFromCents(value: number) {
   }).format(value / 100);
 }
 
-export function formatCartItemDisplayName(item: Pick<CartItem, "product_name" | "product_slug">) {
-  const explicit = item.product_name.trim();
+export function formatCartItemDisplayName(
+  item: Partial<Pick<CartItem, "product_name" | "product_slug">>,
+) {
+  const explicit = typeof item.product_name === "string" ? item.product_name.trim() : "";
   if (explicit.length > 0) {
     return explicit;
   }
 
-  return item.product_slug
+  const slug = typeof item.product_slug === "string" ? item.product_slug.trim() : "";
+  if (!slug) {
+    return "Digital product";
+  }
+
+  return slug
     .split("-")
     .filter(Boolean)
     .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))

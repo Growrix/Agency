@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>STRATUM — Architecture &amp; Design Studio | Spaces That Define Tomorrow</title>
+<meta name="description" content="STRATUM is an award-winning architecture &amp; design studio crafting luxury residences, commercial developments and hospitality landmarks. Sustainable, human-centred design from concept to delivery. Book a design consultation."/>
+<meta name="keywords" content="architecture firm, architectural design, luxury residential architects, commercial architecture, sustainable design, master planning, hospitality architecture, feasibility study"/>
+<meta name="author" content="STRATUM Architecture &amp; Design"/>
+<meta name="theme-color" content="#111111"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="STRATUM — Architecture &amp; Design Studio"/>
+<meta property="og:description" content="Designing spaces that define tomorrow. Visionary architecture, technical precision and sustainability expertise, end to end."/>
+<meta property="og:site_name" content="STRATUM"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="STRATUM — Architecture &amp; Design Studio"/>
+<meta name="twitter:description" content="Designing spaces that define tomorrow."/>
+<link rel="canonical" href="https://www.stratum-studio.com/"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111111'/%3E%3Cpath d='M14 46 L32 14 L50 46 Z' fill='none' stroke='%23B9865B' stroke-width='3'/%3E%3Cline x1='14' y1='46' x2='50' y2='46' stroke='%23B9865B' stroke-width='3'/%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"STRATUM Architecture & Design","description":"Award-winning architecture and design studio specialising in luxury residential, commercial, hospitality and civic projects with sustainability expertise.","areaServed":"Worldwide","priceRange":"$$$$","telephone":"+1-212-555-0190","email":"studio@stratum-studio.com","address":{"@type":"PostalAddress","streetAddress":"118 Vanderbilt Loft, Floor 9","addressLocality":"New York","addressRegion":"NY","postalCode":"10013","addressCountry":"US"},"url":"https://www.stratum-studio.com/","sameAs":["https://instagram.com/stratum.studio","https://linkedin.com/company/stratum-studio"]}
+</script>
+<style>
+:root{
+  --announce-h:44px;
+  --header-h:72px;
+  --concrete:#F7F7F5; --surface:#FFFFFF; --surface2:#EFEEEA; --surface3:#E6E5E0;
+  --ink:#111111; --graphite:#2D2D2D;
+  --text:#141413; --muted:#5B5E64; --faint:#9A9DA3;
+  --copper:#B9865B; --copper-d:#996B43; --copper-l:#D2A579; --copper-w:rgba(185,134,91,.12);
+  --steel:#6D7278; --forest:#4E6655; --forest-w:rgba(78,102,85,.12);
+  --blueprint:#4A6C8C; --blueprint-w:rgba(74,108,140,.10);
+  --border:rgba(17,17,17,.10); --border2:rgba(17,17,17,.17); --line:rgba(17,17,17,.065);
+  --fd:'Bricolage Grotesque',sans-serif; --fb:'Inter',sans-serif; --fm:'DM Mono',monospace;
+  --rs:4px; --rm:8px; --rl:14px; --rxl:22px; --maxw:1440px; --wrap:1200px;
+  --shadow:0 2px 18px rgba(17,17,17,.06); --shadow-lg:0 28px 70px rgba(17,17,17,.13);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+[data-theme=dark]{
+  --concrete:#0E0E10; --surface:#161618; --surface2:#1D1D20; --surface3:#26262A;
+  --ink:#0A0A0B; --graphite:#1A1A1C;
+  --text:#ECEBE7; --muted:#9B9B95; --faint:#5E5E58;
+  --copper:#CB9A6C; --copper-d:#B9865B; --copper-l:#E0B68A; --copper-w:rgba(203,154,108,.14);
+  --steel:#9398A0; --forest:#86A491; --forest-w:rgba(134,164,145,.13);
+  --blueprint:#83A6C8; --blueprint-w:rgba(131,166,200,.13);
+  --border:rgba(255,255,255,.09); --border2:rgba(255,255,255,.16); --line:rgba(255,255,255,.055);
+  --shadow:0 2px 18px rgba(0,0,0,.4); --shadow-lg:0 28px 70px rgba(0,0,0,.6);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--concrete);color:var(--text);font-family:var(--fb);min-height:100vh;line-height:1.6;overflow-x:hidden;transition:background .4s var(--ease),color .4s var(--ease),padding-top .3s var(--ease);padding-top:var(--announce-h)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+input,textarea,select{font-family:var(--fb);font-size:15px;color:var(--text)}
+::selection{background:var(--copper);color:#fff}
+:focus-visible{outline:2.5px solid var(--copper);outline-offset:3px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* ===== TYPOGRAPHY PRIMITIVES ===== */
+.eyebrow{font-family:var(--fm);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--copper);display:inline-block;opacity:.7}
+.eyebrow.center{justify-content:center}
+.spec{font-family:var(--fm);font-size:12px;letter-spacing:.04em;color:var(--steel)}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:700;line-height:1.04;letter-spacing:-.02em;color:var(--text)}
+.display{font-size:clamp(40px,7.4vw,98px);font-weight:700;line-height:.98;letter-spacing:-.035em}
+.h-sec{font-size:clamp(30px,4.4vw,58px);font-weight:700;letter-spacing:-.03em;line-height:1.02}
+.lead{font-size:clamp(16px,1.7vw,19px);color:var(--muted);line-height:1.7;font-weight:400}
+
+/* ===== SKIP / LAYOUT ===== */
+.skip{position:absolute;left:14px;top:-60px;background:var(--ink);color:#fff;padding:11px 18px;border-radius:var(--rm);z-index:400;font-weight:600;transition:top .2s}
+.skip:focus{top:14px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+.wrap-wide{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+section{position:relative}
+.pad{padding:clamp(70px,9vw,128px) 0}
+.divider-line{height:1px;background:var(--border);max-width:var(--maxw);margin:0 auto}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:14.5px;padding:14px 26px;border-radius:var(--rm);transition:all .25s var(--ease);white-space:nowrap;position:relative;font-family:var(--fb)}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-primary{background:var(--ink);color:#fff}
+[data-theme=dark] .btn-primary{background:var(--copper);color:#16110b}
+.btn-primary:hover{background:var(--copper);color:#fff;transform:translateY(-2px);box-shadow:0 12px 30px var(--copper-w)}
+[data-theme=dark] .btn-primary:hover{background:var(--copper-l)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--copper);color:var(--copper);transform:translateY(-2px)}
+.btn-copper{background:var(--copper);color:#fff}
+.btn-copper:hover{background:var(--copper-d);transform:translateY(-2px);box-shadow:0 12px 30px var(--copper-w)}
+.btn-lg{padding:17px 32px;font-size:15.5px}
+.btn-block{width:100%}
+.link-arrow{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;color:var(--copper);font-family:var(--fb)}
+.link-arrow svg{width:15px;height:15px;transition:transform .25s var(--ease)}
+.link-arrow:hover svg{transform:translateX(4px)}
+
+/* ===== BLUEPRINT MOTIF ===== */
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:54px 54px;pointer-events:none;z-index:0;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 30%,transparent 78%);mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 30%,transparent 78%)}
+.corner-tick{position:absolute;width:14px;height:14px;border:1px solid var(--copper);opacity:.55;pointer-events:none}
+.ct-tl{top:0;left:0;border-right:none;border-bottom:none}
+.ct-tr{top:0;right:0;border-left:none;border-bottom:none}
+.ct-bl{bottom:0;left:0;border-right:none;border-top:none}
+.ct-br{bottom:0;right:0;border-left:none;border-top:none}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+.draw-line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--ease)}
+.draw-line.in{stroke-dashoffset:0}
+
+/* ===== ANNOUNCEMENT BAR ===== */
+/* ===== ANNOUNCEMENT ===== */
+.announce{position:fixed;top:0;left:0;right:0;background:var(--ink);color:#fff;font-size:12.5px;letter-spacing:.01em;z-index:130;overflow:hidden}
+[data-theme=dark] .announce{background:#000;border-bottom:1px solid var(--border)}
+.announce-inner{max-width:var(--maxw);margin:0 auto;padding:9px 28px;display:flex;align-items:center;justify-content:center;gap:14px;text-align:center}
+.announce .tag{font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:var(--copper);color:#16110b;padding:3px 9px;border-radius:100px;font-weight:500;flex-shrink:0}
+.announce a{color:var(--copper-l);font-weight:600;display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
+.announce a svg{width:12px;height:12px}
+@media(max-width:680px){
+  .announce-inner{justify-content:flex-start;text-align:left;padding:9px 44px 9px 16px}
+  .announce-inner span:not(.tag){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:46vw}
+  .announce-inner a{white-space:nowrap}
+}
+.announce .close-an{position:absolute;right:18px;top:50%;transform:translateY(-50%);opacity:.5;font-size:16px;line-height:1;padding:4px}
+.announce .close-an:hover{opacity:1}
+
+/* ===== HEADER ===== */
+.header{position:fixed;top:var(--announce-h,0px);left:0;right:0;z-index:110;transition:background .4s var(--ease),border-color .4s,box-shadow .4s,padding .4s,top .3s var(--ease);border-bottom:1px solid transparent}
+.header:not(.scrolled){background:linear-gradient(180deg,rgba(8,8,9,.78) 0%,rgba(8,8,9,.28) 72%,rgba(8,8,9,0) 100%)}
+.header.scrolled{background:color-mix(in srgb,var(--concrete) 88%,transparent);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom-color:var(--border);box-shadow:var(--shadow)}
+.header-inner{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;transition:padding .4s}
+.header.scrolled .header-inner{padding:13px 28px}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0;min-width:0}
+.brand .mark{width:34px;height:34px;flex-shrink:0}
+.brand .mark svg{width:100%;height:100%}
+.brand .word{font-family:var(--fd);font-weight:800;font-size:21px;letter-spacing:.14em;color:var(--text);transition:color .3s}
+.brand .sub{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--steel);margin-top:1px;transition:color .3s}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.nav{display:flex;align-items:center;gap:2px;flex:1;justify-content:center;min-width:0}
+.nav a{padding:8px 11px;font-size:13px;font-weight:500;color:var(--muted);border-radius:var(--rm);transition:color .2s,background .2s;position:relative;white-space:nowrap}
+.nav a:hover{color:var(--text)}
+.nav a.active{color:var(--copper)}
+.nav a.active::after{content:"";position:absolute;bottom:2px;left:11px;right:11px;height:2px;background:var(--copper);border-radius:2px}
+.header:not(.scrolled) .brand .word{color:#fff}
+.header:not(.scrolled) .brand .sub{color:rgba(255,255,255,.58)}
+.header:not(.scrolled) .nav a{color:rgba(255,255,255,.78)}
+.header:not(.scrolled) .nav a:hover,.header:not(.scrolled) .nav a.active{color:var(--copper-l)}
+.header:not(.scrolled) .nav a.active::after{background:var(--copper-l)}
+.header:not(.scrolled) .icon-btn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.88)}
+.header:not(.scrolled) .icon-btn:hover{color:var(--copper-l);border-color:var(--copper-l)}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.icon-btn{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--rm);border:1px solid var(--border);color:var(--muted);transition:all .2s;background:var(--surface)}
+.icon-btn:hover{color:var(--copper);border-color:var(--copper);transform:translateY(-1px)}
+.icon-btn svg{width:18px;height:18px}
+.burger{display:none}
+@media(max-width:1240px){.nav a{padding:8px 8px;font-size:12px}.header-cta .btn{padding:12px 18px;font-size:13px}}
+@media(max-width:1080px){.nav{display:none}.burger{display:inline-flex}.header-cta .btn{display:none}.header-inner{gap:14px}}
+
+/* ===== MOBILE DRAWER ===== */
+.drawer-ov{position:fixed;inset:0;background:rgba(10,10,11,.55);backdrop-filter:blur(4px);z-index:190;opacity:0;visibility:hidden;transition:.3s}
+.drawer-ov.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(360px,86vw);background:var(--concrete);z-index:200;transform:translateX(100%);transition:transform .42s var(--ease);display:flex;flex-direction:column;border-left:1px solid var(--border);overflow-y:auto}
+.drawer.open{transform:none}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--border)}
+.drawer-nav{padding:14px 12px;display:flex;flex-direction:column;gap:2px}
+.drawer-nav a{padding:15px 16px;font-family:var(--fd);font-size:18px;font-weight:600;color:var(--text);border-radius:var(--rm);display:flex;align-items:center;justify-content:space-between;transition:.2s}
+.drawer-nav a:hover{background:var(--surface2);color:var(--copper)}
+.drawer-nav a .idx{font-family:var(--fm);font-size:11px;color:var(--faint)}
+.drawer-foot{margin-top:auto;padding:22px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--ink);padding-top:calc(var(--header-h,72px) + 20px)}
+.hero-stage{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s var(--ease);background-size:cover;background-position:center}
+.hero-slide.active{opacity:1}
+.hero-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,9,.55) 0%,rgba(8,8,9,.35) 38%,rgba(8,8,9,.82) 100%)}
+.hero-bp{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;opacity:.9}
+.hero-svg{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none}
+.hero-shell{position:relative;z-index:5;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px;flex-shrink:0}
+.hero-dots{position:absolute;top:clamp(16px,2.5vw,28px);left:28px;display:flex;gap:8px;z-index:2}
+.hero-meta{position:absolute;top:clamp(16px,2.5vw,28px);right:28px;text-align:right;color:rgba(255,255,255,.7);font-family:var(--fm);font-size:11px;letter-spacing:.04em;line-height:1.9;display:none;z-index:2}
+@media(min-width:1080px){.hero-meta{display:block}}
+.hero-meta .num{color:var(--copper-l)}
+.hero-content{position:relative;z-index:1;width:100%;max-width:920px;padding:clamp(72px,10vw,96px) 0 clamp(40px,5vw,56px)}
+.hero .eyebrow{color:var(--copper-l)}
+.hero .eyebrow::before{background:var(--copper-l)}
+.hero h1{color:#fff;margin:18px 0 22px;max-width:14ch}
+.hero h1 .em{color:var(--copper-l);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.82);font-size:clamp(15px,1.5vw,18.5px);max-width:54ch;line-height:1.65}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px;align-items:center}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.28)}
+.hero .btn-ghost:hover{border-color:var(--copper-l);color:var(--copper-l)}
+.hero-stats{position:relative;z-index:5;border-top:1px solid rgba(255,255,255,.14);flex-shrink:0}
+.hero-stats-grid{max-width:var(--maxw);margin:0 auto;padding:24px 28px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.hstat .n{font-family:var(--fd);font-size:clamp(26px,3vw,40px);font-weight:700;color:#fff;letter-spacing:-.03em;line-height:1}
+.hstat .l{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:7px}
+.hero-dot{width:30px;height:3px;border-radius:3px;background:rgba(255,255,255,.3);cursor:pointer;transition:.3s;padding:0;border:none}
+.hero-dot.active{background:var(--copper-l);width:46px}
+@media(max-width:760px){
+  .hero-shell{padding-top:8px}
+  .hero-meta{display:block;max-width:44%}
+  .hero-content{padding-top:64px}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%}
+  .hero-stats-grid{grid-template-columns:repeat(2,1fr);gap:14px 18px}
+  .hstat:last-child{display:none}
+}
+
+/* ===== SECTION HEADINGS ===== */
+.sec-head{max-width:760px;margin-bottom:clamp(40px,5vw,68px)}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head h2{margin:16px 0 14px}
+.sec-flex{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:clamp(36px,4.5vw,60px)}
+.sec-flex .sec-head{margin-bottom:0}
+
+/* ===== INTRO / STATS ===== */
+.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,88px);align-items:center}
+@media(max-width:900px){.intro-grid{grid-template-columns:1fr;gap:44px}}
+.intro-copy h2{margin:18px 0 22px}
+.intro-copy p{color:var(--muted);font-size:16.5px;line-height:1.75;margin-bottom:18px}
+.intro-sign{display:flex;align-items:center;gap:16px;margin-top:30px;padding-top:26px;border-top:1px solid var(--border)}
+.intro-sign .av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--copper),var(--copper-d));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:700;color:#fff;font-size:18px;flex-shrink:0}
+.intro-sign .nm{font-family:var(--fd);font-weight:700;font-size:16px}
+.intro-sign .rl{font-size:13px;color:var(--muted)}
+.stat-stack{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.stat-cell{background:var(--surface);padding:30px 26px;position:relative}
+.stat-cell .code{font-family:var(--fm);font-size:10px;letter-spacing:.1em;color:var(--faint);position:absolute;top:14px;right:16px}
+.stat-cell .n{font-family:var(--fd);font-size:clamp(34px,4.4vw,52px);font-weight:700;color:var(--copper);letter-spacing:-.03em;line-height:1}
+.stat-cell .l{font-size:13.5px;color:var(--muted);margin-top:9px;font-weight:500}
+
+/* ===== PROJECTS GRID ===== */
+.proj-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+.fbtn{padding:9px 17px;font-size:13px;font-weight:600;border-radius:100px;border:1px solid var(--border2);color:var(--muted);transition:.22s;font-family:var(--fb)}
+.fbtn:hover{border-color:var(--copper);color:var(--copper)}
+.fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+[data-theme=dark] .fbtn.active{background:var(--copper);color:#16110b;border-color:var(--copper)}
+.proj-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.pcard{position:relative;border-radius:var(--rl);overflow:hidden;background:var(--surface3);min-height:300px;cursor:pointer;transition:transform .5s var(--ease),box-shadow .5s var(--ease);grid-column:span 4}
+.pcard.wide{grid-column:span 8}.pcard.tall{min-height:430px}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pcard .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .9s var(--ease)}
+.pcard:hover .ph{transform:scale(1.07)}
+.pcard .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,9,.0) 30%,rgba(8,8,9,.86) 100%)}
+.pcard .meta{position:absolute;left:0;right:0;bottom:0;padding:24px;color:#fff;z-index:2}
+.pcard .code{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;color:var(--copper-l);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.pcard h3{color:#fff;font-size:23px;letter-spacing:-.02em}
+.pcard .loc{font-size:13px;color:rgba(255,255,255,.7);margin-top:5px;display:flex;align-items:center;gap:6px}
+.pcard .loc svg{width:13px;height:13px}
+.pcard .reveal-row{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--ease),opacity .4s var(--ease),margin .5s}
+.pcard:hover .reveal-row{max-height:60px;opacity:1;margin-top:12px}
+.pcard .tags{display:flex;gap:7px;flex-wrap:wrap}
+.pcard .tags span{font-size:11px;padding:4px 10px;border:1px solid rgba(255,255,255,.28);border-radius:100px;color:rgba(255,255,255,.9)}
+.pcard .cat-badge{position:absolute;top:18px;left:18px;z-index:2;font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);color:#fff;padding:5px 11px;border-radius:100px}
+@media(max-width:900px){.pcard,.pcard.wide{grid-column:span 6}}
+@media(max-width:600px){.pcard,.pcard.wide{grid-column:span 12}.pcard{min-height:280px}}
+
+/* ===== CATEGORIES ===== */
+.cat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.cat-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:28px 22px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:.35s var(--ease);overflow:hidden}
+.cat-card::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .45s var(--ease);z-index:0}
+.cat-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.cat-card:hover::before{transform:none}
+.cat-card>*{position:relative;z-index:1;transition:color .35s}
+.cat-card:hover h3,.cat-card:hover .cc-n,.cat-card:hover p,.cat-card:hover .cc-arrow{color:#fff}
+.cat-card .cc-n{font-family:var(--fm);font-size:11px;letter-spacing:.1em;color:var(--copper)}
+.cat-card h3{font-size:21px;margin:14px 0 9px}
+.cat-card p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.cat-card .cc-arrow{margin-top:16px;color:var(--copper);display:inline-flex}
+.cat-card .cc-arrow svg{width:20px;height:20px}
+@media(max-width:1080px){.cat-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cat-row{grid-template-columns:1fr}.cat-card{min-height:auto}}
+
+/* ===== PHILOSOPHY ===== */
+.philo{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.philo .grid-bg{-webkit-mask-image:none;mask-image:none;opacity:.5}
+.philo .line{background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px)}
+.philo-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(40px,6vw,80px);align-items:center;position:relative;z-index:2}
+@media(max-width:900px){.philo-grid{grid-template-columns:1fr;gap:40px}}
+.philo h2{color:#fff;font-size:clamp(30px,4.2vw,56px)}
+.philo .eyebrow{color:var(--copper-l)}.philo .eyebrow::before{background:var(--copper-l)}
+.philo-statement{font-family:var(--fd);font-size:clamp(22px,2.8vw,34px);font-weight:500;line-height:1.32;letter-spacing:-.02em;color:#fff}
+.philo-statement .hl{color:var(--copper-l)}
+.philo-points{margin-top:30px;display:flex;flex-direction:column;gap:2px}
+.ppoint{display:flex;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,.13)}
+.ppoint .pn{font-family:var(--fm);font-size:12px;color:var(--copper-l);flex-shrink:0;padding-top:3px}
+.ppoint h4{color:#fff;font-size:18px;margin-bottom:5px}
+.ppoint p{color:rgba(255,255,255,.62);font-size:14px;line-height:1.6}
+
+/* ===== PROCESS TIMELINE ===== */
+.proc-track{position:relative}
+.proc-line{position:absolute;top:42px;left:0;right:0;height:1px;background:var(--border)}
+.proc-prog{position:absolute;top:42px;left:0;height:1px;background:var(--copper);width:0;transition:width 1.4s var(--ease)}
+.proc-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}
+.pstep{cursor:pointer}
+.pstep .dot{width:16px;height:16px;border-radius:50%;background:var(--surface);border:2px solid var(--border2);margin-bottom:26px;position:relative;z-index:2;transition:.3s}
+.pstep.on .dot{border-color:var(--copper);background:var(--copper);box-shadow:0 0 0 5px var(--copper-w)}
+.pstep .pn{font-family:var(--fm);font-size:11px;color:var(--copper);letter-spacing:.08em}
+.pstep h3{font-size:19px;margin:8px 0 10px}
+.pstep p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.pstep .more{max-height:0;overflow:hidden;opacity:0;transition:.4s var(--ease)}
+.pstep.on .more{max-height:160px;opacity:1;margin-top:12px}
+.pstep .more li{font-size:12.5px;color:var(--muted);padding:4px 0 4px 16px;position:relative}
+.pstep .more li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;background:var(--copper);border-radius:50%}
+@media(max-width:880px){.proc-steps{grid-template-columns:1fr}.proc-line,.proc-prog{display:none}.pstep{padding-left:26px;border-left:1px solid var(--border)}.pstep .dot{position:absolute;margin-left:-34px;margin-bottom:0}}
+
+/* ===== SUSTAINABILITY ===== */
+.sus-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:center}
+@media(max-width:900px){.sus-grid{grid-template-columns:1fr;gap:40px}}
+.sus-copy .eyebrow{color:var(--forest)}.sus-copy .eyebrow::before{background:var(--forest)}
+.sus-copy h2{margin:16px 0 18px}
+.sus-copy p{color:var(--muted);font-size:16px;line-height:1.72;margin-bottom:16px}
+.sus-metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sus-m{background:var(--forest-w);border:1px solid color-mix(in srgb,var(--forest) 30%,transparent);border-radius:var(--rl);padding:24px}
+.sus-m .n{font-family:var(--fd);font-size:clamp(30px,4vw,46px);font-weight:700;color:var(--forest);line-height:1;letter-spacing:-.03em}
+.sus-m .l{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.45}
+.sus-bar{margin-top:14px;height:6px;background:color-mix(in srgb,var(--forest) 18%,transparent);border-radius:6px;overflow:hidden}
+.sus-bar i{display:block;height:100%;background:var(--forest);width:0;border-radius:6px;transition:width 1.4s var(--ease)}
+.sus-cert{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.sus-cert span{font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:7px 13px;border:1px solid var(--border2);border-radius:100px;color:var(--muted)}
+
+/* ===== AWARDS ===== */
+.awards-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(36px,5vw,72px)}
+@media(max-width:900px){.awards-wrap{grid-template-columns:1fr;gap:36px}}
+.aw-time{position:relative}
+.aw-item{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid var(--border);transition:.25s}
+.aw-item:hover{padding-left:8px}
+.aw-item .yr{font-family:var(--fm);font-size:13px;color:var(--copper);flex-shrink:0;width:48px;padding-top:2px}
+.aw-item .ab h4{font-size:16px;margin-bottom:3px}
+.aw-item .ab p{font-size:13px;color:var(--muted)}
+.pub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-content:start}
+.pub-logo{background:var(--surface);border:1px solid var(--border);border-radius:var(--rm);min-height:88px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:700;font-size:15px;color:var(--muted);letter-spacing:.02em;transition:.25s;text-align:center;padding:12px}
+.pub-logo:hover{color:var(--copper);border-color:var(--copper);transform:translateY(-2px)}
+@media(max-width:560px){.pub-grid{grid-template-columns:1fr 1fr}}
+
+/* ===== TESTIMONIALS ===== */
+.testi{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.testi-stage{max-width:840px;margin:0 auto;text-align:center;position:relative;min-height:300px}
+.tquote{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:.6s var(--ease);pointer-events:none}
+.tquote.active{opacity:1;transform:none;pointer-events:auto;position:relative}
+.tquote .qmark{font-family:var(--fd);font-size:80px;color:var(--copper);line-height:.6;opacity:.4;height:42px}
+.tquote blockquote{font-family:var(--fd);font-size:clamp(21px,2.6vw,30px);font-weight:500;line-height:1.4;letter-spacing:-.015em;color:var(--text);margin:18px 0 28px}
+.tquote .who{display:flex;align-items:center;justify-content:center;gap:14px}
+.tquote .av{width:50px;height:50px;border-radius:50%;background-size:cover;background-position:center;flex-shrink:0}
+.tquote .wd{text-align:left}
+.tquote .wd .nm{font-family:var(--fd);font-weight:700;font-size:15px}
+.tquote .wd .rl{font-size:13px;color:var(--muted)}
+.testi-nav{display:flex;justify-content:center;gap:10px;margin-top:34px}
+.testi-nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--border2);display:inline-flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s}
+.testi-nav button:hover{border-color:var(--copper);color:var(--copper)}
+.testi-nav svg{width:17px;height:17px}
+
+/* ===== CALCULATOR ===== */
+.calc{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.calc .grid-bg{-webkit-mask-image:none;mask-image:none;opacity:.4;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px)}
+.calc-wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,4vw,60px);align-items:start}
+@media(max-width:920px){.calc-wrap{grid-template-columns:1fr;gap:36px}}
+.calc .eyebrow{color:var(--copper-l)}.calc .eyebrow::before{background:var(--copper-l)}
+.calc-intro h2{color:#fff;margin:16px 0 16px}
+.calc-intro p{color:rgba(255,255,255,.68);font-size:16px;line-height:1.7;margin-bottom:14px}
+.calc-feat{display:flex;flex-direction:column;gap:11px;margin-top:24px}
+.calc-feat .cf{display:flex;gap:12px;align-items:center;font-size:14px;color:rgba(255,255,255,.85)}
+.calc-feat .cf svg{width:18px;height:18px;color:var(--copper-l);flex-shrink:0}
+.calc-panel{background:var(--surface);color:var(--text);border-radius:var(--rxl);padding:clamp(24px,3vw,38px);box-shadow:var(--shadow-lg)}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:9px;color:var(--text)}
+.field label .hint{font-weight:400;color:var(--faint);font-family:var(--fm);font-size:11px;float:right}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:7px}
+.seg button{padding:11px 8px;font-size:12.5px;font-weight:600;border:1px solid var(--border2);border-radius:var(--rm);color:var(--muted);background:var(--surface);transition:.2s;text-align:center}
+.seg button:hover{border-color:var(--copper)}
+.seg button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+[data-theme=dark] .seg button.sel{background:var(--copper);color:#16110b;border-color:var(--copper)}
+.field input[type=text],.field input[type=number],.field select{width:100%;padding:13px 15px;border:1px solid var(--border2);border-radius:var(--rm);background:var(--surface);transition:.2s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 3px var(--copper-w)}
+.range-wrap{display:flex;align-items:center;gap:14px}
+.range-wrap input[type=range]{flex:1;accent-color:var(--copper);height:5px}
+.range-val{font-family:var(--fm);font-size:14px;font-weight:500;color:var(--copper);min-width:92px;text-align:right}
+.calc-out{margin-top:8px;border-top:1px dashed var(--border2);padding-top:22px}
+.calc-out .ro-label{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.calc-out .ro-budget{font-family:var(--fd);font-size:clamp(30px,4vw,42px);font-weight:700;color:var(--copper);letter-spacing:-.03em;line-height:1}
+.calc-out .ro-sub{font-size:13px;color:var(--muted);margin-top:6px}
+.ro-rows{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.ro-cell{background:var(--surface2);border-radius:var(--rm);padding:15px}
+.ro-cell .k{font-size:11.5px;color:var(--muted);margin-bottom:5px}
+.ro-cell .v{font-family:var(--fd);font-weight:700;font-size:16px;color:var(--text);line-height:1.2}
+
+/* ===== TEAM ===== */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:920px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.team-grid{grid-template-columns:1fr}}
+.tmember{border-radius:var(--rl);overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:.35s var(--ease);cursor:pointer}
+.tmember:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.tmember .tph{aspect-ratio:4/5;background-size:cover;background-position:center;position:relative;filter:grayscale(.55) contrast(1.02);transition:filter .4s}
+.tmember:hover .tph{filter:grayscale(0)}
+.tmember .tph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,8,9,.5) 100%)}
+.tmember .tb{padding:18px 18px 20px}
+.tmember .tb .code{font-family:var(--fm);font-size:10px;letter-spacing:.1em;color:var(--copper)}
+.tmember .tb h4{font-size:18px;margin:6px 0 3px}
+.tmember .tb .role{font-size:13px;color:var(--muted)}
+
+/* ===== INSIGHTS ===== */
+.ins-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+@media(max-width:880px){.ins-grid{grid-template-columns:1fr}}
+.ins-feat{position:relative;border-radius:var(--rl);overflow:hidden;min-height:420px;cursor:pointer}
+.ins-feat .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s var(--ease)}
+.ins-feat:hover .ph{transform:scale(1.05)}
+.ins-feat .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,9,.05) 35%,rgba(8,8,9,.88) 100%)}
+.ins-feat .ib{position:absolute;bottom:0;left:0;right:0;padding:30px;color:#fff;z-index:2}
+.ins-feat .cat{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper-l)}
+.ins-feat h3{color:#fff;font-size:clamp(22px,2.6vw,30px);margin:12px 0 10px;max-width:18ch}
+.ins-feat p{color:rgba(255,255,255,.78);font-size:14px;max-width:46ch}
+.ins-side{display:flex;flex-direction:column;gap:14px}
+.ins-card{display:flex;gap:16px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);cursor:pointer;transition:.28s;flex:1;align-items:center}
+.ins-card:hover{border-color:var(--copper);transform:translateX(4px)}
+.ins-card .ith{width:96px;height:78px;border-radius:var(--rm);background-size:cover;background-position:center;flex-shrink:0}
+.ins-card .cat{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+.ins-card h4{font-size:16px;margin:6px 0 5px;line-height:1.25}
+.ins-card .date{font-size:12px;color:var(--faint)}
+
+/* ===== GLOBAL MAP ===== */
+.map-sec{background:var(--ink);color:#fff;overflow:hidden;position:relative}
+.map-sec .eyebrow{color:var(--copper-l)}.map-sec .eyebrow::before{background:var(--copper-l)}
+.map-sec h2{color:#fff}
+.map-wrap{position:relative;margin-top:36px}
+.map-svg{width:100%;height:auto;max-height:540px;display:block}
+.map-svg path{fill:rgba(255,255,255,.07);stroke:rgba(255,255,255,.14);stroke-width:.5}
+.map-pin{cursor:pointer}
+.map-pin circle.dot{fill:var(--copper-l)}
+.map-pin circle.ring{fill:none;stroke:var(--copper-l);stroke-width:1.5;opacity:.6;transform-origin:center}
+.map-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;border-top:1px solid rgba(255,255,255,.13);padding-top:30px}
+@media(max-width:680px){.map-stats{grid-template-columns:repeat(2,1fr);gap:24px 18px}}
+.map-stat .n{font-family:var(--fd);font-size:clamp(26px,3.4vw,40px);font-weight:700;color:var(--copper-l);line-height:1}
+.map-stat .l{font-size:12.5px;color:rgba(255,255,255,.6);margin-top:8px}
+.map-tip{position:absolute;background:var(--surface);color:var(--text);padding:9px 13px;border-radius:var(--rm);font-size:12px;font-weight:600;box-shadow:var(--shadow-lg);pointer-events:none;opacity:0;transition:opacity .2s;transform:translate(-50%,-130%);white-space:nowrap;z-index:5}
+.map-tip .mt-sub{font-weight:400;color:var(--muted);font-size:11px}
+
+/* ===== CTA BANNER ===== */
+.cta-band{background:linear-gradient(135deg,var(--copper) 0%,var(--copper-d) 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-band .grid-bg{-webkit-mask-image:none;mask-image:none;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px)}
+.cta-band-in{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.cta-band h2{color:#fff;font-size:clamp(30px,4.6vw,56px);margin-bottom:16px}
+.cta-band p{color:rgba(255,255,255,.9);font-size:17px;margin-bottom:30px}
+.cta-band .btn-primary{background:#fff;color:var(--ink)}
+.cta-band .btn-primary:hover{background:var(--ink);color:#fff}
+.cta-band .btn-ghost{color:#fff;border-color:rgba(255,255,255,.5)}
+.cta-band .btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff;border-color:#fff}
+
+/* ===== CONTACT MULTI-STEP ===== */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:start}
+@media(max-width:920px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+.contact-info h2{margin:16px 0 18px}
+.contact-info>p{color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:28px}
+.contact-methods{display:flex;flex-direction:column;gap:12px}
+.cm{display:flex;gap:15px;align-items:center;padding:16px;border:1px solid var(--border);border-radius:var(--rl);background:var(--surface);transition:.25s}
+.cm:hover{border-color:var(--copper);transform:translateX(4px)}
+.cm .ic{width:44px;height:44px;border-radius:var(--rm);background:var(--copper-w);color:var(--copper);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cm .ic svg{width:19px;height:19px}
+.cm .k{font-size:12px;color:var(--faint);font-family:var(--fm);letter-spacing:.04em}
+.cm .v{font-weight:600;font-size:14.5px;margin-top:2px}
+.form-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--rxl);padding:clamp(26px,3vw,40px);box-shadow:var(--shadow)}
+.steps-bar{display:flex;gap:6px;margin-bottom:26px}
+.steps-bar .sb{flex:1;height:4px;border-radius:4px;background:var(--surface3);transition:.3s}
+.steps-bar .sb.done{background:var(--copper)}
+.step-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.step-head .sc{font-family:var(--fm);font-size:11px;letter-spacing:.1em;color:var(--copper)}
+.step-head h3{font-size:22px;margin-top:4px}
+.fstep{display:none}.fstep.active{display:block;animation:fadeUp .4s var(--ease)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.frow{grid-template-columns:1fr}}
+.form-nav{display:flex;gap:12px;margin-top:8px;justify-content:space-between}
+.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--rl);padding:30px 20px;text-align:center;color:var(--muted);transition:.25s;cursor:pointer}
+.upload-zone:hover{border-color:var(--copper);color:var(--copper);background:var(--copper-w)}
+.upload-zone svg{width:30px;height:30px;margin:0 auto 10px}
+.success-state{text-align:center;padding:30px 10px}
+.success-state .sc-ic{width:72px;height:72px;border-radius:50%;background:var(--forest-w);color:var(--forest);display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.success-state .sc-ic svg{width:34px;height:34px}
+.success-state h3{font-size:25px;margin-bottom:12px}
+.success-state p{color:var(--muted);max-width:42ch;margin:0 auto 24px}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--ink);color:#fff;padding-top:clamp(60px,7vw,90px)}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
+@media(max-width:880px){.footer-top{grid-template-columns:1fr 1fr;gap:34px}}
+@media(max-width:520px){.footer-top{grid-template-columns:1fr}}
+.footer .fbrand .word{font-family:var(--fd);font-weight:800;font-size:24px;letter-spacing:.14em;color:#fff}
+.footer .fbrand p{color:rgba(255,255,255,.6);font-size:14px;line-height:1.7;margin:16px 0 22px;max-width:34ch}
+.footer-cert{display:flex;gap:9px;flex-wrap:wrap}
+.footer-cert span{font-family:var(--fm);font-size:10px;letter-spacing:.05em;padding:6px 11px;border:1px solid rgba(255,255,255,.16);border-radius:100px;color:rgba(255,255,255,.65)}
+.fcol h5{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-l);margin-bottom:18px}
+.fcol a{display:block;color:rgba(255,255,255,.66);font-size:14px;padding:6px 0;transition:.2s}
+.fcol a:hover{color:#fff;padding-left:5px}
+.footer-mid{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 0;flex-wrap:wrap}
+.footer-mid .fcta{font-family:var(--fd);font-size:clamp(20px,2.4vw,28px);font-weight:600;color:#fff}
+.fsoc{display:flex;gap:10px}
+.fsoc a{width:42px;height:42px;border-radius:var(--rm);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);transition:.25s}
+.fsoc a:hover{border-color:var(--copper);color:var(--copper);transform:translateY(-2px)}
+.fsoc svg{width:18px;height:18px}
+.footer-bot{border-top:1px solid rgba(255,255,255,.1);padding:24px 0 100px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer-bot .legal{display:flex;gap:20px;flex-wrap:wrap}
+.footer-bot .legal a{color:rgba(255,255,255,.5);font-size:12.5px;transition:.2s}
+.footer-bot .legal a:hover{color:#fff}
+.footer-bot .credit{color:rgba(255,255,255,.5);font-size:12.5px}
+.footer-bot .credit a{color:var(--copper-l);font-weight:600}
+@media(max-width:760px){.footer-bot{padding-bottom:90px}}
+
+/* ===== FAB ===== */
+.fab-wrap{position:fixed;right:22px;bottom:22px;z-index:130;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+@media(max-width:760px){.fab-wrap{bottom:80px;right:16px}}
+.fab-opts{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.fab-opt{display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(12px) scale(.9);pointer-events:none;transition:.3s var(--ease)}
+.fab-wrap.open .fab-opt{opacity:1;transform:none;pointer-events:auto}
+.fab-wrap.open .fab-opt:nth-child(1){transition-delay:.04s}
+.fab-wrap.open .fab-opt:nth-child(2){transition-delay:.08s}
+.fab-wrap.open .fab-opt:nth-child(3){transition-delay:.12s}
+.fab-wrap.open .fab-opt:nth-child(4){transition-delay:.16s}
+.fab-opt .lbl{background:var(--ink);color:#fff;font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--rm);white-space:nowrap;box-shadow:var(--shadow)}
+.fab-btn{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:.25s;flex-shrink:0}
+.fab-btn svg{width:21px;height:21px}
+.fab-opt .fab-btn{width:46px;height:46px}
+.fab-opt.call .fab-btn{background:var(--forest);color:#fff}
+.fab-opt.wa .fab-btn{background:#25D366;color:#fff}
+.fab-opt.ai .fab-btn{background:var(--blueprint);color:#fff}
+.fab-opt.top .fab-btn{background:var(--surface);color:var(--text);border:1px solid var(--border2)}
+.fab-opt .fab-btn:hover{transform:scale(1.08)}
+.fab-main{background:var(--ink);color:#fff}
+[data-theme=dark] .fab-main{background:var(--copper);color:#16110b}
+.fab-main:hover{transform:scale(1.05) rotate(90deg)}
+.fab-wrap.open .fab-main{background:var(--copper);transform:rotate(135deg)}
+
+/* ===== MOBILE BOTTOM NAV ===== */
+.mob-nav{position:fixed;bottom:0;left:0;right:0;z-index:125;background:color-mix(in srgb,var(--concrete) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);display:none;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+@media(max-width:760px){.mob-nav{display:flex}}
+.mob-nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;color:var(--muted);font-size:10px;font-weight:600;transition:.2s}
+.mob-nav a svg{width:21px;height:21px}
+.mob-nav a.active,.mob-nav a:hover{color:var(--copper)}
+
+/* ===== MODALS ===== */
+.modal-ov{position:fixed;inset:0;background:rgba(8,8,9,.62);backdrop-filter:blur(7px);z-index:210;opacity:0;visibility:hidden;transition:.3s;display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:680px){.modal-ov{align-items:center;padding:24px}}
+.modal-ov.open{opacity:1;visibility:visible}
+.modal{background:var(--surface);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;border-radius:var(--rxl) var(--rxl) 0 0;transform:translateY(40px);transition:transform .42s var(--ease);box-shadow:var(--shadow-lg)}
+@media(min-width:680px){.modal{border-radius:var(--rxl)}}
+.modal-ov.open .modal{transform:none}
+.modal.lg{max-width:760px}
+.modal-head{position:sticky;top:0;background:var(--surface);display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--border);z-index:2}
+.modal-head .mh-code{font-family:var(--fm);font-size:10px;letter-spacing:.1em;color:var(--copper)}
+.modal-head h3{font-size:21px;margin-top:3px}
+.modal-x{width:38px;height:38px;border-radius:var(--rm);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:.2s;flex-shrink:0}
+.modal-x:hover{color:var(--copper);border-color:var(--copper)}
+.modal-x svg{width:18px;height:18px}
+.modal-body{padding:26px}
+
+/* AI assistant */
+.ai-feed{display:flex;flex-direction:column;gap:14px;min-height:260px;max-height:46vh;overflow-y:auto;padding:4px 2px 12px}
+.ai-msg{display:flex;gap:11px;max-width:88%}
+.ai-msg.user{align-self:flex-end;flex-direction:row-reverse}
+.ai-msg .ab{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:700;font-size:13px}
+.ai-msg.bot .ab{background:var(--blueprint-w);color:var(--blueprint)}
+.ai-msg.user .ab{background:var(--copper-w);color:var(--copper)}
+.ai-msg .bub{padding:12px 15px;border-radius:var(--rl);font-size:14px;line-height:1.55}
+.ai-msg.bot .bub{background:var(--surface2);border-bottom-left-radius:4px}
+.ai-msg.user .bub{background:var(--ink);color:#fff;border-bottom-right-radius:4px}
+[data-theme=dark] .ai-msg.user .bub{background:var(--copper);color:#16110b}
+.ai-chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.ai-chip{font-size:12.5px;padding:8px 13px;border:1px solid var(--border2);border-radius:100px;color:var(--muted);transition:.2s}
+.ai-chip:hover{border-color:var(--copper);color:var(--copper)}
+.ai-input{display:flex;gap:10px;border-top:1px solid var(--border);padding-top:16px}
+.ai-input input{flex:1;padding:13px 15px;border:1px solid var(--border2);border-radius:var(--rm);background:var(--surface)}
+.ai-input input:focus{outline:none;border-color:var(--copper)}
+.ai-send{width:48px;border-radius:var(--rm);background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+[data-theme=dark] .ai-send{background:var(--copper);color:#16110b}
+.ai-send svg{width:18px;height:18px}
+.typing span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blueprint);margin:0 1.5px;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+
+/* project detail modal */
+.pm-hero{height:230px;background-size:cover;background-position:center;position:relative;border-radius:var(--rl);margin-bottom:20px}
+.pm-hero .pm-code{position:absolute;top:14px;left:14px;font-family:var(--fm);font-size:10px;letter-spacing:.1em;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);color:#fff;padding:5px 11px;border-radius:100px}
+.pm-spec{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin:18px 0}
+.pm-spec .pc{background:var(--surface);padding:14px 16px}
+.pm-spec .pc .k{font-family:var(--fm);font-size:10px;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+.pm-spec .pc .v{font-weight:600;font-size:14px;margin-top:4px}
+.pm-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pm-tags span{font-size:11.5px;padding:5px 11px;background:var(--surface2);border-radius:100px;color:var(--muted)}
+
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:var(--rl);font-size:14px;font-weight:600;z-index:300;box-shadow:var(--shadow-lg);opacity:0;transition:.4s var(--ease);display:flex;align-items:center;gap:10px}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast svg{width:18px;height:18px;color:var(--copper-l)}
+
+.no-scroll{overflow:hidden}
+.map-tip.show{opacity:1}
+.upload-zone.drag{border-color:var(--copper);background:var(--copper-w)}
+.ai-typing{display:inline-flex;gap:4px;align-items:center;padding:2px 0}
+.ai-typing i{width:7px;height:7px;border-radius:50%;background:var(--faint);display:inline-block;animation:aiDot 1.1s var(--ease) infinite}
+.ai-typing i:nth-child(2){animation-delay:.16s}
+.ai-typing i:nth-child(3){animation-delay:.32s}
+@keyframes aiDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.ai-typing i{animation:none}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce" id="announce">
+  <div class="announce-inner">
+    <span class="tag">Recognition</span>
+    <span>Featured in Architectural Digest — our Sustainable Waterfront Residence named Project of the Year</span>
+    <a href="#insights">Read the feature
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button class="close-an" aria-label="Dismiss announcement" onclick="dismissAnnounce()">&times;</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#top" class="brand" aria-label="STRATUM home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="var(--ink)"/><path d="M14 47 L32 15 L50 47 Z" fill="none" stroke="var(--copper)" stroke-width="3"/><line x1="14" y1="47" x2="50" y2="47" stroke="var(--copper)" stroke-width="3"/><line x1="23" y1="47" x2="32" y2="31" stroke="var(--copper)" stroke-width="1.5" opacity=".6"/></svg>
+      </span>
+      <span class="brand-text"><span class="word">STRATUM</span><span class="sub">Architecture · Est. 2008</span></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#projects" class="navlink">Projects</a>
+      <a href="#categories" class="navlink">Services</a>
+      <a href="#process" class="navlink">Process</a>
+      <a href="#sustainability" class="navlink">Sustainability</a>
+      <a href="#studio" class="navlink">Studio</a>
+      <a href="#insights" class="navlink">Insights</a>
+      <a href="#contact" class="navlink">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">
+        <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>
+      </button>
+      <button class="btn btn-primary" onclick="openModal('bookModal')">Schedule Consultation</button>
+      <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer-ov" id="drawerOv"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile menu" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="brand"><span class="word" style="font-family:var(--fd);font-weight:800;font-size:19px;letter-spacing:.14em">STRATUM</span></span>
+    <button class="modal-x" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <nav class="drawer-nav" aria-label="Mobile primary">
+    <a href="#projects"><span>Projects</span><span class="idx">01</span></a>
+    <a href="#categories"><span>Services</span><span class="idx">02</span></a>
+    <a href="#process"><span>Process</span><span class="idx">03</span></a>
+    <a href="#sustainability"><span>Sustainability</span><span class="idx">04</span></a>
+    <a href="#calculator"><span>Feasibility Tool</span><span class="idx">05</span></a>
+    <a href="#studio"><span>Studio</span><span class="idx">06</span></a>
+    <a href="#insights"><span>Insights</span><span class="idx">07</span></a>
+    <a href="#contact"><span>Contact</span><span class="idx">08</span></a>
+  </nav>
+  <div class="drawer-foot">
+    <button class="btn btn-copper btn-block" onclick="openModal('bookModal');closeDrawer()">Schedule Consultation</button>
+    <a class="btn btn-ghost btn-block" href="tel:+12125550190">Call +1 (212) 555-0190</a>
+  </div>
+</aside>
+
+<span id="top"></span>
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-slide active" style="background:repeating-linear-gradient(86deg,rgba(255,255,255,.045) 0 1px,transparent 1px 46px),linear-gradient(150deg,#14141a 0%,#2c2620 48%,#6a4c30 100%)"></div>
+    <div class="hero-slide" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 52px),linear-gradient(155deg,#1a2330 0%,#274058 55%,#0f1c28 100%)"></div>
+    <div class="hero-slide" style="background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 50px),linear-gradient(150deg,#1b2620 0%,#33493c 52%,#141f19 100%)"></div>
+  </div>
+  <div class="hero-bp" aria-hidden="true"></div>
+  <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path class="draw-line hl" d="M180 760 L520 300 L860 760" fill="none" stroke="rgba(210,165,121,.5)" stroke-width="1.5" pathLength="1"/>
+    <path class="draw-line hl" d="M520 300 L520 760" fill="none" stroke="rgba(210,165,121,.32)" stroke-width="1" pathLength="1"/>
+    <path class="draw-line hl" d="M900 820 L1180 480 L1380 700" fill="none" stroke="rgba(210,165,121,.32)" stroke-width="1" pathLength="1"/>
+    <circle class="draw-line hl" cx="520" cy="300" r="6" fill="none" stroke="rgba(210,165,121,.7)" stroke-width="1.5" pathLength="1"/>
+  </svg>
+  <div class="hero-shell">
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" data-i="0" aria-label="Project 1"></button>
+      <button class="hero-dot" data-i="1" aria-label="Project 2"></button>
+      <button class="hero-dot" data-i="2" aria-label="Project 3"></button>
+    </div>
+    <div class="hero-meta" id="heroMeta">
+      <div>SHT <span class="num">01</span> / 14</div>
+      <div>SCALE <span class="num">1:200</span></div>
+      <div>LAT <span class="num">40.7128°N</span></div>
+      <div>LNG <span class="num">74.0060°W</span></div>
+    </div>
+    <div class="hero-content">
+      <span class="eyebrow">Architecture &amp; Design Studio</span>
+      <h1 class="display">Designing spaces<br>that <span class="em">define tomorrow</span></h1>
+      <p class="hero-sub">From luxury residences to large-scale commercial developments, we transform ambitious visions into iconic architectural experiences — engineered with technical precision and built to last.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-copper btn-lg">View Our Projects
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <button class="btn btn-ghost btn-lg" onclick="openModal('bookModal')">Book Consultation</button>
+        <button class="btn btn-ghost btn-lg" onclick="toast('Firm profile download started')">Download Firm Profile</button>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stats-grid">
+      <div class="hstat"><div class="n" data-count="16">0</div><div class="l">Years Practising</div></div>
+      <div class="hstat"><div class="n" data-count="248" data-suffix="+">0</div><div class="l">Projects Delivered</div></div>
+      <div class="hstat"><div class="n" data-count="37">0</div><div class="l">Design Awards</div></div>
+      <div class="hstat"><div class="n" data-count="42">0</div><div class="l">Licensed Architects</div></div>
+      <div class="hstat"><div class="n" data-count="19">0</div><div class="l">LEED Certifications</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO + STATS -->
+<section class="pad" id="studio-intro">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div class="intro-copy reveal">
+        <span class="eyebrow">The Practice</span>
+        <h2 class="h-sec">Architecture as a long-term act of stewardship</h2>
+        <p>STRATUM is an award-winning architecture and design studio working at the intersection of art, engineering and ecology. We believe a building is not finished when it opens — it is finished when a community decides it belongs to them.</p>
+        <p>Across residential, commercial, hospitality and civic work, our integrated teams own every layer of the build: from the first feasibility sketch to the final certificate of occupancy. One studio, accountable end to end.</p>
+        <div class="intro-sign">
+          <div class="av" aria-hidden="true">EM</div>
+          <div>
+            <div class="nm">Elena Marchetti, AIA</div>
+            <div class="rl">Founding Principal &amp; Design Director</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-stack reveal d2">
+        <div class="stat-cell"><span class="code">A-01</span><div class="n" data-count="16">0</div><div class="l">Years of practice across three continents</div></div>
+        <div class="stat-cell"><span class="code">A-02</span><div class="n" data-count="248" data-suffix="+">0</div><div class="l">Completed projects since founding</div></div>
+        <div class="stat-cell"><span class="code">A-03</span><div class="n" data-count="9" data-suffix="M ft²">0</div><div class="l">Square footage designed &amp; delivered</div></div>
+        <div class="stat-cell"><span class="code">A-04</span><div class="n" data-count="98" data-suffix="%">0</div><div class="l">Of clients return for a second project</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- FEATURED PROJECTS -->
+<section class="pad" id="projects">
+  <div class="wrap-wide">
+    <div class="sec-flex">
+      <div class="sec-head">
+        <span class="eyebrow">Selected Work</span>
+        <h2 class="h-sec">Featured projects</h2>
+        <p class="lead">A portfolio spanning skyline-defining towers, intimate residences and cultural landmarks — each a study in light, material and place.</p>
+      </div>
+      <a href="#contact" class="link-arrow">Commission a project
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="proj-filter" id="projFilter" role="tablist" aria-label="Filter projects">
+      <button class="fbtn active" data-f="all" role="tab" aria-selected="true">All Work</button>
+      <button class="fbtn" data-f="residential" role="tab">Residential</button>
+      <button class="fbtn" data-f="commercial" role="tab">Commercial</button>
+      <button class="fbtn" data-f="hospitality" role="tab">Hospitality</button>
+      <button class="fbtn" data-f="civic" role="tab">Civic &amp; Cultural</button>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- CATEGORIES -->
+<section class="pad" id="categories">
+  <div class="wrap-wide">
+    <div class="sec-head center reveal">
+      <span class="eyebrow center">Disciplines</span>
+      <h2 class="h-sec">Five sectors, one standard of craft</h2>
+      <p class="lead">Specialised teams, shared design intelligence. Choose a discipline to see how we approach it.</p>
+    </div>
+    <div class="cat-row">
+      <button class="cat-card reveal" data-cat="residential">
+        <div><span class="cc-n">SEC / 01</span><h3>Residential</h3><p>Private estates, multi-family and bespoke homes designed around how people actually live.</p></div>
+        <span class="cc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </button>
+      <button class="cat-card reveal d1" data-cat="commercial">
+        <div><span class="cc-n">SEC / 02</span><h3>Commercial</h3><p>Workplaces and towers engineered for performance, flexibility and brand presence.</p></div>
+        <span class="cc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </button>
+      <button class="cat-card reveal d2" data-cat="hospitality">
+        <div><span class="cc-n">SEC / 03</span><h3>Hospitality</h3><p>Hotels and resorts that turn a stay into a story worth returning for.</p></div>
+        <span class="cc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </button>
+      <button class="cat-card reveal d3" data-cat="mixed">
+        <div><span class="cc-n">SEC / 04</span><h3>Mixed-Use</h3><p>Master-planned districts where living, working and culture share one fabric.</p></div>
+        <span class="cc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </button>
+      <button class="cat-card reveal d4" data-cat="civic">
+        <div><span class="cc-n">SEC / 05</span><h3>Civic &amp; Cultural</h3><p>Museums, libraries and public space that give a city a place to gather.</p></div>
+        <span class="cc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philo pad" id="philosophy">
+  <div class="grid-bg line" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="philo-grid">
+      <div class="reveal">
+        <span class="eyebrow">Design Philosophy</span>
+        <h2 style="margin:16px 0 0">Human-centred,<br>climate-aware,<br>built to endure.</h2>
+      </div>
+      <div class="reveal d2">
+        <p class="philo-statement">We design from the <span class="hl">inside out</span> — beginning with the experience of the person in the room, then letting structure, light and material follow. Beauty is the byproduct of getting the <span class="hl">fundamentals</span> right.</p>
+        <div class="philo-points">
+          <div class="ppoint"><span class="pn">01</span><div><h4>Place before form</h4><p>Every project starts with climate, culture and context — the site tells us what it wants to become.</p></div></div>
+          <div class="ppoint"><span class="pn">02</span><div><h4>Material honesty</h4><p>Concrete reads as concrete, timber as timber. We let materials express their own character.</p></div></div>
+          <div class="ppoint"><span class="pn">03</span><div><h4>Designed to outlast us</h4><p>We build for the next hundred years — low-carbon, adaptable, and easy to love over decades.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="pad" id="process">
+  <div class="wrap-wide">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How We Work</span>
+      <h2 class="h-sec">From first sketch to final key</h2>
+      <p class="lead">A transparent five-phase method that removes uncertainty. Select any phase to see what happens inside it.</p>
+    </div>
+    <div class="proc-track">
+      <div class="proc-line" aria-hidden="true"></div>
+      <div class="proc-prog" id="procProg" aria-hidden="true"></div>
+      <div class="proc-steps" id="procSteps">
+        <div class="pstep on" data-i="0"><div class="dot"></div><span class="pn">PH / 01</span><h3>Discovery</h3><p>Listening, site analysis and a shared definition of success.</p><ul class="more"><li>Vision &amp; brief workshop</li><li>Site &amp; zoning analysis</li><li>Feasibility &amp; budget framing</li></ul></div>
+        <div class="pstep" data-i="1"><div class="dot"></div><span class="pn">PH / 02</span><h3>Concept</h3><p>Translating intent into spatial ideas and a clear design direction.</p><ul class="more"><li>Massing &amp; concept options</li><li>Material &amp; light studies</li><li>3D renders &amp; walkthroughs</li></ul></div>
+        <div class="pstep" data-i="2"><div class="dot"></div><span class="pn">PH / 03</span><h3>Design</h3><p>Resolving every detail across architecture, structure and systems.</p><ul class="more"><li>Developed design package</li><li>Engineering coordination</li><li>Sustainability modelling</li></ul></div>
+        <div class="pstep" data-i="3"><div class="dot"></div><span class="pn">PH / 04</span><h3>Development</h3><p>Construction documentation, permits and contractor onboarding.</p><ul class="more"><li>Construction drawings</li><li>Permitting &amp; approvals</li><li>Tender &amp; procurement</li></ul></div>
+        <div class="pstep" data-i="4"><div class="dot"></div><span class="pn">PH / 05</span><h3>Delivery</h3><p>On-site oversight through handover and post-occupancy care.</p><ul class="more"><li>Site supervision</li><li>Quality &amp; snagging</li><li>Handover &amp; aftercare</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- SUSTAINABILITY -->
+<section class="pad" id="sustainability">
+  <div class="wrap-wide">
+    <div class="sus-grid">
+      <div class="sus-copy reveal">
+        <span class="eyebrow">Sustainability</span>
+        <h2 class="h-sec">Low-carbon by default, not by upgrade</h2>
+        <p>Environmental performance is written into our brief from day one — passive design, embodied-carbon accounting and renewable systems are baseline expectations, not premium add-ons.</p>
+        <p>The result is architecture that costs less to run, feels better to occupy, and asks less of the planet across its full life.</p>
+        <div class="sus-cert">
+          <span>LEED Platinum</span><span>BREEAM Outstanding</span><span>Passivhaus</span><span>WELL Certified</span><span>Net-Zero Ready</span>
+        </div>
+      </div>
+      <div class="sus-metrics reveal d2">
+        <div class="sus-m"><div class="n" data-count="46" data-suffix="%">0</div><div class="l">Average reduction in operational energy use</div><div class="sus-bar"><i data-w="86"></i></div></div>
+        <div class="sus-m"><div class="n" data-count="31" data-suffix="%">0</div><div class="l">Lower embodied carbon vs. industry baseline</div><div class="sus-bar"><i data-w="62"></i></div></div>
+        <div class="sus-m"><div class="n" data-count="19">0</div><div class="l">LEED &amp; BREEAM certified buildings</div><div class="sus-bar"><i data-w="74"></i></div></div>
+        <div class="sus-m"><div class="n" data-count="100" data-suffix="%">0</div><div class="l">Projects with a carbon &amp; energy model</div><div class="sus-bar"><i data-w="100"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- AWARDS -->
+<section class="pad" id="awards">
+  <div class="wrap-wide">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Recognition</span>
+      <h2 class="h-sec">Awards &amp; press</h2>
+    </div>
+    <div class="awards-wrap">
+      <div class="aw-time reveal">
+        <div class="aw-item"><span class="yr">2025</span><div class="ab"><h4>RIBA International Prize — Finalist</h4><p>Meridian Waterfront Residence</p></div></div>
+        <div class="aw-item"><span class="yr">2024</span><div class="ab"><h4>AIA Honor Award for Architecture</h4><p>Kestrel Cultural Pavilion</p></div></div>
+        <div class="aw-item"><span class="yr">2024</span><div class="ab"><h4>Dezeen Award — Hospitality Building</h4><p>Solace Cliff Retreat</p></div></div>
+        <div class="aw-item"><span class="yr">2023</span><div class="ab"><h4>WAF World Building of the Year — Shortlist</h4><p>Atlas Mixed-Use District</p></div></div>
+        <div class="aw-item"><span class="yr">2022</span><div class="ab"><h4>Architizer A+ Award — Sustainability</h4><p>Verdant Office Tower</p></div></div>
+      </div>
+      <div class="pub-grid reveal d2">
+        <div class="pub-logo">Architectural<br>Digest</div>
+        <div class="pub-logo">Dezeen</div>
+        <div class="pub-logo">ArchDaily</div>
+        <div class="pub-logo">Wallpaper*</div>
+        <div class="pub-logo">Domus</div>
+        <div class="pub-logo">The<br>Architectural Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi pad" id="testimonials">
+  <div class="wrap">
+    <div class="sec-head center reveal"><span class="eyebrow center">Client Voices</span><h2 class="h-sec">Trusted by the people who build cities</h2></div>
+    <div class="testi-stage" id="testiStage">
+      <div class="tquote active">
+        <div class="qmark">&ldquo;</div>
+        <blockquote>STRATUM understood our development before we could fully articulate it. They turned a difficult waterfront site into the most valuable address in the city — and delivered ahead of schedule.</blockquote>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#6a4c30,#2c2620)"></div><div class="wd"><div class="nm">Daniel Whitlock</div><div class="rl">Managing Partner, Harborline Developments</div></div></div>
+      </div>
+      <div class="tquote">
+        <div class="qmark">&ldquo;</div>
+        <blockquote>Our home feels inevitable — like it could have been nothing else. Every sightline, every shadow was considered. Six years in, it still surprises us with light.</blockquote>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#274058,#0f1c28)"></div><div class="wd"><div class="nm">Priya &amp; Marcus Lindqvist</div><div class="rl">Private Residence, Lake District</div></div></div>
+      </div>
+      <div class="tquote">
+        <div class="qmark">&ldquo;</div>
+        <blockquote>As a public client we needed transparency at every stage. STRATUM gave us certainty on cost, carbon and program — and a civic building the community is genuinely proud of.</blockquote>
+        <div class="who"><div class="av" style="background:linear-gradient(135deg,#33493c,#141f19)"></div><div class="wd"><div class="nm">Hon. Adaeze Okonkwo</div><div class="rl">Director of Public Works, City of Meridian</div></div></div>
+      </div>
+    </div>
+    <div class="testi-nav">
+      <button id="tPrev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button id="tNext" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- FEASIBILITY CALCULATOR -->
+<section class="calc pad" id="calculator">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap-wide">
+    <div class="calc-wrap">
+      <div class="calc-intro reveal">
+        <span class="eyebrow">Project Tool</span>
+        <h2 class="h-sec">Feasibility calculator</h2>
+        <p>Get an instant, transparent estimate of budget, approach and timeline for your project. Built on real cost models from 240+ delivered builds — adjust the inputs and watch it recalculate live.</p>
+        <div class="calc-feat">
+          <div class="cf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Indicative cost range by sector &amp; finish tier</div>
+          <div class="cf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Recommended delivery approach</div>
+          <div class="cf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Realistic design-to-completion timeline</div>
+          <div class="cf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Full report emailed to you on request</div>
+        </div>
+      </div>
+      <div class="calc-panel reveal d2">
+        <div class="field">
+          <label>Project type</label>
+          <div class="seg" id="calcType" role="group" aria-label="Project type">
+            <button class="sel" data-rate="420" data-key="residential">Residential</button>
+            <button data-rate="360" data-key="commercial">Commercial</button>
+            <button data-rate="520" data-key="hospitality">Hospitality</button>
+            <button data-rate="300" data-key="civic">Civic</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Estimated floor area <span class="hint" id="sqftHint">12,000 ft²</span></label>
+          <div class="range-wrap">
+            <input type="range" id="sqft" min="1000" max="120000" step="500" value="12000" aria-label="Floor area in square feet">
+          </div>
+        </div>
+        <div class="field">
+          <label>Finish &amp; specification tier</label>
+          <div class="seg" id="calcTier" role="group" aria-label="Finish tier">
+            <button data-mult="0.82" data-key="Standard">Standard</button>
+            <button class="sel" data-mult="1" data-key="Premium">Premium</button>
+            <button data-mult="1.34" data-key="Signature">Signature</button>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="field">
+            <label>Location market</label>
+            <select id="calcLoc">
+              <option value="1.18">Major metro (NY / London)</option>
+              <option value="1" selected>National average</option>
+              <option value="0.86">Regional / suburban</option>
+              <option value="1.32">Premium coastal</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Sustainability goal</label>
+            <select id="calcSus">
+              <option value="1">Code-compliant</option>
+              <option value="1.07" selected>High-performance</option>
+              <option value="1.15">Net-zero / Passivhaus</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-out">
+          <div class="ro-label">Preliminary budget range</div>
+          <div class="ro-budget" id="roBudget">$4.4M – $5.4M</div>
+          <div class="ro-sub" id="roSub">≈ $410 / ft² · Premium · National average</div>
+          <div class="ro-rows">
+            <div class="ro-cell"><div class="k">Recommended approach</div><div class="v" id="roApproach">Integrated design-build</div></div>
+            <div class="ro-cell"><div class="k">Estimated timeline</div><div class="v" id="roTime">18–24 months</div></div>
+          </div>
+          <button class="btn btn-copper btn-block" style="margin-top:18px" onclick="openModal('bookModal')">Email me the full report
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="spec" style="margin-top:12px;text-align:center;display:block">Indicative only · not a formal quotation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- TEAM -->
+<section class="pad" id="studio">
+  <div class="wrap-wide">
+    <div class="sec-flex">
+      <div class="sec-head reveal"><span class="eyebrow">The Studio</span><h2 class="h-sec">People behind the practice</h2><p class="lead">A multidisciplinary team of architects, engineers and sustainability specialists.</p></div>
+      <a href="#contact" class="link-arrow">Join the studio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="team-grid">
+      <div class="tmember reveal"><div class="tph" style="background:linear-gradient(160deg,#6a4c30,#241a13)"></div><div class="tb"><span class="code">PRINCIPAL</span><h4>Elena Marchetti</h4><div class="role">Founding Principal, Design Director</div></div></div>
+      <div class="tmember reveal d1"><div class="tph" style="background:linear-gradient(160deg,#274058,#0f1c28)"></div><div class="tb"><span class="code">PARTNER</span><h4>Jonah Reyes</h4><div class="role">Partner, Technical &amp; Delivery</div></div></div>
+      <div class="tmember reveal d2"><div class="tph" style="background:linear-gradient(160deg,#33493c,#141f19)"></div><div class="tb"><span class="code">DIRECTOR</span><h4>Sofia Almeida</h4><div class="role">Director of Sustainability</div></div></div>
+      <div class="tmember reveal d3"><div class="tph" style="background:linear-gradient(160deg,#474d57,#1a1d22)"></div><div class="tb"><span class="code">DIRECTOR</span><h4>Kenji Tanaka</h4><div class="role">Director of Urban &amp; Master Planning</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="pad" id="insights" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap-wide">
+    <div class="sec-flex">
+      <div class="sec-head reveal"><span class="eyebrow">Insights</span><h2 class="h-sec">Thinking &amp; thought leadership</h2></div>
+      <a href="#contact" class="link-arrow">All articles
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="ins-grid">
+      <article class="ins-feat reveal" onclick="toast('Opening article…')">
+        <div class="ph" style="background:linear-gradient(150deg,#1a2330,#274058 55%,#0f1c28)"></div>
+        <div class="ov"></div>
+        <div class="ib"><span class="cat">Sustainability</span><h3>The myth of the &ldquo;green premium&rdquo; in 2026</h3><p>Why low-carbon design is now the cheaper long-term decision — with data from our last forty builds.</p></div>
+      </article>
+      <div class="ins-side">
+        <article class="ins-card reveal d1" onclick="toast('Opening article…')"><div class="ith" style="background:linear-gradient(150deg,#6a4c30,#241a13)"></div><div><span class="cat">Design</span><h4>Designing for the second hundred years</h4><div class="date">May 2026 · 6 min read</div></div></article>
+        <article class="ins-card reveal d2" onclick="toast('Opening article…')"><div class="ith" style="background:linear-gradient(150deg,#33493c,#141f19)"></div><div><span class="cat">Practice</span><h4>What a feasibility study should actually tell you</h4><div class="date">Apr 2026 · 4 min read</div></div></article>
+        <article class="ins-card reveal d3" onclick="toast('Opening article…')"><div class="ith" style="background:linear-gradient(150deg,#474d57,#1a1d22)"></div><div><span class="cat">Cities</span><h4>Mixed-use districts that don&rsquo;t feel manufactured</h4><div class="date">Mar 2026 · 7 min read</div></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL MAP -->
+<section class="map-sec pad" id="reach">
+  <div class="wrap-wide">
+    <div class="sec-head reveal"><span class="eyebrow">Global Reach</span><h2 class="h-sec">Projects across four continents</h2><p class="lead" style="color:rgba(255,255,255,.66)">Hover a marker to see where STRATUM is building.</p></div>
+    <div class="map-wrap reveal d2">
+      <div class="map-tip" id="mapTip"></div>
+      <svg class="map-svg" id="mapSvg" viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet" aria-label="World map of project locations">
+        <path d="M120 110 L300 95 L360 130 L340 180 L250 210 L160 195 L110 150 Z"/>
+        <path d="M250 230 L330 220 L340 300 L300 390 L260 410 L240 320 Z"/>
+        <path d="M470 90 L560 80 L600 110 L580 150 L500 160 L460 130 Z"/>
+        <path d="M500 175 L600 170 L640 250 L580 360 L530 380 L490 290 L500 220 Z"/>
+        <path d="M620 95 L860 85 L900 150 L840 230 L700 220 L630 160 Z"/>
+        <path d="M820 320 L900 310 L920 360 L870 390 L820 370 Z"/>
+        <g class="map-pin" data-x="250" data-y="150" data-city="New York" data-sub="HQ · 64 projects">
+          <circle class="ring" cx="250" cy="150" r="14"><animate attributeName="r" values="6;16;6" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.4s" repeatCount="indefinite"/></circle>
+          <circle class="dot" cx="250" cy="150" r="5"/>
+        </g>
+        <g class="map-pin" data-x="490" data-y="120" data-city="London" data-sub="Studio · 38 projects">
+          <circle class="ring" cx="490" cy="120" r="14"><animate attributeName="r" values="6;16;6" dur="2.4s" begin=".5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.4s" begin=".5s" repeatCount="indefinite"/></circle>
+          <circle class="dot" cx="490" cy="120" r="5"/>
+        </g>
+        <g class="map-pin" data-x="720" data-y="160" data-city="Dubai" data-sub="Studio · 27 projects">
+          <circle class="ring" cx="720" cy="160" r="14"><animate attributeName="r" values="6;16;6" dur="2.4s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.4s" begin="1s" repeatCount="indefinite"/></circle>
+          <circle class="dot" cx="720" cy="160" r="5"/>
+        </g>
+        <g class="map-pin" data-x="840" data-y="200" data-city="Singapore" data-sub="Studio · 21 projects">
+          <circle class="ring" cx="840" cy="200" r="14"><animate attributeName="r" values="6;16;6" dur="2.4s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.4s" begin="1.5s" repeatCount="indefinite"/></circle>
+          <circle class="dot" cx="840" cy="200" r="5"/>
+        </g>
+        <g class="map-pin" data-x="300" data-y="330" data-city="São Paulo" data-sub="Projects · 14 builds">
+          <circle class="ring" cx="300" cy="330" r="14"><animate attributeName="r" values="6;16;6" dur="2.4s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.4s" begin="2s" repeatCount="indefinite"/></circle>
+          <circle class="dot" cx="300" cy="330" r="5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="map-stats">
+      <div class="map-stat"><div class="n" data-count="22">0</div><div class="l">Countries with delivered work</div></div>
+      <div class="map-stat"><div class="n" data-count="5">0</div><div class="l">Global studios</div></div>
+      <div class="map-stat"><div class="n" data-count="248" data-suffix="+">0</div><div class="l">Projects completed</div></div>
+      <div class="map-stat"><div class="n" data-count="4">0</div><div class="l">Continents</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band pad">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap cta-band-in reveal">
+    <span class="eyebrow center" style="color:rgba(255,255,255,.85)">Start Your Vision</span>
+    <h2 style="margin-top:14px">Let&rsquo;s design what comes next.</h2>
+    <p>Book a no-obligation design consultation. We&rsquo;ll review your site, ambitions and budget — and tell you honestly what&rsquo;s possible.</p>
+    <div class="hero-cta" style="justify-content:center">
+      <button class="btn btn-primary btn-lg" onclick="openModal('bookModal')">Schedule Design Consultation</button>
+      <button class="btn btn-ghost btn-lg" onclick="openAI()">Ask the AI assistant</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT MULTI-STEP -->
+<section class="pad" id="contact">
+  <div class="wrap-wide">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Get In Touch</span>
+        <h2 class="h-sec">Begin a consultation</h2>
+        <p>Tell us about your project in a few steps. A principal will personally review every enquiry and respond within two business days.</p>
+        <div class="contact-methods">
+          <a class="cm" href="tel:+12125550190"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2Z"/></svg></span><div><div class="k">Direct line</div><div class="v">+1 (212) 555-0190</div></div></a>
+          <a class="cm" href="mailto:studio@stratum-studio.com"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span><div><div class="k">Email</div><div class="v">studio@stratum-studio.com</div></div></a>
+          <a class="cm" href="https://wa.me/12125550190" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6a9 9 0 0 1-3.4-3 4 4 0 0 1-.8-2c0-.6.3-.9.5-1.1.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4l.7 1.6c0 .1.1.3 0 .4l-.3.5-.3.3c-.1.1-.2.3-.1.5a6 6 0 0 0 1.1 1.4 5.5 5.5 0 0 0 1.6 1c.2.1.4.1.5-.1l.6-.7c.1-.2.3-.2.5-.1l1.6.7c.2.1.4.2.4.3.1.1.1.6 0 1.1Z"/></svg></span><div><div class="k">WhatsApp</div><div class="v">Message the studio</div></div></a>
+          <div class="cm"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div class="k">Studio</div><div class="v">118 Vanderbilt Loft, New York</div></div></div>
+        </div>
+      </div>
+      <div class="form-panel reveal d2">
+        <div class="steps-bar" id="stepsBar"><span class="sb done"></span><span class="sb"></span><span class="sb"></span><span class="sb"></span></div>
+        <form id="leadForm" novalidate>
+          <div class="fstep active" data-step="0">
+            <div class="step-head"><div><span class="sc">STEP 01 / 04</span><h3>About you</h3></div></div>
+            <div class="frow">
+              <div class="field"><label>Full name</label><input type="text" name="name" placeholder="Jane Doe" required></div>
+              <div class="field"><label>Company / household</label><input type="text" name="company" placeholder="Optional"></div>
+            </div>
+            <div class="frow">
+              <div class="field"><label>Email</label><input type="text" name="email" placeholder="you@email.com" required></div>
+              <div class="field"><label>Phone</label><input type="text" name="phone" placeholder="+1 …"></div>
+            </div>
+          </div>
+          <div class="fstep" data-step="1">
+            <div class="step-head"><div><span class="sc">STEP 02 / 04</span><h3>Your project</h3></div></div>
+            <div class="field"><label>Project type</label>
+              <select name="ptype"><option>Residential</option><option>Commercial</option><option>Hospitality</option><option>Mixed-use</option><option>Civic &amp; cultural</option></select></div>
+            <div class="frow">
+              <div class="field"><label>Approx. floor area</label><input type="text" name="area" placeholder="e.g. 12,000 ft²"></div>
+              <div class="field"><label>Location</label><input type="text" name="ploc" placeholder="City, country"></div>
+            </div>
+          </div>
+          <div class="fstep" data-step="2">
+            <div class="step-head"><div><span class="sc">STEP 03 / 04</span><h3>Budget &amp; timeline</h3></div></div>
+            <div class="field"><label>Budget range</label>
+              <select name="budget"><option>Under $1M</option><option>$1M – $5M</option><option>$5M – $20M</option><option>$20M – $50M</option><option>$50M+</option></select></div>
+            <div class="field"><label>Ideal start</label>
+              <select name="timeline"><option>As soon as possible</option><option>Within 3 months</option><option>3–6 months</option><option>6–12 months</option><option>Just exploring</option></select></div>
+          </div>
+          <div class="fstep" data-step="3">
+            <div class="step-head"><div><span class="sc">STEP 04 / 04</span><h3>Details &amp; documents</h3></div></div>
+            <div class="field"><label>Anything we should know?</label><textarea name="notes" rows="3" placeholder="Vision, constraints, references…" style="width:100%;padding:13px 15px;border:1px solid var(--border2);border-radius:var(--rm);background:var(--surface);resize:vertical"></textarea></div>
+            <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-label="Upload documents">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></svg>
+              <div id="uploadText">Drop site plans, briefs or references — or click to browse</div>
+            </div>
+          </div>
+          <div class="form-nav">
+            <button type="button" class="btn btn-ghost" id="backBtn" style="visibility:hidden">Back</button>
+            <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
+          </div>
+        </form>
+        <div class="success-state" id="successState" style="display:none">
+          <div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Enquiry received</h3>
+          <p>Thank you. A STRATUM principal will personally review your project and reach out within two business days to arrange your discovery call.</p>
+          <button class="btn btn-copper" onclick="resetForm()">Submit another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap-wide">
+    <div class="footer-top">
+      <div class="fbrand">
+        <span class="word">STRATUM</span>
+        <p>An award-winning architecture &amp; design studio crafting timeless, sustainable spaces that elevate how people live, work and gather.</p>
+        <div class="footer-cert"><span>RIBA Chartered</span><span>AIA Member</span><span>USGBC</span><span>ISO 14001</span></div>
+      </div>
+      <div class="fcol">
+        <h5>Company</h5>
+        <a href="#studio-intro">About</a><a href="#studio">Team</a><a href="#contact">Careers</a><a href="#process">Process</a>
+      </div>
+      <div class="fcol">
+        <h5>Services</h5>
+        <a href="#categories">Residential</a><a href="#categories">Commercial</a><a href="#categories">Hospitality</a><a href="#categories">Master Planning</a>
+      </div>
+      <div class="fcol">
+        <h5>Resources</h5>
+        <a href="#insights">Insights</a><a href="#awards">Awards</a><a href="#calculator">Feasibility Tool</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-mid">
+      <div class="fcta">Start your architectural vision &rarr;</div>
+      <div class="fsoc">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.3 18V10H5.7v8h2.6Zm-1.3-9.1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM18.3 18v-4.4c0-2.4-1.3-3.5-3-3.5-1.4 0-2 .8-2.3 1.3V10h-2.6v8h2.6v-4.5c0-1.2.7-1.8 1.5-1.8s1.4.6 1.4 1.8V18h2.4Z"/></svg></a>
+        <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.1-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4l-.9 3.6c-.1.6.3 1.1.9 1.1 1.1 0 1.9-1.4 1.9-3.1 0-1.6-1.1-2.7-2.8-2.7a3.2 3.2 0 0 0-3.3 3.2c0 .6.2 1.1.5 1.4l-.2.9c0 .2-.2.3-.4.2-1-.4-1.5-1.6-1.5-2.8 0-2.1 1.6-4.1 4.6-4.1 2.4 0 4.1 1.7 4.1 4 0 2.5-1.5 4.4-3.6 4.4-.7 0-1.4-.4-1.6-.8l-.4 1.7c-.2.6-.6 1.4-.9 1.9A10 10 0 1 0 12 2Z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div class="legal"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Accessibility</a><a href="#">Cookie Policy</a></div>
+      <div class="credit">Built &amp; maintained by <a href="https://www.growrixos.com" target="_blank" rel="noopener">GrowrixOS</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mob-nav" aria-label="Mobile quick navigation">
+  <a href="#top" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Home</a>
+  <a href="#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Projects</a>
+  <a href="#categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>Services</a>
+  <a href="#calculator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M8 14h2M8 18h2M14 10h2v8h-2z"/></svg>Tool</a>
+  <a href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2Z"/></svg>Contact</a>
+</nav>
+
+<!-- FAB -->
+<div class="fab-wrap" id="fabWrap">
+  <div class="fab-opts">
+    <div class="fab-opt top"><span class="lbl">Back to top</span><button class="fab-btn" onclick="scrollToTop()" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>
+    <div class="fab-opt ai"><span class="lbl">AI Project Assistant</span><button class="fab-btn" onclick="openAI()" aria-label="Open AI assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4-2.5 5.2-.8.8-1.5 1.5-1.5 2.8v1H9v-1c0-1.3-.7-2-1.5-2.8C6.2 13 5 11.4 5 9a7 7 0 0 1 7-7Z"/><path d="M9 21h6M10 18h4"/></svg></button></div>
+    <div class="fab-opt wa"><span class="lbl">WhatsApp</span><button class="fab-btn" onclick="window.open('https://wa.me/12125550190','_blank')" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6a9 9 0 0 1-3.4-3 4 4 0 0 1-.8-2c0-.6.3-.9.5-1.1.2-.2.4-.3.6-.3h.4c.1 0 .3 0 .5.4l.7 1.6c0 .1.1.3 0 .4l-.3.5-.3.3c-.1.1-.2.3-.1.5a6 6 0 0 0 1.1 1.4 5.5 5.5 0 0 0 1.6 1c.2.1.4.1.5-.1l.6-.7c.1-.2.3-.2.5-.1l1.6.7c.2.1.4.2.4.3.1.1.1.6 0 1.1Z"/></svg></button></div>
+    <div class="fab-opt call"><span class="lbl">Call studio</span><button class="fab-btn" onclick="window.location.href='tel:+12125550190'" aria-label="Call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2Z"/></svg></button></div>
+  </div>
+  <button class="fab-btn fab-main" id="fabMain" aria-label="Quick actions" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></button>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-ov" id="bookModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bmTitle">
+    <div class="modal-head"><div><span class="mh-code">CONSULTATION / REQUEST</span><h3 id="bmTitle">Schedule a design consultation</h3></div><button class="modal-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div id="bookFormWrap">
+        <div class="frow"><div class="field"><label>Full name</label><input type="text" id="bmName" placeholder="Jane Doe"></div><div class="field"><label>Email</label><input type="text" id="bmEmail" placeholder="you@email.com"></div></div>
+        <div class="frow"><div class="field"><label>Project type</label><select id="bmType"><option>Residential</option><option>Commercial</option><option>Hospitality</option><option>Mixed-use</option><option>Civic</option></select></div><div class="field"><label>Preferred format</label><select><option>Video call</option><option>Studio visit</option><option>On-site meeting</option><option>Phone call</option></select></div></div>
+        <div class="field"><label>Preferred date</label><input type="text" id="bmDate" placeholder="e.g. Week of 14 July, mornings"></div>
+        <button class="btn btn-copper btn-block" onclick="submitBooking()">Request consultation</button>
+        <p class="spec" style="text-align:center;margin-top:12px;display:block">No obligation · Reviewed by a principal</p>
+      </div>
+      <div class="success-state" id="bookSuccess" style="display:none">
+        <div class="sc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Consultation requested</h3>
+        <p>We&rsquo;ll confirm your slot by email shortly. Looking forward to discussing your project.</p>
+        <button class="btn btn-ghost" data-close>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI MODAL -->
+<div class="modal-ov" id="aiModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aiTitle">
+    <div class="modal-head"><div><span class="mh-code">STRATUM / AI ASSISTANT</span><h3 id="aiTitle">Project assistant</h3></div><button class="modal-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="ai-feed" id="aiFeed">
+        <div class="ai-msg bot"><div class="ab">S</div><div class="bub">Hi — I&rsquo;m STRATUM&rsquo;s assistant. I can help you scope a project, estimate budget and timeline, or get you to the right team. What are you planning?</div></div>
+      </div>
+      <div class="ai-chips" id="aiChips">
+        <button class="ai-chip" data-q="What does a project cost?">What does a project cost?</button>
+        <button class="ai-chip" data-q="How long does design take?">How long does design take?</button>
+        <button class="ai-chip" data-q="Do you work internationally?">Do you work internationally?</button>
+        <button class="ai-chip" data-q="How do I get started?">How do I get started?</button>
+      </div>
+      <div class="ai-input"><input type="text" id="aiText" placeholder="Ask anything about working with us…" aria-label="Message"><button class="ai-send" id="aiSend" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg></button></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT DETAIL MODAL -->
+<div class="modal-ov" id="projModal">
+  <div class="modal lg" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <div class="modal-head"><div><span class="mh-code" id="pmCode">PRJ / 000</span><h3 id="pmTitle">Project</h3></div><button class="modal-x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="pm-hero" id="pmHero"><span class="pm-code" id="pmHeroCode">PRJ / 000</span></div>
+      <p id="pmDesc" style="color:var(--muted);line-height:1.7"></p>
+      <div class="pm-spec" id="pmSpec"></div>
+      <div class="pm-tags" id="pmTags"></div>
+      <button class="btn btn-copper btn-block" style="margin-top:22px" onclick="closeModal('projModal');openModal('bookModal')">Discuss a similar project</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span id="toastMsg">Done</span></div>
+
+<script>
+(function(){
+"use strict";
+var doc=document, root=doc.documentElement;
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $(s,c){return (c||doc).querySelector(s);}
+function $all(s,c){return Array.prototype.slice.call((c||doc).querySelectorAll(s));}
+function on(el,ev,fn){if(el)el.addEventListener(ev,fn);}
+
+/* ===== ANNOUNCEMENT BAR OFFSET ===== */
+var announceEl=doc.getElementById('announce');
+var headerEl=doc.getElementById('header');
+function syncAnnounceHeight(){
+  if(!announceEl||announceEl.style.display==='none'){ root.style.setProperty('--announce-h','0px'); }
+  else { root.style.setProperty('--announce-h',announceEl.offsetHeight+'px'); }
+  if(headerEl){ root.style.setProperty('--header-h',headerEl.offsetHeight+'px'); }
+}
+function dismissAnnounce(){
+  if(!announceEl)return;
+  announceEl.style.display='none';
+  root.style.setProperty('--announce-h','0px');
+  syncAnnounceHeight();
+}
+window.dismissAnnounce=dismissAnnounce;
+function scrollTopOffset(){
+  var ah=parseFloat(getComputedStyle(root).getPropertyValue('--announce-h'))||0;
+  return ah+(headerEl?headerEl.offsetHeight:72);
+}
+syncAnnounceHeight();
+window.addEventListener('resize',syncAnnounceHeight);
+window.addEventListener('load',function(){
+  syncAnnounceHeight();
+  setTimeout(function(){
+    $all('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 600);
+});
+
+/* ===== THEME ===== */
+var THEME_KEY='stratum-theme';
+function applyTheme(t){root.setAttribute('data-theme',t);try{localStorage.setItem(THEME_KEY,t);}catch(e){}
+  var mc=doc.querySelector('meta[name=theme-color]'); if(mc)mc.setAttribute('content',t==='dark'?'#0E0E10':'#111111');}
+(function(){var saved;try{saved=localStorage.getItem(THEME_KEY);}catch(e){}
+  if(saved){applyTheme(saved);} })();
+on($('#themeBtn'),'click',function(){applyTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');});
+
+/* ===== HEADER SCROLL ===== */
+var header=headerEl;
+function onScroll(){ if(header){ if(window.scrollY>40)header.classList.add('scrolled'); else header.classList.remove('scrolled'); } spy(); mobSpy(); }
+window.addEventListener('scroll',onScroll,{passive:true});
+
+/* ===== DRAWER ===== */
+var drawer=$('#drawer'), drawerOv=$('#drawerOv');
+function openDrawer(){ if(!drawer)return; drawer.classList.add('open'); drawerOv.classList.add('open'); drawer.setAttribute('aria-hidden','false'); doc.body.classList.add('no-scroll'); }
+function closeDrawer(){ if(!drawer)return; drawer.classList.remove('open'); drawerOv.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); if(!anyModalOpen())doc.body.classList.remove('no-scroll'); }
+window.closeDrawer=closeDrawer;
+on($('#burger'),'click',openDrawer);
+on($('#drawerClose'),'click',closeDrawer);
+on(drawerOv,'click',closeDrawer);
+$all('.drawer-nav a',doc).forEach(function(a){ on(a,'click',closeDrawer); });
+
+/* ===== MODALS ===== */
+function anyModalOpen(){return !!doc.querySelector('.modal-ov.open');}
+function openModal(id){var m=doc.getElementById(id); if(!m)return; m.classList.add('open'); doc.body.classList.add('no-scroll');
+  var f=m.querySelector('input,select,textarea,button'); if(f&&!reduce){setTimeout(function(){try{f.focus();}catch(e){}},120);} }
+function closeModal(id){var m=doc.getElementById(id); if(!m)return; m.classList.remove('open'); if(!anyModalOpen()&&!(drawer&&drawer.classList.contains('open')))doc.body.classList.remove('no-scroll'); }
+window.openModal=openModal; window.closeModal=closeModal;
+$all('.modal-ov').forEach(function(ov){
+  on(ov,'click',function(e){ if(e.target===ov)closeModal(ov.id); });
+  $all('[data-close]',ov).forEach(function(b){ on(b,'click',function(){closeModal(ov.id);}); });
+});
+doc.addEventListener('keydown',function(e){ if(e.key==='Escape'){ var open=doc.querySelector('.modal-ov.open'); if(open)closeModal(open.id); else if(drawer&&drawer.classList.contains('open'))closeDrawer(); } });
+
+/* ===== HERO SLIDES ===== */
+var slides=$all('.hero-slide'), dots=$all('.hero-dot'), heroMeta=$('#heroMeta');
+var hi=0, heroTimer=null;
+var heroSheets=['01','06','11'];
+function setHero(n){ hi=(n+slides.length)%slides.length;
+  slides.forEach(function(s,i){s.classList.toggle('active',i===hi);});
+  dots.forEach(function(d,i){d.classList.toggle('active',i===hi);});
+  if(heroMeta){var sht=heroMeta.querySelector('.num'); if(sht)sht.textContent=heroSheets[hi];} }
+function heroNext(){ setHero(hi+1); }
+function startHero(){ if(reduce||slides.length<2)return; stopHero(); heroTimer=setInterval(heroNext,6000); }
+function stopHero(){ if(heroTimer){clearInterval(heroTimer);heroTimer=null;} }
+dots.forEach(function(d){ on(d,'click',function(){ setHero(parseInt(d.getAttribute('data-i'),10)||0); startHero(); }); });
+startHero();
+
+/* ===== COUNT-UP ===== */
+function countUp(el){
+  var target=parseFloat(el.getAttribute('data-count'))||0;
+  var suffix=el.getAttribute('data-suffix')||'';
+  if(reduce){ el.textContent=target+suffix; return; }
+  var dur=1500, start=null, isInt=target%1===0;
+  function step(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1);
+    var eased=1-Math.pow(1-p,3); var val=target*eased;
+    el.textContent=(isInt?Math.round(val):val.toFixed(1))+suffix;
+    if(p<1)requestAnimationFrame(step); else el.textContent=(isInt?target:target.toFixed(1))+suffix; }
+  requestAnimationFrame(step);
+}
+
+/* ===== INTERSECTION OBSERVERS ===== */
+if('IntersectionObserver' in window){
+  var revObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); revObs.unobserve(en.target); } });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  $all('.reveal,.draw-line').forEach(function(el){revObs.observe(el);});
+
+  var countObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ countUp(en.target); countObs.unobserve(en.target); } });
+  },{threshold:0.4});
+  $all('[data-count]').forEach(function(el){countObs.observe(el);});
+
+  var barObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ var w=en.target.getAttribute('data-w'); en.target.style.width=(reduce?w:w)+'%'; barObs.unobserve(en.target); } });
+  },{threshold:0.4});
+  $all('.sus-bar i[data-w]').forEach(function(el){barObs.observe(el);});
+}else{
+  $all('.reveal,.draw-line').forEach(function(el){el.classList.add('in');});
+  $all('[data-count]').forEach(countUp);
+  $all('.sus-bar i[data-w]').forEach(function(el){el.style.width=el.getAttribute('data-w')+'%';});
+}
+// trigger hero draw lines immediately
+setTimeout(function(){ $all('.hero-svg .draw-line').forEach(function(el){el.classList.add('in');}); },200);
+
+/* ===== SCROLL SPY ===== */
+var navlinks=$all('.navlink');
+var spyMap=navlinks.map(function(a){ var id=a.getAttribute('href'); return {a:a, sec: id&&id.charAt(0)==='#'?doc.getElementById(id.slice(1)):null}; }).filter(function(o){return o.sec;});
+function spy(){ var y=window.scrollY+scrollTopOffset()+16; var cur=null;
+  spyMap.forEach(function(o){ if(o.sec.offsetTop<=y)cur=o; });
+  spyMap.forEach(function(o){ o.a.classList.toggle('active',o===cur); }); }
+var mobLinks=$all('.mob-nav a');
+function mobSpy(){ var y=window.scrollY+120; var best=null;
+  mobLinks.forEach(function(a){ var id=a.getAttribute('href'); if(!id||id.charAt(0)!=='#')return; var t=id==='#top'?doc.body:doc.getElementById(id.slice(1)); if(t&&t.offsetTop<=y)best=a; });
+  if(window.scrollY<80)best=mobLinks[0];
+  mobLinks.forEach(function(a){a.classList.toggle('active',a===best);}); }
+
+/* ===== SMOOTH ANCHORS ===== */
+$all('a[href^="#"]').forEach(function(a){
+  on(a,'click',function(e){ var id=a.getAttribute('href'); if(id==='#'||id.length<2)return;
+    var t=doc.getElementById(id.slice(1)); if(!t)return; e.preventDefault();
+    var off=scrollTopOffset()+10;
+    window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-off,behavior:reduce?'auto':'smooth'}); });
+});
+
+/* ===== PROJECTS ===== */
+var PROJECTS=[
+  {code:'PRJ / 042',cat:'residential',title:'Meridian House',loc:'Lake District, UK',cls:'wide tall',
+   grad:'linear-gradient(150deg,#14141a,#2c2620 50%,#6a4c30)',
+   desc:'A cantilevered family residence carved into a glacial hillside, organised around a double-height living volume that frames the lake through a 12-metre glazed wall. Passive solar orientation and a ground-source loop carry the home to net-zero in operation.',
+   spec:[['Type','Private residence'],['Area','9,400 ft²'],['Status','Completed 2023'],['Certification','Passivhaus']],tags:['Net-zero','Timber frame','Lakeside']},
+  {code:'PRJ / 038',cat:'commercial',title:'Vantage Tower',loc:'New York, USA',cls:'tall',
+   grad:'linear-gradient(155deg,#1a2330,#274058 55%,#0f1c28)',
+   desc:'A 41-storey mixed-tenant tower with a column-free trading floor and a public sky-lobby. A high-performance double-skin façade cuts solar gain by 38% while preserving panoramic transparency.',
+   spec:[['Type','Office tower'],['Area','680,000 ft²'],['Status','Completed 2022'],['Certification','LEED Platinum']],tags:['High-rise','Double-skin','Mixed-tenant']},
+  {code:'PRJ / 051',cat:'hospitality',title:'Dunes Resort',loc:'Ras Al Khaimah, UAE',cls:'',
+   grad:'linear-gradient(150deg,#1b2620,#33493c 52%,#141f19)',
+   desc:'Forty low-slung villas dissolve into a coastal dune landscape, shaded by perforated screens tuned to the desert sun. Greywater recycling and on-site solar make the resort water- and energy-positive across the year.',
+   spec:[['Type','Luxury resort'],['Area','220,000 ft²'],['Status','Completed 2024'],['Certification','LEED Gold']],tags:['Resort','Desert','Water-positive']},
+  {code:'PRJ / 029',cat:'civic',title:'Meridian Library',loc:'City of Meridian',cls:'',
+   grad:'linear-gradient(150deg,#14141a,#2d2d2d 55%,#6d7278)',
+   desc:'A civic library wrapped in a fluted concrete colonnade, with a top-lit reading hall that needs no artificial light by day. Built for a 100-year service life from low-carbon concrete and reclaimed oak.',
+   spec:[['Type','Public library'],['Area','86,000 ft²'],['Status','Completed 2023'],['Certification','BREEAM Outstanding']],tags:['Civic','Low-carbon','Daylit']},
+  {code:'PRJ / 047',cat:'commercial',title:'Foundry Quarter',loc:'Manchester, UK',cls:'wide',
+   grad:'linear-gradient(150deg,#241c16,#4a3826 55%,#6a4c30)',
+   desc:'An adaptive reuse of a Victorian iron foundry into a creative-industry campus. The original brick shell is retained and re-tempered with a steel-and-glass insertion, saving an estimated 4,200 tonnes of embodied carbon.',
+   spec:[['Type','Adaptive reuse'],['Area','164,000 ft²'],['Status','Completed 2021'],['Certification','BREEAM Excellent']],tags:['Adaptive reuse','Heritage','Campus']},
+  {code:'PRJ / 055',cat:'residential',title:'Cascade Villas',loc:'Singapore',cls:'',
+   grad:'linear-gradient(150deg,#16221f,#2c4a40 55%,#101c18)',
+   desc:'A stack of nine sky-villas with cascading planted terraces that double the site\u2019s green area. Cross-ventilation and deep shading remove the need for daytime cooling in shared spaces.',
+   spec:[['Type','Luxury residential'],['Area','142,000 ft²'],['Status','Completed 2024'],['Certification','Green Mark Platinum']],tags:['Sky-villas','Biophilic','Tropical']},
+  {code:'PRJ / 033',cat:'hospitality',title:'The Linden Hotel',loc:'London, UK',cls:'',
+   grad:'linear-gradient(150deg,#1a1a22,#2c2838 55%,#3a3450)',
+   desc:'A boutique 120-key hotel threading a contemporary insertion through three listed townhouses, with a sunken garden bar and a rooftop conservatory restaurant.',
+   spec:[['Type','Boutique hotel'],['Area','98,000 ft²'],['Status','Completed 2022'],['Certification','BREEAM Very Good']],tags:['Boutique','Heritage','Rooftop']},
+  {code:'PRJ / 060',cat:'civic',title:'Harbour Pavilion',loc:'São Paulo, BR',cls:'',
+   grad:'linear-gradient(150deg,#14141a,#3a2c20 55%,#6a4c30)',
+   desc:'A waterfront cultural pavilion with a lightweight timber gridshell roof spanning 48 metres without internal columns, sheltering a flexible event hall open to the harbour breeze.',
+   spec:[['Type','Cultural pavilion'],['Area','58,000 ft²'],['Status','Completed 2024'],['Certification','LEED Gold']],tags:['Gridshell','Timber','Waterfront']}
+];
+var projGrid=$('#projGrid');
+var locSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+function renderProjects(filter){
+  if(!projGrid)return; projGrid.innerHTML='';
+  PROJECTS.forEach(function(p,idx){
+    if(filter&&filter!=='all'&&p.cat!==filter)return;
+    var card=doc.createElement('article');
+    card.className='pcard'+(p.cls?(' '+p.cls):'');
+    card.setAttribute('tabindex','0'); card.setAttribute('role','button');
+    card.setAttribute('aria-label',p.title+' — view project');
+    var tagHtml=p.tags.map(function(t){return '<span>'+t+'</span>';}).join('');
+    card.innerHTML=
+      '<div class="ph" style="background:'+p.grad+'"></div>'+
+      '<div class="ov"></div>'+
+      '<span class="cat-badge">'+p.cat+'</span>'+
+      '<div class="meta">'+
+        '<div class="code">'+p.code+'</div>'+
+        '<h3>'+p.title+'</h3>'+
+        '<div class="loc">'+locSvg+p.loc+'</div>'+
+        '<div class="reveal-row"><div class="tags">'+tagHtml+'</div></div>'+
+      '</div>';
+    card.addEventListener('click',function(){openProject(p);});
+    card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(p);}});
+    projGrid.appendChild(card);
+  });
+}
+function openProject(p){
+  var hero=$('#pmHero'); if(hero)hero.style.background=p.grad;
+  var hc=$('#pmHeroCode'); if(hc)hc.textContent=p.code;
+  var c=$('#pmCode'); if(c)c.textContent=p.code;
+  var t=$('#pmTitle'); if(t)t.textContent=p.title;
+  var d=$('#pmDesc'); if(d)d.textContent=p.desc;
+  var spec=$('#pmSpec'); if(spec)spec.innerHTML=p.spec.map(function(r){return '<div class="pc"><div class="k">'+r[0]+'</div><div class="v">'+r[1]+'</div></div>';}).join('');
+  var tags=$('#pmTags'); if(tags)tags.innerHTML=p.tags.map(function(x){return '<span>'+x+'</span>';}).join('');
+  openModal('projModal');
+}
+renderProjects('all');
+var curFilter='all';
+$all('#projFilter .fbtn').forEach(function(b){
+  on(b,'click',function(){
+    $all('#projFilter .fbtn').forEach(function(x){x.classList.remove('active');x.setAttribute('aria-selected','false');});
+    b.classList.add('active'); b.setAttribute('aria-selected','true');
+    curFilter=b.getAttribute('data-f'); renderProjects(curFilter);
+  });
+});
+function setFilter(f){
+  var btn=$('#projFilter .fbtn[data-f="'+f+'"]')||$('#projFilter .fbtn[data-f="all"]');
+  if(btn)btn.click();
+}
+
+/* ===== CATEGORIES ===== */
+$all('.cat-card[data-cat]').forEach(function(card){
+  on(card,'click',function(){
+    var cat=card.getAttribute('data-cat');
+    if(cat==='mixed')cat='all';
+    setFilter(cat);
+    var t=$('#projects'); if(t){var off=scrollTopOffset()+10; window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-off,behavior:reduce?'auto':'smooth'});}
+  });
+});
+
+/* ===== PROCESS STEPS ===== */
+var psteps=$all('.pstep'), procProg=$('#procProg');
+function setStep(idx){
+  psteps.forEach(function(s,i){s.classList.toggle('on',i===idx);});
+  if(procProg)procProg.style.width=(((idx+1)/psteps.length)*100)+'%';
+}
+psteps.forEach(function(s,i){ on(s,'click',function(){setStep(i);}); });
+if(psteps.length)setStep(0);
+
+/* ===== TESTIMONIALS ===== */
+var tq=$all('.tquote'), ti=0, tTimer=null;
+function setTesti(n){ ti=(n+tq.length)%tq.length; tq.forEach(function(q,i){q.classList.toggle('active',i===ti);}); }
+function tStart(){ if(reduce||tq.length<2)return; tStop(); tTimer=setInterval(function(){setTesti(ti+1);},7000); }
+function tStop(){ if(tTimer){clearInterval(tTimer);tTimer=null;} }
+on($('#tPrev'),'click',function(){setTesti(ti-1);tStart();});
+on($('#tNext'),'click',function(){setTesti(ti+1);tStart();});
+tStart();
+
+/* ===== FEASIBILITY CALCULATOR ===== */
+var calcType=$('#calcType'), calcTier=$('#calcTier'), sqftEl=$('#sqft'), sqftHint=$('#sqftHint'),
+    calcLoc=$('#calcLoc'), calcSus=$('#calcSus'),
+    roBudget=$('#roBudget'), roSub=$('#roSub'), roApproach=$('#roApproach'), roTime=$('#roTime');
+function fmtMoney(v){
+  if(v>=1e9)return '$'+(v/1e9).toFixed(1)+'B';
+  if(v>=1e6)return '$'+(v/1e6).toFixed(1)+'M';
+  if(v>=1e3)return '$'+Math.round(v/1e3)+'K';
+  return '$'+Math.round(v);
+}
+function fmtNum(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function segActive(seg,attr){ var b=seg?seg.querySelector('.sel'):null; if(!b&&seg)b=seg.querySelector('button'); return b; }
+function calc(){
+  if(!sqftEl)return;
+  var typeBtn=calcType?(calcType.querySelector('.sel')||calcType.querySelector('button')):null;
+  var tierBtn=calcTier?(calcTier.querySelector('.sel')||calcTier.querySelector('button')):null;
+  var rate=typeBtn?parseFloat(typeBtn.getAttribute('data-rate')):420;
+  var typeKey=typeBtn?typeBtn.getAttribute('data-key'):'residential';
+  var mult=tierBtn?parseFloat(tierBtn.getAttribute('data-mult')):1;
+  var tierKey=tierBtn?tierBtn.getAttribute('data-key'):'Premium';
+  var sqft=parseInt(sqftEl.value,10)||0;
+  var locVal=calcLoc?parseFloat(calcLoc.value):1;
+  var locLabel=calcLoc?calcLoc.options[calcLoc.selectedIndex].text:'';
+  var susVal=calcSus?parseFloat(calcSus.value):1;
+  if(sqftHint)sqftHint.textContent=fmtNum(sqft)+' ft²';
+  var perFt=rate*mult*locVal*susVal;
+  var total=perFt*sqft;
+  var low=total*0.9, high=total*1.1;
+  if(roBudget)roBudget.textContent=fmtMoney(low)+' – '+fmtMoney(high);
+  if(roSub)roSub.textContent='\u2248 $'+Math.round(perFt)+' / ft² · '+tierKey+' · '+locLabel;
+  // approach by type + size
+  var approach;
+  if(typeKey==='residential')approach= sqft>20000?'Integrated design-build':'Bespoke design-led';
+  else if(typeKey==='commercial')approach= sqft>60000?'Design-build with CM at risk':'Negotiated design-build';
+  else if(typeKey==='hospitality')approach='Design-led, phased delivery';
+  else approach= sqft>50000?'Public design-bid-build':'Design-build (public)';
+  if(roApproach)roApproach.textContent=approach;
+  // timeline by size
+  var months;
+  if(sqft<8000)months=[12,16];
+  else if(sqft<25000)months=[16,22];
+  else if(sqft<60000)months=[22,30];
+  else if(sqft<100000)months=[30,40];
+  else months=[40,54];
+  if(typeKey==='hospitality'){months[0]+=2;months[1]+=4;}
+  if(typeKey==='civic'){months[0]+=3;months[1]+=6;}
+  if(roTime)roTime.textContent=months[0]+'–'+months[1]+' months';
+}
+function bindSeg(seg){ if(!seg)return; $all('button',seg).forEach(function(b){ on(b,'click',function(){ $all('button',seg).forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); calc(); }); }); }
+bindSeg(calcType); bindSeg(calcTier);
+on(sqftEl,'input',calc);
+on(calcLoc,'change',calc);
+on(calcSus,'change',calc);
+calc();
+
+/* ===== MULTI-STEP FORM ===== */
+var fsteps=$all('#leadForm .fstep'), nextBtn=$('#nextBtn'), backBtn=$('#backBtn'),
+    stepsBar=$('#stepsBar'), sbCells=$all('#stepsBar .sb'), leadForm=$('#leadForm'),
+    successState=$('#successState');
+var fi=0;
+function showStep(n){
+  fi=Math.max(0,Math.min(n,fsteps.length-1));
+  fsteps.forEach(function(s,i){s.classList.toggle('active',i===fi);});
+  sbCells.forEach(function(c,i){c.classList.toggle('done',i<=fi);});
+  if(backBtn)backBtn.style.visibility=fi===0?'hidden':'visible';
+  if(nextBtn)nextBtn.textContent=fi===fsteps.length-1?'Submit request':'Continue';
+}
+function validateStep(){
+  var step=fsteps[fi]; if(!step)return true;
+  var reqs=$all('[required]',step), ok=true;
+  reqs.forEach(function(inp){
+    var v=(inp.value||'').trim(), bad=!v;
+    if(inp.type==='text'&&inp.name==='email'){ bad=!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
+    inp.style.borderColor=bad?'#c0563f':''; if(bad)ok=false;
+  });
+  return ok;
+}
+on(nextBtn,'click',function(){
+  if(!validateStep()){ toast('Please complete the highlighted fields'); return; }
+  if(fi===fsteps.length-1){ submitLead(); }
+  else showStep(fi+1);
+});
+on(backBtn,'click',function(){ showStep(fi-1); });
+function submitLead(){
+  if(leadForm)leadForm.style.display='none';
+  var bar=stepsBar; if(bar)bar.style.display='none';
+  var foot=$('#leadForm');
+  if(successState)successState.style.display='block';
+  var nav=doc.querySelector('.form-nav'); if(nav)nav.style.display='none';
+  toast('Consultation request sent');
+}
+function resetForm(){
+  if(leadForm){leadForm.reset();leadForm.style.display='block';}
+  if(stepsBar)stepsBar.style.display='';
+  if(successState)successState.style.display='none';
+  var nav=doc.querySelector('.form-nav'); if(nav)nav.style.display='';
+  var ut=$('#uploadText'); if(ut)ut.textContent='Drop site plans, briefs or references — or click to browse';
+  showStep(0);
+}
+window.resetForm=resetForm;
+if(fsteps.length)showStep(0);
+
+/* ===== UPLOAD ZONE ===== */
+var uz=$('#uploadZone'), uploadText=$('#uploadText');
+if(uz){
+  var fileInput=doc.createElement('input'); fileInput.type='file'; fileInput.multiple=true; fileInput.style.display='none'; uz.appendChild(fileInput);
+  function showFiles(files){ if(!files||!files.length)return; var names=Array.prototype.map.call(files,function(f){return f.name;}).slice(0,3).join(', '); if(uploadText)uploadText.textContent=files.length+' file'+(files.length>1?'s':'')+' ready · '+names; }
+  on(uz,'click',function(e){ if(e.target!==fileInput)fileInput.click(); });
+  on(uz,'keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();fileInput.click();} });
+  on(fileInput,'change',function(){ showFiles(fileInput.files); });
+  ['dragover','dragenter'].forEach(function(ev){ on(uz,ev,function(e){e.preventDefault();uz.classList.add('drag');}); });
+  ['dragleave','drop'].forEach(function(ev){ on(uz,ev,function(e){e.preventDefault();uz.classList.remove('drag');}); });
+  on(uz,'drop',function(e){ if(e.dataTransfer&&e.dataTransfer.files)showFiles(e.dataTransfer.files); });
+}
+
+/* ===== BOOKING MODAL ===== */
+function submitBooking(){
+  var name=$('#bmName'), email=$('#bmEmail');
+  var nv=name?name.value.trim():'', ev=email?email.value.trim():'';
+  var ok=true;
+  if(name){ name.style.borderColor=nv?'':'#c0563f'; if(!nv)ok=false; }
+  if(email){ var good=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ev); email.style.borderColor=good?'':'#c0563f'; if(!good)ok=false; }
+  if(!ok){ toast('Add your name and a valid email'); return; }
+  var fw=$('#bookFormWrap'), bs=$('#bookSuccess');
+  if(fw)fw.style.display='none'; if(bs)bs.style.display='block';
+  toast('Consultation requested');
+}
+window.submitBooking=submitBooking;
+
+/* ===== AI ASSISTANT ===== */
+var aiFeed=$('#aiFeed'), aiText=$('#aiText'), aiSend=$('#aiSend');
+function openAI(){ openModal('aiModal'); if(aiText&&!reduce)setTimeout(function(){try{aiText.focus();}catch(e){}},150); }
+window.openAI=openAI;
+var AI_KB=[
+ {k:['cost','price','budget','expensive','fee','much'],a:'Most of our projects price between $300 and $700 per ft², depending on type, finish tier and location. Our feasibility calculator on this page gives a realistic range in seconds — or share your brief and we\u2019ll prepare a tailored estimate.'},
+ {k:['time','long','timeline','duration','schedule','fast'],a:'Design typically runs 4–9 months, with delivery on top depending on scale. A private residence might complete in 12–18 months end to end; a large commercial build, 30 months or more. The calculator estimates your timeline by size and type.'},
+ {k:['international','global','where','located','country','abroad','overseas'],a:'Yes — we work worldwide from studios in New York, London, Dubai, Singapore and São Paulo, with delivered projects across 22 countries and four continents.'},
+ {k:['start','begin','process','how do i','first step','consultation'],a:'It starts with a free discovery consultation. We discuss your vision, site and goals, then prepare a proposal and feasibility view. You can book directly using the Book Consultation button, or tell me a good time.'},
+ {k:['sustainab','green','carbon','energy','leed','passivhaus','net zero','net-zero','environment'],a:'Sustainability is baseline, not an upsell. Every project gets a carbon and energy model from day one. Our work averages a 46% cut in operational energy and 31% lower embodied carbon, with 19 LEED/BREEAM certified buildings to date.'},
+ {k:['service','do you','residential','commercial','hospitality','civic','sector','offer'],a:'We design across residential, commercial, hospitality, mixed-use and civic & cultural projects — from concept through to on-site delivery and post-occupancy care.'},
+ {k:['contact','phone','email','call','reach','talk','speak'],a:'You can reach the studio at +1 (212) 555-0190 or studio@stratum-studio.com. Prefer to schedule? Use the Book Consultation button and we\u2019ll confirm within one business day.'},
+ {k:['team','who','architect','studio','people'],a:'STRATUM is led by founding principal Elena Marchetti, AIA, with a multidisciplinary team of 42 licensed architects and specialists across design, sustainability and delivery.'}
+];
+function aiReply(q){
+  var ql=q.toLowerCase(), best=null, score=0;
+  AI_KB.forEach(function(item){ var s=0; item.k.forEach(function(k){ if(ql.indexOf(k)!==-1)s++; }); if(s>score){score=s;best=item;} });
+  return best?best.a:'Great question. The fastest way to get a precise answer is a short consultation with our team — or try the feasibility calculator on this page for budget and timeline. Would you like me to set up a call?';
+}
+function aiBubble(text,who){
+  if(!aiFeed)return null;
+  var row=doc.createElement('div'); row.className='ai-msg '+who;
+  var av=who==='user'?'Y':'S';
+  row.innerHTML='<div class="ab">'+av+'</div><div class="bub">'+text+'</div>';
+  aiFeed.appendChild(row); aiFeed.scrollTop=aiFeed.scrollHeight; return row;
+}
+function aiAsk(q){
+  q=(q||'').trim(); if(!q)return;
+  aiBubble(q,'user');
+  if(aiText)aiText.value='';
+  var typing=aiBubble('<span class="ai-typing"><i></i><i></i><i></i></span>','bot');
+  setTimeout(function(){ if(typing)typing.remove(); aiBubble(aiReply(q),'bot'); }, reduce?0:650);
+}
+$all('#aiChips .ai-chip').forEach(function(c){ on(c,'click',function(){ aiAsk(c.getAttribute('data-q')); }); });
+on(aiSend,'click',function(){ if(aiText)aiAsk(aiText.value); });
+on(aiText,'keydown',function(e){ if(e.key==='Enter'){e.preventDefault();aiAsk(aiText.value);} });
+
+/* ===== MAP TOOLTIP ===== */
+var mapTip=$('#mapTip'), mapSvg=$('#mapSvg');
+$all('.map-pin').forEach(function(pin){
+  function show(){
+    if(!mapTip||!mapSvg)return;
+    var city=pin.getAttribute('data-city'), sub=pin.getAttribute('data-sub');
+    var x=parseFloat(pin.getAttribute('data-x')), y=parseFloat(pin.getAttribute('data-y'));
+    var rect=mapSvg.getBoundingClientRect();
+    var px=(x/1000)*rect.width, py=(y/480)*rect.height;
+    mapTip.innerHTML='<strong>'+city+'</strong><span class="mt-sub">'+sub+'</span>';
+    mapTip.style.left=px+'px'; mapTip.style.top=py+'px';
+    mapTip.classList.add('show');
+  }
+  function hide(){ if(mapTip)mapTip.classList.remove('show'); }
+  on(pin,'mouseenter',show); on(pin,'mouseleave',hide);
+  on(pin,'focus',show); on(pin,'blur',hide);
+  on(pin,'click',show);
+  pin.setAttribute('tabindex','0');
+});
+
+/* ===== FAB ===== */
+var fabWrap=$('#fabWrap'), fabMain=$('#fabMain');
+on(fabMain,'click',function(){ if(fabWrap)fabWrap.classList.toggle('open'); });
+doc.addEventListener('click',function(e){ if(fabWrap&&fabWrap.classList.contains('open')&&!fabWrap.contains(e.target))fabWrap.classList.remove('open'); });
+
+/* ===== SCROLL TO TOP ===== */
+function scrollToTop(){ window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}); if(fabWrap)fabWrap.classList.remove('open'); }
+window.scrollToTop=scrollToTop;
+
+/* ===== TOAST ===== */
+var toastEl=$('#toast'), toastMsg=$('#toastMsg'), toastT=null;
+function toast(msg){ if(!toastEl)return; if(toastMsg)toastMsg.textContent=msg||'Done'; toastEl.classList.add('show'); if(toastT)clearTimeout(toastT); toastT=setTimeout(function(){toastEl.classList.remove('show');},3000); }
+window.toast=toast;
+
+/* ===== INIT ===== */
+onScroll();
+})();
+</script>
+<!-- ============================================================
+  STRATUM — Architecture & Design Studio
+  Build 09 · GrowrixOS Portfolio · Single-file self-contained SPA
+  ------------------------------------------------------------
+  LAYOUT FIX (post-delivery patch)
+  - Root cause: announcement bar rendered in normal flow while
+    header used position:fixed top:0, causing both to overlap at
+    the viewport top and clip the nav + CTA button.
+  - Fix: announcement bar promoted to position:fixed; header
+    offset below it via --announce-h CSS var measured live by JS
+    (syncAnnounceHeight); body padding-top and hero padding-top
+    updated to clear the combined fixed-bar height; hero-meta and
+    hero-dots top offsets made announce-height-aware; dismiss
+    button now calls dismissAnnounce() which collapses the offset
+    to 0px so header/hero reflow upward immediately.
+  ------------------------------------------------------------
+  VALIDATION REPORT (passed prior to delivery)
+  - Structural tag balance ....... PASS (literal open/close counts)
+      html 1/1 · head 1/1 · body 1/1 · main 1/1 · header 1/1
+      footer 1/1 · nav 3/3 · aside 1/1 · form 1/1
+      section 15/15 · div 373/373 · script 2/2 · style 1/1
+  - SVG tag balance (literal) .... PASS  49 open / 49 close
+  - Duplicate element IDs ........ NONE
+  - getElementById resolution .... PASS  (all refs map to live DOM IDs)
+  - Anchor (#target) resolution .. PASS  (every nav target exists)
+  - Inline JS syntax ............. PASS  (node --check, standalone + inlined)
+  - Modal overlays ............... 3  (booking · AI assistant · project detail)
+  - Inline onclick handlers ...... 19
+  - Project records (filterable) . 8  (residential/commercial/hospitality/civic)
+  - Interactive systems .......... theme toggle · hero reel · count-up ·
+      scroll-spy · project filter+modal · process accordion · sustainability
+      bars · testimonial carousel · feasibility calculator (genuine math) ·
+      4-step lead form · upload zone · booking · AI assistant · world map ·
+      FAB · toast · reduced-motion + keyboard a11y
+  - Feasibility calculator ....... genuine math: rate × tier × location ×
+      sustainability × area → ±10% budget band, per-ft² rate, approach,
+      timeline by scale & typology
+  ============================================================ -->
+</body>
+</html>

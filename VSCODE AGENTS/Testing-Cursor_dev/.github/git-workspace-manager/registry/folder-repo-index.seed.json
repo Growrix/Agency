@@ -1,0 +1,138 @@
+{
+  "workspace_root": "F:/PROJECTS/testing",
+  "generated_for": "root-core-git-management-folder-index",
+  "mappings": [
+    {
+      "project_id": "testing-factory-backup",
+      "folder_path": "F:/PROJECTS/testing",
+      "canonical_repo_id": "testing-factory-backup",
+      "remote": "https://github.com/Growrix/Testing.git",
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "foundation-core",
+      "folder_path": "F:/PROJECTS/testing/Backend & Deploy/Foundation-Core",
+      "canonical_repo_id": "foundation-core",
+      "remote": "https://github.com/Growrix/Foundation_core.git",
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "blog-automation",
+      "folder_path": "F:/PROJECTS/testing/BLOG-AUTOMATION",
+      "canonical_repo_id": "blog-automation",
+      "remote": "https://github.com/Growrix/Blog_Automation.git",
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "html-profile-builder",
+      "folder_path": "F:/PROJECTS/testing/HTML-PROFILE-BUILDER",
+      "canonical_repo_id": "html-profile-builder",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "aircon-installer",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/aircon-installer",
+      "canonical_repo_id": "aircon-installer",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "growrix-auto",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/GrowrixAuto",
+      "canonical_repo_id": "growrix-auto",
+      "remote": "https://github.com/Growrix/Growrix_Auto.git",
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "lumoria",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/Lumoria",
+      "canonical_repo_id": "lumoria",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "car",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/car",
+      "canonical_repo_id": "car",
+      "remote": "https://github.com/Growrix/Car.git",
+      "push_strategy": "subtree",
+      "subtree_prefix": "FRONTEND DEV/car",
+      "notes": "Folder-scoped project in the Testing workspace. Split and push this prefix to Car repo."
+    },
+    {
+      "project_id": "car-subdomain-nextjs-verified-native-frontend",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend",
+      "canonical_repo_id": "car-subdomain-nextjs-verified-native-frontend",
+      "remote": "https://github.com/Growrix/Car.git",
+      "push_strategy": "subtree",
+      "subtree_prefix": "FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend",
+      "notes": "Folder-scoped project in the Testing workspace. Split and push this prefix to Car repo."
+    },
+    {
+      "project_id": "rayiss",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/rayiss",
+      "canonical_repo_id": "rayiss",
+      "remote": "https://github.com/Growrix/Rayiss.git",
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "nexform-consulting-template",
+      "folder_path": "F:/PROJECTS/testing/Backend & Deploy/Templates/local-business/nexform-consulting",
+      "canonical_repo_id": "nexform-consulting-template",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "nexform-website",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/nexform-website",
+      "canonical_repo_id": "nexform-website",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "optilux",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/optilux",
+      "canonical_repo_id": "optilux",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "plumbing-pro",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/plumbing-pro",
+      "canonical_repo_id": "plumbing-pro",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "reference-style-4",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/reference-style-4",
+      "canonical_repo_id": "reference-style-4",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "reference-style-5",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/reference-style-5",
+      "canonical_repo_id": "reference-style-5",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "wostin-waste",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/wostin-waste",
+      "canonical_repo_id": "wostin-waste",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "agency-growrixos",
+      "folder_path": "F:/PROJECTS/testing/On Going DOCS/Growrixos",
+      "canonical_repo_id": "agency-growrixos",
+      "remote": "https://github.com/Growrix/Agency.git",
+      "push_strategy": "subtree",
+      "subtree_prefix": "On Going DOCS/Growrixos",
+      "notes": "Folder-scoped project in the Testing workspace. Split and push this prefix to Agency repo."
+    }
+  ]
+}

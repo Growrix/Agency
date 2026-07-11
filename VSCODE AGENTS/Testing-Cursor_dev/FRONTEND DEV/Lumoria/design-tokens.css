@@ -1,0 +1,56 @@
+:root {
+  /* Core colors pulled from Lumoria theme variables */
+  --lumoria-color-primary: #8B5E21;
+  --lumoria-color-secondary: #161616;
+  --lumoria-color-tertiary: #EDEDED;
+  --lumoria-color-body-bg: #F5F4F2;
+  --lumoria-color-body-text: #585858;
+  --lumoria-color-border: #DFDEDC;
+  --lumoria-color-surface: #FFFFFF;
+  --lumoria-color-surface-muted: #EDEDED;
+  --lumoria-color-link: #161616;
+  --lumoria-color-link-hover: #C69A59;
+  --lumoria-color-inverse: #FFFFFF;
+
+  --lumoria-font-heading: "Jost", sans-serif;
+  --lumoria-font-body: "DM Sans", sans-serif;
+  --lumoria-font-alt: "Inter", sans-serif;
+
+  --lumoria-font-size-display: 5rem;
+  --lumoria-font-size-h1: 4rem;
+  --lumoria-font-size-h2: 3rem;
+  --lumoria-font-size-h3: 2.25rem;
+  --lumoria-font-size-h4: 1.75rem;
+  --lumoria-font-size-body: 1rem;
+  --lumoria-font-size-small: 0.875rem;
+  --lumoria-font-size-caption: 0.75rem;
+
+  --lumoria-font-weight-regular: 400;
+  --lumoria-font-weight-medium: 500;
+  --lumoria-font-weight-semibold: 600;
+  --lumoria-font-weight-bold: 700;
+  --lumoria-line-height-tight: 1.15;
+  --lumoria-line-height-normal: 1.6;
+
+  --lumoria-container-max-width: 1320px;
+  --lumoria-container-padding-x: 24px;
+  --lumoria-section-padding-y: 96px;
+  --lumoria-grid-gap-lg: 32px;
+  --lumoria-grid-gap-md: 24px;
+  --lumoria-grid-gap-sm: 16px;
+
+  --lumoria-radius-hero: 28px;
+  --lumoria-radius-card: 16px;
+  --lumoria-radius-input: 24px;
+  --lumoria-radius-pill: 999px;
+
+  --lumoria-shadow-soft: 0 8px 30px rgba(22, 22, 22, 0.06);
+  --lumoria-shadow-card: 0 14px 40px rgba(22, 22, 22, 0.1);
+  --lumoria-gradient-overlay: linear-gradient(180deg, rgba(22, 22, 22, 0.2) 0%, rgba(22, 22, 22, 0.56) 100%);
+
+  --lumoria-breakpoint-desktop: 1540px;
+  --lumoria-breakpoint-laptop: 1280px;
+  --lumoria-breakpoint-tablet: 1024px;
+  --lumoria-breakpoint-mobile: 767px;
+  --lumoria-breakpoint-mobile-sm: 479px;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "foundation-attached-starter",
+  "mode": "foundation_attached_or_mock_fallback",
+  "foundation_contract": "../../Foundation-Core/docs/contracts/frontend-attach-contract.json",
+  "routes": ["/"],
+  "required_env": ["FOUNDATION_BASE_URL"]
+}

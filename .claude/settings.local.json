@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /f/PROJECTS/Growrixos show 645f5d7:web/src/app/api/v1/me/update/route.ts)",
+      "Bash(git -C /f/PROJECTS/Growrixos diff HEAD~5 HEAD -- \"web/src/app/dashboard/\")",
+      "Bash(tasklist //FI \"PID eq 1640\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} | %{url_effective}\\\\n\" http://127.0.0.1:5000/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:5000/api/health)",
+      "Bash(npm run *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(echo \"TYPECHECK_EXIT=$?\")",
+      "Bash(netstat -ano)",
+      "Bash(NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= CLERK_SECRET_KEY= CLERK_WEBHOOK_SIGNING_SECRET= npm run build)",
+      "Bash(echo \"BUILD_EXIT=$?\")",
+      "Bash(taskkill //F //PID 2296)",
+      "Bash(grep -n \"notification_log\\\\|do \\\\$\\\\$\\\\|^declare\\\\|^begin\\\\|^end\\\\;\" /f/PROJECTS/Growrixos/web/supabase/schema.sql)",
+      "Bash(echo \"TEST_EXIT=$?\")",
+      "Bash(awk '{print $5}')",
+      "Bash(xargs -I{} taskkill //F //PID {})",
+      "Bash(echo \"E2E_EXIT=$?\")",
+      "Bash(grep -r \"addToCart\\\\|Add to Cart\\\\|add_to_cart\" --include=\"*.ts\" --include=\"*.tsx\" web/src --include-dir=web/src)",
+      "Bash(xargs grep -l \"SignUp\\\\|SignIn\")",
+      "Bash(curl -s \"https://api.resend.com/emails\" -H \"Authorization: Bearer re_YBW921rV_KcHqAw18teR3jSC18rUnWkFu\")",
+      "Bash(git push *)",
+      "Bash(rm -rf .next)",
+      "Bash(NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= CLERK_SECRET_KEY= CLERK_WEBHOOK_SIGNING_SECRET= npm run build:vercel)",
+      "Bash(taskkill //F //PID 12756)",
+      "Bash(unset NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY CLERK_SECRET_KEY CLERK_WEBHOOK_SIGNING_SECRET NEXT_PUBLIC_CLERK_SIGN_IN_URL NEXT_PUBLIC_CLERK_SIGN_UP_URL NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL)",
+      "Bash(NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= CLERK_SECRET_KEY= CLERK_WEBHOOK_SIGNING_SECRET= NEXT_PUBLIC_CLERK_SIGN_IN_URL= NEXT_PUBLIC_CLERK_SIGN_UP_URL= NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL= npm run ci:check --prefix /f/PROJECTS/Growrixos/web)",
+      "Bash(vercel ls *)",
+      "Bash(vercel inspect *)",
+      "Bash(vercel pull *)",
+      "Bash(vercel link *)",
+      "Bash(vercel deploy *)"
+    ]
+  }
+}

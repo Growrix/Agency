@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SparkleClean — Professional Cleaning Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Quicksand',sans-serif;background:#065a60;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f0fafa;margin:0 auto}
+
+.hero{min-height:260px;background:linear-gradient(155deg,#0891b2 0%,#0e7490 50%,#164e63 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 22px}
+.bubbles{position:absolute;inset:0;pointer-events:none}
+.bubble{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.12);animation:rise 8s ease-in infinite}
+.bubble:nth-child(1){width:30px;height:30px;left:10%;bottom:-30px;animation-delay:0s}
+.bubble:nth-child(2){width:50px;height:50px;left:35%;bottom:-50px;animation-delay:2s}
+.bubble:nth-child(3){width:20px;height:20px;left:60%;bottom:-20px;animation-delay:4s}
+.bubble:nth-child(4){width:40px;height:40px;left:80%;bottom:-40px;animation-delay:6s}
+@keyframes rise{0%{transform:translateY(0);opacity:.5}100%{transform:translateY(-300px);opacity:0}}
+.hero-shine{position:absolute;top:20px;right:16px;font-size:56px;opacity:.1}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:10px;color:#fff;font-weight:600;margin-bottom:12px;width:fit-content}
+.hero h1{font-size:36px;font-weight:700;color:#fff;line-height:.95;letter-spacing:-.5px}
+.hero h1 span{color:#a5f3fc}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:8px;line-height:1.5}
+.hero-rating{display:flex;align-items:center;gap:6px;margin-top:10px}
+.stars{color:#fbbf24;font-size:13px}
+.rating-text{font-size:11px;color:rgba(255,255,255,.5)}
+
+.why-strip{display:flex;background:#fff;border-bottom:1px solid #cffafe;overflow-x:auto;scrollbar-width:none}
+.why-strip::-webkit-scrollbar{display:none}
+.why-item{flex-shrink:0;text-align:center;padding:10px 16px;border-right:1px solid #e0f8f8}
+.why-item:last-child{border-right:none}
+.why-icon{font-size:18px}
+.why-label{font-size:9px;font-weight:700;color:#0e7490;margin-top:3px;white-space:nowrap}
+
+.body{padding:0 18px 40px}
+.sec{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0891b2;margin:22px 0 10px;display:flex;align-items:center;gap:10px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(8,145,178,.15)}
+
+.service-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc-card{background:#fff;border:1px solid #cffafe;border-radius:14px;padding:16px}
+.svc-card.wide{grid-column:span 2}
+.svc-emoji{font-size:28px;margin-bottom:8px}
+.svc-name{font-size:13px;font-weight:700;color:#164e63}
+.svc-desc{font-size:10px;color:#6baac0;margin-top:3px;line-height:1.4}
+.svc-price{font-size:16px;font-weight:700;color:#0891b2;margin-top:8px}
+.svc-per{font-size:9px;color:#8cc8d8;margin-top:1px}
+.popular-tag{display:inline-block;background:#cffafe;color:#0e7490;font-size:8px;font-weight:700;padding:2px 8px;border-radius:100px;margin-bottom:6px;letter-spacing:.5px}
+
+.checklist{background:#fff;border:1px solid #cffafe;border-radius:14px;padding:16px}
+.checklist h4{font-size:13px;font-weight:700;color:#164e63;margin-bottom:12px}
+.check-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f0fafa;font-size:12px;color:#4a8090}
+.check-item:last-child{border-bottom:none}
+.check-item::before{content:'✓';color:#0891b2;font-weight:700;font-size:13px;flex-shrink:0;margin-top:0}
+
+.book-box{background:linear-gradient(135deg,#0891b2,#0e7490);border-radius:16px;padding:22px;text-align:center}
+.book-box h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.book-box p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:18px;line-height:1.5}
+.book-btn{display:block;background:#fff;color:#0e7490;border-radius:10px;padding:14px;font-weight:700;font-size:14px;text-decoration:none;margin-bottom:8px}
+.book-btn2{display:block;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px;font-size:11px;text-decoration:none}
+
+.contact-box{background:#fff;border:1px solid #cffafe;border-radius:12px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f0fafa;font-size:12px;color:#333}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:30px;height:30px;background:#0891b2;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#065a60;padding:18px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="bubbles"><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div></div>
+  <div class="hero-shine">✨</div>
+  <div class="hero-pill">🧹 Now booking this week</div>
+  <h1>Sparkle<span>Clean</span></h1>
+  <div class="hero-sub">Professional cleaning for homes, offices & after-construction. Guaranteed spotless — or we return free.</div>
+  <div class="hero-rating"><span class="stars">★★★★★</span><span class="rating-text">4.9 · 620 reviews</span></div>
+</div>
+<div class="why-strip">
+  <div class="why-item"><div class="why-icon">🧴</div><div class="why-label">Eco Products</div></div>
+  <div class="why-item"><div class="why-icon">👔</div><div class="why-label">Uniformed Staff</div></div>
+  <div class="why-item"><div class="why-icon">🔒</div><div class="why-label">Background Checked</div></div>
+  <div class="why-item"><div class="why-icon">💰</div><div class="why-label">Fixed Pricing</div></div>
+  <div class="why-item"><div class="why-icon">🔁</div><div class="why-label">Free Redo</div></div>
+</div>
+<div class="body">
+  <div class="sec">Cleaning Services</div>
+  <div class="service-cards">
+    <div class="svc-card">
+      <div class="popular-tag">⭐ Popular</div>
+      <div class="svc-emoji">🏠</div>
+      <div class="svc-name">Home Deep Clean</div>
+      <div class="svc-desc">Full house — every room, kitchen, bathrooms</div>
+      <div class="svc-price">৳2,500</div>
+      <div class="svc-per">from / 2BHK</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-emoji">🏢</div>
+      <div class="svc-name">Office Clean</div>
+      <div class="svc-desc">Desks, floors, toilets, kitchen — weekly plans</div>
+      <div class="svc-price">৳3,500</div>
+      <div class="svc-per">from / month</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-emoji">🧱</div>
+      <div class="svc-name">Post-Construction</div>
+      <div class="svc-desc">Dust, cement, paint removal — new builds</div>
+      <div class="svc-price">৳5,000</div>
+      <div class="svc-per">from</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-emoji">🛋️</div>
+      <div class="svc-name">Sofa & Carpet</div>
+      <div class="svc-desc">Steam clean, stain removal, odour treatment</div>
+      <div class="svc-price">৳1,500</div>
+      <div class="svc-per">from / 3-seater</div>
+    </div>
+    <div class="svc-card wide">
+      <div class="svc-emoji">🏗️</div>
+      <div class="svc-name">Move-In / Move-Out Clean</div>
+      <div class="svc-desc">Complete clean before or after a move. Kitchen appliances, inside cupboards, bathroom deep clean. Bond-back quality guaranteed.</div>
+      <div class="svc-price">৳4,000 <span style="font-size:12px;color:#6baac0">from / apartment</span></div>
+    </div>
+  </div>
+
+  <div class="sec">What's Always Included</div>
+  <div class="checklist">
+    <h4>Every booking includes:</h4>
+    <div class="check-item">All eco-friendly cleaning products supplied</div>
+    <div class="check-item">Uniformed, police-verified team</div>
+    <div class="check-item">Before &amp; after photos sent to you</div>
+    <div class="check-item">48-hour free redo guarantee</div>
+    <div class="check-item">Tidy up — we never leave a mess</div>
+  </div>
+
+  <div class="sec">Book Your Clean</div>
+  <div class="book-box">
+    <h3>✨ First clean 20% off!</h3>
+    <p>New clients get 20% off their first booking. Use code SPARKLE at checkout or mention it on WhatsApp.</p>
+    <a href="https://wa.me/8801700000000" class="book-btn">🧹 Book via WhatsApp</a>
+    <a href="tel:+8801700000000" class="book-btn2">📞 Call for instant quote</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-box">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📍</div>Based in Uttara · All Dhaka covered</div>
+    <div class="c-row"><div class="c-icon">⏰</div>Sat–Thu · 7am–8pm · Fri 9am–5pm</div>
+    <div class="c-row"><div class="c-icon">📸</div>@sparkleclean.bd</div>
+  </div>
+</div>
+<footer>© 2025 SparkleClean · Professional Cleaning · Dhaka · Satisfaction Guaranteed</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

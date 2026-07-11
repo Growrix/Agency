@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Chef's Table — Private Chef & Catering</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Raleway',sans-serif;background:#2d0a14;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#1a0608;margin:0 auto;color:#f0e8e0}
+
+.hero{min-height:300px;background:#1a0608;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 26px;border-bottom:1px solid rgba(200,60,80,.2)}
+.hero-texture{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.01) 0px,rgba(255,255,255,.01) 1px,transparent 1px,transparent 3px)}
+.hero-accent1{position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(180,30,50,.2) 0%,transparent 70%)}
+.hero-accent2{position:absolute;bottom:-30px;left:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,80,.1) 0%,transparent 70%)}
+.hero-ribbon{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c43c50,#c8a060,#c43c50,transparent)}
+.hero-chef{position:absolute;top:28px;right:20px;font-size:48px;opacity:.06}
+.hero-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,160,100,.6);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:rgba(200,160,100,.3)}
+.hero h1{font-family:'Libre Caslon Display',serif;font-size:44px;color:#f0e8e0;line-height:.92;letter-spacing:-1px}
+.hero h1 em{display:block;font-style:italic;color:rgba(200,160,100,.8);font-size:34px}
+.hero-sub{font-size:10px;color:rgba(240,232,224,.3);margin-top:12px;letter-spacing:2.5px;text-transform:uppercase}
+.hero-tagline{font-family:'Libre Caslon Text',serif;font-style:italic;font-size:13px;color:rgba(240,232,224,.45);margin-top:10px;line-height:1.6}
+
+.chef-info{display:flex;gap=14px;background:#200a0e;border-bottom:1px solid rgba(200,60,80,.15);padding:14px 22px;align-items:center;gap:14px}
+.chef-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#c43c50,#8c2030);display:flex;align-items:center;justify-content:center;font-family:'Libre Caslon Text',serif;font-size:18px;font-style:italic;color:#f0e8e0;flex-shrink:0;border:1.5px solid rgba(200,60,80,.3)}
+.chef-name{font-family:'Libre Caslon Text',serif;font-size:16px;color:#f0e8e0;font-style:italic}
+.chef-title{font-size:10px;color:rgba(240,232,224,.35);margin-top:2px;letter-spacing:.5px}
+.chef-exp{font-size:9px;color:rgba(200,160,100,.5);margin-top:3px;letter-spacing:.3px}
+.chef-rating{margin-left:auto;text-align:right;flex-shrink:0}
+.chef-stars{color:#c8a060;font-size:12px;letter-spacing:1px}
+.chef-reviews{font-size:9px;color:rgba(240,232,224,.3);margin-top:2px}
+
+.body{padding:0 18px 40px}
+.sec{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,160,100,.5);margin:28px 0 14px;display:flex;align-items:center;gap:12px}
+.sec::before{content:'✦';font-size:10px;color:rgba(200,60,80,.4)}
+.sec::after{content:'';flex:1;height:1px;background:rgba(200,160,100,.15)}
+
+.menu-cats{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:14px}
+.menu-cats::-webkit-scrollbar{display:none}
+.mcat{flex-shrink:0;font-size:10px;font-weight:600;letter-spacing:.5px;color:rgba(240,232,224,.35);padding:5px 12px;border:1px solid rgba(255,255,255,.06);border-radius:100px;cursor:pointer}
+.mcat.active{background:rgba(200,60,80,.15);border-color:rgba(200,60,80,.3);color:rgba(200,160,100,.8)}
+
+.course{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:12px;justify-content:space-between;align-items:flex-start}
+.course:last-child{border-bottom:none}
+.course-num{font-family:'Libre Caslon Text',serif;font-size:11px;font-style:italic;color:rgba(240,232,224,.2);flex-shrink:0;min-width:20px}
+.course-name{font-family:'Libre Caslon Text',serif;font-size:15px;color:#f0e8e0;font-style:italic;letter-spacing:.2px}
+.course-desc{font-size:10px;color:rgba(240,232,224,.3);margin-top:3px;line-height:1.5;letter-spacing:.2px}
+.course-tag{display:inline-block;font-size:8px;padding:2px 7px;border-radius:2px;margin-top:4px;letter-spacing:.5px}
+.course-sig{background:rgba(200,60,80,.15);color:rgba(200,60,80,.8)}
+
+.occasions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.occasion{background:#200a0e;border:1px solid rgba(200,60,80,.12);border-radius:10px;padding:14px;text-align:center}
+.occ-icon{font-size:24px;margin-bottom:8px}
+.occ-name{font-family:'Libre Caslon Text',serif;font-size:14px;font-style:italic;color:#f0e8e0}
+.occ-desc{font-size:10px;color:rgba(240,232,224,.3);margin-top:3px;line-height:1.4}
+.occ-price{font-family:'Libre Caslon Text',serif;font-size:15px;color:rgba(200,160,100,.7);margin-top:6px;font-style:italic}
+
+.tasting-box{background:#200a0e;border:1px solid rgba(200,60,80,.2);padding:22px;position:relative;overflow:hidden}
+.tasting-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,100,.4),transparent)}
+.tasting-eyebrow{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(200,160,100,.4);margin-bottom:14px}
+.tasting-box h3{font-family:'Libre Caslon Display',serif;font-size:26px;color:#f0e8e0;margin-bottom:8px;letter-spacing:-.5px}
+.tasting-box p{font-size:12px;color:rgba(240,232,224,.35);line-height:1.7;margin-bottom:18px;letter-spacing:.2px;font-style:italic}
+.tasting-price{font-family:'Libre Caslon Text',serif;font-size:22px;color:rgba(200,160,100,.8);margin-bottom:18px;font-style:italic}
+.tasting-price span{font-size:11px;color:rgba(240,232,224,.3);font-family:'Raleway',sans-serif;font-style:normal}
+.tasting-btn{display:block;border:1px solid rgba(200,60,80,.5);color:rgba(200,60,80,.8);padding:14px;text-align:center;font-size:9px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;margin-bottom:8px}
+.tasting-btn2{display:block;color:rgba(240,232,224,.25);text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+
+.contact-list{background:#200a0e;border:1px solid rgba(255,255,255,.04);overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.03);font-size:11px;color:rgba(240,232,224,.35);letter-spacing:.2px}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:28px;height:28px;border:1px solid rgba(200,60,80,.2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#110406;border-top:1px solid rgba(200,60,80,.15);padding:22px;text-align:center}
+.footer-logo{font-family:'Libre Caslon Display',serif;font-size:22px;color:rgba(200,160,100,.2);margin-bottom:6px;letter-spacing:-1px}
+.footer-copy{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,232,224,.1)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-accent1"></div>
+  <div class="hero-accent2"></div>
+  <div class="hero-ribbon"></div>
+  <div class="hero-chef">👨‍🍳</div>
+  <div class="hero-eyebrow">Private Chef &amp; Catering</div>
+  <h1>Chef's<br><em>Table</em></h1>
+  <div class="hero-sub">Private dining · Events · Catering · Dhaka</div>
+  <div class="hero-tagline">"Great food is the language of love. Let me speak it at your table."</div>
+</div>
+<div class="chef-info">
+  <div class="chef-av">RH</div>
+  <div>
+    <div class="chef-name">Chef Rashid Hussain</div>
+    <div class="chef-title">Culinary Institute of Paris · 18 years</div>
+    <div class="chef-exp">Former: La Maison, The Lakeshore, Radisson Blu</div>
+  </div>
+  <div class="chef-rating"><div class="chef-stars">★★★★★</div><div class="chef-reviews">94 events</div></div>
+</div>
+<div class="body">
+  <div class="sec">Signature Tasting Menu</div>
+  <div class="menu-cats">
+    <div class="mcat active">Tasting Menu</div>
+    <div class="mcat">Mediterranean</div>
+    <div class="mcat">Asian Fusion</div>
+    <div class="mcat">Classic French</div>
+  </div>
+  <div class="course"><span class="course-num">I</span><div><div class="course-name">Amuse-Bouche</div><div class="course-desc">Chef's daily inspiration · Seasonal, one bite</div></div></div>
+  <div class="course"><span class="course-num">II</span><div><div class="course-name">Scallop Crudo</div><div class="course-desc">Yuzu dressing · Radish · Micro herbs · Caviar</div><div class="course-tag course-sig">Signature</div></div></div>
+  <div class="course"><span class="course-num">III</span><div><div class="course-name">Truffle Risotto</div><div class="course-desc">Aged parmesan · Black truffle shaving · Chervil</div><div class="course-tag course-sig">Signature</div></div></div>
+  <div class="course"><span class="course-num">IV</span><div><div class="course-name">Wagyu Tenderloin</div><div class="course-desc">Grade A5 · Bordelaise · Seasonal root vegetables</div></div></div>
+  <div class="course"><span class="course-num">V</span><div><div class="course-name">Valrhona Chocolate</div><div class="course-desc">72% dark · Miso caramel · Raspberry sorbet</div></div></div>
+
+  <div class="sec">Occasions</div>
+  <div class="occasions">
+    <div class="occasion"><div class="occ-icon">🕯️</div><div class="occ-name">Intimate Dinner</div><div class="occ-desc">2–8 guests · In your home</div><div class="occ-price">From $400</div></div>
+    <div class="occasion"><div class="occ-icon">🥂</div><div class="occ-name">Dinner Party</div><div class="occ-desc">Up to 20 guests</div><div class="occ-price">From $900</div></div>
+    <div class="occasion"><div class="occ-icon">💍</div><div class="occ-name">Proposal Dinner</div><div class="occ-desc">Special evening · Customised</div><div class="occ-price">From $600</div></div>
+    <div class="occasion"><div class="occ-icon">🏢</div><div class="occ-name">Corporate Events</div><div class="occ-desc">Board dinners · Lunches</div><div class="occ-price">From $1,200</div></div>
+  </div>
+
+  <div class="sec">Signature Experience</div>
+  <div class="tasting-box">
+    <div class="tasting-eyebrow">Chef's Table · In Your Home</div>
+    <h3>The Full Experience</h3>
+    <p>Chef Rashid and a small team arrive at your home and prepare a bespoke 7-course tasting menu. Paired wines optional. From arrival to clear-up, everything is handled.</p>
+    <div class="tasting-price">From $800 <span>for up to 6 guests</span></div>
+    <a href="https://wa.me/0000000000" class="tasting-btn">Enquire &amp; Book</a>
+    <a href="mailto:chef@chefstable.com.bd" class="tasting-btn2">chef@chefstable.com.bd →</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contact-list">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📧</div>chef@chefstable.com.bd</div>
+    <div class="c-row"><div class="c-icon">📍</div>Based in Gulshan · Serves all Dhaka</div>
+    <div class="c-row"><div class="c-icon">⏰</div>Bookings: 72hrs advance notice</div>
+  </div>
+</div>
+<footer><div class="footer-logo">Chef's Table</div><div class="footer-copy">© 2025 Chef's Table · Private Dining · Dhaka</div></footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

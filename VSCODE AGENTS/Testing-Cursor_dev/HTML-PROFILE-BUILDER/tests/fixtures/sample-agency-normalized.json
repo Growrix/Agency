@@ -1,0 +1,87 @@
+{
+  "clientId": "nexus-digital",
+  "revision": "v1",
+  "businessName": "Nexus Digital",
+  "tagline": "Web engineering and conversion systems",
+  "businessType": "agency",
+  "colorVibe": "bold",
+  "deliveryTier": "premium",
+  "contact": {
+    "phone": "+8801911000000",
+    "whatsapp": "8801911000000",
+    "email": "hello@nexusdigital.dev"
+  },
+  "location": {
+    "address": "Banani DOHS, Dhaka",
+    "googleMapsLink": "https://maps.google.com/?q=Nexus+Digital"
+  },
+  "social": {
+    "facebook": "https://facebook.com/nexusdigital",
+    "instagram": "https://instagram.com/nexusdigital",
+    "website": "https://nexusdigital.dev"
+  },
+  "services": [
+    {
+      "name": "Landing Page Systems",
+      "description": "Conversion-focused pages for campaigns and launches",
+      "price": "BDT 35000"
+    },
+    {
+      "name": "Retainer Design Support",
+      "description": "Weekly design and frontend iteration",
+      "price": "BDT 60000"
+    }
+  ],
+  "hours": {
+    "mondayFriday": "10:00am - 7:00pm",
+    "saturday": "By appointment",
+    "sunday": "Closed",
+    "publicHolidays": "Closed"
+  },
+  "aboutText": "Nexus Digital helps service businesses tighten positioning and ship higher-converting frontend experiences.",
+  "team": [
+    {
+      "name": "Rafi Alam",
+      "role": "Founder",
+      "initials": "RA"
+    },
+    {
+      "name": "Sadia Noor",
+      "role": "Frontend Lead",
+      "initials": "SN"
+    }
+  ],
+  "assets": {
+    "logoPath": "assets/logos/nexus-digital/logo.svg",
+    "gallery": []
+  },
+  "optionalSections": {
+    "statusLabel": "Available for Projects",
+    "ratingLabel": "",
+    "proofStats": [
+      {
+        "label": "Projects shipped",
+        "value": "48+"
+      },
+      {
+        "label": "Avg. launch window",
+        "value": "14 days"
+      }
+    ],
+    "portfolioLabels": [],
+    "techStack": [
+      "Next.js",
+      "Node.js",
+      "Vercel",
+      "Analytics"
+    ],
+    "processSteps": [
+      "Audit the current funnel",
+      "Lock the offer and message",
+      "Design the page system",
+      "Launch and measure"
+    ],
+    "deliveryInfo": "Remote across Bangladesh and GCC",
+    "bookingLink": "https://cal.com/nexus-digital/intro"
+  }
+}

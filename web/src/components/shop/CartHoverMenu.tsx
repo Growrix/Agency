@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { formatCartItemDisplayName, formatUsdFromCents, useCartStore } from "@/lib/cart-store";
 import { getCheckoutHref } from "@/lib/shop";
@@ -149,17 +149,35 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
               <ul className="max-h-80 space-y-2 overflow-y-auto py-2">
                 {previewItems.map((item) => {
                   const lineCents = item.unit_price_cents * item.quantity;
+                  const itemTitle = formatCartItemDisplayName(item);
                   return (
                     <li
                       key={`${item.product_slug}::${item.variant_slug ?? "base"}::${item.tier_name ?? ""}`}
                       className="flex items-start gap-3 rounded-sm border border-border/40 bg-inset/25 px-2.5 py-2"
                     >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-border/60 bg-surface">
+                        {item.product_image_src ? (
+                          <div
+                            aria-hidden
+                            className="h-full w-full bg-cover bg-center"
+                            style={{ backgroundImage: `url("${item.product_image_src}")` }}
+                          />
+                        ) : (
+                          <span
+                            className="inline-flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary"
+                            aria-hidden
+                          >
+                            <PhotoIcon className="size-4" />
+                          </span>
+                        )}
+                      </div>
+
                       <div className="min-w-0 flex-1">
                         <Link
                           href={`/digital-products/${item.product_slug}`}
                           className="block truncate text-sm font-medium text-text hover:text-primary"
                         >
-                          {formatCartItemDisplayName(item)}
+                          {itemTitle}
                         </Link>
                         <p className="mt-0.5 text-[11px] text-text-muted">
                           {item.tier_name ? `${item.tier_name} · ` : ""}

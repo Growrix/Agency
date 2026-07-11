@@ -1,0 +1,22 @@
+{
+  "name": "fresh-green",
+  "colorPrimary": "#16803c",
+  "colorAccent": "#0f9f5f",
+  "colorBg": "#f2fcf5",
+  "colorSurface": "#ffffff",
+  "colorText": "#07361a",
+  "colorMuted": "#496354",
+  "colorBorder": "#ccefd7",
+  "colorTextOnPrimary": "#ffffff",
+  "colorTextOnHero": "#ffffff",
+  "colorMutedOnHero": "#f4fff8",
+  "colorHeroChipBg": "#eefbf2",
+  "colorHeroChipText": "#07361a",
+  "colorHeroChipBorder": "#bfe4cb",
+  "fontHeading": "Fraunces",
+  "fontBody": "Plus Jakarta Sans",
+  "fontHeadingWeights": "500;700",
+  "fontBodyWeights": "400;500;700",
+  "borderRadius": "16px",
+  "heroGradient": "linear-gradient(150deg, #16a34a 0%, #07361a 100%)"
+}

@@ -1,0 +1,78 @@
+---
+description: Backend platform standards — route/service/repository layering, Zod boundaries, webhook idempotency, env boot validation for web/src/server and web/src/app/api.
+globs:
+  - web/src/server/**
+  - web/src/app/api/**
+---
+
+# Backend Platform Standards (B1–B14 adapted)
+
+Applies to all work under `web/src/server/` and `web/src/app/api/`.
+
+## Layering (B1)
+
+1. **Routes** (`web/src/app/api/**/route.ts`) — HTTP only: parse, validate, auth gate, call domain/service, map errors.
+2. **Domain** (`web/src/server/domain/*.ts`) — business logic and orchestration.
+3. **Data** (`web/src/server/data/`, repositories) — persistence only.
+
+Routes MUST NOT query persistence directly. Crossing layers is forbidden.
+
+## Validation (B2)
+
+- Every route validates input with Zod (or shared schema module).
+- Every webhook verifies provider signature on **raw body** before JSON parse.
+- Services accept typed inputs — no `any`.
+
+## Auth (B3)
+
+- Identity: **Clerk** via `@clerk-nextjs-auth` — not Supabase Auth.
+- Use server auth helpers; never trust client-supplied user IDs for authorization.
+- Authorization checks belong in domain/services.
+
+## Integrations (B4)
+
+- One client per provider; domain/services orchestrate — routes never import SDKs directly.
+- Env vars from `web/src/server/config/runtime.ts` only — **never invent names**.
+- Lazy-load `@integration-platform` playbooks per provider.
+
+## Webhooks (B6, B8)
+
+Every webhook route MUST:
+
+1. Read raw body; verify signature; return 400 on failure.
+2. Be idempotent by event ID — duplicate delivery must not corrupt state.
+3. Respond 2xx quickly; defer heavy work when possible.
+4. Log structured context for audit.
+
+## Errors (B7)
+
+- Typed domain errors; routes map to HTTP via shared helper.
+- No stack traces or internal paths in client responses.
+
+## Env (B9)
+
+- Required vars validated at boot via runtime config.
+- Server secrets MUST NOT use `NEXT_PUBLIC_` prefix.
+
+## Rate limiting (B10)
+
+- Public unauthenticated endpoints use centralized abuse limits from `runtime.ts`.
+
+## Contracts (B14)
+
+- New API surface: delegate `@api-contract-architect` before implementation.
+- Align with `DOC/PROJECT PLAN/API and Data/` contracts.
+
+## Phase discipline
+
+- Mid-phase: `ReadLints` + narrow lint/typecheck on touched server files.
+- Phase-end: `@backend-quality-enforcer` via `/phase-gate-backend` — not full E2E after every edit.
+
+## Handoffs
+
+| Scope | Owner |
+|-------|-------|
+| Clerk wiring | `@clerk-nextjs-auth` |
+| Backend-only feature | `@senior-backend-devops-developer` |
+| Cross-layer feature | `@senior-saas-developer` |
+| UI work | `@senior-frontend-specialist` |

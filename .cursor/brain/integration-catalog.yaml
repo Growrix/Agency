@@ -1,0 +1,136 @@
+version: 1
+purpose: Machine-readable provider → env → routes → owner skill mapping for Growrixos web/
+last_updated: 2026-06-26
+env_source_of_truth: web/src/server/config/runtime.ts
+playbook_root: ~/.cursor/skills/integration-platform/references/
+repo_stubs: DOC/knowledge/integration-rules/
+
+providers:
+  clerk:
+    role: auth
+    owner_skill: clerk-nextjs-auth
+    env_vars:
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+      - CLERK_SECRET_KEY
+      - CLERK_WEBHOOK_SIGNING_SECRET
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+    routes:
+      - /api/webhooks/clerk
+    repo_doc: DOC/knowledge/integration-rules/auth/clerk.yaml
+    playbook: null
+    priority: P0
+
+  supabase:
+    role: database
+    owner_skill: integration-platform
+    env_vars:
+      - SUPABASE_URL
+      - SUPABASE_ANON_KEY
+      - SUPABASE_SECRET_KEY
+      - SUPABASE_SERVICE_ROLE_KEY
+    routes: []
+    repo_doc: DOC/knowledge/integration-rules/database/supabase.yaml
+    playbook: supabase.md
+    priority: P0
+
+  stripe:
+    role: payments
+    owner_skill: integration-platform
+    env_vars:
+      - STRIPE_SECRET_KEY
+      - STRIPE_WEBHOOK_SECRET
+    routes:
+      - /api/v1/orders/webhook
+    repo_doc: DOC/knowledge/integration-rules/payments/stripe.yaml
+    playbook: stripe.md
+    priority: P0
+
+  resend:
+    role: email
+    owner_skill: integration-platform
+    env_vars:
+      - RESEND_API_KEY
+      - CONTACT_TO_EMAIL
+      - CONTACT_FROM_EMAIL
+      - CONTACT_FROM_FALLBACK_EMAIL
+    routes:
+      - /api/v1/contact
+      - /api/contact
+    repo_doc: DOC/knowledge/integration-rules/email/resend.yaml
+    playbook: resend.md
+    priority: P0
+
+  sanity:
+    role: cms
+    owner_skill: integration-platform
+    env_vars:
+      - NEXT_PUBLIC_SANITY_PROJECT_ID
+      - NEXT_PUBLIC_SANITY_DATASET
+      - SANITY_API_READ_TOKEN
+    routes:
+      - /api/revalidate
+    repo_doc: DOC/knowledge/integration-rules/cms/sanity-server.yaml
+    playbook: sanity-server.md
+    priority: P1
+
+  lark:
+    role: notifications
+    owner_skill: integration-platform
+    env_vars:
+      - LARK_WEBHOOK_URL
+      - LARK_SIGNING_SECRET
+      - LEAD_HOT_THRESHOLD
+    routes: []
+    repo_doc: DOC/knowledge/integration-rules/notifications/lark.yaml
+    playbook: lark.md
+    priority: P1
+
+  openai:
+    role: ai
+    owner_skill: integration-platform
+    env_vars:
+      - OPENAI_API_KEY
+      - OPENAI_MODEL
+    routes:
+      - /api/v1/ai-concierge
+      - /api/v1/ai-concierge/[sessionId]
+    repo_doc: DOC/knowledge/integration-rules/ai/openai.yaml
+    playbook: openai.md
+    priority: P1
+
+  twilio:
+    role: sms
+    owner_skill: integration-platform
+    env_vars: []
+    routes: []
+    repo_doc: null
+    playbook: twilio.md
+    priority: P2
+    status: planned
+
+  posthog:
+    role: analytics
+    owner_skill: null
+    status: missing_knowledge
+    priority: P2
+
+  inngest:
+    role: queue
+    owner_skill: null
+    status: missing_knowledge
+    priority: P2
+
+  pusher:
+    role: realtime
+    owner_skill: null
+    status: missing_knowledge
+    priority: P2
+
+  s3:
+    role: storage
+    owner_skill: null
+    status: missing_knowledge
+    priority: P2

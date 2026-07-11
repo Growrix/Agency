@@ -1,0 +1,33 @@
+{
+  "runtime_root": "Foundation-Core",
+  "package_manager": "npm",
+  "commands": {
+    "install": "npm install",
+    "dev": "npm run dev",
+    "build": "npm run build",
+    "verify": "npm run verify",
+    "stripe_listen": "stripe listen --forward-to http://localhost:3000/api/webhooks/stripe"
+  },
+  "env_bootstrap": [
+    "Copy ENV.example to .env.local.",
+    "Add STRIPE_SECRET_KEY.",
+    "Add STRIPE_WEBHOOK_SECRET.",
+    "Add NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY only if the template uses Stripe.js directly."
+  ],
+  "local_prerequisites": [
+    "Node.js and npm",
+    "Stripe CLI for webhook forwarding",
+    "A local database matching the Foundation runtime contract"
+  ],
+  "smoke_steps": [
+    "POST /api/billing/checkout with auth and a valid offer_key returns a checkout URL.",
+    "POST /api/billing/portal with auth returns a portal URL.",
+    "POST /api/webhooks/stripe without a valid signature returns 400.",
+    "A signed webhook event updates the mirrored billing state."
+  ],
+  "windows_notes": [
+    "Run commands from the Foundation-Core root.",
+    "Quote paths or use a junction alias when shelling through directories that contain an ampersand."
+  ],
+  "export_rule": "Stripe integration must boot from the exported Foundation-Core root without monorepo-only path assumptions."
+}

@@ -1,0 +1,12 @@
+version: 1
+tracker:
+  status: starter-attached
+  canonical_file: DOC/PROJECT PLAN/Tasks/tasks.md
+  rule: >-
+    Update this tracker only after canonical planning docs exist or after
+    material implementation work changes project status.
+  expected_sections:
+    - Project Status
+    - Active Planning Artifacts
+    - Next Steps
+    - Blockers

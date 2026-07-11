@@ -1,0 +1,57 @@
+{
+  "clientId": "brew-and-bean",
+  "revision": "v1",
+  "businessName": "Brew & Bean",
+  "tagline": "Artisan Coffee and Cafe",
+  "businessType": "cafe",
+  "colorVibe": "warm",
+  "deliveryTier": "professional",
+  "contact": {
+    "phone": "+8801700000000",
+    "whatsapp": "8801700000000",
+    "email": "hello@brewandbean.com"
+  },
+  "location": {
+    "address": "House 12, Road 64, Gulshan-2, Dhaka 1212",
+    "googleMapsLink": "https://maps.google.com/?q=Brew+and+Bean"
+  },
+  "social": {
+    "facebook": "https://facebook.com/brewandbean",
+    "instagram": "https://instagram.com/brewandbean",
+    "website": ""
+  },
+  "services": [
+    {
+      "name": "Signature Cold Brew",
+      "description": "12hr steeped, over ice",
+      "price": "BDT 320"
+    },
+    {
+      "name": "Hazelnut Latte",
+      "description": "Double shot, oat milk",
+      "price": "BDT 280"
+    }
+  ],
+  "hours": {
+    "mondayFriday": "7:00am - 10:00pm",
+    "saturday": "8:00am - 11:00pm",
+    "sunday": "8:00am - 11:00pm",
+    "publicHolidays": "9:00am - 9:00pm"
+  },
+  "aboutText": "Brew & Bean serves specialty coffee and a concise brunch menu in Gulshan.",
+  "team": [],
+  "assets": {
+    "logoPath": "assets/logos/brew-and-bean/logo.svg",
+    "gallery": []
+  },
+  "optionalSections": {
+    "statusLabel": "Open Daily",
+    "ratingLabel": "",
+    "proofStats": [],
+    "portfolioLabels": [],
+    "techStack": [],
+    "processSteps": [],
+    "deliveryInfo": "Pickup available",
+    "bookingLink": ""
+  }
+}

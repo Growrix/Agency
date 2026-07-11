@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="236" height="52" viewBox="0 0 236 52" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Velocare Auto Studio</title>
+  <desc id="logoDesc">Velocare Auto Studio wordmark</desc>
+  <defs>
+    <linearGradient id="brandRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6347"/>
+      <stop offset="100%" stop-color="#d6402a"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="236" height="52" fill="none"/>
+  <circle cx="26" cy="26" r="22" fill="url(#brandRed)"/>
+  <path d="M13 23.5c7.2-7.8 16.1-9.4 26-5.4" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M14.5 30.8h23.5" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="19" cy="31" r="2.7" fill="#ffffff"/>
+  <circle cx="33" cy="31" r="2.7" fill="#ffffff"/>
+  <text x="56" y="27" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" letter-spacing="0.2">Velocare</text>
+  <text x="56" y="43" fill="#cfd5df" font-family="Arial, Helvetica, sans-serif" font-size="9.6" font-weight="600" letter-spacing="2.2">AUTO STUDIO</text>
+</svg>

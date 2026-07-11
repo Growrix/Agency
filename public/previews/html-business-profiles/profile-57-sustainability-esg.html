@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Verdant Advisory — ESG & Sustainability Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#1a2410;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f4f0e8;margin:0 auto}
+
+.hero{min-height:280px;background:#1e2e14;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 22px 24px}
+.earth-texture{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(80,120,40,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,rgba(140,100,40,.2) 0%,transparent 50%)}
+.leaf-scatter{position:absolute;inset:0;font-size:24px;display:flex;flex-wrap:wrap;gap:28px;padding:10px;opacity:.05;align-content:flex-start;pointer-events:none}
+.h-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(180,210,120,.5);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.h-leaf{font-size:12px}
+.hero h1{font-family:'Fraunces',serif;font-size:38px;font-weight:300;color:#e8f0d0;line-height:.95;letter-spacing:-.5px}
+.hero h1 em{font-style:italic;color:rgba(160,200,80,.8)}
+.hero-rule{width:40px;height:2px;background:rgba(160,200,80,.4);margin:14px 0 10px}
+.hero-sub{font-size:11px;color:rgba(232,240,208,.4);line-height:1.6;letter-spacing:.2px}
+
+.sdg-strip{background:#1a2410;padding:12px 16px;border-bottom:1px solid rgba(80,120,40,.2);display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.sdg-strip::-webkit-scrollbar{display:none}
+.sdg-label{font-size:9px;color:rgba(160,200,80,.4);letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0;font-weight:500}
+.sdg{width:28px;height:28px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+
+.body{padding:0 20px 40px;background:#f4f0e8}
+.sec{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(60,80,30,.4);margin:24px 0 12px;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:1px;background:rgba(60,80,30,.12)}
+
+.services{display:flex;flex-direction:column;gap:8px}
+.svc{background:#fff;border:1px solid rgba(80,120,40,.12);border-radius:10px;padding:16px;display:flex;gap=14px;align-items:flex-start;gap:12px;border-left:3px solid rgba(80,120,40,.3)}
+.svc-icon{font-size:22px;flex-shrink:0}
+.svc-name{font-family:'Fraunces',serif;font-size:15px;font-weight:400;color:#1e2e14;font-style:italic}
+.svc-desc{font-size:11px;color:rgba(30,46,20,.4);margin-top:3px;line-height:1.5}
+
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.impact-card{background:#fff;border:1px solid rgba(80,120,40,.12);border-radius:10px;padding:16px;text-align:center}
+.impact-n{font-family:'Fraunces',serif;font-size:26px;color:#3a5a18;font-weight:400}
+.impact-l{font-size:10px;color:rgba(30,46,20,.4);margin-top:4px;line-height:1.4;letter-spacing:.3px}
+
+.reports{display:flex;flex-direction:column;gap:6px}
+.report{background:#fff;border:1px solid rgba(80,120,40,.12);border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px}
+.report-icon{font-size:22px;flex-shrink:0}
+.report-name{font-family:'Fraunces',serif;font-size:14px;color:#1e2e14;font-style:italic}
+.report-type{font-size:10px;color:rgba(30,46,20,.35);margin-top:2px;letter-spacing:.3px}
+.report-year{margin-left:auto;font-size:11px;font-weight:500;color:rgba(80,120,40,.6);flex-shrink:0}
+
+.cta{background:#1e2e14;border-radius:14px;padding:22px;text-align:center}
+.cta h3{font-family:'Fraunces',serif;font-size:22px;font-weight:300;color:#e8f0d0;font-style:italic;margin-bottom:8px}
+.cta p{font-size:12px;color:rgba(232,240,208,.4);margin-bottom:18px;line-height:1.5}
+.cta-btn{display:block;background:rgba(160,200,80,.15);color:#a0c850;border:1px solid rgba(160,200,80,.3);border-radius:8px;padding:13px;font-size:13px;font-weight:500;text-decoration:none;margin-bottom:8px}
+.cta-btn2{display:block;background:rgba(255,255,255,.04);color:rgba(232,240,208,.3);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:11px;font-size:11px;text-decoration:none}
+
+.contacts{background:#fff;border:1px solid rgba(80,120,40,.12);border-radius:10px;overflow:hidden}
+.cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(80,120,40,.06);font-size:12px;color:rgba(30,46,20,.45)}
+.cr:last-child{border-bottom:none}
+.ci{width:28px;height:28px;background:rgba(80,120,40,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+footer{background:#1a2410;padding:18px;text-align:center;font-family:'Fraunces',serif;font-size:12px;font-style:italic;color:rgba(160,200,80,.2)}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="earth-texture"></div>
+  <div class="leaf-scatter">🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿</div>
+  <div class="h-eyebrow"><span class="h-leaf">🌿</span> ESG & Sustainability Advisory</div>
+  <h1>Business that's<br>good for the<br><em>planet.</em></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Helping Bangladesh's leading companies build sustainable, profitable, and responsible businesses. Strategy to reporting.</div>
+</div>
+<div class="sdg-strip">
+  <span class="sdg-label">UN SDGs:</span>
+  <div class="sdg" style="background:#e5243b">7</div>
+  <div class="sdg" style="background:#26bde2">6</div>
+  <div class="sdg" style="background:#fd9d24">12</div>
+  <div class="sdg" style="background:#3f7e44">13</div>
+  <div class="sdg" style="background:#0a97d9">14</div>
+  <div class="sdg" style="background:#56c02b">15</div>
+  <div class="sdg" style="background:#00689d">17</div>
+</div>
+<div class="body">
+  <div class="sec">Advisory Services</div>
+  <div class="services">
+    <div class="svc"><div class="svc-icon">📋</div><div><div class="svc-name">ESG Strategy & Roadmap</div><div class="svc-desc">Materiality assessment, goal-setting, stakeholder mapping, 3-year ESG roadmap</div></div></div>
+    <div class="svc"><div class="svc-icon">📊</div><div><div class="svc-name">Sustainability Reporting</div><div class="svc-desc">GRI, TCFD, SASB frameworks — annual sustainability reports for listed companies</div></div></div>
+    <div class="svc"><div class="svc-icon">🌱</div><div><div class="svc-name">Carbon Footprint & Net Zero</div><div class="svc-desc">Scope 1/2/3 emissions, reduction pathways, offset strategies, SBTi alignment</div></div></div>
+    <div class="svc"><div class="svc-icon">🏭</div><div><div class="svc-name">Supply Chain Due Diligence</div><div class="svc-desc">ESG risk assessment across supplier base, RMG and manufacturing sectors</div></div></div>
+  </div>
+
+  <div class="sec">Our Impact</div>
+  <div class="impact-grid">
+    <div class="impact-card"><div class="impact-n">80+</div><div class="impact-l">Companies advised on ESG</div></div>
+    <div class="impact-card"><div class="impact-n">2.4M</div><div class="impact-l">Tonnes CO₂ avoided</div></div>
+    <div class="impact-card"><div class="impact-n">12yr</div><div class="impact-l">Sustainability practice</div></div>
+    <div class="impact-card"><div class="impact-n">$1.2B</div><div class="impact-l">Green financing supported</div></div>
+  </div>
+
+  <div class="sec">Recent Reports</div>
+  <div class="reports">
+    <div class="report"><div class="report-icon">📗</div><div><div class="report-name">Bangladesh ESG Landscape</div><div class="report-type">Annual Industry Report</div></div><div class="report-year">2024</div></div>
+    <div class="report"><div class="report-icon">📙</div><div><div class="report-name">RMG Sector Net Zero Guide</div><div class="report-type">Sector Deep Dive</div></div><div class="report-year">2024</div></div>
+    <div class="report"><div class="report-icon">📘</div><div><div class="report-name">TCFD Disclosure Toolkit</div><div class="report-type">Practice Resource</div></div><div class="report-year">2023</div></div>
+  </div>
+
+  <div class="sec">Start Your Journey</div>
+  <div class="cta">
+    <h3>Ready to build a sustainable business?</h3>
+    <p>Free 45-minute ESG readiness assessment. We'll show you where you are and where to go next.</p>
+    <a href="https://wa.me/8801700000000" class="cta-btn">🌿 Book Free ESG Assessment</a>
+    <a href="mailto:hello@verdantadvisory.com" class="cta-btn2">hello@verdantadvisory.com</a>
+  </div>
+
+  <div class="sec">Contact</div>
+  <div class="contacts">
+    <div class="cr"><div class="ci">📞</div>+880 1700-000000</div>
+    <div class="cr"><div class="ci">📍</div>Gulshan-1, Dhaka · London</div>
+    <div class="cr"><div class="ci">⏰</div>Sun–Thu · 9am – 6pm</div>
+  </div>
+</div>
+<footer>© 2025 Verdant Advisory · ESG & Sustainability · Dhaka · London 🌿</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

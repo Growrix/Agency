@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Torque Auto — Premium Car Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Barlow',sans-serif;background:#080808;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#0a0a0a;margin:0 auto;color:#d0d8e0}
+
+.hero{min-height:280px;background:#0a0a0a;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px 20px 24px;border-bottom:2px solid #1e2830}
+.hero-carbon{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 8px),repeating-linear-gradient(-45deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 8px)}
+.hero-accent{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0066cc,#00aaff,#0066cc)}
+.hero-wheel{position:absolute;right:-20px;top:10px;width:140px;height:140px;border:3px solid rgba(0,102,204,.1);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hero-wheel::before{content:'';position:absolute;inset:20px;border:2px solid rgba(0,102,204,.07);border-radius:50%}
+.hero-wheel-icon{font-size:40px;opacity:.08}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,102,204,.1);border:1px solid rgba(0,102,204,.25);border-radius:3px;padding:4px 12px;font-size:9px;color:#4da6ff;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;width:fit-content}
+.hero h1{font-family:'Exo 2',sans-serif;font-size:46px;font-weight:900;color:#fff;line-height:.9;letter-spacing:-1px;text-transform:uppercase}
+.hero h1 span{color:#0066cc;font-style:italic}
+.hero-sub{font-size:10px;color:rgba(208,216,224,.35);margin-top:8px;letter-spacing:3px;text-transform:uppercase}
+.hero-badges{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.hero-badge{background:#1a1a1a;border:1px solid #2a3040;border-radius:3px;padding:4px 10px;font-size:9px;color:rgba(208,216,224,.4);letter-spacing:.5px}
+
+.info-bar{background:#111;border-bottom:1px solid #1e2830;display:flex}
+.info-item{flex:1;padding:10px 0;text-align:center;border-right:1px solid #1e2830;font-size:9px;color:rgba(208,216,224,.35);letter-spacing:1px;text-transform:uppercase}
+.info-item:last-child{border-right:none}
+.info-item span{display:block;font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:#4da6ff;margin-bottom:2px}
+
+.body{padding:0 18px 40px}
+.sec{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;color:#d0d8e0;text-transform:uppercase;letter-spacing:2px;margin:28px 0 14px;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#0066cc,transparent)}
+
+.services{display:flex;flex-direction:column;gap:2px}
+.svc{background:#111;border:1px solid #1e2830;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#0066cc;opacity:.5}
+.svc:first-child{border-radius:4px 4px 0 0}
+.svc:last-child{border-radius:0 0 4px 4px}
+.svc-name{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:600;color:#d0d8e0;letter-spacing:.3px}
+.svc-desc{font-size:11px;color:rgba(208,216,224,.3);margin-top:3px;line-height:1.5}
+.svc-time{font-size:9px;color:#0066cc;margin-top:4px;letter-spacing:.5px;font-weight:600}
+.svc-price{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;color:#4da6ff;flex-shrink:0;text-align:right}
+.svc-price span{display:block;font-size:9px;color:rgba(208,216,224,.25);font-family:'Barlow',sans-serif;margin-top:1px}
+
+.brands{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.brand-tag{background:#111;border:1px solid #1e2830;border-radius:3px;padding:5px 12px;font-size:10px;color:rgba(208,216,224,.4);font-family:'Exo 2',sans-serif;font-weight:600;letter-spacing:1px}
+
+.warranty-box{background:#111;border:1px solid rgba(0,102,204,.2);padding:18px;position:relative;overflow:hidden}
+.warranty-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#0066cc,transparent)}
+.warranty-icon{font-size:28px;margin-bottom:8px}
+.warranty-box h3{font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;color:#d0d8e0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.warranty-box p{font-size:11px;color:rgba(208,216,224,.35);line-height:1.6}
+.warranty-items{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.w-item{background:#1a1a1a;border:1px solid #252525;padding:10px;text-align:center;border-radius:3px}
+.w-item-n{font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;color:#4da6ff}
+.w-item-l{font-size:9px;color:rgba(208,216,224,.3);margin-top:2px;letter-spacing:.5px}
+
+.book-box{background:linear-gradient(135deg,#003380,#0066cc);padding:22px;border-radius:4px;text-align:center}
+.book-box h3{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.book-box p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:16px;line-height:1.5}
+.book-btn{display:block;background:#fff;color:#0066cc;padding:14px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;border-radius:3px;margin-bottom:8px}
+.book-btn2{display:block;background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:12px;font-size:11px;letter-spacing:1px;text-decoration:none;border-radius:3px}
+
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.h-row{background:#111;border:1px solid #1e2830;padding:11px 14px}
+.h-day{font-family:'Exo 2',sans-serif;font-size:11px;font-weight:600;color:rgba(208,216,224,.4);letter-spacing:.5px;text-transform:uppercase}
+.h-time{font-size:11px;color:#4da6ff;margin-top:3px;font-weight:500}
+
+.contact-strip{background:#111;border:1px solid #1e2830;border-radius:4px;overflow:hidden;margin-top:2px}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #1e2830;font-size:12px;color:rgba(208,216,224,.4)}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:28px;height:28px;background:#0066cc;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+footer{background:#080808;border-top:2px solid #0066cc;padding:16px;text-align:center;font-family:'Exo 2',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(208,216,224,.15);text-transform:uppercase}
+</style>
+</head>
+<body><div class="app">
+<div class="hero">
+  <div class="hero-carbon"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-wheel"><div class="hero-wheel-icon">⚙️</div></div>
+  <div class="hero-tag">⚡ Premium Auto Service</div>
+  <h1>Torque<br><span>Auto</span></h1>
+  <div class="hero-sub">Service · Repair · Detailing · Modification</div>
+  <div class="hero-badges">
+    <div class="hero-badge">ISO CERTIFIED</div>
+    <div class="hero-badge">OEM PARTS</div>
+    <div class="hero-badge">12 MONTHS WARRANTY</div>
+  </div>
+</div>
+<div class="info-bar">
+  <div class="info-item"><span>15yr</span>Experience</div>
+  <div class="info-item"><span>8,000+</span>Cars Serviced</div>
+  <div class="info-item"><span>4.9★</span>Rating</div>
+</div>
+<div class="body">
+  <div class="sec">Services</div>
+  <div class="services">
+    <div class="svc"><div><div class="svc-name">Full Engine Service</div><div class="svc-desc">Oil, filter, spark plugs, belt inspection</div><div class="svc-time">⏱ 3–4 hours</div></div><div class="svc-price">$120<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">Brake System Overhaul</div><div class="svc-desc">Pads, rotors, fluid flush, caliper check</div><div class="svc-time">⏱ 2–3 hours</div></div><div class="svc-price">$80<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">AC Service &amp; Regas</div><div class="svc-desc">Full system check, gas refill, cabin filter</div><div class="svc-time">⏱ 1–2 hours</div></div><div class="svc-price">$60<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">Premium Car Detailing</div><div class="svc-desc">Interior &amp; exterior · Polish · Ceramic coat option</div><div class="svc-time">⏱ 6–8 hours</div></div><div class="svc-price">$150<span>from</span></div></div>
+    <div class="svc"><div><div class="svc-name">Diagnostic Scan</div><div class="svc-desc">Full ECU diagnostic · Error code reading</div><div class="svc-time">⏱ 30 mins</div></div><div class="svc-price">$25</div></div>
+  </div>
+
+  <div class="sec">Brands We Service</div>
+  <div class="brands">
+    <div class="brand-tag">Toyota</div><div class="brand-tag">Honda</div><div class="brand-tag">BMW</div>
+    <div class="brand-tag">Mercedes</div><div class="brand-tag">Hyundai</div><div class="brand-tag">Nissan</div>
+    <div class="brand-tag">Mitsubishi</div><div class="brand-tag">Suzuki</div><div class="brand-tag">All brands</div>
+  </div>
+
+  <div class="sec">Our Promise</div>
+  <div class="warranty-box">
+    <div class="warranty-icon">🛡️</div>
+    <h3>Parts &amp; Labour Warranty</h3>
+    <p>Every service is backed by our warranty. If something isn't right, we fix it — free of charge.</p>
+    <div class="warranty-items">
+      <div class="w-item"><div class="w-item-n">12mo</div><div class="w-item-l">Parts Warranty</div></div>
+      <div class="w-item"><div class="w-item-n">OEM</div><div class="w-item-l">Genuine Parts</div></div>
+      <div class="w-item"><div class="w-item-n">Free</div><div class="w-item-l">Pick-up Service</div></div>
+      <div class="w-item"><div class="w-item-n">Live</div><div class="w-item-l">Progress Updates</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Book a Service</div>
+  <div class="book-box">
+    <h3>Book Your Service</h3>
+    <p>WhatsApp us your car make, model &amp; issue. We'll confirm your slot and send a quote within 30 minutes.</p>
+    <a href="https://wa.me/0000000000" class="book-btn">⚙️ Book via WhatsApp</a>
+    <a href="tel:+8801700000000" class="book-btn2">📞 Call the workshop</a>
+  </div>
+
+  <div class="sec">Hours</div>
+  <div class="hours-grid">
+    <div class="h-row"><div class="h-day">Sat – Thu</div><div class="h-time">7:00am – 8:00pm</div></div>
+    <div class="h-row"><div class="h-day">Friday</div><div class="h-time">8:00am – 1:00pm</div></div>
+    <div class="h-row"><div class="h-day">Emergencies</div><div class="h-time">24hr Helpline</div></div>
+    <div class="h-row"><div class="h-day">Pick-up</div><div class="h-time">Free · All Dhaka</div></div>
+  </div>
+
+  <div class="sec">Find Us</div>
+  <div class="contact-strip">
+    <div class="c-row"><div class="c-icon">📞</div>+880 1700-000000</div>
+    <div class="c-row"><div class="c-icon">📍</div>Plot 12, Tejgaon Industrial Area, Dhaka</div>
+    <div class="c-row"><div class="c-icon">📸</div>@torqueauto.bd</div>
+  </div>
+</div>
+<footer>Torque Auto · Premium Car Service · Dhaka · Est. 2010</footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div></body></html>

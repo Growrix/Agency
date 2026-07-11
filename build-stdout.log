@@ -1,0 +1,57 @@
+
+> build
+> npm --prefix web run build
+
+
+> web@0.1.0 prebuild
+> node ./scripts/optimize-preview-html.mjs && node ./scripts/check-preview-budgets.mjs
+
+Preview HTML optimizer finished (0 files updated).
+Preview performance budgets passed across 105 files.
+
+> web@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.2.4 (webpack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · optimizePackageImports
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 28.0s
+  Running TypeScript ...
+  Finished TypeScript in 26.5s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/192) ...
+  Generating static pages using 7 workers (42/192) 
+  Generating static pages using 7 workers (48/192) 
+  Generating static pages using 7 workers (72/192) 
+  Generating static pages using 7 workers (96/192) 
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-21-travel-agency (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-25-plumbing (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-26-aircon (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-27-cleaning (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-28-pest-control (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-29-painting (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /shop/[slug]/page: /shop/html-business-profile-profile-30-cctv-security (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/html-business-profile-profile-02-luminary-studio (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/website-template-html-preview-05-elite-estates-realty (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/html-business-profile-profile-04-law-firm (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/html-business-profile-profile-05-yoga-studio (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/html-business-profile-profile-06-barbershop (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/website-template-html-preview-07-proflow-plumbing (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/website-template-html-preview-08-voltcore-power (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/website-template-html-preview-09-guardian-pest-pro (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/website-template-html-preview-11-terragrove-flooring (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /digital-products/[slug]/page: /digital-products/website-template-html-preview-12-stoneaxis-flooring (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+  Generating static pages using 7 workers (116/192) 
+  Generating static pages using 7 workers (144/192) 
+Failed to build /page: / (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/three-circles (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/rayiss-electrical-and-solar-pty-ltd (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/casablanca-power (attempt 1 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/rayiss-electrical-and-solar-pty-ltd (attempt 2 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /page: / (attempt 2 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/casablanca-power (attempt 2 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/three-circles (attempt 2 of 3) because it took more than 300 seconds. Retrying again shortly.
+Failed to build /portfolio/[slug]/page: /portfolio/rayiss-electrical-and-solar-pty-ltd after 3 attempts.

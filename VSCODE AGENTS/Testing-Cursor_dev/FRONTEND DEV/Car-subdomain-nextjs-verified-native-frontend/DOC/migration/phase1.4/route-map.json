@@ -1,0 +1,258 @@
+[
+  {
+    "slug": "index",
+    "canonicalPath": "/",
+    "legacyHtmlAlias": "/index.html",
+    "owner": "src/app/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "about",
+    "canonicalPath": "/about",
+    "legacyHtmlAlias": "/about.html",
+    "owner": "src/app/about/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "appointment",
+    "canonicalPath": "/appointment",
+    "legacyHtmlAlias": "/appointment.html",
+    "owner": "src/app/appointment/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "blog",
+    "canonicalPath": "/blog",
+    "legacyHtmlAlias": "/blog.html",
+    "owner": "src/app/blog/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "blog-single",
+    "canonicalPath": "/blog-single",
+    "legacyHtmlAlias": "/blog-single.html",
+    "owner": "src/app/blog-single/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "car-list",
+    "canonicalPath": "/car-list",
+    "legacyHtmlAlias": "/car-list.html",
+    "owner": "src/app/car-list/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "car-listing",
+    "canonicalPath": "/car-listing",
+    "legacyHtmlAlias": "/car-listing.html",
+    "owner": "src/app/car-listing/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "car-single",
+    "canonicalPath": "/car-single",
+    "legacyHtmlAlias": "/car-single.html",
+    "owner": "src/app/car-single/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "careers",
+    "canonicalPath": "/careers",
+    "legacyHtmlAlias": "/careers.html",
+    "owner": "src/app/careers/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "contact",
+    "canonicalPath": "/contact",
+    "legacyHtmlAlias": "/contact.html",
+    "owner": "src/app/contact/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "faq",
+    "canonicalPath": "/faq",
+    "legacyHtmlAlias": "/faq.html",
+    "owner": "src/app/faq/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "gallery",
+    "canonicalPath": "/gallery",
+    "legacyHtmlAlias": "/gallery.html",
+    "owner": "src/app/gallery/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "gallery-carousel",
+    "canonicalPath": "/gallery-carousel",
+    "legacyHtmlAlias": "/gallery-carousel.html",
+    "owner": "src/app/gallery-carousel/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "gallery-slider",
+    "canonicalPath": "/gallery-slider",
+    "legacyHtmlAlias": "/gallery-slider.html",
+    "owner": "src/app/gallery-slider/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-2",
+    "canonicalPath": "/homepage-2",
+    "legacyHtmlAlias": "/homepage-2.html",
+    "owner": "src/app/homepage-2/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-3",
+    "canonicalPath": "/homepage-3",
+    "legacyHtmlAlias": "/homepage-3.html",
+    "owner": "src/app/homepage-3/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-4",
+    "canonicalPath": "/homepage-4",
+    "legacyHtmlAlias": "/homepage-4.html",
+    "owner": "src/app/homepage-4/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-5",
+    "canonicalPath": "/homepage-5",
+    "legacyHtmlAlias": "/homepage-5.html",
+    "owner": "src/app/homepage-5/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-6",
+    "canonicalPath": "/homepage-6",
+    "legacyHtmlAlias": "/homepage-6.html",
+    "owner": "src/app/homepage-6/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-7",
+    "canonicalPath": "/homepage-7",
+    "legacyHtmlAlias": "/homepage-7.html",
+    "owner": "src/app/homepage-7/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "homepage-8",
+    "canonicalPath": "/homepage-8",
+    "legacyHtmlAlias": "/homepage-8.html",
+    "owner": "src/app/homepage-8/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "locations",
+    "canonicalPath": "/locations",
+    "legacyHtmlAlias": "/locations.html",
+    "owner": "src/app/locations/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "privacy",
+    "canonicalPath": "/privacy",
+    "legacyHtmlAlias": "/privacy.html",
+    "owner": "src/app/privacy/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "service-single",
+    "canonicalPath": "/service-single",
+    "legacyHtmlAlias": "/service-single.html",
+    "owner": "src/app/service-single/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "services",
+    "canonicalPath": "/services",
+    "legacyHtmlAlias": "/services.html",
+    "owner": "src/app/services/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "services-2",
+    "canonicalPath": "/services-2",
+    "legacyHtmlAlias": "/services-2.html",
+    "owner": "src/app/services-2/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "services-3",
+    "canonicalPath": "/services-3",
+    "legacyHtmlAlias": "/services-3.html",
+    "owner": "src/app/services-3/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "shop",
+    "canonicalPath": "/shop",
+    "legacyHtmlAlias": "/shop.html",
+    "owner": "src/app/shop/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "shop-product-single",
+    "canonicalPath": "/shop-product-single",
+    "legacyHtmlAlias": "/shop-product-single.html",
+    "owner": "src/app/shop-product-single/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "team",
+    "canonicalPath": "/team",
+    "legacyHtmlAlias": "/team.html",
+    "owner": "src/app/team/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "terms",
+    "canonicalPath": "/terms",
+    "legacyHtmlAlias": "/terms.html",
+    "owner": "src/app/terms/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  },
+  {
+    "slug": "testimonials",
+    "canonicalPath": "/testimonials",
+    "legacyHtmlAlias": "/testimonials.html",
+    "owner": "src/app/testimonials/page.tsx",
+    "routeType": "app-router-static",
+    "htmlAliasPolicy": "redirect-only"
+  }
+]

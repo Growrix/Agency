@@ -1,0 +1,19 @@
+integration: stripe
+category: payments
+role: payments
+playbook: ~/.cursor/skills/integration-platform/references/stripe.md
+env_source: web/src/server/config/runtime.ts
+
+env_vars:
+  - name: STRIPE_SECRET_KEY
+    required: true
+    scope: server
+  - name: STRIPE_WEBHOOK_SECRET
+    required: true
+    scope: server
+
+routes:
+  - POST /api/v1/orders/webhook
+
+owner_skill: integration-platform
+notes: Idempotent webhook handling by Stripe event.id

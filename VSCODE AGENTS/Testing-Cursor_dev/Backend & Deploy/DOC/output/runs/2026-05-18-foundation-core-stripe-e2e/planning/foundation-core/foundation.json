@@ -1,0 +1,34 @@
+{
+  "plan_id": "foundation-core-stripe-e2e",
+  "status": "passed",
+  "request": "Stripe-only E2E integration planning for Foundation Core",
+  "runtime_root": "Foundation-Core",
+  "template_output_root": "Templates",
+  "focus": [
+    "payments"
+  ],
+  "primary_integration": {
+    "payments": "stripe"
+  },
+  "base_runtime_state": "validated_foundation_runtime_present",
+  "target_runtime_state": "api_ready_billing_module",
+  "interaction_model": "hosted_checkout_and_customer_portal",
+  "price_resolution": "template_offer_key_to_stripe_lookup_key",
+  "env_contract": {
+    "required_server": [
+      "STRIPE_SECRET_KEY",
+      "STRIPE_WEBHOOK_SECRET"
+    ],
+    "optional_public": [
+      "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"
+    ],
+    "legacy_to_retire": [
+      "BILLING_PROVIDER_SECRET"
+    ]
+  },
+  "readiness_targets": [
+    "blocked",
+    "foundation_ready_template_pending",
+    "factory_ready"
+  ]
+}

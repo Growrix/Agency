@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nexus Digital — Web &amp; App Development Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#04040f}
+body{font-family:'DM Sans',sans-serif;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:420px;min-height:100vh;background:#f5f5fa;margin:0 auto}
+
+/* HERO */
+.hero{background:#07071a;padding:50px 20px 22px;position:relative;overflow:hidden}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(99,102,241,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.06) 1px,transparent 1px);background-size:28px 28px}
+.orb1{position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.22) 0%,transparent 70%);top:-100px;right:-60px;pointer-events:none}
+.orb2{position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.13) 0%,transparent 70%);bottom:-60px;left:0;pointer-events:none}
+
+.avail-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:100px;padding:5px 14px;font-size:9px;color:#10b981;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;position:relative}
+.a-dot{width:7px;height:7px;background:#10b981;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero h1{font-family:'Space Mono',monospace;font-size:28px;color:#fff;line-height:1.05;letter-spacing:-1.5px;position:relative}
+.hero h1 .acc{color:#6366f1}
+.hero p{font-size:12px;color:rgba(255,255,255,.42);margin-top:10px;line-height:1.75;position:relative;max-width:280px}
+
+.h-actions{display:flex;gap:9px;margin-top:18px;position:relative}
+.btn-p{display:inline-flex;align-items:center;justify-content:center;background:#6366f1;color:#fff;border:none;padding:12px 20px;border-radius:9px;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;box-shadow:0 4px 20px rgba(99,102,241,.4)}
+.btn-s{display:inline-flex;align-items:center;justify-content:center;background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.12);padding:12px 16px;border-radius:9px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none}
+
+/* COUNTS */
+.counts{display:flex;background:#0d0d24;border-top:1px solid rgba(255,255,255,.05)}
+.count{flex:1;text-align:center;padding:14px 0;border-right:1px solid rgba(255,255,255,.05)}
+.count:last-child{border-right:none}
+.count-n{font-family:'Space Mono',monospace;font-size:18px;color:#6366f1;font-weight:700}
+.count-l{font-size:9px;color:rgba(255,255,255,.22);margin-top:4px;letter-spacing:1.5px;text-transform:uppercase}
+
+/* BODY */
+.body{padding:4px 16px 40px}
+.sec{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#6366f1;margin:22px 0 10px;font-weight:700}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{background:#fff;border:1px solid #eaecf5;border-radius:14px;padding:16px}
+.svc-icon{width:36px;height:36px;background:#eef0ff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px}
+.svc-name{font-size:12px;font-weight:600;color:#07071a}
+.svc-desc{font-size:10px;color:#888;margin-top:3px;line-height:1.5}
+.svc-price{font-size:11px;font-weight:700;color:#6366f1;margin-top:8px}
+
+/* TECH STACK */
+.stack{display:flex;flex-wrap:wrap;gap:6px}
+.stag{background:#fff;border:1px solid #e8eaf5;border-radius:8px;padding:5px 11px;font-size:10px;color:#444;font-weight:500;letter-spacing:.2px}
+
+/* TEAM */
+.team{display:flex;flex-direction:column;gap:8px}
+.member{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #eaecf5;border-radius:14px;padding:14px}
+.av{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;font-family:'Space Mono',monospace}
+.m-name{font-size:13px;font-weight:600;color:#07071a}
+.m-role{font-size:10px;color:#888;margin-top:2px}
+.m-badge{margin-left:auto;font-size:9px;padding:4px 10px;border-radius:100px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+
+/* PROCESS */
+.process{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #eaecf5;position:relative}
+.step:last-child{border-bottom:none}
+.step-n{width:28px;height:28px;background:#eef0ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#6366f1;flex-shrink:0;margin-top:1px}
+.step-title{font-size:13px;font-weight:600;color:#07071a}
+.step-desc{font-size:10px;color:#888;margin-top:3px;line-height:1.5}
+
+/* CONTACT */
+.contact{background:#fff;border:1px solid #eaecf5;border-radius:14px;overflow:hidden}
+.c-row{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #f5f5fb;font-size:12px;color:#333}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:34px;height:34px;background:#eef0ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+
+/* CTA */
+.cta-main{display:block;margin-top:16px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;width:100%;padding:17px;border-radius:14px;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 6px 24px rgba(99,102,241,.3)}
+.cta-wa{display:block;margin-top:8px;background:#fff;color:#25d366;border:2px solid #25d366;width:100%;padding:15px;border-radius:14px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:center;text-decoration:none}
+
+/* FOOTER */
+footer{background:#07071a;color:rgba(255,255,255,.2);text-align:center;padding:22px 16px;font-size:10px;letter-spacing:.5px}
+.footer-brand{font-family:'Space Mono',monospace;font-size:14px;color:rgba(99,102,241,.6);letter-spacing:-0.5px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hero">
+    <div class="grid-lines"></div>
+    <div class="orb1"></div>
+    <div class="orb2"></div>
+    <div class="avail-pill"><span class="a-dot"></span>Available for Projects</div>
+    <h1>Nexus<br><span class="acc">Digital_</span></h1>
+    <p>We build fast websites, mobile apps &amp; digital products that grow your business in Bangladesh and beyond.</p>
+    <div class="h-actions">
+      <a href="https://wa.me/8801700123456" class="btn-p">Start a Project</a>
+      <a href="#" class="btn-s">View Work →</a>
+    </div>
+  </div>
+
+  <div class="counts">
+    <div class="count"><div class="count-n">60+</div><div class="count-l">Projects</div></div>
+    <div class="count"><div class="count-n">5yr</div><div class="count-l">Experience</div></div>
+    <div class="count"><div class="count-n">100%</div><div class="count-l">On Time</div></div>
+    <div class="count"><div class="count-n">4.9★</div><div class="count-l">Rating</div></div>
+  </div>
+
+  <div class="body">
+
+    <div class="sec">What We Build</div>
+    <div class="services-grid">
+      <div class="svc">
+        <div class="svc-icon">🌐</div>
+        <div class="svc-name">Web Development</div>
+        <div class="svc-desc">React, Next.js, WordPress, Laravel</div>
+        <div class="svc-price">From ৳30,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">📱</div>
+        <div class="svc-name">Mobile Apps</div>
+        <div class="svc-desc">iOS &amp; Android with Flutter</div>
+        <div class="svc-price">From ৳80,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">🎨</div>
+        <div class="svc-name">UI/UX Design</div>
+        <div class="svc-desc">Figma design to pixel-perfect code</div>
+        <div class="svc-price">From ৳15,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">🤖</div>
+        <div class="svc-name">AI Integration</div>
+        <div class="svc-desc">LLM-powered features &amp; chatbots</div>
+        <div class="svc-price">From ৳50,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">🛒</div>
+        <div class="svc-name">E-Commerce</div>
+        <div class="svc-desc">Shopify, WooCommerce, custom</div>
+        <div class="svc-price">From ৳40,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-icon">📊</div>
+        <div class="svc-name">SEO &amp; Marketing</div>
+        <div class="svc-desc">Rank higher, grow faster</div>
+        <div class="svc-price">From ৳10,000</div>
+      </div>
+    </div>
+
+    <div class="sec">Tech Stack</div>
+    <div class="stack">
+      <div class="stag">Next.js</div><div class="stag">React</div><div class="stag">Flutter</div>
+      <div class="stag">WordPress</div><div class="stag">Node.js</div><div class="stag">Python</div>
+      <div class="stag">Laravel</div><div class="stag">Figma</div><div class="stag">AWS</div>
+      <div class="stag">Firebase</div><div class="stag">Supabase</div><div class="stag">OpenAI API</div>
+    </div>
+
+    <div class="sec">Our Process</div>
+    <div class="process">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div><div class="step-title">Discovery Call</div><div class="step-desc">We understand your goals, audience, and requirements in a free 30-min call.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div><div class="step-title">Design &amp; Prototype</div><div class="step-desc">We create wireframes and Figma designs for your approval before any code is written.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div><div class="step-title">Build &amp; Test</div><div class="step-desc">Development with weekly progress updates. Fully tested across all devices.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div><div class="step-title">Launch &amp; Support</div><div class="step-desc">Go live with 30-day post-launch support included in every project.</div></div>
+      </div>
+    </div>
+
+    <div class="sec">The Team</div>
+    <div class="team">
+      <div class="member">
+        <div class="av" style="background:#eef0ff;color:#6366f1">RK</div>
+        <div><div class="m-name">Rafiq Khan</div><div class="m-role">Founder &amp; Lead Developer</div></div>
+        <div class="m-badge" style="background:#eef0ff;color:#6366f1">CEO</div>
+      </div>
+      <div class="member">
+        <div class="av" style="background:#ecfdf5;color:#10b981">SH</div>
+        <div><div class="m-name">Sara Hassan</div><div class="m-role">UI/UX Designer</div></div>
+        <div class="m-badge" style="background:#ecfdf5;color:#10b981">Design</div>
+      </div>
+      <div class="member">
+        <div class="av" style="background:#fef3e2;color:#f59e0b">AM</div>
+        <div><div class="m-name">Arif Miah</div><div class="m-role">Backend Engineer</div></div>
+        <div class="m-badge" style="background:#fef3e2;color:#f59e0b">Backend</div>
+      </div>
+      <div class="member">
+        <div class="av" style="background:#fce7f3;color:#ec4899">NR</div>
+        <div><div class="m-name">Nadia Rahman</div><div class="m-role">Flutter Developer</div></div>
+        <div class="m-badge" style="background:#fce7f3;color:#ec4899">Mobile</div>
+      </div>
+    </div>
+
+    <div class="sec">Contact</div>
+    <div class="contact">
+      <div class="c-row"><div class="c-icon">📧</div>hello@nexusdigital.com.bd</div>
+      <div class="c-row"><div class="c-icon">📞</div>+880 1700-123456</div>
+      <div class="c-row"><div class="c-icon">📍</div>House 5, Road 11, Banani, Dhaka 1213</div>
+      <div class="c-row"><div class="c-icon">🌐</div>www.nexusdigital.com.bd</div>
+      <div class="c-row"><div class="c-icon">⏰</div>Sun–Thu · 9am – 6pm</div>
+    </div>
+
+    <a href="https://wa.me/8801700123456?text=Hi! I'd like to get a quote for a project..." class="cta-main">Get a Free Quote →</a>
+    <a href="https://wa.me/8801700123456" class="cta-wa">💬 Chat on WhatsApp</a>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">Nexus Digital</div>
+    © 2025 Nexus Digital · Banani, Dhaka · All rights reserved
+  </footer>
+<div class="builder-brand-bar" style="margin-top:12px;padding:12px 14px;border-top:1px solid rgba(0,0,0,.15);background:#0f1117;text-align:center;"><a href="https://www.growrixos.com" target="_blank" rel="noopener" style="color:#f5f7ff;font-size:11px;letter-spacing:.35px;text-decoration:none;">Built By Growrix OS</a></div>
+</div>
+</body>
+</html>

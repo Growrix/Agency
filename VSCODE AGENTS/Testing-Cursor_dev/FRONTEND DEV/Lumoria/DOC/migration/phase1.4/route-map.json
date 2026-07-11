@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-05-23",
+  "ownershipMode": "native-app-router",
+  "routes": [
+    {
+      "path": "/",
+      "screenshot": "screencapture-lumoria-wpengine-2026-05-16-15_47_54.png",
+      "ownerFile": "src/app/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/404",
+      "screenshot": "screencapture-lumoria-wpengine-404-2026-05-16-16_13_47.png",
+      "ownerFile": "src/app/404/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/about",
+      "screenshot": "screencapture-lumoria-wpengine-about-2026-05-16-15_49_47.png",
+      "ownerFile": "src/app/about/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/blog",
+      "screenshot": "screencapture-lumoria-wpengine-blog-2026-05-16-16_18_09.png",
+      "ownerFile": "src/app/blog/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/career-listing",
+      "screenshot": "screencapture-lumoria-wpengine-career-listing-2026-05-16-16_08_14.png",
+      "ownerFile": "src/app/career-listing/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/contact-us",
+      "screenshot": "screencapture-lumoria-wpengine-contact-us-2026-05-16-16_34_24.png",
+      "ownerFile": "src/app/contact-us/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/core-values",
+      "screenshot": "screencapture-lumoria-wpengine-core-values-2026-05-16-16_12_52.png",
+      "ownerFile": "src/app/core-values/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/faq",
+      "screenshot": "screencapture-lumoria-wpengine-faq-2026-05-16-16_06_35.png",
+      "ownerFile": "src/app/faq/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/listings/designing-tomorrows-cities",
+      "screenshot": "screencapture-lumoria-wpengine-listings-designing-tomorrows-cities-2026-05-16-16_15_12.png",
+      "ownerFile": "src/app/listings/designing-tomorrows-cities/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/our-awards",
+      "screenshot": "screencapture-lumoria-wpengine-our-awards-2026-05-16-16_11_54.png",
+      "ownerFile": "src/app/our-awards/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/our-history",
+      "screenshot": "screencapture-lumoria-wpengine-our-history-2026-05-16-16_13_23.png",
+      "ownerFile": "src/app/our-history/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/our-process",
+      "screenshot": "screencapture-lumoria-wpengine-our-process-2026-05-16-16_12_25.png",
+      "ownerFile": "src/app/our-process/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/our-services",
+      "screenshot": "screencapture-lumoria-wpengine-our-services-2026-05-16-16_10_13.png",
+      "ownerFile": "src/app/our-services/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/our-team",
+      "screenshot": "screencapture-lumoria-wpengine-our-team-2026-05-16-16_06_59.png",
+      "ownerFile": "src/app/our-team/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/portfolio-style-2",
+      "screenshot": "screencapture-lumoria-wpengine-portfolio-style-2-2026-05-16-16_14_44.png",
+      "ownerFile": "src/app/portfolio-style-2/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/portfolio-style1",
+      "screenshot": "screencapture-lumoria-wpengine-portfolio-style1-2026-05-16-16_14_15.png",
+      "ownerFile": "src/app/portfolio-style1/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/pricing-plan",
+      "screenshot": "screencapture-lumoria-wpengine-pricing-plan-2026-05-16-16_07_43.png",
+      "ownerFile": "src/app/pricing-plan/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/sustainable-construction-for-long-term-living",
+      "screenshot": "screencapture-lumoria-wpengine-sustainable-construction-for-long-term-living-2026-05-16-16_33_54.png",
+      "ownerFile": "src/app/sustainable-construction-for-long-term-living/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/urban-development-for-the-next-generation",
+      "screenshot": "screencapture-lumoria-wpengine-urban-development-for-the-next-generation-2026-05-16-16_18_41.png",
+      "ownerFile": "src/app/urban-development-for-the-next-generation/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/wdt-careers/project-assistant",
+      "screenshot": "screencapture-lumoria-wpengine-wdt-careers-project-assistant-2026-05-16-16_08_43.png",
+      "ownerFile": "src/app/wdt-careers/project-assistant/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/wdt-services/custom-construction",
+      "screenshot": "screencapture-lumoria-wpengine-wdt-services-custom-construction-2026-05-16-16_10_52.png",
+      "ownerFile": "src/app/wdt-services/custom-construction/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/with-left-sidebar",
+      "screenshot": "screencapture-lumoria-wpengine-with-left-sidebar-2026-05-16-16_16_11.png",
+      "ownerFile": "src/app/with-left-sidebar/page.tsx",
+      "status": "native-app-router-page"
+    },
+    {
+      "path": "/with-right-sidebar",
+      "screenshot": "screencapture-lumoria-wpengine-with-right-sidebar-2026-05-16-16_15_39.png",
+      "ownerFile": "src/app/with-right-sidebar/page.tsx",
+      "status": "native-app-router-page"
+    }
+  ]
+}
