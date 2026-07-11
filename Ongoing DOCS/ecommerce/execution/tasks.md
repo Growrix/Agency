@@ -26,24 +26,24 @@ This tracker converts the ecommerce blueprint into sequenced execution phases. I
 
 | Phase | Name | Status | Primary Sources | Deliverables | Acceptance Criteria |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Project setup | Planned | `architecture/`, `deployment/`, `rules/` | Repo structure, env strategy, CI gates, docs baseline | Environments and quality gates are defined before feature work. |
-| 2 | Authentication | Planned | `auth/`, `security/`, `api/02-auth-customer-api.md` | Registration, login, refresh, reset, roles | Auth flows are tested and protected against session/token abuse. |
-| 3 | Database | Planned | `database/`, `architecture/03-data-and-request-flows.md` | Schema, migrations, seed data, indexes | Core commerce data model supports catalog, cart, orders, payments, inventory. |
-| 4 | Products | Planned | `handbook/04-revenue-product-and-pricing-model.md`, `backend/03-product-catalog-service.md` | Product CRUD, variants, media, SEO fields | Products can be created, searched, viewed, and managed consistently. |
-| 5 | Categories | Planned | `api/03-product-catalog-search-api.md`, `frontend/03-product-discovery-and-search.md` | Categories, subcategories, brands, collections | Discovery pages expose stable filters and SEO-ready routes. |
-| 6 | Inventory | Planned | `backend/04-inventory-warehouse-service.md`, `database/04-order-payment-inventory-schema.md` | Stock, reservations, warehouses, low-stock rules | Checkout cannot oversell inventory and admin can reconcile stock. |
-| 7 | Cart | Planned | `backend/05-cart-checkout-service.md`, `api/04-cart-checkout-payment-api.md` | Guest cart, user cart, merge, coupons, totals | Cart totals are deterministic and recoverable across guest/login flows. |
-| 8 | Checkout | Planned | `frontend/05-cart-checkout-order-success.md`, `backend/05-cart-checkout-service.md` | Address, shipping, tax, validation, order review | Checkout fails safely, explains issues, and locks required inventory. |
-| 9 | Payments | Planned | `integrations/01-payments.md`, `security/04-payment-webhook-fraud-compliance.md` | Payment intents, COD, retries, webhooks, refunds | Payment state is idempotent, auditable, and reconciled with orders. |
-| 10 | Orders | Planned | `backend/06-order-payment-shipping-service.md`, `api/05-orders-admin-webhook-api.md` | Order creation, status, tracking, invoices, returns | Customers and admins see accurate order lifecycle state. |
-| 11 | Reviews | Planned | `frontend/04-product-detail-reviews-wishlist.md`, `backend/07-review-coupon-notification-analytics-service.md` | Reviews, ratings, moderation, helpful votes | Reviews are permissioned, moderated, and linked to verified purchases when required. |
-| 12 | Notifications | Planned | `integrations/02-email-sms-whatsapp.md`, `backend/07-review-coupon-notification-analytics-service.md` | Email, SMS, WhatsApp, in-app notifications | Transactional messages are templated, observable, and retryable. |
-| 13 | Admin dashboard | Planned | `frontend/06-customer-and-admin-dashboards.md`, `blueprint/04-role-permission-capability-map.md` | Product, inventory, order, customer, coupon, report management | Admin actions are role-protected and audit logged. |
-| 14 | Analytics | Planned | `analytics/`, `backend/07-review-coupon-notification-analytics-service.md` | Event tracking, funnels, dashboards, reports | Core revenue, product, retention, and funnel metrics are visible. |
-| 15 | Testing | Planned | `testing/` | Test suites, fixtures, release checks | Critical paths have automated checks and documented manual QA where needed. |
-| 16 | Deployment | Planned | `deployment/`, `security/` | CI/CD, secrets, monitoring, rollback, backups | Staging and production launch paths are repeatable and monitored. |
-| 17 | Optimization | Planned | `deployment/03-scaling-cache-cdn-backups.md`, `testing/03-accessibility-performance-security-release-gates.md` | Performance, caching, search, image and query optimization | Core Web Vitals, search latency, and checkout reliability meet targets. |
-| 18 | Production launch | Planned | all docs | Launch checklist, support runbook, incident response | No critical gates open; support, analytics, rollback, and monitoring are live. |
+| 1 | Project setup | Done | `architecture/`, `deployment/`, `rules/` | Repo structure, env strategy, CI gates, docs baseline | Environments and quality gates are defined before feature work. |
+| 2 | Authentication | Partial | `auth/`, `security/`, `api/02-auth-customer-api.md` | Registration, login, refresh, reset, roles | Auth flows are tested and protected against session/token abuse. |
+| 3 | Database | Partial | `database/`, `architecture/03-data-and-request-flows.md` | Schema, migrations, seed data, indexes | Core commerce data model supports catalog, cart, orders, payments, inventory. |
+| 4 | Products | Partial-Advanced | `handbook/04-revenue-product-and-pricing-model.md`, `backend/03-product-catalog-service.md` | Product CRUD, variants, media, SEO fields | Products can be created, searched, viewed, and managed consistently. |
+| 5 | Categories | Partial-Advanced | `api/03-product-catalog-search-api.md`, `frontend/03-product-discovery-and-search.md` | Categories, subcategories, brands, collections | Discovery pages expose stable filters and SEO-ready routes. |
+| 6 | Inventory | Partial | `backend/04-inventory-warehouse-service.md`, `database/04-order-payment-inventory-schema.md` | Stock, reservations, warehouses, low-stock rules | Checkout cannot oversell inventory and admin can reconcile stock. |
+| 7 | Cart | Partial-Advanced | `backend/05-cart-checkout-service.md`, `api/04-cart-checkout-payment-api.md` | Guest cart, user cart, merge, coupons, totals | Cart totals are deterministic and recoverable across guest/login flows. |
+| 8 | Checkout | Partial-Advanced | `frontend/05-cart-checkout-order-success.md`, `backend/05-cart-checkout-service.md` | Address, shipping, tax, validation, order review | Checkout fails safely, explains issues, and locks required inventory. |
+| 9 | Payments | Partial | `integrations/01-payments.md`, `security/04-payment-webhook-fraud-compliance.md` | Payment intents, COD, retries, webhooks, refunds | Payment state is idempotent, auditable, and reconciled with orders. |
+| 10 | Orders | Partial-Advanced | `backend/06-order-payment-shipping-service.md`, `api/05-orders-admin-webhook-api.md` | Order creation, status, tracking, invoices, returns | Customers and admins see accurate order lifecycle state. |
+| 11 | Reviews | Partial | `frontend/04-product-detail-reviews-wishlist.md`, `backend/07-review-coupon-notification-analytics-service.md` | Reviews, ratings, moderation, helpful votes | Reviews are permissioned, moderated, and linked to verified purchases when required. |
+| 12 | Notifications | Partial-Advanced | `integrations/02-email-sms-whatsapp.md`, `backend/07-review-coupon-notification-analytics-service.md` | Email, SMS, WhatsApp, in-app notifications | Transactional messages are templated, observable, and retryable. |
+| 13 | Admin dashboard | Partial-Advanced | `frontend/06-customer-and-admin-dashboards.md`, `blueprint/04-role-permission-capability-map.md` | Product, inventory, order, customer, coupon, report management | Admin actions are role-protected and audit logged. |
+| 14 | Analytics | Partial-Advanced | `analytics/`, `backend/07-review-coupon-notification-analytics-service.md` | Event tracking, funnels, dashboards, reports | Core revenue, product, retention, and funnel metrics are visible. |
+| 15 | Testing | Advanced | `testing/` | Test suites, fixtures, release checks | Critical paths have automated checks and documented manual QA where needed. |
+| 16 | Deployment | Partial | `deployment/`, `security/` | CI/CD, secrets, monitoring, rollback, backups | Staging and production launch paths are repeatable and monitored. |
+| 17 | Optimization | Partial | `deployment/03-scaling-cache-cdn-backups.md`, `testing/03-accessibility-performance-security-release-gates.md` | Performance, caching, search, image and query optimization | Core Web Vitals, search latency, and checkout reliability meet targets. |
+| 18 | Production launch | Not Closed | all docs | Launch checklist, support runbook, incident response | No critical gates open; support, analytics, rollback, and monitoring are live. |
 
 ## Implementation Alignment Snapshot (Growrixos branch)
 
@@ -65,6 +65,12 @@ Observed implementation alignment (2026-07-11):
 Most recent delta from P21 execution:
 
 - Public template preview behavior has been restored to full preview mode while preserving paid-download security controls (signed grants, redemption checks, fingerprinting, rejection auditing, and throttling).
+
+Most recent delta from P22 execution:
+
+- Phase parity reconciliation completed for blueprint phases 1-18 with evidence in `DOC/PROJECT PLAN/ecommerce-blueprint-phase-parity-closure-2026-07-11.md`.
+- Transactional hardening slice delivered: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard, and refund analytics instrumentation.
+- Release evidence refreshed with passing `typecheck`, targeted `orders.test.ts`, `test:integration`, and full `health:check` including release-gates e2e.
 
 Reference implementation tracker:
 

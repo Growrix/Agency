@@ -219,4 +219,76 @@ describe("orders domain", () => {
     assert.equal(downloads.length, 1);
     assert.equal(licenses.length, 1);
   });
+
+  it("reuses an existing order when the same idempotency key is submitted", async () => {
+    const first = await createOrder({
+      product_slug: "legal-practice-website",
+      customer_name: "Idempotent Buyer",
+      customer_email: "idempotent@example.com",
+      idempotency_key: "checkout-key-001",
+    });
+
+    const second = await createOrder({
+      product_slug: "legal-practice-website",
+      customer_name: "Idempotent Buyer",
+      customer_email: "idempotent@example.com",
+      idempotency_key: "checkout-key-001",
+    });
+
+    assert.equal(second.order.id, first.order.id);
+    assert.equal(second.order.idempotency_key, "checkout-key-001");
+  });
+
+  it("blocks oversell when stock_on_hand is exhausted", async () => {
+    await writeFile(
+      databasePath,
+      JSON.stringify(
+        {
+          products: [
+            {
+              slug: "limited-website-template",
+              name: "Limited Website Template",
+              price: "$99",
+              stock_on_hand: 1,
+              category: "Templates",
+              categorySlug: "templates",
+              type: "Website",
+              typeSlug: "website",
+              industry: "General",
+              industrySlug: "general",
+              published: true,
+              teaser: "Limited stock template.",
+              summary: "Limited stock template.",
+              audience: "Teams",
+              previewVariant: "marketing",
+              includes: ["Template"],
+              stack: ["HTML"],
+              highlights: [{ label: "Stock", value: "1" }],
+              image: null,
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      "utf8",
+    );
+
+    await createOrder({
+      product_slug: "limited-website-template",
+      customer_name: "First Buyer",
+      customer_email: "first-buyer@example.com",
+    });
+
+    await assert.rejects(
+      async () => {
+        await createOrder({
+          product_slug: "limited-website-template",
+          customer_name: "Second Buyer",
+          customer_email: "second-buyer@example.com",
+        });
+      },
+      /Insufficient inventory/,
+    );
+  });
 });

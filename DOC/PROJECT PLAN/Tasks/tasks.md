@@ -24,6 +24,7 @@ current_state:
   content_composition_alignment_implementation: partial
   auth_clerk_migration_planning: done
   auth_clerk_migration_implementation: done
+  ecommerce_blueprint_realignment_planning: done
   deployable: false
 release_blockers:
   - Full integrated production release is still blocked by external integrations and content-operations rollout work intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and the now-documented CMS/content operations implementation plan).
@@ -45,13 +46,14 @@ phase_sequence:
   - P11-auth-clerk-migration
   - P20-customer-dashboard-experience
   - P21-ecommerce-preview-restoration-blueprint-alignment
-next_recommended_phase: P21-ecommerce-preview-restoration-blueprint-alignment
+  - P22-ecommerce-blueprint-realignment-gap-closure
+next_recommended_phase: P22-ecommerce-blueprint-realignment-gap-closure
 next_recommended_tasks:
-  - T124
-  - T125
+  - T133
+  - T134
 phase_status_counts:
   done: 4
-  partial: 8
+  partial: 10
   blocked: 0
   not_started: 1
 task_status_counts:
@@ -79,6 +81,8 @@ task_status_counts:
   - category and type remain discovery filters via query params (for example `/digital-products?category=saas-templates`)
   - reserved product slug segments (`free`, `bundles`, `category`) are blocked to prevent route collisions
 - Active tracked sessions:
+  - implemented P22 transactional hardening slice across checkout and payments: order idempotency key dedupe, stock-aware oversell guard (`stock_on_hand`), Stripe webhook duplicate-event ignore guard, and refund analytics event tracking; added regression tests and revalidated with `typecheck`, `test:unit` (`orders.test.ts`), `test:integration`, and full `health:check` release gates
+  - completed full ecommerce blueprint reanalysis against `Ongoing DOCS/ecommerce` and materialized the canonical realignment artifact `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md` with downstream role docs in Frontend, Backend, API and Data, Security, DevOps, QA, Admin Dashboard, and Supabase; aligned root planning routing docs for deterministic execution continuity
   - completed codebase and blueprint re-audit for preview policy reversal and ecommerce alignment; materialized canonical hybrid planning artifact `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` with downstream role docs in Frontend, Backend, API and Data, Admin Dashboard, and Security to restore full preview behavior while preserving signed paid-delivery controls
   - continued template-theft remediation with a second Phase 2 hardening increment: preview API responses now emit strict CSP + `nosniff` + `no-referrer` headers, and redaction now strips `meta refresh` + `base` tags to prevent client-side redirect/rewrite behaviors; integration checks now assert these headers and stripped tags
   - continued template-theft remediation with a Phase 2 constrained-preview slice: `preview-redaction` now strips `noscript`/`template` artifacts, replaces iframe embeds with locked placeholders, and neutralizes outbound anchor behavior via preview-locked links, plus integration coverage now asserts redacted preview API output (no scripts/comments, overlay present, links locked)
@@ -235,6 +239,15 @@ phases:
   - id: P11
     name: Auth Clerk Migration
     status: done
+  - id: P20
+    name: Customer Dashboard Experience
+    status: partial
+  - id: P21
+    name: Ecommerce Preview Restoration + Blueprint Alignment
+    status: done
+  - id: P22
+    name: Ecommerce Blueprint Realignment Gap Closure
+    status: partial
 ```
 
 ## Phase Overview
@@ -252,6 +265,9 @@ phases:
 | P9 | partial | Product-led implementation now includes canonical `/products` routing, `/shop` compatibility, and tiered product-detail conversion UX with variant metadata flow. Downloads, customer dashboard, lead scoring, Lark, Resend automation, and admin operations remain pending. |
 | P10 | partial | Content-composition alignment started: marketing components, homepage recomposition, product index hero, template-customization service, and solutions landings shipped. CMS seeding, pricing tabs, product-detail refactor, and P10 QA gates remain. |
 | P11 | done | Clerk full-replace migration shipped: ClerkProvider, clerkMiddleware proxy, user mirror sync + webhook, login UI swap, legacy auth API deprecation, test harness, zero-gate validation. |
+| P20 | partial | Customer dashboard experience planning artifact and baseline audit are complete; cross-role implementation and hardening tasks remain. |
+| P21 | done | Full preview restoration was completed with preserved paid-delivery grant security controls and validated integration/health gates. |
+| P22 | partial | Phase-parity reconciliation and a transactional hardening slice are complete; remaining work is Supabase normalized activation plus full launch blocker closure. |
 
 ## Tasks By Phase
 
@@ -420,16 +436,17 @@ phases:
 - The planner agent, planning template, execution constitution, and root project-plan routing now require a canonical `DOC/PROJECT PLAN/` planning artifact before tracker updates.
 - The CMS/content-operations rollout now has a canonical root planning artifact at `DOC/PROJECT PLAN/cms-content-operations-e2e-plan.md`.
 - The CMS/content-operations rollout now also has role-specific implementation-planning docs under `DOC/PROJECT PLAN/Frontend/`, `DOC/PROJECT PLAN/API and Data/`, `DOC/PROJECT PLAN/Admin Dashboard/`, and `DOC/PROJECT PLAN/Security/`.
+- The ecommerce blueprint realignment scope now has a canonical root planning artifact at `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md` plus downstream role-specific planning docs in Frontend, Backend, API and Data, Security, DevOps, QA, Admin Dashboard, and Supabase.
 - Shop CMS authoring now includes grouped editor fields, example-driven field labels, real preview URL support, real uploaded image rendering on shop surfaces, and project-specific content templates for shop items, blog posts, and case studies under `DOC/PROJECT PLAN/`.
 
 ## What Is Next To Build
-Use `DOC/PROJECT PLAN/ecommerce-preview-restoration-e2e-plan.md` as the canonical input for the active P21 execution work.
+Use `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md` as the canonical input for the active P22 execution work.
 
-Immediate P21 priority sequence:
+Immediate P22 priority sequence:
 
-1. T124: restore full preview API behavior for template preview routes.
-2. T125: rebaseline preview integration assertions from redacted mode to full mode while preserving download grant security checks.
-3. T126: keep paid-download hardening controls unchanged and validate no regression in signed delivery protections.
+1. T133: complete remaining critical transactional closure (Supabase normalized activation + broader reservation ownership model) after the completed idempotency/webhook/oversell hardening slice.
+2. T134: complete order lifecycle and operator parity (invoice/admin UX and analytics taxonomy standardization).
+3. T135: finalize production readiness closure with explicit blocker sign-off after launch prerequisites are fully met.
 
 Parallel sequence:
 
@@ -437,6 +454,20 @@ Parallel sequence:
 2. T120-T123: continue customer dashboard experience implementation planning and execution.
 3. T035-T038: continue admin/CMS operations hardening slices.
 4. T018-T020, T027-T028: close remaining production readiness gaps.
+
+### Phase P22 — Ecommerce Blueprint Realignment Gap Closure
+- [x] T131 Create canonical full blueprint realignment artifact at `DOC/PROJECT PLAN/ecommerce-blueprint-realignment-e2e-plan.md` and downstream role docs in Frontend, Backend, API and Data, Security, DevOps, QA, Admin Dashboard, and Supabase.
+- [x] T132 Reconcile ecommerce phase status parity between `DOC/PROJECT PLAN/Tasks/tasks.md` and `Ongoing DOCS/ecommerce/execution/tasks.md` with phase-level closure evidence for phases 1-18.
+  - Evidence: `DOC/PROJECT PLAN/ecommerce-blueprint-phase-parity-closure-2026-07-11.md`
+- [~] T133 Implement critical transactional gap closure for phases 3/6/8/9: Supabase transactional activation, inventory reservation invariants, checkout idempotency, webhook reconciliation.
+  - Completed in this slice: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard.
+  - Remaining: full Supabase normalized activation and broader reservation ownership model.
+- [~] T134 Implement lifecycle and operator parity closure for phases 10-14: returns/refunds consistency, admin operations UX hardening, notifications + analytics taxonomy standardization.
+  - Completed in this slice: refund analytics event standardization and lifecycle instrumentation extension.
+  - Remaining: invoice/admin UX parity and broader analytics taxonomy standardization.
+- [~] T135 Complete production readiness closure for phases 15-18: blueprint-mapped QA matrix, DevOps launch runbook, release blocker sign-off.
+  - Completed in this slice: `health:check` pass with lint, typecheck, perf budgets, unit, integration, build, and release-gates e2e.
+  - Remaining: production launch blocker closure and final go-live sign-off.
 
 - [ ] T062 Complete stable full-suite Playwright pass for P10 regression coverage in this environment.
 

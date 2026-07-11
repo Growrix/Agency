@@ -41,6 +41,7 @@ type CreateOrderInput = {
   customer_email: string;
   customer_phone?: string;
   user_id?: string;
+  idempotency_key?: string;
   notes?: string;
   applied_coupon_code?: string;
   requestId?: string;
@@ -142,6 +143,24 @@ function normalizeTierKey(value: string | undefined) {
   return normalized ? normalized.toLowerCase() : undefined;
 }
 
+async function resolveCheckoutUrlForOrder(order: OrderRecord): Promise<string | null> {
+  if (!order.stripe_checkout_session_id) {
+    return null;
+  }
+
+  const stripe = createStripeClient();
+  if (!stripe) {
+    return null;
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(order.stripe_checkout_session_id);
+    return session.url ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export async function createOrder(input: CreateOrderInput) {
   if (!input.customer_name.trim()) {
     throw new ApiError("MISSING_REQUIRED_FIELD", 400, "Customer name is required.");
@@ -149,6 +168,24 @@ export async function createOrder(input: CreateOrderInput) {
 
   if (!EMAIL_REGEX.test(input.customer_email)) {
     throw new ApiError("FIELD_VALIDATION_FAILED", 400, "A valid email address is required.");
+  }
+
+  const normalizedEmail = input.customer_email.trim().toLowerCase();
+  const normalizedIdempotencyKey = normalizeSelectionValue(input.idempotency_key)?.slice(0, 128);
+
+  if (normalizedIdempotencyKey) {
+    const existingOrder = (await readDatabase()).orders.find(
+      (order) => order.idempotency_key === normalizedIdempotencyKey && order.customer_email === normalizedEmail,
+    );
+
+    if (existingOrder) {
+      const checkoutUrl = await resolveCheckoutUrlForOrder(existingOrder);
+      return {
+        order: existingOrder,
+        checkout_url: checkoutUrl,
+        integration_ready: Boolean(checkoutUrl),
+      };
+    }
   }
 
   const requestedCartItems = (input.items ?? []).filter((item) => item.product_slug.trim().length > 0);
@@ -207,6 +244,10 @@ export async function createOrder(input: CreateOrderInput) {
 
       const resolvedPrice = matchedVariant?.price ?? product.price;
       const unitPriceCents = parseUsdPriceToCents(resolvedPrice);
+      const stockOnHand =
+        typeof product.stock_on_hand === "number" && Number.isFinite(product.stock_on_hand)
+          ? Math.max(0, Math.floor(product.stock_on_hand))
+          : undefined;
       const selectedVariantSlug = matchedVariant
         ? normalizeVariantSlug(matchedVariant.slug)
         : requestedVariantSlug;
@@ -217,6 +258,7 @@ export async function createOrder(input: CreateOrderInput) {
 
       return {
         product,
+        stockOnHand,
         orderItem: {
           product_slug: product.slug,
           product_name: product.name,
@@ -234,6 +276,42 @@ export async function createOrder(input: CreateOrderInput) {
   const orderItems = resolvedItems.map((entry) => entry.orderItem);
   const primaryProduct = resolvedItems[0]?.product;
   const primaryOrderItem = orderItems[0];
+
+  const existingOrders = (await readDatabase()).orders;
+  for (const entry of resolvedItems) {
+    if (entry.stockOnHand === undefined) {
+      continue;
+    }
+
+    const reservedQuantity = existingOrders
+      .filter((order) => order.payment_status === "pending" || order.payment_status === "succeeded")
+      .reduce((sum, order) => {
+        const quantity = order.items.reduce((itemSum, item) => {
+          if (item.product_slug !== entry.orderItem.product_slug) {
+            return itemSum;
+          }
+
+          if (entry.orderItem.product_variant_slug) {
+            if (item.product_variant_slug !== entry.orderItem.product_variant_slug) {
+              return itemSum;
+            }
+          }
+
+          return itemSum + item.quantity;
+        }, 0);
+
+        return sum + quantity;
+      }, 0);
+
+    if (reservedQuantity + entry.orderItem.quantity > entry.stockOnHand) {
+      throw new ApiError(
+        "CONFLICT",
+        409,
+        `Insufficient inventory for ${entry.orderItem.product_name}. Please reduce quantity and try again.`,
+      );
+    }
+  }
+
   const subtotalCents = orderItems.reduce((sum, item) => sum + item.total_cents, 0);
 
   // Coupon: re-validate server-side using the trusted subtotal. Client-side
@@ -265,9 +343,10 @@ export async function createOrder(input: CreateOrderInput) {
   const order: OrderRecord = {
     id: crypto.randomUUID(),
     order_number: buildOrderNumber(),
+    idempotency_key: normalizedIdempotencyKey,
     user_id: input.user_id,
     customer_name: input.customer_name.trim(),
-    customer_email: input.customer_email.trim().toLowerCase(),
+    customer_email: normalizedEmail,
     customer_phone: input.customer_phone?.trim() || undefined,
     payment_status: "pending",
     fulfillment_status: "pending",
@@ -840,6 +919,20 @@ export async function refundOrder(
     },
   });
 
+  await recordAnalyticsEvent({
+    event_name: "order_refunded",
+    route: "/api/v1/admin/orders/[orderId]/refund",
+    source: "admin_refund",
+    actor_email: actorEmail,
+    metadata: {
+      order_id: refundedOrder.id,
+      order_number: refundedOrder.order_number,
+      stripe_refund_id: refund.id,
+      total_cents: refundedOrder.total_cents,
+      currency: refundedOrder.currency,
+    },
+  });
+
   // Customer notification + email fan-out (best-effort).
   try {
     await createCustomerNotification({
@@ -912,6 +1005,24 @@ export async function handleStripeWebhook(payload: string, signature: string | n
   }
 
   const event = stripe.webhooks.constructEvent(payload, signature, runtime.stripe.webhookSecret);
+  const existingLogs = (await readDatabase()).audit_logs;
+  const alreadyProcessed = existingLogs.some(
+    (entry) => entry.action === "stripe.webhook_processed" && entry.metadata?.event_id === event.id,
+  );
+
+  if (alreadyProcessed) {
+    await recordAuditLog({
+      level: "info",
+      action: "stripe.webhook_duplicate_ignored",
+      metadata: {
+        event_id: event.id,
+        event_type: event.type,
+      },
+    });
+    return event.type;
+  }
+
+  let processedOrderId: string | undefined;
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
@@ -927,6 +1038,7 @@ export async function handleStripeWebhook(payload: string, signature: string | n
       : undefined;
 
     if (orderId) {
+      processedOrderId = orderId;
       const paymentIntentId =
         typeof session.payment_intent === "string" ? session.payment_intent : undefined;
 
@@ -989,9 +1101,20 @@ export async function handleStripeWebhook(payload: string, signature: string | n
     const session = event.data.object as Stripe.Checkout.Session;
     const orderId = typeof session.metadata?.orderId === "string" ? session.metadata.orderId : null;
     if (orderId) {
+      processedOrderId = orderId;
       await markOrderFailed(orderId);
     }
   }
+
+  await recordAuditLog({
+    level: "info",
+    action: "stripe.webhook_processed",
+    metadata: {
+      event_id: event.id,
+      event_type: event.type,
+      order_id: processedOrderId,
+    },
+  });
 
   return event.type;
 }

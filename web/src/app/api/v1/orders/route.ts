@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
   try {
     const authenticatedUser = await getAuthenticatedUser(request);
     const body = (await request.json()) as Record<string, unknown>;
+    const idempotencyKeyHeader = request.headers.get("x-idempotency-key");
+    const idempotencyKeyBody = typeof body.idempotency_key === "string" ? body.idempotency_key : undefined;
     const items = Array.isArray(body.items)
       ? body.items
           .filter((entry): entry is Record<string, unknown> => typeof entry === "object" && entry !== null)
@@ -42,6 +44,7 @@ export async function POST(request: NextRequest) {
       customer_email: typeof body.customer_email === "string" ? body.customer_email : "",
       customer_phone: typeof body.customer_phone === "string" ? body.customer_phone : undefined,
       user_id: authenticatedUser?.id,
+      idempotency_key: idempotencyKeyHeader ?? idempotencyKeyBody,
       notes: typeof body.notes === "string" ? body.notes : undefined,
       applied_coupon_code:
         typeof body.applied_coupon_code === "string" && body.applied_coupon_code.trim()

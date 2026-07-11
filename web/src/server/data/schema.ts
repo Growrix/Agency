@@ -136,6 +136,7 @@ export type OrderItemRecord = {
 export type OrderRecord = {
   id: string;
   order_number: string;
+  idempotency_key?: string;
   user_id?: string;
   customer_email: string;
   customer_name: string;
@@ -258,6 +259,7 @@ export type ManagedProductRecord = {
   slug: string;
   name: string;
   price: string;
+  stock_on_hand?: number;
   livePreviewUrl?: string;
   embeddedPreviewUrl?: string;
   parentCategoryLabel?: string;
