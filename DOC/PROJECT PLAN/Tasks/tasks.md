@@ -466,12 +466,14 @@ Parallel sequence:
   - Completed in this slice: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard.
   - Completed in this slice: invoice schema/domain and admin invoice send/mark-paid APIs.
   - Completed in this slice: Supabase normalized migration execution (`db:migrate`) with shared pooler connection.
+  - Completed in this slice: normalized table verification via `node web/scripts/verify-supabase-tables.mjs` (`FOUND 19`, `MISSING 0`).
   - Remaining: broader reservation ownership model.
 - [x] T134 Implement lifecycle and operator parity closure for phases 10-14: returns/refunds consistency, admin operations UX hardening, notifications + analytics taxonomy standardization.
   - Evidence: invoice lifecycle is now implemented through checkout, admin order APIs, notifications, and unit coverage.
 - [~] T135 Complete production readiness closure for phases 15-18: blueprint-mapped QA matrix, DevOps launch runbook, release blocker sign-off.
-  - Completed in this slice: `health:check` pass with lint, typecheck, perf budgets, unit, integration, build, and release-gates e2e.
-  - Remaining: production launch blocker closure and final go-live sign-off after operator Supabase migration step.
+  - Completed in this slice: `health:check` pass with lint, typecheck, perf budgets, unit, integration, build, and release-gates e2e (rerun after stale Next build lock cleanup).
+  - Completed in this slice: Supabase migration + normalized table verification evidence is recorded.
+  - Remaining: final go-live sign-off and production operator runbook confirmations.
 
 - [ ] T062 Complete stable full-suite Playwright pass for P10 regression coverage in this environment.
 

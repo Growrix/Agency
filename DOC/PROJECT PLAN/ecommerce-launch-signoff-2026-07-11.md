@@ -8,7 +8,8 @@ This snapshot captures T135 release evidence after P22 transactional and invoice
 - `npm --prefix web run test:unit`: pass (includes `orders.test.ts` and `invoices.test.ts`)
 - `npm --prefix web run test:integration`: pass (8/8)
 - `npm --prefix web run db:migrate`: pass (shared pooler connection)
-- `npm --prefix web run health:check`: pass
+- `node web/scripts/verify-supabase-tables.mjs`: pass (`FOUND 19`, `MISSING 0`)
+- `npm --prefix web run health:check`: pass (rerun after clearing stale concurrent Next build lock)
   - lint pass
   - typecheck pass
   - perf budgets pass
@@ -33,5 +34,5 @@ This snapshot captures T135 release evidence after P22 transactional and invoice
 - Final production launch sign-off remains blocked until production operator confirmations are complete.
 
 ## Required Operator Action
-1. Record transactional table verification evidence after successful migration run.
+1. Capture transactional table verification evidence in release notes (`verify-supabase-tables.mjs` returns `FOUND 19`, `MISSING 0`).
 2. Complete production operator confirmations for launch runbook checks.

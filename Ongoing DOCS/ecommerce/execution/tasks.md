@@ -71,9 +71,10 @@ Most recent delta from P22 execution:
 - Phase parity reconciliation completed for blueprint phases 1-18 with evidence in `DOC/PROJECT PLAN/ecommerce-blueprint-phase-parity-closure-2026-07-11.md`.
 - Transactional hardening slice delivered: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard, and refund analytics instrumentation.
 - Invoice/operator parity slice delivered: invoice schema + domain lifecycle (`create/send/mark-paid/get`), non-Stripe checkout auto-invoice issuance, admin invoice send/paid APIs, and admin order invoice payload wiring.
-- Release evidence refreshed with passing `typecheck`, `test:unit` (including `orders.test.ts` and `invoices.test.ts`), `test:integration`, and full `health:check` including release-gates e2e (8/8).
+- Release evidence refreshed with passing `typecheck`, `test:unit` (including `orders.test.ts` and `invoices.test.ts`), `test:integration`, and full `health:check` including release-gates e2e (8/8); rerun completed after stale concurrent Next build lock cleanup.
 - Supabase normalized migration is now executed successfully with shared pooler connection (`npm --prefix web run db:migrate`).
 - Migration compatibility fix applied: `cart_items` expression-based uniqueness was moved from invalid table constraint syntax to a valid expression unique index in `web/supabase/schema.sql`.
+- Post-migration verification confirms required normalized tables are present (`node web/scripts/verify-supabase-tables.mjs` => `FOUND 19`, `MISSING 0`).
 
 Reference implementation tracker:
 
