@@ -18,6 +18,7 @@ This tracker converts the ecommerce blueprint into sequenced execution phases. I
 
 - Scope gate: implementation aligns with the approved source documents.
 - Contract gate: database, API, frontend, backend, auth, and security contracts agree.
+- Flow-spec gate: multi-step ecommerce work has matching flow spec, state machine, request/response contract, fixtures, and E2E scenarios.
 - Quality gate: required lint, type, unit, integration, API, E2E, accessibility, performance, and security checks pass for the touched application scope.
 - Operations gate: monitoring, logging, rollback, and support procedures are documented for production-affecting features.
 - Analytics gate: measurable revenue, funnel, and customer events are defined when behavior affects conversion or retention.
@@ -45,6 +46,25 @@ This tracker converts the ecommerce blueprint into sequenced execution phases. I
 | 17 | Optimization | Partial | `deployment/03-scaling-cache-cdn-backups.md`, `testing/03-accessibility-performance-security-release-gates.md` | Performance, caching, search, image and query optimization | Core Web Vitals, search latency, and checkout reliability meet targets. |
 | 18 | Production launch | Not Closed | all docs | Launch checklist, support runbook, incident response | No critical gates open; support, analytics, rollback, and monitoring are live. |
 
+## Flow-Spec Layer Upgrade
+
+Before future ecommerce implementation work begins, agents must read and apply the flow-spec layer when touching checkout, orders, admin operations, customer account flows, or payments.
+
+Required flow-spec sources:
+
+- `flows/01-checkout-flow-spec.md`
+- `flows/02-admin-order-management-flow.md`
+- `flows/03-customer-account-flow.md`
+- `state-machines/01-order-payment-fulfillment-states.md`
+- `api/06-detailed-request-response-contracts.md`
+- `admin/01-admin-permissions-and-screens.md`
+- `fixtures/01-ecommerce-test-data.md`
+- `testing/04-e2e-scenario-matrix.md`
+
+Flow-spec acceptance rule:
+
+- No checkout, order, admin, payment, refund, invoice, or customer-dashboard task is ready unless it names the exact flow spec, state transitions, API contracts, fixtures, and E2E scenarios it satisfies.
+
 ## Implementation Alignment Snapshot (Growrixos branch)
 
 The table above remains the canonical blueprint phase plan. Current repository implementation is ahead of this initial planned baseline in several areas.
@@ -68,6 +88,12 @@ Most recent delta from P21 execution:
 
 Most recent delta from P22 execution:
 
+- Checkout flow realigned to paymentless Place order semantics for this phase: checkout copy/metadata now frame secure order submission with manual team follow-up, success state content/badges now support order-placed/manual-contact outcomes, and consultation-only plans bypass payable cart behavior.
+- Cart tier-selection policy now follows replace semantics for same product slug (new tier selection replaces previous line-item tier instead of accumulating parallel tiers).
+- Ecommerce Playwright regression expectations were updated for current checkout labels/required fields, with focused validation passing for `commerce-admin.spec.ts` and checkout placeholder coverage in `commerce-ui.spec.ts`.
+- Checkout now autosaves and restores the information form draft (contact, billing, notes, coupon) per checkout context, and unauthenticated Place order redirects now preserve full checkout query state for sign-in/sign-up return routing.
+- Admin operations now include a dedicated `/admin/orders` section with search/filter controls, pending/fulfilled status actions, and direct internal note capture for order comments.
+- Team order-created email notifications now support admin-configurable templates via `/admin/email-templates`, with placeholder-driven subject/text/html customization and existing fallback defaults retained.
 - Phase parity reconciliation completed for blueprint phases 1-18 with evidence in `DOC/PROJECT PLAN/ecommerce-blueprint-phase-parity-closure-2026-07-11.md`.
 - Transactional hardening slice delivered: order idempotency-key dedupe, stock-aware oversell guard, Stripe webhook duplicate-event guard, and refund analytics instrumentation.
 - Invoice/operator parity slice delivered: invoice schema + domain lifecycle (`create/send/mark-paid/get`), non-Stripe checkout auto-invoice issuance, admin invoice send/paid APIs, and admin order invoice payload wiring.

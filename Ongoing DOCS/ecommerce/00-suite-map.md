@@ -22,7 +22,7 @@ Intake -> Handbook -> Blueprint -> MCP Docs -> Database -> API -> Frontend -> Ba
 
 ## Canonical Inventory
 
-Target document count: 64 markdown files.
+Target document count: 72 markdown files after the flow-spec layer upgrade.
 
 ### Root
 
@@ -73,6 +73,20 @@ Target document count: 64 markdown files.
 - `backend/06-order-payment-shipping-service.md` - orders, payments, refunds, fulfillment, tracking.
 - `backend/07-review-coupon-notification-analytics-service.md` - engagement and operations services.
 
+### Flow Specs
+
+- `flows/01-checkout-flow-spec.md` - complete cart, checkout, order placement, payment/manual order, success/failure, and recovery behavior.
+- `flows/02-admin-order-management-flow.md` - admin order queue, detail, actions, notes, invoice, refunds, fulfillment, and audit behavior.
+- `flows/03-customer-account-flow.md` - dashboard, order detail, invoice, return, support, address, and session behavior.
+
+### State Machines
+
+- `state-machines/01-order-payment-fulfillment-states.md` - cart, checkout, inventory reservation, order, payment, invoice, shipment, refund/return, and notification states.
+
+### Admin Operations
+
+- `admin/01-admin-permissions-and-screens.md` - exact admin screens, permissions, UI states, and operational actions.
+
 ### Auth
 
 - `auth/01-auth-overview.md` - auth architecture and account states.
@@ -94,6 +108,7 @@ Target document count: 64 markdown files.
 - `api/03-product-catalog-search-api.md` - catalog, search, filters, recommendations.
 - `api/04-cart-checkout-payment-api.md` - cart, checkout, totals, payment, webhook contracts.
 - `api/05-orders-admin-webhook-api.md` - orders, returns, admin, webhooks.
+- `api/06-detailed-request-response-contracts.md` - detailed cart, checkout, order, admin, refund, invoice, and webhook request/response contracts.
 
 ### Integrations
 
@@ -120,6 +135,11 @@ Target document count: 64 markdown files.
 - `testing/01-test-strategy.md` - test pyramid, ownership, fixtures, release posture.
 - `testing/02-unit-integration-api-e2e.md` - behavior coverage by layer.
 - `testing/03-accessibility-performance-security-release-gates.md` - non-functional gates.
+- `testing/04-e2e-scenario-matrix.md` - P0/P1/P2 customer, checkout, admin, permission, and non-functional e2e scenarios.
+
+### Fixtures
+
+- `fixtures/01-ecommerce-test-data.md` - deterministic data required for complete ecommerce unit, integration, API, and E2E validation.
 
 ### Analytics
 
@@ -140,10 +160,12 @@ Target document count: 64 markdown files.
 3. Architecture defines how modules interact.
 4. Database defines persistent ownership.
 5. API defines contracts between callers and services.
-6. Frontend and backend define implementation responsibilities.
-7. Auth and security define access and protection rules.
-8. Testing, deployment, and analytics define readiness.
-9. Execution turns approved contracts into phase tasks.
+6. Flow specs and state machines define exact multi-step behavior and allowed transitions.
+7. Frontend and backend define implementation responsibilities.
+8. Auth and security define access and protection rules.
+9. Fixtures and testing define proof that the e2e behavior works.
+10. Deployment and analytics define readiness.
+11. Execution turns approved contracts into phase tasks.
 
 ## Change Control
 
