@@ -168,6 +168,84 @@ Release decision:
 - Pass | Blocked | Conditional
 ```
 
+## Flow Spec Template
+
+```md
+# <Flow Name> Flow Specification
+
+Document status: Draft | Active
+Owner: <teams>
+
+## Purpose
+<why this multi-step flow exists>
+
+## Routes And States
+| Route/screen | Purpose | Required states |
+| --- | --- | --- |
+
+## Happy Path
+1. <step>
+
+## Branches And Recovery
+| Branch | Required behavior |
+| --- | --- |
+
+## API Contracts
+- `<path>`
+
+## State Machine
+- `<path>`
+
+## Fixtures And Tests
+- `<scenario IDs>`
+```
+
+## Provider Decision Template
+
+```md
+# Provider Decision: <domain>
+
+Selected provider: <name>
+Fallback/manual path: <path>
+Owner: <team>
+
+Environment variables:
+- `<NAME>`: <public/server-only/webhook secret>
+
+Required mocks:
+- <success/failure/retry/webhook behavior>
+
+Failure policy:
+- <what happens when provider fails>
+
+Launch checks:
+- <checks>
+```
+
+## Executable QA Template
+
+```md
+# QA Evidence: <feature/release>
+
+Scenario IDs:
+- <ID>
+
+Fixtures:
+- <fixture IDs>
+
+Commands:
+- <command>
+
+Database assertions:
+- <assertion>
+
+Provider mocks:
+- <mock behavior>
+
+Release decision:
+- Pass | Blocked | Conditional
+```
+
 ## Acceptance Criteria
 
 - Future implementation plans can be produced consistently.

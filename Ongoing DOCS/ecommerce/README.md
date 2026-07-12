@@ -1,7 +1,7 @@
 # Enterprise Ecommerce Blueprint
 
 Document status: active planning source
-Last updated: 2026-07-05
+Last updated: 2026-07-12
 Scope: Ecommerce documentation suite only
 
 ## Purpose
@@ -67,16 +67,23 @@ Every implementation task should be traceable back to a business rule, a system 
 3. `blueprint/01-e2e-system-blueprint.md`
 4. `architecture/01-high-level-architecture.md`
 5. `database/01-erd-overview.md`
-6. `api/01-api-standards.md`
-7. `frontend/01-storefront-and-navigation.md`
-8. `flows/01-checkout-flow-spec.md`
-9. `state-machines/01-order-payment-fulfillment-states.md`
-10. `backend/01-services-overview.md`
-11. `auth/01-auth-overview.md`
-12. `security/01-threat-model.md`
-13. `testing/01-test-strategy.md`
-14. `testing/04-e2e-scenario-matrix.md`
-15. `execution/tasks.md`
+6. `database/05-full-schema-contract.md`
+7. `api/01-api-standards.md`
+8. `api/06-detailed-request-response-contracts.md`
+9. `integrations/05-provider-decision-matrix.md`
+10. `frontend/01-storefront-and-navigation.md`
+11. `flows/01-checkout-flow-spec.md`
+12. `flows/04-product-discovery-pdp-flow-spec.md`
+13. `state-machines/01-order-payment-fulfillment-states.md`
+14. `backend/01-services-overview.md`
+15. `auth/01-auth-overview.md`
+16. `auth/05-auth-hardening-rbac-csrf.md`
+17. `security/01-threat-model.md`
+18. `testing/01-test-strategy.md`
+19. `testing/04-e2e-scenario-matrix.md`
+20. `testing/05-executable-qa-pack.md`
+21. `deployment/04-production-operations-runbook.md`
+22. `execution/tasks.md`
 
 ## Definition Of Ready
 
@@ -84,12 +91,15 @@ A feature is ready for implementation only when these sources agree:
 
 - Business rule exists in `handbook/` or `blueprint/`.
 - Data ownership exists in `database/`.
+- Full schema, constraints, indexes, RLS/access rules, migrations, and seed data exist in `database/05-full-schema-contract.md` for stateful features.
 - API contract exists in `api/`.
+- Detailed request/response examples exist for new public, customer, admin, provider, and operations endpoints.
 - Frontend behavior exists in `frontend/` when user-facing.
 - E2E journey behavior exists in `flows/` for checkout, customer, admin, or other multi-step workflows.
 - State transitions exist in `state-machines/` for transactional workflows.
 - Backend behavior exists in `backend/` when stateful or transactional.
 - Auth/security requirements are named when protected data or payments are involved.
+- Provider decisions, fallback behavior, mocks, and environment variables are named in `integrations/05-provider-decision-matrix.md` for external services.
 - Test and release gates are named in `testing/` and `execution/tasks.md`.
 
 ## Definition Of Done
@@ -99,6 +109,7 @@ A feature is complete only when:
 - Business, API, database, frontend, backend, auth, and security contracts remain aligned.
 - Edge cases and failure states are documented.
 - Flow specs, state machines, request/response contracts, fixtures, and E2E scenarios remain aligned.
+- Provider decisions, full schema, auth hardening, executable QA, and production operations runbook remain aligned.
 - Required tests and release gates pass.
 - Analytics events are defined for measurable user or revenue behavior.
 - Operational ownership is documented for support, refunds, inventory, and incidents.

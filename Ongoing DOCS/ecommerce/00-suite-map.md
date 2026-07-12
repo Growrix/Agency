@@ -1,7 +1,7 @@
 # Ecommerce Suite Map
 
 Document status: canonical map
-Last updated: 2026-07-05
+Last updated: 2026-07-12
 
 ## Purpose
 
@@ -22,7 +22,7 @@ Intake -> Handbook -> Blueprint -> MCP Docs -> Database -> API -> Frontend -> Ba
 
 ## Canonical Inventory
 
-Target document count: 72 markdown files after the flow-spec layer upgrade.
+Target document count: 84 markdown files after the implementation-completeness upgrade.
 
 ### Root
 
@@ -78,6 +78,10 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `flows/01-checkout-flow-spec.md` - complete cart, checkout, order placement, payment/manual order, success/failure, and recovery behavior.
 - `flows/02-admin-order-management-flow.md` - admin order queue, detail, actions, notes, invoice, refunds, fulfillment, and audit behavior.
 - `flows/03-customer-account-flow.md` - dashboard, order detail, invoice, return, support, address, and session behavior.
+- `flows/04-product-discovery-pdp-flow-spec.md` - storefront discovery, search, filters, PDP, variants, reviews, SEO, and add-to-cart behavior.
+- `flows/05-admin-product-inventory-flow.md` - admin product CRUD, variants, media, SEO, stock adjustment, reservations, and low-stock operations.
+- `flows/06-coupons-gift-cards-store-credit-flow.md` - coupon, gift card, store credit, rewards, redemption, ledger, and abuse behavior.
+- `flows/07-returns-exchanges-support-flow.md` - cancellation, returns, exchanges, refunds, store credit, replacements, and support ticket behavior.
 
 ### State Machines
 
@@ -93,6 +97,7 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `auth/02-registration-email-verification-otp.md` - signup and verification flows.
 - `auth/03-login-session-jwt-refresh.md` - session, token, device, refresh behavior.
 - `auth/04-password-reset-social-login-rbac.md` - reset, social identity, 2FA, roles, permissions.
+- `auth/05-auth-hardening-rbac-csrf.md` - exact session, RBAC, CSRF, ownership, step-up, and route protection rules.
 
 ### Database
 
@@ -100,6 +105,7 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `database/02-commerce-catalog-schema.md` - products, categories, brands, variants, media.
 - `database/03-customer-auth-cart-schema.md` - customers, profiles, sessions, carts, addresses.
 - `database/04-order-payment-inventory-schema.md` - orders, payments, inventory, coupons, refunds.
+- `database/05-full-schema-contract.md` - column-level tables, constraints, indexes, RLS/access rules, migrations, and seed requirements.
 
 ### API
 
@@ -109,6 +115,9 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `api/04-cart-checkout-payment-api.md` - cart, checkout, totals, payment, webhook contracts.
 - `api/05-orders-admin-webhook-api.md` - orders, returns, admin, webhooks.
 - `api/06-detailed-request-response-contracts.md` - detailed cart, checkout, order, admin, refund, invoice, and webhook request/response contracts.
+- `api/07-auth-customer-detailed-contracts.md` - auth, profile, address, sessions, customer orders, and support API contracts.
+- `api/08-catalog-search-admin-detailed-contracts.md` - catalog, search, admin products, inventory, coupons, and reviews API contracts.
+- `api/09-operations-analytics-detailed-contracts.md` - reports, analytics, audit, notifications, support, and system health API contracts.
 
 ### Integrations
 
@@ -116,6 +125,7 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `integrations/02-email-sms-whatsapp.md` - transactional and marketing messaging.
 - `integrations/03-storage-media-search.md` - Cloudinary/S3 media and search engines.
 - `integrations/04-shipping-tax-analytics-reviews.md` - fulfillment, tax, analytics, reviews.
+- `integrations/05-provider-decision-matrix.md` - concrete provider choices, fallbacks, mocks, environment variables, and launch blockers.
 
 ### Security
 
@@ -129,6 +139,7 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `deployment/01-environments-ci-cd.md` - environment promotion and pipeline gates.
 - `deployment/02-secrets-monitoring-logging.md` - secrets, observability, incident visibility.
 - `deployment/03-scaling-cache-cdn-backups.md` - scale, cache, CDN, jobs, backups.
+- `deployment/04-production-operations-runbook.md` - SLOs, alerts, reconciliation jobs, incident response, backup/restore, and rollback.
 
 ### Testing
 
@@ -136,6 +147,7 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 - `testing/02-unit-integration-api-e2e.md` - behavior coverage by layer.
 - `testing/03-accessibility-performance-security-release-gates.md` - non-functional gates.
 - `testing/04-e2e-scenario-matrix.md` - P0/P1/P2 customer, checkout, admin, permission, and non-functional e2e scenarios.
+- `testing/05-executable-qa-pack.md` - required commands, provider mocks, DB assertions, scenario traceability, and release evidence.
 
 ### Fixtures
 
@@ -158,14 +170,15 @@ Target document count: 72 markdown files after the flow-spec layer upgrade.
 1. Handbook decisions define what the business allows.
 2. Blueprint files define what the platform must support.
 3. Architecture defines how modules interact.
-4. Database defines persistent ownership.
-5. API defines contracts between callers and services.
-6. Flow specs and state machines define exact multi-step behavior and allowed transitions.
-7. Frontend and backend define implementation responsibilities.
-8. Auth and security define access and protection rules.
-9. Fixtures and testing define proof that the e2e behavior works.
-10. Deployment and analytics define readiness.
-11. Execution turns approved contracts into phase tasks.
+4. Provider decisions define selected external services and fallback paths.
+5. Database defines persistent ownership, schemas, constraints, access rules, and migrations.
+6. API defines contracts between callers and services.
+7. Flow specs and state machines define exact multi-step behavior and allowed transitions.
+8. Frontend and backend define implementation responsibilities.
+9. Auth and security define access and protection rules.
+10. Fixtures, executable QA, and testing define proof that the e2e behavior works.
+11. Deployment, operations, and analytics define readiness.
+12. Execution turns approved contracts into phase tasks.
 
 ## Change Control
 

@@ -1,7 +1,7 @@
 # Ecommerce Execution Tasks
 
 Document status: canonical execution tracker
-Last updated: 2026-07-11
+Last updated: 2026-07-12
 
 ## Purpose
 
@@ -17,8 +17,10 @@ This tracker converts the ecommerce blueprint into sequenced execution phases. I
 ## Global Gates
 
 - Scope gate: implementation aligns with the approved source documents.
-- Contract gate: database, API, frontend, backend, auth, and security contracts agree.
+- Contract gate: database, API, frontend, backend, auth, provider, and security contracts agree.
+- Schema gate: stateful work has matching table, column, constraint, index, RLS/access, migration, and seed requirements in `database/05-full-schema-contract.md`.
 - Flow-spec gate: multi-step ecommerce work has matching flow spec, state machine, request/response contract, fixtures, and E2E scenarios.
+- Provider gate: external-service work has a selected provider, fallback path, environment variables, test mock, and failure policy in `integrations/05-provider-decision-matrix.md`.
 - Quality gate: required lint, type, unit, integration, API, E2E, accessibility, performance, and security checks pass for the touched application scope.
 - Operations gate: monitoring, logging, rollback, and support procedures are documented for production-affecting features.
 - Analytics gate: measurable revenue, funnel, and customer events are defined when behavior affects conversion or retention.
@@ -60,10 +62,38 @@ Required flow-spec sources:
 - `admin/01-admin-permissions-and-screens.md`
 - `fixtures/01-ecommerce-test-data.md`
 - `testing/04-e2e-scenario-matrix.md`
+- `testing/05-executable-qa-pack.md`
+- `database/05-full-schema-contract.md`
+- `integrations/05-provider-decision-matrix.md`
+- `auth/05-auth-hardening-rbac-csrf.md`
+- `deployment/04-production-operations-runbook.md`
 
 Flow-spec acceptance rule:
 
 - No checkout, order, admin, payment, refund, invoice, or customer-dashboard task is ready unless it names the exact flow spec, state transitions, API contracts, fixtures, and E2E scenarios it satisfies.
+
+## Implementation-Completeness Upgrade
+
+The suite now includes the missing provider, full-schema, detailed API, secondary-flow, auth-hardening, executable-QA, and operations runbook contracts required to reduce implementation ambiguity.
+
+Additional required sources for future implementation:
+
+- `integrations/05-provider-decision-matrix.md`
+- `database/05-full-schema-contract.md`
+- `api/07-auth-customer-detailed-contracts.md`
+- `api/08-catalog-search-admin-detailed-contracts.md`
+- `api/09-operations-analytics-detailed-contracts.md`
+- `flows/04-product-discovery-pdp-flow-spec.md`
+- `flows/05-admin-product-inventory-flow.md`
+- `flows/06-coupons-gift-cards-store-credit-flow.md`
+- `flows/07-returns-exchanges-support-flow.md`
+- `auth/05-auth-hardening-rbac-csrf.md`
+- `testing/05-executable-qa-pack.md`
+- `deployment/04-production-operations-runbook.md`
+
+Completion rule:
+
+- No ecommerce task is ready when it relies on an external provider, durable state, protected route, admin operation, support workflow, promotional value, or production launch behavior that is only named at a high level. The task must point to the exact detailed source doc above or add one before implementation.
 
 ## Implementation Alignment Snapshot (Growrixos branch)
 
