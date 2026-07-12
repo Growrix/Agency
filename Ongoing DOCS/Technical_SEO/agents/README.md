@@ -36,6 +36,7 @@ The agent must follow the parent Technical SEO handbook before making recommenda
 | `tools.md` | Tool expectations and tool-agnostic evidence rules. |
 | `rules.md` | Agent-specific constraints and escalation rules. |
 | `memory.md` | What the agent should remember, avoid remembering, and update. |
+| `platform-installation.md` | How to install/select the agent in VS Code Copilot, Cursor, and future projects. |
 | `prompts/reusable-prompts.md` | Reusable invocation prompts for future projects. |
 | `templates/reporting-and-brief-templates.md` | Audit, roadmap, and implementation brief templates. |
 | `checklists/readiness-audit-checklists.md` | Operational checklists for agent runs. |
@@ -56,6 +57,15 @@ The agent must follow the parent Technical SEO handbook before making recommenda
 4. `workflow.md`
 5. Relevant framework file for the task.
 6. Relevant parent handbook docs.
+
+## Platform Adapters
+
+This framework is active in the current project through thin selectable adapters:
+
+- VS Code Copilot: `.github/agents/technical-seo-architect.agent.md`
+- Cursor: `.cursor/agents/technical-seo-architect.md`
+
+For future projects, copy the relevant adapter file and the `Ongoing DOCS/Technical_SEO` handbook folder. See `platform-installation.md`.
 
 ## Completion Standard
 
