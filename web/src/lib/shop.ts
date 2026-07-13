@@ -304,3 +304,20 @@ export function getCheckoutHref(productOrSlug: ShopProduct | string, selection?:
 
   return `/checkout?${params.toString()}`;
 }
+
+type VariantCheckoutInput = {
+  slug: string;
+  tier_name?: string;
+  fulfillment_type?: string;
+};
+
+export function getVariantCheckoutHref(
+  productOrSlug: ShopProduct | string,
+  variant: VariantCheckoutInput,
+) {
+  return getCheckoutHref(productOrSlug, {
+    variantSlug: variant.slug,
+    tierName: variant.tier_name,
+    fulfillmentType: variant.fulfillment_type,
+  });
+}

@@ -11,6 +11,8 @@ type SignInExperienceProps = {
 };
 
 export function SignInExperience({ redirectUrl }: SignInExperienceProps) {
+  const signUpWithNext = `/sign-up?next=${encodeURIComponent(redirectUrl)}`;
+
   if (!isClerkConfiguredClient()) {
     return (
       <ClerkAuthShell
@@ -27,10 +29,10 @@ export function SignInExperience({ redirectUrl }: SignInExperienceProps) {
       title="Sign in to your account"
       description="Access downloads, orders, appointments, and support from your customer dashboard."
     >
-      <SignIn forceRedirectUrl={redirectUrl} signUpUrl="/sign-up" appearance={clerkAuthAppearance} />
+      <SignIn forceRedirectUrl={redirectUrl} signUpUrl={signUpWithNext} appearance={clerkAuthAppearance} />
       <p className="mt-6 text-center text-sm text-text-muted">
         Need an account?{" "}
-        <Link href="/sign-up" className="font-medium text-primary hover:underline">
+        <Link href={signUpWithNext} className="font-medium text-primary hover:underline">
           Sign up
         </Link>
       </p>

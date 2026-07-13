@@ -21,8 +21,8 @@ const STATIC_ROUTES = [
   "/book-appointment",
   "/ai-concierge",
   "/html-business-profiles",
-  "/privacy-policy",
-  "/terms-of-service",
+  "/legal/privacy",
+  "/legal/terms",
   "/refund-policy",
 ] as const;
 

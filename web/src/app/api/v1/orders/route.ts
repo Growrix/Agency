@@ -58,7 +58,9 @@ export async function POST(request: NextRequest) {
       ip: context.ip,
     });
 
-    if (!result.checkout_url && !canUseStripeCheckout(paymentMethod)) {
+    const responseStatus = result.idempotency_reused ? 200 : 201;
+
+    if (!result.checkout_url && paymentMethod === "invoice" && !result.idempotency_reused) {
       const invoiceResult = await sendOrCreateInvoiceForOrder(result.order.id, {
         paymentMethod,
       });
@@ -74,11 +76,11 @@ export async function POST(request: NextRequest) {
           },
           invoice_email_delivered: invoiceResult.delivered,
         },
-        { status: 201 },
+        { status: responseStatus },
       );
     }
 
-    return successResponse(result, { status: 201 });
+    return successResponse(result, { status: responseStatus });
   } catch (error) {
     return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to create order."));
   }
@@ -86,14 +88,10 @@ export async function POST(request: NextRequest) {
 
 function parsePaymentMethod(value: unknown): PaymentMethodType {
   if (typeof value !== "string") {
-    return "card";
+    return "invoice";
   }
 
   const normalized = value.trim();
   const supported: PaymentMethodType[] = ["card", "paypal", "stripe", "bank_transfer", "invoice"];
-  return supported.includes(normalized as PaymentMethodType) ? (normalized as PaymentMethodType) : "card";
-}
-
-function canUseStripeCheckout(method: PaymentMethodType): boolean {
-  return method === "card" || method === "stripe" || method === "paypal";
+  return supported.includes(normalized as PaymentMethodType) ? (normalized as PaymentMethodType) : "invoice";
 }

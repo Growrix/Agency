@@ -1,23 +1,28 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { ReactNode } from "react";
-import { isClerkConfiguredClient } from "@/lib/clerk-client";
-
-const ClerkProviderBoundary = dynamic(
-  () =>
-    import("@/components/shell/ClerkProviderBoundary").then((mod) => mod.ClerkProviderBoundary),
-  { ssr: false },
-);
 
 type ClerkAppProviderProps = {
   children: ReactNode;
 };
 
 export function ClerkAppProvider({ children }: ClerkAppProviderProps) {
-  if (!isClerkConfiguredClient()) {
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
     return children;
   }
 
-  return <ClerkProviderBoundary>{children}</ClerkProviderBoundary>;
+  return (
+    <ClerkProvider
+      publishableKey={publishableKey}
+      signInUrl={process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL ?? "/sign-in"}
+      signUpUrl={process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL ?? "/sign-up"}
+      signInFallbackRedirectUrl={process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL ?? "/dashboard"}
+      signUpFallbackRedirectUrl={process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL ?? "/dashboard"}
+    >
+      {children}
+    </ClerkProvider>
+  );
 }

@@ -7,11 +7,12 @@ import type {
   OrderFulfillmentStatus,
   OrderItemRecord,
   OrderPaymentStatus,
-  PaymentMethodType,
   OrderRecord,
+  PaymentMethodType,
 } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { getPublicShopProduct } from "@/server/domain/catalog";
+import { parseFixedUsdPriceToCents, isQuoteBasedCommerceItem, isQuoteBasedOrder, DFY_PRICE_DISPLAY_LABEL } from "@/lib/commerce-pricing";
 import { applyCouponToOrder, validateCouponForCheckout } from "@/server/domain/coupons";
 import { syncOrderEntitlements } from "@/server/domain/downloads";
 import {
@@ -42,8 +43,8 @@ type CreateOrderInput = {
   customer_email: string;
   customer_phone?: string;
   user_id?: string;
-  idempotency_key?: string;
   payment_method_preference?: PaymentMethodType;
+  idempotency_key?: string;
   notes?: string;
   applied_coupon_code?: string;
   requestId?: string;
@@ -68,14 +69,21 @@ const FULFILLMENT_TRANSITIONS: Record<OrderFulfillmentStatus, OrderFulfillmentSt
   archived: [],
 };
 
-function parseUsdPriceToCents(value: string) {
-  const normalized = value.replace(/[^\d.]/g, "");
-  const parsed = Number(normalized);
-  if (!Number.isFinite(parsed)) {
+function parseUsdPriceToCents(value: string, pricingContext?: {
+  fulfillmentType?: string;
+  variantSlug?: string;
+  tierName?: string;
+}) {
+  if (isQuoteBasedCommerceItem({ ...pricingContext, priceLabel: value })) {
+    return 0;
+  }
+
+  const cents = parseFixedUsdPriceToCents(value);
+  if (cents <= 0) {
     throw new ApiError("INTERNAL_ERROR", 500, "Product price could not be parsed.");
   }
 
-  return Math.round(parsed * 100);
+  return cents;
 }
 
 function buildOrderNumber() {
@@ -145,61 +153,68 @@ function normalizeTierKey(value: string | undefined) {
   return normalized ? normalized.toLowerCase() : undefined;
 }
 
-function normalizePaymentMethod(value: PaymentMethodType | undefined): PaymentMethodType {
-  if (!value) {
-    return "card";
-  }
-
-  const supported: PaymentMethodType[] = ["card", "paypal", "stripe", "bank_transfer", "invoice"];
-  return supported.includes(value) ? value : "card";
-}
-
-function canUseStripeCheckout(method: PaymentMethodType): boolean {
+function canUseStripeCheckout(method: PaymentMethodType) {
   return method === "card" || method === "stripe" || method === "paypal";
 }
 
-async function resolveCheckoutUrlForOrder(order: OrderRecord): Promise<string | null> {
-  if (!order.stripe_checkout_session_id) {
-    return null;
+function normalizeIdempotencyKey(value: string | undefined) {
+  if (!value) {
+    return undefined;
   }
 
-  const stripe = createStripeClient();
-  if (!stripe) {
-    return null;
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return undefined;
   }
 
-  try {
-    const session = await stripe.checkout.sessions.retrieve(order.stripe_checkout_session_id);
-    return session.url ?? null;
-  } catch {
-    return null;
+  return trimmed.slice(0, 120);
+}
+
+function isSameIdempotencyActor(order: OrderRecord, userId: string | undefined, customerEmail: string) {
+  if (userId) {
+    return order.user_id === userId;
   }
+
+  return order.customer_email === customerEmail;
+}
+
+async function getExistingOrderByIdempotency(
+  idempotencyKey: string,
+  userId: string | undefined,
+  customerEmail: string,
+) {
+  const database = await readDatabase();
+  return (
+    database.orders.find(
+      (order) =>
+        order.idempotency_key === idempotencyKey &&
+        isSameIdempotencyActor(order, userId, customerEmail),
+    ) ?? null
+  );
 }
 
 export async function createOrder(input: CreateOrderInput) {
-  if (!input.customer_name.trim()) {
+  const requestedPaymentMethod = input.payment_method_preference ?? "invoice";
+  const customerName = input.customer_name.trim();
+  const customerEmail = input.customer_email.trim().toLowerCase();
+  const normalizedIdempotencyKey = normalizeIdempotencyKey(input.idempotency_key);
+
+  if (!customerName) {
     throw new ApiError("MISSING_REQUIRED_FIELD", 400, "Customer name is required.");
   }
 
-  if (!EMAIL_REGEX.test(input.customer_email)) {
+  if (!EMAIL_REGEX.test(customerEmail)) {
     throw new ApiError("FIELD_VALIDATION_FAILED", 400, "A valid email address is required.");
   }
 
-  const normalizedEmail = input.customer_email.trim().toLowerCase();
-  const normalizedIdempotencyKey = normalizeSelectionValue(input.idempotency_key)?.slice(0, 128);
-  const paymentMethodPreference = normalizePaymentMethod(input.payment_method_preference);
-
   if (normalizedIdempotencyKey) {
-    const existingOrder = (await readDatabase()).orders.find(
-      (order) => order.idempotency_key === normalizedIdempotencyKey && order.customer_email === normalizedEmail,
-    );
-
-    if (existingOrder) {
-      const checkoutUrl = await resolveCheckoutUrlForOrder(existingOrder);
+    const existing = await getExistingOrderByIdempotency(normalizedIdempotencyKey, input.user_id, customerEmail);
+    if (existing) {
       return {
-        order: existingOrder,
-        checkout_url: checkoutUrl,
-        integration_ready: Boolean(checkoutUrl),
+        order: existing,
+        checkout_url: null,
+        integration_ready: Boolean(existing.stripe_checkout_session_id),
+        idempotency_reused: true,
       };
     }
   }
@@ -259,11 +274,6 @@ export async function createOrder(input: CreateOrderInput) {
       }
 
       const resolvedPrice = matchedVariant?.price ?? product.price;
-      const unitPriceCents = parseUsdPriceToCents(resolvedPrice);
-      const stockOnHand =
-        typeof product.stock_on_hand === "number" && Number.isFinite(product.stock_on_hand)
-          ? Math.max(0, Math.floor(product.stock_on_hand))
-          : undefined;
       const selectedVariantSlug = matchedVariant
         ? normalizeVariantSlug(matchedVariant.slug)
         : requestedVariantSlug;
@@ -271,10 +281,14 @@ export async function createOrder(input: CreateOrderInput) {
       const selectedFulfillmentType = matchedVariant
         ? normalizeVariantSlug(matchedVariant.fulfillment_type)
         : normalizeVariantSlug(item.fulfillmentType);
+      const unitPriceCents = parseUsdPriceToCents(resolvedPrice, {
+        fulfillmentType: selectedFulfillmentType,
+        variantSlug: selectedVariantSlug,
+        tierName: selectedTierName,
+      });
 
       return {
         product,
-        stockOnHand,
         orderItem: {
           product_slug: product.slug,
           product_name: product.name,
@@ -292,42 +306,6 @@ export async function createOrder(input: CreateOrderInput) {
   const orderItems = resolvedItems.map((entry) => entry.orderItem);
   const primaryProduct = resolvedItems[0]?.product;
   const primaryOrderItem = orderItems[0];
-
-  const existingOrders = (await readDatabase()).orders;
-  for (const entry of resolvedItems) {
-    if (entry.stockOnHand === undefined) {
-      continue;
-    }
-
-    const reservedQuantity = existingOrders
-      .filter((order) => order.payment_status === "pending" || order.payment_status === "succeeded")
-      .reduce((sum, order) => {
-        const quantity = order.items.reduce((itemSum, item) => {
-          if (item.product_slug !== entry.orderItem.product_slug) {
-            return itemSum;
-          }
-
-          if (entry.orderItem.product_variant_slug) {
-            if (item.product_variant_slug !== entry.orderItem.product_variant_slug) {
-              return itemSum;
-            }
-          }
-
-          return itemSum + item.quantity;
-        }, 0);
-
-        return sum + quantity;
-      }, 0);
-
-    if (reservedQuantity + entry.orderItem.quantity > entry.stockOnHand) {
-      throw new ApiError(
-        "CONFLICT",
-        409,
-        `Insufficient inventory for ${entry.orderItem.product_name}. Please reduce quantity and try again.`,
-      );
-    }
-  }
-
   const subtotalCents = orderItems.reduce((sum, item) => sum + item.total_cents, 0);
 
   // Coupon: re-validate server-side using the trusted subtotal. Client-side
@@ -339,7 +317,7 @@ export async function createOrder(input: CreateOrderInput) {
     const validation = await validateCouponForCheckout({
       code: rawCouponCode,
       subtotal_cents: subtotalCents,
-      user_email: input.customer_email,
+      user_email: customerEmail,
     });
     if (validation.valid) {
       appliedCouponCode = validation.coupon.code;
@@ -354,6 +332,14 @@ export async function createOrder(input: CreateOrderInput) {
   }
 
   const totalCents = Math.max(0, subtotalCents - appliedDiscountCents);
+  const normalizedNotes = normalizeNotes(input.notes) ?? undefined;
+  const purchasedProductSlugs = new Set(orderItems.map((item) => item.product_slug));
+  const requestedQuantityByProduct = new Map<string, number>();
+
+  for (const item of orderItems) {
+    const existing = requestedQuantityByProduct.get(item.product_slug) ?? 0;
+    requestedQuantityByProduct.set(item.product_slug, existing + item.quantity);
+  }
 
   const now = new Date().toISOString();
   const order: OrderRecord = {
@@ -361,10 +347,10 @@ export async function createOrder(input: CreateOrderInput) {
     order_number: buildOrderNumber(),
     idempotency_key: normalizedIdempotencyKey,
     user_id: input.user_id,
-    customer_name: input.customer_name.trim(),
-    customer_email: normalizedEmail,
+    customer_name: customerName,
+    customer_email: customerEmail,
     customer_phone: input.customer_phone?.trim() || undefined,
-    payment_method_preference: paymentMethodPreference,
+    payment_method_preference: requestedPaymentMethod,
     payment_status: "pending",
     fulfillment_status: "pending",
     subtotal_cents: subtotalCents,
@@ -377,16 +363,81 @@ export async function createOrder(input: CreateOrderInput) {
     selected_tier_name: primaryOrderItem?.product_tier_name,
     selected_fulfillment_type: primaryOrderItem?.fulfillment_type,
     delivery_urls: [],
-    notes: input.notes?.trim() || undefined,
+    notes: normalizedNotes,
     applied_coupon_code: appliedCouponCode,
     applied_discount_cents: appliedCouponCode ? appliedDiscountCents : undefined,
     created_at: now,
   };
 
-  await writeDatabase((next) => ({
-    ...next,
-    orders: [order, ...next.orders],
-  }));
+  const idempotentReplayRef: { current: OrderRecord | null } = { current: null };
+
+  await writeDatabase((next) => {
+    if (normalizedIdempotencyKey) {
+      idempotentReplayRef.current =
+        next.orders.find(
+          (existingOrder) =>
+            existingOrder.idempotency_key === normalizedIdempotencyKey &&
+            isSameIdempotencyActor(existingOrder, input.user_id, customerEmail),
+        ) ?? null;
+
+      if (idempotentReplayRef.current) {
+        return next;
+      }
+    }
+
+    for (const [productSlug, requestedQuantity] of requestedQuantityByProduct) {
+      const productRecord = next.products.find((entry) => entry.slug === productSlug);
+      if (!productRecord || typeof productRecord.stock_on_hand !== "number") {
+        continue;
+      }
+
+      const availableQuantity = Math.max(0, Math.floor(productRecord.stock_on_hand));
+      if (availableQuantity < requestedQuantity) {
+        throw new ApiError("CONFLICT", 409, `Insufficient inventory for ${productRecord.name}.`);
+      }
+    }
+
+    const shouldPrunePurchasedCartItems = Boolean(input.user_id) && purchasedProductSlugs.size > 0;
+    const nextCartItems = shouldPrunePurchasedCartItems
+      ? next.cart_items.filter(
+          (entry) =>
+            entry.user_id !== input.user_id || !purchasedProductSlugs.has(entry.product_slug),
+        )
+      : next.cart_items;
+
+    const nextProducts = next.products.map((product) => {
+      if (typeof product.stock_on_hand !== "number") {
+        return product;
+      }
+
+      const consumedQuantity = requestedQuantityByProduct.get(product.slug);
+      if (!consumedQuantity) {
+        return product;
+      }
+
+      return {
+        ...product,
+        stock_on_hand: Math.max(0, Math.floor(product.stock_on_hand) - consumedQuantity),
+      };
+    });
+
+    return {
+      ...next,
+      orders: [order, ...next.orders],
+      cart_items: nextCartItems,
+      products: nextProducts,
+    };
+  });
+
+  if (idempotentReplayRef.current) {
+    const replayedOrder = idempotentReplayRef.current;
+    return {
+      order: replayedOrder,
+      checkout_url: null,
+      integration_ready: Boolean(replayedOrder.stripe_checkout_session_id),
+      idempotency_reused: true,
+    };
+  }
 
   // Increment coupon usage AFTER the order write so we never double-count on
   // a failed order write. Best-effort — a failure here logs but doesn't roll
@@ -414,7 +465,7 @@ export async function createOrder(input: CreateOrderInput) {
   const stripe = createStripeClient();
   let checkoutUrl: string | null = null;
 
-  if (stripe && primaryProduct && canUseStripeCheckout(paymentMethodPreference)) {
+  if (stripe && primaryProduct && canUseStripeCheckout(requestedPaymentMethod) && totalCents > 0) {
     const successUrl = new URL("/success", runtime.appBaseUrl);
     successUrl.searchParams.set("order", order.id);
     successUrl.searchParams.set("product", primaryProduct.slug);
@@ -578,14 +629,30 @@ export async function createOrder(input: CreateOrderInput) {
         `Order: ${order.order_number}`,
         `Customer: ${order.customer_name ?? "N/A"} <${order.customer_email}>`,
         `Phone: ${order.customer_phone ?? "N/A"}`,
-        `Total: ${(order.total_cents / 100).toFixed(2)} ${order.currency.toUpperCase()}`,
+        `Total: ${
+          isQuoteBasedOrder({
+            selected_fulfillment_type: order.selected_fulfillment_type,
+            selected_variant_slug: order.selected_variant_slug,
+            selected_tier_name: order.selected_tier_name,
+            items: order.items,
+          })
+            ? DFY_PRICE_DISPLAY_LABEL
+            : `${(order.total_cents / 100).toFixed(2)} ${order.currency.toUpperCase()}`
+        }`,
         `Stripe ready: ${checkoutUrl ? "yes" : "no"}`,
         ``,
         `Items:`,
-        ...order.items.map(
-          (item) =>
-            `  - ${item.product_name}${item.product_tier_name ? ` (${item.product_tier_name})` : ""} x${item.quantity} — ${(item.unit_price_cents / 100).toFixed(2)}`,
-        ),
+        ...order.items.map((item) => {
+          const quoteItem = isQuoteBasedCommerceItem({
+            fulfillmentType: item.fulfillment_type,
+            variantSlug: item.product_variant_slug,
+            tierName: item.product_tier_name,
+          });
+          const linePrice = quoteItem
+            ? DFY_PRICE_DISPLAY_LABEL
+            : `${(item.unit_price_cents / 100).toFixed(2)}`;
+          return `  - ${item.product_name}${item.product_tier_name ? ` (${item.product_tier_name})` : ""} x${item.quantity} — ${linePrice}`;
+        }),
         order.notes ? `\nNotes:\n${order.notes}` : "",
       ]
         .filter((line) => line !== "")
@@ -608,6 +675,7 @@ export async function createOrder(input: CreateOrderInput) {
     order,
     checkout_url: checkoutUrl,
     integration_ready: Boolean(checkoutUrl),
+    idempotency_reused: false,
   };
 }
 
@@ -624,6 +692,43 @@ export async function listOrders() {
 export async function listOrdersByEmail(email: string) {
   const database = await readDatabase();
   return database.orders.filter((order) => order.customer_email === email.toLowerCase());
+}
+
+type OrderAccessUser = {
+  id: string;
+  email: string;
+  role?: string;
+};
+
+function normalizeCustomerEmail(email: string) {
+  return email.trim().toLowerCase();
+}
+
+export function canAccessOrderByUser(
+  order: Pick<OrderRecord, "customer_email" | "user_id">,
+  user: OrderAccessUser,
+) {
+  if (user.role === "admin") {
+    return true;
+  }
+
+  if (order.user_id && order.user_id === user.id) {
+    return true;
+  }
+
+  return order.customer_email === normalizeCustomerEmail(user.email);
+}
+
+export async function listOrdersForUser(user: OrderAccessUser) {
+  if (user.role === "admin") {
+    return listOrders();
+  }
+
+  const normalizedEmail = normalizeCustomerEmail(user.email);
+  const database = await readDatabase();
+  return database.orders.filter(
+    (order) => order.user_id === user.id || order.customer_email === normalizedEmail,
+  );
 }
 
 type StripeCheckoutSelection = {
@@ -936,20 +1041,6 @@ export async function refundOrder(
     },
   });
 
-  await recordAnalyticsEvent({
-    event_name: "order_refunded",
-    route: "/api/v1/admin/orders/[orderId]/refund",
-    source: "admin_refund",
-    actor_email: actorEmail,
-    metadata: {
-      order_id: refundedOrder.id,
-      order_number: refundedOrder.order_number,
-      stripe_refund_id: refund.id,
-      total_cents: refundedOrder.total_cents,
-      currency: refundedOrder.currency,
-    },
-  });
-
   // Customer notification + email fan-out (best-effort).
   try {
     await createCustomerNotification({
@@ -1022,24 +1113,6 @@ export async function handleStripeWebhook(payload: string, signature: string | n
   }
 
   const event = stripe.webhooks.constructEvent(payload, signature, runtime.stripe.webhookSecret);
-  const existingLogs = (await readDatabase()).audit_logs;
-  const alreadyProcessed = existingLogs.some(
-    (entry) => entry.action === "stripe.webhook_processed" && entry.metadata?.event_id === event.id,
-  );
-
-  if (alreadyProcessed) {
-    await recordAuditLog({
-      level: "info",
-      action: "stripe.webhook_duplicate_ignored",
-      metadata: {
-        event_id: event.id,
-        event_type: event.type,
-      },
-    });
-    return event.type;
-  }
-
-  let processedOrderId: string | undefined;
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
@@ -1055,7 +1128,6 @@ export async function handleStripeWebhook(payload: string, signature: string | n
       : undefined;
 
     if (orderId) {
-      processedOrderId = orderId;
       const paymentIntentId =
         typeof session.payment_intent === "string" ? session.payment_intent : undefined;
 
@@ -1118,20 +1190,9 @@ export async function handleStripeWebhook(payload: string, signature: string | n
     const session = event.data.object as Stripe.Checkout.Session;
     const orderId = typeof session.metadata?.orderId === "string" ? session.metadata.orderId : null;
     if (orderId) {
-      processedOrderId = orderId;
       await markOrderFailed(orderId);
     }
   }
-
-  await recordAuditLog({
-    level: "info",
-    action: "stripe.webhook_processed",
-    metadata: {
-      event_id: event.id,
-      event_type: event.type,
-      order_id: processedOrderId,
-    },
-  });
 
   return event.type;
 }

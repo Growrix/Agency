@@ -1,12 +1,9 @@
 import type { CheckoutSelection } from "@/lib/shop";
+import { parseFixedUsdPriceToCents } from "@/lib/commerce-pricing";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 
 export function parsePriceStringToCents(value: string | undefined): number {
-  if (!value) return 0;
-  const normalized = value.replace(/[^\d.]/g, "");
-  const parsed = Number(normalized);
-  if (!Number.isFinite(parsed)) return 0;
-  return Math.round(parsed * 100);
+  return parseFixedUsdPriceToCents(value);
 }
 
 export function formatCentsAsUsd(value: number): string {

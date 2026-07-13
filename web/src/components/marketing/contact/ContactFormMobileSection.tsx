@@ -26,7 +26,7 @@ export function ContactFormMobileSection({ children }: ContactFormMobileSectionP
         <p className="contact-form-mobile__trust-copy">
           {CONTACT_FORM.trustCopy}{" "}
           See our{" "}
-          <Link href="/privacy-policy" className="text-primary underline">
+          <Link href="/legal/privacy" className="text-primary underline">
             privacy policy
           </Link>
           .

@@ -89,7 +89,7 @@ export default function PrivacyPage() {
               footerTitle="Questions about your data?"
               footerDescription="We respond to privacy questions within 5 business days."
               primaryCta={{ label: "Contact us", href: "/contact" }}
-              secondaryLink={{ label: "Read terms of service →", href: "/terms-of-service" }}
+              secondaryLink={{ label: "Read terms of service →", href: "/legal/terms" }}
             />
           }
           desktop={
@@ -130,7 +130,7 @@ export default function PrivacyPage() {
                 <p className="mt-2 text-text-muted">We respond to privacy questions within 5 business days.</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <LinkButton href="/contact">Contact us</LinkButton>
-                  <Link href="/terms-of-service" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
+                  <Link href="/legal/terms" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
                     Read terms of service →
                   </Link>
                 </div>

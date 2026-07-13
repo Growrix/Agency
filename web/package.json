@@ -2,6 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.8.2",
   "engines": {
     "node": ">=20 <25"
   },
@@ -16,7 +17,7 @@
     "health:check": "npm run lint && npm run typecheck && npm run perf:budgets && npm run test && npm run build && npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome",
     "ci:check": "npm run lint && npm run typecheck && npm run perf:budgets && npm run test && npm run build && npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome",
     "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "tsx --test src/server/auth/users.test.ts src/server/auth/clerk-sync.test.ts src/server/domain/catalog.test.ts src/server/domain/orders.test.ts src/server/domain/invoices.test.ts src/server/domain/leads.test.ts src/server/data/store.test.ts src/server/ai/knowledge.test.ts",
+    "test:unit": "node ./scripts/run-unit-tests.mjs",
     "test:integration": "tsx --test tests/integration/api-flows.test.ts",
     "test:e2e": "playwright test",
     "test:release": "npm run test && npm run build && npm run test:e2e",
@@ -35,11 +36,9 @@
     "clerk:setup": "npm run clerk:link && npm run clerk:env && npm run clerk:doctor"
   },
   "dependencies": {
-    "@axe-core/playwright": "^4.11.0",
     "@clerk/nextjs": "^6.39.5",
     "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.2.0",
-    "@playwright/test": "^1.55.0",
     "@sanity/client": "^7.21.0",
     "@supabase/supabase-js": "^2.104.0",
     "@vercel/speed-insights": "^1.3.1",
@@ -57,7 +56,6 @@
     "stripe": "^22.0.2",
     "tailwind-merge": "^3.5.0",
     "three": "^0.185.0",
-    "vitest": "^4.1.5",
     "zustand": "^5.0.12"
   },
   "devDependencies": {
@@ -74,6 +72,7 @@
     "pg": "^8.20.0",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }

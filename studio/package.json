@@ -15,7 +15,7 @@
   "dependencies": {
     "@sanity/vision": "5.22.0",
     "date-fns": "4.1.0",
-    "growrixos-sanity-studio": "file:",
+    "growrixos-sanity-studio": "file:..",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "sanity": "5.22.0",

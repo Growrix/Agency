@@ -3,6 +3,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { beforeEach, describe, it } from "node:test";
 import { resetRuntimeConfigForTests } from "@/server/config/runtime";
+import { addCartItem, getCartForUser } from "@/server/domain/cart";
 import { listDownloadsByEmail, listLicensesByEmail } from "@/server/domain/downloads";
 import { createOrder, getOrderById, markOrderPaid, updateOrderOperations } from "@/server/domain/orders";
 
@@ -124,6 +125,23 @@ describe("orders domain", () => {
     assert.equal(persisted?.user_id, ownerUserId);
   });
 
+  it("creates quote-based done-for-you orders without a checkout total", async () => {
+    const created = await createOrder({
+      product_slug: "html-business-profile-profile-01-brew-and-bean",
+      product_variant_slug: "done-for-you",
+      product_tier_name: "Done-For-You",
+      fulfillment_type: "done_for_you_service",
+      customer_name: "DFY Buyer",
+      customer_email: "dfy-buyer@example.com",
+    });
+
+    assert.equal(created.order.total_cents, 0);
+    assert.equal(created.order.subtotal_cents, 0);
+    assert.equal(created.order.items[0]?.unit_price_cents, 0);
+    assert.equal(created.order.items[0]?.fulfillment_type, "done-for-you-service");
+    assert.equal(created.checkout_url, null);
+  });
+
   it("applies webhook selection metadata when payment completes", async () => {
     const created = await createOrder({
       product_slug: "legal-practice-website",
@@ -237,6 +255,39 @@ describe("orders domain", () => {
 
     assert.equal(second.order.id, first.order.id);
     assert.equal(second.order.idempotency_key, "checkout-key-001");
+    assert.equal(second.idempotency_reused, true);
+  });
+
+  it("removes purchased products from the same user's cart when an order is created", async () => {
+    const userId = crypto.randomUUID();
+
+    await addCartItem(userId, {
+      product_slug: "legal-practice-website",
+      product_name: "Legal Practice Website",
+      quantity: 1,
+      unit_price_cents: 129900,
+    });
+
+    await addCartItem(userId, {
+      product_slug: "unrelated-product",
+      product_name: "Unrelated Product",
+      quantity: 1,
+      unit_price_cents: 4900,
+    });
+
+    const before = await getCartForUser(userId);
+    assert.equal(before.items.length, 2);
+
+    await createOrder({
+      product_slug: "legal-practice-website",
+      customer_name: "Cart Cleaner",
+      customer_email: "cart-cleaner@example.com",
+      user_id: userId,
+    });
+
+    const after = await getCartForUser(userId);
+    assert.equal(after.items.length, 1);
+    assert.equal(after.items[0]?.product_slug, "unrelated-product");
   });
 
   it("blocks oversell when stock_on_hand is exhausted", async () => {

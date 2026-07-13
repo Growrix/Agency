@@ -102,7 +102,7 @@ export default function RefundPolicyPage() {
               footerTitle="Need to request a refund?"
               footerDescription="Reach out and we will guide you through the process."
               primaryCta={{ label: "Contact us", href: "/contact" }}
-              secondaryLink={{ label: "Read terms of service →", href: "/terms-of-service" }}
+              secondaryLink={{ label: "Read terms of service →", href: "/legal/terms" }}
             />
           }
           desktop={
@@ -144,7 +144,7 @@ export default function RefundPolicyPage() {
                 <div className="mt-5 flex flex-wrap gap-3">
                   <LinkButton href="/contact">Contact us</LinkButton>
                   <Link
-                    href="/terms-of-service"
+                    href="/legal/terms"
                     className="inline-flex items-center text-sm font-medium text-primary px-3 py-2"
                   >
                     Read terms of service →

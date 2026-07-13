@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PhotoIcon, ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { formatCartItemDisplayName, formatUsdFromCents, useCartStore } from "@/lib/cart-store";
+import { isQuoteBasedCommerceItem } from "@/lib/commerce-pricing";
 import { getCheckoutHref } from "@/lib/shop";
 import { cn } from "@/lib/utils";
 
@@ -148,6 +149,11 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
             <>
               <ul className="max-h-80 space-y-2 overflow-y-auto py-2">
                 {previewItems.map((item) => {
+                  const quoteItem = isQuoteBasedCommerceItem({
+                    fulfillmentType: item.fulfillment_type,
+                    variantSlug: item.variant_slug,
+                    tierName: item.tier_name,
+                  });
                   const lineCents = item.unit_price_cents * item.quantity;
                   const itemTitle = formatCartItemDisplayName(item);
                   return (
@@ -189,7 +195,7 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
                       </div>
                       <div className="flex flex-col items-end gap-1">
                         <span className="text-sm font-semibold tabular-nums">
-                          {formatUsdFromCents(lineCents)}
+                          {quoteItem ? "Quoted after discovery" : formatUsdFromCents(lineCents)}
                         </span>
                         <button
                           type="button"
@@ -210,9 +216,9 @@ export function CartHoverMenu({ cartHydrated, className }: CartHoverMenuProps) {
               </ul>
 
               <div className="flex items-center justify-between border-t border-border/50 pt-2 text-sm">
-                <span className="text-text-muted">Subtotal</span>
+                <span className="text-text-muted">{totalCents > 0 ? "Subtotal" : "Pricing"}</span>
                 <span className="font-semibold tabular-nums">
-                  {formatUsdFromCents(totalCents)}
+                  {totalCents > 0 ? formatUsdFromCents(totalCents) : "Quoted after discovery"}
                 </span>
               </div>
 

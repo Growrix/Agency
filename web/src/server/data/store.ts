@@ -58,6 +58,13 @@ function cloneDefaultDatabase(): DatabaseSchema {
     product_reviews: [...DEFAULT_DATABASE.product_reviews],
     invoices: [...DEFAULT_DATABASE.invoices],
     jobs: [...DEFAULT_DATABASE.jobs],
+    admin_email_templates: {
+      order_created: {
+        subject: DEFAULT_DATABASE.admin_email_templates.order_created.subject,
+        text: DEFAULT_DATABASE.admin_email_templates.order_created.text,
+        html: DEFAULT_DATABASE.admin_email_templates.order_created.html,
+      },
+    },
   };
 }
 

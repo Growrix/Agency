@@ -62,8 +62,8 @@ export const FOOTER_NAV = {
     { label: "WhatsApp", href: "https://wa.me/8801986925425" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Privacy Policy", href: "/legal/privacy" },
+    { label: "Terms of Service", href: "/legal/terms" },
     { label: "Refund Policy", href: "/refund-policy" },
   ],
 };
@@ -79,7 +79,7 @@ export const MOBILE_NAV_SUPPORT_LINKS = [
 ] as const;
 
 export const MOBILE_NAV_LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms of Service", href: "/terms-of-service" },
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "Terms of Service", href: "/legal/terms" },
   { label: "Refund Policy", href: "/refund-policy" },
 ] as const;

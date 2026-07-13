@@ -157,6 +157,15 @@ function shouldEnforceCompletion(pathname: string) {
   return false;
 }
 
+async function resolveMirroredClerkUser(userId: string) {
+  const existing = await getUserByClerkId(userId).catch(() => null);
+  if (existing) {
+    return existing;
+  }
+
+  return syncClerkUser(userId).catch(() => null);
+}
+
 async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
   return clerkMiddleware(async (auth, nextRequest) => {
     const rewrite = businessProfileRewrite(nextRequest);
@@ -174,18 +183,20 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
     }
 
     const { userId } = await auth();
-    if (userId && isAdminPath(nextRequest.nextUrl.pathname)) {
-      const record = (await getUserByClerkId(userId).catch(() => null)) ?? (await syncClerkUser(userId).catch(() => null));
+    const pathname = nextRequest.nextUrl.pathname;
+    const needsMirroredUser =
+      Boolean(userId) && (isAdminPath(pathname) || shouldEnforceCompletion(pathname));
+    const mirroredUser = needsMirroredUser && userId ? await resolveMirroredClerkUser(userId) : null;
 
-      if (record?.role !== "admin") {
+    if (userId && isAdminPath(pathname)) {
+      if (mirroredUser?.role !== "admin") {
         return rejectForbidden(nextRequest);
       }
     }
 
-    if (userId && shouldEnforceCompletion(nextRequest.nextUrl.pathname)) {
-      const record = await getUserByClerkId(userId).catch(() => null);
-      const isCompleted = Boolean(record?.signup_completed_at);
-      const isAdmin = record?.role === "admin";
+    if (userId && shouldEnforceCompletion(pathname)) {
+      const isCompleted = Boolean(mirroredUser?.signup_completed_at);
+      const isAdmin = mirroredUser?.role === "admin";
 
       if (!isCompleted && !isAdmin) {
         if (nextRequest.nextUrl.pathname.startsWith("/api/")) {

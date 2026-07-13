@@ -94,7 +94,7 @@ export default function TermsPage() {
               footerTitle="Need clarification?"
               footerDescription="We're happy to walk through any term in detail."
               primaryCta={{ label: "Contact us", href: "/contact" }}
-              secondaryLink={{ label: "Read privacy policy →", href: "/privacy-policy" }}
+              secondaryLink={{ label: "Read privacy policy →", href: "/legal/privacy" }}
             />
           }
           desktop={
@@ -135,7 +135,7 @@ export default function TermsPage() {
                 <p className="mt-2 text-text-muted">We&apos;re happy to walk through any term in detail.</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <LinkButton href="/contact">Contact us</LinkButton>
-                  <Link href="/privacy-policy" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
+                  <Link href="/legal/privacy" className="inline-flex items-center text-sm font-medium text-primary px-3 py-2">
                     Read privacy policy →
                   </Link>
                 </div>

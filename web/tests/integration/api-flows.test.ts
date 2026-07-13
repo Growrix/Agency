@@ -223,6 +223,60 @@ describe("API flows", () => {
     assert.equal(database.orders[0]?.selected_fulfillment_type, "done-for-you");
   });
 
+  it("reuses the same order when the same idempotency key is replayed", async () => {
+    const { POST } = await import("@/app/api/v1/orders/route");
+    await seedManagedProduct();
+
+    const idempotencyKey = "api-idempotency-replay-001";
+    const requestBody = {
+      customer_name: "Replay Buyer",
+      customer_email: "replay-buyer@example.com",
+      product_slug: "three-circles-template",
+      payment_method_preference: "invoice",
+    };
+
+    const firstResponse = await POST(
+      new NextRequest("http://localhost/api/v1/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-forwarded-for": "127.0.0.1",
+          "x-idempotency-key": idempotencyKey,
+        },
+        body: JSON.stringify(requestBody),
+      })
+    );
+
+    const secondResponse = await POST(
+      new NextRequest("http://localhost/api/v1/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-forwarded-for": "127.0.0.1",
+          "x-idempotency-key": idempotencyKey,
+        },
+        body: JSON.stringify(requestBody),
+      })
+    );
+
+    assert.equal(firstResponse.status, 201);
+    assert.equal(secondResponse.status, 200);
+
+    const firstPayload = await firstResponse.json() as {
+      data: { order: { id: string; idempotency_key?: string } };
+    };
+    const secondPayload = await secondResponse.json() as {
+      data: { order: { id: string; idempotency_key?: string }; idempotency_reused: boolean };
+    };
+
+    assert.equal(secondPayload.data.idempotency_reused, true);
+    assert.equal(secondPayload.data.order.id, firstPayload.data.order.id);
+    assert.equal(secondPayload.data.order.idempotency_key, idempotencyKey);
+
+    const database = await readDatabaseFile();
+    assert.equal(database.orders.length, 1);
+  });
+
   it("persists concierge conversations through the public route", async () => {
     const { POST } = await import("@/app/api/v1/ai-concierge/route");
 
@@ -406,6 +460,149 @@ describe("API flows", () => {
     assert.equal(orderDownloadResponse.status, 307);
     const orderRedirectLocation = orderDownloadResponse.headers.get("location") ?? "";
     assert.match(orderRedirectLocation, /\/api\/v1\/downloads\/.+\/deliver\?grant=/);
+  });
+
+  it("allows customers to update and cancel only their own orders", async () => {
+    await seedManagedProduct();
+
+    const { createUser } = await import("@/server/auth/users");
+    const { SESSION_COOKIE_NAME, issueSessionToken } = await import("@/server/auth/token");
+    const { createOrder } = await import("@/server/domain/orders");
+    const { PATCH: patchMyOrder } = await import("@/app/api/v1/me/orders/[orderId]/route");
+
+    const owner = await createUser({
+      email: "order-owner@example.com",
+      password: "Passw0rd!",
+      firstName: "Order",
+      lastName: "Owner",
+      role: "subscriber",
+    });
+    const outsider = await createUser({
+      email: "outsider@example.com",
+      password: "Passw0rd!",
+      firstName: "Out",
+      lastName: "Sider",
+      role: "subscriber",
+    });
+
+    const ownerToken = await issueSessionToken({
+      userId: owner.id,
+      email: owner.email,
+      role: owner.role,
+    });
+    const outsiderToken = await issueSessionToken({
+      userId: outsider.id,
+      email: outsider.email,
+      role: outsider.role,
+    });
+
+    const ownerCookie = `${SESSION_COOKIE_NAME}=${ownerToken}`;
+    const outsiderCookie = `${SESSION_COOKIE_NAME}=${outsiderToken}`;
+
+    const created = await createOrder({
+      product_slug: "three-circles-template",
+      customer_name: "Order Owner",
+      customer_email: owner.email,
+      notes: "Initial checkout notes",
+    });
+
+    const notesUpdateResponse = await patchMyOrder(
+      new NextRequest(`http://localhost/api/v1/me/orders/${created.order.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", cookie: ownerCookie },
+        body: JSON.stringify({ notes: "Updated customer notes" }),
+      }),
+      { params: Promise.resolve({ orderId: created.order.id }) },
+    );
+
+    assert.equal(notesUpdateResponse.status, 200);
+    const notesPayload = (await notesUpdateResponse.json()) as { data: { notes?: string } };
+    assert.equal(notesPayload.data.notes, "Updated customer notes");
+
+    const cancelResponse = await patchMyOrder(
+      new NextRequest(`http://localhost/api/v1/me/orders/${created.order.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", cookie: ownerCookie },
+        body: JSON.stringify({ cancel: true, notes: "Please stop this order" }),
+      }),
+      { params: Promise.resolve({ orderId: created.order.id }) },
+    );
+
+    assert.equal(cancelResponse.status, 200);
+    const cancelPayload = (await cancelResponse.json()) as {
+      data: { fulfillment_status: string; notes?: string };
+    };
+    assert.equal(cancelPayload.data.fulfillment_status, "archived");
+    assert.equal(cancelPayload.data.notes, "Please stop this order");
+
+    const forbiddenResponse = await patchMyOrder(
+      new NextRequest(`http://localhost/api/v1/me/orders/${created.order.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", cookie: outsiderCookie },
+        body: JSON.stringify({ notes: "I should not be able to update this" }),
+      }),
+      { params: Promise.resolve({ orderId: created.order.id }) },
+    );
+
+    assert.equal(forbiddenResponse.status, 403);
+  });
+
+  it("allows logged-in owners to access their orders by user id even when checkout email differs", async () => {
+    await seedManagedProduct();
+
+    const { createUser } = await import("@/server/auth/users");
+    const { SESSION_COOKIE_NAME, issueSessionToken } = await import("@/server/auth/token");
+    const { createOrder } = await import("@/server/domain/orders");
+    const { GET: getMyOrders } = await import("@/app/api/v1/me/orders/route");
+    const { GET: getMyOrderDetail } = await import("@/app/api/v1/me/orders/[orderId]/route");
+
+    const owner = await createUser({
+      email: "owner-account@example.com",
+      password: "Passw0rd!",
+      firstName: "Owner",
+      lastName: "Account",
+      role: "subscriber",
+    });
+
+    const ownerToken = await issueSessionToken({
+      userId: owner.id,
+      email: owner.email,
+      role: owner.role,
+    });
+    const ownerCookie = `${SESSION_COOKIE_NAME}=${ownerToken}`;
+
+    const created = await createOrder({
+      product_slug: "three-circles-template",
+      customer_name: "Different Checkout Email",
+      customer_email: "billing-contact@example.com",
+      user_id: owner.id,
+    });
+
+    const ordersResponse = await getMyOrders(
+      new NextRequest("http://localhost/api/v1/me/orders", {
+        headers: { cookie: ownerCookie },
+      }),
+    );
+
+    assert.equal(ordersResponse.status, 200);
+    const ordersPayload = (await ordersResponse.json()) as {
+      data: Array<{ id: string }>;
+    };
+    assert.equal(ordersPayload.data.some((order) => order.id === created.order.id), true);
+
+    const detailResponse = await getMyOrderDetail(
+      new NextRequest(`http://localhost/api/v1/me/orders/${created.order.id}`, {
+        headers: { cookie: ownerCookie },
+      }),
+      { params: Promise.resolve({ orderId: created.order.id }) },
+    );
+
+    assert.equal(detailResponse.status, 200);
+    const detailPayload = (await detailResponse.json()) as {
+      data: { id: string; user_id?: string };
+    };
+    assert.equal(detailPayload.data.id, created.order.id);
+    assert.equal(detailPayload.data.user_id, owner.id);
   });
 
   it("serves full preview HTML while preserving preview response safeguards", async () => {

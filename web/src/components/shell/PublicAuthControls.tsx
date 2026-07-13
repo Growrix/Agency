@@ -40,12 +40,12 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
     return (
       <div className={cn("flex flex-col gap-2", className)}>
         <SignedOut>
-          <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+          <SignInButton mode="modal">
             <Button fullWidth onClick={onNavigate}>
               Sign in
             </Button>
           </SignInButton>
-          <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+          <SignUpButton mode="modal">
             <Button fullWidth variant="outline" onClick={onNavigate}>
               Sign up
             </Button>
@@ -66,7 +66,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
   return (
     <div className={cn("flex items-center gap-1 lg:gap-2", className)}>
       <SignedOut>
-        <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+        <SignInButton mode="modal">
           <button
             type="button"
             className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
@@ -77,7 +77,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
             <UserCircleIcon className="size-5" aria-hidden />
           </button>
         </SignInButton>
-        <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+        <SignInButton mode="modal">
           <button
             type="button"
             className="hidden rounded-full px-4 py-2 text-sm font-semibold text-text transition-colors hover:bg-inset lg:inline-flex"
@@ -86,7 +86,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
             Sign in
           </button>
         </SignInButton>
-        <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+        <SignUpButton mode="modal">
           <Button size="sm" className="ml-1 hidden lg:inline-flex" onClick={onNavigate}>
             Sign up
           </Button>

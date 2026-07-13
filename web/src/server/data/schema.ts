@@ -534,6 +534,47 @@ export type InvoiceRecord = {
   updated_at: string;
 };
 
+export type OrderCreatedEmailTemplateRecord = {
+  subject: string;
+  text: string;
+  html: string;
+};
+
+export type AdminEmailTemplateSettings = {
+  order_created: OrderCreatedEmailTemplateRecord;
+};
+
+export const DEFAULT_ADMIN_EMAIL_TEMPLATE_SETTINGS: AdminEmailTemplateSettings = {
+  order_created: {
+    subject: "New order created: {{order_number}}",
+    text: [
+      "Order: {{order_number}}",
+      "Customer: {{customer_name}} <{{customer_email}}>",
+      "Phone: {{customer_phone}}",
+      "Total: {{total_amount}} {{currency}}",
+      "Items: {{item_count}}",
+      "",
+      "Items:",
+      "{{items_text}}",
+      "",
+      "Notes:",
+      "{{notes}}",
+    ].join("\n"),
+    html: [
+      "<h2>New order created</h2>",
+      "<p><strong>Order:</strong> {{order_number}}</p>",
+      "<p><strong>Customer:</strong> {{customer_name}} &lt;{{customer_email}}&gt;</p>",
+      "<p><strong>Phone:</strong> {{customer_phone}}</p>",
+      "<p><strong>Total:</strong> {{total_amount}} {{currency}}</p>",
+      "<p><strong>Items:</strong> {{item_count}}</p>",
+      "<h3>Line items</h3>",
+      "<ul>{{items_html}}</ul>",
+      "<h3>Notes</h3>",
+      "<p>{{notes}}</p>",
+    ].join(""),
+  },
+};
+
 export type ProductReviewRecord = {
   id: string;
   product_slug: string;
@@ -598,6 +639,7 @@ export type DatabaseSchema = {
   product_reviews: ProductReviewRecord[];
   invoices: InvoiceRecord[];
   jobs: JobRecord[];
+  admin_email_templates: AdminEmailTemplateSettings;
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -626,4 +668,11 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   product_reviews: [],
   invoices: [],
   jobs: [],
+  admin_email_templates: {
+    order_created: {
+      subject: DEFAULT_ADMIN_EMAIL_TEMPLATE_SETTINGS.order_created.subject,
+      text: DEFAULT_ADMIN_EMAIL_TEMPLATE_SETTINGS.order_created.text,
+      html: DEFAULT_ADMIN_EMAIL_TEMPLATE_SETTINGS.order_created.html,
+    },
+  },
 };

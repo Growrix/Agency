@@ -8,7 +8,7 @@ import { CheckoutExperience } from "./CheckoutExperience";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Secure Stripe-powered checkout opens with the website product launch.",
+  description: "Place your order securely and receive guided next steps from the Growrix OS team.",
   robots: { index: false, follow: false },
 };
 
@@ -55,7 +55,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           </Link>
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
             <LockClosedIcon className="size-3.5" aria-hidden />
-            Secure checkout
+            Secure order form
           </span>
         </div>
 
@@ -75,9 +75,9 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           </h1>
           <p className="mt-3 text-sm leading-6 text-text-muted sm:text-base">
             {product
-              ? "You're minutes away from launching a professional website. Complete your purchase and get instant access."
+              ? "You're minutes away from placing your order. The team will review details and contact you with the next steps."
               : isCartMode
-                ? "Review your cart, apply a discount code, and continue to secure payment."
+                ? "Review your cart, apply a discount code, and place your order securely."
                 : "Pick a product from the catalog to create an order and continue into checkout."}
           </p>
         </header>

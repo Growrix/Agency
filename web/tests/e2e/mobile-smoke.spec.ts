@@ -53,10 +53,21 @@ test.describe("mobile smoke", () => {
   }) => {
     // Fresh browser context — the cart store is empty. We should see the
     // cart-empty message rather than the "choose a product" copy.
+    await page.addInitScript(() => {
+      localStorage.removeItem("growrix-cart");
+    });
     await page.goto("/checkout?cart=1", { waitUntil: "domcontentloaded" });
 
+    const closeCart = page.getByRole("button", { name: /close cart/i });
+    if (await closeCart.isVisible().catch(() => false)) {
+      await closeCart.click();
+    }
+
+    // Let cart hydration settle before asserting the steady-state empty copy.
+    await expect(page.getByText(/loading your cart/i)).toHaveCount(0, { timeout: 15_000 });
+
     // The empty-cart copy is scoped to the checkout empty-state block.
-    const emptyCartMessage = page.getByText(/your cart is empty\. browse the catalog/i).first();
+    const emptyCartMessage = page.getByText(/your cart is empty\./i).first();
     await expect(emptyCartMessage).toBeVisible();
 
     // The generic no-product copy must not be showing.

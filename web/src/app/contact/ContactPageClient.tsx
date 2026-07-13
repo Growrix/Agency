@@ -380,7 +380,7 @@ export function ContactPageClient() {
                     <p className="mt-2 text-sm leading-6 text-text-muted">
                       {CONTACT_FORM.trustCopy}{" "}
                       See our{" "}
-                      <Link href="/privacy-policy" className="text-primary underline">
+                      <Link href="/legal/privacy" className="text-primary underline">
                         privacy policy
                       </Link>
                       .

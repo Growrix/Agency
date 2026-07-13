@@ -13,36 +13,68 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCard";
-import { CheckoutSteps } from "@/components/checkout/CheckoutSteps";
+import { CheckoutSteps, type CheckoutStep } from "@/components/checkout/CheckoutSteps";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
 import { getAuthenticatedUser } from "@/server/auth/guards";
 import { getOrderById } from "@/server/domain/orders";
 
+const ORDER_FLOW_STEPS: CheckoutStep[] = [
+  { id: "cart", label: "Cart", href: "/cart" },
+  { id: "information", label: "Information", href: "/checkout?cart=1" },
+  { id: "confirmation", label: "Confirmation", href: "/success" },
+];
+
 export const metadata: Metadata = {
-  title: "Order confirmed",
-  description: "Checkout confirmation and next-step guidance for Growrix OS orders.",
+  title: "Order received",
+  description: "Order confirmation and next-step guidance for Growrix OS orders.",
   robots: { index: false, follow: false },
 };
 
 type SuccessPageProps = {
-  searchParams?: Promise<{ order?: string | string[]; product?: string | string[] }>;
+  searchParams?: Promise<{
+    order?: string | string[];
+    product?: string | string[];
+    ref?: string | string[];
+    status?: string | string[];
+  }>;
 };
 
 function firstString(value: string | string[] | undefined): string | undefined {
   return Array.isArray(value) ? value[0] : value;
 }
 
-function formatOrderState(order: Awaited<ReturnType<typeof getOrderById>>) {
+function toTitleCase(value: string) {
+  return value
+    .replace(/_/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function isManualFollowUpOrder(order: Awaited<ReturnType<typeof getOrderById>> | null) {
+  if (!order) return true;
+  return order.payment_status === "pending";
+}
+
+function getLeadMessage(order: Awaited<ReturnType<typeof getOrderById>> | null) {
   if (!order) {
-    return "Your order has been received and the team will continue the fulfillment flow.";
+    return "Your order request has been recorded. The Growrix OS team will contact you shortly to confirm scope and next steps.";
   }
-  return `Payment ${order.payment_status.replace(/_/g, " ")} · Fulfillment ${order.fulfillment_status.replace(/_/g, " ")}.`;
+
+  if (isManualFollowUpOrder(order)) {
+    return `Order ${order.order_number} has been placed successfully. The Growrix OS team will contact you shortly using your submitted details to continue the process.`;
+  }
+
+  return `Order ${order.order_number} is confirmed. Payment ${toTitleCase(order.payment_status)} and fulfillment ${toTitleCase(order.fulfillment_status)}.`;
 }
 
 export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const resolved = searchParams ? await searchParams : undefined;
   const orderId = firstString(resolved?.order);
   const productSlug = firstString(resolved?.product);
+  const orderRef = firstString(resolved?.ref);
+  const status = firstString(resolved?.status);
 
   const headerList = await headers();
   const cookieHeader = headerList.get("cookie");
@@ -56,6 +88,8 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const canViewOrder = Boolean(
     user && order && (user.role === "admin" || order.customer_email === user.email.toLowerCase()),
   );
+  const manualFlow = isManualFollowUpOrder(order);
+  const showPlacedBadge = status === "placed" || manualFlow;
 
   return (
     <Section size="compact" className="pb-16">
@@ -66,22 +100,27 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary"
           >
             <ArrowLeftIcon className="size-4" />
-            Go to dashboard
+            Go to account
           </Link>
-          <span className="inline-flex items-center gap-2 rounded-full border border-success/25 bg-success/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-success">
+          <span
+            className={[
+              "inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider",
+              showPlacedBadge
+                ? "border border-primary/25 bg-primary/10 text-primary"
+                : "border border-success/25 bg-success/10 text-success",
+            ].join(" ")}
+          >
             <LockClosedIcon className="size-3.5" aria-hidden />
-            Payment confirmed
+            {showPlacedBadge ? "Order placed" : "Payment confirmed"}
           </span>
         </div>
 
         <header className="mb-8 max-w-2xl">
           <h1 className="font-display text-3xl leading-tight tracking-tight sm:text-4xl">
-            Your order is <span className="text-primary">in motion</span>
+            Your order is <span className="text-primary">received</span>
           </h1>
           <p className="mt-3 text-sm leading-6 text-text-muted sm:text-base">
-            {canViewOrder && order
-              ? `Order ${order.order_number} is now recorded. ${formatOrderState(order)}`
-              : formatOrderState(order)}
+            {getLeadMessage(order)}
           </p>
         </header>
 
@@ -89,10 +128,10 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
           <div className="min-w-0 space-y-6">
             <CheckoutSteps
               active="confirmation"
+              steps={ORDER_FLOW_STEPS}
               hrefOverrides={{
                 cart: "/cart",
-                information: "/checkout",
-                payment: orderId ? `/checkout/payment?order=${encodeURIComponent(orderId)}` : "/checkout/payment",
+                information: "/checkout?cart=1",
                 confirmation: orderId ? `/success?order=${encodeURIComponent(orderId)}` : "/success",
               }}
             />
@@ -107,9 +146,13 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
                     <CheckCircleIcon className="size-6" />
                   </span>
                   <div>
-                    <p className="font-display text-lg tracking-tight">Payment confirmed</p>
+                    <p className="font-display text-lg tracking-tight">
+                      {manualFlow ? "Order placed successfully" : "Payment confirmed"}
+                    </p>
                     <p className="mt-1 text-sm text-text-muted">
-                      A receipt is on its way to your email. Delivery updates land in your dashboard.
+                      {manualFlow
+                        ? "Thank you. Growrix OS will contact you for consultation, scope confirmation, and the next progress steps."
+                        : "A receipt is on its way to your email. Delivery updates land in your dashboard."}
                     </p>
                   </div>
                 </div>
@@ -133,9 +176,13 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
                 </div>
                 <p className="mt-3 text-sm leading-6 text-text-muted">
                   {productSlug ? `Product: ${productSlug}. ` : ""}
-                  {orderId
-                    ? `Reference: ${orderId}.`
-                    : "Reference is attached to your checkout session."}
+                  {order?.order_number
+                    ? `Order number: ${order.order_number}.`
+                    : orderRef
+                      ? `Order number: ${orderRef}.`
+                      : orderId
+                        ? `Reference: ${orderId}.`
+                        : "Reference is attached to your checkout session."}
                 </p>
               </Card>
               <Card variant="inset" className="p-4 sm:p-5">
@@ -146,7 +193,9 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
                   </p>
                 </div>
                 <p className="mt-3 text-sm leading-6 text-text-muted">
-                  {canViewOrder && order?.fulfillment_status === "delivered"
+                  {manualFlow
+                    ? "Our team will review your request and contact you to align scope, timeline, and payment process."
+                    : canViewOrder && order?.fulfillment_status === "delivered"
                     ? "Your download access is ready in the dashboard."
                     : "Use the customer dashboard to track delivery, appointments, and support requests."}
                 </p>
@@ -187,9 +236,19 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
                   What to expect
                 </p>
                 <ul className="mt-3 space-y-2 text-sm leading-6 text-text-muted">
-                  <li>1. Confirmation email with receipt (usually within a minute).</li>
-                  <li>2. Fulfillment updates delivered to your dashboard.</li>
-                  <li>3. 30-day money-back guarantee if anything isn&apos;t right.</li>
+                  {manualFlow ? (
+                    <>
+                      <li>1. Order confirmation lands in your email shortly.</li>
+                      <li>2. Growrix OS team contacts you to finalize requirements and timeline.</li>
+                      <li>3. Delivery progress and updates continue after scope confirmation.</li>
+                    </>
+                  ) : (
+                    <>
+                      <li>1. Confirmation email with receipt (usually within a minute).</li>
+                      <li>2. Fulfillment updates delivered to your dashboard.</li>
+                      <li>3. 30-day money-back guarantee if anything isn&apos;t right.</li>
+                    </>
+                  )}
                 </ul>
               </Card>
             </div>

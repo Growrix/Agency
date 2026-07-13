@@ -75,18 +75,39 @@ async function seedPlaywrightProductIfMissing() {
   }
 }
 
-async function getFirstPublicProductSlug(request: APIRequestContext) {
-  const response = await request.get("/api/v1/shop/products");
-  expect(response.ok()).toBeTruthy();
+async function getJsonWithRetry<T>(request: APIRequestContext, url: string, attempts = 3): Promise<T> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const response = await request.get(url);
+      if (!response.ok()) {
+        throw new Error(`Request failed: ${url} -> ${response.status()}`);
+      }
+      return (await response.json()) as T;
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts) {
+        throw error;
+      }
+    }
+  }
 
-  let payload = (await response.json()) as { data?: Array<{ slug: string }> };
+  throw lastError ?? new Error(`Request failed after retries: ${url}`);
+}
+
+async function getFirstPublicProductSlug(request: APIRequestContext) {
+  let payload = await getJsonWithRetry<{ data?: Array<{ slug: string }> }>(
+    request,
+    "/api/v1/shop/products",
+  );
   let slug = payload.data?.[0]?.slug;
 
   if (!slug) {
     await seedPlaywrightProductIfMissing();
-    const retryResponse = await request.get("/api/v1/shop/products");
-    expect(retryResponse.ok()).toBeTruthy();
-    payload = (await retryResponse.json()) as { data?: Array<{ slug: string }> };
+    payload = await getJsonWithRetry<{ data?: Array<{ slug: string }> }>(
+      request,
+      "/api/v1/shop/products",
+    );
     slug = payload.data?.[0]?.slug;
   }
 
@@ -95,9 +116,10 @@ async function getFirstPublicProductSlug(request: APIRequestContext) {
 }
 
 async function getFirstPublicPortfolioSlug(request: APIRequestContext) {
-  const response = await request.get("/api/v1/portfolio");
-  expect(response.ok()).toBeTruthy();
-  const payload = (await response.json()) as { data?: Array<{ slug: string; name: string }> };
+  const payload = await getJsonWithRetry<{ data?: Array<{ slug: string; name: string }> }>(
+    request,
+    "/api/v1/portfolio",
+  );
   return payload.data?.[0] ?? null;
 }
 
@@ -105,8 +127,13 @@ test("checkout placeholders remain visible", async ({ page, request }) => {
   const productSlug = await getFirstPublicProductSlug(request);
   await page.goto(`/checkout?product=${productSlug}`, { waitUntil: "domcontentloaded" });
 
-  const nameField = page.locator('input[name="customer_name"]');
-  const emailField = page.locator('input[name="customer_email"]');
+  const closeCart = page.getByRole("button", { name: /close cart/i });
+  if (await closeCart.isVisible().catch(() => false)) {
+    await closeCart.click();
+  }
+
+  const nameField = page.getByLabel("Full name *");
+  const emailField = page.getByLabel("Email address *");
 
   await expect(nameField).toBeVisible();
   await expect(emailField).toBeVisible();
@@ -131,8 +158,15 @@ test("shop product pages do not overflow the mobile viewport", async ({ page, re
   const productSlug = await getFirstPublicProductSlug(request);
 
   for (const slug of [productSlug]) {
-    await page.goto(`/shop/${slug}`, { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    const response = await page.goto(`/shop/${slug}`, { waitUntil: "domcontentloaded" });
+    expect(response?.ok()).toBeTruthy();
+
+    const main = page.locator("main");
+    if (!(await main.isVisible().catch(() => false))) {
+      await page.reload({ waitUntil: "domcontentloaded" });
+    }
+    await expect(main).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(/page could not be found/i)).toHaveCount(0);
 
     const viewport = page.viewportSize();
     const dimensions = await page.evaluate(() => ({

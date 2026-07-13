@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { QuotePricingPanel } from "@/components/checkout/QuotePricingPanel";
+import {
+  formatOrderMoneyDisplay,
+  isQuoteBasedCommerceItem,
+  isQuoteBasedOrder,
+} from "@/lib/commerce-pricing";
 
 type OrderItem = {
   product_slug: string;
@@ -36,6 +42,9 @@ type OrderRecord = {
   applied_coupon_code?: string;
   applied_discount_cents?: number;
   invoice_url?: string;
+  selected_fulfillment_type?: string;
+  selected_variant_slug?: string;
+  selected_tier_name?: string;
   created_at: string;
   completed_at?: string;
   refunded_at?: string;
@@ -89,11 +98,19 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   const [order, setOrder] = useState<OrderRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [draftNotes, setDraftNotes] = useState("");
+  const [actionState, setActionState] = useState<"idle" | "saving">("idle");
+  const [actionMessage, setActionMessage] = useState<{ kind: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     const timer = setTimeout(() => {
       void (async () => {
+        setLoading(true);
+        setError(null);
+        setOrder(null);
+        setDraftNotes("");
+
         try {
           const response = await fetch(`/api/v1/me/orders/${orderId}`, { credentials: "same-origin" });
           const payload = (await response.json().catch(() => null)) as
@@ -105,6 +122,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
             return;
           }
           setOrder(payload.data);
+          setDraftNotes(payload.data.notes ?? "");
         } catch (err) {
           if (!cancelled) {
             setError(err instanceof Error ? err.message : "Unable to load order.");
@@ -120,9 +138,87 @@ export function OrderDetail({ orderId }: { orderId: string }) {
     };
   }, [orderId]);
 
+  async function updateOrder(body: { notes?: string; cancel?: boolean }, successMessage: string) {
+    setActionState("saving");
+    setActionMessage(null);
+
+    try {
+      const response = await fetch(`/api/v1/me/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify(body),
+      });
+
+      const payload = (await response.json().catch(() => null)) as
+        | { data?: OrderRecord; error?: { message?: string } }
+        | null;
+
+      if (!response.ok || !payload?.data) {
+        setActionMessage({
+          kind: "error",
+          text: payload?.error?.message ?? "Order update failed.",
+        });
+        return;
+      }
+
+      setOrder(payload.data);
+      setDraftNotes(payload.data.notes ?? "");
+      setActionMessage({ kind: "success", text: successMessage });
+    } catch {
+      setActionMessage({ kind: "error", text: "Order update failed." });
+    } finally {
+      setActionState("idle");
+    }
+  }
+
+  const canCancelOrder =
+    order !== null && !["delivered", "archived"].includes(order.fulfillment_status);
+
+  function handleSaveNotes() {
+    if (!order) {
+      return;
+    }
+
+    const currentNotes = (order.notes ?? "").trim();
+    const nextNotes = draftNotes.trim();
+    if (currentNotes === nextNotes) {
+      setActionMessage({ kind: "success", text: "No changes to save." });
+      return;
+    }
+
+    void updateOrder({ notes: draftNotes }, "Order notes updated.");
+  }
+
+  function handleCancelOrder() {
+    if (!canCancelOrder || !order) {
+      return;
+    }
+
+    if (!window.confirm(`Cancel order ${order.order_number}?`)) {
+      return;
+    }
+
+    void updateOrder(
+      {
+        cancel: true,
+        notes: draftNotes,
+      },
+      "Order cancelled successfully.",
+    );
+  }
+
   const timelineIndex = order
     ? FULFILLMENT_TIMELINE.findIndex((step) => step.key === order.fulfillment_status)
     : -1;
+  const quoteBasedOrder = order
+    ? isQuoteBasedOrder({
+        selected_fulfillment_type: order.selected_fulfillment_type,
+        selected_variant_slug: order.selected_variant_slug,
+        selected_tier_name: order.selected_tier_name,
+        items: order.items,
+      })
+    : false;
 
   return (
     <div className="space-y-5 p-4 sm:p-5 lg:p-6">
@@ -170,7 +266,13 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/60">
-                    {order.items.map((item, index) => (
+                    {order.items.map((item, index) => {
+                      const quoteItem = isQuoteBasedCommerceItem({
+                        fulfillmentType: item.fulfillment_type,
+                        variantSlug: item.product_variant_slug,
+                        tierName: item.product_tier_name,
+                      });
+                      return (
                       <tr key={`${item.product_slug}-${index}`}>
                         <td className="px-3 py-2">
                           <div className="text-text">{item.product_name}</div>
@@ -182,36 +284,45 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                         </td>
                         <td className="px-3 py-2">{item.quantity}</td>
                         <td className="px-3 py-2 text-right text-text">
-                          {formatMoney(item.total_cents, order.currency)}
+                          {formatOrderMoneyDisplay(
+                            item.total_cents,
+                            order.currency,
+                            quoteItem,
+                          )}
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
 
-              <dl className="mt-4 space-y-1 text-sm">
-                <div className="flex justify-between">
-                  <dt className="text-text-muted">Subtotal</dt>
-                  <dd>{formatMoney(order.subtotal_cents, order.currency)}</dd>
-                </div>
-                {order.tax_cents > 0 ? (
+              {quoteBasedOrder ? (
+                <QuotePricingPanel className="mt-4" compact />
+              ) : (
+                <dl className="mt-4 space-y-1 text-sm">
                   <div className="flex justify-between">
-                    <dt className="text-text-muted">Tax</dt>
-                    <dd>{formatMoney(order.tax_cents, order.currency)}</dd>
+                    <dt className="text-text-muted">Subtotal</dt>
+                    <dd>{formatMoney(order.subtotal_cents, order.currency)}</dd>
                   </div>
-                ) : null}
-                {order.discount_cents > 0 ? (
-                  <div className="flex justify-between">
-                    <dt className="text-text-muted">Discount</dt>
-                    <dd>−{formatMoney(order.discount_cents, order.currency)}</dd>
+                  {order.tax_cents > 0 ? (
+                    <div className="flex justify-between">
+                      <dt className="text-text-muted">Tax</dt>
+                      <dd>{formatMoney(order.tax_cents, order.currency)}</dd>
+                    </div>
+                  ) : null}
+                  {order.discount_cents > 0 ? (
+                    <div className="flex justify-between">
+                      <dt className="text-text-muted">Discount</dt>
+                      <dd>−{formatMoney(order.discount_cents, order.currency)}</dd>
+                    </div>
+                  ) : null}
+                  <div className="flex justify-between font-semibold text-text">
+                    <dt>Total</dt>
+                    <dd>{formatMoney(order.total_cents, order.currency)}</dd>
                   </div>
-                ) : null}
-                <div className="flex justify-between font-semibold text-text">
-                  <dt>Total</dt>
-                  <dd>{formatMoney(order.total_cents, order.currency)}</dd>
-                </div>
-              </dl>
+                </dl>
+              )}
             </Card>
 
             <div className="space-y-4">
@@ -243,6 +354,54 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                   <p>Created: {formatDateTime(order.created_at)}</p>
                   <p>Completed: {formatDateTime(order.completed_at)}</p>
                   {order.refunded_at ? <p>Refunded: {formatDateTime(order.refunded_at)}</p> : null}
+                </div>
+
+                <div className="mt-4 space-y-2 border-t border-border/60 pt-4">
+                  <label className="block text-sm">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+                      Update order notes
+                    </span>
+                    <textarea
+                      rows={3}
+                      value={draftNotes}
+                      onChange={(event) => setDraftNotes(event.target.value)}
+                      className="signal-input mt-1 min-h-24"
+                      placeholder="Add instructions or update your request details."
+                    />
+                  </label>
+
+                  {actionMessage ? (
+                    <p
+                      className={`text-xs ${
+                        actionMessage.kind === "error" ? "text-destructive" : "text-primary"
+                      }`}
+                    >
+                      {actionMessage.text}
+                    </p>
+                  ) : null}
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-sm text-text hover:border-primary/30"
+                      onClick={handleSaveNotes}
+                      disabled={actionState === "saving"}
+                    >
+                      {actionState === "saving" ? "Saving..." : "Save update"}
+                    </button>
+                    {canCancelOrder ? (
+                      <button
+                        type="button"
+                        className="inline-flex h-9 items-center rounded-sm bg-destructive px-3 text-sm text-surface hover:opacity-90"
+                        onClick={handleCancelOrder}
+                        disabled={actionState === "saving"}
+                      >
+                        Cancel order
+                      </button>
+                    ) : (
+                      <span className="text-xs text-text-muted">Cancellation is unavailable for this order status.</span>
+                    )}
+                  </div>
                 </div>
               </Card>
 

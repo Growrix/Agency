@@ -1,12 +1,14 @@
 "use client";
 
 import {
+  Cog6ToothIcon,
   ChartBarSquareIcon,
   ChartPieIcon,
   ClipboardDocumentListIcon,
   EnvelopeOpenIcon,
   InboxIcon,
   QueueListIcon,
+  ShoppingBagIcon,
   Squares2X2Icon,
   StarIcon,
   TicketIcon,
@@ -15,6 +17,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
+import { AppSignOutButton } from "@/components/auth/AppSignOutButton";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import {
@@ -344,11 +347,13 @@ const navItems: DashboardNavItem[] = [
   { href: "/admin/activity", label: "Activity", icon: <ChartBarSquareIcon className="h-4 w-4" /> },
   { href: "/admin/catalog", label: "Catalog", icon: <ClipboardDocumentListIcon className="h-4 w-4" /> },
   { href: "/admin/pipeline", label: "Pipeline", icon: <QueueListIcon className="h-4 w-4" /> },
+  { href: "/admin/orders", label: "Orders", icon: <ShoppingBagIcon className="h-4 w-4" /> },
   { href: "/admin/submissions", label: "Submissions", icon: <InboxIcon className="h-4 w-4" /> },
   { href: "/admin/users", label: "Users", icon: <UsersIcon className="h-4 w-4" /> },
   { href: "/admin/coupons", label: "Coupons", icon: <TicketIcon className="h-4 w-4" /> },
   { href: "/admin/reviews", label: "Reviews", icon: <StarIcon className="h-4 w-4" /> },
   { href: "/admin/reports", label: "Reports", icon: <ChartPieIcon className="h-4 w-4" /> },
+  { href: "/admin/email-templates", label: "Email templates", icon: <Cog6ToothIcon className="h-4 w-4" /> },
   { href: "/admin/email-log", label: "Email log", icon: <EnvelopeOpenIcon className="h-4 w-4" /> },
 ];
 
@@ -460,11 +465,6 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
     }
   };
 
-  const onLogout = async () => {
-    await fetch("/api/v1/auth/logout", { method: "POST" });
-    window.location.assign("/admin/login");
-  };
-
   return (
     <DashboardShell
       title="Admin Dashboard"
@@ -475,9 +475,9 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
           <LinkButton href="/" variant="outline" size="sm">
             Back to main site
           </LinkButton>
-          <Button type="button" variant="ghost" onClick={onLogout}>
+          <AppSignOutButton variant="ghost" redirectUrl="/admin/login">
             Log out
-          </Button>
+          </AppSignOutButton>
         </>
       }
     >

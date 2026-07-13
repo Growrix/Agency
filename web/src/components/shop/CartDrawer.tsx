@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MinusIcon, PlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LinkButton } from "@/components/primitives/Button";
 import { formatCartItemDisplayName, formatUsdFromCents, useCartStore } from "@/lib/cart-store";
+import { isQuoteBasedCommerceItem } from "@/lib/commerce-pricing";
 import { cn } from "@/lib/utils";
 
 function getFocusable(container: HTMLElement | null) {
@@ -162,7 +163,15 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         </button>
                       </div>
 
-                      <p className="font-medium text-text">{formatUsdFromCents(item.unit_price_cents * item.quantity)}</p>
+                      <p className="font-medium text-text">
+                        {isQuoteBasedCommerceItem({
+                          fulfillmentType: item.fulfillment_type,
+                          variantSlug: item.variant_slug,
+                          tierName: item.tier_name,
+                        })
+                          ? "Quoted after discovery"
+                          : formatUsdFromCents(item.unit_price_cents * item.quantity)}
+                      </p>
                     </div>
                   </li>
                 ))}
@@ -180,8 +189,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
           <div className="border-t border-border px-5 py-4">
             <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm text-text-muted">Subtotal</p>
-              <p className="font-display text-xl font-bold tracking-tight">{formatUsdFromCents(totalCents)}</p>
+              <p className="text-sm text-text-muted">{totalCents > 0 ? "Subtotal" : "Pricing"}</p>
+              <p className="font-display text-xl font-bold tracking-tight">
+                {totalCents > 0 ? formatUsdFromCents(totalCents) : "Quoted after discovery"}
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-2">
               <LinkButton href="/checkout?cart=1" onClick={onClose} fullWidth>

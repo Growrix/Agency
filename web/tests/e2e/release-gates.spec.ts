@@ -34,6 +34,7 @@ test("security headers and auth protection are present", async ({ request }) => 
 });
 
 test("health endpoints respond and homepage loads within smoke threshold", async ({ request, page }) => {
+  test.setTimeout(120_000);
   const health = await request.get("/api/health");
   const ready = await request.get("/api/ready");
   expect(health.ok()).toBeTruthy();

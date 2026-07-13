@@ -226,3 +226,38 @@ Speially needs to check back the UI UX and the flow of the checkout process, and
 ***Strickt rules***
 - Understand the above tasks and the project focus areas clearly before starting any execution. Always refer to the project plan and documentation for guidance on what needs to be done.
 - read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , and update the documentations if it doenst match the current codebase implimentations. and then start execution as per planned. make sure to run test and 0 gate pass validations before considering any implementation complete. Finally commit the changes but do not push or merge any code, only commit.
+
+
+------------------------
+### few this to fix : 
+- when the users are not logged in and they click on the place order button, it should redirect them to the signup/signin page. After they sign up or sign in, it should redirect them back to the checkout page with their selected product and variant pre-selected. The checkout page should have a clear summary of the product, variant, and tier selected, along with the total price and any applicable taxes or fees. The user should be able to review their order and make any necessary changes before proceeding placing order even without payment.
+- And the admin dashboard should have a section to view all the orders placed by users, along with the ability to filter and search through the orders. The admin should be able to view the details of each order, including the product, variant, tier, total price, and any applicable taxes or fees. The admin should also be able to mark orders as fulfilled or pending, and add notes or comments as needed. This will help us keep track of all user orders and ensure that we are providing timely and effective support to our customers.
+- also make sure that Admin gets email notifications for each order placed by users, along with the ability to customize the email templates and content. The email notifications should include all relevant information about the order, including the product, variant, tier, total price, and any applicable taxes or fees. Additionally, the email notifications should include a clear call-to-action for the admin to review and manage the order as needed. Make sure to test the email functionality thoroughly to ensure that all order notifications are being sent to the correct email address and that the email templates are properly formatted and include all relevant information.
+- make sure the information form has autosave functionality, so that users can save their progress and return to the form later if needed. This will help prevent data loss and ensure that users can complete their orders at their own pace. Additionally, implement proper validation and error handling for all forms and queries to ensure that the data being submitted is accurate and complete. Finally, make sure to thoroughly test all functionalities to ensure that they are working as expected and that there are no bugs or issues that could impact the user experience.
+----------------------------
+
+- now the place order button redirecting to the signup page, but instead of the page I want just the auth modal to popup and user signup/signin and then > now after the signup/signin, The Place order button remains unclickable and the user has no options to move further and place the order and just see the confirmation message. > and then user should be able to see the order on their dashboard and also able to manage to order (cancel, update, etc) and also able to see the order status. The admin should also be able to see the order in the admin dashboard and manage it accordingly. Make sure to implement proper authentication and authorization for both the admin and user dashboards, ensuring that only authorized users can access the relevant sections and data. Additionally, implement proper validation and error handling for all forms and queries to ensure that the data being submitted is accurate and complete. Finally, make sure to thoroughly test all functionalities to ensure that they are working as expected and that there are no bugs or issues that could impact the user experience.
+
+----------------------------
+
+- now on this checkout information page has no option to place order and go further to place the order even when the users are logged in. THe users should be able to place order even if not paying for the product. The place order button should be available and functional for logged in users, allowing them to complete their order and proceed to the next steps. Additionally, implement proper validation and error handling for all forms and queries to ensure that the data being submitted is accurate and complete. Finally, make sure to thoroughly test all functionalities to ensure that they are working as expected and that there are no bugs or issues that could impact the user experience.
+------------------------
+
+- After placing the order, you should show the confirmation message in a pop up modal , and also Add dashbord button to visit dashboard and a view order button as well and redirect to the order page in the dashboard directly with that. 
+now the issue is > the place order is still clickable even when the order is already placed. Make sure to disable the place order button after the order is placed to prevent duplicate orders.
+- and another issues is the cart icon still shows items and price for checkout even it is already checkout. this is unusal behavior to fix. 
+- Remove the "Need an invoice instead" button from the cart page. 
+-----------------------
+
+
+Actually I am bit scattered about building handbooks and also not planned well how many handbooks will I build and how do I organize them as well. Over the time I have created a lot of handbooks so far. but not well planned overall. so this might created duplicates. But on the other hand I need deep speciality of the agents and also the Handbooks that will be followed by agents. Also I built some MCP servers as well but no I idea how it will work on this vs code and copilot environment. 
+
+- Here I am sharing some core handbooks and also agents and also MCP servers as well. You must analyze all of them as per shared below : 
+
+1. "F:\PROJECTS\Junks\MCP\mcp-system"
+
+2. "F:\PROJECTS\testing\DOC\Universal"
+
+3. DOC
+------------------------------------------------
+

@@ -2,5 +2,8 @@
   "css.lint.unknownAtRules": "ignore",
   "cSpell.enabled": true,
   "cSpell.useWorkspaceConfigFile": true,
-  "cSpell.diagnosticLevel": "Hint"
+  "cSpell.diagnosticLevel": "Hint",
+  "npm.packageManager": "npm",
+  "npm.enableRunFromFolder": true,
+  "npm.exclude": "**/VSCODE AGENTS/**,**/Frontend_Nextjs/**,**/.cursor/**"
 }

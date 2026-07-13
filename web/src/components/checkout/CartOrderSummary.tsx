@@ -2,9 +2,11 @@
 
 import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCard";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
+import { QuotePricingPanel } from "@/components/checkout/QuotePricingPanel";
 import { formatCentsAsUsd } from "@/components/checkout/checkout-utils";
 import { Card } from "@/components/primitives/Card";
 import type { CartItem } from "@/lib/cart-store";
+import { isQuoteBasedCommerceItem } from "@/lib/commerce-pricing";
 
 type CartOrderSummaryProps = {
   items: CartItem[];
@@ -13,18 +15,29 @@ type CartOrderSummaryProps = {
   taxCents?: number;
 };
 
+function isQuoteCartItem(item: CartItem) {
+  return isQuoteBasedCommerceItem({
+    fulfillmentType: item.fulfillment_type,
+    variantSlug: item.variant_slug,
+    tierName: item.tier_name,
+  });
+}
+
 export function CartOrderSummary({
   items,
   discountCode,
   discountCents,
   taxCents = 0,
 }: CartOrderSummaryProps) {
-  const subtotalCents = items.reduce(
+  const hasQuoteItems = items.some(isQuoteCartItem);
+  const fixedItems = items.filter((item) => !isQuoteCartItem(item));
+  const subtotalCents = fixedItems.reduce(
     (sum, item) => sum + item.unit_price_cents * item.quantity,
     0,
   );
   const totalCents = Math.max(0, subtotalCents - discountCents + taxCents);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const showFixedTotals = fixedItems.length > 0;
 
   return (
     <div className="space-y-4">
@@ -44,6 +57,7 @@ export function CartOrderSummary({
 
         <ul className="mt-4 space-y-2">
           {items.map((item) => {
+            const quoteItem = isQuoteCartItem(item);
             const lineCents = item.unit_price_cents * item.quantity;
             return (
               <li
@@ -56,51 +70,57 @@ export function CartOrderSummary({
                     {item.tier_name ? `${item.tier_name} · ` : ""}Qty {item.quantity}
                   </p>
                 </div>
-                <span className="shrink-0 font-semibold tabular-nums">
-                  {formatCentsAsUsd(lineCents)}
+                <span className="shrink-0 text-right font-semibold tabular-nums text-text-muted">
+                  {quoteItem ? "Quoted after discovery" : formatCentsAsUsd(lineCents)}
                 </span>
               </li>
             );
           })}
         </ul>
 
-        <dl className="mt-5 space-y-2 border-t border-border/50 pt-4 text-sm">
-          <div className="flex items-center justify-between">
-            <dt className="text-text-muted">Subtotal</dt>
-            <dd className="tabular-nums">{formatCentsAsUsd(subtotalCents)}</dd>
-          </div>
-          {discountCents > 0 ? (
-            <div className="flex items-center justify-between">
-              <dt className="flex items-center gap-2 text-text-muted">
-                Discount
-                {discountCode ? (
-                  <span className="rounded-full bg-inset/40 px-2 py-0.5 text-[10px] font-mono text-text">
-                    {discountCode}
-                  </span>
-                ) : null}
-              </dt>
-              <dd className="tabular-nums text-success">
-                -{formatCentsAsUsd(discountCents)}
-              </dd>
-            </div>
-          ) : null}
-          <div className="flex items-center justify-between text-xs text-text-muted">
-            <dt>Tax</dt>
-            <dd className="tabular-nums">
-              {taxCents > 0 ? formatCentsAsUsd(taxCents) : "$0.00"}
-            </dd>
-          </div>
-        </dl>
+        {hasQuoteItems ? <QuotePricingPanel className="mt-4" compact /> : null}
 
-        <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
-          <p className="font-display text-lg tracking-tight">Total</p>
-          <div className="flex items-baseline gap-2">
-            <span className="text-xs text-text-muted">USD</span>
-            <span className="font-display text-3xl tracking-tight text-text sm:text-4xl">
-              {formatCentsAsUsd(totalCents)}
-            </span>
-          </div>
-        </div>
+        {showFixedTotals ? (
+          <>
+            <dl className="mt-5 space-y-2 border-t border-border/50 pt-4 text-sm">
+              <div className="flex items-center justify-between">
+                <dt className="text-text-muted">Subtotal</dt>
+                <dd className="tabular-nums">{formatCentsAsUsd(subtotalCents)}</dd>
+              </div>
+              {discountCents > 0 ? (
+                <div className="flex items-center justify-between">
+                  <dt className="flex items-center gap-2 text-text-muted">
+                    Discount
+                    {discountCode ? (
+                      <span className="rounded-full bg-inset/40 px-2 py-0.5 text-[10px] font-mono text-text">
+                        {discountCode}
+                      </span>
+                    ) : null}
+                  </dt>
+                  <dd className="tabular-nums text-success">
+                    -{formatCentsAsUsd(discountCents)}
+                  </dd>
+                </div>
+              ) : null}
+              <div className="flex items-center justify-between text-xs text-text-muted">
+                <dt>Tax</dt>
+                <dd className="tabular-nums">
+                  {taxCents > 0 ? formatCentsAsUsd(taxCents) : "$0.00"}
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
+              <p className="font-display text-lg tracking-tight">Total</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-xs text-text-muted">USD</span>
+                <span className="font-display text-3xl tracking-tight text-text sm:text-4xl">
+                  {formatCentsAsUsd(totalCents)}
+                </span>
+              </div>
+            </div>
+          </>
+        ) : null}
       </Card>
 
       <CheckoutGuaranteeCard />

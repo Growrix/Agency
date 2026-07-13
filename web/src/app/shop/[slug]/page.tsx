@@ -31,7 +31,7 @@ import {
   getTierCardMutedTextClass,
 } from "@/components/sections/tierCardTheme";
 import { SERVICES } from "@/lib/content";
-import { getCheckoutHref, getProductHref } from "@/lib/shop";
+import { getCheckoutHref, getProductHref, getVariantCheckoutHref } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 import { getPublicShopProduct, listPublicShopProducts } from "@/server/domain/catalog";
 
@@ -329,6 +329,16 @@ function getWebsiteTemplateTierLabel(variant: ProductVariant) {
   return WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug]?.label ?? variant.title;
 }
 
+function buildWebsiteTemplateCartPlanOptions(variants: ProductVariant[]) {
+  return variants.map((variant) => ({
+    slug: variant.slug,
+    title: getWebsiteTemplateTierLabel(variant),
+    tierName: variant.tier_name,
+    fulfillmentType: variant.fulfillment_type,
+    price: WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug]?.price ?? variant.price,
+  }));
+}
+
 const HTML_PROFILE_COMPARISON_ROWS = [
   { capability: "Template files", standard: true, premium: true, doneForYou: true },
   { capability: "Responsive design", standard: true, premium: true, doneForYou: true },
@@ -475,7 +485,9 @@ export default async function ShopPreviewPage({ params }: PageProps) {
             title: "Need a Done-For-You rollout?",
             description: "Let the Growrix team configure, launch, and quality-check this product for your business model.",
             cta_label: "Request Done-For-You Scope",
-            cta_href: `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`,
+            cta_href: doneForYouVariant
+              ? getVariantCheckoutHref(product, doneForYouVariant)
+              : getProductHref(product),
           },
         ]
       : [];
@@ -502,6 +514,9 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const websiteTemplatePathVariants = isWebsiteTemplateProduct
     ? [websiteTemplateStandardVariant, websiteTemplatePremiumVariant, websiteTemplateLaunchVariant]
     : variants;
+  const websiteTemplateCartPlanOptions = isWebsiteTemplateProduct
+    ? buildWebsiteTemplateCartPlanOptions(websiteTemplatePathVariants)
+    : [];
   const sidebarBasePriceLabel = isWebsiteTemplateProduct
     ? WEBSITE_TEMPLATE_TIER_PRESETS.standard.price
     : basePriceLabel;
@@ -562,10 +577,6 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       tierName: variant.tier_name,
       fulfillmentType: variant.fulfillment_type,
       price: variant.price,
-      redirectHref:
-        variant.slug === "done-for-you"
-          ? `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`
-          : undefined,
     }));
     const htmlFaqs = product.faqs && product.faqs.length > 0 ? product.faqs : HTML_PROFILE_FAQ_FALLBACK;
 
@@ -781,13 +792,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     {htmlPathVariants.map((variant) => (
                       <Link
                         key={variant.slug}
-                        href={variant.slug === "done-for-you"
-                          ? `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`
-                          : getCheckoutHref(product, {
-                              variantSlug: variant.slug,
-                              tierName: variant.tier_name,
-                              fulfillmentType: variant.fulfillment_type,
-                            })}
+                        href={getVariantCheckoutHref(product, variant)}
                         className="flex items-center justify-between rounded-xl border border-border px-3 py-2 text-sm hover:border-primary/60 hover:bg-primary/5"
                       >
                         <span>{getHtmlProfileTierLabel(variant)}</span>
@@ -912,13 +917,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   const preset = HTML_PROFILE_TIER_PRESETS[variant.slug];
                   const isMostPopular = variant.slug === "premium";
                   const isFeaturedCard = isMostPopular;
-                  const variantHref = variant.slug === "done-for-you"
-                    ? `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`
-                    : getCheckoutHref(product, {
-                        variantSlug: variant.slug,
-                        tierName: variant.tier_name,
-                        fulfillmentType: variant.fulfillment_type,
-                      });
+                  const variantHref = getVariantCheckoutHref(product, variant);
 
                   return (
                     <article
@@ -1076,12 +1075,12 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               Download Template
             </LinkButton>
             <LinkButton
-              href={`/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`}
+              href={getVariantCheckoutHref(product, doneForYouVariantForPath)}
               variant="outline"
               size="sm"
               fullWidth
             >
-              Launch Quote
+              Place DFY Order
             </LinkButton>
           </div>
         </div>
@@ -1094,14 +1093,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
     const premiumVariant = variants.find((variant) => variant.slug === "premium") ?? variants[1] ?? variants[0];
     const launchVariant = variants.find((variant) => variant.slug === "done-for-you") ?? variants[2] ?? variants[0];
     const htmlPreviewPathVariants = [standardVariant, premiumVariant, launchVariant];
-    const websiteTemplateCartPlanOptions = htmlPreviewPathVariants.map((variant) => ({
-      slug: variant.slug,
-      title: getWebsiteTemplateTierLabel(variant),
-      tierName: variant.tier_name,
-      fulfillmentType: variant.fulfillment_type,
-      price: WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug]?.price ?? variant.price,
-      redirectHref: variant.slug === "done-for-you" ? "/book-appointment" : undefined,
-    }));
+    const websiteTemplateCartPlanOptions = buildWebsiteTemplateCartPlanOptions(htmlPreviewPathVariants);
 
     return (
       <>
@@ -1268,21 +1260,29 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   >
                     {WEBSITE_TEMPLATE_PREVIEW.previewCta} <ArrowUpRightIcon className="size-4" />
                   </LinkButton>
+                  <AddToCartButton
+                    productSlug={product.slug}
+                    productName={product.name}
+                    productImageSrc={product.image?.src}
+                    productPrice={WEBSITE_TEMPLATE_TIER_PRESETS.standard.price}
+                    variantSlug={standardVariant.slug}
+                    tierName={standardVariant.tier_name}
+                    fulfillmentType={standardVariant.fulfillment_type}
+                    planOptions={websiteTemplateCartPlanOptions}
+                    forcePlanSelection
+                    size="lg"
+                    variant="outline"
+                    fullWidth
+                  />
                 </div>
 
                 <div className="rounded-2xl border border-border bg-inset/40 p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Quick tier links</p>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-muted">Quick tier summary</p>
                   <div className="mt-3 space-y-2">
                     {htmlPreviewPathVariants.map((variant) => (
                       <Link
                         key={variant.slug}
-                        href={variant.slug === "done-for-you"
-                          ? "/book-appointment"
-                          : getCheckoutHref(product, {
-                              variantSlug: variant.slug,
-                              tierName: variant.tier_name,
-                              fulfillmentType: variant.fulfillment_type,
-                            })}
+                        href={getVariantCheckoutHref(product, variant)}
                         className="flex items-center justify-between rounded-xl border border-border px-3 py-2 text-sm hover:border-primary/60 hover:bg-primary/5"
                       >
                         <span>{getWebsiteTemplateTierLabel(variant)}</span>
@@ -1393,20 +1393,22 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         <Section className="border-t border-border py-10 sm:py-12">
           <Container>
             <div className="space-y-8">
-              <WebsiteTemplateChoosePathIntro />
+              <div className="max-w-4xl">
+                <h2 className="font-display text-2xl font-semibold tracking-tight">Choose Your Plan</h2>
+                <p className="mt-2 text-base leading-7 text-text-muted">
+                  Whether you want a ready-made website template, a branded setup, or a complete launch-ready implementation, choose the option that matches your goals and technical comfort level.
+                </p>
+                <p className="mt-2 text-base leading-7 text-text-muted">
+                  Every website template is available in three delivery options: Template Only for DIY users, Done-For-You Setup for businesses that need branding and content applied, and Business Launch for owners who want a complete website prepared and launched.
+                </p>
+              </div>
 
               <div className="grid gap-5 lg:grid-cols-3">
                 {htmlPreviewPathVariants.map((variant) => {
                   const preset = WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug];
                   const isRecommended = variant.slug === "premium";
                   const isFeaturedCard = isRecommended;
-                  const variantHref = variant.slug === "done-for-you"
-                    ? "/book-appointment"
-                    : getCheckoutHref(product, {
-                        variantSlug: variant.slug,
-                        tierName: variant.tier_name,
-                        fulfillmentType: variant.fulfillment_type,
-                      });
+                  const variantHref = getVariantCheckoutHref(product, variant);
 
                   return (
                     <article key={variant.slug} className={getTierCardContainerClass(isFeaturedCard)}>
@@ -1569,14 +1571,12 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               Get Template Access
             </LinkButton>
             <LinkButton
-              href={previewHref}
+              href={getVariantCheckoutHref(product, launchVariant)}
               variant="outline"
               size="sm"
               fullWidth
-              target={hasExternalPreview ? "_blank" : undefined}
-              rel={hasExternalPreview ? "noreferrer" : undefined}
             >
-              {WEBSITE_TEMPLATE_PREVIEW.previewCta}
+              Place DFY Order
             </LinkButton>
           </div>
         </div>
@@ -1670,6 +1670,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     variantSlug={sidebarPrimaryVariant.slug}
                     tierName={sidebarPrimaryVariant.tier_name}
                     fulfillmentType={sidebarPrimaryVariant.fulfillment_type}
+                    planOptions={isWebsiteTemplateProduct ? websiteTemplateCartPlanOptions : undefined}
+                    forcePlanSelection={isWebsiteTemplateProduct}
                     size="sm"
                     variant="outline"
                     fullWidth
@@ -1740,13 +1742,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     const isMostPopular = isWebsiteTemplateProduct && variant.slug === "premium";
                     const isRecommended = isWebsiteTemplateProduct && variant.slug === "done-for-you";
                     const isFeaturedCard = isMostPopular || Boolean(variant.recommended);
-                    const variantHref = variant.slug === "done-for-you"
-                      ? `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`
-                      : getCheckoutHref(product, {
-                          variantSlug: variant.slug,
-                          tierName: variant.tier_name,
-                          fulfillmentType: variant.fulfillment_type,
-                        });
+                    const variantHref = getVariantCheckoutHref(product, variant);
 
                     return (
                       <article
@@ -1939,13 +1935,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                       const preset = WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug];
                       const isRecommended = variant.slug === "premium";
                       const isFeaturedCard = isRecommended;
-                      const variantHref = variant.slug === "done-for-you"
-                        ? "/book-appointment"
-                        : getCheckoutHref(product, {
-                            variantSlug: variant.slug,
-                            tierName: variant.tier_name,
-                            fulfillmentType: variant.fulfillment_type,
-                          });
+                      const variantHref = getVariantCheckoutHref(product, variant);
 
                       return (
                         <article
@@ -2151,6 +2141,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   variantSlug={sidebarPrimaryVariant.slug}
                   tierName={sidebarPrimaryVariant.tier_name}
                   fulfillmentType={sidebarPrimaryVariant.fulfillment_type}
+                  planOptions={isWebsiteTemplateProduct ? websiteTemplateCartPlanOptions : undefined}
+                  forcePlanSelection={isWebsiteTemplateProduct}
                   size="lg"
                   variant="outline"
                   fullWidth
@@ -2171,15 +2163,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                     {websiteTemplatePathVariants.map((variant) => (
                       <Link
                         key={variant.slug}
-                        href={variant.slug === "done-for-you"
-                          ? (isWebsiteTemplateProduct
-                            ? "/book-appointment"
-                            : `/contact?intent=done-for-you&product=${encodeURIComponent(product.slug)}`)
-                          : getCheckoutHref(product, {
-                              variantSlug: variant.slug,
-                              tierName: variant.tier_name,
-                              fulfillmentType: variant.fulfillment_type,
-                            })}
+                        href={getVariantCheckoutHref(product, variant)}
                         className="flex items-center justify-between rounded-xl border border-border px-3 py-2 text-sm hover:border-primary/60 hover:bg-primary/5"
                       >
                         <span>{isWebsiteTemplateProduct
@@ -2249,13 +2233,7 @@ export default async function ShopPreviewPage({ params }: PageProps) {
                   const preset = WEBSITE_TEMPLATE_TIER_PRESETS[variant.slug];
                   const isRecommended = variant.slug === "premium";
                   const isFeaturedCard = isRecommended;
-                  const variantHref = variant.slug === "done-for-you"
-                    ? "/book-appointment"
-                    : getCheckoutHref(product, {
-                        variantSlug: variant.slug,
-                        tierName: variant.tier_name,
-                        fulfillmentType: variant.fulfillment_type,
-                      });
+                  const variantHref = getVariantCheckoutHref(product, variant);
 
                   return (
                     <article
@@ -2452,16 +2430,27 @@ export default async function ShopPreviewPage({ params }: PageProps) {
               ? "Get Template Access"
               : `Buy (${isHtmlBusinessProfile ? getHtmlProfileTierLabel(sidebarPrimaryVariant) : sidebarPrimaryVariant.tier_name})`}
           </LinkButton>
-          <LinkButton
-            href={previewHref}
-            variant="outline"
-            size="sm"
-            fullWidth
-            target={hasExternalPreview ? "_blank" : undefined}
-            rel={hasExternalPreview ? "noreferrer" : undefined}
-          >
-            {WEBSITE_TEMPLATE_PREVIEW.previewCta}
-          </LinkButton>
+          {isWebsiteTemplateProduct ? (
+            <LinkButton
+              href={getVariantCheckoutHref(product, websiteTemplateLaunchVariant)}
+              variant="outline"
+              size="sm"
+              fullWidth
+            >
+              Place DFY Order
+            </LinkButton>
+          ) : (
+            <LinkButton
+              href={previewHref}
+              variant="outline"
+              size="sm"
+              fullWidth
+              target={hasExternalPreview ? "_blank" : undefined}
+              rel={hasExternalPreview ? "noreferrer" : undefined}
+            >
+              {WEBSITE_TEMPLATE_PREVIEW.previewCta}
+            </LinkButton>
+          )}
         </div>
       </div>
     </>

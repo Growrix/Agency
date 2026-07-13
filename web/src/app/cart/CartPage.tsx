@@ -14,7 +14,7 @@ import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
 import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCard";
-import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
+import { CheckoutSteps, type CheckoutStep, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
 import { CheckoutUpsellsCard } from "@/components/checkout/CheckoutUpsellsCard";
 import { DiscountCodeField, type AppliedCoupon } from "@/components/checkout/DiscountCodeField";
@@ -23,6 +23,8 @@ import {
   rehydrateCartStore,
   useCartStore,
 } from "@/lib/cart-store";
+import { isQuoteBasedCommerceItem } from "@/lib/commerce-pricing";
+import { QuotePricingPanel } from "@/components/checkout/QuotePricingPanel";
 import { getCheckoutHref } from "@/lib/shop";
 import type { ProductUpsellRecord } from "@/server/data/schema";
 
@@ -31,6 +33,12 @@ type ProductFetchEnvelope = {
     customization_upsells?: ProductUpsellRecord[] | null;
   } | null;
 };
+
+const ORDER_FLOW_STEPS: CheckoutStep[] = [
+  { id: "cart", label: "Cart", href: "/cart" },
+  { id: "information", label: "Information", href: "/checkout?cart=1" },
+  { id: "confirmation", label: "Confirmation", href: "/success" },
+];
 
 export function CartPage() {
   const [hydrated, setHydrated] = useState(false);
@@ -45,6 +53,21 @@ export function CartPage() {
   const [selectedUpsells, setSelectedUpsells] = useState<Set<string>>(() => new Set());
   const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
   const primaryProductSlug = items[0]?.product_slug;
+  const hasQuoteItems = items.some((item) =>
+    isQuoteBasedCommerceItem({
+      fulfillmentType: item.fulfillment_type,
+      variantSlug: item.variant_slug,
+      tierName: item.tier_name,
+    }),
+  );
+  const hasFixedPriceItems = items.some(
+    (item) =>
+      !isQuoteBasedCommerceItem({
+        fulfillmentType: item.fulfillment_type,
+        variantSlug: item.variant_slug,
+        tierName: item.tier_name,
+      }),
+  );
 
   const discountCents = appliedCoupon
     ? Math.min(appliedCoupon.discount_cents, totalCents)
@@ -159,7 +182,7 @@ export function CartPage() {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px]">
           <div className="min-w-0 space-y-6">
-            <CheckoutSteps active="cart" hrefOverrides={stepHrefOverrides} />
+            <CheckoutSteps active="cart" steps={ORDER_FLOW_STEPS} hrefOverrides={stepHrefOverrides} />
 
             {!hydrated ? (
               <Card>
@@ -189,6 +212,11 @@ export function CartPage() {
               <>
                 <ul className="space-y-3">
                   {items.map((item) => {
+                    const quoteItem = isQuoteBasedCommerceItem({
+                      fulfillmentType: item.fulfillment_type,
+                      variantSlug: item.variant_slug,
+                      tierName: item.tier_name,
+                    });
                     const lineTotal = item.unit_price_cents * item.quantity;
                     return (
                       <li key={`${item.product_slug}::${item.variant_slug ?? ""}`}>
@@ -210,7 +238,9 @@ export function CartPage() {
                                 </p>
                               ) : null}
                               <p className="mt-3 text-xs text-text-muted">
-                                Unit {formatUsdFromCents(item.unit_price_cents)}
+                                {quoteItem
+                                  ? "Quoted after discovery"
+                                  : `Unit ${formatUsdFromCents(item.unit_price_cents)}`}
                               </p>
                             </div>
 
@@ -251,7 +281,9 @@ export function CartPage() {
 
                               <div className="flex items-center gap-3">
                                 <span className="text-sm font-semibold tabular-nums">
-                                  {formatUsdFromCents(lineTotal)}
+                                  {quoteItem
+                                    ? "Quoted after discovery"
+                                    : formatUsdFromCents(lineTotal)}
                                 </span>
                                 <button
                                   type="button"
@@ -296,6 +328,9 @@ export function CartPage() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-text-muted">
                   Order summary
                 </p>
+                {hasQuoteItems ? <QuotePricingPanel className="mt-4" compact /> : null}
+
+                {hasFixedPriceItems ? (
                 <dl className="mt-4 space-y-2 text-sm">
                   <div className="flex items-center justify-between">
                     <dt className="text-text-muted">Subtotal</dt>
@@ -319,8 +354,9 @@ export function CartPage() {
                     <dd>Calculated at checkout</dd>
                   </div>
                 </dl>
+                ) : null}
 
-                {hydrated && items.length > 0 ? (
+                {hydrated && items.length > 0 && hasFixedPriceItems ? (
                   <div className="mt-4 border-t border-border/50 pt-3">
                     <DiscountCodeField
                       applied={appliedCoupon}
@@ -331,6 +367,7 @@ export function CartPage() {
                   </div>
                 ) : null}
 
+                {hasFixedPriceItems ? (
                 <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
                   <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                     Estimated total
@@ -339,6 +376,7 @@ export function CartPage() {
                     {formatUsdFromCents(estimatedTotalCents)}
                   </span>
                 </div>
+                ) : null}
                 <div className="mt-6 space-y-2">
                   <LinkButton
                     href={checkoutHref}

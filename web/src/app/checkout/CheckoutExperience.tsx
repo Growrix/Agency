@@ -1,31 +1,41 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { Dialog } from "@headlessui/react";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   EnvelopeIcon,
-  LockClosedIcon,
-  ShieldCheckIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { BillingAddressFieldset, EMPTY_BILLING_ADDRESS, type BillingAddressValues } from "@/components/checkout/BillingAddressFieldset";
-import { CardDetailsPanel } from "@/components/checkout/CardDetailsPanel";
 import { CartOrderSummary } from "@/components/checkout/CartOrderSummary";
 import { CheckoutOrderSummary } from "@/components/checkout/CheckoutOrderSummary";
 import { CheckoutRecommendations } from "@/components/checkout/CheckoutRecommendations";
 import { CheckoutSteps, type CheckoutStepId } from "@/components/checkout/CheckoutSteps";
 import { DiscountCodeField, type AppliedCoupon } from "@/components/checkout/DiscountCodeField";
-import { PaymentMethodTabs, type PaymentMethodId } from "@/components/checkout/PaymentMethodTabs";
 import { parsePriceStringToCents, resolveSelectedVariant } from "@/components/checkout/checkout-utils";
 import { formatUsdFromCents, rehydrateCartStore, useCartStore } from "@/lib/cart-store";
+import { isClerkConfiguredClient } from "@/lib/clerk-client";
+import { isQuoteBasedCommerceItem } from "@/lib/commerce-pricing";
 import { getCheckoutHref, type CheckoutSelection } from "@/lib/shop";
 import type { PublicShopProductRecord } from "@/server/domain/catalog";
 import type { ProductUpsellRecord } from "@/server/data/schema";
 import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CHECKOUT_DRAFT_STORAGE_PREFIX = "growrix:checkout:draft:";
+
+type CheckoutDraftSnapshot = {
+  customer_name?: string;
+  customer_email?: string;
+  notes?: string;
+  create_account_on_checkout?: boolean;
+  billing?: Partial<BillingAddressValues>;
+  selected_upsells?: string[];
+};
 
 type CheckoutExperienceProps = {
   product?: PublicShopProductRecord | null;
@@ -43,6 +53,21 @@ type CheckoutViewer = {
   last_name: string | null;
 };
 
+type CheckoutCreatedOrder = {
+  id?: string;
+  order_number?: string;
+};
+
+function createCheckoutIdempotencyKey() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return `checkout-${crypto.randomUUID()}`;
+  }
+
+  const timestamp = Date.now().toString(36);
+  const random = Math.random().toString(36).slice(2, 10);
+  return `checkout-${timestamp}-${random}`;
+}
+
 async function fetchCheckoutViewer(): Promise<CheckoutViewer | null> {
   try {
     const response = await fetch("/api/v1/me", { credentials: "same-origin" });
@@ -59,11 +84,59 @@ async function fetchCheckoutViewer(): Promise<CheckoutViewer | null> {
 export function CheckoutExperience({ product, status, orderId, selection }: CheckoutExperienceProps) {
   const searchParams = useSearchParams();
   const isCartMode = searchParams.get("cart") === "1";
+  const clerkConfigured = isClerkConfiguredClient();
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const signInModalTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const submitLockRef = useRef(false);
+  const idempotencyKeyRef = useRef<string | null>(null);
+  const [draftHydrated, setDraftHydrated] = useState(false);
+
+  const checkoutSearchParams = useMemo(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("status");
+    params.delete("order");
+    return params;
+  }, [searchParams]);
+
+  const checkoutReturnUrl = useMemo(() => {
+    const serialized = checkoutSearchParams.toString();
+    return serialized.length > 0 ? `/checkout?${serialized}` : "/checkout";
+  }, [checkoutSearchParams]);
+
+  const signInHref = useMemo(
+    () => `/sign-in?next=${encodeURIComponent(checkoutReturnUrl)}`,
+    [checkoutReturnUrl],
+  );
+
+  const draftScope = useMemo(() => {
+    if (isCartMode) {
+      return "cart";
+    }
+
+    const productScope = product?.slug ?? "unknown-product";
+    const variantScope = selection?.variantSlug ?? "default-variant";
+    const tierScope = selection?.tierName ?? "default-tier";
+    const fulfillmentScope = selection?.fulfillmentType ?? "default-fulfillment";
+
+    return `${productScope}::${variantScope}::${tierScope}::${fulfillmentScope}`;
+  }, [
+    isCartMode,
+    product?.slug,
+    selection?.fulfillmentType,
+    selection?.tierName,
+    selection?.variantSlug,
+  ]);
+
+  const draftStorageKey = useMemo(() => {
+    return `${CHECKOUT_DRAFT_STORAGE_PREFIX}${encodeURIComponent(draftScope)}`;
+  }, [draftScope]);
 
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [cartHydrated, setCartHydrated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Checkout could not start. Please try again.");
-  const [fallbackMessage, setFallbackMessage] = useState<string | null>(null);
+  const [validationMessage, setValidationMessage] = useState<string | null>(null);
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [createdOrder, setCreatedOrder] = useState<CheckoutCreatedOrder | null>(null);
   const [viewer, setViewer] = useState<CheckoutViewer | null>(null);
   const [viewerLoaded, setViewerLoaded] = useState(false);
 
@@ -73,7 +146,6 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   const [customerEmailTouched, setCustomerEmailTouched] = useState(false);
   const [createAccountOnCheckout, setCreateAccountOnCheckout] = useState(false);
 
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodId>("card");
   const [billing, setBilling] = useState<BillingAddressValues>(EMPTY_BILLING_ADDRESS);
 
   const [selectedUpsells, setSelectedUpsells] = useState<Set<string>>(() => new Set());
@@ -82,12 +154,68 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
 
   const cartItems = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
+  const removeProductItems = useCartStore((state) => state.removeProductItems);
 
   const selectedTierLabel = selection?.tierName?.trim();
 
   useEffect(() => {
     void rehydrateCartStore().finally(() => setCartHydrated(true));
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let cancelled = false;
+
+    const applyDraft = async () => {
+      await Promise.resolve();
+      if (cancelled) return;
+
+      setDraftHydrated(false);
+
+      try {
+        const raw = window.localStorage.getItem(draftStorageKey);
+        if (!raw) {
+          return;
+        }
+
+        const snapshot = JSON.parse(raw) as CheckoutDraftSnapshot;
+        if (typeof snapshot.customer_name === "string") {
+          setCustomerName(snapshot.customer_name);
+        }
+        if (typeof snapshot.customer_email === "string") {
+          setCustomerEmail(snapshot.customer_email);
+        }
+        if (typeof snapshot.notes === "string") {
+          setNotes(snapshot.notes);
+        }
+        if (typeof snapshot.create_account_on_checkout === "boolean") {
+          setCreateAccountOnCheckout(snapshot.create_account_on_checkout);
+        }
+        if (snapshot.billing && typeof snapshot.billing === "object") {
+          setBilling({
+            ...EMPTY_BILLING_ADDRESS,
+            ...snapshot.billing,
+          });
+        }
+        if (Array.isArray(snapshot.selected_upsells)) {
+          setSelectedUpsells(new Set(snapshot.selected_upsells.filter((value) => typeof value === "string")));
+        }
+      } catch {
+        // Ignore malformed draft payloads and continue with empty form defaults.
+      } finally {
+        if (!cancelled) {
+          setDraftHydrated(true);
+        }
+      }
+    };
+
+    void applyDraft();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [draftStorageKey]);
 
   useEffect(() => {
     let cancelled = false;
@@ -105,6 +233,34 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       cancelled = true;
     };
   }, []);
+
+  useLayoutEffect(() => {
+    if (typeof window === "undefined" || !draftHydrated) return;
+
+    const snapshot: CheckoutDraftSnapshot = {
+      customer_name: customerName,
+      customer_email: customerEmail,
+      notes,
+      create_account_on_checkout: createAccountOnCheckout,
+      billing,
+      selected_upsells: Array.from(selectedUpsells),
+    };
+
+    try {
+      window.localStorage.setItem(draftStorageKey, JSON.stringify(snapshot));
+    } catch {
+      // Ignore localStorage quota/security exceptions to avoid blocking checkout.
+    }
+  }, [
+    billing,
+    createAccountOnCheckout,
+    customerEmail,
+    customerName,
+    draftHydrated,
+    draftStorageKey,
+    notes,
+    selectedUpsells,
+  ]);
 
   const activeCartItems = useMemo(() => {
     if (!isCartMode || !cartHydrated) return [];
@@ -141,14 +297,32 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     [product, selection],
   );
 
-  const productCents = parsePriceStringToCents(selectedVariant?.price ?? product?.price);
+  const productPricingContext = {
+    fulfillmentType: selection?.fulfillmentType ?? selectedVariant?.fulfillment_type,
+    variantSlug: selection?.variantSlug ?? selectedVariant?.slug,
+    tierName: selection?.tierName ?? selectedVariant?.tier_name,
+    priceLabel: selectedVariant?.price ?? product?.price,
+  };
+  const isQuoteBasedProduct = isQuoteBasedCommerceItem(productPricingContext);
+  const productCents = isQuoteBasedProduct
+    ? 0
+    : parsePriceStringToCents(selectedVariant?.price ?? product?.price);
   const upsellsCents = upsells
     .filter((upsell) => selectedUpsells.has(upsell.title))
     .reduce((sum, upsell) => sum + parsePriceStringToCents(upsell.price), 0);
-  const cartCents = activeCartItems.reduce(
-    (sum, item) => sum + item.unit_price_cents * item.quantity,
-    0,
-  );
+  const cartCents = activeCartItems.reduce((sum, item) => {
+    if (
+      isQuoteBasedCommerceItem({
+        fulfillmentType: item.fulfillment_type,
+        variantSlug: item.variant_slug,
+        tierName: item.tier_name,
+      })
+    ) {
+      return sum;
+    }
+
+    return sum + item.unit_price_cents * item.quantity;
+  }, 0);
   const summarySubtotalCents = product ? productCents + upsellsCents : cartCents;
   const discountCents = appliedCoupon
     ? Math.min(appliedCoupon.discount_cents, summarySubtotalCents)
@@ -175,10 +349,8 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
   const formValid = contactValid && billingValid;
 
   let activeStep: CheckoutStepId = "information";
-  if (status === "success") {
+  if (status === "success" || submitState === "success") {
     activeStep = "confirmation";
-  } else if (submitState === "submitting") {
-    activeStep = "payment";
   } else if (!viewerLoaded || !viewer) {
     activeStep = "information";
   } else if (isCartMode && !cartHydrated) {
@@ -197,29 +369,101 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     });
   }
 
+  function clearDraft() {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.removeItem(draftStorageKey);
+    } catch {
+      // Ignore localStorage exceptions to avoid blocking order placement.
+    }
+  }
+
+  function getMissingBillingFields(values: BillingAddressValues) {
+    const missing: string[] = [];
+    if (!values.country) missing.push("country");
+    if (!values.address_line1.trim()) missing.push("address");
+    if (!values.city.trim()) missing.push("city");
+    if (!values.region.trim()) missing.push("state/region");
+    if (!values.postal_code.trim()) missing.push("zip/postal code");
+    return missing;
+  }
+
+  function focusFirstInvalidField() {
+    const field = formRef.current?.querySelector<HTMLElement>(
+      '[aria-invalid="true"], select:invalid, input:invalid, textarea:invalid',
+    );
+    field?.focus();
+  }
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setCustomerNameTouched(true);
-    setCustomerEmailTouched(true);
 
-    if (!formValid) return;
-
-    setSubmitState("submitting");
-    setErrorMessage("Checkout could not start. Please try again.");
-    setFallbackMessage(null);
-
-    if (!viewer) {
-      const next = `${window.location.pathname}${window.location.search}`;
-      window.location.assign(`/sign-in?next=${encodeURIComponent(next)}`);
+    if (submitState === "submitting" || submitState === "success" || submitLockRef.current) {
       return;
     }
+
+    setCustomerNameTouched(true);
+    setCustomerEmailTouched(true);
+    setValidationMessage(null);
+    setErrorMessage("Checkout could not start. Please try again.");
+
+    if (!formValid) {
+      const missingBillingFields = getMissingBillingFields(billing);
+      const chunks: string[] = [];
+
+      if (!contactValid) {
+        chunks.push("a valid full name and email address");
+      }
+
+      if (missingBillingFields.length > 0) {
+        chunks.push(`billing fields: ${missingBillingFields.join(", ")}`);
+      }
+
+      setSubmitState("error");
+      setErrorMessage("Please complete all required fields before placing your order.");
+      setValidationMessage(`Please complete ${chunks.join(" and ")}.`);
+      focusFirstInvalidField();
+      return;
+    }
+
+    let activeViewer = viewer;
+    if (!activeViewer) {
+      const refreshedViewer = await fetchCheckoutViewer();
+      setViewer(refreshedViewer);
+      setViewerLoaded(true);
+      if (refreshedViewer) {
+        activeViewer = refreshedViewer;
+      }
+    }
+
+    if (!activeViewer) {
+      if (clerkConfigured) {
+        signInModalTriggerRef.current?.click();
+        return;
+      }
+
+      window.location.assign(signInHref);
+      return;
+    }
+
+    setSubmitState("submitting");
+    submitLockRef.current = true;
+
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = createCheckoutIdempotencyKey();
+    }
+
+    const idempotencyKey = idempotencyKeyRef.current;
 
     const hasCartItems = activeCartItems.length > 0;
 
     try {
       const response = await fetch("/api/v1/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-idempotency-key": idempotencyKey,
+        },
         body: JSON.stringify({
           customer_name: customerName.trim(),
           customer_email: customerEmail.trim(),
@@ -229,46 +473,44 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
           product_tier_name: selection?.tierName,
           fulfillment_type: selection?.fulfillmentType,
           items: hasCartItems ? activeCartItems : undefined,
-          payment_method_preference: paymentMethod,
+          payment_method_preference: "invoice",
           applied_coupon_code: appliedCoupon?.code ?? null,
           selected_upsells: Array.from(selectedUpsells),
           billing_address: billing,
           create_account_on_checkout: createAccountOnCheckout,
+          idempotency_key: idempotencyKey,
         }),
       });
 
       const payload = (await response.json().catch(() => null)) as {
-        data?: { checkout_url?: string | null; integration_ready?: boolean; order?: { order_number: string } };
+        data?: {
+          checkout_url?: string | null;
+          integration_ready?: boolean;
+          order?: CheckoutCreatedOrder;
+        };
         error?: { message?: string };
       } | null;
 
       if (!response.ok) {
         setErrorMessage(payload?.error?.message ?? "Checkout could not start. Please try again.");
         setSubmitState("error");
+        submitLockRef.current = false;
         return;
       }
 
-      const orderRef = payload?.data?.order?.order_number ?? "";
+      const resolvedOrder = payload?.data?.order ?? null;
 
-      if (payload?.data?.checkout_url) {
-        if (hasCartItems) clearCart();
-        const params = new URLSearchParams({ checkout: payload.data.checkout_url });
-        if (orderRef) params.set("order", orderRef);
-        window.location.assign(`/checkout/payment?${params.toString()}`);
-        return;
-      }
-
-      setFallbackMessage(
-        orderRef
-          ? `Order ${orderRef} was saved. Stripe is not configured yet, so the team will follow up manually.`
-          : "Order draft saved. Stripe is not configured yet, so the team will follow up manually.",
-      );
       setSubmitState("success");
-      if (hasCartItems) {
-        clearCart();
-      }
+      setCreatedOrder(resolvedOrder);
+      setConfirmationOpen(true);
+
+      if (hasCartItems) clearCart();
+      else if (product?.slug) removeProductItems(product.slug);
+
+      clearDraft();
     } catch {
       setSubmitState("error");
+      submitLockRef.current = false;
     }
   };
 
@@ -277,9 +519,8 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       <div className="space-y-4">
         <CheckoutSteps active="confirmation" hrefOverrides={stepHrefOverrides} />
         <div className="rounded-md border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
-          Payment flow returned successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}
-          {orderId ? `Order reference: ${orderId}. ` : ""}Stripe webhook confirmation may still be
-          processing.
+          Order confirmed successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}
+          {orderId ? `Order reference: ${orderId}. ` : ""}Our team will contact you with fulfillment updates.
         </div>
       </div>
     );
@@ -290,7 +531,7 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
       <div className="space-y-4">
         <CheckoutSteps active="information" hrefOverrides={stepHrefOverrides} />
         <div className="rounded-md border border-border bg-surface p-5 text-sm leading-6 text-text-muted">
-          Checkout was cancelled before payment.{" "}
+          Checkout was cancelled before order placement.{" "}
           {selectedTierLabel ? `Tier ${selectedTierLabel} is still selected. ` : ""}Your order draft
           is still available for follow-up if you restart the flow.
         </div>
@@ -336,6 +577,8 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
         <CheckoutSteps active={activeStep} hrefOverrides={stepHrefOverrides} />
 
         <form
+          id="checkout-order-form"
+          ref={formRef}
           key={viewer?.id ?? "anon"}
           onSubmit={onSubmit}
           className="space-y-6"
@@ -356,19 +599,42 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
               {!viewer ? (
                 <p className="text-xs text-text-muted">
                   Already have an account?{" "}
-                  <a
-                    href={`/sign-in?next=${encodeURIComponent(
-                      typeof window !== "undefined"
-                        ? `${window.location.pathname}${window.location.search}`
-                        : "/checkout",
-                    )}`}
-                    className="font-medium text-primary hover:underline"
-                  >
-                    Sign in
-                  </a>
+                  {clerkConfigured ? (
+                    <>
+                      <SignInButton mode="modal" forceRedirectUrl={checkoutReturnUrl}>
+                        <button type="button" className="font-medium text-primary hover:underline">
+                          Sign in
+                        </button>
+                      </SignInButton>
+                      <span>{" "}or{" "}</span>
+                      <SignUpButton mode="modal" forceRedirectUrl={checkoutReturnUrl}>
+                        <button type="button" className="font-medium text-primary hover:underline">
+                          Sign up
+                        </button>
+                      </SignUpButton>
+                    </>
+                  ) : (
+                    <a href={signInHref} className="font-medium text-primary hover:underline">
+                      Sign in
+                    </a>
+                  )}
                 </p>
               ) : null}
             </header>
+
+            {!viewer && clerkConfigured ? (
+              <SignInButton mode="modal" forceRedirectUrl={checkoutReturnUrl}>
+                <button
+                  ref={signInModalTriggerRef}
+                  type="button"
+                  className="sr-only"
+                  tabIndex={-1}
+                  aria-hidden
+                >
+                  Open sign in dialog
+                </button>
+              </SignInButton>
+            ) : null}
 
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="block">
@@ -443,29 +709,16 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
             ) : null}
           </section>
 
-          <section aria-labelledby="checkout-payment-heading" className="space-y-4">
+          <section aria-labelledby="checkout-details-heading" className="space-y-4">
             <header>
               <h2
-                id="checkout-payment-heading"
+                id="checkout-details-heading"
                 className="flex items-baseline gap-2 font-display text-lg tracking-tight"
               >
                 <span className="text-text-muted">2.</span>
-                Payment method
+                Order details
               </h2>
             </header>
-
-            <PaymentMethodTabs value={paymentMethod} onChange={setPaymentMethod} />
-
-            {paymentMethod === "card" ? <CardDetailsPanel /> : null}
-
-            {paymentMethod === "stripe" ? (
-              <div className="flex items-start gap-3 rounded-md border border-border/60 bg-surface p-4 text-sm">
-                <ShieldCheckIcon className="mt-0.5 size-5 text-primary" aria-hidden />
-                <p className="text-text-muted">
-                  Stripe hosted checkout will collect your card details on a secure page.
-                </p>
-              </div>
-            ) : null}
 
             <BillingAddressFieldset values={billing} onChange={setBilling} />
 
@@ -483,24 +736,21 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
             </label>
 
             <div className="flex items-center justify-between gap-3 rounded-sm bg-inset/30 px-3 py-2 text-xs text-text-muted">
-              <span className="flex items-center gap-2">
-                <LockClosedIcon className="size-3.5 text-primary" aria-hidden />
-                Your payment information is secure and encrypted
+              <span>
+                {summarySubtotalCents > 0
+                  ? "Order totals are locked at submission and confirmed by email."
+                  : "Done-For-You orders are submitted without payment. We will confirm final pricing after discovery."}
               </span>
-              <DiscountCodeField
-                applied={appliedCoupon}
-                onApply={(coupon) => setAppliedCoupon(coupon)}
-                onClear={() => setAppliedCoupon(null)}
-                subtotalCents={summarySubtotalCents}
-                userEmail={customerEmail || viewer?.email}
-              />
+              {summarySubtotalCents > 0 ? (
+                <DiscountCodeField
+                  applied={appliedCoupon}
+                  onApply={(coupon) => setAppliedCoupon(coupon)}
+                  onClear={() => setAppliedCoupon(null)}
+                  subtotalCents={summarySubtotalCents}
+                  userEmail={customerEmail || viewer?.email}
+                />
+              ) : null}
             </div>
-
-            {fallbackMessage ? (
-              <p className="rounded-md border border-border bg-surface px-4 py-3 text-sm text-text-muted">
-                {fallbackMessage}
-              </p>
-            ) : null}
 
             <p
               role="status"
@@ -513,25 +763,22 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
               {submitState === "error" ? errorMessage : ""}
             </p>
 
-            <div className="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <LinkButton href="/contact" variant="outline" size="md" className="w-full sm:w-auto">
-                Need an invoice instead
-              </LinkButton>
+            <div className="flex items-stretch justify-end gap-3">
               <Button
                 type="submit"
                 size="lg"
-                disabled={submitState === "submitting" || !viewerLoaded || (viewer ? !formValid : false)}
-                className="w-full sm:w-auto"
+                disabled={submitState === "submitting" || submitState === "success"}
+                className="w-full sm:w-auto lg:hidden"
               >
-                {submitState === "submitting"
-                  ? "Starting checkout…"
-                  : !viewerLoaded
-                    ? "Continue to payment"
-                    : viewer
-                      ? "Continue to payment"
-                      : "Continue to sign in"}
+                {submitState === "submitting" ? "Placing order..." : "Place order"}
               </Button>
             </div>
+
+            {validationMessage ? (
+              <p className="text-xs text-destructive" role="alert">
+                {validationMessage}
+              </p>
+            ) : null}
           </section>
 
           {activeCartItems.length > 0 ? (
@@ -540,7 +787,13 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                 Cart summary
               </p>
               <ul className="mt-2 space-y-2 text-sm text-text-muted">
-                {activeCartItems.map((item) => (
+                {activeCartItems.map((item) => {
+                  const quoteItem = isQuoteBasedCommerceItem({
+                    fulfillmentType: item.fulfillment_type,
+                    variantSlug: item.variant_slug,
+                    tierName: item.tier_name,
+                  });
+                  return (
                   <li
                     key={`${item.product_slug}::${item.variant_slug ?? "base"}`}
                     className="flex items-start justify-between gap-3"
@@ -551,10 +804,13 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
                       {` × ${item.quantity}`}
                     </span>
                     <span className="shrink-0 text-text">
-                      {formatUsdFromCents(item.unit_price_cents * item.quantity)}
+                      {quoteItem
+                        ? "Quoted after discovery"
+                        : formatUsdFromCents(item.unit_price_cents * item.quantity)}
                     </span>
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </Card>
           ) : null}
@@ -581,7 +837,63 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
             discountCents={discountCents}
           />
         )}
+
+        <Card variant="inset" className="mt-4 hidden p-4 lg:block">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+            Ready to submit?
+          </p>
+          <p className="mt-2 text-sm text-text-muted">
+            No upfront payment is required. Place your order now and we will follow up with fulfillment.
+          </p>
+          <Button
+            type="submit"
+            form="checkout-order-form"
+            size="lg"
+            disabled={submitState === "submitting" || submitState === "success"}
+            className="mt-4 w-full"
+          >
+            {submitState === "submitting" ? "Placing order..." : "Place order"}
+          </Button>
+
+          {validationMessage ? (
+            <p className="mt-2 text-xs text-destructive" role="alert">
+              {validationMessage}
+            </p>
+          ) : null}
+
+        </Card>
       </aside>
+
+      <Dialog
+        open={confirmationOpen}
+        onClose={() => undefined}
+        className="relative z-70"
+      >
+        <div className="fixed inset-0 bg-black/60" aria-hidden />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <Dialog.Panel className="w-full max-w-md rounded-md border border-border bg-surface p-5 shadow-(--shadow-3)">
+            <Dialog.Title className="font-display text-lg text-text">Order placed</Dialog.Title>
+            <p className="mt-2 text-sm text-text-muted">
+              {createdOrder?.order_number
+                ? `Order ${createdOrder.order_number} has been placed. Our team will follow up with fulfillment details.`
+                : "Your order has been placed. Our team will follow up with fulfillment details."}
+            </p>
+
+            <div className="mt-5 grid gap-2 sm:grid-cols-2">
+              <LinkButton href="/dashboard" fullWidth>
+                Dashboard
+              </LinkButton>
+              <LinkButton
+                href={createdOrder?.id ? `/dashboard/orders/${encodeURIComponent(createdOrder.id)}` : "/dashboard/orders"}
+                variant="outline"
+                fullWidth
+              >
+                View order
+              </LinkButton>
+            </div>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
     </div>
   );
 }

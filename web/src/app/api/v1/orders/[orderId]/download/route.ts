@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiError, createRequestContext, errorResponse } from "@/server/core/api";
 import { requireAuthenticatedUser } from "@/server/auth/guards";
 import { createAuthorizedDownloadUrl, listDownloadsByOrderId } from "@/server/domain/downloads";
-import { getOrderById } from "@/server/domain/orders";
+import { canAccessOrderByUser, getOrderById } from "@/server/domain/orders";
 import { assertRateLimit } from "@/server/security/rate-limit";
 
 export const dynamic = "force-dynamic";
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       throw new ApiError("NOT_FOUND", 404, "Order not found.");
     }
 
-    if (user.role !== "admin" && order.customer_email !== user.email.toLowerCase()) {
+    if (!canAccessOrderByUser(order, user)) {
       throw new ApiError("FORBIDDEN", 403, "You do not have access to this order.");
     }
 

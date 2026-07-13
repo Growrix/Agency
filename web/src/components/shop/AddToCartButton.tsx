@@ -5,6 +5,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/primitives/Button";
 import { LinkButton } from "@/components/primitives/Button";
 import { parseUsdPriceToCents, useCartStore, useCartUiStore } from "@/lib/cart-store";
+import { formatPriceLabelForDisplay } from "@/lib/commerce-pricing";
 import { getCheckoutHref } from "@/lib/shop";
 import { cn } from "@/lib/utils";
 
@@ -193,7 +194,13 @@ export function AddToCartButton({
                         <span className="mt-0.5 block text-xs text-text-muted">{entry.fulfillmentType.replace(/_/g, " ")}</span>
                       ) : null}
                     </span>
-                    <span className="font-display text-xl tracking-tight text-text">{entry.price}</span>
+                    <span className="font-display text-xl tracking-tight text-text">
+                      {formatPriceLabelForDisplay(entry.price, {
+                        fulfillmentType: entry.fulfillmentType,
+                        variantSlug: entry.slug,
+                        tierName: entry.tierName ?? entry.title,
+                      })}
+                    </span>
                   </button>
                 );
               })}

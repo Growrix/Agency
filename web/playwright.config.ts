@@ -15,7 +15,8 @@ export default defineConfig({
   webServer: {
     command: "node ./scripts/playwright-server.mjs",
     url: "http://127.0.0.1:5000",
-    reuseExistingServer: true,
+    // Default to an isolated server so CI/E2E does not hammer a live `npm run dev` instance on :5000.
+    reuseExistingServer: process.env.PW_REUSE_DEV_SERVER === "1",
     timeout: 120_000,
     env: {
       AGENCY_DATA_DIRECTORY: path.join(__dirname, ".data", "playwright"),

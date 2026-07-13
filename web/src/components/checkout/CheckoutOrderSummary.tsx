@@ -7,11 +7,16 @@ import type { PublicShopProductRecord } from "@/server/domain/catalog";
 import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCard";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
 import { CheckoutUpsellsCard } from "@/components/checkout/CheckoutUpsellsCard";
+import { QuotePricingPanel } from "@/components/checkout/QuotePricingPanel";
 import {
   formatCentsAsUsd,
   parsePriceStringToCents,
   resolveSelectedVariant,
 } from "@/components/checkout/checkout-utils";
+import {
+  formatPriceLabelForDisplay,
+  isQuoteBasedCommerceItem,
+} from "@/lib/commerce-pricing";
 import { Card } from "@/components/primitives/Card";
 
 type CheckoutOrderSummaryProps = {
@@ -37,13 +42,22 @@ export function CheckoutOrderSummary({
 }: CheckoutOrderSummaryProps) {
   const selectedVariant = resolveSelectedVariant(product, selection);
   const selectedPriceLabel = selectedVariant?.price ?? product.price;
-  const productCents = parsePriceStringToCents(selectedPriceLabel);
+  const pricingContext = {
+    fulfillmentType: selection.fulfillmentType ?? selectedVariant?.fulfillment_type,
+    variantSlug: selection.variantSlug ?? selectedVariant?.slug,
+    tierName: selection.tierName ?? selectedVariant?.tier_name,
+    priceLabel: selectedPriceLabel,
+  };
+  const isQuoteBased = isQuoteBasedCommerceItem(pricingContext);
+  const displayPriceLabel = formatPriceLabelForDisplay(selectedPriceLabel, pricingContext);
+  const productCents = isQuoteBased ? 0 : parsePriceStringToCents(selectedPriceLabel);
   const upsellsCents = upsells
     .filter((upsell) => selectedUpsells.has(upsell.title))
     .reduce((sum, upsell) => sum + parsePriceStringToCents(upsell.price), 0);
 
   const subtotalCents = productCents + upsellsCents;
   const totalCents = Math.max(0, subtotalCents - discountCents + taxCents);
+  const showFixedTotals = !isQuoteBased || subtotalCents > 0;
 
   return (
     <div className="space-y-4">
@@ -72,7 +86,7 @@ export function CheckoutOrderSummary({
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
               <p className="min-w-0 text-base font-semibold text-text">{product.name}</p>
-              <p className="shrink-0 font-display text-xl tracking-tight">{selectedPriceLabel}</p>
+              <p className="shrink-0 font-display text-xl tracking-tight">{displayPriceLabel}</p>
             </div>
             <p className="mt-1 text-xs text-text-muted">
               {product.category}
@@ -105,43 +119,49 @@ export function CheckoutOrderSummary({
 
         <p className="mt-4 text-xs leading-5 text-text-muted">{product.summary}</p>
 
-        <dl className="mt-5 space-y-2 border-t border-border/50 pt-4 text-sm">
-          <div className="flex items-center justify-between">
-            <dt className="text-text-muted">Subtotal</dt>
-            <dd className="tabular-nums">{formatCentsAsUsd(subtotalCents)}</dd>
-          </div>
-          {discountCents > 0 ? (
-            <div className="flex items-center justify-between">
-              <dt className="flex items-center gap-2 text-text-muted">
-                Discount
-                {discountCode ? (
-                  <span className="rounded-full bg-inset/40 px-2 py-0.5 text-[10px] font-mono text-text">
-                    {discountCode}
-                  </span>
-                ) : null}
-              </dt>
-              <dd className="tabular-nums text-success">
-                -{formatCentsAsUsd(discountCents)}
-              </dd>
-            </div>
-          ) : null}
-          <div className="flex items-center justify-between text-xs text-text-muted">
-            <dt>Tax</dt>
-            <dd className="tabular-nums">
-              {taxCents > 0 ? formatCentsAsUsd(taxCents) : "$0.00"}
-            </dd>
-          </div>
-        </dl>
+        {isQuoteBased ? <QuotePricingPanel className="mt-5" compact /> : null}
 
-        <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
-          <p className="font-display text-lg tracking-tight">Total</p>
-          <div className="flex items-baseline gap-2">
-            <span className="text-xs text-text-muted">USD</span>
-            <span className="font-display text-3xl tracking-tight text-text sm:text-4xl">
-              {formatCentsAsUsd(totalCents)}
-            </span>
-          </div>
-        </div>
+        {showFixedTotals ? (
+          <>
+            <dl className="mt-5 space-y-2 border-t border-border/50 pt-4 text-sm">
+              <div className="flex items-center justify-between">
+                <dt className="text-text-muted">Subtotal</dt>
+                <dd className="tabular-nums">{formatCentsAsUsd(subtotalCents)}</dd>
+              </div>
+              {discountCents > 0 ? (
+                <div className="flex items-center justify-between">
+                  <dt className="flex items-center gap-2 text-text-muted">
+                    Discount
+                    {discountCode ? (
+                      <span className="rounded-full bg-inset/40 px-2 py-0.5 text-[10px] font-mono text-text">
+                        {discountCode}
+                      </span>
+                    ) : null}
+                  </dt>
+                  <dd className="tabular-nums text-success">
+                    -{formatCentsAsUsd(discountCents)}
+                  </dd>
+                </div>
+              ) : null}
+              <div className="flex items-center justify-between text-xs text-text-muted">
+                <dt>Tax</dt>
+                <dd className="tabular-nums">
+                  {taxCents > 0 ? formatCentsAsUsd(taxCents) : "$0.00"}
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-4 flex items-baseline justify-between border-t border-border/50 pt-4">
+              <p className="font-display text-lg tracking-tight">Total</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-xs text-text-muted">USD</span>
+                <span className="font-display text-3xl tracking-tight text-text sm:text-4xl">
+                  {formatCentsAsUsd(totalCents)}
+                </span>
+              </div>
+            </div>
+          </>
+        ) : null}
       </Card>
 
       <CheckoutUpsellsCard

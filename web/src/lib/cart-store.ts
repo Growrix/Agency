@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { isQuoteBasedCommerceItem, parseFixedUsdPriceToCents } from "@/lib/commerce-pricing";
 
 export type CartItem = {
   product_slug: string;
@@ -21,6 +22,7 @@ type CartStoreState = {
 type CartStoreActions = {
   addItem: (item: CartItem) => void;
   removeItem: (productSlug: string, variantSlug?: string) => void;
+  removeProductItems: (productSlug: string) => void;
   updateQuantity: (productSlug: string, variantSlug: string | undefined, quantity: number) => void;
   clearCart: () => void;
   totalCents: () => number;
@@ -33,14 +35,51 @@ function getItemKey(item: Pick<CartItem, "product_slug" | "variant_slug">) {
   return `${item.product_slug}::${item.variant_slug ?? "base"}`;
 }
 
-export function parseUsdPriceToCents(value: string) {
-  const normalized = value.replace(/[^\d.]/g, "");
-  const parsed = Number(normalized);
-  if (!Number.isFinite(parsed)) {
-    return 0;
+function sanitizeCartItem(item: CartItem): CartItem {
+  if (
+    isQuoteBasedCommerceItem({
+      fulfillmentType: item.fulfillment_type,
+      variantSlug: item.variant_slug,
+      tierName: item.tier_name,
+    })
+  ) {
+    return { ...item, unit_price_cents: 0 };
   }
 
-  return Math.round(parsed * 100);
+  return item;
+}
+
+function createSafeLocalStorage() {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  return {
+    getItem: (name: string) => {
+      const value = window.localStorage.getItem(name);
+      if (!value) {
+        return null;
+      }
+
+      try {
+        JSON.parse(value);
+        return value;
+      } catch {
+        window.localStorage.removeItem(name);
+        return null;
+      }
+    },
+    setItem: (name: string, value: string) => {
+      window.localStorage.setItem(name, value);
+    },
+    removeItem: (name: string) => {
+      window.localStorage.removeItem(name);
+    },
+  };
+}
+
+export function parseUsdPriceToCents(value: string) {
+  return parseFixedUsdPriceToCents(value);
 }
 
 export function formatUsdFromCents(value: number) {
@@ -77,8 +116,19 @@ export const useCartStore = create<CartStore>()(
       items: [],
       addItem: (item) =>
         set((state) => {
-          const nextQuantity = Number.isFinite(item.quantity) ? Math.max(1, Math.floor(item.quantity)) : 1;
-          const key = getItemKey(item);
+          const quoteItem = isQuoteBasedCommerceItem({
+            fulfillmentType: item.fulfillment_type,
+            variantSlug: item.variant_slug,
+            tierName: item.tier_name,
+          });
+          const normalizedItem = {
+            ...item,
+            unit_price_cents: quoteItem ? 0 : item.unit_price_cents,
+          };
+          const nextQuantity = Number.isFinite(normalizedItem.quantity)
+            ? Math.max(1, Math.floor(normalizedItem.quantity))
+            : 1;
+          const key = getItemKey(normalizedItem);
           const existing = state.items.find((entry) => getItemKey(entry) === key);
 
           if (!existing) {
@@ -86,7 +136,7 @@ export const useCartStore = create<CartStore>()(
               items: [
                 ...state.items,
                 {
-                  ...item,
+                  ...normalizedItem,
                   quantity: nextQuantity,
                 },
               ],
@@ -107,6 +157,10 @@ export const useCartStore = create<CartStore>()(
       removeItem: (productSlug, variantSlug) =>
         set((state) => ({
           items: state.items.filter((entry) => !(entry.product_slug === productSlug && (entry.variant_slug ?? "") === (variantSlug ?? ""))),
+        })),
+      removeProductItems: (productSlug) =>
+        set((state) => ({
+          items: state.items.filter((entry) => entry.product_slug !== productSlug),
         })),
       updateQuantity: (productSlug, variantSlug, quantity) =>
         set((state) => {
@@ -129,14 +183,34 @@ export const useCartStore = create<CartStore>()(
           };
         }),
       clearCart: () => set({ items: [] }),
-      totalCents: () => get().items.reduce((sum, item) => sum + item.unit_price_cents * item.quantity, 0),
+      totalCents: () =>
+        get().items.reduce((sum, item) => {
+          if (
+            isQuoteBasedCommerceItem({
+              fulfillmentType: item.fulfillment_type,
+              variantSlug: item.variant_slug,
+              tierName: item.tier_name,
+            })
+          ) {
+            return sum;
+          }
+
+          return sum + item.unit_price_cents * item.quantity;
+        }, 0),
       itemCount: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
     }),
     {
       name: "growrix-cart",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => createSafeLocalStorage() ?? localStorage),
       skipHydration: true,
       partialize: (state) => ({ items: state.items }),
+      onRehydrateStorage: () => (state) => {
+        if (!state?.items?.length) {
+          return;
+        }
+
+        state.items = state.items.map(sanitizeCartItem);
+      },
     }
   )
 );
@@ -177,7 +251,7 @@ function localToServerInput(item: CartItem) {
 }
 
 function serverToLocalItem(item: ServerCartItem): CartItem {
-  return {
+  return sanitizeCartItem({
     product_slug: item.product_slug,
     product_name: item.product_name,
     variant_slug: item.product_variant_slug ?? undefined,
@@ -185,7 +259,7 @@ function serverToLocalItem(item: ServerCartItem): CartItem {
     fulfillment_type: item.fulfillment_type ?? undefined,
     quantity: item.quantity,
     unit_price_cents: item.unit_price_cents,
-  };
+  });
 }
 
 async function fetchServerCart(): Promise<ServerCartFetchResult> {
