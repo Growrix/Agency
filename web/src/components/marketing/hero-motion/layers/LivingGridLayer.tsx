@@ -7,14 +7,16 @@ import { useHeroMotionOptional } from "../HeroMotionContext";
 export function LivingGridLayer() {
   const gridRef = useRef<HTMLDivElement>(null);
   const motion = useHeroMotionOptional();
+  const tier = motion?.tier ?? "full";
+  const registerLoadTarget = motion?.registerLoadTarget;
 
   useEffect(() => {
     const grid = gridRef.current;
-    if (!grid || motion?.tier === "reduced") {
+    if (!grid || tier === "reduced") {
       return;
     }
 
-    motion?.registerLoadTarget("grid", grid);
+    registerLoadTarget?.("grid", grid);
 
     let cancelled = false;
 
@@ -26,7 +28,7 @@ export function LivingGridLayer() {
 
       gsap.set(grid, { opacity: 0, scale: 0.98 });
       gsap.to(grid, {
-        opacity: motion?.tier === "mobile" ? 0.4 : 0.2,
+        opacity: tier === "mobile" ? 0.4 : 0.2,
         scale: 1,
         duration: 0.9,
         delay: HERO_LOAD_SEQUENCE.grid,
@@ -38,9 +40,9 @@ export function LivingGridLayer() {
     return () => {
       cancelled = true;
     };
-  }, [motion]);
+  }, [registerLoadTarget, tier]);
 
-  if (motion?.tier === "reduced") {
+  if (tier === "reduced") {
     return <div className="pointer-events-none absolute inset-0 bg-grid opacity-40 lg:opacity-20" aria-hidden />;
   }
 

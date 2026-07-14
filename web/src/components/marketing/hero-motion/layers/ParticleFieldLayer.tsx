@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { HERO_LOAD_SEQUENCE, HERO_PARTICLE_COUNTS } from "../hero-motion-config";
+import { sendDebugLog } from "@/lib/debug-log";
 import { useHeroMotionOptional } from "../HeroMotionContext";
 
 const ThreeParticleCanvas = dynamic(
@@ -14,6 +15,7 @@ function Canvas2DParticles({ count }: { count: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const motion = useHeroMotionOptional();
   const containerRef = useRef<HTMLDivElement>(null);
+  const tier = motion?.tier ?? "full";
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -26,6 +28,9 @@ function Canvas2DParticles({ count }: { count: number }) {
     if (!ctx) {
       return;
     }
+    // #region agent log
+    sendDebugLog("Canvas2DParticles.tsx:27", "Canvas2DParticles effect run", { count, tier }, "B");
+    // #endregion
 
     let width = 0;
     let height = 0;
@@ -74,7 +79,9 @@ function Canvas2DParticles({ count }: { count: number }) {
 
     const tick = () => {
       if (visible && width > 0 && height > 0) {
-        scrollBoost = 1 + (motion?.scrollProgress ?? 0) * 0.5;
+        const section = container.closest(".hero-section") as HTMLElement | null;
+        const scrollProgress = Number.parseFloat(section?.style.getPropertyValue("--hero-scroll-progress") || "0");
+        scrollBoost = 1 + scrollProgress * 0.5;
         ctx.clearRect(0, 0, width, height);
 
         for (const p of particles) {
@@ -83,7 +90,7 @@ function Canvas2DParticles({ count }: { count: number }) {
           const dx = pointer.x * width - px;
           const dy = pointer.y * height - py;
           const dist = Math.hypot(dx, dy);
-          if (dist < 120 && motion?.tier === "full") {
+          if (dist < 120 && tier === "full") {
             p.vx -= (dx / dist) * 0.00008;
             p.vy -= (dy / dist) * 0.00008;
           }
@@ -119,7 +126,7 @@ function Canvas2DParticles({ count }: { count: number }) {
       container.removeEventListener("pointermove", onPointerMove);
       observer.disconnect();
     };
-  }, [count, motion?.scrollProgress, motion?.tier]);
+  }, [count, tier]);
 
   return (
     <div ref={containerRef} className="hero-ambient__particles-canvas">
@@ -129,18 +136,23 @@ function Canvas2DParticles({ count }: { count: number }) {
 }
 
 export function ParticleFieldLayer() {
+  // #region agent log
+  const motionForLog = useHeroMotionOptional();
+  sendDebugLog("ParticleFieldLayer.tsx:131", "ParticleFieldLayer render", { tier: motionForLog?.tier ?? null, count: HERO_PARTICLE_COUNTS[motionForLog?.tier ?? "full"] }, "A");
+  // #endregion
   const wrapperRef = useRef<HTMLDivElement>(null);
   const motion = useHeroMotionOptional();
   const [ready, setReady] = useState(false);
   const tier = motion?.tier ?? "full";
   const count = HERO_PARTICLE_COUNTS[tier];
+  const registerLoadTarget = motion?.registerLoadTarget;
 
   useEffect(() => {
     if (tier === "reduced" || count === 0) {
       return;
     }
 
-    motion?.registerLoadTarget("particles", wrapperRef.current);
+    registerLoadTarget?.("particles", wrapperRef.current);
 
     const idle = window.requestIdleCallback ?? ((cb: IdleRequestCallback) => window.setTimeout(cb, 1));
     const id = idle(() => setReady(true));
@@ -148,7 +160,7 @@ export function ParticleFieldLayer() {
       const cancel = window.cancelIdleCallback ?? clearTimeout;
       cancel(id);
     };
-  }, [count, motion, tier]);
+  }, [count, registerLoadTarget, tier]);
 
   useEffect(() => {
     if (!wrapperRef.current || tier === "reduced" || count === 0) {

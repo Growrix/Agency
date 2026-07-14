@@ -10,14 +10,16 @@ export function GradientMeshLayer() {
   const blob2Ref = useRef<HTMLDivElement>(null);
   const blob3Ref = useRef<HTMLDivElement>(null);
   const motion = useHeroMotionOptional();
+  const tier = motion?.tier ?? "full";
+  const registerLoadTarget = motion?.registerLoadTarget;
 
   useEffect(() => {
     const mesh = meshRef.current;
-    if (!mesh || motion?.tier === "reduced") {
+    if (!mesh || tier === "reduced") {
       return;
     }
 
-    motion?.registerLoadTarget("background", mesh);
+    registerLoadTarget?.("background", mesh);
 
     let cancelled = false;
 
@@ -53,9 +55,9 @@ export function GradientMeshLayer() {
     return () => {
       cancelled = true;
     };
-  }, [motion]);
+  }, [registerLoadTarget, tier]);
 
-  if (motion?.tier === "reduced") {
+  if (tier === "reduced") {
     return null;
   }
 

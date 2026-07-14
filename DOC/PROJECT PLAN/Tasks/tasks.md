@@ -576,3 +576,30 @@ Remaining parallel tracks:
 - [ ] T121 Frontend implementation plan execution for public header/footer integration, modal-first settings/detail flows, and route fallbacks across `/dashboard/**`.
 - [ ] T122 Backend + API/data implementation plan execution for profile/preferences, notification feed, support-thread history, appointment action flows, and detail endpoints.
 - [ ] T123 Security/QA implementation planning and release-gate definition for customer dashboard ownership, privacy, and authenticated end-to-end flows.
+
+### 2026-07-14 — Homepage mobile scroll fumble investigation (REPAIR)
+- **Status:** root cause confirmed, targeted fix implemented, full release-gate validation passing.
+- **Root cause:** `scrollProgress` was held in React state inside `HomeHeroMotionRoot`. On every scroll frame the GSAP ScrollTrigger `onUpdate` called `setScrollProgress`, which (1) re-rendered the entire hero tree and (2) caused `useHeroScrollTransform` to tear down and recreate the ScrollTrigger. The particle canvas layers also read `motion.scrollProgress` inside `useEffect` dependency arrays, so the canvas context/animation loop was destroyed and recreated on every scroll frame.
+- **Fix:**
+  - Replaced the `scrollProgress` React state with a stable `useRef` plus a `useCallback` setter that only writes to the CSS variable `--hero-scroll-progress` on the hero section.
+  - Removed `scrollProgress` from `HeroMotionContext` so the context value no longer changes on scroll.
+  - Changed `useHeroScrollTransform` to depend on the stable setter instead of the `motion` object, stopping ScrollTrigger teardown/recreation.
+  - Updated `Canvas2DParticles` and `ThreeParticleCanvas` to read `scrollProgress` from the CSS variable inside their `requestAnimationFrame` ticks, removing it from `useEffect` dependencies.
+  - Stabilized `useEffect` dependency arrays in ambient layers (`GradientMeshLayer`, `LivingGridLayer`, `EnergyWaveLayer`, `ParticleFieldLayer`) to use `tier` and `registerLoadTarget` instead of the whole `motion` object.
+  - Switched Google Fonts to self-hosted `next/font/local` files using `@fontsource/*` packages to eliminate the build-time Google Fonts fetch that was failing in this environment.
+- **Files changed:**
+  - `web/src/components/marketing/hero-motion/HeroMotionContext.tsx`
+  - `web/src/components/marketing/hero-motion/HomeHeroMotionRoot.tsx`
+  - `web/src/components/marketing/hero-motion/hooks/useHeroScrollTransform.ts`
+  - `web/src/components/marketing/hero-motion/layers/ParticleFieldLayer.tsx`
+  - `web/src/components/marketing/hero-motion/layers/ThreeParticleCanvas.tsx`
+  - `web/src/components/marketing/hero-motion/layers/GradientMeshLayer.tsx`
+  - `web/src/components/marketing/hero-motion/layers/LivingGridLayer.tsx`
+  - `web/src/components/marketing/hero-motion/layers/EnergyWaveLayer.tsx`
+  - `web/src/app/layout.tsx` (self-hosted fonts)
+  - `web/src/app/fonts/*` (5 font files)
+  - `web/package.json` (added `@fontsource/*` packages)
+- **Verification:**
+  - Pre-fix Playwright scroll reproduction showed `Canvas2DParticles` effect re-initializing and `useHeroScrollTransform` effect restarting on scroll.
+  - Post-fix reproduction shows `scrollProgress update` events from GSAP but **no additional canvas effect runs** during/after the scroll and **no repeated ScrollTrigger teardown/recreation**.
+  - `npm run health:check` exit 0 (lint, typecheck, perf budgets, unit/integration tests, production build, 15 release-gate Playwright tests).

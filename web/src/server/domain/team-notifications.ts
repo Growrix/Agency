@@ -2,6 +2,7 @@ import "server-only";
 
 import { Resend } from "resend";
 import { getRuntimeConfig } from "@/server/config/runtime";
+import { getTransactionalFromEmail, resolveTransactionalFromEmail } from "@/server/domain/email-layout";
 import type { NotificationKind } from "@/server/data/schema";
 import { dispatchNotification } from "@/server/domain/notifications";
 import { recordAuditLog } from "@/server/logging/observability";
@@ -35,7 +36,8 @@ async function withTimeout<T>(promise: Promise<T>, ms: number, fallback: T): Pro
 
 async function sendTeamEmail(input: NotifyTeamInput): Promise<{ delivered: boolean; fallbackUsed: boolean }> {
   const runtime = getRuntimeConfig();
-  if (!runtime.contact.resendApiKey || runtime.contact.toEmails.length === 0 || !runtime.contact.fromEmail) {
+  const fromEmail = getTransactionalFromEmail();
+  if (!runtime.contact.resendApiKey || runtime.contact.toEmails.length === 0 || !fromEmail) {
     return { delivered: false, fallbackUsed: false };
   }
 
@@ -52,18 +54,19 @@ async function sendTeamEmail(input: NotifyTeamInput): Promise<{ delivered: boole
 
   const send = await resend.emails.send({
     ...base,
-    from: runtime.contact.fromEmail,
+    from: fromEmail,
   });
 
   if (!send.error) {
     return { delivered: true, fallbackUsed: false };
   }
 
+  const fallbackFrom = resolveTransactionalFromEmail(undefined, runtime.contact.fallbackFromEmail);
   const retry = await resend.emails.send({
     ...base,
-    from: runtime.contact.fallbackFromEmail,
+    from: fallbackFrom ?? runtime.contact.fallbackFromEmail,
     headers: {
-      "X-Original-From": runtime.contact.fromEmail,
+      "X-Original-From": fromEmail,
     },
   });
 

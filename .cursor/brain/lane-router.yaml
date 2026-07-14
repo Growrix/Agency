@@ -2,7 +2,7 @@ version: 1
 purpose: >-
   Machine-readable lane router for Agent Brain. Agents read this first to resolve
   brain file, execution ledger, quality gates, and primary skill/agent for a path prefix.
-last_updated: 2026-06-26
+last_updated: 2026-07-14
 
 context_recovery_order:
   - .cursor/brain/lane-router.yaml
@@ -22,10 +22,12 @@ lanes:
     primary_agents:
       - senior-saas-developer
       - senior-frontend-specialist
+      - Technical_SEO_expert
     primary_skills:
       - senior-saas-developer
       - senior-frontend-specialist
       - clerk-nextjs-auth
+      - technical-seo
     phase_end_gate_agent: frontend-quality-enforcer
     verify_command: npm run health:check
     verify_cwd: web/
@@ -42,9 +44,11 @@ lanes:
       - frontend-architect
       - design-system-architect
       - frontend-content-strategist
+      - Technical_SEO_expert
     primary_skills:
       - html-website-builder
       - frontend-content-strategist
+      - technical-seo
     phase_end_gate_agent: frontend-quality-enforcer
     verify_skill: .cursor/skills/html-website-builder/SKILL.md
     commands:
@@ -60,9 +64,11 @@ lanes:
       - nextjs-migration-architect
       - senior-frontend-specialist
       - tailwind-design-system-architect
+      - Technical_SEO_expert
     primary_skills:
       - nextjs-site-migrator
       - senior-frontend-specialist
+      - technical-seo
     phase_end_gate_agent: frontend-quality-enforcer
     verify_command: pnpm build
     commands:
@@ -186,6 +192,7 @@ intent_routing:
   frontend_build: senior-frontend-specialist
   framework_conversion: frontend-system-architect
   copy_seo_content: frontend-content-strategist
+  technical_seo: technical-seo
   phase_gate: frontend-quality-enforcer
   html_template: frontend-architect
   nextjs_migration: nextjs-migration-architect

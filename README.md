@@ -72,7 +72,7 @@ That works because the root `postinstall` script installs `web/` dependencies an
 
 ## Environment Setup
 
-Copy values from `.env.example` into Vercel project environment variables before deployment. The current frontend can deploy without backend secrets, but the public site URL should be set.
+Copy values from `.env.example` into Vercel project environment variables before deployment. Ensure `NEXT_PUBLIC_SITE_URL` is set to your production domain (e.g., `https://www.growrixos.com`) for correct link generation in emails and other outbound communications.
 
 For the live Google review sections, also set:
 

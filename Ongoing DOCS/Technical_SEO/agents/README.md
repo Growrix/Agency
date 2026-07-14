@@ -62,8 +62,11 @@ The agent must follow the parent Technical SEO handbook before making recommenda
 
 This framework is active in the current project through thin selectable adapters:
 
-- VS Code Copilot: `.github/agents/technical-seo-architect.agent.md`
-- Cursor: `.cursor/agents/technical-seo-architect.md`
+- VS Code Copilot: `.github/agents/Technical_SEO_expert.agent.md`
+- Cursor: `.cursor/agents/Technical_SEO_expert.md`
+- Personal skill: `~/.cursor/skills/technical-seo/` (`@technical-seo`)
+
+**Deprecated:** `technical-seo-architect` — merged into `Technical_SEO_expert`.
 
 For future projects, copy the relevant adapter file and the `Ongoing DOCS/Technical_SEO` handbook folder. See `platform-installation.md`.
 

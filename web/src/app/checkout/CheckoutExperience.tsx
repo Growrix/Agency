@@ -514,17 +514,6 @@ export function CheckoutExperience({ product, status, orderId, selection }: Chec
     }
   };
 
-  if (status === "success") {
-    return (
-      <div className="space-y-4">
-        <CheckoutSteps active="confirmation" hrefOverrides={stepHrefOverrides} />
-        <div className="rounded-md border border-success/20 bg-success/5 p-5 text-sm leading-6 text-text-muted">
-          Order confirmed successfully. {selectedTierLabel ? `Tier: ${selectedTierLabel}. ` : ""}
-          {orderId ? `Order reference: ${orderId}. ` : ""}Our team will contact you with fulfillment updates.
-        </div>
-      </div>
-    );
-  }
 
   if (status === "cancelled") {
     return (

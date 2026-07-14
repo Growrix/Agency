@@ -40,9 +40,6 @@ export default async function PaymentPage({ searchParams }: PaymentPageProps) {
   const checkoutUrl = firstString(resolved?.checkout);
   const status = firstString(resolved?.status);
 
-  if (status === "success") {
-    redirect(orderId ? `/success?order=${encodeURIComponent(orderId)}` : "/success");
-  }
 
   const order = orderId ? await getOrderById(orderId).catch(() => null) : null;
 

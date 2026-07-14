@@ -261,3 +261,20 @@ Actually I am bit scattered about building handbooks and also not planned well h
 3. DOC
 ------------------------------------------------
 
+There are few dashboard pages needs to be redesigned as per the design system we have, now it seems like it did not follow the DS properly and also did not follow the styles and patters as well. Mandatory rules to follow even for the mobile version as well. Understand the existing DS and styles and patterns. stay concistent. you should redesing the following :
+
+1. https://www.growrixos.com/dashboard/products > The product section cards needs to redesing and also the fonts should follow the same sizing as the site followed. 
+2. https://www.growrixos.com/dashboard/orders > The order cards needs to redesign as well. and also the hero cards , soe amounts are overflowing the cards. so fix them too.
+3. https://www.growrixos.com/dashboard/appointments > just has overall size issues in texts/icons. just adjust as per required. 
+4. https://www.growrixos.com/dashboard/submissions > same issue as per the 3. 
+5. https://www.growrixos.com/dashboard/account > needs to adjust the sizing and design for the mobile version well. 
+
+*** overall the user Dashboard needs to recheck the UI for desktop and mobile version both. 
+
+-----------------------------------------------------
+
+There are few issues seems in the checkout page. 
+
+1. After placing order it is not popup the confirmation modal. 
+2. THe invoice HTML has issues > the logo is not visible , and also the CTA "Open order dashboard" redirects to the localhost link , not the main domain www.growrixos.com/dashboard. same with the bottom hyperlink - visit website (www.growrixos.com) . you need to fix this issues first. 
+3. same issues with the cancellation email as well. the CTA and hyperlinks are using localhost link, which is not correct. lets fix this issues as well. 

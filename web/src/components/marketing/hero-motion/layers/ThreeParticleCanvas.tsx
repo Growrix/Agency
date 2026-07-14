@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useHeroMotionOptional } from "../HeroMotionContext";
 
 type ThreeParticleCanvasProps = {
   count: number;
@@ -10,7 +9,6 @@ type ThreeParticleCanvasProps = {
 export function ThreeParticleCanvas({ count }: ThreeParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const motion = useHeroMotionOptional();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -71,17 +69,16 @@ export function ThreeParticleCanvas({ count }: ThreeParticleCanvasProps) {
       );
       observer.observe(container);
 
+      const section = (container.closest(".hero-section") ?? container) as HTMLElement;
+
       const tick = () => {
         if (visible && renderer) {
-          const scrollBoost = 1 + (motion?.scrollProgress ?? 0) * 0.5;
+          const scrollProgress = Number.parseFloat(section.style.getPropertyValue("--hero-scroll-progress") || "0");
+          const scrollBoost = 1 + scrollProgress * 0.5;
           points.rotation.y += 0.0004 * scrollBoost;
           points.rotation.x += 0.0002 * scrollBoost;
-          const px = Number.parseFloat(
-            getComputedStyle(container.closest(".hero-section") ?? container).getPropertyValue("--hero-px") || "0",
-          );
-          const py = Number.parseFloat(
-            getComputedStyle(container.closest(".hero-section") ?? container).getPropertyValue("--hero-py") || "0",
-          );
+          const px = Number.parseFloat(section.style.getPropertyValue("--hero-px") || "0");
+          const py = Number.parseFloat(section.style.getPropertyValue("--hero-py") || "0");
           points.position.x = px * 0.15;
           points.position.y = -py * 0.1;
           renderer.render(scene, camera);
@@ -123,7 +120,7 @@ export function ThreeParticleCanvas({ count }: ThreeParticleCanvasProps) {
       cleanup?.();
       renderer?.dispose();
     };
-  }, [count, motion?.scrollProgress]);
+  }, [count]);
 
   return (
     <div ref={containerRef} className="hero-ambient__particles-canvas">
