@@ -33,6 +33,14 @@ import {
   DashboardProductCard,
 } from "@/components/dashboard/DashboardRecordCards";
 import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
+import {
+  DASHBOARD_CARD_META_CLASS,
+  DASHBOARD_CARD_TITLE_CLASS,
+  DASHBOARD_EYEBROW_CLASS,
+  DASHBOARD_PAGE_LEAD_CLASS,
+  DASHBOARD_SECTION_HEADING_CLASS,
+} from "@/lib/dashboard-typography";
+import { cn } from "@/lib/utils";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 
@@ -899,27 +907,34 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   function renderSupport() {
     return (
       <div className="space-y-4">
-        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
-          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
-          <div className="relative">
-            <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
-            <p className="mt-3 text-base text-text-muted">Send a product or service request and get help from our team.</p>
-          </div>
-        </section>
+        <DashboardHeroBand
+          eyebrow="Support"
+          title={
+            <>
+              Welcome back, <span className="text-primary">{fullName}</span>
+            </>
+          }
+          description="Send a product or service request and get help from our team."
+          stats={[
+            { label: "Your products", value: purchasedProducts.length, icon: <CubeIcon className="size-5" /> },
+            { label: "Orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
+            { label: "Appointments", value: appointments.length, icon: <CalendarDaysIcon className="size-5" /> },
+            { label: "Downloads", value: downloads.length, icon: <ArrowDownTrayIcon className="size-5" /> },
+          ]}
+        />
 
         <section className="grid gap-4 xl:grid-cols-[1.12fr_0.88fr]">
-          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-5" hoverable={false}>
-            <p className="text-xs uppercase tracking-[0.18em] text-primary">Support request</p>
-            <h2 className="mt-3 font-display text-5xl tracking-tight">Send a request to the team</h2>
-            <p className="mt-3 text-base leading-7 text-text-muted">
-              This creates a tracked service request tied to your account and our team can follow up from the same conversation.
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4 sm:p-5" hoverable={false}>
+            <p className={DASHBOARD_EYEBROW_CLASS}>Support request</p>
+            <h2 className={cn(DASHBOARD_SECTION_HEADING_CLASS, "mt-2")}>Send a request to the team</h2>
+            <p className={cn(DASHBOARD_PAGE_LEAD_CLASS, "max-w-2xl")}>
+              This creates a tracked service request tied to your account. Our team can follow up from the same conversation.
             </p>
 
-            <form onSubmit={handleSupportSubmit} className="mt-7 space-y-4">
+            <form onSubmit={handleSupportSubmit} className="mt-5 space-y-4 sm:mt-6">
               <label className="block">
                 <span className="text-xs uppercase tracking-[0.18em] text-text-muted">Request category</span>
-                <select name="product_slug" className="signal-input mt-1.5">
+                <select name="product_slug" className="signal-input mt-1.5 w-full text-sm">
                   <option value="">General support</option>
                   {purchasedProducts.map((product) => (
                     <option key={product.slug} value={product.slug}>{product.name}</option>
@@ -933,7 +948,7 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                   name="subject"
                   required
                   minLength={6}
-                  className="signal-input mt-1.5"
+                  className="signal-input mt-1.5 w-full text-sm"
                   placeholder="Enter a short summary of your request"
                 />
               </label>
@@ -944,18 +959,18 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                   name="details"
                   required
                   minLength={20}
-                  rows={6}
-                  className="signal-input mt-1.5 min-h-36 resize-y py-3"
+                  rows={5}
+                  className="signal-input mt-1.5 min-h-32 w-full resize-y py-3 text-sm sm:min-h-36"
                   placeholder="Describe the issue, request, delivery or customization help you need..."
                 />
               </label>
 
-              <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-text-muted">
-                <button type="button" className="inline-flex items-center gap-2 text-text-muted hover:text-text">
-                  <PaperClipIcon className="size-4" />
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-text-muted sm:text-sm">
+                <button type="button" className="inline-flex items-center gap-2 text-text-muted transition-colors hover:text-text">
+                  <PaperClipIcon className="size-4 shrink-0" />
                   Add attachment (optional)
                 </button>
-                <span>0 / 5 files • Max 10MB each</span>
+                <span className="text-right">0 / 5 files · Max 10MB each</span>
               </div>
 
               {supportMessage ? (
@@ -964,61 +979,72 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                 </p>
               ) : null}
 
-              <Button type="submit" disabled={supportStatus === "submitting"}>
+              <Button type="submit" disabled={supportStatus === "submitting"} className="w-full sm:w-auto">
                 {supportStatus === "submitting" ? "Sending..." : "Send request"}
                 <ArrowRightIcon className="ml-1 size-4" />
               </Button>
             </form>
           </Card>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
-              <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Fast paths</p>
-              <div className="mt-4 space-y-2.5">
+              <p className={DASHBOARD_EYEBROW_CLASS}>Fast paths</p>
+              <div className="mt-3 space-y-2 sm:mt-4">
                 {[
-                  { href: "/live-chat", title: "Open live chat", hint: "Instant help from our support team", icon: <ChatBubbleLeftRightIcon className="size-5" /> },
-                  { href: "/contact", title: "Contact the team", hint: "Reach out to our support specialists", icon: <LifebuoyIcon className="size-5" /> },
-                  { href: "/book-appointment", title: "Book another session", hint: "Schedule a call or meeting", icon: <CalendarDaysIcon className="size-5" /> },
+                  { href: "/live-chat", title: "Open live chat", hint: "Instant help from our support team", icon: <ChatBubbleLeftRightIcon className="size-4" /> },
+                  { href: "/contact", title: "Contact the team", hint: "Reach out to our support specialists", icon: <LifebuoyIcon className="size-4" /> },
+                  { href: "/book-appointment", title: "Book another session", hint: "Schedule a call or meeting", icon: <CalendarDaysIcon className="size-4" /> },
                 ].map((item) => (
-                  <Link key={item.title} href={item.href} className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3.5 py-3 transition-colors hover:border-primary/35">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">{item.icon}</span>
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3 py-2.5 transition-colors hover:border-primary/35 sm:px-3.5 sm:py-3"
+                  >
+                    <span className="dashboard-record-icon text-primary [&_svg]:size-4">{item.icon}</span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-base font-semibold text-text">{item.title}</p>
-                      <p className="truncate text-sm text-text-muted">{item.hint}</p>
+                      <p className={DASHBOARD_CARD_TITLE_CLASS}>{item.title}</p>
+                      <p className={cn(DASHBOARD_CARD_META_CLASS, "truncate")}>{item.hint}</p>
                     </div>
-                    <ChevronRightIcon className="size-5 text-text-muted" />
+                    <ChevronRightIcon className="size-4 shrink-0 text-text-muted" />
                   </Link>
                 ))}
               </div>
             </Card>
 
             <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
-              <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Support hours</p>
-              <div className="mt-4 flex items-center gap-3">
-                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-primary/25 bg-primary/12 text-primary"><ClockIcon className="size-7" /></span>
-                <div>
-                  <p className="text-base text-text-muted">We&apos;re available</p>
-                  <p className="text-3xl font-semibold tracking-tight text-text">Mon - Fri, 9:00 AM - 6:00 PM (UTC)</p>
-                  <p className="text-sm text-text-muted">Average response time: 2h 14m</p>
+              <p className={DASHBOARD_EYEBROW_CLASS}>Support hours</p>
+              <div className="mt-3 flex items-start gap-3 sm:mt-4">
+                <span className="dashboard-record-icon shrink-0 text-primary">
+                  <ClockIcon className="size-5" aria-hidden />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm text-text-muted">We&apos;re available</p>
+                  <p className={cn(DASHBOARD_SECTION_HEADING_CLASS, "mt-1 text-base sm:text-lg")}>
+                    Mon – Fri, 9:00 AM – 6:00 PM (UTC)
+                  </p>
+                  <p className={cn(DASHBOARD_CARD_META_CLASS, "mt-1")}>Average response time: 2h 14m</p>
                 </div>
               </div>
             </Card>
 
             <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4" hoverable={false}>
-              <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Helpful resources</p>
-              <div className="mt-4 space-y-2.5">
+              <p className={DASHBOARD_EYEBROW_CLASS}>Helpful resources</p>
+              <div className="mt-3 space-y-2 sm:mt-4">
                 {[
-                  { title: "Knowledge base", hint: "Browse articles and guides", icon: <BookOpenIcon className="size-5" /> },
-                  { title: "Video tutorials", hint: "Step-by-step walkthroughs", icon: <PlayIcon className="size-5" /> },
-                  { title: "System status", hint: "Check our system health", icon: <ServerStackIcon className="size-5" /> },
+                  { title: "Knowledge base", hint: "Browse articles and guides", icon: <BookOpenIcon className="size-4" /> },
+                  { title: "Video tutorials", hint: "Step-by-step walkthroughs", icon: <PlayIcon className="size-4" /> },
+                  { title: "System status", hint: "Check our system health", icon: <ServerStackIcon className="size-4" /> },
                 ].map((item) => (
-                  <div key={item.title} className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3.5 py-3">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-primary/25 bg-primary/12 text-primary">{item.icon}</span>
-                    <div className="flex-1">
-                      <p className="text-base text-text">{item.title}</p>
-                      <p className="text-sm text-text-muted">{item.hint}</p>
+                  <div
+                    key={item.title}
+                    className="flex items-center gap-3 rounded-sm border border-border/60 bg-surface/25 px-3 py-2.5 sm:px-3.5 sm:py-3"
+                  >
+                    <span className="dashboard-record-icon text-primary [&_svg]:size-4">{item.icon}</span>
+                    <div className="min-w-0 flex-1">
+                      <p className={DASHBOARD_CARD_TITLE_CLASS}>{item.title}</p>
+                      <p className={DASHBOARD_CARD_META_CLASS}>{item.hint}</p>
                     </div>
-                    <ChevronRightIcon className="size-5 text-text-muted" />
+                    <ChevronRightIcon className="size-4 shrink-0 text-text-muted" aria-hidden />
                   </div>
                 ))}
               </div>
