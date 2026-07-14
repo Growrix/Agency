@@ -10,16 +10,19 @@ import {
 } from "@/server/domain/email-layout";
 
 describe("email layout", () => {
-  const originalEnv = process.env;
+  const env = process.env as Record<string, string | undefined>;
+  const originalNodeEnv = env.NODE_ENV;
+  const originalSiteUrl = env.NEXT_PUBLIC_SITE_URL;
 
   afterEach(() => {
-    process.env = originalEnv;
+    env.NODE_ENV = originalNodeEnv;
+    env.NEXT_PUBLIC_SITE_URL = originalSiteUrl;
     resetRuntimeConfigForTests();
   });
 
   it("uses production domain in branded footer links when env is unset", () => {
-    Object.defineProperty(process.env, "NODE_ENV", { value: "production" });
-    delete process.env.NEXT_PUBLIC_SITE_URL;
+    env.NODE_ENV = "production";
+    delete env.NEXT_PUBLIC_SITE_URL;
     resetRuntimeConfigForTests();
 
     const html = buildBrandedEmailHtml({
@@ -30,6 +33,7 @@ describe("email layout", () => {
     assert.match(html, /href="https:\/\/www\.growrixos\.com"/);
     assert.doesNotMatch(html, /localhost/);
   });
+
   it("normalizes sender display name to Growrix OS", () => {
     assert.equal(resolveTransactionalFromEmail("Growrix <hello@growrixos.com>"), "Growrix OS <hello@growrixos.com>");
     assert.equal(resolveTransactionalFromEmail("hello@growrixos.com"), "Growrix OS <hello@growrixos.com>");

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import {
   ArrowLeftIcon,
   ArrowUpRightIcon,
@@ -38,8 +37,6 @@ export default async function PaymentPage({ searchParams }: PaymentPageProps) {
   const resolved = searchParams ? await searchParams : undefined;
   const orderId = firstString(resolved?.order);
   const checkoutUrl = firstString(resolved?.checkout);
-  const status = firstString(resolved?.status);
-
 
   const order = orderId ? await getOrderById(orderId).catch(() => null) : null;
 
