@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 import { ApiError, createRequestContext, errorResponse, successResponse } from "@/server/core/api";
 import { requireCompletedSubscriber } from "@/server/auth/guards";
 import { canAccessOrderByUser, getOrderById, updateOrderOperations } from "@/server/domain/orders";
+import { safeSendOrderCancellationEmail } from "@/server/domain/commerce-emails";
+import { createCustomerNotification } from "@/server/domain/customer-notifications";
 import { recordAuditLog } from "@/server/logging/observability";
 
 export const dynamic = "force-dynamic";
@@ -113,6 +115,19 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
     if (!updatedOrder) {
       throw new ApiError("NOT_FOUND", 404, "Order not found.");
+    }
+
+    if (cancel) {
+      await safeSendOrderCancellationEmail(updatedOrder);
+      await createCustomerNotification({
+        userEmail: updatedOrder.customer_email,
+        kind: "submission_status",
+        title: `Order cancelled: ${updatedOrder.order_number}`,
+        body:
+          "Your order was cancelled as requested. Browse our digital products or consult with our team if you'd like help choosing the right next step.",
+        href: `/dashboard/orders/${updatedOrder.id}`,
+        relatedOrderId: updatedOrder.id,
+      }).catch(() => undefined);
     }
 
     await recordAuditLog({

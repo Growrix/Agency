@@ -1047,7 +1047,8 @@ export async function refundOrder(
       userEmail: refundedOrder.customer_email,
       kind: "order_completed",
       title: `Refund issued for ${refundedOrder.order_number}`,
-      body: `Your refund has been submitted to Stripe. It typically settles on the original payment method within 5-10 business days.`,
+      body:
+        "Your refund has been submitted to Stripe. It typically settles on the original payment method within 5-10 business days. If your plans changed, browse our digital products or consult with our team for help choosing the right next step.",
       href: `/dashboard/orders/${refundedOrder.id}`,
       relatedOrderId: refundedOrder.id,
     });

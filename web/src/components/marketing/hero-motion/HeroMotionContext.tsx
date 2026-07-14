@@ -18,8 +18,6 @@ import {
 type HeroMotionContextValue = {
   tier: HeroMotionTier;
   sectionRef: RefObject<HTMLElement | null>;
-  scrollProgress: number;
-  setScrollProgress: (value: number) => void;
   loadTimelineReady: boolean;
   registerLoadTarget: (key: string, el: Element | null) => void;
   headlineReadyRef: React.MutableRefObject<boolean>;
@@ -38,8 +36,6 @@ export function HeroMotionProvider({
   children,
   loadTimelineReady,
   registerLoadTarget,
-  scrollProgress,
-  setScrollProgress,
   headlineReadyRef,
   copySequenceStarted,
   copySequenceStartTime,
@@ -51,8 +47,6 @@ export function HeroMotionProvider({
   children: ReactNode;
   loadTimelineReady: boolean;
   registerLoadTarget: (key: string, el: Element | null) => void;
-  scrollProgress: number;
-  setScrollProgress: (value: number) => void;
   headlineReadyRef: React.MutableRefObject<boolean>;
   copySequenceStarted: boolean;
   copySequenceStartTime: number | null;
@@ -68,8 +62,6 @@ export function HeroMotionProvider({
     () => ({
       tier,
       sectionRef,
-      scrollProgress,
-      setScrollProgress,
       loadTimelineReady,
       registerLoadTarget,
       headlineReadyRef,
@@ -82,8 +74,6 @@ export function HeroMotionProvider({
     [
       tier,
       sectionRef,
-      scrollProgress,
-      setScrollProgress,
       loadTimelineReady,
       registerLoadTarget,
       headlineReadyRef,

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import { HomeHeroAmbientLayers } from "./HomeHeroAmbientLayers";
 import { HeroMotionProvider } from "./HeroMotionContext";
+import { sendDebugLog } from "@/lib/debug-log";
 import { useHeroMotionProfile } from "./hooks/useHeroMotionProfile";
 import { useHeroPointerParallax } from "./hooks/useHeroPointerParallax";
 import { useHeroScrollTransform } from "./hooks/useHeroScrollTransform";
@@ -14,13 +15,24 @@ type HomeHeroMotionRootProps = {
 
 export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootProps) {
   const tier = useHeroMotionProfile();
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // #region agent log
+  sendDebugLog("HomeHeroMotionRoot.tsx:30", "HomeHeroMotionRoot render", { tier }, "A");
+  // #endregion
+  const scrollProgressRef = useRef(0);
   const [loadTimelineReady, setLoadTimelineReady] = useState(false);
   const [copySequenceStarted, setCopySequenceStarted] = useState(false);
   const [copySequenceStartTime, setCopySequenceStartTime] = useState<number | null>(null);
   const [headlineComplete, setHeadlineCompleteState] = useState(false);
   const loadTargetsRef = useRef<Map<string, Element>>(new Map());
   const headlineReadyRef = useRef(false);
+
+  const setScrollProgress = useCallback((value: number) => {
+    scrollProgressRef.current = value;
+    const section = sectionRef.current;
+    if (section) {
+      section.style.setProperty("--hero-scroll-progress", String(value));
+    }
+  }, [sectionRef]);
 
   const registerLoadTarget = useCallback((key: string, el: Element | null) => {
     if (el) {
@@ -45,7 +57,7 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
   }, []);
 
   useHeroPointerParallax(sectionRef, tier, tier !== "reduced");
-  useHeroScrollTransform(sectionRef, tier);
+  useHeroScrollTransform(sectionRef, tier, setScrollProgress);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -91,8 +103,6 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
     <HeroMotionProvider
       tier={tier}
       sectionRef={sectionRef}
-      scrollProgress={scrollProgress}
-      setScrollProgress={setScrollProgress}
       loadTimelineReady={loadTimelineReady}
       registerLoadTarget={registerLoadTarget}
       headlineReadyRef={headlineReadyRef}

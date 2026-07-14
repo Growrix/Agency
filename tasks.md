@@ -98,3 +98,4 @@
 - 2026-07-14T17:15:00+06:00 | Technical_SEO_expert | audit_start | Launched full-site Technical SEO audit across web/, sites/, Frontend_Nextjs/
 - 2026-07-14T17:30:00+06:00 | Technical_SEO_expert | audit_complete | Full-site audit report and AI-executable plan saved to Ongoing DOCS/Technical_SEO/audit-reports/
 - 2026-07-14T18:45:00+06:00 | Technical_SEO_expert | web_seo_remediation | Completed focused web/ SEO remediation (WEB-SEO-001..005); release-gates 15/15 pass; commit 0350ba0
+- 2026-07-14T19:00:00+06:00 | senior-saas-developer | email_url_fix | Fixed transactional email localhost links via resolveAppBaseUrl(); unit tests 55/55 pass

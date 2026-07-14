@@ -13,14 +13,16 @@ const WAVE_PATHS = [
 export function EnergyWaveLayer() {
   const layerRef = useRef<SVGSVGElement>(null);
   const motion = useHeroMotionOptional();
+  const tier = motion?.tier ?? "full";
+  const registerLoadTarget = motion?.registerLoadTarget;
 
   useEffect(() => {
     const layer = layerRef.current;
-    if (!layer || motion?.tier === "reduced") {
+    if (!layer || tier === "reduced") {
       return;
     }
 
-    motion?.registerLoadTarget("waves", layer);
+    registerLoadTarget?.("waves", layer);
 
     let cancelled = false;
 
@@ -32,7 +34,7 @@ export function EnergyWaveLayer() {
 
       gsap.set(layer, { opacity: 0 });
       gsap.to(layer, {
-        opacity: motion?.tier === "lite" ? 0.35 : 0.55,
+        opacity: tier === "lite" ? 0.35 : 0.55,
         duration: 0.9,
         delay: HERO_LOAD_SEQUENCE.waves,
         ease: "power2.out",
@@ -61,9 +63,9 @@ export function EnergyWaveLayer() {
     return () => {
       cancelled = true;
     };
-  }, [motion]);
+  }, [registerLoadTarget, tier]);
 
-  if (motion?.tier === "reduced") {
+  if (tier === "reduced") {
     return null;
   }
 

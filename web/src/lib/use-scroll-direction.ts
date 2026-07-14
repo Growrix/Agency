@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { sendDebugLog } from "@/lib/debug-log";
 
 type UseScrollChromeVisibilityOptions = {
   /** Minimum scroll delta (px) before toggling visibility. */
@@ -44,6 +45,9 @@ export function useScrollChromeVisibility(options?: UseScrollChromeVisibilityOpt
         return;
       }
       topVisibleRef.current = next;
+      // #region agent log
+      sendDebugLog("use-scroll-direction.ts:46", "top chrome visibility changed", { visible: next }, "D");
+      // #endregion
       setTopVisible(next);
     };
 
@@ -52,6 +56,9 @@ export function useScrollChromeVisibility(options?: UseScrollChromeVisibilityOpt
         return;
       }
       bottomNavVisibleRef.current = next;
+      // #region agent log
+      sendDebugLog("use-scroll-direction.ts:55", "bottom nav visibility changed", { visible: next }, "D");
+      // #endregion
       setBottomNavVisible(next);
     };
 

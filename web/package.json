@@ -37,6 +37,9 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.39.5",
+    "@fontsource/bricolage-grotesque": "^5.2.10",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/manrope": "^5.2.8",
     "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.2.0",
     "@sanity/client": "^7.21.0",

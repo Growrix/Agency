@@ -10,15 +10,15 @@ import {
 } from "@/server/domain/email-layout";
 
 describe("email layout", () => {
-  const originalEnv = { ...process.env };
+  const originalEnv = process.env;
 
   afterEach(() => {
-    process.env = { ...originalEnv };
+    process.env = originalEnv;
     resetRuntimeConfigForTests();
   });
 
   it("uses production domain in branded footer links when env is unset", () => {
-    process.env.NODE_ENV = "production";
+    Object.defineProperty(process.env, "NODE_ENV", { value: "production" });
     delete process.env.NEXT_PUBLIC_SITE_URL;
     resetRuntimeConfigForTests();
 
