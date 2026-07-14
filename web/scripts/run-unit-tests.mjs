@@ -11,10 +11,12 @@ const tsxBinary =
 
 const testFiles = [
   "src/lib/commerce-pricing.test.ts",
+  "src/lib/site.test.ts",
   "src/server/auth/users.test.ts",
   "src/server/auth/clerk-sync.test.ts",
   "src/server/domain/catalog.test.ts",
   "src/server/domain/orders.test.ts",
+  "src/server/domain/email-layout.test.ts",
   "src/server/domain/email-templates.test.ts",
   "src/server/domain/invoices.test.ts",
   "src/server/domain/leads.test.ts",

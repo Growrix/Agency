@@ -8,6 +8,9 @@
  */
 
 const DEFAULT_SITE_URL = "https://www.growrixos.com";
+const LOCAL_DEV_DEFAULT = "http://localhost:5000";
+
+const LOOPBACK_HOSTS = new Set(["localhost", "127.0.0.1", "::1", "[::1]"]);
 
 function normalizeBaseUrl(value: string | undefined) {
   if (!value) {
@@ -16,6 +19,32 @@ function normalizeBaseUrl(value: string | undefined) {
 
   const trimmed = value.trim().replace(/\/+$/, "");
   return trimmed.length > 0 ? trimmed : DEFAULT_SITE_URL;
+}
+
+/**
+ * Resolves the public app origin for outbound links (transactional email, Stripe redirects).
+ * Production never emits loopback hosts even when NEXT_PUBLIC_SITE_URL is missing or mis-set.
+ */
+export function resolveAppBaseUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const candidate = fromEnv
+    ? normalizeBaseUrl(fromEnv)
+    : process.env.NODE_ENV === "production"
+      ? DEFAULT_SITE_URL
+      : LOCAL_DEV_DEFAULT;
+
+  if (process.env.NODE_ENV === "production") {
+    try {
+      const { hostname } = new URL(candidate);
+      if (LOOPBACK_HOSTS.has(hostname)) {
+        return DEFAULT_SITE_URL;
+      }
+    } catch {
+      return DEFAULT_SITE_URL;
+    }
+  }
+
+  return candidate;
 }
 
 export const SITE_URL = normalizeBaseUrl(process.env.NEXT_PUBLIC_SITE_URL);

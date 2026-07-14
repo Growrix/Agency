@@ -1,5 +1,7 @@
 import "server-only";
 
+import { resolveAppBaseUrl } from "@/lib/site";
+
 type RuntimeConfig = {
   appBaseUrl: string;
   contact: {
@@ -57,7 +59,7 @@ type RuntimeConfig = {
   };
 };
 
-const DEFAULT_FALLBACK_FROM_EMAIL = "Growrix <onboarding@resend.dev>";
+const DEFAULT_FALLBACK_FROM_EMAIL = "Growrix OS <onboarding@resend.dev>";
 
 let cachedRuntimeConfig: RuntimeConfig | null = null;
 
@@ -117,18 +119,6 @@ function maybeWarnUnverifiedResendSender(fromEmail: string | undefined) {
   );
 }
 
-function parseBaseUrl(value: string | undefined) {
-  if (!value) {
-    return "http://localhost:5000";
-  }
-
-  try {
-    return new URL(value).toString().replace(/\/$/, "");
-  } catch {
-    return "http://localhost:5000";
-  }
-}
-
 export function getRuntimeConfig(): RuntimeConfig {
   if (cachedRuntimeConfig) {
     return cachedRuntimeConfig;
@@ -137,7 +127,7 @@ export function getRuntimeConfig(): RuntimeConfig {
   const toEmails = parseRecipientList(process.env.CONTACT_TO_EMAIL);
 
   cachedRuntimeConfig = {
-    appBaseUrl: parseBaseUrl(process.env.NEXT_PUBLIC_SITE_URL),
+    appBaseUrl: resolveAppBaseUrl(),
     contact: {
       toEmail: toEmails[0],
       toEmails,

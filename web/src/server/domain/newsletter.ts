@@ -3,6 +3,7 @@ import "server-only";
 import { Resend } from "resend";
 import { ApiError } from "@/server/core/api";
 import { getRuntimeConfig } from "@/server/config/runtime";
+import { getTransactionalFromEmail } from "@/server/domain/email-layout";
 import type { NewsletterSubscriberRecord } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent } from "@/server/logging/observability";
@@ -21,14 +22,15 @@ function escapeHtml(value: string) {
 
 async function sendWelcomeEmail(email: string) {
   const runtime = getRuntimeConfig();
-  if (!runtime.contact.resendApiKey || !runtime.contact.fromEmail) {
+  const fromEmail = getTransactionalFromEmail();
+  if (!runtime.contact.resendApiKey || !fromEmail) {
     return;
   }
 
   const resend = new Resend(runtime.contact.resendApiKey);
   const safeEmail = escapeHtml(email);
   await resend.emails.send({
-    from: runtime.contact.fromEmail,
+    from: fromEmail,
     to: email,
     subject: "You're on the Field Notes list",
     html: `
@@ -38,7 +40,7 @@ async function sendWelcomeEmail(email: string) {
           You&apos;re subscribed at <strong>${safeEmail}</strong>. One short email a month with the studio&apos;s best writing on shipping software.
         </p>
         <p style="font-size:15px;line-height:1.6;color:#444;margin:0 0 24px">
-          In the meantime, browse the blog at <a href="https://www.growrixos.com/blog" style="color:#22c55e">growrixos.com/blog</a>.
+          In the meantime, browse the blog at <a href="${runtime.appBaseUrl}/blog" style="color:#22c55e">${runtime.appBaseUrl.replace(/^https?:\/\//, "")}/blog</a>.
         </p>
         <p style="font-size:13px;color:#888;margin:0">
           — The Growrix OS team
