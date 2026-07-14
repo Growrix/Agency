@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const DEFAULT_OG_IMAGE = "/images/og/growrix-os-share.png";
 
-export const HOME_SHARE_TITLE = "Agency for Websites, SaaS Applications, Mobile Apps, Automations";
+export const HOME_SHARE_TITLE = "Growrix OS | Web development agency for websites , SaaS Applications, Mobile Apps, Automations , and more.";
 
 export const HOME_SHARE_DESCRIPTION =
   "Growrix OS is an agency specializing in websites, SaaS applications, mobile apps, and automation systems for ambitious teams.";
