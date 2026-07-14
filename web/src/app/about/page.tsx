@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import { ArrowRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
@@ -40,11 +41,12 @@ import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "About GrowrixOS | Founder-Led Product Studio",
   description:
     "GrowrixOS is a founder-led product studio building websites, SaaS applications, mobile products, automation, technical SEO, and AI business systems for measurable outcomes.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

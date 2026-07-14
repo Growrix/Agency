@@ -74,7 +74,7 @@ export const WHATSAPP_HREF = "https://wa.me/8801986925425";
 export const MOBILE_NAV_SUPPORT_LINKS = [
   { label: "FAQ", href: "/faq" },
   { label: "Book Appointment", href: "/book-appointment" },
-  { label: "SEO Service", href: "/additional-services" },
+  { label: "SEO Service", href: "/services/technical-seo" },
   { label: "Live Chat", href: "/live-chat" },
 ] as const;
 

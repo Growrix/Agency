@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import Link from "next/link";
 import {
 	ArrowRightIcon,
@@ -58,11 +59,12 @@ import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
-export const metadata: Metadata = {
-	title: "Services | Choose the Right Path for Your Business",
-	description:
-		"Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Services | Choose the Right Path for Your Business",
+  description:
+    "Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
+  path: "/services",
+});
 
 const ICONS = {
 	websites: WindowIcon,

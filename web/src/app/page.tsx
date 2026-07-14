@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { HomeHeroGate } from "@/components/marketing/HomeHeroGate";
 import { HomeBelowFoldGate } from "@/components/marketing/HomeBelowFoldGate";
 
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
+import { buildPageMetadata, HOME_SHARE_DESCRIPTION, HOME_SHARE_TITLE } from "@/lib/seo-metadata";
+import { buildOrganizationSchema, buildWebSiteSchema } from "@/lib/seo-structured-data";
 
 import { buildReadyMadeSolutionTabs, pickPreviewProducts } from "@/lib/ready-made-solutions";
 
@@ -10,8 +13,6 @@ import { homeSection } from "@/lib/homepage-composition";
 import { getHomePageData } from "@/server/marketing/home-page-data";
 
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
-
-import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 
 import {
 
@@ -34,6 +35,12 @@ import { getProductHref } from "@/lib/shop";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 
 export const revalidate = 120;
+
+export const metadata: Metadata = buildPageMetadata({
+  title: HOME_SHARE_TITLE,
+  description: HOME_SHARE_DESCRIPTION,
+  path: "/",
+});
 
 function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | undefined, fallback: T[]) {
   if (!slugs || slugs.length === 0) {
@@ -136,45 +143,8 @@ export default async function Home() {
   };
 
   const homeStructuredData: JsonLdData[] = [
-
-    {
-
-      "@context": "https://schema.org",
-
-      "@type": "Organization",
-
-      name: SITE_NAME,
-
-      url: SITE_URL,
-
-      logo: absoluteUrl("/Favicon.svg"),
-
-      sameAs: [],
-
-    },
-
-    {
-
-      "@context": "https://schema.org",
-
-      "@type": "WebSite",
-
-      name: SITE_NAME,
-
-      url: SITE_URL,
-
-      potentialAction: {
-
-        "@type": "SearchAction",
-
-        target: `${SITE_URL}/digital-products?search={search_term_string}`,
-
-        "query-input": "required name=search_term_string",
-
-      },
-
-    },
-
+    buildOrganizationSchema(),
+    buildWebSiteSchema(),
   ];
 
 

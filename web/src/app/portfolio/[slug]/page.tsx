@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { buildCreativeWorkSchema } from "@/lib/seo-structured-data";
 import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
@@ -29,10 +32,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const project = await getPublicPortfolioProject(slug);
   if (!project) return {};
-  return {
+  return buildPageMetadata({
     title: `${project.name} — Case Study`,
     description: project.summary,
-  };
+    path: `/portfolio/${slug}`,
+    ogImage: project.hero_image?.src ? toSanityCdnImageSrc(project.hero_image.src, 1200) : undefined,
+  });
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -59,8 +64,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     (detail.seo?.length ?? 0) > 0 ||
     (detail.standards?.length ?? 0) > 0;
 
+  const creativeWorkSchema = buildCreativeWorkSchema({
+    name: project.name,
+    description: project.summary,
+    slug: project.slug,
+    imageUrl: heroImage ? toSanityCdnImageSrc(heroImage.src, 1200) : undefined,
+  });
+
   return (
     <>
+      <JsonLd data={creativeWorkSchema} />
       <MarketingViewportGate
         mobile={
           <Section className="pt-8 pb-8">

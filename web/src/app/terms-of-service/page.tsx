@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
@@ -7,10 +8,11 @@ import { MarketingViewportGate } from "@/components/marketing/MarketingViewportG
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { LegalDocumentMobile } from "@/components/marketing/legal/LegalDocumentMobile";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Terms of Service",
   description: "Review the commercial, licensing, payment, and delivery terms for Growrix OS services and digital products.",
-};
+  path: "/legal/terms",
+});
 
 const SECTIONS = [
   {

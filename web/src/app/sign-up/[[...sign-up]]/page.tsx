@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
+import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
 import { SignUpExperience } from "@/components/auth/SignUpExperience";
 
 export const metadata: Metadata = {
-  title: "Sign Up",
-  description: "Create your Growrix OS account to access downloads, orders, and your customer dashboard.",
+  ...buildPageMetadata({
+    title: "Sign Up",
+    description: "Create your Growrix OS account to access downloads, orders, and your customer dashboard.",
+    path: "/sign-up",
+  }),
+  robots: NOINDEX_ROBOTS,
 };
 
 type SignUpPageProps = {

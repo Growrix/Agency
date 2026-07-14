@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import { ShopPageMobile } from "@/components/shop/ShopPageMobile";
 import { ShopPageDesktop } from "@/components/shop/ShopPageDesktop";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
@@ -6,11 +7,12 @@ import { buildShopFilterGroups, buildShopFilterOptions, type ShopFilterState } f
 import { buildShopMerchandising } from "@/lib/shop-merchandising";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Digital Products — Templates, Starters, and Toolkits",
   description:
     "Browse HTML templates, SaaS starters, AI toolkits, MCP kits, and SEO packs. Compare Standard, Premium, and Done-For-You tiers.",
-};
+  path: "/digital-products",
+});
 
 type SearchParams = Promise<{
   category?: string;

@@ -2,6 +2,10 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { buildBlogPostingSchema } from "@/lib/seo-structured-data";
+import { absoluteUrl } from "@/lib/site";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
@@ -47,22 +51,21 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Article not found" };
 
-  const canonical = post.seo?.canonicalUrl ?? `https://www.growrixos.com/blog/${post.slug}`;
+  const canonical = post.seo?.canonicalUrl ?? `/blog/${post.slug}`;
+  const title = post.seo?.metaTitle ?? post.title;
+  const description = post.seo?.metaDescription ?? post.excerpt;
+  const ogImage = post.seo?.ogImageUrl ?? post.coverImage?.url;
 
   return {
-    title: post.seo?.metaTitle ?? post.title,
-    description: post.seo?.metaDescription ?? post.excerpt,
-    alternates: {
-      canonical,
-    },
+    ...buildPageMetadata({
+      title,
+      description,
+      path: canonical.startsWith("http") ? `/blog/${post.slug}` : canonical,
+      ogType: "article",
+      ogImage,
+      twitterImages: ogImage ? [ogImage] : undefined,
+    }),
     robots: post.seo?.noIndex ? { index: false, follow: false } : undefined,
-    openGraph: {
-      title: post.seo?.metaTitle ?? post.title,
-      description: post.seo?.metaDescription ?? post.excerpt,
-      type: "article",
-      url: canonical,
-      images: post.seo?.ogImageUrl ? [{ url: post.seo.ogImageUrl }] : undefined,
-    },
   };
 }
 
@@ -72,10 +75,18 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   if (!post) notFound();
 
   const related = await getRelatedPosts(slug, 2);
+  const url = absoluteUrl(`/blog/${post.slug}`);
   const heroImage = post.coverImage
     ? { src: post.coverImage.url, alt: post.coverImage.alt }
     : getBlogImage(post.slug);
-  const url = `https://growrixos.com/blog/${post.slug}`;
+  const blogPostingSchema = buildBlogPostingSchema({
+    title: post.title,
+    description: post.excerpt,
+    slug: post.slug,
+    publishedAt: post.publishedAt,
+    authorName: post.author.name,
+    imageUrl: heroImage?.src,
+  });
   const articleSections = post.body.flatMap((block, index) => {
     if (block.type !== "h2" && block.type !== "h3") {
       return [];
@@ -90,6 +101,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   return (
     <>
+      <JsonLd data={blogPostingSchema} />
       {/* Hero */}
       <MarketingViewportGate
         mobile={

@@ -1,4 +1,7 @@
 ﻿import type { Metadata } from "next";
+import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { buildFaqPageSchema, buildServiceSchema } from "@/lib/seo-structured-data";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -395,10 +398,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = await getPublicService(slug);
   if (!service) return {};
-  return {
+  return buildPageMetadata({
     title: `${service.title} Service`,
     description: service.description,
-  };
+    path: `/services/${slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -874,8 +878,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     </Section>
   );
 
+  const serviceStructuredData: JsonLdData[] = [
+    buildServiceSchema({
+      name: service.title,
+      description: service.description,
+      path: `/services/${slug}`,
+    }),
+    ...(buildFaqPageSchema(copy.faq) ? [buildFaqPageSchema(copy.faq)!] : []),
+  ];
+
   return (
     <>
+      <JsonLd data={serviceStructuredData} />
       <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>

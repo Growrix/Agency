@@ -1,62 +1,66 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
 import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
 import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
+import {
+  DEFAULT_OG_IMAGE,
+  HOME_SHARE_DESCRIPTION,
+  HOME_SHARE_TITLE,
+} from "@/lib/seo-metadata";
 
-const SITE_DESCRIPTION =
-  "Growrix OS is a product-minded web development studio building websites, HTML business profiles, SaaS applications, MCP servers, and automation systems for ambitious teams.";
-const DEFAULT_OG_IMAGE = "/images/home/studio-hero.jpg";
+const SITE_DESCRIPTION = HOME_SHARE_DESCRIPTION;
 
-const sans = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+const sans = localFont({
+  src: [
+    { path: "./fonts/manrope-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/manrope-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-manrope",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["600"],
+const display = localFont({
+  src: [{ path: "./fonts/bricolage-grotesque-latin-600-normal.woff2", weight: "600", style: "normal" }],
   variable: "--font-bricolage",
   display: "swap",
-  preload: false,
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const mono = localFont({
+  src: [
+    { path: "./fonts/jetbrains-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/jetbrains-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+  ],
   variable: "--font-jetbrains-mono",
   display: "swap",
-  preload: false,
+  fallback: ["monospace"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
+    default: HOME_SHARE_TITLE,
     template: "%s | Growrix OS",
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
     url: SITE_URL,
-    title: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
+    title: HOME_SHARE_TITLE,
     description: SITE_DESCRIPTION,
     locale: "en_US",
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Growrix OS | Web Development Agency for Websites, HTML Profiles, SaaS, MCP & Automation",
+    title: HOME_SHARE_TITLE,
     description: SITE_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
   },

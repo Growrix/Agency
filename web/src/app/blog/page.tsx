@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
@@ -27,11 +28,12 @@ import {
 // Sanity webhook at /api/revalidate triggers on-demand invalidation after publish.
 export const revalidate = 60;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Blog — Field notes from Growrix OS",
   description:
     "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, MCP servers, and automation.",
-};
+  path: "/blog",
+});
 
 type SearchParams = Promise<{
   category?: string;

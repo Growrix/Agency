@@ -103,7 +103,7 @@ test("technical SEO baseline metadata exists on key category route", async ({ pa
   expect(categoryHtml).toContain("/digital-products/category/website-templates-html-preview");
 });
 
-test("homepage keeps canonical and SearchAction schema", async ({ page, request }) => {
+test("homepage keeps canonical and Organization schema", async ({ page, request }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   const canonicalHref = await page
@@ -115,6 +115,84 @@ test("homepage keeps canonical and SearchAction schema", async ({ page, request 
   const homeResponse = await request.get("/");
   const homeHtml = await homeResponse.text();
   expect(homeHtml).toContain("WebSite");
-  expect(homeHtml).toContain("SearchAction");
-  expect(homeHtml).toContain("/digital-products?search=");
+  expect(homeHtml).toContain("Organization");
+  expect(homeHtml).not.toContain("SearchAction");
+});
+
+test("services route exposes self-canonical metadata and Service schema", async ({ page, request }) => {
+  await page.goto("/services/technical-seo", { waitUntil: "domcontentloaded" });
+
+  const canonicalHref = await page
+    .locator('head link[rel="canonical"]')
+    .first()
+    .getAttribute("href");
+  expect(canonicalHref).toContain("/services/technical-seo");
+
+  const response = await request.get("/services/technical-seo");
+  const html = await response.text();
+  expect(html).toContain('"@type":"Service"');
+  expect(html).toContain('property="og:url"');
+});
+
+test("blog index exposes self-canonical metadata", async ({ page }) => {
+  await page.goto("/blog", { waitUntil: "domcontentloaded" });
+
+  const canonicalHref = await page
+    .locator('head link[rel="canonical"]')
+    .first()
+    .getAttribute("href");
+  expect(canonicalHref).toContain("/blog");
+});
+
+test("portfolio index exposes self-canonical metadata", async ({ page }) => {
+  await page.goto("/portfolio", { waitUntil: "domcontentloaded" });
+
+  const canonicalHref = await page
+    .locator('head link[rel="canonical"]')
+    .first()
+    .getAttribute("href");
+  expect(canonicalHref).toContain("/portfolio");
+});
+
+test("faq page exposes FAQPage schema and self-canonical metadata", async ({ page, request }) => {
+  await page.goto("/faq", { waitUntil: "domcontentloaded" });
+
+  const canonicalHref = await page
+    .locator('head link[rel="canonical"]')
+    .first()
+    .getAttribute("href");
+  expect(canonicalHref).toContain("/faq");
+
+  const response = await request.get("/faq");
+  const html = await response.text();
+  expect(html).toContain("FAQPage");
+});
+
+test("robots.txt and sitemap.xml are reachable", async ({ request }) => {
+  const robots = await request.get("/robots.txt");
+  expect(robots.ok()).toBeTruthy();
+  expect(await robots.text()).toContain("User-Agent");
+
+  const sitemap = await request.get("/sitemap.xml");
+  expect(sitemap.ok()).toBeTruthy();
+  expect(await sitemap.text()).toContain("<urlset");
+  expect(await sitemap.text()).toContain("/services/technical-seo");
+});
+
+test("transactional routes advertise noindex robots metadata", async ({ request }) => {
+  for (const route of ["/sign-in", "/sign-up", "/cart", "/complete-account", "/live-chat"]) {
+    const response = await request.get(route);
+    const html = await response.text();
+    expect(html).toMatch(/noindex/i);
+  }
+});
+
+test("legacy legal URLs redirect to canonical legal routes", async ({ request }) => {
+  const privacy = await request.get("/privacy-policy", { maxRedirects: 0 });
+  expect([301, 308]).toContain(privacy.status());
+  expect(privacy.headers()["location"] ?? "").toContain("/legal/privacy");
+
+  const terms = await request.get("/terms-of-service", { maxRedirects: 0 });
+  expect([301, 308]).toContain(terms.status());
+  expect(terms.headers()["location"] ?? "").toContain("/legal/terms");
 });

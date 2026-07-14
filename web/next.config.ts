@@ -152,6 +152,16 @@ const nextConfig: NextConfig = {
         destination: "/services/technical-seo",
         permanent: true,
       },
+      {
+        source: "/privacy-policy",
+        destination: "/legal/privacy",
+        permanent: true,
+      },
+      {
+        source: "/terms-of-service",
+        destination: "/legal/terms",
+        permanent: true,
+      },
     ];
   },
   async headers() {
