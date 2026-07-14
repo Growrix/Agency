@@ -120,8 +120,8 @@ export function DashboardChrome({ children }: { children: React.ReactNode }) {
               <ArrowRightIcon className="size-4" />
             </LinkButton>
           </div>
-          <LinkButton href="/digital-products" variant="outline" size="sm" fullWidth className="justify-between">
-            Shop catalog
+          <LinkButton href="/" variant="outline" size="sm" fullWidth className="justify-between">
+            Visit website
             <ArrowRightIcon className="size-4" />
           </LinkButton>
           <DashboardSignOutButton />

@@ -231,6 +231,123 @@
   background: color-mix(in srgb, var(--color-bg) 48%, transparent);
 }
 
+.dashboard-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.dashboard-page-title {
+  margin-top: 0.75rem;
+  max-width: 42rem;
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  line-height: 1.15;
+}
+
+.dashboard-stat-tile {
+  min-width: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 25%, transparent);
+  padding: 0.625rem 0.75rem;
+}
+
+.dashboard-stat-value {
+  font-size: 1.125rem;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 640px) {
+  .dashboard-stat-value {
+    font-size: 1.375rem;
+  }
+}
+
+.dashboard-card-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+@media (min-width: 640px) {
+  .dashboard-card-title {
+    font-size: 1rem;
+  }
+}
+
+.dashboard-record-amount {
+  font-size: 1rem;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 640px) {
+  .dashboard-record-amount {
+    font-size: 1.125rem;
+  }
+}
+
+.dashboard-product-card__media {
+  display: flex;
+  height: 7rem;
+  flex-shrink: 0;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--color-primary) 18%, transparent),
+    color-mix(in srgb, var(--color-surface) 92%, transparent)
+  );
+  padding: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .dashboard-product-card__media {
+    width: 7.5rem;
+    height: 6.5rem;
+  }
+}
+
+.dashboard-order-card {
+  display: block;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
+  padding: 0.875rem 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.dashboard-order-card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.dashboard-record-icon {
+  display: inline-flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 640px) {
+  .dashboard-record-icon {
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
 .contrast-surface,
 .bg-contrast {
   --button-outline-bg: transparent;

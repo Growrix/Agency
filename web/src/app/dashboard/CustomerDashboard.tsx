@@ -26,6 +26,12 @@ import {
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
 import { AppointmentRescheduleModal } from "@/components/dashboard/AppointmentRescheduleModal";
+import { DashboardHeroBand } from "@/components/dashboard/DashboardHeroBand";
+import {
+  DashboardAppointmentCard,
+  DashboardOrderCard,
+  DashboardProductCard,
+} from "@/components/dashboard/DashboardRecordCards";
 import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
@@ -397,8 +403,8 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                 </span>
               </div>
               <p className="mt-3 text-xs uppercase tracking-[0.14em] text-text-muted">{item.label}</p>
-              <p className="mt-1 font-display text-4xl leading-none tracking-tight">{item.value}</p>
-              <p className="mt-1 text-sm text-text-muted">{item.subtitle}</p>
+              <p className="dashboard-stat-value mt-1">{item.value}</p>
+              <p className="mt-1 text-xs text-text-muted sm:text-sm">{item.subtitle}</p>
             </Link>
           ))}
         </section>
@@ -523,37 +529,28 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
     return (
       <div className="space-y-4">
-        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
-          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
-          <div className="relative">
-            <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-            <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">
-              Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span>
-            </h2>
-            <p className="mt-3 text-base text-text-muted">Everything you have unlocked, including licenses and fulfillment status.</p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              {[
-                { label: "Total orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
-                { label: "Downloads", value: downloads.length, icon: <ArrowDownTrayIcon className="size-5" /> },
-                { label: "Licenses", value: licenses.length, icon: <ShieldCheckIcon className="size-5" /> },
-                { label: "Appointments", value: appointments.length, icon: <TagIcon className="size-5" /> },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
-                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-2xl font-semibold text-text">{stat.value}</span></div>
-                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <DashboardHeroBand
+          title={
+            <>
+              Welcome back, <span className="text-primary">{fullName}</span>
+            </>
+          }
+          description="Everything you have unlocked, including licenses and fulfillment status."
+          stats={[
+            { label: "Total orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
+            { label: "Downloads", value: downloads.length, icon: <ArrowDownTrayIcon className="size-5" /> },
+            { label: "Licenses", value: licenses.length, icon: <ShieldCheckIcon className="size-5" /> },
+            { label: "Appointments", value: appointments.length, icon: <TagIcon className="size-5" /> },
+          ]}
+        />
 
-        <section className="flex flex-wrap items-center justify-between gap-3">
-          <div className="dashboard-panel-surface flex flex-wrap gap-2 rounded-sm border border-border/65 p-2">
+        <section className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="dashboard-panel-surface flex max-w-full gap-2 overflow-x-auto rounded-sm border border-border/65 p-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {productKinds.map((kind, index) => (
               <button
                 key={kind}
                 type="button"
-                className={index === 0 ? "rounded-sm bg-primary/20 px-4 py-2 text-sm font-medium text-primary" : "rounded-sm border border-border/60 px-4 py-2 text-sm text-text-muted hover:border-primary/30"}
+                className={index === 0 ? "shrink-0 rounded-sm bg-primary/20 px-3 py-1.5 text-xs font-medium text-primary sm:px-4 sm:py-2 sm:text-sm" : "shrink-0 rounded-sm border border-border/60 px-3 py-1.5 text-xs text-text-muted hover:border-primary/30 sm:px-4 sm:py-2 sm:text-sm"}
               >
                 {kind}
               </button>
@@ -561,8 +558,8 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           </div>
 
           <div className="flex items-center gap-2">
-            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort by: Latest</button>
-            <button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-primary/30 bg-primary/12 text-primary" aria-label="Grid view">
+            <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-xs text-text sm:h-10 sm:px-4 sm:text-sm">Sort by: Latest</button>
+            <button type="button" className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-primary/30 bg-primary/12 text-primary sm:h-10 sm:w-10" aria-label="Grid view">
               <span className="grid grid-cols-2 gap-0.5">
                 <span className="h-1.5 w-1.5 rounded-xs bg-current" />
                 <span className="h-1.5 w-1.5 rounded-xs bg-current" />
@@ -573,36 +570,19 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
           </div>
         </section>
 
-        <section className="grid gap-4 xl:grid-cols-3">
+        <section className="grid gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
           {sortedProducts.map((product) => {
-            const state = product.fulfillment_status.toLowerCase();
-            const stateTone = state.includes("delivered") || state.includes("complete")
-              ? "border-primary/35 bg-primary/12 text-primary"
-              : "border-warning/40 bg-warning/12 text-warning";
-
+            const relatedOrder = orders.find((order) => order.order_number === product.order_number);
             return (
-              <Card key={product.slug} className="dashboard-panel-surface rounded-sm border-border/65 p-3" hoverable={false}>
-                <div className="grid gap-3 sm:grid-cols-[9rem_1fr]">
-                  <div className="flex h-52 items-end rounded-sm border border-border/60 bg-linear-to-br from-primary/18 to-surface p-3">
-                    <p className="text-base font-semibold text-text">{product.name.slice(0, 22)}</p>
-                  </div>
-                  <div>
-                    <p className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${stateTone}`}>
-                      {state.includes("delivered") || state.includes("complete") ? "Completed" : "In progress"}
-                    </p>
-                    <h3 className="mt-3 font-display text-4xl leading-tight tracking-tight">{product.name}</h3>
-                    <p className="mt-1 text-2xl text-text-muted">{product.slug.replaceAll("-", " ")}</p>
-                    <p className="mt-2 text-base text-text-muted">Order ID</p>
-                    <p className="text-2xl text-text">{product.order_number}</p>
-                    <p className="mt-1 text-base text-text-muted">Purchased on {orders.find((order) => order.order_number === product.order_number)?.created_at ? formatShortDate(orders.find((order) => order.order_number === product.order_number)?.created_at) : "Not available"}</p>
-                    {product.selected_tier_name ? <p className="mt-2 text-sm text-text-muted">Tier: {product.selected_tier_name}</p> : null}
-                    <LinkButton href="/dashboard/orders" variant="outline" size="sm" fullWidth className="mt-4 justify-between">
-                      View Details
-                      <ArrowRightIcon className="size-4" />
-                    </LinkButton>
-                  </div>
-                </div>
-              </Card>
+              <DashboardProductCard
+                key={product.slug}
+                name={product.name}
+                slug={product.slug}
+                orderNumber={product.order_number}
+                purchasedOn={relatedOrder?.created_at ? formatShortDate(relatedOrder.created_at) : "Not available"}
+                tierName={product.selected_tier_name}
+                fulfillmentStatus={product.fulfillment_status}
+              />
             );
           })}
         </section>
@@ -615,12 +595,12 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
         {sortedProducts.length > 0 ? (
           <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
-            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-text-muted">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted sm:text-sm">
               <p>Showing 1 to {sortedProducts.length} of {sortedProducts.length} products</p>
               <div className="flex items-center gap-2">
-                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Previous</button>
-                <button type="button" className="h-9 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary">1</button>
-                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Next</button>
+                <button type="button" className="h-8 rounded-sm border border-border/60 px-3 text-text-muted sm:h-9" disabled>Previous</button>
+                <button type="button" className="h-8 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary sm:h-9">1</button>
+                <button type="button" className="h-8 rounded-sm border border-border/60 px-3 text-text-muted sm:h-9" disabled>Next</button>
               </div>
             </div>
           </Card>
@@ -746,43 +726,35 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     const pendingAction = orders.filter((order) => !["delivered", "completed"].includes(order.fulfillment_status.toLowerCase())).length;
     const completedCount = orders.filter((order) => ["succeeded", "paid"].includes(order.payment_status.toLowerCase())).length;
     const sortedOrders = [...orders].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    const totalSpentLabel = currencyFormatter.format(totalSpent / 100);
 
     return (
       <div className="space-y-4">
-        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
-          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
-          <div className="relative grid gap-4 xl:grid-cols-[1.1fr_1fr] xl:items-end">
-            <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
-              <p className="mt-3 text-base text-text-muted">Track payment and fulfillment progress for each purchase.</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              {[
-                { label: "Total orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
-                { label: "Total spent", value: currencyFormatter.format(totalSpent / 100), icon: <TagIcon className="size-5" /> },
-                { label: "Pending action", value: pendingAction, icon: <ClockIcon className="size-5" /> },
-                { label: "Completed", value: completedCount, icon: <ShieldCheckIcon className="size-5" /> },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
-                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-2xl font-semibold text-text">{stat.value}</span></div>
-                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <DashboardHeroBand
+          title={
+            <>
+              Welcome back, <span className="text-primary">{fullName}</span>
+            </>
+          }
+          description="Track payment and fulfillment progress for each purchase."
+          stats={[
+            { label: "Total orders", value: orders.length, icon: <ShoppingBagIcon className="size-5" /> },
+            { label: "Total spent", value: totalSpentLabel, icon: <TagIcon className="size-5" /> },
+            { label: "Pending action", value: pendingAction, icon: <ClockIcon className="size-5" /> },
+            { label: "Completed", value: completedCount, icon: <ShieldCheckIcon className="size-5" /> },
+          ]}
+        />
 
-        <section className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap gap-3">
+        <section className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="flex max-w-full gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {["All Orders", "Processing", "Completed", "Cancelled", "Refunded"].map((tab, index) => (
-              <button key={tab} type="button" className={index === 0 ? "border-b-2 border-primary pb-2 text-base font-medium text-primary" : "pb-2 text-base text-text-muted"}>{tab}</button>
+              <button key={tab} type="button" className={index === 0 ? "shrink-0 border-b-2 border-primary pb-2 text-sm font-medium text-primary" : "shrink-0 pb-2 text-sm text-text-muted"}>{tab}</button>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
-            <button type="button" className="inline-flex h-11 items-center gap-2 rounded-sm border border-border/60 px-4 text-sm text-text"><FunnelIcon className="size-4" />Filter</button>
-            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort: Newest</button>
+            <button type="button" className="inline-flex h-9 items-center gap-2 rounded-sm border border-border/60 px-3 text-xs text-text sm:h-10 sm:px-4 sm:text-sm"><FunnelIcon className="size-4" />Filter</button>
+            <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-xs text-text sm:h-10 sm:px-4 sm:text-sm">Sort: Newest</button>
           </div>
         </section>
 
@@ -792,39 +764,20 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
             const fulfillmentDone = ["delivered", "completed"].includes(order.fulfillment_status.toLowerCase());
 
             return (
-              <Link key={order.id} href={`/dashboard/orders/${order.id}`} className="dashboard-panel-surface block rounded-sm border border-border/65 px-4 py-3 transition-colors hover:border-primary/35">
-              <div className="grid gap-3 xl:grid-cols-[1.3fr_0.55fr_0.6fr_0.62fr_0.58fr_0.52fr_auto] xl:items-center">
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/20 bg-linear-to-br from-primary/30 to-surface text-sm font-semibold text-text-muted">{order.items[0]?.product_name.slice(0, 2).toUpperCase() ?? "PD"}</span>
-                  <div className="min-w-0">
-                    <p className="truncate text-3xl font-semibold tracking-tight text-text">{order.order_number}</p>
-                    <p className="truncate text-2xl text-text">{order.items[0]?.product_name ?? "Product"}</p>
-                    <p className="truncate text-base text-text-muted">{order.items[0]?.product_slug?.replaceAll("-", " ") ?? "Website Template"} · {order.selected_tier_name ?? "Standard"}</p>
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-sm text-text-muted">Payment status</p>
-                  <p className="mt-1 inline-flex items-center gap-2 text-base text-text"><span className={paymentDone ? "size-2 rounded-full bg-success" : "size-2 rounded-full bg-warning"} aria-hidden />{paymentDone ? "Paid" : order.payment_status}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-text-muted">Fulfillment status</p>
-                  <p className="mt-1 inline-flex items-center gap-2 text-base text-text"><span className={fulfillmentDone ? "size-2 rounded-full bg-success" : "size-2 rounded-full bg-warning"} aria-hidden />{fulfillmentDone ? "Completed" : "Pending"}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-text-muted">Created</p>
-                  <p className="mt-1 text-base text-text">{formatDateTime(order.created_at)}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-text-muted">Completed</p>
-                  <p className="mt-1 text-base text-text">{order.completed_at ? formatDateTime(order.completed_at) : "Not available"}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-4xl font-semibold tracking-tight text-text">{currencyFormatter.format(order.total_cents / 100)}</p>
-                </div>
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-border/60 bg-surface/35 text-text-muted"><ChevronRightIcon className="size-5" /></span>
-              </div>
-            </Link>
+              <DashboardOrderCard
+                key={order.id}
+                href={`/dashboard/orders/${order.id}`}
+                orderNumber={order.order_number}
+                productName={order.items[0]?.product_name ?? "Product"}
+                productMeta={`${order.items[0]?.product_slug?.replaceAll("-", " ") ?? "Website template"} · ${order.selected_tier_name ?? "Standard"}`}
+                paymentStatus={order.payment_status}
+                paymentDone={paymentDone}
+                fulfillmentDone={fulfillmentDone}
+                createdAt={formatShortDate(order.created_at)}
+                completedAt={order.completed_at ? formatShortDate(order.completed_at) : "Not available"}
+                amount={currencyFormatter.format(order.total_cents / 100)}
+                initials={order.items[0]?.product_name.slice(0, 2).toUpperCase() ?? "PD"}
+              />
             );
           })}
         </section>
@@ -837,16 +790,16 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
         {sortedOrders.length > 0 ? (
           <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
-            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-text-muted">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted sm:text-sm">
               <p>Showing 1 to {sortedOrders.length} of {sortedOrders.length} orders</p>
               <div className="flex items-center gap-2">
-                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Previous</button>
-                <button type="button" className="h-9 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary">1</button>
-                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Next</button>
+                <button type="button" className="h-8 rounded-sm border border-border/60 px-3 text-text-muted sm:h-9" disabled>Previous</button>
+                <button type="button" className="h-8 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary sm:h-9">1</button>
+                <button type="button" className="h-8 rounded-sm border border-border/60 px-3 text-text-muted sm:h-9" disabled>Next</button>
               </div>
               <div className="flex items-center gap-2">
                 <span>Show</span>
-                <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-text">10 per page</button>
+                <button type="button" className="inline-flex h-8 items-center rounded-sm border border-border/60 px-3 text-text sm:h-9">10 per page</button>
               </div>
             </div>
           </Card>
@@ -864,39 +817,30 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
     return (
       <div className="space-y-4">
-        <section className="dashboard-hero-surface relative overflow-hidden rounded-md border border-primary/25 p-6 lg:p-7">
-          <div className="dashboard-hero-glow pointer-events-none absolute inset-y-0 right-0 hidden w-2/5 lg:block" aria-hidden />
-          <div className="relative grid gap-4 xl:grid-cols-[1.1fr_1fr] xl:items-end">
-            <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-primary">Portal summary</p>
-              <h2 className="mt-3 max-w-2xl font-display text-3xl leading-tight tracking-tight sm:text-4xl">Welcome back, <span className="text-primary">{fullName}</span> <span aria-hidden>👋</span></h2>
-              <p className="mt-3 text-base text-text-muted">Upcoming and requested sessions connected to your account.</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              {[
-                { label: "Total appointments", value: totalAppointments, icon: <CalendarDaysIcon className="size-5" /> },
-                { label: "Upcoming", value: upcomingAppointments, icon: <ClockIcon className="size-5" /> },
-                { label: "Pending", value: pendingAppointments, icon: <TagIcon className="size-5" /> },
-                { label: "Completed", value: completedAppointments, icon: <ShieldCheckIcon className="size-5" /> },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-sm border border-primary/20 bg-surface/25 px-3.5 py-3">
-                  <div className="flex items-center gap-2 text-primary">{stat.icon}<span className="text-xl font-semibold text-text">{stat.value}</span></div>
-                  <p className="mt-1 text-sm text-text-muted">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <DashboardHeroBand
+          title={
+            <>
+              Welcome back, <span className="text-primary">{fullName}</span>
+            </>
+          }
+          description="Upcoming and requested sessions connected to your account."
+          stats={[
+            { label: "Total appointments", value: totalAppointments, icon: <CalendarDaysIcon className="size-5" /> },
+            { label: "Upcoming", value: upcomingAppointments, icon: <ClockIcon className="size-5" /> },
+            { label: "Pending", value: pendingAppointments, icon: <TagIcon className="size-5" /> },
+            { label: "Completed", value: completedAppointments, icon: <ShieldCheckIcon className="size-5" /> },
+          ]}
+        />
 
-        <section className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap gap-3">
+        <section className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+          <div className="flex max-w-full gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {["All Appointments", "Upcoming", "Pending", "Completed", "Cancelled"].map((tab, index) => (
-              <button key={tab} type="button" className={index === 0 ? "border-b-2 border-primary pb-2 text-base font-medium text-primary" : "pb-2 text-base text-text-muted"}>{tab}</button>
+              <button key={tab} type="button" className={index === 0 ? "shrink-0 border-b-2 border-primary pb-2 text-sm font-medium text-primary" : "shrink-0 pb-2 text-sm text-text-muted"}>{tab}</button>
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <button type="button" className="inline-flex h-11 items-center rounded-sm border border-border/60 px-4 text-sm text-text">Sort by: Upcoming first</button>
-            <button type="button" className="inline-flex h-11 items-center gap-2 rounded-sm border border-border/60 px-4 text-sm text-text"><FunnelIcon className="size-4" />Filter</button>
+            <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-xs text-text sm:h-10 sm:px-4 sm:text-sm">Sort by: Upcoming first</button>
+            <button type="button" className="inline-flex h-9 items-center gap-2 rounded-sm border border-border/60 px-3 text-xs text-text sm:h-10 sm:px-4 sm:text-sm"><FunnelIcon className="size-4" />Filter</button>
           </div>
         </section>
 
@@ -911,37 +855,17 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
                 : "border-warning/40 bg-warning/10 text-warning";
 
             return (
-              <div key={appointment.id} className="dashboard-panel-surface rounded-sm border border-border/65 px-4 py-3">
-                <div className="grid gap-3 xl:grid-cols-[1.35fr_0.9fr_auto] xl:items-center">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-16 w-16 items-center justify-center rounded-sm border border-primary/25 bg-primary/14 text-primary"><CalendarDaysIcon className="size-8" /></span>
-                    <div>
-                      <p className="text-3xl font-semibold tracking-tight text-text">{appointment.service_interested_in}</p>
-                      <div className="mt-1 flex flex-wrap items-center gap-4 text-base text-text-muted">
-                        <span className="inline-flex items-center gap-1"><CalendarDaysIcon className="size-4" />{formatShortDate(appointment.preferred_datetime)}</span>
-                        <span className="inline-flex items-center gap-1"><ClockIcon className="size-4" />{new Date(appointment.preferred_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
-                      </div>
-                      <p className="text-sm text-text-muted">Type: Inquiry</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ${statusTone}`}>{appointment.status}</p>
-                    <p className="mt-2 text-sm text-text-muted">{canModify ? "Awaiting confirmation" : "Session completed"}</p>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    {canModify ? (
-                      <Button type="button" variant="outline" size="sm" onClick={() => setRescheduleAppointment(appointment)}>
-                        Reschedule or cancel
-                      </Button>
-                    ) : (
-                      <Button type="button" variant="outline" size="sm">View details</Button>
-                    )}
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-text-muted"><ChevronRightIcon className="size-5" /></span>
-                  </div>
-                </div>
-              </div>
+              <DashboardAppointmentCard
+                key={appointment.id}
+                serviceName={appointment.service_interested_in}
+                dateLabel={formatShortDate(appointment.preferred_datetime)}
+                timeLabel={new Date(appointment.preferred_datetime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                status={appointment.status}
+                statusTone={statusTone}
+                statusHint={canModify ? "Awaiting confirmation" : "Session completed"}
+                canModify={canModify}
+                onReschedule={() => setRescheduleAppointment(appointment)}
+              />
             );
           })}
         </section>
@@ -954,16 +878,16 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
 
         {sortedAppointments.length > 0 ? (
           <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
-            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-text-muted">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-text-muted sm:text-sm">
               <p>Showing 1 to {sortedAppointments.length} of {sortedAppointments.length} appointments</p>
               <div className="flex items-center gap-2">
-                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Previous</button>
-                <button type="button" className="h-9 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary">1</button>
-                <button type="button" className="h-9 rounded-sm border border-border/60 px-3 text-text-muted" disabled>Next</button>
+                <button type="button" className="h-8 rounded-sm border border-border/60 px-3 text-text-muted sm:h-9" disabled>Previous</button>
+                <button type="button" className="h-8 rounded-sm border border-primary/35 bg-primary/12 px-3 text-primary sm:h-9">1</button>
+                <button type="button" className="h-8 rounded-sm border border-border/60 px-3 text-text-muted sm:h-9" disabled>Next</button>
               </div>
               <div className="flex items-center gap-2">
                 <span>Show</span>
-                <button type="button" className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-text">10 per page</button>
+                <button type="button" className="inline-flex h-8 items-center rounded-sm border border-border/60 px-3 text-text sm:h-9">10 per page</button>
               </div>
             </div>
           </Card>

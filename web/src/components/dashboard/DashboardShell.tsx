@@ -58,11 +58,15 @@ export function DashboardShell({
         <div className="dashboard-shell-sidebar-glow pointer-events-none absolute inset-0" aria-hidden />
 
         <div className="relative flex h-(--dashboard-header-height) items-center justify-between border-b border-primary/15 px-4">
-          <div className="flex min-w-0 items-center gap-2.5">
+          <Link
+            href="/"
+            className="flex min-w-0 items-center gap-2.5 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            aria-label="Go to GrowrixOS homepage"
+          >
             {collapsed ? (
               <Image
                 src="/website logo main.svg"
-                alt="Growrix logo"
+                alt="GrowrixOS"
                 width={32}
                 height={32}
                 unoptimized
@@ -71,14 +75,14 @@ export function DashboardShell({
             ) : (
               <Image
                 src="/website logo main.svg"
-                alt="Growrix logo"
+                alt="GrowrixOS"
                 width={120}
                 height={32}
                 unoptimized
                 className="h-7 w-auto object-contain"
               />
             )}
-          </div>
+          </Link>
           <div className="flex items-center gap-1">
             <Button
               type="button"
