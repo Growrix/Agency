@@ -278,3 +278,13 @@ There are few issues seems in the checkout page.
 1. After placing order it is not popup the confirmation modal. 
 2. THe invoice HTML has issues > the logo is not visible , and also the CTA "Open order dashboard" redirects to the localhost link , not the main domain www.growrixos.com/dashboard. same with the bottom hyperlink - visit website (www.growrixos.com) . you need to fix this issues first. 
 3. same issues with the cancellation email as well. the CTA and hyperlinks are using localhost link, which is not correct. lets fix this issues as well. 
+
+Hello Sal, Hope you are doing well. I am excited to share that, I have launched my own web development agency where we build websites, SaaS applications, Mobile apps, business automations and more. I become a Full-Stack web developer and now working with SaaS products. here is my website link https://www.growrixos.com/ . please have some time to visit. Additionally, Mitchell asked about the site when you knocked me last time and after that I did not hear much. But In the mean time I have created a site architecture for Rayiss, visit this link the check out the website https://rayiss.vercel.app/ . let me know if you want to move from WordPress to SaaS where you will get limitless scaling later. 
+
+
+Hello Mitchel, Hope you are doing well brother. Its been long time havent hear from you. I am excited to share that, I have launced my own web development agency where we build websites, saas applications, Mobile apps, business automations and more. I become a Full-Stack web developer and now working with saas products. here is my website link https://www.growrixos.com/ . please have some time to visit. 
+
+by the time I have created a site architecture for Rayiss, visit this link the check out the website https://rayiss.vercel.app/ . let me know if you want to move from wordpress to Saas where you will get limitless scaling later. 
+
+
+Hello Danny, Hope you are doing well, I am excited to share that, I have launced my own web development agency where we build websites, saas applications, Mobile apps, business automations and more. I become a Full-Stack web developer and now working with saas products. here is my website link https://www.growrixos.com/ . please have some time to visit.  
