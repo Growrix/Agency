@@ -90,11 +90,11 @@
   - status: completed
   - owner: Technical_SEO_expert
   - depends_on: WEB-SEO-002, WEB-SEO-003, WEB-SEO-004
-  - evidence: lint/typecheck/perf:budgets/test/build/release-gates pass; Ongoing DOCS/Technical_SEO/audit-reports/2026-07-14-web-seo-remediation.md
+  - evidence: lint/typecheck/perf:budgets/test/build/release-gates pass (15/15); commit 0350ba0; Ongoing DOCS/Technical_SEO/audit-reports/2026-07-14-web-seo-remediation.md
 
 ## Log
 - 2026-07-14T16:49:00+06:00 | system-builder | intake | Started Technical SEO Cursor adaptation per approved plan
 - 2026-07-14T17:05:00+06:00 | system-builder | complete | All TSEO tasks completed; Technical_SEO_expert + @technical-seo skill active
 - 2026-07-14T17:15:00+06:00 | Technical_SEO_expert | audit_start | Launched full-site Technical SEO audit across web/, sites/, Frontend_Nextjs/
 - 2026-07-14T17:30:00+06:00 | Technical_SEO_expert | audit_complete | Full-site audit report and AI-executable plan saved to Ongoing DOCS/Technical_SEO/audit-reports/
-- 2026-07-14T18:45:00+06:00 | Technical_SEO_expert | web_seo_remediation | Completed focused web/ SEO remediation (WEB-SEO-001..005); release-gates 15/15 pass
+- 2026-07-14T18:45:00+06:00 | Technical_SEO_expert | web_seo_remediation | Completed focused web/ SEO remediation (WEB-SEO-001..005); release-gates 15/15 pass; commit 0350ba0
