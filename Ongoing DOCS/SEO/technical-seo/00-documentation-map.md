@@ -60,7 +60,7 @@ A stable map reduces context waste, prevents duplicate guidance, and helps agent
 
 ## Validation Rules
 
-- All created or updated docs must remain under `Ongoing DOCS/Technical_SEO`.
+- All created or updated docs must remain under `Ongoing DOCS/SEO/technical-seo/` (or sibling SEO disciplines under `Ongoing DOCS/SEO/`).
 - The suite must include map, rules, patterns, templates, checklists, and execution tasks.
 - Every domain document should preserve the required section structure.
 

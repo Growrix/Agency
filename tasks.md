@@ -6,7 +6,7 @@
 - created_by: system-builder
 - created_at: 2026-07-14T16:49:00+06:00
 - last_updated_by: system-builder
-- last_updated_at: 2026-07-14T18:45:00+06:00
+- last_updated_at: 2026-07-14T20:30:00+06:00
 - legacy_tasks_source: DOC/PROJECT PLAN/Tasks/tasks.md
 
 ## Plan
@@ -31,7 +31,7 @@
   - status: completed
   - owner: system-builder
   - depends_on: TSEO-003
-  - evidence: .cursor/brain/lane-router.yaml; Ongoing DOCS/Technical_SEO/agents/platform-installation.md
+  - evidence: .cursor/brain/lane-router.yaml; Ongoing DOCS/SEO/agents/platform-installation.md
 - [x] [TSEO-005] Run compatibility checklist and validate
   - status: completed
   - owner: system-builder
@@ -58,12 +58,12 @@
   - status: completed
   - owner: Technical_SEO_expert
   - depends_on: TSEO-AUDIT-001, TSEO-AUDIT-002, TSEO-AUDIT-003
-  - evidence: Ongoing DOCS/Technical_SEO/audit-reports/2026-07-14-growrixos-full-site-technical-seo-audit.md
+  - evidence: Ongoing DOCS/SEO/technical-seo/audit-reports/2026-07-14-growrixos-full-site-technical-seo-audit.md
 - [x] [TSEO-AUDIT-005] Produce AI-executable Technical SEO plan and roadmap
   - status: completed
   - owner: Technical_SEO_expert
   - depends_on: TSEO-AUDIT-004
-  - evidence: Ongoing DOCS/Technical_SEO/audit-reports/2026-07-14-growrixos-full-site-technical-seo-audit.md (Section 6)
+  - evidence: Ongoing DOCS/SEO/technical-seo/audit-reports/2026-07-14-growrixos-full-site-technical-seo-audit.md (Section 6)
 
 ### Phase WEB-SEO - Focused web/ Technical SEO Remediation
 - [x] [WEB-SEO-001] Fix root canonical inheritance and per-route metadata
@@ -90,12 +90,45 @@
   - status: completed
   - owner: Technical_SEO_expert
   - depends_on: WEB-SEO-002, WEB-SEO-003, WEB-SEO-004
-  - evidence: lint/typecheck/perf:budgets/test/build/release-gates pass (15/15); commit 0350ba0; Ongoing DOCS/Technical_SEO/audit-reports/2026-07-14-web-seo-remediation.md
+  - evidence: lint/typecheck/perf:budgets/test/build/release-gates pass (15/15); commit 0350ba0; Ongoing DOCS/SEO/technical-seo/audit-reports/2026-07-14-web-seo-remediation.md
+
+### Phase SEO-SUITE - Complete SEO Agent Suite
+- [x] [SEO-001] Restructure handbook Ongoing DOCS/Technical_SEO → Ongoing DOCS/SEO/technical-seo + shared root
+  - status: completed
+  - owner: system-builder
+  - depends_on: none
+  - evidence: Ongoing DOCS/SEO/README.md; Ongoing DOCS/SEO/00-documentation-map.md; git mv to technical-seo/
+- [x] [SEO-002] Create On_Page_SEO_expert agent, handbook, personal skill
+  - status: completed
+  - owner: system-builder
+  - depends_on: SEO-001
+  - evidence: .cursor/agents/On_Page_SEO_expert.md; Ongoing DOCS/SEO/on-page-seo/; ~/.cursor/skills/on-page-seo/
+- [x] [SEO-003] Create Off_Page_SEO_expert agent, handbook, personal skill
+  - status: completed
+  - owner: system-builder
+  - depends_on: SEO-001
+  - evidence: .cursor/agents/Off_Page_SEO_expert.md; Ongoing DOCS/SEO/off-page-seo/; ~/.cursor/skills/off-page-seo/
+- [x] [SEO-004] Update Technical_SEO_expert paths to Ongoing DOCS/SEO/technical-seo/
+  - status: completed
+  - owner: system-builder
+  - depends_on: SEO-001
+  - evidence: .cursor/agents/Technical_SEO_expert.md; ~/.cursor/skills/technical-seo/ updated
+- [x] [SEO-005] Update registries and lane-router.yaml
+  - status: completed
+  - owner: system-builder
+  - depends_on: SEO-002, SEO-003, SEO-004
+  - evidence: ~/.cursor/docs/agents_cursor.md; skills-index.md; lanes-index.md; .cursor/brain/lane-router.yaml
+- [x] [SEO-006] Compatibility checklist and platform-installation.md
+  - status: completed
+  - owner: system-builder
+  - depends_on: SEO-005
+  - evidence: Ongoing DOCS/SEO/agents/platform-installation.md; compatibility checklist passed
 
 ## Log
 - 2026-07-14T16:49:00+06:00 | system-builder | intake | Started Technical SEO Cursor adaptation per approved plan
 - 2026-07-14T17:05:00+06:00 | system-builder | complete | All TSEO tasks completed; Technical_SEO_expert + @technical-seo skill active
 - 2026-07-14T17:15:00+06:00 | Technical_SEO_expert | audit_start | Launched full-site Technical SEO audit across web/, sites/, Frontend_Nextjs/
-- 2026-07-14T17:30:00+06:00 | Technical_SEO_expert | audit_complete | Full-site audit report and AI-executable plan saved to Ongoing DOCS/Technical_SEO/audit-reports/
+- 2026-07-14T17:30:00+06:00 | Technical_SEO_expert | audit_complete | Full-site audit report saved to Ongoing DOCS/SEO/technical-seo/audit-reports/
+- 2026-07-14T19:00:00+06:00 | senior-saas-developer | email_url_fix | Fixed transactional email localhost links via resolveAppBaseUrl()
 - 2026-07-14T18:45:00+06:00 | Technical_SEO_expert | web_seo_remediation | Completed focused web/ SEO remediation (WEB-SEO-001..005); release-gates 15/15 pass; commit 0350ba0
-- 2026-07-14T19:00:00+06:00 | senior-saas-developer | email_url_fix | Fixed transactional email localhost links via resolveAppBaseUrl(); unit tests 55/55 pass
+- 2026-07-14T20:30:00+06:00 | system-builder | seo_suite_complete | Complete SEO Agent Suite: On_Page + Off_Page experts, unified Ongoing DOCS/SEO/ handbook, registries and lane-router updated
