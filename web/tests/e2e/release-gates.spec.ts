@@ -21,6 +21,11 @@ test("security headers and auth protection are present", async ({ request }) => 
   expect(response.headers()["x-frame-options"]).toBe("DENY");
   expect(response.headers()["strict-transport-security"]).toContain("max-age=31536000");
 
+  const homeNoRedirect = await request.get("/", { maxRedirects: 0 });
+  expect(homeNoRedirect.status()).toBe(200);
+  const homeLocation = homeNoRedirect.headers()["location"] ?? "";
+  expect(homeLocation).not.toMatch(/clerk\.accounts\.dev/);
+
   const adminApi = await request.get("/api/v1/admin/analytics", { maxRedirects: 0 });
   expect([401, 307, 308]).toContain(adminApi.status());
   if ([307, 308].includes(adminApi.status())) {

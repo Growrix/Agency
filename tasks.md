@@ -6,7 +6,7 @@
 - created_by: system-builder
 - created_at: 2026-07-14T16:49:00+06:00
 - last_updated_by: system-builder
-- last_updated_at: 2026-07-14T20:30:00+06:00
+- last_updated_at: 2026-07-15T18:45:00+06:00
 - legacy_tasks_source: DOC/PROJECT PLAN/Tasks/tasks.md
 
 ## Plan
@@ -124,6 +124,28 @@
   - depends_on: SEO-005
   - evidence: Ongoing DOCS/SEO/agents/platform-installation.md; compatibility checklist passed
 
+### Phase WEB-PERF - Homepage Performance Remediation
+- [x] [WEB-PERF-001] Write Pingdom/HAR audit report
+  - status: completed
+  - owner: Technical_SEO_expert
+  - depends_on: none
+  - evidence: Ongoing DOCS/SEO/technical-seo/audit-reports/2026-07-15-growrixos-homepage-pingdom-performance-audit.md
+- [x] [WEB-PERF-002] Narrow Clerk proxy matcher to skip handshake on marketing routes
+  - status: completed
+  - owner: Technical_SEO_expert
+  - depends_on: WEB-PERF-001
+  - evidence: web/src/proxy.ts — createRouteMatcher + legacyProxy for marketing routes
+- [x] [WEB-PERF-003] Add E2E regression for homepage 200 without Clerk handshake
+  - status: completed
+  - owner: Technical_SEO_expert
+  - depends_on: WEB-PERF-002
+  - evidence: web/tests/e2e/release-gates.spec.ts security headers test
+- [x] [WEB-PERF-004] Run health:check validation
+  - status: completed
+  - owner: Technical_SEO_expert
+  - depends_on: WEB-PERF-003
+  - evidence: npm run health:check exit 0; release-gates 15/15 pass
+
 ## Log
 - 2026-07-14T16:49:00+06:00 | system-builder | intake | Started Technical SEO Cursor adaptation per approved plan
 - 2026-07-14T17:05:00+06:00 | system-builder | complete | All TSEO tasks completed; Technical_SEO_expert + @technical-seo skill active
@@ -131,4 +153,4 @@
 - 2026-07-14T17:30:00+06:00 | Technical_SEO_expert | audit_complete | Full-site audit report saved to Ongoing DOCS/SEO/technical-seo/audit-reports/
 - 2026-07-14T19:00:00+06:00 | senior-saas-developer | email_url_fix | Fixed transactional email localhost links via resolveAppBaseUrl()
 - 2026-07-14T18:45:00+06:00 | Technical_SEO_expert | web_seo_remediation | Completed focused web/ SEO remediation (WEB-SEO-001..005); release-gates 15/15 pass; commit 0350ba0
-- 2026-07-14T20:30:00+06:00 | system-builder | seo_suite_complete | Complete SEO Agent Suite: On_Page + Off_Page experts, unified Ongoing DOCS/SEO/ handbook, registries and lane-router updated
+- 2026-07-15T18:45:00+06:00 | Technical_SEO_expert | web_perf_remediation | Homepage Clerk handshake fix; audit report; health:check 15/15 pass
