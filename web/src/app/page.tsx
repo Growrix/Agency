@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { HomeHeroGate } from "@/components/marketing/HomeHeroGate";
+import { HomeHeroLcpHints } from "@/components/marketing/HomeHeroLcpHints";
 import { HomeBelowFoldGate } from "@/components/marketing/HomeBelowFoldGate";
 
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
+import { resolveHeroLcpPosters } from "@/lib/home-hero-lcp";
 import { buildPageMetadata, HOME_SHARE_DESCRIPTION, HOME_SHARE_TITLE } from "@/lib/seo-metadata";
 import { buildOrganizationSchema, buildWebSiteSchema } from "@/lib/seo-structured-data";
 
@@ -25,6 +27,8 @@ import {
   getWebsiteTemplateHtmlPreviewUrl,
 
   listWebsiteTemplateHtmlPreviews,
+
+  previewPosterAlt,
 
   WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_SLUG,
 
@@ -122,7 +126,7 @@ export default async function Home() {
 
           src: getPreviewPosterUrl(htmlPreviewFallbackTemplate.slug, "desktop"),
 
-          alt: `${htmlPreviewFallbackTemplate.title} desktop preview`,
+          alt: previewPosterAlt(htmlPreviewFallbackTemplate.title, "desktop"),
 
         }
 
@@ -134,13 +138,15 @@ export default async function Home() {
 
           src: getPreviewPosterUrl(htmlPreviewFallbackTemplate.slug, "mobile"),
 
-          alt: `${htmlPreviewFallbackTemplate.title} mobile preview`,
+          alt: previewPosterAlt(htmlPreviewFallbackTemplate.title, "mobile"),
 
         }
 
       : undefined,
 
   };
+
+  const lcpPosters = resolveHeroLcpPosters(heroPreviewSlides, heroPreviewFallbackSlide);
 
   const homeStructuredData: JsonLdData[] = [
     buildOrganizationSchema(),
@@ -152,6 +158,8 @@ export default async function Home() {
   return (
 
     <>
+
+      <HomeHeroLcpHints mobilePoster={lcpPosters.mobile} desktopPoster={lcpPosters.desktop} />
 
       <JsonLd data={homeStructuredData} />
 
@@ -167,6 +175,8 @@ export default async function Home() {
         slides={heroPreviewSlides}
 
         emptyFallbackSlide={heroPreviewFallbackSlide}
+
+        lcpPosters={lcpPosters}
 
       />
 

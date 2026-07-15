@@ -106,7 +106,7 @@ export function Header({
           <button
             type="button"
             onClick={() => openConcierge()}
-            className="hidden size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:inline-flex"
+            className="hidden size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation lg:inline-flex"
             aria-label="Open chat"
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
@@ -114,7 +114,7 @@ export function Header({
           <CartHoverMenu cartHydrated={cartHydrated} className="hidden lg:inline-flex" />
           <Link
             href="/cart"
-            className="relative inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset lg:hidden"
+            className="relative inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation lg:hidden"
             aria-label={
               cartHydrated && cartCount > 0
                 ? `Open shopping cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`
@@ -133,7 +133,7 @@ export function Header({
           <PublicAuthControls />
           <button
             type="button"
-            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-inset lg:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full hover:bg-inset touch-manipulation lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"

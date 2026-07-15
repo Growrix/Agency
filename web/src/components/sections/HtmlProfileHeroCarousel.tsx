@@ -224,7 +224,7 @@ function CarouselPreviewFrame({
 }
 
 const carouselNavButtonClassName =
-  "pointer-events-auto inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text shadow-sm backdrop-blur-sm transition hover:border-primary/40 hover:bg-surface hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:pointer-events-none disabled:opacity-40";
+  "pointer-events-auto inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text shadow-sm backdrop-blur-sm transition hover:border-primary/40 hover:bg-surface hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:pointer-events-none disabled:opacity-40 touch-manipulation";
 
 export { carouselNavButtonClassName };
 

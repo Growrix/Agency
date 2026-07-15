@@ -603,3 +603,26 @@ Remaining parallel tracks:
   - Pre-fix Playwright scroll reproduction showed `Canvas2DParticles` effect re-initializing and `useHeroScrollTransform` effect restarting on scroll.
   - Post-fix reproduction shows `scrollProgress update` events from GSAP but **no additional canvas effect runs** during/after the scroll and **no repeated ScrollTrigger teardown/recreation**.
   - `npm run health:check` exit 0 (lint, typecheck, perf budgets, unit/integration tests, production build, 15 release-gate Playwright tests).
+
+### 2026-07-15 — PSI performance, SEO 85, and Google indexing prep (WEB-PERF-005)
+- **Status:** Code complete; production indexing env flip pending operator action in Vercel.
+- **Scope:** LCP SSR poster + preload, WebP poster pipeline, crawlable mobile nav, tap targets, live audit + GSC docs.
+- **Changes:**
+  - `HomeHeroPlaceholder` — SSR LCP poster (mobile + desktop) with `<picture>` WebP fallback
+  - `HomeHeroLcpHints` + `resolveHeroLcpPosters` — preload first hero poster in document head
+  - `HomeHeroStackLogos` — demote stack SVG `fetchPriority` to low
+  - `WebsiteTemplateHtmlDesktopPosterFrame` / `MobilePreviewFrame` — WebP `<picture>` sources
+  - `generate-preview-posters.mjs` — WebP generation + sharp PNG conversion path
+  - `MobileBottomNav` — Chat item is crawlable `<Link href="/ai-concierge">`
+  - Shell tap targets — Header, ThemeToggle, PublicAuthControls bumped to 44px (`size-11`)
+  - `HtmlProfileHeroCarousel` — nav controls `size-11`
+  - `previewPosterAlt()` helper for alt fallbacks
+  - Release gates: SSR LCP poster hints + crawlable chat link (17/17 pass)
+  - Audit docs: `2026-07-15-growrixos-psi-indexing-live-audit.md`, `google-indexing-enablement-checklist.md`, `google-search-console-setup.md`
+- **Live production baseline (pre-deploy):** Homepage 200 without Clerk redirect; `robots.txt` still `Disallow: /` (indexing off); sitemap reachable but apex host in URLs.
+- **Operator next steps:**
+  1. Deploy this commit to production
+  2. Vercel env: `SITE_INDEXING_ENABLED=true`, `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com`
+  3. Follow `Ongoing DOCS/SEO/technical-seo/audit-reports/google-search-console-setup.md`
+  4. Re-run Pingdom + PageSpeed Insights mobile on `/`
+- **Verification:** `npm run health:check` exit 0 (17 release-gate tests including new LCP + nav checks).

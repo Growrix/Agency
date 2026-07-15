@@ -69,7 +69,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
         <SignInButton mode="modal">
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] sm:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-surface shadow-(--shadow-1) transition-[background-color,transform] duration-200 ease-signal hover:-translate-y-px hover:bg-primary-hover active:translate-y-0 active:scale-[0.97] touch-manipulation sm:hidden"
             aria-label="Sign in"
             title="Sign in"
             onClick={onNavigate}
@@ -95,7 +95,7 @@ export function PublicAuthControls({ variant = "header", onNavigate, className }
       <SignedIn>
         <Link
           href="/dashboard"
-          className="inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset sm:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation sm:hidden"
           aria-label="My dashboard"
           title="My dashboard"
           onClick={onNavigate}

@@ -117,21 +117,23 @@ export function WebsiteTemplateHtmlDesktopPosterFrame({
           transformOrigin: "top left",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- must mirror iframe box model inside transform scale */}
-        <img
-          src={posterImage.src}
-          alt={posterImage.alt}
-          width={viewportWidth}
-          height={viewportHeight}
-          className="block max-h-none max-w-none border-0 bg-surface"
-          style={{
-            width: viewportWidth,
-            height: viewportHeight,
-          }}
-          decoding="async"
-          loading={imagePriority ? "eager" : "lazy"}
-          fetchPriority={imagePriority ? "high" : "low"}
-        />
+        <picture className="block max-h-none max-w-none border-0 bg-surface">
+          <source srcSet={posterImage.src.replace(/\.png$/i, ".webp")} type="image/webp" />
+          <img
+            src={posterImage.src}
+            alt={posterImage.alt}
+            width={viewportWidth}
+            height={viewportHeight}
+            className="block max-h-none max-w-none border-0 bg-surface"
+            style={{
+              width: viewportWidth,
+              height: viewportHeight,
+            }}
+            decoding="async"
+            loading={imagePriority ? "eager" : "lazy"}
+            fetchPriority={imagePriority ? "high" : "low"}
+          />
+        </picture>
       </div>
     </div>
   );
