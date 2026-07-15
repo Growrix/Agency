@@ -28,7 +28,7 @@ export default async function FreeProductsPage() {
   const freeProducts = (await listPublicShopProducts()).filter(isFreeProduct);
   const freeStructuredData = [
     buildCollectionPageSchema({
-      name: "Free Products",
+      name: "Free Website Templates & Starters",
       description: "Browse free offers and starter downloads from the catalog.",
       path: "/digital-products/free",
       items: freeProducts.map((product) => ({
@@ -52,7 +52,7 @@ export default async function FreeProductsPage() {
           <SectionHeading
             as="h1"
             eyebrow="Free"
-            title="Free products"
+            title="Free Website Templates & Starters"
             description="Starter templates and resources you can use before committing to paid bundles."
           />
           <LinkButton href="/digital-products" variant="outline" size="sm">

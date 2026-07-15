@@ -23,7 +23,7 @@ export default async function ProductBundlesPage() {
   const bundles = (await listPublicShopProducts()).filter(isBundleProduct);
   const bundlesStructuredData = [
     buildCollectionPageSchema({
-      name: "Product Bundles",
+      name: "Website Template Bundles",
       description: "Explore bundle and package offers from the published product catalog.",
       path: "/digital-products/bundles",
       items: bundles.map((product) => ({
@@ -47,7 +47,7 @@ export default async function ProductBundlesPage() {
           <SectionHeading
             as="h1"
             eyebrow="Bundles"
-            title="Product bundles"
+            title="Website Template Bundles"
             description="Curated packs and grouped offers designed for faster launch decisions."
           />
           <LinkButton href="/digital-products" variant="outline" size="sm">

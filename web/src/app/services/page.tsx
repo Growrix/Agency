@@ -61,9 +61,9 @@ import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Services — Choose the Right Path for Your Business",
+  title: "Web Development Services — Websites, SaaS & Apps",
   description:
-    "Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
+    "Compare custom website, SaaS, and mobile app development paths. Book a strategy call to choose the right engagement model.",
   path: "/services",
 });
 
@@ -155,9 +155,9 @@ export default async function ServicesPage() {
 	);
 	const servicesStructuredData = [
 		buildCollectionPageSchema({
-			name: "Services — Choose the Right Path for Your Business",
+			name: "Web Development Services — Websites, SaaS & Apps",
 			description:
-				"Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
+				"Compare custom website, SaaS, and mobile app development paths. Book a strategy call to choose the right engagement model.",
 			path: "/services",
 			items: allServices.map((service) => ({
 				name: service.title,

@@ -652,3 +652,9 @@ Remaining parallel tracks:
 - **Bugs:** Gated `api/debug-log` to non-production; `success/page.tsx` auth sentinel uses `resolveAppBaseUrl()`; Tailwind `break-words` → `wrap-break-word` in admin submission detail.
 - **Operator action (Stream A):** Set `SITE_INDEXING_ENABLED=true` and `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` in Vercel Production, redeploy, then submit `https://www.growrixos.com/sitemap.xml` in Google Search Console.
 - **Verification:** `npm run health:check` exit 0 (17/17 release gates).
+
+### 2026-07-16 — On-page SEO approved text changes (WEB-SEO-TXT-002)
+- **Status:** All user-approved TXT items implemented. TXT-011/013/022 remain as-is per user rejection.
+- **Approved + implemented:** TXT-001 (home title), TXT-002 (home meta), TXT-003 (services title+meta), TXT-004 (pricing title+meta), TXT-006 (service detail title pattern → `${title} Development`), TXT-007 (about title), TXT-008 (additional-services title), TXT-010 (hero badge), TXT-012 (hero description), TXT-023 (contact channel label), TXT-024 (free/bundles H1), TXT-030 (footer AI concierge kept removed).
+- **Files touched:** `seo-metadata.ts`, `home-conversion-content.ts`, `contact-landing-content.ts`, `services/page.tsx`, `services/[slug]/page.tsx`, `pricing/page.tsx`, `about/page.tsx`, `additional-services/page.tsx`, `digital-products/free/page.tsx`, `digital-products/bundles/page.tsx`, approval-queue doc.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0. Pre-existing warnings in `checkout/payment/page.tsx` unrelated.

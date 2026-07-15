@@ -358,7 +358,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = await getPublicService(slug);
   if (!service) return { title: "Service not found", robots: NOINDEX_ROBOTS };
   return buildPageMetadata({
-    title: `${service.title} Service`,
+    title: `${service.title} Development`,
     description: service.description,
     path: `/services/${slug}`,
   });

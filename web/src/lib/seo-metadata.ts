@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 export const DEFAULT_OG_IMAGE = "/images/og/growrix-os-share.png";
 
-export const HOME_SHARE_TITLE = "Agency for Websites, SaaS Applications, Mobile Apps, Automations";
+export const HOME_SHARE_TITLE = "Custom Website & SaaS Development Agency";
 
 export const HOME_SHARE_DESCRIPTION =
-  "Growrix OS is an agency specializing in websites, SaaS applications, mobile apps, and automation systems for ambitious teams.";
+  "Founder-led studio for custom websites, SaaS products, and mobile apps. Production-ready delivery with transparent pricing and post-launch support.";
 
 export const NOINDEX_ROBOTS: NonNullable<Metadata["robots"]> = {
   index: false,

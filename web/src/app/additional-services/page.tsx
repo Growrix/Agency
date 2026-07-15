@@ -38,7 +38,7 @@ import { buildBreadcrumbListSchema, buildFaqPageSchema, buildWebPageSchema } fro
 import { WHATSAPP_HREF } from "@/lib/nav";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "SEO Service — SEO Setup, Analytics & Technical Optimization",
+  title: "SEO & Analytics Setup — One-Time Technical Package",
   description:
     "One-time SEO and analytics setup services: Google Search Console, Meta Pixel, GA4, structured data, Core Web Vitals, and more. Get your product found and tracked from day one.",
   path: "/additional-services",
@@ -151,7 +151,7 @@ export default function AdditionalServicesPage() {
   const faqSchema = buildFaqPageSchema(FAQ_ITEMS);
   const additionalServicesStructuredData = [
     buildWebPageSchema({
-      name: "SEO Service — SEO Setup, Analytics & Technical Optimization",
+      name: "SEO & Analytics Setup — One-Time Technical Package",
       description:
         "One-time SEO and analytics setup services: Google Search Console, Meta Pixel, GA4, structured data, Core Web Vitals, and more. Get your product found and tracked from day one.",
       path: "/additional-services",

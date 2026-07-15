@@ -1,7 +1,7 @@
 # Suggested Text Changes — Approval Queue
 
-Document status: **PENDING USER APPROVAL — DO NOT IMPLEMENT**
-Last updated: 2026-07-15
+Document status: **IMPLEMENTED — all approved items applied 2026-07-16**
+Last updated: 2026-07-16
 Project / lane: `web/`
 Agent: On_Page_SEO_expert
 
@@ -207,24 +207,24 @@ Agent: On_Page_SEO_expert
 
 | Item ID | Status | Approved by | Date |
 | --- | --- | --- | --- |
+| TXT-001 | Implemented | User approved | 2026-07-16 |
+| TXT-002 | Implemented | User approved | 2026-07-16 |
+| TXT-003 | Implemented | User approved | 2026-07-16 |
+| TXT-004 | Implemented | User approved | 2026-07-16 |
 | TXT-005 | Implemented | User directive | 2026-07-16 |
+| TXT-006 | Implemented | User approved | 2026-07-16 |
+| TXT-007 | Implemented | User approved | 2026-07-16 |
+| TXT-008 | Implemented | User approved | 2026-07-16 |
+| TXT-010 | Implemented | User approved | 2026-07-16 |
 | TXT-011 | Keep as-is | User rejected | 2026-07-16 |
+| TXT-012 | Implemented | User approved | 2026-07-16 |
 | TXT-013 | Keep as-is | User rejected | 2026-07-16 |
 | TXT-020 | Implemented | User directive | 2026-07-16 |
 | TXT-021 | Implemented | User directive | 2026-07-16 |
 | TXT-022 | Keep as-is | User rejected | 2026-07-16 |
+| TXT-023 | Implemented | User approved | 2026-07-16 |
+| TXT-024 | Implemented | User approved | 2026-07-16 |
+| TXT-030 | Keep removed | User approved | 2026-07-16 |
 | TXT-031 | Eliminated | User directive | 2026-07-16 |
-| TXT-001 | Pending | — | — |
-| TXT-002 | Pending | — | — |
-| TXT-003 | Pending | — | — |
-| TXT-004 | Pending | — | — |
-| TXT-006 | Pending | — | — |
-| TXT-007 | Pending | — | — |
-| TXT-008 | Pending | — | — |
-| TXT-010 | Pending | — | — |
-| TXT-012 | Pending | — | — |
-| TXT-023 | Pending | — | — |
-| TXT-024 | Pending | — | — |
-| TXT-030 | Pending | — | — |
 
 **After approval:** Hand off to `@frontend-content-strategist` for copy implementation, then `Technical_SEO_expert` for metadata validation.

@@ -44,7 +44,7 @@ import { MarketingSplitHero } from "@/components/marketing/MarketingSplitHero";
 import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "About — Founder-Led Product Studio",
+  title: "About — Founder-Led Web & SaaS Studio",
   description:
     "GrowrixOS is a founder-led product studio building websites, SaaS applications, mobile products, automation, technical SEO, and AI business systems for measurable outcomes.",
   path: "/about",
@@ -53,7 +53,7 @@ export const metadata: Metadata = buildPageMetadata({
 export default function AboutPage() {
   const aboutStructuredData = [
     buildWebPageSchema({
-      name: "About — Founder-Led Product Studio",
+      name: "About — Founder-Led Web & SaaS Studio",
       description:
         "GrowrixOS is a founder-led product studio building websites, SaaS applications, mobile products, automation, technical SEO, and AI business systems for measurable outcomes.",
       path: "/about",

@@ -55,9 +55,9 @@ export const CONTACT_CHANNELS = {
       hotline: true,
     },
     {
-      name: "Instant Answers",
+      name: "Quick answers",
       description: "Best for instant guidance about services, products, timelines, and project planning.",
-      action: "Ask AI GrowrixOS",
+      action: "AI assistant",
       href: "concierge",
     },
     {

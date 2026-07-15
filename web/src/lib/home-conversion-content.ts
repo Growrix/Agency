@@ -13,15 +13,15 @@ export const HOME_HERO_HIGHLIGHTS = [
 ] as const;
 
 export const HOME_HERO_COPY = {
-  badge: "Productized SaaS studio + digital marketplace",
+  badge: "Founder-led web, SaaS & mobile app studio",
   titleLines: ["Launch faster.", "Scale smarter."],
   titleAccent: "Grow with confidence.",
   description:
-    "Access production-ready systems, powerful digital products, and expert growth support — all in one place.",
+    "Custom websites, SaaS products, and mobile apps — from strategy through launch. Or start faster with our ready-made templates.",
   /** Mobile hero — balanced for two lines at ~390px with token typography. */
   mobileDescriptionLines: [
-    "Production-ready systems, digital products,",
-    "and expert growth support — all in one place.",
+    "Custom websites, SaaS products, and mobile apps",
+    "from strategy through launch.",
   ],
   primaryCta: "Browse Digital Products",
   primaryCtaHref: "/digital-products",
