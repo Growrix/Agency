@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildCollectionPageSchema } from "@/lib/seo-structured-data";
 import Link from "next/link";
 import {
 	ArrowRightIcon,
@@ -59,7 +61,7 @@ import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Services | Choose the Right Path for Your Business",
+  title: "Services — Choose the Right Path for Your Business",
   description:
     "Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
   path: "/services",
@@ -151,9 +153,26 @@ export default async function ServicesPage() {
 	const highlightServices = SERVICES_LANDING_HIGHLIGHT_SLUGS.map((slug) => serviceBySlug.get(slug)).filter(
 		(service): service is NonNullable<typeof service> => Boolean(service),
 	);
+	const servicesStructuredData = [
+		buildCollectionPageSchema({
+			name: "Services — Choose the Right Path for Your Business",
+			description:
+				"Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
+			path: "/services",
+			items: allServices.map((service) => ({
+				name: service.title,
+				path: `/services/${service.slug}`,
+			})),
+		}),
+		buildBreadcrumbListSchema([
+			{ name: "Home", path: "/" },
+			{ name: "Services", path: "/services" },
+		]),
+	];
 
 	return (
 		<>
+			<JsonLd data={servicesStructuredData} />
 			<Section
 				{...marketingSection("services", "hero")}
 				layout="viewport"

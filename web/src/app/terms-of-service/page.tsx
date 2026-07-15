@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildWebPageSchema } from "@/lib/seo-structured-data";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
@@ -83,6 +85,20 @@ export default function TermsPage() {
     "Last updated April 19, 2026. These terms cover services, products, payments, refunds, and acceptable use.";
 
   return (
+    <>
+      <JsonLd
+        data={[
+          buildWebPageSchema({
+            name: "Terms of Service",
+            description: "Review the commercial, licensing, payment, and delivery terms for Growrix OS services and digital products.",
+            path: "/legal/terms",
+          }),
+          buildBreadcrumbListSchema([
+            { name: "Home", path: "/" },
+            { name: "Terms of Service", path: "/legal/terms" },
+          ]),
+        ]}
+      />
     <Section className="overflow-x-hidden py-10 sm:py-12">
       <Container width="reading" className="min-w-0 px-4 sm:px-6">
         <MarketingViewportGate
@@ -147,5 +163,6 @@ export default function TermsPage() {
         />
       </Container>
     </Section>
+    </>
   );
 }

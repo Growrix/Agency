@@ -17,8 +17,8 @@ function BrowserShell({ children }: { children: React.ReactNode }) {
 function StatPill({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0 rounded-[14px] border border-white/10 bg-white/4 px-4 py-3">
-      <p className="break-words font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">{label}</p>
-      <p className="mt-2 break-words font-display text-lg tracking-tight text-white">{value}</p>
+      <p className="wrap-break-word font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">{label}</p>
+      <p className="mt-2 wrap-break-word font-display text-lg tracking-tight text-white">{value}</p>
     </div>
   );
 }
@@ -163,7 +163,7 @@ function MobilePreview() {
   return (
     <BrowserShell>
       <div className="grid min-w-0 gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-        <div className="mx-auto w-full max-w-[13.75rem] rounded-[32px] border border-white/10 bg-black/35 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+        <div className="mx-auto w-full max-w-55 rounded-[32px] border border-white/10 bg-black/35 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
           <div className="overflow-hidden rounded-lg border border-white/10 bg-linear-to-b from-[#16202a] via-[#10151f] to-[#0f1218] p-4">
             <div className="mx-auto h-1.5 w-20 rounded-full bg-white/15" />
             <div className="mt-6 h-20 rounded-[18px] bg-linear-to-br from-primary/30 via-accent/20 to-secondary/20" />

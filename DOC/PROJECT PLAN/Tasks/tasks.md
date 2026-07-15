@@ -632,3 +632,23 @@ Remaining parallel tracks:
 - **Root cause:** Legacy repo-root `public/` is a real directory (subset of `web/public/`). Bridge could not symlink canonical assets; 37 newer files (36 WebP posters + updated manifest) existed only under `web/public/`.
 - **Fix:** `vercel-monorepo-finalizer-bridge.mjs` — when `public/` blocks symlink, remove blocker and symlink `web/public` at repo root; merge fallback if symlink still fails.
 - **Verification:** Local `VERCEL=1` bridge run created `public -> web/public` symlink; `npm run ci:check` exit 0. Remote Vercel Ready pending post-push inspect.
+
+### 2026-07-15 — Growrix OS on-page SEO audit + non-text implementation (WEB-SEO-ONPAGE-001)
+- **Status:** Documentation complete; non-text code fixes implemented; text changes held in approval queue.
+- **Deliverables:**
+  - `Ongoing DOCS/SEO/on-page-seo/audit-reports/2026-07-15-growrixos-on-page-audit.md`
+  - `Ongoing DOCS/SEO/on-page-seo/implementation-briefs/2026-07-15-growrixos-build-brief.md`
+  - `Ongoing DOCS/SEO/on-page-seo/implementation-briefs/2026-07-15-growrixos-suggested-text-changes.md` (pending user approval)
+  - `Ongoing DOCS/SEO/on-page-seo/strategy/2026-07-15-growrixos-content-strategy.md`
+- **Code (non-text only):** `buildPageMetadata` on 6 routes; 404 noindex; sitemap additions; H1 structural fix on free/bundles; `buildBreadcrumbListSchema` + JSON-LD on blog/service/portfolio/product detail; CollectionPage on digital-products index; category OG image; title-template dedup on 6 listing pages; AI concierge removed from footer Support nav.
+- **Deferred:** All title/meta/H1/body copy rewrites in suggested-text-changes doc — implement only after user approves item IDs.
+- **Verification:** `npm run health:check` exit 0 (17/17 release gates).
+
+### 2026-07-16 — SEO + quality remediation plan (WEB-SEO-REMEDIATION-001)
+- **Status:** Streams B–E implemented; Stream A operator action documented; Stream F unchanged (TXT approval queue).
+- **Indexing/crawl:** Removed `/additional-services` → `/services/technical-seo` redirect so the page is reachable; cleaned `sitemap.ts` (removed redirect-only `/privacy-policy`, `/terms-of-service`, `/html-business-profiles`, duplicate `/services/technical-seo`).
+- **Metadata:** Migrated `shop/[slug]` and `digital-products/category/[category]` to `buildPageMetadata`; not-found slugs return `NOINDEX_ROBOTS` on 5 dynamic routes; replaced `|` title separators with em dashes on 6 pages; AI concierge title → `AI Assistant`.
+- **Structured data:** Added `buildWebPageSchema`, `buildContactPageSchema`, `buildCollectionPageSchema`, `buildBlogSchema` helpers; JSON-LD on services/portfolio/blog/free/bundles index pages plus about, contact, book-appointment, ai-concierge, refund-policy, legal pages, additional-services (WebPage + FAQ + breadcrumbs).
+- **Bugs:** Gated `api/debug-log` to non-production; `success/page.tsx` auth sentinel uses `resolveAppBaseUrl()`; Tailwind `break-words` → `wrap-break-word` in admin submission detail.
+- **Operator action (Stream A):** Set `SITE_INDEXING_ENABLED=true` and `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` in Vercel Production, redeploy, then submit `https://www.growrixos.com/sitemap.xml` in Google Search Console.
+- **Verification:** `npm run health:check` exit 0 (17/17 release gates).

@@ -6,6 +6,10 @@ export const runtime = "edge";
  * so the page sends logs here and the server handler forwards them.
  */
 export async function POST(request: Request) {
+  if (process.env.NODE_ENV === "production") {
+    return new Response(null, { status: 204 });
+  }
+
   let body: string;
   try {
     body = await request.text();

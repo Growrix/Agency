@@ -292,7 +292,7 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
                 .map(([key, value]) => (
                   <div key={key} className="grid grid-cols-[160px_1fr] gap-2">
                     <dt className="text-text-muted">{key}</dt>
-                    <dd className="break-words text-text">
+                    <dd className="wrap-break-word text-text">
                       {typeof value === "object" ? JSON.stringify(value) : String(value)}
                     </dd>
                   </div>

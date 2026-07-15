@@ -148,11 +148,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/additional-services",
-        destination: "/services/technical-seo",
-        permanent: true,
-      },
-      {
         source: "/privacy-policy",
         destination: "/legal/privacy",
         permanent: true,

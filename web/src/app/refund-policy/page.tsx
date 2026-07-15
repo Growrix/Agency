@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildWebPageSchema } from "@/lib/seo-structured-data";
 import Link from "next/link";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
@@ -7,11 +10,12 @@ import { MarketingViewportGate } from "@/components/marketing/MarketingViewportG
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { LegalDocumentMobile } from "@/components/marketing/legal/LegalDocumentMobile";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Refund Policy",
   description:
     "Growrix OS refund policy for digital products, service tiers, and custom engagements — including timeframes, eligibility, and how to request a refund.",
-};
+  path: "/refund-policy",
+});
 
 const SECTIONS = [
   {
@@ -89,6 +93,21 @@ export default function RefundPolicyPage() {
     "Last updated July 3, 2026. This policy explains refund eligibility, timeframes, and how to file a request for Growrix OS purchases.";
 
   return (
+    <>
+      <JsonLd
+        data={[
+          buildWebPageSchema({
+            name: "Refund Policy",
+            description:
+              "Growrix OS refund policy for digital products, service tiers, and custom engagements — including timeframes, eligibility, and how to request a refund.",
+            path: "/refund-policy",
+          }),
+          buildBreadcrumbListSchema([
+            { name: "Home", path: "/" },
+            { name: "Refund Policy", path: "/refund-policy" },
+          ]),
+        ]}
+      />
     <Section className="overflow-x-hidden py-10 sm:py-12">
       <Container width="reading" className="min-w-0 px-4 sm:px-6">
         <MarketingViewportGate
@@ -156,5 +175,6 @@ export default function RefundPolicyPage() {
         />
       </Container>
     </Section>
+    </>
   );
 }

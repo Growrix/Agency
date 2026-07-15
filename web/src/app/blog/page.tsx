@@ -2,6 +2,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBlogSchema, buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { ArrowUpRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
@@ -74,6 +76,22 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
 
   const categories = getBlogCategoryCounts(sorted);
   const tags = getBlogTagCounts(sorted);
+  const blogStructuredData = [
+    buildBlogSchema({
+      name: "Blog — Field notes",
+      description:
+        "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, and automation.",
+      path: "/blog",
+      posts: sorted.slice(0, 20).map((post) => ({
+        name: post.title,
+        path: `/blog/${post.slug}`,
+      })),
+    }),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+    ]),
+  ];
 
   function buildChipHref(removeKey: string) {
     const next = new URLSearchParams();
@@ -112,6 +130,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
 
   return (
     <>
+      <JsonLd data={blogStructuredData} />
       {/* Hero / featured */}
       <MarketingViewportGate
         mobile={

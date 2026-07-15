@@ -14,12 +14,15 @@ import { Card } from "@/components/primitives/Card";
 import { Badge } from "@/components/primitives/Badge";
 import { ConciergeTriggerButton } from "@/components/ai/ConciergeTrigger";
 import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: "Page Not Found",
   description: "The page could not be found. Continue to services, products, portfolio, booking, or support.",
-};
+  path: "/404",
+  noIndex: true,
+});
 
 const DESTINATIONS = [
   { icon: Squares2X2Icon, label: "Services", description: "Browse the four practices.", href: "/services" },

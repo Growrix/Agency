@@ -7,7 +7,7 @@ import { FAQ_CATEGORIES, FAQ_QUESTIONS, FAQ_QUICK } from "@/lib/faq-content";
 import { listSanityFaqItems } from "@/server/sanity/marketing";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "FAQ — Growrix OS",
+  title: "FAQ",
   description:
     "Answers about Growrix OS services, digital products, delivery timelines, pricing, support, and how to start a project.",
   path: "/faq",

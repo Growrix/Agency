@@ -272,7 +272,7 @@ export function ShopPageDesktop({
         </Container>
       </Section>
 
-      <Section className="!py-0">
+      <Section className="py-0!">
         <Container>
           <nav aria-label="Product categories" className="shop-desktop__category-tabs">
             <Link
