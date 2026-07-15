@@ -28,7 +28,7 @@ export const FAQ_QUESTIONS: FaqQuestion[] = [
     category: "services",
     question: "What services do you offer?",
     answer:
-      "Premium websites, HTML business profiles, SaaS applications, mobile apps, automation, technical SEO, and AI business systems. MCP servers are available as a secondary scope when agent workflows are part of the roadmap.",
+      "Premium websites, HTML business profiles, SaaS applications, mobile apps, automation, technical SEO, and AI business systems. Agent integrations and API-based workflows are scoped when they support the main build.",
   },
   {
     category: "services",
@@ -111,12 +111,6 @@ export const FAQ_QUESTIONS: FaqQuestion[] = [
     question: "What stack do you prefer?",
     answer:
       "Next.js, React, TypeScript, Tailwind, and headless CMS setups like Strapi or Sanity are our defaults for websites. For products, we layer in the backend and infra that fit the roadmap.",
-  },
-  {
-    category: "technical",
-    question: "Where do you deploy MCP servers?",
-    answer:
-      "Cloudflare Workers, Fly, Vercel, or your AWS - when MCP is part of the roadmap, we adapt to your infra preferences and security posture.",
   },
   {
     category: "technical",

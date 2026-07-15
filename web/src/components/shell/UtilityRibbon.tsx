@@ -24,7 +24,7 @@ export function UtilityRibbon() {
             WhatsApp
           </Link>
           <Link href="/digital-products" className="text-secondary hover:opacity-90">
-            Spring bundle: 20% off MCP starters →
+            Browse website templates & starters →
           </Link>
         </div>
       </div>

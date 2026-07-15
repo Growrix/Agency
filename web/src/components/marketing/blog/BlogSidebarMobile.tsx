@@ -166,7 +166,7 @@ export function BlogSidebarMobile({ categories, tags, initialSearch = "" }: Blog
       <div className="blog-sidebar-mobile__about">
         <p className="blog-sidebar-mobile__label">About the studio</p>
         <p className="blog-sidebar-mobile__about-copy">
-          Growrix OS is a small product studio shipping SaaS apps, websites, MCP servers, and automation for ambitious teams.
+          Growrix OS is a small product studio shipping SaaS apps, websites, and automation for ambitious teams.
         </p>
         <Link href="/about" className="blog-sidebar-mobile__about-link">
           Read the studio story →

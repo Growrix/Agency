@@ -129,7 +129,6 @@ export async function POST(request: NextRequest) {
             }))
         : undefined,
       previewVariant:
-        body.previewVariant === "mcp" ||
         body.previewVariant === "marketing" ||
         body.previewVariant === "dashboard" ||
         body.previewVariant === "automation" ||

@@ -29,9 +29,9 @@ import {
 export const revalidate = 60;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Blog — Field notes from Growrix OS",
+  title: "Blog — Field notes",
   description:
-    "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, MCP servers, and automation.",
+    "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, and automation.",
   path: "/blog",
 });
 
@@ -140,7 +140,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Se
                   className="mt-5 text-lg text-text-muted leading-7 text-pretty signal-rise"
                   style={{ animationDelay: "140ms" }}
                 >
-                  Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.
+                  Long-form writing on SaaS architecture, automation, and the studio operating model that keeps it all moving.
                 </p>
               </div>
 

@@ -212,7 +212,7 @@ export function BlogSidebar({ categories, tags, initialSearch = "" }: SidebarPro
           About the studio
         </h3>
         <p className="mt-3 text-sm leading-6 text-text">
-          Growrix OS is a small product studio shipping SaaS apps, websites, MCP servers, and automation for ambitious teams.
+          Growrix OS is a small product studio shipping SaaS apps, websites, and automation for ambitious teams.
         </p>
         <Link
           href="/about"

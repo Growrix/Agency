@@ -1,5 +1,4 @@
 export type PreviewVariant =
-  | "mcp"
   | "marketing"
   | "dashboard"
   | "automation"
@@ -39,37 +38,6 @@ export type ShopProduct = {
 };
 
 export const SHOP_PRODUCTS: ShopProduct[] = [
-  {
-    slug: "concierge-mcp-starter",
-    name: "Concierge MCP Starter",
-    price: "$249",
-    category: "MCP Servers",
-    categorySlug: "mcp",
-    type: "Internal Tool Starter",
-    typeSlug: "internal-tool-starter",
-    industry: "AI Operations",
-    industrySlug: "ai-operations",
-    tag: "New",
-    published: false,
-    teaser: "A premium MCP starter with auth, tracing, tool scaffolding, and operator-safe defaults.",
-    summary:
-      "Built for teams who want a fast path to an internal agent surface without inventing the architecture from scratch.",
-    audience: "AI product teams, internal platforms, operations enablement",
-    previewVariant: "mcp",
-    includes: [
-      "Typed MCP server scaffold",
-      "Signed-session auth starter",
-      "Tool registry + tracing hooks",
-      "Operator console screens",
-      "Deployment checklist",
-    ],
-    stack: ["TypeScript", "MCP", "Auth.js", "Observability hooks"],
-    highlights: [
-      { label: "Setup time", value: "< 1 day" },
-      { label: "Starter tools", value: "8" },
-      { label: "Trace coverage", value: "100%" },
-    ],
-  },
   {
     slug: "atelier-marketing-theme",
     name: "Atelier Marketing Theme",

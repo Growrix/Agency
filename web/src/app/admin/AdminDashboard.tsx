@@ -64,7 +64,7 @@ type ProductRecord = {
   teaser: string;
   summary: string;
   audience: string;
-  previewVariant: "mcp" | "marketing" | "dashboard" | "automation" | "mobile" | "booking";
+  previewVariant: "marketing" | "dashboard" | "automation" | "mobile" | "booking";
   includes: string[];
   stack: string[];
   highlights: Array<{ label: string; value: string }>;

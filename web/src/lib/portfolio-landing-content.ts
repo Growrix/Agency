@@ -25,7 +25,7 @@ export const PORTFOLIO_HERO_PANEL = {
   ],
 } as const;
 
-/** Service slugs eligible for portfolio filters — MCP excluded. */
+/** Service slugs eligible for portfolio filters. */
 export const PORTFOLIO_FILTER_SERVICE_SLUGS = [
   "websites",
   "saas-applications",
@@ -38,8 +38,7 @@ export const PORTFOLIO_FILTER_SERVICE_SLUGS = [
 export type PortfolioFilter = { label: string; value: string };
 
 export function buildPortfolioFilters(projects: PublicPortfolioRecord[]): PortfolioFilter[] {
-  const eligibleProjects = projects.filter((project) => project.service !== "mcp-servers");
-  const activeSlugs = new Set(eligibleProjects.map((project) => project.service));
+  const activeSlugs = new Set(projects.map((project) => project.service));
 
   const serviceFilters = PORTFOLIO_FILTER_SERVICE_SLUGS.filter((slug) => activeSlugs.has(slug)).map((slug) => ({
     label: SERVICE_BY_SLUG[slug]?.name ?? SERVICES.find((service) => service.slug === slug)?.name ?? slug,
@@ -50,7 +49,7 @@ export function buildPortfolioFilters(projects: PublicPortfolioRecord[]): Portfo
 }
 
 export function filterPortfolioProjects(projects: PublicPortfolioRecord[]): PublicPortfolioRecord[] {
-  return projects.filter((project) => project.service !== "mcp-servers");
+  return projects;
 }
 
 export const PORTFOLIO_CAPABILITIES_SECTION = {

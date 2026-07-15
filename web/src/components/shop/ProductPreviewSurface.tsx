@@ -120,48 +120,6 @@ function DashboardPreview() {
   );
 }
 
-function McpPreview() {
-  return (
-    <BrowserShell>
-      <div className="grid min-w-0 gap-4 lg:grid-cols-[1.15fr_.85fr]">
-        <div className="min-w-0 rounded-[18px] border border-white/10 bg-white/4 p-5">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">Tool graph</p>
-              <p className="mt-2 font-display text-xl tracking-tight text-white">Internal MCP runtime</p>
-            </div>
-            <div className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-              8 tools live
-            </div>
-          </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {["crm_lookup", "list_invoices", "inventory_sync", "route_ticket"].map((tool) => (
-              <div key={tool} className="rounded-md border border-white/10 bg-black/25 p-4">
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{tool}</p>
-                <div className="mt-4 h-2 rounded-full bg-white/8">
-                  <div className="h-full w-3/4 rounded-full bg-linear-to-r from-primary to-accent" />
-                </div>
-                <div className="mt-4 h-12 rounded-sm bg-white/5" />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="min-w-0 space-y-4">
-          <div className="rounded-[18px] border border-white/10 bg-black/25 p-4 font-mono text-[11px] text-white/72">
-            <div className="text-primary">$ tool trace --latest</div>
-            <div className="mt-3">auth.session verified</div>
-            <div>tool.crm_lookup completed</div>
-            <div>trace.latency 148ms</div>
-            <div>response shipped to host</div>
-          </div>
-          <StatPill label="Median latency" value="148ms" />
-          <StatPill label="Audit coverage" value="100%" />
-        </div>
-      </div>
-    </BrowserShell>
-  );
-}
-
 function AutomationPreview() {
   return (
     <BrowserShell>
@@ -292,8 +250,6 @@ function BookingPreview() {
 
 export function ProductPreviewSurface({ variant }: { variant: PreviewVariant }) {
   switch (variant) {
-    case "mcp":
-      return <McpPreview />;
     case "marketing":
       return <MarketingPreview />;
     case "dashboard":

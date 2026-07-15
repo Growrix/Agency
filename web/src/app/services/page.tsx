@@ -6,7 +6,6 @@ import {
 	BoltIcon,
 	CheckIcon,
 	CodeBracketSquareIcon,
-	CpuChipIcon,
 	DevicePhoneMobileIcon,
 	DocumentTextIcon,
 	MagnifyingGlassCircleIcon,
@@ -74,7 +73,6 @@ const ICONS = {
 	automation: BoltIcon,
 	"technical-seo": MagnifyingGlassCircleIcon,
 	"html-business-profiles": DocumentTextIcon,
-	"mcp-servers": CpuChipIcon,
 } as const;
 
 const FIT_NOTES: Record<string, string> = {
@@ -147,7 +145,7 @@ const GOAL_ROWS = [
 export default async function ServicesPage() {
 	const portfolio = await listPublicPortfolio();
 	const allServices = (await listPublicServices()).filter(
-		(service) => service.slug !== "html-business-profiles" && service.slug !== "mcp-servers",
+		(service) => service.slug !== "html-business-profiles",
 	);
 	const serviceBySlug = new Map(allServices.map((service) => [service.slug, service]));
 	const highlightServices = SERVICES_LANDING_HIGHLIGHT_SLUGS.map((slug) => serviceBySlug.get(slug)).filter(

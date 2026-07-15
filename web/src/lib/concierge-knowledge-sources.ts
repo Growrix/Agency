@@ -344,17 +344,6 @@ export function buildServiceDetailDocuments(): ConciergeKnowledgeDocument[] {
   });
 }
 
-export function buildMcpSecondaryDocument(): ConciergeKnowledgeDocument {
-  return {
-    id: "service-mcp-servers-secondary",
-    label: "MCP Servers (secondary)",
-    sourcePath: "/services",
-    sourceType: "service",
-    content:
-      "MCP Servers is a secondary service available by request when agent workflows are part of the roadmap. It is not promoted in primary navigation. Typical timeline: 3-12 weeks. Scope includes tool design, auth and access, observability, and deployment.",
-  };
-}
-
 export function buildFaqDocuments(questions: FaqQuestion[] = FAQ_QUESTIONS): ConciergeKnowledgeDocument[] {
   const pageFaqs = questions.map((entry, index) => ({
     id: `faq-page-${index + 1}`,
@@ -410,7 +399,6 @@ export function buildStaticKnowledgeDocuments(whatsappHref: string): ConciergeKn
     ...buildBuyerPathDocuments(),
     ...buildStudioDocuments(),
     ...buildServiceDetailDocuments(),
-    buildMcpSecondaryDocument(),
     ...buildFaqDocuments(),
     ...buildConversionDocuments(whatsappHref),
   ];

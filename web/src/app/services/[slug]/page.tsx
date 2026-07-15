@@ -1,7 +1,7 @@
 ﻿import type { Metadata } from "next";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { buildPageMetadata } from "@/lib/seo-metadata";
-import { buildFaqPageSchema, buildServiceSchema } from "@/lib/seo-structured-data";
+import { buildFaqPageSchema, buildServiceSchema, buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -10,7 +10,6 @@ import {
   BoltIcon,
   CheckIcon,
   CodeBracketSquareIcon,
-  CpuChipIcon,
   DevicePhoneMobileIcon,
   DocumentTextIcon,
   MagnifyingGlassCircleIcon,
@@ -165,13 +164,12 @@ const ICONS = {
   "mobile-apps": DevicePhoneMobileIcon,
   "html-business-profiles": DocumentTextIcon,
   "ai-business-systems": SparklesIcon,
-  "mcp-servers": CpuChipIcon,
   automation: BoltIcon,
   "technical-seo": MagnifyingGlassCircleIcon,
 } as const;
 
 type SlugKey = keyof typeof ICONS;
-const PRICE_MUTED_SERVICE_SLUGS = new Set<SlugKey>(["mcp-servers"]);
+const PRICE_MUTED_SERVICE_SLUGS = new Set<SlugKey>([]);
 
 const COPY: Record<
   SlugKey,
@@ -217,7 +215,7 @@ const COPY: Record<
     tiers: [
       { name: "Template Packs", iconKey: "template-packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/digital-products" } },
       { name: "Ready Websites", iconKey: "ready-websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/digital-products" }, featured: true, badge: "Most chosen" },
-      { name: "Custom Build Scope", iconKey: "custom-build-scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
+      { name: "Custom Build Scope", iconKey: "custom-build-scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "Automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: WEBSITES_SERVICE_FAQ.map((item) => ({ ...item })),
     stats: WEBSITES_SERVICE_STATS.map((item) => ({ ...item })),
@@ -314,45 +312,6 @@ const COPY: Record<
     })),
     faq: AI_BUSINESS_SYSTEMS_SERVICE_FAQ.map((item) => ({ ...item })),
     stats: AI_BUSINESS_SYSTEMS_SERVICE_STATS.map((item) => ({ ...item })),
-  },
-  "mcp-servers": {
-    eyebrow: "MCP Servers",
-    headline: "Production-ready MCP servers that agents can actually trust.",
-    description:
-      "We build secure, observable Model Context Protocol servers that wrap your APIs, data, and internal tools so agents act with confidence.",
-    primaryCta: "Scope an MCP Server",
-    secondaryCta: "Browse MCP Products",
-    secondaryHref: "/digital-products",
-    builds: [
-      { title: "API wrappers", description: "Existing REST/GraphQL APIs exposed as cleanly typed MCP tools." },
-      { title: "Internal data tools", description: "Read/write access to internal systems with role-aware permissions." },
-      { title: "CRM & ops integrations", description: "HubSpot, Salesforce, Linear, Notion, Slack tool exposures." },
-      { title: "Document retrieval", description: "Hybrid search MCPs over your docs with citations and source URLs." },
-      { title: "Workflow orchestration", description: "Multi-step tool flows that can pause, resume, and request approval." },
-      { title: "Developer tooling MCPs", description: "Code, deployment, and incident-response tools wired to your stack." },
-    ],
-    differentiators: [
-      { title: "Auth & access by design", description: "OAuth, API keys, scoped tokens, and clear human-in-the-loop boundaries." },
-      { title: "Observability built-in", description: "Trace every tool call, log every input, surface every failure with context." },
-      { title: "Schema-first tools", description: "Strict JSON schemas, examples, and behaviour notes agents can rely on." },
-      { title: "Deployable anywhere", description: "Self-host or deploy to your cloud — Cloudflare Workers, Fly, Vercel, or AWS." },
-    ],
-    tiers: [
-      { name: "Starter MCP", price: "$249", cadence: "one-time", description: "Productized starter with auth, logging, and example tools.", features: ["TypeScript codebase", "Auth + secrets handling", "Example tools", "Deployment guide"], cta: { label: "Buy starter", href: "/digital-products" } },
-      { name: "Custom Integration", price: "$8.5k", cadence: "/ project", description: "A focused MCP server scoped around 1–2 systems with secure access.", features: ["Discovery + scoping", "Auth + permission model", "Tool design + tests", "Deployment + handoff"], cta: { label: "Scope an MCP", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
-      { name: "Platform Engagement", price: "Custom", description: "Multi-system MCP platform with shared infra, observability, and governance.", features: ["Shared auth layer", "Tool registry", "Audit + governance", "Ongoing support"], cta: { label: "Plan platform", href: "/book-appointment" } },
-    ],
-    faq: [
-      { question: "What is MCP?", answer: "Model Context Protocol — an open standard for giving AI agents structured, auditable access to tools and data." },
-      { question: "Where do you deploy?", answer: "We deploy to your cloud or recommended hosts: Cloudflare Workers, Fly, Vercel, or AWS." },
-      { question: "How do you handle security?", answer: "Scoped auth, secrets via your existing vault, full call logging, and explicit human-in-the-loop boundaries." },
-    ],
-    stats: [
-      { value: "12+", label: "MCPs shipped" },
-      { value: "<150ms", label: "Median tool latency" },
-      { value: "100%", label: "Audit-traced calls" },
-      { value: "3 wk", label: "Typical scope-to-ship" },
-    ],
   },
   automation: {
     eyebrow: "Automation",
@@ -884,6 +843,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       description: service.description,
       path: `/services/${slug}`,
     }),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: "Services", path: "/services" },
+      { name: service.title, path: `/services/${slug}` },
+    ]),
     ...(buildFaqPageSchema(copy.faq) ? [buildFaqPageSchema(copy.faq)!] : []),
   ];
 
@@ -1122,7 +1086,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </>
       ) : null}
 
-      {slug !== "mcp-servers" && !isConversionServicePage && (
+      {!isConversionServicePage && (
         <Section size="compact">
           <StatBlock stats={HOME_STATS} />
         </Section>
