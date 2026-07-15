@@ -626,3 +626,9 @@ Remaining parallel tracks:
   3. Follow `Ongoing DOCS/SEO/technical-seo/audit-reports/google-search-console-setup.md`
   4. Re-run Pingdom + PageSpeed Insights mobile on `/`
 - **Verification:** `npm run health:check` exit 0 (17 release-gate tests including new LCP + nav checks).
+
+### 2026-07-15 — Vercel growrix preview deploy Error after public bridge skip (debug_failure)
+- **Deployment:** `dpl_C2Mm4cbAUNFe5pxpxukCniRWxgpT` on branch `Technical_SEO_debug` (commit `6e343e3`) — Next.js build succeeded; finalizer failed with `readyState: ERROR` after bridge logged `skip symlink; path exists and is not a symlink: /vercel/path0/public`.
+- **Root cause:** Legacy repo-root `public/` is a real directory (subset of `web/public/`). Bridge could not symlink canonical assets; 37 newer files (36 WebP posters + updated manifest) existed only under `web/public/`.
+- **Fix:** `vercel-monorepo-finalizer-bridge.mjs` — when `public/` blocks symlink, remove blocker and symlink `web/public` at repo root; merge fallback if symlink still fails.
+- **Verification:** Local `VERCEL=1` bridge run created `public -> web/public` symlink; `npm run ci:check` exit 0. Remote Vercel Ready pending post-push inspect.
