@@ -69,13 +69,13 @@ export const INVESTMENT_SERVICE_RANGES = {
   services: [
     {
       title: "Technical SEO",
-      investment: "$750 – $1,500+",
+      investment: "$500 – $1,500+",
       description: "Search visibility, analytics, schema, and technical foundations.",
       href: "/services/technical-seo",
     },
     {
       title: "Automation",
-      investment: "$1,500 – $5,000+",
+      investment: "$300 – $5,000+",
       description: "Workflow automation, integrations, and operational systems.",
       href: "/services/automation",
     },
@@ -93,13 +93,13 @@ export const INVESTMENT_SERVICE_RANGES = {
     },
     {
       title: "Mobile Apps",
-      investment: "$6,500 – $14,000+",
+      investment: "$2,500 – $14,000+",
       description: "Companion apps, customer portals, and mobile-first products.",
       href: "/services/mobile-apps",
     },
     {
       title: "SaaS Applications",
-      investment: "$9,500 – $18,000+",
+      investment: "$1,500 – $18,000+",
       description: "Custom software products, platforms, and scalable systems.",
       href: "/services/saas-applications",
     },

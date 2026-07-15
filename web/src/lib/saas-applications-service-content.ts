@@ -310,7 +310,7 @@ export const SAAS_ENGAGEMENT_SECTION = {
     {
       name: "MVP Launch",
       iconKey: "mvp-launch",
-      price: "From $9,500",
+      price: "From $1,500",
       description:
         "For founders validating an idea and launching a functional first version of their product.",
       features: [

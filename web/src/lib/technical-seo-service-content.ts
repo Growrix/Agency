@@ -272,7 +272,7 @@ export const TECHNICAL_SEO_ENGAGEMENT_SECTION = {
     {
       name: "SEO Essentials",
       iconKey: "seo-essentials",
-      price: "From $750",
+      price: "From $500",
       description: "A foundational setup for websites requiring search visibility and measurement readiness.",
       features: [
         "Search Console setup",

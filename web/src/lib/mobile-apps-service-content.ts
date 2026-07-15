@@ -168,7 +168,7 @@ export const MOBILE_ENGAGEMENT_SECTION = {
     {
       name: "Mobile Launch Package",
       iconKey: "mobile-launch",
-      price: "From $6,500",
+      price: "From $2,500",
       description:
         "Perfect for businesses needing mobile-ready experiences, launch support, and product validation.",
       features: [
