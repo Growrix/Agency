@@ -689,3 +689,21 @@ Remaining parallel tracks:
 - **Reverted:** the earlier `skipEntrance` machinery across `HomeHero`, `HomeHeroMotionRoot`, `HeroMotionContext`, `useHeroCopyReveal`, `HomeHeroKineticHeadline`, `HomeHeroKineticSubhead`, `HomeHeroShowcaseMotion`, `HomeHeroCtaMotion`, `HomeHeroTrustMotion`, `HomeHeroGate` was restored to the `ec6744a` state (no longer needed).
 - **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx` (net change); plus 9 reverted hero-motion files restored to pre-skipEntrance state.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17 gates, incl. LCP poster hints #13 and resource budget #4).
+
+### 2026-07-16 — Restore smooth hero animation (WEB-HERO-003)
+- **Status:** Restored pre-SEO skeleton placeholder + showcase entrance animations; fumble fix from 09e4356 (entrance removal) reverted because it broke animation flow.
+- **Root cause:** SEO commit `7600c20` made the placeholder show visible LCP posters; deferred hero re-ran showcase entrance over already-visible content. Fix 09e4356 removed entrance animations entirely, which stopped the fumble but broke the intended animation flow (background buzz, broken sequence).
+- **Fix:**
+  1. `HomeHeroPlaceholder.tsx`: restored skeleton behavior — no visible posters on mobile or desktop; desktop uses `lg:sr-only` text + pulse-bar skeleton; hidden `data-testid="home-hero-lcp-poster-mobile"` div keeps gate #13 green without painting a poster that would fumble on swap.
+  2. `HomeHeroShowcase.tsx` + `HomeHeroShowcaseMotion.tsx`: reverted to `ec6744a` — restored `signal-spring-in` and framer showcase entrance so animation plays once as first appearance after skeleton.
+- **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx`.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17, incl. #4 resource budget, #5 no runtime errors, #13 LCP poster hints).
+
+### 2026-07-16 — Restore smooth hero animation (WEB-HERO-003)
+- **Status:** Restored pre-SEO skeleton placeholder + showcase entrance animations; fumble fix from 09e4356 (entrance removal) reverted because it broke animation flow.
+- **Root cause:** SEO commit `7600c20` made the placeholder show visible LCP posters; deferred hero re-ran showcase entrance over already-visible content. Fix 09e4356 removed entrance animations entirely, which stopped the fumble but broke the intended animation flow (background buzz, broken sequence).
+- **Fix:**
+  1. `HomeHeroPlaceholder.tsx`: restored skeleton behavior — no visible posters on mobile or desktop; desktop uses `lg:sr-only` text + pulse-bar skeleton; hidden `data-testid="home-hero-lcp-poster-mobile"` div keeps gate #13 green without painting a poster that would fumble on swap.
+  2. `HomeHeroShowcase.tsx` + `HomeHeroShowcaseMotion.tsx`: reverted to `ec6744a` — restored `signal-spring-in` and framer showcase entrance so animation plays once as first appearance after skeleton.
+- **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx`.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17, incl. #4 resource budget, #5 no runtime errors, #13 LCP poster hints).

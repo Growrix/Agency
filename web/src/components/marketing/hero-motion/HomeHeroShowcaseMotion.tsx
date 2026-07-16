@@ -2,22 +2,20 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useHeroCopyReveal } from "./hooks/useHeroCopyReveal";
 import { useHeroMotionOptional } from "./HeroMotionContext";
+
+const EASE_SIGNAL = [0.22, 1, 0.36, 1] as const;
 
 type HomeHeroShowcaseMotionProps = {
   children: ReactNode;
   className?: string;
 };
 
-/**
- * Wraps the hero showcase. The showcase is always mounted deferred (after the static
- * placeholder already painted the LCP poster), so it must NOT play an entrance
- * fade/scale/spring — that would re-animate the poster the user already sees (a fumble).
- * It mounts at its final state and only keeps the ambient float + pointer parallax.
- */
 export function HomeHeroShowcaseMotion({ children, className }: HomeHeroShowcaseMotionProps) {
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
+  const reveal = useHeroCopyReveal("showcase");
 
   if (reduced || motionCtx?.tier === "reduced") {
     return <div className={className}>{children}</div>;
@@ -25,13 +23,21 @@ export function HomeHeroShowcaseMotion({ children, className }: HomeHeroShowcase
 
   return (
     <motion.div
-      className={`hero-showcase-motion ${className ?? ""}`}
-      initial={false}
-      animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
+      className={[`hero-showcase-motion ${className ?? ""}`, reveal.pendingClassName].filter(Boolean).join(" ")}
+      initial={{ opacity: 0, scale: 0.96, y: 20 }}
+      animate={
+        reveal.animate
+          ? {
+              opacity: 1,
+              scale: 1,
+              y: [0, -10, 0],
+            }
+          : { opacity: 0, scale: 0.96, y: 20 }
+      }
       transition={{
-        opacity: { duration: 0 },
-        scale: { duration: 0 },
-        y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+        opacity: { duration: reveal.duration, delay: reveal.delay, ease: EASE_SIGNAL },
+        scale: { duration: reveal.duration, delay: reveal.delay, ease: EASE_SIGNAL },
+        y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: reveal.delay + 1.2 },
       }}
       style={{
         rotateX: "calc(var(--hero-py, 0) * -3deg)",
