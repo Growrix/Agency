@@ -698,12 +698,7 @@ Remaining parallel tracks:
   2. `HomeHeroShowcase.tsx` + `HomeHeroShowcaseMotion.tsx`: reverted to `ec6744a` — restored `signal-spring-in` and framer showcase entrance so animation plays once as first appearance after skeleton.
 - **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx`.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17, incl. #4 resource budget, #5 no runtime errors, #13 LCP poster hints).
-
-### 2026-07-16 — Restore smooth hero animation (WEB-HERO-003)
-- **Status:** Restored pre-SEO skeleton placeholder + showcase entrance animations; fumble fix from 09e4356 (entrance removal) reverted because it broke animation flow.
-- **Root cause:** SEO commit `7600c20` made the placeholder show visible LCP posters; deferred hero re-ran showcase entrance over already-visible content. Fix 09e4356 removed entrance animations entirely, which stopped the fumble but broke the intended animation flow (background buzz, broken sequence).
-- **Fix:**
-  1. `HomeHeroPlaceholder.tsx`: restored skeleton behavior — no visible posters on mobile or desktop; desktop uses `lg:sr-only` text + pulse-bar skeleton; hidden `data-testid="home-hero-lcp-poster-mobile"` div keeps gate #13 green without painting a poster that would fumble on swap.
-  2. `HomeHeroShowcase.tsx` + `HomeHeroShowcaseMotion.tsx`: reverted to `ec6744a` — restored `signal-spring-in` and framer showcase entrance so animation plays once as first appearance after skeleton.
-- **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx`.
-- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17, incl. #4 resource budget, #5 no runtime errors, #13 LCP poster hints).
+- **Commit:** `4c6e1f3` on `main`.
+- **Push:** `main` → `origin/main` (`09e4356..4c6e1f3`).
+- **Local CI parity:** `npm run ci:check --prefix web` exit 0 before push.
+- **Remote CI verification:** local pass only — remote unverified (`gh` not authenticated); verify GitHub Actions on commit `4c6e1f3`.
