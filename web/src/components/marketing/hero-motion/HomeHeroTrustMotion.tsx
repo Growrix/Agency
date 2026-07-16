@@ -17,7 +17,7 @@ export function HomeHeroTrustMotion({ children, className }: HomeHeroTrustMotion
   const motionCtx = useHeroMotionOptional();
   const reveal = useHeroCopyReveal("trust");
 
-  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
+  if (reduced || motionCtx?.tier === "reduced") {
     return <div className={className}>{children}</div>;
   }
 
@@ -46,7 +46,7 @@ export function HomeHeroTrustNameMotion({
   const motionCtx = useHeroMotionOptional();
   const reveal = useHeroCopyReveal("trust", { staggerIndex: index + 1 });
 
-  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
+  if (reduced || motionCtx?.tier === "reduced") {
     return <li className={className}>{name}</li>;
   }
 
@@ -82,7 +82,7 @@ export function HomeHeroTrustLogoMotion({
   const motionCtx = useHeroMotionOptional();
   const reveal = useHeroCopyReveal("trust", { staggerIndex: index + 1 });
 
-  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
+  if (reduced || motionCtx?.tier === "reduced") {
     return <li className={className}>{children}</li>;
   }
 
@@ -112,7 +112,7 @@ export function HomeHeroTrustAvatarMotion({
   const motionCtx = useHeroMotionOptional();
   const reveal = useHeroCopyReveal("trust", { staggerIndex: index + 1 });
 
-  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
+  if (reduced || motionCtx?.tier === "reduced") {
     return <li className="home-hero-desktop__trust-avatar">{children}</li>;
   }
 

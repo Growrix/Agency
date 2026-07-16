@@ -18,7 +18,6 @@ type HomeHeroProps = {
   description?: string;
   slides: HtmlProfileHeroSlide[];
   emptyFallbackSlide?: HtmlProfileHeroSlide;
-  skipEntrance?: boolean;
 };
 
 export function HomeHero({
@@ -27,7 +26,6 @@ export function HomeHero({
   description = HOME_HERO_COPY.description,
   slides,
   emptyFallbackSlide,
-  skipEntrance,
 }: HomeHeroProps) {
   const motionHostRef = useRef<HTMLDivElement>(null);
   const sharedProps = {
@@ -45,7 +43,7 @@ export function HomeHero({
       className="hero-section hero-section--responsive-band hero-section--under-chrome home-hero-desktop-section relative flex min-h-0 flex-col overflow-hidden lg:min-h-dvh"
     >
       <div ref={motionHostRef} className="hero-section__motion-host relative min-h-0 flex flex-1 flex-col">
-        <HomeHeroMotionRoot sectionRef={motionHostRef} skipEntrance={skipEntrance}>
+        <HomeHeroMotionRoot sectionRef={motionHostRef}>
           <Container
             className={cn(
               HERO_VIEWPORT_CONTAINER_CLASS,

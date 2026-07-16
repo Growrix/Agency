@@ -11,21 +11,20 @@ import { useHeroScrollTransform } from "./hooks/useHeroScrollTransform";
 type HomeHeroMotionRootProps = {
   sectionRef: RefObject<HTMLElement | null>;
   children: ReactNode;
-  skipEntrance?: boolean;
 };
 
-export function HomeHeroMotionRoot({ sectionRef, children, skipEntrance }: HomeHeroMotionRootProps) {
+export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootProps) {
   const tier = useHeroMotionProfile();
   // #region agent log
-  sendDebugLog("HomeHeroMotionRoot.tsx:30", "HomeHeroMotionRoot render", { tier, skipEntrance }, "A");
+  sendDebugLog("HomeHeroMotionRoot.tsx:30", "HomeHeroMotionRoot render", { tier }, "A");
   // #endregion
   const scrollProgressRef = useRef(0);
-  const [loadTimelineReady, setLoadTimelineReady] = useState(skipEntrance ?? false);
-  const [copySequenceStarted, setCopySequenceStarted] = useState(skipEntrance ?? false);
-  const [copySequenceStartTime, setCopySequenceStartTime] = useState<number | null>(() => (skipEntrance ? performance.now() : null));
-  const [headlineComplete, setHeadlineCompleteState] = useState(skipEntrance ?? false);
+  const [loadTimelineReady, setLoadTimelineReady] = useState(false);
+  const [copySequenceStarted, setCopySequenceStarted] = useState(false);
+  const [copySequenceStartTime, setCopySequenceStartTime] = useState<number | null>(null);
+  const [headlineComplete, setHeadlineCompleteState] = useState(false);
   const loadTargetsRef = useRef<Map<string, Element>>(new Map());
-  const headlineReadyRef = useRef(skipEntrance ?? false);
+  const headlineReadyRef = useRef(false);
 
   const setScrollProgress = useCallback((value: number) => {
     scrollProgressRef.current = value;
@@ -76,10 +75,6 @@ export function HomeHeroMotionRoot({ sectionRef, children, skipEntrance }: HomeH
       return;
     }
 
-    if (skipEntrance) {
-      return;
-    }
-
     let cancelled = false;
 
     const runTimeline = async () => {
@@ -102,7 +97,7 @@ export function HomeHeroMotionRoot({ sectionRef, children, skipEntrance }: HomeH
       const cancel = window.cancelIdleCallback ?? clearTimeout;
       cancel(idleId);
     };
-  }, [sectionRef, tier, startCopySequence, skipEntrance]);
+  }, [sectionRef, tier, startCopySequence]);
 
   return (
     <HeroMotionProvider
@@ -115,7 +110,6 @@ export function HomeHeroMotionRoot({ sectionRef, children, skipEntrance }: HomeH
       copySequenceStartTime={copySequenceStartTime}
       headlineComplete={headlineComplete}
       setHeadlineComplete={setHeadlineComplete}
-      skipEntrance={skipEntrance ?? false}
     >
       {tier !== "reduced" ? <HomeHeroAmbientLayers /> : (
         <>

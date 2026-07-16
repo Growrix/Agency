@@ -91,7 +91,7 @@ export function HomeHeroPlaceholder({
           </div>
 
           <div className="hidden min-h-0 flex-1 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-10">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 lg:sr-only">
               <p className="text-sm font-medium text-primary">{badge}</p>
               <h1 className="text-balance text-5xl font-semibold tracking-tight">{resolvedTitle}</h1>
               <p className="max-w-xl text-pretty text-lg text-muted">{description}</p>

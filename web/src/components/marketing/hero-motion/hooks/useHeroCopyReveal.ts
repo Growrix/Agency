@@ -37,16 +37,6 @@ export function useHeroCopyReveal(phase: HeroCopyPhase, options?: UseHeroCopyRev
       };
     }
 
-    if (motion.skipEntrance) {
-      return {
-        hidden: false,
-        animate: true,
-        delay: 0,
-        duration: 0,
-        pendingClassName: "",
-      };
-    }
-
     const phaseDelay =
       motion.getCopyRevealDelay(phase, titleLineCount) + staggerIndex * staggerStep;
 

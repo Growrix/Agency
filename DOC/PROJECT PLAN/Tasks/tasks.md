@@ -679,3 +679,13 @@ Remaining parallel tracks:
 - **Commit:** `09a9df9` on `main` (HEAD: `09a9df9e7b6f7cc14b06ab71c3b3e6e5289551fa17899ac065611f5`).
 - **Push:** `main` → `origin/main` (`ec6744a..09a9df9`).
 - **Remote CI verification:** `gh` not authenticated locally; verify GitHub Actions status on commit `09a9df9e7b6f7cc14b06ab71c3b3e6e5289551fa17899ac065611f5` in the browser or via `gh auth login`.
+
+### 2026-07-16 — Homepage hero fumble root-cause fix (WEB-HERO-002)
+- **Status:** Previous skipEntrance fix (09a9df9) did not resolve the fumble; reverted it and applied a surgical root-cause fix.
+- **Root cause (regression from SEO commit `7600c20`):** The LCP/performance commit changed the desktop placeholder from a loading skeleton (`lg:sr-only` text + pulse bars) to visible real text + a real LCP poster. The deferred hero then swapped in with a different DOM (kinetic headline classes) AND re-ran the showcase entrance (`signal-spring-in` CSS + framer `HomeHeroShowcaseMotion` opacity/scale/y). That visible-content → visible-content swap with different styling, plus the right-column re-spring, was the fumble/blink.
+- **Fix (two surgical changes):**
+  1. `HomeHeroPlaceholder.tsx`: desktop left-column text restored to `lg:sr-only` (invisible on desktop, still in DOM for SEO/a11y). LCP poster kept in the right column so the LCP gate stays green. Mobile text unchanged (matches pre-SEO good behavior).
+  2. `HomeHeroShowcaseMotion.tsx` + `HomeHeroShowcase.tsx`: removed the showcase entrance animations (framer opacity/scale/y entrance and CSS `signal-spring-in`). The showcase now mounts at its final state and keeps only the ambient float + pointer parallax, so the poster the placeholder already painted persists across the deferred swap instead of being re-animated.
+- **Reverted:** the earlier `skipEntrance` machinery across `HomeHero`, `HomeHeroMotionRoot`, `HeroMotionContext`, `useHeroCopyReveal`, `HomeHeroKineticHeadline`, `HomeHeroKineticSubhead`, `HomeHeroShowcaseMotion`, `HomeHeroCtaMotion`, `HomeHeroTrustMotion`, `HomeHeroGate` was restored to the `ec6744a` state (no longer needed).
+- **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx` (net change); plus 9 reverted hero-motion files restored to pre-skipEntrance state.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17 gates, incl. LCP poster hints #13 and resource budget #4).

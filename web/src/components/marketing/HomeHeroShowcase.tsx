@@ -98,7 +98,7 @@ export function HomeHeroShowcase({
       className={cn("relative w-full min-w-0", className)}
       style={{ "--home-hero-showcase-fade-ms": `${HOME_HERO_SHOWCASE_FADE_MS}ms` } as CSSProperties}
     >
-      <div className="signal-spring-in home-hero-showcase__stage" style={{ animationDelay: "220ms" }}>
+      <div className="home-hero-showcase__stage">
         <div
           className={cn(
             "home-hero-showcase__frame-row",

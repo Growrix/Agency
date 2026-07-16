@@ -84,7 +84,7 @@ export function HomeHeroMotionReveal({
   const motionCtx = useHeroMotionOptional();
   const reveal = useHeroCopyReveal(phase, { staggerIndex, titleLineCount });
 
-  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
+  if (reduced || motionCtx?.tier === "reduced") {
     return <div className={className}>{children}</div>;
   }
 
