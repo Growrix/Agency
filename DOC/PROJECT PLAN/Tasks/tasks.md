@@ -711,3 +711,6 @@ Remaining parallel tracks:
   2. `HomeHeroDesktop` / `HomeHeroMobile`: always use kinetic structured title (no CMS plain-H1 path); mobile copy uses `hero-copy-pending` until sequence starts.
   3. `HomeHeroKineticHeadline`: useLayoutEffect hides chars before paint; `HomeHeroMotionRoot` reduced-motion still emits ready events.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run build` + release gates 17/17 (incl. #5 single `.hero-section`, #13 LCP hints).
+- **Commit:** `c38882c` on `main`.
+- **Push:** `main` → `origin/main` (`de0d38f..c38882c`).
+- **Remote CI verification:** local pass only — remote unverified (`gh` not authenticated).
