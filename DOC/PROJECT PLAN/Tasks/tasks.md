@@ -658,3 +658,14 @@ Remaining parallel tracks:
 - **Approved + implemented:** TXT-001 (home title), TXT-002 (home meta), TXT-003 (services title+meta), TXT-004 (pricing title+meta), TXT-006 (service detail title pattern → `${title} Development`), TXT-007 (about title), TXT-008 (additional-services title), TXT-010 (hero badge), TXT-012 (hero description), TXT-023 (contact channel label), TXT-024 (free/bundles H1), TXT-030 (footer AI concierge kept removed).
 - **Files touched:** `seo-metadata.ts`, `home-conversion-content.ts`, `contact-landing-content.ts`, `services/page.tsx`, `services/[slug]/page.tsx`, `pricing/page.tsx`, `about/page.tsx`, `additional-services/page.tsx`, `digital-products/free/page.tsx`, `digital-products/bundles/page.tsx`, approval-queue doc.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0. Pre-existing warnings in `checkout/payment/page.tsx` unrelated.
+
+### 2026-07-16 — Push & merge to main (WEB-SEO-DEPLOY-001)
+- **Status:** `Technical_SEO_debug` pushed to origin and merged into `main`.
+- **Merge commit:** `c405bf0` on `main` (HEAD: `c405bf042dfde46e5289551fa17899ac065611f5`).
+- **Push results:**
+  - `Technical_SEO_debug` → `origin/Technical_SEO_debug` (`d5174a7..32914fb`)
+  - `main` → `origin/main` (`f3a44a2..c405bf0`)
+- **Local CI parity:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit tests, integration tests, build, 17/17 E2E release gates).
+- **Remote CI verification:** `gh` not authenticated locally; verify GitHub Actions status on commit `c405bf042dfde46e5289551fa17899ac065611f5` in the browser or via `gh auth login`.
+- **Uncommitted workspace:** `.cursor/agents_cursor.md`, `.cursor/rules/60-zero-gate-health-check.mdc`, `.cursor/rules/70-execution-constitution.mdc` still have local modifications; not staged or pushed.
+- **Next operator action:** Vercel Production env `SITE_INDEXING_ENABLED=true` + `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` already set; redeploy `main` branch in Vercel, then submit sitemap in Google Search Console.
