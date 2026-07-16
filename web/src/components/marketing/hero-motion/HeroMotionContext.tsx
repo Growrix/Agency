@@ -26,6 +26,7 @@ type HeroMotionContextValue = {
   headlineComplete: boolean;
   setHeadlineComplete: () => void;
   getCopyRevealDelay: (phase: HeroCopyPhase, titleLineCount?: number) => number;
+  skipEntrance: boolean;
 };
 
 const HeroMotionContext = createContext<HeroMotionContextValue | null>(null);
@@ -41,6 +42,7 @@ export function HeroMotionProvider({
   copySequenceStartTime,
   headlineComplete,
   setHeadlineComplete,
+  skipEntrance,
 }: {
   tier: HeroMotionTier;
   sectionRef: RefObject<HTMLElement | null>;
@@ -52,6 +54,7 @@ export function HeroMotionProvider({
   copySequenceStartTime: number | null;
   headlineComplete: boolean;
   setHeadlineComplete: () => void;
+  skipEntrance: boolean;
 }) {
   const getCopyRevealDelay = useCallback(
     (phase: HeroCopyPhase, titleLineCount = 2) => getCopyPhaseDelay(phase, tier, titleLineCount),
@@ -70,6 +73,7 @@ export function HeroMotionProvider({
       headlineComplete,
       setHeadlineComplete,
       getCopyRevealDelay,
+      skipEntrance,
     }),
     [
       tier,
@@ -82,6 +86,7 @@ export function HeroMotionProvider({
       headlineComplete,
       setHeadlineComplete,
       getCopyRevealDelay,
+      skipEntrance,
     ],
   );
 

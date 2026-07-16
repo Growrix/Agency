@@ -15,7 +15,9 @@ type HomeHeroGateProps = {
   lcpPosters?: HomeHeroLcpPosters;
 };
 
-type HomeHeroComponent = ComponentType<HomeHeroGateProps>;
+const skipEntrance = true;
+
+type HomeHeroComponent = ComponentType<HomeHeroGateProps & { skipEntrance?: boolean }>;
 
 /**
  * Loads hero JS shortly after DOMContentLoaded so the static placeholder is replaced faster,
@@ -46,5 +48,5 @@ export function HomeHeroGate(props: HomeHeroGateProps) {
     );
   }
 
-  return <Hero {...props} />;
+  return <Hero {...props} skipEntrance={skipEntrance} />;
 }

@@ -35,6 +35,23 @@ function KineticSubheadContent({
   tokens: string[];
 }) {
   const reveal = useHeroCopyReveal("subhead");
+  const motionCtx = useHeroMotionOptional();
+  const skipEntrance = motionCtx?.skipEntrance ?? false;
+
+  if (skipEntrance) {
+    return (
+      <p className={[`hero-kinetic-subhead ${className ?? ""}`, reveal.pendingClassName].filter(Boolean).join(" ")}>
+        {tokens.map((token, index) => (
+          <span
+            key={`${token}-${index}`}
+            className={/^\s+$/.test(token) ? "hero-kinetic-subhead__space" : "hero-kinetic-subhead__word"}
+          >
+            {token}
+          </span>
+        ))}
+      </p>
+    );
+  }
 
   return (
     <motion.p
@@ -68,7 +85,7 @@ export function HomeHeroKineticSubhead({ children, className }: HomeHeroKineticS
   const reduced = useReducedMotion();
   const motionCtx = useHeroMotionOptional();
 
-  if (reduced || motionCtx?.tier === "reduced") {
+  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
     return <p className={className}>{children}</p>;
   }
 
@@ -95,7 +112,7 @@ export function HomeHeroKineticSubheadLines({
   const motionCtx = useHeroMotionOptional();
   const reveal = useHeroCopyReveal("subhead");
 
-  if (reduced || motionCtx?.tier === "reduced") {
+  if (reduced || motionCtx?.tier === "reduced" || motionCtx?.skipEntrance) {
     return (
       <p className={className}>
         {lines.map((line) => (

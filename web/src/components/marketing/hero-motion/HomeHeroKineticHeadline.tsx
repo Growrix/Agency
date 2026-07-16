@@ -65,14 +65,15 @@ export function HomeHeroKineticHeadline({
   );
 
   const isAnimatedTier = !reduced && motion?.tier !== "reduced";
+  const skipEntrance = motion?.skipEntrance ?? false;
 
   useLayoutEffect(() => {
-    if (!isAnimatedTier || !headlineRef.current) {
+    if (!isAnimatedTier || skipEntrance || !headlineRef.current) {
       return;
     }
 
     setInitialHiddenState(headlineRef.current, accentRef.current);
-  }, [isAnimatedTier, titleLines, titleAccent]);
+  }, [isAnimatedTier, skipEntrance, titleLines, titleAccent]);
 
   useEffect(() => {
     if (!isAnimatedTier || !headlineRef.current) {
@@ -100,6 +101,13 @@ export function HomeHeroKineticHeadline({
 
     const runRevealTimeline = async () => {
       if (timelineStartedRef.current || cancelled || !headlineRef.current) {
+        return;
+      }
+
+      if (skipEntrance) {
+        revealAllChars();
+        timelineStartedRef.current = true;
+        motion?.setHeadlineComplete();
         return;
       }
 
@@ -217,9 +225,9 @@ export function HomeHeroKineticHeadline({
         window.clearTimeout(fallbackTimer);
       }
     };
-  }, [isAnimatedTier, motion?.loadTimelineReady, motion?.copySequenceStarted, titleLines, titleAccent, motion]);
+  }, [isAnimatedTier, skipEntrance, motion?.loadTimelineReady, motion?.copySequenceStarted, titleLines, titleAccent, motion]);
 
-  if (!isAnimatedTier) {
+  if (!isAnimatedTier || skipEntrance) {
     return (
       <h1 aria-label={ariaLabel} className={`hero-kinetic-headline ${className ?? ""}`}>
         {titleLines.map((line) => (

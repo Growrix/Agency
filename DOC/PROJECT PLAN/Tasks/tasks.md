@@ -669,3 +669,10 @@ Remaining parallel tracks:
 - **Remote CI verification:** `gh` not authenticated locally; verify GitHub Actions status on commit `c405bf042dfde46e5289551fa17899ac065611f5` in the browser or via `gh auth login`.
 - **Uncommitted workspace:** `.cursor/agents_cursor.md`, `.cursor/rules/60-zero-gate-health-check.mdc`, `.cursor/rules/70-execution-constitution.mdc` still have local modifications; not staged or pushed.
 - **Next operator action:** Vercel Production env `SITE_INDEXING_ENABLED=true` + `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` already set; redeploy `main` branch in Vercel, then submit sitemap in Google Search Console.
+
+### 2026-07-16 — Homepage hero deferred-load fumble fix (WEB-HERO-001)
+- **Status:** Fixed loading-animation fumble/blink when real hero replaces static placeholder.
+- **Root cause:** `HomeHeroKineticHeadline`, `HomeHeroKineticSubhead`, `HomeHeroShowcaseMotion`, `HomeHeroMotionReveal`, and `HomeHeroTrustMotion` were designed for cold-start entrance, so they reset already-visible placeholder content to `opacity: 0` and re-animated it in after the deferred bundle swapped in.
+- **Fix:** Added `skipEntrance` flag through `HomeHeroGate` → `HomeHero` → `HomeHeroMotionRoot` → `HeroMotionContext`. When true, the motion root marks the copy sequence as already started and each motion component bypasses the entrance hide/reveal, keeping the placeholder's visible state. Showcase keeps ambient float animation via `initial={false}`.
+- **Files touched:** `HomeHeroGate.tsx`, `HomeHero.tsx`, `HomeHeroMotionRoot.tsx`, `HeroMotionContext.tsx`, `useHeroCopyReveal.ts`, `HomeHeroKineticHeadline.tsx`, `HomeHeroKineticSubhead.tsx`, `HomeHeroShowcaseMotion.tsx`, `HomeHeroCtaMotion.tsx`, `HomeHeroTrustMotion.tsx`.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17 release gates).
