@@ -4,7 +4,7 @@ export const BLOG_LANDING_HERO = {
   titleLead: "Field notes from a studio",
   titleAccent: "that ships.",
   description:
-    "Long-form writing on SaaS architecture, MCP servers, automation, and the studio operating model that keeps it all moving.",
+    "Long-form writing on SaaS architecture, automation, and the studio operating model that keeps it all moving.",
   primaryCta: "Browse posts",
   primaryHref: "#blog-grid",
   secondaryCta: "Book a call",

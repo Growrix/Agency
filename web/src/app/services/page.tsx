@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildCollectionPageSchema } from "@/lib/seo-structured-data";
 import Link from "next/link";
 import {
 	ArrowRightIcon,
 	BoltIcon,
 	CheckIcon,
 	CodeBracketSquareIcon,
-	CpuChipIcon,
 	DevicePhoneMobileIcon,
 	DocumentTextIcon,
 	MagnifyingGlassCircleIcon,
@@ -60,9 +61,9 @@ import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Services | Choose the Right Path for Your Business",
+  title: "Web Development Services — Websites, SaaS & Apps",
   description:
-    "Compare GrowrixOS services—websites, SaaS, mobile apps, automation, technical SEO, and AI business systems—and book a strategy call to choose the right path.",
+    "Compare custom website, SaaS, and mobile app development paths. Book a strategy call to choose the right engagement model.",
   path: "/services",
 });
 
@@ -74,7 +75,6 @@ const ICONS = {
 	automation: BoltIcon,
 	"technical-seo": MagnifyingGlassCircleIcon,
 	"html-business-profiles": DocumentTextIcon,
-	"mcp-servers": CpuChipIcon,
 } as const;
 
 const FIT_NOTES: Record<string, string> = {
@@ -147,15 +147,32 @@ const GOAL_ROWS = [
 export default async function ServicesPage() {
 	const portfolio = await listPublicPortfolio();
 	const allServices = (await listPublicServices()).filter(
-		(service) => service.slug !== "html-business-profiles" && service.slug !== "mcp-servers",
+		(service) => service.slug !== "html-business-profiles",
 	);
 	const serviceBySlug = new Map(allServices.map((service) => [service.slug, service]));
 	const highlightServices = SERVICES_LANDING_HIGHLIGHT_SLUGS.map((slug) => serviceBySlug.get(slug)).filter(
 		(service): service is NonNullable<typeof service> => Boolean(service),
 	);
+	const servicesStructuredData = [
+		buildCollectionPageSchema({
+			name: "Web Development Services — Websites, SaaS & Apps",
+			description:
+				"Compare custom website, SaaS, and mobile app development paths. Book a strategy call to choose the right engagement model.",
+			path: "/services",
+			items: allServices.map((service) => ({
+				name: service.title,
+				path: `/services/${service.slug}`,
+			})),
+		}),
+		buildBreadcrumbListSchema([
+			{ name: "Home", path: "/" },
+			{ name: "Services", path: "/services" },
+		]),
+	];
 
 	return (
 		<>
+			<JsonLd data={servicesStructuredData} />
 			<Section
 				{...marketingSection("services", "hero")}
 				layout="viewport"

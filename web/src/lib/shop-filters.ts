@@ -22,10 +22,9 @@ const CATEGORY_ORDER = new Map([
   ["website-templates-html-preview", 2],
   ["saas-templates", 3],
   ["ai-automation", 4],
-  ["mcp-servers", 5],
-  ["seo-toolkits", 6],
-  ["bundles", 7],
-  ["free-products", 8],
+  ["seo-toolkits", 5],
+  ["bundles", 6],
+  ["free-products", 7],
 ]);
 
 function sortCategoryOptions(left: ShopFilterOption, right: ShopFilterOption) {

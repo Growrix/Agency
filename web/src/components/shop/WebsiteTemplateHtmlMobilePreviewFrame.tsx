@@ -41,19 +41,24 @@ function MobilePreviewScreenContent({
   };
 
   if (posterImage) {
+    const webpSrc = posterImage.src.replace(/\.png$/i, ".webp");
+
     return (
-      // eslint-disable-next-line @next/next/no-img-element -- poster must mirror iframe box model inside scale transform
-      <img
-        src={posterImage.src}
-        alt={posterImage.alt}
-        width={HTML_MOBILE_VIEWPORT_WIDTH}
-        height={HTML_MOBILE_VIEWPORT_HEIGHT}
-        className="block max-h-none max-w-none border-0 bg-surface"
-        style={screenStyle}
-        decoding="async"
-        loading="lazy"
-        fetchPriority="low"
-      />
+      <picture className="block max-h-none max-w-none border-0 bg-surface" style={screenStyle}>
+        <source srcSet={webpSrc} type="image/webp" />
+        {/* Poster must mirror iframe box model inside scale transform */}
+        <img
+          src={posterImage.src}
+          alt={posterImage.alt}
+          width={HTML_MOBILE_VIEWPORT_WIDTH}
+          height={HTML_MOBILE_VIEWPORT_HEIGHT}
+          className="block max-h-none max-w-none border-0 bg-surface"
+          style={screenStyle}
+          decoding="async"
+          loading="lazy"
+          fetchPriority="low"
+        />
+      </picture>
     );
   }
 

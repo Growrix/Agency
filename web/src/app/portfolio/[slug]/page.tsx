@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildPageMetadata } from "@/lib/seo-metadata";
-import { buildCreativeWorkSchema } from "@/lib/seo-structured-data";
+import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
+import { buildCreativeWorkSchema, buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { toSanityCdnImageSrc } from "@/lib/sanity-image";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const project = await getPublicPortfolioProject(slug);
-  if (!project) return {};
+  if (!project) return { title: "Case study not found", robots: NOINDEX_ROBOTS };
   return buildPageMetadata({
     title: `${project.name} — Case Study`,
     description: project.summary,
@@ -70,10 +70,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     slug: project.slug,
     imageUrl: heroImage ? toSanityCdnImageSrc(heroImage.src, 1200) : undefined,
   });
+  const breadcrumbSchema = buildBreadcrumbListSchema([
+    { name: "Home", path: "/" },
+    { name: "Portfolio", path: "/portfolio" },
+    { name: project.name, path: `/portfolio/${project.slug}` },
+  ]);
 
   return (
     <>
-      <JsonLd data={creativeWorkSchema} />
+      <JsonLd data={[creativeWorkSchema, breadcrumbSchema]} />
       <MarketingViewportGate
         mobile={
           <Section className="pt-8 pb-8">

@@ -33,7 +33,7 @@ export function HomeHeroStackLogos({
             )}
             loading="eager"
             decoding="async"
-            fetchPriority="high"
+            fetchPriority="low"
           />
         );
 

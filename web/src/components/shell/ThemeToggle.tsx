@@ -38,7 +38,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         type="button"
         aria-label="Toggle theme"
         className={cn(
-          "inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset",
+          "inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation",
           className
         )}
       >
@@ -58,7 +58,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       aria-pressed={isDark}
       title={label}
       className={cn(
-        "relative inline-flex size-10 items-center justify-center overflow-hidden rounded-full transition-colors hover:bg-inset",
+        "relative inline-flex size-11 items-center justify-center overflow-hidden rounded-full transition-colors hover:bg-inset touch-manipulation",
         className
       )}
     >
@@ -104,7 +104,7 @@ export function ThemeToggleButton({ className = "" }: { className?: string }) {
         type="button"
         aria-label="Toggle theme"
         className={cn(
-          "inline-flex size-10 items-center justify-center rounded-full transition-colors hover:bg-inset",
+          "inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation",
           className
         )}
       >
@@ -124,7 +124,7 @@ export function ThemeToggleButton({ className = "" }: { className?: string }) {
       aria-pressed={isDark}
       title={label}
       className={cn(
-        "relative inline-flex size-10 items-center justify-center overflow-hidden rounded-full transition-colors hover:bg-inset",
+        "relative inline-flex size-11 items-center justify-center overflow-hidden rounded-full transition-colors hover:bg-inset touch-manipulation",
         className
       )}
     >

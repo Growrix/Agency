@@ -37,7 +37,7 @@ export const THREE_PATH_ROWS = [
 export const PRODUCT_INDEX_COPY = {
   title: "Digital products for faster launches",
   description:
-    "Browse HTML templates, SaaS starters, AI toolkits, MCP kits, and SEO packs. Pick Standard for self-serve, Premium for expanded packages, or Done-For-You when you want us to set it up.",
+    "Browse HTML templates, SaaS starters, AI toolkits, and SEO packs. Pick Standard for self-serve, Premium for expanded packages, or Done-For-You when you want us to set it up.",
   eyebrow: "Marketplace",
 } as const;
 

@@ -104,7 +104,6 @@ export const SAAS_STACK_GROUPS = [
   {
     category: "AI & Automation Systems",
     items: [
-      "Custom MCP servers",
       "AI-driven workflows",
       "API automation",
       "Background job systems",

@@ -71,7 +71,84 @@ function copyCriticalFiles(sourceDir, targetDir) {
   return copied;
 }
 
+/**
+ * Merge files from web/public into repo-root public when a symlink is blocked.
+ * web/public is the canonical superset; only missing or newer files are copied.
+ */
+function mergePublicAssets(sourceDir, targetDir) {
+  let copied = 0;
+  let updated = 0;
+
+  function walk(relativePath = "") {
+    const sourcePath = path.join(sourceDir, relativePath);
+    const entries = fs.readdirSync(sourcePath, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const rel = relativePath ? path.join(relativePath, entry.name) : entry.name;
+      const src = path.join(sourceDir, rel);
+      const tgt = path.join(targetDir, rel);
+
+      if (entry.isDirectory()) {
+        fs.mkdirSync(tgt, { recursive: true });
+        walk(rel);
+        continue;
+      }
+
+      if (!fs.existsSync(tgt)) {
+        fs.mkdirSync(path.dirname(tgt), { recursive: true });
+        fs.copyFileSync(src, tgt);
+        copied += 1;
+        continue;
+      }
+
+      const srcStat = fs.statSync(src);
+      const tgtStat = fs.statSync(tgt);
+      if (srcStat.size !== tgtStat.size || srcStat.mtimeMs > tgtStat.mtimeMs) {
+        fs.copyFileSync(src, tgt);
+        updated += 1;
+      }
+    }
+  }
+
+  fs.mkdirSync(targetDir, { recursive: true });
+  walk();
+  return { copied, updated };
+}
+
+function bridgePublicDirectory(appRoot, repoRoot) {
+  const source = path.join(appRoot, "public");
+  const target = path.join(repoRoot, "public");
+
+  if (!fs.existsSync(source)) {
+    log(`skip public bridge: source missing at ${source}`);
+    return;
+  }
+
+  if (symlinkDirectory(source, target)) {
+    return;
+  }
+
+  // A real repo-root public/ directory (legacy duplicate tree) blocks symlinks.
+  // web/public is the canonical superset — replace the blocker so finalizer resolves assets once.
+  log(`replacing blocking directory at ${target} for public symlink bridge`);
+  fs.rmSync(target, { recursive: true, force: true });
+
+  if (symlinkDirectory(source, target)) {
+    return;
+  }
+
+  log("public symlink still blocked; merging canonical assets into repo-root public");
+  fs.mkdirSync(target, { recursive: true });
+  const { copied, updated } = mergePublicAssets(source, target);
+  log(`merged public assets: ${copied} copied, ${updated} updated`);
+}
+
 function bridgeDirectory(appRoot, repoRoot, directoryName) {
+  if (directoryName === "public") {
+    bridgePublicDirectory(appRoot, repoRoot);
+    return;
+  }
+
   const source = path.join(appRoot, directoryName);
   const target = path.join(repoRoot, directoryName);
 

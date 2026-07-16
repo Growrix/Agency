@@ -6,6 +6,18 @@ export const PREVIEW_POSTER_ROOT = "posters" as const;
 const WEBSITE_TEMPLATE_HTML_PREVIEW_API_ROOT = "website-templates-html-preview" as const;
 
 export type PreviewPosterVariant = "desktop" | "mobile";
+export type PreviewPosterFormat = "png" | "webp";
+
+const PREVIEW_POSTER_ALT_FALLBACK = "Website template preview";
+
+export function previewPosterAlt(title: string | undefined, variant: PreviewPosterVariant) {
+  const trimmed = title?.trim();
+  if (!trimmed) {
+    return PREVIEW_POSTER_ALT_FALLBACK;
+  }
+
+  return `${trimmed} ${variant} preview`;
+}
 
 export type WebsiteTemplateHtmlPreviewRecord = {
   slug: string;
@@ -247,8 +259,16 @@ type WebsiteTemplateHtmlPreviewCatalogProduct = {
   livePreviewUrl?: string;
 };
 
-export function getPreviewPosterUrl(templateSlug: string, variant: PreviewPosterVariant) {
-  return `/previews/${PREVIEW_POSTER_ROOT}/${templateSlug}-${variant}.png`;
+export function getPreviewPosterUrl(
+  templateSlug: string,
+  variant: PreviewPosterVariant,
+  format: PreviewPosterFormat = "png",
+) {
+  return `/previews/${PREVIEW_POSTER_ROOT}/${templateSlug}-${variant}.${format}`;
+}
+
+export function getPreviewPosterWebpUrl(templateSlug: string, variant: PreviewPosterVariant) {
+  return getPreviewPosterUrl(templateSlug, variant, "webp");
 }
 
 export function buildWebsiteTemplateHtmlPreviewSlides(catalogProducts: WebsiteTemplateHtmlPreviewCatalogProduct[]) {
@@ -293,11 +313,11 @@ export function buildWebsiteTemplateHtmlPreviewHeroSlides(
       href: catalogProduct ? `/digital-products/${catalogProduct.slug}` : `/digital-products/${productSlug}`,
       previewImage: {
         src: getPreviewPosterUrl(template.slug, "desktop"),
-        alt: `${template.title} desktop preview`,
+        alt: previewPosterAlt(template.title, "desktop"),
       },
       previewMobileImage: {
         src: getPreviewPosterUrl(template.slug, "mobile"),
-        alt: `${template.title} mobile preview`,
+        alt: previewPosterAlt(template.title, "mobile"),
       },
     };
   });

@@ -10,7 +10,6 @@ import {
   ChatBubbleLeftRightIcon,
   ChevronRightIcon,
   CloudIcon,
-  CommandLineIcon,
   CpuChipIcon,
   CubeIcon,
   DocumentTextIcon,
@@ -50,7 +49,6 @@ const CATEGORY_TAB_ICONS: Record<string, typeof GlobeAltIcon> = {
   "website-templates-html-preview": GlobeAltIcon,
   "saas-templates": CloudIcon,
   "ai-automation": CpuChipIcon,
-  "mcp-servers": CommandLineIcon,
   "seo-toolkits": SparklesIcon,
   bundles: GiftIcon,
   "free-products": ArrowDownTrayIcon,
@@ -274,7 +272,7 @@ export function ShopPageDesktop({
         </Container>
       </Section>
 
-      <Section className="!py-0">
+      <Section className="py-0!">
         <Container>
           <nav aria-label="Product categories" className="shop-desktop__category-tabs">
             <Link

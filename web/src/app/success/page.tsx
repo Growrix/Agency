@@ -15,6 +15,7 @@ import { Container, Section } from "@/components/primitives/Container";
 import { CheckoutGuaranteeCard } from "@/components/checkout/CheckoutGuaranteeCard";
 import { CheckoutSteps, type CheckoutStep } from "@/components/checkout/CheckoutSteps";
 import { CheckoutTrustRow } from "@/components/checkout/CheckoutTrustRow";
+import { resolveAppBaseUrl } from "@/lib/site";
 import { getAuthenticatedUser } from "@/server/auth/guards";
 import { getOrderById } from "@/server/domain/orders";
 
@@ -80,7 +81,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const cookieHeader = headerList.get("cookie");
   const user = cookieHeader
     ? await getAuthenticatedUser(
-        new Request("http://localhost/success", { headers: { cookie: cookieHeader } }),
+        new Request(`${resolveAppBaseUrl()}/success`, { headers: { cookie: cookieHeader } }),
       )
     : null;
 

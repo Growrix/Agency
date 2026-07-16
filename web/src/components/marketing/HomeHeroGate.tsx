@@ -3,6 +3,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { HomeHeroPlaceholder } from "@/components/marketing/HomeHeroPlaceholder";
 import { scheduleHomepageBundleLoad } from "@/lib/homepage-deferred-load";
+import type { HomeHeroLcpPosters } from "@/lib/home-hero-lcp";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
 
 type HomeHeroGateProps = {
@@ -11,6 +12,7 @@ type HomeHeroGateProps = {
   description?: string;
   slides: HtmlProfileHeroSlide[];
   emptyFallbackSlide?: HtmlProfileHeroSlide;
+  lcpPosters?: HomeHeroLcpPosters;
 };
 
 type HomeHeroComponent = ComponentType<HomeHeroGateProps>;
@@ -34,7 +36,13 @@ export function HomeHeroGate(props: HomeHeroGateProps) {
 
   if (!Hero) {
     return (
-      <HomeHeroPlaceholder badge={props.badge} title={props.title} description={props.description} />
+      <HomeHeroPlaceholder
+        badge={props.badge}
+        title={props.title}
+        description={props.description}
+        lcpMobilePoster={props.lcpPosters?.mobile}
+        lcpDesktopPoster={props.lcpPosters?.desktop}
+      />
     );
   }
 

@@ -173,6 +173,24 @@ test("faq page exposes FAQPage schema and self-canonical metadata", async ({ pag
   expect(html).toContain("FAQPage");
 });
 
+test("homepage ships SSR LCP poster hints", async ({ request }) => {
+  const response = await request.get("/");
+  const html = await response.text();
+
+  expect(html).toMatch(/rel="preload"[^>]+as="image"[^>]+\/previews\/posters\//);
+  expect(html).toMatch(/data-testid="home-hero-lcp-poster-mobile"|data-testid="home-hero-lcp-poster-desktop"/);
+  expect(html).toMatch(/\/previews\/posters\/[^"]+-mobile\.png/);
+});
+
+test("mobile bottom nav chat is a crawlable link", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const chatLink = page.getByTestId("mobile-bottom-nav-chat");
+  await expect(chatLink).toHaveAttribute("href", "/ai-concierge");
+  await expect(chatLink).toHaveRole("link");
+});
+
 test("robots.txt and sitemap.xml are reachable", async ({ request }) => {
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();

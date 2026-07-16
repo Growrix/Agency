@@ -91,6 +91,24 @@ export function buildBlogPostingSchema(input: {
   };
 }
 
+export type BreadcrumbSchemaItem = {
+  name: string;
+  path: string;
+};
+
+export function buildBreadcrumbListSchema(items: BreadcrumbSchemaItem[]): JsonLdData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path.startsWith("/") ? item.path : `/${item.path}`),
+    })),
+  };
+}
+
 export function buildCreativeWorkSchema(input: {
   name: string;
   description: string;
@@ -109,5 +127,111 @@ export function buildCreativeWorkSchema(input: {
       url: SITE_URL,
     },
     ...(input.imageUrl ? { image: input.imageUrl } : {}),
+  };
+}
+
+export function buildWebPageSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+}): JsonLdData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+
+export function buildContactPageSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+}): JsonLdData {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+
+export type CollectionPageSchemaItem = {
+  name: string;
+  path: string;
+};
+
+export function buildCollectionPageSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  items?: CollectionPageSchemaItem[];
+}): JsonLdData {
+  const itemListElement = input.items?.map((item, index) => ({
+    "@type": "ListItem" as const,
+    position: index + 1,
+    url: absoluteUrl(item.path.startsWith("/") ? item.path : `/${item.path}`),
+    name: item.name,
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    ...(itemListElement && itemListElement.length > 0
+      ? {
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: itemListElement.length,
+            itemListElement,
+          },
+        }
+      : {}),
+  };
+}
+
+export function buildBlogSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  posts?: CollectionPageSchemaItem[];
+}): JsonLdData {
+  const blogPost = input.posts?.map((post) => ({
+    "@type": "BlogPosting" as const,
+    headline: post.name,
+    url: absoluteUrl(post.path.startsWith("/") ? post.path : `/${post.path}`),
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    ...(blogPost && blogPost.length > 0 ? { blogPost } : {}),
   };
 }

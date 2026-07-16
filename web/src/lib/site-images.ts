@@ -64,10 +64,6 @@ export const TEAM_IMAGES: Record<string, StockImage> = {
 };
 
 export const PRODUCT_IMAGES: Record<string, StockImage> = {
-  "Concierge MCP Starter": {
-    src: "/images/products/mcp.jpg",
-    alt: "Developer workstation showing code on a large screen.",
-  },
   "Atelier Marketing Theme": {
     src: "/images/products/template.jpg",
     alt: "Designer workspace with laptop and visual design tools for a premium website template.",
@@ -91,10 +87,6 @@ export const PRODUCT_IMAGES: Record<string, StockImage> = {
 };
 
 export const BLOG_IMAGES: Record<string, StockImage> = {
-  "designing-mcp-servers-real-teams-actually-deploy": {
-    src: "/images/blog/mcp.jpg",
-    alt: "Developers working on laptops around a collaborative table.",
-  },
   "the-launch-sprint-method": {
     src: "/images/blog/launch-sprint.jpg",
     alt: "Team workshop session planning a launch sprint around laptops.",
@@ -121,10 +113,6 @@ export const PORTFOLIO_IMAGES: Record<string, StockImage> = {
   "tideline-health": {
     src: "/images/portfolio/tideline-health-hero.jpg",
     alt: "Doctor using a mobile device in a healthcare setting.",
-  },
-  "northcrest-mcp": {
-    src: "/images/portfolio/northcrest-mcp-hero.jpg",
-    alt: "Server hardware and network equipment representing backend infrastructure.",
   },
   "lumora-studio": {
     src: "/images/portfolio/lumora-studio-hero.jpg",
@@ -179,42 +167,6 @@ export const CASE_STUDY_DETAILS: Record<string, CaseStudyDetail> = {
       { src: "/images/portfolio/tideline-health-hero.jpg", alt: "Healthcare professional using a mobile device." },
       { src: "/images/portfolio/tideline-health-2.jpg", alt: "Healthcare-related digital workflow on a mobile device." },
       { src: "/images/home/mobile-device.jpg", alt: "Close-up of a mobile screen interaction, representing patient app use." },
-    ],
-  },
-  "northcrest-mcp": {
-    client: "Northcrest",
-    year: "2026",
-    duration: "6 weeks",
-    team: "MCP architecture, backend, ops enablement",
-    challenge: [
-      "Operations teams needed one safe way for an internal AI assistant to access CRM, billing, and inventory systems together.",
-      "Existing internal tools had inconsistent naming and weak visibility into who triggered what across the stack.",
-      "Any rollout needed strong auditability before operators would trust the assistant in production work.",
-    ],
-    strategy: [
-      "Reduced the tool surface into a smaller, safer set of MCP actions aligned to real operator jobs.",
-      "Added clear permission boundaries, request tracing, and reviewable logs from the first version.",
-      "Built a supporting console so the ops team could test and inspect tool behavior without engineering involvement.",
-      "Scoped the first release around high-frequency operations questions where time savings would be obvious.",
-    ],
-    build: [
-      { label: "Server", value: "TypeScript MCP runtime" },
-      { label: "Tools", value: "CRM, billing, inventory connectors" },
-      { label: "Auth", value: "Signed session tokens + RBAC" },
-      { label: "Observability", value: "Structured logs + trace review" },
-      { label: "Hosting", value: "Cloudflare Workers" },
-      { label: "Testing", value: "Schema fixtures + smoke tests" },
-    ],
-    results: [
-      { value: "5h/wk", label: "Time saved", hint: "Per operations lead" },
-      { value: "148ms", label: "Median tool latency", hint: "Across live requests" },
-      { value: "100%", label: "Audit coverage", hint: "All tool calls logged" },
-      { value: "8", label: "Live tools", hint: "Shipped in the initial scope" },
-    ],
-    gallery: [
-      { src: "/images/portfolio/northcrest-mcp-hero.jpg", alt: "Close-up of server infrastructure." },
-      { src: "/images/blog/mcp.jpg", alt: "Developers collaborating on engineering work." },
-      { src: "/images/home/studio-hero.jpg", alt: "Team collaboration around laptops." },
     ],
   },
   "lumora-studio": {

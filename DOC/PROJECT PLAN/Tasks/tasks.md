@@ -603,3 +603,58 @@ Remaining parallel tracks:
   - Pre-fix Playwright scroll reproduction showed `Canvas2DParticles` effect re-initializing and `useHeroScrollTransform` effect restarting on scroll.
   - Post-fix reproduction shows `scrollProgress update` events from GSAP but **no additional canvas effect runs** during/after the scroll and **no repeated ScrollTrigger teardown/recreation**.
   - `npm run health:check` exit 0 (lint, typecheck, perf budgets, unit/integration tests, production build, 15 release-gate Playwright tests).
+
+### 2026-07-15 — PSI performance, SEO 85, and Google indexing prep (WEB-PERF-005)
+- **Status:** Code complete; production indexing env flip pending operator action in Vercel.
+- **Scope:** LCP SSR poster + preload, WebP poster pipeline, crawlable mobile nav, tap targets, live audit + GSC docs.
+- **Changes:**
+  - `HomeHeroPlaceholder` — SSR LCP poster (mobile + desktop) with `<picture>` WebP fallback
+  - `HomeHeroLcpHints` + `resolveHeroLcpPosters` — preload first hero poster in document head
+  - `HomeHeroStackLogos` — demote stack SVG `fetchPriority` to low
+  - `WebsiteTemplateHtmlDesktopPosterFrame` / `MobilePreviewFrame` — WebP `<picture>` sources
+  - `generate-preview-posters.mjs` — WebP generation + sharp PNG conversion path
+  - `MobileBottomNav` — Chat item is crawlable `<Link href="/ai-concierge">`
+  - Shell tap targets — Header, ThemeToggle, PublicAuthControls bumped to 44px (`size-11`)
+  - `HtmlProfileHeroCarousel` — nav controls `size-11`
+  - `previewPosterAlt()` helper for alt fallbacks
+  - Release gates: SSR LCP poster hints + crawlable chat link (17/17 pass)
+  - Audit docs: `2026-07-15-growrixos-psi-indexing-live-audit.md`, `google-indexing-enablement-checklist.md`, `google-search-console-setup.md`
+- **Live production baseline (pre-deploy):** Homepage 200 without Clerk redirect; `robots.txt` still `Disallow: /` (indexing off); sitemap reachable but apex host in URLs.
+- **Operator next steps:**
+  1. Deploy this commit to production
+  2. Vercel env: `SITE_INDEXING_ENABLED=true`, `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com`
+  3. Follow `Ongoing DOCS/SEO/technical-seo/audit-reports/google-search-console-setup.md`
+  4. Re-run Pingdom + PageSpeed Insights mobile on `/`
+- **Verification:** `npm run health:check` exit 0 (17 release-gate tests including new LCP + nav checks).
+
+### 2026-07-15 — Vercel growrix preview deploy Error after public bridge skip (debug_failure)
+- **Deployment:** `dpl_C2Mm4cbAUNFe5pxpxukCniRWxgpT` on branch `Technical_SEO_debug` (commit `6e343e3`) — Next.js build succeeded; finalizer failed with `readyState: ERROR` after bridge logged `skip symlink; path exists and is not a symlink: /vercel/path0/public`.
+- **Root cause:** Legacy repo-root `public/` is a real directory (subset of `web/public/`). Bridge could not symlink canonical assets; 37 newer files (36 WebP posters + updated manifest) existed only under `web/public/`.
+- **Fix:** `vercel-monorepo-finalizer-bridge.mjs` — when `public/` blocks symlink, remove blocker and symlink `web/public` at repo root; merge fallback if symlink still fails.
+- **Verification:** Local `VERCEL=1` bridge run created `public -> web/public` symlink; `npm run ci:check` exit 0. Remote Vercel Ready pending post-push inspect.
+
+### 2026-07-15 — Growrix OS on-page SEO audit + non-text implementation (WEB-SEO-ONPAGE-001)
+- **Status:** Documentation complete; non-text code fixes implemented; text changes held in approval queue.
+- **Deliverables:**
+  - `Ongoing DOCS/SEO/on-page-seo/audit-reports/2026-07-15-growrixos-on-page-audit.md`
+  - `Ongoing DOCS/SEO/on-page-seo/implementation-briefs/2026-07-15-growrixos-build-brief.md`
+  - `Ongoing DOCS/SEO/on-page-seo/implementation-briefs/2026-07-15-growrixos-suggested-text-changes.md` (pending user approval)
+  - `Ongoing DOCS/SEO/on-page-seo/strategy/2026-07-15-growrixos-content-strategy.md`
+- **Code (non-text only):** `buildPageMetadata` on 6 routes; 404 noindex; sitemap additions; H1 structural fix on free/bundles; `buildBreadcrumbListSchema` + JSON-LD on blog/service/portfolio/product detail; CollectionPage on digital-products index; category OG image; title-template dedup on 6 listing pages; AI concierge removed from footer Support nav.
+- **Deferred:** All title/meta/H1/body copy rewrites in suggested-text-changes doc — implement only after user approves item IDs.
+- **Verification:** `npm run health:check` exit 0 (17/17 release gates).
+
+### 2026-07-16 — SEO + quality remediation plan (WEB-SEO-REMEDIATION-001)
+- **Status:** Streams B–E implemented; Stream A operator action documented; Stream F unchanged (TXT approval queue).
+- **Indexing/crawl:** Removed `/additional-services` → `/services/technical-seo` redirect so the page is reachable; cleaned `sitemap.ts` (removed redirect-only `/privacy-policy`, `/terms-of-service`, `/html-business-profiles`, duplicate `/services/technical-seo`).
+- **Metadata:** Migrated `shop/[slug]` and `digital-products/category/[category]` to `buildPageMetadata`; not-found slugs return `NOINDEX_ROBOTS` on 5 dynamic routes; replaced `|` title separators with em dashes on 6 pages; AI concierge title → `AI Assistant`.
+- **Structured data:** Added `buildWebPageSchema`, `buildContactPageSchema`, `buildCollectionPageSchema`, `buildBlogSchema` helpers; JSON-LD on services/portfolio/blog/free/bundles index pages plus about, contact, book-appointment, ai-concierge, refund-policy, legal pages, additional-services (WebPage + FAQ + breadcrumbs).
+- **Bugs:** Gated `api/debug-log` to non-production; `success/page.tsx` auth sentinel uses `resolveAppBaseUrl()`; Tailwind `break-words` → `wrap-break-word` in admin submission detail.
+- **Operator action (Stream A):** Set `SITE_INDEXING_ENABLED=true` and `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` in Vercel Production, redeploy, then submit `https://www.growrixos.com/sitemap.xml` in Google Search Console.
+- **Verification:** `npm run health:check` exit 0 (17/17 release gates).
+
+### 2026-07-16 — On-page SEO approved text changes (WEB-SEO-TXT-002)
+- **Status:** All user-approved TXT items implemented. TXT-011/013/022 remain as-is per user rejection.
+- **Approved + implemented:** TXT-001 (home title), TXT-002 (home meta), TXT-003 (services title+meta), TXT-004 (pricing title+meta), TXT-006 (service detail title pattern → `${title} Development`), TXT-007 (about title), TXT-008 (additional-services title), TXT-010 (hero badge), TXT-012 (hero description), TXT-023 (contact channel label), TXT-024 (free/bundles H1), TXT-030 (footer AI concierge kept removed).
+- **Files touched:** `seo-metadata.ts`, `home-conversion-content.ts`, `contact-landing-content.ts`, `services/page.tsx`, `services/[slug]/page.tsx`, `pricing/page.tsx`, `about/page.tsx`, `additional-services/page.tsx`, `digital-products/free/page.tsx`, `digital-products/bundles/page.tsx`, approval-queue doc.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0. Pre-existing warnings in `checkout/payment/page.tsx` unrelated.

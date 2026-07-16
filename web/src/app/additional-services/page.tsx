@@ -32,13 +32,17 @@ import { AdditionalServicesValueMobile } from "@/components/marketing/additional
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { ADDITIONAL_SERVICES_CATEGORIES } from "@/lib/content";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildFaqPageSchema, buildWebPageSchema } from "@/lib/seo-structured-data";
 import { WHATSAPP_HREF } from "@/lib/nav";
 
-export const metadata: Metadata = {
-  title: "SEO Service | SEO Setup, Analytics & Technical Optimization",
+export const metadata: Metadata = buildPageMetadata({
+  title: "SEO & Analytics Setup — One-Time Technical Package",
   description:
     "One-time SEO and analytics setup services: Google Search Console, Meta Pixel, GA4, structured data, Core Web Vitals, and more. Get your product found and tracked from day one.",
-};
+  path: "/additional-services",
+});
 
 const CATEGORY_ICONS = [
   MagnifyingGlassCircleIcon,
@@ -144,8 +148,24 @@ const NOT_INCLUDED = [
 ];
 
 export default function AdditionalServicesPage() {
+  const faqSchema = buildFaqPageSchema(FAQ_ITEMS);
+  const additionalServicesStructuredData = [
+    buildWebPageSchema({
+      name: "SEO & Analytics Setup — One-Time Technical Package",
+      description:
+        "One-time SEO and analytics setup services: Google Search Console, Meta Pixel, GA4, structured data, Core Web Vitals, and more. Get your product found and tracked from day one.",
+      path: "/additional-services",
+    }),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: "Additional Services", path: "/additional-services" },
+    ]),
+    ...(faqSchema ? [faqSchema] : []),
+  ];
+
   return (
     <>
+      <JsonLd data={additionalServicesStructuredData} />
       {/* Hero */}
       <MarketingViewportGate
         mobile={

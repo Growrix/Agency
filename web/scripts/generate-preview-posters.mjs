@@ -18,6 +18,8 @@ const DESKTOP_VIEWPORT = { width: 1440, height: 900 };
 const MOBILE_VIEWPORT = { width: 390, height: 844 };
 const SETTLE_MS = 800;
 const POSTER_EXTENSION = "png";
+const WEBP_EXTENSION = "webp";
+const WEBP_QUALITY = 82;
 const forceRegenerate = process.argv.includes("--force");
 
 /** @type {Array<{ slug: string; fileName: string; title: string }>} */
@@ -39,7 +41,7 @@ fs.mkdirSync(outputDir, { recursive: true });
 const server = await startStaticServer(publicRoot);
 const baseUrl = `http://127.0.0.1:${server.port}`;
 
-/** @type {Record<string, { desktop: string; mobile: string; generatedAt: string; sourceFile: string }>} */
+/** @type {Record<string, { desktop: string; mobile: string; desktopWebp?: string; mobileWebp?: string; generatedAt: string; sourceFile: string }>} */
 const manifest = {};
 
 let generated = 0;
@@ -59,17 +61,31 @@ try {
     const htmlMtime = fs.statSync(htmlPath).mtimeMs;
     const desktopOut = path.join(outputDir, `${template.slug}-desktop.${POSTER_EXTENSION}`);
     const mobileOut = path.join(outputDir, `${template.slug}-mobile.${POSTER_EXTENSION}`);
+    const desktopWebpOut = path.join(outputDir, `${template.slug}-desktop.${WEBP_EXTENSION}`);
+    const mobileWebpOut = path.join(outputDir, `${template.slug}-mobile.${WEBP_EXTENSION}`);
 
     const desktopFresh =
       !forceRegenerate && fs.existsSync(desktopOut) && fs.statSync(desktopOut).mtimeMs >= htmlMtime;
     const mobileFresh =
       !forceRegenerate && fs.existsSync(mobileOut) && fs.statSync(mobileOut).mtimeMs >= htmlMtime;
+    const desktopWebpFresh =
+      !forceRegenerate &&
+      fs.existsSync(desktopWebpOut) &&
+      fs.existsSync(desktopOut) &&
+      fs.statSync(desktopWebpOut).mtimeMs >= fs.statSync(desktopOut).mtimeMs;
+    const mobileWebpFresh =
+      !forceRegenerate &&
+      fs.existsSync(mobileWebpOut) &&
+      fs.existsSync(mobileOut) &&
+      fs.statSync(mobileWebpOut).mtimeMs >= fs.statSync(mobileOut).mtimeMs;
 
-    if (desktopFresh && mobileFresh) {
+    if (desktopFresh && mobileFresh && desktopWebpFresh && mobileWebpFresh) {
       skipped += 1;
       manifest[template.slug] = {
         desktop: `/previews/posters/${template.slug}-desktop.${POSTER_EXTENSION}`,
         mobile: `/previews/posters/${template.slug}-mobile.${POSTER_EXTENSION}`,
+        desktopWebp: `/previews/posters/${template.slug}-desktop.${WEBP_EXTENSION}`,
+        mobileWebp: `/previews/posters/${template.slug}-mobile.${WEBP_EXTENSION}`,
         generatedAt: new Date(fs.statSync(desktopOut).mtimeMs).toISOString(),
         sourceFile: template.fileName,
       };
@@ -79,24 +95,36 @@ try {
     const previewUrl = `${baseUrl}/previews/${PREVIEW_ROOT}/${encodeURIComponent(template.fileName)}`;
     console.log(`Capturing ${template.slug} …`);
 
-    if (!desktopFresh) {
-      await captureVariant(context, previewUrl, {
-        viewport: DESKTOP_VIEWPORT,
-        outputPath: desktopOut,
-      });
+    if (!desktopFresh || !desktopWebpFresh) {
+      if (desktopFresh && !desktopWebpFresh) {
+        await convertPngPosterToWebp(desktopOut, desktopWebpOut);
+      } else {
+        await captureVariant(context, previewUrl, {
+          viewport: DESKTOP_VIEWPORT,
+          pngOutputPath: desktopOut,
+          webpOutputPath: desktopWebpOut,
+        });
+      }
     }
 
-    if (!mobileFresh) {
-      await captureVariant(context, previewUrl, {
-        viewport: MOBILE_VIEWPORT,
-        outputPath: mobileOut,
-      });
+    if (!mobileFresh || !mobileWebpFresh) {
+      if (mobileFresh && !mobileWebpFresh) {
+        await convertPngPosterToWebp(mobileOut, mobileWebpOut);
+      } else {
+        await captureVariant(context, previewUrl, {
+          viewport: MOBILE_VIEWPORT,
+          pngOutputPath: mobileOut,
+          webpOutputPath: mobileWebpOut,
+        });
+      }
     }
 
     generated += 1;
     manifest[template.slug] = {
       desktop: `/previews/posters/${template.slug}-desktop.${POSTER_EXTENSION}`,
       mobile: `/previews/posters/${template.slug}-mobile.${POSTER_EXTENSION}`,
+      desktopWebp: `/previews/posters/${template.slug}-desktop.${WEBP_EXTENSION}`,
+      mobileWebp: `/previews/posters/${template.slug}-mobile.${WEBP_EXTENSION}`,
       generatedAt: new Date().toISOString(),
       sourceFile: template.fileName,
     };
@@ -121,9 +149,24 @@ console.log(
 );
 
 /**
+ * @param {string} pngPath
+ * @param {string} webpPath
+ */
+async function convertPngPosterToWebp(pngPath, webpPath) {
+  try {
+    const sharpModule = await import("sharp");
+    const sharp = sharpModule.default;
+    await sharp(pngPath).webp({ quality: WEBP_QUALITY }).toFile(webpPath);
+    console.log(`Converted ${path.basename(pngPath)} → ${path.basename(webpPath)}`);
+  } catch (error) {
+    console.warn(`WebP conversion failed for ${pngPath}:`, error);
+  }
+}
+
+/**
  * @param {import("@playwright/test").BrowserContext} context
  * @param {string} previewUrl
- * @param {{ viewport: { width: number; height: number }; outputPath: string }} options
+ * @param {{ viewport: { width: number; height: number }; pngOutputPath: string; webpOutputPath: string }} options
  */
 async function captureVariant(context, previewUrl, options) {
   const page = await context.newPage();
@@ -140,8 +183,15 @@ async function captureVariant(context, previewUrl, options) {
     await delay(SETTLE_MS);
 
     await page.screenshot({
-      path: options.outputPath,
+      path: options.pngOutputPath,
       type: "png",
+      fullPage: false,
+    });
+
+    await page.screenshot({
+      path: options.webpOutputPath,
+      type: "webp",
+      quality: WEBP_QUALITY,
       fullPage: false,
     });
   } finally {

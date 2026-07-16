@@ -287,4 +287,10 @@ Hello Mitchel, Hope you are doing well brother. Its been long time havent hear f
 by the time I have created a site architecture for Rayiss, visit this link the check out the website https://rayiss.vercel.app/ . let me know if you want to move from wordpress to Saas where you will get limitless scaling later. 
 
 
-Hello Danny, Hope you are doing well, I am excited to share that, I have launced my own web development agency where we build websites, saas applications, Mobile apps, business automations and more. I become a Full-Stack web developer and now working with saas products. here is my website link https://www.growrixos.com/ . please have some time to visit.  
+Hello Danny, Hope you are doing well, I am excited to share that, I have launced my own web development agency where we build websites, saas applications, Mobile apps, business automations and more. I become a Full-Stack web developer and now working with saas products. here is my website link https://www.growrixos.com/ . please have some time to visit.
+
+---------------------------------------------------------------------------------------
+
+I need you to update some pricings on overall site as followes:
+1. Techinical SEO should Start from $500 , not 750. Automations starts from 300 , Mobile apps from $2500 , Saas Applications from $1500 .
+- update the https://www.growrixos.com/pricing and also all the relevant areas has the pricing on the site. check for that and update accordingly. and also knowledge.ts file as well. but for that analyze the entire sites contents once again and update with all the latest knowledge.

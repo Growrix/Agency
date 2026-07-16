@@ -59,28 +59,28 @@ export function MobileBottomNav() {
             ? isConciergeOpen
             : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           const Icon = isActive ? item.active : item.icon;
+          const navItemClassName = cn(
+            "flex min-h-12 w-full flex-col items-center justify-center gap-1 px-1 py-3 text-[10px] font-medium leading-tight touch-manipulation",
+            isActive ? "text-primary" : "text-text",
+          );
+
           return (
             <li key={item.label}>
               {item.href === "/ai-concierge" ? (
-                <button
-                  type="button"
-                  onClick={() => openConcierge()}
-                  className={cn(
-                    "flex w-full flex-col items-center justify-center gap-1 px-1 py-3 text-[10px] font-medium leading-tight",
-                    isActive ? "text-primary" : "text-text"
-                  )}
+                <Link
+                  href={item.href}
+                  data-testid="mobile-bottom-nav-chat"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    openConcierge();
+                  }}
+                  className={navItemClassName}
                 >
                   <Icon className="size-5 shrink-0" aria-hidden />
                   {item.label}
-                </button>
+                </Link>
               ) : (
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex flex-col items-center justify-center gap-1 px-1 py-3 text-[10px] font-medium leading-tight",
-                    isActive ? "text-primary" : "text-text"
-                  )}
-                >
+                <Link href={item.href} className={navItemClassName}>
                   <Icon className="size-5 shrink-0" aria-hidden />
                   {item.label}
                 </Link>

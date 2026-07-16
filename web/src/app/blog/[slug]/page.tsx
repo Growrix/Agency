@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildPageMetadata } from "@/lib/seo-metadata";
-import { buildBlogPostingSchema } from "@/lib/seo-structured-data";
+import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
+import { buildBlogPostingSchema, buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { absoluteUrl } from "@/lib/site";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Container, Section } from "@/components/primitives/Container";
@@ -49,7 +49,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
-  if (!post) return { title: "Article not found" };
+  if (!post) return { title: "Article not found", robots: NOINDEX_ROBOTS };
 
   const canonical = post.seo?.canonicalUrl ?? `/blog/${post.slug}`;
   const title = post.seo?.metaTitle ?? post.title;
@@ -87,6 +87,11 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     authorName: post.author.name,
     imageUrl: heroImage?.src,
   });
+  const breadcrumbSchema = buildBreadcrumbListSchema([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
   const articleSections = post.body.flatMap((block, index) => {
     if (block.type !== "h2" && block.type !== "h3") {
       return [];
@@ -101,7 +106,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   return (
     <>
-      <JsonLd data={blogPostingSchema} />
+      <JsonLd data={[blogPostingSchema, breadcrumbSchema]} />
       {/* Hero */}
       <MarketingViewportGate
         mobile={

@@ -61,15 +61,6 @@ export const SERVICES = [
     timeline: "3-10 days",
     pillars: ["Search Console & indexing", "Analytics & pixels", "Schema & meta", "Core Web Vitals"],
   },
-  {
-    slug: "mcp-servers",
-    name: "MCP Servers",
-    short: "Secondary: MCP infrastructure when your product stack needs agents.",
-    long: "Secure, observable MCP servers that extend websites, SaaS products, and internal tools when agent workflows are part of the roadmap.",
-    typical: "Scoped integration or platform engagement",
-    timeline: "3-12 weeks",
-    pillars: ["Tool design", "Auth & access", "Observability", "Deployment & ops"],
-  },
 ] as const;
 
 export const SERVICE_BY_SLUG = Object.fromEntries(SERVICES.map((s) => [s.slug, s]));
@@ -210,15 +201,6 @@ export const PORTFOLIO = [
     accent: "from-purple-500 to-fuchsia-500",
   },
   {
-    slug: "northcrest-mcp",
-    name: "Northcrest MCP",
-    industry: "B2B Operations",
-    service: "mcp-servers",
-    summary: "An MCP server connecting CRM, billing, and inventory for an internal ops agent.",
-    metric: "5h/week saved per ops lead",
-    accent: "from-sky-500 to-blue-600",
-  },
-  {
     slug: "beacon-route-engine",
     name: "Beacon Route Engine",
     industry: "Mobility",
@@ -240,7 +222,7 @@ export const FAQ_GENERAL = [
   {
     question: "What is your typical timeline?",
     answer:
-      "Custom websites usually land in 4-10 weeks. Ready websites can move much faster when the content is clear. SaaS products run 8-24 weeks depending on integrations. MCP and automation work are scoped when they support the main build.",
+      "Custom websites usually land in 4-10 weeks. Ready websites can move much faster when the content is clear. SaaS products run 8-24 weeks depending on integrations. Automation work is scoped when it supports the main build.",
   },
   {
     question: "Do you handle content, copy, and assets?",

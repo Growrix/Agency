@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { HtmlBusinessProfilesCategoryLanding } from "@/components/sections/HtmlBusinessProfilesCategoryLanding";
 import { WebsiteTemplatesHtmlPreviewCategoryLanding } from "@/components/sections/WebsiteTemplatesHtmlPreviewCategoryLanding";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
 import { isHiddenProductCategorySlug } from "@/lib/feature-flags";
 import { HTML_BUSINESS_PROFILES_CATEGORY_METADATA } from "@/lib/html-business-profiles-category-content";
 import { HTML_BUSINESS_PROFILE_SHOP_CATEGORY } from "@/lib/html-business-profiles";
@@ -32,26 +33,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category } = await params;
   const entry = CATEGORY_METADATA[category];
   if (!entry) {
-    return {};
+    return { title: "Category not found", robots: NOINDEX_ROBOTS };
   }
 
-  const canonical = `/digital-products/category/${category}`;
-  return {
+  return buildPageMetadata({
     title: entry.title,
     description: entry.description,
-    alternates: { canonical },
-    openGraph: {
-      title: entry.title,
-      description: entry.description,
-      url: canonical,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: entry.title,
-      description: entry.description,
-    },
-  };
+    path: `/digital-products/category/${category}`,
+  });
+}
+
+export function generateStaticParams() {
+  return Object.keys(CATEGORY_METADATA).map((category) => ({ category }));
 }
 
 export default async function ProductsCategoryPage({ params }: PageProps) {

@@ -9,20 +9,30 @@ import {
   resolveTransactionalFromEmail,
 } from "@/server/domain/email-layout";
 
+const testEnv = process.env as NodeJS.ProcessEnv & Record<string, string | undefined>;
+
+function setTestEnv(key: string, value: string | undefined) {
+  if (value === undefined) {
+    delete testEnv[key];
+    return;
+  }
+
+  testEnv[key] = value;
+}
+
 describe("email layout", () => {
-  const env = process.env as Record<string, string | undefined>;
-  const originalNodeEnv = env.NODE_ENV;
-  const originalSiteUrl = env.NEXT_PUBLIC_SITE_URL;
+  const originalNodeEnv = process.env.NODE_ENV;
+  const originalSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   afterEach(() => {
-    env.NODE_ENV = originalNodeEnv;
-    env.NEXT_PUBLIC_SITE_URL = originalSiteUrl;
+    setTestEnv("NODE_ENV", originalNodeEnv);
+    setTestEnv("NEXT_PUBLIC_SITE_URL", originalSiteUrl);
     resetRuntimeConfigForTests();
   });
 
   it("uses production domain in branded footer links when env is unset", () => {
-    env.NODE_ENV = "production";
-    delete env.NEXT_PUBLIC_SITE_URL;
+    setTestEnv("NODE_ENV", "production");
+    setTestEnv("NEXT_PUBLIC_SITE_URL", undefined);
     resetRuntimeConfigForTests();
 
     const html = buildBrandedEmailHtml({

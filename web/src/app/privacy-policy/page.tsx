@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildWebPageSchema } from "@/lib/seo-structured-data";
 import { Container, Section } from "@/components/primitives/Container";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
@@ -78,6 +80,20 @@ export default function PrivacyPage() {
     "Last updated April 19, 2026. This policy explains how we handle data across the website, AI chat, booking, and payments.";
 
   return (
+    <>
+      <JsonLd
+        data={[
+          buildWebPageSchema({
+            name: "Privacy Policy",
+            description: "Learn how Growrix OS handles data related to contact forms, AI chat, booking, analytics, and payments.",
+            path: "/legal/privacy",
+          }),
+          buildBreadcrumbListSchema([
+            { name: "Home", path: "/" },
+            { name: "Privacy Policy", path: "/legal/privacy" },
+          ]),
+        ]}
+      />
     <Section className="overflow-x-hidden py-10 sm:py-12">
       <Container width="reading" className="min-w-0 px-4 sm:px-6">
         <MarketingViewportGate
@@ -142,5 +158,6 @@ export default function PrivacyPage() {
         />
       </Container>
     </Section>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
 import { ArrowLeftIcon, ArrowUpRightIcon, ShoppingBagIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
@@ -19,6 +20,7 @@ import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { ProductReviews } from "@/components/shop/ProductReviews";
 import { WishlistButton } from "@/components/shop/WishlistButton";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
@@ -47,30 +49,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = await getPublicShopProduct(slug).catch(() => null);
-  if (!product) return {};
+  if (!product) {
+    return { title: "Product not found", robots: NOINDEX_ROBOTS };
+  }
 
-  const canonical = `/digital-products/${product.slug}`;
-  const description = product.summary ?? product.teaser ?? undefined;
+  const description = product.summary ?? product.teaser ?? "Digital product details and purchase options.";
   const ogImage = product.image?.src;
 
-  return {
+  return buildPageMetadata({
     title: product.name,
     description,
-    alternates: { canonical },
-    openGraph: {
-      title: product.name,
-      description,
-      url: canonical,
-      type: "website",
-      images: ogImage ? [{ url: ogImage, alt: product.image?.alt ?? product.name }] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: product.name,
-      description,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
+    path: `/digital-products/${product.slug}`,
+    ogImage,
+    twitterImages: ogImage ? [ogImage] : undefined,
+  });
 }
 
 function StarRating({ rating }: { rating: number }) {
@@ -564,7 +556,14 @@ export default async function ShopPreviewPage({ params }: PageProps) {
         })),
       }
     : null;
-  const productStructuredData: JsonLdData[] = faqJsonLd ? [productJsonLd, faqJsonLd] : [productJsonLd];
+  const productStructuredData: JsonLdData[] = [
+    ...(faqJsonLd ? [productJsonLd, faqJsonLd] : [productJsonLd]),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: "Digital Products", path: "/digital-products" },
+      { name: product.name, path: `/digital-products/${product.slug}` },
+    ]),
+  ];
 
   if (isHtmlBusinessProfile) {
     const standardVariant = variants.find((variant) => variant.slug === "standard") ?? variants[0];

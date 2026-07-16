@@ -203,10 +203,6 @@ function scoreDocument(input: {
     }
   }
 
-  if (document.id === "service-mcp-servers-secondary" && !tokens.some((token) => ["mcp", "agent", "agents", "tool", "tools"].includes(token))) {
-    score -= 6;
-  }
-
   return score;
 }
 

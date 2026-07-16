@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbListSchema, buildCollectionPageSchema } from "@/lib/seo-structured-data";
 import { Container, Section } from "@/components/primitives/Container";
 import { LinkButton } from "@/components/primitives/Button";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Free Products",
   description: "Browse free offers and starter downloads from the catalog.",
-};
+  path: "/digital-products/free",
+});
 
 function isFreePrice(price: string) {
   const normalized = price.trim().toLowerCase();
@@ -22,14 +26,33 @@ function isFreeProduct(product: { price: string; tag?: string; name: string; typ
 
 export default async function FreeProductsPage() {
   const freeProducts = (await listPublicShopProducts()).filter(isFreeProduct);
+  const freeStructuredData = [
+    buildCollectionPageSchema({
+      name: "Free Website Templates & Starters",
+      description: "Browse free offers and starter downloads from the catalog.",
+      path: "/digital-products/free",
+      items: freeProducts.map((product) => ({
+        name: product.name,
+        path: `/digital-products/${product.slug}`,
+      })),
+    }),
+    buildBreadcrumbListSchema([
+      { name: "Home", path: "/" },
+      { name: "Digital Products", path: "/digital-products" },
+      { name: "Free Products", path: "/digital-products/free" },
+    ]),
+  ];
 
   return (
+    <>
+      <JsonLd data={freeStructuredData} />
     <Section className="py-10 sm:py-14">
       <Container>
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeading
+            as="h1"
             eyebrow="Free"
-            title="Free products"
+            title="Free Website Templates & Starters"
             description="Starter templates and resources you can use before committing to paid bundles."
           />
           <LinkButton href="/digital-products" variant="outline" size="sm">
@@ -50,5 +73,6 @@ export default async function FreeProductsPage() {
         )}
       </Container>
     </Section>
+    </>
   );
 }
