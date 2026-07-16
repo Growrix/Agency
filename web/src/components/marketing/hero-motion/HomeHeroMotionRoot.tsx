@@ -72,6 +72,9 @@ export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootP
 
     if (tier === "reduced") {
       section.classList.add("hero-section--reduced-motion");
+      // Signal gate without setState — overlay must lift for reduced-motion users.
+      window.dispatchEvent(new CustomEvent("hero-copy-sequence-start"));
+      window.dispatchEvent(new CustomEvent("hero-headline-ready"));
       return;
     }
 

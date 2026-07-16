@@ -43,14 +43,13 @@ type HomeHeroDesktopProps = {
 
 export function HomeHeroDesktop({
   badge,
-  title,
   description,
   slides,
   emptyFallbackSlide,
 }: HomeHeroDesktopProps) {
   const reduced = useReducedMotion();
   const motion = useHeroMotionOptional();
-  const useStructuredTitle = !title;
+  // Always use kinetic structured title — a CMS plain <h1> pops in when pending lifts (title blink).
   const desktopCopyPending = Boolean(
     !reduced &&
       motion &&
@@ -67,16 +66,12 @@ export function HomeHeroDesktop({
           </Badge>
         </HomeHeroMotionReveal>
 
-        {useStructuredTitle ? (
-          <HomeHeroKineticHeadline
-            titleLines={HOME_HERO_COPY.titleLines}
-            titleAccent={HOME_HERO_COPY.titleAccent}
-            className={`home-hero-desktop__title ${HERO_DISPLAY_TITLE_CLASS}`}
-            variant="desktop"
-          />
-        ) : (
-          <h1 className={`home-hero-desktop__title ${HERO_DISPLAY_TITLE_CLASS}`}>{title}</h1>
-        )}
+        <HomeHeroKineticHeadline
+          titleLines={HOME_HERO_COPY.titleLines}
+          titleAccent={HOME_HERO_COPY.titleAccent}
+          className={`home-hero-desktop__title ${HERO_DISPLAY_TITLE_CLASS}`}
+          variant="desktop"
+        />
 
         <HomeHeroKineticSubhead className="home-hero-desktop__description">{description}</HomeHeroKineticSubhead>
 

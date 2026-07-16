@@ -702,3 +702,12 @@ Remaining parallel tracks:
 - **Push:** `main` → `origin/main` (`09e4356..4c6e1f3`).
 - **Local CI parity:** `npm run ci:check --prefix web` exit 0 before push.
 - **Remote CI verification:** local pass only — remote unverified (`gh` not authenticated); verify GitHub Actions on commit `4c6e1f3`.
+
+### 2026-07-16 — Hero title blink before kinetic entrance (WEB-HERO-004)
+- **Status:** Fixed title flash on reload before kinetic animation.
+- **Root cause:** Placeholder painted a real visible H1 (esp. mobile); deferred `HomeHero` tore it down then hid kinetic chars and re-animated → blink. CMS `heroTitle` also bypassed kinetic for a plain `<h1>` that popped when `hero-copy-pending` lifted. Mobile lacked the desktop pending guard.
+- **Fix:**
+  1. `HomeHeroPlaceholder.tsx`: skeleton-only visuals; title/badge/description `sr-only`; hidden LCP poster for gate #13.
+  2. `HomeHeroDesktop` / `HomeHeroMobile`: always use kinetic structured title (no CMS plain-H1 path); mobile copy uses `hero-copy-pending` until sequence starts.
+  3. `HomeHeroKineticHeadline`: useLayoutEffect hides chars before paint; `HomeHeroMotionRoot` reduced-motion still emits ready events.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run build` + release gates 17/17 (incl. #5 single `.hero-section`, #13 LCP hints).
