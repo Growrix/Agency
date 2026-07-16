@@ -676,3 +676,6 @@ Remaining parallel tracks:
 - **Fix:** Added `skipEntrance` flag through `HomeHeroGate` → `HomeHero` → `HomeHeroMotionRoot` → `HeroMotionContext`. When true, the motion root marks the copy sequence as already started and each motion component bypasses the entrance hide/reveal, keeping the placeholder's visible state. Showcase keeps ambient float animation via `initial={false}`.
 - **Files touched:** `HomeHeroGate.tsx`, `HomeHero.tsx`, `HomeHeroMotionRoot.tsx`, `HeroMotionContext.tsx`, `useHeroCopyReveal.ts`, `HomeHeroKineticHeadline.tsx`, `HomeHeroKineticSubhead.tsx`, `HomeHeroShowcaseMotion.tsx`, `HomeHeroCtaMotion.tsx`, `HomeHeroTrustMotion.tsx`.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17 release gates).
+- **Commit:** `09a9df9` on `main` (HEAD: `09a9df9e7b6f7cc14b06ab71c3b3e6e5289551fa17899ac065611f5`).
+- **Push:** `main` → `origin/main` (`ec6744a..09a9df9`).
+- **Remote CI verification:** `gh` not authenticated locally; verify GitHub Actions status on commit `09a9df9e7b6f7cc14b06ab71c3b3e6e5289551fa17899ac065611f5` in the browser or via `gh auth login`.
