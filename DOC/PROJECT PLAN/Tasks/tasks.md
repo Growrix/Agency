@@ -757,4 +757,5 @@ Remaining parallel tracks:
 - **CI parity:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
 - **IDE diagnostics:** `ReadLints` on all touched files returned zero errors/warnings.
 - **Gaps / operator actions:** Vercel env `NEXT_PUBLIC_GA_MEASUREMENT_ID` not yet set; GSC plan operator actions (env, 301 redirect, redeploy, URL inspection) pending; `Technical_SEO_debug` branch has unmerged commits.
-- **Push:** Not performed — waiting for explicit user approval.
+- **Push:** `main` → `origin/main` (`d15506a..1e794c6`) completed.
+- **Remote CI verification:** `gh` not authenticated locally — status **unverified**; verify GitHub Actions on commit `1e794c6e02cdb496711e7637d5f610b61d1de272`.
