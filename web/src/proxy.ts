@@ -2,8 +2,6 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { isClerkConfigured } from "@/server/auth/clerk-config";
-import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/auth/token";
 
 const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
 const loginPrefixes = ["/admin/login", "/dashboard/login", "/sign-in", "/sign-up"];
@@ -13,6 +11,18 @@ const blockedPreviewPrefixes = [
   "/previews/html-business-profiles/",
   "/previews/website-templates-html/",
 ];
+
+/**
+ * Middleware-safe Clerk gate — reads env directly.
+ * Do NOT import `@/server/auth/clerk-config` or `@/server/config/runtime` here:
+ * those modules use `server-only` and crash Vercel middleware boot
+ * (`MIDDLEWARE_INVOCATION_FAILED`) even on marketing routes.
+ */
+function isClerkConfiguredInProxy() {
+  return Boolean(
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim() && process.env.CLERK_SECRET_KEY?.trim(),
+  );
+}
 
 /** Routes that need Clerk middleware (auth handshake, protect, session sync). */
 const isClerkRoute = createRouteMatcher([
@@ -125,6 +135,8 @@ async function legacyProxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Lazy-load JWT helpers so marketing routes never pull `server-only` / runtime config.
+  const { parseSessionTokenFromCookieHeader, verifySessionToken } = await import("@/server/auth/token");
   const token = parseSessionTokenFromCookieHeader(request.headers.get("cookie"));
   if (!token) {
     return rejectLegacy(request);
@@ -249,7 +261,7 @@ export default async function proxy(request: NextRequest, event: NextFetchEvent)
     return blockedPreview;
   }
 
-  if (!isClerkConfigured()) {
+  if (!isClerkConfiguredInProxy()) {
     return legacyProxy(request);
   }
 

@@ -733,3 +733,12 @@ Remaining parallel tracks:
 - **Verification:** `npm run build:vercel` (VERCEL=1) exit 0; smoke `/` 200, `/api/health` 200, `/api/v1/admin/analytics` 307; `npm run ci:check --prefix web` exit 0 (17/17 release gates).
 - **Commit:** `40773d9` pushed to `frontend_indexing`.
 - **Preview verification:** `https://growrix-git-frontendindexing-mohammad-ikramul-nayeems-projects.vercel.app/` → final HTTP 200 (no `MIDDLEWARE_INVOCATION_FAILED`).
+
+### 2026-07-17 — Middleware failure recurrence on main (WEB-MIDDLEWARE-002)
+- **Symptom:** Production/main deploy still returned `500 MIDDLEWARE_INVOCATION_FAILED` (`bom1::jn76h-1784297325537-a9783572082d`) after WEB-MIDDLEWARE-001 merge.
+- **Root cause:** WEB-MIDDLEWARE-001 only lazy-loaded `clerk-sync`. Proxy still **statically** imported `@/server/auth/clerk-config` and `@/server/auth/token`, both of which pull `@/server/config/runtime` (`import "server-only"`), crashing middleware boot on every request including `/`.
+- **Fix in `web/src/proxy.ts`:**
+  - Replaced `isClerkConfigured()` with local `isClerkConfiguredInProxy()` reading `process.env` (no `server-only` graph).
+  - Lazy-import `@/server/auth/token` only inside protected legacy JWT paths.
+  - Kept lazy `clerk-sync` import for dashboard/admin mirror lookups.
+- **Verification:** `npm run lint` + `typecheck` exit 0; `npm run build:vercel` exit 0; smoke `/` `/services` `/api/health` 200, admin API 307; release gates 17/17.
