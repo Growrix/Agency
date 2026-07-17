@@ -731,4 +731,5 @@ Remaining parallel tracks:
   - `build:vercel` → `next build --webpack && node ./scripts/vercel-monorepo-finalizer-bridge.mjs`.
   - Note: Next.js 16 proxy already runs on Node.js; `export const runtime = "nodejs"` is rejected in proxy files.
 - **Verification:** `npm run build:vercel` (VERCEL=1) exit 0; smoke `/` 200, `/api/health` 200, `/api/v1/admin/analytics` 307; `npm run ci:check --prefix web` exit 0 (17/17 release gates).
-- **Remote preview verification:** pending after push (operator confirms new deployment loads homepage).
+- **Commit:** `40773d9` pushed to `frontend_indexing`.
+- **Preview verification:** `https://growrix-git-frontendindexing-mohammad-ikramul-nayeems-projects.vercel.app/` → final HTTP 200 (no `MIDDLEWARE_INVOCATION_FAILED`).
