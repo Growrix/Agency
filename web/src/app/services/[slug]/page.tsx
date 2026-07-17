@@ -33,7 +33,6 @@ import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { StatBlock } from "@/components/sections/StatBlock";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { HomeHtmlPreviewSection } from "@/components/marketing/HomeHtmlPreviewSection";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
@@ -59,7 +58,7 @@ import { TechnicalSeoSetupCategoriesMobile } from "@/components/marketing/servic
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ServiceFeaturedProofMobile } from "@/components/marketing/services/ServiceFeaturedProofMobile";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
-import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { pickPreviewProducts } from "@/lib/ready-made-solutions";
@@ -89,7 +88,6 @@ import {
   WEBSITES_SERVICE_FAQ,
   WEBSITES_SERVICE_FAQ_SECTION,
   WEBSITES_SERVICE_HERO,
-  WEBSITES_SERVICE_STATS,
   WEBSITES_WHY_CHOOSE_SECTION,
 } from "@/lib/websites-service-content";
 import {
@@ -100,7 +98,6 @@ import {
   SAAS_SERVICE_FAQ,
   SAAS_SERVICE_FAQ_SECTION,
   SAAS_SERVICE_HERO,
-  SAAS_SERVICE_STATS,
   SAAS_STACK_GROUPS,
   SAAS_STACK_SECTION,
   SAAS_SYSTEMS_SECTION,
@@ -111,7 +108,6 @@ import {
   MOBILE_APPS_SERVICE_FAQ,
   MOBILE_APPS_SERVICE_FAQ_SECTION,
   MOBILE_APPS_SERVICE_HERO,
-  MOBILE_APPS_SERVICE_STATS,
   MOBILE_ENGAGEMENT_SECTION,
   MOBILE_LAUNCH_PROCESS_SECTION,
   MOBILE_PRODUCT_TYPES_SECTION,
@@ -126,7 +122,6 @@ import {
   AUTOMATION_SERVICE_FAQ,
   AUTOMATION_SERVICE_FAQ_SECTION,
   AUTOMATION_SERVICE_HERO,
-  AUTOMATION_SERVICE_STATS,
   AUTOMATION_TYPES_SECTION,
   AUTOMATION_WHY_BUILD_SECTION,
   AUTOMATION_WORKFLOW_SHOWCASE_SECTION,
@@ -140,7 +135,6 @@ import {
   TECHNICAL_SEO_SERVICE_FAQ,
   TECHNICAL_SEO_SERVICE_FAQ_SECTION,
   TECHNICAL_SEO_SERVICE_HERO,
-  TECHNICAL_SEO_SERVICE_STATS,
   TECHNICAL_SEO_SETUP_CATEGORIES_SECTION,
   TECHNICAL_SEO_VISIBILITY_SECTION,
   TECHNICAL_SEO_WHY_SECTION,
@@ -151,7 +145,6 @@ import {
   AI_BUSINESS_SYSTEMS_SERVICE_FAQ,
   AI_BUSINESS_SYSTEMS_SERVICE_FAQ_SECTION,
   AI_BUSINESS_SYSTEMS_SERVICE_HERO,
-  AI_BUSINESS_SYSTEMS_SERVICE_STATS,
   AI_ENGAGEMENT_SECTION,
   AI_SOLUTIONS_SECTION,
   AI_VALUE_SECTION,
@@ -184,7 +177,6 @@ const COPY: Record<
     differentiators: { title: string; description: string }[];
     tiers: Tier[];
     faq: { question: string; answer: string }[];
-    stats: { value: string; label: string; hint?: string }[];
   }
 > = {
   "saas-applications": {
@@ -201,7 +193,6 @@ const COPY: Record<
       features: [...tier.features],
     })),
     faq: SAAS_SERVICE_FAQ.map((item) => ({ ...item })),
-    stats: SAAS_SERVICE_STATS.map((item) => ({ ...item })),
   },
   websites: {
     eyebrow: "Websites",
@@ -218,7 +209,6 @@ const COPY: Record<
       { name: "Custom Build Scope", iconKey: "custom-build-scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "Automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: WEBSITES_SERVICE_FAQ.map((item) => ({ ...item })),
-    stats: WEBSITES_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "mobile-apps": {
     eyebrow: "Mobile Apps",
@@ -234,7 +224,6 @@ const COPY: Record<
       features: [...tier.features],
     })),
     faq: MOBILE_APPS_SERVICE_FAQ.map((item) => ({ ...item })),
-    stats: MOBILE_APPS_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "html-business-profiles": {
     eyebrow: "HTML Business Profiles",
@@ -290,12 +279,6 @@ const COPY: Record<
       { question: "Are these connected to checkout?", answer: "Yes. Each profile template is represented as a shop product with a direct checkout path." },
       { question: "Can your team customize a purchased profile?", answer: "Yes. After purchase, we can scope branding, content adaptation, and advanced upgrades." },
     ],
-    stats: [
-      { value: "50+", label: "Built profiles" },
-      { value: "3", label: "Core categories" },
-      { value: "1-7d", label: "Typical launch window" },
-      { value: "100%", label: "Shop purchase coverage" },
-    ],
   },
   "ai-business-systems": {
     eyebrow: "AI Business Systems",
@@ -311,7 +294,6 @@ const COPY: Record<
       features: [...tier.features],
     })),
     faq: AI_BUSINESS_SYSTEMS_SERVICE_FAQ.map((item) => ({ ...item })),
-    stats: AI_BUSINESS_SYSTEMS_SERVICE_STATS.map((item) => ({ ...item })),
   },
   automation: {
     eyebrow: "Automation",
@@ -327,7 +309,6 @@ const COPY: Record<
       features: [...tier.features],
     })),
     faq: AUTOMATION_SERVICE_FAQ.map((item) => ({ ...item })),
-    stats: AUTOMATION_SERVICE_STATS.map((item) => ({ ...item })),
   },
   "technical-seo": {
     eyebrow: "Technical SEO",
@@ -343,7 +324,6 @@ const COPY: Record<
       features: [...tier.features],
     })),
     faq: TECHNICAL_SEO_SERVICE_FAQ.map((item) => ({ ...item })),
-    stats: [],
   },
 };
 
@@ -395,7 +375,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       shouldMuteTierPrices ? { ...tier, mutePrice: true } : tier
     ),
     faq: cmsCopy?.faq ?? fallbackCopy.faq,
-    stats: cmsCopy?.stats ?? fallbackCopy.stats,
   };
 
   const Icon = ICONS[slug as SlugKey];
@@ -452,20 +431,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             : isAiBusinessSystemsService
               ? "service-detail-ai-business-systems"
               : "service-detail";
-
-  const heroServiceStats = isWebsitesService
-    ? WEBSITES_SERVICE_STATS
-    : isSaasService
-      ? SAAS_SERVICE_STATS
-      : isMobileAppsService
-        ? MOBILE_APPS_SERVICE_STATS
-        : isAutomationService
-          ? AUTOMATION_SERVICE_STATS
-          : isTechnicalSeoService
-            ? TECHNICAL_SEO_SERVICE_STATS
-            : isAiBusinessSystemsService
-              ? AI_BUSINESS_SYSTEMS_SERVICE_STATS
-              : null;
 
   const serviceHeroHeadlineLead = isWebsitesService
     ? WEBSITES_SERVICE_HERO.headlineLead
@@ -543,13 +508,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             </ul>
           </Card>
         </div>
-      }
-      footer={
-        heroServiceStats ? (
-          <div className="signal-rise" style={{ animationDelay: "350ms" }}>
-            <StatBlock stats={heroServiceStats} containerWidth="shell" />
-          </div>
-        ) : null
       }
     />
   );
@@ -857,7 +815,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          {(isConversionServicePage && heroServiceStats) ? (
+          {isConversionServicePage ? (
             <MarketingViewportGate
               mobile={
                 <ServiceDetailHeroMobile
@@ -895,7 +853,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   deliveryTimeline={service.delivery_timeline}
                   engagementSummary={service.short_description}
                   pillars={service.pillars}
-                  stats={heroServiceStats}
                   icon={Icon}
                 />
               }
@@ -1085,12 +1042,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           {engagementModelsSection}
         </>
       ) : null}
-
-      {!isConversionServicePage && (
-        <Section size="compact">
-          <StatBlock stats={HOME_STATS} />
-        </Section>
-      )}
 
       {isMobileAppsService ? (
         <Section {...marketingSection("service-detail-mobile-apps", "product-types")}>

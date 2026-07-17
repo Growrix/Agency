@@ -1,0 +1,65 @@
+[
+  {
+    "id": "TP-KNW-001",
+    "title": "Knowledge Object Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-KNW-001-knowledge-object.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-AGT-001",
+    "title": "Agent Definition Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-AGT-001-agent-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-MCP-001",
+    "title": "MCP Server Definition Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-MCP-001-mcp-server-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-PRJ-001",
+    "title": "Project Definition Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-PRJ-001-project-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-WF-001",
+    "title": "Workflow Definition Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-WF-001-workflow-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-DOC-001",
+    "title": "Documentation Page Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-DOC-001-documentation-page.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-REG-001",
+    "title": "Registry Entry Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-REG-001-registry-entry.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  }
+]

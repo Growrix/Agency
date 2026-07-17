@@ -3,7 +3,6 @@ import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { isClerkConfigured } from "@/server/auth/clerk-config";
-import { getUserByClerkId, syncClerkUser } from "@/server/auth/clerk-sync";
 import { parseSessionTokenFromCookieHeader, verifySessionToken } from "@/server/auth/token";
 
 const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
@@ -170,6 +169,7 @@ function shouldEnforceCompletion(pathname: string) {
 }
 
 async function resolveMirroredClerkUser(userId: string) {
+  const { getUserByClerkId, syncClerkUser } = await import("@/server/auth/clerk-sync");
   const existing = await getUserByClerkId(userId).catch(() => null);
   if (existing) {
     return existing;

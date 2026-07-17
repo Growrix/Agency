@@ -4,7 +4,6 @@ import { ArrowRightIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
-import { StatBlock, type Stat } from "@/components/sections/StatBlock";
 
 type ServiceDetailHeroMobileProps = {
   eyebrow: string;
@@ -17,7 +16,6 @@ type ServiceDetailHeroMobileProps = {
   deliveryTimeline: string;
   engagementSummary: string;
   pillars: string[];
-  stats: Stat[];
   icon: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
@@ -32,7 +30,6 @@ export function ServiceDetailHeroMobile({
   deliveryTimeline,
   engagementSummary,
   pillars,
-  stats,
   icon: Icon,
 }: ServiceDetailHeroMobileProps) {
   return (
@@ -84,8 +81,6 @@ export function ServiceDetailHeroMobile({
           ))}
         </ul>
       </Card>
-
-      <StatBlock stats={stats} dense containerWidth="content" containerClassName="px-0" className="service-detail-hero-mobile__stats" />
     </div>
   );
 }

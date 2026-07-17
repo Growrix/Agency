@@ -1,5 +1,5 @@
 // Temporary content controls for launch-phase stability.
-export const FORCE_HERO_STATS_SITEWIDE = true;
+export const FORCE_HERO_STATS_SITEWIDE = false;
 export const SHOW_GOOGLE_REVIEWS = false;
 
 /** Service detail pages excluded from nav, sitemap, and public catalog. */

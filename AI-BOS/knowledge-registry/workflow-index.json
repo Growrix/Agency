@@ -1,0 +1,29 @@
+[
+  {
+    "id": "WF-GOV-PHASE-APPROVE-001",
+    "title": "Phase Gate Approval Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-GOV-PHASE-APPROVE-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "WF-KNW-AUTHOR-001",
+    "title": "Knowledge Object Authoring Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-KNW-AUTHOR-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "WF-DLV-SAAS-FEATURE-001",
+    "title": "SaaS Feature Delivery Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-DLV-SAAS-FEATURE-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  }
+]

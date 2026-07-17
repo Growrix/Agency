@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "system": "AI-BOS",
+  "registry": "mcp",
+  "description": "MCP registry for AI-BOS \u2014 MCP servers provide capability contracts",
+  "last_updated": "2026-07-17",
+  "indexes": {
+    "mcp": "mcp-index.json"
+  },
+  "objects": [
+    {
+      "id": "MC-KNW-REGISTRY-001",
+      "name": "Knowledge Registry Server",
+      "version": "1.0.0",
+      "status": "active",
+      "capabilities": [
+        "CAP-PLT-003",
+        "CAP-KNW-003",
+        "CAP-KNW-006"
+      ],
+      "services": [
+        "knowledge.search",
+        "knowledge.read",
+        "knowledge.related",
+        "knowledge.dependencies",
+        "knowledge.validate"
+      ],
+      "contracts": [
+        {
+          "name": "knowledge.search",
+          "inputs": {
+            "query": "string",
+            "type": "string?"
+          },
+          "outputs": {
+            "results": "KnowledgeObject[]"
+          },
+          "failures": [
+            "no_match",
+            "invalid_query"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        },
+        {
+          "name": "knowledge.read",
+          "inputs": {
+            "id": "KnowledgeObjectID"
+          },
+          "outputs": {
+            "object": "KnowledgeObject"
+          },
+          "failures": [
+            "not_found",
+            "deprecated"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        },
+        {
+          "name": "knowledge.related",
+          "inputs": {
+            "id": "KnowledgeObjectID"
+          },
+          "outputs": {
+            "results": "KnowledgeObject[]"
+          },
+          "failures": [
+            "not_found"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        },
+        {
+          "name": "knowledge.dependencies",
+          "inputs": {
+            "id": "KnowledgeObjectID"
+          },
+          "outputs": {
+            "results": "KnowledgeObject[]"
+          },
+          "failures": [
+            "not_found",
+            "cycle_detected"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        },
+        {
+          "name": "knowledge.validate",
+          "inputs": {
+            "object": "KnowledgeObject"
+          },
+          "outputs": {
+            "result": "ValidationResult"
+          },
+          "failures": [
+            "invalid_frontmatter",
+            "duplicate_id",
+            "broken_dependency"
+          ],
+          "idempotent": true,
+          "authority_required": "autonomous"
+        }
+      ],
+      "reads": [
+        "AR-AI-BOS-005",
+        "ST-KNW-001",
+        "ST-REG-001"
+      ],
+      "transport": "stdio",
+      "owner": "AI-BOS",
+      "runtime_projection": "planned",
+      "generated_from": "TP-MCP-001",
+      "updated": "2026-07-17"
+    }
+  ]
+}

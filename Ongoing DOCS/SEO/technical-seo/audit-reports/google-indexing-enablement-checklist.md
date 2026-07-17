@@ -9,7 +9,7 @@
 
 - [x] [`web/src/app/sitemap.ts`](../../../web/src/app/sitemap.ts) — static + dynamic public routes
 - [x] [`web/src/app/robots.ts`](../../../web/src/app/robots.ts) — allow public, disallow previews/auth when flag on
-- [x] [`web/src/lib/site.ts`](../../../web/src/lib/site.ts) — `SITE_INDEXING_ENABLED` + `DISALLOWED_CRAWL_PATHS`
+- [x] [`web/src/lib/site.ts`](../../../web/src/lib/site.ts) — `SITE_INDEXING_ENABLED` + `DISALLOWED_CRAWL_PATHS` + production apex→www normalizer
 - [x] Per-route self-canonical via `buildPageMetadata`
 - [x] Transactional routes `noindex` (release gate)
 - [x] Preview routes `X-Robots-Tag: noindex` (`next.config.ts`)
@@ -29,7 +29,7 @@ NEXT_PUBLIC_SITE_URL=https://www.growrixos.com
 
 Redeploy after saving env vars.
 
-> **Important:** Current production sitemap uses apex `https://growrixos.com/` when `NEXT_PUBLIC_SITE_URL` is wrong or unset. Canonical host must be **www** for consistency with marketing URLs.
+> **Important:** Production now normalizes apex `https://growrixos.com` to **www** in code when `NODE_ENV=production`. Still set `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` in Vercel and redeploy. Apex→www redirect is **301** via [`web/vercel.json`](../../../web/vercel.json).
 
 ---
 

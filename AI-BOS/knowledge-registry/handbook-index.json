@@ -1,0 +1,65 @@
+[
+  {
+    "id": "HB-KNW-AUTHORING-001",
+    "title": "Knowledge Authoring Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-KNW-AUTHORING-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-GOV-OPS-001",
+    "title": "AI-BOS Operations Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GOV-OPS-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-FE-001",
+    "title": "SaaS Frontend Engineering Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-FE-001-saas-frontend.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-BE-001",
+    "title": "SaaS Backend Engineering Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-BE-001-saas-backend.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-ARCH-001",
+    "title": "SaaS System Architecture Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-ARCH-001-saas-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-DATA-001",
+    "title": "SaaS Data and Persistence Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-DATA-001-saas-data.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-OPS-REL-001",
+    "title": "SaaS Release and Operations Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-OPS-REL-001-saas-release-ops.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  }
+]

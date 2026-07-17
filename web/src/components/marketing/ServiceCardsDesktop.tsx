@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRightIcon, SparklesIcon } from "@heroicons/react/24/outline";
-import { HomeServicesDesktopStatsBar } from "@/components/marketing/desktop/HomeServicesDesktopStatsBar";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import type { PublicServiceRecord } from "@/server/domain/catalog";
@@ -53,8 +52,6 @@ export function ServiceCardsDesktop({ services }: ServiceCardsDesktopProps) {
           );
         })}
       </RevealGroup>
-
-      <HomeServicesDesktopStatsBar />
     </div>
   );
 }

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ST-KNW-001",
+    "title": "Knowledge Object Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-KNW-001-knowledge-object.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-REG-001",
+    "title": "Knowledge Registry Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-REG-001-knowledge-registry.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-DOC-001",
+    "title": "Documentation Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-DOC-001-documentation.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-AGT-001",
+    "title": "Agent Definition Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-AGT-001-agent-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-MCP-001",
+    "title": "MCP Server Definition Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-MCP-001-mcp-server-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-EXE-001",
+    "title": "Execution Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-EXE-001-execution.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-GOV-001",
+    "title": "Governance Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-GOV-001-governance.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-PRJ-001",
+    "title": "Project Definition Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-PRJ-001-project-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-VER-001",
+    "title": "Versioning and Evolution Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-VER-001-versioning-evolution.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-TP-001",
+    "title": "Template Authoring Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-TP-001-template-authoring.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-SEC-001",
+    "title": "SaaS Security Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-SEC-001-saas-security.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-TST-001",
+    "title": "SaaS Testing and Quality Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-TST-001-saas-testing.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-API-001",
+    "title": "SaaS API Design Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-API-001-saas-api.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-FE-DS-001",
+    "title": "SaaS Frontend Design System Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-FE-DS-001-saas-design-system.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  }
+]

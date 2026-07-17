@@ -116,13 +116,6 @@ export const TESTIMONIALS = [
   },
 ];
 
-export const HOME_STATS = [
-  { value: "50+", label: "Digital products", hint: "Templates, starters, and toolkits" },
-  { value: "3", label: "Purchase tiers", hint: "Standard, Premium, Done-For-You" },
-  { value: "24h", label: "Response window", hint: "Sales and support routing" },
-  { value: "4", label: "Buyer paths", hint: "DIY, setup, build, or chat" },
-];
-
 export const CLIENT_LOGOS = [
   "Tideline Health",
   "Northcrest Operations",

@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Zero-Gate Health Check (mandatory)
 
-After **any** change under `web/`, `sites/`, or `Frontend_Nextjs/`, you MUST verify **0 gate failures** before telling the user the task is done. Do not skip gates because a change "looks small."
+After **any** change under `web/`, `sites/`, `Frontend_Nextjs/`, or `AI-BOS/`, you MUST verify **0 gate failures** before telling the user the task is done. Do not skip gates because a change "looks small."
 
 ## Definition: zero gate
 
@@ -52,6 +52,15 @@ npm run health:check
 - `pnpm build` / `npm run build` with zero TypeScript errors
 - Follow `.cursor/skills/nextjs-site-migrator/SKILL.md` Phase 9+ gates
 - Run `nextjs-code-reviewer` before delivery
+
+### `AI-BOS/` (isolated planning system)
+
+- Valid YAML front matter on all new Knowledge Objects per `AI-BOS/.cursor/skills/ai-bos-architect/references/front-matter-schema.md`
+- Registry integrity — objects registered in correct `knowledge-registry/*-index.json`; IDs unique across indexes
+- Vendor independence — no IDE/provider lock-in in knowledge content
+- Phase gate — do not advance planning phases without explicit user approval (see `AI-BOS/.cursor/skills/ai-bos-architect/checklists/phase-approval-checklist.md`)
+- Structural changes route through `@system-builder`; content authoring via `@ai-bos-architect`
+- Update `AI-BOS/tasks.md` with evidence before sign-off
 
 ## Never declare done when
 
