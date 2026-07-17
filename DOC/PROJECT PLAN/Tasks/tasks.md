@@ -748,3 +748,13 @@ Remaining parallel tracks:
 - **Changes:** `web/src/lib/analytics.ts`, `GoogleAnalytics.tsx` (deferred post-load gtag), `ConsentBanner.tsx` (Consent Mode + localStorage), CSP allowlist in `next.config.ts`, privacy policy GA4 disclosure, `.env.example` + `DEPLOYMENT_CHECKLIST.md`.
 - **Operator:** Set `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-W3TM38ELE5` in Vercel Production + Preview; redeploy; verify GA4 Realtime after accepting analytics banner.
 - **Verification:** `npm run ci:check --prefix web` exit 0 (17/17 release gates).
+
+### 2026-07-17 — Pre-push verification for `main` (WEB-ANALYTICS-001)
+- **Status:** Verified readiness to push `main` → `origin/main`.
+- **Commit under review:** `80bed75` `feat(web): add consent-aware GA4 analytics (G-W3TM38ELE5)`.
+- **Working tree:** clean; no uncommitted changes.
+- **Touched files:** `.env.example`, `DEPLOYMENT_CHECKLIST.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`, `web/next.config.ts`, `web/src/app/layout.tsx`, `web/src/app/privacy-policy/page.tsx`, `web/src/components/shell/ConsentBanner.tsx`, `web/src/components/shell/GoogleAnalytics.tsx`, `web/src/lib/analytics.test.ts`, `web/src/lib/analytics.ts`.
+- **CI parity:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
+- **IDE diagnostics:** `ReadLints` on all touched files returned zero errors/warnings.
+- **Gaps / operator actions:** Vercel env `NEXT_PUBLIC_GA_MEASUREMENT_ID` not yet set; GSC plan operator actions (env, 301 redirect, redeploy, URL inspection) pending; `Technical_SEO_debug` branch has unmerged commits.
+- **Push:** Not performed — waiting for explicit user approval.
