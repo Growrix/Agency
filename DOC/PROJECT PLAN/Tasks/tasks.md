@@ -665,3 +665,11 @@ Remaining parallel tracks:
 - **Approved + implemented:** TXT-001 (home title), TXT-002 (home meta), TXT-003 (services title+meta), TXT-004 (pricing title+meta), TXT-006 (service detail title pattern → `${title} Development`), TXT-007 (about title), TXT-008 (additional-services title), TXT-010 (hero badge), TXT-012 (hero description), TXT-023 (contact channel label), TXT-024 (free/bundles H1), TXT-030 (footer AI concierge kept removed).
 - **Files touched:** `seo-metadata.ts`, `home-conversion-content.ts`, `contact-landing-content.ts`, `services/page.tsx`, `services/[slug]/page.tsx`, `pricing/page.tsx`, `about/page.tsx`, `additional-services/page.tsx`, `digital-products/free/page.tsx`, `digital-products/bundles/page.tsx`, approval-queue doc.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0. Pre-existing warnings in `checkout/payment/page.tsx` unrelated.
+
+### 2026-07-17 — Remove service hero stat counters from all service pages (WEB-SERVICE-HERO-001)
+- **Request:** Remove counter blocks (service-specific stats) from all service detail pages alongside the previously removed homepage `HOME_STATS` counter.
+- **Changes:**
+  - `web/src/app/services/[slug]/page.tsx`: removed `SERVICE_HERO_STATS` lookup, `cmsCopy.stats` fallback, desktop hero `StatBlock` footer, and mobile `stats={heroStats}` prop.
+  - `web/src/components/marketing/services/ServiceDetailHeroMobile.tsx`: removed `StatBlock` import, `stats` prop, and rendered `StatBlock` element.
+- **Verification:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
+- **Commit:** `1ec0ab5` pushed to `Technical_SEO_debug`.
