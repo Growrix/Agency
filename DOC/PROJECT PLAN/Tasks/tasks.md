@@ -633,6 +633,13 @@ Remaining parallel tracks:
 - **Fix:** `vercel-monorepo-finalizer-bridge.mjs` — when `public/` blocks symlink, remove blocker and symlink `web/public` at repo root; merge fallback if symlink still fails.
 - **Verification:** Local `VERCEL=1` bridge run created `public -> web/public` symlink; `npm run ci:check` exit 0. Remote Vercel Ready pending post-push inspect.
 
+### 2026-07-17 — GSC indexing host mismatch fix (WEB-SEO-INDEX-001)
+- **GSC state:** Page indexing still “Processing data” (normal lag); sitemap Success with 99 discovered URLs.
+- **Root cause:** Production emitted apex `https://growrixos.com` in sitemap/canonical/robots Host while site serves www; apex→www was 307.
+- **Fix:** [`web/src/lib/site.ts`](web/src/lib/site.ts) production apex→www normalizer; [`web/vercel.json`](web/vercel.json) permanent apex host redirect; env docs updated.
+- **Operator:** Confirm Vercel Production `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` + `SITE_INDEXING_ENABLED=true`; GSC URL Inspection on P0 www URLs; recheck Pages in 24–72h.
+- **Verification:** `site.test.ts` apex→www tests pass; release gates 17/17 local; post-deploy curl pending push.
+
 ### 2026-07-15 — Growrix OS on-page SEO audit + non-text implementation (WEB-SEO-ONPAGE-001)
 - **Status:** Documentation complete; non-text code fixes implemented; text changes held in approval queue.
 - **Deliverables:**
