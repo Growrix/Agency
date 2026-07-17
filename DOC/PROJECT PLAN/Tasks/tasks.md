@@ -742,3 +742,9 @@ Remaining parallel tracks:
   - Lazy-import `@/server/auth/token` only inside protected legacy JWT paths.
   - Kept lazy `clerk-sync` import for dashboard/admin mirror lookups.
 - **Verification:** `npm run lint` + `typecheck` exit 0; `npm run build:vercel` exit 0; smoke `/` `/services` `/api/health` 200, admin API 307; release gates 17/17.
+
+### 2026-07-17 — GA4 consent-aware analytics setup (WEB-ANALYTICS-001)
+- **Measurement ID:** `G-W3TM38ELE5`
+- **Changes:** `web/src/lib/analytics.ts`, `GoogleAnalytics.tsx` (deferred post-load gtag), `ConsentBanner.tsx` (Consent Mode + localStorage), CSP allowlist in `next.config.ts`, privacy policy GA4 disclosure, `.env.example` + `DEPLOYMENT_CHECKLIST.md`.
+- **Operator:** Set `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-W3TM38ELE5` in Vercel Production + Preview; redeploy; verify GA4 Realtime after accepting analytics banner.
+- **Verification:** `npm run ci:check --prefix web` exit 0 (17/17 release gates).

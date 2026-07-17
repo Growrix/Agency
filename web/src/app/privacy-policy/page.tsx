@@ -22,7 +22,7 @@ const SECTIONS = [
     title: "Data we collect",
     body: [
       "Information you provide via contact forms, booking flows, AI chat, and checkout: name, email, company, project details, and payment metadata.",
-      "Technical telemetry: anonymous analytics events, device and browser type, page views, and aggregated performance metrics.",
+      "Technical telemetry: anonymous analytics events (only after you accept analytics cookies), device and browser type, page views, and aggregated performance metrics.",
       "AI conversations: messages you send to the concierge are stored to operate the service and improve quality. They are never used to train external models.",
     ],
   },
@@ -42,7 +42,7 @@ const SECTIONS = [
       "Stripe — payment processing for shop products and milestone invoices.",
       "Calendly or similar — scheduling discovery and project calls.",
       "Vercel + Cloudflare — hosting, edge delivery, and security.",
-      "PostHog or Plausible — privacy-respecting analytics.",
+      "Google Analytics 4 — optional traffic and conversion measurement when you accept analytics cookies.",
       "Sentry — error and performance monitoring.",
       "WhatsApp — direct messaging when initiated by you.",
     ],
@@ -55,6 +55,7 @@ const SECTIONS = [
       "Correction: request changes to inaccurate or outdated information.",
       "Deletion: request removal of personal data, subject to legal and contractual retention requirements.",
       "Portability: request data in a structured, machine-readable format.",
+      "Analytics cookies: use the site consent banner to accept or decline Google Analytics measurement at any time.",
     ],
   },
   {
@@ -70,7 +71,7 @@ const SECTIONS = [
     id: "contact",
     title: "Contact",
     body: [
-      "Questions about this policy? Reach us via the contact page or email privacy@growrixos.example.",
+      "Questions about this policy? Reach us via the contact page or email growrixos@gmail.com.",
     ],
   },
 ];

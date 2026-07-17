@@ -43,11 +43,21 @@ const authCspHosts = [
   "https://*.gstatic.com",
 ];
 
+const ga4CspHosts = [
+  "https://www.googletagmanager.com",
+  "https://*.googletagmanager.com",
+  "https://www.google-analytics.com",
+  "https://*.google-analytics.com",
+  "https://*.analytics.google.com",
+];
+
+const cspScriptHosts = [...authCspHosts, ...ga4CspHosts];
+
 const connectSrc = ["'self'", "https:", ...(isDevelopment ? ["http:", "ws:", "wss:"] : [])].join(" ");
 const defaultCsp =
-  `default-src 'self'; img-src 'self' data: https: ${authCspHosts.join(" ")}; script-src 'self' 'unsafe-inline' 'unsafe-eval' ${authCspHosts.join(" ")}; ` +
+  `default-src 'self'; img-src 'self' data: https: ${authCspHosts.join(" ")}; script-src 'self' 'unsafe-inline' 'unsafe-eval' ${cspScriptHosts.join(" ")}; ` +
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; ` +
-  `connect-src ${connectSrc} ${authCspHosts.join(" ")}; frame-src 'self' ${authCspHosts.join(" ")}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
+  `connect-src ${connectSrc} ${cspScriptHosts.join(" ")}; frame-src 'self' ${authCspHosts.join(" ")}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
 
 const htmlPreviewCsp =
   `default-src 'self' data: https: http: 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:; ` +

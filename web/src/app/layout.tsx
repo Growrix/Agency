@@ -5,6 +5,8 @@ import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
 import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
 import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
+import { GoogleAnalytics } from "@/components/shell/GoogleAnalytics";
+import { ConsentBanner } from "@/components/shell/ConsentBanner";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
 import {
   DEFAULT_OG_IMAGE,
@@ -120,6 +122,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AppShell>{children}</AppShell>
         </MotionRoot>
         <DeferredSpeedInsights />
+        <GoogleAnalytics />
+        <ConsentBanner />
       </body>
     </html>
   );
