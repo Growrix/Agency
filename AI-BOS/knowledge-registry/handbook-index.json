@@ -1,0 +1,110 @@
+[
+  {
+    "id": "AR-AI-BOS-001",
+    "title": "AI-BOS Overall Vision",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-001-vision.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-002",
+    "title": "AI-BOS Constitution — Table of Contents",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-002-constitution-toc.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-003",
+    "title": "AI-BOS Assumption Review and Challenge",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-003-assumption-review.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-004",
+    "title": "AI-BOS Business Capability Model",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-004-capability-model.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-005",
+    "title": "AI-BOS Knowledge Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-005-knowledge-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-006",
+    "title": "AI-BOS Documentation Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-006-documentation-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-007",
+    "title": "AI-BOS Agent Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-007-agent-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-008",
+    "title": "AI-BOS MCP Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-008-mcp-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-009",
+    "title": "AI-BOS Execution Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-009-execution-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-010",
+    "title": "AI-BOS Governance",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-010-governance.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-011",
+    "title": "AI-BOS Project Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-011-project-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-16"
+  },
+  {
+    "id": "AR-AI-BOS-012",
+    "title": "AI-BOS Standards, Templates, Evolution Strategy, and Repository Structure",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-AI-BOS-012-standards-templates-evolution.md",
+    "version": "1.0.0",
+    "status": "draft",
+    "updated": "2026-07-16"
+  }
+]

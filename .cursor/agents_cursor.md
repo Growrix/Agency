@@ -18,5 +18,6 @@ This project mirrors a pointer only — do not duplicate the full registry here.
 | Commands | `.cursor/commands/` |
 | Brain | `.cursor/brain/` |
 | Orientation | `AGENTS.md` |
+| AI-BOS (isolated) | `AI-BOS/` — skill `@ai-bos-architect`, ledger `AI-BOS/tasks.md` |
 
 When `@system-builder` updates agents in this repo, it must update **`~/.cursor/docs/agents_cursor.md`** (Project: Growrixos section).

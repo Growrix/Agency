@@ -1,0 +1,75 @@
+---
+description: AI-BOS isolated root governance — knowledge registry SSOT, vendor independence, phase gates, and system-builder routing for structural changes. Apply when working under AI-BOS/.
+globs: "AI-BOS/**"
+alwaysApply: false
+---
+
+# AI-BOS Governance (Isolated Root)
+
+Governs all work under `AI-BOS/`. This is a **docs-first, vendor-independent** planning system — not a SaaS or template delivery lane.
+
+## Isolated root contract
+
+| Path | Role |
+|------|------|
+| `AI-BOS/knowledge-registry/` | SSOT for discovery — indexes metadata, never stores handbook body |
+| `AI-BOS/.cursor/skills/ai-bos-architect/` | Content authoring skill |
+| `AI-BOS/.cursor/rules/` | Local governance only |
+| `AI-BOS/tasks.md` | Execution ledger |
+
+## Permanent rules
+
+1. **Knowledge ≠ Agents ≠ MCP ≠ Projects ≠ Runtime** — never mix layers.
+2. **IDs are permanent** — agents and documents reference IDs, not file paths.
+3. **Registry tracks paths** — file paths may change; IDs never do.
+4. **Vendor independence** — knowledge content must not assume Cursor, Claude, Copilot, or any single IDE/provider.
+5. **Repository structure is last** — design Business Model → Capability → Knowledge → … → Repository Structure.
+6. **Phase gates** — never advance planning phases without explicit user approval.
+7. **No code by default** — do not generate application code unless explicitly requested.
+8. **Disk is canonical** — chat summaries are never SSOT; artifacts on disk are.
+
+## Knowledge Object standard
+
+Every authored document is a Knowledge Object:
+
+- YAML front matter per `references/front-matter-schema.md`
+- Body: Purpose, Scope, Principles, Standards, Best Practices, Anti-patterns, References, Related Knowledge Objects, Change History
+
+After authoring: register in the appropriate `knowledge-registry/*-index.json`.
+
+## Structural changes → @system-builder
+
+Invoke `@system-builder` when:
+
+- Adding/renaming skills, rules, hooks, automations
+- Changing registry JSON schema
+- Promoting AI-BOS to separate repository
+- Adding MCP servers or validation tooling
+
+Content authoring stays with `@ai-bos-architect`.
+
+## Phase-end validation (AI-BOS gates)
+
+Before declaring a phase complete:
+
+1. Valid YAML front matter on all new Knowledge Objects
+2. Unique IDs across all registry indexes
+3. Registry entries match on-disk paths, version, status
+4. No tool-specific assumptions in knowledge content
+5. `ReadLints` clean on touched files
+6. `tasks.md` updated with evidence and user approval recorded
+
+## Session recovery
+
+1. Read `AI-BOS/tasks.md`
+2. Read `@ai-bos-architect` skill
+3. Read last approved phase artifact on disk
+4. Continue only from next `not_started` task
+
+## Relationship to Growrixos
+
+AI-BOS is an isolated root inside Growrixos. It does **not** replace:
+
+- `DOC/PROJECT PLAN/` — SaaS implementation SSOT
+- `web/`, `sites/`, `Frontend_Nextjs/` — delivery surfaces
+- Personal skills in `~/.cursor/skills/` — except when explicitly promoted

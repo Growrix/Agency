@@ -1,0 +1,19 @@
+# Secrets and local env
+.env
+.env.local
+*.pem
+*.key
+
+# Generated / scratch
+.cursor/tmp-*
+*.log
+dist/
+node_modules/
+
+# Optional future outputs (briefs with PII)
+outputs/private/
+briefs/private/
+
+# OS
+.DS_Store
+Thumbs.db
