@@ -1,7 +1,7 @@
 import { ABOUT_FOUNDER_SECTION, ABOUT_HERO } from "@/lib/about-landing-content";
 import { AI_ENGAGEMENT_SECTION, AI_BUSINESS_SYSTEMS_SERVICE_FAQ } from "@/lib/ai-business-systems-service-content";
 import { AUTOMATION_ENGAGEMENT_SECTION, AUTOMATION_SERVICE_FAQ } from "@/lib/automation-service-content";
-import { HOME_STACK_MARQUEE, HOME_STATS } from "@/lib/content";
+import { HOME_STACK_MARQUEE } from "@/lib/content";
 import type { FaqQuestion } from "@/lib/faq-content";
 import { FAQ_QUESTIONS, FAQ_QUICK } from "@/lib/faq-content";
 import { HOME_THREE_PATH_CARDS } from "@/lib/home-conversion-content";
@@ -261,7 +261,6 @@ export function buildBuyerPathDocuments(): ConciergeKnowledgeDocument[] {
 }
 
 export function buildStudioDocuments(): ConciergeKnowledgeDocument[] {
-  const homeStats = HOME_STATS.map((stat) => `${stat.value} ${stat.label} (${stat.hint})`).join(", ");
   const stack = HOME_STACK_MARQUEE.join(", ");
   const founderTimeline = ABOUT_FOUNDER_SECTION.timeline
     .map((entry) => `${entry.title} ${entry.description}`)
@@ -281,13 +280,6 @@ export function buildStudioDocuments(): ConciergeKnowledgeDocument[] {
       sourcePath: "/about",
       sourceType: "offering",
       content: `${ABOUT_FOUNDER_SECTION.founder.name} is the ${ABOUT_FOUNDER_SECTION.founder.role}. ${ABOUT_FOUNDER_SECTION.founder.intro} ${founderTimeline}`,
-    },
-    {
-      id: "offering-studio-stats",
-      label: "Studio stats and marketplace proof",
-      sourcePath: "/",
-      sourceType: "offering",
-      content: `Homepage proof points: ${homeStats}. Trust positioning includes 100+ ready-made templates, custom development, AI-powered business systems, and builds for startups and agencies.`,
     },
     {
       id: "offering-stack",

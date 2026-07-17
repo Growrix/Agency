@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/primitives/Container";
 import { CountUp } from "@/components/motion/Motion";
-import { HOME_STATS } from "@/lib/content";
-import { FORCE_HERO_STATS_SITEWIDE } from "@/lib/feature-flags";
 
 export type Stat = { value: string; label: string; hint?: string };
 
@@ -21,7 +19,7 @@ export function StatBlock({
   containerWidth?: StatBlockWidth;
   containerClassName?: string;
 }) {
-  const effectiveStats = FORCE_HERO_STATS_SITEWIDE ? HOME_STATS : stats;
+  const effectiveStats = stats;
 
   return (
     <Container width={containerWidth} className={containerClassName}>

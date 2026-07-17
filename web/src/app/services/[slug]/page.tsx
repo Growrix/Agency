@@ -59,7 +59,7 @@ import { TechnicalSeoSetupCategoriesMobile } from "@/components/marketing/servic
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ServiceFeaturedProofMobile } from "@/components/marketing/services/ServiceFeaturedProofMobile";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
-import { HOME_STATS, PROCESS_STEPS, SERVICES } from "@/lib/content";
+import { PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
 import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 import { pickPreviewProducts } from "@/lib/ready-made-solutions";
@@ -1085,12 +1085,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           {engagementModelsSection}
         </>
       ) : null}
-
-      {!isConversionServicePage && (
-        <Section size="compact">
-          <StatBlock stats={HOME_STATS} />
-        </Section>
-      )}
 
       {isMobileAppsService ? (
         <Section {...marketingSection("service-detail-mobile-apps", "product-types")}>
