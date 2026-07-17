@@ -88,7 +88,6 @@ import {
   WEBSITES_SERVICE_FAQ,
   WEBSITES_SERVICE_FAQ_SECTION,
   WEBSITES_SERVICE_HERO,
-  WEBSITES_SERVICE_STATS,
   WEBSITES_WHY_CHOOSE_SECTION,
 } from "@/lib/websites-service-content";
 import {
@@ -99,7 +98,6 @@ import {
   SAAS_SERVICE_FAQ,
   SAAS_SERVICE_FAQ_SECTION,
   SAAS_SERVICE_HERO,
-  SAAS_SERVICE_STATS,
   SAAS_STACK_GROUPS,
   SAAS_STACK_SECTION,
   SAAS_SYSTEMS_SECTION,
@@ -110,7 +108,6 @@ import {
   MOBILE_APPS_SERVICE_FAQ,
   MOBILE_APPS_SERVICE_FAQ_SECTION,
   MOBILE_APPS_SERVICE_HERO,
-  MOBILE_APPS_SERVICE_STATS,
   MOBILE_ENGAGEMENT_SECTION,
   MOBILE_LAUNCH_PROCESS_SECTION,
   MOBILE_PRODUCT_TYPES_SECTION,
@@ -125,7 +122,6 @@ import {
   AUTOMATION_SERVICE_FAQ,
   AUTOMATION_SERVICE_FAQ_SECTION,
   AUTOMATION_SERVICE_HERO,
-  AUTOMATION_SERVICE_STATS,
   AUTOMATION_TYPES_SECTION,
   AUTOMATION_WHY_BUILD_SECTION,
   AUTOMATION_WORKFLOW_SHOWCASE_SECTION,
@@ -139,7 +135,6 @@ import {
   TECHNICAL_SEO_SERVICE_FAQ,
   TECHNICAL_SEO_SERVICE_FAQ_SECTION,
   TECHNICAL_SEO_SERVICE_HERO,
-  TECHNICAL_SEO_SERVICE_STATS,
   TECHNICAL_SEO_SETUP_CATEGORIES_SECTION,
   TECHNICAL_SEO_VISIBILITY_SECTION,
   TECHNICAL_SEO_WHY_SECTION,
@@ -150,7 +145,6 @@ import {
   AI_BUSINESS_SYSTEMS_SERVICE_FAQ,
   AI_BUSINESS_SYSTEMS_SERVICE_FAQ_SECTION,
   AI_BUSINESS_SYSTEMS_SERVICE_HERO,
-  AI_BUSINESS_SYSTEMS_SERVICE_STATS,
   AI_ENGAGEMENT_SECTION,
   AI_SOLUTIONS_SECTION,
   AI_VALUE_SECTION,
@@ -166,15 +160,6 @@ const ICONS = {
   automation: BoltIcon,
   "technical-seo": MagnifyingGlassCircleIcon,
 } as const;
-
-const SERVICE_HERO_STATS: Partial<Record<SlugKey, typeof WEBSITES_SERVICE_STATS>> = {
-  websites: WEBSITES_SERVICE_STATS,
-  "saas-applications": SAAS_SERVICE_STATS,
-  "mobile-apps": MOBILE_APPS_SERVICE_STATS,
-  automation: AUTOMATION_SERVICE_STATS,
-  "technical-seo": TECHNICAL_SEO_SERVICE_STATS,
-  "ai-business-systems": AI_BUSINESS_SYSTEMS_SERVICE_STATS,
-};
 
 type SlugKey = keyof typeof ICONS;
 const PRICE_MUTED_SERVICE_SLUGS = new Set<SlugKey>([]);
@@ -376,7 +361,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   const cmsCopy = await getSanityServiceDetailContent(slug).catch(() => null);
   const shouldMuteTierPrices = PRICE_MUTED_SERVICE_SLUGS.has(slug as SlugKey);
-  const heroStats = cmsCopy?.stats ?? SERVICE_HERO_STATS[slug as SlugKey] ?? [];
   const copy = {
     ...fallbackCopy,
     eyebrow: cmsCopy?.heroEyebrow ?? fallbackCopy.eyebrow,
@@ -869,7 +853,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   deliveryTimeline={service.delivery_timeline}
                   engagementSummary={service.short_description}
                   pillars={service.pillars}
-                  stats={heroStats}
                   icon={Icon}
                 />
               }
