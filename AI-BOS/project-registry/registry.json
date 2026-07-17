@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0.0",
+  "system": "AI-BOS",
+  "registry": "project",
+  "description": "Project registry for AI-BOS \u2014 projects instantiate capabilities, agents, MCP, and workflows",
+  "last_updated": "2026-07-17",
+  "indexes": {
+    "project": "project-index.json"
+  },
+  "objects": [
+    {
+      "id": "PRJ-GOV-AI-BOS-001",
+      "name": "AI-BOS Foundation",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: owner",
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-002",
+        "CAP-OPS-005",
+        "CAP-PLT-003",
+        "CAP-STR-001"
+      ],
+      "consumes": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-002",
+        "AR-AI-BOS-003",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-006",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-008",
+        "AR-AI-BOS-009",
+        "AR-AI-BOS-010",
+        "AR-AI-BOS-011",
+        "AR-AI-BOS-012",
+        "ST-KNW-001",
+        "ST-REG-001",
+        "ST-DOC-001",
+        "ST-AGT-001",
+        "ST-MCP-001",
+        "ST-EXE-001",
+        "ST-GOV-001",
+        "ST-PRJ-001",
+        "ST-VER-001",
+        "ST-TP-001",
+        "TP-KNW-001",
+        "TP-AGT-001",
+        "TP-MCP-001",
+        "TP-PRJ-001",
+        "TP-WF-001",
+        "TP-DOC-001",
+        "TP-REG-001",
+        "HB-KNW-AUTHORING-001",
+        "HB-GOV-OPS-001",
+        "WF-GOV-PHASE-APPROVE-001",
+        "WF-KNW-AUTHOR-001"
+      ],
+      "agents": [
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-VALID-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "workflows": [
+        "WF-GOV-PHASE-APPROVE-001",
+        "WF-KNW-AUTHOR-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "system_builder": "AG-GOV-SYSBUILD-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/AI-BOS/",
+      "generated_from": "TP-PRJ-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "PRJ-SAAS-GROWRIXOS-001",
+      "name": "Growrixos SaaS",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: owner",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-004",
+        "CAP-DLV-005",
+        "CAP-OPS-002",
+        "CAP-OPS-003",
+        "CAP-PLT-005",
+        "CAP-KNW-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-009",
+        "AR-AI-BOS-010",
+        "AR-AI-BOS-011",
+        "ST-EXE-001",
+        "ST-GOV-001",
+        "ST-PRJ-001",
+        "ST-AGT-001",
+        "HB-GOV-OPS-001",
+        "WF-GOV-PHASE-APPROVE-001",
+        "HB-ENG-FE-001",
+        "HB-ENG-BE-001",
+        "HB-ENG-ARCH-001",
+        "HB-ENG-DATA-001",
+        "HB-OPS-REL-001",
+        "ST-SEC-001",
+        "ST-TST-001",
+        "ST-API-001",
+        "ST-FE-DS-001",
+        "WF-DLV-SAAS-FEATURE-001",
+        "RU-AI-BOS-SAAS-001"
+      ],
+      "agents": [
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001",
+        "AG-DLV-QA-001",
+        "AG-DLV-QA-BE-001",
+        "AG-DLV-DEVOPS-001",
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-VALID-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "workflows": [
+        "WF-GOV-PHASE-APPROVE-001",
+        "WF-KNW-AUTHOR-001",
+        "WF-DLV-SAAS-FEATURE-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "system_builder": "AG-GOV-SYSBUILD-001",
+        "delivery_lead": "AG-DLV-SAAS-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/web/",
+      "ledger_path": "F:/PROJECTS/Growrixos/DOC/PROJECT PLAN/Tasks/tasks.md",
+      "generated_from": "TP-PRJ-001",
+      "notes": {
+        "missing_knowledge": [
+          "Optional later: SEO/content HB, integration playbook KOs, pattern library PT-*"
+        ],
+        "wiring": "I4 SaaS knowledge pack + skill/rule bindings",
+        "related_surfaces": [
+          "sites/",
+          "Frontend_Nextjs/ \u2014 separate future PRJ-* entries"
+        ]
+      },
+      "updated": "2026-07-17"
+    }
+  ]
+}

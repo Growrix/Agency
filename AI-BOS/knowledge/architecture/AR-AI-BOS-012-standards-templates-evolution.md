@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -391,15 +391,18 @@ The current AI-BOS root already matches most of this layout. Gaps to close in th
 
 ## Related Knowledge Objects
 
-- `ST-KNW-001` — Knowledge Object Standard (to be authored in implementation)
-- `ST-REG-001` — Knowledge Registry Standard (to be authored in implementation)
-- `ST-VER-001` — Versioning and Evolution Standard (to be authored in implementation)
-- `ST-TP-001` — Template Authoring Standard (to be authored in implementation)
-- `TP-KNW-001` — Knowledge Object Template (to be authored in implementation)
-- `AR-AI-BOS-003` — Assumption Review (D1 trigger source; final D1 decision now due)
+- `ST-KNW-001` — Knowledge Object Standard (authored I1)
+- `ST-REG-001` — Knowledge Registry Standard (authored I1)
+- `ST-VER-001` — Versioning and Evolution Standard (authored I1)
+- `ST-TP-001` — Template Authoring Standard (authored I1)
+- `TP-KNW-001` — Knowledge Object Template (authored I1)
+- `HB-KNW-AUTHORING-001` / `HB-GOV-OPS-001` — starter handbooks (authored I2)
+- `WF-GOV-PHASE-APPROVE-001` / `WF-KNW-AUTHOR-001` — starter workflows (authored I2)
+- `AR-AI-BOS-003` — Assumption Review (D1 trigger source; terminal Option B + Trigger 2 acknowledged)
 
 ## Change History
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0.0 | 2026-07-16 | Initial Phase 12 terminal deliverable — Standards catalog (10 standards), Templates catalog (7 templates), Evolution Strategy (semver, migration, deprecation, amendment, registry schema evolution, backward compatibility), final Repository Structure (four registries as siblings, knowledge by type, docs separate, runtime under `.cursor/`), layout rules, migration gaps. Final D1 repo-promotion decision flagged for `@system-builder` after approval. Awaiting user approval. |
+| 1.0.0 | 2026-07-17 | Related Knowledge Objects updated after I1/I2 implementation — ST/TP/HB/WF authored; D1 Trigger 2 acknowledged with Option B reaffirmed. |

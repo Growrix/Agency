@@ -1,0 +1,357 @@
+{
+  "schema_version": "1.0.0",
+  "system": "AI-BOS",
+  "registry": "agent",
+  "description": "Agent registry for AI-BOS \u2014 agents consume knowledge and perform roles",
+  "last_updated": "2026-07-17",
+  "indexes": {
+    "agent": "agent-index.json"
+  },
+  "objects": [
+    {
+      "id": "AG-KNW-ARCH-001",
+      "name": "AI-BOS Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-002",
+        "CAP-OPS-005",
+        "CAP-STR-001"
+      ],
+      "consumes": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-002",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-006",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-012",
+        "ST-KNW-001",
+        "ST-REG-001",
+        "ST-TP-001",
+        "TP-KNW-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GOV-SYSBUILD-001",
+          "when": "structural change needed (skill, rule, registry schema)"
+        },
+        {
+          "to": "human",
+          "when": "phase gate or ratification required"
+        }
+      ],
+      "generates": [
+        "AR-AI-BOS-*",
+        "ST-*",
+        "TP-*",
+        "HB-*",
+        "WF-*"
+      ],
+      "owner": "AI-BOS",
+      "runtime_projection": "cursor-skill:ai-bos-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-GOV-SYSBUILD-001",
+      "name": "System Builder",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-001",
+        "CAP-PLT-003",
+        "CAP-PLT-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-010",
+        "AR-AI-BOS-011",
+        "AR-AI-BOS-012",
+        "ST-GOV-001",
+        "ST-AGT-001",
+        "ST-REG-001",
+        "ST-VER-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-KNW-ARCH-001",
+          "when": "domain architecture content authoring"
+        },
+        {
+          "to": "human",
+          "when": "lane redesign or repo promotion decision"
+        }
+      ],
+      "generates": [
+        "RU-*",
+        "audit artifacts"
+      ],
+      "owner": "AI-BOS",
+      "runtime_projection": "cursor-skill:system-builder",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-KNW-VALID-001",
+      "name": "Knowledge Validator",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "autonomous",
+      "capabilities": [
+        "CAP-KNW-006",
+        "CAP-KNW-002"
+      ],
+      "consumes": [
+        "ST-KNW-001",
+        "ST-REG-001",
+        "ST-VER-001",
+        "AR-AI-BOS-005"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-KNW-ARCH-001",
+          "when": "validation failures require content rewrite"
+        }
+      ],
+      "generates": [],
+      "owner": "AI-BOS",
+      "runtime_projection": "standalone",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-SAAS-001",
+      "name": "Senior SaaS Developer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-005",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-GOV-001",
+        "ST-PRJ-001",
+        "HB-GOV-OPS-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "frontend-only DS/UI work"
+        },
+        {
+          "to": "AG-DLV-BE-001",
+          "when": "backend-only API/data work"
+        },
+        {
+          "to": "AG-DLV-QA-001",
+          "when": "phase-end frontend gates"
+        },
+        {
+          "to": "AG-DLV-DEVOPS-001",
+          "when": "deploy/CI/env"
+        },
+        {
+          "to": "AG-GOV-SYSBUILD-001",
+          "when": "agent/skill structural change"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "cursor-skill:senior-saas-developer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-FE-001",
+      "name": "Senior Frontend Specialist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "HB-GOV-OPS-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "cross-layer full-stack work"
+        },
+        {
+          "to": "AG-DLV-QA-001",
+          "when": "phase-end gates"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "cursor-skill:senior-frontend-specialist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-BE-001",
+      "name": "Senior Backend DevOps Developer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-005",
+        "CAP-OPS-003"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "HB-GOV-OPS-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "cross-layer full-stack work"
+        },
+        {
+          "to": "AG-DLV-DEVOPS-001",
+          "when": "release/CI only"
+        },
+        {
+          "to": "AG-DLV-QA-BE-001",
+          "when": "backend phase-end gates"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "cursor-skill:senior-backend-devops-developer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-QA-001",
+      "name": "Frontend Quality Enforcer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-001"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "gate failures need frontend fixes"
+        },
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "gate failures need cross-layer fixes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "cursor-skill:frontend-quality-enforcer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-QA-BE-001",
+      "name": "Backend Quality Enforcer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-001"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-BE-001",
+          "when": "backend gate failures need fixes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "cursor-skill:backend-quality-enforcer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-DEVOPS-001",
+      "name": "DevOps Release Engineer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-PLT-005",
+        "CAP-OPS-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "HB-GOV-OPS-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "app code changes needed for release"
+        },
+        {
+          "to": "AG-DLV-BE-001",
+          "when": "server/env contract changes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "cursor-skill:devops-release-engineer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    }
+  ]
+}

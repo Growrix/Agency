@@ -1,0 +1,16 @@
+[
+  {
+    "id": "PRJ-GOV-AI-BOS-001",
+    "name": "AI-BOS Foundation",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "PRJ-SAAS-GROWRIXOS-001",
+    "name": "Growrixos SaaS",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  }
+]

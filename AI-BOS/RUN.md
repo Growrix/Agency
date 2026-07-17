@@ -3,19 +3,20 @@
 ## Prerequisites
 
 - Cursor workspace opened at `F:/PROJECTS/Growrixos` (or repo root containing `AI-BOS/`)
-- No env vars required for Phases 1–5 (docs-first planning)
+- No env vars required for foundation knowledge work (docs-first)
 
 ## Session start
 
 1. Read `AI-BOS/tasks.md` — continue from last `in_progress` or next `not_started` task.
-2. Read `.cursor/skills/ai-bos-architect/SKILL.md` for phase workflow.
-3. Do **not** re-plan from chat memory — disk artifacts are canonical.
+2. Read `.cursor/skills/ai-bos-architect/SKILL.md` for authoring workflow.
+3. Follow `ST-KNW-001` + instantiate from `TP-KNW-001` for new Knowledge Objects.
+4. Do **not** re-plan from chat memory — disk artifacts are canonical.
 
 ## Invoke skills
 
 | Intent | Attach |
 |--------|--------|
-| Author Constitution, Capability Model, Knowledge Architecture, etc. | `@ai-bos-architect` |
+| Author Knowledge Objects, standards, templates, handbooks | `@ai-bos-architect` |
 | Add skill, rule, registry schema, or structural change | `@system-builder` |
 | Update execution ledger | `@task-ledger` |
 

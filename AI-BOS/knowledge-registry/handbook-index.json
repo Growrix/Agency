@@ -1,110 +1,65 @@
 [
   {
-    "id": "AR-AI-BOS-001",
-    "title": "AI-BOS Overall Vision",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-001-vision.md",
+    "id": "HB-KNW-AUTHORING-001",
+    "title": "Knowledge Authoring Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-KNW-AUTHORING-001.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   {
-    "id": "AR-AI-BOS-002",
-    "title": "AI-BOS Constitution — Table of Contents",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-002-constitution-toc.md",
+    "id": "HB-GOV-OPS-001",
+    "title": "AI-BOS Operations Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GOV-OPS-001.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   {
-    "id": "AR-AI-BOS-003",
-    "title": "AI-BOS Assumption Review and Challenge",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-003-assumption-review.md",
+    "id": "HB-ENG-FE-001",
+    "title": "SaaS Frontend Engineering Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-FE-001-saas-frontend.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   {
-    "id": "AR-AI-BOS-004",
-    "title": "AI-BOS Business Capability Model",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-004-capability-model.md",
+    "id": "HB-ENG-BE-001",
+    "title": "SaaS Backend Engineering Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-BE-001-saas-backend.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   {
-    "id": "AR-AI-BOS-005",
-    "title": "AI-BOS Knowledge Architecture",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-005-knowledge-architecture.md",
+    "id": "HB-ENG-ARCH-001",
+    "title": "SaaS System Architecture Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-ARCH-001-saas-architecture.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   {
-    "id": "AR-AI-BOS-006",
-    "title": "AI-BOS Documentation Architecture",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-006-documentation-architecture.md",
+    "id": "HB-ENG-DATA-001",
+    "title": "SaaS Data and Persistence Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-DATA-001-saas-data.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   },
   {
-    "id": "AR-AI-BOS-007",
-    "title": "AI-BOS Agent Architecture",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-007-agent-architecture.md",
+    "id": "HB-OPS-REL-001",
+    "title": "SaaS Release and Operations Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-OPS-REL-001-saas-release-ops.md",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-16"
-  },
-  {
-    "id": "AR-AI-BOS-008",
-    "title": "AI-BOS MCP Architecture",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-008-mcp-architecture.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-16"
-  },
-  {
-    "id": "AR-AI-BOS-009",
-    "title": "AI-BOS Execution Architecture",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-009-execution-architecture.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-16"
-  },
-  {
-    "id": "AR-AI-BOS-010",
-    "title": "AI-BOS Governance",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-010-governance.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-16"
-  },
-  {
-    "id": "AR-AI-BOS-011",
-    "title": "AI-BOS Project Architecture",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-011-project-architecture.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-16"
-  },
-  {
-    "id": "AR-AI-BOS-012",
-    "title": "AI-BOS Standards, Templates, Evolution Strategy, and Repository Structure",
-    "type": "architecture",
-    "path": "knowledge/architecture/AR-AI-BOS-012-standards-templates-evolution.md",
-    "version": "1.0.0",
-    "status": "draft",
-    "updated": "2026-07-16"
+    "updated": "2026-07-17"
   }
 ]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "RU-AI-BOS-SAAS-001",
+    "title": "SaaS Agents Must Consume AI-BOS Project Knowledge",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-SAAS-001-saas-project-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  }
+]

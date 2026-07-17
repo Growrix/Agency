@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "system": "AI-BOS",
+  "description": "Human-facing documentation index \u2014 presents Knowledge Objects; is not the knowledge registry",
+  "last_updated": "2026-07-17",
+  "sections": {
+    "guides": "docs/guides/",
+    "reference": "docs/reference/",
+    "concepts": "docs/concepts/"
+  },
+  "pages": [
+    {
+      "id": "DOC-CONCEPT-001",
+      "title": "AI-BOS Overview",
+      "path": "docs/concepts/overview.md",
+      "presents": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-012"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-GUIDE-001",
+      "title": "How to Author a Knowledge Object",
+      "path": "docs/guides/author-knowledge-object.md",
+      "presents": [
+        "ST-KNW-001",
+        "TP-KNW-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-REF-001",
+      "title": "Standards Catalog Reference",
+      "path": "docs/reference/standards-catalog.md",
+      "presents": [
+        "AR-AI-BOS-012",
+        "ST-KNW-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-GUIDE-002",
+      "title": "AI-BOS Operations Quickstart",
+      "path": "docs/guides/operations-quickstart.md",
+      "presents": [
+        "HB-GOV-OPS-001",
+        "WF-GOV-PHASE-APPROVE-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-REF-002",
+      "title": "Agent and MCP Catalog",
+      "path": "docs/reference/agent-mcp-catalog.md",
+      "presents": [
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-008",
+        "ST-AGT-001",
+        "ST-MCP-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-REF-003",
+      "title": "Projects Catalog",
+      "path": "docs/reference/projects-catalog.md",
+      "presents": [
+        "AR-AI-BOS-011",
+        "ST-PRJ-001",
+        "HB-GOV-OPS-001",
+        "RU-AI-BOS-SAAS-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-REF-004",
+      "title": "SaaS Knowledge Catalog",
+      "path": "docs/reference/saas-knowledge-catalog.md",
+      "presents": [
+        "HB-ENG-FE-001",
+        "HB-ENG-BE-001",
+        "HB-ENG-ARCH-001",
+        "HB-ENG-DATA-001",
+        "HB-OPS-REL-001",
+        "ST-SEC-001",
+        "ST-TST-001",
+        "ST-API-001",
+        "ST-FE-DS-001",
+        "WF-DLV-SAAS-FEATURE-001",
+        "RU-AI-BOS-SAAS-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "DOC-REF-005",
+      "title": "Runtime Surface Inventory",
+      "path": "docs/reference/runtime-surface-inventory.md",
+      "presents": [
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-011",
+        "RU-AI-BOS-SAAS-001"
+      ],
+      "status": "active",
+      "updated": "2026-07-17"
+    }
+  ]
+}

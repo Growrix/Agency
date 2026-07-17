@@ -2,15 +2,20 @@
   "schema_version": "1.0.0",
   "system": "AI-BOS",
   "description": "Root knowledge registry for the AI Business Operating System",
-  "last_updated": "2026-07-16",
+  "last_updated": "2026-07-17",
   "indexes": {
     "handbook": "handbook-index.json",
-    "agent": "agent-index.json",
-    "prompt": "prompt-index.json",
-    "mcp": "mcp-index.json",
+    "architecture": "architecture-index.json",
+    "blueprint": "blueprint-index.json",
+    "standard": "standard-index.json",
+    "rule": "rule-index.json",
+    "pattern": "pattern-index.json",
     "template": "template-index.json",
     "workflow": "workflow-index.json",
-    "standard": "standard-index.json"
+    "prompt": "prompt-index.json",
+    "example": "example-index.json",
+    "agent": "agent-index.json",
+    "mcp": "mcp-index.json"
   },
   "objects": [
     {
@@ -21,22 +26,33 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-STR-001"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-STR-001"
+      ],
       "dependencies": [],
       "updated": "2026-07-16"
     },
     {
       "id": "AR-AI-BOS-002",
-      "title": "AI-BOS Constitution — Table of Contents",
+      "title": "AI-BOS Constitution \u2014 Table of Contents",
       "type": "architecture",
       "path": "knowledge/architecture/AR-AI-BOS-002-constitution-toc.md",
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-STR-001", "CAP-OPS-005"],
-      "dependencies": ["AR-AI-BOS-001"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-STR-001",
+        "CAP-OPS-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-001"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -47,9 +63,17 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-STR-005", "CAP-OPS-005"],
-      "dependencies": ["AR-AI-BOS-001", "AR-AI-BOS-002"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-STR-005",
+        "CAP-OPS-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-002"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -60,9 +84,18 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-STR-001", "CAP-STR-002"],
-      "dependencies": ["AR-AI-BOS-001", "AR-AI-BOS-002", "AR-AI-BOS-003"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-STR-001",
+        "CAP-STR-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-002",
+        "AR-AI-BOS-003"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -73,9 +106,20 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-KNW-001", "CAP-KNW-002", "CAP-PLT-003"],
-      "dependencies": ["AR-AI-BOS-001", "AR-AI-BOS-002", "AR-AI-BOS-003", "AR-AI-BOS-004"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-002",
+        "CAP-PLT-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-002",
+        "AR-AI-BOS-003",
+        "AR-AI-BOS-004"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -86,9 +130,18 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-KNW-001", "CAP-KNW-005", "CAP-PLT-003"],
-      "dependencies": ["AR-AI-BOS-004", "AR-AI-BOS-005"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-005",
+        "CAP-PLT-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -99,9 +152,19 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-PLT-001", "CAP-KNW-001", "CAP-OPS-005"],
-      "dependencies": ["AR-AI-BOS-004", "AR-AI-BOS-005", "AR-AI-BOS-006"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-PLT-001",
+        "CAP-KNW-001",
+        "CAP-OPS-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-006"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -112,9 +175,19 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-PLT-002", "CAP-PLT-003", "CAP-KNW-003"],
-      "dependencies": ["AR-AI-BOS-004", "AR-AI-BOS-005", "AR-AI-BOS-007"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-PLT-002",
+        "CAP-PLT-003",
+        "CAP-KNW-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-007"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -125,9 +198,20 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-PLT-004", "CAP-OPS-005", "CAP-KNW-001"],
-      "dependencies": ["AR-AI-BOS-004", "AR-AI-BOS-005", "AR-AI-BOS-007", "AR-AI-BOS-008"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-PLT-004",
+        "CAP-OPS-005",
+        "CAP-KNW-001"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-008"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -138,9 +222,20 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-OPS-005", "CAP-OPS-003", "CAP-STR-005"],
-      "dependencies": ["AR-AI-BOS-002", "AR-AI-BOS-004", "AR-AI-BOS-007", "AR-AI-BOS-009"],
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-OPS-003",
+        "CAP-STR-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-002",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-009"
+      ],
       "updated": "2026-07-16"
     },
     {
@@ -151,10 +246,23 @@
       "version": "1.0.0",
       "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect"],
-      "capabilities": ["CAP-OPS-005", "CAP-PLT-005", "CAP-STR-002"],
-      "dependencies": ["AR-AI-BOS-004", "AR-AI-BOS-005", "AR-AI-BOS-007", "AR-AI-BOS-008", "AR-AI-BOS-009", "AR-AI-BOS-010"],
-      "updated": "2026-07-16"
+      "consumers": [
+        "ai-bos-architect"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-005",
+        "CAP-STR-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-008",
+        "AR-AI-BOS-009",
+        "AR-AI-BOS-010"
+      ],
+      "updated": "2026-07-17"
     },
     {
       "id": "AR-AI-BOS-012",
@@ -162,12 +270,767 @@
       "type": "architecture",
       "path": "knowledge/architecture/AR-AI-BOS-012-standards-templates-evolution.md",
       "version": "1.0.0",
-      "status": "draft",
+      "status": "active",
       "owner": "AI-BOS",
-      "consumers": ["ai-bos-architect", "system-builder"],
-      "capabilities": ["CAP-OPS-005", "CAP-PLT-003", "CAP-KNW-001", "CAP-KNW-002", "CAP-STR-005"],
-      "dependencies": ["AR-AI-BOS-001", "AR-AI-BOS-002", "AR-AI-BOS-004", "AR-AI-BOS-005", "AR-AI-BOS-006", "AR-AI-BOS-007", "AR-AI-BOS-008", "AR-AI-BOS-009", "AR-AI-BOS-010", "AR-AI-BOS-011"],
-      "updated": "2026-07-16"
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-003",
+        "CAP-KNW-001",
+        "CAP-KNW-002",
+        "CAP-STR-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-002",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-006",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-008",
+        "AR-AI-BOS-009",
+        "AR-AI-BOS-010",
+        "AR-AI-BOS-011"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-KNW-001",
+      "title": "Knowledge Object Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-KNW-001-knowledge-object.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-005",
+        "AR-AI-BOS-012"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-REG-001",
+      "title": "Knowledge Registry Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-REG-001-knowledge-registry.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-002",
+        "CAP-PLT-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-005",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-DOC-001",
+      "title": "Documentation Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-DOC-001-documentation.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-005",
+        "CAP-PLT-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-006",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-AGT-001",
+      "title": "Agent Definition Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-AGT-001-agent-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-001",
+        "CAP-OPS-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-007",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-MCP-001",
+      "title": "MCP Server Definition Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-MCP-001-mcp-server-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-002",
+        "CAP-PLT-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-008",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-EXE-001",
+      "title": "Execution Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-EXE-001-execution.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-004",
+        "CAP-OPS-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-009",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-GOV-001",
+      "title": "Governance Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-GOV-001-governance.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-OPS-003",
+        "CAP-STR-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-010",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-PRJ-001",
+      "title": "Project Definition Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-PRJ-001-project-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-005",
+        "CAP-STR-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-VER-001",
+      "title": "Versioning and Evolution Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-VER-001-versioning-evolution.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-KNW-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-012",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-TP-001",
+      "title": "Template Authoring Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-TP-001-template-authoring.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-PLT-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-012",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-KNW-001",
+      "title": "Knowledge Object Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-KNW-001-knowledge-object.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-001"
+      ],
+      "dependencies": [
+        "ST-KNW-001",
+        "ST-TP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-AGT-001",
+      "title": "Agent Definition Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-AGT-001-agent-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-001"
+      ],
+      "dependencies": [
+        "ST-AGT-001",
+        "ST-TP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-MCP-001",
+      "title": "MCP Server Definition Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-MCP-001-mcp-server-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-002"
+      ],
+      "dependencies": [
+        "ST-MCP-001",
+        "ST-TP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-PRJ-001",
+      "title": "Project Definition Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-PRJ-001-project-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-005"
+      ],
+      "dependencies": [
+        "ST-PRJ-001",
+        "ST-TP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-WF-001",
+      "title": "Workflow Definition Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-WF-001-workflow-definition.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-PLT-004"
+      ],
+      "dependencies": [
+        "ST-EXE-001",
+        "ST-TP-001",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-DOC-001",
+      "title": "Documentation Page Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-DOC-001-documentation-page.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-005"
+      ],
+      "dependencies": [
+        "ST-DOC-001",
+        "ST-TP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "TP-REG-001",
+      "title": "Registry Entry Template",
+      "type": "template",
+      "path": "knowledge/templates/TP-REG-001-registry-entry.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "ai-bos-architect",
+        "system-builder"
+      ],
+      "capabilities": [
+        "CAP-KNW-002"
+      ],
+      "dependencies": [
+        "ST-REG-001",
+        "ST-TP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-GOV-PHASE-APPROVE-001",
+      "title": "Phase Gate Approval Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-GOV-PHASE-APPROVE-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-004"
+      ],
+      "dependencies": [
+        "ST-EXE-001",
+        "ST-GOV-001",
+        "AR-AI-BOS-009",
+        "AR-AI-BOS-010"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-KNW-AUTHOR-001",
+      "title": "Knowledge Object Authoring Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-KNW-AUTHOR-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-KNW-ARCH-001",
+        "AG-KNW-VALID-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-PLT-004"
+      ],
+      "dependencies": [
+        "ST-KNW-001",
+        "ST-REG-001",
+        "ST-EXE-001",
+        "TP-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-KNW-AUTHORING-001",
+      "title": "Knowledge Authoring Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-KNW-AUTHORING-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-KNW-ARCH-001",
+        "AG-KNW-VALID-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-005"
+      ],
+      "dependencies": [
+        "ST-KNW-001",
+        "ST-REG-001",
+        "TP-KNW-001",
+        "WF-KNW-AUTHOR-001",
+        "AR-AI-BOS-005"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-GOV-OPS-001",
+      "title": "AI-BOS Operations Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-GOV-OPS-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-OPS-001",
+        "CAP-KNW-005"
+      ],
+      "dependencies": [
+        "ST-GOV-001",
+        "ST-VER-001",
+        "AR-AI-BOS-010",
+        "AR-AI-BOS-012",
+        "WF-GOV-PHASE-APPROVE-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-ENG-FE-001",
+      "title": "SaaS Frontend Engineering Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-ENG-FE-001-saas-frontend.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-FE-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-QA-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "ST-FE-DS-001",
+        "ST-TST-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-ENG-BE-001",
+      "title": "SaaS Backend Engineering Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-ENG-BE-001-saas-backend.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-BE-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-QA-BE-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-005",
+        "CAP-PLT-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "ST-API-001",
+        "ST-SEC-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-ENG-ARCH-001",
+      "title": "SaaS System Architecture Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-ENG-ARCH-001-saas-architecture.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-004",
+        "CAP-DLV-001"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-ENG-DATA-001",
+      "title": "SaaS Data and Persistence Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-ENG-DATA-001-saas-data.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-BE-001",
+        "AG-DLV-SAAS-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-OPS-003"
+      ],
+      "dependencies": [
+        "HB-ENG-ARCH-001",
+        "ST-API-001",
+        "ST-SEC-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-OPS-REL-001",
+      "title": "SaaS Release and Operations Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-OPS-REL-001-saas-release-ops.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-DEVOPS-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-QA-001"
+      ],
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-PLT-005"
+      ],
+      "dependencies": [
+        "ST-TST-001",
+        "ST-SEC-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-SEC-001",
+      "title": "SaaS Security Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-SEC-001-saas-security.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-BE-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-DEVOPS-001",
+        "AG-DLV-QA-BE-001"
+      ],
+      "capabilities": [
+        "CAP-OPS-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-TST-001",
+      "title": "SaaS Testing and Quality Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-TST-001-saas-testing.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-QA-001",
+        "AG-DLV-QA-BE-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001"
+      ],
+      "capabilities": [
+        "CAP-OPS-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-API-001",
+      "title": "SaaS API Design Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-API-001-saas-api.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-BE-001",
+        "AG-DLV-SAAS-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-005"
+      ],
+      "dependencies": [
+        "ST-KNW-001",
+        "ST-SEC-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-FE-DS-001",
+      "title": "SaaS Frontend Design System Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-FE-DS-001-saas-design-system.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-FE-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-QA-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "dependencies": [
+        "ST-KNW-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-DLV-SAAS-FEATURE-001",
+      "title": "SaaS Feature Delivery Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-DLV-SAAS-FEATURE-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001",
+        "AG-DLV-QA-001",
+        "AG-DLV-QA-BE-001",
+        "AG-DLV-DEVOPS-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-005",
+        "CAP-OPS-002"
+      ],
+      "dependencies": [
+        "ST-EXE-001",
+        "ST-TST-001",
+        "ST-SEC-001",
+        "HB-ENG-ARCH-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "RU-AI-BOS-SAAS-001",
+      "title": "SaaS Agents Must Consume AI-BOS Project Knowledge",
+      "type": "rule",
+      "path": "knowledge/rules/RU-AI-BOS-SAAS-001-saas-project-binding.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001",
+        "AG-DLV-QA-001",
+        "AG-DLV-QA-BE-001",
+        "AG-DLV-DEVOPS-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-004",
+        "CAP-DLV-001",
+        "CAP-OPS-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "ST-PRJ-001",
+        "ST-AGT-001"
+      ],
+      "updated": "2026-07-17"
     }
   ]
 }

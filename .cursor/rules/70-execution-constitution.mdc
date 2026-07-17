@@ -13,7 +13,7 @@ Ported essentials from `DOC/Universal/Execution Constitution.md`. Governs docume
 |-------|-------|---------|
 | Universal | `DOC/Universal/` | Reusable prompts, roles, enterprise guides |
 | Project plan | `DOC/PROJECT PLAN/` | Generated project-specific docs — SSOT for `web/` SaaS implementation |
-| AI-BOS | `AI-BOS/` | Tool-independent business OS — knowledge registry, constitution, capability model (planning; not SaaS SSOT) |
+| AI-BOS | `AI-BOS/` | Tool-independent business OS — knowledge registry; SaaS `web/` binds via `PRJ-SAAS-GROWRIXOS-001` + rule `76-ai-bos-saas-binding.mdc` |
 | Code | `web/`, `sites/`, `Frontend_Nextjs/` | Implementation surfaces |
 
 ## Two execution stages
@@ -43,7 +43,7 @@ Resolve lane via [`.cursor/brain/lane-router.yaml`](.cursor/brain/lane-router.ya
 
 | Lane | Brain | Ledger |
 |------|-------|--------|
-| `web/` | `memories/repo/site-brain.md` | `DOC/PROJECT PLAN/Tasks/tasks.md` |
+| `web/` | `memories/repo/site-brain.md` + AI-BOS `PRJ-SAAS-GROWRIXOS-001` (rule 76) | `DOC/PROJECT PLAN/Tasks/tasks.md` |
 | `sites/` | `.cursor/brain/template-brain.md` | `.cursor/execution/template-tasks.md` |
 | `Frontend_Nextjs/` | `.cursor/brain/migration-brain.md` | `.cursor/execution/template-tasks.md` |
 | Conversion | `.cursor/brain/migration-brain.md` | `.cursor/execution/template-tasks.md` |

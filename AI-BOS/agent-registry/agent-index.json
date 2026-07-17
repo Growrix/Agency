@@ -1,0 +1,74 @@
+[
+  {
+    "id": "AG-KNW-ARCH-001",
+    "name": "AI-BOS Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-GOV-SYSBUILD-001",
+    "name": "System Builder",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-KNW-VALID-001",
+    "name": "Knowledge Validator",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "autonomous",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-SAAS-001",
+    "name": "Senior SaaS Developer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-FE-001",
+    "name": "Senior Frontend Specialist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-BE-001",
+    "name": "Senior Backend DevOps Developer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-QA-001",
+    "name": "Frontend Quality Enforcer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-QA-BE-001",
+    "name": "Backend Quality Enforcer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-DEVOPS-001",
+    "name": "DevOps Release Engineer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  }
+]

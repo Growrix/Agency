@@ -1,0 +1,38 @@
+---
+description: Bind Growrixos web/ SaaS work to AI-BOS project PRJ-SAAS-GROWRIXOS-001 and its Knowledge Objects. Apply when editing under web/.
+globs: web/**
+alwaysApply: false
+---
+
+# AI-BOS SaaS Binding (web/)
+
+When working under `web/`, treat the delivery project as **`PRJ-SAAS-GROWRIXOS-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-SAAS-GROWRIXOS-001` before material changes.
+2. Consume declared Knowledge Object IDs (not chat summaries) — at minimum as scoped by the active delivery skill’s `references/ai-bos-binding.md`.
+3. Prefer AI-BOS KOs as SSOT when they exist; `DOC/Universal/` remains reference only.
+4. Follow `WF-DLV-SAAS-FEATURE-001` for feature delivery; use `ST-TST-001` / phase-end enforcers at gates.
+5. Record evidence in `DOC/PROJECT PLAN/Tasks/tasks.md`.
+
+## Routing
+
+| Need | Skill / agent |
+|------|----------------|
+| Cross-layer SaaS | `@senior-saas-developer` (`AG-DLV-SAAS-001`) |
+| Frontend-only | `@senior-frontend-specialist` (`AG-DLV-FE-001`) |
+| Backend-only | `@senior-backend-devops-developer` (`AG-DLV-BE-001`) |
+| Frontend gates | `@frontend-quality-enforcer` (`AG-DLV-QA-001`) |
+| Backend gates | `@backend-quality-enforcer` (`AG-DLV-QA-BE-001`) |
+| Release / CI / env | `@devops-release-engineer` (`AG-DLV-DEVOPS-001`) |
+| New AI-BOS KO content | `@ai-bos-architect` |
+| AI-BOS structural change | `@system-builder` |
+
+## Never
+
+- Create a duplicate senior SaaS/FE/BE skill — extend bindings only
+- Invent security/testing standards in chat when `ST-SEC-001` / `ST-TST-001` exist
+- Skip project binding for `web/` work
+
+Knowledge-layer mirror: `RU-AI-BOS-SAAS-001`.
