@@ -714,3 +714,11 @@ Remaining parallel tracks:
 - **Commit:** `c38882c` on `main`.
 - **Push:** `main` → `origin/main` (`de0d38f..c38882c`).
 - **Remote CI verification:** local pass only — remote unverified (`gh` not authenticated).
+
+### 2026-07-17 — Remove service hero stat counters from all service pages (WEB-SERVICE-HERO-001)
+- **Request:** Remove counter blocks (service-specific stats) from all service detail pages alongside the previously removed homepage `HOME_STATS` counter.
+- **Changes:**
+  - `web/src/app/services/[slug]/page.tsx`: removed `SERVICE_HERO_STATS` lookup, `cmsCopy.stats` fallback, desktop hero `StatBlock` footer, and mobile `stats={heroStats}` prop.
+  - `web/src/components/marketing/services/ServiceDetailHeroMobile.tsx`: removed `StatBlock` import, `stats` prop, and rendered `StatBlock` element.
+- **Verification:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
+- **Commit:** `1ec0ab5` on `Technical_SEO_debug`; branch state merged into `frontend_indexing` checkpoint commit `c91e1b7`.
