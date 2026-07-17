@@ -722,3 +722,13 @@ Remaining parallel tracks:
   - `web/src/components/marketing/services/ServiceDetailHeroMobile.tsx`: removed `StatBlock` import, `stats` prop, and rendered `StatBlock` element.
 - **Verification:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
 - **Commit:** `1ec0ab5` on `Technical_SEO_debug`; branch state merged into `frontend_indexing` checkpoint commit `c91e1b7`.
+
+### 2026-07-17 — Fix preview MIDDLEWARE_INVOCATION_FAILED (WEB-MIDDLEWARE-001)
+- **Symptom:** `frontend_indexing` Vercel preview (`growrix-git-frontendindexing-*.vercel.app`) returned `500 MIDDLEWARE_INVOCATION_FAILED` on `/`.
+- **Root cause:** `web/src/proxy.ts` statically imported `@/server/auth/clerk-sync` (`server-only` + `readDatabase()` / `node:fs`) into the middleware bundle on every request. Vercel `build:vercel` also used default bundler (no `--webpack`), diverging from local CI.
+- **Fix:**
+  - Lazy `import("@/server/auth/clerk-sync")` inside `resolveMirroredClerkUser` only (dashboard/admin completion paths).
+  - `build:vercel` → `next build --webpack && node ./scripts/vercel-monorepo-finalizer-bridge.mjs`.
+  - Note: Next.js 16 proxy already runs on Node.js; `export const runtime = "nodejs"` is rejected in proxy files.
+- **Verification:** `npm run build:vercel` (VERCEL=1) exit 0; smoke `/` 200, `/api/health` 200, `/api/v1/admin/analytics` 307; `npm run ci:check --prefix web` exit 0 (17/17 release gates).
+- **Remote preview verification:** pending after push (operator confirms new deployment loads homepage).
