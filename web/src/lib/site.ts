@@ -9,6 +9,8 @@
 
 const DEFAULT_SITE_URL = "https://www.growrixos.com";
 const LOCAL_DEV_DEFAULT = "http://localhost:5000";
+const PRODUCTION_APEX_HOST = "growrixos.com";
+const PRODUCTION_WWW_HOST = "www.growrixos.com";
 
 const LOOPBACK_HOSTS = new Set(["localhost", "127.0.0.1", "::1", "[::1]"]);
 
@@ -22,10 +24,24 @@ function normalizeBaseUrl(value: string | undefined) {
 }
 
 /**
- * Resolves the public app origin for outbound links (transactional email, Stripe redirects).
- * Production never emits loopback hosts even when NEXT_PUBLIC_SITE_URL is missing or mis-set.
+ * Production canonical host is always www. Mis-set apex env values must not leak into
+ * sitemap, robots Host, or per-page canonical metadata.
  */
-export function resolveAppBaseUrl(): string {
+function enforceProductionWwwHost(url: string) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === PRODUCTION_APEX_HOST) {
+      parsed.hostname = PRODUCTION_WWW_HOST;
+      return normalizeBaseUrl(parsed.toString());
+    }
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+
+  return url;
+}
+
+function resolvePublicSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   const candidate = fromEnv
     ? normalizeBaseUrl(fromEnv)
@@ -42,12 +58,22 @@ export function resolveAppBaseUrl(): string {
     } catch {
       return DEFAULT_SITE_URL;
     }
+
+    return enforceProductionWwwHost(candidate);
   }
 
   return candidate;
 }
 
-export const SITE_URL = normalizeBaseUrl(process.env.NEXT_PUBLIC_SITE_URL);
+/**
+ * Resolves the public app origin for outbound links (transactional email, Stripe redirects).
+ * Production never emits loopback hosts even when NEXT_PUBLIC_SITE_URL is missing or mis-set.
+ */
+export function resolveAppBaseUrl(): string {
+  return resolvePublicSiteUrl();
+}
+
+export const SITE_URL = resolvePublicSiteUrl();
 
 export const SITE_NAME = "Growrix OS";
 

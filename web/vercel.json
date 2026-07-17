@@ -1,6 +1,19 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build:vercel",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "growrixos.com"
+        }
+      ],
+      "destination": "https://www.growrixos.com/:path*",
+      "permanent": true
+    }
+  ],
   "crons": [
     {
       "path": "/api/cron/warm-cache",

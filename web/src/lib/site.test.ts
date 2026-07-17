@@ -54,4 +54,16 @@ describe("resolveAppBaseUrl", () => {
     resetRuntimeConfigForTests();
     assert.equal(getRuntimeConfig().appBaseUrl, "https://www.growrixos.com");
   });
+
+  it("normalizes apex host to www in production", () => {
+    setTestEnv("NODE_ENV", "production");
+    setTestEnv("NEXT_PUBLIC_SITE_URL", "https://growrixos.com");
+    assert.equal(resolveAppBaseUrl(), "https://www.growrixos.com");
+  });
+
+  it("preserves explicit www host in production", () => {
+    setTestEnv("NODE_ENV", "production");
+    setTestEnv("NEXT_PUBLIC_SITE_URL", "https://www.growrixos.com");
+    assert.equal(resolveAppBaseUrl(), "https://www.growrixos.com");
+  });
 });

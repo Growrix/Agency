@@ -67,6 +67,16 @@ For each: Inspect → **Request indexing** (quota applies).
 | **Page experience** | LCP/CLS after performance deploy |
 | **Rich results** | Organization, Service, Product schema valid |
 
+**If Page indexing still shows “Processing data”:** normal for new domain properties for 24–72h after sitemap submit. Confirm live signals first:
+
+```bash
+curl.exe -s https://www.growrixos.com/robots.txt
+curl.exe -s https://www.growrixos.com/sitemap.xml | findstr /i "www.growrixos.com"
+curl.exe -sI https://growrixos.com/
+```
+
+Expect: `Allow: /`, all sitemap `<loc>` on www, apex **301** to www.
+
 ---
 
 ## 6. Rollback
