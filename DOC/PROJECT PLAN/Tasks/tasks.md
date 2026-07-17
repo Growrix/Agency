@@ -638,7 +638,7 @@ Remaining parallel tracks:
 - **Root cause:** Production emitted apex `https://growrixos.com` in sitemap/canonical/robots Host while site serves www; apex→www was 307.
 - **Fix:** [`web/src/lib/site.ts`](web/src/lib/site.ts) production apex→www normalizer; [`web/vercel.json`](web/vercel.json) permanent apex host redirect; env docs updated.
 - **Operator:** Confirm Vercel Production `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` + `SITE_INDEXING_ENABLED=true`; GSC URL Inspection on P0 www URLs; recheck Pages in 24–72h.
-- **Verification:** `site.test.ts` apex→www tests pass; release gates 17/17 local; post-deploy curl pending push.
+- **Verification:** `site.test.ts` apex→www tests pass; release gates 17/17 local; preview deploy Ready (`growrix-ip3b3diiw`); **production** still serves apex URLs until Production redeploy from this branch.
 
 ### 2026-07-15 — Growrix OS on-page SEO audit + non-text implementation (WEB-SEO-ONPAGE-001)
 - **Status:** Documentation complete; non-text code fixes implemented; text changes held in approval queue.
