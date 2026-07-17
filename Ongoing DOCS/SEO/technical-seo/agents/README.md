@@ -68,7 +68,7 @@ This framework is active in the current project through thin selectable adapters
 
 **Deprecated:** `technical-seo-architect` — merged into `Technical_SEO_expert`.
 
-For future projects, copy the relevant adapter file and the `Ongoing DOCS/Technical_SEO` handbook folder. See `platform-installation.md`.
+For future projects, copy the relevant adapter file and the `Ongoing DOCS/SEO/` handbook folder. See `../../agents/platform-installation.md`.
 
 ## Completion Standard
 

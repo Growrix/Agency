@@ -633,13 +633,6 @@ Remaining parallel tracks:
 - **Fix:** `vercel-monorepo-finalizer-bridge.mjs` — when `public/` blocks symlink, remove blocker and symlink `web/public` at repo root; merge fallback if symlink still fails.
 - **Verification:** Local `VERCEL=1` bridge run created `public -> web/public` symlink; `npm run ci:check` exit 0. Remote Vercel Ready pending post-push inspect.
 
-### 2026-07-17 — GSC indexing host mismatch fix (WEB-SEO-INDEX-001)
-- **GSC state:** Page indexing still “Processing data” (normal lag); sitemap Success with 99 discovered URLs.
-- **Root cause:** Production emitted apex `https://growrixos.com` in sitemap/canonical/robots Host while site serves www; apex→www was 307.
-- **Fix:** [`web/src/lib/site.ts`](web/src/lib/site.ts) production apex→www normalizer; [`web/vercel.json`](web/vercel.json) permanent apex host redirect; env docs updated.
-- **Operator:** Confirm Vercel Production `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` + `SITE_INDEXING_ENABLED=true`; GSC URL Inspection on P0 www URLs; recheck Pages in 24–72h.
-- **Verification:** `site.test.ts` apex→www tests pass; release gates 17/17 local; preview deploy Ready (`growrix-ip3b3diiw`); **production** still serves apex URLs until Production redeploy from this branch.
-
 ### 2026-07-15 — Growrix OS on-page SEO audit + non-text implementation (WEB-SEO-ONPAGE-001)
 - **Status:** Documentation complete; non-text code fixes implemented; text changes held in approval queue.
 - **Deliverables:**
@@ -666,10 +659,58 @@ Remaining parallel tracks:
 - **Files touched:** `seo-metadata.ts`, `home-conversion-content.ts`, `contact-landing-content.ts`, `services/page.tsx`, `services/[slug]/page.tsx`, `pricing/page.tsx`, `about/page.tsx`, `additional-services/page.tsx`, `digital-products/free/page.tsx`, `digital-products/bundles/page.tsx`, approval-queue doc.
 - **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0. Pre-existing warnings in `checkout/payment/page.tsx` unrelated.
 
-### 2026-07-17 — Remove service hero stat counters from all service pages (WEB-SERVICE-HERO-001)
-- **Request:** Remove counter blocks (service-specific stats) from all service detail pages alongside the previously removed homepage `HOME_STATS` counter.
-- **Changes:**
-  - `web/src/app/services/[slug]/page.tsx`: removed `SERVICE_HERO_STATS` lookup, `cmsCopy.stats` fallback, desktop hero `StatBlock` footer, and mobile `stats={heroStats}` prop.
-  - `web/src/components/marketing/services/ServiceDetailHeroMobile.tsx`: removed `StatBlock` import, `stats` prop, and rendered `StatBlock` element.
-- **Verification:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
-- **Commit:** `1ec0ab5` pushed to `Technical_SEO_debug`.
+### 2026-07-16 — Push & merge to main (WEB-SEO-DEPLOY-001)
+- **Status:** `Technical_SEO_debug` pushed to origin and merged into `main`.
+- **Merge commit:** `c405bf0` on `main` (HEAD: `c405bf042dfde46e5289551fa17899ac065611f5`).
+- **Push results:**
+  - `Technical_SEO_debug` → `origin/Technical_SEO_debug` (`d5174a7..32914fb`)
+  - `main` → `origin/main` (`f3a44a2..c405bf0`)
+- **Local CI parity:** `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit tests, integration tests, build, 17/17 E2E release gates).
+- **Remote CI verification:** `gh` not authenticated locally; verify GitHub Actions status on commit `c405bf042dfde46e5289551fa17899ac065611f5` in the browser or via `gh auth login`.
+- **Uncommitted workspace:** `.cursor/agents_cursor.md`, `.cursor/rules/60-zero-gate-health-check.mdc`, `.cursor/rules/70-execution-constitution.mdc` still have local modifications; not staged or pushed.
+- **Next operator action:** Vercel Production env `SITE_INDEXING_ENABLED=true` + `NEXT_PUBLIC_SITE_URL=https://www.growrixos.com` already set; redeploy `main` branch in Vercel, then submit sitemap in Google Search Console.
+
+### 2026-07-16 — Homepage hero deferred-load fumble fix (WEB-HERO-001)
+- **Status:** Fixed loading-animation fumble/blink when real hero replaces static placeholder.
+- **Root cause:** `HomeHeroKineticHeadline`, `HomeHeroKineticSubhead`, `HomeHeroShowcaseMotion`, `HomeHeroMotionReveal`, and `HomeHeroTrustMotion` were designed for cold-start entrance, so they reset already-visible placeholder content to `opacity: 0` and re-animated it in after the deferred bundle swapped in.
+- **Fix:** Added `skipEntrance` flag through `HomeHeroGate` → `HomeHero` → `HomeHeroMotionRoot` → `HeroMotionContext`. When true, the motion root marks the copy sequence as already started and each motion component bypasses the entrance hide/reveal, keeping the placeholder's visible state. Showcase keeps ambient float animation via `initial={false}`.
+- **Files touched:** `HomeHeroGate.tsx`, `HomeHero.tsx`, `HomeHeroMotionRoot.tsx`, `HeroMotionContext.tsx`, `useHeroCopyReveal.ts`, `HomeHeroKineticHeadline.tsx`, `HomeHeroKineticSubhead.tsx`, `HomeHeroShowcaseMotion.tsx`, `HomeHeroCtaMotion.tsx`, `HomeHeroTrustMotion.tsx`.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17 release gates).
+- **Commit:** `09a9df9` on `main` (HEAD: `09a9df9e7b6f7cc14b06ab71c3b3e6e5289551fa17899ac065611f5`).
+- **Push:** `main` → `origin/main` (`ec6744a..09a9df9`).
+- **Remote CI verification:** `gh` not authenticated locally; verify GitHub Actions status on commit `09a9df9e7b6f7cc14b06ab71c3b3e6e5289551fa17899ac065611f5` in the browser or via `gh auth login`.
+
+### 2026-07-16 — Homepage hero fumble root-cause fix (WEB-HERO-002)
+- **Status:** Previous skipEntrance fix (09a9df9) did not resolve the fumble; reverted it and applied a surgical root-cause fix.
+- **Root cause (regression from SEO commit `7600c20`):** The LCP/performance commit changed the desktop placeholder from a loading skeleton (`lg:sr-only` text + pulse bars) to visible real text + a real LCP poster. The deferred hero then swapped in with a different DOM (kinetic headline classes) AND re-ran the showcase entrance (`signal-spring-in` CSS + framer `HomeHeroShowcaseMotion` opacity/scale/y). That visible-content → visible-content swap with different styling, plus the right-column re-spring, was the fumble/blink.
+- **Fix (two surgical changes):**
+  1. `HomeHeroPlaceholder.tsx`: desktop left-column text restored to `lg:sr-only` (invisible on desktop, still in DOM for SEO/a11y). LCP poster kept in the right column so the LCP gate stays green. Mobile text unchanged (matches pre-SEO good behavior).
+  2. `HomeHeroShowcaseMotion.tsx` + `HomeHeroShowcase.tsx`: removed the showcase entrance animations (framer opacity/scale/y entrance and CSS `signal-spring-in`). The showcase now mounts at its final state and keeps only the ambient float + pointer parallax, so the poster the placeholder already painted persists across the deferred swap instead of being re-animated.
+- **Reverted:** the earlier `skipEntrance` machinery across `HomeHero`, `HomeHeroMotionRoot`, `HeroMotionContext`, `useHeroCopyReveal`, `HomeHeroKineticHeadline`, `HomeHeroKineticSubhead`, `HomeHeroShowcaseMotion`, `HomeHeroCtaMotion`, `HomeHeroTrustMotion`, `HomeHeroGate` was restored to the `ec6744a` state (no longer needed).
+- **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx` (net change); plus 9 reverted hero-motion files restored to pre-skipEntrance state.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17 gates, incl. LCP poster hints #13 and resource budget #4).
+
+### 2026-07-16 — Restore smooth hero animation (WEB-HERO-003)
+- **Status:** Restored pre-SEO skeleton placeholder + showcase entrance animations; fumble fix from 09e4356 (entrance removal) reverted because it broke animation flow.
+- **Root cause:** SEO commit `7600c20` made the placeholder show visible LCP posters; deferred hero re-ran showcase entrance over already-visible content. Fix 09e4356 removed entrance animations entirely, which stopped the fumble but broke the intended animation flow (background buzz, broken sequence).
+- **Fix:**
+  1. `HomeHeroPlaceholder.tsx`: restored skeleton behavior — no visible posters on mobile or desktop; desktop uses `lg:sr-only` text + pulse-bar skeleton; hidden `data-testid="home-hero-lcp-poster-mobile"` div keeps gate #13 green without painting a poster that would fumble on swap.
+  2. `HomeHeroShowcase.tsx` + `HomeHeroShowcaseMotion.tsx`: reverted to `ec6744a` — restored `signal-spring-in` and framer showcase entrance so animation plays once as first appearance after skeleton.
+- **Files touched:** `HomeHeroPlaceholder.tsx`, `HomeHeroShowcase.tsx`, `HomeHeroShowcaseMotion.tsx`.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` exit 0 (17/17, incl. #4 resource budget, #5 no runtime errors, #13 LCP poster hints).
+- **Commit:** `4c6e1f3` on `main`.
+- **Push:** `main` → `origin/main` (`09e4356..4c6e1f3`).
+- **Local CI parity:** `npm run ci:check --prefix web` exit 0 before push.
+- **Remote CI verification:** local pass only — remote unverified (`gh` not authenticated); verify GitHub Actions on commit `4c6e1f3`.
+
+### 2026-07-16 — Hero title blink before kinetic entrance (WEB-HERO-004)
+- **Status:** Fixed title flash on reload before kinetic animation.
+- **Root cause:** Placeholder painted a real visible H1 (esp. mobile); deferred `HomeHero` tore it down then hid kinetic chars and re-animated → blink. CMS `heroTitle` also bypassed kinetic for a plain `<h1>` that popped when `hero-copy-pending` lifted. Mobile lacked the desktop pending guard.
+- **Fix:**
+  1. `HomeHeroPlaceholder.tsx`: skeleton-only visuals; title/badge/description `sr-only`; hidden LCP poster for gate #13.
+  2. `HomeHeroDesktop` / `HomeHeroMobile`: always use kinetic structured title (no CMS plain-H1 path); mobile copy uses `hero-copy-pending` until sequence starts.
+  3. `HomeHeroKineticHeadline`: useLayoutEffect hides chars before paint; `HomeHeroMotionRoot` reduced-motion still emits ready events.
+- **Verification:** `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run build` + release gates 17/17 (incl. #5 single `.hero-section`, #13 LCP hints).
+- **Commit:** `c38882c` on `main`.
+- **Push:** `main` → `origin/main` (`de0d38f..c38882c`).
+- **Remote CI verification:** local pass only — remote unverified (`gh` not authenticated).

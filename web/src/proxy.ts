@@ -1,4 +1,4 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -14,6 +14,18 @@ const blockedPreviewPrefixes = [
   "/previews/html-business-profiles/",
   "/previews/website-templates-html/",
 ];
+
+/** Routes that need Clerk middleware (auth handshake, protect, session sync). */
+const isClerkRoute = createRouteMatcher([
+  "/admin(.*)",
+  "/dashboard(.*)",
+  "/complete-account(.*)",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api(.*)",
+  "/trpc(.*)",
+  "/__clerk(.*)",
+]);
 
 function businessProfileRewrite(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -227,7 +239,22 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
 }
 
 export default async function proxy(request: NextRequest, event: NextFetchEvent) {
+  const rewrite = businessProfileRewrite(request);
+  if (rewrite) {
+    return rewrite;
+  }
+
+  const blockedPreview = blockPublicPreviewSource(request);
+  if (blockedPreview) {
+    return blockedPreview;
+  }
+
   if (!isClerkConfigured()) {
+    return legacyProxy(request);
+  }
+
+  // Marketing pages skip clerkMiddleware to avoid handshake redirect loops for anonymous visitors.
+  if (!isClerkRoute(request)) {
     return legacyProxy(request);
   }
 
@@ -241,8 +268,14 @@ export const config = {
     "/previews/html-template-websites/:path*",
     "/previews/html-business-profiles/:path*",
     "/previews/website-templates-html/:path*",
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
+    "/admin/:path*",
+    "/dashboard/:path*",
+    "/complete-account/:path*",
+    "/sign-in/:path*",
+    "/sign-up/:path*",
+    "/api/:path*",
+    "/trpc/:path*",
     "/__clerk/:path*",
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
   ],
 };

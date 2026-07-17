@@ -5,7 +5,7 @@
 **Auditor:** `@technical-seo` / `Technical_SEO_expert`  
 **Scope:** `web/` (Next.js SaaS), `sites/` (HTML templates), `Frontend_Nextjs/` (migrated Next.js sites)  
 **Evidence type:** Static codebase analysis; no live HTTP crawl, no Search Console, no Lighthouse runs  
-**Handbook alignment:** `Ongoing DOCS/Technical_SEO/` — principles of crawlability, indexability, renderability, measurability, enforceability, observability
+**Handbook alignment:** `Ongoing DOCS/SEO/technical-seo/` — principles of crawlability, indexability, renderability, measurability, enforceability, observability
 
 ---
 
@@ -251,7 +251,7 @@
 | 6.2 | Submit sitemaps and monitor index coverage | Human | GSC index status |
 | 6.3 | Run Lighthouse CI or `web-vitals` RUM on homepage + service + product + category | `@senior-frontend-specialist` | CWV passes |
 | 6.4 | Run Rich Results Test / Schema Markup Validator on all structured-data routes | `Technical_SEO_expert` | Validator screenshots |
-| 6.5 | Document post-launch SEO monitoring cadence in `Ongoing DOCS/Technical_SEO/devops-observability/` | `Technical_SEO_expert` | Doc on disk |
+| 6.5 | Document post-launch SEO monitoring cadence in `Ongoing DOCS/SEO/technical-seo/devops-observability/` | `Technical_SEO_expert` | Doc on disk |
 
 ---
 

@@ -30,24 +30,14 @@ The system helps teams ship websites that can be crawled, indexed, understood, t
 
 ## Architecture
 
+This discipline lives under `Ongoing DOCS/SEO/technical-seo/`. Shared SEO taxonomy: `Ongoing DOCS/SEO/README.md`.
+
 ```text
-Technical_SEO/
-  README.md
-  00-documentation-map.md
-  01-brainstorming-and-architecture-decisions.md
-  02-principles.md
-  architecture/
-  on-page/
-  media/
-  performance/
-  security-http/
-  accessibility-international-local/
-  devops-observability/
-  testing-auditing/
-  rules/
-  patterns/
-  templates/
-  checklists/
+Ongoing DOCS/SEO/
+  technical-seo/          ← this handbook
+  on-page-seo/
+  off-page-seo/
+```
   execution/tasks.md
 ```
 

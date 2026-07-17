@@ -71,7 +71,9 @@ export function HomeHeroKineticHeadline({
       return;
     }
 
+    // Hide before first paint so deferred mount never flashes full title text.
     setInitialHiddenState(headlineRef.current, accentRef.current);
+    headlineRef.current.setAttribute("data-hero-headline-hidden", "true");
   }, [isAnimatedTier, titleLines, titleAccent]);
 
   useEffect(() => {

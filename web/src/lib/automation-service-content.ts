@@ -224,7 +224,7 @@ export const AUTOMATION_ENGAGEMENT_SECTION = {
     {
       name: "Workflow Audit",
       iconKey: "workflow-audit",
-      price: "From $1,500",
+      price: "From $300",
       description: "Identify bottlenecks, manual effort, and automation opportunities.",
       features: [
         "Workflow mapping",

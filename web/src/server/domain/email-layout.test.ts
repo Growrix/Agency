@@ -43,6 +43,7 @@ describe("email layout", () => {
     assert.match(html, /href="https:\/\/www\.growrixos\.com"/);
     assert.doesNotMatch(html, /localhost/);
   });
+
   it("normalizes sender display name to Growrix OS", () => {
     assert.equal(resolveTransactionalFromEmail("Growrix <hello@growrixos.com>"), "Growrix OS <hello@growrixos.com>");
     assert.equal(resolveTransactionalFromEmail("hello@growrixos.com"), "Growrix OS <hello@growrixos.com>");

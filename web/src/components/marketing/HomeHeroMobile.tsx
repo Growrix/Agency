@@ -1,5 +1,6 @@
 "use client";
 
+import { useReducedMotion } from "framer-motion";
 import {
   ArrowRightIcon,
   CalendarDaysIcon,
@@ -17,6 +18,7 @@ import { HomeHeroKineticHeadline } from "@/components/marketing/hero-motion/Home
 import { HomeHeroKineticSubheadLines } from "@/components/marketing/hero-motion/HomeHeroKineticSubhead";
 import { HomeHeroShowcaseMotion } from "@/components/marketing/hero-motion/HomeHeroShowcaseMotion";
 import { HomeHeroTrustMotion } from "@/components/marketing/hero-motion/HomeHeroTrustMotion";
+import { useHeroMotionOptional } from "@/components/marketing/hero-motion/HeroMotionContext";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import type { HtmlProfileHeroSlide } from "@/components/sections/HtmlProfileHeroCarousel";
@@ -33,32 +35,35 @@ type HomeHeroMobileProps = {
 
 export function HomeHeroMobile({
   badge,
-  title,
   slides,
   emptyFallbackSlide,
 }: HomeHeroMobileProps) {
-  const useStructuredTitle = !title;
+  const reduced = useReducedMotion();
+  const motion = useHeroMotionOptional();
+  // Always kinetic — CMS plain title bypass caused a visible pop before animations.
+  const mobileCopyPending = Boolean(
+    !reduced &&
+      motion &&
+      motion.tier !== "reduced" &&
+      !motion.copySequenceStarted,
+  );
 
   return (
     <div className="home-hero-mobile w-full">
       <section className="home-hero-mobile__intro" aria-label="Growrix OS hero">
-        <div className="home-hero-mobile__copy">
+        <div className={`home-hero-mobile__copy ${mobileCopyPending ? "hero-copy-pending" : ""}`}>
           <HomeHeroMotionReveal phase="badge" className="home-hero-mobile__badge-wrap">
             <Badge tone="primary" dot className="home-hero-mobile__badge">
               {badge}
             </Badge>
           </HomeHeroMotionReveal>
 
-          {useStructuredTitle ? (
-            <HomeHeroKineticHeadline
-              titleLines={HOME_HERO_COPY.titleLines}
-              titleAccent={HOME_HERO_COPY.titleAccent}
-              className={HERO_MOBILE_DISPLAY_TITLE_CLASS}
-              variant="mobile"
-            />
-          ) : (
-            <h1 className={HERO_MOBILE_DISPLAY_TITLE_CLASS}>{title}</h1>
-          )}
+          <HomeHeroKineticHeadline
+            titleLines={HOME_HERO_COPY.titleLines}
+            titleAccent={HOME_HERO_COPY.titleAccent}
+            className={HERO_MOBILE_DISPLAY_TITLE_CLASS}
+            variant="mobile"
+          />
 
           <HomeHeroKineticSubheadLines
             lines={HOME_HERO_COPY.mobileDescriptionLines}

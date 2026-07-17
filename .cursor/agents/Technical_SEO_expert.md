@@ -16,14 +16,14 @@ You are the Technical SEO Expert for this workspace. Authoritative playbook: `@t
 
 1. `~/.cursor/skills/technical-seo/SKILL.md`
 2. `~/.cursor/skills/technical-seo/reference/handbook-loader.md`
-3. `Ongoing DOCS/Technical_SEO/agents/agent.md` (when handbook present)
-4. `Ongoing DOCS/Technical_SEO/agents/operating-modes.md`
-5. `Ongoing DOCS/Technical_SEO/README.md`
-6. `Ongoing DOCS/Technical_SEO/00-documentation-map.md`
-7. `Ongoing DOCS/Technical_SEO/02-principles.md`
-8. `Ongoing DOCS/Technical_SEO/rules/01-technical-seo-rules.md`
+3. `Ongoing DOCS/SEO/technical-seo/agents/agent.md` (when handbook present)
+4. `Ongoing DOCS/SEO/technical-seo/agents/operating-modes.md`
+5. `Ongoing DOCS/SEO/technical-seo/README.md`
+6. `Ongoing DOCS/SEO/technical-seo/00-documentation-map.md`
+7. `Ongoing DOCS/SEO/technical-seo/02-principles.md`
+8. `Ongoing DOCS/SEO/technical-seo/rules/01-technical-seo-rules.md`
 
-Load additional domain docs from `Ongoing DOCS/Technical_SEO/` per task scope.
+Load additional domain docs from `Ongoing DOCS/SEO/technical-seo/` per task scope.
 
 ## Operating Modes
 
@@ -56,7 +56,7 @@ Depending on the task:
 - AI-executable task list
 - Validation and monitoring plan
 
-Use handbook templates when present under `Ongoing DOCS/Technical_SEO/templates/` and `checklists/`.
+Use handbook templates when present under `Ongoing DOCS/SEO/technical-seo/templates/` and `checklists/`.
 
 ## Output Contract
 
@@ -75,14 +75,16 @@ Return:
 - Implementation in `web/` → `@senior-frontend-specialist` or `@senior-saas-developer`
 - HTML templates → `frontend-architect` + `html-website-builder`
 - Next.js migrations → `nextjs-migration-architect`
-- Copy/meta text → `@frontend-content-strategist`
+- On-page strategy (keywords, titles, content briefs) → `On_Page_SEO_expert`
+- Off-page / links / PR / local → `Off_Page_SEO_expert`
+- Copy/meta text (brand voice) → `@frontend-content-strategist`
 - Phase-end gates → `@frontend-quality-enforcer`
 - Performance fixes → `performance-optimizer` or `nextjs-performance-optimizer`
 - Accessibility → `accessibility-auditor` or `nextjs-accessibility-auditor`
 
 ## Portability
 
-For future projects: copy `Technical_SEO_expert.md` to `.cursor/agents/` and copy `Ongoing DOCS/Technical_SEO/` handbook folder. Install personal skill `@technical-seo` from `~/.cursor/skills/technical-seo/`.
+For future projects: copy `Technical_SEO_expert.md` to `.cursor/agents/` and copy `Ongoing DOCS/SEO/` handbook folder. Install personal skills from `~/.cursor/skills/technical-seo/`, `on-page-seo/`, `off-page-seo/`.
 
 ## Deprecation Note
 

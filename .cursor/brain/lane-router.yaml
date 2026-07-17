@@ -23,11 +23,15 @@ lanes:
       - senior-saas-developer
       - senior-frontend-specialist
       - Technical_SEO_expert
+      - On_Page_SEO_expert
+      - Off_Page_SEO_expert
     primary_skills:
       - senior-saas-developer
       - senior-frontend-specialist
       - clerk-nextjs-auth
       - technical-seo
+      - on-page-seo
+      - off-page-seo
     phase_end_gate_agent: frontend-quality-enforcer
     verify_command: npm run health:check
     verify_cwd: web/
@@ -45,10 +49,14 @@ lanes:
       - design-system-architect
       - frontend-content-strategist
       - Technical_SEO_expert
+      - On_Page_SEO_expert
+      - Off_Page_SEO_expert
     primary_skills:
       - html-website-builder
       - frontend-content-strategist
       - technical-seo
+      - on-page-seo
+      - off-page-seo
     phase_end_gate_agent: frontend-quality-enforcer
     verify_skill: .cursor/skills/html-website-builder/SKILL.md
     commands:
@@ -65,10 +73,14 @@ lanes:
       - senior-frontend-specialist
       - tailwind-design-system-architect
       - Technical_SEO_expert
+      - On_Page_SEO_expert
+      - Off_Page_SEO_expert
     primary_skills:
       - nextjs-site-migrator
       - senior-frontend-specialist
       - technical-seo
+      - on-page-seo
+      - off-page-seo
     phase_end_gate_agent: frontend-quality-enforcer
     verify_command: pnpm build
     commands:

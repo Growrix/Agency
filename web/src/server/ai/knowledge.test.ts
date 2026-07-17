@@ -65,13 +65,13 @@ describe("searchKnowledgeDocuments", () => {
 
   it("returns current SaaS MVP pricing", () => {
     const content = topContent("SaaS MVP cost");
-    assert.match(content, /\$9,?500|9 500/i);
+    assert.match(content, /\$1,?500|1 500/i);
     assert.doesNotMatch(content, /\$24,?000|24k/i);
   });
 
   it("returns current automation audit pricing", () => {
     const content = topContent("Automation audit price");
-    assert.match(content, /\$1,?500|1 500/i);
+    assert.match(content, /\$300\b|300/i);
     assert.doesNotMatch(content, /\$3,?500|3\.5k/i);
   });
 

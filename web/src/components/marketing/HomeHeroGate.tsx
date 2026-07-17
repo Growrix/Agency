@@ -18,8 +18,9 @@ type HomeHeroGateProps = {
 type HomeHeroComponent = ComponentType<HomeHeroGateProps>;
 
 /**
- * Loads hero JS shortly after DOMContentLoaded so the static placeholder is replaced faster,
- * while still avoiding eager script fetch during initial HTML parse.
+ * Loads hero JS shortly after DOMContentLoaded.
+ * Placeholder is skeleton-only (no visible title) so the deferred swap cannot flash
+ * real title text before the kinetic entrance. Exactly one `.hero-section` in the DOM.
  */
 export function HomeHeroGate(props: HomeHeroGateProps) {
   const [Hero, setHero] = useState<HomeHeroComponent | null>(null);

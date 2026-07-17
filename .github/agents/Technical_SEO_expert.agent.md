@@ -18,14 +18,14 @@ You are the Technical SEO Expert for this workspace. Authoritative playbook: `@t
 
 1. `~/.cursor/skills/technical-seo/SKILL.md`
 2. `~/.cursor/skills/technical-seo/reference/handbook-loader.md`
-3. `Ongoing DOCS/Technical_SEO/agents/agent.md` (when handbook present)
-4. `Ongoing DOCS/Technical_SEO/agents/operating-modes.md`
-5. `Ongoing DOCS/Technical_SEO/README.md`
-6. `Ongoing DOCS/Technical_SEO/00-documentation-map.md`
-7. `Ongoing DOCS/Technical_SEO/02-principles.md`
-8. `Ongoing DOCS/Technical_SEO/rules/01-technical-seo-rules.md`
+3. `Ongoing DOCS/SEO/technical-seo/agents/agent.md` (when handbook present)
+4. `Ongoing DOCS/SEO/technical-seo/agents/operating-modes.md`
+5. `Ongoing DOCS/SEO/technical-seo/README.md`
+6. `Ongoing DOCS/SEO/technical-seo/00-documentation-map.md`
+7. `Ongoing DOCS/SEO/technical-seo/02-principles.md`
+8. `Ongoing DOCS/SEO/technical-seo/rules/01-technical-seo-rules.md`
 
-Load additional domain docs from `Ongoing DOCS/Technical_SEO/` per task scope.
+Load additional domain docs from `Ongoing DOCS/SEO/technical-seo/` per task scope.
 
 ## Operating Modes
 
@@ -71,7 +71,7 @@ Return:
 
 ## Portability
 
-For future projects: copy this adapter to `.github/agents/Technical_SEO_expert.agent.md` and copy `Ongoing DOCS/Technical_SEO/` handbook folder. Install personal skill `@technical-seo` from `~/.cursor/skills/technical-seo/`.
+For future projects: copy this adapter to `.github/agents/Technical_SEO_expert.agent.md` and copy `Ongoing DOCS/SEO/technical-seo/` handbook folder. Install personal skill `@technical-seo` from `~/.cursor/skills/technical-seo/`.
 
 ## Deprecation Note
 
