@@ -1,0 +1,882 @@
+/* Scoped visual system for the Automation service page.
+   Uses existing global tokens so the redesign stays consistent with the
+   rest of the site while adding dark, glass-morphic, teal-accented surfaces. */
+
+/* ---------- Hero ---------- */
+.heroCopy {
+  max-width: 36rem;
+}
+
+.heroMobile {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heroTitleAccent :global(.marketing-title-accent),
+.heroMobile :global(.home-mobile-marketing__title-accent),
+.sectionHeaderCenter :global(.marketing-title-accent) {
+  background: linear-gradient(90deg, var(--color-primary), #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroEyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.heroPanel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  padding: 1.5rem;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.heroPanelGlow {
+  position: absolute;
+  top: -40%;
+  right: -25%;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-primary), transparent 70%);
+  opacity: 0.16;
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.heroIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-primary) 16%, transparent);
+  color: var(--color-primary);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--color-primary) 40%, transparent);
+}
+
+.heroPillars {
+  margin-top: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.heroPillar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.heroPillarIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.heroTrust {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  opacity: 0.7;
+}
+
+.heroTrustLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.heroTrustLogos {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.heroTrustLogo {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ---------- Section headings ---------- */
+.sectionHeaderCenter {
+  text-align: center;
+  margin-inline: auto;
+}
+
+/* ---------- Workflow examples ---------- */
+.workflowCards {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.workflowCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.5rem;
+}
+
+.workflowCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.4;
+}
+
+.workflowCardTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.workflowTimeline {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.workflowTimeline::before {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dashed color-mix(in srgb, var(--color-border) 80%, transparent);
+  z-index: 0;
+}
+
+.workflowNode {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 4.5rem;
+  flex: 1;
+}
+
+.workflowNodeCircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-surface);
+}
+
+.workflowNodeCircleAi {
+  border-color: color-mix(in srgb, var(--color-primary) 70%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+}
+
+.workflowNodeLabel {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--color-text-muted);
+}
+
+.workflowOutcome {
+  position: relative;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+}
+
+.workflowOutcomeLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.workflowOutcomeText {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.workflowCardsMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.workflowCardMobile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.25rem;
+}
+
+.workflowCardMobile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.4;
+}
+
+.workflowCardTitleMobile {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.workflowTimelineMobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-left: 1.75rem;
+}
+
+.workflowTimelineMobile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1rem;
+  width: 1px;
+  border-left: 1px dashed var(--color-border);
+}
+
+.workflowNodeMobile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.workflowNodeMobileCircle {
+  position: absolute;
+  left: -1.75rem;
+  top: 0;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.workflowNodeMobileCircleAi {
+  border-color: color-mix(in srgb, var(--color-primary) 70%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+}
+
+.workflowNodeMobileText {
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.workflowOutcomeMobile {
+  position: relative;
+  margin-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+}
+
+/* ---------- Automation types grid ---------- */
+.typesGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.typeCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.25rem;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.typeCard:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.typeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  margin-bottom: 1rem;
+}
+
+.typeIconPurple {
+  color: #a78bfa;
+  background: rgba(167, 139, 250, 0.12);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.typeIconBlue {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+.typeIconGreen {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.typeIconCyan {
+  color: #22d3ee;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.typeIconOrange {
+  color: #fb923c;
+  background: rgba(251, 146, 60, 0.12);
+  border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.typeIconGray {
+  color: #9ca3af;
+  background: rgba(156, 163, 175, 0.12);
+  border: 1px solid rgba(156, 163, 175, 0.2);
+}
+
+.typeTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.typeDescription {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.typeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ---------- Metrics ---------- */
+.metricsGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.metricCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.metricCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.4;
+}
+
+.metricIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.metricLabel {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.metricDescription {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Why build ---------- */
+.whyGrid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.whyCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface);
+  padding: 1.5rem;
+}
+
+.whyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.whyTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.whyDescription {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Process ---------- */
+.processTimeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.processTimeline::before {
+  content: "";
+  position: absolute;
+  top: 1.75rem;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  border-top: 2px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
+  z-index: 0;
+}
+
+.processStep {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.processNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 0 0 6px var(--color-surface);
+}
+
+.processTitle {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.processDescription {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  padding: 0 0.5rem;
+}
+
+.processTimelineMobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-left: 2.5rem;
+}
+
+.processTimelineMobile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.25rem;
+  width: 1px;
+  border-left: 2px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
+  z-index: 0;
+}
+
+.processStepMobile {
+  position: relative;
+  z-index: 1;
+}
+
+.processNumberMobile {
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* ---------- Pricing ---------- */
+.pricingGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  align-items: stretch;
+}
+
+.pricingCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pricingFeatured {
+  border: 1px solid var(--color-primary);
+  background: color-mix(in srgb, var(--color-surface) 96%, var(--color-primary) 4%);
+  box-shadow:
+    0 0 0 1px var(--color-primary),
+    0 20px 48px rgba(0, 0, 0, 0.3);
+}
+
+.pricingFeaturedBadge {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.pricingHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pricingTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.pricingIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.pricingPrice {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.pricingCadence {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.pricingDescription {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.pricingFeatures {
+  margin-top: 1.25rem;
+  list-style: none;
+  padding: 0;
+  flex: 1;
+}
+
+.pricingFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.pricingFeatureIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.pricingCta {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.pricingFooter {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- FAQ ---------- */
+.faqGrid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.faqColumn :global(.divide-y) > * {
+  border-color: var(--color-border);
+}
+
+/* ---------- CTA ---------- */
+.ctaBand {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-contrast);
+  padding: 3rem 2rem;
+}
+
+.ctaBand::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 20% 50%,
+    color-mix(in srgb, var(--color-primary) 18%, transparent),
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.ctaBand::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+.ctaBandMobile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-contrast);
+  padding: 1.5rem;
+}
+
+.ctaBandMobile::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+.ctaTitleAccent :global(.marketing-title-accent) {
+  background: linear-gradient(90deg, var(--color-primary), #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1023px) {
+  .processTimeline {
+    grid-template-columns: 1fr;
+  }
+
+  .processTimeline::before {
+    display: none;
+  }
+
+  .processDescription {
+    padding: 0;
+  }
+}
+
+@media (min-width: 640px) {
+  .typesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .whyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .typesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .whyGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pricingGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .faqGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .workflowCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

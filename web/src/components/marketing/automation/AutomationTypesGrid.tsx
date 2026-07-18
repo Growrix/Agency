@@ -1,0 +1,109 @@
+import {
+  UsersIcon,
+  CloudIcon,
+  RocketLaunchIcon,
+  SparklesIcon,
+  ChartBarIcon,
+  CogIcon,
+} from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { SectionHeading } from "@/components/primitives/SectionHeading";
+import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { RevealGroup, RevealItem } from "@/components/motion/Motion";
+import { AUTOMATION_TYPES_SECTION } from "@/lib/automation-service-content";
+import { cn } from "@/lib/utils";
+import styles from "./AutomationPage.module.css";
+
+const TYPE_ICONS = [
+  { icon: UsersIcon, tone: "purple" },
+  { icon: CloudIcon, tone: "blue" },
+  { icon: RocketLaunchIcon, tone: "green" },
+  { icon: SparklesIcon, tone: "cyan" },
+  { icon: ChartBarIcon, tone: "orange" },
+  { icon: CogIcon, tone: "gray" },
+] as const;
+
+type TypeItem = (typeof AUTOMATION_TYPES_SECTION.items)[number];
+
+function TypeCard({ item, index }: { item: TypeItem; index: number }) {
+  const { icon: Icon, tone } = TYPE_ICONS[index % TYPE_ICONS.length];
+  const toneClass =
+    tone === "purple"
+      ? styles.typeIconPurple
+      : tone === "blue"
+        ? styles.typeIconBlue
+        : tone === "green"
+          ? styles.typeIconGreen
+          : tone === "cyan"
+            ? styles.typeIconCyan
+            : tone === "orange"
+              ? styles.typeIconOrange
+              : styles.typeIconGray;
+
+  return (
+    <RevealItem className="h-full">
+      <article className={styles.typeCard}>
+        <div className={cn(styles.typeIcon, toneClass)}>
+          <Icon className="size-5" />
+        </div>
+        <h3 className={styles.typeTitle}>{item.title}</h3>
+        <p className={styles.typeDescription}>{item.description}</p>
+        <a href="#pricing" className={styles.typeLink}>
+          Learn more <ArrowRightIcon className="size-4" />
+        </a>
+      </article>
+    </RevealItem>
+  );
+}
+
+function AutomationTypesDesktop() {
+  return (
+    <>
+      <div className={cn("mx-auto max-w-2xl text-center", styles.sectionHeaderCenter)}>
+        <SectionHeading
+          eyebrow={AUTOMATION_TYPES_SECTION.eyebrow}
+          title={AUTOMATION_TYPES_SECTION.title}
+          titleLead={AUTOMATION_TYPES_SECTION.titleLead}
+          titleAccent={AUTOMATION_TYPES_SECTION.titleAccent}
+          description={AUTOMATION_TYPES_SECTION.description}
+          align="center"
+        />
+      </div>
+      <RevealGroup className={styles.typesGrid} stagger={0.06}>
+        {AUTOMATION_TYPES_SECTION.items.map((item, index) => (
+          <TypeCard key={item.title} item={item} index={index} />
+        ))}
+      </RevealGroup>
+    </>
+  );
+}
+
+function AutomationTypesMobile() {
+  return (
+    <div>
+      <MobileMarketingSectionHeader
+        eyebrow={AUTOMATION_TYPES_SECTION.eyebrow}
+        titleLead={AUTOMATION_TYPES_SECTION.titleLead}
+        titleAccent={AUTOMATION_TYPES_SECTION.titleAccent}
+        description={AUTOMATION_TYPES_SECTION.description}
+        align="left"
+        className="home-mobile-marketing__header--left max-w-none"
+      />
+      <div className={styles.typesGrid}>
+        {AUTOMATION_TYPES_SECTION.items.map((item, index) => (
+          <TypeCard key={item.title} item={item} index={index} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function AutomationTypesGrid() {
+  return (
+    <MarketingViewportGate
+      mobile={<AutomationTypesMobile />}
+      desktop={<AutomationTypesDesktop />}
+    />
+  );
+}

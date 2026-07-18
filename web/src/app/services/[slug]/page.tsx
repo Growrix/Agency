@@ -25,13 +25,21 @@ import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { WebsiteLaunchProcessTimeline } from "@/components/sections/WebsiteLaunchProcessTimeline";
-import { AutomationWorkflowShowcase } from "@/components/sections/AutomationWorkflowShowcase";
 import { SeoVisibilityFoundation } from "@/components/sections/SeoVisibilityFoundation";
 import { SeoDeliverablesChecklist } from "@/components/sections/SeoDeliverablesChecklist";
 import { TechnicalSeoSetupCategories } from "@/components/sections/TechnicalSeoSetupCategories";
 import { PricingTier, type Tier } from "@/components/sections/PricingTier";
 import { Accordion } from "@/components/sections/Accordion";
 import { CTABand } from "@/components/sections/CTABand";
+import { AutomationHero } from "@/components/marketing/automation/AutomationHero";
+import { AutomationWorkflowSection } from "@/components/marketing/automation/AutomationWorkflowSection";
+import { AutomationTypesGrid } from "@/components/marketing/automation/AutomationTypesGrid";
+import { AutomationOutcomesMetrics } from "@/components/marketing/automation/AutomationOutcomesMetrics";
+import { AutomationWhyBuild } from "@/components/marketing/automation/AutomationWhyBuild";
+import { AutomationProcess } from "@/components/marketing/automation/AutomationProcess";
+import { AutomationPricing } from "@/components/marketing/automation/AutomationPricing";
+import { AutomationFAQ } from "@/components/marketing/automation/AutomationFAQ";
+import { AutomationCTA } from "@/components/marketing/automation/AutomationCTA";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { PortfolioCard } from "@/components/sections/PortfolioCard";
 import { HomeHtmlPreviewSection } from "@/components/marketing/HomeHtmlPreviewSection";
@@ -48,8 +56,6 @@ import { PrincipleCardsMobile } from "@/components/marketing/services/PrincipleC
 import { WebsitesOutcomesDesktop } from "@/components/marketing/services/WebsitesOutcomesDesktop";
 import { WebsitesPrinciplesDesktop } from "@/components/marketing/services/WebsitesPrinciplesDesktop";
 import { AiSolutionsMobile } from "@/components/marketing/services/AiSolutionsMobile";
-import { AutomationTypesMobile } from "@/components/marketing/services/AutomationTypesMobile";
-import { AutomationWorkflowShowcaseMobile } from "@/components/marketing/services/AutomationWorkflowShowcaseMobile";
 import { MobileAppsProductTypesMobile } from "@/components/marketing/services/MobileAppsProductTypesMobile";
 import { SeoDeliverablesChecklistMobile } from "@/components/marketing/services/SeoDeliverablesChecklistMobile";
 import { SeoVisibilityFoundationMobile } from "@/components/marketing/services/SeoVisibilityFoundationMobile";
@@ -117,12 +123,9 @@ import {
 import {
   AUTOMATION_ENGAGEMENT_SECTION,
   AUTOMATION_OUTCOMES_SECTION,
-  AUTOMATION_PROCESS_SECTION,
   AUTOMATION_SERVICE_CTA,
   AUTOMATION_SERVICE_FAQ,
-  AUTOMATION_SERVICE_FAQ_SECTION,
   AUTOMATION_SERVICE_HERO,
-  AUTOMATION_TYPES_SECTION,
   AUTOMATION_WHY_BUILD_SECTION,
   AUTOMATION_WORKFLOW_SHOWCASE_SECTION,
 } from "@/lib/automation-service-content";
@@ -621,36 +624,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             }
           />
         ) : isAutomationService ? (
-          <MarketingViewportGate
-            mobile={
-              <EngagementTiersMobile
-                eyebrow={AUTOMATION_ENGAGEMENT_SECTION.eyebrow}
-                title={AUTOMATION_ENGAGEMENT_SECTION.title}
-                titleLead={AUTOMATION_ENGAGEMENT_SECTION.titleLead}
-                titleAccent={AUTOMATION_ENGAGEMENT_SECTION.titleAccent}
-                tiers={copy.tiers}
-              />
-            }
-            desktop={
-              <>
-                <SectionHeading
-                  eyebrow={AUTOMATION_ENGAGEMENT_SECTION.eyebrow}
-                  title={AUTOMATION_ENGAGEMENT_SECTION.title}
-                  titleLead={AUTOMATION_ENGAGEMENT_SECTION.titleLead}
-                  titleAccent={AUTOMATION_ENGAGEMENT_SECTION.titleAccent}
-                  description={AUTOMATION_ENGAGEMENT_SECTION.description}
-                  align="center"
-                />
-                <RevealGroup className="mt-12 grid auto-rows-fr gap-5 lg:grid-cols-3" stagger={0.08}>
-                  {copy.tiers.map((t) => (
-                    <RevealItem key={t.name} className="h-full">
-                      <PricingTier tier={t} className="h-full" />
-                    </RevealItem>
-                  ))}
-                </RevealGroup>
-              </>
-            }
-          />
+          <AutomationPricing tiers={copy.tiers} />
         ) : isTechnicalSeoService ? (
           <MarketingViewportGate
             mobile={
@@ -815,7 +789,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Section {...marketingSection("service-detail", "hero")} layout="viewport" className="hero-section relative overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" aria-hidden />
         <Container className={HERO_VIEWPORT_CONTAINER_CLASS}>
-          {isConversionServicePage ? (
+          {isAutomationService ? (
+            <AutomationHero service={service} copy={copy} />
+          ) : isConversionServicePage ? (
             <MarketingViewportGate
               mobile={
                 <ServiceDetailHeroMobile
@@ -827,11 +803,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                         ? SAAS_SERVICE_HERO.headlineLead
                         : isMobileAppsService
                           ? MOBILE_APPS_SERVICE_HERO.headlineLead
-                          : isAutomationService
-                            ? AUTOMATION_SERVICE_HERO.headlineLead
-                            : isTechnicalSeoService
-                              ? TECHNICAL_SEO_SERVICE_HERO.headlineLead
-                              : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineLead
+                          : isTechnicalSeoService
+                            ? TECHNICAL_SEO_SERVICE_HERO.headlineLead
+                            : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineLead
                   }
                   headlineAccent={
                     isWebsitesService
@@ -840,11 +814,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                         ? SAAS_SERVICE_HERO.headlineAccent
                         : isMobileAppsService
                           ? MOBILE_APPS_SERVICE_HERO.headlineAccent
-                          : isAutomationService
-                            ? AUTOMATION_SERVICE_HERO.headlineAccent
-                            : isTechnicalSeoService
-                              ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
-                              : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent
+                          : isTechnicalSeoService
+                            ? TECHNICAL_SEO_SERVICE_HERO.headlineAccent
+                            : AI_BUSINESS_SYSTEMS_SERVICE_HERO.headlineAccent
                   }
                   description={copy.description}
                   primaryCta={copy.primaryCta}
@@ -906,52 +878,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             className="overflow-x-hidden"
           >
             <Container className="min-w-0">
-              <MarketingViewportGate
-                mobile={<AutomationWorkflowShowcaseMobile />}
-                desktop={
-                  <>
-                    <SectionHeading
-                      eyebrow={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.eyebrow}
-                      title={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.title}
-                      titleLead={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.titleLead}
-                      titleAccent={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.titleAccent}
-                      description={AUTOMATION_WORKFLOW_SHOWCASE_SECTION.description}
-                    />
-                    <AutomationWorkflowShowcase
-                      workflows={[...AUTOMATION_WORKFLOW_SHOWCASE_SECTION.workflows]}
-                    />
-                  </>
-                }
-              />
+              <AutomationWorkflowSection />
             </Container>
           </Section>
 
           <Section {...marketingSection("service-detail-automation", "automation-types")}>
             <Container>
-              <MarketingViewportGate
-                mobile={<AutomationTypesMobile />}
-                desktop={
-                  <>
-                    <SectionHeading
-                      eyebrow={AUTOMATION_TYPES_SECTION.eyebrow}
-                      title={AUTOMATION_TYPES_SECTION.title}
-                      titleLead={AUTOMATION_TYPES_SECTION.titleLead}
-                      titleAccent={AUTOMATION_TYPES_SECTION.titleAccent}
-                      description={AUTOMATION_TYPES_SECTION.description}
-                    />
-                    <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-                      {AUTOMATION_TYPES_SECTION.items.map((item) => (
-                        <RevealItem key={item.title} className="h-full">
-                          <Card hoverable className="h-full">
-                            <h3 className="font-display text-lg tracking-tight">{item.title}</h3>
-                            <p className="mt-2 text-sm leading-6 text-text-muted">{item.description}</p>
-                          </Card>
-                        </RevealItem>
-                      ))}
-                    </RevealGroup>
-                  </>
-                }
-              />
+              <AutomationTypesGrid />
             </Container>
           </Section>
         </>
@@ -1250,39 +1183,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               }
             />
           ) : isAutomationService ? (
-            <MarketingViewportGate
-              mobile={
-                <MobileFeatureGrid
-                  eyebrow={AUTOMATION_OUTCOMES_SECTION.eyebrow}
-                  title={AUTOMATION_OUTCOMES_SECTION.title}
-                  titleLead={AUTOMATION_OUTCOMES_SECTION.titleLead}
-                  titleAccent={AUTOMATION_OUTCOMES_SECTION.titleAccent}
-                  description={AUTOMATION_OUTCOMES_SECTION.description}
-                  items={AUTOMATION_OUTCOMES_SECTION.builds}
-                />
-              }
-              desktop={
-                <>
-                  <SectionHeading
-                    eyebrow={AUTOMATION_OUTCOMES_SECTION.eyebrow}
-                    title={AUTOMATION_OUTCOMES_SECTION.title}
-                    titleLead={AUTOMATION_OUTCOMES_SECTION.titleLead}
-                    titleAccent={AUTOMATION_OUTCOMES_SECTION.titleAccent}
-                    description={AUTOMATION_OUTCOMES_SECTION.description}
-                  />
-                  <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-                    {copy.builds.map((b) => (
-                      <RevealItem key={b.title} className="h-full">
-                        <Card hoverable className="h-full">
-                          <h3 className="font-display text-lg tracking-tight">{b.title}</h3>
-                          <p className="mt-2 text-sm text-text-muted leading-6">{b.description}</p>
-                        </Card>
-                      </RevealItem>
-                    ))}
-                  </RevealGroup>
-                </>
-              }
-            />
+            <AutomationOutcomesMetrics />
           ) : isTechnicalSeoService ? (
             <MarketingViewportGate
               mobile={
@@ -1503,39 +1404,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               }
             />
           ) : isAutomationService ? (
-            <MarketingViewportGate
-              mobile={
-                <MobilePrincipleList
-                  eyebrow={AUTOMATION_WHY_BUILD_SECTION.eyebrow}
-                  title={AUTOMATION_WHY_BUILD_SECTION.title}
-                  titleLead={AUTOMATION_WHY_BUILD_SECTION.titleLead}
-                  titleAccent={AUTOMATION_WHY_BUILD_SECTION.titleAccent}
-                  description={AUTOMATION_WHY_BUILD_SECTION.description}
-                  items={AUTOMATION_WHY_BUILD_SECTION.cards}
-                />
-              }
-              desktop={
-                <>
-                  <SectionHeading
-                    eyebrow={AUTOMATION_WHY_BUILD_SECTION.eyebrow}
-                    title={AUTOMATION_WHY_BUILD_SECTION.title}
-                    titleLead={AUTOMATION_WHY_BUILD_SECTION.titleLead}
-                    titleAccent={AUTOMATION_WHY_BUILD_SECTION.titleAccent}
-                    description={AUTOMATION_WHY_BUILD_SECTION.description}
-                  />
-                  <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2" stagger={0.07}>
-                    {copy.differentiators.map((d) => (
-                      <RevealItem key={d.title} className="h-full">
-                        <div className="h-full rounded-md border border-border bg-surface p-6">
-                          <h3 className="font-display text-xl tracking-tight">{d.title}</h3>
-                          <p className="mt-2 text-text-muted leading-7 text-pretty">{d.description}</p>
-                        </div>
-                      </RevealItem>
-                    ))}
-                  </RevealGroup>
-                </>
-              }
-            />
+            <AutomationWhyBuild />
           ) : isTechnicalSeoService ? (
             <MarketingViewportGate
               mobile={
@@ -1753,31 +1622,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               }
             />
           ) : isAutomationService ? (
-            <MarketingViewportGate
-              mobile={
-                <ProcessStepsMobile
-                  steps={[...AUTOMATION_PROCESS_SECTION.steps]}
-                  eyebrow={AUTOMATION_PROCESS_SECTION.eyebrow}
-                  titleLead={AUTOMATION_PROCESS_SECTION.titleLead}
-                  titleAccent={AUTOMATION_PROCESS_SECTION.titleAccent}
-                  description={AUTOMATION_PROCESS_SECTION.description}
-                />
-              }
-              desktop={
-                <>
-                  <SectionHeading
-                    eyebrow={AUTOMATION_PROCESS_SECTION.eyebrow}
-                    title={AUTOMATION_PROCESS_SECTION.title}
-                    titleLead={AUTOMATION_PROCESS_SECTION.titleLead}
-                    titleAccent={AUTOMATION_PROCESS_SECTION.titleAccent}
-                    description={AUTOMATION_PROCESS_SECTION.description}
-                  />
-                  <div className="mt-10">
-                    <WebsiteLaunchProcessTimeline steps={[...AUTOMATION_PROCESS_SECTION.steps]} />
-                  </div>
-                </>
-              }
-            />
+            <AutomationProcess />
           ) : isTechnicalSeoService ? (
             <MarketingViewportGate
               mobile={
@@ -2030,33 +1875,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               }
             />
           ) : isAutomationService ? (
-            <MarketingViewportGate
-              mobile={
-                <ServiceFaqMobile
-                  eyebrow={AUTOMATION_SERVICE_FAQ_SECTION.eyebrow}
-                  title={AUTOMATION_SERVICE_FAQ_SECTION.title}
-                  titleLead={AUTOMATION_SERVICE_FAQ_SECTION.titleLead}
-                  titleAccent={AUTOMATION_SERVICE_FAQ_SECTION.titleAccent}
-                  description={AUTOMATION_SERVICE_FAQ_SECTION.description}
-                  items={copy.faq.map((item) => ({ ...item }))}
-                />
-              }
-              desktop={
-                <>
-                  <SectionHeading
-                    eyebrow={AUTOMATION_SERVICE_FAQ_SECTION.eyebrow}
-                    title={AUTOMATION_SERVICE_FAQ_SECTION.title}
-                    titleLead={AUTOMATION_SERVICE_FAQ_SECTION.titleLead}
-                    titleAccent={AUTOMATION_SERVICE_FAQ_SECTION.titleAccent}
-                    description={AUTOMATION_SERVICE_FAQ_SECTION.description}
-                    align="center"
-                  />
-                  <div className="mt-10">
-                    <Accordion items={copy.faq} />
-                  </div>
-                </>
-              }
-            />
+            <AutomationFAQ items={copy.faq} />
           ) : isTechnicalSeoService ? (
             <MarketingViewportGate
               mobile={
@@ -2247,36 +2066,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           }
         />
       ) : isAutomationService ? (
-        <MarketingViewportGate
-          mobile={
-            <ProductLedFinalCTAMobile
-              eyebrow="Next step"
-              titleLead={AUTOMATION_SERVICE_CTA.titleLead}
-              titleAccent={AUTOMATION_SERVICE_CTA.titleAccent}
-              description={AUTOMATION_SERVICE_CTA.description}
-              primaryLabel={AUTOMATION_SERVICE_CTA.primaryLabel}
-              primaryHref={AUTOMATION_SERVICE_CTA.primaryHref}
-              secondaryLabel={AUTOMATION_SERVICE_CTA.secondaryLabel}
-              secondaryHref={AUTOMATION_SERVICE_CTA.secondaryHref}
-            />
-          }
-          desktop={
-            <CTABand
-              title={AUTOMATION_SERVICE_CTA.title}
-              titleLead={AUTOMATION_SERVICE_CTA.titleLead}
-              titleAccent={AUTOMATION_SERVICE_CTA.titleAccent}
-              description={AUTOMATION_SERVICE_CTA.description}
-              primary={{
-                label: AUTOMATION_SERVICE_CTA.primaryLabel,
-                href: AUTOMATION_SERVICE_CTA.primaryHref,
-              }}
-              secondary={{
-                label: AUTOMATION_SERVICE_CTA.secondaryLabel,
-                href: AUTOMATION_SERVICE_CTA.secondaryHref,
-              }}
-            />
-          }
-        />
+        <AutomationCTA />
       ) : isTechnicalSeoService ? (
         <MarketingViewportGate
           mobile={
