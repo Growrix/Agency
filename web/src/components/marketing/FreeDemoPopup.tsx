@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAuth, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { FreeDemoModal } from "@/components/marketing/FreeDemoModal";
-import { FREE_DEMO_SEEN_KEY, useFreeDemoStore } from "@/lib/free-demo-store";
+import {
+  FREE_DEMO_SEEN_KEY,
+  hasSeenFreeDemo,
+  markFreeDemoSeen,
+  useFreeDemoStore,
+} from "@/lib/free-demo-store";
 import { isClerkConfiguredClient } from "@/lib/clerk-client";
 import { Button, LinkButton } from "@/components/primitives/Button";
 
-const AUTO_OPEN_MS = 8000;
+const AUTO_OPEN_MS = 5000;
 
 export function FreeDemoPopup() {
   const isOpen = useFreeDemoStore((state) => state.isOpen);
@@ -15,18 +20,18 @@ export function FreeDemoPopup() {
   const open = useFreeDemoStore((state) => state.open);
   const close = useFreeDemoStore((state) => state.close);
   const openForm = useFreeDemoStore((state) => state.openForm);
-  const { isSignedIn } = useAuth();
 
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
-    if (window.localStorage.getItem(FREE_DEMO_SEEN_KEY) === "1") {
+    if (hasSeenFreeDemo()) {
       return;
     }
 
     const timer = window.setTimeout(() => {
-      window.localStorage.setItem(FREE_DEMO_SEEN_KEY, "1");
+      // Do not mark seen here — only mark when the visitor dismisses the modal
+      // so a reload before dismiss still shows the offer.
       open({ showForm: false });
     }, AUTO_OPEN_MS);
 
@@ -34,41 +39,26 @@ export function FreeDemoPopup() {
   }, [open]);
 
   function handleClose() {
+    markFreeDemoSeen();
     close();
   }
 
   function handleOpenForm() {
-    if (!isClerkConfiguredClient()) {
-      openForm();
-      return;
-    }
-    if (!isSignedIn) {
-      openForm();
-      return;
-    }
     openForm();
   }
 
   return (
-    <>
-      <FreeDemoModal
-        open={isOpen}
-        showForm={showForm}
-        onClose={handleClose}
-        onOpenForm={handleOpenForm}
-      />
-      {!isClerkConfiguredClient() ? null : showForm && isOpen && !isSignedIn ? (
-        <div className="sr-only" aria-live="polite">
-          Sign in required to submit the intake form.
-        </div>
-      ) : null}
-    </>
+    <FreeDemoModal
+      open={isOpen}
+      showForm={showForm}
+      onClose={handleClose}
+      onOpenForm={handleOpenForm}
+    />
   );
 }
 
 export function FreeDemoHeaderButton() {
-  const openForm = useFreeDemoStore((state) => state.openForm);
-  const { isSignedIn } = useAuth();
+  const openOffer = useFreeDemoStore((state) => state.openOffer);
 
   if (!isClerkConfiguredClient()) {
     return (
@@ -84,18 +74,36 @@ export function FreeDemoHeaderButton() {
       size="sm"
       variant="outline"
       className="hidden lg:inline-flex"
-      onClick={() => openForm()}
+      onClick={() => {
+        // Clear prior dismiss so header CTA always opens the offer panel.
+        if (typeof window !== "undefined") {
+          window.localStorage.removeItem(FREE_DEMO_SEEN_KEY);
+        }
+        openOffer();
+      }}
     >
-      {isSignedIn ? "Free demo" : "Claim free demo"}
+      Claim free demo
     </Button>
   );
 }
 
-export function FreeDemoAuthGate() {
+export function FreeDemoAuthGate({
+  title = "Almost done — sign in to submit",
+  description = "Create a free account or sign in. Your brief stays filled in and submits automatically after you authenticate.",
+  stayOnPage = true,
+}: {
+  title?: string;
+  description?: string;
+  /** Keep the visitor on the current page so the filled form can auto-submit. */
+  stayOnPage?: boolean;
+}) {
+  const returnUrl = stayOnPage && typeof window !== "undefined" ? window.location.href : undefined;
+
   if (!isClerkConfiguredClient()) {
     return (
       <div className="space-y-3 rounded-md border border-border bg-inset/20 p-4">
-        <p className="text-sm text-text">Sign in to claim your free demo and submit your project brief.</p>
+        <p className="text-sm font-medium text-text">{title}</p>
+        <p className="text-sm text-text-muted">{description}</p>
         <LinkButton href="/dashboard/login" fullWidth>
           Sign in to continue
         </LinkButton>
@@ -104,13 +112,14 @@ export function FreeDemoAuthGate() {
   }
 
   return (
-    <div className="space-y-3 rounded-md border border-border bg-inset/20 p-4">
-      <p className="text-sm text-text">Create a free account or sign in to claim your demo spot and submit your brief.</p>
+    <div className="space-y-3 rounded-md border border-primary/30 bg-primary/10 p-4">
+      <p className="text-sm font-medium text-text">{title}</p>
+      <p className="text-sm text-text-muted">{description}</p>
       <div className="flex flex-col gap-2 sm:flex-row">
-        <SignInButton mode="modal">
+        <SignInButton mode="modal" forceRedirectUrl={returnUrl} fallbackRedirectUrl={returnUrl}>
           <Button fullWidth>Sign in</Button>
         </SignInButton>
-        <SignUpButton mode="modal">
+        <SignUpButton mode="modal" forceRedirectUrl={returnUrl} fallbackRedirectUrl={returnUrl}>
           <Button fullWidth variant="outline">
             Sign up free
           </Button>

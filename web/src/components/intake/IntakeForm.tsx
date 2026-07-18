@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import { FreeDemoAuthGate } from "@/components/marketing/FreeDemoPopup";
 import { FileUploadField } from "@/components/intake/FileUploadField";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { isClerkConfiguredClient } from "@/lib/clerk-client";
+import { markFreeDemoSeen } from "@/lib/free-demo-store";
 import { cn } from "@/lib/utils";
 
 export type IntakeFormValues = {
@@ -136,13 +137,14 @@ function TagInput({
 }
 
 export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
+  const clerk = useClerk();
   const clerkEnabled = isClerkConfiguredClient();
-  const needsAuth = clerkEnabled && !isSignedIn;
 
   const [step, setStep] = useState(0);
   const [files, setFiles] = useState<File[]>([]);
   const [submitting, setSubmitting] = useState(false);
+  const [awaitingAuth, setAwaitingAuth] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [values, setValues] = useState<IntakeFormValues>({
@@ -162,43 +164,54 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
     must_have_features: [],
   });
 
+  const pendingSubmitRef = useRef(false);
+  const valuesRef = useRef(values);
+  const filesRef = useRef(files);
+
+  useEffect(() => {
+    valuesRef.current = values;
+    filesRef.current = files;
+  }, [values, files]);
+
   const progress = useMemo(() => ((step + 1) / STEPS.length) * 100, [step]);
 
   function update<K extends keyof IntakeFormValues>(key: K, value: IntakeFormValues[K]) {
     setValues((current) => ({ ...current, [key]: value }));
   }
 
-  async function handleSubmit() {
+  async function submitIntake() {
+    const current = valuesRef.current;
+    const currentFiles = filesRef.current;
     setSubmitting(true);
     setError(null);
     try {
       const formData = new FormData();
-      formData.set("business_name", values.business_name);
+      formData.set("business_name", current.business_name);
       formData.set(
         "industry",
-        values.industry === "Other" ? values.industry_custom.trim() : values.industry,
+        current.industry === "Other" ? current.industry_custom.trim() : current.industry,
       );
-      formData.set("target_audience", values.target_audience);
-      formData.set("brand_voice", values.brand_voice);
-      formData.set("business_description", values.business_description);
-      formData.set("goals", JSON.stringify(values.goals));
-      formData.set("competitors", JSON.stringify(values.competitors));
+      formData.set("target_audience", current.target_audience);
+      formData.set("brand_voice", current.brand_voice);
+      formData.set("business_description", current.business_description);
+      formData.set("goals", JSON.stringify(current.goals));
+      formData.set("competitors", JSON.stringify(current.competitors));
       formData.set(
         "reference_sites",
-        JSON.stringify(values.reference_sites.filter((item) => item.url.trim())),
+        JSON.stringify(current.reference_sites.filter((item) => item.url.trim())),
       );
       formData.set(
         "drive_links",
-        JSON.stringify(values.drive_links.filter((item) => item.url.trim())),
+        JSON.stringify(current.drive_links.filter((item) => item.url.trim())),
       );
       formData.set(
         "budget_range",
-        values.budget_range === "Custom" ? values.budget_custom.trim() : values.budget_range,
+        current.budget_range === "Custom" ? current.budget_custom.trim() : current.budget_range,
       );
-      formData.set("timeline", values.timeline);
-      formData.set("must_have_features", JSON.stringify(values.must_have_features));
+      formData.set("timeline", current.timeline);
+      formData.set("must_have_features", JSON.stringify(current.must_have_features));
       formData.set("is_free_demo", isFreeDemo ? "true" : "false");
-      for (const file of files) {
+      for (const file of currentFiles) {
         formData.append("files", file);
       }
 
@@ -216,6 +229,8 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
         throw new Error(payload?.error?.message ?? "Unable to submit your request.");
       }
 
+      markFreeDemoSeen();
+      setAwaitingAuth(false);
       setSuccessMessage(
         `Request submitted (${payload?.data?.submission_number ?? "confirmed"}). Check your dashboard for updates.`,
       );
@@ -227,14 +242,37 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
     }
   }
 
-  if (needsAuth) {
-    return (
-      <div className="space-y-4">
-        <FreeDemoAuthGate />
-        <p className="text-xs text-text-muted">After signing in, this form will continue where you left off.</p>
-      </div>
-    );
+  function handleSubmit() {
+    setError(null);
+
+    if (clerkEnabled && isLoaded && !isSignedIn) {
+      pendingSubmitRef.current = true;
+      setAwaitingAuth(true);
+      const returnUrl = typeof window !== "undefined" ? window.location.href : "/";
+      try {
+        clerk.openSignIn({
+          forceRedirectUrl: returnUrl,
+          fallbackRedirectUrl: returnUrl,
+        });
+      } catch {
+        // Fallback UI (FreeDemoAuthGate) remains visible below.
+      }
+      return;
+    }
+
+    void submitIntake();
   }
+
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn || !pendingSubmitRef.current) {
+      return;
+    }
+    pendingSubmitRef.current = false;
+    setAwaitingAuth(false);
+    void submitIntake();
+    // submitIntake closes over refs + stable props; intentionally omit from deps.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- auto-submit once after auth
+  }, [isLoaded, isSignedIn]);
 
   if (successMessage) {
     return (
@@ -535,6 +573,13 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
 
       {error ? <p className={cn("text-sm text-destructive")}>{error}</p> : null}
 
+      {awaitingAuth ? (
+        <FreeDemoAuthGate
+          title="Sign in to finish your free demo request"
+          description="Your answers are saved in this form. After you sign in or sign up, we submit automatically."
+        />
+      ) : null}
+
       <div className="flex flex-col gap-2 sm:flex-row sm:justify-between">
         <Button type="button" variant="ghost" disabled={step === 0 || submitting} onClick={() => setStep((s) => s - 1)}>
           Back
@@ -551,8 +596,8 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
             Continue
           </Button>
         ) : (
-          <Button type="button" disabled={submitting} onClick={() => void handleSubmit()}>
-            {submitting ? "Submitting…" : "Submit request"}
+          <Button type="button" disabled={submitting} onClick={() => handleSubmit()}>
+            {submitting ? "Submitting…" : awaitingAuth ? "Sign in to submit" : "Submit request"}
           </Button>
         )}
       </div>

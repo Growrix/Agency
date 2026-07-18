@@ -13,7 +13,11 @@ export function FreeDemoGate() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    return scheduleHomepageBundleLoad(() => setReady(true), { timing: "after-load" });
+    // Mount early so the 5s offer timer can start without waiting for full window load.
+    return scheduleHomepageBundleLoad(() => setReady(true), {
+      timing: "after-domcontentloaded",
+      useIdle: false,
+    });
   }, []);
 
   if (!ready) {
