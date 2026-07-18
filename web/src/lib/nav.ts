@@ -11,7 +11,7 @@ export const PRIMARY_NAV = [
       { label: "Mobile Apps", href: "/services/mobile-apps", description: "App launch sites, companion apps, and store-ready mobile experiences." },
       { label: "Automation", href: "/services/automation", description: "Operational systems that remove repetitive work." },
       { label: "Technical SEO", href: "/services/technical-seo", description: "One-time search, analytics, and Core Web Vitals setup." },
-      { label: "AI Business Systems", href: "/services/ai-business-systems", description: "Practical AI implementation for assistants, knowledge systems, and operational workflows." },
+      { label: "AI Business Systems", href: "/services/ai-business-systems", description: "Practical AI assistants for knowledge, support, sales, and operational workflows." },
     ],
   },
   {

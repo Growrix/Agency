@@ -75,6 +75,13 @@ describe("searchKnowledgeDocuments", () => {
     assert.doesNotMatch(content, /\$300\b|300/i);
   });
 
+  it("returns current AI business systems pricing", () => {
+    const content = topContent("AI business systems price");
+    assert.match(content, /\$499\b|499/i);
+    assert.match(content, /AI Business Systems/i);
+    assert.match(content, /\$1,?999\b|1999/i);
+  });
+
   it("surfaces the six public services including AI business systems", () => {
     const content = topContent("What services do you offer?");
     assert.match(content, /AI Business Systems/i);

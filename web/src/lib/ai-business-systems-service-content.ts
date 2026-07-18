@@ -3,224 +3,232 @@ import type { Stat } from "@/components/sections/StatBlock";
 
 export const AI_BUSINESS_SYSTEMS_SERVICE_STATS: Stat[] = [
   { value: "50+", label: "Digital assets built", hint: "Products, platforms, and operational systems" },
-  { value: "AI + Auto", label: "Automation expertise", hint: "Integrated AI and workflow implementation" },
+  { value: "AI + Auto", label: "Automation expertise", hint: "Integrated AI assistants and workflow implementation" },
   { value: "24h", label: "Average response time", hint: "Discovery and scoping inquiries" },
-  { value: "Business-first", label: "AI systems", hint: "Practical implementations, not experiments" },
+  { value: "Business-first", label: "AI assistants", hint: "Practical outcomes, not experiments" },
 ];
 
 export const AI_BUSINESS_SYSTEMS_SERVICE_HERO = {
-  headline: "AI systems that create leverage, not complexity.",
-  headlineLead: "AI systems that create leverage,",
-  headlineAccent: "not complexity.",
+  headline: "Practical AI that saves time, supports your team, and automates repetitive work.",
+  headlineLead: "Practical AI that saves time,",
+  headlineAccent: "supports your team, and automates repetitive work.",
   description:
-    "From AI assistants and content workflows to internal knowledge systems and customer support automation, we help businesses apply AI where it creates measurable value.",
-  secondaryCta: "Explore AI Systems",
+    "GrowrixOS builds AI assistants, internal knowledge tools, customer support assistants, and workflow automations that integrate into your existing business. Start small, grow over time, and partner long-term.",
+  secondaryCta: "Explore AI Solutions",
   secondaryHref: "#ai-solutions",
 } as const;
 
 export const AI_SOLUTIONS_SECTION = {
   id: "ai-solutions",
-  eyebrow: "AI solutions",
-  title: "Practical AI systems built for business operations.",
-  titleLead: "Practical AI systems built",
-  titleAccent: "for business operations.",
+  eyebrow: "Common AI solutions",
+  title: "Practical AI assistants that solve everyday business problems.",
+  titleLead: "Practical AI assistants",
+  titleAccent: "that solve everyday business problems.",
   description:
-    "We focus on real-world AI applications that improve efficiency, support teams, and create measurable outcomes.",
+    "We focus on AI that makes work easier, faster, and more consistent for startups, agencies, and growing businesses.",
   items: [
     {
-      title: "AI Knowledge Base",
-      description: "Internal company knowledge assistants trained on business information.",
+      title: "Internal Knowledge Assistant",
+      description: "Help your team find answers, policies, and information without searching through files.",
     },
     {
       title: "Customer Support Assistant",
-      description: "AI-powered support systems that answer questions and reduce workload.",
+      description: "Answer common questions instantly and reduce response times for your customers.",
     },
     {
       title: "Sales Assistant",
-      description: "Lead qualification, follow-up assistance, and customer interaction support.",
+      description: "Qualify leads, draft follow-ups, and support your sales team with faster responses.",
     },
     {
       title: "Content Operations",
-      description: "Research, drafting, repurposing, and publishing workflows.",
+      description: "Speed up research, drafting, repurposing, and publishing with AI-assisted workflows.",
     },
     {
       title: "Internal Productivity Assistant",
-      description: "AI-powered tools that help teams find information and complete tasks faster.",
+      description: "Reduce repetitive work so your team can focus on high-value tasks.",
     },
     {
       title: "AI Reporting & Insights",
-      description: "Automated summaries, analysis, and business intelligence.",
+      description: "Turn data into clear summaries, updates, and decision-ready insights.",
     },
     {
       title: "Proposal & Document Generation",
-      description: "Generate business documents, proposals, and operational content.",
+      description: "Generate proposals, documents, and operational content from your business knowledge.",
     },
     {
       title: "AI Workflow Assistants",
-      description: "AI integrated directly into business processes and operations.",
+      description: "Connect AI into the tools and workflows your business already uses.",
     },
   ],
 } as const;
 
 export const AI_VALUE_SECTION = {
-  eyebrow: "Business impact",
-  title: "How AI creates operational leverage.",
-  titleLead: "How AI creates",
-  titleAccent: "operational leverage.",
+  eyebrow: "Business benefits",
+  title: "Save time, reduce repetitive work, and support your team.",
+  titleLead: "Save time, reduce repetitive work,",
+  titleAccent: "and support your team.",
   description: undefined,
   builds: [
     {
-      title: "Faster Decisions",
-      description: "Access information and insights instantly.",
+      title: "Save Time Every Week",
+      description: "Automate everyday tasks and free up hours for work that matters.",
     },
     {
-      title: "Reduced Manual Work",
-      description: "Automate repetitive content and operational tasks.",
+      title: "Reduce Repetitive Work",
+      description: "Let AI handle drafts, answers, summaries, and follow-ups your team does repeatedly.",
     },
     {
-      title: "Better Customer Support",
-      description: "Improve response times and customer experience.",
+      title: "Improve Customer Response",
+      description: "Answer common questions faster and route complex issues to the right person.",
     },
     {
-      title: "Increased Team Productivity",
-      description: "Help teams spend more time on high-value work.",
+      title: "Make Information Easier to Access",
+      description: "Turn scattered documents and knowledge into instant answers for your team.",
     },
     {
-      title: "Consistent Outputs",
-      description: "Reduce variation and improve process reliability.",
+      title: "Increase Productivity",
+      description: "Help your team focus on high-value work instead of manual lookups and busywork.",
     },
     {
-      title: "Scalable Operations",
-      description: "Support growth without increasing administrative burden.",
+      title: "Grow Without Adding Overhead",
+      description: "Scale operations with practical AI assistants that work alongside your existing tools.",
     },
   ],
 } as const;
 
 export const AI_WHY_BUILD_SECTION = {
-  eyebrow: "Why businesses implement AI with GrowrixOS",
-  title: "Focused on business outcomes, not AI hype.",
-  titleLead: "Focused on business outcomes,",
-  titleAccent: "not AI hype.",
+  eyebrow: "Why businesses choose GrowrixOS",
+  title: "Built for practical outcomes, not experiments.",
+  titleLead: "Built for practical outcomes,",
+  titleAccent: "not experiments.",
   description:
-    "Every AI implementation is designed around practical value, measurable improvements, and operational impact.",
+    "Every AI assistant is designed around a real business job, integrated into your tools, and handed off so your team can keep improving it.",
   cards: [
     {
-      title: "AI With Purpose",
-      description: "We implement AI where it creates measurable value.",
+      title: "Start With One Use Case",
+      description: "Solve one real problem first, then expand as the business sees value.",
     },
     {
-      title: "Human Oversight",
-      description: "Critical decisions remain under human control.",
+      title: "Human-Ready Handoff",
+      description: "Critical decisions stay with your team while AI handles the repetitive work.",
     },
     {
-      title: "Operational Integration",
-      description: "AI is embedded into existing workflows and systems.",
+      title: "Works With Your Tools",
+      description: "AI assistants connect into CRMs, help desks, knowledge bases, and communication tools.",
     },
     {
-      title: "Long-Term Maintainability",
-      description: "Solutions are designed for ongoing use and future improvement.",
+      title: "Designed to Improve",
+      description: "Built with monitoring, feedback loops, and clear paths for expansion.",
     },
   ],
 } as const;
 
 export const AI_BUSINESS_SYSTEMS_PROCESS_SECTION = {
   eyebrow: "Our process",
-  title: "How we implement AI systems that businesses actually use.",
-  titleLead: "How we implement AI systems",
-  titleAccent: "businesses actually use.",
+  title: "How we build AI assistants that your team actually uses.",
+  titleLead: "How we build AI assistants",
+  titleAccent: "that your team actually uses.",
   description: undefined,
   steps: [
     {
       number: "01",
-      title: "Discovery & Opportunities",
-      description: "Identify where AI can create meaningful value.",
+      title: "Discovery & Use Case",
+      description: "Identify one practical AI opportunity that saves time or supports your team.",
     },
     {
       number: "02",
-      title: "System Design",
-      description: "Define workflows, integrations, and user interactions.",
+      title: "Knowledge & Design",
+      description: "Define knowledge sources, workflows, and how the AI assistant will interact with users.",
     },
     {
       number: "03",
       title: "Build & Integration",
-      description: "Implement AI systems and connect them with business operations.",
+      description: "Implement the AI assistant and connect it to your existing tools and systems.",
     },
     {
       number: "04",
-      title: "Testing & Optimization",
-      description: "Monitor usage, improve outputs, and refine workflows.",
+      title: "Testing & Handoff",
+      description: "Refine responses, train your team, and deploy the assistant with confidence.",
     },
   ] satisfies Step[],
 } as const;
 
 export const AI_ENGAGEMENT_SECTION = {
-  eyebrow: "Engagement models",
-  title: "Choose the AI implementation path that fits your business.",
-  titleLead: "Choose the AI implementation path",
-  titleAccent: "that fits your business.",
+  eyebrow: "Pricing",
+  title: "Choose the AI path that fits your business stage.",
+  titleLead: "Choose the AI path",
+  titleAccent: "that fits your business stage.",
   description:
-    "Whether you're exploring opportunities or deploying operational AI systems, we'll recommend the most suitable approach.",
+    "Whether you're exploring your first AI assistant, building a connected AI system, or looking for ongoing AI support, choose the option that matches your current stage.",
   trustNote:
-    "Need something different? Every business operates differently. Discovery sessions help define scope, tooling, and the most suitable AI implementation path.",
+    "Need something different? Every business operates differently. Discovery sessions help define scope, tooling, and the most suitable AI path.",
   tiers: [
     {
-      name: "AI Discovery",
+      name: "AI Starter",
       iconKey: "ai-discovery",
-      price: "From $1,500",
-      description: "Identify opportunities, use cases, and implementation priorities.",
+      price: "From $499",
+      description:
+        "Start with one practical AI assistant that solves a real business problem. Ideal for businesses exploring AI for the first time.",
       features: [
-        "AI opportunity audit",
-        "Workflow assessment",
-        "Recommendations",
-        "Implementation roadmap",
-        "Strategic planning",
+        "Discovery call",
+        "One AI assistant",
+        "Knowledge setup",
+        "Prompt engineering",
+        "Testing",
+        "Deployment",
       ],
-      cta: { label: "Book Discovery", href: "/book-appointment" },
+      cta: { label: "Build My First AI", href: "/book-appointment" },
     },
     {
-      name: "AI System Build",
+      name: "Business AI System",
       iconKey: "ai-system-build",
-      price: "From $5,000",
-      description: "Design and implement AI-powered business systems.",
+      price: "From $1,999",
+      description:
+        "Design and deploy an AI system that supports your daily business operations. Ideal for businesses ready to integrate AI into customer support, internal workflows, sales, or content operations.",
       features: [
-        "AI assistant implementation",
-        "Workflow integration",
-        "Knowledge system setup",
-        "Prompt architecture",
-        "Testing & optimization",
-        "Team onboarding",
+        "Discovery workshop",
+        "Multiple AI workflows",
+        "Business knowledge integration",
+        "Customer support assistant",
+        "Internal AI assistant",
+        "Workflow integrations",
+        "Staff onboarding",
+        "Deployment",
       ],
-      cta: { label: "Scope AI Build", href: "/book-appointment" },
+      cta: { label: "Build My AI System", href: "/book-appointment" },
       featured: true,
-      badge: "Most popular",
+      badge: "Most Popular",
     },
     {
-      name: "AI Operations Partner",
+      name: "AI Growth Partner",
       iconKey: "ai-operations-partner",
-      price: "Custom Scope",
-      description: "Ongoing optimization, monitoring, and AI system expansion.",
+      price: "From $499",
+      cadence: "/month",
+      description:
+        "Continuous improvements, prompt optimization, monitoring, and expansion of your AI systems. Starting from $499/month depending on scope.",
       features: [
-        "Continuous improvement",
-        "New use cases",
-        "Workflow expansion",
-        "Usage reviews",
-        "Strategic planning",
+        "AI improvements",
+        "New assistants",
+        "Knowledge updates",
+        "Prompt optimization",
+        "Monitoring",
+        "Priority support",
       ],
-      cta: { label: "Start Partnership", href: "/book-appointment" },
+      cta: { label: "Become an AI Partner", href: "/book-appointment" },
     },
   ],
 } as const;
 
 export const AI_BUSINESS_SYSTEMS_SERVICE_FAQ = [
   {
-    question: "What types of AI systems do you build?",
+    question: "What types of AI assistants do you build?",
     answer:
-      "Knowledge assistants, customer support systems, sales assistants, content operations workflows, internal productivity tools, reporting systems, and AI embedded in business processes.",
+      "Internal knowledge assistants, customer support assistants, sales assistants, content operations helpers, productivity tools, reporting assistants, and AI embedded in business workflows.",
   },
   {
     question: "Can AI be integrated with existing business tools?",
     answer:
-      "Yes. We connect AI systems to CRMs, help desks, CMS platforms, internal databases, and communication tools your team already uses.",
+      "Yes. We connect AI assistants to CRMs, help desks, CMS platforms, internal databases, and communication tools your team already uses.",
   },
   {
     question: "Do you use OpenAI models?",
@@ -230,7 +238,7 @@ export const AI_BUSINESS_SYSTEMS_SERVICE_FAQ = [
   {
     question: "Can AI be trained on our business knowledge?",
     answer:
-      "Yes. We implement retrieval and knowledge bases over your documents, policies, and operational content—with scoped access and update workflows.",
+      "Yes. We implement knowledge bases over your documents, policies, and operational content—with scoped access and update workflows.",
   },
   {
     question: "How do you handle sensitive information?",
@@ -250,37 +258,37 @@ export const AI_BUSINESS_SYSTEMS_SERVICE_FAQ = [
   {
     question: "How long does implementation take?",
     answer:
-      "Discovery often completes in one to two weeks. Focused AI builds typically land in two to six weeks depending on integrations, data readiness, and review cycles.",
+      "Discovery often completes in one to two weeks. An AI Starter build typically lands in two to four weeks. A Business AI System build usually lands in four to six weeks depending on integrations and review cycles.",
   },
   {
     question: "Do you provide ongoing support?",
     answer:
-      "Yes. AI Operations Partner engagements cover monitoring, refinement, and expansion. One-time builds include handoff documentation and optional support scopes.",
+      "Yes. AI Growth Partner engagements cover continuous improvements, monitoring, and expansion. One-time builds include handoff documentation and optional support scopes.",
   },
   {
     question: "How do AI projects usually begin?",
     answer:
-      "With a discovery session to map workflows, identify high-value use cases, and recommend an implementation path before any build commitment.",
+      "With a discovery session to map workflows, identify one high-value use case, and recommend the right starting package before any build commitment.",
   },
 ] as const;
 
 export const AI_BUSINESS_SYSTEMS_SERVICE_FAQ_SECTION = {
   eyebrow: "FAQ",
-  title: "Common AI implementation questions, answered.",
-  titleLead: "Common AI implementation questions,",
-  titleAccent: "answered.",
+  title: "Common questions about practical AI assistants.",
+  titleLead: "Common questions about",
+  titleAccent: "practical AI assistants.",
   description:
     "Use cases, integrations, data handling, implementation timelines, and ongoing support—covered before you book a call.",
 } as const;
 
 export const AI_BUSINESS_SYSTEMS_SERVICE_CTA = {
-  title: "Let's identify where AI can create the most value.",
-  titleLead: "Let's identify where AI",
-  titleAccent: "can create the most value.",
+  title: "Build your first practical AI assistant.",
+  titleLead: "Build your first",
+  titleAccent: "practical AI assistant.",
   description:
-    "Book a discovery session and receive a practical roadmap for AI opportunities, implementation priorities, and expected business outcomes.",
-  primaryLabel: "Book AI Discovery",
+    "Book a discovery session and we'll recommend the right AI package for your current stage, with a clear plan and next steps.",
+  primaryLabel: "Build My First AI",
   primaryHref: "/book-appointment",
-  secondaryLabel: "Explore AI Systems",
+  secondaryLabel: "Explore AI Solutions",
   secondaryHref: "#ai-solutions",
 } as const;

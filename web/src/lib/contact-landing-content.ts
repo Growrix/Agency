@@ -4,7 +4,7 @@ export const CONTACT_HERO = {
   titleLead: "Let's plan the fastest path",
   titleAccent: "from idea to launch.",
   description:
-    "Whether you're launching a website, SaaS platform, mobile app, automation system, AI implementation, or technical SEO project, we'll help identify the right approach and next steps.",
+    "Whether you're launching a website, SaaS platform, mobile app, automation system, AI business system, or technical SEO project, we'll help identify the right approach and next steps.",
   proofPoints: [
     "Under 2 business hour response time",
     "Conversations stay private",
@@ -149,7 +149,7 @@ export const CONTACT_FORM = {
     "SaaS products",
     "Mobile apps",
     "Automation systems",
-    "AI implementations",
+    "AI business systems",
     "Technical SEO foundations",
     "Product redesigns",
     "Growth-focused improvements",

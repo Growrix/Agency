@@ -284,7 +284,7 @@ const COPY: Record<
     eyebrow: "AI Business Systems",
     headline: AI_BUSINESS_SYSTEMS_SERVICE_HERO.headline,
     description: AI_BUSINESS_SYSTEMS_SERVICE_HERO.description,
-    primaryCta: "Book AI Discovery",
+    primaryCta: "Build My First AI",
     secondaryCta: AI_BUSINESS_SYSTEMS_SERVICE_HERO.secondaryCta,
     secondaryHref: AI_BUSINESS_SYSTEMS_SERVICE_HERO.secondaryHref,
     builds: AI_VALUE_SECTION.builds.map((item) => ({ ...item })),
@@ -2127,7 +2127,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                     : isTechnicalSeoService
                       ? "Common technical SEO questions, answered."
                       : isAiBusinessSystemsService
-                        ? "Common AI implementation questions, answered."
+                        ? "Common questions about practical AI assistants."
                         : `${copy.eyebrow} questions, answered.`
             }
             description={

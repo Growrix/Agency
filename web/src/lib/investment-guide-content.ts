@@ -52,7 +52,7 @@ export const INVESTMENT_STARTING_POINTS = {
       title: "Custom Builds",
       investment: "From $1,500–$25,000+",
       description:
-        "Custom websites, SaaS applications, mobile apps, automation systems, and AI implementations tailored to specific business requirements.",
+        "Custom websites, SaaS applications, mobile apps, automation systems, and AI business systems tailored to specific business requirements.",
       bestFor: ["Unique requirements", "Business systems", "Product development", "Long-term growth"],
       cta: { label: "Book Consultation", href: "/book-appointment" },
     },
@@ -81,8 +81,8 @@ export const INVESTMENT_SERVICE_RANGES = {
     },
     {
       title: "AI Business Systems",
-      investment: "$1,500 – $5,000+",
-      description: "Knowledge systems, AI assistants, and operational AI workflows.",
+      investment: "$499 – $1,999+",
+      description: "AI assistants, knowledge systems, and practical AI workflows. AI Growth Partner retainers available from $499/month.",
       href: "/services/ai-business-systems",
     },
     {

@@ -4,7 +4,7 @@ export const SERVICES_LANDING_HERO = {
   headlineLead: "Choose the right path to",
   headlineAccent: "launch, grow, or optimize.",
   description:
-    "Whether you need a website, SaaS platform, mobile app, automation system, technical SEO foundation, or AI implementation, we'll help you choose the right solution for your goals.",
+    "Whether you need a website, SaaS platform, mobile app, automation system, technical SEO foundation, or AI business system, we'll help you choose the right solution for your goals.",
   primaryCta: "Book Strategy Call",
   primaryHref: "/book-appointment",
   secondaryCta: "Compare Services",
@@ -27,7 +27,7 @@ export const SERVICES_LANDING_INTRO = {
   titleLead: "Choose the capability",
   titleAccent: "that matches your goal.",
   description:
-    "Each service supports a different stage of digital growth—from launching your first website to implementing AI-powered business systems.",
+    "Each service supports a different stage of digital growth—from launching your first website to implementing practical AI assistants that save time and support your team.",
 } as const;
 
 export type ServiceEcosystemLink = {
@@ -58,7 +58,7 @@ export const SERVICES_HERO_ECOSYSTEM_LINKS: ServiceEcosystemLink[] = [
   {
     toSlug: "ai-business-systems",
     label: "AI Business Systems",
-    hint: "Assistants, knowledge systems, and practical AI workflows",
+    hint: "Practical AI assistants that save time and reduce repetitive work",
   },
   {
     toSlug: "mobile-apps",
@@ -211,7 +211,7 @@ export const SERVICES_LANDING_FAQ = [
   {
     question: "Where do AI Business Systems fit?",
     answer:
-      "AI Business Systems fit where language, classification, knowledge retrieval, or content workflows create measurable leverage—support, sales assistance, internal knowledge, reporting, and operational assistants embedded in existing tools.",
+      "AI Business Systems fit where language, knowledge retrieval, or content workflows create measurable leverage—customer support, sales assistance, internal knowledge, reporting, and operational assistants embedded in existing tools.",
   },
   {
     question: "How do projects usually begin?",

@@ -137,7 +137,7 @@ export const ABOUT_ECOSYSTEM_SECTION = {
     { title: "Websites", description: "Create visibility and first impressions." },
     { title: "Technical SEO", description: "Improve discoverability and measurement." },
     { title: "Automation", description: "Reduce operational friction." },
-    { title: "AI Business Systems", description: "Create leverage and efficiency." },
+    { title: "AI Business Systems", description: "Save time and reduce repetitive work with practical AI assistants." },
     { title: "SaaS Applications", description: "Build scalable digital products." },
     { title: "Mobile Apps", description: "Extend customer experiences across devices." },
   ],

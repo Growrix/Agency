@@ -137,7 +137,7 @@ const GOAL_ROWS = [
 			websites: "Launch sprint or redesign track",
 			"saas-applications": "MVP sprint or product partner",
 			"mobile-apps": "Launch site sprint or companion MVP",
-			"ai-business-systems": "Discovery, build, or operations partner",
+			"ai-business-systems": "AI Starter → Business AI System → AI Growth Partner",
 			automation: "Audit sprint then implementation",
 			"technical-seo": "Essentials or full technical SEO sprint",
 		},
