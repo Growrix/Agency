@@ -759,3 +759,12 @@ Remaining parallel tracks:
 - **Gaps / operator actions:** Vercel env `NEXT_PUBLIC_GA_MEASUREMENT_ID` not yet set; GSC plan operator actions (env, 301 redirect, redeploy, URL inspection) pending; `Technical_SEO_debug` branch has unmerged commits.
 - **Push:** `main` → `origin/main` (`d15506a..1e794c6`) completed.
 - **Remote CI verification:** `gh` not authenticated locally — status **unverified**; verify GitHub Actions on commit `1e794c6e02cdb496711e7637d5f610b61d1de272`.
+
+### 2026-07-18 — Contact page mobile Quick answers CTA fix (debug_failure)
+- **Root cause:** Mobile contact channels passed the raw React click event to `useConciergeStore.open` via `onClick={onOpenConcierge}`. The event object was stored as `initialPrompt`, and `ConciergeExperience` later called `initialPrompt?.trim()`, throwing `TypeError: event.trim is not a function` and breaking the concierge on mobile. Desktop used `() => openConcierge()` and avoided the event leak.
+- **Fix:**
+  - Changed `web/src/components/marketing/contact/ContactChannelsMobile.tsx` `onClick` from `onClick={onOpenConcierge}` to `onClick={() => onOpenConcierge()}`.
+  - Corrected the icon map key from `"Instant Answers"` to `"Quick answers"` in both mobile `ContactChannelsMobile.tsx` and desktop `ContactPageClient.tsx` to match the content source of truth in `web/src/lib/contact-landing-content.ts`.
+- **Touched files:** `web/src/components/marketing/contact/ContactChannelsMobile.tsx`, `web/src/app/contact/ContactPageClient.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero errors/warnings; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
+- **Gaps:** No operator actions. Mobile-specific tap interaction was not exercised by the existing desktop-chrome e2e suite; a manual mobile browser pass is recommended.

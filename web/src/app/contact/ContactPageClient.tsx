@@ -55,7 +55,7 @@ import { cn } from "@/lib/utils";
 const CHANNEL_ICONS = {
   "Project Inquiry": PaperAirplaneIcon,
   WhatsApp: ChatBubbleLeftRightIcon,
-  "Instant Answers": SparklesIcon,
+  "Quick answers": SparklesIcon,
   "Book A Call": CalendarDaysIcon,
 } as const;
 

@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 const CHANNEL_ICONS = {
   "Project Inquiry": PaperAirplaneIcon,
   WhatsApp: ChatBubbleLeftRightIcon,
-  "Instant Answers": SparklesIcon,
+  "Quick answers": SparklesIcon,
   "Book A Call": CalendarDaysIcon,
 } as const;
 
@@ -82,7 +82,7 @@ export function ContactChannelsMobile({ onOpenConcierge }: ContactChannelsMobile
 
           if (channel.href === "concierge") {
             return (
-              <button key={channel.name} type="button" onClick={onOpenConcierge} className="contact-channels-mobile__trigger">
+              <button key={channel.name} type="button" onClick={() => onOpenConcierge()} className="contact-channels-mobile__trigger">
                 {card}
               </button>
             );
