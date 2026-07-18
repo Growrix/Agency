@@ -1,27 +1,13 @@
-import {
-  CursorArrowRaysIcon,
-  ServerIcon,
-  SparklesIcon,
-  DocumentTextIcon,
-  ChatBubbleLeftRightIcon,
-  ChartBarIcon,
-} from "@heroicons/react/24/outline";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { AutomationWorkflowShowcaseMobile } from "@/components/marketing/services/AutomationWorkflowShowcaseMobile";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_WORKFLOW_SHOWCASE_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
+import { AUTOMATION_WORKFLOW_STEP_ICONS } from "./automation-visual-icons";
 import styles from "./AutomationPage.module.css";
 
-const STEP_ICONS = [
-  CursorArrowRaysIcon,
-  ServerIcon,
-  SparklesIcon,
-  DocumentTextIcon,
-  ChatBubbleLeftRightIcon,
-  ChartBarIcon,
-];
+const STEP_ICONS = AUTOMATION_WORKFLOW_STEP_ICONS;
 
 type Workflow = (typeof AUTOMATION_WORKFLOW_SHOWCASE_SECTION.workflows)[number];
 

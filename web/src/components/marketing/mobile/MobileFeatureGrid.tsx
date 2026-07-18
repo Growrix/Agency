@@ -6,6 +6,7 @@ export type MobileFeatureGridItem = {
   title: string;
   description: string;
   icon?: ComponentType<SVGProps<SVGSVGElement>>;
+  iconTone?: "purple" | "blue" | "green" | "cyan" | "orange" | "gray";
 };
 
 type MobileFeatureGridProps = {
@@ -53,7 +54,14 @@ export function MobileFeatureGrid({
               )}
             >
               {Icon ? (
-                <span className="home-mobile-marketing__outcome-card-icon" aria-hidden>
+                <span
+                  className={cn(
+                    "home-mobile-marketing__outcome-card-icon",
+                    item.iconTone &&
+                      `home-mobile-marketing__outcome-card-icon--${item.iconTone}`,
+                  )}
+                  aria-hidden
+                >
                   <Icon className="home-mobile-marketing__outcome-card-icon-glyph" />
                 </span>
               ) : null}

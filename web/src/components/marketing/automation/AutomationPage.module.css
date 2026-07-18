@@ -315,17 +315,7 @@
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--color-text-muted);
-}
-
-.typeLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  margin-top: auto;
-  padding-top: 1rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-primary);
+  flex: 1;
 }
 
 /* ---------- Metrics ---------- */

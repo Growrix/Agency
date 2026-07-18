@@ -1,5 +1,5 @@
-import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { AUTOMATION_WORKFLOW_STEP_ICONS } from "@/components/marketing/automation/automation-visual-icons";
 import type { AutomationWorkflowExample } from "@/lib/automation-service-content";
 import { AUTOMATION_WORKFLOW_SHOWCASE_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,21 @@ import { cn } from "@/lib/utils";
 type AutomationWorkflowShowcaseMobileProps = {
   workflows?: readonly AutomationWorkflowExample[];
 };
+
+function WorkflowStepIcon({ index, isAi }: { index: number; isAi: boolean }) {
+  const Icon = AUTOMATION_WORKFLOW_STEP_ICONS[index % AUTOMATION_WORKFLOW_STEP_ICONS.length];
+  return (
+    <span
+      className={cn(
+        "home-mobile-marketing__workflow-timeline-circle",
+        isAi && "home-mobile-marketing__workflow-timeline-circle--ai",
+      )}
+      aria-hidden
+    >
+      <Icon className="home-mobile-marketing__workflow-timeline-circle-glyph" />
+    </span>
+  );
+}
 
 export function AutomationWorkflowShowcaseMobile({
   workflows = AUTOMATION_WORKFLOW_SHOWCASE_SECTION.workflows,
@@ -24,33 +39,31 @@ export function AutomationWorkflowShowcaseMobile({
 
       <div className="home-mobile-marketing__stack">
         {workflows.map((workflow) => (
-          <article key={workflow.title} className="home-mobile-marketing__workflow-card">
+          <article
+            key={workflow.title}
+            className="home-mobile-marketing__workflow-card home-mobile-marketing__workflow-card--showcase"
+          >
             <h3 className="home-mobile-marketing__workflow-card-title">{workflow.title}</h3>
 
-            <ol className="home-mobile-marketing__workflow-steps" aria-label={`${workflow.title} steps`}>
+            <div
+              className="home-mobile-marketing__workflow-timeline"
+              role="list"
+              aria-label={`${workflow.title} steps`}
+            >
               {workflow.steps.map((step, index) => {
-                const isLast = index === workflow.steps.length - 1;
-                const isAiStep = /ai/i.test(step);
-
+                const isAi = /ai/i.test(step);
                 return (
-                  <li key={`${step}-${index}`} className="home-mobile-marketing__workflow-step">
-                    <div
-                      className={cn(
-                        "home-mobile-marketing__workflow-step-node",
-                        isAiStep && "home-mobile-marketing__workflow-step-node--ai",
-                      )}
-                    >
-                      {step}
-                    </div>
-                    {!isLast ? (
-                      <span className="home-mobile-marketing__workflow-step-connector" aria-hidden>
-                        <ArrowDownIcon className="home-mobile-marketing__workflow-step-arrow" />
-                      </span>
-                    ) : null}
-                  </li>
+                  <div
+                    key={`${step}-${index}`}
+                    className="home-mobile-marketing__workflow-timeline-node"
+                    role="listitem"
+                  >
+                    <WorkflowStepIcon index={index} isAi={isAi} />
+                    <span className="home-mobile-marketing__workflow-timeline-label">{step}</span>
+                  </div>
                 );
               })}
-            </ol>
+            </div>
 
             <p className="home-mobile-marketing__workflow-outcome">
               <span className="home-mobile-marketing__workflow-outcome-label">Outcome</span>

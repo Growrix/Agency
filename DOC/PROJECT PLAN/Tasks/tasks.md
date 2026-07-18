@@ -893,3 +893,14 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/components/marketing/automation/AutomationProcess.tsx`, `AutomationPage.module.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `ReadLints` zero; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0.
 - **Gaps:** Refresh `/services/automation` desktop to confirm connector clears all text.
+
+### 2026-07-18 — Automation types + workflow mobile parity (WEB-AUTOMATION-REDESIGN-007)
+- **Request:** Remove "Learn more" from Automation Types section; mobile types missing colored icons vs desktop; workflow examples mobile not redesigned to match desktop icon timeline.
+- **Fix:**
+  - Removed desktop "Learn more" links from `AutomationTypesGrid`; removed unused `.typeLink` CSS.
+  - Shared icon config in `automation-visual-icons.ts` for desktop + mobile parity.
+  - `AutomationTypesMobile` now passes icons + tone colors to `MobileFeatureGrid`; added tone modifier classes in `globals.css`.
+  - Redesigned `AutomationWorkflowShowcaseMobile` — horizontal scroll icon-circle timeline matching desktop (replaced vertical text-only steps).
+- **Touched files:** `AutomationTypesGrid.tsx`, `AutomationTypesMobile.tsx`, `AutomationWorkflowShowcaseMobile.tsx`, `AutomationWorkflowSection.tsx`, `automation-visual-icons.ts`, `MobileFeatureGrid.tsx`, `AutomationPage.module.css`, `globals.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0.
+- **Gaps:** Manual mobile pass on `/services/automation` at 375px recommended.

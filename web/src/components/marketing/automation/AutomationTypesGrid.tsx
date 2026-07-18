@@ -1,33 +1,16 @@
-import {
-  UsersIcon,
-  CloudIcon,
-  RocketLaunchIcon,
-  SparklesIcon,
-  ChartBarIcon,
-  CogIcon,
-} from "@heroicons/react/24/outline";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { AutomationTypesMobile } from "@/components/marketing/services/AutomationTypesMobile";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_TYPES_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
+import { AUTOMATION_TYPE_ICONS } from "./automation-visual-icons";
 import styles from "./AutomationPage.module.css";
-
-const TYPE_ICONS = [
-  { icon: UsersIcon, tone: "purple" },
-  { icon: CloudIcon, tone: "blue" },
-  { icon: RocketLaunchIcon, tone: "green" },
-  { icon: SparklesIcon, tone: "cyan" },
-  { icon: ChartBarIcon, tone: "orange" },
-  { icon: CogIcon, tone: "gray" },
-] as const;
 
 type TypeItem = (typeof AUTOMATION_TYPES_SECTION.items)[number];
 
 function TypeCard({ item, index }: { item: TypeItem; index: number }) {
-  const { icon: Icon, tone } = TYPE_ICONS[index % TYPE_ICONS.length];
+  const { icon: Icon, tone } = AUTOMATION_TYPE_ICONS[index % AUTOMATION_TYPE_ICONS.length];
   const toneClass =
     tone === "purple"
       ? styles.typeIconPurple
@@ -49,9 +32,6 @@ function TypeCard({ item, index }: { item: TypeItem; index: number }) {
         </div>
         <h3 className={styles.typeTitle}>{item.title}</h3>
         <p className={styles.typeDescription}>{item.description}</p>
-        <a href="#pricing" className={styles.typeLink}>
-          Learn more <ArrowRightIcon className="size-4" />
-        </a>
       </article>
     </RevealItem>
   );
