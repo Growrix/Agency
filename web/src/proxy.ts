@@ -3,7 +3,15 @@ import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const protectedPrefixes = ["/admin", "/dashboard", "/api/v1/admin", "/api/v1/me"];
+const protectedPrefixes = [
+  "/admin",
+  "/dashboard",
+  "/api/v1/admin",
+  "/api/v1/me",
+  "/api/v1/intakes",
+  "/api/v1/intake-assets",
+  "/api/v1/projects",
+];
 const loginPrefixes = ["/admin/login", "/dashboard/login", "/sign-in", "/sign-up"];
 const completionExemptApiPaths = ["/api/v1/me", "/api/v1/me/update", "/api/v1/me/complete-signup"];
 const blockedPreviewPrefixes = [
@@ -73,6 +81,22 @@ function isProtectedPath(pathname: string) {
 
 function isAdminPath(pathname: string) {
   return pathname === "/admin" || pathname.startsWith("/admin/") || pathname.startsWith("/api/v1/admin");
+}
+
+function rejectUnauthenticatedApi() {
+  return NextResponse.json(
+    {
+      success: false,
+      error: {
+        code: "UNAUTHORIZED",
+        message: "Authentication is required.",
+        details: null,
+      },
+      timestamp: new Date().toISOString(),
+      request_id: crypto.randomUUID(),
+    },
+    { status: 401 },
+  );
 }
 
 function rejectLegacy(request: NextRequest) {
@@ -203,7 +227,17 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
     }
 
     if (isProtectedPath(nextRequest.nextUrl.pathname)) {
-      await auth.protect();
+      // For API routes, return a 401 JSON response (our envelope) instead of
+      // Clerk's default redirect/404 so API clients and tests get a clean error.
+      if (nextRequest.nextUrl.pathname.startsWith("/api/")) {
+        try {
+          await auth.protect();
+        } catch {
+          return rejectUnauthenticatedApi();
+        }
+      } else {
+        await auth.protect();
+      }
     }
 
     const { userId } = await auth();

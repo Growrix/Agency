@@ -73,7 +73,8 @@ async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
   if (!user) {
     try {
       user = await syncClerkUser(userId);
-    } catch {
+    } catch (error) {
+      console.error("[auth] syncClerkUser threw for clerk userId", userId, error);
       user = null;
     }
   }
