@@ -59,6 +59,23 @@ const defaultCsp =
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; ` +
   `connect-src ${connectSrc} ${cspScriptHosts.join(" ")}; frame-src 'self' ${authCspHosts.join(" ")}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://wa.me;`;
 
+/**
+ * Tightened CSP for admin/dashboard surfaces.
+ *
+ * Differences vs defaultCsp:
+ *  - Drops `'unsafe-eval'` from script-src — admin pages do not eval dynamic code.
+ *  - Drops GA4 tag-manager/analytics script + connect sources — admin surfaces do not need marketing analytics.
+ *  - Keeps `'unsafe-inline'` because Next.js injects inline styles and Clerk may inject inline scripts.
+ *  - Keeps Clerk auth hosts because /admin/login renders the Clerk <SignIn> component.
+ *
+ * Rationale: this narrows the XSS blast radius on the most privileged surfaces without
+ * breaking Clerk sign-in or Next.js inline style hydration.
+ */
+const adminCsp =
+  `default-src 'self'; img-src 'self' data: https: ${authCspHosts.join(" ")}; script-src 'self' 'unsafe-inline' ${authCspHosts.join(" ")}; ` +
+  `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; ` +
+  `connect-src ${connectSrc} ${authCspHosts.join(" ")}; frame-src 'self' ${authCspHosts.join(" ")}; frame-ancestors 'none'; base-uri 'self'; form-action 'self';`;
+
 const htmlPreviewCsp =
   `default-src 'self' data: https: http: 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:; ` +
   `script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:; style-src 'self' 'unsafe-inline' https: http:; ` +
@@ -251,12 +268,14 @@ const nextConfig: NextConfig = {
         source: "/admin/:path*",
         headers: [
           { key: "Cache-Control", value: "no-store" },
+          { key: "Content-Security-Policy", value: adminCsp },
         ],
       },
       {
         source: "/dashboard/:path*",
         headers: [
           { key: "Cache-Control", value: "no-store" },
+          { key: "Content-Security-Policy", value: adminCsp },
         ],
       },
       {

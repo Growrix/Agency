@@ -28,6 +28,26 @@ export async function ensureSeedAdminUser() {
 
   const database = await readDatabase();
   const existing = database.users.find((user) => user.email.toLowerCase() === adminEmail.toLowerCase());
+
+  // Migrate legacy "env-admin" sentinel records to a proper bcrypt hash so the
+  // password-bypass path can never be reached again.
+  if (existing && existing.password_hash === "env-admin") {
+    const now = getNow();
+    const hashed = await hash(adminPassword, 12);
+    const migrated: UserRecord = {
+      ...existing,
+      password_hash: hashed,
+      updated_at: now,
+    };
+
+    await writeDatabase((next) => ({
+      ...next,
+      users: next.users.map((user) => (user.id === existing.id ? migrated : user)),
+    }));
+
+    return migrated;
+  }
+
   if (existing) {
     return existing;
   }
@@ -135,47 +155,12 @@ export async function authenticateUser(email: string, password: string) {
   await ensureSeedAdminUser();
   const database = await readDatabase();
   const normalizedEmail = email.trim().toLowerCase();
-  const user = database.users.find((entry) => entry.email.toLowerCase() === normalizedEmail);
-  const runtime = getRuntimeConfig();
+  const user = database.users.find(
+    (entry) => entry.email.toLowerCase() === normalizedEmail && !entry.deleted_at,
+  );
 
   if (!user || !user.password_hash || user.password_hash === "clerk-auth") {
-    const configuredAdminEmail = runtime.auth.adminEmail?.trim().toLowerCase();
-    const configuredAdminPassword = runtime.auth.adminPassword;
-
-    if (
-      configuredAdminEmail &&
-      configuredAdminPassword &&
-      normalizedEmail === configuredAdminEmail &&
-      password === configuredAdminPassword
-    ) {
-      const now = getNow();
-      const fallbackAdmin: UserRecord = {
-        id: user?.id ?? crypto.randomUUID(),
-        email: configuredAdminEmail,
-        password_hash: "env-admin",
-        role: "admin",
-        first_name: user?.first_name,
-        last_name: user?.last_name,
-        created_at: user?.created_at ?? now,
-        updated_at: now,
-      };
-
-      await writeDatabase((next) => {
-        const withoutMatch = next.users.filter((entry) => entry.email.toLowerCase() !== normalizedEmail);
-        return {
-          ...next,
-          users: [fallbackAdmin, ...withoutMatch],
-        };
-      });
-
-      return fallbackAdmin;
-    }
-
     return null;
-  }
-
-  if (user.password_hash === "env-admin") {
-    return user;
   }
 
   const matches = await compare(password, user.password_hash);
@@ -184,7 +169,7 @@ export async function authenticateUser(email: string, password: string) {
 
 export async function getUserById(userId: string) {
   const database = await readDatabase();
-  return database.users.find((user) => user.id === userId) ?? null;
+  return database.users.find((user) => user.id === userId && !user.deleted_at) ?? null;
 }
 
 export async function updateUserProfile(
@@ -274,6 +259,15 @@ export function getRequiredAdminCredentialsConfigured() {
 
   const runtime = getRuntimeConfig();
   requireRuntimeValue(runtime.auth.jwtSecret, "AUTH_JWT_SECRET");
+
+  // Legacy auth requires both admin credentials so the seed admin can be created
+  // and authenticated with a bcrypt hash. Failing closed here prevents a confusing
+  // state where legacy mode is "enabled" but every login attempt returns 401.
+  if (isLegacyTestAuthEnabled()) {
+    requireRuntimeValue(runtime.auth.adminEmail, "ADMIN_EMAIL");
+    requireRuntimeValue(runtime.auth.adminPassword, "ADMIN_PASSWORD");
+    return;
+  }
 
   if (runtime.auth.adminEmail || runtime.auth.adminPassword) {
     requireRuntimeValue(runtime.auth.adminEmail, "ADMIN_EMAIL");

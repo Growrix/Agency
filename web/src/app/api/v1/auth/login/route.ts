@@ -4,6 +4,7 @@ import { ApiError, createRequestContext, errorResponse } from "@/server/core/api
 import { applySessionCookie } from "@/server/auth/guards";
 import { issueSessionToken } from "@/server/auth/token";
 import { authenticateUser, getRequiredAdminCredentialsConfigured } from "@/server/auth/users";
+import { recordAuditLog } from "@/server/logging/observability";
 import { getRuntimeConfig } from "@/server/config/runtime";
 import { assertRateLimit } from "@/server/security/rate-limit";
 
@@ -34,8 +35,29 @@ export async function POST(request: NextRequest) {
 
     const user = await authenticateUser(email, password);
     if (!user) {
+      await recordAuditLog({
+        level: "warning",
+        action: "auth.admin_login_failed",
+        actor_email: email,
+        ip: context.ip,
+        metadata: {
+          reason: "invalid_credentials",
+          user_agent: context.userAgent,
+        },
+      });
       throw new ApiError("UNAUTHORIZED", 401, "Invalid credentials.");
     }
+
+    await recordAuditLog({
+      level: "info",
+      action: "auth.admin_login_success",
+      actor_email: user.email,
+      ip: context.ip,
+      metadata: {
+        role: user.role,
+        user_agent: context.userAgent,
+      },
+    });
 
     const token = await issueSessionToken({ userId: user.id, email: user.email, role: user.role });
     const response = NextResponse.json({

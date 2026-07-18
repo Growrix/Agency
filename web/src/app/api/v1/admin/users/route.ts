@@ -19,6 +19,7 @@ type UserListEntry = {
   signup_completed_at: string | null;
   signup_intent_source: string | null;
   clerk_user_id: string | null;
+  deleted_at: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -35,6 +36,7 @@ function projectUser(record: UserRecord): UserListEntry {
     signup_completed_at: record.signup_completed_at ?? null,
     signup_intent_source: record.signup_intent_source ?? null,
     clerk_user_id: record.clerk_user_id ?? null,
+    deleted_at: record.deleted_at ?? null,
     created_at: record.created_at,
     updated_at: record.updated_at,
   };
@@ -62,6 +64,9 @@ export async function GET(request: NextRequest) {
     const database = await readDatabase();
     const filtered = database.users
       .filter((user) => {
+        // Soft-deleted users are excluded from the admin list by default. Admins can
+        // opt into seeing them with ?deleted=1, but they can never authenticate.
+        if (completionFilter !== "deleted" && user.deleted_at) return false;
         if (role && user.role !== role) return false;
         if (
           completionFilter === "completed" &&

@@ -22,7 +22,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   if (user.role !== "admin") {
-    redirect("/dashboard");
+    // Surface a reason param so the dashboard can explain why the admin surface was denied.
+    redirect("/dashboard?reason=not_admin");
   }
 
   return children;

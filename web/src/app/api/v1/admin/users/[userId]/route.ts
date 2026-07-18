@@ -26,6 +26,7 @@ function projectUser(record: UserRecord) {
     signup_completed_at: record.signup_completed_at ?? null,
     signup_intent_source: record.signup_intent_source ?? null,
     clerk_user_id: record.clerk_user_id ?? null,
+    deleted_at: record.deleted_at ?? null,
     created_at: record.created_at,
     updated_at: record.updated_at,
   };

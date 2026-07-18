@@ -24,7 +24,9 @@ function resolveRoleFromClerkMetadata(
 
 export async function getUserByClerkId(clerkUserId: string) {
   const database = await readDatabase();
-  return database.users.find((user) => user.clerk_user_id === clerkUserId) ?? null;
+  return (
+    database.users.find((user) => user.clerk_user_id === clerkUserId && !user.deleted_at) ?? null
+  );
 }
 
 export async function upsertUserFromClerk(input: {
@@ -56,6 +58,8 @@ export async function upsertUserFromClerk(input: {
       marketing_opt_in: existing?.marketing_opt_in,
       signup_completed_at: existing?.signup_completed_at,
       signup_intent_source: existing?.signup_intent_source,
+      // Upsert means the user exists in Clerk again, so clear any prior soft-delete marker.
+      deleted_at: undefined,
       created_at: existing?.created_at ?? now,
       updated_at: now,
     };
@@ -106,7 +110,11 @@ export async function softDeleteClerkUser(clerkUserId: string) {
 
   await writeDatabase((next) => ({
     ...next,
-    users: next.users.filter((user) => user.clerk_user_id !== clerkUserId),
+    users: next.users.map((user) =>
+      user.clerk_user_id === clerkUserId
+        ? { ...user, deleted_at: now, updated_at: now }
+        : user,
+    ),
   }));
 
   return { clerkUserId, deleted_at: now };

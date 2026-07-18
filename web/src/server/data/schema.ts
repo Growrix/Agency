@@ -199,6 +199,8 @@ export type UserRecord = {
   marketing_opt_in?: boolean;
   signup_completed_at?: string;
   signup_intent_source?: SignupIntentSource;
+  /** ISO timestamp set when a Clerk `user.deleted` webhook fires. Soft-deleted users are filtered out of auth and admin lists by default. */
+  deleted_at?: string;
   created_at: string;
   updated_at: string;
 };

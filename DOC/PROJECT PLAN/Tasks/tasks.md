@@ -925,4 +925,68 @@ Remaining parallel tracks:
 ### 2026-07-18 — Client intake & project workspace (P21)
 - **Request:** Free demo popup with live counter, auth-gated intake form, admin notification, ongoing client/admin project workspace with files, drive links, reference sites.
 - **Delivered:** Full stack per `DOC/PROJECT PLAN/client-intake-workspace-e2e-plan.md`.
-- **Validation:** integration + e2e intake specs; health:check pending this session.
+- **Validation:** integration + e2e intake specs; lint/typecheck/build pass; release gates pass (homepage load threshold flaky on reused dev server — passed on retry).
+
+### 2026-07-18 — Intake auth 401 + missing client dashboard record (debug)
+- **Mode:** `debug_failure`
+- **Reproduce:** Signed-in user completes Project Intake step 5 → Submit → red "Authentication is required."; `/dashboard/projects` empty (projects only after admin convert).
+- **Root cause:** Marketing routes skipped `clerkMiddleware`, so client Clerk could show signed-in while API/server session was missing; intakes also never auto-created a project for the client workspace.
+- **Fix:** Always run `clerkMiddleware` when Clerk configured; soften API protect to `userId` check; harden Clerk→DB mirror with `currentUser` fallback; send Bearer token on intake POST; auto-`convertIntakeToProject` on create; My Projects shows pending intakes + projects.
+- **Validation:** `npm run typecheck` pass; ReadLints clean on touched files; lint in progress.
+- **Commit:** none (awaiting user request)
+
+## Session Log
+- 2026-07-18T22:40:00+06:00 | senior-saas-developer | debug_failure | Fixed signed-in intake 401 + client project visibility
+  - brain: lane-router.yaml → tasks.md (P21) → client-intake plan context
+  - files_touched: web/src/proxy.ts, web/src/server/auth/guards.ts, web/src/server/domain/intakes.ts, web/src/components/intake/IntakeForm.tsx, web/src/app/api/v1/intakes/route.ts, web/src/app/dashboard/projects/MyProjectsClient.tsx, DOC/PROJECT PLAN/Tasks/tasks.md
+  - gates: QG-typecheck=pass, QG-lints=pass, QG-health=N/A (mid-phase debug)
+  - reproduce: homepage intake submit while signed in → 401
+  - root_cause: clerkMiddleware skipped on marketing + no auto project on intake
+  - regression: typecheck; manual retest submit + /dashboard/projects
+  - commit: none
+  - handoff: none
+
+### 2026-07-18 — Admin auth hardening (ADMIN-AUTH-HARDENING-001)
+- **Mode:** `refactor_existing_system`
+- **Request:** Audit and harden the admin authentication bridge (Clerk + legacy), fix security gaps, validate against ST-SEC-001 and WF-DLV-SAAS-FEATURE-001.
+- **Audit findings:**
+  - Critical: `authenticateUser` returned the user without password verification when `password_hash === "env-admin"` (password bypass).
+  - High: Legacy fallback compared submitted password directly against `ADMIN_PASSWORD` env var and stored a `"env-admin"` sentinel hash, creating the bypass above.
+  - Medium: No audit log on admin login success/failure.
+  - Medium: `softDeleteClerkUser` performed a hard delete (removed the user record), breaking audit trails and foreign-key references.
+  - Low: `getRequiredAdminCredentialsConfigured` did not require credentials when both were empty in legacy mode.
+  - Low: CSP for admin routes was permissive (`unsafe-eval`, GA4 sources).
+  - Correction: The "unwired middleware" finding from the explore subagent was wrong — in Next.js 16, `proxy.ts` IS the middleware file (renamed from `middleware.ts`). The existing `web/src/proxy.ts` is already the active proxy; release-gate e2e confirms `/admin` redirects and `/api/v1/admin/*` returns 401.
+- **Fix:**
+  - Removed the `env-admin` password bypass and the plaintext `ADMIN_PASSWORD` comparison in `web/src/server/auth/users.ts`.
+  - `ensureSeedAdminUser` now migrates legacy `"env-admin"` sentinel records to a proper bcrypt hash on the next call.
+  - `getRequiredAdminCredentialsConfigured` now requires both `ADMIN_EMAIL` and `ADMIN_PASSWORD` when legacy test auth is active (fail-closed).
+  - Added `auth.admin_login_success` and `auth.admin_login_failed` audit log entries in `web/src/app/api/v1/auth/login/route.ts` (no secrets logged).
+  - Added `deleted_at` field to `UserRecord` in `web/src/server/data/schema.ts`.
+  - `softDeleteClerkUser` now sets `deleted_at` instead of removing the record; `upsertUserFromClerk` clears `deleted_at` on re-creation.
+  - `getUserById`, `getUserByClerkId`, `authenticateUser`, and the admin user list now filter out soft-deleted users by default (admin list supports `?completion=deleted` to opt in).
+  - Admin layout now redirects non-admins to `/dashboard?reason=not_admin` for clearer messaging.
+  - Added a tightened `adminCsp` in `web/next.config.ts` for `/admin/:path*` and `/dashboard/:path*` that drops `'unsafe-eval'` and GA4 sources while keeping Clerk auth hosts and `'unsafe-inline'` (required by Next.js/Clerk).
+  - Updated `.env.example` to document that `ADMIN_EMAIL`/`ADMIN_PASSWORD`/`AUTH_JWT_SECRET` are legacy/test-only and ignored when Clerk is configured.
+- **Touched files:** `web/src/server/auth/users.ts`, `web/src/server/auth/clerk-sync.ts`, `web/src/app/api/v1/auth/login/route.ts`, `web/src/app/api/v1/admin/users/route.ts`, `web/src/app/api/v1/admin/users/[userId]/route.ts`, `web/src/app/admin/layout.tsx`, `web/src/server/data/schema.ts`, `web/src/server/auth/users.test.ts`, `web/next.config.ts`, `.env.example`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero errors/warnings on touched files; `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run perf:budgets` exit 0; `npm run test` exit 0 (unit 64 pass, integration 12 pass); `npm run build` exit 0; `npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome` 17/17 pass (including "security headers and auth protection are present").
+- **Gaps:** No operator actions. The legacy auth path is test-only (`NODE_ENV=test`); production uses Clerk. Rotating `ADMIN_PASSWORD` after first seed requires deleting the seeded admin record so the new value can be re-hashed. CSP still keeps `'unsafe-inline'` because Next.js and Clerk require it; a nonce-based CSP is a future hardening follow-up.
+
+## Session Log
+- 2026-07-18T22:40:00+06:00 | senior-saas-developer | debug_failure | Fixed signed-in intake 401 + client project visibility
+  - brain: lane-router.yaml → tasks.md (P21) → client-intake plan context
+  - files_touched: web/src/proxy.ts, web/src/server/auth/guards.ts, web/src/server/domain/intakes.ts, web/src/components/intake/IntakeForm.tsx, web/src/app/api/v1/intakes/route.ts, web/src/app/dashboard/projects/MyProjectsClient.tsx, DOC/PROJECT PLAN/Tasks/tasks.md
+  - gates: QG-typecheck=pass, QG-lints=pass, QG-health=N/A (mid-phase debug)
+  - reproduce: homepage intake submit while signed in → 401
+  - root_cause: clerkMiddleware skipped on marketing + no auto project on intake
+  - regression: typecheck; manual retest submit + /dashboard/projects
+  - commit: none
+  - handoff: none
+- 2026-07-19T04:33:00+06:00 | senior-saas-developer | refactor_existing_system | Admin auth hardening (ADMIN-AUTH-HARDENING-001)
+  - brain: lane-router.yaml → backend-brain.md → ST-SEC-001 → WF-DLV-SAAS-FEATURE-001
+  - files_touched: web/src/server/auth/users.ts, web/src/server/auth/clerk-sync.ts, web/src/app/api/v1/auth/login/route.ts, web/src/app/api/v1/admin/users/route.ts, web/src/app/api/v1/admin/users/[userId]/route.ts, web/src/app/admin/layout.tsx, web/src/server/data/schema.ts, web/src/server/auth/users.test.ts, web/next.config.ts, .env.example, DOC/PROJECT PLAN/Tasks/tasks.md
+  - gates: QG-lints=pass, QG-typecheck=pass, QG-perf=pass, QG-test=pass(unit64+integ12), QG-build=pass, QG-e2e=pass(17/17 release-gates)
+  - root_cause: env-admin password bypass + plaintext ADMIN_PASSWORD comparison + hard-delete on Clerk user.deleted
+  - regression: 6 new unit tests in users.test.ts (seed hash, correct/wrong password, bypass no longer works, env-admin migration, soft-delete exclusion)
+  - commit: pending user request
+  - handoff: optional @backend-quality-enforcer for phase-end review
