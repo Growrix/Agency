@@ -821,3 +821,15 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/app/services/[slug]/page.tsx`, `web/src/components/marketing/automation/AutomationPage.module.css`, `web/src/components/marketing/automation/AutomationHero.tsx`, `web/src/components/marketing/automation/AutomationWorkflowSection.tsx`, `web/src/components/marketing/automation/AutomationTypesGrid.tsx`, `web/src/components/marketing/automation/AutomationOutcomesMetrics.tsx`, `web/src/components/marketing/automation/AutomationWhyBuild.tsx`, `web/src/components/marketing/automation/AutomationProcess.tsx`, `web/src/components/marketing/automation/AutomationPricing.tsx`, `web/src/components/marketing/automation/AutomationFAQ.tsx`, `web/src/components/marketing/automation/AutomationCTA.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `ReadLints` zero errors/warnings after fixes; `npm run lint` exit 0; `npm run typecheck` exit 0; `npm run health:check` from `web/` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
 - **Gaps:** No operator actions. The e2e suite validates accessibility and metadata but does not assert page-specific visual styling or mockup fidelity; a manual browser pass on `/services/automation` (desktop and mobile) is recommended.
+
+### 2026-07-18 — Automation page visual polish fixes (WEB-AUTOMATION-REDESIGN-002)
+- **Request:** Fix the "Most Popular" badge being clipped on the Business Automation pricing card, and compact the mobile layout for the "What we deliver" metrics and the following "Why build" section so the cards are not oversized on small screens.
+- **Root cause:**
+  - The featured pricing card had `overflow: hidden`, which clipped the absolutely positioned badge that extended above the card.
+  - The metrics and why-build cards used desktop padding and icon sizes on mobile, making them feel oversized when stacked in a single column.
+- **Fix:**
+  - Changed `.pricingFeatured` to `overflow: visible`, added `padding-top: 2rem` to reserve space for the badge, and added `margin-top: 0.75rem` to ensure the badge does not collide with the section above.
+  - Added a `@media (max-width: 639px)` block that reduces the metrics grid to two columns (`repeat(2, 1fr)`), shrinks metric card padding, icon size, and label/description sizes, and applies the same compact treatment to the why-build cards (padding, icon size, title/description size, grid gap).
+- **Touched files:** `web/src/components/marketing/automation/AutomationPage.module.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests). A stale `next start` process on port 5000 was killed before the e2e run.
+- **Gaps:** No operator actions. A manual browser pass on `/services/automation` at mobile viewport is recommended to confirm the metrics and why-build cards feel compact and the "Most Popular" badge is fully visible on both desktop and mobile.

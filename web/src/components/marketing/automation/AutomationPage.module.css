@@ -651,11 +651,14 @@
 }
 
 .pricingFeatured {
+  overflow: visible;
   border: 1px solid var(--color-primary);
   background: color-mix(in srgb, var(--color-surface) 96%, var(--color-primary) 4%);
   box-shadow:
     0 0 0 1px var(--color-primary),
     0 20px 48px rgba(0, 0, 0, 0.3);
+  padding-top: 2rem;
+  margin-top: 0.75rem;
 }
 
 .pricingFeaturedBadge {
@@ -878,5 +881,66 @@
 
   .workflowCards {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Mobile compactness (< 640px) ---------- */
+@media (max-width: 639px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .metricCard {
+    padding: 1rem;
+  }
+
+  .metricIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .metricIcon :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .metricLabel {
+    font-size: 1rem;
+  }
+
+  .metricDescription {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .whyGrid {
+    gap: 0.75rem;
+  }
+
+  .whyCard {
+    padding: 1rem;
+  }
+
+  .whyIcon {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .whyIcon :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .whyTitle {
+    font-size: 1rem;
+  }
+
+  .whyDescription {
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 }
