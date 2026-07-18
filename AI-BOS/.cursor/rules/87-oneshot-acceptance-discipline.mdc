@@ -1,0 +1,57 @@
+---
+description: One-shot acceptance discipline — stop multi-round UI/auth/copy regressions on web/ marketing and modal work
+alwaysApply: true
+---
+
+# One-Shot Acceptance Discipline (Growrixos)
+
+Learned from repeated user pain: agents ship incomplete, then need 3–6 repair rounds for the same feature. **Do not declare UI/conversion work done until the acceptance checklist below is green.**
+
+## Failure patterns that keep recurring (do not repeat)
+
+| Pattern | Wrong | Right |
+|---------|-------|-------|
+| Auth API 401 while UI shows signed-in | Call `requireAuthenticatedUser` on a route **not** in `proxy.ts` `protectedPrefixes` | Any auth-required `/api/v1/*` route must be listed in `protectedPrefixes` (same as `/api/v1/me`) |
+| Popup never appears | Mark `localStorage` seen **on open**; skip signed-in users; wait for full `load` + idle | Timer starts early; mark seen on **dismiss/success** only; do not skip signed-in for launch offers |
+| Auth wall too early | Replace form with Sign-in before user fills anything | Follow stated flow literally: offer → form → **auth on submit** → auto-submit after auth |
+| Modal overlaps viewport | Tall content, no `max-height`, no scroll, tiny edge padding | Desktop: `max-h-[min(88dvh,…)]` + scroll + `p-6/py-8+` margins. Mobile: bottom sheet `max-h-[min(90dvh,…)]` + scroll + safe-area |
+| Copy drift | Invent "AI-powered" or keep banned words after user said remove | User-forbidden phrases are **hard deletes**. Replace with approved alternatives before commit |
+| Form options incomplete | Hardcoded short lists when user asked for custom/other | Provide presets **and** free-text "Other/Custom" paths end-to-end |
+| "Done" after code compile | Lint/typecheck green ≠ user intent met | Replay the user's steps in order before claiming done |
+
+## Mandatory pre-done checklist (conversion / modal / intake)
+
+Before telling the user the task is complete, verify **in this order**:
+
+1. **Replay user story** — Walk the exact click path they described (header CTA, auto-open delay, submit, auth). No invented steps.
+2. **Viewport fit** — At 375px and ≥1280px: modal does not clip; body scrolls inside the panel; ≥24px breathing room from viewport edges on desktop.
+3. **Auth chain** — Signed-in submit works; signed-out submit opens auth then auto-submits; middleware prefixes cover the API.
+4. **Copy contract** — Grep the touched files for any phrase the user banned (e.g. `AI-powered`, `AI Powered`). Zero matches in the offer surface.
+5. **Persistence UX** — Dismiss / seen / timer behavior matches the latest request (not an older assumption).
+6. **Evidence** — `ReadLints` + scoped lint/typecheck on touched files; note what you manually verified.
+
+## Modal / overlay geometry (non-negotiable)
+
+```
+Desktop shell: fixed inset-0 → flex center → padding ≥ 1.5–2.5rem → panel max-h ≤ 88dvh → header sticky/shrink-0 → body overflow-y-auto
+Mobile shell: fixed bottom sheet → max-h ≤ 90dvh → header shrink-0 → body overflow-y-auto → safe-area bottom
+```
+
+Never ship a marketing modal whose content height can exceed the viewport without an internal scroll region.
+
+## Auth route registration
+
+When adding `requireAuthenticatedUser` / `requireAdminUser` under `web/src/app/api/v1/`:
+
+1. Open `web/src/proxy.ts`
+2. Add the path prefix to `protectedPrefixes` **in the same change set**
+3. Confirm unauthenticated requests return **401 JSON** (not a silent null `auth()`)
+
+## Copy / marketing surfaces
+
+- If the user names forbidden wording, treat it as a **blocker**, not polish.
+- Prefer concrete product language (strategy demo, roadmap, expert plan) over hype buzzwords unless the brand kit requires them.
+
+## Multi-round tax — stop the loop
+
+If the same feature needs a third repair in one session for the same acceptance item (viewport, auth, copy, timer), **stop coding** and write a short acceptance matrix on disk, then implement against that matrix in one pass.

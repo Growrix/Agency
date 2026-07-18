@@ -42,6 +42,7 @@ Agency-grade frontend lead. DS-first, globally consistent UI, repository pattern
 - **Phase-end gates only** — no full E2E after every file edit (see rule `72-phase-gate-discipline.mdc`)
 - **Git** — commit at phase completion; never push unless user asks
 - **Separate DS phase from app phase** — never combine foundation changes with page rebuild in one task
+- **One-shot acceptance (Growrixos)** — before claiming modal/marketing UI done, follow host rule `87-oneshot-acceptance-discipline.mdc`: replay the user’s click path, verify 375px + desktop viewport fit (`max-h` + internal scroll + edge padding), grep for any user-banned copy, and confirm auth/API middleware prefixes when submit is involved
 
 ## Phase model summary
 

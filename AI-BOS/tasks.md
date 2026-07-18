@@ -25,8 +25,72 @@
 | I2 | Operational wiring | completed | 3 AG-* + 1 MC-* + 2 WF-* + 2 HB-* + project wired — **completed 2026-07-17** |
 | I3 | Wire PRJ-SAAS-GROWRIXOS-001 | completed | `web/` project + 6 delivery AG-* mapped to existing Cursor skills — **completed 2026-07-17** |
 | I4 | SaaS agent readiness (knowledge + skills + rules) | completed | 44 KOs; 6 skill bindings; rule 76; docs inventory — **completed 2026-07-17** |
+| I5 | Full agent enrollment (register + wire all 37) | completed | 40 AG-* + 5 PRJ-* + rules 77–79 — **completed 2026-07-17** |
+| I6 | Portable SSOT + hygiene + MCP runtime | completed | universal/ + MCP + RU-UNI — **completed 2026-07-17** |
+| I7 | HTML + Next domain packs | completed | 11 KOs wired to PRJ-TMPL-* — **completed 2026-07-17** |
+| I8 | Blueprint + SEO domain packs | completed | 8 KOs wired — **completed 2026-07-17** |
+| I9 | P2 bindings + 85+ score gate | completed | rules 80, audit ≥85 — **completed 2026-07-17** |
+| I10 | Vault-first governance + handoff + System Builder upgrade | completed | audit `2026-07-18-i10-vault-first-governance.md` — **completed 2026-07-18** |
+| I11 | Bangla beginner handoff guidance (RU-HANDOFF v1.1) | completed | RU-HANDOFF v1.1 + rules 81 + skill output notes — **completed 2026-07-18** |
+| I12 | Founder OS strategy layer + rewire protocol | completed | AG-STR-FOUNDER-001 + PRJ-STR-FOUNDEROS-001 + 5 KOs — **completed 2026-07-18** |
+| I13 | Founder OS power pack + selective MCP port | completed | 4 specialist AG-* + 8 KOs + 2 MCP servers — **completed 2026-07-18** |
+| I14 | Dual memory — personal forever + project ephemeral | completed | ST-STR-MEMORY/ST-PLT-REWIRE v1.1 + folder reshape — **completed 2026-07-18** |
+| I15 | Marketing OS E2E under Business OS | completed | 23 KOs + CMO + 35 specialists + PRJ-GRO-MKOS-001 + rule 84 — **completed 2026-07-18** |
+| I16 | SEO OS sub-department under CMO | completed | SEO Lead + 3 specialists + 9 KOs + rule 85 — **completed 2026-07-18** |
+| I17 | Engineering OS peer department under Founder | completed | CTO + 2 specialists + 8 KOs + rule 86 — **completed 2026-07-18** |
 
 ## Task list
+
+- [x] **I12.1** Amend AR-004/007/011 to v1.1 — completed
+- [x] **I12.2** Author HB-STR-FOUNDER-001 + WF-STR-FOUNDER-001 — completed
+- [x] **I12.3** Author ST-PLT-REWIRE-001 — completed
+- [x] **I12.4** Author ST-STR-MEMORY-001 + TP-STR-FOUNDER-001 — completed
+- [x] **I12.5** Register AG-STR-FOUNDER-001 + vault skill + host copy-in — completed
+- [x] **I12.6** Register PRJ-STR-FOUNDEROS-001 — completed
+- [x] **I12.7** Scaffold founder-os-brain + memory folders + lane-router — completed
+- [x] **I12.8** Registry + ledger + anatomy + smoke validation — completed
+
+- [x] **I13.1** Author I13 KOs (5 HB + 2 WF + RU-FOUNDER + ST-MCP-PORT) + bump HB-STR-FOUNDER-001 v1.1 — completed
+- [x] **I13.2** Register AG-STR-RESEARCH/MARKET/SALES + AG-PLT-AUTOMATION + vault skills + host copy-in — completed
+- [x] **I13.3** Port MC-PLT-CODEBASE-001 + MC-KNW-RETRIEVE-001; wire mcp.json; junks port matrix — completed
+- [x] **I13.4** Update founder-os-brain, lane-router intents, rule 83 — completed
+- [x] **I13.5** Registry indexes + ledger + agents_cursor + smoke validation — completed
+
+- [x] **I14.1** Bump ST-STR-MEMORY-001 + ST-PLT-REWIRE-001 to v1.1 (dual-tier) — completed
+- [x] **I14.2** Reshape founder-os-memory/ personal + projects + active-project.json — completed
+- [x] **I14.3** Update brain, skill binding, MC-KNW-RETRIEVE-001; seed profile template — completed
+- [x] **I14.4** Registry bump + ledger + smoke validation — completed
+
+- [x] **I15.0** AR-004 v1.2 + AR-GRO-MKOS-001 + 23 KOs (HB/ST/RU/WF/TP) + registry 107 — completed
+- [x] **I15.1** AG-GRO-CMO-001 + rule 84 + marketing memory scaffold + lane `marketing_os` — completed
+- [x] **I15.2** Wave A — intelligence + brand agents (5) + skills + CMO handoffs — completed
+- [x] **I15.3** Wave B — content mini-OS agents (6) + skills — completed
+- [x] **I15.4** Wave C — SEO keyword/GEO + CRO/funnel/pricing; SEO trio under CMO — completed
+- [x] **I15.5** Wave D — social manager + paid + email agents (8) — completed
+- [x] **I15.6** Wave E — analytics/creative/video/community/memory (13) + PRJ-GRO-MKOS-001 + anatomy — completed
+
+- [x] **I16.0** AR-GRO-SEOOS-001 + 9 KOs + AR-004 v1.3 CAP-GRO-016 + registry 116 + rule 85 — completed
+- [x] **I16.1** AG-GRO-SEO-LEAD-001 + CMO rewire + seo_os lane + memory scaffold — completed
+- [x] **I16.2** International + Automation + Algorithm Watch agents + skills — completed
+- [x] **I16.3** founder brain + lane-router + ledger + anatomy + smoke + integrity — completed
+
+- [x] **I17.0** AR-ENG-SAASOS-001 + 8 KOs + AR-004 v1.4 CAP-ENG-001 + registry 124 + rule 86 — completed
+- [x] **I17.1** AG-ENG-CTO-001 + Founder rewire + engineering_os lane + memory scaffold + PRJ-ENG-SAASOS-001 — completed
+- [x] **I17.2** AG-ENG-PERF-001 + AG-ENG-DOCS-001 agents + skills + CTO handoffs — completed
+- [x] **I17.3** founder brain + lane-router + HB-DLV-SAAS-ORCH v1.1 + ledger + anatomy + smoke + integrity — completed
+
+- [x] **I11.1** Bump RU-AI-BOS-HANDOFF-001 to v1.1.0 with Bangla beginner template — completed
+- [x] **I11.2** Update vault + host rule 81 for Bangla suggestions — completed
+- [x] **I11.3** Add Output Format notes to system-builder + senior-saas skills (vault + personal) — completed
+- [x] **I11.4** Registry version bump + ledger + anatomy version log — completed
+
+- [x] **I10.1** Author RU-AI-BOS-VAULT-001 + expand AI-BOS/.cursor tree — completed
+- [x] **I10.2** Author RU-AI-BOS-HANDOFF-001 + vault rule 81 — completed
+- [x] **I10.3** Copy-in skills/agents; clarify SaaS orchestrator — completed
+- [x] **I10.4** Author HB-PLT-SYSBUILD-001, ST-PLT-ENV-001, WF-PLT-SYSBUILD-001 — completed
+- [x] **I10.5** Planner gap matrix + vault-skill/agent projections — completed (integrity PASS 40/40)
+- [x] **I10.6** Register KOs (70 objects); anatomy + ledger — completed
+
 
 - [x] **0.1** Scaffold isolated root (README, RUN, ENV.example, .gitignore) — evidence: `AI-BOS/`
 - [x] **0.2** Create local governance rule — evidence: `AI-BOS/.cursor/rules/75-ai-bos-governance.mdc`
@@ -84,6 +148,22 @@
 - [x] **I4.3** EXTEND 6 delivery skill AI-BOS bindings — completed — evidence: `~/.cursor/skills/*/references/ai-bos-binding.md` + SKILL.md Read First
 - [x] **I4.4** Add rule 76-ai-bos-saas-binding.mdc + align rule 70 — completed — evidence: `.cursor/rules/76-ai-bos-saas-binding.mdc`, `70-execution-constitution.mdc`
 - [x] **I4.5** Docs + anatomy + runtime inventory — completed — evidence: `docs/reference/saas-knowledge-catalog.md`, `runtime-surface-inventory.md`, `~/.cursor/docs/agents_cursor.md`
+- [x] **I5.1** Register 31 AG-* in agent-registry — completed — evidence: `agent-registry/registry.json` (40 total)
+- [x] **I5.2** Create PRJ-TMPL-HTML/NEXT + PRJ-BP-WEB; extend PRJ-SAAS — completed — evidence: `project-registry/registry.json` (5 total)
+- [x] **I5.3** Skill bindings + rules 77–79 + align rule 70 — completed — evidence: 10 skill bindings, `.cursor/rules/77–79`
+- [x] **I5.4** Docs + anatomy + registries — completed — evidence: `agent-mcp-catalog.md`, `projects-catalog.md`, `runtime-surface-inventory.md`, `agents_cursor.md`
+- [x] **I5.5** Validation (40 agents, 5 projects, 37 projections) — completed — evidence: enrollment script + manual verify
+- [x] **I6.1** Copy Universal + SEO → `AI-BOS/universal/`; README + INDEX — completed — evidence: 161 files, `universal/README.md`, `universal/INDEX.md`
+- [x] **I6.2** Author `RU-AI-BOS-UNI-001`; rewrite HB/ST refs to `universal/` — completed — evidence: zero `DOC/Universal/` in `AI-BOS/knowledge/`
+- [x] **I6.3** Registry hygiene (AR status, capabilities, PRJ-GOV ledger_path, ST-MCP align) — completed — evidence: `knowledge-registry/registry.json`, `ST-MCP-001`
+- [x] **I6.4** MCP runtime `MC-KNW-REGISTRY-001` + `.cursor/mcp.json` — completed — evidence: `AI-BOS/mcp/knowledge-registry/`, smoke PASS
+- [x] **I6.5** AG-KNW-VALID invocable surface + gov skill bindings — completed — evidence: `knowledge-validator` skill, `ai-bos-binding.md` on architect + system-builder
+- [x] **I7.1** HTML domain pack (6 KOs) + PRJ-TMPL-HTML-001 consumes — completed — evidence: `HB-ENG-HTML-001` … `RU-AI-BOS-HTML-001`
+- [x] **I7.2** Next domain pack (5 KOs) + PRJ-TMPL-NEXT-001 consumes — completed — evidence: `HB-ENG-NEXT-001` … `RU-AI-BOS-NEXT-001`
+- [x] **I8.1** Blueprint domain pack (4 KOs) + PRJ-BP-WEB-001 consumes — completed — evidence: `HB-DLV-BP-001` … `RU-AI-BOS-BP-001`
+- [x] **I8.2** SEO domain pack (4 KOs) + PRJ-SAAS consumes — completed — evidence: `HB-GRO-SEO-001` … `RU-AI-BOS-SEO-001`
+- [x] **I9.1** Rule 80 conversion binding + rule 70 PRJ-GOV/universal align — completed — evidence: `.cursor/rules/80-ai-bos-conversion-binding.mdc`, `70-execution-constitution.mdc`
+- [x] **I9.2** AR References scrub + anatomy/inventory + readiness audit ≥85 — completed — evidence: `2026-07-17-readiness-85.md`, `runtime-surface-inventory.md`, `agents_cursor.md`
 
 ## Log
 
@@ -124,3 +204,13 @@
 | 2026-07-17 | **I2 Operational wiring completed** via `@system-builder` (user: continue accordingly, done all planned implementations). Registered agents AG-KNW-ARCH-001 / AG-GOV-SYSBUILD-001 / AG-KNW-VALID-001; MCP MC-KNW-REGISTRY-001 with five canonical knowledge services; workflows WF-GOV-PHASE-APPROVE-001 + WF-KNW-AUTHOR-001; handbooks HB-KNW-AUTHORING-001 + HB-GOV-OPS-001; wired PRJ-GOV-AI-BOS-001; knowledge-registry now 33 objects. **D1 Trigger 2 acknowledged — Option B reaffirmed** (keep isolated root). Evidence: `AI-BOS/.cursor/audits/2026-07-17-d1-trigger2-acknowledgment.md`. Planned Phase 12 migration gaps + I1/I2 operational baseline are complete. |
 | 2026-07-17 | **I3 — PRJ-SAAS-GROWRIXOS-001 wired** via `@system-builder`. Registered 6 delivery agents (AG-DLV-SAAS/FE/BE/QA/QA-BE/DEVOPS) as projections of existing Cursor skills (no skill duplication). Project root_path=`F:/PROJECTS/Growrixos/web/`, ledger_path=`DOC/PROJECT PLAN/Tasks/tasks.md`, capabilities CAP-DLV-001/004/005 + ops/platform. `missing_knowledge` noted: SaaS domain handbooks not yet in AI-BOS. Projects now: PRJ-GOV-AI-BOS-001 + PRJ-SAAS-GROWRIXOS-001. Agents total: 9. |
 | 2026-07-17 | **I4 — SaaS agent readiness completed** via `@system-builder`. Authored 11 KOs; knowledge-registry **44** objects; wired project consumes; EXTEND 6 delivery skills with `ai-bos-binding.md`; added rule `76-ai-bos-saas-binding.mdc` + aligned rule 70; docs + anatomy + `runtime-surface-inventory.md`. Optional remaining: SEO/integration PT packs, MCP runtime, separate PRJ for sites/Next. |
+| 2026-07-17 | **I6–I9 — Path to 85+ completed** via `@system-builder`. Copied Universal+SEO to `AI-BOS/universal/` (161 files); +20 domain/policy KOs (registry **64**); MCP runtime live; gov bindings; rules 80 + 70 align; readiness audit **≥85**. Evidence: `AI-BOS/.cursor/audits/2026-07-17-readiness-85.md`. |
+| 2026-07-18 | **I10 — Vault-first governance completed** via `@system-builder`. RU-VAULT + RU-HANDOFF + HB-SYSBUILD + HB-SAAS-ORCH + ST-ENV + WF-SYSBUILD; copy-in 37 agents + 19 skills into vault `.cursor/`; all AG-* → `vault-*` (integrity PASS); SaaS orchestrator clarified; host rules 81/82 derived; knowledge-registry **70**. Evidence: `AI-BOS/.cursor/audits/2026-07-18-i10-vault-first-governance.md`. |
+| 2026-07-18 | **I11 — Bangla beginner handoff guidance completed.** RU-AI-BOS-HANDOFF-001 **v1.1.0** (Bangla template + optional-choice); rules 81 vault + host derived; system-builder + senior-saas Output Format notes (vault + `~/.cursor/skills/`); registry version bump; anatomy version log. Smoke PASS (70 objects). |
+| 2026-07-18 | **I12 — Founder OS strategy layer completed.** AR-004/007/011 v1.1; HB/WF/ST×2/TP founder KOs; `AG-STR-FOUNDER-001` + `PRJ-STR-FOUNDEROS-001`; vault skill `founder-os`; brain + `founder-os-memory/` scaffold; lane-router `founder_os`; agents **41**; knowledge-registry **75**. |
+| 2026-07-18 | **I13 — Founder OS power pack completed.** 4 specialist agents (`@founder-research`, `@founder-marketing`, `@founder-sales`, `@founder-automation`); 8 KOs + RU-FOUNDER-001; AR-008 v1.1; MCP `MC-PLT-CODEBASE-001` + `MC-KNW-RETRIEVE-001` under `AI-BOS/mcp/`; rule 83; agents **45**; knowledge-registry **84**. Port matrix: `docs/reference/junks-mcp-port-matrix.md`. |
+| 2026-07-18 | **I14 — Dual memory completed.** ST-STR-MEMORY-001 + ST-PLT-REWIRE-001 **v1.1**; `founder-os-memory/personal/` (forever) + `projects/<slug>/` (archivable); `active-project.json` + `shared-inbox/`; profile template; MC-KNW-RETRIEVE-001 dual-tier search. Registry **84** objects (version bumps only). |
+| 2026-07-18 | **I15 — Marketing OS E2E completed.** AR-004 v1.2 (CAP-GRO-006…015); 23 new KOs + AR-GRO-MKOS-001; `PRJ-GRO-MKOS-001`; `AG-GRO-CMO-001` + 35 division specialists; SEO trio + `@founder-marketing` under CMO; rule `84-ai-bos-mkos-binding.mdc`; marketing memory scaffold; lane `marketing_os`; agents **81**; knowledge-registry **107**. Smoke PASS; vault-skill integrity **60/60**. Evidence: `AI-BOS/.cursor/audits/2026-07-18-i15-marketing-os.md`. |
+| 2026-07-18 | **I16 — SEO OS completed.** `AG-GRO-SEO-LEAD-001` + 3 specialists (international, automation, algorithm watch); 9 KOs + AR-GRO-SEOOS-001; CAP-GRO-016; CMO → SEO Lead rewire; rule `85-ai-bos-seoos-binding.mdc`; lane `seo_os`; SEO memory scaffold; agents **85**; registry **116**. Evidence: `AI-BOS/.cursor/audits/2026-07-18-i16-seo-os.md`. |
+| 2026-07-18 | **I17 — Engineering OS completed.** `AG-ENG-CTO-001` Chief Technology Officer + 2 specialists (performance, documentation); 8 KOs + AR-ENG-SAASOS-001; CAP-ENG-001; Founder → CTO rewire; rule `86-ai-bos-engos-binding.mdc`; lane `engineering_os`; engineering memory scaffold; `PRJ-ENG-SAASOS-001`; agents **88**; registry **124**. Evidence: `AI-BOS/.cursor/audits/2026-07-18-i17-engineering-os.md`. |
+| 2026-07-18 | **One-shot acceptance discipline (repair_drift)** via `@system-builder` + `/frontend-factory`. Pain inventory from free-demo intake chat: auth middleware miss, popup timing/localStorage, fill-then-auth, viewport-overflow modals, banned “AI-powered” copy. Added host+vault rule `87-oneshot-acceptance-discipline.mdc`; FE skill note; `agents_cursor.md` version log. UI fix: `FreeDemoModal` viewport fit + non-AI copy. |
