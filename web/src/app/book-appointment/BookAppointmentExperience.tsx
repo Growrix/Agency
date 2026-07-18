@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
 import {
   ArrowRightIcon,
@@ -97,6 +97,15 @@ export function BookAppointmentExperience() {
   const [status, setStatus] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("Could not reserve that slot. Please try another time or use WhatsApp.");
   const [confirmation, setConfirmation] = useState<{ id: string; datetime: string } | null>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success") {
+      successRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      successRef.current?.focus();
+    }
+  }, [status]);
+
   const timezone = getDetectedTimezone();
   const [minimumBookingDate] = useState<Date>(() => getMinimumBookingDate());
   const minDate = minimumBookingDate ? toDateInputValue(minimumBookingDate) : "";
@@ -153,7 +162,7 @@ export function BookAppointmentExperience() {
   const bookingCard = (
     <Card className="contact-form-mobile__form-card">
       {status === "success" && confirmation ? (
-        <div className="py-2">
+        <div ref={successRef} tabIndex={-1} aria-live="polite" className="py-2 outline-none">
           <CheckCircleIcon className="size-12 text-success" aria-hidden />
           <h2 className="mt-4 font-display text-2xl tracking-tight">Slot requested.</h2>
           <p className="mt-3 text-sm leading-6 text-text-muted">

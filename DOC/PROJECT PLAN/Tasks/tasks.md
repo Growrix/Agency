@@ -768,3 +768,13 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/components/marketing/contact/ContactChannelsMobile.tsx`, `web/src/app/contact/ContactPageClient.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `ReadLints` zero errors/warnings; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
 - **Gaps:** No operator actions. Mobile-specific tap interaction was not exercised by the existing desktop-chrome e2e suite; a manual mobile browser pass is recommended.
+
+### 2026-07-18 — Contact and booking form post-submit scroll/focus fix (debug_failure)
+- **Root cause:** On successful submission, both the contact inquiry form and the booking form replace a tall form with a much shorter success confirmation. Because the viewport was anchored near the bottom of the page (submit button area), the layout collapse left the user looking at the next unrelated section instead of the confirmation. There was no programmatic scroll or focus to the success message.
+- **Fix:**
+  - Added a `successRef` and `useEffect` to `web/src/app/contact/ContactPageClient.tsx` that calls `scrollIntoView({ behavior: "smooth", block: "start" })` and `focus()` on the success container when `status === "success"`.
+  - Applied the same pattern to `web/src/app/book-appointment/BookAppointmentExperience.tsx` for the booking confirmation.
+  - Both success containers now have `tabIndex={-1}` and `aria-live="polite"` for accessibility, with `outline-none` to avoid an unwanted focus ring on the non-interactive container.
+- **Touched files:** `web/src/app/contact/ContactPageClient.tsx`, `web/src/app/book-appointment/BookAppointmentExperience.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero errors/warnings; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
+- **Gaps:** No operator actions. The existing e2e suite does not assert the actual scroll position after form submission; a manual browser pass on both desktop and mobile is recommended.

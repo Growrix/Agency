@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
 import {
   CalendarDaysIcon,
@@ -64,6 +64,14 @@ export function ContactPageClient() {
   const [isHydrated] = useState(true);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("Something went wrong. Please try again or use WhatsApp.");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success") {
+      successRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      successRef.current?.focus();
+    }
+  }, [status]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,10 +106,13 @@ export function ContactPageClient() {
     <Card className="contact-form-mobile__form-card">
       {status === "success" ? (
         <motion.div
+          ref={successRef}
+          tabIndex={-1}
+          aria-live="polite"
           initial={{ opacity: 0, scale: 0.9, y: 8 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 360, damping: 24, mass: 0.6 }}
-          className="py-6 text-center"
+          className="py-6 text-center outline-none"
         >
           <motion.div
             initial={{ scale: 0.4, rotate: -20 }}
