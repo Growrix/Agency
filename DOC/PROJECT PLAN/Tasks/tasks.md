@@ -851,3 +851,25 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/components/marketing/automation/AutomationHero.tsx`, `AutomationWorkflowSection.tsx`, `AutomationTypesGrid.tsx`, `AutomationOutcomesMetrics.tsx`, `AutomationWhyBuild.tsx`, `AutomationProcess.tsx`, `AutomationPricing.tsx`, `AutomationFAQ.tsx`, `AutomationCTA.tsx`, `AutomationPage.module.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `ReadLints` zero errors/warnings; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
 - **Gaps:** No operator actions. Manual mobile browser pass on `/services/automation` recommended to confirm visual parity with other service pages.
+
+### 2026-07-18 — Automation desktop title accent gradient fix (WEB-AUTOMATION-REDESIGN-004)
+- **Request:** Automation desktop section headings, hero, and CTA title accents were not using the global gradient; mobile was correct.
+- **Root cause:** `AutomationPage.module.css` overrode `.marketing-title-accent` inside `.sectionHeaderCenter`, `.heroTitleAccent`, and `.ctaTitleAccent` with a custom primary-to-cyan gradient instead of the global primary-to-secondary gradient in `globals.css`.
+- **Fix:** Removed the per-page CSS-module accent overrides; removed `styles.heroTitleAccent` and `styles.ctaTitleAccent` class references from `AutomationHero.tsx` and `AutomationCTA.tsx`.
+- **Touched files:** `web/src/components/marketing/automation/AutomationPage.module.css`, `AutomationHero.tsx`, `AutomationCTA.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero errors/warnings; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0; build pass; 17/17 release-gate e2e tests pass (after killing stale port 5000 process and cleaning `.next` cache). Commit `96a5950`.
+- **Gaps:** No operator actions. Manual browser pass on `/services/automation` desktop recommended to confirm accent gradient matches other service pages.
+
+### 2026-07-18 — Web mobile design-system governance (system-builder)
+- **Request:** Identify root cause of repeated DS violations (bespoke mobile CSS, per-page accent overrides) and update rules/skills/brain to prevent recurrence.
+- **Root cause:** The canonical `MarketingViewportGate` + `home-mobile-marketing` pattern was documented only in project plans, not in rules/skills/brain that agents read before starting work. No gate caught bespoke mobile CSS or accent overrides.
+- **Fix:**
+  - Created `.cursor/rules/52-web-mobile-design-system.mdc` — requires `MarketingViewportGate`, lists shared mobile components, forbids bespoke mobile CSS modules and per-page `.marketing-title-accent` overrides.
+  - Updated `.cursor/rules/60-zero-gate-health-check.mdc` with marketing/service page DS parity check.
+  - Updated `senior-saas-developer` SKILL (host + AI-BOS vault) with web marketing page audit section and rule load.
+  - Updated `senior-frontend-specialist` SKILL with shared mobile system non-negotiables.
+  - Documented marketing mobile system in `memories/repo/site-brain.md`.
+  - Added Step 12 (Design system parity) to `frontend-quality-enforcer/quality-matrix.md`.
+- **Touched files:** `.cursor/rules/52-web-mobile-design-system.mdc`, `.cursor/rules/60-zero-gate-health-check.mdc`, `AI-BOS/.cursor/skills/senior-saas-developer/SKILL.md`, `AI-BOS/.cursor/skills/senior-frontend-specialist/SKILL.md`, `AI-BOS/.cursor/skills/frontend-quality-enforcer/quality-matrix.md`, `memories/repo/site-brain.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`. Host copy: `~/.cursor/skills/senior-saas-developer/SKILL.md`.
+- **Validation:** ReadLints zero on touched rule/brain files; no code gates required for documentation-only changes.
+- **Gaps:** Rule `52-web-mobile-design-system.mdc` is not yet mirrored to `AI-BOS/.cursor/rules/` (host-only for Growrixos `web/` lane). Consider vault KO if cross-project portability is needed.

@@ -1,0 +1,58 @@
+---
+description: Mandatory mobile design-system reuse for web/ marketing pages — MarketingViewportGate, home-mobile-marketing components, and global title accent gradient
+globs: web/**/*
+alwaysApply: false
+---
+
+# Web Mobile Design System (`web/`)
+
+Applies to all marketing and service pages under `web/src/app/`. Complements rules `20-design-system.mdc`, `51-web-production-gates.mdc`, and `60-zero-gate-health-check.mdc`.
+
+## Viewport delegation (required)
+
+Every public marketing page under `web/src/app/` **must** use `MarketingViewportGate` from [`web/src/components/marketing/MarketingViewportGate.tsx`](web/src/components/marketing/MarketingViewportGate.tsx) to split mobile (`< lg`) and desktop (`≥ lg`) layouts.
+
+**Never** build bespoke mobile-only CSS modules that duplicate shared components. Mobile layout CSS extensions belong in `web/src/app/globals.css` under the `.home-mobile-marketing*` or `.service-detail-hero-mobile*` BEM namespaces.
+
+## Service detail pages — shared mobile components
+
+When adding or redesigning a service detail page, **reuse** these mobile components (do not reinvent):
+
+| Section | Mobile component |
+|---------|------------------|
+| Hero | `ServiceDetailHeroMobile` |
+| Section header | `MobileMarketingSectionHeader` |
+| Feature/outcome grid | `MobileFeatureGrid` |
+| Principle/why-build list | `MobilePrincipleList` |
+| Process steps | `ProcessStepsMobile` |
+| Pricing tiers | `EngagementTiersMobile` |
+| FAQ | `ServiceFaqMobile` |
+| Final CTA | `ProductLedFinalCTAMobile` |
+| Workflow showcase | `AutomationWorkflowShowcaseMobile` (automation-specific) |
+| Automation types | `AutomationTypesMobile` |
+
+Gold-standard reference implementations:
+
+- [`web/src/app/services/[slug]/page.tsx`](web/src/app/services/[slug]/page.tsx) — service page hub
+- `/services/websites`, `/services/saas-applications`, `/services/ai-business-systems`
+
+## Title accent gradient (required)
+
+Section headings on marketing pages **must** use `titleLead` / `titleAccent` via `SectionHeading` or `MarketingAccentTitle`, which render the global `.marketing-title-accent` class.
+
+The gradient is defined in `web/src/app/globals.css` (`.marketing-title-accent` and `.home-mobile-marketing__title-accent`).
+
+**Never** override `.marketing-title-accent` in page-specific CSS modules. Per-page accent overrides break visual parity with other service pages.
+
+## Desktop custom styling
+
+Desktop-only visual treatments (cards, timelines, glass panels) may use scoped CSS modules **only when** they do not override global typography tokens or the title accent gradient. Mobile must still delegate to the shared components above.
+
+## Audit before redesign
+
+Before redesigning or adding a `web/` marketing/service page:
+
+1. Read [`memories/repo/site-brain.md`](memories/repo/site-brain.md) — Marketing mobile system section
+2. Audit an existing gold-standard service page in `web/src/app/services/[slug]/page.tsx`
+3. Confirm mobile sections use `MarketingViewportGate` + shared `home-mobile-marketing` primitives
+4. Confirm section headings use the global accent gradient (no per-page override)

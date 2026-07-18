@@ -179,6 +179,27 @@ Auth note: Clerk is the managed identity provider; Supabase is PostgreSQL persis
 - **Forbidden:** `@/components/marketing/hero-motion` barrel imports (ESLint enforced)
 - Resource budget flake after hero changes: defer SpeedInsights until `window` load; below-fold sections use `dynamic(..., { ssr: false })` in `HomeBelowFoldSections.tsx`
 
+## Marketing mobile system (`web/`)
+
+Canonical pattern for service and marketing pages below `lg`:
+
+| Piece | Location |
+|-------|----------|
+| Viewport gate | `web/src/components/marketing/MarketingViewportGate.tsx` |
+| Shared mobile components | `web/src/components/marketing/mobile/` |
+| Service-specific mobile wrappers | `web/src/components/marketing/services/` |
+| Service page hub | `web/src/app/services/[slug]/page.tsx` |
+| Mobile BEM namespace | `.home-mobile-marketing*` in `web/src/app/globals.css` |
+| Service hero mobile namespace | `.service-detail-hero-mobile*` in `web/src/app/globals.css` |
+
+**Required mobile components for service detail pages:** `ServiceDetailHeroMobile`, `MobileMarketingSectionHeader`, `MobileFeatureGrid`, `MobilePrincipleList`, `ProcessStepsMobile`, `EngagementTiersMobile`, `ServiceFaqMobile`, `ProductLedFinalCTAMobile`.
+
+**Gold-standard reference pages:** `/services/websites`, `/services/saas-applications`, `/services/ai-business-systems`.
+
+**Title accent gradient:** Global class `.marketing-title-accent` in `web/src/app/globals.css` (~line 3732). Mobile uses `.home-mobile-marketing__title-accent` (same gradient). **Never override** in page-specific CSS modules.
+
+**Rule:** `.cursor/rules/52-web-mobile-design-system.mdc` — agents must read before redesigning any `web/` marketing/service page.
+
 ## Future Update Checklist
 
 When site content changes, update this file in this order:
