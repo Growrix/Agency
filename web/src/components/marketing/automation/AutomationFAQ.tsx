@@ -1,6 +1,6 @@
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { Accordion, type AccordionItem } from "@/components/sections/Accordion";
 import { AUTOMATION_SERVICE_FAQ_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
@@ -33,26 +33,19 @@ function AutomationFAQDesktop({ items }: { items: AccordionItem[] }) {
   );
 }
 
-function AutomationFAQMobile({ items }: { items: AccordionItem[] }) {
-  return (
-    <div>
-      <MobileMarketingSectionHeader
-        eyebrow={AUTOMATION_SERVICE_FAQ_SECTION.eyebrow}
-        titleLead={AUTOMATION_SERVICE_FAQ_SECTION.titleLead}
-        titleAccent={AUTOMATION_SERVICE_FAQ_SECTION.titleAccent}
-        description={AUTOMATION_SERVICE_FAQ_SECTION.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <Accordion items={items} className={styles.faqColumn} />
-    </div>
-  );
-}
-
 export function AutomationFAQ({ items }: { items: AccordionItem[] }) {
   return (
     <MarketingViewportGate
-      mobile={<AutomationFAQMobile items={items} />}
+      mobile={
+        <ServiceFaqMobile
+          eyebrow={AUTOMATION_SERVICE_FAQ_SECTION.eyebrow}
+          title={AUTOMATION_SERVICE_FAQ_SECTION.title}
+          titleLead={AUTOMATION_SERVICE_FAQ_SECTION.titleLead}
+          titleAccent={AUTOMATION_SERVICE_FAQ_SECTION.titleAccent}
+          description={AUTOMATION_SERVICE_FAQ_SECTION.description}
+          items={items}
+        />
+      }
       desktop={<AutomationFAQDesktop items={items} />}
     />
   );

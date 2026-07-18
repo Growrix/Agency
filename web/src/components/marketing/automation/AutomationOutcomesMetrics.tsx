@@ -7,7 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { MobileFeatureGrid } from "@/components/marketing/mobile/MobileFeatureGrid";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_OUTCOMES_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
@@ -65,30 +65,19 @@ function AutomationOutcomesDesktop() {
   );
 }
 
-function AutomationOutcomesMobile() {
-  return (
-    <div>
-      <MobileMarketingSectionHeader
-        eyebrow={AUTOMATION_OUTCOMES_SECTION.eyebrow}
-        titleLead={AUTOMATION_OUTCOMES_SECTION.titleLead}
-        titleAccent={AUTOMATION_OUTCOMES_SECTION.titleAccent}
-        description={AUTOMATION_OUTCOMES_SECTION.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <div className={styles.metricsGrid}>
-        {METRICS.map((metric) => (
-          <MetricCard key={metric.title} metric={metric} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function AutomationOutcomesMetrics() {
   return (
     <MarketingViewportGate
-      mobile={<AutomationOutcomesMobile />}
+      mobile={
+        <MobileFeatureGrid
+          eyebrow={AUTOMATION_OUTCOMES_SECTION.eyebrow}
+          title={AUTOMATION_OUTCOMES_SECTION.title}
+          titleLead={AUTOMATION_OUTCOMES_SECTION.titleLead}
+          titleAccent={AUTOMATION_OUTCOMES_SECTION.titleAccent}
+          description={AUTOMATION_OUTCOMES_SECTION.description}
+          items={AUTOMATION_OUTCOMES_SECTION.builds}
+        />
+      }
       desktop={<AutomationOutcomesDesktop />}
     />
   );

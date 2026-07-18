@@ -7,15 +7,7 @@
   max-width: 36rem;
 }
 
-.heroMobile {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .heroTitleAccent :global(.marketing-title-accent),
-.heroMobile :global(.home-mobile-marketing__title-accent),
 .sectionHeaderCenter :global(.marketing-title-accent) {
   background: linear-gradient(90deg, var(--color-primary), #06b6d4);
   -webkit-background-clip: text;
@@ -237,100 +229,6 @@
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--color-text-muted);
-}
-
-.workflowCardsMobile {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.workflowCardMobile {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  padding: 1.25rem;
-}
-
-.workflowCardMobile::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-  opacity: 0.4;
-}
-
-.workflowCardTitleMobile {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  position: relative;
-}
-
-.workflowTimelineMobile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding-left: 1.75rem;
-}
-
-.workflowTimelineMobile::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 1rem;
-  width: 1px;
-  border-left: 1px dashed var(--color-border);
-}
-
-.workflowNodeMobile {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.workflowNodeMobileCircle {
-  position: absolute;
-  left: -1.75rem;
-  top: 0;
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
-  background: var(--color-surface);
-  color: var(--color-primary);
-}
-
-.workflowNodeMobileCircleAi {
-  border-color: color-mix(in srgb, var(--color-primary) 70%, transparent);
-  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
-}
-
-.workflowNodeMobileText {
-  font-size: 0.875rem;
-  color: var(--color-text);
-}
-
-.workflowOutcomeMobile {
-  position: relative;
-  margin-top: 1rem;
-  border-top: 1px solid var(--color-border);
-  padding-top: 1rem;
 }
 
 /* ---------- Automation types grid ---------- */
@@ -586,50 +484,6 @@
   padding: 0 0.5rem;
 }
 
-.processTimelineMobile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  padding-left: 2.5rem;
-}
-
-.processTimelineMobile::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 1.25rem;
-  width: 1px;
-  border-left: 2px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
-  z-index: 0;
-}
-
-.processStepMobile {
-  position: relative;
-  z-index: 1;
-}
-
-.processNumberMobile {
-  position: absolute;
-  left: -2.5rem;
-  top: 0;
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
-  background: var(--color-surface);
-  color: var(--color-primary);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
 /* ---------- Pricing ---------- */
 .pricingGrid {
   display: grid;
@@ -803,25 +657,6 @@
   background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
 }
 
-.ctaBandMobile {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  border: 1px solid var(--color-border);
-  background: var(--color-contrast);
-  padding: 1.5rem;
-}
-
-.ctaBandMobile::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-}
-
 .ctaTitleAccent :global(.marketing-title-accent) {
   background: linear-gradient(90deg, var(--color-primary), #06b6d4);
   -webkit-background-clip: text;
@@ -881,66 +716,5 @@
 
   .workflowCards {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ---------- Mobile compactness (< 640px) ---------- */
-@media (max-width: 639px) {
-  .metricsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-
-  .metricCard {
-    padding: 1rem;
-  }
-
-  .metricIcon {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .metricIcon :global(svg) {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .metricLabel {
-    font-size: 1rem;
-  }
-
-  .metricDescription {
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-
-  .whyGrid {
-    gap: 0.75rem;
-  }
-
-  .whyCard {
-    padding: 1rem;
-  }
-
-  .whyIcon {
-    width: 2rem;
-    height: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .whyIcon :global(svg) {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .whyTitle {
-    font-size: 1rem;
-  }
-
-  .whyDescription {
-    font-size: 0.875rem;
-    line-height: 1.5;
   }
 }

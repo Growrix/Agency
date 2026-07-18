@@ -9,7 +9,7 @@ import { MarketingHeroTitle } from "@/components/marketing/MarketingHeroTitle";
 import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { ServiceDetailHeroMobile } from "@/components/marketing/services/ServiceDetailHeroMobile";
 import { AUTOMATION_SERVICE_HERO } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
 import styles from "./AutomationPage.module.css";
@@ -131,49 +131,6 @@ function AutomationHeroDesktop({
   );
 }
 
-function AutomationHeroMobile({
-  service,
-  copy,
-}: {
-  service: AutomationService;
-  copy: AutomationCopy;
-}) {
-  return (
-    <div className={styles.heroMobile}>
-      <Link
-        href="/services"
-        className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary"
-      >
-        ← All services
-      </Link>
-      <MobileMarketingSectionHeader
-        eyebrow={copy.eyebrow}
-        titleLead={AUTOMATION_SERVICE_HERO.headlineLead}
-        titleAccent={AUTOMATION_SERVICE_HERO.headlineAccent}
-        description={copy.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <div className="flex flex-col gap-3">
-          <LinkButton href="/book-appointment" fullWidth className="min-h-12">
-            {copy.primaryCta}
-            <ArrowRightIcon className="size-4" aria-hidden />
-          </LinkButton>
-          <LinkButton
-            href={copy.secondaryHref}
-            variant="outline"
-            fullWidth
-            className="min-h-12"
-          >
-          {copy.secondaryCta}
-        </LinkButton>
-      </div>
-      <AutomationHeroPanel service={service} />
-      <AutomationHeroTrust />
-    </div>
-  );
-}
-
 export function AutomationHero({
   service,
   copy,
@@ -183,7 +140,21 @@ export function AutomationHero({
 }) {
   return (
     <MarketingViewportGate
-      mobile={<AutomationHeroMobile service={service} copy={copy} />}
+      mobile={
+        <ServiceDetailHeroMobile
+          eyebrow={copy.eyebrow}
+          headlineLead={AUTOMATION_SERVICE_HERO.headlineLead}
+          headlineAccent={AUTOMATION_SERVICE_HERO.headlineAccent}
+          description={copy.description}
+          primaryCta={copy.primaryCta}
+          secondaryCta={copy.secondaryCta}
+          secondaryHref={copy.secondaryHref}
+          deliveryTimeline={service.delivery_timeline}
+          engagementSummary={service.short_description}
+          pillars={service.pillars}
+          icon={BoltIcon}
+        />
+      }
       desktop={<AutomationHeroDesktop service={service} copy={copy} />}
     />
   );

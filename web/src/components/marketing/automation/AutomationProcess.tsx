@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { ProcessStepsMobile } from "@/components/marketing/ProcessStepsMobile";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_PROCESS_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
@@ -59,34 +59,18 @@ function AutomationProcessDesktop() {
   );
 }
 
-function AutomationProcessMobile() {
-  return (
-    <div>
-      <MobileMarketingSectionHeader
-        eyebrow={AUTOMATION_PROCESS_SECTION.eyebrow}
-        titleLead={AUTOMATION_PROCESS_SECTION.titleLead}
-        titleAccent={AUTOMATION_PROCESS_SECTION.titleAccent}
-        description={AUTOMATION_PROCESS_SECTION.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <ol className={styles.processTimelineMobile}>
-        {AUTOMATION_PROCESS_SECTION.steps.map((step) => (
-          <li key={step.title} className={styles.processStepMobile}>
-            <span className={styles.processNumberMobile}>{step.number}</span>
-            <h3 className={styles.processTitle}>{step.title}</h3>
-            <p className={styles.processDescription}>{step.description}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
 export function AutomationProcess() {
   return (
     <MarketingViewportGate
-      mobile={<AutomationProcessMobile />}
+      mobile={
+        <ProcessStepsMobile
+          steps={[...AUTOMATION_PROCESS_SECTION.steps]}
+          eyebrow={AUTOMATION_PROCESS_SECTION.eyebrow}
+          titleLead={AUTOMATION_PROCESS_SECTION.titleLead}
+          titleAccent={AUTOMATION_PROCESS_SECTION.titleAccent}
+          description={AUTOMATION_PROCESS_SECTION.description}
+        />
+      }
       desktop={<AutomationProcessDesktop />}
     />
   );

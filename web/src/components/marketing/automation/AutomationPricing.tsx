@@ -9,7 +9,7 @@ import { LinkButton } from "@/components/primitives/Button";
 import { Badge } from "@/components/primitives/Badge";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { EngagementTiersMobile } from "@/components/marketing/services/EngagementTiersMobile";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_ENGAGEMENT_SECTION } from "@/lib/automation-service-content";
 import type { Tier } from "@/components/sections/PricingTier";
@@ -92,30 +92,18 @@ function AutomationPricingDesktop({ tiers }: { tiers: Tier[] }) {
   );
 }
 
-function AutomationPricingMobile({ tiers }: { tiers: Tier[] }) {
-  return (
-    <div>
-      <MobileMarketingSectionHeader
-        eyebrow={AUTOMATION_ENGAGEMENT_SECTION.eyebrow}
-        titleLead={AUTOMATION_ENGAGEMENT_SECTION.titleLead}
-        titleAccent={AUTOMATION_ENGAGEMENT_SECTION.titleAccent}
-        description={AUTOMATION_ENGAGEMENT_SECTION.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <div className={styles.pricingGrid}>
-        {tiers.map((tier) => (
-          <PricingCard key={tier.name} tier={tier} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function AutomationPricing({ tiers }: { tiers: Tier[] }) {
   return (
     <MarketingViewportGate
-      mobile={<AutomationPricingMobile tiers={tiers} />}
+      mobile={
+        <EngagementTiersMobile
+          eyebrow={AUTOMATION_ENGAGEMENT_SECTION.eyebrow}
+          title={AUTOMATION_ENGAGEMENT_SECTION.title}
+          titleLead={AUTOMATION_ENGAGEMENT_SECTION.titleLead}
+          titleAccent={AUTOMATION_ENGAGEMENT_SECTION.titleAccent}
+          tiers={tiers}
+        />
+      }
       desktop={<AutomationPricingDesktop tiers={tiers} />}
     />
   );

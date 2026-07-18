@@ -9,7 +9,7 @@ import {
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { AutomationTypesMobile } from "@/components/marketing/services/AutomationTypesMobile";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_TYPES_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
@@ -76,26 +76,6 @@ function AutomationTypesDesktop() {
         ))}
       </RevealGroup>
     </>
-  );
-}
-
-function AutomationTypesMobile() {
-  return (
-    <div>
-      <MobileMarketingSectionHeader
-        eyebrow={AUTOMATION_TYPES_SECTION.eyebrow}
-        titleLead={AUTOMATION_TYPES_SECTION.titleLead}
-        titleAccent={AUTOMATION_TYPES_SECTION.titleAccent}
-        description={AUTOMATION_TYPES_SECTION.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <div className={styles.typesGrid}>
-        {AUTOMATION_TYPES_SECTION.items.map((item, index) => (
-          <TypeCard key={item.title} item={item} index={index} />
-        ))}
-      </div>
-    </div>
   );
 }
 

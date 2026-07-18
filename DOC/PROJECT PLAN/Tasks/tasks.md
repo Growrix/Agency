@@ -833,3 +833,21 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/components/marketing/automation/AutomationPage.module.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests). A stale `next start` process on port 5000 was killed before the e2e run.
 - **Gaps:** No operator actions. A manual browser pass on `/services/automation` at mobile viewport is recommended to confirm the metrics and why-build cards feel compact and the "Most Popular" badge is fully visible on both desktop and mobile.
+
+### 2026-07-18 — Automation page mobile alignment with global home-mobile-marketing system (WEB-AUTOMATION-REDESIGN-003)
+- **Request:** The automation page mobile version was not following the global mobile design system used on other service pages (AI Business Systems, Technical SEO, SaaS, etc.). Sections like "What we deliver" and "Why build" used custom CSS module cards instead of the shared `home-mobile-marketing` components.
+- **Root cause:** The automation redesign introduced bespoke mobile layouts in each automation component (`AutomationOutcomesMetrics`, `AutomationWhyBuild`, `AutomationProcess`, `AutomationPricing`, etc.) rather than delegating mobile to the established global components already used across service detail pages.
+- **Fix:**
+  - **Hero:** Mobile now uses `ServiceDetailHeroMobile` (same as other conversion service pages).
+  - **Workflow examples:** Mobile now uses `AutomationWorkflowShowcaseMobile` (global workflow card pattern).
+  - **Automation types:** Mobile now uses `AutomationTypesMobile` → `MobileFeatureGrid`.
+  - **What we deliver:** Mobile now uses `MobileFeatureGrid` with `AUTOMATION_OUTCOMES_SECTION.builds`.
+  - **Why build:** Mobile now uses `MobilePrincipleList` with `AUTOMATION_WHY_BUILD_SECTION.cards`.
+  - **Process:** Mobile now uses `ProcessStepsMobile`.
+  - **Pricing:** Mobile now uses `EngagementTiersMobile` (path-card pattern with featured tier styling).
+  - **FAQ:** Mobile now uses `ServiceFaqMobile`.
+  - **CTA:** Mobile now uses `ProductLedFinalCTAMobile`.
+  - Removed obsolete custom mobile CSS from `AutomationPage.module.css` (workflow mobile, process mobile, CTA mobile, hero mobile, metrics/why compactness overrides). Desktop custom design preserved.
+- **Touched files:** `web/src/components/marketing/automation/AutomationHero.tsx`, `AutomationWorkflowSection.tsx`, `AutomationTypesGrid.tsx`, `AutomationOutcomesMetrics.tsx`, `AutomationWhyBuild.tsx`, `AutomationProcess.tsx`, `AutomationPricing.tsx`, `AutomationFAQ.tsx`, `AutomationCTA.tsx`, `AutomationPage.module.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero errors/warnings; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
+- **Gaps:** No operator actions. Manual mobile browser pass on `/services/automation` recommended to confirm visual parity with other service pages.

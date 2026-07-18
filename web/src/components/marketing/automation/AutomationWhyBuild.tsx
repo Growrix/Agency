@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { SectionHeading } from "@/components/primitives/SectionHeading";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
-import { MobileMarketingSectionHeader } from "@/components/marketing/mobile/MobileMarketingSectionHeader";
+import { MobilePrincipleList } from "@/components/marketing/mobile/MobilePrincipleList";
 import { RevealGroup, RevealItem } from "@/components/motion/Motion";
 import { AUTOMATION_WHY_BUILD_SECTION } from "@/lib/automation-service-content";
 import { cn } from "@/lib/utils";
@@ -53,30 +53,19 @@ function AutomationWhyBuildDesktop() {
   );
 }
 
-function AutomationWhyBuildMobile() {
-  return (
-    <div>
-      <MobileMarketingSectionHeader
-        eyebrow={AUTOMATION_WHY_BUILD_SECTION.eyebrow}
-        titleLead={AUTOMATION_WHY_BUILD_SECTION.titleLead}
-        titleAccent={AUTOMATION_WHY_BUILD_SECTION.titleAccent}
-        description={AUTOMATION_WHY_BUILD_SECTION.description}
-        align="left"
-        className="home-mobile-marketing__header--left max-w-none"
-      />
-      <div className={styles.whyGrid}>
-        {AUTOMATION_WHY_BUILD_SECTION.cards.map((card, index) => (
-          <WhyCard key={card.title} card={card} index={index} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function AutomationWhyBuild() {
   return (
     <MarketingViewportGate
-      mobile={<AutomationWhyBuildMobile />}
+      mobile={
+        <MobilePrincipleList
+          eyebrow={AUTOMATION_WHY_BUILD_SECTION.eyebrow}
+          title={AUTOMATION_WHY_BUILD_SECTION.title}
+          titleLead={AUTOMATION_WHY_BUILD_SECTION.titleLead}
+          titleAccent={AUTOMATION_WHY_BUILD_SECTION.titleAccent}
+          description={AUTOMATION_WHY_BUILD_SECTION.description}
+          items={AUTOMATION_WHY_BUILD_SECTION.cards}
+        />
+      }
       desktop={<AutomationWhyBuildDesktop />}
     />
   );
