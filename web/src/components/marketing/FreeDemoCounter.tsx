@@ -16,11 +16,13 @@ type Props = {
   className?: string;
   compact?: boolean;
   withRing?: boolean;
+  /** Tighter padding / smaller ring for above-the-fold offer layouts. */
+  dense?: boolean;
 };
 
 const POLL_MS = 5000;
 
-export function FreeDemoCounter({ className, compact = false, withRing = false }: Props) {
+export function FreeDemoCounter({ className, compact = false, withRing = false, dense = false }: Props) {
   const [state, setState] = useState<FreeDemoCampaignView | null>(null);
   const [error, setError] = useState(false);
   const reduced = useReducedMotion();
@@ -58,13 +60,18 @@ export function FreeDemoCounter({ className, compact = false, withRing = false }
   }
 
   if (!state) {
-    return <p className={cn("text-sm text-text-muted", className)} aria-live="polite">Loading spots…</p>;
+    return (
+      <p className={cn("text-sm text-text-muted", className)} aria-live="polite">
+        Loading spots…
+      </p>
+    );
   }
 
   const claimedLabel = `${state.claimedCount}/${state.totalSlots}`;
   const remainingLabel = `${state.remaining}`;
   const claimedRatio = state.totalSlots > 0 ? state.claimedCount / state.totalSlots : 0;
-  const ringRadius = 26;
+  const ringRadius = dense ? 20 : 26;
+  const ringSize = dense ? 48 : 64;
   const ringCircumference = 2 * Math.PI * ringRadius;
   const ringOffset = ringCircumference * (1 - claimedRatio);
 
@@ -79,45 +86,61 @@ export function FreeDemoCounter({ className, compact = false, withRing = false }
   return (
     <div
       className={cn(
-        "flex items-center gap-4 rounded-md border border-primary/25 bg-primary/10 px-4 py-3 text-sm text-text",
+        "flex items-center gap-3 rounded-md border border-primary/25 bg-primary/10 text-sm text-text",
+        dense ? "px-3 py-2" : "gap-4 px-4 py-3",
         className,
       )}
       aria-live="polite"
     >
       <span
         aria-hidden
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary"
+        className={cn(
+          "flex shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary",
+          dense ? "h-8 w-8" : "h-10 w-10",
+        )}
       >
-        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" className={dense ? "h-4 w-4" : "h-5 w-5"} stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
           <path d="M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0Z" />
           <path d="M2 21v-1a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v1" />
         </svg>
       </span>
       <div className="min-w-0 flex-1">
-        <p className="font-medium text-text tabular-nums">
+        <p className={cn("font-medium text-text tabular-nums", dense && "text-[13px] leading-snug")}>
           <CountUp value={claimedLabel} /> founders claimed · <CountUp value={remainingLabel} /> spots left
         </p>
-        {state.claimedCount > 0 ? (
-          <p className="mt-1 text-text-muted">Join {state.claimedCount} founders who already claimed their spot.</p>
+        {!dense ? (
+          state.claimedCount > 0 ? (
+            <p className="mt-1 text-text-muted">Join {state.claimedCount} founders who already claimed their spot.</p>
+          ) : (
+            <p className="mt-1 text-text-muted">Be among the first to claim your free strategy demo.</p>
+          )
         ) : (
-          <p className="mt-1 text-text-muted">Be among the first to claim your free strategy demo.</p>
+          <p className="mt-0.5 text-[11px] text-text-muted">Be among the first to claim your free strategy demo.</p>
         )}
       </div>
       {withRing ? (
         <span
           aria-hidden
-          className="relative flex h-16 w-16 shrink-0 items-center justify-center"
+          className="relative flex shrink-0 items-center justify-center"
+          style={{ width: ringSize, height: ringSize }}
           role="presentation"
         >
-          <svg viewBox="0 0 64 64" className="h-16 w-16 -rotate-90">
-            <circle cx="32" cy="32" r={ringRadius} fill="none" stroke="var(--color-border)" strokeWidth={5} />
+          <svg viewBox={`0 0 ${ringSize} ${ringSize}`} className="-rotate-90" width={ringSize} height={ringSize}>
+            <circle
+              cx={ringSize / 2}
+              cy={ringSize / 2}
+              r={ringRadius}
+              fill="none"
+              stroke="var(--color-border)"
+              strokeWidth={dense ? 4 : 5}
+            />
             <motion.circle
-              cx="32"
-              cy="32"
+              cx={ringSize / 2}
+              cy={ringSize / 2}
               r={ringRadius}
               fill="none"
               stroke="var(--color-primary)"
-              strokeWidth={5}
+              strokeWidth={dense ? 4 : 5}
               strokeLinecap="round"
               strokeDasharray={ringCircumference}
               initial={reduced ? false : { strokeDashoffset: ringCircumference }}
@@ -126,8 +149,10 @@ export function FreeDemoCounter({ className, compact = false, withRing = false }
             />
           </svg>
           <span className="absolute flex flex-col items-center leading-none">
-            <span className="text-base font-semibold tabular-nums text-text">{state.remaining}</span>
-            <span className="text-[9px] uppercase tracking-wider text-text-muted">left</span>
+            <span className={cn("font-semibold tabular-nums text-text", dense ? "text-sm" : "text-base")}>
+              {state.remaining}
+            </span>
+            <span className="text-[8px] uppercase tracking-wider text-text-muted">left</span>
           </span>
         </span>
       ) : null}
