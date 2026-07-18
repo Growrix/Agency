@@ -299,7 +299,7 @@ const COPY: Record<
     eyebrow: "Automation",
     headline: AUTOMATION_SERVICE_HERO.headline,
     description: AUTOMATION_SERVICE_HERO.description,
-    primaryCta: "Audit My Workflow",
+    primaryCta: "Build My Automation",
     secondaryCta: AUTOMATION_SERVICE_HERO.secondaryCta,
     secondaryHref: AUTOMATION_SERVICE_HERO.secondaryHref,
     builds: AUTOMATION_OUTCOMES_SECTION.builds.map((item) => ({ ...item })),

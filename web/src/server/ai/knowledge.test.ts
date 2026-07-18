@@ -69,10 +69,10 @@ describe("searchKnowledgeDocuments", () => {
     assert.doesNotMatch(content, /\$24,?000|24k/i);
   });
 
-  it("returns current automation audit pricing", () => {
-    const content = topContent("Automation audit price");
-    assert.match(content, /\$300\b|300/i);
-    assert.doesNotMatch(content, /\$3,?500|3\.5k/i);
+  it("returns current automation service pricing", () => {
+    const content = topContent("Automation service price");
+    assert.match(content, /\$499\b|499/i);
+    assert.doesNotMatch(content, /\$300\b|300/i);
   });
 
   it("surfaces the six public services including AI business systems", () => {

@@ -9,7 +9,7 @@ export type AutomationWorkflowExample = {
 
 export const AUTOMATION_SERVICE_STATS: Stat[] = [
   { value: "50+", label: "Digital assets built", hint: "Products, workflows, and internal systems" },
-  { value: "3", label: "Engagement models", hint: "Audit, build, or optimization partner" },
+  { value: "3", label: "Service packages", hint: "Starter, Business, or Partner" },
   { value: "24h", label: "Average response time", hint: "Discovery and scoping inquiries" },
   { value: "Multi-tool", label: "Workflow-first systems", hint: "n8n, Zapier, Make, and custom APIs" },
 ];
@@ -190,7 +190,7 @@ export const AUTOMATION_PROCESS_SECTION = {
   steps: [
     {
       number: "01",
-      title: "Workflow Audit",
+      title: "Workflow Discovery",
       description: "Map current processes, bottlenecks, and manual effort.",
     },
     {
@@ -212,59 +212,68 @@ export const AUTOMATION_PROCESS_SECTION = {
 } as const;
 
 export const AUTOMATION_ENGAGEMENT_SECTION = {
-  eyebrow: "Engagement models",
-  title: "Choose the automation engagement that fits your business.",
-  titleLead: "Choose the automation engagement",
-  titleAccent: "that fits your business.",
+  eyebrow: "Pricing",
+  title: "Choose Your Automation Path",
+  titleLead: "Choose Your",
+  titleAccent: "Automation Path",
   description:
-    "Whether you need an audit, implementation, or ongoing optimization, we'll recommend the most practical path forward.",
+    "Whether you're automating your first workflow, connecting multiple business processes, or looking for an ongoing automation partner, choose the option that matches your current stage.",
   trustNote:
     "Need something different? Every business operates differently. Discovery sessions help define scope, tooling, and the most suitable automation path.",
   tiers: [
     {
-      name: "Workflow Audit",
+      name: "Automation Starter",
       iconKey: "workflow-audit",
-      price: "From $300",
-      description: "Identify bottlenecks, manual effort, and automation opportunities.",
+      price: "From $499",
+      description:
+        "Automate a single workflow to eliminate repetitive tasks and save time. Ideal for businesses taking their first step into automation.",
       features: [
-        "Workflow mapping",
-        "Process analysis",
-        "Automation recommendations",
-        "Priority roadmap",
-        "Implementation plan",
+        "Discovery call",
+        "One workflow automation",
+        "Up to 2 integrations",
+        "Basic testing",
+        "Documentation",
+        "Deployment",
       ],
-      cta: { label: "Book Audit", href: "/book-appointment" },
+      cta: { label: "Start Small", href: "/book-appointment" },
     },
     {
-      name: "Automation Build",
+      name: "Business Automation",
       iconKey: "automation-build",
-      price: "From $5,000",
-      description: "Design, build, and deploy a complete automation system.",
+      price: "From $1,499",
+      description:
+        "Build connected automations that streamline operations and save hours every week. Ideal for businesses ready to automate sales, operations, customer communication, and internal workflows.",
       features: [
-        "Discovery & design",
-        "Workflow implementation",
-        "Integrations",
-        "AI enhancements (if appropriate)",
-        "Observability setup",
-        "Documentation & handover",
+        "Discovery workshop",
+        "Multiple workflow automations",
+        "CRM integrations",
+        "Email automation",
+        "WhatsApp automation",
+        "AI integrations (where applicable)",
+        "Workflow testing",
+        "Deployment",
+        "Team handover",
       ],
-      cta: { label: "Scope Build", href: "/book-appointment" },
+      cta: { label: "Build My Automation", href: "/book-appointment" },
       featured: true,
-      badge: "Most popular",
+      badge: "Most Popular",
     },
     {
-      name: "Optimization Partner",
+      name: "Automation Partner",
       iconKey: "optimization-partner",
-      price: "Custom Scope",
-      description: "Continuous monitoring, refinement, and expansion of automation systems.",
+      price: "From $399",
+      cadence: "/month",
+      description:
+        "Continuous improvements, monitoring, and new automation development for growing businesses. Starting from $399/month depending on scope.",
       features: [
-        "Workflow reviews",
+        "Monthly workflow improvements",
         "New automations",
-        "Failure monitoring",
-        "Optimization cycles",
-        "Quarterly planning",
+        "Monitoring",
+        "Bug fixes",
+        "Priority support",
+        "Strategy sessions",
       ],
-      cta: { label: "Start Partnership", href: "/book-appointment" },
+      cta: { label: "Become a Partner", href: "/book-appointment" },
     },
   ],
 } as const;
@@ -313,7 +322,7 @@ export const AUTOMATION_SERVICE_FAQ = [
   {
     question: "How long does implementation take?",
     answer:
-      "Audits often complete in one to two weeks. Focused builds typically land in two to six weeks depending on integration count, exception logic, and approval cycles.",
+      "Discovery and initial scoping often complete in one to two weeks. Focused builds typically land in two to six weeks depending on integration count, exception logic, and approval cycles.",
   },
   {
     question: "Can workflows be expanded later?",
@@ -336,8 +345,8 @@ export const AUTOMATION_SERVICE_CTA = {
   titleLead: "Let's find where your business",
   titleAccent: "is losing time.",
   description:
-    "Book a workflow audit and receive a practical roadmap for automation opportunities, implementation priorities, and expected operational gains.",
-  primaryLabel: "Audit My Workflow",
+    "Book a discovery call and we'll recommend the right automation package for your current stage, goals, and everyday workflows.",
+  primaryLabel: "Build My Automation",
   primaryHref: "/book-appointment",
   secondaryLabel: "View Automation Examples",
   secondaryHref: "#workflow-examples",

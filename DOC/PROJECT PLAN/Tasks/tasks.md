@@ -778,3 +778,18 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/app/contact/ContactPageClient.tsx`, `web/src/app/book-appointment/BookAppointmentExperience.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `ReadLints` zero errors/warnings; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests).
 - **Gaps:** No operator actions. The existing e2e suite does not assert the actual scroll position after form submission; a manual browser pass on both desktop and mobile is recommended.
+
+### 2026-07-18 — Automation service pricing and positioning refactor (refactor_existing_system)
+- **Root cause:** The Automation service was positioned around enterprise-style engagement models ("Workflow Audit", "Automation Build", "Optimization Partner") with pricing ($300, $5,000, custom scope) that created friction for startups and SMBs. The page intro, package copy, CTAs, and service metadata all reinforced an audit-first, build-heavy narrative rather than a productized ladder.
+- **Fix:**
+  - Replaced the three engagement tiers in `web/src/lib/automation-service-content.ts` with the productized ladder: **Automation Starter** ($499), **Business Automation** ($1,499, "Most Popular"), and **Automation Partner** ($399/month).
+  - Rewrote package descriptions to include the "Ideal For" framing and approachable business language ("eliminate repetitive tasks", "save hours every week", "connect your existing tools").
+  - Updated the engagement section intro to "Choose Your Automation Path" and aligned CTAs with the new packages.
+  - Renamed the process step from "Workflow Audit" to "Workflow Discovery" to avoid confusion with the old package.
+  - Updated the service metadata in `web/src/lib/content.ts` and the investment range in `web/src/lib/investment-guide-content.ts` to `$499 – $1,499+` with a partner-retainer note.
+  - Changed the Automation service hero CTA from "Audit My Workflow" to "Build My Automation" in `web/src/app/services/[slug]/page.tsx`.
+  - Enhanced the shared featured-tier card styling in `web/src/components/sections/tierCardTheme.ts` with `lg:p-6` padding and a stronger primary ring/shadow so the recommended package visually dominates.
+  - Updated the concierge knowledge test in `web/src/server/ai/knowledge.test.ts` to assert the new $499 Automation Starter pricing instead of the old $300 audit price.
+- **Touched files:** `web/src/lib/automation-service-content.ts`, `web/src/lib/content.ts`, `web/src/lib/investment-guide-content.ts`, `web/src/app/services/[slug]/page.tsx`, `web/src/components/sections/tierCardTheme.ts`, `web/src/server/ai/knowledge.test.ts`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero errors/warnings; `npm run health:check --prefix web` exit 0 (lint, typecheck, perf budgets, unit/integration tests, build, 17/17 release-gate e2e tests). Note: the first two health check attempts hit a transient `EPERM`/port-5000 conflict from a stale Playwright `next start` process left by an earlier interrupted run; killing the stale process and re-running produced a clean pass.
+- **Gaps:** No operator actions. The e2e suite validates accessibility and metadata but does not assert package card content or visual hierarchy; a manual browser pass on `/services/automation` and `/pricing` is recommended to confirm the new card styling and copy.

@@ -2,9 +2,10 @@ import { cn } from "@/lib/utils";
 
 export function getTierCardContainerClass(featured: boolean) {
   return cn(
-    "flex h-full flex-col rounded-2xl border p-5",
+    "flex h-full flex-col rounded-2xl border",
+    featured ? "p-5 lg:p-6" : "p-5",
     featured
-      ? "contrast-surface bg-contrast text-contrast-text border-white/15 ring-1 ring-primary/40 shadow-(--shadow-2)"
+      ? "contrast-surface bg-contrast text-contrast-text border-white/15 ring-2 ring-primary/50 shadow-(--shadow-3)"
       : "border-border bg-surface shadow-[var(--shadow-1)]"
   );
 }

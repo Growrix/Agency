@@ -75,8 +75,8 @@ export const INVESTMENT_SERVICE_RANGES = {
     },
     {
       title: "Automation",
-      investment: "$300 – $5,000+",
-      description: "Workflow automation, integrations, and operational systems.",
+      investment: "$499 – $1,499+",
+      description: "Workflow automation, integrations, and operational systems. Partner retainers available from $399/month.",
       href: "/services/automation",
     },
     {

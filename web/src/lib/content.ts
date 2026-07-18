@@ -46,11 +46,11 @@ export const SERVICES = [
   {
     slug: "automation",
     name: "Automation",
-    short: "Operational systems that remove repetitive work around your core product.",
-    long: "We map workflows and ship integrations across CRM, payments, support, and content systems when manual operations start slowing delivery.",
-    typical: "Audit + implementation + retainer",
+    short: "Workflow automations that reduce manual work and connect your everyday tools.",
+    long: "From a single automated workflow to connected business systems and ongoing optimization — we help teams save time, reduce errors, and scale operations without adding overhead.",
+    typical: "Starter package → Business automation → Partner retainer",
     timeline: "2-8 weeks",
-    pillars: ["Workflow mapping", "Exception logic", "Integrations", "Observability"],
+    pillars: ["Eliminate repetitive tasks", "Connect existing tools", "Save hours every week", "Scale without overhead"],
   },
   {
     slug: "technical-seo",
