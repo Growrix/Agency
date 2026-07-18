@@ -25,14 +25,16 @@ function ProcessStepDesktop({ step, index }: { step: ProcessStep; index: number 
   const Icon = PROCESS_ICONS[index % PROCESS_ICONS.length];
   return (
     <RevealItem className={styles.processStep}>
-      <div className={styles.processNumber}>
-        <Icon className="size-5" />
+      <div className={styles.processStepTrack}>
+        <div className={styles.processNumber}>
+          <Icon className="size-5" />
+        </div>
       </div>
-      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
-        Step {step.number}
-      </span>
-      <h3 className={styles.processTitle}>{step.title}</h3>
-      <p className={styles.processDescription}>{step.description}</p>
+      <div className={styles.processStepBody}>
+        <span className={styles.processIndex}>Step {step.number}</span>
+        <h3 className={styles.processTitle}>{step.title}</h3>
+        <p className={styles.processDescription}>{step.description}</p>
+      </div>
     </RevealItem>
   );
 }

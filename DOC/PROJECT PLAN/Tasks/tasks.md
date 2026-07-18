@@ -885,3 +885,11 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/components/marketing/automation/AutomationPage.module.css`, `.cursor/rules/52-web-mobile-design-system.mdc`, `.cursor/rules/60-zero-gate-health-check.mdc`, `memories/repo/site-brain.md`, `AI-BOS/.cursor/skills/senior-saas-developer/SKILL.md`, `AI-BOS/.cursor/skills/senior-frontend-specialist/SKILL.md`, `AI-BOS/.cursor/skills/frontend-quality-enforcer/quality-matrix.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`. Host copy: `~/.cursor/skills/senior-saas-developer/SKILL.md`.
 - **Validation:** `ReadLints` zero on touched CSS; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0.
 - **Gaps:** Manual desktop browser pass on `/services/automation` recommended to confirm visual alignment at 1024px+.
+
+### 2026-07-18 — Automation process section label overlap fix (WEB-AUTOMATION-REDESIGN-006)
+- **Request:** Our Process section — dashed connector line and "Step 01" labels overlapping icon circles and text.
+- **Root cause:** `processNumber` was `inline-flex` beside an inline `Step NN` span, so labels rendered on the same row as icons; segment connector was positioned on the whole step cell at icon-center height, crossing label text.
+- **Fix:** Split each step into `processStepTrack` (icon + segment connector only) and `processStepBody` (step index, title, description below). Moved connector to `.processStepTrack::after` at vertical center of icon row only.
+- **Touched files:** `web/src/components/marketing/automation/AutomationProcess.tsx`, `AutomationPage.module.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** `ReadLints` zero; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0.
+- **Gaps:** Refresh `/services/automation` desktop to confirm connector clears all text.
