@@ -75,6 +75,12 @@ planning_artifact_contract:
         - DOC/PROJECT PLAN/API and Data/customer-dashboard-api-data.md
         - DOC/PROJECT PLAN/Admin Dashboard/customer-dashboard-admin-dashboard.md
         - DOC/PROJECT PLAN/Security/customer-dashboard-security.md
+    - path: DOC/PROJECT PLAN/client-intake-workspace-e2e-plan.md
+      scope: Free demo popup, auth-gated client intake, admin notification, client/admin project workspace with assets
+      status: active — implementation complete (P21)
+      phases: P21
+      downstream_role_docs:
+        - DOC/PROJECT PLAN/API and Data/client-intake-workspace-api-data.md
     - path: DOC/PROJECT PLAN/auth-clerk-migration-e2e-plan.md
       scope: Clerk full identity migration
       status: done (P11 complete)

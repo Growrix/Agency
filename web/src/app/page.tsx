@@ -15,6 +15,7 @@ import { homeSection } from "@/lib/homepage-composition";
 import { getHomePageData } from "@/server/marketing/home-page-data";
 
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
+import { FreeDemoGate } from "@/components/marketing/FreeDemoGate";
 
 import {
 
@@ -214,6 +215,7 @@ export default async function Home() {
       />
 
       </div>
+      <FreeDemoGate />
     </>
 
   );

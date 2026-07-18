@@ -19,6 +19,7 @@ import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { rehydrateCartStore, useCartStore, useCartUiStore } from "@/lib/cart-store";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
+import { FreeDemoHeaderButton } from "@/components/marketing/FreeDemoPopup";
 
 type HeaderProps = {
   mobileOpen?: boolean;
@@ -130,6 +131,7 @@ export function Header({
           </Link>
           <ThemeToggleButton className="lg:hidden" />
           <ThemeToggle className="hidden lg:inline-flex" />
+          <FreeDemoHeaderButton />
           <PublicAuthControls />
           <button
             type="button"

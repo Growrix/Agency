@@ -8,6 +8,7 @@ import {
   CalendarDaysIcon,
   ClipboardDocumentListIcon,
   CubeIcon,
+  FolderIcon,
   HeartIcon,
   LifebuoyIcon,
   ShoppingBagIcon,
@@ -34,6 +35,7 @@ const navItems: DashboardNavItem[] = [
   { href: "/dashboard/wishlist", label: "Wishlist", icon: <HeartIcon className="size-5" /> },
   { href: "/dashboard/appointments", label: "Appointments", icon: <CalendarDaysIcon className="size-5" /> },
   { href: "/dashboard/submissions", label: "Submissions", icon: <ClipboardDocumentListIcon className="size-5" /> },
+  { href: "/dashboard/projects", label: "Projects", icon: <FolderIcon className="size-5" /> },
   { href: "/dashboard/support", label: "Support", icon: <LifebuoyIcon className="size-5" /> },
   { href: "/dashboard/account", label: "Account", icon: <UserCircleIcon className="size-5" /> },
 ];
@@ -46,6 +48,7 @@ const sectionMeta: Array<{ match: (path: string) => boolean; title: string }> = 
   { match: (p) => p.startsWith("/dashboard/wishlist"), title: "Wishlist" },
   { match: (p) => p.startsWith("/dashboard/appointments"), title: "Appointments" },
   { match: (p) => p.startsWith("/dashboard/submissions"), title: "Submissions" },
+  { match: (p) => p.startsWith("/dashboard/projects"), title: "Projects" },
   { match: (p) => p.startsWith("/dashboard/support"), title: "Support" },
   { match: (p) => p.startsWith("/dashboard/account"), title: "Account" },
 ];

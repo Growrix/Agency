@@ -499,6 +499,112 @@ create trigger coupons_set_updated_at
 before update on public.coupons
 for each row execute function public.set_updated_at();
 
+-- ---------------------------------------------------------------------
+-- Client intake & project workspace (Phase P21)
+-- ---------------------------------------------------------------------
+
+create table if not exists public.free_demo_campaigns (
+  id text primary key,
+  name text not null,
+  total_slots integer not null default 20 check (total_slots > 0),
+  claimed_count integer not null default 0 check (claimed_count >= 0),
+  is_active boolean not null default true,
+  starts_at timestamptz,
+  ends_at timestamptz,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+
+drop trigger if exists free_demo_campaigns_set_updated_at on public.free_demo_campaigns;
+create trigger free_demo_campaigns_set_updated_at
+before update on public.free_demo_campaigns
+for each row execute function public.set_updated_at();
+
+insert into public.free_demo_campaigns (id, name, total_slots, claimed_count, is_active)
+values ('growrixos-launch-2026', 'Growrix OS Launch — Free Demo', 20, 0, true)
+on conflict (id) do nothing;
+
+create table if not exists public.client_intake_submissions (
+  id uuid primary key default gen_random_uuid(),
+  submission_number text not null unique,
+  user_id uuid not null,
+  client_email text not null,
+  client_name text not null,
+  business_name text not null,
+  industry text,
+  target_audience text,
+  brand_voice text,
+  business_description text not null,
+  goals jsonb not null default '[]'::jsonb,
+  competitors jsonb not null default '[]'::jsonb,
+  reference_sites jsonb not null default '[]'::jsonb,
+  drive_links jsonb not null default '[]'::jsonb,
+  uploaded_files jsonb not null default '[]'::jsonb,
+  budget_range text,
+  timeline text,
+  must_have_features jsonb not null default '[]'::jsonb,
+  is_free_demo boolean not null default false,
+  status text not null default 'submitted' check (status in ('submitted','in_review','project_created','archived')),
+  project_id uuid,
+  metadata jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists client_intake_submissions_user_idx on public.client_intake_submissions (user_id, created_at desc);
+create index if not exists client_intake_submissions_status_idx on public.client_intake_submissions (status, created_at desc);
+
+drop trigger if exists client_intake_submissions_set_updated_at on public.client_intake_submissions;
+create trigger client_intake_submissions_set_updated_at
+before update on public.client_intake_submissions
+for each row execute function public.set_updated_at();
+
+create table if not exists public.projects (
+  id uuid primary key default gen_random_uuid(),
+  project_number text not null unique,
+  submission_id uuid not null references public.client_intake_submissions(id) on delete restrict,
+  client_user_id uuid not null,
+  admin_assigned_user_id uuid,
+  title text not null,
+  status text not null default 'intake' check (status in ('intake','planning','in_progress','review','delivered','archived')),
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists projects_client_user_idx on public.projects (client_user_id, created_at desc);
+create index if not exists projects_status_idx on public.projects (status, created_at desc);
+
+drop trigger if exists projects_set_updated_at on public.projects;
+create trigger projects_set_updated_at
+before update on public.projects
+for each row execute function public.set_updated_at();
+
+create table if not exists public.project_updates (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references public.projects(id) on delete cascade,
+  author_user_id uuid not null,
+  author_role text not null check (author_role in ('client','admin')),
+  kind text not null check (kind in ('note','instruction','reference','file','drive_link','status_change')),
+  body text,
+  reference_url text,
+  file_path text,
+  created_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists project_updates_project_idx on public.project_updates (project_id, created_at desc);
+
+create table if not exists public.project_assets (
+  id uuid primary key default gen_random_uuid(),
+  project_id uuid not null references public.projects(id) on delete cascade,
+  kind text not null check (kind in ('file','drive_link','reference_site')),
+  url text,
+  storage_path text,
+  label text,
+  file_name text,
+  mime_type text,
+  size_bytes bigint,
+  uploaded_by_user_id uuid not null,
+  created_at timestamptz not null default timezone('utc', now())
+);
+create index if not exists project_assets_project_idx on public.project_assets (project_id, created_at desc);
+
 -- =====================================================================
 -- RLS policies for the normalized tables
 -- =====================================================================
@@ -528,7 +634,12 @@ begin
     'coupons',
     'wishlist_items',
     'product_reviews',
-    'job_queue'
+    'job_queue',
+    'free_demo_campaigns',
+    'client_intake_submissions',
+    'projects',
+    'project_updates',
+    'project_assets'
   ] loop
     execute format('alter table public.%I enable row level security', tbl);
     execute format('revoke all on table public.%I from anon', tbl);

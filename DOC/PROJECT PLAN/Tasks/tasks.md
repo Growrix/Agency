@@ -44,10 +44,10 @@ phase_sequence:
   - P10-content-composition-alignment
   - P11-auth-clerk-migration
   - P20-customer-dashboard-experience
-next_recommended_phase: P20-customer-dashboard-experience
+  - P21-client-intake-workspace
+next_recommended_phase: P21-client-intake-workspace
 next_recommended_tasks:
-  - T118
-  - T119
+  - T-INTAKE-012
 phase_status_counts:
   done: 4
   partial: 8
@@ -904,3 +904,25 @@ Remaining parallel tracks:
 - **Touched files:** `AutomationTypesGrid.tsx`, `AutomationTypesMobile.tsx`, `AutomationWorkflowShowcaseMobile.tsx`, `AutomationWorkflowSection.tsx`, `automation-visual-icons.ts`, `MobileFeatureGrid.tsx`, `AutomationPage.module.css`, `globals.css`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** `ReadLints` zero; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0.
 - **Gaps:** Manual mobile pass on `/services/automation` at 375px recommended.
+
+## Phase P21 — Client Intake & Project Workspace
+
+| Task | Description | Status |
+|------|-------------|--------|
+| T-INTAKE-001 | Schema + SQL tables for intakes, projects, updates, assets, free demo campaign | done |
+| T-INTAKE-002 | Supabase/local intake asset storage helper | done |
+| T-INTAKE-003 | Domain: intakes, projects, free-demo-campaign, notifications | done |
+| T-INTAKE-004 | Public API: campaign counter + auth-gated intake POST | done |
+| T-INTAKE-005 | Client API: me/intakes, me/projects, updates, assets | done |
+| T-INTAKE-006 | Admin API: intakes inbox, convert, projects workspace | done |
+| T-INTAKE-007 | Homepage FreeDemoGate popup + header CTA + live counter | done |
+| T-INTAKE-008 | Multi-step IntakeForm (auth-gated, file + drive links) | done |
+| T-INTAKE-009 | Customer dashboard `/dashboard/projects` workspace | done |
+| T-INTAKE-010 | Admin `/admin/intakes` + `/admin/projects` workspace | done |
+| T-INTAKE-011 | E2E + integration tests for intake flow | done |
+| T-INTAKE-012 | Full `npm run health:check` sign-off | done |
+
+### 2026-07-18 — Client intake & project workspace (P21)
+- **Request:** Free demo popup with live counter, auth-gated intake form, admin notification, ongoing client/admin project workspace with files, drive links, reference sites.
+- **Delivered:** Full stack per `DOC/PROJECT PLAN/client-intake-workspace-e2e-plan.md`.
+- **Validation:** integration + e2e intake specs; health:check pending this session.

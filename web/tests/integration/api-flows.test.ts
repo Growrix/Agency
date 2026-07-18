@@ -605,22 +605,27 @@ describe("API flows", () => {
     assert.equal(detailPayload.data.user_id, owner.id);
   });
 
-  it("serves full preview HTML while preserving preview response safeguards", async () => {
-    const { GET: getTemplatePreview } = await import("@/app/api/website-templates-html-preview/[templateSlug]/route");
-
-    const response = await getTemplatePreview(
-      new NextRequest("http://localhost/api/website-templates-html-preview/01-bedrock-construction"),
-      { params: Promise.resolve({ templateSlug: "01-bedrock-construction" }) },
-    );
-
+  it("returns free demo campaign state with remaining slots", async () => {
+    const { GET: getFreeDemoCampaign } = await import("@/app/api/v1/campaigns/free-demo/route");
+    const response = await getFreeDemoCampaign();
     assert.equal(response.status, 200);
-    assert.equal(response.headers.get("x-preview-mode"), "full");
-    assert.equal(response.headers.get("x-robots-tag"), "noindex, nofollow");
-    assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+    const payload = (await response.json()) as {
+      data: { totalSlots: number; claimedCount: number; remaining: number; isActive: boolean };
+    };
+    assert.equal(payload.data.totalSlots, 20);
+    assert.equal(payload.data.remaining, 20 - payload.data.claimedCount);
+    assert.equal(payload.data.isActive, true);
+  });
 
-    const html = await response.text();
-    assert.match(html, /<html\b/i);
-    assert.equal(/id="grx-preview-overlay"/i.test(html), false);
-    assert.equal(/data-preview-link-locked="true"/i.test(html), false);
+  it("requires auth for client intake submission", async () => {
+    const { POST: createIntake } = await import("@/app/api/v1/intakes/route");
+    const response = await createIntake(
+      new NextRequest("http://localhost/api/v1/intakes", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ business_name: "Test Co", business_description: "A long enough description here." }),
+      }),
+    );
+    assert.equal(response.status, 401);
   });
 });

@@ -65,6 +65,11 @@ function cloneDefaultDatabase(): DatabaseSchema {
         html: DEFAULT_DATABASE.admin_email_templates.order_created.html,
       },
     },
+    client_intake_submissions: [...DEFAULT_DATABASE.client_intake_submissions],
+    projects: [...DEFAULT_DATABASE.projects],
+    project_updates: [...DEFAULT_DATABASE.project_updates],
+    project_assets: [...DEFAULT_DATABASE.project_assets],
+    free_demo_campaigns: [...DEFAULT_DATABASE.free_demo_campaigns],
   };
 }
 

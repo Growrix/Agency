@@ -438,6 +438,7 @@ export type NotificationKind =
   | "service_request_created"
   | "appointment_requested"
   | "download_issued"
+  | "client_intake_received"
   | "system";
 export type NotificationStatus = "pending" | "sent" | "failed" | "skipped";
 
@@ -613,6 +614,137 @@ export type JobRecord = {
   updated_at: string;
 };
 
+export type DriveLinkType = "gdrive" | "dropbox" | "onedrive" | "other";
+
+export type IntakeReferenceSite = {
+  url: string;
+  note?: string;
+};
+
+export type IntakeDriveLink = {
+  url: string;
+  label?: string;
+  type: DriveLinkType;
+};
+
+export type IntakeUploadedFile = {
+  storage_path: string;
+  file_name: string;
+  mime_type?: string;
+  size_bytes?: number;
+};
+
+export type ClientIntakeStatus = "submitted" | "in_review" | "project_created" | "archived";
+
+export type ClientIntakeSubmissionRecord = {
+  id: string;
+  submission_number: string;
+  user_id: string;
+  client_email: string;
+  client_name: string;
+  business_name: string;
+  industry?: string;
+  target_audience?: string;
+  brand_voice?: string;
+  business_description: string;
+  goals: string[];
+  competitors: string[];
+  reference_sites: IntakeReferenceSite[];
+  drive_links: IntakeDriveLink[];
+  uploaded_files: IntakeUploadedFile[];
+  budget_range?: string;
+  timeline?: string;
+  must_have_features: string[];
+  is_free_demo: boolean;
+  status: ClientIntakeStatus;
+  project_id?: string;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ProjectStatus =
+  | "intake"
+  | "planning"
+  | "in_progress"
+  | "review"
+  | "delivered"
+  | "archived";
+
+export type ProjectRecord = {
+  id: string;
+  project_number: string;
+  submission_id: string;
+  client_user_id: string;
+  admin_assigned_user_id?: string;
+  title: string;
+  status: ProjectStatus;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ProjectUpdateKind =
+  | "note"
+  | "instruction"
+  | "reference"
+  | "file"
+  | "drive_link"
+  | "status_change";
+
+export type ProjectUpdateAuthorRole = "client" | "admin";
+
+export type ProjectUpdateRecord = {
+  id: string;
+  project_id: string;
+  author_user_id: string;
+  author_role: ProjectUpdateAuthorRole;
+  kind: ProjectUpdateKind;
+  body?: string;
+  reference_url?: string;
+  file_path?: string;
+  created_at: string;
+};
+
+export type ProjectAssetKind = "file" | "drive_link" | "reference_site";
+
+export type ProjectAssetRecord = {
+  id: string;
+  project_id: string;
+  kind: ProjectAssetKind;
+  url?: string;
+  storage_path?: string;
+  label?: string;
+  file_name?: string;
+  mime_type?: string;
+  size_bytes?: number;
+  uploaded_by_user_id: string;
+  created_at: string;
+};
+
+export type FreeDemoCampaignRecord = {
+  id: string;
+  name: string;
+  total_slots: number;
+  claimed_count: number;
+  is_active: boolean;
+  starts_at?: string;
+  ends_at?: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export const DEFAULT_FREE_DEMO_CAMPAIGN_ID = "growrixos-launch-2026";
+
+export const DEFAULT_FREE_DEMO_CAMPAIGN: FreeDemoCampaignRecord = {
+  id: DEFAULT_FREE_DEMO_CAMPAIGN_ID,
+  name: "Growrix OS Launch — Free Demo",
+  total_slots: 20,
+  claimed_count: 0,
+  is_active: true,
+  created_at: new Date(0).toISOString(),
+  updated_at: new Date(0).toISOString(),
+};
+
 export type DatabaseSchema = {
   inquiries: ContactInquiryRecord[];
   appointments: AppointmentRecord[];
@@ -640,6 +772,11 @@ export type DatabaseSchema = {
   invoices: InvoiceRecord[];
   jobs: JobRecord[];
   admin_email_templates: AdminEmailTemplateSettings;
+  client_intake_submissions: ClientIntakeSubmissionRecord[];
+  projects: ProjectRecord[];
+  project_updates: ProjectUpdateRecord[];
+  project_assets: ProjectAssetRecord[];
+  free_demo_campaigns: FreeDemoCampaignRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -675,4 +812,9 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
       html: DEFAULT_ADMIN_EMAIL_TEMPLATE_SETTINGS.order_created.html,
     },
   },
+  client_intake_submissions: [],
+  projects: [],
+  project_updates: [],
+  project_assets: [],
+  free_demo_campaigns: [DEFAULT_FREE_DEMO_CAMPAIGN],
 };
