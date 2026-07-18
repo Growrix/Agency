@@ -24,9 +24,6 @@ export function FreeDemoPopup() {
     if (window.localStorage.getItem(FREE_DEMO_SEEN_KEY) === "1") {
       return;
     }
-    if (isSignedIn) {
-      return;
-    }
 
     const timer = window.setTimeout(() => {
       window.localStorage.setItem(FREE_DEMO_SEEN_KEY, "1");
@@ -34,7 +31,7 @@ export function FreeDemoPopup() {
     }, AUTO_OPEN_MS);
 
     return () => window.clearTimeout(timer);
-  }, [isSignedIn, open]);
+  }, [open]);
 
   function handleClose() {
     close();

@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 export type IntakeFormValues = {
   business_name: string;
   industry: string;
+  industry_custom: string;
   target_audience: string;
   brand_voice: string;
   business_description: string;
@@ -19,6 +20,7 @@ export type IntakeFormValues = {
   reference_sites: Array<{ url: string; note: string }>;
   drive_links: Array<{ url: string; label: string; type: "gdrive" | "dropbox" | "onedrive" | "other" }>;
   budget_range: string;
+  budget_custom: string;
   timeline: string;
   must_have_features: string[];
 };
@@ -31,10 +33,35 @@ const INDUSTRIES = [
   "Real estate",
   "Education",
   "Hospitality",
+  "Construction / contracting",
+  "Legal services",
+  "Finance / insurance",
+  "Food & beverage",
+  "Fitness / wellness",
+  "Automotive",
+  "Travel / tourism",
+  "Media / entertainment",
+  "Manufacturing",
+  "Agriculture",
+  "Creative / design",
+  "Marketing agency",
+  "Consulting",
+  "Non-profit / NGO",
+  "Government",
+  "Religious / spiritual",
   "Other",
 ];
 
-const BUDGETS = ["Under $2k", "$2k – $5k", "$5k – $10k", "$10k+", "Not sure yet"];
+const BUDGETS = [
+  "Under $500",
+  "$500 – $1k",
+  "$1k – $2k",
+  "$2k – $5k",
+  "$5k – $10k",
+  "$10k+",
+  "Not sure yet",
+  "Custom",
+];
 const TIMELINES = ["ASAP (2–4 weeks)", "1–2 months", "3+ months", "Flexible"];
 
 const STEPS = ["About", "Goals", "Assets", "Budget", "Review"] as const;
@@ -121,6 +148,7 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
   const [values, setValues] = useState<IntakeFormValues>({
     business_name: "",
     industry: "",
+    industry_custom: "",
     target_audience: "",
     brand_voice: "",
     business_description: "",
@@ -129,6 +157,7 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
     reference_sites: [{ url: "", note: "" }],
     drive_links: [{ url: "", label: "", type: "gdrive" }],
     budget_range: "",
+    budget_custom: "",
     timeline: "",
     must_have_features: [],
   });
@@ -145,7 +174,10 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
     try {
       const formData = new FormData();
       formData.set("business_name", values.business_name);
-      formData.set("industry", values.industry);
+      formData.set(
+        "industry",
+        values.industry === "Other" ? values.industry_custom.trim() : values.industry,
+      );
       formData.set("target_audience", values.target_audience);
       formData.set("brand_voice", values.brand_voice);
       formData.set("business_description", values.business_description);
@@ -159,7 +191,10 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
         "drive_links",
         JSON.stringify(values.drive_links.filter((item) => item.url.trim())),
       );
-      formData.set("budget_range", values.budget_range);
+      formData.set(
+        "budget_range",
+        values.budget_range === "Custom" ? values.budget_custom.trim() : values.budget_range,
+      );
       formData.set("timeline", values.timeline);
       formData.set("must_have_features", JSON.stringify(values.must_have_features));
       formData.set("is_free_demo", isFreeDemo ? "true" : "false");
@@ -255,6 +290,16 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
                 </option>
               ))}
             </select>
+            {values.industry === "Other" ? (
+              <input
+                id="industry_custom"
+                className="signal-input mt-2"
+                value={values.industry_custom}
+                onChange={(event) => update("industry_custom", event.target.value)}
+                placeholder="Type your industry"
+                aria-label="Your industry"
+              />
+            ) : null}
           </div>
           <div>
             <label className="text-sm font-medium text-text" htmlFor="target_audience">
@@ -416,6 +461,16 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
                 </option>
               ))}
             </select>
+            {values.budget_range === "Custom" ? (
+              <input
+                id="budget_custom"
+                className="signal-input mt-2"
+                value={values.budget_custom}
+                onChange={(event) => update("budget_custom", event.target.value)}
+                placeholder="e.g. $3,200 or $750–$1,500"
+                aria-label="Your custom budget"
+              />
+            ) : null}
           </div>
           <div>
             <label className="text-sm font-medium text-text" htmlFor="timeline">
@@ -450,7 +505,10 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
             <strong>Business:</strong> {values.business_name || "—"}
           </p>
           <p>
-            <strong>Industry:</strong> {values.industry || "—"}
+            <strong>Industry:</strong>{" "}
+            {values.industry === "Other"
+              ? values.industry_custom.trim() || "—"
+              : values.industry || "—"}
           </p>
           <p>
             <strong>Goals:</strong> {values.goals.join(", ") || "—"}
@@ -466,7 +524,11 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
             <strong>Drive links:</strong> {values.drive_links.filter((item) => item.url.trim()).length}
           </p>
           <p>
-            <strong>Budget / timeline:</strong> {values.budget_range || "—"} · {values.timeline || "—"}
+            <strong>Budget / timeline:</strong>{" "}
+            {values.budget_range === "Custom"
+              ? values.budget_custom.trim() || "—"
+              : values.budget_range || "—"}{" "}
+            · {values.timeline || "—"}
           </p>
         </div>
       ) : null}
