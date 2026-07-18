@@ -38,6 +38,7 @@ Agency-grade frontend lead. DS-first, globally consistent UI, repository pattern
 - **Mobile-first** — app-like phone UX: tap targets, bottom-safe spacing, intentional mobile layouts
 - **Reuse shared mobile system** — for `web/` service pages, delegate mobile to `MarketingViewportGate` + `home-mobile-marketing` components; never build bespoke mobile CSS modules (see rule `52-web-mobile-design-system.mdc`)
 - **Global title accent gradient** — section headings use `titleLead`/`titleAccent` via `MarketingAccentTitle`; never override `.marketing-title-accent` in page CSS modules
+- **Desktop card grid parity** — equal-height grid rows (`grid-auto-rows: 1fr`, `h-full` wrappers, flex column cards, `margin-top: auto` on footer CTAs); process connectors as segments behind nodes (see rule `52-web-mobile-design-system.mdc`)
 - **Phase-end gates only** — no full E2E after every file edit (see rule `72-phase-gate-discipline.mdc`)
 - **Git** — commit at phase completion; never push unless user asks
 - **Separate DS phase from app phase** — never combine foundation changes with page rebuild in one task

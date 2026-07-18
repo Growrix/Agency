@@ -25,7 +25,7 @@ Readonly auditor. Run **once per completed phase** — not after every file edit
 | 9 | Performance | perf:budgets | nextjs-performance-optimizer | performance-optimizer |
 | 10 | Security | headers, auth smoke | env no secrets in client | N/A unless forms |
 | 11 | Regression | critical flows unchanged | parity if migration | route coverage |
-| 12 | Design system parity | `MarketingViewportGate` + `home-mobile-marketing`; global `.marketing-title-accent` gradient; no bespoke mobile CSS modules | N/A unless marketing UI | N/A |
+| 12 | Design system parity | `MarketingViewportGate` + `home-mobile-marketing`; global `.marketing-title-accent` gradient; no bespoke mobile CSS modules; desktop card grids equal-height + bottom-aligned CTAs; segment process connectors | N/A unless marketing UI | N/A |
 
 ## Lane bundles (short form)
 

@@ -41,7 +41,7 @@ npm run health:check
 
 **Release gates (must be 0 failures):** accessibility smoke, security headers, health endpoints, homepage load ≤5s, resource budget ≤30, preview iframe budgets, SEO metadata checks — see `web/tests/e2e/release-gates.spec.ts`.
 
-**Marketing/service page design-system parity:** For changes to `web/src/app/` marketing or service pages, confirm mobile sections reuse `MarketingViewportGate` and shared `home-mobile-marketing` primitives (see rule `52-web-mobile-design-system.mdc`); no new bespoke mobile CSS modules unless explicitly approved. Confirm section headings use the global `.marketing-title-accent` gradient with no per-page CSS-module override.
+**Marketing/service page design-system parity:** For changes to `web/src/app/` marketing or service pages, confirm mobile sections reuse `MarketingViewportGate` and shared `home-mobile-marketing` primitives (see rule `52-web-mobile-design-system.mdc`); no new bespoke mobile CSS modules unless explicitly approved. Confirm section headings use the global `.marketing-title-accent` gradient with no per-page CSS-module override. Confirm desktop card grids use equal-height stretch (`grid-auto-rows: 1fr`, `h-full` wrappers, flex column cards, `margin-top: auto` on footer CTAs) and process connectors use segment lines behind nodes — not full-width overlaps.
 
 ### `sites/` (HTML templates)
 

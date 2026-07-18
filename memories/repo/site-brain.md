@@ -198,6 +198,8 @@ Canonical pattern for service and marketing pages below `lg`:
 
 **Title accent gradient:** Global class `.marketing-title-accent` in `web/src/app/globals.css` (~line 3732). Mobile uses `.home-mobile-marketing__title-accent` (same gradient). **Never override** in page-specific CSS modules.
 
+**Desktop card grids:** Equal-height rows — `align-items: stretch`, `grid-auto-rows: 1fr`, motion wrappers with `h-full`, cards as flex columns, footer CTAs with `margin-top: auto`. Process timelines use segment connectors behind step nodes (not one full-width line through labels).
+
 **Rule:** `.cursor/rules/52-web-mobile-design-system.mdc` — agents must read before redesigning any `web/` marketing/service page.
 
 ## Future Update Checklist

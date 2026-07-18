@@ -112,6 +112,7 @@
   display: grid;
   gap: 1.5rem;
   margin-top: 2.5rem;
+  align-items: stretch;
 }
 
 .workflowCard {
@@ -121,6 +122,9 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .workflowCard::before {
@@ -202,7 +206,7 @@
 
 .workflowOutcome {
   position: relative;
-  margin-top: 1.25rem;
+  margin-top: auto;
   border-top: 1px solid var(--color-border);
   padding-top: 1rem;
 }
@@ -228,6 +232,7 @@
   display: grid;
   gap: 1rem;
   margin-top: 2.5rem;
+  align-items: stretch;
 }
 
 .typeCard {
@@ -237,6 +242,9 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   padding: 1.25rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   transition:
     transform 0.3s ease,
     border-color 0.3s ease,
@@ -313,7 +321,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-primary);
@@ -324,6 +333,7 @@
   display: grid;
   gap: 1rem;
   margin-top: 2.5rem;
+  align-items: stretch;
 }
 
 .metricCard {
@@ -332,7 +342,13 @@
   border-radius: 0.875rem;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-  padding: 1.5rem;
+  padding: 1.75rem 1.25rem;
+  min-height: 12.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   text-align: center;
 }
 
@@ -372,6 +388,7 @@
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--color-text-muted);
+  flex: 1;
 }
 
 /* ---------- Why build ---------- */
@@ -379,6 +396,7 @@
   display: grid;
   gap: 1.25rem;
   margin-top: 2.5rem;
+  align-items: stretch;
 }
 
 .whyCard {
@@ -389,6 +407,9 @@
   border-left: 3px solid var(--color-primary);
   background: var(--color-surface);
   padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .whyIcon {
@@ -425,26 +446,31 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   margin-top: 2.5rem;
-}
-
-.processTimeline::before {
-  content: "";
-  position: absolute;
-  top: 1.75rem;
-  left: 12.5%;
-  right: 12.5%;
-  height: 1px;
-  border-top: 2px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
-  z-index: 0;
+  align-items: start;
 }
 
 .processStep {
   position: relative;
   z-index: 1;
   text-align: center;
+  isolation: isolate;
+}
+
+.processStep:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.75rem;
+  left: calc(50% + 1.75rem);
+  width: calc(100% - 3.5rem + 1rem);
+  height: 0;
+  border-top: 2px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .processNumber {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -482,6 +508,7 @@
   gap: 1rem;
   margin-top: 2.5rem;
   align-items: stretch;
+  padding-top: 0.75rem;
 }
 
 .pricingCard {
@@ -490,7 +517,7 @@
   border-radius: 1rem;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-  padding: 1.5rem;
+  padding: 2rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -504,7 +531,6 @@
     0 0 0 1px var(--color-primary),
     0 20px 48px rgba(0, 0, 0, 0.3);
   padding-top: 2rem;
-  margin-top: 0.75rem;
 }
 
 .pricingFeaturedBadge {
@@ -655,7 +681,7 @@
     grid-template-columns: 1fr;
   }
 
-  .processTimeline::before {
+  .processStep:not(:last-child)::after {
     display: none;
   }
 
@@ -667,32 +693,39 @@
 @media (min-width: 640px) {
   .typesGrid {
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .metricsGrid {
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .whyGrid {
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
   }
 }
 
 @media (min-width: 1024px) {
   .typesGrid {
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .metricsGrid {
     grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .whyGrid {
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .pricingGrid {
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
   }
 
   .faqGrid {
@@ -701,5 +734,6 @@
 
   .workflowCards {
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
   }
 }

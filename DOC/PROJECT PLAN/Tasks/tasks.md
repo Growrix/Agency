@@ -873,3 +873,15 @@ Remaining parallel tracks:
 - **Touched files:** `.cursor/rules/52-web-mobile-design-system.mdc`, `.cursor/rules/60-zero-gate-health-check.mdc`, `AI-BOS/.cursor/skills/senior-saas-developer/SKILL.md`, `AI-BOS/.cursor/skills/senior-frontend-specialist/SKILL.md`, `AI-BOS/.cursor/skills/frontend-quality-enforcer/quality-matrix.md`, `memories/repo/site-brain.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`. Host copy: `~/.cursor/skills/senior-saas-developer/SKILL.md`.
 - **Validation:** ReadLints zero on touched rule/brain files; no code gates required for documentation-only changes.
 - **Gaps:** Rule `52-web-mobile-design-system.mdc` is not yet mirrored to `AI-BOS/.cursor/rules/` (host-only for Growrixos `web/` lane). Consider vault KO if cross-project portability is needed.
+
+### 2026-07-18 — Automation desktop layout polish + DS governance extension (WEB-AUTOMATION-REDESIGN-005)
+- **Request:** Fine-tune automation page desktop design — uneven card sizes in workflow/types/metrics sections, process connector line overlapping step icons/text, pricing card misalignment; extend agent rules to prevent recurrence.
+- **Fix (CSS):**
+  - Equal-height card grids: `align-items: stretch`, `grid-auto-rows: 1fr`, flex column cards with `height: 100%`, `margin-top: auto` on footer links/outcomes.
+  - Metrics cards: `min-height: 12.5rem` for consistent scale in 5-column row.
+  - Process timeline: replaced full-width `::before` connector with per-step segment `::after` lines behind node circles; hidden on mobile stack.
+  - Pricing: removed featured `margin-top` offset; unified card padding; grid `padding-top` for badge clearance.
+- **Fix (governance):** Extended `.cursor/rules/52-web-mobile-design-system.mdc` with desktop marketing layout discipline (equal-height grids, segment connectors, cross-section rhythm). Updated `60-zero-gate-health-check.mdc`, `site-brain.md`, `senior-saas-developer` + `senior-frontend-specialist` skills, `frontend-quality-enforcer/quality-matrix.md` Step 12.
+- **Touched files:** `web/src/components/marketing/automation/AutomationPage.module.css`, `.cursor/rules/52-web-mobile-design-system.mdc`, `.cursor/rules/60-zero-gate-health-check.mdc`, `memories/repo/site-brain.md`, `AI-BOS/.cursor/skills/senior-saas-developer/SKILL.md`, `AI-BOS/.cursor/skills/senior-frontend-specialist/SKILL.md`, `AI-BOS/.cursor/skills/frontend-quality-enforcer/quality-matrix.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`. Host copy: `~/.cursor/skills/senior-saas-developer/SKILL.md`.
+- **Validation:** `ReadLints` zero on touched CSS; `npm run lint --prefix web` exit 0; `npm run typecheck --prefix web` exit 0.
+- **Gaps:** Manual desktop browser pass on `/services/automation` recommended to confirm visual alignment at 1024px+.

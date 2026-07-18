@@ -48,6 +48,8 @@ When adding or redesigning a `web/` marketing or service page:
 1. Audit [`web/src/app/services/[slug]/page.tsx`](../../web/src/app/services/[slug]/page.tsx) and shared mobile components in [`web/src/components/marketing/mobile/`](../../web/src/components/marketing/mobile/).
 2. Reuse `MarketingViewportGate` and the `home-mobile-marketing` system — **do not** build bespoke mobile CSS modules.
 3. Section headings must use `titleLead` / `titleAccent` with the global `.marketing-title-accent` gradient — **no per-page overrides** in CSS modules.
+4. Desktop card grids: equal-height stretch (`grid-auto-rows: 1fr`, `h-full` on motion wrappers, flex column cards, `margin-top: auto` on footer links/CTAs).
+5. Process/timeline connectors: segment lines between step nodes behind circles — never a single full-width line overlapping labels.
 
 ## Agent Brain (Growrixos and similar monorepos)
 

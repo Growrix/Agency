@@ -48,6 +48,28 @@ The gradient is defined in `web/src/app/globals.css` (`.marketing-title-accent` 
 
 Desktop-only visual treatments (cards, timelines, glass panels) may use scoped CSS modules **only when** they do not override global typography tokens or the title accent gradient. Mobile must still delegate to the shared components above.
 
+## Desktop marketing layout discipline (required)
+
+When building desktop card grids, timelines, or multi-column sections in `web/` marketing pages:
+
+### Equal-height card grids
+
+- Grid containers: `align-items: stretch` and `grid-auto-rows: 1fr` at each breakpoint where cards sit in a row.
+- Card wrappers (`RevealItem`, grid children): `className="h-full"` when using motion wrappers.
+- Card surfaces: `height: 100%`, `display: flex`, `flex-direction: column`.
+- Footer CTAs / "Learn more" links: `margin-top: auto` so they align across rows regardless of body copy length.
+
+### Process / timeline connectors
+
+- **Never** use a single full-width pseudo-element line across an entire timeline row — it will overlap step labels and icons.
+- Connect steps with **segment connectors** (`:not(:last-child)::after`) from circle center to next circle, positioned behind nodes (`z-index: 0`) with opaque node backgrounds + ring (`box-shadow`).
+- Hide segment connectors on stacked/mobile single-column layouts.
+
+### Cross-section visual rhythm
+
+- Do not mix arbitrary card scales in adjacent sections (e.g. tiny icon tiles beside full feature cards) without explicit design intent.
+- Pricing featured tiers: avoid `margin-top` offsets that break grid alignment — use grid `padding-top` for badge clearance instead.
+
 ## Audit before redesign
 
 Before redesigning or adding a `web/` marketing/service page:
@@ -56,3 +78,5 @@ Before redesigning or adding a `web/` marketing/service page:
 2. Audit an existing gold-standard service page in `web/src/app/services/[slug]/page.tsx`
 3. Confirm mobile sections use `MarketingViewportGate` + shared `home-mobile-marketing` primitives
 4. Confirm section headings use the global accent gradient (no per-page override)
+5. Confirm desktop card grids use equal-height stretch + flex column + bottom-aligned CTAs
+6. Confirm process/timeline connectors use segment lines behind nodes, not full-width overlaps
