@@ -7,14 +7,6 @@
   max-width: 36rem;
 }
 
-.heroTitleAccent :global(.marketing-title-accent),
-.sectionHeaderCenter :global(.marketing-title-accent) {
-  background: linear-gradient(90deg, var(--color-primary), #06b6d4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .heroEyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -655,13 +647,6 @@
   width: 100%;
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-}
-
-.ctaTitleAccent :global(.marketing-title-accent) {
-  background: linear-gradient(90deg, var(--color-primary), #06b6d4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 /* ---------- Responsive ---------- */

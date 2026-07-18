@@ -5,7 +5,6 @@ import { MarketingAccentTitle } from "@/components/marketing/MarketingAccentTitl
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { ProductLedFinalCTAMobile } from "@/components/marketing/ProductLedFinalCTAMobile";
 import { AUTOMATION_SERVICE_CTA } from "@/lib/automation-service-content";
-import { cn } from "@/lib/utils";
 import styles from "./AutomationPage.module.css";
 
 function AutomationCTADesktop() {
@@ -13,12 +12,7 @@ function AutomationCTADesktop() {
     <Section size="compact" layout="content" spacing="default">
       <Container>
         <div className={styles.ctaBand}>
-          <h2
-            className={cn(
-              "font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance",
-              styles.ctaTitleAccent,
-            )}
-          >
+          <h2 className="font-display text-3xl sm:text-4xl leading-[1.08] tracking-tight text-balance">
             <MarketingAccentTitle
               lead={AUTOMATION_SERVICE_CTA.titleLead}
               accent={AUTOMATION_SERVICE_CTA.titleAccent}

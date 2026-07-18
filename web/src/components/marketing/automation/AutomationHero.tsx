@@ -11,7 +11,6 @@ import { LinkButton } from "@/components/primitives/Button";
 import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
 import { ServiceDetailHeroMobile } from "@/components/marketing/services/ServiceDetailHeroMobile";
 import { AUTOMATION_SERVICE_HERO } from "@/lib/automation-service-content";
-import { cn } from "@/lib/utils";
 import styles from "./AutomationPage.module.css";
 
 const TRUST_LOGOS = ["Linear", "Ghost", "Webflow", "Vercel"];
@@ -99,7 +98,6 @@ function AutomationHeroDesktop({
           </div>
           <div className="signal-rise mt-5" style={{ animationDelay: "140ms" }}>
             <MarketingHeroTitle
-              className={cn(styles.heroTitle, styles.heroTitleAccent)}
               titleLead={AUTOMATION_SERVICE_HERO.headlineLead}
               titleAccent={AUTOMATION_SERVICE_HERO.headlineAccent}
             />
