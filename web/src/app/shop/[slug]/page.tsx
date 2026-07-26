@@ -20,7 +20,7 @@ import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { ProductReviews } from "@/components/shop/ProductReviews";
 import { WishlistButton } from "@/components/shop/WishlistButton";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
-import { buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
+import { buildBreadcrumbListSchema, buildDigitalProductSchema } from "@/lib/seo-structured-data";
 import { absoluteUrl } from "@/lib/site";
 import { WebsiteTemplateHtmlDesktopPreviewFrame } from "@/components/shop/WebsiteTemplateHtmlDesktopPreviewFrame";
 import { WebsiteTemplateHtmlMobilePreviewFrame } from "@/components/shop/WebsiteTemplateHtmlMobilePreviewFrame";
@@ -524,27 +524,18 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const productCanonicalUrl = absoluteUrl(`/digital-products/${product.slug}`);
   const productPriceMatch = /([0-9][0-9,]*(?:\.[0-9]+)?)/.exec(product.price ?? "");
   const productPriceValue = productPriceMatch ? productPriceMatch[1].replace(/,/g, "") : undefined;
-  const productJsonLd: JsonLdData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
+  const productJsonLd: JsonLdData = buildDigitalProductSchema({
     name: product.name,
     description: product.summary ?? product.teaser ?? undefined,
     url: productCanonicalUrl,
     category: product.category,
-    ...(product.image?.src ? { image: absoluteUrl(product.image.src) } : {}),
-    brand: { "@type": "Brand", name: "Growrix OS" },
-    ...(productPriceValue
-      ? {
-          offers: {
-            "@type": "Offer",
-            price: productPriceValue,
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            url: productCanonicalUrl,
-          },
-        }
-      : {}),
-  };
+    image: product.image?.src ? absoluteUrl(product.image.src) : undefined,
+    sku: product.slug,
+    brandName: "Growrix OS",
+    price: productPriceValue,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  });
   const faqJsonLd: JsonLdData | null = faqs.length > 0
     ? {
         "@context": "https://schema.org",

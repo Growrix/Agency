@@ -46,7 +46,7 @@ import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 export const metadata: Metadata = buildPageMetadata({
   title: "About — Founder-Led Web & SaaS Studio",
   description:
-    "GrowrixOS is a founder-led product studio building websites, SaaS applications, mobile products, automation, technical SEO, and AI business systems for measurable outcomes.",
+    "Growrix OS is a founder-led product studio building websites, SaaS apps, mobile products, automation, technical SEO, and AI business systems.",
   path: "/about",
 });
 

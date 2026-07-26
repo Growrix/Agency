@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
-import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
+import { buildPageMetadata, NOINDEX_ROBOTS, truncateMetaDescription } from "@/lib/seo-metadata";
 import { buildFaqPageSchema, buildServiceSchema, buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
@@ -342,7 +342,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!service) return { title: "Service not found", robots: NOINDEX_ROBOTS };
   return buildPageMetadata({
     title: `${service.title} Development`,
-    description: service.description,
+    description: truncateMetaDescription(service.description),
     path: `/services/${slug}`,
   });
 }

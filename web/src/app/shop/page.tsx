@@ -10,7 +10,7 @@ import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/site";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Digital Products — Templates, Starters, and Toolkits",
+  title: "Digital Products — Templates & Toolkits",
   description:
     "Browse HTML templates, SaaS starters, AI toolkits, and SEO packs. Compare Standard, Premium, and Done-For-You tiers.",
   path: "/digital-products",

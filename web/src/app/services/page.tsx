@@ -61,7 +61,7 @@ import { HERO_VIEWPORT_CONTAINER_CLASS } from "@/lib/typography";
 import { listPublicPortfolio, listPublicServices } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Web Development Services — Websites, SaaS & Apps",
+  title: "Web Dev Services — Websites, SaaS & Apps",
   description:
     "Compare custom website, SaaS, and mobile app development paths. Book a strategy call to choose the right engagement model.",
   path: "/services",
