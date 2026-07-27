@@ -11,7 +11,11 @@ import { readDatabase, writeDatabase } from "@/server/data/store";
 import type { AuthenticatedUser } from "@/server/auth/guards";
 import { uploadIntakeFiles } from "@/server/domain/intake-assets";
 import { ensureFreeDemoCampaign, reserveFreeDemoSlot } from "@/server/domain/free-demo-campaign";
-import { notifyAdminIntakeReceived } from "@/server/domain/intake-notifications";
+import {
+  notifyAdminIntakeReceived,
+  notifyClientIntakeConfirmed,
+} from "@/server/domain/intake-notifications";
+import { convertIntakeToProject } from "@/server/domain/projects";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -216,10 +220,27 @@ export async function createClientIntake(input: CreateIntakeInput): Promise<Clie
         is_free_demo: record.is_free_demo,
       },
     }),
-    notifyAdminIntakeReceived(record),
+    notifyAdminIntakeReceived(record).catch((error) => {
+      console.error("[intake] admin notify failed", record.id, error);
+    }),
+    notifyClientIntakeConfirmed(record).catch((error) => {
+      console.error("[intake] client confirmation email failed", record.id, error);
+    }),
   ]);
 
-  return record;
+  // Auto-open the client project workspace so the submission appears under
+  // /dashboard/projects immediately (plan: client + admin ongoing workspace).
+  try {
+    const project = await convertIntakeToProject({ intake: record });
+    return {
+      ...record,
+      status: "project_created" as const,
+      project_id: project.id,
+    };
+  } catch (error) {
+    console.error("[intake] auto-convert to project failed", record.id, error);
+    return record;
+  }
 }
 
 export async function listIntakesForUser(userId: string) {

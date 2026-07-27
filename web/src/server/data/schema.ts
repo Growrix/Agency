@@ -441,6 +441,7 @@ export type NotificationKind =
   | "appointment_requested"
   | "download_issued"
   | "client_intake_received"
+  | "client_intake_confirmed"
   | "system";
 export type NotificationStatus = "pending" | "sent" | "failed" | "skipped";
 

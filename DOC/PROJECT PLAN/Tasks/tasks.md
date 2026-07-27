@@ -990,3 +990,16 @@ Remaining parallel tracks:
   - regression: 6 new unit tests in users.test.ts (seed hash, correct/wrong password, bypass no longer works, env-admin migration, soft-delete exclusion)
   - commit: pending user request
   - handoff: optional @backend-quality-enforcer for phase-end review
+- 2026-07-27T18:05:00+06:00 | senior-saas-developer | execute_locked_plan | Intake email harden + client confirm + UX + tests
+  - brain: client-intake-workspace-e2e-plan + intake E2E analysis plan
+  - files_touched: intake-notifications.ts, team-notifications.ts, intakes.ts, schema.ts, MySubmissionsClient.tsx, MyProjectsClient.tsx, intake-email-flow.test.ts, intake-flow.spec.ts, package.json, tasks.md
+  - gates: QG-typecheck=pass, QG-integration=pass(14), QG-lints=pending
+  - ops: RESEND_API_KEY/CONTACT_TO_EMAIL/CONTACT_FROM_EMAIL present in .env.local (values not logged)
+  - commit: pending
+  - handoff: none
+
+### 2026-07-27 — Intake email + E2E gap remediation
+- **Mode:** `execute_locked_plan` (Intake E2E Analysis remediation)
+- **Ops verify:** `.env.local` has RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL set (lengths only).
+- **Delivered:** Honest admin notify logging + absolute admin URLs; client confirmation email; Projects vs Submissions UX clarity; integration tests for skip path + absolute href; team email timeout 5s.
+- **Validation:** typecheck pass; integration 14/14 pass; ReadLints clean on touched files.

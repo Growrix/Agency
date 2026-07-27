@@ -7,7 +7,7 @@ import type { NotificationKind } from "@/server/data/schema";
 import { dispatchNotification } from "@/server/domain/notifications";
 import { recordAuditLog } from "@/server/logging/observability";
 
-const TEAM_EMAIL_TIMEOUT_MS = 3_000;
+const TEAM_EMAIL_TIMEOUT_MS = 5_000;
 
 type EmailBody = { html: string; text?: string } | { text: string; html?: string };
 

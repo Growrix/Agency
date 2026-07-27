@@ -72,6 +72,7 @@ export async function POST(request: NextRequest) {
       submission_number: record.submission_number,
       status: record.status,
       is_free_demo: record.is_free_demo,
+      project_id: record.project_id ?? null,
     });
   } catch (error) {
     return errorResponse(

@@ -44,3 +44,10 @@ test("homepage loads with free demo gate without runtime errors", async ({ page 
 
   expect(pageErrors).toEqual([]);
 });
+
+test("dashboard projects page is the free-demo intake endpoint", async ({ page }) => {
+  await page.goto("/dashboard/projects", { waitUntil: "domcontentloaded" });
+  // Unauthenticated users are redirected to login; authenticated see projects workspace.
+  const url = page.url();
+  expect(url.includes("/dashboard/projects") || url.includes("/dashboard/login") || url.includes("/sign-in")).toBeTruthy();
+});

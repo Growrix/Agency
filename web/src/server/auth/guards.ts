@@ -1,10 +1,10 @@
 import "server-only";
 
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { type NextRequest, NextResponse } from "next/server";
 import { ApiError } from "@/server/core/api";
 import { isClerkConfigured, isLegacyTestAuthEnabled } from "@/server/auth/clerk-config";
-import { getUserByClerkId, syncClerkUser } from "@/server/auth/clerk-sync";
+import { getUserByClerkId, syncClerkUser, upsertUserFromClerk } from "@/server/auth/clerk-sync";
 import { getUserById } from "@/server/auth/users";
 import { recordAuditLog } from "@/server/logging/observability";
 import {
@@ -63,6 +63,41 @@ async function getLegacyAuthenticatedUser(request: Request | NextRequest): Promi
   }
 }
 
+async function resolveClerkUserFromSession(userId: string) {
+  // Prefer Clerk Backend API sync; fall back to currentUser() so a signed-in
+  // session never becomes a false 401 when the Backend API call flakes.
+  try {
+    const synced = await syncClerkUser(userId);
+    if (synced) {
+      return synced;
+    }
+  } catch (error) {
+    console.error("[auth] syncClerkUser threw for clerk userId", userId, error);
+  }
+
+  try {
+    const clerkUser = await currentUser();
+    if (!clerkUser || clerkUser.id !== userId) {
+      return null;
+    }
+    const primaryEmail =
+      clerkUser.emailAddresses.find((entry) => entry.id === clerkUser.primaryEmailAddressId)?.emailAddress ??
+      clerkUser.emailAddresses[0]?.emailAddress;
+    if (!primaryEmail) {
+      return null;
+    }
+    return upsertUserFromClerk({
+      clerkUserId: userId,
+      email: primaryEmail,
+      firstName: clerkUser.firstName ?? undefined,
+      lastName: clerkUser.lastName ?? undefined,
+    });
+  } catch (error) {
+    console.error("[auth] currentUser fallback failed for clerk userId", userId, error);
+    return null;
+  }
+}
+
 async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
   const { userId } = await auth();
   if (!userId) {
@@ -71,15 +106,11 @@ async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
 
   let user = await getUserByClerkId(userId);
   if (!user) {
-    try {
-      user = await syncClerkUser(userId);
-    } catch (error) {
-      console.error("[auth] syncClerkUser threw for clerk userId", userId, error);
-      user = null;
-    }
+    user = await resolveClerkUserFromSession(userId);
   }
 
   if (!user) {
+    console.warn("[auth] signed-in Clerk user has no mirrored DB record", userId);
     return null;
   }
 

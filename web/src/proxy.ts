@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -31,18 +31,6 @@ function isClerkConfiguredInProxy() {
     process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim() && process.env.CLERK_SECRET_KEY?.trim(),
   );
 }
-
-/** Routes that need Clerk middleware (auth handshake, protect, session sync). */
-const isClerkRoute = createRouteMatcher([
-  "/admin(.*)",
-  "/dashboard(.*)",
-  "/complete-account(.*)",
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/api(.*)",
-  "/trpc(.*)",
-  "/__clerk(.*)",
-]);
 
 function businessProfileRewrite(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -226,22 +214,19 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
       return blockedPreview;
     }
 
-    if (isProtectedPath(nextRequest.nextUrl.pathname)) {
-      // For API routes, return a 401 JSON response (our envelope) instead of
-      // Clerk's default redirect/404 so API clients and tests get a clean error.
-      if (nextRequest.nextUrl.pathname.startsWith("/api/")) {
-        try {
-          await auth.protect();
-        } catch {
+    const pathname = nextRequest.nextUrl.pathname;
+    // Resolve session first — do not wrap auth.protect() in a catch-all that can
+    // turn non-auth control-flow into a false 401 for signed-in users.
+    const { userId } = await auth();
+
+    if (isProtectedPath(pathname)) {
+      if (!userId) {
+        if (pathname.startsWith("/api/")) {
           return rejectUnauthenticatedApi();
         }
-      } else {
         await auth.protect();
       }
     }
-
-    const { userId } = await auth();
-    const pathname = nextRequest.nextUrl.pathname;
     const needsMirroredUser =
       Boolean(userId) && (isAdminPath(pathname) || shouldEnforceCompletion(pathname));
     const mirroredUser = needsMirroredUser && userId ? await resolveMirroredClerkUser(userId) : null;
@@ -299,11 +284,10 @@ export default async function proxy(request: NextRequest, event: NextFetchEvent)
     return legacyProxy(request);
   }
 
-  // Marketing pages skip clerkMiddleware to avoid handshake redirect loops for anonymous visitors.
-  if (!isClerkRoute(request)) {
-    return legacyProxy(request);
-  }
-
+  // Always run clerkMiddleware when Clerk is configured. Skipping it on marketing
+  // pages left homepage visitors "signed in" in the client while API routes saw
+  // no server session — intake submit then returned "Authentication is required."
+  // Public routes stay public: we only auth.protect() / 401 on protectedPrefixes.
   return clerkProxy(request, event);
 }
 

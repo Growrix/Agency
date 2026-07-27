@@ -15,6 +15,16 @@ type ProjectItem = {
   updated_at: string;
 };
 
+type IntakeItem = {
+  id: string;
+  submission_number: string;
+  business_name: string;
+  status: string;
+  project_id?: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 function formatDateTime(value: string) {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
@@ -35,6 +45,7 @@ function statusBadgeClass(status: string) {
 
 export function MyProjectsClient() {
   const [items, setItems] = useState<ProjectItem[]>([]);
+  const [pendingIntakes, setPendingIntakes] = useState<IntakeItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -42,15 +53,27 @@ export function MyProjectsClient() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("/api/v1/me/projects", { credentials: "same-origin" });
-      const payload = (await response.json().catch(() => null)) as {
+      const [projectsResponse, intakesResponse] = await Promise.all([
+        fetch("/api/v1/me/projects", { credentials: "same-origin" }),
+        fetch("/api/v1/me/intakes", { credentials: "same-origin" }),
+      ]);
+      const projectsPayload = (await projectsResponse.json().catch(() => null)) as {
         data?: { items?: ProjectItem[] };
         error?: { message?: string };
       } | null;
-      if (!response.ok) {
-        throw new Error(payload?.error?.message ?? "Unable to load projects.");
+      const intakesPayload = (await intakesResponse.json().catch(() => null)) as {
+        data?: { items?: IntakeItem[] };
+        error?: { message?: string };
+      } | null;
+      if (!projectsResponse.ok) {
+        throw new Error(projectsPayload?.error?.message ?? "Unable to load projects.");
       }
-      setItems(payload?.data?.items ?? []);
+      const projects = projectsPayload?.data?.items ?? [];
+      setItems(projects);
+      const intakes = intakesPayload?.data?.items ?? [];
+      setPendingIntakes(
+        intakes.filter((intake) => !intake.project_id && intake.status !== "project_created"),
+      );
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to load projects.");
     } finally {
@@ -71,13 +94,36 @@ export function MyProjectsClient() {
         <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Project workspace</p>
         <h1 className="mt-1 font-display text-3xl tracking-tight">My projects</h1>
         <p className="mt-1 text-sm text-text-muted">
-          Track your website build, share new references, and collaborate with the Growrix team.
+          Track your website build, share new references, and collaborate with the Growrix team. Free demo intake
+          requests appear here after you submit from the homepage.
         </p>
       </header>
 
       {error ? (
         <Card>
           <p className="text-sm text-destructive">{error}</p>
+        </Card>
+      ) : null}
+
+      {pendingIntakes.length > 0 ? (
+        <Card className="overflow-hidden p-0">
+          <div className="border-b border-border/60 bg-inset/30 px-4 py-2 text-xs uppercase tracking-[0.18em] text-text-muted">
+            Pending requests ({pendingIntakes.length})
+          </div>
+          <ul className="divide-y divide-border/60">
+            {pendingIntakes.map((intake) => (
+              <li key={intake.id} className="px-4 py-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-medium text-text">{intake.business_name}</p>
+                  <span className="rounded-sm bg-warning/15 px-2 py-0.5 text-xs text-warning">
+                    {intake.status.replace(/_/g, " ")}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-text-muted">{intake.submission_number}</p>
+                <p className="mt-1 text-xs text-text-muted">Submitted {formatDateTime(intake.created_at)}</p>
+              </li>
+            ))}
+          </ul>
         </Card>
       ) : null}
 
@@ -100,7 +146,7 @@ export function MyProjectsClient() {
               </Link>
             </li>
           ))}
-          {!loading && items.length === 0 ? (
+          {!loading && items.length === 0 && pendingIntakes.length === 0 ? (
             <li className="px-4 py-10 text-center">
               <p className={cn(DASHBOARD_EMPTY_TITLE_CLASS, "mt-2")}>No projects yet</p>
               <p className="mt-2 text-sm text-text-muted">

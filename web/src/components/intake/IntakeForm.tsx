@@ -137,7 +137,7 @@ function TagInput({
 }
 
 export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded, getToken } = useAuth();
   const clerk = useClerk();
   const clerkEnabled = isClerkConfiguredClient();
 
@@ -215,13 +215,22 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
         formData.append("files", file);
       }
 
+      const headers: HeadersInit = {};
+      if (clerkEnabled) {
+        const token = await getToken().catch(() => null);
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
+      }
+
       const response = await fetch("/api/v1/intakes", {
         method: "POST",
         body: formData,
         credentials: "same-origin",
+        headers,
       });
       const payload = (await response.json().catch(() => null)) as {
-        data?: { submission_number?: string };
+        data?: { submission_number?: string; project_id?: string };
         error?: { message?: string };
       } | null;
 
@@ -231,8 +240,11 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
 
       markFreeDemoSeen();
       setAwaitingAuth(false);
+      const projectHint = payload?.data?.project_id
+        ? " Open My projects in your dashboard to track progress."
+        : " Check your dashboard for updates.";
       setSuccessMessage(
-        `Request submitted (${payload?.data?.submission_number ?? "confirmed"}). Check your dashboard for updates.`,
+        `Request submitted (${payload?.data?.submission_number ?? "confirmed"}).${projectHint}`,
       );
       onSuccess?.();
     } catch (caught) {

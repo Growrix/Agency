@@ -18,7 +18,7 @@
     "ci:check": "npm run lint && npm run typecheck && npm run perf:budgets && npm run test && npm run build && npm run test:e2e -- tests/e2e/release-gates.spec.ts --project=desktop-chrome",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "node ./scripts/run-unit-tests.mjs",
-    "test:integration": "tsx --test tests/integration/api-flows.test.ts",
+    "test:integration": "tsx --test --test-concurrency=1 tests/integration/*.test.ts",
     "test:e2e": "playwright test",
     "test:release": "npm run test && npm run build && npm run test:e2e",
     "perf:budgets": "node ./scripts/check-preview-budgets.mjs",

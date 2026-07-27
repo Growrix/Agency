@@ -126,7 +126,7 @@ export function MySubmissionsClient() {
       <DashboardHeroBand
         eyebrow="Submissions"
         title="My submissions"
-        description="Every contact form, booking, service request, and order tied to your account. Click any row to read team replies."
+        description="Every contact form, booking, service request, and order tied to your account. Free demo and website intake requests live under Projects."
         stats={[
           { label: "Total", value: items.length, icon: <ClipboardDocumentListIcon className="size-5" /> },
           { label: "Open", value: openCount, icon: <InboxStackIcon className="size-5" /> },
@@ -134,6 +134,16 @@ export function MySubmissionsClient() {
           { label: "Resolved", value: resolvedCount, icon: <ArrowRightIcon className="size-5" /> },
         ]}
       />
+
+      <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
+        <p className="text-sm text-text-muted">
+          Looking for a free demo or website build request?{" "}
+          <Link href="/dashboard/projects" className="font-medium text-primary underline-offset-2 hover:underline">
+            Open My projects
+          </Link>
+          .
+        </p>
+      </Card>
 
       <section className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div className="flex max-w-full gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -219,12 +229,19 @@ export function MySubmissionsClient() {
                 </span>
                 <p className={cn(DASHBOARD_EMPTY_TITLE_CLASS, "mt-5 sm:mt-6")}>No submissions yet</p>
                 <p className="mx-auto mt-2 max-w-sm text-sm text-text-muted sm:text-base">
-                  Your contact forms, bookings, and service requests will appear here.
+                  Your contact forms, bookings, and service requests will appear here. Free demo requests appear under
+                  Projects.
                 </p>
-                <LinkButton href="/contact" variant="outline" className="mt-5 sm:mt-6">
-                  Contact us
-                  <ArrowRightIcon className="ml-1 size-4" />
-                </LinkButton>
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-6">
+                  <LinkButton href="/dashboard/projects" variant="primary">
+                    Open my projects
+                    <ArrowRightIcon className="ml-1 size-4" />
+                  </LinkButton>
+                  <LinkButton href="/contact" variant="outline">
+                    Contact us
+                    <ArrowRightIcon className="ml-1 size-4" />
+                  </LinkButton>
+                </div>
               </div>
             </li>
           ) : null}
