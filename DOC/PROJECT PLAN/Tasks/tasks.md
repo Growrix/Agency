@@ -1011,9 +1011,10 @@ Remaining parallel tracks:
 - **Fix:** sessionStorage pending draft restore + auto-submit; success panel stays open; completion exempt for projects; Lark HMAC signing when secret set; counter `bumpClaimed` refetch; regression tests.
 - **Validation:** typecheck pass; lint pass; test pass (unit+integ 15); build pass; e2e intake-flow 6/6 pass (`PW_REUSE_DEV_SERVER=1`).
 - **Ops:** set `LARK_WEBHOOK_URL` (and optional `LARK_SIGNING_SECRET`) in `web/.env.local` — documented in `.env.example`.
+- **Commit:** `c3018c9`
 - 2026-07-27T18:45:00+06:00 | senior-saas-developer | debug_failure | Fixed free-demo intake E2E unfinished flow
   - brain: intake E2E fix plan
   - files_touched: IntakeForm.tsx, free-demo-store.ts, FreeDemoModal/Popup/Counter, proxy.ts, notifications.ts, .env.example, intake tests, tasks.md
   - gates: QG-typecheck=pass, QG-lint=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(6)
-  - commit: pending
+  - commit: c3018c9
   - handoff: none
