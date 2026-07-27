@@ -1,0 +1,45 @@
+---
+description: Bind Founder OS work to PRJ-STR-FOUNDEROS-001 and I13 power-pack Knowledge Objects. Apply when working in founder memory or orchestrating business initiatives.
+globs: ".cursor/brain/founder-os-memory/**,.cursor/brain/founder-os-brain.md"
+alwaysApply: false
+---
+
+# AI-BOS Founder Binding (Founder OS)
+
+When working in the Founder OS lane, treat delivery context as **`PRJ-STR-FOUNDEROS-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-STR-FOUNDEROS-001` before material founder work.
+2. Load `RU-AI-BOS-FOUNDER-001` + `HB-STR-FOUNDER-001` v1.1+ and specialist HBs when scope matches.
+3. Persist outcomes to `founder-os-memory/` per `ST-STR-MEMORY-001`.
+4. End with Bangla handoff per `RU-AI-BOS-HANDOFF-001`.
+
+## Routing
+
+| Need | Agent |
+|------|-------|
+| Entry / orchestration | `@founder-os` (`AG-STR-FOUNDER-001`) |
+| Research / competitors | `@founder-research` |
+| Marketing / funnels (early) | `@founder-marketing` |
+| Marketing department / multi-channel | `@marketing-cmo` |
+| Sales / proposals | `@founder-sales` |
+| Automation planning | `@founder-automation` |
+| SaaS build | `@senior-saas-developer` |
+| Vault / MCP port | `@system-builder` |
+
+## MCP tools (when available)
+
+| ID | Cursor server |
+|----|---------------|
+| `MC-KNW-REGISTRY-001` | `ai-bos-knowledge-registry` |
+| `MC-KNW-RETRIEVE-001` | `ai-bos-knowledge-retrieve` |
+| `MC-PLT-CODEBASE-001` | `ai-bos-codebase-intelligence` |
+
+## Never
+
+- Write product code in Founder OS agents — delegate to `AG-DLV-*`
+- Store secrets in founder memory
+- Skip disk artifacts before delivery handoff
+
+Knowledge-layer mirror: `RU-AI-BOS-FOUNDER-001`.

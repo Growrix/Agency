@@ -31,6 +31,8 @@ tags:
   - ai-bos
   - standard
   - testing
+capabilities:
+  - CAP-OPS-002
 ---
 
 # SaaS Testing and Quality Standard
@@ -74,7 +76,7 @@ Applicable gates green; evidence paths in ledger; no known red diagnostics on to
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/quality/*
+- universal/Enterprise Level Guide/quality/*
 - ST-EXE-001
 
 ## Related Knowledge Objects

@@ -1,0 +1,37 @@
+---
+description: Bind SEO OS work to PRJ-GRO-MKOS-001 SEO sub-department. Apply when orchestrating SEO programs, audits, international, automation, or algorithm watch advisory work.
+globs: ".cursor/brain/founder-os-memory/projects/**/marketing/seo/**,.cursor/skills/seo-lead/**,.cursor/skills/mkt-seo-international/**,.cursor/skills/mkt-seo-automation/**,.cursor/skills/mkt-seo-algorithm-watch/**,AI-BOS/.cursor/skills/seo-lead/**,AI-BOS/.cursor/skills/mkt-seo-*/**"
+alwaysApply: false
+---
+
+# AI-BOS SEO OS Binding
+
+When working in the SEO OS lane, treat delivery context as **`PRJ-GRO-MKOS-001`** (SEO sub-department).
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-GRO-MKOS-001`.
+2. Load `RU-AI-BOS-SEOOS-001` + `HB-GRO-SEOOS-001` + division handbook.
+3. Persist to `founder-os-memory/projects/<slug>/marketing/seo/` per `ST-GRO-MKT-MEMORY-001`.
+4. End with Bangla handoff per `RU-AI-BOS-HANDOFF-001`.
+
+## Routing
+
+| Need | Agent |
+|------|-------|
+| SEO department / multi-track | `@seo-lead` (`AG-GRO-SEO-LEAD-001`) |
+| Full marketing campaign | `@marketing-cmo` |
+| Technical SEO execution | `@technical-seo` |
+| On-page SEO | `@on-page-seo` |
+| Off-page / local | `@off-page-seo` |
+| Business context | `@founder-os` |
+
+## Human gates
+
+Search Console, DNS, sitemap submit, publish — stop with Bangla click-by-click instructions.
+
+## Never
+
+Fabricate rankings or traffic data; skip SEO Lead on multi-track programs.
+
+Knowledge-layer mirror: `RU-AI-BOS-SEOOS-001`.

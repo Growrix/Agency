@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - versioning-evolution
+capabilities:
+  - CAP-OPS-005
+  - CAP-KNW-002
 ---
 
 # Versioning and Evolution Standard

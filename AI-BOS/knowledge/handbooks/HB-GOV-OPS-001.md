@@ -31,6 +31,10 @@ tags:
   - ai-bos
   - handbook
   - governance
+capabilities:
+  - CAP-OPS-005
+  - CAP-OPS-001
+  - CAP-KNW-005
 ---
 
 # AI-BOS Operations Handbook

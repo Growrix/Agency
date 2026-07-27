@@ -2,8 +2,8 @@
   "schema_version": "1.0.0",
   "system": "AI-BOS",
   "registry": "agent",
-  "description": "Agent registry for AI-BOS \u2014 agents consume knowledge and perform roles",
-  "last_updated": "2026-07-17",
+  "description": "Agent registry for AI-BOS â€” agents consume knowledge and perform roles",
+  "last_updated": "2026-07-18",
   "indexes": {
     "agent": "agent-index.json"
   },
@@ -54,14 +54,14 @@
         "WF-*"
       ],
       "owner": "AI-BOS",
-      "runtime_projection": "cursor-skill:ai-bos-architect",
+      "runtime_projection": "vault-skill:ai-bos-architect",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
     },
     {
       "id": "AG-GOV-SYSBUILD-001",
       "name": "System Builder",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "authority": "supervised",
       "capabilities": [
@@ -71,14 +71,26 @@
         "CAP-PLT-005"
       ],
       "consumes": [
+        "AR-AI-BOS-001",
+        "AR-AI-BOS-004",
         "AR-AI-BOS-007",
+        "AR-AI-BOS-008",
+        "AR-AI-BOS-009",
         "AR-AI-BOS-010",
         "AR-AI-BOS-011",
         "AR-AI-BOS-012",
         "ST-GOV-001",
         "ST-AGT-001",
         "ST-REG-001",
-        "ST-VER-001"
+        "ST-VER-001",
+        "ST-EXE-001",
+        "ST-PLT-ENV-001",
+        "HB-GOV-OPS-001",
+        "HB-PLT-SYSBUILD-001",
+        "RU-AI-BOS-VAULT-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-UNI-001",
+        "WF-PLT-SYSBUILD-001"
       ],
       "mcp_servers": [
         "MC-KNW-REGISTRY-001"
@@ -87,6 +99,10 @@
         {
           "to": "AG-KNW-ARCH-001",
           "when": "domain architecture content authoring"
+        },
+        {
+          "to": "AG-KNW-VALID-001",
+          "when": "registry validation after structural edits"
         },
         {
           "to": "human",
@@ -98,9 +114,13 @@
         "audit artifacts"
       ],
       "owner": "AI-BOS",
-      "runtime_projection": "cursor-skill:system-builder",
+      "runtime_projection": "vault-skill:system-builder",
       "generated_from": "TP-AGT-001",
-      "updated": "2026-07-17"
+      "updated": "2026-07-18",
+      "notes": {
+        "vault_skill": ".cursor/skills/system-builder/",
+        "role": "vault_platform_builder"
+      }
     },
     {
       "id": "AG-KNW-VALID-001",
@@ -129,14 +149,296 @@
       ],
       "generates": [],
       "owner": "AI-BOS",
-      "runtime_projection": "standalone",
+      "runtime_projection": "vault-skill:knowledge-validator",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
     },
     {
+      "id": "AG-STR-FOUNDER-001",
+      "name": "Founder OS",
+      "version": "1.2.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-STR-001",
+        "CAP-STR-002",
+        "CAP-STR-006",
+        "CAP-STR-007",
+        "CAP-KNW-005",
+        "CAP-KNW-007",
+        "CAP-ORG-001",
+        "CAP-ORG-002"
+      ],
+      "consumes": [
+        "HB-STR-FOUNDER-001",
+        "WF-STR-FOUNDER-001",
+        "ST-STR-MEMORY-001",
+        "ST-PLT-REWIRE-001",
+        "TP-STR-FOUNDER-001",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-011",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-VAULT-001",
+        "RU-AI-BOS-FOUNDER-001",
+        "HB-STR-RESEARCH-001",
+        "HB-GRO-MARKET-001",
+        "HB-GRO-SALES-001",
+        "HB-OPS-FIN-001",
+        "HB-PLT-AUTOMATION-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "marketing department work"
+        },
+        {
+          "to": "AG-ENG-CTO-001",
+          "when": "engineering department work"
+        },
+        {
+          "to": "AG-STR-RESEARCH-001",
+          "when": "market or competitor research"
+        },
+        {
+          "to": "AG-GRO-MARKET-001",
+          "when": "offer, funnel, or messaging"
+        },
+        {
+          "to": "AG-GRO-SALES-001",
+          "when": "sales pipeline or proposal"
+        },
+        {
+          "to": "AG-PLT-AUTOMATION-001",
+          "when": "n8n or automation planning"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "website blueprint strategy"
+        },
+        {
+          "to": "AG-GRO-SEO-TECH-001",
+          "when": "technical SEO scope"
+        },
+        {
+          "to": "AG-GRO-SEO-ON-001",
+          "when": "on-page SEO scope"
+        },
+        {
+          "to": "AG-GRO-SEO-OFF-001",
+          "when": "off-page SEO scope"
+        },
+        {
+          "to": "AG-GOV-SYSBUILD-001",
+          "when": "agent system or rewire structural work"
+        },
+        {
+          "to": "AG-KNW-ARCH-001",
+          "when": "knowledge object authoring"
+        },
+        {
+          "to": "human",
+          "when": "subscriptions, API keys, payments, OAuth, or actions AI cannot perform"
+        }
+      ],
+      "generates": [
+        "memory records",
+        "scope docs",
+        "E2E plans"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:founder-os",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "no_coding": true,
+        "archetype": "strategy-orchestrator"
+      }
+    },
+    {
+      "id": "AG-STR-RESEARCH-001",
+      "name": "Founder Research",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-STR-004"
+      ],
+      "consumes": [
+        "HB-STR-RESEARCH-001",
+        "WF-STR-RESEARCH-001",
+        "ST-STR-MEMORY-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "research complete — plan next"
+        },
+        {
+          "to": "AG-GRO-MARKET-001",
+          "when": "research feeds offer design"
+        },
+        {
+          "to": "human",
+          "when": "login-gated scrape or paid data needed"
+        }
+      ],
+      "generates": [
+        "research briefs",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:founder-research",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "AG-GRO-MARKET-001",
+      "name": "Founder Marketing",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-001",
+        "CAP-GRO-002",
+        "CAP-GRO-004"
+      ],
+      "consumes": [
+        "HB-GRO-MARKET-001",
+        "WF-GRO-OFFER-001",
+        "HB-OPS-FIN-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-GRO-SALES-001",
+          "when": "offer ready for pipeline"
+        },
+        {
+          "to": "AG-GRO-SEO-TECH-001",
+          "when": "technical SEO execution"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "return to business orchestrator"
+        }
+      ],
+      "generates": [
+        "offer docs",
+        "funnel maps"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:founder-marketing",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "offer-funnel",
+        "reports_to": "AG-GRO-CMO-001"
+      }
+    },
+    {
+      "id": "AG-GRO-SALES-001",
+      "name": "Founder Sales",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-005",
+        "CAP-DLV-006"
+      ],
+      "consumes": [
+        "HB-GRO-SALES-001",
+        "WF-GRO-OFFER-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "won deal — implementation"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "return to orchestrator"
+        },
+        {
+          "to": "human",
+          "when": "contract sign or payment"
+        }
+      ],
+      "generates": [
+        "proposals",
+        "pipeline records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:founder-sales",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "AG-PLT-AUTOMATION-001",
+      "name": "Founder Automation",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-PLT-004"
+      ],
+      "consumes": [
+        "HB-PLT-AUTOMATION-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [],
+      "handoffs": [
+        {
+          "to": "AG-DLV-INT-001",
+          "when": "provider wiring in app"
+        },
+        {
+          "to": "AG-DLV-API-001",
+          "when": "API contract needed"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "plan complete"
+        },
+        {
+          "to": "human",
+          "when": "n8n account or credentials"
+        }
+      ],
+      "generates": [
+        "automation plans"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:founder-automation",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18"
+    },
+    {
       "id": "AG-DLV-SAAS-001",
       "name": "Senior SaaS Developer",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "authority": "supervised",
       "capabilities": [
@@ -149,12 +451,21 @@
         "ST-EXE-001",
         "ST-GOV-001",
         "ST-PRJ-001",
-        "HB-GOV-OPS-001"
+        "HB-GOV-OPS-001",
+        "HB-DLV-SAAS-ORCH-001",
+        "RU-AI-BOS-SAAS-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-VAULT-001",
+        "WF-DLV-SAAS-FEATURE-001"
       ],
       "mcp_servers": [
         "MC-KNW-REGISTRY-001"
       ],
       "handoffs": [
+        {
+          "to": "AG-ENG-CTO-001",
+          "when": "return to engineering executive"
+        },
         {
           "to": "AG-DLV-FE-001",
           "when": "frontend-only DS/UI work"
@@ -164,8 +475,28 @@
           "when": "backend-only API/data work"
         },
         {
+          "to": "AG-DLV-API-001",
+          "when": "new API/webhook contract design"
+        },
+        {
+          "to": "AG-DLV-INT-001",
+          "when": "provider integration wiring"
+        },
+        {
+          "to": "AG-DLV-CONTENT-001",
+          "when": "copy/SEO content strategy"
+        },
+        {
+          "to": "AG-DLV-CONV-001",
+          "when": "framework conversion/migration architecture"
+        },
+        {
           "to": "AG-DLV-QA-001",
           "when": "phase-end frontend gates"
+        },
+        {
+          "to": "AG-DLV-QA-BE-001",
+          "when": "phase-end backend gates"
         },
         {
           "to": "AG-DLV-DEVOPS-001",
@@ -178,9 +509,14 @@
       ],
       "generates": [],
       "owner": "Growrixos",
-      "runtime_projection": "cursor-skill:senior-saas-developer",
+      "runtime_projection": "vault-skill:senior-saas-developer",
       "generated_from": "TP-AGT-001",
-      "updated": "2026-07-17"
+      "updated": "2026-07-18",
+      "notes": {
+        "vault_skill": ".cursor/skills/senior-saas-developer/",
+        "role": "cross_layer_orchestrator",
+        "reports_to": "AG-ENG-CTO-001"
+      }
     },
     {
       "id": "AG-DLV-FE-001",
@@ -213,7 +549,7 @@
       ],
       "generates": [],
       "owner": "Growrixos",
-      "runtime_projection": "cursor-skill:senior-frontend-specialist",
+      "runtime_projection": "vault-skill:senior-frontend-specialist",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
     },
@@ -252,7 +588,7 @@
       ],
       "generates": [],
       "owner": "Growrixos",
-      "runtime_projection": "cursor-skill:senior-backend-devops-developer",
+      "runtime_projection": "vault-skill:senior-backend-devops-developer",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
     },
@@ -285,7 +621,7 @@
       ],
       "generates": [],
       "owner": "Growrixos",
-      "runtime_projection": "cursor-skill:frontend-quality-enforcer",
+      "runtime_projection": "vault-skill:frontend-quality-enforcer",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
     },
@@ -314,7 +650,7 @@
       ],
       "generates": [],
       "owner": "Growrixos",
-      "runtime_projection": "cursor-skill:backend-quality-enforcer",
+      "runtime_projection": "vault-skill:backend-quality-enforcer",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
     },
@@ -349,9 +685,3555 @@
       ],
       "generates": [],
       "owner": "Growrixos",
-      "runtime_projection": "cursor-skill:devops-release-engineer",
+      "runtime_projection": "vault-skill:devops-release-engineer",
       "generated_from": "TP-AGT-001",
       "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-API-001",
+      "name": "API Contract Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-DLV-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001",
+        "ST-API-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-BE-001",
+          "when": "contract approved â€” implement API"
+        },
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "cross-layer scope"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:api-contract-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-INT-001",
+      "name": "Integration Platform Engineer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-PLT-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-BE-001",
+          "when": "integration wiring in server layer"
+        },
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "cross-layer integration scope"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:integration-platform",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-CONTENT-001",
+      "name": "Frontend Content Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-GRO-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "content ready for UI implementation"
+        },
+        {
+          "to": "AG-GRO-SEO-ON-001",
+          "when": "on-page SEO alignment needed"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:frontend-content-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-CONV-001",
+      "name": "Frontend System Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "HTML export track"
+        },
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "Next migration track"
+        },
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "web/ slice conversion"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:frontend-ui-converter",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-GRO-SEO-TECH-001",
+      "name": "Technical SEO Expert",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-GRO-SEO-ON-001",
+          "when": "on-page remediation handoff"
+        },
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "frontend implementation of SEO fixes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:technical-seo",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-GRO-SEO-ON-001",
+      "name": "On-Page SEO Expert",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-DLV-CONTENT-001",
+          "when": "content strategy needed"
+        },
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "on-page changes in UI"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:on-page-seo",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-GRO-SEO-OFF-001",
+      "name": "Off-Page SEO Expert",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-GRO-SEO-TECH-001",
+          "when": "technical SEO audit alignment"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:off-page-seo",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-HTML-LEAD-001",
+      "name": "Frontend Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-ENG-CTO-001",
+          "when": "return to engineering executive"
+        },
+        {
+          "to": "AG-DLV-HTML-DS-001",
+          "when": "design system / tokens first"
+        },
+        {
+          "to": "AG-DLV-HTML-A11Y-001",
+          "when": "accessibility audit"
+        },
+        {
+          "to": "AG-DLV-HTML-PERF-001",
+          "when": "performance pass"
+        },
+        {
+          "to": "AG-DLV-HTML-QA-001",
+          "when": "final QA gate"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:html-website-builder",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17",
+      "notes": {
+        "reports_to": "AG-ENG-CTO-001"
+      }
+    },
+    {
+      "id": "AG-DLV-HTML-DS-001",
+      "name": "Design System Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-004",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "tokens delivered â€” build sections"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:design-system-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-HTML-A11Y-001",
+      "name": "Accessibility Auditor",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "a11y findings need fixes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:accessibility-auditor",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-HTML-PERF-001",
+      "name": "Performance Optimizer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "perf fixes in site file"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:performance-optimizer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-HTML-QA-001",
+      "name": "Code Reviewer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "QA blockers need fixes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:code-reviewer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-NEXT-LEAD-001",
+      "name": "Next.js Migration Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-ENG-CTO-001",
+          "when": "return to engineering executive"
+        },
+        {
+          "to": "AG-DLV-NEXT-DS-001",
+          "when": "Tailwind token port"
+        },
+        {
+          "to": "AG-DLV-NEXT-A11Y-001",
+          "when": "a11y audit"
+        },
+        {
+          "to": "AG-DLV-NEXT-PERF-001",
+          "when": "performance pass"
+        },
+        {
+          "to": "AG-DLV-NEXT-QA-001",
+          "when": "contract QA"
+        },
+        {
+          "to": "AG-DLV-NEXT-PARITY-001",
+          "when": "parity pass"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:nextjs-site-migrator",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17",
+      "notes": {
+        "reports_to": "AG-ENG-CTO-001"
+      }
+    },
+    {
+      "id": "AG-DLV-NEXT-DS-001",
+      "name": "Tailwind Design System Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-004",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "tokens ported â€” continue migration"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:tailwind-design-system-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-NEXT-A11Y-001",
+      "name": "Next.js Accessibility Auditor",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "a11y fixes needed"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:nextjs-accessibility-auditor",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-NEXT-PERF-001",
+      "name": "Next.js Performance Optimizer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "perf fixes in Next app"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:nextjs-performance-optimizer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-NEXT-QA-001",
+      "name": "Next.js Code Reviewer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "contract QA failures"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:nextjs-code-reviewer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-DLV-NEXT-PARITY-001",
+      "name": "Next.js Visual Parity Auditor",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-OPS-002",
+        "CAP-DLV-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "parity gaps need fixes"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:nextjs-visual-parity-auditor",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-DIR-001",
+      "name": "Blueprint Director",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004",
+        "CAP-GRO-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-001",
+          "when": "start Stage 01 industry intelligence"
+        },
+        {
+          "to": "human",
+          "when": "stage approval gate"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:website-blueprint-factory",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-001",
+      "name": "Blueprint Stage 01 â€” Industry Intelligence",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-002",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-01-industry-intelligence",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-002",
+      "name": "Blueprint Stage 02 â€” Competitor Intelligence",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-003",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-02-competitor-intelligence",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-003",
+      "name": "Blueprint Stage 03 â€” Positioning Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-004",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-03-positioning-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-004",
+      "name": "Blueprint Stage 04 â€” Visual Architecture Director",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-005",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-04-visual-architecture-director",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-005",
+      "name": "Blueprint Stage 05 â€” Homepage Composition",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-006",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-05-homepage-composition-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-006",
+      "name": "Blueprint Stage 06 â€” Hero System Designer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-007",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-06-hero-system-designer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-007",
+      "name": "Blueprint Stage 07 â€” Conversion Architect",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-008",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-07-conversion-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-008",
+      "name": "Blueprint Stage 08 â€” Interactive Experience",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-009",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-08-interactive-experience-designer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-009",
+      "name": "Blueprint Stage 09 â€” Motion Director",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-010",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-09-motion-director",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-010",
+      "name": "Blueprint Stage 10 â€” Component System",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-011",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-10-component-system-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-011",
+      "name": "Blueprint Stage 11 â€” Uniqueness Enforcer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-STG-012",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-11-uniqueness-enforcer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-BP-STG-012",
+      "name": "Blueprint Stage 12 â€” Frontend Execution",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "supervised",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "ST-EXE-001",
+        "ST-AGT-001",
+        "ST-PRJ-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "stage complete â€” advance pipeline"
+        },
+        {
+          "to": "AG-BP-DIR-001",
+          "when": "pipeline blocked or rework needed"
+        },
+        {
+          "to": "human",
+          "when": "stage approval required"
+        }
+      ],
+      "generates": [],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-agent:bp-12-frontend-execution-architect",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "AG-GRO-CMO-001",
+      "name": "Marketing CMO",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-002",
+        "CAP-GRO-011",
+        "CAP-GRO-015"
+      ],
+      "consumes": [
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "WF-GRO-CAMPAIGN-001",
+        "WF-GRO-LAUNCH-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-SCORECARD-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-MKOS-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "AR-GRO-MKOS-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "SEO department work"
+        },
+        {
+          "to": "AG-GRO-INTEL-CUST-001",
+          "when": "customer research"
+        },
+        {
+          "to": "AG-GRO-INTEL-COMP-001",
+          "when": "competitor intelligence"
+        },
+        {
+          "to": "AG-STR-RESEARCH-001",
+          "when": "market research (founder lane)"
+        },
+        {
+          "to": "AG-GRO-BRAND-001",
+          "when": "brand strategy"
+        },
+        {
+          "to": "AG-GRO-BRAND-GUARD-001",
+          "when": "brand review"
+        },
+        {
+          "to": "AG-GRO-MARKET-001",
+          "when": "offer and funnel design"
+        },
+        {
+          "to": "AG-GRO-CONTENT-STRAT-001",
+          "when": "content strategy"
+        },
+        {
+          "to": "AG-GRO-CONTENT-PLAN-001",
+          "when": "content calendar"
+        },
+        {
+          "to": "AG-GRO-COPY-001",
+          "when": "copywriting"
+        },
+        {
+          "to": "AG-GRO-BLOG-001",
+          "when": "blog content"
+        },
+        {
+          "to": "AG-GRO-SOCIAL-WRITE-001",
+          "when": "social posts"
+        },
+        {
+          "to": "AG-GRO-REPURPOSE-001",
+          "when": "content repurposing"
+        },
+        {
+          "to": "AG-GRO-CRO-FUNNEL-001",
+          "when": "funnel design"
+        },
+        {
+          "to": "AG-GRO-CRO-001",
+          "when": "conversion optimization"
+        },
+        {
+          "to": "AG-GRO-PRICE-001",
+          "when": "pricing strategy"
+        },
+        {
+          "to": "AG-GRO-SOCIAL-MGR-001",
+          "when": "social strategy"
+        },
+        {
+          "to": "AG-GRO-ADS-PPC-001",
+          "when": "Google ads"
+        },
+        {
+          "to": "AG-GRO-ADS-META-001",
+          "when": "Meta ads"
+        },
+        {
+          "to": "AG-GRO-ADS-LI-001",
+          "when": "LinkedIn ads"
+        },
+        {
+          "to": "AG-GRO-ADS-RETARGET-001",
+          "when": "retargeting"
+        },
+        {
+          "to": "AG-GRO-EMAIL-STRAT-001",
+          "when": "email strategy"
+        },
+        {
+          "to": "AG-GRO-EMAIL-NEWS-001",
+          "when": "newsletter"
+        },
+        {
+          "to": "AG-GRO-EMAIL-DELIV-001",
+          "when": "deliverability"
+        },
+        {
+          "to": "AG-GRO-ANALYTICS-001",
+          "when": "analytics"
+        },
+        {
+          "to": "AG-GRO-KPI-001",
+          "when": "KPI scorecard"
+        },
+        {
+          "to": "AG-GRO-EXPERIMENT-001",
+          "when": "experiments"
+        },
+        {
+          "to": "AG-GRO-CREATIVE-DIR-001",
+          "when": "creative direction"
+        },
+        {
+          "to": "AG-GRO-CREATIVE-BRIEF-001",
+          "when": "creative briefs"
+        },
+        {
+          "to": "AG-GRO-PROMPT-CREATIVE-001",
+          "when": "AI creative prompts"
+        },
+        {
+          "to": "AG-GRO-VIDEO-STRAT-001",
+          "when": "video strategy"
+        },
+        {
+          "to": "AG-GRO-VIDEO-SCRIPT-001",
+          "when": "video scripts"
+        },
+        {
+          "to": "AG-GRO-COMMUNITY-001",
+          "when": "community"
+        },
+        {
+          "to": "AG-GRO-REPUTATION-001",
+          "when": "reputation"
+        },
+        {
+          "to": "AG-GRO-MKT-MEMORY-001",
+          "when": "marketing memory"
+        },
+        {
+          "to": "AG-GRO-ASSET-LIB-001",
+          "when": "asset library"
+        },
+        {
+          "to": "AG-GRO-SALES-001",
+          "when": "sales handoff"
+        },
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "landing page build"
+        },
+        {
+          "to": "AG-DLV-CONTENT-001",
+          "when": "site content implementation"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, accounts, publish"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:marketing-cmo",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "executive",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-INTEL-CUST-001",
+      "name": "Customer Research",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-GRO-006"
+      ],
+      "consumes": [
+        "HB-GRO-INTEL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-customer-research",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "intelligence",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-INTEL-COMP-001",
+      "name": "Competitor Intelligence",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-STR-004"
+      ],
+      "consumes": [
+        "HB-GRO-INTEL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-competitor-intel",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "intelligence",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-BRAND-001",
+      "name": "Brand Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-006"
+      ],
+      "consumes": [
+        "HB-GRO-BRAND-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-brand-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "brand",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-BRAND-GUARD-001",
+      "name": "Brand Guardian",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-006"
+      ],
+      "consumes": [
+        "HB-GRO-BRAND-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-brand-guardian",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "brand",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-CONTENT-STRAT-001",
+      "name": "Marketing Content Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-007"
+      ],
+      "consumes": [
+        "HB-GRO-CONTENT-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-content-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "content",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-CONTENT-PLAN-001",
+      "name": "Content Planner",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-007"
+      ],
+      "consumes": [
+        "HB-GRO-CONTENT-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-content-planner",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "content",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-COPY-001",
+      "name": "Copywriter",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-007"
+      ],
+      "consumes": [
+        "HB-GRO-CONTENT-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-copywriter",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "content",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-BLOG-001",
+      "name": "Blog Writer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-007",
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "HB-GRO-CONTENT-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-blog-writer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "content",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SOCIAL-WRITE-001",
+      "name": "Social Content Writer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-004"
+      ],
+      "consumes": [
+        "HB-GRO-SOCIAL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-social-writer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "content",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-REPURPOSE-001",
+      "name": "Content Repurposer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-007"
+      ],
+      "consumes": [
+        "HB-GRO-CONTENT-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-repurposer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "content",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SEO-KW-001",
+      "name": "Keyword Research",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-003",
+        "CAP-GRO-014"
+      ],
+      "consumes": [
+        "HB-GRO-SEO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-seo-keyword",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "seo",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SEO-GEO-001",
+      "name": "AI Search GEO",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-014"
+      ],
+      "consumes": [
+        "HB-GRO-SEO-GEO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-seo-geo",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "seo",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-CRO-FUNNEL-001",
+      "name": "Funnel Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-010"
+      ],
+      "consumes": [
+        "HB-GRO-CRO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-funnel-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "cro",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-CRO-001",
+      "name": "CRO Specialist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-010"
+      ],
+      "consumes": [
+        "HB-GRO-CRO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-cro",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "cro",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-PRICE-001",
+      "name": "Pricing Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-010",
+        "CAP-OPS-004"
+      ],
+      "consumes": [
+        "HB-GRO-CRO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-pricing",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "cro",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SOCIAL-MGR-001",
+      "name": "Social Media Manager",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-004"
+      ],
+      "consumes": [
+        "HB-GRO-SOCIAL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-social-manager",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "social",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-ADS-PPC-001",
+      "name": "PPC Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-008"
+      ],
+      "consumes": [
+        "HB-GRO-ADS-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-ads-ppc",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "paid",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-ADS-META-001",
+      "name": "Meta Ads",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-008"
+      ],
+      "consumes": [
+        "HB-GRO-ADS-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-ads-meta",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "paid",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-ADS-LI-001",
+      "name": "LinkedIn Ads",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-008"
+      ],
+      "consumes": [
+        "HB-GRO-ADS-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-ads-linkedin",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "paid",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-ADS-RETARGET-001",
+      "name": "Retargeting",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-008"
+      ],
+      "consumes": [
+        "HB-GRO-ADS-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-ads-retargeting",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "paid",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-EMAIL-STRAT-001",
+      "name": "Email Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-009"
+      ],
+      "consumes": [
+        "HB-GRO-EMAIL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-email-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "email",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-EMAIL-NEWS-001",
+      "name": "Newsletter Writer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-009"
+      ],
+      "consumes": [
+        "HB-GRO-EMAIL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-newsletter-writer",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "email",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-EMAIL-DELIV-001",
+      "name": "Email Deliverability",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-009"
+      ],
+      "consumes": [
+        "HB-GRO-EMAIL-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-email-deliverability",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "email",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-ANALYTICS-001",
+      "name": "Marketing Analytics",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-011"
+      ],
+      "consumes": [
+        "HB-GRO-ANALYTICS-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-analytics",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "analytics",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-KPI-001",
+      "name": "KPI Scorecard",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-011"
+      ],
+      "consumes": [
+        "ST-GRO-SCORECARD-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-kpi",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "analytics",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-EXPERIMENT-001",
+      "name": "Experiment Designer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-011"
+      ],
+      "consumes": [
+        "HB-GRO-ANALYTICS-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-experiment",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "analytics",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-CREATIVE-DIR-001",
+      "name": "Creative Director",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-012"
+      ],
+      "consumes": [
+        "HB-GRO-CREATIVE-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-creative-director",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "creative",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-CREATIVE-BRIEF-001",
+      "name": "Creative Brief Planner",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-012"
+      ],
+      "consumes": [
+        "HB-GRO-CREATIVE-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-creative-brief",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "creative",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-PROMPT-CREATIVE-001",
+      "name": "Creative Prompt Engineer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-012"
+      ],
+      "consumes": [
+        "HB-GRO-CREATIVE-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-creative-prompt",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "creative",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-VIDEO-STRAT-001",
+      "name": "Video Strategist",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-012"
+      ],
+      "consumes": [
+        "HB-GRO-VIDEO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-video-strategist",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "video",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-VIDEO-SCRIPT-001",
+      "name": "Video Script Writer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-012"
+      ],
+      "consumes": [
+        "HB-GRO-VIDEO-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-video-script",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "video",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-COMMUNITY-001",
+      "name": "Community Manager",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-013"
+      ],
+      "consumes": [
+        "HB-GRO-COMMUNITY-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-community",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "community",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-REPUTATION-001",
+      "name": "Reputation Manager",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-013"
+      ],
+      "consumes": [
+        "HB-GRO-COMMUNITY-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-reputation",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "community",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-MKT-MEMORY-001",
+      "name": "Marketing Memory Curator",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-015"
+      ],
+      "consumes": [
+        "HB-GRO-MKT-MEMORY-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-memory-curator",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "memory",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-ASSET-LIB-001",
+      "name": "Asset Library Manager",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-015"
+      ],
+      "consumes": [
+        "HB-GRO-MKT-MEMORY-001",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "RU-AI-BOS-MKOS-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-CLAIMS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "human",
+          "when": "ad spend, ad accounts, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "marketing artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-asset-library",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "memory",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SEO-LEAD-001",
+      "name": "Chief SEO Officer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-016",
+        "CAP-GRO-003",
+        "CAP-GRO-014"
+      ],
+      "consumes": [
+        "HB-GRO-SEOOS-001",
+        "AR-GRO-SEOOS-001",
+        "HB-GRO-SEO-001",
+        "HB-GRO-SEO-GEO-001",
+        "WF-GRO-SEO-PROGRAM-001",
+        "WF-SEO-AUDIT-001",
+        "ST-GRO-SEO-SCORECARD-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "RU-AI-BOS-SEOOS-001",
+        "RU-AI-BOS-MKOS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "AG-GRO-SEO-TECH-001",
+          "when": "technical SEO audit or implementation"
+        },
+        {
+          "to": "AG-GRO-SEO-ON-001",
+          "when": "on-page SEO optimization"
+        },
+        {
+          "to": "AG-GRO-SEO-OFF-001",
+          "when": "off-page SEO, links, local SEO"
+        },
+        {
+          "to": "AG-GRO-SEO-KW-001",
+          "when": "keyword research and clusters"
+        },
+        {
+          "to": "AG-GRO-SEO-GEO-001",
+          "when": "AI search / GEO optimization"
+        },
+        {
+          "to": "AG-GRO-SEO-INTL-001",
+          "when": "international / hreflang SEO"
+        },
+        {
+          "to": "AG-GRO-SEO-AUTO-001",
+          "when": "SEO automation and scheduled audits"
+        },
+        {
+          "to": "AG-GRO-SEO-ALGO-001",
+          "when": "algorithm updates and volatility"
+        },
+        {
+          "to": "AG-GRO-ANALYTICS-001",
+          "when": "SEO analytics and Search Console"
+        },
+        {
+          "to": "AG-GRO-MKT-MEMORY-001",
+          "when": "SEO memory and post-mortems"
+        },
+        {
+          "to": "AG-GRO-ASSET-LIB-001",
+          "when": "SEO asset library and templates"
+        },
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "frontend SEO implementation"
+        },
+        {
+          "to": "AG-DLV-CONTENT-001",
+          "when": "site content SEO implementation"
+        },
+        {
+          "to": "human",
+          "when": "Search Console access, DNS, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "SEO artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:seo-lead",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "seo-os-executive",
+        "reports_to": "AG-GRO-CMO-001"
+      }
+    },
+    {
+      "id": "AG-GRO-SEO-INTL-001",
+      "name": "International SEO",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "HB-GRO-SEO-INTL-001",
+        "AR-GRO-SEOOS-001",
+        "HB-GRO-SEO-001",
+        "RU-AI-BOS-SEOOS-001",
+        "ST-GRO-SEO-SCORECARD-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy"
+        },
+        {
+          "to": "human",
+          "when": "Search Console, DNS, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "SEO artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-seo-international",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "seo-os",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SEO-AUTO-001",
+      "name": "SEO Automation",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "HB-GRO-SEO-AUTO-001",
+        "AR-GRO-SEOOS-001",
+        "HB-GRO-SEO-001",
+        "RU-AI-BOS-SEOOS-001",
+        "ST-GRO-SEO-SCORECARD-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy"
+        },
+        {
+          "to": "human",
+          "when": "Search Console, DNS, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "SEO artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-seo-automation",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "seo-os",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-GRO-SEO-ALGO-001",
+      "name": "Algorithm Watch",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "consumes": [
+        "HB-GRO-SEO-ALGO-001",
+        "AR-GRO-SEOOS-001",
+        "HB-GRO-SEO-001",
+        "RU-AI-BOS-SEOOS-001",
+        "ST-GRO-SEO-SCORECARD-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-GRO-SEO-LEAD-001",
+          "when": "return to SEO executive"
+        },
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "return to marketing executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy"
+        },
+        {
+          "to": "human",
+          "when": "Search Console, DNS, publish, OAuth"
+        }
+      ],
+      "generates": [
+        "SEO artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:mkt-seo-algorithm-watch",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "seo-os",
+        "no_coding": true
+      }
+    },
+    {
+      "id": "AG-ENG-CTO-001",
+      "name": "Chief Technology Officer",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-ENG-001",
+        "CAP-DLV-001",
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "consumes": [
+        "HB-ENG-CTO-001",
+        "AR-ENG-SAASOS-001",
+        "HB-DLV-SAAS-ORCH-001",
+        "HB-ENG-ARCH-001",
+        "WF-ENG-PROGRAM-001",
+        "WF-DLV-SAAS-FEATURE-001",
+        "ST-ENG-SCORECARD-001",
+        "RU-AI-BOS-ENGOS-001",
+        "RU-AI-BOS-SAAS-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy or cross-department"
+        },
+        {
+          "to": "AG-GRO-CMO-001",
+          "when": "marketing department coordination"
+        },
+        {
+          "to": "AG-DLV-SAAS-001",
+          "when": "full-stack SaaS delivery (web/)"
+        },
+        {
+          "to": "AG-DLV-HTML-LEAD-001",
+          "when": "HTML template delivery (sites/)"
+        },
+        {
+          "to": "AG-DLV-NEXT-LEAD-001",
+          "when": "Next.js migration (Frontend_Nextjs/)"
+        },
+        {
+          "to": "AG-DLV-FE-001",
+          "when": "frontend-only SaaS work"
+        },
+        {
+          "to": "AG-DLV-BE-001",
+          "when": "backend-only SaaS work"
+        },
+        {
+          "to": "AG-DLV-API-001",
+          "when": "API contract design"
+        },
+        {
+          "to": "AG-DLV-INT-001",
+          "when": "integration provider wiring"
+        },
+        {
+          "to": "AG-DLV-DEVOPS-001",
+          "when": "CI/CD, release, env"
+        },
+        {
+          "to": "AG-DLV-QA-001",
+          "when": "frontend phase-end gate"
+        },
+        {
+          "to": "AG-DLV-QA-BE-001",
+          "when": "backend phase-end gate"
+        },
+        {
+          "to": "AG-ENG-PERF-001",
+          "when": "performance engineering"
+        },
+        {
+          "to": "AG-ENG-DOCS-001",
+          "when": "engineering documentation"
+        },
+        {
+          "to": "AG-GOV-SYSBUILD-001",
+          "when": "agent system / vault structure"
+        },
+        {
+          "to": "AG-GRO-MKT-MEMORY-001",
+          "when": "engineering memory and ADRs"
+        },
+        {
+          "to": "human",
+          "when": "production deploy, secrets, OAuth, payments"
+        }
+      ],
+      "generates": [
+        "engineering artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:engineering-cto",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "engineering-os-executive",
+        "reports_to": "AG-STR-FOUNDER-001",
+        "peer": "AG-GRO-CMO-001"
+      }
+    },
+    {
+      "id": "AG-ENG-PERF-001",
+      "name": "Performance Engineering",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-OPS-002"
+      ],
+      "consumes": [
+        "HB-ENG-PERF-001",
+        "AR-ENG-SAASOS-001",
+        "RU-AI-BOS-ENGOS-001",
+        "ST-ENG-SCORECARD-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-ENG-CTO-001",
+          "when": "return to engineering executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy"
+        },
+        {
+          "to": "human",
+          "when": "production deploy, secrets, OAuth"
+        }
+      ],
+      "generates": [
+        "engineering artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:eng-performance",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "engineering-os",
+        "no_coding": false
+      }
+    },
+    {
+      "id": "AG-ENG-DOCS-001",
+      "name": "Engineering Documentation",
+      "version": "1.0.0",
+      "status": "active",
+      "authority": "advisory",
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-DLV-001"
+      ],
+      "consumes": [
+        "HB-ENG-DOCS-001",
+        "AR-ENG-SAASOS-001",
+        "RU-AI-BOS-ENGOS-001",
+        "ST-ENG-SCORECARD-001",
+        "RU-AI-BOS-HANDOFF-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "handoffs": [
+        {
+          "to": "AG-ENG-CTO-001",
+          "when": "return to engineering executive"
+        },
+        {
+          "to": "AG-STR-FOUNDER-001",
+          "when": "business strategy"
+        },
+        {
+          "to": "human",
+          "when": "production deploy, secrets, OAuth"
+        }
+      ],
+      "generates": [
+        "engineering artifacts",
+        "memory records"
+      ],
+      "owner": "Growrixos",
+      "runtime_projection": "vault-skill:eng-documentation",
+      "generated_from": "TP-AGT-001",
+      "updated": "2026-07-18",
+      "notes": {
+        "division": "engineering-os",
+        "no_coding": false
+      }
     }
   ]
 }

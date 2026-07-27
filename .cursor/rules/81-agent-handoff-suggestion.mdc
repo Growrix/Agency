@@ -1,0 +1,14 @@
+---
+description: Derived install — Bangla beginner next-step guidance. SSOT RU-AI-BOS-HANDOFF-001 v1.1.
+alwaysApply: true
+---
+
+# Next-Agent Suggestion (host derived)
+
+**SSOT:** `AI-BOS/knowledge/rules/RU-AI-BOS-HANDOFF-001-next-agent-suggestion.md` (v1.1.0)  
+**Vault rule copy:** `AI-BOS/.cursor/rules/81-agent-handoff-suggestion.mdc`
+
+1. After material work → **`## পরবর্তী ধাপ (সহজ বাংলা)`** — simple Bangla, one example per suggestion, beginner SaaS tone; suggestions are **optional**.
+2. Wrong agent → **`## ভুল এজেন্ট — থামছি`** in Bangla; name correct `@agent` (AG-*); stop editing.
+
+Routing: `AI-BOS/agent-registry/registry.json` + `AI-BOS/.cursor/brain/lane-router.yaml`.

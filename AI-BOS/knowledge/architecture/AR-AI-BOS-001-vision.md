@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -26,6 +26,8 @@ tags:
   - vision
   - v2
   - greenfield
+capabilities:
+  - CAP-STR-001
 ---
 
 # AI-BOS Overall Vision
@@ -103,8 +105,8 @@ Must work with Cursor, Claude Code, GitHub Copilot, VS Code, OpenAI, Anthropic, 
 
 ## References
 
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/ai-bos-planning-prompt.md`
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/knowledge-registry-standard.md`
+- `TP-KNW-001, ST-KNW-001`
+- `ST-KNW-001, ST-REG-001`
 - `Ongoing DOCS/AI-BOS_Constitution_Planning_Prompt.md` (source reference)
 
 ## Related Knowledge Objects

@@ -10,10 +10,10 @@
   {
     "id": "AG-GOV-SYSBUILD-001",
     "name": "System Builder",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "status": "active",
     "authority": "supervised",
-    "updated": "2026-07-17"
+    "updated": "2026-07-18"
   },
   {
     "id": "AG-KNW-VALID-001",
@@ -24,12 +24,52 @@
     "updated": "2026-07-17"
   },
   {
-    "id": "AG-DLV-SAAS-001",
-    "name": "Senior SaaS Developer",
+    "id": "AG-STR-FOUNDER-001",
+    "name": "Founder OS",
+    "version": "1.2.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-STR-RESEARCH-001",
+    "name": "Founder Research",
     "version": "1.0.0",
     "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-MARKET-001",
+    "name": "Founder Marketing",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SALES-001",
+    "name": "Founder Sales",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-PLT-AUTOMATION-001",
+    "name": "Founder Automation",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-DLV-SAAS-001",
+    "name": "Senior SaaS Developer",
+    "version": "1.1.0",
+    "status": "active",
     "authority": "supervised",
-    "updated": "2026-07-17"
+    "updated": "2026-07-18"
   },
   {
     "id": "AG-DLV-FE-001",
@@ -70,5 +110,597 @@
     "status": "active",
     "authority": "supervised",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-API-001",
+    "name": "API Contract Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-INT-001",
+    "name": "Integration Platform Engineer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-CONTENT-001",
+    "name": "Frontend Content Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-CONV-001",
+    "name": "Frontend System Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-GRO-SEO-TECH-001",
+    "name": "Technical SEO Expert",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-GRO-SEO-ON-001",
+    "name": "On-Page SEO Expert",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-GRO-SEO-OFF-001",
+    "name": "Off-Page SEO Expert",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-HTML-LEAD-001",
+    "name": "Frontend Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-HTML-DS-001",
+    "name": "Design System Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-HTML-A11Y-001",
+    "name": "Accessibility Auditor",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-HTML-PERF-001",
+    "name": "Performance Optimizer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-HTML-QA-001",
+    "name": "Code Reviewer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-NEXT-LEAD-001",
+    "name": "Next.js Migration Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-NEXT-DS-001",
+    "name": "Tailwind Design System Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-NEXT-A11Y-001",
+    "name": "Next.js Accessibility Auditor",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-NEXT-PERF-001",
+    "name": "Next.js Performance Optimizer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-NEXT-QA-001",
+    "name": "Next.js Code Reviewer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-DLV-NEXT-PARITY-001",
+    "name": "Next.js Visual Parity Auditor",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-DIR-001",
+    "name": "Blueprint Director",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-001",
+    "name": "Blueprint Stage 01 â€” Industry Intelligence",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-002",
+    "name": "Blueprint Stage 02 â€” Competitor Intelligence",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-003",
+    "name": "Blueprint Stage 03 â€” Positioning Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-004",
+    "name": "Blueprint Stage 04 â€” Visual Architecture Director",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-005",
+    "name": "Blueprint Stage 05 â€” Homepage Composition",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-006",
+    "name": "Blueprint Stage 06 â€” Hero System Designer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-007",
+    "name": "Blueprint Stage 07 â€” Conversion Architect",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-008",
+    "name": "Blueprint Stage 08 â€” Interactive Experience",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-009",
+    "name": "Blueprint Stage 09 â€” Motion Director",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-010",
+    "name": "Blueprint Stage 10 â€” Component System",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-011",
+    "name": "Blueprint Stage 11 â€” Uniqueness Enforcer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-BP-STG-012",
+    "name": "Blueprint Stage 12 â€” Frontend Execution",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "supervised",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "AG-GRO-CMO-001",
+    "name": "Marketing CMO",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-INTEL-CUST-001",
+    "name": "Customer Research",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-INTEL-COMP-001",
+    "name": "Competitor Intelligence",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-BRAND-001",
+    "name": "Brand Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-BRAND-GUARD-001",
+    "name": "Brand Guardian",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-CONTENT-STRAT-001",
+    "name": "Marketing Content Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-CONTENT-PLAN-001",
+    "name": "Content Planner",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-COPY-001",
+    "name": "Copywriter",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-BLOG-001",
+    "name": "Blog Writer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SOCIAL-WRITE-001",
+    "name": "Social Content Writer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-REPURPOSE-001",
+    "name": "Content Repurposer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SEO-KW-001",
+    "name": "Keyword Research",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SEO-GEO-001",
+    "name": "AI Search GEO",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-CRO-FUNNEL-001",
+    "name": "Funnel Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-CRO-001",
+    "name": "CRO Specialist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-PRICE-001",
+    "name": "Pricing Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SOCIAL-MGR-001",
+    "name": "Social Media Manager",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-ADS-PPC-001",
+    "name": "PPC Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-ADS-META-001",
+    "name": "Meta Ads",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-ADS-LI-001",
+    "name": "LinkedIn Ads",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-ADS-RETARGET-001",
+    "name": "Retargeting",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-EMAIL-STRAT-001",
+    "name": "Email Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-EMAIL-NEWS-001",
+    "name": "Newsletter Writer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-EMAIL-DELIV-001",
+    "name": "Email Deliverability",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-ANALYTICS-001",
+    "name": "Marketing Analytics",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-KPI-001",
+    "name": "KPI Scorecard",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-EXPERIMENT-001",
+    "name": "Experiment Designer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-CREATIVE-DIR-001",
+    "name": "Creative Director",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-CREATIVE-BRIEF-001",
+    "name": "Creative Brief Planner",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-PROMPT-CREATIVE-001",
+    "name": "Creative Prompt Engineer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-VIDEO-STRAT-001",
+    "name": "Video Strategist",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-VIDEO-SCRIPT-001",
+    "name": "Video Script Writer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-COMMUNITY-001",
+    "name": "Community Manager",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-REPUTATION-001",
+    "name": "Reputation Manager",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-MKT-MEMORY-001",
+    "name": "Marketing Memory Curator",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-ASSET-LIB-001",
+    "name": "Asset Library Manager",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SEO-LEAD-001",
+    "name": "Chief SEO Officer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SEO-INTL-001",
+    "name": "International SEO",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SEO-AUTO-001",
+    "name": "SEO Automation",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-GRO-SEO-ALGO-001",
+    "name": "Algorithm Watch",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-ENG-CTO-001",
+    "name": "Chief Technology Officer",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-ENG-PERF-001",
+    "name": "Performance Engineering",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AG-ENG-DOCS-001",
+    "name": "Engineering Documentation",
+    "version": "1.0.0",
+    "status": "active",
+    "authority": "advisory",
+    "updated": "2026-07-18"
   }
 ]

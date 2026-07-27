@@ -2,7 +2,7 @@ version: 1
 purpose: >-
   Machine-readable lane router for Agent Brain. Agents read this first to resolve
   brain file, execution ledger, quality gates, and primary skill/agent for a path prefix.
-last_updated: 2026-07-14
+last_updated: 2026-07-18
 
 context_recovery_order:
   - .cursor/brain/lane-router.yaml
@@ -12,6 +12,111 @@ context_recovery_order:
   - lane-specific ai-context or skill entrypoint
 
 lanes:
+  founder_os:
+    path_prefixes:
+      - .cursor/brain/founder-os-memory/
+    brain: .cursor/brain/founder-os-brain.md
+    ledger: AI-BOS/tasks.md
+    memory: .cursor/brain/founder-os-memory/
+    primary_agents:
+      - founder-os
+      - founder-research
+      - founder-marketing
+      - founder-sales
+      - founder-automation
+    primary_skills:
+      - founder-os
+      - founder-research
+      - founder-marketing
+      - founder-sales
+      - founder-automation
+    phase_end_gate_agent: null
+    notes: Entry lane for PRJ-STR-FOUNDEROS-001 — strategy orchestrator + I13 specialists, no coding
+
+  marketing_os:
+    path_prefixes:
+      - .cursor/brain/founder-os-memory/projects/
+      - .cursor/skills/marketing-cmo/
+      - .cursor/skills/mkt-
+      - AI-BOS/.cursor/skills/marketing-cmo/
+      - AI-BOS/.cursor/skills/mkt-
+    brain: .cursor/brain/founder-os-brain.md
+    ledger: AI-BOS/tasks.md
+    memory: .cursor/brain/founder-os-memory/projects/<slug>/marketing/
+    primary_agents:
+      - marketing-cmo
+      - founder-marketing
+      - mkt-brand-strategist
+      - mkt-content-strategist
+      - mkt-seo-keyword
+      - mkt-analytics
+    primary_skills:
+      - marketing-cmo
+      - founder-marketing
+      - mkt-brand-strategist
+      - mkt-content-strategist
+      - mkt-seo-keyword
+      - mkt-analytics
+    phase_end_gate_agent: null
+    notes: Marketing department entry PRJ-GRO-MKOS-001 — CMO orchestrates; advisory only, no coding
+
+  seo_os:
+    path_prefixes:
+      - .cursor/brain/founder-os-memory/projects/
+      - .cursor/skills/seo-lead/
+      - .cursor/skills/mkt-seo-international/
+      - .cursor/skills/mkt-seo-automation/
+      - .cursor/skills/mkt-seo-algorithm-watch/
+      - AI-BOS/.cursor/skills/seo-lead/
+    brain: .cursor/brain/founder-os-brain.md
+    ledger: AI-BOS/tasks.md
+    memory: .cursor/brain/founder-os-memory/projects/<slug>/marketing/seo/
+    primary_agents:
+      - seo-lead
+      - technical-seo
+      - on-page-seo
+      - off-page-seo
+      - mkt-seo-keyword
+      - mkt-seo-geo
+    primary_skills:
+      - seo-lead
+      - technical-seo
+      - on-page-seo
+      - off-page-seo
+      - mkt-seo-keyword
+      - mkt-seo-geo
+    phase_end_gate_agent: null
+    notes: SEO OS sub-department under CMO — PRJ-GRO-MKOS-001; seo-lead entry
+
+  engineering_os:
+    path_prefixes:
+      - .cursor/brain/founder-os-memory/projects/
+      - .cursor/skills/engineering-cto/
+      - .cursor/skills/eng-performance/
+      - .cursor/skills/eng-documentation/
+      - AI-BOS/.cursor/skills/engineering-cto/
+      - AI-BOS/.cursor/skills/eng-performance/
+      - AI-BOS/.cursor/skills/eng-documentation/
+    brain: .cursor/brain/founder-os-brain.md
+    ledger: AI-BOS/tasks.md
+    memory: .cursor/brain/founder-os-memory/projects/<slug>/engineering/
+    primary_agents:
+      - engineering-cto
+      - senior-saas-developer
+      - frontend-architect
+      - nextjs-migration-architect
+      - eng-performance
+      - eng-documentation
+    primary_skills:
+      - engineering-cto
+      - senior-saas-developer
+      - frontend-architect
+      - nextjs-migration-architect
+      - eng-performance
+      - eng-documentation
+    phase_end_gate_agent: null
+    notes: Engineering OS department under Founder — PRJ-ENG-SAASOS-001; engineering-cto entry; peer to marketing_os
+
   web_saas:
     path_prefixes:
       - web/
@@ -200,6 +305,21 @@ backend_devops_factory:
     - /resume-backend-brain
 
 intent_routing:
+  founder_intake: founder-os
+  founder_research: founder-research
+  founder_marketing: founder-marketing
+  founder_sales: founder-sales
+  founder_automation: founder-automation
+  marketing_intake: marketing-cmo
+  marketing_campaign: marketing-cmo
+  marketing_content: mkt-content-strategist
+  marketing_seo: mkt-seo-keyword
+  seo_intake: seo-lead
+  seo_program: seo-lead
+  engineering_intake: engineering-cto
+  engineering_program: engineering-cto
+  marketing_ads: mkt-ads-ppc
+  marketing_analytics: mkt-analytics
   full_stack_saas: senior-saas-developer
   frontend_build: senior-frontend-specialist
   framework_conversion: frontend-system-architect

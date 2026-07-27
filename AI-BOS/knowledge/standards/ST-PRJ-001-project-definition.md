@@ -27,6 +27,10 @@ tags:
   - ai-bos
   - standard
   - project-definition
+capabilities:
+  - CAP-OPS-005
+  - CAP-PLT-005
+  - CAP-STR-002
 ---
 
 # Project Definition Standard

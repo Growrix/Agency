@@ -1,0 +1,11 @@
+{
+  "mode": "product",
+  "brand_slug": "example-brand",
+  "primary_kpi": "deploy_frequency",
+  "active_program_id": null,
+  "engineering_lead": "AG-ENG-CTO-001",
+  "project_id": "PRJ-ENG-SAASOS-001",
+  "saas_project": "PRJ-SAAS-GROWRIXOS-001",
+  "tracks": ["web", "sites", "Frontend_Nextjs"],
+  "updated": "2026-07-18"
+}

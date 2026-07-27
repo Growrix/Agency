@@ -1,0 +1,16 @@
+---
+description: Derived install — AI-BOS vault integrity for system-builder. SSOT RU-AI-BOS-VAULT-001.
+globs: AI-BOS/**
+alwaysApply: false
+---
+
+# AI-BOS Vault Integrity (host derived)
+
+**SSOT:** `AI-BOS/knowledge/rules/RU-AI-BOS-VAULT-001-vault-integrity.md`
+
+When changing the agentic system under `AI-BOS/`:
+
+1. Write agents/skills/rules/MCP only under `AI-BOS/`.
+2. Copy-in from outside before registering.
+3. Use `vault-skill:` / `vault-agent:` projections.
+4. Host `.cursor/` and `~/.cursor/skills/` are not SSOT for vault bodies.

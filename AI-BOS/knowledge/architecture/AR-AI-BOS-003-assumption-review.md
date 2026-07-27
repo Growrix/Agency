@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -29,6 +29,9 @@ tags:
   - assumptions
   - risk
   - review
+capabilities:
+  - CAP-STR-005
+  - CAP-OPS-005
 ---
 
 # AI-BOS Assumption Review and Challenge
@@ -109,7 +112,7 @@ Does **not** introduce new architecture. Output is a verdict table plus a list o
 
 - `knowledge/architecture/AR-AI-BOS-001-vision.md` — Vision (challenged)
 - `knowledge/architecture/AR-AI-BOS-002-constitution-toc.md` — Constitution TOC (challenged)
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/ai-bos-planning-prompt.md` — Phase 3 spec
+- `TP-KNW-001, ST-KNW-001` — Phase 3 spec
 
 ## Related Knowledge Objects
 

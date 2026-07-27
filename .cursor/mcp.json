@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "ai-bos-knowledge-registry": {
+      "command": "node",
+      "args": ["AI-BOS/mcp/knowledge-registry/index.js"],
+      "env": {}
+    },
+    "ai-bos-codebase-intelligence": {
+      "command": "node",
+      "args": ["AI-BOS/mcp/codebase-intelligence/index.js"],
+      "env": {}
+    },
+    "ai-bos-knowledge-retrieve": {
+      "command": "node",
+      "args": ["AI-BOS/mcp/knowledge-retrieve/index.js"],
+      "env": {}
+    }
+  }
+}

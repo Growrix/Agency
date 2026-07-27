@@ -31,6 +31,10 @@ tags:
   - handbook
   - backend
   - saas
+capabilities:
+  - CAP-DLV-001
+  - CAP-DLV-005
+  - CAP-PLT-005
 ---
 
 # SaaS Backend Engineering Handbook
@@ -81,7 +85,7 @@ Service-owned rules; testable authz; recovery paths; docs match contracts.
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/backend/*
+- universal/Enterprise Level Guide/backend/*
 - ST-API-001, ST-SEC-001
 
 ## Related Knowledge Objects

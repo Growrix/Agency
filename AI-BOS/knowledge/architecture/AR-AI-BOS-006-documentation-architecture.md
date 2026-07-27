@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -29,6 +29,10 @@ tags:
   - documentation
   - architecture
   - foundational
+capabilities:
+  - CAP-KNW-001
+  - CAP-KNW-005
+  - CAP-PLT-003
 ---
 
 # AI-BOS Documentation Architecture
@@ -231,7 +235,7 @@ Documentation serves capabilities through its backing Knowledge Objects. The `ca
 | `AI-BOS/README.md` | `index` doc for the AI-BOS root (presents: AR-AI-BOS-001) |
 | `AI-BOS/RUN.md` | `guide` doc for operating the build (presents: AR-AI-BOS-005, AR-AI-BOS-002) |
 | `AI-BOS/tasks.md` | `changelog` (operational, not ratified documentation) |
-| `AI-BOS/.cursor/audits/2026-07-16-d1-repo-promotion-evaluation.md` | `decision-record` (presents: AR-AI-BOS-003) |
+| `docs/reference/runtime-surface-inventory.md (D1 decision record)` | `decision-record` (presents: AR-AI-BOS-003) |
 
 These existing files can be retrofitted with documentation front matter in a later phase; this architecture defines the model, not the migration.
 
@@ -261,7 +265,7 @@ These existing files can be retrofitted with documentation front matter in a lat
 - `knowledge/architecture/AR-AI-BOS-005-knowledge-architecture.md` — Knowledge Architecture (dependency; defines KO substrate)
 - `knowledge/architecture/AR-AI-BOS-004-capability-model.md` — Capability Model (dependency; source of capability group codes)
 - `knowledge/architecture/AR-AI-BOS-002-constitution-toc.md` — Constitution TOC (documentation layer will be referenced in §6 Layer Model)
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/front-matter-schema.md` — KO front matter schema (extended here for docs)
+- `TP-KNW-001` — KO front matter schema (extended here for docs)
 
 ## Related Knowledge Objects
 

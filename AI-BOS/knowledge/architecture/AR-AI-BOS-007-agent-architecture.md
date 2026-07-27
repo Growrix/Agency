@@ -4,8 +4,8 @@ title: AI-BOS Agent Architecture
 type: architecture
 category: governance
 domain: ai-bos
-version: 1.0.0
-status: draft
+version: 1.2.0
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -24,13 +24,17 @@ related:
   - handoffs
   - vendor-independence
 review_cycle: quarterly
-last_review: 2026-07-16
+last_review: 2026-07-18
 priority: critical
 tags:
   - ai-bos
   - agent-architecture
   - agents
   - foundational
+capabilities:
+  - CAP-PLT-001
+  - CAP-KNW-001
+  - CAP-OPS-005
 ---
 
 # AI-BOS Agent Architecture
@@ -188,6 +192,38 @@ Handoffs are declared contracts, not hidden calls. Each handoff specifies:
 
 **Rule:** Handoffs are user-routing guidance, not autonomous orchestration. An agent declares a handoff; the human (or supervising system) executes it. This matches the `@system-builder` SKILL.md rule: *"Handoffs are user-routing guidance, not hidden autonomous orchestration."*
 
+### Strategy-orchestrator archetype (I12)
+
+A **strategy-orchestrator** is an advisory agent that serves as the human founder's entry point. It orchestrates delivery and growth agents but **does not write code**.
+
+| Property | Rule |
+|----------|------|
+| Canonical ID | `AG-STR-FOUNDER-001` |
+| Authority | `advisory` — produces plans, briefs, handoffs; human decides |
+| No-coding rule | Must not edit product code, configs, or deploy artifacts; delegates to `AG-DLV-*` |
+| Capabilities | `CAP-STR-001`, `CAP-STR-002`, `CAP-STR-006`, `CAP-STR-007`, `CAP-KNW-005`, `CAP-KNW-007`, `CAP-ORG-001`, `CAP-ORG-002` |
+| Memory | Reads/writes founder memory per `ST-STR-MEMORY-001`; runtime under `.cursor/brain/founder-os-memory/` |
+| Database | Read-only access to project databases when credentials are supplied by human |
+| External inputs | Must stop and request human action for subscriptions, API keys, payments, OAuth, and any action AI cannot perform |
+
+**Rule:** When scope clearly requires implementation, the strategy-orchestrator hands off to **`AG-ENG-CTO-001`** for engineering department work (or lane-specific delivery agents when scope is already classified) with a structured brief — it does not continue into coding scope.
+
+### Engineering-orchestrator archetype (I17)
+
+An **engineering-orchestrator** is an advisory agent that serves as the engineering department entry under Founder OS. It orchestrates delivery agents across SaaS, HTML, and Next.js tracks but **does not replace lane specialists**.
+
+| Property | Rule |
+|----------|------|
+| Canonical ID | `AG-ENG-CTO-001` |
+| Authority | `advisory` — produces program briefs, routing, scorecards; human decides |
+| Peer | `AG-GRO-CMO-001` — neither subordinates the other |
+| Reports to | `AG-STR-FOUNDER-001` for business context |
+| Capabilities | `CAP-ENG-001`, `CAP-DLV-001`, `CAP-DLV-004`, `CAP-DLV-005` |
+| Memory | Reads/writes `founder-os-memory/projects/<slug>/engineering/` per `TP-ENG-SAASOS-001` |
+| Delivery leads | `AG-DLV-SAAS-001`, `AG-DLV-HTML-LEAD-001`, `AG-DLV-NEXT-LEAD-001` report to CTO for department programs |
+
+**Rule:** Cross-track or ambiguous engineering scope routes Founder → CTO → delivery lead. Lane-specific execution stays with existing `AG-DLV-*` agents after CTO brief.
+
 ### Agent vs human roles
 
 | Property | Human | Agent |
@@ -268,7 +304,7 @@ These mappings are not yet registered in the agent registry; that happens when P
 - `knowledge/architecture/AR-AI-BOS-005-knowledge-architecture.md` — Knowledge Architecture (dependency; defines KO substrate and consumer model)
 - `knowledge/architecture/AR-AI-BOS-006-documentation-architecture.md` — Documentation Architecture (dependency; agents consume docs by path)
 - `knowledge/architecture/AR-AI-BOS-003-assumption-review.md` — Assumption Review (D2: agent-generated knowledge allowed)
-- `AI-BOS/.cursor/skills/ai-bos-architect/SKILL.md` — this skill itself is a runtime projection of `AG-KNW-ARCH-001`
+- `docs/reference/runtime-surface-inventory.md (AG-KNW-ARCH-001 projection)` — this skill itself is a runtime projection of `AG-KNW-ARCH-001`
 
 ## Related Knowledge Objects
 
@@ -282,3 +318,5 @@ These mappings are not yet registered in the agent registry; that happens when P
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0.0 | 2026-07-16 | Initial Phase 7 Agent Architecture — agent identity, separate agent registry, authority levels, lifecycle, handoff contracts, agent-generated knowledge (D2), vendor-independent runtime projection, capability binding. Awaiting user approval. |
+| 1.1.0 | 2026-07-18 | I12 — strategy-orchestrator archetype; register `AG-STR-FOUNDER-001` with advisory authority and no-coding rule. |
+| 1.2.0 | 2026-07-18 | I17 — engineering-orchestrator archetype; `AG-ENG-CTO-001` peer to CMO; Founder → CTO for engineering department work. |

@@ -1,7 +1,7 @@
 # SaaS Knowledge Catalog (I4)
 
 Human-facing index of Knowledge Objects authored for **`PRJ-SAAS-GROWRIXOS-001`** (`web/`).  
-SSOT remains `AI-BOS/knowledge-registry/`. Source material was adapted from `DOC/Universal/Enterprise Level Guide/` without refactoring that tree.
+SSOT remains `AI-BOS/knowledge-registry/`. Source material was adapted from `universal/Enterprise Level Guide/` via portable AI-BOS/universal/ copy (RU-AI-BOS-UNI-001).
 
 ## Handbooks
 

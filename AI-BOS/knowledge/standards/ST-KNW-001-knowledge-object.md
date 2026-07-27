@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - knowledge-object
+capabilities:
+  - CAP-KNW-001
+  - CAP-KNW-002
 ---
 
 # Knowledge Object Standard

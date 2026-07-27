@@ -9,8 +9,8 @@ import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Product Bundles",
-  description: "Explore bundle and package offers from the published product catalog.",
+  title: "Product Bundles — Template Packs & Deals",
+  description: "Explore bundle and package offers of HTML templates, SaaS starters, and AI toolkits from the Growrix OS catalog.",
   path: "/digital-products/bundles",
 });
 

@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - agent-definition
+capabilities:
+  - CAP-PLT-001
+  - CAP-OPS-005
 ---
 
 # Agent Definition Standard

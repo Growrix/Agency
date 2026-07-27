@@ -3,7 +3,7 @@
   "system": "AI-BOS",
   "registry": "mcp",
   "description": "MCP registry for AI-BOS \u2014 MCP servers provide capability contracts",
-  "last_updated": "2026-07-17",
+  "last_updated": "2026-07-18",
   "indexes": {
     "mcp": "mcp-index.json"
   },
@@ -110,9 +110,122 @@
       ],
       "transport": "stdio",
       "owner": "AI-BOS",
-      "runtime_projection": "planned",
+      "runtime_projection": "cursor-mcp:ai-bos-knowledge-registry",
       "generated_from": "TP-MCP-001",
       "updated": "2026-07-17"
+    },
+    {
+      "id": "MC-PLT-CODEBASE-001",
+      "name": "Codebase Intelligence Server",
+      "version": "1.0.0",
+      "status": "active",
+      "capabilities": [
+        "CAP-PLT-003",
+        "CAP-KNW-005"
+      ],
+      "services": [
+        "codebase.generate_snapshot",
+        "codebase.get_latest_snapshot",
+        "codebase.ensure_fresh_snapshot",
+        "codebase.get_summary",
+        "codebase.get_compact_audit"
+      ],
+      "contracts": [
+        {
+          "name": "codebase.generate_snapshot",
+          "inputs": {
+            "objective": "string?",
+            "trigger": "string?"
+          },
+          "outputs": {
+            "snapshot": "CodebaseSnapshot"
+          },
+          "failures": [
+            "scan_error",
+            "invalid_root"
+          ],
+          "idempotent": false,
+          "authority_required": "advisory"
+        },
+        {
+          "name": "codebase.get_summary",
+          "inputs": {},
+          "outputs": {
+            "summary": "string"
+          },
+          "failures": [
+            "no_snapshot"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        }
+      ],
+      "reads": [
+        "ST-MCP-PORT-001"
+      ],
+      "transport": "stdio",
+      "owner": "AI-BOS",
+      "runtime_projection": "cursor-mcp:ai-bos-codebase-intelligence",
+      "generated_from": "ST-MCP-PORT-001",
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "MC-KNW-RETRIEVE-001",
+      "name": "Knowledge Retrieve Server",
+      "version": "1.1.0",
+      "status": "active",
+      "capabilities": [
+        "CAP-KNW-003",
+        "CAP-KNW-005",
+        "CAP-STR-006"
+      ],
+      "services": [
+        "retrieve.search",
+        "retrieve.ground",
+        "retrieve.memory_list"
+      ],
+      "contracts": [
+        {
+          "name": "retrieve.search",
+          "inputs": {
+            "query": "string",
+            "limit": "number?"
+          },
+          "outputs": {
+            "results": "RetrieveHit[]"
+          },
+          "failures": [
+            "no_match",
+            "invalid_query"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        },
+        {
+          "name": "retrieve.ground",
+          "inputs": {
+            "query": "string",
+            "ids": "string[]?"
+          },
+          "outputs": {
+            "context": "string"
+          },
+          "failures": [
+            "no_match"
+          ],
+          "idempotent": true,
+          "authority_required": "advisory"
+        }
+      ],
+      "reads": [
+        "AR-AI-BOS-005",
+        "ST-STR-MEMORY-001"
+      ],
+      "transport": "stdio",
+      "owner": "AI-BOS",
+      "runtime_projection": "cursor-mcp:ai-bos-knowledge-retrieve",
+      "generated_from": "ST-MCP-PORT-001",
+      "updated": "2026-07-18"
     }
   ]
 }

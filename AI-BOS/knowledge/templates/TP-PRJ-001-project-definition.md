@@ -28,6 +28,8 @@ tags:
   - ai-bos
   - template
   - project-definition
+capabilities:
+  - CAP-PLT-005
 ---
 
 # Project Definition Template

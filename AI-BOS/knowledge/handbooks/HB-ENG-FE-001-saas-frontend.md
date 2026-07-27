@@ -31,6 +31,10 @@ tags:
   - handbook
   - frontend
   - saas
+capabilities:
+  - CAP-DLV-001
+  - CAP-DLV-004
+  - CAP-DLV-005
 ---
 
 # SaaS Frontend Engineering Handbook
@@ -88,7 +92,7 @@ Contracts consumed; a11y checked; no privilege leakage; tokens used; surfaces ro
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/frontend/* (source reference; not SSOT after this KO)
+- universal/Enterprise Level Guide/frontend/* (source reference; not SSOT after this KO)
 - ST-FE-DS-001, ST-TST-001, AR-AI-BOS-004
 
 ## Related Knowledge Objects

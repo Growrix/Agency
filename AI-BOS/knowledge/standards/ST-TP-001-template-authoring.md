@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - template-authoring
+capabilities:
+  - CAP-KNW-001
+  - CAP-PLT-003
 ---
 
 # Template Authoring Standard

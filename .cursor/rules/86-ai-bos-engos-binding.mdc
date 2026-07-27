@@ -1,0 +1,33 @@
+---
+description: Bind Engineering OS work to PRJ-ENG-SAASOS-001 Engineering department. Apply when orchestrating engineering programs, performance, documentation, or multi-track delivery advisory work.
+globs: ".cursor/brain/founder-os-memory/projects/**/engineering/**,.cursor/skills/engineering-cto/**,.cursor/skills/eng-performance/**,.cursor/skills/eng-documentation/**"
+alwaysApply: false
+---
+
+# AI-BOS Engineering OS Binding (host projection)
+
+**SSOT:** `AI-BOS/knowledge/rules/RU-AI-BOS-ENGOS-001-engineering-os-binding.md` (v1.0.0)  
+**Vault rule copy:** `AI-BOS/.cursor/rules/86-ai-bos-engos-binding.mdc`
+
+When working in the Engineering OS lane, treat delivery context as **`PRJ-ENG-SAASOS-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-ENG-SAASOS-001`.
+2. Load `RU-AI-BOS-ENGOS-001` + `HB-ENG-CTO-001` + division handbook.
+3. Persist to `founder-os-memory/projects/<slug>/engineering/`.
+4. End with Bangla handoff per `RU-AI-BOS-HANDOFF-001`.
+
+## Routing
+
+| Need | Agent |
+|------|-------|
+| Engineering entry | `@engineering-cto` |
+| SaaS delivery | `@senior-saas-developer` |
+| Performance | `@eng-performance` |
+| Documentation | `@eng-documentation` |
+| Marketing | `@marketing-cmo` |
+
+## Never
+
+Bypass CTO on multi-track engineering; skip quality enforcers at phase end.

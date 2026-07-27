@@ -4,7 +4,7 @@ title: AI-BOS Project Architecture
 type: architecture
 category: governance
 domain: ai-bos
-version: 1.0.0
+version: 1.1.0
 status: active
 owner: "AI-BOS"
 visibility: internal
@@ -27,13 +27,17 @@ related:
   - repository-structure
   - d1-re-evaluation
 review_cycle: quarterly
-last_review: 2026-07-16
+last_review: 2026-07-18
 priority: critical
 tags:
   - ai-bos
   - project-architecture
   - projects
   - foundational
+capabilities:
+  - CAP-OPS-005
+  - CAP-PLT-005
+  - CAP-STR-002
 ---
 
 # AI-BOS Project Architecture
@@ -167,6 +171,22 @@ project-registry/      ← Projects (Phase 11) ← NEW
 | `runtime_projection` | Implementation: `cursor` / `claude-code` / `standalone` / `openai` / `anthropic` |
 | `root_path` | The project's physical root (may change; the ID never does) |
 
+### Founder OS project binding (I12)
+
+`PRJ-STR-FOUNDEROS-001` is the canonical **founder workspace project** — the entry point for any new business initiative before delivery projects spin up.
+
+| Field | Value |
+|-------|-------|
+| ID | `PRJ-STR-FOUNDEROS-001` |
+| Primary agent | `AG-STR-FOUNDER-001` |
+| Root path | Growrixos workspace root (founder OS lives across lanes) |
+| Ledger | `AI-BOS/tasks.md` for governance; lane-specific ledgers when delivery starts |
+| Memory runtime | `.cursor/brain/founder-os-memory/` per `ST-STR-MEMORY-001` |
+| Rewire protocol | `ST-PLT-REWIRE-001` — single instruction for wiring AI-BOS to any project or cleaning for fresh rewire |
+| Capabilities | `CAP-STR-001`, `CAP-STR-002`, `CAP-STR-006`, `CAP-STR-007`, `CAP-KNW-005`, `CAP-KNW-007`, `CAP-ORG-001`, `CAP-ORG-002`, plus delivery/growth capabilities as orchestrated |
+
+**Rule:** Delivery projects (`PRJ-SAAS-*`, `PRJ-TMPL-*`, etc.) are spawned from founder intake — the founder project does not replace them; it routes into them via `AG-STR-FOUNDER-001` handoffs.
+
 ### Project lifecycle
 
 ```text
@@ -281,7 +301,7 @@ The re-evaluation will consider:
 - `knowledge/architecture/AR-AI-BOS-008-mcp-architecture.md` — MCP Architecture (dependency; projects call MCP via agents)
 - `knowledge/architecture/AR-AI-BOS-009-execution-architecture.md` — Execution Architecture (dependency; projects run workflows)
 - `knowledge/architecture/AR-AI-BOS-010-governance.md` — Governance (dependency; projects assign governance roles)
-- `AI-BOS/.cursor/audits/2026-07-16-d1-repo-promotion-evaluation.md` — D1 first evaluation (deferred to Phase 11)
+- `docs/reference/runtime-surface-inventory.md (D1 decision record)` — D1 first evaluation (deferred to Phase 11)
 
 ## Related Knowledge Objects
 
@@ -294,3 +314,4 @@ The re-evaluation will consider:
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0.0 | 2026-07-16 | Initial Phase 11 Project Architecture — project identity, fourth registry (project-registry), four-registry model complete, project lifecycle, layer instantiation table, repository structure emergence rule, vendor-independent runtime projection, D1 re-evaluation trigger flagged. AI-BOS itself is `PRJ-GOV-AI-BOS-001`. Awaiting user approval. |
+| 1.1.0 | 2026-07-18 | I12 — `PRJ-STR-FOUNDEROS-001` founder workspace binding pattern; memory runtime + rewire protocol references. |

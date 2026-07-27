@@ -1,36 +1,9 @@
 [
   {
-    "id": "HB-KNW-AUTHORING-001",
-    "title": "Knowledge Authoring Handbook",
+    "id": "HB-DLV-BP-001",
+    "title": "Website Blueprint Factory Handbook",
     "type": "handbook",
-    "path": "knowledge/handbooks/HB-KNW-AUTHORING-001.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "HB-GOV-OPS-001",
-    "title": "AI-BOS Operations Handbook",
-    "type": "handbook",
-    "path": "knowledge/handbooks/HB-GOV-OPS-001.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "HB-ENG-FE-001",
-    "title": "SaaS Frontend Engineering Handbook",
-    "type": "handbook",
-    "path": "knowledge/handbooks/HB-ENG-FE-001-saas-frontend.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "HB-ENG-BE-001",
-    "title": "SaaS Backend Engineering Handbook",
-    "type": "handbook",
-    "path": "knowledge/handbooks/HB-ENG-BE-001-saas-backend.md",
+    "path": "knowledge/handbooks/HB-DLV-BP-001-blueprint-factory.md",
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
@@ -45,10 +18,73 @@
     "updated": "2026-07-17"
   },
   {
+    "id": "HB-ENG-BE-001",
+    "title": "SaaS Backend Engineering Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-BE-001-saas-backend.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
     "id": "HB-ENG-DATA-001",
     "title": "SaaS Data and Persistence Handbook",
     "type": "handbook",
     "path": "knowledge/handbooks/HB-ENG-DATA-001-saas-data.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-FE-001",
+    "title": "SaaS Frontend Engineering Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-FE-001-saas-frontend.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-HTML-001",
+    "title": "HTML Template Delivery Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-HTML-001-html-template-delivery.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-ENG-NEXT-001",
+    "title": "Next.js Migration Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-ENG-NEXT-001-nextjs-migration.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-GOV-OPS-001",
+    "title": "AI-BOS Operations Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GOV-OPS-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-GRO-SEO-001",
+    "title": "SEO Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GRO-SEO-001-seo-handbook.md",
+    "version": "1.1.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "HB-KNW-AUTHORING-001",
+    "title": "Knowledge Authoring Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-KNW-AUTHORING-001.md",
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
@@ -61,5 +97,248 @@
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "HB-PLT-SYSBUILD-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-PLT-SYSBUILD-001-system-builder.md",
+    "type": "handbook",
+    "title": "System Builder Handbook — Vault Platform Builder",
+    "status": "active"
+  },
+  {
+    "id": "HB-DLV-SAAS-ORCH-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-DLV-SAAS-ORCH-001-saas-orchestrator.md",
+    "type": "handbook",
+    "title": "Senior SaaS Developer — Cross-Layer Orchestrator Contract",
+    "status": "active"
+  },
+  {
+    "id": "HB-STR-FOUNDER-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-STR-FOUNDER-001-founder-os.md",
+    "type": "handbook",
+    "title": "Founder OS Handbook — Strategy Orchestrator",
+    "status": "active"
+  },
+  {
+    "id": "HB-STR-RESEARCH-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-STR-RESEARCH-001-founder-research.md",
+    "type": "handbook",
+    "title": "Founder Research Handbook — Market and Competitor Intelligence",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-MARKET-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-MARKET-001-founder-marketing.md",
+    "type": "handbook",
+    "title": "Offer and Funnel Specialist Handbook — Under CMO",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-MKOS-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-MKOS-001-marketing-os-handbook.md",
+    "type": "handbook",
+    "title": "Marketing OS CMO Operating Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-UNIVERSAL-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-UNIVERSAL-001-marketing-universal-rules.md",
+    "type": "handbook",
+    "title": "Marketing Universal Rules — All Agents",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-INTEL-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-INTEL-001-marketing-intelligence.md",
+    "type": "handbook",
+    "title": "Marketing Intelligence Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-BRAND-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-BRAND-001-marketing-brand.md",
+    "type": "handbook",
+    "title": "Marketing Brand Strategy Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-CONTENT-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-CONTENT-001-marketing-content.md",
+    "type": "handbook",
+    "title": "Marketing Content Mini-OS Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-SEO-GEO-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-SEO-GEO-001-marketing-geo.md",
+    "type": "handbook",
+    "title": "AI Search and GEO Optimization Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-SOCIAL-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-SOCIAL-001-marketing-social.md",
+    "type": "handbook",
+    "title": "Social Media Strategy Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-ADS-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-ADS-001-marketing-paid-ads.md",
+    "type": "handbook",
+    "title": "Paid Acquisition Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-EMAIL-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-EMAIL-001-marketing-email.md",
+    "type": "handbook",
+    "title": "Email Lifecycle Marketing Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-CRO-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-CRO-001-marketing-cro.md",
+    "type": "handbook",
+    "title": "Funnels, CRO, and Pricing Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-ANALYTICS-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-ANALYTICS-001-marketing-analytics.md",
+    "type": "handbook",
+    "title": "Marketing Analytics and Experiments Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-CREATIVE-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-CREATIVE-001-marketing-creative.md",
+    "type": "handbook",
+    "title": "Creative Direction and Briefs Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-VIDEO-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-VIDEO-001-marketing-video.md",
+    "type": "handbook",
+    "title": "Video Strategy and Scripts Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-COMMUNITY-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-COMMUNITY-001-marketing-community.md",
+    "type": "handbook",
+    "title": "Community and Reputation Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-MKT-MEMORY-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-MKT-MEMORY-001-marketing-memory.md",
+    "type": "handbook",
+    "title": "Campaign Memory and Asset Library Handbook",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-SALES-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-GRO-SALES-001-founder-sales.md",
+    "type": "handbook",
+    "title": "Founder Sales Handbook — Pipeline, Proposals, Client Conversations",
+    "status": "active"
+  },
+  {
+    "id": "HB-OPS-FIN-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-OPS-FIN-001-founder-finance.md",
+    "type": "handbook",
+    "title": "Founder Finance Handbook — Pricing and Unit Economics",
+    "status": "active"
+  },
+  {
+    "id": "HB-PLT-AUTOMATION-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/handbooks/HB-PLT-AUTOMATION-001-founder-automation.md",
+    "type": "handbook",
+    "title": "Founder Automation Handbook — n8n and AI Workflow Planning",
+    "status": "active"
+  },
+  {
+    "id": "HB-GRO-SEOOS-001",
+    "title": "SEO OS Lead Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GRO-SEOOS-001-seo-os-lead-handbook.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "HB-GRO-SEO-INTL-001",
+    "title": "International SEO Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GRO-SEO-INTL-001-international-seo.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "HB-GRO-SEO-AUTO-001",
+    "title": "SEO Automation Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GRO-SEO-AUTO-001-seo-automation.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "HB-GRO-SEO-ALGO-001",
+    "title": "Algorithm Watch Handbook",
+    "type": "handbook",
+    "path": "knowledge/handbooks/HB-GRO-SEO-ALGO-001-algorithm-watch.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

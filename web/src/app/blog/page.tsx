@@ -31,9 +31,9 @@ import {
 export const revalidate = 60;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Blog — Field notes",
+  title: "Blog — Field Notes on SaaS, Web & Automation",
   description:
-    "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, and automation.",
+    "Field notes, engineering deep-dives, and studio reflections on building SaaS apps, websites, automation, and AI business systems.",
   path: "/blog",
 });
 

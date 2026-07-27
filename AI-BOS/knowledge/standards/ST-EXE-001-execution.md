@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - execution
+capabilities:
+  - CAP-PLT-004
+  - CAP-OPS-005
 ---
 
 # Execution Standard

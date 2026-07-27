@@ -1,0 +1,11 @@
+{
+  "name": "@ai-bos/mcp-knowledge-retrieve",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MC-KNW-RETRIEVE-001 — founder memory + KO grounding",
+  "main": "index.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  }
+}

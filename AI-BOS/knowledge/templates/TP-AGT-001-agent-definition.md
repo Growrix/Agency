@@ -28,6 +28,8 @@ tags:
   - ai-bos
   - template
   - agent-definition
+capabilities:
+  - CAP-PLT-001
 ---
 
 # Agent Definition Template

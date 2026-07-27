@@ -1,0 +1,11 @@
+{
+  "name": "@ai-bos/mcp-codebase-intelligence",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MC-PLT-CODEBASE-001 — ported from Junks codebase-intelligence-mcp",
+  "main": "index.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  }
+}

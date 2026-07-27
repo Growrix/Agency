@@ -30,6 +30,9 @@ tags:
   - ai-bos
   - workflow
   - governance
+capabilities:
+  - CAP-OPS-005
+  - CAP-PLT-004
 ---
 
 # Phase Gate Approval Workflow

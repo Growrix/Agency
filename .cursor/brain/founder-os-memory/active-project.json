@@ -1,0 +1,5 @@
+{
+  "slug": null,
+  "updated": "2026-07-18",
+  "notes": "Set slug to active project folder under projects/<slug>/. Personal memory always loads regardless."
+}

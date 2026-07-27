@@ -1,5 +1,32 @@
 [
   {
+    "id": "RU-AI-BOS-BP-001",
+    "title": "Blueprint Agents Must Consume AI-BOS Project Knowledge",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-BP-001-blueprint-project-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "RU-AI-BOS-HTML-001",
+    "title": "HTML Agents Must Consume AI-BOS Project Knowledge",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-HTML-001-html-project-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "RU-AI-BOS-NEXT-001",
+    "title": "Next.js Agents Must Consume AI-BOS Project Knowledge",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-NEXT-001-next-project-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
     "id": "RU-AI-BOS-SAAS-001",
     "title": "SaaS Agents Must Consume AI-BOS Project Knowledge",
     "type": "rule",
@@ -7,5 +34,68 @@
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "RU-AI-BOS-SEO-001",
+    "title": "SEO Agents Must Consume AI-BOS SEO Pack",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-SEO-001-seo-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "RU-AI-BOS-UNI-001",
+    "title": "Universal SSOT Binding Policy",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-UNI-001-universal-ssot-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "RU-AI-BOS-VAULT-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/rules/RU-AI-BOS-VAULT-001-vault-integrity.md",
+    "type": "rule",
+    "title": "AI-BOS Vault Integrity — Single Portable Root",
+    "status": "active"
+  },
+  {
+    "id": "RU-AI-BOS-HANDOFF-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/rules/RU-AI-BOS-HANDOFF-001-next-agent-suggestion.md",
+    "type": "rule",
+    "title": "Next-Agent Suggestion and Wrong-Agent STOP",
+    "status": "active"
+  },
+  {
+    "id": "RU-AI-BOS-FOUNDER-001",
+    "version": "1.2.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/rules/RU-AI-BOS-FOUNDER-001-founder-power-pack.md",
+    "type": "rule",
+    "title": "Founder OS Power Pack Binding Rule",
+    "status": "active"
+  },
+  {
+    "id": "RU-AI-BOS-MKOS-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/rules/RU-AI-BOS-MKOS-001-marketing-os-binding.md",
+    "type": "rule",
+    "title": "Marketing OS Lane Binding Rule",
+    "status": "active"
+  },
+  {
+    "id": "RU-AI-BOS-SEOOS-001",
+    "title": "SEO OS Binding Rule",
+    "type": "rule",
+    "path": "knowledge/rules/RU-AI-BOS-SEOOS-001-seo-os-binding.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

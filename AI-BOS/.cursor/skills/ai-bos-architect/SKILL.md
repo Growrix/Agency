@@ -14,11 +14,12 @@ Enterprise architecture partner for the **tool-independent AI Business Operating
 
 ## Read First
 
-1. [references/ai-bos-planning-prompt.md](references/ai-bos-planning-prompt.md) — authoritative planning prompt and phase order
-2. [references/knowledge-registry-standard.md](references/knowledge-registry-standard.md) — Knowledge Object + registry rules
-3. [references/front-matter-schema.md](references/front-matter-schema.md) — YAML metadata + ID convention
-4. [checklists/phase-approval-checklist.md](checklists/phase-approval-checklist.md) — phase-end gates
-5. `AI-BOS/tasks.md` — execution ledger (continue from last state)
+1. [references/ai-bos-binding.md](references/ai-bos-binding.md) — PRJ-GOV-AI-BOS-001 binding
+2. [references/ai-bos-planning-prompt.md](references/ai-bos-planning-prompt.md) — authoritative planning prompt and phase order
+3. [references/knowledge-registry-standard.md](references/knowledge-registry-standard.md) — Knowledge Object + registry rules
+4. [references/front-matter-schema.md](references/front-matter-schema.md) — YAML metadata + ID convention
+5. [checklists/phase-approval-checklist.md](checklists/phase-approval-checklist.md) — phase-end gates
+6. `AI-BOS/tasks.md` — execution ledger (continue from last state)
 
 ## Role
 

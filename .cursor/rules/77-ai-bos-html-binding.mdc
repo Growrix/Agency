@@ -1,0 +1,32 @@
+---
+description: Bind Growrixos sites/ HTML template work to AI-BOS project PRJ-TMPL-HTML-001. Apply when editing under sites/.
+globs: sites/**
+alwaysApply: false
+---
+
+# AI-BOS HTML Binding (sites/)
+
+When working under `sites/`, treat the delivery project as **`PRJ-TMPL-HTML-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-TMPL-HTML-001` before material changes.
+2. Load HTML domain pack: `HB-ENG-HTML-001`, `RU-AI-BOS-HTML-001`, `WF-DLV-HTML-SITE-001`.
+3. Use `@html-website-builder` / `AG-DLV-HTML-LEAD-001` as lead; delegate subagents per skill.
+3. Record evidence in `.cursor/execution/template-tasks.md`.
+
+## Routing
+
+| Need | Agent / skill |
+|------|----------------|
+| Lead build | `frontend-architect` / `@html-website-builder` (`AG-DLV-HTML-LEAD-001`) |
+| Design tokens | `design-system-architect` (`AG-DLV-HTML-DS-001`) |
+| Accessibility | `accessibility-auditor` (`AG-DLV-HTML-A11Y-001`) |
+| Performance | `performance-optimizer` (`AG-DLV-HTML-PERF-001`) |
+| Final QA | `code-reviewer` (`AG-DLV-HTML-QA-001`) |
+| AI-BOS structural change | `@system-builder` |
+
+## Never
+
+- Introduce frameworks, CDN scripts, or build tools in `sites/` deliverables
+- Skip readonly audit subagents at delivery

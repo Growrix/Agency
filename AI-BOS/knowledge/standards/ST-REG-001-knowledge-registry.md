@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - knowledge-registry
+capabilities:
+  - CAP-KNW-002
+  - CAP-PLT-003
 ---
 
 # Knowledge Registry Standard

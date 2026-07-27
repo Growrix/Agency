@@ -1,108 +1,9 @@
 [
   {
-    "id": "ST-KNW-001",
-    "title": "Knowledge Object Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-KNW-001-knowledge-object.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-REG-001",
-    "title": "Knowledge Registry Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-REG-001-knowledge-registry.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-DOC-001",
-    "title": "Documentation Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-DOC-001-documentation.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
     "id": "ST-AGT-001",
     "title": "Agent Definition Standard",
     "type": "standard",
     "path": "knowledge/standards/ST-AGT-001-agent-definition.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-MCP-001",
-    "title": "MCP Server Definition Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-MCP-001-mcp-server-definition.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-EXE-001",
-    "title": "Execution Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-EXE-001-execution.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-GOV-001",
-    "title": "Governance Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-GOV-001-governance.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-PRJ-001",
-    "title": "Project Definition Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-PRJ-001-project-definition.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-VER-001",
-    "title": "Versioning and Evolution Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-VER-001-versioning-evolution.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-TP-001",
-    "title": "Template Authoring Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-TP-001-template-authoring.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-SEC-001",
-    "title": "SaaS Security Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-SEC-001-saas-security.md",
-    "version": "1.0.0",
-    "status": "active",
-    "updated": "2026-07-17"
-  },
-  {
-    "id": "ST-TST-001",
-    "title": "SaaS Testing and Quality Standard",
-    "type": "standard",
-    "path": "knowledge/standards/ST-TST-001-saas-testing.md",
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
@@ -117,6 +18,33 @@
     "updated": "2026-07-17"
   },
   {
+    "id": "ST-BP-001",
+    "title": "Blueprint Stage Deliverables Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-BP-001-stage-deliverables.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-DOC-001",
+    "title": "Documentation Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-DOC-001-documentation.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-EXE-001",
+    "title": "Execution Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-EXE-001-execution.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
     "id": "ST-FE-DS-001",
     "title": "SaaS Frontend Design System Standard",
     "type": "standard",
@@ -124,5 +52,212 @@
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-GOV-001",
+    "title": "Governance Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-GOV-001-governance.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-HTML-A11Y-001",
+    "title": "HTML Accessibility Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-HTML-A11Y-001-accessibility.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-HTML-DS-001",
+    "title": "Vanilla HTML Design System Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-HTML-DS-001-vanilla-design-system.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-HTML-PERF-001",
+    "title": "HTML Performance and SEO Head Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-HTML-PERF-001-performance-seo-head.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-KNW-001",
+    "title": "Knowledge Object Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-KNW-001-knowledge-object.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-MCP-001",
+    "title": "MCP Server Definition Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-MCP-001-mcp-server-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-NEXT-MIG-001",
+    "title": "Next.js Migration Contract",
+    "type": "standard",
+    "path": "knowledge/standards/ST-NEXT-MIG-001-migration-contract.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-NEXT-PARITY-001",
+    "title": "Visual Parity Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-NEXT-PARITY-001-visual-parity.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-PRJ-001",
+    "title": "Project Definition Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-PRJ-001-project-definition.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-REG-001",
+    "title": "Knowledge Registry Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-REG-001-knowledge-registry.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-SEC-001",
+    "title": "SaaS Security Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-SEC-001-saas-security.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-SEO-001",
+    "title": "SEO Quality Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-SEO-001-seo-quality.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-TP-001",
+    "title": "Template Authoring Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-TP-001-template-authoring.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-TST-001",
+    "title": "SaaS Testing and Quality Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-TST-001-saas-testing.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-VER-001",
+    "title": "Versioning and Evolution Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-VER-001-versioning-evolution.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "ST-PLT-ENV-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-PLT-ENV-001-environment-projection.md",
+    "type": "standard",
+    "title": "Environment Projection Standard",
+    "status": "active"
+  },
+  {
+    "id": "ST-PLT-REWIRE-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-PLT-REWIRE-001-ai-bos-rewire-protocol.md",
+    "type": "standard",
+    "title": "AI-BOS Rewire Protocol — Wire and Clean Any Project",
+    "status": "active"
+  },
+  {
+    "id": "ST-STR-MEMORY-001",
+    "version": "1.1.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-STR-MEMORY-001-founder-memory.md",
+    "type": "standard",
+    "title": "Founder Personal Memory Architecture",
+    "status": "active"
+  },
+  {
+    "id": "ST-MCP-PORT-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-MCP-PORT-001-mcp-port.md",
+    "type": "standard",
+    "title": "MCP Port Standard — Vault Copy-In from External Experiments",
+    "status": "active"
+  },
+  {
+    "id": "ST-GRO-MKT-MEMORY-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-GRO-MKT-MEMORY-001-marketing-memory-layout.md",
+    "type": "standard",
+    "title": "Marketing Memory Folder Layout Standard",
+    "status": "active"
+  },
+  {
+    "id": "ST-GRO-SCORECARD-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-GRO-SCORECARD-001-marketing-kpi-scorecard.md",
+    "type": "standard",
+    "title": "Marketing KPI Scorecard Standard",
+    "status": "active"
+  },
+  {
+    "id": "ST-GRO-CLAIMS-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/standards/ST-GRO-CLAIMS-001-marketing-claims-compliance.md",
+    "type": "standard",
+    "title": "Marketing Claims Compliance Standard",
+    "status": "active"
+  },
+  {
+    "id": "ST-GRO-SEO-SCORECARD-001",
+    "title": "SEO KPI Scorecard Standard",
+    "type": "standard",
+    "path": "knowledge/standards/ST-GRO-SEO-SCORECARD-001-seo-kpi-scorecard.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -34,6 +34,10 @@ tags:
   - authority
   - decision-process
   - foundational
+capabilities:
+  - CAP-OPS-005
+  - CAP-OPS-003
+  - CAP-STR-005
 ---
 
 # AI-BOS Governance
@@ -201,10 +205,10 @@ Governance rules must not assume:
 
 | Existing artifact | Governance role |
 |-------------------|------------------|
-| `AI-BOS/.cursor/rules/75-ai-bos-governance.mdc` | Runtime projection of this Governance artifact into Cursor |
-| `~/.cursor/docs/agents_cursor.md` | The anatomy doc maintained by `@system-builder`; reflects governance decisions |
-| `~/.cursor/skills/system-builder/registry/skills-index.md` | Personal skills registry; governed by `@system-builder` per this model |
-| `AI-BOS/.cursor/audits/2026-07-16-d1-repo-promotion-evaluation.md` | A decision-record (DOC-GOV-*) per this governance model |
+| `docs/reference/runtime-surface-inventory.md (rule 75 projection)` | Runtime projection of this Governance artifact into Cursor |
+| `docs/reference/runtime-surface-inventory.md` | The anatomy doc maintained by `@system-builder`; reflects governance decisions |
+| `docs/reference/runtime-surface-inventory.md` | Personal skills registry; governed by `@system-builder` per this model |
+| `docs/reference/runtime-surface-inventory.md (D1 decision record)` | A decision-record (DOC-GOV-*) per this governance model |
 
 This Governance artifact ratifies the existing practice: `@system-builder` governs structure, `@ai-bos-architect` authors content, the human approves material changes.
 
@@ -238,7 +242,7 @@ This Governance artifact ratifies the existing practice: `@system-builder` gover
 - `knowledge/architecture/AR-AI-BOS-004-capability-model.md` — Capability Model (dependency; `CAP-OPS-005` Governance & Evolution)
 - `knowledge/architecture/AR-AI-BOS-007-agent-architecture.md` — Agent Architecture (dependency; authority levels to ratify)
 - `knowledge/architecture/AR-AI-BOS-009-execution-architecture.md` — Execution Architecture (dependency; gate semantics and provenance to ratify)
-- `AI-BOS/.cursor/rules/75-ai-bos-governance.mdc` — runtime projection of this artifact
+- `docs/reference/runtime-surface-inventory.md (rule 75 projection)` — runtime projection of this artifact
 
 ## Related Knowledge Objects
 

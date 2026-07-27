@@ -30,6 +30,9 @@ tags:
   - handbook
   - ops
   - saas
+capabilities:
+  - CAP-OPS-002
+  - CAP-PLT-005
 ---
 
 # SaaS Release and Operations Handbook
@@ -76,8 +79,8 @@ CI green on SHA; smoke pass; rollback noted.
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/process/deployment-and-environments.md
-- DOC/Universal/Enterprise Level Guide/quality/qa-and-release-gates.md
+- universal/Enterprise Level Guide/process/deployment-and-environments.md
+- universal/Enterprise Level Guide/quality/qa-and-release-gates.md
 
 ## Related Knowledge Objects
 

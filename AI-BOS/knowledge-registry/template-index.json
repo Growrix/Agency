@@ -61,5 +61,32 @@
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "TP-STR-FOUNDER-001",
+    "title": "Founder OS Project Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-STR-FOUNDER-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "TP-GRO-MKOS-001",
+    "title": "Marketing OS Project Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-GRO-MKOS-001-marketing-os-project-template.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "TP-GRO-SEOOS-001",
+    "title": "SEO OS Project Template",
+    "type": "template",
+    "path": "knowledge/templates/TP-GRO-SEOOS-001-seo-os-project-template.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

@@ -1,5 +1,32 @@
 [
   {
+    "id": "WF-BLUEPRINT-FACTORY-001",
+    "title": "Blueprint Factory Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-BLUEPRINT-FACTORY-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "WF-DLV-HTML-SITE-001",
+    "title": "HTML Site Delivery Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-DLV-HTML-SITE-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "WF-DLV-SAAS-FEATURE-001",
+    "title": "SaaS Feature Delivery Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-DLV-SAAS-FEATURE-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
     "id": "WF-GOV-PHASE-APPROVE-001",
     "title": "Phase Gate Approval Workflow",
     "type": "workflow",
@@ -18,12 +45,84 @@
     "updated": "2026-07-17"
   },
   {
-    "id": "WF-DLV-SAAS-FEATURE-001",
-    "title": "SaaS Feature Delivery Workflow",
+    "id": "WF-MIGRATE-HTML-TO-NEXT-001",
+    "title": "HTML to Next.js Migration Workflow",
     "type": "workflow",
-    "path": "knowledge/workflows/WF-DLV-SAAS-FEATURE-001.md",
+    "path": "knowledge/workflows/WF-MIGRATE-HTML-TO-NEXT-001.md",
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "WF-SEO-AUDIT-001",
+    "title": "SEO Audit Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-SEO-AUDIT-001.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "WF-PLT-SYSBUILD-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/workflows/WF-PLT-SYSBUILD-001.md",
+    "type": "workflow",
+    "title": "System Builder Vault Build Workflow",
+    "status": "active"
+  },
+  {
+    "id": "WF-STR-FOUNDER-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/workflows/WF-STR-FOUNDER-001.md",
+    "type": "workflow",
+    "title": "Founder Intake-to-Plan Workflow",
+    "status": "active"
+  },
+  {
+    "id": "WF-STR-RESEARCH-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/workflows/WF-STR-RESEARCH-001.md",
+    "type": "workflow",
+    "title": "Founder Research Workflow",
+    "status": "active"
+  },
+  {
+    "id": "WF-GRO-OFFER-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/workflows/WF-GRO-OFFER-001.md",
+    "type": "workflow",
+    "title": "Offer to Funnel to Sales Workflow",
+    "status": "active"
+  },
+  {
+    "id": "WF-GRO-CAMPAIGN-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/workflows/WF-GRO-CAMPAIGN-001-marketing-campaign-lifecycle.md",
+    "type": "workflow",
+    "title": "Marketing Campaign Lifecycle Workflow",
+    "status": "active"
+  },
+  {
+    "id": "WF-GRO-LAUNCH-001",
+    "version": "1.0.0",
+    "updated": "2026-07-18",
+    "path": "knowledge/workflows/WF-GRO-LAUNCH-001-marketing-gtm-launch.md",
+    "type": "workflow",
+    "title": "GTM Launch Workflow",
+    "status": "active"
+  },
+  {
+    "id": "WF-GRO-SEO-PROGRAM-001",
+    "title": "SEO Program Lifecycle Workflow",
+    "type": "workflow",
+    "path": "knowledge/workflows/WF-GRO-SEO-PROGRAM-001-seo-program-lifecycle.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

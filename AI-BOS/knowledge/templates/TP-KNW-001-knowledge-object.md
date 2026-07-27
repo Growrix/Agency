@@ -28,6 +28,8 @@ tags:
   - ai-bos
   - template
   - knowledge-object
+capabilities:
+  - CAP-KNW-001
 ---
 
 # Knowledge Object Template

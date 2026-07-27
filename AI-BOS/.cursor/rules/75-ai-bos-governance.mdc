@@ -8,14 +8,19 @@ alwaysApply: false
 
 Governs all work under `AI-BOS/`. This is a **docs-first, vendor-independent** planning system — not a SaaS or template delivery lane.
 
-## Isolated root contract
+## Isolated root / vault contract
 
 | Path | Role |
 |------|------|
 | `AI-BOS/knowledge-registry/` | SSOT for discovery — indexes metadata, never stores handbook body |
-| `AI-BOS/.cursor/skills/ai-bos-architect/` | Content authoring skill |
-| `AI-BOS/.cursor/rules/` | Local governance only |
+| `AI-BOS/.cursor/skills/` | **All** vault skills (SSOT) — including system-builder, senior-saas, delivery |
+| `AI-BOS/.cursor/agents/` | **All** vault agent wrappers (SSOT) |
+| `AI-BOS/.cursor/rules/` | Vault governance + handoff rules |
+| `AI-BOS/.cursor/brain/` | Lane router / brains for agentic routing |
+| `AI-BOS/mcp/` | MCP server implementations |
 | `AI-BOS/tasks.md` | Execution ledger |
+
+Also follow **`RU-AI-BOS-VAULT-001`** and rule `82-ai-bos-vault-integrity.mdc`.
 
 ## Permanent rules
 
@@ -27,6 +32,8 @@ Governs all work under `AI-BOS/`. This is a **docs-first, vendor-independent** p
 6. **Phase gates** — never advance planning phases without explicit user approval.
 7. **No code by default** — do not generate application code unless explicitly requested.
 8. **Disk is canonical** — chat summaries are never SSOT; artifacts on disk are.
+9. **Vault integrity** — never register agent/skill/rule files that exist only outside `AI-BOS/`; copy-in first.
+10. **Next-agent suggestion** — all agents follow `RU-AI-BOS-HANDOFF-001`.
 
 ## Knowledge Object standard
 
@@ -68,8 +75,9 @@ Before declaring a phase complete:
 
 ## Relationship to Growrixos
 
-AI-BOS is an isolated root inside Growrixos. It does **not** replace:
+AI-BOS is the **portable vault** for the agentic system. Product roots remain outside:
 
-- `DOC/PROJECT PLAN/` — SaaS implementation SSOT
-- `web/`, `sites/`, `Frontend_Nextjs/` — delivery surfaces
-- Personal skills in `~/.cursor/skills/` — except when explicitly promoted
+- `DOC/PROJECT PLAN/` — SaaS implementation docs SSOT
+- `web/`, `sites/`, `Frontend_Nextjs/` — delivery app surfaces
+
+Host `.cursor/` or personal `~/.cursor/skills/` may hold **derived** installs only — vault `.cursor/` is SSOT for agent/skill/rule bodies (`RU-AI-BOS-VAULT-001`).

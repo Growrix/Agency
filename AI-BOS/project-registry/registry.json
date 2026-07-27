@@ -2,8 +2,8 @@
   "schema_version": "1.0.0",
   "system": "AI-BOS",
   "registry": "project",
-  "description": "Project registry for AI-BOS \u2014 projects instantiate capabilities, agents, MCP, and workflows",
-  "last_updated": "2026-07-17",
+  "description": "Project registry for AI-BOS â€” projects instantiate capabilities, agents, MCP, and workflows",
+  "last_updated": "2026-07-18",
   "indexes": {
     "project": "project-index.json"
   },
@@ -54,7 +54,13 @@
         "HB-KNW-AUTHORING-001",
         "HB-GOV-OPS-001",
         "WF-GOV-PHASE-APPROVE-001",
-        "WF-KNW-AUTHOR-001"
+        "WF-KNW-AUTHOR-001",
+        "RU-AI-BOS-UNI-001",
+        "RU-AI-BOS-VAULT-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "HB-PLT-SYSBUILD-001",
+        "ST-PLT-ENV-001",
+        "WF-PLT-SYSBUILD-001"
       ],
       "agents": [
         "AG-KNW-ARCH-001",
@@ -78,7 +84,8 @@
       "runtime_projection": "cursor",
       "root_path": "F:/PROJECTS/Growrixos/AI-BOS/",
       "generated_from": "TP-PRJ-001",
-      "updated": "2026-07-17"
+      "updated": "2026-07-18",
+      "ledger_path": "F:/PROJECTS/Growrixos/AI-BOS/tasks.md"
     },
     {
       "id": "PRJ-SAAS-GROWRIXOS-001",
@@ -93,7 +100,9 @@
         "CAP-OPS-002",
         "CAP-OPS-003",
         "CAP-PLT-005",
-        "CAP-KNW-004"
+        "CAP-KNW-004",
+        "CAP-GRO-002",
+        "CAP-GRO-003"
       ],
       "consumes": [
         "AR-AI-BOS-001",
@@ -118,7 +127,15 @@
         "ST-API-001",
         "ST-FE-DS-001",
         "WF-DLV-SAAS-FEATURE-001",
-        "RU-AI-BOS-SAAS-001"
+        "RU-AI-BOS-SAAS-001",
+        "HB-GRO-SEO-001",
+        "ST-SEO-001",
+        "WF-SEO-AUDIT-001",
+        "RU-AI-BOS-SEO-001",
+        "RU-AI-BOS-UNI-001",
+        "HB-DLV-SAAS-ORCH-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-VAULT-001"
       ],
       "agents": [
         "AG-DLV-SAAS-001",
@@ -129,7 +146,14 @@
         "AG-DLV-DEVOPS-001",
         "AG-KNW-ARCH-001",
         "AG-GOV-SYSBUILD-001",
-        "AG-KNW-VALID-001"
+        "AG-KNW-VALID-001",
+        "AG-DLV-API-001",
+        "AG-DLV-INT-001",
+        "AG-DLV-CONTENT-001",
+        "AG-DLV-CONV-001",
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001"
       ],
       "mcp_servers": [
         "MC-KNW-REGISTRY-001"
@@ -145,23 +169,557 @@
         ],
         "auditor": "AG-KNW-VALID-001",
         "system_builder": "AG-GOV-SYSBUILD-001",
-        "delivery_lead": "AG-DLV-SAAS-001"
+        "delivery_lead": "AG-DLV-SAAS-001",
+        "engineering_lead": "AG-ENG-CTO-001"
       },
       "runtime_projection": "cursor",
       "root_path": "F:/PROJECTS/Growrixos/web/",
       "ledger_path": "F:/PROJECTS/Growrixos/DOC/PROJECT PLAN/Tasks/tasks.md",
       "generated_from": "TP-PRJ-001",
       "notes": {
-        "missing_knowledge": [
-          "Optional later: SEO/content HB, integration playbook KOs, pattern library PT-*"
-        ],
-        "wiring": "I4 SaaS knowledge pack + skill/rule bindings",
+        "missing_knowledge": [],
         "related_surfaces": [
-          "sites/",
-          "Frontend_Nextjs/ \u2014 separate future PRJ-* entries"
-        ]
+          "PRJ-TMPL-HTML-001 (sites/)",
+          "PRJ-TMPL-NEXT-001 (Frontend_Nextjs/)",
+          "PRJ-BP-WEB-001 (blueprints/)"
+        ],
+        "wiring": "I10 vault-first; AG-DLV-SAAS-001 = cross_layer_orchestrator; runtime vault-skill:*"
+      },
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "PRJ-TMPL-HTML-001",
+      "name": "Growrixos HTML Templates",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: owner",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-004",
+        "CAP-DLV-005",
+        "CAP-OPS-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-011",
+        "ST-EXE-001",
+        "ST-PRJ-001",
+        "ST-AGT-001",
+        "HB-GOV-OPS-001",
+        "WF-GOV-PHASE-APPROVE-001",
+        "HB-ENG-HTML-001",
+        "ST-HTML-DS-001",
+        "ST-HTML-A11Y-001",
+        "ST-HTML-PERF-001",
+        "WF-DLV-HTML-SITE-001",
+        "RU-AI-BOS-HTML-001",
+        "RU-AI-BOS-UNI-001"
+      ],
+      "agents": [
+        "AG-DLV-HTML-LEAD-001",
+        "AG-DLV-HTML-DS-001",
+        "AG-DLV-HTML-A11Y-001",
+        "AG-DLV-HTML-PERF-001",
+        "AG-DLV-HTML-QA-001",
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-VALID-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "workflows": [
+        "WF-GOV-PHASE-APPROVE-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "system_builder": "AG-GOV-SYSBUILD-001",
+        "delivery_lead": "AG-DLV-HTML-LEAD-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/sites/",
+      "ledger_path": "F:/PROJECTS/Growrixos/.cursor/execution/template-tasks.md",
+      "generated_from": "TP-PRJ-001",
+      "notes": {
+        "missing_knowledge": [],
+        "wiring": "I5 agent enrollment"
       },
       "updated": "2026-07-17"
+    },
+    {
+      "id": "PRJ-TMPL-NEXT-001",
+      "name": "Growrixos Next.js Migrations",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: owner",
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-004",
+        "CAP-DLV-005",
+        "CAP-OPS-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-011",
+        "ST-EXE-001",
+        "ST-PRJ-001",
+        "ST-AGT-001",
+        "HB-GOV-OPS-001",
+        "WF-GOV-PHASE-APPROVE-001",
+        "HB-ENG-NEXT-001",
+        "ST-NEXT-MIG-001",
+        "ST-NEXT-PARITY-001",
+        "WF-MIGRATE-HTML-TO-NEXT-001",
+        "RU-AI-BOS-NEXT-001",
+        "RU-AI-BOS-UNI-001"
+      ],
+      "agents": [
+        "AG-DLV-NEXT-LEAD-001",
+        "AG-DLV-NEXT-DS-001",
+        "AG-DLV-NEXT-A11Y-001",
+        "AG-DLV-NEXT-PERF-001",
+        "AG-DLV-NEXT-QA-001",
+        "AG-DLV-NEXT-PARITY-001",
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-VALID-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "workflows": [
+        "WF-GOV-PHASE-APPROVE-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "system_builder": "AG-GOV-SYSBUILD-001",
+        "delivery_lead": "AG-DLV-NEXT-LEAD-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/Frontend_Nextjs/",
+      "ledger_path": "F:/PROJECTS/Growrixos/.cursor/execution/template-tasks.md",
+      "generated_from": "TP-PRJ-001",
+      "notes": {
+        "missing_knowledge": [],
+        "wiring": "I5 agent enrollment"
+      },
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "PRJ-BP-WEB-001",
+      "name": "Growrixos Website Blueprint Factory",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: owner",
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-DLV-004",
+        "CAP-GRO-002"
+      ],
+      "consumes": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-011",
+        "ST-EXE-001",
+        "ST-PRJ-001",
+        "ST-AGT-001",
+        "HB-GOV-OPS-001",
+        "WF-GOV-PHASE-APPROVE-001",
+        "HB-DLV-BP-001",
+        "ST-BP-001",
+        "WF-BLUEPRINT-FACTORY-001",
+        "RU-AI-BOS-BP-001",
+        "RU-AI-BOS-UNI-001"
+      ],
+      "agents": [
+        "AG-BP-DIR-001",
+        "AG-BP-STG-001",
+        "AG-BP-STG-002",
+        "AG-BP-STG-003",
+        "AG-BP-STG-004",
+        "AG-BP-STG-005",
+        "AG-BP-STG-006",
+        "AG-BP-STG-007",
+        "AG-BP-STG-008",
+        "AG-BP-STG-009",
+        "AG-BP-STG-010",
+        "AG-BP-STG-011",
+        "AG-BP-STG-012",
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-VALID-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001"
+      ],
+      "workflows": [
+        "WF-GOV-PHASE-APPROVE-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "system_builder": "AG-GOV-SYSBUILD-001",
+        "delivery_lead": "AG-BP-DIR-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/blueprints/",
+      "ledger_path": "F:/PROJECTS/Growrixos/.cursor/execution/template-tasks.md",
+      "generated_from": "TP-PRJ-001",
+      "notes": {
+        "missing_knowledge": [],
+        "wiring": "I5 agent enrollment"
+      },
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "PRJ-STR-FOUNDEROS-001",
+      "name": "Growrix Founder OS",
+      "version": "1.3.0",
+      "status": "active",
+      "owner": "human: founder",
+      "capabilities": [
+        "CAP-STR-001",
+        "CAP-STR-002",
+        "CAP-STR-004",
+        "CAP-STR-006",
+        "CAP-STR-007",
+        "CAP-KNW-005",
+        "CAP-KNW-007",
+        "CAP-ORG-001",
+        "CAP-ORG-002",
+        "CAP-GRO-001",
+        "CAP-GRO-002",
+        "CAP-GRO-004",
+        "CAP-GRO-005",
+        "CAP-OPS-004",
+        "CAP-PLT-004",
+        "CAP-DLV-003",
+        "CAP-DLV-006"
+      ],
+      "consumes": [
+        "HB-STR-FOUNDER-001",
+        "WF-STR-FOUNDER-001",
+        "ST-STR-MEMORY-001",
+        "ST-PLT-REWIRE-001",
+        "TP-STR-FOUNDER-001",
+        "HB-STR-RESEARCH-001",
+        "HB-GRO-MARKET-001",
+        "HB-GRO-SALES-001",
+        "HB-OPS-FIN-001",
+        "HB-PLT-AUTOMATION-001",
+        "WF-STR-RESEARCH-001",
+        "WF-GRO-OFFER-001",
+        "RU-AI-BOS-FOUNDER-001",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "AR-AI-BOS-008",
+        "AR-AI-BOS-011",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-VAULT-001",
+        "AR-GRO-MKOS-001",
+        "HB-GRO-MKOS-001",
+        "RU-AI-BOS-MKOS-001",
+        "AR-ENG-SAASOS-001",
+        "HB-ENG-CTO-001",
+        "RU-AI-BOS-ENGOS-001"
+      ],
+      "agents": [
+        "AG-STR-FOUNDER-001",
+        "AG-STR-RESEARCH-001",
+        "AG-GRO-MARKET-001",
+        "AG-GRO-SALES-001",
+        "AG-PLT-AUTOMATION-001",
+        "AG-DLV-SAAS-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-ARCH-001",
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001",
+        "AG-GRO-CMO-001",
+        "AG-ENG-CTO-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "workflows": [
+        "WF-STR-FOUNDER-001",
+        "WF-STR-RESEARCH-001",
+        "WF-GRO-OFFER-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "founder_lead": "AG-STR-FOUNDER-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/",
+      "ledger_path": "F:/PROJECTS/Growrixos/AI-BOS/tasks.md",
+      "memory_path": "F:/PROJECTS/Growrixos/.cursor/brain/founder-os-memory/",
+      "generated_from": "TP-STR-FOUNDER-001",
+      "notes": {
+        "wiring": "I15 CMO handoff",
+        "primary_agent": "AG-STR-FOUNDER-001",
+        "marketing_handoff": "AG-GRO-CMO-001",
+        "engineering_handoff": "AG-ENG-CTO-001"
+      },
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "PRJ-GRO-MKOS-001",
+      "name": "Growrix Marketing OS",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: founder",
+      "capabilities": [
+        "CAP-GRO-002",
+        "CAP-GRO-003",
+        "CAP-GRO-004",
+        "CAP-GRO-006",
+        "CAP-GRO-007",
+        "CAP-GRO-008",
+        "CAP-GRO-009",
+        "CAP-GRO-010",
+        "CAP-GRO-011",
+        "CAP-GRO-012",
+        "CAP-GRO-013",
+        "CAP-GRO-014",
+        "CAP-GRO-015",
+        "CAP-STR-004",
+        "CAP-OPS-004",
+        "CAP-GRO-016"
+      ],
+      "consumes": [
+        "AR-GRO-MKOS-001",
+        "AR-AI-BOS-004",
+        "HB-GRO-MKOS-001",
+        "HB-GRO-UNIVERSAL-001",
+        "HB-GRO-INTEL-001",
+        "HB-GRO-BRAND-001",
+        "HB-GRO-CONTENT-001",
+        "HB-GRO-MARKET-001",
+        "HB-GRO-SEO-001",
+        "HB-GRO-SEO-GEO-001",
+        "HB-GRO-SOCIAL-001",
+        "HB-GRO-ADS-001",
+        "HB-GRO-EMAIL-001",
+        "HB-GRO-CRO-001",
+        "HB-GRO-ANALYTICS-001",
+        "HB-GRO-CREATIVE-001",
+        "HB-GRO-VIDEO-001",
+        "HB-GRO-COMMUNITY-001",
+        "HB-GRO-MKT-MEMORY-001",
+        "ST-GRO-MKT-MEMORY-001",
+        "ST-GRO-SCORECARD-001",
+        "ST-GRO-CLAIMS-001",
+        "ST-STR-MEMORY-001",
+        "RU-AI-BOS-MKOS-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-VAULT-001",
+        "WF-GRO-CAMPAIGN-001",
+        "WF-GRO-LAUNCH-001",
+        "TP-GRO-MKOS-001",
+        "AR-GRO-SEOOS-001",
+        "HB-GRO-SEOOS-001",
+        "RU-AI-BOS-SEOOS-001",
+        "WF-GRO-SEO-PROGRAM-001",
+        "ST-GRO-SEO-SCORECARD-001",
+        "TP-GRO-SEOOS-001",
+        "HB-GRO-SEO-INTL-001",
+        "HB-GRO-SEO-AUTO-001",
+        "HB-GRO-SEO-ALGO-001"
+      ],
+      "agents": [
+        "AG-GRO-CMO-001",
+        "AG-GRO-MARKET-001",
+        "AG-GRO-INTEL-CUST-001",
+        "AG-GRO-INTEL-COMP-001",
+        "AG-STR-RESEARCH-001",
+        "AG-GRO-BRAND-001",
+        "AG-GRO-BRAND-GUARD-001",
+        "AG-GRO-CONTENT-STRAT-001",
+        "AG-GRO-CONTENT-PLAN-001",
+        "AG-GRO-COPY-001",
+        "AG-GRO-BLOG-001",
+        "AG-GRO-SOCIAL-WRITE-001",
+        "AG-GRO-REPURPOSE-001",
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001",
+        "AG-GRO-SEO-KW-001",
+        "AG-GRO-SEO-GEO-001",
+        "AG-GRO-CRO-FUNNEL-001",
+        "AG-GRO-CRO-001",
+        "AG-GRO-PRICE-001",
+        "AG-GRO-SOCIAL-MGR-001",
+        "AG-GRO-ADS-PPC-001",
+        "AG-GRO-ADS-META-001",
+        "AG-GRO-ADS-LI-001",
+        "AG-GRO-ADS-RETARGET-001",
+        "AG-GRO-EMAIL-STRAT-001",
+        "AG-GRO-EMAIL-NEWS-001",
+        "AG-GRO-EMAIL-DELIV-001",
+        "AG-GRO-ANALYTICS-001",
+        "AG-GRO-KPI-001",
+        "AG-GRO-EXPERIMENT-001",
+        "AG-GRO-CREATIVE-DIR-001",
+        "AG-GRO-CREATIVE-BRIEF-001",
+        "AG-GRO-PROMPT-CREATIVE-001",
+        "AG-GRO-VIDEO-STRAT-001",
+        "AG-GRO-VIDEO-SCRIPT-001",
+        "AG-GRO-COMMUNITY-001",
+        "AG-GRO-REPUTATION-001",
+        "AG-GRO-MKT-MEMORY-001",
+        "AG-GRO-ASSET-LIB-001",
+        "AG-GRO-SALES-001",
+        "AG-DLV-HTML-LEAD-001",
+        "AG-DLV-CONTENT-001",
+        "AG-GRO-SEO-LEAD-001",
+        "AG-GRO-SEO-INTL-001",
+        "AG-GRO-SEO-AUTO-001",
+        "AG-GRO-SEO-ALGO-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001"
+      ],
+      "workflows": [
+        "WF-GRO-CAMPAIGN-001",
+        "WF-GRO-LAUNCH-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "marketing_lead": "AG-GRO-CMO-001",
+        "parent_project": "PRJ-STR-FOUNDEROS-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/",
+      "ledger_path": "F:/PROJECTS/Growrixos/AI-BOS/tasks.md",
+      "memory_path": "F:/PROJECTS/Growrixos/.cursor/brain/founder-os-memory/projects/<slug>/marketing/",
+      "generated_from": "TP-GRO-MKOS-001",
+      "notes": {
+        "wiring": "I16 SEO OS",
+        "primary_agent": "AG-GRO-CMO-001",
+        "entry_intent": "marketing_intake",
+        "seo_lead": "AG-GRO-SEO-LEAD-001"
+      },
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "PRJ-ENG-SAASOS-001",
+      "name": "Growrix Engineering OS",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "human: founder",
+      "capabilities": [
+        "CAP-ENG-001",
+        "CAP-DLV-001",
+        "CAP-DLV-002",
+        "CAP-DLV-004",
+        "CAP-DLV-005",
+        "CAP-OPS-002",
+        "CAP-OPS-003",
+        "CAP-PLT-005",
+        "CAP-KNW-001"
+      ],
+      "consumes": [
+        "AR-ENG-SAASOS-001",
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "HB-ENG-CTO-001",
+        "HB-DLV-SAAS-ORCH-001",
+        "HB-ENG-ARCH-001",
+        "HB-ENG-FE-001",
+        "HB-ENG-BE-001",
+        "HB-ENG-DATA-001",
+        "HB-ENG-PERF-001",
+        "HB-ENG-DOCS-001",
+        "HB-OPS-REL-001",
+        "ST-SEC-001",
+        "ST-TST-001",
+        "ST-API-001",
+        "ST-FE-DS-001",
+        "ST-ENG-SCORECARD-001",
+        "WF-ENG-PROGRAM-001",
+        "WF-DLV-SAAS-FEATURE-001",
+        "RU-AI-BOS-ENGOS-001",
+        "RU-AI-BOS-SAAS-001",
+        "RU-AI-BOS-HANDOFF-001",
+        "RU-AI-BOS-VAULT-001",
+        "TP-ENG-SAASOS-001"
+      ],
+      "agents": [
+        "AG-ENG-CTO-001",
+        "AG-ENG-PERF-001",
+        "AG-ENG-DOCS-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001",
+        "AG-DLV-QA-001",
+        "AG-DLV-QA-BE-001",
+        "AG-DLV-DEVOPS-001",
+        "AG-DLV-API-001",
+        "AG-DLV-INT-001",
+        "AG-DLV-CONTENT-001",
+        "AG-DLV-CONV-001",
+        "AG-DLV-HTML-LEAD-001",
+        "AG-DLV-HTML-DS-001",
+        "AG-DLV-HTML-A11Y-001",
+        "AG-DLV-HTML-PERF-001",
+        "AG-DLV-HTML-QA-001",
+        "AG-DLV-NEXT-LEAD-001",
+        "AG-DLV-NEXT-DS-001",
+        "AG-DLV-NEXT-A11Y-001",
+        "AG-DLV-NEXT-PERF-001",
+        "AG-DLV-NEXT-QA-001",
+        "AG-DLV-NEXT-PARITY-001"
+      ],
+      "mcp_servers": [
+        "MC-KNW-REGISTRY-001",
+        "MC-KNW-RETRIEVE-001",
+        "MC-PLT-CODEBASE-001"
+      ],
+      "workflows": [
+        "WF-ENG-PROGRAM-001",
+        "WF-DLV-SAAS-FEATURE-001"
+      ],
+      "governance": {
+        "knowledge_owners": [
+          "AG-KNW-ARCH-001"
+        ],
+        "auditor": "AG-KNW-VALID-001",
+        "engineering_lead": "AG-ENG-CTO-001",
+        "parent_project": "PRJ-STR-FOUNDEROS-001",
+        "peer_project": "PRJ-GRO-MKOS-001"
+      },
+      "runtime_projection": "cursor",
+      "root_path": "F:/PROJECTS/Growrixos/",
+      "ledger_path": "F:/PROJECTS/Growrixos/AI-BOS/tasks.md",
+      "memory_path": "F:/PROJECTS/Growrixos/.cursor/brain/founder-os-memory/projects/<slug>/engineering/",
+      "generated_from": "TP-ENG-SAASOS-001",
+      "notes": {
+        "wiring": "I17 Engineering OS",
+        "primary_agent": "AG-ENG-CTO-001",
+        "entry_intent": "engineering_intake",
+        "saas_project": "PRJ-SAAS-GROWRIXOS-001"
+      },
+      "updated": "2026-07-18"
     }
   ]
 }

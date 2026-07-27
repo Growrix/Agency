@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -32,6 +32,10 @@ tags:
   - knowledge-architecture
   - registry
   - foundational
+capabilities:
+  - CAP-KNW-001
+  - CAP-KNW-002
+  - CAP-PLT-003
 ---
 
 # AI-BOS Knowledge Architecture
@@ -245,8 +249,8 @@ This phase implements **Phase 2 (Registry indexes + Dependency mapping)** of the
 
 ## References
 
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/knowledge-registry-standard.md` — Knowledge Registry Standard (input)
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/front-matter-schema.md` — YAML schema + ID convention (input)
+- `ST-KNW-001, ST-REG-001` — Knowledge Registry Standard (input)
+- `TP-KNW-001` — YAML schema + ID convention (input)
 - `knowledge/architecture/AR-AI-BOS-004-capability-model.md` — Capability Model (dependency; source of capability IDs)
 - `AI-BOS/knowledge-registry/registry.json` — live registry (current state)
 

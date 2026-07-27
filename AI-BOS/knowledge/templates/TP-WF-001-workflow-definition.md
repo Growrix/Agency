@@ -29,6 +29,8 @@ tags:
   - ai-bos
   - template
   - workflow-definition
+capabilities:
+  - CAP-PLT-004
 ---
 
 # Workflow Definition Template

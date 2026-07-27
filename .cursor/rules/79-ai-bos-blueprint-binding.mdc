@@ -1,0 +1,31 @@
+---
+description: Bind Growrixos blueprints/ strategy work to AI-BOS project PRJ-BP-WEB-001. Apply when editing under blueprints/.
+globs: blueprints/**
+alwaysApply: false
+---
+
+# AI-BOS Blueprint Binding (blueprints/)
+
+When working under `blueprints/`, treat the delivery project as **`PRJ-BP-WEB-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-BP-WEB-001` before material changes.
+2. Load Blueprint domain pack: `HB-DLV-BP-001`, `WF-BLUEPRINT-FACTORY-001`, `RU-AI-BOS-BP-001`.
+3. Follow 12-stage pipeline via `bp-director` / `@website-blueprint-factory` (`AG-BP-DIR-001`).
+3. Record evidence in `.cursor/execution/template-tasks.md`.
+4. **No code or HTML** — markdown blueprints only.
+
+## Routing
+
+| Need | Agent |
+|------|-------|
+| Orchestrator | `bp-director` (`AG-BP-DIR-001`) |
+| Stages 01–12 | `bp-01` … `bp-12` (`AG-BP-STG-001` … `AG-BP-STG-012`) |
+| Uniqueness gate | `bp-11-uniqueness-enforcer` (`AG-BP-STG-011`, advisory) |
+| AI-BOS structural change | `@system-builder` |
+
+## Never
+
+- Skip strategy stages and jump to visual design
+- Emit HTML or application code from blueprint factory

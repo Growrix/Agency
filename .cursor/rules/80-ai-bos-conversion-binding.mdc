@@ -1,0 +1,28 @@
+---
+description: Bind Growrixos conversion scripts lane to AI-BOS cross-lane project knowledge. Apply when editing under scripts/conversion/.
+globs: scripts/conversion/**
+alwaysApply: false
+---
+
+# AI-BOS Conversion Binding
+
+When working under `scripts/conversion/`, treat delivery context as **cross-lane conversion** between HTML, Next.js, and SaaS surfaces.
+
+## Mandatory
+
+1. Read target lane project from `.cursor/brain/lane-router.yaml` — `PRJ-TMPL-HTML-001`, `PRJ-TMPL-NEXT-001`, or `PRJ-SAAS-GROWRIXOS-001`.
+2. Load that project's `consumes` KOs from `AI-BOS/project-registry/registry.json`.
+3. Use `@frontend-ui-converter` skill as runtime lead where applicable.
+4. Record evidence in the lane ledger (template-tasks.md or SaaS tasks.md).
+
+## Routing
+
+| Target | Project | Rule |
+|--------|---------|------|
+| sites/ | PRJ-TMPL-HTML-001 | 77 |
+| Frontend_Nextjs/ | PRJ-TMPL-NEXT-001 | 78 |
+| web/ | PRJ-SAAS-GROWRIXOS-001 | 76 |
+
+## Never
+
+- Invent conversion standards in chat — defer to lane domain packs and `universal/` depth SSOT.

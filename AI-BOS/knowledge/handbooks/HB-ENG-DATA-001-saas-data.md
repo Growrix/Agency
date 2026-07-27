@@ -30,6 +30,9 @@ tags:
   - handbook
   - data
   - saas
+capabilities:
+  - CAP-DLV-001
+  - CAP-OPS-003
 ---
 
 # SaaS Data and Persistence Handbook
@@ -76,7 +79,7 @@ Schema matches contracts; RLS policies reviewed; indexes for hot paths.
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/data/data-model.md
+- universal/Enterprise Level Guide/data/data-model.md
 - ST-SEC-001
 
 ## Related Knowledge Objects

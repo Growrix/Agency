@@ -4,13 +4,55 @@
     "name": "AI-BOS Foundation",
     "version": "1.0.0",
     "status": "active",
-    "updated": "2026-07-17"
+    "updated": "2026-07-18"
   },
   {
     "id": "PRJ-SAAS-GROWRIXOS-001",
     "name": "Growrixos SaaS",
     "version": "1.0.0",
     "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "PRJ-TMPL-HTML-001",
+    "name": "Growrixos HTML Templates",
+    "version": "1.0.0",
+    "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "PRJ-TMPL-NEXT-001",
+    "name": "Growrixos Next.js Migrations",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "PRJ-BP-WEB-001",
+    "name": "Growrixos Website Blueprint Factory",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-17"
+  },
+  {
+    "id": "PRJ-STR-FOUNDEROS-001",
+    "name": "Growrix Founder OS",
+    "version": "1.3.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "PRJ-GRO-MKOS-001",
+    "name": "Growrix Marketing OS",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "PRJ-ENG-SAASOS-001",
+    "name": "Growrix Engineering OS",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

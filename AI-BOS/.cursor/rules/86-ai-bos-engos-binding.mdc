@@ -1,0 +1,39 @@
+---
+description: Bind Engineering OS work to PRJ-ENG-SAASOS-001 Engineering department. Apply when orchestrating engineering programs, performance, documentation, or multi-track delivery advisory work.
+globs: ".cursor/brain/founder-os-memory/projects/**/engineering/**,.cursor/skills/engineering-cto/**,.cursor/skills/eng-performance/**,.cursor/skills/eng-documentation/**,AI-BOS/.cursor/skills/engineering-cto/**,AI-BOS/.cursor/skills/eng-*/**"
+alwaysApply: false
+---
+
+# AI-BOS Engineering OS Binding
+
+When working in the Engineering OS lane, treat delivery context as **`PRJ-ENG-SAASOS-001`** (Engineering department, peer to Marketing OS).
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-ENG-SAASOS-001`.
+2. Load `RU-AI-BOS-ENGOS-001` + `HB-ENG-CTO-001` + division handbook.
+3. Persist to `founder-os-memory/projects/<slug>/engineering/` per `TP-ENG-SAASOS-001`.
+4. End with Bangla handoff per `RU-AI-BOS-HANDOFF-001`.
+
+## Routing
+
+| Need | Agent |
+|------|-------|
+| Engineering department / multi-track | `@engineering-cto` (`AG-ENG-CTO-001`) |
+| Full-stack SaaS (web/) | `@senior-saas-developer` (via CTO brief) |
+| HTML templates | `@frontend-architect` |
+| Next.js migration | `@nextjs-migration-architect` |
+| Performance / CWV | `@eng-performance` |
+| Docs / ADRs / runbooks | `@eng-documentation` |
+| Marketing coordination | `@marketing-cmo` |
+| Business context | `@founder-os` |
+
+## Human gates
+
+Production deploy, secrets, OAuth, payments — stop with Bangla click-by-click instructions.
+
+## Never
+
+Skip phase-end quality enforcers; bypass CTO on cross-track engineering programs from Founder; auto-deploy to production.
+
+Knowledge-layer mirror: `RU-AI-BOS-ENGOS-001`.

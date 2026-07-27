@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "system": "AI-BOS",
   "description": "Root knowledge registry for the AI Business Operating System",
-  "last_updated": "2026-07-17",
+  "last_updated": "2026-07-18",
   "indexes": {
     "handbook": "handbook-index.json",
     "architecture": "architecture-index.json",
@@ -37,7 +37,7 @@
     },
     {
       "id": "AR-AI-BOS-002",
-      "title": "AI-BOS Constitution \u2014 Table of Contents",
+      "title": "AI-BOS Constitution â€” Table of Contents",
       "type": "architecture",
       "path": "knowledge/architecture/AR-AI-BOS-002-constitution-toc.md",
       "version": "1.0.0",
@@ -81,7 +81,7 @@
       "title": "AI-BOS Business Capability Model",
       "type": "architecture",
       "path": "knowledge/architecture/AR-AI-BOS-004-capability-model.md",
-      "version": "1.0.0",
+      "version": "1.4.0",
       "status": "active",
       "owner": "AI-BOS",
       "consumers": [
@@ -96,7 +96,7 @@
         "AR-AI-BOS-002",
         "AR-AI-BOS-003"
       ],
-      "updated": "2026-07-16"
+      "updated": "2026-07-18"
     },
     {
       "id": "AR-AI-BOS-005",
@@ -149,7 +149,7 @@
       "title": "AI-BOS Agent Architecture",
       "type": "architecture",
       "path": "knowledge/architecture/AR-AI-BOS-007-agent-architecture.md",
-      "version": "1.0.0",
+      "version": "1.2.0",
       "status": "active",
       "owner": "AI-BOS",
       "consumers": [
@@ -165,14 +165,14 @@
         "AR-AI-BOS-005",
         "AR-AI-BOS-006"
       ],
-      "updated": "2026-07-16"
+      "updated": "2026-07-18"
     },
     {
       "id": "AR-AI-BOS-008",
       "title": "AI-BOS MCP Architecture",
       "type": "architecture",
       "path": "knowledge/architecture/AR-AI-BOS-008-mcp-architecture.md",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "active",
       "owner": "AI-BOS",
       "consumers": [
@@ -188,7 +188,7 @@
         "AR-AI-BOS-005",
         "AR-AI-BOS-007"
       ],
-      "updated": "2026-07-16"
+      "updated": "2026-07-18"
     },
     {
       "id": "AR-AI-BOS-009",
@@ -1031,6 +1031,1213 @@
         "ST-AGT-001"
       ],
       "updated": "2026-07-17"
+    },
+    {
+      "id": "RU-AI-BOS-UNI-001",
+      "title": "Universal SSOT Binding Policy",
+      "type": "rule",
+      "path": "knowledge/rules/RU-AI-BOS-UNI-001-universal-ssot-binding.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-KNW-ARCH-001",
+        "AG-GOV-SYSBUILD-001",
+        "AG-KNW-VALID-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-001",
+        "CAP-KNW-004"
+      ],
+      "dependencies": [
+        "ST-KNW-001",
+        "AR-AI-BOS-005"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-ENG-HTML-001",
+      "title": "HTML Template Delivery Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-ENG-HTML-001-html-template-delivery.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-HTML-LEAD-001",
+        "AG-DLV-HTML-DS-001",
+        "AG-DLV-HTML-QA-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "ST-HTML-DS-001",
+        "ST-HTML-A11Y-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-HTML-DS-001",
+      "title": "Vanilla HTML Design System Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-HTML-DS-001-vanilla-design-system.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-HTML-DS-001",
+        "AG-DLV-HTML-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-004"
+      ],
+      "dependencies": [
+        "ST-KNW-001",
+        "RU-AI-BOS-UNI-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-HTML-A11Y-001",
+      "title": "HTML Accessibility Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-HTML-A11Y-001-accessibility.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-HTML-A11Y-001",
+        "AG-DLV-HTML-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-005"
+      ],
+      "dependencies": [
+        "RU-AI-BOS-UNI-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-HTML-PERF-001",
+      "title": "HTML Performance and SEO Head Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-HTML-PERF-001-performance-seo-head.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-HTML-PERF-001",
+        "AG-DLV-HTML-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-005",
+        "CAP-OPS-002"
+      ],
+      "dependencies": [
+        "RU-AI-BOS-UNI-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-DLV-HTML-SITE-001",
+      "title": "HTML Site Delivery Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-DLV-HTML-SITE-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-HTML-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-OPS-002"
+      ],
+      "dependencies": [
+        "ST-EXE-001",
+        "HB-ENG-HTML-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "RU-AI-BOS-HTML-001",
+      "title": "HTML Agents Must Consume AI-BOS Project Knowledge",
+      "type": "rule",
+      "path": "knowledge/rules/RU-AI-BOS-HTML-001-html-project-binding.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-HTML-LEAD-001",
+        "AG-DLV-HTML-DS-001",
+        "AG-DLV-HTML-A11Y-001",
+        "AG-DLV-HTML-PERF-001",
+        "AG-DLV-HTML-QA-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-004",
+        "CAP-DLV-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "ST-PRJ-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-ENG-NEXT-001",
+      "title": "Next.js Migration Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-ENG-NEXT-001-nextjs-migration.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-NEXT-LEAD-001",
+        "AG-DLV-NEXT-PARITY-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-002",
+        "CAP-DLV-004"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "ST-NEXT-MIG-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-NEXT-MIG-001",
+      "title": "Next.js Migration Contract",
+      "type": "standard",
+      "path": "knowledge/standards/ST-NEXT-MIG-001-migration-contract.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-NEXT-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-002"
+      ],
+      "dependencies": [
+        "HB-ENG-HTML-001",
+        "RU-AI-BOS-UNI-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-NEXT-PARITY-001",
+      "title": "Visual Parity Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-NEXT-PARITY-001-visual-parity.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-NEXT-PARITY-001",
+        "AG-DLV-NEXT-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-004",
+        "CAP-DLV-005"
+      ],
+      "dependencies": [
+        "ST-NEXT-MIG-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-MIGRATE-HTML-TO-NEXT-001",
+      "title": "HTML to Next.js Migration Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-MIGRATE-HTML-TO-NEXT-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-NEXT-LEAD-001"
+      ],
+      "capabilities": [
+        "CAP-DLV-002"
+      ],
+      "dependencies": [
+        "HB-ENG-NEXT-001",
+        "ST-NEXT-MIG-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "RU-AI-BOS-NEXT-001",
+      "title": "Next.js Agents Must Consume AI-BOS Project Knowledge",
+      "type": "rule",
+      "path": "knowledge/rules/RU-AI-BOS-NEXT-001-next-project-binding.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-DLV-NEXT-LEAD-001",
+        "AG-DLV-NEXT-DS-001",
+        "AG-DLV-NEXT-A11Y-001",
+        "AG-DLV-NEXT-PERF-001",
+        "AG-DLV-NEXT-QA-001",
+        "AG-DLV-NEXT-PARITY-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-004",
+        "CAP-DLV-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "ST-PRJ-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-DLV-BP-001",
+      "title": "Website Blueprint Factory Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-DLV-BP-001-blueprint-factory.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-BP-DIR-001"
+      ],
+      "capabilities": [
+        "CAP-STR-004",
+        "CAP-GRO-002"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "WF-BLUEPRINT-FACTORY-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "ST-BP-001",
+      "title": "Blueprint Stage Deliverables Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-BP-001-stage-deliverables.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-BP-DIR-001",
+        "AG-BP-STG-001"
+      ],
+      "capabilities": [
+        "CAP-STR-004"
+      ],
+      "dependencies": [
+        "HB-DLV-BP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-BLUEPRINT-FACTORY-001",
+      "title": "Blueprint Factory Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-BLUEPRINT-FACTORY-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-BP-DIR-001"
+      ],
+      "capabilities": [
+        "CAP-STR-004"
+      ],
+      "dependencies": [
+        "ST-EXE-001",
+        "ST-BP-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "RU-AI-BOS-BP-001",
+      "title": "Blueprint Agents Must Consume AI-BOS Project Knowledge",
+      "type": "rule",
+      "path": "knowledge/rules/RU-AI-BOS-BP-001-blueprint-project-binding.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-BP-DIR-001",
+        "AG-BP-STG-001",
+        "AG-BP-STG-002",
+        "AG-BP-STG-003",
+        "AG-BP-STG-004",
+        "AG-BP-STG-005",
+        "AG-BP-STG-006",
+        "AG-BP-STG-007",
+        "AG-BP-STG-008",
+        "AG-BP-STG-009",
+        "AG-BP-STG-010",
+        "AG-BP-STG-011",
+        "AG-BP-STG-012"
+      ],
+      "capabilities": [
+        "CAP-KNW-004",
+        "CAP-STR-004"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "ST-PRJ-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "HB-GRO-SEO-001",
+      "title": "SEO Handbook",
+      "type": "handbook",
+      "path": "knowledge/handbooks/HB-GRO-SEO-001-seo-handbook.md",
+      "version": "1.1.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001"
+      ],
+      "capabilities": [
+        "CAP-GRO-003",
+        "CAP-GRO-002"
+      ],
+      "dependencies": [
+        "RU-AI-BOS-UNI-001",
+        "ST-SEO-001"
+      ],
+      "updated": "2026-07-18"
+    },
+    {
+      "id": "ST-SEO-001",
+      "title": "SEO Quality Standard",
+      "type": "standard",
+      "path": "knowledge/standards/ST-SEO-001-seo-quality.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001"
+      ],
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "dependencies": [
+        "RU-AI-BOS-UNI-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "WF-SEO-AUDIT-001",
+      "title": "SEO Audit Workflow",
+      "type": "workflow",
+      "path": "knowledge/workflows/WF-SEO-AUDIT-001.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001"
+      ],
+      "capabilities": [
+        "CAP-GRO-003"
+      ],
+      "dependencies": [
+        "HB-GRO-SEO-001",
+        "ST-SEO-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "id": "RU-AI-BOS-SEO-001",
+      "title": "SEO Agents Must Consume AI-BOS SEO Pack",
+      "type": "rule",
+      "path": "knowledge/rules/RU-AI-BOS-SEO-001-seo-binding.md",
+      "version": "1.0.0",
+      "status": "active",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-SEO-TECH-001",
+        "AG-GRO-SEO-ON-001",
+        "AG-GRO-SEO-OFF-001"
+      ],
+      "capabilities": [
+        "CAP-KNW-004",
+        "CAP-GRO-003"
+      ],
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "ST-PRJ-001"
+      ],
+      "updated": "2026-07-17"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "id": "RU-AI-BOS-VAULT-001",
+      "type": "rule",
+      "version": "1.0.0",
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-001"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "AR-AI-BOS-007",
+        "RU-AI-BOS-UNI-001"
+      ],
+      "status": "active",
+      "path": "knowledge/rules/RU-AI-BOS-VAULT-001-vault-integrity.md",
+      "title": "AI-BOS Vault Integrity — Single Portable Root"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-GOV-SYSBUILD-001",
+        "AG-DLV-SAAS-001",
+        "AG-DLV-FE-001",
+        "AG-DLV-BE-001",
+        "AG-KNW-ARCH-001",
+        "AG-KNW-VALID-001"
+      ],
+      "id": "RU-AI-BOS-HANDOFF-001",
+      "type": "rule",
+      "version": "1.1.0",
+      "capabilities": [
+        "CAP-ORG-003",
+        "CAP-PLT-001",
+        "CAP-OPS-005"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "AR-AI-BOS-007",
+        "RU-AI-BOS-VAULT-001"
+      ],
+      "status": "active",
+      "path": "knowledge/rules/RU-AI-BOS-HANDOFF-001-next-agent-suggestion.md",
+      "title": "Next-Agent Suggestion and Wrong-Agent STOP"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "id": "HB-PLT-SYSBUILD-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "capabilities": [
+        "CAP-OPS-005",
+        "CAP-PLT-001"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "RU-AI-BOS-VAULT-001"
+      ],
+      "status": "active",
+      "path": "knowledge/handbooks/HB-PLT-SYSBUILD-001-system-builder.md",
+      "title": "System Builder Handbook — Vault Platform Builder"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-DLV-SAAS-001"
+      ],
+      "id": "HB-DLV-SAAS-ORCH-001",
+      "type": "handbook",
+      "version": "1.1.0",
+      "capabilities": [
+        "CAP-DLV-001",
+        "CAP-ORG-003"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "RU-AI-BOS-SAAS-001"
+      ],
+      "status": "active",
+      "path": "knowledge/handbooks/HB-DLV-SAAS-ORCH-001-saas-orchestrator.md",
+      "title": "Senior SaaS Developer — Cross-Layer Orchestrator Contract"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "id": "ST-PLT-ENV-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "capabilities": [
+        "CAP-PLT-005"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "RU-AI-BOS-VAULT-001"
+      ],
+      "status": "active",
+      "path": "knowledge/standards/ST-PLT-ENV-001-environment-projection.md",
+      "title": "Environment Projection Standard"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "id": "WF-PLT-SYSBUILD-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "capabilities": [
+        "CAP-PLT-004"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "HB-PLT-SYSBUILD-001"
+      ],
+      "status": "active",
+      "path": "knowledge/workflows/WF-PLT-SYSBUILD-001.md",
+      "title": "System Builder Vault Build Workflow"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-STR-FOUNDER-001"
+      ],
+      "id": "HB-STR-FOUNDER-001",
+      "type": "handbook",
+      "version": "1.1.0",
+      "capabilities": [
+        "CAP-STR-006",
+        "CAP-STR-007",
+        "CAP-KNW-007"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "AR-AI-BOS-004",
+        "AR-AI-BOS-007",
+        "ST-STR-MEMORY-001"
+      ],
+      "status": "active",
+      "path": "knowledge/handbooks/HB-STR-FOUNDER-001-founder-os.md",
+      "title": "Founder OS Handbook — Strategy Orchestrator"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-STR-FOUNDER-001"
+      ],
+      "id": "WF-STR-FOUNDER-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "capabilities": [
+        "CAP-STR-006",
+        "CAP-STR-007"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "HB-STR-FOUNDER-001"
+      ],
+      "status": "active",
+      "path": "knowledge/workflows/WF-STR-FOUNDER-001.md",
+      "title": "Founder Intake-to-Plan Workflow"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-STR-FOUNDER-001",
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "id": "ST-PLT-REWIRE-001",
+      "type": "standard",
+      "version": "1.1.0",
+      "capabilities": [
+        "CAP-PLT-003",
+        "CAP-STR-006"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "AR-AI-BOS-011",
+        "RU-AI-BOS-VAULT-001"
+      ],
+      "status": "active",
+      "path": "knowledge/standards/ST-PLT-REWIRE-001-ai-bos-rewire-protocol.md",
+      "title": "AI-BOS Rewire Protocol — Wire and Clean Any Project"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-STR-FOUNDER-001"
+      ],
+      "id": "ST-STR-MEMORY-001",
+      "type": "standard",
+      "version": "1.1.0",
+      "capabilities": [
+        "CAP-KNW-007"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "HB-STR-FOUNDER-001"
+      ],
+      "status": "active",
+      "path": "knowledge/standards/ST-STR-MEMORY-001-founder-memory.md",
+      "title": "Founder Personal Memory Architecture"
+    },
+    {
+      "updated": "2026-07-18",
+      "consumers": [
+        "AG-STR-FOUNDER-001",
+        "AG-GOV-SYSBUILD-001"
+      ],
+      "id": "TP-STR-FOUNDER-001",
+      "type": "template",
+      "version": "1.0.0",
+      "capabilities": [
+        "CAP-STR-006"
+      ],
+      "owner": "AI-BOS",
+      "dependencies": [
+        "ST-PRJ-001",
+        "HB-STR-FOUNDER-001"
+      ],
+      "status": "active",
+      "path": "knowledge/templates/TP-STR-FOUNDER-001.md",
+      "title": "Founder OS Project Template"
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "HB-STR-RESEARCH-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/handbooks/HB-STR-RESEARCH-001-founder-research.md",
+      "title": "Founder Research Handbook — Market and Competitor Intelligence",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-STR-RESEARCH-001",
+        "AG-STR-FOUNDER-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "HB-GRO-MARKET-001",
+      "type": "handbook",
+      "version": "1.1.0",
+      "status": "active",
+      "path": "knowledge/handbooks/HB-GRO-MARKET-001-founder-marketing.md",
+      "title": "Founder Marketing Handbook — Offers, Funnels, and Messaging",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-MARKET-001",
+        "AG-STR-FOUNDER-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "HB-GRO-SALES-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/handbooks/HB-GRO-SALES-001-founder-sales.md",
+      "title": "Founder Sales Handbook — Pipeline, Proposals, Client Conversations",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-SALES-001",
+        "AG-STR-FOUNDER-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "HB-OPS-FIN-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/handbooks/HB-OPS-FIN-001-founder-finance.md",
+      "title": "Founder Finance Handbook — Pricing and Unit Economics",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-STR-FOUNDER-001",
+        "AG-GRO-MARKET-001",
+        "AG-GRO-SALES-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "HB-PLT-AUTOMATION-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/handbooks/HB-PLT-AUTOMATION-001-founder-automation.md",
+      "title": "Founder Automation Handbook — n8n and AI Workflow Planning",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-PLT-AUTOMATION-001",
+        "AG-STR-FOUNDER-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "WF-STR-RESEARCH-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/workflows/WF-STR-RESEARCH-001.md",
+      "title": "Founder Research Workflow",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-STR-RESEARCH-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "WF-GRO-OFFER-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/workflows/WF-GRO-OFFER-001.md",
+      "title": "Offer to Funnel to Sales Workflow",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GRO-MARKET-001",
+        "AG-GRO-SALES-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "RU-AI-BOS-FOUNDER-001",
+      "type": "rule",
+      "version": "1.3.0",
+      "status": "active",
+      "path": "knowledge/rules/RU-AI-BOS-FOUNDER-001-founder-power-pack.md",
+      "title": "Founder OS Power Pack Binding Rule",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-STR-FOUNDER-001",
+        "AG-STR-RESEARCH-001",
+        "AG-GRO-MARKET-001",
+        "AG-GRO-SALES-001",
+        "AG-PLT-AUTOMATION-001"
+      ]
+    },
+    {
+      "updated": "2026-07-18",
+      "id": "ST-MCP-PORT-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "status": "active",
+      "path": "knowledge/standards/ST-MCP-PORT-001-mcp-port.md",
+      "title": "MCP Port Standard — Vault Copy-In from External Experiments",
+      "owner": "AI-BOS",
+      "consumers": [
+        "AG-GOV-SYSBUILD-001"
+      ]
+    },
+    {
+      "id": "AR-GRO-MKOS-001",
+      "type": "architecture",
+      "version": "1.1.0",
+      "path": "knowledge/architecture/AR-GRO-MKOS-001-marketing-os-architecture.md",
+      "title": "Marketing OS Architecture",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-MKOS-001",
+      "type": "handbook",
+      "version": "1.1.0",
+      "path": "knowledge/handbooks/HB-GRO-MKOS-001-marketing-os-handbook.md",
+      "title": "Marketing OS Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-UNIVERSAL-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-UNIVERSAL-001-marketing-universal-rules.md",
+      "title": "Marketing Universal Rules",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-INTEL-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-INTEL-001-marketing-intelligence.md",
+      "title": "Marketing Intelligence Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-BRAND-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-BRAND-001-marketing-brand.md",
+      "title": "Marketing Brand Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-CONTENT-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-CONTENT-001-marketing-content.md",
+      "title": "Marketing Content Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-SEO-GEO-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-SEO-GEO-001-marketing-geo.md",
+      "title": "AI Search GEO Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-SOCIAL-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-SOCIAL-001-marketing-social.md",
+      "title": "Marketing Social Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-ADS-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-ADS-001-marketing-paid-ads.md",
+      "title": "Marketing Paid Ads Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-EMAIL-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-EMAIL-001-marketing-email.md",
+      "title": "Marketing Email Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-CRO-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-CRO-001-marketing-cro.md",
+      "title": "Marketing CRO Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-ANALYTICS-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-ANALYTICS-001-marketing-analytics.md",
+      "title": "Marketing Analytics Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-CREATIVE-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-CREATIVE-001-marketing-creative.md",
+      "title": "Marketing Creative Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-VIDEO-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-VIDEO-001-marketing-video.md",
+      "title": "Marketing Video Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-COMMUNITY-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-COMMUNITY-001-marketing-community.md",
+      "title": "Marketing Community Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-MKT-MEMORY-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-MKT-MEMORY-001-marketing-memory.md",
+      "title": "Marketing Memory Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "RU-AI-BOS-MKOS-001",
+      "type": "rule",
+      "version": "1.1.0",
+      "path": "knowledge/rules/RU-AI-BOS-MKOS-001-marketing-os-binding.md",
+      "title": "Marketing OS Binding Rule",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "ST-GRO-MKT-MEMORY-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "path": "knowledge/standards/ST-GRO-MKT-MEMORY-001-marketing-memory-layout.md",
+      "title": "Marketing Memory Layout Standard",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "ST-GRO-SCORECARD-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "path": "knowledge/standards/ST-GRO-SCORECARD-001-marketing-kpi-scorecard.md",
+      "title": "Marketing KPI Scorecard Standard",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "ST-GRO-CLAIMS-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "path": "knowledge/standards/ST-GRO-CLAIMS-001-marketing-claims-compliance.md",
+      "title": "Marketing Claims Compliance Standard",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "WF-GRO-CAMPAIGN-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "path": "knowledge/workflows/WF-GRO-CAMPAIGN-001-marketing-campaign-lifecycle.md",
+      "title": "Marketing Campaign Lifecycle Workflow",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "WF-GRO-LAUNCH-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "path": "knowledge/workflows/WF-GRO-LAUNCH-001-marketing-gtm-launch.md",
+      "title": "Marketing GTM Launch Workflow",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "TP-GRO-MKOS-001",
+      "type": "template",
+      "version": "1.0.0",
+      "path": "knowledge/templates/TP-GRO-MKOS-001-marketing-os-project-template.md",
+      "title": "Marketing OS Project Template",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "AR-GRO-SEOOS-001",
+      "type": "architecture",
+      "version": "1.0.0",
+      "path": "knowledge/architecture/AR-GRO-SEOOS-001-seo-os-architecture.md",
+      "title": "SEO OS Architecture",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-SEOOS-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-SEOOS-001-seo-os-lead-handbook.md",
+      "title": "SEO OS Lead Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-SEO-INTL-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-SEO-INTL-001-international-seo.md",
+      "title": "International SEO Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-SEO-AUTO-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-SEO-AUTO-001-seo-automation.md",
+      "title": "SEO Automation Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-GRO-SEO-ALGO-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-GRO-SEO-ALGO-001-algorithm-watch.md",
+      "title": "Algorithm Watch Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "WF-GRO-SEO-PROGRAM-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "path": "knowledge/workflows/WF-GRO-SEO-PROGRAM-001-seo-program-lifecycle.md",
+      "title": "SEO Program Lifecycle Workflow",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "ST-GRO-SEO-SCORECARD-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "path": "knowledge/standards/ST-GRO-SEO-SCORECARD-001-seo-kpi-scorecard.md",
+      "title": "SEO KPI Scorecard Standard",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "RU-AI-BOS-SEOOS-001",
+      "type": "rule",
+      "version": "1.0.0",
+      "path": "knowledge/rules/RU-AI-BOS-SEOOS-001-seo-os-binding.md",
+      "title": "SEO OS Binding Rule",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "TP-GRO-SEOOS-001",
+      "type": "template",
+      "version": "1.0.0",
+      "path": "knowledge/templates/TP-GRO-SEOOS-001-seo-os-project-template.md",
+      "title": "SEO OS Project Template",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "AR-ENG-SAASOS-001",
+      "type": "architecture",
+      "version": "1.0.0",
+      "path": "knowledge/architecture/AR-ENG-SAASOS-001-engineering-os-architecture.md",
+      "title": "Engineering OS Architecture",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-ENG-CTO-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-ENG-CTO-001-engineering-cto-handbook.md",
+      "title": "Engineering OS CTO Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-ENG-PERF-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-ENG-PERF-001-performance-engineering-handbook.md",
+      "title": "Performance Engineering Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "HB-ENG-DOCS-001",
+      "type": "handbook",
+      "version": "1.0.0",
+      "path": "knowledge/handbooks/HB-ENG-DOCS-001-engineering-documentation-handbook.md",
+      "title": "Engineering Documentation Handbook",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "WF-ENG-PROGRAM-001",
+      "type": "workflow",
+      "version": "1.0.0",
+      "path": "knowledge/workflows/WF-ENG-PROGRAM-001-engineering-program-lifecycle.md",
+      "title": "Engineering Program Lifecycle",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "ST-ENG-SCORECARD-001",
+      "type": "standard",
+      "version": "1.0.0",
+      "path": "knowledge/standards/ST-ENG-SCORECARD-001-engineering-kpi-scorecard.md",
+      "title": "Engineering KPI Scorecard",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "RU-AI-BOS-ENGOS-001",
+      "type": "rule",
+      "version": "1.0.0",
+      "path": "knowledge/rules/RU-AI-BOS-ENGOS-001-engineering-os-binding.md",
+      "title": "Engineering OS Binding Rule",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
+    },
+    {
+      "id": "TP-ENG-SAASOS-001",
+      "type": "template",
+      "version": "1.0.0",
+      "path": "knowledge/templates/TP-ENG-SAASOS-001-engineering-os-project-template.md",
+      "title": "Engineering OS Project Template",
+      "updated": "2026-07-18",
+      "status": "active",
+      "owner": "AI-BOS"
     }
   ]
 }

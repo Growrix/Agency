@@ -1,0 +1,26 @@
+---
+description: AI-BOS vault-first — never register external agent/skill roots as SSOT. Apply when working under AI-BOS/.
+globs: "AI-BOS/**"
+alwaysApply: false
+---
+
+# AI-BOS Vault Integrity
+
+SSOT: **`RU-AI-BOS-VAULT-001`**.
+
+## Mandatory for @system-builder
+
+1. Create/edit agents, skills, rules, MCP, brain only under `AI-BOS/`.
+2. If a file lives outside → **copy into vault** → then register.
+3. `runtime_projection` must be `vault-skill:<name>` or `vault-agent:<name>`.
+4. Never register host `.cursor/`, `.github/agents/`, or personal `~/.cursor/skills/` as canonical.
+
+## Surfaces
+
+| Surface | Path |
+|---------|------|
+| Agents | `AI-BOS/.cursor/agents/` |
+| Skills | `AI-BOS/.cursor/skills/` |
+| Rules | `AI-BOS/.cursor/rules/` |
+| Brain | `AI-BOS/.cursor/brain/` |
+| MCP | `AI-BOS/mcp/` |

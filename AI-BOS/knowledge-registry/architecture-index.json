@@ -10,7 +10,7 @@
   },
   {
     "id": "AR-AI-BOS-002",
-    "title": "AI-BOS Constitution \u2014 Table of Contents",
+    "title": "AI-BOS Constitution — Table of Contents",
     "type": "architecture",
     "path": "knowledge/architecture/AR-AI-BOS-002-constitution-toc.md",
     "version": "1.0.0",
@@ -31,9 +31,9 @@
     "title": "AI-BOS Business Capability Model",
     "type": "architecture",
     "path": "knowledge/architecture/AR-AI-BOS-004-capability-model.md",
-    "version": "1.0.0",
+    "version": "1.3.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-18"
   },
   {
     "id": "AR-AI-BOS-005",
@@ -67,9 +67,9 @@
     "title": "AI-BOS MCP Architecture",
     "type": "architecture",
     "path": "knowledge/architecture/AR-AI-BOS-008-mcp-architecture.md",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "status": "active",
-    "updated": "2026-07-16"
+    "updated": "2026-07-18"
   },
   {
     "id": "AR-AI-BOS-009",
@@ -106,5 +106,23 @@
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "AR-GRO-MKOS-001",
+    "title": "Marketing OS Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-GRO-MKOS-001-marketing-os-architecture.md",
+    "version": "1.1.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "AR-GRO-SEOOS-001",
+    "title": "SEO OS Architecture",
+    "type": "architecture",
+    "path": "knowledge/architecture/AR-GRO-SEOOS-001-seo-os-architecture.md",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

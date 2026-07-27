@@ -9,8 +9,8 @@ import { ShopProductCard } from "@/components/shop/ShopProductCard";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Free Products",
-  description: "Browse free offers and starter downloads from the catalog.",
+  title: "Free Products — Free Templates & Starters",
+  description: "Browse free website templates, HTML business profiles, SaaS starters, and toolkits from the Growrix OS catalog.",
   path: "/digital-products/free",
 });
 

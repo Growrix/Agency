@@ -34,6 +34,10 @@ tags:
   - ai-bos
   - workflow
   - saas
+capabilities:
+  - CAP-DLV-001
+  - CAP-DLV-005
+  - CAP-OPS-002
 ---
 
 # SaaS Feature Delivery Workflow

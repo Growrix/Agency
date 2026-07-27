@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -28,6 +28,9 @@ tags:
   - constitution
   - toc
   - governance
+capabilities:
+  - CAP-STR-001
+  - CAP-OPS-005
 ---
 
 # AI-BOS Constitution — Table of Contents
@@ -126,9 +129,9 @@ AI-BOS Constitution
 
 ## References
 
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/ai-bos-planning-prompt.md` — Phase 2 spec
+- `TP-KNW-001, ST-KNW-001` — Phase 2 spec
 - `knowledge/architecture/AR-AI-BOS-001-vision.md` — Phase 1 approved Vision (input to Section 1)
-- `AI-BOS/.cursor/rules/75-ai-bos-governance.mdc` — local governance rule (must align with Constitution Section 5 and 7)
+- `docs/reference/runtime-surface-inventory.md (rule 75 projection)` — local governance rule (must align with Constitution Section 5 and 7)
 
 ## Related Knowledge Objects
 

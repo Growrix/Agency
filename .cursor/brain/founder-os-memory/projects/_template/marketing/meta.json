@@ -1,0 +1,9 @@
+{
+  "mode": "product",
+  "brand_slug": "example-brand",
+  "primary_kpi": "qualified_leads",
+  "active_campaign_id": null,
+  "cmo_agent": "AG-GRO-CMO-001",
+  "project_id": "PRJ-GRO-MKOS-001",
+  "updated": "2026-07-18"
+}

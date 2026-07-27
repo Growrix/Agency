@@ -1,0 +1,20 @@
+{
+  "name": "@ai-bos/knowledge-registry-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for AI-BOS knowledge registry (MC-KNW-REGISTRY-001)",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "ai-bos-knowledge-registry": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

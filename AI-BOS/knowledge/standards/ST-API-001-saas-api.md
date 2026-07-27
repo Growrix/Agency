@@ -28,6 +28,9 @@ tags:
   - ai-bos
   - standard
   - api
+capabilities:
+  - CAP-DLV-001
+  - CAP-DLV-005
 ---
 
 # SaaS API Design Standard
@@ -74,7 +77,7 @@ Schema exists; authz declared; tests cover happy + auth failure paths.
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/api/api-design.md
+- universal/Enterprise Level Guide/api/api-design.md
 
 ## Related Knowledge Objects
 

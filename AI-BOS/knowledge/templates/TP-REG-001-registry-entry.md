@@ -28,6 +28,8 @@ tags:
   - ai-bos
   - template
   - registry-entry
+capabilities:
+  - CAP-KNW-002
 ---
 
 # Registry Entry Template

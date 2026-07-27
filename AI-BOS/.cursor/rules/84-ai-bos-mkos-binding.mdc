@@ -1,0 +1,39 @@
+---
+description: Bind Marketing OS work to PRJ-GRO-MKOS-001 and I15 knowledge catalog. Apply when orchestrating marketing campaigns, content, SEO, ads, or analytics advisory work.
+globs: ".cursor/brain/founder-os-memory/projects/**/marketing/**,.cursor/skills/marketing-cmo/**,.cursor/skills/mkt-*/**,AI-BOS/.cursor/skills/marketing-cmo/**,AI-BOS/.cursor/skills/mkt-*/**"
+alwaysApply: false
+---
+
+# AI-BOS Marketing OS Binding
+
+When working in the Marketing OS lane, treat delivery context as **`PRJ-GRO-MKOS-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-GRO-MKOS-001` before material marketing work.
+2. Load `RU-AI-BOS-MKOS-001` + `HB-GRO-MKOS-001` + division handbook for assigned agent.
+3. Persist outcomes under `founder-os-memory/projects/<slug>/marketing/` per `ST-GRO-MKT-MEMORY-001`.
+4. End with Bangla handoff per `RU-AI-BOS-HANDOFF-001`.
+
+## Routing
+
+| Need | Agent |
+|------|-------|
+| Marketing entry / multi-channel | `@marketing-cmo` (`AG-GRO-CMO-001`) |
+| Offer / funnel (early) | `@founder-marketing` → escalate to CMO when channels multiply |
+| Business context | `@founder-os` |
+| Site implementation | `@frontend-architect` / `@frontend-content-strategist` |
+| Sales handoff | `@founder-sales` |
+| Vault / registry | `@system-builder` |
+
+## Human gates (never automate)
+
+Ad spend, ad account creation, OAuth, publish to social, email send — stop with Bangla click-by-click instructions.
+
+## Never
+
+- Write product code in marketing agents — delegate to `AG-DLV-*`
+- Fabricate analytics or performance data
+- Skip claims review (`ST-GRO-CLAIMS-001`) on external copy
+
+Knowledge-layer mirror: `RU-AI-BOS-MKOS-001`.

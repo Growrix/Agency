@@ -28,6 +28,8 @@ tags:
   - ai-bos
   - template
   - documentation-page
+capabilities:
+  - CAP-KNW-005
 ---
 
 # Documentation Page Template

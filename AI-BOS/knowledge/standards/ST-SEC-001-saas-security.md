@@ -30,6 +30,8 @@ tags:
   - ai-bos
   - standard
   - security
+capabilities:
+  - CAP-OPS-003
 ---
 
 # SaaS Security Standard
@@ -80,8 +82,8 @@ Authz tests exist; secrets audit clean; webhook verify present.
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/operations/security-and-operations.md
-- DOC/Universal/Enterprise Level Guide/backend/auth-authorization-and-rls.md
+- universal/Enterprise Level Guide/operations/security-and-operations.md
+- universal/Enterprise Level Guide/backend/auth-authorization-and-rls.md
 
 ## Related Knowledge Objects
 

@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - mcp-server-definition
+capabilities:
+  - CAP-PLT-002
+  - CAP-PLT-003
 ---
 
 # MCP Server Definition Standard
@@ -57,9 +60,9 @@ MC-<DOMAIN>-<NAME>-<NNN>
 
 1. knowledge.read
 2. knowledge.search
-3. knowledge.validate
-4. knowledge.list
-5. knowledge.resolve
+3. knowledge.related
+4. knowledge.dependencies
+5. knowledge.validate
 
 ### Registry entry fields
 

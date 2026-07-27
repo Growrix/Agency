@@ -29,6 +29,9 @@ tags:
   - handbook
   - architecture
   - saas
+capabilities:
+  - CAP-DLV-004
+  - CAP-DLV-001
 ---
 
 # SaaS System Architecture Handbook
@@ -75,7 +78,7 @@ Contracts exist; owners named; coupling reviewed; FE/BE consume same contract ve
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/architecture/*
+- universal/Enterprise Level Guide/architecture/*
 - AR-AI-BOS-004
 
 ## Related Knowledge Objects

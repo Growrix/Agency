@@ -1,0 +1,24 @@
+---
+description: All agents must suggest next steps in simple Bangla with examples. SSOT RU-AI-BOS-HANDOFF-001 v1.1.
+alwaysApply: true
+---
+
+# Next-Agent Suggestion (vault)
+
+Follow **`RU-AI-BOS-HANDOFF-001` v1.1.0** (`AI-BOS/knowledge/rules/RU-AI-BOS-HANDOFF-001-next-agent-suggestion.md`).
+
+## Required
+
+1. After every material final outcome, add **`## পরবর্তী ধাপ (সহজ বাংলা)`** with: what finished, 1–3 optional next agents (each with কেন + উদাহরণ + কখন ডাকবে না), what not to pick, and **তোমার সিদ্ধান্ত** (suggestions are optional — human chooses).
+2. Wrong agent → **`## ভুল এজেন্ট — থামছি`** in Bangla + correct `@agent` + copy-paste hint — no further edits.
+3. Write for a **beginner SaaS developer** (10th-grade Bangla); keep `@name` and `AG-*` in English for invocation.
+
+## Routing sources
+
+- `AI-BOS/agent-registry/registry.json` handoffs
+- `AI-BOS/.cursor/brain/lane-router.yaml` intent_routing
+- Project binding rules (RU-AI-BOS-SAAS-001, etc.)
+
+## Vault
+
+Agent files and skills must live under this vault per **`RU-AI-BOS-VAULT-001`**.

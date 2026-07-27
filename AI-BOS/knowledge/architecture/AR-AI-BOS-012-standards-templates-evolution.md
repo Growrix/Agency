@@ -44,6 +44,12 @@ tags:
   - repository-structure
   - terminal-phase
   - foundational
+capabilities:
+  - CAP-OPS-005
+  - CAP-PLT-003
+  - CAP-KNW-001
+  - CAP-KNW-002
+  - CAP-STR-005
 ---
 
 # AI-BOS Standards, Templates, Evolution Strategy, and Repository Structure
@@ -387,7 +393,7 @@ The current AI-BOS root already matches most of this layout. Gaps to close in th
 - `knowledge/architecture/AR-AI-BOS-009-execution-architecture.md` — Execution Architecture (dependency; source of `ST-EXE-001`)
 - `knowledge/architecture/AR-AI-BOS-010-governance.md` — Governance (dependency; source of amendment process referenced in Evolution Strategy)
 - `knowledge/architecture/AR-AI-BOS-011-project-architecture.md` — Project Architecture (dependency; source of repository emergence rule and `project-registry/`)
-- `AI-BOS/.cursor/audits/2026-07-16-d1-repo-promotion-reevaluation.md` — D1 re-evaluation (deferred final decision to after Phase 12)
+- `docs/reference/runtime-surface-inventory.md` — D1 re-evaluation (deferred final decision to after Phase 12)
 
 ## Related Knowledge Objects
 

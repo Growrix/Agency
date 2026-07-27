@@ -5,5 +5,19 @@
     "version": "1.0.0",
     "status": "active",
     "updated": "2026-07-17"
+  },
+  {
+    "id": "MC-PLT-CODEBASE-001",
+    "name": "Codebase Intelligence Server",
+    "version": "1.0.0",
+    "status": "active",
+    "updated": "2026-07-18"
+  },
+  {
+    "id": "MC-KNW-RETRIEVE-001",
+    "name": "Knowledge Retrieve Server",
+    "version": "1.1.0",
+    "status": "active",
+    "updated": "2026-07-18"
   }
 ]

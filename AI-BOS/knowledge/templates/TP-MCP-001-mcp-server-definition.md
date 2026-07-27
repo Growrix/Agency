@@ -28,6 +28,8 @@ tags:
   - ai-bos
   - template
   - mcp-server-definition
+capabilities:
+  - CAP-PLT-002
 ---
 
 # MCP Server Definition Template

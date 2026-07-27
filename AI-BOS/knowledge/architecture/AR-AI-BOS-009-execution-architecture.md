@@ -5,7 +5,7 @@ type: architecture
 category: governance
 domain: ai-bos
 version: 1.0.0
-status: draft
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -33,6 +33,10 @@ tags:
   - workflows
   - orchestration
   - foundational
+capabilities:
+  - CAP-PLT-004
+  - CAP-OPS-005
+  - CAP-KNW-001
 ---
 
 # AI-BOS Execution Architecture
@@ -267,7 +271,7 @@ These mappings are illustrative; concrete workflow definitions are authored in P
 - `knowledge/architecture/AR-AI-BOS-005-knowledge-architecture.md` — Knowledge Architecture (dependency; workflows are KOs of type `WF`)
 - `knowledge/architecture/AR-AI-BOS-007-agent-architecture.md` — Agent Architecture (dependency; execution orchestrates agents)
 - `knowledge/architecture/AR-AI-BOS-008-mcp-architecture.md` — MCP Architecture (dependency; agents call MCP servers during execution)
-- `AI-BOS/.cursor/skills/ai-bos-architect/SKILL.md` — this skill's phase workflow is itself a `sequential + human_gated` execution
+- `docs/reference/runtime-surface-inventory.md (AG-KNW-ARCH-001 projection)` — this skill's phase workflow is itself a `sequential + human_gated` execution
 
 ## Related Knowledge Objects
 

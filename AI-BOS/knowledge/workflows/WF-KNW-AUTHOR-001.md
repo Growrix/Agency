@@ -30,6 +30,9 @@ tags:
   - ai-bos
   - workflow
   - knowledge
+capabilities:
+  - CAP-KNW-001
+  - CAP-PLT-004
 ---
 
 # Knowledge Object Authoring Workflow

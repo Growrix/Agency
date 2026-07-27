@@ -6,8 +6,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildBreadcrumbListSchema, buildWebPageSchema } from "@/lib/seo-structured-data";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "AI Assistant",
-  description: "Get instant, business-aware answers about Growrix OS services, pricing, and timelines.",
+  title: "AI Assistant — Growrix OS Project Concierge",
+  description: "Get instant, business-aware answers about Growrix OS services, pricing, timelines, and digital products.",
   path: "/ai-concierge",
 });
 

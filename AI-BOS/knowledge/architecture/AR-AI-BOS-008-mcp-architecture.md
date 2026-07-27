@@ -4,8 +4,8 @@ title: AI-BOS MCP Architecture
 type: architecture
 category: governance
 domain: ai-bos
-version: 1.0.0
-status: draft
+version: 1.1.0
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -32,6 +32,10 @@ tags:
   - mcp
   - capabilities
   - foundational
+capabilities:
+  - CAP-PLT-002
+  - CAP-PLT-003
+  - CAP-KNW-003
 ---
 
 # AI-BOS MCP Architecture
@@ -263,7 +267,7 @@ The Growrixos workspace already uses MCP servers (e.g. `plugin-shadcn-shadcn`, `
 - `knowledge/architecture/AR-AI-BOS-004-capability-model.md` — Capability Model (dependency; source of capability IDs)
 - `knowledge/architecture/AR-AI-BOS-005-knowledge-architecture.md` — Knowledge Architecture (dependency; defines KO substrate and registry)
 - `knowledge/architecture/AR-AI-BOS-007-agent-architecture.md` — Agent Architecture (dependency; agents call MCP servers)
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/knowledge-registry-standard.md` — Knowledge Registry Standard (source of the five canonical services)
+- `ST-KNW-001, ST-REG-001` — Knowledge Registry Standard (source of the five canonical services)
 
 ## Related Knowledge Objects
 
@@ -277,3 +281,4 @@ The Growrixos workspace already uses MCP servers (e.g. `plugin-shadcn-shadcn`, `
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0.0 | 2026-07-16 | Initial Phase 8 MCP Architecture — MCP identity, separate MCP registry, capability contracts, five canonical knowledge-query services, agent-to-MCP binding (one-way), vendor-independent runtime projection, capability binding. Awaiting user approval. |
+| 1.1.0 | 2026-07-18 | I13 — register `MC-PLT-CODEBASE-001`, `MC-KNW-RETRIEVE-001`; Founder OS consumers; `ST-MCP-PORT-001` port rules. |

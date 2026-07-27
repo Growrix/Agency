@@ -27,6 +27,9 @@ tags:
   - ai-bos
   - standard
   - documentation
+capabilities:
+  - CAP-KNW-005
+  - CAP-PLT-003
 ---
 
 # Documentation Standard

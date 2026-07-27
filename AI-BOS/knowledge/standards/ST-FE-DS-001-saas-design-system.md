@@ -28,6 +28,9 @@ tags:
   - ai-bos
   - standard
   - design-system
+capabilities:
+  - CAP-DLV-004
+  - CAP-DLV-005
 ---
 
 # SaaS Frontend Design System Standard
@@ -71,8 +74,8 @@ No raw hex/spacing magic numbers in feature UI; primitives reused; focus-visible
 
 ## References
 
-- DOC/Universal/Enterprise Level Guide/frontend/frontend-rules-and-design-system.md
-- DOC/Universal/Enterprise Level Guide/frontend/component-and-styling-standards.md
+- universal/Enterprise Level Guide/frontend/frontend-rules-and-design-system.md
+- universal/Enterprise Level Guide/frontend/component-and-styling-standards.md
 
 ## Related Knowledge Objects
 

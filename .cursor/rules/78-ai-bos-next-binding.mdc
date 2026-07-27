@@ -1,0 +1,33 @@
+---
+description: Bind Growrixos Frontend_Nextjs/ migration work to AI-BOS project PRJ-TMPL-NEXT-001. Apply when editing under Frontend_Nextjs/.
+globs: Frontend_Nextjs/**
+alwaysApply: false
+---
+
+# AI-BOS Next.js Binding (Frontend_Nextjs/)
+
+When working under `Frontend_Nextjs/`, treat the delivery project as **`PRJ-TMPL-NEXT-001`**.
+
+## Mandatory
+
+1. Read `AI-BOS/project-registry/registry.json` entry `PRJ-TMPL-NEXT-001` before material changes.
+2. Load Next domain pack: `HB-ENG-NEXT-001`, `RU-AI-BOS-NEXT-001`, `WF-MIGRATE-HTML-TO-NEXT-001`.
+3. Use `@nextjs-site-migrator` / `AG-DLV-NEXT-LEAD-001` as lead; run audit trio before sign-off.
+3. Record evidence in `.cursor/execution/template-tasks.md`.
+
+## Routing
+
+| Need | Agent / skill |
+|------|----------------|
+| Lead migration | `nextjs-migration-architect` / `@nextjs-site-migrator` (`AG-DLV-NEXT-LEAD-001`) |
+| Token port | `tailwind-design-system-architect` (`AG-DLV-NEXT-DS-001`) |
+| Accessibility | `nextjs-accessibility-auditor` (`AG-DLV-NEXT-A11Y-001`) |
+| Performance | `nextjs-performance-optimizer` (`AG-DLV-NEXT-PERF-001`) |
+| Contract QA | `nextjs-code-reviewer` (`AG-DLV-NEXT-QA-001`) |
+| Parity | `nextjs-visual-parity-auditor` (`AG-DLV-NEXT-PARITY-001`) |
+| AI-BOS structural change | `@system-builder` |
+
+## Never
+
+- Migrate without approved HTML source in `sites/`
+- Hardcode copy/colors/routes — use repository pattern

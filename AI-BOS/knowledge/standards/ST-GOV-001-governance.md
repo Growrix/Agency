@@ -27,6 +27,10 @@ tags:
   - ai-bos
   - standard
   - governance
+capabilities:
+  - CAP-OPS-005
+  - CAP-OPS-003
+  - CAP-STR-005
 ---
 
 # Governance Standard

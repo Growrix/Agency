@@ -30,6 +30,9 @@ tags:
   - ai-bos
   - handbook
   - knowledge
+capabilities:
+  - CAP-KNW-001
+  - CAP-KNW-005
 ---
 
 # Knowledge Authoring Handbook

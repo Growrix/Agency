@@ -4,8 +4,8 @@ title: AI-BOS Business Capability Model
 type: architecture
 category: governance
 domain: ai-bos
-version: 1.0.0
-status: draft
+version: 1.4.0
+status: active
 owner: AI-BOS
 visibility: internal
 audience:
@@ -22,13 +22,31 @@ related:
   - capabilities
   - business-architecture
 review_cycle: quarterly
-last_review: 2026-07-16
+last_review: 2026-07-18
 priority: critical
 tags:
   - ai-bos
   - capability-model
   - business-architecture
   - foundational
+capabilities:
+  - CAP-STR-001
+  - CAP-STR-002
+  - CAP-STR-006
+  - CAP-STR-007
+  - CAP-KNW-007
+  - CAP-GRO-006
+  - CAP-GRO-007
+  - CAP-GRO-008
+  - CAP-GRO-009
+  - CAP-GRO-010
+  - CAP-GRO-011
+  - CAP-GRO-012
+  - CAP-GRO-013
+  - CAP-GRO-014
+  - CAP-GRO-015
+  - CAP-GRO-016
+  - CAP-ENG-001
 ---
 
 # AI-BOS Business Capability Model
@@ -87,6 +105,8 @@ Capabilities are intentionally tool-agnostic and provider-agnostic.
 | CAP-STR-003 | Product Planning | Define what products/services to build and their evolution | Product specs, roadmaps | Delivery |
 | CAP-STR-004 | Research & Intelligence | Investigate markets, competitors, technologies, and feasibility | Research reports, competitor analyses | Strategy, Growth |
 | CAP-STR-005 | Prioritization & Decision | Decide what to do, what to defer, what to reject; record rationale | Decision logs, priority matrices | All groups |
+| CAP-STR-006 | Founder Guidance | Guide the human founder through business decisions, intake, and orchestration of delivery agents | Briefs, handoff prompts, decision records, memory artifacts | Delivery, Growth, Organization |
+| CAP-STR-007 | Business Architecture | Translate founder intent into business architecture, project plans, and E2E build plans (no implementation) | Business architecture docs, E2E plans, scope docs | Delivery, Strategy |
 
 #### Group: Delivery (DLV)
 
@@ -99,6 +119,12 @@ Capabilities are intentionally tool-agnostic and provider-agnostic.
 | CAP-DLV-005 | Coding Workflows | Execute implementation with consistent quality and velocity | Code, reviews, builds | SaaS, Agency |
 | CAP-DLV-006 | Proposal Generation | Generate winning proposals from requirements and prior knowledge | Proposals, statements of work | Client Delivery, Growth |
 
+#### Group: Engineering (ENG)
+
+| ID | Capability | Definition | Produces | Consumed by |
+|----|-----------|------------|----------|-------------|
+| CAP-ENG-001 | Engineering Program Management | Orchestrate engineering programs, roadmaps, and division routing under CTO | Engineering program charters, roadmaps, scorecards | CTO, delivery agents |
+
 #### Group: Growth (GRO)
 
 | ID | Capability | Definition | Produces | Consumed by |
@@ -108,6 +134,17 @@ Capabilities are intentionally tool-agnostic and provider-agnostic.
 | CAP-GRO-003 | SEO | Improve discoverability and authority in search | Technical SEO, on-page, off-page outputs | Marketing, Lead Gen |
 | CAP-GRO-004 | Social Media Content | Produce and publish social content | Social posts, calendars | Marketing |
 | CAP-GRO-005 | Sales & Conversion | Convert leads into clients | Pipelines, deals, contracts | Client Delivery |
+| CAP-GRO-006 | Marketing Intelligence & Brand | Research ICP, competitors, positioning, and messaging foundations | ICP briefs, competitor matrices, messaging house | Content, Ads, Brand agents |
+| CAP-GRO-007 | Content Marketing | Plan and produce editorial, copy, blogs, and repurposing pipelines | Content calendars, copy, blog briefs | SEO, Social, Email, Ads |
+| CAP-GRO-008 | Paid Acquisition | Structure paid media across search, social, and retargeting | Ad plans, audience defs, launch checklists | Analytics, Creative, CRO |
+| CAP-GRO-009 | Email Lifecycle Marketing | Design nurture, launch, and newsletter programs | Sequences, newsletters, deliverability guides | CRO, Analytics, Sales |
+| CAP-GRO-010 | Conversion & Pricing Optimization | Map funnels, landing CRO, and pricing tests | Funnel maps, CRO audits, pricing experiments | Ads, Content, Sales |
+| CAP-GRO-011 | Marketing Analytics & Experimentation | Interpret data, scorecards, and A/B tests | Scorecards, experiment logs, review memos | CMO, all channel divisions |
+| CAP-GRO-012 | Creative & Video Production | Direct campaign creative, briefs, prompts, and video scripts | Creative briefs, prompts, video scripts | Ads, Social, Content |
+| CAP-GRO-013 | Community & Reputation | Plan community engagement and review/mention response | Community plans, reputation playbooks | Social, Brand |
+| CAP-GRO-014 | AI Search & GEO | Keyword clusters and generative-engine visibility strategy | Keyword maps, entity maps, GEO playbooks | SEO agents, Content |
+| CAP-GRO-015 | Marketing Memory & Assets | Curate campaign history, winners/losers, and asset index | Post-mortems, asset library index | CMO, all divisions |
+| CAP-GRO-016 | SEO Program Management | Orchestrate SEO programs, roadmaps, and division routing under CMO | SEO program charters, roadmaps, scorecards | SEO Lead, CMO, delivery SEO agents |
 
 #### Group: Operations & Governance (OPS)
 
@@ -129,6 +166,7 @@ Capabilities are intentionally tool-agnostic and provider-agnostic.
 | CAP-KNW-004 | Knowledge Reuse | Apply existing knowledge to new projects without duplication | Reused artifacts, reference links | Delivery, Growth, Operations |
 | CAP-KNW-005 | Learning & Onboarding | Bring humans and AI agents up to competence on the system | Learning paths, onboarding guides | Organization, Platform |
 | CAP-KNW-006 | Knowledge Validation | Verify knowledge is current, non-duplicate, and well-formed | Validation reports, deprecation notices | Knowledge Organization |
+| CAP-KNW-007 | Founder Memory | Persist founder inputs, chat logs, client conversations, and ongoing context for reuse across sessions | Memory records, inbox artifacts, project memory folders | Founder Guidance, Strategy |
 
 #### Group: Platform & Infrastructure (PLT)
 
@@ -159,12 +197,18 @@ Confirms every long-term vision domain is served by at least one capability.
 | Web development agency | CAP-DLV-002, CAP-DLV-003, CAP-DLV-006 |
 | Client delivery | CAP-DLV-003, CAP-DLV-006, CAP-OPS-002 |
 | Research | CAP-STR-004 |
-| Business planning | CAP-STR-002 |
+| Business planning | CAP-STR-002, CAP-STR-006, CAP-STR-007 |
 | Product planning | CAP-STR-003 |
-| Lead generation | CAP-GRO-001, CAP-GRO-002 |
-| Marketing | CAP-GRO-002, CAP-GRO-004 |
-| SEO | CAP-GRO-003 |
-| Social media content | CAP-GRO-004 |
+| Lead generation | CAP-GRO-001, CAP-GRO-002, CAP-GRO-010 |
+| Marketing | CAP-GRO-002, CAP-GRO-006–CAP-GRO-015 |
+| Marketing OS (CMO) | CAP-GRO-002, CAP-GRO-011, CAP-GRO-015 |
+| SEO | CAP-GRO-003, CAP-GRO-014, CAP-GRO-016 |
+| SEO OS (Lead) | CAP-GRO-016, CAP-GRO-003, CAP-GRO-014 |
+| Engineering OS (CTO) | CAP-ENG-001, CAP-DLV-001, CAP-DLV-004, CAP-DLV-005 |
+| Social media content | CAP-GRO-004, CAP-GRO-013 |
+| Paid advertising | CAP-GRO-008 |
+| Email marketing | CAP-GRO-009 |
+| Analytics & experimentation | CAP-GRO-011 |
 | Documentation | CAP-KNW-001, CAP-KNW-002 |
 | Proposal generation | CAP-DLV-006 |
 | Architecture | CAP-DLV-004 |
@@ -172,7 +216,7 @@ Confirms every long-term vision domain is served by at least one capability.
 | MCP servers | CAP-PLT-002 |
 | AI Agents | CAP-PLT-001 |
 | Knowledge management | CAP-KNW-001 through CAP-KNW-006 |
-| Learning | CAP-KNW-005, CAP-ORG-002 |
+| Learning | CAP-KNW-005, CAP-KNW-007, CAP-ORG-002 |
 | Internal SOPs | CAP-OPS-001 |
 | Future business domains | Inherited via capability groups (no new groups needed) |
 
@@ -211,7 +255,7 @@ This rule is a candidate for Constitution §5 (Permanent Rules).
 - `knowledge/architecture/AR-AI-BOS-001-vision.md` — Vision (source of long-term domains)
 - `knowledge/architecture/AR-AI-BOS-002-constitution-toc.md` — Constitution TOC (will ratify derivation rule in §5)
 - `knowledge/architecture/AR-AI-BOS-003-assumption-review.md` — Assumption review (A3, A11 inform capability design)
-- `AI-BOS/.cursor/skills/ai-bos-architect/references/ai-bos-planning-prompt.md` — Phase 4 spec
+- `TP-KNW-001, ST-KNW-001` — Phase 4 spec
 
 ## Related Knowledge Objects
 
@@ -225,3 +269,7 @@ This rule is a candidate for Constitution §5 (Permanent Rules).
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0.0 | 2026-07-16 | Initial Phase 4 Business Capability Model — 7 groups, 30 capabilities, full vision coverage map. Awaiting user approval. |
+| 1.1.0 | 2026-07-18 | I12 — add CAP-STR-006 Founder Guidance, CAP-STR-007 Business Architecture, CAP-KNW-007 Founder Memory (33 capabilities). |
+| 1.2.0 | 2026-07-18 | I15 — add CAP-GRO-006 through CAP-GRO-015 Marketing OS capabilities (43 capabilities); update vision coverage map. |
+| 1.3.0 | 2026-07-18 | I16 — add CAP-GRO-016 SEO Program Management; SEO OS vision coverage. |
+| 1.4.0 | 2026-07-18 | I17 — add CAP-ENG-001 Engineering Program Management; Engineering OS vision coverage. |
