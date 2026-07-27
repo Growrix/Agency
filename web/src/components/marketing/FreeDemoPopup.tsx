@@ -5,6 +5,8 @@ import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { FreeDemoModal } from "@/components/marketing/FreeDemoModal";
 import {
   FREE_DEMO_SEEN_KEY,
+  clearPendingIntake,
+  hasPendingIntake,
   hasSeenFreeDemo,
   markFreeDemoSeen,
   useFreeDemoStore,
@@ -25,6 +27,13 @@ export function FreeDemoPopup() {
     if (typeof window === "undefined") {
       return;
     }
+
+    // After Clerk redirect, reopen the form so restored draft can auto-submit.
+    if (hasPendingIntake()) {
+      open({ showForm: true });
+      return;
+    }
+
     if (hasSeenFreeDemo()) {
       return;
     }
@@ -39,6 +48,7 @@ export function FreeDemoPopup() {
   }, [open]);
 
   function handleClose() {
+    clearPendingIntake();
     markFreeDemoSeen();
     close();
   }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { CountUp, motion } from "@/components/motion/Motion";
+import { useFreeDemoStore } from "@/lib/free-demo-store";
 import { cn } from "@/lib/utils";
 
 export type FreeDemoCampaignView = {
@@ -26,6 +27,7 @@ export function FreeDemoCounter({ className, compact = false, withRing = false, 
   const [state, setState] = useState<FreeDemoCampaignView | null>(null);
   const [error, setError] = useState(false);
   const reduced = useReducedMotion();
+  const lastClaimedAt = useFreeDemoStore((store) => store.lastClaimedAt);
 
   useEffect(() => {
     let cancelled = false;
@@ -53,7 +55,7 @@ export function FreeDemoCounter({ className, compact = false, withRing = false, 
       cancelled = true;
       window.clearInterval(timer);
     };
-  }, []);
+  }, [lastClaimedAt]);
 
   if (error && !state) {
     return <p className={cn("text-sm text-text-muted", className)}>Limited launch spots available.</p>;

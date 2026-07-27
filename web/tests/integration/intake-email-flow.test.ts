@@ -66,8 +66,10 @@ async function readDatabaseFile() {
       business_name: string;
       project_id?: string;
       status: string;
+      is_free_demo?: boolean;
     }>;
     projects: Array<{ id: string; submission_id: string; client_user_id: string }>;
+    free_demo_campaigns: Array<{ id: string; claimed_count: number; total_slots: number }>;
     notifications: Array<{
       kind: string;
       status: string;
@@ -212,5 +214,59 @@ describe("Client intake email + project wiring", () => {
     assert.ok(adminNotify);
     assert.equal(adminNotify?.payload?.admin_href, "https://growrix.example/admin/intakes/intake-abs-url-1");
     assert.equal(adminNotify?.status, "skipped");
+  });
+
+  it("increments free-demo claimed_count on free-demo submit and not on regular submit", async () => {
+    const token = await issueSessionToken({
+      userId: TEST_USER.id,
+      email: TEST_USER.email,
+      role: TEST_USER.role,
+    });
+    const { POST: createIntake } = await import("@/app/api/v1/intakes/route");
+
+    const freeDemoResponse = await createIntake(
+      new NextRequest("http://localhost/api/v1/intakes", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          cookie: `agency_session=${token}`,
+        },
+        body: JSON.stringify({
+          business_name: "Counter Demo Co",
+          business_description: "Long enough business description for free demo counter testing.",
+          is_free_demo: true,
+        }),
+      }),
+    );
+    assert.equal(freeDemoResponse.status, 200);
+
+    let database = await readDatabaseFile();
+    const campaignAfterFree = database.free_demo_campaigns.find(
+      (item) => item.id === "growrixos-launch-2026",
+    );
+    assert.ok(campaignAfterFree, "free demo campaign should exist after free-demo submit");
+    assert.equal(campaignAfterFree?.claimed_count, 1);
+
+    const regularResponse = await createIntake(
+      new NextRequest("http://localhost/api/v1/intakes", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          cookie: `agency_session=${token}`,
+        },
+        body: JSON.stringify({
+          business_name: "Regular Intake Co",
+          business_description: "Long enough business description for non free-demo counter testing.",
+          is_free_demo: false,
+        }),
+      }),
+    );
+    assert.equal(regularResponse.status, 200);
+
+    database = await readDatabaseFile();
+    const campaignAfterRegular = database.free_demo_campaigns.find(
+      (item) => item.id === "growrixos-launch-2026",
+    );
+    assert.equal(campaignAfterRegular?.claimed_count, 1, "non free-demo submit must not increment counter");
   });
 });

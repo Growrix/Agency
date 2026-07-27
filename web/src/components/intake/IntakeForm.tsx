@@ -6,7 +6,13 @@ import { FreeDemoAuthGate } from "@/components/marketing/FreeDemoPopup";
 import { FileUploadField } from "@/components/intake/FileUploadField";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { isClerkConfiguredClient } from "@/lib/clerk-client";
-import { markFreeDemoSeen } from "@/lib/free-demo-store";
+import {
+  clearPendingIntake,
+  markFreeDemoSeen,
+  readPendingIntake,
+  savePendingIntake,
+  useFreeDemoStore,
+} from "@/lib/free-demo-store";
 import { cn } from "@/lib/utils";
 
 export type IntakeFormValues = {
@@ -68,9 +74,59 @@ const TIMELINES = ["ASAP (2–4 weeks)", "1–2 months", "3+ months", "Flexible"
 const STEPS = ["About", "Goals", "Assets", "Budget", "Review"] as const;
 
 type Props = {
+  /** Optional callback after a successful submit (does not close the host modal). */
   onSuccess?: () => void;
+  /** Close the host modal from the success panel. */
+  onClose?: () => void;
   isFreeDemo?: boolean;
 };
+
+const EMPTY_VALUES: IntakeFormValues = {
+  business_name: "",
+  industry: "",
+  industry_custom: "",
+  target_audience: "",
+  brand_voice: "",
+  business_description: "",
+  goals: [],
+  competitors: [],
+  reference_sites: [{ url: "", note: "" }],
+  drive_links: [{ url: "", label: "", type: "gdrive" }],
+  budget_range: "",
+  budget_custom: "",
+  timeline: "",
+  must_have_features: [],
+};
+
+function coerceIntakeValues(raw: Record<string, unknown> | undefined): IntakeFormValues {
+  if (!raw) {
+    return { ...EMPTY_VALUES, reference_sites: [{ url: "", note: "" }], drive_links: [{ url: "", label: "", type: "gdrive" }] };
+  }
+  return {
+    business_name: typeof raw.business_name === "string" ? raw.business_name : "",
+    industry: typeof raw.industry === "string" ? raw.industry : "",
+    industry_custom: typeof raw.industry_custom === "string" ? raw.industry_custom : "",
+    target_audience: typeof raw.target_audience === "string" ? raw.target_audience : "",
+    brand_voice: typeof raw.brand_voice === "string" ? raw.brand_voice : "",
+    business_description: typeof raw.business_description === "string" ? raw.business_description : "",
+    goals: Array.isArray(raw.goals) ? raw.goals.filter((item): item is string => typeof item === "string") : [],
+    competitors: Array.isArray(raw.competitors)
+      ? raw.competitors.filter((item): item is string => typeof item === "string")
+      : [],
+    reference_sites: Array.isArray(raw.reference_sites)
+      ? (raw.reference_sites as IntakeFormValues["reference_sites"])
+      : [{ url: "", note: "" }],
+    drive_links: Array.isArray(raw.drive_links)
+      ? (raw.drive_links as IntakeFormValues["drive_links"])
+      : [{ url: "", label: "", type: "gdrive" }],
+    budget_range: typeof raw.budget_range === "string" ? raw.budget_range : "",
+    budget_custom: typeof raw.budget_custom === "string" ? raw.budget_custom : "",
+    timeline: typeof raw.timeline === "string" ? raw.timeline : "",
+    must_have_features: Array.isArray(raw.must_have_features)
+      ? raw.must_have_features.filter((item): item is string => typeof item === "string")
+      : [],
+  };
+}
 
 function TagInput({
   label,
@@ -136,10 +192,11 @@ function TagInput({
   );
 }
 
-export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
+export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   const { isSignedIn, isLoaded, getToken } = useAuth();
   const clerk = useClerk();
   const clerkEnabled = isClerkConfiguredClient();
+  const bumpClaimed = useFreeDemoStore((state) => state.bumpClaimed);
 
   const [step, setStep] = useState(0);
   const [files, setFiles] = useState<File[]>([]);
@@ -147,31 +204,44 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
   const [awaitingAuth, setAwaitingAuth] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [values, setValues] = useState<IntakeFormValues>({
-    business_name: "",
-    industry: "",
-    industry_custom: "",
-    target_audience: "",
-    brand_voice: "",
-    business_description: "",
-    goals: [],
-    competitors: [],
+  const [submissionNumber, setSubmissionNumber] = useState<string | null>(null);
+  const [needsFileReattach, setNeedsFileReattach] = useState(false);
+  const [values, setValues] = useState<IntakeFormValues>(() => ({
+    ...EMPTY_VALUES,
     reference_sites: [{ url: "", note: "" }],
     drive_links: [{ url: "", label: "", type: "gdrive" }],
-    budget_range: "",
-    budget_custom: "",
-    timeline: "",
-    must_have_features: [],
-  });
+  }));
 
   const pendingSubmitRef = useRef(false);
+  const restoredPendingRef = useRef(false);
   const valuesRef = useRef(values);
   const filesRef = useRef(files);
+  const [pendingRestoreReady, setPendingRestoreReady] = useState(false);
 
   useEffect(() => {
     valuesRef.current = values;
     filesRef.current = files;
   }, [values, files]);
+
+  // Restore draft after Clerk full-page redirect so auto-submit can finish.
+  useEffect(() => {
+    if (restoredPendingRef.current) {
+      return;
+    }
+    const draft = readPendingIntake();
+    if (!draft) {
+      return;
+    }
+    restoredPendingRef.current = true;
+    const restored = coerceIntakeValues(draft.values);
+    setValues(restored);
+    valuesRef.current = restored;
+    setStep(STEPS.length - 1);
+    setNeedsFileReattach(Boolean(draft.hadFiles));
+    pendingSubmitRef.current = true;
+    setAwaitingAuth(true);
+    setPendingRestoreReady(true);
+  }, []);
 
   const progress = useMemo(() => ((step + 1) / STEPS.length) * 100, [step]);
 
@@ -238,14 +308,18 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
         throw new Error(payload?.error?.message ?? "Unable to submit your request.");
       }
 
+      clearPendingIntake();
       markFreeDemoSeen();
       setAwaitingAuth(false);
-      const projectHint = payload?.data?.project_id
-        ? " Open My projects in your dashboard to track progress."
-        : " Check your dashboard for updates.";
+      setNeedsFileReattach(false);
+      const number = payload?.data?.submission_number ?? "confirmed";
+      setSubmissionNumber(number);
       setSuccessMessage(
-        `Request submitted (${payload?.data?.submission_number ?? "confirmed"}).${projectHint}`,
+        `Request submitted (${number}). Open My projects in your dashboard to track progress.`,
       );
+      if (isFreeDemo) {
+        bumpClaimed();
+      }
       onSuccess?.();
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to submit your request.");
@@ -260,6 +334,11 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
     if (clerkEnabled && isLoaded && !isSignedIn) {
       pendingSubmitRef.current = true;
       setAwaitingAuth(true);
+      savePendingIntake({
+        values: valuesRef.current as unknown as Record<string, unknown>,
+        hadFiles: filesRef.current.length > 0,
+        isFreeDemo,
+      });
       const returnUrl = typeof window !== "undefined" ? window.location.href : "/";
       try {
         clerk.openSignIn({
@@ -284,13 +363,26 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
     void submitIntake();
     // submitIntake closes over refs + stable props; intentionally omit from deps.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- auto-submit once after auth
-  }, [isLoaded, isSignedIn]);
+  }, [isLoaded, isSignedIn, pendingRestoreReady]);
 
   if (successMessage) {
     return (
-      <div className="space-y-4 rounded-md border border-success/30 bg-success/10 p-4">
+      <div className="space-y-4 rounded-md border border-success/30 bg-success/10 p-4" data-testid="intake-success">
+        <p className="text-xs uppercase tracking-[0.18em] text-success">Request received</p>
         <p className="font-medium text-text">{successMessage}</p>
-        <LinkButton href="/dashboard/projects">Open my projects</LinkButton>
+        {submissionNumber ? (
+          <p className="text-sm text-text-muted" data-testid="intake-submission-number">
+            Submission ID: <span className="font-mono text-text">{submissionNumber}</span>
+          </p>
+        ) : null}
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <LinkButton href="/dashboard/projects">Open my projects</LinkButton>
+          {onClose ? (
+            <Button type="button" variant="ghost" onClick={onClose}>
+              Close
+            </Button>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -551,6 +643,12 @@ export function IntakeForm({ onSuccess, isFreeDemo = false }: Props) {
 
       {step === 4 ? (
         <div className="space-y-3 text-sm">
+          {needsFileReattach ? (
+            <p className="rounded-md border border-warning/40 bg-warning/10 px-3 py-2 text-warning">
+              You had files attached before sign-in. Please re-attach them below if needed, then submit again.
+            </p>
+          ) : null}
+          {needsFileReattach ? <FileUploadField files={files} onChange={setFiles} /> : null}
           <p>
             <strong>Business:</strong> {values.business_name || "—"}
           </p>

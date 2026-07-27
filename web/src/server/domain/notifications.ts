@@ -1,5 +1,6 @@
 import "server-only";
 
+import { createHmac } from "node:crypto";
 import { getRuntimeConfig } from "@/server/config/runtime";
 import type {
   NotificationChannel,
@@ -64,6 +65,12 @@ function buildLarkText(input: NotifyInput) {
   return lines.join("\n");
 }
 
+/** Feishu/Lark custom-bot signature: HMAC-SHA256(key=timestamp\\nsecret, msg=empty) → Base64. */
+function buildLarkSign(timestampSeconds: string, secret: string) {
+  const stringToSign = `${timestampSeconds}\n${secret}`;
+  return createHmac("sha256", stringToSign).update("").digest("base64");
+}
+
 async function sendLarkWebhook(input: NotifyInput): Promise<{ ok: boolean; error?: string }> {
   const { notifications } = getRuntimeConfig();
   if (!notifications.larkWebhookUrl) {
@@ -74,13 +81,21 @@ async function sendLarkWebhook(input: NotifyInput): Promise<{ ok: boolean; error
   const timer = setTimeout(() => controller.abort(), LARK_TIMEOUT_MS);
 
   try {
+    const body: Record<string, unknown> = {
+      msg_type: "text",
+      content: { text: buildLarkText(input) },
+    };
+
+    if (notifications.larkSigningSecret) {
+      const timestamp = Math.floor(Date.now() / 1000).toString();
+      body.timestamp = timestamp;
+      body.sign = buildLarkSign(timestamp, notifications.larkSigningSecret);
+    }
+
     const response = await fetch(notifications.larkWebhookUrl, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        msg_type: "text",
-        content: { text: buildLarkText(input) },
-      }),
+      body: JSON.stringify(body),
       signal: controller.signal,
     });
 
@@ -102,6 +117,15 @@ export async function dispatchNotification(input: NotifyInput) {
   if (!notifications.larkWebhookUrl) {
     const entry = buildLogEntry(input, "console", "skipped", "lark_not_configured", 0);
     await appendLog(entry);
+    await recordAuditLog({
+      level: "warning",
+      action: "team_notification.lark_skipped_missing_config",
+      metadata: {
+        kind: input.kind,
+        title: input.title,
+        missing: ["LARK_WEBHOOK_URL"],
+      },
+    });
     console.info(`[notify:${input.kind}] ${input.title}`, input.payload);
     return entry;
   }

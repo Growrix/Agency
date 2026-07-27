@@ -1004,3 +1004,16 @@ Remaining parallel tracks:
 - **Delivered:** Honest admin notify logging + absolute admin URLs; client confirmation email; Projects vs Submissions UX clarity; integration tests for skip path + absolute href; team email timeout 5s.
 - **Validation:** typecheck pass; integration 14/14 pass; lint pass; ReadLints clean on touched files.
 - **Commit:** `385b1a3`
+
+### 2026-07-27 — Free demo intake E2E fix (state loss + confirmation + dashboard)
+- **Mode:** `debug_failure` → `execute_locked_plan`
+- **Root cause:** Clerk sign-up redirect wiped form state / pendingSubmitRef so submit never ran (counter 0/20, no emails, no dashboard). Modal closed on success (`onSuccess={onClose}`). Dashboard completion gate blocked `/dashboard/projects`. Lark skipped (`LARK_WEBHOOK_URL` absent).
+- **Fix:** sessionStorage pending draft restore + auto-submit; success panel stays open; completion exempt for projects; Lark HMAC signing when secret set; counter `bumpClaimed` refetch; regression tests.
+- **Validation:** typecheck pass; lint pass; test pass (unit+integ 15); build pass; e2e intake-flow 6/6 pass (`PW_REUSE_DEV_SERVER=1`).
+- **Ops:** set `LARK_WEBHOOK_URL` (and optional `LARK_SIGNING_SECRET`) in `web/.env.local` — documented in `.env.example`.
+- 2026-07-27T18:45:00+06:00 | senior-saas-developer | debug_failure | Fixed free-demo intake E2E unfinished flow
+  - brain: intake E2E fix plan
+  - files_touched: IntakeForm.tsx, free-demo-store.ts, FreeDemoModal/Popup/Counter, proxy.ts, notifications.ts, .env.example, intake tests, tasks.md
+  - gates: QG-typecheck=pass, QG-lint=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(6)
+  - commit: pending
+  - handoff: none

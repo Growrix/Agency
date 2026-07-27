@@ -13,7 +13,13 @@ const protectedPrefixes = [
   "/api/v1/projects",
 ];
 const loginPrefixes = ["/admin/login", "/dashboard/login", "/sign-in", "/sign-up"];
-const completionExemptApiPaths = ["/api/v1/me", "/api/v1/me/update", "/api/v1/me/complete-signup"];
+const completionExemptApiPaths = [
+  "/api/v1/me",
+  "/api/v1/me/update",
+  "/api/v1/me/complete-signup",
+  "/api/v1/me/projects",
+  "/api/v1/me/intakes",
+];
 const blockedPreviewPrefixes = [
   "/previews/html-template-websites/",
   "/previews/html-business-profiles/",
@@ -171,6 +177,11 @@ function shouldEnforceCompletion(pathname: string) {
   }
 
   if (pathname === "/dashboard/login" || pathname.startsWith("/dashboard/login/")) {
+    return false;
+  }
+
+  // Free-demo submitters must reach their project workspace before completing signup.
+  if (pathname === "/dashboard/projects" || pathname.startsWith("/dashboard/projects/")) {
     return false;
   }
 

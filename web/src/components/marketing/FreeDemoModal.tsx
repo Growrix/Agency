@@ -350,7 +350,8 @@ export function FreeDemoModal({ open, showForm, onClose, onOpenForm }: Props) {
               <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Project intake</p>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-4 sm:px-8">
-              <IntakeForm onSuccess={onClose} isFreeDemo />
+              {/* Keep modal open on success so the confirmation panel is visible. */}
+              <IntakeForm isFreeDemo onClose={onClose} />
             </div>
           </>
         ) : (
@@ -385,7 +386,8 @@ export function FreeDemoModal({ open, showForm, onClose, onOpenForm }: Props) {
               <Dialog.Title className="font-display text-base">Tell us about your project</Dialog.Title>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3">
-              <IntakeForm onSuccess={onClose} isFreeDemo />
+              {/* Keep modal open on success so the confirmation panel is visible. */}
+              <IntakeForm isFreeDemo onClose={onClose} />
             </div>
           </>
         ) : (
