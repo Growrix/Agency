@@ -149,9 +149,9 @@ vercel_environment_variables:
       reference: https://resend.com/api-keys
     
     - name: CONTACT_TO_EMAIL
-      value: growrixos@gmail.com
+      value: Inquiry@growrixos.com,growrixos@gmail.com
       type: public
-      description: Email address to receive contact form submissions
+      description: Comma-separated team email addresses to receive contact form submissions and other team notifications
       same_as_local: true
     
     - name: CONTACT_FROM_EMAIL

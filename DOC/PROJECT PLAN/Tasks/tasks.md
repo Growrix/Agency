@@ -1012,9 +1012,25 @@ Remaining parallel tracks:
 - **Validation:** typecheck pass; lint pass; test pass (unit+integ 15); build pass; e2e intake-flow 6/6 pass (`PW_REUSE_DEV_SERVER=1`).
 - **Ops:** set `LARK_WEBHOOK_URL` (and optional `LARK_SIGNING_SECRET`) in `web/.env.local` — documented in `.env.example`.
 - **Commit:** `c3018c9`
-- 2026-07-27T18:45:00+06:00 | senior-saas-developer | debug_failure | Fixed free-demo intake E2E unfinished flow
+  - 2026-07-27T18:45:00+06:00 | senior-saas-developer | debug_failure | Fixed free-demo intake E2E unfinished flow
   - brain: intake E2E fix plan
   - files_touched: IntakeForm.tsx, free-demo-store.ts, FreeDemoModal/Popup/Counter, proxy.ts, notifications.ts, .env.example, intake tests, tasks.md
   - gates: QG-typecheck=pass, QG-lint=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(6)
   - commit: c3018c9
+  - handoff: none
+
+### 2026-07-27 — Add growrixos@gmail.com to CONTACT_TO_EMAIL
+- **Mode:** `execute_locked_plan`
+- **Root cause:** Team notification emails were only delivered to `Inquiry@growrixos.com`. Operator wanted `growrixos@gmail.com` to also receive every team notification.
+- **Fix:** No application logic changed. `CONTACT_TO_EMAIL` already supports comma-separated recipients via `parseRecipientList` in `runtime.ts` and `team-notifications.ts` already sends to `runtime.contact.toEmails`. Updated the environment configuration and deployment docs to use `CONTACT_TO_EMAIL=Inquiry@growrixos.com,growrixos@gmail.com`.
+- **Touched files:** `.env.example`, `web/.env.local` (untracked), `DEPLOYMENT_CHECKLIST.md`, `DOC/PRODUCTION_DEPLOYMENT_GUIDE.md`, `DOC/PROJECT PLAN/DevOps/vercel-deployment-config.yaml`, `DOC/PROJECT PLAN/Supabase/environment-configuration.md`, `web/README.md`, `web/scripts/run-unit-tests.mjs`, `web/src/server/config/runtime.test.ts`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Application logic:** No code changes. Verified all team notification paths (`contact`, `appointments`, `service_requests`, `intakes`, `newsletter`, `orders`, `submissions`) route through `notifyTeam` → `runtime.contact.toEmails`.
+- **Hardcoded recipients:** No hardcoded team notification recipients found. Static support addresses on policy pages (`growrixos@gmail.com`, `admin@growrixos.com`) are user-facing contact info, not notification destinations, so left untouched.
+- **Validation:** `npm run typecheck --prefix web` pass; `npm run test:unit --prefix web` pass (68/68, including new runtime parsing tests). `npm run lint --prefix web` fails on a pre-existing `react-hooks/set-state-in-effect` error in `web/src/components/intake/IntakeForm.tsx:237` (not touched in this change).
+- **Redeploy:** Required for production. Update `CONTACT_TO_EMAIL` in the Vercel dashboard (Project → Settings → Environment Variables) to `Inquiry@growrixos.com,growrixos@gmail.com`, then redeploy. No new env vars needed.
+- **Commit:** 2f875bb
+- 2026-07-27T18:46:00+06:00 | senior-saas-developer | execute_locked_plan | Add growrixos@gmail.com to CONTACT_TO_EMAIL
+  - files_touched: .env.example, web/.env.local, DEPLOYMENT_CHECKLIST.md, DOC/PRODUCTION_DEPLOYMENT_GUIDE.md, DOC/PROJECT PLAN/DevOps/vercel-deployment-config.yaml, DOC/PROJECT PLAN/Supabase/environment-configuration.md, web/README.md, web/scripts/run-unit-tests.mjs, web/src/server/config/runtime.test.ts, DOC/PROJECT PLAN/Tasks/tasks.md
+  - gates: QG-typecheck=pass, QG-test=pass(68/68), QG-lint=pre-existing-fail(IntakeForm.tsx:237)
+  - commit: 2f875bb
   - handoff: none

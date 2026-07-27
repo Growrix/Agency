@@ -27,7 +27,14 @@ cp ../.env.example .env.local
 
 If Supabase variables are not set, the server falls back to local file persistence under `.data/agency-db.json`.
 
-4. Configure Sanity CMS (optional, for blog content management):
+4. Configure Resend email (required for team notifications and customer confirmations):
+	- Set `RESEND_API_KEY`
+	- Set `CONTACT_TO_EMAIL` to a comma-separated list of team recipients (e.g., `Inquiry@growrixos.com,growrixos@gmail.com`)
+	- Set `CONTACT_FROM_EMAIL` to a verified sender address (e.g., `Growrix <hello@growrixos.com>`)
+
+If email variables are not set, team notifications are skipped and logged in the audit log.
+
+5. Configure Sanity CMS (optional, for blog content management):
 	- Set `SANITY_PROJECT_ID` and `SANITY_DATASET`
 	- Optionally set `SANITY_API_TOKEN` for private datasets
 	- Keep `SANITY_API_VERSION` pinned (default: `2025-01-01`)

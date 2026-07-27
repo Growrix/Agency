@@ -14,6 +14,7 @@ const testFiles = [
   "src/lib/site.test.ts",
   "src/server/auth/users.test.ts",
   "src/server/auth/clerk-sync.test.ts",
+  "src/server/config/runtime.test.ts",
   "src/server/domain/catalog.test.ts",
   "src/server/domain/orders.test.ts",
   "src/server/domain/email-layout.test.ts",
