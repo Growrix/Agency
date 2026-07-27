@@ -233,14 +233,18 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
       return;
     }
     restoredPendingRef.current = true;
-    const restored = coerceIntakeValues(draft.values);
-    setValues(restored);
-    valuesRef.current = restored;
-    setStep(STEPS.length - 1);
-    setNeedsFileReattach(Boolean(draft.hadFiles));
-    pendingSubmitRef.current = true;
-    setAwaitingAuth(true);
-    setPendingRestoreReady(true);
+
+    // Defer restoration to a microtask so it does not trigger cascading renders.
+    queueMicrotask(() => {
+      const restored = coerceIntakeValues(draft.values);
+      setValues(restored);
+      valuesRef.current = restored;
+      setStep(STEPS.length - 1);
+      setNeedsFileReattach(Boolean(draft.hadFiles));
+      pendingSubmitRef.current = true;
+      setAwaitingAuth(true);
+      setPendingRestoreReady(true);
+    });
   }, []);
 
   const progress = useMemo(() => ((step + 1) / STEPS.length) * 100, [step]);
