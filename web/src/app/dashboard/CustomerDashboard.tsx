@@ -16,6 +16,7 @@ import {
   FunnelIcon,
   ClipboardDocumentListIcon,
   CubeIcon,
+  FolderIcon,
   LifebuoyIcon,
   MagnifyingGlassIcon,
   PaperClipIcon,
@@ -31,12 +32,14 @@ import {
   DashboardAppointmentCard,
   DashboardOrderCard,
   DashboardProductCard,
+  DashboardProjectCard,
 } from "@/components/dashboard/DashboardRecordCards";
 import { DownloadDetailModal } from "@/components/dashboard/DownloadDetailModal";
 import {
   DASHBOARD_CARD_META_CLASS,
   DASHBOARD_CARD_TITLE_CLASS,
   DASHBOARD_EYEBROW_CLASS,
+  DASHBOARD_EMPTY_TITLE_CLASS,
   DASHBOARD_PAGE_LEAD_CLASS,
   DASHBOARD_SECTION_HEADING_CLASS,
 } from "@/lib/dashboard-typography";
@@ -44,7 +47,7 @@ import { cn } from "@/lib/utils";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 
-type CustomerDashboardView = "overview" | "products" | "downloads" | "orders" | "appointments" | "support";
+type CustomerDashboardView = "overview" | "products" | "downloads" | "orders" | "appointments" | "support" | "projects";
 
 type Viewer = {
   id: string;
@@ -106,6 +109,25 @@ type DashboardAppointment = {
   status: string;
 };
 
+type DashboardProject = {
+  id: string;
+  project_number: string;
+  title: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+};
+
+type DashboardIntake = {
+  id: string;
+  submission_number: string;
+  business_name: string;
+  status: string;
+  project_id?: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 type Envelope<T> = { data: T };
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -161,6 +183,8 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
   const [downloads, setDownloads] = useState<DashboardDownload[]>([]);
   const [licenses, setLicenses] = useState<DashboardLicense[]>([]);
   const [appointments, setAppointments] = useState<DashboardAppointment[]>([]);
+  const [projects, setProjects] = useState<DashboardProject[]>([]);
+  const [intakes, setIntakes] = useState<DashboardIntake[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -205,19 +229,24 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     setError(null);
 
     try {
-      const [meData, ordersData, appointmentsData, downloadsData, licensesData] = await Promise.all([
-        loadJson<{ user: Viewer }>("/api/v1/me"),
-        loadJson<DashboardOrder[]>("/api/v1/me/orders"),
-        loadJson<DashboardAppointment[]>("/api/v1/me/appointments"),
-        loadJson<DashboardDownload[]>("/api/v1/me/downloads"),
-        loadJson<DashboardLicense[]>("/api/v1/me/licenses"),
-      ]);
+      const [meData, ordersData, appointmentsData, downloadsData, licensesData, projectsData, intakesData] =
+        await Promise.all([
+          loadJson<{ user: Viewer }>("/api/v1/me"),
+          loadJson<DashboardOrder[]>("/api/v1/me/orders"),
+          loadJson<DashboardAppointment[]>("/api/v1/me/appointments"),
+          loadJson<DashboardDownload[]>("/api/v1/me/downloads"),
+          loadJson<DashboardLicense[]>("/api/v1/me/licenses"),
+          loadJson<DashboardProject[]>("/api/v1/me/projects"),
+          loadJson<DashboardIntake[]>("/api/v1/me/intakes"),
+        ]);
 
       setUser(meData.user);
       setOrders(ordersData);
       setAppointments(appointmentsData);
       setDownloads(downloadsData);
       setLicenses(licensesData);
+      setProjects(projectsData);
+      setIntakes(intakesData);
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : "Unable to load the dashboard.");
     } finally {
@@ -1055,6 +1084,98 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     );
   }
 
+  function renderProjects() {
+    const sortedProjects = [...projects].sort(
+      (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+    );
+    const pendingIntakes = intakes.filter(
+      (intake) => !intake.project_id && intake.status !== "project_created",
+    );
+    const inProgressCount = projects.filter((project) =>
+      ["intake", "in_progress", "review"].includes(project.status.toLowerCase()),
+    ).length;
+    const deliveredCount = projects.filter(
+      (project) => project.status.toLowerCase() === "delivered",
+    ).length;
+
+    return (
+      <div className="space-y-4">
+        <DashboardHeroBand
+          eyebrow="Projects"
+          title={
+            <>
+              Welcome back, <span className="text-primary">{fullName}</span>
+            </>
+          }
+          description="Track your website build, share new references, and collaborate with the Growrix team."
+          stats={[
+            { label: "Total projects", value: projects.length, icon: <FolderIcon className="size-5" /> },
+            { label: "Pending intakes", value: pendingIntakes.length, icon: <ClipboardDocumentListIcon className="size-5" /> },
+            { label: "In progress", value: inProgressCount, icon: <ClockIcon className="size-5" /> },
+            { label: "Delivered", value: deliveredCount, icon: <ShieldCheckIcon className="size-5" /> },
+          ]}
+        />
+
+        {pendingIntakes.length > 0 ? (
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 p-4 sm:p-5" hoverable={false}>
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="font-display text-2xl tracking-tight">Pending requests</h3>
+              <span className="rounded-full border border-primary/35 bg-primary/12 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                {pendingIntakes.length}
+              </span>
+            </div>
+            <div className="mt-4 space-y-2.5">
+              {pendingIntakes.map((intake) => (
+                <div
+                  key={intake.id}
+                  className="flex flex-wrap items-center gap-3 rounded-sm border border-border/55 bg-surface/25 px-3.5 py-3"
+                >
+                  <span className="dashboard-record-icon">{intake.business_name.slice(0, 2).toUpperCase()}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className={DASHBOARD_CARD_TITLE_CLASS}>{intake.business_name}</p>
+                    <p className={cn(DASHBOARD_CARD_META_CLASS, "mt-0.5")}>
+                      {intake.submission_number} · Submitted {formatShortDate(intake.created_at)}
+                    </p>
+                  </div>
+                  <span className="rounded-full border border-warning/40 bg-warning/12 px-2.5 py-0.5 text-xs font-semibold text-warning">
+                    {intake.status.replace(/_/g, " ")}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ) : null}
+
+        <section className="space-y-3">
+          {sortedProjects.map((project) => (
+            <DashboardProjectCard
+              key={project.id}
+              href={`/dashboard/projects/${project.id}`}
+              title={project.title}
+              projectNumber={project.project_number}
+              status={project.status}
+              updatedAt={formatShortDate(project.updated_at)}
+              initials={project.title.slice(0, 2).toUpperCase()}
+            />
+          ))}
+        </section>
+
+        {projects.length === 0 && pendingIntakes.length === 0 ? (
+          <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-10 text-center" hoverable={false}>
+            <p className={DASHBOARD_EMPTY_TITLE_CLASS}>No projects yet</p>
+            <p className="mt-2 text-sm text-text-muted">
+              Submit a free demo request from the homepage to start your first project workspace.
+            </p>
+            <LinkButton href="/" variant="outline" size="sm" className="mt-5">
+              Start a project
+              <ArrowRightIcon className="ml-1 size-4" />
+            </LinkButton>
+          </Card>
+        ) : null}
+      </div>
+    );
+  }
+
   function renderView() {
     if (loading) {
       return (
@@ -1075,6 +1196,8 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
         return renderAppointments();
       case "support":
         return renderSupport();
+      case "projects":
+        return renderProjects();
       case "overview":
       default:
         return renderOverview();

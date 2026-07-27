@@ -97,6 +97,68 @@ export function DashboardProductCard({
   );
 }
 
+type DashboardProjectCardProps = {
+  href: string;
+  title: string;
+  projectNumber: string;
+  status: string;
+  updatedAt: string;
+  initials: string;
+};
+
+function projectStatusTone(status: string) {
+  const state = status.toLowerCase();
+  if (state === "delivered" || state === "completed" || state === "done") {
+    return "border-primary/35 bg-primary/12 text-primary";
+  }
+  if (state === "cancelled" || state === "archived") {
+    return "border-destructive/40 bg-destructive/10 text-destructive";
+  }
+  return "border-warning/40 bg-warning/12 text-warning";
+}
+
+function projectStatusLabel(status: string) {
+  return status.replace(/_/g, " ");
+}
+
+export function DashboardProjectCard({
+  href,
+  title,
+  projectNumber,
+  status,
+  updatedAt,
+  initials,
+}: DashboardProjectCardProps) {
+  return (
+    <Link href={href} className="dashboard-panel-surface dashboard-order-card">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex min-w-0 items-start gap-3">
+          <span className="dashboard-record-icon">{initials}</span>
+          <div className="min-w-0 flex-1">
+            <p className={cn(DASHBOARD_CARD_TITLE_CLASS, "mt-0.5")}>{title}</p>
+            <p className={cn(DASHBOARD_CARD_META_CLASS, "mt-0.5 truncate")}>{projectNumber}</p>
+            <p className={cn(DASHBOARD_CARD_META_CLASS, "mt-0.5")}>Updated {updatedAt}</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/55 pt-3 lg:justify-end lg:border-t-0 lg:pt-0">
+          <span
+            className={cn(
+              "inline-flex rounded-full border px-2.5 py-0.5 text-xs font-semibold",
+              projectStatusTone(status),
+            )}
+          >
+            {projectStatusLabel(status)}
+          </span>
+          <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border/60 bg-surface/35 text-text-muted">
+            <ChevronRightIcon className="size-4" aria-hidden />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 type DashboardOrderCardProps = {
   href: string;
   orderNumber: string;

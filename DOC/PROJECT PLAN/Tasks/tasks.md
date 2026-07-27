@@ -1034,3 +1034,17 @@ Remaining parallel tracks:
   - gates: QG-typecheck=pass, QG-test=pass(68/68), QG-lint=pre-existing-fail(IntakeForm.tsx:237)
   - commit: 2f875bb
   - handoff: none
+
+### 2026-07-27 — Refactor dashboard Projects page to shared design system
+- **Mode:** `refactor_existing_system`
+- **Goal:** Make `/dashboard/projects` consistent with other CustomerDashboard views (Orders, Appointments, etc.) using `DashboardShell`, `DashboardHeroBand`, `DashboardRecordCards`, `Card`, and `dashboard-typography` tokens.
+- **Approach:** Added a `projects` view to `CustomerDashboard` and `CustomerDashboardView` union; deleted the bespoke `MyProjectsClient` component; replaced `page.tsx` with `CustomerDashboard view="projects"`.
+- **Touched files:** `web/src/app/dashboard/CustomerDashboard.tsx`, `web/src/components/dashboard/DashboardRecordCards.tsx`, `web/src/app/dashboard/projects/page.tsx`, `web/src/app/dashboard/projects/MyProjectsClient.tsx` (deleted), `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Functionality preserved:** Loads projects from `/api/v1/me/projects` and intakes from `/api/v1/me/intakes`; shows pending intakes not linked to a project; lists projects with title, project_number, status, updated_at; links each project to `/dashboard/projects/{id}`; empty state when no projects and no pending intakes.
+- **Validation:** Scoped `npx eslint` on touched files exit 0; `npm run typecheck --prefix web` exit 0; `npm run build --prefix web` exit 0. `npm run lint --prefix web` only fails on pre-existing `react-hooks/set-state-in-effect` in `web/src/components/intake/IntakeForm.tsx:237` (not touched).
+- **Commit:** pending
+- 2026-07-27T19:35:00+06:00 | senior-frontend-specialist | refactor_existing_system | Refactor dashboard Projects page to shared DS
+  - files_touched: web/src/app/dashboard/CustomerDashboard.tsx, web/src/components/dashboard/DashboardRecordCards.tsx, web/src/app/dashboard/projects/page.tsx, web/src/app/dashboard/projects/MyProjectsClient.tsx (deleted), DOC/PROJECT PLAN/Tasks/tasks.md
+  - gates: QG-typecheck=pass, QG-lint=scoped-pass, QG-build=pass, QG-lint-full=pre-existing-fail(IntakeForm.tsx:237)
+  - commit: pending
+  - handoff: optional @frontend-quality-enforcer for full matrix if needed
