@@ -45,6 +45,9 @@ function pickSummary(detail: SubmissionDetail) {
   if (detail.type === "order") {
     return (r.order_number as string) ?? "";
   }
+  if (detail.type === "intake") {
+    return [r.business_name, r.business_description].filter(Boolean).join(" — ") as string;
+  }
   return "";
 }
 

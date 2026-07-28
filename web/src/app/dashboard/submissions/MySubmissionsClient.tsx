@@ -64,6 +64,8 @@ function typeLabel(type: string) {
       return "Order";
     case "newsletter":
       return "Newsletter";
+    case "intake":
+      return "Free demo";
     default:
       return type;
   }
@@ -126,7 +128,7 @@ export function MySubmissionsClient() {
       <DashboardHeroBand
         eyebrow="Submissions"
         title="My submissions"
-        description="Every contact form, booking, service request, and order tied to your account. Free demo and website intake requests live under Projects."
+        description="Every contact form, booking, service request, order, and free demo intake tied to your account."
         stats={[
           { label: "Total", value: items.length, icon: <ClipboardDocumentListIcon className="size-5" /> },
           { label: "Open", value: openCount, icon: <InboxStackIcon className="size-5" /> },
@@ -137,11 +139,11 @@ export function MySubmissionsClient() {
 
       <Card className="dashboard-panel-surface rounded-sm border-border/65 px-4 py-3" hoverable={false}>
         <p className="text-sm text-text-muted">
-          Looking for a free demo or website build request?{" "}
+          Free demo and website build requests also open a project workspace.{" "}
           <Link href="/dashboard/projects" className="font-medium text-primary underline-offset-2 hover:underline">
             Open My projects
-          </Link>
-          .
+          </Link>{" "}
+          to track progress with the Growrix team.
         </p>
       </Card>
 

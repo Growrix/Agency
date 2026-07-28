@@ -13,6 +13,7 @@ const ALLOWED_TYPES: SubmissionType[] = [
   "order",
   "newsletter",
   "support_thread",
+  "intake",
 ];
 
 type RouteContext = {
@@ -26,6 +27,7 @@ function extractOwnerEmail(detail: Awaited<ReturnType<typeof getSubmissionDetail
   if (detail.type === "service_request") return detail.record.customer_email;
   if (detail.type === "order") return detail.record.customer_email;
   if (detail.type === "newsletter") return detail.record.email;
+  if (detail.type === "intake") return detail.record.client_email;
   return null;
 }
 

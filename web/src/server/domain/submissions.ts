@@ -4,6 +4,8 @@ import { ApiError } from "@/server/core/api";
 import type {
   AppointmentRecord,
   AppointmentStatus,
+  ClientIntakeStatus,
+  ClientIntakeSubmissionRecord,
   ContactInquiryRecord,
   CustomerVisibleStatus,
   InquiryStatus,
@@ -28,6 +30,7 @@ type SubmissionStatusValue =
   | AppointmentStatus
   | ServiceRequestStatus
   | OrderFulfillmentStatus
+  | ClientIntakeStatus
   | "subscribed";
 
 export type SubmissionListItem = {
@@ -48,7 +51,8 @@ export type SubmissionDetailEnvelope =
   | { type: "appointment"; record: AppointmentRecord; notes: SubmissionNoteRecord[] }
   | { type: "service_request"; record: ServiceRequestRecord; notes: SubmissionNoteRecord[] }
   | { type: "order"; record: OrderRecord; notes: SubmissionNoteRecord[] }
-  | { type: "newsletter"; record: NewsletterSubscriberRecord; notes: SubmissionNoteRecord[] };
+  | { type: "newsletter"; record: NewsletterSubscriberRecord; notes: SubmissionNoteRecord[] }
+  | { type: "intake"; record: ClientIntakeSubmissionRecord; notes: SubmissionNoteRecord[] };
 
 export type ListSubmissionsFilters = {
   type?: SubmissionType;
@@ -144,6 +148,18 @@ export function mapToCustomerVisibleStatus(
     return "resolved";
   }
 
+  if (type === "intake") {
+    switch (internalStatus as ClientIntakeStatus) {
+      case "submitted":
+        return "open";
+      case "in_review":
+      case "project_created":
+        return "in_progress";
+      case "archived":
+        return "closed";
+    }
+  }
+
   return "open";
 }
 
@@ -216,6 +232,20 @@ function normalizeNewsletter(record: NewsletterSubscriberRecord): SubmissionList
     customer_email: record.email,
     summary: `Subscribed via ${record.source ?? "unknown"}`,
     created_at: record.subscribed_at,
+    has_customer_visible_notes: false,
+  };
+}
+
+function normalizeIntake(record: ClientIntakeSubmissionRecord): SubmissionListItem {
+  return {
+    id: record.id,
+    type: "intake",
+    status: record.status,
+    customer_visible_status: mapToCustomerVisibleStatus("intake", record.status),
+    customer_name: record.client_name,
+    customer_email: record.client_email,
+    summary: `${record.submission_number}: ${record.business_name}${record.is_free_demo ? " (Free demo)" : ""}`,
+    created_at: record.created_at,
     has_customer_visible_notes: false,
   };
 }
@@ -312,6 +342,9 @@ export async function listSubmissionsForEmail(email: string) {
       .filter((r) => r.customer_email === normalized)
       .map(normalizeServiceRequest),
     ...database.orders.filter((r) => r.customer_email === normalized).map(normalizeOrder),
+    ...(database.client_intake_submissions ?? [])
+      .filter((r) => r.client_email === normalized)
+      .map(normalizeIntake),
   ];
 
   const customerVisibleNotes = (database.submission_notes ?? []).filter((note) => note.customer_visible);
@@ -349,6 +382,10 @@ export async function getSubmissionDetail(
     const record = (database.newsletter_subscribers ?? []).find((r) => r.id === id);
     return record ? { type: "newsletter", record, notes } : null;
   }
+  if (type === "intake") {
+    const record = (database.client_intake_submissions ?? []).find((r) => r.id === id);
+    return record ? { type: "intake", record, notes } : null;
+  }
   return null;
 }
 
@@ -361,6 +398,8 @@ async function findSubmissionEmail(type: SubmissionType, id: string): Promise<st
   if (type === "order") return database.orders.find((r) => r.id === id)?.customer_email ?? null;
   if (type === "newsletter")
     return (database.newsletter_subscribers ?? []).find((r) => r.id === id)?.email ?? null;
+  if (type === "intake")
+    return (database.client_intake_submissions ?? []).find((r) => r.id === id)?.client_email ?? null;
   return null;
 }
 

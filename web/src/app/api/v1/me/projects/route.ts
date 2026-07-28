@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   try {
     const user = await requireAuthenticatedUser(request);
     const items = await listProjectsForUser(user.id);
-    return successResponse({ items, total: items.length });
+    return successResponse(items);
   } catch (error) {
     return errorResponse(
       error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "Unable to load projects."),

@@ -46,10 +46,24 @@ test("homepage loads with free demo gate without runtime errors", async ({ page 
 });
 
 test("dashboard projects page is the free-demo intake endpoint", async ({ page }) => {
+  const pageErrors: string[] = [];
+  page.on("pageerror", (error) => {
+    pageErrors.push(error.message);
+  });
+
   await page.goto("/dashboard/projects", { waitUntil: "domcontentloaded" });
   // Unauthenticated users are redirected to login; authenticated see projects workspace.
   const url = page.url();
   expect(url.includes("/dashboard/projects") || url.includes("/dashboard/login") || url.includes("/sign-in")).toBeTruthy();
+
+  // Authenticated crash regression: Application Error boundary must not appear.
+  if (url.includes("/dashboard/projects")) {
+    await page.waitForTimeout(1500);
+    await expect(page.getByText("Something went wrong.")).toHaveCount(0);
+    await expect(page.getByText("APPLICATION ERROR")).toHaveCount(0);
+  }
+
+  expect(pageErrors).toEqual([]);
 });
 
 test("intake success panel markup is present in homepage bundle after free-demo gate mounts", async ({ page }) => {
@@ -62,10 +76,14 @@ test("intake success panel markup is present in homepage bundle after free-demo 
   await page.waitForTimeout(6000);
 
   // Offer modal should open (auto 5s). Switch to form and assert the form shell mounts.
+  // MarketingViewportGate mounts mobile + desktop panels; assert the desktop-visible copy.
   const claimButton = page.getByRole("button", { name: /Claim my free demo/i });
   if (await claimButton.isVisible().catch(() => false)) {
     await claimButton.click();
-    await expect(page.getByText(/Step 1 of 5|Tell us about your project|Project intake/i).first()).toBeVisible({
+    await expect(page.getByText("Project intake")).toBeVisible({
+      timeout: 5000,
+    });
+    await expect(page.getByText(/Step 1 of 5/i).locator("visible=true").first()).toBeVisible({
       timeout: 5000,
     });
   }

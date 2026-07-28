@@ -64,7 +64,8 @@ export type SubmissionType =
   | "service_request"
   | "order"
   | "newsletter"
-  | "support_thread";
+  | "support_thread"
+  | "intake";
 
 export type SubmissionAuthorRole = "admin" | "customer" | "system";
 
