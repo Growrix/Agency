@@ -1090,3 +1090,15 @@ Remaining parallel tracks:
   - gates: QG-lint=scoped-pass, QG-typecheck=pass
   - commit: 5c2fabf
   - handoff: optional push when user requests
+
+### 2026-07-28 — Push to main (CI parity)
+- **Mode:** `verify_only` → push
+- **Pre-push:** Freed port 5000; `npm run ci:check --prefix web` exit 0 (lint, typecheck, perf:budgets, test, build, e2e release-gates desktop-chrome).
+- **Pushed:** `f3e49b5..e8d3e40` → `origin/main` (6 commits including projects crash, Clerk hardening, project workspace DS).
+- **HEAD:** `e8d3e40`
+- **Remote CI:** `gh` not authenticated — **local pass only — remote unverified.** Check https://github.com/Growrix/Agency/actions
+- 2026-07-28T15:40:00+06:00 | senior-saas-developer | verify_only | Push main after ci:check
+  - gates: QG-ci-check=pass (local)
+  - push: e8d3e40
+  - remote: unverified (gh auth missing)
+  - handoff: user verify Actions + Clerk Allowed origins if sign-in still fails on prod
