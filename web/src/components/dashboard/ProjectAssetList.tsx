@@ -74,18 +74,22 @@ export function ProjectAssetList({ projectId, assets, apiAssetsBase, onChanged }
   }
 
   if (assets.length === 0) {
-    return <p className="text-sm text-text-muted">No shared assets yet.</p>;
+    return (
+      <div className="rounded-sm border border-dashed border-border/55 px-4 py-6 text-center">
+        <p className="text-sm text-text-muted">No shared assets yet.</p>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-3">
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
-      <ul className="divide-y divide-border/60 rounded-md border border-border/60">
+      <ul className="divide-y divide-border/55 overflow-hidden rounded-sm border border-border/55">
         {assets.map((asset) => (
-          <li key={asset.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm">
-            <div>
-              <p className="font-medium text-text">{asset.label ?? asset.file_name ?? asset.url ?? "Asset"}</p>
-              <p className="text-xs text-text-muted">
+          <li key={asset.id} className="flex flex-wrap items-center justify-between gap-3 bg-surface/25 px-3.5 py-3 text-sm">
+            <div className="min-w-0">
+              <p className="truncate font-medium text-text">{asset.label ?? asset.file_name ?? asset.url ?? "Asset"}</p>
+              <p className="mt-0.5 text-xs text-text-muted">
                 {asset.kind.replace(/_/g, " ")} · {formatDateTime(asset.created_at)}
               </p>
             </div>
@@ -99,7 +103,7 @@ export function ProjectAssetList({ projectId, assets, apiAssetsBase, onChanged }
                   href={asset.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-9 items-center rounded-sm border border-border px-3 text-sm hover:bg-inset/30"
+                  className="inline-flex h-9 items-center rounded-sm border border-border/60 px-3 text-sm hover:bg-inset/30"
                 >
                   Open
                 </a>
@@ -168,8 +172,11 @@ export function ProjectAssetComposer({
   }
 
   return (
-    <form className="space-y-3 rounded-md border border-border/60 bg-surface p-4" onSubmit={(event) => void handleSubmit(event)}>
-      <p className="text-sm font-medium text-text">Share more references or files</p>
+    <form
+      className="space-y-3 rounded-sm border border-border/55 bg-surface/25 p-3.5 sm:p-4"
+      onSubmit={(event) => void handleSubmit(event)}
+    >
+      <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Share more references or files</p>
       <select className="signal-input" value={kind} onChange={(event) => setKind(event.target.value as typeof kind)}>
         <option value="reference_site">Reference website</option>
         <option value="drive_link">Drive / folder link</option>

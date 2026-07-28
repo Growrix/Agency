@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/primitives/Button";
+import { DASHBOARD_CARD_META_CLASS } from "@/lib/dashboard-typography";
+import { cn } from "@/lib/utils";
 
 type Update = {
   id: string;
@@ -23,31 +25,50 @@ function formatDateTime(value: string) {
 
 export function ProjectUpdateThread({ updates }: Props) {
   if (updates.length === 0) {
-    return <p className="text-sm text-text-muted">No updates yet. Add a note or reference to get started.</p>;
+    return (
+      <div className="rounded-sm border border-dashed border-border/55 px-4 py-6 text-center">
+        <p className="text-sm text-text-muted">No updates yet. Add a note or reference to get started.</p>
+      </div>
+    );
   }
 
   return (
-    <ul className="space-y-3">
-      {updates.map((update) => (
-        <li
-          key={update.id}
-          className={`rounded-md border px-4 py-3 ${
-            update.author_role === "admin" ? "border-primary/30 bg-primary/5" : "border-border/60 bg-inset/20"
-          }`}
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-text-muted">
-            <span className="uppercase tracking-wide">{update.author_role === "admin" ? "Growrix team" : "You"}</span>
-            <span>{formatDateTime(update.created_at)}</span>
-          </div>
-          {update.body ? <p className="mt-2 text-sm text-text">{update.body}</p> : null}
-          {update.reference_url ? (
-            <a href={update.reference_url} className="mt-2 inline-block text-sm text-primary underline" target="_blank" rel="noreferrer">
-              {update.reference_url}
-            </a>
-          ) : null}
-          <p className="mt-1 text-xs text-text-muted">{update.kind.replace(/_/g, " ")}</p>
-        </li>
-      ))}
+    <ul className="space-y-2.5">
+      {updates.map((update) => {
+        const isTeam = update.author_role === "admin";
+        return (
+          <li
+            key={update.id}
+            className={cn(
+              "rounded-sm border px-3.5 py-3",
+              isTeam ? "border-primary/25 bg-primary/8" : "border-border/55 bg-surface/25",
+            )}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={cn("text-sm font-semibold", isTeam ? "text-primary" : "text-text")}>
+                  {isTeam ? "Growrix team" : "You"}
+                </span>
+                <span className="inline-flex rounded-full border border-border/60 bg-surface/40 px-2 py-0.5 text-[11px] font-medium capitalize text-text-muted">
+                  {update.kind.replace(/_/g, " ")}
+                </span>
+              </div>
+              <span className={DASHBOARD_CARD_META_CLASS}>{formatDateTime(update.created_at)}</span>
+            </div>
+            {update.body ? <p className="mt-2 text-sm leading-6 text-text whitespace-pre-wrap">{update.body}</p> : null}
+            {update.reference_url ? (
+              <a
+                href={update.reference_url}
+                className="mt-2 inline-block text-sm text-primary underline-offset-2 hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {update.reference_url}
+              </a>
+            ) : null}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -91,15 +112,18 @@ export function ProjectUpdateComposer({
   }
 
   return (
-    <form className="space-y-3 rounded-md border border-border/60 bg-surface p-4" onSubmit={(event) => void handleSubmit(event)}>
-      <p className="text-sm font-medium text-text">Add update</p>
+    <form
+      className="space-y-3 rounded-sm border border-border/55 bg-surface/25 p-3.5 sm:p-4"
+      onSubmit={(event) => void handleSubmit(event)}
+    >
+      <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Add update</p>
       <select className="signal-input" value={kind} onChange={(event) => setKind(event.target.value as typeof kind)}>
         <option value="note">Note</option>
         <option value="instruction">Instruction</option>
         <option value="reference">Reference link</option>
       </select>
       <textarea
-        className="signal-input min-h-24"
+        className="signal-input min-h-24 resize-y"
         placeholder="Share new instructions, context, or feedback"
         value={body}
         onChange={(event) => setBody(event.target.value)}

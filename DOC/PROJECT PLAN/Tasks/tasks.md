@@ -1077,3 +1077,16 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-build=pass
   - commit: bd005c8
   - handoff: user must add Allowed origins in Clerk Dashboard; then optional push/redeploy
+
+### 2026-07-28 — Project detail workspace DS consistency (frontend only)
+- **Mode:** `refactor_existing_system`
+- **Issue:** `/dashboard/projects/[id]` used raw header + default Card spacing, inconsistent with submissions/projects list (no hero band, loose `space-y-6`, intake/timeline/assets not on `dashboard-panel-surface`).
+- **Fix:** Align `ProjectWorkspace` with dashboard shell padding + `DashboardHeroBand` + status badge + panel cards; polish timeline kind badge and empty/composer surfaces in `ProjectUpdateThread` / `ProjectAssetList`.
+- **Touched files:** `web/src/components/dashboard/ProjectWorkspace.tsx`, `ProjectUpdateThread.tsx`, `ProjectAssetList.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** scoped eslint pass; typecheck pass; ReadLints clean. No API/backend changes.
+- **Commit:** pending
+- 2026-07-28T15:30:00+06:00 | senior-saas-developer | refactor_existing_system | Project detail DS consistency
+  - files_touched: ProjectWorkspace, ProjectUpdateThread, ProjectAssetList, tasks.md
+  - gates: QG-lint=scoped-pass, QG-typecheck=pass
+  - commit: pending
+  - handoff: optional push when user requests
