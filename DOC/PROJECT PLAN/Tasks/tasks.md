@@ -1071,9 +1071,9 @@ Remaining parallel tracks:
 - **Touched files:** `web/src/components/shell/ClerkAppProvider.tsx`, `web/src/components/auth/ClerkLoadGuard.tsx` (new), `web/src/components/auth/SignInExperience.tsx`, `web/src/components/auth/SignUpExperience.tsx`, `web/docs/clerk-setup.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** scoped eslint pass; typecheck pass; build pass; ReadLints clean.
 - **Ops remaining (user):** Clerk Dashboard Allowed origins for growrixos.com / www; optional switch to `pk_live_` on Vercel Production + redeploy.
-- **Commit:** pending
+- **Commit:** `bd005c8`
 - 2026-07-28T15:05:00+06:00 | senior-saas-developer | debug_failure | Clerk load failure hardening + docs
   - files_touched: ClerkAppProvider, ClerkLoadGuard, SignIn/SignUpExperience, clerk-setup.md, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-build=pass
-  - commit: pending
+  - commit: bd005c8
   - handoff: user must add Allowed origins in Clerk Dashboard; then optional push/redeploy
