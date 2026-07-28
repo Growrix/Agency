@@ -1112,9 +1112,9 @@ Remaining parallel tracks:
   - Integration suite `web/tests/integration/admin-auth.test.ts` (8 tests): login cookie, failed audit, bypass regression, Clerk 410, analytics 401/403, soft-delete exclusion, no admin-role resurrection without Clerk metadata.
   - Security-review follow-up: `upsertUserFromClerk` no longer inherits privileged roles from soft-deleted mirrors.
 - **Validation:** lint exit 0; typecheck exit 0; admin-auth integration 8/8; full test suite exit 0; build exit 0; release-gate e2e 17/17; security-review: no high/critical findings.
-- **Commit:** pending (this session)
+- **Commit:** `6334988`
 - 2026-07-28T15:56:00+06:00 | senior-saas-developer | execute_locked_plan | Admin auth hardening completion pass
   - files_touched: dashboard/page.tsx, proxy.ts, clerk-sync.ts, admin-auth.test.ts, run-integration-tests.mjs, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(17/17), QG-security-review=pass(no high/critical)
-  - commit: pending
+  - commit: 6334988
   - handoff: optional @backend-quality-enforcer; push only on user request
