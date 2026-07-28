@@ -41,10 +41,21 @@ export async function upsertUserFromClerk(input: {
   let upserted: UserRecord | null = null;
 
   await writeDatabase((next) => {
-    const existingByClerk = next.users.find((user) => user.clerk_user_id === input.clerkUserId);
-    const existingByEmail = next.users.find((user) => user.email.toLowerCase() === normalizedEmail);
+    // Prefer active (non-deleted) mirrors so soft-deleted rows do not silently win.
+    const existingByClerk =
+      next.users.find((user) => user.clerk_user_id === input.clerkUserId && !user.deleted_at) ??
+      next.users.find((user) => user.clerk_user_id === input.clerkUserId);
+    const existingByEmail =
+      next.users.find((user) => user.email.toLowerCase() === normalizedEmail && !user.deleted_at) ??
+      next.users.find((user) => user.email.toLowerCase() === normalizedEmail);
     const existing = existingByClerk ?? existingByEmail;
-    const role = input.role ?? existing?.role ?? resolveRoleFromClerkMetadata(undefined);
+
+    // Never inherit privileged roles from a soft-deleted mirror. Re-provisioned users
+    // must get an explicit role from Clerk metadata (input.role) or default to subscriber.
+    const role =
+      input.role ??
+      (existing && !existing.deleted_at ? existing.role : undefined) ??
+      resolveRoleFromClerkMetadata(undefined);
 
     const record: UserRecord = {
       id: existing?.id ?? crypto.randomUUID(),

@@ -1102,3 +1102,19 @@ Remaining parallel tracks:
   - push: e8d3e40
   - remote: unverified (gh auth missing)
   - handoff: user verify Actions + Clerk Allowed origins if sign-in still fails on prod
+
+### 2026-07-28 — Admin auth hardening completion pass (ADMIN-AUTH-HARDENING-001)
+- **Mode:** `execute_locked_plan`
+- **Request:** Implement the attached admin auth hardening plan end-to-end (do not edit the plan file).
+- **Prior state:** Core bypass/soft-delete/CSP work already landed in `8d379f8`.
+- **This pass closed remaining plan gaps:**
+  - Non-admin denial UX: `/dashboard?reason=not_admin` banner + proxy `rejectForbidden` redirect aligned with admin layout.
+  - Integration suite `web/tests/integration/admin-auth.test.ts` (8 tests): login cookie, failed audit, bypass regression, Clerk 410, analytics 401/403, soft-delete exclusion, no admin-role resurrection without Clerk metadata.
+  - Security-review follow-up: `upsertUserFromClerk` no longer inherits privileged roles from soft-deleted mirrors.
+- **Validation:** lint exit 0; typecheck exit 0; admin-auth integration 8/8; full test suite exit 0; build exit 0; release-gate e2e 17/17; security-review: no high/critical findings.
+- **Commit:** pending (this session)
+- 2026-07-28T15:56:00+06:00 | senior-saas-developer | execute_locked_plan | Admin auth hardening completion pass
+  - files_touched: dashboard/page.tsx, proxy.ts, clerk-sync.ts, admin-auth.test.ts, run-integration-tests.mjs, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(17/17), QG-security-review=pass(no high/critical)
+  - commit: pending
+  - handoff: optional @backend-quality-enforcer; push only on user request

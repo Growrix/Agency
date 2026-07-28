@@ -135,7 +135,7 @@ function rejectForbidden(request: NextRequest) {
     );
   }
 
-  return NextResponse.redirect(new URL("/dashboard", request.url));
+  return NextResponse.redirect(new URL("/dashboard?reason=not_admin", request.url));
 }
 
 async function legacyProxy(request: NextRequest) {

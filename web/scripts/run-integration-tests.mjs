@@ -12,6 +12,7 @@ const tsxBinary =
 const testFiles = [
   "tests/integration/intake-email-flow.test.ts",
   "tests/integration/api-flows.test.ts",
+  "tests/integration/admin-auth.test.ts",
 ];
 
 const result = spawnSync(tsxBinary, ["--test", "--test-concurrency=1", ...testFiles], {
