@@ -1,6 +1,10 @@
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { NextRequest, NextResponse } from "next/server";
-import { softDeleteClerkUser, upsertUserFromClerk } from "@/server/auth/clerk-sync";
+import {
+  resolveRoleFromClerkMetadata,
+  softDeleteClerkUser,
+  upsertUserFromClerk,
+} from "@/server/auth/clerk-sync";
 import { getRuntimeConfig } from "@/server/config/runtime";
 
 export const dynamic = "force-dynamic";
@@ -32,11 +36,9 @@ export async function POST(request: NextRequest) {
       }
 
       const metadata = event.data.public_metadata as Record<string, unknown> | undefined;
-      const role =
-        typeof metadata?.role === "string" &&
-        (metadata.role === "admin" || metadata.role === "customer" || metadata.role === "subscriber")
-          ? metadata.role
-          : undefined;
+      // Always apply resolved role (defaults to subscriber) so removing admin from
+      // Clerk publicMetadata demotes the local mirror instead of preserving admin.
+      const role = resolveRoleFromClerkMetadata(metadata);
 
       await upsertUserFromClerk({
         clerkUserId: event.data.id,

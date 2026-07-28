@@ -9,7 +9,7 @@ function getNow() {
   return new Date().toISOString();
 }
 
-function resolveRoleFromClerkMetadata(
+export function resolveRoleFromClerkMetadata(
   metadata: Record<string, unknown> | undefined
 ): UserRecord["role"] {
   if (typeof metadata?.role === "string") {
@@ -20,6 +20,30 @@ function resolveRoleFromClerkMetadata(
   }
 
   return "subscriber";
+}
+
+/**
+ * Writes role into Clerk publicMetadata (SSOT). Callers must update the local
+ * mirror only after this succeeds — never leave the mirror ahead of Clerk.
+ */
+export async function updateClerkPublicRole(
+  clerkUserId: string,
+  role: UserRecord["role"],
+): Promise<void> {
+  if (!isClerkConfigured()) {
+    throw new Error("Clerk is not configured; cannot update publicMetadata.role.");
+  }
+
+  const client = await clerkClient();
+  const existing = await client.users.getUser(clerkUserId);
+  const previousMetadata = (existing.publicMetadata ?? {}) as Record<string, unknown>;
+
+  await client.users.updateUserMetadata(clerkUserId, {
+    publicMetadata: {
+      ...previousMetadata,
+      role,
+    },
+  });
 }
 
 export async function getUserByClerkId(clerkUserId: string) {

@@ -78,16 +78,43 @@ The current Frontend API (`*.clerk.accounts.dev`) is a **test** instance (`pk_te
 
 CSP in `web/next.config.ts` already allowlists `https://*.clerk.accounts.dev` and `https://*.clerk.com`.
 
-## Webhook (production)
+## Webhook (required for reliable role sync)
 
 Register in [Clerk Dashboard](https://dashboard.clerk.com):
 
-- Endpoint: `https://www.growrixos.com/api/webhooks/clerk`
+- Endpoint: `https://www.growrixos.com/api/webhooks/clerk` (use your production origin)
 - Events: `user.created`, `user.updated`, `user.deleted`
+- Signing secret → set as `CLERK_WEBHOOK_SIGNING_SECRET` in `.env.local` / Vercel
 
-## Admin access
+Without the webhook, role changes in Clerk can stay stale in the local mirror until the next **admin-path** sync (`/admin` or `/api/v1/admin/*` forces a Clerk Backend refresh).
 
-Set `publicMetadata.role = "admin"` on operator accounts in Clerk Dashboard.
+## Admin access (first admin bootstrap)
+
+Clerk `publicMetadata.role` is the **source of truth**. Local `UserRecord.role` is a mirror.
+
+### Create the first admin
+
+1. Sign up / sign in normally (same Clerk flow as customers) so the user exists.
+2. In Clerk Dashboard → **Users** → select the operator → **Public metadata**:
+
+```json
+{
+  "role": "admin"
+}
+```
+
+3. Save. Prefer waiting for webhook `user.updated`, or open `/admin` once (admin routes re-sync from Clerk).
+4. Open `/admin/login` or `/admin` with that account.
+
+### Demotion
+
+Remove or change `publicMetadata.role` away from `"admin"` in Clerk (or set `"subscriber"` / `"customer"`). Webhook `user.updated` demotes the local mirror. The next `/admin` visit also re-syncs and denies access.
+
+### In-app role changes
+
+Admin Users UI (`PATCH /api/v1/admin/users/:id`) updates **Clerk first**, then the local mirror. If Clerk update fails, the local role is **not** changed.
+
+There is **no** separate admin password and **no** `ADMIN_EMAIL`/`ADMIN_PASSWORD` path when Clerk keys are configured.
 
 ## Verify locally
 
@@ -97,8 +124,20 @@ npm run dev
 
 Open `/`, confirm header Sign in / Sign up, complete sign-up, land on `/dashboard`.
 
+After setting `publicMetadata.role = "admin"`, open `/admin` and confirm the admin panel loads. A non-admin signed-in user must land on `/dashboard?reason=not_admin`.
+
 ## Verify production
 
 1. Open `https://www.growrixos.com/sign-in` — Clerk card must render (no `failed_to_load_clerk_js` in DevTools).
 2. If clerk-js is blocked, `/sign-in` shows a recovery panel with Retry + alternate login (code hardening in `ClerkLoadGuard`).
 3. Complete sign-in → land on `/dashboard`.
+4. Operator with `publicMetadata.role = "admin"` → `/admin` succeeds.
+5. Confirm webhook deliveries succeed in Clerk Dashboard (user.updated after metadata edits).
+
+## Production checklist
+
+- [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` + `CLERK_SECRET_KEY` on Vercel Production
+- [ ] `CLERK_WEBHOOK_SIGNING_SECRET` set; webhook endpoint + events registered
+- [ ] Allowed origins include production domains
+- [ ] First operator has `publicMetadata.role = "admin"`
+- [ ] Redirect URLs: `/sign-in`, `/sign-up`, after-auth `/dashboard`

@@ -203,8 +203,15 @@ function shouldEnforceCompletion(pathname: string) {
   return false;
 }
 
-async function resolveMirroredClerkUser(userId: string) {
+async function resolveMirroredClerkUser(userId: string, options?: { forceSync?: boolean }) {
   const { getUserByClerkId, syncClerkUser } = await import("@/server/auth/clerk-sync");
+
+  // Admin surfaces always re-sync from Clerk so publicMetadata.role demotions/promotions
+  // are not stuck behind a stale local mirror. Non-admin paths keep the cheap cache hit.
+  if (options?.forceSync) {
+    return syncClerkUser(userId).catch(() => null);
+  }
+
   const existing = await getUserByClerkId(userId).catch(() => null);
   if (existing) {
     return existing;
@@ -240,7 +247,10 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
     }
     const needsMirroredUser =
       Boolean(userId) && (isAdminPath(pathname) || shouldEnforceCompletion(pathname));
-    const mirroredUser = needsMirroredUser && userId ? await resolveMirroredClerkUser(userId) : null;
+    const mirroredUser =
+      needsMirroredUser && userId
+        ? await resolveMirroredClerkUser(userId, { forceSync: isAdminPath(pathname) })
+        : null;
 
     if (userId && isAdminPath(pathname)) {
       if (mirroredUser?.role !== "admin") {

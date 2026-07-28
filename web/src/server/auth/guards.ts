@@ -4,7 +4,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { type NextRequest, NextResponse } from "next/server";
 import { ApiError } from "@/server/core/api";
 import { isClerkConfigured, isLegacyTestAuthEnabled } from "@/server/auth/clerk-config";
-import { getUserByClerkId, syncClerkUser, upsertUserFromClerk } from "@/server/auth/clerk-sync";
+import { getUserByClerkId, syncClerkUser, upsertUserFromClerk, resolveRoleFromClerkMetadata } from "@/server/auth/clerk-sync";
 import { getUserById } from "@/server/auth/users";
 import { recordAuditLog } from "@/server/logging/observability";
 import {
@@ -91,6 +91,9 @@ async function resolveClerkUserFromSession(userId: string) {
       email: primaryEmail,
       firstName: clerkUser.firstName ?? undefined,
       lastName: clerkUser.lastName ?? undefined,
+      role: resolveRoleFromClerkMetadata(
+        clerkUser.publicMetadata as Record<string, unknown> | undefined,
+      ),
     });
   } catch (error) {
     console.error("[auth] currentUser fallback failed for clerk userId", userId, error);

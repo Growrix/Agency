@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { ApiError, errorResponse, successResponse } from "@/server/core/api";
 import { requireAdminUser } from "@/server/auth/guards";
+import { updateClerkPublicRole } from "@/server/auth/clerk-sync";
 import { getUserById } from "@/server/auth/users";
 import { writeDatabase } from "@/server/data/store";
 import { recordAuditLog } from "@/server/logging/observability";
@@ -79,6 +80,33 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       );
     }
 
+    // Clerk publicMetadata.role is SSOT. Update Clerk first; only then mirror locally.
+    // Never leave the local mirror ahead of Clerk on a failed write.
+    if (nextRole && nextRole !== previousRole && targetExists.clerk_user_id) {
+      try {
+        await updateClerkPublicRole(targetExists.clerk_user_id, nextRole);
+      } catch (error) {
+        await recordAuditLog({
+          level: "error",
+          action: "admin.user_role_clerk_update_failed",
+          actor_email: actor.email,
+          metadata: {
+            target_user_id: userId,
+            target_email: targetExists.email,
+            clerk_user_id: targetExists.clerk_user_id,
+            previous_role: previousRole,
+            attempted_role: nextRole,
+            error: error instanceof Error ? error.message : "unknown",
+          },
+        });
+        throw new ApiError(
+          "SERVICE_UNAVAILABLE",
+          503,
+          "Unable to update role in Clerk. Local role was not changed.",
+        );
+      }
+    }
+
     let updated: UserRecord | null = null;
     await writeDatabase((next) => ({
       ...next,
@@ -108,6 +136,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
           target_email: targetExists.email,
           previous_role: previousRole,
           next_role: nextRole,
+          clerk_synced: Boolean(targetExists.clerk_user_id),
         },
       });
     }

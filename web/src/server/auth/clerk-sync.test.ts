@@ -46,4 +46,63 @@ describe("clerk user mirror", () => {
     assert.equal(synced.clerk_user_id, "user_clerk_test_123");
     assert.equal((await getUserByClerkId("user_clerk_test_123"))?.email, "buyer@example.com");
   });
+
+  it("resolveRoleFromClerkMetadata defaults to subscriber and accepts admin", async () => {
+    const { resolveRoleFromClerkMetadata } = await import("@/server/auth/clerk-sync");
+    assert.equal(resolveRoleFromClerkMetadata(undefined), "subscriber");
+    assert.equal(resolveRoleFromClerkMetadata({}), "subscriber");
+    assert.equal(resolveRoleFromClerkMetadata({ role: "admin" }), "admin");
+    assert.equal(resolveRoleFromClerkMetadata({ role: "invalid" }), "subscriber");
+  });
+
+  it("demotes prior admin when webhook-style role subscriber is applied", async () => {
+    await resetDatabase();
+    delete process.env.CLERK_SECRET_KEY;
+    delete process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+    resetRuntimeConfigForTests();
+    resetSupabaseClientsForTests();
+
+    const { upsertUserFromClerk, resolveRoleFromClerkMetadata } = await import(
+      "@/server/auth/clerk-sync"
+    );
+
+    await upsertUserFromClerk({
+      clerkUserId: "user_admin_demote",
+      email: "demote@example.com",
+      role: "admin",
+    });
+
+    // Simulates webhook user.updated after publicMetadata.role was removed in Clerk.
+    const demoted = await upsertUserFromClerk({
+      clerkUserId: "user_admin_demote",
+      email: "demote@example.com",
+      role: resolveRoleFromClerkMetadata({}),
+    });
+
+    assert.equal(demoted.role, "subscriber");
+  });
+
+  it("promotes subscriber when explicit admin role is supplied", async () => {
+    await resetDatabase();
+    delete process.env.CLERK_SECRET_KEY;
+    delete process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+    resetRuntimeConfigForTests();
+    resetSupabaseClientsForTests();
+
+    const { upsertUserFromClerk } = await import("@/server/auth/clerk-sync");
+
+    await upsertUserFromClerk({
+      clerkUserId: "user_promote",
+      email: "promote@example.com",
+      role: "subscriber",
+    });
+
+    const promoted = await upsertUserFromClerk({
+      clerkUserId: "user_promote",
+      email: "promote@example.com",
+      role: "admin",
+    });
+
+    assert.equal(promoted.role, "admin");
+  });
 });

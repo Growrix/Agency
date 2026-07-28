@@ -236,4 +236,26 @@ describe("admin auth API flows", () => {
     assert.equal(restored.role, "subscriber", "must not inherit prior admin role from soft-deleted mirror");
     assert.equal(restored.deleted_at, undefined);
   });
+
+  it("demotes active admin when resolved metadata role is subscriber (webhook demotion)", async () => {
+    // Admin PATCH role writeback is Clerk-first then local (see users/[userId]/route.ts).
+    // This test covers the webhook/sync demotion path that keeps the local mirror aligned.
+    const { upsertUserFromClerk, resolveRoleFromClerkMetadata } = await import(
+      "@/server/auth/clerk-sync"
+    );
+
+    await upsertUserFromClerk({
+      clerkUserId: "clerk_active_admin",
+      email: "active-admin@example.com",
+      role: "admin",
+    });
+
+    const demoted = await upsertUserFromClerk({
+      clerkUserId: "clerk_active_admin",
+      email: "active-admin@example.com",
+      role: resolveRoleFromClerkMetadata({}),
+    });
+
+    assert.equal(demoted.role, "subscriber");
+  });
 });
