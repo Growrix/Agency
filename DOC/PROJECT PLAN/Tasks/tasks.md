@@ -1129,9 +1129,9 @@ Remaining parallel tracks:
   - Admin user PATCH: Clerk `publicMetadata.role` first, then local mirror; fail closed + audit on Clerk error.
   - Docs: `web/docs/clerk-setup.md` first-admin / webhook / demotion checklist.
 - **Validation:** lint, typecheck, unit+integration (incl. clerk-sync demote/promote + admin-auth), build, 17/17 release-gate e2e.
-- **Commit:** pending
+- **Commit:** `b7b3e85`
 - 2026-07-28T20:30:00+06:00 | senior-saas-developer | execute_locked_plan | Admin auth production readiness sync
   - files_touched: proxy.ts, guards.ts, clerk-sync.ts, webhooks/clerk/route.ts, admin/users/[userId]/route.ts, clerk-sync.test.ts, admin-auth.test.ts, clerk-setup.md, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(17/17)
-  - commit: pending
+  - commit: b7b3e85
   - handoff: user must set publicMetadata.role=admin + webhook in Clerk Dashboard
