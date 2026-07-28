@@ -1084,9 +1084,9 @@ Remaining parallel tracks:
 - **Fix:** Align `ProjectWorkspace` with dashboard shell padding + `DashboardHeroBand` + status badge + panel cards; polish timeline kind badge and empty/composer surfaces in `ProjectUpdateThread` / `ProjectAssetList`.
 - **Touched files:** `web/src/components/dashboard/ProjectWorkspace.tsx`, `ProjectUpdateThread.tsx`, `ProjectAssetList.tsx`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
 - **Validation:** scoped eslint pass; typecheck pass; ReadLints clean. No API/backend changes.
-- **Commit:** pending
+- **Commit:** `5c2fabf`
 - 2026-07-28T15:30:00+06:00 | senior-saas-developer | refactor_existing_system | Project detail DS consistency
   - files_touched: ProjectWorkspace, ProjectUpdateThread, ProjectAssetList, tasks.md
   - gates: QG-lint=scoped-pass, QG-typecheck=pass
-  - commit: pending
+  - commit: 5c2fabf
   - handoff: optional push when user requests
