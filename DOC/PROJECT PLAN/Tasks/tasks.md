@@ -1063,3 +1063,17 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(6/6)
   - commit: 3f453b3
   - handoff: optional @devops-release-engineer after user requests push/redeploy
+
+### 2026-07-28 — Clerk failed_to_load_clerk_js on production (code hardening)
+- **Mode:** `debug_failure`
+- **Root cause:** Production-only ClerkRuntimeError `failed_to_load_clerk_js_timeout` loading `generous-lioness-64.clerk.accounts.dev`. Local works; CSP already allowlists `*.clerk.accounts.dev`. Canonical ops fix: add `https://growrixos.com` + `https://www.growrixos.com` to Clerk Allowed origins (operator). Secondary: production still uses `pk_test_` instance.
+- **Code hardening (this commit):** Error boundary around `ClerkProvider` so load failures do not blank the app; `ClerkLoadGuard` with `ClerkFailed`/`ClerkLoaded` + 8s timeout fallback on `/sign-in` and `/sign-up`; document production allowlist + live-instance recommendation in `web/docs/clerk-setup.md`.
+- **Touched files:** `web/src/components/shell/ClerkAppProvider.tsx`, `web/src/components/auth/ClerkLoadGuard.tsx` (new), `web/src/components/auth/SignInExperience.tsx`, `web/src/components/auth/SignUpExperience.tsx`, `web/docs/clerk-setup.md`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** scoped eslint pass; typecheck pass; build pass; ReadLints clean.
+- **Ops remaining (user):** Clerk Dashboard Allowed origins for growrixos.com / www; optional switch to `pk_live_` on Vercel Production + redeploy.
+- **Commit:** pending
+- 2026-07-28T15:05:00+06:00 | senior-saas-developer | debug_failure | Clerk load failure hardening + docs
+  - files_touched: ClerkAppProvider, ClerkLoadGuard, SignIn/SignUpExperience, clerk-setup.md, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-build=pass
+  - commit: pending
+  - handoff: user must add Allowed origins in Clerk Dashboard; then optional push/redeploy

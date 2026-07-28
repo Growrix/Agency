@@ -3,6 +3,7 @@
 import { SignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { ClerkAuthShell, clerkAuthAppearance } from "@/components/auth/ClerkAuthShell";
+import { ClerkLoadGuard } from "@/components/auth/ClerkLoadGuard";
 import { LinkButton } from "@/components/primitives/Button";
 import { isClerkConfiguredClient } from "@/lib/clerk-client";
 
@@ -12,6 +13,7 @@ type SignUpExperienceProps = {
 
 export function SignUpExperience({ redirectUrl }: SignUpExperienceProps) {
   const signInWithNext = `/sign-in?next=${encodeURIComponent(redirectUrl)}`;
+  const legacyLoginHref = `/dashboard/login?next=${encodeURIComponent(redirectUrl)}`;
 
   if (!isClerkConfiguredClient()) {
     return (
@@ -29,13 +31,20 @@ export function SignUpExperience({ redirectUrl }: SignUpExperienceProps) {
       title="Create your account"
       description="Register to manage digital product downloads, order history, and customer support in one place."
     >
-      <SignUp forceRedirectUrl={redirectUrl} signInUrl={signInWithNext} appearance={clerkAuthAppearance} />
-      <p className="mt-6 text-center text-sm text-text-muted">
-        Already have an account?{" "}
-        <Link href={signInWithNext} className="font-medium text-primary hover:underline">
-          Sign in
-        </Link>
-      </p>
+      <ClerkLoadGuard
+        recoveryHref={legacyLoginHref}
+        recoveryLabel="Continue to login"
+        title="Sign-up is taking longer than expected"
+        description="We could not load Clerk on this domain. Retry, or use the alternate login path while we restore authentication."
+      >
+        <SignUp forceRedirectUrl={redirectUrl} signInUrl={signInWithNext} appearance={clerkAuthAppearance} />
+        <p className="mt-6 text-center text-sm text-text-muted">
+          Already have an account?{" "}
+          <Link href={signInWithNext} className="font-medium text-primary hover:underline">
+            Sign in
+          </Link>
+        </p>
+      </ClerkLoadGuard>
     </ClerkAuthShell>
   );
 }
