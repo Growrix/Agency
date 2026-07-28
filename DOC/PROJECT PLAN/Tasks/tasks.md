@@ -1048,3 +1048,18 @@ Remaining parallel tracks:
   - gates: QG-typecheck=pass, QG-lint=scoped-pass, QG-build=pass, QG-lint-full=pre-existing-fail(IntakeForm.tsx:237)
   - commit: f39c223
   - handoff: optional @frontend-quality-enforcer for full matrix if needed
+
+### 2026-07-28 — Fix /dashboard/projects crash + surface free-demo intake as submission
+- **Mode:** `debug_failure`
+- **Root cause (projects crash):** `/api/v1/me/projects` and `/api/v1/me/intakes` returned `successResponse({ items, total })` while `CustomerDashboard` expected a bare array. Spreading the object threw `TypeError: ... is not iterable` and tripped the Application Error boundary.
+- **Root cause (missing submission):** `listSubmissionsForEmail` omitted `client_intake_submissions`, so free-demo intakes never appeared on `/dashboard/submissions`.
+- **Fix:** Return `successResponse(items)` from both me list routes; add `"intake"` to `SubmissionType`; normalize/list/detail/email wiring in submissions domain; update submissions UI labels/copy and detail summary; allow `"intake"` on me submission detail routes; strengthen intake e2e regression for projects crash + desktop-visible form locator.
+- **Touched files:** `web/src/app/api/v1/me/projects/route.ts`, `web/src/app/api/v1/me/intakes/route.ts`, `web/src/server/data/schema.ts`, `web/src/server/domain/submissions.ts`, `web/src/app/api/v1/me/submissions/[type]/[id]/route.ts`, `web/src/app/api/v1/me/submissions/[type]/[id]/notes/route.ts`, `web/src/app/dashboard/submissions/MySubmissionsClient.tsx`, `web/src/app/dashboard/submissions/[type]/[id]/MySubmissionDetailClient.tsx`, `web/tests/e2e/intake-flow.spec.ts`, `DOC/PROJECT PLAN/Tasks/tasks.md`.
+- **Validation:** lint pass; typecheck pass; unit+integration pass; build pass; e2e intake-flow 6/6 pass (desktop-chrome). ReadLints clean on touched files.
+- **Redeploy:** Required after push (user-gated). No new env vars.
+- **Commit:** `3f453b3`
+- 2026-07-28T14:30:00+06:00 | senior-saas-developer | debug_failure | Fix projects crash + surface free-demo intake
+  - files_touched: me/projects+intakes routes, schema, submissions domain+UI+detail APIs, intake-flow.spec.ts, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(6/6)
+  - commit: 3f453b3
+  - handoff: optional @devops-release-engineer after user requests push/redeploy
