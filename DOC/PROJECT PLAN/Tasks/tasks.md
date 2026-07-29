@@ -1146,9 +1146,9 @@ Remaining parallel tracks:
   - `webhooks/clerk/route.ts`: log 503/401/per-event apply failures.
   - One-shot mirror heal: wrote `role=admin` for growrixos@gmail.com into Supabase `app_state` (previous=subscriber → next=admin).
 - **Validation:** clerk-sync unit 5/5; integration 24/24; lint exit 0; typecheck exit 0; ReadLints clean.
-- **Commit:** `567f3d6`
+- **Commit:** `9b7fad3`
 - 2026-07-29T20:15:00+06:00 | senior-saas-developer | debug_failure | Admin role stale mirror fix
   - files_touched: guards.ts, admin/layout.tsx, clerk-sync.ts, clerk-sync.test.ts, proxy.ts, webhooks/clerk/route.ts, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-unit=pass(5/5), QG-integration=pass(24/24)
-  - commit: 567f3d6
+  - commit: 9b7fad3
   - handoff: user open /admin as growrixos@gmail.com; push/redeploy when ready so prod gets forceClerkRefresh
