@@ -55,6 +55,14 @@ describe("clerk user mirror", () => {
     assert.equal(resolveRoleFromClerkMetadata({ role: "invalid" }), "subscriber");
   });
 
+  it("resolveRoleFromClerkMetadata trims and lowercases role values", async () => {
+    const { resolveRoleFromClerkMetadata } = await import("@/server/auth/clerk-sync");
+    assert.equal(resolveRoleFromClerkMetadata({ role: "Admin" }), "admin");
+    assert.equal(resolveRoleFromClerkMetadata({ role: " admin " }), "admin");
+    assert.equal(resolveRoleFromClerkMetadata({ role: "CUSTOMER" }), "customer");
+    assert.equal(resolveRoleFromClerkMetadata({ role: " Subscriber " }), "subscriber");
+  });
+
   it("demotes prior admin when webhook-style role subscriber is applied", async () => {
     await resetDatabase();
     delete process.env.CLERK_SECRET_KEY;

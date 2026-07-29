@@ -209,7 +209,10 @@ async function resolveMirroredClerkUser(userId: string, options?: { forceSync?: 
   // Admin surfaces always re-sync from Clerk so publicMetadata.role demotions/promotions
   // are not stuck behind a stale local mirror. Non-admin paths keep the cheap cache hit.
   if (options?.forceSync) {
-    return syncClerkUser(userId).catch(() => null);
+    return syncClerkUser(userId).catch((error) => {
+      console.error("[proxy] admin force-sync failed", userId, error);
+      return null;
+    });
   }
 
   const existing = await getUserByClerkId(userId).catch(() => null);
@@ -217,7 +220,10 @@ async function resolveMirroredClerkUser(userId: string, options?: { forceSync?: 
     return existing;
   }
 
-  return syncClerkUser(userId).catch(() => null);
+  return syncClerkUser(userId).catch((error) => {
+    console.error("[proxy] clerk sync failed", userId, error);
+    return null;
+  });
 }
 
 async function clerkProxy(request: NextRequest, event: NextFetchEvent) {

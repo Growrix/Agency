@@ -101,13 +101,24 @@ async function resolveClerkUserFromSession(userId: string) {
   }
 }
 
-async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
+type AuthOptions = {
+  /**
+   * When true (admin surfaces), re-sync from Clerk instead of trusting a
+   * possibly-stale local mirror. Prefer the Node server runtime over middleware.
+   */
+  forceClerkRefresh?: boolean;
+};
+
+async function getClerkAuthenticatedUser(options?: AuthOptions): Promise<AuthenticatedUser | null> {
   const { userId } = await auth();
   if (!userId) {
     return null;
   }
 
-  let user = await getUserByClerkId(userId);
+  let user = options?.forceClerkRefresh
+    ? await resolveClerkUserFromSession(userId)
+    : await getUserByClerkId(userId);
+
   if (!user) {
     user = await resolveClerkUserFromSession(userId);
   }
@@ -120,16 +131,22 @@ async function getClerkAuthenticatedUser(): Promise<AuthenticatedUser | null> {
   return mapUserRecord(user);
 }
 
-export async function getAuthenticatedUser(request: Request | NextRequest): Promise<AuthenticatedUser | null> {
+export async function getAuthenticatedUser(
+  request: Request | NextRequest,
+  options?: AuthOptions,
+): Promise<AuthenticatedUser | null> {
   if (isClerkConfigured()) {
-    return getClerkAuthenticatedUser();
+    return getClerkAuthenticatedUser(options);
   }
 
   return getLegacyAuthenticatedUser(request);
 }
 
-export async function requireAuthenticatedUser(request: Request | NextRequest) {
-  const user = await getAuthenticatedUser(request);
+export async function requireAuthenticatedUser(
+  request: Request | NextRequest,
+  options?: AuthOptions,
+) {
+  const user = await getAuthenticatedUser(request, options);
   if (!user) {
     throw new ApiError("UNAUTHORIZED", 401, "Authentication is required.");
   }
@@ -138,7 +155,9 @@ export async function requireAuthenticatedUser(request: Request | NextRequest) {
 }
 
 export async function requireAdminUser(request: Request | NextRequest) {
-  const user = await requireAuthenticatedUser(request);
+  // Admin APIs must re-sync from Clerk so a stale subscriber mirror cannot
+  // permanently deny operators after publicMetadata.role was promoted.
+  const user = await requireAuthenticatedUser(request, { forceClerkRefresh: true });
   if (user.role !== "admin") {
     throw new ApiError("FORBIDDEN", 403, "Admin access is required.");
   }

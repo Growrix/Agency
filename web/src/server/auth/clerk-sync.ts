@@ -13,7 +13,7 @@ export function resolveRoleFromClerkMetadata(
   metadata: Record<string, unknown> | undefined
 ): UserRecord["role"] {
   if (typeof metadata?.role === "string") {
-    const role = metadata.role as UserRecord["role"];
+    const role = metadata.role.trim().toLowerCase();
     if (role === "admin" || role === "customer" || role === "subscriber") {
       return role;
     }

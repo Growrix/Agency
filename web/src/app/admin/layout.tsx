@@ -15,7 +15,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     headers: headerList,
   });
 
-  const user = await getAuthenticatedUser(sentinelRequest);
+  // Force Clerk refresh in the Node server runtime so a stale local mirror
+  // (e.g. subscriber from first signup) cannot permanently deny /admin.
+  const user = await getAuthenticatedUser(sentinelRequest, { forceClerkRefresh: true });
 
   if (!user) {
     redirect("/admin/login?next=/admin");

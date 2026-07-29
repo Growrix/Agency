@@ -1135,3 +1135,20 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-test=pass, QG-build=pass, QG-e2e=pass(17/17)
   - commit: b7b3e85
   - handoff: user must set publicMetadata.role=admin + webhook in Clerk Dashboard
+
+### 2026-07-29 — Fix growrixos@gmail.com admin role not applied at /admin
+- **Mode:** `debug_failure`
+- **Evidence:** Clerk `publicMetadata.role=admin` for `user_3G2pvRJU6npkpqCDu9pVSeH5nHc` / growrixos@gmail.com; shared Supabase mirror was stale `subscriber` (updated_at 2026-07-04). Middleware force-sync was silent on failure; admin layout trusted the stale cache.
+- **Fix:**
+  - `guards.ts`: `forceClerkRefresh` option; admin layout + `requireAdminUser` re-sync from Clerk in Node runtime.
+  - `clerk-sync.ts`: trim+lowercase role parse (`Admin` / ` admin ` → `admin`).
+  - `proxy.ts`: log swallowed force-sync failures.
+  - `webhooks/clerk/route.ts`: log 503/401/per-event apply failures.
+  - One-shot mirror heal: wrote `role=admin` for growrixos@gmail.com into Supabase `app_state` (previous=subscriber → next=admin).
+- **Validation:** clerk-sync unit 5/5; integration 24/24; lint exit 0; typecheck exit 0; ReadLints clean.
+- **Commit:** `567f3d6`
+- 2026-07-29T20:15:00+06:00 | senior-saas-developer | debug_failure | Admin role stale mirror fix
+  - files_touched: guards.ts, admin/layout.tsx, clerk-sync.ts, clerk-sync.test.ts, proxy.ts, webhooks/clerk/route.ts, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-unit=pass(5/5), QG-integration=pass(24/24)
+  - commit: 567f3d6
+  - handoff: user open /admin as growrixos@gmail.com; push/redeploy when ready so prod gets forceClerkRefresh
