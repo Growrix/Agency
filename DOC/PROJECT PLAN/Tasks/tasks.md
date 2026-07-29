@@ -1163,8 +1163,9 @@ Remaining parallel tracks:
 - **Evidence:** Clerk+Supabase both `admin` for growrixos@gmail.com; curl: `/admin/login` → 200; `/auth/after-sign-in` → 307 `/sign-in?next=/auth/after-sign-in`; `/admin` signed-out → 307 `/sign-in?redirect_url=.../admin`.
 - **Fix:** Remove Clerk middleware role gate; Node admin layout + `requireAdminUser`; `/auth/after-sign-in`; dashboard admin safety redirect; honor `redirect_url`+`next`; skip auth gate on `/admin/login`.
 - **Validation:** unit 7/7; integration 24/24; lint exit 0; typecheck exit 0; ReadLints clean; curl smoke above.
-- **Commit:** (pending)
+- **Commit:** `61290a6`
 - 2026-07-29T20:50:00+06:00 | senior-saas-developer | debug_failure | Admin login routing fix
   - files_touched: proxy.ts, admin/layout.tsx, auth/after-sign-in, dashboard/page.tsx, sign-in/sign-up, auth-redirect.ts, ClerkAppProvider, runtime.ts, clerk-setup.md, .env.example, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-unit=pass(7/7), QG-integration=pass(24/24)
+  - commit: 61290a6
   - handoff: user verify local `/admin/login` as growrixos@gmail.com → `/admin`; push/redeploy when requested
