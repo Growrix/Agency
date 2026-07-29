@@ -150,7 +150,11 @@ async function legacyProxy(request: NextRequest) {
   }
 
   if (!isProtectedPath(request.nextUrl.pathname)) {
-    return NextResponse.next();
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-growrix-pathname", request.nextUrl.pathname);
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+    });
   }
 
   // Lazy-load JWT helpers so marketing routes never pull `server-only` / runtime config.
@@ -165,7 +169,11 @@ async function legacyProxy(request: NextRequest) {
     if (isAdminPath(request.nextUrl.pathname) && payload.role !== "admin") {
       return rejectForbidden(request);
     }
-    return NextResponse.next();
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-growrix-pathname", request.nextUrl.pathname);
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+    });
   } catch {
     return rejectLegacy(request);
   }
@@ -203,18 +211,10 @@ function shouldEnforceCompletion(pathname: string) {
   return false;
 }
 
-async function resolveMirroredClerkUser(userId: string, options?: { forceSync?: boolean }) {
+async function resolveMirroredClerkUser(userId: string) {
   const { getUserByClerkId, syncClerkUser } = await import("@/server/auth/clerk-sync");
 
-  // Admin surfaces always re-sync from Clerk so publicMetadata.role demotions/promotions
-  // are not stuck behind a stale local mirror. Non-admin paths keep the cheap cache hit.
-  if (options?.forceSync) {
-    return syncClerkUser(userId).catch((error) => {
-      console.error("[proxy] admin force-sync failed", userId, error);
-      return null;
-    });
-  }
-
+  // Completion checks use a cheap cache hit; admin role is enforced in Node layouts/APIs.
   const existing = await getUserByClerkId(userId).catch(() => null);
   if (existing) {
     return existing;
@@ -251,18 +251,13 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
         await auth.protect();
       }
     }
-    const needsMirroredUser =
-      Boolean(userId) && (isAdminPath(pathname) || shouldEnforceCompletion(pathname));
+    // Admin role authorization lives in Node (admin/layout + requireAdminUser), not
+    // middleware — Edge mirror sync was false-denying operators to /dashboard.
+    // Middleware only ensures the user is signed in for /admin and /api/v1/admin/*.
     const mirroredUser =
-      needsMirroredUser && userId
-        ? await resolveMirroredClerkUser(userId, { forceSync: isAdminPath(pathname) })
+      userId && shouldEnforceCompletion(pathname)
+        ? await resolveMirroredClerkUser(userId)
         : null;
-
-    if (userId && isAdminPath(pathname)) {
-      if (mirroredUser?.role !== "admin") {
-        return rejectForbidden(nextRequest);
-      }
-    }
 
     if (userId && shouldEnforceCompletion(pathname)) {
       const isCompleted = Boolean(mirroredUser?.signup_completed_at);
@@ -292,7 +287,11 @@ async function clerkProxy(request: NextRequest, event: NextFetchEvent) {
       }
     }
 
-    return NextResponse.next();
+    const requestHeaders = new Headers(nextRequest.headers);
+    requestHeaders.set("x-growrix-pathname", pathname);
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+    });
   })(request, event);
 }
 
@@ -327,6 +326,7 @@ export const config = {
     "/previews/website-templates-html/:path*",
     "/admin/:path*",
     "/dashboard/:path*",
+    "/auth/after-sign-in",
     "/complete-account/:path*",
     "/sign-in/:path*",
     "/sign-up/:path*",

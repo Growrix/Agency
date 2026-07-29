@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
 import { SignInExperience } from "@/components/auth/SignInExperience";
+import { resolveAuthRedirectPath } from "@/lib/auth-redirect";
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
@@ -12,17 +13,19 @@ export const metadata: Metadata = {
 };
 
 type SignInPageProps = {
-  searchParams?: Promise<{ next?: string | string[] }>;
+  searchParams?: Promise<{
+    next?: string | string[];
+    redirect_url?: string | string[];
+  }>;
 };
-
-function resolveRedirectPath(next: string | string[] | undefined) {
-  const nextPath = Array.isArray(next) ? next[0] : next;
-  return nextPath && nextPath.startsWith("/") ? nextPath : "/dashboard";
-}
 
 export default async function SignInPage({ searchParams }: SignInPageProps) {
   const resolved = searchParams ? await searchParams : undefined;
-  const redirectUrl = resolveRedirectPath(resolved?.next);
+  const redirectUrl = resolveAuthRedirectPath({
+    next: resolved?.next,
+    redirect_url: resolved?.redirect_url,
+    fallback: "/auth/after-sign-in",
+  });
 
   return <SignInExperience redirectUrl={redirectUrl} />;
 }

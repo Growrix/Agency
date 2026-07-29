@@ -103,8 +103,8 @@ Clerk `publicMetadata.role` is the **source of truth**. Local `UserRecord.role` 
 }
 ```
 
-3. Save. Prefer waiting for webhook `user.updated`, or open `/admin` once (admin routes re-sync from Clerk).
-4. Open `/admin/login` or `/admin` with that account.
+3. Save. Prefer waiting for webhook `user.updated`, or open `/admin` once (admin layout re-syncs from Clerk in Node).
+4. Sign in via `/admin/login` (redirects to `/admin`) or generic `/sign-in` (lands on `/auth/after-sign-in`, then `/admin` for admins).
 
 ### Demotion
 
@@ -116,24 +116,25 @@ Admin Users UI (`PATCH /api/v1/admin/users/:id`) updates **Clerk first**, then t
 
 There is **no** separate admin password and **no** `ADMIN_EMAIL`/`ADMIN_PASSWORD` path when Clerk keys are configured.
 
+Admin and customer dashboards share the **same Clerk session**; access is separated by `role`, not by a second auth provider.
+
 ## Verify locally
 
 ```bash
 npm run dev
 ```
 
-Open `/`, confirm header Sign in / Sign up, complete sign-up, land on `/dashboard`.
+Open `/`, confirm header Sign in / Sign up, complete sign-up, land on `/auth/after-sign-in` → `/dashboard` for non-admins.
 
-After setting `publicMetadata.role = "admin"`, open `/admin` and confirm the admin panel loads. A non-admin signed-in user must land on `/dashboard?reason=not_admin`.
+After setting `publicMetadata.role = "admin"`, sign in and confirm landing is `/admin`. A non-admin signed-in user opening `/admin` must land on `/dashboard?reason=not_admin`.
 
 ## Verify production
 
 1. Open `https://www.growrixos.com/sign-in` — Clerk card must render (no `failed_to_load_clerk_js` in DevTools).
 2. If clerk-js is blocked, `/sign-in` shows a recovery panel with Retry + alternate login (code hardening in `ClerkLoadGuard`).
-3. Complete sign-in → land on `/dashboard`.
+3. Complete sign-in → `/auth/after-sign-in` routes admins to `/admin` and others to `/dashboard`.
 4. Operator with `publicMetadata.role = "admin"` → `/admin` succeeds.
 5. Confirm webhook deliveries succeed in Clerk Dashboard (user.updated after metadata edits).
-
 ## Production checklist
 
 - [ ] `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` + `CLERK_SECRET_KEY` on Vercel Production

@@ -8,9 +8,21 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
+function isAdminLoginPath(pathname: string) {
+  return pathname === "/admin/login" || pathname.startsWith("/admin/login/");
+}
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const headerList = await headers();
+  const pathname = headerList.get("x-growrix-pathname") ?? "";
+
+  // /admin/login must stay public — it lives under /admin/* but must not require admin role.
+  if (isAdminLoginPath(pathname)) {
+    return children;
+  }
+
   const sentinelRequest = new Request("https://internal/admin", {
     headers: headerList,
   });

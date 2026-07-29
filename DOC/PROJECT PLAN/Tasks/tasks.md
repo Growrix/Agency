@@ -1152,3 +1152,19 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-unit=pass(5/5), QG-integration=pass(24/24)
   - commit: 9b7fad3
   - handoff: user open /admin as growrixos@gmail.com; push/redeploy when ready so prod gets forceClerkRefresh
+
+### 2026-07-29 — Admin login routing + role gate separation
+- **Mode:** `debug_failure`
+- **Root causes:**
+  1. Middleware still made the final admin role decision and could false-deny before Node layout ran.
+  2. Default post-login landing was customer-first (`/dashboard`); no role-aware router.
+  3. `/admin/login` was wrapped by admin layout that required admin session (login page not truly public).
+  4. Clerk `auth.protect()` sends `/sign-in?redirect_url=/admin`, but sign-in only read `next` and ignored `redirect_url`.
+- **Evidence:** Clerk+Supabase both `admin` for growrixos@gmail.com; curl: `/admin/login` → 200; `/auth/after-sign-in` → 307 `/sign-in?next=/auth/after-sign-in`; `/admin` signed-out → 307 `/sign-in?redirect_url=.../admin`.
+- **Fix:** Remove Clerk middleware role gate; Node admin layout + `requireAdminUser`; `/auth/after-sign-in`; dashboard admin safety redirect; honor `redirect_url`+`next`; skip auth gate on `/admin/login`.
+- **Validation:** unit 7/7; integration 24/24; lint exit 0; typecheck exit 0; ReadLints clean; curl smoke above.
+- **Commit:** (pending)
+- 2026-07-29T20:50:00+06:00 | senior-saas-developer | debug_failure | Admin login routing fix
+  - files_touched: proxy.ts, admin/layout.tsx, auth/after-sign-in, dashboard/page.tsx, sign-in/sign-up, auth-redirect.ts, ClerkAppProvider, runtime.ts, clerk-setup.md, .env.example, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-unit=pass(7/7), QG-integration=pass(24/24)
+  - handoff: user verify local `/admin/login` as growrixos@gmail.com → `/admin`; push/redeploy when requested
