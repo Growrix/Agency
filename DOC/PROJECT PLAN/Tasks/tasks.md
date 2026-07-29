@@ -1202,4 +1202,5 @@ Remaining parallel tracks:
 - 2026-07-29T22:15:00+06:00 | senior-saas-developer | refactor_existing_system | Admin global shell redesign
   - files_touched: admin/layout.tsx, AdminDashboardChrome.tsx, admin-nav.ts, AdminPage.tsx, AdminDashboard.tsx, all listed admin *Client.tsx, DashboardShell.tsx, globals.css, commerce-admin.spec.ts, site-brain.md, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-build=pass, QG-admin-e2e=pass(2/2)
+  - commit: f3b79e2
   - handoff: hard-refresh any `/admin/orders` (etc.) — sidebar+header must match overview; `/admin/login` stays shell-free
