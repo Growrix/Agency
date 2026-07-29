@@ -1178,8 +1178,9 @@ Remaining parallel tracks:
   - Add `/api/v1/me/dashboard` aggregate (one auth + one `readDatabase`) via `getCustomerDashboardSnapshot`.
   - `CustomerDashboard` loads once from that endpoint.
 - **Validation:** integration 25/25 (incl. customer-dashboard); lint exit 0; typecheck exit 0; ReadLints clean.
-- **Commit:** (pending)
+- **Commit:** `e9bfae9`
 - 2026-07-29T21:40:00+06:00 | senior-saas-developer | debug_failure | Dashboard UX leakage + aggregate fetch
   - files_touched: dashboard/page.tsx, CustomerDashboard.tsx, admin/layout.tsx, proxy.ts, me/dashboard route, customer-dashboard.ts, customer-dashboard.test.ts, clerk-setup.md, tasks.md
   - gates: QG-lint=pass, QG-typecheck=pass, QG-integration=pass(25/25)
+  - commit: e9bfae9
   - handoff: user hard-refresh `/dashboard` — no admin text; Network should show one `/api/v1/me/dashboard` call; push/redeploy when requested
