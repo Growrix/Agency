@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
 
 type OrderRecord = {
   id: string;
@@ -36,6 +38,8 @@ const PAYMENT_FILTERS = [
   { value: "failed", label: "Failed" },
   { value: "refunded", label: "Refunded" },
 ] as const;
+
+const PAGE_META = resolveAdminSectionMeta("/admin/orders");
 
 function formatDateTime(value: string) {
   const date = new Date(value);
@@ -178,23 +182,17 @@ export function AdminOrdersClient() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl space-y-6 px-4 py-12">
-      <header className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Admin</p>
-          <h1 className="mt-1 font-display text-3xl tracking-tight">Orders</h1>
-          <p className="mt-2 text-sm text-text-muted">
-            Track all orders, search and filter quickly, mark fulfillment state, and capture internal notes.
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+        meta={
+          <p className="text-xs text-text-muted">
+            {items.length} loaded · {counts.pending} pending · {counts.fulfilled} fulfilled
           </p>
-        </div>
-        <div className="flex items-center gap-3 text-xs text-text-muted">
-          <span>{items.length} loaded</span>
-          <span>·</span>
-          <span>{counts.pending} pending</span>
-          <span>·</span>
-          <span>{counts.fulfilled} fulfilled</span>
-        </div>
-      </header>
+        }
+      />
 
       <Card>
         <div className="grid gap-3 p-4 md:grid-cols-[minmax(0,1fr)_180px_180px_auto] md:items-end">
@@ -245,28 +243,17 @@ export function AdminOrdersClient() {
         </div>
       </Card>
 
-      {error ? (
-        <Card>
-          <p role="alert" className="text-sm text-destructive">
-            {error}
-          </p>
-        </Card>
-      ) : null}
-
-      {feedback ? (
-        <Card>
-          <p className="text-sm text-primary">{feedback}</p>
-        </Card>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
+      {feedback ? <AdminPageAlert tone="info">{feedback}</AdminPageAlert> : null}
 
       <div className="space-y-3">
         {loading ? (
           <Card>
-            <p className="text-sm text-text-muted">Loading orders...</p>
+            <p className="p-4 text-sm text-text-muted">Loading orders...</p>
           </Card>
         ) : items.length === 0 ? (
           <Card>
-            <p className="text-sm text-text-muted">No orders match these filters.</p>
+            <p className="p-4 text-sm text-text-muted">No orders match these filters.</p>
           </Card>
         ) : (
           items.map((order) => {
@@ -357,6 +344,6 @@ export function AdminOrdersClient() {
           })
         )}
       </div>
-    </main>
+    </AdminPage>
   );
 }

@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/reports");
 
 type ReportPeriod = "7d" | "30d" | "90d" | "all";
 
@@ -96,20 +100,14 @@ export function ReportsClient() {
   }, []);
 
   return (
-    <div className="space-y-6 p-6">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-muted">REPORTS</p>
-        <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight sm:text-3xl">Business intelligence</h2>
-        <p className="mt-1.5 text-sm text-text-muted max-w-2xl">
-          Revenue, best-sellers, and coupon usage aggregated from paid orders.
-        </p>
-      </div>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+      />
 
-      {error ? (
-        <div className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-          {error}
-        </div>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       {loading ? <p className="text-sm text-text-muted">Loading reports…</p> : null}
 
@@ -243,6 +241,6 @@ export function ReportsClient() {
           <p className="text-xs text-text-muted">Generated {new Date(summary.generated_at).toLocaleString()}</p>
         </>
       ) : null}
-    </div>
+    </AdminPage>
   );
 }

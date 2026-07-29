@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
 import { cn } from "@/lib/utils";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/users");
 
 type UserListItem = {
   id: string;
@@ -106,19 +110,22 @@ export function UsersListClient() {
   }, [fetchList]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
-      <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Admin</p>
-          <h1 className="mt-1 font-display text-3xl tracking-tight">Users</h1>
-          <p className="mt-2 text-sm text-text-muted">
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={
+          <>
             Role assignment + sign-up completion state. Revoking admission forces the user back
-            through <code className="rounded-sm bg-inset/30 px-1 py-0.5 text-xs">/complete-account</code>{" "}
+            through{" "}
+            <code className="rounded-sm bg-inset/30 px-1 py-0.5 text-xs">/complete-account</code>{" "}
             on their next visit.
-          </p>
-        </div>
-        <p className="text-xs text-text-muted">{total} users</p>
-      </header>
+          </>
+        }
+        meta={<p className="text-xs text-text-muted">{total} users</p>}
+      />
+
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       <Card>
         <div className="flex flex-wrap items-center gap-3 border-b border-border/55 px-4 py-3">
@@ -128,7 +135,7 @@ export function UsersListClient() {
               id="users-role"
               value={role}
               onChange={(event) => setRole(event.target.value)}
-              className="rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input"
             >
               {ROLE_FILTERS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -143,7 +150,7 @@ export function UsersListClient() {
               id="users-completion"
               value={completion}
               onChange={(event) => setCompletion(event.target.value)}
-              className="rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input"
             >
               {COMPLETION_FILTERS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -160,17 +167,13 @@ export function UsersListClient() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="email, name, Clerk id"
-              className="flex-1 rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input flex-1"
             />
           </div>
           <Button type="button" variant="outline" size="sm" onClick={() => void fetchList()}>
             Refresh
           </Button>
         </div>
-
-        {error ? (
-          <p role="alert" className="px-4 py-3 text-sm text-destructive">{error}</p>
-        ) : null}
 
         {loading ? (
           <p className="px-4 py-6 text-sm text-text-muted">Loading…</p>
@@ -222,6 +225,6 @@ export function UsersListClient() {
           </ul>
         )}
       </Card>
-    </main>
+    </AdminPage>
   );
 }

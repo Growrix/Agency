@@ -1,9 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { Button } from "@/components/primitives/Button";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
+import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/users/");
 
 type UserDetail = {
   id: string;
@@ -114,21 +117,28 @@ export function UserDetailClient({ userId }: { userId: string }) {
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
-      <Link href="/admin/users" className="text-sm text-text-muted hover:text-primary">
-        ← All users
-      </Link>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={user ? displayName(user) : PAGE_META.title}
+        description={user?.email}
+        actions={
+          <LinkButton href="/admin/users" variant="ghost" size="sm">
+            ← All users
+          </LinkButton>
+        }
+      />
 
       {loading ? (
-        <p className="mt-4 text-sm text-text-muted">Loading…</p>
+        <p className="text-sm text-text-muted">Loading…</p>
       ) : !user ? (
-        <p className="mt-4 text-sm text-destructive">{error ?? "User not found."}</p>
+        <AdminPageAlert tone="error">{error ?? "User not found."}</AdminPageAlert>
       ) : (
-        <div className="mt-6 space-y-6">
+        <div className="space-y-6">
           <Card>
             <header>
               <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">User</p>
-              <h1 className="mt-1 font-display text-2xl tracking-tight">{displayName(user)}</h1>
+              <h2 className="mt-1 font-display text-2xl tracking-tight">{displayName(user)}</h2>
               <p className="mt-1 text-sm text-text-muted">{user.email}</p>
             </header>
 
@@ -212,10 +222,10 @@ export function UserDetailClient({ userId }: { userId: string }) {
             </div>
           </Card>
 
-          {notice ? <p className="text-sm text-success">{notice}</p> : null}
-          {error ? <p className="text-sm text-destructive">{error}</p> : null}
+          {notice ? <AdminPageAlert tone="success">{notice}</AdminPageAlert> : null}
+          {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
         </div>
       )}
-    </main>
+    </AdminPage>
   );
 }

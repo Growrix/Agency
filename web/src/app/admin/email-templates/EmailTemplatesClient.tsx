@@ -1,8 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/email-templates");
 
 type OrderTemplate = {
   subject: string;
@@ -121,39 +125,25 @@ export function EmailTemplatesClient() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl space-y-6 px-4 py-12">
-      <header className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Admin</p>
-          <h1 className="mt-1 font-display text-3xl tracking-tight">Order email templates</h1>
-          <p className="mt-2 text-sm text-text-muted">
-            Customize the team notification sent for every new order. Placeholders in double curly braces
-            are replaced automatically.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <LinkButton href="/admin/email-log" variant="outline" size="sm">
-            View email log
-          </LinkButton>
-          <Button type="button" variant="outline" size="sm" onClick={() => void loadTemplate()}>
-            Refresh
-          </Button>
-        </div>
-      </header>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+        actions={
+          <>
+            <LinkButton href="/admin/email-log" variant="outline" size="sm">
+              View email log
+            </LinkButton>
+            <Button type="button" variant="outline" size="sm" onClick={() => void loadTemplate()}>
+              Refresh
+            </Button>
+          </>
+        }
+      />
 
-      {error ? (
-        <Card>
-          <p role="alert" className="text-sm text-destructive">
-            {error}
-          </p>
-        </Card>
-      ) : null}
-
-      {notice ? (
-        <Card>
-          <p className="text-sm text-primary">{notice}</p>
-        </Card>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
+      {notice ? <AdminPageAlert tone="info">{notice}</AdminPageAlert> : null}
 
       {loading ? (
         <Card>
@@ -223,6 +213,6 @@ export function EmailTemplatesClient() {
           </Card>
         </div>
       )}
-    </main>
+    </AdminPage>
   );
 }

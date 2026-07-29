@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/submissions");
 
 type SubmissionListItem = {
   id: string;
@@ -108,17 +112,17 @@ export function SubmissionsInboxClient() {
   }, [items]);
 
   return (
-    <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-      <header className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Operations</p>
-          <h1 className="mt-1 font-display text-3xl tracking-tight">Submissions Inbox</h1>
-          <p className="mt-1 text-sm text-text-muted">
-            Unified queue across contact, booking, service request, order, and newsletter records.
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+        meta={
+          <p className="text-sm text-text-muted">
+            {total} matching · {items.length} loaded
           </p>
-        </div>
-        <p className="text-sm text-text-muted">{total} matching · {items.length} loaded</p>
-      </header>
+        }
+      />
 
       <Card variant="inset" className="space-y-3">
         <div className="flex flex-wrap gap-2">
@@ -154,11 +158,7 @@ export function SubmissionsInboxClient() {
         </div>
       </Card>
 
-      {error ? (
-        <Card>
-          <p className="text-sm text-destructive">{error}</p>
-        </Card>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       <Card className="overflow-hidden p-0">
         <div className="border-b border-border/60 bg-inset/30 px-4 py-2 text-xs uppercase tracking-[0.18em] text-text-muted">
@@ -196,6 +196,6 @@ export function SubmissionsInboxClient() {
           ) : null}
         </ul>
       </Card>
-    </div>
+    </AdminPage>
   );
 }

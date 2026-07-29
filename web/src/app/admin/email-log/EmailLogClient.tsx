@@ -1,8 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/email-log");
 
 type EmailLogEntry = {
   id: string;
@@ -102,26 +106,25 @@ export function EmailLogClient() {
   }, [items]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
-      <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Admin</p>
-          <h1 className="mt-1 font-display text-3xl tracking-tight">Email log</h1>
-          <p className="mt-2 text-sm text-text-muted">
-            Audit trail of outbound team notifications routed through Resend. Surfaces delivered,
-            failed, and configuration-skipped attempts.
-          </p>
-        </div>
-        <div className="flex items-center gap-3 text-xs text-text-muted">
-          <span>{total} entries</span>
-          <span>·</span>
-          <span>{counts.delivered} delivered</span>
-          <span>·</span>
-          <span className="text-destructive">{counts.failed} failed</span>
-          <span>·</span>
-          <span className="text-warning">{counts.skipped} skipped</span>
-        </div>
-      </header>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+        meta={
+          <div className="flex items-center gap-3 text-xs text-text-muted">
+            <span>{total} entries</span>
+            <span>·</span>
+            <span>{counts.delivered} delivered</span>
+            <span>·</span>
+            <span className="text-destructive">{counts.failed} failed</span>
+            <span>·</span>
+            <span className="text-warning">{counts.skipped} skipped</span>
+          </div>
+        }
+      />
+
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       <Card>
         <div className="flex flex-wrap items-center gap-3 border-b border-border/55 px-4 py-3">
@@ -133,7 +136,7 @@ export function EmailLogClient() {
               id="email-log-status"
               value={status}
               onChange={(event) => setStatus(event.target.value)}
-              className="rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input"
             >
               {STATUS_FILTERS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -152,19 +155,13 @@ export function EmailLogClient() {
               value={kind}
               onChange={(event) => setKind(event.target.value)}
               placeholder="contact_inquiry"
-              className="rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input"
             />
           </div>
           <Button type="button" variant="outline" size="sm" onClick={() => void fetchList()}>
             Refresh
           </Button>
         </div>
-
-        {error ? (
-          <p role="alert" className="px-4 py-3 text-sm text-destructive">
-            {error}
-          </p>
-        ) : null}
 
         {loading ? (
           <p className="px-4 py-6 text-sm text-text-muted">Loading…</p>
@@ -206,6 +203,6 @@ export function EmailLogClient() {
           </ul>
         )}
       </Card>
-    </main>
+    </AdminPage>
   );
 }

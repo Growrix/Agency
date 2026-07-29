@@ -23,6 +23,24 @@ type DashboardShellProps = {
   children: React.ReactNode;
 };
 
+function isNavItemActive(href: string, currentPath: string, allHrefs: string[]) {
+  if (currentPath === href) {
+    return true;
+  }
+
+  if (!currentPath.startsWith(`${href}/`)) {
+    return false;
+  }
+
+  // Prefer the longest matching nav href so `/admin` does not stay active on nested routes.
+  return !allHrefs.some(
+    (other) =>
+      other !== href &&
+      other.startsWith(`${href}/`) &&
+      (currentPath === other || currentPath.startsWith(`${other}/`)),
+  );
+}
+
 export function DashboardShell({
   title,
   currentPath,
@@ -36,6 +54,7 @@ export function DashboardShell({
   const sidebarWidthClass = collapsed
     ? "lg:grid-cols-[var(--dashboard-sidebar-collapsed)_minmax(0,1fr)]"
     : "lg:grid-cols-[var(--dashboard-sidebar-expanded)_minmax(0,1fr)]";
+  const navHrefs = navItems.map((item) => item.href);
 
   return (
     <div className={cn("h-screen min-h-0 overflow-hidden bg-background lg:grid", sidebarWidthClass)}>
@@ -109,7 +128,7 @@ export function DashboardShell({
 
         <nav className="relative flex-1 space-y-1.5 overflow-y-auto px-3 py-4">
           {navItems.map((item) => {
-            const active = item.href === currentPath;
+            const active = isNavItemActive(item.href, currentPath, navHrefs);
             return (
               <Link
                 key={item.href}

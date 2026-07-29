@@ -3,8 +3,12 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/intakes/");
 
 type IntakeDetail = {
   id: string;
@@ -91,44 +95,49 @@ export function AdminIntakeDetailClient() {
   }
 
   if (loading) {
-    return <p className="p-6 text-sm text-text-muted">Loading intake…</p>;
+    return (
+      <AdminPage>
+        <AdminPageHeader eyebrow={PAGE_META.eyebrow} title={PAGE_META.title} />
+        <p className="text-sm text-text-muted">Loading intake…</p>
+      </AdminPage>
+    );
   }
 
   if (error || !intake) {
     return (
-      <div className="space-y-4 p-6">
-        <p className="text-sm text-destructive">{error ?? "Intake not found."}</p>
+      <AdminPage>
+        <AdminPageHeader eyebrow={PAGE_META.eyebrow} title={PAGE_META.title} />
+        <AdminPageAlert tone="error">{error ?? "Intake not found."}</AdminPageAlert>
         <LinkButton href="/admin/intakes" variant="outline" size="sm">
           Back to intakes
         </LinkButton>
-      </div>
+      </AdminPage>
     );
   }
 
   return (
-    <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-      <header className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <LinkButton href="/admin/intakes" variant="ghost" size="sm">
-            ← All intakes
-          </LinkButton>
-          <h1 className="mt-2 font-display text-3xl tracking-tight">{intake.business_name}</h1>
-          <p className="mt-1 text-sm text-text-muted">
-            {intake.submission_number} · {intake.client_name} · {intake.client_email}
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {intake.project_id ? (
-            <LinkButton href={`/admin/projects/${intake.project_id}`} size="sm">
-              Open project
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={intake.business_name}
+        description={`${intake.submission_number} · ${intake.client_name} · ${intake.client_email}`}
+        actions={
+          <>
+            <LinkButton href="/admin/intakes" variant="ghost" size="sm">
+              ← All intakes
             </LinkButton>
-          ) : (
-            <Button type="button" size="sm" disabled={converting} onClick={() => void convertToProject()}>
-              {converting ? "Creating…" : "Convert to project"}
-            </Button>
-          )}
-        </div>
-      </header>
+            {intake.project_id ? (
+              <LinkButton href={`/admin/projects/${intake.project_id}`} size="sm">
+                Open project
+              </LinkButton>
+            ) : (
+              <Button type="button" size="sm" disabled={converting} onClick={() => void convertToProject()}>
+                {converting ? "Creating…" : "Convert to project"}
+              </Button>
+            )}
+          </>
+        }
+      />
 
       <Card className="space-y-3">
         <p className="text-sm text-text">{intake.business_description}</p>
@@ -188,6 +197,6 @@ export function AdminIntakeDetailClient() {
           </p>
         ) : null}
       </Card>
-    </div>
+    </AdminPage>
   );
 }

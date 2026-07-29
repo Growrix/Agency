@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { StarIcon as StarSolid } from "@heroicons/react/24/solid";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/reviews");
 
 type ReviewStatus = "pending" | "approved" | "rejected";
 
@@ -108,14 +112,12 @@ export function ReviewsModerationClient() {
   };
 
   return (
-    <div className="space-y-5 p-6">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-muted">REVIEWS</p>
-        <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight sm:text-3xl">Moderation queue</h2>
-        <p className="mt-1.5 text-sm text-text-muted max-w-2xl">
-          Approve or reject verified-purchase reviews before they appear on product pages.
-        </p>
-      </div>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+      />
 
       <div className="flex flex-wrap gap-2">
         {FILTERS.map((option) => (
@@ -131,11 +133,7 @@ export function ReviewsModerationClient() {
         ))}
       </div>
 
-      {error ? (
-        <div className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-          {error}
-        </div>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       {loading ? <p className="text-sm text-text-muted">Loading reviews…</p> : null}
 
@@ -202,6 +200,6 @@ export function ReviewsModerationClient() {
           </Card>
         ))}
       </div>
-    </div>
+    </AdminPage>
   );
 }

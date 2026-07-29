@@ -3,9 +3,13 @@
 import { Dialog } from "@headlessui/react";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { PencilSquareIcon, PlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
 import { cn } from "@/lib/utils";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/coupons");
 
 type CouponItem = {
   id: string;
@@ -222,21 +226,21 @@ export function CouponsClient() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
-      <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Admin</p>
-          <h1 className="mt-1 font-display text-3xl tracking-tight">Coupons</h1>
-          <p className="mt-2 max-w-2xl text-sm text-text-muted">
-            Percent-only discount codes. Codes are matched case-insensitively at checkout. Deactivating
-            a coupon prevents new use immediately without deleting the record.
-          </p>
-        </div>
-        <Button type="button" size="sm" onClick={openCreate}>
-          <PlusIcon className="size-4" />
-          New coupon
-        </Button>
-      </header>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+        actions={
+          <Button type="button" size="sm" onClick={openCreate}>
+            <PlusIcon className="size-4" />
+            New coupon
+          </Button>
+        }
+      />
+
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
+      {notice ? <AdminPageAlert tone="success">{notice}</AdminPageAlert> : null}
 
       <Card>
         <div className="flex flex-wrap items-center gap-3 border-b border-border/55 px-4 py-3">
@@ -248,7 +252,7 @@ export function CouponsClient() {
               id="coupons-active"
               value={activeFilter}
               onChange={(event) => setActiveFilter(event.target.value)}
-              className="rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input"
             >
               {ACTIVE_FILTERS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -267,7 +271,7 @@ export function CouponsClient() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="code or description"
-              className="flex-1 rounded-sm border border-border bg-surface px-2 py-1.5 text-sm"
+              className="signal-input flex-1"
             />
           </div>
           <Button type="button" variant="outline" size="sm" onClick={() => void fetchList()}>
@@ -275,13 +279,6 @@ export function CouponsClient() {
           </Button>
           <p className="text-xs text-text-muted">{total} coupons</p>
         </div>
-
-        {error ? (
-          <p role="alert" className="px-4 py-3 text-sm text-destructive">
-            {error}
-          </p>
-        ) : null}
-        {notice ? <p className="px-4 py-3 text-sm text-success">{notice}</p> : null}
 
         {loading ? (
           <p className="px-4 py-6 text-sm text-text-muted">Loading…</p>
@@ -504,6 +501,6 @@ export function CouponsClient() {
           </Dialog.Panel>
         </div>
       </Dialog>
-    </main>
+    </AdminPage>
   );
 }

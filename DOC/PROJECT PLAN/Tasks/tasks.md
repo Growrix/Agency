@@ -1184,3 +1184,22 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-integration=pass(25/25)
   - commit: e9bfae9
   - handoff: user hard-refresh `/dashboard` — no admin text; Network should show one `/api/v1/me/dashboard` call; push/redeploy when requested
+
+### 2026-07-29 — Admin dashboard global shell redesign
+- **Mode:** `refactor_existing_system`
+- **Problem:** Newer admin routes rendered without shared sidebar/layout; only overview/activity/catalog/pipeline used `DashboardShell`.
+- **Fix:**
+  - Global `AdminDashboardChrome` in `admin/layout.tsx` for all non-login `/admin/**` routes.
+  - Centralized nav/title metadata in `web/src/lib/admin-nav.ts`.
+  - Shared `AdminPage` / `AdminPageHeader` / `AdminPageAlert` scaffolding.
+  - Migrated list + detail admin clients onto shared scaffolding; removed nested shell from `AdminDashboard.tsx`.
+  - Nested-route-aware sidebar active matching in `DashboardShell`.
+- **Validation:**
+  - lint exit 0; typecheck exit 0; unit/integration via health:check tests pass; production build exit 0
+  - health:check e2e blocked once by occupied `:5000` (reuseExistingServer required)
+  - release-gates 16/17 then transactional noindex flake (`Request context disposed`); unrelated to admin shell
+  - admin E2E: login renders without shell + protected routes redirect without sidebar — 2/2 pass (`PW_REUSE_DEV_SERVER=1`)
+- 2026-07-29T22:15:00+06:00 | senior-saas-developer | refactor_existing_system | Admin global shell redesign
+  - files_touched: admin/layout.tsx, AdminDashboardChrome.tsx, admin-nav.ts, AdminPage.tsx, AdminDashboard.tsx, all listed admin *Client.tsx, DashboardShell.tsx, globals.css, commerce-admin.spec.ts, site-brain.md, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-build=pass, QG-admin-e2e=pass(2/2)
+  - handoff: hard-refresh any `/admin/orders` (etc.) — sidebar+header must match overview; `/admin/login` stays shell-free

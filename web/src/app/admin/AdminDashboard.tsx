@@ -1,25 +1,7 @@
 "use client";
 
-import {
-  Cog6ToothIcon,
-  ChartBarSquareIcon,
-  ChartPieIcon,
-  ClipboardDocumentListIcon,
-  EnvelopeOpenIcon,
-  InboxIcon,
-  QueueListIcon,
-  ShoppingBagIcon,
-  Squares2X2Icon,
-  StarIcon,
-  TicketIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { DashboardShell, type DashboardNavItem } from "@/components/dashboard/DashboardShell";
-import { AppSignOutButton } from "@/components/auth/AppSignOutButton";
-import { Button, LinkButton } from "@/components/primitives/Button";
-import { Card } from "@/components/primitives/Card";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import {
   CatalogServiceForm,
   type CatalogServiceFormValues,
@@ -32,6 +14,9 @@ import {
   CatalogPortfolioForm,
   type CatalogPortfolioFormValues,
 } from "@/components/admin/CatalogPortfolioForm";
+import { Button } from "@/components/primitives/Button";
+import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
 
 type AdminDashboardView = "overview" | "activity" | "catalog" | "pipeline";
 
@@ -323,44 +308,14 @@ async function loadAdminState(): Promise<LoadedAdminState> {
   };
 }
 
-const viewMeta: Record<AdminDashboardView, { title: string; description: string }> = {
-  overview: {
-    title: "Operational Snapshot",
-    description: "Real-time volume and health of customer-facing touchpoints.",
-  },
-  activity: {
-    title: "Activity Stream",
-    description: "Recent analytics and audit events across the platform.",
-  },
-  catalog: {
-    title: "Catalog Studio",
-    description: "Manage services, products, and portfolio records in one workspace.",
-  },
-  pipeline: {
-    title: "Pipeline Monitor",
-    description: "Latest inquiries, appointments, and order movement.",
-  },
+const VIEW_PATH: Record<AdminDashboardView, string> = {
+  overview: "/admin",
+  activity: "/admin/activity",
+  catalog: "/admin/catalog",
+  pipeline: "/admin/pipeline",
 };
 
-const navItems: DashboardNavItem[] = [
-  { href: "/admin", label: "Overview", icon: <Squares2X2Icon className="h-4 w-4" /> },
-  { href: "/admin/activity", label: "Activity", icon: <ChartBarSquareIcon className="h-4 w-4" /> },
-  { href: "/admin/catalog", label: "Catalog", icon: <ClipboardDocumentListIcon className="h-4 w-4" /> },
-  { href: "/admin/pipeline", label: "Pipeline", icon: <QueueListIcon className="h-4 w-4" /> },
-  { href: "/admin/orders", label: "Orders", icon: <ShoppingBagIcon className="h-4 w-4" /> },
-  { href: "/admin/submissions", label: "Submissions", icon: <InboxIcon className="h-4 w-4" /> },
-  { href: "/admin/intakes", label: "Intakes", icon: <ClipboardDocumentListIcon className="h-4 w-4" /> },
-  { href: "/admin/projects", label: "Projects", icon: <QueueListIcon className="h-4 w-4" /> },
-  { href: "/admin/users", label: "Users", icon: <UsersIcon className="h-4 w-4" /> },
-  { href: "/admin/coupons", label: "Coupons", icon: <TicketIcon className="h-4 w-4" /> },
-  { href: "/admin/reviews", label: "Reviews", icon: <StarIcon className="h-4 w-4" /> },
-  { href: "/admin/reports", label: "Reports", icon: <ChartPieIcon className="h-4 w-4" /> },
-  { href: "/admin/email-templates", label: "Email templates", icon: <Cog6ToothIcon className="h-4 w-4" /> },
-  { href: "/admin/email-log", label: "Email log", icon: <EnvelopeOpenIcon className="h-4 w-4" /> },
-];
-
 export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardView }) {
-  const pathname = usePathname();
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [services, setServices] = useState<ServiceRecord[]>([]);
   const [products, setProducts] = useState<ProductRecord[]>([]);
@@ -375,7 +330,7 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
   const [notice, setNotice] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const currentMeta = useMemo(() => viewMeta[view], [view]);
+  const currentMeta = useMemo(() => resolveAdminSectionMeta(VIEW_PATH[view]), [view]);
 
   const refreshState = useCallback(async () => {
     setLoading(true);
@@ -468,307 +423,289 @@ export function AdminDashboard({ view = "overview" }: { view?: AdminDashboardVie
   };
 
   return (
-    <DashboardShell
-      title="Admin Dashboard"
-      currentPath={pathname}
-      navItems={navItems}
-      utilityActions={
-        <>
-          <LinkButton href="/" variant="outline" size="sm">
-            Back to main site
-          </LinkButton>
-          <AppSignOutButton variant="ghost" redirectUrl="/admin/login">
-            Log out
-          </AppSignOutButton>
-        </>
-      }
-    >
-      <div className="h-full flex flex-col overflow-y-auto">
-        <div className="flex-1 px-6 py-6 sm:px-8 sm:py-8">
-          {/* Page header */}
-          <div className="mb-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-text-muted">{view.toUpperCase()}</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight sm:text-3xl">{currentMeta.title}</h2>
-            <p className="mt-1.5 text-sm text-text-muted max-w-2xl">{currentMeta.description}</p>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={currentMeta.eyebrow ?? view}
+        title={currentMeta.title}
+        description={currentMeta.description}
+      />
 
-            {error ? (
-              <div className="mt-3 rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-                {error}
-              </div>
-            ) : null}
-            {notice ? (
-              <div className="mt-3 rounded-md border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-primary">
-                {notice}
-              </div>
-            ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
+      {notice ? <AdminPageAlert tone="info">{notice}</AdminPageAlert> : null}
+
+      {loading ? <p className="text-sm text-text-muted">Loading dashboard data...</p> : null}
+
+      {!loading && view === "overview" ? (
+        <div className="space-y-6">
+          <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
+            {[
+              { label: "Inquiries", value: summary?.totals.inquiries ?? 0 },
+              { label: "Appointments", value: summary?.totals.appointments ?? 0 },
+              { label: "Orders", value: summary?.totals.orders ?? 0 },
+              { label: "Concierge Sessions", value: summary?.totals.concierge_sessions ?? 0 },
+            ].map((card) => (
+              <Card key={card.label} className="rounded-sm border-border bg-surface p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">{card.label}</p>
+                <p className="mt-3 font-display text-3xl tracking-tight">{card.value}</p>
+              </Card>
+            ))}
           </div>
 
-          {/* Content */}
-          {loading ? (
-            <div className="text-sm text-text-muted">Loading dashboard data...</div>
-          ) : null}
-
-          {!loading && view === "overview" ? (
-            <div className="space-y-6">
-              <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
-                {[
-                  { label: "Inquiries", value: summary?.totals.inquiries ?? 0 },
-                  { label: "Appointments", value: summary?.totals.appointments ?? 0 },
-                  { label: "Orders", value: summary?.totals.orders ?? 0 },
-                  { label: "Concierge Sessions", value: summary?.totals.concierge_sessions ?? 0 },
-                ].map((card) => (
-                  <Card
-                    key={card.label}
-                    className="rounded-sm border-border bg-surface p-4"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">{card.label}</p>
-                    <p className="mt-3 font-display text-3xl tracking-tight">{card.value}</p>
-                  </Card>
-                ))}
+          <div className="grid gap-5 xl:grid-cols-2">
+            <Card className="rounded-sm border-border p-5">
+              <h3 className="font-display text-lg font-semibold tracking-tight">Latest Analytics Events</h3>
+              <div className="mt-4 space-y-3 text-sm text-text-muted">
+                {summary?.latest_events.length ? (
+                  summary.latest_events.slice(0, 6).map((event) => (
+                    <div key={event.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                      <div className="font-medium text-text">{event.event_name}</div>
+                      <div className="text-xs">{new Date(event.created_at).toLocaleString()}</div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No analytics events yet.</div>
+                )}
               </div>
+            </Card>
 
-              <div className="grid gap-5 xl:grid-cols-2">
-                <Card className="rounded-sm border-border p-5">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">Latest Analytics Events</h3>
-                  <div className="mt-4 space-y-3 text-sm text-text-muted">
-                    {summary?.latest_events.length ? (
-                      summary.latest_events.slice(0, 6).map((event) => (
-                        <div key={event.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                          <div className="font-medium text-text">{event.event_name}</div>
-                          <div className="text-xs">{new Date(event.created_at).toLocaleString()}</div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No analytics events yet.</div>
-                    )}
-                  </div>
-                </Card>
-
-                <Card className="rounded-sm border-border p-5">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">Latest Audit Entries</h3>
-                  <div className="mt-4 space-y-3 text-sm text-text-muted">
-                    {summary?.latest_logs.length ? (
-                      summary.latest_logs.slice(0, 6).map((log) => (
-                        <div key={log.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                          <div className="font-medium text-text">{log.action}</div>
-                          <div className="text-xs">
-                            {log.level.toUpperCase()} - {new Date(log.created_at).toLocaleString()}
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No audit entries yet.</div>
-                    )}
-                  </div>
-                </Card>
-              </div>
-            </div>
-          ) : null}
-
-          {!loading && view === "activity" ? (
-            <div className="grid gap-5 xl:grid-cols-2">
-              <Card className="rounded-sm border-border p-5">
-                <h3 className="font-display text-lg font-semibold tracking-tight">Analytics Stream</h3>
-                <div className="mt-4 space-y-3 text-sm text-text-muted">
-                  {summary?.latest_events.length ? (
-                    summary.latest_events.map((event) => (
-                      <div key={event.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                        <div className="font-medium text-text">{event.event_name}</div>
-                        <div className="text-xs">{new Date(event.created_at).toLocaleString()}</div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No analytics events yet.</div>
-                  )}
-                </div>
-              </Card>
-
-              <Card className="rounded-sm border-border p-5">
-                <h3 className="font-display text-lg font-semibold tracking-tight">Audit Stream</h3>
-                <div className="mt-4 space-y-3 text-sm text-text-muted">
-                  {summary?.latest_logs.length ? (
-                    summary.latest_logs.map((log) => (
-                      <div key={log.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                        <div className="font-medium text-text">{log.action}</div>
-                        <div className="text-xs">
-                          {log.level.toUpperCase()} - {new Date(log.created_at).toLocaleString()}
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No audit entries yet.</div>
-                  )}
-                </div>
-              </Card>
-            </div>
-          ) : null}
-
-          {!loading && view === "catalog" ? (
-            <div className="grid gap-5 2xl:grid-cols-3">
-              <Card className="rounded-sm border-border p-5 flex flex-col">
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">Manage Services</h3>
-                  <Button type="button" variant="outline" size="sm" onClick={() => setEditingService(buildNewService())}>
-                    New
-                  </Button>
-                </div>
-                <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-                  {services.map((service) => (
-                    <div key={service.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0">
-                          <div className="font-medium text-text text-sm">{service.title}</div>
-                          <div className="text-xs text-text-muted">{service.slug}</div>
-                        </div>
-                        <div className="flex gap-1 shrink-0">
-                          <Button type="button" size="sm" variant="outline" onClick={() => setEditingService(service)}>
-                            Edit
-                          </Button>
-                          <Button type="button" size="sm" variant="ghost" onClick={() => void deleteRecord("/api/v1/admin/services", `id=${encodeURIComponent(service.id)}`)}>
-                            Delete
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4">
-                  <CatalogServiceForm
-                    key={editingService.id}
-                    initial={editingService satisfies CatalogServiceFormValues}
-                    onSubmit={(values) => saveEditor("/api/v1/admin/services", formatJson(values))}
-                  />
-                </div>
-              </Card>
-
-              <Card className="rounded-sm border-border p-5 flex flex-col">
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">Manage Products</h3>
-                  <Button type="button" variant="outline" size="sm" onClick={() => setEditingProduct(buildNewProduct())}>
-                    New
-                  </Button>
-                </div>
-                <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-                  {products.map((product) => (
-                    <div key={product.slug} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0">
-                          <div className="font-medium text-text text-sm">{product.name}</div>
-                          <div className="text-xs text-text-muted">{product.slug}</div>
-                        </div>
-                        <div className="flex gap-1 shrink-0">
-                          <Button type="button" size="sm" variant="outline" onClick={() => setEditingProduct(product)}>
-                            Edit
-                          </Button>
-                          <Button type="button" size="sm" variant="ghost" onClick={() => void deleteRecord("/api/v1/admin/products", `slug=${encodeURIComponent(product.slug)}`)}>
-                            Delete
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4">
-                  <CatalogProductForm
-                    key={editingProduct.slug}
-                    initial={productToFormValues(editingProduct)}
-                    onSubmit={(values) => {
-                      const { advancedJson, ...structured } = values;
-                      const merged = mergeAdvancedJson(structured, advancedJson);
-                      return saveEditor("/api/v1/admin/products", formatJson(merged));
-                    }}
-                  />
-                </div>
-              </Card>
-
-              <Card className="rounded-sm border-border p-5 flex flex-col">
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <h3 className="font-display text-lg font-semibold tracking-tight">Manage Portfolio</h3>
-                  <Button type="button" variant="outline" size="sm" onClick={() => setEditingPortfolio(buildNewPortfolio())}>
-                    New
-                  </Button>
-                </div>
-                <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-                  {portfolio.map((project) => (
-                    <div key={project.slug} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0">
-                          <div className="font-medium text-text text-sm">{project.name}</div>
-                          <div className="text-xs text-text-muted">{project.slug}</div>
-                        </div>
-                        <div className="flex gap-1 shrink-0">
-                          <Button type="button" size="sm" variant="outline" onClick={() => setEditingPortfolio(project)}>
-                            Edit
-                          </Button>
-                          <Button type="button" size="sm" variant="ghost" onClick={() => void deleteRecord("/api/v1/admin/portfolio", `slug=${encodeURIComponent(project.slug)}`)}>
-                            Delete
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4">
-                  <CatalogPortfolioForm
-                    key={editingPortfolio.slug}
-                    initial={portfolioToFormValues(editingPortfolio)}
-                    onSubmit={(values) => {
-                      const { advancedJson, ...structured } = values;
-                      const merged = mergeAdvancedJson(structured, advancedJson);
-                      return saveEditor("/api/v1/admin/portfolio", formatJson(merged));
-                    }}
-                  />
-                </div>
-              </Card>
-            </div>
-          ) : null}
-
-          {!loading && view === "pipeline" ? (
-            <div className="grid gap-5 2xl:grid-cols-3">
-              <Card className="rounded-sm border-border p-5">
-                <h3 className="font-display text-lg font-semibold tracking-tight">Recent Inquiries</h3>
-                <div className="mt-4 space-y-2 text-sm text-text-muted max-h-96 overflow-y-auto">
-                  {inquiries.slice(0, 12).map((inquiry) => (
-                    <div key={inquiry.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                      <div className="font-medium text-text text-sm">{inquiry.visitor_name}</div>
-                      <div className="text-xs">{inquiry.visitor_email}</div>
-                      <div className="text-xs">{inquiry.status.toUpperCase()}</div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-              <Card className="rounded-sm border-border p-5">
-                <h3 className="font-display text-lg font-semibold tracking-tight">Recent Appointments</h3>
-                <div className="mt-4 space-y-2 text-sm text-text-muted max-h-96 overflow-y-auto">
-                  {appointments.slice(0, 12).map((appointment) => (
-                    <div key={appointment.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                      <div className="font-medium text-text text-sm">{appointment.visitor_name}</div>
-                      <div className="text-xs">{appointment.service_interested_in}</div>
-                      <div className="text-xs">{new Date(appointment.preferred_datetime).toLocaleString()}</div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-
-              <Card className="rounded-sm border-border p-5">
-                <h3 className="font-display text-lg font-semibold tracking-tight">Recent Orders</h3>
-                <div className="mt-4 space-y-2 text-sm text-text-muted max-h-96 overflow-y-auto">
-                  {orders.slice(0, 12).map((order) => (
-                    <div key={order.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
-                      <div className="font-medium text-text text-sm">{order.order_number}</div>
-                      <div className="text-xs">{order.customer_email}</div>
+            <Card className="rounded-sm border-border p-5">
+              <h3 className="font-display text-lg font-semibold tracking-tight">Latest Audit Entries</h3>
+              <div className="mt-4 space-y-3 text-sm text-text-muted">
+                {summary?.latest_logs.length ? (
+                  summary.latest_logs.slice(0, 6).map((log) => (
+                    <div key={log.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                      <div className="font-medium text-text">{log.action}</div>
                       <div className="text-xs">
-                        {order.payment_status.toUpperCase()} - {order.fulfillment_status.toUpperCase()}
+                        {log.level.toUpperCase()} - {new Date(log.created_at).toLocaleString()}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </Card>
-            </div>
-          ) : null}
+                  ))
+                ) : (
+                  <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No audit entries yet.</div>
+                )}
+              </div>
+            </Card>
+          </div>
         </div>
-      </div>
-    </DashboardShell>
+      ) : null}
+
+      {!loading && view === "activity" ? (
+        <div className="grid gap-5 xl:grid-cols-2">
+          <Card className="rounded-sm border-border p-5">
+            <h3 className="font-display text-lg font-semibold tracking-tight">Analytics Stream</h3>
+            <div className="mt-4 space-y-3 text-sm text-text-muted">
+              {summary?.latest_events.length ? (
+                summary.latest_events.map((event) => (
+                  <div key={event.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                    <div className="font-medium text-text">{event.event_name}</div>
+                    <div className="text-xs">{new Date(event.created_at).toLocaleString()}</div>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No analytics events yet.</div>
+              )}
+            </div>
+          </Card>
+
+          <Card className="rounded-sm border-border p-5">
+            <h3 className="font-display text-lg font-semibold tracking-tight">Audit Stream</h3>
+            <div className="mt-4 space-y-3 text-sm text-text-muted">
+              {summary?.latest_logs.length ? (
+                summary.latest_logs.map((log) => (
+                  <div key={log.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                    <div className="font-medium text-text">{log.action}</div>
+                    <div className="text-xs">
+                      {log.level.toUpperCase()} - {new Date(log.created_at).toLocaleString()}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-md border border-border/50 bg-surface px-3 py-2">No audit entries yet.</div>
+              )}
+            </div>
+          </Card>
+        </div>
+      ) : null}
+
+      {!loading && view === "catalog" ? (
+        <div className="grid gap-5 2xl:grid-cols-3">
+          <Card className="flex flex-col rounded-sm border-border p-5">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h3 className="font-display text-lg font-semibold tracking-tight">Manage Services</h3>
+              <Button type="button" variant="outline" size="sm" onClick={() => setEditingService(buildNewService())}>
+                New
+              </Button>
+            </div>
+            <div className="mt-4 max-h-80 flex-1 space-y-2 overflow-y-auto">
+              {services.map((service) => (
+                <div key={service.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium text-text">{service.title}</div>
+                      <div className="text-xs text-text-muted">{service.slug}</div>
+                    </div>
+                    <div className="flex shrink-0 gap-1">
+                      <Button type="button" size="sm" variant="outline" onClick={() => setEditingService(service)}>
+                        Edit
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => void deleteRecord("/api/v1/admin/services", `id=${encodeURIComponent(service.id)}`)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4">
+              <CatalogServiceForm
+                key={editingService.id}
+                initial={editingService satisfies CatalogServiceFormValues}
+                onSubmit={(values) => saveEditor("/api/v1/admin/services", formatJson(values))}
+              />
+            </div>
+          </Card>
+
+          <Card className="flex flex-col rounded-sm border-border p-5">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h3 className="font-display text-lg font-semibold tracking-tight">Manage Products</h3>
+              <Button type="button" variant="outline" size="sm" onClick={() => setEditingProduct(buildNewProduct())}>
+                New
+              </Button>
+            </div>
+            <div className="mt-4 max-h-80 flex-1 space-y-2 overflow-y-auto">
+              {products.map((product) => (
+                <div key={product.slug} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium text-text">{product.name}</div>
+                      <div className="text-xs text-text-muted">{product.slug}</div>
+                    </div>
+                    <div className="flex shrink-0 gap-1">
+                      <Button type="button" size="sm" variant="outline" onClick={() => setEditingProduct(product)}>
+                        Edit
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => void deleteRecord("/api/v1/admin/products", `slug=${encodeURIComponent(product.slug)}`)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4">
+              <CatalogProductForm
+                key={editingProduct.slug}
+                initial={productToFormValues(editingProduct)}
+                onSubmit={(values) => {
+                  const { advancedJson, ...structured } = values;
+                  const merged = mergeAdvancedJson(structured, advancedJson);
+                  return saveEditor("/api/v1/admin/products", formatJson(merged));
+                }}
+              />
+            </div>
+          </Card>
+
+          <Card className="flex flex-col rounded-sm border-border p-5">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h3 className="font-display text-lg font-semibold tracking-tight">Manage Portfolio</h3>
+              <Button type="button" variant="outline" size="sm" onClick={() => setEditingPortfolio(buildNewPortfolio())}>
+                New
+              </Button>
+            </div>
+            <div className="mt-4 max-h-80 flex-1 space-y-2 overflow-y-auto">
+              {portfolio.map((project) => (
+                <div key={project.slug} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium text-text">{project.name}</div>
+                      <div className="text-xs text-text-muted">{project.slug}</div>
+                    </div>
+                    <div className="flex shrink-0 gap-1">
+                      <Button type="button" size="sm" variant="outline" onClick={() => setEditingPortfolio(project)}>
+                        Edit
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => void deleteRecord("/api/v1/admin/portfolio", `slug=${encodeURIComponent(project.slug)}`)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4">
+              <CatalogPortfolioForm
+                key={editingPortfolio.slug}
+                initial={portfolioToFormValues(editingPortfolio)}
+                onSubmit={(values) => {
+                  const { advancedJson, ...structured } = values;
+                  const merged = mergeAdvancedJson(structured, advancedJson);
+                  return saveEditor("/api/v1/admin/portfolio", formatJson(merged));
+                }}
+              />
+            </div>
+          </Card>
+        </div>
+      ) : null}
+
+      {!loading && view === "pipeline" ? (
+        <div className="grid gap-5 2xl:grid-cols-3">
+          <Card className="rounded-sm border-border p-5">
+            <h3 className="font-display text-lg font-semibold tracking-tight">Recent Inquiries</h3>
+            <div className="mt-4 max-h-96 space-y-2 overflow-y-auto text-sm text-text-muted">
+              {inquiries.slice(0, 12).map((inquiry) => (
+                <div key={inquiry.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                  <div className="text-sm font-medium text-text">{inquiry.visitor_name}</div>
+                  <div className="text-xs">{inquiry.visitor_email}</div>
+                  <div className="text-xs">{inquiry.status.toUpperCase()}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="rounded-sm border-border p-5">
+            <h3 className="font-display text-lg font-semibold tracking-tight">Recent Appointments</h3>
+            <div className="mt-4 max-h-96 space-y-2 overflow-y-auto text-sm text-text-muted">
+              {appointments.slice(0, 12).map((appointment) => (
+                <div key={appointment.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                  <div className="text-sm font-medium text-text">{appointment.visitor_name}</div>
+                  <div className="text-xs">{appointment.service_interested_in}</div>
+                  <div className="text-xs">{new Date(appointment.preferred_datetime).toLocaleString()}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="rounded-sm border-border p-5">
+            <h3 className="font-display text-lg font-semibold tracking-tight">Recent Orders</h3>
+            <div className="mt-4 max-h-96 space-y-2 overflow-y-auto text-sm text-text-muted">
+              {orders.slice(0, 12).map((order) => (
+                <div key={order.id} className="rounded-md border border-border/50 bg-surface px-3 py-2">
+                  <div className="text-sm font-medium text-text">{order.order_number}</div>
+                  <div className="text-xs">{order.customer_email}</div>
+                  <div className="text-xs">
+                    {order.payment_status.toUpperCase()} - {order.fulfillment_status.toUpperCase()}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+      ) : null}
+    </AdminPage>
   );
 }

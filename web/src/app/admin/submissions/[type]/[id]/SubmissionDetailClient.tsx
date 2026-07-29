@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button, LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/submissions/");
 
 type SubmissionNote = {
   id: string;
@@ -256,19 +260,18 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
   const statusOptions = getStatusOptions(type);
 
   return (
-    <div className="space-y-5 p-4 sm:p-5 lg:p-6">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-text-muted">{type} · {id}</p>
-          <h1 className="mt-1 font-display text-2xl tracking-tight">
-            {detail ? getOwnerName(detail) : "Submission"}
-          </h1>
-          {detail ? <p className="text-sm text-text-muted">{getOwnerEmail(detail)}</p> : null}
-        </div>
-        <LinkButton href="/admin/submissions" variant="outline" size="sm">
-          Back to inbox
-        </LinkButton>
-      </header>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={detail ? getOwnerName(detail) : PAGE_META.title}
+        description={detail ? getOwnerEmail(detail) : undefined}
+        meta={<span className="text-xs uppercase tracking-[0.18em] text-text-muted">{type} · {id}</span>}
+        actions={
+          <LinkButton href="/admin/submissions" variant="outline" size="sm">
+            Back to inbox
+          </LinkButton>
+        }
+      />
 
       {loading ? (
         <Card>
@@ -276,11 +279,7 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
         </Card>
       ) : null}
 
-      {error ? (
-        <Card>
-          <p className="text-sm text-destructive">{error}</p>
-        </Card>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       {detail ? (
         <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr]">
@@ -521,6 +520,6 @@ export function SubmissionDetailClient({ type, id }: { type: string; id: string 
           </div>
         </div>
       ) : null}
-    </div>
+    </AdminPage>
   );
 }

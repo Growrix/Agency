@@ -48,6 +48,18 @@ Update this file whenever major site structure, content ownership, or operationa
 - /admin/catalog
 - /admin/login
 - /admin/pipeline
+- /admin/orders
+- /admin/submissions
+- /admin/intakes
+- /admin/projects
+- /admin/users
+- /admin/coupons
+- /admin/reviews
+- /admin/reports
+- /admin/email-templates
+- /admin/email-log
+
+Admin shell: shared `AdminDashboardChrome` + `DashboardShell` via `web/src/app/admin/layout.tsx` (except `/admin/login`). Nav/title metadata: `web/src/lib/admin-nav.ts`. Page scaffolding: `web/src/components/admin/AdminPage.tsx`.
 
 ### API Routes
 

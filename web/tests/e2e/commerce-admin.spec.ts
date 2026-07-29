@@ -155,4 +155,17 @@ test("admin login page renders", async ({ page }) => {
   await expect(page).toHaveURL(/\/admin\/login/i);
   await expect(page).toHaveTitle(/Admin Login/i);
   await expect(page.locator("body")).toBeVisible();
+  // Login must remain outside the dashboard shell/sidebar.
+  await expect(page.locator(".dashboard-shell-sidebar")).toHaveCount(0);
+});
+
+test("protected admin routes redirect unauthenticated visitors to login", async ({ page }) => {
+  const sampleRoutes = ["/admin", "/admin/orders", "/admin/submissions", "/admin/reports"];
+
+  for (const route of sampleRoutes) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    // Proxy/Clerk may send /sign-in; Node admin layout may send /admin/login.
+    await expect(page).toHaveURL(/\/(admin\/login|sign-in)/i);
+    await expect(page.locator(".dashboard-shell-sidebar")).toHaveCount(0);
+  }
 });

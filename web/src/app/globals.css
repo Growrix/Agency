@@ -190,6 +190,13 @@
   box-shadow: 0 8px 20px color-mix(in srgb, var(--color-primary) 24%, transparent);
 }
 
+/* Shared admin page scaffolding inside DashboardShell main content. */
+.admin-page {
+  width: 100%;
+  max-width: var(--container-shell);
+  margin-inline: auto;
+}
+
 .dashboard-hero-surface {
   background-image: linear-gradient(
     to right,

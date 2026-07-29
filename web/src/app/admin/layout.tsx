@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { AdminDashboardChrome } from "@/components/dashboard/AdminDashboardChrome";
 import { getAuthenticatedUser } from "@/server/auth/guards";
 
 export const metadata: Metadata = {
@@ -40,5 +41,5 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     redirect("/dashboard");
   }
 
-  return children;
+  return <AdminDashboardChrome>{children}</AdminDashboardChrome>;
 }

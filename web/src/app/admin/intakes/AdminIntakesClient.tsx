@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { AdminPage, AdminPageAlert, AdminPageHeader } from "@/components/admin/AdminPage";
 import { Button } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
+import { resolveAdminSectionMeta } from "@/lib/admin-nav";
+
+const PAGE_META = resolveAdminSectionMeta("/admin/intakes");
 
 type IntakeItem = {
   id: string;
@@ -55,18 +59,14 @@ export function AdminIntakesClient() {
   }, [load]);
 
   return (
-    <div className="space-y-6 p-4 sm:p-5 lg:p-6">
-      <header>
-        <p className="text-xs uppercase tracking-[0.18em] text-text-muted">Operations</p>
-        <h1 className="mt-1 font-display text-3xl tracking-tight">Client intakes</h1>
-        <p className="mt-1 text-sm text-text-muted">Free demo requests and project brief submissions.</p>
-      </header>
+    <AdminPage>
+      <AdminPageHeader
+        eyebrow={PAGE_META.eyebrow}
+        title={PAGE_META.title}
+        description={PAGE_META.description}
+      />
 
-      {error ? (
-        <Card>
-          <p className="text-sm text-destructive">{error}</p>
-        </Card>
-      ) : null}
+      {error ? <AdminPageAlert tone="error">{error}</AdminPageAlert> : null}
 
       <Card className="overflow-hidden p-0">
         <div className="flex items-center justify-between border-b border-border/60 bg-inset/30 px-4 py-2 text-xs uppercase tracking-[0.18em] text-text-muted">
@@ -101,6 +101,6 @@ export function AdminIntakesClient() {
           ) : null}
         </ul>
       </Card>
-    </div>
+    </AdminPage>
   );
 }
