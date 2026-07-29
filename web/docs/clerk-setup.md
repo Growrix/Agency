@@ -126,7 +126,7 @@ npm run dev
 
 Open `/`, confirm header Sign in / Sign up, complete sign-up, land on `/auth/after-sign-in` → `/dashboard` for non-admins.
 
-After setting `publicMetadata.role = "admin"`, sign in and confirm landing is `/admin`. A non-admin signed-in user opening `/admin` must land on `/dashboard?reason=not_admin`.
+After setting `publicMetadata.role = "admin"`, sign in and confirm landing is `/admin`. A non-admin signed-in user opening `/admin` must land on `/dashboard` with no admin-denial messaging.
 
 ## Verify production
 

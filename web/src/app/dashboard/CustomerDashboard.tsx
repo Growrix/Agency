@@ -229,24 +229,23 @@ export function CustomerDashboard({ view = "overview" }: { view?: CustomerDashbo
     setError(null);
 
     try {
-      const [meData, ordersData, appointmentsData, downloadsData, licensesData, projectsData, intakesData] =
-        await Promise.all([
-          loadJson<{ user: Viewer }>("/api/v1/me"),
-          loadJson<DashboardOrder[]>("/api/v1/me/orders"),
-          loadJson<DashboardAppointment[]>("/api/v1/me/appointments"),
-          loadJson<DashboardDownload[]>("/api/v1/me/downloads"),
-          loadJson<DashboardLicense[]>("/api/v1/me/licenses"),
-          loadJson<DashboardProject[]>("/api/v1/me/projects"),
-          loadJson<DashboardIntake[]>("/api/v1/me/intakes"),
-        ]);
+      const snapshot = await loadJson<{
+        user: Viewer;
+        orders: DashboardOrder[];
+        appointments: DashboardAppointment[];
+        downloads: DashboardDownload[];
+        licenses: DashboardLicense[];
+        projects: DashboardProject[];
+        intakes: DashboardIntake[];
+      }>("/api/v1/me/dashboard");
 
-      setUser(meData.user);
-      setOrders(ordersData);
-      setAppointments(appointmentsData);
-      setDownloads(downloadsData);
-      setLicenses(licensesData);
-      setProjects(projectsData);
-      setIntakes(intakesData);
+      setUser(snapshot.user);
+      setOrders(snapshot.orders);
+      setAppointments(snapshot.appointments);
+      setDownloads(snapshot.downloads);
+      setLicenses(snapshot.licenses);
+      setProjects(snapshot.projects);
+      setIntakes(snapshot.intakes);
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : "Unable to load the dashboard.");
     } finally {

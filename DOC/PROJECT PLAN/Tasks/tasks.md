@@ -1169,3 +1169,17 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-unit=pass(7/7), QG-integration=pass(24/24)
   - commit: 61290a6
   - handoff: user verify local `/admin/login` as growrixos@gmail.com → `/admin`; push/redeploy when requested
+
+### 2026-07-29 — Dashboard auth UX leakage + slow fetch
+- **Mode:** `debug_failure`
+- **Issues:** Customer dashboard showed `/dashboard?reason=not_admin` + admin-denial banner; overview fired 7 parallel `/api/v1/me/*` calls each re-reading Supabase `app_state`.
+- **Fix:**
+  - Remove `reason=not_admin` URL/banner from customer dashboard; silent `/dashboard` redirect from non-admin `/admin` access.
+  - Add `/api/v1/me/dashboard` aggregate (one auth + one `readDatabase`) via `getCustomerDashboardSnapshot`.
+  - `CustomerDashboard` loads once from that endpoint.
+- **Validation:** integration 25/25 (incl. customer-dashboard); lint exit 0; typecheck exit 0; ReadLints clean.
+- **Commit:** (pending)
+- 2026-07-29T21:40:00+06:00 | senior-saas-developer | debug_failure | Dashboard UX leakage + aggregate fetch
+  - files_touched: dashboard/page.tsx, CustomerDashboard.tsx, admin/layout.tsx, proxy.ts, me/dashboard route, customer-dashboard.ts, customer-dashboard.test.ts, clerk-setup.md, tasks.md
+  - gates: QG-lint=pass, QG-typecheck=pass, QG-integration=pass(25/25)
+  - handoff: user hard-refresh `/dashboard` — no admin text; Network should show one `/api/v1/me/dashboard` call; push/redeploy when requested

@@ -17,6 +17,7 @@ const completionExemptApiPaths = [
   "/api/v1/me",
   "/api/v1/me/update",
   "/api/v1/me/complete-signup",
+  "/api/v1/me/dashboard",
   "/api/v1/me/projects",
   "/api/v1/me/intakes",
 ];
@@ -135,7 +136,7 @@ function rejectForbidden(request: NextRequest) {
     );
   }
 
-  return NextResponse.redirect(new URL("/dashboard?reason=not_admin", request.url));
+  return NextResponse.redirect(new URL("/dashboard", request.url));
 }
 
 async function legacyProxy(request: NextRequest) {
