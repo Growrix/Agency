@@ -27,8 +27,10 @@ Indexing: user confirmed `SITE_INDEXING_ENABLED=true` is set and Production rede
 | F6 | Meta titles over 60 chars | `/services` (61), `/digital-products` (65), `/additional-services` (63) | Medium | Title strings too long before brand suffix | Shortened all three titles |
 | F7 | Meta descriptions over 155 chars | `/about` (172), `/contact` (171), `/book-appointment` (156), `/additional-services` (175), `/services/[slug]` (158-178) | Medium | Copy not length-capped | Shortened static pages; added `truncateMetaDescription()` for dynamic service pages |
 | F8 | Homepage meta ignored by Google | SERP shows `HOME_THREE_PATH_COPY.description` from body | Medium | Meta description not aligned with primary page message | Refined `HOME_SHARE_DESCRIPTION` to state marketplace + studio identity |
-| F9 | `/live-chat` was noindex | `live-chat/layout.tsx` had `NOINDEX_ROBOTS` | Low | Public page blocked from indexing | Removed noindex; fixed duplicate brand in title |
-| F10 | Sitemap redirected slugs included | `sitemap.ts` (original) | Low | Stale service URLs in sitemap | Filter `html-business-profiles`, `template-customization`; add `lastModified`. Sitemap `SITE_INDEXING_ENABLED` gate deferred — requires Playwright env update to avoid breaking release gates. |
+| F9 | `/live-chat` noindex + robots-blocked while publicly linked | `live-chat/layout.tsx` + `site.ts` DISALLOWED | Medium | Dual block wastes crawl budget and produces GSC "Blocked by robots.txt" | Kept noindex; removed from robots disallow (2026-07-29) |
+| F10 | Sitemap redirected slugs included | `sitemap.ts` (original) | Low | Stale service URLs in sitemap | Filter `html-business-profiles`, `template-customization`; add `lastModified` |
+| F11 | Sitemap emits CMS service slugs that 404 | `services/[slug]/page.tsx:363` + `sitemap.ts` | High | COPY map missing → `notFound()` | Filter sitemap to `PUBLIC_SERVICE_SLUG_SET` |
+| F12 | Blog posts beyond first 10 are crawl orphans | `BlogGrid.tsx` Load-more only renders 9 in SSR HTML | Medium | Sitemap-only discovery for older posts | Render all post links in DOM; CSS-hide beyond page size |
 
 ## 3. Merchant listings schema — exact fields
 
@@ -54,7 +56,7 @@ Indexing: user confirmed `SITE_INDEXING_ENABLED=true` is set and Production rede
 | `/contact` | OK | Shortened to ≤155 | Desc 171 | Shortened |
 | `/book-appointment` | OK | Shortened to ≤155 | Desc 156 | Shortened |
 | `/services/[slug]` | Dynamic | `truncateMetaDescription()` | Descs 158-178 | Capped at 155 |
-| `/live-chat` | Live Chat \| Growrix OS | Unique description | Was noindex + duplicate brand + homepage meta | Fixed title/description; kept noindex (also in `robots.txt` disallow list) |
+| `/live-chat` | Live Chat \| Growrix OS | Unique description | Publicly linked but noindex | Keep noindex; removed from robots.txt disallow (crawlable, not indexable) |
 
 ## 5. Indexing signal audit
 
@@ -104,3 +106,42 @@ Indexing: user confirmed `SITE_INDEXING_ENABLED=true` is set and Production rede
 
 ### P3 — Google site verification
 1. Provide verification token; wire into `app/layout.tsx` `metadata.verification.google`.
+
+## 8. GSC Page indexing coverage remediation (2026-07-27 report / 2026-07-29 fix)
+
+**Source:** `Ongoing DOCS/Pingdom tests/growrixos.com-Coverage-2026-07-27/` (GSC Page indexing export dated 2026-07-24).
+
+| Metric | Value |
+|--------|-------|
+| Indexed | 8 |
+| Not indexed | 102 |
+| Impressions (peak) | 17 |
+
+### Coverage breakdown
+
+| Reason | Pages | Verdict | Action |
+|--------|-------|---------|--------|
+| Discovered - currently not indexed | 90 | New-site crawl priority — not a code bug | Request indexing on hubs; wait; build authority |
+| Excluded by noindex tag | 4 | Mostly intentional (auth/transactional + `/live-chat` + `/html-business-profiles`) | Keep |
+| Page with redirect | 3 | Expected legacy URLs (`/shop`, `/products`, `/privacy-policy`, etc.) | Keep redirects |
+| Blocked by robots.txt | 2 | `/live-chat` + `/cart` publicly linked while disallowed | Unblocked `/live-chat` crawl; keep `/cart` blocked |
+| Not found (404) | 1 | CMS service slug in sitemap without local COPY map | Filter sitemap to `PUBLIC_SERVICE_SLUG_SET` |
+| Alternate page with proper canonical | 1 | `/shop` → canonical `/digital-products` | Expected / correct |
+| Crawled - currently not indexed | 1 | Inspect specific URL in GSC | External |
+
+### Codebase fixes applied (this pass)
+
+| File | Change |
+|------|--------|
+| `web/src/lib/public-service-slugs.ts` | **New** — exports the 6 service slugs that have local COPY and can render without 404 |
+| `web/src/app/sitemap.ts` | Filter service entries to `PUBLIC_SERVICE_SLUG_SET` (in addition to redirected-slug filter) |
+| `web/src/lib/site.ts` | Remove `/live-chat` from `DISALLOWED_CRAWL_PATHS` (keep noindex in layout) |
+| `web/src/components/sections/BlogGrid.tsx` | Render ALL blog post `<Link>` cards in initial HTML; CSS-hide beyond page size so Google can crawl orphans via internal links |
+
+### External actions still required
+
+1. GSC → Request indexing on hub pages: `/`, `/services`, `/digital-products`, `/about`, `/contact`, `/portfolio`, `/blog`.
+2. GSC → URL Inspection on the exact "Crawled - currently not indexed" and "Not found (404)" URLs.
+3. Re-check Page indexing report 5–7 days after this deploy.
+4. Off-page authority (→ `Off_Page_SEO_expert`) remains the biggest lever for the 90 discovered-not-indexed pages.
+5. communicatorsbd.com copyright rebrand (still open from Section 7 P0).

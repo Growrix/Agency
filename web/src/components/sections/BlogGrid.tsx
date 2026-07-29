@@ -9,6 +9,11 @@ import { cn } from "@/lib/utils";
 
 const PAGE_SIZE = 9;
 
+/**
+ * Renders ALL blog post cards in the initial HTML so Google can crawl every
+ * `/blog/{slug}` via internal links (not sitemap alone). Visual "Load more"
+ * pagination only toggles the `hidden` class — anchors stay in the DOM.
+ */
 export function BlogGrid({
   posts,
   layout = "responsive",
@@ -19,7 +24,6 @@ export function BlogGrid({
   className?: string;
 }) {
   const [visible, setVisible] = useState(PAGE_SIZE);
-  const shown = posts.slice(0, visible);
   const hasMore = posts.length > visible;
 
   return (
@@ -32,8 +36,8 @@ export function BlogGrid({
         )}
         stagger={0.07}
       >
-        {shown.map((p) => (
-          <RevealItem key={p.slug}>
+        {posts.map((p, index) => (
+          <RevealItem key={p.slug} className={index >= visible ? "hidden" : undefined}>
             <BlogCard post={p} />
           </RevealItem>
         ))}
@@ -44,7 +48,7 @@ export function BlogGrid({
             Load more articles
           </Button>
           <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
-            Showing {shown.length} of {posts.length}
+            Showing {Math.min(visible, posts.length)} of {posts.length}
           </p>
         </div>
       )}

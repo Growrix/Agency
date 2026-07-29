@@ -96,7 +96,6 @@ export const DISALLOWED_CRAWL_PATHS = [
   "/sign-up",
   "/cart",
   "/complete-account",
-  "/live-chat",
   "/Business-profile",
   "/business-profile",
   "/businessprofile",

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { PUBLIC_SERVICE_SLUG_SET } from "@/lib/public-service-slugs";
 import { absoluteUrl } from "@/lib/site";
 import { listBlogPosts } from "@/server/blog/content";
 import { listPublicPortfolio, listPublicServices, listPublicShopProducts } from "@/server/domain/catalog";
@@ -42,7 +43,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     listBlogPosts().catch(() => []),
   ]);
 
-  const indexableServices = services.filter((service) => !REDIRECTED_SERVICE_SLUGS.has(service.slug));
+  // Only emit service URLs that both avoid redirects AND have a local COPY map
+  // (otherwise Google crawls a sitemap URL and hits a 404).
+  const indexableServices = services.filter(
+    (service) =>
+      !REDIRECTED_SERVICE_SLUGS.has(service.slug) && PUBLIC_SERVICE_SLUG_SET.has(service.slug),
+  );
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
     url: absoluteUrl(route),
