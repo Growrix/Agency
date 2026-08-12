@@ -1220,5 +1220,5 @@ Remaining parallel tracks:
   - brain: senior-saas-developer SKILL + tasks.md (lane web/)
   - files_touched: .gitignore, local.env.example, scripts/check-no-secrets.mjs, package.json, .github/workflows/ci.yml, DEPLOYMENT_CHECKLIST.md, DOC docs scrub, Ongoing DOCS/Prompts.md, tasks.md
   - gates: QG-secrets-check=pass, QG-full-ci=N/A (docs/gitignore only; no web runtime change)
-  - commit: pending
+  - commit: 5512af0
   - handoff: user rotate remaining leaked credentials; push when ready (do not rewrite git history unless explicitly requested)
