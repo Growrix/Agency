@@ -107,13 +107,14 @@ ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 # External services (same across environments)
 OPENAI_API_KEY=sk-proj-...
 OPENAI_MODEL=o3-mini
-RESEND_API_KEY=re_YBW921rV_...
+RESEND_API_KEY=<set-in-hosting-secret-manager>
 CONTACT_TO_EMAIL=Inquiry@growrixos.com,growrixos@gmail.com
 CONTACT_FROM_EMAIL=Growrix <hello@growrixos.com>
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=<set-in-hosting-secret-manager>
 NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT=Growrix OS, 82, 1 Rd-2, Niekton, Gulshan 1, Dhaka 1212, Bangladesh
-NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJn2bmb6pYVTcR1QwQnQwQnQw
+NEXT_PUBLIC_GOOGLE_PLACE_ID=<set-in-hosting-secret-manager>
 ```
+
 
 ### Usage:
 ```bash

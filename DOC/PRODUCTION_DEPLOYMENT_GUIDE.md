@@ -48,7 +48,7 @@
 In Vercel Dashboard → Settings → Environment Variables → Add:
 
 NEXT_PUBLIC_SITE_URL=https://www.growrixos.com
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=<set-in-hosting-secret-manager>
 NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT=Growrix OS, 82, 1 Rd-2, Niekton, Gulshan 1, Dhaka 1212, Bangladesh
 NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJn2bmb6pYVTcR1QwQnQwQnQw
 OPENAI_API_KEY=<set-in-hosting-secret-manager>

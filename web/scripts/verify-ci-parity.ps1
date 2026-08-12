@@ -8,6 +8,12 @@ Push-Location $repoRoot
 
 try {
     $env:CI = "true"
+    Write-Host "Running secret scan (npm run secrets:check)..." -ForegroundColor Cyan
+    npm run secrets:check
+    if ($LASTEXITCODE -ne 0) {
+        throw "secrets:check failed with exit code $LASTEXITCODE"
+    }
+
     Write-Host "Running CI parity bundle (npm run ci:check --prefix web)..." -ForegroundColor Cyan
     npm run ci:check --prefix web
     if ($LASTEXITCODE -ne 0) {

@@ -1,8 +1,21 @@
 # Ignore environment variable files (keep .env.example tracked)
 .env
+.env.*
+!.env.example
+!**/.env.example
 .env.local
 .env.*.local
-!.env.example
+local.env
+*.local.env
+web/.env
+web/.env.*
+!web/.env.example
+
+# Local tooling / IDE secrets (never commit)
+.claude/settings.local.json
+.claude/*.local.*
+.cursor/mcp.json
+**/.cursor/mcp.json
 
 # System files
 .DS_Store
@@ -35,3 +48,8 @@ yarn-error.log*
 # Vercel
 .vercel/
 .vercel
+
+# OS / editor
+Thumbs.db
+*.swp
+*~

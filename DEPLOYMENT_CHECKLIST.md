@@ -21,6 +21,13 @@
 - [x] X-Frame-Options set to DENY
 - [x] X-Content-Type-Options set to nosniff
 
+### Secrets hygiene (mandatory)
+- Never commit `.env`, `local.env`, `web/.env.local`, or Claude/IDE local settings
+- Put real keys only in Vercel Environment Variables / gitignored local env files
+- Docs and checklists must use `<set-in-hosting-secret-manager>` placeholders
+- Before push: `npm run secrets:check` (also runs automatically in GitHub Actions CI)
+- If GitHub Secret Scanning revokes a key: rotate in the provider dashboard, update Vercel, redeploy — do not paste the new key into git
+
 ### Sanity CMS ✅
 - [x] Project ID: 1tk4ulcx
 - [x] Dataset: production
@@ -51,9 +58,9 @@ In Vercel Dashboard → Settings → Environment Variables:
 ```
 NEXT_PUBLIC_SITE_URL=https://www.growrixos.com
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-W3TM38ELE5
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=<set-in-hosting-secret-manager>
 NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT=Growrix OS, 82, 1 Rd-2, Niekton, Gulshan 1, Dhaka 1212, Bangladesh
-NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJn2bmb6pYVTcR1QwQnQwQnQw
+NEXT_PUBLIC_GOOGLE_PLACE_ID=<set-in-hosting-secret-manager>
 OPENAI_API_KEY=<set-in-hosting-secret-manager>
 OPENAI_MODEL=o3-mini
 RESEND_API_KEY=<set-in-hosting-secret-manager>
@@ -196,9 +203,8 @@ npm --prefix web run start
 
 - [ ] **Admin panel works** at https://www.growrixos.com/admin
   ```bash
-  Test login with:
-  Email: admin@growrixos.com
-  Password: TNkAFFGz_nhWpquW9LqMnradXx2o-jXb
+  Test login with the operator Clerk account (role=admin in publicMetadata).
+  Never commit admin passwords or API keys into this checklist.
   ```
 
 ---

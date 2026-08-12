@@ -162,7 +162,7 @@ vercel_environment_variables:
       note: Until domain verified, use onboarding@resend.dev for testing
     
     - name: NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-      value: AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+      value: <set-in-hosting-secret-manager>
       type: public
       description: Google Maps API key (browser-restricted)
       same_as_local: true
@@ -265,7 +265,7 @@ quick_copy_paste_vars:
     - RESEND_API_KEY=YOUR_RESEND_API_KEY
     - CONTACT_TO_EMAIL=growrixos@gmail.com
     - CONTACT_FROM_EMAIL=Growrix <hello@growrixos.com>
-    - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyAiDvmPIsjcMdjDbdBGi5GbQGGCAoch7sg
+    - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=<set-in-hosting-secret-manager>
     - NEXT_PUBLIC_GOOGLE_PLACE_SEARCH_TEXT=Growrix OS, 82, 1 Rd-2, Některo, Gulshan 1, Dhaka 1212, Bangladesh
     - NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJn2bmb6pYVTcR1QwQnQwQnQw
 

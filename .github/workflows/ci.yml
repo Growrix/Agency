@@ -16,6 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Secret scan (tracked files)
+        run: npm run secrets:check
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

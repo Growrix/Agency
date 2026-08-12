@@ -1204,3 +1204,21 @@ Remaining parallel tracks:
   - gates: QG-lint=pass, QG-typecheck=pass, QG-build=pass, QG-admin-e2e=pass(2/2)
   - commit: f3b79e2
   - handoff: hard-refresh any `/admin/orders` (etc.) — sidebar+header must match overview; `/admin/login` stays shell-free
+
+### 2026-08-12 — Prevent API key leaks in git (SEC-SECRETS-001)
+- **Mode:** `refactor_existing_system`
+- **Problem:** GitHub Secret Scanning revoked a Resend key after a live key was committed (Claude settings allowlist + docs). Other secrets had also been tracked (`local.env`, docs).
+- **Fix:**
+  - Hardened root `.gitignore` for `.env*`, `local.env`, `.claude/settings.local.json`
+  - Untracked `local.env` + `.claude/settings.local.json` (`git rm --cached`)
+  - Scrubbed placeholders in docs/checklists (no live keys in tracked files)
+  - Added `scripts/check-no-secrets.mjs` + root `npm run secrets:check`
+  - Wired secret scan into `.github/workflows/ci.yml` before `ci:check`
+- **Validation:** `npm run secrets:check` exit 0 (5230 tracked files); no live key patterns in DOC/DEPLOYMENT/Ongoing DOCS
+- **Rotate still required (history):** Supabase DB password(s), legacy admin password from checklist, Google Maps key restrictions/rotation — Resend already rotated by operator
+- 2026-08-12T15:10:00+06:00 | senior-saas-developer | refactor_existing_system | Secret hygiene + CI secret scan
+  - brain: senior-saas-developer SKILL + tasks.md (lane web/)
+  - files_touched: .gitignore, local.env.example, scripts/check-no-secrets.mjs, package.json, .github/workflows/ci.yml, DEPLOYMENT_CHECKLIST.md, DOC docs scrub, Ongoing DOCS/Prompts.md, tasks.md
+  - gates: QG-secrets-check=pass, QG-full-ci=N/A (docs/gitignore only; no web runtime change)
+  - commit: pending
+  - handoff: user rotate remaining leaked credentials; push when ready (do not rewrite git history unless explicitly requested)

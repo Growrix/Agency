@@ -46,13 +46,14 @@ read the necessary codebases, must read the DOC\PROJECT PLAN\ai-context.yaml , a
 - Always run tests and ensure 0 gate pass validations before considering any implementation complete.
 
 Project name : Growrix OS
-supabase DB pass : ow0rJSThOZtHVCjZ
-Project URL : [https://okzrczymtlkaaxlvjnyh.supabase.co](https://okzrczymtlkaaxlvjnyh.supabase.co)
-Publishable Key : sb_publishable_UXidVgN6ulcKzqgRPS79UQ_UCBf6W4X
-Direct Connection string : postgresql://postgres:[YOUR-PASSWORD]@db.okzrczymtlkaaxlvjnyh.supabase.co:5432/postgres
+# SECRETS: never paste DB passwords, API keys, or connection strings into this file.
+# Store them only in Vercel Environment Variables / web/.env.local / local.env (gitignored).
+Project URL : set in SUPABASE_URL (hosting secret manager)
+Publishable Key : set in SUPABASE_ANON_KEY (hosting secret manager)
+Direct Connection string : use Supabase Dashboard → Database (do not commit)
 CLI setup commands : supabase login
 supabase init
-supabase link --project-ref okzrczymtlkaaxlvjnyh
+supabase link --project-ref <PROJECT_REF>
 
 ***few issues to fix sequentially one by one. just unedrstand the contexts and the screenshort shared.***
 
