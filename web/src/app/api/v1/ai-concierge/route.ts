@@ -60,6 +60,21 @@ export async function POST(request: NextRequest) {
       sessionId: session.id,
     });
   } catch (error) {
-    return errorResponse(error instanceof Error ? error : new ApiError("INTERNAL_ERROR", 500, "AI Growrix OS could not answer right now."));
+    if (error instanceof ApiError) {
+      return errorResponse(error);
+    }
+
+    const message =
+      error instanceof Error && error.message.trim().length > 0
+        ? error.message
+        : "AI Growrix OS could not answer right now.";
+
+    // Never leak provider/auth payloads into the public chat response.
+    const safeMessage =
+      /openrouter|openai|authorization|api[_ ]?key|401|403|missing authentication/i.test(message)
+        ? "AI Growrix OS is temporarily unavailable. You can still use WhatsApp, contact, or booking to continue."
+        : message;
+
+    return errorResponse(new ApiError("SERVICE_UNAVAILABLE", 503, safeMessage));
   }
 }

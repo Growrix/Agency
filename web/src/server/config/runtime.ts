@@ -14,7 +14,7 @@ type RuntimeConfig = {
     resendApiKey?: string;
   };
   openAi: {
-    /** OpenRouter key preferred; legacy OPENAI_API_KEY accepted as fallback. */
+    /** OpenRouter key only (`OPENROUTER_API_KEY`). Legacy OPENAI_* is ignored. */
     apiKey?: string;
     /** OpenRouter model slug (e.g. mistralai/mistral-nemo). */
     model: string;
@@ -142,11 +142,9 @@ export function getRuntimeConfig(): RuntimeConfig {
       resendApiKey: process.env.RESEND_API_KEY,
     },
     openAi: {
-      apiKey: process.env.OPENROUTER_API_KEY?.trim() || process.env.OPENAI_API_KEY?.trim() || undefined,
-      model:
-        process.env.OPENROUTER_MODEL?.trim() ||
-        process.env.OPENAI_MODEL?.trim() ||
-        "mistralai/mistral-nemo",
+      /** OpenRouter only — do not fall back to OPENAI_API_KEY (wrong provider). */
+      apiKey: process.env.OPENROUTER_API_KEY?.trim() || undefined,
+      model: process.env.OPENROUTER_MODEL?.trim() || "mistralai/mistral-nemo",
       baseUrl: (process.env.OPENROUTER_BASE_URL?.trim() || "https://openrouter.ai/api/v1").replace(/\/$/, ""),
       httpReferer: process.env.NEXT_PUBLIC_SITE_URL?.trim() || resolveAppBaseUrl(),
       appTitle: process.env.OPENROUTER_APP_TITLE?.trim() || "Growrix OS",

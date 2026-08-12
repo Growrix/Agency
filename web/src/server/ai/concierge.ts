@@ -67,6 +67,9 @@ function isActionKey(value: string): value is ConciergeActionKey {
   return value in ACTIONS;
 }
 
+const USER_SAFE_PROVIDER_ERROR =
+  "AI Growrix OS is temporarily unavailable. You can still use WhatsApp, contact, or booking to continue.";
+
 function isRetryableModelError(status: number, body: string) {
   if (status !== 403 && status !== 404) {
     return false;
@@ -88,7 +91,8 @@ async function requestChatCompletion(apiKey: string, message: string, pagePath: 
   );
 
   const completionsUrl = `${runtime.openAi.baseUrl}/chat/completions`;
-  let lastError = "";
+  let lastStatus = 0;
+  let lastBody = "";
 
   for (const model of candidateModels) {
     const completionResponse = await fetch(completionsUrl, {
@@ -123,14 +127,24 @@ async function requestChatCompletion(apiKey: string, message: string, pagePath: 
     }
 
     const errorText = await completionResponse.text();
-    lastError = `OpenRouter request failed: ${completionResponse.status} ${errorText}`;
+    lastStatus = completionResponse.status;
+    lastBody = errorText;
+    console.error("[ai-concierge] OpenRouter request failed", {
+      status: completionResponse.status,
+      model,
+      bodyPreview: errorText.slice(0, 240),
+    });
 
     if (!isRetryableModelError(completionResponse.status, errorText)) {
-      throw new Error(lastError);
+      throw new Error(USER_SAFE_PROVIDER_ERROR);
     }
   }
 
-  throw new Error(lastError || "OpenRouter request failed.");
+  console.error("[ai-concierge] OpenRouter exhausted model candidates", {
+    status: lastStatus,
+    bodyPreview: lastBody.slice(0, 240),
+  });
+  throw new Error(USER_SAFE_PROVIDER_ERROR);
 }
 
 function buildNoAnswer(sessionId: string): ConciergeReply {
@@ -193,7 +207,10 @@ export async function generateConciergeReply(input: {
 
   const { apiKey } = getRuntimeConfig().openAi;
   if (!apiKey) {
-    throw new Error("OPENROUTER_API_KEY is missing.");
+    console.error("[ai-concierge] OPENROUTER_API_KEY is missing in runtime config");
+    throw new Error(
+      "AI Growrix OS is temporarily unavailable. You can still use WhatsApp, contact, or booking to continue."
+    );
   }
   const knowledgeById = new Map(knowledge.map((document) => [document.id, document]));
   const completionJson = await requestChatCompletion(

@@ -973,6 +973,15 @@ Remaining parallel tracks:
 - **Gaps:** No operator actions. The legacy auth path is test-only (`NODE_ENV=test`); production uses Clerk. Rotating `ADMIN_PASSWORD` after first seed requires deleting the seeded admin record so the new value can be re-hashed. CSP still keeps `'unsafe-inline'` because Next.js and Clerk require it; a nonce-based CSP is a future hardening follow-up.
 
 ## Session Log
+- 2026-08-12T17:20:00+06:00 | senior-saas-developer | debug_failure | Fixed live OpenRouter 401 via Vercel env + key harden
+  - brain: tasks.md → runtime.ts → concierge.ts
+  - files_touched: runtime.ts, concierge.ts, ai-concierge/route.ts, .env.example, openai.md playbook, tasks.md
+  - gates: QG-lints=pass, QG-integration=pass(25/25), QG-vercel-env=set(OPENROUTER_*), remote-live=pending smoke after redeploy
+  - reproduce: live chat showed OpenRouter 401 Missing Authentication header
+  - root_cause: Production missing/misapplied OPENROUTER_API_KEY; legacy OPENAI_API_KEY fallback sent wrong auth to OpenRouter
+  - regression: Vercel OPENROUTER_* synced from local; OPENAI_* removed; code stops OpenAI fallback + sanitizes public errors
+  - commit: pending
+  - handoff: none
 - 2026-08-12T16:25:00+06:00 | senior-saas-developer | execute_locked_plan | Pushed OpenRouter concierge to origin/main after CI parity
   - brain: ci-parity-verification.md → ci.yml → tasks.md
   - files_touched: none (push only; prior commits 0beedaa + 983fba4)

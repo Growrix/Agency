@@ -9,8 +9,8 @@
 | `OPENROUTER_API_KEY` | OpenRouter API key | Required for concierge |
 | `OPENROUTER_MODEL` | OpenRouter model slug | `mistralai/mistral-nemo` |
 | `OPENROUTER_BASE_URL` | Chat Completions API root | `https://openrouter.ai/api/v1` |
-| `OPENAI_API_KEY` | Legacy fallback key | Optional |
-| `OPENAI_MODEL` | Legacy fallback model | Optional |
+
+Legacy `OPENAI_API_KEY` / `OPENAI_MODEL` are **not** used for the concierge path.
 
 ## Routes
 
