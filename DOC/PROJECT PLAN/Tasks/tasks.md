@@ -973,6 +973,13 @@ Remaining parallel tracks:
 - **Gaps:** No operator actions. The legacy auth path is test-only (`NODE_ENV=test`); production uses Clerk. Rotating `ADMIN_PASSWORD` after first seed requires deleting the seeded admin record so the new value can be re-hashed. CSP still keeps `'unsafe-inline'` because Next.js and Clerk require it; a nonce-based CSP is a future hardening follow-up.
 
 ## Session Log
+- 2026-08-12T15:35:00+06:00 | senior-saas-developer | execute_locked_plan | Migrated AI concierge from OpenAI to OpenRouter (cheap JSON model)
+  - brain: lane-router.yaml → tasks.md → openai.yaml playbook → runtime.ts
+  - files_touched: web/src/server/ai/concierge.ts, web/src/server/config/runtime.ts, web/tests/integration/api-flows.test.ts, .env.example, deploy/env docs, integration playbooks, brain catalogs
+  - gates: QG-lints=pass, QG-typecheck=pass, QG-integration=pass(25/25), QG-openrouter-smoke=pass(mistral-nemo JSON), QG-secrets:check=pass, QG-health=N/A (mid-phase; no push)
+  - ops: OPENROUTER_* set in gitignored web/.env.local + root .env (values not logged); Vercel still needs OPENROUTER_* for production
+  - commit: 0beedaa
+  - handoff: optional @devops-release-engineer for Vercel env + redeploy
 - 2026-07-18T22:40:00+06:00 | senior-saas-developer | debug_failure | Fixed signed-in intake 401 + client project visibility
   - brain: lane-router.yaml → tasks.md (P21) → client-intake plan context
   - files_touched: web/src/proxy.ts, web/src/server/auth/guards.ts, web/src/server/domain/intakes.ts, web/src/components/intake/IntakeForm.tsx, web/src/app/api/v1/intakes/route.ts, web/src/app/dashboard/projects/MyProjectsClient.tsx, DOC/PROJECT PLAN/Tasks/tasks.md
