@@ -1219,7 +1219,7 @@ Remaining parallel tracks:
 - Added `scripts/verify-resend.mjs` + `npm run verify:resend`
 - 2026-08-12T15:20:00+06:00 | devops-release-engineer | verify_only | Resend key mismatch fixed; prod TO list incomplete
   - gates: QG-health-prod=pass, QG-ready-prod=pass, QG-resend-auth=pass, QG-resend-send=pass, QG-contact-local=pass, QG-contact-prod=pass(partial recipients)
-  - commit: pending
+  - commit: e3bc63a
   - handoff: user update Vercel CONTACT_TO_EMAIL; check Inquiry@ inbox
 
 ### 2026-08-12 — Prevent API key leaks in git (SEC-SECRETS-001)
