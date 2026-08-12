@@ -1,13 +1,16 @@
-# OpenAI — Growrixos Playbook
+# OpenRouter — Growrixos AI Concierge Playbook
 
-**Env source:** `runtime.ts` → `openAi.*`
+**Env source:** `runtime.ts` → `openAi.*` (OpenRouter-backed; legacy OpenAI env names accepted as fallback)
 
 ## Env vars
 
 | Variable | Purpose | Default |
 |----------|---------|---------|
-| `OPENAI_API_KEY` | API key | Required for concierge |
-| `OPENAI_MODEL` | Model id | `o3-mini` |
+| `OPENROUTER_API_KEY` | OpenRouter API key | Required for concierge |
+| `OPENROUTER_MODEL` | OpenRouter model slug | `mistralai/mistral-nemo` |
+| `OPENROUTER_BASE_URL` | Chat Completions API root | `https://openrouter.ai/api/v1` |
+| `OPENAI_API_KEY` | Legacy fallback key | Optional |
+| `OPENAI_MODEL` | Legacy fallback model | Optional |
 
 ## Routes
 
@@ -16,9 +19,12 @@
 
 ## Rules
 
+- Provider: OpenRouter OpenAI-compatible Chat Completions
+- Default model chosen for low cost + JSON `response_format` support
 - Rate limit: `abuseProtection.conciergeLimitPerMinute`
 - Session state via `domain/conversations.ts`
 - Never log full prompts with PII
+- Never commit API keys
 
 ## Repo stub
 

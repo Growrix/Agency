@@ -16,7 +16,7 @@ Session recovery anchor for backend-only work. Update when adding routes, domain
 | Data | `web/src/server/data/` | Persistence adapters (Supabase / file store) |
 | Config | `web/src/server/config/runtime.ts` | Env contract — **never invent var names** |
 | Auth | `web/src/server/auth/` + Clerk | Identity via `@clerk-nextjs-auth` — not Supabase Auth |
-| Integrations | `web/src/server/` clients + domain | Stripe, Resend, OpenAI, Lark, Sanity fetch |
+| Integrations | `web/src/server/` clients + domain | Stripe, Resend, OpenRouter, Lark, Sanity fetch |
 
 ## Active Domain Modules
 
@@ -76,7 +76,7 @@ Full route list: `memories/repo/site-brain.md` (sync on major changes).
 | Supabase | PostgreSQL persistence | `runtime.ts` → `supabase.*` | `@integration-platform` |
 | Stripe | Payments + webhooks | `runtime.ts` → `stripe.*` | `@integration-platform` |
 | Resend | Transactional email | `runtime.ts` → `contact.resendApiKey` | `@integration-platform` |
-| OpenAI | AI concierge | `runtime.ts` → `openAi.*` | `@integration-platform` |
+| OpenRouter | AI concierge | `runtime.ts` → `openAi.*` | `@integration-platform` |
 | Lark | Internal ops alerts | `runtime.ts` → `notifications.*` | `@integration-platform` |
 | Sanity | CMS (server fetch) | Studio + server adapters | `@integration-platform` |
 

@@ -47,8 +47,8 @@ Source of truth: `web/src/server/config/runtime.ts` + `web/.env.example`
 
 | Variable | Scope | Prod required |
 |----------|-------|---------------|
-| `OPENAI_API_KEY` | server | Concierge |
-| `OPENAI_MODEL` | server | Optional |
+| `OPENROUTER_API_KEY` | server | Concierge |
+| `OPENROUTER_MODEL` | server | Optional (default `mistralai/mistral-nemo`) |
 
 ## Lark (optional)
 

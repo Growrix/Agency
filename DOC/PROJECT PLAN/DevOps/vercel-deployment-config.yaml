@@ -128,17 +128,17 @@ vercel_environment_variables:
       warning: Must match actual production domain or auth will fail
 
   external_services:
-    - name: OPENAI_API_KEY
-      value: YOUR_OPENAI_API_KEY
+    - name: OPENROUTER_API_KEY
+      value: YOUR_OPENROUTER_API_KEY
       type: server-only
-      description: OpenAI API key for AI concierge
+      description: OpenRouter API key for AI concierge
       same_as_local: true
-      reference: https://platform.openai.com/api-keys
+      reference: https://openrouter.ai/keys
     
-    - name: OPENAI_MODEL
-      value: o3-mini
+    - name: OPENROUTER_MODEL
+      value: mistralai/mistral-nemo
       type: public
-      description: OpenAI model to use
+      description: OpenRouter model slug for AI concierge (cheap JSON-capable default)
       same_as_local: true
     
     - name: RESEND_API_KEY
@@ -260,8 +260,8 @@ quick_copy_paste_vars:
     - ADMIN_EMAIL=admin@growrixos.com
     - ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
     - NEXT_PUBLIC_SITE_URL=https://growrixos.com
-    - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
-    - OPENAI_MODEL=o3-mini
+    - OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
+    - OPENROUTER_MODEL=mistralai/mistral-nemo
     - RESEND_API_KEY=YOUR_RESEND_API_KEY
     - CONTACT_TO_EMAIL=growrixos@gmail.com
     - CONTACT_FROM_EMAIL=Growrix <hello@growrixos.com>

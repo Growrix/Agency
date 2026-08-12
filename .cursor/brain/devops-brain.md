@@ -33,7 +33,7 @@ Session recovery for release, env matrix, pipeline, and deploy-smoke work. Pair 
 | Supabase | `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` | Yes (persistence) |
 | Stripe | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Commerce |
 | Resend | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Email flows |
-| OpenAI | `OPENAI_API_KEY`, `OPENAI_MODEL` | AI concierge |
+| OpenRouter | `OPENROUTER_API_KEY`, `OPENROUTER_MODEL` | AI concierge |
 | Lark | `LARK_WEBHOOK_URL`, `LARK_SIGNING_SECRET` | Ops alerts (optional) |
 | Rate limits | `RATE_LIMIT_*_PER_MINUTE` | Defaults in runtime |
 | Legacy auth | `AUTH_JWT_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` | Deprecating — Clerk target |

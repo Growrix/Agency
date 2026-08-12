@@ -105,8 +105,8 @@ ADMIN_EMAIL=admin@growrixos.com
 ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 
 # External services (same across environments)
-OPENAI_API_KEY=sk-proj-...
-OPENAI_MODEL=o3-mini
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_MODEL=mistralai/mistral-nemo
 RESEND_API_KEY=<set-in-hosting-secret-manager>
 CONTACT_TO_EMAIL=Inquiry@growrixos.com,growrixos@gmail.com
 CONTACT_FROM_EMAIL=Growrix <hello@growrixos.com>
@@ -146,7 +146,7 @@ ADMIN_EMAIL=admin@growrixos.com
 ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 
 # Same external services
-OPENAI_API_KEY=sk-proj-...
+OPENROUTER_API_KEY=sk-or-v1-...
 # ... rest of secrets
 ```
 

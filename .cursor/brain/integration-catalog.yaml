@@ -92,8 +92,9 @@ providers:
     role: ai
     owner_skill: integration-platform
     env_vars:
-      - OPENAI_API_KEY
-      - OPENAI_MODEL
+      - OPENROUTER_API_KEY
+      - OPENROUTER_MODEL
+      - OPENROUTER_BASE_URL
     routes:
       - /api/v1/ai-concierge
       - /api/v1/ai-concierge/[sessionId]

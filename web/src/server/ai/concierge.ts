@@ -2,6 +2,7 @@ import "server-only";
 
 import { WHATSAPP_HREF } from "@/lib/nav";
 import { formatKnowledgeForPrompt, searchKnowledge } from "@/server/ai/knowledge";
+import { getRuntimeConfig } from "@/server/config/runtime";
 
 type ConciergeActionKey =
   | "book"
@@ -34,6 +35,14 @@ const ACTIONS: Record<ConciergeActionKey, Action> = {
 
 const FALLBACK_ACTIONS: ConciergeActionKey[] = ["whatsapp", "book", "contact"];
 
+/** Cheap JSON-capable OpenRouter models; primary is cost-optimized for grounded Q&A. */
+const DEFAULT_MODEL_CANDIDATES = [
+  "mistralai/mistral-nemo",
+  "qwen/qwen3.7-flash",
+  "google/gemini-2.5-flash-lite",
+  "openai/gpt-4o-mini",
+] as const;
+
 export type ConciergeReply = {
   answer: string;
   messageId: string;
@@ -63,23 +72,32 @@ function isRetryableModelError(status: number, body: string) {
     return false;
   }
 
-  return body.includes("model_not_found") || body.includes("does not have access to model");
+  return (
+    body.includes("model_not_found") ||
+    body.includes("does not have access to model") ||
+    body.includes("No endpoints found") ||
+    body.includes("not available")
+  );
 }
 
 async function requestChatCompletion(apiKey: string, message: string, pagePath: string, knowledgePrompt: string) {
-  const requestedModel = process.env.OPENAI_MODEL?.trim();
-  const candidateModels = [requestedModel, "o3-mini", "gpt-4.1-mini", "gpt-4.1-nano", "gpt-4o-mini"].filter(
+  const runtime = getRuntimeConfig();
+  const requestedModel = runtime.openAi.model?.trim();
+  const candidateModels = [requestedModel, ...DEFAULT_MODEL_CANDIDATES].filter(
     (value, index, array): value is string => Boolean(value) && array.indexOf(value) === index
   );
 
+  const completionsUrl = `${runtime.openAi.baseUrl}/chat/completions`;
   let lastError = "";
 
   for (const model of candidateModels) {
-    const completionResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+    const completionResponse = await fetch(completionsUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
+        "HTTP-Referer": runtime.openAi.httpReferer,
+        "X-Title": runtime.openAi.appTitle,
       },
       body: JSON.stringify({
         model,
@@ -105,14 +123,14 @@ async function requestChatCompletion(apiKey: string, message: string, pagePath: 
     }
 
     const errorText = await completionResponse.text();
-    lastError = `OpenAI request failed: ${completionResponse.status} ${errorText}`;
+    lastError = `OpenRouter request failed: ${completionResponse.status} ${errorText}`;
 
     if (!isRetryableModelError(completionResponse.status, errorText)) {
       throw new Error(lastError);
     }
   }
 
-  throw new Error(lastError || "OpenAI request failed.");
+  throw new Error(lastError || "OpenRouter request failed.");
 }
 
 function buildNoAnswer(sessionId: string): ConciergeReply {
@@ -173,9 +191,9 @@ export async function generateConciergeReply(input: {
     return buildNoAnswer(sessionId);
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const { apiKey } = getRuntimeConfig().openAi;
   if (!apiKey) {
-    throw new Error("OPENAI_API_KEY is missing.");
+    throw new Error("OPENROUTER_API_KEY is missing.");
   }
   const knowledgeById = new Map(knowledge.map((document) => [document.id, document]));
   const completionJson = await requestChatCompletion(

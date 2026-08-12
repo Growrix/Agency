@@ -14,8 +14,14 @@ type RuntimeConfig = {
     resendApiKey?: string;
   };
   openAi: {
+    /** OpenRouter key preferred; legacy OPENAI_API_KEY accepted as fallback. */
     apiKey?: string;
+    /** OpenRouter model slug (e.g. mistralai/mistral-nemo). */
     model: string;
+    /** Chat Completions base URL (OpenRouter by default). */
+    baseUrl: string;
+    httpReferer: string;
+    appTitle: string;
   };
   stripe: {
     secretKey?: string;
@@ -136,8 +142,14 @@ export function getRuntimeConfig(): RuntimeConfig {
       resendApiKey: process.env.RESEND_API_KEY,
     },
     openAi: {
-      apiKey: process.env.OPENAI_API_KEY,
-      model: process.env.OPENAI_MODEL?.trim() || "o3-mini",
+      apiKey: process.env.OPENROUTER_API_KEY?.trim() || process.env.OPENAI_API_KEY?.trim() || undefined,
+      model:
+        process.env.OPENROUTER_MODEL?.trim() ||
+        process.env.OPENAI_MODEL?.trim() ||
+        "mistralai/mistral-nemo",
+      baseUrl: (process.env.OPENROUTER_BASE_URL?.trim() || "https://openrouter.ai/api/v1").replace(/\/$/, ""),
+      httpReferer: process.env.NEXT_PUBLIC_SITE_URL?.trim() || resolveAppBaseUrl(),
+      appTitle: process.env.OPENROUTER_APP_TITLE?.trim() || "Growrix OS",
     },
     stripe: {
       secretKey: process.env.STRIPE_SECRET_KEY,

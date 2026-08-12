@@ -85,7 +85,10 @@ function getRequestUrl(input: RequestInfo | URL) {
 describe("API flows", () => {
   beforeEach(async () => {
     await resetDatabase();
-    process.env.OPENAI_API_KEY = "test-openai-key";
+    process.env.OPENROUTER_API_KEY = "test-openrouter-key";
+    process.env.OPENROUTER_MODEL = "mistralai/mistral-nemo";
+    delete process.env.OPENAI_API_KEY;
+    delete process.env.OPENAI_MODEL;
     process.env.AUTH_JWT_SECRET = "test-jwt-secret";
     delete process.env.STRIPE_SECRET_KEY;
     delete process.env.STRIPE_WEBHOOK_SECRET;
@@ -97,7 +100,7 @@ describe("API flows", () => {
     globalThis.fetch = (async (input) => {
       const url = getRequestUrl(input);
 
-      if (url === "https://api.openai.com/v1/chat/completions") {
+      if (url === "https://openrouter.ai/api/v1/chat/completions") {
         return new Response(
           JSON.stringify({
             choices: [
