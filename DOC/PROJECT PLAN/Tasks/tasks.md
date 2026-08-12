@@ -973,6 +973,14 @@ Remaining parallel tracks:
 - **Gaps:** No operator actions. The legacy auth path is test-only (`NODE_ENV=test`); production uses Clerk. Rotating `ADMIN_PASSWORD` after first seed requires deleting the seeded admin record so the new value can be re-hashed. CSP still keeps `'unsafe-inline'` because Next.js and Clerk require it; a nonce-based CSP is a future hardening follow-up.
 
 ## Session Log
+- 2026-08-12T16:25:00+06:00 | senior-saas-developer | execute_locked_plan | Pushed OpenRouter concierge to origin/main after CI parity
+  - brain: ci-parity-verification.md → ci.yml → tasks.md
+  - files_touched: none (push only; prior commits 0beedaa + 983fba4)
+  - gates: QG-secrets=pass, QG-ci:check=pass(lint/typecheck/perf/test/build + e2e 17/17 after port-5000 clear), remote CI=unverified (gh auth missing)
+  - push: origin/main @ 983fba4
+  - ops: Vercel still requires OPENROUTER_API_KEY + OPENROUTER_MODEL (keys not in git)
+  - commit: none (push only)
+  - handoff: user — Vercel env + redeploy; optional @devops-release-engineer
 - 2026-08-12T15:35:00+06:00 | senior-saas-developer | execute_locked_plan | Migrated AI concierge from OpenAI to OpenRouter (cheap JSON model)
   - brain: lane-router.yaml → tasks.md → openai.yaml playbook → runtime.ts
   - files_touched: web/src/server/ai/concierge.ts, web/src/server/config/runtime.ts, web/tests/integration/api-flows.test.ts, .env.example, deploy/env docs, integration playbooks, brain catalogs
