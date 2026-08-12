@@ -9,6 +9,7 @@
     "test:integration": "npm --prefix web run test:integration",
     "test:e2e": "npm --prefix web run test:e2e",
     "studio": "npm --prefix studio run dev",
-    "secrets:check": "node ./scripts/check-no-secrets.mjs"
+    "secrets:check": "node ./scripts/check-no-secrets.mjs",
+    "verify:resend": "node ./scripts/verify-resend.mjs"
   }
 }

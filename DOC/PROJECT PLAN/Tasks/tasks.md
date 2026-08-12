@@ -1205,6 +1205,23 @@ Remaining parallel tracks:
   - commit: f3b79e2
   - handoff: hard-refresh any `/admin/orders` (etc.) — sidebar+header must match overview; `/admin/login` stays shell-free
 
+### 2026-08-12 — Resend delivery diagnose + local key sync (SEC-RESEND-001)
+- **Mode:** `verify_only` → repair local env (no app code)
+- **Root cause:** `web/.env.local` still had revoked/invalid Resend key (`re_Y…`, API: "API key is invalid"). Next.js loads `.env.local`, so local contact email failed. Root `.env` had working key (`re_G…`).
+- **Fix:** Synced working `RESEND_API_KEY` into `web/.env.local`; aligned root `CONTACT_TO_EMAIL` to both recipients.
+- **Evidence:**
+  - Resend domains probe: `growrixos.com:verified`
+  - Direct Resend send id `e6cec2a6-…` → `last_event=delivered` to Inquiry@ + gmail
+  - Local `POST /api/v1/contact` → Resend delivered (both recipients)
+  - Prod `POST https://www.growrixos.com/api/v1/contact` → `email_delivery.delivered=true` but **only Inquiry@growrixos.com** (Vercel `CONTACT_TO_EMAIL` missing gmail)
+  - Prod health/ready 200
+- **Operator action:** Update Vercel Production `CONTACT_TO_EMAIL=Inquiry@growrixos.com,growrixos@gmail.com`; confirm Production `RESEND_API_KEY` is the working key (not revoked). Check Inquiry@ + spam.
+- Added `scripts/verify-resend.mjs` + `npm run verify:resend`
+- 2026-08-12T15:20:00+06:00 | devops-release-engineer | verify_only | Resend key mismatch fixed; prod TO list incomplete
+  - gates: QG-health-prod=pass, QG-ready-prod=pass, QG-resend-auth=pass, QG-resend-send=pass, QG-contact-local=pass, QG-contact-prod=pass(partial recipients)
+  - commit: pending
+  - handoff: user update Vercel CONTACT_TO_EMAIL; check Inquiry@ inbox
+
 ### 2026-08-12 — Prevent API key leaks in git (SEC-SECRETS-001)
 - **Mode:** `refactor_existing_system`
 - **Problem:** GitHub Secret Scanning revoked a Resend key after a live key was committed (Claude settings allowlist + docs). Other secrets had also been tracked (`local.env`, docs).
