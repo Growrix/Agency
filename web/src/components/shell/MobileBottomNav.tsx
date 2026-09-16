@@ -45,7 +45,7 @@ export function MobileBottomNav() {
       data-testid="mobile-bottom-nav"
       data-nav-visible={navVisible ? "true" : "false"}
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface backdrop-blur-md lg:hidden",
+        "fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface backdrop-blur-md md:hidden",
         !reduced && "transition-transform duration-300 ease-signal",
         !navVisible && "translate-y-full pointer-events-none"
       )}

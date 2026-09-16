@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { FreeDemoModal } from "@/components/marketing/FreeDemoModal";
 import {
   FREE_DEMO_SEEN_KEY,
@@ -72,7 +71,7 @@ export function FreeDemoHeaderButton() {
 
   if (!isClerkConfiguredClient()) {
     return (
-      <LinkButton href="/contact" size="sm" variant="outline" className="hidden lg:inline-flex">
+      <LinkButton href="/contact" size="sm" variant="outline" className="hidden md:inline-flex">
         Free demo
       </LinkButton>
     );
@@ -83,7 +82,7 @@ export function FreeDemoHeaderButton() {
       type="button"
       size="sm"
       variant="outline"
-      className="hidden lg:inline-flex"
+      className="hidden md:inline-flex"
       onClick={() => {
         // Clear prior dismiss so header CTA always opens the offer panel.
         if (typeof window !== "undefined") {
@@ -107,14 +106,16 @@ export function FreeDemoAuthGate({
   /** Keep the visitor on the current page so the filled form can auto-submit. */
   stayOnPage?: boolean;
 }) {
-  const returnUrl = stayOnPage && typeof window !== "undefined" ? window.location.href : undefined;
+  const returnUrl =
+    stayOnPage && typeof window !== "undefined" ? window.location.href : "/";
+  const encodedReturn = encodeURIComponent(returnUrl);
 
   if (!isClerkConfiguredClient()) {
     return (
       <div className="space-y-3 rounded-md border border-border bg-inset/20 p-4">
         <p className="text-sm font-medium text-text">{title}</p>
         <p className="text-sm text-text-muted">{description}</p>
-        <LinkButton href="/dashboard/login" fullWidth>
+        <LinkButton href={`/dashboard/login?next=${encodedReturn}`} fullWidth>
           Sign in to continue
         </LinkButton>
       </div>
@@ -126,14 +127,12 @@ export function FreeDemoAuthGate({
       <p className="text-sm font-medium text-text">{title}</p>
       <p className="text-sm text-text-muted">{description}</p>
       <div className="flex flex-col gap-2 sm:flex-row">
-        <SignInButton mode="modal" forceRedirectUrl={returnUrl} fallbackRedirectUrl={returnUrl}>
-          <Button fullWidth>Sign in</Button>
-        </SignInButton>
-        <SignUpButton mode="modal" forceRedirectUrl={returnUrl} fallbackRedirectUrl={returnUrl}>
-          <Button fullWidth variant="outline">
-            Sign up free
-          </Button>
-        </SignUpButton>
+        <LinkButton href={`/sign-in?redirect_url=${encodedReturn}`} fullWidth>
+          Sign in
+        </LinkButton>
+        <LinkButton href={`/sign-up?redirect_url=${encodedReturn}`} fullWidth variant="outline">
+          Sign up free
+        </LinkButton>
       </div>
     </div>
   );

@@ -1,14 +1,20 @@
-/* Digital Products shop — desktop layout (lg+) */
+/* Digital Products shop — desktop layout (md+ / tablet+) */
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .shop-desktop {
-    --shop-desktop-sidebar-width: 17.5rem;
+    --shop-desktop-sidebar-width: 14rem;
     --shop-desktop-grid-gap: 1.25rem;
     --shop-section-gap: 2rem;
     --shop-desktop-panel-radius: var(--radius-lg);
     --shop-desktop-panel-border: color-mix(in srgb, var(--color-border) 80%, transparent);
     --shop-desktop-panel-bg: color-mix(in srgb, var(--color-surface) 92%, var(--color-inset));
     --shop-desktop-glow: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  }
+
+  @media (min-width: 1024px) {
+    .shop-desktop {
+      --shop-desktop-sidebar-width: 17.5rem;
+    }
   }
 
   .shop-desktop__hero-shell {
@@ -626,8 +632,14 @@
 
   .shop-desktop__product-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--shop-desktop-grid-gap);
+  }
+
+  @media (min-width: 1024px) {
+    .shop-desktop__product-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   .shop-desktop__product-cell {

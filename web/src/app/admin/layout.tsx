@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { AdminDashboardChrome } from "@/components/dashboard/AdminDashboardChrome";
+import { ClerkRouteLayout } from "@/components/shell/ClerkRouteLayout";
 import { getAuthenticatedUser } from "@/server/auth/guards";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   // /admin/login must stay public — it lives under /admin/* but must not require admin role.
   if (isAdminLoginPath(pathname)) {
-    return children;
+    return <ClerkRouteLayout>{children}</ClerkRouteLayout>;
   }
 
   const sentinelRequest = new Request("https://internal/admin", {
@@ -41,5 +42,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     redirect("/dashboard");
   }
 
-  return <AdminDashboardChrome>{children}</AdminDashboardChrome>;
+  return (
+    <ClerkRouteLayout>
+      <AdminDashboardChrome>{children}</AdminDashboardChrome>
+    </ClerkRouteLayout>
+  );
 }

@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { MotionRoot } from "@/components/motion/Motion";
 import { AppChrome } from "@/components/shell/AppChrome";
-import { ClerkAppProvider } from "@/components/shell/ClerkAppProvider";
 import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
 import { GoogleAnalytics } from "@/components/shell/GoogleAnalytics";
 import { ConsentBanner } from "@/components/shell/ConsentBanner";
@@ -86,18 +85,6 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
-function AppShell({ children }: { children: React.ReactNode }) {
-  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
-    return <AppChrome>{children}</AppChrome>;
-  }
-
-  return (
-    <ClerkAppProvider>
-      <AppChrome>{children}</AppChrome>
-    </ClerkAppProvider>
-  );
-}
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -119,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <MotionRoot>
-          <AppShell>{children}</AppShell>
+          <AppChrome>{children}</AppChrome>
         </MotionRoot>
         <DeferredSpeedInsights />
         <GoogleAnalytics />

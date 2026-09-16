@@ -2,9 +2,9 @@
  * Canonical site configuration used by metadata, robots, and sitemap generation.
  *
  * The production host can be overridden with NEXT_PUBLIC_SITE_URL. Public search
- * indexing is gated behind SITE_INDEXING_ENABLED so the site can stay fully
- * blocked during the pre-launch phase and be opened with a single env flag once
- * the SEO readiness checklist passes.
+ * indexing defaults ON for Vercel Production (and generic NODE_ENV=production
+ * when not a preview). Preview/dev stay blocked unless explicitly enabled.
+ * Set SITE_INDEXING_ENABLED=false to force a full crawl/index block.
  */
 
 const DEFAULT_SITE_URL = "https://www.growrixos.com";
@@ -77,12 +77,64 @@ export const SITE_URL = resolvePublicSiteUrl();
 
 export const SITE_NAME = "Growrix OS";
 
+function parseIndexingFlag(raw: string | undefined): boolean | null {
+  if (raw === undefined) {
+    return null;
+  }
+
+  const normalized = raw.trim().toLowerCase();
+  if (normalized === "") {
+    return null;
+  }
+
+  if (["1", "true", "yes", "on"].includes(normalized)) {
+    return true;
+  }
+
+  if (["0", "false", "no", "off"].includes(normalized)) {
+    return false;
+  }
+
+  return null;
+}
+
 /**
- * When false (the default), the site advertises itself as non-indexable through
- * robots.txt and per-page robots metadata. Set SITE_INDEXING_ENABLED=true to
- * open the site to search engines after the launch checklist is complete.
+ * Decide whether public routes may be crawled/indexed.
+ *
+ * Priority:
+ * 1. Explicit SITE_INDEXING_ENABLED=true|false (and common aliases)
+ * 2. Vercel preview / non-production → blocked
+ * 3. Vercel production (or NODE_ENV=production outside preview) → allowed
+ *
+ * Exportable for unit tests.
  */
-export const SITE_INDEXING_ENABLED = process.env.SITE_INDEXING_ENABLED === "true";
+export function resolveSiteIndexingEnabled(
+  env: Partial<NodeJS.ProcessEnv> = process.env,
+): boolean {
+  const explicit = parseIndexingFlag(env.SITE_INDEXING_ENABLED);
+  if (explicit !== null) {
+    return explicit;
+  }
+
+  const vercelEnv = (env.VERCEL_ENV ?? "").trim().toLowerCase();
+  if (vercelEnv === "preview" || vercelEnv === "development") {
+    return false;
+  }
+
+  if (vercelEnv === "production") {
+    return true;
+  }
+
+  // Generic production builds (non-Vercel) default to indexable so a missing
+  // env flag cannot silently emit Disallow:/ + sitewide noindex again.
+  return env.NODE_ENV === "production";
+}
+
+/**
+ * When false, robots.txt disallows `/` and root metadata emits noindex.
+ * Production defaults ON; set SITE_INDEXING_ENABLED=false to kill-switch.
+ */
+export const SITE_INDEXING_ENABLED = resolveSiteIndexingEnabled();
 
 /** Route prefixes that must never be indexed even after indexing is enabled. */
 export const DISALLOWED_CRAWL_PATHS = [

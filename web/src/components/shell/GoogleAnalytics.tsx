@@ -9,7 +9,7 @@ import {
   readStoredAnalyticsConsent,
 } from "@/lib/analytics";
 
-/** Mount GA4 after window load so gtag does not count toward domcontentloaded resource budget. */
+/** Mount GA4 after window load + idle so gtag does not count toward domcontentloaded. */
 export function GoogleAnalytics() {
   const [mounted, setMounted] = useState(false);
 
@@ -18,14 +18,39 @@ export function GoogleAnalytics() {
       return;
     }
 
-    const enable = () => setMounted(true);
+    let cancelled = false;
+    let idleHandle: number | undefined;
+
+    const scheduleMount = () => {
+      const requestIdle =
+        window.requestIdleCallback ??
+        ((callback: IdleRequestCallback) =>
+          window.setTimeout(() => callback({ didTimeout: true, timeRemaining: () => 0 }), 1));
+
+      idleHandle = requestIdle(
+        () => {
+          if (!cancelled) {
+            setMounted(true);
+          }
+        },
+        { timeout: 2000 },
+      ) as number;
+    };
+
     if (document.readyState === "complete") {
-      enable();
-      return;
+      scheduleMount();
+    } else {
+      window.addEventListener("load", scheduleMount, { once: true });
     }
 
-    window.addEventListener("load", enable, { once: true });
-    return () => window.removeEventListener("load", enable);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", scheduleMount);
+      if (idleHandle !== undefined) {
+        const cancelIdle = window.cancelIdleCallback ?? window.clearTimeout;
+        cancelIdle(idleHandle);
+      }
+    };
   }, []);
 
   if (!mounted || !isGaConfigured()) {
@@ -49,13 +74,13 @@ export function GoogleAnalytics() {
 
   return (
     <>
-      <Script id="ga4-gtag-init" strategy="afterInteractive">
+      <Script id="ga4-gtag-init" strategy="lazyOnload">
         {initScript}
       </Script>
       <Script
         id="ga4-gtag-loader"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         onLoad={() => {
           if (readStoredAnalyticsConsent() === "granted") {
             gaConsentGranted();

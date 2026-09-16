@@ -695,7 +695,7 @@
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .processTimeline {
     grid-template-columns: 1fr;
   }
@@ -726,24 +726,24 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .typesGrid {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
   }
 
   .metricsGrid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1fr;
   }
 
   .whyGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
   }
 
   .pricingGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
   }
 
@@ -754,5 +754,19 @@
   .workflowCards {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .metricsGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .whyGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pricingGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

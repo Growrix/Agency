@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useAuth, useClerk } from "@clerk/nextjs";
 import { FreeDemoAuthGate } from "@/components/marketing/FreeDemoPopup";
 import { FileUploadField } from "@/components/intake/FileUploadField";
 import { Button, LinkButton } from "@/components/primitives/Button";
@@ -193,8 +192,6 @@ function TagInput({
 }
 
 export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
-  const { isSignedIn, isLoaded, getToken } = useAuth();
-  const clerk = useClerk();
   const clerkEnabled = isClerkConfiguredClient();
   const bumpClaimed = useFreeDemoStore((state) => state.bumpClaimed);
 
@@ -206,6 +203,8 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [submissionNumber, setSubmissionNumber] = useState<string | null>(null);
   const [needsFileReattach, setNeedsFileReattach] = useState(false);
+  const [authLoaded, setAuthLoaded] = useState(!clerkEnabled);
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const [values, setValues] = useState<IntakeFormValues>(() => ({
     ...EMPTY_VALUES,
     reference_sites: [{ url: "", note: "" }],
@@ -222,6 +221,32 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
     valuesRef.current = values;
     filesRef.current = files;
   }, [values, files]);
+
+  // Cookie-session probe — avoids loading clerk-js on marketing pages.
+  useEffect(() => {
+    if (!clerkEnabled) {
+      return;
+    }
+
+    let cancelled = false;
+    void fetch("/api/v1/me", { credentials: "same-origin" })
+      .then((response) => {
+        if (!cancelled) {
+          setIsSignedIn(response.ok);
+          setAuthLoaded(true);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setIsSignedIn(false);
+          setAuthLoaded(true);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [clerkEnabled]);
 
   // Restore draft after Clerk full-page redirect so auto-submit can finish.
   useEffect(() => {
@@ -289,19 +314,10 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
         formData.append("files", file);
       }
 
-      const headers: HeadersInit = {};
-      if (clerkEnabled) {
-        const token = await getToken().catch(() => null);
-        if (token) {
-          headers.Authorization = `Bearer ${token}`;
-        }
-      }
-
       const response = await fetch("/api/v1/intakes", {
         method: "POST",
         body: formData,
         credentials: "same-origin",
-        headers,
       });
       const payload = (await response.json().catch(() => null)) as {
         data?: { submission_number?: string; project_id?: string };
@@ -335,7 +351,7 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   function handleSubmit() {
     setError(null);
 
-    if (clerkEnabled && isLoaded && !isSignedIn) {
+    if (clerkEnabled && authLoaded && !isSignedIn) {
       pendingSubmitRef.current = true;
       setAwaitingAuth(true);
       savePendingIntake({
@@ -344,13 +360,8 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
         isFreeDemo,
       });
       const returnUrl = typeof window !== "undefined" ? window.location.href : "/";
-      try {
-        clerk.openSignIn({
-          forceRedirectUrl: returnUrl,
-          fallbackRedirectUrl: returnUrl,
-        });
-      } catch {
-        // Fallback UI (FreeDemoAuthGate) remains visible below.
+      if (typeof window !== "undefined") {
+        window.location.assign(`/sign-in?redirect_url=${encodeURIComponent(returnUrl)}`);
       }
       return;
     }
@@ -359,7 +370,7 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   }
 
   useEffect(() => {
-    if (!isLoaded || !isSignedIn || !pendingSubmitRef.current) {
+    if (!authLoaded || !isSignedIn || !pendingSubmitRef.current) {
       return;
     }
     pendingSubmitRef.current = false;
@@ -367,7 +378,7 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
     void submitIntake();
     // submitIntake closes over refs + stable props; intentionally omit from deps.
     // eslint-disable-next-line react-hooks/exhaustive-deps -- auto-submit once after auth
-  }, [isLoaded, isSignedIn, pendingRestoreReady]);
+  }, [authLoaded, isSignedIn, pendingRestoreReady]);
 
   if (successMessage) {
     return (

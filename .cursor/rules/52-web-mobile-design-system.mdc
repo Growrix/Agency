@@ -10,7 +10,7 @@ Applies to all marketing and service pages under `web/src/app/`. Complements rul
 
 ## Viewport delegation (required)
 
-Every public marketing page under `web/src/app/` **must** use `MarketingViewportGate` from [`web/src/components/marketing/MarketingViewportGate.tsx`](web/src/components/marketing/MarketingViewportGate.tsx) to split mobile (`< lg`) and desktop (`≥ lg`) layouts.
+Every public marketing page under `web/src/app/` **must** use `MarketingViewportGate` from [`web/src/components/marketing/MarketingViewportGate.tsx`](web/src/components/marketing/MarketingViewportGate.tsx) to split phone (`< md` / `< 768px`) and desktop (`≥ md` / `≥ 768px`) layouts. Tablet is fluid desktop — not an enlarged phone tree.
 
 **Never** build bespoke mobile-only CSS modules that duplicate shared components. Mobile layout CSS extensions belong in `web/src/app/globals.css` under the `.home-mobile-marketing*` or `.service-detail-hero-mobile*` BEM namespaces.
 

@@ -85,6 +85,41 @@ Update task statuses when work moves from planned to in progress, blocked, or do
 - `checklists/02-recurring-maintenance-checklist.md`
 - `testing-auditing/02-audit-playbook.md`
 
+## Active / Recent Tasks
+
+### Task: Grok findings revalidation P0/P1
+
+Status: Done
+Phase: 9 Testing and audit + on-page/performance remediation
+Route type: homepage | service detail | marketing shell
+Source docs:
+- `on-page/04-crawlability-robots-sitemaps.md`
+- `on-page/01-metadata.md`
+- `on-page/02-structured-data-schema.md`
+- `on-page/05-internal-linking-navigation.md`
+- `media/01-image-seo.md`
+- `performance/01-core-web-vitals.md`
+- `audit-reports/2026-09-10-grok-findings-revalidation.md`
+
+Deliverables:
+- Clerk provider scoped off marketing HTML
+- robots.txt without Host
+- Hero WebP LCP preload
+- Service explore links + title/canonical hygiene
+- Release-gate updates
+
+Acceptance criteria:
+- Marketing pages do not mount ClerkProvider
+- robots body has no Host line
+- Public service slugs emit Service + FAQPage + BreadcrumbList
+- health:check exits 0
+
+Validation:
+- `npm run health:check` (web/) — exit 0 on 2026-09-16
+
+Risks:
+- Cloudflare managed robots block still present at edge — cannot fix in Next alone
+
 ## References
 
 - Master Technical SEO Documentation Blueprint.

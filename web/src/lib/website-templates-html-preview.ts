@@ -312,11 +312,11 @@ export function buildWebsiteTemplateHtmlPreviewHeroSlides(
       price: catalogProduct?.price ?? template.price,
       href: catalogProduct ? `/digital-products/${catalogProduct.slug}` : `/digital-products/${productSlug}`,
       previewImage: {
-        src: getPreviewPosterUrl(template.slug, "desktop"),
+        src: getPreviewPosterWebpUrl(template.slug, "desktop"),
         alt: previewPosterAlt(template.title, "desktop"),
       },
       previewMobileImage: {
-        src: getPreviewPosterUrl(template.slug, "mobile"),
+        src: getPreviewPosterWebpUrl(template.slug, "mobile"),
         alt: previewPosterAlt(template.title, "mobile"),
       },
     };

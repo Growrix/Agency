@@ -1,6 +1,6 @@
-/* Digital Products shop — mobile app-like layout (< lg) */
+/* Digital Products shop — mobile app-like layout (< md) */
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .shop-mobile {
     --shop-section-gap: 1.5rem;
     --shop-carousel-gap: 0.75rem;

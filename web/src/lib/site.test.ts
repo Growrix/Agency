@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import { resolveAppBaseUrl } from "@/lib/site";
+import { resolveAppBaseUrl, resolveSiteIndexingEnabled } from "@/lib/site";
 import { getRuntimeConfig, resetRuntimeConfigForTests } from "@/server/config/runtime";
 
 const testEnv = process.env as NodeJS.ProcessEnv & Record<string, string | undefined>;
@@ -65,5 +65,74 @@ describe("resolveAppBaseUrl", () => {
     setTestEnv("NODE_ENV", "production");
     setTestEnv("NEXT_PUBLIC_SITE_URL", "https://www.growrixos.com");
     assert.equal(resolveAppBaseUrl(), "https://www.growrixos.com");
+  });
+});
+
+describe("resolveSiteIndexingEnabled", () => {
+  it("defaults ON for Vercel production when flag is unset", () => {
+    assert.equal(
+      resolveSiteIndexingEnabled({
+        NODE_ENV: "production",
+        VERCEL_ENV: "production",
+      }),
+      true,
+    );
+  });
+
+  it("defaults ON for generic production builds when flag is unset", () => {
+    assert.equal(
+      resolveSiteIndexingEnabled({
+        NODE_ENV: "production",
+      }),
+      true,
+    );
+  });
+
+  it("defaults OFF for Vercel preview when flag is unset", () => {
+    assert.equal(
+      resolveSiteIndexingEnabled({
+        NODE_ENV: "production",
+        VERCEL_ENV: "preview",
+      }),
+      false,
+    );
+  });
+
+  it("defaults OFF in local development when flag is unset", () => {
+    assert.equal(
+      resolveSiteIndexingEnabled({
+        NODE_ENV: "development",
+      }),
+      false,
+    );
+  });
+
+  it("honors explicit true even on preview", () => {
+    assert.equal(
+      resolveSiteIndexingEnabled({
+        NODE_ENV: "production",
+        VERCEL_ENV: "preview",
+        SITE_INDEXING_ENABLED: "true",
+      }),
+      true,
+    );
+  });
+
+  it("honors explicit false even on production", () => {
+    assert.equal(
+      resolveSiteIndexingEnabled({
+        NODE_ENV: "production",
+        VERCEL_ENV: "production",
+        SITE_INDEXING_ENABLED: "false",
+      }),
+      false,
+    );
+  });
+
+  it("accepts common truthy/falsey aliases", () => {
+    assert.equal(resolveSiteIndexingEnabled({ SITE_INDEXING_ENABLED: "1" }), true);
+    assert.equal(resolveSiteIndexingEnabled({ SITE_INDEXING_ENABLED: "yes" }), true);
+    assert.equal(resolveSiteIndexingEnabled({ SITE_INDEXING_ENABLED: "0" }), false);
+    assert.equal(resolveSiteIndexingEnabled({ SITE_INDEXING_ENABLED: "off" }), false);
   });
 });

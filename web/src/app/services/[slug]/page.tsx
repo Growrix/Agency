@@ -63,6 +63,7 @@ import { ServiceDetailHeroMobile } from "@/components/marketing/services/Service
 import { TechnicalSeoSetupCategoriesMobile } from "@/components/marketing/services/TechnicalSeoSetupCategoriesMobile";
 import { ServiceFaqMobile } from "@/components/marketing/services/ServiceFaqMobile";
 import { ServiceFeaturedProofMobile } from "@/components/marketing/services/ServiceFeaturedProofMobile";
+import { ServiceExploreLinks } from "@/components/marketing/services/ServiceExploreLinks";
 import { FeaturedProducts } from "@/components/marketing/FeaturedProducts";
 import { PROCESS_STEPS, SERVICES } from "@/lib/content";
 import { HOME_PREVIEW_COPY } from "@/lib/home-conversion-content";
@@ -340,9 +341,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = await getPublicService(slug);
   if (!service) return { title: "Service not found", robots: NOINDEX_ROBOTS };
+
+  const fallbackCopy = COPY[slug as SlugKey];
+  const cmsCopy = await getSanityServiceDetailContent(slug).catch(() => null);
+  const headline = cmsCopy?.heroHeadline ?? fallbackCopy?.headline ?? `${service.title} Development`;
+  const title = headline.length > 60 ? `${headline.slice(0, 57).trim()}…` : headline;
+
   return buildPageMetadata({
-    title: `${service.title} Development`,
-    description: truncateMetaDescription(service.description),
+    title,
+    description: truncateMetaDescription(cmsCopy?.heroDescription ?? service.description),
     path: `/services/${slug}`,
   });
 }
@@ -1971,6 +1978,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           )}
         </Container>
       </Section>
+
+      <ServiceExploreLinks sectionProps={marketingSection(serviceSectionPage, "related")} />
 
       {isWebsitesService ? (
         <MarketingViewportGate

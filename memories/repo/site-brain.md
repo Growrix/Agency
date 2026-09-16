@@ -193,16 +193,18 @@ Auth note: Clerk is the managed identity provider; Supabase is PostgreSQL persis
 
 ## Marketing mobile system (`web/`)
 
-Canonical pattern for service and marketing pages below `lg`:
+Canonical pattern for service and marketing pages below `md` (768px). Tablet and up use the desktop tree as a fluid layout (`--marketing-desktop-min: 48rem` in `globals.css`).
 
 | Piece | Location |
 |-------|----------|
-| Viewport gate | `web/src/components/marketing/MarketingViewportGate.tsx` |
+| Viewport gate | `web/src/components/marketing/MarketingViewportGate.tsx` (CSS cutover at 768px) |
 | Shared mobile components | `web/src/components/marketing/mobile/` |
 | Service-specific mobile wrappers | `web/src/components/marketing/services/` |
 | Service page hub | `web/src/app/services/[slug]/page.tsx` |
 | Mobile BEM namespace | `.home-mobile-marketing*` in `web/src/app/globals.css` |
 | Service hero mobile namespace | `.service-detail-hero-mobile*` in `web/src/app/globals.css` |
+| Desktop marketing CSS | `web/src/styles/home-desktop-marketing.css` (md+) |
+| Shell chrome | Header / DesktopHeaderNav / MobileBottomNav switch at `md` |
 
 **Required mobile components for service detail pages:** `ServiceDetailHeroMobile`, `MobileMarketingSectionHeader`, `MobileFeatureGrid`, `MobilePrincipleList`, `ProcessStepsMobile`, `EngagementTiersMobile`, `ServiceFaqMobile`, `ProductLedFinalCTAMobile`.
 

@@ -469,6 +469,23 @@ Remaining parallel tracks:
 
 ## Session Audit Log
 
+### 2026-09-16 — Indexing kill-switch default flipped for production
+- **Root cause:** `SITE_INDEXING_ENABLED` required exact `"true"`; unset/mis-set env made `robots.ts` emit `Disallow: /` and root layout emit sitewide `noindex`. Live www currently allows crawl (`Allow: /`, `index, follow`) when env is set, but code was fail-closed and fragile.
+- **Fix:** `resolveSiteIndexingEnabled()` — production/Vercel production defaults **ON**; preview/dev default OFF; explicit `false` remains a kill-switch. Unit tests in `web/src/lib/site.test.ts`.
+- **Note:** Production still shows legacy `Host:` until this branch deploys (already removed from `robots.ts`).
+
+### 2026-09-10 — Technical SEO P0/P1 (Grok revalidation)
+- **Scope:** Audit + implement validated P0/P1 in `web/` only (Clerk off marketing, robots Host removal, hero WebP LCP, hydration, GA idle, lazy CartDrawer, service schema/links/titles, trailingSlash false).
+- **Evidence:** `Ongoing DOCS/SEO/technical-seo/audit-reports/2026-09-10-grok-findings-revalidation.md`
+- **Out of scope:** P2 niche/`/work/`/blog clusters, GSC/Bing verify, `llms.txt`
+- **Validation:** `npm run ci:check --prefix web` from repo root — exit **0** on 2026-09-16 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 18/18 desktop-chrome). Indexing resolver unit tests 14/14. Production live pre-push: `Allow: /` + `meta robots=index,follow`; `Host:` removal ships with this commit.
+
+### 2026-08-12 — Marketing tablet = fluid desktop (global breakpoint)
+- **Problem:** Tablet widths (768–1023) rendered phone trees via `MarketingViewportGate` + shell chrome cutover at `lg` / 1024px.
+- **Global fix:** `--marketing-desktop-min: 48rem` (768px / md); gate + shell (Header, DesktopHeaderNav, MobileBottomNav, PublicAuthControls, ChatLauncher, FreeDemo header CTA) + shared desktop CSS (`home-desktop-marketing.css`, `shop-desktop`/`shop-mobile`, hero/services globals, hero-motion, automation module) switch at md. Tablet densification: 2-col product/path/portfolio/services grids at md → 3/6 at lg; compact desktop nav padding.
+- **Contract:** Rule `52-web-mobile-design-system.mdc` + `site-brain.md` updated — phone `< md`, desktop `≥ md`.
+- **Acceptance:** 375/767 phone; 768/834 tablet desktop tree + desktop chrome; 1280 unchanged. Mid-phase: lint + typecheck.
+
 ### 2026-06-26 — Homepage hero client crash loop (debug_failure)
 - **Root cause:** Monolithic `"use client"` `HomeHeroSection` imported from server `page.tsx`; barrel re-exports in hero-motion amplified Next.js 16 webpack undefined client symbols.
 - **Fix (partial, superseded):** Restored server-shell `HomeHero.tsx` + client-leaf `HomeHeroMotionShell.tsx` (ServiceCards pattern); removed `HomeHeroSection`, `HomeHeroViewportGate`, `hero-motion/index.ts`; ESLint ban on hero-motion barrel imports.

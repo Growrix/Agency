@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,13 +14,17 @@ import { DesktopHeaderNav } from "@/components/shell/DesktopHeaderNav";
 import { PublicAuthControls } from "@/components/shell/PublicAuthControls";
 import { ThemeToggle, ThemeToggleButton } from "@/components/shell/ThemeToggle";
 import { HeaderMobileNav } from "@/components/shell/HeaderMobileNav";
-import { CartDrawer } from "@/components/shop/CartDrawer";
 import { CartHoverMenu } from "@/components/shop/CartHoverMenu";
 import { CONTAINER_X_CLASS } from "@/components/primitives/Container";
 import { rehydrateCartStore, useCartStore, useCartUiStore } from "@/lib/cart-store";
 import { cn } from "@/lib/utils";
 import { useConciergeStore } from "@/lib/concierge-store";
 import { FreeDemoHeaderButton } from "@/components/marketing/FreeDemoPopup";
+
+const CartDrawer = dynamic(
+  () => import("@/components/shop/CartDrawer").then((mod) => mod.CartDrawer),
+  { ssr: false },
+);
 
 type HeaderProps = {
   mobileOpen?: boolean;
@@ -88,8 +93,8 @@ export function Header({
         scrolled ? "bg-surface/85 backdrop-blur" : "bg-transparent",
       )}
     >
-      <div className={cn("mx-auto flex h-16 max-w-shell items-center gap-2 lg:h-18 lg:gap-6", CONTAINER_X_CLASS)}>
-        <Link href="/" className="group flex min-w-0 flex-1 items-center gap-2.5 lg:flex-none lg:shrink-0">
+      <div className={cn("mx-auto flex h-16 max-w-shell items-center gap-2 md:h-18 md:gap-4 lg:gap-6", CONTAINER_X_CLASS)}>
+        <Link href="/" className="group flex min-w-0 flex-1 items-center gap-2.5 md:flex-none md:shrink-0">
           <Image
             src="/website logo main.svg"
             alt="Growrix logo"
@@ -103,19 +108,19 @@ export function Header({
 
         <DesktopHeaderNav />
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 lg:gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
           <button
             type="button"
             onClick={() => openConcierge()}
-            className="hidden size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation lg:inline-flex"
+            className="hidden size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation md:inline-flex"
             aria-label="Open chat"
           >
             <ChatBubbleLeftRightIcon className="size-5" aria-hidden />
           </button>
-          <CartHoverMenu cartHydrated={cartHydrated} className="hidden lg:inline-flex" />
+          <CartHoverMenu cartHydrated={cartHydrated} className="hidden md:inline-flex" />
           <Link
             href="/cart"
-            className="relative inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation lg:hidden"
+            className="relative inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-inset touch-manipulation md:hidden"
             aria-label={
               cartHydrated && cartCount > 0
                 ? `Open shopping cart, ${cartCount} item${cartCount === 1 ? "" : "s"}`
@@ -129,13 +134,13 @@ export function Header({
               </span>
             ) : null}
           </Link>
-          <ThemeToggleButton className="lg:hidden" />
-          <ThemeToggle className="hidden lg:inline-flex" />
+          <ThemeToggleButton className="md:hidden" />
+          <ThemeToggle className="hidden md:inline-flex" />
           <FreeDemoHeaderButton />
           <PublicAuthControls />
           <button
             type="button"
-            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full hover:bg-inset touch-manipulation lg:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-full hover:bg-inset touch-manipulation md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
@@ -148,7 +153,7 @@ export function Header({
 
       <div
         className={cn(
-          "site-mobile-nav__panel lg:hidden",
+          "site-mobile-nav__panel md:hidden",
           mobileOpen && "site-mobile-nav__panel--open",
         )}
         aria-hidden={!mobileOpen}
@@ -163,7 +168,7 @@ export function Header({
         </div>
       </div>
 
-      <CartDrawer open={cartOpen} onClose={closeCart} />
+      {cartOpen ? <CartDrawer open={cartOpen} onClose={closeCart} /> : null}
     </header>
   );
 }

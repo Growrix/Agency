@@ -31,7 +31,7 @@ function DesktopNavDropdown({
       <button
         type="button"
         className={cn(
-          "inline-flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
+          "inline-flex items-center gap-0.5 px-2 py-2 text-sm font-medium transition-colors hover:text-primary lg:gap-1 lg:px-3",
           isOpen && "text-primary",
         )}
         aria-expanded={isOpen}
@@ -92,7 +92,7 @@ function DesktopHeaderNavContent() {
   }, [openMenu]);
 
   return (
-    <nav className="ml-4 hidden items-center gap-1 lg:flex" aria-label="Primary">
+    <nav className="ml-2 hidden items-center gap-0 md:flex lg:ml-4 lg:gap-1" aria-label="Primary">
       {PRIMARY_NAV.map((item) =>
         item.children ? (
           <DesktopNavDropdown
@@ -106,7 +106,7 @@ function DesktopHeaderNavContent() {
           <Link
             key={item.label}
             href={item.href}
-            className="px-3 py-2 text-sm font-medium transition-colors hover:text-primary"
+            className="px-2 py-2 text-sm font-medium transition-colors hover:text-primary lg:px-3"
             onMouseEnter={() => setOpenMenu(null)}
             onFocus={() => setOpenMenu(null)}
           >

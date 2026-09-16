@@ -36,7 +36,7 @@ export function WebsitesOutcomesDesktop({
         titleAccent={titleAccent}
         description={description}
       />
-      <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+      <RevealGroup className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
         {items.map((item) => {
           const Icon = getWebsitesOutcomeIcon(item.icon);
           return (

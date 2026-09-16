@@ -193,7 +193,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .product-choose-path {
     gap: 2rem;
   }

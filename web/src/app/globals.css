@@ -94,6 +94,8 @@
 
   --shell-offset: 4rem;
   --site-chrome-height: 4rem;
+  /* Marketing desktop tree + chrome start here (tablet = fluid desktop, not phone). */
+  --marketing-desktop-min: 48rem; /* 768px — Tailwind md */
 
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
   --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -148,9 +150,14 @@
   color-scheme: light;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   :root {
     --site-chrome-height: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
     --admin-shell-top: 1.25rem;
     --admin-sidebar-top: 1.25rem;
   }
@@ -440,7 +447,7 @@ body {
   margin-top: 3rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .marketing-split-hero__grid {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: 2.5rem;
@@ -485,7 +492,7 @@ body {
   min-width: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .marketing-content-split {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: 2.5rem;
@@ -510,7 +517,7 @@ body {
   background-position: 0 calc(var(--site-chrome-height) * -1);
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   .hero-section--under-chrome.hero-section--responsive-band {
     min-height: auto;
   }
@@ -1192,8 +1199,8 @@ body {
   }
 }
 
-/* ---------- Homepage hero desktop (lg+ only) ---------- */
-@media (min-width: 1024px) {
+/* ---------- Homepage hero desktop (md+ / tablet+) ---------- */
+@media (min-width: 768px) {
   .home-hero-desktop-section {
     background:
       radial-gradient(circle at 78% 42%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 42%),
@@ -1204,8 +1211,15 @@ body {
     display: grid;
     width: 100%;
     align-items: start;
-    gap: 2.5rem;
-    grid-template-columns: minmax(0, 44%) minmax(0, 56%);
+    gap: 1.75rem;
+    grid-template-columns: minmax(0, 46%) minmax(0, 54%);
+  }
+
+  @media (min-width: 1024px) {
+    .home-hero-desktop {
+      gap: 2.5rem;
+      grid-template-columns: minmax(0, 44%) minmax(0, 56%);
+    }
   }
 
   .home-hero-desktop__copy {
@@ -1339,15 +1353,15 @@ body {
   }
 }
 
-@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
   .home-hero-desktop-section .signal-drift-1,
   .home-hero-desktop-section .signal-drift-2 {
     animation: none;
   }
 }
 
-/* ---------- Homepage services desktop (lg+ only) ---------- */
-@media (min-width: 1024px) {
+/* ---------- Homepage services desktop (md+ / tablet+) ---------- */
+@media (min-width: 768px) {
   .home-services-desktop-section {
     background: color-mix(in srgb, var(--color-inset) 28%, var(--color-bg));
   }
@@ -1360,9 +1374,10 @@ body {
 
   .home-services-desktop__header {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1.25rem 2rem;
   }
 
   .home-services-desktop__heading {
@@ -1387,11 +1402,17 @@ body {
 
   .home-services-desktop__grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
     margin-top: 2rem;
     list-style: none;
     padding: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .home-services-desktop__grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
   }
 
   .home-services-desktop__card {
@@ -1451,12 +1472,18 @@ body {
 
   .home-services-desktop__stats {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 1.25rem;
     border: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
     border-radius: var(--radius-md);
     background: color-mix(in srgb, var(--color-surface) 88%, var(--color-inset));
     overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .home-services-desktop__stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   .home-services-desktop__stat {
@@ -1517,7 +1544,7 @@ body {
   }
 }
 
-@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
   .home-services-desktop__card:hover {
     transform: none;
   }
@@ -3662,7 +3689,8 @@ body {
   text-decoration: none;
 }
 
-/* Viewport gate — CSS-only show/hide avoids mobile flash before hydration on desktop */
+/* Viewport gate — CSS-only show/hide avoids phone flash before hydration on desktop/tablet.
+   Cutover: --marketing-desktop-min (768px / md). Phone trees below; fluid desktop above. */
 .marketing-viewport-gate__mobile {
   display: block;
 }
@@ -3671,7 +3699,7 @@ body {
   display: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .marketing-viewport-gate__mobile {
     display: none;
   }

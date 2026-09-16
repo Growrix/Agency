@@ -90,6 +90,7 @@ export const MARKETING_SECTIONS: Record<
     proof: section("default"),
     reviews: section("inset"),
     faq: section("default"),
+    related: section("inset", "compact"),
     cta: section("default", "compact"),
   },
   "service-detail-websites": {
@@ -102,6 +103,7 @@ export const MARKETING_SECTIONS: Record<
     process: section("inset"),
     proof: section("default"),
     faq: section("inset"),
+    related: section("default", "compact"),
     cta: section("default", "compact"),
   },
   "service-detail-saas-applications": {
@@ -113,6 +115,7 @@ export const MARKETING_SECTIONS: Record<
     process: section("inset"),
     engagement: section("default"),
     faq: section("inset"),
+    related: section("default", "compact"),
     cta: section("default", "compact"),
   },
   "service-detail-mobile-apps": {
@@ -123,6 +126,7 @@ export const MARKETING_SECTIONS: Record<
     process: section("default"),
     engagement: section("inset"),
     faq: section("default"),
+    related: section("inset", "compact"),
     cta: section("default", "compact"),
   },
   "service-detail-automation": {
@@ -134,6 +138,7 @@ export const MARKETING_SECTIONS: Record<
     process: section("inset"),
     engagement: section("default"),
     faq: section("inset"),
+    related: section("default", "compact"),
     cta: section("default", "compact"),
   },
   "service-detail-technical-seo": {
@@ -146,6 +151,7 @@ export const MARKETING_SECTIONS: Record<
     process: section("default"),
     engagement: section("inset"),
     faq: section("default"),
+    related: section("inset", "compact"),
     cta: section("default", "compact"),
   },
   "service-detail-ai-business-systems": {
@@ -156,6 +162,7 @@ export const MARKETING_SECTIONS: Record<
     process: section("default"),
     engagement: section("inset"),
     faq: section("default"),
+    related: section("inset", "compact"),
     cta: section("default", "compact"),
   },
   pricing: {

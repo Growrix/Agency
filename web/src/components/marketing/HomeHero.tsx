@@ -40,7 +40,7 @@ export function HomeHero({
     <Section
       {...homeSection("hero")}
       layout="viewport"
-      className="hero-section hero-section--responsive-band hero-section--under-chrome home-hero-desktop-section relative flex min-h-0 flex-col overflow-hidden lg:min-h-dvh"
+      className="hero-section hero-section--responsive-band hero-section--under-chrome home-hero-desktop-section relative flex min-h-0 flex-col overflow-hidden md:min-h-dvh"
     >
       <div ref={motionHostRef} className="hero-section__motion-host relative min-h-0 flex flex-1 flex-col">
         <HomeHeroMotionRoot sectionRef={motionHostRef}>
@@ -48,8 +48,8 @@ export function HomeHero({
             className={cn(
               HERO_VIEWPORT_CONTAINER_CLASS,
               "hero-section__content relative flex flex-1 flex-col",
-              "justify-start py-0 lg:justify-center lg:py-12",
-              "pt-0 lg:pt-[calc(var(--site-chrome-height)+3rem)]",
+              "justify-start py-0 md:justify-center md:py-12",
+              "pt-0 md:pt-[calc(var(--site-chrome-height)+3rem)]",
             )}
           >
             <MarketingViewportGate

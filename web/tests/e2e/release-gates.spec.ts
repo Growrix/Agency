@@ -132,11 +132,35 @@ test("services route exposes self-canonical metadata and Service schema", async 
     .first()
     .getAttribute("href");
   expect(canonicalHref).toContain("/services/technical-seo");
+  expect(canonicalHref?.endsWith("/")).toBe(false);
 
   const response = await request.get("/services/technical-seo");
   const html = await response.text();
   expect(html).toContain('"@type":"Service"');
+  expect(html).toContain('"@type":"FAQPage"');
+  expect(html).toContain('"@type":"BreadcrumbList"');
   expect(html).toContain('property="og:url"');
+  expect(html).toContain('href="/pricing"');
+  expect(html).toContain('href="/portfolio"');
+  expect(html).toContain('href="/contact"');
+});
+
+test("public service slugs expose Service FAQ and Breadcrumb JSON-LD", async ({ request }) => {
+  const slugs = [
+    "websites",
+    "saas-applications",
+    "mobile-apps",
+    "ai-business-systems",
+    "automation",
+    "technical-seo",
+  ];
+
+  for (const slug of slugs) {
+    const html = await (await request.get(`/services/${slug}`)).text();
+    expect(html, slug).toContain('"@type":"Service"');
+    expect(html, slug).toContain('"@type":"FAQPage"');
+    expect(html, slug).toContain('"@type":"BreadcrumbList"');
+  }
 });
 
 test("blog index exposes self-canonical metadata", async ({ page }) => {
@@ -194,7 +218,18 @@ test("mobile bottom nav chat is a crawlable link", async ({ page }) => {
 test("robots.txt and sitemap.xml are reachable", async ({ request }) => {
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
-  expect(await robots.text()).toContain("User-Agent");
+  const robotsBody = await robots.text();
+  expect(robotsBody).toMatch(/User-[Aa]gent:\s*\*/);
+  // Next body must not emit Host: (Google-unsupported). Cloudflare may still
+  // prepend managed Content-Signal blocks at the edge in production.
+  expect(robotsBody).not.toMatch(/^Host:\s*/m);
+
+  if (!robotsBody.includes("Disallow: /") || robotsBody.includes("Allow: /")) {
+    expect(robotsBody).toContain("Sitemap:");
+    for (const path of ["/admin", "/dashboard", "/api/", "/sign-in", "/cart"]) {
+      expect(robotsBody).toContain(`Disallow: ${path}`);
+    }
+  }
 
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.ok()).toBeTruthy();

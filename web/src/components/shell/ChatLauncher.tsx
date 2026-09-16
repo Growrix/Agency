@@ -15,7 +15,7 @@ export function ChatLauncher() {
   const icon = isOpen ? <XMarkIcon className="size-6" /> : <ChatBubbleLeftRightIcon className="size-6" />;
 
   return (
-    <div className="hidden lg:block fixed bottom-6 right-6 z-50">
+    <div className="hidden md:block fixed bottom-6 right-6 z-50">
       <motion.button
         onClick={() => toggle()}
         aria-label={isOpen ? "Close concierge chat" : "Open concierge chat"}

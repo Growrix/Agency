@@ -21,13 +21,14 @@ function LcpPosterImage({
   className?: string;
 }) {
   const webpSrc = poster.src.replace(/\.png$/i, ".webp");
+  const pngSrc = poster.src.replace(/\.webp$/i, ".png");
 
   return (
     <picture className={cn("block h-full w-full", className)}>
       <source srcSet={webpSrc} type="image/webp" />
       {/* Native img for SSR LCP poster; must match deferred hero poster frame */}
       <img
-        src={poster.src}
+        src={pngSrc}
         alt={poster.alt}
         width={poster.width}
         height={poster.height}
@@ -35,6 +36,7 @@ function LcpPosterImage({
         decoding="async"
         loading="eager"
         fetchPriority="high"
+        sizes="(max-width: 767px) 100vw, min(55vw, 720px)"
       />
     </picture>
   );
@@ -44,7 +46,7 @@ function HeroSkeletonSurface() {
   return (
     <>
       {/* Mobile skeleton */}
-      <div className="flex min-h-[50vh] flex-col justify-center gap-4 lg:hidden" aria-hidden>
+      <div className="flex min-h-[50vh] flex-col justify-center gap-4 md:hidden" aria-hidden>
         <span className="h-5 w-48 animate-pulse rounded-full bg-inset" />
         <span className="h-10 w-[min(20rem,90vw)] animate-pulse rounded-lg bg-inset" />
         <span className="h-10 w-[min(16rem,75vw)] animate-pulse rounded-lg bg-inset" />
@@ -53,7 +55,7 @@ function HeroSkeletonSurface() {
       </div>
 
       {/* Desktop skeleton */}
-      <div className="hidden min-h-0 flex-1 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-10">
+      <div className="hidden min-h-0 flex-1 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:items-center md:gap-8 lg:gap-10">
         <div className="flex flex-col gap-3" aria-hidden>
           <span className="h-6 w-40 animate-pulse rounded-full bg-inset" />
           <span className="h-12 w-[min(32rem,72vw)] animate-pulse rounded-lg bg-inset" />
@@ -61,7 +63,7 @@ function HeroSkeletonSurface() {
           <span className="mt-2 h-5 w-[min(34rem,70vw)] animate-pulse rounded-md bg-inset" />
         </div>
         <div className="flex flex-col gap-3" aria-hidden>
-          <span className="h-[300px] w-full animate-pulse rounded-xl bg-inset sm:h-[340px] lg:h-[400px] xl:h-[440px]" />
+          <span className="h-75 w-full animate-pulse rounded-xl bg-inset sm:h-85 md:h-90 lg:h-100 xl:h-110" />
         </div>
       </div>
     </>
@@ -86,7 +88,7 @@ export function HomeHeroPlaceholder({
     <Section
       {...homeSection("hero")}
       layout="viewport"
-      className="hero-section hero-section--responsive-band hero-section--under-chrome home-hero-desktop-section relative flex min-h-0 flex-col overflow-hidden lg:min-h-dvh"
+      className="hero-section hero-section--responsive-band hero-section--under-chrome home-hero-desktop-section relative flex min-h-0 flex-col overflow-hidden md:min-h-dvh"
       aria-busy="true"
     >
       <div className="hero-section__motion-host relative min-h-0 flex flex-1 flex-col">
@@ -94,8 +96,8 @@ export function HomeHeroPlaceholder({
           className={cn(
             HERO_VIEWPORT_CONTAINER_CLASS,
             "hero-section__content relative flex flex-1 flex-col",
-            "justify-start py-0 lg:justify-center lg:py-12",
-            "pt-0 lg:pt-[calc(var(--site-chrome-height)+3rem)]",
+            "justify-start py-0 md:justify-center md:py-12",
+            "pt-0 md:pt-[calc(var(--site-chrome-height)+3rem)]",
           )}
         >
           {lcpMobilePoster ? (

@@ -8,8 +8,9 @@ type MarketingViewportGateProps = {
 };
 
 /**
- * Renders mobile and desktop variants together; visibility is controlled by CSS
- * media queries so the correct layout paints on first frame (no SSR → mobile flash).
+ * Renders phone and desktop variants together; visibility is controlled by CSS
+ * media queries so the correct layout paints on first frame (no SSR flash).
+ * Cutover: 768px (md) — tablet and up use the desktop tree as a fluid layout.
  */
 export function MarketingViewportGate({ mobile, desktop }: MarketingViewportGateProps) {
   return (

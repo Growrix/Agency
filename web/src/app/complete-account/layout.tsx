@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClerkRouteLayout } from "@/components/shell/ClerkRouteLayout";
 import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = {
@@ -11,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function CompleteAccountLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <ClerkRouteLayout>{children}</ClerkRouteLayout>;
 }

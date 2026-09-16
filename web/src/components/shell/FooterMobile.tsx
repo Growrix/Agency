@@ -94,7 +94,7 @@ export function FooterMobile() {
         </div>
 
         <div className="home-mobile-marketing__footer-bottom">
-          <p className="home-mobile-marketing__footer-copyright">
+          <p className="home-mobile-marketing__footer-copyright" suppressHydrationWarning>
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
           <p className="home-mobile-marketing__footer-tagline">{HOME_FOOTER_COPY.tagline}</p>
@@ -161,7 +161,7 @@ export function FooterDesktop() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-border pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-6 sm:flex-row sm:items-center sm:justify-between sm:pb-6">
-          <p className="text-xs text-text-muted">
+          <p className="text-xs text-text-muted" suppressHydrationWarning>
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
           <p className="font-mono text-xs text-text-muted">{HOME_FOOTER_COPY.tagline}</p>
