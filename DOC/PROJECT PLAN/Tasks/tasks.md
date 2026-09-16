@@ -469,6 +469,14 @@ Remaining parallel tracks:
 
 ## Session Audit Log
 
+### 2026-09-16 — Vercel Web Prebuilt Deploy #32 skipped (RCA)
+- **Working mode:** `debug_failure`
+- **Symptom:** GitHub Actions run “Vercel Web Prebuilt Deploy” showed `deploy` job **skipped** for `3a95067`.
+- **Root cause:** Job `if: vars.VERCEL_PREBUILT_ENABLED == 'true'`. Repo variable is **not** set — intentional Tier 2 kill-switch (see `.cursor/brain/devops-brain.md`). Not a CI failure.
+- **Evidence:** API `vercel-web-prebuilt.yml` run `35058183894` → `completed/skipped`; companion **CI #118** run `35058183890` → `completed/success` on same SHA. Live `https://www.growrixos.com/robots.txt` has `Allow: /`, **no** `Host:` line; homepage `meta robots=index, follow` — Tier 1 Vercel Git Integration already shipped the SEO commit.
+- **Code change:** Added always-on `preflight` job that emits a GitHub notice when Tier 2 is disabled (avoids bare “skipped” confusion). Deploy gate unchanged.
+- **Not done (operator):** Set Actions variable `VERCEL_PREBUILT_ENABLED=true` + secrets `VERCEL_TOKEN` / `VERCEL_ORG_ID` / `VERCEL_PROJECT_ID` only if Tier 2 fallback should actually deploy.
+
 ### 2026-09-16 — Indexing kill-switch default flipped for production
 - **Root cause:** `SITE_INDEXING_ENABLED` required exact `"true"`; unset/mis-set env made `robots.ts` emit `Disallow: /` and root layout emit sitewide `noindex`. Live www currently allows crawl (`Allow: /`, `index, follow`) when env is set, but code was fail-closed and fragile.
 - **Fix:** `resolveSiteIndexingEnabled()` — production/Vercel production defaults **ON**; preview/dev default OFF; explicit `false` remains a kill-switch. Unit tests in `web/src/lib/site.test.ts`.
@@ -479,6 +487,7 @@ Remaining parallel tracks:
 - **Evidence:** `Ongoing DOCS/SEO/technical-seo/audit-reports/2026-09-10-grok-findings-revalidation.md`
 - **Out of scope:** P2 niche/`/work/`/blog clusters, GSC/Bing verify, `llms.txt`
 - **Validation:** `npm run ci:check --prefix web` from repo root — exit **0** on 2026-09-16 (lint, typecheck, perf:budgets, unit/integration, build, release-gates 18/18 desktop-chrome). Indexing resolver unit tests 14/14. Production live pre-push: `Allow: /` + `meta robots=index,follow`; `Host:` removal ships with this commit.
+- **Git:** committed `3a95067` and pushed `main` → `origin/main`. Remote GitHub Actions: **unverified** (`gh` not authenticated). Check https://github.com/Growrix/Agency/actions for SHA `3a95067`.
 
 ### 2026-08-12 — Marketing tablet = fluid desktop (global breakpoint)
 - **Problem:** Tablet widths (768–1023) rendered phone trees via `MarketingViewportGate` + shell chrome cutover at `lg` / 1024px.

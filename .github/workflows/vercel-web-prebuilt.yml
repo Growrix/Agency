@@ -1,8 +1,9 @@
 name: Vercel Web Prebuilt Deploy
 
-# Fallback deploy path when Vercel Git Integration finalizer fails on rootDirectory=web.
-# Requires GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID (growrix project).
-# Enable by adding secrets, then push or workflow_dispatch.
+# Tier 2 fallback when Vercel Git Integration finalizer fails on rootDirectory=web.
+# Primary production path remains Vercel Git Integration (Tier 1).
+# Enable Tier 2 only after secrets exist + repo variable VERCEL_PREBUILT_ENABLED=true.
+# Required secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID (growrix project).
 
 on:
   workflow_dispatch:
@@ -15,7 +16,21 @@ on:
       - ".github/workflows/vercel-web-prebuilt.yml"
 
 jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report Tier 2 prebuilt gate
+        run: |
+          ENABLED="${{ vars.VERCEL_PREBUILT_ENABLED }}"
+          if [ "$ENABLED" = "true" ]; then
+            echo "VERCEL_PREBUILT_ENABLED=true — deploy job will run."
+          else
+            echo "::notice title=Tier 2 prebuilt intentionally skipped::Set repository variable VERCEL_PREBUILT_ENABLED=true after adding secrets VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID. Primary production deploy is Vercel Git Integration (not this workflow). CI success is tracked by the separate CI workflow."
+            echo "Current vars.VERCEL_PREBUILT_ENABLED='${ENABLED}' (expected 'true' to deploy)."
+          fi
+
   deploy:
+    needs: preflight
     runs-on: ubuntu-latest
     # Set repository variable VERCEL_PREBUILT_ENABLED=true after adding GitHub secrets.
     if: vars.VERCEL_PREBUILT_ENABLED == 'true'
