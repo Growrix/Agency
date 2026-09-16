@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import type { HeroMotionTier } from "../hero-motion-config";
-import { sendDebugLog } from "@/lib/debug-log";
 
 export function useHeroScrollTransform(
   sectionRef: React.RefObject<HTMLElement | null>,
@@ -14,9 +13,6 @@ export function useHeroScrollTransform(
     if (!section || tier === "reduced") {
       return;
     }
-    // #region agent log
-    sendDebugLog("useHeroScrollTransform.ts:11", "scroll transform effect started", { sectionFound: true, tier }, "A");
-    // #endregion
 
     let killed = false;
     let scrollTriggerCleanup: (() => void) | undefined;
@@ -28,16 +24,10 @@ export function useHeroScrollTransform(
       ]);
 
       if (killed || !section) {
-        // #region agent log
-        sendDebugLog("useHeroScrollTransform.ts:26", "scroll transform run aborted", { killed, sectionFound: !!section }, "A");
-        // #endregion
         return;
       }
 
       gsap.registerPlugin(ScrollTrigger);
-      // #region agent log
-      sendDebugLog("useHeroScrollTransform.ts:30", "gsap scrolltrigger registered", {}, "A");
-      // #endregion
 
       const headline = section.querySelector(".hero-kinetic-headline");
       const showcase = section.querySelector(".hero-showcase-motion");
@@ -52,9 +42,6 @@ export function useHeroScrollTransform(
           scrub: true,
           onUpdate: (self) => {
             setScrollProgress(self.progress);
-            // #region agent log
-            sendDebugLog("useHeroScrollTransform.ts:43", "scrollProgress update", { progress: self.progress }, "A");
-            // #endregion
             section.style.setProperty("--hero-scroll-progress", String(self.progress));
           },
         },
@@ -90,18 +77,12 @@ export function useHeroScrollTransform(
         tl.scrollTrigger?.kill();
         tl.kill();
       };
-      // #region agent log
-      sendDebugLog("useHeroScrollTransform.ts:79", "scroll trigger timeline created", {}, "A");
-      // #endregion
     };
 
     void run();
 
     return () => {
       killed = true;
-      // #region agent log
-      sendDebugLog("useHeroScrollTransform.ts:87", "scroll transform effect cleanup", {}, "A");
-      // #endregion
       scrollTriggerCleanup?.();
     };
   }, [sectionRef, tier, setScrollProgress]);

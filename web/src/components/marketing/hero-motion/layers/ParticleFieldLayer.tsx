@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { HERO_LOAD_SEQUENCE, HERO_PARTICLE_COUNTS } from "../hero-motion-config";
-import { sendDebugLog } from "@/lib/debug-log";
 import { useHeroMotionOptional } from "../HeroMotionContext";
 
 const ThreeParticleCanvas = dynamic(
@@ -28,9 +27,6 @@ function Canvas2DParticles({ count }: { count: number }) {
     if (!ctx) {
       return;
     }
-    // #region agent log
-    sendDebugLog("Canvas2DParticles.tsx:27", "Canvas2DParticles effect run", { count, tier }, "B");
-    // #endregion
 
     let width = 0;
     let height = 0;
@@ -136,10 +132,6 @@ function Canvas2DParticles({ count }: { count: number }) {
 }
 
 export function ParticleFieldLayer() {
-  // #region agent log
-  const motionForLog = useHeroMotionOptional();
-  sendDebugLog("ParticleFieldLayer.tsx:131", "ParticleFieldLayer render", { tier: motionForLog?.tier ?? null, count: HERO_PARTICLE_COUNTS[motionForLog?.tier ?? "full"] }, "A");
-  // #endregion
   const wrapperRef = useRef<HTMLDivElement>(null);
   const motion = useHeroMotionOptional();
   const [ready, setReady] = useState(false);

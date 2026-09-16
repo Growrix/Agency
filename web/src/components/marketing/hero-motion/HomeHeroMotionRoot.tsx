@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import { HomeHeroAmbientLayers } from "./HomeHeroAmbientLayers";
 import { HeroMotionProvider } from "./HeroMotionContext";
-import { sendDebugLog } from "@/lib/debug-log";
 import { useHeroMotionProfile } from "./hooks/useHeroMotionProfile";
 import { useHeroPointerParallax } from "./hooks/useHeroPointerParallax";
 import { useHeroScrollTransform } from "./hooks/useHeroScrollTransform";
@@ -15,9 +14,6 @@ type HomeHeroMotionRootProps = {
 
 export function HomeHeroMotionRoot({ sectionRef, children }: HomeHeroMotionRootProps) {
   const tier = useHeroMotionProfile();
-  // #region agent log
-  sendDebugLog("HomeHeroMotionRoot.tsx:30", "HomeHeroMotionRoot render", { tier }, "A");
-  // #endregion
   const scrollProgressRef = useRef(0);
   const [loadTimelineReady, setLoadTimelineReady] = useState(false);
   const [copySequenceStarted, setCopySequenceStarted] = useState(false);

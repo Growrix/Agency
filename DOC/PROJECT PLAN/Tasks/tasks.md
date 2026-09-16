@@ -469,6 +469,17 @@ Remaining parallel tracks:
 
 ## Session Audit Log
 
+### 2026-09-16 — Vercel build warning cleanup (allowScripts + edge debug route)
+- **Working mode:** `debug_failure`
+- **Symptom:** User reported “2 build errors” in Vercel log: (1) `npm warn allow-scripts` for `@clerk/shared`, `esbuild`, `sharp`, `unrs-resolver`; (2) `Using edge runtime on a page currently disables static generation`.
+- **Clarification:** GitHub checks for `eb3970c` were already green — `Vercel – growrix` / `cmsgrowrixos` **Deployment has completed**, `CI / lint-and-build` success. These lines were **warnings**, not failed builds.
+- **Root causes:**
+  1. Vercel’s npm emits `allowScripts` policy warnings when install scripts are unreviewed (future npm hard-fail risk).
+  2. Leftover Cursor session debug path `web/src/app/api/debug-log/route.ts` used `export const runtime = "edge"` and was beacon-called from hero/chrome client code (also `console.log` noise in prod).
+- **Fix:** Added `allowScripts` allowlist to `web/package.json`; deleted debug-log API + `debug-log.ts` and removed all `sendDebugLog` / `#region agent log` call sites.
+- **Validation:** `npm run ci:check` from `web/` — exit **0** after clearing stale `.next` types for deleted `/api/debug-log` (lint, typecheck, perf:budgets, tests, build, release-gates desktop-chrome).
+- **Git:** pending commit + push to `main` (user-requested).
+
 ### 2026-09-16 — Vercel Web Prebuilt Deploy #32 skipped (RCA)
 - **Working mode:** `debug_failure`
 - **Symptom:** GitHub Actions run “Vercel Web Prebuilt Deploy” showed `deploy` job **skipped** for `3a95067`.
