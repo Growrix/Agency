@@ -120,6 +120,35 @@ Validation:
 Risks:
 - Cloudflare managed robots block still present at edge — cannot fix in Next alone
 
+### Task: Homepage crawlable content, brand-first title, blog publish dates (audit P0)
+
+Status: Done (pending production verification)
+Phase: 3 On-page technical signals
+Route type: homepage | blog
+Source docs:
+- `on-page/01-metadata.md`
+- `on-page/02-structured-data-schema.md`
+- `on-page/04-crawlability-robots-sitemaps.md`
+
+Deliverables:
+- `HomeCrawlableSummary` server-rendered as the `HomeBelowFoldGate` first-paint fallback (services, templates, blog, key links in initial HTML)
+- Homepage `<title>` is brand-first (`HOME_SEO_TITLE`); OG/Twitter keep the short share title
+- Blog `publishedAt` no longer relies on GROQ string slicing; `toIsoDateOnly` normalizes in TypeScript; `BlogPosting.datePublished` omitted rather than emitted empty
+- Unit tests (`iso-date.test.ts`, `HomeCrawlableSummary.test.tsx`) and a raw-HTML release gate in `release-gates.spec.ts`
+
+Acceptance criteria:
+- Initial homepage HTML (no JS) contains service, category, and product links and exactly one `h1`
+- Homepage `<title>` starts with `Growrix OS |`
+- Blog posts show a real date and emit `datePublished`
+
+Validation:
+- `tsc --noEmit`, `eslint` on touched files, `npm run test:unit` (88 pass), `next build --webpack`, and the new request-only e2e gate against the built server
+- Not run locally: full `npm run health:check` (Playwright browser projects)
+
+Risks:
+- The fallback is visible until the deferred sections mount; check for a visible swap/blank gap and CLS on the deployed preview
+- Blog date fix assumes the GROQ `string(...)[0..9]` slice returned null; confirm on production after deploy
+
 ## References
 
 - Master Technical SEO Documentation Blueprint.

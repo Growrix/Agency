@@ -12,6 +12,8 @@ const tsxBinary =
 const testFiles = [
   "src/lib/commerce-pricing.test.ts",
   "src/lib/site.test.ts",
+  "src/lib/iso-date.test.ts",
+  "src/components/marketing/HomeCrawlableSummary.test.tsx",
   "src/server/auth/users.test.ts",
   "src/server/auth/clerk-sync.test.ts",
   "src/server/config/runtime.test.ts",
