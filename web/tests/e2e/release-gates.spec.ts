@@ -222,6 +222,24 @@ test("homepage initial HTML has brand-first title and crawlable body content wit
   expect(html).toContain('href="/digital-products/category/html-business-profiles"');
 });
 
+test("filtered catalog URLs are noindex and key pages use keyword-led titles", async ({ request }) => {
+  const listing = await (await request.get("/digital-products")).text();
+  expect(listing).toMatch(/<title>HTML Website Templates &amp; Business Profiles \| /);
+  expect(listing).not.toContain("noindex");
+
+  // Filter facets duplicate the category landing pages: keep them out of the index, keep links followable.
+  const filtered = await (await request.get("/digital-products?category=html-business-profiles")).text();
+  expect(filtered).toMatch(/<meta name="robots" content="noindex, follow"/);
+  expect(filtered).toContain('<link rel="canonical" href="https://www.growrixos.com/digital-products"');
+
+  const service = await (await request.get("/services/technical-seo")).text();
+  expect(service).toMatch(/<title>Technical SEO Setup Services \| /);
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  // Only real dates: no blanket "now" stamps on every URL.
+  expect(sitemap.match(/<lastmod>/g)?.length ?? 0).toBeLessThan(5);
+});
+
 test("mobile bottom nav chat is a crawlable link", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/", { waitUntil: "domcontentloaded" });

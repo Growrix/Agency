@@ -149,6 +149,37 @@ Risks:
 - The fallback is visible until the deferred sections mount; check for a visible swap/blank gap and CLS on the deployed preview
 - Blog date fix assumes the GROQ `string(...)[0..9]` slice returned null; confirm on production after deploy
 
+### Task: Keyword-led titles, filtered-catalog noindex, facet labels, honest sitemap dates (audit P1)
+
+Status: Done (pending production verification)
+Phase: 3 On-page technical signals
+Route type: catalog | services | sitemap
+Source docs:
+- `on-page/01-metadata.md`
+- `on-page/04-crawlability-robots-sitemaps.md`
+
+Deliverables:
+- `/digital-products` title/description/CollectionPage schema describe what is actually sold (HTML templates and business profiles)
+- Filtered listing URLs (`?category=`, `?type=`, `?industry=`) return `noindex, follow`; canonical stays the unfiltered listing
+- Product `<title>` is keyword-led via `buildProductSeoTitle` (H1 and Product schema keep the storefront name)
+- Service `<title>` is keyword-led via `getServiceSeoTitle` (hero headline no longer used as the title)
+- Shop facets no longer label a shared slug with whichever product came last ("Healthcare 18", "Dentistry 18" for all 18 templates is now "Website Templates 18")
+- Sitemap emits `lastmod` only where a real date exists (blog posts)
+
+Acceptance criteria:
+- `/digital-products?category=html-business-profiles` has `robots: noindex, follow`
+- `/services/technical-seo` title starts with `Technical SEO Setup Services`
+- Sitemap has no blanket `lastmod`
+
+Validation:
+- `tsc --noEmit`, eslint on touched files, `npm run test:unit` (96 pass), `next build --webpack`, curl checks on the built server, request-only e2e gates
+- Not run locally: full `npm run health:check` (Playwright browser projects)
+
+Open decisions (not changed):
+- Unverified stats on the shop hero (8,000+ customers, 4.9/5, 24/7 support) in `lib/product-led-content.ts`
+- Long product slugs (`website-template-html-preview-...`); changing them needs 301s and a check of order/CMS references
+- Per-product OG images (poster aspect ratio is not 1.91:1)
+
 ## References
 
 - Master Technical SEO Documentation Blueprint.

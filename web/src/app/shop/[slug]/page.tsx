@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildPageMetadata, NOINDEX_ROBOTS } from "@/lib/seo-metadata";
+import { buildProductSeoTitle } from "@/lib/product-seo";
 import { ArrowLeftIcon, ArrowUpRightIcon, ShoppingBagIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const ogImage = product.image?.src;
 
   return buildPageMetadata({
-    title: product.name,
+    title: buildProductSeoTitle(product),
     description,
     path: `/digital-products/${product.slug}`,
     ogImage,
