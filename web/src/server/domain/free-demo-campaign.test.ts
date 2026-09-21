@@ -71,6 +71,31 @@ describe("reserveFreeDemoSlot — atomic Supabase path", () => {
     assert.equal(result.is_active, true);
   });
 
+  it("retries after a transient RPC failure (e.g. PostgREST thread killed by timeout) and succeeds", async () => {
+    let rpcCalls = 0;
+
+    globalThis.fetch = (async (input: RequestInfo | URL) => {
+      const url = typeof input === "string" ? input : input.toString();
+      if (url.includes("/rpc/increment_free_demo_claimed_count")) {
+        rpcCalls += 1;
+        if (rpcCalls === 1) {
+          throw new Error("fetch failed: socket hang up");
+        }
+        return new Response(
+          JSON.stringify({ found: true, incremented: true, claimed_count: 1, total_slots: 20, is_active: true }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        );
+      }
+      throw new Error(`Unexpected fetch to ${url}`);
+    }) as typeof fetch;
+
+    const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
+    const result = await reserveFreeDemoSlot();
+
+    assert.equal(rpcCalls, 2);
+    assert.equal(result.claimed_count, 1);
+  });
+
   it("throws CAMPAIGN_FULL when the RPC reports the campaign is full", async () => {
     globalThis.fetch = (async () =>
       new Response(

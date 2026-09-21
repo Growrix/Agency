@@ -96,30 +96,59 @@ type IncrementFreeDemoClaimedRow = {
  * silently losing a claim. Returns null when the campaign row doesn't exist
  * yet in Supabase, so the caller can fall back to the create-on-write path.
  */
+const RPC_MAX_ATTEMPTS = 3;
+const RPC_RETRY_BASE_DELAY_MS = 150;
+
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * This Supabase project's PostgREST pool is capped at 10 connections and this
+ * app's writeDatabase()/readDatabase() pattern does several sequential round
+ * trips per user action (campaign lookup, the increment itself, the intake
+ * record write, a handful of audit-log writes) — under load that pool gets
+ * exhausted and PostgREST logs "Warp server error: Thread killed by timeout
+ * manager" (observed recurring throughout the day, independent of this fix).
+ * A thread killed mid-request means its transaction never committed, so a
+ * retry here is a clean redo, not a double-increment, in the dominant case.
+ */
 async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | null> {
   const client = getSupabaseAdminClient();
-  // Deliberately not using .single(): that only sets an Accept header asking
-  // PostgREST to coerce the response to one object, and this code should
-  // behave the same whether the server honors that or returns the table
-  // function's normal row array — parse defensively instead of trusting it.
-  const { data, error } = await client.rpc("increment_free_demo_claimed_count", {
-    p_campaign_id: DEFAULT_FREE_DEMO_CAMPAIGN_ID,
-  });
 
-  if (error) {
-    console.error("[free-demo-campaign] increment_free_demo_claimed_count RPC error", {
-      message: error.message,
-      details: error.details,
-      hint: error.hint,
-      code: error.code,
+  let row: IncrementFreeDemoClaimedRow | null | undefined;
+  let lastError: { message: string; details: string; hint: string; code: string } | null = null;
+
+  for (let attempt = 1; attempt <= RPC_MAX_ATTEMPTS; attempt += 1) {
+    // Deliberately not using .single(): that only sets an Accept header asking
+    // PostgREST to coerce the response to one object, and this code should
+    // behave the same whether the server honors that or returns the table
+    // function's normal row array — parse defensively instead of trusting it.
+    const { data, error } = await client.rpc("increment_free_demo_claimed_count", {
+      p_campaign_id: DEFAULT_FREE_DEMO_CAMPAIGN_ID,
     });
-    throw new Error(`Supabase increment_free_demo_claimed_count failed: ${error.message}`);
+
+    if (!error) {
+      row = (Array.isArray(data) ? data[0] : data) as IncrementFreeDemoClaimedRow | null | undefined;
+      lastError = null;
+      break;
+    }
+
+    lastError = { message: error.message, details: error.details, hint: error.hint, code: error.code };
+    console.warn(`[free-demo-campaign] increment RPC attempt ${attempt}/${RPC_MAX_ATTEMPTS} failed`, lastError);
+
+    if (attempt < RPC_MAX_ATTEMPTS) {
+      await delay(RPC_RETRY_BASE_DELAY_MS * attempt);
+    }
   }
 
-  const row = (Array.isArray(data) ? data[0] : data) as IncrementFreeDemoClaimedRow | null | undefined;
+  if (lastError) {
+    console.error("[free-demo-campaign] increment_free_demo_claimed_count RPC failed after retries", lastError);
+    throw new Error(`Supabase increment_free_demo_claimed_count failed: ${lastError.message}`);
+  }
 
   if (!row || !row.found) {
-    console.warn("[free-demo-campaign] increment RPC returned no matching campaign row", { data });
+    console.warn("[free-demo-campaign] increment RPC returned no matching campaign row", { row });
     return null;
   }
 
