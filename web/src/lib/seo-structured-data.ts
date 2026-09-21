@@ -1,4 +1,5 @@
 import type { JsonLdData } from "@/components/seo/JsonLd";
+import { toIsoDateOnly } from "@/lib/iso-date";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo-metadata";
 import { SITE_NAME, SITE_SOCIAL_LINKS, SITE_URL, absoluteUrl } from "@/lib/site";
 
@@ -108,7 +109,7 @@ export function buildBlogPostingSchema(input: {
     headline: input.title,
     description: input.description,
     url: absoluteUrl(`/blog/${input.slug}`),
-    datePublished: input.publishedAt,
+    ...(toIsoDateOnly(input.publishedAt) ? { datePublished: toIsoDateOnly(input.publishedAt) } : {}),
     author: {
       "@type": "Person",
       name: input.authorName,

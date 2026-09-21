@@ -1,6 +1,7 @@
 import "server-only";
 
 import type { BlogBodyBlock, BlogComment, BlogPost } from "@/lib/content";
+import { toIsoDateOnly } from "@/lib/iso-date";
 import { getSanityClient, isSanityConfigured } from "@/server/sanity/client";
 
 type SanityPortableTextChild = { text?: string };
@@ -80,7 +81,7 @@ const SANITY_BLOG_POSTS_QUERY = `*[
     "bio": coalesce(authorRef->bio, author->bio, author.bio, ""),
     "initials": coalesce(authorRef->initials, author->initials, author.initials, "GO")
   },
-  "publishedAt": string(coalesce(publishedAt, scheduledPublishAt, _createdAt))[0..9],
+  "publishedAt": coalesce(publishedAt, scheduledPublishAt, _createdAt),
   "readMinutes": coalesce(readMinutes, 6),
   "accent": coalesce(accent, "from-indigo-500 to-violet-600"),
   "body": body[]{
@@ -231,7 +232,8 @@ function normalizePost(post: SanityBlogPost): BlogPost {
           ogImageUrl: post.seo.ogImageUrl,
         }
       : undefined,
-    publishedAt: post.publishedAt,
+    // GROQ returns the raw ISO datetime; trim to a date here (GROQ cannot slice strings).
+    publishedAt: toIsoDateOnly(post.publishedAt) ?? "",
     readMinutes: post.readMinutes,
     accent: post.accent,
     body: toBlogBody(post.body),

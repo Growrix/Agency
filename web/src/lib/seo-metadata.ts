@@ -4,6 +4,13 @@ export const DEFAULT_OG_IMAGE = "/images/og/growrix-os-share.png";
 
 export const HOME_SHARE_TITLE = "Custom Website, SaaS & Mobile App Studio";
 
+/**
+ * Homepage <title>. The root layout `title.template` does not apply to the same route
+ * segment, so the brand must be part of the string. Brand-first because similar names
+ * (Growix, GrowExx, GrowthOS) compete for the same searches.
+ */
+export const HOME_SEO_TITLE = `Growrix OS | ${HOME_SHARE_TITLE}`;
+
 export const HOME_SHARE_DESCRIPTION =
   "Growrix OS is a founder-led studio and digital marketplace for website templates, SaaS starters, and custom website, SaaS, and mobile app builds.";
 

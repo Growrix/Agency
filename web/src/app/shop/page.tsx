@@ -9,18 +9,35 @@ import { buildShopMerchandising } from "@/lib/shop-merchandising";
 import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/site";
 import { listPublicShopProducts } from "@/server/domain/catalog";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Digital Products — Templates & Toolkits",
-  description:
-    "Browse HTML templates, SaaS starters, AI toolkits, and SEO packs. Compare Standard, Premium, and Done-For-You tiers.",
-  path: "/digital-products",
-});
+const SHOP_SEO_TITLE = "HTML Website Templates & Business Profiles";
+const SHOP_SEO_DESCRIPTION =
+  "Browse HTML website templates and single-file business profiles for local services, corporate and creative businesses. Preview live, then choose Standard, Premium, or Done-For-You setup.";
 
 type SearchParams = Promise<{
   category?: string;
   type?: string;
   industry?: string;
 }>;
+
+/**
+ * Filtered listing URLs (?category=, ?type=, ?industry=) show a subset of the same
+ * catalog and duplicate the category landing pages, so they stay out of the index while
+ * still letting crawlers follow the product links. The canonical stays the unfiltered
+ * listing.
+ */
+export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
+  const filters = await searchParams;
+  const hasActiveFilter = Boolean(filters.category || filters.type || filters.industry);
+
+  return {
+    ...buildPageMetadata({
+      title: SHOP_SEO_TITLE,
+      description: SHOP_SEO_DESCRIPTION,
+      path: "/digital-products",
+    }),
+    ...(hasActiveFilter ? { robots: { index: false, follow: true } } : {}),
+  };
+}
 
 export default async function ShopPage({ searchParams }: { searchParams: SearchParams }) {
   const filters = await searchParams;
@@ -42,9 +59,8 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
   const catalogStructuredData: JsonLdData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Digital Products — Templates, Starters, and Toolkits",
-    description:
-      "Browse HTML templates, SaaS starters, AI toolkits, and SEO packs. Compare Standard, Premium, and Done-For-You tiers.",
+    name: SHOP_SEO_TITLE,
+    description: SHOP_SEO_DESCRIPTION,
     url: absoluteUrl("/digital-products"),
     isPartOf: {
       "@type": "WebSite",

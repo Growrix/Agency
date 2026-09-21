@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { buildPageMetadata, NOINDEX_ROBOTS, truncateMetaDescription } from "@/lib/seo-metadata";
+import { getServiceSeoTitle } from "@/lib/service-seo-titles";
 import { buildFaqPageSchema, buildServiceSchema, buildBreadcrumbListSchema } from "@/lib/seo-structured-data";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
@@ -342,10 +343,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = await getPublicService(slug);
   if (!service) return { title: "Service not found", robots: NOINDEX_ROBOTS };
 
-  const fallbackCopy = COPY[slug as SlugKey];
   const cmsCopy = await getSanityServiceDetailContent(slug).catch(() => null);
-  const headline = cmsCopy?.heroHeadline ?? fallbackCopy?.headline ?? `${service.title} Development`;
-  const title = headline.length > 60 ? `${headline.slice(0, 57).trim()}…` : headline;
+  // <title> is a search-facing label; the hero headline is conversion copy and stays on-page only.
+  const title = getServiceSeoTitle(slug, service.title);
 
   return buildPageMetadata({
     title,

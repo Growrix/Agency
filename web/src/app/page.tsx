@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { HomeHeroGate } from "@/components/marketing/HomeHeroGate";
 import { HomeHeroLcpHints } from "@/components/marketing/HomeHeroLcpHints";
 import { HomeBelowFoldGate } from "@/components/marketing/HomeBelowFoldGate";
+import { HomeCrawlableSummary } from "@/components/marketing/HomeCrawlableSummary";
 
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { resolveHeroLcpPosters } from "@/lib/home-hero-lcp";
-import { buildPageMetadata, HOME_SHARE_DESCRIPTION, HOME_SHARE_TITLE } from "@/lib/seo-metadata";
+import { buildPageMetadata, HOME_SEO_TITLE, HOME_SHARE_DESCRIPTION, HOME_SHARE_TITLE } from "@/lib/seo-metadata";
 import { buildOrganizationSchema, buildWebSiteSchema } from "@/lib/seo-structured-data";
 
 import { buildReadyMadeSolutionTabs, pickPreviewProducts } from "@/lib/ready-made-solutions";
@@ -41,11 +42,15 @@ import { WEBSITE_TEMPLATE_PREVIEW } from "@/lib/preview-terminology";
 
 export const revalidate = 120;
 
-export const metadata: Metadata = buildPageMetadata({
-  title: HOME_SHARE_TITLE,
-  description: HOME_SHARE_DESCRIPTION,
-  path: "/",
-});
+export const metadata: Metadata = {
+  ...buildPageMetadata({
+    title: HOME_SHARE_TITLE,
+    description: HOME_SHARE_DESCRIPTION,
+    path: "/",
+  }),
+  // Brand-first <title>; social cards keep the shorter share title.
+  title: { absolute: HOME_SEO_TITLE },
+};
 
 function pickBySlugs<T extends { slug: string }>(items: T[], slugs: string[] | undefined, fallback: T[]) {
   if (!slugs || slugs.length === 0) {
@@ -182,6 +187,13 @@ export default async function Home() {
       />
 
       <HomeBelowFoldGate
+        fallback={
+          <HomeCrawlableSummary
+            services={services}
+            featuredTemplates={featuredHtmlWebsiteTemplates}
+            latestBlogPosts={latestBlogPosts}
+          />
+        }
         services={services}
         readyMadeTabs={readyMadeSolutions.tabs}
         readyMadeProductsByTabId={readyMadeSolutions.productsByTabId}

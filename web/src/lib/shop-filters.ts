@@ -36,6 +36,42 @@ function sortCategoryOptions(left: ShopFilterOption, right: ShopFilterOption) {
   return left.label.localeCompare(right.label);
 }
 
+/**
+ * Builds facet options for one taxonomy key.
+ *
+ * Several products can share one slug while carrying different labels (for example every
+ * website template uses one `typeSlug` but a per-template vertical label). A plain
+ * `new Map(slug -> label)` keeps whichever product came last, so the facet showed
+ * "Healthcare 18" / "Dentistry 18" for all 18 templates. When labels disagree we fall
+ * back to the shared category label so the option name matches what the count covers.
+ */
+function buildFacetOptions<T extends { category: string }>(
+  items: T[],
+  getSlug: (item: T) => string,
+  getLabel: (item: T) => string,
+): ShopFilterOption[] {
+  const bySlug = new Map<string, T[]>();
+  for (const item of items) {
+    const slug = getSlug(item);
+    const group = bySlug.get(slug);
+    if (group) {
+      group.push(item);
+    } else {
+      bySlug.set(slug, [item]);
+    }
+  }
+
+  return Array.from(bySlug.entries(), ([value, group]) => {
+    const labels = new Set(group.map(getLabel));
+    if (labels.size === 1) {
+      return { value, label: getLabel(group[0]!) };
+    }
+
+    const categories = new Set(group.map((item) => item.category));
+    return { value, label: categories.size === 1 ? group[0]!.category : getLabel(group[0]!) };
+  });
+}
+
 export function buildShopFilterOptions(
   items: Pick<
     PublicShopProductRecord,
@@ -49,13 +85,15 @@ export function buildShopFilterOptions(
     )
       .filter((option) => !isHiddenProductCategorySlug(option.value))
       .sort(sortCategoryOptions),
-    types: Array.from(
-      new Map(items.map((item) => [item.typeSlug, item.type])).entries(),
-      ([value, label]) => ({ value, label }),
+    types: buildFacetOptions(
+      items,
+      (item) => item.typeSlug,
+      (item) => item.type,
     ).sort((left, right) => left.label.localeCompare(right.label)),
-    industries: Array.from(
-      new Map(items.map((item) => [item.industrySlug, item.industry])).entries(),
-      ([value, label]) => ({ value, label }),
+    industries: buildFacetOptions(
+      items,
+      (item) => item.industrySlug,
+      (item) => item.industry,
     ).sort((left, right) => left.label.localeCompare(right.label)),
   };
 }
