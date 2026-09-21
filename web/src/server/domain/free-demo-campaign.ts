@@ -98,15 +98,28 @@ type IncrementFreeDemoClaimedRow = {
  */
 async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | null> {
   const client = getSupabaseAdminClient();
-  const { data, error } = await client
-    .rpc("increment_free_demo_claimed_count", { p_campaign_id: DEFAULT_FREE_DEMO_CAMPAIGN_ID })
-    .single<IncrementFreeDemoClaimedRow>();
+  // Deliberately not using .single(): that only sets an Accept header asking
+  // PostgREST to coerce the response to one object, and this code should
+  // behave the same whether the server honors that or returns the table
+  // function's normal row array — parse defensively instead of trusting it.
+  const { data, error } = await client.rpc("increment_free_demo_claimed_count", {
+    p_campaign_id: DEFAULT_FREE_DEMO_CAMPAIGN_ID,
+  });
 
   if (error) {
+    console.error("[free-demo-campaign] increment_free_demo_claimed_count RPC error", {
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      code: error.code,
+    });
     throw new Error(`Supabase increment_free_demo_claimed_count failed: ${error.message}`);
   }
 
-  if (!data || !data.found) {
+  const row = (Array.isArray(data) ? data[0] : data) as IncrementFreeDemoClaimedRow | null | undefined;
+
+  if (!row || !row.found) {
+    console.warn("[free-demo-campaign] increment RPC returned no matching campaign row", { data });
     return null;
   }
 
@@ -115,15 +128,20 @@ async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | nul
   // of waiting out the cache TTL.
   invalidateSupabaseDatabaseCache();
 
-  if (!data.incremented) {
-    throw new Error(data.is_active ? "CAMPAIGN_FULL" : "CAMPAIGN_INACTIVE");
+  if (!row.incremented) {
+    throw new Error(row.is_active ? "CAMPAIGN_FULL" : "CAMPAIGN_INACTIVE");
   }
+
+  console.info("[free-demo-campaign] claimed slot via atomic RPC", {
+    claimed_count: row.claimed_count,
+    total_slots: row.total_slots,
+  });
 
   return {
     ...DEFAULT_FREE_DEMO_CAMPAIGN,
-    claimed_count: data.claimed_count ?? DEFAULT_FREE_DEMO_CAMPAIGN.claimed_count,
-    total_slots: data.total_slots ?? DEFAULT_FREE_DEMO_CAMPAIGN.total_slots,
-    is_active: data.is_active ?? DEFAULT_FREE_DEMO_CAMPAIGN.is_active,
+    claimed_count: row.claimed_count ?? DEFAULT_FREE_DEMO_CAMPAIGN.claimed_count,
+    total_slots: row.total_slots ?? DEFAULT_FREE_DEMO_CAMPAIGN.total_slots,
+    is_active: row.is_active ?? DEFAULT_FREE_DEMO_CAMPAIGN.is_active,
     updated_at: new Date().toISOString(),
   };
 }
@@ -134,6 +152,7 @@ export async function reserveFreeDemoSlot(): Promise<FreeDemoCampaignRecord> {
     if (atomicResult) {
       return atomicResult;
     }
+    console.warn("[free-demo-campaign] falling back to read-modify-write path (Supabase configured but no atomic result)");
   }
 
   let updatedCampaign = DEFAULT_FREE_DEMO_CAMPAIGN;
@@ -168,6 +187,11 @@ export async function reserveFreeDemoSlot(): Promise<FreeDemoCampaignRecord> {
       ...database,
       free_demo_campaigns: campaigns,
     };
+  });
+
+  console.info("[free-demo-campaign] claimed slot via read-modify-write fallback", {
+    claimed_count: updatedCampaign.claimed_count,
+    total_slots: updatedCampaign.total_slots,
   });
 
   return updatedCampaign;
