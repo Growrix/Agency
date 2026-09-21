@@ -28,6 +28,95 @@ to anon, authenticated
 using (false)
 with check (false);
 
+-- Atomically increments free_demo_campaigns[].claimed_count inside app_state's
+-- JSON payload as one row-locked UPDATE, instead of the app reading the row,
+-- incrementing in JS, and writing the whole blob back (which loses increments
+-- under concurrent claims). p_claim_id is an idempotency key: a retried call
+-- with the same claim id reports the earlier success again instead of
+-- incrementing a second time, so a network-level retry after the first
+-- attempt already committed cannot double-count a claim.
+create or replace function public.increment_free_demo_claimed_count(p_campaign_id text, p_claim_id text default null)
+returns table (
+  found boolean,
+  incremented boolean,
+  already_claimed boolean,
+  claimed_count integer,
+  total_slots integer,
+  is_active boolean
+)
+language plpgsql
+as $$
+declare
+  v_payload jsonb;
+  v_campaigns jsonb;
+  v_elem jsonb;
+  v_new_elem jsonb;
+  v_new_campaigns jsonb := '[]'::jsonb;
+  v_found boolean := false;
+  v_incremented boolean := false;
+  v_already_claimed boolean := false;
+  v_claimed integer;
+  v_total integer;
+  v_active boolean;
+  v_claim_ids jsonb;
+begin
+  select payload into v_payload
+  from app_state
+  where id = 'primary'
+  for update;
+
+  if v_payload is null then
+    return query select false, false, false, null::integer, null::integer, null::boolean;
+    return;
+  end if;
+
+  v_campaigns := coalesce(v_payload->'free_demo_campaigns', '[]'::jsonb);
+
+  for v_elem in select * from jsonb_array_elements(v_campaigns)
+  loop
+    if v_elem->>'id' = p_campaign_id then
+      v_found := true;
+      v_claimed := (v_elem->>'claimed_count')::integer;
+      v_total := (v_elem->>'total_slots')::integer;
+      v_active := (v_elem->>'is_active')::boolean;
+      v_claim_ids := coalesce(v_elem->'claim_ids', '[]'::jsonb);
+
+      if p_claim_id is not null and v_claim_ids ? p_claim_id then
+        v_already_claimed := true;
+        v_incremented := true;
+        v_new_elem := v_elem;
+      elsif v_active and v_claimed < v_total then
+        v_claimed := v_claimed + 1;
+        v_incremented := true;
+        v_new_elem := jsonb_set(
+          jsonb_set(
+            jsonb_set(v_elem, '{claimed_count}', to_jsonb(v_claimed)),
+            '{updated_at}', to_jsonb(now()::text)
+          ),
+          '{claim_ids}',
+          case when p_claim_id is not null then v_claim_ids || jsonb_build_array(p_claim_id) else v_claim_ids end
+        );
+      else
+        v_new_elem := v_elem;
+      end if;
+    else
+      v_new_elem := v_elem;
+    end if;
+
+    v_new_campaigns := v_new_campaigns || jsonb_build_array(v_new_elem);
+  end loop;
+
+  if v_found and v_incremented and not v_already_claimed then
+    update app_state
+    set payload = jsonb_set(v_payload, '{free_demo_campaigns}', v_new_campaigns),
+        updated_at = now()
+    where id = 'primary';
+  end if;
+
+  return query select v_found, v_incremented, v_already_claimed, v_claimed, v_total, v_active;
+end;
+$$;
+
 -- =====================================================================
 -- Normalized product-led transactional schema (Phase P9, T048)
 -- =====================================================================

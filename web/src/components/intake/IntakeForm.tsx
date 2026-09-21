@@ -80,6 +80,22 @@ type Props = {
   isFreeDemo?: boolean;
 };
 
+/**
+ * Module-level submit guard shared across every IntakeForm instance.
+ *
+ * MarketingViewportGate renders mobile + desktop trees simultaneously (visibility
+ * is CSS-only), so whenever the free-demo modal is open with the form there are
+ * two IntakeForm React components mounted at the same time. A component-local
+ * useRef would let each instance independently fire its own submit — which is
+ * exactly what was double-counting the counter: two POSTs to /api/v1/intakes,
+ * ~500-660ms apart, each with its own submission id, each a valid claim from
+ * the server's point of view.
+ *
+ * A module-level flag is shared by every instance, so the first one into
+ * `submitIntake` wins and the twin instance's call is a no-op.
+ */
+let submitInFlightGlobal = false;
+
 const EMPTY_VALUES: IntakeFormValues = {
   business_name: "",
   industry: "",
@@ -212,6 +228,7 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   }));
 
   const pendingSubmitRef = useRef(false);
+  const submitInFlightRef = useRef(false);
   const restoredPendingRef = useRef(false);
   const valuesRef = useRef(values);
   const filesRef = useRef(files);
@@ -279,6 +296,18 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   }
 
   async function submitIntake() {
+    // Synchronous re-entrancy guard — must be MODULE-LEVEL, not a useRef.
+    // MarketingViewportGate mounts mobile + desktop trees simultaneously
+    // (visibility is CSS-only), so this component has TWO live instances at
+    // once and a per-instance ref would not stop the twin from also firing.
+    // Also covers a double-click of the same button (`submitting` is React
+    // state, which only disables the button after the next render commits).
+    if (submitInFlightGlobal || submitInFlightRef.current) {
+      return;
+    }
+    submitInFlightGlobal = true;
+    submitInFlightRef.current = true;
+
     const current = valuesRef.current;
     const currentFiles = filesRef.current;
     setSubmitting(true);
@@ -345,6 +374,8 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
       setError(caught instanceof Error ? caught.message : "Unable to submit your request.");
     } finally {
       setSubmitting(false);
+      submitInFlightRef.current = false;
+      submitInFlightGlobal = false;
     }
   }
 
