@@ -152,7 +152,9 @@ export async function createClientIntake(input: CreateIntakeInput): Promise<Clie
   if (input.is_free_demo) {
     await ensureFreeDemoCampaign();
     try {
-      await reserveFreeDemoSlot();
+      // submissionId is generated once above (not re-rolled on retry), so it
+      // doubles as this claim's idempotency key.
+      await reserveFreeDemoSlot(submissionId);
     } catch (error) {
       const message = error instanceof Error ? error.message : "";
       if (message === "CAMPAIGN_FULL") {

@@ -63,7 +63,7 @@ describe("reserveFreeDemoSlot — atomic Supabase path", () => {
     }) as typeof fetch;
 
     const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
-    const result = await reserveFreeDemoSlot();
+    const result = await reserveFreeDemoSlot("claim-1");
 
     assert.equal(rpcCalls, 1);
     assert.equal(result.claimed_count, 4);
@@ -90,57 +90,155 @@ describe("reserveFreeDemoSlot — atomic Supabase path", () => {
     }) as typeof fetch;
 
     const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
-    const result = await reserveFreeDemoSlot();
+    const result = await reserveFreeDemoSlot("claim-2");
 
     assert.equal(rpcCalls, 2);
     assert.equal(result.claimed_count, 1);
   });
 
-  it("throws CAMPAIGN_FULL when the RPC reports the campaign is full", async () => {
+  it("treats an already-claimed idempotency key as success instead of throwing CAMPAIGN_FULL", async () => {
+    // Simulates a retry after the client saw a network failure but the first
+    // attempt's transaction had already committed: the RPC reports the same
+    // claim id as already recorded, incremented stays true, and no error should
+    // reach the caller even though the campaign happens to be at capacity.
     globalThis.fetch = (async () =>
       new Response(
-        JSON.stringify({ found: true, incremented: false, claimed_count: 20, total_slots: 20, is_active: true }),
+        JSON.stringify({
+          found: true,
+          incremented: true,
+          already_claimed: true,
+          claimed_count: 20,
+          total_slots: 20,
+          is_active: true,
+        }),
         { status: 200, headers: { "content-type": "application/json" } },
       )) as typeof fetch;
 
     const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
-    await assert.rejects(reserveFreeDemoSlot(), (error) => error instanceof Error && error.message === "CAMPAIGN_FULL");
+    const result = await reserveFreeDemoSlot("claim-already-recorded");
+
+    assert.equal(result.claimed_count, 20);
   });
 
-  it("throws CAMPAIGN_INACTIVE when the RPC reports the campaign is inactive", async () => {
+  it("throws CAMPAIGN_FULL when the RPC reports the campaign is full", async () => {
     globalThis.fetch = (async () =>
       new Response(
-        JSON.stringify({ found: true, incremented: false, claimed_count: 3, total_slots: 20, is_active: false }),
+        JSON.stringify({
+          found: true,
+          incremented: false,
+          already_claimed: false,
+          claimed_count: 20,
+          total_slots: 20,
+          is_active: true,
+        }),
         { status: 200, headers: { "content-type": "application/json" } },
       )) as typeof fetch;
 
     const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
     await assert.rejects(
-      reserveFreeDemoSlot(),
+      reserveFreeDemoSlot("claim-3"),
+      (error) => error instanceof Error && error.message === "CAMPAIGN_FULL",
+    );
+  });
+
+  it("throws CAMPAIGN_INACTIVE when the RPC reports the campaign is inactive", async () => {
+    globalThis.fetch = (async () =>
+      new Response(
+        JSON.stringify({
+          found: true,
+          incremented: false,
+          already_claimed: false,
+          claimed_count: 3,
+          total_slots: 20,
+          is_active: false,
+        }),
+        { status: 200, headers: { "content-type": "application/json" } },
+      )) as typeof fetch;
+
+    const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
+    await assert.rejects(
+      reserveFreeDemoSlot("claim-4"),
       (error) => error instanceof Error && error.message === "CAMPAIGN_INACTIVE",
     );
   });
 
-  it("falls back to the read-modify-write path when the Supabase row has no campaign yet", async () => {
-    globalThis.fetch = (async (input: RequestInfo | URL) => {
+  it("falls back to the read-modify-write path when the RPC function doesn't exist yet", async () => {
+    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = typeof input === "string" ? input : input.toString();
+      const method = init?.method ?? "GET";
+
       if (url.includes("/rpc/increment_free_demo_claimed_count")) {
         return new Response(
-          JSON.stringify({ found: false, incremented: false, claimed_count: null, total_slots: null, is_active: null }),
+          JSON.stringify({
+            code: "PGRST202",
+            message: "Could not find the function public.increment_free_demo_claimed_count in the schema cache",
+          }),
+          { status: 404, headers: { "content-type": "application/json" } },
+        );
+      }
+
+      if (url.includes("/app_state") && method === "GET") {
+        return new Response(
+          JSON.stringify({ payload: { free_demo_campaigns: [] }, updated_at: "2020-01-01T00:00:00.000Z" }),
           { status: 200, headers: { "content-type": "application/json" } },
         );
       }
-      if (url.includes("/app_state")) {
-        return new Response(JSON.stringify({ payload: null }), {
+
+      if (url.includes("/app_state") && method === "PATCH") {
+        return new Response(JSON.stringify([{ updated_at: new Date().toISOString() }]), {
           status: 200,
           headers: { "content-type": "application/json" },
         });
       }
-      throw new Error(`Unexpected fetch to ${url}`);
+
+      throw new Error(`Unexpected ${method} ${url}`);
     }) as typeof fetch;
 
     const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
-    const result = await reserveFreeDemoSlot();
+    const result = await reserveFreeDemoSlot("claim-5");
+
+    assert.equal(result.claimed_count, 1);
+    assert.equal(result.id, "growrixos-launch-2026");
+  });
+
+  it("falls back to the read-modify-write path when the Supabase row has no campaign yet", async () => {
+    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = typeof input === "string" ? input : input.toString();
+      const method = init?.method ?? "GET";
+
+      if (url.includes("/rpc/increment_free_demo_claimed_count")) {
+        return new Response(
+          JSON.stringify({
+            found: false,
+            incremented: false,
+            already_claimed: false,
+            claimed_count: null,
+            total_slots: null,
+            is_active: null,
+          }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        );
+      }
+
+      if (url.includes("/app_state") && method === "GET") {
+        return new Response(JSON.stringify({ payload: null, updated_at: null }), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      }
+
+      if (url.includes("/app_state") && (method === "POST" || method === "PATCH")) {
+        return new Response(JSON.stringify([{ updated_at: new Date().toISOString() }]), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      }
+
+      throw new Error(`Unexpected ${method} ${url}`);
+    }) as typeof fetch;
+
+    const { reserveFreeDemoSlot } = await import("@/server/domain/free-demo-campaign");
+    const result = await reserveFreeDemoSlot("claim-6");
 
     assert.equal(result.claimed_count, 1);
     assert.equal(result.id, "growrixos-launch-2026");

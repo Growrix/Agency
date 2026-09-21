@@ -81,10 +81,18 @@ export function assertFreeDemoSlotAvailable(campaign: FreeDemoCampaignRecord) {
 type IncrementFreeDemoClaimedRow = {
   found: boolean;
   incremented: boolean;
+  already_claimed: boolean;
   claimed_count: number | null;
   total_slots: number | null;
   is_active: boolean | null;
 };
+
+/** PostgREST's code when the RPC function isn't in its schema cache (e.g. this environment's Supabase project hasn't had supabase/schema.sql applied since the function was added). */
+const RPC_FUNCTION_MISSING_CODE = "PGRST202";
+
+function isFunctionMissingError(error: { code: string; message: string }) {
+  return error.code === RPC_FUNCTION_MISSING_CODE || /could not find the function/i.test(error.message);
+}
 
 /**
  * Atomically increments claimed_count via a Postgres function (single locked
@@ -93,8 +101,9 @@ type IncrementFreeDemoClaimedRow = {
  * elsewhere in this domain only serializes writes within one warm Lambda
  * instance — concurrent claims landing on different instances can each read
  * the same starting count and both write back the same incremented value,
- * silently losing a claim. Returns null when the campaign row doesn't exist
- * yet in Supabase, so the caller can fall back to the create-on-write path.
+ * silently losing a claim. Returns null when the campaign row — or the RPC
+ * function itself — doesn't exist yet, so the caller can fall back to the
+ * create-on-write path instead of failing every claim.
  */
 const RPC_MAX_ATTEMPTS = 3;
 const RPC_RETRY_BASE_DELAY_MS = 150;
@@ -110,10 +119,14 @@ function delay(ms: number) {
  * record write, a handful of audit-log writes) — under load that pool gets
  * exhausted and PostgREST logs "Warp server error: Thread killed by timeout
  * manager" (observed recurring throughout the day, independent of this fix).
- * A thread killed mid-request means its transaction never committed, so a
- * retry here is a clean redo, not a double-increment, in the dominant case.
+ * A thread killed mid-request usually means its transaction never committed,
+ * so a retry is normally a clean redo — but a network-level failure (e.g. a
+ * socket hang-up) can also happen *after* Postgres already committed, which
+ * is why every attempt carries claimId as an idempotency key: the function
+ * recognizes a repeated claimId and reports the same success again instead
+ * of incrementing a second time.
  */
-async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | null> {
+async function reserveFreeDemoSlotAtomic(claimId: string): Promise<FreeDemoCampaignRecord | null> {
   const client = getSupabaseAdminClient();
 
   let row: IncrementFreeDemoClaimedRow | null | undefined;
@@ -126,6 +139,7 @@ async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | nul
     // function's normal row array — parse defensively instead of trusting it.
     const { data, error } = await client.rpc("increment_free_demo_claimed_count", {
       p_campaign_id: DEFAULT_FREE_DEMO_CAMPAIGN_ID,
+      p_claim_id: claimId,
     });
 
     if (!error) {
@@ -134,7 +148,14 @@ async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | nul
       break;
     }
 
-    lastError = { message: error.message, details: error.details, hint: error.hint, code: error.code };
+    const parsedError = { message: error.message, details: error.details, hint: error.hint, code: error.code };
+
+    if (isFunctionMissingError(parsedError)) {
+      console.warn("[free-demo-campaign] increment_free_demo_claimed_count function not found, falling back", parsedError);
+      return null;
+    }
+
+    lastError = parsedError;
     console.warn(`[free-demo-campaign] increment RPC attempt ${attempt}/${RPC_MAX_ATTEMPTS} failed`, lastError);
 
     if (attempt < RPC_MAX_ATTEMPTS) {
@@ -164,6 +185,7 @@ async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | nul
   console.info("[free-demo-campaign] claimed slot via atomic RPC", {
     claimed_count: row.claimed_count,
     total_slots: row.total_slots,
+    already_claimed: row.already_claimed,
   });
 
   return {
@@ -175,9 +197,14 @@ async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | nul
   };
 }
 
-export async function reserveFreeDemoSlot(): Promise<FreeDemoCampaignRecord> {
+/**
+ * @param claimId Idempotency key for this specific claim attempt (e.g. the
+ * intake submission id, generated once by the caller before any retries).
+ * Passed through to the atomic RPC so a retried request can't double-count.
+ */
+export async function reserveFreeDemoSlot(claimId: string): Promise<FreeDemoCampaignRecord> {
   if (isSupabaseDatabaseConfigured()) {
-    const atomicResult = await reserveFreeDemoSlotAtomic();
+    const atomicResult = await reserveFreeDemoSlotAtomic(claimId);
     if (atomicResult) {
       return atomicResult;
     }
