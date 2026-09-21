@@ -150,9 +150,7 @@ export async function writeDatabase(updater: (database: DatabaseSchema) => Datab
   if (isSupabaseDatabaseConfigured()) {
     writeQueue = writeQueue.catch(() => undefined).then(async () => {
       try {
-        const current = await readDatabaseFromSupabaseCached();
-        const next = await updater(current);
-        await writeDatabaseToSupabase(next);
+        await writeDatabaseToSupabaseWithCas(updater);
       } catch (error) {
         if (!canFallbackToFileStore()) {
           throw new Error(
@@ -214,33 +212,47 @@ async function readDatabaseFromSupabaseCached(): Promise<DatabaseSchema> {
 }
 
 async function readDatabaseFromSupabase(): Promise<DatabaseSchema> {
+  const { database } = await readDatabaseFromSupabaseWithVersion();
+  return database;
+}
+
+/**
+ * Always hits Supabase directly (never the short-lived cache) and returns the
+ * row's updated_at alongside its payload, so a caller can later write back
+ * only if nobody else has touched the row since — see writeDatabaseToSupabaseWithCas.
+ * Using the cache here would let a write's "have things changed?" check compare
+ * against data that was already stale when this process read it.
+ */
+async function readDatabaseFromSupabaseWithVersion(): Promise<{ database: DatabaseSchema; updatedAt: string }> {
   const client = getSupabaseAdminClient();
   const { data, error } = await client
     .from("app_state")
-    .select("payload")
+    .select("payload, updated_at")
     .eq("id", SUPABASE_APP_STATE_ID)
-    .maybeSingle<{ payload: Partial<DatabaseSchema> | null }>();
+    .maybeSingle<{ payload: Partial<DatabaseSchema> | null; updated_at: string | null }>();
 
   if (error) {
     throw new Error(`Supabase app_state read failed: ${error.message}`);
   }
 
-  if (!data?.payload) {
+  if (!data?.payload || !data.updated_at) {
     const initial = cloneDefaultDatabase();
-    await writeDatabaseToSupabase(initial);
-    return initial;
+    const updatedAt = await writeDatabaseToSupabase(initial);
+    return { database: initial, updatedAt };
   }
 
-  return { ...cloneDefaultDatabase(), ...data.payload };
+  return { database: { ...cloneDefaultDatabase(), ...data.payload }, updatedAt: data.updated_at };
 }
 
-async function writeDatabaseToSupabase(database: DatabaseSchema) {
+/** Unconditional upsert — only for bootstrapping the row on its first-ever read. */
+async function writeDatabaseToSupabase(database: DatabaseSchema): Promise<string> {
   const client = getSupabaseAdminClient();
+  const updatedAt = new Date().toISOString();
   const { error } = await client.from("app_state").upsert(
     {
       id: SUPABASE_APP_STATE_ID,
       payload: database,
-      updated_at: new Date().toISOString(),
+      updated_at: updatedAt,
     },
     { onConflict: "id" }
   );
@@ -250,4 +262,49 @@ async function writeDatabaseToSupabase(database: DatabaseSchema) {
   }
 
   setCachedSupabaseDatabase(database);
+  return updatedAt;
+}
+
+const WRITE_CAS_MAX_ATTEMPTS = 5;
+
+/**
+ * Writes only if the row's updated_at still matches what was just read (optimistic
+ * concurrency). A plain upsert here would silently overwrite anything another
+ * concurrent request wrote in between — that's exactly how the free-demo claim
+ * counter lost real increments: two requests each read the row, one of their
+ * "nothing changed" writes (e.g. ensureFreeDemoCampaign's no-op, or a later
+ * audit-log/record write) landed after the other's real increment and blindly
+ * replaced the whole payload with its own older snapshot. On a conflict, re-read
+ * and retry the updater against the current row instead of clobbering it.
+ */
+async function writeDatabaseToSupabaseWithCas(
+  updater: (database: DatabaseSchema) => DatabaseSchema | Promise<DatabaseSchema>
+) {
+  const client = getSupabaseAdminClient();
+
+  for (let attempt = 1; attempt <= WRITE_CAS_MAX_ATTEMPTS; attempt += 1) {
+    const { database: current, updatedAt: expectedUpdatedAt } = await readDatabaseFromSupabaseWithVersion();
+    const next = await updater(current);
+    const nextUpdatedAt = new Date().toISOString();
+
+    const { data, error } = await client
+      .from("app_state")
+      .update({ payload: next, updated_at: nextUpdatedAt })
+      .eq("id", SUPABASE_APP_STATE_ID)
+      .eq("updated_at", expectedUpdatedAt)
+      .select("updated_at");
+
+    if (error) {
+      throw new Error(`Supabase app_state write failed: ${error.message}`);
+    }
+
+    if (data && data.length > 0) {
+      setCachedSupabaseDatabase(next);
+      return;
+    }
+
+    console.warn(`[store] app_state write conflict, retrying (attempt ${attempt}/${WRITE_CAS_MAX_ATTEMPTS})`);
+  }
+
+  throw new Error("Supabase app_state write failed: too many concurrent writers (CAS retries exhausted)");
 }

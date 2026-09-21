@@ -119,6 +119,7 @@ describe("store fail-closed guardrails", () => {
                 },
               ],
             },
+            updated_at: new Date(now).toISOString(),
           }),
           {
             status: 200,
@@ -148,5 +149,93 @@ describe("store fail-closed guardrails", () => {
     } finally {
       Date.now = originalDateNow;
     }
+  });
+});
+
+describe("writeDatabase optimistic concurrency", () => {
+  beforeEach(async () => {
+    process.env.SUPABASE_URL = "https://example.supabase.co";
+    process.env.SUPABASE_SERVICE_ROLE_KEY = "service-role-key";
+    process.env.SUPABASE_SECRET_KEY = "service-role-key";
+    process.env.SUPABASE_ANON_KEY = "anon-key";
+    process.env.APP_ENV = "production";
+    delete process.env.ALLOW_SUPABASE_FILE_FALLBACK;
+
+    resetRuntimeConfigForTests();
+    resetSupabaseClientsForTests();
+    const { resetStoreCacheForTests } = await import("@/server/data/store");
+    resetStoreCacheForTests();
+  });
+
+  afterEach(async () => {
+    globalThis.fetch = originalFetch;
+    delete process.env.APP_ENV;
+    delete process.env.SUPABASE_URL;
+    delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+    delete process.env.SUPABASE_SECRET_KEY;
+    delete process.env.SUPABASE_ANON_KEY;
+
+    resetRuntimeConfigForTests();
+    resetSupabaseClientsForTests();
+    const { resetStoreCacheForTests } = await import("@/server/data/store");
+    resetStoreCacheForTests();
+  });
+
+  it("retries against the current row instead of clobbering a concurrent writer's change", async () => {
+    // Mirrors the real bug: a plain upsert here would blindly overwrite the
+    // whole payload with whatever this process last read, silently discarding
+    // an increment (e.g. the free-demo claim counter) that landed in between.
+    let row = { updated_at: "2020-01-01T00:00:00.000Z", payload: { newsletter_subscribers: [] as unknown[] } };
+    let updateAttempts = 0;
+
+    globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = new URL(typeof input === "string" ? input : input.toString());
+      const method = init?.method ?? "GET";
+
+      if (method === "GET") {
+        return new Response(JSON.stringify({ payload: row.payload, updated_at: row.updated_at }), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      }
+
+      if (method === "PATCH") {
+        updateAttempts += 1;
+        const expected = url.searchParams.get("updated_at");
+        const body = JSON.parse(String(init?.body)) as { payload: { newsletter_subscribers: unknown[] }; updated_at: string };
+
+        if (expected !== `eq.${row.updated_at}`) {
+          return new Response(JSON.stringify([]), { status: 200, headers: { "content-type": "application/json" } });
+        }
+
+        if (updateAttempts === 1) {
+          // A concurrent writer lands between this request's read and its write.
+          row = {
+            updated_at: "2020-01-01T00:00:01.000Z",
+            payload: { newsletter_subscribers: [{ id: "interloper" }] },
+          };
+          return new Response(JSON.stringify([]), { status: 200, headers: { "content-type": "application/json" } });
+        }
+
+        row = { updated_at: body.updated_at, payload: body.payload };
+        return new Response(JSON.stringify([{ updated_at: row.updated_at }]), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      }
+
+      throw new Error(`Unexpected ${method} ${url}`);
+    }) as typeof fetch;
+
+    const { writeDatabase } = await import("@/server/data/store");
+
+    await writeDatabase((database) => ({
+      ...database,
+      newsletter_subscribers: [...database.newsletter_subscribers, { id: "new-subscriber" } as never],
+    }));
+
+    assert.equal(updateAttempts, 2);
+    const subscriberIds = row.payload.newsletter_subscribers.map((item) => (item as { id: string }).id);
+    assert.deepEqual(subscriberIds.sort(), ["interloper", "new-subscriber"]);
   });
 });
