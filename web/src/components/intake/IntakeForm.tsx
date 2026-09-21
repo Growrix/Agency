@@ -212,6 +212,7 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   }));
 
   const pendingSubmitRef = useRef(false);
+  const submitInFlightRef = useRef(false);
   const restoredPendingRef = useRef(false);
   const valuesRef = useRef(values);
   const filesRef = useRef(files);
@@ -279,6 +280,17 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
   }
 
   async function submitIntake() {
+    // Synchronous re-entrancy guard: `submitting` is React state, so it only
+    // blocks the button's `disabled` prop after the next render commits. A
+    // fast double-click (or a manual click racing the auto-submit-after-sign-in
+    // effect) can fire this function twice before that render lands, posting
+    // two real requests — each gets its own id server-side, so both count as
+    // genuine claims. A ref updates immediately, closing that window.
+    if (submitInFlightRef.current) {
+      return;
+    }
+    submitInFlightRef.current = true;
+
     const current = valuesRef.current;
     const currentFiles = filesRef.current;
     setSubmitting(true);
@@ -345,6 +357,7 @@ export function IntakeForm({ onSuccess, onClose, isFreeDemo = false }: Props) {
       setError(caught instanceof Error ? caught.message : "Unable to submit your request.");
     } finally {
       setSubmitting(false);
+      submitInFlightRef.current = false;
     }
   }
 
