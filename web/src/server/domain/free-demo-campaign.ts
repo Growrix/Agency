@@ -5,7 +5,8 @@ import {
   DEFAULT_FREE_DEMO_CAMPAIGN_ID,
   type FreeDemoCampaignRecord,
 } from "@/server/data/schema";
-import { readDatabase, writeDatabase } from "@/server/data/store";
+import { invalidateSupabaseDatabaseCache, readDatabase, writeDatabase } from "@/server/data/store";
+import { getSupabaseAdminClient, isSupabaseDatabaseConfigured } from "@/server/supabase/client";
 
 export type FreeDemoCampaignState = {
   id: string;
@@ -77,7 +78,64 @@ export function assertFreeDemoSlotAvailable(campaign: FreeDemoCampaignRecord) {
   }
 }
 
+type IncrementFreeDemoClaimedRow = {
+  found: boolean;
+  incremented: boolean;
+  claimed_count: number | null;
+  total_slots: number | null;
+  is_active: boolean | null;
+};
+
+/**
+ * Atomically increments claimed_count via a Postgres function (single locked
+ * UPDATE), instead of this process reading the row, incrementing in JS, and
+ * writing it back. The generic readDatabase()/writeDatabase() path used
+ * elsewhere in this domain only serializes writes within one warm Lambda
+ * instance — concurrent claims landing on different instances can each read
+ * the same starting count and both write back the same incremented value,
+ * silently losing a claim. Returns null when the campaign row doesn't exist
+ * yet in Supabase, so the caller can fall back to the create-on-write path.
+ */
+async function reserveFreeDemoSlotAtomic(): Promise<FreeDemoCampaignRecord | null> {
+  const client = getSupabaseAdminClient();
+  const { data, error } = await client
+    .rpc("increment_free_demo_claimed_count", { p_campaign_id: DEFAULT_FREE_DEMO_CAMPAIGN_ID })
+    .single<IncrementFreeDemoClaimedRow>();
+
+  if (error) {
+    throw new Error(`Supabase increment_free_demo_claimed_count failed: ${error.message}`);
+  }
+
+  if (!data || !data.found) {
+    return null;
+  }
+
+  // This process's cached Supabase snapshot (readDatabase()'s short-lived cache) is
+  // now stale — drop it so the next read reflects the increment immediately instead
+  // of waiting out the cache TTL.
+  invalidateSupabaseDatabaseCache();
+
+  if (!data.incremented) {
+    throw new Error(data.is_active ? "CAMPAIGN_FULL" : "CAMPAIGN_INACTIVE");
+  }
+
+  return {
+    ...DEFAULT_FREE_DEMO_CAMPAIGN,
+    claimed_count: data.claimed_count ?? DEFAULT_FREE_DEMO_CAMPAIGN.claimed_count,
+    total_slots: data.total_slots ?? DEFAULT_FREE_DEMO_CAMPAIGN.total_slots,
+    is_active: data.is_active ?? DEFAULT_FREE_DEMO_CAMPAIGN.is_active,
+    updated_at: new Date().toISOString(),
+  };
+}
+
 export async function reserveFreeDemoSlot(): Promise<FreeDemoCampaignRecord> {
+  if (isSupabaseDatabaseConfigured()) {
+    const atomicResult = await reserveFreeDemoSlotAtomic();
+    if (atomicResult) {
+      return atomicResult;
+    }
+  }
+
   let updatedCampaign = DEFAULT_FREE_DEMO_CAMPAIGN;
 
   await writeDatabase((database) => {

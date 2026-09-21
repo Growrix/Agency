@@ -100,6 +100,17 @@ export function resetStoreCacheForTests() {
   inflightSupabaseRead = null;
 }
 
+/**
+ * Drops the in-memory Supabase snapshot so the next readDatabase() call refetches.
+ * Use after a write that bypasses writeDatabase() (e.g. an atomic Postgres RPC),
+ * so this warm Lambda instance doesn't keep serving a stale cached value for up
+ * to SUPABASE_CACHE_TTL_MS.
+ */
+export function invalidateSupabaseDatabaseCache() {
+  cachedSupabaseDatabase = null;
+  cachedSupabaseDatabaseAt = 0;
+}
+
 export async function readDatabase(): Promise<DatabaseSchema> {
   if (isSupabaseDatabaseConfigured()) {
     try {

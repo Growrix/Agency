@@ -29,7 +29,9 @@
     "Growix",
     "GrowExx",
     "GrowthOS",
-    "Growrixes"
+    "Growrixes",
+    "refetch",
+    "refetches"
   ],
   "ignorePaths": [
     ".next/**",
