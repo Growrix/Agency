@@ -2,10 +2,44 @@
 
 import { Dialog } from "@headlessui/react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { MarketingViewportGate } from "@/components/marketing/MarketingViewportGate";
+import { useEffect, useState } from "react";
 import { FreeDemoCounter } from "@/components/marketing/FreeDemoCounter";
 import { IntakeForm } from "@/components/intake/IntakeForm";
 import { cn } from "@/lib/utils";
+
+const DESKTOP_BREAKPOINT = "(min-width: 768px)";
+
+/**
+ * Reads the desktop breakpoint once on mount (window is guaranteed here: this
+ * component tree is dynamic-imported with ssr:false, so it only ever renders
+ * client-side) and re-subscribes to viewport changes. Returned as a real
+ * boolean, not the tri-state MarketingViewportGate uses, because this modal
+ * MUST render exactly one variant at a time — rendering both would mount
+ * IntakeForm twice, and any per-instance submit state (auto-submit after
+ * sign-in, in-flight refs) would run on both trees at once and post two real
+ * submissions per user click.
+ */
+function useIsDesktopViewport(): boolean {
+  const [isDesktop, setIsDesktop] = useState<boolean>(() => {
+    if (typeof window === "undefined") {
+      // Fallback for the (shouldn't-happen) SSR path — desktop is the safer
+      // default because the form's chrome fits both viewports gracefully.
+      return true;
+    }
+    return window.matchMedia(DESKTOP_BREAKPOINT).matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia(DESKTOP_BREAKPOINT);
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isDesktop;
+}
 
 type Props = {
   open: boolean;
@@ -319,6 +353,7 @@ function PromoPanel({
 
 export function FreeDemoModal({ open, showForm, onClose, onOpenForm }: Props) {
   const reduced = useReducedMotion();
+  const isDesktop = useIsDesktopViewport();
   const panelMotion = reduced
     ? { initial: false, animate: undefined }
     : {
@@ -408,18 +443,18 @@ export function FreeDemoModal({ open, showForm, onClose, onOpenForm }: Props) {
         transition={{ duration: 0.3 }}
         aria-hidden
       />
-      <MarketingViewportGate
-        mobile={
-          <div className="fixed inset-x-0 bottom-0 z-50 flex max-h-dvh items-end justify-center pb-[max(env(safe-area-inset-bottom),0.25rem)]">
-            {mobilePanel}
-          </div>
-        }
-        desktop={
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-5 py-6 sm:p-8 sm:py-8">
-            {desktopPanel}
-          </div>
-        }
-      />
+      {/* Render exactly one panel — never both. MarketingViewportGate would render
+          both trees and hide one with CSS, which mounts IntakeForm twice and lets
+          each twin independently submit the same claim. See useIsDesktopViewport. */}
+      {isDesktop ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-5 py-6 sm:p-8 sm:py-8">
+          {desktopPanel}
+        </div>
+      ) : (
+        <div className="fixed inset-x-0 bottom-0 z-50 flex max-h-dvh items-end justify-center pb-[max(env(safe-area-inset-bottom),0.25rem)]">
+          {mobilePanel}
+        </div>
+      )}
     </Dialog>
   );
 }
