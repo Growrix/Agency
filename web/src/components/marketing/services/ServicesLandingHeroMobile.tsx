@@ -37,7 +37,7 @@ export function ServicesLandingHeroMobile({
         </div>
 
         <h1 className="service-detail-hero-mobile__title signal-rise" style={{ animationDelay: "70ms" }}>
-          <span className="block">{headlineLead}</span>
+          <span className="block">{headlineLead}</span>{" "}
           <span className="block marketing-title-accent">{headlineAccent}</span>
         </h1>
 

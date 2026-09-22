@@ -38,7 +38,7 @@ export function LegalDocumentMobile({
           {eyebrow}
         </Badge>
         <h1 className="service-detail-hero-mobile__title">
-          <span className="block">{titleLead}</span>
+          <span className="block">{titleLead}</span>{" "}
           <span className="block marketing-title-accent">{titleAccent}</span>
         </h1>
         <p className="service-detail-hero-mobile__description">{intro}</p>

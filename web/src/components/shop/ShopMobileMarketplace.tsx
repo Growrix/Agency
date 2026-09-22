@@ -48,7 +48,7 @@ export function ShopMobileMarketplace({
       <header className="shop-mobile__header">
         <p className="shop-mobile__eyebrow">{SHOP_DESKTOP_COPY.hero.eyebrow}</p>
         <h1 className="shop-mobile__title">
-          <span className="block">{SHOP_DESKTOP_COPY.hero.titleLead}</span>
+          <span className="block">{SHOP_DESKTOP_COPY.hero.titleLead}</span>{" "}
           <span className="block marketing-title-accent">{SHOP_DESKTOP_COPY.hero.titleAccent}</span>
         </h1>
         <p className="shop-mobile__description">{SHOP_DESKTOP_COPY.hero.description}</p>

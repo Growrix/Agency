@@ -25,7 +25,13 @@ export function MarketingHeroTitle({
   if (resolved.kind === "accent" && layout === "block") {
     return (
       <Tag className={titleClass}>
-        <span className="block">{resolved.titleLead}</span>
+        {/*
+          The explicit space matters even though both spans are display:block.
+          Without it, text extraction (crawlers, AI answer engines, screen-reader
+          transcripts) concatenates the two lines into one word — "andoptimized",
+          "studiobuilding". It is invisible in the rendered layout.
+        */}
+        <span className="block">{resolved.titleLead}</span>{" "}
         <span className="block marketing-title-accent">{resolved.titleAccent}</span>
       </Tag>
     );

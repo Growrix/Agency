@@ -20,7 +20,19 @@ export function Accordion({ items, className }: { items: AccordionItem[]; classN
                   aria-hidden
                 />
               </DisclosureButton>
-              <DisclosurePanel className="pb-5 -mt-1 text-text-muted leading-7 text-pretty">
+              {/*
+                `static` keeps the answer in the rendered HTML even while collapsed.
+                Headless UI unmounts a managed panel when closed, which meant FAQ
+                answers never reached crawlers or AI answer engines — the page shipped
+                questions with no answers. `hidden` still removes a collapsed answer
+                from the accessibility tree and from view, so behavior is unchanged
+                for users while the text stays in the source.
+              */}
+              <DisclosurePanel
+                static
+                hidden={!open}
+                className="pb-5 -mt-1 text-text-muted leading-7 text-pretty"
+              >
                 {item.answer}
               </DisclosurePanel>
             </>

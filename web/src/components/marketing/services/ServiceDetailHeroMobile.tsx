@@ -44,7 +44,7 @@ export function ServiceDetailHeroMobile({
         </Badge>
 
         <h1 className="service-detail-hero-mobile__title">
-          <span className="block">{headlineLead}</span>
+          <span className="block">{headlineLead}</span>{" "}
           <span className="block marketing-title-accent">{headlineAccent}</span>
         </h1>
 

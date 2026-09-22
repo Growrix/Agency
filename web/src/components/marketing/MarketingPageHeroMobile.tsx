@@ -40,7 +40,7 @@ export function MarketingPageHeroMobile({
 
         {resolved.kind === "accent" ? (
           <h1 className="service-detail-hero-mobile__title">
-            <span className="block">{resolved.titleLead}</span>
+            <span className="block">{resolved.titleLead}</span>{" "}
             <span className="block marketing-title-accent">{resolved.titleAccent}</span>
           </h1>
         ) : (

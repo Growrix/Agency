@@ -7,7 +7,6 @@ import { HomeCrawlableSummary } from "@/components/marketing/HomeCrawlableSummar
 import { SHOW_GOOGLE_REVIEWS } from "@/lib/feature-flags";
 import { resolveHeroLcpPosters } from "@/lib/home-hero-lcp";
 import { buildPageMetadata, HOME_SEO_TITLE, HOME_SHARE_DESCRIPTION, HOME_SHARE_TITLE } from "@/lib/seo-metadata";
-import { buildOrganizationSchema, buildWebSiteSchema } from "@/lib/seo-structured-data";
 
 import { buildReadyMadeSolutionTabs, pickPreviewProducts } from "@/lib/ready-made-solutions";
 
@@ -15,7 +14,6 @@ import { homeSection } from "@/lib/homepage-composition";
 
 import { getHomePageData } from "@/server/marketing/home-page-data";
 
-import { JsonLd, type JsonLdData } from "@/components/seo/JsonLd";
 import { FreeDemoGate } from "@/components/marketing/FreeDemoGate";
 
 import {
@@ -154,10 +152,6 @@ export default async function Home() {
 
   const lcpPosters = resolveHeroLcpPosters(heroPreviewSlides, heroPreviewFallbackSlide);
 
-  const homeStructuredData: JsonLdData[] = [
-    buildOrganizationSchema(),
-    buildWebSiteSchema(),
-  ];
 
 
 
@@ -167,7 +161,6 @@ export default async function Home() {
 
       <HomeHeroLcpHints mobilePoster={lcpPosters.mobile} desktopPoster={lcpPosters.desktop} />
 
-      <JsonLd data={homeStructuredData} />
 
       <div className="home-desktop-marketing">
       <HomeHeroGate

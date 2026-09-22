@@ -57,7 +57,7 @@ export function HomeCrawlableSummary({
               {orderedServices.map((service) => (
                 <li key={service.slug}>
                   <Link href={`/services/${service.slug}`} className={cardClass}>
-                    <span className="block text-lg font-semibold text-text">{service.title}</span>
+                    <span className="block text-lg font-semibold text-text">{service.title}</span>{" "}
                     <span className="mt-2 block text-sm leading-6 text-text-muted">
                       {service.short_description}
                     </span>
@@ -85,7 +85,7 @@ export function HomeCrawlableSummary({
               {templates.map((product) => (
                 <li key={product.slug}>
                   <Link href={getProductHref(product)} className={cardClass}>
-                    <span className="block text-lg font-semibold text-text">{product.name}</span>
+                    <span className="block text-lg font-semibold text-text">{product.name}</span>{" "}
                     <span className="mt-1 block text-sm text-text-muted">
                       {product.type} · {product.price}
                     </span>
@@ -122,7 +122,7 @@ export function HomeCrawlableSummary({
               {posts.map((post) => (
                 <li key={post.slug}>
                   <Link href={`/blog/${post.slug}`} className={cardClass}>
-                    <span className="block text-lg font-semibold text-text">{post.title}</span>
+                    <span className="block text-lg font-semibold text-text">{post.title}</span>{" "}
                     <span className="mt-2 block text-sm leading-6 text-text-muted">{post.excerpt}</span>
                   </Link>
                 </li>

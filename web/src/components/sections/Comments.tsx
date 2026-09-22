@@ -191,7 +191,7 @@ export function Comments({ initial }: { initial: BlogComment[] }) {
           />
           <div className="sm:col-span-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-text-muted">
-              Email is never published. Comments load instantly in this preview.
+              Email is never published.
             </p>
             <Button type="submit">Post comment</Button>
           </div>

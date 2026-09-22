@@ -46,7 +46,7 @@ export function WebsiteTemplatesHtmlPreviewCategoryHeroMobile({
         </Badge>
 
         <h1 className="service-detail-hero-mobile__title">
-          <span className="block">{WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_HERO.titleLead}</span>
+          <span className="block">{WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_HERO.titleLead}</span>{" "}
           <span className="block marketing-title-accent">{WEBSITE_TEMPLATES_HTML_PREVIEW_CATEGORY_HERO.titleAccent}</span>
         </h1>
 

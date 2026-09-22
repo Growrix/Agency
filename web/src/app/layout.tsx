@@ -6,6 +6,8 @@ import { AppChrome } from "@/components/shell/AppChrome";
 import { DeferredSpeedInsights } from "@/components/shell/DeferredSpeedInsights";
 import { GoogleAnalytics } from "@/components/shell/GoogleAnalytics";
 import { ConsentBanner } from "@/components/shell/ConsentBanner";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildOrganizationSchema, buildWebSiteSchema } from "@/lib/seo-structured-data";
 import { SITE_INDEXING_ENABLED, SITE_NAME, SITE_URL } from "@/lib/site";
 import {
   DEFAULT_OG_IMAGE,
@@ -85,6 +87,8 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
+const SITE_STRUCTURED_DATA = [buildOrganizationSchema(), buildWebSiteSchema()];
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -105,6 +109,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        {/*
+          Organization + WebSite schema is emitted on every page, not just the
+          homepage. Answer engines routinely land on a deep page (a service, a
+          blog post) and need the entity definition there to attribute the
+          content to Growrix OS rather than guessing from the domain.
+        */}
+        <JsonLd data={SITE_STRUCTURED_DATA} />
         <MotionRoot>
           <AppChrome>{children}</AppChrome>
         </MotionRoot>
