@@ -1,10 +1,10 @@
 export const ABOUT_HERO = {
-  eyebrow: "About GrowrixOS",
+  eyebrow: "About Growrix OS",
   title: "A product-focused studio building systems that help businesses grow.",
   titleLead: "A product-focused studio",
   titleAccent: "building systems that grow.",
   description:
-    "GrowrixOS combines websites, SaaS applications, mobile products, automation systems, technical SEO, and AI business systems into practical solutions designed for long-term business value.",
+    "Growrix OS is a founder-led product studio based in Bangladesh, working with clients worldwide. It combines websites, SaaS applications, mobile products, automation systems, technical SEO, and AI business systems into practical solutions designed for long-term business value.",
   proofPoints: [
     "Product-first thinking",
     "Senior-level execution",
@@ -58,15 +58,15 @@ export const ABOUT_PRINCIPLES_SECTION = {
 
 export const ABOUT_FOUNDER_SECTION = {
   eyebrow: "Founder story",
-  title: "Why I Built GrowrixOS",
+  title: "Why I Built Growrix OS",
   titleLead: "Why I Built",
-  titleAccent: "GrowrixOS",
-  timelineEyebrow: "The path to GrowrixOS",
+  titleAccent: "Growrix OS",
+  timelineEyebrow: "The path to Growrix OS",
   founder: {
     name: "Nayeem",
     role: "Founder & Product Builder",
     intro:
-      "My background spans digital marketing, web development, automation, SEO, product strategy, and modern software development. Over time I noticed a common problem: businesses were forced to coordinate multiple specialists across disconnected disciplines. GrowrixOS was created to bring those capabilities together into one practical system focused on measurable outcomes.",
+      "My background spans digital marketing, web development, automation, SEO, product strategy, and modern software development. Over time I noticed a common problem: businesses were forced to coordinate multiple specialists across disconnected disciplines. Growrix OS was created to bring those capabilities together into one practical system focused on measurable outcomes.",
   },
   timeline: [
     {
@@ -96,7 +96,7 @@ export const ABOUT_WHY_EXIST_SECTION = {
   titleLead: "Built to bridge the gap",
   titleAccent: "between products and implementation.",
   description:
-    "Most businesses don't struggle because they lack tools. They struggle because websites, software, SEO, automation, and AI are often treated as separate projects. GrowrixOS exists to connect these systems into a single operational ecosystem.",
+    "Most businesses don't struggle because they lack tools. They struggle because websites, software, SEO, automation, and AI are often treated as separate projects. Growrix OS exists to connect these systems into a single operational ecosystem.",
   pillars: [
     {
       title: "Visibility",
@@ -132,7 +132,7 @@ export const ABOUT_ECOSYSTEM_SECTION = {
   titleLead: "Every service supports",
   titleAccent: "the same business outcome.",
   description:
-    "GrowrixOS is designed as a connected ecosystem rather than a collection of disconnected services.",
+    "Growrix OS is designed as a connected ecosystem rather than a collection of disconnected services.",
   services: [
     { title: "Websites", description: "Create visibility and first impressions." },
     { title: "Technical SEO", description: "Improve discoverability and measurement." },

@@ -1,5 +1,5 @@
 export const SERVICES_LANDING_HERO = {
-  eyebrow: "GrowrixOS services",
+  eyebrow: "Growrix OS services",
   title: "Choose the right path to launch, grow, or optimize your business.",
   headlineLead: "Choose the right path to",
   headlineAccent: "launch, grow, or optimize.",
@@ -224,7 +224,7 @@ export const SERVICES_LANDING_FAQ = [
       "Usually yes. New sites often launch without Search Console, analytics, schema, or verified tracking configured. Technical SEO establishes the foundation so you can measure and improve from day one.",
   },
   {
-    question: "Can GrowrixOS support long-term growth?",
+    question: "Can Growrix OS support long-term growth?",
     answer:
       "Yes. Engagements can scale from one-time foundations to ongoing product partnership, automation optimization, and AI operations support as your business grows.",
   },

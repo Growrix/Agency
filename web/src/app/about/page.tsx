@@ -55,7 +55,7 @@ export default function AboutPage() {
     buildWebPageSchema({
       name: "About — Founder-Led Web & SaaS Studio",
       description:
-        "GrowrixOS is a founder-led product studio building websites, SaaS applications, mobile products, automation, technical SEO, and AI business systems for measurable outcomes.",
+        "Growrix OS is a founder-led product studio building websites, SaaS applications, mobile products, automation, technical SEO, and AI business systems for measurable outcomes.",
       path: "/about",
     }),
     buildBreadcrumbListSchema([

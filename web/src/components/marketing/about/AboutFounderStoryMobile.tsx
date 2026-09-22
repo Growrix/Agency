@@ -20,7 +20,7 @@ export function AboutFounderStoryMobile() {
         <div className="about-founder-mobile__photo">
           <Image
             src={ABOUT_IMAGES.founder.src}
-            alt={`${founder.name}, Founder of GrowrixOS`}
+            alt={`${founder.name}, Founder of Growrix OS`}
             fill
             sizes="100vw"
             className="object-cover object-center"

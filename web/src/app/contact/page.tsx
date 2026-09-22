@@ -16,7 +16,7 @@ export default function ContactPage() {
     buildContactPageSchema({
       name: "Contact — Plan Your Project",
       description:
-        "Start a project conversation with GrowrixOS. Share your website, SaaS, mobile, automation, technical SEO, or AI business system goals — we respond within 2 business hours.",
+        "Start a project conversation with Growrix OS. Share your website, SaaS, mobile, automation, technical SEO, or AI business system goals — we respond within 2 business hours.",
       path: "/contact",
     }),
     buildBreadcrumbListSchema([

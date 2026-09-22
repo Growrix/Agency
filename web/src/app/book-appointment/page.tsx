@@ -16,7 +16,7 @@ export default function BookPage() {
     buildWebPageSchema({
       name: "Book a Discovery Call",
       description:
-        "Schedule a 30-minute discovery call with GrowrixOS to clarify scope, timeline, and the right path for your website, SaaS, mobile, automation, or AI project.",
+        "Schedule a 30-minute discovery call with Growrix OS to clarify scope, timeline, and the right path for your website, SaaS, mobile, automation, or AI project.",
       path: "/book-appointment",
     }),
     buildBreadcrumbListSchema([

@@ -52,7 +52,7 @@ export const BOOK_APPOINTMENT_FORM = {
     "Select a preferred slot and tell us what you're planning. We'll confirm the session and follow up with clear next steps.",
   trustHeading: "What happens after you book?",
   trustCopy:
-    "Your request is reviewed by GrowrixOS. We'll confirm the session or suggest a better time within 2 business hours.",
+    "Your request is reviewed by Growrix OS. We'll confirm the session or suggest a better time within 2 business hours.",
   timezoneLabel: "Your timezone",
   slotPreviewLabel: "Selected slot",
   slotPreviewEmpty: "Pick a date and time to preview your discovery call request.",
@@ -92,7 +92,7 @@ export const BOOK_APPOINTMENT_ALTERNATIVES = {
     },
     {
       title: "Instant answers",
-      description: "Use AI GrowrixOS to qualify the project before the call.",
+      description: "Use AI Growrix OS to qualify the project before the call.",
       href: "concierge",
       cta: "Open concierge",
     },

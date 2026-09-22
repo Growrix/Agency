@@ -155,7 +155,7 @@ export const AUTOMATION_OUTCOMES_SECTION = {
 } as const;
 
 export const AUTOMATION_WHY_BUILD_SECTION = {
-  eyebrow: "Why businesses automate with GrowrixOS",
+  eyebrow: "Why businesses automate with Growrix OS",
   title: "Built around reliability, visibility, and operational improvement.",
   titleLead: "Built around reliability, visibility, and",
   titleAccent: "operational improvement.",

@@ -4,7 +4,7 @@ export const CONTACT_HERO = {
   titleLead: "Let's plan the fastest path",
   titleAccent: "from idea to launch.",
   description:
-    "Whether you're launching a website, SaaS platform, mobile app, automation system, AI business system, or technical SEO project, we'll help identify the right approach and next steps.",
+    "Growrix OS is based in Bangladesh and works with clients worldwide. Whether you're launching a website, SaaS platform, mobile app, automation system, AI business system, or technical SEO project, we'll help identify the right approach and next steps.",
   proofPoints: [
     "Under 2 business hour response time",
     "Conversations stay private",
@@ -142,7 +142,7 @@ export const CONTACT_FORM = {
     "Share your project, business goals, timeline, or challenge. We'll recommend the most suitable next step.",
   trustHeading: "What happens to your information?",
   trustCopy:
-    "Your message is encrypted in transit and only reviewed by GrowrixOS. We do not share inquiry information with third parties.",
+    "Your message is encrypted in transit and only reviewed by Growrix OS. We do not share inquiry information with third parties.",
   projectFitHeading: "Projects we commonly help with",
   projectFitItems: [
     "Website launches",

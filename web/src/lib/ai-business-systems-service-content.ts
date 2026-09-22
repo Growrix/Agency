@@ -13,7 +13,7 @@ export const AI_BUSINESS_SYSTEMS_SERVICE_HERO = {
   headlineLead: "Practical AI that saves time,",
   headlineAccent: "supports your team, and automates repetitive work.",
   description:
-    "GrowrixOS builds AI assistants, internal knowledge tools, customer support assistants, and workflow automations that integrate into your existing business. Start small, grow over time, and partner long-term.",
+    "Growrix OS builds AI assistants, internal knowledge tools, customer support assistants, and workflow automations that integrate into your existing business. Start small, grow over time, and partner long-term.",
   secondaryCta: "Explore AI Solutions",
   secondaryHref: "#ai-solutions",
 } as const;
@@ -97,7 +97,7 @@ export const AI_VALUE_SECTION = {
 } as const;
 
 export const AI_WHY_BUILD_SECTION = {
-  eyebrow: "Why businesses choose GrowrixOS",
+  eyebrow: "Why businesses choose Growrix OS",
   title: "Built for practical outcomes, not experiments.",
   titleLead: "Built for practical outcomes,",
   titleAccent: "not experiments.",

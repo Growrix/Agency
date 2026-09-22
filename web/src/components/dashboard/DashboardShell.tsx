@@ -80,12 +80,12 @@ export function DashboardShell({
           <Link
             href="/"
             className="flex min-w-0 items-center gap-2.5 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            aria-label="Go to GrowrixOS homepage"
+            aria-label="Go to Growrix OS homepage"
           >
             {collapsed ? (
               <Image
                 src="/website logo main.svg"
-                alt="GrowrixOS"
+                alt="Growrix OS"
                 width={32}
                 height={32}
                 unoptimized
@@ -94,7 +94,7 @@ export function DashboardShell({
             ) : (
               <Image
                 src="/website logo main.svg"
-                alt="GrowrixOS"
+                alt="Growrix OS"
                 width={120}
                 height={32}
                 unoptimized
