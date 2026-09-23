@@ -13,7 +13,7 @@ export function BookAppointmentHeroMobile() {
         </Badge>
 
         <h1 className="service-detail-hero-mobile__title">
-          <span className="block">{BOOK_APPOINTMENT_HERO.titleLead}</span>
+          <span className="block">{BOOK_APPOINTMENT_HERO.titleLead}</span>{" "}
           <span className="block marketing-title-accent">{BOOK_APPOINTMENT_HERO.titleAccent}</span>
         </h1>
 

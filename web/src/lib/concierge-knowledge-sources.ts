@@ -219,7 +219,7 @@ export function buildMarketplaceDocuments(): ConciergeKnowledgeDocument[] {
       sourcePath: "/digital-products",
       sourceType: "marketplace",
       content:
-        `GrowrixOS digital marketplace at /digital-products has two primary catalog lines: HTML Business Profiles and ${WEBSITE_TEMPLATE_PREVIEW.categoryPageTitle}. Every product uses Standard, Premium, and Done-For-You tiers. Additional nav paths include Bundles at /digital-products/bundles and Free Starters at /digital-products/free. Digital products overall start from $15-$399 for self-serve purchases.`,
+        `Growrix OS digital marketplace at /digital-products has two primary catalog lines: HTML Business Profiles and ${WEBSITE_TEMPLATE_PREVIEW.categoryPageTitle}. Every product uses Standard, Premium, and Done-For-You tiers. Additional nav paths include Bundles at /digital-products/bundles and Free Starters at /digital-products/free. Digital products overall start from $15-$399 for self-serve purchases.`,
     },
     {
       id: "pricing-payment-terms",
@@ -227,7 +227,7 @@ export function buildMarketplaceDocuments(): ConciergeKnowledgeDocument[] {
       sourcePath: "/pricing",
       sourceType: "pricing",
       content:
-        "For qualifying international clients, GrowrixOS offers delivery-first payment with no advance on the first 100 qualifying projects. Milestone-based or custom payment arrangements are available. Every delivered site includes 1 year of free support and maintenance covering bug fixes, security updates, and minor content updates. Payment plans are available for larger custom engagements.",
+        "For qualifying international clients, Growrix OS offers delivery-first payment with no advance on the first 100 qualifying projects. Milestone-based or custom payment arrangements are available. Every delivered site includes 1 year of free support and maintenance covering bug fixes, security updates, and minor content updates. Payment plans are available for larger custom engagements.",
     },
   ];
 }
@@ -269,10 +269,10 @@ export function buildStudioDocuments(): ConciergeKnowledgeDocument[] {
   return [
     {
       id: "offering-positioning",
-      label: "GrowrixOS positioning",
+      label: "Growrix OS positioning",
       sourcePath: "/",
       sourceType: "offering",
-      content: `${ABOUT_HERO.title} ${ABOUT_HERO.description} GrowrixOS is a founder-led product studio combining a digital product marketplace with six core services: websites, SaaS applications, mobile apps, automation, technical SEO, and AI business systems.`,
+      content: `${ABOUT_HERO.title} ${ABOUT_HERO.description} Growrix OS is a founder-led product studio combining a digital product marketplace with six core services: websites, SaaS applications, mobile apps, automation, technical SEO, and AI business systems.`,
     },
     {
       id: "offering-founder-studio",
@@ -286,7 +286,7 @@ export function buildStudioDocuments(): ConciergeKnowledgeDocument[] {
       label: "Technology stack",
       sourcePath: "/about",
       sourceType: "offering",
-      content: `GrowrixOS core stack: ${stack}. For SaaS products we also use AWS, Docker, CI/CD, MongoDB, Redis, and GraphQL when the roadmap requires them.`,
+      content: `Growrix OS core stack: ${stack}. For SaaS products we also use AWS, Docker, CI/CD, MongoDB, Redis, and GraphQL when the roadmap requires them.`,
     },
     {
       id: "offering-support-handoff",
@@ -363,7 +363,7 @@ export function buildConversionDocuments(whatsappHref: string): ConciergeKnowled
       label: "Contact and escalation paths",
       sourcePath: "/contact",
       sourceType: "contact",
-      content: `GrowrixOS supports four contact channels: (1) Inquiry form at /contact — best for website, SaaS, mobile app, automation, or custom build briefs that need clear scoping. (2) WhatsApp at ${whatsappHref} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about services, digital products, pricing, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
+      content: `Growrix OS supports four contact channels: (1) Inquiry form at /contact — best for website, SaaS, mobile app, automation, or custom build briefs that need clear scoping. (2) WhatsApp at ${whatsappHref} — best for fast questions about pricing, timelines, and product fit during business hours. (3) AI Growrix OS at /ai-concierge — best for instant answers about services, digital products, pricing, and launch timing. (4) Book a call at /book-appointment — best for discovery, scoping, and decision-grade conversations around a real launch plan.`,
     },
     {
       id: "booking-path",
@@ -379,7 +379,7 @@ export function buildConversionDocuments(whatsappHref: string): ConciergeKnowled
       sourcePath: "/privacy-policy",
       sourceType: "policy",
       content:
-        "The AI Growrix OS concierge answers only from approved internal knowledge about GrowrixOS services, pricing, portfolio, and process. It does not use outside knowledge, does not make unsupported claims, and routes to a human when a verified answer is not available.",
+        "The AI Growrix OS concierge answers only from approved internal knowledge about Growrix OS services, pricing, portfolio, and process. It does not use outside knowledge, does not make unsupported claims, and routes to a human when a verified answer is not available.",
     },
   ];
 }

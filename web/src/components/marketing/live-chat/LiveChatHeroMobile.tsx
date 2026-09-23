@@ -13,7 +13,7 @@ export function LiveChatHeroMobile() {
         </Badge>
 
         <h1 className="service-detail-hero-mobile__title">
-          <span className="block">{LIVE_CHAT_HERO.titleLead}</span>
+          <span className="block">{LIVE_CHAT_HERO.titleLead}</span>{" "}
           <span className="block marketing-title-accent">{LIVE_CHAT_HERO.titleAccent}</span>
         </h1>
 

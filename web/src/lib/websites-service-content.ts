@@ -76,7 +76,7 @@ export const WEBSITES_OUTCOMES_SECTION = {
 } as const;
 
 export const WEBSITES_WHY_CHOOSE_SECTION = {
-  eyebrow: "Why clients choose GrowrixOS",
+  eyebrow: "Why clients choose Growrix OS",
   title: "Built for performance, growth, and long-term scalability.",
   titleLead: "Built for performance, growth, and",
   titleAccent: "long-term scalability.",

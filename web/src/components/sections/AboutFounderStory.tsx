@@ -15,7 +15,7 @@ export function AboutFounderStory() {
             <div className="relative aspect-4/5 w-full lg:aspect-auto lg:h-full lg:min-h-[22rem]">
               <Image
                 src={ABOUT_IMAGES.founder.src}
-                alt={`${founder.name}, Founder of GrowrixOS`}
+                alt={`${founder.name}, Founder of Growrix OS`}
                 fill
                 sizes="(min-width: 1024px) 28vw, 100vw"
                 className="object-cover object-center"
@@ -43,7 +43,7 @@ export function AboutFounderStory() {
       </div>
 
       <div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">The path to GrowrixOS</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">The path to Growrix OS</p>
         <RevealGroup as="ol" className="mt-4 grid gap-4 lg:grid-cols-3" stagger={0.07} aria-label="Founder timeline">
           {timeline.map((step, index) => (
             <RevealItem as="li" key={step.title} className="relative h-full min-w-0 list-none">

@@ -13,15 +13,20 @@ export const HOME_HERO_HIGHLIGHTS = [
 ] as const;
 
 export const HOME_HERO_COPY = {
-  badge: "Founder-led web, SaaS & mobile app studio",
+  badge: "Founder-led web, SaaS & mobile app studio · Bangladesh",
   titleLines: ["Launch faster.", "Scale smarter."],
   titleAccent: "Grow with confidence.",
+  /**
+   * Leads with a self-contained entity sentence ("Growrix OS is a ... based in
+   * Bangladesh") because answer engines quote the first paragraph under the H1
+   * when answering "what is Growrix OS". The H1 itself stays a tagline.
+   */
   description:
-    "Custom websites, SaaS products, and mobile apps — from strategy through launch. Or start faster with our ready-made templates.",
+    "Growrix OS is a founder-led web, SaaS, and mobile app studio based in Bangladesh, building custom products from strategy through launch — or start faster with our ready-made templates.",
   /** Mobile hero — balanced for two lines at ~390px with token typography. */
   mobileDescriptionLines: [
-    "Custom websites, SaaS products, and mobile apps",
-    "from strategy through launch.",
+    "Growrix OS is a founder-led studio in Bangladesh",
+    "building web, SaaS, and mobile products.",
   ],
   primaryCta: "Browse Digital Products",
   primaryCtaHref: "/digital-products",
@@ -163,7 +168,7 @@ export const HOME_THREE_PATH_COPY = {
   titleLead: "Choose the way you want",
   titleAccent: "to build.",
   description:
-    "Whether you want to launch yourself, work alongside experts, or hand everything off, GrowrixOS adapts to your workflow.",
+    "Whether you want to launch yourself, work alongside experts, or hand everything off, Growrix OS adapts to your workflow.",
 } as const;
 
 export const HOME_THREE_PATH_CARDS = [
@@ -244,9 +249,9 @@ export const HOME_AI_DEMO_SCRIPT = {
 
 export const HOME_TESTIMONIALS_COPY = {
   eyebrow: "Proof",
-  title: "Teams that shipped with GrowrixOS",
+  title: "Teams that shipped with Growrix OS",
   titleLead: "Teams that shipped with",
-  titleAccent: "GrowrixOS",
+  titleAccent: "Growrix OS",
   description:
     "Product buyers and service clients share the same bar — launch-ready quality, clear communication, and measurable outcomes.",
 } as const;

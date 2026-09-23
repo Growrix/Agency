@@ -177,7 +177,7 @@ export const SAAS_SYSTEMS_SECTION = {
 } as const;
 
 export const SAAS_WHY_FOUNDERS_SECTION = {
-  eyebrow: "Why founders work with GrowrixOS",
+  eyebrow: "Why founders work with Growrix OS",
   title: "Built for product growth, not just project delivery.",
   titleLead: "Built for product growth,",
   titleAccent: "not just project delivery.",

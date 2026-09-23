@@ -26,9 +26,9 @@ export const INVESTMENT_HERO_PANEL = {
 
 export const INVESTMENT_STARTING_POINTS = {
   eyebrow: "Starting points",
-  title: "Three ways businesses typically work with GrowrixOS.",
+  title: "Three ways businesses typically work with Growrix OS.",
   titleLead: "Three ways to work",
-  titleAccent: "with GrowrixOS.",
+  titleAccent: "with Growrix OS.",
   description: "Choose the path that best matches your current stage, budget, and goals.",
   cards: [
     {
@@ -159,9 +159,9 @@ export const INVESTMENT_PROJECT_SCOPING = {
 
 export const INVESTMENT_CLIENT_JOURNEYS = {
   eyebrow: "Client journeys",
-  title: "How businesses typically grow with GrowrixOS.",
+  title: "How businesses typically grow with Growrix OS.",
   titleLead: "How businesses typically grow",
-  titleAccent: "with GrowrixOS.",
+  titleAccent: "with Growrix OS.",
   journeys: [
     {
       persona: "Startup Founder",

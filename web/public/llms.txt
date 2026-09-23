@@ -1,0 +1,54 @@
+# Growrix OS
+
+> Growrix OS is a founder-led product studio and digital marketplace. It sells
+> production-ready website templates, HTML business profiles, SaaS starters and
+> AI toolkits, and it delivers custom website, SaaS, mobile app, automation,
+> technical SEO and AI business system projects for clients.
+
+Growrix OS is the brand operating at https://www.growrixos.com. It is not a
+system identifier, a file format, or a product of any other agency. Two delivery
+tracks run side by side: self-serve digital products you buy and download, and
+done-for-you client projects scoped through a call.
+
+## Start here
+
+- [Home](https://www.growrixos.com/): What Growrix OS does, in one page.
+- [About](https://www.growrixos.com/about): Who runs the studio and how it works.
+- [Contact](https://www.growrixos.com/contact): Ways to reach the team.
+- [FAQ](https://www.growrixos.com/faq): Answers on scope, timelines, pricing and support.
+- [Pricing](https://www.growrixos.com/pricing): What engagements and products cost.
+
+## Services (done-for-you)
+
+- [All services](https://www.growrixos.com/services)
+- [Websites](https://www.growrixos.com/services/websites): Marketing sites and business websites.
+- [SaaS applications](https://www.growrixos.com/services/saas-applications): Multi-tenant products, billing, dashboards.
+- [Mobile apps](https://www.growrixos.com/services/mobile-apps): iOS and Android builds.
+- [AI business systems](https://www.growrixos.com/services/ai-business-systems): Assistants and AI workflows wired into a business.
+- [Automation](https://www.growrixos.com/services/automation): Internal workflow and integration automation.
+- [Technical SEO](https://www.growrixos.com/services/technical-seo): Crawlability, indexing, Core Web Vitals, structured data.
+- [Additional services](https://www.growrixos.com/additional-services): Smaller scoped engagements.
+
+## Digital products (self-serve)
+
+- [All digital products](https://www.growrixos.com/digital-products)
+- [Website templates](https://www.growrixos.com/digital-products/category/website-templates-html-preview): Single-file HTML templates, no build step.
+- [HTML business profiles](https://www.growrixos.com/digital-products/category/html-business-profiles): One-page company profiles.
+- [Bundles](https://www.growrixos.com/digital-products/bundles)
+- [Free downloads](https://www.growrixos.com/digital-products/free)
+
+## Proof and writing
+
+- [Portfolio](https://www.growrixos.com/portfolio): Selected client builds.
+- [Blog](https://www.growrixos.com/blog): Notes on building and shipping software.
+
+## Booking
+
+- [Book an appointment](https://www.growrixos.com/book-appointment): Schedule a scoping call.
+- [AI concierge](https://www.growrixos.com/ai-concierge): Ask questions about fit before booking.
+
+## Optional
+
+- [Privacy policy](https://www.growrixos.com/legal/privacy)
+- [Terms](https://www.growrixos.com/legal/terms)
+- [Refund policy](https://www.growrixos.com/refund-policy)

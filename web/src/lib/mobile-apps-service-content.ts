@@ -98,7 +98,7 @@ export const MOBILE_SYSTEMS_SECTION = {
 } as const;
 
 export const MOBILE_WHY_BUILD_SECTION = {
-  eyebrow: "Why businesses build mobile products with GrowrixOS",
+  eyebrow: "Why businesses build mobile products with Growrix OS",
   title: "Built for adoption, scalability, and long-term growth.",
   titleLead: "Built for adoption, scalability, and",
   titleAccent: "long-term growth.",

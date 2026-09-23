@@ -11,7 +11,7 @@ import { SITE_NAME, SITE_SOCIAL_LINKS, SITE_URL, absoluteUrl } from "@/lib/site"
  * gives Google's Knowledge Graph a first-party signal to disambiguate the entity.
  */
 export const ORGANIZATION_DESCRIPTION =
-  "Growrix OS is a founder-led product studio and digital marketplace selling production-ready website templates, HTML business profiles, SaaS starters, and AI toolkits, alongside custom website, SaaS, mobile app, automation, technical SEO, and AI business system services.";
+  "Growrix OS is a founder-led product studio and digital marketplace based in Bangladesh, serving clients worldwide. It sells production-ready website templates, HTML business profiles, SaaS starters, and AI toolkits, alongside custom website, SaaS, mobile app, automation, technical SEO, and AI business system services.";
 
 export const ORGANIZATION_KNOWS_ABOUT = [
   "Website templates",
@@ -23,6 +23,12 @@ export const ORGANIZATION_KNOWS_ABOUT = [
   "AI business systems",
 ];
 
+/** Founder of record, mirrored from the About page so the two never drift. */
+export const ORGANIZATION_FOUNDER_NAME = "Nayeem";
+
+/** Operating country. Stated plainly so answer engines can place the studio. */
+export const ORGANIZATION_COUNTRY = "Bangladesh";
+
 export function buildOrganizationSchema(): JsonLdData {
   return {
     "@context": "https://schema.org",
@@ -33,6 +39,20 @@ export function buildOrganizationSchema(): JsonLdData {
     description: ORGANIZATION_DESCRIPTION,
     knowsAbout: ORGANIZATION_KNOWS_ABOUT,
     sameAs: SITE_SOCIAL_LINKS.map((link) => link.href),
+    founder: {
+      "@type": "Person",
+      name: ORGANIZATION_FOUNDER_NAME,
+      jobTitle: "Founder & Product Builder",
+      url: absoluteUrl("/about"),
+    },
+    // Country only: no street address is published, and inventing one would be
+    // worse than omitting it.
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: ORGANIZATION_COUNTRY,
+    },
+    // Based in Bangladesh, delivering remotely to clients worldwide.
+    areaServed: "Worldwide",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
